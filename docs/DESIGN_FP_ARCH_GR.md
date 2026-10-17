@@ -11,7 +11,8 @@
 ## substrate facts and the volume wins on design law — a conflict in design law
 ## is a STOP-and-report, never an implementer pick.
 
-**Status: COMPILED IMPLEMENTATION LAYER. Nothing here is scheduled until the
+**Status: COMPILED IMPLEMENTATION LAYER. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: GR-0 lifecycle voice, GR-1 oath stamp (partial — the credit-obligation stamp and the dossier signature line unbuilt), GR-2 formation + the standalone NAP, GR-3 rows (GR-3a + GR-3b), GR-4 succession (voice slice GR-4b-β owed), GR-5 renewal/renegotiation/conversion (mechanics only, silent), GR-6 mediation (2 of 3 occasions, 1 of 4 endings) — `pactFormationEnabled` in 4 presets incl. the default realistic_regional, the warpeace four (`treatyLifecycleVoiceEnabled`, `oathHolderEnabled`, `treatyRenewalEnabled`, `mediationGeneralizedEnabled`) in dramatic_campaign + full_simulation (simulationRules.js:789-803; ODQ §934.84 "no just build it all shipped lit") · BUILT DARK: every GR-3 grant READ (no consumer), `mutualDefenseFor` (no reader, §3.2.3), `treatiesPricedDuring` (no consumer) · UNBUILT: GR-7 measurement (the program's own gate, §3.2.2 / OD-FC-6), GR-5e voice, J-GR-14a war-end lens, the `mutual_defense` reader, `tribute_population` (OD-FC-13), the proposer's own-picture arm (§3.2.1 / OD-FC-5), the signature / lineage / standing-proposal / "courts remember" dossier lines] Nothing here is scheduled until the
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `envoy_hearing`, `pact_acceptance`, `mediation_offer`, `succession_reaffirmation`, `tribute_demand`/`trade_rights_demand`, STANDING `negotiation` — `pact_acceptance` and `envoy_hearing` are two of the four kinds SP-9 lights first. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
 owner sequences it (spine §5: GRAMMAR first among the six FP programs, behind
 the sim-proof path). Every judgment below is labeled JUDGMENT and is vetoable.
 Live code outranks every table in this file — re-verify anything you build on.**
@@ -25,11 +26,11 @@ Live code outranks every table in this file — re-verify anything you build on.
   `gr.<facet>.<realmId>.<a>.<b>...` codepoint-ordered; weighted races are
   `w * hash01` products (the `sovereigntyMarketStage.js` header documents the
   house race idiom verbatim — both sides of every weight proven live, the
-  dead-band law). `pulseKernel.js` (BANKED at 1580, scripts/.size-baseline.json)
+  dead-band law). `pulseKernel.js` (BANKED at 1580, scripts/.size-baseline.json) [CORRECTED 2026-10-16 (coherence fold §3.3.8) — 1581 effective (scripts/.size-baseline.json:13); frozen.]
   and `applyWorldPulse.js` receive ZERO edits — see §2 R-3 for what this does to
   the volume's mount premise.
 - **L2 FLAGS:** the five GR flags take the LIVE idiom (§3), which is richer than
-  the volume's statement: absent from DEFAULT_SIMULATION_RULES and every preset,
+  the volume's statement: absent from DEFAULT_SIMULATION_RULES and every preset, [see the bracket at :227]
   DECLARED `false` on the full_simulation ceiling with a dated comment (the
   WR-1/2/3/6/7 precedent, `simulationRules.js:445-472`), joining
   `ENGINE_GATED_VIRTUAL_RULE_KEYS` (`simulationRules.js:185`) in the SAME commit
@@ -42,7 +43,7 @@ Live code outranks every table in this file — re-verify anything you build on.
   against a legitimate truth reader OUTSIDE the negotiation set — never
   `peaceTerms.js`). The `sovereigntyMarketStage.js` header records the split
   this program copies: zero-import leaves for appraisal-class math, pinned
-  import lists for composers.
+  import lists for composers. [CORRECTED 2026-10-16 (coherence fold) — as built the acceptance valuation sits in pactFormation.js (reserveFor :417, answerPactProposal :446), OUTSIDE this set, because a court's self-read is knowledge (:226-250); see DESIGN_FP_GRAMMAR.md §1c K3's bracket.]
 - **L4 PERSISTENCE:** ONE new top-level key in the whole program
   (`spatialLedgers.pactProposals`); every treaty-record extension is a
   conditional drop-when-absent field riding the `sellerId`/`buyerId`/`swapId`/
@@ -88,7 +89,7 @@ Live code outranks every table in this file — re-verify anything you build on.
 - **R-1 — "peaceTerms.js sits at 794 of its 800 ceiling; ALL capability in lazy
   leaves; peaceTerms gains only net-zero seam lines."** REFUTED AS ARITHMETIC.
   The file was DECOMPOSED since the census into an eleven-module writer family:
-  `peaceTerms.js` (head, 1181 raw / ~766 effective by chair approximation) plus
+  `peaceTerms.js` (head, 1181 raw / ~766 effective by chair approximation) [CORRECTED 2026-10-16 (coherence fold §3.3.8) — at 00b648c9d the head sits ≈799 of 800 effective (sizes are cited from scripts/.size-baseline.json and eslint's EFFECTIVE count, never a raw wc): AT ceiling, it takes ZERO lines from any wave without a leaf-first decomposition car.] plus
   `peaceTermsCatalog.js` (235), `peaceTermsPrimitives.js` (108),
   `peaceTermsAppraisal.js` (291), `peaceTermsDrafting.js` (109),
   `peaceTermsCarriedSheet.js`, `peaceTermsGraph.js` (145),
@@ -122,7 +123,7 @@ Live code outranks every table in this file — re-verify anything you build on.
 - **R-3 — "advancePeacetimePacts called from pulseKernel adjacent to
   advanceTreaties, flag-gated at the call site."** REFUTED TWICE. (a)
   `pulseKernel.js` is BANKED (1580 in scripts/.size-baseline.json; the standing
-  R-BLD-10 law: zero edits ever). (b) The treaty advance is no longer a bare
+  R-BLD-10 law: zero edits ever). [see the bracket at :28] (b) The treaty advance is no longer a bare
   call: `pulseKernel.js:2580` calls `advanceTreatiesWithDisposition` (the WR-2
   wrapper in `dispositionChannels.js`, 88 lines). CURE (J-GRC-2): the peacetime
   pass mounts in `settlementLifecycleKernel.js` — the lifecycle host — exactly
@@ -136,7 +137,7 @@ Live code outranks every table in this file — re-verify anything you build on.
   API: `createNegotiationPicture` :164, `evaluateNegotiationPicture` :396,
   `compareOfferToResponderDraft` :464, `negotiateFromPictures` :523,
   `validateTermSheetAgainstPictures` :597. The §9 build-precondition on WR-7c
-  is SATISFIED; GR-2/GR-5 consume, never fork.
+  is SATISFIED; GR-2/GR-5 consume, never fork. [RULED BY DELEGATION 2026-10-16 (OD-FC-5 — the wrapper exists and NO pact module imports it (src consumers: envoy, coalition and sovereignty files only); peacetime acceptance is the responder's own value-vs-reserve plus its dependency fear (pactFormation.js:446-494). Chair recommendation (coherence fold §3.2.1): amend SP-3 for PEACETIME — the proposer's own-picture arm is the OFFER it chose to make, the responder's is the answer; the war-end path keeps the full contract.]
 - **R-5 — "SP spine reads (SP-2 believed subjects, SP-4
   postureOf/riskToleranceOf) — VERIFY-AT-BUILD their landed shapes."**
   MEASURED ABSENT, plus one live collision. Zero hits for `postureOf`,
@@ -146,7 +147,7 @@ Live code outranks every table in this file — re-verify anything you build on.
   settlement-court read MUST NOT take that name (collision would be silent at
   import-rename time — the concurrent-lane rename hazard). GR-0 and GR-1 read
   no spine surface and can build now; GR-2..GR-6 have HARD spine
-  preconditions (§7 Q2).
+  preconditions (§7 Q2). [CORRECTED 2026-10-16 (coherence fold §3.3.3) — SUPERSEDED BY EVENT: SP-B landed (`4c0f2f38`) and SP-C landed (`cbd348a5`) as `courtPostureOf` / `courtRiskAppetiteOf` (pactFormation.js:120); the roads collision now sits at roads/state.js:334 (:319 was the 08-04 address).]
 - **R-6 — "`warIntents` ledger (W1) — GR-6's pre-war mediation surface."**
   EXISTS but the shape refutes the occasion as drafted:
   `warIntent.js:79` `WAR_INTENT_LEDGER_KEY = 'warIntents'`, record =
@@ -173,7 +174,7 @@ Live code outranks every table in this file — re-verify anything you build on.
 | # | Claim | Receipt | State |
 |---|---|---|---|
 | V-1 | One treaty per unordered pair is enforced at the war door | `peaceTerms.js:348` `mintedThisPair` + comment "one treaty per unordered pair"; pair key minted by `treatyPairKey` (`peaceTermsPrimitives.js`) | VERIFIED — and the SALE door honors it by REFUSAL: `peaceTermsSale.js:246` refuses when either directed spelling of the slot is occupied (measured; see §7 Q4) |
-| V-2 | TERM_CATALOG: now **12 terms / 8 families**, executor kinds `transfer/overlay/readiness_cap/war_block/occupation_hold/seam`; codepoint-frozen TERM_TYPES/TERM_FAMILIES | `peaceTermsCatalog.js:141-192` | VERIFIED with growth: `sovereignty_transfer` joined (own family, forced by §13 stacking); the volume's "extract TERM_CATALOG into a pure-data sibling" item (GR-3) is ALREADY DONE under the name `peaceTermsCatalog.js` — GR-3's catalog-mechanics slice is VOID |
+| V-2 | TERM_CATALOG: now **12 terms / 8 families**, executor kinds `transfer/overlay/readiness_cap/war_block/occupation_hold/seam`; codepoint-frozen TERM_TYPES/TERM_FAMILIES | `peaceTermsCatalog.js:141-192` | VERIFIED with growth: `sovereignty_transfer` joined (own family, forced by §13 stacking); the volume's "extract TERM_CATALOG into a pure-data sibling" item (GR-3) is ALREADY DONE under the name `peaceTermsCatalog.js` — GR-3's catalog-mechanics slice is VOID [CORRECTED 2026-10-16 (coherence fold §3.3.6) — 26 rows / 13 families / 7 executor kinds at 00b648c9d (peaceTermsCatalog.js:181-342); DESIGN_FP_GRAMMAR.md §4 lists every landed row by pointer; every count derives from live TERM_FAMILIES.] |
 | V-3 | Every term REQUIRES `expiresTick` | TermRecord typedef, `peaceTermsCatalog.js` ("REQUIRED... unrepresentable") | VERIFIED |
 | V-4 | `non_intervention` catalogued, ZERO producers (the D4 tombstone) | catalog comment: "no non_intervention asset producer yet ⇒ never drafted ⇒ byte-identical" | VERIFIED — the no-orphan-vocabulary law's anchor, AND the executor:'seam' idiom GR-3's deferred-consumer rows reuse |
 | V-5 | Treaty clock: 52-week current, legacy-12 by explicit marker | `treatyClock.js` `CURRENT_TREATY_TICKS_PER_YEAR`; persisted `treatyTicksPerYear` at `peaceTerms.js:230,:863` and `peaceTermsSale.js:184` | VERIFIED — GR-1's provenance discipline template |
@@ -188,14 +189,14 @@ Live code outranks every table in this file — re-verify anything you build on.
 | V-14 | Mediation single-source, war-exit occasions only | `findCrossPressuredMediator` `peaceTermsGraph.js:103`; invoked in `mintTreaty` `peaceTerms.js:783`; `accrueMediationTrust` `peaceTermsOverlay.js:84`, called `peaceTerms.js:1045` | VERIFIED — GR-6 adds occasions, never a second finder |
 | V-15 | Three-lane DM proposal machinery | severity-gated drift `relationshipRulesCore.js:776` (`applyMode: severity >= 0.72 ? "proposal" : "auto"`); `actorMajorApproval.js` opt-in `routineMajorApproval === true` :75-76, EXPIRES TO DECLINE :27,:103; realm verbs `realmManifest.js` | VERIFIED — GR-4's two-mode declaration and HONOR-terminal divergence stand as ruled |
 | V-16 | Relationship vocabularies + turning-point archive cap 24 | `relationshipState.js:136` `RELATIONSHIP_TURNING_POINT_CAP = 24`, append :295-298, normalize :414-419 | VERIFIED |
-| V-17 | Turning-point RENDERING absent from components + pdf | grep zero in src/components, src/pdf | VERIFIED — GR-2's "the courts remember" WarFaithTab line premise holds |
-| V-18 | `defensive_pact` edges: readers only, NO writer | readers now FIVE families: `warHomeCosts.js:79` (levy), `warCapacityReads.js:60` (ally relief), `thirdPartyRansom.js:70`, `warAllianceRisk.js:41`, certification notes | VERIFIED and STRONGER than the census — GR-3's `mutual_defense` found-writer value grew |
-| V-19 | Generosity `credit` obligations with maturity/default | `generosityKernel.js:38,:89,:123` | VERIFIED — GR-1's obligation stamp target |
+| V-17 | Turning-point RENDERING absent from components + pdf | grep zero in src/components, src/pdf | VERIFIED — GR-2's "the courts remember" WarFaithTab line premise holds [CORRECTED 2026-10-16 (coherence fold §3.3.9) — WarFaithTab is gone: the TreatyBlock lives in components/new/tabs/WarTab.jsx (:32, :354), faith surfaces in FaithTab.jsx; as built the card shows the age and succession lines only — the signature, lineage, standing-proposal and "courts remember" lines are UNBUILT.] |
+| V-18 | `defensive_pact` edges: readers only, NO writer | readers now FIVE families: `warHomeCosts.js:79` (levy), `warCapacityReads.js:60` (ally relief), `thirdPartyRansom.js:70`, `warAllianceRisk.js:41`, certification notes | VERIFIED and STRONGER than the census — GR-3's `mutual_defense` found-writer value grew [RULED 2026-10-16 (coherence fold §3.2.3) — the found writer is NOT connected: the readers key on the relationship TYPE and mutualDefenseFor (treatyEnforcement.js:328) has no reader; a one-reader unit (consult mutualDefenseFor OR the type — the union, never a swap), slotted with GR-5d-l.] |
+| V-19 | Generosity `credit` obligations with maturity/default | `generosityKernel.js:38,:89,:123` | VERIFIED — GR-1's obligation stamp target [CORRECTED 2026-10-16 (coherence fold §3.3.8) — generosityKernel.js sits ≈800/800 effective, AT ceiling: the credit-obligation stamp takes ZERO lines from it without a leaf-first decomposition car (FP-ORDER pair 1).] |
 | V-20 | Embassy = war-exit channel only; bounded-multiplier idiom | `embassyLedger.js` header (deposit-and-consume; ×1 exactly when dark) | VERIFIED — the idiom GR-6's occasion-1 cure reuses (R-6) |
 | V-21 | `believedMarginAtSignature` persisted; credibility ledger + fracture deltas exist; NOTHING ties a lie to a treaty | `peaceTerms.js:860`; `spatialLedgers.credibility` (`informationStatecraft.js:120`), `fractureCredibilityDeltas` :378 (consumed :1364); zero treaty tokens in the credibility region | VERIFIED — GR-0's read and GR-4's charge both NEW, both have real homes |
 | V-22 | Succession-repudiation, renewal/renegotiation, standalone NAP, faith/population terms, `sworn`, `provenance:'negotiated'`, `lineage`, `oathHolderOf`, `pactProposals`, all five GR flag names | grep ZERO across src/ and tests/ | VERIFIED ABSENT — every GR symbol is virgin namespace |
 | V-23 | Ruler-person read absent; the compose path exists | no `rulerOf`/`seatHolder`; `governingFactionOf` `rulingPower.js:189`, `npcInFaction` `npcLadderState.js:153`, `durableIdForRoster` `npcLedger.js:586` | VERIFIED — GR-1 composes exactly these sanctioned helpers |
-| V-24 | Dossier surfaces | `WarFaithTab.jsx` TreatyBlock :109-116 (230 raw); `TreatyPanel.jsx` :18 renderAllTreaties (152 raw); `HeraldBody.jsx` (294); `pdf/lib/liveWorld.js` treaty chapter :83,:274,:344 | VERIFIED — all landing pads live; sizes small enough for line additions without leaf extraction |
+| V-24 | Dossier surfaces | `WarFaithTab.jsx` TreatyBlock :109-116 (230 raw); `TreatyPanel.jsx` :18 renderAllTreaties (152 raw); `HeraldBody.jsx` (294); `pdf/lib/liveWorld.js` treaty chapter :83,:274,:344 | VERIFIED — all landing pads live; sizes small enough for line additions without leaf extraction [see the bracket at :191] |
 | V-25 | WR-6 alliance-web read exists with a CLOSED consumer census | `readAllianceWebRisk` (`warAllianceRisk.js`, 57 raw); `tests/lint/allianceWebRiskConsumers.walker.test.js` pins EXACTLY TWO named consumers and forbids rebuilt walks | VERIFIED — GR-2's `shared_threat` trigger is a THIRD consumer: the walker reds at GR-2 and the census update must be ARGUED in the wave commit (§6 seam 4) |
 | V-26 | The WR-10 catalog tripwire is live and will fire at GR-3 | `catalogGrewSinceWr10` `sovereigntyBundle.js:166`; asserted `false` at `tests/domain/sovereigntyBundleWr10.test.js:321,:388`; `sovereigntyBundle.js` derives components from TERM_FAMILIES at call time (no literals — comment-stripped scan pinned both directions) | VERIFIED — the red is RECORDED as the instruction: re-read WAR §5's degradation note, confirm the bundle widened mechanically, update/delete the tripwire pins and the WAR §3 row, all in GR-3's commit (§6 seam 1) |
 | V-27 | Transit leg physics read | `hopWeeks` (`spatial/distanceRead.js`), consumed by roads/seaRoads | VERIFIED — GR-2's dark-transport `answerDueTick` source. ⚠ STANDING HAZARD: hopWeeks is CALIBRATED PER DIGEST — a whole realm spans ~2..8 march weeks, so any dwell/reach band ≥ 9 weeks refuses nothing; GR-2/GR-6 bands state their ranges against the measured digest spectrum |
@@ -224,7 +225,7 @@ R-4 removes a precondition, R-7 trims a wave's charter.**
 
 Shape per flag (all five, no exceptions):
 1. ABSENT from `DEFAULT_SIMULATION_RULES` **and from every preset override,
-   with NO exception — manifest-only is the law.**
+   with NO exception — manifest-only is the law.** [CORRECTED 2026-10-16 (coherence fold) — superseded for lighting by LIT-1a/1b/2 under ODQ §934.84 ("no just build it all shipped lit"): manifest membership stands (simulationRules.js:365-498), preset absence does not — FP_LIT_ALIVE / FP_LIT_WARPEACE spread the GR flags into four and two presets (:789-803). The code comment pactProposals.js:120 carries the same stale sentence — a cure row slotted with the next pact unit.]
 
    > **⚠️ ERRATUM 2026-08-05 (recorded in place at the ES + WY
    > owner-amendment fold; REPORTED, NOT SILENT; vetoable in one owner
@@ -278,7 +279,7 @@ Shape per flag (all five, no exceptions):
    `.every()` hole).
 5. Dependencies (unchanged from the volume, re-affirmed): `treatyRenewalEnabled`
    ⇒ `pactFormationEnabled`; lighting order = build order; the GR-7
-   certification walker reds out-of-order lighting. Cross-program interactions
+   certification walker reds out-of-order lighting. [CORRECTED 2026-10-16 (coherence fold) — superseded by the lighting signature: realistic_regional and living_realm run GR-2 without GR-0/GR-1, a lawful degraded arm; the GR-7 walker was never built (§3.2.2). See DESIGN_FP_GRAMMAR.md §3's bracket.] Cross-program interactions
    carried verbatim: `envoyDiplomacyEnabled` transport shift (disclosed,
    transport-mode field on every formation receipt), `oathHolderEnabled` ×
    `pactFormationEnabled` (reserve reads the charge band, clean-by-absence when
@@ -293,7 +294,7 @@ Shape per flag (all five, no exceptions):
 ```
 worldState.spatialLedgers.pactProposals    — GR-2; writer pactProposals.js (ONE
   [ { id, from, to, trigger,               //   writer; the volume's §4 shape
-      sheet: { terms: [...] },             //   verbatim: five closed triggers
+      sheet: { terms: [...] },             //   verbatim: five closed triggers [CORRECTED 2026-10-16 (coherence fold) — SIX: GR-5c added `renegotiation` (pactTriggers.js:60-62).]
       openedTick, answerDueTick, state,    //   incl. 'renewal'; states open |
       transport } ]                        //   signed | refused | expired;
                                            //   transport: 'abstract'|'envoy'
@@ -348,7 +349,7 @@ HONOR (declared divergence from expire-to-DECLINE, pinned both ways).
 - **migrate/import:** NOTHING migrates — legacy records carry NO new field and
   every reader tolerates absence forever (the treatyTicksPerYear provenance
   discipline, V-5); import validates proposal trigger tokens against the
-  closed five and `sworn.npcId` against the roster, degrading to seat-voice on
+  closed five [see the bracket at :296] and `sworn.npcId` against the roster, degrading to seat-voice on
   a dangling ref (never a crash, never an invented name).
 - **veil:** proposals and treaty extensions carry no DM-only truth EXCEPT the
   GR-0 true-state chip (`includeGroundTruth` projection) and `hollowed_quiet`
@@ -369,12 +370,13 @@ finder, no new relationship vocabulary.
 ## the design narrative; THIS section is what changed under re-measurement.)
 
 ### GR-0 — THE LIFECYCLE VOICE (`treatyLifecycleVoiceEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: where lit, the treaty card's age line on any advance (dossier); the detection beat in the advance a monitor's observed state first crosses out of honored (event-timed, years in); the lapse eulogy 3–8 years after signing · TIER: aspatial-safe; host flags: `treatyLifecycleVoiceEnabled` (dramatic_campaign + full_simulation only) · DEGRADED ARM: dark in realistic_regional and living_realm — lapse and prune stay silent as before; the lie tie has no consumer in any preset]
 **Builds NOW (no spine reads — R-5).**
-- **Files touched:** `peaceTerms.js` (~766 eff/800 — the lapse/detection beat
+- **Files touched:** `peaceTerms.js` (~766 eff/800 [see the bracket at :91] — the lapse/detection beat
   hooks are ~4-6 gated lines at the V-10 prune site and the V-6 compliance
   crossing; state the delta, prefer net-zero via moving a read-model line into
   `peaceTermsDocument.js`); `display/treatyDocument.js` (208 raw — age line);
-  `WarFaithTab.jsx` (230) / `TreatyPanel.jsx` (152 — DM chip behind
+  `WarFaithTab.jsx` (230) [see the bracket at :191] / `TreatyPanel.jsx` (152 — DM chip behind
   `includeGroundTruth`) / `pdf/lib/liveWorld.js` (age line); herald joins in
   `settlementRumors.js` + `heraldRouting.js` + `chroniclersLetter.js`.
 - **New leaf:** `treatyLifecycleVoice.js` (budget ≤200 eff): beat composition
@@ -404,11 +406,12 @@ finder, no new relationship vocabulary.
   assignments only).
 
 ### GR-1 — THE OATH-HOLDER IDENTITY (`oathHolderEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at the table — the sworn stamp is ledger fact with no signature line (UNBUILT); it surfaces only through GR-4's succession lines, event-timed · TIER: aspatial-safe; host flags: `oathHolderEnabled` (dramatic_campaign + full_simulation) · DEGRADED ARM: unstamped seat-voice (the null and legacy contract)]
 **Builds NOW (composes existing helpers — V-23).**
 - **Files touched:** the writer family's THREE stamp sites (war mint
   `mintTreaty`, carried-sheet mint, sale mint `peaceTermsSale.js` — the volume
   said "both doors"; the tree now has THREE, and the sale door stamps too or
-  the walker that asserts stamp totality across mint paths reds);
+  the walker that asserts stamp totality across mint paths reds); [CORRECTED 2026-10-16 (coherence fold) — FOUR stamp sites as built: war mint peaceTerms.js:586, sale peaceTermsSale.js:269, pact pactFormation.js:651, renewal re-swear pactRenewal.js:687; the generosityKernel.js credit stamp is unbuilt — see the bracket at :193.]
   `generosityKernel.js` credit mint (V-19).
 - **New leaf:** `oathHolder.js` (budget ≤120 eff): `oathHolderOf(worldState,
   settlementId) -> { npcId, name } | null` composed EXACTLY from
@@ -429,6 +432,7 @@ finder, no new relationship vocabulary.
   QUEUE.md row); the alias trap (roster objects) is the recorded hazard class.
 
 ### GR-2 — PEACETIME FORMATION + THE STANDALONE NAP (`pactFormationEnabled`) — **LANDED 2026-08-06 @ `a18fdcfa`, repaired @ `91075d45`**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none for an engine proposal inside a one-month advance (the answer is due in 4–18 weeks and no proposal or refusal line exists); the signing beat is event-timed, about one signing per 1.3–3 years per world (BOARD:207, :228) · TIER: aspatial-safe for `shared_threat` (the answer dwell falls back to the one-week floor without a digest); belief infoMode for `trade_demand`/`migration_pressure` (dramatic_campaign, living_realm, full_simulation); `faith_communion` needs `believedDevotionEnabled` (lit nowhere, OD-FC-7); host flags: `pactFormationEnabled` (4 presets incl. the default) · DEGRADED ARM: realistic_regional forms `shared_threat` pacts only; the abstract transport only (envoy keys dark in every preset); with `oathHolderEnabled` dark the reserve reads clean-by-absence]
 <!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home.
      The "BLOCKED on spine SP-2/SP-4" line immediately below is DISCHARGED, not live:
      SP-2/SP-4 are the pre-fold spellings of SP-B (`4c0f2f38`) and SP-C (`cbd348a5`),
@@ -449,7 +453,7 @@ finder, no new relationship vocabulary.
   this wave makes (the PASS 1 pair-slot guard's gated arm), delta stated.
 - **New modules + budgets:** `pactTriggers.js` (pure, ≤220 eff),
   `pactProposals.js` (one writer, ≤250 eff), `pactFormation.js` (≤200 eff),
-  `pactAmendment.js` (≤180 eff).
+  `pactAmendment.js` (≤180 eff). [CORRECTED 2026-10-16 (coherence fold §3.3.8) — budgets blown as built: pactFormation.js ≈511–563 effective (511 measured at GR-5c, BOARD:118; 563 a reader approximation, PLAUSIBLE, not the enforcer), and pactRenewal.js (unbudgeted, a sixth leaf, 1063 raw / ≈470 effective); both under the 800 layer ceiling.]
 - **Transport:** dark ⇒ `answerDueTick` from the `hopWeeks` leg read (V-27 —
   dwell bands stated against the measured 2..8-week digest spectrum, the
   calibrated-weeks hazard); lit ⇒ SP-1/WR-7 envoy, purpose `diplomatic`,
@@ -494,9 +498,10 @@ finder, no new relationship vocabulary.
 > [`implementation/packets/foreign-policy/GR-3B.md`](./implementation/packets/foreign-policy/GR-3B.md)
 > is terminal in `docs/implementation/INDEX.md` (row LANDED-5, `40afbdd6`) — do not
 > redispatch it. The producer-selection prose below pre-dates the landing; read the code
-> and its pins, not the prose.
+> and its pins, not the prose. [CLARIFIED 2026-10-16 (coherence fold) — still owed after GR-3b: J-GR-14a (CLASS_TERM carries no faith or population class, peaceTermsCatalog.js:406-416) and `reparations`' producer (no CLASS_TERM maps to it; recorded under CHAIR and still unslotted in any volume — reported to the fold for a slot).]
 
 ### GR-3 — THE NEW TERM FAMILIES (second slice of `pactFormationEnabled`) — **GR-3a LANDED 2026-08-06; GR-3b LANDED 2026-08-10 at `40afbdd6`** <!-- heading corrected 2026-08-11 per chair order, session c42c8924; it read "GR-3b OWED/BLOCKED" -->
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the drafted rows on the treaty document's family×state table in the advance a pact signs (event-timed); no granted right bites anywhere (every grant read unconsumed) · TIER: aspatial-safe; rides `pactFormationEnabled`; the faith rows draft only through `faith_communion` (unreachable while `believedDevotionEnabled` is dark, OD-FC-7) · DEGRADED ARM: the consumer-dark arm — legal parchment with teeth deferred]
 <!-- Build state is not maintained per-file; docs/implementation/INDEX.md controls current
      dispatch and FP §5 retains dated corroboration only. What
      follows is the SCOPE SPLIT, which is not build state but a change to what this wave IS.
@@ -543,7 +548,7 @@ finder, no new relationship vocabulary.
 - **Trade-rights rows:** per §7 Q1's recommendation, GR-3 ALSO mints
   `exclusivity` / `market_access` / `toll_exemption` as executor:'seam' rows
   (the V-4 non_intervention idiom: no producer ⇒ never drafted ⇒
-  byte-identical) under GRAMMAR spellings; TR-5 lands executors + producers.
+  byte-identical) under GRAMMAR spellings; TR-5 lands executors + producers. [RULED 2026-10-16 (coherence fold §3.1.1) — "TR-5 lands executors + producers" is amended to point here: EC-6 owns the READ-side executor (the stance derivation IS the executor — one read, no ledger); the PRODUCER is GRAMMAR's `PACT_DRAFT_LENS` row (pactFormation.js:190-210), keyed on EC-17's need read when lit and on TR-3's believed dearness when dark.]
 - **Pins:** volume set (no-producer-less-term walker with the seam-row
   exemption EXPLICIT; grant lift; Law One negatives; freeze walker
   same-commit; found-writer pin on the V-18 readers; J-GR-14 lighting pin) +
@@ -558,12 +563,13 @@ finder, no new relationship vocabulary.
   through the canonical-list contract (J-GR-15).
 
 ### GR-4 — THE SUCCESSION QUESTION (second slice of `oathHolderEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the open-question line in the advance a seat changes (event-timed and rare — years apart; only the two `seatTransitions` producers open one, CR-GR4-5) · TIER: aspatial-safe; host flags: `oathHolderEnabled` (2 presets); the queue mode needs the opt-in `routineMajorApproval` · DEGRADED ARM: direct scoring at the event, HONOR the default, no queue]
 - Volume spec stands whole; compiled deltas: the charge writes through the
   MEASURED credibility home (`spatialLedgers.credibility`,
   `informationStatecraft.js:120`; the `fractureCredibilityDeltas` idiom :378);
   `treatyBreach.js` factoring per J-GR-16 fits in the file (V-12);
   the succession event list is WR-5's D re-read surface — VERIFY-AT-BUILD its
-  landed symbol (the war program built through WR-10; navigate by symbol).
+  landed symbol (the war program built through WR-10; navigate by symbol). [RULED 2026-10-16 (coherence fold §3.1.10) — measured at GR-4a (CR-GR4-5): WR-5's D re-read never touches `seatTransitions`; GR-4a reads `seatTransitions` by symbol, and only the applied `government_change` and organic ladder succession write a row. GRAMMAR owns the question and the answer; INTERIOR INT-3's pact arm is a books COLOUR inside GR-4a's scoring (through readWarSeatBooks), never a second band; `reaffirmed_by_heir` is struck from INT-7's floors.]
 - **Pins:** volume set verbatim (silence-honors hardest; tribute-only
   disavowal with `repudiableTreatyPairs` asserted UNCHANGED; dark-mode
   silence-equivalence; HONOR-terminal divergence; composition fixture;
@@ -574,6 +580,7 @@ finder, no new relationship vocabulary.
   the charge is a disclosed lit-path addition to WR-0c's verb (J-GR-13).
 
 ### GR-5 — RENEWAL, RENEGOTIATION, CONVERSION (`treatyRenewalEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — renewal, renegotiation and conversion are silent (no news kind, pactRenewal.js:123; GR-5e unbuilt); a renewal shows only as a treaty that did not lapse, 3–8 years in · TIER: aspatial-safe; host flags: `treatyRenewalEnabled` (2 presets) ⇒ `pactFormationEnabled` · DEGRADED ARM: clean lapse through GR-0's eulogy (a silent prune where GR-0 is dark)]
 - Volume spec stands; compiled deltas: `worstObservedEver` lands as the
   one-line monotone fold at the V-7 site (gated, dark ⇒ never written);
   renewal proposals ride `pactProposals` (trigger `renewal`); lineage acts
@@ -587,6 +594,7 @@ finder, no new relationship vocabulary.
   GR-0.
 
 ### GR-6 — MEDIATION GENERALIZED (`mediationGeneralizedEnabled`)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the `brokered_back` beat in the advance a pressured war intent expires unopened (2-tick TTL — fast but rare); occasion 2's fraying soften is invisible · TIER: aspatial-safe as built (no reach band or transit read); host flags: `mediationGeneralizedEnabled` (2 presets) + the war layer and a cross-pressured neighbour · DEGRADED ARM: war-exit mediation only (the landed single finder)]
 - **Occasion 1 recompiled (R-6 cure, J-GRC-3):** a dependency-free leaf
   (`mediationPressure.js`, ≤120 eff) the opener consumes — the embassyLedger
   idiom mirrored: reads a live `warIntents` row + the single finder
@@ -596,7 +604,7 @@ finder, no new relationship vocabulary.
   "war that did not happen" receipt mints when a pressured intent expires
   unopened.
 - Occasions 2 and 3 per the volume (fraying read + `worstObservedEver ??
-  'honored'`; temple arm through `cohesionWeave` facet resolution).
+  'honored'`; temple arm through `cohesionWeave` facet resolution). [CORRECTED 2026-10-16 (coherence fold) — as built occasion 3 is UNBUILT and unreachable under the one finder (FPQ-26), and one of four endings landed (`brokered_back`); see DESIGN_FP_GRAMMAR.md GR-6's brackets.]
 - **Pins:** volume set (never-forces hardest; interested-broker dual-face;
   distant-broker vs the V-27 calibrated reach band; single-finder source-scan
   walker; both-edge trust). **Req 13/14:** Alignment — engagement; Edit-verb —
@@ -605,6 +613,7 @@ finder, no new relationship vocabulary.
   reused, never forked.
 
 ### GR-7 — MEASUREMENT + CERTIFICATION (no flag)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: soak profiles (the succession-mix envelope needs `routineMajorApproval: true`) · DEGRADED ARM: dark]
 - Extends `war-convergence-collector.mjs`'s OWN idiom (R-7) with the treaty
   section: compliance distributions, formation-vs-dictation THESIS METRIC,
   endings mix (closed vocabulary with every producer named, the volume's §GR-7
@@ -616,7 +625,7 @@ finder, no new relationship vocabulary.
   `routineMajorApproval: true` profile precondition. Every envelope carries an
   executed mutant negative control.
 - **This wave closes the program: DONE when the envelopes hold on an
-  owner-ordered soak, and not before.**
+  owner-ordered soak, and not before.** [RULED 2026-10-16 (coherence fold §3.2.2) — superseded for lighting by the owner's 09-23 signature; GR-7 lands as instrumentation in the next GRAMMAR unit, sized to the thesis metric and the endings mix; COURT BONDS (FPQ-56) ride it as a flavour. RULED BY DELEGATION 2026-10-16, OD-FC-6 restores the gate only if the owner wants it (chair: NO).]
 
 ---
 
@@ -629,11 +638,11 @@ finder, no new relationship vocabulary.
    update the two test assertions and the WAR §3 row). Honored, not fought.
 2. **GR-3 → TR-5 (trade-rights):** GR-3 mints the three rows as
    executor:'seam' (GRAMMAR spellings canonical, J-GR-15/CR-WR10-B); TR-5
-   lands executors + producers. Tripwire: a GR-3 pin asserts the three rows
+   lands executors + producers. [see the bracket at :550] Tripwire: a GR-3 pin asserts the three rows
    remain producer-less seams (reds the day TR-5 lands — the instruction to
    move the reachability obligation to TR-5's commit).
 3. **GR-2/5 ↔ WR-7 (transport + pictures):** consume `negotiationPictures.js`
-   (R-4) and the envoy errand (purpose `diplomatic`); transport-mode field on
+   (R-4) [see the bracket at :139] and the envoy errand (purpose `diplomatic`); transport-mode field on
    every formation receipt; dark dwell = `hopWeeks`. Tripwire: the
    transport-agreement band pin (dark clock vs lit clock agree within band).
 4. **GR-2 ↔ WR-6:** `readAllianceWebRisk` gains its THIRD consumer; the
@@ -642,7 +651,7 @@ finder, no new relationship vocabulary.
 5. **GR-0 → FP-INFORMATION:** `treatiesPricedDuring` lands in GR-0 with
    find/miss pins; INFO wires the exposure-path consumer (coupling row
    GRAMMAR×INFO). Tripwire: the GR-0 pin asserting the read is exported and
-   UNCONSUMED in src (reds when INFO wires it — the handoff signal).
+   UNCONSUMED in src (reds when INFO wires it — the handoff signal). [CLARIFIED 2026-10-16 (coherence fold) — INFO's volumes never name `treatiesPricedDuring` (zero hits); the consumer is unslotted on INFO's side, so the lie-tie sentence reaches no DM.]
 6. **GR-3 → FAITH (WF-6) / POP / TRADE consumer-dark arms:** grant reads
    (`missionaryAccessFor` etc.) land with producer-side pins; consumer-side
    reachability DEFERRED BY NAME in each coupling-registry row
@@ -669,7 +678,7 @@ finder, no new relationship vocabulary.
   (CR-WR10-B, 2026-08-04) says GR-3 "must mint the trade-rights catalog rows";
   the GRAMMAR volume's GR-3 lists faith/population/security only.
   RECOMMENDATION: GR-3 mints the three rows as executor:'seam'
-  (byte-identical by the V-4 mechanism), TR-5 lands executors/producers —
+  (byte-identical by the V-4 mechanism), TR-5 lands executors/producers [see the bracket at :550] —
   seam 2's tripwire keeps both honest. Cost of waiting instead: WR-10's
   bundle stays unnameable on trade rights for another program's duration.
 - **Q2 — The spine gap.** GR-2..GR-6 read SP-2/SP-4 surfaces that are grep-zero
@@ -677,7 +686,7 @@ finder, no new relationship vocabulary.
   spine reads; both are pure density wins), hold GR-2+ behind SP-2/SP-4, and
   rule NOW that SP-4's court reads are spelled `courtPostureOf` /
   `courtRiskAppetiteOf` — never `riskToleranceOf`, which is TAKEN by an
-  NPC-level read at `roads/state.js:319` (a silent-collision class this estate
+  NPC-level read at `roads/state.js:319` [see the bracket at :149] (a silent-collision class this estate
   has been bitten by).
 - **Q3 — GR-6 occasion 1's mount.** The intent ledger is `{targetId, tick}`
   with TTL 2 (R-6). RECOMMENDATION: the bounded-multiplier leaf at the
@@ -701,4 +710,4 @@ DESIGN_WAR_RULINGS_ARCHITECTURE.md §10 binds verbatim; the GRAMMAR volume's
 treaty outside peaceTerms.js" now reads "outside the peaceTerms WRITER FAMILY"
 (R-2 — the sale precedent is the family's own definition); item 5's ceiling
 obligation uses the MEASURED ~766/800 figure re-measured at each publishing
-commit, never inherited — including from this document.
+commit, never inherited — including from this document. [see the bracket at :91]

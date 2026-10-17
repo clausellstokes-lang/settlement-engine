@@ -17,16 +17,16 @@
 ## claim, so survey-receipted fact and unverified inference were
 ## typographically identical in the one document Sol treats as the map of what
 ## already works). Implementation is assigned to the external implementer
-## (Sol); architecture and validation by Fable.
+## (Sol); architecture and validation by Fable. [CORRECTED 2026-10-16 (coherence fold) — implementation runs as chair-dispatched lane seats under docs/OPERATING_STANDARD.md; "Sol" is historical.]
 
-**Status: ARCHITECTURE. This volume is the map every other volume points at when
+**Status: ARCHITECTURE. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: — (no cross-wire lights; the per-pair couplings live in their owning volumes) · BUILT DARK: CW-0 registry 68 rows + its four walkers (landed; instrumentation, no flag); CW-1 cascade braid (cascadeGovernorEnabled dark, OD-FC-16) · UNBUILT: CW-2x cause-walk extension; CW-3 measure; causedBy adoption in zero volumes] This volume is the map every other volume points at when
 it declares a coupling (spine req. 8). It walks all 21 pairs of the seven layers
 {war, trade, faith, populations, information, grammar, interior}, rules which
 volume OWNS each designed coupling, declares the deliberately-empty directions as
 decisions, derives the six cross-layer signature stories end to end by named
 reads and receipts (spine req. 7's proof-by-construction), and specs the FOUR
 cross-wire waves (CW-0..CW-3) that no single volume owns. Judgment blocks in §7
-are the drafting chair's rulings under delegation — vetoable there.**
+are the drafting chair's rulings under delegation — vetoable there.** [CORRECTED 2026-10-16 (coherence fold) — the live map is the coupling REGISTRY (68 rows, src/domain/certification/couplingRegistry*.js); this volume is its design. CW-0w and CW-1 LANDED (CW-1 dark); CW-2 is RE-SCOPED to CW-2x (DESIGN_FP_ARCH_CW §1 S9, ratified in the compiled fold DESIGN_FP_ARCHITECTURE.md as wave #59; see the bracket at :1672); CW-2x and CW-3 are unbuilt.]
 
 **Cross-reference key [CORRECTED 2026-08-02 (fp-audit)].** War volume waves =
 WR-0..WR-10 (DESIGN_WAR_RULINGS_ARCHITECTURE.md). Faith = WF-0..WF-9
@@ -57,7 +57,7 @@ assign (VERIFY-AT-BUILD).
 2. **The count [CORRECTED 2026-08-02 (fp-audit)].** Seven layers give 21
    unordered pairs and 42 directions. The per-direction GRADE lives in §3's
    matrix — every one of the 42 directions is ruled there (designed, existing,
-   or declared empty). §4 walks each pair as a UNIT: where the survey evidence
+   or declared empty). [see the bracket at :224 — no direction is graded EMPTY] §4 walks each pair as a UNIT: where the survey evidence
    is directional the section carries separate **EXISTS, A→B** / **EXISTS,
    B→A** blocks, and where one merged EXISTS block serves, §3 remains the
    per-direction authority. CW-0's registry construction therefore takes
@@ -70,7 +70,7 @@ assign (VERIFY-AT-BUILD).
 3. **Pair anchors.** The pairs are CPL-1..CPL-21 (§4). Other volumes point at
    these anchors when they declare a coupling; a coupling declared in a volume
    with no CPL row, or a CPL row with no owning wave, is a defect one side must
-   fix. [CORRECTED 2026-08-02 (fp-audit)] The obligation is SAME-COMMIT and
+   fix. [RULED 2026-10-16 (coherence fold §3.3.2) — the registry minted CPL-22 (TRADE→GRAMMAR, couplingRegistryEspionage.js:125-126, although CPL-10 IS TRADE × GRAMMAR), CPL-23 (FAITH→WAR, couplingRegistryWar.js:661-662, although CPL-2 IS WAR × FAITH) and CPL-20.INFO_TO_INFO (couplingRegistryEspionage.js:574, a within-layer row under a cross-layer pair). RULED: re-anchor 22→10 and 23→2 in the registry (a certification-file cure, no behaviour); within-layer rows take a declared extension family `CPL-X.<LAYER>_WITHIN`; a pair-id closure pin lands beside CHARTERED_VOLUME_PREFIXES (the shape regex is `CPL-\d+` today, couplingRegistry.test.js:139); EC, WC, EP, LG, PG, MF and CN prefixes are chartered in the same commit as their first row (requirement 21b/21c). Until the cure row lands, read CPL-22 as CPL-10 and CPL-23 as CPL-2.] [CORRECTED 2026-08-02 (fp-audit)] The obligation is SAME-COMMIT and
    standing: any wave in any volume that lands a cross-layer read adds its
    CW-0 registry row (pairId, direction, read, receiptField, counterforce,
    flags, owningVolume, owningWave, intendedDesk) in the SAME commit, and the
@@ -79,7 +79,7 @@ assign (VERIFY-AT-BUILD).
    the very waves it guards (the spine's §5 implementer protocol now carries
    the reciprocal line).
 4. **The ownership law (J-CPL-1):** every designed coupling has exactly ONE
-   owning wave in ONE volume — the wave that builds its writer or its read. This
+   owning wave in ONE volume — the wave that builds its writer or its read. [CLARIFIED 2026-10-16 (coherence fold §3.2.10, §3.1.1–§3.1.4) — DESIGN_FP_ARCH_EC absorbs TR: every row below owned by a TR wave resolves through EC's absorption (TR-4..TR-8 absorbed as EC-12/6/13/14/15, fold §2), except where the fold ruled otherwise — the trade-rights READ executor is EC-6 and the PRODUCER is GRAMMAR's `PACT_DRAFT_LENS` (§3.1.1); TR-5's trade half is RULED BY DELEGATION 2026-10-16, OD-FC-2 (§3.1.2); the HIDE trade toll is an EC-6 stance input (§3.1.4); TR-6's MONOPOLY keeps TR-6's definition (§3.2.10a). The TR wave ids in this volume stay as written; read them through that table. ARCH_EC names `seatBooksEnabled` zero times, so TR-7's seatBooks reservation (CPL-11) has no EC home yet (PLAUSIBLE loss in the absorption).] This
    volume builds NOTHING per-pair; it builds only the four cross-wires (§6),
    which are the machinery of coupling-as-such: the registry, the governor, the
    cause-walk, and the measure.
@@ -155,7 +155,7 @@ volumes, BOTH volumes' §1 laws bind the coupling — the stricter clause wins.
   a bare token by word-association — the knowledge family's measured
   contamination (knowledgeLaneEvidence.js:12-29: FIFTEEN impactKinds reach
   `knowledge` on the 'news' token alone) and the `belief_misjudgment`-under-the-
-  faith-desk misfile (heraldRouting.js:118) are the SAME hazard. Every new
+  faith-desk misfile (heraldRouting.js:118) are the SAME hazard. [CORRECTED 2026-10-16 (coherence fold) — IN-5 LANDED the refile: HERALD_SECTIONS carries `knowledge` (heraldRouting.js:74) and :151-152 records "RE-FILED to the KNOWLEDGE block"; the misfile is history, the hazard class stands.] Every new
   cross-layer kind chooses its id tokens deliberately and registers routing
   explicitly; CW-0's registry records the intended desk so the misfile class is
   walker-visible.
@@ -191,8 +191,8 @@ volumes, BOTH volumes' §1 laws bind the coupling — the stricter clause wins.
 | **FAITH** | faithProximityOf/faithAlignmentQuadrant (sacredClaim.js:67-123), patronSecurity, piety/legitimacy bands, institutionTolerance (baseline IS patron conviction), templeMediated relief warmth (generosityEV.js:243-253) | conversionOutcome, faith_pact/betrayal/foothold, pantheon Ascendancy/Twilight, ~9 phrased tokens (vs war's ~27) | worldState.religionStates (shares/standings/legitimacy/heresyStain/suppressed), worldState.pantheon, institutionTolerance | LOCAL lane every tick on deity presence; SPREAD lane behind faithSpreadEnabled; piety lag 0.06 |
 | **POP** | demographicReadings/destinationMenuFor (the ONE menu seam — demographicsMigration.js:276-315), pressureOf, viability ladder + moverPermitted (one consumer today), realmPressure01 (war-motive only), populationTrendBand (belief axis) | hungry_gap + migration_flight (the two Herald lines, graded the estate's model translation), lifecycle beats (steading_*, terminal death, resettled) | population integer + 12-row history, spatialLedgers.migration columns (travelClass mutex), demographicPlans | weekly rates; columns at leg speed; plans PATIENCE 78; exact conservation pinned w/ negative control |
 | **INFO** | beliefMap per-observer/per-slot reads (beliefMap.js:10-12), credibilityOf (rise 0.6/fall 5, half-life 52), brokerage stamps (measured 18,377-record ladder), detectMisjudgment, reputationRace (built, ZERO consumers) | infowar_lie_exposed/spy_exposed, intel_transfer, belief_misjudgment — 4 beats among 269 routed tokens (~1.5%); speaks only when a secret dies. [CORRECTED 2026-08-02 (fp-audit)] IN-5 mints THE KNOWLEDGE DESK — a seventh Herald section for knowledge-native kinds (J-INF-7); belief_misjudgment REFILES there from the faith desk (J-INF-6) — CW-0 registry rows for INFO-side kinds carry `intendedDesk: knowledge` | beliefMaps, rumorLedgers (TTL/top-K/hop-weathered), disinfo, sightPostures, credibility | hop latency + distance surcharge; silence decay 0.92/tick; lie shelf-life 8 ticks |
-| **GRAMMAR** | treatiesForPair→treaty_default casus, treatyDocument/frayingTermOf, compliance-under-fog (trueState vs observed, DETECT_FLOOR), findCrossPressuredMediator (one finder, two consumers) | treaty_signed (major, cured of the id-less drop), treaty_breached (DM-verb path only); expiry RECEIPTLESS today (peaceTerms.js:720-724) | treaties ledger (11-term catalog, 7 families, six executors; sole mint = war-exit PASS 1) | treaty clock 52-week (WR-0c item 4; legacy 12 marked); strain 0.6/yr; errand legs law M when WR-7 lands |
-| **INTERIOR** | postureOf/blocDecisionFactor (settlementPolitics, dark), publicLegitimacy bands + gates (coup spawn, insurgency null ≥75), grievanceRead (fixation/revanchism), obligations/gratitudeBonds, dispositionStats (permanent until WR-2) | coup verdicts (dice-clean main lane), faction 7-type table, commons petition/gathering/riot, investiture beat, generosity 6 headlines | legitimacy 0-100 stock (never passively decays), factionPairStates, relationshipMemory + turningPoints(24), commonsVoice ledger | same-settlement, same-tick (the fast layer); memory clocks 4-tick incident half-life / 156w bonds / permanent disposition |
+| **GRAMMAR** | treatiesForPair→treaty_default casus, treatyDocument/frayingTermOf, compliance-under-fog (trueState vs observed, DETECT_FLOOR), findCrossPressuredMediator (one finder, two consumers) | treaty_signed (major, cured of the id-less drop), treaty_breached (DM-verb path only); expiry RECEIPTLESS today (peaceTerms.js:720-724) | treaties ledger (11-term catalog, 7 families, six executors; sole mint = war-exit PASS 1) [CORRECTED 2026-10-16 (coherence fold §3.3.6) — 26 term types / 13 families at 00b648c9d (GR-3 landed; counts derive from live TERM_FAMILIES); peacetime formation is LIT (pactFormationEnabled, FP_LIT_ALIVE); the treaty advance is pulseKernel.js:2752 advanceTreatiesWithDisposition — "sole mint" and its address are history] | treaty clock 52-week (WR-0c item 4; legacy 12 marked); strain 0.6/yr; errand legs law M when WR-7 lands |
+| **INTERIOR** | postureOf/blocDecisionFactor (settlementPolitics, dark) [CORRECTED 2026-10-16 (coherence fold §3.3.3) — settlementPolitics exports `blocDecisionFactor` (settlementPolitics.js:628) and no `postureOf`; the court posture read is SP-C's `courtPostureOf` / `courtRiskAppetiteOf` (strategicPosture.js:222, :303, CR-C4-1)], publicLegitimacy bands + gates (coup spawn, insurgency null ≥75), grievanceRead (fixation/revanchism), obligations/gratitudeBonds, dispositionStats (permanent until WR-2) | coup verdicts (dice-clean main lane), faction 7-type table, commons petition/gathering/riot, investiture beat, generosity 6 headlines | legitimacy 0-100 stock (never passively decays), factionPairStates, relationshipMemory + turningPoints(24), commonsVoice ledger | same-settlement, same-tick (the fast layer); memory clocks 4-tick incident half-life / 156w bonds / permanent disposition |
 
 **The three cross-cutting substrate facts every pair below leans on:**
 (1) **Belief exists but is consumed asymmetrically** — courts get it (war
@@ -202,7 +202,7 @@ across nine core commerce modules; faith survey: sacred_claim compares embedded
 refs). SP-2's three subject families are the cure, and POP-1/TR-3/WF-4 are the
 owning waves [CORRECTED 2026-08-02 (fp-audit): concrete waves]. (2) **The
 grammar is war-exit-shaped** — the single agreement artifact mints only from
-sue_for_peace (peaceTerms.js PASS 1, sole caller pulseKernel.js:2371); SP-3
+sue_for_peace (peaceTerms.js PASS 1, sole caller pulseKernel.js:2371); [see the bracket at :194 — stale: peacetime formation is lit] SP-3
 peacetime formation is the cure and GR-2 owns it, amendment-shaped per chair
 ruling R1 (one instrument per pair is LAW: formation AMENDS the pair's standing
 instrument, minting only where none exists; reciprocal pacts are DIRECTIONAL
@@ -211,7 +211,7 @@ stacking machinery). (3) **Every layer's memory outruns its voice** — the
 surveys' uniform verdict (population 2 dedicated lines, faith ~9 tokens, info
 ~1.5%, interior single-template) — so EVERY pair below has a narration debt its
 owning volumes' voice waves (WF-8, POP-6, IN-5, INT-8) pay; this volume does not
-duplicate those waves, it routes cascade-grade tellings through CW-1/CW-2.
+duplicate those waves, it routes cascade-grade tellings through CW-1/CW-2. [RULED 2026-10-16 (coherence fold §5) — "telling" is SP-6b's SEVERITY rung (glancing · telling · grave · ruinous) as well as the TELLING register and "worn in the telling"; prose names the noun ("the telling register"); here "tellings" means the register's composed chains.]
 
 ---
 
@@ -221,7 +221,7 @@ duplicate those waves, it routes cascade-grade tellings through CW-1/CW-2.
 ## [CORRECTED 2026-08-02 (fp-audit): a fifth explicit token — the audit found
 ## two designed directions graded "EMPTY-today", a grade outside the legend
 ## that C-LAW-8 would have read as a STOP-and-report on designed GR-2
-## triggers] · **EMPTY** = declared empty in §4)
+## triggers] · **EMPTY** = declared empty in §4) [CORRECTED 2026-10-16 (coherence fold) — no cell below is graded EMPTY: every "declared empty" in §4 is a SUB-coupling inside a designed direction (about 45), so §0.2's "designed, existing, or declared empty" holds at sub-coupling grain only, and J-CPL-2's absence-of-rows enforcement keys on (module, module) pairs, not CPL directions. These grades are the 2026-08-02 design snapshot; the status of record is the coherence fold §2, and findings SP-CW §13 re-grades every row at 00b648c9d (e.g. CPL-10 and CPL-17 A→B are BUILT-LIT through pactFormationEnabled).]
 
 | Pair | A→B | B→A |
 |---|---|---|
@@ -231,7 +231,7 @@ duplicate those waves, it routes cascade-grade tellings through CW-1/CW-2.
 | CPL-4 WAR×INFO | LIVE (belief-wrapped strength, bluff) | ADDS (the lure, feasibility, race — IN-2/WR-8/IN-4) |
 | CPL-5 WAR×GRAMMAR | LIVE (war-exit mint, enforcement bites) | ADDS (WR-7 transport; GR-2 peacetime; GR-1 oath identity) |
 | CPL-6 WAR×INTERIOR | LIVE (4 channels) / DARK (war party) | ADDS (WR-5 books/veto/re-read; INT-3/INT-4) |
-| CPL-7 TRADE×FAITH | LIVE (conscience embargo, relational contraband) | ADDS (WF-7 tithe; TR-6 moral drift) |
+| CPL-7 TRADE×FAITH | LIVE (conscience embargo, relational contraband) | ADDS (WF-7 tithe; TR-6 moral drift) [RULED 2026-10-16 (coherence fold §5) — one tithe (§3.1.5); see the bracket at :568] |
 | CPL-8 TRADE×POP | LIVE (import arm, prosperity pull) | ADDS (POP-1 believed conditions; TR-4 grain road) |
 | CPL-9 TRADE×INFO | LIVE (believed danger EV) / gap (prices read truth) | ADDS (TR-3 believed scarcity; IN-0 HIDE tax; the run) |
 | CPL-10 TRADE×GRAMMAR | ADDS (nil today) — GR-2 `trade_demand` trigger | ADDS (GR-2 formation; TR-5 pact lane; GR-3 term rows) |
@@ -280,7 +280,7 @@ so a "starved" city starves by percentage, not by intercepted grain); WR-4's
 home front reads trade partners lost + route decay as war cost; WR-6's
 expenditure read prices allied trade spent; WR-10's bundle stacks trade-rights
 term families — **which do not exist in the tree** (trade survey:
-trade_exclusivity/market_access/toll_exemption, zero hits) — a declared
+trade_exclusivity/market_access/toll_exemption, zero hits) [RULED 2026-10-16 (coherence fold §3.3.1) — minted by GR-3 as `exclusivity` / `market_access` / `toll_exemption` (peaceTermsCatalog.js:306-308, labels :447-448, family `commercial`); the spelling is `exclusivity`, never `trade_exclusivity` (J-GR3-C2, the catalog). THE POINTER the war volume promised beside this TRADE row: DESIGN_WAR_RULINGS_ARCHITECTURE.md WR-10's bundle stacks these three catalog rows as the catalog spells them; the §10 register item 2 dependency is discharged by GR-3.] — a declared
 cross-volume dependency: GR-3 mints the catalog rows (chair ruling R3 — ONE
 canonical catalog list, minted in GRAMMAR; TR-5's pact lane consumes), and
 WR-10 consumes them (§10).
@@ -308,7 +308,7 @@ commodityFlow).
 except through the one opener's full gate stack (settled by WR-0c item 3;
 re-litigating it here is a defect). War→trade price panic — no numeric price
 exists to panic (owner's no-coin ruling, treatyTransfer.js:11-20); scarcity
-speaks in bands only.
+speaks in bands only. [CORRECTED 2026-10-16 (coherence fold) — the no-coin ruling was REVERSED by the owner (ODQ §731.1, "KNOWINGLY REVERSES the recorded no-conserved-coin ruling"; W-COIN, `treasuryEnabled` manifested); this empty now rests on finite semantics and EC's banded reference price (ODQ §934.90 addendum 3), not on the absence of coin. The owner's words stay where they are; only the rationale is re-grounded (the banded-not-float conclusion survives — PLAUSIBLE).]
 
 ### CPL-2 — WAR × FAITH (Saladin and the raided pilgrim roads: the casus a holy man hands a general)
 **EXISTS, faith→war:** sacred_claim reads the closed four-quadrant table
@@ -345,7 +345,7 @@ believed-devotion family when WF-4/IN-2 land. Spread moves at carrier reach;
 dissolution re-reads at pulse cadence once warTerminationEnabled lights.
 **RECEIPTS + DOSSIER:** conversionOutcome receipts name amplifiers per the
 legibility law; the dissolution receipt is authored. Dossier: WarFaithTab
-already composes both; WF-0/WF-8 add the fall causes and war-of-the-faith lines
+already composes both; [CORRECTED 2026-10-16 (coherence fold §3.3.9) — WarFaithTab no longer exists; WarTab.jsx, FaithTab.jsx and WarFaithDesk.jsx (src/components/new/tabs/) hold the surfaces.] WF-0/WF-8 add the fall causes and war-of-the-faith lines
 to FaithSection (ACTIVE state only — premium gate maps in WF §3).
 **PINS:** negative-hardest — two towns with NO patrons share no rite and press
 no claim ("absence of a faith is not a shared faith", sacredClaim.js:39-49,
@@ -466,7 +466,7 @@ engine-level order, intent, or ledger artifact; lies move BELIEFS about state
 
 ### CPL-5 — WAR × GRAMMAR (Versailles: the dictated peace that pre-paid the next war)
 **EXISTS:** this is the grammar's home lane — the entire treaty artifact mints
-at war-exit (advanceTreaties PASS 1, sole caller pulseKernel.js:2371; victor
+at war-exit (advanceTreaties PASS 1, sole caller pulseKernel.js:2371; [see the bracket at :194] victor
 drafts unilaterally from believed margin, no counter-offer machinery anywhere);
 enforcement BITES (war block, demil cap, occupation hold — treatyEnforcement.js
 :82-141); detected default feeds the treaty_default casus; WR-0c made
@@ -493,7 +493,7 @@ face-saving exits price the climb-down so peace stays reachable.
 lie-bought pact's fingerprint — CPL-19); the treaty clock is 52-week current /
 legacy-12-marked (WR-0c item 4 landed). Errand legs at law M when WR-7 lights.
 **RECEIPTS + DOSSIER:** treaty_signed (major) + treaty_breached exist;
-TreatyPanel/WarFaithTab/PDF render per-term compliance and the fraying line —
+TreatyPanel/WarFaithTab/PDF render [see the bracket at :348] per-term compliance and the fraying line —
 mid-life legibility is excellent, both ends near-mute (survey verdict) —
 GR-0's lifecycle voice adds lapse/detection/longevity beats. Dossier: the
 treaty document IS the round-trip.
@@ -565,7 +565,7 @@ institutions under the patron plane × piety megaphone (moralInstitutionPressure
 (generosityEV.js:243-253); and the tithe does NOT exist — no gold/treasury
 stream touches a temple anywhere in src/domain (faith survey, tithe grep;
 'tithe_rights' is a faction-competition prize TOKEN only,
-factionCompetition.js:68).
+factionCompetition.js:68). [RULED 2026-10-16 (coherence fold §3.1.5) — ONE tithe: W-COIN's treasury now mints a `tithe_share` tax form (dark; treasury.js) — the coin arm, made lawful by the owner's reversal of T2; WF-7's temple wealth is NOT a second stock but a BAND derived from that row where the treasury is lit and from the piety × temple-presence heuristic where it is dark (the named degraded arm); the house-fortune source is struck — houses pay the seat's tax, and the temple reads the seat's books through INT, never a house's. WF-7 still owns the executor end to end.] [RE-RULED 2026-10-16 after skeptic S1-02 — the tithe is the CHURCH's (ODQ:32488): WF-7's piety × presence → `templeWealth` band is the flow's source; W-COIN's `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from WF-7's band, never a source — one flow, two ends; the fold §3.1.5 carries the text of record.]
 **ADDS [CORRECTED 2026-08-02 (fp-audit) — the ownership circle broken: FAITH's
 waves pointed the stream executors at TRADE's machinery, TRADE's text pointed
 the tithe back at FAITH, and no wave owned either executor; ruled per the
@@ -578,7 +578,7 @@ DECLARED CPL-7 PORT:** where TRADE's stream physics (TR-4) is LIT, WF-7's
 draw additionally registers a stream entry through TRADE's OWN writer at its
 own chokepoint — consumed, never forked; TRADE dark ⇒ wealth fold + receipts
 only (the degraded arm, declared in FAITH §3). The TRADE side of this pair is
-a READ SURFACE only (house books/fortune bands read by FAITH's executor).
+a READ SURFACE only (house books/fortune bands read by FAITH's executor). [see the bracket at :568 — the house-books half is struck]
 Also: TR-6 (moral drift prices profiteering) — the famine speculator's
 fortune carries a conscience stain the tolerance/moral machinery can read
 (story #5); WF-2a's shrine economy makes pilgrim traffic a receipted faith
@@ -592,7 +592,7 @@ alignment gate reading the SAME provenance.
 **BELIEF + CLOCK:** tithe flows at local (LOCAL-lane, deity presence) cadence;
 the speculator's cornering rides SP-2 believed scarcity (CPL-9). Neighbours'
 knowledge of a temple's wealth is a SECRET (belief-side, sack-lure reads
-believed wealth) — the altar is loud, the coffer is not (C-LAW-5 applied).
+believed wealth) [RULED 2026-10-16 (coherence fold §5) — "lure" is INFORMATION's bought lie (IN-2); FAITH's sack lure is "the sack's draw" in prose] — the altar is loud, the coffer is not (C-LAW-5 applied).
 **RECEIPTS + DOSSIER:** WF-7's tithe band + relief receipts land in
 FaithSection (ACTIVE only); moral_reckoning exists as a phrased token today.
 Dossier: the temple's wealth band and the house's stain both render where the
@@ -605,7 +605,7 @@ omniscient morality — the stain rides receipts, not truth).
 **DECLARED EMPTY:** no indulgence market — forgiveness of the corruption/
 grievance estates is never purchasable through the tithe stream (INT-6's
 deliberate forgiveness is a SEAT act with a price, not a commodity; Law One
-keeps the divine ledger closed); no blessed-goods price tier (no prices exist).
+keeps the divine ledger closed); no blessed-goods price tier (no prices exist). [see the bracket at :311]
 
 ### CPL-8 — TRADE × POP (the grain fleets of the Baltic: bread decides where people can live)
 **EXISTS, trade→pop:** K_food's import arm is the coupling's spine —
@@ -651,7 +651,7 @@ disappointment machinery, pinned there); conservation across arrival/turn-back
 (the 300-tick identity with negative control, built).
 **DECLARED EMPTY:** no rumor moves grain — belief never enters the conserved
 goods arithmetic anywhere (the POP seam ruling's law, restated here as the
-pair's boundary); no per-capita price signal (no prices).
+pair's boundary); no per-capita price signal (no prices). [see the bracket at :311]
 
 ### CPL-9 — TRADE × INFO (the Panic of 1907: runs started by whispered association, not audited books)
 **EXISTS, info→trade:** dispatch refusal reads BELIEVED destination danger —
@@ -670,7 +670,7 @@ informationStatecraft.js:1448-1452).
 BELIEVED SCARCITY ("grain is dear in the east, they say") — TR-3 (believed
 markets) owns the consumers: the wrong-market tragedy, cornering (TR-6), the
 famine speculator; IN-0 lands the HIDE trade tax (the sealed court stops
-hearing prices too); IN-2's planted wealth/planted scarcity are the lure
+hearing prices too); [RULED 2026-10-16 (coherence fold §3.1.4) — the HIDE toll (IN-0d `secrecyTradeFactor.js`, zero consumers) is EC-6's: a HIDE posture is a `restricted` STANCE on every pair into the hiding court (its bands unhindered/curtailed/throttled/choked map onto open/taxed/restricted/closed); one read, no new join; CUT-TO-SENTENCE as a stance input (fold §6); a lit-world shift only when EC-6 lights.] IN-2's planted wealth/planted scarcity are the lure
 pointed at markets; SP-5's house credibility instantiates the
 confidence-stock family for commerce — the run becomes mechanics (story #3);
 IN-4's race decides who-knew-first at the market gate.
@@ -696,7 +696,7 @@ cornering play against a well-connected market fails (independent witnesses
 arrive too fast); HIDE's tax must show the sealed court mis-pricing (the cost
 of secrecy is ignorance, both directions — built as SEE/HIDE symmetry).
 **DECLARED EMPTY:** no numeric price feed — believed scarcity is BANDED
-("dear/fair/glut" family), never a float (finite semantics); no autonomous
+("dear/fair/glut" family), never a float (finite semantics); [RULED 2026-10-16 (coherence fold §5, §3.3.7) — the believed ladder here is SP-B's `SCARCITY_BANDS` (landed); the TRUTH-side market ladder is EC's `MARKET_CONDITION_BANDS` (glut · soft · fair · dear · desperate), never `CONDITION_BANDS` (armyStrength.js:133 owns that); for the re-grounding of the no-price empties see the bracket at :311.] no autonomous
 house-side SELL spammer (the anti-whisper-war-hum law, recorded deferral in
 informationStatecraft's foot notes, honored here).
 
@@ -717,7 +717,7 @@ treaty quantity waits on trade agreements landing.
 R1 recorded]:** SP-3 IS this pair's cure and GR-2 owns formation — peacetime
 formation from typed triggers (GR-2's `trade_demand` crossing among the
 closed four), two-sided drafting via negotiationPictures (built once for
-WR-7, used for peacetime), the standalone NAP writer; GR-0 owns expiry
+WR-7, used for peacetime), [RULED BY DELEGATION 2026-10-16 (OD-FC-5 — peacetime drafting is one-sided as built (no pact module imports negotiationPictures; pactFormation.js:446-494); chair recommendation: amend SP-3's two-picture law for peacetime — the proposer's own picture is the offer it chose (coherence fold §3.2.1); see the spine's SP-3 bracket] the standalone NAP writer; GR-0 owns expiry
 receipts; GR-4 succession-repudiation; GR-5 renegotiation-from-strength.
 **R1 — ONE INSTRUMENT PER PAIR IS LAW:** the treaty ledger's one-per-pair key
 is not a bug; peacetime formation AMENDS the pair's standing instrument
@@ -731,7 +731,7 @@ receipt. GRAMMAR §4 carries the model change; TR-5's pact lane consumes it
 and never re-derives it. GR-3 mints the TRADE TERM FAMILY catalog rows
 (canonical per R3) — including the exclusivity/market-access/toll-exemption
 rows that WR-10's bundle spec name-drops but the tree lacks (trade survey:
-zero hits; the dependency is declared in §10); TR-1 (casus commercii) gives
+zero hits; the dependency is declared in §10); [see the bracket at :283] TR-1 (casus commercii) gives
 pact breach its commercial casus siblings so a defaulted grain pact angers
 like a defaulted peace.
 **COUNTERFORCE:** compliance-under-fog transfers whole (the same monitor-reach
@@ -750,7 +750,7 @@ valuation clears mints NOTHING but a receipted no-deal (the whitePeace
 precedent extended to peacetime); a grain pact whose payer starves performs
 the reserve-floor law (impoverish, never starve-out — treatyTransfer's floor
 generalizes); the survey's sharpest sentence stays pinned until cured: two
-peaceful neighbours CAN now sign what only victors could dictate.
+peaceful neighbours CAN now sign what only victors could dictate. [CORRECTED 2026-10-16 (coherence fold) — CURED: peacetime formation is LIT (pactFormationEnabled in FP_LIT_ALIVE, 4 presets incl. the default); see the bracket at :194.]
 **DECLARED EMPTY:** no spot-market, no auction, no clearing-house object —
 pacts are bilateral court instruments (law I's pairwise discipline applies to
 commerce too); DM-confirmed dependency discovery stays advisory, never
@@ -1106,10 +1106,10 @@ population-adjacent term stays out: persons as compliance bonds crosses the
 named-cast never-resolve line — a held hostage is WR-7b's foreign-guest
 hold, a war mechanism, not a peacetime term); no serfdom/population-
 transfer term (people are never the PAYMENT — grain, rights, and access
-are; the sovereignty market trades EDGES, not souls).
+are; the sovereignty market trades EDGES, not souls). [CORRECTED 2026-10-16 (coherence fold) — except the owner's `tribute_population` (the bracket below): anonymous population columns as a levy term; persons and named cast stay out. The override does not strike this empty clause in its own text; the owner's word wins.]
 [OWNER-OVERRIDE 2026-08-02: `tribute_population` is ruled INTO the catalog
 by owner order — the levy is anonymous-population columns only;
-DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md TB-3 carries the spec]
+DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md TB-3 carries the spec] [RULED BY DELEGATION 2026-10-16 (OD-FC-13 — `tribute_population` is unbuilt (0 hits in src at 00b648c9d) and unscheduled in ARCH_GR; coherence fold §3.2.16 records it as a GR-3 row + POP-5b's conservation identity; the owner confirms it (with ODQ §125.4's size-scaled column speed) still binds — chair recommendation YES; it shifts goldens at its landing] [CORRECTED 2026-10-16 (OD-FC-13 as finally ruled, S3 M14) — the identity is POP-1's (POP-5b consumes); both directives are the owner's own and BIND without re-asking.]
 
 ### CPL-18 — POP × INTERIOR (the Peasants' Revolt: the levy refused, the petition marched)
 **EXISTS, pop→interior (DARK) [CORRECTED 2026-08-02 (fp-audit): directional
@@ -1575,12 +1575,13 @@ inflates far enough to march on.
 ### CW-0 — THE COUPLING REGISTRY + WALKER (no flag — structural prevention;
 ### the WR-9 instrument-wave precedent; historical archetype: the customs
 ### rolls — trade existed before the rolls, but only the rolls made smuggling
-### a crime you could see)
+### a crime you could see) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED: the registry (68 rows across eight couplingRegistry*.js files, schema v4) and its four walkers (CW-0w: b3fb8f494, f7da6b607, 03dee5fd5, e30770bd0; DESIGN_FP_ARCH_CW §4).]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (gate-time walkers; no engine cadence) · TIER: aspatial-safe (source tree and test estate only) · DEGRADED ARM: n/a — no world read, no save bytes]
 **Scope:** a machine-readable registry module (certification family; pure
 data + pure reads, no state, no writer) enumerating every DESIGNED coupling:
 `{ pairId (CPL-1..21), direction, read (module.export), receiptField,
 counterforce (module.export), flags[], owningVolume, owningWave,
-intendedDesk }`. Three walkers:
+intendedDesk }`. [see the bracket at :73 — CPL-22/23 re-anchor to CPL-10/CPL-2; within-layer rows take `CPL-X.<LAYER>_WITHIN`] Three walkers:
 - **The inclusion ratchet (J-CPL-2):** an import-graph scan over the seven
   layers' module families — a cross-layer read without a registry row reds;
   the DECLARED-EMPTY directions are enforced as the ABSENCE of rows (never a
@@ -1629,7 +1630,8 @@ are structurally impossible (empties are absences). **Bands:** none.
 ### CW-1 — THE CASCADE GOVERNOR (flag `cascadeGovernorEnabled`; spine req.
 ### 12 made structural for cross-layer chains; historical archetype: the
 ### newspaper edition — the world does not stop happening, but the paper
-### chooses what a morning can carry)
+### chooses what a morning can carry) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED 2026-09-24 @ 155da82f2, DARK: cascadeBraid.js (WINDOW_WEEKS 13, MEMBER_FLOOR 3, LAYER_FLOOR 3 at :77-81), one line in heraldFeed.js; `cascadeGovernorEnabled` is in the manifest (simulationRules.js:274) and in no preset.]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: IMMEDIATE (corrected by skeptic S1-06: the braid forms at composition as soon as it qualifies, cascadeBraid.js:510-517; it never waits for the window to close) — the earlier reading was: seasonal — window 13 weeks (cascadeBraid.js:79); read as "braids when the window CLOSES" a one-month advance never shows the braid of a cascade it caused; the code's "closed window" may be an inclusive interval and braid at once (PLAUSIBLE, VERIFY); OD-FC-1 decides · TIER: aspatial-safe display; needs at least 3 receipts sharing one recorded ancestor across at least 3 registry layers, so it rides causedBy/sourceEventId adoption (two engine causedBy writers today); host flags: cascadeGovernorEnabled (dark, OD-FC-16), provenanceLedgerEnabled · DEGRADED ARM: dark ⇒ the composed feed is byte-identical; a player's braid truncates covert members]
 **Scope:** DISPLAY-SIDE composition only (J-CPL-4: pacing edits the paper,
 never the world — no engine receipt is ever suppressed or unminted). At
 Herald composition, a CASCADE is detected: N ≥ depth-band receipts within a
@@ -1649,10 +1651,10 @@ covert links truncate for players (the CW-2 rule); the DM's braid is whole.
 name — no summarization ever drops a name the address law carried.
 **Clock:** window and dwell in INTERVAL_WEEKS-denominated bands; a cascade
 braids when its window CLOSES, one edition late by design (the paper
-reports; it does not prophesy).
+reports; it does not prophesy). [RULED BY DELEGATION 2026-10-16 (OD-FC-1 — at a 13-week window (cascadeBraid.js:79) a braid that waits for its window to close is never seen inside a one-month advance of the cascade it tells; the code's "CLOSED window" reads as an inclusive interval, so the built braid may be immediate (PLAUSIBLE, VERIFY). Requirement 16 (first-visible latency) is the owner's to set, and it decides which reading binds.]
 **Receipts:** the braided item is itself a receipt (id-carrying, full
 address chain across every member settlement, typed action `cascade`,
-reason = the chain).
+reason = the chain). [CLARIFIED 2026-10-16 (coherence fold) — reconciled with "Lifecycle: display-side; no save state" below at DESIGN_FP_ARCH_CW §3 JUDGMENT (its Q4) as a VIEW-ITEM-WITH-RECEIPT-DISCIPLINE: deterministic composition-time id, address chain, typed action, never persisted; CW-1 LANDED that way (155da82f2, dark). Q4 is recorded nowhere as ruled — it stands as the architect's JUDGMENT, vetoable.]
 **Pins (negative hardest):** two unrelated same-window misfortunes DO NOT
 braid (no false causality — the ancestor join is identity, never
 similarity); a chain of 2 layers never braids (depth floor); dark ⇒
@@ -1667,7 +1669,8 @@ page — the DM finds the whole chain where any of its victims live.
 ### CW-2 — THE CAUSE-WALK SURFACE (no flag — a read-only DM surface over
 ### persisted receipts; the crown law made a page; historical archetype:
 ### the coroner's inquest — the verdict is only as good as the chain of
-### custody)
+### custody) [CORRECTED 2026-10-16 (coherence fold) — RE-SCOPED: DESIGN_FP_ARCH_CW §1 S9 REFUTED this wave's greenfield premise — the V-4 cause-walk estate (causeWalk.js, CauseWalkPanel.jsx, CausalityPopup.jsx, heraldIntegrity.js, discourseKernel.js) landed after this volume was drafted, and building CW-2 as written would erect a SECOND cause-walk. The wave is CW-2x, the extension (registry join, horizon honesty, layer tags, story harness), ARCH_CW chair question Q1, ratified in the compiled fold DESIGN_FP_ARCHITECTURE.md as wave #59. This volume never received the one-line correction ARCH_CW asked for; this bracket is that line. CW-2x is UNBUILT (causeWalkCouplingJoin.js absent at 00b648c9d).]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: instant on click (a pull surface, no clock); its horizon is counted in RECORDS — pulseHistory 80, wizardNews 240, turningPoints 24 — so a busy or year-cadence realm forgets faster in weeks (requirement 23, OD-FC-33) · TIER: aspatial-safe; reads spatialLedgers.provenance (provenanceLedgerEnabled) · DEGRADED ARM: ledger absent ⇒ LEDGER_DARK_LINE; a player walk fails closed at covert seams ("the trail goes cold")]
 **Scope:** from any receipt, condition, or coupling receipt-field on a town
 page, walk BACKWARD across provenance (sourceEventId / causes[] / §1b-B
 receipt fields / the registry's receiptField map) up to a banded depth,
@@ -1705,7 +1708,8 @@ from the receipt the coupling landed.
 
 ### CW-3 — THE COUPLING MEASURE (no flag — WR-9's sibling for the coupling
 ### estate; the program's acceptance harness; historical archetype: the
-### assay office — the rush is rumor until the ore is weighed)
+### assay office — the rush is rumor until the ore is weighed) [CORRECTED 2026-10-16 (coherence fold §2) — UNBUILT at 00b648c9d (subsystemRowsCoupling.js absent); recorded with a slot in the coherence fold §6.]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (soak-side; the owner's terminal phase) · TIER: soak: the owner-signed lit soak · DEGRADED ARM: rows for volumes still dark read UNOBSERVED-and-say-why, never ALIVE]
 **Scope:** three instruments, all soak-side, none engine-side:
 - **The differential harness:** paired lit/dark same-seed soaks per coupling
   flag family, compared over the divergence series — the instrument the
@@ -1828,6 +1832,7 @@ physics (C-LAW-4) and are never tuned here.
 ## §9 HERALD + LEGIBILITY CONTRACT (the sentences the coupled world must be
 ## able to say — acceptance criteria, not decoration; every one carries id +
 ## full address chain + typed action + named settlements + recorded reason)
+[ADDED 2026-10-16 (coherence fold §1, requirement 22c) — these twelve contract sentences are 2026-08-02 acceptance shapes, not shipped prose, and none is pinned to a built kind today. Requirement 22c binds the owner's EVIDENCE LAW (2026-10-02/03, "complete, not cryptic"; docs/VOICE_AND_TONE.md pillar 10) and the voice program ("actions, not potential") on every phrased kind: each sentence below is RE-AUTHORED AT BUILD under it — the riddle forms (story 3's, CW-1's) name who, which power and what effect; and under the Herald TRUTH LAW (DESIGN_FP_SPINE §2 SP-6) the "they say" / "men said" forms are rumour-mill register, while the Herald forms report the believing as the true event. The sentences stand as written until then.]
 - "Grain is dear in the east, they say — and the say was worth more than
   the grain." (CPL-9)
 - "The house of Marrow could not pay what it never owed." (story 3)
@@ -1879,7 +1884,7 @@ spine, reported here; resolution state marked):**
    can stack them — a lit-precondition the war volume's §3 table does not
    yet carry. Report to the chair for a war-volume amendment row (WR-10's
    graceful-degradation note is accepted per R10; the war volume gets the
-   matching one-line note via the cohesion agent).
+   matching one-line note via the cohesion agent). [see the bracket at :283 — DISCHARGED: GR-3 minted the three rows]
 3. **The sacred_claim boundary note:** sacredClaim reads both towns'
    embedded patron snapshots — a truth-read ruled LEGAL under J-CPL-3's
    loud-fact exemption (altars are public). Recorded so nobody "fixes" it

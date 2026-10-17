@@ -15,6 +15,7 @@
 ## admission), each vetoable, each recorded in FABLE_VALIDATION_QUEUE.md at
 ## the fold commit.
 ## HEAD at landing: 32cc17f7 (stamped by the landing lane).
+## [RULED 2026-10-16 (coherence fold §5) — `rooted` in this volume is ES's ROOTED DWELL (§3.4b); W-OPS's infiltration rung `rooted` (operationsVoice.js ARC_RUNGS_MIRROR) is a homonym in an unsanctioned design (RULED BY DELEGATION 2026-10-16, OD-FC-4) and renames if sanctioned.]
 ##
 ## THE OWNER-AMENDMENT VOLUME that folds into DESIGN_FP_ARCHITECTURE as a wave
 ## family of the INFORMATION program, architected JOINTLY with the belief-legs
@@ -39,6 +40,9 @@
 ## navigate by SYMBOL, never by any line number quoted here.
 
 **Status: ARCHITECTURE. Nothing is scheduled until the owner sequences it.
+[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (`espionageEnabled` needs `errandSpineEnabled`, dark in every preset) · BUILT DARK at 00b648c9d: ES-0, ES-1, ES-2, ES-3, ES-4 (the `ES-4-DISTANT-SOURCE-EVIDENCE` pin), ES-5a (the stage as a leaf; no autonomous dispatch mount found — PLAUSIBLE, import census only), ES-5b, ES-5c, ES-5d, ES-6a (the leak) and ES-Da (the composite rider — the ONLY mission mint path, absent from §4's wave list) · UNBUILT: ES-6b, ES-7 (no `espionage_*` kind is registered or routed; missions resolve silently), ES-Db; W-OPS's cars are orphans (RULED BY DELEGATION 2026-10-16, OD-FC-4, see §0).]
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `spy_at_target` (ES-2's gauntlet + ES-3's product): the mission's target leg is the hearing; a spy dwells one week before the verdict. Once `hearingWeekEnabled` is lit no kind resolves in the tick it arrives at a one-week advance: it mints its pending verdict and the DM may leave it, tilt it or give a verdict (never a "decree" — the Decree Registry's word); month/season/year advances run the engine default; the hearing never parks the advance cursor (skeptic S5). Each kind's pending card is its FIRST-VISIBLE sign.]
+[ADDED 2026-10-16 (coherence fold, req 17) — TIER DECLARATION for every wave in this volume: `espionageActive` = `beliefsActive` (the spatial canon marker ∧ infoMode ≠ 'omniscient', beliefMap.js:204-209) ∧ `errandSpineEnabled` ∧ `espionageEnabled`. Only three presets record beliefs (dramatic_campaign and living_realm at 'perfect_delayed', full_simulation at 'full'; the default infoMode is 'omniscient', simulationRules.js:56), and `errandSpineEnabled` is lit in NO preset, so no mission can run in any shipped configuration. The family is spatial-canon (premium-tier) only by construction and has no aspatial degraded arm. Each wave below carries its own FIRST-VISIBLE/TIER line.]
 Every wave ships DARK behind `espionageEnabled`; no flag lights, no soak runs,
 no band ratifies outside the owner-signed schedule. Every judgment below is
 labeled JUDGMENT and is vetoable — an implementer NEVER re-rules one silently.
@@ -83,6 +87,8 @@ tap-order ruling (H — a spy taps BY ACCESS DEPTH and never reports purer
 than their access: the outbound performance at standoff/shallow cover, the
 host's internal beliefs embedded, both plus the delta with an inside asset;
 tap level is fidelity metadata, receipted in house voice — §3.7).
+
+[ADDED 2026-10-16 (coherence fold) — RULED BY DELEGATION 2026-10-16, OD-FC-4 — W-OPS (DESIGN_W_OPS / W_LIVES) is a successor DRAFT over espionage, unsanctioned, every leaf unimported; ES's volumes are the authority for missions until the owner signs. What it adds: one operation grammar (`operations/operationGrammar.js`, "THE ONE GRAMMAR every operation walks", absorbing these missions into MISSION/GOAL/ERRAND classes), the infiltration rungs `passing_ear → observer → rooted → placed → seated`, a mission dispatcher and acceptance (`missionDispatcher.js`, `missionAcceptance.js`), infiltration depth and drift, and an operations voice (`operationsVoice.js`); its mission catalog is owner-UNSIGNED (`signedBy: null`). That is new capability, not repair; the chair's recommendation is NO for now (coherence fold §3.1.8, §7).]
 
 **The measured verdict (all six censuses agree): this layer is overwhelmingly
 a WIRING problem.** Notoriety math (`embassyEnvoyWeight01`), capture math
@@ -151,7 +157,7 @@ is a parallel cover-story spelling and two suppression rulings.
 ## §1 THE CANONICAL MODEL — zero new top-level keys, one conditional sub-record
 
 **The fight, won:** ZERO new top-level worldState keys. ZERO new
-spatialLedgers sub-keys. ZERO new persisted derived state — vigilance,
+spatialLedgers sub-keys. [CORRECTED 2026-10-16 (coherence fold) — ES-5d added one; see the bracket at §3.14's ES-5d note.] ZERO new persisted derived state — vigilance,
 doctrine, notoriety, competence, the tell, the deliberation clock, the
 miss clock, the rooted-dwell decision (§3.4b), the tap level (§3.7), and
 the promotion-risk register (§3.14 — a READ, never a stock) are ALL derived
@@ -201,6 +207,7 @@ worldState.envoyErrands[] (EXISTS; writer envoyErrand.js — unchanged; SP-D's
                                    // would mint a dead vocabulary member
                                    // (the dead-band law's shape). Mint
                                    // REFUSES a legRef outside the six.
+                                   // [CORRECTED 2026-10-16 (coherence fold) — FIVE members at 00b648c9d: EP-r cut 'exports' 2026-08-10 (ES-1's charter in §4; envoyErrandVocabulary.js:207-213).]
     gathered?: [                   // the confidence gradient's accrual —
                                    // path-dependent, so it MUST be row state
                                    // (census 3 §8: the one thing Option C
@@ -297,7 +304,7 @@ executed third-writer plant (L4).
 
 **Name collision: the FLAG/read names are measured clear; the WORD is not
 display-only ⟨F4⟩.** No `espionageEnabled|espionageActive|suspicionOf|
-wariness01` anywhere in src (re-measured at 99d63d92). The word "espionage",
+wariness01` anywhere in src (re-measured at 99d63d92). [CORRECTED 2026-10-16 (coherence fold) — HISTORICAL (99d63d92): `espionageEnabled` (simulationRules.js:310), `espionageActive` (espionageGate.js), `suspicionOf` (suspicion.js) and `wariness01Core` (espionageMath.js:375) all exist.] The word "espionage",
 however, carries LIVE tokens beyond prose: relationshipRulesAdversarial.js
 `internalDrift(ctx, "cold_war_espionage", …)` with metadata
 `incidentType: "espionage"` — a live AMBIENT espionage-flavored internal-drift
@@ -744,6 +751,8 @@ The synthetic report, common shape (per product deltas below):
   knowledge lands as the belief-side fill that `peaceTermsAppraisal`'s
   truth-read of loserExports was built to be replaced by (census 6 §4 — a
   banded slot with a live consumer).
+  [CORRECTED 2026-10-16 (coherence fold) — AS BUILT (ES-3): the TARGET read carries `conditionsBands` and the declared `allianceLabel` ONLY — "no strengthBand, no readiness, and NO faithLabel" (espionageProducts.js:28-31); strength, readiness and faith come only from a HOST's belief row at a waypoint (:32-40). `exports` is not a legRef (see the bracket at §1). WC's "spies count banners" therefore has no road.]
+  [RULED BY DELEGATION 2026-10-16 (OD-FC-12 — 2026-10-16 (coherence fold §3.2.15) — the axes these products fold (`conditionsBands`, via `foldBeliefAxes`) are exposed to the SP-B × M9b ally-share ghost-write (PLAUSIBLE, reasoned): an adopted ally share replaces the whole seat record (beliefMap.js:1117) and drops every SP-B axis, and the next report re-seeds an absent axis from ground truth (beliefAxes.js:225) — a spy-filled leg could be erased by an ally's share and re-anchored to truth. A measurement car rides the next spine lane; a confirmed cure is a one-time full_simulation belief shift the owner signs.]
 - **REFUTE** (first-class "it is not what we believe" — the dramatic
   engine): the report asserts the observed value where it CONTRADICTS the
   prior — `reconcileBelief`'s contradiction term (`CONTRA_W · |obs − prior|`)
@@ -815,6 +824,7 @@ first-hand:      cap 1.0 ONLY at the target stop, ONLY at tap 'beliefs' or
                  'delta' (entered — H: purity requires access; a declared-face
                  visit to the target reads the target's SELF-performance:
                  cap PERF_SELF_CAP < 1, its paraded granaries)
+                 [CORRECTED 2026-10-16 (coherence fold) — as built the first-hand target read carries conditions + alliance only; see the bracket at §3.6 ACQUIRE.]
 ```
 
 Home discounts by tap level × host trust at landing (the report's
@@ -894,7 +904,7 @@ lookback — a court that just caught one spy checks the next caravan harder
 Consumed as §3.3's `wariness` multiplier. When IN-3 lands, `suspicionOf`
 gains these two terms in ITS derivation and this leaf CONSUMES suspicionOf
 where `counterIntelEnabled` is lit (one derivation, no fork — §5 row 9);
-the minimal own-read above is the declared dark arm.
+the minimal own-read above is the declared dark arm. [RULED 2026-10-16 (coherence fold §3.1.12) — ONE suspicion derivation: IN-3's `suspicionOf`. As built it is NOT WIRED — suspicion.js:8-10 records that ES carries `espionageMath.js :: wariness01Core` until its own lane composes the read, and no espionage module imports `suspicionOf` — so two derivations stand, declared only in a code comment. `wariness01Core` BECOMES A CONSUMER of `suspicionOf` where `counterIntelEnabled` is lit and keeps the minimal own-read as the dark arm; the composing lane is ES-5's next unit. HB's `awareness01` likewise consumes it (its truth read of `sightPostures` is struck).]
 
 **The home-side miss clock (JUDGMENT J-ES-14):** the home court NOTICES an
 overdue mission at `expectedReturnTick + MISS_GRACE · (1 −
@@ -1145,7 +1155,7 @@ faction.power as a READ-ONLY derivation output — HZ6);
 court-vote-weight is minted under any spelling (HZ5). Rivals exploit the
 window through machinery that already exists: the ladder's contest math and
 factionCompetition read the same bloc weights every tick — a lightened
-faction IS the two-books texture with no further code.
+faction IS the two-books texture with no further code. [CORRECTED 2026-10-16 (coherence fold) — FALSE as measured; see the ES-5 block in §4: `factionCompetition.js` held no bloc read, and ES-5b BUILT the reach on its contest weight (`entry.power`). Felt value: expect almost none from a pure spy's absence (the paragraph's own texture note).]
 
 **The amendment text (chair lands it, owner signs — Q1):** THE ROADS §1
 law 5 gains one sentence in the amended-in-place voice: "AMENDED (espionage
@@ -1193,7 +1203,7 @@ extends the answer clock, landed as a GR-side one-line gated consumption per
 `settlementStrategy` (the war chooser, 812 effective, frozen surface — "NOTHING
 touches the chooser", IN-4) is NOT wired: war declarations do not wait on
 spies in this program. RECORDED DEFERRAL, owner-visible — wiring the war
-chooser is a future owner ruling, not an oversight.
+chooser is a future owner ruling, not an oversight. [RULED 2026-10-16 (coherence fold §3.2.9) — RELEASED: the owner's blanket grant of 2026-08-05 ("I give permission for everything that requires my sign off in the full queue", FABLE_VALIDATION_QUEUE.md:2598; its scope reading names this deferred arm, :2615-2617) is the future owner ruling this sentence waits on. The war-chooser spy-before-decision wiring is no longer deferred: it lands as ONE joint unit with HB-5 (DESIGN_FP_ARCH_HB.md R1 "REFUTED BY EVENT", :3442-3450). CR-ES-4 stands as the ruling that deferred it; coherence fold §6 places the joint unit in chain 1, THE STATECRAFT BAND.]
 
 ### 3.13 THE DOUBLE AGENT — leak-only, silent success, vetting (owner addition F)
 
@@ -1228,6 +1238,7 @@ attribution) LEAKS to that enemy, whether or not it is the target:
   home — the confirmation product stays honest; falsified product belongs
   to info-statecraft disinfo if the owner ever wants it. Say "veto" to
   widen; the cost is REFUTE's honesty guarantee.
+  [RULED BY DELEGATION 2026-10-16 (OD-FC-9 — 2026-10-16 (coherence fold §3.2.7) — the family holds TWO double agents with OPPOSITE honesty laws: this leak-only operative and DESIGN_FP_INFORMATION.md IN-4's courier, which "delivers a mutated telling onward". CR-ES-2 amends the owner's 2026-07-19 ruling, so widening or narrowing it is his. CHAIR RECOMMENDATION: ONE law, leak-only; a courier that falsifies is the plant road (J-INF-3) wearing a courier.]
 
 > ⏱ **AMENDED IN PLACE, 2026-08-11 (ES-6a compilation + landing).** Every clause
 > above was re-measured against live code. **Four were REFUTED and two were
@@ -1428,7 +1439,7 @@ bridge's three hops all existed as parts (`errand.from` → `rosterPersonById` �
 `npcId`) with only the composition missing — so the genuinely new construction
 was the deposit family and the ladder's `stock` terminus. The carrier is a
 one-tick, drop-when-empty `missionCreditEvents` deposit classified TRACKED, and
-the fold is SAME-TICK rather than one-tick-lagged (deviation D7 above).
+the fold is SAME-TICK rather than one-tick-lagged (deviation D7 above). [CORRECTED 2026-10-16 (coherence fold) — the carrier must be recorded against §1's law: `missionCreditEvents` is a NEW `spatialLedgers` sub-key (one-tick, drop-when-empty, classified TRACKED; espionageCareerCredit.js:16, :200-209; spatialUsage.js:307), so §1's "ZERO new spatialLedgers sub-keys" no longer holds as written. Recorded, not re-ruled; if contested, a persisted-shape question is the owner's.]
 
 ---
 
@@ -1445,6 +1456,7 @@ negative carries `// anchored:`; four-fence dormancy + lit-mutant per flagged
 wave; sizes re-measured with the enforcer at the publishing commit (raw
 `wc -l` below is orientation only).
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (pure leaves + the flag's manifest row and certification row) · TIER: host flag `espionageEnabled` (manifested, lit nowhere) · DEGRADED ARM: dark by construction]
 **ES-0 — THE PURE LEAVES + THE FLAG (dark by construction; early-eligible).**
 ⭐ **LANDED 2026-08-05.** Two charter corrections, both MEASURED against the live tree
 and both vetoable. (a) **THE FLAG LANDS HERE**, with its full CQ5 trio — manifest entry,
@@ -1491,6 +1503,7 @@ lane). Order: after SP-A (no hard dependency; SP-A's bandFamilies is not
 consumed here — doctrine words are program-local closed sets, recorded
 under J-WR-10-B as borrow-checked: nothing existing matched).
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none a DM can see at a month — the mint has no production dispatch (`espionageMissions.js` has zero importers under src; ES-Da's rider is the only traffic), and a mission's legs (one week per leg, 2-3 legs + dwell) speak no beat until ES-7 · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` · DEGRADED ARM: dark (`envoyErrands` bytes identical)]
 **ES-1 — THE MISSION (⚠ RIDES `espionageEnabled`; DOES NOT MINT IT — see §2's
 correction and the FLAG-ATTRIBUTION NOTE in `DESIGN_FP_ARCHITECTURE.md` §3;
 needs SP-D).** Charter: the covert arm in SP-D's `errandMint.js` (mint
@@ -1520,6 +1533,7 @@ the live pulse). Req 13: casting consumes doctrine targeting (declared);
 req 14: engine-only here (the DM verb is ES-7's — recorded). Collision:
 envoy family (war lane, CHECK-GIT-FIRST mandatory).
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: a `caught_spying` foreign-guest hold on the hold surfaces at a hostile stop's dwell interval; the ransom gate opens at week 4 / protracted at week 16 (`DWELL_CUTS_COVERT`) — seasonal; no `espionage_*` beat until ES-7 · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` · DEGRADED ARM: dark (covert rows absent ⇒ the stage no-ops byte-identically)]
 **ES-2 — THE GAUNTLET (second slice of `espionageEnabled`; needs ES-1;
 Q2/Q3 rulings consumed).** Charter: the stay-detection stage —
 `espionageGauntlet.js` leaf mounted INSIDE the errand advance (the covert
@@ -1566,6 +1580,7 @@ declared-consumed-when-Q3-rules; req 14: engine-only. Collision: the
 hold/ransom family (war lane; TR-8 slice 2 will consume the same road later
 — the seam row pre-pins it).
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the home court's belief about the subject moving when the mission folds home — mundane at `markEnvoyHome` after 2-3 weekly legs + dwell (a month to a season), magic at the stop's confirmation tick — visible only on DM belief surfaces until ES-7 voices the tap registers · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` (+ `believedConditionsEnabled` for the axis arm) · DEGRADED ARM: core slots only, the receipt naming the missing family]
 **ES-3 — THE PRODUCTS + THE GRADIENT (third slice; needs SP-B landed for
 the full arm, ships the degraded arm regardless).** Charter:
 `espionageProducts.js` leaf — the three synthetic-report builders (§3.6
@@ -1603,6 +1618,7 @@ honesty negative. Dormancy: axes dark ⇒ core-slots-only with the receipt
 naming the missing family (pinned). Req 13: doctrine frequency in the
 cadence; req 14: engine-only.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (the evidence pin); its felt sentence is WR-10's market · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` (+ `sovereigntyTradeEnabled`, lit nowhere, for any effect) · DEGRADED ARM: dark]
 **ES-4 — THE JOINT-LEGS DISCHARGE (rides SP-B/SP-B2; the lighting wave).**
 Charter: ACQUIRE/CONFIRM/REFUTE wired to SP-B's `conditionsBands` spellings
 (the closed-vocabulary seam pin, both sides); the fed-by-espionage companion
@@ -1649,13 +1665,14 @@ tier/route/trajectory legs about non-neighbors" becomes an executed fixture,
 and `sovereigntyTradeEnabled`'s green condition cites all three wave ids.
 Req 13: declared-empty (wiring); req 14: engine-only.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at a month — the bench discount (ES-5b) moves bloc math per tick but a pure spy's absence costs the council little (§3.11); the career register and credit (ES-5c/5d) read at the yearly clock; the autonomous cadence (ES-5a) is not mounted · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` (+ `npcLadderActive` for ES-5c/5d; ES-5b/5c are not covert-gated, §3.13's ES-Da note) · DEGRADED ARM: the promotion term declared-absent; ladder dark ⇒ the grade stays a receipt]
 **ES-5 — DOCTRINE ENGAGED + THE ABSENCE AMENDMENT (fourth slice; needs
 Q1 signed for the absence arm).**
 ⚠⚠ **THIS CHARTER IS SPLIT ACROSS THREE WAVES AND NO LONGER DESCRIBES ANY ONE OF
 THEM. It is kept whole because it is the amendment's argument** — CR-ES5B-1
 ratifies the slice rather than rewriting the reasoning. The mapping, binding:
 **ES-5a** = the doctrine STAGE + the dispatch cadence + `wariness01` + the IN-3
-handshake — **LANDED at `41ddeae0`**. **ES-5b** = `presentShare01` and the bench
+handshake — **LANDED at `41ddeae0`**. [CORRECTED 2026-10-16 (coherence fold) — LANDED AS A LEAF: `espionageDoctrineStage.js` is imported only by `espionageRider.js` among engine modules; no autonomous dispatch mount was found (PLAUSIBLE — import census only), so "the court decides to spy" is not mounted, and the IN-3 handshake is NOT wired (see the bracket at §3.8).] **ES-5b** = `presentShare01` and the bench
 grain (§3.11): the council-weight discount at `rulingBlocOf` AND the contest
 weight at `topFactionEntries`. **ES-5c** = THE CAREER REGISTER (§3.14's arms A
 and C) — compiled, promoted READY 2026-08-11, and BUILT: `careerRiskFor` in the
@@ -1667,7 +1684,7 @@ naming drift `promotionRiskOf` → `promotionRisk01Core`. **ES-5d** = THE CAREER
 CREDIT (§3.14's arm B, `freshMissionGradeFor` into the maintenance road) —
 split out because it is a second behaviour family needing a named state writer
 the register does not, and because its substrate does not exist yet; compile it
-just-in-time after ES-5c lands. ⛔ "BOTH GRAINS … IN THE SAME COMMIT" below is the ES-5a
+just-in-time after ES-5c lands. [CORRECTED 2026-10-16 (coherence fold) — STALE: ES-5d LANDED (`espionageCareerCredit.js` → npcLadderKernel.js:93); see §3.14's ES-5d notes and the bracket there.] ⛔ "BOTH GRAINS … IN THE SAME COMMIT" below is the ES-5a
 draft's sentence and is SUPERSEDED: the grains ship in two commits, under ONE
 CR-ES-1 signature (CR-ES5B-3). ⛔ And §3.11's "with no further code" claim is
 FALSE as measured — `factionCompetition.js` holds no bloc read at all, so ES-5b
@@ -1711,6 +1728,7 @@ frequency, employment; req 14: engine-only. Collision: settlementPolitics /
 factionCompetition (INT-2's future surface — additive leaf keeps the diff
 attributable) + the npcLadder family.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — silent success by law; the leak surfaces only on exposure (yearly; ES-7's retroactive clause) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` (+ the corruption web for the leash read) · DEGRADED ARM: web dark ⇒ no leash read]
 **ES-6 — THE DOUBLE AGENT (fifth slice; degraded-dark when the web is
 dark).** Charter: the leash read at dispatch (deterministic, keyed on the
 minted errand id) + the leak delivery (magic two-address sends; mundane
@@ -1755,6 +1773,7 @@ consumed; req 14: engine-only.
 > pass when the leak was absent for the wrong reason and would convict the very
 > headers that state the law.
 
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: UNBUILT — when built, the six `espionage_*` beats at a mission's weekly legs (departures dm-only; confirmations and refutes on the knowledge desk; captures and betrayals public) and the three tap registers; this wave is the gate to all felt value in the family · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` (+ IN-5's desk) · DEGRADED ARM: dm-only kinds fail-closed upstream]
 **ES-7 — THE VOICE + THE MEASURE (final slice; after IN-5 for the knowledge
 desk; AMENDS the ES-0-landed certification row — ⛔ there is no pending
 entry and never was: ES-0 landed the full CQ5 trio at `55674790`, §2's
@@ -1784,7 +1803,7 @@ names the doctrine words each kind may speak; req 14: THE EDIT-VERB WAVE —
 the one player/DM surface, named. Collision: heraldRouting (525) +
 compendium regen (additive).
 
-**Wave count: 9**, and ⏱ **AMENDED 2026-08-11: ES-6 IS NOW THREE SLICES**, the same
+**Wave count: 9** [CORRECTED 2026-10-16 (coherence fold) — the count omits ES-Da, the composite rider (LANDED `6dbb76c2`; `espionageRider.js` → envoyDiplomacy.js:41, "THE ONE caller since ES-Da", subsystemRowsBelief.js:178), which is the ONLY mission mint path at 00b648c9d (§3.13's amendment records it; this list never did), and ES-Db (FP-ORDER pair 4, after U26). The program is ES-0..4, 5a-5d, 6a/6b (6c folded into ES-7), 7, Da/Db; twelve units landed at 00b648c9d (ES-0..4, 5a-5d, 6a, Da). ES-Da's own line — FIRST-VISIBLE: none (silent covert cargo on an accepted peace envoy until ES-7) · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `errandSpineEnabled` + `espionageEnabled` + the envoy-diplomacy gate that carries the host envoy (PLAUSIBLE) · DEGRADED ARM: dark.], and ⏱ **AMENDED 2026-08-11: ES-6 IS NOW THREE SLICES**, the same
 budget split ES-5 took and for the same reason. The spine's `→ ES-6 →` reads
 `→ ES-6a → ES-7` today: **ES-6b** carries no place in the spine because it is
 blocked on a DISPATCHER wave nobody has chartered (its consumer has zero
@@ -1816,7 +1835,7 @@ walk or the lifecycle host.
 | 6 | SOVEREIGNTY MARKET (WR-10) | THE LEGS SUPPLY (§6): ES-4 + SP-B + SP-B2 are the amended green condition of `sovereigntyTradeEnabled`'s lighting (recorded in CR-WR10-H + FP §3/§9 row 4; ⟨F9⟩ the certification lighting-order ROW was minted at SP-B2 on 2026-08-05 — `SOVEREIGNTY_LIGHTING_EVIDENCE` in src/domain/certification/warConvergenceContract.js, measured by tests/lint/sovereigntyLightingContract.walker.test.js; ES-4 SATISFIES it rather than minting it); the buyer's deliberation arm is a stage-local gated read (the stage's composition untouched — the injectable-seam law). | The fed-by-espionage contract fixture; the non-neighbor differential pin; the marker `ES-4-DISTANT-SOURCE-EVIDENCE` in the pin's TITLE — an `it`/`test` title and never a `describe` title, in the DECLARED address `tests/domain/espionageDistantSourceEs4.test.js` (the cap `d48224e3`; recipe pointed at, not copied — clauses (0) and (0b) in the walker header) — which flips the existing three-wave row to SATISFIED |
 | 7 | HERALD | Six kinds × the FIVE JOINS in their mint commits; dm-only covert fail-closed UPSTREAM; public kinds carry the full address chain; own walker file; significance classes from SP-A's family (covert beats `routine`-class so quiet departures never clear `passesSignificanceGate` — refinement 9 lands on the existing gate, measured). | Per-kind walker; the covert-departure significance negative (anchored); the retroactive-exposure fixture |
 | 8 | INTERIOR/POLITICS | The absence discount feeds the EXISTING bloc reads via one lazy leaf (no second vote-weight spelling — HZ5); INT-2's counsel and INT-3's decision incidents consume the lightened blocs for free; an espionage SCANDAL (public exposure) is eligible to become an INT-3 `_decision` sibling incident ONLY through INT's own mint (no ES-side incident types). | The deleted-symbol pin (`conquestVoteWeight01` absent) stands guard; the bloc leaf's import-source pin; INT-3's own walker owns incident types |
-| 9 | INFORMATION siblings (IN-2/IN-3/IN-4) | J-INA-2 EXTENDED: products ride the report road; plants ride the plant roads; the two never share a writer (scan-pinned). IN-3's `suspicionOf` gains the two wariness terms when both are lit — ONE derivation, ES consumes it lit / derives minimally dark. ⟨F8⟩ THE VETTING READ HAS ONE HOME: `vetVolunteerEnvoy` (sendTwoDivergence.js) — IN-3's VET (which lands BEFORE ES-1 in the compiled order and composes the same module's vocabulary) and ES-1's casting BOTH route through that one reader; neither program forks a second vetting derivation (the same one-derivation treatment this row gives suspicionOf; source-scan both sides). IN-4's couriers are CARGO movers, ES missions are PRODUCT movers — distinct purposes on the one spine, both in the consumer map. | The writer-boundary scan (ES-3); the suspicionOf handshake pin lands IN-3-side with a by-name espionage read; the vetting one-home scan (no second `vetVolunteer` spelling in src); consumer-map rows distinct |
+| 9 | INFORMATION siblings (IN-2/IN-3/IN-4) | J-INA-2 EXTENDED: products ride the report road; plants ride the plant roads; the two never share a writer (scan-pinned). IN-3's `suspicionOf` gains the two wariness terms when both are lit — ONE derivation, ES consumes it lit / derives minimally dark. [RULED 2026-10-16 (coherence fold §3.1.12) — not wired at 00b648c9d (suspicion.js:8-10); see the bracket at §3.8.] ⟨F8⟩ THE VETTING READ HAS ONE HOME: `vetVolunteerEnvoy` (sendTwoDivergence.js) — IN-3's VET (which lands BEFORE ES-1 in the compiled order and composes the same module's vocabulary) and ES-1's casting BOTH route through that one reader; neither program forks a second vetting derivation (the same one-derivation treatment this row gives suspicionOf; source-scan both sides). IN-4's couriers are CARGO movers, ES missions are PRODUCT movers — distinct purposes on the one spine, both in the consumer map. [RULED BY DELEGATION 2026-10-16 (OD-FC-9 — 2026-10-16 (coherence fold §3.2.7) — this row never reconciles IN-4's falsifying courier double agent with §3.13's leak-only one; see the bracket at §3.13.] | The writer-boundary scan (ES-3); the suspicionOf handshake pin lands IN-3-side with a by-name espionage read; the vetting one-home scan (no second `vetVolunteer` spelling in src); consumer-map rows distinct |
 | 10 | FAITH + the alignment estate | The doctrine reads the ONE moral ladder verbatim and mints `lawWordFor` ONCE (warSeatBooks' private copy retired; INT-1 later consumes the same export — coordinate, both-site headers). Faith's observer-axis judgment of espionage scandals (a benevolent patron's court caught spying) rides WF's own judged-kind machinery (the `sovereignty_sale_judged` precedent) when WF-8 lands — pre-pinned as a declared-future kind row. | The one-spelling scan (no fourth law-band vocabulary); the WF declared-future row's red is the lift signal |
 | 11 | MAGIC ECONOMY (W-K) | Existence = the pair gate NOW (projection-only, J-ES-7); price = `magicExploitationGate` + QUERY_PRICE_BANDS prose WHEN `magicEconomyActive` lights — the price arm ships DARK with its own fence; the `Message network (high magic)` institution names the instrument in prose when lit. Law 2 enforced BY SIGNATURE (the magic gate takes no economy; the price arm takes no magic axis). | The dark price-arm fence; a pin that the existence gate never reads the economy flag (signature-shape scan) |
 | 12 | CORRUPTION WEB (INT/IN shared substrate) | Inside assets and double-agent leashes READ the web (resolveLeash, compromisedSecurityInstitutions, returned-captive channel); ES never writes web state — conversion of ES captives rides the web's existing returned-captive road (CHANNEL_RETURNED_CAPTIVE 0.6, already "THE ROADS §10" — the same clause serves the errand's returns). A live asset ALSO raises the tap ceiling to `delta` (H, §3.7) — the same read, a second consumer, no second leash spelling. | Read-only scan on the web ledgers from the ES module set; the returned-captive fixture; the asset-less-delta anchored negative (ES-3) |
@@ -2043,7 +2062,7 @@ chair should price, not a rider on an information program.
 **CR-ES-4 — RULED (chair, 2026-08-05; vetoable).** ACCEPT — this program wires
 the sovereignty buyer, GR-2's pact answers, and its own cadence (J-ES-13); the
 WAR CHOOSER (`settlementStrategy`, frozen surface) is DEFERRED to a future
-OWNER ruling and filed as an owner-queue row. No ES wave wires the chooser.
+OWNER ruling and filed as an owner-queue row. No ES wave wires the chooser. [RULED 2026-10-16 (coherence fold §3.2.9) — the deferral is RELEASED by the owner's 2026-08-05 grant; see the bracket at §3.12 J-ES-13. This ruling's text stands as history.]
 
 **Q5 — Third-party alliance topology ("A believes B stands with C") — the
 one classical spy product with NO surface (owner-shaped, blocks nothing).**
@@ -2103,6 +2122,6 @@ docs/DESIGN_FP_ARCH_SP.md §4/SP-D, and the war volume's §1/§9/§10. The
 cohesion critic's F1-F9 are closed in place (⟨F#⟩ marks); every closure's
 symbol home re-measured. Zero new top-level keys; one conditional
 sub-record; NINE waves (§4's amended count — ES-6 split to three slices,
-ES-6c folded into ES-7), all dark; THIRTEEN seams pinned both sides; five
+ES-6c folded into ES-7), all dark; [CORRECTED 2026-10-16 (coherence fold) — see the bracket at §4's wave count.] THIRTEEN seams pinned both sides; five
 questions to the chair. Where this document disagrees with the tree, the
 tree wins and the disagreement is a bug to report.*

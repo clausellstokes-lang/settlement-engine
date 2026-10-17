@@ -13,7 +13,7 @@
 ## OUTRANKS EVERY TABLE IN THIS FILE. Judgments are labeled JUDGMENT and are
 ## vetoable by the chair or the owner.
 
-**Status: IMPLEMENTATION ARCHITECTURE. Sequencing per SOL_QUEUE.md row 18
+**Status: IMPLEMENTATION ARCHITECTURE. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: — (no CW flag lights) · BUILT DARK: CW-0 registry (68 rows, eight files, schema v4) and the CW-0w walkers, LANDED (instrumentation, no flag); CW-1 cascade braid LANDED 2026-09-24 @ 155da82f2, DARK (cascadeGovernorEnabled) — pulled forward as FP-25, not "LAST" · UNBUILT: CW-2x (causeWalkCouplingJoin.js absent); CW-3 (subsystemRowsCoupling.js absent)] Sequencing per SOL_QUEUE.md row 18
 (verified at docs/SOL_QUEUE.md:72-75): CW-1 → CW-2 → CW-3 land LAST; CW-0 does
 NOT wait — it landed EARLY with WR-3 and grows under the same-commit
 obligation. This file therefore splits CW-0 into what is BUILT (the registry)
@@ -38,11 +38,11 @@ The refuted premises are the most valuable rows in this file. Three were found.
 
 | # | Claim | Live receipt | Verdict |
 |---|---|---|---|
-| S1 | CW-0's registry is BUILT and growing: pure data + pure lookup, no state/writer/clock/randomness | `src/domain/certification/couplingRegistry.js` (⚠ RE-DERIVE — now a 178-line COMPOSING HEAD over six desk leaves, schema v4, at the TL-F stamp; the 575-line/schema-2/26-row figures are the 08-04 survey); header states "Pure data plus pure lookup only"; frozen rows — WR-3 (1) + WR-4 (4) + WR-5 (5) + WR-6 (7) + WR-7 (9), composed at `COUPLING_REGISTRY` :532-538; `couplingRowsFor`/`couplingRowFor` fail closed on a shared frozen empty | VERIFIED |
+| S1 | CW-0's registry is BUILT and growing: pure data + pure lookup, no state/writer/clock/randomness | `src/domain/certification/couplingRegistry.js` (⚠ RE-DERIVE — now a 178-line COMPOSING HEAD over six desk leaves, schema v4, at the TL-F stamp; [CORRECTED 2026-10-16 (coherence fold) — at 00b648c9d: a 284-line head + six leaves + the schema file (eight couplingRegistry*.js files), 68 rows (War 32, Espionage 13, Grammar 11, Info 7, Encounters 3, Trade 2), schema v4] the 575-line/schema-2/26-row figures are the 08-04 survey); header states "Pure data plus pure lookup only"; frozen rows — WR-3 (1) + WR-4 (4) + WR-5 (5) + WR-6 (7) + WR-7 (9), composed at `COUPLING_REGISTRY` :532-538; `couplingRowsFor`/`couplingRowFor` fail closed on a shared frozen empty | VERIFIED |
 | S2 | Rows land in the SAME commit as their cross-layer read (the §0.3 obligation), starting at WR-3 | `git log -S couplingRegistry` → 526c5e31 "WR-3 LINEAGE CLAIM…"; FABLE_VALIDATION_QUEUE.md:154 records the CW-0 ruling ("WR-3 adds its machine-readable registry row in this commit"); SOL_QUEUE.md:201 chair checkpoint "Any cross-layer read → CW-0 registry row in the SAME commit" | VERIFIED |
 | S3 | **The volume's three CW-0 walkers exist ("the registry + walkers … lands EARLY", SOL_QUEUE:73; "walker-enforced", SOL_QUEUE:201)** | `ls tests/lint | grep -iE "coupl|layer|desk"` → ZERO files; the ONLY enforcement is `tests/domain/couplingRegistry.test.js` (358 lines) — a hand-enumerated data-shape test. NO inclusion-ratchet import-graph scan, NO fixture-sampled receipt-field walker, NO desk walker asserting registry-vs-routing agreement exists anywhere in tests/ | **REFUTED AT THE SURVEY — ⏱ DISCHARGED: CW-0w LANDED IN FULL (all four slices), the walkers exist and police the registry both ways; the honor-system window is CLOSED.** Historical: until CW-0w landed, every FP wave's registry row was on the honor system |
-| S4 | **The registry can grow across volumes as designed** | `tests/domain/couplingRegistry.test.js:299`: `expect(row.couplingId).toMatch(/^CPL-\d+\.[A-Z_]+\.WR-\d+\.[a-z_]+$/)` — the shape pin hard-codes the **WR-** wave prefix | **REFUTED AT THE SURVEY — ⏱ DISCHARGED: CW-0w WIDENED the pin; the live shape is TWELVE prefixes WITH the CR-ESDA-6 letter-wave segment (`(?:\d+[a-z]?|[A-Z][a-z]?)`, `couplingRegistry.test.js:99-112`) — point at `CHARTERED_VOLUME_PREFIXES`, never restate the alternation (SC-7). ⚠ carried hazard: one new coupling row moves THREE pins — budget the flips into the row's own commit** |
-| S5 | Size headroom for growth | couplingRegistry.js = 575 effective; the domain-layer max-lines ceiling is **800** (tests/lint/sizeBaseline.test.js:66-74 `ceilingFor`); a row costs ~18-22 lines with its comment → ~10-12 more rows before the eslint layer rule reds the file. The seven volumes' ADDS will exceed that severalfold | VERIFIED (measurement) — §4 CW-0w pre-plans the per-volume leaf split per the WR-7b decomposition recipe, BEFORE the ceiling forces it mid-wave |
+| S4 | **The registry can grow across volumes as designed** | `tests/domain/couplingRegistry.test.js:299`: `expect(row.couplingId).toMatch(/^CPL-\d+\.[A-Z_]+\.WR-\d+\.[a-z_]+$/)` — the shape pin hard-codes the **WR-** wave prefix | **REFUTED AT THE SURVEY — ⏱ DISCHARGED: CW-0w WIDENED the pin; the live shape is TWELVE prefixes [see the bracket at :565 — now thirteen] WITH the CR-ESDA-6 letter-wave segment (`(?:\d+[a-z]?|[A-Z][a-z]?)`, `couplingRegistry.test.js:99-112`) — point at `CHARTERED_VOLUME_PREFIXES`, never restate the alternation (SC-7). ⚠ carried hazard: one new coupling row moves THREE pins — budget the flips into the row's own commit** |
+| S5 | Size headroom for growth | couplingRegistry.js = 575 effective; [see the bracket at :41 — the survey figure] the domain-layer max-lines ceiling is **800** (tests/lint/sizeBaseline.test.js:66-74 `ceilingFor`); a row costs ~18-22 lines with its comment → ~10-12 more rows before the eslint layer rule reds the file. The seven volumes' ADDS will exceed that severalfold | VERIFIED (measurement) — §4 CW-0w pre-plans the per-volume leaf split per the WR-7b decomposition recipe, BEFORE the ceiling forces it mid-wave |
 | S6 | The certification family already binds the registry into subsystem censuses | `src/domain/certification/subsystemRowsWar.js` (771 lines) lists couplingRegistry.js in its module censuses at :536, :618, :656, :705 | VERIFIED — CW-3's aliveness rows extend an existing idiom (the subsystemRows* family), not a new invention. Note 771/800: the coupling rows go in a NEW sibling file, never into this one |
 
 ### 1b The provenance / cause-walk estate (CW-2's ground truth — the biggest finding)
@@ -53,14 +53,14 @@ The refuted premises are the most valuable rows in this file. Three were found.
 | S8 | Its flag is virtual and ALREADY in the lit cohort | `provenanceLedgerEnabled` in the ONE_REGEN preset-override spread, `src/domain/worldPulse/simulationRules.js:271` (block :258-279 — the eight chartered dark engines + roads, lit together at the single declared golden boundary; VIRTUAL, `=== true` reads, zero persisted flag bytes) | VERIFIED |
 | S9 | **The volume's CW-2 premise: "a read-only DM surface over persisted receipts" is to be BUILT (greenfield; walks sourceEventId / causes[] / registry receiptFields)** | The surface EXISTS: `src/domain/display/causeWalk.js` (306 lines, "THE CAUSE-WALK read model (VISION WAVE V-4)") walks the provenance DAG backward with `seesSecrets` covert redaction (`REDACTED_HOP`, structural `redacted:true`), graceful lines `NO_DEEPER_MEMORY` + `LEDGER_DARK_LINE`, zero-engine-contact; reader `src/domain/display/chronicleGraph.js` (528); UI consumers `src/components/map/CauseWalkPanel.jsx`, `CausalityPopup.jsx`, `HeraldHeadline.jsx`; the information-integrity register (CLEAN / WORN IN THE TELLING / PLANTED / PLANTED-THEN-WORN / UNKNOWN, the seed-not-growth law) in `src/domain/display/heraldIntegrity.js` (288) | **REFUTED** — the V-4 estate landed after the volume's 2026-08-02 drafting and the volume never cites it. Building the volume's CW-2 as written would erect a SECOND cause-walk — the second-telephone defect (J-CPL-11's shape pointed at ourselves). CW-2 is RE-SCOPED to an extension program (§4 CW-2x; chair question Q1) |
 | S10 | A forward prose realization over walks exists | `src/domain/display/discourseKernel.js` (486, "TRANCHE 3c: THE DISCOURSE KERNEL") — deterministic finite-lexicon connective realization over a resolved cause-walk, "multi-hop via E-J-v2's causedBy edges"; headlines carried byte-verbatim; clause.text = connective + ' ' + recorded (walker-provable anti-embellishment) | VERIFIED — CW-1's braid body REUSES this kernel; it never builds a second prose writer |
-| S11 | causedBy adoption breadth (what chains exist to braid/walk) | `grep -rl causedBy src/domain` → 6 files; engine-side writers: provenanceKernel.js + roadsKernel.js ONLY (rest are display readers). `sourceEventId` breadth: 65 files | VERIFIED (measurement) — **cross-layer chains of depth ≥3 essentially cannot exist yet**; the multi-hop seam is built but only ONE kernel feeds it. CW-1's depth-≥3 detection and CW-3's chain-depth envelopes are vacuous until the FP volumes adopt causedBy at their mint sites — seam contract SC-6, and the reason CW-1/CW-2x/CW-3 sequence LAST |
-| S12 | Retention rings the walk must be honest about | pulseHistory: `MAX_HISTORY = 80` (`src/domain/worldPulse/worldState.js:16`, applied :518, :665) VERIFIED. wizardNews 240: ⏱ DISCHARGED — the constant's home is `wizardNews.js:21` (the annex's executed verify). turningPoints 24: ⏱ DISCHARGED — `relationshipState.js:136`, re-exported `relationshipEvolution.js:39`. Both rings verified; the addresses re-derive at any compile that pins them (rn-1 restructures relationship files — the S21/S22 addresses rot) | VERIFIED (pulseHistory) / VERIFY-AT-BUILD (the other two rings) |
+| S11 | causedBy adoption breadth (what chains exist to braid/walk) | `grep -rl causedBy src/domain` → 6 files; engine-side writers: provenanceKernel.js + roadsKernel.js ONLY (rest are display readers). [CORRECTED 2026-10-16 (coherence fold) — STILL TRUE at 00b648c9d, unchanged two and a half months later (findings SP-CW §6 S18); requirement 20 now names the seam — see the bracket at :555] `sourceEventId` breadth: 65 files | VERIFIED (measurement) — **cross-layer chains of depth ≥3 essentially cannot exist yet**; the multi-hop seam is built but only ONE kernel feeds it. CW-1's depth-≥3 detection and CW-3's chain-depth envelopes are vacuous until the FP volumes adopt causedBy at their mint sites — seam contract SC-6, and the reason CW-1/CW-2x/CW-3 sequence LAST |
+| S12 | Retention rings the walk must be honest about | pulseHistory: `MAX_HISTORY = 80` (`src/domain/worldPulse/worldState.js:16`, applied :518, :665) VERIFIED. [ADDED 2026-10-16 (coherence fold §1, requirement 23) — every ring declares its horizon in INTERVAL_WEEKS at a measured event rate; a `one_year` advance nets the 80-ring to about 29 advances (findings EP §6 S1); the ring policy is RULED BY DELEGATION 2026-10-16, OD-FC-33] wizardNews 240: ⏱ DISCHARGED — the constant's home is `wizardNews.js:21` (the annex's executed verify). turningPoints 24: ⏱ DISCHARGED — `relationshipState.js:136`, re-exported `relationshipEvolution.js:39`. Both rings verified; the addresses re-derive at any compile that pins them (rn-1 restructures relationship files — the S21/S22 addresses rot) | VERIFIED (pulseHistory) / VERIFY-AT-BUILD (the other two rings) |
 
 ### 1c The Herald composition estate (CW-1's ground truth)
 
 | # | Claim | Live receipt | Verdict |
 |---|---|---|---|
-| S13 | Desk routing is single-home and content-typed; belief_misjudgment sits at the faith desk pending IN-5 | `src/domain/realm/heraldRouting.js` (525): `EXACT_SECTION` at :81, SECTION_OF single-home law in header :18; `belief_misjudgment: 'faith'` at **:134** (volume said :118 — rotted); `grep -n knowledge heraldRouting.js` → ZERO hits at the survey: **⚠ RE-DERIVE-AT-COMPILE — the knowledge-desk absence and the IN-5 status are DATED FACTS (08-04); re-execute the grep and re-read the packet surface at the compile's own base, never inherit this cell**  | VERIFIED/MOVED — the desk walker (CW-0w) asserts registry-vs-routing AGREEMENT over CURRENT desks and never pins the pre-refile seat (J-CPL-10's precedence, honored); today's 26 rows carry desks {adjudication 10, war 6, trade 5, events 4, divination 1} and the WR-10 comment at :140 records that SECTION_OF and the governed registry's desks agree |
+| S13 | Desk routing is single-home and content-typed; belief_misjudgment sits at the faith desk pending IN-5 | `src/domain/realm/heraldRouting.js` (525): `EXACT_SECTION` at :81, SECTION_OF single-home law in header :18; `belief_misjudgment: 'faith'` at **:134** (volume said :118 — rotted); `grep -n knowledge heraldRouting.js` → ZERO hits at the survey: [CORRECTED 2026-10-16 (coherence fold) — IN-5 LANDED: HERALD_SECTIONS carries `knowledge` (heraldRouting.js:74) and :151-152 records the RE-FILE to the KNOWLEDGE block; the registry is 68 rows (see the bracket at :41)] **⚠ RE-DERIVE-AT-COMPILE — the knowledge-desk absence and the IN-5 status are DATED FACTS (08-04); re-execute the grep and re-read the packet surface at the compile's own base, never inherit this cell**  | VERIFIED/MOVED — the desk walker (CW-0w) asserts registry-vs-routing AGREEMENT over CURRENT desks and never pins the pre-refile seat (J-CPL-10's precedence, honored); today's 26 rows carry desks {adjudication 10, war 6, trade 5, events 4, divination 1} and the WR-10 comment at :140 records that SECTION_OF and the governed registry's desks agree |
 | S14 | An engine-side pacing governor exists and CW-1 must not duplicate it | `src/domain/worldPulse/narrativeTempo.js` (511, "E0, THE NARRATIVE TEMPO GOVERNOR"): "THE ONE LAW: throttle SPONTANEITY, never CAUSALITY… a receipted consequence chain is never censored"; gates independent arc BIRTHS only, deterministic, dormant-default | VERIFIED — the engine/display split J-CPL-4 demands already exists structurally. CW-1 is display-side composition ONLY; its census pin proves cascadeBraid imports no engine writer |
 | S15 | The significance vocabulary CW-1's braid derivation needs | Today TWO-valued: `'major'|'notable'` (`src/domain/display/chroniclersLetter.js:164, :287`; `src/domain/display/settlementRumors.js:634`). The three-band `routine/notable/major` family is MINTED AT SP-6a (DESIGN_FP_SPINE.md ~:220, ruling R5: "significance/severity band FAMILIES are minted HERE… assign each news KIND a class in the wave that mints it") | VERIFIED AT THE SURVEY — ⏱ SP-6a LANDED: the three-band scale exists (`bandFamilies.js:75`) and `'routine'` is in LIVE use; SC-3's tripwire condition is satisfied and CW-1's braid-class blocker is DEAD. CW-1's REAL gate is the causedBy adoption state (C-TLF-8) at its compile |
 | S16 | The Herald index landed and its wiring is declared to ride CW-1 | `src/domain/display/heraldIndex.js` (313, "SP-6's THE HERALD INDEX amendment, owner order 2026-08-03"): typed-ref facets, PENDING facets await mint-time entity-ref slots, includeCovert fail-closed; SOL_QUEUE.md:182 "Wiring rides CW-1 (the braid) + the Herald composers" | VERIFIED — a POST-volume obligation: the braided item must carry typed entity-ref slots so search sees it (the volume, drafted 08-02, predates this) |
@@ -73,14 +73,14 @@ The refuted premises are the most valuable rows in this file. Three were found.
 | S18 | The differential harness is the certification estate's own named gap | `src/domain/certification/subsystemRowsRegen.js:61` (volume said :59 — rotted): "THE HONEST GAP… What would close the gap is a PAIRED run… two soaks on one seed, one with the flag lit and one dark, compared over the new per-year beliefDivergence series (BELIEF_DIVERGENCE_RECEIPT_PATH). Half of that instrument now exists; the differential harness does not" | VERIFIED/MOVED — CW-3's harness has a named, waiting first consumer: closing that row's UNOBSERVED verdict is its guard-the-guard proof |
 | S19 | The hop-count theorem is measured (CW-3's aliveness-floor precedent for evidence-grade claims) | `src/domain/worldPulse/brokerageStamps.js` header table: hop 0 core 1.000 → hop 4 core 0.465 (n per hop quoted in-file) | VERIFIED — the volume's "1.000→0.465" is exact |
 | S20 | Exaggeration is the carrier's (J-CPL-11's substrate) | `src/domain/spatial/rumorNetwork.js` — `degradeTelling` export at :473 (doc range :472-507 ≈ holds): bounded structural mutations, 30% magnitude band drift ±1, 12% name swap ONLY to a real settlement id from the frozen digest | VERIFIED |
-| S21 | The misjudgment/schism reads the stories lean on | `detectMisjudgment` now at `src/domain/worldPulse/beliefMap.js:1468` (doc: 1362-1457); `council_schism` minted at `src/domain/worldPulse/pulseKernel.js:597-621` (doc: 564-591). Both files also MOVED homes vs the doc's spellings (worldPulse/, not spatial/) | VERIFIED/MOVED — navigate by symbol |
+| S21 | The misjudgment/schism reads the stories lean on | `detectMisjudgment` now at `src/domain/worldPulse/beliefMap.js:1468` [CORRECTED 2026-10-16 (coherence fold) — now beliefMap.js:1504] (doc: 1362-1457); `council_schism` minted at `src/domain/worldPulse/pulseKernel.js:597-621` (doc: 564-591). Both files also MOVED homes vs the doc's spellings (worldPulse/, not spatial/) | VERIFIED/MOVED — navigate by symbol |
 
 ### 1e Cross-cutting hazard claims (CW-0w's scope items)
 
 | # | Claim | Live receipt | Verdict |
 |---|---|---|---|
 | S22 | The prose-numerics push-indirection escape is LIVE | `src/domain/worldPulse/relationshipMemory.js:296-303` (`postureReasons`, doc said :300-302): `out.push(\`High resentment (${relState.resentment.toFixed(2)}) shapes the posture.\`)` + two siblings — raw floats into reader prose; `grep relationshipMemory tests/lint/.prose-numerics-baseline.json` → ZERO: the file is NOT frozen debt, it ESCAPES the scanner entirely (the walker covers authored templates; the baseline holds 401 reviewed instances in 4 detector classes, `tests/lint/proseNumerics.test.js:21-27`) | VERIFIED AT THE SURVEY — ⏱ CURED BY CW-0w SLICE 4: the baseline now names relationshipMemory ×3; the escape this row measured is closed, and the row stands as the record of why the fourth detector exists |
-| S23 | Flag machinery CW-1's law-2 shape rides | `ENGINE_GATED_VIRTUAL_RULE_KEYS` at `src/domain/worldPulse/simulationRules.js:185`; its one-key-delta walker exists (`tests/lint/engineGatedRuleKeys.walker.test.js`); `tests/lint/mutationCoverageManifest.test.js` exists | VERIFIED |
+| S23 | Flag machinery CW-1's law-2 shape rides | `ENGINE_GATED_VIRTUAL_RULE_KEYS` at `src/domain/worldPulse/simulationRules.js:185`; [CORRECTED 2026-10-16 (coherence fold) — now simulationRules.js:230; `cascadeGovernorEnabled` is in it at :274] its one-key-delta walker exists (`tests/lint/engineGatedRuleKeys.walker.test.js`); `tests/lint/mutationCoverageManifest.test.js` exists | VERIFIED |
 | S24 | CW sequencing as briefed | SOL_QUEUE.md:72-75 (CW-1→CW-2→CW-3 LAST; CW-0 early, growing, "the walker asserts" the same-commit obligation) | VERIFIED as INTENT; see S3 for the enforcement gap |
 
 **Tally: 21 VERIFIED (5 of them MOVED — quote no line number from the volume
@@ -96,7 +96,7 @@ declare flaglessness per the WR-9 precedent (stated, not omitted).
 
 | Flag | Wave | Shape | Manifest timing |
 |---|---|---|---|
-| `cascadeGovernorEnabled` | CW-1 | VIRTUAL: ABSENT from DEFAULT_SIMULATION_RULES; every gate reads `=== true`; dark-never-permissive; read by NAME at the composition seam (one by-name read lands even if a list-driven gate also exists — the conjunction-gate hole, L2) | Joins ENGINE_GATED_VIRTUAL_RULE_KEYS (simulationRules.js:185) in the SAME commit as its first real gate read; engineGatedRuleKeys walker asserts exactly that one-key delta |
+| `cascadeGovernorEnabled` | CW-1 | VIRTUAL: ABSENT from DEFAULT_SIMULATION_RULES; every gate reads `=== true`; dark-never-permissive; read by NAME at the composition seam (one by-name read lands even if a list-driven gate also exists — the conjunction-gate hole, L2) | Joins ENGINE_GATED_VIRTUAL_RULE_KEYS (simulationRules.js:185) in the SAME commit [see the bracket at :83] as its first real gate read; engineGatedRuleKeys walker asserts exactly that one-key delta |
 
 Four-fence dormancy set for `cascadeGovernorEnabled` (all four + the
 lit-mutant control proving the fences see):
@@ -175,6 +175,7 @@ program that needs none.
 ### slices; the CR-FP-11/CR-FP-1 amendment blocks below are the record;
 ### do NOT re-dispatch) (no flag; structural prevention; was "buildable
 ### NOW and sequenced FIRST" — S3/S4 made it urgent, and it landed)
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (gate-time walkers; no engine cadence) · TIER: aspatial-safe (source tree and test estate only) · DEGRADED ARM: n/a — no world read, no save bytes]
 
 **Why now:** S3 — every FP wave that lands before the inclusion walker exists
 adds cross-layer reads on the honor system; S4 — the FIRST non-WAR registry
@@ -344,7 +345,8 @@ any concurrently-landing registry row — pathspec discipline + re-read before
 edit (the live-tree law); land slice 1 in a quiet window.
 
 ### CW-1 — THE CASCADE GOVERNOR (`cascadeGovernorEnabled`) — BLOCKED on SP-6a
-### (S15); starved until upstream causedBy adoption (S11); sequenced LAST-1
+### (S15); starved until upstream causedBy adoption (S11); sequenced LAST-1 [CORRECTED 2026-10-16 (coherence fold §2) — not blocked: SP-6a's three-band scale was always live (DESIGN_FP_SPINE §6 SP-A ⚠1; bandFamilies.js:75), and CW-1 LANDED 2026-09-24 @ 155da82f2 (FP-25 pulled forward; board DONE a74efaa7a), DARK (`cascadeGovernorEnabled`, simulationRules.js:274, in no preset): cascadeBraid.js WINDOW_WEEKS 13 · MEMBER_FLOOR 3 · LAYER_FLOOR 3 (:77-81), one line in heraldFeed.js. "Starved until causedBy adoption" still holds (SC-6).]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: IMMEDIATE (corrected by skeptic S1-06: the braid forms at composition as soon as ≥3 members across ≥3 layers fall inside [tick, tick+13], cascadeBraid.js:510-517; it never waits for the window to close) — the earlier reading was: seasonal — window 13 weeks (cascadeBraid.js:79); read as "braids when the window CLOSES" a one-month advance never shows the braid of a cascade it caused; the code's "closed window" may be an inclusive interval and braid at once (PLAUSIBLE, VERIFY); OD-FC-1 decides · TIER: aspatial-safe display; needs at least 3 receipts sharing one recorded ancestor across at least 3 registry layers, so it rides causedBy/sourceEventId adoption (two engine causedBy writers today); host flags: cascadeGovernorEnabled (dark, OD-FC-16), provenanceLedgerEnabled · DEGRADED ARM: dark ⇒ the composed feed is byte-identical; a player's braid truncates covert members]
 
 **Scope (volume §6 CW-1, bound to the measured tree):** display-side
 composition ONLY (J-CPL-4). At Herald composition, detect a CASCADE — N ≥
@@ -353,7 +355,7 @@ sharing a causal ANCESTOR by IDENTITY (recorded edges via
 chronicleGraph.buildRecordedEdges over `spatialLedgers.provenance`, S7 — never
 similarity) whose links cross ≥3 LAYERS (layer of a link = the registry join:
 the receipt's kind/desk mapped through the row's pairId — the registry is the
-layer authority, S1). Braid: ONE story item at the cascade's top significance
+layer authority, S1). [CLARIFIED 2026-10-16 (coherence fold) — as built the braid keeps its OWN COPY of the registry's layer table (board:193: an import would break the Herald contamination fence; cascadeBraid.js:21-31 frames it as the registry's projection); cascadeBraidCw1.test.js:57 imports COUPLING_REGISTRY, so an equality pin between the two is available (PLAUSIBLE; VERIFY that one exists).] Braid: ONE story item at the cascade's top significance
 carrying the chain rendered FORWARD through discourseKernel (S10 — reuse,
 never a second prose kernel), member beats damped to the SP-6a 'routine' class
 WITHOUT losing ids or feed presence (damped, never dropped).
@@ -364,7 +366,7 @@ WITHOUT losing ids or feed presence (damped, never dropped).
   top-class derivation), damping marks. Zero engine imports (census pin — the
   causeWalk zero-engine-contact precedent, S9).
 - The composition seam: `src/domain/realm/realmItemReadModel.js` is **1072
-  lines — OVER the 800 ceiling and baseline-frozen** (S5's law: hot files at
+  lines — OVER the 800 ceiling and baseline-frozen** [CORRECTED 2026-10-16 (coherence fold §3.3.8) — sizes are cited from scripts/.size-baseline.json and eslint's EFFECTIVE count, never a raw wc: at 00b648c9d realmItemReadModel.js has NO baseline entry (raw wc 1078), so by the house rule its effective count is under the 800 domain ceiling and it is not baseline-frozen. CW-1 landed its seam as one line in heraldFeed.js instead. The one-line-delegation caution stands.] (S5's law: hot files at
   ceiling get extraction FIRST or a one-line lazy hook). CW-1 adds AT MOST a
   guarded one-line delegation to the leaf at the composition point; if the
   seam needs more, the wave STOPs and reports for a decomposition slice
@@ -413,7 +415,8 @@ one-liner collides with LD-ladder lanes — coordinate by pathspec; zero war-src
 overlap.
 
 ### CW-2x — THE CAUSE-WALK EXTENSION (no new flag; the re-scope of the
-### volume's CW-2 per S9 — chair question Q1, recommendation: ratify)
+### volume's CW-2 per S9 — chair question Q1, recommendation: ratify) [CORRECTED 2026-10-16 (coherence fold) — the re-scope was ratified in the compiled fold DESIGN_FP_ARCHITECTURE.md as wave #59, but DESIGN_FP_COUPLINGS.md never received it (zero mentions of CW-2x in the kit and master copies); the one-line correction is now written there by dated bracket at its §6 CW-2 heading. CW-2x remains UNBUILT (causeWalkCouplingJoin.js absent at 00b648c9d) and is recorded with a slot in the coherence fold §6.]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: instant on click (a pull surface, no clock); its horizon is counted in RECORDS — pulseHistory 80, wizardNews 240, turningPoints 24 — so a busy or year-cadence realm forgets faster in weeks (requirement 23, OD-FC-33) · TIER: aspatial-safe; reads spatialLedgers.provenance (provenanceLedgerEnabled) · DEGRADED ARM: ledger absent ⇒ LEDGER_DARK_LINE; a player walk fails closed at covert seams ("the trail goes cold")]
 
 **What already satisfies the volume's CW-2 (no work owed):** backward walk
 over recorded provenance (causeWalk.js); covert fail-closed with byte-identical
@@ -465,7 +468,8 @@ editing (live tree); CauseWalkPanel.jsx touch is components-layer (600
 ceiling — measure at build).
 
 ### CW-3 — THE COUPLING MEASURE (no flag; the program's close; soak-side only;
-### builds DARK instruments — RUNNING them is the owner's terminal phase)
+### builds DARK instruments — RUNNING them is the owner's terminal phase) [CORRECTED 2026-10-16 (coherence fold §2) — UNBUILT at 00b648c9d (subsystemRowsCoupling.js absent); recorded with a slot in the coherence fold §6]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (soak-side; the owner's terminal phase) · TIER: soak: the owner-signed lit soak · DEGRADED ARM: rows for volumes still dark read UNOBSERVED-and-say-why, never ALIVE]
 
 **Three instruments (volume §6 CW-3, bound to the measured tree):**
 1. **The differential harness** — paired lit/dark same-seed soaks per
@@ -525,7 +529,7 @@ hold on the owner-signed lit soak, and not before (volume §6, binding).**
   the desk walker itself — green through the flip or the flip forgot its rows.
 - **SC-3 — SP-6a's significance family** (spine R5). CW-1 derives a CLASS
   within routine/notable/major, never a scale; CW-1 is BLOCKED until SP-6a
-  lands (S15 — 'routine' does not exist in the tree today). Tripwire: CW-1's
+  lands (S15 — 'routine' does not exist in the tree today). [CORRECTED 2026-10-16 (coherence fold) — stale: see the bracket at :348] Tripwire: CW-1's
   Bands entry names SP-6a's exported scale; building CW-1 against the
   two-valued vocabulary is a STOP.
 - **SC-4 — the engine/display pacing split** (J-CPL-4; narrativeTempo E0,
@@ -548,7 +552,7 @@ hold on the owner-signed lit soak, and not before (volume §6, binding).**
   CW-1's depth-floor fixtures (a chain must be mintable to braid) and CW-3's
   `chainDepthDegenerate` envelope red (S11). Without adoption, CW-1/CW-2x/
   CW-3 are instruments over an empty sky — the tripwire says so at soak, in
-  those words.
+  those words. [ADDED 2026-10-16 (coherence fold §1, requirement 20) — requirement 20 (THE PROVENANCE-ADOPTION LAW) adopts this seam corpus-wide: every child receipt of a known outcome populates `causedBy` at its mint (the provenanceKernel road). At 00b648c9d this pre-pin is cited by zero volumes and `causedBy` still has two engine writers (provenanceKernel, roadsKernel), so CW-3's `chainDepthDegenerate` reds by design until adoption (PLAUSIBLE).]
 - **SC-7 — the couplingId volume-prefix closure** (toward all volumes'
   waves). CW-0w widens the shape pin from the WAR-locked regex to a closed
   prefix alternation — **NINE at that wave's own landing** (S4's cure); any
@@ -558,7 +562,7 @@ hold on the owner-signed lit soak, and not before (volume §6, binding).**
   inherited miss found by the 2026-08-07 fold and reported rather than quietly
   restated: ES and WY were consciously admitted at the 2026-08-05
   owner-amendment fold (TENTH and ELEVENTH) and **HB at the 2026-08-07 one
-  (TWELFTH, HB chair question Q4, RULED)**, so a THIRTEENTH now reds. ⭐ **THE
+  (TWELFTH, HB chair question Q4, RULED)**, so a THIRTEENTH now reds. [CORRECTED 2026-10-16 (coherence fold) — ENC was admitted THIRTEENTH; point at CHARTERED_VOLUME_PREFIXES (couplingRegistry.test.js:119); EC, WC, EP, LG, PG, MF and CN are NOT chartered, and requirement 21c charters each in the same commit as its first registry row (coherence fold §3.3.2)] ⭐ **THE
   ONE CURRENT SPELLING IS `CHARTERED_VOLUME_PREFIXES` in
   `tests/domain/couplingRegistry.test.js`, indexed by
   docs/DESIGN_FP_ARCHITECTURE.md §9 seam row 32 — POINT AT IT, NEVER RESTATE
@@ -593,7 +597,7 @@ hold on the owner-signed lit soak, and not before (volume §6, binding).**
    story harness) and record a one-line correction in the volume's §10
    register via the cohesion agent — the volume's own drafting predates the
    estate's landing, and J-CPL-11's no-second-telephone reasoning applies to
-   us with full force.
+   us with full force. [see the bracket at :418 — ratified as #59; COUPLINGS now carries the line]
 2. **Q2 — pull CW-0w forward, out of the CW slot.** SOL_QUEUE row 18 holds
    CW-1..3 LAST but CW-0 "does not wait"; S3/S4 show the walkers absent and
    the growth regex WAR-locked. RECOMMENDATION: land CW-0w (all four slices)

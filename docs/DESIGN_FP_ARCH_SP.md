@@ -10,10 +10,11 @@
 ## architect's ruling under delegation — vetoable, never silently re-ruled.
 
 **Status: ARCHITECTURE. Nothing here is scheduled until the chair sequences it
-against the standing pipeline. Where this document and DESIGN_FP_SPINE.md
+against the standing pipeline. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: SP-B scarcity + conditions (FP_LIT_BELIEF, simulationRules.js:793-797, 3 presets) · BUILT DARK: SP-A @ 59df13a97; SP-B devotion (@ 4c0f2f38b); SP-B2; SP-C @ cbd348a50 (appetite starved, SEAM-0 owed); SP-D @ 0aac6792 / 57fe385b (+ SP-D2 @ 3fd25f5df; held dark on purpose); SP-E @ 7a77c84ba; second-order belief (secondOrderBeliefEnabled, IN-1) · UNBUILT: SP-7 temporal walker (fold §4); SP-8 age layer (OD-FC-17); SP-F is a non-wave and its marking is unmet corpus-wide] Where this document and DESIGN_FP_SPINE.md
+[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — **SP-9 THE HEARING WEEK** is chartered here as the spine's wave at the HEAD of the chain order (fold §6 chain 0): the ENGAGEMENT REGISTRY (`registerEngagementKind`, closure pin, CLIMAX vs STANDING), the PENDING LEDGER (`spatialLedgers.pendingEngagements`, drop-when-empty, flag-gated), the HEARING SEAL as its own Edit Mode seal kind keyed by engagement id (engine · tilt slight/heavy · VERDICT; "decree" is the Decree Registry's word), its seal event the verdict's `causedBy` parent, J-D7's adjudication screen as the pending panel, NO PAUSE CURSOR (skeptic S5-B1: the landed cursor re-runs the parked tick and refuses advances and edits): at the DM's one-week unit the tick completes with the engagement in the HELD DOCKET and the NEXT advance resolves the docket first; the landed majors pause and its DM switch (directive 7) are untouched; month/season/year advances resolve hearings on the engine default (the owner's word governs hearings only), the premium gate (U16), flag `hearingWeekEnabled` dark-identical; zero lines in `pulseKernel.js` (each resolver's mint-then-resolve split lives in its own module; a walker enforces it). The four live kinds register first: `pact_acceptance`, `envoy_hearing`, `siege`, `armies_meet`. FIRST-VISIBLE: the pending card at the week of the climax · TIER: aspatial-safe (the kinds decide their own tier) · DEGRADED ARM: dark (today's same-tick resolution). Lighting is a declared same-seed shift (every climax one tick later), signed once.]
 disagree, the constitution wins and the disagreement is a bug to report — with
 ONE class of exception: where the constitution disagrees with the LIVE TREE
-(three cases measured in §2), the tree wins, the correction is recorded here,
+(three cases measured in §2) [CORRECTED 2026-10-16 (coherence fold) — four (R1–R4, §2b)], the tree wins, the correction is recorded here,
 and the constitution owes an erratum row.**
 
 **Reading order for the implementer:** this document top to bottom →
@@ -38,7 +39,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
    is the never-written-fallback exemplar and it lives in THIS program's
    substrate). `pulseKernel.js` (measured 2,820 lines at HEAD — the banked
    figure in older memory is stale as a number; the law is not) and
-   `applyWorldPulse.js` (measured 1,291) receive ZERO edits ever. SP stages
+   `applyWorldPulse.js` (measured 1,291) receive ZERO edits ever. [CORRECTED 2026-10-16 (coherence fold §3.3.8) — sizes are cited from scripts/.size-baseline.json in eslint's EFFECTIVE count, never a raw wc: pulseKernel.js 1581 (:13; banked permanently by R-BLD-10 at :6, its one declared ratchet-up J-EP-11 at :12; raw wc 3007), applyWorldPulse.js 907 (:9). "ZERO edits ever" held for the SP waves; it is not an estate fact — the kernel took 23 commits after 2026-08-04 from other lanes (findings SP-CW §6 (b)). The kernel is a size-banked mouth, a CEILING, not an untouchable file.] SP stages
    mount via the lifecycle host (`settlementLifecycleKernel.js:537` is the
    pattern: own-flag-before-host-gate) or ride existing fold call sites.
 2. **L2 FLAGS:** every SP flag is virtual — ABSENT from
@@ -47,7 +48,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
    call: `tests/lint/engineGatedRuleKeys.walker.test.js` source-scans the tree
    both directions, so each flag joins `ENGINE_GATED_VIRTUAL_RULE_KEYS`
    (`simulationRules.js:185`) in the SAME commit as its first strict gate read,
-   with a certification row (or declared-pending entry) owed the same commit.
+   with a certification row (or declared-pending entry) owed the same commit. [CORRECTED 2026-10-16 (coherence fold) — the list now sits at simulationRules.js:230 (the symbol holds).] [RULED 2026-10-16 (coherence fold §3.2.14) — the declared-pending door is STRUCK (`VIRTUAL_PENDING_RULE_KEYS = []`, subsystemRowsVirtual.js:897, shrink-only): every flag lands its AUTHORED certification row in the same commit as its first gate read.]
    Display-side flags take the EXEMPT_RULE_KEYS rationale row instead
    (`heraldCausalVoiceEnabled` at the walker's `:117` is the precedent). The
    FOUR-FENCE dormancy set per flag (own-footprint golden · absent-vs-false
@@ -60,7 +61,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
    itself, so the law runs the OTHER way too: the axis fold's ground-truth
    inputs enter ONLY through `axisGroundTruth`-shaped seams
    (`beliefAxes.js:120`), never ad-hoc truth reads inside the fold; the
-   infoMode gate (`simulationRules.js:739 infoModeOf`) stays the one door.
+   infoMode gate (`simulationRules.js:739 infoModeOf`) stays the one door. [CORRECTED 2026-10-16 (coherence fold) — now simulationRules.js:1404; see the bracket at :50]
 4. **L4 PERSISTENCE:** ZERO new top-level worldState keys in this program
    (achieved — §4). Conditional fields drop-when-absent (T4: a key is a byte;
    absent, never null). Every state-writing wave lands its canonical-model
@@ -88,7 +89,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
    effective-line ceiling; hot files at ceiling get an extraction FIRST;
    measure with the enforcer at the publishing commit, never inherit a figure
    (this document's own size figures are pre-build measurements, not budgets
-   to inherit).
+   to inherit). [RULED 2026-10-16 (coherence fold §3.3.8) — every size this volume quotes is read from scripts/.size-baseline.json and eslint's EFFECTIVE count, never a raw wc. At 00b648c9d only pulseKernel.js (1581) and applyWorldPulse.js (907) of this volume's files hold baseline entries; beliefMap.js (raw 1602, effective ≈781), simulationRules.js, envoyErrand.js, dispositionLedger.js and the rest carry no entry and sit under the 800 layer ceiling. Host files AT ceiling take ZERO lines from any wave without a leaf-first decomposition car.]
 9. **L9 PROCESS:** pathspec commits under the staged-set law; python3
    byte-scan every authored file; per-wave implementer + adversarial verifier
    with reject gates; STOP-and-report on measured blockers is a SUCCESS mode;
@@ -106,7 +107,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
 
 | # | Premise | Receipt (file:symbol) | Measured state |
 |---|---|---|---|
-| V1 | The beliefMap's per-observer, per-faction-slot partition is BUILT, rigorous | `beliefMap.js:224 beliefRecord(worldState, observerId, subjectId, factionId = GOVERNING_SEAT_KEY)`; file measured 1,564 lines | BUILT. SP-2 extends, never forks |
+| V1 | The beliefMap's per-observer, per-faction-slot partition is BUILT, rigorous | `beliefMap.js:224 beliefRecord(worldState, observerId, subjectId, factionId = GOVERNING_SEAT_KEY)`; file measured 1,564 lines [see the bracket at :91 — a raw count; no baseline entry] | BUILT. SP-2 extends, never forks |
 | V2 | Existing decay/update/forgetting laws exist for beliefs to ride | `beliefMap.js:112-128 BELIEF_TUNING {SILENCE_DECAY: 0.92, HOP_DECAY: 0.75, RECENCY_DECAY: 0.85}`; the byte-identity decay anchor at `:660-669` | BUILT — new axes ride the same fold |
 | V3 | Truth never leaks past the infoMode gate | `simulationRules.js:739 infoModeOf` (fail-closed string enum) | BUILT |
 | V4 | The axis-extension pattern exists (the fold SP-2's three families join) | `beliefAxes.js` (204 lines): `AXIS_TUNING:32`, `trendBandFromHistory:71`, `axisGroundTruth:120`, folded at `beliefMap.js:654 foldBeliefAxes`; gated by `beliefAxesEnabled` (in ENGINE_GATED list) | BUILT with TWO axes: `populationTrendBand` (numeric −2..+2) and `observanceLabel` (cultural rite). SP-2's families are axes #3-#5+ |
@@ -116,7 +117,7 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
 | V8 | The errand substrate exists with one writer and the ruled lifecycle | `worldState.js:432 'envoyErrands'` (conditional materialization); writer `envoyErrand.js` (823 lines), `'lost'` close paths at `:425/:473/:528`; `ENVOY_ERRAND_STATES` in `envoyErrandVocabulary.js:42`; DM-KILL-closes-lost lifecycle landed with WR-7 | BUILT — SP-1 generalizes IN PLACE (§3 seam ruling 2) |
 | V9 | The purpose vocabulary is war-scoped today | `envoyErrandVocabulary.js:119 ENVOY_PURPOSES = ['sue', 'self_parlay']` | The six-class vocabulary {diplomatic, commercial, religious, factional, personal, covert} is NEW WORK (SP-D) |
 | V10 | The two-picture contract exists for SP-3 to point at | `negotiationPictures.js` present (29.6 KB), the WR-7 seam | BUILT — SP builds nothing here (§3 ruling 3) |
-| V11 | The treaty term catalog + tripwire state | `peaceTermsCatalog.js:141 TERM_CATALOG` — 12 types, 8 families (economic, relational, security, territorial, political, informational, sovereignty, sovereignty_transfer); `TERM_FAMILIES:192`; `catalogGrewSinceWr10` live in `sovereigntyBundle.js` + `tests/domain/sovereigntyBundleWr10.test.js` | Trade-rights rows, faith families, population families all ABSENT — GR-3/TR-5 territory; SP must honor the tripwire (§8) |
+| V11 | The treaty term catalog + tripwire state | `peaceTermsCatalog.js:141 TERM_CATALOG` — 12 types, 8 families (economic, relational, security, territorial, political, informational, sovereignty, sovereignty_transfer) [CORRECTED 2026-10-16 (coherence fold §3.3.6) — 26 types / 13 families at 00b648c9d (GR-3, WC-0D and WR-10 rows landed: faith, population, commercial — `exclusivity` / `market_access` / `toll_exemption` — amnesty, jubilee); every count derives from live TERM_FAMILIES]; `TERM_FAMILIES:192`; `catalogGrewSinceWr10` live in `sovereigntyBundle.js` + `tests/domain/sovereigntyBundleWr10.test.js` | Trade-rights rows, faith families, population families all ABSENT — GR-3/TR-5 territory; SP must honor the tripwire (§8) |
 | V12 | Disposition channels are BUILT (dark) for SP-4b to compose | `dispositionLedger.js` (560 lines): channel list at `:31` {martial, mercantile, diplomatic, insular}, per-channel decay at `:62`; `dispositionChannelsEnabled` read in 10+ modules (warTermination.js, settlementStrategy.js, sovereigntyIntent.js…); `dispositionProfile.js` (156 lines) pure read-side | BUILT dark. SP-4b's channel term gates on it (degraded arm when dark) |
 | V13 | The ruler's books are unbuilt; the SP-4 degraded arm binds | `grep seatBooksEnabled src` → zero hits | Verified ABSENT — the constitution's INT-1 degraded-arm correction is live law for SP-C |
 | V14 | The appetite-stock idiom exists to generalize | `supplyKernel.js:566-578` — `spatialLedgers.merchantAppetite` written via `setSpatialLedger`/`dropSpatialLedger` (drop-when-cold); idiom reused by `tradeOverture`, `lendAppetite`, `intelCooldown` (`src/lib/spatialUsage.js:243-269`) | BUILT as idiom; the SETTLEMENT appetite stock is new work (SP-C) |
@@ -126,8 +127,8 @@ SP-specific bindings, each proven by execution in the WR/H/P lanes:
 | V18 | The narration-kit registration surfaces exist | `WHAT_PHRASES` at `settlementRumors.js:116`; `heraldRouting.js` (525 lines): `HERALD_SECTIONS:64`, `EXACT_SECTION:81`, `SECTION_OF:360`; four per-program kind-pool walker files (V6's L6 row) | BUILT — SP-E codifies the checklist and adds the floor walker |
 | V19 | The causal voice + state-prose substrate is BUILT dark | display: `heraldCausalGrammar/Voice/JoinMolds/Integrity/Index.js`, `rumorHeraldLink.js` (pacing-floor read at `:8/:101`), `PortablePopup/CausalityPopup`; dossier: `src/domain/display/stateProse/` (five modules) + `src/data/dossierStateProse/*.generated.js` + `package.json:27 gen:dossier-prose` | BUILT (lanes H/HG/HR/P/PR/CF). SP-E extends; never rebuilds |
 | V20 | The pacing governor exists and is frozen | `narrativeTempo.js` (511 lines): `TEMPO_BUDGETS:125` (classMax/arcMax/graceWeeks per tier), `narrativeTempoOf:141` (absent ⇒ DORMANT, budget ∞); docs/DESIGN_PACING_GOVERNOR.md present | BUILT — but see R4: it has no news-kind registration surface |
-| V21 | The temporal spine is single-sourced and mirror-guarded; the transit kernel + totality walker exist | `intervalWeeks.js:7 INTERVAL_WEEKS` re-exported `worldState.js:38`; `tests/domain/temporalGates.w0.test.js` (calendar-mirror drift guards over the two documented local copies in foodStockpile.js/populationDynamics.js + sim-path wall-clock backstop); `tests/lint/namedPersonTransitTotality.walker.test.js` + `npcCirculationTransit.js:131 planWanderLeg` | SP-7 is MOSTLY BUILT. Remaining: the mode-speed table (grep `kmPerWeek|MODE_SPEED` → zero hits — J-D11(b)'s, cross-referenced, NOT SP work) and extending walker totality to new SP consumers (folded into each wave's pins) |
-| V22 | J-D12 (the age toggle) exists with veto open; WR-9's instrument surface exists for the era envelopes | `docs/DESIGN_REALM_DIRECTIVES.md:1511 J-D12`; `src/domain/certification/warConvergenceContract.js` (820 lines) + `tests/simulation/distributionEnvelopes.test.js` | SP-8 owes only the ERA-PRESET-ELIGIBLE marking rule (§7) — the preset tables are the age wave's own, owner-signed |
+| V21 | The temporal spine is single-sourced and mirror-guarded; the transit kernel + totality walker exist | `intervalWeeks.js:7 INTERVAL_WEEKS` re-exported `worldState.js:38`; `tests/domain/temporalGates.w0.test.js` (calendar-mirror drift guards over the two documented local copies in foodStockpile.js/populationDynamics.js + sim-path wall-clock backstop); `tests/lint/namedPersonTransitTotality.walker.test.js` + `npcCirculationTransit.js:131 planWanderLeg` | SP-7 is MOSTLY BUILT. Remaining: the mode-speed table (grep `kmPerWeek|MODE_SPEED` → zero hits — J-D11(b)'s, cross-referenced, NOT SP work) [CORRECTED 2026-10-16 (coherence fold §3.1.11) — the mode table landed with WY-1 at src/domain/spatial/modeSpeeds.js; WY-1 owns the TABLE and SP-7 owns the TEMPORAL WALKER (unbuilt; coherence fold §4 re-charters it as tests/lint/timeBase.walker.test.js)] and extending walker totality to new SP consumers (folded into each wave's pins) |
+| V22 | J-D12 (the age toggle) exists with veto open; WR-9's instrument surface exists for the era envelopes | `docs/DESIGN_REALM_DIRECTIVES.md:1511 J-D12`; `src/domain/certification/warConvergenceContract.js` (820 lines) + `tests/simulation/distributionEnvelopes.test.js` | SP-8 owes only the ERA-PRESET-ELIGIBLE marking rule (§7) [RULED 2026-10-16 (coherence fold §5) — ERA-PRESET-ELIGIBLE stands or falls with RULED BY DELEGATION 2026-10-16, OD-FC-17 (SP-8 / J-D12: chair recommendation DEFER past launch with the slot "THE AGES"); no non-SP volume carries the marking] — the preset tables are the age wave's own, owner-signed |
 
 Also verified in passing, carried for the flag family: the WR flags
 (`warTerminationEnabled` etc.) are declared `false` on the full_simulation
@@ -139,10 +140,10 @@ declaration (+32 serialized bytes per key is the measured cost of the old way).
 
 | # | The constitution's premise | What the tree actually holds | Consequence |
 |---|---|---|---|
-| R1 | `alignmentOf(id) → { lawfulness01, malice01 }` lives at `beliefMap.js:915` and `informationStatecraft.js:584` (req 13's anchor) | NO exported `alignmentOf` exists anywhere. It is an INJECTED CLOSURE PARAMETER: `beliefMap.js:1025 applyAllyIntelSharing({ ..., alignmentOf })` (typed at `:1021`), `informationStatecraft.js:500` (typed at `:485`), composed at the pulse call sites. Both cited line numbers have rotted | Req-13 consumers in every SP wave bind the INJECTION SEAM, never an import; navigate by symbol, never by the constitution's line addresses. Constitution owes an erratum. The hand-keyed line-address-rot class, again |
-| R2 | SP-1's ledger home is `spatialLedgers.errands` | The live errand ledger is TOP-LEVEL `worldState.envoyErrands` (`worldState.js:432`, conditional materialization; `ENVOY_ERRAND_LEDGER_KEY = 'envoyErrands'` at `envoyErrandVocabulary.js:24`), with a landed writer, lifecycle, persistence pins, and WR-7c/d pulse wiring | JUDGMENT (§3 ruling 2): SP-1 generalizes the EXISTING ledger in place. Migrating a live persisted key to a new home is persistence-shape churn for zero behavior — owner-gated and not proposed. Open question Q1 |
-| R3 | SP-4 exposes `riskToleranceOf(actor)` (an unclaimed name) | `src/domain/roads/state.js:319` ALREADY exports `riskToleranceOf(npc)` — an NPC-grain roads-courage read, consumed by `roadsKernel.js:36,982` | The constitution's export name COLLIDES with a live symbol in another domain. §3 ruling 4 + open question Q2. Any grep-driven sweep touching this name must scope by module or it conflates two contracts (the concurrent-lane rename hazard class) |
-| R4 | News classes "register with the pacing/significance machinery" (§1.12) — implying a registration surface exists | The governor exists (V20) but throttles STRESSOR/ARC BIRTHS via `dramaClassOf(candidate)`; there is NO registration surface for Herald news kinds, and display significance is ad hoc — `components/map/heraldFeed.js:95` mixes `record.significance === 'major'` with a raw `severity >= 0.72` float threshold | SP-6a's one-scale family and its registration walker are genuinely NEW WORK (SP-E), and the fp-audit's "dozen independently-authored significance scales" direction is confirmed by sample. The governor is the CONSUMER of the family, not its home |
+| R1 | `alignmentOf(id) → { lawfulness01, malice01 }` lives at `beliefMap.js:915` and `informationStatecraft.js:584` (req 13's anchor) | NO exported `alignmentOf` exists anywhere. It is an INJECTED CLOSURE PARAMETER: `beliefMap.js:1025 applyAllyIntelSharing({ ..., alignmentOf })` (typed at `:1021`), `informationStatecraft.js:500` (typed at `:485`), composed at the pulse call sites. Both cited line numbers have rotted | Req-13 consumers in every SP wave bind the INJECTION SEAM, never an import; navigate by symbol, never by the constitution's line addresses. Constitution owes an erratum. The hand-keyed line-address-rot class, again [CORRECTED 2026-10-16 (coherence fold §3.3.5) — an exported derived read now exists: `settlementAlignment(item, worldState)` at settlementAlignment.js:44, and the constitution erratum is applied (master SPINE requirement 13 names it); req-13 consumers bind that read or the injection seam, never `alignmentOf`] |
+| R2 | SP-1's ledger home is `spatialLedgers.errands` | The live errand ledger is TOP-LEVEL `worldState.envoyErrands` (`worldState.js:432`, conditional materialization; `ENVOY_ERRAND_LEDGER_KEY = 'envoyErrands'` at `envoyErrandVocabulary.js:24`), with a landed writer, lifecycle, persistence pins, and WR-7c/d pulse wiring | JUDGMENT (§3 ruling 2): SP-1 generalizes the EXISTING ledger in place. Migrating a live persisted key to a new home is persistence-shape churn for zero behavior — owner-gated and not proposed. Open question Q1 [CORRECTED 2026-10-16 (coherence fold §3.3.4) — address now worldState.js:483; the constitution erratum is APPLIED by dated bracket at DESIGN_FP_SPINE SP-1] [RULED BY DELEGATION 2026-10-16 (OD-FC-14 — confirm `worldState.envoyErrands` stays the errand ledger's home (14 consumers); chair recommendation KEEP] |
+| R3 | SP-4 exposes `riskToleranceOf(actor)` (an unclaimed name) | `src/domain/roads/state.js:319` ALREADY exports `riskToleranceOf(npc)` — an NPC-grain roads-courage read, consumed by `roadsKernel.js:36,982` | The constitution's export name COLLIDES with a live symbol in another domain. §3 ruling 4 + open question Q2. Any grep-driven sweep touching this name must scope by module or it conflates two contracts (the concurrent-lane rename hazard class) [CORRECTED 2026-10-16 (coherence fold §3.3.3) — the address moved to roads/state.js:334; the collision is AVOIDED under CR-C4-1 (`courtPostureOf` / `courtRiskAppetiteOf`, strategicPosture.js:222, :303), held by tests/lint/postureNameCollision.walker.test.js] |
+| R4 | News classes "register with the pacing/significance machinery" (§1.12) — implying a registration surface exists | The governor exists (V20) but throttles STRESSOR/ARC BIRTHS via `dramaClassOf(candidate)`; there is NO registration surface for Herald news kinds, and display significance is ad hoc — `components/map/heraldFeed.js:95` mixes `record.significance === 'major'` with a raw `severity >= 0.72` float threshold [CORRECTED 2026-10-16 (coherence fold) — the address moved to heraldFeed.js:120 at 00b648c9d; the premise still holds and SP-E's named migration is still owed] | SP-6a's one-scale family and its registration walker are genuinely NEW WORK (SP-E), and the fp-audit's "dozen independently-authored significance scales" direction is confirmed by sample. The governor is the CONSUMER of the family, not its home |
 
 ---
 
@@ -152,7 +153,7 @@ Five new virtual flags. All absent from DEFAULT_SIMULATION_RULES and every
 preset; all join `ENGINE_GATED_VIRTUAL_RULE_KEYS` in the same commit as their
 first strict gate read (the walker enforces this mechanically, both
 directions); each owes a certification row the same commit; each ships the
-four-fence dormancy set with the lit-mutant control.
+four-fence dormancy set with the lit-mutant control. [CORRECTED 2026-10-16 (coherence fold §2) — since LIT-1b (2026-09-24) `believedScarcityEnabled` and `believedConditionsEnabled` ARE in the FP_LIT_BELIEF preset spread (simulationRules.js:793-797; three presets, with `beliefAxesEnabled`); `believedDevotionEnabled` is lit nowhere (RULED BY DELEGATION 2026-10-16, OD-FC-7); `strategicPostureEnabled` and `errandSpineEnabled` are dark, the latter HELD DARK ON PURPOSE (:781-788).]
 
 | Flag | Gates | Wave |
 |---|---|---|
@@ -322,7 +323,8 @@ not state); no era-preset state (J-D12's wave owns it).
 ## §5 THE WAVES (dependency order; each: one commit, focused gates per slice,
 ## full gate at wave end, ledger row; every wave DARK per §3)
 
-### SP-A — THE PURE FOUNDATIONS (no flag; dark by construction)
+### SP-A — THE PURE FOUNDATIONS (no flag; dark by construction) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED 2026-08-04 @ 59df13a97; bandedStock.js / bandFamilies.js now consumed by 20 / 12 src modules]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (pure vocabulary and shape; a DM sees no direct sign, only one decay law and one significance scale everywhere) · TIER: aspatial-safe · DEGRADED ARM: n/a — the leaves read no world state]
 **Scope:** the three shared-idiom leaves every later wave and every volume
 consumes.
 - **`bandedStock.js` (new leaf, budget ≤ 250 lines):** the SP-5b family —
@@ -372,7 +374,8 @@ authorities may not) — because seven programs are about to read pressure and
 until now the discipline was J-WR-10-B plus two header comments.
 
 ### SP-B — THE BELIEVED-WORLD AXES (flags `believedScarcityEnabled`,
-`believedConditionsEnabled`, `believedDevotionEnabled`)
+`believedConditionsEnabled`, `believedDevotionEnabled`) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED 2026-08-05 @ 4c0f2f38b (beliefAxisSubjects.js); scarcity + conditions LIT in FP_LIT_BELIEF (simulationRules.js:793-797), devotion manifested and DARK (OD-FC-7)]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: weekly where beliefs are recorded — a believed-dearness or condition band word, or a mistaken-court receipt, inside a one-month advance (a per-tick fold, SILENCE_DECAY 0.92) · TIER: belief infoMode (non-omniscient; LIT only in FP_LIT_BELIEF, inert in omniscient presets such as realistic_regional, ruling FP-24); host flags: beliefAxesEnabled; routePositionBand borrows ROUTE_FLOW_BANDS, so a world with no route network reads `unknown` (PLAUSIBLE) · DEGRADED ARM: omniscient infoMode ⇒ the axes never fold and consumers read truth or `unknown`]
 **Scope:** the three subject families as beliefAxes fold arms (seam ruling 1).
 - **Extend `beliefAxes.js` (204 lines, headroom ~600):** three ground-truth
   derivations joining `axisGroundTruth` — scarcity from the existing supply/
@@ -391,7 +394,7 @@ until now the discipline was J-WR-10-B plus two header comments.
   statecraft records); zero-import pin excluding the belief partition itself
   (it reads the outbound ledgers, never the counterpart's beliefs — that
   would be the recursion Law One forbids). No flag (no writer, no consumer at
-  land time).
+  land time). [see the bracket at :805 — IN-1 manifested `secondOrderBeliefEnabled`]
 - **Files touched (measured):** `beliefAxes.js` (204), `beliefMap.js` (1,564 —
   fold call-site only, few lines; the file is at scale, so NO new logic lands
   in it), `simulationRules.js` (896 — three list rows), certification rows.
@@ -448,6 +451,7 @@ generalise past food). Both mints were chosen so their words appear as quoted
 literals ZERO times elsewhere under `src/` — the bandFamilies.js discipline.
 
 ### SP-B2 — THE BELIEF-LEGS DISCHARGE (rides SP-B's flags; no new flag) — **LANDED 2026-08-05**
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none while `sovereigntyTradeEnabled` is lit nowhere; once lit, at appraisal cadence (UNMEASURED) · TIER: belief infoMode plus spatial reach (ES-4's distant missions supply the SOURCE); host flags: sovereigntyTradeEnabled, believedConditionsEnabled, beliefAxesEnabled · DEGRADED ARM: a missing leg ⇒ `known:false` and the receipted no-trade (partial knowledge never clears a market)]
 **Scope:** the queued "belief-legs wave" named in `sovereigntyMarketStage.js`'s
 header (navigate by symbol — the line address rotted) — the WR-10 lighting
 precondition CR-WR10-H discharged in its SEAM member.
@@ -520,10 +524,10 @@ precondition CR-WR10-H discharged in its SEAM member.
   `src/domain/certification/warConvergenceContract.js` — three rows naming SP-B
   (SURFACES, measured against the CQ5 flag manifest), SP-B2 (SEAM, measured by
   the marker `SP-B2-LEG-SUPPLY-EVIDENCE` in a live pin) and ES-4 (SOURCE,
-  measured by the marker `ES-4-DISTANT-SOURCE-EVIDENCE`, ABSENT today) —
+  measured by the marker `ES-4-DISTANT-SOURCE-EVIDENCE`, ABSENT today) [CORRECTED 2026-10-16 (coherence fold) — PRESENT: espionageDistantSourceEs4.test.js:400 carries it as an `it` title; the CR-WR10-H condition is satisfiable; `sovereigntyTradeEnabled` remains lit in no preset] —
   with `tests/lint/sovereigntyLightingContract.walker.test.js` measuring the
   tree and evaluating the condition. It reads `UNSATISFIED_TRACKED / missing
-  ['ES-4']` today and flips `SATISFIED` the commit ES-4 lands its marker; both
+  ['ES-4']` today [see the bracket at :526 — stale] and flips `SATISFIED` the commit ES-4 lands its marker; both
   states are executed pins, and the walker never reds on the tracked state
   because a build-order fact is not a defect. ES-4's ONE obligation here is to
   carry that marker in a live test title.
@@ -535,7 +539,8 @@ precondition CR-WR10-H discharged in its SEAM member.
   what follows them, in the walker header of
   `tests/lint/sovereigntyLightingContract.walker.test.js`.
 
-### SP-C — THE POSTURE READ (flag `strategicPostureEnabled`)
+### SP-C — THE POSTURE READ (flag `strategicPostureEnabled`) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED 2026-08-06 @ cbd348a50, DARK (`strategicPostureEnabled` lit nowhere); consumers pactFormation, pactRenewal, suspicion, envoyTaskCatalog; the appetite is STARVED — FP-ORDER's SEAM-0 ("the facet has no data") is owed]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: a posture colour word on its consumers' receipts (pact, suspicion) inside a month once lit; its own appetite crossings are yearly-plus (half-life a_few_years 156 weeks, channels a_generation) and below requirement 16's line (OD-FC-1) · TIER: aspatial-safe; host flags: strategicPostureEnabled, dispositionChannelsEnabled (dark, simulationRules.js:1041), seatBooksEnabled (absent) · DEGRADED ARM: channels and books terms ABSENT, never zero; the posture receipt names its inputs]
 **Scope:** SP-4a's settlement appetite stock + SP-4b's posture composition.
 - **Extend `dispositionLedger.js` (560 lines, headroom ~240):** the
   `appetite` facet per §4 — learned from OUTCOME EVENTS only (war won/lost,
@@ -621,7 +626,8 @@ would be the fourteen-drift class in miniature. The posture's own band is the
 same ladder read at the composite. What the owner signs here is therefore three
 learn rates, four composition weights and one cap — no edges.
 
-### SP-D — THE ERRAND SPINE GENERALIZATION (flag `errandSpineEnabled`) — **LANDED 2026-08-06 @ `0aac6792`, repaired @ `57fe385b`**
+### SP-D — THE ERRAND SPINE GENERALIZATION (flag `errandSpineEnabled`) — **LANDED 2026-08-06 @ `0aac6792`, repaired @ `57fe385b`** [CORRECTED 2026-10-16 (coherence fold §2) — and SP-D2 @ 3fd25f5df (2026-09-24); `errandMint.js` is imported by 12 other src modules (espionage, émigré, pact proposals); `errandSpineEnabled` stays DARK, held on purpose (simulationRules.js:781-788)]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: weekly — an envoy, mission or émigré seen leaving and arriving (law M: a one-week floor per leg) · TIER: spatial canon (legs need a route plan and positions); host flags: errandSpineEnabled (held dark) · DEGRADED ARM: dark — only the war envoy path mints, byte-identical]
 <!-- Build state is not maintained per-file; FP §5's PROGRESS block is the one home. -->
 
 **Scope:** SP-1 — the war errand becomes the estate's one purposeful-travel
@@ -716,7 +722,8 @@ substrate, in place (seam ruling 2).
   attributable.
 
 ### SP-E — THE NARRATION KIT ASSEMBLY (no engine flag; test/walker/soak estate
-plus one pure leaf consumption)
+plus one pure leaf consumption) [CORRECTED 2026-10-16 (coherence fold §2) — LANDED 2026-08-06 @ 7a77c84ba (kindPoolWalker.js, phraseRepetitionEnvelope.js, the floor walker); the heraldFeed migration it names is still owed]
+[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation (gate- and soak-time; felt only as fewer repeated sentences, the envelope windowed per settlement per season) · TIER: aspatial-safe (test, walker and soak estate) · DEGRADED ARM: n/a — no engine path]
 **Scope:** SP-6 completed as machinery, not hope.
 - **The registration checklist codified:** the five L6 joins + pool floor +
   pacing assignment, as a walker template file the volumes copy (the envoy
@@ -736,7 +743,7 @@ plus one pure leaf consumption)
 - **SP-6a/6b consumption:** `heraldFeed.js:95`'s ad-hoc significance read is
   RECORDED as the first migration target (a consumer census + shrink-only
   scale-spelling scan lands here; the actual display migration is each
-  surface's own small wave — assessment first, the census names the debt).
+  surface's own small wave — assessment first, the census names the debt). [see the bracket at :145 — now heraldFeed.js:120]
 - **Files touched:** test estate + one certification leaf + the census scan.
   Zero engine behavior changes; zero flags.
 - **Pins:** the walker's own negative controls (unregistered kind reds;
@@ -758,7 +765,7 @@ SP-8 owes this program exactly one obligation: every SP band row in §7 below
 carries an ERA-PRESET-ELIGIBLE column (a preset may move only marked bands).
 The preset tables, the drift/dwell/hysteresis machinery, and the ERA EVENTS
 are J-D12's own owner-signed wave (`DESIGN_REALM_DIRECTIVES.md:1511`), NOT
-built here. Deliberately deferred — documented, not a bug to re-find.
+built here. Deliberately deferred — documented, not a bug to re-find. [RULED BY DELEGATION 2026-10-16 (OD-FC-17 — see the bracket at :130; the obligation is unmet in every non-SP volume (findings SP-CW §12)]
 
 ---
 
@@ -771,7 +778,7 @@ built here. Deliberately deferred — documented, not a bug to re-find.
 - **J-SP-2 (the errand ledger stays):** SP-1 generalizes `envoyErrands` in
   place; the constitution's `spatialLedgers.errands` address is recorded as
   resolved-at-build. VETO migrates the ledger home (owner-gated persistence
-  shape — goes to the owner, not to an implementer).
+  shape — goes to the owner, not to an implementer). [see the bracket at :143 — RULED BY DELEGATION 2026-10-16, OD-FC-14]
 - **J-SP-3 (three axis flags, not one):** per-family flags let TRADE/POP/FAITH
   light their subjects independently, matching the corpus's per-volume
   lit-preconditions; the cost is two extra walker rows. VETO collapses to one
@@ -793,10 +800,10 @@ built here. Deliberately deferred — documented, not a bug to re-find.
   SURVIVES from this block: the collision is documented at both sites. What is
   ADDED: the walker that keeps `riskToleranceOf` single-definition under
   `src/domain`. The constitution owes the erratum for the five volumes that
-  bind the old spelling.
+  bind the old spelling. [CORRECTED 2026-10-16 (coherence fold §3.3.3) — APPLIED: the erratum lands by dated bracket at DESIGN_FP_SPINE SP-4, DESIGN_FP_COUPLINGS §2, and FAITH, POPULATIONS, INTERIOR and GRAMMAR (fold §8). CR-C4-1 has no row in OWNER_DECISION_QUEUE.md by grep — its text lives in the volumes.]
 - **J-SP-6 (second-order belief has no flag):** a pure read with no writer
   and no land-time consumer ships dark by construction; INFO's consumers gate
-  it. VETO adds `secondOrderBeliefEnabled` and its four-fence cost now.
+  it. VETO adds `secondOrderBeliefEnabled` and its four-fence cost now. [CORRECTED 2026-10-16 (coherence fold) — the veto arm was taken at IN-1: `secondOrderBeliefEnabled` is manifested (simulationRules.js:411, the engine-gated list) and lit in no preset; the outbound-impression read stays flagless, its consumer is gated.]
 - **J-SP-7 (SP-3 delegation):** SP builds nothing against the term catalog;
   GRAMMAR owns formation, families, and the one list. VETO pulls any GR wave
   forward into SP — and must then also own the catalogGrewSinceWr10 red and
@@ -895,7 +902,7 @@ Internal order: **SP-A → SP-B → SP-B2 → SP-C → SP-D → SP-E** (A feeds 
 stock shape and E's families; B feeds B2; C and D are independent of each
 other but D's projection rows read no posture — order kept for lane
 serialization on the shared envoy files). Every wave dark; no SP flag is in
-any standing lighting batch; SP flags light at the owner-signed soak redo, in
+any standing lighting batch; [CORRECTED 2026-10-16 (coherence fold §2) — see the bracket at :155: SP-B's scarcity + conditions families light in FP_LIT_BELIEF] SP flags light at the owner-signed soak redo, in
 build order, with the axis flags requiring `beliefAxesEnabled` lit first (the
 conjunction). THE WR-10 CONVERGENCE, stated once more for the record (AMENDED
 2026-08-05, the ES + WY owner-amendment fold, ES ⟨F9⟩): the exact waves that
@@ -918,7 +925,7 @@ tree is LIVE with concurrent lanes on `beliefMap.js`, the envoy family, and
 re-grep renamed symbols after; (b) python3 byte-scan every authored file (the
 NUL class has bitten six times); (c) new tests in generation trees use
 tests/helpers/{anchoredNegatives,seedFailures}.js; (d) the R1/R3 name
-hazards (injected `alignmentOf`, roads `riskToleranceOf`) are quoted in the
+hazards (injected `alignmentOf`, roads `riskToleranceOf`) [see the bracket at :142 — an exported `settlementAlignment` now exists] are quoted in the
 relevant modules' headers so a grep-led successor cannot conflate them — and
 since CR-C4-1 the R3 half is enforced as well as quoted: SP mints no second
 `riskToleranceOf`, and `tests/lint/postureNameCollision.walker.test.js` holds
@@ -930,7 +937,7 @@ that name to exactly ONE definition under `src/domain`.
   as the generalized spine's home, or migrate to the constitution's
   `spatialLedgers.errands`? RECOMMENDATION: keep; record the constitution
   erratum; migration is persistence churn on a live save shape with zero
-  behavioral payoff and a full lifecycle re-proof bill.
+  behavioral payoff and a full lifecycle re-proof bill. [see the bracket at :143 — the erratum is applied; RULED BY DELEGATION 2026-10-16, OD-FC-14 confirms keep]
 - **Q2 — The riskToleranceOf collision (R3/J-SP-5) — RULED AND CLOSED,
   CR-C4-1, 2026-08-06, AGAINST THIS RECOMMENDATION.** The question was whether
   to keep the constitution's export name beside roads' existing
@@ -938,7 +945,7 @@ that name to exactly ONE definition under `src/domain`.
   module-scoped, because five volumes bind the spelling. The chair ruled for
   GRAMMAR §7 Q2's spellings — `courtPostureOf` / `courtRiskAppetiteOf` — and
   SP-C landed them. The erratum for the five volumes is owed at the
-  constitution; the enforcement is
+  constitution; [see the bracket at :802 — applied] the enforcement is
   `tests/lint/postureNameCollision.walker.test.js`.
 - **Q3 — The appetite home (J-SP-4):** dispositionStats facet (recommended:
   zero new keys, one writer, the learn/decay machinery already there) versus
