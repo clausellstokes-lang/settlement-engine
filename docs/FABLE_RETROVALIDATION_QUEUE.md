@@ -3956,3 +3956,10 @@ No Opus car landed in this act. The twelve rulings, the two recorded owner words
 *Receipts:* ODQ §934.89 addendum 1; the FP kit's FP-PROGRESS-BOARD.md (10-02), FP-QUEUE.md (FPQ-71..86), findings/*-REPORT.md; `1b313fadc`, `402a6e2c9`; PR #57.
 *Priority:* P2.
 **Status:** enrolled.
+
+### R107 — the polity and menace volumes and the champions brief (Opus 5.5 seat; ODQ §934.92)
+*What was judged:* the kingdom layer as a derived pattern over sworn links with the liege's voice through the foreign book; feud, break and crown war as three things with the contest as the one persisted decision; the menace as one generic DM-named force driving the landed stressors and the one danger scalar; the requirement-24 extension to menace engagements; the coherence fold's §2/§3.4/§5/§6/§7 rows for both; CN cn-5's host re-ruled a menace; and the champions brief.
+*What Fable re-derives:* whether the cures of SPL/SMN/SX (the kit `settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/`) hold; whether the polity honours §735.2 and W-SEAT's laws; whether the menace honours §128a/§128b and ONE PLAGUE TRUTH's idiom; whether the requirement-24 extension is the owner's to make.
+*Receipts:* ODQ §934.92; `docs/DESIGN_FP_ARCH_PL.md`, `docs/DESIGN_FP_ARCH_MN.md`, `docs/DESIGN_FP_CHAMPIONS_BRIEF.md`; the kit's findings and skeptic files.
+*Priority:* P1 (the owner asked for Fable on this work).
+**Status:** enrolled.

@@ -145,7 +145,7 @@ systematically failed (the spine reader's §12, confirmed by every family read).
     belong to ONE of the seven coupling layers, declared once (ES→INFO, EC→TRADE,
     WC→WAR, HB→INFO, INT stays INTERIOR), or declare themselves a CARRIER across
     named layers (WY across TRADE/POP/WAR; EP across all, as a clock) — a
-    declared multi-layer carrier is lawful, an undeclared one is not; (b) pair ids are closed at CPL-1..21 with a declared
+    declared multi-layer carrier is lawful, an undeclared one is not; [ADDED 2026-10-17 — the two new programs declare: PL (the polity) a CARRIER across GRAMMAR · WAR · INTERIOR; MN (the menace) a CARRIER across WAR · POPULATIONS · TRADE; their prefixes `PL` and `MN` are chartered in the same commit as their first coupling-registry row (21c).] (b) pair ids are closed at CPL-1..21 with a declared
     extension family for within-layer and new-program rows (the registry's
     CPL-22/23 are re-anchored, §3.3); (c) a new volume prefix is chartered in
     the same commit as its first registry row; (d) a closed ladder is minted
@@ -196,7 +196,11 @@ systematically failed (the spine reader's §12, confirmed by every family read).
     once lit (an unregistered kind may not resolve; registration is the only
     door) (kind · owning program · its CLIMAX tick · its
     verdict vocabulary · whether it is a CLIMAX kind, settled in one hearing, or
-    a STANDING kind that holds for weeks). (b) [RULED 2026-10-16 after skeptics
+    a STANDING kind that holds for weeks). [EXTENDED 2026-10-17 by OD-MN-8
+    (`DESIGN_FP_ARCH_MN.md` §11, by delegation) — an engagement between a
+    settlement (or its army) and a MENACE, the DM-named outside force, is also
+    a registered kind (`menace_strikes` STANDING, `menace_met` CLIMAX); a
+    menace's raiding is its stressor's ordinary life, not a hearing.] (b) [RULED 2026-10-16 after skeptics
     S1-01 and S5-B1 — THE DOCKET EXISTS BUT THE PAUSE CURSOR CANNOT HOST A
     HEARING: the landed majors docket (`decisionTier.js`, eleven majors;
     `advanceInterval.js:601`; J-D7's "ONE gathered adjudication screen" and
@@ -347,6 +351,8 @@ Legend: LIT = the flag is in at least one shipped preset (the default preset is 
 | EPOCH (EP) | — (`advanceEpochEnabled` in the manifest, lit in no preset; L-DEFAULT "decision (ii) unspent") | EP-0 segment, EP-1 kernel seam + flag, EP-2 fork semantics, EP-3A/B ledger + year anchor (all LANDED 2026-08-16, two days after the volume's "NOT BUILT" banner); the census walker (23 sites, 15 modules) | EP-4 (slice 1 cured elsewhere and half-reversed), EP-5 copy; the persisted undo ring (escalation E1, unanswered) | "undo, re-advance, a different winter" works only inside one session (the undo ring dies on reload); once lit, the Auspice forecast composes the legacy stream while the advance mints a fresh epoch (OD-FC-31) |
 | the compiled fold (ARCH) | its §12.8 "SHIPPED LIT" set: nine FP keys lit (pactFormation + faithUnseating in four presets incl. the default; the belief three in three; the war-peace four in two) | — | — | its §5 progress block (09-23: 28 · 10 · 73) re-derived at 00b648c9d: **37 landed · 12 partial · 62 not started of 111** (65 of 114 with §13); the ledger copy carries only the 08-09 block; THIS TABLE is the record |
 | CN · LG · PG · MF (later volumes) | — (zero code for any of the four; MF-CH2B is a DIFFERENT landed unit, the magic shelf gate) | — | CN cn-1..6, LG-0..LG-9+, PG pg-1..3, MF-1..7 — none in the compiled order; the volumes landed on the ledger at `1d77ceb67` while their headers say "NOT YET LANDED" | CN's console (the pre-Edit-Mode idiom; §3.1.20); LG-0's willingness gate repairs a LIVE routing defect and waits on nothing; PG's "plague reaches X from refugees" waits on POP-4's fold (§3.1.9) |
+| THE POLITY (PL, 2026-10-17) | — | the substrate it derives from: sworn edges, the matured-conquest rung, `foreignSeatOf` (ungated, one hop), the per-tick vassal rules (lit in six presets), the one-shot cascade, the silent levy, symmetric relief, the dark foreign book | PL-0..PL-10 entire: no chain walk exists anywhere; nothing reads a fallen lord's vassals; pacts, peace, mediation and commerce are hierarchy-blind | "Ashford is sworn to Merewick, under the crown of Merewick" — no read above the pair exists |
+| THE MENACE (MN, 2026-10-17) | — | the stressor's attacker seam (`attackerLabel`, no reader), `monster_raider_pressure` and the pressure-born `siege`, the wander mechanic, `embattlement`, the calamity bucket, the phantom (off-stage) | MN-0..MN-7 entire: no non-settlement actor exists; every belief and rumor subject is a settlement | "The Ashen Host is camped below Kell's walls" — nothing can be an outside force today |
 
 **The one lit chain** (restated per preset after skeptic S1-05's executed census): in the DEFAULT preset `realistic_regional` a DM feels a pact proposed, valued by the responder, signed or declined, kept or frayed; and a patron's fall — which is VACUOUS on every born world because the birth preset seats no deity (FAITH:10, FPQ-62). Renewal, conversion, succession at an heir and mediation are lit only in `dramatic_campaign` and `full_simulation`; believed scarcity and conditions colour pacts only in the three belief presets, never the default. Everything else in thirty volumes is a flag away or a build away.
 
@@ -384,6 +390,15 @@ Legend: LIT = the flag is in at least one shipped preset (the default preset is 
 | `pact_renewal` | GRAMMAR (GR-5) | the renewal window's answer tick | `renewed · lapsed · renegotiated` | CLIMAX (S5-B4) |
 | `embargo` | EC-6 (the stance) | every week the stance stands | `open · taxed · restricted · closed` | STANDING (S5-B4) |
 | `supply_raid` | the war volume | the raid's landing | `repelled · succeeds` | CLIMAX (S5-B4) |
+| `fealty_question` | GRAMMAR (GR-4 extended) with PL's reads (`DESIGN_FP_ARCH_PL.md` §7) | the week after a lord's seat changes hands | `renew · withhold · claim · free` | CLIMAX |
+| `crown_fallen` | the war volume with PL's reads | the week after a lord falls to conquest | `submit · remnant · free` | CLIMAX |
+| `crown_claim` | PL (PL-9) | the claimant's decision tick | `pressed · withdrawn` | CLIMAX |
+| `allegiance_choice` | PL (PL-9) | each member's answer after a claim | `crown · claimant · aside` | CLIMAX |
+| `crown_war` | PL (PL-9) | every week a crown contest stands | `continues · claim_prevails · crown_prevails · partition` | STANDING |
+| `crown_arbitration` | PL (PL-7) via GR-6 | the liege's order in a feud | `accept · refuse` | CLIMAX |
+| `fealty_broken` | the relationship plane's break road with PL's definitions | the break's resolution | the landed `succeeds · quashed` | CLIMAX |
+| `menace_strikes` | MN (MN-2) | every week a menace besieges a town | `holds · repelled · breached` (+ `falls`, the DM's verdict only) | STANDING |
+| `menace_met` | MN (MN-4) | an army meets a menace in the field | `engage · withdraw`, then `menace_beaten · army_beaten · stand_off` | CLIMAX |
 
 The CHAIR's rulings on the registry: (1) the registry and the PENDING LEDGER are built by ONE spine wave, **SP-9 THE HEARING WEEK** (the ledger shape, the HEARING SEAL kind (keyed by engagement id; engine · tilt · verdict), J-D7's adjudication screen as the pending panel, the held docket read-first at the next advance, the premium gate, the flag `hearingWeekEnabled`, the per-kind `registerEngagementKind` with a closure pin that grows only by registration), dark; (2) the first rows LIT are the kinds already alive: `pact_acceptance`, `envoy_hearing`, `siege` (seal 6 generalised), `armies_meet` (the live encounter); every other row lands with the wave that builds its kind, as an obligation of that wave's charter (bracketed in §8's volumes); (3) once lit, a kind outside the registry cannot resolve — the resolver's split (docket-then-resolve) is enforced by a walker over every REGISTERED resolver, seeded from §3.4's census of live acts so it is green on day one (S5-B4); (4) SP-9 is THE HEAD OF THE CHAIN ORDER (§6): every later felt chain is felt through its hearings; (5) the pulseKernel stays frozen — the split lives in each resolver's own module, the ledger write in `spatialLedgers`, no pause cursor at all (S5-B1): the tick completes and the next advance resolves the docket first; J-D7's adjudication screen is the panel; the majors pause stays the DM's option (directive 7).
 
@@ -451,6 +466,14 @@ The CHAIR's rulings on the registry: (1) the registry and the PENDING LEDGER are
 | `route_wardenship` / `provision` | landed TR-1 REASON kinds (`commercialReasonTaxonomy.js:44-68`) · the TERM tokens OD-FC-2 routes | ONE fact, two surfaces: the TERM is the PRODUCER of the landed reason of the same name; the names stand (S2-16) |
 | `embattled` | WC's EMBATTLED stressor · the live `embattlement` ledger phase | ONE: the ledger's phase (§3.1.16) |
 
+| `polity` | the vassal-chain pattern above settlements (PL) · prose-only uses today ("a good polity's conscience") | the code token for the pattern; "kingdom", "crown", "capital" are PROSE only, by the root's ruling power (PL §2); `dominion` (a roads purpose), `kingdom` (the AI door's realm cue), `realm`, `seat`, `sovereign`, `capital` (a tier), `bloc`, `chain` are never PL tokens |
+| `nominal · loose · firm · absolute` | the crown's hold (PL cohesion) | four words; `contested` is an occupation rung and is avoided |
+| deference | a member's weight under its liege | NOT a new quantity: the seat weight and its band (`dominant · strong · present · marginal`) |
+| `feud` · `break` · `crown war` | three different things (PL9) | members vs members over their quarrel · a member leaving · members vs members over the crown |
+| `menace` | the DM-named outside force (MN) | the code token; never `threat`, `host`, `raid`, `brigand`, `calamity`, `phantom`, `externalThreat`, `monster_pressure` (all landed) |
+| might words | `thin · modest · capable · strong · formidable` | the army's own `STRENGTH_BANDS`, one vocabulary (J-CNC-5), exported once |
+| course words | `stays · toward · wanders` | the menace's three courses |
+| menace states | `abroad · raiding · besieging · stilled · broken · gone` | closed; `stilled` is the DM's pause |
 | `hearing` / `tilt` / `verdict` | the hearing week's three choices (requirement 24) · "decree" is the landed DECREE REGISTRY's word (realm decrees) | the DM's forced outcome is a VERDICT, never a decree; "the hearing seal" names the Edit Mode seal kind; "the held docket" names the ledger (J-D7's word) |
 | `chain n` / `C0..C8` | FP-40's chains (chain 1 = the UI+prose release, chain 2 = the statecraft band) vs this fold's chains | this fold's are the COHERENCE CHAINS `C0..C8`; "chain n" bare means FP-40's |
 | `SEAM-n` | §13's SEAM-0..3 · the landed TE-NET-1/T5 "car SEAM-3/4/5" commits · §9's "seam matrix" rows | prose: "the SEAM family (§13)" / "seam row n" / "the T5 cars"; a new seam id is `SEAM-<family>-<n>` |
@@ -478,6 +501,8 @@ Under the owner's standing words ("no just build it all shipped lit" 09-23; "foc
 | C6 · THE ECONOMY (EC Phase A–F) | per ODQ §934.90 addendum 6's FIRST SOAK lit set | gate: the release pushed and deployed | weekly conditions; spatial for flows |
 | C7 · WAYFARE'S BODIES | WY-3 then TR-4/EC-12; WY-10 markers on WY-3 (the re-sequencing WY Q3 asks) | the caravan becomes a thing on the road | spatial |
 | C8 · THE AGES (SP-8 / J-D12, OD-FC-17) | the age layer and the ERA-PRESET-ELIGIBLE marking | pre-launch by ODQ §764 (no post-launch disposition exists) | epoch |
+| C9 · THE CROWN (PL, `DESIGN_FP_ARCH_PL.md`) | PL-0 the walk, PL-1 the name and the page, PL-2 the hold, PL-4 duties down (the protection record) as the first felt chain; PL-3/5/6/7/8/9 after, chosen at each read | the owner's 10-17 kingdom layer; PL-5 rides WC-5's call-in (after C2) and PL-3 waits on the owner's lighting of `foreignSeatEnabled` | aspatial core; war arms in war presets |
+| C10 · THE MENACE (MN, `DESIGN_FP_ARCH_MN.md`) | MN-0 the record and the DM's hand, MN-1 the press, MN-2 the strike, MN-3 the word as the first felt chain; MN-4/5/6/7 after | the owner's 10-17 outside force; the chair recommends it as the first chain chosen after C0 — its strike IS a hearing and its first waves are leaves | aspatial core; the danger term needs a canonized map |
 | recorded with a slot (S2-09's census, every wave named) | WC Arc B–D incl. WC-3 whole (slot: C2's successor "THE HOST"); WF-2/3/5 (incl. 5b)/7/9 → C5; POP-3/5a/5b/6/7 → C3; INT-1/2/4/5/6 and INT-8's pools → C4; WY-0/2/4/5/6/7/8/9/11 → C7; HB-6/7/8/9 → C4's successor; EP-4/5/6 → "THE LIVING FUTURE" after C8; CW-2x/CW-3 → C0's successor; GR-5e, GR-4b-β, GR-7 (+ CR-FP-8 as its own shift car, joint with the war chair, FVQ:2453), `mutual_defense`, `tribute_population` → the next GR unit in C2; WAR-MARCH (parked kit lane) → C2; VITAL-SIGNS (parked kit lane) → the release's own UI chain | their laws are written; their machinery waits for a chain that asks for it | seasonal to epoch |
 
 Mechanisms the readers judged CUT-TO-SENTENCE are NOT cut (skeptic S4 B5: a cut narrows the owner's own clauses against "build it all"): WC-3's staging network, R6's release standing, WC-9's integrals and WC-5's jubilee keep their charters and are RECORDED WITH THE SLOT "THE HOST"; only the HIDE toll's home changed (§3.1.4, a routing, not a cut). The readers' felt-value judgments stay in the findings as the experience reads' hypotheses.
@@ -535,6 +560,8 @@ Mechanisms the readers judged CUT-TO-SENTENCE are NOT cut (skeptic S4 B5: a cut 
 | OD-FC-42 | Q-HB-B (dropped from the first fold; S3 M9): is a person-grain habit (per-general sheet, court→general subject, affected-only accrual) a new capability or a repair? | RULED: HB stays INSTITUTION-GRAIN (J-HB-2); the generals' person-keyed loop READS HB's institution sheet and keeps its own person memory in the generals' volume — a repair of that volume's seam, no HB shape change; OD-FC-23's "generals' loop first" stands on this | no HB persisted shape |
 | OD-FC-43 | Q-HB-E: is any habit voice meant for the free tier? | RULED by the owner's 18:5x word "The simulator is gated for premium": no free-tier habit voice; the `habit_sheet_shifted` beat is premium with the rest | paid surface |
 | OD-FC-44 | POP's three persisted shapes (S3 M13): `spatialLedgers.departureMemory`, the column's `believedBand`, the column's `events` | RULED: `believedBand` lands with POP-1 (chain C3; it is the clearing's own belief); `departureMemory` with POP-3 and `events` with POP-5a, each only when its wave's experience read asks (their slots in §6) | persisted shapes |
+| OD-FC-45 | The polity (the owner's 10-17 "realm layer above settlements … based in the vassalage system") — the token, the pattern-not-entity rule, the christening, the precedence mechanism, the definitional acts, the contest record, the autonomy charter, partition, cohesion's words, κ, genesis, and the chain | RULED by delegation as `DESIGN_FP_ARCH_PL.md` §12 OD-PL-1..14; OD-PL-5 (lighting `foreignSeatEnabled`) stays the OWNER'S (ODQ §820 Q-S3) | persisted shapes: the christening and the crown contest; κ on the FP-46 roster |
+| OD-FC-46 | The menace (the owner's 10-17 "very simple generic option … so the DM can keep sovereignty over the story") — the token, the interface, the record, one crisis truth, one danger truth, readiness, requirement 24's extension, razing, menace vs phantom (re-ruling OD-FC-38's cn-5 reconciliation), menace vs calamity, the word, the verbs, the chain | RULED by delegation as `DESIGN_FP_ARCH_MN.md` §11 OD-MN-1..18 | a persisted shape (`spatialLedgers.menaces`); the draft constants on the FP-46 roster |
 
 ---
 
