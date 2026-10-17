@@ -137,3 +137,5 @@
 **Renown for every NPC (owner, 2026-10-17):** champions' renown is one instance of the ONE fame-and-regard model for every person — see `DESIGN_FP_PARTY_BRIEF.md` §5.
 
 **Meeting the party (owner, 2026-10-17):** champions and villains may seek out the party, with a purpose (employment, history, relationship or regard) or from curiosity alone, "Just for meeting"; designed with the owner's words in `DESIGN_FP_PARTY_BRIEF.md` §6, which also records the owner's delegation ("I leave all judgment to you") for this brief's design calls.
+
+**Inherent value (owner, 2026-10-17):** every champion's and villain's act carries the inherent value of `DESIGN_FP_PARTY_BRIEF.md` §8 (derived from what the act does and to whom), read by every actor through its alignment and personality; one model with the party's.
