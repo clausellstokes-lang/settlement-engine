@@ -1,0 +1,5 @@
+  lands AT N+1 WITH the census (⚠ C-TLF-3: the commodityFlow
+  writer-family census this line assumed DOES NOT EXIST — TR-6 AUTHORS
+  the shrink-only source-scan census, the T4/`storageMonths` shape with
+  an executed third-writer plant, asserting exactly the measured set in
+  the same commit).

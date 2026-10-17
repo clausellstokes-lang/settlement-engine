@@ -1,0 +1,492 @@
+{
+ "DESIGN_FP_INFORMATION": [
+  [
+   "R1 status header",
+   12
+  ],
+  [
+   "R2/S1 thesis plant (C1)",
+   24
+  ],
+  [
+   "vocab lure (§5)",
+   27
+  ],
+  [
+   "OD-FC-12 M9b row (§3.2.15)",
+   169
+  ],
+  [
+   "§2 HIDE row (§3.1.4 pointer)",
+   170
+  ],
+  [
+   "S20 §2 disclosure row (IN-0c landed)",
+   171
+  ],
+  [
+   "S1 §2 PLANT_WIRING row",
+   167
+  ],
+  [
+   "R8/S2 §2 race row",
+   174
+  ],
+  [
+   "S5 §2 Herald row",
+   176
+  ],
+  [
+   "S7 §2 sightPostures row",
+   178
+  ],
+  [
+   "S8/S10 §2 projections row",
+   179
+  ],
+  [
+   "S3 §2 gate-stack row",
+   180
+  ],
+  [
+   "S2 §2 absent-list race",
+   185
+  ],
+  [
+   "R9/S4 WAR_REASON_TYPES",
+   190
+  ],
+  [
+   "R3/C2 SEND-TWO first site",
+   196
+  ],
+  [
+   "R4/C3/S9/S13 believed axes first site",
+   201
+  ],
+  [
+   "R4 §3 lit-preconditions",
+   256
+  ],
+  [
+   "R3 §3 SEND-TWO",
+   266
+  ],
+  [
+   "S2/T10 §3 refugee degraded arm",
+   270
+  ],
+  [
+   "C1 seam contract one",
+   285
+  ],
+  [
+   "C14 seam contract three",
+   303
+  ],
+  [
+   "R5/C4 devotion two axes (code block)",
+   337
+  ],
+  [
+   "R4 §4 hard-blocked (code block)",
+   342
+  ],
+  [
+   "wave IN-0",
+   376
+  ],
+  [
+   "wave IN-0a",
+   381
+  ],
+  [
+   "C1 IN-0a model superseded",
+   386
+  ],
+  [
+   "vocab spent (§5)",
+   423
+  ],
+  [
+   "wave IN-0b",
+   461
+  ],
+  [
+   "wave IN-0c",
+   526
+  ],
+  [
+   "wave IN-0d",
+   591
+  ],
+  [
+   "§3.1.4 HIDE toll home",
+   597
+  ],
+  [
+   "wave IN-1",
+   635
+  ],
+  [
+   "R10/C14/S17 mirror inputs",
+   648
+  ],
+  [
+   "R15 IN-1 receipt pointer",
+   716
+  ],
+  [
+   "wave IN-2",
+   777
+  ],
+  [
+   "R4 IN-2 baits blocked",
+   794
+  ],
+  [
+   "S15 IN-2 restraint pointer",
+   802
+  ],
+  [
+   "lure flagship pointer (receipts)",
+   858
+  ],
+  [
+   "wave IN-3",
+   931
+  ],
+  [
+   "vocab measured/zeal (§5)",
+   945
+  ],
+  [
+   "R3 IN-3 SEND-TWO",
+   953
+  ],
+  [
+   "IN-3 verbs unmounted + §3.1.12",
+   964
+  ],
+  [
+   "§3.1.4 HIDE-as-answer pointer",
+   972
+  ],
+  [
+   "R6/C5/S6 PLANT_REFUSALS",
+   1003
+  ],
+  [
+   "R11 sweep endings",
+   1018
+  ],
+  [
+   "§3.1.3 witch-hunt grievance",
+   1021
+  ],
+  [
+   "wave IN-4",
+   1061
+  ],
+  [
+   "R12/C6 §3.2.7 double agent",
+   1077
+  ],
+  [
+   "S2/T10 IN-4 race half",
+   1080
+  ],
+  [
+   "wave IN-5",
+   1153
+  ],
+  [
+   "R7/S5 HERALD_SECTIONS",
+   1163
+  ],
+  [
+   "R13/T12 desk kinds",
+   1168
+  ],
+  [
+   "court_sat_still unbuilt",
+   1205
+  ],
+  [
+   "wave IN-6",
+   1262
+  ],
+  [
+   "R11 IN-6 sweep envelope pointer",
+   1302
+  ],
+  [
+   "R14/S15 J-INF-14",
+   1392
+  ],
+  [
+   "R3 J-INF-15",
+   1406
+  ],
+  [
+   "lure flagship §8",
+   1464
+  ],
+  [
+   "R15 §8 mirror sentence",
+   1470
+  ],
+  [
+   "court_sat_still §8",
+   1482
+  ],
+  [
+   "R3 §9 SEND-TWO",
+   1495
+  ]
+ ],
+ "DESIGN_FP_ARCH_IN": [
+  [
+   "status header + tier",
+   43
+  ],
+  [
+   "OD-FC-12 S2 M9b row",
+   58
+  ],
+  [
+   "R19 §1a history (S8/S11-S14/S16/S32)",
+   93
+  ],
+  [
+   "R19 §1b history (R1/R3/R5)",
+   106
+  ],
+  [
+   "R19 verified-absent paragraph",
+   114
+  ],
+  [
+   "R4 §2 lure flag row",
+   142
+  ],
+  [
+   "wave IN-0",
+   269
+  ],
+  [
+   "wave IN-0a",
+   282
+  ],
+  [
+   "R17/S12 pulseKernel size",
+   295
+  ],
+  [
+   "wave IN-0b",
+   334
+  ],
+  [
+   "wave IN-0c",
+   349
+  ],
+  [
+   "wave IN-0d",
+   369
+  ],
+  [
+   "§3.1.4 HIDE toll home (AIN)",
+   375
+  ],
+  [
+   "wave IN-1",
+   382
+  ],
+  [
+   "IN-1 as built (two axes unknown)",
+   468
+  ],
+  [
+   "wave IN-2",
+   470
+  ],
+  [
+   "R4/C3/C4 J-INA-3",
+   485
+  ],
+  [
+   "lure flagship (AIN)",
+   509
+  ],
+  [
+   "wave IN-3",
+   511
+  ],
+  [
+   "vocab measured/zeal (AIN)",
+   533
+  ],
+  [
+   "IN-3 verbs unmounted + §3.1.12 (AIN)",
+   534
+  ],
+  [
+   "wave IN-4",
+   536
+  ],
+  [
+   "S2/T10/T12 race as built + OD-FC-9",
+   546
+  ],
+  [
+   "wave IN-5",
+   561
+  ],
+  [
+   "R7/S5 HERALD six (AIN)",
+   563
+  ],
+  [
+   "court_sat_still (AIN)",
+   572
+  ],
+  [
+   "wave IN-6",
+   579
+  ],
+  [
+   "§3.1.4 collision-map pointer",
+   607
+  ],
+  [
+   "§3.1.4 pre-pin 1 pointer",
+   643
+  ],
+  [
+   "R4 pre-pin 2 re-opened",
+   649
+  ],
+  [
+   "R4 Q4 pointer",
+   694
+  ],
+  [
+   "R18/C7 J-INA-1",
+   705
+  ]
+ ],
+ "DESIGN_FP_ARCH_ES": [
+  [
+   "vocab rooted (§5)",
+   17
+  ],
+  [
+   "R20 status header + tier",
+   41
+  ],
+  [
+   "§3.1.8 W-OPS (OD-FC-4)",
+   87
+  ],
+  [
+   "R21/C11/S19 legRefs (code block)",
+   203
+  ],
+  [
+   "C13 §1 zero sub-keys pointer",
+   154
+  ],
+  [
+   "R29/S11 §2 names clear",
+   300
+  ],
+  [
+   "R22/C15/S18 ACQUIRE as built + exports",
+   746
+  ],
+  [
+   "R22 first-hand cap pointer (code block)",
+   817
+  ],
+  [
+   "§3.1.12 suspicion one derivation",
+   897
+  ],
+  [
+   "R23/C10 §3.11 no further code",
+   1148
+  ],
+  [
+   "R24/S16 §3.2.9 J-ES-13 release",
+   1196
+  ],
+  [
+   "§3.2.7 double agent (ES)",
+   1230
+  ],
+  [
+   "R28/C13 ES-5d carrier vs §1",
+   1431
+  ],
+  [
+   "wave ES-0",
+   1448
+  ],
+  [
+   "wave ES-1",
+   1494
+  ],
+  [
+   "wave ES-2",
+   1523
+  ],
+  [
+   "wave ES-3",
+   1569
+  ],
+  [
+   "wave ES-4",
+   1606
+  ],
+  [
+   "wave ES-5",
+   1652
+  ],
+  [
+   "ES-5a handshake + dispatch PLAUSIBLE",
+   1658
+  ],
+  [
+   "ES-5d stale",
+   1670
+  ],
+  [
+   "wave ES-6",
+   1714
+  ],
+  [
+   "wave ES-7",
+   1758
+  ],
+  [
+   "R25/C9 ES-Da wave count",
+   1787
+  ],
+  [
+   "§3.1.12 seam row 9",
+   1819
+  ],
+  [
+   "§3.2.7 seam row 9",
+   1819
+  ],
+  [
+   "§3.2.9 CR-ES-4",
+   2046
+  ],
+  [
+   "R25 colophon",
+   2106
+  ]
+ ]
+}

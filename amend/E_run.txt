@@ -1,0 +1,228 @@
+DESIGN_FP_POPULATIONS 67
+     16  R-1 status header
+     10  C-8 header VERIFIED claim
+     91  R-16 named-cast mercy
+    143  S-10 beat-id line drift
+    158  S-1b pointer K_food row
+    160  S-12 MIGRATION_REFUSALS + S-1a
+    161  S-1a conservation hand-built nets
+    162  §3.2.16 size-scaled speed (OD-FC-13)
+    168  named-cast floor pointer
+    169  commons voice row (S-10, OD-FC-3)
+    172  X25 FPQ-53 arrival record
+    175  S-4 Herald row
+    177  S-8 WHAT_PHRASES row pointer
+    178  S-13 disasters census pointer
+    203  X20 governor pointer (absent register)
+    209  R-13 R-28 second verb
+    218  S-5 decline promise pointer
+    241  §3.1.9 calamityArcEnabled flag row
+    245  R-3 artery hazard + OD-FC-18
+    254  SP-2 landed (lit-preconditions)
+    272  R-2 pull seam empty menu
+    274  R-4 pointer seam axes
+    296  R-15 + §3.1.3 + OD-FC-3 voice seam
+    329  §3.1.9 calamityArcs not minted (§4)
+    383  FV POP-1
+    392  R-4 + §3.1.21 POP-1 Force axes
+    408  §3.1.7 return column class
+    429  R-4 pointer mechanics (a)
+    443  R-5 posture POP-1
+    463  X3/X5 labor_compact + trigger
+    468  C-3 turn-back rides departure line
+    486  S-16 organic hot band PLAUSIBLE
+    512  FV POP-2
+    516  X7 riot index shift
+    529  §3.1.3 POP-2 force
+    566  R-10 levy call
+    567  C-1 pointer levy grade
+    634  FV POP-3
+    734  FV POP-4 + §3.1.9
+    752  OD-FC-28 disease_pressure
+    764  R-8 disaster cause
+    774  R-7 substrate gate
+    785  J-POP-14 pointer belief posture
+    854  FV POP-5a
+    950  FV POP-5b
+    960  R-6 levy column
+    967  C-1 institution evacuating
+    983  S-1 destination arm blocked
+    996  R-21 treaty inputs
+    994  §3.2.16 tribute_population (OD-FC-13)
+   1005  Counterforce sentence pointer
+   1025  booksOf posture POP-5b
+   1031  R-10 pointer clock
+   1071  R-6 dossier line
+   1079  FV POP-6
+   1116  R-11 POP-6(f)
+   1133  R-12 POP-6(h)
+   1138  R-12 pointer force/counterforce
+   1175  FV POP-7
+   1274  R-11 pointer J-POP-12
+   1283  R-9 + OD-FC-40 J-POP-14
+   1290  §3.1.7 pointer J-POP-15
+   1335  OD-FC-28 pointer §7
+   1350  R-14 Evidence Law §8
+   1364  R-6 pointer §8 sentence
+   1377  §9 spine order superseded
+   1384  S-17 lighting premise
+DESIGN_FP_ARCH_POP 49
+      9  status header
+     19  R-16 pointer S1
+     21  S-4/X20 S3 mint site
+     36  §3.1.3 S18 composite
+     46  S-4 S28 floors
+     48  S-8 S30 pointer
+     61  §3.1.7 LG §C ownership
+     60  R-18 pointer §46c
+     68  R-28 still open
+     71  R-7 decline promise
+    101  §3.1.7 RF-2 returning
+    115  S-9 / §3.2.14 RF-3
+    145  OD-FC-18 believedMigration preconditions
+    146  OD-FC-3 commonsArc preconditions
+    148  §3.1.9 calamityArc flag row
+    194  §3.1.9 calamityArcs §3 model
+    201  §3.1.7 travelClass line
+    245  §3.1.7 lifecycle pointer
+    278  §3.3.8 size reality
+    281  FV POP-1 (ARCH)
+    299  §3.1.7 mechanics returning
+    322  R-17 Req 14 POP-1
+    328  R-20 CW-0 rows degraded
+    330  FV POP-2 (ARCH)
+    356  R-10 levy collision
+    351  R-17 ptr POP-2
+    359  FV POP-3 (ARCH)
+    377  R-17 ptr POP-3
+    379  FV POP-4 (ARCH)
+    387  R-7 substrate gate ARCH
+    395  OD-FC-28 ARCH POP-4
+    399  R-17 ptr POP-4
+    402  FV POP-5a (ARCH)
+    420  R-17 ptr POP-5a
+    425  FV POP-5b (ARCH)
+    428  S-11 levy site POP-5b
+    443  R-20/R-21 treaty pins degraded
+    449  R-17 ptr POP-5b
+    454  FV POP-6 (ARCH)
+    463  R-11/R-12/R-28 POP-6 files
+    476  R-17 ptr POP-6
+    481  FV POP-7 (ARCH)
+    494  chain 3 commons cert row
+    508  R-20/R-4 seam contract 1
+    531  booksOf seam 4
+    563  R-18 C-POPF-2 absent
+    572  R-19 + §3.1.7 Q1
+    579  chain 3 Q2
+    595  R-9 + OD-FC-40 Q4
+DESIGN_FP_INTERIOR 71
+     25  status header
+     53  S-1 pointer §0 item 1
+    114  S-13 address rot §1b
+    139  R-20 W-SEAT note §1b
+    156  S-3 pointer §1c push-indirection
+    182  R-6 legitimacy passive clock row 1
+    187  §5 contradiction 7 row 6
+    190  R-7 commons row 9 + §3.1.3
+    191  row 10 four books pointer
+    192  INT-5 deferral stands row 11
+    194  §5 bond register row 13
+    195  R-8 reframe row 14
+    202  S-3 pointer row 21
+    212  S-7 oath-holder drama row
+    214  R-8 interventionEnabled
+    228  R-12 pointer seat_held
+    232  OD-FC-26 disposition ratchet
+    236  R-19 pointer ambitious
+    242  §3.3.3 posture + preconditions
+    260  INT-4 substrates dark (flag table)
+    277  R-16 quiet_local + static
+    297  OD-FC-39 lighting order
+    304  R-10 booksOf shape
+    311  posture ptr GR-2/WF-3
+    392  §3.3.11/S-11 émigré no ledger + OD-FC-25
+    426  FV INT-1
+    434  posture ptr INT-1 seams
+    485  R-11 posture-wide shift
+    520  FV INT-2
+    585  posture ptr INT-2
+    604  FV INT-3a + chain 4
+    637  S-8 installed successor pointer
+    648  R-3 + §3.1.10 + R-5 re-read
+    667  STRUCK reaffirm pin INT-3a
+    690  posture ptr INT-3a
+    696  FV INT-3b
+    708  R-19 ambitious label
+    715  S-11 pointer mechanism
+    771  R-4 STRUCK INT-3 endings
+    777  FV INT-4
+    801  S-17 tribute_strain homonym
+    818  R-13 + §3.1.3 commons term
+    833  S-16 pHold budget rally
+    873  posture ptr INT-4
+    879  §3.1.3 cap pointer INT-4 bands
+    889  FV INT-5
+    985  FV INT-6
+   1035  posture ptr INT-6 price
+   1043  §3.1.3 burial relief
+   1074  §3.1.10 pointer heir burial
+   1118  posture ptr INT-6 decision
+   1140  FV INT-7 + chain 4
+   1162  §5 item 6 token count
+   1177  R-4 STRUCK INT-7 floor
+   1223  R-6 pointer INT-7 clock
+   1225  R-18 band edges
+   1232  FV INT-8
+   1260  R-9 two cures
+   1359  §3.1.10 row 3
+   1424  §3.1.3 row 8 FAITH omen
+   1481  R-12 seat_held orphan
+   1502  expose verb
+   1569  R-5 pointer J-INT-10
+   1623  §5 item 8 J-INT-15
+   1640  §8 token count pointer
+   1653  req 22c Evidence Law §9
+   1664  STRUCK §9 son kept
+   1681  R-18 pointer §9 Crisis
+   1691  §10 sequencing superseded
+   1725  R-15 two deltas
+   1729  S-4 commons LIVE fence
+DESIGN_FP_ARCH_INT 37
+      9  status header
+     17  AINT §0 W-SEAT
+     27  R-6 pointer S1
+     35  R-7 S9 commons
+     39  R-8 S13 reframe
+     44  R-9 S18
+     52  §3.3.8 S26 sizes
+     73  S-1/C2 R1 four books
+    120  R-17 + OD-FC-26 R6
+    138  R-1 INT-3b LANDED overclaim (§1b)
+    145  R-2 precondition contradiction
+    186  R-16 §2 table quiet_local
+    293  FV INT-1 (ARCH)
+    305  S-2 budget +80
+    309  §5 item 10 war-arm receipt dark
+    325  SP-4 landed cycle pin
+    342  FV INT-2 (ARCH)
+    358  R-16 pointer INT-2 fences
+    381  §3.3.8 settlementStrategy
+    384  FV INT-3a (ARCH)
+    396  §3.1.10 pact re-read
+    415  R-1 + FV INT-3b bullet
+    424  STRUCK reaffirm pin (ARCH)
+    435  FV INT-4 (ARCH)
+    446  R-7 + §3.1.3 ARCH INT-4
+    470  FV INT-5 (ARCH)
+    500  FV INT-6 (ARCH)
+    535  R-14 INT-6 Req 14
+    542  FV INT-7 (ARCH)
+    555  §8 token count ARCH
+    576  FV INT-8 (ARCH)
+    588  R-9 ARCH two cures
+    609  build order INT-3b pointer
+    657  R-5 seam 10
+    661  R-12 seam 11
+    684  Q1 pointer
+    722  §3.3.11 Q4

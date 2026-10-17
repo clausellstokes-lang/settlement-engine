@@ -1,0 +1,612 @@
+{
+ "DESIGN_FP_ARCHITECTURE": [
+  [
+   "STATUS + R1 (§5.1, X2)",
+   44
+  ],
+  [
+   "§2a row 3 (sealing header)",
+   38
+  ],
+  [
+   "R5 see-ref (header §10 verbatim)",
+   16
+  ],
+  [
+   "R2 see-ref (EM fold banner 28·10·73)",
+   40
+  ],
+  [
+   "R3 + S1/S2 (L1 kernel \"ever\")",
+   89
+  ],
+  [
+   "S6 (L10 provenance 6 of 86)",
+   220
+  ],
+  [
+   "§5 register: pin/seal, doctrine sheet, tithe, phantom policy",
+   218
+  ],
+  [
+   "S5 (TERM_CATALOG 12/8)",
+   241
+  ],
+  [
+   "§3.1.7 + §5 returning→column_return (first use)",
+   369
+  ],
+  [
+   "S3 (§2b item 5 five members)",
+   421
+  ],
+  [
+   "S9 + S1/S2 (§2c sizes)",
+   451
+  ],
+  [
+   "INT-7 see-ref (§3 lane file)",
+   476
+  ],
+  [
+   "§5 register embattled (first use, flag row 60)",
+   542
+  ],
+  [
+   "§6 overturned: lighting owner-held",
+   632
+  ],
+  [
+   "§5 register kmScale (first use)",
+   688
+  ],
+  [
+   "OD-FC-20 CR-WC-9 (§4)",
+   704
+  ],
+  [
+   "§3.1.9 calamityArcs row",
+   722
+  ],
+  [
+   "returning see-ref (§4 POP fields)",
+   757
+  ],
+  [
+   "§3.2.21 INVENTORY (§5 heading)",
+   859
+  ],
+  [
+   "EP-18 (EP placement)",
+   925
+  ],
+  [
+   "§6 overturned: CQ2 early motion",
+   946
+  ],
+  [
+   "R2 + R12 + §3.3.11 (09-23 progress block)",
+   948
+  ],
+  [
+   "§3.3.11 see-ref (08-09 block)",
+   950
+  ],
+  [
+   "§6 overturned: Edit-verb clauses (first site)",
+   987
+  ],
+  [
+   "S10 + SP-CW R-24 + §3.3.11 (SP-C BLOCKED ON Q1)",
+   1064
+  ],
+  [
+   "R8 WF-2 religious (SP-D charter)",
+   1080
+  ],
+  [
+   "§3.1.1 see-ref (GR-3 TR-5 producers)",
+   1168
+  ],
+  [
+   "R8 HB-2 first coupling row",
+   1558
+  ],
+  [
+   "S9 see-ref (IN-4 812)",
+   1495
+  ],
+  [
+   "R8 TR-5 five + §3.1.1 + §3.1.2/OD-FC-2 + §3.3.11",
+   1734
+  ],
+  [
+   "§3.1.7 WC-0 column union",
+   1818
+  ],
+  [
+   "R8 WC-2 warStanceOf + §3.2.19",
+   1829
+  ],
+  [
+   "§5 register crossing (first use)",
+   1834
+  ],
+  [
+   "§5 register bond (first bare use)",
+   1841
+  ],
+  [
+   "§5 register partial (WC-9)",
+   1908
+  ],
+  [
+   "embattled see-ref (WC-12)",
+   1934
+  ],
+  [
+   "R8 WF-2 religious (WF-2 charter)",
+   2010
+  ],
+  [
+   "§3.1.5 one tithe (WF-7)",
+   2052
+  ],
+  [
+   "§5 register sack lure",
+   2077
+  ],
+  [
+   "returning see-ref (POP-1)",
+   2089
+  ],
+  [
+   "§3.1.9 POP-4 folds into PG",
+   2145
+  ],
+  [
+   "R8 INT-7 subsystemRowsInterior",
+   2280
+  ],
+  [
+   "returning see-ref (§6 POP J)",
+   2454
+  ],
+  [
+   "OD-FC-40 see-ref (§6 POP Q6)",
+   2458
+  ],
+  [
+   "see-ref subsystemRowsInterior (§6 INT)",
+   2464
+  ],
+  [
+   "§5 register ERA-PRESET-ELIGIBLE (§7 heading)",
+   2484
+  ],
+  [
+   "S16 knowledge desk",
+   2571
+  ],
+  [
+   "R4 + S8 seam row 32",
+   2705
+  ],
+  [
+   "EP-19 dormancy counts",
+   2723
+  ],
+  [
+   "R4 see-ref (twelfth prefix)",
+   2761
+  ],
+  [
+   "R5 + S11 §10 verbatim",
+   2771
+  ],
+  [
+   "R6 §10.6 operationRegistry",
+   2832
+  ],
+  [
+   "lighting see-ref (§10.10)",
+   2858
+  ],
+  [
+   "OD-FC-20 see-ref (§11 CR-WC-9)",
+   2891
+  ],
+  [
+   "App. A Q1 CR-FP-3",
+   2985
+  ],
+  [
+   "App. A Q3 CR-FP-4",
+   2992
+  ],
+  [
+   "App. A Q4 CR-FP-5",
+   2997
+  ],
+  [
+   "App. A Q6 CR-FP-6 / OD-FC-40",
+   3001
+  ],
+  [
+   "App. A Q8 CR-FP-8 dangling",
+   3011
+  ],
+  [
+   "App. A Q10 CR-FP-10",
+   3021
+  ],
+  [
+   "App. A CR-FP-12 moot",
+   3037
+  ],
+  [
+   "CQ2 see-ref (STANDING)",
+   3047
+  ],
+  [
+   "R9 + §5.4 parked list",
+   3077
+  ],
+  [
+   "S7 envoyArrived",
+   3091
+  ],
+  [
+   "S6 see-ref (§12.0 item 4)",
+   3093
+  ],
+  [
+   "S17 + LG (§12.0 census)",
+   3098
+  ],
+  [
+   "dark-layer law see-ref",
+   3111
+  ],
+  [
+   "R7 home-only (§12.2 row 4)",
+   3120
+  ],
+  [
+   "R7 see-ref (row 5)",
+   3121
+  ],
+  [
+   "R7 see-ref (row 7)",
+   3123
+  ],
+  [
+   "S7 see-ref (seal 8)",
+   3124
+  ],
+  [
+   "§3.2.19 + §3.1.1 + §3.1.9 beside J-EM-6",
+   3143
+  ],
+  [
+   "OD-FC-20 + HB Q1 beside J-EM-9",
+   3146
+  ],
+  [
+   "R10 + X1 J-EM-12",
+   3149
+  ],
+  [
+   "R3 see-ref (J-EM-13)",
+   3150
+  ],
+  [
+   "J-EM-14 superseded",
+   3151
+  ],
+  [
+   "R12 HB-3 row",
+   3221
+  ],
+  [
+   "R12 see-ref (HB-5 row)",
+   3223
+  ],
+  [
+   "§3.2.19 WC-2 row",
+   3229
+  ],
+  [
+   "§5 addendum REINFORCE (WC-4 row)",
+   3231
+  ],
+  [
+   "R10 see-ref (§12.5)",
+   3255
+  ],
+  [
+   "OD-FC-20 see-ref (§12.5)",
+   3255
+  ],
+  [
+   "R12 see-ref (§12.5)",
+   3255
+  ],
+  [
+   "App. A §12.7.1 launch line",
+   3267
+  ],
+  [
+   "App. A §12.7.2 HB Q1",
+   3268
+  ],
+  [
+   "S3/S4 + §3.2.20 (§12.8 35 keys)",
+   3276
+  ],
+  [
+   "§2a colophon",
+   3304
+  ],
+  [
+   "§5 register SEAM-n (§13 heading)",
+   3307
+  ],
+  [
+   "OD-FC-37 SEAM-2 (X13/X14)",
+   3317
+  ],
+  [
+   "bond see-ref (court bonds)",
+   3321
+  ],
+  [
+   "R11 §13 order clause",
+   3323
+  ],
+  [
+   "FV SEAM-0 (§13, no program-volume home)",
+   3313
+  ],
+  [
+   "FV SEAM-1",
+   3315
+  ],
+  [
+   "FV SEAM-2",
+   3317
+  ],
+  [
+   "FV SEAM-3",
+   3319
+  ]
+ ],
+ "DESIGN_FP_ARCH_CN": [
+  [
+   "STATUS + R13 (§5.8)",
+   10
+  ],
+  [
+   "OD-FC-38 see-ref (slotting)",
+   50
+  ],
+  [
+   "S14 SIEGE_MAX_AGE address",
+   107
+  ],
+  [
+   "§3.3.9 WarFaithTab",
+   113
+  ],
+  [
+   "§5 register CONDITION_BANDS",
+   117
+  ],
+  [
+   "X15 law 2 beside",
+   134
+  ],
+  [
+   "§5.9 flag count",
+   181
+  ],
+  [
+   "FV cn-1",
+   214
+  ],
+  [
+   "FV cn-2",
+   238
+  ],
+  [
+   "FV cn-3",
+   261
+  ],
+  [
+   "X15 cn-3 RULED",
+   264
+  ],
+  [
+   "FV cn-4 + R16 + X16",
+   289
+  ],
+  [
+   "FV cn-5 + X17",
+   332
+  ],
+  [
+   "FV cn-6",
+   367
+  ],
+  [
+   "OQ-1 inside OD-FC-38",
+   433
+  ]
+ ],
+ "DESIGN_FP_ARCH_LG": [
+  [
+   "STATUS (LG)",
+   5
+  ],
+  [
+   "OD-FC-38 (LG)",
+   7
+  ],
+  [
+   "FV LG-0",
+   111
+  ],
+  [
+   "FV LG-1",
+   114
+  ],
+  [
+   "FV LG-2",
+   117
+  ],
+  [
+   "FV LG-3",
+   120
+  ],
+  [
+   "FV LG-4",
+   122
+  ],
+  [
+   "FV LG-5",
+   124
+  ],
+  [
+   "FV LG-6",
+   129
+  ],
+  [
+   "FV LG-7",
+   132
+  ],
+  [
+   "FV LG-8",
+   134
+  ],
+  [
+   "FV LG-9..12",
+   136
+  ],
+  [
+   "FV LG-13+",
+   145
+  ],
+  [
+   "§3.2.16 size-scaled speed",
+   164
+  ],
+  [
+   "R17 + §3.1.7 (§C)",
+   179
+  ],
+  [
+   "§D vs J-EM-12",
+   189
+  ]
+ ],
+ "DESIGN_FP_ARCH_PG": [
+  [
+   "STATUS + R13 + OD-FC-38 (PG)",
+   10
+  ],
+  [
+   "§3.1.9 one plague truth names POP-4",
+   27
+  ],
+  [
+   "OD-FC-38 see-ref (slot)",
+   54
+  ],
+  [
+   "§5 register pin (first use)",
+   75
+  ],
+  [
+   "FV pg-0",
+   112
+  ],
+  [
+   "FV pg-1",
+   135
+  ],
+  [
+   "§3.1.7 column union (pg-1 ruling 2)",
+   162
+  ],
+  [
+   "FV pg-2",
+   200
+  ],
+  [
+   "FV pg-3",
+   252
+  ],
+  [
+   "§3.1.21 afflictionBand",
+   276
+  ],
+  [
+   "FV pg-4",
+   316
+  ],
+  [
+   "§3.3.2 PG prefix",
+   364
+  ]
+ ],
+ "DESIGN_FP_ARCH_MF": [
+  [
+   "R15 + §5 FABRIC rename",
+   3
+  ],
+  [
+   "STATUS + R13 + OD-FC-38 (MF)",
+   9
+  ],
+  [
+   "§5.9 August count",
+   165
+  ],
+  [
+   "R14 + X22 + S13 + §5 kmScale",
+   196
+  ],
+  [
+   "FV MF-1",
+   210
+  ],
+  [
+   "FV MF-2",
+   211
+  ],
+  [
+   "FV MF-3",
+   212
+  ],
+  [
+   "FV MF-4",
+   213
+  ],
+  [
+   "FV MF-5",
+   214
+  ],
+  [
+   "FV MF-6",
+   215
+  ],
+  [
+   "FV MF-7",
+   216
+  ],
+  [
+   "kmScale see-ref (§11.12 a)",
+   433
+  ]
+ ]
+}

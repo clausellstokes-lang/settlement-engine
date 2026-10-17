@@ -1,0 +1,25 @@
+- **THE WR-10 DISCHARGE — RE-CHARTERED ON MEASURED STATE (C-TLF-2; the
+  drafted instructions rotted, the design did not):** (1) TR-5 ADOPTS
+  the three GRAMMAR-minted rows at `peaceTermsCatalog.js:285-287`
+  (`exclusivity`, `market_access`, `toll_exemption` — spelling
+  canonical in GRAMMAR §4) and mints ONLY the genuinely-absent
+  remainder of its five; the draft spellings are FORBIDDEN tree-wide
+  by `sovereigntyBundleWr10.test.js` PIN 2 and are written NOWHERE,
+  comments included. (2) The tripwire is ALREADY TRUE (GR-3;
+  `sovereigntyBundle.js:56-58`) — no pin retirement exists to execute;
+  instead TR-5's commit CARRIES THE TWO DESIGNED FLIPS: PIN 5 ("the
+  trade-rights rows stay producer-less until TR-5 lands") and
+  `peaceTermsGrantTerms.test.js:273-274` both red the day TR-5 lands
+  BY DESIGN — their re-pointing is priced into the wave, with the
+  reachability obligation moving into TR-5's own pins. (3) The war
+  volume's CR-WR10-B blockquote is AMENDED "HALF DISCHARGED… TR-5
+  STILL OWED" → "DISCHARGED", NEVER deleted (11 consumer files);
+  `DESIGN_FP_ARCHITECTURE.md:2349`'s stale retire-and-delete
+  instruction gets the same amendment (both are `docs/**.md` writes
+  under the CLAIM_RE law, and both ride TR-5's OWN commit, not this
+  sitting). (4) `peaceTerms.js` stands at 797/800 — any head seam ≥ 4
+  effective lines is leaf-first or the wave STOPs; the rows land in
+  `peaceTermsCatalog.js`. (5) Scope (executors + producers + the
+  demand trigger + the `realmPressure01` dead-consumer landing) is
+  UNCHANGED. A TR-5 that lands rows without THIS discharge is
+  REJECTED.

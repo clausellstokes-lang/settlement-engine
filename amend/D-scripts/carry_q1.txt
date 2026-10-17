@@ -1,0 +1,5 @@
+- **Q1 — Pre-spine partial build? ⏱ THE PREMISE MOVED (TL-F round):**
+  TR-1, TR-2, TR-4 and TR-9's contract module measured buildable at the
+  survey; the TR-3/5/6/7/8 spine blockers are all SATISFIED since
+  08-05/08-06 — the buildability list re-derives at compile from the
+  INTRA-TR chain + C-TLF-1's bill, not from spine absence. RECOMMENDATION: hold SPINE §5

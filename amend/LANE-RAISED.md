@@ -1,0 +1,43 @@
+# Items the amendment lanes raised for the chair (ruled in the fold §9 under the 10-16 delegation)
+- A1 req range 1–22 → 1–23: FIXED in the fold and SPINE.
+- A2 CW-2x ratified as wave #59 at ARCH:2316 (the SP-CW reader said "recorded nowhere"); Q4 (the braided item's standing) unruled → rule in §9.
+- A3 R-24 (SP-CW) targets ARCHITECTURE → lane H.
+- C1 ES-5d minted `missionCreditEvents` sub-key vs ES §1 zero-new → §3.2.22 (done).
+- C2 IN-ES findings cite ledger lines (INFO/ARCH_IN/ARCH_ES shorter by 54/72/159) → note only.
+- B1 J-GR-14a UNBUILT not built-dark → §2 fixed.
+- B2 `reparations` producer unslotted → rule: it rides J-GR-14a's war-end lens row (GRAMMAR's), slot = chain 2 (the auxiliary) where war-end terms are first felt.
+- B3 WF-4 / THE ATTRIBUTED EDIT in no §6 chain → rule: chain 5 (faith's felt core) carries THE ATTRIBUTED EDIT at WF-4's position.
+- B4 `missionary_access`: GRAMMAR "moves believer-share bands" vs FAITH "a gate only" → rule: FAITH's (a gate); GRAMMAR's sentence bracketed by lane B as CLARIFIED — confirm.
+- B5 WF-9's done gate bypassed by LIT-1a as GR-7 by the lighting word → rule: same as OD-FC-6 — WF-9 lands as instrumentation in the next WF unit.
+- B6 GRAMMAR, ARCH_GR, FAITH recreated from base (were ` D` in the stale tree) → landing by pathspec.
+- D1 ARCH_TR base: ledger copy had the 08-15 sitting hunks master lacks → carried as ADDED brackets (nothing lost). OK.
+- D2 TRADE §3 Seam One "those terms DO NOT EXIST", the flag table, the dependency ruling deliberately NOT bracketed: master's PIN-6 and tradeConvergenceContract.walker parse them exactly once → §9 notes the doc-parsing-pin hazard.
+- D3 `sinceTick` lossy? → rule: NOT lossy (the reader's pick) — PLAUSIBLE, confirm at EC-1.
+- E1 FPQ-53 refugees cannot enter IN-4/2's race (landing deletes the column) → rule: slot in chain 3 (POP-1 + the clearing) as the race's refugee arm (IN-4/2 reads `RACE_ARRIVAL_KINDS` + refugee columns before deletion).
+- E2 INT §6 row 11 `seat_held` fix assigned to INFORMATION, never accepted → rule: INFO's IN-5 desk owns it (the knowledge desk's seat line); slot chain 1.
+- E3 POP-2's levy refusal has nothing to refuse (conscription is a continuous rate, no discrete levy call) → rule: re-cut as a DAMPER on the conscription rate (the commons' refusal lowers the rate band), no levy act minted.
+- E4 vocabulary: `repudiated_by_heir` (INT) vs `disavowed_by_succession` (GRAMMAR) = one event → GRAMMAR's name; INT bracket. `tribute_strain` is an incident type → INT-4's burden word is `treaty_burden`.
+- E5 §3.2.16 "POP-5b's conservation identity" → the identity lives in POP-1/POP-5a; corrected to "POP-1's conservation identity, consumed by POP-5b's permit".
+- G1 `column_return` covers POP-1's unlanded class only; WC's landed `veteran_return` stands → CONFIRMED (landed names never rename).
+- G2 `LEARN_RATES` at habitCurve.js:101 (not :102); `spatialUsage.js:184` embattlement row not found → brackets cite correctly; fold §3.1.13/§3.1.16 receipts corrected.
+- F-EP1 EP-1's first-visible sign: the findings' "a re-advanced interval differs" stands (the brief's "instrumentation" was wrong for EP-1) → CONFIRMED as bracketed.
+- F-EP2 EP-4 "none on any advance; per-click generator sign" → CONFIRMED.
+- F-EP3 OD-FC-31 (a) pre-mint vs J-EP-12's strike of `current` (the flag-dark leak surface) → RULE: the pending epoch is persisted ONLY under the lit flag as `pausedAdvance.advanceEpoch`'s sibling `pendingAdvanceEpoch` on the SAME record J-EP-12 kept (the cursor), absent when dark (no leak surface: the dark-identity fence covers the key's absence), re-minted by undo; J-EP-12's objection was to a persisted `current` under a DARK flag — not revived.
+- F-EP4 OD-FC-32 has no EP wave → SLOT: EP-6 "THE REMEMBERED UNDO" (persist the newest two undo entries), after EP-4, before EP-5's copy; recorded in EP §4 by bracket at landing of the chain that lights EP (recorded here; the never-deferred law satisfied by this slot).
+- F-WY1 OD-FC-22 "the map's implied scale" = legacy read to the bit (distanceRead.js:607-612), so the recommended default would make a scaled world indistinguishable from a legacy one → RULING CHANGED: the default is the code's FMG default (`DEFAULT_KM_SCALE 3`), signed at WY-3's soak with MODE_SPEEDS; FP-10's "each map's implied scale" is amended; the creation flow may override per world.
+- F-WY2 WY-8b reuses armyStrength's CONDITION_BANDS, which derives from `supplyIntegrity` → CONFIRMED: under OD-FC-21 the scalar is derived from the F9 stock, so one ladder reads one derived scalar.
+- F-HB1 fold §2 HABIT row cited OD-FC-24 for the flagship → fixed to OD-FC-23.
+- F-HB2 `LEARN_RATES` :101 → fixed in the fold.
+- F-HB3 `firmness` extends to the §3g receipt's `hold:` field (one rung, one name) → CONFIRMED.
+- F-HB4 every unlanded `doctrine*` token renames at minting (`habitSheet`, `habitSheetOf`, `habitTapEnabled`, `HABIT_SHEET_ADOPT`); only `believedDoctrineEnabled` keeps its name (three volumes key on it) → RULED.
+- F-HB5 HB-3's charter drops the `treaty.habitEpisode` carry pin until close 2 asks (OD-FC-24) → RULED.
+- F-HB6 HB-8's tier: `doctrineTapActive` gates on `espionageActive`, so "reachable the day this lands" is false; DEGRADED ARM = dark → RULED.
+- F-HB7 the commission fold = `processLies`' `commissionedPlants` (informationStatecraft.js:549-658) → CONFIRMED.
+- H1 §13's SEAM-0..3 given FIRST-VISIBLE lines (no program-volume home) → CONFIRMED.
+- H2 OD-FC-20 (parked) overrides J-EM-9's "signed" reading of CR-WC-9 → CONFIRMED (the grant pre-dates the escalation).
+- H3 UNMEASURED lines (cn-2/5/6, LG-0/2/6/9+, SEAM-2/3, pg-4, pg-2's decay tier) → stand; measured at each wave's build.
+- H4 Refinement 18 (ODQ §934.84's LIT-2 promise) → recorded in ODQ §934.91 (this program's entry), not edited in place.
+- H5 CR-FP-8 fired (GR-2 complete), no slot → SLOT: the next GRAMMAR unit (with GR-7's instrumentation).
+- H6 CN cn-5's conversion valve depends on the unminted pin → its trigger is re-keyed to seal 6's `letSiegeFall` fork (§3.1.20); recorded at cn-5.
+- H7 SEAM-0 (SP-C's appetite mount) owed, no slot under FP-40 → SLOT: the head of chain 2 (allies' send/keep decisions read appetite first).
+- H8 CN OQ-1 stays inside OD-FC-38 → paid-surface sub-question RULED: command powers are premium (the Edit Mode surface, U16); AUTHOR is not priced apart from ORDER.

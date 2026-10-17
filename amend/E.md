@@ -1,0 +1,256 @@
+# LANE E worklog — POPULATIONS · ARCH_POP · INTERIOR · ARCH_INT (amendment lane, 2026-10-16)
+
+## Setup
+- Base: kit volumes-master/ (POPV 1392, ARCH_POP 605, INT 1747, ARCH_INT 739 lines). volumes/ vs volumes-master/ differ only by in-line re-cites (same line counts), so findings line numbers (POP read volumes/, INT read volumes-master/) are valid master lines.
+- Destination: POPULATIONS and INTERIOR were absent in the worktree (" D"); cp created them. ARCH_POP/ARCH_INT overwritten by cp of base (ledger copies differed only at the re-cite lines).
+
+## Run (2026-10-16, resumed after the session limit; destinations re-measured = base, zero brackets had landed)
+- Script: amend/E_apply.py (exact-string anchors asserted unique in base; 6 anchors failed on the first run — line-wrap/punctuation mismatches — fixed and re-run; 1 placement fix: the POP-5b dossier bracket moved outside the closing quote).
+- Verification: the script removes every inserted chunk and asserts byte-equality with base — PASSED for all four files (CONFIRMED, executed).
+- Word-diff residue: `git diff --no-index --word-diff=porcelain base dest | grep -c '^-[^-]'` = 1/2/3/0 (POPV/ARCH_POP/INT/ARCH_INT); every hit is a punctuation-adjacent token split by an inline bracket (e.g. `levied),` → `levied) [..],`), not removed text — the reconstruction assert is the proof.
+- Bracket counts (`grep -o '2026-10-16 (coherence fold'`): POPV 70 · ARCH_POP 48 · INT 79 · ARCH_INT 39. FIRST-VISIBLE lines: 8 · 8 · 9 · 9 (every wave charter: POP-1/2/3/4/5a/5b/6/7; INT-1/2/3a/3b/4/5/6/7/8).
+
+## Applied edits (id → destination line at insertion)
+### DESIGN_FP_POPULATIONS (67)
+- R-1 status header → :16 — applied
+- C-8 header VERIFIED claim → :10 — applied
+- R-16 named-cast mercy → :91 — applied
+- S-10 beat-id line drift → :143 — applied
+- S-1b pointer K_food row → :158 — applied
+- S-12 MIGRATION_REFUSALS + S-1a → :160 — applied
+- S-1a conservation hand-built nets → :161 — applied
+- §3.2.16 size-scaled speed (OD-FC-13) → :162 — applied
+- named-cast floor pointer → :168 — applied
+- commons voice row (S-10, OD-FC-3) → :169 — applied
+- X25 FPQ-53 arrival record → :172 — applied
+- S-4 Herald row → :175 — applied
+- S-8 WHAT_PHRASES row pointer → :177 — applied
+- S-13 disasters census pointer → :178 — applied
+- X20 governor pointer (absent register) → :203 — applied
+- R-13 R-28 second verb → :209 — applied
+- S-5 decline promise pointer → :218 — applied
+- §3.1.9 calamityArcEnabled flag row → :241 — applied
+- R-3 artery hazard + OD-FC-18 → :245 — applied
+- SP-2 landed (lit-preconditions) → :254 — applied
+- R-2 pull seam empty menu → :272 — applied
+- R-4 pointer seam axes → :274 — applied
+- R-15 + §3.1.3 + OD-FC-3 voice seam → :296 — applied
+- §3.1.9 calamityArcs not minted (§4) → :329 — applied
+- FV POP-1 → :383 — applied
+- R-4 + §3.1.21 POP-1 Force axes → :392 — applied
+- §3.1.7 return column class → :408 — applied
+- R-4 pointer mechanics (a) → :429 — applied
+- R-5 posture POP-1 → :443 — applied
+- X3/X5 labor_compact + trigger → :463 — applied
+- C-3 turn-back rides departure line → :468 — applied
+- S-16 organic hot band PLAUSIBLE → :486 — applied
+- FV POP-2 → :512 — applied
+- X7 riot index shift → :516 — applied
+- §3.1.3 POP-2 force → :529 — applied
+- R-10 levy call → :566 — applied
+- C-1 pointer levy grade → :567 — applied
+- FV POP-3 → :634 — applied
+- FV POP-4 + §3.1.9 → :734 — applied
+- OD-FC-28 disease_pressure → :752 — applied
+- R-8 disaster cause → :764 — applied
+- R-7 substrate gate → :774 — applied
+- J-POP-14 pointer belief posture → :785 — applied
+- FV POP-5a → :854 — applied
+- FV POP-5b → :950 — applied
+- R-6 levy column → :960 — applied
+- C-1 institution evacuating → :967 — applied
+- S-1 destination arm blocked → :983 — applied
+- R-21 treaty inputs → :996 — applied
+- §3.2.16 tribute_population (OD-FC-13) → :994 — applied
+- Counterforce sentence pointer → :1005 — applied
+- booksOf posture POP-5b → :1025 — applied
+- R-10 pointer clock → :1031 — applied
+- R-6 dossier line → :1071 — applied
+- FV POP-6 → :1079 — applied
+- R-11 POP-6(f) → :1116 — applied
+- R-12 POP-6(h) → :1133 — applied
+- R-12 pointer force/counterforce → :1138 — applied
+- FV POP-7 → :1175 — applied
+- R-11 pointer J-POP-12 → :1274 — applied
+- R-9 + OD-FC-40 J-POP-14 → :1283 — applied
+- §3.1.7 pointer J-POP-15 → :1290 — applied
+- OD-FC-28 pointer §7 → :1335 — applied
+- R-14 Evidence Law §8 → :1350 — applied
+- R-6 pointer §8 sentence → :1364 — applied
+- §9 spine order superseded → :1377 — applied
+- S-17 lighting premise → :1384 — applied
+### DESIGN_FP_ARCH_POP (49)
+- status header → :9 — applied
+- R-16 pointer S1 → :19 — applied
+- S-4/X20 S3 mint site → :21 — applied
+- §3.1.3 S18 composite → :36 — applied
+- S-4 S28 floors → :46 — applied
+- S-8 S30 pointer → :48 — applied
+- §3.1.7 LG §C ownership → :61 — applied
+- R-18 pointer §46c → :60 — applied
+- R-28 still open → :68 — applied
+- R-7 decline promise → :71 — applied
+- §3.1.7 RF-2 returning → :101 — applied
+- S-9 / §3.2.14 RF-3 → :115 — applied
+- OD-FC-18 believedMigration preconditions → :145 — applied
+- OD-FC-3 commonsArc preconditions → :146 — applied
+- §3.1.9 calamityArc flag row → :148 — applied
+- §3.1.9 calamityArcs §3 model → :194 — applied
+- §3.1.7 travelClass line → :201 — applied
+- §3.1.7 lifecycle pointer → :245 — applied
+- §3.3.8 size reality → :278 — applied
+- FV POP-1 (ARCH) → :281 — applied
+- §3.1.7 mechanics returning → :299 — applied
+- R-17 Req 14 POP-1 → :322 — applied
+- R-20 CW-0 rows degraded → :328 — applied
+- FV POP-2 (ARCH) → :330 — applied
+- R-10 levy collision → :356 — applied
+- R-17 ptr POP-2 → :351 — applied
+- FV POP-3 (ARCH) → :359 — applied
+- R-17 ptr POP-3 → :377 — applied
+- FV POP-4 (ARCH) → :379 — applied
+- R-7 substrate gate ARCH → :387 — applied
+- OD-FC-28 ARCH POP-4 → :395 — applied
+- R-17 ptr POP-4 → :399 — applied
+- FV POP-5a (ARCH) → :402 — applied
+- R-17 ptr POP-5a → :420 — applied
+- FV POP-5b (ARCH) → :425 — applied
+- S-11 levy site POP-5b → :428 — applied
+- R-20/R-21 treaty pins degraded → :443 — applied
+- R-17 ptr POP-5b → :449 — applied
+- FV POP-6 (ARCH) → :454 — applied
+- R-11/R-12/R-28 POP-6 files → :463 — applied
+- R-17 ptr POP-6 → :476 — applied
+- FV POP-7 (ARCH) → :481 — applied
+- chain 3 commons cert row → :494 — applied
+- R-20/R-4 seam contract 1 → :508 — applied
+- booksOf seam 4 → :531 — applied
+- R-18 C-POPF-2 absent → :563 — applied
+- R-19 + §3.1.7 Q1 → :572 — applied
+- chain 3 Q2 → :579 — applied
+- R-9 + OD-FC-40 Q4 → :595 — applied
+### DESIGN_FP_INTERIOR (71)
+- status header → :25 — applied
+- S-1 pointer §0 item 1 → :53 — applied
+- S-13 address rot §1b → :114 — applied
+- R-20 W-SEAT note §1b → :139 — applied
+- S-3 pointer §1c push-indirection → :156 — applied
+- R-6 legitimacy passive clock row 1 → :182 — applied
+- §5 contradiction 7 row 6 → :187 — applied
+- R-7 commons row 9 + §3.1.3 → :190 — applied
+- row 10 four books pointer → :191 — applied
+- INT-5 deferral stands row 11 → :192 — applied
+- §5 bond register row 13 → :194 — applied
+- R-8 reframe row 14 → :195 — applied
+- S-3 pointer row 21 → :202 — applied
+- S-7 oath-holder drama row → :212 — applied
+- R-8 interventionEnabled → :214 — applied
+- R-12 pointer seat_held → :228 — applied
+- OD-FC-26 disposition ratchet → :232 — applied
+- R-19 pointer ambitious → :236 — applied
+- §3.3.3 posture + preconditions → :242 — applied
+- INT-4 substrates dark (flag table) → :260 — applied
+- R-16 quiet_local + static → :277 — applied
+- OD-FC-39 lighting order → :297 — applied
+- R-10 booksOf shape → :304 — applied
+- posture ptr GR-2/WF-3 → :311 — applied
+- §3.3.11/S-11 émigré no ledger + OD-FC-25 → :392 — applied
+- FV INT-1 → :426 — applied
+- posture ptr INT-1 seams → :434 — applied
+- R-11 posture-wide shift → :485 — applied
+- FV INT-2 → :520 — applied
+- posture ptr INT-2 → :585 — applied
+- FV INT-3a + chain 4 → :604 — applied
+- S-8 installed successor pointer → :637 — applied
+- R-3 + §3.1.10 + R-5 re-read → :648 — applied
+- STRUCK reaffirm pin INT-3a → :667 — applied
+- posture ptr INT-3a → :690 — applied
+- FV INT-3b → :696 — applied
+- R-19 ambitious label → :708 — applied
+- S-11 pointer mechanism → :715 — applied
+- R-4 STRUCK INT-3 endings → :771 — applied
+- FV INT-4 → :777 — applied
+- S-17 tribute_strain homonym → :801 — applied
+- R-13 + §3.1.3 commons term → :818 — applied
+- S-16 pHold budget rally → :833 — applied
+- posture ptr INT-4 → :873 — applied
+- §3.1.3 cap pointer INT-4 bands → :879 — applied
+- FV INT-5 → :889 — applied
+- FV INT-6 → :985 — applied
+- posture ptr INT-6 price → :1035 — applied
+- §3.1.3 burial relief → :1043 — applied
+- §3.1.10 pointer heir burial → :1074 — applied
+- posture ptr INT-6 decision → :1118 — applied
+- FV INT-7 + chain 4 → :1140 — applied
+- §5 item 6 token count → :1162 — applied
+- R-4 STRUCK INT-7 floor → :1177 — applied
+- R-6 pointer INT-7 clock → :1223 — applied
+- R-18 band edges → :1225 — applied
+- FV INT-8 → :1232 — applied
+- R-9 two cures → :1260 — applied
+- §3.1.10 row 3 → :1359 — applied
+- §3.1.3 row 8 FAITH omen → :1424 — applied
+- R-12 seat_held orphan → :1481 — applied
+- expose verb → :1502 — applied
+- R-5 pointer J-INT-10 → :1569 — applied
+- §5 item 8 J-INT-15 → :1623 — applied
+- §8 token count pointer → :1640 — applied
+- req 22c Evidence Law §9 → :1653 — applied
+- STRUCK §9 son kept → :1664 — applied
+- R-18 pointer §9 Crisis → :1681 — applied
+- §10 sequencing superseded → :1691 — applied
+- R-15 two deltas → :1725 — applied
+- S-4 commons LIVE fence → :1729 — applied
+### DESIGN_FP_ARCH_INT (37)
+- status header → :9 — applied
+- AINT §0 W-SEAT → :17 — applied
+- R-6 pointer S1 → :27 — applied
+- R-7 S9 commons → :35 — applied
+- R-8 S13 reframe → :39 — applied
+- R-9 S18 → :44 — applied
+- §3.3.8 S26 sizes → :52 — applied
+- S-1/C2 R1 four books → :73 — applied
+- R-17 + OD-FC-26 R6 → :120 — applied
+- R-1 INT-3b LANDED overclaim (§1b) → :138 — applied
+- R-2 precondition contradiction → :145 — applied
+- R-16 §2 table quiet_local → :186 — applied
+- FV INT-1 (ARCH) → :293 — applied
+- S-2 budget +80 → :305 — applied
+- §5 item 10 war-arm receipt dark → :309 — applied
+- SP-4 landed cycle pin → :325 — applied
+- FV INT-2 (ARCH) → :342 — applied
+- R-16 pointer INT-2 fences → :358 — applied
+- §3.3.8 settlementStrategy → :381 — applied
+- FV INT-3a (ARCH) → :384 — applied
+- §3.1.10 pact re-read → :396 — applied
+- R-1 + FV INT-3b bullet → :415 — applied
+- STRUCK reaffirm pin (ARCH) → :424 — applied
+- FV INT-4 (ARCH) → :435 — applied
+- R-7 + §3.1.3 ARCH INT-4 → :446 — applied
+- FV INT-5 (ARCH) → :470 — applied
+- FV INT-6 (ARCH) → :500 — applied
+- R-14 INT-6 Req 14 → :535 — applied
+- FV INT-7 (ARCH) → :542 — applied
+- §8 token count ARCH → :555 — applied
+- FV INT-8 (ARCH) → :576 — applied
+- R-9 ARCH two cures → :588 — applied
+- build order INT-3b pointer → :609 — applied
+- R-5 seam 10 → :657 — applied
+- R-12 seam 11 → :661 — applied
+- Q1 pointer → :684 — applied
+- §3.3.11 Q4 → :722 — applied
+
+## Findings coverage
+- POP §10 R-1..R-21: ALL applied (R-1 folded into the status-header template; R-4 propagated to ARCH §5 contract 1; R-6's COUPLINGS:1136 site and R-7/R-9's fold sites belong to other lanes' files — not in this manifest).
+- POP §5 C-1..C-9 and §6 S-1..S-17: all bracketed (C-3 at POP-1 Herald contract, C-8 at the header ## line, C-9 inside the OD-FC-28 bracket, S-10 line drift at §1c, S-12 at the §2 pull row, S-16 at the gold-rush pin).
+- INT §10 1..20: ALL applied (7 also lands at INT §11 fence list; the DESIGN_FP_ARCHITECTURE.md:2240 site is lane H's file).
+- INT §5 items 1-10 and §6 S-1..S-17: bracketed (item 4 via R-16; item 6 at INT-7 envelopes + §8 + ARCH INT-7; item 7 at §2 row 6; item 8 at J-INT-15; item 10 at ARCH INT-1 receipt emission; S-2 at ARCH INT-1 budget; S-13 at §1b; S-16 at INT-4 rally; S-17 at INT-4 burden vocab).
+- Fold obligations: §3.1.3 (POPV voice seam + POP-2 force + ARCH S18; INT-4 term + bands, INT-6 relief, INT row 8, ARCH INT-4) · §3.1.7 (POPV POP-1 + J-POP-15; ARCH LG§C, RF-2, §3 model, mechanics, Q1) · §3.1.9 (POPV flag row, §4, POP-4; ARCH flag row, §3, POP-4, Q4) · §3.1.10 (INT-3a re-read, pins, endings, INT-7 floor, row 3, §9; ARCH INT-3) · §3.1.21 (POP-1 Force, ARCH contract 1) · §3.2.16 (POPV §2 transit row + POP-5b) · §3.3.3 (POPV POP-1; INT §2 preconditions + 8 pointers; ARCH POP-1 Req 14, ARCH INT-1 cycle pin) · §3.3.8 (ARCH_POP §4, ARCH_INT S26/INT-1/INT-2) · §3.3.11 (ARCH_INT Q4) · §4 planting line (POP-3, INT-5, INT-6) · §5 (column_return, reaffirmed_by_heir STRUCK, bond) · OD-FC-3/13/18/25/26/28/39/40 cited at their sites.
+
+## Not resolved here (for the fold)
+- FPQ-53 (refugee arrival record for IN-4/2's race, FP-QUEUE.md:56) — no slot ruled; bracketed as routed.
+- INT §6 row 11 seat_held fix — INFO never accepted it; bracketed as an orphan, no slot ruled.
+- POP-2's levy-refusal target (no discrete levy act exists) — re-cut or wait on a war-lane levy act; not ruled.
+- `repudiated_by_heir` vs GRAMMAR's `disavowed_by_succession` (one event, two names) and INT-4's burden ladder (`tribute_strain` homonym) — not in the §5 register.
+- §3.2.16 places `tribute_population`'s identity in POP-5b, which has no conservation identity of its own (POP-1/5a own conservation) — bracket follows the fold verbatim; the fold may want POP-1's.
+

@@ -1,0 +1,1012 @@
+
+ RUN  v4.1.8 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/2fc13d59-5fcc-4359-9f88-b2795e6919f4/scratchpad/master-00b648c9d
+
+··············································································stdout | tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > the corpus vocabulary is live and the census is not measuring an empty set
+[scw-0] distinct export vocabulary at this HEAD: 152 strings
+
+···stdout | tests/lint/exportTokenCoverage.test.js > export-token coverage census (Wave 0 — predicate liveness, never correctness) > every predicate alternative is exercised by the live vocabulary or quarantined in KNOWN_INERT
+[scw-0] predicate alternatives: 66 total, 44 live, 22 inert
+
+··········································································································································································································································stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > scan-only dispatch writes one governed artifact and never admits baseline I/O
+observed-shape exact-origin artifact: 1 finding(s) written to /virtual/observed-shape.json
+⚠ DECLARED SCOPE EXCLUSION (CR-OSR-SCOPE-1): read sites under src/components/ were NOT exactly resolved — 0 of 1 indexed file(s). They remain in the program index and are covered by the heuristic (legacy-leaf) detector, which is handed the unfiltered file list.
+CR-OSR-FREEZE-6 shape-family filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M12 language-surface filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+M8/M9 explained-writer bank: NOT APPLIED (exact-origin probe keeps the raw detector output).
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > progress mode emits JSONL-ready lifecycle and exact reader events
+observed-shape exact-origin artifact: 1 finding(s) written to /virtual/progress.json
+⚠ DECLARED SCOPE EXCLUSION (CR-OSR-SCOPE-1): read sites under src/components/ were NOT exactly resolved — 0 of 1 indexed file(s). They remain in the program index and are covered by the heuristic (legacy-leaf) detector, which is handed the unfiltered file list.
+CR-OSR-FREEZE-6 shape-family filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M12 language-surface filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+M8/M9 explained-writer bank: NOT APPLIED (exact-origin probe keeps the raw detector output).
+
+······stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > CR-OSR-SCOPE-1: the EXACT leg is handed the declared exclusion, over an unfiltered census
+observed-shape exact-origin artifact: 1 finding(s) written to /virtual/scope-exact.json
+⚠ DECLARED SCOPE EXCLUSION (CR-OSR-SCOPE-1): read sites under src/components/ were NOT exactly resolved — 1 of 1 indexed file(s). They remain in the program index and are covered by the heuristic (legacy-leaf) detector, which is handed the unfiltered file list.
+CR-OSR-FREEZE-6 shape-family filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+CR-OSR-SCHEMA-6 M12 language-surface filter: NOT APPLIED (exact-origin probe keeps the raw detector output).
+M8/M9 explained-writer bank: NOT APPLIED (exact-origin probe keeps the raw detector output).
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > CR-OSR-SCOPE-1: the HEURISTIC leg is handed NO exclusion and the same unfiltered census
+observed-shape legacy-leaf artifact: 1 finding(s) written to /virtual/scope-legacy.json
+scan scope: the WHOLE scanned tree (no declared exclusion).
+CR-OSR-FREEZE-6 shape-family filter (theta=0.8, >=8 keys): cleared 0 read(s) across 0 identit(ies) whose key is carried by a sibling shape in the same family. Zero CR-OSR-FREEZE-3-R2 class-(a) rows may be cleared; the scan refuses if one is.
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter (document, globalThis, window): cleared 0 read(s) across 0 identit(ies) whose read EXPRESSION begins with a host global, so the shape the ungrounded single-home rule bound them to is not the record being read. Keyed on the RECEIVER, never on the key name. No class-(a) TRUE POSITIVE may be cleared.
+CR-OSR-SCHEMA-6 M12 language-surface filter (toLocaleString): cleared 0 read(s) across 0 identit(ies) of a builtin prototype member the byte-frozen detector's BUILTIN_MEMBERS list predates. Each declared key must live on a builtin prototype AND be absent from every observed shape, or the scan refuses.
+M8/M9 explained-writer bank (H26 / CR-OSR-FREEZE-6-R2): 10 declared identit(ies) whose writer the GENERATION corpus never runs; banked and enforced 0 read(s) across 0 of them on this scan. Each entry names its writer and its key must still be written there, in one of the four measured write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.
+
+··stderr | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > A3/A4: banked growth stays red ordinarily and only a reasoned tagged write can raise it
+src/lib/saves.js: read(s) of a key no writer produces, outside the frozen inventory:
+    NEW      neighbourNetwork on settlement — 1 read(s); this file has no frozen row for it (ceiling 0)
+  A guarded read of a key the real generator never writes cannot throw — it
+  degrades to a default, and the arm behind it is dead on every generated world.
+  A NEW row means a fresh one landed even if this file's TOTAL did not move: the
+  inventory is addressed by finding IDENTITY, not by count, so a swap cannot hide.
+  TO COMPLY: read a key the producer actually writes, or delete the dead arm.
+    The authority is a real run, not a typedef: `node scripts/check-observed-shape-readers.mjs --report`
+    prints the shape and the keys it was observed carrying.
+  TO SHRINK: fixed a site? From a clean committed tree, run the governed
+    `node scripts/check-observed-shape-readers.mjs --write` re-freeze. It re-derives
+    every row and may only lower or delete ordinary debt; never hand-edit this baseline.
+    Never raise a number, never add a file, never add an identity.
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > A3/A4: banked growth stays red ordinarily and only a reasoned tagged write can raise it
+froze 2 finding(s) / 2 identit(ies) across 1 file(s); bank 1 banked read(s) across 1 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+··············stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the bank fence: a --write whose register would disagree with the hand-owned literal is REFUSED before the write, naming both sides
+froze 2 finding(s) / 2 identit(ies) across 1 file(s); bank 1 banked read(s) across 1 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+········································································stdout | tests/lint/proseWiringCensus.walker.test.js > the census printed BESIDE the composed-fill census (report-only) > one table, and the join between them is total
+WIRING CENSUS · beside the composed-fill census · R1 at this tip
+  pools 708 · RESOLVED 340 · WIRING-UNRESOLVED 368
+  of the RESOLVED: carrying a predicate row 207 · every row a readable comparison 207
+  variants 2266 · mean/pool 3.20 · histogram 2->33 3->547 4->96 5->17 6->15
+  recovery rungs: none 368 · literal 171 · table 100 · template 69
+  key functions 118 (consulted 118) · module key tables 33
+  the ten largest UNRESOLVED reasons:
+     226  no pool-key function returns this key as a literal, no template of one binds it, and no module-level key table names it
+     142  the block is UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS): no composer reads it, so no predicate selects this pool
+  slots with NO provider (the block has a bag): 65 pools
+    DS-DEF-4 :: capture none — {seat}
+    DS-DEF-4 :: capture adversarial — {seat}
+    DS-DEF-4 :: capture equilibrium — {seat}
+    DS-DEF-4 :: capture corrupted — {seat}
+    DS-DEF-4 :: capture capture — {seat}
+    DS-DEF-6 :: Medical Readiness: Clergy care — {institution}
+    DS-DEF-6 :: Logistics & Supply: Granary with road supply — {route}
+    DS-DEF-9 :: magicDependency true, with a NAMED dependent chain — {good}
+  pools whose block has NO bag at all (unmounted): 140
+  predicates over a field no composer holds: 99 (the table rung's own synthetic labels, counted apart: 100)
+    DS-DEF-2 :: Internal Security: full legal chain (court AND prison) — court
+    DS-DEF-2 :: Internal Security: full legal chain (court AND prison) — prison
+    DS-DEF-2 :: Internal Security: court without detention — court
+    DS-DEF-5 :: garrison PRESENT — forces.garrison.present
+    DS-DEF-5 :: militia PRESENT (no garrison) — forces.militia.present
+    DS-DEF-5 :: watch PRESENT — forces.watch.present
+  status by block (the twelve with the most unresolved):
+    DS-WAR-5     resolved   0 · unresolved  31
+    DS-WAR-2     resolved   4 · unresolved  24
+    DS-FTH-3     resolved   2 · unresolved  23
+    DS-DEF-10    resolved   0 · unresolved  21
+    DS-DEF-6     resolved   3 · unresolved  18
+    DS-POW-7     resolved   2 · unresolved  18
+    DS-POP-1     resolved   0 · unresolved  17
+    DS-FTH-1     resolved   8 · unresolved  13
+    DS-DEF-7     resolved   0 · unresolved  11
+    DS-HK-1      resolved   0 · unresolved  11
+    DS-POW-5     resolved   1 · unresolved  11
+    DS-GEN-1     resolved   0 · unresolved  10
+  COMPOSED FILL (the sibling census this one sits beside):
+    blocks with a composer bag 53 of 68 · call sites 96
+
+stdout | tests/lint/proseEntryContradiction.walker.test.js > the same-entry contradiction walker — the published lexicons > takes the union of EVERY role source, so a live office is not called absent
+
+OFFICE ROSTER · union of four sources (one unreachable by import)
+  roster 249 · candidates 37 · still absent 12: bailiff · beadle · seneschal · castellan · provost · burgess · councillor · prefect · master of the guild · toll keeper · gatekeeper · clerk of the rolls
+
+
+··········································stdout | tests/lint/proseWiringCensus.walker.test.js > THE MAP READ THE OTHER WAY — fact → text, and the three tiers > the fact index inverts the census without losing a pool
+  FACT `${text(note?.type)}|${text(note?.tab)}` (via COHERE pools   6 · variants   24 · grammars 12
+  FACT axis                                                 pools  20 · variants   60 · grammars 30
+  FACT beastsRowSituation(family, perimeter, force) (via BE pools   7 · variants   21 · grammars 10
+  FACT blockaded                                            pools   1 · variants    4 · grammars 1
+  FACT breakdown.prosperity                                 pools   2 · variants    6 · grammars 4
+  FACT breakdown.safety                                     pools   2 · variants    6 · grammars 4
+  FACT condition.archetype                                  pools   3 · variants    9 · grammars 3
+  FACT condition.severity                                   pools   4 · variants   12 · grammars 7
+  FACT condition.status                                     pools   2 · variants    6 · grammars 4
+  FACT conflict.intensity                                   pools   3 · variants   15 · grammars 7
+  FACT court                                                pools   2 · variants    6 · grammars 3
+  FACT covert                                               pools   1 · variants    3 · grammars 1
+
+stdout | tests/lint/proseWiringCensus.walker.test.js > THE MAP READ THE OTHER WAY — fact → text, and the three tiers > the tiers name the block, the field, the reading function and the COUNT
+  TIERS · MISSING 34 · THIN 483 · COVERED 225
+    MISSING readings.ancientRuin — 0 pools keyed on this fact
+    MISSING readings.clockIds — 0 pools keyed on this fact
+    MISSING readings.coherenceNotes — 0 pools keyed on this fact
+    MISSING readings.conflicts — 0 pools keyed on this fact
+    MISSING readings.crossEngagements — 0 pools keyed on this fact
+    MISSING readings.foodBalance — 0 pools keyed on this fact
+    MISSING readings.foodSecurityLabel — 0 pools keyed on this fact
+    MISSING readings.govFaction — 0 pools keyed on this fact
+
+·······················stdout | tests/lint/proseEntryContradiction.walker.test.js > THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > ANCHOR 5 (CLERK-LAWS §2.4.1) — the C3-LEXICAL class, and why the census reads ZERO C3 findings
+
+C3-LEXICAL · the class the census reads as ZERO
+  entries carrying a provenance-class phrase: 44 (NOT-EXECUTABLE without the flag)
+  the same entries WITH `eventProvenance: false`: 44 FAIL
+    defense.generated.js::DS-DEF-1::readiness ADEQUATE#2 — capacity claim on a state-only field
+    defense.generated.js::DS-DEF-2::Invasion & War: walls AND professional garrison#2 — actor claim on a state-only field
+    defense.generated.js::DS-DEF-2::Internal Security: detention without process#0 — capacity claim on a state-only field
+
+
+···stdout | tests/lint/proseEntryContradiction.walker.test.js > THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > prints LIVE REPLACEMENT ANCHORS per arm, so a wave car can choose one by measurement
+
+ANTI-VACUITY · live replacement anchors, per arm (cure 17 step 1)
+    93  a bare future indicative
+          defense.generated.js::DS-DEF-1::readiness CRITICAL#1
+          defense.generated.js::DS-DEF-2::Beasts & Monsters: frontier, credible deterrence#0
+          defense.generated.js::DS-DEF-2::Disasters & Famine: granary, NO medical provision#1
+    10  a totality over an open column
+          general.generated.js::DS-GEN-3::scores.monster: WEAK#1
+          general.generated.js::DS-GEN-6::tier overlay: thorp / hamlet#0
+          general.generated.js::DS-GEN-15::SCARRED-FADING#1
+     2  exemption on a null column
+          general.generated.js::DS-GEN-1::occupation_legacy#2
+          src/generators/factionDynamics.js:448
+
+
+·····················································stdout | tests/lint/proseEntryContradiction.walker.test.js > THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > THE QUALIFY ARM on the shipped `DS-POW-5::autocrat` variant — a trailing coordinate
+  Q · trailing coordinate: 329 of 2266 R1 entries carry the class
+
+·······stdout | tests/lint/proseEntryContradiction.walker.test.js > THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > THE MOVEMENT ARM Q'S CURE MAKES, MEASURED AND PRINTED (REWRITE car 8a-6)
+
+  Q · the cure's movement on the shipped corpus: 890 withheld -> 875 with the reads column and the ratified synonyms (15 licensed)
+
+
+·····················stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the HEURISTIC leg executes its own corpus with no --corpus-artifact
+observed-shape legacy-leaf artifact: 1 finding(s) written to /virtual/heuristic.json
+scan scope: the WHOLE scanned tree (no declared exclusion).
+CR-OSR-FREEZE-6 shape-family filter (theta=0.8, >=8 keys): cleared 0 read(s) across 0 identit(ies) whose key is carried by a sibling shape in the same family. Zero CR-OSR-FREEZE-3-R2 class-(a) rows may be cleared; the scan refuses if one is.
+CR-OSR-SCHEMA-6 M11 DOM-global receiver filter (document, globalThis, window): cleared 0 read(s) across 0 identit(ies) whose read EXPRESSION begins with a host global, so the shape the ungrounded single-home rule bound them to is not the record being read. Keyed on the RECEIVER, never on the key name. No class-(a) TRUE POSITIVE may be cleared.
+CR-OSR-SCHEMA-6 M12 language-surface filter (toLocaleString): cleared 0 read(s) across 0 identit(ies) of a builtin prototype member the byte-frozen detector's BUILTIN_MEMBERS list predates. Each declared key must live on a builtin prototype AND be absent from every observed shape, or the scan refuses.
+M8/M9 explained-writer bank (H26 / CR-OSR-FREEZE-6-R2): 10 declared identit(ies) whose writer the GENERATION corpus never runs; banked and enforced 0 read(s) across 0 of them on this scan. Each entry names its writer and its key must still be written there, in one of the four measured write shapes, or the scan refuses. No class-(a) TRUE POSITIVE may be exempted.
+
+·····stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > schema migration freeze rebinds one reviewed bundle to the fresh clean HEAD scan
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 0 banked read(s) across 0 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+··stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 0 banked read(s) across 0 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 1 banked read(s) across 1 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 1 banked read(s) across 1 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 0 banked read(s) across 0 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+stderr | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+observed-shape provenance digests moved since the schema-24 instrument was governed but NO detector or input path accounts for the movement; an ordinary gate/write cannot migrate an instrument whose drift it cannot explain.
+
+stderr | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+observed-shape execution INPUT changed since the last re-freeze (1 path(s): tests/fixtures/spatialPackFixtures.js). These are generated/data inputs, not detector sources, so the shrink-only --write re-freeze may absorb them; the instrument is NOT darkened by them.
+
+stdout | tests/lint/observedShapeSentinel.test.js > observed-shape anti-vacuity sentinel telemetry > the schema-8 ordinary write admits only pure decreases, never growth or an identity swap
+froze 1 finding(s) / 1 identit(ies) across 1 file(s); bank 0 banked read(s) across 0 tagged address(es), and tests/lint/observedShapeBank.literal.js agrees
+
+·········stdout | tests/lint/proseEntryContradiction.walker.test.js > THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships beside > finds the breaches the sitting did NOT name, and prints the corpus census
+
+ENTRY WALKER · corpus census over 3132 entries
+  entries with a FAIL: 251
+  WITHHELD findings: 1815
+  NOT-EXECUTABLE limbs: 1399
+ 128  C4 · a bare future indicative
+ 114  D · a slot the composer never fills
+  13  C4 · a totality over an open column
+   3  C2 · exemption on a null column
+
+
+··stdout | tests/lint/proseWiringCensus.walker.test.js > SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SITTING §Q) > ⭐ THE RECORD-SERVICE LISTS ARE THE SHIPPED ROSTER'S OWN WORDS, re-measured here
+
+SEAM 5b · THE HOLDER CENSUS on the shipped corpus
+  ROWS      LICENSED 114 · OFFICE 3 · SOURCE-UNRESOLVED 591 of 708 (two-source 10; 368 read nothing at all)
+  FIELDS    LICENSED 191 · OFFICE 5 · SOURCE-UNRESOLVED 415 (no mapping 415, no institution 0)
+  by KIND   muster 61 · market 49 · treasury 22 · court 21 · toll-bar 13 · watch 9 · road 7 · elders 5 · office 5 · parish 4
+  the table treasury 4 · muster 12 · census 0 · parish 2 · toll-bar 3 · market 9 · watch 4 · court 9 · elders 1 · tradition 0 · road 2 · office 3
+
+
+···························
+[deadCodeDisposition] docs/DEAD_CODE_DISPOSITION.md: 4 dispositioned row(s) — 3 DARK-BY-DESIGN, 0 RETIRE-PROPOSED, 1 RETIRED; importer scan over src/scripts/api/supabase/e2e
+······stdout | tests/lint/institutionTable.walker.test.js > the column census, measured across the estate > finds `whoIsExempt` EMPTY on every settlement, and no `bailiff` in any office column
+
+INSTITUTION TABLE · estate scan over 30 settlements
+  whoIsExempt non-empty on: 0
+  distinct offices held:    161
+  a bailiff anywhere:       false
+
+
+··stdout | tests/lint/institutionTable.walker.test.js > the column census, measured across the estate > prints the column census beside CLERK-LAWS §1.2's own table
+
+INSTITUTION TABLE · column census at the product tip
+  hamlet — 16 live institutions
+     institution      closed=true  held=  16  Subsistence farming · Common grazing land · Dairy farmer
+     office           closed=false held=   7  Elder · Elder Council · Innkeeper
+     holderRole       closed=false held=   0  
+     whatItCounts     closed=true  held=   0  
+     whoIsCounted     closed=false held=   1  several hundred
+     whoIsExempt      closed=false held=   0  
+     whatItDoes       closed=false held=  19  Basic repairs · Basic smithing · Burial
+     whatItDoesNotDo  closed=false held=   0  
+     provenance       closed=true  held=   1  PRE_SEED
+     sustainer        closed=false held=   0  
+  town — 68 live institutions
+     institution      closed=true  held=  68  Fish market · Charcoal burner · Stone quarry
+     office           closed=false held=  20  Bürgermeister · Chief Magistrate · Elder
+     holderRole       closed=false held=   0  
+     whatItCounts     closed=true  held=   6  Church Tithes · Gate Tolls · Market Taxes
+     whoIsCounted     closed=false held=   1  thousands
+     whoIsExempt      closed=false held=   0  
+     whatItDoes       closed=false held= 100  Accommodation · Animal training · Arrow production
+     whatItDoesNotDo  closed=false held=   0  
+     provenance       closed=true  held=   1  PRE_SEED
+     sustainer        closed=false held=   0  
+  city — 69 live institutions
+     institution      closed=true  held=  69  Fish market · Mine · Furrier's district
+     office           closed=false held=  25  Advisor · Aufseher · Bürgermeister
+     holderRole       closed=false held=   0  
+     whatItCounts     closed=true  held=   3  Customs bypass · Gate Tolls · Market Taxes
+     whoIsCounted     closed=false held=   1  thousands
+     whoIsExempt      closed=false held=   0  
+     whatItDoes       closed=false held= 114  Alchemical components · Ale production · Alloy production
+     whatItDoesNotDo  closed=false held=   0  
+     provenance       closed=true  held=   1  PRE_SEED
+     sustainer        closed=false held=   0  
+
+
+········stdout | tests/lint/institutionTable.walker.test.js > the column census, measured across the estate > PINS `settlement.services` PERMANENTLY ABSENT — the key is never written, on any tier
+
+INSTITUTION TABLE · the services field over 30 settlements
+  rows on `availableServices`: 2228
+  settlements carrying a `services` key: 0
+
+
+································stdout | tests/lint/institutionTable.walker.test.js > THE HONESTY RULE — a column is `closed` only where every source the spec names is read > routes the RUIN FILTER through the service COLUMNS, and the filter is measured doing work
+
+INSTITUTION TABLE · ruin filter through the COLUMNS, over 30 settlements
+  service rows dropped: 23
+  the institutions they named: (arcane underground) · (informal) · (lawless) · (smuggling) · (street gang)
+
+
+····················································································································[controlBytes] tracked=7091 textSubjects=6869 strict=5274 rest=1595 gitBinary=208 textSubjectsClassifiedBinary=0
+············································································································································································································································································································································································································stdout | tests/lint/proseMeasures.walker.test.js > CAR 5(a) — the presence measure, three lines, reported > publishes a closed, sense-partitioned lexicon — counted over the ARRAYS, where it can fail
+
+SENSORY LEXICON · 166 entries / 166 distinct — sight 82 · hearing 26 · smell 16 · touch 23 · taste 19
+
+
+··················stdout | tests/lint/proseMeasures.walker.test.js > CAR 5(a) — the presence measure, three lines, reported > prints the three lines for every register and for the exemplars it can reach
+
+PRESENCE MEASURE · the estate, per register (Part B §13.2 — reported, never a gate)
+  R1 dossier state   sensory/100w  1.198 · textured  24% · spread 0.79 bits  [sight 86% · hearing 4% · smell 0% · touch 2% · taste 8%]
+  R2 causal join     sensory/100w  1.478 · textured  36% · spread 0.65 bits  [sight 88% · hearing 8% · smell 0% · touch 0% · taste 4%]
+  R4b disclosure     sensory/100w  1.975 · textured  21% · spread 0.87 bits  [sight 82% · hearing 9% · smell 0% · touch 9% · taste 0%]
+  R5 crier voice     sensory/100w  3.437 · textured  46% · spread 1.31 bits  [sight 71% · hearing 16% · smell 1% · touch 3% · taste 9%]
+  R6 npc ladder      sensory/100w  1.046 · textured  21% · spread 1.52 bits  [sight 61% · hearing 18% · smell 0% · touch 17% · taste 3%]
+  R7 gazetteer       sensory/100w  3.583 · textured  35% · spread 1.58 bits  [sight 60% · hearing 2% · smell 4% · touch 12% · taste 23%]
+  chronicle R12      sensory/100w  2.276 · textured  32% · spread 0.66 bits  [sight 83% · hearing 17% · smell 0% · touch 0% · taste 0%]
+  D-d dm hooks       sensory/100w  0.577 · textured   8% · spread 1.49 bits  [sight 63% · hearing 21% · smell 0% · touch 8% · taste 8%]
+  R9 chrome copy     sensory/100w  0.715 · textured   8% · spread 0.76 bits  [sight 86% · hearing 2% · smell 0% · touch 5% · taste 8%]
+
+
+·stdout | tests/lint/proseMeasures.walker.test.js > CAR 5(b) — the unrendered-facts census, the number the authoring wave is sized from > counts what each composer HOLDS against what it RENDERS AS A WORD
+
+UNRENDERED-FACTS CENSUS · six composers
+  generalStateProse.js     holds  34 · renders as a word  6 · KEY-ONLY  28
+  powerStateProse.js       holds   7 · renders as a word  1 · KEY-ONLY   6
+  economyStateProse.js     holds  12 · renders as a word  2 · KEY-ONLY  10
+  defenseStateProse.js     holds   9 · renders as a word  1 · KEY-ONLY   8
+  stressorsStateProse.js   holds   4 · renders as a word  1 · KEY-ONLY   3
+  warFaithStateProse.js    holds   6 · renders as a word  2 · KEY-ONLY   4
+  TOTAL: holds 72 · renders as a word 13 · key-only 59 (82%)
+  ⚠ A KEY-ONLY FACT IS NOT DARK. It chooses which authored sentence the reader meets,
+    so it reaches the reader as a CHOICE and never as a WORD.
+  ⛔ AND IT IS NOT AN UPPER BOUND ON THE WAVE'S OPPORTUNITY — that framing is WITHDRAWN
+    (SITTING §L.2 item 70; Part B §18). This is a PER-FILE reach census over six composer
+    sources: a generated town carries 41 top-level settlement keys and the six composers
+    name 9, so 32 top-level keys are named by no composer and are invisible to this scan
+    by construction. The wave sizes from car 8's TIER TABLE (MISSING 58 · THIN 483 ·
+    COVERED 225), and §912.1's condition one is discharged by those tiers, not by this.
+
+
+stdout | tests/lint/proseMeasures.walker.test.js > CAR 5(c) — the licensed level-1 members per block, on the COMPOSED fill > re-measures the sitting's A12 and prints what it finds
+
+LICENSED LEVEL-1 MEMBERS on the composed fill
+  blocks 68 · settlement-ONLY bag 22 · no bag at all 15
+  licensing ONE member (the bare PRESENT): 33
+  licensing two or more:                   20
+  NOT-EXECUTABLE on every block today: V2 (no structural-consequence field),
+    V3 / V8 (no typed none-exists or not-held field), V6 (no typed unresolved /
+    contested / pending STATE field — SITTING A12)
+  settlement-only blocks: DS-CND-1, DS-DEF-1, DS-DEF-11, DS-DEF-2, DS-DEF-3, DS-DEF-4, DS-DEF-5, DS-DEF-6, DS-DEF-8, DS-DEF-9, DS-GEN-11, DS-GEN-12, DS-GEN-13, DS-GEN-14, DS-GEN-17, DS-GEN-3, DS-GEN-5, DS-GEN-6, DS-POP-3, DS-REL-2, DS-STR-1, DS-STR-2
+
+
+··········stdout | tests/lint/proseMeasures.walker.test.js > CAR 9 — THE COMPOSED READING SEQUENCE, with every reading the shipped caller passes > reaches MORE THAN ONE COMPOSER and MORE THAN SEVEN BLOCKS — the sequence SITTING K.2 was priced from did neither
+
+COMPOSED READING SEQUENCE · 3 towns, six desks
+  composers reached: 14 — defenseForcesProse, defenseMagicDependencyProse, defenseMilitaryStatusProse, defensePostureProse, defenseStateProse, defenseSupportingProse, defenseThreatProse, defenseWallRationaleProse, economy, general, generalDeskLines (bare strings), power, stressors, warFaith
+  provenance rungs 208 · bare general-desk sentences 55 · LINES 263
+  distinct blocks fired: 39 of 68
+  draws from the DORMANT pool key: 3
+  desk throws: none
+
+
+···stdout | tests/lint/proseRegisterLoaders.walker.test.js > the registers, in the wave's order — each loaded, each counted > loads every register and prints its census against PROBE_ALL's
+
+REGISTER LOADERS · census at the product tip
+  chronicle (R11 · R12)    rows    85 · pools   22 · distinct    81 · singleton pools   15   [R12 n=108 over 7 files; this loader reads 5 of them, and the letter's three pools are R11]
+  R4b herald disclosure    rows    53 · pools   15 · distinct    53 · singleton pools    4   [PROBE_ALL R4b n=50 over 4 files — a DIFFERENT roster (it names heraldCausalVoice.js, unread here) and without causeWalk.js's three bare strings]
+  R5 crier voice           rows   374 · pools   58 · distinct   374 · singleton pools    0   [R5 n=373 (deduplicated SENTENCES)]
+  R6 npc ladder            rows  1662 · pools 1104 · distinct  1662 · singleton pools    0   [R6 n=1659; the seat's own 1,662 / 1,104 pools]
+  R7 gazetteer             rows  2904 · pools 2084 · distinct  2315 · singleton pools 1497   [R7 n=2169 over 6 files; this loader reads 5 (the sixth exports a builder, no table)]
+  D-d dm hooks             rows   278 · pools  125 · distinct   278 · singleton pools  123   [(PROBE_ALL has no D-d column)]
+  R9 chrome copy           rows   888 · pools  211 · distinct   854 · singleton pools  204   [R9 n=619 over 6 files; R16 is NOT loaded, by a stated refusal]
+
+
+·····················stdout | tests/lint/proseRegisterLoaders.walker.test.js > the registers, in the wave's order — each loaded, each counted > R6's ladder pools are overwhelmingly SINGLETONS — the floor finding, measured
+
+R6 POOL FLOOR · 1104 pools, mean size 1.51, 546 singletons (49%)  [Part B §10 item 9: a register whose mean pool size is under its derived floor is NOT-EXECUTABLE; the derived floors are 8 / 6 / 4]
+
+
+···········stdout | tests/lint/proseMeasures.walker.test.js > CAR 9 — THE COMPOSED READING SEQUENCE, with every reading the shipped caller passes > re-measures SITTING K.2's V1 share and run rate on the SIX-DESK sequence
+
+K.2 RE-MEASURED · 3 towns (the 200-town run is $SC/instr-912/reading-sequence-9.mjs)
+  V1 share 0.8175 (215 of 263) · run rate 0.6756
+  distinct orders n = 19
+  K.2 carried 0.784 / 0.618 from ONE desk over 7 blocks; the 200-town six-desk figures
+  are 0.8650 / 0.7525 over 19,047 lines and are now in Part B §18.
+
+
+···stdout | tests/lint/proseMeasures.walker.test.js > CAR 6 — D8's ledger walker, and the class it is waiting for > over the SHIPPED product it reports NOT-EXECUTABLE and names the three missing fields
+
+D8 PLANT LEDGER · nine settlements over three tiers
+  plants enumerated:            380
+  plants carrying `answerable`: 0
+  open share:                   NOT MEASURABLE — no plant is marked answerable, so the
+                                share is a fact about the missing class, not about a town
+  fields the arm wants:
+    · plant.id: a stable identity on the plant itself (today: none; `links[].id` is the NPC's)
+    · plant.answerable: the typed flag that makes a plant owe an answer (today: absent)
+    · plant.answer | plant.gapReason: the DM page's answer channel (today: neither exists)
+
+
+···································································
+SYMBOL ARM (report-only): 278 citation(s) whose named symbol is not on the cited line — 12 in live code, 266 in live docs, over 5791 files (255 LANDED packet bodies excluded as frozen records).
+  ⚠ EVERY LINE IS A LEAD, NEVER A VERDICT. Measured 2026-09-20 on a systematic sample of
+  twenty docs findings: 19/20 led to a citation that genuinely needed re-addressing, but only
+  16/20 named the right symbol — so cure by reading the SENTENCE, never by `declaredAt`.
+  src/domain/certification/subsystemRowsBaseline.js:17  cites npcAgency.js:909  but `candidateType` is declared at 904, 1023, 1072, 1191 in src/domain/worldPulse/npcAgency.js
+  src/domain/certification/subsystemRowsGrowth.js:43  cites candidateEvents.js:252  but `candidateType` is declared at 141, 270, 844 in src/domain/worldPulse/candidateEvents.js
+  src/domain/display/resourceDisplayName.js:14  cites resourceGenerator.js:243  but `buildViabilityReport` is declared at 244 in src/generators/resourceGenerator.js
+  src/domain/worldPulse/stressorGates.js:929  cites brokerageStamps.js:397  but `brokerageEffectsActive` is declared at 400 in src/domain/worldPulse/brokerageStamps.js
+  tests/components/handbookVoice.test.jsx:145  cites AppViews.jsx:46  but `HowToUse` is declared at 47 in src/AppViews.jsx
+  tests/domain/roadsParticipation.test.js:480  cites npcAgency.js:194  but `npcId` is declared at 195, 520, 908, 957 in src/domain/worldPulse/npcAgency.js
+  tests/domain/roadsParticipation.test.js:516  cites npcVerdictPulse.js:133  but `replacementSource` is declared at 99 in src/domain/worldPulse/npcVerdictPulse.js
+  tests/lint/dossierMountRegistry.walker.test.js:1287  cites Primitives.jsx:120  but `Collapsible` is declared at 67 in src/components/new/Primitives.jsx
+  tests/lint/snapshotPromotion.census.walker.test.js:390  cites campaignImportedCreation.js:57  but `settlementIds` is declared at 45 in src/store/campaignImportedCreation.js
+  scripts/probe-ej-family2.mjs:28  cites pulseKernel.js:2487  but `worldState` is declared at 362, 1671, 1734, 1787 in src/domain/worldPulse/pulseKernel.js
+  scripts/review/readerCorpus.mjs:28  cites whole-world-soak.mjs:232-238  but `SEQ_IDS` is declared at 250 in scripts/audit/whole-world-soak.mjs
+  scripts/review/readerCorpus.mjs:31  cites soakRules.mjs:160  but `composeSoakRules` is declared at 174 in scripts/audit/soakRules.mjs
+  docs/COHESION_REMEDIATION_PLAN.md:114  cites activeConditions.js:368-370  but `affectedSystems` is declared at 62, 70, 78, 86 in src/domain/activeConditions.js
+  docs/COHESION_REMEDIATION_PLAN.md:115  cites causalState.js:611  but `finalizeVariable` is declared at 1350 in src/domain/causalState.js
+  docs/COHESION_REMEDIATION_PLAN.md:116  cites deriveSystemState.js:64-73  but `deriveResilience` is declared at 101 in src/domain/state/deriveSystemState.js
+  docs/COHESION_REMEDIATION_PLAN.md:119  cites npcProfile.js:32  but `CATEGORY_TO_ARCHETYPE` is declared at 36 in src/domain/npcProfile.js
+  docs/COHESION_REMEDIATION_PLAN.md:132  cites mutateWorld.js:171  but `nearbyResourcesDepleted` is declared at 204, 264, 988, 1057 in src/domain/events/mutateWorld.js
+  docs/DEAD_CODE_DISPOSITION.md:196  cites npcData.js:392  but `NPC_FACTION_GOALS` is declared at 458 in src/data/npcData.js
+  docs/DESIGN_FP_ARCHITECTURE.md:100  cites simulationRules.js:185  but `ENGINE_GATED_VIRTUAL_RULE_KEYS` is declared at 230 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCHITECTURE.md:203  cites sovereigntyBundle.js:166  but `catalogGrewSinceWr10` is declared at 191 in src/domain/worldPulse/sovereigntyBundle.js
+  docs/DESIGN_FP_ARCHITECTURE.md:355  cites src/domain/roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCHITECTURE.md:1065  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_ARCHITECTURE.md:2986  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_ARCH_CENSUS.md:187  cites beliefMap.js:159  but `STRENGTH_BANDS` is declared at 160 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_FP_ARCH_CN.md:102  cites src/domain/worldPulse/peaceTermsCatalog.js:159  but `TERM_CATALOG` is declared at 180 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/DESIGN_FP_ARCH_CN.md:113  cites dossierLazyTabs.js:27  but `FaithTab` is declared at 57 in src/components/dossier/dossierLazyTabs.js
+  docs/DESIGN_FP_ARCH_CN.md:115  cites humanizeEngineTokens.js:41  but `tickCalendarLabel` is declared at 44 in src/domain/display/humanizeEngineTokens.js
+  docs/DESIGN_FP_ARCH_CN.md:115  cites relationshipColors.js:79  but `relRgb` is declared at 110 in src/domain/display/relationshipColors.js
+  docs/DESIGN_FP_ARCH_CN.md:295  cites stressors.js:400  but `blockedBySynergy` is declared at 407 in src/domain/worldPulse/stressors.js
+  docs/DESIGN_FP_ARCH_CN.md:465  cites stressors.js:363  but `blockFloor` is declared at 370 in src/domain/worldPulse/stressors.js
+  docs/DESIGN_FP_ARCH_CW.md:44  cites tests/domain/couplingRegistry.test.js:299  but `couplingId` is declared at 239, 256, 314, 326 in tests/domain/couplingRegistry.test.js
+  docs/DESIGN_FP_ARCH_CW.md:44  cites couplingRegistry.test.js:99-112  but `CHARTERED_VOLUME_PREFIXES` is declared at 119 in tests/domain/couplingRegistry.test.js
+  docs/DESIGN_FP_ARCH_CW.md:53  cites src/domain/worldPulse/simulationRules.js:271  but `provenanceLedgerEnabled` is declared at 745 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_CW.md:76  cites src/domain/worldPulse/beliefMap.js:1468  but `detectMisjudgment` is declared at 1504 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_FP_ARCH_CW.md:83  cites src/domain/worldPulse/simulationRules.js:185  but `ENGINE_GATED_VIRTUAL_RULE_KEYS` is declared at 230 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_EC.md:362  cites resourceChains.js:35  but `exportValue` is declared at 42, 51, 61, 71 in src/data/resourceChains.js
+  docs/DESIGN_FP_ARCH_EC.md:373  cites viability.js:259  but `foodBalance` is declared at 606 in src/generators/economy/viability.js
+  docs/DESIGN_FP_ARCH_EC.md:432  cites tierResourceDynamics.js:732-740  but `worldState` is declared at 649 in src/domain/worldPulse/tierResourceDynamics.js
+  docs/DESIGN_FP_ARCH_EC.md:654  cites worldState.js:16  but `pulseHistory` is declared at 323, 599 in src/domain/worldPulse/worldState.js
+  docs/DESIGN_FP_ARCH_EC.md:2104  cites dispatchEV.js:47  but `appetiteOf` is declared at 259 in src/domain/spatial/dispatchEV.js
+  docs/DESIGN_FP_ARCH_EC.md:2496  cites capacityModel.js:47-58  but `deriveCapacityProfile` is declared at 961 in src/domain/capacityModel.js
+  docs/DESIGN_FP_ARCH_EC.md:2706  cites treasury.js:905  but `TAX_FORMS` is declared at 269 in src/domain/worldPulse/treasury.js
+  docs/DESIGN_FP_ARCH_EP.md:1819  cites advanceEpochLedger.js:160  but `yearStreamSeedOf` is declared at 213 in src/domain/advanceEpochLedger.js
+  docs/DESIGN_FP_ARCH_EP.md:2521  cites campaignWorldPulseDeferred.js:118-122  but `advanceEpoch` is declared at 124 in src/store/campaignWorldPulseDeferred.js
+  docs/DESIGN_FP_ARCH_ES.md:707  cites beliefMap.js:591  but `reconcileBelief` is declared at 610 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_FP_ARCH_ES.md:907  cites suspicion.js:8-10  but `suspicionOf` is declared at 152 in src/domain/worldPulse/suspicion.js
+  docs/DESIGN_FP_ARCH_GR.md:36  cites simulationRules.js:185  but `ENGINE_GATED_VIRTUAL_RULE_KEYS` is declared at 230 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_GR.md:176  cites peaceTerms.js:348  but `mintedThisPair` is declared at 379 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_ARCH_GR.md:180  cites peaceTerms.js:230  but `treatyTicksPerYear` is declared at 265, 958 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_ARCH_GR.md:180  cites peaceTermsSale.js:184  but `treatyTicksPerYear` is declared at 187 in src/domain/worldPulse/peaceTermsSale.js
+  docs/DESIGN_FP_ARCH_GR.md:182  cites peaceTerms.js:634  but `worstObserved` is declared at 701 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_ARCH_GR.md:185  cites peaceTerms.js:686  but `nextLedger` is declared at 345 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_ARCH_GR.md:186  cites display/treatyDocument.js:51  but `TREATY_COMPLIANCE_VOICE` is declared at 53 in src/domain/display/treatyDocument.js
+  docs/DESIGN_FP_ARCH_GR.md:187  cites treatyBreach.js:47-51  but `repudiableTreatyPairs` is declared at 102 in src/domain/worldPulse/treatyBreach.js
+  docs/DESIGN_FP_ARCH_GR.md:187  cites realmManifest.js:288  but `REPUDIATE_TREATY` is declared at 341 in src/domain/events/realmManifest.js
+  docs/DESIGN_FP_ARCH_GR.md:189  cites peaceTerms.js:783  but `mintTreaty` is declared at 860 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_ARCH_GR.md:190  cites relationshipRulesCore.js:776  but `applyMode` is declared at 778 in src/domain/worldPulse/relationshipRulesCore.js
+  docs/DESIGN_FP_ARCH_GR.md:191  cites relationshipState.js:136  but `RELATIONSHIP_TURNING_POINT_CAP` is declared at 198 in src/domain/worldPulse/relationshipState.js
+  docs/DESIGN_FP_ARCH_GR.md:196  cites informationStatecraft.js:120  but `fractureCredibilityDeltas` is declared at 419 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_ARCH_GR.md:198  cites rulingPower.js:189  but `governingFactionOf` is declared at 224 in src/domain/rulingPower.js
+  docs/DESIGN_FP_ARCH_GR.md:198  cites npcLadderState.js:153  but `npcInFaction` is declared at 160 in src/domain/worldPulse/npcLadderState.js
+  docs/DESIGN_FP_ARCH_GR.md:198  cites npcLedger.js:586  but `durableIdForRoster` is declared at 587 in src/domain/worldPulse/npcLedger.js
+  docs/DESIGN_FP_ARCH_GR.md:201  cites sovereigntyBundle.js:166  but `catalogGrewSinceWr10` is declared at 191 in src/domain/worldPulse/sovereigntyBundle.js
+  docs/DESIGN_FP_ARCH_GR.md:491  cites src/domain/worldPulse/pactFormation.js:169  but `PACT_DRAFT_LENS` is declared at 190 in src/domain/worldPulse/pactFormation.js
+  docs/DESIGN_FP_ARCH_GR.md:569  cites informationStatecraft.js:120  but `fractureCredibilityDeltas` is declared at 419 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_ARCH_HB.md:917  cites habitCurve.js:149  but `PLEDGE_BOOK_CAP` is declared at 168 in src/domain/worldPulse/habit/habitCurve.js
+  docs/DESIGN_FP_ARCH_IN.md:501  cites beliefAxisSubjects.js:85  but `DEVOTION_BANDS` is declared at 115 in src/domain/worldPulse/beliefAxisSubjects.js
+  docs/DESIGN_FP_ARCH_INT.md:31  cites coup.js:45  but `WAR_SENTIMENT_PHOLD_WEIGHT` is declared at 49 in src/domain/worldPulse/coup.js
+  docs/DESIGN_FP_ARCH_INT.md:36  cites grievanceRead.js:29-30  but `WOUND_TYPE_RE` is declared at 48 in src/domain/worldPulse/grievanceRead.js
+  docs/DESIGN_FP_ARCH_INT.md:40  cites npcLadderState.js:72  but `HEIR_INHERIT_FRACTION` is declared at 77 in src/domain/worldPulse/npcLadderState.js
+  docs/DESIGN_FP_ARCH_INT.md:48  cites factionPairLedger.js:44  but `HALF_LIFE_WEEKS` is declared at 45 in src/domain/worldPulse/factionPairLedger.js
+  docs/DESIGN_FP_ARCH_INT.md:50  cites relationshipState.js:136  but `RELATIONSHIP_TURNING_POINT_CAP` is declared at 198 in src/domain/worldPulse/relationshipState.js
+  docs/DESIGN_FP_ARCH_INT.md:52  cites display/settlementRumors.js:116  but `WHAT_PHRASES` is declared at 123 in src/domain/display/settlementRumors.js
+  docs/DESIGN_FP_ARCH_INT.md:88  cites applyWorldPulse.js:943  but `carriedDemand` is declared at 958 in src/domain/worldPulse/applyWorldPulse.js
+  docs/DESIGN_FP_ARCH_INT.md:188  cites simulationRules.js:45  but `factionCompetitionEnabled` is declared at 70, 870, 972 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_INT.md:361  cites simulationRules.js:517  but `factionCompetitionEnabled` is declared at 70, 870, 972 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_POP.md:23  cites demographicsKernel.js:402  but `newsEntries` is declared at 250, 424 in src/domain/worldPulse/demographicsKernel.js
+  docs/DESIGN_FP_ARCH_POP.md:45  cites traditions/relations.js:48-49  but `ADOPTION_THRESHOLD` is declared at 50 in src/domain/traditions/relations.js
+  docs/DESIGN_FP_ARCH_POP.md:47  cites settlementLifecycleKernel.js:225  but `TERMINAL_DWELL` is declared at 227 in src/domain/worldPulse/settlementLifecycleKernel.js
+  docs/DESIGN_FP_ARCH_SP.md:64  cites simulationRules.js:739  but `infoModeOf` is declared at 1404 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_SP.md:110  cites beliefMap.js:224  but `beliefRecord` is declared at 225 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_FP_ARCH_SP.md:112  cites simulationRules.js:739  but `infoModeOf` is declared at 1404 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_SP.md:115  cites sovereigntyMarketStage.js:156  but `beliefLegsOf` is declared at 242 in src/domain/worldPulse/sovereigntyMarketStage.js
+  docs/DESIGN_FP_ARCH_SP.md:120  cites peaceTermsCatalog.js:141  but `TERM_CATALOG` is declared at 180 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/DESIGN_FP_ARCH_SP.md:123  cites src/lib/spatialUsage.js:243-269  but `intelCooldown` is declared at 380 in src/lib/spatialUsage.js
+  docs/DESIGN_FP_ARCH_SP.md:127  cites settlementRumors.js:116  but `WHAT_PHRASES` is declared at 123 in src/domain/display/settlementRumors.js
+  docs/DESIGN_FP_ARCH_SP.md:143  cites informationStatecraft.js:584  but `alignmentOf` is declared at 1379 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_ARCH_SP.md:143  cites beliefMap.js:1025  but `applyAllyIntelSharing` is declared at 1046 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_FP_ARCH_SP.md:143  cites informationStatecraft.js:500  but `alignmentOf` is declared at 1379 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_ARCH_SP.md:145  cites src/domain/roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCH_SP.md:145  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_ARCH_SP.md:562  cites roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCH_TR.md:29  cites commodityFlow.js:260  but `assertGoodsConservation` is declared at 263 in src/domain/spatial/commodityFlow.js
+  docs/DESIGN_FP_ARCH_TR.md:31  cites simulationRules.js:490  but `commodityFlowEnabled` is declared at 896, 1081 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_TR.md:38  cites seaLanes.js:84-87  but `SEA_LANE_CAPACITY` is declared at 102 in src/domain/spatial/seaLanes.js
+  docs/DESIGN_FP_ARCH_TR.md:39  cites simulationRules.js:528  but `routeLifecycleEnabled` is declared at 1119 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_TR.md:40  cites simulationRules.js:547  but `magicEconomyEnabled` is declared at 1138 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_TR.md:61  cites tradeWar.js:81  but `FLIP_COOLDOWN_TICKS` is declared at 86 in src/domain/worldPulse/tradeWar.js
+  docs/DESIGN_FP_ARCH_TR.md:70  cites commonsVoiceKernel.js:155  but `RUNG_KIND` is declared at 184 in src/domain/worldPulse/commonsVoiceKernel.js
+  docs/DESIGN_FP_ARCH_TR.md:82  cites simulationRules.js:472  but `envoyDiplomacyEnabled` is declared at 1063 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_TR.md:84  cites peaceTermsCatalog.js:77  but `TERM_FAMILIES` is declared at 349 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/DESIGN_FP_ARCH_TR.md:98  cites settlementRumors.js:116  but `WHAT_PHRASES` is declared at 123 in src/domain/display/settlementRumors.js
+  docs/DESIGN_FP_ARCH_TR.md:99  cites roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCH_TR.md:99  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_ARCH_TR.md:99  cites roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCH_TR.md:138  cites simulationRules.js:579  but `demographicsEnabled` is declared at 1170 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_TR.md:548  cites sovereigntyBundle.js:166  but `catalogGrewSinceWr10` is declared at 191 in src/domain/worldPulse/sovereigntyBundle.js
+  docs/DESIGN_FP_ARCH_WC.md:4330  cites warArmyRecord.js:127  but `foodReserve` is declared at 132 in src/domain/worldPulse/warArmyRecord.js
+  docs/DESIGN_FP_ARCH_WC.md:4330  cites attrition.js:312  but `foodReserve` is declared at 287 in src/domain/worldPulse/attrition.js
+  docs/DESIGN_FP_ARCH_WC.md:4800  cites warArmyRecord.js:127  but `foodReserve` is declared at 132 in src/domain/worldPulse/warArmyRecord.js
+  docs/DESIGN_FP_ARCH_WC.md:5669  cites migration.js:504-511  but `columnOf` is declared at 543 in src/domain/spatial/migration.js
+  docs/DESIGN_FP_ARCH_WC.md:5704  cites migration.js:578  but `releaseArrivals` is declared at 616 in src/domain/spatial/migration.js
+  docs/DESIGN_FP_ARCH_WC.md:6726  cites convergence.js:185  but `ENGAGEMENT_MOVES` is declared at 190 in src/domain/worldPulse/convergence.js
+  docs/DESIGN_FP_ARCH_WC.md:6730  cites warArmyRecord.js:127  but `foodReserve` is declared at 132 in src/domain/worldPulse/warArmyRecord.js
+  docs/DESIGN_FP_ARCH_WC.md:6739  cites warHomeCosts.js:443  but `leviedPopulationBySource` is declared at 452 in src/domain/worldPulse/warHomeCosts.js
+  docs/DESIGN_FP_ARCH_WC.md:6748  cites envoyErrandVocabulary.js:130  but `PURPOSE_CLASS_BY_PURPOSE` is declared at 147 in src/domain/worldPulse/envoyErrandVocabulary.js
+  docs/DESIGN_FP_ARCH_WC.md:6922  cites espionageMath.js:96  but `TAP_LEVELS` is declared at 104 in src/domain/worldPulse/espionage/espionageMath.js
+  docs/DESIGN_FP_ARCH_WF.md:44  cites peaceTermsCatalog.js:192  but `TERM_TYPES` is declared at 346 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/DESIGN_FP_ARCH_WF.md:52  cites realmEvents.js:24  but `COMPOUND_SIGNATURES` is declared at 25 in src/domain/worldPulse/realmEvents.js
+  docs/DESIGN_FP_ARCH_WF.md:175  cites src/domain/roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_FP_ARCH_WF.md:206  cites simulationRules.js:185  but `ENGINE_GATED_VIRTUAL_RULE_KEYS` is declared at 230 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_ARCH_WF.md:745  cites peaceTermsCatalog.js:192  but `TERM_FAMILIES` is declared at 349 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/DESIGN_FP_ARCH_WF.md:746  cites sovereigntyBundle.js:166  but `catalogGrewSinceWr10` is declared at 191 in src/domain/worldPulse/sovereigntyBundle.js
+  docs/DESIGN_FP_ARCH_WY.md:689  cites mapSlice.js:328-330  but `setLayerFilter` is declared at 382 in src/store/mapSlice.js
+  docs/DESIGN_FP_COHERENCE_FOLD.md:515  cites export-json.js:90  but `distanceUnit` is declared at 89 in public/map/modules/dynamic/export-json.js
+  docs/DESIGN_FP_COUPLINGS.md:195  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_GRAMMAR.md:202  cites peaceTermsDocument.js:150  but `frayingTermOf` is declared at 154 in src/domain/worldPulse/peaceTermsDocument.js
+  docs/DESIGN_FP_GRAMMAR.md:215  cites peaceTerms.js:213  but `mintedTick` is declared at 220, 954 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_GRAMMAR.md:217  cites informationStatecraft.js:363  but `fractureCredibilityDeltas` is declared at 419 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_GRAMMAR.md:555  cites peaceTerms.js:885  but `believedMarginAtSignature` is declared at 955 in src/domain/worldPulse/peaceTerms.js
+  docs/DESIGN_FP_GRAMMAR.md:1067  cites treatyBreach.js:46-51  but `isRepudiableTreaty` is declared at 87 in src/domain/worldPulse/treatyBreach.js
+  docs/DESIGN_FP_INFORMATION.md:175  cites informationStatecraft.js:1487  but `disclosureFidelityFor` is declared at 1211 in src/domain/worldPulse/informationStatecraft.js
+  docs/DESIGN_FP_INFORMATION.md:205  cites beliefAxisSubjects.js:85  but `DEVOTION_BANDS` is declared at 115 in src/domain/worldPulse/beliefAxisSubjects.js
+  docs/DESIGN_FP_INFORMATION.md:794  cites infoLure.js:45-48  but `lureCommission` is declared at 588 in src/domain/worldPulse/infoLure.js
+  docs/DESIGN_FP_INTERIOR.md:243  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_INTERIOR.md:278  cites simulationRules.js:306  but `factionCompetitionEnabled` is declared at 70, 870, 972 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_INTERIOR.md:571  cites simulationRules.js:743  but `factionCompetitionEnabled` is declared at 70, 870, 972 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_POPULATIONS.md:172  cites traditions/relations.js:48-49, 226  but `adoptedFrom` is declared at 144, 281 in src/domain/traditions/relations.js
+  docs/DESIGN_FP_POPULATIONS.md:446  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_POPULATIONS.md:1037  cites warSeatBooks.js:540  but `readWarSeatBooks` is declared at 618 in src/domain/worldPulse/warSeatBooks.js
+  docs/DESIGN_FP_SPINE.md:294  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_TRADE.md:200  cites simulationRules.js:424  but `commodityFlowEnabled` is declared at 896, 1081 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_TRADE.md:206  cites simulationRules.js:449-462  but `routeLifecycleEnabled` is declared at 1119 in src/domain/worldPulse/simulationRules.js
+  docs/DESIGN_FP_TRADE.md:222  cites strategicPosture.js:222  but `courtRiskAppetiteOf` is declared at 303 in src/domain/worldPulse/strategicPosture.js
+  docs/DESIGN_FP_TRADE.md:222  cites roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/DESIGN_HOOK_NONREDUNDANCY.md:112  cites src/generators/hookVariety.js:42  but `drawUnique` is declared at 93 in src/generators/hookVariety.js
+  docs/DESIGN_HOOK_NONREDUNDANCY.md:116  cites src/domain/hookEscalation.js:43  but `collectAllHooks` is declared at 49 in src/domain/hookEscalation.js
+  docs/DESIGN_REALM_MAGIC_TOGGLE.md:114  cites composeInstantWorld.js:180  but `settType` is declared at 139 in src/lib/instantWorld/composeInstantWorld.js
+  docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:435  cites pulseKernel.js:1938  but `alignmentOf` is declared at 2161, 2247 in src/domain/worldPulse/pulseKernel.js
+  docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:435  cites beliefMap.js:915  but `applyAllyIntelSharing` is declared at 1046 in src/domain/worldPulse/beliefMap.js
+  docs/DESIGN_WAR_CONVENIENCE_AND_TRIBUTE.md:436  cites warTermination.js:762-766  but `actorId` is declared at 638, 646, 656, 746 in src/domain/worldPulse/warTermination.js
+  docs/FABLE_VALIDATION_QUEUE.md:185  cites tierResourceDynamics.js:106  but `tierEligibility` is declared at 119 in src/domain/worldPulse/tierResourceDynamics.js
+  docs/FABLE_VALIDATION_QUEUE.md:637  cites src/domain/region/graph.js:310  but `normalizeEdge` is declared at 198 in src/domain/region/graph.js
+  docs/FABLE_VALIDATION_QUEUE.md:852  cites behavioralContract.js:1051-1054  but `releaseCases` is declared at 1025 in src/domain/certification/behavioralContract.js
+  docs/FABLE_VALIDATION_QUEUE.md:1004  cites behavioralContract.js:1051-1054  but `releaseCases` is declared at 1025 in src/domain/certification/behavioralContract.js
+  docs/FABLE_VALIDATION_QUEUE.md:1219  cites behavioralContract.js:1051-1054  but `releaseCases` is declared at 1025 in src/domain/certification/behavioralContract.js
+  docs/FABLE_VALIDATION_QUEUE.md:7289  cites pactFormation.js:367  but `signPactProposal` is declared at 579 in src/domain/worldPulse/pactFormation.js
+  docs/FABLE_VALIDATION_QUEUE.md:7304  cites peaceTerms.js:250  but `signedTick` is declared at 276 in src/domain/worldPulse/peaceTerms.js
+  docs/FABLE_VALIDATION_QUEUE.md:7344  cites src/data/constants.js:56  but `prosperityRank` is declared at 97 in src/data/constants.js
+  docs/FABLE_VALIDATION_QUEUE.md:7436  cites check-observed-shape-readers.mjs:993-995, 671-673  but `dirtyInputsFor` is declared at 2317 in scripts/check-observed-shape-readers.mjs
+  docs/FABLE_VALIDATION_QUEUE.md:7442  cites domain/factionRename.js:355-359  but `NPC_NON_CASCADED_SURFACES` is declared at 361 in src/domain/factionRename.js
+  docs/FABLE_VALIDATION_QUEUE.md:7444  cites locksPreservation.js:139  but `idArray` is declared at 115, 308 in src/domain/locksPreservation.js
+  docs/FABLE_VALIDATION_QUEUE.md:7451  cites mapSlice.js:815-830  but `burgToConfig` is declared at 872 in src/store/mapSlice.js
+  docs/FABLE_VALIDATION_QUEUE.md:7457  cites aiLayer.js:222  but `plotHooks` is declared at 228 in src/generators/aiLayer.js
+  docs/FABLE_VALIDATION_QUEUE.md:7478  cites locksPreservation.js:139  but `idArray` is declared at 115, 308 in src/domain/locksPreservation.js
+  docs/FABLE_VALIDATION_QUEUE.md:7483  cites saves.js:235-251  but `neighbourNetwork` is declared at 365 in src/lib/saves.js
+  docs/FIRST_CONTACT_BACKLOG.md:160  cites App.jsx:74  but `PricingMomentCard` is declared at 77 in src/App.jsx
+  docs/FIRST_CONTACT_BACKLOG.md:2766  cites src/config/pricing.js:255  but `priceCents` is declared at 245, 267, 298, 318 in src/config/pricing.js
+  docs/GENERATION_TIME_SHIFT_MAP_DOSSIER.md:147  cites factionCategories.js:121-126  but `inferFactionCategory` is declared at 149 in src/generators/power/factionCategories.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:36  cites graph.js:21-38  but `REGIONAL_CHANNEL_TYPES` is declared at 47 in src/domain/region/graph.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:36  cites graph.js:456-512  but `relationshipChannelBundle` is declared at 665 in src/domain/region/graph.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:44  cites graph.js:40  but `REGIONAL_CHANNEL_STATUSES` is declared at 66 in src/domain/region/graph.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:51  cites graph.js:674  but `delayTicks` is declared at 227, 944 in src/domain/region/graph.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:64  cites stressors.js:628  but `ageRoamingStressors` is declared at 313 in src/domain/worldPulse/stressors.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:65  cites stressorDynamics.js:748  but `originContext` is declared at 951 in src/domain/worldPulse/stressorDynamics.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:203  cites stressorDynamics.js:920  but `windDownSponsoredStressors` is declared at 929 in src/domain/worldPulse/stressorDynamics.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:286  cites relationshipRuleHelpers.js:566  but `sharedEnemyAllianceCandidate` is declared at 591 in src/domain/worldPulse/relationshipRuleHelpers.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:301  cites npcAgency.js:799-814  but `evaluateNpcRules` is declared at 1112 in src/domain/worldPulse/npcAgency.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:301  cites prng.js:50,62  but `weightedPick` is declared at 60 in src/kernel/prng.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:317  cites pulseKernel.js:1481  but `structuralCandidates` is declared at 1492 in src/domain/worldPulse/pulseKernel.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:323  cites stressorDynamics.js:920  but `windDownSponsoredStressors` is declared at 929 in src/domain/worldPulse/stressorDynamics.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:343  cites authSlice.js:364  but `canUseCustomContent` is declared at 840 in src/store/authSlice.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:352  cites causalState.js:539  but `deriveReligiousAuthority` is declared at 1120 in src/domain/causalState.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:355  cites stressors.js:156  but `spreadChannels` is declared at 531, 812 in src/domain/worldPulse/stressors.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:364  cites corruption.js:521  but `hasCriminalInst` is declared at 597 in src/domain/corruption.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:466  cites flows.js:114  but `tradeScarcityFlows` is declared at 124 in src/domain/worldPulse/flows.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:468  cites pressureModel.js:142  but `countChannels` is declared at 88 in src/domain/worldPulse/pressureModel.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:529  cites corruption.js:521  but `hasCriminalInst` is declared at 597 in src/domain/corruption.js
+  docs/GEOPOLITICAL_WAR_LAYER.md:557  cites rulingPower.js:376  but `transferRulingPower` is declared at 493 in src/domain/rulingPower.js
+  docs/GOLDEN_SHIFT_LEDGER.md:332  cites region/graph.js:649  but `syncRelationshipChannelBundle` is declared at 737 in src/domain/region/graph.js
+  docs/GOLDEN_SHIFT_LEDGER.md:465  cites region/graph.js:649  but `syncRelationshipChannelBundle` is declared at 737 in src/domain/region/graph.js
+  docs/MASTER_MERGE_PLAN.md:284  cites auth.js:152-154  but `redirectTo` is declared at 167, 361 in src/lib/auth.js
+  docs/MASTER_MERGE_PLAN.md:835  cites tests/build/vendorPdfLazy.test.js:426  but `CLOSURE_BUDGET_BYTES` is declared at 565 in tests/build/vendorPdfLazy.test.js
+  docs/PHASE4_FAITH_DELTA.md:75  cites religiousContest.js:339-499  but `advanceReligionStates` is declared at 544 in src/domain/worldPulse/religiousContest.js
+  docs/PHASE4_FAITH_DELTA.md:124  cites src/domain/worldPulse/pantheon.js:129-135  but `deityIdOf` is declared at 141 in src/domain/worldPulse/pantheon.js
+  docs/PHASE4_FAITH_DELTA.md:167  cites religionState.js:491-513  but `applyDivineMandate` is declared at 762 in src/domain/worldPulse/religionState.js
+  docs/PHASE4_FAITH_DELTA.md:312  cites religionState.js:614  but `faithProfile` is declared at 641 in src/domain/worldPulse/religionState.js
+  docs/PHASE4_FAITH_DELTA.md:339  cites religiousContest.js:434  but `deityLocalStrength` is declared at 508 in src/domain/worldPulse/religiousContest.js
+  docs/PHASE4_FAITH_DELTA.md:341  cites religionState.js:570  but `MANDATE_RANGE` is declared at 681 in src/domain/worldPulse/religionState.js
+  docs/PHASE4_FAITH_DELTA.md:342  cites religiousContest.js:487  but `pietyMult` is declared at 754 in src/domain/worldPulse/religiousContest.js
+  docs/PHASE4_FAITH_DELTA.md:346  cites disposition.js:234  but `W_DEITY` is declared at 195 in src/domain/worldPulse/disposition.js
+  docs/PHASE4_FAITH_DELTA.md:347  cites causalState.js:731-744  but `lawDir` is declared at 957 in src/domain/causalState.js
+  docs/PHASE55_E0_TEMPO_GOVERNOR_PLAN.md:189  cites candidateEvents.js:116  but `compareStableKeys` is declared at 379 in src/domain/worldPulse/candidateEvents.js
+  docs/PHASE55_E0_TEMPO_GOVERNOR_PLAN.md:239  cites candidateEvents.js:380-430  but `rollCandidates` is declared at 697 in src/domain/worldPulse/candidateEvents.js
+  docs/PHASE55_SPATIAL_ENGINE_DESIGN.md:996  cites campaignWorldPulseSlice.js:187  but `canonizeCampaignWorld` is declared at 331 in src/store/campaignWorldPulseSlice.js
+  docs/PHASE55_SPATIAL_ENGINE_DESIGN.md:1336  cites disposition.js:221  but `computeAggressiveness` is declared at 253 in src/domain/worldPulse/disposition.js
+  docs/REGIONAL_ENGINE_AUDIT.md:77  cites graph.js:291-294  but `relationshipType` is declared at 204, 263, 481, 498 in src/domain/region/graph.js
+  docs/RISK_REGISTER.md:58  cites campaignSlice.js:436-457  but `persistCampaignState` is declared at 591, 686, 728, 773 in src/store/campaignSlice.js
+  docs/RISK_REGISTER.md:116  cites SettlementsPanel.jsx:612  but `filteredSaves` is declared at 685 in src/components/SettlementsPanel.jsx
+  docs/RISK_REGISTER.md:117  cites domain/events/mutateHelpers.js:47  but `powerStructure` is declared at 160 in src/domain/events/mutateHelpers.js
+  docs/RISK_REGISTER.md:118  cites tonightAtTheTable.js:31-63  but `npcSecretText` is declared at 84 in src/domain/summary/tonightAtTheTable.js
+  docs/SITE_COHERENCE_AUDIT.md:61  cites resourceData.js:118  but `tradeGoods` is declared at 20, 31, 42, 53 in src/data/resourceData.js
+  docs/SITE_COHERENCE_AUDIT.md:83  cites townLayoutV2.js:624  but `srcA` is declared at 620 in src/domain/townMap/townLayoutV2.js
+  docs/SITE_COHERENCE_AUDIT.md:145  cites townLayoutV2.js:283  but `exportsList` is declared at 284 in src/domain/townMap/townLayoutV2.js
+  docs/SITE_COHERENCE_AUDIT.md:170  cites src/lib/spatialUsage.js:158  but `commercialReasons` is declared at 362 in src/lib/spatialUsage.js
+  docs/SITE_COHERENCE_AUDIT.md:188  cites check-observed-shape-readers.mjs:124-129  but `rowOf` is declared at 1761 in scripts/check-observed-shape-readers.mjs
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:68  cites npcAgency.js:807  but `evaluateNpcRules` is declared at 1112 in src/domain/worldPulse/npcAgency.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:124  cites candidateEvents.js:109  but `simulationRules` is declared at 571, 583 in src/domain/worldPulse/candidateEvents.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:128  cites applyWorldPulse.js:421  but `wizardNews` is declared at 1148, 1196, 1235, 1272 in src/domain/worldPulse/applyWorldPulse.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:297  cites npcAgency.js:445  but `npcStates` is declared at 434, 651, 697, 1180 in src/domain/worldPulse/npcAgency.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:369  cites stressorGates.js:428  but `religiousConversionGate` is declared at 719 in src/domain/worldPulse/stressorGates.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:380  cites applyWorldPulse.js:680  but `byId` is declared at 1040 in src/domain/worldPulse/applyWorldPulse.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:438  cites stressorPicker.js:31  but `GEN_TO_PULSE_TYPE` is declared at 35 in src/domain/stressorPicker.js
+  docs/SUBSYSTEM_INTEGRATION_PLAN.md:593  cites candidateEvents.js:259  but `rollCandidates` is declared at 697 in src/domain/worldPulse/candidateEvents.js
+  docs/TEMPORAL_AUDIT.md:61  cites worldPulse/worldState.js:302  but `canonizeWorldState` is declared at 676 in src/domain/worldPulse/worldState.js
+  docs/TEMPORAL_AUDIT.md:63  cites worldPulse/applyWorldPulse.js:1024  but `applyWorldPulseProposal` is declared at 1176 in src/domain/worldPulse/applyWorldPulse.js
+  docs/TEMPORAL_AUDIT.md:64  cites region/graph.js:84  but `nowIso` is declared at 99 in src/domain/region/graph.js
+  docs/TEMPORAL_AUDIT.md:65  cites region/wizardNews.js:169  but `nowIso` is declared at 275 in src/domain/region/wizardNews.js
+  docs/TEMPORAL_AUDIT.md:70  cites userEdits.js:171  but `editedAt` is declared at 185 in src/domain/userEdits.js
+  docs/TEMPORAL_AUDIT.md:99  cites worldPulse/stressors.js:404  but `updatedAt` is declared at 288, 339, 347, 398 in src/domain/worldPulse/stressors.js
+  docs/TEMPORAL_AUDIT.md:100  cites region/wizardNews.js:476  but `createdAt` is declared at 669, 969, 1009 in src/domain/region/wizardNews.js
+  docs/TEMPORAL_AUDIT.md:101  cites region/graph.js:190-191  but `createdAt` is declared at 232 in src/domain/region/graph.js
+  docs/TEMPORAL_AUDIT.md:110  cites kernel/prng.js:79  but `generateSeed` is declared at 247 in src/kernel/prng.js
+  docs/analytics-event-taxonomy.md:22  cites src/domain/causalState.js:89  but `CAUSAL_BANDS` is declared at 422 in src/domain/causalState.js
+  docs/analytics-event-taxonomy.md:65  cites src/components/OutputContainer.jsx:78-83  but `TAB_GROUPS` is declared at 96 in src/components/OutputContainer.jsx
+  docs/analytics-event-taxonomy.md:93  cites settlementSlice.js:250  but `queueEdit` is declared at 264 in src/store/settlementSlice.js
+  docs/analytics-event-taxonomy.md:95  cites settlementSlice.js:273  but `commitPendingEdits` is declared at 267 in src/store/settlementSlice.js
+  docs/analytics-event-taxonomy.md:187  cites src/lib/gallery.js:41  but `publishSettlement` is declared at 57 in src/lib/gallery.js
+  docs/analytics-event-taxonomy.md:188  cites gallery.js:52  but `unpublishSettlement` is declared at 78 in src/lib/gallery.js
+  docs/briefs/W2_CONJUNCTION_CONTENT_BRIEF.md:10  cites causeLifecycle.js:88  but `causeClass` is declared at 373, 379, 397, 449 in src/domain/worldPulse/causeLifecycle.js
+  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2279  cites src/domain/corruption.js:421-441  but `CAPTURE_LADDER` is declared at 474 in src/domain/corruption.js
+  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:2571  cites src/domain/causalState.js:300-315  but `defenseProfileHasWalls` is declared at 380 in src/domain/causalState.js
+  docs/content/RECEIPT_POOLS_DOSSIER_STATE.md:3152  cites src/domain/display/defenseDisplay.js:29  but `DEFENSE_STRESS_STATUS` is declared at 61 in src/domain/display/defenseDisplay.js
+  docs/content/RECEIPT_POOLS_INTERIOR.md:38  cites demographicsHerald.js:58  but `QUANTITY_BANDS` is declared at 72 in src/domain/worldPulse/demographicsHerald.js
+  docs/implementation/INDEX.md:1437  cites implementation-packets.mjs:498  but `changeManifest` is declared at 897, 1258, 1302 in scripts/implementation-packets.mjs
+  docs/implementation/PACKET_MANIFEST.json:33994  cites authSlice.js:83-85  but `canEditSettlement` is declared at 866 in src/store/authSlice.js
+  docs/implementation/PACKET_MANIFEST.json:35009  cites worldPulse/simulationRules.js:976  but `routeLifecycleEnabled` is declared at 1119 in src/domain/worldPulse/simulationRules.js
+  docs/implementation/PACKET_MANIFEST.json:35141  cites worldPulse/simulationRules.js:976  but `routeLifecycleEnabled` is declared at 1119 in src/domain/worldPulse/simulationRules.js
+  docs/implementation/PACKET_MANIFEST.json:37990  cites src/lib/instantWorld/composeInstantWorld.js:226  but `instantWorld` is declared at 500 in src/lib/instantWorld/composeInstantWorld.js
+  docs/implementation/charters/EDIT-MODE-TRAIN.md:57  cites settlementRenameHelpers.js:249  but `campaignState` is declared at 121, 237 in src/store/settlementRenameHelpers.js
+  docs/implementation/charters/EDIT-MODE-TRAIN.md:87  cites neighbourBackLink.js:99  but `findSaveByName` is declared at 71 in src/domain/relationships/neighbourBackLink.js
+  docs/implementation/preambles/WC-PREAMBLE.md:69  cites peaceTermsCatalog.js:192  but `TERM_FAMILIES` is declared at 349 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/implementation/preambles/WC-PREAMBLE.md:71  cites espionageMath.js:96  but `TAP_LEVELS` is declared at 104 in src/domain/worldPulse/espionage/espionageMath.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:67  cites pulseKernel.js:184  but `nextWorldStateForPulse` is declared at 202 in src/domain/worldPulse/pulseKernel.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:126  cites generosityKernel.js:131  but `intelActs` is declared at 1037 in src/domain/worldPulse/generosityKernel.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:127  cites traditionsKernel.js:258  but `asObject` is declared at 110 in src/domain/worldPulse/traditionsKernel.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:129  cites worldState.js:648  but `WEEKS_PER_YEAR` is declared at 41 in src/domain/worldPulse/worldState.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:129  cites intelActs.js:104-106  but `WEEKS_PER_YEAR` is declared at 71 in src/domain/spatial/intelActs.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:186  cites worldState.js:15  but `cloneArray` is declared at 74 in src/domain/worldPulse/worldState.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:188  cites worldState.js:695  but `appendPulseHistory` is declared at 796 in src/domain/worldPulse/worldState.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:189  cites warTermination.js:1032  but `syntheticPrior` is declared at 1053 in src/domain/worldPulse/warTermination.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:203  cites configSlice.js:80-88  but `updateConfig` is declared at 157 in src/store/configSlice.js
+  docs/implementation/preverification/EP-SUBSTRATE.md:205  cites InstantWorldEntry.jsx:38-40  but `freshSeed` is declared at 42 in src/components/instant/InstantWorldEntry.jsx
+  docs/implementation/preverification/EP-SUBSTRATE.md:206  cites InstantWorldEntry.jsx:63  but `setSeed` is declared at 110 in src/components/instant/InstantWorldEntry.jsx
+  docs/implementation/preverification/WF-SUBSTRATE.md:137  cites religionState.js:312  but `advanceShares` is declared at 342 in src/domain/worldPulse/religionState.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:138  cites realmEvents.js:24  but `COMPOUND_SIGNATURES` is declared at 25 in src/domain/worldPulse/realmEvents.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:150  cites peaceTermsCatalog.js:192  but `TERM_FAMILIES` is declared at 349 in src/domain/worldPulse/peaceTermsCatalog.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:151  cites sovereigntyBundle.js:166  but `catalogGrewSinceWr10` is declared at 191 in src/domain/worldPulse/sovereigntyBundle.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:179  cites worldState.js:496  but `cloneAdmittedEnvoyErrands` is declared at 202 in src/domain/worldPulse/worldState.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:180  cites src/lib/spatialUsage.js:238  but `TRACKED_LEDGER_KEYS` is declared at 242 in src/lib/spatialUsage.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:203  cites subsystemRowsVirtual.test.js:454  but `VIRTUAL_RULES` is declared at 293 in tests/domain/subsystemRowsVirtual.test.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:213  cites heraldRouting.js:64  but `HERALD_SECTIONS` is declared at 74 in src/domain/realm/heraldRouting.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:322  cites heraldRouting.js:64  but `HERALD_SECTIONS` is declared at 74 in src/domain/realm/heraldRouting.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:339  cites src/domain/display/settlementRumors.js:116  but `WHAT_PHRASES` is declared at 123 in src/domain/display/settlementRumors.js
+  docs/implementation/preverification/WF-SUBSTRATE.md:344  cites src/domain/roads/state.js:319  but `riskToleranceOf` is declared at 334 in src/domain/roads/state.js
+  docs/simulation-intelligence-layer.md:21  cites src/domain/causalState.js:67,89  but `CAUSAL_BANDS` is declared at 422 in src/domain/causalState.js
+  docs/simulation-intelligence-layer.md:43  cites requestMeta.ts:140  but `botGuard` is declared at 190 in supabase/functions/_shared/requestMeta.ts
+  docs/simulation-intelligence-layer.md:377  cites requestMeta.ts:140  but `botGuard` is declared at 190 in supabase/functions/_shared/requestMeta.ts
+
+···············stdout | tests/lint/proseMoveGrammar.walker.test.js > the four negative controls and the positive one (MOVE-GRAMMAR §4.4, as the sitting re-cut them) > CONTROL 4, SECOND HALF — the R1 leaves RED ON ARM E, which is what the control actually says
+
+CONTROL 4 · arm E over the R1 leaves
+  RED  292 of 708 pools (41.2%): uniformGrammar above the ceiling 30.0%
+  RED  407 of 708 pools (57.5%): uniformSegments above the ceiling 40.0%
+  RED  79 of 708 pools (11.2%): repeatedOpener above the ceiling 3.0%
+
+
+······stdout | tests/lint/proseMoveGrammar.walker.test.js > the classifier — measured against a hand-tagged sample, and printed > agrees with the hand tags at a rate this test PRINTS rather than asserts
+
+B-GRAMMAR CLASSIFIER · agreement on a 24-variant stratified hand-tagged sample
+  exact sequence:            19/24 = 0.79
+  conservative (the two revised-after-seeing tags counted as disagreements): 17/24 = 0.71
+  first move agrees:         22/24 = 0.92
+DIFF  hand=PRESENT                            read=PRESENT→PROVENANCE→PRESENT
+  ok  hand=PRESENT→ABSENCE→PRESENT            read=PRESENT→ABSENCE→PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=GEOGRAPHY→PRESENT                  read=GEOGRAPHY→PRESENT
+  ok  hand=INSTITUTION→OBJECT                 read=INSTITUTION→OBJECT
+  ok  hand=PRESENT→OBJECT                     read=PRESENT→OBJECT
+DIFF  hand=ABSENCE→PRESENT                    read=PRESENT→ABSENCE→PRESENT
+DIFF  hand=PRESENT                            read=PRESENT→HISTORY
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+DIFF  hand=OBJECT→PRESENT→HISTORY             read=OBJECT→HISTORY→PRESENT
+  ok  hand=PRESENT→CONTRADICTION              read=PRESENT→CONTRADICTION
+DIFF  hand=GEOGRAPHY→PRESENT                  read=PRESENT→OBJECT→PRESENT
+  ok  hand=INSTITUTION→PRESENT                read=INSTITUTION→PRESENT
+  ok  hand=INSTITUTION→PRESENT                read=INSTITUTION→PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=HISTORY→PRESENT                    read=HISTORY→PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=PRESENT                            read=PRESENT
+  ok  hand=PRESENT→CONSEQUENCE→HISTORY        read=PRESENT→CONSEQUENCE→HISTORY
+  ok  hand=PRESENT→TRADITION                  read=PRESENT→TRADITION
+  ok  hand=PRESENT                            read=PRESENT
+
+
+··········································stdout | tests/lint/proseMoveGrammar.walker.test.js > the ten instrument gaps (SITTING §J) — all reported, none gating > prints the register-level gap census over the shipped corpus
+
+B-GRAMMAR GAPS · first 400 R1 variants
+  opening shapes: article=183 settlement-token=103 other=37 free-relative=26 expletive=22 participial=17 negative=10 other-slot=2
+  close kinds:    other=323 pronoun=57 abstraction=11 civicNoun=9
+  tenses:         present=294 subjunctive=56 past=38 future=12
+  settlement-token openers (gap (a), PER POOL): register total 103 · pools with any 89 of 132 · pools with MORE THAN ONE 14 (wall 10's own subject) · most in one pool 2
+  contrast shapes: 65 · bare relatives: 1 · appositives: 4
+
+
+······
+AMBIGUOUS-BASENAME ARM (report-only): 207 citation(s) whose token matches 2+ files; 118 resolved by path evidence, 89 left open.
+  by rule: {"extent":102,"directory":7,"symbol":9}
+   69/75   resolved  en.js  (2 candidates)
+   14/31   resolved  registry.js  (2 candidates)
+    3/21   resolved  index.js  (13 candidates)
+    2/14   resolved  theme.js  (2 candidates)
+    5/13   resolved  index.ts  (32 candidates)
+    4/12   resolved  chronicle.js  (2 candidates)
+    3/11   resolved  helpers.js  (3 candidates)
+    3/10   resolved  Timeline.jsx  (2 candidates)
+    5/7    resolved  institutionServices.js  (2 candidates)
+    2/5    resolved  customCategories.js  (2 candidates)
+    4/4    resolved  customContent.js  (2 candidates)
+    2/2    resolved  bandLadders.js  (2 candidates)
+    1/1    resolved  IconButton.jsx  (2 candidates)
+    1/1    resolved  index.test.ts  (23 candidates)
+  OPEN  docs/A_PLUS_ROADMAP.md:164  index.ts:255  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/A_PLUS_ROADMAP.md:558  index.js:55  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/A_PLUS_ROADMAP.md:869  index.ts:171-172  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/CAPABILITY_REMEDIATION_PLAN.md:157  Timeline.jsx:107  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/COMPREHENSIVE_REVIEW_2026-07-13.md:871  index.js:2  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/COMPREHENSIVE_REVIEW_2026-07-13.md:1129  institutionServices.js:66-96  ->  src/data/institutionServices.js | src/generators/services/institutionServices.js
+  OPEN  docs/COMPREHENSIVE_REVIEW_2026-07-13.md:1948  index.ts:1737  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1405  theme.js:1021-1024  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1407  theme.js:403  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1408  theme.js:982-983  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1462  theme.js:969  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1464  theme.js:1001  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/FABLE_VALIDATION_QUEUE.md:1695  theme.js:1135  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/GAME_GRADE_AUDIT.md:303  customCategories.js:109-122  ->  src/components/compendium/customCategories.js | src/domain/customCategories.js
+  OPEN  docs/GENERATION_COHERENCE_AUDIT.md:363  institutionServices.js:147  ->  src/data/institutionServices.js | src/generators/services/institutionServices.js
+  OPEN  docs/GENERATION_COHERENCE_AUDIT.md:813  registry.js:112  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/GENERATION_COHERENCE_AUDIT.md:828  registry.js:90  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/GENERATION_COHERENCE_AUDIT.md:1112  index.ts:1105-1117  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/PHASE4_FAITH_DELTA.md:102  customCategories.js:41  ->  src/components/compendium/customCategories.js | src/domain/customCategories.js
+  OPEN  docs/REGIONAL_ENGINE_AUDIT.md:38  chronicle.js:29-34  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:97  Timeline.jsx:79-85  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3118  Timeline.jsx:70  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3133  registry.js:115  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3575  Timeline.jsx:79-85  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3886  registry.js:350  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3900  registry.js:179  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3915  registry.js:146  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3941  registry.js:451  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3977  Timeline.jsx:70  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:3984  Timeline.jsx:79-85  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:4477  index.js:108-119  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5170  index.js:155  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5175  index.js:155  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5500  index.js:107-119  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5500  index.js:98-106,131-136  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5500  index.js:100-102  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5510  index.js:107-119  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5547  index.js:131-136  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5689  index.js:89  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:5990  index.js:26  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:6744  index.js:110-112  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:6752  index.js:121-134  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7685  registry.js:379-394  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7697  registry.js:379-394  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7724  registry.js:250-258  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7731  registry.js:250-258  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7899  registry.js:333-341  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7903  registry.js:339-341  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7920  registry.js:316-319  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7924  registry.js:320-324  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7941  registry.js:367-373  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:7945  registry.js:374-376  ->  src/domain/edit/registry.js | src/domain/events/registry.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:8956  customCategories.js:13-53  ->  src/components/compendium/customCategories.js | src/domain/customCategories.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:10366  Timeline.jsx:70  ->  src/components/settlement/Timeline.jsx | src/pdf/sections/Timeline.jsx
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:10479  chronicle.js:118-126  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:10773  chronicle.js:8-10  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:10844  chronicle.js:23-26  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:10911  chronicle.js:51  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:12006  index.js:131  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SETTLEMENT_CAPABILITY_ATLAS.md:12017  index.js:107-119  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/SUBSYSTEM_INTEGRATION_PLAN.md:131  chronicle.js:60  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/SUBSYSTEM_INTEGRATION_PLAN.md:461  chronicle.js:60  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:118  en.js:58-60  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:615  helpers.js:65  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:630  helpers.js:65-79  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:1837  en.js:55  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:1837  en.js:63  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:1911  en.js:54  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:1912  en.js:55  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/UIUX_AUDIT_AND_PLAN.md:1912  en.js:63  ->  src/copy/en.js | public/map/libs/tinymce/plugins/help/js/i18n/keynav/en.js
+  OPEN  docs/briefs/W4a_LIBRARY_IMPLEMENTER_BRIEF.md:34  helpers.js:65  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/implementation/PACKET_MANIFEST.json:35386  theme.js:91  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/PACKET_MANIFEST.json:36376  theme.js:102  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/packets/fp/WF-1F.md:79  chronicle.js:16  ->  src/domain/worldPulse/chronicle.js | src/lib/chronicle.js
+  OPEN  docs/implementation/packets/settlement-editor/EM-D0a.md:39  theme.js:76  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/packets/settlement-editor/EM-D0a.md:123  theme.js:81  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/packets/settlement-editor/EM-D0c.md:235  theme.js:91  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/packets/settlement-editor/EM-V10.md:112  theme.js:102  ->  src/components/theme.js | src/pdf/theme.js
+  OPEN  docs/implementation/packets/website/WEB-2.md:79  index.ts:72  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/review-r2/VERIFY_DIMS_RESULTS.json:171  index.js:2  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/review-r2/VERIFY_DIMS_RESULTS.json:1599  index.js:2  ->  src/components/organic/index.js | src/copy/index.js | src/design/organic/index.js | src/domain/ai/index.js | …9 more
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:125  index.ts:79-99  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:794  helpers.js:2-8  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:796  helpers.js:2  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:850  helpers.js:69-72  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:962  helpers.js:41-44  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:1170  index.ts:585-618  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:1238  helpers.js:72  ->  src/components/settlement/eventComposer/helpers.js | src/components/settlements/helpers.js | src/generators/helpers.js
+  OPEN  docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json:2578  index.ts:585-618  ->  supabase/functions/account-actions/index.ts | supabase/functions/account-deletion-worker/index.ts | supabase/functions/admin-actions/index.ts | supabase/functions/ai-analyst/index.ts | …28 more
+
+····················stdout | tests/lint/proseMoveGrammar.walker.test.js > the walk over the shipped corpus — REPORTED, and the arms that cannot run say so > walks the whole dossier corpus and prints the level-1 figures
+
+B-GRAMMAR · level 1 over 2734 variants
+  realised orders n = 184; top: V1 60.4% · GEOGRAPHY→PRESENT 4.9% · V5 2.5% · V3|V8 2.2% · PERSON→PRESENT 1.9% · V7 1.8%
+  index-0 orders: V1 453 · GEOGRAPHY→PRESENT 46 · V5 24 · V3|V8 22
+  untagged variants: 2734 of 2734
+  pools 786 — uniform grammar 37.2%, uniform segments 56.9%, repeated opener 12.6%
+  fails by arm: D, F1, F10, F2, F3, F6, G/FEELING, G/FIGURE, G/FORECAST, G/MEANING
+
+
+···stdout | tests/lint/proseMoveGrammar.walker.test.js > the PROVENANCE detector cites the twelve holder kinds and nothing wider (SITTING §R c-16) > splits the shipped citations as THREE INTEGERS beside the total: kind-only 7 · generic-only 0 · both 0
+
+PROVENANCE · 7 citing variants of 2266
+  kind-only 7 · generic-only 0 · both 0
+  carrying the WITHDRAWN generic limb but NOT cited: 11
+    DS-DEF-1 :: readiness STRONG | from the road
+    DS-DEF-7 :: band collapsed | the muster books
+    DS-ECO-9 :: BLOCKADED | from the road
+    DS-POP-1 :: QUANTITY: many hundreds | from the road
+    DS-POP-1 :: RECEIPT: births exceed deaths | from the road
+    DS-GEN-3 :: scores.military: STRONG | The muster roll
+    DS-GEN-11 :: viable: true: the arithmetic closes | from the road
+
+
+······
+BARE-ADDRESS ARM (report-only): 1107 bare `:NNN` address(es) read; 31 point past the end of the file their sentence names.
+  tests/lint/proseWiringCensus.walker.test.js:1691  :603 inherits src/generators/narrativeText.js -> src/generators/narrativeText.js (388 lines)
+  tests/lint/proseWiringCensus.walker.test.js:1691  :608 inherits src/generators/narrativeText.js -> src/generators/narrativeText.js (388 lines)
+  docs/DESIGN_FP_ARCH_CN.md:113  :262 inherits dossierLazyTabs.js -> src/components/dossier/dossierLazyTabs.js (67 lines)
+  docs/DESIGN_FP_ARCH_CN.md:113  :283 inherits dossierLazyTabs.js -> src/components/dossier/dossierLazyTabs.js (67 lines)
+  docs/DESIGN_FP_ARCH_EC.md:431  :1063-1064 inherits aiGrounding.js -> src/domain/aiGrounding.js (555 lines)
+  docs/DESIGN_FP_ARCH_EC.md:2254  :1099 inherits strategicPosture.js -> src/domain/worldPulse/strategicPosture.js (325 lines)
+  docs/DESIGN_FP_ARCH_WY.md:1432  :574 inherits armyStrength.js -> src/domain/display/armyStrength.js (238 lines)
+  docs/DESIGN_FP_COHERENCE_FOLD.md:316  :213 inherits patronFall.js -> src/domain/worldPulse/patronFall.js (168 lines)
+  docs/DESIGN_FP_COUPLINGS.md:699  :311 inherits armyStrength.js -> src/domain/display/armyStrength.js (238 lines)
+  docs/DESIGN_FP_FAITH.md:1144  :1133 inherits beliefAxisSubjects.js -> src/domain/worldPulse/beliefAxisSubjects.js (463 lines)
+  docs/DESIGN_FP_TRADE.md:234  :872 inherits peaceTermsCatalog.js -> src/domain/worldPulse/peaceTermsCatalog.js (458 lines)
+  docs/implementation/PACKET_MANIFEST.json:34813  :549 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/foreign-policy/ES-5D.md:677  :2031 inherits espionageCareerCreditDormancy.test.js -> tests/property/espionageCareerCreditDormancy.test.js (424 lines)
+  docs/implementation/packets/foreign-policy/ES-5D.md:677  :2563 inherits espionageCareerCreditDormancy.test.js -> tests/property/espionageCareerCreditDormancy.test.js (424 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :604 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :207 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :309 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :382 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :495 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B1c1.md:928  :311 inherits src/domain/pendingEdits.js -> src/domain/pendingEdits.js (188 lines)
+  docs/implementation/packets/settlement-editor/EM-B3e.md:311  :442 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/settlement-editor/EM-B3e.md:311  :549 inherits importScrub.js -> src/lib/importScrub.js (226 lines)
+  docs/implementation/packets/town-cartography/MF-UC0.md:204  :1965 inherits institutionalCatalog.js -> src/data/institutionalCatalog.js (1830 lines)
+  docs/implementation/packets/town-cartography/MF-UC0.md:206  :2249 inherits institutionalCatalog.js -> src/data/institutionalCatalog.js (1830 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :128 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :210 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :312 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :420 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :525 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/packets/town-cartography/MF-UC1.md:178  :623 inherits src/domain/resolveTerrain.js -> src/domain/resolveTerrain.js (64 lines)
+  docs/implementation/preambles/WC-PREAMBLE.md:70  :1360 inherits settlementStrategy.js -> src/domain/worldPulse/settlementStrategy.js (1315 lines)
+
+········································································································································································································································································································································································································································································································································································································································stdout | tests/lint/observedShapeMigration.test.js > observed-shape schema-2 -> schema-4 heuristic migration > the CLI derives its target from the inputs and refuses a contradictory pair
+{
+  "predecessorDecreased": 0,
+  "predecessorGone": 0,
+  "predecessorIncreased": 0,
+  "predecessorNew": 1,
+  "predecessorSame": 1
+}
+
+·····························································································································································································································································································································································································································································································································
+EM-A1 ARM I-2 — the 12 declared pool ids:
+  faction.category
+  institution.class
+  institution.state
+  npc.role
+  npc.status
+  power.holder
+  tier
+  worldFact.culture
+  worldFact.monsterThreat
+  worldFact.resources
+  worldFact.stressors
+  worldFact.terrain
+···························stdout | tests/lint/proseComposed.walker.test.js > A0b — the text claims every declared field and no other > ⭐ THE SHIPPED CORPUS READING, printed and held SHRINK-ONLY
+
+A0b · the AUTHORING debt on the shipped corpus, before a byte of the rewrite moves
+  variants walked      2266
+  over-claims          55
+  under-claims         1282
+  implicit negations   13
+  NOT-EXECUTABLE reads 1530   pools carrying a finding 240
+
+
+stdout | tests/lint/proseComposed.walker.test.js > A5 — the four faces are not four synonym swaps > ⭐ THE FLOOR'S PROXY POPULATION, measured on the shipped pools and printed
+
+A5 · the SIBLING-distance distribution the wording-set floor will be cut from
+  sibling pairs 2645 over 708 pools
+  same opener 95   same sentence count 1898
+  content overlap in basis points, 0-999 / 1000-1999 / 2000-2999 / 3000-3999 / 4000+:
+    2449 / 172 / 17 / 5 / 2
+
+
+····································stdout | tests/lint/proseComposed.walker.test.js > ⭐⭐ THE REFUTERS' GROUNDS, AS REPORTED ARMS (SITTING §T.5) > THE RATE ON THE SHIPPED CORPUS, printed — the authoring debt the REWRITE inherits
+
+SITTING §T.5's four arms on the shipped corpus (2266 variants)
+  Tail 0 · Aspect 177 · Restatement 6 · Ambiguity 0
+
+
+stdout | tests/lint/proseComposed.walker.test.js > A13 — the PROVENANCE move, EXECUTABLE since the holder census landed (SEAM car 5b) > ⭐ THE CITATION HABIT ON THE SHIPPED CORPUS, printed for the sitting's budget
+
+A13 · the CITATION habit before any budget is set
+  variants naming a record holder: 7 of 2266
+  by block: DS-DEF-1 1 · DS-DEF-7 1 · DS-ECO-9 1 · DS-GEN-11 1 · DS-GEN-3 1 · DS-POP-1 2
+  EXECUTABLE VERDICTS (SEAM car 5b): LICENSED 2 · WITHHELD 5
+  by the pool's register standing: LICENSED <- LICENSED 2 · WITHHELD <- SOURCE-UNRESOLVED 5
+
+
+··················································stdout | tests/lint/proseComposed.walker.test.js > composedOrderIdOf — LEVEL1 union LEVEL2, and the share outside both > ⭐ THE SHARE OUTSIDE BOTH SETS, printed at the shipped corpus as car 6's baseline
+
+composedOrderIdOf · 2266 shipped variants as one-piece composed units
+  outside LEVEL1 union LEVEL2: 534 (2357 basis points)
+  V1 1498 · (outside) 534 · V5 65 · V3|V8 54 · V2 39 · V7 35 · V4 34 · V6 7
+
+
+stdout | tests/lint/proseComposed.walker.test.js > THE COMPOSED WALK — the exhaustive block re-walk, and the sampled walk with its sha > ⛔ A MODIFIER LANDING RE-WALKS ITS BLOCK EXHAUSTIVELY, never a sample
+
+THE BLOCK RE-WALK · DS-DEF-11 at a modifier landing
+  units walked 12   FAIL 0  WITHHELD 8   PASS 4
+
+
+stdout | tests/lint/proseComposed.walker.test.js > THE COMPOSED WALK — the exhaustive block re-walk, and the sampled walk with its sha > ⭐ THE SAMPLED COMPOSED WALK at a PLACEHOLDER N, with its cost and its sha printed
+
+THE SAMPLED COMPOSED WALK · N is a PLACEHOLDER until car 6 sets it
+  N 200 of 2266   sample sha 1c833c7b3bdda92af6b4214886ffe1e59ddccb3414631bb1d03804d21cd9bb8a
+  FAIL 7   WITHHELD 93   PASS 100
+  cost 78 ms for the sample, about 390 microseconds per unit; the whole corpus at this rate is about 884 ms
+
+
+··········································································································································································································································································································································································································································································································································································································
+[A3s] the two comparands disagree on 16 rows: resolveConfig|effectiveConfig, resolveResources|effectiveConfig, resolveStress|stress, resolveStress|effectiveConfig, resolveNeighbour|effectiveConfig, assembleInstitutions|institutions, subsumptionPass|institutions, cascadePass|institutions, isolationPass|stress, isolationPass|institutions, isolationPass|effectiveConfig, stressConfirmPass|stress, stressConfirmPass|effectiveConfig, generateEconomy|economicState, generateEconomy|effectiveConfig, factionCorrelationPass|institutions
+·································································stderr | tests/copy/localeParity.test.js > the door swings (runtime locale activation) > an unknown locale id is rejected and the active locale is unchanged
+[copy] unknown locale: zz-ZZ — staying on en
+
+··································································································································································································································································································································stdout | tests/lint/proseTasteCorruption.walker.test.js > the corruption closure is re-measured, and refused above the precedent > the candidates leaf pulls 6 files and stays under 293,079 B
+
+[closure] corruption.js into the defense candidates leaf: 6 file(s) / 153025 B against the 293079 B precedent (52 %)
+  src/data/entityTags.js
+  src/data/npcTraitWeights.js
+  src/domain/corruption.js
+  src/domain/prosperityRank.js
+  src/domain/settlement.schema.js
+  src/lib/entities.js
+[closure] the leaf's closure without the edge: 1 files / 4303 B · with it: 7 files / 157328 B
+
+
+stdout | tests/lint/proseTasteCorruption.walker.test.js > ⭐⭐ THE PAIRED-TOWN ARM: a covert fact leaves no trace on the player page > ⛔ THE STANDING OF THE THREE ARMS BELOW, stated before they run
+
+[taste-corruption] NOT-EXECUTABLE: DS-DEF-11's covert candidate function is refused to 8b, so no composed sentence reads a corruption impairment and the paired town cannot diverge on either face. The closure arms above are unaffected.
+
+
+······························································································································································································································································································································································································································································································································································································································stdout | tests/lint/proseTasteInterested.walker.test.js > ⭐⭐ THE STANDING, PRINTED AND ASSERTED ON BOTH TOWNS > prints the per-kind table and holds the four organs against every other kind
+
+[interested] CAPTURED · Kaltenwalde · town · criminalCaptureState corrupted
+  LICENSED rows 114 · holder named on 38 · INTERESTED 14
+  by kind (named/interested): court 0/0 · elders 0/0 · market 22/0 · muster 0/0 · parish 2/0 · road 0/0 · toll-bar 0/0 · treasury 14/14 · watch 0/0
+[interested] CLEAN · Al-istan · town · criminalCaptureState none
+  LICENSED rows 114 · holder named on 62 · INTERESTED 0
+  by kind (named/interested): court 16/0 · elders 0/0 · market 22/0 · muster 0/0 · parish 2/0 · road 0/0 · toll-bar 12/0 · treasury 14/0 · watch 0/0
+  the STATE'S ORGANS: office · court · treasury · watch
+
+
+······························································stdout | tests/copy/spellBreakCensus.test.js > THE SPELL-BREAK CENSUS — reader surfaces stay in character (shrink-only ratchet) > diagnostics (printed so the burn-down list can be re-checked)
+[spell-census] letter: strings=1 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+[spell-census] chronicle: strings=4001 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+[spell-census] decrees: strings=0 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+[spell-census] dossier: strings=132 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+[spell-census] roadScene: strings=12 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+[spell-census] causeWalk: strings=8 counts={"rawId":0,"tickSpeak":0,"camelKey":0,"jsonFragment":0,"softwareVoice":0}
+
+···················································································································································································································
+
+ Test Files  238 passed (238)
+      Tests  4485 passed (4485)
+   Start at  19:27:16
+   Duration  145.56s (transform 26.76s, setup 6.35s, import 278.60s, tests 631.17s, environment 21ms)
+
+exit=0
