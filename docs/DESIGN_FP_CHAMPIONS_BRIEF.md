@@ -16,6 +16,7 @@
 6. On the chair's four open decisions (death in the engine's hands; how many per world; may courts hire villains; may a champion leave a successor): "courts can hire villains. but such hiring is clandestine. there should be a system of confirmation based on our spy system that if let out, would damage thecourt's repuation. everything else is no, champions is left to the DM on the number. no on a successor because that is entering into the fate area."
 7. "Regarding the champions, as well as the dieties, when they are formed and this can also be authors in custom content, I want them to also have relations with kingdoms, settlements, and other NPCs, champions, dieties that impact their behavior when nearby anything related to them foiled by their personalities, and such relationships are both emergent and dynamic over a set amount of time. What are your thoughts to this?"
 8. "Also, we should be able to author and emergently organically as with closing the gates ban champions from certain regions, kingdoms or settlements"
+9. "What else should we add to deepen the emergency behavior, cohesive, and coherent and agent self of the champions and villains in accordance with our systems?"
 
 ---
 
@@ -94,3 +95,39 @@
 7. Movement and belief: the errand spine, the roamer belief, migrant columns, armies; a per-character belief store, capped.
 8. Cost: a few characters deciding weekly; the per-snapshot memo idiom.
 9. ANSWERED by the owner (message 6): death never the engine's · the number the DM's · courts may hire villains clandestinely, exposure through the spy system damages the court · no successors. Still to research: which landed quantity carries a court's damaged standing at home and abroad (legitimacy, credibility, relationship trust) — one reading, no new reputation law.
+
+---
+
+## §5 THE CHAIR'S PROPOSALS TO DEEPEN THE AGENT SELF (answering message 9; NOT yet the owner's — each needs his word)
+
+**The inner self.**
+1. **Values and one line they will not cross.** A closed set of values from the NPC system, plus one authored "never" (never betray an employer, never serve a theocracy, never harm the helpless). Pressure toward the line creates dilemmas; crossing it brings shame and drift. Villains have codes too.
+2. **Needs that shift in urgency.** Safety, coin, purpose, renown, belonging, as bands. A broke champion takes bad contracts; a famous one seeks meaning; a frightened one goes home.
+3. **The calling against the personal goal.** The arc engine: a saint who longs for home, a captain whose revenge conflicts with duty. Produces believable hesitation and turning points.
+4. **Turning points, including the fall and redemption.** Sustained shame, betrayal or disgrace can turn a champion toward villainy; sustained grace can redeem a villain. Polarity never flips silently: the engine proposes it as a hearing when its conditions are met, and the DM decides.
+5. **Secrets.** Each character can carry one hidden fact (a past, a debt, an employer) that the spy system can uncover; exposure moves renown and relations. The clandestine villain hire is one instance.
+
+**Social life.**
+6. **Debts and favours.** A court that ransomed a champion is owed; favours are called in (WC's cost-memory idiom). Obligations make choices non-trivial.
+7. **Fellowships and rivalries.** Characters travel together after shared deeds (a warden and a doctor), and rivals duel; both through the relations' one regard idiom.
+8. **Entanglement in court factions.** Factions inside a court court a famous champion and the champion backs one (faction competition is lit); a captain can become a coup's muscle only through the existing intervention terms (the coup budget is full).
+
+**Knowledge.**
+9. **Their own picture of the world.** They hear and spread rumours, carry news into the towns they enter (wayfare's carried word), and can be DECEIVED: a deceiver can lure a hero away with a false report.
+10. **Legends that precede them.** Renown is belief, and tales grow in the telling, so courts over- or under-rate a character they have never seen.
+
+**Coupling to the world (cohesion).**
+11. **One call board.** Every FP system already produces needs (plague, menace, war, heresy, unrest, dear markets); a derived, belief-read registry of CALLS keyed by domain is what characters weigh — one seam for every system, no special wiring per archetype.
+12. **Seasons.** Winter slows travel, festivals draw saints, the campaigning season draws captains (the clock law; wayfare's scale).
+13. **A material life without mortality.** A purse band, upkeep, wounds and illness that weaken them for a time, exhaustion that forces rest — vulnerability that respects "death is the DM's".
+14. **Legacy marks.** Deeds leave lasting state and chronicle lines; places remember them through their regard.
+
+**Villains.**
+15. **Schemes as staged plans.** Infiltrate, corrupt, strike — each stage an errand the spy system can detect; foiling a stage is a champion's deed.
+16. **Networks.** Villains turn ordinary NPCs into agents through the existing corruption web; a network can be rolled up thread by thread.
+
+**Legibility.**
+17. **Named arcs.** Sustained patterns become named arcs in the Herald and dossier (a feud, a pilgrimage, a fall, a redemption).
+18. **Big personal decisions as hearings.** Taking a great contract, crossing their line, a change of heart: the DM sees them coming.
+
+**Guardrails for all of the above:** closed vocabularies; bounded leans; belief, never truth; receipts on every choice; no fate; existing writers only (relations, banded stocks, the habit curve, rumour, errands, the corruption web, the treasury, stressors, faction competition, the hearing registry).
