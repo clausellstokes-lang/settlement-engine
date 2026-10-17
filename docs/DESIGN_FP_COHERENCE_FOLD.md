@@ -101,7 +101,7 @@ systematically failed (the spine reader's §12, confirmed by every family read).
     outside says so in its header with the reason. (Today the spine binds "the
     six program volumes and the coupling volume" by name; nine later volumes
     cite the spine zero times.)
-16. **THE FIRST-VISIBLE-LATENCY LAW** ⛔ RULED BY DELEGATION 2026-10-16, OD-FC-1 (the spine reader
+16. **THE FIRST-VISIBLE-LATENCY LAW** [CLARIFIED 2026-10-17 by the owner, verbatim: "Remember that we are building something that is mostly going to be behind the scenes in regard to the simulator. The DM wants emergent experience that only when scrutinized upon shows coherence. Not the other way around we’re not trying to show the full machinery." — so every 'first-visible sign' and 'felt sentence' is an OUTCOME in the world's voice (what happened to whom), never the machinery (bands, weights, odds, holds, mechanisms); the WHY is available on SCRUTINY (the Why panel, the causal walk, receipts) when the DM asks, never pushed onto the surface. Three layers: SURFACE (emergent outcomes) · SCRUTINY (coherence on demand) · MACHINERY (never shown).] ⛔ RULED BY DELEGATION 2026-10-16, OD-FC-1 (the spine reader
     rightly says a product rule about what a DM must see is the owner's).
     Proposed text: every mechanism declares, beside its clock, its FIRST-VISIBLE
     LATENCY in DM advances — the DM's advance unit is week / month / season /
@@ -129,7 +129,7 @@ systematically failed (the spine reader's §12, confirmed by every family read).
     rows only; "absent means zero" needs a dormancy reason written down. (The
     board counts 255 tuning tables; the chain-first amendment had to add this
     outside the constitution.)
-19. **THE FELT-PROOF LAW.** A mechanism is DONE when its DM-felt sentence fires
+19. **THE FELT-PROOF LAW.** [CLARIFIED 2026-10-17 — see requirement 16's bracket: the felt sentence is an outcome, the coherence is on scrutiny.] A mechanism is DONE when its DM-felt sentence fires
     in a lit preset on a seeded world and an experience read scores it — not
     when its fixture pin is green. Every wave names that sentence in its
     charter; a wave with no sentence is instrumentation and says so. (The

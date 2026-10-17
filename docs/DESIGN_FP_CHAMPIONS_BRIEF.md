@@ -130,4 +130,6 @@
 17. **Named arcs.** Sustained patterns become named arcs in the Herald and dossier (a feud, a pilgrimage, a fall, a redemption).
 18. **Big personal decisions as hearings.** Taking a great contract, crossing their line, a change of heart: the DM sees them coming.
 
+**The owner's doctrine (2026-10-17) governs every proposal above:** "Remember that we are building something that is mostly going to be behind the scenes in regard to the simulator. The DM wants emergent experience that only when scrutinized upon shows coherence. Not the other way around we’re not trying to show the full machinery." Characters' reasons are told as story on the surface ("she turned south"), their mechanics only on scrutiny.
+
 **Guardrails for all of the above:** closed vocabularies; bounded leans; belief, never truth; receipts on every choice; no fate; existing writers only (relations, banded stocks, the habit curve, rumour, errands, the corruption web, the treasury, stressors, faction competition, the hearing registry).
