@@ -135,3 +135,5 @@
 **Guardrails for all of the above:** closed vocabularies; bounded leans; belief, never truth; receipts on every choice; no fate; existing writers only (relations, banded stocks, the habit curve, rumour, errands, the corruption web, the treasury, stressors, faction competition, the hearing registry).
 
 **Renown for every NPC (owner, 2026-10-17):** champions' renown is one instance of the ONE fame-and-regard model for every person — see `DESIGN_FP_PARTY_BRIEF.md` §5.
+
+**Meeting the party (owner, 2026-10-17):** champions and villains may seek out the party, with a purpose (employment, history, relationship or regard) or from curiosity alone, "Just for meeting"; designed with the owner's words in `DESIGN_FP_PARTY_BRIEF.md` §6, which also records the owner's delegation ("I leave all judgment to you") for this brief's design calls.
