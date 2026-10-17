@@ -1,0 +1,15 @@
+# CENSUS SEAT BRIEF — the dominion (realm layer) and external forces (2026-10-17, chair 2fc13d59, Opus 5.5)
+
+The owner asked the chair to design two new FP families IN THE CURRENT ARCHITECTURE:
+1. THE DOMINION (the owner says "kingdom"; the word "realm" is TAKEN — it means the whole campaign world in this codebase): a political unit ABOVE settlements, "based in the vassalage system … a chain of vassalages and the one that sits at the very top is the capital, referencing a feudal like system", coherent and compatible with each settlement's own FP; with precedence between a settlement and its kingdom in trade, war, alliance; nuances and compromises; civil war ("does a civil war still mean its the same kingdom but despite that different settlements are organizing against each other?").
+2. EXTERNAL FORCES: a threat from outside the settlement system (the owner: "just a very simple generic option rather than a list of options of what the threat is so the DM can keep sovereignty over the story"). The world simulates the RESPONSE; the DM owns what the threat is.
+The tool is the DM's, not the table's: "We only supply setting and consequence."
+
+Your job is a MEASUREMENT, not a design: find what the code already has that each design must extend, never fork. Read code, do not guess.
+
+- CODE OF RECORD: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/2fc13d59-5fcc-4359-9f88-b2795e6919f4/scratchpad/master-00b648c9d` (a detached worktree now at master `81f1cd963`; read-only; `rg`/`sed` only; do not edit, do not run git that writes).
+- DESIGN RECORD (ledger checkout, read-only): `/Users/cstokes/Desktop/settlement-engine/docs/` — the FP constitution `DESIGN_FP_SPINE.md` §1 (requirements 1–24), `DESIGN_FP_COHERENCE_FOLD.md` (§2 status, §3 rulings, §3.4 the engagement registry, §5 vocabulary), the war rulings `DESIGN_WAR_RULINGS_ARCHITECTURE.md`, `DESIGN_REALM_DIRECTIVES.md`, `DESIGN_EDIT_MODE_AND_DECREES.md` if present, `DESIGN_W_SEAT.md` if present (else read it from master with `git -C <code-of-record> show HEAD:docs/DESIGN_W_SEAT.md`), and `OWNER_DECISION_QUEUE.md` by grep for owner words.
+
+Write your findings to `/Users/cstokes/Desktop/settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/findings/<SEAT>.md`, saving as you go. Every claim carries `file:line` at `81f1cd963` or an ODQ §; reasoning is marked PLAUSIBLE. Sections: (1) what exists, module by module, with the exported reads and the persisted shapes; (2) what is lit in which preset (`simulationRules.js`); (3) the owner's and chair's prior rulings that bind this family (verbatim quotes, ODQ §); (4) the seams a new family must use (the extension points, with addresses); (5) hazards (frozen files: `pulseKernel.js` 1581 effective, frozen; host files at the 800 effective ceiling — measure with the repo's eslint effective count or comment-stripped `wc`; homonyms with landed tokens); (6) gaps — what the design must newly build, stated as facts not proposals.
+
+Report ≤350 words + one table: outcome first, the five facts the design most needs, one CONFIRMED-vs-PLAUSIBLE sentence.
