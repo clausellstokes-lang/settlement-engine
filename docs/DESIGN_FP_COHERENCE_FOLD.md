@@ -254,6 +254,20 @@ systematically failed (the spine reader's §12, confirmed by every family read).
     and is written under the Evidence Law: who, upon whom, where, the default
     verdict, and nothing about what the DM might do; at a month-or-longer
     advance the RECEIPT ("resolved by the engine's default verdict") is the sign.
+    [RESTATED 2026-10-17 by the owner, verbatim: "Also just to make sure that
+    the simulator has this right as well for any hearing on a week by week basis
+    that the dungeon, master or user has not made a decision on is then left to
+    the RnG of the simulator to the side. Hearings only happen on the week.
+    Which means something that was held up three weeks ago when we decided to
+    advance by a month is not what we’re looking at." — (b) and (c) bind EVERY
+    hearing kind, the party's and the champions' included
+    (`DESIGN_FP_PARTY_BRIEF.md` §6 withdraws its earlier queue exception): a
+    hearing is minted only at the DM's one-week advance and lives that one week,
+    the next advance resolves it first from the DM's answer or the default, and
+    nothing is held over an advance. A party hearing's default is that nothing
+    has happened to the party (the party's fate is never the engine's); the RNG
+    decides only the other actor's course. The landed majors pause, the DM's own
+    switch, is a different object and stays as (c) rules.]
 
 ---
 

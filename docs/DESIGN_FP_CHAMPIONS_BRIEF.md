@@ -104,7 +104,7 @@
 1. **Values and one line they will not cross.** A closed set of values from the NPC system, plus one authored "never" (never betray an employer, never serve a theocracy, never harm the helpless). Pressure toward the line creates dilemmas; crossing it brings shame and drift. Villains have codes too.
 2. **Needs that shift in urgency.** Safety, coin, purpose, renown, belonging, as bands. A broke champion takes bad contracts; a famous one seeks meaning; a frightened one goes home.
 3. **The calling against the personal goal.** The arc engine: a saint who longs for home, a captain whose revenge conflicts with duty. Produces believable hesitation and turning points.
-4. **Turning points, including the fall and redemption.** Sustained shame, betrayal or disgrace can turn a champion toward villainy; sustained grace can redeem a villain. Polarity never flips silently: the engine proposes it as a hearing when its conditions are met, and the DM decides.
+4. **Turning points, including the fall and redemption.** Sustained shame, betrayal or disgrace can turn a champion toward villainy; sustained grace can redeem a villain. Polarity never flips silently: the engine proposes it as a hearing in the week its conditions are met, and the DM decides that week or the engine's default does (requirement 24; at a month-or-longer advance its receipt is the sign).
 5. **Secrets.** Each character can carry one hidden fact (a past, a debt, an employer) that the spy system can uncover; exposure moves renown and relations. The clandestine villain hire is one instance.
 
 **Social life.**
