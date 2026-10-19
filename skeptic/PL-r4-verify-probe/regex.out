@@ -1,0 +1,35 @@
+riders_lent {
+  ESCALATION_HINT: false,
+  DEESCALATION_HINT: false,
+  WOUND_TYPE_RE: false
+}
+riders_quartered {
+  ESCALATION_HINT: false,
+  DEESCALATION_HINT: false,
+  WOUND_TYPE_RE: false
+}
+peace_unkept {
+  ESCALATION_HINT: false,
+  DEESCALATION_HINT: false,
+  WOUND_TYPE_RE: false
+}
+protection_kept {
+  ESCALATION_HINT: false,
+  DEESCALATION_HINT: true,
+  WOUND_TYPE_RE: false
+}
+protection_failed {
+  ESCALATION_HINT: false,
+  DEESCALATION_HINT: true,
+  WOUND_TYPE_RE: false
+}
+raid {
+  ESCALATION_HINT: true,
+  DEESCALATION_HINT: false,
+  WOUND_TYPE_RE: true
+}
+supply_raid {
+  ESCALATION_HINT: true,
+  DEESCALATION_HINT: false,
+  WOUND_TYPE_RE: true
+}

@@ -1,0 +1,13 @@
+  798 src/domain/worldPulse/armyTransitKernel.js
+  685 src/domain/worldPulse/warDeployment.js
+  556 src/domain/worldPulse/envoyChanceMeeting.js
+  143 src/domain/worldPulse/ransomChoices.js
+  136 src/domain/worldPulse/strategicPosture.js
+  169 src/domain/worldPulse/pestilenceKernel.js
+  179 src/domain/npc/regenIdentityFold.js
+  364 src/domain/spatial/rumorNetwork.js
+  231 src/domain/roads/thirdPartyRansom.js
+   72 src/domain/worldPulse/warArmyRecord.js
+   61 src/domain/pendingEdits.js
+  177 src/domain/worldPulse/counterIntelSweep.js
+  368 src/domain/worldPulse/envoyErrandVocabulary.js

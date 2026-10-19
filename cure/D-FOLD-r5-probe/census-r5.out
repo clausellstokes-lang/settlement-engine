@@ -1,0 +1,14 @@
+dispersed: src 1 (e.g. src/domain/worldPulse/settlementLifecycleFirstClass.js) · tests 0
+ranged_away: src 0 · tests 0
+by_office: src 0 · tests 0
+wild: src 4 (e.g. src/design/organic/ornament/pools.js) · tests 1 (e.g. tests/domain/causalThreatCorrectnessFixes.test.js)
+way: src 0 · tests 1 (e.g. tests/property/roadsCharter.test.js)
+junction: src 0 · tests 0
+trail: src 0 · tests 0
+hidden: src 135 (e.g. src/App.jsx) · tests 34 (e.g. tests/ui/wizardOutputToolbar.test.jsx)
+scattered: src 3 (e.g. src/lib/constructionUsage.js) · tests 3 (e.g. tests/lib/constructionUsage.test.js)
+junction:: src 0 · tests 0
+trail:: src 0 · tests 0
+stretch:: src 0 · tests 0
+body: src 10 (e.g. src/design/organic/ink.js) · tests 12 (e.g. tests/lint/sourceCitationIntegrity.walker.test.js)
+confront: src 0 · tests 0

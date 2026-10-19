@@ -1,0 +1,13 @@
+(1) attacker 0 · defender 0 · legitimacy 10 → require_betrayal · permits siege true
+(1) attacker 0 · defender 5 · legitimacy 10 → require_betrayal · permits siege true
+(1) attacker 0 · defender 40 · legitimacy 10 → require_betrayal · permits siege true
+(1) attacker 0 · defender 0 · legitimacy 80 → auto_fail · permits siege false
+(1) attacker 0 · defender 5 · legitimacy 80 → auto_fail · permits siege false
+(1) attacker 0 · defender 40 · legitimacy 80 → auto_fail · permits siege false
+(2) offensive 0, riders kept, raw 0/0 (NaN): prefilter skips = false
+(2) offensive 0, riders kept, guard 0: prefilter skips = true
+(2) offensive 0, riders kept, guard 1 (identity): prefilter skips = false
+(3) offensive 0 · draw 6 → drawn 0 · drawnCap.offensive 0 · drawShare01 1 · stamp absent
+(3) offensive 5 · draw 12 → drawn 5 · drawnCap.offensive 0 · drawShare01 0 · stamp {riders, points: 5}
+(3) offensive 40 · draw 6 → drawn 6 · drawnCap.offensive 34 · drawShare01 0.85 · stamp {riders, points: 6}
+(3) offensive 40 · draw 0 → drawn 0 · drawnCap.offensive 40 · drawShare01 1 · stamp absent

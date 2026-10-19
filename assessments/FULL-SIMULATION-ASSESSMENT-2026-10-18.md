@@ -1,0 +1,70 @@
+# THE FULL-SIMULATION ASSESSMENT — the synthesis over four lenses, for the owner (2026-10-18)
+
+Synthesis seat (Fable 5.1), chair 0a2e8bd9's panel. I read the brief and the four lenses whole, then spot-read the corpus where they disagree or I doubted one: the BOARD's owner lines, CHAIR-NOTES 1–17, the fold §1, §2, §3.4 and §6, GENERALS, CW §1b, the nine new volumes' laws and sentence tables, L-BD, SEAMS-r3 and RULINGS-ROUND4. No code. "I judge" marks my judgment; open findings are named by file; where a chair ruling looks wrong, I say so.
+
+## The verdict
+
+As designed, this is a referee's world simulation of unusual principle and unproven dynamics. Its laws are the best I have seen specified in the genre: every actor plans on belief and only the physics resolves on truth (SP §1 Law One; PL16, PS3, PR7, BD12); every quantity has one truth and every new system enters it as a bounded lean (ST5, BD5, MN5, RN12); every climax between settlements pauses for the DM's week (requirement 24); the world hosts the campaign and never competes (requirement 1's 10-18 bracket; PT1, BD15, MN12, CH1). Its sentence tables already read better than most shipped games' logs. But three things are true at once. First, the design guards against noise and runaways and not against silence: the only executed measurement of dynamics finds the landed war layer marched twice in 180 realm-years, legitimacy at zero in every court (GENERALS §1, §3.1), and until the owner's 19:09 word nothing set a floor. Second, the writing is disproportionate: about 2.3 MB of the last two days went to force on the land and disorder in the wilds, while the interior — who rules a town, how a court pays for itself — stays at its August depth, entirely unbuilt. Third, almost none of it exists: 37 of 111 units landed (fold §2, ARCH row), the nine new volumes have no code, and a plain-born campaign runs none of the default preset's twenty-three switches (OD-FC-62). So: an excellent constitution, disciplined volumes, a palimpsest for a text of record, and a soak that cannot yet run. Build it — but build the instruments and the interior before a tenth wilds volume.
+
+## Where the lenses disagree, and who is right
+
+**Is the cause walk built?** Lens 1 says mostly landed; Lens 3 says unbuilt. Lens 1 is right about the reader, Lens 3 about the supply. The provenance ledger, its lit flag, the walk model and its panel exist (CW §1b S7–S9, CONFIRMED claims); CW-2x, the coupling join, is unbuilt (fold §2, CW row), and the supply is empty — two engine writers of `causedBy`, adoption at zero volumes (requirement 20; CW §1b S11). The owner's test, coherence on scrutiny, rests on a panel that works and a ledger nothing feeds. C0.5's one-hop pin is the right gate and a low bar; I would hold every chain from C0.5 on to two hops.
+
+**Too loud or too quiet?** Lens 1 fears a wartime Tuesday of twenty to forty cards; Lens 3 fears a still life. Both are PLAUSIBLE. Lens 1's number is an unmeasured tally of the registry (fold §3.4); Lens 3's is MEASURED, but of the landed war layer, not the new designs (GENERALS §3.1). The synthesis: the design has a ceiling and no floor. The push budget caps what is pushed (requirement 12's bracket, DRAFT ≤ 8 lines, UNMEASURED); nothing says how much must happen. The owner's 19:09 word — "make sure the world is dynamic, kingdoms fall and are made" — and CHAIR-NOTES 17(d)'s measurable standard of dynamism answer Lens 3 at the ages' grain; no lens saw that word. Neither yet answers at the campaign year, where the DM lives; GENERALS' UNIT 0 (cure the march) is the first thing that would.
+
+**Proportion.** Lens 2 and Lens 3 find the interior, persons and generations thin against the march; Lens 4 says build it as written. Lens 2 is right on substance, Lens 4 on sequence. The cure is not another volume: INT is designed and unbuilt (fold §2, INT row). The order already puts the renown, the party and the champions before PL's deeper waves (§6 THE ORDER NOTE), rightly — fast actors bring slow systems to the table (OD-FC-55). What it lacks is the interior's two cheap hops (C4's INT-3a and INT-7) near the front; I would place them after C13.
+
+**Mortality.** Lens 2 proposes a DM-confirmable "the lord is old" suggestion; Lens 3 asks the cost be weighed knowingly; the owner has ruled no engine mortality clock (BOARD 05:57; OD-FC-69). I do not re-rule his word. Lens 2's proposal is not a clock: a batched suggestion the DM may ignore at no cost, the shape of PT2's zero-click marks — a question for the owner, not an error in the design. After the 19:09 word the frozen world is the frozen person, by his choice; the age receipt says so (C8's r2 bracket), which is honest.
+
+**A minded outside power.** Lens 2 calls the absence of a non-settlement polity with a mind the largest gap; Lens 3 counts the mindless, nameless menace among the novelties. MN6 is right for what the owner asked ("a very simple generic option rather than a list", MN header), and the design already holds most of Lens 2's answer elsewhere: a gang that holds a site long enough founds an unsworn hamlet, "thereafter a settlement like any other" (BOARD 18:47; L-BD 42), and sponsorship gives bodies clandestine foreign ties (L-BD 46). The tribute-taking neighbour is a settlement by another name; one line saying so costs less than a mind on the menace. Genuinely absent is buying off a menace — the owner's to want.
+
+**The chain order.** Lens 4 says C14 THE PASSAGE should wait; the fold's r2b bracket puts C14 · C15 · C16 early for adjacency (§6 THE ORDER NOTE ↳ r2b). Lens 4 is right and the chair's placement is wrong on readiness: PS does nothing in the default preset because the war layer is dark (PS §10); its land gates wait on H22, unscheduled on the host side (fold §6 THE CANON ROOT); and the r3 bracket hands the shared presence composer to "the first to land" — under this order, the chain least able to fire. ST-0 and the fort can go early; C14 and C16 should follow the map's M-W2 and the war's lighting; the composer should be an owned unit.
+
+## What is excellent
+
+Belief as every actor's planning substrate, truth reserved for the physics, applied without exception across twelve volumes (SP §1; EC E13; PL16; PS3; PR7; BD12; CH7) — the strongest idea in the corpus, new to the genre at this breadth. One truth per quantity with bounded leans (ST5, BD5, MN5, RN12, CH5), the reason ten systems could be added without parallel laws. The hearing week as DM agency — leave, tilt, decree; standing engagements every week (requirement 24) — and its corollary that the party's default is always "nothing has happened to the party yet" (PT6). The hosting doctrine made law: no engine spawns a menace, a paragon or a site (MN12, CH1, ST3); no body is moved toward the party (BD15, PR19). The quiet/safe split (BD7) and the gang's four ends (L-BD 42), the best sociology of disorder in any sim design I know. Zero-click marks (PT2). The lifecycle law's ten paths filled for every new shape (requirement 22a). The Evidence Law's sentences: "Merewick did not come when Brenmoor's host besieged Kell" (PL §13); "The hill roads are quiet; the quarter still breeds" (BD §18).
+
+## What is weak
+
+The scrutiny layer's supply, above. The docket's ranking: "the top three by stakes" (requirement 12's bracket) is defined nowhere in any volume (CONFIRMED by grep); Lens 1 is right that it is the most important unspecified piece of the experience. The push budget is never summed across chains (Lens 4). The default preset is the weakest experience: belief omniscient so no tale mutates (RN §8; requirement 17), the passage inert (PS §10), the champions dark (CH §19), and a plain-born campaign carrying the preset's name and none of its switches (OD-FC-62). The deed door's ergonomics are unspecified, so a session the DM forgets to record is a world that did not notice (PT2). The text of record is a palimpsest: 215 to 358 `(fp-final` brackets per cured volume, and parallel cures that contradict (PT-r3-verify). The undo safety net the owner relies on (requirement 16's 10-18 bracket) is session-only until OD-FC-32 is built. SEAMS-r3's one BLOCKING and five MAJOR are being cured in round 4a (RULINGS-ROUND4 §A) — not design intentions, but each sits where a DM would scrutinize: a cult coded as a hazard, a protection record that only falls, an undo that erases a court's own ban. The habits registry: 104 fork rows, 0 LEARN (fold §2, HB row).
+
+## What is missing
+
+A floor on dynamism at the campaign year (CHAIR-NOTES 17(d) covers the century). The interior built (INT-1..INT-7). The fiscal decision — no volume makes a court's extraction rate a choice with unrest as its counterforce; PL §4.2's dues are "unchanged (the landed rule)". An aggregate per-tick budget at continent scale (a stop condition on the BOARD; no volume carries the number). A stakes function. One law for when a shared leaf reads belief and when truth (A.8 fixes one instance, not the class). A visible tempo dial (Lens 3's borrowing from RimWorld, which I endorse). The line that says a founded hamlet is the design's minded outside power.
+
+## What is over-designed
+
+The habits volume: 399 KB, architected not built (HB header), for what is today a weight multiplier. The grain of the march — cadences by address and week (PR4), tolerance widths with nine answers and five roads (PS5–PS7), a hold theorem over 17,160 freezes (PS9) — on a war layer that marched twice in 180 years. Five doors to "trouble on the road" (ambient raiders, the criminal corridor, WC's free units, gangs, untied holders, menaces): one quantity (BD §19), six doors for the DM to learn. WC: 481 KB, no writer, its base stale. And the STANDING kinds re-minted weekly: Lens 1's volume is structural, not tunable.
+
+## The five decisions that matter most
+
+1. **Requirement 24's reach.** The owner's law speaks of "one settlement with another"; the chair widened it by delegation to the party's fifteen kinds, the champions' nine, the bodies' and the menace's (OD-FC-50; BD13). Each is defensible alone; together they are the docket. Light C0 on the settlement kinds, count a wartime week on three seeds, write the stakes function, widen as the count allows.
+2. **What a new campaign actually runs.** Re-confirm the birth door at +30 keys (OD-FC-62) or every "lit in the default preset" claim is false for every plain-born world; and decide whether the default stays omniscient, because the mutating tale — the design's signature — lives only in the belief presets.
+3. **The order after C0.5.** Keep RN-0 + PT-0 → RN → PT → CH; move C14 and C16 behind the map's M-W2 and the war's lighting; bring INT's two hops forward; cure the march (GENERALS UNIT 0) before any wilds chain, or the DM gets a rich road and a silent crown.
+4. **"No new stage" and "first to land".** Four actors stacked into `calamityKernel` and three into `envoyPulse` to avoid a manifest change (MN §9; RN §10); six shared leaves owned by build order (fold §3.1.30). I judge the trade wrong: the r3 cross-volume failures cluster there. Cut each shared leaf as an owned unit and accept one manifest row.
+5. **The floor.** Adopt the measured standard of dynamism (CHAIR-NOTES 17(d)) at two grains — the century for the ages, the campaign year for the table — as owner-signed bands in the first soak, so stagnation is a red gate like a runaway.
+
+One decision the owner has already made that the lenses would re-ask: no mortality clock. It stands; its cost is a frozen cast over a ten-year advance, said in the receipt.
+
+## The domains, scored (my judgment of the design as written; every constant is DRAFT)
+
+| Domain | Substance | Experience | One line |
+|---|---|---|---|
+| Information and belief (IN, ES, RN) | 5 | 3 | Best articulated; felt only in the belief presets, dark in the default |
+| The party (PT) | 5 | 4 | On doctrine throughout; the deed door's ergonomics will decide it |
+| The kingdom (PL) | 4 | 4 | Derived, never stored; a league of towns, not houses holding land |
+| The wilds (ST, BD, MN) | 5 | 3 | The best ecology in the genre; five doors to one phenomenon |
+| War, the march, the sea (WC, PS, PR, generals) | 4 | 2 | The deepest grain in the corpus on a substrate measured near-silent |
+| Economy (EC) | 4 | 3 | Disciplined conditions, no prices; dark entire behind the dispatch gate |
+| Faith (WF) | 3 | 2 | Principled; hollow where no deity is seated, which is the birth preset |
+| Town politics (INT) | 2 | 1 | Designed in August, nothing built; the table's commonest drama |
+| Populations (POP) | 3 | 2 | Strong physics; the migration menu empty in every shipped world |
+| Persons (CH, RN) | 4 | 3 | Paragons deeply agentic; ordinary rulers neither age nor wander |
+| Habits (HB) | 2 | 1 | 104 fork rows, zero learn |
+| Time and the ages (EP, C8) | 3 | 3 | Undo dies on reload; the macro churn now owned, unmeasured |
+| Legibility (CW, C0.5) | 3 | 2 | The panel exists; nothing feeds it |
+| The hearing week (C0) | 5 | 3 | The genre's new agency; unmeasured against its own docket |
+
+## What to do next
+
+Freeze the scope: new ideas queue for the next program instead of entering these volumes (BD's items 29–49 arrived after "stop adding from the top"). Finish round 4 and the P4 fold, then stop reviewing — a fifth round finds only parallel-cure drift, which a consolidated text cures. Produce one bracket-free packet per wave before any dispatch. Build in this order: the birth door; OD-FC-32's persisted undo; an aggregate tick-cost and push-budget harness on the whole-world soak, extended to a century with the dynamism bands; C0 on the settlement kinds with a wartime docket count and the stakes function; C0.5 with a two-hop pin; RN-0 + PT-0 with the deed door's ergonomics in the packet; GENERALS UNIT 0 measured; then choose the next chain at the read (OD-FC-19). Spend the next design hour on the interior and the fiscal seat, not the wilds. Everything the reviews CONFIRMED is consistency between documents; nothing yet is behaviour, and only the soak will say whether this is Dwarf Fortress or a well-documented still life.

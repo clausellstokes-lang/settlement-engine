@@ -1,0 +1,56 @@
+## 7b stormSeasonFactor
+378:function stormSeasonFactor(lanes, season) {
+1154:  const storm = stormSeasonFactor(seaLanes, season);
+## 10 attrition
+src/domain/worldPulse/attrition.js
+src/domain/worldPulse/attrition.js season-hits: 0
+## 11 routingAdjacency/isPort
+311:export function isPort(digest, id) {
+## 12 naval
+src/domain/worldPulse/pulseKernel.js:2462:  // blockade MINTS A SIEGE through the existing interdiction machinery. Runs BEFORE the
+src/domain/spatial/navalLayer.js:608:// thievesGuildStrength, no pirate havens, no naval-patrol damper, no pirate-specific tuning).
+src/domain/spatial/navalLayer.js:609:// This module adds NO danger math. The ONLY piracy scope is DISPLAY NAMING:
+src/domain/worldPulse/navalKernel.js:12: *   • SEA BATTLES: two HOSTILE navies whose paths share a SEA EDGE collide there — resolved
+src/domain/worldPulse/navalKernel.js:18: *   • BLOCKADE (Stage 4, added next): a navy blockading a hostile port MINTS A SIEGE through
+src/domain/worldPulse/navalKernel.js:424:  // ── SEA BATTLES: hostile navies sharing a sea edge collide (resolveFieldBattle verbatim). ─
+111:  CONVOY: 'convoy', BLOCKADE: 'blockade',
+## 13 seaRoads
+5: * sea-aware current-leg read, and a PASS-3 SEA-HAZARD branch — blockade capture (S1), storm delay
+6: * (S2, priced not severed), and piracy (S3 = banditry-by-construction). NO parallel mission
+12: * machinery gates). S1 additionally needs navalEnabled (blockades are a naval state); S2/S3 do
+41:/** Is naval state live? (S1 blockade capture needs it; S2/S3 do not.) Pure.
+50:  S1_BLOCKADE_BASE: 0.30, S1_BLOCKADE_ALPHA: 0.25, // a fleet respects an escort even less than an army (the T1 partial-bypass law at sea)
+## 14 navalEnabled
+rg: src/domain/simulationRules.js: IO error for operation on src/domain/simulationRules.js: No such file or directory (os error 2)
+## 15 DESIGN_NAVY
+docs/DESIGN_NAVY.md
+2:## Fable 5 architecture, 2026-07-15 — owner-commissioned: navies convoy own/allied armies on water routes; hostile navies meeting = a sea battle with LAND-PARITY semantics (loser retreats to home port); an army at sea shares its convoy's fate; and THE BLOCKADE LAW, verbatim: "a blockade is the same as a siege." Grounded by the dedicated naval recon (2026-07-15) whose headline reshapes the wave: M8 sea lanes are FULLY BUILT and armies already implicitly sail — routing folds sea edges in whenever an endpoint is a port, ~10× cheaper than land, storm-seasoned. W-NAVY formalizes an implicit path property into a named military reality.
+## 16 custody
+src/domain/worldPulse/foreignGuestHold.js:320:  if (!id || !npcId || !errandId || !encounterId || !captorId || !venueId
+## 17 stamp
+src/domain/worldPulse/stressors.js:380:      counterforce: assessment
+## 18 smuggle
+src/domain/spatial/commodityFlow.js:83:  worstGate, smuggleSuccessChance, smuggleDetected, smugglePipeline, seizureTake,
+src/domain/spatial/commodityFlow.js:595:        const worst = worstGate(path.slice(1, -1).map((gid) => ({
+src/domain/spatial/smuggle.js:32: *      the route's WORST gate (`worstGate`), not one per gate — otherwise a long hostile
+src/domain/spatial/smuggle.js:230:export function smuggleSuccessChance({ network, corruption, goodsResistance: resist, boldness }) {
+src/domain/spatial/smuggle.js:287:export function worstGate(gates) {
+## 19 hard deny
+src/domain/worldPulse/worldState.js:449:// worldSnapshotDenyCensus.test.js), which asserts WORLD_SNAPSHOT_HARD_DENY covers every
+src/domain/display/worldSnapshotPublic.js:68:export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+src/domain/display/worldSnapshotPublic.js:105:  'spatialLedgers',
+## 20 gates cheapest crossing / cut01
+24: *      cheapest crossing cells are their GATE.
+cut01 hits:        0
+## 21 gateKey
+src/generators/computeActiveChains.js:122:const _gateKeywordIdSets = new Map();
+src/generators/computeActiveChains.js:123:function gateKeywordPredicate(kw) {
+src/generators/computeActiveChains.js:130:function gateKeywordIdSet(kw) {
+src/generators/computeActiveChains.js:131:  let set = _gateKeywordIdSets.get(kw);
+src/generators/computeActiveChains.js:133:    const pred = gateKeywordPredicate(kw);
+## 22 freeUnits
+freeUnits src files:        0
+## 23 UPKEEP_LEDGERS
+src/domain/worldPulse/treasury.js:498:export const UPKEEP_LEDGERS = Object.freeze(['deployments']);
+## 24 prosperityRank01
+src/domain/prosperityRank.js:138:export function prosperityRank01(value) {

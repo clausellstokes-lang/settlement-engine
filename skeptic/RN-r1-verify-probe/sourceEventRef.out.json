@@ -1,0 +1,25 @@
+{
+  "composerAction": {
+    "kind": "remove_npc",
+    "settlementId": "s1",
+    "npcId": "npc_3",
+    "magnitude": 1,
+    "label": "Remove an NPC",
+    "note": "Aldo slain"
+  },
+  "composerActionCarriesEventId": false,
+  "partyDoorRefs_composerKill": [
+    "party.remove_npc.remove_an_npc.s1"
+  ],
+  "removeAldo_t10": [
+    "party.remove_npc.remove_an_npc.s1"
+  ],
+  "removeBerra_t10": [
+    "party.remove_npc.remove_an_npc.s1"
+  ],
+  "removeBerra_t200": [
+    "party.remove_npc.remove_an_npc.s1"
+  ],
+  "sameRefAcrossDistinctActs": true,
+  "composerRefEqualsEventId": false
+}

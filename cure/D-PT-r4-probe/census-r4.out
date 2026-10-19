@@ -1,0 +1,38 @@
+body_ended	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src	word-files=0	quoted-literal-files=0
+body_ended	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests	word-files=0	quoted-literal-files=0
+body_ended	/Users/cstokes/Desktop/settlement-engine/docs	word-files=0	quoted-literal-files=0
+party_made_known_trail	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src	word-files=0	quoted-literal-files=0
+party_made_known_trail	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests	word-files=0	quoted-literal-files=0
+party_made_known_trail	/Users/cstokes/Desktop/settlement-engine/docs	word-files=0	quoted-literal-files=0
+bodyId	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src	word-files=2	quoted-literal-files=0
+bodyId	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests	word-files=0	quoted-literal-files=0
+bodyId	/Users/cstokes/Desktop/settlement-engine/docs	word-files=5	quoted-literal-files=0
+passed	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src	word-files=242	quoted-literal-files=0
+passed	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests	word-files=287	quoted-literal-files=0
+passed	/Users/cstokes/Desktop/settlement-engine/docs	word-files=205	quoted-literal-files=0
+reaches_party	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src	word-files=0	quoted-literal-files=0
+reaches_party	/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests	word-files=0	quoted-literal-files=0
+reaches_party	/Users/cstokes/Desktop/settlement-engine/docs	word-files=2	quoted-literal-files=0
+--- bodyId in src
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminDirectMessageDialog.jsx:64:  const bodyId = useId();
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminDirectMessageDialog.jsx:134:          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, f
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminDirectMessageDialog.jsx:137:          <textarea id={bodyId} aria-label="Notice message" maxLength={10000
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminBroadcastPanel.jsx:87:  const bodyId = useId();
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminBroadcastPanel.jsx:202:          <label htmlFor={bodyId} style={{ color: MUTED, fontFamily: sans, fontSi
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/admin/AdminBroadcastPanel.jsx:203:          <textarea id={bodyId} aria-label="Broadcast message" maxLength={10000} 
+--- quoted passed in src
+body_ended	MASTER/src	quoted-literal-files=0	[]
+body_ended	MASTER/tests	quoted-literal-files=0	[]
+body_ended	LEDGER-docs	quoted-literal-files=0	[]
+party_made_known_trail	MASTER/src	quoted-literal-files=0	[]
+party_made_known_trail	MASTER/tests	quoted-literal-files=0	[]
+party_made_known_trail	LEDGER-docs	quoted-literal-files=0	[]
+bodyId	MASTER/src	quoted-literal-files=0	[]
+bodyId	MASTER/tests	quoted-literal-files=0	[]
+bodyId	LEDGER-docs	quoted-literal-files=4	['LEDGER-docs/DESIGN_FP_ARCH_ST.md', 'LEDGER-docs/DESIGN_FP_ARCH_PL.md', 'LEDGER-docs/DESIGN_FP_ARCH_CH.md', 'LEDGER-docs/DESIGN_FP_ARCH_BD.md']
+passed	MASTER/src	quoted-literal-files=1	['MASTER/src/domain/certification/warConvergenceForces.js']
+passed	MASTER/tests	quoted-literal-files=7	['MASTER/tests/lint/testRatchet.test.js', 'MASTER/tests/edgeFunctions/surveyorByok.test.js', 'MASTER/tests/fixtures/simSoakReceiptFixture.json', 'MASTER/tests/fixtures/cl0-rogue-authority-pin.json']
+passed	LEDGER-docs	quoted-literal-files=6	['LEDGER-docs/FABLE_VALIDATION_QUEUE.md', 'LEDGER-docs/EXHAUSTIVE_REMEDIATION_ARCHITECTURE.md', 'LEDGER-docs/DESIGN_FP_ARCH_BD.md', 'LEDGER-docs/archive/workflow-scripts/f24-port-verify-wf_5b25f6cd-ae9.js.txt']
+reaches_party	MASTER/src	quoted-literal-files=0	[]
+reaches_party	MASTER/tests	quoted-literal-files=0	[]
+reaches_party	LEDGER-docs	quoted-literal-files=1	['LEDGER-docs/DESIGN_FP_ARCH_PT.md']

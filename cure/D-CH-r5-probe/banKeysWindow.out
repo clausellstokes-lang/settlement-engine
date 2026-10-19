@@ -1,0 +1,100 @@
+{
+ "F_merged": {
+  "settlementId": "Kell",
+  "kind": "banishment_edict",
+  "indefinite": true
+ },
+ "F_r4": {
+  "edge": null,
+  "bannedAt": {
+   "150": false,
+   "230": false
+  },
+  "keys": [
+   {
+    "settlementId": "Kell",
+    "episode": "kell-ep-3",
+    "untilTick": 220
+   }
+  ]
+ },
+ "F_r5": {
+  "edge": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "untilTick": 220
+  },
+  "bannedAt": {
+   "150": true,
+   "230": false
+  },
+  "keys": [
+   {
+    "settlementId": "Kell",
+    "episode": "kell-ep-3",
+    "untilTick": 220
+   }
+  ]
+ },
+ "S45_r5": {
+  "edge": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "untilTick": 300
+  },
+  "bannedAt": {
+   "250": true,
+   "310": false
+  },
+  "keys": [
+   {
+    "settlementId": "Kell",
+    "episode": "kell-ep-1",
+    "untilTick": 300
+   }
+  ]
+ },
+ "G_r5_undoAt200": {
+  "edge": null,
+  "bannedAt": {
+   "210": false
+  },
+  "keys": []
+ },
+ "H_r5": {
+  "edge": null,
+  "bannedAt": {
+   "130": false
+  },
+  "keys": []
+ },
+ "I_r5": {
+  "edge": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  },
+  "bannedAt": {
+   "500": true
+  },
+  "keys": [
+   {
+    "settlementId": "Kell",
+    "episode": "kell-ep-5",
+    "untilTick": 220
+   }
+  ]
+ },
+ "J_edge": {
+  "settlementId": "Kell",
+  "kind": "banishment_edict",
+  "untilTick": 300
+ },
+ "J_keys": [
+  {
+   "settlementId": "Kell",
+   "episode": "kell-ep-2",
+   "untilTick": 300
+  }
+ ]
+}

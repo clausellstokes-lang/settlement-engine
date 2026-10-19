@@ -1,0 +1,52 @@
+{
+ "belief_hostile__truth_rival": {
+  "beliefsActive": true,
+  "CH_enemy_in_service": false,
+  "PT_enemy_in_service": true,
+  "PT_read_needs_truthType_from_graph": "rival",
+  "landed_atWarWith": false,
+  "atOpenWar": false
+ },
+ "belief_allied__truth_hostile": {
+  "beliefsActive": true,
+  "CH_enemy_in_service": true,
+  "PT_enemy_in_service": false,
+  "PT_read_needs_truthType_from_graph": "hostile",
+  "landed_atWarWith": true,
+  "atOpenWar": false
+ },
+ "belief_hostile__truth_hostile": {
+  "beliefsActive": true,
+  "CH_enemy_in_service": true,
+  "PT_enemy_in_service": true,
+  "PT_read_needs_truthType_from_graph": "hostile",
+  "landed_atWarWith": true,
+  "atOpenWar": false
+ },
+ "undoBanPartyAfterMerge": {
+  "beforeDmBan": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   }
+  ],
+  "afterDmBan": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "liftedByInverse": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "afterInverse": [],
+  "emergentBanRestored": false,
+  "priorStateBannedAt120": true
+ }
+}

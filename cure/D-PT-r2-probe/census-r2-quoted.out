@@ -1,0 +1,9 @@
+# quoted-literal files in master src (single or double quote), Sun Oct 18 07:15:18 EDT 2026
+partySeq quoted_single=0 quoted_double=0
+party_cleared_site quoted_single=0 quoted_double=0
+party_revealed_site quoted_single=0 quoted_double=0
+party_reached_site quoted_single=0 quoted_double=0
+refoldPartyCredibility quoted_single=0 quoted_double=0
+seq quoted_single=0 quoted_double=0
+credited quoted_single=0 quoted_double=0
+site_revealed quoted_single=0 quoted_double=0

@@ -1,0 +1,19 @@
+HEAD file:
+gitdir: /Users/cstokes/Desktop/settlement-engine/.git/worktrees/master-81f1cd963
+rumors in: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js
+2097:    const rumors = advanceRumorLedgers({
+2527:    const calamity = advanceCalamity({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/religionState.js:154:  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:50:const EVIL01 = Object.freeze({ evil: 1, neutral: 0.5, good: 0 });
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:52:const CHAOS01 = Object.freeze({ chaotic: 1, neutral: 0.5, lawful: 0 });
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warCapacityReads.js:226:    defenderCurrent: defender.homeDefense,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/beliefMap.js:337: * @property {number} readiness        believed war readiness 0..1
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/armyTransit.js:315: * @property {number} readiness     0..1 martial readiness
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/applyWorldPulse.js:65:import { coalitionJoinFeasibility } from './warDeployment.js';
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/applyWorldPulse.js:446:          ? coalitionJoinFeasibility(
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warCapacityReads.js:64:const ALLY_RELIEF_FRACTION = 0.4;
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/embattlement.js:74:  ENTER_THRESHOLD: 0.55,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/embattlement.js:75:  EXIT_THRESHOLD: 0.3,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkConsumersTransit.js:69: * THE HIDDEN RUNG IS 2 BECAUSE H3'S IS. `NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN`
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/npcConsequencesTuning.js:155:  HIDDEN_PATH_SLOWDOWN: 2,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/npcCirculationTransit.js:117: * its arrival tick. A hidden way costs HIDDEN_PATH_SLOWDOWN times the nominal hop: the

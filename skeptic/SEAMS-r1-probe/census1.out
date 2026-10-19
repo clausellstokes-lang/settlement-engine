@@ -1,0 +1,31 @@
+drawn	word:216	quoted:1	src/domain/generation/generationForkRegistry.js:46: * @property {'drawn' | 'pure' | 'label'} class DERIVED from stepDraws and keyMoves, never authored|
+indecisive	word:0	quoted:0	
+honoured	word:56	quoted:0	
+honored	word:56	quoted:18	src/domain/worldPulse/treatyLifecycleVoice.js:366:  const trueStates = (Array.isArray(terms) ? terms : []).map((term) => String(term.trueState || 'honored'));|src/domain/worldPulse/pactRenewal.js:359:    ...term, mintedTick: tick, expiresTick: tick + span, complianceState: 'honored', trueState: 'honored', burden01: 0,|
+upheld	word:1	quoted:0	
+voided	word:7	quoted:0	
+weathered	word:16	quoted:1	src/domain/certification/infoConvergenceContract.js:204:    volumeGroups: Object.freeze([Object.freeze({ wave: 'IN-3', name: 'house', tokens: Object.freeze(['un|
+void	word:195	quoted:3	src/components/map/SimulationRulesDialog.jsx:51:  ['void', 'Into void'],|src/domain/worldPulse/populationDynamics.js:152:  return ['void', 'distributed', 'concentrated'][hash % 3];|
+expelled	word:1	quoted:1	src/domain/worldPulse/roadsKernel.js:674:          else if (r < detentionP * 2) res = { cls: 'T4', outcome: 'expelled', captorId: destId };|
+overlooked	word:3	quoted:1	src/domain/worldPulse/beliefAxisSubjects.js:107:export const PULL_BANDS = Object.freeze(['shunned', 'overlooked', 'sought', 'coveted']);|
+repudiated	word:8	quoted:1	src/domain/worldPulse/grammarReceiptPools.js:161:  // `credibility_charge` remain deferred. ⛔ `repudiated` is authored here too and deliberately|
+correction	word:61	quoted:0	
+praise	word:1	quoted:0	
+condemnation	word:1	quoted:0	
+stays	word:856	quoted:0	
+resigns	word:0	quoted:0	
+disgraced	word:15	quoted:0	
+crosses	word:97	quoted:0	
+seized	word:16	quoted:2	src/domain/prose/entryLexicons.js:261:    'founded', 'razed', 'rebuilt', 'burned', 'seized', 'granted', 'revoked',|src/domain/edit/pools.js:93:const CAUSE_REMOVE = Object.freeze(['burned', 'died', 'dissolved', 'left', 'seized']);|
+stand_off	word:0	quoted:0	
+princely	word:1	quoted:0	
+decent	word:1	quoted:0	
+meagre	word:0	quoted:0	
+handsome	word:0	quoted:0	
+kept	word:434	quoted:2	src/domain/regenerationDelta.js:123: * judgment 241 ruling 1). §12.12's "kept" is an ENTITY diff; this is the FIELD-level section, and|src/domain/display/heraldCausalVoice.js:531:      // clause, so a placeholder left "kept" would be molded into the next link's|
+broken	word:216	quoted:10	src/pdf/sections/SupplyChainFlow.jsx:193:  const impaired = chains.filter((c) => c.status === 'impaired' || c.status === 'broken').length;|src/domain/prose/composedWalker.js:788: * `carried`, `turn-outward` AND `broken` — is emitted, because ruling (c)'s distribution table|
+staunch	word:0	quoted:0	
+frayed	word:4	quoted:0	
+shaky	word:4	quoted:0	
+unbroken	word:7	quoted:0	
+paramount	word:0	quoted:0	

@@ -1,0 +1,13 @@
+(a) the verifier's case: the net rides weeks 1–10, then the hold slips
+  season 0–12: r4 lived-read → protection_failed · r5 weeksCovered 10 → protection_kept
+  season 13–25: r4 lived-read → protection_failed · r5 weeksCovered 0 → protection_failed
+(b) one week only, the season's last
+  season 0–12: r4 lived-read → protection_kept · r5 weeksCovered 1 → protection_kept
+  season 13–25: r4 lived-read → protection_failed · r5 weeksCovered 0 → protection_failed
+(c) never covered
+  season 0–12: r4 lived-read → protection_failed · r5 weeksCovered 0 → protection_failed
+  season 13–25: r4 lived-read → protection_failed · r5 weeksCovered 0 → protection_failed
+(d) covered only in the second season
+  season 0–12: r4 lived-read → protection_failed · r5 weeksCovered 0 → protection_failed
+  season 13–25: r4 lived-read → protection_failed · r5 weeksCovered 2 → protection_kept
+(e) a stale pair { seasonStartTick 0, weeks 9 } read at tick 30 (season 26): reads 0

@@ -1,0 +1,22 @@
+229	src/domain/worldPulse/narrativeTempo.js
+558	src/domain/worldPulse/stressors.js
+172	src/domain/spatial/embattlement.js
+461	src/domain/worldPulse/calamityKernel.js
+121	src/domain/worldPulse/flows.js
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/conditionPromotion.js'
+    at readFileSync (node:fs:440:20)
+    at file:///Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-MN-r2-probe/effLines.mjs:11:15
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/conditionPromotion.js'
+}
+
+Node.js v24.12.0

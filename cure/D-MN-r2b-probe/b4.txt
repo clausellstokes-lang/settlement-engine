@@ -1,0 +1,5 @@
+@@OLD
+`columnTerm(T)`, THE PASSAGE's enemy-column feeder at T as PS12 defines it (DRAFT 0.60); `roadCountry(T)`, the MAX of every pressing menace's raid-and-road term at T (`raiding`, `abroad`; 0.60) and THE SITES' untied-holder feeder at T (ST §3.4)
+@@NEW
+`columnTerm(T)`, THE PASSAGE's feeder row `enemyColumnPresence(worldState)` at T, as PS12 defines it (DRAFT 0.60); `roadCountry(T)`, the MAX of every pressing menace's raid-and-road term at T (`raiding`, `abroad`; 0.60) and THE SITES' untied-holder feeder at T (`sitePresenceFeeder(T)`, ST §3.4)
+@@END

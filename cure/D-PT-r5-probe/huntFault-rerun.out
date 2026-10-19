@@ -1,0 +1,15 @@
+A yes at Kell, never rides; Kell's riders break the gang at week 6
+  r4 (patience only): came_to_nothing
+  r5 (priced to the body's where): fell_short
+B yes at Merewick, the gang on the Tolle road, broken at week 2 (four weeks away)
+  r4 (patience only): came_to_nothing
+  r5 (priced to the body's where): came_to_nothing
+C yes at Kell, the party rides to Tolle (week 2) and another hand breaks the gang at week 4
+  r4 (patience only): came_to_nothing
+  r5 (priced to the body's where): made_good
+D yes at Kell; the DM records END_BODY(gang, party) at week 3
+  r4 (patience only): made_good
+  r5 (priced to the body's where): made_good
+E the gang moves away each week (Ashford, then Merewick country); party stays at Kell; bounty lapses week 3
+  r4 (patience only): came_to_nothing
+  r5 (priced to the body's where): fell_short

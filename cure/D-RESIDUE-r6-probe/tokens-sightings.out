@@ -1,0 +1,26 @@
+tests/domain/treasury.test.js:1
+src/data/institutionDescVariants.js:1
+src/generators/steps/coherenceRepairPass.js:1
+src/domain/prosperityRank.js:1
+src/domain/worldPulse/treasury.js:1
+tests/domain/intelSelfPolicing.test.js:1
+--recordSighting
+--sighting
+src/domain/npc/livedExperienceSources.js:1
+src/domain/npc/characterReadModel.js:1
+src/domain/npc/characterConsumers.js:1
+src/domain/worldPulse/espionage/infiltrationDrift.js:1
+tests/domain/npc/livedExperienceSources.test.js:2
+tests/soak-harness/coveringArrayCoverage.test.js:1
+src/domain/worldPulse/npcGoalBranches.js:1
+src/domain/worldPulse/settlementLifecycleKernel.js:1
+tests/domain/subsystemRowsVirtual.test.js:1
+src/domain/worldPulse/treasury.js:1
+--spatialUsage
+spatial
+tests/domain/treasury.test.js:175:    // §711.6, four sightings in this program's memory: a numeric field with no declared
+src/data/institutionDescVariants.js:327:    "Here one hires carters, teamsters, and pack-drivers for a journey. Those lately returned swap road conditions and bandit sightings over a cup. Transactional, never institution
+src/generators/steps/coherenceRepairPass.js:351: * @param {Set<string>} observed  step-scoped dedupe for unrepairable sightings.
+src/domain/prosperityRank.js:8: * family, measured at ODQ §759.3 (5th–7th sightings). Each consumer was internally consistent,
+src/domain/worldPulse/treasury.js:42: * later car. Four sightings in this program's memory say what happens to a numeric
+tests/domain/intelSelfPolicing.test.js:7: * SOUL's personal stock (intelSaleNpcCredibilityDeltas). The boy who sold true wolf-sightings gets

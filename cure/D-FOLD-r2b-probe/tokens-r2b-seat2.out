@@ -1,0 +1,36 @@
+# D-FOLD-r2b token census (this seat; rg -w on master src/ tests/; Sun Oct 18 12:12:14 EDT 2026)
+spentTick src=0 tests=0
+menaceSpentAt src=0 tests=0
+menacePressSet src=0 tests=0
+columnTerm src=0 tests=0
+partySeq src=0 tests=0
+party_reached_site src=0 tests=0
+party_cleared_site src=0 tests=0
+party_revealed_site src=0 tests=0
+made_known src=0 tests=0
+kept_secret src=0 tests=0
+keptSecret src=0 tests=0
+settlementFundingBand src=0 tests=0
+fundingBandOfSettlement src=0 tests=0
+garrisonBandOf src=0 tests=0
+mapSiteRef src=0 tests=0
+requestFealtyRow src=0 tests=0
+FEALTY_EPISODE_PREFIXES src=0 tests=0
+riders_quartered src=0 tests=0
+PATROL_CADENCES src=0 tests=0
+every_four_weeks src=0 tests=0
+every_thirteen_weeks src=0 tests=0
+patrol_engages src=0 tests=0
+patrol_joins src=0 tests=0
+patrolCounterTerm src=0 tests=0
+gateKey src=1 tests=0
+quoted 'u: literal files in src: 0
+quoted 'revealed' literal files in src: 2
+word corps files in src: 3
+control navalEnabled src files: 12
+## gateKey and corps hits
+src/domain/display/defenseDisplay.js:376:    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+src/domain/display/defenseDisplay.js:377:    const gate = gateKey ? gates[gateKey] : undefined;
+src/domain/factionRelationshipUpdate.js:383:      { field: 'manpower',    delta: -4, reason: 'Implicated ranks are purged; the officer corps is thinned by suspicion.' },
+src/domain/spatial/navalLayer.js:130:  /shipyard|dockyard|dry\s*dock|drydock|boatyard|admiralt|naval|navy|war\s*(fleet|galley|ship)|shipwright|marine\s*corps|fleet\s*(yard|base|command)/i;
+src/data/sampleDossier.json:26:    { "id": "wallcorps",      "name": "Wall Maintenance Corps",  "category": "civic",     "size": "small",  "weight": 0.4 },

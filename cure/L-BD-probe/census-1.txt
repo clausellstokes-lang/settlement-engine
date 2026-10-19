@@ -1,0 +1,54 @@
+conclave | lit=0 [] | word=9 | tests=4 | ledger=7
+gang | lit=6 [src/generators/npcGenerator.js src/generators/defenseGenerator.js src/generators/roleCategory.js src/data/namingData.js ] | word=49 | tests=18 | ledger=25
+beast | lit=1 [src/domain/tableEvents.js ] | word=20 | tests=2 | ledger=24
+beasts | lit=4 [src/components/new/tabs/DefenseTab.jsx src/domain/display/institutionVocabulary.js ] | word=28 | tests=9 | ledger=23
+body | lit=25 [src/data/sampleDossier.json src/components/edit/CardEditorDialog.jsx src/components/primitives/RefusalNotice.jsx src/components/organic/samples/PricingSample.jsx ] | word=1203 | tests=1980 | ledger=1350
+sect | lit=0 [] | word=1 | tests=0 | ledger=4
+congregation | lit=0 [] | word=65 | tests=2 | ledger=71
+brigand | lit=1 [src/domain/worldPulse/peopleLedger.js ] | word=2 | tests=1 | ledger=58
+outlaw | lit=5 [src/generators/roleCategory.js src/generators/historyGenerator.js src/generators/institutionProbability.js src/generators/defenseGenerator.js ] | word=8 | tests=0 | ledger=10
+tolerated | lit=3 [src/domain/settlement.schema.js src/domain/magicProfile.js ] | word=46 | tests=35 | ledger=60
+hunted | lit=0 [] | word=9 | tests=5 | ledger=13
+employed | lit=0 [] | word=0 | tests=0 | ledger=7
+sheltered | lit=5 [src/domain/settlement.schema.js src/domain/townMap/townMapModel.js src/domain/townMap/townLayoutV2.js src/domain/mapProfile.js ] | word=15 | tests=15 | ledger=8
+permitted | lit=1 [src/generators/steps/resolveResources.js ] | word=81 | tests=68 | ledger=71
+suppressed | lit=11 [src/lib/structuralFingerprint.js src/domain/certification/subsystemRowsVirtual.js src/generators/steps/resolveStress.js src/domain/worldPulse/religiousContest.js ] | word=218 | tests=243 | ledger=182
+patronized | lit=2 [src/domain/worldPulse/magicRegimeModel.js ] | word=14 | tests=26 | ledger=3
+outlawed | lit=0 [] | word=3 | tests=0 | ledger=2
+hunt | lit=7 [src/generators/economy/foodBalance.js src/data/traditionCorpus.js src/domain/customContentSchema.js src/domain/content/customContentAdmission.generated.js ] | word=39 | tests=38 | ledger=166
+avoid | lit=6 [src/components/howto/AboutManifesto.jsx src/components/howto/LivingWorldTab.jsx src/components/primitives/NameColumns.jsx src/components/HowToUse.jsx ] | word=85 | tests=22 | ledger=137
+hostile | lit=159 [src/store/campaignSlice.js src/store/neighbourSlice.js src/store/mapSlice.js src/generators/steps/resolveNeighbour.js ] | word=631 | tests=1401 | ledger=461
+passed | lit=2 [src/domain/certification/warConvergenceForces.js ] | word=442 | tests=864 | ledger=795
+parleyed | lit=0 [] | word=3 | tests=0 | ledger=0
+fought | lit=0 [] | word=43 | tests=10 | ledger=53
+joined | lit=4 [src/domain/worldPulse/relationshipState.js src/domain/display/relationshipChronicle.js src/domain/worldPulse/warDeployment.js src/domain/worldPulse/warCoalitionDecision.js ] | word=143 | tests=366 | ledger=201
+raid | lit=6 [src/domain/tableEvents.js src/domain/certification/knowledgeLaneEvidence.js src/domain/state/deriveSystemState.js src/domain/worldPulse/relationshipRulesAdversarial.js ] | word=94 | tests=130 | ledger=107
+raided | lit=0 [] | word=1 | tests=15 | ledger=13
+repelled | lit=0 [] | word=0 | tests=0 | ledger=15
+sacked | lit=0 [] | word=19 | tests=17 | ledger=8
+caravan_waylaid | lit=0 [] | word=0 | tests=0 | ledger=0
+migrants_waylaid | lit=0 [] | word=0 | tests=0 | ledger=0
+bodies_meet | lit=0 [] | word=0 | tests=0 | ledger=0
+gather | lit=2 [src/domain/worldPulse/espionage/espionageGauntlet.js ] | word=32 | tests=16 | ledger=24
+grow | lit=0 [] | word=135 | tests=151 | ledger=205
+petition | lit=1 [src/domain/worldPulse/commonsVoiceKernel.js ] | word=26 | tests=13 | ledger=52
+hide | lit=3 [src/generators/services/serviceClassifier.js src/data/arrivalProse.js src/domain/prose/presenceMeasure.js ] | word=121 | tests=184 | ledger=115
+defy | lit=0 [] | word=0 | tests=0 | ledger=3
+smuggle | lit=1 [src/lib/spatialUsage.js ] | word=129 | tests=90 | ledger=138
+bribe | lit=0 [] | word=2 | tests=9 | ledger=17
+feud | lit=0 [] | word=9 | tests=8 | ledger=31
+recruit | lit=0 [] | word=10 | tests=7 | ledger=6
+scatter | lit=1 [src/generators/steps/generatePopulation.js ] | word=46 | tests=14 | ledger=36
+range | lit=8 [src/components/gallery/ImageCropper.jsx src/components/region/RegionalCausalChainViewer.jsx src/components/map/LayersPanel.jsx src/components/map/TimelapsePanel.jsx ] | word=175 | tests=283 | ledger=257
+den | lit=3 [src/domain/npcProfile.js src/domain/districtProfile.js ] | word=61 | tests=47 | ledger=102
+flee | lit=0 [] | word=8 | tests=3 | ledger=2
+sustenance | lit=0 [] | word=5 | tests=5 | ledger=2
+cohesion | lit=2 [src/domain/worldPulse/lawBandModulation.js ] | word=43 | tests=23 | ledger=291
+habitat | lit=0 [] | word=14 | tests=103 | ledger=116
+trail | lit=0 [] | word=47 | tests=84 | ledger=58
+hiddenWays | lit=0 [] | word=0 | tests=0 | ledger=0
+brigandage_exported | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyReadiness01 | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyRef | lit=3 [src/components/primitives/RefusalNotice.jsx src/copy/en.js ] | word=12 | tests=6 | ledger=0
+roaming | lit=0 [] | word=85 | tests=48 | ledger=43
+lair | lit=0 [] | word=0 | tests=0 | ledger=21

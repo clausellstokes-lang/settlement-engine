@@ -1,0 +1,57 @@
+== receipts (master 81f1cd963, read-only; re-run by the re-seated D-FOLD-r5, Mon Oct 19 07:44:29 EDT 2026)
+64:export const ROUTE_GRADES = Object.freeze(['highway', 'road', 'track', 'hidden']);
+97:export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+100:export const HIDDEN_GRADE = 'hidden';
+124: * and it fails CLOSED: an unrecognized kind is refused, so a lane that forgets to
+130:export function mayUseHiddenPaths(kind) {
+69: * THE HIDDEN RUNG IS 2 BECAUSE H3'S IS. `NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN`
+87:    hidden: 2,
+154:   *  HIDDEN path. Design: wanderers may use hidden paths (slowly); armies may not. */
+155:  HIDDEN_PATH_SLOWDOWN: 2,
+src/domain/worldPulse/routeNetworkDecayLifecycle.js:22: * A dead town's roads go HIDDEN. They are not removed, because nothing in this
+472:  spread_faith: 'doctrine', defend_doctrine: 'doctrine', serve_patron: 'patron',
+src/domain/worldPulse/ransomChoices.js:25:export const CAPTOR_CHOICES = Object.freeze(['hold', 'ransom', 'release']);
+src/domain/worldPulse/ransomChoices.js:28:export const HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon']);
+-- quoted-literal census (src, tests): a quote before, a quote after
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+dispersed: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+ranged_away: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+by_office: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+wild: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+way: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+junction: src 0 · tests 0
+(eval):11: bad math expression: operand expected at `'\"`'
+(eval):11: bad math expression: operand expected at `'\"`'
+trail: src 0 · tests 0
+'junction:' prefix: src 0
+'trail:' prefix: src 0
+'stretch:' prefix: src 0
+-- word census (src, tests) for the round-5 fold tokens
+weeksCovered: src 0 · tests 0
+oathSince: src 0 · tests 0
+confront: src 1 · tests 0
+by_broker: src 0 · tests 0
+by_pursuit: src 0 · tests 0
+shared_faith: src 0 · tests 0
+ROAD_COVER_BY_MIGHT: src 0 · tests 0
+knownTrailsOf: src 0 · tests 0
+hunt_won: src 0 · tests 0
+escaped: src 10 · tests 45
+-- dispersed in quoted src (where)
+src/domain/worldPulse/settlementLifecycleFirstClass.js:559: * NEVER removed and NEVER resolved — each record gains only a `dispersed` stamp
+-- rampThreat / relief
+92:  // CAPPED at SECURITY_MAX_RELIEF so a garrison can never nullify an active siege
+96:  SECURITY_MAX_RELIEF: 0.25,
+194:export function rampThreat(inputs = {}) {
+204:  const relief = Math.min(T.SECURITY_MAX_RELIEF, T.W_SEC * sec);

@@ -1,0 +1,7 @@
+{"ENTER":0.55,"EXIT":0.3,"MIN_DWELL_TICKS":6}
+capable den, then kept road: T0=0 p 0.6→0.35 (raw 0.600→0.350): phase before=embattled; after=embattled (never left in 52 weeks)
+menace raid, then kept road: T0=0 p 0.6→0.35 (raw 0.600→0.350): phase before=embattled; after=embattled (never left in 52 weeks)
+modest den sustains: T0=0 p 0.6→0.4 (raw 0.600→0.400): phase before=embattled; after=embattled (never left in 52 weeks)
+modest den, then kept road (T0 0): T0=0 p 0.6→0.15 (raw 0.600→0.150): phase before=embattled; after=calm (left at week 1)
+modest den, then kept road (T0 0.2): T0=0.2 p 0.6→0.15 (raw 0.680→0.320): phase before=embattled; after=embattled (never left in 52 weeks)
+calm, kept road only: T0=0 p 0.35→0.35 (raw 0.350→0.350): phase before=pruned; after=calm (left at week 1)

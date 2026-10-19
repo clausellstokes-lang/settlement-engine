@@ -1,0 +1,95 @@
+# (b2) mayUseHiddenPaths quoted
+/**
+ * MAY THIS TRAVELLER TAKE A HIDDEN PATH? (§9). The single statement of J-D9 (d),
+ * and it fails CLOSED: an unrecognized kind is refused, so a lane that forgets to
+ * declare itself gets the army's answer rather than the smuggler's.
+ *
+ * @param {string|null|undefined} kind
+ * @returns {boolean}
+ */
+export function mayUseHiddenPaths(kind) {
+  return HIDDEN_PATH_KINDS.indexOf(text(kind)) >= 0;
+}
+
+# (c) realm verb proposal carries args?
+6: *   • buildRealmVerbOutcome — the PURE mint builder: verb + dial args →
+8: *     { kind:'realm_verb_order', verb, args }). applyWorldPulse routes it
+86: * Folding a hash of the sorted args in gives each distinct order a distinct id
+89: * @param {Mut} args
+91:function stableArgHash(args) {
+92:  const obj = asObject(args);
+135: * @param {string} verb @param {Mut} args @param {Mut} snapshot */
+136:function headlineFor(verb, args, snapshot) {
+139:    case 'DECLARE_CASUS': return `${n(args.fromId)} declares a reason for war against ${n(args.toId)}`;
+140:    case 'SUE_FOR_PEACE': return `${n(args.partyId)} sues for peace`;
+141:    case 'REPUDIATE_TREATY': return `${n(args.fromId)} repudiates its treaty with ${n(args.toId)}`;
+142:    case 'PROPOSE_PACT': return `${n(args.fromId)} puts terms before ${n(args.toId)}`;
+143:    case 'TRANSFER_SOVEREIGNTY': return `${n(args.sellerId)} conveys ${n(args.assetId)} to ${n(args.buyerId)}`;
+144:    case 'ORDER_SUPPLY_RAID': return `${n(args.aggressorId)} opens a supply-web campaign against ${n(args.targetId)}`;
+145:    case 'DECLARE_TRADE_EMBARGO': return `${n(args.aggressorId)} declares a trade embargo on ${n(args.targetId)}`;
+146:    case 'ORDER_INTERVENTION': return `${n(args.patronId)} commits an army to the contest at ${n(args.targetId)}`;
+147:    case 'ORDER_CONVOY': return `${n(args.ownerId)}'s fleet is ordered to convoy its army to ${n(args.destId)}`;
+148:    case 'DECLARE_BLOCKADE': return `${n(args.ownerId)}'s fleet is ordered across ${n(args.targetId)}'s sea approaches`;
+149:    case 'FORCE_RECONSIDERATION': return `${n(args.targetId)} is pressed to reconsider its course`;
+150:    case 'FORCE_CALAMITY': return `Calamity is ordered upon ${n(args.targetId)}`;
+151:    case 'FORCE_FOUND_STEADING': return `${n(args.parentId)} is ordered to found a steading`;
+152:    case 'FORCE_ABANDON': return `${n(args.targetId)} is ordered abandoned`;
+153:    case 'FORCE_RESETTLE': return `The remnant of ${n(args.targetId)} is ordered resettled`;
+161: * into args so apply is deterministic. Refuses unknown/deferred verbs.
+162: * @param {{ verb: string, args: Mut, worldState: Mut,
+
+# (d) CONSERVATION_ENDPOINTS
+src/domain/worldPulse/peopleLedger.js:106:export const CONSERVATION_ENDPOINTS = Object.freeze({
+src/domain/worldPulse/peopleLedger.js:260:for (const event of CONSERVATION_ENDPOINTS.SINKS) {
+src/domain/worldPulse/peopleLedger.js:263:for (const event of CONSERVATION_ENDPOINTS.SOURCES) {
+# (c2) the outcome carries args
+/**
+ * domain/worldPulse/realmVerbExecution.js — THE REALM VERB LIVE PATH
+ * (W-COMPOSER-2 Stage 2; Composer V2 §6 "zero new apply paths").
+ *
+ * Two halves of one lane:
+ *   • buildRealmVerbOutcome — the PURE mint builder: verb + dial args →
+ *     a proposal-mode outcome (applyMode:'proposal', proposalPayload
+ *     { kind:'realm_verb_order', verb, args }). applyWorldPulse routes it
+ *     through the EXACT sim proposal-mint path (upsert + news), so a DM-minted
+ *     realm proposal is record-identical to a sim-minted one.
+ *   • applyRealmVerbOrder — the apply ARM dispatcher applyWorldPulseOutcomes
+ *     calls when an APPROVED realm_verb_order outcome reaches apply. Every arm
+
+# (d2) CONSERVATION_ENDPOINTS body
+ * delete-and-recreate is the count-dropping shape WC-6 exists to catch.
+ * @type {ReadonlyArray<string>}
+ */
+export const TAG_EVENTS = Object.freeze(['brigand', 'demobilize', 'reclass', 'untag']);
+
+/**
+ * ⭐ THE DECLARED ENDPOINTS OF THE IDENTITY, SINKS AND SOURCES IN THE SAME FROZEN OBJECT
+ * (§0.2). The identity subtracts exactly the three sinks and adds exactly the one source;
+ * anything else moving a count is a hole. Exporting them together is what makes an
+ * un-sourced credit as visible as an un-sunk debit.
+ */
+export const CONSERVATION_ENDPOINTS = Object.freeze({
+  SINKS: Object.freeze(['dm_removed', 'fell', 'mortality']),
+  SOURCES: Object.freeze(['birth']),
+});
+
+/**
+ * The closed selection vocabulary every tag arm names. Minted at WC-0 because before the
+ * volume's round 3 the selection was a typed bucket said three times in prose and declared
+ * nowhere — and since the walker derives its check from the SAME object the movers obey,
+ * an invented shape becomes law silently.
+ * @type {ReadonlyArray<string>}
+ */
+export const TAG_SELECTIONS = Object.freeze(['pro_rata', 'untag_only', 'veterans_first']);
+
+/** The two non-pool endpoints a signature may name. */
+const SINK = 'SINK';
+const SOURCE = 'SOURCE';
+
+/**
+ * @typedef {object} TagArm
+ * @property {string} selection a REQUIRED `TAG_SELECTIONS` member.
+ * @property {ReadonlyArray<string>} rows the `RESIDENCY_TAGS` rows the arm debits.
+ */
+
+/**

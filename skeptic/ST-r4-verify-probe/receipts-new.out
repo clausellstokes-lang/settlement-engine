@@ -1,0 +1,28 @@
+## X-L30 (seizure gate) — ST §6.1 step 6, §2.4 denPressOf, §3.4 feeder, S31; BD §7.1
+336:an attached tied court whose town the den presses (`denPressOf` on that town ≥ 0.40
+336:so a conclave's site is cleared only by a court that holds its creed `outlawed`
+188:ST's own feeder term for that site at that town, or, where the handoff above gives a body's presence to THE BODIES
+187:where a site's untied holder IS a body and `bodyEffectsEnabled` is lit, the feeder reads ZERO
+263:`sitePresenceFeeder(T)` — the MAX over the untied sites attached to T
+594:only once Ashford holds a creed `outlawed` does its clearing fork open `site_cleared` (the seizure)
+473:its fork turns `outlawed` (the flock hostile from that week, item 15) and ST's clearing follows (ST §6.1 step 6)
+
+## X-presence — ST8, §3.1 vs BD §8.2, §22 A2, §2.2
+93:A CONCLAVE is never an untied holder and never a hazard
+230:whatever harm a HOSTILE flock does is its own acts through THE BODIES' rows, one term per thing, BD §8.2/§9.2
+516:the MAX over the bodies whose `where` touches T this week (a body on the stretch `a|b` touches both; a body on a trail touches nothing unless it SORTIED this week; a body at a site attached `at_han
+516:`ACT_FACTOR` raiding this week 1.0, based in the country 0.8, passing 0.5
+1060:| A2 | any body PRESENT in a country (based · passing · raiding; a beast in winter)
+196:baseSiteId?,              // the held site that is its base
+197:might,                    // STRENGTH_BAND_KEYS
+
+## X-join — ST §8 docket line vs §6.1 step 4
+476:whatever courts, patrols or bodies move on one site in one week meet it in ONE hearing with one draw — the anchor court leading, the rest joining
+334:A court sorties only against an arriver it holds HOSTILE
+471:a BODY on another body's site (BD §9.4); a menace whose DM-set course takes it to a site a body holds
+336:when the anchor does not sortie, the sortieing court nearest by band leads
+
+## RU-MN (promotion) — MN route vs ST §6.7 vs MN M59 vs BD
+393:the body's end `raised` empties its site through ST's writer (BD §15's death row: "its site falls EMPTY"), and the new menace holds it only where the DM's course or `SITE_HOLDER` puts it there (MN12) — a holder change like any other (§6.1 step 3).
+580:the ruin's holder ref reads `{ kind: 'menace', id }` (ST's writer)
+429:its site falls EMPTY (ST's `abandoned`, through ST's writer)

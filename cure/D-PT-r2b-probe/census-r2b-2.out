@@ -1,0 +1,12 @@
+RECORD_CLEARING  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=0
+party_made_known_site  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=0
+party_revealed_site  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=1
+made_known  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=1
+banKeys  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=1
+fromIds  src-word=0  src-quoted=0  tests-word=2  master-docs=0  ledger-docs=1
+party_cleared_site  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=2
+party_reached_site  src-word=0  src-quoted=0  tests-word=0  master-docs=0  ledger-docs=2
+--- ledger-doc files naming party_revealed_site
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PT.md
+--- ledger-doc files naming banKeys
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CH.md

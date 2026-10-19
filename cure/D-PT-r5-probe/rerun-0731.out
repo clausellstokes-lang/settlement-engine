@@ -1,0 +1,6 @@
+# re-run Mon Oct 19 07:32:50 EDT 2026
+huntFault: byte-identical
+census (minus header line):
+  word/quote counts identical
+tables 23 · mismatches 0 []
+lines 851

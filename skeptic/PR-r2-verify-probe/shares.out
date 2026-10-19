@@ -1,0 +1,25 @@
+bold (a=1,h=0)             peaceShare=0.40 max= 1 peace=1 campaign=1  (a) peace at max
+median (a=.5,h=0)          peaceShare=0.60 max= 1 peace=1 campaign=1  (a) peace at max
+median (a=.5,h=0)          peaceShare=0.60 max= 2 peace=2 campaign=2  (a) peace at max
+wary (a=0,h=0)             peaceShare=0.80 max= 1 peace=1 campaign=1  (a) peace at max
+wary (a=0,h=0)             peaceShare=0.80 max= 2 peace=2 campaign=2  (a) peace at max
+wary (a=0,h=0)             peaceShare=0.80 max= 3 peace=3 campaign=3  (a) peace at max
+wary (a=0,h=0)             peaceShare=0.80 max= 4 peace=4 campaign=3  (a) peace at max  (b) campaign < peace
+wary (a=0,h=0)             peaceShare=0.80 max= 8 peace=7 campaign=6  (b) campaign < peace
+wary (a=0,h=0)             peaceShare=0.80 max= 9 peace=8 campaign=7  (b) campaign < peace
+wary (a=0,h=0)             peaceShare=0.80 max=12 peace=10 campaign=9  (b) campaign < peace
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 1 peace=1 campaign=1  (a) peace at max
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 2 peace=2 campaign=2  (a) peace at max
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 3 peace=3 campaign=3  (a) peace at max
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 4 peace=4 campaign=3  (a) peace at max  (b) campaign < peace
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 8 peace=7 campaign=6  (b) campaign < peace
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max= 9 peace=8 campaign=7  (b) campaign < peace
+lawful-cruel (a=.5,h=1)    peaceShare=0.80 max=12 peace=10 campaign=9  (b) campaign < peace
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 1 peace=1 campaign=1  (a) peace at max
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 2 peace=2 campaign=2  (a) peace at max
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 3 peace=3 campaign=3  (a) peace at max
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 4 peace=4 campaign=3  (a) peace at max  (b) campaign < peace
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 8 peace=7 campaign=6  (b) campaign < peace
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max= 9 peace=8 campaign=7  (b) campaign < peace
+wary+harsh (a=.25,h=.5)    peaceShare=0.80 max=12 peace=10 campaign=9  (b) campaign < peace
+rows=60 peaceAtMax=15 campaignBelowPeace=12

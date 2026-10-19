@@ -1,0 +1,6 @@
+thorp       military min 0 med 19 max 56      | monster min 0 med 4 max 23       | internal min 0 med 24 max 28      | walled 4/12 | present true
+hamlet      military min 0 med 38 max 57      | monster min 4 med 34 max 53      | internal min 0 med 24 max 30      | walled 1/12 | present true
+village     military min 21 med 48 max 78     | monster min 4 med 49 max 57      | internal min 1 med 14 max 34      | walled 6/12 | present true
+town        military min 65 med 93 max 99     | monster min 63 med 96 max 100    | internal min 41 med 64 max 75     | walled 11/12 | present true
+city        military min 67 med 97 max 100    | monster min 85 med 95 max 98     | internal min 14 med 64 max 64     | walled 12/12 | present true
+metropolis  military min 75 med 88 max 100    | monster min 91 med 95 max 98     | internal min 41 med 54 max 64     | walled 12/12 | present true

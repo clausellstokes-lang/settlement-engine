@@ -1,0 +1,56 @@
+@@OLD
+is met by the fence.] Felt, once,
+@@NEW
+is met by the fence.] [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b: the chair ACCEPTED the measurement note ("MN's measurement note (`war_pressure` is not on the pulse path): ACCEPTED — no clear needed; MN's cure stands as measured"); nothing changed but the citation.] Felt, once,
+@@END
+@@OLD
+a paragon whose calling is `domain: 'wildland'` exerting this week (`aim.exert`) in the besieged town (`polarity: 'champion'`, a warden, toward holding; `polarity: 'villain'`, a beast-caller, toward the breach — THE CHAMPIONS' wildland run side, `DESIGN_FP_ARCH_CH.md` §2 and §6)
+@@NEW
+a paragon whose calling is `domain: 'wildland'` and whose week's `exertion.outcome` in the besieged town is `exerted` (`polarity: 'champion'`, a warden, toward holding; `polarity: 'villain'`, a beast-caller, toward the breach — THE CHAMPIONS' wildland run side, `DESIGN_FP_ARCH_CH.md` §2 and §6), read through CH's ONE seam leaf `paragonLean(worldState, settlementId, 'wildland', side)` (CH §2.2) and NEVER from the decision `aim.exert`: a `faltered` exertion and a duel's `voided` loser lean nothing, and an `indecisive` duel leaves both `exerted`, so a warden and a beast-caller in one town cancel; the person stage (`advanceEnvoyDiplomacyPulse(`) runs before the calamity stage that hosts MN's leaf (`advanceCalamity(`) in the kernel's order, and the kernel threads its world forward (`memoryState = envoys.worldState;`), so MN reads the outcome the SAME tick it is written (CONFIRMED by reading `pulseKernel.js`; that the person stage writes the outcome into that returned world is RN-1's and CH-3's design) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-5: the round-2 text read the DECISION `aim.exert`, so a faltered warden or a duel's loser still tilted the siege, against CH's own cure CH-V2 ("never `aim.exert`")]
+@@END
+@@OLD
+(1) a paragon of calling `domain: 'wildland'` exerting this week (`aim.exert`) in the raided town —
+@@NEW
+(1) a paragon of calling `domain: 'wildland'` whose week's `exertion.outcome` in the raided town is `exerted` — through CH's `paragonLean`, as in §5.2, never `aim.exert`; a faltered or voided exertion adds nothing [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-5] —
+@@END
+@@OLD
+one value, one road, either way.
+@@NEW
+one value, one road, either way [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b ("PR fills MN's slot (2) and ST's post-blend slot ("two consumers, one value"): ACCEPTED"), read exactly so: PR's ONE value fills this slot, and the road it arrives by is the stamp, because ST's post-blend slot sits inside the score this wear read already takes; each of the two readers — the raider record's resolution and the menace's wear — takes the value once, and MN adds no `menaceCounterTerms` row for it (PR §6.2 as cured in round 2b: "one entry, the stamp carrying it to the second reader"; SEAMS-r2-4 and PR-r2-7, routed to PR, ask the same)].
+@@END
+@@OLD
+the host opens H16's optional door (PR item 18).
+@@NEW
+the host SENDS its patrol facts OUT through the events window (H9) like every other fact — H16 is the map's INBOUND door, which the host never consumes (PR item 18 as corrected) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b HOST-r2-5: the chair's earlier "opens H16" corrected; MN had echoed it].
+@@END
+@@OLD
+| `menace_met` | options `engage · withdraw`; outcomes `menace_beaten · army_beaten · indecisive` | free; `stand_off` is NOT used (it is `armies_meet`'s option — SX-16), `drawn` is landed (`generationForkRegistry.js`) |
+@@NEW
+| `menace_met` | options `engage · withdraw`; outcomes `menace_beaten · army_beaten · indecisive` — `army_beaten` reads "an army or a detachment" (one vocabulary; a patrol detachment is the force when THE PATROLS produce the meeting) | free; `stand_off` is NOT used (it is `armies_meet`'s option — SX-16), `drawn` is landed (`generationForkRegistry.js`) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b, PR's open question (6)] |
+@@END
+@@OLD
+| round-2 tokens |
+@@NEW
+| round-2b names | `columnTerm` — the enemy-column argument of the one composition sentence (§3.3), beside `wallsTerm` · `roadCountry` · `siteSuppression` · `patrolSubtraction`; design names inside one formula, never persisted; `paragonLean` is CH's leaf (CH §2.2), read here and never re-minted | `columnTerm` free (`rg -w` on master `src` · `tests` · `docs` and the ledger's docs: 0 hits, `cure/D-MN-r2b.md` §1(f)) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7 · SEAMS-r2-5] |
+| round-2 tokens |
+@@END
+@@OLD
+(MN7's witness idiom, a hop sooner).]
+@@NEW
+(MN7's witness idiom, a hop sooner).] [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b, PR's open question (6) ("MN's `army_beaten` reads 'an army or a detachment' (one vocabulary; a bracket)"): ruled as MN answered it in round 2; and STOP-PR-0 as ACCEPTED there — a detachment is a WEEKLY-PLACED body of the town's own capacity, never a WC column — so its "arrival" is THE PATROLS' placement after its hop weeks (PR §5.2), it has no transit record and adds no `armyTransitKernel.js` line, and its losses book through THE PATROLS' row, never the war's attrition.] [REFINED 2026-10-18 (fp-final r2) — SEAMS-r2-8 (routed to PS, PR and the fold; MN named as a citer): the card's `road (a, b)` place is the WHOLE road between two towns, an UNORDERED pair — the fold's one stretch key `road{a,b}` when P4 writes it; a menace holds the whole road, never one power's half of it; the record's `[a, b]` order carries only the anchor (§2).]
+@@END
+@@OLD
+a waned record stays [CURED 2026-10-18 (fp-final r1)] |
+@@NEW
+a waned record stays [CURED 2026-10-18 (fp-final r1)]; a faltered or voided paragon leans nothing on the siege or the wear (M44, M54) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-5] |
+@@END
+@@OLD
+re-adoption restores the attacker (M49) [CURED 2026-10-18 (fp-final r2)] |
+@@NEW
+re-adoption restores the attacker (M49) [CURED 2026-10-18 (fp-final r2)]; the one composition — the walls term and an enemy column never suppressed, the raid-and-road part suppressed only to the shared cap (M50, M53) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7] |
+@@END
+@@OLD
+(the presence term, read from `pressTally` for the current press set);
+@@NEW
+(the presence term, read from `pressTally` for the current press set and composed by §3.3's one sentence over its three registered feeders — ST's and PS's rows registered by whichever commit lands second; SEAMS-r2-7 (r2b));
+@@END

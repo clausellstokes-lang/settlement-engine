@@ -1,0 +1,13 @@
+(1) master escalation arm on a spent held record (severity 0.55):
+  conflict 0.6: escalation candidates 0
+      with the fence (menace-held ⇒ no escalation candidate): 0
+  conflict 0.65: escalation candidates 1 · severity 0.680 · applyMode auto · p 0.262 · over flight band true
+      with the fence (menace-held ⇒ no escalation candidate): 0
+  conflict 0.7: escalation candidates 1 · severity 0.705 · applyMode auto · p 0.276 · over flight band true
+      with the fence (menace-held ⇒ no escalation candidate): 0
+  conflict 0.8: escalation candidates 1 · severity 0.755 · applyMode auto · p 0.304 · over flight band true
+      with the fence (menace-held ⇒ no escalation candidate): 0
+  conflict 0.9: escalation candidates 1 · severity 0.805 · applyMode proposal · p 0.332 · over flight band true
+      with the fence (menace-held ⇒ no escalation candidate): 0
+(2) the fenced held record over 52 weeks at the spent floor (decay floored, no escalation):
+  max severity 0.550 · weeks at or over the flight band 0 · (master would have rolled resolution 51× — suppressed by the hold)

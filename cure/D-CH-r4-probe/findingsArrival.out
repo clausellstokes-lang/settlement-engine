@@ -1,0 +1,5 @@
+{"hopWeeksMeetToHome":1,"travelTicks":1,"ttlNotable":13}
+{"stamped":true,"delay":1,"everHeld":["home"],"firstHeardAtHome":11,"goneAtTick":25}
+{"stamped":true,"delay":4,"everHeld":["home"],"firstHeardAtHome":14,"goneAtTick":28}
+{"stamped":true,"delay":0,"everHeld":["home"],"firstHeardAtHome":10,"goneAtTick":24}
+{"stamped":false,"delay":1,"everHeld":["home","meet","third"],"firstHeardAtHome":11,"goneAtTick":25}

@@ -1,0 +1,67 @@
+rite                   srcFiles=44   srcHits=128   tests=26   wtDocs=35   ledgerDocs=32   quotedToken: src/domain/worldPulse/peaceReasons.js:RITE:
+imposition             srcFiles=15   srcHits=39    tests=10   wtDocs=17   ledgerDocs=25   quotedToken: src/domain/traditions/relations.js:'imposition'
+missionary             srcFiles=1    srcHits=1     tests=0    wtDocs=13   ledgerDocs=14   quotedToken: 
+recognition            srcFiles=22   srcHits=52    tests=8    wtDocs=17   ledgerDocs=23   quotedToken: src/data/npcData.js:recognition:
+recognised             srcFiles=14   srcHits=15    tests=20   wtDocs=13   ledgerDocs=2    quotedToken: 
+recognized             srcFiles=19   srcHits=22    tests=15   wtDocs=10   ledgerDocs=9    quotedToken: src/domain/worldPulse/simulationProfile.js:recognized:
+appointee              srcFiles=14   srcHits=27    tests=1    wtDocs=2    ledgerDocs=10   quotedToken: 
+appointment            srcFiles=25   srcHits=39    tests=5    wtDocs=5    ledgerDocs=9    quotedToken: src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx:'appointment'
+garrison               srcFiles=194  srcHits=661   tests=129  wtDocs=70   ledgerDocs=112  quotedToken: src/design/townGlyphs/medieval.js:garrison:
+fosterage              srcFiles=1    srcHits=1     tests=0    wtDocs=1    ledgerDocs=2    quotedToken: 
+hostage                srcFiles=32   srcHits=104   tests=33   wtDocs=22   ledgerDocs=32   quotedToken: src/store/settlementPendingEdits.js:'hostage'
+match                  srcFiles=380  srcHits=758   tests=686  wtDocs=213  ledgerDocs=276  quotedToken: src/store/settlementSliceHelpers.js:match:
+league                 srcFiles=16   srcHits=25    tests=106  wtDocs=13   ledgerDocs=12   quotedToken: src/lib/instantWorld/factionDedup.js:'League'
+overreach              srcFiles=2    srcHits=2     tests=2    wtDocs=5    ledgerDocs=5    quotedToken: 
+tyranny                srcFiles=5    srcHits=6     tests=0    wtDocs=4    ledgerDocs=4    quotedToken: src/generators/history/historyPolicyData.js:'tyranny'
+centralizing           srcFiles=12   srcHits=13    tests=0    wtDocs=1    ledgerDocs=2    quotedToken: 
+centrifugal            srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=1    quotedToken: 
+hold                   srcFiles=463  srcHits=1150  tests=491  wtDocs=228  ledgerDocs=298  quotedToken: src/store/settlementGenerateAction.js:hold:
+nominal                srcFiles=25   srcHits=35    tests=7    wtDocs=8    ledgerDocs=13   quotedToken: src/generators/npcGenerator.js:'nominal'
+loose                  srcFiles=71   srcHits=119   tests=47   wtDocs=24   ledgerDocs=39   quotedToken: src/domain/worldPulse/pulseKernel.js:loose:
+firm                   srcFiles=24   srcHits=56    tests=17   wtDocs=6    ledgerDocs=10   quotedToken: src/domain/npc/livedExperienceFunnel.js:firm:
+absolute               srcFiles=140  srcHits=231   tests=79   wtDocs=125  ledgerDocs=134  quotedToken: src/components/PurchaseModal.jsx:'absolute'
+cohesion               srcFiles=32   srcHits=52    tests=27   wtDocs=54   ledgerDocs=96   quotedToken: src/components/map/CampaignEmptyState.jsx:cohesion:
+deference              srcFiles=1    srcHits=2     tests=0    wtDocs=2    ledgerDocs=6    quotedToken: 
+homage                 srcFiles=1    srcHits=1     tests=0    wtDocs=0    ledgerDocs=1    quotedToken: 
+liege                  srcFiles=3    srcHits=5     tests=1    wtDocs=1    ledgerDocs=10   quotedToken: src/domain/relationships/canonicalRelationship.js:liege:
+vassal                 srcFiles=103  srcHits=356   tests=75   wtDocs=46   ledgerDocs=61   quotedToken: src/store/campaignSlice.js:'vassal'
+root                   srcFiles=205  srcHits=605   tests=643  wtDocs=162  ledgerDocs=206  quotedToken: src/domain/realm/realmItemIdentity.js:'root'
+sworn                  srcFiles=43   srcHits=70    tests=23   wtDocs=30   ledgerDocs=23   quotedToken: src/domain/tableEvents.js:'sworn'
+held                   srcFiles=433  srcHits=1137  tests=439  wtDocs=273  ledgerDocs=276  quotedToken: src/components/pricing/PricingBands.jsx:held:
+crown                  srcFiles=57   srcHits=151   tests=93   wtDocs=48   ledgerDocs=66   quotedToken: src/generators/history/historyEventStrands.js:crown:
+fealty                 srcFiles=3    srcHits=5     tests=1    wtDocs=0    ledgerDocs=3    quotedToken: 
+suzerain               srcFiles=3    srcHits=6     tests=3    wtDocs=4    ledgerDocs=11   quotedToken: src/domain/relationships/canonicalRelationship.js:suzerain:
+conversion             srcFiles=107  srcHits=253   tests=57   wtDocs=95   ledgerDocs=145  quotedToken: src/generators/power/factionCategories.js:'Conversion'
+scutage                srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=1    quotedToken: 
+autonomy               srcFiles=49   srcHits=126   tests=43   wtDocs=28   ledgerDocs=38   quotedToken: src/domain/aiCharter.js:'autonomy'
+liberties              srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=2    quotedToken: 
+counsel                srcFiles=10   srcHits=12    tests=9    wtDocs=26   ledgerDocs=41   quotedToken: 
+envoy                  srcFiles=110  srcHits=444   tests=106  wtDocs=68   ledgerDocs=101  quotedToken: src/domain/briefs/roadScene.js:'envoy'
+slack                  srcFiles=17   srcHits=24    tests=41   wtDocs=70   ledgerDocs=42   quotedToken: src/domain/prose/grammarWalker.js:slack:
+frayed                 srcFiles=4    srcHits=4     tests=1    wtDocs=8    ledgerDocs=2    quotedToken: 
+tight                  srcFiles=24   srcHits=34    tests=20   wtDocs=18   ledgerDocs=31   quotedToken: src/domain/worldPulse/houseActs.js:'tight'
+iron                   srcFiles=70   srcHits=215   tests=206  wtDocs=27   ledgerDocs=37   quotedToken: src/lib/supplyChains.js:'iron'
+steady                 srcFiles=69   srcHits=149   tests=53   wtDocs=22   ledgerDocs=27   quotedToken: src/components/settlement/FaithSection.jsx:steady:
+shaky                  srcFiles=4    srcHits=4     tests=5    wtDocs=1    ledgerDocs=2    quotedToken: 
+unbroken               srcFiles=6    srcHits=8     tests=4    wtDocs=6    ledgerDocs=8    quotedToken: 
+investiture            srcFiles=2    srcHits=8     tests=3    wtDocs=7    ledgerDocs=7    quotedToken: src/domain/npc/livedExperienceSources.js:'investiture'
+endorse                srcFiles=1    srcHits=1     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+endorsement            srcFiles=5    srcHits=14    tests=4    wtDocs=2    ledgerDocs=8    quotedToken: src/domain/worldPulse/religionLegitimacy.js:endorsement:
+allegiance             srcFiles=6    srcHits=10    tests=0    wtDocs=6    ledgerDocs=9    quotedToken: 
+homage                 srcFiles=1    srcHits=1     tests=0    wtDocs=0    ledgerDocs=1    quotedToken: 
+proselytize            srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+mission                srcFiles=77   srcHits=328   tests=52   wtDocs=34   ledgerDocs=66   quotedToken: src/domain/worldPulse/espionage/infiltrationDepth.js:'MISSION'
+seed_rite              srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+liegeRite              srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+courtFaith             srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+polity                 srcFiles=13   srcHits=17    tests=2    wtDocs=2    ledgerDocs=26   quotedToken: 
+overlord               srcFiles=59   srcHits=208   tests=41   wtDocs=15   ledgerDocs=31   quotedToken: src/domain/relationships/canonicalRelationship.js:overlord:
+chain                  srcFiles=374  srcHits=1885  tests=362  wtDocs=273  ledgerDocs=333  quotedToken: src/lib/customContentReviewedSupplyChainService.js:chain:
+tier                   srcFiles=804  srcHits=4656  tests=1321 wtDocs=289  ledgerDocs=411  quotedToken: src/App.jsx:tier:
+sanction               srcFiles=12   srcHits=16    tests=3    wtDocs=8    ledgerDocs=10   quotedToken: 
+acclaim                srcFiles=0    srcHits=0     tests=0    wtDocs=0    ledgerDocs=0    quotedToken: 
+acknowledge            srcFiles=7    srcHits=12    tests=4    wtDocs=7    ledgerDocs=8    quotedToken: 
+bound                  srcFiles=326  srcHits=702   tests=324  wtDocs=205  ledgerDocs=221  quotedToken: src/domain/tableEvents.js:'bound'
+sound                  srcFiles=30   srcHits=49    tests=46   wtDocs=38   ledgerDocs=87   quotedToken: src/domain/townMap/arch/conditionGrammar.js:'sound'
+fast                   srcFiles=79   srcHits=151   tests=69   wtDocs=80   ledgerDocs=95   quotedToken: src/config/pricing.js:'fast'
+steadfast              srcFiles=4    srcHits=4     tests=1    wtDocs=0    ledgerDocs=2    quotedToken: src/domain/npc/paradigmAxisCatalog.js:'steadfast'

@@ -1,0 +1,22 @@
+SITE_READINESS src:0 tests:0
+siteReadiness01 src:0 tests:0
+siteReadinessOf src:0 tests:0
+reliefAnswerOf src:0 tests:0
+presenceComposer src:0 tests:0
+warSiegeRefused src:0 tests:0
+PASSAGE_UNSEEN_ROWS_CAP src:0 tests:0
+fatigueFloor01 src:0 tests:0
+groundCap01 src:0 tests:0
+party_made_known_site src:0 tests:0
+FEALTY_ROW_FAMILIES src:0 tests:0
+settlementFundingBand src:0 tests:0
+fundingBandOfSettlement src:0 tests:0
+polity_ban src:0 tests:0
+quoted 'at_strength' src files: 0
+quoted 'hollow' src files: 0
+quoted 'manned' src files: 0
+quoted 'sparse' src files: 1
+quoted 'skeleton' src files: 0
+stretch: quoted:
+       0
+src/domain/settlement.schema.js:1672: * @property {'sparse' | 'standard' | 'lush'} proseDensity

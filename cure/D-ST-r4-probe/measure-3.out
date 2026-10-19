@@ -1,0 +1,6 @@
+# kernel stage order at master 81f1cd963 (src/domain/worldPulse/pulseKernel.js)
+2097:    const rumors = advanceRumorLedgers({
+2391:    const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });
+2527:    const calamity = advanceCalamity({
+# rumorNetwork.js signature
+546:export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null, armyPaths = null, smugglePaths = null, migrantPaths = null }) {

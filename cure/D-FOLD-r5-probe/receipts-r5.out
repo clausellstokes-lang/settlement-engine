@@ -1,0 +1,61 @@
+== receipts (master 81f1cd963, read-only; Mon Oct 19 04:33:56 EDT 2026)
+ * ES-1 admits `covert_envoy` on the design's own sentence — covert travel is HARDER TO
+ * CATCH and less credible on any simultaneous open purpose (ES §0), and the overgrown road
+ * is where that trade is paid. The ORDINARY envoy is deliberately still absent: an open
+ * embassy that took a forgotten way would be an embassy nobody could witness arriving,
+ * which is the opposite of what an embassy is for.
+ * @type {ReadonlyArray<string>}
+ */
+export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+
+/** The grade a forgotten corridor holds (Law 5's floor). @type {string} */
+export const HIDDEN_GRADE = 'hidden';
+
+--
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkLedger.js:64:export const ROUTE_GRADES = Object.freeze(['highway', 'road', 'track', 'hidden']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkLedger.js:64:export const ROUTE_GRADES = Object.freeze(['highway', 'road', 'track', 'hidden']);
+/**
+ * ROUTE_LIFECYCLE_TUNING, the transit half (§12: every entry a band, soak-vetoable).
+ *
+ * GRADE_LEG_MULTIPLIER is §9's "grade penalty" as a number, and the ladder is the
+ * whole point of the route lifecycle showing up in somebody's travel time: a highway
+ * is the realm's spine and moves people faster than the ordinary road, a track is a
+ * way that has been earned but not yet proven, and a hidden path is an overgrown
+ * remnant that a person can still push through slowly.
+ *
+ * THE HIDDEN RUNG IS 2 BECAUSE H3'S IS. `NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN`
+ * is 2, and two programs disagreeing about what an overgrown road costs a walker
+ * would be visible as a roamer who arrives on a different tick depending on which
+ * lane advanced them. The number is repeated rather than imported on purpose: these
+ * are two independently vetoable tuning surfaces that happen to agree today, and a
+ * shared import would make a future owner ruling about one silently retune the other.
+ * The agreement is pinned instead, which is the honest way to hold two bands equal.
+ *
+ * MIN_LEG_TICKS is the floor H3 also keeps: a leg can never resolve on the tick it
+ * opened, so no walker crosses two edges in one advance.
+ *
+ * @type {Readonly<Record<string, unknown>>}
+ */
+export const ROUTE_TRANSIT_TUNING = Object.freeze({
+  GRADE_LEG_MULTIPLIER: Object.freeze({
+    highway: 0.75,
+    road: 1,
+    track: 1.5,
+    hidden: 2,
+  }),
+  MIN_LEG_TICKS: NAMED_PERSON_TRANSIT_TUNING.MIN_LEG_TICKS,
+  /**
+--
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/npcConsequencesTuning.js:154:   *  HIDDEN path. Design: wanderers may use hidden paths (slowly); armies may not. */
+-- dispersed
+-- spread_faith
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/settlementPolitics.js:472:  spread_faith: 'doctrine', defend_doctrine: 'doctrine', serve_patron: 'patron',
+-- ranged_away by_office
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/narrative/settlementOriginProse.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/data/geographyData.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/data/narrativeData.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/generators/densityLaw.test.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/narrative/settlementOriginProse.js:81:    'Founded at a junction on the oldest logic there is: whoever holds the meeting of roads holds what moves along them.',
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/data/geographyData.js:668:        reason: "Trade route junction"
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/data/geographyData.js:712:      "trade route junction"
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/data/narrativeData.js:89:    "was founded when a powerful merchant family built a counting house at the junction",

@@ -1,0 +1,10 @@
+ROUTE_MODES (pinned)                                       ["land","water"]
+ROUTE_GRADES (pinned)                                      ["highway","road","track","hidden"]
+routeEdgeId(land) · routeEdgeId(way)                       ["route.ashford.kell.land","route.ashford.kell.way"]
+the convicting receipt: a 2nd LAND edge refused (unchanged) true
+the cure: a WAY-mode edge beside it admitted (ids)         ["route.ashford.kell.land","route.ashford.kell.way"]
+livedAdjacency(kell) hops (grade · mode · hidden)          [["road","land",false],["hidden","way",true]]
+gradeLegMultiplier hidden · trail · way · wild             [2,1,1,1]
+routeNetworkComponents excludes the hidden-grade way edge  [["ashford","ashford"],["kell","ashford"]]
+mayUseHiddenPaths body · army · smuggler (master today)    [false,false,true]
+travellerMayWalk army · smuggler on the way hop            [false,true]

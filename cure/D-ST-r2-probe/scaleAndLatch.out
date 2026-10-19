@@ -1,0 +1,26 @@
+(ST-r2-7) tied gate row BASE 0.8 (monsterRaiderGate fort):
+  unfunded at_hand  literal 0.120  deviation 0.970
+  unfunded distant  literal 0.024  deviation 0.994
+  meagre   at_hand  literal 0.360  deviation 0.910
+  meagre   distant  literal 0.072  deviation 0.982
+  funded   at_hand  literal 0.640  deviation 0.840
+  funded   distant  literal 0.128  deviation 0.968
+  lavish   at_hand  literal 0.800  deviation 0.800
+  lavish   distant  literal 0.160  deviation 0.960
+(ST-r2-7) untied gate row BASE_H 1.3 (monsterRaiderGate den):
+  thin       literal 0.260  deviation 1.060
+  modest     literal 0.520  deviation 1.120
+  capable    literal 0.780  deviation 1.180
+  strong     literal 1.040  deviation 1.240
+  formidable literal 1.300  deviation 1.300
+(ST-r2-9) untied presence feeder at at_hand, formidable, best quality (ruin fixed ruined) vs ENTER_THRESHOLD 0.55:
+  fortification  p=1.000 latches alone: true  tips a town at T=0.30: true  at T=0.45: true
+  watchtower     p=0.300 latches alone: false  tips a town at T=0.30: false  at T=0.45: true
+  tower          p=0.250 latches alone: false  tips a town at T=0.30: false  at T=0.45: true
+  waystation     p=0.450 latches alone: false  tips a town at T=0.30: true  at T=0.45: true
+  crossing       p=0.450 latches alone: false  tips a town at T=0.30: true  at T=0.45: true
+  resource       p=0.200 latches alone: false  tips a town at T=0.30: false  at T=0.45: true
+  harbour_works  p=0.450 latches alone: false  tips a town at T=0.30: true  at T=0.45: true
+  ruin           p=0.140 latches alone: false  tips a town at T=0.30: false  at T=0.45: false
+(ST-r2-22) Kell Prosperous rank 0.8 → band lavish → siteDefense 18 × F × Q = 18
+(M50 parity) raid 0.60 − min(0.25, fort 0.20 + riders 0.15) = 0.35 < 0.55 (the counterforce working; RULINGS-ROUND2b)

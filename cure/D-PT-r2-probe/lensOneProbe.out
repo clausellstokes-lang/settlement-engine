@@ -1,0 +1,6 @@
+verifier's case: act (0.5,0.5,0.5), holder balanced m=0.5, chaotic lawful=0, peaceful aggr=0, mark villainous 0.08, belief 0.6
+  unmarked=+0.0000  r1(lean all three)=+0.2268  r2(kind01 replaced)=-0.0000
+orphanage row (0.1,0.3,0.75), same holder, mark villainous
+  unmarked=+0.0000  r1(lean all three)=+0.2268  r2(kind01 replaced)=+0.0000
+orphanage row, good lawful peaceful holder (m=0.2,l=0.8,ag=0.3), mark admirable 0.73
+  unmarked=-0.3400  r1(lean all three)=-0.0339  r2(kind01 replaced)=+0.0380

@@ -1,0 +1,5 @@
+token                    quotedSrc  wordSrc wordTests   fpDocs
+siteReadinessOf                 0        0        0        1
+KEEP_DEFENSE_MAX                0        0        0        1
+SITE_DEFENSE_CEILING            0        0        0        0
+at_strength                     0        0        0        1

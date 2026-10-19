@@ -1,0 +1,34 @@
+spilled | lit=0 [] | word=6 | tests=5 | ledger=5
+sent_forth | lit=0 [] | word=0 | tests=0 | ledger=3
+driven_out | lit=0 [] | word=0 | tests=0 | ledger=0
+den_held | lit=0 [] | word=0 | tests=0 | ledger=0
+bred | lit=0 [] | word=4 | tests=0 | ledger=2
+wild | lit=6 [src/domain/threatProfile.js src/design/organic/ornament/pools.js src/components/gallery/galleryUtils.js src/domain/display/institutionVocabulary.js ] | word=49 | tests=47 | ledger=32
+deserted | lit=0 [] | word=6 | tests=0 | ledger=3
+cast_out | lit=0 [] | word=0 | tests=0 | ledger=3
+raised | lit=0 [] | word=207 | tests=189 | ledger=307
+dismissed | lit=27 [src/components/gallery/GalleryModerationPanel.jsx src/store/campaignWorldPulseSlice.js src/store/campaignWorldPulseDeferred.js src/domain/realm/realmItemActions.js ] | word=171 | tests=145 | ledger=57
+starved | lit=4 [src/domain/worldPulse/envoyChanceMeetingNews.js src/domain/worldPulse/magicSubstitutionReagents.js ] | word=106 | tests=79 | ledger=53
+provisioned | lit=3 [src/components/map/WarResolveSection.jsx src/domain/display/warResolve.js ] | word=18 | tests=3 | ledger=27
+lean | lit=10 [src/domain/worldPulse/moralInstitutionPressure.js src/domain/worldPulse/foundingCatalog.js src/domain/worldPulse/eventProse.js src/domain/worldPulse/treasuryNews.js ] | word=371 | tests=142 | ledger=254
+hungry | lit=7 [src/data/dossierCausalProse.generated.js src/domain/worldPulse/eventProse.js ] | word=89 | tests=67 | ledger=43
+starving | lit=2 [src/domain/display/warResolve.js ] | word=87 | tests=131 | ledger=33
+by_catch | lit=0 [] | word=0 | tests=0 | ledger=0
+by_survey | lit=0 [] | word=0 | tests=0 | ledger=0
+by_guide | lit=0 [] | word=0 | tests=0 | ledger=0
+by_dm | lit=0 [] | word=0 | tests=0 | ledger=0
+bodySupply01 | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyCohesion01 | lit=0 [] | word=0 | tests=0 | ledger=0
+believedBodies | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyProjection | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyHabitat | lit=0 [] | word=0 | tests=0 | ledger=0
+bodySecurity | lit=0 [] | word=0 | tests=0 | ledger=0
+courtStanceOf | lit=0 [] | word=0 | tests=0 | ledger=0
+believedStanceOf | lit=0 [] | word=0 | tests=0 | ledger=0
+wild_born | lit=0 [] | word=0 | tests=0 | ledger=0
+disbanded | lit=3 [src/domain/worldPulse/institutionLifecycle.js src/domain/worldPulse/moralInstitutionPressure.js src/domain/worldPulse/causeLifecycle.js ] | word=10 | tests=5 | ledger=10
+strained | lit=81 [src/domain/summary/tonightAtTheTable.js src/pdf/sections/Services.jsx src/generators/factionDynamics.js src/domain/settlement.schema.js ] | word=261 | tests=242 | ledger=134
+conclave_choice | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_BIRTHS | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_ENDS | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_SUPPLY_WORDS | lit=0 [] | word=0 | tests=0 | ledger=0

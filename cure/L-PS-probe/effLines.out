@@ -1,0 +1,37 @@
+src/domain/worldPulse/armyTransitKernel.js	798	baseline=-
+src/domain/spatial/armyTransit.js	340	baseline=-
+src/domain/spatial/embattlement.js	172	baseline=-
+src/domain/spatial/distanceRead.js	544	baseline=-
+src/domain/worldPulse/warDeployment.js	685	baseline=-
+src/domain/worldPulse/roadsKernel.js	838	baseline=838
+src/domain/spatial/spatialDigest.js	418	baseline=-
+src/domain/worldPulse/martialReadiness.js	264	baseline=-
+src/domain/worldPulse/pactFormation.js	565	baseline=-
+src/domain/worldPulse/peaceTermsCatalog.js	117	baseline=-
+src/domain/worldPulse/warReasonTaxonomy.js	70	baseline=-
+src/domain/worldPulse/pulseKernel.js	1581	baseline=1581
+src/domain/worldPulse/applyWorldPulse.js	907	baseline=907
+src/domain/worldPulse/settlementLifecycleKernel.js	735	baseline=-
+src/domain/worldPulse/envoyPulse.js	332	baseline=-
+src/domain/worldPulse/settlementStrategy.js	763	baseline=-
+src/domain/worldPulse/pactProposals.js	235	baseline=-
+src/domain/worldPulse/envoyErrand.js	714	baseline=-
+src/domain/worldPulse/warSeatBooks.js	492	baseline=-
+src/domain/worldPulse/relationshipEvolution.js	438	baseline=-
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/embattlementKernel.js'
+    at readFileSync (node:fs:440:20)
+    at file:///Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-PS-probe/effLines.mjs:10:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/embattlementKernel.js'
+}
+
+Node.js v24.12.0

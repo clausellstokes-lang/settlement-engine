@@ -1,0 +1,31 @@
+  126                  src/domain/worldPulse/coup.js
+  738                  src/domain/worldPulse/occupation.js
+   72                  src/domain/worldPulse/decisionTier.js
+  238                  src/domain/worldPulse/changeAuthorityPolicy.js
+   50                  src/domain/worldPulse/relationshipEdgeSeed.js
+   55                  src/domain/worldPulse/dispositionChannels.js
+  370                  src/domain/worldPulse/warPeaceDecision.js
+  492                  src/domain/worldPulse/warSeatBooks.js
+  295                  src/domain/rulingPowerSeat.js
+  227                  src/domain/worldPulse/religionLegitimacy.js
+node:fs:440
+    return binding.readFileUtf8(path, stringToFlags(options.flag));
+                   ^
+
+Error: ENOENT: no such file or directory, open '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/rulingPower.js'
+    at readFileSync (node:fs:440:20)
+    at file:///Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-PL-probe/effLines.mjs:10:16
+    at ModuleJob.run (node:internal/modules/esm/module_job:413:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:660:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5) {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'open',
+  path: '/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/rulingPower.js'
+}
+
+Node.js v24.12.0
+  255                  src/domain/worldPulse/concludedWars.js
+  154                  src/domain/worldPulse/warIntent.js
+  685                  src/domain/worldPulse/warDeployment.js
+  295                  src/domain/worldPulse/concludedWarRecord.js

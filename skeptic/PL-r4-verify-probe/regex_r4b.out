@@ -1,0 +1,3 @@
+riders_lent {'ESCALATION_HINT': False, 'DEESCALATION_HINT': False, 'WOUND_TYPE_RE': False}
+riders_quartered {'ESCALATION_HINT': False, 'DEESCALATION_HINT': False, 'WOUND_TYPE_RE': False}
+peace_unkept {'ESCALATION_HINT': False, 'DEESCALATION_HINT': False, 'WOUND_TYPE_RE': False}

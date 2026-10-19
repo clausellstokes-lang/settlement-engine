@@ -1,0 +1,63 @@
+## stage order (pulseKernel.js)
+525:    ? coupVerdictOutcomes({
+1578:  const applied = applyWorldPulseOutcomes({
+2442:    const armyTransit = advanceArmyTransit({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+## computeAllyRelief per-ally term + homeDefense derivation
+64:const ALLY_RELIEF_FRACTION = 0.4;
+93:    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+94:    relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
+191:    const homeDefense = Math.max(0, offensive - armyAway);
+## siteDefense on master (expect 0: ST's design)
+       0
+## INTERVAL_WEEKS
+8:  one_week: 1,
+10:  one_season: 13,
+11:  one_year: 52,
+## MEMORY_WEAVE_INCIDENT_TYPES
+325:export const MEMORY_WEAVE_INCIDENT_TYPES = Object.freeze({
+326-  ROUTE_SEIZED: 'route_seized',   // D-7b (POST-ROADS-FOLD host): a seizer↔victim route capture
+327-  RITE_IMPOSED: 'rite_imposed',   // D-7b: an overlord↔vassal rite imposition (host live on this base)
+328-  ELITE_FEUD: 'elite_feud',       // D-7f: a cross-border elite feud crossing (settlement pair cools)
+## ESCALATION_HINT / WOUND_TYPE_RE
+78:const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction|embargo)/i;
+79:const DEESCALATION_HINT = /(thaw|recovery|compact|protect|stability|alliance|allied|trade_partner|patronage|compliance|support|reconcil|dependency_coercion)/i;
+src/domain/worldPulse/grievanceRead.js:48:const WOUND_TYPE_RE = /war|betray|tribute|conquest|occupation|sack|raid|seiz|impos|contest_loss|contest_forestalled/i;
+## token census (src / tests word hits)
+peace_unkept src=0 tests=0
+riders_lent src=0 tests=0
+huntOrderOf src=0 tests=0
+liegeAnswer src=0 tests=0
+bannerStackOf src=0 tests=0
+siteReadiness01 src=0 tests=0
+SITE_READINESS src=0 tests=0
+at_strength src=0 tests=0
+crownNetOf src=0 tests=0
+peace_kept src=0 tests=0
+brigandage_exported src=0 tests=0
+## quoted 'body: prefix literals in src
+count:        0
+## readiness01 (landed homonym) files
+      14
+## extra census (word hits src / tests)
+banner src=193 tests=138
+lend src=16 tests=10
+huntOrder src=0 tests=0
+body_stance src=0 tests=0
+harboured src=0 tests=0
+## quoted 'banner: / 'lend: literals
+       0
+## regex check (node)
+riders_lent ESCALATION false DEESCALATION false WOUND false
+riders_quartered ESCALATION false DEESCALATION false WOUND false
+peace_unkept ESCALATION false DEESCALATION false WOUND false
+## computeAllyRelief signature
+74:export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet, coalitionLit = false) {
+## warCapacityReads callers of computeAllyRelief
+src/domain/worldPulse/warDeployment.js:544:      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets), coalitionLit)
+## readiness words census (quoted literals in src; word hits src/tests)
+hollow quoted=0 word_src=28 word_tests=29
+manned quoted=0 word_src=7 word_tests=3
+sparse quoted=1 word_src=105 word_tests=84
+skeleton quoted=0 word_src=43 word_tests=32
+at_strength quoted=0 word_src=0 word_tests=0

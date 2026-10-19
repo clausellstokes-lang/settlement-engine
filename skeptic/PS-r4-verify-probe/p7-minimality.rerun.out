@@ -1,0 +1,8 @@
+summer: candidates O>C>D base 110 seasonal 110 ; O>E>D base 130 seasonal 130
+  round-3 routeAvoiding (base-cheapest) = O>C>D seasonal 110; minimal in season: true
+  round-4 pick (chooseRoute's re-score over the avoided candidates) = O>C>D seasonal 110; MINIMALITY pin holds: true
+  the struck round-3 pin "never less than the direct route's march AT THE SAME SEASON" (direct O>B>D seasonal 100): true
+winter: candidates O>C>D base 110 seasonal 660 ; O>E>D base 130 seasonal 195
+  round-3 routeAvoiding (base-cheapest) = O>C>D seasonal 660; minimal in season: false
+  round-4 pick (chooseRoute's re-score over the avoided candidates) = O>E>D seasonal 195; MINIMALITY pin holds: true
+  the struck round-3 pin "never less than the direct route's march AT THE SAME SEASON" (direct O>B>D seasonal 150): true

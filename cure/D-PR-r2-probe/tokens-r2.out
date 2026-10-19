@@ -1,0 +1,22 @@
+watchOf	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+placementOf	src=3	tests=1	ledgerDocs=0	srcLiteral=0
+fireLevel	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+watchedFireLevel	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+riders_seen	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+threat_seen	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+crossing_seen	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+nothing_found	src=1	tests=4	ledgerDocs=0	srcLiteral=0
+fortWill	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+CAMPAIGN_SHARE	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+JOINT_FLOOR	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+CADENCE_DWELL	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+K_CORRIDOR	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+fundingBandOfSettlement	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+slowShare	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+patrolPhase	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+PEACE_POSTURE_W	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+PEACE_ALIGN_W	src=0	tests=0	ledgerDocs=0	srcLiteral=0
+placement	src=120	tests=77	ledgerDocs=135	srcLiteral=0
+# run in zsh where rg is the session's function (the sh script had no rg on PATH and printed zeros — superseded)
+found_nothing src=0 tests=0 docs=0
+patrolPlacementOf src=0 tests=0 docs=0

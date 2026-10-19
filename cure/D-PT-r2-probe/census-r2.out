@@ -1,0 +1,14 @@
+# census-r2 (zsh rg function; run Sun Oct 18 07:14:56 EDT 2026)
+partySeq quoted_src=0 word_src=0 word_tests=0 ledger_docs=0
+party_cleared_site quoted_src=0 word_src=0 word_tests=0 ledger_docs=0
+party_revealed_site quoted_src=0 word_src=0 word_tests=0 ledger_docs=0
+party_reached_site quoted_src=0 word_src=0 word_tests=0 ledger_docs=1
+refoldPartyCredibility quoted_src=0 word_src=0 word_tests=0 ledger_docs=0
+seq quoted_src=0 word_src=6 word_tests=11 ledger_docs=8
+credited quoted_src=0 word_src=25 word_tests=55 ledger_docs=55
+site_revealed quoted_src=0 word_src=0 word_tests=0 ledger_docs=0
+made_good quoted_src=0 word_src=0 word_tests=0 ledger_docs=1
+fell_short quoted_src=0 word_src=0 word_tests=0 ledger_docs=1
+correctsRef quoted_src=0 word_src=0 word_tests=0 ledger_docs=3
+voidsRef quoted_src=0 word_src=0 word_tests=0 ledger_docs=1
+lastReachedTick quoted_src=0 word_src=0 word_tests=0 ledger_docs=0

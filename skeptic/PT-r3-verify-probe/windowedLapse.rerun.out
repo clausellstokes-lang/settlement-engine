@@ -1,0 +1,59 @@
+{
+ "E_r2bRule": {
+  "merged": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  },
+  "stillBannedAtKell": false
+ },
+ "A_emergentThenDm": {
+  "keysAfterMint": 1,
+  "merged": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  },
+  "action": "nothing lifted; key kept inert (indefinite = the DM's word)",
+  "keysAfter": 1,
+  "stillBannedAtKell": true
+ },
+ "B_dmThenEmergent": {
+  "merged": {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  },
+  "keysRecorded": 1,
+  "lapseAction": "nothing lifted; key kept inert (indefinite = the DM's word)",
+  "stillBannedAfterSeatChange": true,
+  "stillBannedAtKell": true
+ },
+ "C_emergentAlone": {
+  "action": "windowed edge lifted",
+  "keysAfter": 0,
+  "stillBannedAtKell": false
+ },
+ "D_twoDoors": {
+  "action": "windowed edge lifted",
+  "bannedKell": false,
+  "bannedTolle": true
+ },
+ "F_cap": {
+  "keys": [
+   "D0",
+   "T2",
+   "T3",
+   "T4",
+   "T5",
+   "T6",
+   "T7",
+   "T8",
+   "T9"
+  ],
+  "windowedKeys": 8,
+  "indefiniteKeyKeptOutsideCap": true,
+  "evictedDoorStillWindowedBanned": true,
+  "evictedDoorOpensAtUntil": true
+ }
+}

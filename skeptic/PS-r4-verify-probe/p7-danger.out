@@ -1,0 +1,9 @@
+no danger (summer; embattled {}): O>C>D seasonal 110 danger 0 effective 110 ; O>E>D seasonal 130 danger 0 effective 130
+  chooseRoute's scoring picks O>C>D; P7 clause "a detour is never chosen when a more direct B-avoiding route's seasonal cost is lower": holds
+  planner (direct O>B>D seasonal 100 + passage 0, effective 100): picks O>B>D; §5.1 clause "a detour around a holder is never chosen when the direct route's seasonal cost plus its believed passage cost is lower": holds
+danger on C and B (summer; embattled {"C":0.6,"B":0.6}): O>C>D seasonal 110 danger 0.6 effective 155 ; O>E>D seasonal 130 danger 0 effective 130
+  chooseRoute's scoring picks O>E>D; P7 clause "a detour is never chosen when a more direct B-avoiding route's seasonal cost is lower": VIOLATED (cheaper in season: O>C>D)
+  planner (direct O>B>D seasonal 100 + passage 0, effective 145): picks O>E>D; §5.1 clause "a detour around a holder is never chosen when the direct route's seasonal cost plus its believed passage cost is lower": VIOLATED
+danger on E only (winter; embattled {"E":0.6}): O>C>D seasonal 660 danger 0 effective 660 ; O>E>D seasonal 195 danger 0.6 effective 240
+  chooseRoute's scoring picks O>E>D; P7 clause "a detour is never chosen when a more direct B-avoiding route's seasonal cost is lower": holds
+  planner (direct O>B>D seasonal 150 + passage 0, effective 150): picks O>B>D; §5.1 clause "a detour around a holder is never chosen when the direct route's seasonal cost plus its believed passage cost is lower": holds

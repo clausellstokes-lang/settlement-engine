@@ -1,0 +1,60 @@
+## RUNG_WORD = 
+domain/worldPulse/commonsVoiceKernel.js:185:const RUNG_WORD = Object.freeze(['', 'petition', 'gathering', 'riot']);
+## REACTION_BANDS = 
+domain/worldPulse/anticipatedReactions.js:57:export const REACTION_BANDS = Object.freeze(['supportive', 'indifferent', 'wary', 'opposed']);
+## corruptionVector: 'fear'
+domain/npc/paradigmAxisCatalog.js:154:    corruptionVector: 'fear',
+domain/npc/paradigmAxisCatalog.js:229:    corruptionVector: 'fear',
+## UPKEEP_LEDGERS = 
+domain/worldPulse/treasury.js:498:export const UPKEEP_LEDGERS = Object.freeze(['deployments']);
+## HAS NO WRITER IN THE ENGINE
+domain/display/stateProse/dossierMounts.js:515:  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
+## export const TERM_CATALOG
+domain/worldPulse/peaceTermsCatalog.js:180:export const TERM_CATALOG = Object.freeze({
+## export function applyForeignExposureBlowback
+domain/worldPulse/corruptionWeb.js:1073:export function applyForeignExposureBlowback({ worldState, snapshot, exposures, graph = null, tick, now = null }) {
+## covert_hire_exposed
+## spread_faith: 'doctrine'
+domain/worldPulse/settlementPolitics.js:472:  spread_faith: 'doctrine', defend_doctrine: 'doctrine', serve_patron: 'patron',
+## export function applyHomeWarCosts
+domain/worldPulse/warHomeCosts.js:315:export function applyHomeWarCosts({
+## export function applyLegitimacyDeltasToUpdates
+domain/worldPulse/generosityUpdates.js:80:export function applyLegitimacyDeltasToUpdates(updates, updateIndex, legitimacyDeltas) {
+## faithCarriersOut
+domain/worldPulse/moralInstitutionPressure.js:281:  // in religiousContest (reusing faithCarriersOut — no second graph) and threaded via context;
+domain/worldPulse/religiousContest.js:314:export function faithCarriersOut(snapshot, fromId) {
+domain/worldPulse/religiousContest.js:352: * reaches CONVERT settlements over the SAME faith carriers (faithCarriersOut — this does NOT
+domain/worldPulse/religiousContest.js:373:    for (const { to, strength } of faithCarriersOut(snapshot, item.id)) {
+## export function stanceOf
+domain/worldPulse/deityStance.js:124:export function stanceOf(source, target) {
+## export function effectiveToleranceOf
+domain/worldPulse/institutionTolerance.js:95:export function effectiveToleranceOf(settlement, ledger, cid) {
+## export function criminalStrength01Of
+domain/worldPulse/supplyKernel.js:767:export function criminalStrength01Of(settlement) {
+## export function buildSmuggleContext
+## export function covertCompetence01
+domain/worldPulse/espionage/espionageMath.js:259:export function covertCompetence01(homeSettlement, npc) {
+## SECURITY_MAX_RELIEF
+domain/worldPulse/pulseKernel.js:2384:        // (SECURITY_MAX_RELIEF caps the relief in embattlement.js).
+domain/spatial/embattlement.js:92:  // CAPPED at SECURITY_MAX_RELIEF so a garrison can never nullify an active siege
+domain/spatial/embattlement.js:96:  SECURITY_MAX_RELIEF: 0.25,
+domain/spatial/embattlement.js:204:  const relief = Math.min(T.SECURITY_MAX_RELIEF, T.W_SEC * sec);
+## CRIME_FLOOR
+domain/spatial/embattlement.js:98:  CRIME_FLOOR: 0.5,
+domain/spatial/embattlement.js:200:  const highCrime = crime <= T.CRIME_FLOOR ? 0 : (crime - T.CRIME_FLOOR) / (1 - T.CRIME_FLOOR);
+## maxResolutionBonus
+domain/worldPulse/stressorDynamics.js:151:// maxResolutionBonus / weaknessPenalty bound the resolution-chance delta.
+domain/worldPulse/stressorDynamics.js:154:  maxResolutionBonus: 0.15,
+domain/worldPulse/stressorDynamics.js:172:    maxResolutionBonus: 0.18,
+domain/worldPulse/stressorDynamics.js:190:    maxResolutionBonus: 0.18,
+## export function deityLegitimacyTarget
+domain/worldPulse/religionLegitimacy.js:473:export function deityLegitimacyTarget({ settlement, snapshot, worldState, cid, deity, deityRef, neighbourIds, entry, lens, institutionBacking = 0, deitySnapshotFor, government = null, pietyMult = null, clergy = null, rankStrengthOf = deityRankStrength }) {
+## export function attemptEntry
+domain/worldPulse/religionState.js:292:export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
+## export function resolvePatronContest
+domain/worldPulse/religionState.js:532:export function resolvePatronContest(state, rng, tick = null) {
+## COLUMN_SEED_CAP
+## export function readBeliefRelationship
+domain/worldPulse/beliefMap.js:448:export function readBeliefRelationship(observerId, subjectId, worldState, truthType) {
+## MIGRATION_REFUSALS = 
+domain/worldPulse/demographicsMigration.js:107:export const MIGRATION_REFUSALS = Object.freeze([

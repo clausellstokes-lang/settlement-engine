@@ -1,0 +1,12 @@
+{"ENTER":0.55,"EXIT":0.3,"MIN_DWELL_TICKS":6,"sigma":0.25,"raidPart":0.35}
+column present 4 weeks at raw 0.6: phase embattled, level 0.4862
+column gone, raid part 0.35 for 26 weeks: week1 embattled@0.440 · week6 embattled@0.361 · week13 embattled@0.351 · week26 embattled@0.350
+phases while the menace still raids: embattled
+the raid stops (raw 0): leaves embattled after 1 week(s)
+calm watched country, 52 weeks at raw 0.35: phases seen calm
+wear: score 0.3 × 1.10 = 0.330 < modest 0.35
+wear: score 0.32 × 1.10 = 0.352 ≥ modest 0.35
+wear: score 0.33 × 1.10 = 0.363 ≥ modest 0.35
+siege draw u=0.1: × 1.05 → 0.105 (shift +0.005); × 0.95 → 0.095
+siege draw u=0.5: × 1.05 → 0.525 (shift +0.025); × 0.95 → 0.475
+siege draw u=0.9: × 1.05 → 0.945 (shift +0.045); × 0.95 → 0.855

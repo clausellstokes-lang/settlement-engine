@@ -1,0 +1,35 @@
+quiet edge (no rows for 25y)       {
+  rowsPerYear: 0,
+  kinds: 'protection_failed+relief_kept+service_refused',
+  A: '1.000',
+  rebaselines: 0,
+  newestRenewingTick: 0
+}
+failing crown, 2 rows/yr           {
+  rowsPerYear: 2,
+  kinds: 'protection_failed+relief_kept+service_refused',
+  A: '0.040',
+  rebaselines: 2,
+  newestRenewingTick: 1248
+}
+failing crown, 4 rows/yr (war)     {
+  rowsPerYear: 4,
+  kinds: 'protection_failed+relief_kept+service_refused',
+  A: '0.040',
+  rebaselines: 4,
+  newestRenewingTick: 1248
+}
+failing crown, 8 rows/yr (war)     {
+  rowsPerYear: 8,
+  kinds: 'protection_failed+relief_kept+service_refused',
+  A: '0.003',
+  rebaselines: 9,
+  newestRenewingTick: 1296
+}
+defied crown, 4 fealty_defied/yr   {
+  rowsPerYear: 4,
+  kinds: 'fealty_defied',
+  A: '0.040',
+  rebaselines: 4,
+  newestRenewingTick: 1248
+}

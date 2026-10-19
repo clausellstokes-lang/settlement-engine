@@ -1,0 +1,49 @@
+# D-FOLD-r1 token census on master 81f1cd963 (2026-10-18 05:27 local), 2319 src files: word files · quoted-literal files
+whereaboutsOf: 0 · 0
+sourceEventRef: 0 · 0
+backerRole: 0 · 0
+ENGAGEMENT_WHERE_KINDS: 0 · 0
+party_voiced: 0 · 0
+let_be: 0 · 0
+honored: 56 · 18 e.g. src/domain/rulingPowerSeat.js
+honoured: 56 · 0
+withheld: 45 · 1 e.g. src/domain/display/heraldCausalGrammar.js
+spoken: 63 · 0
+border_segment: 0 · 0
+indecisive: 0 · 0
+opposed_creed: 0 · 0
+polity_ban: 0 · 0
+gateDefault: 0 · 0
+seatChangedSince: 0 · 0
+narrowed_voice: 0 · 0
+crownReachAt: 0 · 0
+polity_verdict: 0 · 0
+court: 316 · 16 e.g. src/generators/institutionProbability.js
+faction: 462 · 84 e.g. src/pdf/sections/NPCQuickRef.jsx
+creed: 45 · 5 e.g. src/data/dossierCausalProse.generated.js
+polity: 13 · 0
+outranked: 1 · 0
+fighting: 52 · 0
+allegiance: 7 · 0
+claimant: 21 · 3 e.g. src/data/dossierCausalProse.generated.js
+expelled: 1 · 1 e.g. src/domain/worldPulse/roadsKernel.js
+overlooked: 3 · 1 e.g. src/domain/worldPulse/beliefAxisSubjects.js
+rival_creed: 4 · 2 e.g. src/data/dossierCausalProse.generated.js
+stand_off: 0 · 0
+drawn: 214 · 1 e.g. src/domain/generation/generationForkRegistry.js
+crown_ban: 0 · 0
+praise: 1 · 0
+condemnation: 1 · 0
+in_office: 0 · 0
+road: 389 · 77 e.g. src/components/ConfigurationPanel.jsx
+country: 41 · 0
+site: 381 · 4 e.g. src/domain/worldPulse/demographicsLand.js
+settlement: 1483 · 181 e.g. src/App.jsx
+# D-FOLD-r1 token census on master 81f1cd963 (2026-10-18 05:32 local), 2319 src files: word files · quoted-literal files
+banished_from_here: 1 · 1 e.g. src/domain/worldPulse/npcCirculationTable.js
+menaceCounterTerms: 0 · 0
+under_quarantine: 0 · 0
+at_war_with_employer: 0 · 0
+enemy_in_service: 0 · 0
+paragon_employer: 0 · 0
+legend_recorded: 0 · 0

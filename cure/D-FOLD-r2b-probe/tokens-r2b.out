@@ -1,0 +1,36 @@
+# D-FOLD-r2b token census (inline zsh with the session rg; master 81f1cd963; Sun Oct 18 08:42:14 EDT 2026)
+ripgrep 14.1.1 (rev 9ecafc1964)
+spentTick src=0 tests=0 quotedLiteralFiles=0
+menaceSpentAt src=0 tests=0 quotedLiteralFiles=0
+menacePressSet src=0 tests=0 quotedLiteralFiles=0
+columnTerm src=0 tests=0 quotedLiteralFiles=0
+partySeq src=0 tests=0 quotedLiteralFiles=0
+party_reached_site src=0 tests=0 quotedLiteralFiles=0
+party_cleared_site src=0 tests=0 quotedLiteralFiles=0
+party_revealed_site src=0 tests=0 quotedLiteralFiles=0
+made_known src=0 tests=0 quotedLiteralFiles=0
+kept_secret src=0 tests=0 quotedLiteralFiles=0
+keptSecret src=0 tests=0 quotedLiteralFiles=0
+corps src=2 tests=0 quotedLiteralFiles=0
+patrol_engages src=0 tests=0 quotedLiteralFiles=0
+patrol_joins src=0 tests=0 quotedLiteralFiles=0
+PATROL_CADENCES src=0 tests=0 quotedLiteralFiles=0
+every_four_weeks src=0 tests=0 quotedLiteralFiles=0
+every_thirteen_weeks src=0 tests=0 quotedLiteralFiles=0
+settlementFundingBand src=0 tests=0 quotedLiteralFiles=0
+fundingBandOfSettlement src=0 tests=0 quotedLiteralFiles=0
+garrisonBandOf src=0 tests=0 quotedLiteralFiles=0
+ENGAGEMENT_WHERE_KINDS src=0 tests=0 quotedLiteralFiles=0
+--- quoted 'revealed' files in src:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/events/mutateEntities.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/corruptionImpair.js
+--- word corps in src:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/factionRelationshipUpdate.js:383:      { field: 'manpower',    delta: -4, reason: 'Implicated ranks are purged; the officer corps is thinned by suspicion.' },
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/navalLayer.js:130:  /shipyard|dockyard|dry\s*dock|drydock|boatyard|admiralt|naval|navy|war\s*(fleet|galley|ship)|shipwright|marine\s*corps|fleet\s*(yard|base|command)/i;
+--- quoted 'weekly' in src:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/briefs/composers.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/history/historyEventStrands.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/historyGenerator.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/ai/stateSlicers.js
+--- control: known token navalEnabled src files:
+      12

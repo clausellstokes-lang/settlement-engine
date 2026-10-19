@@ -1,0 +1,11 @@
+r2 brackets in body: 117
+ids without a body bracket: []
+PR question 1 MISSING
+PR question 2 bracketed
+PR question 4 bracketed
+SEAMS-r2-2 bracketed
+HOST-r2-1 bracketed
+table rows with column mismatch: []
+raw pipes in table code spans at lines: []
+lines with odd backtick count: []
+stale words: {'scant': 5, 'SET_PASSAGE_STANCE': 1, 'one of eight': 0, 'no_halt_at_seat': 2}

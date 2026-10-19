@@ -1,0 +1,21 @@
+{
+ "bornKeys": 30,
+ "forcedKeys": 60,
+ "bornPresetId": "realistic_regional",
+ "forcedPresetId": "realistic_regional",
+ "bornVals": {},
+ "forcedVals": {
+  "pactFormationEnabled": true,
+  "faithUnseatingEnabled": true,
+  "roadsEnabled": true,
+  "npcLadderEnabled": true
+ },
+ "rawPresetVals": {
+  "pactFormationEnabled": true,
+  "faithUnseatingEnabled": true,
+  "roadsEnabled": true,
+  "npcLadderEnabled": true
+ },
+ "defaultVals": {},
+ "litInForcedNotBorn": 23
+}

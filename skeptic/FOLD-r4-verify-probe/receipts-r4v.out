@@ -1,0 +1,38 @@
+== R1 gStrength line
+723:    if (gStrength) s = applyGuildToSettlement(s, gStrength);
+== R2 accrueSaleGrievance
+171:      trust: clamp01((Number(current?.trust) || 0) - m),
+160:function accrueSaleGrievance(worldState, edges, soldId, sellerId, magnitude01, now) {
+== R3 RELATIONSHIP_DEFAULTS neutral trust
+src/domain/relationships/canonicalRelationship.js
+src/domain/instantWorld/genesisDiplomacy.js
+src/domain/events/canonRelationshipLinkage.js
+src/domain/worldPulse/razing.js
+src/domain/worldPulse/relationshipState.js
+== R4 standingFor
+154:  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+== R5 symbols BD row
+criminalStrength01Of: src/domain/worldPulse/espionage/espionageGauntlet.js src/domain/worldPulse/espionage/espionageMath.js src/domain/worldPulse/migrationKernel.js 
+effectiveToleranceOf: src/domain/worldPulse/institutionTolerance.js src/domain/worldPulse/tradeWar.js src/domain/worldPulse/moralInstitutionPressure.js 
+monsterRaiderGate: src/domain/worldPulse/stressorGates.js 
+supplyBand: src/domain/display/warResolve.js 
+standingFor: src/domain/worldPulse/religionState.js src/domain/worldPulse/lineageClaim.js src/domain/worldPulse/operations/missionDispatcher.js 
+stanceOf: src/domain/worldPulse/deityStanceLane.js src/domain/worldPulse/deityStance.js 
+homeRansomAnswer: src/domain/worldPulse/ransomChoices.js 
+HOME_ANSWERS: src/domain/worldPulse/ransomChoices.js 
+banditryLoss: src/domain/spatial/supplyShipments.js src/domain/spatial/embattlement.js src/domain/spatial/commodityFlow.js 
+== R6 INSTITUTION_ROLES warden
+24:export const INSTITUTION_ROLES = Object.freeze({
+59:  return INSTITUTION_ROLES[kind] || INSTITUTION_ROLES.other;
+26:  law_enforcement: [{ role: 'Watch Captain',  importance: 'pillar' }, { role: 'Sergeant',   importance: 'key' },     { role: 'Guard',      importance: 'notable' }],
+== R7 quoted counts
+'cult' src_files=23
+'trail: src_files=0
+'passed' src_files=0
+'leads' src_files=0
+'banner' src_files=1
+'body' src_files=5
+'gang' src_files=5
+'band' src_files=19
+== R8 free tokens
+peace_unkept:0 riders_lent:0 huntOrderOf:0 liegeAnswer:0 passageDefenceOf:0 hiddenWayFor:0 hunt_body:0 hunt_won:0 isWardenParagon:0 bodies_meet:0 body_stance:0 traffic_waylaid:0 alms_requested:0 body_bounty:0 hunt_taken:0 guild_war:0 sponsorship_offered:0 sponsor_exposed:0 ransom_granted:0 captive_freed:0 captive_released:0 enlists:0 absorbBody:0 menaceEnlisting:0 body_ended:0 party_made_known_trail:0 ledBy:0 body_act:0 bodyPresenceFeeder:0 site_sale:0 saleScore:0 denPressOf:0 BODY_FUNDING_BY_SUPPLY:0 BODY_REPAIR_CEILING:0 forkSince:0 pursuedRef:0 leaderRef:0 trailWatchOf:0 predictedPlaceOf:0 bannerCoverOf:0 LOOK_FIND_SECRET:0 in_hearing:0 hidden_approach:0 trailNodes:0 

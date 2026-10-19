@@ -1,0 +1,7 @@
+paragon_leak src=0 tests=0 mdocs=0 ldocs=0 quotedStart=0
+paragon_findings src=0 tests=0 mdocs=0 ldocs=0 quotedStart=0
+paragonId src=0 tests=0 mdocs=0 ldocs=0 quotedStart=0
+employerId src=0 tests=0 mdocs=0 ldocs=2 quotedStart=0
+rendezvous src=0 tests=0 mdocs=0 ldocs=3 quotedStart=0
+leak: literal files: 0
+rendezvous: literal files: 0

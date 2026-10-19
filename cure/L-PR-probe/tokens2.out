@@ -1,0 +1,54 @@
+driven_off	src-w=0	src-literal=0	tests-w=0
+cut_down	src-w=0	src-literal=0	tests-w=0
+fell_back	src-w=0	src-literal=0	tests-w=0
+screened	src-w=4	src-literal=0	tests-w=3
+screening	src-w=2	src-literal=1	tests-w=1
+looking	src-w=112	src-literal=0	tests-w=86
+converging	src-w=12	src-literal=0	tests-w=7
+escorting	src-w=1	src-literal=0	tests-w=0
+resting	src-w=17	src-literal=0	tests-w=15
+engaged	src-w=9	src-literal=0	tests-w=7
+on_round	src-w=0	src-literal=0	tests-w=0
+circuit	src-w=36	src-literal=1	tests-w=23
+walk	src-w=200	src-literal=0	tests-w=402
+sweep	src-w=92	src-literal=9	tests-w=209
+stretch	src-w=33	src-literal=12	tests-w=6
+stretches	src-w=11	src-literal=0	tests-w=1
+cadence	src-w=60	src-literal=1	tests-w=55
+few	src-w=126	src-literal=1	tests-w=78
+several	src-w=163	src-literal=3	tests-w=92
+many	src-w=292	src-literal=7	tests-w=198
+sparse	src-w=57	src-literal=1	tests-w=48
+steady	src-w=69	src-literal=20	tests-w=47
+detachments	src-w=0	src-literal=0	tests-w=0
+patrolLedger	src-w=0	src-literal=0	tests-w=0
+patrolsNear	src-w=0	src-literal=0	tests-w=0
+patrolOn	src-w=0	src-literal=0	tests-w=0
+patrolEncounter	src-w=0	src-literal=0	tests-w=0
+patrolWatch	src-w=0	src-literal=0	tests-w=0
+muster	src-w=54	src-literal=6	tests-w=32
+mustered	src-w=5	src-literal=1	tests-w=0
+riders	src-w=13	src-literal=0	tests-w=6
+crown_riders	src-w=0	src-literal=0	tests-w=0
+standing_watch	src-w=0	src-literal=0	tests-w=0
+first_response	src-w=0	src-literal=0	tests-w=0
+turned_back	src-w=0	src-literal=0	tests-w=0
+stopped	src-w=138	src-literal=0	tests-w=382
+passed	src-w=241	src-literal=1	tests-w=287
+questioned	src-w=9	src-literal=0	tests-w=1
+detained	src-w=3	src-literal=0	tests-w=2
+recognised	src-w=15	src-literal=1	tests-w=19
+recognized	src-w=19	src-literal=0	tests-w=13
+seized	src-w=16	src-literal=2	tests-w=10
+ledger_patrols	src-w=0	src-literal=0	tests-w=0
+docs-w driven_off 1
+docs-w cut_down 0
+docs-w screened 0
+docs-w looking 11
+docs-w converging 0
+docs-w escorting 0
+docs-w resting 3
+docs-w cadence 23
+docs-w muster 9
+docs-w riders 5
+docs-w detachment 1

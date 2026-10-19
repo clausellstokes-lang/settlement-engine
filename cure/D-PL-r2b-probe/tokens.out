@@ -1,0 +1,26 @@
+# token census at master 81f1cd963 (rg -w -l, files)
+appendRelationshipFealtyRow: src=0 tests=0
+requestFealtyRow: src=0 tests=0
+riders_quartered: src=0 tests=0
+call_in_answer: src=0 tests=0
+half_answered: src=0 tests=0
+patrol_order: src=0 tests=0
+paragonFaithCarriers: src=0 tests=0
+attemptEntry: src=4 tests=3
+mintMemoryWeaveIncident: src=3 tests=1
+MEMORY_WEAVE_INCIDENT_TYPES: src=4 tests=2
+
+# weave list
+325:export const MEMORY_WEAVE_INCIDENT_TYPES = Object.freeze({
+326-  ROUTE_SEIZED: 'route_seized',   // D-7b (POST-ROADS-FOLD host): a seizer↔victim route capture
+327-  RITE_IMPOSED: 'rite_imposed',   // D-7b: an overlord↔vassal rite imposition (host live on this base)
+328-  ELITE_FEUD: 'elite_feud',       // D-7f: a cross-border elite feud crossing (settlement pair cools)
+329-  ELITE_AMITY: 'elite_amity',     // D-7f: a cross-border elite amity crossing (settlement pair warms)
+330-});
+331-
+# regexes
+48:const WOUND_TYPE_RE = /war|betray|tribute|conquest|occupation|sack|raid|seiz|impos|contest_loss|contest_forestalled/i;
+78:const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction|embargo)/i;
+# 3a entry
+767:    // 3a. entries — faiths reaching C not yet present (or resurging from suppression).
+786:        const entered = attemptEntry(state, deity, strength, { force: Boolean(occupied), tick: stampTick });

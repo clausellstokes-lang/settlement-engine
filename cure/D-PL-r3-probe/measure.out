@@ -1,0 +1,41 @@
+## kernel stage order (pulseKernel.js)
+525:    ? coupVerdictOutcomes({
+994:  let war = evaluateWarLayer({
+1578:  const applied = applyWorldPulseOutcomes({
+2194:    const envoys = advanceEnvoyDiplomacyPulse({
+2442:    const armyTransit = advanceArmyTransit({
+2630:  const lifecycleAdvance = advanceSettlementLifecycle({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+## armyTransitKernel fought set
+815:  const fought = new Set();
+843:    fought.add(result.loserId);
+## computeAllyRelief per-ally term + fraction + siege skip
+63:const ALLY_SUPPORT_TYPES = new Set(['allied', 'vassal', 'patron', 'defensive_pact']);
+64:const ALLY_RELIEF_FRACTION = 0.4;
+93:    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+94:    relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
+## warDeployment caller
+544:      ? computeAllyRelief(snapshot, targetId, capacityFor, new Set(targets), coalitionLit)
+## grip terms (rulingPowerSeat.js :: vassalageSeat)
+  const grip01 = clamp01(
+    T.VASSAL_LEVERAGE * clamp01(num(Number(r.leverage), 0))
+    + T.VASSAL_DEPENDENCY * clamp01(num(Number(r.dependency), 0))
+    + T.VASSAL_PACT * clamp01(num(Number(r.pactStrength), 0))
+    + T.VASSAL_FEAR * clamp01(num(Number(r.fear), 0))
+    - T.VASSAL_RESENTMENT * clamp01(num(Number(r.resentment), 0)) * (1 - clamp01(num(Number(r.fear), 0))),
+  );
+## stable compact (relationshipRulesCore.js)
+738:  const stableVassalage = clamp01(relState.trust * 0.34 + relState.pactStrength * 0.28 + (1 - vassalStrain) * 0.38);
+## fnv1a32 exports
+src/design/organic/ornament/fnv.js:12:export function fnv1a32(str) {
+src/domain/display/heraldCausalGrammar.js:34:export function fnv1a32(str) {
+src/domain/worldPulse/proseSelection.js:52:export function fnv1a32(str) {
+src/kernel/proseHash.js:28:export function fnv1a32(str) {
+## token census (src, tests)
+allyReliefShare src=0 tests=0
+reliefAnswerOf src=0 tests=0
+patrol: src=0 tests=0
+corps: src=0 tests=0
+polity_ban src=0 tests=0
+fealtyFamily src=0 tests=0
+FEALTY_ROW_FAMILIES src=0 tests=0

@@ -1,0 +1,89 @@
+### institution names: thieves/assassin/mercenary
+src/domain/institutions/defenseInstitutionBuckets.js:98:  mercenary: Object.freeze([
+src/domain/institutions/defenseInstitutionBuckets.js:99:    'mercenary company', 'mercenary quarter', 'hired muscle',
+src/data/economicData.js:329:      "Free company hall": {
+src/data/economicData.js:337:          "mercenary hire",
+src/data/economicData.js:342:      "Mercenary quarter": {
+src/data/economicData.js:348:        detail: "iron and grain for mercenary provisioning",
+src/data/economicData.js:350:          "mercenary hire",
+src/data/powerData.js:83:  military: ['The Guard Union', 'The Garrison Order', "The Knights' Charter", "The Soldiers' League", "The Watchmen's Company", 'The Mercenary Compact'],
+src/data/powerData.js:86:  criminal: ["The Thieves' Union", 'The Shadow League', 'The Underworld Compact', "The Smugglers' Ring", 'The Cartel', "The Assassins' Circle"],
+src/data/institutionalCatalog.js:1224:    // The city Mercenary quarter was filed on Adventuring until 2026-09-30; soldiers for hire are one
+src/data/institutionalCatalog.js:1227:      shared: { name: 'Mercenary quarter', desc: 'Organized sellsword companies. Major forces (hundreds to thousands).', tags: ['military'], priorityCategory: 'adventuring' },
+src/data/institutionalCatalog.js:1229:        town: { name: 'Free company hall', baseChance: 0.3, desc: 'A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.', tags: ['military', 'guild'], priorityCategory: 'military' },
+src/data/institutionalCatalog.js:1422:        city: { name: "Thieves' guild chapter", baseChance: 0.6, minPopulation: 10000, desc: 'Organized crime chapter. 10,000+ population for viable operation. 30-100 members.' },
+src/data/institutionalCatalog.js:1423:        metropolis: { name: "Thieves' guild (powerful)", baseChance: 0.55, desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.' },
+src/data/institutionalCatalog.js:1482:      shared: { name: 'Contract killer', baseChance: 0.25, desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.', tags: ['guild', 'military'], priorityCategory: 'criminal' },
+src/data/institutionalCatalog.js:1489:      shared: { name: "Assassins' guild" },
+src/data/servicesData.js:43:  "mercenary company hq": "Mercenary quarter",
+src/data/finishedGoodsCategory.js:39:      'free company hall':        { demand: 3 },
+src/data/finishedGoodsCategory.js:43:      'mercenary quarter':        { demand: 4 },
+src/data/npcData.js:536:      short: "Identify which of their officers is on the thieves' guild payroll",
+src/data/npcData.js:553:  'Mercenary Captain': [
+src/data/npcData.js:661:  "Thieves' Guild Master": [
+src/data/npcData.js:798:      secret: "On the payroll of the thieves' guild as a silent informant",
+src/data/historyData.js:466:      role: "Mercenary Captain",
+src/data/historyData.js:471:      requiresInstKeyword: ['mercenary', 'free company', 'charter', 'hireling'],
+src/data/historyData.js:673:      role: "Thieves' Guild Master",
+src/data/historyData.js:1067:      role: 'Mercenary-for-Hire',
+src/data/institutionLadders.js:119:  { greater: "assassins' guild", lesser: ['contract killer', 'hired blades'] },
+src/data/institutionLadders.js:120:  { greater: "thieves' guild (powerful)", lesser: ["thieves' guild chapter", 'black market bazaar', 'contract killer'] },
+src/data/supplyChainData.js:54:const THIEVES_GUILD_POWERFUL = "Thieves' guild (powerful)";
+### roadsKernel embassy gauntlet quote
+15: * pass · departure/return prose + news). THE GAUNTLET (hazards/capture) is R-3; CAPTIVITY
+170:// ── §7 THE GAUNTLET — hop location + threat reads ──────────────────────────────
+568:  // ── PASS 3: THE GAUNTLET (§7) — one fork per mission, at most ONE resolution per tick ──
+600:      // road (T3) can still take an embassy that no army meets (bandits do not parley).
+### warden role
+src/domain/arcaneInstitutionIdentity.js:198: * ⚠️ THAT LIST IS BROAD AND CATALOG-SHAPED. It carries 'dragon', 'undead', 'warden' and
+src/domain/entities/npcs.js:144:  if (/captain|priest|guildmaster|master|magister|sheriff|warden|abbot|seneschal/.test(role)) return 'key';
+src/domain/hookEscalation.js:168:  { origin: 'npc',             test: /(?:the )?(?:reeve|mayor|magistrate|captain|priest(?:ess)?|elder|sheriff|chief|abbot|abbess|warden|guildmaster|patron|lord|lady)/i },
+src/domain/prose/moveGrammar.js:234:  { move: 'PERSON', re: /\b(the (mayor|captain|guildmaster|steward|priest|priestess|archmagister|kingpin|lieutenant|warden|baron|advisor)|whoever (holds|sits)|the holder of)\b/i },
+src/domain/factionArchetypes.js:79:  { archetype: A.MILITARY,   re: /military|militia|guard|watch|soldier|garrison|knight|army|sheriff|sentinel|ranger|warden|war\s+council|captain/i },
+src/domain/arcaneInstitutionVocabulary.js:148: * deliberately broad ('dragon', 'undead', 'warden', 'great library' all mean what the
+src/domain/arcaneInstitutionVocabulary.js:163:  'hedge wizard', 'traveling hedge wizard', 'warden',
+src/domain/prose/entryLexicons.js:212:  'steward', 'chamberlain', 'seneschal', 'castellan', 'warden', 'provost',
+src/domain/threatProfile.js:236:  // 'seaward' / 'warden' / 'warehouse', which the old bare /war/ minted as
+src/domain/worldPulse/militaryStrength.js:88:const MILITARY_INSTITUTION_PATTERN = /garrison|barrack|armory|armoury|watch|militia|guard|fort|citadel|keep|bastion|war ?college|drill|mercenary|company|legion|warden|marshal/i;
+### INSTITUTION_ROLES / inferRoleArchetype
+src/domain/worldPulse/npcAgency.js:282:export function inferRoleArchetype(npc = {}) {
+src/domain/roles/roleCatalog.js:24:export const INSTITUTION_ROLES = Object.freeze({
+### shared faith
+src/domain/worldPulse/generosityKernel.js:319: * The faith-axis proximity for a pair (samePatron + a sharedFaith01 closeness), from the
+src/domain/worldPulse/generosityKernel.js:323: * @returns {{ samePatron: boolean, sharedFaith01: number, alignmentKinship01: number }}
+src/domain/worldPulse/generosityKernel.js:330:  const sharedFaith01 = samePatron ? 1 : clamp01(1 - faithDist);
+src/domain/worldPulse/generosityKernel.js:334:  return { samePatron, sharedFaith01, alignmentKinship01 };
+src/domain/worldPulse/generosityKernel.js:412:  const faith = { templeMediated: charityRoster, sharedFaith01: prox.sharedFaith01 };
+src/domain/worldPulse/generosityKernel.js:660:    const faith = { templeMediated: charityRoster, sharedFaith01: prox.sharedFaith01 };
+src/domain/worldPulse/settlementPolitics.js:413: * (shared faith) > patronage (a warm personal leader tie) > concession (the overt
+src/domain/worldPulse/sacredClaim.js:48: *      faith is not a shared faith.
+src/domain/worldPulse/sacredClaim.js:146: * shared faith (see the module header's guard 2).
+src/domain/spatial/generosityEV.js:244: * @property {number} [sharedFaith01]    shared-faith closeness in [0,1] (cultureDistance's faith axis — already computed)
+src/domain/spatial/generosityEV.js:247: * FAITH (§2.1): temple-mediated relief adds piety warmth; a shared faith adds a modest
+src/domain/spatial/generosityEV.js:252:  const shared = clamp01(finiteNumber(faith.sharedFaith01, 0));
+### schism
+src/domain/worldPulse/religionState.js:62:  // Patron CONTEST (fires when a rival shares the patron's niche — a schism).
+src/domain/worldPulse/religionState.js:456:  // the SCHISM contest (resolvePatronContest), not this organic flip: weighting it here
+src/domain/worldPulse/religionState.js:515: * DM-imposed cult planted in the patron's own domain, a schism). The top-three
+src/domain/worldPulse/religionState.js:521: * losing same-niche rival(s) are suppressed, clearing the schism. Until then the
+src/domain/worldPulse/religionState.js:537:  // A SCHISM: a rival shares the patron's own niche (e.g. an imposed cult).
+src/domain/worldPulse/religiousContest.js:19: *   legitimacy, patron contest/schism, the divine-mandate substrate) runs whenever
+src/domain/worldPulse/religiousContest.js:979:        if (pietyMult > 1) reasons.push('Deep local devotion makes the schism louder than the numbers alone would.');
+### warHomeCosts
+109:export function computeLevySources(snapshot, homeId, excludeSet, coalitionLit = false) {
+157:export function revertSuppressedDeployExhaustion({ warExhaustion, preTickWarExhaustion, homeId, leviedSourceIds = [] }) {
+209:export function stripSuppressedDeployResidue({ war, suppressedIds, preTickWarExhaustion = {} }) {
+315:export function applyHomeWarCosts({
+### founding
+src/domain/simulationSpine.js
+src/domain/historyPreservation.js
+src/domain/events/mutateEntities.js
+src/domain/settlement.schema.js
+src/domain/aiOverlayVerifier.js
+src/domain/historyBeats.js
+src/domain/realm/autoplacement.js
+src/domain/resourceSites.js
+src/domain/realm/heraldRouting.js
+src/domain/settlementParentRef.js
+src/domain/events/realmManifest.js
+src/domain/content/customContentManifest.generated.js

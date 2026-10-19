@@ -1,0 +1,386 @@
+{
+  "a_persons_continuous": {
+    "goodNonRival_m02": {
+      "one": 0.18,
+      "two": 0,
+      "reading": 0.18,
+      "grudge": false
+    },
+    "goodRival_m02": {
+      "one": 0.18,
+      "two": -0.4,
+      "reading": 0,
+      "grudge": false
+    },
+    "maliciousRival_m09": {
+      "one": 0,
+      "two": -0.4,
+      "reading": -0.2,
+      "grudge": true
+    },
+    "maliciousNoTie_m09": {
+      "one": 0,
+      "two": 0,
+      "reading": 0,
+      "grudge": false
+    },
+    "cruelByGood_m02": {
+      "one": -0.18,
+      "two": 0,
+      "reading": -0.18,
+      "grudge": true
+    },
+    "cruelByEvil_m09": {
+      "one": 0.24,
+      "two": 0,
+      "reading": 0.24,
+      "grudge": false
+    }
+  },
+  "b_towns_on_bands": {
+    "benevolent_m020": {
+      "word": "benevolent",
+      "resolve_noTie": {
+        "one": 0.198,
+        "two": 0,
+        "reading": 0.198,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0.198,
+        "two": -0.4,
+        "reading": 0,
+        "grudge": false
+      },
+      "cruel_noTie": {
+        "one": -0.198,
+        "two": 0,
+        "reading": -0.198,
+        "grudge": true
+      }
+    },
+    "benevolent_m030": {
+      "word": "benevolent",
+      "resolve_noTie": {
+        "one": 0.198,
+        "two": 0,
+        "reading": 0.198,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0.198,
+        "two": -0.4,
+        "reading": 0,
+        "grudge": false
+      },
+      "cruel_noTie": {
+        "one": -0.198,
+        "two": 0,
+        "reading": -0.198,
+        "grudge": true
+      }
+    },
+    "balanced_m045": {
+      "word": "balanced",
+      "resolve_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0,
+        "two": -0.4,
+        "reading": 0,
+        "grudge": false
+      },
+      "cruel_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      }
+    },
+    "balanced_m060": {
+      "word": "balanced",
+      "resolve_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0,
+        "two": -0.4,
+        "reading": 0,
+        "grudge": false
+      },
+      "cruel_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      }
+    },
+    "malicious_m070": {
+      "word": "malicious",
+      "resolve_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0,
+        "two": -0.4,
+        "reading": -0.2,
+        "grudge": true
+      },
+      "cruel_noTie": {
+        "one": 0.198,
+        "two": 0,
+        "reading": 0.198,
+        "grudge": false
+      }
+    },
+    "malicious_m095": {
+      "word": "malicious",
+      "resolve_noTie": {
+        "one": 0,
+        "two": 0,
+        "reading": 0,
+        "grudge": false
+      },
+      "resolve_rival": {
+        "one": 0,
+        "two": -0.4,
+        "reading": -0.2,
+        "grudge": true
+      },
+      "cruel_noTie": {
+        "one": 0.198,
+        "two": 0,
+        "reading": 0.198,
+        "grudge": false
+      }
+    }
+  },
+  "c_pledge": {
+    "fell_short_ally": -0.2,
+    "fell_short_rival_before_clamp": 0.1333,
+    "fell_short_rival": 0,
+    "made_good_rival_benevolent": 0,
+    "made_good_rival_malicious": -0.1333
+  },
+  "d_verdict": {
+    "venality": {
+      "face": "shameful",
+      "benevolent": {
+        "reading": -0.132,
+        "net": -0.132,
+        "regard": "mistrust",
+        "badlyByRegard": true,
+        "badlyByFaceUnlessWarm": true
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "malicious": {
+        "reading": 0.132,
+        "net": 0.132,
+        "regard": "fondness",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "lawful_balanced": {
+        "reading": -0.099,
+        "net": -0.099,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      }
+    },
+    "betrayal": {
+      "face": "shameful",
+      "benevolent": {
+        "reading": -0.198,
+        "net": -0.198,
+        "regard": "mistrust",
+        "badlyByRegard": true,
+        "badlyByFaceUnlessWarm": true
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "malicious": {
+        "reading": 0.198,
+        "net": 0.198,
+        "regard": "fondness",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "lawful_balanced": {
+        "reading": -0.066,
+        "net": -0.066,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      }
+    },
+    "brutality": {
+      "face": "villainous",
+      "benevolent": {
+        "reading": -0.264,
+        "net": -0.264,
+        "regard": "mistrust",
+        "badlyByRegard": true,
+        "badlyByFaceUnlessWarm": true
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "malicious": {
+        "reading": 0.264,
+        "net": 0.264,
+        "regard": "fondness",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "lawful_balanced": {
+        "reading": -0.066,
+        "net": -0.066,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      }
+    },
+    "conspiracy": {
+      "face": "shameful",
+      "benevolent": {
+        "reading": -0.165,
+        "net": -0.165,
+        "regard": "mistrust",
+        "badlyByRegard": true,
+        "badlyByFaceUnlessWarm": true
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "malicious": {
+        "reading": 0.165,
+        "net": 0.165,
+        "regard": "fondness",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "lawful_balanced": {
+        "reading": -0.1155,
+        "net": -0.1155,
+        "regard": "mistrust",
+        "badlyByRegard": true,
+        "badlyByFaceUnlessWarm": true
+      }
+    },
+    "heresy": {
+      "face": "neutral",
+      "benevolent": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "malicious": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      },
+      "lawful_balanced": {
+        "reading": -0.066,
+        "net": -0.066,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": false
+      }
+    },
+    "none": {
+      "face": "shameful",
+      "benevolent": {
+        "reading": -0.099,
+        "net": -0.099,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "balanced": {
+        "reading": 0,
+        "net": 0,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "malicious": {
+        "reading": 0.099,
+        "net": 0.099,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      },
+      "lawful_balanced": {
+        "reading": -0.066,
+        "net": -0.066,
+        "regard": "indifference",
+        "badlyByRegard": false,
+        "badlyByFaceUnlessWarm": true
+      }
+    }
+  },
+  "e_credibility": {
+    "full_at60": -7.1829,
+    "struck_d2_by_refold_at60": -4.2356,
+    "struck_d2_by_subtraction_at60": -4.1017,
+    "clampCase": {
+      "all_at24": 5.3411,
+      "struckLie_refold_at24": 11.8411,
+      "struckLie_subtraction_at24": 11.8411,
+      "weight_refold": 1.15,
+      "weight_sub": 1.15
+    }
+  },
+  "f_timing": {
+    "HALF_LIFE_WEEKS": {
+      "a_season": 13,
+      "a_year": 52,
+      "a_few_years": 156,
+      "a_decade": 520,
+      "a_generation": 1040
+    },
+    "realmDeed_firstWeekRegional": 137,
+    "heardTermFactor_atThatWeek_aFewYears": 0.544
+  }
+}

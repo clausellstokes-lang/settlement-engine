@@ -1,0 +1,75 @@
+## stage order
+525:    ? coupVerdictOutcomes({
+1578:  const applied = applyWorldPulseOutcomes({
+2442:    const armyTransit = advanceArmyTransit({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+## computeAllyRelief
+64:const ALLY_RELIEF_FRACTION = 0.4;
+74:export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet, coalitionLit = false) {
+93:    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+94:    relief += (Number(capacityFor(ally)?.homeDefense) || 0) * ALLY_RELIEF_FRACTION;
+## siteDefense in capacity (relief subtract?)
+## grip
+ugrep: warning: src/domain/worldPulse/rulingPowerSeat.js: No such file or directory
+## trust in rulingPowerSeat
+ugrep: warning: src/domain/worldPulse/rulingPowerSeat.js: No such file or directory
+## stableVassalage
+738:  const stableVassalage = clamp01(relState.trust * 0.34 + relState.pactStrength * 0.28 + (1 - vassalStrain) * 0.38);
+739:  if (!rebellionActive && stableVassalage > 0.55 && !hasRecentIncident(relState, "stable_vassalage", tick, 3)) {
+743:        severity: clamp01(0.24 + stableVassalage * 0.32),
+744:        probability: clamp01(0.08 + stableVassalage * 0.18),
+747:          `The case for a settled compact is ${relationLevelWordFor(stableVassalage)}; the strain against it, ${relationLevelWordFor(vassalStrain)}.`,
+757:        metadata: { incidentType: "stable_vassalage", overlordSaveId: overlordId, vassalSaveId: vassalId, stableVassalage },
+## census
+'patrol: src=0 tests=0
+'corps: src=0 tests=0
+patrol:' src=0 tests=0
+corps:' src=0 tests=0
+reliefAnswerOf src=0 tests=0
+polity_ban src=0 tests=0
+siteReadiness01 src=0 tests=0
+SITE_READINESS src=0 tests=0
+## fnv1a32
+src/design/organic/ornament/fnv.js:12:export function fnv1a32(str) {
+src/domain/worldPulse/proseSelection.js:52:export function fnv1a32(str) {
+src/domain/display/heraldCausalGrammar.js:34:export function fnv1a32(str) {
+src/kernel/proseHash.js:28:export function fnv1a32(str) {
+## allyDefenseEnabled presets
+src/domain/worldPulse/simulationRules.js:140:  allyDefenseEnabled: false,
+src/domain/worldPulse/simulationRules.js:1027:    allyDefenseEnabled: true,
+## fought set
+815:  const fought = new Set();
+## vassalageSeat file src/domain/rulingPowerSeat.js
+102:  VASSAL_LEVERAGE: 0.35,
+103:  VASSAL_DEPENDENCY: 0.25,
+104:  VASSAL_PACT: 0.20,
+105:  VASSAL_FEAR: 0.20,
+106:  VASSAL_RESENTMENT: 0.25,
+454: * is `0.34·trust + 0.28·pactStrength + 0.38·(1 − vassalStrain)`, and `vassalStrain`
+601:function vassalageSeat(worldState, snapshot, sid, expectedPatronId) {
+640:    T.VASSAL_LEVERAGE * clamp01(num(Number(r.leverage), 0))
+641:    + T.VASSAL_DEPENDENCY * clamp01(num(Number(r.dependency), 0))
+642:    + T.VASSAL_PACT * clamp01(num(Number(r.pactStrength), 0))
+643:    + T.VASSAL_FEAR * clamp01(num(Number(r.fear), 0))
+644:    - T.VASSAL_RESENTMENT * clamp01(num(Number(r.resentment), 0)) * (1 - clamp01(num(Number(r.fear), 0))),
+## where the polity stage host sits relative to army transit (applyPulseMover / treaty)
+  // attrition mauls the loser (never annihilates) and writes back onto its deployment
+  // (a battered army besieges weaker). The COURIER UMBILICAL grows an army's belief-
+  // staleness while its route home is cut (info-starved ⇒ mis-assesses); INACTIVE under
+  // omniscient. AGGREGATE counts only — no named NPC touched. DORMANT (no spatial
+  // marker) ⇒ changed:false ⇒ byte-identical (the aspatial war layer runs verbatim).
+  {
+    const armyTransit = advanceArmyTransit({
+      snapshot: postTimeSnapshot,
+      worldState: memoryState,
+      digest: memoryState.spatialDigest,
+      graph: applied.regionalGraph,
+  // peace-causal dormancy golden, extended to fence the treaties ledger, proves it).
+  // The stream terms move REAL grain, so this mover now threads settlementUpdates like
+  // the generosity/upswing movers do — hence the applyPulseMover form (byte-identical to
+  // the inline block it replaces: an unchanged mover returns the same references).
+  const treatyAdvance = advanceTreatiesWithDisposition({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
+    dispositionEnabled: simulationRules.dispositionChannelsEnabled === true, dispositionTransitions,
+  });

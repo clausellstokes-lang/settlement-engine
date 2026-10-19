@@ -1,0 +1,26 @@
+## m3 stage order
+2097:    const rumors = advanceRumorLedgers({
+2391:    const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });
+2527:    const calamity = advanceCalamity({
+## m4 coalitionJoinFeasibility
+214:export function coalitionJoinFeasibility(snapshot, worldState, partyId, enemyId) {
+226:    defenderCurrent: defender.homeDefense,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/applyWorldPulse.js:65:import { coalitionJoinFeasibility } from './warDeployment.js';
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/applyWorldPulse.js:446:          ? coalitionJoinFeasibility(
+## m5 beliefMap readiness
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/martialReadiness.js:130: * @property {number} readiness01   0..1 structural militarization (asymmetric hysteresis)
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/beliefMap.js:337: * @property {number} readiness        believed war readiness 0..1
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/defenseLedger.js:26: * @property {number} readinessScore 0..100 overall readiness (avg of dims +/- tier/threat)
+## m1 standingFor
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/religionState.js:154:  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+## m6 deityAxes
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:50:const EVIL01 = Object.freeze({ evil: 1, neutral: 0.5, good: 0 });
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:52:const CHAOS01 = Object.freeze({ chaotic: 1, neutral: 0.5, lawful: 0 });
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:60:export function evil01(deity) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/deityAxes.js:71:export function chaos01(deity) {
+## effectiveToleranceOf
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/institutionTolerance.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/tradeWar.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/moralInstitutionPressure.js
+## COURSE_TARGET_SEP
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/events/realmManifest.js:253:export const COURSE_TARGET_SEP = '␟';

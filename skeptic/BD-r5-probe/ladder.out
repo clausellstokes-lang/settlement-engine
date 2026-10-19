@@ -1,0 +1,13 @@
+road id route.ashford.kell.land | way-beside-road id route.ashford.kell.land
+edges after adding the way beside the road: ["route.ashford.kell.land"] | grade kept: road | network object unchanged: true
+ROUTE_GRADES ["highway","road","track","hidden"] | ROUTE_FLOW_CLASSES ["goods","population","military"]
+gradeLegMultiplier( highway ) = 0.75 | arterialWeight = 3
+gradeLegMultiplier( road ) = 1 | arterialWeight = 2
+gradeLegMultiplier( track ) = 1.5 | arterialWeight = 1
+gradeLegMultiplier( trail ) = 1 | arterialWeight = 0
+gradeLegMultiplier( way ) = 1 | arterialWeight = 0
+gradeLegMultiplier( wild ) = 1 | arterialWeight = 0
+gradeLegMultiplier( hidden ) = 2 | arterialWeight = 0
+TRAVELLER_KINDS ["army","caravan","covert_envoy","smuggler","wanderer"] | HIDDEN_PATH_KINDS ["covert_envoy","smuggler","wanderer"]
+master's franchise pin 'for (const kind of HIDDEN_PATH_KINDS) expect(TRAVELLER_KINDS).toContain(kind)' with body added to HIDDEN_PATH_KINDS only: REDS (body not a TRAVELLER_KIND)
+mayUseHiddenPaths('patrol') = false | mayUseHiddenPaths('army') = false

@@ -1,0 +1,31 @@
+== volume sha
+5a51834616112176f10be8aaa6811fbb2349f534  /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PT.md
+== PT:212 (reveal to the party)
+BD's `TRAIL_KNOWN` (town · trail · known/forgotten) a fourth, `party`
+A trail REVEALED TO THE PARTY is the players' known places — the host's map record (ENC-HS-01, §4), never PT's and never a town's
+== PT:518 P54
+a trail revealed TO the party writes nothing in PT (the host's known places)
+== BD:225
+- **The party's knowledge is not the towns'.** The DM may REVEAL a way TO THE PARTY (`TRAIL_KNOWN` with `to: party`, §11) — a mark on THE PARTY's own record (PT's shape and writer; ROUTE PT), read by nothing in the world; the party's own discoveries reach a town only when the DM tells the world (`by_dm`).
+== BD:665
+| `TRAIL_KNOWN` | to (a town · the party) · trail · known / forgotten | AUTHOR | the DM tells a TOWN of a trail (`by_dm`, §2.3) or REVEALS it TO THE PARTY (a mark on THE PARTY's record — PT's shape and writer, read by nothing in the world; ROUTE PT) — the party's own discoveries are the DM's
+== BD:663
+| `END_BODY` | body | AUTHOR | ends it `disbanded` (CH's "DEATH = DISBANDMENT, THE DM'S" idiom) |
+== BD:970
+- **PT:** (3) the party hunting a body is `party_hunted`'s MIRROR — the party's own deed door, the board's bounty its call (§9.9); (4) `TRAIL_KNOWN` `to: party` — the reveal's party half, a mark on the party's record (PT's shape and writer).
+== PT:269 (conclave → faith)
+the party is known for the quarry's domain (a gang → `order`, a beast → `wildland`, a conclave → `faith` — the domain table gains `body_ended` by the ended body's kind)
+== BD:586
+in the `order` domain for a gang or a flock and the `wildland` domain for a beast
+== CH:617
+an `outlawed` conclave's an `order` call only (BD §7.1's quarry rule — a `curbed` or `permitted` conclave carries none; never a faith call: the followers act, the god does not)
+== PT:303 (hunt)
+no PLACE a journey could be priced to — a body moves each week, and on the hidden ways, and the engine never forecasts where — so `earliestArrivalTick` has no target and the pledge runs under PATIENCE and can never be `fell_short`
+== PT:330 (the body half reads the body's where)
+looks, on each half, for a BODY whose own `where` that week is that stretch (`{ kind: 'road', ids: [a, b] }`) or the trail beside it (`{ kind: 'trail' }` on the same pair, BD §2.2; with `hiddenWaysEnabled`) — the body's record AS IT STANDS
+== BD:194 where
+    where: { kind: 'country' | 'road' | 'trail' | 'site', ids: [a] | [a, b], siteId? },
+== BD:587 claim/lapse
+A bounty unclaimed for DRAFT 52 weeks lapses (requirement 23's horizon)
+== CH:186
+  banKeys?: [≤8 { settlementId, episode }],   // the banning court's seat EPISODE KEY at each emergent ban's mint (PL's `seatEpisodeKeyOf`, §11)

@@ -1,0 +1,61 @@
+{
+ "node": "v24.12.0",
+ "rows": [
+  {
+   "settlements": 30,
+   "bodies": 15,
+   "radiusHops": 2,
+   "msPerTick": 0.158,
+   "lookupsPerTick": 940
+  },
+  {
+   "settlements": 30,
+   "bodies": 15,
+   "radiusHops": 3,
+   "msPerTick": 0.268,
+   "lookupsPerTick": 1486
+  },
+  {
+   "settlements": 300,
+   "bodies": 150,
+   "radiusHops": 2,
+   "msPerTick": 1.35,
+   "lookupsPerTick": 12259
+  },
+  {
+   "settlements": 300,
+   "bodies": 150,
+   "radiusHops": 3,
+   "msPerTick": 2.506,
+   "lookupsPerTick": 23622
+  },
+  {
+   "settlements": 3000,
+   "bodies": 1500,
+   "radiusHops": 2,
+   "msPerTick": 20.144,
+   "lookupsPerTick": 139016
+  },
+  {
+   "settlements": 3000,
+   "bodies": 1500,
+   "radiusHops": 3,
+   "msPerTick": 38.266,
+   "lookupsPerTick": 274341
+  },
+  {
+   "settlements": 10000,
+   "bodies": 5000,
+   "radiusHops": 2,
+   "msPerTick": 77.871,
+   "lookupsPerTick": 466502
+  },
+  {
+   "settlements": 10000,
+   "bodies": 5000,
+   "radiusHops": 3,
+   "msPerTick": 149.641,
+   "lookupsPerTick": 921384
+  }
+ ]
+}

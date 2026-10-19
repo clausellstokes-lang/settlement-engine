@@ -1,0 +1,18 @@
++two-way
+-(see
++(an overlord's authority over its vassal reaches 0.82, one way; see
+-§4
+-receipted steps.
++receipted, receipt-visible steps (its §0 and B2) and the code's own tuning comment says "receipted".
+-`docs/DESIGN_UPSWING_RELATIONSHIP_FLOWS.md` §4.
++`docs/DESIGN_UPSWING_RELATIONSHIP_FLOWS.md:12`, `:103`; `src/domain/worldPulse/upswingKernel.js:121` [Fable-reviewed 2026-10-18].
+-`src/domain/worldPulse/supplyKernel.js:580-586`;
++`src/domain/worldPulse/supplyKernel.js:590-591`;
+-`:410`;
++`:411-412`;
++952) |
++| plague-R7 | PG pg-4's quarantine or gate-closure verb is DESIGNED ONLY and PG names quarantine an owner value: is it to be built, and if so as the host's own verb with a stance input — never as a patrol fact the map draws (a patrol holds no quarantine line)? | Without the verb the DM has no plague-control action to author, and no border, patrol or march can stand in for it. | Owner ruling (PG names it an owner value). | open question; plague-system.md §5.1 row 14 (line 531), §7 (line 672); retrovalidation/plague ruling R7 (Fable, 2026-10-18)
+-1790-1802);
++1803-1815);
+-(enter 3.0, exit 1.5, dwell 3).
++(a boom enters at throughput 3.0 with centrality 0.3 after a 3-tick dwell; a bust below 1.0 or on embattlement — 1.5 is the building-phase floor, not a boom exit, `src/domain/worldPulse/upswingKernel.js:644-653` [Fable-reviewed 2026-10-18]).

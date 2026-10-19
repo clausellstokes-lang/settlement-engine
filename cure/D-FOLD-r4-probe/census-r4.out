@@ -1,0 +1,61 @@
+at_strength	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 5	
+manned	quoted src 0 · tests 0	word src 5 · tests 2	ledger docs 5	src/data/narrativeData.js, src/data/dossierStateProse/defense.generated.js, src/domain/worldPulse/opportunism.js
+sparse	quoted src 1 · tests 1	word src 57 · tests 48	ledger docs 30	src/domain/settlement.schema.js
+skeleton	quoted src 0 · tests 1	word src 18 · tests 19	ledger docs 52	src/components/OutputContainer.jsx, src/components/map/WorldMapToolbar.jsx, src/hooks/useAdvanceSession.js
+hollow	quoted src 0 · tests 2	word src 21 · tests 11	ledger docs 29	src/components/PipelineRail.jsx, src/components/map/TerritoryLayer.jsx, src/generators/stressGenerator.js
+full	quoted src 37 · tests 79	word src 663 · tests 769	ledger docs 479	src/pdf/sections/ResourcesProduction.jsx, src/pdf/lib/format.js, src/components/ChroniclePanel.jsx
+empty	quoted src 16 · tests 17	word src 771 · tests 1286	ledger docs 277	src/components/settlements/SampleDashboard.jsx, src/components/founders/RequestChairLetter.jsx, src/lib/foundersHall.js
+peace_unkept	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+banner	quoted src 1 · tests 3	word src 77 · tests 52	ledger docs 72	src/domain/prose/presenceMeasure.js
+body	quoted src 11 · tests 14	word src 387 · tests 469	ledger docs 201	src/design/organic/ink.js, src/components/organic/Manuscript.jsx, src/components/organic/samples/CompendiumSample.jsx
+bodies_meet	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 4	
+body_stance	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 5	
+traffic_waylaid	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+alms_requested	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+body_bounty	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+hunt_taken	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 3	
+guild_war	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+sponsorship_offered	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+sponsor_exposed	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+ransom_granted	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+captive_freed	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+captive_released	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+site_sale	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+trail:	quoted src 0 · tests 0	word src 0 · tests 2	ledger docs 7	
+g:	quoted src 0 · tests 0	word src 5 · tests 7	ledger docs 4	src/components/admin/AdminTrendsPanel.jsx, src/components/new/tabs/OverviewTab.jsx, src/domain/worldPulse/piety.js
+cult	quoted src 25 · tests 51	word src 80 · tests 74	ledger docs 59	src/pdf/lib/liveWorld.js, src/components/settlements/RealmStrip.jsx, src/components/gallery/CampaignStatePanel.jsx
+band	quoted src 36 · tests 33	word src 705 · tests 671	ledger docs 270	src/components/surveyor/AutonomyPanel.jsx, src/components/map/RealmVerbComposer.jsx, src/components/new/tabs/SubstrateTab.jsx
+conclave	quoted src 0 · tests 1	word src 7 · tests 1	ledger docs 11	src/generators/history/historyEventStrands.js, src/domain/magicLedger.js, src/domain/contradictions.js
+gang	quoted src 6 · tests 0	word src 29 · tests 9	ledger docs 20	src/generators/defenseGenerator.js, src/generators/roleCategory.js, src/generators/npcGenerator.js
+beast	quoted src 1 · tests 0	word src 16 · tests 2	ledger docs 18	src/domain/tableEvents.js
+den_answered	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 0	
+den_unanswered	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 4	
+liegeAnswer	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 5	
+riders_lent	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+huntOrderOf	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+hidden_way	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+in_hearing	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+trailNodes	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+hidden_approach	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+passageDefenceOf	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+hiddenWayFor	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+guard:	quoted src 0 · tests 0	word src 45 · tests 126	ledger docs 25	src/App.jsx, src/config/firstHundred.js, src/pdf/sections/AIAppendix.jsx
+hunt_body	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+hunt_won	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+leads	quoted src 1 · tests 0	word src 45 · tests 53	ledger docs 37	src/domain/display/stateProse/economyStateProse.js
+isWardenParagon	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+ledBy	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+LOOK_FIND_SECRET	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+saleScore	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+denPressOf	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+arriveAt	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+BODY_FUNDING_BY_SUPPLY	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+BODY_REPAIR_CEILING	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 2	
+body_act	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 3	
+leak:body:	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 3	
+bodyKind	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 7	
+BODY_KINDS	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 1	
+body:	quoted src 0 · tests 0	word src 43 · tests 50	ledger docs 20	src/design/organic/ink.js, src/design/organic/fluidScale.js, src/pdf/theme.js
+warden	quoted src 8 · tests 3	word src 18 · tests 9	ledger docs 21	src/generators/computeActiveChains.js, src/generators/roleCategory.js, src/generators/npcGenerator.js
+protection_kept	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 6	
+protection_failed	quoted src 0 · tests 0	word src 0 · tests 0	ledger docs 6	

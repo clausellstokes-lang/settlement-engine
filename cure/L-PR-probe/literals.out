@@ -1,0 +1,59 @@
+== patrol
+src/generators/services/serviceAvailability.js:12:  return svc.includes('patrol') ||
+src/data/economicData.js:268:          "patrol",
+src/data/economicData.js:281:          "patrol",
+src/data/economicData.js:312:          "patrol"
+src/domain/prose/wiringCensus.js:1303:  force: Object.freeze(['garrison', 'militia', 'muster', 'watch', 'guard', 'soldier', 'patrol', 'armed']),
+== warden
+src/generators/computeActiveChains.js:624:  'hunting_grounds':    ['hunter', 'wildfowl', 'warden', 'furrier'],
+src/generators/computeActiveChains.js:666:  'Game meat':              ['hunter', 'wildfowl', 'warden', 'furrier'],
+src/generators/computeActiveChains.js:667:  'Furs and pelts':         ['hunter', 'wildfowl', 'warden', 'furrier'],
+src/generators/computeActiveChains.js:668:  'Hunting trophies':       ['hunter', 'wildfowl', 'warden'],
+src/generators/roleCategory.js:41:    'captain', 'commander', 'constable', 'warden', 'marshal', 'quartermaster',
+src/generators/npcGenerator.js:1021:    ['warden', milFaction],
+src/data/historyData.js:149:      title: 'warden',
+src/data/historyData.js:505:      title: 'warden',
+== escort
+src/generators/services/serviceClassifier.js:325:                                      y.includes('escort') ||
+src/generators/services/serviceAvailability.js:13:    svc.includes('escort') ||
+== disperse
+src/domain/worldPulse/demographicsMigration.js:591:      mode: 'disperse',
+src/domain/spatial/migration.js:142:// The DISTRIBUTION MODE is fixed to 'disperse' under spatial — the aspatial
+src/domain/spatial/migration.js:145:export const SPATIAL_DISTRIBUTION_MODE = 'disperse';
+src/domain/spatial/migration.js:342: * @property {string} mode         ALWAYS 'disperse' — 'concentrated' is forbidden under spatial
+== dispersed
+src/domain/worldPulse/settlementLifecycleFirstClass.js:559: * NEVER removed and NEVER resolved — each record gains only a `dispersed` stamp
+== answered
+src/lib/interview.js:144:  track(EVENTS.SURVEYOR_ADOPTION, { surface: 'interview', verdict: 'answered' });
+src/data/dossierCausalProse.generated.js:5149:      "answered"
+src/data/dossierCausalProse.generated.js:5203:            "answered"
+src/domain/worldPulse/peaceReasons.js:118: * THE TWO ROADS IN, and R2 names both. `answered` is the JUST RAZING — the
+src/domain/worldPulse/ransomChoices.js:187:    answer, basis, abandoned, reason: 'answered',
+src/domain/display/heraldJoinMolds.js:29: * `answered`, where the parent is the thing responded to, and unlawful under
+== thin
+src/pdf/lib/headlines.js:129:  if (r.includes('marginal') || r.includes('thin')) return 'warn';
+src/components/new/tabs/EconomicsTab.jsx:351:  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a' : '#1a5a28') : '#a0762a'; con
+src/domain/capacityModel.js:309:    supply -= 10; push(supplyContributors, 'population', 'thin', -10, `Population ${pop} leaves little slack.`);
+src/domain/worldPulse/sovereigntyAppraisal.js:73:  'unknown', 'bare', 'thin', 'stocked', 'deep',
+src/domain/worldPulse/conquestFeasibility.js:89:  'unknown', 'bare', 'thin', 'stocked', 'deep',
+src/domain/worldPulse/armyTransitKernel.js:166:  return score < 0.2 ? 'bare' : score < 0.45 ? 'thin' : score < 0.75 ? 'stocked' : 'deep';
+src/domain/worldPulse/demographicsPushPull.js:112:export const RESERVE_BANDS = Object.freeze(['bare', 'thin', 'stocked', 'deep']);
+src/domain/worldPulse/demographicsPushPull.js:263:  if (coverage >= 0.20) return 'thin';
+== fair
+src/generators/priorityHelpers.js:60:    hasMarket:        hasAny(names, ['market','bazaar','fair','trade center','exchange']),
+src/generators/stressGenerator.js:110:  const hasMarket   = instNames.some(n => n.includes('market')  || n.includes('fair'));
+src/generators/steps/stressConfirmPass.js:48:  famine:           ['granar', 'market', 'fair'],
+src/data/traditionCorpus.js:79:  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true  },
+src/domain/worldPulse/warCoalitionEvidence.js:33:  'present', 'modest', 'moderate', 'fair',
+src/domain/worldPulse/traditionsKernel.js:352: * Fires ONLY for a 'fair'-act observance that lands GOOD-or-better at a settlement on a real trade
+src/domain/worldPulse/traditionsKernel.js:359:  if (String(asObject(/** @type {Record<string, unknown>} */ (rec).coreMotif).act) !== 'fair') return 0;
+src/domain/content/customContentAdmission.generated.js:789:          "fair",
+== strong
+src/design/organic/ink.js:12: *     `strong` `body` map 1:1 to the shipped ink-900 / ink-800 / ink-600 tokens
+src/design/organic/ink.js:59:export const INK_RAMP_ORDER = Object.freeze(['deepest', 'strong', 'body', 'secondary', 'hairline']);
+src/design/organic/ink.js:62:export const INK_TEXT_STEPS = Object.freeze(['deepest', 'strong', 'body', 'secondary']);
+src/components/organic/Manuscript.jsx:53:/** Ink — a tonal-ramp text span (tone: 'ink'|'strong'|'body'|'secondary'). */
+src/components/organic/samples/CompendiumSample.jsx:14:const ALIGN_TONE = { Good: 'body', Neutral: 'secondary', Evil: 'strong' };
+src/components/organic/samples/DossierSample.jsx:32:            <td className="oc-score-register__num"><Ink tone="strong">{r.score}</Ink><Ink tone="secondary"> / 100</Ink></td>
+src/components/organic/samples/DossierSample.jsx:96:              <Ink tone="strong">{n.name}</Ink>{', '}<Ink tone="secondary">{n.role}. </Ink>
+src/components/organic/samples/LibrarySample.jsx:73:                  <Ink tone="strong">{r.name}</Ink>

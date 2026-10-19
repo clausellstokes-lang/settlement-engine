@@ -1,0 +1,344 @@
+[
+ {
+  "kind": "resolve_stressor",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_stressor_residual",
+    "sig": "notable",
+    "score": 29,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "resolve_stressor",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_stressor_residual",
+    "sig": "notable",
+    "score": 29,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "ease_stressor",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 0,
+  "entries": []
+ },
+ {
+  "kind": "ease_stressor",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 0,
+  "entries": []
+ },
+ {
+  "kind": "worsen_stressor",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 0,
+  "entries": []
+ },
+ {
+  "kind": "worsen_stressor",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 0,
+  "entries": []
+ },
+ {
+  "kind": "name_attacker",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_name_attacker",
+    "sig": "notable",
+    "score": 24,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "name_attacker",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_name_attacker",
+    "sig": "notable",
+    "score": 24,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "broker_relationship",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_broker_relationship",
+    "sig": "notable",
+    "score": 51,
+    "sids": 0,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "broker_relationship",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_broker_relationship",
+    "sig": "major",
+    "score": 82,
+    "sids": 0,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "inflame_relationship",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_inflame_relationship",
+    "sig": "notable",
+    "score": 51,
+    "sids": 0,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "inflame_relationship",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_inflame_relationship",
+    "sig": "major",
+    "score": 82,
+    "sids": 0,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "clear_condition",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_clear_condition",
+    "sig": "notable",
+    "score": 24,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "clear_condition",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_clear_condition",
+    "sig": "notable",
+    "score": 24,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "impose_condition",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_impose_condition",
+    "sig": "notable",
+    "score": 48,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "impose_condition",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_impose_condition",
+    "sig": "major",
+    "score": 98,
+    "sids": 1,
+    "rumorSeedable": true
+   }
+  ]
+ },
+ {
+  "kind": "bolster_faction",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_bolster_faction",
+    "sig": "notable",
+    "score": 44,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "bolster_faction",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_bolster_faction",
+    "sig": "notable",
+    "score": 56,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "undermine_faction",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_undermine_faction",
+    "sig": "notable",
+    "score": 44,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "undermine_faction",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_undermine_faction",
+    "sig": "notable",
+    "score": 56,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "empower_npc",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_empower_npc",
+    "sig": "notable",
+    "score": 44,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "empower_npc",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 1,
+  "entries": [
+   {
+    "impactKind": "party_empower_npc",
+    "sig": "notable",
+    "score": 56,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "remove_npc",
+  "mag": "default",
+  "ok": true,
+  "outcomes": 2,
+  "entries": [
+   {
+    "impactKind": "party_remove_npc",
+    "sig": "notable",
+    "score": 52,
+    "sids": 1,
+    "rumorSeedable": false
+   },
+   {
+    "impactKind": "party_remove_npc_state",
+    "sig": "notable",
+    "score": 32,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ },
+ {
+  "kind": "remove_npc",
+  "mag": 1,
+  "ok": true,
+  "outcomes": 2,
+  "entries": [
+   {
+    "impactKind": "party_remove_npc",
+    "sig": "notable",
+    "score": 52,
+    "sids": 1,
+    "rumorSeedable": false
+   },
+   {
+    "impactKind": "party_remove_npc_state",
+    "sig": "notable",
+    "score": 32,
+    "sids": 1,
+    "rumorSeedable": false
+   }
+  ]
+ }
+]

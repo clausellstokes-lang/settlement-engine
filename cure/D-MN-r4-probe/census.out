@@ -1,0 +1,13 @@
+Sun Oct 18 22:41:53 EDT 2026
+token | master src rg -w files | master src quoted-literal files | master tests | master docs | ledger docs (excluding DESIGN_FP_ARCH_MN.md)
+enlists | 0 | 0 | 0 | 0 | 1
+recruits | 9 | 0 | 0 | 3 | 7
+lastSiteId | 0 | 0 | 0 | 0 | 1
+absorbBody | 0 | 0 | 0 | 0 | 0
+menaceEnlisting | 0 | 0 | 0 | 0 | 0
+re-check Sun Oct 18 22:42:12 EDT 2026: ledger docs other than MN —
+enlists: 0 files
+lastSiteId: 0 files
+absorbBody: 0 files
+menaceEnlisting: 0 files
+(the '1' above for enlists/lastSiteId was this volume itself, written by this lane minutes earlier; the -g exclusion did not apply with '--')

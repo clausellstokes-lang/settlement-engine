@@ -1,0 +1,29 @@
+## routingAdjacency
+922: *  augmentation; see augmentedAdjacency). Pre-M8 + inland routing is byte-identical.
+953:// for a trip INVOLVING a port or a circle-holder (routingAdjacency gates on isPort /
+965:function augmentedAdjacency(digest) {
+992:function routingAdjacency(digest, a, b) {
+995:  if (seaInvolved || teleInvolved) return augmentedAdjacency(digest);
+## envoyEncounter
+src/domain/worldPulse/envoyEncounter.js:6: * node equality is the whole collision law: a shared route, segment, or future
+## holdInterruptedEnvoy
+src/domain/worldPulse/envoyInterceptionStage.js:384:function holdInterruptedEnvoy({ worldState, errand, encounter, holdVenue, tick, cause }) {
+src/domain/worldPulse/envoyInterceptionStage.js:551:        : holdInterruptedEnvoy({
+src/domain/worldPulse/envoyInterceptionStage.js:572:    const held = holdInterruptedEnvoy({
+## simulationRules navalEnabled
+src/domain/worldPulse/simulationRules.js:722:  navalEnabled: true,
+src/domain/certification/subsystemRowsWaves.js
+src/components/map/SimulationRulesDialog.jsx
+src/components/map/SimulationRulesAxes.jsx
+## gateKey -w
+src/domain/display/defenseDisplay.js:376:    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+src/domain/display/defenseDisplay.js:377:    const gate = gateKey ? gates[gateKey] : undefined;
+## gates shape
+113: * @property {Array<{ cellA: number, cellB: number, cost: number, terrainA: string, terrainB: string }>} segments
+389: * @param {Record<string, { a:string, b:string, cost:number, cellA:number, cellB:number }>} crossings
+408:    return [key, { a: biomeAt(g.cellA), b: biomeAt(g.cellB) }];
+700:  /** @type {Record<string, { a:string, b:string, cost:number, cellA:number, cellB:number }>} */
+718:      // Cheapest crossing wins; deterministic tie-break by lower (cellA, cellB).
+721:      const cellA = A < B ? u : v;
+722:      const cellB = A < B ? v : u;
+724:        || (crossCost === prev.cost && (cellA < prev.cellA || (cellA === prev.cellA && cellB < prev.cellB)))) {

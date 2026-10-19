@@ -1,0 +1,49 @@
+### PG hop seeds
+59:owner docket for quarantine).
+323:| Quarantine as a settlement stance | a settlement ACT (close own gates / refuse ALL groups while self-afflicted) — needs a NEW VERB on the decision surface | **OWNER-VALUE — flagged per §136.2; not chartered** |
+339:  and the owner (quarantine verb).
+402:| Quarantine verb | pg-4 | a settlement ACT | **OWNER-VALUE (§136.2) — not chartered** |
+418:   per-wave value tables into one ledger, plus the pg-4 quarantine OWNER-VALUE
+### master plague spread
+(eval):3: no matches found: /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/plague*.js
+### GR clause vocabulary
+51:  Lifecycle-paths clause, written BEFORE any writer builds.
+177:| V-2 | TERM_CATALOG: now **12 terms / 8 families**, executor kinds `transfer/overlay/readiness_cap/war_block/occupation_hold/seam`; codepoint-frozen TERM_TYPES/TERM_FAMILIES | `peaceTermsCatalog.js:141-192` | VERIFIED with growth: `sovereignty_transfer` joined (own family, forced by §13 stacking); the volume's "extract TERM_CATALOG into a pure-data sibling" item (GR-3) is ALREADY DONE under the name `peaceTermsCatalog.js` — GR-3's catalog-mechanics slice is VOID [CORRECTED 2026-10-16 (coherence fold §3.3.6) — 26 rows / 13 families / 7 executor kinds at 00b648c9d (peaceTermsCatalog.js:181-342); DESIGN_FP_GRAMMAR.md §4 lists every landed row by pointer; every count derives from live TERM_FAMILIES.] |
+232:   > clause).** This item previously read: "ABSENT from
+246:   > the struck clause and item 3 could never both be obeyed.
+254:   > struck clause pointed a GR implementer at the arm the ruling REJECTED.
+257:   > comments the struck clause cited do exist (`warTerminationEnabled`,
+262:   > precisely what keeps them lawful. The conjunction the struck clause
+331:**Lifecycle-paths clause (L4, written before any writer builds):**
+### master treaty term types
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warTerminationCauseTables.js:134:export const TERMINATION_PEACE_PROSE = Object.freeze({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warTermination.js:95:export const WAR_TERMINATION_BANDS = Object.freeze([
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warTermination.js:103:export const WAR_TERMINATION_TUNING = Object.freeze({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/treatyOrientation.js:270:export const TERM_OBLIGATION_KINDS = Object.freeze(['unknown', 'wartime', 'sale', 'negotiated']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/treasury.js:465:export const COIN_FLOW_TERMS = Object.freeze([
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/strategicPosture.js:104:export const POSTURE_TERMS = Object.freeze(['standing', 'channels', 'appetite', 'books']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peaceTermsCarriedSheet.js:27:export const CARRIED_TERM_SHEET_SCHEMA_VERSION = 1;
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peaceTermsCatalog.js:17:export const PEACE_TERMS_TUNING = Object.freeze({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peaceTermsCatalog.js:180:export const TERM_CATALOG = Object.freeze({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peaceTermsCatalog.js:346:export const TERM_TYPES = Object.freeze(Object.keys(TERM_CATALOG).sort());
+### IN covert objectives / public mission
+46:> [ADDED 2026-10-16 (coherence fold, req 17) — TIER DECLARATION for every wave in this volume: `beliefsActive` (the spatial canon marker ∧ infoMode ≠ 'omniscient', beliefMap.js:204-209; the default infoMode is 'omniscient', simulationRules.js:56) holds in only three presets — dramatic_campaign, living_realm ('perfect_delayed') and full_simulation ('full') — and `infoStatecraftEnabled`, `informationBrokeragesEnabled` and `errandSpineEnabled` are dark in every preset. No IN wave runs aspatially or in the default preset; the family is spatial-canon (premium-tier) only. Each wave below carries its own FIRST-VISIBLE/TIER line.]
+92:| S33 | Flag manifest + walker exist; infoStatecraftEnabled is a member | src/domain/worldPulse/simulationRules.js — ENGINE_GATED_VIRTUAL_RULE_KEYS :185-194 = ['beliefAxesEnabled','conquestDoctrineEnabled','infoStatecraftEnabled','migrationRumorsEnabled','sovereigntyTradeEnabled']; walker tests/lint/engineGatedRuleKeys.walker.test.js | VERIFIED |
+148:| `secondOrderBeliefEnabled` | ⏱ LANDED at IN-1a (row 14, MIRROR twin) | mirrorOf + every consumer | `infoStatecraftEnabled` (the outbound ledgers it derives from are its writers') |
+149:| `infoLureEnabled` | IN-2 commit 1 | axis-typed plant subjects + bait receipts | `informationBrokeragesEnabled` + `infoStatecraftEnabled` + `secondOrderBeliefEnabled`; SCARCITY/CONDITIONS baits additionally on SP-2's trade families (HARD, still absent — S8) [CORRECTED 2026-10-16 (coherence fold) — unblocked by SP-B; see the bracket at IN-2's J-INA-3.]; DEVOTION bait re-scoped buildable NOW (J-INA-3, S25). `enforceLiveStrength` stays an interaction, precondition in NEITHER direction (J-INF-14) |
+150:| `counterIntelEnabled` | IN-3 commit 1 | sweep/vet/send-two/hide-as-answer + suspicionOf + house exposure producer | `infoStatecraftEnabled`; mirror-gap evidence arm degrades dark (named degraded read); SEND-TWO consumes the BUILT sendTwoDivergence.js (R2 — the J-INF-15 dependency is DISCHARGED, not pending) |
+154:re-measured: IN-0a ⇒ `informationBrokeragesEnabled` × `infoStatecraftEnabled`
+160:`infoStatecraftEnabled` × peaceCausalActive through the pre-plumbed `provenTrue`
+161:param (S29); IN-0d ⇒ `infoStatecraftEnabled`, dark ⇒ exported factor is the 1.0
+290:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the lie's take inside its 8-week shelf (`EXPOSE_MAX_AGE_TICKS: 8`) — the DM-truth `plant_took` line and the town page's plants panel within a month of a commission landing; credibility is the yearly verdict · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `informationBrokeragesEnabled` × `infoStatecraftEnabled` · DEGRADED ARM: dark (byte-identical, ONE_REGEN included)]
+359:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: `treaty_disclosure_opened` one tick after signing (credit at T+1; routed 'trade') · TIER: host flags: peaceCausalActive × `allyIntelSharingEnabled` (lit in quiet_local and full_simulation) for the feed, × `infoStatecraftEnabled` for the credit · DEGRADED ARM: the term mints, strains and expires with no feed (pinned)]
+380:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — zero consumers; once EC-6 consumes it, the toll's band word the week the gates shut · TIER: host flag `infoStatecraftEnabled` (+ EC-6 lit for any effect) · DEGRADED ARM: the 1.0 identity]
+395:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: the DM standing line per neighbour (display/neighbourMirror.js:202), strength only, moving the tick we show something; staleness seasonal to generational · TIER: belief infoMode (spatial canon ∧ infoMode ≠ omniscient) · host flags: `secondOrderBeliefEnabled` + `infoStatecraftEnabled` · DEGRADED ARM: dark]
+### ES operative kinds / errand
+43:[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (`espionageEnabled` needs `errandSpineEnabled`, dark in every preset) · BUILT DARK at 00b648c9d: ES-0, ES-1, ES-2, ES-3, ES-4 (the `ES-4-DISTANT-SOURCE-EVIDENCE` pin), ES-5a (the stage as a leaf; no autonomous dispatch mount found — PLAUSIBLE, import census only), ES-5b, ES-5c, ES-5d, ES-6a (the leak) and ES-Da (the composite rider — the ONLY mission mint path, absent from §4's wave list) · UNBUILT: ES-6b, ES-7 (no `espionage_*` kind is registered or routed; missions resolve silently), ES-Db; W-OPS's cars are orphans (RULED BY DELEGATION 2026-10-16, OD-FC-4, see §0).]
+1243:> ⏱ **AMENDED IN PLACE, 2026-08-11 (ES-6a compilation + landing).** Every clause
+1265:>   ES-3, ES-5d and ES-6a. POINT at the packet and §17a for the full
+1303:> **THE SPLIT (chair-ratified):** **ES-6a — THE LEAK** (this, LANDED); **ES-6b —
+1755:> - **ES-6a — THE LEAK. LANDED.** The leash read re-sited to the product stage,
+1808:`→ ES-6a → ES-7` today: **ES-6b** carries no place in the spine because it is
+### EC contracted hauls

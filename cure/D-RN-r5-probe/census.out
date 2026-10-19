@@ -1,0 +1,7 @@
+labelIsTrue | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 1
+hunt_won | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 6
+escaped | src words 10 quoted 0 | tests words 45 quoted 4 | master docs 13 | ledger docs 32
+body_ended | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 3
+paid_quarter | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 1
+robbed_quarter | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 1
+fed_poor | src words 0 quoted 0 | tests words 0 quoted 0 | master docs 0 | ledger docs 1

@@ -1,0 +1,16 @@
+latch raw=0.6: ["embattled@0.204","embattled@0.3386","embattled@0.4275","embattled@0.4862"]
+latch raw=0.45: ["calm@0","calm@0","calm@0","calm@0"]
+latch raw=0.35: ["calm@0","calm@0","calm@0","calm@0"]
+walls sec=0: {"war":0.85,"menace":0.85,"equal":true}
+walls sec=0.5: {"war":0.6499999999999999,"menace":0.6499999999999999,"equal":true}
+walls sec=1: {"war":0.6,"menace":0.6,"equal":true}
+core might=34 hd=70: {"pFall":0.0002,"shares":{"decisive_success":0,"costly_success":0,"narrow_fail":0.178,"decisive_fail":0.822}}
+core might=51 hd=60: {"pFall":0.0117,"shares":{"decisive_success":0,"costly_success":0.012,"narrow_fail":0.179,"decisive_fail":0.81}}
+core might=69 hd=40: {"pFall":0.8375,"shares":{"decisive_success":0.658,"costly_success":0.179,"narrow_fail":0.163,"decisive_fail":0}}
+core might=89 hd=60: {"pFall":0.8375,"shares":{"decisive_success":0.66,"costly_success":0.18,"narrow_fail":0.16,"decisive_fail":0}}
+release policy=catalog(structural): {"durationPolicy":"structural","firstUnder06":13,"firstUnder04":23,"resolvedAt":30}
+release policy=episodic: {"durationPolicy":"episodic","firstUnder06":null,"firstUnder04":null,"resolvedAt":1}
+archetype monster_raider_pressure / "Pressure from outside": "war_pressure"
+archetype siege / "A siege from outside": "war_pressure"
+archetype monster_raider_pressure / "": "war_pressure"
+archetype siege / "": "war_pressure"

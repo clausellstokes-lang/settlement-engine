@@ -1,0 +1,150 @@
+[
+ {
+  "name": "grid-24x18-12",
+  "season": null,
+  "marches": 132,
+  "intermediateNodes": 154,
+  "judged": 154,
+  "unjudged": 0,
+  "byInbound": {
+   "land": 154,
+   "sea": 0,
+   "teleport": 0
+  },
+  "seaWaypoints": 0,
+  "landings": 0,
+  "arrivalsByTeleport": 0,
+  "holdsTried": 154,
+  "clampBelowPrev": 2,
+  "clampAtOrigin": 0,
+  "examplesCoarse": [
+   {
+    "o": "s002",
+    "d": "s006",
+    "hops": 4,
+    "weeks": 3,
+    "holdBefore": 3,
+    "clampIdx": 1
+   },
+   {
+    "o": "s006",
+    "d": "s002",
+    "hops": 4,
+    "weeks": 3,
+    "holdBefore": 3,
+    "clampIdx": 1
+   }
+  ]
+ },
+ {
+  "name": "ports-24x18 (sea+seasons)",
+  "season": null,
+  "marches": 56,
+  "intermediateNodes": 69,
+  "judged": 69,
+  "unjudged": 0,
+  "byInbound": {
+   "land": 32,
+   "sea": 37,
+   "teleport": 0
+  },
+  "seaWaypoints": 7,
+  "landings": 30,
+  "arrivalsByTeleport": 0,
+  "holdsTried": 69,
+  "clampBelowPrev": 11,
+  "clampAtOrigin": 11,
+  "examplesCoarse": [
+   {
+    "o": "p000",
+    "d": "p003",
+    "hops": 3,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   },
+   {
+    "o": "p000",
+    "d": "p004",
+    "hops": 4,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   }
+  ]
+ },
+ {
+  "name": "ports-24x18 (sea+seasons)",
+  "season": "winter",
+  "marches": 56,
+  "intermediateNodes": 82,
+  "judged": 82,
+  "unjudged": 0,
+  "byInbound": {
+   "land": 42,
+   "sea": 40,
+   "teleport": 0
+  },
+  "seaWaypoints": 8,
+  "landings": 32,
+  "arrivalsByTeleport": 0,
+  "holdsTried": 82,
+  "clampBelowPrev": 11,
+  "clampAtOrigin": 11,
+  "examplesCoarse": [
+   {
+    "o": "p000",
+    "d": "p003",
+    "hops": 3,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   },
+   {
+    "o": "p000",
+    "d": "p004",
+    "hops": 4,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   }
+  ]
+ },
+ {
+  "name": "portCoast-8 (sea)",
+  "season": null,
+  "marches": 56,
+  "intermediateNodes": 62,
+  "judged": 62,
+  "unjudged": 0,
+  "byInbound": {
+   "land": 0,
+   "sea": 62,
+   "teleport": 0
+  },
+  "seaWaypoints": 62,
+  "landings": 0,
+  "arrivalsByTeleport": 0,
+  "holdsTried": 62,
+  "clampBelowPrev": 20,
+  "clampAtOrigin": 19,
+  "examplesCoarse": [
+   {
+    "o": "p000",
+    "d": "p005",
+    "hops": 3,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   },
+   {
+    "o": "p000",
+    "d": "p006",
+    "hops": 3,
+    "weeks": 2,
+    "holdBefore": 2,
+    "clampIdx": 0
+   }
+  ]
+ }
+]

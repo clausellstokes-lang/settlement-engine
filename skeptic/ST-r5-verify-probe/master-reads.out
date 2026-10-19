@@ -1,0 +1,20 @@
+== m1 stage order
+2097:    const rumors = advanceRumorLedgers({
+2527:    const calamity = advanceCalamity({
+== m2 deityAxes
+50:const EVIL01 = Object.freeze({ evil: 1, neutral: 0.5, good: 0 });
+52:const CHAOS01 = Object.freeze({ chaotic: 1, neutral: 0.5, lawful: 0 });
+== m3 standingFor
+152:  if (prev === 'ascendant') return share >= A - H ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+153:  if (prev === 'established') return share >= A ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+154:  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+== m4 homeDefense
+191:    const homeDefense = Math.max(0, offensive - armyAway);
+== census raised quoted / closeSiteWeek / seenBy
+raised-quoted src:        0
+closeSiteWeek src+tests:        0
+worldSites src:        0
+== calamityKernel lines
+     873 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/calamityKernel.js
+== HEAD file
+gitdir: /Users/cstokes/Desktop/settlement-engine/.git/worktrees/master-81f1cd963

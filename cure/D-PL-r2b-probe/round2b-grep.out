@@ -1,0 +1,29 @@
+# RULINGS-ROUND2b rows read against PL (grep -n -c -i -E per topic, on the pre-round copy PL.before-r2b.md)
+naval|navalTransit                               0
+\bsea\b|storm|harbour                            5
+winter|closed pass|SLOW_NOT_SEVER                0
+gateKeeperOf|J385|keeps the gate                 0
+corps|u:<                                        0
+envoy_intercepted|envoy_held|holdInterruptedEnvoy 0
+fundingBand|UPKEEP_LEDGERS|W-COIN                1
+siteDefense|SIEGE_VERDICT|relief01               0
+patrolDraw|POPULATION_RANGES|deploy time         0
+per hop|per-hop                                  0
+departTick|unitKey                               4
+H16                                              1
+
+# the unitKey and H16 lines (pre-round)
+234:N ITS SIDE: ONE answer per liege per incursion unit (the episode is the unit's `unitKey`), however many of its members' lands the unit crosses, written as an input lin
+240:ing of a banned paragon), `army:` / `column:` (PS's harbouring; the crossing's `unitKey`), `den_unanswered:<siteId>:<tick>` (ST's occasion, the bracket below); PL's ow
+479:abled ∧ allyDefenseEnabled` | ONE relief answer by H for the unit (episode its `unitKey`), an input line on both cards; rows on H–M and H–N under that one episode; DAR
+535:casion under its war arm; ONE answer per liege per incursion unit (episode the `unitKey`), an input line on every crossed member's `armed_incursion` card; rows per cro
+
+# W-COIN line (pre-round)
+88 … these two acts are the ONLY triggers of a break. HARBOURING the crown's enemy — a member admitting a parag…
+134 …trespassed member, and the price on a member that harbours its crown's enemy's column — lands as PS's coupl…
+218 …- **Scutage** — coin in place of men (W-COIN's treasury, when lit): the summons is answered `a…
+240 …ppendRelationshipFealtyRow`, §5.5's STATE idiom). HARBOURING THE CROWN'S ENEMY is such a request: a `fealty…
+240 …nd pinned): `polity_ban:<wnpcId>:<banTick>` (CH's harbouring of a banned paragon), `army:` / `column:` (PS'…
+240 …g of a banned paragon), `army:` / `column:` (PS's harbouring; the crossing's `unitKey`), `den_unanswered:<s…
+533 …ban:` · `army:` / `column:` · `den_unanswered:`); harbouring the crown's enemy is PRICED (`fealty_defied`) …
+728 …stFealtyRow` and the registered episode prefixes; harbouring is priced and never opens a break; the detecto…

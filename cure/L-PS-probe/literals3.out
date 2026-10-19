@@ -1,0 +1,61 @@
+== 'enmity' literals:
+src/domain/worldPulse/settlementPolitics.js:361:        reason: `a ${strengthWord || ''} ${type === 'enemy' ? 'enmity' : 'rivalry'} between the leaders`.replace(/\s+/g, '
+== 'defiance' literals:
+== 'passage_redressed' literals:
+== 'passage_amended' literals:
+== 'passage_atoned' literals:
+== 'right_of_march' literals:
+== 'march_rights' literals:
+== 'none' literals:
+src/design/organic/rules.js:15: * blend-modes). Straight rules stretch full-width with preserveAspectRatio="none"
+src/design/organic/rules.js:43:  return `<svg viewBox="0 0 ${W} ${viewH}" preserveAspectRatio="none" width="100%" height="${viewH}" role="presentation" aria-hidden="true"
+src/design/organic/material.js:104:    `preserveAspectRatio="none" role="presentation" aria-hidden="true" focusable="false">` +
+src/design/organic/ornament/pools.js:18:const S = (p, w = 2) => `fill="none" stroke="${p.line}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"`;
+src/design/organic/ornament/pools.js:60:    `<rect x="3" y="3" width="${w - 6}" height="${h - 6}" rx="4" ${S(p)}/><rect x="7" y="7" width="${w - 14}" height="${h - 14}" r
+src/design/organic/ornament/pools.js:62:    `<path d="M3 8 Q3 3 8 3 L${w - 8} 3 Q${w - 3} 3 ${w - 3} 8 L${w - 3} ${h - 8} Q${w - 3} ${h - 3} ${w - 8} ${h - 3} L8 ${h - 3}
+== 'slight' literals:
+src/domain/worldPulse/demographicsPushPull.js:122:export const DRIVER_STRENGTH_BANDS = Object.freeze(['none', 'slight', 'pressing', 'severe']);
+src/domain/worldPulse/demographicsPushPull.js:430:  if (strength01 > 0) return 'slight';
+src/domain/worldPulse/beliefMap.js:1538:const STRENGTH_WORDS = Object.freeze(['negligible', 'slight', 'middling', 'formidable', 'overwhelming']);
+src/domain/worldPulse/magicSubstitution.js:119:  'none', 'slight', 'marked', 'severe',
+src/domain/worldPulse/magicSubstitution.js:157:    Object.freeze({ atLeast: 0.02, band: 'slight' }),
+src/domain/display/settlementBeliefs.js:43:const STRENGTH_WORDS = Object.freeze(['negligible', 'slight', 'middling', 'formidable', 'overwhelming']);
+== 'fair' literals:
+src/generators/priorityHelpers.js:60:    hasMarket:        hasAny(names, ['market','bazaar','fair','trade center','exchange']),
+src/generators/stressGenerator.js:110:  const hasMarket   = instNames.some(n => n.includes('market')  || n.includes('fair'));
+src/generators/steps/stressConfirmPass.js:48:  famine:           ['granar', 'market', 'fair'],
+src/data/traditionCorpus.js:79:  { id: 'fair',       noun: 'Fair',       deityFit: false, grand: true  },
+src/domain/worldPulse/warCoalitionEvidence.js:33:  'present', 'modest', 'moderate', 'fair',
+src/domain/worldPulse/traditionsKernel.js:352: * Fires ONLY for a 'fair'-act observance that lands GOOD-or-better at a settlement on a real trade
+== 'broad' literals:
+src/domain/capacityModel.js:305:    supply += 15; push(supplyContributors, 'population', 'broad', +15, `Population ${pop} sustains a deep labor pool.`);
+src/domain/capacityModel.js:369:    supply += 25; push(supplyContributors, 'institutions', 'broad', +25, `${healers} healing-capable institutions.`);
+src/domain/capacityModel.js:566:    supply += 20; push(supplyContributors, 'institutions', 'broad', +20, `${food.length} food institutions.`);
+src/domain/capacityModel.js:679:    supply += 12; push(supplyContributors, 'institutions', 'broad', +12, `${trans.length} transport institutions.`);
+src/domain/capacityModel.js:689:    demand += 8; push(demandContributors, 'economicState.exports', 'broad', +8, `${exports.length} exports to move.`);
+src/domain/capacityModel.js:717:    supply += 18; push(supplyContributors, 'institutions', 'broad', +18, `${rel.length} religious institutions.`);
+== 'taxed' literals:
+src/domain/worldPulse/treasury.js:466:  'taxed', 'upkeep', 'transferredIn', 'transferredOut', 'shortfall',
+src/domain/region/goodsCatalog.js:252:  'imports', 'exports', 'import', 'export', 'taxed', 'transit', 'only',
+src/domain/prose/entryLexicons.js:116:  'taxes', 'taxed', 'taxing',
+== 'restricted' literals:
+src/generators/factionDynamics.js:36:  if (l.includes('restricted') || l.includes('volatile')
+src/domain/magicProfile.js:57:  'absent', 'forbidden', 'restricted', 'regulated', 'tolerated', 'celebrated',
+src/domain/magicProfile.js:144:                 'restricted';
+src/domain/magicProfile.js:407:  // availability 'rare' and deriveLegality's else-arm reads legality 'restricted'. The
+src/domain/settlement.schema.js:1685: * @property {'forbidden'|'restricted'|'regulated'|'tolerated'|'celebrated'} legality
+src/domain/display/safetySeverity.js:57:  ['controlled', 'controlled'], ['suspicious', 'controlled'], ['quarantined', 'controlled'], ['restricted', 'controlled'],
+== 'closed' literals:
+src/components/admin/SupportQueuePanel.jsx:29:  'resolved', 'closed', 'reopened',
+src/components/new/tabs/WatchPanel.jsx:65:        The court&apos;s suspicion reads {rows.suspicion.band}; its gates stand {rows.gateClosed ? 'closed' : 'open'}.
+src/components/account/AccountTickets.jsx:51:  const open = !['resolved', 'closed'].includes(status);
+src/lib/founderChairRequest.js:42:const CLOSED_STATUSES = Object.freeze(['resolved', 'closed']);
+src/generators/density/successionGrammar.js:125: *  exactly, because "closed" is the whole content of a finite-semantics ruling. */
+src/domain/worldPulse/houseLedger.js:120:  'act', 'closed', 'dormant', 'formed', 'holdings', 'returned', 'ruined', 'woke',
+== 'open' literals:
+src/components/settlement/SuccessorPrompt.jsx:43:  // early return (Rules of Hooks); "open" is false when the prompt isn't shown, so the
+src/components/gallery/GalleryModerationPanel.jsx:14:  ['open', 'Open'],
+src/components/gallery/GalleryModerationPanel.jsx:22:  const active = status === 'open';
+src/components/gallery/GalleryModerationPanel.jsx:145:  const [status, setStatus] = useState('open');
+src/components/gallery/GalleryModerationPanel.jsx:242:                border: `1px solid ${report.status === 'open' ? RED : BORDER}`,
+src/components/gallery/GalleryModerationPanel.jsx:243:                background: report.status === 'open' ? CARD_ALT : CARD,

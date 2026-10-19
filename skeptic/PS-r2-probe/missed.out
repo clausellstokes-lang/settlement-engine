@@ -1,0 +1,80 @@
+[
+ {
+  "name": "grid-24x18-12",
+  "marches": 132,
+  "marchesWithUnreadIntermediate": 2,
+  "unreadIntermediateNodes": 2,
+  "ex": [
+   {
+    "o": "s002",
+    "d": "s006",
+    "hops": 4,
+    "weeks": 3,
+    "unreadIdx": [
+     3
+    ]
+   },
+   {
+    "o": "s006",
+    "d": "s002",
+    "hops": 4,
+    "weeks": 3,
+    "unreadIdx": [
+     3
+    ]
+   }
+  ]
+ },
+ {
+  "name": "ports-24x18",
+  "marches": 56,
+  "marchesWithUnreadIntermediate": 10,
+  "unreadIntermediateNodes": 11,
+  "ex": [
+   {
+    "o": "p000",
+    "d": "p003",
+    "hops": 3,
+    "weeks": 2,
+    "unreadIdx": [
+     2
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p004",
+    "hops": 4,
+    "weeks": 2,
+    "unreadIdx": [
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "name": "portCoast-8",
+  "marches": 56,
+  "marchesWithUnreadIntermediate": 16,
+  "unreadIntermediateNodes": 20,
+  "ex": [
+   {
+    "o": "p000",
+    "d": "p005",
+    "hops": 3,
+    "weeks": 2,
+    "unreadIdx": [
+     2
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p006",
+    "hops": 3,
+    "weeks": 2,
+    "unreadIdx": [
+     2
+    ]
+   }
+  ]
+ }
+]

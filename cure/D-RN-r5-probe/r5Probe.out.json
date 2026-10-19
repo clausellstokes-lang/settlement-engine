@@ -1,0 +1,154 @@
+{
+  "A_readBeliefRelationship": {
+    "dormant_with_record": "rival",
+    "omniscient_with_record": "rival",
+    "belief_with_record": "hostile",
+    "belief_record_unknown_label": "unknown",
+    "belief_no_record": "rival",
+    "self": "neutral",
+    "beliefsActive": {
+      "dormant": false,
+      "omni": false,
+      "live": true
+    }
+  },
+  "A_pairNet": {
+    "r4_truth_read": -0.51,
+    "omniscient": {
+      "label": "rival",
+      "net": -0.51
+    },
+    "belief_stale_hostile": {
+      "label": "hostile",
+      "net": -0.8
+    },
+    "belief_current": {
+      "label": "rival",
+      "net": -0.51
+    },
+    "belief_unknown_record": {
+      "label": "unknown",
+      "net": 0
+    },
+    "belief_no_record": {
+      "label": "rival",
+      "net": -0.51
+    },
+    "vassal_contract_true_despite_stale_belief": {
+      "label": "vassal",
+      "net": 0.47
+    }
+  },
+  "B_tiers": [
+    "thorp",
+    "hamlet",
+    "village",
+    "town",
+    "city",
+    "metropolis"
+  ],
+  "B_walk": {
+    "varn_town_r5": {
+      "budget": 2,
+      "rings": [
+        [
+          "varn"
+        ],
+        [
+          "ashford",
+          "merewick",
+          "tolle"
+        ],
+        [
+          "kell"
+        ]
+      ]
+    },
+    "varn_town_r4_office_scope_settlement": {
+      "rings": [
+        [
+          "varn"
+        ]
+      ]
+    },
+    "hamlet_one_neighbour_r5": {
+      "budget": 2,
+      "rings": [
+        [
+          "ham"
+        ],
+        [
+          "kell"
+        ],
+        [
+          "far",
+          "tolle"
+        ]
+      ]
+    },
+    "isolated_hamlet_r5": {
+      "budget": 2,
+      "rings": [
+        [
+          "lone"
+        ]
+      ]
+    },
+    "city_r5": {
+      "budget": 4,
+      "rings": [
+        [
+          "varn"
+        ],
+        [
+          "ashford",
+          "merewick",
+          "tolle"
+        ],
+        [
+          "kell"
+        ],
+        [
+          "far",
+          "ham"
+        ],
+        [
+          "farther"
+        ]
+      ]
+    },
+    "great_crown_r5": {
+      "budget": 5
+    }
+  },
+  "B_hearer_towns": {
+    "varn_town_r5": [
+      "ashford",
+      "merewick",
+      "tolle",
+      "kell"
+    ],
+    "varn_town_r4_office_scope_settlement": [],
+    "hamlet_one_neighbour_r5": [
+      "kell",
+      "far",
+      "tolle"
+    ],
+    "isolated_hamlet_r5": [],
+    "city_r5": [
+      "ashford",
+      "merewick",
+      "tolle",
+      "kell",
+      "far",
+      "ham",
+      "farther"
+    ]
+  },
+  "B_R62_terms": {
+    "tolle_allied": -0.4,
+    "ashford_no_pair": 0,
+    "merewick_hostile": 0.4,
+    "liar_allied": -0.175
+  }
+}

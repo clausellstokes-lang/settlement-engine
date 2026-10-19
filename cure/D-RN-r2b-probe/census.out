@@ -1,0 +1,21 @@
+== TELLING_SOURCES src:0 tests:0
+== tellingSources src:0 tests:0
+== atTick src:22 tests:36
+== heardTick src:0 tests:0
+== passage_kept src:0 tests:0
+== passage_breached src:0 tests:0
+== passage_trespassed src:0 tests:0
+== corps src:16 tests:7
+== 'u: src:0 tests:1
+== `u: src:0 tests:2
+== -w atTick hits:
+src/components/settlement/faithPanelModel.js:226:  // ring's newest record verbatim ({ ref, cause, atTick }) and only materializes behind the
+src/components/map/heraldFeed.js:168: *   a paused interval → `pausedAdvance.atTick − ticksDone`: its interior records have not
+src/components/map/heraldFeed.js:177: * @param {{ pulseHistory?: unknown, pausedAdvance?: { atTick?: unknown, ticksDone?: unknown } | null } | null | undefined} worldState
+src/components/map/heraldFeed.js:185:  const atTick = paused ? paused.atTick : undefined;
+src/components/map/heraldFeed.js:187:  const pausedFloor = typeof atTick === 'number' && Number.isFinite(atTick)
+== -w corps hits:
+src/domain/factionRelationshipUpdate.js:383:      { field: 'manpower',    delta: -4, reason: 'Implicated ranks are purged; the officer corps is thinned by suspicion.' },
+src/domain/spatial/navalLayer.js:130:  /shipyard|dockyard|dry\s*dock|drydock|boatyard|admiralt|naval|navy|war\s*(fleet|galley|ship)|shipwright|marine\s*corps|fleet\s*(yard|base|command)/i;
+== freeUnits:
+       0

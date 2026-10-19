@@ -1,0 +1,48 @@
+# token census r5 (rg -w; master src · tests · docs ; ledger docs) — counts of files
+menaceSightings  src=       0 tests=       0 masterdocs=       0 ledgerdocs=       0
+recordMenaceSighting  src=       0 tests=       0 masterdocs=       0 ledgerdocs=       0
+pactAnswers  src=       0 tests=       0 masterdocs=       0 ledgerdocs=       0
+menace_not_enlisting  src=       0 tests=       0 masterdocs=       0 ledgerdocs=       0
+enlisted_by_menace  src=       0 tests=       0 masterdocs=       0 ledgerdocs=       0
+sighting  src=       7 tests=       7 masterdocs=       0 ledgerdocs=      11
+
+# dm_removed usage
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peopleLedger.js:78:  'arrival', 'arrive_home', 'defect', 'depart', 'dispatch', 'dm_removed', 'enlist',
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peopleLedger.js:107:  SINKS: Object.freeze(['dm_removed', 'fell', 'mortality']),
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyErrandVocabulary.js:118:export const ENVOY_LOSS_CAUSES = Object.freeze(['killed', 'route_lost', 'dm_removed']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyErrand.js:507:  if (!personId || now == null || !['killed', 'dm_removed'].includes(lossCause)) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyErrand.js:599:      || !['killed', 'dm_removed'].includes(String(current.lossCause))
+# peopleLedger event vocabulary (homonym check for enlists)
+export const RESIDENCY_TAGS = Object.freeze(['cohort', 'free_lance']);
+
+/**
+ * The fifteen counting events, codepoint-sorted and order-free. ⭐ `return` was SPLIT into
+ * `depart` + `arrive_home` because a two-hop row in a one-debit-one-credit table is a law
+ * that exempts itself. `merge` is the sibling-unit arm that had no event and therefore no
+ * road before the volume's round 3.
+ * @type {ReadonlyArray<string>}
+ */
+export const COUNT_EVENTS = Object.freeze([
+  'arrival', 'arrive_home', 'defect', 'depart', 'dispatch', 'dm_removed', 'enlist',
+  'fell', 'fission', 'merge', 'mortality', 'muster', 'orphan', 'rejoin', 'shed',
+]);
+
+/**
+ * The subset of `COUNT_EVENTS` that debits census and therefore CARRIES A TAG ARM.
+ * ⛔ Derived membership is asserted at module load below: this list and the set of
+ * signatures carrying a `tag` arm must agree exactly.
+ * @type {ReadonlyArray<string>}
+ */
+export const CENSUS_DEBITING = Object.freeze(['dispatch', 'enlist', 'mortality', 'muster']);
+
+/**
+
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/peopleLedger.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/simulationRules.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/store/configSlice.js
+menace_absorbed src=       0 tests=       0 ledgerdocs: 
+menaceEnlisting src=       0 tests=       0 ledgerdocs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_MN.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_COHERENCE_FOLD.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md 
+absorbBody src=       0 tests=       0 ledgerdocs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_MN.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_COHERENCE_FOLD.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md 
+7:proposalPayload
+273:proposalPayload: { kind: REALM_VERB_PAYLOAD_KIND, verb, args: a },
+361:proposalPayload).peaceOffer !== true)) return null

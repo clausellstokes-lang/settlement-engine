@@ -1,0 +1,6 @@
+ids without a body bracket: []
+R2b refinement marks in body: ['R2b-1', 'R2b-2', 'R2b-3', 'R2b-4', 'R2b-5'] 20
+residual tokens: party_revealed_site=0  "opens H16"=2  HR:600=0 HR:513=0 HR:655=0 HR:666=0 HR:872=0  "chair notes items 13–14)"=0  "banTick"=1
+M-SITE-A mentions: 14 ; u:<unitKey> mentions: 17 ; road arm mentions: 27
+table column mismatches: 0 ; raw pipes in code spans in tables: 0
+lines: 719 bytes: 230249

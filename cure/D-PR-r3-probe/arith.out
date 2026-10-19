@@ -1,0 +1,47 @@
+== (1)+(2) the 60-row grid (5 courts x max 1..12)
+bold (a=1,h=0)             ps=0.40 max= 1 peace= 1 kept= 1 oldTrigger=Y newTrigger=- harassInput=0.000
+bold (a=1,h=0)             ps=0.40 max= 2 peace= 1 kept= 2 oldTrigger=- newTrigger=- harassInput=0.000
+bold (a=1,h=0)             ps=0.40 max= 3 peace= 2 kept= 3 oldTrigger=- newTrigger=- harassInput=0.000
+bold (a=1,h=0)             ps=0.40 max= 4 peace= 2 kept= 3 oldTrigger=- newTrigger=- harassInput=0.000
+bold (a=1,h=0)             ps=0.40 max=12 peace= 5 kept= 9 oldTrigger=- newTrigger=- harassInput=0.000
+median (a=.5,h=0)          ps=0.60 max= 1 peace= 1 kept= 1 oldTrigger=Y newTrigger=- harassInput=0.000
+median (a=.5,h=0)          ps=0.60 max= 2 peace= 2 kept= 2 oldTrigger=Y newTrigger=- harassInput=0.000
+median (a=.5,h=0)          ps=0.60 max= 3 peace= 2 kept= 3 oldTrigger=- newTrigger=- harassInput=0.000
+median (a=.5,h=0)          ps=0.60 max= 4 peace= 3 kept= 4 oldTrigger=- newTrigger=- harassInput=0.000
+median (a=.5,h=0)          ps=0.60 max=12 peace= 8 kept= 9 oldTrigger=- newTrigger=- harassInput=0.000
+wary (a=0,h=0)             ps=0.80 max= 1 peace= 1 kept= 1 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary (a=0,h=0)             ps=0.80 max= 2 peace= 2 kept= 2 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary (a=0,h=0)             ps=0.80 max= 3 peace= 3 kept= 3 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary (a=0,h=0)             ps=0.80 max= 4 peace= 4 kept= 4 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary (a=0,h=0)             ps=0.80 max=12 peace=10 kept=11 oldTrigger=- newTrigger=Y harassInput=0.050
+lawful-cruel (a=.5,h=1)    ps=0.80 max= 1 peace= 1 kept= 1 oldTrigger=Y newTrigger=Y harassInput=0.050
+lawful-cruel (a=.5,h=1)    ps=0.80 max= 2 peace= 2 kept= 2 oldTrigger=Y newTrigger=Y harassInput=0.050
+lawful-cruel (a=.5,h=1)    ps=0.80 max= 3 peace= 3 kept= 3 oldTrigger=Y newTrigger=Y harassInput=0.050
+lawful-cruel (a=.5,h=1)    ps=0.80 max= 4 peace= 4 kept= 4 oldTrigger=Y newTrigger=Y harassInput=0.050
+lawful-cruel (a=.5,h=1)    ps=0.80 max=12 peace=10 kept=11 oldTrigger=- newTrigger=Y harassInput=0.050
+wary+harsh (a=.25,h=.5)    ps=0.80 max= 1 peace= 1 kept= 1 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary+harsh (a=.25,h=.5)    ps=0.80 max= 2 peace= 2 kept= 2 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary+harsh (a=.25,h=.5)    ps=0.80 max= 3 peace= 3 kept= 3 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary+harsh (a=.25,h=.5)    ps=0.80 max= 4 peace= 4 kept= 4 oldTrigger=Y newTrigger=Y harassInput=0.050
+wary+harsh (a=.25,h=.5)    ps=0.80 max=12 peace=10 kept=11 oldTrigger=- newTrigger=Y harassInput=0.050
+rows=60 campaignBelowPeace=0 campaignEqualPeace=15 (of which peace<max: 0) campaignAbovePeace=45
+harassment: oldTrigger(fielded==max)=15 rows · newTrigger(fork)=36 rows · old fired by rounding alone (no fork)=3
+== (3) allocation: cases=117 (n 0..12 x H 1..9, 208 weeks each) · weeks with more rider-places than riders=0 · halves whose presence != its word's exact period=0 · 'never' halves=81 · rover home-weeks=1872
+  n=1 H=3: weekly · never · never
+  n=2 H=6: weekly · thirteenw · thirteenw · thirteenw · thirteenw · thirteenw
+  n=4 H=6: weekly · weekly · weekly · fourw · fourw · fourw
+  n=3 H=9: weekly · fourw · fourw · fourw · fourw · fourw · fourw · fourw · fourw
+  n=1 H=9: weekly · never · never · never · never · never · never · never · never
+== (4) namedPersonPathPosition on a 4-node path, departTick 0, arrivalTick 6
+  t=0 progress01=0.000 hopIndex=0 nodeId=A hopLocal=0.000 gateAtLegFraction=0.167 half=origin agree=true
+  t=1 progress01=0.167 hopIndex=0 nodeId=A hopLocal=0.500 gateAtLegFraction=0.167 half=destination agree=true
+  t=2 progress01=0.333 hopIndex=1 nodeId=B hopLocal=0.000 gateAtLegFraction=0.500 half=origin agree=true
+  t=3 progress01=0.500 hopIndex=1 nodeId=B hopLocal=0.500 gateAtLegFraction=0.500 half=destination agree=true
+  t=4 progress01=0.667 hopIndex=2 nodeId=C hopLocal=0.000 gateAtLegFraction=0.833 half=origin agree=true
+  t=5 progress01=0.833 hopIndex=2 nodeId=C hopLocal=0.500 gateAtLegFraction=0.833 half=destination agree=true
+  t=6 progress01=1.000 hopIndex=2 nodeId=D hopLocal=1.000 gateAtLegFraction=0.833 half=destination agree=true
+  n=0: never 45 of 45 halves (H 1..9)
+  n=1: never 36 of 45 halves (H 1..9)
+  n=2: never 0 of 45 halves (H 1..9)
+  n=3: never 0 of 45 halves (H 1..9)
+  n=4: never 0 of 45 halves (H 1..9)

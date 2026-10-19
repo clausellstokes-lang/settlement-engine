@@ -1,0 +1,22 @@
+fromIds  src-word-files=0  src-quoted-files=0  tests-word-files=2  master-docs=0  ledger-docs=1
+corps  src-word-files=2  src-quoted-files=0  tests-word-files=0  master-docs=0  ledger-docs=6
+--- fromIds hits (tests, ledger docs)
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PT.md:166:- `journeyWeeks(worldState, fromIds, toId, tick) → { weeks, priced: boolean } | null` — §8.3; from a pair, the nearer endpoint; `null` when no k
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:83:function fixture(fromIds = []) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:93:  return fromIds.reduce((carried, id) => withPeac
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:97:function makeStore(fromIds = []) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:100:    state.settlement = structuredClone(fixture(f
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:102:      id: SAVE_ID, name: 'Ashford', tier: 'town'
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:208:    const collected = [['town.harrow', 'town.dun
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/sealWriters.test.jsx:209:      const store = makeStore(fromIds);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/editModeShell.test.jsx:512:   * @param {readonly string[]} fromIds
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/editModeShell.test.jsx:514:  function seatStandingOffers(fromIds) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/components/editModeShell.test.jsx:520:    storeState.settlement = fromIds.reduce(
+--- quoted 'u:' prefix literals in master src
+count=0
+--- corps (word) in master src
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/factionRelationshipUpdate.js:383:      { field: 'manpower',
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/navalLayer.js:130:  /shipyard|dockyard|dry\s*dock|d
+movedFrom src=0 tests=0 mdocs=0 ledger=0
+cameFrom src=1 tests=0 mdocs=0 ledger=0
+RECORD_SITE_DEED src=0 tests=0 mdocs=0 ledger=0

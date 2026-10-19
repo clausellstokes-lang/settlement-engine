@@ -1,0 +1,11 @@
+thorp      pop     40 theoretical 33.5 current 33.5 {"manpower":9.612359947967775,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+hamlet     pop    120 theoretical 37.9 current 37.9 {"manpower":26.47508747628575,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+village    pop    600 theoretical 42.6 current 42.6 {"manpower":44.66890750230186,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+town       pop   3000 theoretical 47.3 current 47.3 {"manpower":62.862727528317976,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+city       pop  15000 theoretical 52.1 current 52.1 {"manpower":81.05654755433409,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+metropolis pop  60000 theoretical 56.7 current 56.7 {"manpower":98.66890750230186,"institutions":35,"materiel":50,"logistics":30,"economy":50,"will":50}
+thin       midpoint 13 max bodyStrength 13 min 4.7
+modest     midpoint 34 max bodyStrength 34 min 12.2
+capable    midpoint 51 max bodyStrength 51 min 18.4
+strong     midpoint 69 max bodyStrength 69 min 24.8
+formidable midpoint 89 max bodyStrength 89 min 32.0

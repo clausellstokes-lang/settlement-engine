@@ -1,0 +1,31 @@
+# SEAMS-r3 — the seams skeptic across the NINE (PL · MN · RN · CH · PT · PS · ST · PR · the fold+spine+CN) after round 3a's cures, with the HOST re-check folded in (P3 round 3b; ONE Fable seat)
+
+Read `../README.md` (the RESUME BLOCK), `SKEPTIC.md` WHOLE (its attack surfaces and rules bind here), `RESEARCH-COMMON.md` (the code of record, READ-ONLY), the BOARD's 2026-10-18 lines (the owner's words outrank every ruling), and the rulings in order: `RULINGS-ROUND2.md`, `RULINGS-ROUND2b.md` (+ addendum), `RULINGS-ROUND3.md` (the latest wins). Then the prior seams work so you never repeat a disposed finding without a NEW receipt: `../skeptic/SEAMS-r2.md`, `../skeptic/HOST-r2.md`, all nine `../skeptic/*-r2-verify.md`, and all nine `../cure/D-*-r3.md` (what round 3a changed, and what each lane ROUTED to another volume — an unapplied routed half is a finding).
+
+## What to read in the volumes
+The chair reads laws and registry sections, never a volume whole; YOU read each volume's LAWS (§1), ONTOLOGY (§2: records, derived reads with signatures, closed vocabularies), HEARINGS, FLAGS, WAVES, LIFECYCLE and RULINGS sections WHOLE, and every passage carrying a `(fp-final r3)` bracket (grep them; read each in its context). The fold: §1 (requirements and their brackets), §3.3 (the cross-program rulings), §3.4 (the engagement registry), §5 (the vocabulary), §6 (the chains and the order note), §7 (the decision rows) — WHOLE.
+
+## The seams round 3 touched — attack these first (each is a chair ruling in `RULINGS-ROUND3.md` §A; a ruling that contradicts an owner word or a landed law is BLOCKING)
+1. **A.1 the keep's garrison vs the town's riders** — ST (the rows stand through the levy; the zeroing struck) × PR (R34, §10.5, sentence 9) × MN (M50/M53 cite ST's `σ`; the one cap). Is the composition ONE sentence with ONE cap in all three? Does any text still say the fort's effect IS its patrols, or zeroes the keep when PATROLS light?
+2. **A.2 the hold helper's two modes** — PS §4.1 is the only order of record; PR §9.1 and ST (S21, the approach fort) CITE it and keep no arithmetic; "where THE PASSAGE is lit" prefixes every cap claim. Check the arithmetic of the freeze mode against the clamp (the verifier's worked example: span 10, n−1 = 2, j = 1).
+3. **A.3 the shared presence composer** — MN's sentence, the three feeders, the builder named in the fold §6, each feeder gated by its own flag; `menacesEnabled` narrowed. Does PS/ST/PR say "MN-1 builds it" anywhere still?
+4. **A.4 court-of-court feeling is the landed pair state** — CH §11 step 3, §9's leak patch (cause `paragon_leak`); RN R51; PS's struck court fame. Is there any remaining read of RN by a court about a court or town?
+5. **A.5 the fealty families' owner flags** and **A.6 the liege's `sent` in PS §7.5's contest** — PL's §8/§10 per family; PS's defender term; the week's order (polity before passage); `protection_kept/failed` by outcome, trust by answer.
+6. **A.7 five actor kinds** (`corps` added; `site` never) — the fold §1 bracket, the spine mirror, §3.3, and every volume's actor list (ST §7.3/§7.4, RN §3.1, PT §15, CH §16b).
+7. **A.8 one ban grammar · A.9 one name `settlementFundingBand` · A.10 the readiness words (no `STRENGTH_BANDS` homonym; the fold §5 registers them; H13's `PolitySite` carries the readiness word) · A.11 `party_voiced`'s court arm (RN §5.5, PT §7.3, the fold §3.4 row) · A.12 `believedWhereabouts` one wording · A.13 the sea waypoint · A.14 `a|b` keys, `cut01`, `hash01` · A.15 `paragonLean` one form.**
+8. **The HOST re-check (folded in; cite the host document in `../refs/HOST-REQUIREMENTS-2026-10-18.md` by its `HR:<line>`):** H13's per-seat force band stays a SLOT (never "reads THE SITES' garrison record"); patrol facts go OUT through H9/H23, never "opens H16"; every registry row's WHERE kind is on the host document's closed list; the birth-door row is still an OWNER row; the map stays a map-only picture for patrols until the host lights them.
+
+## Then the general sweep (SKEPTIC.md's seven surfaces), with these round-3-specific questions
+- A cure that moved a problem to another volume unmarked (grep each lane's "routed" list against the other volume's text: is the other half APPLIED?).
+- Two volumes stating one rule in two wordings (the hold order, the composer, the readiness scale, the ban grammar, the funding read's name, the actor kinds, `believedWhereabouts`).
+- A pinned scenario row whose numbers no longer match the ruled composition (MN M50/M53, ST S21, PR's `shares.out` rows, PS P24/P25).
+- A fold §3.4 / §5 mirror written before the owning volume's round-3 cure (FOLD-V1's class — compare each registry row's words with the owning volume's HEARINGS section).
+- A DRAFT constant introduced this round without UNMEASURED; a pin introduced without an executable assertion.
+
+## Rules (SKEPTIC.md's, restated where they matter here)
+- Every finding: id `SEAMS-r3-<n>`, severity (BLOCKING = a builder or a DM would act wrongly · MAJOR = misleading or a real gap · MINOR = cosmetic), the site (volume § and line), the claim (quoted ≤1 line), the refuting receipt (`path :: symbol` with the quoted line at `81f1cd963`; a volume line; an ODQ §; an `HR:<line>`), and a one-sentence cure naming the OWNING volume. No finding without a receipt; reasoning-only is marked PLAUSIBLE. A finding a prior round DISPOSED is re-raised ONLY with a new receipt showing the disposition failed, and says "RE-RAISED".
+- Probes (node, read-only imports of the worktree's modules) go under `../skeptic/SEAMS-r3-probe/`. Do NOT edit any file except your report. Never git; never the test suite.
+- Write `../skeptic/SEAMS-r3.md`: COUNTS by severity first; the TABLE; then a **ROUTES** section — one line per volume (`PL · MN · RN · CH · PT · PS · ST · PR · FOLD`) listing the ids routed to it (the round-3b/4 disposition lanes grep this); then the three findings you would defend hardest; then one CONFIRMED-vs-PLAUSIBLE sentence.
+- REPORT DIET in your final message: ≤350 words + the table trimmed to BLOCKING and MAJOR; outcome first.
+
+## ADDED 2026-10-18 ~19:2x (the chair): RULINGS-ROUND3 §F THE BANNER (patrols in a kingdom) and L-BD (THE BODIES, compiling beside you) are ROUND 4 inputs — their ABSENCE from PR · PL · PS · the fold is NOT a finding this round; a contradiction between a volume as it stands and §F IS one (route it).

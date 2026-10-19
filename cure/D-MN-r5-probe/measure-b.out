@@ -1,0 +1,16 @@
+# (b) hidden ways
+src/domain/worldPulse/routeNetworkConsumers.js:97:export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+src/domain/worldPulse/routeNetworkConsumers.js:131:  return HIDDEN_PATH_KINDS.indexOf(text(kind)) >= 0;
+src/domain/worldPulse/routeNetworkConsumersTransit.js:63: * GRADE_LEG_MULTIPLIER is §9's "grade penalty" as a number, and the ladder is the
+src/domain/worldPulse/routeNetworkConsumersTransit.js:69: * THE HIDDEN RUNG IS 2 BECAUSE H3'S IS. `NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN`
+src/domain/worldPulse/routeNetworkConsumersTransit.js:83:  GRADE_LEG_MULTIPLIER: Object.freeze({
+src/domain/worldPulse/routeNetworkConsumersTransit.js:120:  const table = /** @type {Record<string, number>} */ (ROUTE_TRANSIT_TUNING.GRADE_LEG_MULTIPLIER);
+src/domain/worldPulse/envoyDiplomacy.js:258: * solve has always passed `'envoy'`, which is not in `HIDDEN_PATH_KINDS` — so every
+src/domain/worldPulse/npcConsequencesTuning.js:155:  HIDDEN_PATH_SLOWDOWN: 2,
+src/domain/worldPulse/npcCirculationTransit.js:117: * its arrival tick. A hidden way costs HIDDEN_PATH_SLOWDOWN times the nominal hop: the
+src/domain/worldPulse/npcCirculationTransit.js:141:    gradeMultiplier: hop.hidden ? NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : 1,
+src/domain/worldPulse/espionage/espionageDoctrine.js:90: * HIDDEN_PATH_KINDS franchise, ES-1). A `balanced` court keeps to lawful covers, so
+
+# hopWeeks / pathCost head
+653:export function pathCost(digest, fromId, toId, season = null) {
+728:export function hopWeeks(digest, fromId, toId, season = null, mode = null) {

@@ -1,0 +1,9 @@
+src/domain/worldPulse/warReasons.js	515	baseline=-
+src/domain/worldPulse/peaceReasons.js	362	baseline=-
+src/domain/worldPulse/warTerminationCauseTables.js	83	baseline=-
+src/domain/display/warAndRoadNames.js	286	baseline=-
+src/domain/worldPulse/warIntent.js	154	baseline=-
+src/domain/worldPulse/navalKernel.js	367	baseline=-
+src/domain/spatial/navalLayer.js	278	baseline=-
+src/domain/worldPulse/warCapacityReads.js	143	baseline=-
+src/domain/worldPulse/envoyErrandVocabulary.js	368	baseline=-

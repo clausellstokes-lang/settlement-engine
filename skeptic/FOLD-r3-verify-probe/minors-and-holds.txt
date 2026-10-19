@@ -1,0 +1,56 @@
+FOLD-r3-verify — the detail behind the report (V-FOLD-r3, 2026-10-18 19:1x EDT)
+
+READ: the README's RESUME BLOCK 2; VERIFY; RESEARCH-COMMON; every rulings file through RULINGS-ROUND3 §D–§F; CHAIR-NOTES; the BOARD's owner lines; the fold WHOLE (mtime 18:14); the spine §1 and its SP-4 r3 bracket; CN's fp-final brackets; FOLD-r2-verify; D-FOLD-r3 and its probe; the ROUTES of all nine cure/D-*-r3.md. Sibling volumes as they stand now. Master 81f1cd963, read-only.
+
+HOLDS (44)
+- HOST-r2-9, FOLD-V3 and FOLD-V4: all hold.
+- MN-V6 / A.3: holds. PS carries THE SHARED PRESENCE CAR (PS12, §10, PS-3, OD-PS-19); so do ST (§3.4, §9) and PR (OD-PR-43).
+- The other rulings hold: A.1, A.2, A.5–A.15, §D.1 and §E.1–E.3. Each owning volume's text now matches the fold's mirror:
+  - PL: §4.3, §8 families, OD-PL-52 and OD-PL-53.
+  - ST: §2.4 SITE_READINESS / garrisonBandOf, §3.4 σ, OD-ST-39.
+  - PR: R34 and OD-PR-41.
+  - MN: §3.3, §8, M37, M57.
+  - PS: §4.1 order and freeze, §2.5 field force, PS14 first sight.
+  - RN: §5.5 court arm, OD-RN-40, actRef.
+- All 12 minor notes and 3 routed carries hold.
+- All 7 route bundles hold.
+
+ROUTED TO FOLD, ALL CARRIED
+- CH (4): §3.1.25 ↳ r3, §5:730, §5:790, §5:792, §1 and the spine.
+- MN (5): §3.1.30, §6 ↳ r3, §3.4 menace_met/armies_meet ↳ r3, §5:786/789, A.7 rows; plus WC (6).
+- PL (4): §3.4:477, §5:683/785, OD-FC-45 ↳ r3.
+- PR (5): §6 ↳ r3, OD-FC-46 ↳ r3, §3.1.29 ↳ r3, §5:774/788/789, INBOX (l).
+- PS (4): the recount ↳ r3 card notes for P4, §6 ↳ r3, §3.4 armies_meet ↳ r3, §5:787/789; plus WC (5).
+- PT (3): §5:730, §3.4 party_voiced ↳ r3 and the five kinds, §3.4 WHERE road ↳ r3.
+- RN (5): OD-FC-47 ↳ r3, party_voiced ↳ r3, §5:791, OD-FC-28 ↳ r3, OD-FC-63 ↳ r3.
+- ST (4): §5:784 and §3.1.29 ↳ r3, §3.3.14 ↳ r3, §3.4 WHERE road ↳ r3, the recount ↳ r3 site_taken note for P4.
+
+MINOR NOTES (not counted)
+1. Which wave builds the composer. §6 ↳ r3 (fold:840) says it is built in "C14's first wave". The owning volumes name PS-3 (PS §10), ST-1 and PR-1 (OD-PR-43). The fold should read "the first of PS-3 · ST-1 · PR-1 · MN-1 to land", and P4's C14 row should carry it.
+2. A stale "0 hits". §9.6's r3 row "A.12 · A.13 · A.15 NOTED … paragonLean (0 hits)" is out of date: fold:790 and OD-FC-28 ↳ r3 now carry paragonLean. The row also omits A.15's roster row.
+3. The readiness-word census is slightly off.
+   - §5:784 says the five words, as quoted literals, are FREE "0 · 0".
+   - In fact 'skeleton' has 1 test hit (tests/domain/townLayoutV2.test.js, a layout key) and 'hollow' has 1 test hit (tests/domain/institutionStatusModel.test.js, a test string).
+   - 'full' is in 29 quoted src files, not 37. It is landed either way.
+4. The posture list is widened past its own definition.
+   - The spine's SP-4 r3 bracket and §3.3.12 ↳ r3 widen POSTURE_ACTOR_KINDS to include menace and party. That list is what the posture door admits: strategicPosture.js :: assertActor throws on any other kind.
+   - Both texts also say no posture is ever computed for a menace or the party. That clashes with §3.3.12 ↳ r2b's still-standing "the closed set of posture-bearing DECIDERS".
+   - Cure: keep the actor-ref convention's five kinds (hearings, deeds, regard) separate from the posture list. The posture list widens only to kinds that bear a posture, or keeps a refusal for those two.
+5. A cult filed under the band slot.
+   - §3.3.12 ↳ r2b (fold:408) says "a band or a cult rides the subject dial … until WC-12 mints a band actor".
+   - That predates RULINGS-ROUND3 §D.2 CORRECTED, under which a conclave sits on WF's ladder, never WC-12's band slot.
+   - It is unbracketed. Round 4 or P4 should bracket it beside BD's tokens.
+6. MN's departure is stated as settled.
+   - §3.4 armies_meet ↳ r3 and WC INBOX (6) state MN's REFINED 2 as settled: a column at a menace-held town meets it as menace_met, not as the ruling's literal armies_meet.
+   - It is MN's open question 1 to the chair. The fold should mark it vetoable.
+7. Quotes and counts.
+   - §5:792 quotes beliefMap.js's ground-truth constant comment ("Ground-truth war readiness for a warPosture state …") as the gloss for the picture field. The field's own typedef reads "believed war readiness 0..1".
+   - §9.6's r3 block has no counts line. The log has 45/45: cured 39 · noted 6.
+8. A.5's families are mirrored in §5 and OD-FC-45 ↳ r3 only. §3.4's fealty_break and relief_answer rows name fealty rows without flags. No contradiction; no text is owed.
+
+FOR THE CHAIR
+- briefs/L-FOLD2.md item 4 still lists four actor kinds, "settlement · person · party · menace", which predates A.7.
+- Item 5 says to bracket relief_answer "as ONE kind for every siege", but §3.4 struck it as a kind in r1 and RULINGS-ROUND2 A.7 reads it as one DECISION.
+- If P4 folds either item literally, it re-opens it.
+- PL (OD-PL-33/§15) and PR (§15.2) still carry `full · manned · … · empty` and readiness01. These are D-FOLD-r3's and D-ST-r3's routes, and their own verifiers' to judge.
+- PL P45 still reads "M's homeDefense plus H's share", not the field force (PS's route to PL).

@@ -1,0 +1,10 @@
+# (a) stage order + hop latency (pulseKernel / rumorNetwork)
+2097:    const rumors = advanceRumorLedgers({
+2194:    const envoys = advanceEnvoyDiplomacyPulse({
+2527:    const calamity = advanceCalamity({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+693:          const travelTicks = Math.max(1, finiteNumber(weeks, 1));
+679:      if (finiteNumber(record.arrivalTick, Infinity) > now) continue; // in transit
+
+# (b) hidden ways
+(eval):1: no matches found: --include=*.js

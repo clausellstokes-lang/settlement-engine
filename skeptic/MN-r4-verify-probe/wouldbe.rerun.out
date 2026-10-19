@@ -1,0 +1,13 @@
+siege birthThreshold = 0.72
+edge hostile  conflict 0.60: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge hostile  conflict 0.72: cured receipt ["merewick"]   · old (hostileNeighborsOf alone) ["merewick"]
+edge hostile  conflict 0.90: cured receipt ["merewick"]   · old (hostileNeighborsOf alone) ["merewick"]
+edge cold_war conflict 0.60: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge cold_war conflict 0.72: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge cold_war conflict 0.90: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge rival    conflict 0.60: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge rival    conflict 0.72: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge rival    conflict 0.90: cured receipt []             · old (hostileNeighborsOf alone) ["merewick"]
+edge allied   conflict 0.60: cured receipt []             · old (hostileNeighborsOf alone) []
+edge allied   conflict 0.72: cured receipt []             · old (hostileNeighborsOf alone) []
+edge allied   conflict 0.90: cured receipt []             · old (hostileNeighborsOf alone) []

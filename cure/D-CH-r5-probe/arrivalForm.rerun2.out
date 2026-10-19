@@ -1,0 +1,23 @@
+[
+ {
+  "label": "no digest (aspatial)",
+  "hopWeeks": null,
+  "bareSum": 10,
+  "bareInTransitAt10": false,
+  "rnGuarded": 11
+ },
+ {
+  "label": "empty digest, unknown pair",
+  "hopWeeks": null,
+  "bareSum": 10,
+  "bareInTransitAt10": false,
+  "rnGuarded": 11
+ },
+ {
+  "label": "same town",
+  "hopWeeks": 0,
+  "bareSum": 10,
+  "bareInTransitAt10": false,
+  "rnGuarded": 10
+ }
+]

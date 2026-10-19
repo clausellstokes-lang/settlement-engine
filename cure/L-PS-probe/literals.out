@@ -1,0 +1,51 @@
+== 'passage' literals:
+== 'tolerance' literals:
+== 'trespass' literals:
+== 'incursion' literals:
+src/domain/threatProfile.js:99:    vector: 'incursion',
+== 'tolerated' literals:
+src/domain/magicProfile.js:57:  'absent', 'forbidden', 'restricted', 'regulated', 'tolerated', 'celebrated',
+src/domain/magicProfile.js:142:  let legality = (magic === 'high' || magic === 'pervasive') ? 'tolerated' :
+src/domain/settlement.schema.js:1685: * @property {'forbidden'|'restricted'|'regulated'|'tolerated'|'celebrated'} legality
+== 'contested' literals:
+src/pdf/sections/FaithWar.jsx:86:  return { label: 'contested', tone: 'bad' };
+src/pdf/lib/headlines.js:74:  if (stab === 'tense' || stab === 'contested') return 'warn';
+src/components/settlement/faithPanelModel.js:43:  return { label: 'contested', tone: 'bad' };
+src/components/new/SummaryTab.jsx:55:    contested:{c:'#7a3a1a',bg:'#fdf4ec',br:'#d4b090',label:'contested'},
+src/components/howto/LivingWorldTab.jsx:153:  return { label: 'contested', color: RED };
+src/generators/power/stressFactions.js:55:          ((N.power = Math.round(N.power * 0.4)), (N.modifiers = [...(N.modifiers || []), 'contested'])),
+== 'refused' literals:
+src/components/settlement/eventComposer/EventComposerDeityField.jsx:83:    return probe.action !== 'refused';
+src/components/map/HeraldAdjudication.jsx:186:    // mis-attribution the mark exists to prevent. 'refused' and 'superseded' are
+src/components/map/HeraldAdjudication.jsx:191:      : status === 'refused'
+src/components/map/HeraldAdjudication.jsx:402:        .filter(p => ['applied', 'dismissed', 'refused', 'superseded'].includes(p.status) && touchesFocus(p))
+src/components/map/HeraldAdjudication.jsx:406:          by: p.status === 'refused'
+src/components/map/HeraldAdjudication.jsx:466:        : status === 'applied' || status === 'refused' || status === 'superseded';
+== 'granted' literals:
+src/data/dossierCausalProse.generated.js:2471:      "granted"
+src/data/dossierCausalProse.generated.js:2527:            "granted"
+src/data/dossierCausalProse.generated.js:2538:            "granted"
+src/domain/prose/entryLexicons.js:261:    'founded', 'razed', 'rebuilt', 'burned', 'seized', 'granted', 'revoked',
+== 'welcomed' literals:
+== 'complied' literals:
+== 'rerouted' literals:
+== 'waited' literals:
+== 'unopposed' literals:
+== 'escort' literals:
+src/generators/services/serviceClassifier.js:325:                                      y.includes('escort') ||
+src/generators/services/serviceAvailability.js:13:    svc.includes('escort') ||
+== 'watch' literals:
+src/design/organic/ornament/pools.js:22:  { kind: 'watch', name: 'tower', draw: (p) =>
+src/components/organic/samples/fixtures.js:21:  emblemKind: 'watch',
+src/components/new/SummaryTab.jsx:28:  const hasArmed=insts.some(n=>['garrison','militia','watch','guard','mercenary'].some(k=>n.includes(k)));
+src/lib/entities.js:8: *     name.toLowerCase().includes('watch')
+src/generators/power/rulingStructure.js:731:      || nativeSemanticName(i).toLowerCase().includes('watch')
+src/generators/power/governanceNarrative.js:337:    ['garrison', 'barracks', 'militia', 'watch', 'guard', 'mercenary'],
+== 'transit' literals:
+src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx:55:            value={tradeEntrepot ? 'transit' : 'local'}
+src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx:56:            onChange={e => setTradeEntrepot(e.target.value === 'transit')}
+src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx:60:            <option value="transit">Entrepôt transit</option>
+src/generators/steps/generateEconomy.js:99:    ensure('transit', String(l), null);
+src/domain/region/goodsCatalog.js:252:  'imports', 'exports', 'import', 'export', 'taxed', 'transit', 'only',
+src/domain/events/batch.js:413:  for (const key of ['primaryExports', 'primaryImports', 'transit', 'exports', 'imports']) {
+== 'overstay' literals:

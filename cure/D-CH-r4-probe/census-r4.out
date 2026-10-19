@@ -1,0 +1,47 @@
+(eval):1: bad math expression: operand expected at `'\"'
+hunt_body | src files=0 · quoted-literal files=0 · tests=0 · master docs=0 · ledger docs=0
+(eval):1: bad math expression: operand expected at `'\"'
+hunt_won | src files=0 · quoted-literal files=0 · tests=0 · master docs=0 · ledger docs=0
+(eval):1: bad math expression: operand expected at `'\"'
+leads | src files=45 · quoted-literal files=0 · tests=53 · master docs=27 · ledger docs=41
+(eval):1: bad math expression: operand expected at `'\"'
+isWardenParagon | src files=0 · quoted-literal files=0 · tests=0 · master docs=0 · ledger docs=0
+(eval):1: bad math expression: operand expected at `'\"'
+bodyId | src files=2 · quoted-literal files=0 · tests=0 · master docs=4 · ledger docs=4
+(eval):1: bad math expression: operand expected at `'\"'
+employerId | src files=0 · quoted-literal files=0 · tests=0 · master docs=0 · ledger docs=3
+(eval):1: bad math expression: operand expected at `'\"'
+hunt | src files=22 · quoted-literal files=0 · tests=19 · master docs=32 · ledger docs=80
+(eval):1: bad math expression: operand expected at `'\"'
+warden | src files=18 · quoted-literal files=0 · tests=8 · master docs=8 · ledger docs=21
+
+inferRoleArchetype labels (npcAgency.js :: NPC_ROLE_ARCHETYPES):
+    labels: ['ruler', 'lord', 'lady', 'mayor', 'governor', 'reeve', 'chief', 'prince', 'duke', 'baron'],
+    labels: ['heir', 'claimant', 'scion', 'successor'],
+    labels: ['captain', 'marshal', 'general', 'guard', 'commander', 'knight', 'sheriff'],
+    labels: ['merchant', 'guild', 'factor', 'trader', 'banker', 'caravan', 'broker'],
+    labels: ['priest', 'cleric', 'bishop', 'abbot', 'oracle', 'cult', 'temple'],
+    labels: ['thief', 'gang', 'smuggler', 'crime', 'bandit', 'fence', 'assassin'],
+    labels: ['mage', 'wizard', 'sage', 'arcanist', 'witch', 'alchemist'],
+    labels: ['judge', 'clerk', 'elder', 'steward', 'council', 'scribe'],
+    labels: ['healer', 'doctor', 'surgeon', 'midwife', 'apothecary'],
+    labels: ['miner', 'farmer', 'forester', 'labor', 'teamster', 'dock', 'mill'],
+    labels: ['envoy', 'ambassador', 'emissary', 'outsider', 'foreign', 'legate'],
+    labels: ['rebel', 'agitator', 'dissident', 'reformer', 'radical', 'prophet'],
+    if ((def.labels || []).some(label => text.includes(label))) return role;
+
+roleCategory.js military/government keywords:
+  government: [
+    'elder', 'mayor', 'reeve', 'steward', 'magistrate', 'council', 'governor',
+    'chancellor', 'judge', 'sheriff', 'official', 'chamberlain',
+  ],
+  military: [
+    'captain', 'commander', 'constable', 'warden', 'marshal', 'quartermaster',
+    'garrison', 'sergeant', 'watch chief', 'city watch', 'guard',
+  ],
+
+factionRoles.js:
+131:  knightdame: 'watch', warden: 'watch', sergeantatarms: 'watch',
+
+HIDDEN_PATH_SLOWDOWN:
+155:  HIDDEN_PATH_SLOWDOWN: 2,

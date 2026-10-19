@@ -1,0 +1,29 @@
+## R1 insertions-only (diff vs D-FOLD-r3 snapshots, no git)
+fold +79 -0; spine +2 -0; cn diff lines        0
+## R2 pipes
+checked 66 bad 0 inserted 79
+## R3 enemy_in_service reads
+relationshipTypeBetween(graph, worldState, courtId, servedId) === 'hostile'
+readBeliefRelationship(observerId, subjectId, worldState, truthType)
+0
+36:export function relationshipTypeBetween(graph, worldState, a, b) {
+448:export function readBeliefRelationship(observerId, subjectId, worldState, truthType) {
+## R4 A.3 PS half
+PS presenceComposer: 0 shared car: 8 | ST: 7 PR: 10 MN: 5
+## R5 superseded words in fold
+full · manned: 0
+readiness01: 1
+polity resolutions: 0
+come before passage: 0
+adds nothing: 0
+## R6 posture door
+97:export const POSTURE_ACTOR_KINDS = Object.freeze(['settlement']);
+159:  if (!POSTURE_ACTOR_KINDS.includes(kind) || !id) {
+162:      + ` actor set is {${POSTURE_ACTOR_KINDS.join(', ')}} and widening it is an SP-4a`
+## R7 census
+'at_strength' src:       0 tests:       0
+'manned' src:       0 tests:       0
+'sparse' src:       1 tests:       1
+'skeleton' src:       0 tests:       1
+'hollow' src:       0 tests:       1
+'full' src:       29

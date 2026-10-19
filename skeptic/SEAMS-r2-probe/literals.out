@@ -1,0 +1,37 @@
+engaged	0	 
+resting	0	 
+looking	0	 
+escorting	0	 
+converging	0	 
+on_round	0	 
+quiet	27	src/components/compendium/RegistryHubs.jsx src/domain/worldPulse/conquestIntent.js src/domain/worldPulse/warCosts.js 
+present	32	src/design/tokens.js src/design/boundBook.js src/generators/steps/resolveResources.js 
+pressing	20	src/domain/worldPulse/conquestIntent.js src/domain/worldPulse/warCosts.js src/domain/worldPulse/razingExecution.js 
+decisive	18	src/domain/worldPulse/conquestIntent.js src/domain/worldPulse/warCosts.js src/domain/worldPulse/razingExecution.js 
+welcomed	0	 
+tolerated	2	src/domain/magicProfile.js src/domain/settlement.schema.js 
+barred	0	 
+trespassing	0	 
+overstayed	0	 
+funded	1	src/domain/worldPulse/magicRegimeModel.js 
+unfunded	0	 
+meagre	0	 
+lavish	0	 
+at_hand	0	 
+untied	0	 
+screened	0	 
+withdrew	0	 
+cut_down	0	 
+driven_off	0	 
+rides	1	src/domain/worldPulse/espionage/espionageRider.js 
+will_see	0	 
+detachment	0	 
+sent	4	src/components/auth/ForgotPasswordFlow.jsx src/components/account/AccountSecuritySection.jsx src/lib/operatorMessageExport.js 
+kept	2	src/domain/regenerationDelta.js src/domain/display/heraldCausalVoice.js 
+worn	3	src/domain/townCartography/cartographyBuildings.js src/domain/townScene/cartographyContract.js src/domain/display/heraldIntegrity.js 
+ruined	24	src/generators/defenseGenerator.js src/domain/institutions/institutionRoster.js src/domain/institutions/defenseInstitutionBuckets.js 
+sound	4	src/domain/townMap/arch/conditionGrammar.js src/domain/worldPulse/houseActs.js src/domain/townCartography/cartographyBuildings.js 
+fair	12	src/generators/priorityHelpers.js src/generators/stressGenerator.js src/generators/steps/stressConfirmPass.js 
+wide	1	src/components/organic/Manuscript.jsx 
+scant	1	src/domain/worldPulse/beliefAxisSubjects.js 
+held	26	src/components/map/gatheredDocket.js src/components/founders/ChairPlate.jsx src/components/account/AccountSeatTransferPanel.jsx 

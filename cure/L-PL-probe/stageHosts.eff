@@ -1,0 +1,8 @@
+  384                  src/domain/worldPulse/causeLifecycle.js
+  764                  src/domain/worldPulse/convergence.js
+   55                  src/domain/worldPulse/dispositionChannels.js
+  332                  src/domain/worldPulse/envoyPulse.js
+  633                  src/domain/worldPulse/momentum.js
+  362                  src/domain/worldPulse/peaceReasons.js
+  735                  src/domain/worldPulse/settlementLifecycleKernel.js
+  515                  src/domain/worldPulse/warReasons.js

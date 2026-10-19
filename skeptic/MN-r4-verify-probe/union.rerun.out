@@ -1,0 +1,7 @@
+ENTER 0.55 EXIT 0.3 DWELL 6; raid part p=0.35; T* = 0.3077
+ramp T=0.0000 raw=0.3500 → phase after one step from calm: calm
+ramp T=0.2000 raw=0.4800 → phase after one step from calm: calm
+ramp T=0.3000 raw=0.5450 → phase after one step from calm: calm
+ramp T=0.3077 raw=0.5500 → phase after one step from calm: embattled
+ramp T=0.3100 raw=0.5515 → phase after one step from calm: embattled
+ramp T=0.3600 raw=0.5840 → phase after one step from calm: embattled

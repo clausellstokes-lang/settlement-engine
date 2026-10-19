@@ -1,0 +1,36 @@
+# receipts gathered by D-CH-r2 at master 81f1cd963 (rg/sed only)
+119:export const ENVOY_PURPOSES = Object.freeze(['sue', 'self_parlay']);
+581:    || !from || !to || from === to || !PURPOSE_SET.has(purpose)
+470:    rosterIdentity: candidate.identity,
+141:function unclaimedPlacementAt(position, settlementId, notAfterTick) {
+142-  if (!position?.placed || notAfterTick == null) return false;
+143-  const record = asObject(position.record);
+144-  return text(record.hostSettlementId) === text(settlementId)
+63:function envoyIsPhysicallyHome(worldState, delivery) {
+64-  const npcId = String(delivery?.npcId || '');
+65-  const originId = String(delivery?.from || '');
+66-  if (!npcId || !originId) return false;
+67-  const ledger = npcLedgerOf(worldState);
+68-  if (Object.prototype.hasOwnProperty.call(ledger.roamers, npcId)) return false;
+69-  const record = asObject(ledger.placed[npcId]);
+70-  return String(record.hostSettlementId || '') === originId
+71-    && Object.keys(asObject(record.transit)).length === 0
+72-    && Object.keys(asObject(record.residency)).length === 0
+73-    && Object.keys(asObject(record.dmAssignment)).length === 0
+74-    && record.whereaboutsUnknown !== true;
+75-}
+135:  const nominal = hopWeeks(/** @type {SpatialDigest} */ (digest), text(fromId), hop.toId);
+653:export function pathCost(digest, fromId, toId, season = null) {
+728:export function hopWeeks(digest, fromId, toId, season = null, mode = null) {
+992:function routingAdjacency(digest, a, b) {
+567:      const peaceDecision = transportedDecision || readWarPeaceDecision({
+578:        publishRuling(peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }));
+584:          decision: peaceDecision,
+635:          decision: peaceDecision,
+667:      publishRuling(peaceDecisionRulingEvidence({ outcome, decision: peaceDecision, tick }));
+490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
+174:    proposalPayload: null,
+297: * @property {string} settlementId  the settlement whose door is shut
+299: * @property {number} [untilTick]   WINDOWED variant: the first tick the door reopens
+18:export function seatKey(seat) {
+649:    const sieged = applyBlockadeTransportImpairment(stocked.settlement, blockade, { now }); const vaulted = advanceTreasury(sieged, { interval: tickInterval, tick: worldState.tick, deployment, blo

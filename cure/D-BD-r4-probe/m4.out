@@ -1,0 +1,32 @@
+### HB volume key shapes
+7:its signature `habitConditioningEnabled` and `habitAnticipationEnabled` — the
+14:[CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: none (`habitConditioningEnabled` is manifested and lit in no preset; HB Q1's two fields are signed only by the chair's J-EM-15(2) reading of the owner's 2026-09-23 word, vetoable) · BUILT DARK: HB-0 substrate (`e188760b8` + HB-0B `c777a158d`, 2026-08-14: `habit/habitVocabulary.js`, `habit/habitCurve.js`), HB-1 vocabularies + fork registry (`1013d58ba`: `strategyMoves.js`; `habitForkRegistry.js` holds 104 rows — 84 DEFER, 20 STAY, 0 LEARN; two charter clauses REVERSED by the build, see :397), HB-2 ledger (`de214782b`: `habit/habitLedger.js` + `habit/habitGate.js`; the persisted shape differs from §1.1, see :759, and `writeHabits` has ZERO src callers, habitLedger.js:7) · UNBUILT: HB-3..HB-9 (no `habitCredit.js`; `habitFactorFor`, `doctrineBands`, `anticipationFactorFor` and `doctrine_shifted` return zero src hits at 00b648c9d). The 08-14 measurement above was taken at `60083174`, before those three landings, and is refuted at the code of record.]
+270:2. Census 1 recommended ruling migration and the NPC grain out of scope. Refinement 8
+330:**THE PLEDGE BOOK MAKES IT UNNECESSARY** (§3a). The habit ledger keeps its OWN
+441:`npcLadderKernel`, `mapDress`. **RULED (J-HB-17): THE HABIT LEDGER STAMPS WEEKS, NEVER
+700:GRAINS (four channels vs twelve classes); (c) `dispositionLedger` is itself one of
+705:`habitConditioningEnabled` becomes unusable without `dispositionChannelsEnabled`.
+714:other NPC-grain fork is a STAY or DEFER row with a written reason. This is the
+716:NPC set, never the roster. [CORRECTED 2026-10-16 (coherence fold) — the owner's 2026-10-02 generals messages ("with habits forming from success and failures and their reputation regarding as well"; enemies "remember how that general acts") and the chair's rulings 14a/14d/14d′ (fp-kit owner-words/2026-10-02-the-generals.md:65-88, vetoable) route a PER-GENERAL habit, and a per-court belief about how a general acts, through THIS family ("never a second habit model"), accrued by the AFFECTED enemies only. Three seams are unreconciled: an NPC grain this ruling permits only where machinery exists (no general-dial fork is in the registry), a court→NPC subject where the habit sheet is court→court, and affected-only accrual where refinement 13 accrues from any hop-worn report. A person-grain extension is a persisted-shape question the fold did not rule (findings HB Q-HB-B); the generals' loop is also the fold's chosen home for the felt anticipation (OD-FC-23, :2619).]
+722:### 1.1 The habit ledger
+776:**Why an array pair and not an object per row.** A habit ledger is the widest
+870:The habit key's third dimension is a token from **the deciding site's OWN frozen
+910:The habit ledger is the one place in this program where cost is a real design input,
+933:`preview / forecast` — so the habit ledger answers on FIFTEEN.** This clause states the
+934:habit ledger's answer on each; §8.5 carries the full table with the writers named.
+1012:flags are virtual and lit in no preset, and `habitConditioningEnabled` will be exactly
+1025:hits across `src/`: `habitStrength` · `habitConditioningEnabled` ·
+1042:| `habitConditioningEnabled` | HB-2 | the ledger, the pledge book, the credit fold, and every chooser's habit term |
+1069:  return rules.habitConditioningEnabled === true;      // BY-NAME strict read
+1110:`believedDoctrineEnabled`, which lights only after both `habitConditioningEnabled` and
+1151:story in `other`, and `soakEvidence: 'unobserved'`. `habitConditioningEnabled`'s row
+1153:habit ledger IS a top-level sub-key and IS censusable — the `vengeanceLicenses`
+1214:`habitConditioningEnabled` is dark — so a fence that lights only
+1342:`habitConditioningEnabled` and dropped when absent (dark worlds byte-identical), and
+2469:   THE ONE TRUTH DOOR. ⚠ The habit ledger arrives as an OPTS MEMBER (`{ habitLedger }`),
+### master habit modules
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/lib/spatialUsage.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/certification/subsystemRowsVirtual.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/habit/habitGate.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/habit/habitLedger.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/simulationRules.js

@@ -1,0 +1,15 @@
+src/domain/spatial/commodityFlow.js	474	baseline=-
+src/domain/spatial/smuggle.js	119	baseline=-
+src/domain/spatial/embattlement.js	172	baseline=-
+src/domain/worldPulse/roadsKernel.js	838	baseline=838
+src/domain/worldPulse/armyTransitKernel.js	798	baseline=-
+src/domain/worldPulse/warCapacityReads.js	143	baseline=-
+src/domain/spatial/migrationRumors.js	83	baseline=-
+src/domain/spatial/distanceRead.js	544	baseline=-
+src/domain/worldPulse/namedPersonTransit.js	96	baseline=-
+src/domain/worldPulse/stressorDynamics.js	759	baseline=-
+src/domain/worldPulse/stressorGates.js	609	baseline=-
+src/domain/worldPulse/calamityKernel.js	461	baseline=-
+src/domain/worldPulse/envoyPulse.js	332	baseline=-
+src/domain/worldPulse/martialReadiness.js	264	baseline=-
+src/domain/worldPulse/settlementLifecycleKernel.js	735	baseline=-

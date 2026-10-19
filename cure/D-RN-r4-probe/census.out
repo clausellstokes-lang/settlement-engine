@@ -1,0 +1,14 @@
+body_act	src=0	tests=0	masterdocs=0	ledgerdocs=4
+believedBodyOf	src=0	tests=0	masterdocs=0	ledgerdocs=7
+postureBandOf	src=2	tests=0	masterdocs=0	ledgerdocs=0
+POSTURE_BANDS	src=3	tests=3	masterdocs=0	ledgerdocs=0
+relationFactor	src=0	tests=0	masterdocs=0	ledgerdocs=0
+REGARD_POSTURE	src=0	tests=0	masterdocs=0	ledgerdocs=0
+carriedFrom	src=0	tests=0	masterdocs=0	ledgerdocs=0
+--- 'g: literal prefix in src (quoted)
+--- leak:body
+--- postureBandOf uses
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeetingStage.js:253:function postureBandOf(relationshipType) {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeetingStage.js:468:    const posture = postureBandOf(relationshipTypeBetweenIdx(
+ledBy	src=0	tests=0	masterdocs=0	ledgerdocs=0
+leads	src=60	tests=76	masterdocs=58	ledgerdocs=81

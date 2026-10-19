@@ -1,0 +1,54 @@
+== 'blocked' literals:
+src/pdf/sections/EconomicsTrade.jsx:276:              : c.activationState === 'blocked'
+src/pdf/sections/Services.jsx:206:  const tone = status === 'impaired' || status === 'blocked' || status === 'collapsing' || chain.resourceDepleted
+src/pdf/sections/Services.jsx:213:  const statusLabel = status === 'impaired' || status === 'blocked' || status === 'collapsing'
+src/components/founders/RequestChairLetter.jsx:43:  if (reason === 'blocked') return 'That wording can’t be used here. Think this is wrong? Feedback & support.';
+src/components/account/FounderChairBio.jsx:41:  if (reason === 'blocked') return 'That wording can’t be used here. Think this is wrong? Feedback & support.';
+src/lib/foundersHall.js:397: * @property {'empty'|'short'|'long'|'blocked'|null} reason
+== 'barred' literals:
+== 'opposed' literals:
+src/generators/steps/neighbourFactions.js:136:          result: 'opposed',
+src/domain/worldPulse/anticipatedReactions.js:57:export const REACTION_BANDS = Object.freeze(['supportive', 'indifferent', 'wary', 'opposed']);
+src/domain/worldPulse/anticipatedReactions.js:254:    band = readiness >= REACTION_TUNING.MOBILIZED_AT ? 'opposed' : 'wary';
+src/domain/worldPulse/anticipatedReactions.js:324:    if (r.band !== 'opposed' || r.casus !== true) continue;
+src/domain/worldPulse/anticipatedReactions.js:402:        band: 'opposed',
+src/domain/worldPulse/npcLadderKernel.js:175: * @property {string} signalVar @property {'convergent'|'opposed'} kind
+== 'suffered' literals:
+== 'armed_incursion' literals:
+== 'unanswered' literals:
+== 'let_pass' literals:
+== 'withdrawn' literals:
+src/components/edit/DecreeRegistryPage.jsx:111:  Object.freeze({ status: 'withdrawn', heading: 'Withdrawn' }),
+src/domain/edit/registry.js:54: * @typedef {'applied'|'pending'|'withdrawn'} DecreeStatus
+src/domain/edit/registry.js:68:export const DECREE_STATUSES = Object.freeze(/** @type {const} */ (['applied', 'pending', 'withdrawn']));
+src/domain/certification/infoConvergenceContract.js:231:      Object.freeze({ wave: 'IN-3', name: 'engagement', tokens: Object.freeze(['burned', 'withdrawn', 'gone_quiet'
+src/domain/certification/infoConvergenceContract.js:232:      Object.freeze({ wave: 'IN-5', name: 'arc', tokens: Object.freeze(['burned', 'withdrawn', 'gone_quiet']) }),
+src/domain/certification/infoConvergenceContract.js:237:      ending('withdrawn', 'OWED', { owedBy: 'IN-5' }),
+== 'withdrew' literals:
+== 'overstay' literals:
+== 'hostility' literals:
+src/domain/worldPulse/demographicsPushPull.js:400:  return pressureScore(pIndex, settlementId, 'hostility', 0);
+src/domain/worldPulse/relationshipEvolution.js:239:    hostility: pressureFor(pressureIdx, saveId, "hostility"),
+src/domain/worldPulse/demographicsMigration.js:299:    const hostility = pressureScore(input.pIndex, destId, 'hostility', 0);
+src/domain/worldPulse/demographicsMigration.js:330:  const hostility = pressureScore(input.pIndex, input.settlementId, 'hostility', 0);
+src/domain/worldPulse/pressureModel.js:258:      kind: 'hostility',
+src/domain/autonomy/signalRegistry.js:73:  'food', 'disease', 'conflict', 'hostility', 'trade', 'economy', 'legitimacy', 'defense', 'crime',
+== 'intention' literals:
+== 'urgency' literals:
+== 'noticed' literals:
+== 'unnoticed' literals:
+== 'quiet' literals:
+src/components/compendium/RegistryHubs.jsx:203:              basis to choose among the four otherwise-identical "quiet" presets. */}
+src/domain/worldPulse/conquestIntent.js:56:  'unknown', 'quiet', 'present', 'pressing', 'decisive',
+src/domain/worldPulse/warCosts.js:45:  'quiet',
+src/domain/worldPulse/warCosts.js:240:/** @param {unknown} score @returns {'quiet'|'present'|'pressing'|'decisive'} */
+src/domain/worldPulse/warCosts.js:246:  return 'quiet';
+src/domain/worldPulse/conquestFeasibility.js:84:  'unknown', 'quiet', 'present', 'pressing', 'decisive',
+== 'watched' literals:
+src/data/dossierCausalProse.generated.js:3479:      "watched"
+src/data/dossierCausalProse.generated.js:3511:            "watched"
+src/domain/settlement.schema.js:1620: * @property {string} safety      'lawless' | 'unsafe' | 'watched' | 'orderly' | 'fortified'
+src/domain/townMap/townLayoutV2.js:306:      category: assignment.syntheticDistrict.category, wealth: 'modest', safety: 'watched',
+src/domain/townMap/townMapModel.js:392:      safety: 'watched',
+src/domain/districtProfile.js:41:const SAFETY_BANDS = Object.freeze(['lawless', 'unsafe', 'watched', 'orderly', 'fortified']);
+== 'shadowed' literals:

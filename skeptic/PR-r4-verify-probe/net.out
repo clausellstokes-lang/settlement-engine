@@ -1,0 +1,26 @@
+crown staunch (hold01 ≤ 0.6999) · direct vassal · max lent riders = floor(n × share01 × hold01):
+  hamlet(n≤1) marginal:0 present:0 strong:0 dominant:0
+  village(n≤2) marginal:0 present:0 strong:0 dominant:0
+  town(n≤4) marginal:0 present:0 strong:1 dominant:1
+  city(n≤8) marginal:0 present:1 strong:2 dominant:2
+  metropolis(n≤12) marginal:0 present:2 strong:3 dominant:3
+crown staunch (hold01 ≤ 0.6999) · sub vassal · max lent riders = floor(n × share01 × hold01):
+  hamlet(n≤1) marginal:0 present:0 strong:0 dominant:0
+  village(n≤2) marginal:0 present:0 strong:0 dominant:0
+  town(n≤4) marginal:0 present:0 strong:0 dominant:0
+  city(n≤8) marginal:0 present:0 strong:0 dominant:0
+  metropolis(n≤12) marginal:0 present:0 strong:0 dominant:0
+crown unbroken (hold01 ≤ 1) · direct vassal · max lent riders = floor(n × share01 × hold01):
+  hamlet(n≤1) marginal:0 present:0 strong:0 dominant:0
+  village(n≤2) marginal:0 present:0 strong:0 dominant:0
+  town(n≤4) marginal:0 present:1 strong:1 dominant:1
+  city(n≤8) marginal:0 present:2 strong:3 dominant:3
+  metropolis(n≤12) marginal:1 present:3 strong:4 dominant:5
+crown unbroken (hold01 ≤ 1) · sub vassal · max lent riders = floor(n × share01 × hold01):
+  hamlet(n≤1) marginal:0 present:0 strong:0 dominant:0
+  village(n≤2) marginal:0 present:0 strong:0 dominant:0
+  town(n≤4) marginal:0 present:0 strong:0 dominant:0
+  city(n≤8) marginal:0 present:0 strong:0 dominant:1
+  metropolis(n≤12) marginal:0 present:0 strong:1 dominant:1
+R39 (crown staunch; Ashford a sub-vassal): the most Ashford can ever lend = 0
+ten town vassals (n 4, strong 0.38) at hold 0.60: PL F.2's Σ riders × share01 × hold01 = 9.12 → floor of the sum 9; PR's per-member floor summed = 0

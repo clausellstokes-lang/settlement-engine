@@ -1,0 +1,21 @@
+city 0 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0429,"crime":0.12} | base conflict 0.029 crime 0.470
+city 1 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0571,"crime":0.12} | base conflict 0.057 crime 0.480
+city 2 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0429,"crime":0.12} | base conflict 0.000 crime 0.470
+city 3 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0571,"crime":0.12} | base conflict 0.029 crime 0.470
+city 4 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0429,"crime":0.12} | base conflict 0.086 crime 0.470
+city 5 pressure deltas at severity 0.8: {"conflict":0.1286,"defense":0.0429,"crime":0.12} | base conflict 0.000 crime 0.470
+city 6 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0571,"crime":0.12} | base conflict 0.014 crime 0.470
+city 7 pressure deltas at severity 0.8: {"conflict":0.1429,"defense":0.0429,"crime":0.12} | base conflict 0.000 crime 0.470
+--- the birth rules that read the moved kinds (stressorsCore pressureKinds / birthThreshold):
+siege                          pressureKinds ["conflict"] birthThreshold 0.72 <- moved: conflict
+occupation                     pressureKinds ["conflict","legitimacy"] birthThreshold 0.76 <- moved: conflict
+betrayal                       pressureKinds ["legitimacy","crime"] birthThreshold 0.7 <- moved: crime
+infiltration                   pressureKinds ["crime","legitimacy"] birthThreshold 0.58 <- moved: crime
+monster_raider_pressure        pressureKinds ["conflict","crime"] birthThreshold 0.6 <- moved: conflict,crime
+insurgency                     pressureKinds ["legitimacy","conflict"] birthThreshold 0.68 <- moved: conflict
+slave_revolt                   pressureKinds ["legitimacy","conflict"] birthThreshold 0.78 <- moved: conflict
+rebellion                      pressureKinds ["legitimacy","conflict"] birthThreshold 0.7 <- moved: conflict
+wartime                        pressureKinds ["conflict"] birthThreshold 0.64 <- moved: conflict
+mass_migration                 pressureKinds ["food","conflict","disease"] birthThreshold 0.62 <- moved: conflict
+criminal_corridor              pressureKinds ["crime"] birthThreshold 0.56 <- moved: crime
+magical_instability            pressureKinds ["legitimacy","disease","conflict"] birthThreshold 0.72 <- moved: conflict

@@ -1,0 +1,5 @@
+src/domain/worldPulse/npcDmVerbs.js	711	baseline=-
+src/domain/worldPulse/npcDmVerbAuthority.js	127	baseline=-
+src/store/campaignPulseHelpers.js	244	baseline=-
+src/store/campaignAdvanceSession.js	700	baseline=-
+src/store/settlementSlice.js	816	baseline=816

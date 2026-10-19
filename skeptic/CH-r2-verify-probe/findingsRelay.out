@@ -1,0 +1,6 @@
+maxHopsFor(notable seed, scope settlement) = 2
+first heard (arrivalTick <= tick): {"meet":{"heardAtTick":10,"hop":0,"partyIds":["post"],"whereId":"post","visibility":"mechanical","what":"paragon_findings"},"home":{"heardAtTick":11,"hop":1,"partyIds":["post"],"whereId":"post","visibility":"mechanical","what":"paragon_findings"},"third":{"heardAtTick":11,"hop":1,"partyIds":["post"],"whereId":"post","visibility":"mechanical","what":"paragon_findings"}}
+meet none
+home none
+third none
+leak re-seed at t14 merged arrivalTick = 10 (a new arrival would read 14)

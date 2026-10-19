@@ -1,0 +1,5 @@
+(1) LANDED spatial core: pFall home40 = 0.0759  home58 (keep +18) = 0.0937  verdicts plausible plausible → keep RAISES pFall: true
+(2) CURED spatial core: cells 2000 cells where a bigger keep raised pFall: 0 worst rise 0
+    replica at keep 0 equals landed pFall: true 0.0759 0.0759
+    LANDED aspatial core pFall by keep 0/6/12/18: 0.8808 0.7389 0.5200 0.2932 monotone non-increasing: true
+(3) pin: falls true roll 0 | ceiling: falls true roll 0 | capitulation: true falls true roll 0 | rolled fall: falls true roll 0.001 band decisive_success

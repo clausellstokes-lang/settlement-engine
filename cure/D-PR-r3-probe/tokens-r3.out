@@ -1,0 +1,10 @@
+patrolDrawnCap src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+drawShare01 src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+pendingCadence src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+pendingSince src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/EXHAUSTIVE_REMEDIATION_ARCHITECTURE.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+normalizePatrolDrawStamp src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+patrolDrawStamp src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+settlementFundingBand src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CH.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_ST.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_COHERENCE_FOLD.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+fortWill src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+stretchKey src=0 tests=0 ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+phase (rg -w, src files): 191

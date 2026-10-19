@@ -1,0 +1,2 @@
+summer: direct (base 100, mult 1) = 100; detour avoiding B (base 120, mult 1) = 120; detour < direct at the SAME season: false
+winter: direct (base 100, mult 6) = 600; detour avoiding B (base 120, mult 1.5) = 180; detour < direct at the SAME season: true

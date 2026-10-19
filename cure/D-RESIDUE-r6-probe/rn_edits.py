@@ -1,0 +1,10 @@
+import json
+E=[]
+def e(o,n): E.append([o,n])
+e("is the DOER of CH's `hunt_won`, never a `ledBy` rider (`ledBy` rides only a deed whose doer is a body)",
+  "is the DOER of CH's `hunt_won`, never a `ledBy` rider (`ledBy` rides only a deed whose doer is a body) — ONE WORD, ONE MEANING: RULINGS-ROUND5 B.5's \"doer the LEADER (`ledBy`)\" names the HUNT CARD's leader (the person, paragon or company the `hunt_taken` card names, PR's detachment `leaderRef`, CH's `leads`), which becomes the deed's `doer`; RN's `ledBy` is the DEED field for a body's leader on a body-doer deed and never appears on `hunt_won` [CURED 2026-10-19 (fp-final r6) — RULINGS-ROUND6 B.7 \"RN (`ledBy` wording)\" · BD-r5-22 (BD §9.11 \"DOER the LEADER the card named (`ledBy` — …)\" vs this line): RN's half is this sentence; BD's \"(`ledBy` …)\" on the hunt's doer is struck in BD (routed)]")
+e("the might SEEN is a SIGHTING ROW `{ id, mightBand, tick }` of BD's own record, written by BD's door into the sighting court's belief (RULINGS-ROUND5 A.5: \"never onto ST's holder object\"; ST stores none), never an RN fact",
+  "the might SEEN is a SIGHTING ROW of MN's ONE sighting store (`spatialLedgers.sightings`, keyed court × subject — the subject `{ kind: 'body', id }`), written by its one door `recordSighting` into the sighting court's belief and READ by BD's `believedBodyOf` (RULINGS-ROUND6 B.2; RULINGS-ROUND5 A.5: \"never onto ST's holder object\"; ST stores none), never an RN fact [CURED 2026-10-19 (fp-final r6) — RULINGS-ROUND6 B.2: \"BD's own record\" → the one store MN owns]")
+e("| RULINGS-ROUND5 A.5, as `cure/D-ST-r5.md` §5 routes it | sibling | CURED — a body's might seen is a sighting row of BD's own record, never ST's `seenBy` | §2.3 |",
+  "| RULINGS-ROUND5 A.5, as `cure/D-ST-r5.md` §5 routes it | sibling | CURED — a body's might seen is a sighting row of BD's own record, never ST's `seenBy` (↳ r6: MN's one store, B.2) | §2.3 |")
+json.dump(E,open('/Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RESIDUE-r6-probe/rn_edits.json','w',encoding='utf-8'),ensure_ascii=False)

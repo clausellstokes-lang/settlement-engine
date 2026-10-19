@@ -1,0 +1,722 @@
+[
+ {
+  "tier": "thorp",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 17,
+  "monster": 4,
+  "internal": 28,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 19,
+  "monster": 4,
+  "internal": 28,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 49,
+  "monster": 23,
+  "internal": 14,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 18,
+  "monster": 4,
+  "internal": 28,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 7,
+  "monster": 0,
+  "internal": 4,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 51,
+  "monster": 22,
+  "internal": 24,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 17,
+  "monster": 4,
+  "internal": 2,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 39,
+  "monster": 23,
+  "internal": 7,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 4,
+  "monster": 4,
+  "internal": 9,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 19,
+  "monster": 4,
+  "internal": 26,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 56,
+  "monster": 23,
+  "internal": 28,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "thorp",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 0,
+  "monster": 4,
+  "internal": 0,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 42,
+  "monster": 35,
+  "internal": 28,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 21,
+  "monster": 4,
+  "internal": 24,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 53,
+  "monster": 48,
+  "internal": 26,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 38,
+  "monster": 36,
+  "internal": 24,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 23,
+  "monster": 6,
+  "internal": 0,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 21,
+  "monster": 4,
+  "internal": 22,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 0,
+  "monster": 34,
+  "internal": 13,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 44,
+  "monster": 23,
+  "internal": 9,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 19,
+  "monster": 4,
+  "internal": 20,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 43,
+  "monster": 36,
+  "internal": 30,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 57,
+  "monster": 53,
+  "internal": 24,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "hamlet",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 20,
+  "monster": 4,
+  "internal": 24,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 56,
+  "monster": 56,
+  "internal": 11,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 45,
+  "monster": 15,
+  "internal": 29,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 25,
+  "monster": 4,
+  "internal": 14,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 48,
+  "monster": 57,
+  "internal": 13,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 21,
+  "monster": 4,
+  "internal": 18,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 56,
+  "monster": 56,
+  "internal": 28,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 78,
+  "monster": 53,
+  "internal": 26,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 45,
+  "monster": 38,
+  "internal": 11,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 42,
+  "monster": 38,
+  "internal": 11,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 75,
+  "monster": 51,
+  "internal": 34,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 76,
+  "monster": 49,
+  "internal": 8,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "village",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 35,
+  "monster": 33,
+  "internal": 1,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 92,
+  "monster": 83,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 93,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 76,
+  "monster": 63,
+  "internal": 47,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 89,
+  "monster": 82,
+  "internal": 69,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 93,
+  "monster": 95,
+  "internal": 50,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 99,
+  "monster": 100,
+  "internal": 75,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 95,
+  "monster": 96,
+  "internal": 60,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 93,
+  "monster": 83,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 65,
+  "monster": 98,
+  "internal": 41,
+  "walls": false,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 97,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 93,
+  "monster": 81,
+  "internal": 47,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "town",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 89,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 97,
+  "monster": 95,
+  "internal": 60,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 67,
+  "monster": 85,
+  "internal": 14,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 100,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 100,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 99,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 97,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 93,
+  "monster": 95,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 100,
+  "monster": 95,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 93,
+  "monster": 95,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 93,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 97,
+  "monster": 95,
+  "internal": 50,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "city",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 91,
+  "monster": 94,
+  "internal": 40,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 0,
+  "terrainOverride": "plains",
+  "military": 82,
+  "monster": 98,
+  "internal": 41,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 1,
+  "terrainOverride": "forest",
+  "military": 83,
+  "monster": 91,
+  "internal": 46,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 2,
+  "terrainOverride": "hills",
+  "military": 100,
+  "monster": 95,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 3,
+  "terrainOverride": "riverside",
+  "military": 93,
+  "monster": 95,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 4,
+  "terrainOverride": "plains",
+  "military": 93,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 5,
+  "terrainOverride": "forest",
+  "military": 93,
+  "monster": 98,
+  "internal": 64,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 6,
+  "terrainOverride": "hills",
+  "military": 84,
+  "monster": 95,
+  "internal": 56,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 7,
+  "terrainOverride": "riverside",
+  "military": 88,
+  "monster": 95,
+  "internal": 42,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 8,
+  "terrainOverride": "plains",
+  "military": 88,
+  "monster": 95,
+  "internal": 42,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 9,
+  "terrainOverride": "forest",
+  "military": 89,
+  "monster": 98,
+  "internal": 50,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 10,
+  "terrainOverride": "hills",
+  "military": 75,
+  "monster": 94,
+  "internal": 54,
+  "walls": true,
+  "present": true
+ },
+ {
+  "tier": "metropolis",
+  "i": 11,
+  "terrainOverride": "riverside",
+  "military": 75,
+  "monster": 94,
+  "internal": 54,
+  "walls": true,
+  "present": true
+ }
+]

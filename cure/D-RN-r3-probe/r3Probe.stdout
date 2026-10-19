@@ -1,0 +1,256 @@
+{
+ "A1_convictingMergeRealShape": {
+  "mergedMagnitude": 3,
+  "mergedArrivalTick": 5,
+  "storedVer": 35,
+  "mergedVer": 35,
+  "sameMask": true,
+  "round2_verOnly_reRead": false,
+  "round3_triple_reRead": true
+ },
+ "A2_doerSwapMovesOneTerm": {
+  "swappedDoerKey": "p:wnpc_vey",
+  "round2_verOnly_reRead": false,
+  "round3_triple_reRead": true,
+  "subjectsAfter": [
+   "p:wnpc_vey"
+  ],
+  "termsForTheDeedAfter": 1,
+  "idempotentNextTick": true
+ },
+ "A3_doerInvisibleBelowVague": {
+  "mask": 1,
+  "doerKey": null,
+  "RUMOR_VAGUE_THRESHOLD": 0.3
+ },
+ "B1_landedVerdictStamps": {
+  "jailed": {
+   "firstOffence": "known",
+   "repeat": "notorious"
+  },
+  "banished": {
+   "firstOffence": "notorious",
+   "repeat": "infamous"
+  },
+  "turncoat": {
+   "firstOffence": "known",
+   "repeat": "notorious"
+  },
+  "criminal_founding": {
+   "firstOffence": "notorious",
+   "repeat": "infamous"
+  }
+ },
+ "B1_notorietyBands": [
+  "unknown",
+  "whispered",
+  "known",
+  "notorious",
+  "infamous"
+ ],
+ "B2_hopBudgets": {
+  "major": 4,
+  "majorRealmShaking": 5,
+  "notable": 2
+ },
+ "B2_gate": {
+  "REJECTION_NOTORIETY_RANK": 2,
+  "infamousRank": 4,
+  "knownRank": 2
+ },
+ "B3_halfLifeWeeks": {
+  "a_year": 52,
+  "a_decade": 520
+ },
+ "B3_rnPace": {
+  "a_decade": {
+   "settlement": [
+    {
+     "week": 521,
+     "to": 0
+    }
+   ],
+   "regional": [
+    {
+     "week": 216,
+     "to": 1
+    },
+    {
+     "week": 1041,
+     "to": 0
+    }
+   ],
+   "realm": [
+    {
+     "week": 137,
+     "to": 2
+    },
+    {
+     "week": 521,
+     "to": 1
+    },
+    {
+     "week": 1345,
+     "to": 0
+    }
+   ]
+  },
+  "a_year": {
+   "settlement": [
+    {
+     "week": 53,
+     "to": 0
+    }
+   ],
+   "regional": [
+    {
+     "week": 22,
+     "to": 1
+    },
+    {
+     "week": 105,
+     "to": 0
+    }
+   ],
+   "realm": [
+    {
+     "week": 14,
+     "to": 2
+    },
+    {
+     "week": 53,
+     "to": 1
+    },
+    {
+     "week": 135,
+     "to": 0
+    }
+   ]
+  }
+ },
+ "B3_landedFadeAtOrigin": {
+  "known": [
+   {
+    "week": 40,
+    "to": "whispered"
+   },
+   {
+    "week": 80,
+    "to": "unknown"
+   }
+  ],
+  "notorious": [
+   {
+    "week": 40,
+    "to": "known"
+   },
+   {
+    "week": 80,
+    "to": "whispered"
+   },
+   {
+    "week": 120,
+    "to": "unknown"
+   }
+  ],
+  "infamous": [
+   {
+    "week": 40,
+    "to": "notorious"
+   },
+   {
+    "week": 80,
+    "to": "known"
+   },
+   {
+    "week": 120,
+    "to": "whispered"
+   },
+   {
+    "week": 160,
+    "to": "unknown"
+   }
+  ]
+ },
+ "B3_landedFadeAtDelay6": {
+  "known": [
+   {
+    "week": 0,
+    "to": "unknown"
+   }
+  ],
+  "notorious": [
+   {
+    "week": 0,
+    "to": "whispered"
+   },
+   {
+    "week": 40,
+    "to": "unknown"
+   }
+  ]
+ },
+ "B4_projection": [
+  {
+   "stamp": "known",
+   "cap": "regional",
+   "cases": [
+    {
+     "scope": "regional",
+     "badFace": "notorious",
+     "clamped": "known",
+     "warmTown": "known",
+     "strictArmed": true
+    }
+   ]
+  },
+  {
+   "stamp": "notorious",
+   "cap": "walk",
+   "cases": [
+    {
+     "scope": "regional",
+     "badFace": "notorious",
+     "clamped": "notorious",
+     "warmTown": "known",
+     "strictArmed": true
+    },
+    {
+     "scope": "realm",
+     "badFace": "infamous",
+     "clamped": "notorious",
+     "warmTown": "known",
+     "strictArmed": true
+    }
+   ]
+  },
+  {
+   "stamp": "infamous",
+   "cap": "walk",
+   "cases": [
+    {
+     "scope": "regional",
+     "badFace": "notorious",
+     "clamped": "notorious",
+     "warmTown": "known",
+     "strictArmed": true
+    },
+    {
+     "scope": "realm",
+     "badFace": "infamous",
+     "clamped": "infamous",
+     "warmTown": "known",
+     "strictArmed": true
+    }
+   ]
+  }
+ ],
+ "B4_round2Chain": {
+  "stamp": "known",
+  "magnitude": 2,
+  "significance": "major (magnitude >= 2; target a court)",
+  "hops": 4,
+  "projectionAtHop4BadFace": "notorious",
+  "projectionAtRealmBadFace": "infamous"
+ }
+}

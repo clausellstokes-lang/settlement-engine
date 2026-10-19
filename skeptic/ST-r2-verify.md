@@ -1,0 +1,49 @@
+# ST-r2-verify — THE SITES, refuting verifier (P3 round 2b)
+
+Seat V-ST-r2 (Opus 5.5), chair a73343ed, 2026-10-18. I read these whole: README, VERIFY, every rulings file (ROUND2b and its addendum win), CHAIR-NOTES, the BOARD, `docs/DESIGN_FP_ARCH_ST.md` as it stands (680 lines, mtime 08:30), `skeptic/ST-r2.md`, the ST routes of `SEAMS-r2` (7 · 9 · 12 · 18) and `HOST-r2` (3 · 7 · 8 · 9 · 10 · 11 · 19 · 20), and `cure/D-ST-r2.md` with its probe outputs. I checked cross-volume text in MN, PS, PR, PT, CH and PL, and the host document's lines HR:68, 107, 529, 534, 644, 646, 689, 690, 694 and 900. The code of record is master `81f1cd963`, read only. I edited no file but this one and ran no tests. **Disclosure:** I ran one read-only `git rev-parse HEAD` in the master worktree to confirm the sha, against the "never git" instruction.
+
+## COUNTS
+**holds 26 · fails 1 · stop 2 · new 3 (0 BLOCKING · 3 MAJOR).** I judged 29 BLOCKING or MAJOR ids: ST-r2 1–20, SEAMS-r2 7, 9 and 12, and HOST-r2 3 and 7–11. There were no REFUTED dispositions.
+
+## VERDICTS
+| id | disposition | verdict | why / receipt |
+|---|---|---|---|
+| **ST-r2-16** | CURED (`wantSince`) | **FAILS** | The stale-dwell defect comes back on the holder-change path. §2.1 drops `wantSince` only "when it reads above". §6.1 step 3 runs for tied holders only, so after `abandoned` the unheld site keeps its old `wantSince`. §11 drops it only at relighting. ST6's own remedy says the DM "re-garrisons it by `SITE_HOLDER`". If the DM does that with any `unfunded` holder, the next tick sees the dwell long past and abandons the keep again. Even if an implementer drops the clock at clearing, `min(fundingSet, derived)` can never lift a poor holder above `unfunded`, so the keep is gone a season later. "Manned regardless" and "the DM's hand is total through the record" are both false. **Cure:** drop `wantSince` on every holder change (`abandoned`, `garrisoned`, `conveyed`, `taken`, and the rest), add a §11 row for it, and give the DM a true override, or strike the ST6 sentence and name the real lever (the holder's prosperity, or a richer holder). |
+| ST-r2-1 | CURED | holds | Three things check out. ST6 and OD-ST-5 apply the `min` ceiling. CH OD-CH-10 names the same car, carrying the roll on the settlement record `advanceTreasury` receives. `treasury.js :: UPKEEP_LEDGERS = ['deployments']` and `computeUpkeep` "ONE LAW PARAMETERIZED BY LEDGER" were both read. |
+| ST-r2-2 / HOST-r2-3 | CURED | holds | The crossing's holder gets a toll share only. PS2's `gateKeeperOf` gives the territory's holder, J385 (HR:898). |
+| ST-r2-3 | CURED | holds | These exist at master: `isPort`, `STORM_SEASON_COST`, `seaRoads.js` S3 `level >= T.EMBATTLED_THRESHOLD` (0.35), `seaRoadsEnabled` absent from the defaults, `activeBlockadeTargets` and `blockadeInterceptsSupply`. `navalEnabled` is lit in `realistic_regional`. `chooseRoute` calls `seasonalPathCost` before `scoreRoute`, at `embattlement.js:414–415`. |
+| ST-r2-4 | CURED, executed | holds | The probe matches the landed function at keep 0. `willBias`, which the replica omits, falls with `defenderCurrent` through hope, and that direction keeps the curve monotone. Under the defender-attrition override (`min(eroded, homeDef)`) the shrunk denominator only raises `relief01`, so a bigger keep still never raises pFall. |
+| ST-r2-5 | CURED, executed | holds | The pin, ceiling and capitulation arms all write `roll: 0` (`warSiegeVerdict.js:386–389`). With the band rewritten to `narrow_fail` the siege keeps going: `verdict.verdict` stays plausible, so it does not take the withdrawal branch. |
+| ST-r2-6 | CURED | holds | The lookup holds `deployments[key]?.targetId`. `ALLY_SUPPORT_TYPES` is module-local with the four types. `swornLinkSuspended` is in PL. The pin is PLAUSIBLE and has a fallback. |
+| ST-r2-7 | CURED | holds | Deviation scaling gives 0.97 and 1.18, checked by arithmetic. |
+| ST-r2-8 | CURED | holds | MN §3.3 registers `sitePresenceFeeder` and `siteSuppression` under one cap (note 3 has the residual). |
+| ST-r2-9 | CURED (tippers) | holds | This is the skeptic's second option, applied. |
+| ST-r2-10 | CURED | holds | PS9 Bound 2 lists "ST-2b's fort … as it holds at a refused border". |
+| ST-r2-11 | CURED | holds | PR's `witnessedCrossing` reads `siteWitnesses(…, stretch)` (PR §6.5). |
+| ST-r2-12 | CURED | holds | `careCapacity`'s product stays below 0.6, since w·s ≤ 0.35 < 1. `STRESSOR_COUNTERFORCES.disease_outbreak` and `diseaseOutbreakGate` both exist. |
+| ST-r2-13 | CURED | holds | This is the skeptic's membership cure (`raidHot`). The header's "never a user/party action" sits against DM-authored dens, a PLAUSIBLE tension; MN set the precedent. |
+| ST-r2-15 | CURED | holds | Law One is applied. The new read opens new findings (ST-V1, ST-V2). |
+| ST-r2-17 | CURED | holds | Each arrival gets one hearing. The folded contest cannot be reached (ST-V1). |
+| ST-r2-18 · 19 · 20 | CURED | holds | 19: PT has `RECORD_CLEARING` and `party_cleared_site` (P41, OD-PT-30). |
+| SEAMS-r2-7 · 9 · 12 | CURED (ST's side) | holds | 9: PR's line 417 aligns ("the fort's garrison is ST's `siteDefense` on the walls"). 12: `settlementFundingBand` is exported (note 2). |
+| HOST-r2-7 · 8 · 9 · 10 | CURED | holds | The HR lines quoted above match. For 8 see note 4; for 9 see ST-V3. |
+| ST-r2-14 · HOST-r2-11 | STOP | **STOP** | The chair RULED both, as proposed, in the ROUND2b addendum at about 10:0x. The volume still carries the withdrawn text in five places: §2.1 "widens by `site` alone", the first sentence of §7.3, the §7.4 SP row, OD-ST-27, and the J388 re-canonize clause in the §6.3 TRADED row. Applying the rulings is still owed. |
+
+## NEW FINDINGS
+| id | sev | site | claim | receipt | cure |
+|---|---|---|---|---|---|
+| ST-V1 | MAJOR | §2.4 `believedDenOf`; §8 `site_taken` default; §6.1 step 6; §10 HBF `siteTakenContest` | "unless an attached tied court that BELIEVES it can contest the arrival (`believedDenOf`) sorties that week … that sortie IS this hearing's contest" | §2.4: "an arrival is known from the tick after it" in the omniscient arm. In the belief arm the source is the arrival's own `site_taken` news. Either way no court believes in an arrival during its own week. The folded contest and its new HBF row can never fire, so the default is always `held_by_them`, and the response always comes as next week's `site_cleared`. Two round-2 cures (15 and 17) contradict each other. | Pick one. Either let the anchor and the courts attached at hand know an arrival in its own week (it happens on their own land), or strike the folded contest and `siteTakenContest` and say the sortie is next week's `site_cleared`. |
+| ST-V2 | MAJOR | §2.4 `believedDenOf` (belief arm); §6.1 step 6; §6.4; §6.6; OD-ST-35 | "in the belief presets the court's picture from the tellings of the site's `site_taken` news it holds" | Some dens never produce `site_taken` news. A den set by `SITE_HOLDER` AUTHOR ("is so", which is S4's own setup) has no hearing at all. A keep taken by a `site_siege` fall (S9) produces `site_siege` news. So in every belief preset no court ever believes in these dens: the clearing, the reclaim's believed force term, and `den_unanswered` (ruling 12) all go dead for them. | Have the belief arm read every telling that makes an untied holder: `site_taken`, a `site_siege` fall, an authored placement's news, and MN17's menace rumors for a menace holder. |
+| ST-V3 | MAJOR | §2.4 `garrisonBandOf` (new in r2) vs §8 `site_siege` resolver | `garrisonBandOf` = `100 × F × Q` on `STRENGTH_BANDS`, while the siege fights "the site's GARRISON BAND … (`siteDefenseOf`'s value …)" | Take a funded, sound keep, using the volume's own constants. `garrisonBandOf` gives 80, which is ≥ 78, so H13's `PolitySite` reports it as `formidable`. The siege defends at 18 × 0.8 = 14.4, which is below 26, the `thin` floor (`armyStrength.js :: STRENGTH_BANDS` 78/60/42/26/0). MN's `modest` might, 34, takes it. One phrase now has two scales, and the map's word misleads anyone who looks closely. | Make `site_siege` read `garrisonBandOf`'s latent value, or derive `garrisonBandOf` from the value the siege uses. Use one scale and one word. |
+
+## NOTES (minor; not counted)
+1. The two STOP rulings are not yet applied in the volume (see above).
+2. One read has two names. PR §3.1 and its routes call it `fundingBandOfSettlement`; ST §2.4 and CH §7 call it `settlementFundingBand`.
+3. ST §3.4 restates MN's sentence instead of citing it. It uses `wallsTerm` to mean "every unsuppressible part", while MN keeps `wallsTerm` and `columnTerm` apart, and it still calls the column "the chair's call", though MN §3.3 and the ROUND2b addendum (SEAMS-r2-7) have settled it.
+4. §6.5 says "never a live host row over a retired map document". That is false for as long as the founding settlement lives (ENC-MS-06 retires the map document at adoption).
+5. The harbour works as a sea-arrival witness input adds nothing. PS8 already makes every landing witnessed, and PR15/OD-PR-37 say a harbour's watch is the port's navy.
+6. `party_cleared_site` and `keepBreached` are missing from the §2.5 census (the fold registers the former).
+7. ST8 says the readiness membership fires "on every attached town at every band", while ST9 and §3.3 say at-hand towns only.
+
+## CONFIRMED vs PLAUSIBLE
+Every verdict and new finding is CONFIRMED, either by reading the cited code at `81f1cd963` or by quoting the volumes, the rulings or the host document. ST-V3 is also CONFIRMED by arithmetic on the volume's constants. Two things are PLAUSIBLE: that ST-r2-16's re-abandonment happens on the very next tick, which depends on an implementer not dropping `wantSince` when the site is cleared (the failure a season later is CONFIRMED either way), and the endogeneity tension in note ST-r2-13. I read the lane's probes and did not re-run them, and I executed nothing myself.

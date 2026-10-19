@@ -1,0 +1,13 @@
+A at year 25 (1 = oaths a generation old, 0 = freshly sworn or renewed); r4 = the round-4 rule; r5 = oathSince
+world                                                        A r4   A r5 baselines oathSince
+quiet edge: no row in 25 years                              1.000  1.000         1 0
+failing crown: 1 failure row/yr                             0.079  1.000         2 0
+failing crown: 3 failure rows/yr                            0.053  1.000         4 0
+failing crown: 10 failure rows/yr                           0.044  1.000        11 0
+defied crown: 3 fealty_defied/yr                            0.053  1.000         4 0
+protective crown: 1 protection_kept/yr                      0.039  0.039         2 0
+busy protective: 1 protection_kept/yr + 30 failures/yr      0.010  0.020        33 0
+renewed at y20 (coup -> renew), quiet since                 0.200  0.200         1 1040
+renewed at y20, then 30 failures/yr (renewal evicted)       0.009  0.200         7 1040
+relit: succession dark y10-y15, 3 failures/yr               0.053  1.000         4 0
+succession dark throughout, 3 failures/yr                   1.000   dark         0 None

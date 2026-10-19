@@ -1,0 +1,10 @@
+{
+  "adoptedId": "world_stressor.siege.kell",
+  "laterWarId": "world_stressor.siege.kell",
+  "guardIdFor": "world_stressor.siege.kell",
+  "adoptedCollidesWithGuard": true,
+  "laterWarCollidesWithAdopted": true,
+  "mintedMenaceId": "world_stressor.siege.kell.menace.menace_m1",
+  "mintedCollidesWithGuard": false,
+  "adoptedStampSurvivesNormalize": true
+}

@@ -1,0 +1,103 @@
+== standingFor body
+  rows.slice().sort((a, b) => (b.rem - a.rem) || codepoint(a.k, b.k)).forEach((r) => { if (leftover > 0) { r.floor++; leftover--; } });
+  for (const r of rows) deities[r.k].share = r.floor;
+}
+
+/** Standing from share, with hysteresis against the previous standing. @param {number} share @param {string} prev */
+function standingFor(share, prev) {
+  const { STANDING_ESTABLISHED: E, STANDING_ASCENDANT: A, STANDING_HYSTERESIS: H } = RELIGION_TUNING;
+  if (prev === 'ascendant') return share >= A - H ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+  if (prev === 'established') return share >= A ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+}
+
+/**
+ * Normalize / migrate a settlement's religion state. Seeds from the embedded
+ * `primaryDeitySnapshot` (the PATRON, at 100% in its niche) and any DM-imposed
+ * `cultDeitySnapshots` (each entering at cult standing in its own free niche,
+ * capped by tier capacity) when no state exists yet.
+ * @param {any} state @param {import('../settlement.schema.js').SimSettlement} settlement @param {string} tier
+ */
+export function ensureReligionState(state, settlement, tier) {
+  const capacity = capacityForTier(tier);
+== deityAxes exports
+60:export function evil01(deity) {
+71:export function chaos01(deity) {
+79:export const TEMPER_DERIVATION = Object.freeze({
+95:export function deriveTemper(evilCoord, chaosCoord, context) {
+119:export const TEMPER_WORDS = Object.freeze(['warlike', 'peacelike', 'neutral']);
+148:export function deityTemper(deity) {
+== deityTemper
+148:export function deityTemper(deity) {
+149-  if (!deity) return undefined;
+150-  const authored = deity.authoredTemper;
+151-  if (typeof authored === 'string' && TEMPER_WORDS.includes(authored)) return authored;
+152-  return deriveTemper(evil01(deity), chaos01(deity));
+153-}
+== stanceOf
+124:export function stanceOf(source, target) {
+125-  const T = STANCE_TUNING;
+126-  const mA = malice(source);
+127-  const mB = malice(target);
+128-  const dA = disorder(source);
+129-  const dB = disorder(target);
+130-
+131-  // AGGRESSION — evil strikes all (slight tilt vs less-evil, +raid if chaotic);
+132-  // good strikes ONLY evil (its one consolidated aggression); neutral strikes none.
+133-  const evilAgg = pos(mA) * (T.AGG_EVIL_BASE + T.AGG_EVIL_TILT * (1 - pos(mB)));
+134-  const raidAgg = pos(mA) * T.AGG_EVIL_RAID * pos(dA);
+135-  const goodAgg = pos(-mA) * T.AGG_GOOD_VS_EVIL * pos(mB);
+136-  const aggression = clamp01(evilAgg + raidAgg + goodAgg);
+== coalitionJoinFeasibility body
+ * @param {unknown} partyId   `unknown`, not `any`: both ids are String()-coerced on
+ * @param {unknown} enemyId   the first two lines, so nothing may read through them.
+ * @returns {{ allowed: boolean, verdict: string }}
+ */
+export function coalitionJoinFeasibility(snapshot, worldState, partyId, enemyId) {
+  const party = String(partyId || '');
+  const enemy = String(enemyId || '');
+  if (!party || !enemy || party === enemy
+    || !snapshot?.byId?.has?.(party) || !snapshot?.byId?.has?.(enemy)) {
+    return { allowed: false, verdict: 'auto_fail' };
+  }
+  const capacityFor = buildCapacityLookup(snapshot, worldState?.deployments || {});
+  const attacker = capacityFor(party);
+  const defender = capacityFor(enemy);
+  const { verdict } = classifyFeasibility({
+    attackerCurrent: attacker.offensive,
+    defenderCurrent: defender.homeDefense,
+    coalitionSize: 1,
+    defenderItem: snapshot.byId.get(enemy),
+    attackerFacets: attacker.facets,
+    defenderFacets: defender.facets,
+  });
+  return { allowed: verdictPermitsSiege(verdict), verdict };
+const EVIL01 = Object.freeze({ evil: 1, neutral: 0.5, good: 0 });
+/** @type {Record<string, number>} */
+const CHAOS01 = Object.freeze({ chaotic: 1, neutral: 0.5, lawful: 0 });
+
+/**
+ * The 0..1 malice coordinate of a deity's alignment axis: evil 1 · neutral 0.5 ·
+ * good 0. A legacy/absent alignmentAxis reads neutral (0.5). Pure.
+ * @param {{ alignmentAxis?: string } | null} [deity]
+ * @returns {number}
+ */
+export function evil01(deity) {
+  return EVIL01[String(deity?.alignmentAxis ?? 'neutral')] ?? 0.5;
+}
+
+/**
+ * The 0..1 disorder coordinate of a deity's law axis: chaotic 1 · neutral 0.5 ·
+ * lawful 0. A legacy/absent lawAxis reads neutral (0.5) — the lawAxis-absence ⇒
+ * neutral back-compat discipline. Pure.
+ * @param {{ lawAxis?: string } | null} [deity]
+ * @returns {number}
+ */
+export function chaos01(deity) {
+  return CHAOS01[String(deity?.lawAxis ?? 'neutral')] ?? 0.5;
+}
+
+// Weights for the intrinsic-temper derivation. Intent (good–evil) dominates the
+// niche-grid temper; chaos adds belligerence (method); a dead-band around the
+// neutral core reads 'neutral'. LIVE for every deity (W-F5 stage 1 retired the
+// stored-value short-circuit), so these weights now shape every engine temper read.

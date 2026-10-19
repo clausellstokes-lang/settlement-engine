@@ -1,0 +1,10 @@
+frail      src=0 tests=0
+fragile    src=44 tests=22
+reliable   src=36 tests=11
+unerring   src=0 tests=1
+sure       src=22 tests=10
+vocation   src=1 tests=0
+liaison    src=1 tests=0
+contact    src=49 tests=19
+fabled     src=0 tests=0
+storied    src=2 tests=1

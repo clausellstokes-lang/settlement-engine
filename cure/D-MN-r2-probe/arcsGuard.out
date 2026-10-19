@@ -1,0 +1,12 @@
+(1) master, week 0: 3
+(2) guarded (lit), week 0: 1
+(4) guarded (dark), week 0: 3
+week 1: master 3 · guarded 1 · tails alive 2
+week 2: master 2 · guarded 1 · tails alive 1
+week 3: master 2 · guarded 1 · tails alive 1
+week 4: master 2 · guarded 1 · tails alive 1
+week 5: master 1 · guarded 1 · tails alive 0
+week 6: master 1 · guarded 1 · tails alive 0
+week 7: master 1 · guarded 1 · tails alive 0
+week 8: master 1 · guarded 1 · tails alive 0
+(3) menaceRelease stamp survives normalize + aging on every surviving tail: true

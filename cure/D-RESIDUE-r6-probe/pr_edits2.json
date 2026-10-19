@@ -1,0 +1,1 @@
+[["read through `bannerCoverOf(worldState, memberId, tick) → { weeks, seasonStartTick }` (§2.6). PL writes ONE row", "read through `bannerCoverOf(worldState, memberId, tick) → { weeks, seasonStartTick, swept }` (§2.6; `swept` the own-need count PL's sweep reads, RULINGS-ROUND6 B.3 [CURED 2026-10-19 (fp-final r6)]). PL writes ONE row"]]

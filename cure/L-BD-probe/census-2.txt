@@ -1,0 +1,41 @@
+curbed | lit=0 [] | word=0 | tests=0 | ledger=0
+harried | lit=0 [] | word=2 | tests=0 | ledger=5
+hounded | lit=0 [] | word=0 | tests=0 | ledger=0
+endowed | lit=0 [] | word=7 | tests=0 | ledger=4
+favoured | lit=1 [src/domain/worldPulse/warSiegeVerdict.js ] | word=11 | tests=13 | ledger=6
+favored | lit=0 [] | word=3 | tests=0 | ledger=3
+sponsored | lit=0 [] | word=17 | tests=6 | ledger=15
+blessed | lit=3 [src/components/new/tabs/FaithTab.jsx src/domain/display/faithDeepening.js ] | word=19 | tests=23 | ledger=21
+banned | lit=0 [] | word=31 | tests=179 | ledger=84
+proscribed | lit=0 [] | word=0 | tests=0 | ledger=0
+forbidden | lit=3 [src/domain/settlement.schema.js src/domain/magicProfile.js src/components/gallery/galleryUtils.js ] | word=134 | tests=189 | ledger=256
+muster | lit=23 [src/domain/interior/interiorTemplates.js src/domain/prose/wiringCensus.js src/domain/prose/entryLexicons.js src/domain/prose/fieldSynonyms.js ] | word=153 | tests=149 | ledger=541
+assemble | lit=0 [] | word=29 | tests=12 | ledger=31
+roam | lit=0 [] | word=0 | tests=1 | ledger=7
+prowl | lit=0 [] | word=0 | tests=0 | ledger=0
+lurk | lit=0 [] | word=0 | tests=0 | ledger=0
+prey | lit=0 [] | word=1 | tests=5 | ledger=5
+forage | lit=4 [src/generators/chainMagicSubstitution.js src/generators/computeActiveChains.js src/data/supplyChainData.js ] | word=13 | tests=4 | ledger=23
+gone_to_ground | lit=0 [] | word=0 | tests=0 | ledger=0
+lie_low | lit=0 [] | word=0 | tests=0 | ledger=0
+merged | lit=0 [] | word=270 | tests=277 | ledger=388
+absorbed | lit=8 [src/generators/steps/subsumptionPass.js src/generators/steps/assembleInstitutions.js src/domain/display/decreeTracker.js src/domain/worldPulse/demographicsResponses.js ] | word=58 | tests=74 | ledger=183
+scattered | lit=12 [src/generators/density/successionGrammar.js src/domain/rulingPower.js src/lib/constructionUsage.js ] | word=55 | tests=15 | ledger=58
+starved | lit=4 [src/domain/worldPulse/envoyChanceMeetingNews.js src/domain/worldPulse/magicSubstitutionReagents.js ] | word=106 | tests=79 | ledger=53
+dissolved | lit=20 [src/domain/density/factionLifecycle.js src/domain/edit/pools.js src/domain/worldPulse/armyTransitKernel.js src/domain/worldPulse/houseLedger.js ] | word=66 | tests=45 | ledger=63
+promoted | lit=3 [src/domain/trace.js src/domain/worldPulse/magicRegimeLifecycle.js src/domain/worldPulse/magicRegimeModel.js ] | word=103 | tests=178 | ledger=189
+mission | lit=4 [src/domain/worldPulse/routeNetworkFlows.js src/domain/roads/state.js ] | word=289 | tests=357 | ledger=300
+missionize | lit=3 [src/domain/worldPulse/settlementStrategy.js src/domain/worldPulse/strategyMoves.js ] | word=10 | tests=8 | ledger=12
+shelter | lit=2 [src/domain/tableEvents.js src/domain/display/institutionVocabulary.js ] | word=52 | tests=14 | ledger=14
+extort | lit=1 [src/generators/npcGenerator.js ] | word=1 | tests=1 | ledger=0
+waylay | lit=0 [] | word=1 | tests=0 | ledger=0
+ambush | lit=2 [src/domain/tableEvents.js src/domain/threatProfile.js ] | word=6 | tests=1 | ledger=30
+sortie | lit=0 [] | word=3 | tests=1 | ledger=13
+bodyCohesion01 | lit=0 [] | word=0 | tests=0 | ledger=0
+unity | lit=0 [] | word=2 | tests=0 | ledger=4
+cohesion01 | lit=0 [] | word=0 | tests=0 | ledger=0
+wardens | lit=0 [] | word=15 | tests=11 | ledger=10
+congregate | lit=0 [] | word=1 | tests=0 | ledger=0
+flock | lit=0 [] | word=7 | tests=0 | ledger=2
+sect | lit=0 [] | word=1 | tests=0 | ledger=4
+brood | lit=0 [] | word=0 | tests=0 | ledger=0

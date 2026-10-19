@@ -1,0 +1,123 @@
+## SLOW_NOT_SEVER / SEASON_TERRAIN_COST
+79:// (a large multiplier) but NEVER infinite/cut — so a snowed-in town is dear to
+87:// so a route's effective multiplier is always in [1, SLOW_NOT_SEVER_MAX].
+88:export const SLOW_NOT_SEVER_MAX = 6;
+95:// routes on it). Every value FINITE and ≥ 1, and ≤ SLOW_NOT_SEVER_MAX.
+96:export const SEASON_TERRAIN_COST = Object.freeze({
+## CLIMATE_BAND_VERSION
+src/domain/spatial/index.js:52:  CLIMATE_BAND_VERSION,
+src/domain/spatial/spatialDigest.js:134:export const CLIMATE_BAND_VERSION = 1;
+src/domain/spatial/spatialDigest.js:482:  return { version: CLIMATE_BAND_VERSION, bySettlement: sortedObject(entries) };
+## climateBandFor
+98:  // ── W-CAP CAP-3 CLIMATE TRUTH: amplitude by MEASURED climate, not by terrain word ──
+158: * @param {string|null} [climateBand] W-CAP CAP-3: the frozen canon's measured band
+163:  // W-CAP CAP-3: MEASURED climate outranks the terrain-word proxy, and only when it
+192: * W-CAP CAP-3 — this settlement's frozen climate band, or null.
+212:export function climateBandFor(digest, settlementId) {
+## navalLayer convoy
+rg: src/domain/worldPulse/navalLayer.js: IO error for operation on src/domain/worldPulse/navalLayer.js: No such file or directory (os error 2)
+## navalKernel header
+12: *   • SEA BATTLES: two HOSTILE navies whose paths share a SEA EDGE collide there — resolved
+15: *     army SHARES the convoy's fate (the heaviest bounded loss band + a forced debark at the
+18: *   • BLOCKADE (Stage 4, added next): a navy blockading a hostile port MINTS A SIEGE through
+424:  // ── SEA BATTLES: hostile navies sharing a sea edge collide (resolveFieldBattle verbatim). ─
+## navalEnabled
+src/domain/worldPulse/simulationRules.js
+## ARMY_ROLES
+rg: src/domain/worldPulse/armyTransit.js: IO error for operation on src/domain/worldPulse/armyTransit.js: No such file or directory (os error 2)
+## hopWeeks / planWanderLeg
+653:export function pathCost(digest, fromId, toId, season = null) {
+728:export function hopWeeks(digest, fromId, toId, season = null, mode = null) {
+135:  const nominal = hopWeeks(/** @type {SpatialDigest} */ (digest), text(fromId), hop.toId);
+## u: key prefix census
+## stormSeasonFactor
+375: * self-describing law. Unknown/absent season ⇒ 1.0. Always ≥ 1 (slow, not sever).
+378:function stormSeasonFactor(lanes, season) {
+1154:  const storm = stormSeasonFactor(seaLanes, season);
+## navalLayer file
+src/domain/spatial/navalLayer.js
+## navalEnabled in simulationRules
+722:  navalEnabled: true,
+## ARMY_ROLES file
+src/domain/spatial/armyTransit.js:109:export const ARMY_ROLES = Object.freeze({
+## CONVOY role
+src/domain/worldPulse/realmVerbExecution.js:126:  ORDER_INTERVENTION: 'patronId', ORDER_CONVOY: 'ownerId', DECLARE_BLOCKADE: 'ownerId',
+src/domain/worldPulse/realmVerbExecution.js:147:    case 'ORDER_CONVOY': return `${n(args.ownerId)}'s fleet is ordered to convoy its army to ${n(args.destId)}`;
+src/domain/worldPulse/realmVerbExecution.js:617:    case 'ORDER_CONVOY': {
+src/domain/worldPulse/navalKernel.js:8: *   • DERIVE CONVOYS: a committed deployment whose target is a sea-reachable PORT, from a
+src/domain/worldPulse/navalKernel.js:9: *     port that fields a war navy, gains a CONVOY record (the sea lift's battle exposure) —
+src/domain/worldPulse/navalKernel.js:14: *     home port (retreatRoute — it already routes over sea edges); a lost CONVOY's embarked
+## navalTransit ledger
+src/domain/certification/subsystemRowsWar.js
+src/domain/worldPulse/pulseKernel.js
+src/domain/display/navalDisplay.js
+src/domain/display/forceComposition.js
+src/domain/worldPulse/roadsKernel.js
+src/domain/spatial/armyTransit.js
+## does a named person leg route by sea? planWanderLeg body
+/**
+ * OPEN ONE LEG. The walker commits to exactly one edge this tick and is MID-ROUTE until
+ * its arrival tick. A hidden way costs HIDDEN_PATH_SLOWDOWN times the nominal hop: the
+ * design's "wanderers may use hidden paths (slowly)" is a real price, not a flavour note.
+ *
+ * The arrival is always at least one tick after departure, so a leg can never resolve on
+ * the tick it opened and "one hop per tick" cannot be laundered into several.
+ *
+ * @param {Object} args
+ * @param {SpatialDigest|null|undefined} args.digest
+ * @param {string} args.fromId
+ * @param {string} args.destId
+ * @param {number} args.tick
+ * @param {((fromId: string) => ReadonlyArray<string>)|null} [args.hiddenHopsOf]
+ * @returns {WanderLeg|null}
+ */
+export function planWanderLeg({ digest, fromId, destId, tick, hiddenHopsOf = null }) {
+  const hop = nextHopToward({ digest, fromId, destId, hiddenHopsOf });
+  if (!hop) return null;
+  const depart = tickOf(tick);
+  const nominal = hopWeeks(/** @type {SpatialDigest} */ (digest), text(fromId), hop.toId);
+  return /** @type {WanderLeg} */ (openNamedPersonLeg({
+    fromId: text(fromId),
+    toId: hop.toId,
+    departTick: depart,
+    nominalWeeks: nominal,
+    gradeMultiplier: hop.hidden ? NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : 1,
+    hidden: hop.hidden,
+  }));
+}
+
+/**
+ * WHERE THE WALKER IS at `tick`. A leg that has not reached its arrival tick puts the
+ * walker MID-ROUTE with a 0..1 progress reading and NO settlement; one that has puts
+ * them at the far end.
+ *
+## nextHopToward / candidateRoutes
+src/domain/spatial/distanceRead.js:992:function routingAdjacency(digest, a, b) {
+src/domain/spatial/distanceRead.js:1078:export function candidateRoutes(digest, fromId, toId, k = K_CANDIDATES) {
+src/domain/spatial/distanceRead.js:1096:    const adj = routingAdjacency(digest, from, to);
+## navalLayer convoy line
+205:// A navy convoys an own/allied army over water. The record rides the SIBLING
+## simulationRules 712-724
+16:// additionally AND-gated with warLayerEnabled (lit in all three); naval also needs
+21:const WAVES = Object.freeze({
+22:  momentumEnabled: true,
+23:  navalEnabled: true,
+24:  interventionEnabled: true,
+25:  settlementLifecycleEnabled: true,
+## ARMY_ROLES
+export const ARMY_ROLES = Object.freeze({
+  MARCH: 'march', REINFORCEMENT: 'reinforcement', RETREAT: 'retreat',
+  CONVOY: 'convoy', BLOCKADE: 'blockade',
+});
+
+// WR-7b keeps encounter intent on the aggregate column.  This is deliberately a
+// singular value: a malformed row cannot smuggle several private goals into the
+// encounter arbiter and let array order choose the winner.
+export const ARMY_ENVOY_INTENT_KINDS = Object.freeze(['war_continue', 'private_goal']);
+export const ARMY_ENVOY_PRIVATE_GOALS = Object.freeze(['plant', 'imprison', 'terms_shop']);
+## navalKernel 12-16
+ *   • SEA BATTLES: two HOSTILE navies whose paths share a SEA EDGE collide there — resolved
+ *     by resolveFieldBattle VERBATIM (land parity by construction). The loser retreats to its
+ *     home port (retreatRoute — it already routes over sea edges); a lost CONVOY's embarked
+ *     army SHARES the convoy's fate (the heaviest bounded loss band + a forced debark at the
+ *     nearest friendly port, whence survivors retreat OVERLAND via the standing recall

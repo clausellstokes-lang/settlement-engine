@@ -1,0 +1,15 @@
+site_sale src=0 tests=0 quotedSrc=0 ledgerDocs=0
+bodyKind src=0 tests=0 quotedSrc=0 ledgerDocs=1
+saleScore src=0 tests=0 quotedSrc=0 ledgerDocs=0
+BODY_REPAIR_CEILING src=0 tests=0 quotedSrc=0 ledgerDocs=0
+BODY_FUNDING_BY_SUPPLY src=0 tests=0 quotedSrc=0 ledgerDocs=0
+mightBand src=0 tests=0 quotedSrc=0 ledgerDocs=1
+denPressOf src=0 tests=0 quotedSrc=0 ledgerDocs=0
+sold src=94 tests=33 quotedSrc=1 ledgerDocs=39
+refused src=339 tests=392 quotedSrc=34 ledgerDocs=196
+cult src=80 tests=74 quotedSrc=25 ledgerDocs=74
+band src=708 tests=671 quotedSrc=35 ledgerDocs=374
+body src=391 tests=469 quotedSrc=11 ledgerDocs=290
+provisioned src=13 tests=3 quotedSrc=2 ledgerDocs=16
+saleFork src=0 tests=0 quotedSrc=0 ledgerDocs=1
+arriveAt src=0 tests=0 quotedSrc=0 ledgerDocs=1

@@ -1,0 +1,34 @@
+## 1 SLOW_NOT_SEVER_MAX
+src/domain/spatial/spatialCost.js:79:// (a large multiplier) but NEVER infinite/cut — so a snowed-in town is dear to
+src/domain/spatial/spatialCost.js:80:// reach yet still RESCUABLE by spring. Every entry is a FINITE multiplier ≥ 1
+src/domain/spatial/spatialCost.js:88:export const SLOW_NOT_SEVER_MAX = 6;
+## 2 seasons
+src/domain/worldPulse/seasons.js:212:export function climateBandFor(digest, settlementId) {
+src/domain/worldPulse/seasons.js:226: * climate sub-digest, the food year's amplitude comes from the MEASURED band instead of
+src/domain/worldPulse/seasons.js:232:export function seasonalContextFor({ rngSeed, clock, settlement, settlementId, digest = null }) {
+## 3 pestilence hopWeeks season
+192:      const weeks = digest ? hopWeeks(digest, id, nb.neighbourId, season) : null;
+196:      const weeks = digest ? hopWeeks(digest, id, e.to, season) : null;
+## 4 SEASON_ROAD_DEATH
+src/domain/spatial/migration.js:93:  // the season factor (SEASON_ROAD_DEATH) makes a WINTER war zone deadlier. MAX is
+src/domain/spatial/migration.js:151:export const SEASON_ROAD_DEATH = Object.freeze({
+src/domain/spatial/migration.js:223:    /** @type {Record<string, number>} */ (SEASON_ROAD_DEATH)[String(season)], 1);
+## 5 supply season
+src/domain/worldPulse/supplyKernel.js:213:export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
+## 6 SEASON_TERRAIN_COST / SEASONAL_OVERLAY_VERSION
+src/domain/spatial/spatialCost.js:82:export const SEASONAL_OVERLAY_VERSION = 2;
+src/domain/spatial/spatialCost.js:96:export const SEASON_TERRAIN_COST = Object.freeze({
+## 7 storms
+src/domain/spatial/distanceRead.js:375: * self-describing law. Unknown/absent season ⇒ 1.0. Always ≥ 1 (slow, not sever).
+src/domain/spatial/navalLayer.js:271: *  own stormSeasonCost law. ≥ 1 (slow, not sever); 1 when absent/unknown. Pure.
+src/domain/spatial/seaLanes.js:118:export const STORM_SEASON_COST = Object.freeze({
+## 8 planMarch season
+src/domain/spatial/armyTransit.js:696:export function planMarch(digest, worldState, originId, destId, readiness01, alignment, departTick, season = null) {
+src/domain/spatial/armyTransit.js:706:  const base = hopWeeks(digest, originId, destId, season);
+src/domain/spatial/armyTransit.js:696:export function planMarch(digest, worldState, originId, destId, readiness01, alignment, departTick, season = null) {
+src/domain/spatial/armyTransit.js:706:  const base = hopWeeks(digest, originId, destId, season);
+## 9 CLIMATE_BAND_VERSION
+src/domain/spatial/spatialDigest.js:134:export const CLIMATE_BAND_VERSION = 1;
+## 10 attrition season
+(eval):11: command not found: fd
+(eval):11: command not found: fd

@@ -1,0 +1,67 @@
+OLD L7-7: ## `[CURED 2026-10-17 (fp-final) — <id>: …]`, `[CURED 2026-10-18 (fp-final r1) — <id>: …]`, `[CURED 2026-10-18 (fp-final r2) — <id>: …]` and `[REFINED …]` brackets mark every change.
+
+OLD L235-235: The failure window is the strike's hearing week: when the siege resolves with the liege `kept`, the row's sibling `protection_failed` is written;
+
+OLD L235-235: Each row also patches trust/resentment through the one relationship writer, which moves grip and so the owner's scalar — that is how protection earns deference.
+
+OLD L241-241: The `episodeId` carries a REGISTERED PREFIX naming its occasion, so `rowId` stays exact-once and every reader tells the occasions apart with no new field (`FEALTY_EPISODE_PREFIXES`, closed and pinned): `polity_ban:<wnpcId>:<banTick>` (CH's harbouring of a banned paragon), `army:` / `column:` (PS's harbouring;
+
+OLD L241-241: the crossing's `unitKey`), `den_unanswered:<siteId>:<tick>` (ST's occasion, the bracket below);
+
+OLD L241-241: `FEALTY_EPISODE_PREFIXES` stays `polity_ban:` · `army:` / `column:` · `den_unanswered:`.] [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b PS-r2-3/4 ("the unit key is the unit's own stable id (the deployment id), never `departTick`"): the `army:` / `column:` episode is PS's STABLE unit key, whose kind prefix is the registered occasion (PS's key carries its kind as its prefix today — `'army:' + …`
+
+OLD L296-296: else it is `free`) · `free` (a relabel to `rival` through the polity verdict channel, §5.5 — never the landed `labelProposal`, whose always-proposal gate would be a second DM gate for one heard fact [CURED 2026-10-18 (fp-final r1) — PL-r1-10]).
+
+OLD L316-316: refusal is priced (a `fealty_defied` row and the deference patch) and, under `unbroken`, is cause for the liege's war of submission.
+
+OLD L328-328: | `fealty_question` | PL (PL-8) | the week after the lord's episode key changes (§5.6) | settlement — the vassal's seat | `renew · withhold · claim · free` | CLIMAX | the decider's answer (§5.6) |
+
+OLD L350-352: a `fealty_break` verdict through the polity verdict channel [CURED 2026-10-18 (fp-final r1) — PL-r1-15 · PL-r1-10: a flag of its own, out of `polityEnabled` and off the owner-lit seat] | `polityEnabled`;
+
+OLD L350-352: act (b) `coalitionLedgerEnabled` | all six (the war arm in war presets) |
+| `polityObligationsEnabled` | the decided WAR relief on sworn edges, the fealty record's writes (incl.
+
+OLD L350-352: the menace arm's relief and protection rows), the summons cascade, scutage, charters, passage, the common-liege mediator rule, the war of submission [CURED 2026-10-18 (fp-final r1) — PL-r1-11: relief's gates are each arm's real relief;
+
+OLD L350-352: war relief where ally defence is lit (full_simulation today) |
+| `politySuccessionEnabled` | the fealty question, the fallen lord's vassals | `polityEnabled`;
+
+OLD L399-399: `changeAuthorityPolicy.js` (238) one row;
+
+OLD L415-415: the `fealty_sworn` baseline when a sworn edge first meets the stage | the vassal rule stamps it on its rebellion stressor (`relationshipRulesCore.js`, a leaf call) |
+
+OLD L422-422: | dark-after-lit | kept, unread | the WIND-DOWN arm closes every contest `lapsed` at the next advance — recall stamps (`polity_verdict`), the record dropped, one receipt (§8) — and then no suspension and no guards remain [CURED 2026-10-18 (fp-final r1) — PL-r1-17] | kept, unread;
+
+OLD L422-422: menace relief keeps the one decider (MN's flag) and only its rows stop | kept;
+
+OLD L447-448: `relief_kept` then `protection_failed` on H–M;
+
+OLD L447-448: `protection_failed` on M–L and, if H keeps, on H–M |
+
+OLD L478-480: M (H's vassal) grants passage to K's column;
+
+OLD L478-480: separately M admits a paragon under H's `polity_ban` | two `fealty_defied` rows on H–M (episodes `column:…` and `polity_ban:…`), each with its deference patch, each written once;
+
+OLD L478-480: P5's separate peace still opens one [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2 A.14] |
+| P41 | `politySuccessionEnabled` lit, `polityContestEnabled` dark;
+
+OLD L478-480: `polityContestEnabled` cannot light without `polityHoldEnabled` [CURED 2026-10-18 (fp-final r2) — PL-V1 · PL-r1-15] |
+| P42 | K's column crosses M's and then N's land (both H's vassals);
+
+OLD L478-480: a week in which PS holds the unit at a border keeps the same episode — still ONE answer and one row per edge [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b PS-r2-3] |
+
+OLD L522-522: the owner's sign-off) that no PL term reads [CURED 2026-10-18 (fp-final r1) — HOST-r1-15] [REFINED 2026-10-18 (fp-final r2) — HOST-r2-9 (routed to ST and the fold, not to PL): H13's held sites and their garrison band are THE SITES' record;
+
+OLD L524-524: old edges relabel `neutral`, vassal formations last (§5.5) [CURED 2026-10-18 (fp-final r1) — PL-r1-2, RULINGS-ROUND1 PL-r1-2] [CURED 2026-10-18 (fp-final r2) — PL-V1 · PL-V2: two `auto` rows — the sealed `polity_verdict` minor, the engine's `polity_verdict_default` a major (`campaignAltering: true`, the `occupation_vassalized` idiom), so the DM's majors pause holds a default and never re-asks his 
+
+OLD L530-530: the verdict channel is a flagless shared row lit by any of its four owner flags] |
+
+OLD L535-535: occasions told apart by REGISTERED episode prefixes (`FEALTY_EPISODE_PREFIXES`: `polity_ban:` · `army:` / `column:` · `den_unanswered:`);
+
+OLD L537-537: rows per crossed sworn edge (§4.3) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2 C.Q4] [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b PS-r2-3: the `unitKey` is PS's stable unit id, never `departTick`, so a held week keeps one answer] |
+
+OLD L614-614: The root's decision to quarter them reads its own hold, `polityHoldOf(worldState, snapshot, rootId, rootId)` (§3.1 b).
+
+OLD L614-614: A SUB-VASSAL's roads are open to them only where the one crown-reach read gives the root a share there, `crownReachAt(worldState, snapshot, rootId, subVassalId, rootId).share01 > 0` (OD-PL-44;
+
+OLD L614-614: from then the host's patrol facts go OUT through the events window (H9) like every other host fact.

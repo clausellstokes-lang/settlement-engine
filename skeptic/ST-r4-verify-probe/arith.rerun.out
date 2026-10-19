@@ -1,0 +1,29 @@
+# body holder readiness (gang: x1; conclave of a fortification: x0.5), defender walls = r x 18
+provisioned  meagre    sound   gang      r=0.450 manned      walls=8.10
+provisioned  meagre    sound   conclave  r=0.225 sparse      walls=4.05
+provisioned  meagre    worn    gang      r=0.225 sparse      walls=4.05
+provisioned  meagre    worn    conclave  r=0.113 skeleton    walls=2.02
+provisioned  meagre    ruined  gang      r=0.000 hollow      walls=0.00
+provisioned  meagre    ruined  conclave  r=0.000 hollow      walls=0.00
+strained     unfunded  sound   gang      r=0.150 skeleton    walls=2.70
+strained     unfunded  sound   conclave  r=0.075 skeleton    walls=1.35
+strained     unfunded  worn    gang      r=0.075 skeleton    walls=1.35
+strained     unfunded  worn    conclave  r=0.037 skeleton    walls=0.67
+strained     unfunded  ruined  gang      r=0.000 hollow      walls=0.00
+strained     unfunded  ruined  conclave  r=0.000 hollow      walls=0.00
+starving     unfunded  sound   gang      r=0.150 skeleton    walls=2.70
+starving     unfunded  sound   conclave  r=0.075 skeleton    walls=1.35
+starving     unfunded  worn    gang      r=0.075 skeleton    walls=1.35
+starving     unfunded  worn    conclave  r=0.037 skeleton    walls=0.67
+starving     unfunded  ruined  gang      r=0.000 hollow      walls=0.00
+starving     unfunded  ruined  conclave  r=0.000 hollow      walls=0.00
+# saleScore = law + good; sold when >= 0
+lawful   good     score=+2 sold
+lawful   neutral  score=+1 sold
+lawful   evil     score=+0 sold
+neutral  good     score=+1 sold
+neutral  neutral  score=+0 sold
+neutral  evil     score=-1 refused
+chaotic  good     score=+0 sold
+chaotic  neutral  score=-1 refused
+chaotic  evil     score=-2 refused

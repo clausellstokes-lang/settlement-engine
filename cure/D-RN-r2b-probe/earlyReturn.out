@@ -1,0 +1,15 @@
+{
+ "worldStateSameRef": true,
+ "wizardNewsSameRef": true,
+ "settlementUpdatesSameRef": true,
+ "keys": [
+  "worldState",
+  "regionalGraph",
+  "wizardNews",
+  "settlementUpdates",
+  "evidence",
+  "autoApplied",
+  "newsEntries",
+  "ratifications"
+ ]
+}

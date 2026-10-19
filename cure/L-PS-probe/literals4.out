@@ -1,0 +1,23 @@
+== 'narrow' literals:
+src/domain/worldPulse/warCosts.js:41:export const WAR_COST_TRAJECTORY_MARGIN_BANDS = Object.freeze(['narrow', 'clear']);
+src/domain/worldPulse/warCosts.js:125: * @returns {{observed:boolean,trajectory:'losing'|'even'|'winning',trajectoryMarginBand:null|'narrow'|'clear'}}
+src/domain/worldPulse/warCosts.js:141:      : 'narrow',
+src/domain/worldPulse/warCosts.js:561: *   trajectoryMarginBand:null|'narrow'|'clear',
+src/domain/worldPulse/warCosts.js:563: *   receipt:null|{kind:string,audience:'public',stateRead:string,priorBelievedBand:string,currentBelievedBand:string,trajectory:'lo
+src/domain/worldPulse/warCosts.js:591:      trajectoryMarginBand: /** @type {'narrow'|'clear'} */ (read.trajectoryMarginBand),
+== 'wide' literals:
+== 'thin' literals:
+src/pdf/lib/headlines.js:129:  if (r.includes('marginal') || r.includes('thin')) return 'warn';
+src/components/new/tabs/EconomicsTab.jsx:351:  const granaryColor = granary.available ? (granary.band === 'nearly empty' ? '#8b1a1a' : granary.band === 'thin' ? '#a0762a'
+src/domain/capacityModel.js:309:    supply -= 10; push(supplyContributors, 'population', 'thin', -10, `Population ${pop} leaves little slack.`);
+src/domain/worldPulse/sovereigntyAppraisal.js:73:  'unknown', 'bare', 'thin', 'stocked', 'deep',
+src/domain/worldPulse/conquestFeasibility.js:89:  'unknown', 'bare', 'thin', 'stocked', 'deep',
+src/domain/worldPulse/armyTransitKernel.js:166:  return score < 0.2 ? 'bare' : score < 0.45 ? 'thin' : score < 0.75 ? 'stocked' : 'deep';
+== 'ample' literals:
+src/domain/worldPulse/demographicsPushPull.js:110:export const FOOD_FLOW_BANDS = Object.freeze(['famished', 'short', 'adequate', 'ample']);
+src/domain/worldPulse/demographicsPushPull.js:254:  if (ratio >= 1.15) return 'ample';
+== 'passageTolerance' literals:
+== 'toleranceWidth' literals:
+== 'guest' literals:
+== 'guests' literals:
+== 'sojourn' literals:

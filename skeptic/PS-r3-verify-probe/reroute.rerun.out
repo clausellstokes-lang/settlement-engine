@@ -1,0 +1,5 @@
+cases 348738 (span 2..52 x weeks-before x new span 1..52 x weeks-after samples)
+(a) LANDED restart (position01 -> 0 on the new path): strength RAISED above the pre-reroute moment in 180479 cases; worst +76.3%
+(b) literal fraction-of-campaign fatigue at the reroute instant: RAISED in 19746 of the reroute-instant cases (the detour lengthens the march, so the fraction falls)
+(c) BANKED floor/cap (fatigue rises from the floor; ground 0 abroad, capped at home): RAISED in 0
+(d) records with no reroute banked: inputs differ from the landed battleInputs in 0 (byte-identical by construction)

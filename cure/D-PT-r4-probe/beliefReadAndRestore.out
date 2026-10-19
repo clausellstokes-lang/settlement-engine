@@ -1,0 +1,164 @@
+{
+ "A8": {
+  "belief hostile, truth rival, no front": {
+   "beliefsActive": true,
+   "reason": "enemy_in_service",
+   "landed_atWarWith": false,
+   "atOpenWar": false
+  },
+  "belief allied, truth hostile, no front": {
+   "beliefsActive": true,
+   "reason": null,
+   "landed_atWarWith": true,
+   "atOpenWar": false
+  },
+  "belief hostile, truth hostile, no front (P49)": {
+   "beliefsActive": true,
+   "reason": "enemy_in_service",
+   "landed_atWarWith": true,
+   "atOpenWar": false
+  },
+  "belief hostile, truth hostile, LIVE FRONT (P49 war arm)": {
+   "beliefsActive": true,
+   "reason": "at_war_with_employer",
+   "landed_atWarWith": true,
+   "atOpenWar": true
+  },
+  "omniscient, truth hostile, no front": {
+   "beliefsActive": false,
+   "reason": "enemy_in_service",
+   "landed_atWarWith": true,
+   "atOpenWar": false
+  },
+  "omniscient, truth rival, no front": {
+   "beliefsActive": false,
+   "reason": null,
+   "landed_atWarWith": false,
+   "atOpenWar": false
+  }
+ },
+ "A19_A_priorWindowed": {
+  "before": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   }
+  ],
+  "afterBan": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "afterUndo": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   }
+  ],
+  "exact": true,
+  "bannedAt120": true,
+  "bannedAt160": false
+ },
+ "r3Inverse_rerun": {
+  "afterInverse": [],
+  "bannedAt120": false,
+  "priorBannedAt120": true
+ },
+ "A19_B_priorAbsent": {
+  "afterUndo": [],
+  "exact": true
+ },
+ "A19_C_priorIndefinite": {
+  "afterUndo": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "exact": true
+ },
+ "A19_D_region": {
+  "before": [
+   {
+    "settlementId": "Ashford",
+    "kind": "banishment_edict",
+    "indefinite": true
+   },
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   },
+   {
+    "settlementId": "Merewick",
+    "kind": "banishment_edict",
+    "untilTick": 140
+   }
+  ],
+  "afterUndo": [
+   {
+    "settlementId": "Ashford",
+    "kind": "banishment_edict",
+    "indefinite": true
+   },
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   },
+   {
+    "settlementId": "Merewick",
+    "kind": "banishment_edict",
+    "untilTick": 140
+   }
+  ],
+  "exact": true
+ },
+ "A19_E_pardonInverse": {
+  "afterPardon": [
+   {
+    "settlementId": "Tolle",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "afterUndo": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 152
+   },
+   {
+    "settlementId": "Tolle",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "exact": true,
+  "banKeysRestored": true
+ },
+ "A19_F_laterVerdict": {
+  "afterLaterVerdict": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "indefinite": true
+   }
+  ],
+  "afterUndoTokenOnly": [],
+  "afterUndoWithKeyWindow": [
+   {
+    "settlementId": "Kell",
+    "kind": "banishment_edict",
+    "untilTick": 160
+   }
+  ],
+  "courtBanStillAt150": true,
+  "openAt170": true
+ }
+}

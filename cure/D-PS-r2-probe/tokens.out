@@ -1,0 +1,34 @@
+unopposed src_quoted=0 src_word=8 tests_word=6 ledger_docs_files(excl PS)=1
+grudging src_quoted=0 src_word=3 tests_word=0 ledger_docs_files(excl PS)=3
+stopped src_quoted=0 src_word=349 tests_word=710 ledger_docs_files(excl PS)=109
+escorted src_quoted=0 src_word=2 tests_word=3 ledger_docs_files(excl PS)=6
+open_water src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+harbour src_quoted=0 src_word=104 tests_word=55 ledger_docs_files(excl PS)=36
+circle src_quoted=0 src_word=315 tests_word=227 ledger_docs_files(excl PS)=35
+marches src_quoted=0 src_word=68 tests_word=35 ledger_docs_files(excl PS)=21
+holdBeforeNode src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passageHopModes src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passageCrossingOf src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+sweptNodesOf src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+routeWeeks src_quoted=0 src_word=10 tests_word=11 ledger_docs_files(excl PS)=0
+routeAvoiding src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+enemyColumnPresence src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passage_kept src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passage_breached src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passage_trespassed src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+passage_barred src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+capStrength src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+PASSAGE_ENVOY_VERDICTS src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+reachedIdx src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+plannedArrival src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+heldBefore src_quoted=0 src_word=0 tests_word=3 ledger_docs_files(excl PS)=0
+pathSig src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=0
+turned_back src_quoted=0 src_word=0 tests_word=0 ledger_docs_files(excl PS)=3
+unopposed quoted_src=0
+grudging quoted_src=1
+stopped quoted_src=0
+escorted quoted_src=0
+harbour quoted_src=12
+circle quoted_src=21
+marches quoted_src=0
+open_water quoted_src=0

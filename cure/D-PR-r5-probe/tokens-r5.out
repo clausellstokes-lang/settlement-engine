@@ -1,0 +1,21 @@
+weeksCovered src 0 · tests 0 · master-docs 0 · ledger-docs 1
+holderEyesOf src 0 · tests 0 · master-docs 0 · ledger-docs 0
+NET_HOME_MIN src 0 · tests 0 · master-docs 0 · ledger-docs 0
+seasonStartTick src 0 · tests 0 · master-docs 0 · ledger-docs 1
+hunt_body src 0 · tests 0 · master-docs 0 · ledger-docs 4
+knownTrailsOf src 0 · tests 0 · master-docs 0 · ledger-docs 2
+believedBodyOf src 0 · tests 0 · master-docs 0 · ledger-docs 3
+ROAD_COVER_BY_MIGHT src 0 · tests 0 · master-docs 0 · ledger-docs 1
+hiddenWayEdges src 0 · tests 0 · master-docs 0 · ledger-docs 5
+riders_quartered src 0 · tests 0 · master-docs 0 · ledger-docs 3
+gleaned src 0 · tests 0 · master-docs 0 · ledger-docs 1
+glean src 0 · tests 0 · master-docs 0 · ledger-docs 1
+--- 'patrol' quoted literal in src:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/services/serviceAvailability.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/prose/wiringCensus.js
+--- HIDDEN_PATH_KINDS line:
+97:export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+     540 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkConsumers.js
+GLEAN_BASE src 0 · tests 0 · ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+GLEAN_CAP src 0 · tests 0 · ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md 
+leaderRef src 0 · tests 0 · ledger-docs: /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CH.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_RN.md /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_COHERENCE_FOLD.md /Users/cstokes/Desktop/settlement-engine/docs/EXHAUSTIVE_REMEDIATION_ARCHITECTURE.md 

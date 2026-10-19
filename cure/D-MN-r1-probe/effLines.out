@@ -1,0 +1,8 @@
+445	src/store/campaignRegionalSlice.js
+168	src/domain/events/drainQueuedEvents.js
+558	src/domain/worldPulse/stressors.js
+172	src/domain/spatial/embattlement.js
+180	src/domain/worldPulse/warSiegeVerdict.js
+231	src/domain/display/warStatus.js
+1581	src/domain/worldPulse/pulseKernel.js
+461	src/domain/worldPulse/calamityKernel.js

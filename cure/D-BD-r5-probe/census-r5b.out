@@ -1,0 +1,17 @@
+raided | quoted src 0 · quoted tests 0 · word src 1
+robbed_road | quoted src 0 · quoted tests 0 · word src 0
+fought | quoted src 0 · quoted tests 0 · word src 30
+sheltered | quoted src 4 · quoted tests 3 · word src 10
+merged | quoted src 0 · quoted tests 0 · word src 92
+paid_quarter | quoted src 0 · quoted tests 0 · word src 0
+fed_poor | quoted src 0 · quoted tests 0 · word src 0
+robbed_quarter | quoted src 0 · quoted tests 0 · word src 0
+ROAD_COVER_BY_MIGHT | quoted src 0 · quoted tests 0 · word src 0
+bodyRouteChoice | quoted src 0 · quoted tests 0 · word src 0
+bodyDefenceOf | quoted src 0 · quoted tests 0 · word src 0
+leaderOf | quoted src 0 · quoted tests 0 · word src 1
+guild_war | quoted src 0 · quoted tests 0 · word src 0
+captured_by_local_powers | quoted src 1 · quoted tests 2 · word src 2
+--- quoted hits (src) for the landed-looking ones
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/settlement.schema.js:1566: *             defensiveTerrain: 'exposed'|'open'|'mixed'|'sheltered'|'fortified',
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/townMap/townLayoutV2.js:96:const DEFENSIVE_BANDS = Object.freeze(['exposed', 'open', 'mixed', 'sheltered', 'fortified']);

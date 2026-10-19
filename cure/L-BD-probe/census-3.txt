@@ -1,0 +1,20 @@
+peace_unkept | lit=0 [] | word=0 | tests=0 | ledger=0
+traffic_waylaid | lit=0 [] | word=0 | tests=0 | ledger=0
+let_pass | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyStage | lit=0 [] | word=0 | tests=0 | ledger=0
+advanceBodies | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyLedger | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_STANCES | lit=0 [] | word=0 | tests=0 | ledger=0
+COURT_STANCES | lit=0 [] | word=0 | tests=0 | ledger=0
+bought_off | lit=0 [] | word=0 | tests=0 | ledger=1
+succeeds | lit=1 [src/domain/worldPulse/relationshipRulesCore.js ] | word=28 | tests=44 | ledger=44
+repelled | lit=0 [] | word=0 | tests=0 | ledger=15
+hearingWeekEnabled | lit=0 [] | word=0 | tests=0 | ledger=54
+bodyMightOf | lit=0 [] | word=0 | tests=0 | ledger=0
+hiddenWayEdges | lit=0 [] | word=0 | tests=0 | ledger=0
+knownTrails | lit=0 [] | word=0 | tests=0 | ledger=0
+trailKnowledge | lit=0 [] | word=0 | tests=0 | ledger=0
+sustenance01 | lit=0 [] | word=5 | tests=5 | ledger=0
+brigandage_exported | lit=0 [] | word=0 | tests=0 | ledger=0
+HABITAT | lit=0 [] | word=5 | tests=27 | ledger=15
+body_act | lit=0 [] | word=0 | tests=0 | ledger=0

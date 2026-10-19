@@ -1,0 +1,19 @@
+# V-PL-r4 (round 4b re-run) measurements at master 81f1cd963, Mon Oct 19 02:30:44 EDT 2026
+peace_unkept src_files=0 tests_files=0
+riders_lent src_files=0 tests_files=0
+huntOrderOf src_files=0 tests_files=0
+liegeAnswer src_files=0 tests_files=0
+siteReadiness01 src_files=0 tests_files=0
+SITE_READINESS src_files=0 tests_files=0
+at_strength src_files=0 tests_files=0
+riders_quartered src_files=0 tests_files=0
+quoted 'body: literals in src: 0
+readiness01 src files: 14
+banner src files: 80
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/relationshipState.js:203:export const RELATIONSHIP_ALLIANCE_CALL_CAP = 24;
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warCapacityReads.js:64:const ALLY_RELIEF_FRACTION = 0.4;
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warCapacityReads.js:93:    if (besiegedSet.has(ally)) continue; // an ally under its own siege sends nothing
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js:2442:    const armyTransit = advanceArmyTransit({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js:2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js:2442:    const armyTransit = advanceArmyTransit({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js:2752:  const treatyAdvance = advanceTreatiesWithDisposition({

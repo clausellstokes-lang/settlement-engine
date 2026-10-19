@@ -1,0 +1,8 @@
+advanceCommitments src/domain/worldPulse/momentum.js
+advanceWarReasons src/domain/worldPulse/warReasons.js
+advancePeaceReasons src/domain/worldPulse/peaceReasons.js
+advanceTreatiesWithDisposition src/domain/worldPulse/dispositionChannels.js
+advanceEnvoyDiplomacyPulse src/domain/worldPulse/envoyPulse.js
+advanceCauseLifecycle src/domain/worldPulse/causeLifecycle.js
+advanceIntervention src/domain/worldPulse/convergence.js
+advanceSettlementLifecycle src/domain/worldPulse/settlementLifecycleKernel.js

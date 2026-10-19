@@ -1,0 +1,38 @@
+## stressorGates legitimacy band rows
+src/domain/worldPulse/stressorGates.js:63:// not re-wire it — every gate below already carries legitimacy band rows, and `coupSpawnGate`
+## coup/insurgency/political_fracture gates
+6: * (coup_detat's coupSpawnGate, formerly local to stressors.js) into a
+116:   * The occupied insurgency replacement's span. ⛔ MEASURED, NOT CHOSEN: `insurgencyGate`'s
+506:  const coupEcho = echoStrengthAt(snapshot, sid, 'coup_detat');
+619:  if (activeTypesAt(snapshot, sid).has('coup_detat')) return null;
+622:    echoStrengthAt(snapshot, sid, 'coup_detat') > 0.15
+661:function insurgencyGate(snapshot, pressure) {
+707:    // merely-tolerated regime faces a WEAKER pull toward armed insurgency than toward
+744:  // Under occupation the uprising is a RESISTANCE — insurgency models it.
+## applyFactionPatch
+src/domain/worldPulse/factionCompetition.js:1106:export function applyFactionPatch(worldState, outcome) {
+## applyRelationshipPatch
+src/domain/worldPulse/relationshipEvolution.js:490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
+## withActiveCondition
+src/domain/activeConditions.js:721:export function withActiveCondition(settlement, partial) {
+## council_schism inline
+746:    // M9a DISSENT → council_schism: a faction reading the world materially
+762:          archetype: 'council_schism',
+770:            effect: 'council_schism',
+## CONDITION_ARCHETYPE_TEMPLATES
+src/domain/activeConditions.js:58:export const CONDITION_ARCHETYPE_TEMPLATES = Object.freeze({
+## deriveDefenseReadiness
+src/domain/causalState.js:1034:function deriveDefenseReadiness(s) {
+src/domain/causalState.js-1035-  let score = 50;
+src/domain/causalState.js-1036-  /** @type {CausalContributor[]} */
+src/domain/causalState.js-1037-  const contributors = [];
+src/domain/causalState.js-1038-
+src/domain/causalState.js-1039-  const def = s.defenseProfile || {};
+src/domain/causalState.js-1040-  // Read the persisted numeric readiness via the conserved defense ledger.
+src/domain/display/defenseDisplay.js:358:export function deriveDefenseReadiness(settlement) {
+src/domain/display/defenseDisplay.js-359-  const r = settlement || {};
+src/domain/display/defenseDisplay.js-360-  const scores = r.defenseProfile?.scores || {};
+src/domain/display/defenseDisplay.js-361-  const gates = r.defenseProfile?.economicGates || {};
+src/domain/display/defenseDisplay.js-362-  const f = r.economicState?.compound?.inst || {};
+## counterforces
+(eval):1: no matches found: src/domain/worldPulse/stressorCounterforces*.js

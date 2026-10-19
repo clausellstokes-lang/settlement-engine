@@ -1,0 +1,56 @@
+@@LINE - **Piracy is parity** (the owner):
+@@NEW
+- **Piracy is parity** (the owner): a menace on a sea lane is a menace on a road; the seams are node-keyed and modality-blind (`spatial/navalLayer.js`, its piracy-parity note: "scoreRoute prices port-node embattlement into sea routes verbatim (pinned since M8) and banditryLoss fires on EVERY arriving shipment sea or land alike"), so a menace holding a lane presses its two harbour towns and the shipments through them are lost to piracy by the landed roll. **THE SEA IS IN THE BOOKS — MN MINTS NO SEA LAW AND NO SEA FIGHT** [REFINED 2026-10-18 (fp-final r2) — the owner's 06:35 question, "Regarding weather and Sea route isn't this already in the books?"] [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-1 (BLOCKING): the round-2 text named "WY's `navalTransit`" and "W11's blockade" (no such wave id on master) and said "no naval program", leaving out the navy the owner commissioned on 2026-07-15, landed and lit; and MN's echoes of CHAIR-NOTES 13–14 that HOST-r2-13 and HOST-r2-1 convicted at the fold (a storm as "the calamity bucket on a lane"; the climate band owed "the day the band lands") — RULINGS-ROUND2b HOST-r2-1 corrects the chair's own words]. The sea's carriers, every one landed: (a) M8's sea lanes, ports and storm seasons (`spatial/seaLanes.js :: STORM_SEASON_COST` — "winter storms price up the cheap sea route"; a port = geography ∧ a maritime institution); (b) W-NAVY — navies, convoys, sea battles and the blockade (`docs/DESIGN_NAVY.md`; `spatial/navalLayer.js` and `worldPulse/navalKernel.js`: "SEA BATTLES: two HOSTILE navies whose paths share a SEA EDGE collide there"; "a navy blockading a hostile port MINTS A SIEGE"; the `navalTransit` ledger is W-NAVY's, which WY's projection only draws; `navalEnabled: true` in `simulationRules.js :: WAVES`); (c) D-6's sea roads for missions (`roads/seaRoads.js`: "blockade capture (S1), storm delay (S2, priced not severed), and piracy (S3 = banditry-by-construction)", behind `seaRoadsEnabled`, which no preset lights today). For a menace that means: a sea lane is a `road` in every MN read (its WHERE, its presence term at the two harbour towns, its march by `hopWeeks` with the season — `pathCost` takes the sea-augmented route whenever an endpoint is a port, exactly as armies already sail); a menace that crosses a lane arrives in the far harbour town's country as on any road and rides NO convoy (W-NAVY convoys "an own/allied army over water", and a menace is no one's army, MN6); NO NAVY ENGAGES A MENACE — W-NAVY's sea battle is between hostile navies, and a menace is no navy and no court at war — so a menace at sea is answered at its ports like any road menace (the raider counterforce's wear, decided relief, `menace_met` at a town): closed with that reason, never a sea battle; a storm on a lane is the landed storm-season law (M8's storm cost, D-6's S2 delay — slow, never sever), never a calamity on a lane and never a menace's weather, and a storm that STRIKES a port town is the calamity bucket there, by that settlement's own stressor (MN11); a blockade is W-NAVY's war siege, and where a menace also stands at that port the war's siege is born beside the menace's by §3.2's admission (PLAUSIBLE: the blockade's siege is born on the war's own interpretation); a harbour's site (THE SITES' `harbour_works`; the port test the digest's `isPort`) suppresses as every held site does (§3.3). The SEASONS at the macro level reach a menace only through `hopWeeks`'s ONE seasonal law: winter SLOWS a pass and NEVER cuts it (`spatial/spatialCost.js :: SLOW_NOT_SEVER_MAX` 6 — "Every value FINITE and ≥ 1"); the per-settlement climate band is already landed (`worldPulse/seasons.js :: climateBandFor`, read by the food year — W-CAP CAP-3) and reaches the march only when travel's one seasonal table is re-versioned to read it (the host document's H11 climate-band version; a `SEASONAL_OVERLAY_VERSION` step), where it scales the slowing — never an MN multiplier and never a closure; the harvest's band and the plague's season (`pestilenceKernel.js`'s `hopWeeks(digest, id, nb.neighbourId, season)`) are landed, and neither is MN's.
+@@END
+@@OLD
+a warden paragon (`domain: 'wildland'`, `polarity: 'champion'`, `aim.exert`) exerting there, CH lit
+@@NEW
+a warden paragon (`domain: 'wildland'`, `polarity: 'champion'`) whose week's `exertion.outcome` there is `exerted`, CH lit
+@@END
+@@OLD
+a pin reds on the literal `'wilds'` in MN's leaves
+@@NEW
+a pin reds on the literal `'wilds'` in MN's leaves, and on any read of `aim.exert` there (SEAMS-r2-5)
+@@END
+@@OLD
+| M52 |
+@@NEW
+| M53 | canonized map; THE SITES, THE PATROLS and THE PASSAGE lit; Merewick's column (hostile) in Tolle's land while a capable menace raids Tolle's country; Tolle's held fort suppresses 0.20 and its riders 0.15 | `presenceTerms` at Tolle = 0.60, the column's term unsuppressed — never 0.35 and never a sum; a CALM Tolle latches `embattled` (PS's P14 holds); the menace's raid part reads 0.35 inside the max; when the column leaves Tolle's land the term falls to 0.35 and Tolle relaxes by its own hysteresis (EXECUTED on master's `stepEmbattlement`, `cure/D-MN-r2b.md` §1(c)) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7] |
+| M54 | a strong menace at Kell's walls; a warden paragon in Kell decides to exert (`aim.exert` true) and its exertion FALTERS (`exertion.outcome: 'faltered'`); a later week a duel there leaves the warden `voided` | in neither week does the siege's draw bias or the wear read carry a paragon lean; a week whose outcome is `exerted` moves the bias +0.05 toward holding; an `indecisive` duel between the warden and a beast-caller leaves both `exerted`, and their leans cancel [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-5] |
+| M55 | a canonized map with sea lanes, `navalEnabled` lit; a menace holds the sea lane between two ports; a navy hostile to one port sails a path over that lane | both port towns carry the menace's presence term; a shipment arriving through either port rolls banditry on the raised level, and a loss over sea is named piracy; NO sea battle, NO `navalTransit` row and NO `resolveFieldBattle` call names the menace; in storm season the menace's own crossing takes longer and is never severed [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-1] |
+| M52 |
+@@END
+@@OLD
+the pins test the LATCH [CURED 2026-10-18 (fp-final r1) — MN-r1-3 · MN-r1-11] |
+@@NEW
+the pins test the LATCH [CURED 2026-10-18 (fp-final r1) — MN-r1-3 · MN-r1-11]; THREE registered feeders (menace · untied site · enemy column, PS12) in ONE sentence (§3.3); SUPPRESSIBLE, the raid-and-road part only (sites and riders, one shared 0.25); NEVER SUPPRESSED, the walls term and an enemy column — the composer's call, written alike by PS12 (OD-PS-19), which the seams skeptic named the chair's: vetoable by one clause at P4; a column latches a kept, watched town (EXECUTED) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7] |
+@@END
+@@OLD
+[CURED 2026-10-18 (fp-final r2) — MN-r1-6; REFINED — the fence's full scope, EXECUTED] |
+@@NEW
+[CURED 2026-10-18 (fp-final r2) — MN-r1-6; REFINED — the fence's full scope, EXECUTED]; the measurement note ACCEPTED by the chair ("no clear needed; MN's cure stands as measured" — RULINGS-ROUND2b) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b] |
+@@END
+@@OLD
+(exerting; `polarity` `champion` toward holding, `villain` toward the breach)
+@@NEW
+(its week's `exertion.outcome` `exerted`, read through CH's `paragonLean`, never `aim.exert`; `polarity` `champion` toward holding, `villain` toward the breach)
+@@END
+@@OLD
+never as a second MN term [CURED
+@@NEW
+never as a second MN term — which IS PR filling slot (2) as RULINGS-ROUND2b accepted it ("two consumers, one value": one entry, the stamp carrying it to the menace's wear) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-5 · RULINGS-ROUND2b (slot (2))] [CURED
+@@END
+@@LINE | OD-MN-38 | The sea and the seasons |
+@@NEW
+| OD-MN-38 | The sea and the seasons | THE SEA IS IN THE BOOKS — MN MINTS NO SEA LAW AND NO SEA FIGHT (§6): its carriers are M8 (sea lanes, ports, `STORM_SEASON_COST`), W-NAVY (`docs/DESIGN_NAVY.md`, owner-commissioned: navies, convoys on its `navalTransit` ledger, sea battles between hostile navies, the blockade that mints a siege; `navalEnabled` lit in `WAVES`) and D-6's sea roads (S1–S3 behind `seaRoadsEnabled`, lit in no preset); a sea lane is a `road` in every MN read; a menace rides no convoy and no navy engages it (closed with reason: it is no navy and no court at war, so it is answered at its ports); a storm on a lane is the landed storm-season law (slow, never sever) and a storm striking a port town the calamity bucket there; the march calls `hopWeeks(digest, a, b, season)` so the land's seasonal law and the sea's storm law apply with no MN constant, the leaf receiving `digest` and `season` from its host; winter slows a pass and never cuts it (`SLOW_NOT_SEVER_MAX`); the landed climate band reaches the march only through travel's one re-versioned seasonal table (H11's climate-band version), where it scales the slowing [REFINED 2026-10-18 (fp-final r2) — the owner's 06:35 question] [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-1 and MN's echoes of HOST-r2-13 and HOST-r2-1 (RULINGS-ROUND2b): "WY's `navalTransit`", "W11's blockade", "no naval program", the storm "on a lane" and the band "the day it lands" struck] |
+@@END
+@@OLD
+until THE PATROLS lights and opens H16;
+@@NEW
+until THE PATROLS lights and the host sends its patrol facts out through the events window (H9) — H16 is the map's inbound door (RULINGS-ROUND2b HOST-r2-5);
+@@END
+@@OLD
+touches no MN read (a menace has no gate) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2 §E] |
+@@NEW
+touches no MN read (a menace has no gate) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2 §E]; a grouped detachment is a weekly-placed body of the town's own capacity, never a WC column (STOP-PR-0); a ready keep enters MN-2 only through `homeDefense`, so a bigger keep never raises a menace's breach odds (RULINGS-ROUND2b ST-r2-4/5's pin holds by MN-2's core, which has no `relief01`); an enemy column is the presence term's third feeder and is never suppressed (§3.3) [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b HOST-r2-5 · STOP-PR-0 · SEAMS-r2-7; REFINED — the keep's pin stated for MN-2] |
+@@END

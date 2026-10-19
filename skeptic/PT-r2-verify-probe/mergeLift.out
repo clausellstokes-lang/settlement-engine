@@ -1,0 +1,25 @@
+{
+ "afterEmergent": [
+  {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "untilTick": 152
+  }
+ ],
+ "afterAuthored": [
+  {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  }
+ ],
+ "liftedEdges": [
+  {
+   "settlementId": "Kell",
+   "kind": "banishment_edict",
+   "indefinite": true
+  }
+ ],
+ "afterLapse": [],
+ "stillBannedAtKell": false
+}

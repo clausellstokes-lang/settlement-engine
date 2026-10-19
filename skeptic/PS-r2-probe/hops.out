@@ -1,0 +1,204 @@
+[
+ {
+  "name": "grid-24x18-12",
+  "readiness": 0.5,
+  "season": null,
+  "settlements": 12,
+  "pairs": 132,
+  "intermediatePaths": 94,
+  "seaPaths": 0,
+  "noGateHops": 0,
+  "skipMarches": 2,
+  "skippedNodes": 2,
+  "examples": [
+   {
+    "o": "s002",
+    "d": "s006",
+    "hops": 4,
+    "marchWeeks": 3,
+    "sea": 0,
+    "skipped": [
+     2
+    ]
+   },
+   {
+    "o": "s006",
+    "d": "s002",
+    "hops": 4,
+    "marchWeeks": 3,
+    "sea": 0,
+    "skipped": [
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "name": "grid-24x18-12",
+  "readiness": 0.9,
+  "season": null,
+  "settlements": 12,
+  "pairs": 132,
+  "intermediatePaths": 94,
+  "seaPaths": 0,
+  "noGateHops": 0,
+  "skipMarches": 2,
+  "skippedNodes": 2,
+  "examples": [
+   {
+    "o": "s002",
+    "d": "s006",
+    "hops": 4,
+    "marchWeeks": 3,
+    "sea": 0,
+    "skipped": [
+     2
+    ]
+   },
+   {
+    "o": "s006",
+    "d": "s002",
+    "hops": 4,
+    "marchWeeks": 3,
+    "sea": 0,
+    "skipped": [
+     2
+    ]
+   }
+  ]
+ },
+ {
+  "name": "ports-24x18 (sea+seasons)",
+  "readiness": 0.5,
+  "season": null,
+  "settlements": 8,
+  "pairs": 56,
+  "intermediatePaths": 37,
+  "seaPaths": 44,
+  "noGateHops": 27,
+  "skipMarches": 10,
+  "skippedNodes": 15,
+  "examples": [
+   {
+    "o": "p000",
+    "d": "p003",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 2,
+    "skipped": [
+     1
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p004",
+    "hops": 4,
+    "marchWeeks": 2,
+    "sea": 3,
+    "skipped": [
+     1,
+     3
+    ]
+   },
+   {
+    "o": "p001",
+    "d": "p004",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 2,
+    "skipped": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "name": "ports-24x18 (sea+seasons)",
+  "readiness": 0.5,
+  "season": "winter",
+  "settlements": 8,
+  "pairs": 56,
+  "intermediatePaths": 41,
+  "seaPaths": 42,
+  "noGateHops": 34,
+  "skipMarches": 10,
+  "skippedNodes": 15,
+  "examples": [
+   {
+    "o": "p000",
+    "d": "p003",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 2,
+    "skipped": [
+     1
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p004",
+    "hops": 4,
+    "marchWeeks": 2,
+    "sea": 3,
+    "skipped": [
+     1,
+     3
+    ]
+   },
+   {
+    "o": "p001",
+    "d": "p004",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 2,
+    "skipped": [
+     1
+    ]
+   }
+  ]
+ },
+ {
+  "name": "portCoast-8 (sea)",
+  "readiness": 0.5,
+  "season": null,
+  "settlements": 8,
+  "pairs": 56,
+  "intermediatePaths": 36,
+  "seaPaths": 56,
+  "noGateHops": 39,
+  "skipMarches": 16,
+  "skippedNodes": 26,
+  "examples": [
+   {
+    "o": "p000",
+    "d": "p005",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 3,
+    "skipped": [
+     1
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p006",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 3,
+    "skipped": [
+     1
+    ]
+   },
+   {
+    "o": "p000",
+    "d": "p007",
+    "hops": 3,
+    "marchWeeks": 2,
+    "sea": 3,
+    "skipped": [
+     1
+    ]
+   }
+  ]
+ }
+]

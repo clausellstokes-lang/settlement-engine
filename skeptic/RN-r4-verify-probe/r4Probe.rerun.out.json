@@ -1,0 +1,148 @@
+{
+ "A_relayPrice_meet_to_home_weeks": 1,
+ "A_hopWeeks_meet_home_raw": 1,
+ "A_notableTtl": 13,
+ "A_findingsTelling": [
+  {
+   "label": "round-3 RN text (origin the meeting town; guard null; arrival at once)",
+   "originId": "meet",
+   "seedArrivalTick": 10,
+   "seedRelayedTick": null,
+   "everHeld": [
+    "fourth",
+    "home",
+    "meet",
+    "post",
+    "third"
+   ],
+   "firstVisibleAtOrigin": 10,
+   "goneAtOrigin": 24
+  },
+  {
+   "label": "A.9 CURED (origin the seat; guard pre-stamped; arrival = tick + the carry)",
+   "originId": "home",
+   "seedArrivalTick": 11,
+   "seedRelayedTick": 10,
+   "everHeld": [
+    "home"
+   ],
+   "firstVisibleAtOrigin": 11,
+   "goneAtOrigin": 25
+  },
+  {
+   "label": "a row that declares nothing (the leak default: relayed exactly as a feed seed)",
+   "originId": "third",
+   "seedArrivalTick": 10,
+   "seedRelayedTick": null,
+   "everHeld": [
+    "fourth",
+    "home",
+    "meet",
+    "post",
+    "third"
+   ],
+   "firstVisibleAtOrigin": 10,
+   "goneAtOrigin": 24
+  }
+ ],
+ "B_postureBandOf_exported": false,
+ "B_postureBandOf_source": "function postureBandOf(relationshipType) {\n  const word = text(relationshipType).toLowerCase();\n  if (['allied', 'patron', 'client', 'vassal', 'trade_partner'].includes(word)) return 'friendly';\n  if (['hostile', 'cold_war', 'rival'].includes(word)) return 'hostile';\n  return 'neutral';\n}",
+ "B_POSTURE_BANDS": [
+  "friendly",
+  "neutral",
+  "hostile"
+ ],
+ "B_courtStockDark_weight": 1,
+ "B_byLabel_condemnation": [
+  {
+   "label": "neutral",
+   "band": "neutral",
+   "factor": 0,
+   "termStockDark": 0,
+   "termTrustedCourt": 0,
+   "termProvenLiar": 0
+  },
+  {
+   "label": "trade_partner",
+   "band": "friendly",
+   "factor": 1,
+   "termStockDark": -0.4,
+   "termTrustedCourt": -0.4,
+   "termProvenLiar": -0.175
+  },
+  {
+   "label": "allied",
+   "band": "friendly",
+   "factor": 1,
+   "termStockDark": -0.4,
+   "termTrustedCourt": -0.4,
+   "termProvenLiar": -0.175
+  },
+  {
+   "label": "patron",
+   "band": "friendly",
+   "factor": 1,
+   "termStockDark": -0.4,
+   "termTrustedCourt": -0.4,
+   "termProvenLiar": -0.175
+  },
+  {
+   "label": "client",
+   "band": "friendly",
+   "factor": 1,
+   "termStockDark": -0.4,
+   "termTrustedCourt": -0.4,
+   "termProvenLiar": -0.175
+  },
+  {
+   "label": "vassal",
+   "band": "friendly",
+   "factor": 1,
+   "termStockDark": -0.4,
+   "termTrustedCourt": -0.4,
+   "termProvenLiar": -0.175
+  },
+  {
+   "label": "rival",
+   "band": "hostile",
+   "factor": -1,
+   "termStockDark": 0.4,
+   "termTrustedCourt": 0.4,
+   "termProvenLiar": 0.175
+  },
+  {
+   "label": "cold_war",
+   "band": "hostile",
+   "factor": -1,
+   "termStockDark": 0.4,
+   "termTrustedCourt": 0.4,
+   "termProvenLiar": 0.175
+  },
+  {
+   "label": "hostile",
+   "band": "hostile",
+   "factor": -1,
+   "termStockDark": 0.4,
+   "termTrustedCourt": 0.4,
+   "termProvenLiar": 0.175
+  },
+  {
+   "label": "criminal_network",
+   "band": "neutral",
+   "factor": 0,
+   "termStockDark": 0,
+   "termTrustedCourt": 0,
+   "termProvenLiar": 0
+  },
+  {
+   "label": "(no pair state)",
+   "band": "neutral",
+   "factor": 0,
+   "termStockDark": 0,
+   "termTrustedCourt": 0,
+   "termProvenLiar": 0
+  }
+ ],
+ "B_ownCommons": "EXCLUDED by rule (no term) — the voice is theirs",
+ "B_round3_formula_indifferentHearer": -0.5
+}

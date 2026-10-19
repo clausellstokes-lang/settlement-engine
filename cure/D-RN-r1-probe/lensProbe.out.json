@@ -1,0 +1,74 @@
+{
+  "rivalNetAtDefaults": -0.4,
+  "neutralNetAtDefaults": 0,
+  "alliedNetAtDefaults": 0.6,
+  "hostileNetAtDefaults": -0.8,
+  "R4_goodRival": {
+    "one": 0.18,
+    "two": -0.4,
+    "reading": 0,
+    "band": "merciful",
+    "grudge": false
+  },
+  "R4b_balancedRival": {
+    "one": 0,
+    "two": -0.4,
+    "reading": 0,
+    "band": "balanced",
+    "grudge": false
+  },
+  "R5_maliciousRival": {
+    "one": 0,
+    "two": -0.4,
+    "reading": -0.2,
+    "band": "malicious",
+    "grudge": true
+  },
+  "R26_maliciousNonRival": {
+    "one": 0,
+    "two": 0,
+    "reading": 0,
+    "band": "malicious",
+    "grudge": false
+  },
+  "goodNonRival": {
+    "one": 0.18,
+    "two": 0,
+    "reading": 0.09,
+    "band": "merciful",
+    "grudge": false
+  },
+  "goodAlly": {
+    "one": 0.18,
+    "two": 0.6,
+    "reading": 0.39,
+    "band": "merciful",
+    "grudge": false
+  },
+  "cruelActByEvil": {
+    "one": 0.24,
+    "two": 0,
+    "reading": 0.12,
+    "band": "malicious",
+    "grudge": false
+  },
+  "cruelActByGood": {
+    "one": -0.18,
+    "two": 0,
+    "reading": -0.09,
+    "band": "merciful",
+    "grudge": true
+  },
+  "credibility": {
+    "tuning": {
+      "TRUE_RISE": 0.6,
+      "LIE_FALL": 6.5,
+      "HALF_LIFE_TICKS": 52
+    },
+    "lieFall_weight0": 0.4719,
+    "lieFall_weeksToOrdinary_ge090": 125,
+    "missFall2_weight0": 0.8375,
+    "missFall2_weeksToOrdinary_ge090": 37,
+    "keptOnce_weight0": 1.0112
+  }
+}

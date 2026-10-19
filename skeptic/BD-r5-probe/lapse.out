@@ -1,0 +1,4 @@
+NEUTRAL_I 5000 CAP_I 8500 | lapse band read A: |stock-neutral| <= 0.1 x NEUTRAL_I = 500 | read B: <= 0.1 x (CAP_I-NEUTRAL_I) = 350
+lawless        one credit from neutral -> glancing: +270 · telling: +770 · grave: +1078 · ruinous: +616
+balanced       one credit from neutral -> glancing: +172 · telling: +490 · grave: +686 · ruinous: +392
+lawful         one credit from neutral -> glancing: +110 · telling: +315 · grave: +441 · ruinous: +252

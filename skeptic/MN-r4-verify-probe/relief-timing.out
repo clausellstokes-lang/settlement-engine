@@ -1,0 +1,7 @@
+# master 81f1cd963 — stage order and rumor hop latency (read-only greps)
+2097:    const rumors = advanceRumorLedgers({
+2194:    const envoys = advanceEnvoyDiplomacyPulse({
+2527:    const calamity = advanceCalamity({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+693:          const travelTicks = Math.max(1, finiteNumber(weeks, 1));
+679:      if (finiteNumber(record.arrivalTick, Infinity) > now) continue; // in transit

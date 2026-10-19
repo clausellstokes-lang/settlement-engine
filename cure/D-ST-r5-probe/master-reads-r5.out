@@ -1,0 +1,35 @@
+== m1 pulseKernel stage order
+2097:    const rumors = advanceRumorLedgers({
+2391:    const emb = advanceEmbattlement({ threats, worldState: memoryState, tick: worldState.tick });
+2527:    const calamity = advanceCalamity({
+== m2 calamityKernel size + head
+     873 src/domain/worldPulse/calamityKernel.js
+609:export function advanceCalamity({ settlementUpdates, worldState, snapshot, digest, pIndex, rules, rng, season, prevWeeks, weeks, tick, now }) {
+== m3 deityAxes
+50:const EVIL01 = Object.freeze({ evil: 1, neutral: 0.5, good: 0 });
+52:const CHAOS01 = Object.freeze({ chaotic: 1, neutral: 0.5, lawful: 0 });
+== m4 rumor scope idiom
+src/foundry/generateFoundryModule.js:70:      scope: 'settlement',
+src/utils/generateSettlementPDF.js:372:      scope: 'settlement',
+src/domain/worldPulse/settlementLifecycleFirstClass.js:792:    type: 'FORCE_ABANDON', family: 'Realm', scope: 'settlement', authority: 'dm_direct',
+src/domain/worldPulse/settlementLifecycleFirstClass.js:802:    type: 'FORCE_RESETTLE', family: 'Realm', scope: 'settlement', authority: 'dm_direct',
+src/domain/worldPulse/calamityKernel.js:567:    type: 'FORCE_CALAMITY', family: 'War', scope: 'settlement', authority: 'dm_direct',
+src/domain/worldPulse/stressorAftermath.js:118:    scope: 'settlement',
+src/domain/worldPulse/dispositionNews.js:197:    scope: 'settlement',
+src/domain/worldPulse/settlementLifecycleKernel.js:1239:    type: 'FORCE_FOUND_STEADING', family: 'Realm', scope: 'settlement', authority: 'dm_direct',
+== m5 rumor scope field
+src/domain/aiOutputSchema.js:543:  if (group.scope === 'settlement' || group.scope === 'pair') {
+src/domain/worldPulse/worldPulseFeedCuration.js:81:  if (major && scope === 'settlement'
+src/domain/autonomy/stopConditions.js:80:  if ((entry.scope === 'settlement' || entry.scope === 'pair') && !node.settlementId) {
+src/domain/ai/stateSlicers.js:161:      if (entry.scope === 'settlement') {
+src/domain/ai/stateSlicers.js:189:    if (entry.scope === 'settlement' && !hasSettlement) continue;
+src/domain/autonomy/signalRegistry.js:295:  if ((entry.scope === 'settlement' || entry.scope === 'pair') && !sid) {
+== m6 religionState standingFor
+152:  if (prev === 'ascendant') return share >= A - H ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+153:  if (prev === 'established') return share >= A ? 'ascendant' : (share >= E - H ? 'established' : 'cult');
+154:  return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');
+== m7 warCapacityReads homeDefense
+191:    const homeDefense = Math.max(0, offensive - armyAway);
+== m8 SIEGE_VERDICT_BANDS
+99:export const SIEGE_VERDICT_BANDS = Object.freeze({ costly_success: true, decisive_fail: false, decisive_success: true, narrow_fail: false });
+105: * are DERIVED from `SIEGE_VERDICT_BANDS` above rather than transcribed, so a band added or

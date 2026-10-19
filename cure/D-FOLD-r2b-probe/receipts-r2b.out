@@ -1,0 +1,264 @@
+# D-FOLD-r2b code receipts (master worktree; Sun Oct 18 12:05:29 EDT 2026)
+## W-NAVY
+# DESIGN — THE NAVY (the sea is a road where losing means drowning)
+## Fable 5 architecture, 2026-07-15 — owner-commissioned: navies convoy own/allied armies on water routes; hostile navies meeting = a sea battle with LAND-PARITY semantics (loser retreats to home port); an army at sea shares its convoy's fate; and THE BLOCKADE LAW, verbatim: "a blockade is the same as a siege." Grounded by the dedicated naval recon (2026-07-15) whose headline reshapes the wave: 
+### Companion: DESIGN_CONVERGENCE (the engagement law navies join). Builds as W-NAVY immediately after W-CONVERGENCE.
+
+## 0. THE SCOPE SUPERSESSION (conscious, owner-driven)
+M8 shipped with a declared boundary — seaLanes.js: "NO FLEET COMBAT… this module mints no
+battle" — and a pin freezing the digest slot's exact shape. The owner's three naval laws
+explicitly supersede the boundary. HOW we supersede honors the pin: **navies never live in the
+frozen slot.** Fleet state lives in `spatialLedgers` (the armyTransit pattern — drop-when-empty,
+zero eager, no digest version-axis event, no re-canonize). The M8 slot stays byte-frozen; the
+"no fleet combat" scope comment is amended to point here. (JUDGMENT, vetoable: ledger-not-slot.)
+
+12: *   • SEA BATTLES: two HOSTILE navies whose paths share a SEA EDGE collide there — resolved
+15: *     army SHARES the convoy's fate (the heaviest bounded loss band + a forced debark at the
+18: *   • BLOCKADE (Stage 4, added next): a navy blockading a hostile port MINTS A SIEGE through
+424:  // ── SEA BATTLES: hostile navies sharing a sea edge collide (resolveFieldBattle verbatim). ─
+rg: src/domain/simulationRules.js: IO error for operation on src/domain/simulationRules.js: No such file or directory (os error 2)
+src/domain/worldPulse/realmVerbExecution.js:126:  ORDER_INTERVENTION: 'patronId', ORDER_CONVOY: 'ownerId', DECLARE_BLOCKADE: 'ownerId',
+src/domain/worldPulse/realmVerbExecution.js:147:    case 'ORDER_CONVOY': return `${n(args.ownerId)}'s fleet is ordered to convoy its army to ${n(args.destId)}`;
+src/domain/worldPulse/realmVerbExecution.js:617:    case 'ORDER_CONVOY': {
+src/domain/worldPulse/navalKernel.js:8: *   • DERIVE CONVOYS: a committed deployment whose target is a sea-reachable PORT, from a
+src/domain/worldPulse/navalKernel.js:9: *     port that fields a war navy, gains a CONVOY record (the sea lift's battle exposure) —
+5: * sea-aware current-leg read, and a PASS-3 SEA-HAZARD branch — blockade capture (S1), storm delay
+6: * (S2, priced not severed), and piracy (S3 = banditry-by-construction). NO parallel mission
+12: * machinery gates). S1 additionally needs navalEnabled (blockades are a naval state); S2/S3 do
+41:/** Is naval state live? (S1 blockade capture needs it; S2/S3 do not.) Pure.
+50:  S1_BLOCKADE_BASE: 0.30, S1_BLOCKADE_ALPHA: 0.25, // a fleet respects an escort even less than an army (the T1 partial-bypass law at sea)
+51:  S2_STORM_INCIDENCE: 0.20, // per autumn/winter sea-hop tick: stormChance = clamp((stormMult-1) × this, 0, MAX)
+52:  S2_STORM_INCIDENCE_MAX: 0.40,
+53:  S3_PIRACY_BASE: 0.12, S3_PIRACY_ALPHA: 1.0, // the T3 twin VERBATIM (× embattlement level)
+## SEASONS
+79:// (a large multiplier) but NEVER infinite/cut — so a snowed-in town is dear to
+82:export const SEASONAL_OVERLAY_VERSION = 2;
+88:export const SLOW_NOT_SEVER_MAX = 6;
+98:  // ── W-CAP CAP-3 CLIMATE TRUTH: amplitude by MEASURED climate, not by terrain word ──
+158: * @param {string|null} [climateBand] W-CAP CAP-3: the frozen canon's measured band
+163:  // W-CAP CAP-3: MEASURED climate outranks the terrain-word proxy, and only when it
+192: * W-CAP CAP-3 — this settlement's frozen climate band, or null.
+212:export function climateBandFor(digest, settlementId) {
+225: * W-CAP CAP-3 widened it with the optional frozen `digest`: when the canon carries a
+226: * climate sub-digest, the food year's amplitude comes from the MEASURED band instead of
+232:export function seasonalContextFor({ rngSeed, clock, settlement, settlementId, digest = null }) {
+src/domain/spatial/spatialDigest.js:134:export const CLIMATE_BAND_VERSION = 1;
+192:      const weeks = digest ? hopWeeks(digest, id, nb.neighbourId, season) : null;
+151:export const SEASON_ROAD_DEATH = Object.freeze({
+375: * self-describing law. Unknown/absent season ⇒ 1.0. Always ≥ 1 (slow, not sever).
+src/domain/worldPulse/supplyKernel.js:213:export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
+src/domain/worldPulse/supplyKernel.js:213:export function advanceSettlementSupply({ snapshot, localSettlements, worldState, graph, digest, tick, tickWeeks, season = null, rng = null, now = null }) {
+## ROUTING
+311:export function isPort(digest, id) {
+922: *  augmentation; see augmentedAdjacency). Pre-M8 + inland routing is byte-identical.
+965:function augmentedAdjacency(digest) {
+995:  if (seaInvolved || teleInvolved) return augmentedAdjacency(digest);
+## CUSTODY
+src/domain/worldPulse/foreignGuestHold.js:320:  if (!id || !npcId || !errandId || !encounterId || !captorId || !venueId
+## PATROL SEAMS
+src/domain/worldPulse/stressors.js:380:      counterforce: assessment
+src/domain/worldPulse/stressors.js:380:      counterforce: assessment
+src/domain/spatial/smuggle.js:32: *      the route's WORST gate (`worstGate`), not one per gate — otherwise a long hostile
+src/domain/spatial/smuggle.js:60:  CORRUPTION_W: 0.45,  // the worst gate's corruption — the HINGE (a leaky gate leaks)
+src/domain/spatial/smuggle.js:110:// a CONTRABAND gate (confiscation) is worse than a plain TOLL gate. Named for the worst-gate
+src/domain/spatial/smuggle.js:218: * The smuggle-SUCCESS chance (0..SUCCESS_MAX) — the probability a shipment slips the worst
+src/domain/spatial/smuggle.js:225: * @param {number} args.corruption      the worst gate's corruption / leakiness (0..1)
+## second pass (Sun Oct 18 12:05:36 EDT 2026)
+src/domain/worldPulse/simulationRules.js
+supabase/functions/_shared/aiCharterBundle.js:9863:  navalEnabled: true,
+supabase/functions/_shared/aiOutputSchemaBundle.js:9860:  navalEnabled: true,
+tests/lib/spatialUsage.test.js:174:      simulationRules: { presetId: 'full_simulation', navalEnabled: true, upswingArcsEnabled: true, momentumEnabled: true },
+992:function routingAdjacency(digest, a, b) {
+src/domain/worldPulse/envoyInterceptionStage.js:384:function holdInterruptedEnvoy({ worldState, errand, encounter, holdVenue, tick, cause }) {
+src/domain/worldPulse/envoyInterceptionStage.js:551:        : holdInterruptedEnvoy({
+src/domain/worldPulse/envoyInterceptionStage.js:572:    const held = holdInterruptedEnvoy({
+src/domain/worldPulse/armyTransitKernel.js:35:  stepBeliefStaleness, ARMY_ROLES, retreatRoute, currentRegion, armyMarchWeeks,
+src/domain/worldPulse/armyTransitKernel.js:549:    if (a.role === ARMY_ROLES.RETREAT || b.role === ARMY_ROLES.RETREAT) return false;
+src/domain/worldPulse/armyTransitKernel.js:717:        armyId, role: ARMY_ROLES.MARCH, originId: String(armyId), destId: targetId,
+96:export const SEASON_TERRAIN_COST = Object.freeze({
+118:export const STORM_SEASON_COST = Object.freeze({
+src/domain/spatial/armyTransit.js:109:export const ARMY_ROLES = Object.freeze({
+src/domain/spatial/armyTransit.js-110-  MARCH: 'march', REINFORCEMENT: 'reinforcement', RETREAT: 'retreat',
+src/domain/spatial/armyTransit.js-111-  CONVOY: 'convoy', BLOCKADE: 'blockade',
+src/domain/spatial/armyTransit.js-112-});
+src/domain/spatial/armyTransit.js-113-
+src/domain/spatial/armyTransit.js-114-// WR-7b keeps encounter intent on the aggregate column.  This is deliberately a
+src/domain/spatial/armyTransit.js-115-// singular value: a malformed row cannot smuggle several private goals into the
+src/domain/spatial/armyTransit.js-116-// encounter arbiter and let array order choose the winner.
+src/domain/spatial/armyTransit.js-117-export const ARMY_ENVOY_INTENT_KINDS = Object.freeze(['war_continue', 'private_goal']);
+## third pass (Sun Oct 18 12:05:43 EDT 2026)
+722:  navalEnabled: true,
+388:    encounterId: encounter.id,
+403:      encounterId: text(encounter.id),
+449:    encounterId: encounter.id,
+## fourth pass
+  majorChangesRequireProposal: false,
+  politicalAutonomy: 'full',
+  migrationMode: 'distributed',
+});
+
+// ── THE NINE ENGINE-WAVE GATES (W-R2-LIGHT owner ruling, 2026-07-16) ──────────
+// The post-close anti-stasis stack's virtual gate flags, lit TOGETHER in the three
+// world-alive presets AND, since L-DEFAULT hunk 1, in the lit default beneath them.
+// Like disastersEnabled / commodityFlowEnabled, these keys are ABSENT from
+// DEFAULT_SIMULATION_RULES — VIRTUAL, so they ride the ...overrides spread and add
+// NO persisted bytes to an existing campaign (normalize({}) carries none; the
+// engine gates read `=== true`, absent ⇒ dormant no-op ⇒ every dark-config golden
+// byte-identical). They are NOT RULE_COMPARISON_KEYS (not in DEFAULT), so preset
+// IDENTITY is unaffected: a legacy save missing them still infers its preset (the
+// disastersEnabled precedent). intervention/peaceEngine/supplyWebWarfare are
+// additionally AND-gated with warLayerEnabled (lit in all three); naval also needs
+// a spatially-canonized realm at runtime. Shared object (the QUIET/OPEN dedupe
+// idiom) so "the nine" have one source of truth. Byte-budget: the preset catalog
+// rides the eager store slice (normalizeSimulationRules → presetIdForRules), so
+// this adds a measured +252 B to the first-paint closure — well inside its margin.
+const WAVES = Object.freeze({
+  momentumEnabled: true,
+  navalEnabled: true,
+  interventionEnabled: true,
+  settlementLifecycleEnabled: true,
+  peaceEngineEnabled: true,
+(eval):1: command not found: fd
+(eval):1: command not found: fd
+docs/DESIGN_FP_ARCH_ES.md:142:surface is army-collision-only (exact node equality, envoyEncounter.js),
+docs/DESIGN_FP_ARCH_ES.md:490:equality is the whole collision law, one pre-mutation cut, one encounter per
+docs/SOL_QUEUE.md:449:    carries TWO trios, then WC-6, WC-10, WC-13, WC-15 — and CQ5's collision law
+## fifth pass
+src/domain/worldPulse/envoyEncounter.js
+/**
+ * WR-7b's pure encounter census.
+ *
+ * This leaf never moves an envoy or an army.  Its callers hand it both ledgers
+ * already projected from the same pre-mutation cut to the same tick.  Exact
+ * node equality is the whole collision law: a shared route, segment, or future
+ * destination is not an encounter.
+ */
+
+import {
+  independentLiveWarCauseTypes,
+  joinAnchorOf,
+} from './warCoalitionLedger.js';
+
+export const ENVOY_PROJECTION_PHASE = 'pre_mutation';
+export const ENVOY_ENCOUNTER_KINDS = Object.freeze([
+  'field_parlay',
+  'war_continue',
+  'private_goal',
+]);
+export const ENVOY_PRIVATE_GOALS = Object.freeze([
+  'plant',
+  'imprison',
+  'terms_shop',
+]);
+/**
+ * ⚠ THE SECOND HOME of the venue vocabulary — `envoyErrandVocabulary.js` carries the
+ * other, and that copy holds the full reasoning for `host_settlement` (EP-q, closing
+ * ⛔ STOP-ES2-1's fourth blocker). THE TWO MUST MOVE IN ONE EDIT: this leaf is the pure
+ * census and that one is the persistence DTO's vocabulary, so a drift would let a venue
+6: * node equality is the whole collision law: a shared route, segment, or future
+252: * Enumerate every eligible collision from one already-projected temporal cut.
+344: * Census the corrected kind (c): proactive genesis, never a collision.  A
+docs/DESIGN_FP_ARCH_ES.md:133:**JUDGMENT J-ES-1 (the host).** Espionage missions ride the SP-D GENERALIZED
+docs/DESIGN_FP_ARCH_ES.md:485:Two exposure classes, BY CONSTRUCTION of the host (J-ES-1) — no bandits, no
+docs/DESIGN_FP_ARCH_ES.md:782:**JUDGMENT J-ES-16 (the tap assignment rule):** the tap at a stop is derived
+docs/DESIGN_FP_ARCH_ES.md:909:**The home-side miss clock (JUDGMENT J-ES-14):** the home court NOTICES an
+docs/DESIGN_FP_ARCH_ES.md:943:  INT-1, §5 row 10). **JUDGMENT J-ES-10:** doctrine-LOCAL thresholds 0.60/
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_ES.md
+docs/DESIGN_FP_ARCH_ES.md
+## W11 census
+count:        0
+## W-NAVY blockade
+2:## Fable 5 architecture, 2026-07-15 — owner-commissioned: navies convoy own/allied armies on water routes; hostile navies meeting = a sea battle with LAND-PARITY semantics (loser retreats to home port); an army at sea shares its convoy's fate; and THE BLOCKADE LAW, verbatim: "a blockade is the same as a siege." Grounded by the dedicated naval recon (2026-07-15) whose headline reshapes the wave: M8 sea lanes are FULLY BUILT and armies already implicitly sail — routing folds sea edges in whenever an endpoint is a port, ~10× cheaper than land, storm-seasoned. W-NAVY formalizes an implicit path property into a named military reality.
+609:// This module adds NO danger math. The ONLY piracy scope is DISPLAY NAMING:
+612: * The modality-aware NAME for a banditry loss — the ONLY place the word "piracy" appears
+614: * "piracy"; a land-route loss "banditry". A pure naming primitive — takes only the modality
+619:  return overSea ? 'piracy' : 'banditry';
+src/domain/spatial/navalLayer.js:608:// thievesGuildStrength, no pirate havens, no naval-patrol damper, no pirate-specific tuning).
+## army supply attrition by season?
+(eval):1: no matches found: src/domain/spatial/attrition*.js
+src/domain/spatial/armyTransit.js
+src/domain/spatial/navalLayer.js
+src/domain/certification/subsystemRowsWar.js
+src/domain/certification/couplingRegistryWar.js
+src/domain/certification/subsystemRowsPeople.js
+src/domain/worldPulse/settlementStrategy.js
+src/domain/worldPulse/pulseKernel.js
+src/domain/worldPulse/relationshipRulesAdversarial.js
+src/domain/worldPulse/relationshipState.js
+src/domain/display/armyStrength.js
+src/domain/worldPulse/martialReadiness.js
+src/domain/worldPulse/armyTransitKernel.js
+src/hooks/useAdvanceSession.js:27:// (worldState.js INTERVAL_WEEKS, on the committed 4-4-5 calendar: 13-week seasons,
+src/hooks/useAdvanceSession.js:35:export const ADVANCE_TICKS = { one_week: 1, one_month: 4, one_season: 13, one_year: 52 };
+foundry-module/scripts/build-journals.js:109:    overview.push('', `**In-world time:** year ${esc(clock.calendar.year)}, ${esc(clock.calendar.season)} (tick ${esc(clock.tick)}).`);
+src/store/campaignSpatialCanonize.js:21:  SEASONAL_OVERLAY_VERSION,
+src/store/campaignSpatialCanonize.js:101:  // climate band into the canon, and the seasons food year reads it in place of its
+src/store/campaignSpatialCanonize.js:118:    // SEASONS-B (M3): a NEW canon lights the seasonal-road overlay (per-season ×
+src/store/campaignSpatialCanonize.js:119:    // per-terrain cost law) under overlayVersion SEASONAL_OVERLAY_VERSION — the
+src/store/campaignSpatialCanonize.js:121:    // overlay) and read with no seasonal modulation (dormant, byte-identical).
+## attrition in armyTransit/armyStrength/martialReadiness
+src/domain/display/armyStrength.js:10: *     record) — how much of the marched-out army is LEFT after attrition
+src/domain/display/armyStrength.js:13: *     accumulatedAttrition / supplyIntegrity primitives.
+src/domain/display/armyStrength.js:15: * HEURISTIC DM LANGUAGE — NO INTERNALS. No capacity number, no attrition fraction,
+src/domain/display/armyStrength.js:17: * "army strength + attrition in plain words" surface.
+src/domain/display/armyStrength.js:71:// attrition (currentEffectiveStrength / maxStartStrength), 1..0 → words.
+src/domain/display/armyStrength.js:104:export function attritionPhrase(remainingFraction) {
+src/domain/display/armyStrength.js:158: * its strength remains after attrition (in words), and its supply/morale condition
+src/domain/display/armyStrength.js:181:  // (the army just marched out; attrition hasn't been modelled). Never throws.
+src/domain/display/armyStrength.js:189:    remainingPhrase: attritionPhrase(remaining),
+src/domain/worldPulse/armyTransitKernel.js:15: *     The §5 clamped resolver decides it; BOUNDED attrition mauls the loser (never
+src/domain/spatial/armyTransit.js:31: * attrition (a loser retreats mauled, never annihilated — rescuable, not wiped) + the
+src/domain/spatial/armyTransit.js:79:  // BOUNDED BATTLE ATTRITION. The LOSER bleeds up to LOSER_MAX_LOSS of its strength
+src/domain/spatial/armyTransit.js:571: * @param {string|null} [season]
+src/domain/spatial/armyTransit.js:574:export function retreatRoute(digest, worldState, fromId, homeId, alignment, season = null) {
+src/domain/spatial/armyTransit.js:576:  return chooseRoute(digest, worldState, fromId, homeId, riskTolerance, season);
+src/domain/spatial/armyTransit.js:693: * @param {string|null} [season]
+src/domain/spatial/armyTransit.js:696:export function planMarch(digest, worldState, originId, destId, readiness01, alignment, departTick, season = null) {
+src/domain/spatial/armyTransit.js:697:  const scored = chooseRoute(digest, worldState, originId, destId, riskToleranceFromAlignment(alignment), season);
+src/domain/spatial/armyTransit.js:706:  const base = hopWeeks(digest, originId, destId, season);
+src/domain/worldPulse/armyTransitKernel.js:647: * @param {string|null} [args.season]
+## supplyIntegrity / accumulatedAttrition writers and season
+src/domain/worldPulse/attrition.js
+src/domain/worldPulse/armyTransitKernel.js
+src/domain/display/forceComposition.js
+src/domain/display/armyStrength.js
+src/domain/worldPulse/warCoalitionExpenditure.js
+src/domain/worldPulse/reinforcement.js
+src/domain/worldPulse/warArmyRecord.js
+-- src/domain/display/armyStrength.js: season hits 0
+-- src/domain/worldPulse/attrition.js: season hits 0
+-- src/domain/worldPulse/warArmyRecord.js: season hits 2
+-- src/domain/worldPulse/warCoalitionExpenditure.js: season hits 0
+## warArmyRecord season lines + attrition.js header
+17: * rust 0 (a seasoned realm, or any world with no martial record) forks NO rng at all, so
+95:  // rust 0 (seasoned / no martial record) ⇒ factor 1, NO rng forked ⇒ byte-identical.
+/**
+ * domain/worldPulse/attrition.js — Phase B2 PER-ENGAGEMENT ATTRITION (pure).
+ *
+ * A deployed army is now STATEFUL: it carries an `currentEffectiveStrength` that
+ * DEGRADES after every engagement (a siege attempt that held, a failed storm, a
+ * successful storm, a withdrawal). This module is the pure, deterministic kernel
+ * that computes that degradation — for BOTH the attacker AND the defender — given
+ * the relative military strengths, the defensive advantage, the siege length
+ * (deploymentAge), the target's terrain / fortifications, the army's supply
+ * integrity / morale / magical support / food reserves, and the OUTCOME BAND of
+ * the engagement (narrow-fail / decisive-fail / narrow-success / costly-success).
+ *
+ * The §9 property this enables: a depleted army's `currentEffectiveStrength` is
+ * what the siege verdict reads downstream (warDeployment.resolveSiegeVerdict), so a
+ * worn-down army can FAIL against a target it once out-classed — attrition has
+ * teeth, war-spam is bounded, and a stalled campaign trends toward resolution.
+ *
+ * DETERMINISM CONTRACT (sacred): a PURE function of the deployment record + the two
+ * capacity envelopes + the outcome band. NO Date.now / Math.random / argless new
+ * Date, NO rng — the loss for a given (army-state, matchup, band) is byte-stable, so
+ * the same engagement always degrades the same way independent of save order. The
+ * loss is BOUNDED (a per-engagement cap) so a single tick can never annihilate an
+ * army, and the floor is 0 so strength never goes negative. Attrition is applied to
+ * a COPY (the caller writes the NEXT-tick ledger); this module never mutates input.
+ *
+## hard deny + cheapest crossing (Sun Oct 18 12:19:46 EDT 2026)
+68:export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+105:  'spatialLedgers',
+24: *      cheapest crossing cells are their GATE.
+718:      // Cheapest crossing wins; deterministic tie-break by lower (cellA, cellB).

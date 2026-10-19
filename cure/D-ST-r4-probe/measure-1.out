@@ -1,0 +1,26 @@
+== coalitionJoinFeasibility
+214:export function coalitionJoinFeasibility(snapshot, worldState, partyId, enemyId) {
+226:    defenderCurrent: defender.homeDefense,
+src/domain/worldPulse/warDeployment.js
+src/domain/worldPulse/warCapacityReads.js
+src/domain/worldPulse/applyWorldPulse.js
+== beliefMap readiness
+11: *     { readiness, strengthBand, allianceLabel, faithLabel, confidence01,
+141:  // low readiness (a settlement assumes an unknown neighbour is average + calm).
+162:// Ground-truth war readiness for a warPosture state (0 calm … 1 in the field).
+262: * inventing unobserved strength, readiness, or faith. A real prior picture is
+337: * @property {number} readiness        believed war readiness 0..1
+463:/** Ground-truth war readiness of a subject from the warPosture ledger (0 absent).
+492:    readiness: round4(groundTruthReadiness(ctx.worldState, subjectId)),
+529: * @property {{ warPosture?: unknown, religionStates?: unknown }} worldState  the ledgers (readiness; SP-B's devotion read)
+== standingFor
+== deityAxes
+== standingFor
+src/domain/worldPulse/religionState.js:150:function standingFor(share, prev) {
+== deityAxes/deityStance/deityTemper
+src/domain/worldPulse/deityStance.js
+src/domain/worldPulse/deityAxes.js
+== coalitionJoinFeasibility callers
+src/domain/worldPulse/warDeployment.js:162:export { computeAllyRelief, coalitionJoinFeasibility, ARMY_DEPLOYED_CAPACITY_PENALTY } from './warCapacityReads.js';
+src/domain/worldPulse/applyWorldPulse.js:65:import { coalitionJoinFeasibility } from './warDeployment.js';
+src/domain/worldPulse/applyWorldPulse.js:446:          ? coalitionJoinFeasibility(

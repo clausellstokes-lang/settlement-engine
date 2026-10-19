@@ -1,0 +1,33 @@
+== W1 H<->M mixed
+  foreignSeatOf(H) -> M via occupation_rung_vassalized
+  foreignSeatOf(M) -> H via vassal_edge
+  walk(H) -> {"rootId":"H","path":["H"],"cls":"occupied (lord in chains)","receipt":null}
+  walk(M) -> {"rootId":"H","path":["M","H"],"cls":"occupied (lord in chains)","receipt":null}
+== W1b H<-M<-L, H held by M
+  foreignSeatOf(H) -> M via occupation_rung_vassalized
+  foreignSeatOf(M) -> H via vassal_edge
+  foreignSeatOf(L) -> M via vassal_edge
+  walk(H) -> {"rootId":"H","path":["H"],"cls":"occupied (lord in chains)","receipt":null}
+  walk(M) -> {"rootId":"H","path":["M","H"],"cls":"occupied (lord in chains)","receipt":null}
+  walk(L) -> {"rootId":"H","path":["L","M","H"],"cls":"occupied (lord in chains)","receipt":null}
+== W2 all-edge A<-B<-C<-A
+  foreignSeatOf(A) -> C via vassal_edge
+  foreignSeatOf(B) -> A via vassal_edge
+  foreignSeatOf(C) -> B via vassal_edge
+  walk(A) -> {"rootId":null,"path":["A","C","B"],"cls":null,"receipt":"polity_circle"}
+  walk(B) -> {"rootId":null,"path":["B","A","C"],"cls":null,"receipt":"polity_circle"}
+  walk(C) -> {"rootId":null,"path":["C","B","A"],"cls":null,"receipt":"polity_circle"}
+== W3 L holds H at the rung, L-H edge re-stamped (backed)
+  foreignSeatOf(H) -> L via vassal_edge
+  foreignSeatOf(M) -> H via vassal_edge
+  foreignSeatOf(L) -> M via vassal_edge
+  walk(H) -> {"rootId":null,"path":["H","L","M"],"cls":null,"receipt":"polity_circle"}
+  walk(M) -> {"rootId":null,"path":["M","H","L"],"cls":null,"receipt":"polity_circle"}
+  walk(L) -> {"rootId":null,"path":["L","M","H"],"cls":null,"receipt":"polity_circle"}
+== W4 L holds H at the rung, no L-H edge (unbacked)
+  foreignSeatOf(H) -> L via occupation_rung_vassalized
+  foreignSeatOf(M) -> H via vassal_edge
+  foreignSeatOf(L) -> M via vassal_edge
+  walk(H) -> {"rootId":"H","path":["H"],"cls":"occupied (lord in chains)","receipt":null}
+  walk(M) -> {"rootId":"H","path":["M","H"],"cls":"occupied (lord in chains)","receipt":null}
+  walk(L) -> {"rootId":"H","path":["L","M","H"],"cls":"occupied (lord in chains)","receipt":null}

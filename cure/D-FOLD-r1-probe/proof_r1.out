@@ -1,0 +1,4 @@
+DESIGN_FP_COHERENCE_FOLD.md: +158 / -0 lines; restore-by-removal == snapshot: True; sha256 now 81b9b32d1348
+DESIGN_FP_SPINE.md: +2 / -0 lines; restore-by-removal == snapshot: True; sha256 now 93d0f6dd2198
+DESIGN_FP_ARCH_CN.md: +1 / -0 lines; restore-by-removal == snapshot: True; sha256 now 9d103cb57d70
+INSERTIONS-ONLY PROOF: PASS

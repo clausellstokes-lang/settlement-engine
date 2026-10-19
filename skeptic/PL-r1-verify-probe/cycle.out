@@ -1,0 +1,6 @@
+H -> {
+  regime: 'vassalage',
+  patron: 'M',
+  basis: 'occupation_rung_vassalized'
+}
+M -> { regime: 'vassalage', patron: 'H', basis: 'vassal_edge' }

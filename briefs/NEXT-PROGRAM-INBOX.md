@@ -1,0 +1,12 @@
+# NEXT-PROGRAM INBOX — opened 2026-10-19 ~03:3x by the chair (CHAIR-NOTES 18 (f): the scope of the FP final architecture program is FROZEN; everything below QUEUES for the next program, in the owner's order when he gives one). Nothing here is designed in this program.
+
+1. **THE INTERIOR AND THE FISCAL SEAT** (lens 2/the synthesis: "spend the next design hour on the interior and the fiscal seat, not the wilds"): who rules a town and how a court pays for itself — the extraction rate as a DECISION with unrest as its counterforce; INT's two cheap hops are already moved forward in the order (18 c); the deeper interior is this program's successor's first hour.
+2. **DYNASTIC MARRIAGE AND SUCCESSION AS CHURN DRIVERS FOR THE AGES** (COUPLINGS "declared empty"; lens 3/the chair's recommendation) — new capability, the owner's; inside "no mortality clock" (a DM-confirmable 'the lord is old' prompt that is only ever a suggestion — lens 2's shape).
+3. **THE PARTY AS A SITE HOLDER** (RULINGS-ROUND3 §D.1; OD-FC-72) — the owner's row; the chair recommends yes.
+4. **MID-CAMPAIGN FOUNDING OVER A SITE** (OD-BD-35, the gang's hamlet end; POP's mechanism) — the owner's row; recommended yes.
+5. **A MINDED NON-SETTLEMENT POLITY** (lens 2's largest substantive gap: a menace that takes tribute or negotiates — nomad confederations, a tribute-taking dragon) — against MN6/MN12 as ruled; the owner's call whether a menace may ever have a mind.
+6. **THE DOSSIER'S DESK FOR THE QUARTER AND THE HILLS** (L-BD 49 (b)) — the prose program's (the owner's UI + prose release).
+7. **THE BODIES' MAP PIECES BEHIND A TOGGLE** (L-BD 49 (b)) — one paragraph appended to the mapmaker exchange after the hidden-ways asks close.
+8. **A CRAFT-QUALITY BAND ON INSTITUTIONS** (the arms question of 10-19 ~02:5x: quality today = kit completeness only) — new capability, the owner's, if he wants a famed smithy's arms to fight better.
+9. **THE INSTRUMENTS** (18 (f): the century soak with the dynamism bands at two grains counting consequential chains; the aggregate tick-cost budget; the push-budget harness across all lit chains; the nine-question harness; the stakes-ranking function; the deed-recording contract) — CODE; the first build after the dispatch gate, or before the release on the owner's word (the chair's recommendation: before).
+10. **THE ROUND-LANE DRIFT CURE: CONSOLIDATED BRACKET-FREE PACKETS PER WAVE** at dispatch (lens 4; 18 f) — the packet era's instrument, not a review round.

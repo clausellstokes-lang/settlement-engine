@@ -1,0 +1,60 @@
+hold01 staunch-low 0.45:
+  thorp n=0(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  thorp n=0(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  village n=2(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 0
+  village n=2(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 0
+  town n=3(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  town n=4(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  city n=5(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:1→r5:1 · root 2
+  city n=8(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 3
+  metropolis n=8(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 3
+  metropolis n=12(max) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:2→r5:2 · dominant r4:2→r5:2 · root 5
+hold01 staunch-high 0.6999:
+  thorp n=0(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  thorp n=0(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  village n=2(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  village n=2(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  town n=3(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 2
+  town n=4(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 2
+  city n=5(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 3
+  city n=8(max) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:2→r5:2 · dominant r4:2→r5:2 · root 5
+  metropolis n=8(peace) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:2→r5:2 · dominant r4:2→r5:2 · root 5
+  metropolis n=12(max) marginal r4:0→r5:1 · present r4:2→r5:2 · strong r4:3→r5:3 · dominant r4:3→r5:3 · root 8
+hold01 unbroken-low 0.70:
+  thorp n=0(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  thorp n=0(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  village n=2(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  village n=2(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  town n=3(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 2
+  town n=4(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 2
+  city n=5(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 3
+  city n=8(max) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:2→r5:2 · dominant r4:2→r5:2 · root 5
+  metropolis n=8(peace) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:2→r5:2 · dominant r4:2→r5:2 · root 5
+  metropolis n=12(max) marginal r4:0→r5:1 · present r4:2→r5:2 · strong r4:3→r5:3 · dominant r4:3→r5:3 · root 8
+hold01 unbroken-high 1.0:
+  thorp n=0(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  thorp n=0(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(peace) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  hamlet n=1(max) marginal r4:0→r5:0 · present r4:0→r5:0 · strong r4:0→r5:0 · dominant r4:0→r5:0 · root 0
+  village n=2(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  village n=2(max) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:0→r5:1 · dominant r4:0→r5:1 · root 1
+  town n=3(peace) marginal r4:0→r5:1 · present r4:0→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 2
+  town n=4(max) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:1→r5:1 · dominant r4:1→r5:1 · root 3
+  city n=5(peace) marginal r4:0→r5:1 · present r4:1→r5:1 · strong r4:1→r5:1 · dominant r4:2→r5:2 · root 4
+  city n=8(max) marginal r4:0→r5:1 · present r4:2→r5:2 · strong r4:3→r5:3 · dominant r4:3→r5:3 · root 7
+  metropolis n=8(peace) marginal r4:0→r5:1 · present r4:2→r5:2 · strong r4:3→r5:3 · dominant r4:3→r5:3 · root 7
+  metropolis n=12(max) marginal r4:1→r5:1 · present r4:3→r5:3 · strong r4:4→r5:4 · dominant r4:5→r5:5 · root 11
+CHECK (B.8 "never lends zero at a strong hold"): members with n ≥ 2 lending 0 = 0 of the rows (expected 0)
+CHECK (the home's minimum): rows where the lender keeps fewer than NET_HOME_MIN = 0 (expected 0)
+R39 Ashford (town, n 3, marginal toward Kell, hold 0.60): lend = 1 (r4: 0 at the crown's own share)
+R39 Ashford (town, n 3, present toward Kell, hold 0.60): lend = 1 (r4: 0 at the crown's own share)
+R39 Ashford (town, n 3, strong toward Kell, hold 0.60): lend = 1 (r4: 0 at the crown's own share)
+R39 Ashford (town, n 3, dominant toward Kell, hold 0.60): lend = 1 (r4: 0 at the crown's own share)
+ten town vassals (n 4, strong, hold 0.60): Σ lend r5 = 10 (r4 per-member floor 0; r4 PL Σ-then-floor 9)
+hamlet n 1: lend 0 · village n 2 (strong, 0.6): lend 1, keeps 1

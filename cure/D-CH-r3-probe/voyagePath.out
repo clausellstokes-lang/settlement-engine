@@ -1,0 +1,4 @@
+{"o":"p000","d":"p004","path":["p000","p001","p004"],"modes":["sea","sea"],"cost":480,"weeks":1}
+t0:depart p000->p001 arr 1 | t1:arrive p001 | t2:depart p001->p002 arr 3 | t3:arrive p002 | t4:depart p002->p003 arr 5 | t5:arrive p003 | t6:depart p003->p004 arr 7 | t7:arrive p004
+{"o":"p000","d":"p007","path":["p000","p001","p003","p007"],"modes":["sea","sea","sea"],"cost":840,"weeks":1}
+t0:depart p000->p001 arr 1 | t1:arrive p001 | t2:depart p001->p002 arr 3 | t3:arrive p002 | t4:depart p002->p003 arr 5 | t5:arrive p003 | t6:depart p003->p004 arr 7 | t7:arrive p004 | t8:depart p004->p005 arr 9 | t9:arrive p005 | t10:depart p005->p006 arr 11 | t11:arrive p006 | t12:depart p006->p007 arr 13 | t13:arrive p007

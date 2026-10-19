@@ -1,0 +1,11 @@
+  332 src/domain/worldPulse/envoyPulse.js
+  166 src/components/map/heraldWanderers.js
+  113 src/domain/worldPulse/npcLedgerProjection.js
+  388 src/domain/worldPulse/npcCirculation.js
+  161 src/domain/worldPulse/npcReplacement.js
+  183 src/domain/worldPulse/reputationRaceConsumer.js
+   75 src/domain/worldPulse/npcCirculationTransit.js
+  429 src/domain/worldPulse/npcLedger.js
+  711 src/domain/worldPulse/npcDmVerbs.js
+  609 src/domain/worldPulse/stressorGates.js
+  368 src/domain/worldPulse/envoyErrandVocabulary.js

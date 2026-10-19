@@ -1,0 +1,17 @@
+presets: quiet_local realistic_regional dramatic_campaign static_campaign narrative_campaign living_realm full_simulation
+warLayerEnabled              default= false virtual= false lit in: dramatic_campaign,full_simulation
+warTerminationEnabled        default= undefined virtual= false lit in: -
+peaceEngineEnabled           default= undefined virtual= false lit in: realistic_regional,dramatic_campaign,living_realm,full_simulation
+envoyDiplomacyEnabled        default= undefined virtual= false lit in: -
+npcConsequencesEnabled       default= undefined virtual= false lit in: -
+routeLifecycleEnabled        default= undefined virtual= false lit in: -
+errandSpineEnabled           default= undefined virtual= true lit in: -
+counterIntelEnabled          default= undefined virtual= true lit in: -
+infoMode                     default= "omniscient" virtual= false lit in: -
+quiet_local infoMode= omniscient
+realistic_regional infoMode= omniscient
+dramatic_campaign infoMode= perfect_delayed
+static_campaign infoMode= omniscient
+narrative_campaign infoMode= omniscient
+living_realm infoMode= perfect_delayed
+full_simulation infoMode= full

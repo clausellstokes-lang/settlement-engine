@@ -1,0 +1,62 @@
+FOLD-r4-verify — detail file (seat V-FOLD-r4, Opus 5.5, 2026-10-19 ~03:0x EDT by `date`)
+Inputs read: README (RESUME BLOCK 2), VERIFY, RESEARCH-COMMON, SKEPTIC, RULINGS-PL-MN, -AFTER-RESEARCH, -AFTER-COMPILE,
+CHAIR-NOTES 1-18, RULINGS-ROUND1 (+addendum), -ROUND2, -ROUND2b (+addendum), -ROUND3 (A-G), -ROUND4 (A-E), ROUND5 (context only),
+the BOARD's owner lines, skeptic/FOLD-r3-verify.md, skeptic/SEAMS-r3.md, cure/D-FOLD-r4.md (+probe), the ROUTES of all ten cure/D-*-r4.md
+(and BD §19.0, which D-BD-r4 §5 names as "the full list"), refs/MAP-REPLY-HIDDEN-WAYS-2026-10-18.md.
+The fold read whole (1392 lines); spine §1 r4 brackets and SP-4; CN's two r4 brackets in context.
+Sibling texts checked at the cited sites: CH §2.2/§11/§18/S50/OD-CH-41; PT §9.2/§13/P49; PL §4.1/§4.6/§4.7/§4.8/§8; ST §6.6/OD-ST-46/§2.1;
+MN §3.3/§7/M45/OD-MN-40; PS §2.1/§2.8/§5.5/OD-PS-45; BD §9.9/§9.10/§12/§13/§17/§19.0.
+
+== RE-EXECUTED ==
+- Insertions-only: diff(snapshot, current) fold +92/-0, spine +2/-0, CN +2/-0 (fold-r4.diff, spine-r4.diff, cn-r4.diff); sha256 fold e1c5d179…, spine 238485f0…, CN d0718d3b… = the lane's.
+- Pipe check (pipes-r4v.out): 79 inserted table rows in the fold + 1 in CN, 0 pipe-count mismatches against each anchor table's header.
+- Master receipts (receipts-r4v.out): pulseKernel.js:723 gStrength line; sovereigntyTransfer.js:171 `|| 0` in accrueSaleGrievance (l.160);
+  religionState.js:154 standingFor's 'cult'; beliefMap.js:448 readBeliefRelationship(observerId, subjectId, worldState, truthType) and l.450
+  "if (b.source === 'belief') return b.record.allianceLabel || truthType;" (allianceLabel uses 'hostile', l.282/995);
+  strategicPosture.js:97 POSTURE_ACTOR_KINDS ['settlement'], :155 assertActor throws; embassyHazard.js:36/61/74; roleCatalog INSTITUTION_ROLES
+  has law_enforcement (Watch Captain…), no warden; criminalStrength01Of / effectiveToleranceOf / monsterRaiderGate / homeRansomAnswer / HOME_ANSWERS exist;
+  44 r4 tokens 0 files (word match, src+tests): peace_unkept … trailNodes (see out file).
+- Census-method note: 'passed'/'leads' read 1 file only by the lane's method (backtick or colon after) — held as stated (method declared).
+
+== VERDICT PER D-FOLD-r4 RECORD ROW (127 ids) ==
+HOLD  A.4 fold half (FAIL r3) — RE-CURED A.8: §3.1.25 ↳ r4, §5 gate ↳ r4; CH §11 step 3 (CH:540) and §2.2 (CH:216) read belief; PT §9.2/P49 (PT:326, :513) cite it; symbols resolve.
+HOLD  minor 1 builder — §6 ↳ r4 names PS-3 · ST-1 · PR-1 · MN-1 (ST §9 ST-1, OD-PR-43, MN:267 confirm).
+HOLD  minor 2 NOTED · minor 7 NOTED · minor 8 NOTED (spot-checked; history rows, no text owed).
+HOLD  minor 3 readiness census — re-counted, both methods named.
+HOLD  minor 4 posture door — §3.3.12 ↳ r4, OD-FC-57 ↳ r4, spine SP-4 r4 agree; master's "THE CLOSED ACTOR SET" comment quoted correctly.
+HOLD  minor 5 cult in band slot — withdrawn; ST §2.1/ST8/ST15/§6.7 struck (ST:93, :107, :391; "heresy" 0 hits).
+HOLD  minor 6 — moot by A.13; MN §7 (MN:397) "these two and no other".
+HOLD  chair notes NOTED (but see chair note below on L-FOLD2 item 4).
+HOLD  SEAMS-r3-1 fold half (BLOCKING) — §5 cult·band ↳ r4 one meaning; never a holder kind; owner 17:27 verbatim.
+FAIL  SEAMS-r3-5 fold half — see report (drift vs ST §6.6 / OD-ST-46).
+HOLD  SEAMS-r3-6 fold half — §3.3.15, §5 banner, OD-FC-75; PS §5.5/OD-PS-45 and PL §4.7 agree on the two reads (net: the crown's read; crossing: the holder's belief).
+HOLD  A.1·A.2·A.6·A.7·A.16·A.18 mirrors (A.6 on the ruling's own words; ST's refinement is the SEAMS-r3-5 FAIL).
+HOLD  A.3·A.12·A.13·A.14 · A.4·A.8·A.15·A.19 · A.5·A.9·A.10·A.11·A.17·A.20 (NOTED, no fold text owed — grep).
+HOLD  B FOLD: §F · ransom words · clocked card (but see FOLD-X1, FOLD-X2) · BD kinds + WHERE (BD §12 cell by cell: all nine rows match; body_bounty "hunts or outlaws" = BD §9.9) · CHAIR-NOTES 17.
+FAIL  B FOLD `peace_unkept` / D-PL-r4 route (REQUESTED family) — see report (ROUTED-UNAPPLIED, mis-applied as OBLIGATION).
+HOLD  §E PL-r4-S1 · STOP-PR-r4-1 recorded as re-ruled (§3.3.15, call_in_answer ↳ r4, OD-FC-45/75).
+HOLD  L-BD FOLD route (7) · L-BD open questions NOTED (§G).
+HOLD  D-*-r3 routes (7 re-bracketed, 30 noted) — the five-kinds rows each followed by an r4 six-kinds row; menace_met ↳ r3 and WC (6) withdrawn.
+HOLD  r4 lanes' routes: CH (all; the WHERE `trail:` declined by REFINED 2 with a route back — within the fold's closure of the WHERE list) · MN (all) · PR (all; PR kinds as P4 card notes, as its route's "(P4)" head) · PS (all) · PT (all) · RN (all) · ST (all; site_sale a P4 card note, as its "(P4)" head; OD-FC-72 owner's).
+=> 125 hold · 2 fail of the 127.
+
+== OUTSIDE THE 127 (the §E.4 class and §E) ==
+FAIL RU-BD-1  D-BD-r4 §5 / BD §19.0 → FOLD "§7 … OD-BD-34's visible reading" — 0 hits for OD-BD-34 / 18:46 in the fold; OD-FC-74 lists OD-BD-31, -35 only.
+FAIL RU-BD-2  "THE FIRST SOAK's BODIES row (L-BD 45 …)" — the fold's "first soak" hits are EC's only (§3.2.11, §6 C6, §9.2 S2-04).
+FAIL RU-BD-3  "§5 — … `SPONSOR_PURPOSES` (`spread_faith` the landed motive key, aligned) … `dispersed` · `ranged_away`, `by_office`" — 0 hits each
+              (`dispersed` appears only as POP's `column_at_the_wall` verdict, fold:498 — a homonym BD's end word now meets, unregistered).
+FAIL §E-RN   RULINGS-ROUND4 §E: OD-RN-48 RULED ("D-FOLD-r4's §3.1.25 ↳ r4 cites it"); the fold's §3.1.25 ↳ r4 does not, and §5's RN round-4 row still says the question "is the chair's (OD-RN-48)". Post-lane ruling; round-5 bracket.
+
+== MINORS (spot notes; none raised to MAJOR) ==
+m1  THE MAP CONTRACT (§E: MINOR, round 5): §5 registers neither the six rungs `wild · way · trail · track · road · highway` nor the class `hidden` (the reconciliation's "the fold §5 registers the six rungs and the class"); WHERE ↳ r4 "ENGAGEMENT_WHERE_KINDS stays …" and "a card on a trail names `road (a, b)`" vs the contract's "junctions … are the hearing card's WHERE (`junction:<id>`)"; INBOX ↳ r4 (n) still "until it answers" and "the road ladder's bottom rung".
+m2  OD-FC-70 (fold:1039) still "C8 THE AGES is long spans of the same world only", unbracketed; superseded by C8 ↳ r4 and OD-FC-73.
+m3  §5 MN round-1 tokens ↳ r2b (fold:783) "a CLOSED list of THREE feeders" unbracketed beside OD-FC-46 ↳ r4's FOUR (MN: "four feeders, three parts").
+m4  §3.4 `raid` ↳ r4 writes the ref `{ kind: 'body', id }`; §3.3.12 ↳ r4 defines `{ kind: 'body', bodyKind, id }`.
+m5  The r4 recount's "NINE existing kinds take a body as a party" counts `person_at_the_gate` (a counterparty) but not `party_gate`'s body half (also a counterparty); BD §12 counts seven + `ransom` (+ the new `site_sale`).
+m6  §3.3.15 "PROTECTION IS A DEED — riders PLACED … `protection_kept`, none placed `protection_failed`" omits PL §4.7 F.4's bounds (only under the crown's own `staunch`+ read, after a summons answered with riders; "Below `staunch` no occasion opens"). Same drift class as the SEAMS-r3-5 fail; the row cites PL F.4.
+m7  §5 `banner` row: "no field of its own" — PS §2.1 (PS:196) returns `passageStandingOf(…) → { …, banner? }` with values `right · tolerance`; field and words unregistered.
+m8  CN's census rows C14 · C15 · C16 also collide with the fold's chains C14 · C15 · C16 (CN:114–116); the r4 homonym row brackets C17 only.
+m9  §1 r4 (2) / spine r4: "the push budget counts the card once" vs the recount's "STANDING and never pushed" — consistent only if the CLIMAX close is the one push; say so once.
+Chair note: `briefs/L-FOLD2.md` item 4 still reads "`settlement · person · party · menace`" (four kinds); P4 folding it literally re-opens A.12 (and A.7).
+Seam note (for SEAMS-r4, PLAUSIBLE): PS's route to PR asked the net to read the HOLDER's belief "so the right and the net never disagree"; the fold's §3.3.15 rules the net on the crown's own read (PL F.2/F.3, PR) — coherent under CHAIR-NOTES 18 (d), but a crown-believes-staunch / member-believes-shaky week composes a net the member's border treats at tolerance.
+Process note (not a volume finding): D-FOLD-r4 disclosed one read-only `git rev-parse` on the master worktree.

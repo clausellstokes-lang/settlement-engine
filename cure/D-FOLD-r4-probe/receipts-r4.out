@@ -1,0 +1,44 @@
+## A.8 receipts
+448:export function readBeliefRelationship(observerId, subjectId, worldState, truthType) {
+449-  const b = belief(observerId, subjectId, worldState);
+450-  if (b.source === 'belief') return b.record.allianceLabel || truthType;
+451-  return truthType; // truth / self / unknown ⇒ the known declared relationship
+452-}
+453-
+454-// ── Ground-truth extraction (cold-start + the re-anchor target) ───────────────
+455-/** The public dominant-faith name (the primaryDeitySnapshot the FaithSection
+456- *  shows to every viewer — never the latent pantheon), or null.
+457- *  @param {{ settlement?: { config?: { primaryDeitySnapshot?: { name?: unknown } } } } | null | undefined} item */
+458-function groundTruthFaith(item) {
+459-  const name = item?.settlement?.config?.primaryDeitySnapshot?.name;
+460-  return typeof name === 'string' && name ? name : null;
+461-}
+462-
+36:export function relationshipTypeBetween(graph, worldState, a, b) {
+37-  const A = String(a); const B = String(b);
+38-  const edges = Array.isArray(asObject(graph).edges) ? /** @type {unknown[]} */ (asObject(graph).edges) : [];
+39-  for (const e of edges) {
+40-    const from = str(asObject(e).from); const to = str(asObject(e).to);
+--
+61:export function atOpenWar(graph, homeId, hostId) {
+62-  return warFrontsInto(graph, hostId).includes(homeId)
+63-    || warFrontsFrom(graph, hostId).includes(homeId)
+64-    || warFrontsInto(graph, homeId).includes(hostId)
+65-    || warFrontsFrom(graph, homeId).includes(hostId);
+--
+74:export function atWarWith(graph, worldState, a, b) {
+75-  return atOpenWar(graph, a, b) || relationshipTypeBetween(graph, worldState, a, b) === 'hostile';
+76-}
+77-
+78-/** Is this mission a peace embassy (purpose 5)? Pure. @param {Record<string, unknown>} m @returns {boolean} */
+359:      ? readBeliefRelationship(id, other, worldState, relState.relationshipType)
+## INT stale stamp
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js:723:    if (gStrength) s = applyGuildToSettlement(s, gStrength);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/settlement.schema.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pulseKernel.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/migrationKernel.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/supplyKernel.js
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/corruptionWeb.js
+## accrueSaleGrievance
+11:170-      resentment: clamp01((Number(current?.resentment) || 0) + m),
+12:171-      trust: clamp01((Number(current?.trust) || 0) - m),

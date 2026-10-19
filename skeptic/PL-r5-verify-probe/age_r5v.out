@@ -1,0 +1,12 @@
+world                                                              A
+P52(a) quiet 25y                                                   1.0
+P52(b) busy edge 3 fail/yr                                         1.0
+10 fail/yr                                                         1.0
+defied 3/yr                                                        1.0
+protective 1 pk/yr                                                 0.039
+P52(c) renewed y20 then 30 fail/yr                                 0.2
+P52(d) relit y10-15, 3 fail/yr                                     1.0
+P52(e) succession dark                                             dark
+re-sworn at y24 (left vassal, re-sworn)                            0.04
+IMPORT: legacy edge, 1 renewal row at y0, no oathSince, 3 fail/yr  0.693
+peace sweep: 4 riders_quartered/yr + 1 credit/yr (no pk)           1.0

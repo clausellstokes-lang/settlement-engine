@@ -1,0 +1,54 @@
+## generosity
+319: * The faith-axis proximity for a pair (samePatron + a sharedFaith01 closeness), from the
+323: * @returns {{ samePatron: boolean, sharedFaith01: number, alignmentKinship01: number }}
+328:  const samePatron = !!(refG && refG === refR);
+329:  const faithDist = 0.5 * Math.abs(evil01(dG) - evil01(dR)) + 0.5 * Math.abs(chaos01(dG) - chaos01(dR));
+330:  const sharedFaith01 = samePatron ? 1 : clamp01(1 - faithDist);
+334:  return { samePatron, sharedFaith01, alignmentKinship01 };
+412:  const faith = { templeMediated: charityRoster, sharedFaith01: prox.sharedFaith01 };
+414:  const quadrant = faithAlignmentQuadrant({ samePatron: prox.samePatron, alignmentKinship01: prox.alignmentKinship01 });
+660:    const faith = { templeMediated: charityRoster, sharedFaith01: prox.sharedFaith01 };
+700:    const quadrant = faithAlignmentQuadrant({ samePatron: prox.samePatron, alignmentKinship01: prox.alignmentKinship01 });
+domain/worldPulse/generosityKernel.js
+domain/worldPulse/pulseKernel.js
+domain/worldPulse/ledgerOwnershipManifest.js
+domain/worldPulse/beliefMap.js
+domain/worldPulse/generosityNews.js
+domain/worldPulse/generosityUpdates.js
+domain/worldPulse/upswingKernel.js
+domain/worldPulse/sacredClaim.js
+domain/worldPulse/informationStatecraft.js
+domain/worldPulse/settlementLifecycleKernel.js
+## roles
+26:  law_enforcement: [{ role: 'Watch Captain',  importance: 'pillar' }, { role: 'Sergeant',   importance: 'key' },     { role: 'Guard',      importance: 'notable' }],
+38:  { role: 'Leader',     importance: 'pillar',  seat: 'leader_champion' },
+roleCatalog.js
+(eval):1: no matches found: --include=*.js
+## catalog
+1224:    // The city Mercenary quarter was filed on Adventuring until 2026-09-30; soldiers for hire are one
+1227:      shared: { name: 'Mercenary quarter', desc: 'Organized sellsword companies. Major forces (hundreds to thousands).', tags: ['military'], priorityCategory: 'adventuring' },
+1229:        town: { name: 'Free company hall', baseChance: 0.3, desc: 'A billet and contracting office for a band of professional soldiers available between campaigns. Offers caravan escort, garrison contracts, and short-term military hire at day-wage rates. Cheaper than a standing army, more reliable than a mob. These men fight in formation on salary, not for treasure.', tags: ['military', 'guild'], priorityCategory: 'military' },
+1415:        city: { baseChance: 0.5, exclusiveGroup: 'criminalPower' },
+1416:        metropolis: { baseChance: 0.5, exclusiveGroup: 'criminalPower' },
+1420:      shared: { exclusiveGroup: 'criminalPower', tags: ['criminal'], priorityCategory: 'criminal' },
+1422:        city: { name: "Thieves' guild chapter", baseChance: 0.6, minPopulation: 10000, desc: 'Organized crime chapter. 10,000+ population for viable operation. 30-100 members.' },
+1423:        metropolis: { name: "Thieves' guild (powerful)", baseChance: 0.55, desc: 'Dominant criminal syndicate. Tolerated because the alternative (gang war) is worse.' },
+1489:      shared: { name: "Assassins' guild" },
+## commons
+(eval):1: no matches found: --include=*.js
+## treasury
+(eval):1: no matches found: --include=*.js
+## dossier
+(eval):1: no matches found: --include=*.js
+## peaceTerms
+(eval):1: no matches found: --include=*.js
+## exposure
+(eval):1: no matches found: --include=*.js
+## spread_faith
+(eval):1: no matches found: --include=*.js
+## warHomeCosts
+(eval):1: no matches found: --include=*.js
+## legitimacy writer
+(eval):1: no matches found: --include=*.js
+## faithCarriersOut
+(eval):1: no matches found: --include=*.js

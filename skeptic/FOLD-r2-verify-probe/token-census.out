@@ -1,0 +1,35 @@
+spentTick src=0 tests=0
+menaceSpentAt src=0 tests=0
+menacePressSet src=0 tests=0
+columnTerm src=0 tests=0
+partySeq src=0 tests=0
+party_reached_site src=0 tests=0
+party_cleared_site src=0 tests=0
+party_revealed_site src=0 tests=0
+party_made_known_site src=0 tests=0
+made_known src=0 tests=0
+kept_secret src=0 tests=0
+keptSecret src=0 tests=0
+settlementFundingBand src=0 tests=0
+fundingBandOfSettlement src=0 tests=0
+garrisonBandOf src=0 tests=0
+mapSiteRef src=0 tests=0
+requestFealtyRow src=0 tests=0
+FEALTY_EPISODE_PREFIXES src=0 tests=0
+riders_quartered src=0 tests=0
+PATROL_CADENCES src=0 tests=0
+every_four_weeks src=0 tests=0
+every_thirteen_weeks src=0 tests=0
+patrol_engages src=0 tests=0
+patrol_joins src=0 tests=0
+patrolCounterTerm src=0 tests=0
+rekinded src=0 tests=0
+cut01 src=0 tests=0
+backerRole src=0 tests=0
+BACKER_ROLES src=0 tests=0
+quoted 'u: literal files: 1
+tests/security/ingestCheckRate.pglite.test.js
+corps (word) src files: 3
+src/data/sampleDossier.json:26:    { "id": "wallcorps",      "name": "Wall Maintenance Corps",  "category": "civic",     "size": "small",  "weight": 0.4 },
+src/domain/factionRelationshipUpdate.js:383:      { field: 'manpower',    delta: -4, reason: 'Implicated ranks are purged; the officer corps is thinned by suspicion.' },
+src/domain/spatial/navalLayer.js:130:  /shipyard|dockyard|dry\s*dock|drydock|boatyard|admiralt|naval|navy|war\s*(fleet|galley|ship)|shipwright|marine\s*corps|fleet\s*(yard|base|command)/i;

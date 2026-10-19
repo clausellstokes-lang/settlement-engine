@@ -1,0 +1,50 @@
+{
+  "ENTER_THRESHOLD": 0.55,
+  "W_SIEGE": 0.85,
+  "SECURITY_MAX_RELIEF": 0.25,
+  "CAP": 0.85,
+  "rows": [
+    {
+      "label": "menace at the walls, relief at cap, fort 0.20 + riders 0.15",
+      "presence": 0.6,
+      "phase": "embattled",
+      "ifColumnSuppressed": 0.6,
+      "phaseIfColumnSuppressed": "embattled"
+    },
+    {
+      "label": "enemy column in the land, fort 0.20 + riders 0.15",
+      "presence": 0.6,
+      "phase": "embattled",
+      "ifColumnSuppressed": 0.35,
+      "phaseIfColumnSuppressed": "calm"
+    },
+    {
+      "label": "raiding menace, fort 0.20 + riders 0.15",
+      "presence": 0.35,
+      "phase": "calm",
+      "ifColumnSuppressed": 0.35,
+      "phaseIfColumnSuppressed": "calm"
+    },
+    {
+      "label": "raiding menace, nothing held",
+      "presence": 0.6,
+      "phase": "embattled",
+      "ifColumnSuppressed": 0.6,
+      "phaseIfColumnSuppressed": "embattled"
+    },
+    {
+      "label": "column + raiding menace, fort 0.20 + riders 0.15",
+      "presence": 0.6,
+      "phase": "embattled",
+      "ifColumnSuppressed": 0.35,
+      "phaseIfColumnSuppressed": "calm"
+    },
+    {
+      "label": "raiding menace + untied den 0.45, riders 0.05",
+      "presence": 0.55,
+      "phase": "calm",
+      "ifColumnSuppressed": 0.55,
+      "phaseIfColumnSuppressed": "calm"
+    }
+  ]
+}

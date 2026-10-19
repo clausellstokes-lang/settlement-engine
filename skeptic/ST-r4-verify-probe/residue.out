@@ -1,0 +1,48 @@
+## live (outside CURED/REFINED brackets), lines 1-683 (before §15)
+--- cult
+8:8	> **Status: COMPILED, DARK, NOT SCHEDULED — ROUND 4a DISPOSED (2026-10-18, lane D-ST-r4).** Round 4a (the round-3b verifier `skeptic/ST-r3-verify.md` — its three fails incl. two ROUTED-UNAPPLIED, its four new MAJORs and its eight notes; `skeptic/SEAMS-
+62:62	| `worldPulse/religionState.js :: standingFor` | "`return share >= A ? 'ascendant' : (share >= E ? 'established' : 'cult');`" | `cult` is the faith ladder's SIZE standing — the only meaning this volume gives the word (A.3; `fundingBandOf`'s creed arm) 
+71:71	**The binding prior words.** The owner's 10-17 doctrines (the tool is the DM's — "We only supply setting and consequence"; BEHIND THE SCENES; UNPREDICTABLE IN PROSPECT, LEGIBLE AND COHERENT ON SCRUTINY; HEARINGS ONLY ON THE WEEK); the hosting doctrine 
+185:185	- `fundingBandOf(worldState, siteId, snapshot) → FUNDING_BAND` — the EFFECTIVE band `min(fundingSet, derived)` ; derived by holder: a settlement by `settlementFundingBand`; a SEAT's clergy by its creed's standing band in that seat town (`cult` unfu
+217:217	| `cult` · `band` | LANDED: `cult` 80 src · 74 tests · 25 quoted src files (the faith ladder's STANDING, `religionState.js :: standingFor`); `band` 708 src · 671 tests · 35 quoted (the SIZE word everywhere — share, funding, strength bands) (`D-S
+348:348	| `PLACE_SITE` | AUTHOR | `kind` (enum) · `name` (text) · `where` (target: a settlement = its country, or `a␟b` = the road) · `holder` (enum: none · the anchor's garrison · the anchor's civil hold · the anchor's clergy — a person, a body or (
+442:442	| WF (faith) | BY THE ONE READS — the shrine's lean on the contest's strength (the followers act); a CONCLAVE holder is THE BODIES' flock holding as `faith` (§2.1), its sign per town by the town's stance toward its creed (§3.1), never a hazard; `cu
+--- heres
+--- kind: 'band'
+--- kind: 'cult'
+--- five kinds
+436:436	| SP (the shared spine) | BY THE SITE READ — the WHERE `site` (`ENGAGEMENT_WHERE_KINDS`) and the `subject` dial; `POSTURE_ACTOR_KINDS` gains NO `site` (a site is never an actor — §7.3; the SIX actor kinds are A.12's, `body` the sixth)  ; SP-9's do
+--- five actor
+--- FIVE kinds
+436:436	| SP (the shared spine) | BY THE SITE READ — the WHERE `site` (`ENGAGEMENT_WHERE_KINDS`) and the `subject` dial; `POSTURE_ACTOR_KINDS` gains NO `site` (a site is never an actor — §7.3; the SIX actor kinds are A.12's, `body` the sixth)  ; SP-9's do
+--- readiness01
+60:60	| `martialReadiness.js` · `readiness01` (LANDED: 14 src files, e.g. `armyTransit.js :: armyMarchWeeks(baseHopWeeks, readiness01 = 0.5)` "the army's 0..1 martial readiness"; `WarTab.jsx :: readinessWords(readiness01)` → "on a war footing" · "braced fo
+214:214	| `readiness01` | LANDED, 14 src · 9 test files: a town's or an army's MARTIAL readiness (`martialReadiness.js`; `armyTransit.js :: armyMarchWeeks`; `WarTab.jsx :: readinessWords`) | NEVER the site's value (that is `siteReadiness01`); the war page's r
+646:646	| OD-ST-41 | THE GARRISON'S WORD IS READINESS (A.10): ONE value `siteReadiness01 = F × Q` (× ½ for a person or faith holder of a fortification), read by the town's keep term (`KEEP_DEFENSE_MAX` 18 ×), the site's own siege (× `SITE_DEFENSE_CEILING[
+--- refused border
+584:584	| S21 | THE APPROACH FORT AND THE CAP: Ashford's march meets a held fort on the road after two weeks held at a refused border | WHERE THE PASSAGE IS LIT, the fort's hold (the one helper's FREEZE mode: the column's position unchanged from the prior tick
+--- spends PS9
+299:299	A held `fortification` on the hostile unit's route — on the stretch it travels (`where.kind = 'road'`) or `at_hand` to the next node it enters — is its own `site_siege` (STANDING; §8) that the attacker must resolve or BYPASS before the town's sieg
+--- a band
+89:89	**ST6 — FUNDING IS A DERIVED BAND, NEVER A COIN STORE; THE DM'S BAND IS A CEILING.**  A holder's DERIVED band is read each tick from what it has: a settlement from its prosperity label (`settlementFundingBand`, §2.4 — THE ONE settlement band, which 
+217:217	| `cult` · `band` | LANDED: `cult` 80 src · 74 tests · 25 quoted src files (the faith ladder's STANDING, `religionState.js :: standingFor`); `band` 708 src · 671 tests · 35 quoted (the SIZE word everywhere — share, funding, strength bands) (`D-S
+350:350	| `SITE_STATUS` | AUTHOR | `subject` · `event` (enum: `abandoned · destroyed · restored · consecrated · made_known · kept_secret`) · `funding` (enum: a band, or `derived`) · `quality` (enum, or `as is`) | the DM's dated events and the funding C
+595:595	| S32 | THE REPAIR CEILING (L-BD 31): a `provisioned` gang holds a `ruined` keep; a `starving` gang holds a `sound` one; a pack lairs in a `worn` watchtower; a conclave whose creed `Prosperous` Kell (attached) holds `endowed` holds a `ruined` hospice |
+--- band actor
+--- offensive
+44:44	| `warCapacityReads.js :: buildCapacityLookup` · `computeAllyRelief` | "`const homeDefense = Math.max(0, offensive - armyAway);`"; relief = allies' `homeDefense × ALLY_RELIEF_FRACTION` | THE ONE DEFENCE READ: the ready keep enters `homeDefense` as a na
+289:289	**Reads:** TRUTH — the site record, the holder's effective funding band and the live one-army ledger (a physical fact of the world, like the walls). **Writes:** nothing (a derived term). **Seam (the envelope):** `warCapacityReads.js :: buildCapacityL
+291:291	**The siege verdict reads it on BOTH cores** . ASPATIAL (the capacity roll): through `defenderCurrent` in `SIEGE_CAPACITY_K * (coalitionCurrent - defenderCurrent)` — pFall falls as the keep grows (executed: 0.8808 · 0.7389 · 0.5200 · 0.2932 for a 
+--- full · 
+--- four hearings
+--- FOUR hearings
+--- heretic
+--- villain
+71:71	**The binding prior words.** The owner's 10-17 doctrines (the tool is the DM's — "We only supply setting and consequence"; BEHIND THE SCENES; UNPREDICTABLE IN PROSPECT, LEGIBLE AND COHERENT ON SCRUTINY; HEARINGS ONLY ON THE WEEK); the hosting doctrine 
+93:93	**ST8 — THE UNTIED HOLDER IS A GENERAL HAZARD.** A site held by a force tied to no settlement — a GANG or a BEAST (THE BODIES' engine-born bodies), a DM's MENACE, a villain paragon — gives NO town a bonus and EVERY attached town a hazard, scaled by
+217:217	| `cult` · `band` | LANDED: `cult` 80 src · 74 tests · 25 quoted src files (the faith ladder's STANDING, `religionState.js :: standingFor`); `band` 708 src · 671 tests · 35 quoted (the SIZE word everywhere — share, funding, strength bands) (`D-S
+231:231	| `untied` (a gang or a beast — THE BODIES; a menace; an id-less authored gang before C17) · a `person` whose paragon `polarity` is `villain` | `untied` — the GENERAL HAZARD (ST8) | EVERY attached town, by distance band; no town benefits |
+348:348	| `PLACE_SITE` | AUTHOR | `kind` (enum) · `name` (text) · `where` (target: a settlement = its country, or `a␟b` = the road) · `holder` (enum: none · the anchor's garrison · the anchor's civil hold · the anchor's clergy — a person, a body or (
+389:389	| a villain paragon | its own weekly choice (CH §4.4's weights gain a site row: a post, a tower, a lair) — the paragon exists only because the DM introduced it | EMERGENT CHOICE of a DM-introduced person; its purpose only by the DM's direction |
+422:422	| A PARAGON'S weekly choice — a post, a tower, a lair | CH §4.4's weights gain one site row (a warden weighs a watchtower, a wizard a tower, a villain an unheld keep) | CH's commit |
+452:452	| CH (the champions) | BY THE SITE READ — the call board's `wildland` row; a paragon's choice weighs a post, a tower, a lair; a villain paragon holder is untied |

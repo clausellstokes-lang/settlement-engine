@@ -1,0 +1,67 @@
+@@OLD
+round-2 disposition seat D-MN-r2 (Opus 5.5), 2026-10-18. First compiled by chair 2fc13d59 the same day.
+@@NEW
+round-2 disposition seat D-MN-r2 (Opus 5.5), 2026-10-18; round-2b disposition seat D-MN-r2b (Opus 5.5), 2026-10-18. First compiled by chair 2fc13d59 the same day.
+@@END
+@@OLD
+round 2's `[CURED 2026-10-18 (fp-final r2) — <id>: …]` and `[REFINED 2026-10-18 (fp-final r2) — …]`.
+@@NEW
+round 2's `[CURED 2026-10-18 (fp-final r2) — <id>: …]` and `[REFINED 2026-10-18 (fp-final r2) — …]`; round 2b's carry the same `(fp-final r2)` tag with a round-2b id (`SEAMS-r2-<n>`, `RULINGS-ROUND2b …`).
+@@END
+@@OLD
+the measurements are in `cure/D-MN-r2.md` §1.
+
+**The owner's words, verbatim.**
+@@NEW
+the measurements are in `cure/D-MN-r2.md` §1.
+>
+> **ROUND 2b DISPOSED (2026-10-18, lane D-MN-r2b).** The seams skeptic's round-2 rows routed here (`fp-final-a73343ed-2026-10-17/skeptic/SEAMS-r2.md`: 1 BLOCKING — the sea's landed, owner-commissioned navy; 5 — the paragon's exertion OUTCOME, never the decision; 7 — the ONE presence composition with three feeders) and the four items `briefs/RULINGS-ROUND2b.md` names for MN (`army_beaten` for a detachment; the suppressor below the latch confirmed; the `war_pressure` measurement note accepted; PR's slot (2) through the stamp) are disposed in §14's round-2b block. The map builder's round-2 host re-check (`skeptic/HOST-r2.md`) routes nothing new here; the chair's corrections of round 2b that MN had echoed (the host's patrol facts leave by the events window, never "opens H16"; winter slows a pass, never cuts it; a storm is the lane's own landed law, never a calamity on a lane) are applied. The measurements are in `cure/D-MN-r2b.md` §1.
+
+**The owner's words, verbatim.**
+@@END
+@@OLD
+per town the MAX of its feeders, capped once — the menaces now, THE SITES' untied holders when that volume lands (`DESIGN_FP_ARCH_ST.md`, brief L-ST item 21: one term, two feeders, one cap) — so three dangers on one road never triple.
+@@NEW
+per town the MAX of its feeders, capped once — THREE registered feeders: the menaces (MN), THE SITES' untied holders (`DESIGN_FP_ARCH_ST.md` §3.4, brief L-ST item 21) and THE PASSAGE's enemy columns (`DESIGN_FP_ARCH_PS.md` PS12) — so three dangers on one road never triple; the ONE composition sentence is §3.3's `presenceTerms`, which ST §3.4, PS12 and PR §6.1 cite and never restate [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7: MN5 counted two feeders, ST §3.4 two, PS12 a third, and no volume said which part a suppressor may touch].
+@@END
+@@OLD
+SITES AND PATROLS CONSIDERED, on the same term (
+@@NEW
+SITES, PATROLS AND COLUMNS CONSIDERED, on the same term (
+@@END
+@@OLD
+THE PATROLS PR5 and §6.1): the composition is `presence′(T) = max(wallsTerm(T), max(0, roadCountry(T) − min(0.25, siteSuppression(T) + patrolSubtraction(T))))` — a held keep and the riders on the roads may lower the raid and road term by up to 0.25 together, floored at zero, and NEVER the walls term, so
+@@NEW
+THE PATROLS PR5 and §6.1; THE PASSAGE PS12): the composition is `p(T) = max(wallsTerm(T), columnTerm(T), max(0, roadCountry(T) − min(0.25, siteSuppression(T) + patrolSubtraction(T))))` (§3.3) — a held keep and the riders on the roads may lower the RAID-AND-ROAD part (a raiding or travelling menace, an untied den) by up to 0.25 together, floored at zero, and NEVER the walls term or an enemy column, so
+@@END
+@@OLD
+always latches]. Every danger consumer — route choice, banditry loss, the roads gauntlet, migration road deaths, charters, the believed view — then follows.
+@@NEW
+always latches] [CURED 2026-10-18 (fp-final r2) — RULINGS-ROUND2b ("MN's routed note: ST's suppressor (sites + patrols, up to 0.25) MAY take a raiding menace below the latch — that is the counterforce WORKING (MN's M50 wins)"): the chair confirmed this text; only the citation is new] [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7: an enemy column enters on the UNSUPPRESSED side beside the walls term, as PS12 writes it — a host in arms in the land is answered by the war's own contest (`barred`) and THE PATROLS' screen, not by a fort's or a rider's suppression of brigandage, and suppressing it as well would count the same riders twice against one army; so PS's latch pin P14 holds (EXECUTED on master's `stepEmbattlement`, `cure/D-MN-r2b.md` §1(c): the column's 0.60 latches a calm town in a kept, watched land; made suppressible it would read 0.35 and the town would stay calm). The seams skeptic named this the chair's call; MN and PS write it alike, vetoable by one clause (OD-MN-29)]. Every danger consumer — route choice, banditry loss (piracy too, on a sea route through the same port nodes — §6), the roads gauntlet, migration road deaths, charters, the believed view — then follows.
+@@END
+@@OLD
+`presenceTerms` = the per-town MAX over every feeder (MN now, THE SITES' untied holders), capped at `PRESENCE_TERM_CAP` (= `W_SIEGE`), then THE SITES' suppressor and THE PATROLS' subtraction on the raid and road part only (ST §3.4)
+@@NEW
+`presenceTerms` IS THE ONE COMPOSITION SENTENCE (every volume cites it, none restates it): per town T, `p(T) = max(wallsTerm(T), columnTerm(T), max(0, roadCountry(T) − σ(T)))` over a CLOSED list of three registered feeders, each registered into MN's leaf by whichever commit lands second (MN's or the feeder owner's) — `wallsTerm(T)`, the largest walls term of a menace `at_the_walls` of T (`W_SIEGE` net of T's capped security relief, §4.2); `columnTerm(T)`, THE PASSAGE's enemy-column feeder at T as PS12 defines it (DRAFT 0.60); `roadCountry(T)`, the MAX of every pressing menace's raid-and-road term at T (`raiding`, `abroad`; 0.60) and THE SITES' untied-holder feeder at T (ST §3.4) — each of the three capped ONCE at `PRESENCE_TERM_CAP` (= `W_SIEGE`) before anything else; and `σ(T) = min(0.25, siteSuppression(T) + patrolSubtraction(T))`, THE SITES' held suppressor (ST §3.4) plus THE PATROLS' slow subtraction (PR §6.1) — ONE suppressor slot, one shared cap. SUPPRESSIBLE: `roadCountry` only (the country's brigand-like danger). NEVER SUPPRESSED: the walls term and an enemy column (an armed host is answered by the siege verdict and relief, or by the war's own contest and the screen). So the term is never a sum, never above the cap and never below zero; the walls term and a column always cross the latch (0.60 > 0.55); a raided country may fall under it where sites and riders keep the roads (M50, M53) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7: three volumes restated the composition with different feeder counts, and none said which part is suppressible]
+@@END
+@@OLD
+— the ONE presence term: per town the MAX over its feeders, capped at `PRESENCE_TERM_CAP` (= `W_SIEGE`), so two menaces, or a menace and (when THE SITES lands) a den on the same road, never add (L-ST item 21: MN's danger term and ST's untied-site hazard are the same term with two feeders)
+@@NEW
+— the ONE presence term (§3.3's one composition sentence): per town the MAX over its three feeders, capped at `PRESENCE_TERM_CAP` (= `W_SIEGE`), so two menaces, a menace and a den (THE SITES), or a menace and an enemy column (THE PASSAGE) on the same road never add (L-ST item 21: MN's danger term and ST's untied-site hazard are one term; PS12 the third feeder) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-7]
+@@END
+@@OLD
+up to 0.25 together, floored at zero, never on the walls term — MN5)
+@@NEW
+up to 0.25 together, floored at zero, never on the walls term or an enemy column — MN5, §3.3)
+@@END
+@@OLD
+a shipment lost to banditry, deaths on a migrant road)
+@@NEW
+a shipment lost to banditry — named piracy when it was lost at sea, by the same roll: `navalLayer.js`, "banditryLoss fires on EVERY arriving shipment sea or land alike" — deaths on a migrant road)
+@@END
+@@OLD
+[REFINED 2026-10-18 (fp-final r2) — the owner's 06:35 question: the weather and the sea route ARE in the books and in the code] | a canonized map | — | derived |
+@@NEW
+[REFINED 2026-10-18 (fp-final r2) — the owner's 06:35 question: the weather and the sea route ARE in the books and in the code] | a canonized map | — | derived |
+| `spatial/navalLayer.js` · `worldPulse/navalKernel.js` (W-NAVY, `docs/DESIGN_NAVY.md`); `spatial/seaLanes.js :: STORM_SEASON_COST`; `roads/seaRoads.js` (D-6); `spatial/spatialCost.js :: SLOW_NOT_SEVER_MAX` | "navies convoy own/allied armies over water; two hostile navies sharing a SEA EDGE fight a sea battle"; "a navy blockading a hostile port MINTS A SIEGE"; "banditryLoss fires on EVERY arriving shipment sea or land alike"; "winter storms price up the cheap sea route"; "blockade capture (S1), storm delay (S2, priced not severed), and piracy (S3 = banditry-by-construction)"; `SLOW_NOT_SEVER_MAX = 6` ("Every value FINITE and ≥ 1") | THE SEA'S CARRIERS, every one landed: a menace on a lane presses its harbour towns' presence term and the landed rolls do the rest; MN mints no sea law, rides no convoy and fights no navy (§6) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-1] | `navalEnabled` (lit in `simulationRules.js :: WAVES`) + the canon marker; `seaRoadsEnabled` lit in no preset | — | `spatialLedgers.navalTransit` persisted (W-NAVY's); the rest derived |
+@@END

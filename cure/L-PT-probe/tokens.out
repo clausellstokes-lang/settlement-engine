@@ -1,0 +1,67 @@
+party_request	src=0	lit=0	tests=0	ldocs=0
+party_offer	src=0	lit=0	tests=0	ldocs=0
+party_summons	src=0	lit=0	tests=0	ldocs=0
+party_warrant	src=0	lit=0	tests=0	ldocs=0
+party_bounty	src=0	lit=0	tests=0	ldocs=0
+party_hunted	src=0	lit=0	tests=0	ldocs=0
+party_ambush	src=0	lit=0	tests=0	ldocs=0
+party_slander	src=0	lit=0	tests=0	ldocs=0
+party_gate	src=0	lit=0	tests=0	ldocs=0
+party_pledge_due	src=0	lit=0	tests=0	ldocs=0
+party_visit	src=0	lit=0	tests=0	ldocs=1
+pledge	src=10	lit=1	tests=3	ldocs=13
+pledged	src=8	lit=0	tests=1	ldocs=3
+seeking	src=12	lit=0	tests=2	ldocs=19
+awaiting	src=44	lit=0	tests=17	ldocs=52
+engagementState	src=0	lit=0	tests=0	ldocs=0
+pursuitClock	src=0	lit=0	tests=0	ldocs=0
+patienceClock	src=0	lit=0	tests=0	ldocs=0
+partyView	src=0	lit=0	tests=0	ldocs=0
+partyEnabled	src=0	lit=0	tests=0	ldocs=1
+partyEngagementsEnabled	src=0	lit=0	tests=0	ldocs=0
+partyBackingEnabled	src=0	lit=0	tests=0	ldocs=0
+partySanctionEnabled	src=0	lit=0	tests=0	ldocs=0
+backing	src=51	lit=0	tests=30	ldocs=49
+presence	src=197	lit=0	tests=185	ldocs=172
+lastHeard	src=0	lit=0	tests=0	ldocs=0
+earliestArrival	src=0	lit=0	tests=0	ldocs=0
+quieted	src=3	lit=0	tests=1	ldocs=0
+strike	src=51	lit=1	tests=48	ldocs=99
+struck	src=91	lit=1	tests=75	ldocs=152
+callBoard	src=0	lit=0	tests=0	ldocs=1
+witnessIds	src=0	lit=0	tests=0	ldocs=1
+proofShown	src=0	lit=0	tests=0	ldocs=0
+reasonGiven	src=0	lit=0	tests=0	ldocs=1
+declaredStance	src=0	lit=0	tests=0	ldocs=1
+moralWeight	src=1	lit=0	tests=0	ldocs=1
+heroic	src=4	lit=3	tests=5	ldocs=4
+admirable	src=0	lit=0	tests=0	ldocs=2
+shameful	src=2	lit=0	tests=0	ldocs=1
+villainous	src=2	lit=0	tests=0	ldocs=6
+kept	src=507	lit=0	tests=436	ldocs=238
+told	src=155	lit=1	tests=107	ldocs=83
+shown	src=166	lit=0	tests=124	ldocs=81
+escalation	src=51	lit=0	tests=49	ldocs=81
+summoned	src=7	lit=0	tests=1	ldocs=5
+warrant	src=17	lit=0	tests=7	ldocs=32
+hunters	src=15	lit=0	tests=1	ldocs=9
+silent src=323 lit=0
+spoken src=65 lit=0
+avowed src=0 lit=0
+attested src=2 lit=0
+unspoken src=10 lit=0
+party_banned src=0 lit=0
+backing_voided src=0 lit=0
+backing_repudiated src=0 lit=0
+presentAt src=1 lit=0
+menace_weakened src=0 lit=0
+menace_ended src=0 lit=0
+party_pledge src=0 lit=0
+invitation src=34 lit=0
+bribe src=3 lit=0
+reaches_party src=0 lit=0
+gives_up src=0 lit=0
+turns_elsewhere src=0 lit=0
+escalates src=12 lit=0
+unspoken src=10 lit=0
+spoken src=65 lit=0

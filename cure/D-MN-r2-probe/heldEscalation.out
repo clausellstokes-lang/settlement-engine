@@ -1,0 +1,6 @@
+capable siege held at 0.6: p0.65→0.70 auto (chance 0.26) · p0.7→0.73 auto (chance 0.28) · p0.8→0.78 auto (chance 0.30)
+capable monster_raider_pressure held at 0.6: p0.65→0.70 auto (chance 0.26) · p0.7→0.73 auto (chance 0.28) · p0.8→0.78 auto (chance 0.30)
+strong siege held at 0.8: p0.65→0.81 proposal (chance 0.26) · p0.7→0.83 proposal (chance 0.28) · p0.8→0.88 proposal (chance 0.30)
+strong monster_raider_pressure held at 0.8: p0.65→0.81 proposal (chance 0.26) · p0.7→0.83 proposal (chance 0.28) · p0.8→0.88 proposal (chance 0.30)
+formidable siege held at 0.9: p0.65→0.85 proposal (chance 0.26) · p0.7→0.88 proposal (chance 0.28) · p0.8→0.93 proposal (chance 0.30)
+formidable monster_raider_pressure held at 0.9: p0.65→0.85 proposal (chance 0.26) · p0.7→0.88 proposal (chance 0.28) · p0.8→0.93 proposal (chance 0.30)

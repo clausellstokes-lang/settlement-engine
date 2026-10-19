@@ -1,0 +1,26 @@
+retire | quoted src 0 · quoted tests 2 · word src 14 · ledger docs 61
+escaped | quoted src 0 · quoted tests 4 · word src 10 · ledger docs 31
+confront | quoted src 0 · quoted tests 0 · word src 1 · ledger docs 2
+shared_faith | quoted src 0 · quoted tests 0 · word src 0 · ledger docs 1
+by_broker | quoted src 0 · quoted tests 0 · word src 0 · ledger docs 0
+by_pursuit | quoted src 0 · quoted tests 0 · word src 0 · ledger docs 0
+junction | quoted src 0 · quoted tests 0 · word src 3 · ledger docs 10
+wild | quoted src 4 · quoted tests 1 · word src 26 · ledger docs 18
+way | quoted src 0 · quoted tests 1 · word src 617 · ledger docs 316
+trail | quoted src 0 · quoted tests 0 · word src 23 · ledger docs 38
+track | quoted src 6 · quoted tests 17 · word src 124 · ledger docs 65
+hidden | quoted src 135 · quoted tests 34 · word src 373 · ledger docs 152
+body | quoted src 11 · quoted tests 12 · word src 391 · ledger docs 293
+seize_supplies | quoted src 0 · quoted tests 0 · word src 0 · ledger docs 0
+--- escaped quoted (src)
+--- retire quoted (tests)
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/lint/goldenFreeze.walker.test.js:782:    expect(Object.keys(ACTIONS).sort()).toEqual(['enroll', 're-record', 'retire']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/lint/goldenFreeze.walker.test.js:803:    expect(withSurface({ action: 'retire' }).ok).toBe(true);
+--- way quoted (src)
+--- wild quoted (src)
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/design/organic/ornament/pools.js:36:  { kind: 'wild', name: 'oak', draw: (p) =>
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/gallery/galleryUtils.js:13:// getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/threatProfile.js:247:  // 'wild' pattern below — 'wild magic' contains 'wild', so the old ordering
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/display/institutionVocabulary.js:572:  'Druid Circle': ['nature', 'wild', 'balance'],
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/display/institutionVocabulary.js:573:  'Elder Grove Council': ['nature', 'wild', 'balance'],
+--- trail quoted (src)

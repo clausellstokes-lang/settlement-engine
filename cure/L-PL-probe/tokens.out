@@ -1,0 +1,92 @@
+polityHold             src=0    tests=0    ledgerDocs=0    quoted: 
+polityHoldOf           src=0    tests=0    ledgerDocs=0    quoted: 
+frayed                 src=4    tests=1    ledgerDocs=2    quoted: 
+shaky                  src=4    tests=5    ledgerDocs=2    quoted: 
+sound                  src=30   tests=46   ledgerDocs=87   quoted: src/domain/worldPulse/houseActs.js:67:'sound'
+unbroken               src=6    tests=4    ledgerDocs=8    quoted: 
+polityContests         src=0    tests=0    ledgerDocs=0    quoted: 
+polityNames            src=0    tests=0    ledgerDocs=0    quoted: 
+fealtyRecord           src=0    tests=0    ledgerDocs=0    quoted: 
+swornLinkSuspended     src=0    tests=0    ledgerDocs=0    quoted: 
+liegeStanceToward      src=0    tests=0    ledgerDocs=0    quoted: 
+applyPolityVerdict     src=0    tests=0    ledgerDocs=0    quoted: 
+fealtyQuestion         src=0    tests=0    ledgerDocs=0    quoted: 
+polity_claim           src=0    tests=0    ledgerDocs=0    quoted: 
+polity_war             src=0    tests=0    ledgerDocs=0    quoted: 
+polity_fallen          src=0    tests=0    ledgerDocs=0    quoted: 
+polity_arbitration     src=0    tests=0    ledgerDocs=0    quoted: 
+fealty_break           src=0    tests=0    ledgerDocs=0    quoted: 
+fealty_broken          src=0    tests=0    ledgerDocs=2    quoted: 
+fealty_restored        src=0    tests=0    ledgerDocs=1    quoted: 
+fealty_question        src=0    tests=0    ledgerDocs=2    quoted: 
+fealty_withheld        src=0    tests=0    ledgerDocs=0    quoted: 
+fealty_defied          src=0    tests=0    ledgerDocs=0    quoted: 
+stand_by               src=0    tests=0    ledgerDocs=0    quoted: 
+submit                 src=26   tests=10   ledgerDocs=15   quoted: src/copy/en.js:293:submit:
+lapsed                 src=63   tests=47   ledgerDocs=60   quoted: src/domain/realm/realmItemActions.js:15:'lapsed'
+recognized             src=19   tests=15   ledgerDocs=9    quoted: src/domain/worldPulse/simulationProfile.js:76:recognized:
+withheld               src=58   tests=45   ledgerDocs=34   quoted: src/domain/prose/grammarWalker.js:70:withheld:
+recognize              src=6    tests=4    ledgerDocs=7    quoted: 
+relief_answer          src=0    tests=0    ledgerDocs=0    quoted: 
+rebellionKind          src=0    tests=0    ledgerDocs=0    quoted: 
+allegiance_choice      src=0    tests=0    ledgerDocs=2    quoted: 
+polityOf               src=0    tests=0    ledgerDocs=1    quoted: 
+politiesOf             src=0    tests=0    ledgerDocs=1    quoted: 
+apex                   src=13   tests=1    ledgerDocs=2    quoted: 
+paramount              src=0    tests=0    ledgerDocs=0    quoted: 
+occupied               src=131  tests=78   ledgerDocs=74   quoted: src/generators/narrativeGenerator.js:564:'occupied'
+abroad                 src=52   tests=19   ledgerDocs=22   quoted: 
+scutage                src=0    tests=0    ledgerDocs=1    quoted: 
+protection_kept        src=0    tests=0    ledgerDocs=1    quoted: 
+protection_failed      src=0    tests=0    ledgerDocs=2    quoted: 
+relief_sent            src=0    tests=0    ledgerDocs=0    quoted: 
+relief_kept            src=0    tests=0    ledgerDocs=0    quoted: 
+service_answered       src=0    tests=0    ledgerDocs=0    quoted: 
+service_refused        src=0    tests=0    ledgerDocs=0    quoted: 
+SWEAR_FEALTY           src=0    tests=0    ledgerDocs=0    quoted: 
+RELEASE_VASSAL         src=0    tests=0    ledgerDocs=0    quoted: 
+OPEN_CLAIM             src=0    tests=0    ledgerDocs=0    quoted: 
+NAME_POLITY            src=0    tests=0    ledgerDocs=0    quoted: 
+claim_prevails         src=0    tests=0    ledgerDocs=2    quoted: 
+crown_prevails         src=0    tests=0    ledgerDocs=2    quoted: 
+partition              src=65   tests=81   ledgerDocs=68   quoted: 
+renew                  src=5    tests=4    ledgerDocs=5    quoted: 
+diplomacy_abroad       src=0    tests=0    ledgerDocs=0    quoted: 
+sphere                 src=12   tests=7    ledgerDocs=15   quoted: 
+polityEnabled          src=0    tests=0    ledgerDocs=1    quoted: 
+staunch                src=0    tests=0    ledgerDocs=0    quoted: 
+steadfast              src=4    tests=1    ledgerDocs=2    quoted: src/domain/npc/paradigmAxisCatalog.js:187:'steadfast'
+secure                 src=46   tests=33   ledgerDocs=36   quoted: src/pdf/sections/FaithWar.jsx:83:'secure'
+whole                  src=861  tests=1038 ledgerDocs=554  quoted: src/domain/tableEvents.js:251:'whole'
+taut                   src=0    tests=0    ledgerDocs=1    quoted: 
+divided                src=40   tests=14   ledgerDocs=28   quoted: src/domain/display/warResolve.js:92:'divided'
+sundered               src=0    tests=3    ledgerDocs=0    quoted: 
+polity_recognition     src=0    tests=0    ledgerDocs=0    quoted: 
+war_abroad             src=0    tests=0    ledgerDocs=0    quoted: 
+peace_abroad           src=0    tests=0    ledgerDocs=0    quoted: 
+alliance_abroad        src=0    tests=0    ledgerDocs=0    quoted: 
+trade_abroad           src=0    tests=0    ledgerDocs=0    quoted: 
+justice_at_home        src=0    tests=0    ledgerDocs=0    quoted: 
+own_seat               src=0    tests=0    ledgerDocs=0    quoted: 
+fealty_itself          src=0    tests=0    ledgerDocs=0    quoted: 
+PRECEDENCE_CLASSES     src=0    tests=0    ledgerDocs=0    quoted: 
+POLITY_HOLD_BANDS      src=0    tests=0    ledgerDocs=0    quoted: 
+paramount              src=0    tests=0    ledgerDocs=0    quoted: 
+polityClass            src=0    tests=0    ledgerDocs=0    quoted: 
+relief_answered        src=0    tests=0    ledgerDocs=0    quoted: 
+appointment_offer      src=0    tests=0    ledgerDocs=0    quoted: 
+polity_appointment     src=0    tests=0    ledgerDocs=0    quoted: 
+fealtyRow              src=0    tests=0    ledgerDocs=0    quoted: 
+rite_imposed           src=5    tests=2    ledgerDocs=2    quoted: src/domain/display/humanizeEngineTokens.js:316:rite_imposed:
+imposition             src=15   tests=10   ledgerDocs=25   quoted: src/domain/traditions/relations.js:140:'imposition'
+endorsement            src=5    tests=4    ledgerDocs=8    quoted: src/domain/worldPulse/religionLegitimacy.js:331:endorsement:
+court_match            src=0    tests=0    ledgerDocs=0    quoted: 
+fosterage              src=1    tests=0    ledgerDocs=2    quoted: 
+hostage_exchange       src=1    tests=1    ledgerDocs=2    quoted: src/domain/worldPulse/envoyTaskCatalog.js:261:'hostage_exchange'
+covenant               src=29   tests=15   ledgerDocs=24   quoted: src/design/boundBook.js:16:'covenant'
+appointed            src=13   quoted: src/domain/prose/entryLexicons.js:260:'appointed'
+polity_appointment   src=0    quoted: 
+narrowed_sphere      src=0    quoted: 
+sworn_link_rite      src=0    quoted: 
+crownBacked          src=0    quoted: 
+polity_council       src=0    quoted: 

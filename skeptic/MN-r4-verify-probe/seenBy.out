@@ -1,0 +1,5 @@
+# ST: seenBy lives on the holder object and is dropped with it
+146:ST-V1 (`holder.seenBy?`, the at-hand witnesses of an untied arrival, written once at the arrival and dropped with the holder)
+645:written once by the one writer at the act, dropped with the holder
+# MN: the sighting source is gated on the CURRENT holder
+195:on a site whose holder ref is `{ kind: 'menace', id: menaceId }`

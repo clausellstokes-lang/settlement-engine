@@ -1,0 +1,232 @@
+{
+ "NEW_CAMPAIGN_SIMULATION_PRESET_ID": null,
+ "bornPresetId": "realistic_regional",
+ "presetIds": [
+  "quiet_local",
+  "realistic_regional",
+  "dramatic_campaign",
+  "static_campaign",
+  "narrative_campaign",
+  "living_realm",
+  "full_simulation"
+ ],
+ "compare": {
+  "quiet_local": {
+   "diffCount": 13,
+   "litInPresetNotBorn": [],
+   "presetWatched": {
+    "warLayerEnabled": false,
+    "faithSpreadEnabled": false,
+    "infoMode": "omniscient",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "routine"
+   }
+  },
+  "realistic_regional": {
+   "diffCount": 30,
+   "litInPresetNotBorn": [
+    "disastersEnabled",
+    "commodityFlowEnabled",
+    "allyIntelSharingEnabled",
+    "faithUnseatingEnabled",
+    "pactFormationEnabled",
+    "momentumEnabled",
+    "navalEnabled",
+    "interventionEnabled",
+    "settlementLifecycleEnabled",
+    "peaceEngineEnabled",
+    "supplyWebWarfareEnabled",
+    "upswingArcsEnabled",
+    "resourceDynamicsEnabled",
+    "constructiveFlowsEnabled",
+    "distancePricedNewsEnabled",
+    "reframeEnabled",
+    "provenanceLedgerEnabled",
+    "urbanFabricEnabled",
+    "npcGrowthEnabled",
+    "spatialConsequenceEnabled",
+    "npcLadderEnabled",
+    "traditionsEnabled",
+    "roadsEnabled"
+   ],
+   "presetWatched": {
+    "pactFormationEnabled": true,
+    "faithUnseatingEnabled": true,
+    "warLayerEnabled": false,
+    "faithSpreadEnabled": false,
+    "infoMode": "omniscient",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "routine"
+   }
+  },
+  "dramatic_campaign": {
+   "diffCount": 45,
+   "litInPresetNotBorn": [
+    "warLayerEnabled",
+    "settlementStrategyEnabled",
+    "faithSpreadEnabled",
+    "religionDynamicsEnabled",
+    "seasonsEnabled",
+    "disastersEnabled",
+    "faithUnseatingEnabled",
+    "pactFormationEnabled",
+    "beliefAxesEnabled",
+    "believedConditionsEnabled",
+    "believedScarcityEnabled",
+    "mediationGeneralizedEnabled",
+    "oathHolderEnabled",
+    "treatyLifecycleVoiceEnabled",
+    "treatyRenewalEnabled",
+    "momentumEnabled",
+    "navalEnabled",
+    "interventionEnabled",
+    "settlementLifecycleEnabled",
+    "peaceEngineEnabled",
+    "supplyWebWarfareEnabled",
+    "upswingArcsEnabled",
+    "resourceDynamicsEnabled",
+    "constructiveFlowsEnabled",
+    "distancePricedNewsEnabled",
+    "reframeEnabled",
+    "provenanceLedgerEnabled",
+    "urbanFabricEnabled",
+    "npcGrowthEnabled",
+    "spatialConsequenceEnabled",
+    "npcLadderEnabled",
+    "traditionsEnabled",
+    "roadsEnabled"
+   ],
+   "presetWatched": {
+    "pactFormationEnabled": true,
+    "faithUnseatingEnabled": true,
+    "warLayerEnabled": true,
+    "faithSpreadEnabled": true,
+    "infoMode": "perfect_delayed",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "full"
+   }
+  },
+  "static_campaign": {
+   "diffCount": 20,
+   "litInPresetNotBorn": [],
+   "presetWatched": {
+    "warLayerEnabled": false,
+    "faithSpreadEnabled": false,
+    "infoMode": "omniscient",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "dm_only"
+   }
+  },
+  "narrative_campaign": {
+   "diffCount": 11,
+   "litInPresetNotBorn": [],
+   "presetWatched": {
+    "warLayerEnabled": false,
+    "faithSpreadEnabled": false,
+    "infoMode": "omniscient",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "recommendations"
+   }
+  },
+  "living_realm": {
+   "diffCount": 32,
+   "litInPresetNotBorn": [
+    "seasonsEnabled",
+    "faithUnseatingEnabled",
+    "pactFormationEnabled",
+    "beliefAxesEnabled",
+    "believedConditionsEnabled",
+    "believedScarcityEnabled",
+    "momentumEnabled",
+    "navalEnabled",
+    "interventionEnabled",
+    "settlementLifecycleEnabled",
+    "peaceEngineEnabled",
+    "supplyWebWarfareEnabled",
+    "upswingArcsEnabled",
+    "resourceDynamicsEnabled",
+    "constructiveFlowsEnabled",
+    "distancePricedNewsEnabled",
+    "reframeEnabled",
+    "provenanceLedgerEnabled",
+    "urbanFabricEnabled",
+    "npcGrowthEnabled",
+    "spatialConsequenceEnabled",
+    "npcLadderEnabled",
+    "traditionsEnabled",
+    "roadsEnabled"
+   ],
+   "presetWatched": {
+    "pactFormationEnabled": true,
+    "faithUnseatingEnabled": true,
+    "warLayerEnabled": false,
+    "faithSpreadEnabled": false,
+    "infoMode": "perfect_delayed",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "routine"
+   }
+  },
+  "full_simulation": {
+   "diffCount": 67,
+   "litInPresetNotBorn": [
+    "warLayerEnabled",
+    "settlementStrategyEnabled",
+    "faithSpreadEnabled",
+    "religionDynamicsEnabled",
+    "defenderAttritionEnabled",
+    "warEconomyDrainEnabled",
+    "defenderResolveEnabled",
+    "warDispositionEnabled",
+    "allyDefenseEnabled",
+    "warForageEnabled",
+    "warLevyEnabled",
+    "warSupplyQualityEnabled",
+    "seasonsEnabled",
+    "disastersEnabled",
+    "commodityFlowEnabled",
+    "allyIntelSharingEnabled",
+    "faithUnseatingEnabled",
+    "pactFormationEnabled",
+    "beliefAxesEnabled",
+    "believedConditionsEnabled",
+    "believedScarcityEnabled",
+    "mediationGeneralizedEnabled",
+    "oathHolderEnabled",
+    "treatyLifecycleVoiceEnabled",
+    "treatyRenewalEnabled",
+    "momentumEnabled",
+    "navalEnabled",
+    "interventionEnabled",
+    "settlementLifecycleEnabled",
+    "peaceEngineEnabled",
+    "supplyWebWarfareEnabled",
+    "upswingArcsEnabled",
+    "resourceDynamicsEnabled",
+    "constructiveFlowsEnabled",
+    "distancePricedNewsEnabled",
+    "reframeEnabled",
+    "provenanceLedgerEnabled",
+    "urbanFabricEnabled",
+    "npcGrowthEnabled",
+    "spatialConsequenceEnabled",
+    "npcLadderEnabled",
+    "traditionsEnabled",
+    "roadsEnabled"
+   ],
+   "presetWatched": {
+    "pactFormationEnabled": true,
+    "faithUnseatingEnabled": true,
+    "warLayerEnabled": true,
+    "npcConsequencesEnabled": false,
+    "faithSpreadEnabled": true,
+    "infoMode": "full",
+    "spatialMode": "ignore",
+    "politicalAutonomy": "full"
+   }
+  }
+ },
+ "bornWatched": {
+  "warLayerEnabled": false,
+  "faithSpreadEnabled": false
+ }
+}

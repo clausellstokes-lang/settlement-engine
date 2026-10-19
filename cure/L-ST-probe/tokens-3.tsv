@@ -1,0 +1,8 @@
+word	srcLiteralFiles	srcBareFiles	testsFiles	ledgerDocsFiles
+funded	1	34	15	37
+unpaid	2	33	15	33
+manned	0	5	2	0
+unmanned	0	5	1	1
+occupied_site	0	0	0	0
+holder	2	107	97	96
+untied	0	0	1	4

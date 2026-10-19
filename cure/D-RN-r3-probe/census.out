@@ -1,0 +1,24 @@
+# D-RN-r3 token census at master 81f1cd963 (rg -w -l counts: src tests master-docs ledger-docs) — Sun Oct 18 18:01:52 EDT 2026
+actRef	0	0	0	0
+doerKey	0	0	0	1
+siteId	0	0	0	4
+paragon_leak	0	0	0	1
+polity_ban	0	0	0	5
+credibilityWeight	3	3	4	2
+credibilityScoreOf	6	5	5	3
+MINT_PROBE_BUDGET	1	0	0	0
+## receipts
+631:        relayedTick: null,
+737:              relayedTick: null,
+678:      if (record.relayedTick != null) continue;             // continuation guard
+178:        infoMode, hopDelayTicks: 0, elapsedTicks: elapsed, fadeSteps: 0, reinforced: false, arrived: true,
+73:  a_year: INTERVAL_WEEKS.one_year,                 // 52 — a season's grudge, a reputation
+530:  jailed: 'known',
+531:  banished: 'notorious',
+99:const MINT_PROBE_BUDGET = 64;
+541: * checked. The function NEVER throws and never returns a taken id.
+189:  WEIGHT_FLOOR: 0.35,
+190:  WEIGHT_CEIL: 1.15,
+216: * The centered-on-1.0 credibility WEIGHT for a signed score. NEUTRAL (0) ⇒ EXACTLY
+222:export function credibilityWeight(score) {
+28:export function fnv1a32(str) {

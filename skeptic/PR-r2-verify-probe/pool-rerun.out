@@ -1,0 +1,25 @@
+thorp      pop=     8 mid=     34 ratio=0.235 ceiling=0 pool(cured)=0 pool(compiled facet)=0 
+thorp      pop=    22 mid=     34 ratio=0.647 ceiling=0 pool(cured)=0 pool(compiled facet)=0 
+thorp      pop=    34 mid=     34 ratio=1.000 ceiling=0 pool(cured)=0 pool(compiled facet)=0 
+thorp      pop=    60 mid=     34 ratio=1.000 ceiling=0 pool(cured)=0 pool(compiled facet)=0 
+hamlet     pop=    61 mid=  230.5 ratio=0.265 ceiling=1 pool(cured)=1 pool(compiled facet)=1 
+hamlet     pop=   156 mid=  230.5 ratio=0.677 ceiling=1 pool(cured)=1 pool(compiled facet)=1 
+hamlet     pop=   231 mid=  230.5 ratio=1.000 ceiling=1 pool(cured)=1 pool(compiled facet)=1 
+hamlet     pop=   400 mid=  230.5 ratio=1.000 ceiling=1 pool(cured)=1 pool(compiled facet)=1 
+village    pop=   401 mid=  650.5 ratio=0.616 ceiling=2 pool(cured)=1 pool(compiled facet)=2 <-- population binds
+village    pop=   601 mid=  650.5 ratio=0.924 ceiling=2 pool(cured)=2 pool(compiled facet)=2 
+village    pop=   651 mid=  650.5 ratio=1.000 ceiling=2 pool(cured)=2 pool(compiled facet)=2 
+village    pop=   900 mid=  650.5 ratio=1.000 ceiling=2 pool(cured)=2 pool(compiled facet)=2 
+town       pop=   901 mid= 2950.5 ratio=0.305 ceiling=4 pool(cured)=1 pool(compiled facet)=4 <-- population binds
+town       pop=  2122 mid= 2950.5 ratio=0.719 ceiling=4 pool(cured)=3 pool(compiled facet)=4 <-- population binds
+town       pop=  2951 mid= 2950.5 ratio=1.000 ceiling=4 pool(cured)=4 pool(compiled facet)=4 
+town       pop=  5000 mid= 2950.5 ratio=1.000 ceiling=4 pool(cured)=4 pool(compiled facet)=4 
+city       pop=  5001 mid=15000.5 ratio=0.333 ceiling=8 pool(cured)=3 pool(compiled facet)=8 <-- population binds
+city       pop= 11181 mid=15000.5 ratio=0.745 ceiling=8 pool(cured)=6 pool(compiled facet)=8 <-- population binds
+city       pop= 15001 mid=15000.5 ratio=1.000 ceiling=8 pool(cured)=8 pool(compiled facet)=8 
+city       pop= 25000 mid=15000.5 ratio=1.000 ceiling=8 pool(cured)=8 pool(compiled facet)=8 
+metropolis pop= 25001 mid=62500.5 ratio=0.400 ceiling=12 pool(cured)=5 pool(compiled facet)=12 <-- population binds
+metropolis pop= 50001 mid=62500.5 ratio=0.800 ceiling=12 pool(cured)=10 pool(compiled facet)=12 <-- population binds
+metropolis pop= 62501 mid=62500.5 ratio=1.000 ceiling=12 pool(cured)=12 pool(compiled facet)=12 
+metropolis pop=100000 mid=62500.5 ratio=1.000 ceiling=12 pool(cured)=12 pool(compiled facet)=12 
+rows=24 binds=7

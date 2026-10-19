@@ -1,0 +1,16 @@
+token                    quotedSrc  wordSrc wordTests   fpDocs
+at_strength                     0        0        0        0
+stalwart                        3        3        0        2
+stout                           0        2        2        0
+hollow                          0       21       11       24
+undermanned                     0        0        0        3
+ungarrisoned                    0        2        1        0
+bare                           16      361      591      315
+manned                          0        5        2        1
+skeleton                        0       18       19       56
+sparse                          1       57       48       28
+seenBy                          0        0        0        0
+siteReadiness01                 0        0        0        0
+SITE_READINESS                  0        0        0        0
+SITE_DEFENSE_CEILING            0        0        0        0
+KEEP_DEFENSE_MAX                0        0        0        0

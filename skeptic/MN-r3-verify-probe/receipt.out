@@ -1,0 +1,5 @@
+edge hostile: hostileNeighborsOf(kell) = [{"otherId":"merewick","type":"hostile","rank":3}] · siege origin variant = declared_war
+edge cold_war: hostileNeighborsOf(kell) = [{"otherId":"merewick","type":"cold_war","rank":2}] · siege origin variant = unattributed
+edge rival: hostileNeighborsOf(kell) = [{"otherId":"merewick","type":"rival","rank":1}] · siege origin variant = unattributed
+edge allied: hostileNeighborsOf(kell) = [] · siege origin variant = unattributed
+hostileNeighborsOf signature reads only (snapshot, settlementId): no pressure, no birth candidate: 2 params

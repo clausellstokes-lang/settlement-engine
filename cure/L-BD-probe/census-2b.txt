@@ -1,0 +1,28 @@
+rally | lit=0 [] | word=9 | tests=4 | ledger=54
+preach | lit=0 [] | word=5 | tests=0 | ledger=6
+supplicate | lit=0 [] | word=0 | tests=0 | ledger=0
+prowl | lit=0 [] | word=0 | tests=0 | ledger=0
+lie_up | lit=0 [] | word=0 | tests=0 | ledger=0
+curbed | lit=0 [] | word=0 | tests=0 | ledger=0
+endowed | lit=0 [] | word=7 | tests=0 | ledger=4
+harboured | lit=0 [] | word=0 | tests=0 | ledger=3
+harbored | lit=0 [] | word=0 | tests=0 | ledger=0
+merged | lit=0 [] | word=270 | tests=277 | ledger=388
+bodyOnRoute | lit=0 [] | word=0 | tests=0 | ledger=0
+bodyPresenceFeeder | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_CHOICES | lit=0 [] | word=0 | tests=0 | ledger=0
+BODY_KINDS | lit=0 [] | word=0 | tests=0 | ledger=0
+bodies | lit=0 [] | word=115 | tests=173 | ledger=314
+spatialLedgers.bodies | lit=0 [] | word=0 | tests=0 | ledger=0
+settlement_raided | lit=0 [] | word=0 | tests=0 | ledger=0
+buy_off | lit=0 [] | word=0 | tests=0 | ledger=6
+worn_down | lit=0 [] | word=0 | tests=0 | ledger=6
+absorbed | lit=8 [src/generators/steps/subsumptionPass.js src/generators/steps/assembleInstitutions.js src/domain/worldPulse/demographicsResponses.js src/domain/display/decreeTracker.js ] | word=58 | tests=74 | ledger=183
+suppression | lit=4 [src/domain/worldPulse/lineageClaim.js src/domain/worldPulse/factionCompetition.js src/domain/display/rumorFallbackPhrasePoolsEvents.js ] | word=155 | tests=140 | ledger=283
+raiding | lit=0 [] | word=10 | tests=4 | ledger=61
+holderBody | lit=0 [] | word=0 | tests=0 | ledger=0
+bodiesEnabled | lit=0 [] | word=0 | tests=0 | ledger=0
+beastsEnabled | lit=0 [] | word=0 | tests=0 | ledger=0
+conclavesEnabled | lit=0 [] | word=0 | tests=0 | ledger=0
+gangsEnabled | lit=0 [] | word=0 | tests=0 | ledger=0
+hiddenWaysEnabled | lit=0 [] | word=0 | tests=0 | ledger=0

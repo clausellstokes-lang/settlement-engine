@@ -1,0 +1,40 @@
+## HEAD
+81f1cd963553f226b222714914ff34584e9911b8
+## token census (src / tests / worktree docs / ledger docs word hits)
+oathSince src=0 tests=0 worktree-docs=0 ledger-docs-files: 
+riders_quartered src=0 tests=0 worktree-docs=0 ledger-docs-files: DESIGN_FP_ARCH_PL.md DESIGN_FP_ARCH_PR.md DESIGN_FP_COHERENCE_FOLD.md 
+weeksCovered src=0 tests=0 worktree-docs=0 ledger-docs-files: 
+reliefAnswerOf src=0 tests=0 worktree-docs=0 ledger-docs-files: DESIGN_FP_ARCH_PL.md DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_MN.md DESIGN_FP_ARCH_PS.md DESIGN_FP_COHERENCE_FOLD.md 
+huntOrderOf src=0 tests=0 worktree-docs=0 ledger-docs-files: DESIGN_FP_ARCH_PL.md DESIGN_FP_ARCH_BD.md DESIGN_FP_COHERENCE_FOLD.md 
+peace_unkept src=0 tests=0 worktree-docs=0 ledger-docs-files: DESIGN_FP_ARCH_PL.md DESIGN_FP_ARCH_BD.md DESIGN_FP_COHERENCE_FOLD.md 
+## landed regexes
+78:const ESCALATION_HINT = /(arms_race|sabotage|incident|overreach|coup|rebellion|hostile|raid|extract|power_play|autonomy_bid|debt_spiral|forces_align|subjugat|war|sanction|embargo)/i;
+79:const DEESCALATION_HINT = /(thaw|recovery|compact|protect|stability|alliance|allied|trade_partner|patronage|compliance|support|reconcil|dependency_coercion)/i;
+48:const WOUND_TYPE_RE = /war|betray|tribute|conquest|occupation|sack|raid|seiz|impos|contest_loss|contest_forestalled/i;
+## the seniority-stamp clear inside the one relationship writer (oathSince's clear sits beside it)
+621:    // them — a transition away from vassal/patron clears them so a later
+624:    if (outcome.proposalPayload.toType !== "vassal") {
+625:      if (patch.overlordSaveId === undefined) patch.overlordSaveId = null;
+490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
+## stage order: rumor -> calamity (MN's leaf) -> army transit -> polity stage (pulseKernel.js)
+2097:    const rumors = advanceRumorLedgers({
+2442:    const armyTransit = advanceArmyTransit({
+2527:    const calamity = advanceCalamity({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({
+## a hop is at least one tick (rumor travel)
+src/domain/spatial/rumorNetwork.js:693:          const travelTicks = Math.max(1, finiteNumber(weeks, 1));
+## computeAllyRelief reads the snapshot's worldState; the polity stage host receives the snapshot
+74:export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet, coalitionLit = false) {
+75:  const states = snapshot?.worldState?.relationshipStates || {};
+62:export function advanceTreatiesWithDisposition(args) {
+## INTERVAL_WEEKS
+9:  one_month: 4,
+10:  one_season: 13,
+11:  one_year: 52,
+## raid kinds on master (the war volume's designed kinds: expect 0 built)
+bought_off src hits:        0
+'supply_raid' quoted src hits:        0
+## the fold's two raid rows (ledger)
+496:| `raid` | the war volume (border incidents) | the raid's landing | `repelled · succeeds · bought_off` | CLIMAX |
+520:| `supply_raid` | the war volume | the raid's landing | `repelled · succeeds` | CLIMAX (S5-B4) |
+613:| `road` | `armies_meet` · `caravan_seized` · `envoy_intercepted` · `supply_raid` · `chance_meeting` (where it meets on a road; else its settlement) · `menace_met` (a menace holding or travelling a road) · `party_ambush` · `party_visit` (a paragon o

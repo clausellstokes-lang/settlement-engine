@@ -1,0 +1,14 @@
+src/domain/worldPulse/npcVerdictApply.js	296	baseline=-
+src/domain/worldPulse/espionage/espionageMissions.js	132	baseline=-
+src/domain/worldPulse/espionage/espionageGauntlet.js	309	baseline=-
+src/domain/worldPulse/espionage/espionageMath.js	163	baseline=-
+src/domain/worldPulse/npcLedgerFacets.js	146	baseline=-
+src/domain/worldPulse/npcLedgerProjection.js	113	baseline=-
+src/domain/worldPulse/npcLedger.js	429	baseline=-
+src/domain/worldPulse/relationshipState.js	360	baseline=-
+src/domain/worldPulse/warSeatBooks.js	492	baseline=-
+src/domain/spatial/rumorNetwork.js	364	baseline=-
+src/domain/worldPulse/envoyPulse.js	332	baseline=-
+src/domain/worldPulse/reputationRaceConsumer.js	183	baseline=-
+src/domain/worldPulse/religiousContest.js	493	baseline=-
+src/domain/worldPulse/pactFormation.js	565	baseline=-

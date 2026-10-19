@@ -1,0 +1,35 @@
+CH: appendRelationshipFealtyRow=0 requestFealtyRow=6 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=0 H16=11
+PT: appendRelationshipFealtyRow=0 requestFealtyRow=0 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=0 H16=2
+RN: appendRelationshipFealtyRow=0 requestFealtyRow=0 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=0 H16=2
+MN: appendRelationshipFealtyRow=0 requestFealtyRow=0 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=4 H16=3
+PS: appendRelationshipFealtyRow=2 requestFealtyRow=0 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=0 H16=7
+ST: appendRelationshipFealtyRow=0 requestFealtyRow=0 patrol_order=0 riders:=0 "road warden"=0 "re-derive"=4 H16=1
+PR: appendRelationshipFealtyRow=1 requestFealtyRow=0 patrol_order=8 riders:=1 "road warden"=1 "re-derive"=0 H16=7
+FOLD: appendRelationshipFealtyRow=0 requestFealtyRow=0 patrol_order=0 call_in_answer=2
+Sun Oct 18 08:10:35 EDT 2026
+Oct 18 07:25 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CH.md
+Oct 18 07:36 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CN.md
+Oct 16 19:13 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_CW.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_EC.md
+Oct 16 19:19 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_EP.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_ES.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_GR.md
+Oct 16 19:10 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_HB.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_IN.md
+Oct 16 18:38 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_INT.md
+Oct 16 19:19 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_LG.md
+Oct 16 19:19 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_MF.md
+Oct 18 07:17 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_MN.md
+Oct 16 19:19 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PG.md
+Oct 18 08:10 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PL.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_POP.md
+Oct 18 07:05 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PR.md
+Oct 18 06:30 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PS.md
+Oct 18 07:30 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PT.md
+Oct 18 07:27 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_RN.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_SP.md
+Oct 18 06:31 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_ST.md
+Oct 16 18:37 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_TR.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_WC.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_WF.md
+Oct 16 19:26 /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_WY.md

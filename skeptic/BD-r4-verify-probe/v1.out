@@ -1,0 +1,34 @@
+## ransomChoices
+domain/worldPulse/ransomChoices.js:20: * PURE: no world state, no writer, no RNG, no clock. Every input is a closed
+domain/worldPulse/ransomChoices.js:25:export const CAPTOR_CHOICES = Object.freeze(['hold', 'ransom', 'release']);
+domain/worldPulse/ransomChoices.js:28:export const HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon']);
+domain/worldPulse/ransomChoices.js:45:export const ABANDONMENT_GRIEVANCE_KIND = 'abandoned_to_captivity';
+domain/worldPulse/ransomChoices.js:136:export function captorRansomChoice({ captor, dwellBand, claimOpen } = {}) {
+domain/worldPulse/ransomChoices.js:174:export function homeRansomAnswer({ home, claim } = {}) {
+domain/worldPulse/ransomChoices.js:238:      kind: ABANDONMENT_GRIEVANCE_KIND,
+## HIDDEN_PATH_SLOWDOWN
+domain/worldPulse/routeNetworkConsumersTransit.js:69: * THE HIDDEN RUNG IS 2 BECAUSE H3'S IS. `NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN`
+domain/worldPulse/npcConsequencesTuning.js:155:  HIDDEN_PATH_SLOWDOWN: 2,
+domain/worldPulse/npcCirculationTransit.js:117: * its arrival tick. A hidden way costs HIDDEN_PATH_SLOWDOWN times the nominal hop: the
+domain/worldPulse/npcCirculationTransit.js:141:    gradeMultiplier: hop.hidden ? NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : 1,
+## TRAIL_WEEKS_MULT
+## ruinInstitution
+domain/worldPulse/calamityKernel.js:248:export function ruinInstitution(inst, { reason, fate }) {
+domain/worldPulse/calamityKernel.js:249:  if (typeof fate !== 'string' || fate === '') throw new TypeError('ruinInstitution: fate is required and must be a non-empty string. A pulse ruin record never defaults its fate.');
+domain/worldPulse/calamityKernel.js:250:  assertWorldPulseFate(fate, 'ruinInstitution');
+domain/worldPulse/calamityKernel.js:251:  if (typeof reason !== 'string' || reason === '') throw new TypeError('ruinInstitution: reason is required and must be a non-empty string. A pulse ruin record never defaults its cause.');
+domain/worldPulse/calamityKernel.js:324:        if (gi >= 0) { list[gi] = ruinInstitution(list[gi], { reason: 'Razed as the district collapsed to a single survivor after the disaster.', fate: 'destroyed_by_disaster' }); removedNames.push(gone); }
+domain/worldPulse/calamityKernel.js:328:      list[idx] = ruinInstitution(list[idx], { reason: 'Destroyed outright by the disaster.', fate: 'destroyed_by_disaster' });
+domain/worldPulse/worldPulseFates.js:26: * op calls `ruinInstitution` with it. It is here so that op lands against a CLOSED set.
+domain/worldPulse/worldPulseFates.js:35: * tests/domain/ruinInstitution.test.js A7 asserts the pulse's ruin shape has exactly ONE
+domain/worldPulse/worldPulseFates.js:64:  destroyed_by_disaster: 'closure',         // calamityKernel :317/:321 through ruinInstitution
+domain/edit/operations.js:279:    guardsStated: 'No guard is wired here. The five union values write the composer constants STATUS_ACTIVE, STATUS_DESTROYED, STATUS_IMPAIRED, STATUS_REMOVED and STATUS_VACANT; ruined alone writes the PULSE shape, status ruined with _worldPulseInactive true, through EM-B1e ruinInstitution with fate ruined_by_decree, and never a composer constant.',
+## infiltrationGate/religiousConversionGate/criminalCorridorGate
+domain/worldPulse/stressorGates.js:575:function infiltrationGate(snapshot, pressure) {
+domain/worldPulse/stressorGates.js:635:function monsterRaiderGate(snapshot, pressure) {
+domain/worldPulse/stressorGates.js:719:function religiousConversionGate(snapshot, pressure) {
+domain/worldPulse/stressorGates.js:830:function criminalCorridorGate(snapshot, pressure) {
+domain/worldPulse/stressorGates.js:1031:  infiltration: infiltrationGate,
+domain/worldPulse/stressorGates.js:1034:  monster_raider_pressure: monsterRaiderGate,
+domain/worldPulse/stressorGates.js:1036:  religious_conversion_fracture: religiousConversionGate,
+domain/worldPulse/stressorGates.js:1041:  criminal_corridor: criminalCorridorGate,

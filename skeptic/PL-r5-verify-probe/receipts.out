@@ -1,0 +1,31 @@
+## volume
+f6e16f16b632437bbcd69db3cb5b59e4ba1eaaf55716e6205a6e2853c6826a24  /Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_PL.md
+     922
+Oct 19 03:58:38 2026
+## ST->PL route (D-ST-r5 §5): 'no force the member holds hostile' in PL / ST
+0
+4
+## PR->PL route (D-PR-r5 §5): bannerCoverOf(...).weeks in PL; 'weeksCovered > 0' / '(`> 0`)' in PL
+0
+1
+bannerCoverOf(worldState, memberId, tick) → { weeks, seasonStartTick }
+## PS->PL route (D-PS-r5 §5): passageStandingOf in PL; the ladder row in §5.3
+0
+1
+## PL-Y2: PS 'first sight' answer vs PL 'LIEGE BELIEVES'
+1
+1
+0
+## PL-Y1: the sweep's trigger and the tally's power
+1
+1
+1
+## PL-Y3: the liege's-creed credit and the mirror
+1
+1
+## stale patch lists (minor)
+1
+1
+## fold raid rows
+504:| `raid` | the war volume (border incidents) | the raid's landing | `repelled · succeeds · bought_off` | CLIMAX |
+530:| `supply_raid` | the war volume | the raid's landing | `repelled · succeeds` | CLIMAX (S5-B4) |

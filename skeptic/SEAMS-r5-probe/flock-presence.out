@@ -1,0 +1,5 @@
+thin       p(based) 0.280 latches alone false latches once own ramp T >= 0.375
+modest     p(based) 0.400 latches alone false latches once own ramp T >= 0.250
+capable    p(based) 0.480 latches alone false latches once own ramp T >= 0.135
+strong     p(based) 0.560 latches alone true latches once own ramp T >= 0.000
+formidable p(based) 0.560 latches alone true latches once own ramp T >= 0.000

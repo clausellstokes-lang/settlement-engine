@@ -1,0 +1,38 @@
+{
+ "hops_1": {
+  "reason_visible_at_0_85": 0.6737,
+  "reason_visible_at_0_75_shown": 0.9707
+ },
+ "hops_2": {
+  "reason_visible_at_0_85": 0.1552,
+  "reason_visible_at_0_75_shown": 0.6249
+ },
+ "hops_3": {
+  "reason_visible_at_0_85": 0.0243,
+  "reason_visible_at_0_75_shown": 0.196
+ },
+ "hops_4": {
+  "reason_visible_at_0_85": 0.0034,
+  "reason_visible_at_0_75_shown": 0.0431
+ },
+ "magnitude_from_0": {
+  "up": 0.1486,
+  "down": 0,
+  "same": 0.8514
+ },
+ "magnitude_from_1": {
+  "up": 0.149,
+  "down": 0.1493,
+  "same": 0.7017
+ },
+ "magnitude_from_2": {
+  "up": 0.1477,
+  "down": 0.1468,
+  "same": 0.7054
+ },
+ "magnitude_from_3": {
+  "up": 0,
+  "down": 0.1502,
+  "same": 0.8498
+ }
+}

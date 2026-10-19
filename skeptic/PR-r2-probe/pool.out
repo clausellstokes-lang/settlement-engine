@@ -1,0 +1,18 @@
+thorp      pop=     8 manpower=  6 ceiling=0 pool=0 
+thorp      pop=    22 manpower=8.054536084933236 ceiling=0 pool=0 
+thorp      pop=    60 manpower=10.668907502301861 ceiling=0 pool=0 
+hamlet     pop=    61 manpower=24.711979010064603 ceiling=1 pool=1 
+hamlet     pop=   156 manpower=27.158747590126772 ceiling=1 pool=1 
+hamlet     pop=   400 manpower=29.612359947967775 ceiling=1 pool=1 
+village    pop=   401 manpower=43.61886623572109 ceiling=2 pool=2 
+village    pop=   601 manpower=44.67324683201644 ceiling=2 pool=2 
+village    pop=   900 manpower=45.72545505663595 ceiling=2 pool=2 
+town       pop=   901 manpower=59.72834874587438 ceiling=4 pool=4 
+town       pop=  2122 manpower=61.96047227739193 ceiling=4 pool=4 
+town       pop=  5000 manpower=64.19382002601611 ceiling=4 pool=4 
+city       pop=  5001 manpower=78.19434112728601 ceiling=8 pool=8 
+city       pop= 11181 manpower=80.29088388484101 ceiling=8 pool=8 
+city       pop= 25000 manpower=82.38764005203222 ceiling=8 pool=8 
+metropolis pop= 25001 manpower=96.38774428062332 ceiling=12 pool=12 
+metropolis pop= 50001 manpower=98.1938721408328 ceiling=12 pool=12 
+metropolis pop=100000 manpower=100 ceiling=12 pool=12 

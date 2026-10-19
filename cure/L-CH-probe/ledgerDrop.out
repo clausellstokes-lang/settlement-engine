@@ -1,0 +1,5 @@
+roamer keys after read: identityFacets,reputation,originRef,verdictCause,sinceTick
+paragon survives read: false
+paragon survives moveNpcRecord patch: false
+dark move returns same ref: true
+graduate dark → wnpcId: null

@@ -1,0 +1,21 @@
+m=0.00 {"thin":[],"modest":["thorp"],"capable":["thorp","hamlet","village","town"],"strong":["thorp","hamlet","village","town","city","metropolis"],"formidable":["thorp","hamlet","village","town","city","metropolis"]} 
+m=0.20 {"thin":[],"modest":[],"capable":["thorp","hamlet"],"strong":["thorp","hamlet","village","town","city","metropolis"],"formidable":["thorp","hamlet","village","town","city","metropolis"]} 
+m=0.40 {"thin":[],"modest":[],"capable":["thorp"],"strong":["thorp","hamlet","village","town"],"formidable":["thorp","hamlet","village","town","city","metropolis"]} 
+m=0.60 {"thin":[],"modest":[],"capable":[],"strong":["thorp","hamlet","village"],"formidable":["thorp","hamlet","village","town","city"]} 
+m=0.80 {"thin":[],"modest":[],"capable":[],"strong":["thorp","hamlet"],"formidable":["thorp","hamlet","village","town"]} 
+m=0.90 {"thin":[],"modest":[],"capable":[],"strong":["thorp"],"formidable":["thorp","hamlet","village"]} URBAN-SAFE
+m=0.95 {"thin":[],"modest":[],"capable":[],"strong":["thorp"],"formidable":["thorp","hamlet","village"]} URBAN-SAFE
+m=1.00 {"thin":[],"modest":[],"capable":[],"strong":["thorp"],"formidable":["thorp","hamlet","village"]} URBAN-SAFE
+m=1.05 {"thin":[],"modest":[],"capable":[],"strong":["thorp"],"formidable":["thorp","hamlet","village"]} URBAN-SAFE
+m=1.10 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp","hamlet"]} URBAN-SAFE
+m=1.15 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp","hamlet"]} URBAN-SAFE
+m=1.20 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp","hamlet"]} URBAN-SAFE
+m=1.25 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp","hamlet"]} URBAN-SAFE
+m=1.30 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp","hamlet"]} URBAN-SAFE
+m=1.35 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+m=1.40 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+m=1.45 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+m=1.50 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+m=1.55 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+m=1.60 {"thin":[],"modest":[],"capable":[],"strong":[],"formidable":["thorp"]} URBAN-SAFE
+a margin with town+ never raided AND a modest body raiding a hamlet exists: false

@@ -1,0 +1,6 @@
+src/domain/worldPulse/envoyChanceMeetingStage.js raw=882 eff=484 baseline=
+src/domain/worldPulse/envoyChanceMeeting.js raw=1002 eff=556 baseline=
+src/domain/spatial/rumorNetwork.js raw=791 eff=364 baseline=
+src/domain/worldPulse/envoyPulse.js raw=578 eff=332 baseline=
+src/domain/pulseKernel.js MISSING
+src/domain/worldPulse/informationStatecraft.js raw=1548 eff=781 baseline=

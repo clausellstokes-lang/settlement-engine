@@ -1,0 +1,12 @@
+A = age term at year 25 (1 = oaths a generation old; 0 = freshly sworn); baselines = fealty_sworn rows re-written by the cap rule;
+weeksA1 = weeks in which the stated clause "renewing rows evicted -> reads 1" holds
+quiet edge: no row in 25 years                                 A=1.000  baselines= 0  weeksA1=0
+failing crown: 1 failure rows/yr                               A=0.079  baselines= 1  weeksA1=0
+failing crown: 2 failure rows/yr                               A=0.059  baselines= 2  weeksA1=0
+failing crown: 3 failure rows/yr                               A=0.053  baselines= 3  weeksA1=0
+failing crown: 6 failure rows/yr                               A=0.046  baselines= 6  weeksA1=0
+failing crown: 10 failure rows/yr                              A=0.044  baselines=10  weeksA1=0
+defied crown: 3 fealty_defied/yr                               A=0.053  baselines= 3  weeksA1=0
+lender: 1 service_answered credit/yr + 2 relief_sent/yr        A=0.053  baselines= 3  weeksA1=0
+withheld at y1 + 2 failure rows/yr                             A=0.019  baselines= 2  weeksA1=78
+failing crown 2 rows/yr, SUCCESSION dark (no baseline writer)  A=1.000  baselines= 0  weeksA1=702

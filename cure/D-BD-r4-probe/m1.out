@@ -1,0 +1,71 @@
+### templeWealth / tithe
+src/data/dossierCausalProse.generated.js:2657:          "text": "There are two congregations at {settlement} and one of them meets in a barn; the seat went after the tithe {timeband_since}, and a quarrel about money finished as a quarrel about doctrine.",
+src/data/dossierCausalProse.generated.js:2668:          "text": "{temple}'s books at {settlement} are {band} lighter than they were, and the shortfall has a domestic cause: the hall took the tithe rights to a contest and won a part of them.",
+src/data/dossierCausalProse.generated.js:2702:          "text": "The tithe at {settlement} stands where it stood and {temple} keeps one congregation: the hall leaned and the temple did not break, and the seat spent standing to learn what it could have counted.",
+src/data/dossierCausalProse.generated.js:4668:          "text": "The seat's revenue at {settlement} is up and its standing among the neighbouring halls is down, and the tithe contest it won against {temple} is the one entry both movements hang from.",
+src/data/institutionDescVariants.js:438:    "Administers the sacraments and gathers the tithe. Frequently the sole person here who can read.",
+src/data/institutionDescVariants.js:439:    "Says the sacraments, takes the tithe. Usually the one literate soul in the village.",
+src/data/npcData.js:596:      short: 'Negotiate a tithe reduction with the local lord without compromising principle',
+src/data/dossierStateProse/warFaith.generated.js:4604:    "title": "DS-FTH-3: Religion state: standing, niche, legitimacy, falls, rank, wealth and season · `worldState.religionStates[cid] {patronRef, deities{share, standing, legitimacy, niche, tenure, suppressed, covert}, patronFalls[]}` × `templeWealth`",
+src/data/dossierStateProse/warFaith.generated.js:5035:          "text": "The observance here is wealthy, and the tithe shows in the stonework rather than in the vestments; the town is aware of the stonework.",
+src/data/dossierStateProse/warFaith.generated.js:5073:          "text": "{institution}'s coffer is empty. What the tithe brings in leaves again immediately, and the fabric is beginning to show it.",
+src/data/dossierStateProse/warFaith.generated.js:5574:    "title": "DS-FTH-4 · Faith/Power › Why the temple holds its ground (standing, tenure, endowment) · `worldState.religionStates[cid]` × `templeWealth` × `compound.inst.hasChurch`",
+src/data/institutionServices.js:47:    "Tithe and dues": { on: true, p: 0.8, desc: "Collects the lord's dues and the temple tithe" },
+src/domain/institutions/institutionTable.js:95: * stems were singular-only for `tithe`, `tax` and `toll` while `records?`, `rolls?` and
+src/domain/certification/subsystemRowsCoin.js:76:      other: 'THE ESTATE\'S FIRST CONSERVED COIN STOCK, and the reversal of a standing ruling: f3cf639e forbade a conserved-coin primitive and the owner reversed it by order (ODQ 731.1, Q-W8 GRANTED). ONE GATE: treasury.treasuryActive reads treasuryEnabled by name with the strict === true idiom, and it sits at the PULSE WRITER door because that is the door nothing can write past - only advanceTreasury may open or move a ledger, and only applyCoinDeltasToUpdates may fold a cross-settlement delta onto one already open, so a second gate at the applicator would be a guard hiding behind a guard. WHAT CAR 1a CONTAINS: the record (coin, openedTick, lastTick, coinFlows), the accessors coinOf and treasuryCapacity, capacity DERIVED on every read and never persisted, the ONE transfer primitive computeCoinTransfer, the ONE applicator, and the ONE governing resolution law resolveRulingPower - governingFactionOf composed with factionArchetype and rulingPowerFromArchetype over the frozen six-value RULING_POWERS, shared with W-SEAT, never the free-text powerStructure.government string. WHAT CAR 1b ADDS: TAXATION, the writer ONE mint kind. Eight closed TAX_FORMS grounded in the incomeSources families the generator already narrates, five ordered TAX_RATE_BANDS, and a frozen six-by-eight profile keyed on RULING_POWERS - so a merchant league taxes trade and spares land while a theocracy takes its tithe, and a coup RETYPES taxation on the next tick because the A1.12 stamp moved the seat archetype. Rates are BANDS and never free floats. Criminal incomeSources rows are NEVER a tax base, which is the generator own committed sentence turned into an assertion. THE MINT READS THE STOCK ONLY AT THE CAPACITY STOP AND IT DAMPS: every other input is generation-frozen structure or the prosperity OPINION, so no tax-transfer-tax feedback can close. THE LEGITIMACY PRICE is the stock ONLY write to any opinion anywhere, it follows the BAND rather than the coin so a capacity-stopped tick still pays it, and it rides the writer summary to a LATER pulse stage because settlementUpdates does not exist at settlement_clock - landing through the ONE existing applyLegitimacyDeltasToUpdates, never a second applicator (ODQ 768.2 amendment).  THE UNIT IS DECLARED AT BIRTH: absolute integer state-coin, never per-capita, never months, never a band at rest, stated in the typedef and in the fieldManifest displayRule and read only through the accessors. WHAT IT NEVER DOES: no negative coin ever (an unpayable cost becomes a typed shortfall, because debt is owner-gated), no coin from RNG, no coin written outside the writer and applicator pair, no exchange rate between coin and grain in either direction, no per-tick history array, no DM edit surface, no display surface. WHAT IS DELIBERATELY DORMANT AT THIS CAR: the transfer primitive ships with NO caller - the first callers are W-COIN-3 movers - so it lands fully unit-tested and unreached, and that is the design rather than an omission. OCCUPIED AND BESIEGED ARE RULED HERE (A1.14): siege suspends every form and occupation zeroes the own vault with a typed suspended_by_occupation receipt, both read off the SAME blockade record the granary pass already derived, so the vault and the granary can never disagree about the same siege. THE INTERIM LAW, and it governs when this key may be lit at all (A1.21 as answered by Q10, ODQ 763.2): THE FLAG IS NOT LIT ON ANY OWNER-PRESENTED SURFACE BEFORE W-COIN-2 TIP. Lighting belongs to the preset table and the key ships lit in dramatic_campaign, living_realm and full_simulation only after W-COIN-2 band chip lands, so a lit world is never glance-blind about a stock it cannot see. THIS ROW IS AMENDED BY CAR 2 (A1.19): the warCosts coffers read door and the coalitionExpenditure read door join the door list when they land. Until then the lane is pinned where its bodies are readable: tests/domain/treasury.test.js and tests/domain/treasuryDormancy.byteIdentity.test.js.  AMENDED BY W-COIN-2 AND W-COIN-3 (A1.19, the amendment this row was authored expecting). THE DOOR LIST IS NOW THREE, each with its own necessity rationale (A1.6): the WRITER door treasuryActive at advanceTreasury governs whether a ledger may exist, and the two READ doors - warCosts.readWarHomeFront and warCoalitionExpenditure.readCoalitionExpenditure - govern whether a ledger that exists may SPEAK into a war pressure read. The reads are not redundant with the writer, and the cell that proves it is a campaign that was lit, accumulated ledgers, and was then darkened: the writer stops moving those records, and without the read doors their coin would keep pricing war pressure in a world whose owner switched the layer off. W-COIN-2 ADDS: the UPKEEP SINK (an outbound deployment costs the crown coin every tick, charged from the same one-army ledger the granary pass reads, spending to zero because the reserve floor is a TRANSFER clause and upkeep is the garrison the reserve exists to protect), the two receipt kinds a cost that can fail to be met needs (upkeep_paid, and treasury_shortfall RETURNING with a live emitter after the reachability arm struck it as a dead arm in 1a), the closed COIN_FLOW_TERMS ledger with the conservation identity as a function this layer owns, the TWO coin news beats under the address law, and the at-a-glance band CHIP that A1.21 requires before the flag may be lit anywhere. W-COIN-3 ADDS the coffers component to both war reads through ONE shared reading, coffersRead, so two surfaces cannot score how long a crown can pay its army from two independently written expressions. THE COMPONENT IS ABSENT UNLESS OBSERVED rather than present at zero, because readWarHomeFront averages sum over length and a sixth component at zero would dilute the other five on every world the treasury has nothing to say about; coalition expenditure keeps its FROZEN five-weight set untouched and uses a sibling six-weight set only on an observed tick. ⛔ THE UPKEEP BASIS IS NOT THE CHARTER FIELD, and the divergence was measured: the design named deployedPopulation, which is written only behind warEconomyDrainEnabled and warLevyEnabled - lit in full_simulation and nowhere else - so on dramatic_campaign, the other preset that lights war, an upkeep keyed on it would have been identically zero on every world anyone plays. The sink reads currentEffectiveStrength instead, in declared CAPACITY POINTS on the 0 to 100 scale, and a standing arm re-proves that divergence on every run.',
+src/domain/fieldManifest.js:112:    displayRule: 'Displays read the EFFECTIVE deficit (blockade/famine/tithe/drawdown applied); '
+src/domain/prose/moveGrammar.js:214:  // (say|shows|holds|carries|names|records|has)` — plus `customs` and `tithe` (neither a
+src/domain/prose/entryLexicons.js:103: * stems is also a common NOUN in this estate — a muster, a toll, a tithe, the tax, the
+src/domain/prose/entryLexicons.js:130:  'count', 'collect', 'levy', 'register', 'tithe', 'tax', 'toll', 'assess', 'muster',
+src/domain/prose/entryLexicons.js:147:  'free of the toll', 'free of the levy', 'free of the tithe',
+src/domain/prose/entryLexicons.js:170:  'tithe', 'tithes', 'levy', 'levies', 'tax', 'taxes', 'toll', 'tolls', 'due', 'dues',
+src/domain/display/institutionVocabulary.js:319:  'Priest (resident)': "The settlement's resident clergyman, who performs the rites, collects the tithe, and is often its only literate soul.",
+src/domain/display/rumorPhrasePools.js:636:    'the tithe barn filling',
+src/domain/display/newsVoice.js:129:      'The quarrel cooled without bloodshed, and the pikes are stacked in the tithe-barn once more.',
+src/domain/display/newsVoice.js:141:      'A wandering preacher has set the market talking, and the tithe-box overflows for the first time in an age.',
+src/domain/display/newsVoice.js:169:      'The wandering preacher drew a crowd and then a shrug; the tithe-box is as light as it ever was.',
+src/domain/display/newsVoice.js:454:      'The tithe-barn is unlocked for a hungry neighbour, and the laden wagons creak out through the gate at dawn.',
+src/domain/display/newsVoice.js:473:      'The tithe-barn stayed locked while a neighbour starved, and the memory of the closed gate will outlast the famine.',
+src/domain/display/stateProse/dossierMounts.js:515:  //   DS-FTH-4 — ⛔ `templeWealth` HAS NO WRITER IN THE ENGINE (a WF-7 design-doc future;
+src/domain/display/stateProse/dossierMounts.js:516:  //     the estate's own DESIGN_FP_ARCH_WF.md V27 row records `grep templeWealth in
+src/domain/display/causeConjunctionRole/healer.js:270:      'The tainted clergy need their history certified natural, and the healer signs; old injuries become accidents, old deaths become fevers, and the retainer arrives with the tithe.',
+### ransom leaf words
+src/domain/worldPulse/ransomChoices.js:28:export const HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon']);
+src/domain/worldPulse/ransomChoices.js:191:  if (court.meansBand === 'destitute') return answered('refuse', 'means', false);
+src/domain/worldPulse/ransomChoices.js:197:    return answered('abandon', 'seat_writes_him_off', true);
+src/domain/worldPulse/ransomChoices.js:199:  if (court.regardBand === 'beloved') return answered('pay', 'regard', false);
+src/domain/worldPulse/ransomChoices.js:200:  if (court.meansBand === 'comfortable') return answered('pay', 'books', false);
+src/domain/worldPulse/ransomChoices.js:204:    ? answered('pay', 'books', false)
+src/domain/worldPulse/ransomChoices.js:205:    : answered('refuse', 'books', false);
+src/domain/worldPulse/ransomChoices.js:232:  if (decided.answer !== 'abandon' || decided.abandoned !== true) {
+### ransom files
+src/store/settlementPendingEdits.js
+src/store/settlementPendingEditWriters.js
+src/lib/spatialUsage.js
+src/domain/certification/couplingRegistryGrammar.js
+src/domain/certification/subsystemRowsBelief.js
+src/domain/certification/subsystemRowsPlace.js
+src/data/roadsProse.js
+src/lib/editFingerprint.js
+src/domain/npc/livedExperienceSources.js
+src/domain/npc/characterReadModel.js
+src/data/institutionServices.js
+src/domain/npc/regenIdentityFold.js
+src/domain/townMap/arch/ornament/tracery.js
+src/domain/npc/livedExperienceCatalog.js
+src/domain/pendingEditIntents.js
+src/domain/pendingEdits.js
+src/domain/worldPulse/ransomChoices.js
+src/domain/display/npcInteriorityRead.js
+src/domain/roads/thirdPartyRansom.js
+src/domain/roads/whereaboutsDisplay.js
+src/domain/roads/embassyHazard.js
+src/domain/worldPulse/roadsKernel.js
+src/domain/roads/ops.js
+src/domain/compendium/generated/compendiumData.generated.js
+src/domain/roads/state.js
+src/components/new/NpcLifecycleControls.jsx
+src/domain/worldPulse/ransomClaim.js
+src/domain/worldPulse/institutionLifecycle.js
+src/components/dossier/PendingChangesBar.jsx
+src/domain/worldPulse/generosityKernel.js

@@ -1,0 +1,17 @@
+from edit import apply
+R6 = '[CURED 2026-10-19 (fp-final r6) — '
+pairs = [
+("carried; a missing person drops the row (the race ends `captive_released`)",
+ "carried; a missing person drops the row (the race closes with NO word — a receipt that the captive is gone from the world; `captive_released` is only the body's own release or the DM's decision, A.1 " + R6 + "A.1])"),
+("`HIDDEN_PATH_KINDS` gains ONE token `body` — a DECLARED change on a landed access law; \"armies may not\" stands, widened only by WC/PS at their units (L-BD 11i) (§5.2, BD20)",
+ "`body` enters BOTH closed arrays (`TRAVELLER_KINDS` · `HIDDEN_PATH_KINDS`) — a DECLARED change on a landed access law; \"armies may not\" stands, widened only by PS's ONE declared change (PS-4), WC's chooser its wartime reader (L-BD 11i) (§5.2, BD20)"),
+("| A2 | any body PRESENT in a country (based · passing · raiding; a beast in winter) (§8.2) |",
+ "| A2 | any body PRESENT in a country (based · passing · raiding; a beast in winter) — save a CONCLAVE whose stance with the country's court is `permitted`/`endowed`, which presses nothing (B.1 " + R6 + "B.1 · SEAMS-r5-4 · ST-6]) (§8.2) |"),
+("- **PL:** (4) the crown's-faith SERVICE credit — a REQUESTED `service_answered` under `body:` (§10.2 (b′); PL's own open item 1, now routed); (5) a RIVAL creed's flock spreading from a member is defiance on PL17's conversion fault line (the row PL names); (6) the MIRROR counterforce — a member curbing or outlawing a flock of its liege's creed pays the liege's resentment and a step of the crown's protection; (7) sponsoring a body inside a rival crown's member affronts that CROWN (THE BANNER's protection; §10.5).",
+ "- **PL:** (4)–(6) THE CROWN'S FAITH is PL §4.8 (4)'s three rows, each judged by THAT edge's liege's patron — the SERVICE credit only where the member permits or endows its liege's flock, the DEFIANCE only where the member ENDOWED a rival flock, the MIRROR a requested `fealty_defied` carried by deference, never a protection row (§10.2 (b′)); (7) a foreign hand in a member's land affronts the CROWN by PL §4.8 (5) — `polityOf(member).rootId` at its own `staunch`+ read, BD's leak writing the crown's casus (§10.5) " + R6 + "PL-1 · SEAMS-r5-9: these cells now cite PL §4.8 (4)–(5)]."),
+("the WHERE key `junction:<id>` beside `stretch:<a\\|b>` and `trail:<a\\|b>` under `road (a, b)` |",
+ "the WHERE key `junction:<id>` beside `stretch:<a\\|b>` and `trail:<a\\|b>` under `road (a, b)`; [r6, A.2] the route MODE `way` (beside master's `land · water`), the way-mode edge's fields `wayRung` (`wild · way · trail`) and `useCount`, the bypass key `trail:<a\\|c>~<b>` and its derived junction key `junction:<a\\|b>@<b>` |"),
+("so no sibling's citation moves [CURED 2026-10-19 (fp-final r5) — BD-r4-24 · SEAMS-r4-16: the rung words bind; the key keeps its spelling] |",
+ "so no sibling's citation moves [CURED 2026-10-19 (fp-final r5) — BD-r4-24 · SEAMS-r4-16: the rung words bind; the key keeps its spelling]; the MODE word `way` is the contract's rung `way` on another surface (the mode names the network, the rung the status) — a registered aligned pair, 0 quoted `'way'` literals in master `src`; `wayRung` · `useCount` · `GUILD_WAR_LEASE` · `BODY_KEEP_POINTS` · `WORLD_PULSE_GUILD_WAR` FREE (0 `src` · 0 `tests` · 0 master `docs`); `faceless` a PROSE word in 4 `src` files, never a quoted literal — the seat token `faceless:<bodyId>` is a key (`cure/D-BD-r6-probe/census-r6.out`) " + R6 + "A.2 · BD-r5-20] |"),
+]
+apply(pairs, 'c14')

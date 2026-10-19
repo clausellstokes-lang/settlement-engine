@@ -1,0 +1,5 @@
+conflict pressure 0.65: escalation gate true · escalated 0.680 · next tick aged (held lower bound) 0.580 · flows draw (>= 0.6): false · escalation applyMode auto · escalation probability 0.262
+conflict pressure 0.7: escalation gate true · escalated 0.705 · next tick aged (held lower bound) 0.605 · flows draw (>= 0.6): true · escalation applyMode auto · escalation probability 0.276
+conflict pressure 0.75: escalation gate true · escalated 0.730 · next tick aged (held lower bound) 0.630 · flows draw (>= 0.6): true · escalation applyMode auto · escalation probability 0.290
+conflict pressure 0.8: escalation gate true · escalated 0.755 · next tick aged (held lower bound) 0.655 · flows draw (>= 0.6): true · escalation applyMode auto · escalation probability 0.304
+conflict pressure 0.9: escalation gate true · escalated 0.805 · next tick aged (held lower bound) 0.705 · flows draw (>= 0.6): true · escalation applyMode proposal · escalation probability 0.332

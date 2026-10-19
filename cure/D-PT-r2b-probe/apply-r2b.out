@@ -1,0 +1,72 @@
+applied 71 edits; 200431 -> 226692 chars; sha1 0c0b0661f556
+ - G1 D-ST-r2 route (HOST-r2-19): the reveal deed renamed x6
+ - G2 HOST-r2-12: host cite re-pointed x2
+ - G3 HOST-r2-12: host cite re-pointed x2
+ - G4 HOST-r2-12: host cite re-pointed x2
+ - G5 HOST-r2-12: host cite re-pointed x2
+ - G6 HOST-r2-12: host cite re-pointed x2
+ - E1 header
+ - E2 status
+ - E3 §0 actor kinds
+ - E4 §0 season/sea REFINED
+ - E6a shape 1 writer
+ - E5 presentAt.fromIds
+ - E6 banKeys row
+ - E7a shape 3 key grammar
+ - E7b shape 3 pin
+ - E8a engagement actor
+ - E8b engagement officer
+ - E8c engagement where
+ - E8d engagement bracket
+ - E9 gate verdicts
+ - E10 party_event kinds
+ - E11a homonyms
+ - E11b homonyms bracket
+ - E15a PT17 milestones
+ - E15b PT17 bracket
+ - E14 §4 map milestones
+ - E13 §4 sites items
+ - E18a §6 verbs
+ - E18b §6 undo OD-PT-28
+ - E19a §7.3 gate row
+ - E19b §7.3 visit row
+ - E19c §7.3 visit officer
+ - E19d meeting target
+ - E19e WATCH on the road
+ - E16a §8.3 canon root
+ - E16b §8.3 season cite
+ - E20 §9.2 road arm
+ - E9b §9.3 ban lift by key
+ - E22a §13 anchor
+ - E22b §13 place list
+ - E21 §13 patrols line
+ - E22c hunted WHERE
+ - E22d ambush WHERE
+ - E22e gate registry row
+ - E23 §14 host flags
+ - E17 §14 paid tier canon root
+ - E24 §15 PT-6
+ - E25a §16 header
+ - E25b §16 create
+ - E25c §16 persist
+ - E25d §16 migrate
+ - E25e §16 horizon
+ - E25f §16 bracket
+ - E26a P41
+ - E26b P42
+ - E26c P43-P45
+ - E26d §17 bracket
+ - E27a OD-PT-4
+ - E27b OD-PT-6
+ - E27c OD-PT-10
+ - E27d OD-PT-25
+ - E27e OD-PT-28
+ - E27f OD-PT-30..32
+ - E28 §19 line
+ - E29 §19b card
+ - E30a §20 stops
+ - E30b §20 refined
+ - E30c §20 open
+ - E31a r2 patrols row
+ - E31b r2 host row
+ - E32 §21 r2b block

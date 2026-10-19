@@ -1,0 +1,13 @@
+src/domain/worldPulse/partyImpact.js	327	baseline=-
+src/domain/spatial/rumorNetwork.js	364	baseline=-
+src/domain/display/settlementRumors.js	567	baseline=-
+src/domain/worldPulse/npcLedger.js	429	baseline=-
+src/domain/worldPulse/npcCirculationTable.js	114	baseline=-
+src/domain/worldPulse/envoyPulse.js	332	baseline=-
+src/domain/spatial/distanceRead.js	544	baseline=-
+src/domain/worldPulse/informationStatecraft.js	781	baseline=-
+src/store/roadsRescueInflame.js	9	baseline=-
+src/domain/events/drainQueuedEvents.js	168	baseline=-
+src/store/settlementLifecycleHelpers.js	139	baseline=-
+src/domain/events/partyEventLinkage.js	27	baseline=-
+src/domain/events/drainQueuedEvents.js	168	baseline=-

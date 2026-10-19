@@ -1,0 +1,10 @@
+# SEAMS-r4 resumed seat, 2026-10-19 02:28 EDT — read-only node import of master 81f1cd963's modules (run from the detached worktree; nothing written there)
+# node -e "import('./src/domain/worldPulse/stressorsCore.js').then(m => ...Object.keys(m.STRESSOR_CATALOG).length)" / "import('./src/domain/worldPulse/stressorGates.js').then(m => Object.keys(m.STRESSOR_SPAWN_GATES).length)"
+STRESSOR_CATALOG 21 siege,famine,occupation,political_fracture,indebtedness,betrayal,infiltration,disease_outbreak,succession_void,monster_raider_pressure,insurgency,religious_conversion_fracture,slave_revolt,rebellion,wartime,mass_migration,market_shock,criminal_corridor,magical_instability,coup_detat,magic_deadzone
+STRESSOR_SPAWN_GATES 20
+# rg receipts (quoted at master): stressorGates.js:49 GATE_MULT_MIN = 0.1 · :50 GATE_MULT_MAX = 3 · :54 clamp · :844 { mult: 1.25, reason: 'Embedded agents keep the route open.' }
+# stressorsCore.js:147 affectedSystems: ['defense_readiness', 'trade_connectivity', 'housing_pressure'] (monster_raider_pressure) · :165 ['public_legitimacy', 'social_trust', 'faction_stability'] (religious_conversion_fracture)
+# stressorDynamics.js:154 maxResolutionBonus: 0.15 · :166 siege { key: 'defense_readiness', weight: 0.35, floor: 0.35 } · :228-232 infiltration 0.5/0.3/0.2 · :253-257 monster_raider_pressure 0.5/0.3/0.2 · :270-275 religious_conversion_fracture 0.5/0.25 · :340-344 criminal_corridor 0.4/0.3/0.3
+# embattlement.js:74 ENTER_THRESHOLD 0.55 · :75 EXIT_THRESHOLD 0.3 · :89 W_EXH 0.45 · :90 W_CRIME 0.3 · :96 SECURITY_MAX_RELIEF 0.25 · :98 CRIME_FLOOR 0.5 · :194 export function rampThreat
+# pulseKernel.js:2385 security01: 1 - (pIndex.get(id, 'defense')?.score || 0) · npcConsequencesTuning.js:155 HIDDEN_PATH_SLOWDOWN: 2 · distanceRead.js:710 "same settlement ⇒ 0" / :731 if (cost === 0) return 0 · pressureModel.js:42 CRIME_ARCHETYPES · npcLedger.js:774 addExclusionEdge / :809 liftExclusionEdges
+# PRESENCE_TERM_CAP: 0 files on master (MN's designed token; registered fold:782)

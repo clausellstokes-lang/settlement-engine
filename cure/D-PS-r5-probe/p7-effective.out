@@ -1,0 +1,12 @@
+A no danger (summer): O>C>D seasonal 110 effective 110 ; O>E>D seasonal 130 effective 130
+  reroute pick O>C>D: CURED clause (effective) holds · struck clause (seasonal) holds
+  planner pick O>B>D: CURED clause holds · struck clause holds
+A danger on C and B (summer): O>C>D seasonal 110 effective 155 ; O>E>D seasonal 130 effective 130
+  reroute pick O>E>D: CURED clause (effective) holds · struck clause (seasonal) VIOLATED
+  planner pick O>E>D: CURED clause holds · struck clause VIOLATED
+A danger on E only (winter): O>C>D seasonal 660 effective 660 ; O>E>D seasonal 195 effective 240
+  reroute pick O>E>D: CURED clause (effective) holds · struck clause (seasonal) holds
+  planner pick O>B>D: CURED clause holds · struck clause holds
+B sweep: 20000 worlds (3 B-avoiding candidates + the direct road, random terrain/season/embattlement/toll/risk tolerance/believed passage cost)
+  reroute — CURED clause (no candidate cheaper in EFFECTIVE cost than the pick) fails in 0; struck clause (seasonal alone) fails in 2627 (negative control)
+  planner — CURED clause (never a detour when the direct road's effective cost + believed passage cost is lower) fails in 0; struck clause fails in 573 (negative control)

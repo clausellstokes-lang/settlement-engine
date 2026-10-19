@@ -1,0 +1,5 @@
+recognition_withheld wound=false escalation=false deescalation=false
+appointment_imposed wound=true escalation=false deescalation=false
+faction_backed wound=false escalation=false deescalation=false
+charter_granted wound=false escalation=false deescalation=false
+riders_quartered wound=false escalation=false deescalation=false

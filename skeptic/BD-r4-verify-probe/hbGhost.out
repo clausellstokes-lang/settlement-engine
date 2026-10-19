@@ -1,0 +1,4 @@
+after body credit: {"body:gang:abc123":{"route_menaced":{"stretch:a|b":[7000,10]}}}
+after 200 weeks and an unrelated write: {"body:gang:abc123":{"route_menaced":{"stretch:a|b":[7000,10]}},"settlement:kell":{"stores_thin":{"x":[7000,210]}}}
+dead body row survives: true
+its stored stock unchanged: {"route_menaced":{"stretch:a|b":[7000,10]}}

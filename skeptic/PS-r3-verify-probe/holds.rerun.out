@@ -1,0 +1,8 @@
+(1) VERIFIER'S EXAMPLE, round-2 clamp mid-hop: position 0.1 -> 0.2 (forward=true); clock drift -1 week(s) (refund=true)
+    round-3 FREEZE on the same record: position 0.1 -> 0 vs prior tick 0; drift 1
+    round-3 BORDER mode admits j=1 here? false (x = 2.5 weeks; the unit is mid-hop)
+(2) GRID spans 1..52 x hops 1..12 x every tick of the march:
+    FREEZE: 17160 cases; position != prior tick's or drift != +1 in 0
+    round-2 clamp applied to ANY node: 111540 (tick,node) cases; moved the unit FORWARD in 51486; REFUNDED clock weeks in 51486
+    BORDER mode (node entered this tick only): 4056 admitted; clamp differs from FREEZE in 0; forward of prior tick in 0
+(3) nine consecutive freezes: drift 9 = holds 9

@@ -1,0 +1,6 @@
+columnTerm master(src,tests,docs)=0 ledger-docs(before r2b)=
+enemyColumnPresence master(src,tests,docs)=0 ledger-docs(before r2b)=DESIGN_FP_ARCH_PS.md,
+sitePresenceFeeder master(src,tests,docs)=0 ledger-docs(before r2b)=DESIGN_FP_ARCH_ST.md,
+paragonLean master(src,tests,docs)=0 ledger-docs(before r2b)=DESIGN_FP_ARCH_CH.md,
+seaRoadsEnabled set outside seaRoads.js: 0
+W11 in master docs: 0

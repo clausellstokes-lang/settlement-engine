@@ -1,0 +1,31 @@
+### commonsVoiceKernel exports/words
+63:  LEGIT_DIP: Object.freeze([0, 1, 2, 3]),  // step legitimacy cost on ENTERING rung [none,petition,gathering,riot]
+184:const RUNG_KIND = Object.freeze(['', 'commons_petition', 'commons_gathering', 'commons_riot']);
+185:const RUNG_WORD = Object.freeze(['', 'petition', 'gathering', 'riot']);
+### fear/support/indifference literals
+src/domain/magicProfile.js:282:    return 'indifferent';
+src/domain/magicProfile.js:392:      religiousAcceptance: 'indifferent',
+src/domain/magicProfile.js:433:      religiousAcceptance: 'indifferent',
+src/domain/settlement.schema.js:1689: * @property {'hostile'|'wary'|'indifferent'|'syncretic'|'celebrated'} religiousAcceptance
+src/domain/npcProfile.js:97:    leverage:        ['routes through the watch', 'fear', 'corrupt favors in pocket'],
+src/domain/factionProfile.js:194:    leverage: ['smuggling routes', 'corrupt contacts', 'fear'],
+src/domain/worldPulse/conquestIntent.js:79:  'unknown', 'refused_the_decent', 'sanctioned_against_evil', 'indifferent',
+src/domain/worldPulse/conquestIntent.js:211:    moralVerdict = 'indifferent';
+src/domain/worldPulse/conquestIntent.js:217:      ? (enemyWord === 'malicious' ? 'sanctioned_against_evil' : 'indifferent')
+src/domain/worldPulse/anticipatedReactions.js:57:export const REACTION_BANDS = Object.freeze(['supportive', 'indifferent', 'wary', 'opposed']);
+src/domain/worldPulse/anticipatedReactions.js:248:  let band = 'indifferent';
+src/domain/dossier/entityLinks.js:176:  pushTrait(traits, 'fear', 'Fear', npc.fear || npc.fears);
+src/domain/npc/paradigmAxisCatalog.js:154:    corruptionVector: 'fear',
+src/domain/npc/paradigmAxisCatalog.js:229:    corruptionVector: 'fear',
+src/domain/npc/paradigmAxisCatalog.js:341:  cowardly: { plane: null, alignment: null, aggression: null, corrupts: 'fear' },
+src/domain/npc/paradigmAxisCatalog.js:372:  paranoid: { plane: { e: 0.15, c: 0.2 }, alignment: null, aggression: null, corrupts: 'fear' },
+src/domain/npc/paradigmAxisCatalog.js:387:  suspicious: { plane: null, alignment: null, aggression: null, corrupts: 'fear' },
+src/domain/npc/characterConsumers.js:132:  COURAGE: 'fear',
+src/domain/npc/characterConsumers.js:137:  TRUST: 'fear',
+src/domain/corruption.js:44:  cowardly: 'fear',
+### stressors kinds
+### STRESSOR_COUNTERFORCES
+src/domain/worldPulse/stressorDynamics.js
+src/domain/worldPulse/stressorDynamics.js:160:export const STRESSOR_COUNTERFORCES = Object.freeze({
+### promoteStressorsToConditions
+src/domain/conditionPromotion.js:155:export function promoteStressorsToConditions(settlement, origin = null) {

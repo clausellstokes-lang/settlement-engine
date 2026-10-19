@@ -1,0 +1,24 @@
+== note 4: a conclave fortification holder (x1/2) under the patron's lift
+  patron meagre   sound -> siteReadiness01 0.225 sparse  walls 4.0
+  patron meagre   worn  -> siteReadiness01 0.113 skeleton  walls 2.0
+  patron funded   sound -> siteReadiness01 0.400 manned  walls 7.2
+  patron funded   worn  -> siteReadiness01 0.200 sparse  walls 3.6
+  patron lavish   sound -> siteReadiness01 0.500 manned  walls 9.0
+  patron lavish   worn  -> siteReadiness01 0.250 sparse  walls 4.5
+== A.1: who may seize a conclave's site (stance x refused-within-year)
+  permitted refused=False -> sale only (6b)
+  permitted refused=True  -> sale only (6b)
+  endowed   refused=False -> nothing (the patron keeps its flock)
+  endowed   refused=True  -> nothing (the patron keeps its flock)
+  curbed    refused=False -> sale only (6b)
+  curbed    refused=True  -> SEIZE (after the refusal)
+  outlawed  refused=False -> SEIZE when the fork moves
+  outlawed  refused=True  -> SEIZE when the fork moves
+== A.4: the round-4 reclaim arithmetic that convicted (an unheard den)
+  r4: lavish posture +0 -> reclaimScore 1 -> moves;  r5: no offer (the den is unheard)
+  r4: funded posture +1 -> reclaimScore 1 -> moves;  r5: no offer (the den is unheard)
+  r4: funded posture +0 -> reclaimScore 0 -> declines;  r5: no offer (the den is unheard)
+== A.3: S37 sides (latent points; DRAFT example)
+  Kell's side (field force 30 + harboured modest gang 34): 64  -> waits at the approach
+  the Ashen Host (strong, 69): 69  <- contests the holder
+  the rival gang (thin, 13): 13  -> waits at the approach

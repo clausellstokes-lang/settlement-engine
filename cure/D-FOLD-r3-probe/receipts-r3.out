@@ -1,0 +1,57 @@
+### R1 piracy parity: navalLayer Stage 5 / banditryLoss / scoreRoute
+602:// ══ Stage 5 — PIRACY PARITY (design §5 AS AMENDED — the behavior-change set is EMPTY) ══
+606:// banditryLoss fires on EVERY arriving shipment sea or land alike (neither call site checks
+609:// This module adds NO danger math. The ONLY piracy scope is DISPLAY NAMING:
+612: * The modality-aware NAME for a banditry loss — the ONLY place the word "piracy" appears
+614: * "piracy"; a land-route loss "banditry". A pure naming primitive — takes only the modality
+616: * scoreRoute/banditryLoss seam for both modalities). @param {{ overSea?: boolean }} [args] @returns {string}
+619:  return overSea ? 'piracy' : 'banditry';
+src/domain/worldPulse/habitForkRegistry.js
+src/domain/spatial/supplyShipments.js
+src/domain/spatial/embattlement.js
+src/domain/spatial/commodityFlow.js
+src/domain/spatial/navalLayer.js
+src/domain/spatial/embattlement.js:347:export function scoreRoute(path, worldState, baseCost, riskTolerance, medianHopCost) {
+### R2 seaRoadsEnabled (lit where?)
+src/domain/roads/seaRoads.js:9: * DARK behind the VIRTUAL flag `seaRoadsEnabled` (§1 law 1; ABSENT from DEFAULT_SIMULATION_RULES,
+src/domain/roads/seaRoads.js:32: * Is D-6 LIT? Reads simulationRules.seaRoadsEnabled === true, defensively. ABSENT ⇒ false ⇒
+src/domain/roads/seaRoads.js:38:  return !!(rules && typeof rules === 'object' && /** @type {Record<string, unknown>} */ (rules).seaRoadsEnabled === true);
+### R3 seaRoads.js S3 header
+6: * (S2, priced not severed), and piracy (S3 = banditry-by-construction). NO parallel mission
+12: * machinery gates). S1 additionally needs navalEnabled (blockades are a naval state); S2/S3 do
+41:/** Is naval state live? (S1 blockade capture needs it; S2/S3 do not.) Pure.
+53:  S3_PIRACY_BASE: 0.12, S3_PIRACY_ALPHA: 1.0, // the T3 twin VERBATIM (× embattlement level)
+131: * @typedef {{ cls: 'S1'|'S2'|'S3', outcome: 'hostage'|'robbed'|'delayed', captorId: string, overSea: true, delayWeeks?: number }} SeaHazardResult
+137: * severed), S3 piracy (the T3 banditry twin over an embattled port node). At most ONE resolution
+138: * per tick (S1 → S2 → S3, first match — the no-double-jeopardy law across modalities). Returns
+145: * @param {ReturnType<typeof createPRNG>} a.fork  the shared roads-hazard fork (S1/S3 ride it)
+### R4 u: rate-limit key
+supabase/functions/ingest-events/index.ts:247:  const rateKey = actorId ? `u:${actorId}` : (deviceKey ? `d:${deviceKey}` : `ip:${meta.ip}`);
+supabase/functions/_shared/rateLimit.ts:18: * with another's — ingest-events already uses BARE `u:`/`d:`/`ip:` keys, so a
+supabase/migrations/029_gallery_view_dedup.sql:71:    case when auth.uid() is not null then 'u:' || auth.uid()::text end,
+tests/security/ingestCheckRate.pglite.test.js:18: *     the function-scoped `ccp:`/`ip:`/`u:` prefixes in rateLimit.ts rely on);
+tests/security/ingestCheckRate.pglite.test.js:97:    expect(await check('u:alice', 1)).toBe(true); // alice count 1 (<=1)
+tests/security/ingestCheckRate.pglite.test.js:98:    expect(await check('u:alice', 1)).toBe(false); // alice count 2 > 1
+tests/security/ingestCheckRate.pglite.test.js:100:    expect(await check('u:bob', 1)).toBe(true);
+tests/edgeFunctions/accountActionsSupportWrite.test.js:82:    // `u:`/`d:`/`ip:` are ingest-events' bare keys — reusing one would cross-meter
+### R5 digest gate fields / pairKey
+378:const pairKey = (/** @type {string} */ a, /** @type {string} */ b) => (a < b ? `${a}|${b}` : `${b}|${a}`);
+716:      const key = pairKey(A, B);
+src/domain/spatial/spatialDigest.js:113: * @property {Array<{ cellA: number, cellB: number, cost: number, terrainA: string, terrainB: string }>} segments
+src/domain/spatial/spatialDigest.js:389: * @param {Record<string, { a:string, b:string, cost:number, cellA:number, cellB:number }>} crossings
+src/domain/spatial/spatialDigest.js:408:    return [key, { a: biomeAt(g.cellA), b: biomeAt(g.cellB) }];
+src/domain/spatial/spatialDigest.js:700:  /** @type {Record<string, { a:string, b:string, cost:number, cellA:number, cellB:number }>} */
+src/domain/spatial/spatialDigest.js:718:      // Cheapest crossing wins; deterministic tie-break by lower (cellA, cellB).
+### R6 hash01 / fnv1a32 / hashInt / classifyLegModes
+src/design/organic/ornament/fnv.js:12:export function fnv1a32(str) {
+src/kernel/proseHash.js:28:export function fnv1a32(str) {
+src/domain/region/contestMath.js:46:export function hash01(text) {
+src/domain/roads/seaRoads.js:65:export function classifyLegModes(digest, path) {
+src/domain/worldPulse/proseSelection.js:52:export function fnv1a32(str) {
+src/domain/display/heraldCausalGrammar.js:34:export function fnv1a32(str) {
+### R7 ENTER_THRESHOLD / EXIT_THRESHOLD
+33: *   calm → embattled   when T > ENTER_THRESHOLD (X)
+34: *   embattled → calm   when T < EXIT_THRESHOLD (Y < X) AND it has dwelled at
+74:  ENTER_THRESHOLD: 0.55,
+75:  EXIT_THRESHOLD: 0.3,
+239:    if (rawT > T.ENTER_THRESHOLD) { phase = 'embattled'; sinceTick = now; }

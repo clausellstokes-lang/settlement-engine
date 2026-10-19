@@ -1,0 +1,15 @@
+# tokens r5 at 81f1cd963 (rg -l -F, files)
+legMult: src 0 · tests 0
+knownTrailsOf: src 0 · tests 0
+junction:: src 2 · tests 5
+'wild': src 4 · tests 1
+'way': src 0 · tests 1
+'trail': src 0 · tests 0
+src/lib/viewerAuthority.js:13: * THE AUTHORITY, VERBATIM. Two surfaces had hand-copied the same disjunction:
+src/domain/worldPulse/simulationRules.js:330:  // every neighbour above is part of a conjunction: the HABIT ladder charters four doors and
+src/design/organic/ornament/pools.js:36:  { kind: 'wild', name: 'oak', draw: (p) =>
+src/components/gallery/galleryUtils.js:13:// getMagicLevel emits exactly these four bands — 'wild'/'forbidden' never persist.
+src/domain/threatProfile.js:247:  // 'wild' pattern below — 'wild magic' contains 'wild', so the old ordering
+src/domain/display/institutionVocabulary.js:572:  'Druid Circle': ['nature', 'wild', 'balance'],
+src/domain/display/institutionVocabulary.js:573:  'Elder Grove Council': ['nature', 'wild', 'balance'],
+src/domain/display/institutionVocabulary.js:574:  "Warden's Lodge": ['nature', 'wild', 'vigilance'],

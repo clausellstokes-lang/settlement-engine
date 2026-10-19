@@ -1,0 +1,12 @@
+{
+ "tokenPrior": null,
+ "afterVerdict": {
+  "settlementId": "Kell",
+  "kind": "banishment_edict",
+  "indefinite": true
+ },
+ "afterUndo": null,
+ "bannedAt150_courtSentenceStillRunning": false,
+ "keysAfter": [],
+ "verdict": "court's later ban LOST by the DM's undo"
+}

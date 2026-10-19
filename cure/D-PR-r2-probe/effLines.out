@@ -1,0 +1,11 @@
+src/domain/worldPulse/warDeployment.js	685	baseline=-
+src/domain/worldPulse/warArmyRecord.js	72	baseline=-
+src/domain/worldPulse/warCapacityReads.js	143	baseline=-
+src/domain/worldPulse/envoyInterceptionStage.js	590	baseline=-
+src/domain/spatial/supplyShipments.js	210	baseline=-
+src/domain/spatial/embattlement.js	172	baseline=-
+src/domain/spatial/smuggle.js	119	baseline=-
+src/domain/spatial/commodityFlow.js	474	baseline=-
+src/domain/worldPulse/militaryStrength.js	178	baseline=-
+src/domain/worldPulse/stressors.js	558	baseline=-
+src/domain/worldPulse/settlementStrategy.js	763	baseline=-
