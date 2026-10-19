@@ -1,0 +1,27 @@
+export const meta = {
+  name: 'fp-final-p3-round4a',
+  description: 'P3 round 4a of the FP final architecture program: ten disposition lanes (nine volumes + THE BODIES) over the round-3b verifier fails, new MAJORs, routed halves, the seams findings and the owner\'s evening words, under RULINGS-ROUND4',
+  phases: [
+    { title: 'Dispose', detail: 'D-{ST,PL,PS,PR,CH,RN,BD,PT,MN,FOLD}-r4 (pool 4)' },
+  ],
+}
+const KIT = '/Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17'
+const DOCS = '/Users/cstokes/Desktop/settlement-engine/docs'
+const VOLS = [
+  { id: 'ST', file: 'DESIGN_FP_ARCH_ST.md', effort: 'xhigh' }, { id: 'PL', file: 'DESIGN_FP_ARCH_PL.md', effort: 'xhigh' }, { id: 'PS', file: 'DESIGN_FP_ARCH_PS.md', effort: 'xhigh' }, { id: 'PR', file: 'DESIGN_FP_ARCH_PR.md', effort: 'xhigh' },
+  { id: 'CH', file: 'DESIGN_FP_ARCH_CH.md', effort: 'xhigh' }, { id: 'RN', file: 'DESIGN_FP_ARCH_RN.md', effort: 'xhigh' }, { id: 'BD', file: 'DESIGN_FP_ARCH_BD.md', effort: 'xhigh' },
+  { id: 'PT', file: 'DESIGN_FP_ARCH_PT.md', effort: 'high' }, { id: 'MN', file: 'DESIGN_FP_ARCH_MN.md', effort: 'high' }, { id: 'FOLD', file: 'DESIGN_FP_COHERENCE_FOLD.md', effort: 'high' },
+]
+const DISPOSE_SCHEMA = { type: 'object', properties: { lane: { type: 'string' }, path: { type: 'string' }, counts: { type: 'string' }, stops: { type: 'array', items: { type: 'string' } }, refined: { type: 'array', items: { type: 'string' } }, routed: { type: 'array', items: { type: 'string' } }, confirmedVsPlausible: { type: 'string' } }, required: ['lane', 'path', 'counts', 'stops', 'refined', 'routed', 'confirmedVsPlausible'] }
+async function pool(items, n, fn) { const r = new Array(items.length); let i = 0; const w = Array.from({ length: Math.min(n, items.length) }, async () => { while (i < items.length) { const k = i++; try { r[k] = await fn(items[k], k) } catch (e) { r[k] = null; log(`item ${k} threw: ${String(e).slice(0, 200)}`) } } }); await Promise.all(w); return r }
+const RULES = `${KIT}/briefs/RULINGS-PL-MN.md, RULINGS-AFTER-RESEARCH.md, RULINGS-AFTER-COMPILE.md, CHAIR-NOTES-FOR-THE-FOLD.md (incl. item 17), RULINGS-ROUND1.md (+addendum), RULINGS-ROUND2.md, RULINGS-ROUND2b.md (+addendum), RULINGS-ROUND3.md WHOLE (§A–§G), and RULINGS-ROUND4.md WHOLE (the latest wins where they differ; the owner's words on ${KIT}/BOARD.md outrank all)`
+const inputs = (v) => v.id === 'BD'
+  ? `${KIT}/briefs/L-BD.md items 29–49 and every lettered addendum (22b · 23b · 25b · 32b · 33b · 34b · 42 (e) · 46b) — the owner's words of 18:3x–21:4x, VERBATIM on ${KIT}/BOARD.md — applied in the compile's own vocabulary under RULINGS-ROUND3 §G; plus every route addressed to BD in ${KIT}/cure/D-*-r3.md and ${KIT}/cure/L-BD.md's own open questions as ruled; plus RULINGS-ROUND4 A.3/A.12/A.17's BD halves and its B BD row`
+  : `(1) ${KIT}/skeptic/${v.id}-r3-verify.md WHOLE — its FAILS (incl. every ROUTED-UNAPPLIED row), NEW and minor tables; (2) ${KIT}/skeptic/SEAMS-r3.md — every id its ROUTES section sends to ${v.id}; (3) every ROUTES line addressed to ${v.id} in ALL TEN ${KIT}/cure/D-*-r3.md files and in ${KIT}/cure/L-BD.md (THE BODIES' routes to you); (4) every A-row and the ${v.id} B-row of RULINGS-ROUND4.md${v.id === 'FOLD' ? ' (and the FOLD addendum at its end if present; the fold, the spine and CN are insertions-only — a cure is a dated bracket beside the row; prove it with a numstat line)' : ''}`
+const disposePrompt = (v) => `Chair 0a2e8bd9 (Fable 5.1; the program of chair a73343ed), the FP final architecture program, P3 ROUND 4a, disposition lane D-${v.id}-r4. Read ${KIT}/README.md (RESUME BLOCK 2), ${KIT}/briefs/COMPILE-COMMON.md and ${KIT}/briefs/DISPOSE.md WHOLE, then ${RULES}. Your INPUT: ${inputs(v)}. Dispose EVERY input id (CURED · REFUTED with receipt · STOP for the chair); a cure is checked against the receipt that convicted it (re-read the symbol at master; re-run the probe if there was one) and must not open a new contradiction with another volume (grep the citing volume and say so; the other-lane halves you cannot write go under "routed", one line each naming the volume and the exact edit). You OWN ${v.id === 'FOLD' ? DOCS + '/DESIGN_FP_COHERENCE_FOLD.md, ' + DOCS + '/DESIGN_FP_SPINE.md and ' + DOCS + '/DESIGN_FP_ARCH_CN.md (ALL insertions-only)' : DOCS + '/' + v.file + ' (read it WHOLE first; rewrite passages in place; each change [CURED 2026-10-18 (fp-final r4) — <id>: what changed]; [REFINED 2026-10-18 (fp-final r4) — …] for refinements beyond the inputs)'} and ${KIT}/cure/D-${v.id}-r4.md (+ ${KIT}/cure/D-${v.id}-r4-probe/). Save as you go. Never git; never the test suite; the code of record is the detached master worktree named in ${KIT}/briefs/RESEARCH-COMMON.md (read-only). REPORT DIET: ≤350 words + the record table trimmed to the fails and new MAJORs, outcome first. Structured return: lane; path; counts ("disposed N of M: cured X · refuted Y · stop Z · noted W"); stops; refined; routed; confirmedVsPlausible.`
+phase('Dispose')
+const disposed = await pool(VOLS, 4, (v) => agent(disposePrompt(v), { label: `dispose:D-${v.id}-r4`, phase: 'Dispose', model: 'opus', effort: v.effort, schema: DISPOSE_SCHEMA }))
+log('dispose done: ' + VOLS.map((v, i) => `${v.id}:${disposed[i] ? (disposed[i].counts.slice(0, 40) + ' / ' + disposed[i].stops.length + ' STOP / ' + disposed[i].routed.length + ' routed') : 'null'}`).join(' · '))
+const out = {}
+VOLS.forEach((v, i) => { out[v.id] = disposed[i] })
+return out
