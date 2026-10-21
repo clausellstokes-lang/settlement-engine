@@ -1,0 +1,44 @@
+# OP-allow.txt — tokens of the old text (1beabdc85) absent from the consolidated text; one per line; each listed with its reason in consolidate/OP-ledger.md §4 ALLOW-MISSING
+# (a) SUPERSEDED NAMES
+rescue · false_word · debt
+0 when cost > slack
+EQUALS
+# (b) THE HEADER'S TEMPLATE BRACKETS (moved verbatim to history/OP-cure-record.md Part 1)
+[CURED 2026-10-20 (fp-final P6 r1) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r2) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r3) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r4) — <id>: …]
+[REFINED 2026-10-20 (fp-final P6 r1) — …]
+[REFINED 2026-10-20 (fp-final P6 r2) — …]
+[REFINED 2026-10-20 (fp-final P6 r3) — …]
+[REFINED 2026-10-20 (fp-final P6 r4) — …]
+[REFINED 2026-10-20 (fp-final P6) — what; why]
+# (c) REVIEW-TRAIL PATHS AND WORDS that lived only in the header's round lines, the cure record or a trail-only bracket (moved verbatim to history/OP-cure-record.md)
+cure/D-FOUR-r4.md
+cure/D-MG-r2.md
+cure/D-OP-r1.md
+cure/D-OP-r2-probe/
+cure/D-OP-r2.md
+cure/D-OP-r3-probe/receipts.txt
+cure/D-OP-r3.md
+cure/L-CH-PD.md
+cure/L-FS.md
+cure/L-MG.md
+cure/L-WS.md
+skeptic/BRACKETS-p6c-verify.md
+skeptic/MG-r1.md
+skeptic/OP-r1-verify.md
+skeptic/OP-r1.md
+skeptic/OP-r2-verify.md
+skeptic/OP-r2.md
+skeptic/OP-r3-verify.md
+skeptic/OP-r3.md
+skeptic/SEAMS-P6.md
+date
+-r2
+-r3
+# (d) SHORT FORMS that lived only in the cure record; each symbol survives in the new text inside its full cite
+captureCauseId
+relationshipTypeBetween
+toldBy.tick
+mouthpiece-key.out

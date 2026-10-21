@@ -1,0 +1,232 @@
+# CH — ALLOW-MISSING (COMPLETE for the whole volume, P8 lane C-CH, resumed 2026-10-21). One token per line; reasons in CH-ledger.md §4.
+# SUPERSEDED NAMES AND SHAPES (a later ruling replaced them; never minted)
+believedEmployerOf(worldState, observerId, wnpcId)
+spatialLedgers.paragonBeliefs[observerId][wnpcId] = { employerId, band, atTick }
+expelled · overlooked
+{ tick, outcome }
+# SHORT FORMS of a symbol, path or field the new text cites in full
+advanceEnvoyDiplomacyPulse
+heardAt
+density/seatKey.js
+marks.turnedAt/crossedAt
+mintDeed / strikeDeed
+nextHopToward({hiddenHopsOf})
+paragon.banKeys
+DESIGN_FP_ARCH_PR.md
+# CENSUS DETAIL of a moved change note (the token register keeps the census counts)
+AdminBroadcastPanel.jsx
+economyStateProse.js
+useId
+# REVIEW-TRAIL PATHS (moved with the header/status block or a change note; they stay in history/CH-cure-record.md and git)
+briefs/RULINGS-AFTER-RESEARCH.md
+cure/D-BD-r4.md
+cure/D-CH-p5-probe/
+cure/D-CH-r4-probe/census-r4.out
+cure/D-PR-r4.md
+cure/D-RN-r3.md
+cure/L-CH-probe/
+skeptic/BRACKETS-p6c-verify.md
+skeptic/CH-r1-probe/envoyFlags.out
+# HEADER TEMPLATE (moved to history Part 1)
+[REFINED 2026-10-17 (fp-final) — …]
+# --- appended by the resuming seat (§6–§25 and the moved cure record) ---
+# SUPERSEDED NAMES AND SHAPES of §6–§24 (a later ruling replaced them; never minted)
+PATRON_LEAN_WEIGHT
+patronDeityOf
+patronLean
+patron_creed_conflict
+arrivalTick = tick + hopWeeks(meeting, seat, season)
+body.leaderRef
+exposed
+exposed?
+foreignGuestHold
+foreignGuestHolds
+liaisonId
+menace_strikes · repelled · breached
+polity_ban:<wnpcId>:<banTick>
+polity_ban:corps:<unitKey>:<banTick>
+recruit
+settlement · person · party · menace
+settlement · person · party · menace · corps
+… · menace · site
+swornDeityOf(paragon)
+turned.atTick
+# SHORT FORMS of a symbol, path, field or expression the new text carries in full (or a reviewer's quote of one)
+Math.max(1, finiteNumber(hopWeeks(…), 1))
+accrueSaleGrievance
+a␟b
+embassyHazard.js
+mechanical
+r + m
+t − m
+|| 0
+readBeliefRelationship(courtId, servedId, worldState, relationshipTypeBetween(graph, worldState, courtId, servedId))
+relationshipTypeBetween(…) === 'hostile'
+road
+urbanFabricKernel.js
+{ mult }
+lean2.out.tsv
+# PROBE-CASE LABELS AND PROBE OUTPUT DETAIL of a dropped finding quote (the executed receipt kept with its full path)
+A
+J
+afterUndo: null
+bannedAt150: false
+partyIds: ['post']
+banLapse.rerun.out
+banishThenVerdict.out
+# REVIEW-TRAIL PATHS cited in the body of record (ruling files, lane logs and their probe folders, skeptic and verifier reports); they stay in history/CH-cure-record.md and git
+RULINGS-AFTER-COMPILE.md
+RULINGS-ROUND1.md
+RULINGS-ROUND2.md
+RULINGS-ROUND2b.md
+RULINGS-ROUND3.md
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/L-CH-PD.md
+briefs/L-CH.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-P6.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-CH-PD-r1-probe/
+cure/D-CH-PD-r1.md
+cure/D-CH-r1.md
+cure/D-CH-r2.md
+cure/D-CH-r2b.md
+cure/D-CH-r3-probe/
+cure/D-CH-r3.md
+cure/D-CH-r4-probe/
+cure/D-CH-r4.md
+cure/D-CH-r5-probe/
+cure/D-CH-r5.md
+cure/D-MN-r2b.md
+cure/D-PL-r2.md
+cure/D-PR-r2.md
+cure/D-PT-r2.md
+cure/D-PT-r3.md
+cure/D-RN-r2b.md
+cure/D-RN-r5.md
+cure/L-BD.md
+skeptic/CH-PD-r1-probe/lean.out.txt
+skeptic/CH-PD-r1-verify-probe/s68i.out.txt
+skeptic/CH-PD-r1-verify.md
+skeptic/CH-PD-r1.md
+skeptic/CH-r1-verify.md
+skeptic/CH-r1.md
+skeptic/CH-r2-verify-probe/findingsRelay.out
+skeptic/CH-r2-verify.md
+skeptic/CH-r3-verify.md
+skeptic/CH-r4-verify-probe/banishThenVerdict.out
+skeptic/CH-r4-verify.md
+skeptic/HOST-r1.md
+skeptic/PL-r2-verify.md
+skeptic/PT-r2-verify.md
+skeptic/SEAMS-r1.md
+# MOVED WITH THE CURE RECORD (tokens only §25 THE CURE RECORD carried; moved verbatim to history/CH-cure-record.md Part 2)
+(fp-final P5)
+, conserved) or the declared sink
+.tsv
+172431fc…
+ARMY_ROLES.CONVOY
+CH.before-r1.md
+CHAOS01
+CLIMATE_BAND_VERSION = 1
+D-FOLD-r5.md
+EVIL01
+NPC_GOALS
+SLOW_NOT_SEVER_MAX = 6
+activeOwnsLeg
+adapter('god_fortunes_rose', … 'patronDeity', ['pantheon_ascendancy'], …)
+arrivalForm.out
+arrivalForm.rerun2.out
+assessments/P5-WORDS-2026-10-20.md
+assessments/WIRING-CENSUS-2026-10-20.md
+atOpenWar
+authored.patronDeity
+banKeysUndo.out
+banKeysWindow.out
+banKeysWindow.rerun2.out
+banLapse.out
+banishThenVerdict
+believedWatch(…) → { watch01, known }
+believedWatch(…, roadKey, …)
+briefs/RULINGS-ROUND2b.md
+c:<unitKey>
+census-pd-quoted.out
+census.out.tsv
+climateBandFor
+conclave
+cure/BRACKETS-B-champions.md
+cure/D-*-r3.md
+cure/D-*-r4.md
+cure/D-BD-r5.md
+cure/D-CH-r2-probe/
+cure/D-CH-r2b-probe/
+cure/D-CH-r2b-probe/resume/
+cure/D-FOLD-r5.md
+cure/D-MN-r5.md
+cure/D-PL-r2b.md
+cure/D-PR-r5.md
+cure/D-PS-r2.md
+cure/D-PT-r5.md
+cure/D-RESIDUE-r6.md
+cure/L-CH-PD-probe/CH.before.md
+cure/L-FOLD.md
+customRegistry.js :: mintDeityRef
+date
+deedIndex(worldState) → { byDoer, byTarget, … }
+deedIndex(…).byDoer
+deity?._deityRef \|\| deity?.name
+deityCommitEmbed.js :: DEITY_AUTHORED_CHARACTER_KEYS
+deityTemperConsumerCensus.walker.test.js
+diff -u CH.before-r2b.md
+dispatchAcceptedPeaceEnvoy({ … decision: peaceDecision … })
+distanceRead
+dm_removed  block\|free_unit -> SINK
+encounterId
+ensureRelationshipState
+errandId
+export const HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon']);
+findingsArrival.out
+fp-final P5
+fundingBandOfSettlement
+hashInt
+holdBeforeNode
+hopIndex
+information/villain
+livedExperienceSources.js
+menace_strikes
+onsetProbability
+order — captive_held
+p:
+paragonPatron
+party_voiced
+patrol:
+polity_ban:p:<wnpcId>:<banTick>
+ransomChoices.js
+readBeliefRelationship(courtId, servedId, worldState, relationshipTypeBetween(…))
+readiness01
+receipts.out
+removeFreeUnit  WC-11  the dm_removed disposition … absorb-to-nearest (a 
+repick.mjs
+repick.out.txt
+rulerAlignment
+sent
+skeptic/*-r2-verify.md
+skeptic/BD-r4.md
+skeptic/BD-r5.md
+skeptic/HOST-r2.md
+skeptic/OP-r1.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+sovereigntyTransfer.js
+spy_at_target
+stretch:<a\|b>
+suppressDeity
+toHaveLength(13)
+urbanFabricKernel.js :: leaderOf(stocks)
+volume.diff
+voyage.out
+warPeaceDecision

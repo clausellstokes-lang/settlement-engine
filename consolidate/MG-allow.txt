@@ -1,0 +1,43 @@
+# MG — ALLOW-MISSING for the consolidation ratchet (P8, lane C-MG, 2026-10-20). ONE token per line; each reason is in consolidate/MG-ledger.md §4.
+# (a) the review markers' templates — moved with the old header (lines 7–11) and §19 to history/MG-cure-record.md
+[REFINED 2026-10-20 (fp-final P6) — what; why]
+[CURED 2026-10-20 (fp-final P6 r1) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r2) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r3) — <id>: …]
+[CURED 2026-10-20 (fp-final P6 r4) — <id>: …]
+[REFINED 2026-10-20 (fp-final P6 r1) — …]
+[REFINED 2026-10-20 (fp-final P6 r2) — …]
+[REFINED 2026-10-20 (fp-final P6 r3) — …]
+[REFINED 2026-10-20 (fp-final P6 r4) — …]
+[ADDED 2026-10-20 (fp-final P6c; …)]
+# (b) review-trail paths and probe file names that lived only in the old header, in §19 or in a provenance bracket — moved to history/MG-cure-record.md
+.out
+census-r1.out
+census-r2.out
+census-r3.out
+date
+e3-gate-arith.mjs
+e3-gate-arith.out
+e4-wing-holds.mjs
+e4-wing-holds.out
+naval-and-pace.mjs
+naval-and-pace.out
+replan-cure.mjs
+replan-cure.out
+replan-realbase.mjs
+skeptic/MG-r2-verify-probe/mgv2-arith.out
+skeptic/MG-r2.md
+skeptic/MG-r3.md
+skeptic/{OP,WS,FS}-r2.md
+skeptic/{OP,WS,FS}-r3.md
+settlementStrategy.js :: beliefAwareBesieged
+# (c) superseded names (each named only in a provenance bracket that recorded its replacement)
+warKey
+warId
+purse_empty
+coffers_bare
+campaign_plan
+wayOfWarOf(court).weights.motives
+trail
+wild
+way
