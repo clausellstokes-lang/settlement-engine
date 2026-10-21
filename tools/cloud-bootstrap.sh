@@ -4,7 +4,7 @@
 # code-of-record worktree at master's sha, and links node_modules for the docs proof. READ IT FIRST.
 set -eu
 REPO="${1:-$PWD}"; cd "$REPO"
-KITREF="${2:-refs/preserve/fp-final-kit-a73343ed-2026-10-21b}"
+KITREF="${2:-refs/preserve/fp-final-kit-a73343ed-2026-10-21c}"
 git fetch origin review-fixes-2026-07-08 "$KITREF:$KITREF" 2>/dev/null || git fetch origin review-fixes-2026-07-08
 mkdir -p ../settlement-engine-kits/fp-final-a73343ed-2026-10-17
 git archive "$KITREF" | tar -x -C ../settlement-engine-kits/fp-final-a73343ed-2026-10-17
