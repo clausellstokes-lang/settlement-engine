@@ -1,0 +1,73 @@
+T1 | fealtyRow | fold§5=0 fold=0 | vols: CH:1 PL:3 PS:1 | src-files=0
+T2 | polityVerdictOutcomes | fold§5=0 fold=0 | vols: PL:4 | src-files=0
+T3/PL-8 | seatEpisodeKeyOf | fold§5=0 fold=0 | vols: CH:6 PL:8 PT:2 | src-files=0
+T4/PL-67 | polity_verdict_default | fold§5=0 fold=0 | vols: PL:9 | src-files=0
+T5/ST-8 | siteSuppression | fold§5=0 fold=1 | vols: BD:2 MN:5 PR:1 ST:4 | src-files=0
+T6 | patrolSubtraction | fold§5=0 fold=1 | vols: BD:1 MN:5 PR:3 | src-files=0
+T7 | INHERENT_SIGN | fold§5=0 fold=0 | vols: RN:1 | src-files=0
+T8/CH-147 | heldAt | fold§5=0 fold=0 | vols: CH:17 | src-files=0
+T9/CH-138 | soughtBy | fold§5=0 fold=0 | vols: CH:12 | src-files=0
+T10/CH-140 | postId | fold§5=0 fold=0 | vols: CH:14 | src-files=0
+T11/CH-107 | isParagonRecord | fold§5=0 fold=0 | vols: CH:7 | src-files=0
+T12 | paragonMark | fold§5=0 fold=0 | vols: CH:6 | src-files=0
+T13/CH-108 | believedWhereabouts | fold§5=0 fold=1 | vols: CH:12 MN:1 PL:1 PR:1 PS:1 PT:1 RN:6 ST:1 | src-files=0
+T14 | sold_out | fold§5=0 fold=0 | vols: CH:9 RN:2 | src-files=0
+T15/CH-30 | SITE_FIT | fold§5=0 fold=0 | vols: CH:7 | src-files=0
+T16 | paragonCorpsEnabled | fold§5=0 fold=0 | vols: CH:7 PT:1 RN:3 | src-files=0
+T17/CH-149 | paragon_findings | fold§5=0 fold=0 | vols: CH:5 | src-files=0
+T18 | paragonId | fold§5=0 fold=0 | vols: CH:8 | src-files=0
+T19 | employerId | fold§5=0 fold=0 | vols: BD:1 CH:26 RN:4 | src-files=0
+T20 | exposeCovertHire | fold§5=0 fold=0 | vols: BD:6 CH:9 | src-files=0
+T21 | reachedTick | fold§5=0 fold=0 | vols: PT:9 | src-files=0
+T22 | actAt | fold§5=0 fold=0 | vols: CH:1 PT:19 RN:9 | src-files=0
+T23 | visitPurpose | fold§5=0 fold=0 | vols: PT:5 | src-files=0
+T23b | to_challenge | fold§5=0 fold=0 | vols: PT:3 | src-files=0
+T24 | deed_rescue | fold§5=0 fold=0 | vols: PT:3 | src-files=0
+T24b | deed_meeting | fold§5=0 fold=0 | vols: PT:2 | src-files=0
+T25 | abandoned_by | fold§5=1 fold=1 | vols: | src-files=0
+T25b | abandoned_to_captivity | fold§5=0 fold=7 | vols: BD:2 CH:2 ES:2 RN:4 | src-files=2
+PL-84 | APPOINT_TO_SEAT | fold§5=0 fold=0 | vols: PL:8 | src-files=0
+PL-19 | polity_circle | fold§5=0 fold=0 | vols: PL:9 | src-files=0
+CH-97a | paragon_exerted | fold§5=0 fold=0 | vols: CH:21 | src-files=0
+CH-97b | paragon_faltered | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97c | retainer_broken | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97d | office_resigned | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97e | duel_won | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97f | line_crossed | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97g | side_turned | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+CH-97h | barred_at_gate | fold§5=0 fold=0 | vols: CH:2 RN:3 | src-files=0
+ST-2 | sitesNear | fold§5=0 fold=0 | vols: CH:6 PS:2 ST:7 | src-files=0
+ST-7 | sitePresenceFeeder | fold§5=0 fold=0 | vols: BD:2 MN:1 ST:6 | src-files=0
+ST-10 | siteWitnesses | fold§5=0 fold=0 | vols: MN:1 PR:1 PS:1 ST:5 | src-files=0
+ST-12 | siteDefenseOf | fold§5=0 fold=0 | vols: BD:1 ST:8 | src-files=0
+ST-12b | siteDefense | fold§5=0 fold=1 | vols: MN:5 PL:6 PR:4 PS:15 PT:1 ST:24 | src-files=0
+ST-15 | applySiteEvent | fold§5=0 fold=0 | vols: PT:1 ST:3 | src-files=0
+ST-85a | siteClearedContest | fold§5=0 fold=0 | vols: ST:2 | src-files=0
+ST-85b | siteSiegeVerdict | fold§5=0 fold=0 | vols: ST:3 | src-files=0
+ST-88 | fundingSet | fold§5=0 fold=0 | vols: CH:2 PT:1 ST:16 | src-files=0
+ST-92a | placedBy | fold§5=0 fold=0 | vols: ST:3 | src-files=0
+ST-92b | offerRef | fold§5=0 fold=0 | vols: ST:3 | src-files=0
+ST-92c | resourceKey | fold§5=0 fold=0 | vols: EC:2 ST:3 | src-files=16
+ST-92d | ruin_left | fold§5=0 fold=0 | vols: ST:4 | src-files=0
+ST-92e | SITE_KINDS | fold§5=0 fold=0 | vols: ST:3 | src-files=0
+ST-92f | SITE_QUALITY | fold§5=0 fold=0 | vols: BD:1 ST:3 | src-files=0
+ST-92g | HOLDER_CLASSES | fold§5=0 fold=1 | vols: ST:4 | src-files=0
+ST-92h | DISTANCE_BANDS | fold§5=0 fold=0 | vols: ST:3 | src-files=1
+ST-94 | siteTargetId | fold§5=0 fold=0 | vols: ST:7 | src-files=0
+ST-86 | keepBreaches | fold§5=0 fold=0 | vols: ST:1 | src-files=0
+MN-100a | danger01 | fold§5=0 fold=0 | vols: MN:11 | src-files=3
+MN-100b | roamAnchorId | fold§5=0 fold=0 | vols: MN:6 | src-files=0
+MN-100c | regroupUntil | fold§5=0 fold=0 | vols: MN:5 | src-files=0
+MN-100d | raisedBy | fold§5=0 fold=0 | vols: MN:6 | src-files=0
+MN-100e | headAtStart | fold§5=0 fold=0 | vols: MN:5 | src-files=0
+MN-100f | menace_press | fold§5=0 fold=0 | vols: MN:2 | src-files=0
+MN-100g | menaceSiegeVerdict | fold§5=0 fold=0 | vols: MN:3 | src-files=0
+MN-100h | menaceBattleOutcome | fold§5=0 fold=0 | vols: MN:2 | src-files=0
+MN-100i | menaceRoamPick | fold§5=0 fold=0 | vols: MN:3 | src-files=0
+PS-81a | passage_refused | fold§5=0 fold=0 | vols: PS:3 | src-files=0
+PS-81b | passage_barred | fold§5=1 fold=1 | vols: PS:4 | src-files=0
+PS-44/PL-100 | passage_of_arms | fold§5=1 fold=1 | vols: PS:4 | src-files=0
+PS-44b | PRECEDENCE_CLASSES | fold§5=2 fold=3 | vols: PL:3 | src-files=0
+PR-123 | noLook | fold§5=1 fold=1 | vols: PR:4 | src-files=0
+H91a | envoy_hearing | fold§5=0 fold=2 | vols: GR:1 SP:1 | src-files=0
+H91b | pact_acceptance | fold§5=0 fold=4 | vols: GR:1 MN:1 PS:2 SP:1 | src-files=0

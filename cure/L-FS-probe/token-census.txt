@@ -1,0 +1,107 @@
+extraction src=160 tests=137 mdocs=331 ldocs=450
+stance src=159 tests=57 mdocs=604 ldocs=675
+levy src=175 tests=134 mdocs=349 ldocs=349
+tax src=102 tests=41 mdocs=104 ldocs=149
+toll src=231 tests=187 mdocs=243 ldocs=372
+revolt src=79 tests=20 mdocs=55 ldocs=65
+exaction src=0 tests=0 mdocs=0 ldocs=0
+fiscal src=10 tests=2 mdocs=1 ldocs=6
+fiscalHand src=0 tests=0 mdocs=0 ldocs=0
+hand src=999 tests=1354 mdocs=1356 ldocs=1578
+burden src=142 tests=70 mdocs=109 ldocs=123
+impost src=5 tests=0 mdocs=0 ldocs=1
+tallage src=0 tests=0 mdocs=0 ldocs=0
+remit src=2 tests=0 mdocs=6 ldocs=3
+remitting src=0 tests=0 mdocs=0 ldocs=0
+easing src=85 tests=91 mdocs=49 ldocs=58
+eased src=30 tests=20 mdocs=7 ldocs=6
+press src=98 tests=88 mdocs=141 ldocs=107
+pressing src=100 tests=94 mdocs=58 ldocs=57
+wring src=0 tests=0 mdocs=0 ldocs=0
+wringing src=0 tests=0 mdocs=0 ldocs=0
+squeeze src=13 tests=2 mdocs=34 ldocs=2
+steady src=161 tests=113 mdocs=57 ldocs=49
+even src=691 tests=839 mdocs=600 ldocs=660
+lenient src=9 tests=1 mdocs=3 ldocs=6
+customary src=19 tests=1 mdocs=10 ldocs=9
+heavy src=212 tests=228 mdocs=154 ldocs=242
+ruinous src=9 tests=2 mdocs=31 ldocs=31
+grasping src=1 tests=0 mdocs=0 ldocs=0
+tax_revolt src=5 tests=1 mdocs=7 ldocs=14
+fiscal_revolt src=0 tests=0 mdocs=0 ldocs=0
+revolt_hearing src=0 tests=0 mdocs=0 ldocs=0
+tax_strike src=0 tests=0 mdocs=0 ldocs=0
+hearth_tax src=0 tests=0 mdocs=0 ldocs=0
+dues src=15 tests=12 mdocs=11 ldocs=16
+tithe src=57 tests=54 mdocs=142 ldocs=110
+purse src=64 tests=66 mdocs=68 ldocs=209
+coffers src=42 tests=19 mdocs=29 ldocs=22
+treasury src=192 tests=174 mdocs=240 ldocs=361
+grumble src=6 tests=0 mdocs=6 ldocs=8
+grumbling src=4 tests=0 mdocs=3 ldocs=9
+arrears src=0 tests=4 mdocs=1 ldocs=16
+accustomed src=7 tests=0 mdocs=4 ldocs=0
+wonted src=0 tests=0 mdocs=0 ldocs=0
+forbearing src=0 tests=0 mdocs=0 ldocs=0
+sparing src=4 tests=6 mdocs=2 ldocs=2
+exacting src=0 tests=1 mdocs=0 ldocs=2
+grinding src=22 tests=5 mdocs=3 ldocs=6
+gentle src=29 tests=6 mdocs=11 ldocs=10
+moderate src=284 tests=234 mdocs=108 ldocs=121
+remitted src=0 tests=0 mdocs=1 ldocs=0
+exactions src=0 tests=0 mdocs=0 ldocs=0
+taxHand src=0 tests=0 mdocs=0 ldocs=0
+taxing src=2 tests=3 mdocs=4 ldocs=4
+fiscalSeat src=0 tests=0 mdocs=0 ldocs=0
+fiscal_seat src=0 tests=0 mdocs=0 ldocs=0
+fiscalSeatEnabled src=0 tests=0 mdocs=0 ldocs=0
+hand_set src=0 tests=0 mdocs=0 ldocs=0
+fiscalHandSet src=0 tests=0 mdocs=0 ldocs=0
+sparing_hand src=0 tests=0 mdocs=0 ldocs=0
+forbearance src=17 tests=3 mdocs=17 ldocs=11
+usual src=55 tests=31 mdocs=53 ldocs=45
+wonted_rate src=0 tests=0 mdocs=0 ldocs=0
+tax_refusal src=0 tests=0 mdocs=0 ldocs=0
+refusal src=1169 tests=1296 mdocs=1251 ldocs=1091
+remitted src=0 tests=0 mdocs=1 ldocs=0
+pressed src=225 tests=117 mdocs=135 ldocs=98
+eased src=30 tests=20 mdocs=7 ldocs=6
+abated src=0 tests=0 mdocs=0 ldocs=0
+abate src=0 tests=0 mdocs=0 ldocs=0
+tempered src=2 tests=6 mdocs=2 ldocs=0
+relented src=0 tests=0 mdocs=0 ldocs=0
+held_firm src=0 tests=0 mdocs=0 ldocs=0
+stood_firm src=0 tests=0 mdocs=0 ldocs=0
+burden_refused src=0 tests=0 mdocs=0 ldocs=0
+hand_refused src=0 tests=0 mdocs=0 ldocs=0
+fiscal_strain src=0 tests=0 mdocs=0 ldocs=0
+fiscalStrainOf src=0 tests=0 mdocs=0 ldocs=0
+believedFiscalHandOf src=0 tests=0 mdocs=0 ldocs=0
+fiscalNeedOf src=0 tests=0 mdocs=0 ldocs=0
+hand_raised src=0 tests=0 mdocs=0 ldocs=0
+hand_eased src=0 tests=0 mdocs=0 ldocs=0
+hand_set src=0 tests=0 mdocs=0 ldocs=0
+fiscalHandEnabled src=0 tests=0 mdocs=0 ldocs=0
+fiscalRefusalEnabled src=0 tests=0 mdocs=0 ldocs=0
+flush src=121 tests=148 ldocs=74
+sufficient src=71 tests=44 ldocs=74
+straitened src=0 tests=0 ldocs=0
+desperate src=60 tests=34 ldocs=82
+FISCAL_HANDS src=0 tests=0 ldocs=0
+FISCAL_NEED_BANDS src=0 tests=0 ldocs=0
+fiscalNeedOf src=0 tests=0 ldocs=0
+burden src=142 tests=70 ldocs=123
+burden_strain src=0 tests=0 ldocs=0
+commonsBurden01 src=0 tests=0 ldocs=0
+handShiftOf src=0 tests=0 ldocs=0
+handBandFor src=0 tests=0 ldocs=0
+HAND_SHIFT src=0 tests=0 ldocs=0
+fiscalHandOf src=0 tests=0 ldocs=0
+mintHandOf        0
+HAND_STEPS        0
+fiscalDoor        0
+handRaisedAt        0
+heardCommonsOf        0
+exaction01        0
+setFiscalHand        0
+advanceFiscalHand        0

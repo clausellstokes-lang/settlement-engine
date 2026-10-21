@@ -1,0 +1,86 @@
+[
+ {
+  "name": "lawful_good",
+  "lawfulness01": 1,
+  "malice01": 0,
+  "desperation01": 0,
+  "willingness": 0
+ },
+ {
+  "name": "lawful_good",
+  "lawfulness01": 1,
+  "malice01": 0,
+  "desperation01": 0.3,
+  "willingness": 0
+ },
+ {
+  "name": "lawful_good",
+  "lawfulness01": 1,
+  "malice01": 0,
+  "desperation01": 0.5,
+  "willingness": 0
+ },
+ {
+  "name": "lawful_good",
+  "lawfulness01": 1,
+  "malice01": 0,
+  "desperation01": 1,
+  "willingness": 0
+ },
+ {
+  "name": "lawful_neutral",
+  "lawfulness01": 1,
+  "malice01": 0.5,
+  "desperation01": 0,
+  "willingness": 0
+ },
+ {
+  "name": "lawful_neutral",
+  "lawfulness01": 1,
+  "malice01": 0.5,
+  "desperation01": 0.3,
+  "willingness": 0.08000000000000002
+ },
+ {
+  "name": "lawful_neutral",
+  "lawfulness01": 1,
+  "malice01": 0.5,
+  "desperation01": 0.5,
+  "willingness": 0.1999999999999999
+ },
+ {
+  "name": "lawful_neutral",
+  "lawfulness01": 1,
+  "malice01": 0.5,
+  "desperation01": 1,
+  "willingness": 0.49999999999999994
+ },
+ {
+  "name": "lawful_evil",
+  "lawfulness01": 1,
+  "malice01": 1,
+  "desperation01": 0,
+  "willingness": 0.7
+ },
+ {
+  "name": "lawful_evil",
+  "lawfulness01": 1,
+  "malice01": 1,
+  "desperation01": 0.3,
+  "willingness": 0.8799999999999999
+ },
+ {
+  "name": "lawful_evil",
+  "lawfulness01": 1,
+  "malice01": 1,
+  "desperation01": 0.5,
+  "willingness": 1
+ },
+ {
+  "name": "lawful_evil",
+  "lawfulness01": 1,
+  "malice01": 1,
+  "desperation01": 1,
+  "willingness": 1
+ }
+]

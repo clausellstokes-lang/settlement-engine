@@ -1,0 +1,14 @@
+homePop    60 · room     0 · draw/tick 0 · sent/tick 0 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 5000
+homePop   100 · room     0 · draw/tick 1 · sent/tick 0 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   150 · room     0 · draw/tick 1 · sent/tick 0 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   200 · room     0 · draw/tick 1 · sent/tick 0 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   249 · room     0 · draw/tick 1 · sent/tick 0 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   250 · room     0 · draw/tick 2 · sent/tick 0 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   260 · room    10 · draw/tick 2 · sent/tick 2 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   270 · room    20 · draw/tick 2 · sent/tick 2 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   275 · room    25 · draw/tick 2 · sent/tick 2 · (ii) holds AT WAR'S START: true · ticks of continuous conscription to reach (ii): 0
+homePop   300 · room    50 · draw/tick 2 · sent/tick 2 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 13
+homePop   400 · room   150 · draw/tick 2 · sent/tick 2 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 63
+homePop  1000 · room   750 · draw/tick 6 · sent/tick 6 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 215
+homePop  5000 · room  4750 · draw/tick 30 · sent/tick 30 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 483
+homePop 20000 · room 19750 · draw/tick 120 · sent/tick 120 · (ii) holds AT WAR'S START: false · ticks of continuous conscription to reach (ii): 713

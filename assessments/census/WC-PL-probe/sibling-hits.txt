@@ -1,0 +1,126 @@
+== polityOf
+FP_ARCH_BD.md:2 FP_ARCH_PR.md:4 FP_ARCH_PS.md:2 FP_ARCH_PT.md:4 FP_ARCH_RN.md:1 FP_COHERENCE_FOLD.md:8 
+== politiesOf
+FP_COHERENCE_FOLD.md:1 
+== polityHoldOf
+FP_ARCH_PS.md:6 FP_ARCH_PR.md:6 FP_COHERENCE_FOLD.md:2 
+== liegeStanceToward
+FP_ARCH_PS.md:1 FP_COHERENCE_FOLD.md:1 
+== swornLinkSuspended
+FP_ARCH_PS.md:15 FP_ARCH_ST.md:1 FP_ARCH_PR.md:8 FP_COHERENCE_FOLD.md:2 
+== crownReachAt
+FP_ARCH_BD.md:1 FP_ARCH_CH.md:5 FP_ARCH_RN.md:6 FP_ARCH_PT.md:9 FP_ARCH_PR.md:10 FP_COHERENCE_FOLD.md:4 
+== vassalageSeatsOf
+FP_COHERENCE_FOLD.md:3 
+== seatEpisodeKeyOf
+FP_ARCH_CH.md:6 FP_ARCH_PT.md:2 
+== seatChangedSince
+FP_ARCH_CH.md:5 FP_ARCH_PT.md:10 FP_ARCH_RN.md:2 FP_COHERENCE_FOLD.md:2 
+== huntOrderOf
+FP_ARCH_BD.md:7 FP_COHERENCE_FOLD.md:3 
+== reliefAnswerOf
+FP_ARCH_MN.md:11 FP_ARCH_PT.md:1 FP_ARCH_PS.md:12 FP_COHERENCE_FOLD.md:8 
+== requestFealtyRow
+FP_ARCH_BD.md:5 FP_ARCH_CH.md:7 FP_ARCH_PS.md:6 FP_ARCH_ST.md:1 FP_ARCH_MN.md:2 FP_ARCH_PR.md:1 FP_COHERENCE_FOLD.md:3 
+== fealtyRecord
+FP_ARCH_MN.md:12 FP_COHERENCE_FOLD.md:3 
+== polityContests
+FP_COHERENCE_FOLD.md:4 
+== polityNames
+FP_COHERENCE_FOLD.md:4 
+== rebellionKind
+FP_COHERENCE_FOLD.md:3 
+== polityRuleHooks
+
+== polityConvergenceHooks
+
+== polityOccupationHook
+
+== polityVerdictOutcomes
+
+== applyPolityVerdict
+FP_ARCH_ST.md:1 FP_COHERENCE_FOLD.md:3 
+== writePolityContest
+
+== polity_verdict
+FP_COHERENCE_FOLD.md:3 
+== fealty_defied
+FP_ARCH_BD.md:6 FP_ARCH_CH.md:5 FP_ARCH_PS.md:8 FP_ARCH_ST.md:1 FP_COHERENCE_FOLD.md:3 
+== peace_unkept
+FP_ARCH_BD.md:27 FP_COHERENCE_FOLD.md:10 
+== riders_quartered
+FP_ARCH_PR.md:14 FP_COHERENCE_FOLD.md:5 
+== riders_lent
+FP_ARCH_PR.md:8 FP_COHERENCE_FOLD.md:4 
+== protection_kept
+FP_ARCH_PS.md:1 FP_ARCH_MN.md:4 FP_ARCH_ST.md:8 FP_ARCH_PR.md:8 FP_COHERENCE_FOLD.md:6 
+== protection_failed
+FP_ARCH_PS.md:2 FP_ARCH_MN.md:3 FP_ARCH_ST.md:6 FP_ARCH_PR.md:5 FP_COHERENCE_FOLD.md:6 
+== relief_sent
+FP_ARCH_MN.md:3 FP_ARCH_PS.md:3 FP_COHERENCE_FOLD.md:4 
+== relief_kept
+FP_ARCH_PS.md:3 FP_ARCH_MN.md:4 FP_COHERENCE_FOLD.md:4 
+== service_answered
+FP_ARCH_BD.md:1 FP_ARCH_PR.md:5 FP_COHERENCE_FOLD.md:5 
+== oathSince
+FP_COHERENCE_FOLD.md:4 
+== fealty_question
+FP_COHERENCE_FOLD.md:3 
+== polity_fallen
+FP_COHERENCE_FOLD.md:2 
+== polity_claim
+FP_COHERENCE_FOLD.md:2 
+== allegiance_choice
+FP_COHERENCE_FOLD.md:6 
+== polity_war
+FP_COHERENCE_FOLD.md:7 
+== polity_arbitration
+FP_ARCH_PR.md:1 FP_COHERENCE_FOLD.md:2 
+== fealty_break
+FP_ARCH_CH.md:2 FP_ARCH_PS.md:2 FP_ARCH_PR.md:1 FP_COHERENCE_FOLD.md:4 
+== polity_recognition
+FP_COHERENCE_FOLD.md:5 
+== polity_appointment
+FP_COHERENCE_FOLD.md:4 
+== narrowed_voice
+FP_COHERENCE_FOLD.md:4 
+== POLITY_LIEGE_SHARE
+FP_ARCH_PS.md:2 FP_ARCH_PT.md:1 FP_ARCH_RN.md:1 FP_ARCH_PR.md:3 FP_COHERENCE_FOLD.md:3 
+== POLITY_PARAMOUNT_REACH
+FP_ARCH_PR.md:1 FP_ARCH_RN.md:1 FP_COHERENCE_FOLD.md:3 
+== polityEnabled
+FP_ARCH_CH.md:8 FP_ARCH_BD.md:3 FP_ARCH_PS.md:6 FP_ARCH_ST.md:8 FP_ARCH_PT.md:4 FP_ARCH_RN.md:3 FP_COHERENCE_FOLD.md:6 
+== polityHoldEnabled
+FP_ARCH_CH.md:7 FP_ARCH_PS.md:3 FP_ARCH_PT.md:2 FP_ARCH_PR.md:2 FP_COHERENCE_FOLD.md:3 
+== polityPrecedenceEnabled
+FP_ARCH_PS.md:2 
+== polityBreakEnabled
+FP_COHERENCE_FOLD.md:4 
+== polityObligationsEnabled
+FP_ARCH_CH.md:4 FP_ARCH_BD.md:4 FP_ARCH_MN.md:7 FP_ARCH_PS.md:2 FP_ARCH_PR.md:4 FP_ARCH_ST.md:2 FP_COHERENCE_FOLD.md:4 
+== politySuccessionEnabled
+FP_COHERENCE_FOLD.md:1 
+== polityContestEnabled
+FP_ARCH_ST.md:1 FP_COHERENCE_FOLD.md:1 
+== polityConversionEnabled
+
+== polityControlEnabled
+
+== bannerCoverOf
+FP_ARCH_PR.md:18 FP_COHERENCE_FOLD.md:4 
+== liegeAnswer
+FP_ARCH_PS.md:18 FP_ARCH_PR.md:1 FP_ARCH_ST.md:1 FP_ARCH_PT.md:1 FP_COHERENCE_FOLD.md:4 
+== SWEAR_FEALTY
+FP_COHERENCE_FOLD.md:1 
+== RELEASE_VASSAL
+FP_COHERENCE_FOLD.md:1 
+== OPEN_CLAIM
+FP_COHERENCE_FOLD.md:1 
+== NAME_POLITY
+FP_COHERENCE_FOLD.md:2 
+== APPOINT_TO_SEAT
+
+== fealty_broken
+FP_COHERENCE_FOLD.md:3 
+== fealty_restored
+FP_COHERENCE_FOLD.md:2 

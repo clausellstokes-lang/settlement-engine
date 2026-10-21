@@ -1,0 +1,73 @@
+# cure/L-MG.md — the compile log of THE MOVEMENT GRAMMAR (`docs/DESIGN_FP_ARCH_MG.md`)
+Seat: L-MG (Opus 5.5, xhigh), chair session 6eb7b5b6 (Fable 5.1), P6a, 2026-10-20 (started 13:17 CDT by `date`). No predecessor draft existed (checked: neither the volume nor this file).
+Code of record: `/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963` (HEAD 81f1cd963553f226b222714914ff34584e9911b8, verified by `git rev-parse` read-only). Probes: `cure/L-MG-probe/` (`efflines.mjs` copied from D-BD-r6-probe; `efflines.out`).
+
+## §1 MEASURE FIRST — the measurements that could refute the brief (every row CONFIRMED by reading the cited symbol unless marked)
+
+### 1.1 The army's transit record (brief item 8: "can a verb be carried as one field `verb` + `since`?")
+- `spatial/armyTransit.js :: ArmyTransitRecord` (typedef) — fields `armyId` ("the owning settlement id (one army per settlement)") · `role` · `originId` · `destId` · `path` · `departTick` · `arrivalTick` · `position01` · `strength` · `readiness` · `supplyQuality` · `funding` · `beliefStaleness` · `lastTick` · optional `commandPicture` · `envoyIntent` · `carriedTermSheet` · `interceptionDecision`. CONFIRMED.
+- `armyRecordOf` is a CLOSED normalizer: it rebuilds the record field by field ("`armyId: String(r.armyId ?? '')`, … `...(commandPicture && …)`") — an unknown key (`verb`, `since`, `heading`) is DROPPED on the next normalize. ⇒ REFUTES "one field on the transit record" as free: a verb field on the army record is a PERSISTED-SHAPE change to a landed record + a normalizer arm (the owner's). DESIGN CONSEQUENCE: MG stores its posture on its OWN drop-when-empty ledger keyed by the unit key, never on `armyTransit` (the PS `marches` row idiom).
+- `stepArmyPosition`: "`const position01 = span <= 0 ? 1 : clamp01((t - depart) / span);`" — position is LINEAR IN TIME between the two clocks. ⇒ every stand-still (hold · hide · lie in wait) is a CLOCK SHIFT (PS9's one hold helper), and every change of path or pace (double back · forced march · reroute) is a RE-PLAN from the node the unit stands in (PS §4.1 step 6's idiom: `departTick := tick`, `position01` restarts at 0) — never an edit of `arrivalTick` mid-march (which would JUMP the position). CONFIRMED by reading; the re-plan idiom is PS's design (PLAUSIBLE until PS-0's car-0).
+- `siegeArrivalGate` header: "departTick / arrivalTick are frozen when the record is seeded … MAX_MARCH_WEEKS is strictly BELOW the war layer's SIEGE_MAX_AGE ceiling" — restated by PS9 as Bound 1 `arrivalTick − sinceTick ≤ SIEGE_MAX_AGE − 1` (SIEGE_MAX_AGE 60). ⇒ every MG verb that costs weeks on an army is bounded by Bound 1 (the campaign clock is the counterforce of hide/hold/double back).
+- `ARMY_ROLES` = `march · reinforcement · retreat · convoy · blockade` (CONVOY/BLOCKADE "ride the SIBLING `navalTransit` ledger").
+- `planMarch(digest, worldState, originId, destId, readiness01, alignment, departTick, season)` → `{ path, departTick, arrivalTick, marchWeeks }`; `armyMarchWeeks(base, readiness)` = `ceil(base × ARMY_SPEED_FACTOR 1.5 / speedMult)`, cap `MAX_MARCH_WEEKS 52`; `retreatRoute(...)` = `chooseRoute` by risk tolerance.
+- THE ONE-ARMY LAW (WC §1.4.1, design of record): "an army remains ONE deployment record keyed by its home settlement id"; "Free units (1.7) are the ONE exception to army-keyed records". ⇒ REFUTES "a column parts into bands" as two army records: a SPLIT of an army cannot mint a second `armyTransit` record. DESIGN CONSEQUENCE: an army's split-off band is a DETACHED BAND riding its own small ledger keyed `band:<armyId>:<n>` (≤ 2), its strength DEBITED from the parent record's aggregate and CREDITED back at rejoin — a new persisted shape (the owner's), declared; or (degraded) a split is refused. See §2.
+
+### 1.2 The one physics (persons, caravans, wanderers)
+- `routeNetworkConsumersTransit.js :: livedLegTicks(input)` — "`namedPersonLegTicks({ nominalWeeks: nominal, gradeMultiplier: gradeLegMultiplier(input.hop.grade), unpricedWeeks: … })`"; `ROUTE_TRANSIT_TUNING.GRADE_LEG_MULTIPLIER` = `{ highway: 0.75, road: 1, track: 1.5, hidden: 2 }`; no mounted, no carriage input. CONFIRMED.
+- THE LEG RECORD IS H3'S SHAPE, EXACTLY: "`{ fromId, toId, departTick, arrivalTick, hidden? }`. Not a superset." ⇒ REFUTES carrying a verb on a person's leg; a person's posture rides MG's own ledger, never the leg.
+- `TRANSIT_VERDICTS` = `departed · in_transit · arrived · at_rest · unconnected · refused_hidden · dormant` (LANDED; MG never reuses these words as verbs).
+- `routeNetworkConsumers.js :: TRAVELLER_KINDS` = `['army','caravan','covert_envoy','smuggler','wanderer']`; `HIDDEN_PATH_KINDS` = `['covert_envoy','smuggler','wanderer']`; `mayUseHiddenPaths` "fails CLOSED".
+- Host sizes (effective lines, eslint's skipBlank+skipComments, `efflines.out`): `armyTransitKernel.js` 798 (AT THE CEILING) · `armyTransit.js` 340 · `navalKernel.js` 367 · `navalLayer.js` 278 · `routeNetworkConsumersTransit.js` 198 · `routeNetworkConsumers.js` 184 · `namedPersonTransit.js` 96 · `embattlement.js` 172 · `distanceRead.js` 544 · `envoyErrand.js` 714 · `npcCirculationTransit.js` 75 · `TravelersLayer.jsx` 112 · frozen `pulseKernel.js` 1581 · `applyWorldPulse.js` 907 · `warTermination.js` 818.
+
+### 1.3 The designed infrastructure MG must ride (design of record, PLAUSIBLE until its car-0)
+- PS §4.1 THE TRANSIT LEAF STAGE `worldPulse/transitLeafStage.js :: TRANSIT_LEAVES` — a CLOSED registration list, "in this order — (1) PS's `passageBorderLeaf` … (2) THE SITES' approach-fort leaf … (3) THE PATROLS' screen leaf … (4) WC Arc A's `armiesMeetLeaf`"; "one hold per record per tick (the first registrant in this order to hold wins)"; THE ONE HOLD HELPER `holdBeforeNode(record, tick, hold)` modes `border · freeze`; car-0 extracts ~42 eff from `armyTransitKernel.js`. ⇒ MG's army verbs register as a FIFTH registrant (routed to PS: the order is written once, in PS §4.1).
+- PS §4.1 step 6 THE REROUTE — "sets `departTick` to this tick and `arrivalTick` to this tick + `armyMarchWeeks(w, readiness)` … (so `position01` restarts at 0 on the new path — the unit never jumps), banks the holds so far on the march row … BANKS the column's field-battle travel inputs" (`fatigueFloor01`, `groundCap01`). ⇒ the ONE re-plan arithmetic MG's re-plan verbs must call (routed: PS extracts it as a named stage helper beside `holdBeforeNode`).
+- PS §5.3 `distanceRead.js :: routeAvoiding(digest, fromId, toId, avoidIds)` — the one avoided-graph read; PS §5.6 the quiet crossing: a unit ≤ `modest` may walk a hidden way its court KNOWS (`travellerMayWalk(kind, hop, { might })`, PS's one declared widening).
+- BD §2.2 the body record: `where: { kind: 'country'|'road'|'trail'|'site', ids }`, `might` (the five STRENGTH_BAND keys), `bodySupply01`, `bodyCohesion01`, `choice?: { word, tick, reasons }`; BD §4 ONE weekly act choice per body (`bodyChoiceSet`, stream `bodies:<bodyId>:<tick>`) + BD §5.3 ONE route choice (`bodyRouteChoice`, stream `bodies:route:<bodyId>:<tick>`); "advances at most one hop per week". ⇒ a body gets NO third roll: its movement verb is DERIVED from its act choice + its route choice (MG maps them).
+- BD §6.7 FISSION for gangs (two records, "the larger keeping the name, the base and the leader, the smaller born `spilled`").
+- PR §2.1/§2.5: patrols DERIVED weekly, never stepped (PR1); `DETACHMENT_AIMS = clear · screen · pursue · escort · look`; `PATROL_STATES = on_round · converging · engaged · escorting · looking · resting`; PR §5.5 "SHADOW AND GROUP" is PROSE (a rider outmatched "SHADOWS — follows the prediction and reports") — no `shadow` token in PR's vocabularies.
+- PR §8.3 `believedWatch(worldState, snapshot, observerId, roadKey, tick) → { watch01, known, phase? }` — THE ONE PLANNING READ; PR §2.6 `predictedPlaceOf(...)` — the hunt's prediction on belief.
+- WC §1.7 free units `spatialLedgers.freeUnits` (fission forced by the ENDURANCE_ENVELOPE; `rejoin` = the tag event free_unit → block; `merge`); WC's `rejoin` is a LANDED-DESIGN TOKEN (WC TAG_EVENTS, 17 hits in WC) — HOMONYM with the brief's verb `rejoin`.
+
+### 1.4 The mount, the carriage, the composition (brief items 10, 11)
+- `data/institutionalCatalog.js` (Stable district: "`name: 'Stable district', desc: 'Concentrated stabling, horse trading, and farriery. …'`"; hamlet `Stable yard`, village `Stable master`): catalog fields only (`name`, `desc`, `baseChance`, `tags`) — NO stock, NO capacity ⇒ ⛔ S-MG-3. `supplyChainData.js`: chain members `'Stable yard','Stable master','Beast trainers'` → "`outputs: ['Cavalry mounts', 'Draft horses', …]`". `tradeSalience.js :: MATERIEL_GOOD_PATTERN` "`…|mount|cavalry|warhorse|…`".
+- `spatial/modeSpeeds.js :: MODES` "`['foot', 'cart', 'river', 'coastal', 'sea']`", `MODE_SPEEDS` `foot: 150`, `cart: 110` ("slower than the walker who drives them"); `distanceRead.js :: weeksPerCostOf`: "`if (mode == null || read.kmScale == null) return read.weeksPerCost;`" ⇒ a mode is IGNORED in every world today ⇒ the riding RATIO is read off the table in the leg pricer (REFINED, routed to WY).
+- `display/forceComposition.js :: UNIT_TYPES` incl. `heavy_horse`, `baggage_train`; header: "they move no engine number because nothing engine-side reads this file"; "Composition is derived FROM strength and NEVER feeds it" ⇒ ⛔ S-MG-1.
+- `spatial/navalLayer.js :: navalRecordOf`: army record + "`mode: 'sea'`", `ownerId`, `cargoId`, `cargoStrength`, `targetId`; `navalCapability01(institutions)` 0..1 — NO ship count ⇒ ⛔ S-MG-2. LG §4: LG-2 "derived counts, stored commitments" (unbuilt) — the air fleet splits along commitments (routed to LG).
+- `habit/habitCurve.js :: habitFactor(stock, span)`; `habit/habitGate.js :: habitsActive` "`rules.habitConditioningEnabled === true`".
+- Token census: `tokens-1.out`, `tokens-2.out` (rg -w -i on master src/tests/docs + ledger docs; quoted-literal counts). Load-bearing homonyms: `'advance'` (time lens, undo kind) → `keep_course`; `'rejoin'` (`peopleLedger.js` TAG event) → `regroup`; `'reroute'` (`strategyMoves.js`); `'hold'` (`ransomChoices.js` CAPTOR_CHOICES; fold §5 row); `'foot'` (`modeSpeeds.js` MODES — reused, not minted); `mounted` = the estate's "wired into a host" word → never a code token; `band` (fold §5: "`cult` · `band` — NEVER A HOLDER KIND") → the army's part is a `wing`.
+
+## §2 WHAT REFUTED WHAT
+- Brief item 8 "can a verb be carried as one field `verb` + `since`" on the transit record → REFUTED (closed normalizer; H3 leg not a superset) → MG's own ledger (MG15, OD-MG-1).
+- Brief item 2 "split / rejoin (a column parts into way-sized bands)" as two army records → REFUTED by the one-army law → WINGS (OD-MG-8).
+- Brief item 11 (a) "ONE STATUS `mounted` … a COMPOSITION word on a column (`foot · horse · mixed`, plus `train`)" → REFINED: `mounted` collides with the mount rule's word; a composition on the army record is a persisted shape AND the only composition is display-only (S-MG-1); `cart < foot` and the train are already landed (ARMY_SPEED_FACTOR, MODES) → riding is a status of persons/wings; whole armies never ride.
+- Brief item 11 (b) "ONE multiplier column beside the grade table" → REFINED: the number's home is WY's MODES table (`horse` row), the ratio composed into `livedLegTicks`'s gradeMultiplier.
+- Brief item 1 "a BODY by its weekly choice" → REFINED: named, not rolled (one choice per body).
+
+## §3 STOPS (each marked in the volume §17)
+- ⛔ S-MG-1 — the army's horse (no engine-side composition). ⛔ S-MG-2 — no ship count. ⛔ S-MG-3 — no stabling stock. ⛔ S-MG-a (build-time) — `replanFromNode` extraction from PS's step 6.
+
+## §4 REFINED (each bracketed in the volume)
+`keep_course`/`regroup`/`forced_sail` tokens (§2.3) · fifth-and-last registrant (§3.2) · `replanFromNode` as PS's second helper (§3.2) · bodies named not rolled (§3.5) · patrols' shadow named (§3.6) · wings as shares, no block fork (§6.1) · forced march on the readiness ceiling (§6.4) · the riding ratio off WY's table in both arms (§8.2).
+
+## §5 ROUTES (the seams seat checks them; each the sibling's to confirm)
+- WY: `MODES` gains `horse` (owner-signed; OD-MG-15); the riding ratio in the normalized arm; the rider's bar on `wild`/`way` in the access law; the one-line factor in `livedLegTicks`.
+- PS: MG the fifth `TRANSIT_LEAVES` registrant (PS §4.1's order written once); `replanFromNode` named beside `holdBeforeNode`.
+- WC: wing contact into Arc A's `armies_meet`; wings in WC-11's counts-movers manifest; homecoming credit (§1.12.1); the forced march under WY-8a's attrition contract; corps/free units take the `column` row in WC-10..12.
+- PR: `patrolVerbOf`; a riding gang's believed reach one band wider; riders as the stabling's first consumer.
+- BD: `bodyVerbOf`; the `riding` flag on the body record (OD-MG-7).
+- MN: sighting row `heading` + subject kind `unit` (OD-MG-6).
+- RN: deed word `feint_exposed` (credibility).
+- CH / L-CH-PD: a commanding paragon's verbs through CH's one roll (deity inside it).
+- ES: the operative's `hide`/`shadow`/`feint`, the cover read.
+- generals: dials; the general's co-location with a wing (C4 slot).
+- LG: air-fleet verbs in LG-3; split along LG-2 commitments.
+- CROSS-CITATIONS to the three sibling compiles (cited by their briefs' design, PLAUSIBLE until their text): OP (`briefs/L-OP.md`) — the detour is a `reroute` with OP's motive and roll; WS (`briefs/L-WS.md`) — `wayOfWarOf(court)` as the motive prior, the archetype bundle over MG's verbs (§5.2); FS (`briefs/L-FS.md`) — the purse of riders once a stock exists.
+- FOLD (P7): §5 rows (volume §16); a §3.3 "one grammar" row; chain placement (volume §12); the WHERE note (a junction is a key).
+
+## §6 OPEN QUESTIONS FOR THE CHAIR
+(1) S-MG-1: rule a stored arms field (CR-WC-9's field batch) or an existence-gate read of the display clerk? (2) S-MG-2/S-MG-3: declare a ship count / a stabling stock now, or leave dark? (3) Accept MG as the LAST registrant (imposed holds first)?
+
+## §7 WHAT IS LEFT (stopped at ~300k tokens of context)
+The volume is COMPLETE in parts 0–12 (464 lines, ~90 KB). Not done by this seat: (a) a second-pass self-check of §4's 44 rows against each sibling's exact read signatures (several reads are cited at design level, PLAUSIBLE); (b) `keep_course`, `regroup`, `double_back`, `lie_in_wait`, `forced_march`, `forced_sail`, `wing` were censused FREE; the census of the motive tokens (44 snake_case words) was NOT run — owed at MG-0's car-0; (c) no probe executed (the design rests on read symbols; the forced-march arithmetic `armyMarchWeeks(w, 1)` is read, not executed); (d) the WS bundle (§5.2) awaits WS's own text.

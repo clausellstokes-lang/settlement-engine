@@ -1,0 +1,12 @@
+V-ALL-p5 pass 2 (P5d re-judge), 2026-10-20 16:2x CDT. Read-only greps; no git; no test suite.
+- master 81f1cd963 mapProfile.js :: deriveDefensiveTerrain — terrain ladder max idx 3; walls => idx 3; idx 4 only "hasWalls && defense >= 55" (read).
+- master foreignGuestHold.js l.350/384 ".map(normalizeForeignGuestHold)"; l.367 "counts.errandId.get(String(row.errandId)) === 1" (read).
+- master peopleLedger.js EVENT_SIGNATURES dm_removed: debit from('block','free_unit') -> SINK (read) — WC's retire row must name which pool a deployed army debits.
+- master navalLayer.js planBlockade l.594 "departTick: depart, arrivalTick: depart + weeks"; activeBlockadeTargets lists BLOCKADE rows by role (read).
+- ES l.1585 still reads "dark ⇒ `normalizeForeignGuestHold` byte-identical — the six-field refusal stands" and "dark-after-lit: rows kept, inert" (python read of the ledger doc at 16:2x).
+- kit grep: "1585"/"captiveId" appear in briefs/ only in RULINGS-P5.md; the BOARD's P6c input list (16:00 line) names RULINGS-P6 §C + RULINGS-P5 D.7 only.
+- PR "owner's slot" sites now OPENED (l.389/390/490/727/728); PS §6.5 OPENED; SP l.15 inserted; GR l.15 P5 bracket present.
+- MN: WC-car-0 13 · press01 14 · danger01 4 (history/rename brackets only) · fold §5 l.947 carries press01.
+- RN l.207 REGARD_CAUSES: served_with/gift struck, paid_well·sheltered·slandered appended; fold l.820 mirror still lists served_with · gift · abandoned_by (routed).
+- RN l.243 war_won: general's OWN deed `<warId>:general`; GENERALS l.346 U4 still "a second doer `p:<npcId>`" (routed to P6c).
+- CH (13)->(14): 23 "(14)" cites, "(13)" left only in history/explanatory brackets (L-CH-PD writing CH at 16:20).

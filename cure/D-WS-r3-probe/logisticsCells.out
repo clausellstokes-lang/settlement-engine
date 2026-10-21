@@ -1,0 +1,12 @@
+r2 (seafaring + institutions level+)
+  all {"way_harassment":128,"way_coalition":216,"way_shock":175,"way_attrition":190,"way_logistics":11,"way_raiding":140,"way_fortress":112}
+  unique {"way_harassment":46,"way_coalition":58,"way_shock":175,"way_logistics":4,"way_raiding":108,"way_fortress":28,"way_attrition":108} · ties 445 · min 1.1% · max 22.2%
+V1 (+ materiel level+)
+  all {"way_harassment":122,"way_coalition":170,"way_logistics":223,"way_shock":120,"way_attrition":179,"way_raiding":98,"way_fortress":60}
+  unique {"way_harassment":43,"way_coalition":44,"way_logistics":146,"way_shock":120,"way_raiding":85,"way_fortress":12,"way_attrition":81} · ties 441 · min 6.2% · max 22.9%
+V2 (seafaring + materiel level+ + institutions level+, manpower below-level)
+  all {"way_harassment":106,"way_coalition":125,"way_logistics":320,"way_raiding":64,"way_fortress":60,"way_shock":111,"way_attrition":186}
+  unique {"way_harassment":34,"way_coalition":22,"way_logistics":241,"way_raiding":60,"way_fortress":12,"way_shock":111,"way_attrition":99} · ties 393 · min 6.2% · max 32.9%
+V3 (seafaring + materiel level+ + institutions level+)
+  all {"way_harassment":122,"way_coalition":188,"way_logistics":133,"way_shock":135,"way_attrition":188,"way_raiding":110,"way_fortress":96}
+  unique {"way_harassment":43,"way_coalition":44,"way_logistics":71,"way_shock":135,"way_raiding":94,"way_fortress":36,"way_attrition":99} · ties 450 · min 9.9% · max 19.3%

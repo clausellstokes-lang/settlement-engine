@@ -1,0 +1,202 @@
+== paragonLean
+  DESIGN_FP_ARCH_PL.md 2
+  DESIGN_FP_ARCH_MN.md 14
+  DESIGN_FP_ARCH_PS.md 2
+  DESIGN_FP_ARCH_PT.md 2
+  DESIGN_FP_ARCH_PR.md 7
+  DESIGN_FP_ARCH_ST.md 2
+  DESIGN_FP_ARCH_RN.md 2
+  DESIGN_FP_COHERENCE_FOLD.md 3
+== paragonOf
+  DESIGN_FP_ARCH_BD.md 2
+== paragonsOf
+== paragonsAt
+== weeklyChoice
+== callBoard
+  DESIGN_FP_ARCH_BD.md 1
+  DESIGN_FP_ARCH_PR.md 2
+  DESIGN_FP_ARCH_PT.md 2
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== isParagonRecord
+== believedWhereabouts
+  DESIGN_FP_ARCH_PL.md 1
+  DESIGN_FP_ARCH_PS.md 1
+  DESIGN_FP_ARCH_MN.md 1
+  DESIGN_FP_ARCH_PT.md 1
+  DESIGN_FP_ARCH_ST.md 1
+  DESIGN_FP_ARCH_PR.md 1
+  DESIGN_FP_ARCH_RN.md 6
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== gateDefault
+  DESIGN_FP_ARCH_PR.md 1
+  DESIGN_FP_ARCH_PT.md 12
+  DESIGN_FP_ARCH_RN.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 11
+== believedEmployerOf
+== isWardenParagon
+  DESIGN_FP_ARCH_BD.md 8
+  DESIGN_FP_ARCH_PR.md 5
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== securityOfficeOf
+  DESIGN_FP_ARCH_BD.md 3
+  DESIGN_FP_ARCH_PR.md 3
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== purseBand
+== needsOf
+== paragonRows
+== paragonFaithCarriers
+  DESIGN_FP_ARCH_PL.md 2
+== paragonFaithMult
+  DESIGN_FP_ARCH_PL.md 1
+== paragonCareLean
+== paragonPactLean
+== paragonPeaceLean
+== exposeCovertHire
+  DESIGN_FP_ARCH_BD.md 6
+== championForHunt
+  DESIGN_FP_ARCH_BD.md 4
+== mintHuntWon
+== setLeader
+  DESIGN_FP_ARCH_BD.md 4
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== bodyLeaderOf
+  DESIGN_FP_ARCH_BD.md 6
+== hunt_won
+  DESIGN_FP_ARCH_BD.md 10
+  DESIGN_FP_ARCH_ST.md 4
+  DESIGN_FP_ARCH_PR.md 7
+  DESIGN_FP_ARCH_PT.md 5
+  DESIGN_FP_ARCH_RN.md 28
+  DESIGN_FP_COHERENCE_FOLD.md 4
+== warden_attempted
+  DESIGN_FP_ARCH_BD.md 2
+  DESIGN_FP_ARCH_RN.md 6
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== paragon_act
+  DESIGN_FP_ARCH_BD.md 3
+  DESIGN_FP_ARCH_RN.md 16
+  DESIGN_FP_COHERENCE_FOLD.md 5
+== paragon_leak
+  DESIGN_FP_ARCH_BD.md 4
+  DESIGN_FP_ARCH_RN.md 4
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== paragon_findings
+== paragonBeliefs
+  DESIGN_FP_ARCH_BD.md 4
+  DESIGN_FP_ARCH_RN.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 3
+== paragon_employer
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== person_at_the_gate
+  DESIGN_FP_ARCH_BD.md 2
+  DESIGN_FP_ARCH_PS.md 2
+  DESIGN_FP_ARCH_PT.md 3
+  DESIGN_FP_ARCH_PR.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 18
+  DESIGN_FP_SPINE.md 1
+== retainer_offer
+  DESIGN_FP_COHERENCE_FOLD.md 2
+  DESIGN_FP_SPINE.md 1
+== paragon_resigns
+  DESIGN_FP_SPINE.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== champion_duel
+  DESIGN_FP_COHERENCE_FOLD.md 9
+  DESIGN_FP_SPINE.md 1
+== person_banned
+  DESIGN_FP_ARCH_RN.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 4
+  DESIGN_FP_SPINE.md 1
+== banished_found
+  DESIGN_FP_CHAMPIONS_BRIEF.md 1
+  DESIGN_FP_SPINE.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 10
+== paragon_disgraced
+  DESIGN_FP_ARCH_BD.md 1
+  DESIGN_FP_ARCH_PR.md 3
+  DESIGN_FP_SPINE.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 4
+== polarity_turn
+  DESIGN_FP_COHERENCE_FOLD.md 3
+  DESIGN_FP_SPINE.md 1
+== never_line_tested
+  DESIGN_FP_COHERENCE_FOLD.md 2
+  DESIGN_FP_SPINE.md 1
+== hunt_body
+  DESIGN_FP_ARCH_BD.md 6
+  DESIGN_FP_ARCH_ST.md 2
+  DESIGN_FP_ARCH_PR.md 8
+  DESIGN_FP_ARCH_RN.md 2
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== heldOffice
+  DESIGN_FP_ARCH_BD.md 1
+  DESIGN_FP_ARCH_PR.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== heldAt
+== soughtBy
+== banKeys
+  DESIGN_FP_ARCH_PL.md 1
+  DESIGN_FP_ARCH_PT.md 26
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== postId
+== exertion.settlementId
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== leads
+  DESIGN_FP_ARCHITECTURE.md 1
+  DESIGN_FP_ARCH_BD.md 16
+  DESIGN_FP_ARCH_CW.md 1
+  DESIGN_FP_ARCH_INT.md 1
+  DESIGN_FP_ARCH_PL.md 1
+  DESIGN_FP_ARCH_MF.md 1
+  DESIGN_FP_ARCH_PR.md 7
+  DESIGN_FP_ARCH_ST.md 5
+  DESIGN_FP_COUPLINGS.md 1
+  DESIGN_FP_GENERALS.md 1
+  DESIGN_FP_ARCH_RN.md 5
+  DESIGN_FP_ARCH_WC.md 2
+  DESIGN_FP_INTERIOR.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 5
+  DESIGN_W_SEAT_VERIFICATION.md 1
+== bearingWord
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== SITE_FIT
+== paragonsEnabled
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== paragonGiftsEnabled
+  DESIGN_FP_ARCH_MN.md 3
+== paragonRetainersEnabled
+== paragonGateEnabled
+  DESIGN_FP_ARCH_PL.md 1
+  DESIGN_FP_ARCH_RN.md 1
+== paragonCovertEnabled
+  DESIGN_FP_ARCH_RN.md 1
+== paragonCorpsEnabled
+  DESIGN_FP_ARCH_PT.md 1
+  DESIGN_FP_ARCH_RN.md 3
+== PARAGON_LEAN_SEAMS
+  DESIGN_FP_ARCH_MN.md 3
+  DESIGN_FP_ARCH_PR.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== menace_siege_draw
+  DESIGN_FP_ARCH_MN.md 4
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== menace_raid_wear
+  DESIGN_FP_ARCH_MN.md 4
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== patrol_rider_quality
+  DESIGN_FP_ARCH_PR.md 4
+  DESIGN_FP_COHERENCE_FOLD.md 2
+== legend_recorded
+  DESIGN_FP_ARCH_RN.md 1
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== paragon_exerted
+== sold_out
+  DESIGN_FP_ARCH_RN.md 2
+== covert_hire_exposed
+  DESIGN_FP_ARCH_BD.md 9
+  DESIGN_FP_ARCH_PS.md 1
+  DESIGN_FP_ARCH_PR.md 2
+  DESIGN_FP_ARCH_RN.md 2
+  DESIGN_FP_COHERENCE_FOLD.md 1
+== metParty
+  DESIGN_FP_ARCH_PT.md 5

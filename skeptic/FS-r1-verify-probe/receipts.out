@@ -1,0 +1,31 @@
+# receipts at master 81f1cd963 (rg/sed, read-only) — V-FS-r1, Tue Oct 20 15:34:55 CDT 2026
+## FS-r1-7: settlementUpdates exists only after settlement_clock
+1134: * ⚠ A1.4 — IT MUST BE CALLED AT A PULSE STAGE AFTER `settlement_clock`, because
+1135- * `settlementUpdates` does not exist until `consequence_fold`. The mint runs at the
+1136- * writer; the PRICE rides the writer's summary and lands here. That split is §768.2's
+1868:  let settlementUpdates = applied.settlementUpdates.map(update => {
+541:  // @pulse-stage: settlement_clock
+362:  let worldState = { ...nextWorldStateForPulse(startingW
+## FS-V1: vault -> home front -> war continuation
+485:    ? coffersRead(/** @type {Parameters<typeof coffersRead>[0]} */ (settlement), record, throughTick)
+637:    const homeFront = readWarHomeFront({
+727:      homeFront.score01 * T.HOME_FRONT_CONTINUE_W,
+1116:  const coverageTicks = coinOf(settlement) / upkeepPerTick;
+## WS-r1-6: posture standing term live without SP flag
+236:    present.standing = { signed, band: dispositionBandOf(NEUTRAL + signed / 2) };
+282:    direction: composite > 0 ? 'lower' : composite < 0 ? 'raise' : 'neutral',
+40:  if (!deltas.length && !(options.enabled === true && hasDispositionState(worldState))) {
+415:      wins: finite(Number(prev.wins), 0) + (delta.outcome === 'win' ? 1 : 0),
+762:      wins: finite(Number(prev.wins), 0) + martialWins,
+## FS-r1-3 shape
+domain/worldPulse/commonsVoiceKernel.js:102:export function commonsGrievance01(settlement, opts = {}) {
+domain/worldPulse/commonsVoiceKernel.js:284:    const grievance = commonsGrievance01(s, { corruptionSignal: !!corr.signal });
+domain/worldPulse/irregularForce.js:131:  const cause = resistance == null ? commonsGrievance01(s) : resistance;
+## FS-r1-11
+145:  DECISION_LOAD_SPAN: 0.3,
+628:export function blocDecisionFactor(worldState, cid, item, moveKind) {
+149:export function mintFactionPairIncident(worldState, { a, b, type, trustDelta
+## FS-r1-9
+domain/edit/directions.js:252:export function levySuspension(blockade) {
+domain/worldPulse/foodStockpile.js:99:const BLOCKADE_TYPES = new Set(['siege', 'occupation']);
+domain/worldPulse/foodStockpile.js:207:export function blockadeFor(worldStateStressors = [], settlementId) {

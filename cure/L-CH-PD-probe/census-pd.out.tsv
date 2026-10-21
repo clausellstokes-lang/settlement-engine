@@ -1,0 +1,36 @@
+token	src_files	tests_files	master_docs_files	ledger_docs_files	src_quoted_literal_files
+patronDeityRef	       0	       0	       0	       0	       0
+patronDeityId	       0	       0	       0	       0	       0
+patronDeity	       4	       0	       0	       0	       0
+patronRef	      18	      39	       9	       6	       0
+patronId	      33	      25	       6	      14	       0
+patron	     291	     219	     116	     144	       0
+patronLean	       0	       0	       0	       0	       0
+patronOf	       0	       0	       0	       0	       0
+swornDeityRef	       0	       0	       0	       0	       0
+swornRef	       0	       0	       0	       0	       0
+sworn	      44	      23	      40	      31	       0
+devotionRef	       0	       0	       0	       0	       0
+keeps_the_faith	       0	       0	       0	       0	       0
+faith_forbids	       0	       0	       0	       0	       0
+patron_creed	       0	       0	       0	       0	       0
+suppressed_creed	       0	       0	       0	       0	       0
+suppressed	     117	      98	      64	      77	       0
+patron_kin	       0	       0	       0	       0	       0
+deityTemper	      17	       6	      16	      24	       0
+evil01	      20	       4	      12	      21	       0
+chaos01	      19	       4	      13	      24	       0
+rankAxis	      31	     106	      13	      19	       0
+standing	     466	     393	     300	     397	       0
+ascendant	      20	      33	      16	      30	       0
+established	     136	      59	      76	     104	       0
+cult	      82	      75	      61	      73	       0
+outlawed	       3	       0	       7	       9	       0
+secret_faith	       0	       0	       1	       1	       0
+SWORN_WEIGHT	       0	       0	       0	       0	       0
+PATRON_LEAN_WEIGHT	       0	       0	       0	       0	       0
+creedOf	       0	       1	       0	       0	       0
+patronCreedOf	       0	       0	       0	       0	       0
+patron_creed_conflict        0        0        0        0
+patronDeityOf        0        0        0        0
+PATRON_LEAN_WEIGHT        0        0        0        0

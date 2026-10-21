@@ -1,0 +1,79 @@
+# V-OP-r1 read receipts at master 81f1cd963 (Tue Oct 20 15:40:01 CDT 2026)
+## legalEncounterVenue
+ */
+function legalEncounterVenue({ worldState, snapshot, regionalGraph, nodeId, actorId, routeId }) {
+  const node = text(nodeId);
+  const actor = text(actorId);
+  const route = text(routeId);
+  if (!node || !actor) return null;
+  if (snapshotItem(snapshot, node)) {
+    const occupation = asObject(asObject(worldState).occupations)[node];
+    if (text(asObject(occupation).occupierId) === actor) {
+      return {
+        encounterRef: { id: node, kind: 'occupied_enemy_settlement' },
+        holdRef: { kind: 'settlement', settlementId: node },
+      };
+    }
+    if (node === actor) {
+      return {
+        encounterRef: { id: node, kind: 'allied_hall' },
+        holdRef: { kind: 'settlement', settlementId: node },
+      };
+    }
+    const edge = edgeForPair(regionalGraph, actor, node);
+    const relationshipKey = edge ? relationshipKeyFromEdge(edge) : '';
+    const relationship = edge
+      ? ensureRelationshipState(edge, asObject(asObject(worldState).relationshipStates)[relationshipKey])
+      : null;
+    if (relationship?.relationshipType === 'allied') {
+      return {
+        encounterRef: { id: node, kind: 'allied_hall' },
+        holdRef: { kind: 'settlement', settlementId: node },
+      };
+    }
+    return null;
+## buildLiveNpcIds / npcId key
+function buildLiveNpcIds(snapshot) {
+  const byId = snapshot && snapshot.byId instanceof Map ? snapshot.byId : new Map();
+  /** @type {Set<string>} */
+  const out = new Set();
+  for (const [sid, item] of byId) {
+    // FOLD BATCH 3 composition (THE ROADS §8 × D-2): the snapshot's settlement is the
+    // PARTICIPATION view — the master gate filters off-stage souls (hostage / DM-shelved).
+    // The prune scan reads the UNTOUCHED roster (`item.save`, the roadsKernel idiom): a
+    // captive is still a live soul — pruning their credibility key mid-captivity would
+    // reset their reputation the day they come home. Falls back to the participation view
+    // when no raw roster exists (synthetic snapshots).
+    const it = asObject(item);
+    const rawSettlement = asObject(asObject(it.save).settlement);
+    const settlement = Array.isArray(rawSettlement.npcs) ? rawSettlement : asObject(it.settlement);
+    const npcs = Array.isArray(settlement.npcs) ? /** @type {Record<string, unknown>[]} */ (settlement.npcs) : [];
+    npcs.forEach((npc, index) => { out.add(npcId(String(sid), /** @type {Parameters<typeof npcId>[1]} */ (npc), index)); });
+  }
+export function npcId(saveId, npc, index) {
+  return `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || `npc_${index}`)}`;
+}
+## credibility prune
+  for (const id of Object.keys(prior).sort(compareCodepoint)) {
+    if (roster && !roster.has(id)) continue; // roster-scan prune (remove_npc ⇒ no dangling key)
+## npcLedger id
+ * `wnpc_<hash>` is minted ONCE and every cross-settlement surface keys only on that.
+## normalizeErrand travelling+returning
+      ? persistedJourney
+      : 'outbound';
+  if ((expectedJourney === 'return' && !validJourneyRoute(normalizedLegs, 'return', returnOriginId, from))
+    || (returning.length && !validJourneyRoute(normalizedLegs, 'return', returnOriginId, from))
+    || (returning.length && state === 'travelling')) return null;
+  const outboundArrivalTick = Number(outbound.at(-1)?.arrivalTick);
+  const returnArrivalTick = Number(returning.at(-1)?.arrivalTick);
+  if (expectedReturnTick < outboundArrivalTick
+    || (returning.length && (scheduledHomeTick == null || scheduledHomeTick < returnArrivalTick))
+    || (!returning.length && scheduledHomeTick != null)) return null;
+## ENVOY_PICTURE_FIELDS
+export const ENVOY_PICTURE_FIELDS = Object.freeze([
+  'storesBand',
+  'strengthBand',
+  'moraleExhaustionBand',
+  'foundingCauseStatus',
+  'believedRatioBand',
+]);

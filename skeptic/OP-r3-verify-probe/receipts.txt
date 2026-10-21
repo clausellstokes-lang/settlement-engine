@@ -1,0 +1,77 @@
+# V-OP-r3 receipts (2026-10-20 16:37 CDT); master 81f1cd963 (read-only); ledger docs
+## volume unchanged since the lane's diff
+SAME_AS_LANE_DIFF (738 lines)
+## CH §4.2 purpose rows (answer_call, court_errand)
+| `answer_call` | a place whose call in its domain it believes is the gravest within reach | free; bound only inside the employer's lands | its own leg (bound: inside the lands) |
+| `court_errand` | where its employer sends it | bound; the court's business — ONLY WHEN THE OWNER'S ERRAND-ROW SLOT LANDS (no row can name a paragon at master, CH-V1); never offered until then | the errand family, claiming it at its seat (`unclaimedPlacementAt`, CH9) |
+## CH l.427 bound lands + court_errand classes by domain
+427:destinations are restricted to its employer's LANDS — the employer itself, or, when the employer is a polity's root, the members where PL's crown reach is above zero (PL's
+427:classes `religious · diplomatic · covert · commercial · factional` by domain
+## CH l.165 domains
+| `domain` | `faith · war · diplomacy · information · health · wildland · trade · order` | the calling: which seam the gift leans on, which calls it weighs | §4, §6, §14 |
+## CH §4.5 exert where the domain calls
+406:If the week's aim is `work_here` (or it arrives where its domain calls), it EXERTS when a keyed hash `hash01('paragon.exert.<wnpcId>.<tick>')`
+## CH §6.1 order row (gift at the exertion town)
+447:| order | magistrate · agitator | `rebellion` · `insurgency` · `political_fracture` | 0.8 "<name>, a magistrate, hears the people's grievances in <town>." | 1.3 "<name>, an agitator, stirs the streets of <town>." |
+441:whose `exertion.settlementId` IS `pressure.settlementId` — where the exertion served, never where the record now stands [CURED 2026-10-1
+## CH l.229 patrol_will
+229:`patrol_will` 0.10 (PR §3.1's WILL gate: a paragon of the `order` calling whose `exertion.outcome` at that town is `exerted` — a magistrate `1 + d`, an agitator `1 − d` — read by PR as `min(1, WILL_SHARE × mult)` in the weeks t
+## CH l.569 act face on living side
+569:THE ACT'S FACE: CH's OWN registered row (§2.2b — the one table RN's `inherentValueOf` derives from; never a second value) for the act the candidate would make: `work_here` and `answer_call`, and the exert decision → `paragon_exerted` for its domain on its LIVING side (`turned` over `authored.polarity`, §13); `pursue_nemesis` → `duel_won` on its
+## CH l.242 deed target the town
+242:its target the town, append-only and never amended — a stay
+## CH l.261 / l.259 information rows
+| `paragon_exerted` — war | villain | 0.25 | 0.40 | 0.85 | no (warmongering) | shameful |
+| `paragon_exerted` — information | champion | 0.50 | 0.50 | 0.40 | no (a watch kept) | neutral |
+| `paragon_exerted` — information | villain | 0.30 | 0.25 | 0.50 | no (false reports) | shameful |
+## CH l.590 polarity sentence
+590:OP's sentence "a lawful god's envoy-champion never plants a false report" is true by POLARITY (no champion act is a false report; the deceiver is a villain), while of a villain the lean says "less readily", never "never" (ROUTED to OP). MG: a 
+## CH l.683 omniscient
+683:Under the omniscient info mode (the default and three other presets) the board is the truth
+## CH l.669 harm side
+669:places that need that calling (`side: 'help'`) or where a villain can do the most harm (`side: 'harm'`) — each `{ settlementId, domain, side, band, source }` with `band` 
+## CH has no captive_held text yet
+0
+## RN §8 omniscient row
+421:infoMode omniscient — no rumor road) | THE OMNISCIENT ARM: every deed known at once inside its projected scope; office fame | derived on read from the deed ledger through the lenses (towns, courts, the party as subject) | the deed itse
+## MG §8.2
+336:EACH PRICER takes the ratio by WY's ruling, in its owner's one line — never "one line" reaching all: `livedLegTicks` (`routeNetworkConsumersTransit.js`, 198 eff — an errand's whole plan at dispatch and the DM's walker), `planWanderLeg` (`npcCirculationTrans
+## master livedLegTicks + its errand caller
+export function livedLegTicks(input) {
+  const digest = activeSpatialDigest(input.worldState);
+  const nominal = digest
+    ? hopWeeks(digest, text(input.fromId), text(input.hop.toId), input.season || null)
+    : null;
+  return namedPersonLegTicks({
+    nominalWeeks: nominal,
+    gradeMultiplier: gradeLegMultiplier(input.hop.grade),
+    unpricedWeeks: ROUTE_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
+  });
+}
+43:import { livedHopToward, livedLegTicks } from './routeNetworkConsumersTransit.js';
+300:    const duration = livedLegTicks({ worldState, fromId: cursor, hop: reading.hop, season });
+## master WR-7b DM-only
+715:all nine immediate WR-7b facts are DM-only until a separate observation carrier earns public knowledge
+## master relationshipTypeBetween
+export function relationshipTypeBetween(graph, worldState, a, b) {
+  const A = String(a); const B = String(b);
+  const edges = Array.isArray(asObject(graph).edges) ? /** @type {unknown[]} */ (asObject(graph).edges) : [];
+  for (const e of edges) {
+    const from = str(asObject(e).from); const to = str(asObject(e).to);
+    if ((from === A && to === B) || (from === B && to === A)) {
+      const rt = String(asObject(e).relationshipType || '');
+      if (rt) return rt;
+    }
+  }
+  const rs = asObject(asObject(worldState).relationshipStates);
+  for (const key of Object.keys(rs)) {
+    if (key.includes(A) && key.includes(B)) {
+      const rt = String(asObject(rs[key]).relationshipType || '');
+      if (rt) return rt;
+    }
+  }
+## OP residue: bare namedPersonLegTicks pricer sites
+117:a detour's price is `namedPersonLegTicks` over `hopWeeks` on a canonize
+192:ed arrival at the mission's next stop less the planned one, priced by `namedPersonLegTicks` (a rider's pace is the one physics' — M
+## OP OP-1 dependency wording
+392:the persisted demand is the only arrival (D.1)

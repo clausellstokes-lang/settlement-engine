@@ -1,0 +1,6 @@
+src/domain/spatial/armyTransit.js (340)
+src/domain/worldPulse/advanceInterval.js (296)
+src/domain/worldPulse/armyTransitKernel.js (798)
+src/domain/worldPulse/routeNetworkDecay.js (335)
+src/domain/worldPulse/routeNetworkCharterBypass.js (201)
+src/domain/worldPulse/routeNetworkLedger.js (238)

@@ -1,0 +1,6 @@
+SIEGE_MAX_AGE 60 (master) -> Bound 1: arrivalTick - sinceTick <= 59
+tick 11: army 0.6667->0.6667 (held) · wing r2 0.75 (passes the fort) · wing r3 0.6667->0.6667 (held with its army)
+tick 12: army 0.6667->0.6667 (held) · wing r2 0.8333 (passes the fort) · wing r3 0.6667->0.6667 (held with its army)
+tick 13: army 0.6667->0.6667 (held) · wing r2 0.9167 (passes the fort) · wing r3 0.6667->0.6667 (held with its army)
+after the three held weeks: army arrival 17 · wing r2 arrival 14 (3 weeks ahead of its own held army) · wing r3 arrival 17
+Bound 1: a wing with arrivalTick 59, sinceTick 0 -> FREEZE REFUSED (null): the wing keeps its course

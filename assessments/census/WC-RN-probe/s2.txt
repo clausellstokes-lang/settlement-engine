@@ -1,0 +1,59 @@
+##### covert_hire_exposed
+  DESIGN_FP_ARCH_BD.md (10)
+    L118:  hire (`covert: true`, the leak through RN's `TELLING_SOURCES`, exposure through `corruptionWeb.js :: applyForeignExposureBlowback` source `covert_hire_exposed`); the corps' failure rung `desertion`. - **WF-5b (`DESIGN_FP_ARCH_WF.md` §3):** "`.deities[ref].covert` … { share(band)
+  DESIGN_FP_ARCH_CH.md (11)
+    L228: raced` · `retainer_broken` · `office_resigned` · `duel_won` (the doer the winner, the target the loser) · `line_crossed` · `side_turned` · `covert_hire_exposed` (the doer the EMPLOYER court, the subject the paragon) · `barred_at_gate` (the doer the court, the target the paragon) 
+  DESIGN_FP_ARCH_PR.md (2)
+    L389: ner (CH's network) | the same | CH's gate words; the corruption web's exposure (`corruptionWeb.js :: applyForeignExposureBlowback`, source `covert_hire_exposed`) when the runner carries a clandestine hire | CH | | the PARTY (PT) | PT's journey (the DM's toggle moving the party al
+  DESIGN_FP_ARCH_PS.md (1)
+    L373: e one landed quantity for a court's standing abroad, read by `reserveFor` through `credibilityScoreOf` — through the same charge door CH's `covert_hire_exposed` uses; PLAUSIBLE until PS-3's car-0 names that writer, STOP if it needs a new persisted field); `urgency` writes resentm
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L809: ployer` the court's field word | | `liaison` · `rendezvous` (CH) | the handler (prose "handler") and its meeting | FREE | | `covertHire` · `covert_hire_exposed` · `paragonBeliefs` (CH) | the clandestine hire; its exposure source; a court's belief of a hidden employer, band `vague
+##### barred_at_gate
+  DESIGN_FP_ARCH_CH.md (2)
+    L228: r, the target the loser) · `line_crossed` · `side_turned` · `covert_hire_exposed` (the doer the EMPLOYER court, the subject the paragon) · `barred_at_gate` (the doer the court, the target the paragon) · `sold_out` (a corps' sell-out, §16b) [CURED 2026-10-18 (fp-final r2) — B, THE
+##### sold_out
+  DESIGN_FP_ARCH_CH.md (10)
+    L228: ert_hire_exposed` (the doer the EMPLOYER court, the subject the paragon) · `barred_at_gate` (the doer the court, the target the paragon) · `sold_out` (a corps' sell-out, §16b) [CURED 2026-10-18 (fp-final r2) — B, THE CORPS] · `hunt_won` — THE ONE DEED OF A LED HUNT'S SUCCESS (RUL
+##### RECORD_MEETING
+  DESIGN_FP_ARCH_CH.md (2)
+    L662: ts once met (`marks.metParty`, one-way — set by CH's stage, the field's one writer, when PT's `met_in_person` deed, minted by PT's door at `RECORD_MEETING` (PT §7.3: "doer the party, target the person"), names this paragon as its target) [CURED 2026-10-18 (fp-final r2b) — `cure/D
+  DESIGN_FP_ARCH_PT.md (8)
+    L205: t that does NOT ripple · a suggestion answered (PT2) on any engine outcome · the party's hand on MN's verbs · PT's own verbs (`SEND_WORD`, `RECORD_MEETING`, the answer `no`) · the resolution of `backing_voided` / `backing_repudiated` | the immediate composer path: `store/settleme
+##### SEND_WORD
+  DESIGN_FP_ARCH_PT.md (6)
+    L205: ttlement event that does NOT ripple · a suggestion answered (PT2) on any engine outcome · the party's hand on MN's verbs · PT's own verbs (`SEND_WORD`, `RECORD_MEETING`, the answer `no`) · the resolution of `backing_voided` / `backing_repudiated` | the immediate composer path: `s
+##### body_ended
+  DESIGN_FP_ARCH_BD.md (6)
+    L634: won` row (no third deed)"; doer the claimer — the leader, the paragon or the company — target the body; THE PARTY's claim is PT's ONE deed `body_ended` (PT §3.1, OD-PT-33 — B.5's one deed: no `hunt_won` beside it) [CURED 2026-10-19 (fp-final r6) — PT-1 · SEAMS-r5-19]; its defeat 
+  DESIGN_FP_ARCH_PT.md (26)
+    L8: waysKnown` record, no deed, read by nothing in the world; `party_made_known_trail` names that write), B.5's one deed (the party's claim is `body_ended`) and the verifier's minors — §21's round-r5 block; no STOP. Round 4a (lane D-PT-r4) cured A.8 (`enemy_in_service` is CH's ONE BE
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L906:  `lastSiteId` (derived) | FREE (0 · 0 each, `cure/D-FOLD-r4-probe/census-r4b.out`); `bodyPresenceFeeder` as OD-FC-46 ↳ r4 | | PT round-4 | `body_ended` and `party_made_known_trail` (party-door event types, PT §4); `need.bodyId` (a bounty's quarry); `banKeys.untilTick` (a windowed
+##### party_voiced
+  DESIGN_FP_ARCH_CH.md (2)
+    L1153:  — | CH writes no garrison word; its `readiness` (§14) is `beliefMap.js`'s believed war readiness — a homonym routed to the fold | | A.11 (`party_voiced`'s voice) | — | NOTED | — | CH mints no `party_voiced`; a renowned paragon is a PERSON voice under RN §5.5 and PT's card | | RU
+  DESIGN_FP_ARCH_MN.md (1)
+    L837: nd) — ST's resolver reads `siteReadiness01 × SITE_DEFENSE_CEILING[kind]`, said in `SITE_READINESS`' words, never MN's might words | | A.11 `party_voiced`'s voice | — | NOTED — no MN text (a menace voices nothing) | | A.12 `believedWhereabouts`' one wording | — | NOTED — no MN tex
+  DESIGN_FP_ARCH_PL.md (1)
+    L845: atches on the landed pair state (A.4); its kinds' parties are settlements, with no actor-kind list (A.7); it has no funding read (A.9), no `party_voiced` (A.11), no `believedWhereabouts` (A.12), no sea leg (A.13) and no `paragonLean` (A.15) | | RULINGS-ROUND3 A.5 · A.6 · A.8 | — 
+  DESIGN_FP_ARCH_PR.md (1)
+    L990: | CURED — PR's band words are never a garrison's; a keep on a PR card speaks ST's readiness words | §15.2 | | A.11 | — | NOTED — not PR's (`party_voiced`); PR has no voice row | — | | A.12 | — | NOTED — PR reads no `believedWhereabouts` (0 hits) | — | | A.13 | — | NOTED — PR's ro
+  DESIGN_FP_ARCH_PS.md (1)
+    L819: ing | NOTED: PS uses no readiness or garrison word; it reads `siteDefense` only through the one envelope | — | | A.11 | ruling | NOTED: no `party_voiced` in PS | — | | A.12 | ruling | NOTED: no `believedWhereabouts` in PS | — | | A.13 | ruling | CURED (cite): a sea waypoint ends 
+  DESIGN_FP_ARCH_PT.md (26)
+    L8: routed to PT is disposed in §21 THE CURE RECORD under the chair's rulings (the round-1 re-rulings PT-r1-1, -2, -3 and the 05:1x ADDENDUM's `party_voiced` and `seatChangedSince` are executed). The compile's two ⛔ STOPS were RULED by the chair (RULINGS-AFTER-COMPILE): PT-S1 (a road
+  DESIGN_FP_ARCH_ST.md (1)
+    L800:  ban | | A.9 | ruling | CURED | as note 2 | — | | A.10 | ruling | CURED + REFINED | as ST-V3 | — | | A.11 | ruling | NOTED | — | ST has no `party_voiced` row | | A.12 | ruling | NOTED | — | ST has no `believedWhereabouts` | | A.13 | ruling | NOTED | — | ST plans no voyage; the ha
+  DESIGN_FP_COHERENCE_FOLD.md (23)
+    L280: ner's warrant, OD-FC-50: "Everything with the party is a hearing nothing is ever decided for them"), so PT registers one more CLIMAX kind, `party_voiced` (verdicts `spoken · withheld`; default `spoken` — it decides nothing FOR the party; the DM may strike or amend it in its week)
+  DESIGN_FP_SPINE.md (4)
+    L249: §1's requirement-24 bracket of 2026-10-18, whose text is of record; SEAMS-r1-6 · SEAMS-r1-20 · HOST-r1-6) — the party's kinds are FIFTEEN (`party_voiced`, CLIMAX, `spoken · withheld`, default `spoken`: a court's or a renowned person's public praise or condemnation of the party, p
+##### Known here
+##### patrol_clash
+  DESIGN_FP_ARCH_BD.md (13)
+    L511: rget the hunting court (one act, one deed: the hunt's card is BD's `hunt_taken`, so BD's closing row mints it; a led hunt's clash mints no `patrol_clash` deed, B.5) [CURED 2026-10-19 (fp-final r6) — RN-1b: the chair's open question, ruled here by delegation, vetoable — the altern
+  DESIGN_FP_ARCH_CH.md (3)
+    L228: m — "no third deed"; item 33: "a claimed bounty is a DEED (RN) with the body's defeat as its outcome"), its doer the claimer; THE PATROLS' `patrol_clash` mints NO deed for a led hunt (its row is the clash's record; an UNLED clash's deed is PR's own, the TOWN its doer — PR's and R
+  DESIGN_FP_ARCH_PR.md (19)
+    L301: ccess is ONE deed minted by the hunt's own door — CH's `hunt_won` at the mission's close, doer the LEADER (`ledBy`), target the body; PR's `patrol_clash` mints NO deed for a led hunt (its row is the clash's record)"): the riders' clashes inside a led hunt are `patrol_engages` ver

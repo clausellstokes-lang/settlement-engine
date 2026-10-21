@@ -1,0 +1,793 @@
+face	god	temper	m_A'	align	bold	act
+faith/champion (saint, own creed)	good/lawful/derived	peacelike	0.6500	1.0650	1.0500	1.1182
+faith/champion (saint, own creed)	good/lawful/auth:warlike	warlike	0.6500	1.0650	0.9500	1.0117
+faith/champion (saint, own creed)	good/lawful/auth:peacelike	peacelike	0.6500	1.0650	1.0500	1.1182
+faith/champion (saint, own creed)	good/lawful/auth:neutral	neutral	0.6500	1.0650	1.0000	1.0650
+faith/champion (saint, own creed)	good/neutral/derived	peacelike	0.6333	1.0633	1.0500	1.1165
+faith/champion (saint, own creed)	good/neutral/auth:warlike	warlike	0.6333	1.0633	0.9500	1.0102
+faith/champion (saint, own creed)	good/neutral/auth:peacelike	peacelike	0.6333	1.0633	1.0500	1.1165
+faith/champion (saint, own creed)	good/neutral/auth:neutral	neutral	0.6333	1.0633	1.0000	1.0633
+faith/champion (saint, own creed)	good/chaotic/derived	peacelike	0.6167	1.0617	1.0500	1.1148
+faith/champion (saint, own creed)	good/chaotic/auth:warlike	warlike	0.6167	1.0617	0.9500	1.0086
+faith/champion (saint, own creed)	good/chaotic/auth:peacelike	peacelike	0.6167	1.0617	1.0500	1.1148
+faith/champion (saint, own creed)	good/chaotic/auth:neutral	neutral	0.6167	1.0617	1.0000	1.0617
+faith/champion (saint, own creed)	neutral/lawful/derived	neutral	0.5167	1.0517	1.0000	1.0517
+faith/champion (saint, own creed)	neutral/lawful/auth:warlike	warlike	0.5167	1.0517	0.9500	0.9991
+faith/champion (saint, own creed)	neutral/lawful/auth:peacelike	peacelike	0.5167	1.0517	1.0500	1.1043
+faith/champion (saint, own creed)	neutral/lawful/auth:neutral	neutral	0.5167	1.0517	1.0000	1.0517
+faith/champion (saint, own creed)	neutral/neutral/derived	neutral	0.5000	1.0500	1.0000	1.0500
+faith/champion (saint, own creed)	neutral/neutral/auth:warlike	warlike	0.5000	1.0500	0.9500	0.9975
+faith/champion (saint, own creed)	neutral/neutral/auth:peacelike	peacelike	0.5000	1.0500	1.0500	1.1025
+faith/champion (saint, own creed)	neutral/neutral/auth:neutral	neutral	0.5000	1.0500	1.0000	1.0500
+faith/champion (saint, own creed)	neutral/chaotic/derived	neutral	0.4833	1.0483	1.0000	1.0483
+faith/champion (saint, own creed)	neutral/chaotic/auth:warlike	warlike	0.4833	1.0483	0.9500	0.9959
+faith/champion (saint, own creed)	neutral/chaotic/auth:peacelike	peacelike	0.4833	1.0483	1.0500	1.1008
+faith/champion (saint, own creed)	neutral/chaotic/auth:neutral	neutral	0.4833	1.0483	1.0000	1.0483
+faith/champion (saint, own creed)	evil/lawful/derived	warlike	0.5167	1.0517	0.9500	0.9991
+faith/champion (saint, own creed)	evil/lawful/auth:warlike	warlike	0.5167	1.0517	0.9500	0.9991
+faith/champion (saint, own creed)	evil/lawful/auth:peacelike	peacelike	0.5167	1.0517	1.0500	1.1043
+faith/champion (saint, own creed)	evil/lawful/auth:neutral	neutral	0.5167	1.0517	1.0000	1.0517
+faith/champion (saint, own creed)	evil/neutral/derived	warlike	0.5000	1.0500	0.9500	0.9975
+faith/champion (saint, own creed)	evil/neutral/auth:warlike	warlike	0.5000	1.0500	0.9500	0.9975
+faith/champion (saint, own creed)	evil/neutral/auth:peacelike	peacelike	0.5000	1.0500	1.0500	1.1025
+faith/champion (saint, own creed)	evil/neutral/auth:neutral	neutral	0.5000	1.0500	1.0000	1.0500
+faith/champion (saint, own creed)	evil/chaotic/derived	warlike	0.4833	1.0483	0.9500	0.9959
+faith/champion (saint, own creed)	evil/chaotic/auth:warlike	warlike	0.4833	1.0483	0.9500	0.9959
+faith/champion (saint, own creed)	evil/chaotic/auth:peacelike	peacelike	0.4833	1.0483	1.0500	1.1008
+faith/champion (saint, own creed)	evil/chaotic/auth:neutral	neutral	0.4833	1.0483	1.0000	1.0483
+faith/villain (heretic, not its god)	good/lawful/derived	peacelike	-0.3667	0.9633	0.9500	0.9152
+faith/villain (heretic, not its god)	good/lawful/auth:warlike	warlike	-0.3667	0.9633	1.0500	1.0115
+faith/villain (heretic, not its god)	good/lawful/auth:peacelike	peacelike	-0.3667	0.9633	0.9500	0.9152
+faith/villain (heretic, not its god)	good/lawful/auth:neutral	neutral	-0.3667	0.9633	1.0000	0.9633
+faith/villain (heretic, not its god)	good/neutral/derived	peacelike	-0.2667	0.9733	0.9500	0.9247
+faith/villain (heretic, not its god)	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0500	1.0220
+faith/villain (heretic, not its god)	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	0.9500	0.9247
+faith/villain (heretic, not its god)	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+faith/villain (heretic, not its god)	good/chaotic/derived	peacelike	-0.1667	0.9833	0.9500	0.9342
+faith/villain (heretic, not its god)	good/chaotic/auth:warlike	warlike	-0.1667	0.9833	1.0500	1.0325
+faith/villain (heretic, not its god)	good/chaotic/auth:peacelike	peacelike	-0.1667	0.9833	0.9500	0.9342
+faith/villain (heretic, not its god)	good/chaotic/auth:neutral	neutral	-0.1667	0.9833	1.0000	0.9833
+faith/villain (heretic, not its god)	neutral/lawful/derived	neutral	-0.1000	0.9900	1.0000	0.9900
+faith/villain (heretic, not its god)	neutral/lawful/auth:warlike	warlike	-0.1000	0.9900	1.0500	1.0395
+faith/villain (heretic, not its god)	neutral/lawful/auth:peacelike	peacelike	-0.1000	0.9900	0.9500	0.9405
+faith/villain (heretic, not its god)	neutral/lawful/auth:neutral	neutral	-0.1000	0.9900	1.0000	0.9900
+faith/villain (heretic, not its god)	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+faith/villain (heretic, not its god)	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+faith/villain (heretic, not its god)	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+faith/villain (heretic, not its god)	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+faith/villain (heretic, not its god)	neutral/chaotic/derived	neutral	0.1000	1.0100	1.0000	1.0100
+faith/villain (heretic, not its god)	neutral/chaotic/auth:warlike	warlike	0.1000	1.0100	1.0500	1.0605
+faith/villain (heretic, not its god)	neutral/chaotic/auth:peacelike	peacelike	0.1000	1.0100	0.9500	0.9595
+faith/villain (heretic, not its god)	neutral/chaotic/auth:neutral	neutral	0.1000	1.0100	1.0000	1.0100
+faith/villain (heretic, not its god)	evil/lawful/derived	warlike	0.1667	1.0167	1.0500	1.0675
+faith/villain (heretic, not its god)	evil/lawful/auth:warlike	warlike	0.1667	1.0167	1.0500	1.0675
+faith/villain (heretic, not its god)	evil/lawful/auth:peacelike	peacelike	0.1667	1.0167	0.9500	0.9658
+faith/villain (heretic, not its god)	evil/lawful/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+faith/villain (heretic, not its god)	evil/neutral/derived	warlike	0.2667	1.0267	1.0500	1.0780
+faith/villain (heretic, not its god)	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+faith/villain (heretic, not its god)	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+faith/villain (heretic, not its god)	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+faith/villain (heretic, not its god)	evil/chaotic/derived	warlike	0.3667	1.0367	1.0500	1.0885
+faith/villain (heretic, not its god)	evil/chaotic/auth:warlike	warlike	0.3667	1.0367	1.0500	1.0885
+faith/villain (heretic, not its god)	evil/chaotic/auth:peacelike	peacelike	0.3667	1.0367	0.9500	0.9848
+faith/villain (heretic, not its god)	evil/chaotic/auth:neutral	neutral	0.3667	1.0367	1.0000	1.0367
+faith/villain (FALLEN: against its own god)	good/lawful/derived	peacelike	-0.6833	0.9317	0.9500	0.8851
+faith/villain (FALLEN: against its own god)	good/lawful/auth:warlike	warlike	-0.6833	0.9317	1.0500	0.9783
+faith/villain (FALLEN: against its own god)	good/lawful/auth:peacelike	peacelike	-0.6833	0.9317	0.9500	0.8851
+faith/villain (FALLEN: against its own god)	good/lawful/auth:neutral	neutral	-0.6833	0.9317	1.0000	0.9317
+faith/villain (FALLEN: against its own god)	good/neutral/derived	peacelike	-0.6333	0.9367	0.9500	0.8898
+faith/villain (FALLEN: against its own god)	good/neutral/auth:warlike	warlike	-0.6333	0.9367	1.0500	0.9835
+faith/villain (FALLEN: against its own god)	good/neutral/auth:peacelike	peacelike	-0.6333	0.9367	0.9500	0.8898
+faith/villain (FALLEN: against its own god)	good/neutral/auth:neutral	neutral	-0.6333	0.9367	1.0000	0.9367
+faith/villain (FALLEN: against its own god)	good/chaotic/derived	peacelike	-0.5833	0.9417	0.9500	0.8946
+faith/villain (FALLEN: against its own god)	good/chaotic/auth:warlike	warlike	-0.5833	0.9417	1.0500	0.9888
+faith/villain (FALLEN: against its own god)	good/chaotic/auth:peacelike	peacelike	-0.5833	0.9417	0.9500	0.8946
+faith/villain (FALLEN: against its own god)	good/chaotic/auth:neutral	neutral	-0.5833	0.9417	1.0000	0.9417
+faith/villain (FALLEN: against its own god)	neutral/lawful/derived	neutral	-0.5500	0.9450	1.0000	0.9450
+faith/villain (FALLEN: against its own god)	neutral/lawful/auth:warlike	warlike	-0.5500	0.9450	1.0500	0.9922
+faith/villain (FALLEN: against its own god)	neutral/lawful/auth:peacelike	peacelike	-0.5500	0.9450	0.9500	0.8977
+faith/villain (FALLEN: against its own god)	neutral/lawful/auth:neutral	neutral	-0.5500	0.9450	1.0000	0.9450
+faith/villain (FALLEN: against its own god)	neutral/neutral/derived	neutral	-0.5000	0.9500	1.0000	0.9500
+faith/villain (FALLEN: against its own god)	neutral/neutral/auth:warlike	warlike	-0.5000	0.9500	1.0500	0.9975
+faith/villain (FALLEN: against its own god)	neutral/neutral/auth:peacelike	peacelike	-0.5000	0.9500	0.9500	0.9025
+faith/villain (FALLEN: against its own god)	neutral/neutral/auth:neutral	neutral	-0.5000	0.9500	1.0000	0.9500
+faith/villain (FALLEN: against its own god)	neutral/chaotic/derived	neutral	-0.4500	0.9550	1.0000	0.9550
+faith/villain (FALLEN: against its own god)	neutral/chaotic/auth:warlike	warlike	-0.4500	0.9550	1.0500	1.0028
+faith/villain (FALLEN: against its own god)	neutral/chaotic/auth:peacelike	peacelike	-0.4500	0.9550	0.9500	0.9072
+faith/villain (FALLEN: against its own god)	neutral/chaotic/auth:neutral	neutral	-0.4500	0.9550	1.0000	0.9550
+faith/villain (FALLEN: against its own god)	evil/lawful/derived	warlike	-0.4167	0.9583	1.0500	1.0063
+faith/villain (FALLEN: against its own god)	evil/lawful/auth:warlike	warlike	-0.4167	0.9583	1.0500	1.0063
+faith/villain (FALLEN: against its own god)	evil/lawful/auth:peacelike	peacelike	-0.4167	0.9583	0.9500	0.9104
+faith/villain (FALLEN: against its own god)	evil/lawful/auth:neutral	neutral	-0.4167	0.9583	1.0000	0.9583
+faith/villain (FALLEN: against its own god)	evil/neutral/derived	warlike	-0.3667	0.9633	1.0500	1.0115
+faith/villain (FALLEN: against its own god)	evil/neutral/auth:warlike	warlike	-0.3667	0.9633	1.0500	1.0115
+faith/villain (FALLEN: against its own god)	evil/neutral/auth:peacelike	peacelike	-0.3667	0.9633	0.9500	0.9152
+faith/villain (FALLEN: against its own god)	evil/neutral/auth:neutral	neutral	-0.3667	0.9633	1.0000	0.9633
+faith/villain (FALLEN: against its own god)	evil/chaotic/derived	warlike	-0.3167	0.9683	1.0500	1.0168
+faith/villain (FALLEN: against its own god)	evil/chaotic/auth:warlike	warlike	-0.3167	0.9683	1.0500	1.0168
+faith/villain (FALLEN: against its own god)	evil/chaotic/auth:peacelike	peacelike	-0.3167	0.9683	0.9500	0.9199
+faith/villain (FALLEN: against its own god)	evil/chaotic/auth:neutral	neutral	-0.3167	0.9683	1.0000	0.9683
+health/champion	good/lawful/derived	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/lawful/auth:warlike	warlike	0.5333	1.0533	0.9500	1.0007
+health/champion	good/lawful/auth:peacelike	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/lawful/auth:neutral	neutral	0.5333	1.0533	1.0000	1.0533
+health/champion	good/neutral/derived	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/neutral/auth:warlike	warlike	0.5333	1.0533	0.9500	1.0007
+health/champion	good/neutral/auth:peacelike	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/neutral/auth:neutral	neutral	0.5333	1.0533	1.0000	1.0533
+health/champion	good/chaotic/derived	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/chaotic/auth:warlike	warlike	0.5333	1.0533	0.9500	1.0007
+health/champion	good/chaotic/auth:peacelike	peacelike	0.5333	1.0533	1.0500	1.1060
+health/champion	good/chaotic/auth:neutral	neutral	0.5333	1.0533	1.0000	1.0533
+health/champion	neutral/lawful/derived	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	neutral/lawful/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	neutral/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	neutral/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	neutral/chaotic/derived	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	neutral/chaotic/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	neutral/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	neutral/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	evil/lawful/derived	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/lawful/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	evil/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	evil/neutral/derived	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/champion	evil/chaotic/derived	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/chaotic/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+health/champion	evil/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+health/champion	evil/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/villain (plaguebearer)	good/lawful/derived	peacelike	-0.6667	0.9333	0.9500	0.8867
+health/villain (plaguebearer)	good/lawful/auth:warlike	warlike	-0.6667	0.9333	1.0500	0.9800
+health/villain (plaguebearer)	good/lawful/auth:peacelike	peacelike	-0.6667	0.9333	0.9500	0.8867
+health/villain (plaguebearer)	good/lawful/auth:neutral	neutral	-0.6667	0.9333	1.0000	0.9333
+health/villain (plaguebearer)	good/neutral/derived	peacelike	-0.5333	0.9467	0.9500	0.8993
+health/villain (plaguebearer)	good/neutral/auth:warlike	warlike	-0.5333	0.9467	1.0500	0.9940
+health/villain (plaguebearer)	good/neutral/auth:peacelike	peacelike	-0.5333	0.9467	0.9500	0.8993
+health/villain (plaguebearer)	good/neutral/auth:neutral	neutral	-0.5333	0.9467	1.0000	0.9467
+health/villain (plaguebearer)	good/chaotic/derived	peacelike	-0.4000	0.9600	0.9500	0.9120
+health/villain (plaguebearer)	good/chaotic/auth:warlike	warlike	-0.4000	0.9600	1.0500	1.0080
+health/villain (plaguebearer)	good/chaotic/auth:peacelike	peacelike	-0.4000	0.9600	0.9500	0.9120
+health/villain (plaguebearer)	good/chaotic/auth:neutral	neutral	-0.4000	0.9600	1.0000	0.9600
+health/villain (plaguebearer)	neutral/lawful/derived	neutral	-0.1333	0.9867	1.0000	0.9867
+health/villain (plaguebearer)	neutral/lawful/auth:warlike	warlike	-0.1333	0.9867	1.0500	1.0360
+health/villain (plaguebearer)	neutral/lawful/auth:peacelike	peacelike	-0.1333	0.9867	0.9500	0.9373
+health/villain (plaguebearer)	neutral/lawful/auth:neutral	neutral	-0.1333	0.9867	1.0000	0.9867
+health/villain (plaguebearer)	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+health/villain (plaguebearer)	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+health/villain (plaguebearer)	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+health/villain (plaguebearer)	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+health/villain (plaguebearer)	neutral/chaotic/derived	neutral	0.1333	1.0133	1.0000	1.0133
+health/villain (plaguebearer)	neutral/chaotic/auth:warlike	warlike	0.1333	1.0133	1.0500	1.0640
+health/villain (plaguebearer)	neutral/chaotic/auth:peacelike	peacelike	0.1333	1.0133	0.9500	0.9627
+health/villain (plaguebearer)	neutral/chaotic/auth:neutral	neutral	0.1333	1.0133	1.0000	1.0133
+health/villain (plaguebearer)	evil/lawful/derived	warlike	0.4000	1.0400	1.0500	1.0920
+health/villain (plaguebearer)	evil/lawful/auth:warlike	warlike	0.4000	1.0400	1.0500	1.0920
+health/villain (plaguebearer)	evil/lawful/auth:peacelike	peacelike	0.4000	1.0400	0.9500	0.9880
+health/villain (plaguebearer)	evil/lawful/auth:neutral	neutral	0.4000	1.0400	1.0000	1.0400
+health/villain (plaguebearer)	evil/neutral/derived	warlike	0.5333	1.0533	1.0500	1.1060
+health/villain (plaguebearer)	evil/neutral/auth:warlike	warlike	0.5333	1.0533	1.0500	1.1060
+health/villain (plaguebearer)	evil/neutral/auth:peacelike	peacelike	0.5333	1.0533	0.9500	1.0007
+health/villain (plaguebearer)	evil/neutral/auth:neutral	neutral	0.5333	1.0533	1.0000	1.0533
+health/villain (plaguebearer)	evil/chaotic/derived	warlike	0.6667	1.0667	1.0500	1.1200
+health/villain (plaguebearer)	evil/chaotic/auth:warlike	warlike	0.6667	1.0667	1.0500	1.1200
+health/villain (plaguebearer)	evil/chaotic/auth:peacelike	peacelike	0.6667	1.0667	0.9500	1.0133
+health/villain (plaguebearer)	evil/chaotic/auth:neutral	neutral	0.6667	1.0667	1.0000	1.0667
+order/champion	good/lawful/derived	peacelike	0.4333	1.0433	1.0500	1.0955
+order/champion	good/lawful/auth:warlike	warlike	0.4333	1.0433	0.9500	0.9912
+order/champion	good/lawful/auth:peacelike	peacelike	0.4333	1.0433	1.0500	1.0955
+order/champion	good/lawful/auth:neutral	neutral	0.4333	1.0433	1.0000	1.0433
+order/champion	good/neutral/derived	peacelike	0.2667	1.0267	1.0500	1.0780
+order/champion	good/neutral/auth:warlike	warlike	0.2667	1.0267	0.9500	0.9753
+order/champion	good/neutral/auth:peacelike	peacelike	0.2667	1.0267	1.0500	1.0780
+order/champion	good/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+order/champion	good/chaotic/derived	peacelike	0.1000	1.0100	1.0500	1.0605
+order/champion	good/chaotic/auth:warlike	warlike	0.1000	1.0100	0.9500	0.9595
+order/champion	good/chaotic/auth:peacelike	peacelike	0.1000	1.0100	1.0500	1.0605
+order/champion	good/chaotic/auth:neutral	neutral	0.1000	1.0100	1.0000	1.0100
+order/champion	neutral/lawful/derived	neutral	0.1667	1.0167	1.0000	1.0167
+order/champion	neutral/lawful/auth:warlike	warlike	0.1667	1.0167	0.9500	0.9658
+order/champion	neutral/lawful/auth:peacelike	peacelike	0.1667	1.0167	1.0500	1.0675
+order/champion	neutral/lawful/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+order/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+order/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+order/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+order/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+order/champion	neutral/chaotic/derived	neutral	-0.1667	0.9833	1.0000	0.9833
+order/champion	neutral/chaotic/auth:warlike	warlike	-0.1667	0.9833	0.9500	0.9342
+order/champion	neutral/chaotic/auth:peacelike	peacelike	-0.1667	0.9833	1.0500	1.0325
+order/champion	neutral/chaotic/auth:neutral	neutral	-0.1667	0.9833	1.0000	0.9833
+order/champion	evil/lawful/derived	warlike	0.1667	1.0167	0.9500	0.9658
+order/champion	evil/lawful/auth:warlike	warlike	0.1667	1.0167	0.9500	0.9658
+order/champion	evil/lawful/auth:peacelike	peacelike	0.1667	1.0167	1.0500	1.0675
+order/champion	evil/lawful/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+order/champion	evil/neutral/derived	warlike	0.0000	1.0000	0.9500	0.9500
+order/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+order/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+order/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+order/champion	evil/chaotic/derived	warlike	-0.1667	0.9833	0.9500	0.9342
+order/champion	evil/chaotic/auth:warlike	warlike	-0.1667	0.9833	0.9500	0.9342
+order/champion	evil/chaotic/auth:peacelike	peacelike	-0.1667	0.9833	1.0500	1.0325
+order/champion	evil/chaotic/auth:neutral	neutral	-0.1667	0.9833	1.0000	0.9833
+order/villain	good/lawful/derived	peacelike	-0.4667	0.9533	0.9500	0.9057
+order/villain	good/lawful/auth:warlike	warlike	-0.4667	0.9533	1.0500	1.0010
+order/villain	good/lawful/auth:peacelike	peacelike	-0.4667	0.9533	0.9500	0.9057
+order/villain	good/lawful/auth:neutral	neutral	-0.4667	0.9533	1.0000	0.9533
+order/villain	good/neutral/derived	peacelike	-0.2667	0.9733	0.9500	0.9247
+order/villain	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0500	1.0220
+order/villain	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	0.9500	0.9247
+order/villain	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+order/villain	good/chaotic/derived	peacelike	-0.0667	0.9933	0.9500	0.9437
+order/villain	good/chaotic/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+order/villain	good/chaotic/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+order/villain	good/chaotic/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+order/villain	neutral/lawful/derived	neutral	-0.2000	0.9800	1.0000	0.9800
+order/villain	neutral/lawful/auth:warlike	warlike	-0.2000	0.9800	1.0500	1.0290
+order/villain	neutral/lawful/auth:peacelike	peacelike	-0.2000	0.9800	0.9500	0.9310
+order/villain	neutral/lawful/auth:neutral	neutral	-0.2000	0.9800	1.0000	0.9800
+order/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+order/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+order/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+order/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+order/villain	neutral/chaotic/derived	neutral	0.2000	1.0200	1.0000	1.0200
+order/villain	neutral/chaotic/auth:warlike	warlike	0.2000	1.0200	1.0500	1.0710
+order/villain	neutral/chaotic/auth:peacelike	peacelike	0.2000	1.0200	0.9500	0.9690
+order/villain	neutral/chaotic/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+order/villain	evil/lawful/derived	warlike	0.0667	1.0067	1.0500	1.0570
+order/villain	evil/lawful/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+order/villain	evil/lawful/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+order/villain	evil/lawful/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+order/villain	evil/neutral/derived	warlike	0.2667	1.0267	1.0500	1.0780
+order/villain	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+order/villain	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+order/villain	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+order/villain	evil/chaotic/derived	warlike	0.4667	1.0467	1.0500	1.0990
+order/villain	evil/chaotic/auth:warlike	warlike	0.4667	1.0467	1.0500	1.0990
+order/villain	evil/chaotic/auth:peacelike	peacelike	0.4667	1.0467	0.9500	0.9943
+order/villain	evil/chaotic/auth:neutral	neutral	0.4667	1.0467	1.0000	1.0467
+wildland/champion	good/lawful/derived	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/lawful/auth:warlike	warlike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/lawful/auth:peacelike	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/lawful/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/neutral/derived	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/neutral/auth:warlike	warlike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/neutral/auth:peacelike	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/chaotic/derived	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/chaotic/auth:warlike	warlike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/chaotic/auth:peacelike	peacelike	0.2667	1.0267	1.0000	1.0267
+wildland/champion	good/chaotic/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+wildland/champion	neutral/lawful/derived	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/lawful/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/chaotic/derived	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/chaotic/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	neutral/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/lawful/derived	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/lawful/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/neutral/derived	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/chaotic/derived	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/chaotic/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+wildland/champion	evil/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/villain	good/lawful/derived	peacelike	-0.6000	0.9400	0.9500	0.8930
+wildland/villain	good/lawful/auth:warlike	warlike	-0.6000	0.9400	1.0500	0.9870
+wildland/villain	good/lawful/auth:peacelike	peacelike	-0.6000	0.9400	0.9500	0.8930
+wildland/villain	good/lawful/auth:neutral	neutral	-0.6000	0.9400	1.0000	0.9400
+wildland/villain	good/neutral/derived	peacelike	-0.4667	0.9533	0.9500	0.9057
+wildland/villain	good/neutral/auth:warlike	warlike	-0.4667	0.9533	1.0500	1.0010
+wildland/villain	good/neutral/auth:peacelike	peacelike	-0.4667	0.9533	0.9500	0.9057
+wildland/villain	good/neutral/auth:neutral	neutral	-0.4667	0.9533	1.0000	0.9533
+wildland/villain	good/chaotic/derived	peacelike	-0.3333	0.9667	0.9500	0.9183
+wildland/villain	good/chaotic/auth:warlike	warlike	-0.3333	0.9667	1.0500	1.0150
+wildland/villain	good/chaotic/auth:peacelike	peacelike	-0.3333	0.9667	0.9500	0.9183
+wildland/villain	good/chaotic/auth:neutral	neutral	-0.3333	0.9667	1.0000	0.9667
+wildland/villain	neutral/lawful/derived	neutral	-0.1333	0.9867	1.0000	0.9867
+wildland/villain	neutral/lawful/auth:warlike	warlike	-0.1333	0.9867	1.0500	1.0360
+wildland/villain	neutral/lawful/auth:peacelike	peacelike	-0.1333	0.9867	0.9500	0.9373
+wildland/villain	neutral/lawful/auth:neutral	neutral	-0.1333	0.9867	1.0000	0.9867
+wildland/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+wildland/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+wildland/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+wildland/villain	neutral/chaotic/derived	neutral	0.1333	1.0133	1.0000	1.0133
+wildland/villain	neutral/chaotic/auth:warlike	warlike	0.1333	1.0133	1.0500	1.0640
+wildland/villain	neutral/chaotic/auth:peacelike	peacelike	0.1333	1.0133	0.9500	0.9627
+wildland/villain	neutral/chaotic/auth:neutral	neutral	0.1333	1.0133	1.0000	1.0133
+wildland/villain	evil/lawful/derived	warlike	0.3333	1.0333	1.0500	1.0850
+wildland/villain	evil/lawful/auth:warlike	warlike	0.3333	1.0333	1.0500	1.0850
+wildland/villain	evil/lawful/auth:peacelike	peacelike	0.3333	1.0333	0.9500	0.9817
+wildland/villain	evil/lawful/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+wildland/villain	evil/neutral/derived	warlike	0.4667	1.0467	1.0500	1.0990
+wildland/villain	evil/neutral/auth:warlike	warlike	0.4667	1.0467	1.0500	1.0990
+wildland/villain	evil/neutral/auth:peacelike	peacelike	0.4667	1.0467	0.9500	0.9943
+wildland/villain	evil/neutral/auth:neutral	neutral	0.4667	1.0467	1.0000	1.0467
+wildland/villain	evil/chaotic/derived	warlike	0.6000	1.0600	1.0500	1.1130
+wildland/villain	evil/chaotic/auth:warlike	warlike	0.6000	1.0600	1.0500	1.1130
+wildland/villain	evil/chaotic/auth:peacelike	peacelike	0.6000	1.0600	0.9500	1.0070
+wildland/villain	evil/chaotic/auth:neutral	neutral	0.6000	1.0600	1.0000	1.0600
+trade/champion	good/lawful/derived	peacelike	0.2333	1.0233	1.0500	1.0745
+trade/champion	good/lawful/auth:warlike	warlike	0.2333	1.0233	0.9500	0.9722
+trade/champion	good/lawful/auth:peacelike	peacelike	0.2333	1.0233	1.0500	1.0745
+trade/champion	good/lawful/auth:neutral	neutral	0.2333	1.0233	1.0000	1.0233
+trade/champion	good/neutral/derived	peacelike	0.2000	1.0200	1.0500	1.0710
+trade/champion	good/neutral/auth:warlike	warlike	0.2000	1.0200	0.9500	0.9690
+trade/champion	good/neutral/auth:peacelike	peacelike	0.2000	1.0200	1.0500	1.0710
+trade/champion	good/neutral/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+trade/champion	good/chaotic/derived	peacelike	0.1667	1.0167	1.0500	1.0675
+trade/champion	good/chaotic/auth:warlike	warlike	0.1667	1.0167	0.9500	0.9658
+trade/champion	good/chaotic/auth:peacelike	peacelike	0.1667	1.0167	1.0500	1.0675
+trade/champion	good/chaotic/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+trade/champion	neutral/lawful/derived	neutral	0.0333	1.0033	1.0000	1.0033
+trade/champion	neutral/lawful/auth:warlike	warlike	0.0333	1.0033	0.9500	0.9532
+trade/champion	neutral/lawful/auth:peacelike	peacelike	0.0333	1.0033	1.0500	1.0535
+trade/champion	neutral/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+trade/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+trade/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+trade/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+trade/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+trade/champion	neutral/chaotic/derived	neutral	-0.0333	0.9967	1.0000	0.9967
+trade/champion	neutral/chaotic/auth:warlike	warlike	-0.0333	0.9967	0.9500	0.9468
+trade/champion	neutral/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	1.0500	1.0465
+trade/champion	neutral/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+trade/champion	evil/lawful/derived	warlike	0.0333	1.0033	0.9500	0.9532
+trade/champion	evil/lawful/auth:warlike	warlike	0.0333	1.0033	0.9500	0.9532
+trade/champion	evil/lawful/auth:peacelike	peacelike	0.0333	1.0033	1.0500	1.0535
+trade/champion	evil/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+trade/champion	evil/neutral/derived	warlike	0.0000	1.0000	0.9500	0.9500
+trade/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+trade/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+trade/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+trade/champion	evil/chaotic/derived	warlike	-0.0333	0.9967	0.9500	0.9468
+trade/champion	evil/chaotic/auth:warlike	warlike	-0.0333	0.9967	0.9500	0.9468
+trade/champion	evil/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	1.0500	1.0465
+trade/champion	evil/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+trade/villain	good/lawful/derived	peacelike	-0.3333	0.9667	1.0000	0.9667
+trade/villain	good/lawful/auth:warlike	warlike	-0.3333	0.9667	1.0000	0.9667
+trade/villain	good/lawful/auth:peacelike	peacelike	-0.3333	0.9667	1.0000	0.9667
+trade/villain	good/lawful/auth:neutral	neutral	-0.3333	0.9667	1.0000	0.9667
+trade/villain	good/neutral/derived	peacelike	-0.2667	0.9733	1.0000	0.9733
+trade/villain	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0000	0.9733
+trade/villain	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	1.0000	0.9733
+trade/villain	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+trade/villain	good/chaotic/derived	peacelike	-0.2000	0.9800	1.0000	0.9800
+trade/villain	good/chaotic/auth:warlike	warlike	-0.2000	0.9800	1.0000	0.9800
+trade/villain	good/chaotic/auth:peacelike	peacelike	-0.2000	0.9800	1.0000	0.9800
+trade/villain	good/chaotic/auth:neutral	neutral	-0.2000	0.9800	1.0000	0.9800
+trade/villain	neutral/lawful/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+trade/villain	neutral/lawful/auth:warlike	warlike	-0.0667	0.9933	1.0000	0.9933
+trade/villain	neutral/lawful/auth:peacelike	peacelike	-0.0667	0.9933	1.0000	0.9933
+trade/villain	neutral/lawful/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+trade/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+trade/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+trade/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+trade/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+trade/villain	neutral/chaotic/derived	neutral	0.0667	1.0067	1.0000	1.0067
+trade/villain	neutral/chaotic/auth:warlike	warlike	0.0667	1.0067	1.0000	1.0067
+trade/villain	neutral/chaotic/auth:peacelike	peacelike	0.0667	1.0067	1.0000	1.0067
+trade/villain	neutral/chaotic/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+trade/villain	evil/lawful/derived	warlike	0.2000	1.0200	1.0000	1.0200
+trade/villain	evil/lawful/auth:warlike	warlike	0.2000	1.0200	1.0000	1.0200
+trade/villain	evil/lawful/auth:peacelike	peacelike	0.2000	1.0200	1.0000	1.0200
+trade/villain	evil/lawful/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+trade/villain	evil/neutral/derived	warlike	0.2667	1.0267	1.0000	1.0267
+trade/villain	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0000	1.0267
+trade/villain	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	1.0000	1.0267
+trade/villain	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+trade/villain	evil/chaotic/derived	warlike	0.3333	1.0333	1.0000	1.0333
+trade/villain	evil/chaotic/auth:warlike	warlike	0.3333	1.0333	1.0000	1.0333
+trade/villain	evil/chaotic/auth:peacelike	peacelike	0.3333	1.0333	1.0000	1.0333
+trade/villain	evil/chaotic/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+diplomacy/champion	good/lawful/derived	peacelike	0.3333	1.0333	1.0500	1.0850
+diplomacy/champion	good/lawful/auth:warlike	warlike	0.3333	1.0333	0.9500	0.9817
+diplomacy/champion	good/lawful/auth:peacelike	peacelike	0.3333	1.0333	1.0500	1.0850
+diplomacy/champion	good/lawful/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+diplomacy/champion	good/neutral/derived	peacelike	0.2667	1.0267	1.0500	1.0780
+diplomacy/champion	good/neutral/auth:warlike	warlike	0.2667	1.0267	0.9500	0.9753
+diplomacy/champion	good/neutral/auth:peacelike	peacelike	0.2667	1.0267	1.0500	1.0780
+diplomacy/champion	good/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+diplomacy/champion	good/chaotic/derived	peacelike	0.2000	1.0200	1.0500	1.0710
+diplomacy/champion	good/chaotic/auth:warlike	warlike	0.2000	1.0200	0.9500	0.9690
+diplomacy/champion	good/chaotic/auth:peacelike	peacelike	0.2000	1.0200	1.0500	1.0710
+diplomacy/champion	good/chaotic/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+diplomacy/champion	neutral/lawful/derived	neutral	0.0667	1.0067	1.0000	1.0067
+diplomacy/champion	neutral/lawful/auth:warlike	warlike	0.0667	1.0067	0.9500	0.9563
+diplomacy/champion	neutral/lawful/auth:peacelike	peacelike	0.0667	1.0067	1.0500	1.0570
+diplomacy/champion	neutral/lawful/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+diplomacy/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+diplomacy/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+diplomacy/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+diplomacy/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+diplomacy/champion	neutral/chaotic/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+diplomacy/champion	neutral/chaotic/auth:warlike	warlike	-0.0667	0.9933	0.9500	0.9437
+diplomacy/champion	neutral/chaotic/auth:peacelike	peacelike	-0.0667	0.9933	1.0500	1.0430
+diplomacy/champion	neutral/chaotic/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+diplomacy/champion	evil/lawful/derived	warlike	0.0667	1.0067	0.9500	0.9563
+diplomacy/champion	evil/lawful/auth:warlike	warlike	0.0667	1.0067	0.9500	0.9563
+diplomacy/champion	evil/lawful/auth:peacelike	peacelike	0.0667	1.0067	1.0500	1.0570
+diplomacy/champion	evil/lawful/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+diplomacy/champion	evil/neutral/derived	warlike	0.0000	1.0000	0.9500	0.9500
+diplomacy/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+diplomacy/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+diplomacy/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+diplomacy/champion	evil/chaotic/derived	warlike	-0.0667	0.9933	0.9500	0.9437
+diplomacy/champion	evil/chaotic/auth:warlike	warlike	-0.0667	0.9933	0.9500	0.9437
+diplomacy/champion	evil/chaotic/auth:peacelike	peacelike	-0.0667	0.9933	1.0500	1.0430
+diplomacy/champion	evil/chaotic/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+diplomacy/villain	good/lawful/derived	peacelike	-0.3333	0.9667	0.9500	0.9183
+diplomacy/villain	good/lawful/auth:warlike	warlike	-0.3333	0.9667	1.0500	1.0150
+diplomacy/villain	good/lawful/auth:peacelike	peacelike	-0.3333	0.9667	0.9500	0.9183
+diplomacy/villain	good/lawful/auth:neutral	neutral	-0.3333	0.9667	1.0000	0.9667
+diplomacy/villain	good/neutral/derived	peacelike	-0.2667	0.9733	0.9500	0.9247
+diplomacy/villain	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0500	1.0220
+diplomacy/villain	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	0.9500	0.9247
+diplomacy/villain	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+diplomacy/villain	good/chaotic/derived	peacelike	-0.2000	0.9800	0.9500	0.9310
+diplomacy/villain	good/chaotic/auth:warlike	warlike	-0.2000	0.9800	1.0500	1.0290
+diplomacy/villain	good/chaotic/auth:peacelike	peacelike	-0.2000	0.9800	0.9500	0.9310
+diplomacy/villain	good/chaotic/auth:neutral	neutral	-0.2000	0.9800	1.0000	0.9800
+diplomacy/villain	neutral/lawful/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+diplomacy/villain	neutral/lawful/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+diplomacy/villain	neutral/lawful/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+diplomacy/villain	neutral/lawful/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+diplomacy/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+diplomacy/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+diplomacy/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+diplomacy/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+diplomacy/villain	neutral/chaotic/derived	neutral	0.0667	1.0067	1.0000	1.0067
+diplomacy/villain	neutral/chaotic/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+diplomacy/villain	neutral/chaotic/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+diplomacy/villain	neutral/chaotic/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+diplomacy/villain	evil/lawful/derived	warlike	0.2000	1.0200	1.0500	1.0710
+diplomacy/villain	evil/lawful/auth:warlike	warlike	0.2000	1.0200	1.0500	1.0710
+diplomacy/villain	evil/lawful/auth:peacelike	peacelike	0.2000	1.0200	0.9500	0.9690
+diplomacy/villain	evil/lawful/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+diplomacy/villain	evil/neutral/derived	warlike	0.2667	1.0267	1.0500	1.0780
+diplomacy/villain	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+diplomacy/villain	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+diplomacy/villain	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+diplomacy/villain	evil/chaotic/derived	warlike	0.3333	1.0333	1.0500	1.0850
+diplomacy/villain	evil/chaotic/auth:warlike	warlike	0.3333	1.0333	1.0500	1.0850
+diplomacy/villain	evil/chaotic/auth:peacelike	peacelike	0.3333	1.0333	0.9500	0.9817
+diplomacy/villain	evil/chaotic/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+war/champion	good/lawful/derived	peacelike	0.2333	1.0233	0.9500	0.9722
+war/champion	good/lawful/auth:warlike	warlike	0.2333	1.0233	1.0500	1.0745
+war/champion	good/lawful/auth:peacelike	peacelike	0.2333	1.0233	0.9500	0.9722
+war/champion	good/lawful/auth:neutral	neutral	0.2333	1.0233	1.0000	1.0233
+war/champion	good/neutral/derived	peacelike	0.2000	1.0200	0.9500	0.9690
+war/champion	good/neutral/auth:warlike	warlike	0.2000	1.0200	1.0500	1.0710
+war/champion	good/neutral/auth:peacelike	peacelike	0.2000	1.0200	0.9500	0.9690
+war/champion	good/neutral/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+war/champion	good/chaotic/derived	peacelike	0.1667	1.0167	0.9500	0.9658
+war/champion	good/chaotic/auth:warlike	warlike	0.1667	1.0167	1.0500	1.0675
+war/champion	good/chaotic/auth:peacelike	peacelike	0.1667	1.0167	0.9500	0.9658
+war/champion	good/chaotic/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+war/champion	neutral/lawful/derived	neutral	0.0333	1.0033	1.0000	1.0033
+war/champion	neutral/lawful/auth:warlike	warlike	0.0333	1.0033	1.0500	1.0535
+war/champion	neutral/lawful/auth:peacelike	peacelike	0.0333	1.0033	0.9500	0.9532
+war/champion	neutral/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+war/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+war/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+war/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+war/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+war/champion	neutral/chaotic/derived	neutral	-0.0333	0.9967	1.0000	0.9967
+war/champion	neutral/chaotic/auth:warlike	warlike	-0.0333	0.9967	1.0500	1.0465
+war/champion	neutral/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	0.9500	0.9468
+war/champion	neutral/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+war/champion	evil/lawful/derived	warlike	0.0333	1.0033	1.0500	1.0535
+war/champion	evil/lawful/auth:warlike	warlike	0.0333	1.0033	1.0500	1.0535
+war/champion	evil/lawful/auth:peacelike	peacelike	0.0333	1.0033	0.9500	0.9532
+war/champion	evil/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+war/champion	evil/neutral/derived	warlike	0.0000	1.0000	1.0500	1.0500
+war/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+war/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+war/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+war/champion	evil/chaotic/derived	warlike	-0.0333	0.9967	1.0500	1.0465
+war/champion	evil/chaotic/auth:warlike	warlike	-0.0333	0.9967	1.0500	1.0465
+war/champion	evil/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	0.9500	0.9468
+war/champion	evil/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+war/villain	good/lawful/derived	peacelike	-0.4000	0.9600	0.9500	0.9120
+war/villain	good/lawful/auth:warlike	warlike	-0.4000	0.9600	1.0500	1.0080
+war/villain	good/lawful/auth:peacelike	peacelike	-0.4000	0.9600	0.9500	0.9120
+war/villain	good/lawful/auth:neutral	neutral	-0.4000	0.9600	1.0000	0.9600
+war/villain	good/neutral/derived	peacelike	-0.3333	0.9667	0.9500	0.9183
+war/villain	good/neutral/auth:warlike	warlike	-0.3333	0.9667	1.0500	1.0150
+war/villain	good/neutral/auth:peacelike	peacelike	-0.3333	0.9667	0.9500	0.9183
+war/villain	good/neutral/auth:neutral	neutral	-0.3333	0.9667	1.0000	0.9667
+war/villain	good/chaotic/derived	peacelike	-0.2667	0.9733	0.9500	0.9247
+war/villain	good/chaotic/auth:warlike	warlike	-0.2667	0.9733	1.0500	1.0220
+war/villain	good/chaotic/auth:peacelike	peacelike	-0.2667	0.9733	0.9500	0.9247
+war/villain	good/chaotic/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+war/villain	neutral/lawful/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+war/villain	neutral/lawful/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+war/villain	neutral/lawful/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+war/villain	neutral/lawful/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+war/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+war/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+war/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+war/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+war/villain	neutral/chaotic/derived	neutral	0.0667	1.0067	1.0000	1.0067
+war/villain	neutral/chaotic/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+war/villain	neutral/chaotic/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+war/villain	neutral/chaotic/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+war/villain	evil/lawful/derived	warlike	0.2667	1.0267	1.0500	1.0780
+war/villain	evil/lawful/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+war/villain	evil/lawful/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+war/villain	evil/lawful/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+war/villain	evil/neutral/derived	warlike	0.3333	1.0333	1.0500	1.0850
+war/villain	evil/neutral/auth:warlike	warlike	0.3333	1.0333	1.0500	1.0850
+war/villain	evil/neutral/auth:peacelike	peacelike	0.3333	1.0333	0.9500	0.9817
+war/villain	evil/neutral/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+war/villain	evil/chaotic/derived	warlike	0.4000	1.0400	1.0500	1.0920
+war/villain	evil/chaotic/auth:warlike	warlike	0.4000	1.0400	1.0500	1.0920
+war/villain	evil/chaotic/auth:peacelike	peacelike	0.4000	1.0400	0.9500	0.9880
+war/villain	evil/chaotic/auth:neutral	neutral	0.4000	1.0400	1.0000	1.0400
+information/champion	good/lawful/derived	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/lawful/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	good/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	good/neutral/derived	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	good/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	good/chaotic/derived	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/chaotic/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	good/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	good/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/lawful/derived	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/lawful/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	neutral/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	neutral/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/chaotic/derived	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	neutral/chaotic/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	neutral/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	neutral/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	evil/lawful/derived	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/lawful/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/lawful/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	evil/lawful/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	evil/neutral/derived	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/neutral/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/champion	evil/chaotic/derived	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/chaotic/auth:warlike	warlike	0.0000	1.0000	0.9500	0.9500
+information/champion	evil/chaotic/auth:peacelike	peacelike	0.0000	1.0000	1.0500	1.0500
+information/champion	evil/chaotic/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/villain (false reports)	good/lawful/derived	peacelike	-0.4333	0.9567	1.0000	0.9567
+information/villain (false reports)	good/lawful/auth:warlike	warlike	-0.4333	0.9567	1.0000	0.9567
+information/villain (false reports)	good/lawful/auth:peacelike	peacelike	-0.4333	0.9567	1.0000	0.9567
+information/villain (false reports)	good/lawful/auth:neutral	neutral	-0.4333	0.9567	1.0000	0.9567
+information/villain (false reports)	good/neutral/derived	peacelike	-0.2667	0.9733	1.0000	0.9733
+information/villain (false reports)	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0000	0.9733
+information/villain (false reports)	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	1.0000	0.9733
+information/villain (false reports)	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+information/villain (false reports)	good/chaotic/derived	peacelike	-0.1000	0.9900	1.0000	0.9900
+information/villain (false reports)	good/chaotic/auth:warlike	warlike	-0.1000	0.9900	1.0000	0.9900
+information/villain (false reports)	good/chaotic/auth:peacelike	peacelike	-0.1000	0.9900	1.0000	0.9900
+information/villain (false reports)	good/chaotic/auth:neutral	neutral	-0.1000	0.9900	1.0000	0.9900
+information/villain (false reports)	neutral/lawful/derived	neutral	-0.1667	0.9833	1.0000	0.9833
+information/villain (false reports)	neutral/lawful/auth:warlike	warlike	-0.1667	0.9833	1.0000	0.9833
+information/villain (false reports)	neutral/lawful/auth:peacelike	peacelike	-0.1667	0.9833	1.0000	0.9833
+information/villain (false reports)	neutral/lawful/auth:neutral	neutral	-0.1667	0.9833	1.0000	0.9833
+information/villain (false reports)	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+information/villain (false reports)	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0000	1.0000
+information/villain (false reports)	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	1.0000	1.0000
+information/villain (false reports)	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+information/villain (false reports)	neutral/chaotic/derived	neutral	0.1667	1.0167	1.0000	1.0167
+information/villain (false reports)	neutral/chaotic/auth:warlike	warlike	0.1667	1.0167	1.0000	1.0167
+information/villain (false reports)	neutral/chaotic/auth:peacelike	peacelike	0.1667	1.0167	1.0000	1.0167
+information/villain (false reports)	neutral/chaotic/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+information/villain (false reports)	evil/lawful/derived	warlike	0.1000	1.0100	1.0000	1.0100
+information/villain (false reports)	evil/lawful/auth:warlike	warlike	0.1000	1.0100	1.0000	1.0100
+information/villain (false reports)	evil/lawful/auth:peacelike	peacelike	0.1000	1.0100	1.0000	1.0100
+information/villain (false reports)	evil/lawful/auth:neutral	neutral	0.1000	1.0100	1.0000	1.0100
+information/villain (false reports)	evil/neutral/derived	warlike	0.2667	1.0267	1.0000	1.0267
+information/villain (false reports)	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0000	1.0267
+information/villain (false reports)	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	1.0000	1.0267
+information/villain (false reports)	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+information/villain (false reports)	evil/chaotic/derived	warlike	0.4333	1.0433	1.0000	1.0433
+information/villain (false reports)	evil/chaotic/auth:warlike	warlike	0.4333	1.0433	1.0000	1.0433
+information/villain (false reports)	evil/chaotic/auth:peacelike	peacelike	0.4333	1.0433	1.0000	1.0433
+information/villain (false reports)	evil/chaotic/auth:neutral	neutral	0.4333	1.0433	1.0000	1.0433
+duel_won/champion (pursue_nemesis)	good/lawful/derived	peacelike	0.3000	1.0300	0.9500	0.9785
+duel_won/champion (pursue_nemesis)	good/lawful/auth:warlike	warlike	0.3000	1.0300	1.0500	1.0815
+duel_won/champion (pursue_nemesis)	good/lawful/auth:peacelike	peacelike	0.3000	1.0300	0.9500	0.9785
+duel_won/champion (pursue_nemesis)	good/lawful/auth:neutral	neutral	0.3000	1.0300	1.0000	1.0300
+duel_won/champion (pursue_nemesis)	good/neutral/derived	peacelike	0.2667	1.0267	0.9500	0.9753
+duel_won/champion (pursue_nemesis)	good/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+duel_won/champion (pursue_nemesis)	good/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+duel_won/champion (pursue_nemesis)	good/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+duel_won/champion (pursue_nemesis)	good/chaotic/derived	peacelike	0.2333	1.0233	0.9500	0.9722
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:warlike	warlike	0.2333	1.0233	1.0500	1.0745
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:peacelike	peacelike	0.2333	1.0233	0.9500	0.9722
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:neutral	neutral	0.2333	1.0233	1.0000	1.0233
+duel_won/champion (pursue_nemesis)	neutral/lawful/derived	neutral	0.0333	1.0033	1.0000	1.0033
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:warlike	warlike	0.0333	1.0033	1.0500	1.0535
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:peacelike	peacelike	0.0333	1.0033	0.9500	0.9532
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+duel_won/champion (pursue_nemesis)	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+duel_won/champion (pursue_nemesis)	neutral/chaotic/derived	neutral	-0.0333	0.9967	1.0000	0.9967
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:warlike	warlike	-0.0333	0.9967	1.0500	1.0465
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	0.9500	0.9468
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+duel_won/champion (pursue_nemesis)	evil/lawful/derived	warlike	0.0333	1.0033	1.0500	1.0535
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:warlike	warlike	0.0333	1.0033	1.0500	1.0535
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:peacelike	peacelike	0.0333	1.0033	0.9500	0.9532
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:neutral	neutral	0.0333	1.0033	1.0000	1.0033
+duel_won/champion (pursue_nemesis)	evil/neutral/derived	warlike	0.0000	1.0000	1.0500	1.0500
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+duel_won/champion (pursue_nemesis)	evil/chaotic/derived	warlike	-0.0333	0.9967	1.0500	1.0465
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:warlike	warlike	-0.0333	0.9967	1.0500	1.0465
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:peacelike	peacelike	-0.0333	0.9967	0.9500	0.9468
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:neutral	neutral	-0.0333	0.9967	1.0000	0.9967
+duel_won/villain	good/lawful/derived	peacelike	-0.3333	0.9667	0.9500	0.9183
+duel_won/villain	good/lawful/auth:warlike	warlike	-0.3333	0.9667	1.0500	1.0150
+duel_won/villain	good/lawful/auth:peacelike	peacelike	-0.3333	0.9667	0.9500	0.9183
+duel_won/villain	good/lawful/auth:neutral	neutral	-0.3333	0.9667	1.0000	0.9667
+duel_won/villain	good/neutral/derived	peacelike	-0.2667	0.9733	0.9500	0.9247
+duel_won/villain	good/neutral/auth:warlike	warlike	-0.2667	0.9733	1.0500	1.0220
+duel_won/villain	good/neutral/auth:peacelike	peacelike	-0.2667	0.9733	0.9500	0.9247
+duel_won/villain	good/neutral/auth:neutral	neutral	-0.2667	0.9733	1.0000	0.9733
+duel_won/villain	good/chaotic/derived	peacelike	-0.2000	0.9800	0.9500	0.9310
+duel_won/villain	good/chaotic/auth:warlike	warlike	-0.2000	0.9800	1.0500	1.0290
+duel_won/villain	good/chaotic/auth:peacelike	peacelike	-0.2000	0.9800	0.9500	0.9310
+duel_won/villain	good/chaotic/auth:neutral	neutral	-0.2000	0.9800	1.0000	0.9800
+duel_won/villain	neutral/lawful/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+duel_won/villain	neutral/lawful/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+duel_won/villain	neutral/lawful/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+duel_won/villain	neutral/lawful/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+duel_won/villain	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+duel_won/villain	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+duel_won/villain	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+duel_won/villain	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+duel_won/villain	neutral/chaotic/derived	neutral	0.0667	1.0067	1.0000	1.0067
+duel_won/villain	neutral/chaotic/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+duel_won/villain	neutral/chaotic/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+duel_won/villain	neutral/chaotic/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+duel_won/villain	evil/lawful/derived	warlike	0.2000	1.0200	1.0500	1.0710
+duel_won/villain	evil/lawful/auth:warlike	warlike	0.2000	1.0200	1.0500	1.0710
+duel_won/villain	evil/lawful/auth:peacelike	peacelike	0.2000	1.0200	0.9500	0.9690
+duel_won/villain	evil/lawful/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+duel_won/villain	evil/neutral/derived	warlike	0.2667	1.0267	1.0500	1.0780
+duel_won/villain	evil/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+duel_won/villain	evil/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+duel_won/villain	evil/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+duel_won/villain	evil/chaotic/derived	warlike	0.3333	1.0333	1.0500	1.0850
+duel_won/villain	evil/chaotic/auth:warlike	warlike	0.3333	1.0333	1.0500	1.0850
+duel_won/villain	evil/chaotic/auth:peacelike	peacelike	0.3333	1.0333	0.9500	0.9817
+duel_won/villain	evil/chaotic/auth:neutral	neutral	0.3333	1.0333	1.0000	1.0333
+hunt_won/gang-beast	good/lawful/derived	peacelike	0.3667	1.0367	0.9500	0.9848
+hunt_won/gang-beast	good/lawful/auth:warlike	warlike	0.3667	1.0367	1.0500	1.0885
+hunt_won/gang-beast	good/lawful/auth:peacelike	peacelike	0.3667	1.0367	0.9500	0.9848
+hunt_won/gang-beast	good/lawful/auth:neutral	neutral	0.3667	1.0367	1.0000	1.0367
+hunt_won/gang-beast	good/neutral/derived	peacelike	0.2667	1.0267	0.9500	0.9753
+hunt_won/gang-beast	good/neutral/auth:warlike	warlike	0.2667	1.0267	1.0500	1.0780
+hunt_won/gang-beast	good/neutral/auth:peacelike	peacelike	0.2667	1.0267	0.9500	0.9753
+hunt_won/gang-beast	good/neutral/auth:neutral	neutral	0.2667	1.0267	1.0000	1.0267
+hunt_won/gang-beast	good/chaotic/derived	peacelike	0.1667	1.0167	0.9500	0.9658
+hunt_won/gang-beast	good/chaotic/auth:warlike	warlike	0.1667	1.0167	1.0500	1.0675
+hunt_won/gang-beast	good/chaotic/auth:peacelike	peacelike	0.1667	1.0167	0.9500	0.9658
+hunt_won/gang-beast	good/chaotic/auth:neutral	neutral	0.1667	1.0167	1.0000	1.0167
+hunt_won/gang-beast	neutral/lawful/derived	neutral	0.1000	1.0100	1.0000	1.0100
+hunt_won/gang-beast	neutral/lawful/auth:warlike	warlike	0.1000	1.0100	1.0500	1.0605
+hunt_won/gang-beast	neutral/lawful/auth:peacelike	peacelike	0.1000	1.0100	0.9500	0.9595
+hunt_won/gang-beast	neutral/lawful/auth:neutral	neutral	0.1000	1.0100	1.0000	1.0100
+hunt_won/gang-beast	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+hunt_won/gang-beast	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+hunt_won/gang-beast	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+hunt_won/gang-beast	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+hunt_won/gang-beast	neutral/chaotic/derived	neutral	-0.1000	0.9900	1.0000	0.9900
+hunt_won/gang-beast	neutral/chaotic/auth:warlike	warlike	-0.1000	0.9900	1.0500	1.0395
+hunt_won/gang-beast	neutral/chaotic/auth:peacelike	peacelike	-0.1000	0.9900	0.9500	0.9405
+hunt_won/gang-beast	neutral/chaotic/auth:neutral	neutral	-0.1000	0.9900	1.0000	0.9900
+hunt_won/gang-beast	evil/lawful/derived	warlike	0.1000	1.0100	1.0500	1.0605
+hunt_won/gang-beast	evil/lawful/auth:warlike	warlike	0.1000	1.0100	1.0500	1.0605
+hunt_won/gang-beast	evil/lawful/auth:peacelike	peacelike	0.1000	1.0100	0.9500	0.9595
+hunt_won/gang-beast	evil/lawful/auth:neutral	neutral	0.1000	1.0100	1.0000	1.0100
+hunt_won/gang-beast	evil/neutral/derived	warlike	0.0000	1.0000	1.0500	1.0500
+hunt_won/gang-beast	evil/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+hunt_won/gang-beast	evil/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+hunt_won/gang-beast	evil/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+hunt_won/gang-beast	evil/chaotic/derived	warlike	-0.1000	0.9900	1.0500	1.0395
+hunt_won/gang-beast	evil/chaotic/auth:warlike	warlike	-0.1000	0.9900	1.0500	1.0395
+hunt_won/gang-beast	evil/chaotic/auth:peacelike	peacelike	-0.1000	0.9900	0.9500	0.9405
+hunt_won/gang-beast	evil/chaotic/auth:neutral	neutral	-0.1000	0.9900	1.0000	0.9900
+hunt_won/conclave (not its flock)	good/lawful/derived	peacelike	-0.0667	0.9933	0.9500	0.9437
+hunt_won/conclave (not its flock)	good/lawful/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+hunt_won/conclave (not its flock)	good/lawful/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+hunt_won/conclave (not its flock)	good/lawful/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+hunt_won/conclave (not its flock)	good/neutral/derived	peacelike	-0.1333	0.9867	0.9500	0.9373
+hunt_won/conclave (not its flock)	good/neutral/auth:warlike	warlike	-0.1333	0.9867	1.0500	1.0360
+hunt_won/conclave (not its flock)	good/neutral/auth:peacelike	peacelike	-0.1333	0.9867	0.9500	0.9373
+hunt_won/conclave (not its flock)	good/neutral/auth:neutral	neutral	-0.1333	0.9867	1.0000	0.9867
+hunt_won/conclave (not its flock)	good/chaotic/derived	peacelike	-0.2000	0.9800	0.9500	0.9310
+hunt_won/conclave (not its flock)	good/chaotic/auth:warlike	warlike	-0.2000	0.9800	1.0500	1.0290
+hunt_won/conclave (not its flock)	good/chaotic/auth:peacelike	peacelike	-0.2000	0.9800	0.9500	0.9310
+hunt_won/conclave (not its flock)	good/chaotic/auth:neutral	neutral	-0.2000	0.9800	1.0000	0.9800
+hunt_won/conclave (not its flock)	neutral/lawful/derived	neutral	0.0667	1.0067	1.0000	1.0067
+hunt_won/conclave (not its flock)	neutral/lawful/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+hunt_won/conclave (not its flock)	neutral/lawful/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+hunt_won/conclave (not its flock)	neutral/lawful/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+hunt_won/conclave (not its flock)	neutral/neutral/derived	neutral	0.0000	1.0000	1.0000	1.0000
+hunt_won/conclave (not its flock)	neutral/neutral/auth:warlike	warlike	0.0000	1.0000	1.0500	1.0500
+hunt_won/conclave (not its flock)	neutral/neutral/auth:peacelike	peacelike	0.0000	1.0000	0.9500	0.9500
+hunt_won/conclave (not its flock)	neutral/neutral/auth:neutral	neutral	0.0000	1.0000	1.0000	1.0000
+hunt_won/conclave (not its flock)	neutral/chaotic/derived	neutral	-0.0667	0.9933	1.0000	0.9933
+hunt_won/conclave (not its flock)	neutral/chaotic/auth:warlike	warlike	-0.0667	0.9933	1.0500	1.0430
+hunt_won/conclave (not its flock)	neutral/chaotic/auth:peacelike	peacelike	-0.0667	0.9933	0.9500	0.9437
+hunt_won/conclave (not its flock)	neutral/chaotic/auth:neutral	neutral	-0.0667	0.9933	1.0000	0.9933
+hunt_won/conclave (not its flock)	evil/lawful/derived	warlike	0.2000	1.0200	1.0500	1.0710
+hunt_won/conclave (not its flock)	evil/lawful/auth:warlike	warlike	0.2000	1.0200	1.0500	1.0710
+hunt_won/conclave (not its flock)	evil/lawful/auth:peacelike	peacelike	0.2000	1.0200	0.9500	0.9690
+hunt_won/conclave (not its flock)	evil/lawful/auth:neutral	neutral	0.2000	1.0200	1.0000	1.0200
+hunt_won/conclave (not its flock)	evil/neutral/derived	warlike	0.1333	1.0133	1.0500	1.0640
+hunt_won/conclave (not its flock)	evil/neutral/auth:warlike	warlike	0.1333	1.0133	1.0500	1.0640
+hunt_won/conclave (not its flock)	evil/neutral/auth:peacelike	peacelike	0.1333	1.0133	0.9500	0.9627
+hunt_won/conclave (not its flock)	evil/neutral/auth:neutral	neutral	0.1333	1.0133	1.0000	1.0133
+hunt_won/conclave (not its flock)	evil/chaotic/derived	warlike	0.0667	1.0067	1.0500	1.0570
+hunt_won/conclave (not its flock)	evil/chaotic/auth:warlike	warlike	0.0667	1.0067	1.0500	1.0570
+hunt_won/conclave (not its flock)	evil/chaotic/auth:peacelike	peacelike	0.0667	1.0067	0.9500	0.9563
+hunt_won/conclave (not its flock)	evil/chaotic/auth:neutral	neutral	0.0667	1.0067	1.0000	1.0067
+hunt_won/conclave (ITS OWN flock)	good/lawful/derived	peacelike	-0.5333	0.9467	0.9500	0.8993
+hunt_won/conclave (ITS OWN flock)	good/lawful/auth:warlike	warlike	-0.5333	0.9467	1.0500	0.9940
+hunt_won/conclave (ITS OWN flock)	good/lawful/auth:peacelike	peacelike	-0.5333	0.9467	0.9500	0.8993
+hunt_won/conclave (ITS OWN flock)	good/lawful/auth:neutral	neutral	-0.5333	0.9467	1.0000	0.9467
+hunt_won/conclave (ITS OWN flock)	good/neutral/derived	peacelike	-0.5667	0.9433	0.9500	0.8962
+hunt_won/conclave (ITS OWN flock)	good/neutral/auth:warlike	warlike	-0.5667	0.9433	1.0500	0.9905
+hunt_won/conclave (ITS OWN flock)	good/neutral/auth:peacelike	peacelike	-0.5667	0.9433	0.9500	0.8962
+hunt_won/conclave (ITS OWN flock)	good/neutral/auth:neutral	neutral	-0.5667	0.9433	1.0000	0.9433
+hunt_won/conclave (ITS OWN flock)	good/chaotic/derived	peacelike	-0.6000	0.9400	0.9500	0.8930
+hunt_won/conclave (ITS OWN flock)	good/chaotic/auth:warlike	warlike	-0.6000	0.9400	1.0500	0.9870
+hunt_won/conclave (ITS OWN flock)	good/chaotic/auth:peacelike	peacelike	-0.6000	0.9400	0.9500	0.8930
+hunt_won/conclave (ITS OWN flock)	good/chaotic/auth:neutral	neutral	-0.6000	0.9400	1.0000	0.9400
+hunt_won/conclave (ITS OWN flock)	neutral/lawful/derived	neutral	-0.4667	0.9533	1.0000	0.9533
+hunt_won/conclave (ITS OWN flock)	neutral/lawful/auth:warlike	warlike	-0.4667	0.9533	1.0500	1.0010
+hunt_won/conclave (ITS OWN flock)	neutral/lawful/auth:peacelike	peacelike	-0.4667	0.9533	0.9500	0.9057
+hunt_won/conclave (ITS OWN flock)	neutral/lawful/auth:neutral	neutral	-0.4667	0.9533	1.0000	0.9533
+hunt_won/conclave (ITS OWN flock)	neutral/neutral/derived	neutral	-0.5000	0.9500	1.0000	0.9500
+hunt_won/conclave (ITS OWN flock)	neutral/neutral/auth:warlike	warlike	-0.5000	0.9500	1.0500	0.9975
+hunt_won/conclave (ITS OWN flock)	neutral/neutral/auth:peacelike	peacelike	-0.5000	0.9500	0.9500	0.9025
+hunt_won/conclave (ITS OWN flock)	neutral/neutral/auth:neutral	neutral	-0.5000	0.9500	1.0000	0.9500
+hunt_won/conclave (ITS OWN flock)	neutral/chaotic/derived	neutral	-0.5333	0.9467	1.0000	0.9467
+hunt_won/conclave (ITS OWN flock)	neutral/chaotic/auth:warlike	warlike	-0.5333	0.9467	1.0500	0.9940
+hunt_won/conclave (ITS OWN flock)	neutral/chaotic/auth:peacelike	peacelike	-0.5333	0.9467	0.9500	0.8993
+hunt_won/conclave (ITS OWN flock)	neutral/chaotic/auth:neutral	neutral	-0.5333	0.9467	1.0000	0.9467
+hunt_won/conclave (ITS OWN flock)	evil/lawful/derived	warlike	-0.4000	0.9600	1.0500	1.0080
+hunt_won/conclave (ITS OWN flock)	evil/lawful/auth:warlike	warlike	-0.4000	0.9600	1.0500	1.0080
+hunt_won/conclave (ITS OWN flock)	evil/lawful/auth:peacelike	peacelike	-0.4000	0.9600	0.9500	0.9120
+hunt_won/conclave (ITS OWN flock)	evil/lawful/auth:neutral	neutral	-0.4000	0.9600	1.0000	0.9600
+hunt_won/conclave (ITS OWN flock)	evil/neutral/derived	warlike	-0.4333	0.9567	1.0500	1.0045
+hunt_won/conclave (ITS OWN flock)	evil/neutral/auth:warlike	warlike	-0.4333	0.9567	1.0500	1.0045
+hunt_won/conclave (ITS OWN flock)	evil/neutral/auth:peacelike	peacelike	-0.4333	0.9567	0.9500	0.9088
+hunt_won/conclave (ITS OWN flock)	evil/neutral/auth:neutral	neutral	-0.4333	0.9567	1.0000	0.9567
+hunt_won/conclave (ITS OWN flock)	evil/chaotic/derived	warlike	-0.4667	0.9533	1.0500	1.0010
+hunt_won/conclave (ITS OWN flock)	evil/chaotic/auth:warlike	warlike	-0.4667	0.9533	1.0500	1.0010
+hunt_won/conclave (ITS OWN flock)	evil/chaotic/auth:peacelike	peacelike	-0.4667	0.9533	0.9500	0.9057
+hunt_won/conclave (ITS OWN flock)	evil/chaotic/auth:neutral	neutral	-0.4667	0.9533	1.0000	0.9533

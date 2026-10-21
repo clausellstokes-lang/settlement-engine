@@ -1,0 +1,40 @@
+derived temper by (alignment, law):
+   good/lawful/derived -> peacelike
+   good/neutral/derived -> peacelike
+   good/chaotic/derived -> peacelike
+   neutral/lawful/derived -> neutral
+   neutral/neutral/derived -> neutral
+   neutral/chaotic/derived -> neutral
+   evil/lawful/derived -> warlike
+   evil/neutral/derived -> warlike
+   evil/chaotic/derived -> warlike
+
+max |m| over all faces x gods: 0.5541  => max act deviation 0.0831
+
+rows reaching shame (m <= -0.5):
+   health/villain (plaguebearer) | good/lawful/derived | m=-0.554
+   health/villain (plaguebearer) | good/lawful/auth:peacelike | m=-0.554
+   health/villain (plaguebearer) | good/lawful/auth:neutral | m=-0.526
+   wildland/villain | good/lawful/derived | m=-0.543
+   wildland/villain | good/lawful/auth:peacelike | m=-0.543
+
+selected:
+   war/champion	evil/chaotic/derived	warlike	m=0.0015	act=1.0002
+   war/champion	good/lawful/derived	peacelike	m=0.1564	act=1.0235
+   war/champion	neutral/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+   war/champion	good/neutral/auth:warlike	warlike	m=0.1857	act=1.0279
+   war/villain	evil/chaotic/derived	warlike	m=0.4131	act=1.0620
+   duel_won/champion (pursue_nemesis)	good/neutral/derived	peacelike	m=0.1827	act=1.0274
+   duel_won/champion (pursue_nemesis)	good/lawful/derived	peacelike	m=0.2091	act=1.0314
+   health/champion	good/neutral/derived	peacelike	m=0.4488	act=1.0673
+   health/champion	good/lawful/derived	peacelike	m=0.4488	act=1.0673
+   health/villain (plaguebearer)	good/lawful/derived	peacelike	m=-0.5541	act=0.9169
+   faith/champion (saint preaching)	evil/chaotic/derived	warlike	m=-0.0541	act=0.9919
+   faith/champion (saint preaching)	evil/lawful/derived	warlike	m=-0.0015	act=0.9998
+   faith/villain (heretic)	good/lawful/derived	peacelike	m=-0.3034	act=0.9545
+   information/villain (false reports)	good/lawful/derived	peacelike	m=-0.3421	act=0.9487
+   information/villain (false reports)	neutral/lawful/derived	neutral	m=-0.1316	act=0.9803
+   hunt_won/conclave	good/lawful/derived	peacelike	m=-0.1082	act=0.9838
+   hunt_won/conclave	neutral/lawful/auth:warlike	warlike	m=0.1082	act=1.0162
+   wildland/champion	neutral/neutral/auth:warlike	warlike	m=0.0000	act=1.0000
+   order/champion	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958

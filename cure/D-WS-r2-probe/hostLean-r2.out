@@ -1,0 +1,8 @@
+strength vectors 972 (x 2 method reads)
+host factors differ between a bloody and a bloodless court with the SAME strengths: 0/972
+strengths' unique top 527 · tie at the top (host x1) 445 · the method broke a tie 329 · below the floor (reported, x1) 8
+way distribution (bloody court):    {"way_harassment":48,"way_coalition":122,"way_raiding":380,"way_shock":175,"way_logistics":5,"way_fortress":68,"way_attrition":174}
+way distribution (bloodless court): {"way_harassment":125,"way_coalition":172,"way_shock":175,"way_logistics":118,"way_raiding":140,"way_fortress":56,"way_attrition":186}
+verifier's strengths {"materiel":"above","institutions":"above","manpower":"level","horses":"horsed","ways":"none","chain":"alone","harbour":"landbound"} · method bloody -> way_shock (unique true) · C1 deploy x1.1200
+verifier's strengths {"materiel":"above","institutions":"above","manpower":"level","horses":"horsed","ways":"none","chain":"alone","harbour":"landbound"} · method bloodless -> way_shock (unique true) · C1 deploy x1.1200
+turned to way_fortress by field_lost: 0.94,1.06,1.00,0.94,0.94 · by commander: 1,1,1,1,1 · way_logistics by campaign_plan: 1,1,1,1,1

@@ -1,0 +1,3 @@
+V-FS-r2 probes (READ-ONLY against master 81f1cd963; nothing in the worktree edited; no git; no test suite).
+- *-rerun.out: the lane's four probes (cure/D-FS-r2-probe/{completion,posture-live,roll-r2,homefront-bound}.mjs) re-run; all four byte-identical to the lane's .out files.
+- riot-before-completion.mjs/.out: weeks until a raised hand's commons grievance reaches master's riot threshold (RUNG_RIOT 0.75) under the weekly coercive price at the RAISED bands (FS §4.2, A1.16), FS's DRAFT exaction row (0.30 / 0.15) on master's commonsGrievance01; dips ignored (they only shorten it). Receipt for FS-V3.

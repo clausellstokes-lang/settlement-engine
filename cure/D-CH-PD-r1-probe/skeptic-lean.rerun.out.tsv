@@ -1,0 +1,720 @@
+faith/champion (saint preaching)	good/lawful/derived	peacelike	m=0.2646	act=1.0397
+faith/champion (saint preaching)	good/lawful/auth:warlike	warlike	m=0.2091	act=1.0314
+faith/champion (saint preaching)	good/lawful/auth:peacelike	peacelike	m=0.2646	act=1.0397
+faith/champion (saint preaching)	good/lawful/auth:neutral	neutral	m=0.2368	act=1.0355
+faith/champion (saint preaching)	good/neutral/derived	peacelike	m=0.2383	act=1.0357
+faith/champion (saint preaching)	good/neutral/auth:warlike	warlike	m=0.1827	act=1.0274
+faith/champion (saint preaching)	good/neutral/auth:peacelike	peacelike	m=0.2383	act=1.0357
+faith/champion (saint preaching)	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+faith/champion (saint preaching)	good/chaotic/derived	peacelike	m=0.2120	act=1.0318
+faith/champion (saint preaching)	good/chaotic/auth:warlike	warlike	m=0.1564	act=1.0235
+faith/champion (saint preaching)	good/chaotic/auth:peacelike	peacelike	m=0.2120	act=1.0318
+faith/champion (saint preaching)	good/chaotic/auth:neutral	neutral	m=0.1842	act=1.0276
+faith/champion (saint preaching)	neutral/lawful/derived	neutral	m=0.0263	act=1.0039
+faith/champion (saint preaching)	neutral/lawful/auth:warlike	warlike	m=-0.0015	act=0.9998
+faith/champion (saint preaching)	neutral/lawful/auth:peacelike	peacelike	m=0.0541	act=1.0081
+faith/champion (saint preaching)	neutral/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+faith/champion (saint preaching)	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+faith/champion (saint preaching)	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+faith/champion (saint preaching)	neutral/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+faith/champion (saint preaching)	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+faith/champion (saint preaching)	neutral/chaotic/derived	neutral	m=-0.0263	act=0.9961
+faith/champion (saint preaching)	neutral/chaotic/auth:warlike	warlike	m=-0.0541	act=0.9919
+faith/champion (saint preaching)	neutral/chaotic/auth:peacelike	peacelike	m=0.0015	act=1.0002
+faith/champion (saint preaching)	neutral/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+faith/champion (saint preaching)	evil/lawful/derived	warlike	m=-0.0015	act=0.9998
+faith/champion (saint preaching)	evil/lawful/auth:warlike	warlike	m=-0.0015	act=0.9998
+faith/champion (saint preaching)	evil/lawful/auth:peacelike	peacelike	m=0.0541	act=1.0081
+faith/champion (saint preaching)	evil/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+faith/champion (saint preaching)	evil/neutral/derived	warlike	m=-0.0278	act=0.9958
+faith/champion (saint preaching)	evil/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+faith/champion (saint preaching)	evil/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+faith/champion (saint preaching)	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+faith/champion (saint preaching)	evil/chaotic/derived	warlike	m=-0.0541	act=0.9919
+faith/champion (saint preaching)	evil/chaotic/auth:warlike	warlike	m=-0.0541	act=0.9919
+faith/champion (saint preaching)	evil/chaotic/auth:peacelike	peacelike	m=0.0015	act=1.0002
+faith/champion (saint preaching)	evil/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+faith/villain (heretic)	good/lawful/derived	peacelike	m=-0.3034	act=0.9545
+faith/villain (heretic)	good/lawful/auth:warlike	warlike	m=-0.2756	act=0.9587
+faith/villain (heretic)	good/lawful/auth:peacelike	peacelike	m=-0.3034	act=0.9545
+faith/villain (heretic)	good/lawful/auth:neutral	neutral	m=-0.2895	act=0.9566
+faith/villain (heretic)	good/neutral/derived	peacelike	m=-0.2244	act=0.9663
+faith/villain (heretic)	good/neutral/auth:warlike	warlike	m=-0.1966	act=0.9705
+faith/villain (heretic)	good/neutral/auth:peacelike	peacelike	m=-0.2244	act=0.9663
+faith/villain (heretic)	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+faith/villain (heretic)	good/chaotic/derived	peacelike	m=-0.1455	act=0.9782
+faith/villain (heretic)	good/chaotic/auth:warlike	warlike	m=-0.1177	act=0.9823
+faith/villain (heretic)	good/chaotic/auth:peacelike	peacelike	m=-0.1455	act=0.9782
+faith/villain (heretic)	good/chaotic/auth:neutral	neutral	m=-0.1316	act=0.9803
+faith/villain (heretic)	neutral/lawful/derived	neutral	m=-0.0789	act=0.9882
+faith/villain (heretic)	neutral/lawful/auth:warlike	warlike	m=-0.0651	act=0.9902
+faith/villain (heretic)	neutral/lawful/auth:peacelike	peacelike	m=-0.0928	act=0.9861
+faith/villain (heretic)	neutral/lawful/auth:neutral	neutral	m=-0.0789	act=0.9882
+faith/villain (heretic)	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+faith/villain (heretic)	neutral/neutral/auth:warlike	warlike	m=0.0139	act=1.0021
+faith/villain (heretic)	neutral/neutral/auth:peacelike	peacelike	m=-0.0139	act=0.9979
+faith/villain (heretic)	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+faith/villain (heretic)	neutral/chaotic/derived	neutral	m=0.0789	act=1.0118
+faith/villain (heretic)	neutral/chaotic/auth:warlike	warlike	m=0.0928	act=1.0139
+faith/villain (heretic)	neutral/chaotic/auth:peacelike	peacelike	m=0.0651	act=1.0098
+faith/villain (heretic)	neutral/chaotic/auth:neutral	neutral	m=0.0789	act=1.0118
+faith/villain (heretic)	evil/lawful/derived	warlike	m=0.1455	act=1.0218
+faith/villain (heretic)	evil/lawful/auth:warlike	warlike	m=0.1455	act=1.0218
+faith/villain (heretic)	evil/lawful/auth:peacelike	peacelike	m=0.1177	act=1.0177
+faith/villain (heretic)	evil/lawful/auth:neutral	neutral	m=0.1316	act=1.0197
+faith/villain (heretic)	evil/neutral/derived	warlike	m=0.2244	act=1.0337
+faith/villain (heretic)	evil/neutral/auth:warlike	warlike	m=0.2244	act=1.0337
+faith/villain (heretic)	evil/neutral/auth:peacelike	peacelike	m=0.1966	act=1.0295
+faith/villain (heretic)	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+faith/villain (heretic)	evil/chaotic/derived	warlike	m=0.3034	act=1.0455
+faith/villain (heretic)	evil/chaotic/auth:warlike	warlike	m=0.3034	act=1.0455
+faith/villain (heretic)	evil/chaotic/auth:peacelike	peacelike	m=0.2756	act=1.0413
+faith/villain (heretic)	evil/chaotic/auth:neutral	neutral	m=0.2895	act=1.0434
+health/champion	good/lawful/derived	peacelike	m=0.4488	act=1.0673
+health/champion	good/lawful/auth:warlike	warlike	m=0.3933	act=1.0590
+health/champion	good/lawful/auth:peacelike	peacelike	m=0.4488	act=1.0673
+health/champion	good/lawful/auth:neutral	neutral	m=0.4211	act=1.0632
+health/champion	good/neutral/derived	peacelike	m=0.4488	act=1.0673
+health/champion	good/neutral/auth:warlike	warlike	m=0.3933	act=1.0590
+health/champion	good/neutral/auth:peacelike	peacelike	m=0.4488	act=1.0673
+health/champion	good/neutral/auth:neutral	neutral	m=0.4211	act=1.0632
+health/champion	good/chaotic/derived	peacelike	m=0.4488	act=1.0673
+health/champion	good/chaotic/auth:warlike	warlike	m=0.3933	act=1.0590
+health/champion	good/chaotic/auth:peacelike	peacelike	m=0.4488	act=1.0673
+health/champion	good/chaotic/auth:neutral	neutral	m=0.4211	act=1.0632
+health/champion	neutral/lawful/derived	neutral	m=0.0000	act=1.0000
+health/champion	neutral/lawful/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	neutral/lawful/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	neutral/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+health/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+health/champion	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+health/champion	neutral/chaotic/derived	neutral	m=0.0000	act=1.0000
+health/champion	neutral/chaotic/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	neutral/chaotic/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	neutral/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+health/champion	evil/lawful/derived	warlike	m=-0.0278	act=0.9958
+health/champion	evil/lawful/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	evil/lawful/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	evil/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+health/champion	evil/neutral/derived	warlike	m=-0.0278	act=0.9958
+health/champion	evil/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	evil/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+health/champion	evil/chaotic/derived	warlike	m=-0.0278	act=0.9958
+health/champion	evil/chaotic/auth:warlike	warlike	m=-0.0278	act=0.9958
+health/champion	evil/chaotic/auth:peacelike	peacelike	m=0.0278	act=1.0042
+health/champion	evil/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+health/villain (plaguebearer)	good/lawful/derived	peacelike	m=-0.5541	act=0.9169
+health/villain (plaguebearer)	good/lawful/auth:warlike	warlike	m=-0.4985	act=0.9252
+health/villain (plaguebearer)	good/lawful/auth:peacelike	peacelike	m=-0.5541	act=0.9169
+health/villain (plaguebearer)	good/lawful/auth:neutral	neutral	m=-0.5263	act=0.9211
+health/villain (plaguebearer)	good/neutral/derived	peacelike	m=-0.4488	act=0.9327
+health/villain (plaguebearer)	good/neutral/auth:warlike	warlike	m=-0.3933	act=0.9410
+health/villain (plaguebearer)	good/neutral/auth:peacelike	peacelike	m=-0.4488	act=0.9327
+health/villain (plaguebearer)	good/neutral/auth:neutral	neutral	m=-0.4211	act=0.9368
+health/villain (plaguebearer)	good/chaotic/derived	peacelike	m=-0.3436	act=0.9485
+health/villain (plaguebearer)	good/chaotic/auth:warlike	warlike	m=-0.2880	act=0.9568
+health/villain (plaguebearer)	good/chaotic/auth:peacelike	peacelike	m=-0.3436	act=0.9485
+health/villain (plaguebearer)	good/chaotic/auth:neutral	neutral	m=-0.3158	act=0.9526
+health/villain (plaguebearer)	neutral/lawful/derived	neutral	m=-0.1053	act=0.9842
+health/villain (plaguebearer)	neutral/lawful/auth:warlike	warlike	m=-0.0775	act=0.9884
+health/villain (plaguebearer)	neutral/lawful/auth:peacelike	peacelike	m=-0.1331	act=0.9800
+health/villain (plaguebearer)	neutral/lawful/auth:neutral	neutral	m=-0.1053	act=0.9842
+health/villain (plaguebearer)	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+health/villain (plaguebearer)	neutral/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+health/villain (plaguebearer)	neutral/neutral/auth:peacelike	peacelike	m=-0.0278	act=0.9958
+health/villain (plaguebearer)	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+health/villain (plaguebearer)	neutral/chaotic/derived	neutral	m=0.1053	act=1.0158
+health/villain (plaguebearer)	neutral/chaotic/auth:warlike	warlike	m=0.1331	act=1.0200
+health/villain (plaguebearer)	neutral/chaotic/auth:peacelike	peacelike	m=0.0775	act=1.0116
+health/villain (plaguebearer)	neutral/chaotic/auth:neutral	neutral	m=0.1053	act=1.0158
+health/villain (plaguebearer)	evil/lawful/derived	warlike	m=0.3436	act=1.0515
+health/villain (plaguebearer)	evil/lawful/auth:warlike	warlike	m=0.3436	act=1.0515
+health/villain (plaguebearer)	evil/lawful/auth:peacelike	peacelike	m=0.2880	act=1.0432
+health/villain (plaguebearer)	evil/lawful/auth:neutral	neutral	m=0.3158	act=1.0474
+health/villain (plaguebearer)	evil/neutral/derived	warlike	m=0.4488	act=1.0673
+health/villain (plaguebearer)	evil/neutral/auth:warlike	warlike	m=0.4488	act=1.0673
+health/villain (plaguebearer)	evil/neutral/auth:peacelike	peacelike	m=0.3933	act=1.0590
+health/villain (plaguebearer)	evil/neutral/auth:neutral	neutral	m=0.4211	act=1.0632
+health/villain (plaguebearer)	evil/chaotic/derived	warlike	m=0.5541	act=1.0831
+health/villain (plaguebearer)	evil/chaotic/auth:warlike	warlike	m=0.5541	act=1.0831
+health/villain (plaguebearer)	evil/chaotic/auth:peacelike	peacelike	m=0.4985	act=1.0748
+health/villain (plaguebearer)	evil/chaotic/auth:neutral	neutral	m=0.5263	act=1.0789
+order/champion	good/lawful/derived	peacelike	m=0.3699	act=1.0555
+order/champion	good/lawful/auth:warlike	warlike	m=0.3143	act=1.0471
+order/champion	good/lawful/auth:peacelike	peacelike	m=0.3699	act=1.0555
+order/champion	good/lawful/auth:neutral	neutral	m=0.3421	act=1.0513
+order/champion	good/neutral/derived	peacelike	m=0.2383	act=1.0357
+order/champion	good/neutral/auth:warlike	warlike	m=0.1827	act=1.0274
+order/champion	good/neutral/auth:peacelike	peacelike	m=0.2383	act=1.0357
+order/champion	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+order/champion	good/chaotic/derived	peacelike	m=0.1067	act=1.0160
+order/champion	good/chaotic/auth:warlike	warlike	m=0.0512	act=1.0077
+order/champion	good/chaotic/auth:peacelike	peacelike	m=0.1067	act=1.0160
+order/champion	good/chaotic/auth:neutral	neutral	m=0.0789	act=1.0118
+order/champion	neutral/lawful/derived	neutral	m=0.1316	act=1.0197
+order/champion	neutral/lawful/auth:warlike	warlike	m=0.1038	act=1.0156
+order/champion	neutral/lawful/auth:peacelike	peacelike	m=0.1594	act=1.0239
+order/champion	neutral/lawful/auth:neutral	neutral	m=0.1316	act=1.0197
+order/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+order/champion	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+order/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+order/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+order/champion	neutral/chaotic/derived	neutral	m=-0.1316	act=0.9803
+order/champion	neutral/chaotic/auth:warlike	warlike	m=-0.1594	act=0.9761
+order/champion	neutral/chaotic/auth:peacelike	peacelike	m=-0.1038	act=0.9844
+order/champion	neutral/chaotic/auth:neutral	neutral	m=-0.1316	act=0.9803
+order/champion	evil/lawful/derived	warlike	m=0.1038	act=1.0156
+order/champion	evil/lawful/auth:warlike	warlike	m=0.1038	act=1.0156
+order/champion	evil/lawful/auth:peacelike	peacelike	m=0.1594	act=1.0239
+order/champion	evil/lawful/auth:neutral	neutral	m=0.1316	act=1.0197
+order/champion	evil/neutral/derived	warlike	m=-0.0278	act=0.9958
+order/champion	evil/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+order/champion	evil/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+order/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+order/champion	evil/chaotic/derived	warlike	m=-0.1594	act=0.9761
+order/champion	evil/chaotic/auth:warlike	warlike	m=-0.1594	act=0.9761
+order/champion	evil/chaotic/auth:peacelike	peacelike	m=-0.1038	act=0.9844
+order/champion	evil/chaotic/auth:neutral	neutral	m=-0.1316	act=0.9803
+order/villain	good/lawful/derived	peacelike	m=-0.4240	act=0.9364
+order/villain	good/lawful/auth:warlike	warlike	m=-0.3128	act=0.9531
+order/villain	good/lawful/auth:peacelike	peacelike	m=-0.4240	act=0.9364
+order/villain	good/lawful/auth:neutral	neutral	m=-0.3684	act=0.9447
+order/villain	good/neutral/derived	peacelike	m=-0.2661	act=0.9601
+order/villain	good/neutral/auth:warlike	warlike	m=-0.1549	act=0.9768
+order/villain	good/neutral/auth:peacelike	peacelike	m=-0.2661	act=0.9601
+order/villain	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+order/villain	good/chaotic/derived	peacelike	m=-0.1082	act=0.9838
+order/villain	good/chaotic/auth:warlike	warlike	m=0.0029	act=1.0004
+order/villain	good/chaotic/auth:peacelike	peacelike	m=-0.1082	act=0.9838
+order/villain	good/chaotic/auth:neutral	neutral	m=-0.0526	act=0.9921
+order/villain	neutral/lawful/derived	neutral	m=-0.1579	act=0.9763
+order/villain	neutral/lawful/auth:warlike	warlike	m=-0.1023	act=0.9847
+order/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.2135	act=0.9680
+order/villain	neutral/lawful/auth:neutral	neutral	m=-0.1579	act=0.9763
+order/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+order/villain	neutral/neutral/auth:warlike	warlike	m=0.0556	act=1.0083
+order/villain	neutral/neutral/auth:peacelike	peacelike	m=-0.0556	act=0.9917
+order/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+order/villain	neutral/chaotic/derived	neutral	m=0.1579	act=1.0237
+order/villain	neutral/chaotic/auth:warlike	warlike	m=0.2135	act=1.0320
+order/villain	neutral/chaotic/auth:peacelike	peacelike	m=0.1023	act=1.0153
+order/villain	neutral/chaotic/auth:neutral	neutral	m=0.1579	act=1.0237
+order/villain	evil/lawful/derived	warlike	m=0.1082	act=1.0162
+order/villain	evil/lawful/auth:warlike	warlike	m=0.1082	act=1.0162
+order/villain	evil/lawful/auth:peacelike	peacelike	m=-0.0029	act=0.9996
+order/villain	evil/lawful/auth:neutral	neutral	m=0.0526	act=1.0079
+order/villain	evil/neutral/derived	warlike	m=0.2661	act=1.0399
+order/villain	evil/neutral/auth:warlike	warlike	m=0.2661	act=1.0399
+order/villain	evil/neutral/auth:peacelike	peacelike	m=0.1549	act=1.0232
+order/villain	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+order/villain	evil/chaotic/derived	warlike	m=0.4240	act=1.0636
+order/villain	evil/chaotic/auth:warlike	warlike	m=0.4240	act=1.0636
+order/villain	evil/chaotic/auth:peacelike	peacelike	m=0.3128	act=1.0469
+order/villain	evil/chaotic/auth:neutral	neutral	m=0.3684	act=1.0553
+wildland/champion	good/lawful/derived	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/lawful/auth:warlike	warlike	m=0.2105	act=1.0316
+wildland/champion	good/lawful/auth:peacelike	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/lawful/auth:neutral	neutral	m=0.2105	act=1.0316
+wildland/champion	good/neutral/derived	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/neutral/auth:warlike	warlike	m=0.2105	act=1.0316
+wildland/champion	good/neutral/auth:peacelike	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+wildland/champion	good/chaotic/derived	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/chaotic/auth:warlike	warlike	m=0.2105	act=1.0316
+wildland/champion	good/chaotic/auth:peacelike	peacelike	m=0.2105	act=1.0316
+wildland/champion	good/chaotic/auth:neutral	neutral	m=0.2105	act=1.0316
+wildland/champion	neutral/lawful/derived	neutral	m=0.0000	act=1.0000
+wildland/champion	neutral/lawful/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	neutral/lawful/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	neutral/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+wildland/champion	neutral/neutral/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/champion	neutral/chaotic/derived	neutral	m=0.0000	act=1.0000
+wildland/champion	neutral/chaotic/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	neutral/chaotic/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	neutral/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/champion	evil/lawful/derived	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/lawful/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/lawful/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	evil/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/champion	evil/neutral/derived	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/neutral/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/neutral/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/champion	evil/chaotic/derived	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/chaotic/auth:warlike	warlike	m=0.0000	act=1.0000
+wildland/champion	evil/chaotic/auth:peacelike	peacelike	m=0.0000	act=1.0000
+wildland/champion	evil/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/villain	good/lawful/derived	peacelike	m=-0.5432	act=0.9185
+wildland/villain	good/lawful/auth:warlike	warlike	m=-0.4042	act=0.9394
+wildland/villain	good/lawful/auth:peacelike	peacelike	m=-0.5432	act=0.9185
+wildland/villain	good/lawful/auth:neutral	neutral	m=-0.4737	act=0.9289
+wildland/villain	good/neutral/derived	peacelike	m=-0.4379	act=0.9343
+wildland/villain	good/neutral/auth:warlike	warlike	m=-0.2989	act=0.9552
+wildland/villain	good/neutral/auth:peacelike	peacelike	m=-0.4379	act=0.9343
+wildland/villain	good/neutral/auth:neutral	neutral	m=-0.3684	act=0.9447
+wildland/villain	good/chaotic/derived	peacelike	m=-0.3326	act=0.9501
+wildland/villain	good/chaotic/auth:warlike	warlike	m=-0.1937	act=0.9709
+wildland/villain	good/chaotic/auth:peacelike	peacelike	m=-0.3326	act=0.9501
+wildland/villain	good/chaotic/auth:neutral	neutral	m=-0.2632	act=0.9605
+wildland/villain	neutral/lawful/derived	neutral	m=-0.1053	act=0.9842
+wildland/villain	neutral/lawful/auth:warlike	warlike	m=-0.0358	act=0.9946
+wildland/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.1747	act=0.9738
+wildland/villain	neutral/lawful/auth:neutral	neutral	m=-0.1053	act=0.9842
+wildland/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+wildland/villain	neutral/neutral/auth:warlike	warlike	m=0.0695	act=1.0104
+wildland/villain	neutral/neutral/auth:peacelike	peacelike	m=-0.0695	act=0.9896
+wildland/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+wildland/villain	neutral/chaotic/derived	neutral	m=0.1053	act=1.0158
+wildland/villain	neutral/chaotic/auth:warlike	warlike	m=0.1747	act=1.0262
+wildland/villain	neutral/chaotic/auth:peacelike	peacelike	m=0.0358	act=1.0054
+wildland/villain	neutral/chaotic/auth:neutral	neutral	m=0.1053	act=1.0158
+wildland/villain	evil/lawful/derived	warlike	m=0.3326	act=1.0499
+wildland/villain	evil/lawful/auth:warlike	warlike	m=0.3326	act=1.0499
+wildland/villain	evil/lawful/auth:peacelike	peacelike	m=0.1937	act=1.0291
+wildland/villain	evil/lawful/auth:neutral	neutral	m=0.2632	act=1.0395
+wildland/villain	evil/neutral/derived	warlike	m=0.4379	act=1.0657
+wildland/villain	evil/neutral/auth:warlike	warlike	m=0.4379	act=1.0657
+wildland/villain	evil/neutral/auth:peacelike	peacelike	m=0.2989	act=1.0448
+wildland/villain	evil/neutral/auth:neutral	neutral	m=0.3684	act=1.0553
+wildland/villain	evil/chaotic/derived	warlike	m=0.5432	act=1.0815
+wildland/villain	evil/chaotic/auth:warlike	warlike	m=0.5432	act=1.0815
+wildland/villain	evil/chaotic/auth:peacelike	peacelike	m=0.4042	act=1.0606
+wildland/villain	evil/chaotic/auth:neutral	neutral	m=0.4737	act=1.0711
+trade/champion	good/lawful/derived	peacelike	m=0.2120	act=1.0318
+trade/champion	good/lawful/auth:warlike	warlike	m=0.1564	act=1.0235
+trade/champion	good/lawful/auth:peacelike	peacelike	m=0.2120	act=1.0318
+trade/champion	good/lawful/auth:neutral	neutral	m=0.1842	act=1.0276
+trade/champion	good/neutral/derived	peacelike	m=0.1857	act=1.0279
+trade/champion	good/neutral/auth:warlike	warlike	m=0.1301	act=1.0195
+trade/champion	good/neutral/auth:peacelike	peacelike	m=0.1857	act=1.0279
+trade/champion	good/neutral/auth:neutral	neutral	m=0.1579	act=1.0237
+trade/champion	good/chaotic/derived	peacelike	m=0.1594	act=1.0239
+trade/champion	good/chaotic/auth:warlike	warlike	m=0.1038	act=1.0156
+trade/champion	good/chaotic/auth:peacelike	peacelike	m=0.1594	act=1.0239
+trade/champion	good/chaotic/auth:neutral	neutral	m=0.1316	act=1.0197
+trade/champion	neutral/lawful/derived	neutral	m=0.0263	act=1.0039
+trade/champion	neutral/lawful/auth:warlike	warlike	m=-0.0015	act=0.9998
+trade/champion	neutral/lawful/auth:peacelike	peacelike	m=0.0541	act=1.0081
+trade/champion	neutral/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+trade/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+trade/champion	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+trade/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+trade/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+trade/champion	neutral/chaotic/derived	neutral	m=-0.0263	act=0.9961
+trade/champion	neutral/chaotic/auth:warlike	warlike	m=-0.0541	act=0.9919
+trade/champion	neutral/chaotic/auth:peacelike	peacelike	m=0.0015	act=1.0002
+trade/champion	neutral/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+trade/champion	evil/lawful/derived	warlike	m=-0.0015	act=0.9998
+trade/champion	evil/lawful/auth:warlike	warlike	m=-0.0015	act=0.9998
+trade/champion	evil/lawful/auth:peacelike	peacelike	m=0.0541	act=1.0081
+trade/champion	evil/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+trade/champion	evil/neutral/derived	warlike	m=-0.0278	act=0.9958
+trade/champion	evil/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+trade/champion	evil/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+trade/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+trade/champion	evil/chaotic/derived	warlike	m=-0.0541	act=0.9919
+trade/champion	evil/chaotic/auth:warlike	warlike	m=-0.0541	act=0.9919
+trade/champion	evil/chaotic/auth:peacelike	peacelike	m=0.0015	act=1.0002
+trade/champion	evil/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+trade/villain	good/lawful/derived	peacelike	m=-0.2632	act=0.9605
+trade/villain	good/lawful/auth:warlike	warlike	m=-0.2632	act=0.9605
+trade/villain	good/lawful/auth:peacelike	peacelike	m=-0.2632	act=0.9605
+trade/villain	good/lawful/auth:neutral	neutral	m=-0.2632	act=0.9605
+trade/villain	good/neutral/derived	peacelike	m=-0.2105	act=0.9684
+trade/villain	good/neutral/auth:warlike	warlike	m=-0.2105	act=0.9684
+trade/villain	good/neutral/auth:peacelike	peacelike	m=-0.2105	act=0.9684
+trade/villain	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+trade/villain	good/chaotic/derived	peacelike	m=-0.1579	act=0.9763
+trade/villain	good/chaotic/auth:warlike	warlike	m=-0.1579	act=0.9763
+trade/villain	good/chaotic/auth:peacelike	peacelike	m=-0.1579	act=0.9763
+trade/villain	good/chaotic/auth:neutral	neutral	m=-0.1579	act=0.9763
+trade/villain	neutral/lawful/derived	neutral	m=-0.0526	act=0.9921
+trade/villain	neutral/lawful/auth:warlike	warlike	m=-0.0526	act=0.9921
+trade/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.0526	act=0.9921
+trade/villain	neutral/lawful/auth:neutral	neutral	m=-0.0526	act=0.9921
+trade/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+trade/villain	neutral/neutral/auth:warlike	warlike	m=0.0000	act=1.0000
+trade/villain	neutral/neutral/auth:peacelike	peacelike	m=0.0000	act=1.0000
+trade/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+trade/villain	neutral/chaotic/derived	neutral	m=0.0526	act=1.0079
+trade/villain	neutral/chaotic/auth:warlike	warlike	m=0.0526	act=1.0079
+trade/villain	neutral/chaotic/auth:peacelike	peacelike	m=0.0526	act=1.0079
+trade/villain	neutral/chaotic/auth:neutral	neutral	m=0.0526	act=1.0079
+trade/villain	evil/lawful/derived	warlike	m=0.1579	act=1.0237
+trade/villain	evil/lawful/auth:warlike	warlike	m=0.1579	act=1.0237
+trade/villain	evil/lawful/auth:peacelike	peacelike	m=0.1579	act=1.0237
+trade/villain	evil/lawful/auth:neutral	neutral	m=0.1579	act=1.0237
+trade/villain	evil/neutral/derived	warlike	m=0.2105	act=1.0316
+trade/villain	evil/neutral/auth:warlike	warlike	m=0.2105	act=1.0316
+trade/villain	evil/neutral/auth:peacelike	peacelike	m=0.2105	act=1.0316
+trade/villain	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+trade/villain	evil/chaotic/derived	warlike	m=0.2632	act=1.0395
+trade/villain	evil/chaotic/auth:warlike	warlike	m=0.2632	act=1.0395
+trade/villain	evil/chaotic/auth:peacelike	peacelike	m=0.2632	act=1.0395
+trade/villain	evil/chaotic/auth:neutral	neutral	m=0.2632	act=1.0395
+diplomacy/champion	good/lawful/derived	peacelike	m=0.3187	act=1.0478
+diplomacy/champion	good/lawful/auth:warlike	warlike	m=0.2076	act=1.0311
+diplomacy/champion	good/lawful/auth:peacelike	peacelike	m=0.3187	act=1.0478
+diplomacy/champion	good/lawful/auth:neutral	neutral	m=0.2632	act=1.0395
+diplomacy/champion	good/neutral/derived	peacelike	m=0.2661	act=1.0399
+diplomacy/champion	good/neutral/auth:warlike	warlike	m=0.1549	act=1.0232
+diplomacy/champion	good/neutral/auth:peacelike	peacelike	m=0.2661	act=1.0399
+diplomacy/champion	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+diplomacy/champion	good/chaotic/derived	peacelike	m=0.2135	act=1.0320
+diplomacy/champion	good/chaotic/auth:warlike	warlike	m=0.1023	act=1.0153
+diplomacy/champion	good/chaotic/auth:peacelike	peacelike	m=0.2135	act=1.0320
+diplomacy/champion	good/chaotic/auth:neutral	neutral	m=0.1579	act=1.0237
+diplomacy/champion	neutral/lawful/derived	neutral	m=0.0526	act=1.0079
+diplomacy/champion	neutral/lawful/auth:warlike	warlike	m=-0.0029	act=0.9996
+diplomacy/champion	neutral/lawful/auth:peacelike	peacelike	m=0.1082	act=1.0162
+diplomacy/champion	neutral/lawful/auth:neutral	neutral	m=0.0526	act=1.0079
+diplomacy/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+diplomacy/champion	neutral/neutral/auth:warlike	warlike	m=-0.0556	act=0.9917
+diplomacy/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0556	act=1.0083
+diplomacy/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+diplomacy/champion	neutral/chaotic/derived	neutral	m=-0.0526	act=0.9921
+diplomacy/champion	neutral/chaotic/auth:warlike	warlike	m=-0.1082	act=0.9838
+diplomacy/champion	neutral/chaotic/auth:peacelike	peacelike	m=0.0029	act=1.0004
+diplomacy/champion	neutral/chaotic/auth:neutral	neutral	m=-0.0526	act=0.9921
+diplomacy/champion	evil/lawful/derived	warlike	m=-0.0029	act=0.9996
+diplomacy/champion	evil/lawful/auth:warlike	warlike	m=-0.0029	act=0.9996
+diplomacy/champion	evil/lawful/auth:peacelike	peacelike	m=0.1082	act=1.0162
+diplomacy/champion	evil/lawful/auth:neutral	neutral	m=0.0526	act=1.0079
+diplomacy/champion	evil/neutral/derived	warlike	m=-0.0556	act=0.9917
+diplomacy/champion	evil/neutral/auth:warlike	warlike	m=-0.0556	act=0.9917
+diplomacy/champion	evil/neutral/auth:peacelike	peacelike	m=0.0556	act=1.0083
+diplomacy/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+diplomacy/champion	evil/chaotic/derived	warlike	m=-0.1082	act=0.9838
+diplomacy/champion	evil/chaotic/auth:warlike	warlike	m=-0.1082	act=0.9838
+diplomacy/champion	evil/chaotic/auth:peacelike	peacelike	m=0.0029	act=1.0004
+diplomacy/champion	evil/chaotic/auth:neutral	neutral	m=-0.0526	act=0.9921
+diplomacy/villain	good/lawful/derived	peacelike	m=-0.3326	act=0.9501
+diplomacy/villain	good/lawful/auth:warlike	warlike	m=-0.1937	act=0.9709
+diplomacy/villain	good/lawful/auth:peacelike	peacelike	m=-0.3326	act=0.9501
+diplomacy/villain	good/lawful/auth:neutral	neutral	m=-0.2632	act=0.9605
+diplomacy/villain	good/neutral/derived	peacelike	m=-0.2800	act=0.9580
+diplomacy/villain	good/neutral/auth:warlike	warlike	m=-0.1411	act=0.9788
+diplomacy/villain	good/neutral/auth:peacelike	peacelike	m=-0.2800	act=0.9580
+diplomacy/villain	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+diplomacy/villain	good/chaotic/derived	peacelike	m=-0.2274	act=0.9659
+diplomacy/villain	good/chaotic/auth:warlike	warlike	m=-0.0884	act=0.9867
+diplomacy/villain	good/chaotic/auth:peacelike	peacelike	m=-0.2274	act=0.9659
+diplomacy/villain	good/chaotic/auth:neutral	neutral	m=-0.1579	act=0.9763
+diplomacy/villain	neutral/lawful/derived	neutral	m=-0.0526	act=0.9921
+diplomacy/villain	neutral/lawful/auth:warlike	warlike	m=0.0168	act=1.0025
+diplomacy/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.1221	act=0.9817
+diplomacy/villain	neutral/lawful/auth:neutral	neutral	m=-0.0526	act=0.9921
+diplomacy/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+diplomacy/villain	neutral/neutral/auth:warlike	warlike	m=0.0695	act=1.0104
+diplomacy/villain	neutral/neutral/auth:peacelike	peacelike	m=-0.0695	act=0.9896
+diplomacy/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+diplomacy/villain	neutral/chaotic/derived	neutral	m=0.0526	act=1.0079
+diplomacy/villain	neutral/chaotic/auth:warlike	warlike	m=0.1221	act=1.0183
+diplomacy/villain	neutral/chaotic/auth:peacelike	peacelike	m=-0.0168	act=0.9975
+diplomacy/villain	neutral/chaotic/auth:neutral	neutral	m=0.0526	act=1.0079
+diplomacy/villain	evil/lawful/derived	warlike	m=0.2274	act=1.0341
+diplomacy/villain	evil/lawful/auth:warlike	warlike	m=0.2274	act=1.0341
+diplomacy/villain	evil/lawful/auth:peacelike	peacelike	m=0.0884	act=1.0133
+diplomacy/villain	evil/lawful/auth:neutral	neutral	m=0.1579	act=1.0237
+diplomacy/villain	evil/neutral/derived	warlike	m=0.2800	act=1.0420
+diplomacy/villain	evil/neutral/auth:warlike	warlike	m=0.2800	act=1.0420
+diplomacy/villain	evil/neutral/auth:peacelike	peacelike	m=0.1411	act=1.0212
+diplomacy/villain	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+diplomacy/villain	evil/chaotic/derived	warlike	m=0.3326	act=1.0499
+diplomacy/villain	evil/chaotic/auth:warlike	warlike	m=0.3326	act=1.0499
+diplomacy/villain	evil/chaotic/auth:peacelike	peacelike	m=0.1937	act=1.0291
+diplomacy/villain	evil/chaotic/auth:neutral	neutral	m=0.2632	act=1.0395
+war/champion	good/lawful/derived	peacelike	m=0.1564	act=1.0235
+war/champion	good/lawful/auth:warlike	warlike	m=0.2120	act=1.0318
+war/champion	good/lawful/auth:peacelike	peacelike	m=0.1564	act=1.0235
+war/champion	good/lawful/auth:neutral	neutral	m=0.1842	act=1.0276
+war/champion	good/neutral/derived	peacelike	m=0.1301	act=1.0195
+war/champion	good/neutral/auth:warlike	warlike	m=0.1857	act=1.0279
+war/champion	good/neutral/auth:peacelike	peacelike	m=0.1301	act=1.0195
+war/champion	good/neutral/auth:neutral	neutral	m=0.1579	act=1.0237
+war/champion	good/chaotic/derived	peacelike	m=0.1038	act=1.0156
+war/champion	good/chaotic/auth:warlike	warlike	m=0.1594	act=1.0239
+war/champion	good/chaotic/auth:peacelike	peacelike	m=0.1038	act=1.0156
+war/champion	good/chaotic/auth:neutral	neutral	m=0.1316	act=1.0197
+war/champion	neutral/lawful/derived	neutral	m=0.0263	act=1.0039
+war/champion	neutral/lawful/auth:warlike	warlike	m=0.0541	act=1.0081
+war/champion	neutral/lawful/auth:peacelike	peacelike	m=-0.0015	act=0.9998
+war/champion	neutral/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+war/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+war/champion	neutral/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+war/champion	neutral/neutral/auth:peacelike	peacelike	m=-0.0278	act=0.9958
+war/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+war/champion	neutral/chaotic/derived	neutral	m=-0.0263	act=0.9961
+war/champion	neutral/chaotic/auth:warlike	warlike	m=0.0015	act=1.0002
+war/champion	neutral/chaotic/auth:peacelike	peacelike	m=-0.0541	act=0.9919
+war/champion	neutral/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+war/champion	evil/lawful/derived	warlike	m=0.0541	act=1.0081
+war/champion	evil/lawful/auth:warlike	warlike	m=0.0541	act=1.0081
+war/champion	evil/lawful/auth:peacelike	peacelike	m=-0.0015	act=0.9998
+war/champion	evil/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+war/champion	evil/neutral/derived	warlike	m=0.0278	act=1.0042
+war/champion	evil/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+war/champion	evil/neutral/auth:peacelike	peacelike	m=-0.0278	act=0.9958
+war/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+war/champion	evil/chaotic/derived	warlike	m=0.0015	act=1.0002
+war/champion	evil/chaotic/auth:warlike	warlike	m=0.0015	act=1.0002
+war/champion	evil/chaotic/auth:peacelike	peacelike	m=-0.0541	act=0.9919
+war/champion	evil/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+war/villain	good/lawful/derived	peacelike	m=-0.4131	act=0.9380
+war/villain	good/lawful/auth:warlike	warlike	m=-0.2185	act=0.9672
+war/villain	good/lawful/auth:peacelike	peacelike	m=-0.4131	act=0.9380
+war/villain	good/lawful/auth:neutral	neutral	m=-0.3158	act=0.9526
+war/villain	good/neutral/derived	peacelike	m=-0.3604	act=0.9459
+war/villain	good/neutral/auth:warlike	warlike	m=-0.1659	act=0.9751
+war/villain	good/neutral/auth:peacelike	peacelike	m=-0.3604	act=0.9459
+war/villain	good/neutral/auth:neutral	neutral	m=-0.2632	act=0.9605
+war/villain	good/chaotic/derived	peacelike	m=-0.3078	act=0.9538
+war/villain	good/chaotic/auth:warlike	warlike	m=-0.1133	act=0.9830
+war/villain	good/chaotic/auth:peacelike	peacelike	m=-0.3078	act=0.9538
+war/villain	good/chaotic/auth:neutral	neutral	m=-0.2105	act=0.9684
+war/villain	neutral/lawful/derived	neutral	m=-0.0526	act=0.9921
+war/villain	neutral/lawful/auth:warlike	warlike	m=0.0446	act=1.0067
+war/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.1499	act=0.9775
+war/villain	neutral/lawful/auth:neutral	neutral	m=-0.0526	act=0.9921
+war/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+war/villain	neutral/neutral/auth:warlike	warlike	m=0.0973	act=1.0146
+war/villain	neutral/neutral/auth:peacelike	peacelike	m=-0.0973	act=0.9854
+war/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+war/villain	neutral/chaotic/derived	neutral	m=0.0526	act=1.0079
+war/villain	neutral/chaotic/auth:warlike	warlike	m=0.1499	act=1.0225
+war/villain	neutral/chaotic/auth:peacelike	peacelike	m=-0.0446	act=0.9933
+war/villain	neutral/chaotic/auth:neutral	neutral	m=0.0526	act=1.0079
+war/villain	evil/lawful/derived	warlike	m=0.3078	act=1.0462
+war/villain	evil/lawful/auth:warlike	warlike	m=0.3078	act=1.0462
+war/villain	evil/lawful/auth:peacelike	peacelike	m=0.1133	act=1.0170
+war/villain	evil/lawful/auth:neutral	neutral	m=0.2105	act=1.0316
+war/villain	evil/neutral/derived	warlike	m=0.3604	act=1.0541
+war/villain	evil/neutral/auth:warlike	warlike	m=0.3604	act=1.0541
+war/villain	evil/neutral/auth:peacelike	peacelike	m=0.1659	act=1.0249
+war/villain	evil/neutral/auth:neutral	neutral	m=0.2632	act=1.0395
+war/villain	evil/chaotic/derived	warlike	m=0.4131	act=1.0620
+war/villain	evil/chaotic/auth:warlike	warlike	m=0.4131	act=1.0620
+war/villain	evil/chaotic/auth:peacelike	peacelike	m=0.2185	act=1.0328
+war/villain	evil/chaotic/auth:neutral	neutral	m=0.3158	act=1.0474
+information/champion	good/lawful/derived	peacelike	m=0.0278	act=1.0042
+information/champion	good/lawful/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	good/lawful/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	good/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	good/neutral/derived	peacelike	m=0.0278	act=1.0042
+information/champion	good/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	good/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	good/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	good/chaotic/derived	peacelike	m=0.0278	act=1.0042
+information/champion	good/chaotic/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	good/chaotic/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	good/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	neutral/lawful/derived	neutral	m=0.0000	act=1.0000
+information/champion	neutral/lawful/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	neutral/lawful/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	neutral/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+information/champion	neutral/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	neutral/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	neutral/chaotic/derived	neutral	m=0.0000	act=1.0000
+information/champion	neutral/chaotic/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	neutral/chaotic/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	neutral/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	evil/lawful/derived	warlike	m=-0.0278	act=0.9958
+information/champion	evil/lawful/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	evil/lawful/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	evil/lawful/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	evil/neutral/derived	warlike	m=-0.0278	act=0.9958
+information/champion	evil/neutral/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	evil/neutral/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+information/champion	evil/chaotic/derived	warlike	m=-0.0278	act=0.9958
+information/champion	evil/chaotic/auth:warlike	warlike	m=-0.0278	act=0.9958
+information/champion	evil/chaotic/auth:peacelike	peacelike	m=0.0278	act=1.0042
+information/champion	evil/chaotic/auth:neutral	neutral	m=0.0000	act=1.0000
+information/villain (false reports)	good/lawful/derived	peacelike	m=-0.3421	act=0.9487
+information/villain (false reports)	good/lawful/auth:warlike	warlike	m=-0.3421	act=0.9487
+information/villain (false reports)	good/lawful/auth:peacelike	peacelike	m=-0.3421	act=0.9487
+information/villain (false reports)	good/lawful/auth:neutral	neutral	m=-0.3421	act=0.9487
+information/villain (false reports)	good/neutral/derived	peacelike	m=-0.2105	act=0.9684
+information/villain (false reports)	good/neutral/auth:warlike	warlike	m=-0.2105	act=0.9684
+information/villain (false reports)	good/neutral/auth:peacelike	peacelike	m=-0.2105	act=0.9684
+information/villain (false reports)	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+information/villain (false reports)	good/chaotic/derived	peacelike	m=-0.0789	act=0.9882
+information/villain (false reports)	good/chaotic/auth:warlike	warlike	m=-0.0789	act=0.9882
+information/villain (false reports)	good/chaotic/auth:peacelike	peacelike	m=-0.0789	act=0.9882
+information/villain (false reports)	good/chaotic/auth:neutral	neutral	m=-0.0789	act=0.9882
+information/villain (false reports)	neutral/lawful/derived	neutral	m=-0.1316	act=0.9803
+information/villain (false reports)	neutral/lawful/auth:warlike	warlike	m=-0.1316	act=0.9803
+information/villain (false reports)	neutral/lawful/auth:peacelike	peacelike	m=-0.1316	act=0.9803
+information/villain (false reports)	neutral/lawful/auth:neutral	neutral	m=-0.1316	act=0.9803
+information/villain (false reports)	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+information/villain (false reports)	neutral/neutral/auth:warlike	warlike	m=0.0000	act=1.0000
+information/villain (false reports)	neutral/neutral/auth:peacelike	peacelike	m=0.0000	act=1.0000
+information/villain (false reports)	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+information/villain (false reports)	neutral/chaotic/derived	neutral	m=0.1316	act=1.0197
+information/villain (false reports)	neutral/chaotic/auth:warlike	warlike	m=0.1316	act=1.0197
+information/villain (false reports)	neutral/chaotic/auth:peacelike	peacelike	m=0.1316	act=1.0197
+information/villain (false reports)	neutral/chaotic/auth:neutral	neutral	m=0.1316	act=1.0197
+information/villain (false reports)	evil/lawful/derived	warlike	m=0.0789	act=1.0118
+information/villain (false reports)	evil/lawful/auth:warlike	warlike	m=0.0789	act=1.0118
+information/villain (false reports)	evil/lawful/auth:peacelike	peacelike	m=0.0789	act=1.0118
+information/villain (false reports)	evil/lawful/auth:neutral	neutral	m=0.0789	act=1.0118
+information/villain (false reports)	evil/neutral/derived	warlike	m=0.2105	act=1.0316
+information/villain (false reports)	evil/neutral/auth:warlike	warlike	m=0.2105	act=1.0316
+information/villain (false reports)	evil/neutral/auth:peacelike	peacelike	m=0.2105	act=1.0316
+information/villain (false reports)	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+information/villain (false reports)	evil/chaotic/derived	warlike	m=0.3421	act=1.0513
+information/villain (false reports)	evil/chaotic/auth:warlike	warlike	m=0.3421	act=1.0513
+information/villain (false reports)	evil/chaotic/auth:peacelike	peacelike	m=0.3421	act=1.0513
+information/villain (false reports)	evil/chaotic/auth:neutral	neutral	m=0.3421	act=1.0513
+duel_won/champion (pursue_nemesis)	good/lawful/derived	peacelike	m=0.2091	act=1.0314
+duel_won/champion (pursue_nemesis)	good/lawful/auth:warlike	warlike	m=0.2646	act=1.0397
+duel_won/champion (pursue_nemesis)	good/lawful/auth:peacelike	peacelike	m=0.2091	act=1.0314
+duel_won/champion (pursue_nemesis)	good/lawful/auth:neutral	neutral	m=0.2368	act=1.0355
+duel_won/champion (pursue_nemesis)	good/neutral/derived	peacelike	m=0.1827	act=1.0274
+duel_won/champion (pursue_nemesis)	good/neutral/auth:warlike	warlike	m=0.2383	act=1.0357
+duel_won/champion (pursue_nemesis)	good/neutral/auth:peacelike	peacelike	m=0.1827	act=1.0274
+duel_won/champion (pursue_nemesis)	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+duel_won/champion (pursue_nemesis)	good/chaotic/derived	peacelike	m=0.1564	act=1.0235
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:warlike	warlike	m=0.2120	act=1.0318
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:peacelike	peacelike	m=0.1564	act=1.0235
+duel_won/champion (pursue_nemesis)	good/chaotic/auth:neutral	neutral	m=0.1842	act=1.0276
+duel_won/champion (pursue_nemesis)	neutral/lawful/derived	neutral	m=0.0263	act=1.0039
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:warlike	warlike	m=0.0541	act=1.0081
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:peacelike	peacelike	m=-0.0015	act=0.9998
+duel_won/champion (pursue_nemesis)	neutral/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+duel_won/champion (pursue_nemesis)	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:peacelike	peacelike	m=-0.0278	act=0.9958
+duel_won/champion (pursue_nemesis)	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+duel_won/champion (pursue_nemesis)	neutral/chaotic/derived	neutral	m=-0.0263	act=0.9961
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:warlike	warlike	m=0.0015	act=1.0002
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:peacelike	peacelike	m=-0.0541	act=0.9919
+duel_won/champion (pursue_nemesis)	neutral/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+duel_won/champion (pursue_nemesis)	evil/lawful/derived	warlike	m=0.0541	act=1.0081
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:warlike	warlike	m=0.0541	act=1.0081
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:peacelike	peacelike	m=-0.0015	act=0.9998
+duel_won/champion (pursue_nemesis)	evil/lawful/auth:neutral	neutral	m=0.0263	act=1.0039
+duel_won/champion (pursue_nemesis)	evil/neutral/derived	warlike	m=0.0278	act=1.0042
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:warlike	warlike	m=0.0278	act=1.0042
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:peacelike	peacelike	m=-0.0278	act=0.9958
+duel_won/champion (pursue_nemesis)	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+duel_won/champion (pursue_nemesis)	evil/chaotic/derived	warlike	m=0.0015	act=1.0002
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:warlike	warlike	m=0.0015	act=1.0002
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:peacelike	peacelike	m=-0.0541	act=0.9919
+duel_won/champion (pursue_nemesis)	evil/chaotic/auth:neutral	neutral	m=-0.0263	act=0.9961
+duel_won/villain	good/lawful/derived	peacelike	m=-0.3048	act=0.9543
+duel_won/villain	good/lawful/auth:warlike	warlike	m=-0.2215	act=0.9668
+duel_won/villain	good/lawful/auth:peacelike	peacelike	m=-0.3048	act=0.9543
+duel_won/villain	good/lawful/auth:neutral	neutral	m=-0.2632	act=0.9605
+duel_won/villain	good/neutral/derived	peacelike	m=-0.2522	act=0.9622
+duel_won/villain	good/neutral/auth:warlike	warlike	m=-0.1688	act=0.9747
+duel_won/villain	good/neutral/auth:peacelike	peacelike	m=-0.2522	act=0.9622
+duel_won/villain	good/neutral/auth:neutral	neutral	m=-0.2105	act=0.9684
+duel_won/villain	good/chaotic/derived	peacelike	m=-0.1996	act=0.9701
+duel_won/villain	good/chaotic/auth:warlike	warlike	m=-0.1162	act=0.9826
+duel_won/villain	good/chaotic/auth:peacelike	peacelike	m=-0.1996	act=0.9701
+duel_won/villain	good/chaotic/auth:neutral	neutral	m=-0.1579	act=0.9763
+duel_won/villain	neutral/lawful/derived	neutral	m=-0.0526	act=0.9921
+duel_won/villain	neutral/lawful/auth:warlike	warlike	m=-0.0109	act=0.9984
+duel_won/villain	neutral/lawful/auth:peacelike	peacelike	m=-0.0943	act=0.9859
+duel_won/villain	neutral/lawful/auth:neutral	neutral	m=-0.0526	act=0.9921
+duel_won/villain	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+duel_won/villain	neutral/neutral/auth:warlike	warlike	m=0.0417	act=1.0063
+duel_won/villain	neutral/neutral/auth:peacelike	peacelike	m=-0.0417	act=0.9937
+duel_won/villain	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+duel_won/villain	neutral/chaotic/derived	neutral	m=0.0526	act=1.0079
+duel_won/villain	neutral/chaotic/auth:warlike	warlike	m=0.0943	act=1.0141
+duel_won/villain	neutral/chaotic/auth:peacelike	peacelike	m=0.0109	act=1.0016
+duel_won/villain	neutral/chaotic/auth:neutral	neutral	m=0.0526	act=1.0079
+duel_won/villain	evil/lawful/derived	warlike	m=0.1996	act=1.0299
+duel_won/villain	evil/lawful/auth:warlike	warlike	m=0.1996	act=1.0299
+duel_won/villain	evil/lawful/auth:peacelike	peacelike	m=0.1162	act=1.0174
+duel_won/villain	evil/lawful/auth:neutral	neutral	m=0.1579	act=1.0237
+duel_won/villain	evil/neutral/derived	warlike	m=0.2522	act=1.0378
+duel_won/villain	evil/neutral/auth:warlike	warlike	m=0.2522	act=1.0378
+duel_won/villain	evil/neutral/auth:peacelike	peacelike	m=0.1688	act=1.0253
+duel_won/villain	evil/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+duel_won/villain	evil/chaotic/derived	warlike	m=0.3048	act=1.0457
+duel_won/villain	evil/chaotic/auth:warlike	warlike	m=0.3048	act=1.0457
+duel_won/villain	evil/chaotic/auth:peacelike	peacelike	m=0.2215	act=1.0332
+duel_won/villain	evil/chaotic/auth:neutral	neutral	m=0.2632	act=1.0395
+hunt_won/gang-beast	good/lawful/derived	peacelike	m=0.2478	act=1.0372
+hunt_won/gang-beast	good/lawful/auth:warlike	warlike	m=0.3312	act=1.0497
+hunt_won/gang-beast	good/lawful/auth:peacelike	peacelike	m=0.2478	act=1.0372
+hunt_won/gang-beast	good/lawful/auth:neutral	neutral	m=0.2895	act=1.0434
+hunt_won/gang-beast	good/neutral/derived	peacelike	m=0.1688	act=1.0253
+hunt_won/gang-beast	good/neutral/auth:warlike	warlike	m=0.2522	act=1.0378
+hunt_won/gang-beast	good/neutral/auth:peacelike	peacelike	m=0.1688	act=1.0253
+hunt_won/gang-beast	good/neutral/auth:neutral	neutral	m=0.2105	act=1.0316
+hunt_won/gang-beast	good/chaotic/derived	peacelike	m=0.0899	act=1.0135
+hunt_won/gang-beast	good/chaotic/auth:warlike	warlike	m=0.1733	act=1.0260
+hunt_won/gang-beast	good/chaotic/auth:peacelike	peacelike	m=0.0899	act=1.0135
+hunt_won/gang-beast	good/chaotic/auth:neutral	neutral	m=0.1316	act=1.0197
+hunt_won/gang-beast	neutral/lawful/derived	neutral	m=0.0789	act=1.0118
+hunt_won/gang-beast	neutral/lawful/auth:warlike	warlike	m=0.1206	act=1.0181
+hunt_won/gang-beast	neutral/lawful/auth:peacelike	peacelike	m=0.0373	act=1.0056
+hunt_won/gang-beast	neutral/lawful/auth:neutral	neutral	m=0.0789	act=1.0118
+hunt_won/gang-beast	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+hunt_won/gang-beast	neutral/neutral/auth:warlike	warlike	m=0.0417	act=1.0063
+hunt_won/gang-beast	neutral/neutral/auth:peacelike	peacelike	m=-0.0417	act=0.9937
+hunt_won/gang-beast	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+hunt_won/gang-beast	neutral/chaotic/derived	neutral	m=-0.0789	act=0.9882
+hunt_won/gang-beast	neutral/chaotic/auth:warlike	warlike	m=-0.0373	act=0.9944
+hunt_won/gang-beast	neutral/chaotic/auth:peacelike	peacelike	m=-0.1206	act=0.9819
+hunt_won/gang-beast	neutral/chaotic/auth:neutral	neutral	m=-0.0789	act=0.9882
+hunt_won/gang-beast	evil/lawful/derived	warlike	m=0.1206	act=1.0181
+hunt_won/gang-beast	evil/lawful/auth:warlike	warlike	m=0.1206	act=1.0181
+hunt_won/gang-beast	evil/lawful/auth:peacelike	peacelike	m=0.0373	act=1.0056
+hunt_won/gang-beast	evil/lawful/auth:neutral	neutral	m=0.0789	act=1.0118
+hunt_won/gang-beast	evil/neutral/derived	warlike	m=0.0417	act=1.0063
+hunt_won/gang-beast	evil/neutral/auth:warlike	warlike	m=0.0417	act=1.0063
+hunt_won/gang-beast	evil/neutral/auth:peacelike	peacelike	m=-0.0417	act=0.9937
+hunt_won/gang-beast	evil/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+hunt_won/gang-beast	evil/chaotic/derived	warlike	m=-0.0373	act=0.9944
+hunt_won/gang-beast	evil/chaotic/auth:warlike	warlike	m=-0.0373	act=0.9944
+hunt_won/gang-beast	evil/chaotic/auth:peacelike	peacelike	m=-0.1206	act=0.9819
+hunt_won/gang-beast	evil/chaotic/auth:neutral	neutral	m=-0.0789	act=0.9882
+hunt_won/conclave	good/lawful/derived	peacelike	m=-0.1082	act=0.9838
+hunt_won/conclave	good/lawful/auth:warlike	warlike	m=0.0029	act=1.0004
+hunt_won/conclave	good/lawful/auth:peacelike	peacelike	m=-0.1082	act=0.9838
+hunt_won/conclave	good/lawful/auth:neutral	neutral	m=-0.0526	act=0.9921
+hunt_won/conclave	good/neutral/derived	peacelike	m=-0.1608	act=0.9759
+hunt_won/conclave	good/neutral/auth:warlike	warlike	m=-0.0497	act=0.9925
+hunt_won/conclave	good/neutral/auth:peacelike	peacelike	m=-0.1608	act=0.9759
+hunt_won/conclave	good/neutral/auth:neutral	neutral	m=-0.1053	act=0.9842
+hunt_won/conclave	good/chaotic/derived	peacelike	m=-0.2135	act=0.9680
+hunt_won/conclave	good/chaotic/auth:warlike	warlike	m=-0.1023	act=0.9847
+hunt_won/conclave	good/chaotic/auth:peacelike	peacelike	m=-0.2135	act=0.9680
+hunt_won/conclave	good/chaotic/auth:neutral	neutral	m=-0.1579	act=0.9763
+hunt_won/conclave	neutral/lawful/derived	neutral	m=0.0526	act=1.0079
+hunt_won/conclave	neutral/lawful/auth:warlike	warlike	m=0.1082	act=1.0162
+hunt_won/conclave	neutral/lawful/auth:peacelike	peacelike	m=-0.0029	act=0.9996
+hunt_won/conclave	neutral/lawful/auth:neutral	neutral	m=0.0526	act=1.0079
+hunt_won/conclave	neutral/neutral/derived	neutral	m=0.0000	act=1.0000
+hunt_won/conclave	neutral/neutral/auth:warlike	warlike	m=0.0556	act=1.0083
+hunt_won/conclave	neutral/neutral/auth:peacelike	peacelike	m=-0.0556	act=0.9917
+hunt_won/conclave	neutral/neutral/auth:neutral	neutral	m=0.0000	act=1.0000
+hunt_won/conclave	neutral/chaotic/derived	neutral	m=-0.0526	act=0.9921
+hunt_won/conclave	neutral/chaotic/auth:warlike	warlike	m=0.0029	act=1.0004
+hunt_won/conclave	neutral/chaotic/auth:peacelike	peacelike	m=-0.1082	act=0.9838
+hunt_won/conclave	neutral/chaotic/auth:neutral	neutral	m=-0.0526	act=0.9921
+hunt_won/conclave	evil/lawful/derived	warlike	m=0.2135	act=1.0320
+hunt_won/conclave	evil/lawful/auth:warlike	warlike	m=0.2135	act=1.0320
+hunt_won/conclave	evil/lawful/auth:peacelike	peacelike	m=0.1023	act=1.0153
+hunt_won/conclave	evil/lawful/auth:neutral	neutral	m=0.1579	act=1.0237
+hunt_won/conclave	evil/neutral/derived	warlike	m=0.1608	act=1.0241
+hunt_won/conclave	evil/neutral/auth:warlike	warlike	m=0.1608	act=1.0241
+hunt_won/conclave	evil/neutral/auth:peacelike	peacelike	m=0.0497	act=1.0075
+hunt_won/conclave	evil/neutral/auth:neutral	neutral	m=0.1053	act=1.0158
+hunt_won/conclave	evil/chaotic/derived	warlike	m=0.1082	act=1.0162
+hunt_won/conclave	evil/chaotic/auth:warlike	warlike	m=0.1082	act=1.0162
+hunt_won/conclave	evil/chaotic/auth:peacelike	peacelike	m=-0.0029	act=0.9996
+hunt_won/conclave	evil/chaotic/auth:neutral	neutral	m=0.0526	act=1.0079

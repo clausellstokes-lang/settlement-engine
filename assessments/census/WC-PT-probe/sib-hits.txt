@@ -1,0 +1,53 @@
+whereaboutsOf | CH:2 RN:2 FP_COHERENCE_FOLD:5
+lastHeardOf |
+partyKnownFor |
+netEffectAt | CH:1 FP_COHERENCE_FOLD:1
+partyReach |
+journeyWeeks |
+needPlaceOf | FP_COHERENCE_FOLD:1
+suggestMarks |
+defaultMarks |
+partyView | RN:2 FP_COHERENCE_FOLD:3
+partySeq | RN:5 FP_COHERENCE_FOLD:1
+actAt | CH:1 RN:9
+witnessIds | RN:4 FP_COHERENCE_FOLD:2
+moralWeight | RN:7 FP_COHERENCE_FOLD:3
+backerRole | RN:3 FP_COHERENCE_FOLD:6
+reasonGiven | RN:1 FP_COHERENCE_FOLD:1
+met_in_person | CH:4
+refused_request |
+presentAt | CH:1 ST:1 FP_COHERENCE_FOLD:2
+fromIds |
+waysKnown | FP_COHERENCE_FOLD:1
+banKeys | CH:21 PL:1 FP_COHERENCE_FOLD:2
+engagementState | FP_COHERENCE_FOLD:1
+earliestArrivalTick | FP_COHERENCE_FOLD:1
+reachedTick |
+closedRecent |
+strikePartyDeedsForEvent |
+reconcileWorldOnUndo |
+recordPartyDeed |
+RECORD_MEETING | CH:2 RN:2
+SEND_WORD | RN:5
+MARK_DEED |
+DIRECT_TO_PARTY |
+BAN_PARTY | CH:1
+PARDON_PARTY |
+KEEP_PLEDGE |
+SET_PRESENCE |
+NAME_PARTY |
+ANSWER_ENGAGEMENT |
+STRIKE_ENGAGEMENT |
+AMEND_ENGAGEMENT |
+advancePartyEngagements |
+partyValueRows |
+deedParts |
+deedVoice |
+doerPool |
+partyEnabled | RN:5 FP_COHERENCE_FOLD:4
+partyEngagementsEnabled | RN:1 FP_COHERENCE_FOLD:3
+partyBackingEnabled | FP_COHERENCE_FOLD:3
+deed_rescue |
+menace_ended | MN:3
+body_ended | BD:6 RN:9 FP_COHERENCE_FOLD:1
+party_cleared_site | RN:1 ST:8 FP_COHERENCE_FOLD:2

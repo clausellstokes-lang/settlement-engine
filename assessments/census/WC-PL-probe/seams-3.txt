@@ -1,0 +1,61 @@
+## activeRebellionAgainstVassal
+src/domain/worldPulse/relationshipRulesCore.js:7:import { stablePart, mean, candidateBase, labelProposal, internalDrift, pairStableId, hasRecentIncident, itemFor, settlementStrength, relationshipTypeBetween, patronageEligibility, relationshipThirdParties, activeRebellionAgainstVassal } from './relationshipRuleHelpers.js';
+src/domain/worldPulse/relationshipRulesCore.js:737:  const rebellionActive = activeRebellionAgainstVassal(ctx.snapshot, vassalId);
+src/domain/worldPulse/relationshipRuleHelpers.js:572:function activeRebellionAgainstVassal(/** @type {any} */ snapshot, /** @type {any} */ vassalId) {
+src/domain/worldPulse/relationshipRuleHelpers.js:652:  activeRebellionAgainstVassal,
+## originContext in vassal rebellion
+## advanceRelations sig
+src/domain/worldPulse/traditionsKernel.js:728:    const relations = advanceRelations({
+src/domain/traditions/relations.js:379:export function advanceRelations({ recs, worldState, sid, year, localTierBand, minted, traditionsOf, influx, pop, tierCap }) {
+## vassalOverlordOf
+src/domain/rulingPowerSeat.js:290:export function vassalOverlordOf(worldState, sid) {
+## neighbourEndorsement
+src/domain/worldPulse/religiousContest.js:460:function neighbourIdsOf(snapshot, id) {
+src/domain/worldPulse/religiousContest.js:733:    const neighbourIds = spread ? neighbourIdsOf(snapshot, cid) : [];
+src/domain/worldPulse/religionLegitimacy.js:367:function neighbourEndorsement(snapshot, neighbourIds, deityRef, deitySnapshotFor, targetMass, rankStrengthOf = deityRankStrength) {
+## hegemonyFear strengthOf
+26:import { hegemonyRead } from './hegemony.js';
+118:  const baseSpheres = hegemonyRead({ worldState, settlements, strengthOf: groundStrengthOf }).spheres;
+128:    const spheres = hegemonyRead({
+132:      strengthOf: (/** @type {string} */ id) => clamp01(num(readBeliefStrength(observerId, String(id), worldState, landOf(id)))) + navalOf(id),
+## authority contract module path
+3: * contract (src/domain/worldPulse/changeAuthorityPolicy.js) against silent drift.
+26:} from '../../src/domain/worldPulse/changeAuthorityPolicy.js';
+27:import { deriveDecisionTier } from '../../src/domain/worldPulse/decisionTier.js';
+tests/domain/occupationPosture.test.js
+tests/domain/sovereigntyDmVerbWr10w.test.js
+tests/domain/events/realmCoverage.walker.test.js
+## kinship
+198:  'install_friendlier_regime', // the puppet path — backs the CHALLENGER
+207:  install_friendlier_regime: INTERVENTION_SIDES.CHALLENGER,
+254: * install_friendlier_regime (THE PUPPET PATH): a hostile edge to the incumbent + an
+291: * stronger toward. @param {{ kinshipIncumbent01?: number, kinshipChallenger01?: number }} inputs
+294:export function scoreKinship({ kinshipIncumbent01 = 0, kinshipChallenger01 = 0 } = {}) {
+## weave
+src/domain/worldPulse/relationshipEvolution.js:325:export const MEMORY_WEAVE_INCIDENT_TYPES = Object.freeze({
+src/domain/worldPulse/relationshipEvolution.js:358:export function mintMemoryWeaveIncident(worldState, { relationshipKey, incidentType, patch, severity, id, edge = null }, now) {
+## memoryWeaveEnabled presets
+src/domain/worldPulse/simulationRules.js:740:// memoryWeaveEnabled is deliberately NOT a member. It belongs to the separately
+src/domain/worldPulse/simulationRules.js:807:// ONE_REGEN / memoryWeaveEnabled: NO entry in DEFAULT_SIMULATION_RULES, read
+## KILL/ASSIGN
+src/generators/factionRoles.js:7: * Without this, KILL_NPC events on pillar roles produce institutional
+src/domain/entities/successors.js:12: * Pure: no React, no store. The store calls this after KILL_NPC commits
+src/domain/entities/propagate.js:202:  // onto it on that channel — preserving KILL_NPC's exact-once landing.
+src/domain/entities/npcs.js:14: *               that needs filling via ASSIGN_NPC_TO_ROLE.
+src/domain/entities/npcs.js:190: * Apply a KILL_NPC effect: mark the NPC dead and produce the patches
+src/domain/entities/npcs.js:196: * filled by a subsequent ASSIGN_NPC_TO_ROLE event.
+src/domain/entities/npcs.js:256: * Apply an ASSIGN_NPC_TO_ROLE effect: place an NPC into an institution
+src/store/settlementSliceHelpers.js:641:  if (event?.type !== 'KILL_NPC') return null;
+## CHANGE_RULING_POWER
+src/components/settlement/eventComposer/buildEvent.js
+src/components/settlement/eventComposer/EventComposerSecondaryFields.jsx
+src/components/settlement/eventComposer/EventComposerTargetField.jsx
+src/components/settlement/EventComposer.jsx
+src/components/settlement/eventComposer/editSeed.js
+src/domain/types.js
+## realm manifest
+src/store/campaignWorldPulseSlice.js
+src/domain/realm/heraldRouting.js
+src/components/map/RealmVerbComposer.jsx
+src/domain/certification/subsystemRowsWaves.js
+src/domain/worldPulse/warReasons.js

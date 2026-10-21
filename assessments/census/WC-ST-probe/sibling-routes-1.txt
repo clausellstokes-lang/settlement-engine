@@ -1,0 +1,91 @@
+## cession
+DESIGN_FP_ARCH_PR.md:174:Presence in a given week (PR4): `onStretchThisWeek(half, power, tick)` = `true` for a `weekly` half; for a roving half `(tick + base) mod p === slot` (stored as `phase = (slot − base) mod p`, so presence is `tick mod p === phase`, §2.7); `false` for `never` — the week n
+DESIGN_FP_ARCH_PR.md:418:- **(a) TRIGGERS — closed lists.** An APPROPRIATE STRESSOR in the patrol's territory: `INVESTIGABLE_STRESSOR_TYPES = monster_raider_pressure · criminal_corridor · insurgency · slave_revolt · infiltration` — each a LANDED stressor type key (measured against `STRESSOR_
+DESIGN_FP_ARCH_PR.md:588:| GR (grammar) | no PR term; a peace's `site_cession` or a treaty moves the round through the sites and the ladder by construction |
+DESIGN_FP_COHERENCE_FOLD.md:306:| 3.1.10 | **INT-3's heir arm vs GR-4a**: INT claims the succession TRIGGER; GR-4a landed trigger and answer; INT's `reaffirmed_by_heir` ending has no possible producer (GR-4a's HONOR writes nothing). | CHAIR: GRAMMAR owns the question and the answer; INT-3's pact arm
+DESIGN_FP_COHERENCE_FOLD.md:307:| 3.1.10 ↳ | [AMENDED 2026-10-17 (fp-final; SPL-M2 · SX-14, `briefs/RULINGS-PL-MN.md` A; STOP-2, `briefs/RULINGS-AFTER-COMPILE.md` PL)] **The vassals' question after a lord's seat changes hands** — the fealty question — beside GRAMMAR's treaty question | CHAIR:
+DESIGN_FP_COHERENCE_FOLD.md:308:| 3.1.10 ↳ | [AMENDED 2026-10-18 (fp-final r1; REFINED — records `briefs/RULINGS-ROUND1.md` ADDENDUM SEAMS-r1-3 in the ownership row it amends)] **"A seat changed hands", read once** — CH's ban lapse and PT's `backing_repudiated` fired on `seatTransitions` alone
+DESIGN_FP_COHERENCE_FOLD.md:319:| 3.1.19 | **One court-side truth, three homes**: §13 SEAM-2's neighbour drivers (`scarcity · warWeariness · successionClock · appetite`, "its own, not the subject's belief"), the owner's 10-02 THE STANDING ("consolidate how settlements AND their courts regard eac
+DESIGN_FP_COHERENCE_FOLD.md:342:- **GRAMMAR (GR):** (1) `pact_refused`'s erasure by ensure (SPL-m8; `DESIGN_FP_ARCH_PL.md` §16); (2) the hostile-pair NON-AGGRESSION occasion against a shared menace — MN keeps the damper and DROPS the occasion until GRAMMAR lands an admission change (SMN-16, `brie
+DESIGN_FP_COHERENCE_FOLD.md:459:| GRAMMAR (GR) | GR-0 voice, GR-1 oath (partial), GR-2 formation + NAP, GR-3 rows, GR-4 succession, GR-5 renewal/conversion, GR-6 mediation (2 of 3 occasions, 1 of 4 endings) — `pactFormationEnabled` in 4 presets incl. default, the warpeace set in 2 | GR-3 grant REA
+DESIGN_FP_COHERENCE_FOLD.md:494:**The one lit chain** (restated per preset after skeptic S1-05's executed census): in the DEFAULT preset `realistic_regional` a DM feels a pact proposed, valued by the responder, signed or declined, kept or frayed; and a patron's fall — which is VACUOUS on every bor
+DESIGN_FP_COHERENCE_FOLD.md:511:| `succession_reaffirmation` | GRAMMAR (GR-4a) | the heir's answer tick | the LANDED tokens `reaffirmed · disavowed_by_succession · honored_by_silence` (S2-12) | CLIMAX |
+DESIGN_FP_COHERENCE_FOLD.md:660:| `settlement` | `siege` · `pact_acceptance` · `mediation_offer` · `succession_reaffirmation` · `spy_at_target` · `lure_sprung` / `plant_taken` · `call_in_answer` · `contribution_dispatch` · `raid` · `column_at_the_wall` · `legate_received` / `pilgrims_recei
+DESIGN_FP_COHERENCE_FOLD.md:767:| ↳ `fealty_*` — THE FAMILIES AND THE TWO FACTS (PL) [AMENDED 2026-10-18 (fp-final r3; `briefs/RULINGS-ROUND3.md` A.5, A.6 and §E.2, §E.3; PL-r1-15 · PL-V5; `cure/D-PL-r3.md` §5, routed to the fold)] | the record's rows, which now include the SUCCESSION family
+DESIGN_FP_COHERENCE_FOLD.md:1065:| OD-FC-37 | One court-side truth (§3.1.19) | RULED, and RECORDED AS AMENDING §934.85's SEAM-2 charter (S4 M4: that charter minted "three or four banded TRUE drivers under the court record, one writer with learn/decay"): SEAM-2 keeps ONE persisted driver family und
+DESIGN_FP_COHERENCE_FOLD.md:1076:| OD-FC-45 ↳ | [AMENDED 2026-10-18 (fp-final r3; `briefs/RULINGS-ROUND3.md` A.5, A.6, A.8 and §E.2; `cure/D-PL-r3.md`, 25 of 25 ids, routed to the fold)] the polity after round 3a | RULED BY DELEGATION (vetoable): OD-PL-52 — the fealty record's four FAMILIES, ea
+DESIGN_FP_COHERENCE_FOLD.md:1143:| OD-FC-77 | THE DYNAMISM FLOOR AT TWO GRAINS — CONSEQUENTIAL CHANGE [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/CHAIR-NOTES-FOR-THE-FOLD.md` items 17 (d) and 18 (e) with its REFINED clause, the owner's shared analysis of 2026-10-18 ~21:54 EDT adopted by the c
+DESIGN_FP_COHERENCE_FOLD.md:1261:| S2-12 registry verdict words rename landed tokens | MAJOR | CURED — the landed tokens (`signed · refused · expired`; `disavowed_by_succession`) |
+DESIGN_FP_ARCH_GR.md:14:**Status: COMPILED IMPLEMENTATION LAYER. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: GR-0 lifecycle voice, GR-1 oath stamp (partial — the credit-obligation stamp and the d
+DESIGN_FP_ARCH_GR.md:15:[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `envoy_hearing`, `pact_acceptance`, `mediation_offer`, `succession_reaffirmation`, `tribute_demand`/`trade_rights_de
+DESIGN_FP_ARCH_GR.md:192:| V-17 | Turning-point RENDERING absent from components + pdf | grep zero in src/components, src/pdf | VERIFIED — GR-2's "the courts remember" WarFaithTab line premise holds [CORRECTED 2026-10-16 (coherence fold §3.3.9) — WarFaithTab is gone: the TreatyBlock lives in co
+DESIGN_FP_ARCH_GR.md:197:| V-22 | Succession-repudiation, renewal/renegotiation, standalone NAP, faith/population terms, `sworn`, `provenance:'negotiated'`, `lineage`, `oathHolderOf`, `pactProposals`, all five GR flag names | grep ZERO across src/ and tests/ | VERIFIED ABSENT — every GR symbol is 
+DESIGN_FP_ARCH_GR.md:221:| `oathHolderEnabled` | sworn stamps (treaties + credit obligations), succession question, `succession_repudiation`, repudiation credibility charge | GR-1, GR-4 | GR-1's commit |
+DESIGN_FP_ARCH_GR.md:323:  breachType value 'succession_repudiation'                 — GR-4 (a vocabulary
+DESIGN_FP_ARCH_GR.md:326:succession questions — NO new ledger: dark mode scores directly at the event;
+DESIGN_FP_ARCH_GR.md:345:  regenerated world's seat-holder (THE SAME-SEAT pin); settled succession
+DESIGN_FP_ARCH_GR.md:409:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at the table — the sworn stamp is ledger fact with no signature line (UNBUILT); it surfaces only through GR-4's succession lines, event-timed · TIER: aspatial-safe; host flags: `oathHolderEnabled` (dram
+DESIGN_FP_ARCH_GR.md:565:### GR-4 — THE SUCCESSION QUESTION (second slice of `oathHolderEnabled`)
+DESIGN_FP_ARCH_GR.md:571:  the succession event list is WR-5's D re-read surface — VERIFY-AT-BUILD its
+DESIGN_FP_ARCH_GR.md:572:  landed symbol (the war program built through WR-10; navigate by symbol). [RULED 2026-10-16 (coherence fold §3.1.10) — measured at GR-4a (CR-GR4-5): WR-5's D re-read never touches `seatTransitions`; GR-4a reads `seatTransitions` by symbol, and only the applied `governmen
+DESIGN_FP_ARCH_GR.md:616:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: soak profiles (the succession-mix envelope needs `routineMajorApproval: true`) · DEGRADED ARM: dark]
+DESIGN_FP_ARCH_GR.md:624:  moverFamily hazard). Succession-mix envelope declares its
+DESIGN_FP_GRAMMAR.md:12:**Status: ARCHITECTURE. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: GR-0 lifecycle voice, GR-1 oath stamp (partial — the credit-obligation stamp and the dossier signature 
+DESIGN_FP_GRAMMAR.md:13:[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `envoy_hearing` (GR-2's proposal answer after the envoy's one-week dwell), `pact_acceptance`, `mediation_offer` (GR-
+DESIGN_FP_GRAMMAR.md:155:  forces a renewal; the succession question expires to HONOR, not to a forced
+DESIGN_FP_GRAMMAR.md:218:| Succession-repudiation: designed (`DESIGN_PEACE_ENGINE.md:212-214`), ZERO coup-to-treaty code; treaties key on settlement ids, seats change silently; only breachType `repudiation` severity 1 exists | grep-confirmed absent | ABSENT — GR-4 |
+DESIGN_FP_GRAMMAR.md:226:| Dossier surfaces: WarFaithTab treaty block (house voice), TreatyPanel (Realm Inspector via HeraldBody), PDF export | `WarFaithTab.jsx:110-134`; `TreatyPanel.jsx`, `HeraldBody.jsx:227`; `pdf/lib/liveWorld.js:254-261` | BUILT — every GR dossier round-trip lands on these th
+DESIGN_FP_GRAMMAR.md:246:| `oathHolderEnabled` | sworn stamps on treaties + credit obligations; the succession question; `succession_repudiation`; the repudiation credibility charge | GR-1, GR-4 |
+DESIGN_FP_GRAMMAR.md:256:and `mediationGeneralizedEnabled` are independent. GR-4's succession question
+DESIGN_FP_GRAMMAR.md:282:  modes; the GR-7 succession-mix envelope is measurable ONLY on profiles that
+DESIGN_FP_GRAMMAR.md:437:  breachType gains 'succession_repudiation' // GR-4; severity BANDED below
+DESIGN_FP_GRAMMAR.md:489:succession questions                       — GR-4: NO new ledger.
+DESIGN_FP_GRAMMAR.md:496:                                           //   directly at the succession event,
+DESIGN_FP_GRAMMAR.md:602:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none at the table — the sworn stamp is ledger fact with no signature line (UNBUILT); it surfaces only through GR-4's succession lines, event-timed · TIER: aspatial-safe; host flags: `oathHolderEnabled` (dram
+DESIGN_FP_GRAMMAR.md:633:  speaks persons ("the peace of Aldric and Merek"); the succession question (GR-4)
+DESIGN_FP_GRAMMAR.md:635:  as succession risk — a BELIEF consumer, declared as the GRAMMAR×INFO row, built
+DESIGN_FP_GRAMMAR.md:636:  there. [CLARIFIED 2026-10-16 (coherence fold) — not built there: INFO's volumes carry no oath / sworn / succession-risk consumer; the row is unslotted on INFO's side.]
+DESIGN_FP_GRAMMAR.md:654:GRAMMAR×INFO (succession-risk belief reads). Rows declared.
+DESIGN_FP_GRAMMAR.md:655:**Endings entries:** none new; GR-4 adds `disavowed_by_succession`.
+DESIGN_FP_GRAMMAR.md:1010:### GR-4 — THE SUCCESSION QUESTION (rides `oathHolderEnabled` — second slice;
+DESIGN_FP_GRAMMAR.md:1011:settled law: "succession-repudiation lands" + THE OATH-HOLDER IDENTITY's payoff)
+DESIGN_FP_GRAMMAR.md:1016:- **The trigger:** on ANY legitimate-power change (succession, coup, faction
+DESIGN_FP_GRAMMAR.md:1036:    (`applyWorldPulse.js:953-1027`) and organic ladder succession
+DESIGN_FP_GRAMMAR.md:1042:    records** — the gap is named, not silently widened. Minting succession records
+DESIGN_FP_GRAMMAR.md:1045:    (`'government_change'`; `coup|challenge|succession|vacancy`; and
+DESIGN_FP_GRAMMAR.md:1053:  (SP-4): [RULED 2026-10-16 (coherence fold §3.1.10) — GRAMMAR owns the succession QUESTION and its ANSWER; INTERIOR INT-3's pact arm is a books COLOUR inside GR-4a's scoring (through readWarSeatBooks), never a second band; INT-7's `reaffirmed_by_heir` floor is STRUCK (n
+DESIGN_FP_GRAMMAR.md:1057:    directly at the succession event with HONOR the scored default and DISAVOW
+DESIGN_FP_GRAMMAR.md:1065:  - DISAVOW — breachType `succession_repudiation` [CORRECTED 2026-08-02
+DESIGN_FP_GRAMMAR.md:1076:    `repudiableTreatyPairs` does not widen — pinned), while succession
+DESIGN_FP_GRAMMAR.md:1079:    graded by succession kind: coup-born seats pay least (the world understands
+DESIGN_FP_GRAMMAR.md:1087:  paths):** open repudiation (WR-0c's verb) and succession disavowal BOTH write a
+DESIGN_FP_GRAMMAR.md:1090:  (succession lighter). The oathbreaker's word finally costs something in the
+DESIGN_FP_GRAMMAR.md:1100:**Force / counterforce (same evidence):** force — succession freedom: the
+DESIGN_FP_GRAMMAR.md:1101:succession record that names a new holder is what opens the choice. Counterforce
+DESIGN_FP_GRAMMAR.md:1102:— THE CREDIBILITY LEDGER: the same succession record grades the price, and the
+DESIGN_FP_GRAMMAR.md:1105:2026-08-02 (fp-audit)]). Both read the one succession + breach history.
+DESIGN_FP_GRAMMAR.md:1110:WR-5's demand-rides-succession-record read consumed, not duplicated) — all
+DESIGN_FP_GRAMMAR.md:1123:**Endings entries:** `disavowed_by_succession` joins pact endings.
+DESIGN_FP_GRAMMAR.md:1131:DIFFERENTIAL pin — same treaty, coup-born vs lineal succession, two severities
+DESIGN_FP_GRAMMAR.md:1140:the succession predicate while the DM verb's `repudiableTreatyPairs` list is
+DESIGN_FP_GRAMMAR.md:1142:SILENCE-EQUIVALENCE pin — with `routineMajorApproval` absent, a succession over
+DESIGN_FP_GRAMMAR.md:1148:laws — VERIFY-AT-BUILD its exact payload shape); `succession_repudiation`
+DESIGN_FP_GRAMMAR.md:1156:**Bands:** severity bands by succession kind; credibility delta bands by breach
+DESIGN_FP_GRAMMAR.md:1205:concession; the refusal arm is priced by the same ratio read the demand cites).
+DESIGN_FP_GRAMMAR.md:1368:[ADDED 2026-10-16 (coherence fold, req 16/17) — FIRST-VISIBLE: none — instrumentation · TIER: soak profiles (the succession-mix envelope needs `routineMajorApproval: true`) · DEGRADED ARM: dark]
+DESIGN_FP_GRAMMAR.md:1378:  and save rate; succession-question answer mix ([CORRECTED 2026-08-02
+DESIGN_FP_GRAMMAR.md:1386:  `disavowed_by_succession`, `hollowed_quiet` (DM-only), `hollowed_detected`,
+DESIGN_FP_GRAMMAR.md:1394:  (`repudiated`), GR-4 (`disavowed_by_succession`), GR-5 (`renewed` = window
+DESIGN_FP_GRAMMAR.md:1450:- **J-GR-3 (silence honors):** the succession question expires to HONOR. VETO
+DESIGN_FP_GRAMMAR.md:1453:- **J-GR-4 (graded disavowal):** `succession_repudiation` is a NEW breachType
+DESIGN_FP_GRAMMAR.md:1454:  with banded severity by succession kind, riding the existing shell machinery.
+DESIGN_FP_GRAMMAR.md:1490:  succession disavowal only.
+DESIGN_FP_GRAMMAR.md:1518:  only; composer surface unchanged), succession disavowal reaches ANY sworn
+DESIGN_FP_GRAMMAR.md:1535:severity-by-succession bands + credibility deltas + hold window + dark-mode
+DESIGN_FP_GRAMMAR.md:1546:[CORRECTED 2026-10-16 (coherence fold, req 22c) — every sentence below is bound by ODQ §934.88 ("Such as X is targeting Y. A has captured B.") and the Evidence Law's COMPLETE, NOT CRYPTIC amendment (name who, which power, what effect): a line names its courts and what ch
+## arriveAt / arrival door in BD
+## siteTargetId / site target
+DESIGN_FP_COHERENCE_FOLD.md:489:| THE SITES (ST, 2026-10-18 fp-final; `DESIGN_FP_ARCH_ST.md`, compiled by lane L-ST on the owner's nine site words of 2026-10-18 00:50–01:05 EDT; reviewed in rounds 2–6) [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/L-FOLD2.md` item 2)] | — (four virtual flag
+DESIGN_FP_COHERENCE_FOLD.md:958:| C15 · THE SITES (ST, `DESIGN_FP_ARCH_ST.md`) [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/L-FOLD2.md` item 8; CHAIR-NOTES 18 (c))] | ST-0 the record, the DM's hand and the map's adoption → ST-1 THE FORTIFICATION ALONE (its first felt chain, ST §4 and §10); 
+## WR-10 sites
+1151:| OD-FC-85 | THE CONVEYANCE OF A SITE [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/RULINGS-ROUND2b.md` ADDENDUM HOST-r2-11 (a STOP, ACCEPTED as proposed); `briefs/L-FOLD2.md` item 9)] | RULED BY DELEGATION (vetoable): a conveyance moves the SITE's holder (its attachment re-derived by distan

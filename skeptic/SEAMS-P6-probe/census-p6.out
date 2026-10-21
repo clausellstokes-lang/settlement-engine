@@ -1,0 +1,45 @@
+# SEAMS-P6 probe — token census at master 81f1cd963 (rg -w -i -l file counts: src | tests | docs), executed Tue Oct 20 20:29:26 CDT 2026
+courtTemperOf            0   0   0
+wayOfWarOf               0   0   0
+wayLeanOf                0   0   0
+wayPriorOf               0   0   0
+recordSighting           0   0   0
+holdWingAtContact        0   0   0
+replanFromNode           0   0   0
+detourEnvoyErrand        0   0   0
+fiscalHand               0   0   0
+swornDeity               0   0   0
+patronDeity              4   0   0
+exaction                 0   0   0
+tax_refusal              0   0   0
+tax_revolt               3   1   3
+rescue_attempt           0   0   0
+keep_course              0   0   0
+regroup                  3   1   1
+forced_sail              0   0   0
+MOVEMENT_VERBS           0   0   0
+lensOne                  0   0   0
+slackTicks               0   0   0
+captiveId                0   0   0
+refusedSinceWeek         0   0   0
+warLevyMarks             0   0   0
+opportunity_act          0   0   0
+rescued_by               0   0   0
+false_word               0   0   0
+carry_word               0   0   0
+map_way                  0   0   0
+jailerOf                 0   0   0
+wing                     3   1   3
+feint                   11   3   2
+remitting                0   0   0
+wonted                   0   0   0
+exacting                 0   1   0
+wringing                 0   0   0
+way_attrition            0   0   0
+way_subversion           0   0   0
+WAYS_OF_WAR              0   0   0
+--- quoted 'wing' token in src: 0 hits (0 = prose only) ---
+--- regroup in src (prose strings/comments only):
+src/domain/worldPulse/armyTransitKernel.js:611:    summary: `The marching hosts of ${winner} and ${loser} met between se
+src/domain/display/engagementNarrative.js:154:    'one column gives ground and falls back to regroup',
+src/domain/worldPulse/convergence.js:165:  // this many ticks — bloodied armies regroup before they re-engage.

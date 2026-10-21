@@ -1,0 +1,11 @@
+row 4  council at peace, no demand, malice 0.5: share of season-cells at >= exacting over 2000 keys x 8 seasons = 0 (asserted 0, a candidacy law); max step per decision = 0
+row 4b a CRUEL seat at peace (malice 0.8, avarice): share >= exacting = 0.2114 (> 0: the only peace-time raise, cause avarice)
+row 5  autocrat, company in the field: need01=0.145 P(raise at the war trigger)=0.115
+row 5  autocrat, host in the field: need01=0.455 P(raise at the war trigger)=0.212
+row 5  autocrat, great_host in the field: need01=1.000 P(raise at the war trigger)=0.339
+row 5  same autocrat at peace (no demand, malice 0.5): P(raise)=0 (no candidate)
+row 5  autocrat with a host over a 4-season war: share of season-cells at >= exacting = 0.3521 (vs 0 at peace)
+row 9  Approved: bold seat need 0.7 (exacting) P(held_firm)=0.849 · cautious seat need 0.2 P(remitted)=0.817 · direction holds=true
+row 9  Tolerated: bold seat need 0.7 (exacting) P(held_firm)=0.818 · cautious seat need 0.2 P(remitted)=0.848 · direction holds=true
+row 9  Crisis: bold seat need 0.7 (exacting) P(held_firm)=0.763 · cautious seat need 0.2 P(remitted)=0.886 · direction holds=true
+row 9  from wringing, bold, need 0.7, Tolerated: {"remitted":0.125,"abated":0.313,"held_firm":0.563}

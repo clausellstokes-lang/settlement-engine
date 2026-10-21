@@ -1,0 +1,28 @@
+## receipts at 81f1cd963 (V-CH-PD-r1)
+### subsystemActivation.js :: religionActive
+function religionActive(snapshot) {
+  return settlementItems(snapshot).some(
+    /** @param {any} item */
+    item => Boolean(item?.settlement?.config?.primaryDeitySnapshot)
+      || ((item?.settlement?.config?.cultDeitySnapshots || []).length > 0),
+  );
+### religiousContest.js :: advanceReligionStates gate
+547:  if (!isSubsystemActive(snapshot, 'religion')) return { religionStates: null, outcomes: [], graphChannels: [], pietyByCid: {} };
+### religiousContest.js 3a entry strength
+776:        let strength = clamp01(pietyMult * deityLocalStrength({ snapshot, deity, deityRef: dref, neighbourIds, carrier, moodDeity, lens, worldState, cid, targetMass, crisisDisorder, spatialDigest,
+581:  const rankStrengthOf = (deity) => Math.max(deityRankStrength(deity), pantheonTierStrength(deity));
+### cultImpositionApply.js :: deityRankStrength
+export function deityRankStrength(d) {
+  return /** @type {Record<string,number>} */ (DEITY_RANK_STRENGTH)[d?.rankAxis] ?? DEITY_RANK_STRENGTH.minor;
+}
+### religionState.js :: attemptEntry seed
+300:  const seed = (existingShare = 0) => ({ deityRef: ref, snapshot: deity, niche, share: Math.max(RELIGION_TUNING.CULT_SEED_SHARE, Math.ro
+### faithField.js boon read
+264:  if (str(snapshot.boonChannel) === channel) term += (mag[str(snapshot.boonStrength)] ?? 0) * boonScale01;
+346:        ...(boonScale01 !== 1 && str(member?.snapshot?.boonChannel) === channel
+### deityAxes.js :: deriveTemper
+  const { W_EVIL, W_CHAOS, THRESHOLD } = TEMPER_DERIVATION;
+  const score = W_EVIL * (evilCoord - 0.5) + W_CHAOS * (chaosCoord - 0.5);
+  if (score > THRESHOLD) return 'warlike';
+  if (score < -THRESHOLD) return 'peacelike';
+  return 'neutral';

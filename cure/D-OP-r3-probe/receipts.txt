@@ -1,0 +1,88 @@
+# D-OP-r3 receipts (read 2026-10-20 16:2x CDT; master 81f1cd963; ledger docs)
+## master :: roads/state.js RansomRec + captureCauseId
+ * @typedef {Object} RansomRec
+ * @property {string} id                 `ransom.${missionId}`
+ * @property {string} npcKey
+ * @property {string} npcName
+ * @property {string} homeId
+ * @property {string} captorId
+ * @property {string} threatClass        T1|T2|T3|T4
+ * @property {string} purposeKind        the captured mission's purpose (§9 prose + the release leg)
+ * @property {string} missionId          the mission this capture resolved (the V-24d cause edge)
+ * @property {number} [startedYear]      genesis year of the interrupted mission (absent on legacy records)
+ * @property {number} startedTick
+ * @property {number} startedWeek        the CALENDAR week of capture — the term clock's origin
+ * DESIGN_VISION_WAVE V-24d — DEEPER PROVENANCE THREADING (the roads captivity lineage). The
+ * EXACT node id of the CAPTURE receipt that began a captivity, reconstructed from the ransom
+ * record a release/ransom pass holds in hand: roadsBeat mints an id `wizard_news.${tick}.roads.
+ * ${sid}.${seed}`, and the capture beat's tick / sid / seed are r.startedTick / r.homeId /
+ * `capture.${r.missionId}` — all on the record. Returned as a `causedBy` parent so the V-4
+export function captureCauseId(worldState, r) {
+  if (!provenanceLedgerActive(/** @type {Record<string, unknown>} */ (worldState))) return undefined;
+  const rr = asObject(r);
+  const mid = String(rr.missionId == null ? '' : rr.missionId);
+  const home = String(rr.homeId == null ? '' : rr.homeId);
+  if (!mid || !home) return undefined;
+  return `wizard_news.${num(rr.startedTick, 0)}.roads.${home}.capture.${mid}`;
+}
+## master :: roads/embassyHazard.js relationshipTypeBetween (edge type only, no tick)
+export function relationshipTypeBetween(graph, worldState, a, b) {
+  const A = String(a); const B = String(b);
+  const edges = Array.isArray(asObject(graph).edges) ? /** @type {unknown[]} */ (asObject(graph).edges) : [];
+  for (const e of edges) {
+    const from = str(asObject(e).from); const to = str(asObject(e).to);
+    if ((from === A && to === B) || (from === B && to === A)) {
+      const rt = String(asObject(e).relationshipType || '');
+      if (rt) return rt;
+    }
+  }
+  const rs = asObject(asObject(worldState).relationshipStates);
+## master :: relationshipEvolution.js RelationshipGraphEdge typedef
+ * @typedef {{
+ *   from?: unknown, to?: unknown, id?: unknown,
+ *   relationshipType?: unknown, type?: unknown, relation?: unknown,
+ * }} RelationshipGraphEdge
+## master :: pactProposals.js header (signed history lives in treaties)
+ * ── A QUEUE, NOT AN ARCHIVE (§4, J-GR-8) ────────────────────────────────────────
+ * Open proposals are RE-DERIVABLE INTENTIONS, not precious state. Regeneration re-scores
+ * the triggers and re-opens whatever the new world still wants; signed history lives in
+ * treaties and the chronicle, which regen preserves under their own laws. So a settled row
+ * PRUNES once its receipt has landed, and a world that has never opened one carries NO
+ * `pactProposals` key at all — `dropSpatialLedger` takes the whole namespace with it when
+## master :: pactFormation.js treaty mint (mintedTick; no edge write)
+  /** @type {Record<string, unknown>} */
+  const treaty = {
+    parties: [first, second],
+    // T4, drop-when-absent: the saved court names (TREATY-VOICE U1), see `courtNamesOf`.
+    ...(partyNames ? { partyNames } : {}),
+    mintedTick: tick,
+    // GR-5c-b: the first party's believed lead over the second, lit only, drop-when-absent (the renewal leaf's record).
+2
+## master :: routeNetworkConsumersTransit.js livedLegTicks
+export function livedLegTicks(input) {
+  const digest = activeSpatialDigest(input.worldState);
+  const nominal = digest
+    ? hopWeeks(digest, text(input.fromId), text(input.hop.toId), input.season || null)
+    : null;
+  return namedPersonLegTicks({
+    nominalWeeks: nominal,
+    gradeMultiplier: gradeLegMultiplier(input.hop.grade),
+    unpricedWeeks: ROUTE_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
+  });
+}
+## master :: subsystemRowsWar.js the DM-only sentence
+all nine immediate WR-7b facts are DM-only until a separate observation carrier earns public knowledge
+## ledger CH l.261 l.371 l.373 l.381 l.427 (cut) l.590 l.683 (cut)
+| `paragon_exerted` — information | villain | 0.30 | 0.25 | 0.50 | no (false reports) | shameful |
+| `work_here` | where it stands | a call in its domain stands here, or it is retained here, or — a bound paragon posted abroad — this is its post (`postId`, §8) | none (it stays); EXERT is decided this week (4.5) |
+| `answer_call` | a place whose call in its domain it believes is the gravest within reach | free; bound only inside the employer's lands | its own leg (bound: inside the lands) |
+| `court_errand` | where its employer sends it | bound; the court's business — ONLY WHEN THE OWNER'S ERRAND-ROW SLOT LANDS (no row can name a paragon at master, CH-V1); never offered until then | the errand family, claiming it at its seat (`unclaimedPlacementAt`, CH9) |
+- **Bound:** destinations are restricted to its employer's LANDS — the employer itself, or, when the employer is a polity's root, the members where PL's crown reach is above zero (PL's ONE reach read, SEAMS-r1-12 — `crownReachAt(worldState, snapshot, rootId, memberId, observerId) → { share01, liegeId, tier }`, `DESIGN_FP_ARCH_PL.md` §2, minted by PL in this round: every direct member has `share01 > 0`, and a sub-vassal has it only under a hold firmer than `frayed`) [CURED 2026-10-18 (fp-final r1) — SEAMS-r1-12]; outside them only where the DM sends it (`assign`: the DM's direction; a bound paragon arriving outside its lands records that place as its `postId`, §8), on `court_errand` once the owner's errand-row slot lands (classes `religious · diplomatic · covert · commercial · factional` by domain; the errand family then the one mover, claiming it `placed` at its seat — CH
+**Couplings — one direction, through CH's one roll (the brief's item 5).** OP: a paragon's opportunity choice reads `weeklyChoice` with the lean inside; OP never reads a deity (OP19) — OP's sentence "a lawful god's envoy-champion never plants a false report" is true by POLARITY (no champion act is a false report; the deceiver is a villain), while of a villain the lean says "less readily", never "never" (ROUTED to OP). MG: a commanding paragon's verbs and motives are named from its aim through the same roll; MG never reads the deity. WS: a court's way of war reads the COURT's own faith temp
+Under the omniscient info mode (the default and three other presets) the board is the truth.
+## ledger RN §8 row 1
+| the default `realistic_regional`, and `quiet_local`, `static_campaign`, `narrative_campaign` (infoMode omniscient — no rumor road) | THE OMNISCIENT ARM: every deed known at once inside its projected scope; office fame | derived on read from the deed ledger through the lenses (towns, courts, the party as subject) | the deed itself (no mutation) | dark until `npcConsequencesEnabled` lights (C1's unit) |
+## ledger MG §8.2 (cut)
+`ridingLegFactor(grade, riding)` = WY's ratio `MODE_SPEEDS.foot / MODE_SPEEDS.horse` on the `road` and `highway` GRADES, and ×1 on every other grade (`track`, `hidden`). The `horse` row is WY's — a new member of the closed `MODES`, owner-signed at the tuning sitting; its value is WY's proposal (the compile's DRAFT 250 is carried to WY in the route, never MG's number). MG reads NO rung word and bars NO way: whether a rider may take a way, and on which rung, is WY's PROPOSAL ROW (RULINGS-P6 A.6) — THE PASSAGE prices a way "at `HIDDEN_PATH_SLOWDOWN` (2) at EVERY rung" and "keeps no rung list of its own", and the leg pricer reads the hop's grade ("`gradeMultiplier: gradeLegMultiplier(input.hop.grade),`"), never a rung [CURED 2026-10-20 (fp-final P6 r1) — MG-r1-2: the compile's `'barred'` on `wild`/`way` and its `trail` rule WITHDRAWN as MG's text, carried to WY as its proposal]. EACH PRICER takes the ratio by WY's ruling, in its owner's one line — never "one line" reaching all: `livedLegTicks` (`routeNetworkConsumersTransit.js`, 198 eff — an errand's whole plan at dispatch and the DM's walker), `planWanderLeg` (`npcCirculationTransit.js` — the paragon and the wanderer; it reads NO grade today, so it gains the ratio only when WY gives it the hop's grade), PR's detachment 
+## captive_held across ledger docs
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_OP.md

@@ -1,0 +1,30 @@
+QUOTED patron 61
+QUOTED patronDeity 1
+QUOTED patronRef 0
+QUOTED patronId 8
+QUOTED suppressed 9
+QUOTED outlawed 0
+QUOTED sworn 6
+QUOTED secret_faith 0
+QUOTED patron_creed 0
+QUOTED suppressed_creed 0
+QUOTED keeps_the_faith 0
+QUOTED patronLean 0
+QUOTED patronDeityRef 0
+
+src/domain/npc/livedExperienceSources.js:134:export const SUBJECT_RESOLUTIONS = Object.freeze(['npcKey', 'durableId', 'displayName', 'home', 'patronDeity']);
+src/domain/npc/livedExperienceSources.js:718:    'patronDeity', ['pantheon_ascendancy'],
+src/domain/npc/livedExperienceSources.js:722:    'patronDeity', ['pantheon_twilight'],
+src/domain/worldPulse/clergyTraitPlane.js:252: * @param {DeitySnapshot|null|undefined} patronDeity
+src/domain/worldPulse/clergyTraitPlane.js:257:export function targetedFootholds(settlement, patronDeity, rivals, lens) {
+src/store/campaignSlice.js:351:      relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile'],
+src/components/map/relationshipEdgeStyle.js:24:  patron:           { color: relColor('patron'),           width: 2,   dash: '6 3', priority: 2, arrow: true  },
+src/components/map/relationshipEdgeStyle.js:47:    { id: 'patron',        label: 'Patron' },
+src/store/mapSlice.js:91:  relationshipFilter: ['trade_partner', 'allied', 'patron', 'client', 'vassal', 'rival', 'cold_war', 'hostile'],
+src/store/neighbourSlice.js:28:  { id: 'patron',        label: 'Patron',         color: '#6a4a8a' },
+src/components/map/RelationshipEdges.jsx:132:        const pairKey = relType === 'patron' || relType === 'client' || relType === 'vassal'
+src/domain/spatial/smuggle.js:86:// (outlawed), AND by a culturally-DISTANT gate. The others show the axis is general.
+src/domain/compendium/bandLadders.js:145:  { name: 'Forbidden',  reading: 'Magic is outlawed; practicing it is a crime.' },
+src/domain/compendium/generated/compendiumData.generated.js:86:    {"id":"magic-legality","concept":"Magic Legality","blurb":"Where magic exists, its standing in law runs from forbidden to celebrated.
+tests/domain/patronFall.test.js:224:const creedOf = (entry) => String(entry.sourceEventId).split('lu_')[1];
+tests/domain/patronFall.test.js:605:    const creeds = WITHDRAWN.map(creedOf);

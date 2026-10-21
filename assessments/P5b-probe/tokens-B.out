@@ -1,0 +1,83 @@
+BD-13 | bounty | fold§5=2 fold=6 | vols: BD:41 CH:20 PL:1 PR:1 PT:35 RN:7 ST:1 SPINE:2 | src-files=15
+BD-63 | bought_off | fold§5=0 fold=3 | vols: BD:7 PL:5 | src-files=0
+BD-63b | bought gate | fold§5=0 fold=0 | vols: BD:5 | src-files=0
+BD-64 | applyHomeWarCosts | fold§5=0 fold=0 | vols: BD:3 WC:6 | src-files=2
+BD-75 | sponsor | fold§5=1 fold=7 | vols: BD:61 CH:9 EC:2 MN:14 PL:7 RN:9 TR:1 | src-files=34
+BD-82a | by_survey | fold§5=0 fold=0 | vols: BD:4 | src-files=0
+BD-82b | by_broker | fold§5=1 fold=1 | vols: BD:7 PR:1 | src-files=0
+BD-82c | knownTrailsOf | fold§5=3 fold=5 | vols: BD:12 CH:12 PR:22 PS:16 PT:3 | src-files=0
+O7a | ADVANCE BY N | fold§5=0 fold=3 | vols: SPINE:1 | src-files=0
+O7b | OD-FC-51 | fold§5=0 fold=8 | vols: SPINE:1 | src-files=0
+O29 | age receipt | fold§5=0 fold=11 | vols: RN:1 SPINE:1 | src-files=6
+PL-27 | scutage | fold§5=0 fold=0 | vols: PL:4 | src-files=0
+PL-29 | commuted | fold§5=0 fold=0 | vols: | src-files=0
+PL-36a | liegeAnswer | fold§5=1 fold=4 | vols: PL:14 PR:1 PS:18 PT:1 ST:1 | src-files=0
+PL-36b | pactAnswers | fold§5=1 fold=3 | vols: MN:14 | src-files=0
+PL-39 | supply_raid | fold§5=0 fold=6 | vols: BD:7 PL:5 PS:2 | src-files=0
+PL-73 | ask the vassals | fold§5=0 fold=3 | vols: CH:1 PL:5 | src-files=0
+PL-74 | succession_reaffirmation | fold§5=0 fold=3 | vols: GR:1 PL:2 | src-files=0
+MN-29 | recordSighting | fold§5=1 fold=3 | vols: BD:8 MN:12 PR:2 RN:2 ST:13 | src-files=0
+MN-34a | lawfulness01 | fold§5=0 fold=0 | vols: CH:3 ES:2 HB:5 INT:1 MN:1 PR:1 PS:3 RN:4 SP:1 SPINE:1 | src-files=27
+MN-34b | malice01 | fold§5=0 fold=0 | vols: ES:2 HB:1 INT:1 MN:1 PR:1 PS:2 RN:11 SP:1 SPINE:1 | src-files=23
+MN-38 | unprotected | fold§5=0 fold=0 | vols: MN:2 | src-files=5
+MN-39 | route disruption | fold§5=0 fold=0 | vols: MN:1 ST:1 | src-files=3
+MN-40 | protection record | fold§5=0 fold=2 | vols: MN:2 ST:1 | src-files=0
+MN-54 | committed_to_menace | fold§5=1 fold=1 | vols: MN:5 | src-files=0
+RN-10 | seat_change | fold§5=0 fold=0 | vols: RN:1 | src-files=0
+RN-11 | war_concluded | fold§5=0 fold=0 | vols: PS:1 RN:1 | src-files=0
+CH-59 | paragon_employer | fold§5=1 fold=1 | vols: CH:8 | src-files=0
+CH-88 | paragon | fold§5=7 fold=41 | vols: BD:29 CH:255 MN:17 PL:5 PR:31 PS:4 PT:22 RN:36 ST:14 SPINE:1 | src-files=0
+CH-92a | removeFreeUnit | fold§5=0 fold=0 | vols: WC:1 | src-files=0
+CH-92b | dissolving | fold§5=0 fold=0 | vols: CH:3 PR:1 PS:1 RN:1 WC:4 | src-files=2
+CH-96 | paragonsAt | fold§5=0 fold=0 | vols: CH:3 | src-files=0
+PS-21 | passageAnswerOf | fold§5=0 fold=0 | vols: PS:12 | src-files=0
+PS-30a | humanTermType | fold§5=0 fold=0 | vols: PS:4 | src-files=0
+PS-30b | termLabel | fold§5=0 fold=0 | vols: WF:1 | src-files=10
+PS-32 | passage_answer | fold§5=0 fold=0 | vols: PS:2 | src-files=0
+ST-42 | riders_quartered | fold§5=1 fold=5 | vols: PL:30 PR:14 | src-files=0
+ST-43 | traitor | fold§5=0 fold=0 | vols: ST:2 TR:1 WC:1 | src-files=13
+ST-59 | site_cession | fold§5=0 fold=0 | vols: PR:1 ST:4 | src-files=0
+ST-62 | consecrated | fold§5=0 fold=0 | vols: ST:7 | src-files=5
+ST-64 | leave a ruin | fold§5=0 fold=0 | vols: ST:8 | src-files=0
+ST-65 | re-emit | fold§5=0 fold=0 | vols: ES:1 ST:1 | src-files=22
+PR-7 | keepRiders | fold§5=0 fold=0 | vols: PR:6 | src-files=0
+PR-9 | route_menaced | fold§5=0 fold=0 | vols: BD:5 HB:1 PR:7 | src-files=1
+PR-39 | trailWatchOf | fold§5=2 fold=4 | vols: BD:9 CH:2 PR:23 PS:5 | src-files=0
+PR-54a | patrolEncounter | fold§5=0 fold=0 | vols: BD:3 CH:1 PR:4 PT:3 | src-files=0
+PR-54b | caravan_seized | fold§5=1 fold=7 | vols: BD:7 EC:1 PR:6 WY:3 | src-files=0
+PR-56 | believedWatch | fold§5=0 fold=1 | vols: BD:7 CH:7 PR:18 PS:1 PT:1 | src-files=0
+PR-57 | armsNear | fold§5=1 fold=1 | vols: PR:5 PS:12 | src-files=0
+PR-61 | INVESTIGABLE_EVENT_TYPES | fold§5=1 fold=1 | vols: PR:2 | src-files=0
+PR-78a | patrol_will | fold§5=0 fold=0 | vols: | src-files=0
+PR-78b | PARAGON_LEAN_SEAMS | fold§5=1 fold=2 | vols: CH:5 MN:3 PR:1 | src-files=0
+DE-BD-69 | bodySpillDraw | fold§5=0 fold=0 | vols: BD:2 | src-files=0
+DE-CH-114 | needsOf | fold§5=0 fold=0 | vols: CH:1 | src-files=0
+DE-CH-134 | liaisonId | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+DE-CH-143a | turnedAt | fold§5=0 fold=0 | vols: CH:3 | src-files=0
+DE-CH-143b | crossedAt | fold§5=0 fold=0 | vols: CH:2 | src-files=0
+DE-PT-33a | party_offer | fold§5=1 fold=5 | vols: PT:7 SPINE:1 | src-files=0
+DE-PT-33b | offer_accepted | fold§5=0 fold=0 | vols: | src-files=0
+DE-PT-49a | needPlaceOf | fold§5=1 fold=1 | vols: PT:8 | src-files=0
+DE-PT-49b | deadlineTick | fold§5=0 fold=0 | vols: PT:3 | src-files=1
+DE-PT-95 | NAME_PARTY | fold§5=0 fold=0 | vols: PT:1 | src-files=0
+DE-PS-50 | gateKeeperOf | fold§5=0 fold=1 | vols: PS:5 ST:2 | src-files=0
+DE-PS-51 | passageNodesOf | fold§5=0 fold=0 | vols: PS:3 | src-files=0
+DE-ST-1 | siteAt | fold§5=0 fold=0 | vols: ST:3 | src-files=0
+DE-ST-91 | quietWeeks | fold§5=1 fold=2 | vols: MN:10 ST:1 | src-files=0
+DE-PR-85 | patrolsOf | fold§5=0 fold=0 | vols: PR:2 | src-files=0
+DE-PR-102 | escortedOn | fold§5=0 fold=0 | vols: PR:2 | src-files=0
+J-PR-22 | MIGHT_LATENT | fold§5=0 fold=0 | vols: MN:3 | src-files=0
+J-BD-55 | bodyOnRoute | fold§5=0 fold=0 | vols: BD:3 | src-files=0
+J-ST-50 | denPressOf | fold§5=1 fold=1 | vols: BD:4 ST:12 | src-files=0
+J-ST-31 | keptSecret | fold§5=3 fold=3 | vols: BD:2 CH:2 MN:1 PR:3 PT:4 RN:2 ST:29 | src-files=0
+J-ST-93 | holderSince | fold§5=0 fold=0 | vols: | src-files=0
+J-RN-49 | factionPairStates | fold§5=0 fold=0 | vols: INT:2 RN:2 | src-files=5
+J-RN-50a | paid_well | fold§5=0 fold=0 | vols: CH:1 | src-files=0
+J-RN-50b | sheltered | fold§5=0 fold=0 | vols: BD:3 CH:1 | src-files=10
+J-RN-50c | slandered | fold§5=0 fold=0 | vols: CH:2 | src-files=1
+J-CH-69 | under_quarantine | fold§5=2 fold=4 | vols: CH:6 PT:1 | src-files=0
+J-MN-57 | UNPRICED_LEG_WEEKS | fold§5=0 fold=0 | vols: BD:2 CH:5 MN:1 PR:2 PT:2 | src-files=2
+J-PT-42 | courtRegardOf | fold§5=0 fold=1 | vols: PT:4 RN:18 | src-files=0
+J-PS-64 | enemyColumnPresence | fold§5=1 fold=1 | vols: MN:1 PS:6 | src-files=0
+J-CH-44 | strengthByRef | fold§5=0 fold=2 | vols: BD:6 CH:5 PL:2 RN:2 ST:2 | src-files=2
+J-PS-48 | favour | fold§5=0 fold=0 | vols: BD:1 CH:2 HB:1 MN:1 PS:9 GENERALS:1 | src-files=47

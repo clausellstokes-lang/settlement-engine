@@ -1,0 +1,18 @@
+instruments embargo,interdiction,occupy,purchase_denial,raid,toll_war · armed interdiction,occupy,raid · archetypes 14 · grid points 6174
+bloodyShare  min 0.1308 · median 0.3000 · max 0.4571 · points >= median 3213/6174
+armedShare   min 0.2846 · median 0.4630 · max 0.6286 · points >= median 3213/6174
+  (none)         bloody 231/441 · armed 231/441
+  arcane         bloody 231/441 · armed 231/441
+  civic          bloody 231/441 · armed 231/441
+  craft          bloody 231/441 · armed 231/441
+  criminal       bloody 231/441 · armed 231/441
+  government     bloody 231/441 · armed 231/441
+  labor          bloody 231/441 · armed 231/441
+  merchant       bloody   0/441 · armed   0/441
+  military       bloody 441/441 · armed 441/441
+  noble          bloody 231/441 · armed 231/441
+  occupation     bloody 231/441 · armed 231/441
+  other          bloody 231/441 · armed 231/441
+  outsider       bloody 231/441 · armed 231/441
+  religious      bloody 231/441 · armed 231/441
+old absolute cut (>= 0.5) bloody: 0/6174

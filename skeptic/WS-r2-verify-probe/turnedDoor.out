@@ -1,0 +1,8 @@
+strength vectors 972; the WAY itself differs bloody vs bloodless (same strengths): 296/972
+C1/C2/C6 factors [deploy, defend/hold, sue, C2 ramp, C6 raid] differ bloody vs bloodless under a situation cause (same strengths, same cause):
+  coffers_bare     240/972
+  foe_on_the_ways  113/972
+  siege_long       113/972
+  field_lost       56/972
+  ally_failed      56/972
+example: {"s":{"manpower":"below","institutions":"level","materiel":"below","ways":"none","horses":"poor","chain":"alone","harbour":"landbound"},"c":"siege_long","bloody":"1.0000,1.0600,1.0000,1.0000,1.0000","bloodless":"1.0000,1.0000,1.0000,1.0000,1.0000","wb":"way_raiding","wl":"way_logistics"}

@@ -1,0 +1,3 @@
+# rg -w -i -l counts: master src · master tests · master docs · ledger docs (excluding DESIGN_FP_ARCH_FS.md), Tue Oct 20 15:57:55 CDT 2026
+pressedSteps 0 · 0 · 0 · 0
+pressedHandOf 0 · 0 · 0 · 0

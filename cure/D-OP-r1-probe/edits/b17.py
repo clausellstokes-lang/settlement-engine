@@ -1,0 +1,5 @@
+C = "[CURED 2026-10-20 (fp-final P6 r1) — "
+PAIRS = [
+("CH's call board gains the `captive_held` source row and CH's exert offers `rescue_attempt` (§9); CH's aim carries the aside mark; a villain's false word is a `paragon_act`. FIRST-VISIBLE: a champion's arrival at a captor's town with a call there. TIER: as CH-1. DEGRADED ARM: ES-2b dark ⇒ a paragon's `caught` reads as a failed attempt without capture (§9).",
+ "CH's call board gains the `captive_held` source row keyed to the captive's HOME (`help`; the venue town `harm`), excluded from PT's read, and CH's exert offers `rescue_attempt` at the venue (§9); CH's aim carries the aside mark (OD-OP-24 ⭐, §13 L4); ANY paragon's false word is a `paragon_act` through CH's roll. FIRST-VISIBLE: a champion's arrival at a venue town holding a captive whose home's call it answered. TIER: as CH-1. DEGRADED ARM: until a paragon can ride a hold (the errand-row slot + ES-2b pairing) a paragon's `caught` reads as a failed attempt without capture (§9) " + C + "OP-r1-13 · 15 · 17 · 21]."),
+]

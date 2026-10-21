@@ -1,0 +1,32 @@
+W=0.1 (alignment half and law half), W/2=0.05 (boldness half), mu=0.5, shame bar m_A' <= -0.5
+
+T1 the skeptic's rows (old act -> new act):
+   war/champion | evil/chaotic/derived (warlike) | 1.0002 -> 1.0465
+   war/champion | good/lawful/derived (peacelike) | 1.0235 -> 0.9722
+   war/champion | neutral/neutral/auth:warlike (warlike) | 1.0042 -> 1.0500
+   duel_won/champion (pursue_nemesis) | good/lawful/derived (peacelike) | 1.0314 -> 0.9785
+   faith/champion (saint, own creed) | evil/chaotic/derived (warlike) | 0.9919 -> 0.9959
+   order/champion | neutral/neutral/auth:warlike (warlike) | 0.9958 -> 0.9500
+   health/champion | good/lawful/derived (peacelike) | 1.0673 -> 1.1060
+   T1 warlike-derived war champion > peacelike-derived: true
+   war deed war/champion: min act over warlike gods 1.0465 vs max over peacelike 0.9722
+   war deed war/villain: min act over warlike gods 1.0080 vs max over peacelike 0.9880
+   war deed duel_won/champion (pursue_nemesis): min act over warlike gods 1.0465 vs max over peacelike 0.9785
+   war deed duel_won/villain: min act over warlike gods 1.0150 vs max over peacelike 0.9817
+   war deed hunt_won/gang-beast: min act over warlike gods 1.0395 vs max over peacelike 0.9848
+   war deed hunt_won/conclave (not its flock): min act over warlike gods 1.0290 vs max over peacelike 0.9690
+   war deed hunt_won/conclave (ITS OWN flock): min act over warlike gods 0.9870 vs max over peacelike 0.9120
+T1b every war deed, every warlike god > every peacelike god: true 
+T2 monotone in each coordinate holding the others (malice, law on the alignment half; temper on act): true 
+T3 neutral/neutral god, no-tie faces: alignment half exactly 1 on every temper arm: true; act exactly 1 when the temper is neutral (derived or authored): true; commit exactly 1: true
+   neutral/neutral/auth:warlike leans ONLY through the temper: faith/villain 1.050 · health/champion 0.950 · health/villain 1.050 · order/champion 0.950 · order/villain 1.050 · wildland/champion 1.000
+   neutral/neutral god, own-creed tie rows (lens two only): faith/champion (saint, own creed) align 1.050 · faith/villain (FALLEN: against its own god) align 0.950 · hunt_won/conclave (ITS OWN flock) align 0.950
+T4 envelope by construction: act in [0.8550, 1.1550], commit in [0.90, 1.10]; MEASURED over the registered faces x 36 gods: act [0.8851, 1.1200], alignment half [0.9317, 1.0667]
+T5 exertion rows reaching shame (m_A' <= -1/2), by face: 
+   faith/villain (FALLEN: against its own god): good/lawful good/neutral good/chaotic neutral/lawful neutral/neutral
+   health/villain (plaguebearer): good/lawful good/neutral
+   wildland/villain: good/lawful
+   S65: the fallen saint under EVERY good creed reaches shame: true (m_A' -0.583 at most); its act 0.885..0.989
+T6 S62 duel_won/villain most opposed: good/lawful/derived act 0.9183; good/lawful/derived act 0.9183
+T7 saint of an evil creed preaching its own god: act 0.9959 (align 1.0483) — was 0.9919
+   conclave hunt of its OWN god's flock vs another flock, good/lawful/derived: 0.8993 vs 0.9437

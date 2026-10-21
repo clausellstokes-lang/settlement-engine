@@ -1,0 +1,11 @@
+## EC embargo/liege rung, toll_exemption
+
+418:| S44 | Treaties move GRAIN ONLY (tribute, reparations, restitution, resource_share + two faith/settlement rows; reserve floor 1.5 months, 60% captured); trade-rights terms (exclusivity, market_ac
+1317:  B for the named good is `restricted`; `toll_exemption` → cancels `taxed`; a
+1323:  `toll_exemption`, family `commercial`, executor `'seam'` (S44's "placeholder"
+1384:  `toll_exemption` EXACTLY ONCE at the catalog's spelling; a planted fourth
+1998:  `market_access` demand (the TR-5 catalog row) — the symmetric motive. [CORRECTED 2026-10-16 (coherence fold §3.1.1) — nothing drafts commercial terms today (`rg 'market_access|toll_exempti
+## GRAMMAR charter/narrowed_voice
+## WC call_in_answer + summons
+96:[ADDED 2026-10-16 (coherence fold §3.4, requirement 24 — the owner's HEARING WEEK) — ENGAGEMENT KINDS this program registers in the wave that builds each: `armies_meet` (Arc A, one of the four kinds SP-9 lights first), `call_in_answer` (WC-5), `contrib
+## GR succession_reaffirmation vs fealty

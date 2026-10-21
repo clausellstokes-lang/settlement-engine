@@ -1,0 +1,38 @@
+## master PolitySite/WorldSite/window
+## PL swornLinkSuspended
+11
+## BD reads
+bodyPresenceTermOf 3
+courtStanceOf 3
+bodyStrength 8
+BODY_SUPPLY_WORDS 2
+bodyReadiness01 3
+believedBodies 5
+believedBodyOf 24
+PLACE_BODY 6
+PROMOTE_BODY 12
+den_held 2
+body_stance 17
+bodyPresenceFeeder 4
+## MN reads
+believedMenaces 21
+MENACE_COURSES 3
+MENACE_WHERE_KINDS 4
+presenceTerms 10
+roadCountry 5
+recordSighting 12
+reliefSent 4
+## CH purse
+417:purse band
+649:purse band
+1076:purse band
+## PR
+83:- **ST §3.4 / ST8 / ST item 21, MN §3.3** — ONE presence term of FOUR registered feeders (MN §3.3: "`p(T) = max(wallsTerm(T), columnTerm(T), max(0, roadCountry(T) − σ(T)))`" — the walls, an enemy column, the road-country; OD-MN-40: "THE 
+315:`patrolCounterTerm(T) = clamp(K_COUNTER × (coverageOf(T) − referenceCoverage(tier(T))), −0.10, +0.10)`, `K_COUNTER` 0.25 — the DEVIATION of the town's actual watch from the REFERENCE watch of its tier (the coverage a `funded` town of that 
+332:`witnessedCrossing(worldState, holderId, gateKey, unit, tick) = holderEyesOf(worldState, snapshot, { road: gateKey, holder: holderId }, tick) > 0 (the holder's EYES on its own half of the gate's road this week — its own riders, or a net rider s
+530:- **Car-0:** measure `banditryLoss`'s and `smuggleSuccessChance`'s callers (exactly `commodityFlow.js:651`, `supplyShipments.js:372`, `commodityFlow.js:602` at master — any new caller gets `fireLevel` / `watch01` or is listed as reading none); 
+714:| R8 | WARTIME WITH THE ARMY AWAY — the default | the army is raised ⇒ Kell keeps `max(ceil(max × 0.75), min(max, peace + 1))` riders — NEVER fewer than its peace count and one more wherever `max` allows, for EVERY court (the wary and the 
+839:9. "With the watch gone to the war, the hill road has gone to the brigands." — and where Kell holds a keep on that road: "With the watch gone to the war, the hill road beyond the keep's reach has gone to the brigands." *(the riders Kell kept ro
+## PS sitesNear
+309:`believedPassageCost(worldState, snapshot, A, B, unit)` = A's belief of the answer it will get (A's believed rung with B — `belief(A, B).allianceLabel` — and A's believed size band against B's believed strength band, `strengthOfBand(belief(A, B).strengthBand)`), the envoy's weeks there and b
+604:| ST (the sites) | ONE ruled answer on the digest gate's keeper (RULINGS-ROUND2b HOST-r2-3, J385) [CURED 2026-10-18 (fp-final r3) — minor 4]: the TERRITORY's holder keeps it; a `crossing` site's holder takes a TOLL SHARE and the crossing's own effect only, never the passage answer (ST aligns i

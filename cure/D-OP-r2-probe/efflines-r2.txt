@@ -1,0 +1,5 @@
+src/domain/worldPulse/envoyRansomStage.js raw=201 eff=98 baseline=
+src/domain/worldPulse/ransomClaim.js raw=338 eff=178 baseline=
+src/domain/worldPulse/npcLedger.js raw=1064 eff=429 baseline=
+src/domain/npc/livedExperienceSources.js raw=1018 eff=473 baseline=
+src/domain/worldPulse/espionage/espionageGauntlet.js raw=667 eff=309 baseline=

@@ -1,0 +1,28 @@
+### MG §4.1 row 2 status (l.216)
+DARK-wings; DARK until HB-7 lights `habitAnticipationEnabled` — the (v) term is the motive's only ground for the hope its receipt states, so the row stays dark while that term reads ×1 (a lighting condition, never a second factor) |
+### OD-MG-23 (l.477)
+| OD-MG-23 | HB's anticipation term enters MG's roll ONCE per candidate verb, in §5.1 (v) only; no motive row reads it; rows 2 and 15 stay dark until it can be read (a lighting condition, never a factor) (r2, MG-V2) |
+### S20 (l.427)
+| S20 | a court whose belief of a foe carries `doctrineBands[cls]`, a believed pursuer, `habitAnticipationEnabled` lit | `anticipationFactorFor` is called ONCE per candidate verb, inside §5.1 (v) only (a source scan of `movementMotives.js`: zero calls); split's score carries HB's term once and stays within HB's own bound; `await_enemy_split` raises `hold` through the (their `split`, my `hold`) cell, never the (`spli
+### MG §3.2 step (0) and the imposed-holds claim (l.191)
+The three imposed holds (border, fort, screen) still precede the commander's choice, and "the first registrant in this order to hold wins" still lets the commander re-choose next week; the CONTACT now follows it: the commander chooses on the week's belief, and the meeting is read on
+ONE PASS, IN THIS ORDER: (0) THE WING STEPPER — every wing row on MG's ledger (codepoint order by wing key) is stepped to this tick by the landed pure `stepArmyPosition(wingClocks, tick)` ("`const position01 = span <= 0 ? 1 : clamp01((t - depart
+### MG §6.3 a wing's contacts (l.297)
+ITS CONTACTS ARE WC ARC A'S: Arc A's `armiesMeetLeaf` — now FIFTH in PS §4.1's order, AFTER MG's leaf (RULINGS-P6 D.4) — reads MG's wings, stepped 
+A wing at or below `modest` meets patrols and bodies by PR's ONE encounter law like any small unit.
+### MG §11 wingsEnabled requires (l.373)
+| `wingsEnabled` | `split` · `regroup` (armies; sea and air fleets along LG-2's commitments) | `movementGrammarEnabled`; WC's deployment debit landed (THE OWNER'S row, B.2) with its reader census; PS's ruling on a wing's passage — INCLUDING PS's march row carrying the wing and banking its battle inputs at every re-plan (§6.3) [REFINED 2026-10-20 (fp-final P6 r2) — MG-V1's class on land]; WC's wing arrival reader; WC Arc A calling `holdWingAtContact` (D.4) | WC's conservation pin; a wing never splits; a wing's contact is read in WC Arc A's pass, on the wing MG stepped that tick, and its hold is written by MG
+### PS §4.1 registrants (2) and (3) (PS l.266)
+(2) THE SITES' approach-fort leaf (ST-2b, `siteWarTargetEnabled`; ST §4.3 as cured: "in the helper's FREEZE mode … for a fort on the stretch it travels, and in its border-clamp mode for a fort 
+(3) THE PATROLS' screen leaf (PR §9.1 (b): an army marching on the riders' own town or crossing its land, ONE week at the screen's verdict), FREEZE mode; (4) WC Arc A's `armiesMeetLeaf` (f
+### PS car-0 stage call (PS l.264)
+runTransitLeaves({ records, priorRecords: prior, worldState, snapshot, digest, graph, rng, tick: nowTick }))` placed after DERIVE + ADVANCE and the COURIER UMBILICAL and before COLLISIONS — so a held column is held bef
+### PR §9.1 (b) (PR l.412)
+- **(b) SCREEN AND DELAY — an army marching on the riders' OWN town, or crossing its land toward another.** A detachment with aim `screen` meets the van on a half of the round. The van does NOT stand for the screen's hearing (unlike PS's border hearing, the 
+### wing mentions in PS/ST/PR (count of 'wing' as MG's unit)
+PS: 0
+ST: 0
+PR: 0
+### WS drift
+| `wayOfWarForWar(worldState, snapshot, courtId, foeId, tick)` — the war addressed by its FOE (P4) | the week's P2 pin
+| `WAY_DEVIATION_CAUSES` | `dm_pinned · campaign_plan · field_lost · seat_rotting · coffers_bare · levy_thin · foe_on_the_ways · ally_failed · siege_long · commander` | §5; closed; the recei

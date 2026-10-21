@@ -1,0 +1,14 @@
+landed: WAR_CONSCRIPT_RATE_PER_TICK 0.006 · WAR_CONSCRIPT_POP_FLOOR 250 · SIEGE_MAX_AGE 60
+WAY_LEVY_SPENT (DRAFT) 0.5
+home at the march    60 · room     0 · spent01 after 60 ticks none (room 0 at the march) · ticks to reach the cut never · denominator == room at the march every tick: true
+home at the march   150 · room     0 · spent01 after 60 ticks none (room 0 at the march) · ticks to reach the cut never · denominator == room at the march every tick: true
+home at the march   250 · room     0 · spent01 after 60 ticks none (room 0 at the march) · ticks to reach the cut never · denominator == room at the march every tick: true
+home at the march   260 · room    10 · spent01 after 60 ticks 1.000 · ticks to reach the cut 3 · denominator == room at the march every tick: true
+home at the march   300 · room    50 · spent01 after 60 ticks 1.000 · ticks to reach the cut 13 · denominator == room at the march every tick: true
+home at the march   400 · room   150 · spent01 after 60 ticks 0.800 · ticks to reach the cut 38 · denominator == room at the march every tick: true
+home at the march   600 · room   350 · spent01 after 60 ticks 0.529 · ticks to reach the cut 57 · denominator == room at the march every tick: true
+home at the march   800 · room   550 · spent01 after 60 ticks 0.442 · ticks to reach the cut 71 · denominator == room at the march every tick: true
+home at the march  1000 · room   750 · spent01 after 60 ticks 0.403 · ticks to reach the cut 79 · denominator == room at the march every tick: true
+home at the march  2000 · room  1750 · spent01 after 60 ticks 0.347 · ticks to reach the cut 96 · denominator == room at the march every tick: true
+home at the march  5000 · room  4750 · spent01 after 60 ticks 0.319 · ticks to reach the cut 108 · denominator == room at the march every tick: true
+home at the march 20000 · room 19750 · spent01 after 60 ticks 0.307 · ticks to reach the cut 114 · denominator == room at the march every tick: true

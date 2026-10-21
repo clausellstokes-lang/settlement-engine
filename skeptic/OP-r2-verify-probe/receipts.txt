@@ -1,0 +1,26 @@
+# V-OP-r2 read receipts (master 81f1cd963, READ-ONLY; ledger docs as of 2026-10-20 ~16:xx CDT)
+envoyRansomStage.js header: "NOTHING IS PERSISTED HERE, AND THAT IS AN OWNER GATE, NOT AN OVERSIGHT."
+envoyRansomStage.js :: openRansomClaims: ransomMessageLegs({ claim: minted.claim, departTick: now, venueId: text(hold.venueId) || text(hold.captorId) })
+ransomClaim.js :: mintRansomClaim -> { claimantId: captorId, debtorId, subject } ; ransomMessageLegs demandLeg { fromId: venueId, toId: row.debtorId }
+roads/state.js :: RansomRec: id `ransom.${missionId}` · npcKey · homeId · captorId · startedTick ...
+envoyInterceptionStage.js :: legalEncounterVenue: "if (text(asObject(occupation).occupierId) === actor) { return { encounterRef: { id: node, kind: 'occupied_enemy_settlement' }"
+envoyInterceptionStage.js l.349: encounter: { ...encounter, venueRef: venue.encounterRef }  (kind kept on the errand's encounter; ENCOUNTER_KEYS includes venueRef)
+envoyInterceptionStage.js l.404: captorId: text(encounter.interceptorId)
+espionageGauntlet.js :: gauntletCatchFactors: relationshipTypeBetween(..., text(homeId), targetId); returns { hostRung: Number.isFinite(rung) ? rung : 0, ... } (one plain field)
+npcAgency.js :: npcId: `${saveId}:${npc?.id || stablePart(npc?.name || npc?.label || `npc_${index}`)}`
+informationStatecraft.js :: buildLiveNpcIds: npcs.forEach((npc, index) => { out.add(npcId(String(sid), npc, index)); }) (raw roster)
+informationStatecraft.js l.484 (pickMouthpiece): roster.push({ nid: npcId(sid, n, index), w })
+npcLedger.js OriginRef.rosterId "the POSITIONAL slot id they held at graduation"; graduateNpc "never touches npcs[]"
+livedExperienceSources.js :: subjectByDurableId: "if (str(npc.id) === rosterId && str(npc.name) === name) return { home, npc };"
+subsystemRowsWar.js l.715: "all nine immediate WR-7b facts are DM-only until a separate observation carrier earns public knowledge"
+CH §4.2 answer_call: "a place whose call in its domain it believes is the gravest within reach | free; bound only inside the employer's lands | its own leg (bound: inside the lands)"
+CH §4.2 work_here: "a call in its domain stands here, or it is retained here, or ... its post"
+CH §4.5: "If the week's aim is `work_here` (or it arrives where its domain calls), it EXERTS when ..."
+CH l.117: a bound paragon "moves on its own initiative inside the employer's lands ... and outside them only with the court's army or column, where the DM sends it (`assign`) ..."
+CH §14: "Sources with NO belief arm ... are known by presence alone. Under the omniscient info mode (the default and three other presets) the board is the truth."
+CH §2.1: aim?: { purpose, destId, sinceTick, reasons, exert?, bodyId? }
+OP §9 (r2): harm twin "at the VENUE town, side: 'harm' (... known there by presence alone, CH §14 road (a) ...)"; help row "EXISTS only once a lawful road carried the hold home ... in EVERY info mode"
+OP §4.3: the JAILER must sit at a T4 rung toward the rescuer's court IN TRUTH (friend rule)
+OP §9 (r2): "a BOUND champion answers only where that venue lies inside its employer's lands (CH's rule, unchanged)"; §14 r34 "a BOUND champion whose employer's lands do not reach Kell does not answer it"
+X-DMG-OP: OP's only "BARRED"/"no hidden-way detour" hits are the quotation inside the §15 NOTED row (l.546).
+mouthpiece-key-rerun.out: EXECUTED (exit 0) — durable key: no entry, weight 1; positional key charged, weight 0.47886806459400866.

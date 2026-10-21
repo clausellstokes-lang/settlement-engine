@@ -1,0 +1,23 @@
+offer_accepted | src 0 | tests 0 | master-docs 0 | quoted-src 0 | ledger-docs: 
+deed_acceptance | src 0 | tests 0 | master-docs 0 | quoted-src 0 | ledger-docs: 
+closedRecent | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+fromIds | src 0 | tests 2 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+RECORD_CLEARING | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_RN.md 
+met_in_person | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_CH.md 
+refused_request | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+menace_weakened | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_MN.md 
+menace_ended | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_MN.md 
+SET_PRESENCE | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+NAME_PARTY | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+MARK_DEED | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+ANSWER_ENGAGEMENT | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+KEEP_PLEDGE | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+SEND_WORD | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_RN.md 
+DIRECT_TO_PARTY | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+BAN_PARTY | src 0 | tests 0 | master-docs 2 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_CH.md 
+PARDON_PARTY | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+STRIKE_ENGAGEMENT | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+AMEND_ENGAGEMENT | src 0 | tests 0 | master-docs 1 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md 
+RECORD_MEETING | src 0 | tests 0 | master-docs 3 | quoted-src 0 | ledger-docs: DESIGN_FP_ARCH_PT.md DESIGN_FP_ARCH_CH.md DESIGN_FP_ARCH_RN.md 
+employerOf | src 0 | tests 0 | master-docs 0 | quoted-src 0 | ledger-docs: 
+partyEmployerOf | src 0 | tests 0 | master-docs 0 | quoted-src 0 | ledger-docs: 

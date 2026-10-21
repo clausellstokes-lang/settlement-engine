@@ -1,0 +1,18 @@
+./components/map/heraldWanderers.js:248:    notorietyLine: NOTORIETY_LINE[String(person.notorietyBand || 'unknown')] || NOTORIETY_LINE.unknown,
+./domain/worldPulse/npcLedgerFacets.js:181: * @property {string} notorietyBand   a NOTORIETY_BANDS member
+./domain/worldPulse/npcLedgerFacets.js:196:  notorietyBand: 'unknown',
+./domain/worldPulse/npcLedgerFacets.js:211:  'notorietyBand',
+./domain/worldPulse/npcLedgerFacets.js:249:  const notorietyBand = closedValue(r.notorietyBand, NOTORIETY_BANDS);
+./domain/worldPulse/npcLedgerFacets.js:255:    notorietyBand === NEUTRAL_REPUTATION_FACETS.notorietyBand
+./domain/worldPulse/npcLedgerFacets.js:263:  return Object.freeze({ notorietyBand, edictMark, scandalClass, alignmentRead, competenceRead });
+./domain/worldPulse/npcVerdictTable.js:578: * @returns {{ notorietyBand: string, edictMark: string, scandalClass: string, alignmentRead: string, competenceRead: string }}
+./domain/worldPulse/npcVerdictTable.js:588:    notorietyBand: band,
+./domain/worldPulse/npcVerdictTable.js:613: * @property {{ notorietyBand: string, edictMark: string, scandalClass: string, alignmentRead: string, competenceRead: string }} reputation
+./domain/worldPulse/npcLedgerProjection.js:62: * @property {string} notorietyBand
+./domain/worldPulse/npcLedgerProjection.js:134:    notorietyBand: String(reputation.notorietyBand || 'unknown'),
+./domain/worldPulse/npcCirculationTable.js:235: * @param {{ notorietyBand?: unknown, scandalClass?: unknown, alignmentRead?: unknown, edictMark?: unknown }} args.believed
+./domain/worldPulse/npcCirculationTable.js:246:  const loudness = notorietyRank(marks.notorietyBand);
+./domain/worldPulse/npcCirculation.js:724:  return notorietyRank(believed.notorietyBand);
+./domain/worldPulse/npcCirculationBelief.js:193:  const rank = notorietyRank(facts.notorietyBand) - fadeSteps;
+./domain/worldPulse/npcCirculationBelief.js:207:    believed: normalizeReputationFacets({ ...facts, notorietyBand: band }),
+./domain/worldPulse/reputationRaceConsumer.js:199:      told: NOTORIETY_BANDS.indexOf(rec.reputation.notorietyBand) > 0, npcName: text(rec.identityFacets.name),

@@ -1,0 +1,120 @@
+normalizeRecord | files=5 | src/domain/worldPulse/urbanFabricKernel.js:431:function normalizeRecord(v, tick, weeks) {
+moveNpcRecord | files=5 | src/domain/worldPulse/npcLedger.js:973:export function moveNpcRecord({ worldState, wnpcId, hostSettlementId, patch = {}, sinceTick }) {
+graduateNpc | files=7 | src/domain/worldPulse/npcLedger.js:629:export function graduateNpc({
+mintDurableNpcId | files=1 | src/domain/worldPulse/npcLedger.js:549:export function mintDurableNpcId(settlementSeed, rosterIdentity, tick, taken = { has: () => false }) 
+DM_VERBS | files=1 | src/domain/worldPulse/npcDmVerbs.js:112:export const DM_VERBS = Object.freeze(['assign', 'kill', 'pardon']);
+undoDmVerb | files=2 | src/domain/worldPulse/npcDmVerbs.js:857:export function undoDmVerb({ worldState, undo }) {
+killNamedNpc | files=2 | src/domain/worldPulse/npcDmVerbs.js:487:export function killNamedNpc({ worldState, wnpcId, tick, settlement = null, settlementName = '' }) {
+removeNpcRecord | files=3 | src/domain/worldPulse/npcLedger.js:868:export function removeNpcRecord(worldState, wnpcId) {
+assignRoamer | files=2 | src/domain/worldPulse/npcDmVerbs.js:248:export function assignRoamer({
+assignmentOrigin | files=2 | src/domain/worldPulse/npcDmVerbAuthority.js:118:export function assignmentOrigin(found) {
+advanceAssignedNpcTransits | files=2 | src/domain/worldPulse/npcDmVerbs.js:391:export function advanceAssignedNpcTransits({ worldState, tick, season = null }) {
+placeNpcRecord | files=1 | src/domain/worldPulse/npcDmVerbs.js:211:function placeNpcRecord(worldState, wnpcId, placementHost, sinceTick, patch = {}) {
+EXCLUSION_KINDS | files=2 | src/domain/worldPulse/npcLedgerFacets.js:166:export const EXCLUSION_KINDS = Object.freeze([
+EDICT_EXCLUSION_KINDS | files=5 | src/domain/worldPulse/npcLedgerFacets.js:177:export const EDICT_EXCLUSION_KINDS = Object.freeze(['banishment_edict']);
+isExcludedFrom | files=3 | src/domain/worldPulse/npcLedger.js:478:export function isExcludedFrom(worldState, wnpcId, settlementId, tick, kinds = EXCLUSION_KINDS) {
+addExclusionEdge | files=4 | src/domain/worldPulse/npcLedger.js:774:export function addExclusionEdge(worldState, wnpcId, edge) {
+liftExclusionEdges | files=2 | src/domain/worldPulse/npcLedger.js:809:export function liftExclusionEdges(worldState, wnpcId, scope = {}) {
+normalizeExclusionEdges | files=2 | src/domain/worldPulse/npcLedgerFacets.js:369:export function normalizeExclusionEdges(raw) {
+restoreNpcRecord | files=2 | src/domain/worldPulse/npcLedger.js:920:export function restoreNpcRecord({ worldState, wnpcId, record, wasPlaced, exclusions = [] }) {
+rejectionFor | files=2 | src/domain/worldPulse/npcCirculationTable.js:240:export function rejectionFor({ faction, believed, factionAlignmentRead = 'unknown', history
+believedReputation | files=4 | src/domain/worldPulse/npcCirculationBelief.js:164:export function believedReputation({ worldState, originId, observerId, roamerId, truth, el
+advanceResidency | files=1 | src/domain/worldPulse/npcResidency.js:275:export function advanceResidency({ worldState, wnpcId, tick, digest, candidates, hiddenHopsOf = nu
+planWanderLeg | files=1 | src/domain/worldPulse/npcCirculationTransit.js:131:export function planWanderLeg({ digest, fromId, destId, tick, hiddenHopsOf = null }) {
+nextHopToward | files=1 | src/domain/worldPulse/npcCirculationTransit.js:83:export function nextHopToward({ digest, fromId, destId, hiddenHopsOf = null }) {
+openNamedPersonLeg | files=3 | src/domain/worldPulse/namedPersonTransit.js:109:export function openNamedPersonLeg(input) {
+namedPersonLegTicks | files=6 | src/domain/worldPulse/namedPersonTransit.js:56:export function namedPersonLegTicks(input) {
+namedPersonPathPosition | files=3 | src/domain/worldPulse/namedPersonTransit.js:171:export function namedPersonPathPosition(input) {
+namedPersonLegPosition | files=4 | src/domain/worldPulse/namedPersonTransit.js:131:export function namedPersonLegPosition(leg, tick) {
+UNPRICED_LEG_WEEKS | files=2 | 
+MOVEMENT_SITES | files=1 | 
+advanceEnvoyDiplomacyPulse | files=10 | src/domain/worldPulse/envoyPulse.js:123:export function advanceEnvoyDiplomacyPulse({
+envoyDiplomacyActive | files=18 | src/domain/worldPulse/envoyErrandOffer.js:38:export function envoyDiplomacyActive(worldStateOrRules) {
+envoyIsPhysicallyHome | files=1 | src/domain/worldPulse/envoyPulse.js:63:function envoyIsPhysicallyHome(worldState, delivery) {
+activeOwnsLeg | files=1 | src/domain/worldPulse/envoyDiplomacy.js:180:function activeOwnsLeg(position, errand, journeyLegs, legIndex, leg) {
+unclaimedPlacementAt | files=1 | src/domain/worldPulse/envoyDiplomacy.js:141:function unclaimedPlacementAt(position, settlementId, notAfterTick) {
+ERRAND_CONSUMERS | files=6 | src/domain/worldPulse/envoyErrandVocabulary.js:295:export const ERRAND_CONSUMERS = Object.freeze([
+ENVOY_PURPOSES | files=5 | src/domain/worldPulse/envoyErrandVocabulary.js:119:export const ENVOY_PURPOSES = Object.freeze(['sue', 'self_parlay']);
+mintErrandSpine | files=7 | src/domain/worldPulse/envoyErrand.js:115:export { errandSpineActive, errandSpineFields, mintErrandSpine } from './errandMint.js';
+pactTransportFor | files=2 | src/domain/worldPulse/pactProposals.js:250:export function pactTransportFor({ worldState, fromId, toId, tick, arrivalTick }) {
+STRESSOR_SPAWN_GATES | files=2 | src/domain/worldPulse/stressorGates.js:1024:export const STRESSOR_SPAWN_GATES = Object.freeze({
+gateResult | files=2 | src/domain/worldPulse/stressorGates.js:207:function gateResult(factors, extraReasons = []) {
+clampMult | files=2 | src/domain/worldPulse/stressorGates.js:53:function clampMult(value) {
+advanceReligionStates | files=7 | src/domain/worldPulse/religiousContest.js:544:export function advanceReligionStates({ snapshot, worldState = null, tick = 0, now = null, rul
+deityLocalStrength | files=2 | src/domain/worldPulse/religiousContest.js:508:function deityLocalStrength({ snapshot, deity, deityRef, neighbourIds, carrier, moodDeity, len
+attemptEntry | files=4 | src/domain/worldPulse/religionState.js:292:export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
+reserveFor | files=3 | src/domain/worldPulse/pactFormation.js:417:export function reserveFor({ worldState, responderId, proposerId, tick }) {
+advanceSettlementPestilence | files=2 | src/domain/worldPulse/pestilenceKernel.js:122:export function advanceSettlementPestilence({ snapshot, worldState, digest, graph, rng, season
+careCapacity | files=3 | src/domain/spatial/pestilence.js:209:export function careCapacity(roster) {
+onsetProbability | files=1 | src/domain/spatial/pestilence.js:233:export function onsetProbability(args = {}) {
+seedDeploymentState | files=4 | src/domain/worldPulse/warArmyRecord.js:85:export function seedDeploymentState({ targetId, cap, tick, logisticsBurden, role = 'siege', readin
+applyCredit | files=1 | src/domain/worldPulse/habit/habitCurve.js:260:export function applyCredit({
+habitFactor | files=1 | src/domain/worldPulse/habit/habitCurve.js:288:export function habitFactor(stock, span = HABIT_TUNING.HABIT_SPAN) {
+lawWordFor | files=6 | src/domain/worldPulse/espionage/espionageDoctrine.js:44:export { LAW_WORDS, lawWordFor };
+HABIT_ROWS_PER_ACTOR_CAP | files=2 | 
+HABIT_FORK_REGISTRY | files=5 | src/domain/worldPulse/habitForkRegistry.js:120:export const HABIT_FORK_REGISTRY = Object.freeze([
+applyForeignExposureBlowback | files=6 | src/domain/worldPulse/corruptionWeb.js:1073:export function applyForeignExposureBlowback({ worldState, snapshot, exposures, graph = null, ti
+foreignExposuresFrom | files=1 | src/domain/worldPulse/corruptionWeb.js:960:export function foreignExposuresFrom(exposures) {
+homeRansomAnswer | files=1 | src/domain/worldPulse/ransomChoices.js:174:export function homeRansomAnswer({ home, claim } = {}) {
+HOME_ANSWERS | files=1 | src/domain/worldPulse/ransomChoices.js:28:export const HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon']);
+UPKEEP_LEDGERS | files=1 | src/domain/worldPulse/treasury.js:498:export const UPKEEP_LEDGERS = Object.freeze(['deployments']);
+advanceTreasury | files=7 | src/domain/worldPulse/treasury.js:1203:export function advanceTreasury(settlement, options = {}) {
+stanceOf | files=2 | src/domain/worldPulse/deityStance.js:124:export function stanceOf(source, target) {
+POSTURE_ACTOR_KINDS | files=1 | src/domain/worldPulse/strategicPosture.js:97:export const POSTURE_ACTOR_KINDS = Object.freeze(['settlement']);
+readWarPeaceDecision | files=3 | src/domain/worldPulse/warPeaceDecision.js:174:export function readWarPeaceDecision({
+pathCost | files=11 | src/domain/spatial/distanceRead.js:653:export function pathCost(digest, fromId, toId, season = null) {
+hopWeeks | files=37 | src/domain/spatial/distanceRead.js:728:export function hopWeeks(digest, fromId, toId, season = null, mode = null) {
+applyRelationshipPatch | files=23 | src/domain/worldPulse/relationshipEvolution.js:490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ 
+accrueSaleGrievance | files=1 | src/domain/worldPulse/sovereigntyTransfer.js:160:function accrueSaleGrievance(worldState, edges, soldId, sellerId, magnitude01, now) {
+readBeliefRelationship | files=7 | src/domain/worldPulse/beliefMap.js:448:export function readBeliefRelationship(observerId, subjectId, worldState, truthType) {
+ensureRelationshipState | files=31 | src/domain/worldPulse/relationshipState.js:465:export function ensureRelationshipState(edge, existing = {}) {
+HIDDEN_PATH_SLOWDOWN | files=3 | 
+HIDDEN_PATH_KINDS | files=3 | src/domain/worldPulse/routeNetworkConsumers.js:97:export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+mayUseHiddenPaths | files=4 | src/domain/worldPulse/routeNetworkConsumers.js:130:export function mayUseHiddenPaths(kind) {
+hiddenHopsFor | files=1 | src/domain/worldPulse/routeNetworkConsumers.js:258:export function hiddenHopsFor(worldState, kind) {
+ROUTE_GRADES | files=4 | src/domain/worldPulse/routeNetworkLedger.js:64:export const ROUTE_GRADES = Object.freeze(['highway', 'road', 'track', 'hidden']);
+gradeLegMultiplier | files=1 | src/domain/worldPulse/routeNetworkConsumersTransit.js:119:export function gradeLegMultiplier(grade) {
+NPC_ALIGNMENTS | files=5 | src/domain/npc/npcFacetContract.js:12:export const NPC_ALIGNMENTS = Object.freeze([
+NPC_GOALS | files=4 | src/domain/npc/npcFacetContract.js:96:export const NPC_GOALS = Object.freeze(Object.keys(NPC_GOAL_CATALOG));
+prosperityRank01 | files=7 | src/domain/prosperityRank.js:138:export function prosperityRank01(value) {
+PARADIGM_AXES | files=3 | src/domain/npc/paradigmAxisCatalog.js:129:export const PARADIGM_AXES = Object.freeze([
+rulerAlignment | files=1 | src/domain/worldPulse/warSeatBooks.js:287:function rulerAlignment(worldState, rulerId, ruler) {
+decayTowardNeutral | files=6 | src/domain/worldPulse/bandedStock.js:153:export function decayTowardNeutral(value, neutral, ageWeeks, band) {
+HALF_LIFE_WEEKS | files=2 | src/domain/worldPulse/bandedStock.js:71:export const HALF_LIFE_WEEKS = Object.freeze({
+beliefRecord | files=15 | src/domain/worldPulse/beliefMap.js:225:export function beliefRecord(worldState, observerId, subjectId, factionId = GOVERNING_SEAT_KEY) {
+reportsBySubject | files=2 | src/domain/worldPulse/beliefMap.js:758:function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null, embatt
+advanceRumorLedgers | files=6 | src/domain/spatial/rumorNetwork.js:546:export function advanceRumorLedgers({ worldState, feedEntries, graph, tick, season = null, rng = null
+mergeArrival | files=2 | src/domain/spatial/rumorNetwork.js:427:export function mergeArrival(existing, incoming) {
+RUMOR_TTL_TICKS | files=1 | src/domain/spatial/rumorNetwork.js:117:export const RUMOR_TTL_TICKS = Object.freeze({ major: 26, notable: 13 });
+maxHopsFor | files=1 | src/domain/spatial/rumorNetwork.js:133:export function maxHopsFor(record) {
+classifyLegModes | files=2 | src/domain/roads/seaRoads.js:65:export function classifyLegModes(digest, path) {
+candidateRoutes | files=7 | src/domain/spatial/distanceRead.js:1078:export function candidateRoutes(digest, fromId, toId, k = K_CANDIDATES) {
+atOpenWar | files=5 | src/domain/roads/embassyHazard.js:61:export function atOpenWar(graph, homeId, hostId) {
+relationshipTypeBetween | files=12 | src/domain/worldPulse/relationshipRuleHelpers.js:393:function relationshipTypeBetween(/** @type {any} */ ctx, /** @type {any} */ a, /** @typ
+atWarWith | files=4 | src/domain/roads/embassyHazard.js:74:export function atWarWith(graph, worldState, a, b) {
+SEVERITY_LADDER | files=3 | src/domain/worldPulse/bandFamilies.js:85:export const SEVERITY_LADDER = Object.freeze(['glancing', 'telling', 'grave', 'ruinous']);
+liveSieges | files=18 | src/domain/display/warStatus.js:88:export function liveSieges({ worldState, regionalGraph } = /** @type {any} */ ({})) {
+covertCompetence01 | files=3 | src/domain/worldPulse/espionage/espionageMath.js:259:export function covertCompetence01(homeSettlement, npc) {
+catchChance01 | files=4 | src/domain/worldPulse/espionage/espionageMath.js:336:export function catchChance01(factors) {
+WARINESS_W | files=1 | 
+advanceCredibility | files=7 | src/domain/worldPulse/informationStatecraft.js:350:export function advanceCredibility({ worldState, tick, deltas = [] }) {
+credibilityScoreOf | files=6 | src/domain/worldPulse/informationStatecraft.js:247:export function credibilityScoreOf(worldState, id, tick) {
+routeLifecycleActive | files=19 | src/domain/worldPulse/routeNetworkLedger.js:211:export function routeLifecycleActive(worldState) {
+reachBandOf | files=3 | src/domain/spatial/modeSpeeds.js:216:export function reachBandOf(weeks) {
+withActiveCondition | files=15 | src/domain/activeConditions.js:721:export function withActiveCondition(settlement, partial) {
+npcConsequencesActive | files=10 | src/domain/worldPulse/npcLedger.js:197:export function npcConsequencesActive(worldState) {
+CONFIDENCE_LABEL | files=2 | src/components/map/BeliefDivergenceBand.jsx:40:const CONFIDENCE_LABEL = { certain: 'certain', confident: 'confident', uncertain: 'uncertain'
+mercSupplementOf | files=2 | src/domain/worldPulse/mercenaryMarket.js:163:export function mercSupplementOf(ledger, cid) {
+WORLD_SNAPSHOT_HARD_DENY | files=2 | src/domain/display/worldSnapshotPublic.js:68:export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+refreshOriginRefsAfterRegen | files=2 | src/domain/worldPulse/npcLedger.js:706:export function refreshOriginRefsAfterRegen(worldState, settlementId, preserved) {
+closeEnvoyErrandsForNpcDeath | files=1 | src/domain/worldPulse/envoyErrand.js:498:export function closeEnvoyErrandsForNpcDeath({ worldState, npcId, tick, cause = 'killed' } = {}) {
+climateBandFor | files=1 | src/domain/worldPulse/seasons.js:212:export function climateBandFor(digest, settlementId) {
+SLOW_NOT_SEVER_MAX | files=3 | src/domain/spatial/spatialCost.js:88:export const SLOW_NOT_SEVER_MAX = 6;
+operativeNotoriety01 | files=4 | src/domain/worldPulse/espionage/espionageMath.js:236:export function operativeNotoriety01(homeSettlement, npc) {
+LURE_AXES | files=2 | src/domain/worldPulse/infoLure.js:199:export const LURE_AXES = Object.freeze([...AXIS_SPECS.keys()].sort(compareCodepoint));
+seasonForTick | files=20 | src/domain/worldPulse/worldState.js:742:export function seasonForTick(weekTick) {
+captureContent | files=1 | src/domain/spatial/rumorNetwork.js:392:function captureContent(entry) {
+bandCrossingReceipt | files=3 | src/domain/worldPulse/bandedStock.js:217:export function bandCrossingReceipt(args) {
+envoyReturnAcceptance | files=3 | src/domain/worldPulse/envoyDiplomacy.js:866:export function envoyReturnAcceptance(worldState, outcome, regionalGraph) {
+holdInterruptedEnvoy | files=1 | src/domain/worldPulse/envoyInterceptionStage.js:384:function holdInterruptedEnvoy({ worldState, errand, encounter, holdVenue, tick, cause })
+normalizeForeignGuestHold | files=1 | src/domain/worldPulse/foreignGuestHold.js:308:export function normalizeForeignGuestHold(raw) {

@@ -1,0 +1,92 @@
+deriveResourceSites	2	src/domain/resourceSites.js:195:export function deriveResourceSites(settlement) {
+defenseLedger	7	src/domain/governanceLedger.js:4: * P3.3b Stage 2b. Mirrors foodLedger / defenseLedger. powerGenerator persists the public
+STRESSOR_SPAWN_GATES	2	src/domain/worldPulse/stressorGates.js:1024:export const STRESSOR_SPAWN_GATES = Object.freeze({
+gateResult	2	src/domain/certification/subsystemRowsSeat.js:111:      other: 'LEGITIMACY-SCALED UPHEAVAL: the owner directive (ODQ 736) that "any attempted coup or rebellion 
+monsterRaiderGate	1	src/domain/worldPulse/stressorGates.js:635:function monsterRaiderGate(snapshot, pressure) {
+criminalCorridorGate	2	src/domain/certification/subsystemRowsSeat.js:111:      other: 'LEGITIMACY-SCALED UPHEAVAL: the owner directive (ODQ 736) that "any attempted coup or rebellion 
+magicDeadzoneGate	1	src/domain/worldPulse/stressorGates.js:877:function magicDeadzoneGate(snapshot, pressure) {
+magicalInstabilityGate	1	src/domain/worldPulse/stressorGates.js:856:function magicalInstabilityGate(snapshot, pressure) {
+diseaseOutbreakGate	1	src/domain/worldPulse/stressorGates.js:592:function diseaseOutbreakGate(snapshot, pressure) {
+infiltrationGate	1	src/domain/worldPulse/stressorGates.js:575:function infiltrationGate(snapshot, pressure) {
+counterforceAssessment	4	src/data/dossierStateProse/stressors.generated.js:1110:    "title": "DS-STR-2: Stressor lifecycle, counterforce, synergy and origin · `worldState.stressors[] {
+STRESSOR_COUNTERFORCES	1	src/domain/worldPulse/stressorDynamics.js:160:export const STRESSOR_COUNTERFORCES = Object.freeze({
+advanceEmbattlement	2	src/domain/worldPulse/pulseKernel.js:63:import { advanceEmbattlement, rampThreat, embattlementActive } from '../spatial/embattlement.js';
+rampThreat	4	src/domain/spatial/embattlement.js:28: * pure COMBINATION formula (`rampThreat`) — so it stays a pure spatial leaf with
+EMBATTLEMENT_TUNING	2	src/domain/spatial/embattlement.js:69:export const EMBATTLEMENT_TUNING = Object.freeze({
+scoreRoute	5	src/domain/spatial/embattlement.js:149: * sustained centrality) ⇒ 0 ⇒ scoreRoute's toll term is 0 ⇒ the M1 re-score is
+tollRateOf	4	src/domain/briefs/roadScene.js:36:import { chooseRoute, embattlementLevel, tollRateOf } from '../spatial/embattlement.js';
+chooseRoute	15	src/domain/briefs/roadScene.js:20: *   THE ROAD    — the chosen route (chooseRoute over TRUTH) with per-hop conditions
+seasonalPathCost	2	src/domain/spatial/embattlement.js:66:import { candidateRoutes, calibration, seasonalPathCost, hasSpatialLedger, getSpatialLedger } from './distanceRead.js';
+SLOW_NOT_SEVER_MAX	3	src/domain/spatial/spatialCost.js:87:// so a route's effective multiplier is always in [1, SLOW_NOT_SEVER_MAX].
+buildCapacityLookup	3	src/domain/worldPulse/warDeployment.js:43:  buildCapacityLookup,
+computeAllyRelief	6	src/domain/certification/subsystemRowsWar.js:344:      // DELIBERATELY EMPTY, all three channels. computeAllyRelief returns a number
+ALLY_SUPPORT_TYPES	2	src/domain/certification/subsystemRowsWar.js:349:      other: 'Nested under warLayerEnabled (read at warDeployment.js:477). computeAllyRelief (warCapacityReads.
+coalitionJoinFeasibility	3	src/domain/worldPulse/warDeployment.js:162:export { computeAllyRelief, coalitionJoinFeasibility, ARMY_DEPLOYED_CAPACITY_PENALTY } from './warCapacityReads.js';
+resolveSiegeVerdict	8	src/domain/certification/subsystemRowsWar.js:317:      // bias nor the capitulation ever leaves resolveSiegeVerdict.
+SIEGE_VERDICT_BANDS	4	src/domain/worldPulse/warSiegeVerdict.js:99:export const SIEGE_VERDICT_BANDS = Object.freeze({ costly_success: true, decisive_fail: false, decisive_success: tru
+STARVE_FULL_TICKS	1	src/domain/worldPulse/warSiegeVerdict.js:136:// STARVE_K: the log-odds slope at full starvation×time; STARVE_FULL_TICKS: ticks of
+relief01	1	src/domain/worldPulse/warSiegeVerdict.js:368:    const relief01 = clamp01((Number(defenderReliefBonus) || 0) / Math.max(1, defenderCurrent));
+evaluateWarLayer	12	src/domain/certification/couplingRegistryGrammar.js:317: * (`warDeployment.js :: evaluateWarLayer`, step 4) reads the broker's multiplier and, below one,
+classifyFeasibility	7	src/domain/worldPulse/feasibilityGate.js:249:export function classifyFeasibility({
+buildThreatByCid	4	src/domain/worldPulse/pulseKernel.js:27:import { advanceMartialReadiness, buildThreatByCid } from './martialReadiness.js';
+raidHot	1	src/domain/worldPulse/martialReadiness.js:401:  const raidHot = new Set();
+care01Of	2	src/domain/worldPulse/pestilenceKernel.js:184:  const care01Of = (id) => careCapacity(classifyCareRoster(itemById.get(id)?.settlement?.institutions));
+careCapacity	3	src/domain/spatial/pestilence.js:209:export function careCapacity(roster) {
+classifyCareRoster	3	src/domain/spatial/pestilence.js:185:export function classifyCareRoster(institutions) {
+CARE_MAX_RELIEF	2	src/domain/spatial/pestilence.js:43: * CARE_MAX_RELIEF (< 1) and floored so onset keeps a sliver (ONSET_FLOOR) — a temple
+CARE_W_CHURCH	1	src/domain/spatial/pestilence.js:92:  CARE_W_CHURCH: 0.5,
+CARE_W_HEALING_HOUSE	1	src/domain/spatial/pestilence.js:93:  CARE_W_HEALING_HOUSE: 0.7,
+advanceReligionStates	7	src/domain/worldPulse/religiousContest.js:5: * The LIVE driver is `advanceReligionStates` (mounted by pulseKernel): each tick
+strengthByRef	2	src/domain/worldPulse/religiousContest.js:798:    const strengthByRef = {};
+UPKEEP_LEDGERS	1	src/domain/worldPulse/treasury.js:487: * UPKEEP_LEDGERS — which standing commitments the crown pays for, closed.
+advanceTreasury	7	src/lib/importScrub.js:66: * the pulse (domain/worldPulse/treasury.js#advanceTreasury). Adding `treasury` to the
+computeUpkeep	1	src/domain/worldPulse/treasury.js:1057:export function computeUpkeep(available, charges) {
+prosperityRank01	7	src/generators/density/applyDensityLaw.js:67:import { prosperityRank01 } from '../../domain/prosperityRank.js';
+PROSPERITY_LABELS	2	src/domain/prosperityRank.js:36: * `PROSPERITY_LABELS` is the six `deriveProsperityLabel` can return. Everything else in
+REALM_MANIFEST	3	src/domain/events/realmManifest.js:308:export const REALM_MANIFEST = Object.freeze({
+applyRealmVerbOrder	2	src/domain/worldPulse/realmVerbExecution.js:11: *   • applyRealmVerbOrder — the apply ARM dispatcher applyWorldPulseOutcomes
+COURSE_TARGET_SEP	1	src/domain/events/realmManifest.js:253:export const COURSE_TARGET_SEP = '␟';
+advanceCalamity	4	src/domain/worldPulse/pulseKernel.js:70:import { advanceCalamity } from './calamityKernel.js';
+lifecycleStatusOf	7	src/components/map/heraldRegister.js:17: *     status, read through the canonical `lifecycleStatusOf`;
+getSpatialLedger	108	src/domain/briefs/roadScene.js:35:import { activeSpatialDigest, getSpatialLedger } from '../spatial/distanceRead.js';
+setSpatialLedger	80	src/lib/spatialUsage.js:234:// again: EVERY spatialLedgers key a domain kernel writes (via setSpatialLedger) must
+dropSpatialLedger	56	src/domain/certification/subsystemRowsRegen.js:102:      // provenanceKernel.js:305, dropSpatialLedger at :304 and :376). Receipt
+hopWeeks	37	src/lib/spatialUsage.js:158:    // opened at a tick and owed an answer on a date the ROADS priced (two hopWeeks legs
+isPort	14	src/lib/roadNetwork.js:297: *        distanceRead.isPort` answers true for, which is the sea graph's own node
+STORM_SEASON_COST	2	src/domain/spatial/seaLanes.js:118:export const STORM_SEASON_COST = Object.freeze({
+activeBlockadeTargets	6	src/domain/worldPulse/roadsKernel.js:87:import { activeBlockadeTargets } from '../spatial/navalLayer.js';
+blockadeInterceptsSupply	3	src/domain/spatial/navalLayer.js:520:export function blockadeInterceptsSupply(worldState, digest, destPort, gateNode) {
+STRENGTH_BANDS	5	src/domain/display/forceComposition.js:29: * `armyStrength.STRENGTH_BANDS` uses (78/60/42/26/0), so the words a DM hears and
+WORLD_SNAPSHOT_HARD_DENY	2	src/domain/display/worldSnapshotPublic.js:68:export const WORLD_SNAPSHOT_HARD_DENY = Object.freeze([
+standingFor	4	src/domain/worldPulse/lineageClaim.js:488:  const standingFor = (fromId, toId) => {
+chaos01	19	src/domain/worldPulse/religiousContest.js:65:import { deityTemper, chaos01 } from './deityAxes.js';
+evil01	19	src/components/compendium/deityDraftPreview.js:16: *     alignment coordinates the stance core is built on (deityAxes.evil01), with
+advanceRumorLedgers	6	src/domain/certification/subsystemRowsVirtual.js:274:      // DELIBERATELY EMPTY. The lane assembles INPUTS to advanceRumorLedgers, which
+POSTURE_ACTOR_KINDS	1	src/domain/worldPulse/strategicPosture.js:97:export const POSTURE_ACTOR_KINDS = Object.freeze(['settlement']);
+ENGAGEMENT_WHERE_KINDS	0	
+registerEngagementKind	0	
+logisticsBurdenFor	2	src/domain/worldPulse/warDeployment.js:44:  logisticsBurdenFor,
+buildStrengthLookup	5	src/domain/worldPulse/settlementStrategy.js:51:import { HOSTILE_TYPES, hostileEdgeBetween, strongestNonHostileNeighbour, buildStrengthLookup } from './settlemen
+CONQUEST_MARGIN	8	src/domain/certification/subsystemRowsVirtual.js:716:      other: 'A PRESSURE WITH NO STATE OF ITS OWN, WHICH IS WHY EVERY CHANNEL IS EMPTY AND WHY THAT IS THE 
+ARMY_DEPLOYED_CAPACITY_PENALTY	3	src/domain/worldPulse/warDeployment.js:162:export { computeAllyRelief, coalitionJoinFeasibility, ARMY_DEPLOYED_CAPACITY_PENALTY } from './warCapacityReads.js';
+siegeArrivalGate	3	src/domain/certification/subsystemRowsWar.js:131:      other: 'THE PARENT GATE. warDeployment.js:243 returns the world untouched before any sub-flag is read, so
+MAX_MARCH_WEEKS	3	src/domain/worldPulse/warDeployment.js:303:  // besieger set below is byte-identical. The march time is bounded by MAX_MARCH_WEEKS,
+SIEGE_MAX_AGE	4	src/domain/spatial/armyTransit.js:664: * that many ticks. MAX_MARCH_WEEKS is strictly BELOW the war layer's SIEGE_MAX_AGE
+pairKey	31	src/pdf/lib/liveWorld.js:269:    pairKey: doc.pairKey,
+seasonForTick	20	src/domain/briefs/roadScene.js:39:import { seasonForTick } from '../worldPulse/worldState.js';
+forceAbandonSettlement	2	src/domain/worldPulse/realmVerbExecution.js:56:import { forceAbandonSettlement, forceResettleSettlement } from './settlementLifecycleFirstClass.js';
+realmVetoProse	5	src/components/map/RealmVerbComposer.jsx:18:import { realmVerbs, realmVetoProse } from '../../domain/events/realmManifest.js';
+INTERVAL_WEEKS	23	src/domain/worldPulse/populationDynamics.js:12:// worldState.js INTERVAL_WEEKS), converted to month units at the ONE boundary
+sovereigntyIntent	6	src/domain/worldPulse/conquestDoctrineStage.js:409: *  EXPORTED for WR-10's observer-axis judgment (`sovereigntyIntent.js`): J-WR-10
+TRANSFER_SOVEREIGNTY	3	src/domain/realm/heraldRouting.js:384:  // WR-10 TRANSFER_SOVEREIGNTY. Both of the verb's routing keys file under TRADE, and
+sovereignty_conveyance	1	src/domain/worldPulse/foreignPrimacy.js:92:  sovereignty_conveyed: Object.freeze({ disposition: 'referred', decisionClass: 'sovereignty_conveyance' }),
+spatialUsage	19	src/store/campaignAdvanceSession.js:58:// Coarse, id-free spatial/mover usage summary (side-channel; lazy — see spatialUsage.js).
+EMBATTLED_THRESHOLD	4	src/domain/worldPulse/roadsKernel.js:612:        if (level >= ROADS_TUNING.EMBATTLED_THRESHOLD && captorId !== homeId) {
+seaRoadsEnabled	1	src/domain/roads/seaRoads.js:9: * DARK behind the VIRTUAL flag `seaRoadsEnabled` (§1 law 1; ABSENT from DEFAULT_SIMULATION_RULES,
+navalEnabled	12	src/domain/certification/subsystemRowsWar.js:9: * (navalEnabled and peaceEngineEnabled out of the WAVES cohort, and
+faithSpreadEnabled	11	src/lib/spatialUsage.js:76:  'seasonsEnabled', 'warLayerEnabled', 'settlementStrategyEnabled', 'faithSpreadEnabled',
+warLayerEnabled	53	src/lib/spatialUsage.js:76:  'seasonsEnabled', 'warLayerEnabled', 'settlementStrategyEnabled', 'faithSpreadEnabled',
+treasuryEnabled	10	src/domain/institutions/institutionTable.js:153:        + '`treasuryEnabled` (schema:672), so the ABSENT branch is still the one every '
+hearingWeekEnabled	0	
+strategicPosture	11	src/domain/certification/couplingRegistryInfo.js:202:  counterforce: 'src/domain/worldPulse/strategicPosture.js#courtPostureOf',
+upswingKernel	15	src/domain/activeConditions.js:464:  // Minted by the lazy upswingKernel mover, gated behind virtual upswingArcsEnabled;

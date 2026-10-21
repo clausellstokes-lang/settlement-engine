@@ -1,0 +1,19 @@
+terrain=plains walls=false -> rung exposed | master@54 exposed @55 exposed
+terrain=plains walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=hills walls=false -> rung mixed | master@54 mixed @55 mixed
+terrain=hills walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=forest walls=false -> rung mixed | master@54 mixed @55 mixed
+terrain=forest walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=swamp walls=false -> rung mixed | master@54 mixed @55 mixed
+terrain=swamp walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=mountain walls=false -> rung sheltered | master@54 sheltered @55 sheltered
+terrain=mountain walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=coast walls=false -> rung mixed | master@54 mixed @55 mixed
+terrain=coast walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=river walls=false -> rung mixed | master@54 mixed @55 mixed
+terrain=river walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=tundra walls=false -> rung open | master@54 open @55 open
+terrain=tundra walls=true -> rung sheltered | master@54 sheltered @55 fortified
+terrain=(none) walls=false -> rung open | master@54 open @55 open
+terrain=(none) walls=true -> rung sheltered | master@54 sheltered @55 fortified
+cells 108 · rung == min(master, sheltered) in 108 · terrain×walls rows whose rung moves with readiness: 0

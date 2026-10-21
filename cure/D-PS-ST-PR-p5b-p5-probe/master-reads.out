@@ -1,0 +1,15 @@
+# master 81f1cd963 reads (read-only; rg/sed), lane D-PS-ST-PR-p5b, Tue Oct 20 16:08:20 CDT 2026
+## worldState.js :: normalizeDeployments
+110:// the outer ledger in deterministic key order, retain every deployment field, and
+116:function normalizeDeployments(value) {
+156:    // ⛔ DELIBERATELY UNGATED, AND THIS IS THE POINT RATHER THAN AN OVERSIGHT. Persistence
+## worldState.js pendingEvents
+327:    pendingEvents: [],
+601:    pendingEvents: cloneArray(raw?.pendingEvents).slice(-MAX_PENDING),
+## navalLayer.js planBlockade / activeBlockadeTargets
+242:export function navalTransitLedger(worldState) {
+402:    departTick: depart, arrivalTick: depart + weeks, position01: 0,
+497:export function activeBlockadeTargets(worldState) {
+503:    if (!rec || rec.role !== ARMY_ROLES.BLOCKADE || !rec.targetId) continue;
+572:export function planBlockade(digest, worldState, { ownerId, targetId, ownerStrength, readiness01 = 0.5, alignment = null, departTick, season = null }) {
+594:    departTick: depart, arrivalTick: depart + weeks, position01: 0,

@@ -1,0 +1,6 @@
+row 5 posture=neutral: P(raise at the war trigger) company/host/great_host = 0.115 / 0.212 / 0.339 · monotone=true · at peace P(raise)=0
+row 4 posture=neutral: share >= exacting at peace = 0 (asserted 0)
+row 5 posture=lower: P(raise at the war trigger) company/host/great_host = 0.115 / 0.212 / 0.339 · monotone=true · at peace P(raise)=0
+row 4 posture=lower: share >= exacting at peace = 0 (asserted 0)
+row 5 posture=raise: P(raise at the war trigger) company/host/great_host = 0.089 / 0.168 / 0.278 · monotone=true · at peace P(raise)=0
+row 4 posture=raise: share >= exacting at peace = 0 (asserted 0)

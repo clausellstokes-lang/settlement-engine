@@ -1,0 +1,11 @@
+[r2] strength vectors 972; the WAY differs bloody vs bloodless on identical strengths: 296/972
+[r2] controlled pairs (13-week season x 13 schedules x 2 draws x 2 character pairs): 50544; C1/C2/C6 week-series differ: 25140  {"(none)":1560,"field_lost":4248,"coffers_bare":4708,"levy_thin":2182,"foe_on_the_ways":4097,"ally_failed":4248,"siege_long":4097}
+[r3] strength vectors 972; the WAY differs bloody vs bloodless on identical strengths: 0/972
+[r3] controlled pairs (13-week season x 13 schedules x 2 draws x 2 character pairs): 50544; C1/C2/C6 week-series differ: 0  {}
+[r3] unique top 522 · tie (codepoint names the first; host x1) 450 · below the floor (reported) 5
+[r3] way distribution (all): {"way_harassment":122,"way_coalition":188,"way_logistics":133,"way_shock":135,"way_attrition":188,"way_raiding":110,"way_fortress":96}
+[r3] of which the strengths' UNIQUE top: {"way_harassment":43,"way_coalition":44,"way_logistics":71,"way_shock":135,"way_raiding":94,"way_fortress":36,"way_attrition":99}
+[r3] of which named by codepoint on a tie: {"way_coalition":144,"way_harassment":79,"way_logistics":62,"way_attrition":89,"way_fortress":60,"way_raiding":16}
+[negative control: r3 without the replacement rule] differ 9540/50544
+[negative control: r3 without the order (plan read FIRST)] differ 6226/50544
+[negative control: r3 without transparency (character-borne turn leans C1/C2/C6 x1)] differ 11232/50544

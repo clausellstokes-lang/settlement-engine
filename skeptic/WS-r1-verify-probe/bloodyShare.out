@@ -1,0 +1,4 @@
+grid points 6174 · archetypes 14
+max share 0.4571 at {"share":0.4571428571428572,"archetype":"military","evilLean01":1,"lawfulLean01":0}
+min share 0.1308 at {"share":0.13076923076923078,"archetype":"merchant","evilLean01":0,"lawfulLean01":1}
+points with share >= 0.5 (WS's 'bloody' cut): 0/6174

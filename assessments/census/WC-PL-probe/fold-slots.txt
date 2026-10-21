@@ -1,0 +1,50 @@
+## shared-signal: 4
+324:| 3.1.23 | **THE CHOOSER'S SHARED-SIGNAL CAR** (SX-08): five programs claim the war chooser's headroom (`settlementStrategy.js`, 763 effective) — EC-17's need, MN-4's menace term, PL-3/PL-4's liege reads, HB row 7, INT's factor seam. 
+445:| 3.3.16 ↳ | [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/CHAIR-NOTES-FOR-THE-FOLD.md` item 18 (d) and §6's builder note ↳ r4, "P4 names the owned unit and its wave once"; `briefs/RULINGS-ROUND5.md` B.12 · B.13; `briefs/RULING
+948:| C9 ↳ [AMENDED 2026-10-17 (fp-final; OD-PL-14; SPL-M8, `briefs/RULINGS-PL-MN.md` A)] | the CURED volume's first felt chain: PL-10 THE MEASURE as car 0 (genesis makes 87–94% two-town polities), then PL-0 the walk · PL-1 the name an
+1113:| OD-FC-59 | THE CHOOSER'S SHARED-SIGNAL CAR (SX-08) | RULED BY DELEGATION (2026-10-17, vetoable; §3.1.23): one car-0 in `settlementStrategy.js`, built and owned by the first of EC-17 · MN-4 · PL-4 · HB-7 · INT to land; the joint 
+## embargo: 5
+232:    blockade, an embargo, an occupation's contest, a long negotiation, a spy's
+346:- **THE ECONOMY (EC-6):** the crown's EMBARGO rung — a paramount's embargo enters EC-6's stance derivation at a new rung BELOW the pair's own war stance and ABOVE the trade-memory rung (DRAFT; `DESIGN_FP_ARCH_PL.md` §3 and pin P8; EC
+446:| 3.3.17 | **ONE STANCE FOR GOODS, ARMS AND PEOPLE AT THE GATE, AND WHO KEEPS THE GATE** [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/L-FOLD2.md` item 4; `briefs/RULINGS-ROUND2.md` C Q2; `briefs/RULINGS-ROUND2b.md` HOST-r2-3 (BLOCKI
+549:| `embargo` | EC-6 (the stance) | every week the stance stands | `open · taxed · restricted · closed` | STANDING (S5-B4) |
+## narrowed_voice: 4
+776:| ↳ `narrowed_voice` [RENAMED 2026-10-18 (fp-final r1; PL's round-1 REFINED, OD-PL-9)] | the autonomy charter's GRAMMAR term row — `narrowed_sphere` renamed now that the SPHERE is struck as PL machinery | FREE (PL's `cure/D-PL-r1-pr
+831:| PL round-1 tokens | `polity_verdict` (the relationship outcome's cause and its authority row) · `crownReachAt` (the crown's reach; CH and PT consume it) · `vassalageSeatsOf` (W-SEAT's one additive export) · `fealty_sworn` · `polit
+1075:| OD-FC-45 ↳ | [AMENDED 2026-10-18 (fp-final r1; SEAMS-r1-17; `briefs/RULINGS-ROUND1.md` PL-r1-1 · PL-r1-2 · PL-r1-3; `DESIGN_FP_ARCH_PL.md`'s round-1 cure, 38 of 38 ids)] the polity after round 1 | RULED BY DELEGATION (vetoable), 
+1357:| SEAMS-r1-17 | MAJOR | CURED — each stale row bracketed to its round-1 re-ruling | OD-FC-45 ↳ to OD-FC-49 ↳; §3.4 `polity_war` ↳, `relief_answer` ↳; §5 `PRECEDENCE_CLASSES` ↳, `narrowed_voice` ↳; capture as SEAMS-r1-1 
+## 3.1.10: 8
+306:| 3.1.10 | **INT-3's heir arm vs GR-4a**: INT claims the succession TRIGGER; GR-4a landed trigger and answer; INT's `reaffirmed_by_heir` ending has no possible producer (GR-4a's HONOR writes nothing). | CHAIR: GRAMMAR owns the question 
+307:| 3.1.10 ↳ | [AMENDED 2026-10-17 (fp-final; SPL-M2 · SX-14, `briefs/RULINGS-PL-MN.md` A; STOP-2, `briefs/RULINGS-AFTER-COMPILE.md` PL)] **The vassals' question after a lord's seat changes hands** — the fealty question — beside GR
+308:| 3.1.10 ↳ | [AMENDED 2026-10-18 (fp-final r1; REFINED — records `briefs/RULINGS-ROUND1.md` ADDENDUM SEAMS-r1-3 in the ownership row it amends)] **"A seat changed hands", read once** — CH's ban lapse and PT's `backing_repudiated` 
+342:- **GRAMMAR (GR):** (1) `pact_refused`'s erasure by ensure (SPL-m8; `DESIGN_FP_ARCH_PL.md` §16); (2) the hostile-pair NON-AGGRESSION occasion against a shared menace — MN keeps the damper and DROPS the occasion until GRAMMAR lands an
+## charter: 27
+141:    charter; a wave with no sentence is instrumentation and says so. (The
+155:    declared multi-layer carrier is lawful, an undeclared one is not; [ADDED 2026-10-17 — the two new programs declare: PL (the polity) a CARRIER across GRAMMAR · WAR · INTERIOR; MN (the menace) a CARRIER across WAR · POPULATIONS �
+157:    CPL-22/23 are re-anchored, §3.3); (c) a new volume prefix is chartered in
+161:    [AMENDED 2026-10-17 (fp-final; SX-15, `settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SX.md`; `briefs/RULINGS-PL-MN.md` A/SX-15 and B/SX-15) — 21(a)'s carrier declarations are widened and three new programs declare
+## court bond\|court_match: 3
+342:- **GRAMMAR (GR):** (1) `pact_refused`'s erasure by ensure (SPL-m8; `DESIGN_FP_ARCH_PL.md` §16); (2) the hostile-pair NON-AGGRESSION occasion against a shared menace — MN keeps the damper and DROPS the occasion until GRAMMAR lands an
+761:| `bond` | §13 court bonds · WC `serviceBonds` · WC-15 diaspora bonds | prose: "court bond" / "service bond" / "diaspora bond", never bare |
+778:| PL reused words | `imposition` · `rite_imposed` · `endorsement` · `appointment` · `religious_contest_conversion` · `religious_conversion_fracture` · `hostage_exchange` | LANDED, reused in their landed meanings only; never `crown
+## age of the oaths\|oathSince: 4
+519:| ↳ `call_in_answer` [AMENDED 2026-10-19 (fp-final P4; L-FOLD2; `cure/D-PL-r5.md` §5, routed to the fold; `briefs/RULINGS-ROUND5.md` A.7 and A.8)] | WC (WC-5); PL | unchanged | the r2b row's "`riders_quartered` joins PL's closed memo
+915:| THE POLITY's round-5 tokens (PL) [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `cure/D-PL-r5.md` §5; `briefs/RULINGS-ROUND5.md` A.7)] | `fealty_*` ↳: the kind list of shape 3 gains `riders_quartered` (RE-HOMED from the memory-weave inci
+946:| C8 ↳ [AMENDED 2026-10-19 (fp-final P4; L-FOLD2; `cure/D-PL-r5.md` §5; `briefs/RULINGS-ROUND5.md` A.7; `briefs/CHAIR-NOTES-FOR-THE-FOLD.md` item 18 (e))] | (b)'s COUNTERFORCE cites PL's long hold decay through its fealty record's `o
+1078:| OD-FC-45 ↳ | [AMENDED 2026-10-19 (fp-final P4; L-FOLD2; `cure/D-PL-r5.md` §5; `briefs/RULINGS-ROUND5.md` A.7 and A.8; `briefs/RULINGS-ROUND6.md` B.3 · B.4 · B.5)] PL after rounds 5 and 6 | OD-PL-34's two DECLARED additions on sh
+## scutage: 0
+## HB.s closes\|fealty record: 11
+441:| 3.3.15 | **THE BANNER — patrols in a kingdom** [ADDED 2026-10-18 (fp-final r4; `briefs/RULINGS-ROUND3.md` §F.1–F.7; `briefs/RULINGS-ROUND4.md` A.1, A.7 and §E (PL-r4-S1 · STOP-PR-r4-1, RE-RULED); SEAMS-r3-6's fold half; `cure/D
+442:| 3.3.15 ↳ | [AMENDED 2026-10-19 (fp-final r5; `skeptic/FOLD-r4-verify.md` minor note m6, the drift class of the SEAMS-r3-5 fail; PL §4.7 F.4 as cured in round 5 under `briefs/RULINGS-ROUND5.md` B.9 (PR-X2))] **Protection as a deed, 
+519:| ↳ `call_in_answer` [AMENDED 2026-10-19 (fp-final P4; L-FOLD2; `cure/D-PL-r5.md` §5, routed to the fold; `briefs/RULINGS-ROUND5.md` A.7 and A.8)] | WC (WC-5); PL | unchanged | the r2b row's "`riders_quartered` joins PL's closed memo
+566:| ↳ `fealty_break` [RENAMED 2026-10-17 (fp-final) — the HEARING `fealty_broken` → `fealty_break`; the CASUS keeps `fealty_broken`, with its mirror `fealty_restored` (SPL-m1 · SX-16); a definitional act is PRICED ON THE SPOT (a `f
+## ask the vassals: 3
+307:| 3.1.10 ↳ | [AMENDED 2026-10-17 (fp-final; SPL-M2 · SX-14, `briefs/RULINGS-PL-MN.md` A; STOP-2, `briefs/RULINGS-AFTER-COMPILE.md` PL)] **The vassals' question after a lord's seat changes hands** — the fealty question — beside GR
+308:| 3.1.10 ↳ | [AMENDED 2026-10-18 (fp-final r1; REFINED — records `briefs/RULINGS-ROUND1.md` ADDENDUM SEAMS-r1-3 in the ownership row it amends)] **"A seat changed hands", read once** — CH's ban lapse and PT's `backing_repudiated` 
+1074:| OD-FC-45 ↳ | [AMENDED 2026-10-17 (fp-final; `briefs/RULINGS-PL-MN.md` A; `briefs/RULINGS-AFTER-RESEARCH.md` §6; `briefs/RULINGS-AFTER-COMPILE.md` PL; `DESIGN_FP_ARCH_PL.md` §12 OD-PL-1..34)] the polity after its cure | RULED BY D
+## APPOINT\|appointment: 7
+571:| `polity_appointment` [ADDED 2026-10-17 (fp-final; R4-8, `briefs/RULINGS-AFTER-RESEARCH.md` §6; PL §7, §15)] | PL (PL-12) | the liege's appointment act (riding the landed `government_change` proposal with cause `appointment`) | `app
+645:[RECOUNTED 2026-10-18 (fp-final r1; D-FOLD-r1) — `relief_answer` is struck (−1) and `party_voiced` added (+1), so the live registry still holds SEVENTY kind names in SIXTY-FIVE live rows: thirty-five of 2026-10-16, nine PL and MN ki
+770:| `polity_*` and the polity records (PL) | kinds `polity_claim · polity_war · polity_fallen · polity_arbitration · polity_recognition · polity_appointment`, `allegiance_choice`, `relief_answer`; ledgers `polityContests` · `polityN
+774:| PL verdict words | `submit` · `stand_by` · `lapsed` · `renew` · `withheld` · `recognized` · `partition` · `appointed` | `stand_by` FREE (replaces `remnant`, a landed faction word); HOMONYMS: `submit` a `copy/en.js` key; `lapsed
+## missionary: 0

@@ -1,0 +1,62 @@
+# ST §2.5 token census (P5C-12), master 81f1cd963, Tue Oct 20 15:33:47 CDT 2026
+token | src files | tests files | ledger docs files (excl. ST) | quoted-literal src files
+sitesNear | 0 | 0 | 3 | 0
+sitePresenceFeeder | 0 | 0 | 2 | 0
+siteSuppression | 0 | 0 | 4 | 0
+siteWitnesses | 0 | 0 | 3 | 0
+siteDefenseOf | 0 | 0 | 1 | 0
+siteDefense | 0 | 0 | 6 | 0
+applySiteEvent | 0 | 0 | 1 | 0
+siteClearedContest | 0 | 0 | 0 | 0
+siteSiegeVerdict | 0 | 0 | 0 | 0
+fundingSet | 0 | 0 | 2 | 0
+placedBy | 0 | 0 | 0 | 0
+offerRef | 0 | 0 | 0 | 0
+resourceKey | 16 | 6 | 3 | 0
+ruin_left | 0 | 0 | 0 | 0
+SITE_KINDS | 0 | 0 | 0 | 0
+SITE_QUALITY | 0 | 0 | 1 | 0
+HOLDER_CLASSES | 0 | 0 | 1 | 0
+DISTANCE_BANDS | 1 | 1 | 0 | 0
+FUNDING_BANDS | 0 | 0 | 5 | 0
+SITE_EVENTS | 0 | 0 | 1 | 0
+siteTargetId | 0 | 0 | 0 | 0
+keepBreaches | 0 | 0 | 0 | 0
+holderSinceOf | 0 | 0 | 1 | 0
+holderSince | 0 | 0 | 0 | 0
+siteAt | 0 | 0 | 1 | 0
+attachmentsOf | 0 | 0 | 0 | 0
+siteTermAt | 0 | 0 | 3 | 0
+## resourceKey at master
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/structuralValidator.js:784:  nativeSemanticResourceKeys(config).forEach(resourceKey => {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/structuralValidator.js:785:    const data = RESOURCE_DATA[resourceKey];
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/steps/resolveResources.js:184:    nearbyResourcesDepleted = nearbyResources.filter((resourceKey) => {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/steps/resolveResources.js:187:        isRandomlyDepletableResource(resourceKey)
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/generators/steps/resolveResources.js:250:        ...allowState.filter((resourceKey) => {
+## siteTargetId in fold
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/envoyChanceMeeting.test.js:23:  DISTANCE_BANDS,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/envoyChanceMeeting.test.js:103:      MEETING_DRIFT_BANDS, MEETING_REFUSALS, MEETING_ARMS, DISTANCE_BANDS,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/envoyChanceMeeting.test.js:219:    expect(DISTANCE_BANDS).toContain(far.band);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeeting.js:95:// (`DISTANCE_BANDS`, `POSTURE_BANDS`, `LEAN_BANDS` and `MEETING_REFUSALS`), which is
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeeting.js:118:export const DISTANCE_BANDS = Object.freeze(['alike', 'differing', 'opposed']);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeeting.js:496:    ? DISTANCE_BANDS[0]
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/envoyChanceMeeting.js:497:    : rungs <= num(edges.differing) ? DISTANCE_BANDS[1] : DISTANCE_BANDS[2];
+## captureContent (master)
+392:function captureContent(entry) {
+396:    whereId: ids.length ? ids[0] : '',
+siteId hits in rumorNetwork.js: 0
+## stressor stages
+34:export const STRESSOR_LIFECYCLE_STAGES = Object.freeze([
+37:  'peaking',
+318:  if (stressor.severity >= 0.72) return 'peaking';
+364:    peakSeverity: Math.max(
+## blockade
+497:export function activeBlockadeTargets(worldState) {
+## ruin card candidates
+/**
+ * HeraldRemembrance.jsx — RUINS & REMEMBRANCE, the Herald's graveyard door
+ * (owner directive 5, judgment J-D5, wave W-C).
+     255 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/map/HeraldRemembrance.jsx
+152:    case 'FORCE_ABANDON': return `${n(args.targetId)} is ordered abandoned`;
+900:    case 'FORCE_ABANDON': {
+SITE_DISTANCE_BANDS src=0 tests=0

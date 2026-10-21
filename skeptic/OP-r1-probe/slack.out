@@ -1,0 +1,10 @@
+{
+ "expectedReturnTick": 7,
+ "slackAsWritten_weeks": 4,
+ "detourAccepted": true,
+ "detourExtraWeeks": 2,
+ "homeArrivalNoDetour": 7,
+ "homeArrivalAfterDetour": 9,
+ "lateBy": 2,
+ "silenceEligibleRule": "tick > Number(errand.expectedReturnTick) and not visibly home"
+}

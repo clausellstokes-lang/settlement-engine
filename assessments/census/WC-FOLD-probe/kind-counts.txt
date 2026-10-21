@@ -1,0 +1,90 @@
+armies_meet [WC]: CH:2 MN:6 PR:3 PS:16 SP:1 ST:3 WC:1
+siege [WC]: BD:2 CH:4 MN:18 PL:7 PT:2 SP:1 ST:2
+pact_acceptance [GR]: GR:2 MN:1 PS:2 SP:1
+mediation_offer [GR]: GR:1
+succession_reaffirmation [GR]: GR:1 PL:2
+spy_at_target [ES]: CH:1 ES:1 PR:11
+lure_sprung [IN]: IN:5 PR:1
+plant_taken [IN]: IN:1 PR:1 PT:4
+call_in_answer [WC]: PL:14 PR:15 WC:1
+contribution_dispatch [WC]: MN:1 WC:1
+caravan_seized [WY]: BD:8 EC:1 PR:6 WY:3
+raid [WC]: BD:45 MN:3 PL:9 PS:2 RN:3
+column_at_the_wall [POP]: BD:3 POP:1
+legate_received [WF]: WF:1
+pilgrims_received [WF]: WF:1
+tribute_demand [GR]: GR:1
+trade_rights_demand [GR]: GR:1
+war_declaration [WC]:
+blockade [WC]: EC:1
+occupation_contest [WC]: PS:1 WC:1
+negotiation [GR]: GR:1
+factor_parlay [EC]: EC:1
+peace_offer [WC]:
+coalition_join [WC]:
+treaty_breach [GR]: PS:4
+intervention [WC]:
+sovereignty_conveyance [WC]: ST:1
+envoy_intercepted [IN]: CH:1 PR:6 PS:3
+envoy_held [ES]: CH:6 PR:6 PS:3
+ransom [WC]: BD:13 CH:3
+ratification [GR]:
+chance_meeting [WY]:
+pact_renewal [GR]: PL:1
+embargo [EC]: EC:4 HB:1
+supply_raid [WC]: BD:8 PL:8 PS:2
+fealty_question [PL]: PL:5
+polity_fallen [PL]: PL:11
+polity_claim [PL]: PL:6
+allegiance_choice [PL]: PL:6
+polity_war [PL]: PL:13
+polity_arbitration [PL]: PL:7 PR:1
+fealty_break [PL]: CH:2 PL:30 PR:1 PS:2
+polity_recognition [PL]: PL:5
+polity_appointment [PL]: PL:6
+menace_siege [MN]: CH:4 CN:1 MN:23 PL:9 ST:1 SPINE:2
+menace_met [MN]: MN:36 PR:8 PS:1 PT:1 RN:1 ST:1 SPINE:2
+retainer_offer [CH]: CH:9
+paragon_resigns [CH]: CH:5
+champion_duel [CH]: CH:6
+person_at_the_gate [CH]: BD:2 CH:22 PR:1 PS:3 PT:3
+person_banned [CH]: CH:7 RN:1
+banished_found [CH]: CH:7
+paragon_disgraced [CH]: BD:1 CH:13 PR:3
+polarity_turn [CH]: CH:13
+never_line_tested [CH]: CH:7
+party_request [PT]: PT:13
+party_offer [PT]: PT:5
+party_summons [PT]: PT:5
+party_warrant [PT]: PR:6 PT:9
+party_bounty [PT]: BD:1 PT:6
+party_hunted [PT]: BD:2 CH:1 PT:15 SPINE:1
+party_ambush [PT]: PR:6 PT:8
+party_gate [PT]: CH:4 PR:12 PT:25
+party_visit [PT]: CH:3 PT:8
+party_pledge_due [PT]: PT:8 RN:1
+party_slander [PT]: PT:6 RN:4
+party_banned [PT]: PT:15 RN:1
+backing_voided [PT]: PT:11 RN:3
+backing_repudiated [PT]: PL:1 PT:10 RN:2
+party_voiced [PT]: CH:2 MN:1 PL:1 PR:1 PS:1 PT:25 RN:23 ST:1 SPINE:4
+bodies_meet [BD]: BD:17 PR:7 PT:2 RN:2
+body_stance [BD]: BD:19 CH:2 PL:13 PR:3 RN:4 ST:6
+traffic_waylaid [BD]: BD:15 RN:2
+alms_requested [BD]: BD:10
+body_bounty [BD]: BD:13 CH:3 PT:1
+hunt_taken [BD]: BD:22 CH:12 PR:9 PT:2 RN:15
+guild_war [BD]: BD:31
+sponsorship_offered [BD]: BD:9
+sponsor_exposed [BD]: BD:11 CH:1 PL:1
+passage_request [PS]: PS:7
+passage_at_the_border [PS]: PR:6 PS:21
+passage_overstayed [PS]: PS:10
+armed_incursion [PS]: PL:6 PR:6 PS:24
+site_taken [ST]: BD:12 MN:2 PR:2 RN:1 ST:30
+site_cleared [ST]: BD:10 PR:10 RN:1 ST:44
+site_reclaim [ST]: MN:2 RN:1 ST:15
+site_siege [ST]: BD:4 MN:3 PS:2 RN:1 ST:34
+site_sale [ST]: BD:10 RN:8 ST:21
+patrol_engages [PR]: BD:20 CH:1 PR:37 PS:5 RN:3
+patrol_joins [PR]: PL:1 PR:16 RN:2

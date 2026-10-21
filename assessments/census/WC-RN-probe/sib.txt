@@ -1,0 +1,270 @@
+##### fameOf
+  DESIGN_FP_ARCH_CH.md (4)
+    L228: d `neutral`]. Every deed's `causedBy` is the paragon's receipt for that week (requirement 20). CH reads back `fameOf` / `fameIn` (the gift's scale, the town's-gate belief, the recruiter's choice, the call board's "a reno
+    L418: , PR8; a paragon's fame cuts its cover through RN's `fameIn` AT THE RIDERS' TOWN — that town's belief, never `fameOf`'s world-wide truth, PR §8.1) is TURNED BACK in CH's own words — a `person_at_the_gate` card whose WHER
+    L418: al r2b) — PR's round-2 cures aligned in CH's text: SEAMS-r2-8 (THE ONE STRETCH KEY), PR-r2-12 (`fameIn`, not `fameOf`), SEAMS-r2-2 (envoys), SEAMS-r2-6 (the corps)]; (c) a `patrol_report` that has ARRIVED is road (b) of 
+  DESIGN_FP_ARCH_PR.md (2)
+    L370: N read backwards (RN's `fameIn(worldState, actorRef, power, tick).scope` — fame as that town's BELIEF, never `fameOf`'s world-wide truth: `realm` −0.4 cover, `regional` −0.2; a famous enemy captain is recognised only whe
+    L907: iced | §8.1 · R16 · R32 | | PR-r2-12 | M | CURED — cover reads `fameIn` at the patrol's town (belief), never `fameOf` | §8.1 · R17 | | PR-r2-13 | M | CURED — PT's WATCH on the road IS a detachment of the court's riders (
+  DESIGN_FP_ARCH_PS.md (2)
+    L128:  and no court has fame: RN1, "A SETTLEMENT doer's deed … adds no fame to anyone: it travels as a TALE" (RN's `fameOf` takes a person, a corps or the party only) — and no court's regard of a court is written by RN [CURED 
+    L606: /`broken`; witnesses the territories crossed), so a crossing travels as a TALE — and no court has fame (RN1; `fameOf` takes a person, a corps or the party) [CURED 2026-10-18 (fp-final r3) — RN-V6 · A.4: "and a court's fa
+  DESIGN_FP_ARCH_PT.md (1)
+    L253: 0) — vetoable.]  ---  ## §5 WHAT THE WORLD THINKS OF THE PARTY (PT-1; every read is RN's)  The party's fame (`fameOf`, `fameIn`), every actor's regard of it (`regardOf`, `courtRegardOf` for bodies — courts, factions, a c
+##### fameIn
+  DESIGN_FP_ARCH_BD.md (7)
+    L195: d's derived regard, RN7, → `c:<sponsorCourt>`; §10.4); a body's NOTORIETY is RN's fame of its key at a town (`fameIn(worldState, { kind: 'body', bodyKind, id }, townId, tick)`, RN §4.3) — only a NAMED body's acts are dee
+    L260:  fielded count below its peace count), the level itself (the feedback), for a NAMED gang its NOTORIETY (RN's `fameIn` of its key at the town — feared gangs grow; the bounty is the counterforce) and the commons' SUPPORT (
+    L280: BELIEVED threat: `harm01` × believed might — `harm01` a NAMED gang's or flock's notoriety at the court (RN's `fameIn`, `FAME01`), and for a BEAST pack (no RN key: "a nameless body and a beast are never doers", RN §2.1) i
+  DESIGN_FP_ARCH_CH.md (9)
+    L9: ; HOST-r2-1: winter slows a pass and never cuts it, and the climate band is landed; PR's one stretch key and `fameIn`; ST-r2-1's ceiling; the landed navy) are disposed in §25's Round 2b block (`cure/D-CH-r2b.md`). No STO
+    L228: ]. Every deed's `causedBy` is the paragon's receipt for that week (requirement 20). CH reads back `fameOf` / `fameIn` (the gift's scale, the town's-gate belief, the recruiter's choice, the call board's "a renowned healer
+    L418: D on its leg by PR's one encounter law (`patrolEncounter`, PR8; a paragon's fame cuts its cover through RN's `fameIn` AT THE RIDERS' TOWN — that town's belief, never `fameOf`'s world-wide truth, PR §8.1) is TURNED BACK i
+  DESIGN_FP_ARCH_PR.md (4)
+    L370: ICE_CAP` 0.9):   - `cover` — the traveller's own: a paragon's FAME AT THE PATROL'S TOWN read backwards (RN's `fameIn(worldState, actorRef, power, tick).scope` — fame as that town's BELIEF, never `fameOf`'s world-wide tru
+    L601: -final r5) — B.5 · the RN→PR route] [CURED 2026-10-18 (fp-final r4)]; a paragon's fame AT THE PATROL'S TOWN (`fameIn`) cuts its cover (§8.1); the join's default reads the landed pair state, never RN's court regard (RN's 
+    L723: realm`-fame villain paragon on a friendly road | cover −0.4 only where the riders' town has heard the deeds (`fameIn` = `realm` there); at a town that has not, the cover is unchanged; turned back with CH's `refused` at W
+  DESIGN_FP_ARCH_PT.md (6)
+    L87: — PT-r1-10 · PT-V2 (A.2).]  **PT14 — BOUNDED RESPONSIVENESS.** Only actors who have HEARD of the party (RN's `fameIn`) and CARE (a need it is known to answer, or a regard away from indifference) engage it; each actor hol
+    L245: : in the belief presets an actor knows it only once the placing deed's tale has reached the actor's town (RN `fameIn`'s arrival test); in the omniscient arm at once. Witnesses are the actors where the party is SEEN — the
+    L253: ble.]  ---  ## §5 WHAT THE WORLD THINKS OF THE PARTY (PT-1; every read is RN's)  The party's fame (`fameOf`, `fameIn`), every actor's regard of it (`regardOf`, `courtRegardOf` for bodies — courts, factions, a creed's fai
+##### heardAt
+  DESIGN_FP_ARCH_CH.md (5)
+    L9:  (a patrol is a weekly-placed detachment), and the halves sibling lanes routed here (RN's `TELLING_SOURCES`, `heardAt` and the stage's three rebindings; PT's `met_in_person`; PR's `believedWatch` return) are disposed in 
+    L219: nal r3) — A.12 (RN-r2-verify minor): RN §2.3's wording wins] by RN's ONE HEARD TEST at the observer's town — `heardAt(worldState, deed, observerSettlementId, tick)`, whose `doerKey` (the doer AS HEARD) must name the para
+    L469: reabouts`, §2.2: where the newest heard deed WHOSE DOER is the paragon took place (A.12), by RN's heard test `heardAt(…).heardTick` at the court's town; in the omniscient arm the newest inside whose reach that town lies)
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L882: round-3 | `actRef` (the deed's stored idempotency key, asked before the hash); `doerKey` (the doer as heard, `heardAt`'s field); the deed target's `siteId` (THE SITES' record key) | FREE (0 · 0 each, `siteId` included) |
+##### readDeed
+  DESIGN_FP_ARCH_PT.md (1)
+    L253: ledge deeds that town heard — §2.1) and every deed's inherent value and two-lens reading (`inherentValueOf`, `readDeed`) are `DESIGN_FP_ARCH_RN.md` §4–§7, unchanged; PT's deed kinds enter RN's value table only by the row
+##### regardOf
+  DESIGN_FP_ARCH_CH.md (1)
+    L228: s scale, the town's-gate belief, the recruiter's choice, the call board's "a renowned healer is called") and `regardOf` (proximity, offers, bans), and nothing else of RN's. [REFINED 2026-10-17 (fp-final) — RN landed in p
+  DESIGN_FP_ARCH_PT.md (2)
+    L253:  OF THE PARTY (PT-1; every read is RN's)  The party's fame (`fameOf`, `fameIn`), every actor's regard of it (`regardOf`, `courtRegardOf` for bodies — courts, factions, a creed's faithful, a kingdom), its credibility (`pa
+    L268: r open engagement the actor presses this week (§13). Reads are BELIEF (what each actor heard: RN's `fameIn`, `regardOf` from the actor's town); the one truth it reads is the party's own deed ledger for the pledge's evide
+##### courtRegardOf
+  DESIGN_FP_ARCH_PT.md (4)
+    L67: polityOf`; no kingdom while `polityEnabled` is dark); the net effect at any meeting is RN's body derivation (`courtRegardOf`) read with the place's politics (§9.1). PT supplies the deed doors, the marks and the rows its 
+    L253: Y (PT-1; every read is RN's)  The party's fame (`fameOf`, `fameIn`), every actor's regard of it (`regardOf`, `courtRegardOf` for bodies — courts, factions, a creed's faithful, a kingdom), its credibility (`partyCredibili
+    L325: ET_REGARD` take "any holder kind, bodies … included"), that AUTHORED band alone (`dmSet ⊳ declared`, read as `courtRegardOf(worldState, f:<sid>:<gov>, party, tick).baseline` — RN §2.3; never the body's derivation, so not
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L952:  RN-1 (the regard idiom, THE ONE PERSON STAGE) → RN-2 (the court's derived regard and the office of the act, `courtRegardOf` and `actingOfficer` — which C11's own sentence, "the lords curse the party's name", reads, and 
+##### actingOfficer
+  DESIGN_FP_ARCH_CH.md (5)
+    L123: `'s table for persons). A ban is PROCLAIMED by the court's BENCH and the town's gate KEPT by its WATCH (RN's `actingOfficer`; the ruler where the office is empty) [CURED 2026-10-18 (fp-final r1) — SEAMS-r1-4 · SEAMS-r1-5
+    L545: ere; PT's `party_gate` calls the same leaf with `{kind:'party'}`), and the WATCH keeps the town's gate (RN's `actingOfficer(worldState, settlementId, 'refusal at the gate')`; the ruler where the office is empty; the offi
+    L565: es none, with a prior indefinite edge it leaves that edge]. - **Emergent** — the court's BENCH decides (RN's `actingOfficer(worldState, settlementId, 'ban proclaimed')`; the ruler where the office is empty — RN §5.3's da
+  DESIGN_FP_ARCH_PT.md (6)
+    L141: is only the road arm's counterparty (§9.2) or a bounty's quarry (`need.bodyId`)   officer?,           // RN's actingOfficer key and office (the WATCH, the BENCH …) — who makes the act; a bound paragon carrying its employ
+    L273: s the party's request.]  ### 7.3 The producers (each family's act comes from its office — RN's `ACT_OFFICE`, `actingOfficer`) | Family | Who presses it, and why (belief) | Office | First state · the card's place | |---|-
+    L285:  2026-10-18 (fp-final r2) — SEAMS-r2-14 · RULINGS-ROUND2b STOP-PR-2] | | `party_banned` | the court's BENCH (`actingOfficer(worldState, settlementId, 'ban proclaimed')`; the ruler where the office is empty), when a deed 
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L326: tted_under_watch`) → `admitted`; the court's WATCH keeps the town's gate and its BENCH proclaims a ban (RN's `actingOfficer`; the ruler where the office is empty). PT's `party_gate` CALLS the leaf and states no ladder of
+    L588: nned · not_banned` — the default is `banned` at `hatred`, otherwise by the BENCH officer's personality (RN's `actingOfficer`; the ruler only where that office is empty, §3.1.25), not "the ruler's personality" as the row 
+    L952: iom, THE ONE PERSON STAGE) → RN-2 (the court's derived regard and the office of the act, `courtRegardOf` and `actingOfficer` — which C11's own sentence, "the lords curse the party's name", reads, and which PT-1's net eff
+##### notorietyProjection
+##### partyCredibilityOf
+  DESIGN_FP_ARCH_PT.md (3)
+    L111: rging deed | the party's word, PERSISTED (RULINGS-ROUND2 A.1 — RN wins); the DM's view reads it through RN's `partyCredibilityOf`, and a town reads `partyCredibilityAt` over the pledge deeds IT heard. THE RE-FOLD replays
+    L253: (`regardOf`, `courtRegardOf` for bodies — courts, factions, a creed's faithful, a kingdom), its credibility (`partyCredibilityOf`, RN §7's PERSISTED holder on PT's sub-ledger — RULINGS-ROUND2 A.1 — and per town `partyCre
+    L446: erdict | | read | `partyOf` only (`whereaboutsOf` and `lastHeardOf` derive from it and the deed ledger; RN's `partyCredibilityOf` reads the holder through it) | RN's reads; the parts' projection; `lastHeardOf`; the pledg
+##### partyCredibilityAt
+  DESIGN_FP_ARCH_PT.md (3)
+    L111: D (RULINGS-ROUND2 A.1 — RN wins); the DM's view reads it through RN's `partyCredibilityOf`, and a town reads `partyCredibilityAt` over the pledge deeds IT heard. THE RE-FOLD replays RN §7's law over the party's unstruck 
+    L253: ility (`partyCredibilityOf`, RN §7's PERSISTED holder on PT's sub-ledger — RULINGS-ROUND2 A.1 — and per town `partyCredibilityAt`, the same law over the pledge deeds that town heard — §2.1) and every deed's inherent valu
+    L315: , under patience); the requester weighs a "later" by the party's word in ITS town — RN §7's declared reader, `partyCredibilityAt(worldState, requesterTownId, tick)`: where that word is `doubted` or `discredited`, one see
+##### pairNet
+  DESIGN_FP_COHERENCE_FOLD.md (4)
+    L329: tor reads BELIEF, a read that RESOLVES the physics reads TRUTH, and the leaf's owner names which, once. RN's `pairNet` — lens two's read of how a town or court holder stands with the deed's target, and A.15's relation fa
+    L897:  the row above: "RN's open question … is the chair's (OD-RN-48)" | RULED (§E, by delegation, vetoable): RN's `pairNet` reads the landed pair label THROUGH BELIEF (`readBeliefRelationship`, A.8's form), stated once at §3.
+    L897: air label THROUGH BELIEF (`readBeliefRelationship`, A.8's form), stated once at §3.1.25 ↳ r5; `labelIsTrue` (`pairNet`'s returned flag: whether the read label is the true one; κ rides only such a label) is FREE (0 · 0, `
+##### deedIndex
+  DESIGN_FP_ARCH_CH.md (2)
+    L219: Id \| null` | where a court BELIEVES a paragon is: the `actAt` of the newest deed WHOSE DOER is the paragon (`deedIndex(...).byDoer`; a deed done by someone else about the paragon places nobody) [CURED 2026-10-18 (fp-fin
+    L219: d `doerKey` (RN l.181: "`doerKey` the doer AS HEARD … whose `doerKey` must name it"), never the true doer of `deedIndex(...).byDoer` alone, and RN's clause is added — fame, regard and the whereabouts read one heard doer 
+  DESIGN_FP_ARCH_PT.md (2)
+    L210: or the twelve kinds; the `party_event` door mints ONLY when no live deed carries the act's `sourceEventRef` (`deedIndex(...).bySourceEventRef`, RN §2.1 — and `mintDeed` itself refuses a second mint across doors, RN §3.1)
+    L239: rEvent(campaignId, eventId)`, which strikes every live deed whose `sourceEventRef` is the undone event's id (`deedIndex(...).bySourceEventRef`; RN's `strikeDeed` — a reversible mask, so fame, regard terms, the telling, `
+##### inherentValueOf
+  DESIGN_FP_ARCH_PT.md (1)
+    L253: same law over the pledge deeds that town heard — §2.1) and every deed's inherent value and two-lens reading (`inherentValueOf`, `readDeed`) are `DESIGN_FP_ARCH_RN.md` §4–§7, unchanged; PT's deed kinds enter RN's value ta
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L797:  or `chancellor` office minted | | `inherentValue` (RN) | a deed's value on its face (derived, never stored; `inherentValueOf`) — DM-facing in PT's `moralWeight` words | FREE | | `declaredStance` (RN, PT) | `ally · enemy
+##### mintDeed
+  DESIGN_FP_ARCH_CH.md (5)
+    L228: ED_SOURCES`)  RN owns the deed ledger (`spatialLedgers.deeds`, one writer `src/domain/renown/deedLedger.js :: mintDeed / strikeDeed`, `DESIGN_FP_ARCH_RN.md`) and its source row `paragon_act` is CH's to fill: the paragon 
+    L228: ecord`, and that kill's undo strikes the deed by RN's `strikeDeed`); at the close ONE deed is minted through `mintDeed` with its magnitude from `weeks` and its target the town, append-only and never amended — a stay with
+    L228: append-only ("never rewritten, folded or pruned"; scope "computed ONCE at mint and frozen"; the only writers `mintDeed / strikeDeed`), so the round-1 "opened … magnitude written when the stay closes" amended a minted dee
+  DESIGN_FP_ARCH_MN.md (2)
+    L148: party_event` door, which mints the deed in RN's deed ledger (`spatialLedgers.deeds` through `deedLedger.js :: mintDeed` — RN owns it, RULINGS-AFTER-COMPILE) when THE PARTY and THE RENOWN are lit; dark, the dial is refuse
+    L748:  · OD-MN-36 — a fourth dial `party` on `MENACE_MIGHT` and `MENACE_STATE` calls PT's `party_event` door (RN's `mintDeed`); PT's verb names ROUTED to D-PT; M43 | | MN-r1-16 CH's paragon lean on MN-2 undeclared | M | CURED 
+  DESIGN_FP_ARCH_PS.md (1)
+    L606: CURED 2026-10-18 (fp-final r2) — SEAMS-r2-13 · PS-r2-17 · SEAMS-r2-6] | RN §3.1's slot table (a routed row); `mintDeed` | | CH (champions) | a paragon envoy's diplomacy lean on the request (through `reserveFor`'s shared 
+  DESIGN_FP_ARCH_PT.md (4)
+    L118: ns `spatialLedgers.deeds` and its one normalizer, R-RN-9; PT owns these fields and the party doors that call `mintDeed`; RN's normalizer names every one):  | Field | Values | Default (PT2) | Meaning | |---|---|---|---| |
+    L201: .]  ---  ## §3 THE DEED DOORS AND THE MARK (PT-0)  ### 3.1 The doors (each one call to RN's `deedLedger.js :: mintDeed`; RN §3.1 owns the mint) | `DEED_SOURCES` row | Door | Seam (host eff.) | What it records | |---|---|
+    L210:  ONLY when no live deed carries the act's `sourceEventRef` (`deedIndex(...).bySourceEventRef`, RN §2.1 — and `mintDeed` itself refuses a second mint across doors, RN §3.1). DETERMINISM: because the composer fires `record
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L1085: pend-only; FNV-minted ids; `struck` and `correctsRef`, never a deletion; RN owns it, PT and CH write through `mintDeed`), `spatialLedgers.regard` (persisted only for authored seeds, DM sets and the version heard), the pa
+##### strikeDeed
+  DESIGN_FP_ARCH_CH.md (4)
+    L228: )  RN owns the deed ledger (`spatialLedgers.deeds`, one writer `src/domain/renown/deedLedger.js :: mintDeed / strikeDeed`, `DESIGN_FP_ARCH_RN.md`) and its source row `paragon_act` is CH's to fill: the paragon stage mints
+    L228: l verb's paragon arm closes the stay before `removeNpcRecord`, and that kill's undo strikes the deed by RN's `strikeDeed`); at the close ONE deed is minted through `mintDeed` with its magnitude from `weeks` and its targe
+    L228:  ("never rewritten, folded or pruned"; scope "computed ONCE at mint and frozen"; the only writers `mintDeed / strikeDeed`), so the round-1 "opened … magnitude written when the stay closes" amended a minted deed; `RULINGS
+  DESIGN_FP_ARCH_PT.md (1)
+    L239: kes every live deed whose `sourceEventRef` is the undone event's id (`deedIndex(...).bySourceEventRef`; RN's `strikeDeed` — a reversible mask, so fame, regard terms, the telling, `lastHeard` and the pledge evidence all f
+##### projectScope
+  DESIGN_FP_ARCH_CH.md (1)
+    L228:  `renown` at introduction: doer the paragon, witness the introduction town, its significance set so RN's own `projectScope` reaches the authored scope where the world's carriers allow; struck with the introduction's undo
+##### writeHeardTerm
+##### advanceHeardRegard
+##### believedBodyOf
+  DESIGN_FP_ARCH_BD.md (26)
+    L155: ut hunger, season and cover. A town knows a body by what it has heard — ONE belief record per town and body, `believedBodyOf(worldState, townId, bodyId)` (believed size band · believed base · last heard where and what · 
+    L253: 18 (fp-final r4) — L-BD 45 · 32b · A.17's BD half · ST's route (a)] - **ONE belief record per town and body: `believedBodyOf(worldState, townId, bodyId) → { known, mightBand?, baseId?, lastWhereId?, lastWhat?, lastTick?,
+    L253: ject: { kind: 'menace' | 'body', id }, mightBand, tick, whereId, siteId })`, MN's — MN owns the record, BD's `believedBodyOf` and ST's `believedDenOf` READ it), its callers: (i) THE SITES' stage, handing on each sighting
+  DESIGN_FP_ARCH_MN.md (3)
+    L160: gs` keyed court × subject (`{kind:'menace'|'body', id}`), writer `recordSighting` — MN owns the record; BD's `believedBodyOf` and ST's `believedDenOf` READ it") [CURED 2026-10-19 (fp-final r6) — RULINGS-ROUND6 B.2 · SEAM
+    L160: led` is lit (each subject's readers); the door and the store are MN's leaf at MN-3, and THE BODIES' readers (`believedBodyOf`, `believedBodies`) and THE SITES' (`believedDenOf`, BY PLACE over both kinds) read them [CURED
+    L641: ENERALIZED to any subject `{ kind: 'menace' \| 'body', id }` by RULINGS-ROUND6 B.2 (MN owns the record; BD's `believedBodyOf`/`believedBodies` and ST's `believedDenOf` read it; THE BODIES declares no twin store) — a pers
+  DESIGN_FP_ARCH_PR.md (14)
+    L9: l arm; a body's cover reads BD's `ROAD_COVER_BY_MIGHT` and the commons' support; the hunt's prediction reads `believedBodyOf` (with its informer rows); the gang's `bribe` names PR's unpaid-wages slot; the witness and the
+    L204: ons } | null` — THE HUNT'S PREDICTION (§5.5), on BELIEF only: the town's ONE belief record of the body, BD's `believedBodyOf(worldState, townId, bodyId) → { known, mightBand?, baseId?, lastWhereId?, lastWhat?, lastTick?,
+    L269: Id, bodyKind, lastWhereId, lastWhat, lastTick }` and READ, each, through the town's ONE belief record of it, `believedBodyOf(worldState, townId, bodyId)` → `{ known, mightBand?, baseId?, lastWhereId?, lastWhat?, lastTick
+  DESIGN_FP_ARCH_ST.md (12)
+    L146: ting is now a row of the holder's OWN belief record, keyed by the court (MN's `believedMenaces`, THE BODIES' `believedBodyOf`), which outlives the holder's departure, stale, until a newer sighting or a telling (§2.4; OD-
+    L193: subject; MN owns the record, its door, its closed callers and its horizon; `believedMenaces` and THE BODIES' `believedBodyOf`/`believedBodies` READ it) [CURED 2026-10-19 (fp-final r6) — B.2: two owners' doors became one]
+    L341: dowed` (the patron keeps its flock) — and which BELIEVES it can take the site (`believedDenOf` → THE BODIES' `believedBodyOf`: its FIELD FORCE against the flock's believed strength plus the site's walls, ratio ≥ 1.2 — st
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L445: s` / `recordMenaceSighting`) — MN (RULINGS-ROUND6 B.2) — a BELIEF record written at the tick of seeing; BD's `believedBodyOf`, ST's `believedDenOf` and PR's look read or write through it, never the site's truth holder; S
+##### ACT_OFFICE
+  DESIGN_FP_ARCH_BD.md (1)
+    L640: ms: the captive's standing (RN's fame of the person at the captor's base — `fameIn`'s scope, and its office, `ACT_OFFICE`, banded 0..1) and the road from the body's base to the captive's court (`hopWeeks`) [CURED 2026-10
+  DESIGN_FP_ARCH_PT.md (1)
+    L273: o longer closes the party's request.]  ### 7.3 The producers (each family's act comes from its office — RN's `ACT_OFFICE`, `actingOfficer`) | Family | Who presses it, and why (belief) | Office | First state · the card's 
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L796: oken`; PT's R-PT-9, accepted by the chair) | FREE; each grows only by a registry row in its owner's wave | | `ACT_OFFICE` · `OFFICE_SCOPE` (RN) | the office each act comes from; role → office fame | FREE; over the landed
+##### OFFICE_SCOPE
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L796: T-9, accepted by the chair) | FREE; each grows only by a registry row in its owner's wave | | `ACT_OFFICE` · `OFFICE_SCOPE` (RN) | the office each act comes from; role → office fame | FREE; over the landed `INSTITUTION_R
+##### voiced_regard
+  DESIGN_FP_ARCH_PT.md (6)
+    L69: tor still presses it, in its CURRENT state. [CURED 2026-10-18 (fp-final r1) — SEAMS-r1-6: RN's engine-minted `voiced_regard` naming the party reached no card; the chair ruled it a hearing (the owner: "Everything with the
+    L71: .3; a correction of the backed deed, RULINGS-ROUND2 A.4), and a public voice the hearing let be spoken (RN's `voiced_regard`, §7.3) — none of them is an act upon the party's body or freedom. [CURED 2026-10-18 (fp-final r
+    L291:  PT-r1-19: no act recorded a meeting.] **The voice spoken** (`party_voiced`): at `spoken` (the default) RN's `voiced_regard` deed mints (`praise` or `condemnation`, target the party), once per (holder, party) per year by
+  DESIGN_FP_COHERENCE_FOLD.md (10)
+    L280: lt `spoken` — it decides nothing FOR the party; the DM may strike or amend it in its week), produced by RN's `voiced_regard` deed; RN owns no kind; a voice about anyone but the party stays regard dynamics, never a hearin
+    L281: rson stage hands the act to PT's engagement pass, which opens the `party_voiced` card; RN's writer mints the `voiced_regard` deed only when that hearing resolves `spoken`, and `withheld` mints nothing — so no hearer can 
+    L281:  hearer can hear a voice before the DM's week. The r1 bracket above, which called the kind "produced by RN's `voiced_regard` deed", had the order backwards: RN's crossing is the producer and the deed is the hearing's out
+  DESIGN_FP_SPINE.md (3)
+    L249: ault `spoken`: a court's or a renowned person's public praise or condemnation of the party, produced by RN's `voiced_regard` deed); each kind names its ANCHOR where its actor stands in no settlement (`party_hunted` on th
+    L250: ST-r1-6 · FOLD-V1; `briefs/RULINGS-ROUND2.md` A.5 · A.13) — `party_voiced`: the HEARING comes first and RN's `voiced_regard` deed is minted only when it resolves `spoken` (`withheld` mints nothing), so "produced by RN's 
+    L250: oiced_regard` deed is minted only when it resolves `spoken` (`withheld` mints nothing), so "produced by RN's `voiced_regard` deed" above reads "produced by RN's crossing; the deed is its outcome at `spoken`"; the default
+##### SET_REGARD
+  DESIGN_FP_ARCH_PT.md (2)
+    L259: js :: pardonNpc`: `if (!found) return refuse(worldState, settlement, 'pardon', 'unknown_identity');`) · RN's `SET_REGARD` / `DECLARE_STANCE` / `STRIKE_DEED` / `UNSTRIKE_DEED` (RN §5.6). [CURED 2026-10-18 (fp-final r1) — 
+    L325: a stance or set a regard on the governing faction's own body (`f:<sid>:<gov>`; RN §5.6: `DECLARE_STANCE` and `SET_REGARD` take "any holder kind, bodies … included"), that AUTHORED band alone (`dmSet ⊳ declared`, read as 
+##### DECLARE_STANCE
+  DESIGN_FP_ARCH_CH.md (3)
+    L168: rRef, band }` — `band` is RN's regard ladder word | authored BASELINES, written at introduction through RN's `DECLARE_STANCE` door as `declared: <band>` (RN's widening of `declared` from `ally · enemy` to a band baseline
+    L332: nd nothing else of the living field; 4. seeds the authored relations as RN `declared` baselines through RN's `DECLARE_STANCE` door (SEAMS-r1-9), the authored bans as `indefinite` exclusion edges through `addExclusionEdge
+    L527:  no relation store. CH supplies: the AUTHORED baselines at introduction (`relations[]`, written through RN's `DECLARE_STANCE` door as `declared: <band>` — RN's widening of `declared` to a band baseline; never `dmSet`, wh
+  DESIGN_FP_ARCH_PT.md (4)
+    L67: r written by the party door (§2.1; RULINGS-ROUND2 A.1); its allies-and-enemies list is RN's authored regard (`DECLARE_STANCE`, `declaredStance: ally · enemy`) on any holder the owner named — an NPC once persons light, a 
+    L253:  PT's deed kinds enter RN's value table only by the rows §3.3 registers. The allies-and-enemies list is RN's `DECLARE_STANCE` on any holder the owner named — "from NPC's to kingdoms to settlements to specific courts or r
+    L259: `: `if (!found) return refuse(worldState, settlement, 'pardon', 'unknown_identity');`) · RN's `SET_REGARD` / `DECLARE_STANCE` / `STRIKE_DEED` / `UNSTRIKE_DEED` (RN §5.6). [CURED 2026-10-18 (fp-final r1) — PT-r1-15: strik
+##### STRIKE_DEED
+  DESIGN_FP_ARCH_PT.md (4)
+    L259: urn refuse(worldState, settlement, 'pardon', 'unknown_identity');`) · RN's `SET_REGARD` / `DECLARE_STANCE` / `STRIKE_DEED` / `UNSTRIKE_DEED` (RN §5.6). [CURED 2026-10-18 (fp-final r1) — PT-r1-15: strike and amend ride th
+    L259: ate, settlement, 'pardon', 'unknown_identity');`) · RN's `SET_REGARD` / `DECLARE_STANCE` / `STRIKE_DEED` / `UNSTRIKE_DEED` (RN §5.6). [CURED 2026-10-18 (fp-final r1) — PT-r1-15: strike and amend ride the hearing seal · P
+    L261: RE-FOLDS the persisted credibility holder from the unstruck deeds (§2.1), so it falls back exactly too. RN's `STRIKE_DEED` / `UNSTRIKE_DEED` on a party pledge deed or an exposure rebuild the holder the same way (RN §7's 
+##### renownEnabled
+  DESIGN_FP_ARCH_BD.md (2)
+    L553: s RECRUITMENT (`support` is habitat, §2.5). - **Tier · felt:** the regard arm lights where RN's regard does (`renownEnabled`; RN's person arm where `npcConsequencesEnabled` lights; omniscient presets derive it from the d
+    L760: body grain need HB's `habitConditioningEnabled` (dark: every tilt 1); the COMMONS' stance needs RN's regard (`renownEnabled`; the person arm where `npcConsequencesEnabled` lights); THE RANSOM RACE waits on ES-2b (the own
+  DESIGN_FP_ARCH_CH.md (1)
+    L726:  call board, turns, lines, arcs | `npcConsequencesEnabled` (the ledger — RULINGS §1); fame, regard and deeds `renownEnabled` (RN; without it fame reads `unknown`, regard `indifference`, no deed is minted and gifts run at
+  DESIGN_FP_ARCH_PS.md (1)
+    L465:  **TIER:** as PS-1; the casus under `warLayerEnabled`; the polity arms under PL's flags; the tale under RN's `renownEnabled` (court↔court feeling is always the landed pair state) · **DEGRADED ARM:** without RN, the relat
+  DESIGN_FP_ARCH_PT.md (2)
+    L409: on rows (registered at RN-3's unit), suggestions, `partyView`, the net effect, the source event's undo arm | `renownEnabled` (RN: the deed ledger and its reads) | every world-alive preset incl. the default (aspatial-safe
+    L425: Execution` +2 | the deed's week: the card's marks in words; the witness town's dossier line | aspatial-safe; `renownEnabled`; the default preset: the same (no belief involved); premium | — | | PT-1 (after RN-3) | the §3.
+  DESIGN_FP_COHERENCE_FOLD.md (6)
+    L480:  party's credibility holder; fame, regard, inherent value and the two lenses, the voices; two virtual flags (`renownEnabled`, `renownLeansEnabled`); four STOPs (RN-S1 RULED: THE ONE PERSON STAGE, §3.1.22; RN-S2/S3 slot C
+    L789: TERM_CAP` and `menaceRelease` | | `renown` (RN) | the volume, the module dir `src/domain/renown/`, the flags `renownEnabled` · `renownLeansEnabled` | FREE (one prose hit) | | fame · `FAME_SCOPES` (RN) | fame's band IS it
+    L952: s unit, the party's deeds are the only deeds a DM can record, and RN's `party_impact` door is lit only where `renownEnabled` ∧ PT's `partyEnabled`; then RN-1 (the regard idiom, THE ONE PERSON STAGE) → RN-2 (the court's d
+##### renownLeansEnabled
+  DESIGN_FP_ARCH_CH.md (4)
+    L549:  party: PT's `netEffectAt` at `enmity` or worse ⇒ `refused`. The notoriety projection into this step is RN's `renownLeansEnabled` (RN §19); without it the step is skipped [CURED 2026-10-18 (fp-final r1) — CH-r1-33]. 5. *
+    L573: r 6].  **Tier.** `npcConsequencesEnabled` (the ledger and the edges) + `paragonGateEnabled`; the renown step `renownLeansEnabled`; the crown's ban `polityHoldEnabled`, its harbouring row `paragonGateEnabled` ∧ `polityEna
+    L726: regard `indifference`, no deed is minted and gifts run at their base magnitude); the town's-gate renown step `renownLeansEnabled` (RN's notoriety projection, RN §19) [CURED 2026-10-18 (fp-final r1) — CH-r1-33]; the drift
+  DESIGN_FP_ARCH_PT.md (4)
+    L410:  and person actors; CH's flags for `party_visit` (a company's visit: `paragonCorpsEnabled` with WC-10); RN's `renownLeansEnabled` for `party_voiced` (+ persons for a person's voice; + CH's `paragonCorpsEnabled` with WC-1
+    L430: ssings | a paragon's visit card; a voice's card | `npcConsequencesEnabled` + CH's flags; `party_voiced` also `renownLeansEnabled` (a court's voice: `renownLeansEnabled` alone, A.11) | requests from courts only; court voi
+    L430: e's card | `npcConsequencesEnabled` + CH's flags; `party_voiced` also `renownLeansEnabled` (a court's voice: `renownLeansEnabled` alone, A.11) | requests from courts only; court voices only [CURED 2026-10-18 (fp-final r3
+  DESIGN_FP_COHERENCE_FOLD.md (5)
+    L480: ity holder; fame, regard, inherent value and the two lenses, the voices; two virtual flags (`renownEnabled`, `renownLeansEnabled`); four STOPs (RN-S1 RULED: THE ONE PERSON STAGE, §3.1.22; RN-S2/S3 slot C4; RN-S4 slot C1)
+    L789: aceRelease` | | `renown` (RN) | the volume, the module dir `src/domain/renown/`, the flags `renownEnabled` · `renownLeansEnabled` | FREE (one prose hit) | | fame · `FAME_SCOPES` (RN) | fame's band IS its scope: `unknown 
+    L1085: s and the version heard), the party's credibility holder on PT's sub-ledger; two flags — `renownEnabled` and `renownLeansEnabled` (the leans split so the reads can light where the leans' shift is unsigned); RN-S1 → THE O
+##### spatialLedgers.regard
+  DESIGN_FP_COHERENCE_FOLD.md (4)
+    L480: DS` (zero production callers) | RN-0..RN-5 entire: the deed ledger `spatialLedgers.deeds`, the regard ledger `spatialLedgers.regard`, the party's credibility holder; fame, regard, inherent value and the two lenses, the v
+    L792: ef's `wary · warm · loyal · devoted · neutral` collide and are NOT used | | `regard` (RN) | RN's sparse link `spatialLedgers.regard[holderKey][subjectKey]` | HOMONYM resolved by projection: the ransom leaf's `RANSOM_REGA
+    L802: HOMONYM on the server's meter, never the simulation; RN §2.2's token row registers it; RN's corps key inside `spatialLedgers.regard` keeps its meaning | | `paragon` (CH) | the module dir, the field on the `wnpc_` record,
+##### spatialLedgers.deeds
+  DESIGN_FP_ARCH_CH.md (1)
+    L228: ### 2.2b The acts CH hands RN (the deed source `paragon_act`, RN's `DEED_SOURCES`)  RN owns the deed ledger (`spatialLedgers.deeds`, one writer `src/domain/renown/deedLedger.js :: mintDeed / strikeDeed`, `DESIGN_FP_ARCH_
+  DESIGN_FP_ARCH_MN.md (2)
+    L148: FP_ARCH_PT.md` §2.4): the apply arm calls PT's `party_event` door, which mints the deed in RN's deed ledger (`spatialLedgers.deeds` through `deedLedger.js :: mintDeed` — RN owns it, RULINGS-AFTER-COMPILE) when THE PARTY 
+    L761: form is taken at birth; M46 | | SEAMS-r1-25 MN's deed pointer names THE PARTY's ledger | m | CURED §2 — RN's `spatialLedgers.deeds` via PT's `party_event` door (CN's "pinned" word is the chair's bracket) | | HOST-r1-2 sp
+  DESIGN_FP_ARCH_PT.md (1)
+    L118:  draft field on PT's own shape (OD-PT-4); vetoable] |  **SHAPE 2 — THE PARTY'S FIELDS ON THE DEED** (RN owns `spatialLedgers.deeds` and its one normalizer, R-RN-9; PT owns these fields and the party doors that call `mint
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L480: ark); the ransom leaf's `RANSOM_REGARD_BANDS` (zero production callers) | RN-0..RN-5 entire: the deed ledger `spatialLedgers.deeds`, the regard ledger `spatialLedgers.regard`, the party's credibility holder; fame, regard
+    L793:  · valued · beloved`) is a PROJECTION of RN's court regard (`ransomRegardBand`) | | `deed` (RN) | the record `spatialLedgers.deeds` (append-only; `struck`, `correctsRef`) | HOMONYM: the Herald move `DEED` (`prose/moveGra
+    L1085: , "But also for the court NPC as well"; OD-RN-12: the inherent value of every act); THREE persisted shapes — `spatialLedgers.deeds` (append-only; FNV-minted ids; `struck` and `correctsRef`, never a deletion; RN owns it, 
+##### party.credibility
+  DESIGN_FP_ARCH_PT.md (1)
+    L49: LL: 6.5`, `HALF_LIFE_TICKS: 52`, `MAX_LOOKBACK_TICKS: 260` | RN §7's law and its party holder `spatialLedgers.party.credibility = { score, lastUpdateTick }`, PERSISTED (RULINGS-ROUND2 A.1); the law is a deterministic fol
+##### in_office
+  DESIGN_FP_COHERENCE_FOLD.md (4)
+    L836:  part stand as the row above says | | RN round-1 tokens | the `voiced_regard` kinds `praise · condemnation`; `in_office` (a member ADDED to W-H1's closed `VERDICT_CAUSES`, a persisted value); `sourceEventRef` (the deed's
+    L836: REE (RN's probe; re-checked by the fold lane: `praise` and `condemnation` one prose hit each and no literal, `in_office` and `sourceEventRef` 0) | | party and person credibility words (RN) [AMENDED 2026-10-18 (fp-final r
+    L1086: t` rows into RN's closed table in CH's own commit (the ADDENDUM's SEAMS-r1-2); (6) one more persisted value, `in_office` (a member added to W-H1's closed `VERDICT_CAUSES`), and the deed record gains `sourceEventRef`, the
+##### TELLING_SOURCES
+  DESIGN_FP_ARCH_BD.md (4)
+    L118:  a body never asks passage. - **CH (§9, §16b):** the clandestine hire (`covert: true`, the leak through RN's `TELLING_SOURCES`, exposure through `corruptionWeb.js :: applyForeignExposureBlowback` source `covert_hire_expo
+    L505: vert: true`; CH §9 "ONE IDIOM, THREE TIES"): the employing court's secret, its leak a registered row of RN's `TELLING_SOURCES` (`leak:body:<bodyId>:<courtId>:<sinceTick>`, `courtId` the employing court, ONE PER TIE — RN'
+    L689: rce), ONE LATCH per tie — `exposedAt` on the tie, written by BD's writer in the act that fires it — and RN's `TELLING_SOURCES` row (`leak:body:<bodyId>:<courtId>:<sinceTick>`, `courtId` the sponsoring court, ONE PER TIE 
+  DESIGN_FP_ARCH_CH.md (12)
+    L9: 2b body's STOP-PR-0 (a patrol is a weekly-placed detachment), and the halves sibling lanes routed here (RN's `TELLING_SOURCES`, `heardAt` and the stage's three rebindings; PT's `met_in_person`; PR's `believedWatch` retur
+    L491:  belief (beliefs have one writer): the meeting seeds ONE telling about its post — the `findings` row of RN's `TELLING_SOURCES` (RN §3.4), read at the NEXT tick's rumour stage: for each paragon with a `postId` whose `aim`
+    L509: own record's (the paragon's `retainer`; BD's stance row and sponsorship tie); its LEAKS are tellings of RN's `TELLING_SOURCES` — CH's paragon row below, and THE BODIES' body row (`leak:body:<bodyId>:<courtId>:<sinceTick>
+  DESIGN_FP_COHERENCE_FOLD.md (2)
+    L896: ; a slot row with its contract, C17); `ledBy` (a persisted field on the deed, REFINED, vetoable — OD-RN-47); `TELLING_SOURCES`' third row `leak:body:` and its per-hire key; the SECOND REFUSED CLASS (body↔body feeling is 
+    L914:  (OD-RN-50, B.10; FP-46 DRAFT: the rural band and the town 2 hops, a city or metropolis 4, a great crown 5); `TELLING_SOURCES`' leak key PER TIE (it read "per hire") | `hunt_won` FREE; `escaped` a HOMONYM — 10 `src` · 45
+##### deedTelling
+  DESIGN_FP_ARCH_CH.md (1)
+    L512: 2.4, §3.4: "a closed registration list of NON-DEED tellings RN's one telling call seeds", read inside `renown/deedTelling.js`, the ONE call in `rumorNetwork.js :: advanceRumorLedgers`), so CH adds no host line; RN record
+##### personLens
+##### personAggression
+##### renownLeans
+  DESIGN_FP_ARCH_CH.md (4)
+    L549:  party: PT's `netEffectAt` at `enmity` or worse ⇒ `refused`. The notoriety projection into this step is RN's `renownLeansEnabled` (RN §19); without it the step is skipped [CURED 2026-10-18 (fp-final r1) — CH-r1-33]. 5. *
+    L573: r 6].  **Tier.** `npcConsequencesEnabled` (the ledger and the edges) + `paragonGateEnabled`; the renown step `renownLeansEnabled`; the crown's ban `polityHoldEnabled`, its harbouring row `paragonGateEnabled` ∧ `polityEna
+    L726: regard `indifference`, no deed is minted and gifts run at their base magnitude); the town's-gate renown step `renownLeansEnabled` (RN's notoriety projection, RN §19) [CURED 2026-10-18 (fp-final r1) — CH-r1-33]; the drift
+  DESIGN_FP_ARCH_PT.md (4)
+    L410:  and person actors; CH's flags for `party_visit` (a company's visit: `paragonCorpsEnabled` with WC-10); RN's `renownLeansEnabled` for `party_voiced` (+ persons for a person's voice; + CH's `paragonCorpsEnabled` with WC-1
+    L430: ssings | a paragon's visit card; a voice's card | `npcConsequencesEnabled` + CH's flags; `party_voiced` also `renownLeansEnabled` (a court's voice: `renownLeansEnabled` alone, A.11) | requests from courts only; court voi
+    L430: e's card | `npcConsequencesEnabled` + CH's flags; `party_voiced` also `renownLeansEnabled` (a court's voice: `renownLeansEnabled` alone, A.11) | requests from courts only; court voices only [CURED 2026-10-18 (fp-final r3
+  DESIGN_FP_COHERENCE_FOLD.md (5)
+    L480: ity holder; fame, regard, inherent value and the two lenses, the voices; two virtual flags (`renownEnabled`, `renownLeansEnabled`); four STOPs (RN-S1 RULED: THE ONE PERSON STAGE, §3.1.22; RN-S2/S3 slot C4; RN-S4 slot C1)
+    L789: aceRelease` | | `renown` (RN) | the volume, the module dir `src/domain/renown/`, the flags `renownEnabled` · `renownLeansEnabled` | FREE (one prose hit) | | fame · `FAME_SCOPES` (RN) | fame's band IS its scope: `unknown 
+    L1085: s and the version heard), the party's credibility holder on PT's sub-ledger; two flags — `renownEnabled` and `renownLeansEnabled` (the leans split so the reads can light where the leans' shift is unsigned); RN-S1 → THE O
+##### doerRef
+  DESIGN_FP_ARCH_PT.md (5)
+    L368: fade in the telling | | doer | VAGUE 0.3 | the doer swap: a new branch in `degradeTelling` writing the typed `doerRef` from a closed pool of real actors in the deed's scope (the party, doers of other live deeds, graduate
+    L368: ped doer reaches the hearer's regard through RN's heard pass, whose re-read key is the TRIPLE (`ver`, `mag`, `doerRef`): a changed doer moves the deed's ONE term to the new subject (RULINGS-ROUND3 B for RN, RN-V2 — "the 
+    L368: he deed's ONE term to the new subject (RULINGS-ROUND3 B for RN, RN-V2 — "the same gap applies to a corrected `doerRef` (PT-4's swap)") [CURED 2026-10-18 (fp-final r3) — RN-V2 (routed by the RN verifier): PT cites RN's ke

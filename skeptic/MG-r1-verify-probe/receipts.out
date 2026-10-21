@@ -1,0 +1,25 @@
+# receipts (V-MG-r1, Tue Oct 20 15:37:57 CDT 2026)
+## navalLayer.js :: seaBattleInputs
+export function seaBattleInputs(rec) {
+  return {
+    armyId: rec.ownerId || rec.armyId,
+    size: rec.strength,
+    readiness: rec.readiness,
+    supplyQuality: rec.supplyQuality,
+    funding: rec.funding,
+    groundAdvantage01: clamp01(1 - rec.position01), // a navy near its home port fights home waters
+    fatigue01: rec.position01,
+  };
+}
+## armyTransit.js :: planMarch base
+  const base = hopWeeks(digest, originId, destId, season);
+  if (base == null) return null;
+  const marchWeeks = armyMarchWeeks(base, readiness01);
+  const depart = Math.max(0, Math.floor(finiteNumber(departTick, 0)));
+## MG l.215 (row 2) and l.271 (5.1 v)
+| 2 | split | `invite_split` | A | HB's `anticipationFactorFor(worldState, court, foeCourt, cls, 'split')` — the court's BELIEF of the foe's doctrine of dividing to pursue (`doctrineBands`, HB-6/HB-7, D) × a believed pursuer (row 1's read) | dilution: draw 
+(v) THE HABIT — HB's `habitFactor` on the deciding court's OWN stock for `MOVEMENT_VERBS` (HB's court grain; a general's person grain is HB's unruled Q-HB-B) × `anticipationFactorFor(worldState, courtId, foeCourtId, cls, v)` — the court's BELIEF of the foe's doctrine through `MOVEMENT_VERBS` REGISTERED AS AN HB ACTION VOCABULARY with its `counterWeight` cells over the dyadic subset (B.2
+## MG l.296 (6.3 hold) / l.111 (MG15 one writer) / l.190 (order)
+holds both parties at contact ("both armies HOLD at contact", fold §3.4) and writes the wing's losses through a NAMED seam to WC's deployment debit (routed WC · PS)
+ONE writer, `movement/movementLedger.js` 
+## OP 'is the column' hits: 0

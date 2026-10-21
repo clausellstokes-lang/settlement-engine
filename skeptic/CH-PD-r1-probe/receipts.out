@@ -1,0 +1,87 @@
+## patronDeity -w in src at 81f1cd963 (every landed use = the SETTLEMENT's seated patron)
+src/domain/npc/livedExperienceSources.js:134:export const SUBJECT_RESOLUTIONS = Object.freeze(['npcKey', 'durableId', 'displayName', 'home', 'patronDeity']);
+src/domain/npc/livedExperienceSources.js:718:    'patronDeity', ['pantheon_ascendancy'],
+src/domain/npc/livedExperienceSources.js:722:    'patronDeity', ['pantheon_twilight'],
+src/domain/worldPulse/clergyTraitPlane.js:252: * @param {DeitySnapshot|null|undefined} patronDeity
+src/domain/worldPulse/clergyTraitPlane.js:257:export function targetedFootholds(settlement, patronDeity, rivals, lens) {
+src/domain/worldPulse/clergyTraitPlane.js:259:  if (!patronDeity || !Array.isArray(rivals) || !rivals.length) return [];
+src/domain/worldPulse/clergyTraitPlane.js:267:  const patronPlane = deityPlaneOf(patronDeity);
+src/domain/worldPulse/deityStanceLane.js:298:      patronDeity: patronName,
+src/domain/worldPulse/religionState.js:548:  const patronDeity = patronRef ? state.deities[patronRef].snapshot : null;
+src/domain/worldPulse/religionState.js:551:    if (k !== patronRef) methodPressure = Math.max(methodPressure, methodClash(patronDeity, state.deities[k].snapshot));
+
+## subjectsByPatronDeity (W-LIVES rung's join)
+/**
+ * Every roster of every settlement whose patron deity is the named one — §14's own
+ * small rule for the affiliation plane's "your god" ("laity → the settlement
+ * patron"). The pantheon receipt carries `settlementIds: []` and names no soul, so
+ * without this join the two god kinds have a receipt and no reachable subject.
+ * @param {SourceContext} ctx @param {string} deityId
+ * @returns {Array<{home: SourceHome, npc: object}>}
+ */
+export function subjectsByPatronDeity(ctx, deityId) {
+  const wanted = str(deityId);
+  if (!wanted) return [];
+  const out = [];
+  for (const home of orderedSettlements(ctx)) {
+    if (str(home.patronRef) !== wanted) continue;
+    for (const row of home.cast) out.push({ home, npc: asObject(row) });
+
+## deityTemper callers today (walker pins EXACTLY 13)
+src/components/compendium/CustomContent.jsx
+src/domain/display/deityEffects.js
+src/domain/display/warResolve.js
+src/domain/magicProfile.js
+src/domain/worldPulse/cultImpositionApply.js
+src/domain/worldPulse/deityAxes.js
+src/domain/worldPulse/disposition.js
+src/domain/worldPulse/martialReadiness.js
+src/domain/worldPulse/militaryStrength.js
+src/domain/worldPulse/relationshipRulesAdversarial.js
+src/domain/worldPulse/religionLegitimacy.js
+src/domain/worldPulse/religionState.js
+src/domain/worldPulse/religiousContest.js
+src/pdf/lib/liveWorld.js
+
+## walker pins
+310:  test('the consumer census is EXACTLY the thirteen named modules', () => {
+318:    expect(found).toHaveLength(13);
+436:    // ⛔ THE LOAD-BEARING HALF: exactly one module BUILDS a deity embed. An embed
+451:    expect(byEmbed).toHaveLength(12);
+555:    expect(STORED_FIELD_READERS).toHaveLength(0);
+
+## mintDeityRef (the landed custom-deity ref)
+export function mintDeityRef(raw) {
+  if (!raw) return null;
+  const slug = slugify(raw.name);
+  if (!slug) return null;
+  const scope = raw.localUid != null ? String(raw.localUid)
+    : raw.id != null ? String(raw.id)
+    : null;
+  return scope ? `deity:${scope}:${slug}` : `deity:${slug}`;
+}
+src/store/settlementDeityHelpers.js:29: * ref `deity:<scope>:<slug>` minted here via mintDeityRef(raw). scope is the
+src/store/settlementDeityHelpers.js:193:  const deityRef = mintDeityRef(raw) || deityRefId;
+src/store/settlementDeityHelpers.js:255:  const deityRef = mintDeityRef(raw) || deityRefId;
+src/lib/customRegistry.js:133:export function mintDeityRef(raw) {
+src/domain/content/contentSampleCategoryFixtures.js:324:  const deityRef = mintDeityRef(definition.entry)
+src/components/settlement/DeityAssignmentPanel.jsx:220:  const optionOf = (d) => ({ ...d, minted: mintDeityRef(d.raw) || d.refId });
+src/components/settlement/eventComposer/EventComposerDeityField.jsx:55:  return { deityRef: mintDeityRef(entry.raw) || refId, snapshot: deitySnapshotFrom(entry.raw) };
+
+## embed authored-character keys carried onto any embed
+export const DEITY_AUTHORED_CHARACTER_KEYS = Object.freeze([
+  'authoredTemper',
+  'characterAxes',
+  'boonChannel',
+  'boonStrength',
+  'baneChannel',
+  'baneStrength',
+]);
+
+## attemptEntry needs the deity object
+export function attemptEntry(state, deity, newcomerStrength, opts = {}) {
+  const ref = String(deity?._deityRef || deity?.name || '');
+  if (!ref) return { entered: false, path: 'invalid' };
+    if (reaching) {
+      for (const dref of [...reaching.keys()].sort(codepoint)) {
+        const { deity, carrier, occupied } = reaching.get(dref);

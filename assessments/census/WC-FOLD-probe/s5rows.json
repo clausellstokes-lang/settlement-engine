@@ -1,0 +1,3302 @@
+[
+{
+"line": 704,
+"name": "`telling`",
+"ntok": 5,
+"vols": {
+"MN": 2,
+"RN": 2,
+"CH": 5,
+"PT": 5,
+"ST": 1,
+"PR": 1,
+"BD": 3
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 705,
+"name": "`grave`",
+"ntok": 4,
+"vols": {
+"CH": 2,
+"PT": 2,
+"BD": 1,
+"MN": 1,
+"RN": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 706,
+"name": "`CONDITION_BANDS`",
+"ntok": 1,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 707,
+"name": "`SCARCITY_BANDS`",
+"ntok": 1,
+"vols": {
+"PS": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 708,
+"name": "`tithe`",
+"ntok": 5,
+"vols": {
+"BD": 2,
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 2,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 709,
+"name": "market memory words",
+"ntok": 7,
+"vols": {
+"PR": 4,
+"BD": 4,
+"CH": 4,
+"PT": 5,
+"RN": 4,
+"PL": 2,
+"MN": 1,
+"PS": 2,
+"ST": 2
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 710,
+"name": "`doctrine`",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"RN": 2,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"BD": 1,
+"MN": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 711,
+"name": "`hold` (inside HB)",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 712,
+"name": "`measured`",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 713,
+"name": "`rooted`",
+"ntok": 1,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 714,
+"name": "`spent`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 715,
+"name": "`devotion` / piety words",
+"ntok": 2,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 716,
+"name": "`lure`",
+"ntok": 1,
+"vols": {
+"CH": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 717,
+"name": "`exclusivity`",
+"ntok": 2,
+"vols": {
+"PL": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 718,
+"name": "`returning` / `column_return`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"RN": 1,
+"CH": 1,
+"PS": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 719,
+"name": "`reaffirmed_by_heir`",
+"ntok": 1,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 720,
+"name": "`reachBandOf`",
+"ntok": 2,
+"vols": {
+"CH": 1,
+"PT": 2,
+"RN": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 721,
+"name": "`INTERVAL_WEEKS` shadows",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 722,
+"name": "`kmScale`",
+"ntok": 2,
+"vols": {
+"ST": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 723,
+"name": "`pin`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 724,
+"name": "`partial` (WC)",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"RN": 1,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 725,
+"name": "`brigand` (WC)",
+"ntok": 1,
+"vols": {
+"MN": 1,
+"CH": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 726,
+"name": "`attrition` / `absorption` (WC)",
+"ntok": 4,
+"vols": {
+"MN": 2,
+"ST": 1,
+"PR": 3,
+"BD": 3,
+"PS": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 727,
+"name": "`crossing` (WC)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 728,
+"name": "`ALIGNMENT LINE` (WC)",
+"ntok": 2,
+"vols": {
+"BD": 2,
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 729,
+"name": "`materiel` / `reinforce` (WC)",
+"ntok": 3,
+"vols": {
+"PS": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 730,
+"name": "`signed` / `expired` / `renegotiated` (GR)",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"RN": 2,
+"CH": 2,
+"PT": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1,
+"PS": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 731,
+"name": "`restitution`",
+"ntok": 2,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 732,
+"name": "`ERA-PRESET-ELIGIBLE`",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 734,
+"name": "`settled` (WC)",
+"ntok": 4,
+"vols": {
+"MN": 2,
+"RN": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 735,
+"name": "`stance`",
+"ntok": 5,
+"vols": {
+"PL": 4,
+"MN": 3,
+"RN": 3,
+"CH": 5,
+"PT": 5,
+"PS": 5,
+"ST": 3,
+"PR": 5,
+"BD": 5
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 736,
+"name": "`principal`",
+"ntok": 1,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 737,
+"name": "`dispatch` / `muster` (WC COUNT_EVENTS)",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"MN": 2,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 2,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 738,
+"name": "`taint` / `watched`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"PR": 2,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 739,
+"name": "`route_wardenship` / `provision`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 740,
+"name": "`embattled`",
+"ntok": 2,
+"vols": {
+"MN": 2,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 742,
+"name": "`polity`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 743,
+"name": "`nominal \u00b7 loose \u00b7 firm \u00b7 absolute`",
+"ntok": 4,
+"vols": {
+"PL": 4,
+"CH": 2,
+"BD": 2,
+"PR": 1,
+"MN": 1,
+"PS": 1,
+"ST": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 744,
+"name": "\u21b3 `frayed \u00b7 shaky \u00b7 staunch \u00b7 unbroken`",
+"ntok": 7,
+"vols": {
+"PL": 7,
+"RN": 1,
+"CH": 5,
+"PT": 4,
+"PS": 6,
+"ST": 4,
+"PR": 5,
+"BD": 1,
+"MN": 1
+},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 745,
+"name": "deference",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 746,
+"name": "`feud` \u00b7 `break` \u00b7 `crown war`",
+"ntok": 4,
+"vols": {
+"PL": 4,
+"CH": 4,
+"PS": 4,
+"PR": 4,
+"BD": 4,
+"MN": 3,
+"PT": 3,
+"ST": 3,
+"RN": 2
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 747,
+"name": "\u21b3 the polity war",
+"ntok": 2,
+"vols": {
+"PL": 2
+},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 748,
+"name": "`menace`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 749,
+"name": "might words",
+"ntok": 5,
+"vols": {
+"MN": 5,
+"PT": 1,
+"PS": 5,
+"ST": 5,
+"PR": 5,
+"BD": 5,
+"CH": 1,
+"PL": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 750,
+"name": "\u21b3 might words",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"MN": 3,
+"PS": 2,
+"ST": 1,
+"PR": 1,
+"BD": 1,
+"RN": 1,
+"PT": 1
+},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 751,
+"name": "course words",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"MN": 3,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 3
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 752,
+"name": "\u21b3 course words",
+"ntok": 8,
+"vols": {
+"PL": 4,
+"MN": 8,
+"RN": 4,
+"CH": 4,
+"PT": 5,
+"PS": 4,
+"ST": 7,
+"PR": 4,
+"BD": 6
+},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 753,
+"name": "menace states",
+"ntok": 6,
+"vols": {
+"PL": 4,
+"MN": 6,
+"RN": 4,
+"CH": 4,
+"PS": 3,
+"PR": 4,
+"BD": 4,
+"ST": 5,
+"PT": 2
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 754,
+"name": "\u21b3 menace states",
+"ntok": 7,
+"vols": {
+"PL": 3,
+"MN": 7,
+"RN": 3,
+"CH": 3,
+"PS": 2,
+"PR": 3,
+"BD": 3,
+"ST": 4,
+"PT": 1
+},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 755,
+"name": "`hearing` / `tilt` / `verdict`",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"MN": 3,
+"RN": 2,
+"CH": 3,
+"PT": 3,
+"PS": 3,
+"ST": 3,
+"PR": 3,
+"BD": 3
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 756,
+"name": "`chain n` / `C0..C8`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 757,
+"name": "\u21b3 `C0..C13` and `C0.5`",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": true
+},
+{
+"line": 758,
+"name": "`SEAM-n`",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 759,
+"name": "`MF`",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 760,
+"name": "phantom policy",
+"ntok": 2,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 761,
+"name": "`bond`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"RN": 1,
+"CH": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 762,
+"name": "`pin` (CN)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": false,
+"arrow": false
+},
+{
+"line": 764,
+"name": "`polity` + `POLITY_CLASSES` `paramount \u00b7 vassal \u00b7 occupied` (PL)",
+"ntok": 5,
+"vols": {
+"PL": 5,
+"MN": 2,
+"RN": 3,
+"CH": 2,
+"PT": 3,
+"PS": 4,
+"ST": 3,
+"PR": 3,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 765,
+"name": "`crown` (PL)",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 766,
+"name": "`fealty_*` (PL)",
+"ntok": 13,
+"vols": {
+"PL": 13,
+"CH": 2,
+"PS": 6,
+"PR": 5,
+"MN": 4,
+"ST": 3,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 767,
+"name": "\u21b3 `fealty_*` \u2014 THE FAMILIES AND THE TWO FACTS (PL)",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"MN": 1,
+"PT": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 768,
+"name": "\u21b3 `fealty_*` \u2014 THE DEN'S TWO CLOSINGS, THE PEACE AND THE BANNER (PL, S",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 769,
+"name": "\u21b3 `fealty_*` \u2014 THE DEN'S CLOSINGS AS THE SITES WROTE THEM; `peace_unke",
+"ntok": 2,
+"vols": {
+"PL": 2,
+"BD": 1,
+"MN": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 770,
+"name": "`polity_*` and the polity records (PL)",
+"ntok": 16,
+"vols": {
+"PL": 16,
+"PR": 4,
+"MN": 1,
+"RN": 2,
+"PT": 2,
+"PS": 4,
+"ST": 3,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 771,
+"name": "\u21b3 `relief_answer` (PL)",
+"ntok": 5,
+"vols": {
+"PL": 5,
+"MN": 5,
+"RN": 3,
+"PT": 4,
+"PS": 4,
+"ST": 5,
+"PR": 4,
+"CH": 4,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 772,
+"name": "`PRECEDENCE_CLASSES` (PL)",
+"ntok": 9,
+"vols": {
+"PL": 9
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 773,
+"name": "\u21b3 `PRECEDENCE_CLASSES`",
+"ntok": 12,
+"vols": {
+"PL": 12,
+"RN": 6,
+"PT": 7,
+"PS": 9,
+"PR": 11,
+"MN": 4,
+"CH": 6,
+"ST": 7,
+"BD": 4
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 774,
+"name": "PL verdict words",
+"ntok": 8,
+"vols": {
+"PL": 8,
+"CH": 1,
+"PT": 3,
+"ST": 3,
+"PR": 2,
+"MN": 1,
+"RN": 1,
+"PS": 2,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 775,
+"name": "`narrowed_sphere` \u00b7 `charter` (PL)",
+"ntok": 2,
+"vols": {
+"PL": 2,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 776,
+"name": "\u21b3 `narrowed_voice`",
+"ntok": 2,
+"vols": {
+"PL": 2
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 777,
+"name": "PL verbs",
+"ntok": 4,
+"vols": {
+"PL": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 778,
+"name": "PL reused words",
+"ntok": 7,
+"vols": {
+"PL": 7,
+"PS": 2,
+"ST": 2,
+"CH": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 779,
+"name": "`MENACE_STRESSOR_LABELS` (MN)",
+"ntok": 8,
+"vols": {
+"MN": 6,
+"CH": 4,
+"ST": 4,
+"PR": 4,
+"BD": 4,
+"PL": 3,
+"RN": 3,
+"PT": 3,
+"PS": 3
+},
+"unused": [
+"Harried",
+"Besieged"
+],
+"fp": true,
+"arrow": false
+},
+{
+"line": 780,
+"name": "\u21b3 `MENACE_STRESSOR_LABELS`",
+"ntok": 6,
+"vols": {
+"MN": 6,
+"CH": 4,
+"ST": 4,
+"PR": 4,
+"BD": 4,
+"PL": 3,
+"RN": 3,
+"PT": 3,
+"PS": 3
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 781,
+"name": "`menace_siege` \u00b7 `menace_met` and MN's news kinds (MN)",
+"ntok": 10,
+"vols": {
+"PL": 1,
+"MN": 10,
+"CH": 1,
+"ST": 2,
+"RN": 1,
+"PT": 1,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 782,
+"name": "`falls` (MN)",
+"ntok": 2,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 1,
+"CH": 2,
+"PT": 1,
+"PS": 1,
+"ST": 2,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 783,
+"name": "`menace_met` outcomes (MN)",
+"ntok": 4,
+"vols": {
+"MN": 4,
+"RN": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 4,
+"CH": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 784,
+"name": "\u21b3 `menace_met` outcomes",
+"ntok": 2,
+"vols": {
+"MN": 2,
+"RN": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 2
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 785,
+"name": "`ruined_by_assault` (MN)",
+"ntok": 2,
+"vols": {
+"MN": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 786,
+"name": "MN flags and verbs",
+"ntok": 8,
+"vols": {
+"MN": 8,
+"CH": 2,
+"PS": 1,
+"ST": 3,
+"PR": 1,
+"PL": 1,
+"BD": 2,
+"PT": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 787,
+"name": "MN avoided words",
+"ntok": 8,
+"vols": {
+"MN": 7,
+"ST": 2,
+"BD": 3,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PL": 1,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 788,
+"name": "\u21b3 MN avoided words",
+"ntok": 9,
+"vols": {
+"MN": 8,
+"CH": 5,
+"ST": 6,
+"PR": 3,
+"BD": 6,
+"PT": 4,
+"PL": 3,
+"RN": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 789,
+"name": "`renown` (RN)",
+"ntok": 5,
+"vols": {
+"RN": 5,
+"CH": 5,
+"PT": 5,
+"PS": 4,
+"ST": 3,
+"PR": 3,
+"PL": 2,
+"MN": 2,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 790,
+"name": "fame \u00b7 `FAME_SCOPES` (RN)",
+"ntok": 7,
+"vols": {
+"RN": 7,
+"CH": 6,
+"PL": 3,
+"MN": 4,
+"PT": 4,
+"PS": 3,
+"ST": 3,
+"PR": 4,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 791,
+"name": "`REGARD_BANDS` (RN)",
+"ntok": 8,
+"vols": {
+"RN": 8,
+"CH": 8,
+"PT": 7,
+"PS": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 792,
+"name": "`regard` (RN)",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 3,
+"CH": 2,
+"PT": 2,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 793,
+"name": "`deed` (RN)",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 3,
+"CH": 2,
+"PT": 3,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 794,
+"name": "`reach` (RN)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 795,
+"name": "`REGARD_CAUSES` \u00b7 `DEED_SOURCES` (RN)",
+"ntok": 25,
+"vols": {
+"RN": 24,
+"CH": 10,
+"PT": 12,
+"PS": 6,
+"PR": 5,
+"BD": 7,
+"PL": 4,
+"MN": 5,
+"ST": 5
+},
+"unused": [
+"abandoned_by"
+],
+"fp": true,
+"arrow": false
+},
+{
+"line": 796,
+"name": "`ACT_OFFICE` \u00b7 `OFFICE_SCOPE` (RN)",
+"ntok": 2,
+"vols": {
+"RN": 2,
+"PT": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 797,
+"name": "`inherentValue` (RN)",
+"ntok": 3,
+"vols": {
+"RN": 3,
+"CH": 1,
+"PT": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 798,
+"name": "`declaredStance` (RN, PT)",
+"ntok": 3,
+"vols": {
+"RN": 3,
+"PT": 3,
+"PS": 3,
+"PL": 2,
+"MN": 2,
+"CH": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 799,
+"name": "party credibility words (RN)",
+"ntok": 4,
+"vols": {
+"RN": 4,
+"PT": 4,
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PS": 2,
+"ST": 1,
+"PR": 2,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 800,
+"name": "regard keys (RN)",
+"ntok": 5,
+"vols": {
+"RN": 5,
+"CH": 4,
+"PL": 2,
+"MN": 2,
+"PT": 4,
+"PS": 1,
+"ST": 2,
+"PR": 3,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 801,
+"name": "\u21b3 regard keys \u2014 THE CORPS",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 802,
+"name": "\u21b3 regard keys \u2014 `u:` IS LANDED ON ANOTHER SURFACE",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 803,
+"name": "`paragon` (CH)",
+"ntok": 3,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 2,
+"CH": 3,
+"PT": 2,
+"PS": 1,
+"ST": 2,
+"PR": 1,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 804,
+"name": "`polarity` `champion \u00b7 villain` (CH)",
+"ntok": 3,
+"vols": {
+"MN": 3,
+"RN": 3,
+"CH": 3,
+"ST": 3,
+"PR": 3,
+"BD": 3,
+"PT": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 805,
+"name": "`domain` (CH)",
+"ntok": 9,
+"vols": {
+"PL": 5,
+"MN": 6,
+"RN": 6,
+"CH": 9,
+"PT": 9,
+"PS": 6,
+"ST": 8,
+"PR": 7,
+"BD": 7
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 806,
+"name": "failure words (CH)",
+"ntok": 4,
+"vols": {
+"CH": 4,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 807,
+"name": "`tie` `bound \u00b7 free` \u00b7 `retainer` (CH)",
+"ntok": 4,
+"vols": {
+"PL": 4,
+"MN": 3,
+"RN": 4,
+"CH": 4,
+"PT": 4,
+"PS": 3,
+"ST": 3,
+"PR": 3,
+"BD": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 808,
+"name": "`liaison` \u00b7 `rendezvous` (CH)",
+"ntok": 2,
+"vols": {
+"RN": 2,
+"CH": 2,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 809,
+"name": "`covertHire` \u00b7 `covert_hire_exposed` \u00b7 `paragonBeliefs` (CH)",
+"ntok": 7,
+"vols": {
+"CH": 7,
+"BD": 5,
+"RN": 2,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 810,
+"name": "`champion_duel` \u00b7 `nemesis` (CH)",
+"ntok": 2,
+"vols": {
+"CH": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 811,
+"name": "\u26a0 `stand_off` (CH)",
+"ntok": 2,
+"vols": {
+"MN": 1,
+"CH": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 812,
+"name": "\u21b3 `indecisive` (CH)",
+"ntok": 2,
+"vols": {
+"MN": 1,
+"CH": 2,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 813,
+"name": "CH moods, conditions, purse, arcs, purposes",
+"ntok": 25,
+"vols": {
+"CH": 25,
+"PT": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 814,
+"name": "CH gate and verbs",
+"ntok": 11,
+"vols": {
+"MN": 3,
+"RN": 3,
+"CH": 11,
+"PT": 8,
+"PS": 3,
+"ST": 2,
+"PR": 5,
+"BD": 3,
+"PL": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 815,
+"name": "\u21b3 the town's gate (CH, PT)",
+"ntok": 7,
+"vols": {
+"RN": 3,
+"CH": 7,
+"PT": 6,
+"PR": 2,
+"PL": 1,
+"PS": 2,
+"MN": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 816,
+"name": "\u21b3 the town's gate \u2014 `enemy_in_service` (CH, PT)",
+"ntok": 2,
+"vols": {
+"MN": 1,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PS": 2,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 817,
+"name": "\u21b3 the town's gate \u2014 `enemy_in_service`, ONE BELIEF READ (CH, PT)",
+"ntok": 1,
+"vols": {
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 818,
+"name": "CH hearing kinds",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 819,
+"name": "`party` (PT)",
+"ntok": 2,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 820,
+"name": "`backing` (PT)",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 821,
+"name": "`pledge` (PT)",
+"ntok": 1,
+"vols": {
+"MN": 1,
+"RN": 1,
+"PT": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 822,
+"name": "`engagementState` (PT)",
+"ntok": 10,
+"vols": {
+"PT": 10,
+"CH": 3,
+"ST": 3,
+"PR": 3,
+"BD": 4,
+"PL": 3,
+"MN": 4,
+"PS": 3,
+"RN": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 823,
+"name": "\u21b3 the actor's course words (PT)",
+"ntok": 10,
+"vols": {
+"CH": 3,
+"PT": 10,
+"ST": 2,
+"PR": 3,
+"BD": 3,
+"PL": 2,
+"MN": 3,
+"PS": 2,
+"RN": 3
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 824,
+"name": "`moralWeight` (PT)",
+"ntok": 6,
+"vols": {
+"RN": 6,
+"PT": 6,
+"CH": 5,
+"BD": 5,
+"PL": 1,
+"MN": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 825,
+"name": "`proof` (PT)",
+"ntok": 4,
+"vols": {
+"RN": 4,
+"PT": 4,
+"PR": 3,
+"MN": 2,
+"CH": 2,
+"BD": 2,
+"PL": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 826,
+"name": "`partyView` \u00b7 `presentAt` \u00b7 `lastHeard` (PT)",
+"ntok": 3,
+"vols": {
+"RN": 1,
+"PT": 3,
+"CH": 2,
+"ST": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 827,
+"name": "PT clocks and keys",
+"ntok": 10,
+"vols": {
+"PT": 10,
+"RN": 4,
+"CH": 2,
+"BD": 2,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 828,
+"name": "PT kinds and flags",
+"ntok": 4,
+"vols": {
+"PT": 4,
+"PR": 1,
+"RN": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 829,
+"name": "\u21b3 `PARTY_ENGAGEMENT_KINDS` (PT)",
+"ntok": 16,
+"vols": {
+"PT": 16,
+"PR": 5,
+"BD": 2,
+"CH": 4,
+"RN": 6,
+"PL": 2,
+"MN": 1,
+"PS": 1,
+"ST": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 831,
+"name": "PL round-1 tokens",
+"ntok": 10,
+"vols": {
+"PL": 10,
+"RN": 4,
+"CH": 3,
+"PT": 4,
+"PR": 4,
+"BD": 1,
+"PS": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 832,
+"name": "the criminal polity's prose noun (PL)",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 833,
+"name": "MN round-1 tokens",
+"ntok": 15,
+"vols": {
+"MN": 15,
+"ST": 2,
+"PS": 2,
+"PR": 4,
+"BD": 3,
+"CH": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 834,
+"name": "\u21b3 MN round-1 tokens",
+"ntok": 1,
+"vols": {
+"MN": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 835,
+"name": "\u21b3 MN round-1 tokens \u2014 FOUR FEEDERS",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 836,
+"name": "RN round-1 tokens",
+"ntok": 6,
+"vols": {
+"RN": 6,
+"PT": 4,
+"CH": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 837,
+"name": "party and person credibility words (RN)",
+"ntok": 7,
+"vols": {
+"RN": 7,
+"PT": 4,
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PS": 2,
+"ST": 1,
+"PR": 2,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 838,
+"name": "CH round-1 tokens",
+"ntok": 16,
+"vols": {
+"RN": 5,
+"CH": 16,
+"PT": 4,
+"PR": 2,
+"PL": 1,
+"PS": 2,
+"MN": 3,
+"BD": 1,
+"ST": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 839,
+"name": "`banished_found` verdicts (CH)",
+"ntok": 3,
+"vols": {
+"CH": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 840,
+"name": "PT round-1 tokens (registered ahead of PT's own round-1 disposition, b",
+"ntok": 14,
+"vols": {
+"PL": 8,
+"MN": 9,
+"RN": 12,
+"CH": 8,
+"PT": 14,
+"PS": 5,
+"ST": 8,
+"PR": 6,
+"BD": 5
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 841,
+"name": "\u21b3 PT round-1 tokens",
+"ntok": 9,
+"vols": {
+"RN": 7,
+"PT": 9,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 842,
+"name": "\u21b3 PT round-2 tokens and the `revealed` homonym",
+"ntok": 6,
+"vols": {
+"PT": 5,
+"ST": 4,
+"PR": 1,
+"RN": 4,
+"MN": 1
+},
+"unused": [
+"party_revealed_site"
+],
+"fp": true,
+"arrow": true
+},
+{
+"line": 843,
+"name": "\u21b3 PT's site kind, renamed",
+"ntok": 2,
+"vols": {
+"RN": 1,
+"PT": 1,
+"ST": 1
+},
+"unused": [
+"party_revealed_site"
+],
+"fp": true,
+"arrow": true
+},
+{
+"line": 844,
+"name": "`honored` (PT)",
+"ntok": 2,
+"vols": {
+"PT": 2,
+"PS": 1,
+"PL": 1,
+"RN": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 845,
+"name": "\u21b3 `upheld` (PT)",
+"ntok": 3,
+"vols": {
+"PT": 3,
+"MN": 1,
+"RN": 2,
+"CH": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 846,
+"name": "`ENGAGEMENT_WHERE_KINDS` (the fold, \u00a73.4)",
+"ntok": 6,
+"vols": {
+"CH": 6,
+"PT": 6,
+"PS": 6,
+"ST": 5,
+"PR": 5,
+"PL": 3,
+"MN": 4,
+"RN": 4,
+"BD": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 847,
+"name": "\u21b3 `ENGAGEMENT_WHERE_KINDS` \u2014 THE JUNCTION KEY",
+"ntok": 2,
+"vols": {
+"CH": 2,
+"PT": 1,
+"PS": 2,
+"ST": 2,
+"PR": 2,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 849,
+"name": "`realm`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 2,
+"CH": 2,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 850,
+"name": "`sway`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 851,
+"name": "`allegiance`",
+"ntok": 5,
+"vols": {
+"PL": 5,
+"PS": 4,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 2,
+"ST": 1,
+"PR": 3,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 852,
+"name": "`claimant`",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"PS": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 853,
+"name": "`gate`",
+"ntok": 5,
+"vols": {
+"PL": 2,
+"MN": 1,
+"RN": 2,
+"CH": 5,
+"PT": 4,
+"PS": 2,
+"ST": 2,
+"PR": 5,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 854,
+"name": "`lens`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 2,
+"CH": 1,
+"PT": 2,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 855,
+"name": "`hold`",
+"ntok": 5,
+"vols": {
+"PL": 2,
+"MN": 4,
+"RN": 1,
+"CH": 2,
+"PT": 1,
+"PS": 2,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 856,
+"name": "`warden`",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 1,
+"CH": 2,
+"PS": 1,
+"ST": 2,
+"PR": 3,
+"BD": 2,
+"PT": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 857,
+"name": "\u21b3 `warden` \u2014 A THIRD PROSE SENSE (CH, BD)",
+"ntok": 5,
+"vols": {
+"PL": 2,
+"MN": 2,
+"RN": 2,
+"CH": 3,
+"PS": 1,
+"ST": 2,
+"PR": 4,
+"BD": 4,
+"PT": 2
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 858,
+"name": "force band \u00b7 strength order \u00b7 `might` \u00b7 `homeDefense`",
+"ntok": 3,
+"vols": {
+"PL": 2,
+"MN": 3,
+"RN": 1,
+"CH": 1,
+"PT": 2,
+"PS": 3,
+"ST": 2,
+"PR": 2,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 859,
+"name": "\u21b3 force band \u2014 WHOSE, AND WHAT A SITE SENDS",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 860,
+"name": "`patrol`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 861,
+"name": "\u21b3 `patrol` \u2014 PATROLS CONSIDERED",
+"ntok": 10,
+"vols": {
+"PL": 2,
+"MN": 6,
+"RN": 1,
+"CH": 7,
+"PT": 3,
+"PS": 4,
+"ST": 3,
+"PR": 10,
+"BD": 4
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 862,
+"name": "\u21b3 `patrol` \u2014 WHAT THE RIDERS CHANGE AND CATCH",
+"ntok": 4,
+"vols": {
+"PL": 1,
+"MN": 2,
+"RN": 1,
+"CH": 4,
+"PT": 1,
+"PS": 3,
+"ST": 1,
+"PR": 4,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 863,
+"name": "\u21b3 `patrol` \u2014 THE WINDOW AND THE CADENCE",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 864,
+"name": "\u21b3 `patrol` \u2014 THE CADENCE, AN ASK",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 865,
+"name": "`territory`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 866,
+"name": "`fighting`",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"PT": 1,
+"PR": 2,
+"BD": 2,
+"MN": 1,
+"PS": 1,
+"ST": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 867,
+"name": "`outranked`",
+"ntok": 1,
+"vols": {
+"PL": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 868,
+"name": "`march`",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 869,
+"name": "`prosperity`",
+"ntok": 3,
+"vols": {
+"CH": 2,
+"ST": 2,
+"PR": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 870,
+"name": "\u21b3 `prosperity`",
+"ntok": 1,
+"vols": {
+"CH": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 871,
+"name": "\u21b3 the funding band",
+"ntok": 7,
+"vols": {
+"CH": 7,
+"PT": 1,
+"ST": 7,
+"PR": 7,
+"BD": 6,
+"MN": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 872,
+"name": "\u21b3 the funding band \u2014 ONE NAME",
+"ntok": 1,
+"vols": {
+"CH": 1,
+"ST": 1,
+"PR": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 874,
+"name": "`SITE_READINESS` \u00b7 `siteReadiness01` \u00b7 `siteReadinessOf` (ST)",
+"ntok": 9,
+"vols": {
+"PL": 7,
+"MN": 2,
+"PS": 1,
+"ST": 9,
+"PR": 7,
+"BD": 7,
+"RN": 2,
+"CH": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 875,
+"name": "\u21b3 `SITE_READINESS` \u2014 THE CENSUS CORRECTED",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"MN": 3,
+"PS": 3,
+"ST": 3,
+"PR": 3,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 876,
+"name": "PL round-3",
+"ntok": 7,
+"vols": {
+"PL": 7,
+"MN": 4,
+"PT": 6,
+"PS": 5,
+"CH": 6,
+"ST": 3,
+"PR": 3,
+"BD": 4,
+"RN": 5
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 877,
+"name": "MN round-3",
+"ntok": 2,
+"vols": {
+"MN": 2,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 878,
+"name": "PS round-3",
+"ntok": 8,
+"vols": {
+"PL": 3,
+"MN": 5,
+"PS": 8,
+"ST": 5,
+"PR": 5,
+"BD": 5,
+"RN": 3,
+"CH": 4,
+"PT": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 879,
+"name": "PR round-3",
+"ntok": 9,
+"vols": {
+"PR": 9,
+"MN": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 880,
+"name": "the stretch key (PR, PS, ST, PT, MN, CH)",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 881,
+"name": "CH round-3",
+"ntok": 8,
+"vols": {
+"MN": 5,
+"CH": 8,
+"PR": 4,
+"PL": 1,
+"RN": 3,
+"PT": 1,
+"PS": 1,
+"ST": 2,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 882,
+"name": "RN round-3",
+"ntok": 4,
+"vols": {
+"RN": 4,
+"CH": 3,
+"PL": 1,
+"MN": 1,
+"PT": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 883,
+"name": "`readiness` (a homonym, CH's route)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 885,
+"name": "`cult` \u00b7 `band` \u2014 NEVER A HOLDER KIND, NEVER VILLAINY (A.3; SEAMS-r3-1",
+"ntok": 8,
+"vols": {
+"PL": 5,
+"MN": 6,
+"RN": 7,
+"CH": 7,
+"PT": 8,
+"PS": 6,
+"ST": 8,
+"PR": 6,
+"BD": 8
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 886,
+"name": "THE BODIES' tokens (BD)",
+"ntok": 34,
+"vols": {
+"PL": 15,
+"MN": 13,
+"RN": 14,
+"CH": 11,
+"PT": 13,
+"PS": 11,
+"ST": 16,
+"PR": 13,
+"BD": 34
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 887,
+"name": "\u21b3 THE BODIES' tokens \u2014 `spread_faith` \u00b7 `dispersed` \u00b7 `ranged_away` \u00b7 ",
+"ntok": 5,
+"vols": {
+"BD": 5,
+"PR": 2,
+"CH": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 888,
+"name": "the ransom race's words (BD; 34b)",
+"ntok": 3,
+"vols": {
+"CH": 3,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 889,
+"name": "\u21b3 the ransom race's words \u2014 A PARTITION",
+"ntok": 3,
+"vols": {
+"CH": 3,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 890,
+"name": "\u21b3 the ransom race's words \u2014 THE OWNER'S WORD WINS",
+"ntok": 3,
+"vols": {
+"CH": 3,
+"BD": 3
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 891,
+"name": "`banner` (PR, PL, PS; \u00a73.3.15)",
+"ntok": 7,
+"vols": {
+"PL": 7,
+"MN": 6,
+"RN": 3,
+"CH": 5,
+"PS": 6,
+"ST": 6,
+"PR": 7,
+"BD": 6,
+"PT": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 892,
+"name": "\u21b3 `banner` \u2014 THE PASSAGE's field",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 893,
+"name": "the trail key (BD, PR, PS, CH)",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 894,
+"name": "\u21b3 THE ONE ROAD LADDER \u2014 master's `hidden` grade, its access law, the m",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 895,
+"name": "\u21b3 THE ONE ROAD LADDER \u2014 THE WAY MODE",
+"ntok": 3,
+"vols": {
+"MN": 3,
+"CH": 3,
+"PS": 3,
+"PR": 3,
+"BD": 3,
+"PL": 2,
+"RN": 2,
+"PT": 2,
+"ST": 2
+},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 896,
+"name": "RN round-4 (RN, BD)",
+"ntok": 11,
+"vols": {
+"PL": 6,
+"MN": 6,
+"RN": 11,
+"CH": 8,
+"PT": 5,
+"ST": 5,
+"PR": 8,
+"BD": 10,
+"PS": 3
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 897,
+"name": "\u21b3 RN round-4 \u2014 OD-RN-48 RULED",
+"ntok": 0,
+"vols": {},
+"unused": [],
+"fp": true,
+"arrow": true
+},
+{
+"line": 898,
+"name": "PL round-4",
+"ntok": 5,
+"vols": {
+"PL": 5,
+"BD": 4,
+"PR": 3,
+"RN": 2,
+"CH": 2,
+"ST": 2,
+"MN": 1,
+"PT": 1,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 899,
+"name": "PS round-4",
+"ntok": 12,
+"vols": {
+"PL": 7,
+"PT": 5,
+"PS": 12,
+"ST": 6,
+"PR": 7,
+"MN": 5,
+"CH": 5,
+"BD": 6,
+"RN": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 900,
+"name": "CH round-4",
+"ntok": 6,
+"vols": {
+"RN": 5,
+"CH": 6,
+"ST": 3,
+"PR": 4,
+"BD": 6,
+"PT": 1,
+"PL": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 901,
+"name": "ST round-4",
+"ntok": 7,
+"vols": {
+"RN": 1,
+"ST": 7,
+"BD": 5
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 902,
+"name": "PR round-4",
+"ntok": 10,
+"vols": {
+"PR": 10,
+"BD": 4,
+"RN": 1,
+"CH": 3,
+"PS": 1,
+"PL": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 903,
+"name": "`chain n` \u21b3 C17 (the fold, CN)",
+"ntok": 2,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 2,
+"CH": 2,
+"PT": 2,
+"PS": 1,
+"ST": 2,
+"PR": 1,
+"BD": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 904,
+"name": "`chain n` \u21b3 C14 \u00b7 C15 \u00b7 C16 (the fold, CN)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"PS": 1,
+"ST": 1,
+"PR": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 905,
+"name": "MN round-4",
+"ntok": 5,
+"vols": {
+"MN": 5,
+"BD": 3,
+"ST": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 906,
+"name": "PT round-4",
+"ntok": 6,
+"vols": {
+"RN": 2,
+"PT": 6,
+"BD": 4,
+"PL": 1,
+"MN": 1,
+"CH": 1,
+"PS": 1,
+"ST": 1,
+"PR": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 908,
+"name": "THE PASSAGE's round-2 tokens (PS \u00a715)",
+"ntok": 62,
+"vols": {
+"PS": 62,
+"PL": 27,
+"MN": 21,
+"RN": 24,
+"CH": 24,
+"ST": 21,
+"PR": 37,
+"BD": 28,
+"PT": 19
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 909,
+"name": "THE SITES' round-2 tokens (ST \u00a72.5)",
+"ntok": 53,
+"vols": {
+"PL": 21,
+"PT": 30,
+"ST": 53,
+"PR": 27,
+"CH": 33,
+"BD": 33,
+"MN": 23,
+"PS": 22,
+"RN": 16
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 910,
+"name": "THE PATROLS' round-2 tokens (PR \u00a715.2)",
+"ntok": 68,
+"vols": {
+"PL": 24,
+"MN": 28,
+"RN": 21,
+"CH": 20,
+"PT": 20,
+"PS": 27,
+"ST": 21,
+"PR": 68,
+"BD": 30
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 911,
+"name": "the sighting store (MN; BD, ST and PR read it)",
+"ntok": 1,
+"vols": {
+"PL": 1,
+"MN": 1,
+"RN": 1,
+"CH": 1,
+"PT": 1,
+"BD": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 912,
+"name": "THE BODIES' round-5 and round-6 tokens (BD)",
+"ntok": 16,
+"vols": {
+"CH": 4,
+"BD": 16,
+"PR": 7,
+"ST": 5,
+"RN": 4,
+"PL": 3,
+"MN": 3,
+"PT": 2,
+"PS": 1
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 913,
+"name": "THE CHAMPIONS' round-5 tokens (CH)",
+"ntok": 8,
+"vols": {
+"CH": 8,
+"PR": 2,
+"BD": 8,
+"RN": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 914,
+"name": "THE RENOWN's round-5 tokens (RN)",
+"ntok": 5,
+"vols": {
+"RN": 5,
+"CH": 4,
+"PT": 2,
+"ST": 3,
+"PR": 4,
+"BD": 5,
+"PL": 2,
+"MN": 2,
+"PS": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 915,
+"name": "THE POLITY's round-5 tokens (PL)",
+"ntok": 3,
+"vols": {
+"PL": 3,
+"PR": 2
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 916,
+"name": "THE PASSAGE's and THE PARTY's round-5 tokens (PS, PT)",
+"ntok": 6,
+"vols": {
+"PS": 3,
+"PR": 2,
+"BD": 3,
+"CH": 1,
+"PT": 4
+},
+"unused": [],
+"fp": true,
+"arrow": false
+},
+{
+"line": 917,
+"name": "THE PATROLS' and THE SITES' round-5 and round-6 tokens (PR, ST)",
+"ntok": 16,
+"vols": {
+"PL": 8,
+"PR": 13,
+"MN": 7,
+"RN": 5,
+"CH": 6,
+"PT": 6,
+"PS": 6,
+"ST": 8,
+"BD": 6
+},
+"unused": [],
+"fp": true,
+"arrow": false
+}
+]

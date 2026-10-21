@@ -1,0 +1,52 @@
+from lib import apply
+R2 = '[CURED 2026-10-20 (fp-final P6 r2) — '
+pairs = [
+# §11 pins
+(r'''(iii-c) LIT at master's zero slack, no envoy ever detours (`via`) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2];''',
+ r'''(iii-c) LIT at master's zero slack, no envoy ever detours (`via`) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2]; (iii-d) LIT, every `spokespersonNpcId` OP stamps is a key `buildLiveNpcIds` lists — the roster's positional key, never a `wnpc_` id — and a carrier the reverse read cannot map stamps none ''' + R2 + r'''OP-V1];'''),
+(r'''(vi) a freed errand traveller's row resumes its `encounter.priorState` on a venue → destination plan, and the DM's pardon is byte-identical through the extracted release leaf [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-4]''',
+ r'''(vi) a freed errand traveller's row resumes its `encounter.priorState` on a venue → destination plan, and the DM's pardon is byte-identical through the extracted release leaf [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-4]; (vii) in an `occupied_enemy_settlement` venue every jailer read — the admission rung, `hostRung`, the caught hold's `captorId`, the grievance and the unwitnessed blame — names the occupier (`captorId`), never the occupied town's own court ''' + R2 + r'''OP-r1-5 (D.2)]'''),
+# §12 OP-0 car-0 and leaves and EDITOR n5
+(r'''`processLies`' bluff record keys and IN-0a's take filter — ⛔ STOP on any drift [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2 · 3 · 4 · 5 · 9 · 10 · 11].''',
+ r'''`processLies`' bluff record keys and IN-0a's take filter — and the round-r2 walls — `openRansomClaims`' unpersisted demand (and whether WR-7d's persistence has landed), `legalEncounterVenue`'s occupied arm and the held errand's `encounter.venueRef.kind`, the reverse `originRef` read (`subjectByDurableId`'s both-halves test) against D-2's `npcId` key and the credibility pass's roster-scan prune (S-8) — ⛔ STOP on any drift [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2 · 3 · 4 · 5 · 9 · 10 · 11] ''' + R2 + r'''OP-r1-1 · OP-r1-5 · OP-V1].'''),
+(r'''`opportunity/opportunityReads.js` (`travellersArrivedAt`, `opportunitiesAt`, `detourCandidates`, `opportunityTakenOn`).''',
+ r'''`opportunity/opportunityReads.js` (`travellersArrivedAt`, `opportunitiesAt`, `detourCandidates`, `opportunityTakenOn`, `jailerOf`, `rosterKeyOf` ''' + R2 + r'''OP-r1-5 · OP-V1]).'''),
+(r'''(c) real-only — a believed captive is never a candidate where the believer's own picture is empty;''',
+ r'''(c) real-only — a captive is a candidate only where the traveller STANDS (presence) or its court had been TOLD before it left (an arrived record — OP3 (b)) ''' + R2 + r'''n5];'''),
+# §12 OP-2 hosts
+(r'''seeds the `false_word` rows as LANDED bluffs with the carrier as mouthpiece''',
+ r'''seeds the `false_word` rows as LANDED bluffs with the carrier's POSITIONAL key as mouthpiece (`rosterKeyOf`, S-8 — ''' + R2 + r'''OP-V1])'''),
+# §12 OP-6
+(r'''CH's call board gains the `captive_held` source row keyed to the captive's HOME (`help`; the venue town `harm`), excluded from PT's read, and CH's exert offers `rescue_attempt` at the venue (§9);''',
+ r'''CH's call board gains the `captive_held` source row keyed to the captive's HOME (`help`) and minted ONLY from a record that arrived there (`source.toldBy`: a roads ransom; WR-7d's arrived demand; an RN telling), its twin at the venue town (`harm`), both excluded from PT's read; `answer_call` walks to the source's venue; and CH's exert offers `rescue_attempt` at the venue (§9) ''' + R2 + r'''OP-r1-1 · OP-V2];'''),
+(r'''FIRST-VISIBLE: a champion's arrival at a venue town holding a captive whose home's call it answered.''',
+ r'''FIRST-VISIBLE: a champion's arrival at a venue town holding a captive whose home's call it answered (at master only a ROADS hostage's home holds such a call — no ransom demand arrives).'''),
+# §14 row 28 and row 30
+(r'''an envoy's `false_word` seeds exactly one landed bluff record (`subjectId` = the sender, `spokespersonNpcId` = the carrier) and no key outside the landed shape;''',
+ r'''an envoy's `false_word` seeds exactly one landed bluff record (`subjectId` = the sender, `spokespersonNpcId` = the carrier's positional key, row 33) and no key outside the landed shape;'''),
+(r'''| 30 | The call board | the `captive_held` call's settlement is the captive's home (`help`) or the venue (`harm`), never the captor's own request; PT's `party_request` never reads it [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-13] | OP-6 (CH, PT) |''',
+ r'''| 30 | The call board | the `captive_held` call's settlement is the captive's home (`help`) or the venue (`harm`), never the jailer's own request; PT's `party_request` never reads it [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-13] | OP-6 (CH, PT) |
+| 31 | The home is TOLD | a foreign-guest hold whose ransom demand has not ARRIVED home (at master: every one — `openRansomClaims` persists nothing) yields NO `captive_held` help row at the home, no carried chance for the home's travellers and no detour toward it; with WR-7d's persisted demand the row appears at `demandLeg.arrivalTick`, its `venueId`/`captorId` equal to the demand's `fromId`/`claimantId`; a roads hostage's row stands from its `RansomRec`; a traveller that left before the record reached home carries none (a walker: no OP read and no call row reads a `foreignGuestHolds` row for a captive's HOME) ''' + R2 + r'''OP-r1-1 (D.1)] | OP-1, OP-6 (CH) |
+| 32 | An occupied town's cells | Varn occupies Ashford (Tolle's ally) and holds Tolle's envoy there (`occupied_enemy_settlement`): Tolle's operative at Ashford IS admitted (the jailer Varn is hostile to Tolle), `hostRung` = Tolle → Varn's rung, a caught rescuer's hold names `captorId` Varn, and `breakout_exposed` lands on Varn ↔ Tolle (unwitnessed: Varn ↔ the freed's home at half weight) — never on Ashford ''' + R2 + r'''OP-r1-5 (D.2)] | OP-3 |
+| 33 | The mouthpiece survives the prune | an envoy's declared `false_word`: `spokespersonNpcId` = `<home>:<rosterId>` from the reverse `originRef` read; after the credibility pass's next roster-scan prune an exposure's `deception` charge is still keyed to the carrier and its weight reads it (not neutral); an introduced carrier with no roster row stamps none ''' + R2 + r'''OP-V1] | OP-2 |
+| 34 | The champion goes to the cells | a champion answering Tolle's `captive_held` call (its settlement Tolle, its `source.venueId` Kell) takes `aim.destId` = Kell, never Tolle; a BOUND champion whose employer's lands do not reach Kell does not answer it ''' + R2 + r'''OP-V2] | OP-6 (CH) |'''),
+# §15 ES row
+(r'''NOTHING in the dwell set (a caught rescuer is `caught_spying`) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2 · OP-r1-11] |''',
+ r'''NOTHING in the dwell set (a caught rescuer is `caught_spying`) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-2 · OP-r1-11]; WR-7d's PERSISTED demand (the war volume's slot, OPENED by P5 A.2) as the home's one lawful road to a foreign-guest hold — OP reads its arrival, never the computed claim (D.1); ES-2b's court-carried encounter in an OCCUPIED town takes `legalEncounterVenue`'s occupied arm, the occupier as its actor and the hold's `captorId` (D.2) ''' + R2 + r'''OP-r1-1 · OP-r1-5] |'''),
+# §15 IN row
+(r'''`commissionedPlantAt` is NOT touched (it is the brokerage validator) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-10]; the true report for `carry_word` |''',
+ r'''`commissionedPlantAt` is NOT touched (it is the brokerage validator) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-10]; the true report for `carry_word`; the r1 STOP on RULINGS-P6 §C's IN line is RULED (§D.3: corrected as this volume proposed — IN's marker telling a carried bluff apart is the OWNER's persisted shape, VISIBLE; the carried-plant shape for third-party claims a SLOT, the owner's) ''' + R2 + r'''STOP-C-IN]; the mouthpiece is the carrier's POSITIONAL key (`rosterKeyOf`) ''' + R2 + r'''OP-V1] |'''),
+# §15 RN row
+(r'''whether a capture TOLD on the rumor road is a telling source (none exists — OP3) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-1];''',
+ r'''whether a capture TOLD on the rumor road is a telling source (none exists — OP3) [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-1] — once accepted, its arrival at the captive's home by `heardAt` is one of the three roads that mint the home's call (D.1) ''' + R2 + r'''OP-r1-1];'''),
+# §15 CH row
+(r'''KEYED TO THE CAPTIVE'S HOME (`help`; the venue `harm`) and EXCLUDED from PT's read [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-13];''',
+ r'''KEYED TO THE CAPTIVE'S HOME (`help`; the venue `harm`) and EXCLUDED from PT's read [CURED 2026-10-20 (fp-final P6 r1) — OP-r1-13], minted ONLY from a record that ARRIVED at the home — the source's `toldBy` (`roads_ransom` · `ransom_demand` · `telling`), CH's row citing it (D.1) ''' + R2 + r'''OP-r1-1]; `answer_call`'s destination for a `captive_held` source is `source.venueId` (one bracket on CH §4.2's row, the `hunt_body` precedent; a bound champion only inside its employer's lands) ''' + R2 + r'''OP-V2];'''),
+# §15 MG·WY row
+(r'''[CURED 2026-10-20 (fp-final P6 r1) — OP-r1-16 · MG-r1-15 · X-LMG-OP · OP-r1-18 · MG-r1-26] |''',
+ r'''[CURED 2026-10-20 (fp-final P6 r1) — OP-r1-16 · MG-r1-15 · X-LMG-OP · OP-r1-18 · MG-r1-26]; MG §0.2 lists "a paragon on an aim" among the verb's errand rows — ROUTED to MG to read it as CH's `court_errand` once the errand-row slot lands (§3.3) [REFINED 2026-10-20 (fp-final P6 r2) — A.3's parenthesis read once, in both volumes]; MG's r1 route back to OP (D-MG-r1 §4: "§7 THE PHYSICS: 'on `wild`/`way` it is BARRED' … §14 row 20 'no hidden-way detour'") is already met — neither sentence stands in OP since D-OP-r1 (0 hits) ''' + R2 + r'''X-DMG-OP, NOTED] |'''),
+# §15 WS·FS row
+(r'''| WS · FS (compiling beside) | none direct | a court's way of war may bias its operatives' asides (WS's weight bundle — a raiding court's spies more bold): a ROUTE to WS, never a read of OP's |''',
+ r'''| WS · FS (compiling beside) | none | NONE — WS DECLINED the compile's route (RT-OP-1, `cure/D-WS-r1.md`; WS §13's OP row: "a traveller's detour and its boldness are the traveller's own roll (CH's or ES's person axes); the way never leans an opportunity; it leans only the errand KIND (C12) once ES names it"): a traveller's boldness is its own nature (§4.2) and OP reads no way of war; FS holds no traveller and OP reads no purse ''' + R2 + r'''X-DWS-OP: r1's "a raiding court's spies more bold" contradicted WS's answer] |'''),
+]
+apply(pairs, 'b4')

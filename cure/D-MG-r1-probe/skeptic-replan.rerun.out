@@ -1,0 +1,5 @@
+hop=1wk r=0.5: keep_course arrives in 6 wk; weekly re-plan positions over 20 wk: n1 n2 n3 n4
+hop=2wk r=0.5: keep_course arrives in 12 wk; weekly re-plan positions over 20 wk: n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0
+hop=3wk r=0.5: keep_course arrives in 18 wk; weekly re-plan positions over 20 wk: n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0
+hop=2wk r=1: keep_course arrives in 9 wk; weekly re-plan positions over 20 wk: n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0
+hop=4wk r=0.5: keep_course arrives in 24 wk; weekly re-plan positions over 20 wk: n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0 n0

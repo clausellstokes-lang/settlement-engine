@@ -1,0 +1,35 @@
+## master 81f1cd963 receipts for FS-r1
+### W-COIN anti-loop law (test)
+871:  it('⛔ THE MINT READS THE STOCK ONLY AT THE CAPACITY STOP — no feedback loop can exist', () => {
+872-    // §11.1's exact attack. A vault with more coin in it must not mint more (or less)
+873-    // except by running out of headroom, so a rich crown does not tax harder for being
+874-    // rich and tax → transfer → tax cannot close.
+918: * feedback can exist, and a rich crown does not tax harder for being rich. The tests
+### the landed DM tax direction
+385:  'set-levy': row({
+386-    target: 'settlement',
+387-    payload: { band: pick(TAX_RATE_BANDS), form: pick(TAX_FORMS) },
+388-    stage: HOME, consequence: HOME,
+19: * levy is `treasury.js`'s two lists and its `TREASURY_SUSPENSIONS`, the postures are
+### the composite's signature and its W-SEAT caller
+102:export function commonsGrievance01(settlement, opts = {}) {
+120: * ⚠ NOT FLAG-GATED, DELIBERATELY. F4 rules participation "nearly flag-independent … default
+131:  const cause = resistance == null ? commonsGrievance01(s) : resistance;
+86: * consumer can read the quantity without re-deriving it. W-SEAT D10's `participation01`
+### ticks are weeks
+100:// per tick), so N weeks is N kernel calls, ALWAYS at one_week granularity. The
+### vassal_extraction's two faces
+97:// vassal_extraction is the canonical OCCUPATION condition (conditionPromotion maps
+106:// (the occupier's overextension) are re-emitted EVERY tick by occupation.js, unlike the one-shot
+624:        probability: 0.14 + relState.leverage * 0.18,
+95:    defaultExpiresAtTicks: 6,
+111:    defaultExpiresAtTicks: 6,
+### the wartime war-tax row
+754:    here.has('wartime') && { mult: 1.25, reason: 'War taxes grind the commons toward revolt.' },
+### the canonical week
+575:      // Canonical integer weeks — tolerant read (new elapsedWeeks, else the
+### the price is coercive-only
+955:    if (isCoerciveCell(rulingPower, form)) {
+### news-kind registration homes
+src/domain/display/settlementRumors.js:361:  treasury_band: 'a change in the treasury',
+tests/domain/impactKindWalkers.test.js:240:  treasury_band: null,

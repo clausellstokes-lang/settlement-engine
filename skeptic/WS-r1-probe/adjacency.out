@@ -1,0 +1,44 @@
+neighbours: {
+  attrition: [ 'fortress', 'shock' ],
+  coalition: [ 'logistics', 'subversion' ],
+  fortress: [ 'attrition', 'logistics' ],
+  harassment: [ 'logistics', 'raiding', 'subversion' ],
+  logistics: [ 'coalition', 'fortress', 'harassment' ],
+  raiding: [ 'harassment', 'shock' ],
+  shock: [ 'attrition', 'raiding' ],
+  subversion: [ 'coalition', 'harassment' ]
+}
+attrition --seat_rotting(→subversion)--> lands fortress
+attrition --purse_empty(→raiding)--> lands shock
+attrition --levy_thin(→coalition)--> lands fortress
+attrition --foe_on_the_ways(→logistics)--> lands fortress
+attrition --siege_long(→logistics)--> lands fortress
+coalition --field_lost(→fortress)--> lands logistics
+coalition --purse_empty(→raiding)--> lands logistics
+coalition --ally_failed(→fortress)--> lands logistics
+fortress --seat_rotting(→subversion)--> lands logistics
+fortress --purse_empty(→raiding)--> lands attrition
+fortress --levy_thin(→coalition)--> lands logistics
+harassment --field_lost(→fortress)--> lands logistics
+harassment --levy_thin(→coalition)--> lands logistics
+harassment --ally_failed(→fortress)--> lands logistics
+logistics --seat_rotting(→subversion)--> lands coalition
+logistics --purse_empty(→raiding)--> lands harassment
+raiding --field_lost(→fortress)--> lands harassment
+raiding --seat_rotting(→subversion)--> lands harassment
+raiding --levy_thin(→coalition)--> lands harassment
+raiding --foe_on_the_ways(→logistics)--> lands harassment
+raiding --ally_failed(→fortress)--> lands harassment
+raiding --siege_long(→logistics)--> lands harassment
+shock --field_lost(→fortress)--> lands attrition
+shock --seat_rotting(→subversion)--> lands raiding
+shock --levy_thin(→coalition)--> lands attrition
+shock --foe_on_the_ways(→logistics)--> lands attrition
+shock --ally_failed(→fortress)--> lands attrition
+shock --siege_long(→logistics)--> lands attrition
+subversion --field_lost(→fortress)--> lands coalition
+subversion --purse_empty(→raiding)--> lands harassment
+subversion --foe_on_the_ways(→logistics)--> lands coalition
+subversion --ally_failed(→fortress)--> lands coalition
+subversion --siege_long(→logistics)--> lands coalition
+deviations whose landing way is NOT the cause's way: 33/49

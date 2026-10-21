@@ -1,0 +1,4 @@
+##### ransomRegardBand
+  DESIGN_FP_COHERENCE_FOLD.md (2)
+    L433: ause: 'jailed'`, plus a `paragon.held` sub-field) is answered through the ransom leaf's `pay · refuse · abandon` read against RN's court regard (the `ransomRegardBand` projection, RN §4.6), and `banished_found` gains the verdict `seized`. Two hold roads by substrate — the roads hostage (`roads/state
+    L792: y]` | HOMONYM resolved by projection: the ransom leaf's `RANSOM_REGARD_BANDS` (`forgotten · valued · beloved`) is a PROJECTION of RN's court regard (`ransomRegardBand`) | | `deed` (RN) | the record `spatialLedgers.deeds` (append-only; `struck`, `correctsRef`) | HOMONYM: the Herald move `DEED` (`pros

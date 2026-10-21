@@ -1,0 +1,797 @@
+{
+ "PL": {
+  "header": [
+   "Kind",
+   "Owner",
+   "Climax",
+   "WHERE",
+   "Verdict words",
+   "Class",
+   "DEFAULT verdict"
+  ],
+  "rows": [
+   {
+    "line": 363,
+    "arrow": false,
+    "kinds": [
+     "fealty_question"
+    ],
+    "where": "settlement \u2014 the vassal's seat",
+    "default": "the decider's answer (\u00a75.6)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 364,
+    "arrow": false,
+    "kinds": [
+     "polity_fallen"
+    ],
+    "where": "settlement \u2014 the vassal's seat",
+    "default": "`stand_by` at `strong`+ deference, else `free`",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 365,
+    "arrow": false,
+    "kinds": [
+     "polity_claim"
+    ],
+    "where": "settlement \u2014 the claimant's seat",
+    "default": "the decider's choice; `pressed` when the DM opened it (`OPEN_CLAIM`)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 366,
+    "arrow": false,
+    "kinds": [
+     "allegiance_choice"
+    ],
+    "where": "settlement \u2014 the member's seat",
+    "default": "the decider's choice",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 367,
+    "arrow": false,
+    "kinds": [
+     "polity_war"
+    ],
+    "where": "settlement \u2014 the contested lord's seat",
+    "default": "the first of \u00a75.5's default conditions that holds, else `continues`",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 368,
+    "arrow": false,
+    "kinds": [
+     "polity_arbitration"
+    ],
+    "where": "settlement \u2014 the liege's seat",
+    "default": "the member's fork",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 369,
+    "arrow": false,
+    "kinds": [
+     "fealty_break"
+    ],
+    "where": "settlement \u2014 the breaker's seat",
+    "default": "the landed roll (`probability: clamp01(0.06 + successPressure * 0.24)`); a definitional act defaults `succeeds`, or `quashed` where the liege kept its relief or",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 370,
+    "arrow": false,
+    "kinds": [
+     "polity_recognition"
+    ],
+    "where": "settlement \u2014 the member's seat",
+    "default": "the liege's fork (\u00a715.1)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 371,
+    "arrow": false,
+    "kinds": [
+     "polity_appointment"
+    ],
+    "where": "settlement \u2014 the member's seat",
+    "default": "the member's fork (`appointed` only at `dominant` deference); the engine never opens an appointment on its own",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 372,
+    "arrow": false,
+    "kinds": [
+     "call_in_answer"
+    ],
+    "where": "settlement \u2014 the member's seat",
+    "default": "WC's",
+    "ncells": 7,
+    "nh": 7
+   }
+  ],
+  "end": 372
+ },
+ "MN": {
+  "header": [
+   "Kind",
+   "Owner",
+   "WHERE (the card's place)",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "The engine's DEFAULT",
+   "Parties",
+   "The tilt"
+  ],
+  "rows": [
+   {
+    "line": 402,
+    "arrow": false,
+    "kinds": [
+     "menace_siege"
+    ],
+    "where": "`settlement` \u2014 the besieged town",
+    "default": "\u00a75.2's resolver (never `falls`)",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 403,
+    "arrow": false,
+    "kinds": [
+     "menace_met"
+    ],
+    "where": "`settlement` \u2014 the menace's town at the column's arrival; a `road` stretch `(a, b)` when the menace holds or travels a road",
+    "default": "`engage`; the battle leaf `menaceBattle` (the logistic over the latent delta, the siege's `SIEGE_CAPACITY_K` reused \u2014 exported from `warSiegeVerdict.js`; a deta",
+    "ncells": 9,
+    "nh": 9
+   }
+  ],
+  "end": 403
+ },
+ "CH": {
+  "header": [
+   "Kind",
+   "Owner (wave)",
+   "Parties (actor refs)",
+   "WHERE (ENC-HL-13)",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "DEFAULT verdict"
+  ],
+  "rows": [
+   {
+    "line": 699,
+    "arrow": false,
+    "kinds": [
+     "retainer_offer"
+    ],
+    "where": "`settlement` \u2014 where the offer is made (the court's seat, or where the recruiter found the paragon) \u00b7 `site` from ST's `worldSites`",
+    "default": "the paragon's own score against its best alternative (\u00a77); a villain's offer is always covert (CH21)",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 700,
+    "arrow": false,
+    "kinds": [
+     "paragon_resigns"
+    ],
+    "where": "`settlement` \u2014 where it stands \u00b7 `site` from ST's `worldSites`",
+    "default": "its choice",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 701,
+    "arrow": false,
+    "kinds": [
+     "champion_duel"
+    ],
+    "where": "`settlement` \u2014 the town \u00b7 `site` from ST's `worldSites`",
+    "default": "the two exertions' strength and a keyed hash (\u00a713)",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 702,
+    "arrow": false,
+    "kinds": [
+     "person_at_the_gate"
+    ],
+    "where": "`settlement` \u2014 the town's gate \u00b7 `site` from ST's `worldSites` \u00b7 `road{a, b}` (the half on the riders' town's land \u2014 PR's ONE STRETCH KEY, PR \u00a72.2) for a patrol",
+    "default": "CLIMAX",
+    "ncells": 9,
+    "nh": 8
+   },
+   {
+    "line": 703,
+    "arrow": false,
+    "kinds": [
+     "person_banned"
+    ],
+    "where": "`settlement` \u2014 the court \u00b7 `site` from ST's `worldSites`",
+    "default": "`banned` at `hatred`; otherwise by the BENCH officer's personality (SEAMS-r1-4)",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 704,
+    "arrow": false,
+    "kinds": [
+     "banished_found"
+    ],
+    "where": "`settlement` \u2014 the town \u00b7 `site` from ST's `worldSites`",
+    "default": "`expelled`",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 705,
+    "arrow": false,
+    "kinds": [
+     "paragon_disgraced"
+    ],
+    "where": "`settlement` \u2014 where the failure fell \u00b7 `site` from ST's `worldSites`",
+    "default": "`disgraced` \u2014 and for a CORPS' sell-out (\u00a716b) the same card with the corps' sentence: `disgraced` the sale stands, `weathered` the DM spares it",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 706,
+    "arrow": false,
+    "kinds": [
+     "polarity_turn"
+    ],
+    "where": "`settlement` \u2014 where it stands \u00b7 `site` from ST's `worldSites`",
+    "default": "`turns` only when every condition stands at its strongest band and the advance is one week; else `holds` (CH-r1-13)",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 707,
+    "arrow": false,
+    "kinds": [
+     "never_line_tested"
+    ],
+    "where": "`settlement` \u2014 where it stands \u00b7 `site` from ST's `worldSites`",
+    "default": "`holds_the_line` when the `defining` trait is the line's virtue; else the keyed hash",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 708,
+    "arrow": false,
+    "kinds": [],
+    "where": "\u2014",
+    "default": "NONE until ES-2b lands: no engine holds a paragon; the DM's hand (`authored.heldAt`) is no hearing (\u00a712.4) [CURED 2026-10-18 (fp-final r2) \u2014 A.11: round 1's use",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 709,
+    "arrow": false,
+    "kinds": [
+     "ransom"
+    ],
+    "where": "as the hold's",
+    "default": "written so the slot's first consumer is named, never live design: the employer's answer read against RN's court regard of the paragon; `abandon` mints `abandone",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 710,
+    "arrow": false,
+    "kinds": [
+     "party_visit"
+    ],
+    "where": "PT's",
+    "default": "PT's: nothing has happened to the party yet",
+    "ncells": 8,
+    "nh": 8
+   }
+  ],
+  "end": 710
+ },
+ "PT": {
+  "header": [
+   "Kind",
+   "Climax",
+   "Verdict words",
+   "DEFAULT",
+   "Class",
+   "WHERE",
+   "TILT (requirement 24(b): \"each kind declares which\")"
+  ],
+  "rows": [
+   {
+    "line": 391,
+    "arrow": false,
+    "kinds": [
+     "party_request",
+     "party_offer",
+     "party_summons",
+     "party_warrant",
+     "party_bounty",
+     "party_visit"
+    ],
+    "where": "`settlement` \u2014 the actor's town (a travelling paragon: where it stands, else its leg's origin)",
+    "default": "**nothing has happened to the party yet**: `seeking` while apart, `awaiting` once co-located by `whereaboutsOf` (PT9); the RNG decides only the actor's course",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 392,
+    "arrow": false,
+    "kinds": [
+     "party_hunted"
+    ],
+    "where": "`road{court, first hop toward the party's last-heard place}` (the whole road)",
+    "default": "`seeking` (\"not found yet on the north road\")",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 393,
+    "arrow": false,
+    "kinds": [
+     "party_ambush"
+    ],
+    "where": "`road{actor's town, the party's town}` (the whole road) when the two are neighbours, else `country(actor's town)`",
+    "default": "`awaiting` while the party's whereabouts stay within one week's journey of the actor's lands, else `seeking` (PT9)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 394,
+    "arrow": false,
+    "kinds": [
+     "party_gate"
+    ],
+    "where": "`settlement` \u2014 the town's gate \u00b7 `road{a, b}` \u2014 the half the riders stood on (the road arm), the half the body works (the body half; a trail beside it named as ",
+    "default": "CH's `gateDefault` for `{kind:'party'}` (\u00a79.2) \u2014 on the road, the noticing court's; a plain admission is not heard \u00b7 the body half: `passed` \u2014 **nothing has hap",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 395,
+    "arrow": false,
+    "kinds": [
+     "party_pledge_due"
+    ],
+    "where": "`settlement` \u2014 the need's town",
+    "default": "\u00a78.6 \u2014 the world's evidence first; a reachable miss counts (the owner's word)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 396,
+    "arrow": false,
+    "kinds": [
+     "party_slander"
+    ],
+    "where": "`settlement` \u2014 the town the lie is planted in",
+    "default": "IN's own default; the party's fate untouched (a lie changes what is believed)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 397,
+    "arrow": false,
+    "kinds": [
+     "party_banned"
+    ],
+    "where": "`settlement` \u2014 the court's town",
+    "default": "\u00a79.3",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 398,
+    "arrow": false,
+    "kinds": [
+     "party_voiced"
+    ],
+    "where": "`settlement` \u2014 where the voice stands (a court: its own town)",
+    "default": "`spoken` \u2014 it decides nothing FOR the party; the DM may withhold it (no trace) or amend it (the chair's ruling, SEAMS-r1-6)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 399,
+    "arrow": false,
+    "kinds": [
+     "backing_voided",
+     "backing_repudiated"
+    ],
+    "where": "`settlement` \u2014 the voider's town \u00b7 the backer's town",
+    "default": "\u00a710.3",
+    "ncells": 7,
+    "nh": 7
+   }
+  ],
+  "end": 399
+ },
+ "PS": {
+  "header": [
+   "Kind",
+   "Owner (wave)",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "WHERE (`ENGAGEMENT_WHERE_KINDS`)",
+   "Default verdict"
+  ],
+  "rows": [
+   {
+    "line": 410,
+    "arrow": false,
+    "kinds": [
+     "passage_request"
+    ],
+    "where": "`settlement` (B's seat, where the envoy stands)",
+    "default": "`passageAnswerOf` (request form); A's line, where it is carried, from `moverRoadOf`",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 411,
+    "arrow": false,
+    "kinds": [
+     "passage_at_the_border"
+    ],
+    "where": "a land crossing: `road` \u2014 the stretch `road{prev, B}` keyed by the SEAT PAIR `stretch:<a\\",
+    "default": "b>` (the digest's landed `pairKey` order, RULINGS-ROUND3 A.14; cells or a world point are optional placement data on it, never the key); a landing or a circle a",
+    "ncells": 9,
+    "nh": 7
+   },
+   {
+    "line": 412,
+    "arrow": false,
+    "kinds": [
+     "passage_overstayed"
+    ],
+    "where": "`country (B)` (MN's WHERE kind: \"the land around one settlement\")",
+    "default": "`demanded_to_leave` unless B cannot field strength (then `tolerated`)",
+    "ncells": 7,
+    "nh": 7
+   },
+   {
+    "line": 413,
+    "arrow": false,
+    "kinds": [
+     "armed_incursion"
+    ],
+    "where": "`road{prev, B}` (or `settlement (B)` for a landing; the trail's junction `road{prev, B}` for a unit met on a hidden way) the week it enters; `country (B)` after",
+    "default": "`barred` when the unit's size band against B's DEFENCE (`passageDefenceOf`: the field force PLUS the liege's share where the line reads `sent`) is below `decisi",
+    "ncells": 7,
+    "nh": 7
+   }
+  ],
+  "end": 413
+ },
+ "ST": {
+  "header": [
+   "Kind",
+   "Owner",
+   "WHERE",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "The engine's DEFAULT",
+   "Parties",
+   "The tilt"
+  ],
+  "rows": [
+   {
+    "line": 478,
+    "arrow": false,
+    "kinds": [
+     "site_taken"
+    ],
+    "where": "`site`",
+    "default": "`held_by_them` \u2014 unless an AT-HAND tied court, which SEES the arrival on its own land that week (its sighting written into the arriver's own belief record, \u00a72.4",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 479,
+    "arrow": false,
+    "kinds": [
+     "site_cleared"
+    ],
+    "where": "`site`",
+    "default": "the contest \u2014 ONE PER SITE PER WEEK, ONE SIDE AT A TIME (A.18 \u00b7 A.3; \u00a76.1 step 6d): the clearing force \u2014 the strongest challenger side's (the anchor's side: the",
+    "ncells": 10,
+    "nh": 9
+   },
+   {
+    "line": 480,
+    "arrow": false,
+    "kinds": [
+     "site_reclaim"
+    ],
+    "where": "`site`",
+    "default": "the court's fork (\u00a76.4)",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 481,
+    "arrow": false,
+    "kinds": [
+     "site_siege"
+    ],
+    "where": "`site`",
+    "default": "ST's resolver: the attacker's strength (an army's effective strength; a menace's might on the latent scale; a body's `bodyStrength`) against the site's ONE READ",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 482,
+    "arrow": false,
+    "kinds": [
+     "site_sale"
+    ],
+    "where": "`site`",
+    "default": "the FLOCK's answer by its god's recorded axes, `saleFork` (no randomness): `saleScore = law + good`, `law` +1 lawful \u00b7 0 neutral \u00b7 \u22121 chaotic, `good` +1 good \u00b7 ",
+    "ncells": 9,
+    "nh": 9
+   }
+  ],
+  "end": 482
+ },
+ "PR": {
+  "header": [
+   "Kind",
+   "Owner (wave)",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "WHERE (`ENGAGEMENT_WHERE_KINDS`)",
+   "Default verdict",
+   "Parties"
+  ],
+  "rows": [
+   {
+    "line": 485,
+    "arrow": false,
+    "kinds": [
+     "patrol_engages"
+    ],
+    "where": "`road (a, b)` \u2014 the stretch (a catch on a way beside it is heard here too, the card naming it \"in the forest beside the hill road\", BD \u00a79.1's idiom; at a juncti",
+    "default": "the contest: the force's band against the foe's on `SIEGE_VERDICT_BANDS` \u2014 a body's force is BD's `bodyStrength` \u2014 one keyed draw (stream `patrol_engages:<detac",
+    "ncells": 8,
+    "nh": 8
+   },
+   {
+    "line": 486,
+    "arrow": false,
+    "kinds": [
+     "patrol_joins"
+    ],
+    "where": "`road (a, b)` \u2014 the shared stretch, else `country (ally)`",
+    "default": "the ally's fork: the landed relationship pair state (label, trust, resentment) and its own believed danger (\u00a710.1(d))",
+    "ncells": 8,
+    "nh": 8
+   }
+  ],
+  "end": 486
+ },
+ "BD": {
+  "header": [
+   "Kind",
+   "Owner",
+   "WHERE",
+   "Climax tick",
+   "Verdict vocabulary",
+   "Class",
+   "The engine's DEFAULT",
+   "Parties",
+   "The tilt"
+  ],
+  "rows": [
+   {
+    "line": 724,
+    "arrow": false,
+    "kinds": [
+     "bodies_meet"
+    ],
+    "where": "`country (a)` \u00b7 `road (a, b)` (incl. the trail beside it) \u00b7 `site`",
+    "default": "by the pair label and a keyed draw weighted by each body's act; `fought` on the band contest",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 725,
+    "arrow": false,
+    "kinds": [
+     "body_stance"
+    ],
+    "where": "`settlement` (the court)",
+    "default": "the fork's new word",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 726,
+    "arrow": false,
+    "kinds": [
+     "traffic_waylaid"
+    ],
+    "where": "`road (a, b)`",
+    "default": "`waylaid` (the body's row stands next week)",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 727,
+    "arrow": false,
+    "kinds": [
+     "raid"
+    ],
+    "where": "`settlement`",
+    "default": "the band contest of the body's strength against `bodyDefenceOf` (BD14, B.3); `bought_off` by the town's fork",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 728,
+    "arrow": false,
+    "kinds": [
+     "patrol_engages"
+    ],
+    "where": "`road (a, b)` \u00b7 `country (a)` (a hunt's catch in the country, PR r4) [CURED 2026-10-19 (fp-final r5) \u2014 BD-X9]",
+    "default": "PR's band contest",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 729,
+    "arrow": false,
+    "kinds": [
+     "site_taken",
+     "site_cleared",
+     "site_siege"
+    ],
+    "where": "`site`",
+    "default": "ST's resolvers, the holder body's strength added to the defender",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 730,
+    "arrow": false,
+    "kinds": [
+     "caravan_seized"
+    ],
+    "where": "`road`",
+    "default": "WY-6's",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 731,
+    "arrow": false,
+    "kinds": [
+     "supply_raid"
+    ],
+    "where": "`road`",
+    "default": "the band contest",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 732,
+    "arrow": false,
+    "kinds": [],
+    "where": "`road (a, b)` (the way named on the card)",
+    "default": "PT: `passed` \u2014 \"nothing has happened to the party yet\" \u2014 the body's own `where` read as TRUTH (the meeting happens only where the DM's move of the party crosses",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 733,
+    "arrow": false,
+    "kinds": [
+     "alms_requested"
+    ],
+    "where": "`settlement`",
+    "default": "`given` at `almsOf`'s band",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 734,
+    "arrow": false,
+    "kinds": [
+     "body_bounty"
+    ],
+    "where": "`settlement` (the court)",
+    "default": "the fork's",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 735,
+    "arrow": false,
+    "kinds": [
+     "hunt_taken"
+    ],
+    "where": "`settlement` (the court)",
+    "default": "the public-security office-holder undertakes it",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 736,
+    "arrow": false,
+    "kinds": [
+     "guild_war"
+    ],
+    "where": "`settlement` (the guild's town)",
+    "default": "the weekly band contest of the gang against the guild's might; while open the town carries the ONE `guild_war` condition (B.18; A.4 \u2014 the `war_pressure` channel",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 737,
+    "arrow": false,
+    "kinds": [
+     "sponsorship_offered"
+    ],
+    "where": "`site` or `country (a)` (where the body is met)",
+    "default": "need \u00d7 personality \u00d7 trust",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 738,
+    "arrow": false,
+    "kinds": [
+     "sponsor_exposed"
+    ],
+    "where": "`settlement` (the host court)",
+    "default": "by the host court's pair state with the sponsor READ THROUGH BELIEF \u2014 `beliefMap.js :: readBeliefRelationship(hostId, sponsorId, worldState, truthType)`, the la",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 739,
+    "arrow": false,
+    "kinds": [
+     "ransom"
+    ],
+    "where": "`settlement` (the captive's court)",
+    "default": "the landed home leaf's answer (`homeRansomAnswer`) each week; at the clock's end, `ransom_granted`",
+    "ncells": 9,
+    "nh": 9
+   },
+   {
+    "line": 740,
+    "arrow": false,
+    "kinds": [
+     "site_sale"
+    ],
+    "where": "`site`",
+    "default": "the flock's `saleFork` (ST)",
+    "ncells": 9,
+    "nh": 9
+   }
+  ],
+  "end": 740
+ }
+}

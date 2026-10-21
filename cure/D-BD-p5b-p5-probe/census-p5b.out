@@ -1,0 +1,9 @@
+defensiveTerrainRungOf: src        0 · tests        0 · master docs        0 · ledger docs        1
+captiveId: src        0 · tests        0 · master docs        0 · ledger docs        1
+custodyWriteEnabled: src        0 · tests        0 · master docs        0 · ledger docs        2
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:188:**BD27 — THE ENGINE NEVER HARMS A CAPTIVE; A NAMED CAPTIVE'S CUSTODY WAITS ON ES-2b.** [OPENED 2026-10-20 (fp-final P5) — RUL
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:644:⛔ DARK UNTIL ES-2b LANDS: a NAMED person taken by a body is CUSTODY, which waits on ES-2b (the owner's persisted-shape slot; RU
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:787:- **Car-0:** confirm each widened kind's owner wave has landed or carries BD's producer row (ST-2, PR-2, WY-6, the war volume's `
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:852:| migrate | none at landing (new keys) | ES-2b's migration is the owner's (its `captiveId` key and the relaxed shape's normalizer
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:853:| dark-after-lit | stays, unread (no name shown, no leader's weights, no end tested); relighting resumes | BD's own `held` entrie
+/Users/cstokes/Desktop/settlement-engine/docs/DESIGN_FP_ARCH_BD.md:1011:| OD-BD-40 [r4] | THE RANSOM RACE on the LANDED captor and home answers; its closings `ransom_granted · captive_freed · captiv

@@ -1,0 +1,23 @@
+# rg -w counts (files) at master 81f1cd963 src/tests/docs and ledger docs — Tue Oct 20 16:05:36 CDT 2026
+press01	src=0	tests=0	docs=0	ledger=1
+danger01	src=3	tests=1	docs=1	ledger=2
+roamAnchorId	src=0	tests=0	docs=1	ledger=2
+regroupUntil	src=0	tests=0	docs=1	ledger=2
+raisedBy	src=0	tests=0	docs=1	ledger=2
+headAtStart	src=0	tests=0	docs=1	ledger=2
+drives	src=156	tests=265	docs=103	ledger=109
+menace_press	src=0	tests=0	docs=1	ledger=2
+menaceSiegeVerdict	src=0	tests=0	docs=1	ledger=2
+menaceBattleOutcome	src=0	tests=0	docs=1	ledger=2
+menaceRoamPick	src=0	tests=0	docs=1	ledger=2
+# drives code-shaped lines:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/hooks/useAdvanceSession.js:7: * that REPLACES the old boolean `worldPulseBusy`. It drives:
+# danger01 landed:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkDecay.js:282: * @returns {{ tally: Record<string, number>, peak: number, lossRate01: number, danger01: number }}
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkDecay.js:294:  const lossRate01 = dangerLossRate01(reading.danger01, String(edge.grade));
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkDecay.js:302:  return { tally, peak, lossRate01, danger01: reading.danger01 };
+# UNPRICED_LEG_WEEKS:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkConsumersTransit.js:97:  UNPRICED_LEG_WEEKS: NAMED_PERSON_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/routeNetworkConsumersTransit.js:148:    unpricedWeeks: ROUTE_TRANSIT_TUNING.UNPRICED_LEG_WEEKS,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/namedPersonTransit.js:21:  UNPRICED_LEG_WEEKS: 1,
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/namedPersonTransit.js:58:  const fallback = positive(a.unpricedWeeks, NAMED_PERSON_TRANSIT_TUNING.UNPRICED_LEG_WEEKS);

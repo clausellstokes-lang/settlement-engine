@@ -1,0 +1,46 @@
+##### ransomed_by
+  DESIGN_FP_ARCH_CH.md (1)
+    L535:  and a villain of one domain it is a nemesis candidate (§13).  **Debts and favours (proposal 6).** RN regard incidents with typed reasons (`ransomed_by`, `paid_well`, `sheltered`, `betrayed`, `refused_at_gate`, `slandered`), owned by RN's closed reason vocabulary; a favour owed i
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L795: he field is only ever read with "deed" | | `REGARD_CAUSES` · `DEED_SOURCES` (RN) | causes `heard_deed · met · pledge_kept · pledge_broken · ransomed_by · abandoned_by · refused_at_gate · banned_by · betrayed · served_with · gift · authored · condemned_a_good_deed · praised · cond
+##### served_with
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L795: RCES` (RN) | causes `heard_deed · met · pledge_kept · pledge_broken · ransomed_by · abandoned_by · refused_at_gate · banned_by · betrayed · served_with · gift · authored · condemned_a_good_deed · praised · condemned`; sources `party_impact · party_event · paragon_act · npc_verdic
+##### `betrayed`
+  DESIGN_FP_ARCHITECTURE.md (1)
+    L1908: ead MID-WAR); `CONTRIBUTION_CLOSE_GRADES`; the relay comradeship term lit; the 1.6.4 fidelity rider. ⚠ Three edges, not one — WC-3 supplies `betrayed`'s skim input and WC-5 supplies `partial`'s askedBand [CLARIFIED 2026-10-16 (coherence fold §5) — here `partial` is the `CONTRIBUT
+  DESIGN_FP_ARCH_CH.md (1)
+    L535: esis candidate (§13).  **Debts and favours (proposal 6).** RN regard incidents with typed reasons (`ransomed_by`, `paid_well`, `sheltered`, `betrayed`, `refused_at_gate`, `slandered`), owned by RN's closed reason vocabulary; a favour owed is a warm link with its reason, called in
+  DESIGN_FP_ARCH_WC.md (4)
+    L4232: ave is RECORDED WITH THE SLOT "THE HOST", charter kept whole.]  Dependencies: WC-3, WC-5, WC-6 -- CORRECTED IN ROUND 2 (7.F). WC-3 supplies `betrayed`'s skim input; WC-5 supplies `partial`'s askedBand and `unanswered`'s live call-in. The old single WC-6 edge contradicted this wav
+    L4256: HAT WAITED FOR THIS WAVE'S INPUTS: (1) CONTRIBUTION_CLOSE_GRADES (honored | partial | unanswered | betrayed) is minted HERE, not at WC-1 -- `betrayed` needs skim (WC-3) and comradeship (this wave), `unanswered` needs a live call-in (WC-5), and `partial` needs the request record's
+##### abandoned_to_captivity
+  DESIGN_FP_ARCH_BD.md (2)
+    L642: the ransom unless the DM decides otherwise, and a captive who returns abandoned carries the LANDED grievance `ABANDONMENT_GRIEVANCE_KIND = 'abandoned_to_captivity'` (its first producer for a body's captive) [CURED 2026-10-19 (fp-final r5) — B.7 · BD-r4-4] [CURED 2026-10-19 (fp-fi
+    L1312: annel of BD's | | A14 | captives and the ransom race (§9.10) | the CUSTODY rows (ES-2b) — a SLOT; the abandoned captive's landed grievance `abandoned_to_captivity` | none (dark until ES-2b) | — | | A15 | a sponsorship's leak (§10.4) | the credibility stock and `corruption_exposed
+  DESIGN_FP_ARCH_CH.md (2)
+    L593: s the landed `ransom` row's `pay · refuse · abandon`, the employer's answer read against RN's court regard of the paragon; `abandon` mints `abandoned_to_captivity` (its first consumer); the held villain's nature decides whether it talks (§9, road 4); the ransom's PERSISTENCE stay
+    L709: he slot's first consumer is named, never live design: the employer's answer read against RN's court regard of the paragon; `abandon` mints `abandoned_to_captivity`; persistence WR-7d's owner slot (§12.4) [CURED 2026-10-18 (fp-final r2) — A.11] | | `party_visit` and the party kind
+  DESIGN_FP_ARCH_ES.md (2)
+    L973: VolunteerEnvoy` quality   'careful'; abandons less; ransoms paid) · `lenient` (hurried vetting;   abandonment-prone — feeding the existing `abandoned_to_captivity`   grievance). - CAPTOR-side leniency (the caught spy's fate): the captor's own doctrine   words shape `captorRansomC
+    L1113: ring/principal shapes more often) and in the home-side pressure   via §3.8's miss clock. The abandonment arm (`HOME_ANSWERS` 'abandon' →   `abandoned_to_captivity` on the man's own durable id) needs NOTHING new —   a lenient-employment court abandoning its caught spy is the exist
+  DESIGN_FP_COHERENCE_FOLD.md (9)
+    L433: s the landed home answers (`ransomChoices.js :: HOME_ANSWERS = Object.freeze(['pay', 'refuse', 'abandon'])`; `ABANDONMENT_GRIEVANCE_KIND = 'abandoned_to_captivity'`). | [ADDED 2026-10-17 (fp-final; `briefs/RULINGS-AFTER-RESEARCH.md` §4; `briefs/RULINGS-AFTER-COMPILE.md` CH STOP-C
+    L433: CH-1 and cross-cutting; OD-FC-60)] The row takes the LANDED `pay · refuse · abandon` (§3.4 bracket). THE CHAMPION is the first consumer of `abandoned_to_captivity`: a held paragon (STOP-CH-1 (A) — a hold on its own ledger record riding the W-H verdict economy, `verdictCause: 'jai
+##### refused_at_gate
+  DESIGN_FP_ARCH_CH.md (2)
+    L535: e (§13).  **Debts and favours (proposal 6).** RN regard incidents with typed reasons (`ransomed_by`, `paid_well`, `sheltered`, `betrayed`, `refused_at_gate`, `slandered`), owned by RN's closed reason vocabulary; a favour owed is a warm link with its reason, called in when the cre
+    L569:  [CURED 2026-10-18 (fp-final r2) — the STOP marker dropped: ruled]. A ban lowers the paragon's regard of the court that set it (RN, reason `refused_at_gate`). - **Belief on both sides.** A court bans on what it has heard; a paragon may not know of a new ban until word reaches whe
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L795: th "deed" | | `REGARD_CAUSES` · `DEED_SOURCES` (RN) | causes `heard_deed · met · pledge_kept · pledge_broken · ransomed_by · abandoned_by · refused_at_gate · banned_by · betrayed · served_with · gift · authored · condemned_a_good_deed · praised · condemned`; sources `party_impact
+##### banned_by
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L795: ARD_CAUSES` · `DEED_SOURCES` (RN) | causes `heard_deed · met · pledge_kept · pledge_broken · ransomed_by · abandoned_by · refused_at_gate · banned_by · betrayed · served_with · gift · authored · condemned_a_good_deed · praised · condemned`; sources `party_impact · party_event · p
+##### `gift`
+##### cause: 'met'
+##### `met`
+  DESIGN_FP_ARCH_PR.md (1)
+    L552: :<tick>')` — §8.1's stream, the power included [REFINED 2026-10-18 (fp-final r3) — the two spellings of one stream agreed]); (b) predicates `met`, `noticed`; the screen's hold — the one helper's FREEZE mode, bounded by PS9's cap where THE PASSAGE is lit and by Bound 1 alone where
+  DESIGN_FP_ARCH_PT.md (4)
+    L234: is struck with the deed kind] [CURED 2026-10-18 (fp-final r4) — L-BD 33 · L-BD 36] · `met_in_person` has no value (RN reads it as the cause `met`). [CURED 2026-10-18 (fp-final r2) — PT-r1-14 (A.4) · the verifier's carry on `MARK_DEED` · RULINGS-ROUND2 §E (sites).]  A REGISTRATION
+    L291: here they met); CH's paragon stage reads it to set the one-way `marks.metParty` (CH stays that field's writer) and RN reads it as the cause `met` — so "never repeats once met" can fire. [CURED 2026-10-18 (fp-final r1) — PT-r1-19: no act recorded a meeting.] **The voice spoken** (

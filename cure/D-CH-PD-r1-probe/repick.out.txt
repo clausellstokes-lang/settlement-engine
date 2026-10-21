@@ -1,0 +1,6 @@
+first commit keys: _deityRef,name,alignmentAxis,temperamentAxis,rankAxis,lawAxis,domain,authoredTemper,characterAxes,boonChannel,boonStrength
+foreign keys dropped (junk, wallClock): true
+re-pick through the builder is a fixed point: true
+legacy minimal snapshot fills neutral axes: {"_deityRef":"Old Oak","name":"Old Oak","alignmentAxis":"neutral","temperamentAxis":"neutral","rankAxis":"minor","lawAxis":"neutral"}
+fixed point on the legacy embed: true
+authored-character keys carried: authoredTemper,characterAxes,boonChannel,boonStrength

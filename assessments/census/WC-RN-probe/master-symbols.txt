@@ -1,0 +1,103 @@
+decayTowardNeutral	files=6	src/domain/certification/subsystemRowsBelief.js:383:      other: 'A CONDITIONAL FACET INSIDE ANOTHER SUBSYSTEM\'S CONTAINER, WITH NO CALLER YET, which is why every channel is empty twice over. THE GAT
+HALF_LIFE_WEEKS	files=2	src/domain/worldPulse/factionPairLedger.js:45:  HALF_LIFE_WEEKS: 156,
+graduateNpc	files=7	src/domain/certification/subsystemRowsPeople.js:477:      // setNpcLedger, and graduateNpc returns an immediate no-op when
+mintDurableNpcId	files=1	src/domain/worldPulse/npcLedger.js:549:export function mintDurableNpcId(settlementSeed, rosterIdentity, tick, taken = { has: () => false }) {
+NOTORIETY_BANDS	files=5	src/domain/worldPulse/npcLedgerFacets.js:46:export const NOTORIETY_BANDS = Object.freeze([
+npcVerdictFor	files=2	src/domain/worldPulse/npcVerdictTable.js:638:export function npcVerdictFor({ worldState, settlement, npc, exposure, settlementSeed, settlementId, tick }) {
+applyNpcVerdict	files=4	src/domain/certification/subsystemRowsWar.js:546:      other: 'Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exactly true before t
+applyOrganicNpcVerdicts	files=3	src/domain/worldPulse/pulseKernel.js:47:import { applyOrganicNpcVerdicts } from './npcVerdictPulse.js';
+verdictHeraldItem	files=1	src/domain/worldPulse/npcVerdictApply.js:395:export function verdictHeraldItem({ decision, settlementId, settlementName, rosterId, wnpcId, npcName, tick }) {
+VERDICT_AUDIENCE	files=1	src/domain/worldPulse/npcVerdictApply.js:129:const VERDICT_AUDIENCE = Object.freeze({
+verdictNewsIdFor	files=0	
+believedReputation	files=4	src/domain/worldPulse/npcCirculation.js:59:import { believedReputation } from './npcCirculationBelief.js';
+beliefFadeSteps	files=1	src/domain/worldPulse/npcCirculationBelief.js:136:export function beliefFadeSteps({ infoMode, hopDelayTicks: delay, elapsedTicks, observerId, roamerId }) {
+hopDelayTicks	files=6	src/domain/certification/subsystemRowsSeat.js:57:      other: 'THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\'s ruling power has "an equal or greater coun
+operativeNotoriety01	files=4	src/domain/worldPulse/espionage/espionageMath.js:236:export function operativeNotoriety01(homeSettlement, npc) {
+covertCompetence01	files=3	src/domain/worldPulse/espionage/espionageGauntlet.js:106:  covertCompetence01,
+embassyEnvoyWeight01	files=3	src/domain/worldPulse/espionage/espionageMath.js:48:import { ROADS_TUNING, embassyEnvoyWeight01, factionPowerStanding01, roadsImportanceWeight } from '../../roads/state.js';
+RANSOM_REGARD_BANDS	files=1	src/domain/worldPulse/ransomChoices.js:39:export const RANSOM_REGARD_BANDS = Object.freeze(['forgotten', 'valued', 'beloved']);
+normalizeHomeCourt	files=1	src/domain/worldPulse/ransomChoices.js:103:export function normalizeHomeCourt(value) {
+homeRansomAnswer	files=1	src/domain/worldPulse/ransomChoices.js:174:export function homeRansomAnswer({ home, claim } = {}) {
+ABANDONMENT_GRIEVANCE_KIND	files=3	src/domain/npc/livedExperienceSources.js:956:    'abandoned_unransomed RE-CONFIRMED unreachable: ABANDONMENT_GRIEVANCE_KIND and abandonmentGrievance have zero consumers in src/, exactly as L3 measured
+decayedNpcCredibilityScore	files=1	src/domain/worldPulse/npcCredibility.js:109:export function decayedNpcCredibilityScore(entry, tick) {
+npcCredibilityWeight	files=1	src/domain/worldPulse/npcCredibility.js:124:export function npcCredibilityWeight(score) {
+credibilityWeight	files=3	src/domain/display/credibilityRead.js:12: * credibilityWeight / credibilityDiscount) so the band can never drift from the
+credibilityScoreOf	files=6	src/domain/worldPulse/warReasons.js:87:import { credibilityScoreOf, credibilityDiscount } from './informationStatecraft.js';
+makeCredibilityWeightFn	files=3	src/domain/worldPulse/pulseKernel.js:106:import { advanceInformationStatecraft, infoStatecraftActive, makeCredibilityWeightFn, makeBlaineyCredibilityFn, makeSightFn } from './informationStatecraft.js'
+governanceLedger	files=14	src/domain/capacityModel.js:60:import { governanceLedger } from './governanceLedger.js';
+settlementAlignment	files=16	src/domain/certification/couplingRegistryEspionage.js:295: * §3.9 spells the doctrine's moral axis as `natureWordFor(settlementAlignment(...).malice01)`
+rulerAlignment	files=1	src/domain/worldPulse/warSeatBooks.js:287:function rulerAlignment(worldState, rulerId, ruler) {
+rulingSeatId	files=2	src/domain/dossier/powerStrata.js:287: *                 rulingSeatId convention (simulation-backed; tick-gated);
+moralityBand	files=6	src/domain/worldPulse/ransomChoices.js:48:  'settlementId', 'rulerPresent', 'lawfulnessBand', 'moralityBand',
+INSTITUTION_ROLES	files=1	src/domain/roles/roleCatalog.js:24:export const INSTITUTION_ROLES = Object.freeze({
+FACTION_SEAT_ROLES	files=1	src/domain/roles/roleCatalog.js:37:export const FACTION_SEAT_ROLES = Object.freeze([
+factionPowerShare01	files=7	src/domain/factionPowerShare.js:60:export function factionPowerShare01(raw) {
+governingFactionOf	files=29	src/domain/certification/subsystemRowsSeat.js:57:      other: 'THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\'s ruling power has "an equal or greater coun
+advanceRumorLedgers	files=6	src/domain/certification/subsystemRowsVirtual.js:274:      // DELIBERATELY EMPTY. The lane assembles INPUTS to advanceRumorLedgers, which
+tradeNeighbours	files=6	src/domain/worldPulse/roadsKernel.js:54:// scans and the per-NPC tradeNeighbours rescan). Byte-identical drop-ins for the flagged sites; the
+maxHopsFor	files=1	src/domain/spatial/rumorNetwork.js:133:export function maxHopsFor(record) {
+mergeArrival	files=2	src/domain/spatial/rumorNetwork.js:427:export function mergeArrival(existing, incoming) {
+degradeTelling	files=2	src/domain/spatial/rumorNetwork.js:472:export function degradeTelling(record, fork, digest) {
+magnitudeBandOf	files=2	src/domain/spatial/rumorNetwork.js:247:export function magnitudeBandOf(severity) {
+pickBetterTelling	files=2	src/domain/spatial/rumorNetwork.js:430:  const better = pickBetterTelling(existing, incoming);
+captureContent	files=1	src/domain/spatial/rumorNetwork.js:392:function captureContent(entry) {
+seaLaneNeighbourMap	files=2	src/domain/spatial/rumorNetwork.js:63:import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger, seaLaneNeighbourMap, teleportNeighbourMap } from './distanceRead.js';
+teleportNeighbourMap	files=2	src/domain/spatial/rumorNetwork.js:63:import { activeSpatialDigest, hopWeeks, hasSpatialLedger, getSpatialLedger, seaLaneNeighbourMap, teleportNeighbourMap } from './distanceRead.js';
+hopWeeks	files=37	src/store/mapSlice.js:113:  // POLIS-3 (T11) — the travel-rings lens: hopWeeks-banded settlement groupings
+PARTY_IMPACT_KINDS	files=9	src/lib/intent/interpretApply.js:50: * `PARTY_IMPACT_KINDS` (12), so `makeOp` returns null for every op the Surveyor compiles
+applyPartyImpact	files=5	src/store/campaignWorldPulseDeferred.js:1142:    { applyPartyImpact },
+recordPartyImpact	files=18	src/store/campaignWorldPulseSliceEntry.js:17:  'recordPartyImpact',
+advanceEnvoyDiplomacyPulse	files=10	src/domain/certification/couplingRegistryInfo.js:25: * kernel calls `advanceEnvoyDiplomacyPulse` without `commissionedPlants`, and the mouths
+envoyDiplomacyActive	files=18	src/domain/certification/subsystemRowsEncounters.js:54:      other: 'THE OWNER DIRECTIVE (ODQ §881.10 to §881.13): chance meetings between named NPCs across settlements, with four outcome families i
+snapshotWithUpdates	files=1	src/domain/worldPulse/envoyPulse.js:78:function snapshotWithUpdates(snapshot, settlementUpdates, worldState, regionalGraph) {
+RELATIONSHIP_DEFAULTS	files=9	src/domain/relationships/canonicalRelationship.js:28://     RELATIONSHIP_DEFAULTS actually carries ('hostile', 'vassal'), because a
+ensureRelationshipState	files=31	src/domain/worldPulse/warReasons.js:48:import { ensureRelationshipState, relationshipKeyFromEdge, normalizeRelationshipType } from './relationshipState.js';
+readBeliefRelationship	files=7	src/domain/certification/subsystemRowsSeat.js:57:      other: 'THE COUNTERPART SEAT: the owner directive (ODQ 735.2) that an occupied or vassal settlement\'s ruling power has "an equal or greater coun
+reportsBySubject	files=2	src/domain/worldPulse/beliefMap.js:758:function reportsBySubject(observerLedger, observerId, now, matchFraming = null, digest = null, embattlementOf = null) {
+postureBandOf	files=1	src/domain/worldPulse/envoyChanceMeetingStage.js:253:function postureBandOf(relationshipType) {
+POSTURE_BANDS	files=1	src/domain/worldPulse/envoyChanceMeeting.js:95:// (`DISTANCE_BANDS`, `POSTURE_BANDS`, `LEAN_BANDS` and `MEETING_REFUSALS`), which is
+lawWordFor	files=6	src/domain/certification/couplingRegistryEspionage.js:304: * NOT. The law word arrives with NO coupling, because CR-ES-3 rehomed `lawWordFor` into the
+natureWordFor	files=6	src/domain/certification/couplingRegistryEspionage.js:295: * §3.9 spells the doctrine's moral axis as `natureWordFor(settlementAlignment(...).malice01)`
+TRAIT_ALIGNMENT	files=9	src/data/npcTraitWeights.js:4: * TRAIT_ALIGNMENT (good↔evil) and TRAIT_AGGRESSION (belligerent↔pacific) are the two
+TRAIT_AGGRESSION	files=7	src/data/npcTraitWeights.js:4: * TRAIT_ALIGNMENT (good↔evil) and TRAIT_AGGRESSION (belligerent↔pacific) are the two
+NPC_PERSONALITY_TRAITS	files=3	src/generators/npcGenerator.js:36:  NPC_PERSONALITY_TRAITS,
+advanceReligionStates	files=7	src/domain/worldPulse/religiousContest.js:5: * The LIVE driver is `advanceReligionStates` (mounted by pulseKernel): each tick
+strengthByRef	files=2	src/domain/worldPulse/religiousContest.js:798:    const strengthByRef = {};
+reserveFor	files=3	src/domain/certification/couplingRegistryGrammar.js:65:  counterforce: 'src/domain/worldPulse/pactFormation.js#reserveFor',
+rejectionFor	files=2	src/domain/worldPulse/npcCirculation.js:65:  rejectionFor,
+projectNpcPool	files=3	src/domain/worldPulse/envoyErrandProjection.js:184: * .js, projectNpcPool, mobilizationStandings, realmPolitics) and it is BORROWED rather
+wandererRows	files=2	src/components/map/HeraldWanderers.jsx:40:import { wandererRows } from './heraldWanderers.js';
+CAUSE_LINE	files=1	src/components/map/heraldWanderers.js:85:const CAUSE_LINE = Object.freeze({
+VERDICT_CAUSES	files=3	src/components/map/heraldWanderers.js:84:/** The one-line WHY each card carries (design §6c). Total over VERDICT_CAUSES. */
+SCANDAL_CLASSES	files=2	src/domain/worldPulse/npcLedgerFacets.js:60:export const SCANDAL_CLASSES = Object.freeze([
+moveNpcRecord	files=5	src/domain/worldPulse/npcResidency.js:45:import { npcConsequencesActive, npcLedgerOf, moveNpcRecord } from './npcLedger.js';
+removeNpcRecord	files=3	src/domain/certification/subsystemRowsPeople.js:562:        description: 'NEVER-KILL / DM-SOVEREIGN (law 1, constitutional, and the reason the whole subsystem exists in the shape it does): the engine 
+restoreNpcRecord	files=2	src/domain/worldPulse/npcLedger.js:42: * (removeNpcRecord) and exactly one that can put a dropped one back (restoreNpcRecord).
+killNamedNpc	files=2	src/store/npcVerbsBody.js:31:  killNamedNpc,
+durableIdForRoster	files=6	src/domain/certification/subsystemRowsCompact.js:70:      other: 'A ZERO-KEY IDENTITY LAYER, WHICH IS WHY THE CENSUS CANNOT SEE IT AND WHY THAT IS THE CORRECT READING. ONE GATE: oathHolderActive (oath
+fnv1a32	files=55	src/domain/generation/generationForkRegistry.js:197:  Object.freeze({ id: 'hash-channel', statement: 'pickVariant and the external callers of fnv1a32 are censused and are disjoint by construction, but
+mapEventToPartyImpact	files=3	src/store/settlementLifecycleHelpers.js:22:import { mapEventToPartyImpact } from '../domain/events/partyEventLinkage.js';
+newsEntryForOutcome	files=6	src/domain/npc/livedExperienceSources.js:120: *            `worldPulseFeedCuration.newsEntryForOutcome`, the PulseOutcome ones.
+normalizeEntry	files=15	src/domain/certification/subsystemRowsWaves.js:151:      // the observation sink (wizardNews.js:744), and normalizeEntry preserves id,
+TESTIMONY_CREDIBILITY_BANDS	files=1	src/domain/worldPulse/envoyTestimony.js:34:export const TESTIMONY_CREDIBILITY_BANDS = Object.freeze([
+BAND_WORDS	files=2	src/domain/display/credibilityRead.js:24:const BAND_WORDS = Object.freeze(['discredited', 'doubted', 'trusted', 'unimpeachable']);
+applyForeignExposureBlowback	files=6	src/domain/worldPulse/pulseKernel.js:76:import { advanceCorruptionWeb, applyForeignExposureBlowback } from './corruptionWeb.js';
+crownReachAt	files=0	
+seatChangedSince	files=0	
+currentRegion	files=6	src/domain/briefs/roadScene.js:37:import { currentRegion } from '../spatial/armyTransit.js';
+advanceResidency	files=1	src/domain/worldPulse/npcResidency.js:275:export function advanceResidency({ worldState, wnpcId, tick, digest, candidates, hiddenHopsOf = null }) {
+KIND_REGISTRATION_FREEZES	files=0	
+gauntletCatchFactors	files=2	src/domain/worldPulse/espionage/espionageGauntlet.js:319:export function gauntletCatchFactors({
+reputationRaceConsumer	files=8	src/domain/certification/couplingRegistryInfo.js:214: * `reputationRaceConsumer.js` is the race's first consumer: at every arrival a ledger kept last
+RUMOR_SEED_LOOKBACK_TICKS	files=1	src/domain/spatial/rumorNetwork.js:128:export const RUMOR_SEED_LOOKBACK_TICKS = 4;
+RUMOR_NOTABLE_SCORE_FLOOR	files=5	src/domain/spatial/rumorNetwork.js:122:export const RUMOR_NOTABLE_SCORE_FLOOR = 60;
+computeAggressiveness	files=11	src/pdf/lib/liveWorld.js:19: *   - computeAggressiveness                                 (disposition.js)
+personalityDrive	files=2	src/domain/worldPulse/disposition.js:161:function personalityDrive(settlement) {
+characterAxes	files=9	src/domain/content/customContentManifest.generated.js:1597:          "key": "characterAxes",
+beliefsActive	files=31	src/domain/certification/subsystemRowsWar.js:29: * beliefsActive through
+partyCaused	files=17	src/store/settlementSlice.js:1229:    if (campaign && !event?.partyCaused) {
+concludedWars	files=11	src/domain/certification/couplingRegistryWar.js:703:  read: 'src/domain/worldPulse/concludedWars.js#recordConcludedWars.treatyStandsFor',
+previousGovernments	files=13	src/pdf/lib/viewModel.js:523:    // on `previousGovernments` (warDeployment mints a `conquest`-cause transfer
+seatTransitions	files=6	src/domain/certification/subsystemRowsWar.js:546:      other: 'Nested under warLayerEnabled through a strict two-flag gate: both warLayerEnabled and warTerminationEnabled must be exactly true before t
+npcLadderEnabled	files=13	src/lib/spatialUsage.js:291:  // halves. NO TRACKED FLAG: the lane needs `espionageEnabled` AND `npcLadderEnabled`, and both
+setSpatialLedger	files=80	src/lib/spatialUsage.js:234:// again: EVERY spatialLedgers key a domain kernel writes (via setSpatialLedger) must

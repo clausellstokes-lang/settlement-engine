@@ -1,0 +1,11 @@
+# PR master reads (81f1cd963), Tue Oct 20 15:46:17 CDT 2026
+5: * immediately. They queue on the campaign (worldState.pendingEvents) and
+29: * @param {number|null} [args.tick] worldState.tick, stamped on each drained entry
+59:export function drainQueuedEvents({ queue = [], saves = [], now = wallClockNow(), tick = null } = {}) {
+490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
+38:export function buildEvent(form) {
+97:export const HIDDEN_PATH_KINDS = Object.freeze(['covert_envoy', 'smuggler', 'wanderer']);
+patrol_join_refused src=0 tests=0 docs=0
+PATROL_JOIN_REFUSED_RESENTMENT src=0 tests=0 docs=0
+## MN MIGHT_LATENT (ledger MN volume)
+616:MIGHT_LATENT` (13/34/51/69/89)

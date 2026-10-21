@@ -1,0 +1,45 @@
+# D-PS-ST-PR-p5 master reads (81f1cd963), Tue Oct 20 15:25:05 CDT 2026
+## termLabel
+419:export function termLabel(type) {
+442:    case 'migration_right': return 'right of passage';
+## PACT_TRIGGERS
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pactTriggers.js:60:export const PACT_TRIGGERS = Object.freeze([
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pactTriggers.js:70:export const PACT_TRIGGERS_PRODUCED = Object.freeze([
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/pactTriggers.test.js:47:    expect(PACT_TRIGGERS_PRODUCED).toHaveLength(6);
+292:function crossingsFor({ worldState, rows, fromId, toId, self, strengthFor, threatId }) {
+     330 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/pactTriggers.js
+## CLOSE_ROADS
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/concludedWarRecord.js:69:export const CLOSE_ROADS = Object.freeze([
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/concludedWarLedger.test.js:105:    expect(CLOSE_ROADS.length).toBe(13);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/tests/domain/concludedWarLedger.test.js:106:    expect(new Set(CLOSE_ROADS).size).toBe(13);
+## transit return
+954:  return { worldState: nextWorldState, changed, newsEntries };
+2442:    const armyTransit = advanceArmyTransit({
+2452:    if (armyTransit.changed) memoryState = armyTransit.worldState;
+2453:    if (armyTransit.newsEntries.length) {
+2454:      wizardNews = appendObservedWizardNewsEntries(wizardNews, armyTransit.newsEntries, { now }, newsReceiptSink);
+## war layer before transit (pulse order)
+1019:    const warOutcomeSuppressedIds = residueSuppressionIds(war.outcomes);
+1353:  const warOutcomes = [...mobilizationOutcomes, ...war.outcomes, ...warReturnOutcomes, ...tradeWarOutcomes, ...occupationOutcomes, ...religiousOutcomes];
+## condition writer
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warRecordMode.js:33:export function warConditionOutcome({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warHomeCosts.js:315:export function applyHomeWarCosts({
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warDeployment.js:54:import { applyHomeWarCosts } from './warHomeCosts.js';
+     613 /private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/warHomeCosts.js
+## threat signals
+357:export function threatEnvironment01({ frontNear = false, occupyNear = false, raidNear = false } = {}) {
+## HB classes
+59:export const CIRCUMSTANCE_CLASSES = Object.freeze([
+68:  'terms_offered',
+83:  'terms_offered',
+## recall stamp
+319:export function stampDeploymentRecall(state, attackerId, targetId, cause, tick) {
+## token census (src+tests / ledger docs files)
+passageChooserTermOf 0 / 0
+passageGuardLossesOf 0 / 0
+guardLoss 0 / 0
+passageDemandOf 0 / 0
+scorePassageDemand 0 / 0
+armsNearOf 0 / 0
+refusalsExpected 0 / 0
+PASSAGE_FAVOUR_TRUST 0 / 0

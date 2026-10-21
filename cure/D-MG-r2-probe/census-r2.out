@@ -1,0 +1,18 @@
+holdWingAtContact master/src files=0
+holdWingAtContact master/tests files=0
+holdWingAtContact master/docs files=0
+holdWingAtContact ledger/docs files=1
+weeksOf master/src files=0
+weeksOf master/tests files=0
+weeksOf master/docs files=0
+weeksOf ledger/docs files=1
+beliefAwareBesieged master/src files=1
+beliefAwareBesieged master/tests files=0
+beliefAwareBesieged master/docs files=1
+beliefAwareBesieged ledger/docs files=4
+coffers_bare master/src files=0
+coffers_bare master/tests files=0
+coffers_bare master/docs files=0
+coffers_bare ledger/docs files=2
+
+weeksOf hits in master src:

@@ -1,0 +1,4 @@
+row 4 first-season probabilities from wonted: { remitting: 0.274, wonted: 0.587, exacting: 0.14 }
+row 4 P(no raise in the first season) = 0.860 ; the row asserts ZERO exacting/wringing hands over 8 seasons
+row 5 probabilities at the war trigger: { wonted: 0.715, exacting: 0.285 } ; the row asserts "a hand >= exacting within the war's first week"
+row 5 with need01 = 1 (wages at full pressure): { wonted: 0.661, exacting: 0.339 }

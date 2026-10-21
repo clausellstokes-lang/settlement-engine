@@ -1,0 +1,100 @@
+advanceCalamity | 4 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/realmVerbExecution.js 
+ruinInstitution | 3 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/worldPulseFates.js src/domain/edit/operations.js 
+stepEmbattlement | 1 | src/domain/spatial/embattlement.js 
+advanceEmbattlement | 2 | src/domain/worldPulse/pulseKernel.js src/domain/spatial/embattlement.js 
+presenceTerms | 0 | 
+presenceComposer | 0 | 
+criminalStrength01Of | 4 | src/domain/worldPulse/migrationKernel.js src/domain/worldPulse/supplyKernel.js src/domain/worldPulse/espionage/espionageGauntlet.js 
+buildSmuggleContext | 1 | src/domain/worldPulse/supplyKernel.js 
+guildOf | 1 | src/domain/worldPulse/supplyKernel.js 
+guildEffectiveSecurity | 5 | src/domain/worldPulse/espionage/espionageGauntlet.js src/domain/worldPulse/espionage/espionageMath.js src/domain/corruption.js 
+covertCompetence01 | 3 | src/domain/worldPulse/espionage/espionageGauntlet.js src/domain/worldPulse/espionage/espionageMath.js src/domain/worldPulse/espionage/espionageMissions.js 
+advanceReligionStates | 7 | src/domain/worldPulse/religiousContest.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/patronFall.js 
+strengthByRef | 2 | src/domain/worldPulse/religiousContest.js src/domain/worldPulse/religionState.js 
+faithCarriersOut | 2 | src/domain/worldPulse/religiousContest.js src/domain/worldPulse/moralInstitutionPressure.js 
+attemptEntry | 4 | src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/religiousContest.js src/domain/worldPulse/patronFall.js 
+standingFor | 4 | src/domain/worldPulse/sacredClaim.js src/domain/worldPulse/lineageClaim.js src/domain/worldPulse/religionState.js 
+resolvePatronContest | 5 | src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/religiousContest.js src/domain/worldPulse/patronFall.js 
+stanceOf | 2 | src/domain/worldPulse/deityStanceLane.js src/domain/worldPulse/deityStance.js 
+deityTemper | 17 | src/pdf/lib/liveWorld.js src/components/compendium/CustomContent.jsx src/domain/magicProfile.js 
+effectiveToleranceOf | 3 | src/domain/worldPulse/institutionTolerance.js src/domain/worldPulse/tradeWar.js src/domain/worldPulse/moralInstitutionPressure.js 
+patronConviction | 2 | src/domain/worldPulse/institutionTolerance.js src/domain/worldPulse/moralInstitutionPressure.js 
+monsterRaiderGate | 1 | src/domain/worldPulse/stressorGates.js 
+religiousConversionGate | 2 | src/domain/worldPulse/religiousContest.js src/domain/worldPulse/stressorGates.js 
+STRESSOR_SPAWN_GATES | 2 | src/domain/worldPulse/stressors.js src/domain/worldPulse/stressorGates.js 
+banditryLoss | 5 | src/domain/spatial/supplyShipments.js src/domain/spatial/embattlement.js src/domain/spatial/commodityFlow.js 
+routeDangerLevel | 4 | src/domain/spatial/supplyShipments.js src/domain/spatial/embattlement.js src/domain/spatial/commodityFlow.js 
+roadDeathRate | 1 | src/domain/spatial/migration.js 
+TAG_EVENTS | 1 | src/domain/worldPulse/peopleLedger.js 
+CONSERVATION_ENDPOINTS | 1 | src/domain/worldPulse/peopleLedger.js 
+TERRAIN_CLASSES | 4 | src/domain/realm/placementRaster.js src/domain/spatial/spatialCost.js src/domain/worldPulse/steadingTopography.js 
+hopWeeks | 37 | src/lib/spatialUsage.js src/store/mapSlice.js src/domain/certification/subsystemRowsCompact.js 
+SIEGE_VERDICT_BANDS | 4 | src/domain/worldPulse/warSiegeVerdict.js src/domain/worldPulse/espionage/espionageGauntlet.js src/domain/worldPulse/habitForkRegistry.js 
+RELATIONSHIP_TYPES | 1 | src/store/neighbourSlice.js 
+applyFactionPatch | 7 | src/domain/certification/subsystemRowsWaves.js src/domain/worldPulse/applyWorldPulseFactionRoster.js src/domain/worldPulse/brokerageServicesPlant.js 
+GOVERNMENT_BY_ARCHETYPE | 1 | src/domain/worldPulse/factionCompetition.js 
+applyRelationshipPatch | 23 | src/domain/certification/couplingRegistryEncounters.js src/domain/certification/subsystemRowsEncounters.js src/domain/certification/couplingRegistryWar.js 
+accrueSaleGrievance | 1 | src/domain/worldPulse/sovereigntyTransfer.js 
+missionize | 4 | src/domain/worldPulse/settlementStrategy.js src/domain/worldPulse/scoringObjective.js src/domain/worldPulse/strategyMoves.js 
+MIGRATION_REFUSALS | 1 | src/domain/worldPulse/demographicsMigration.js 
+CAPTOR_CHOICES | 1 | src/domain/worldPulse/ransomChoices.js 
+HOME_ANSWERS | 1 | src/domain/worldPulse/ransomChoices.js 
+homeRansomAnswer | 1 | src/domain/worldPulse/ransomChoices.js 
+captorRansomChoice | 2 | src/domain/worldPulse/ransomChoices.js src/domain/worldPulse/espionage/espionageGauntlet.js 
+ABANDONMENT_GRIEVANCE_KIND | 3 | src/domain/npc/livedExperienceSources.js src/domain/npc/livedExperienceCatalog.js src/domain/worldPulse/ransomChoices.js 
+writeHabits | 3 | src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/emigreErrand.js src/domain/worldPulse/habit/habitLedger.js 
+pruneRows | 1 | src/domain/worldPulse/habit/habitLedger.js 
+seatAdjusted | 1 | src/domain/worldPulse/habit/habitCurve.js 
+applyCredit | 1 | src/domain/worldPulse/habit/habitCurve.js 
+SEAT_SHOCK_KEEP | 1 | src/domain/worldPulse/habit/habitCurve.js 
+route_menaced | 1 | src/domain/worldPulse/habit/habitVocabulary.js 
+stores_thin | 1 | src/domain/worldPulse/habit/habitVocabulary.js 
+rival_ascendant | 1 | src/domain/worldPulse/habit/habitVocabulary.js 
+applyInstitutionLifecycleOutcome | 3 | src/domain/worldPulse/tierOutcomeApply.js src/domain/worldPulse/institutionLifecycle.js src/domain/worldPulse/applyWorldPulse.js 
+criminalPower | 3 | src/data/institutionalCatalog.js src/data/spatialData.js src/generators/power/rulingStructure.js 
+INSTITUTION_ROLES | 1 | src/domain/roles/roleCatalog.js 
+FACTION_SEAT_ROLES | 1 | src/domain/roles/roleCatalog.js 
+faithProximity | 2 | src/domain/worldPulse/generosityKernel.js src/domain/worldPulse/sacredClaim.js 
+UPKEEP_LEDGERS | 1 | src/domain/worldPulse/treasury.js 
+ROUTE_GRADES | 4 | src/domain/edit/worldConditions.js src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/routeNetworkDecay.js 
+ROUTE_MODES | 2 | src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/routeNetworkLedger.js 
+routeEdgeId | 4 | src/domain/worldPulse/routeNetworkCharterBypass.js src/domain/worldPulse/routeNetworkCharter.js src/domain/worldPulse/routeNetworkGenesis.js 
+withRouteEdges | 3 | src/domain/worldPulse/routeNetworkGenesis.js src/domain/worldPulse/routeNetworkLedger.js src/domain/worldPulse/routeNetworkCharter.js 
+HIDDEN_PATH_KINDS | 3 | src/domain/worldPulse/espionage/espionageDoctrine.js src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/envoyDiplomacy.js 
+TRAVELLER_KINDS | 1 | src/domain/worldPulse/routeNetworkConsumers.js 
+mayUseHiddenPaths | 4 | src/domain/certification/couplingRegistryEspionage.js src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/routeNetworkConsumersTransit.js 
+gradeLegMultiplier | 1 | src/domain/worldPulse/routeNetworkConsumersTransit.js 
+HIDDEN_PATH_SLOWDOWN | 3 | src/domain/worldPulse/npcCirculationTransit.js src/domain/worldPulse/routeNetworkConsumersTransit.js src/domain/worldPulse/npcConsequencesTuning.js 
+defenseLedger | 7 | src/domain/capacityModel.js src/domain/governanceLedger.js src/domain/magicLedger.js 
+computeDefenseScores | 4 | src/generators/defenseGenerator.js src/domain/capacityModel.js src/domain/prose/wiringCensus.js 
+withActiveCondition | 15 | src/domain/activeConditions.js src/domain/crisisLifecycle.js src/domain/region/propagation.js 
+withoutActiveCondition | 8 | src/store/campaignRegionalSlice.js src/domain/activeConditions.js src/domain/events/mutateEntities.js 
+CONDITION_ARCHETYPE_TEMPLATES | 6 | src/domain/activeConditions.js src/domain/factionRelationshipUpdate.js src/domain/worldPulse/pulseKernel.js 
+DEFENSE_ARCHETYPES | 1 | src/domain/worldPulse/pressureModel.js 
+applyConditions | 3 | src/domain/causalState.js src/domain/worldPulse/candidateEvents.js src/domain/worldPulse/settlementLifecycleKernel.js 
+isWorldAuthoredCondition | 1 | src/domain/worldPulse/reconcile.js 
+readBeliefRelationship | 7 | src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/supplyWebWarfare.js src/domain/worldPulse/peaceTerms.js 
+applyLegitimacyDeltasToUpdates | 11 | src/domain/certification/subsystemRowsSeat.js src/domain/certification/subsystemRowsCoin.js src/domain/worldPulse/seatIntervention.js 
+deityLegitimacyTarget | 2 | src/domain/worldPulse/religiousContest.js src/domain/worldPulse/religionLegitimacy.js 
+mercPresenceOf | 2 | src/domain/spatial/navalLayer.js src/domain/worldPulse/mercenaryMarket.js 
+applyForeignExposureBlowback | 6 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/espionage/infiltrationDepth.js src/domain/worldPulse/espionage/infiltrationDrift.js 
+applyHomeWarCosts | 2 | src/domain/worldPulse/warHomeCosts.js src/domain/worldPulse/warDeployment.js 
+TERM_CATALOG | 16 | src/domain/certification/tradeConvergenceContract.js src/domain/worldPulse/peaceTermsSale.js src/domain/events/realmManifest.js 
+localPiety01 | 1 | src/domain/worldPulse/piety.js 
+fnv1a32 | 55 | src/kernel/detMath.js src/kernel/proseHash.js src/lib/importReconciliationAdmission.js 
+weightedPick | 9 | src/kernel/prng.js src/kernel/rngContext.js src/data/worldFactOptions.js 
+applyGuildToSettlement | 2 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/thievesGuild.js 
+blockadeInterceptsSupply | 3 | src/domain/worldPulse/supplyKernel.js src/domain/spatial/navalLayer.js src/domain/worldPulse/navalKernel.js 
+resolveFieldBattle | 8 | src/domain/spatial/armyTransit.js src/domain/spatial/navalLayer.js src/domain/worldPulse/habitForkRegistry.js 
+RansomRec | 3 | src/domain/npc/livedExperienceCatalog.js src/domain/roads/thirdPartyRansom.js src/domain/roads/state.js 
+seasonalPathCost | 2 | src/domain/spatial/embattlement.js src/domain/spatial/distanceRead.js 
+supplyBand | 1 | src/domain/display/warResolve.js 
+subsystemRowsVirtual | 15 | src/domain/certification/subsystemRowsWaves.js src/domain/certification/subsystemRowsOps.js src/domain/certification/subsystemRowsSeat.js 
+registerEngagementKind | 0 | 
+selectStrikeTargets | 2 | src/domain/worldPulse/calamityKernel.js src/domain/spatial/calamity.js 
+routeReceipts | 6 | src/domain/realm/placementRaster.js src/domain/spatial/distanceRead.js src/domain/spatial/spatialDigest.js 
+EMBATTLED_THRESHOLD | 4 | src/domain/roads/state.js src/domain/roads/seaRoads.js src/domain/roads/knownWorld.js 
+settlementFundingBand | 0 | 
+withTickedConditionDurations | 2 | src/domain/activeConditions.js src/domain/timeProgression.js 
+withExpiredConditionsRemoved | 3 | src/domain/activeConditions.js src/domain/timeProgression.js src/domain/display/stateProse/stressorsStateProse.js 
+hopOf | 1 | src/domain/worldPulse/routeNetworkConsumers.js 

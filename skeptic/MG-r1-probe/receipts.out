@@ -1,0 +1,24 @@
+# MG-r1 read receipts at master 81f1cd963 (rg -n, read-only)
+## kernel derives strength/supply per tick from the deployment; battle losses written to the deployment
+578:    groundAdvantage01: clamp01(1 - rec.position01),
+579:    fatigue01: rec.position01,
+673:    const strength = Math.max(0, num(dep.currentEffectiveStrength, 0));
+674:    const supplyQuality = clamp01(num(dep.supplyIntegrity, num(dep.deployedQuality, 1)));
+946:      if (nextDeployments[id]) nextDeployments[id] = { ...nextDeployments[id], currentEffectiveStrength: mauled[id] };
+## currentRegion rounding; detectCollisions body
+391:  const idx = Math.min(path.length - 1, Math.round(record.position01 * (path.length - 1)));
+400:  const idx = Math.min(path.length - 1, Math.round(record.position01 * (path.length - 1)));
+553:        if (rb.has(region)) { shared = region; break; }
+## person stage host has no rng
+rng occurrences in envoyPulse.js: 0
+## envoy plan built whole at dispatch
+291:  while (cursor !== to && legs.length < maxLegs) {
+300:    const duration = livedLegTicks({ worldState, fromId: cursor, hop: reading.hop, season });
+## paragon/wanderer leg priced without the grade ladder
+141:    gradeMultiplier: hop.hidden ? NPC_CONSEQUENCES_TUNING.HIDDEN_PATH_SLOWDOWN : 1,
+## WarTab believed idiom is OUR OWN column
+18: *     The believed position of our own column derives from the transit record's
+434:    // §805 UNITS: our own column's BELIEVED position, derived from the transit
+## stormMultOf is a >=1 cost multiplier; sharedFateLoss is the sea-battle loser's fate
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/worldPulse/navalKernel.js:469:        const fate = sharedFateLoss(loser.cargoStrength, margin);
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/navalLayer.js:277:  return typeof v === 'number' && Number.isFinite(v) && v >= 1 ? v : 1;

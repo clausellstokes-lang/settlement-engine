@@ -1,0 +1,120 @@
+##### crownReachAt
+  DESIGN_FP_ARCH_BD.md (1)
+    L246: tion is the home's land; for a crown's office under THE BANNER, the kingdom's ways by the crown's reach (RULINGS-ROUND3 §F; PL's `crownReachAt`). `TRAIL_LEARNED` gains the derived word `by_office` (a read's source tag, never a stored `how`). - **Its readers, e
+  DESIGN_FP_ARCH_CH.md (5)
+    L411: , or, when the employer is a polity's root, the members where PL's crown reach is above zero (PL's ONE reach read, SEAMS-r1-12 — `crownReachAt(worldState, snapshot, rootId, memberId, observerId) → { share01, liegeId, tier }`, `DESIGN_FP_ARCH_PL.md` §2, minted 
+  DESIGN_FP_ARCH_PL.md (21)
+    L84: t `frayed` the paramount's share is zero and the partition is bit-identical to a liege-only book. The quantity is served once as `crownReachAt` (§2): CH's crown retainer, PT's crown backing and the crown's ban read it. Frozen `warTermination.js` takes zero lin
+  DESIGN_FP_ARCH_PR.md (12)
+    L131: he home's minimum (RULINGS-ROUND5 B.8, §10.3 (c)) [CURED 2026-10-19 (fp-final r5) — B.8 · PR-X1: the r4 law read the crown's own `crownReachAt` share, under which no sub-vassal ever lent]. Where the crown's OWN hold reads STRONG (`staunch`, `unbroken`: `polity
+  DESIGN_FP_ARCH_PT.md (9)
+    L166: T-r1-8]. - `partyReach(worldState, backing, settlementId, snapshot) → { inside: boolean, weight01, band }` — §10.1, reading PL's `crownReachAt` for the polity roles. - `netEffectAt(worldState, settlementId, tick) → { verdict, voices: [{ key, band, weight, reas
+  DESIGN_FP_COHERENCE_FOLD.md (5)
+    L326: er: the ban, from truth (`banished_from_here`) → the crown's ban (`polity_ban`, read by the member's believed hold wherever PL's `crownReachAt(…).share01` is above zero: `staunch` or `unbroken` refused · `shaky` under watch · `frayed` no weight — the threshold
+##### seatChangedSince
+  DESIGN_FP_ARCH_CH.md (6)
+    L566: ted lapse at the next weekly pass through the same lift (the owner's "a new ruler at a succession"). THE READ is PL's ONE shared `seatChangedSince(worldState, settlementId, since)` over both landed tails (`powerStructure.previousGovernments` — coups, conquest,
+  DESIGN_FP_ARCH_PL.md (12)
+    L124: n §4.6 is the landed `kernel/proseHash.js :: fnv1a32` (`export function fnv1a32(str) {`), named so no builder mints a second.] - `seatChangedSince(worldState, settlementId, since)` → `{ changed, via: 'transfer' | 'seat' | null, atTick }` — THE ONE SHARED READ 
+  DESIGN_FP_ARCH_PT.md (11)
+    L8: 21 THE CURE RECORD under the chair's rulings (the round-1 re-rulings PT-r1-1, -2, -3 and the 05:1x ADDENDUM's `party_voiced` and `seatChangedSince` are executed). The compile's two ⛔ STOPS were RULED by the chair (RULINGS-AFTER-COMPILE): PT-S1 (a road closed b
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L308: 2 verdict removals, DM KILL/ASSIGN and underworld captures never write (`treatySuccession.js`'s header) | CHAIR: ONE shared read `seatChangedSince(settlementId, tick)` in the polity module, reading BOTH landed tails (`powerStructure.previousGovernments` and `s
+##### seat_change
+##### war_concluded
+  DESIGN_FP_ARCH_PS.md (1)
+    L128: , which is the record the next answer reads. A commander carries the deed on its own fame only when the generals land (RN's slot `war_concluded` neighbour, C4), a paragon captain rides with the army (CH's war seam, C4), or the unit is a RETAINED CORPS (its own
+##### RN-S2
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L480: s, the voices; two virtual flags (`renownEnabled`, `renownLeansEnabled`); four STOPs (RN-S1 RULED: THE ONE PERSON STAGE, §3.1.22; RN-S2/S3 slot C4; RN-S4 slot C1) | "In Varn the lords curse the party's name for saving Kell, their old rival; the commons say it 
+##### RN-S3
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L964: ns keep their volume's chain as their slot (RN-2/RN-5 → C11; CH-4..CH-9 → C12, CH-0b the owner's hand; PT-3..PT-7 → C13); RN-S2 · RN-S3 → C4, RN-S4 → C1, PT-S1 → C7, PT-S2 → C1 | — | — |  Mechanisms the readers judged CUT-TO-SENTENCE are NOT cut (skeptic S4 B5
+##### RN-S4
+  DESIGN_FP_COHERENCE_FOLD.md (4)
+    L161: e of power and the person lens out of the seat books; the priest's lean in the faith contest; the envoy's lean at `reserveFor`, ⛔ RN-S4, slot C1); CH (the champions, `DESIGN_FP_ARCH_CH.md`) a CARRIER across all seven — FAITH · WAR · GRAMMAR · INFO · POPULATION
+  DESIGN_FP_SPINE.md (1)
+    L168: e of power and the person lens out of the seat books; the priest's lean in the faith contest; the envoy's lean at `reserveFor`, ⛔ RN-S4, slot C1); CH (the champions, `DESIGN_FP_ARCH_CH.md`) a CARRIER across all seven — FAITH · WAR · GRAMMAR · INFO · POPULATION
+##### renownLeans
+  DESIGN_FP_ARCH_CH.md (4)
+    L549: ud` ⇒ `refused`; the party: PT's `netEffectAt` at `enmity` or worse ⇒ `refused`. The notoriety projection into this step is RN's `renownLeansEnabled` (RN §19); without it the step is skipped [CURED 2026-10-18 (fp-final r1) — CH-r1-33]. 5. **Watch** — no refusa
+  DESIGN_FP_ARCH_PT.md (4)
+    L410: cesEnabled` for bans and person actors; CH's flags for `party_visit` (a company's visit: `paragonCorpsEnabled` with WC-10); RN's `renownLeansEnabled` for `party_voiced` (+ persons for a person's voice; + CH's `paragonCorpsEnabled` with WC-10 for a company's; a
+  DESIGN_FP_COHERENCE_FOLD.md (5)
+    L480: the party's credibility holder; fame, regard, inherent value and the two lenses, the voices; two virtual flags (`renownEnabled`, `renownLeansEnabled`); four STOPs (RN-S1 RULED: THE ONE PERSON STAGE, §3.1.22; RN-S2/S3 slot C4; RN-S4 slot C1) | "In Varn the lord
+##### partyView
+  DESIGN_FP_ARCH_PT.md (10)
+    L61: a fact about the door, never a force upon the party. The simulation stays indifferent to the party; the DM's VIEW puts it first (`partyView`, §12). [CURED 2026-10-18 (fp-final r1) — PT-r1-27: the unstated gloss "as its object of force" is replaced by the rulin
+  DESIGN_FP_COHERENCE_FOLD.md (4)
+    L826: .1 still prints `kept · told · shown` and takes its bracket at RN's disposition round (`briefs/RULINGS-AFTER-COMPILE.md` RN) | | `partyView` · `presentAt` · `lastHeard` (PT) | the DM's party window; the "party is here" toggle; where word last placed the party 
+##### party_pledge_due
+  DESIGN_FP_ARCH_PT.md (9)
+    L177: _offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_slander · party_gate · party_banned · party_pledge_due · party_visit · party_voiced · backing_voided · backing_repudiated` | all FREE (0 src · 0 tests · 0 ledger docs; 
+  DESIGN_FP_COHERENCE_FOLD.md (6)
+    L279: · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_gate · party_visit` STANDING; `party_pledge_due · party_slander · party_banned · backing_voided · backing_repudiated` CLIMAX; every party kind's default "nothing
+  DESIGN_FP_SPINE.md (1)
+    L248: · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_gate · party_visit` STANDING; `party_pledge_due · party_slander · party_banned · backing_voided · backing_repudiated` CLIMAX; every party kind's default "nothing
+##### hunt_won
+  DESIGN_FP_ARCH_BD.md (17)
+    L511:  ACT, ONE DEED: a patrol's clash with a body is PR's `patrol_clash`, a site's verdict ST's `site_verdict`, a hunt's success CH's `hunt_won` (B.5, §9.11), never a `body_act` beside them; a NAMELESS body and a beast mint nothing as doers. - **THE VALUE ROWS BD R
+  DESIGN_FP_ARCH_CH.md (25)
+    L9: · 41 · 46: the retainer kind `leads`, the bounty as a call and an offer, the paragon captive's slot, the hunt led — `hunt_body`, `hunt_won`, the champion arm of `hunt_taken` — the warden archetype and the trail arm, the one clandestine-hire idiom for three tie
+  DESIGN_FP_ARCH_PR.md (10)
+    L301:  ONE DEED (RULINGS-ROUND5 B.5: "the hearing's OWNER mints: a LED hunt's success is ONE deed minted by the hunt's own door — CH's `hunt_won` at the mission's close, doer the LEADER (`ledBy`), target the body; PR's `patrol_clash` mints NO deed for a led hunt (it
+  DESIGN_FP_ARCH_PT.md (7)
+    L214: 's CLAIM of a bounty: the claim IS this one deed (RULINGS-ROUND5 B.5, "no third deed"; the party takes no `hunt_taken`, so no CH `hunt_won` mints beside it) (§7.2, §8.6); **`party_made_known_trail`** — NOT a deed — when `TRAIL_KNOWN` with `party` ON reveals a 
+  DESIGN_FP_ARCH_ST.md (4)
+    L459: LED hunt (a paragon or the public-security office-holder the card names leading — RN §3.1, BD's route; CH's `hunt_body`) is CH's `hunt_won` [CURED 2026-10-19 (fp-final r6) — ST-r5-verify note 2] and mints no `site_verdict` beside it; `site_verdict`'s slot list
+  DESIGN_FP_COHERENCE_FOLD.md (6)
+    L900: nquoted word hits only, a different construction); as `cure/D-PS-r4.md` §5 lists them | | CH round-4 | `hunt_body` (a purpose) · `hunt_won` (a deed) · `leads` (a retainer kind, a drop-when-empty sub-field — OD-CH-44) · `isWardenParagon` · `exertion.settlementI
+##### warden_attempted
+  DESIGN_FP_ARCH_BD.md (2)
+    L612:  effect BD's own `bribe` row — the court's stance one step toward `tolerated` at its next `body_stance` fork), its ONE deed CH's `warden_attempted` (doer the named gang, target the warden; CH §2.2b's two rows); "or to KILL him" stays the gang's CHOICE, never a
+  DESIGN_FP_ARCH_CH.md (13)
+    L228: der as doer and CH's `hunt_won` — and the leader's fame counted twice; now ONE door, the hunt's own, its mint named and keyed] · `warden_attempted` (a body's attempt on a WARDEN — a bribe or a strike — heard as an arm of §11's road arm; the doer the body by it
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L586: `road (a, b)` or `settlement`, verdicts `withstood · bribed` (`bribed` only where the wages go unpaid), default `withstood`; one `warden_attempted` deed (a CH-registered `paragon_act`, its doer a body) at the card's close; the warden's death is never a verdict
+##### legend_recorded
+  DESIGN_FP_ARCH_CH.md (11)
+    L157: | `unknown · settlement · regional · realm` (RN's `FAME_SCOPES`) | the legend that precedes it, minted ONCE at introduction as a `legend_recorded` deed (§2.2b) and decaying like any deed | §3, RN | | `character.axes` | the W-LIVES chart (the deity's `character
+  DESIGN_FP_COHERENCE_FOLD.md (2)
+    L838: he bare word | | CH round-1 tokens | `gateDefault` · `opposed_creed` · `polity_ban` · `let_be` · `exerted · faltered · voided` · `legend_recorded` · `creedRef` · `renown` (an authored field on the paragon's definition, RN's word in RN's meaning) · `paragon_emp
+##### site_verdict
+  DESIGN_FP_ARCH_BD.md (1)
+    L511: ARMY's sack of a flock (§9.8 (c)). ONE ACT, ONE DEED: a patrol's clash with a body is PR's `patrol_clash`, a site's verdict ST's `site_verdict`, a hunt's success CH's `hunt_won` (B.5, §9.11), never a `body_act` beside them; a NAMELESS body and a beast mint not
+  DESIGN_FP_ARCH_ST.md (10)
+    L459: READS — a cleared den is a deed through the doors that already mint (PT's for the party; an engine court source is RN's slot row `site_verdict`, §8); ONE HUNT, ONE DEED (RULINGS-ROUND5 B.5): a site contest won by a LED hunt (a paragon or the public-security of
+##### patrol_catch
+  DESIGN_FP_ARCH_PR.md (3)
+    L329: work) is a named traveller: §8's encounter, CH's ban/gate words on a catch, and a deed through RN's door when the catch is made (`patrol_catch` source row, §9.3). A patrol away (looking, converging) catches nothing (its stretch reads 0). A smuggler's RUN ON A 
+##### passage_kept
+  DESIGN_FP_ARCH_PS.md (6)
+    L128:  passage's ending mints a deed through RN's slot row `passage` (doer the mover's court; witnesses the territories crossed; kinds `passage_kept · passage_breached · passage_trespassed` — never RN's or PT's `kept`/`broken`, which RULINGS-ROUND2 A.3 ruled against
+  DESIGN_FP_COHERENCE_FOLD.md (1)
+    L908:  kinds `land_gate · harbour · circle · open_water`; `PASSAGE_ENVOY_VERDICTS` `stopped · escorted · turned_back`; RN's deed kinds `passage_kept · passage_breached · passage_trespassed`; `passage_barred` (a recall cause); the unit-key prefixes `army:` · `column:
+##### body_act
+  DESIGN_FP_ARCH_BD.md (16)
+    L511: each an incident on the pair (≤ 8, the pair-state idiom); where the body is NAMED (BD23) the act is ALSO a deed on RN's ledger — `body_act`, its DOER the NAMED BODY (`{ kind: 'body', id }`, keyed `g:<bodyId>` or its creed's `creed:<deityRef>`), its leading par
+  DESIGN_FP_ARCH_PR.md (6)
+    L348: on riding as `ledBy` (CH's `paragon.leads` at the act's tick — the one leader record, B.12) — ONE doer per deed and never also a `body_act` (RN §3.1: "ONE ACT, ONE DEED … a patrol's clash with a body is PR's `patrol_clash` … never a `body_act` beside them"); a
+  DESIGN_FP_COHERENCE_FOLD.md (3)
+    L896: D) | `g:<bodyId>` (a NAMED gang, holder and subject; a conclave keys its creed `creed:<ref>`, a beast and a nameless body none); `body_act` (a deed source; a slot row with its contract, C17); `ledBy` (a persisted field on the deed, REFINED, vetoable — OD-RN-47
+##### Why panel
+  DESIGN_FP_ARCH_CH.md (1)
+    L137: Kell and has not taken up arms"); the reasons, bands, odds and habits wait for a look on purpose (the dossier's paragon page, the Why panel). What builds immersion is shown behind toggles: a paragon's piece on the map and its condition words on that piece — se
+  DESIGN_FP_ARCH_EC.md (27)
+    L562: asusCommerciiEnabled` (TR-1 mount, EXISTING flag); `believedMarketsEnabled` (TR-3 forwarding, EXISTING) | existing | EC-1 for the Why panel's condition joins; TR-1's own flag; TR-3's own flag (+ `commodityFlowEnabled`) | YES | | EC-3 THE LADDER | `allocationLa
+  DESIGN_FP_ARCH_MN.md (10)
+    L183: ING: no field and no line (derived state, re-minted with the docket — §3.5 item 5; no Herald field, so no allowlist edit), so the Why panel says it in the world's words only when it is true: "Kell is already under the Ashen Host's siege; Merewick's war adds no
+  DESIGN_FP_ARCH_PL.md (1)
+    L433: : alignment-empty (a name). `causedBy`: the naming event.  **PL-2 — THE HOLD.** `polityHoldOf` and its bands; `crownReachAt`; the Why panel ON SCRUTINY ("the crown's hold is shaky: its strongest vassal outweighs it, and it did not come when Brenmoor's host bes
+  DESIGN_FP_ARCH_PS.md (4)
+    L132:  The SURFACE shows the deed in the world's words ("Ashford let Kell's column through on the river road"); the SCRUTINY layer (the Why panel, the pair card, the hearing card's reasons) shows the rung, the tolerance band, the size band, the terms and the reasons
+  DESIGN_FP_ARCH_ST.md (1)
+    L705: behind the map's site toggle and on the dossier; the funding band, the distance bands and each lean's term are scrutiny only (the Why panel, the cause walk); the machinery (the factors, the caps) is never pushed.   ---  ## §15 THE CURE RECORD  ### Round r2 (20
+  DESIGN_FP_ARCH_TR.md (1)
+    L408: BED BY DESIGN_FP_ARCH_EC.md: PARTIALLY, as EC-13: MONOPOLY keeps THIS wave's definition (§3.2.10a — EC-8's processor count is the Why panel's `competition` read, never the ending); the holder is a `held` partition on the origin's `commodityStocks` record (§3.2
+  DESIGN_FP_COHERENCE_FOLD.md (8)
+    L108: ice (what happened to whom), never the machinery (bands, weights, odds, holds, mechanisms); the WHY is available on SCRUTINY (the Why panel, the causal walk, receipts) when the DM asks, never pushed onto the surface. Three layers: SURFACE (emergent outcomes) ·
+  DESIGN_FP_TRADE.md (2)
+    L948: BED BY DESIGN_FP_ARCH_EC.md: PARTIALLY, as EC-13: MONOPOLY keeps THIS wave's definition (§3.2.10a — EC-8's processor count is the Why panel's `competition` read, never the ending); the holder is a `held` partition on the origin's `commodityStocks` record (§3.2

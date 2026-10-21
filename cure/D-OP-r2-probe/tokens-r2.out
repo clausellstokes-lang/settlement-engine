@@ -1,0 +1,8 @@
+# D-OP-r2 token census (zsh rg function; rg -w -i -l --no-ignore; files) Tue Oct 20 15:49:07 CDT 2026
+jailerOf         src:0    tests:0    mdocs:0    ldocs:0   
+jailer           src:1    tests:0    mdocs:0    ldocs:0   
+toldBy           src:0    tests:0    mdocs:0    ldocs:0   
+rosterKeyOf      src:0    tests:0    mdocs:0    ldocs:0   
+ransom_demand    src:0    tests:0    mdocs:1    ldocs:0   
+roads_ransom     src:0    tests:0    mdocs:0    ldocs:0   
+telling          src:76   tests:51   mdocs:47   ldocs:75  

@@ -23,4 +23,7 @@ echo "exit=$EXIT" >> "$LOG"
 grep -E 'Test Files|Tests  |exit=' "$LOG" | tail -4
 # restore the worktree's docs so the next run starts clean
 git checkout --quiet -- docs/ 2>/dev/null
+# and remove the UNTRACKED copies the loop above placed (the new FP volumes are not on master): a census seat grepping
+# the worktree's docs/ must never hit a staging copy (hazard found by D-FOUR-r4, 2026-10-20)
+git clean -fq -- docs/ 2>/dev/null
 exit $EXIT

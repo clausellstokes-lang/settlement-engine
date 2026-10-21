@@ -1,0 +1,12 @@
+{
+ "verify": false,
+ "lanes": [
+  {
+   "id": "LANE-C-seams",
+   "effort": "high",
+   "files": "DESIGN_FP_ARCH_PS.md (insertions-only) · DESIGN_FP_ARCH_MG.md · DESIGN_FP_ARCH_OP.md · DESIGN_FP_ARCH_BD.md · DESIGN_FP_ARCH_WC.md (insertions-only) · DESIGN_FP_ARCH_WS.md · DESIGN_FP_ARCH_CH.md (ONE cite line beside lane B's E.5 bracket — read it as it stands first) — in this order, one at a time",
+   "inputs": "RULINGS-P6 §I WHOLE (I.1 the wing's bank has ONE home — MG's wing row; PS l.152's bracket superseded by a dated bracket; MG §3.2 (0)(c) states it once; WC l.97's Arc A read — SEAMS-P6-1 and -8; I.2 the precedence sentence in OP §10.1 and BD §9.10 — SEAMS-P6-2; I.3 the rescue errand rides the `covert` class — OP §9/§15 and CH's cite — SEAMS-P6-3; I.4 the minors: WS §4.2 strikes 'and C5' — SEAMS-P6-4; MG §11's declared same-seed-shift sentence + an OD-MG row — SEAMS-P6-5; OP's deposit rowKind `debt` → `rescue_debt` at every mention — SEAMS-P6-6) and skeptic/SEAMS-P6.md WHOLE (the findings' receipts and cures; its ROUTES section). Every change is a dated bracket beside the row it amends; re-run no probe; keep every existing bracket.",
+   "others": "nobody else writes these seven files now (lane B and its verifier have returned); the fold, the spine and CN are P7's — route anything for them (SEAMS-P6-7 LG's `feint`; the registry rows' precedence note; `rescue_debt`'s register row; the two PL halves)"
+  }
+ ]
+}

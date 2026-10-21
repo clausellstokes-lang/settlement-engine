@@ -1,0 +1,12 @@
+src/domain/worldPulse/treasury.js raw=1303 eff=438
+src/domain/worldPulse/commonsVoiceKernel.js raw=366 eff=214
+src/domain/worldPulse/stressorDynamics.js raw=999 eff=759
+src/domain/rulingPower.js raw=690 eff=288
+src/domain/worldPulse/momentum.js raw=1298 eff=633
+src/domain/worldPulse/stressorGates.js raw=1055 eff=609
+src/domain/worldPulse/coup.js raw=237 eff=126
+src/domain/rulingPowerCoup.js raw=283 eff=121
+src/domain/worldPulse/assizeKernel.js raw=460 eff=281
+src/domain/worldPulse/treasuryNews.js raw=196 eff=92
+src/domain/worldPulse/generosityUpdates.js raw=151 eff=90
+src/domain/worldPulse/demographicsPushPull.js raw=644 eff=238

@@ -1,0 +1,6 @@
+(1) dark READ   foreignGuestHoldsOf ids: hold:a
+    normalizeForeignGuestHold(bodyHeld) -> null
+(2) dark WRITE  an envoy hold opened beside it; persisted ids: hold:a,hold:b
+    body-held row survives the write: false
+(3) master dedupe (id · npcId · errandId) keeps: (none — both erased: String(undefined) counted twice)
+    cure dedupe (errandId only when present; captiveId unique) keeps: hold:x,hold:y

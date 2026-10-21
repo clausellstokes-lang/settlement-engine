@@ -1,0 +1,44 @@
+## readWarSeatBooks( call sites
+src/domain/worldPulse/warCoalitionRefusal.js:88:  const books = readWarSeatBooks({
+src/domain/worldPulse/warPeaceDecision.js:112:  const books = readWarSeatBooks({ worldState, snapshot, actorId, opponentId });
+src/domain/worldPulse/armyTransitKernel.js:677:      ? readWarSeatBooks({ worldState, snapshot, actorId: armyId, opponentId: targetId })
+src/domain/worldPulse/sovereigntyIntent.js:264:  const books = readWarSeatBooks({
+src/domain/worldPulse/envoyInterceptionStage.js:420:  const books = readWarSeatBooks({
+src/domain/worldPulse/warCoalitionDecision.js:123:        const books = readWarSeatBooks({ worldState, snapshot, actorId: partyId, opponentId: episode.enemyId });
+src/domain/worldPulse/peaceTermsCoalition.js:204:  const books = readWarSeatBooks({ worldState, snapshot, actorId: ally, opponentId: deserter });
+src/domain/worldPulse/warTermination.js:643:    const books = readWarSeatBooks({
+src/domain/worldPulse/warTermination.js:653:    const opponentBooks = readWarSeatBooks({
+src/domain/worldPulse/envoyNegotiationPictureBuilder.js:121:  const books = readWarSeatBooks({ worldState, snapshot, actorId, opponentId });
+## armyTransit call
+677:      ? readWarSeatBooks({ worldState, snapshot, actorId: armyId, opponentId: targetId })
+678-      : null;
+679-    const rawPriorHasIntent = Object.prototype.hasOwnProperty.call(rawPriorRec, 'envoyIntent');
+680-    const normalizedPriorIntent = rawPriorHasIntent
+## foreignBookFor gate
+src/domain/worldPulse/warSeatBooks.js:471:  if (simulationRules.foreignSeatEnabled !== true) return null;
+469:function foreignBookFor(state, snapshot, actorId) {
+471:  if (simulationRules.foreignSeatEnabled !== true) return null;
+## dispositionChannels
+src/domain/worldPulse/dispositionChannels.js:55: * The treaty mover resolves after the kernel's early outcome fold. Compose the
+src/domain/worldPulse/dispositionChannels.js:62:export function advanceTreatiesWithDisposition(args) {
+## applyPulseMover
+src/domain/region/wizardNews.js:1174:export function applyPulseMover(result, worldState, settlementUpdates, wizardNews, now, receiptSink = null) {
+src/domain/region/wizardNews.js-1175-  if (!result || !result.changed) return { worldState, settlementUpdates, wizardNews };
+src/domain/region/wizardNews.js-1176-  const news = Array.isArray(result.newsEntries) && result.newsEntries.length
+src/domain/region/wizardNews.js-1177-    // `now` is passed THROUGH, not `now ?? undefined`. That coercion was a workaround from
+src/domain/region/wizardNews.js-1178-    // the era when a null `now` was silently a wall clock: turning it into `undefined` at
+src/domain/region/wizardNews.js-1179-    // least made the fallthrough honest about being one. Now that null means NO STAMP, the
+src/domain/region/wizardNews.js-1180-    // coercion would convert an explicit "no stamp" back into a live clock read. pulseKernel
+src/domain/region/wizardNews.js-1181-    // — this function's only caller family — pins a real instant (assertNowPinnedInTest), so
+src/domain/region/wizardNews.js-1182-    // no production byte moves; what changes is that a null caller is now obeyed.
+src/domain/region/wizardNews.js-1183-    ? appendObservedWizardNewsEntries(wizardNews, /** @type {Parameters<typeof appendWizardNewsEntries>[1]} */ (result.newsEntries), { now }, receiptSink)
+src/domain/region/wizardNews.js-1184-    : wizardNews;
+src/domain/region/wizardNews.js-1185-  return {
+src/domain/region/wizardNews.js-1186-    worldState: result.worldState !== undefined ? result.worldState : worldState,
+## coupVerdictOutcomes call
+src/domain/worldPulse/pulseKernel.js:525:    ? coupVerdictOutcomes({
+src/domain/worldPulse/coup.js:89:export function coupVerdictOutcomes({ resolved = [], snapshot, rng, tick = 0, warExhaustion = {}, warDispositionEnabled = false, rules = {}, worldState = {} }) {
+## kernel order
+1578:  const applied = applyWorldPulseOutcomes({
+2442:    const armyTransit = advanceArmyTransit({
+2752:  const treatyAdvance = advanceTreatiesWithDisposition({

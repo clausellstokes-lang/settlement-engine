@@ -1,0 +1,43 @@
+## PR swept/weeks
+9:> **Status: COMPILED, DARK, NOT SCHEDULED; CURED FOUR TIMES (rounds 2b, 3a and 4a, 2026-10-18; round 5a, 2026-10-19).** Round 5a (`cure/D-PR-r5.md`; inputs `skeptic/PR-r4-verify.md` — its STOP row
+85:- **THE BODIES (`DESIGN_FP_ARCH_BD.md`, compiled 2026-10-18) and its routes to PR (`cure/L-BD.md` §4; BD §19's PR row)** — a body (a gang, a conclave, a beast) is a traveller the ONE encounter 
+205:- `bannerCoverOf(worldState, memberId, tick) → { weeks, seasonStartTick, swept }` [CURED 2026-10-19 (fp-final r6) — RULINGS-ROUND6 B.3: `swept` added, below] — THE BANNER'S SEASON LEDGER rea
+## BD huntOrderOf
+503:- **The GANG default (the town's law and alignment, the owner's "good purchase in evil chaotic settings"):** from the town's EFFECTIVE TOLERANCE (`institutionTolerance.js :: effectiveToleranceOf` — "how much cruelty (+) or disorder (+) it will 
+504:- **The hearing `body_stance` (§12):** minted the week the court's FORK would change the standing word — its inputs the default above, the body's deeds in the court's land (a raid, a sheltering, a fight against a gang), a `supplicate` (a concl
+## ST siteLedger callers PL
+193:- `believedDenOf(worldState, courtId, siteId, snapshot) → { known, holderRef?, mightBand?, sinceTick?, source? }` — what a COURT believes of a site held by a FORCE it may contest: an untied holder (a gang, a beast, a menace, an id-less authored gang) or a conclave whose creed the court holds
+337:4. **Dens and arrivals** (ST15): a FORCE arriving at an unheld site → `site_taken` — an untied force (a gang, a beast, a menace) or a CONCLAVE (a flock that takes an EMPTY site holds it as `faith`, L-BD 30: "can occupy a site"); at a held site → `site_siege` (a body or a menace attacking a
+400:Promotion of an ambient gang's den into a named menace is the DM's act (THE BODIES' `PROMOTE_BODY` staging MN's `RAISE_MENACE` with the body's place and might and the DM's name — MN §2, MN12's adoption road, BD16), never the engine's. ON PROMOTION THE SITE'S HOLDER BECOMES THE MENACE (A.2 —
+89:**ST6 — FUNDING IS A DERIVED BAND, NEVER A COIN STORE; THE DM'S BAND IS A CEILING.** [REFINED 2026-10-18 (fp-final) — the brief's "the ONE upkeep-shaped sink (the `UPKEEP_LEDGERS` row the champions volume uses)" does not exist: `UPKEEP_LEDGERS
+369:| GRANTED as a fief | PL's charter occasion (a site given to a member with its attachment; PL's commit) | `granted` |
+370:| SEIZED in a polity war | PL's verdict writer (`applyPolityVerdict`'s typed patches, PL-r1-2) names the site; ST's writer applies it | `seized` |
+374:[REFINED 2026-10-18 (fp-final) — ST2's "one writer" is exact: ONE module (`siteLedger.js`) with a CLOSED, pinned list of callers — the realm verb arm, ST's stage, the war layer's keep leaf, GRAMMAR's peace-term executor, PL's charter and verd
+## PS incursion leaf reliefAnswerOf
+130:**PS14 — A FOREIGN ARMY IN THE KINGDOM IS THE CROWN'S BUSINESS AS FAR AS THE CROWN'S HOLD REACHES.** Under `polityPrecedenceEnabled`, B's answer reads B's ONE foreign book with the new precedence class `passage_of_arms` (PL §3's table gains th
+220:| `crossings` | `unitKey + '>' + holderId` | `{ unitKey, moverId, holderId, crossing ('land_gate'·'hidden_way'·'harbour'·'circle'), place (the place key: road{a,b}, trail:<a\|b> or settlement(B)), nodeIdx, enteredTick, state ('awaiting'·'held
+## PS passageStandingOf polity
+102:**PS4 — THE LADDER OF STANDING HAS THREE RUNGS, READ FROM THE HOLDER'S BELIEF — AND OCCUPIED LAND IS ITS OCCUPIER'S HOME.** FIRST, OCCUPATION: where B's seat is held by an occupation (`rulingP
+152:`PASSAGE_STANDING` = `ally · stranger · enemy` (PS4), after the OCCUPATION test (PS4: an occupier's units are at home in land it occupies — `passageStandingOf` returns `{ rung: null, home: tru
+## MN reliefAnswerOf
+193:| `menaceDangerTerms` · `presenceTerms` | `(worldState) → Map<settlementId, m01>` — `menaceDangerTerms` (in `menaceReads.js`) is MN's feeder: each pressing menace's `pressTally[id].danger01` for the towns in its CURRENT `menacePressSet(recor
+302:- **Decider — ONE, PL-4's.** [CURED 2026-10-18 (fp-final r1) — MN-r1-4 · MN-r1-24: OD-MN-21 as the chair re-ruled it after P2 ("menace relief is a DECIDED act lit under `menaceResponseEnabled` ALONE for sworn and pact-bound neighbours (the s
+## supply_raid and raid in registry
+523:| `raid` | the war volume (border incidents) | the raid's landing | `repelled · succeeds · bought_off` | CLIMAX |
+524:| ↳ `raid` [AMENDED 2026-10-18 (fp-final r4; THE BODIES' route; BD §9.2 and §12; `briefs/RULINGS-ROUND3.md` §G.5)] | the war volume — WIDENED: a body as the raider, `{ kind: 'body', id }` u
+525:| ↳ `raid` [AMENDED 2026-10-19 (fp-final r5; BD-r4-22 = `skeptic/FOLD-r4-verify.md` minor note m4; `briefs/RULINGS-ROUND5.md` B.2 and B.3; BD §9.2, §12 and BD14 as cured in round 5)] | the war
+550:| `supply_raid` | the war volume | the raid's landing | `repelled · succeeds` | CLIMAX (S5-B4) |
+551:| ↳ `supply_raid` [AMENDED 2026-10-18 (fp-final r4; THE BODIES' route; BD §12)] | the war volume — WIDENED: a body as the raider, where the kind is built | the raid's landing | `repelled · s
+## HB fealty
+## GR seatChangedSince/successors
+## INT/IN polity
+0
+## CH polity_ban requestFealtyRow
+73:| `relationshipEvolution.js :: applyRelationshipPatch(worldState, outcome, now, edge)` + `sovereigntyTransfer.js :: accrueSaleGrievance` | the one relationship writer, state in `worldState.relation
+567:- **A polity-wide ban** — the crown (a polity's root, `DESIGN_FP_ARCH_PL.md`) proclaims it through its BENCH (an emergent ban, or the DM's `banish` with scope `polity`): ONE edge at the root's o
+## PT crownReachAt
+166:- `partyReach(worldState, backing, settlementId, snapshot) → { inside: boolean, weight01, band }` — §10.1, reading PL's `crownReachAt` for the polity roles.
+253:The party's fame (`fameOf`, `fameIn`), every actor's regard of it (`regardOf`, `courtRegardOf` for bodies — courts, factions, a creed's faithful, a kingdom), its credibility (`partyCredibilityOf
+## RN crownReachAt
+92:**RN7 — A BODY FEELS WHAT ITS PEOPLE OF POWER FEEL.** A court's (or a faction's, or a creed's faithful's) regard of anyone is DERIVED: its members' regards weighted by each member's power in it (
+347:`courtRegardOf(c:<sid>, subject)` = the authored baseline for the body (`dmSet` ⊳ `declared`) ⊕ `Σ_m w_m · net(regardOf(p:m, subject)) / Σ_m w_m` over the ruler and the `ACT_OFFICE` holders

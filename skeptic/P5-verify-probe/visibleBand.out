@@ -1,0 +1,5 @@
+walls=yes plains defense_readiness=40 -> sheltered
+walls=yes plains defense_readiness=54 -> sheltered
+walls=yes plains defense_readiness=55 -> fortified
+walls=yes plains defense_readiness=70 -> fortified
+exported deriveMapProfile: function | causal export keys sample: deriveCausalState,deriveSystemVariable

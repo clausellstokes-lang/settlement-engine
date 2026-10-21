@@ -1,0 +1,11 @@
+{
+ "expectedReturnTick": 7,
+ "slackCured_weeks": 0,
+ "detourNormalizes_landedValidator": true,
+ "envoyVia_projectedHome": 9,
+ "envoyViaRefusedByCuredGuard": true,
+ "rescueStay_delayNormalizes": true,
+ "rescueStay_projectedHome": 8,
+ "rescueStay_lateBy": 1,
+ "silenceEligibleFromTick": 8
+}

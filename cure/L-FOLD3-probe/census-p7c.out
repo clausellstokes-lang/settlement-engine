@@ -1,0 +1,14 @@
+== forced (rg -l -w -i src|tests|mdocs)
+     161
+     124
+     127
+== quoted 'forced'
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/InstitutionalGrid.jsx:415:          if (filterMode === 'forced') {
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/TradeDynamicsPanel.jsx:169:    : filterMode==='forced' ? sortedAll.filter(g => { const s=getState(g); return s.force&&!s.forceExclude; })
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/ControlsStrip.jsx:71:        {setFilterMode && ['all', 'forced', 'excluded'].map(m => (
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/ControlsStrip.jsx:79:            {m === 'all' ? 'All' : m === 'forced' ? `Forced (${forcedCount})` : `Excluded (${excludedCount})`}
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/components/ServicesTogglePanel.jsx:158:    if (filterMode === 'forced') return svcEntries.some(([n,d]) => getToggle(catName,svcKey,n,d).force);
+== MODES
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/modeSpeeds.js:42:export const MODES = Object.freeze(/** @type {const} */ (['foot', 'cart', 'river', 'coastal', 'sea']));
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/spatial/modeSpeeds.js:67:export const MODE_SPEEDS = MODE_SPEED_TUNING.MODE_SPEEDS;
+export const MODES = Object.freeze(/** @type {const} */ (['foot', 'cart', 'river', 'coastal', 'sea']));

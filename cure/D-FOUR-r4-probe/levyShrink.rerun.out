@@ -1,0 +1,4 @@
+{"homePop0":400,"roomAtMarch":150,"exodusAt":5,"exodus":0,"last":{"t":12,"conscripted":24,"roomNow":126,"spent":0.16,"trueShareOfRoomAtMarch":0.16,"holds":false},"firstHold":null}
+{"homePop0":400,"roomAtMarch":150,"exodusAt":5,"exodus":140,"last":{"t":12,"conscripted":10,"roomNow":0,"spent":1,"trueShareOfRoomAtMarch":0.067,"holds":true},"firstHold":{"t":5,"conscripted":10,"roomNow":0,"spent":1,"trueShareOfRoomAtMarch":0.067,"holds":true}}
+{"homePop0":600,"roomAtMarch":350,"exodusAt":8,"exodus":300,"last":{"t":12,"conscripted":37,"roomNow":13,"spent":0.74,"trueShareOfRoomAtMarch":0.106,"holds":true},"firstHold":{"t":8,"conscripted":29,"roomNow":21,"spent":0.58,"trueShareOfRoomAtMarch":0.083,"holds":true}}
+{"homePop0":1000,"roomAtMarch":750,"exodusAt":10,"exodus":700,"last":{"t":12,"conscripted":60,"roomNow":0,"spent":1,"trueShareOfRoomAtMarch":0.08,"holds":true},"firstHold":{"t":10,"conscripted":60,"roomNow":0,"spent":1,"trueShareOfRoomAtMarch":0.08,"holds":true}}

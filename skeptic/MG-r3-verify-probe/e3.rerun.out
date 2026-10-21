@@ -1,0 +1,7 @@
+HB's own bound (cw +1, rank 1): x1.20; row 2/15 weight bound after E.3: x1.20 (r2: x4)
+(a) flag dark: row 2 factor x1 (no posture, no draw, no receipt); (v) x1.00; split's doctrine-and-invitation product x1.00
+(b) flag lit, holdRank01 0.25: the DOCTRINE's own effect on split = (v) term x1.05 (<= HB's x1.20) · row 2 at its bound x1.20 on a believed pursuer · product with doctrineBands x1.26 vs without x1.20 (ratio x1.05 = the (v) term) · r2's per-dyad worst case x4.20
+(b) flag lit, holdRank01 0.5: the DOCTRINE's own effect on split = (v) term x1.10 (<= HB's x1.20) · row 2 at its bound x1.20 on a believed pursuer · product with doctrineBands x1.32 vs without x1.20 (ratio x1.10 = the (v) term) · r2's per-dyad worst case x4.40
+(b) flag lit, holdRank01 1: the DOCTRINE's own effect on split = (v) term x1.20 (<= HB's x1.20) · row 2 at its bound x1.20 on a believed pursuer · product with doctrineBands x1.44 vs without x1.20 (ratio x1.20 = the (v) term) · r2's per-dyad worst case x4.80
+(c) flag lit, court holds NO doctrineBands for the foe: (v) x1.00; row 2 fires on the believed pursuer at most x1.20 (r2's flag-level reading: up to x4.00)
+(d) a counter cell (cw -1, rank 1): (v) x0.80 — HB's term may LOWER split; the row's weight never goes below x1

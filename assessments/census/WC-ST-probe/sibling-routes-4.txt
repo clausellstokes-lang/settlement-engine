@@ -1,0 +1,19 @@
+## NEXT-PROGRAM-INBOX ST
+8:3. **THE PARTY AS A SITE HOLDER** (RULINGS-ROUND3 §D.1; OD-FC-72) — the owner's row; the chair recommends yes.
+9:4. **MID-CAMPAIGN FOUNDING OVER A SITE** (OD-BD-35, the gang's hamlet end; POP's mechanism) — the owner's row; recommended yes.
+12:7. **THE BODIES' MAP PIECES BEHIND A TOGGLE** (L-BD 49 (b)) — one paragraph appended to the mapmaker exchange after the hidden-ways asks close.
+## fold toll/EC-6
+295:| 3.1.1 | **The three trade-rights executors** (`exclusivity`, `market_access`, `toll_exemption` — rows exist, `peaceTermsCatalog.js:306-308`): EC-6 lands "the seam executor"; GRAMMAR says "TR-5 lands executors + producers"; the fold's J-EM-6 says TR-5. Two programs, one act, built by neither;
+296:| 3.1.1 ↳ | [AMENDED 2026-10-17 (fp-final; SPL-M14 · SPL-M13 · SX-17, `briefs/RULINGS-PL-MN.md` A)] GRAMMAR's `PACT_DRAFT_LENS` gains the `charter` OCCASION — a restive sworn member, deference falling toward `present` — whose grants are TREATIES between liege and member and enter grip's 
+297:| 3.1.2 | **TR-5's trade half** — `grain_provision`, `route_wardenship` (TRADE:858-862, not catalogued), the `realmPressure01` trade-agreement consumer ("buy the grain before you bleed for it", TRADE:866-870; code: consumed only by war, `warReasons.js:803`), the food-export quantity debt: EC h
+298:| 3.1.3 | **The commons grievance composite** (`commonsGrievance01`, three weights, clamped; `commonsVoiceKernel.js:102-109`): POP owns the writer; INT-4 (treaty burden), the INT burial verb (relief), FAITH's omen reads, INFO's witch-hunt, EC's `rough_for_common` and `restricted` food stance, an
+299:| 3.1.4 | **The HIDE trade toll** (IN-0d `secrecyTradeFactor.js`, zero consumers): INFO says "the consuming join is TRADE's"; no TRADE/EC volume names it; COUPLINGS CPL-9 says "IN-0 lands the HIDE trade tax". Homeless. | CHAIR: it is EC-6's — a `HIDE` posture is a `restricted` STANCE on every 
+## fold IN inbox / seeding
+## fold traitor/ES
+## fold WF consecrat
+## fold map re-emit
+360:  - **THE MAP PROGRAM** (cross-program asks; the chair's row in ODQ §934.93): (a) ↳ an ASK, never a supersession (§3.1.26 ↳ r2b; HOST-r2-4): H13 carries `polityOf` per seat and the map MAY adopt it for its sway's member links — "the map's chain rule yields to it" in (a) above is WITHDRAW
+## fold resource yield STOP-ST-2
+355:  - **THE ECONOMY (EC):** (1) EC-6's ONE trade-stance verb `SET_TRADE_STANCE` is widened with `of: goods · arms` — one stance vocabulary, one verb, which THE PASSAGE states and cites (C Q2); (2) the yield lean of THE SITES' `resource` kind and its famine counterpart are a SLOT on EC — EC-13
+439:| 3.3.14 | **THE SEA** [ADDED 2026-10-18 (fp-final r2b; SEAMS-r2-1 BLOCKING · HOST-r2-13 MAJOR · HOST-r2-2 BLOCKING (the fold's half); `briefs/CHAIR-NOTES-FOR-THE-FOLD.md` item 14 AS CORRECTED, APPLIED here so P4 folds this row and never the note; the owner's question of 2026-10-18, verbatim: 
+489:| THE SITES (ST, 2026-10-18 fp-final; `DESIGN_FP_ARCH_ST.md`, compiled by lane L-ST on the owner's nine site words of 2026-10-18 00:50–01:05 EDT; reviewed in rounds 2–6) [ADDED 2026-10-19 (fp-final P4; L-FOLD2; `briefs/L-FOLD2.md` item 2)] | — (four virtual flags `worldSitesEnabled` · `si

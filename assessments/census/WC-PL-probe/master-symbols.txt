@@ -1,0 +1,95 @@
+ensureRelationshipState 31 src/domain/worldPulse/warReasons.js src/domain/worldPulse/relationshipState.js src/domain/worldPulse/settlementStrategy.js 
+foreignSeatOf 9 src/domain/certification/subsystemRowsOps.js src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/seatIntervention.js 
+closenessBetween 1 src/domain/rulingPowerSeat.js 
+assignGenesisRelations 2 src/domain/instantWorld/worldPlan.js src/domain/instantWorld/genesisDiplomacy.js 
+vassalRules 2 src/domain/worldPulse/relationshipRulesAdversarial.js src/domain/worldPulse/relationshipRulesCore.js 
+allianceCalls 4 src/domain/worldPulse/relationshipState.js src/domain/worldPulse/warCoalitionLedger.js src/domain/worldPulse/relationshipEvolution.js 
+normalizeAllianceCalls 2 src/domain/worldPulse/relationshipState.js src/domain/worldPulse/relationshipEvolution.js 
+applyRelationshipPatch 23 src/domain/certification/couplingRegistryEncounters.js src/domain/certification/subsystemRowsEncounters.js src/domain/certification/couplingRegistryWar.js 
+resolveRelationshipHierarchy 2 src/domain/worldPulse/relationshipHierarchy.js src/domain/worldPulse/applyWorldPulse.js 
+computeLevySources 3 src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/warHomeCosts.js src/domain/worldPulse/warDeployment.js 
+computeAllyRelief 6 src/domain/certification/subsystemRowsWar.js src/domain/certification/couplingRegistryGrammar.js src/domain/worldPulse/warHomeCosts.js 
+foreignBookFor 1 src/domain/worldPulse/warSeatBooks.js 
+readWarSeatBooks 13 src/domain/certification/subsystemRowsSeat.js src/domain/certification/couplingRegistryWar.js src/domain/rulingPower.js 
+blendBooksTerm 3 src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/warSeatBooks.js src/domain/worldPulse/warTermination.js 
+FOREIGN_PRIMACY_CLASS 1 src/domain/worldPulse/foreignPrimacy.js 
+transferRulingPower 13 src/generators/density/successionGrammar.js src/components/settlement/EventComposer.jsx src/domain/rulingPowerCoup.js 
+previousGovernments 13 src/pdf/lib/viewModel.js src/data/dossierStateProse/power.generated.js src/pdf/sections/PowerStructure.jsx 
+seatTransitions 6 src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/warPeaceDecision.js src/domain/worldPulse/npcLadderKernel.js 
+scorePreserveOrder 2 src/domain/worldPulse/seatIntervention.js src/domain/worldPulse/convergence.js 
+resolveCoupVerdict 10 src/domain/certification/subsystemRowsSeat.js src/domain/rulingPowerCoup.js src/domain/rulingPower.js 
+PEACE_STEP 2 src/domain/worldPulse/settlementStrategy.js src/domain/worldPulse/warPeaceDecision.js 
+HOSTILE_TYPES 5 src/domain/worldPulse/settlementStrategy.js src/domain/worldPulse/supplyWebWarfare.js src/domain/worldPulse/warIntent.js 
+findCrossPressuredMediator 5 src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/mediationPressure.js src/domain/worldPulse/peaceTerms.js 
+hegemonyRead 7 src/domain/briefs/composers.js src/domain/briefs/citations.js src/domain/certification/subsystemRowsSeat.js 
+canonLabelFor 1 src/domain/worldPulse/hegemony.js 
+advanceTreatiesWithDisposition 3 src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/dispositionChannels.js src/domain/worldPulse/pulseStageManifest.js 
+applyPulseMover 8 src/domain/certification/subsystemRowsGrowth.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/factionDensityKernel.js 
+coupVerdictOutcomes 4 src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/proposalAdmission.js 
+applyWorldPulseOutcomes 18 src/domain/worldPulse/deploymentReturn.js src/domain/worldPulse/partyImpact.js src/domain/events/realmManifest.js 
+ensureRelationshipEdgeSeed 3 src/domain/worldPulse/applyWorldPulseRelationshipGraph.js src/domain/worldPulse/relationshipEdgeSeed.js src/domain/worldPulse/applyWorldPulse.js 
+vassalizationOutcomes 5 src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/seatIntervention.js src/domain/worldPulse/occupation.js 
+CHANGE_AUTHORITY_POLICY 4 src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/decisionTier.js src/domain/worldPulse/foreignPrimacy.js 
+deriveDecisionTier 8 src/domain/worldPulse/anticipatedReactions.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/decisionTier.js 
+admitGuaranteedProposalOutcomes 5 src/domain/worldPulse/candidateEvents.js src/domain/worldPulse/proposalAdmission.js src/domain/worldPulse/pulseKernel.js 
+CAMPAIGN_ALTERING_CANDIDATE_TYPES 3 src/domain/worldPulse/decisionTier.js src/domain/worldPulse/razingExecution.js src/domain/worldPulse/warDeployment.js 
+isGovernmentChange 1 src/domain/worldPulse/decisionTier.js 
+stampDeploymentRecall 5 src/domain/worldPulse/applyWorldPulseFactionRoster.js src/domain/worldPulse/warIntent.js src/domain/worldPulse/armyTransitKernel.js 
+CLOSE_ROADS 1 src/domain/worldPulse/concludedWarRecord.js 
+applyVerdictWarDissolutions 2 src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/warRulingsEvidence.js 
+readBeliefRelationship 7 src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/supplyWebWarfare.js src/domain/worldPulse/peaceTerms.js 
+readBeliefStrength 11 src/domain/worldPulse/supplyWebWarfare.js src/domain/worldPulse/peaceTerms.js src/domain/worldPulse/settlementStrategy.js 
+applyImposition 2 src/domain/worldPulse/habitForkRegistry.js src/domain/traditions/relations.js 
+applyRestoration 1 src/domain/traditions/relations.js 
+faithCarriersOut 2 src/domain/worldPulse/religiousContest.js src/domain/worldPulse/moralInstitutionPressure.js 
+neighbourEndorsement 1 src/domain/worldPulse/religionLegitimacy.js 
+applyLegitimacyDeltasToUpdates 11 src/domain/certification/subsystemRowsSeat.js src/domain/certification/subsystemRowsCoin.js src/domain/worldPulse/seatIntervention.js 
+authorityTransferEpochFor 5 src/domain/rulingPower.js src/domain/worldPulse/warPeaceDecision.js src/domain/worldPulse/npcLadderKernel.js 
+fnv1a32 55 src/kernel/detMath.js src/kernel/proseHash.js src/domain/generation/generationForkRegistry.js 
+INTERVAL_WEEKS 23 src/hooks/useAdvanceSession.js src/domain/certification/warConvergenceContract.js src/domain/certification/tradeConvergenceContract.js 
+settlementStrength 30 src/domain/certification/couplingRegistryGrammar.js src/components/map/BeliefDivergenceBand.jsx src/domain/worldPulse/conquestDoctrineStage.js 
+foreignSeatCoupAdj 8 src/domain/certification/subsystemRowsSeat.js src/domain/rulingPowerCoup.js src/domain/worldPulse/seatIntervention.js 
+vassalageSeat 1 src/domain/rulingPowerSeat.js 
+mappedDistanceWeight 6 src/domain/worldPulse/religiousContest.js src/domain/worldPulse/tradeSalience.js src/domain/worldPulse/hegemonyFear.js 
+SEAT_TUNING 2 src/domain/rulingPowerSeat.js src/domain/worldPulse/foreignPrimacy.js 
+hegemonyFear 10 src/domain/worldPulse/warReasons.js src/domain/worldPulse/eventProse.js src/domain/worldPulse/hegemonyFear.js 
+partitionPulseOutcomeLanes 2 src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/pulseOutcomePartition.js 
+CLAIM_BASIS_BY_RULING_POWER 1 src/generators/density/titularSuccession.js 
+mintMemoryWeaveIncident 3 src/domain/worldPulse/traditionsKernel.js src/domain/worldPulse/eliteBleed.js src/domain/worldPulse/relationshipEvolution.js 
+MEMORY_WEAVE_INCIDENT_TYPES 4 src/domain/worldPulse/traditionsKernel.js src/domain/display/humanizeEngineTokens.js src/domain/worldPulse/relationshipEvolution.js 
+ESCALATION_HINT 1 src/domain/worldPulse/relationshipRuleHelpers.js 
+WOUND_TYPE_RE 2 src/domain/worldPulse/npcLadderKernel.js src/domain/worldPulse/grievanceRead.js 
+activeRebellionAgainstVassal 2 src/domain/worldPulse/relationshipRulesCore.js src/domain/worldPulse/relationshipRuleHelpers.js 
+rebellionGate 2 src/domain/certification/subsystemRowsSeat.js src/domain/worldPulse/stressorGates.js 
+isRelationshipTurningPoint 1 src/domain/worldPulse/relationshipState.js 
+changeRulingPower 2 src/domain/events/mutate.js src/domain/events/mutateWorld.js 
+vassalOverlordOf 4 src/domain/certification/subsystemRowsSeat.js src/domain/traditions/relations.js src/domain/rulingPowerSeat.js 
+advanceRelations 2 src/domain/worldPulse/traditionsKernel.js src/domain/traditions/relations.js 
+closeRoadFor 1 src/domain/worldPulse/concludedWars.js 
+SUBORDINATING_TERM_TYPES 4 src/domain/worldPulse/hegemony.js src/domain/rulingPowerSeat.js src/domain/worldPulse/anticipatedReactions.js 
+PACT_DRAFT_LENS 3 src/domain/events/realmManifest.js src/domain/worldPulse/realmVerbExecution.js src/domain/worldPulse/pactFormation.js 
+ALLY_RELIEF_FRACTION 2 src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/warCapacityReads.js 
+advanceCalamity 4 src/domain/worldPulse/magicBufferApply.js src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/pulseKernel.js 
+applyFactionPayloadEffect 2 src/domain/worldPulse/applyWorldPulseFactionRoster.js src/domain/worldPulse/applyWorldPulse.js 
+FACTION_PAYLOAD_KINDS 2 src/domain/worldPulse/applyWorldPulseFactionRoster.js src/domain/worldPulse/applyWorldPulse.js 
+NPC_UNAVAILABLE_STATUSES 10 src/domain/entities/successors.js src/domain/entities/npcs.js src/domain/roads/state.js 
+stepDeityLegitimacy 2 src/domain/worldPulse/religiousContest.js src/domain/worldPulse/religionLegitimacy.js 
+neighbourIdsOf 1 src/domain/worldPulse/religiousContest.js 
+attemptEntry 4 src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/religiousContest.js src/domain/worldPulse/patronFall.js 
+advanceReligionStates 7 src/domain/worldPulse/religiousContest.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/patronFall.js 
+STRESSOR_SPAWN_GATES 2 src/domain/worldPulse/stressorGates.js src/domain/worldPulse/stressors.js 
+rulerAlignment 1 src/domain/worldPulse/warSeatBooks.js 
+moralityBand 6 src/domain/worldPulse/ransomChoices.js src/domain/worldPulse/conquestIntent.js src/domain/worldPulse/warSeatBooks.js 
+relationshipChannelBundle 4 src/domain/worldPulse/applyWorldPulseRelationshipGraph.js src/domain/region/index.js src/domain/region/graph.js 
+writeRelationshipLabelToNeighbourNetworks 3 src/domain/fieldManifest.js src/domain/worldPulse/applyWorldPulseRelationshipGraph.js src/domain/worldPulse/applyWorldPulse.js 
+syncRelationshipChannelBundle 5 src/domain/worldPulse/applyWorldPulseRelationshipGraph.js src/domain/worldPulse/canonRelationshipImpact.js src/domain/region/index.js 
+applyRelationshipLabelToGraph 3 src/domain/worldPulse/applyWorldPulseRelationshipGraph.js src/domain/worldPulse/occupation.js src/domain/worldPulse/applyWorldPulse.js 
+legitimateRemnantOf 2 src/domain/rulingPowerSeat.js src/domain/worldPulse/occupation.js 
+TAG_EVENTS 1 src/domain/worldPulse/peopleLedger.js 
+buildImposedCopy 1 src/domain/traditions/relations.js 
+RELATIONSHIP_ALLIANCE_CALL_CAP 2 src/domain/worldPulse/relationshipState.js src/domain/worldPulse/relationshipEvolution.js 
+warCoalitionActive 5 src/domain/worldPulse/warCoalitionLedger.js src/domain/worldPulse/warDeployment.js src/domain/worldPulse/warCoalitionDecision.js 
+spatialUsage 19 src/store/campaignAdvanceSession.js src/lib/spatialUsage.js src/lib/pulseFingerprint.js 
+call_in_answer 0 
+half_answered 0 
+warAnchorKey 0 

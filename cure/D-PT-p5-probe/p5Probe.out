@@ -1,0 +1,176 @@
+{
+  "A": {
+    "A1 Kell summons the party; yes given at Tolle (a week away) at tick 0; term ends tick 4; the party never rides": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "fell_short",
+        "credibility": "MISS_FALL · mag (RN §7)",
+        "earliestArrivalTick": 2,
+        "reachedTick": null
+      }
+    },
+    "A2 Merewick summons; yes at Kell (six weeks away); term ends tick 2; the party never rides": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": 7,
+        "reachedTick": null
+      }
+    },
+    "A3 Kell invites the party; yes at Tolle; the party rides to Kell at tick 2; the day is tick 4; no click": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "made_good",
+        "credibility": "TRUE_RISE · mag",
+        "earliestArrivalTick": 2,
+        "reachedTick": 2
+      }
+    },
+    "A4 yes given IN Kell to Kell's summons, the party leaves the same session for Ashford (P35's rule)": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "fell_short",
+        "credibility": "MISS_FALL · mag (RN §7)",
+        "earliestArrivalTick": 3,
+        "reachedTick": null
+      }
+    },
+    "A5 yes given IN Kell to Kell's summons, the party stays through one advance": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "made_good",
+        "credibility": "TRUE_RISE · mag",
+        "earliestArrivalTick": 1,
+        "reachedTick": 1
+      }
+    },
+    "A6 Kell employs the party (term of service 26 weeks); yes at Tolle; the party reports at Kell in week 3 and rides on": {
+      "before": {
+        "verdict": "came_to_nothing",
+        "credibility": "none",
+        "earliestArrivalTick": null,
+        "reachedTick": null
+      },
+      "after": {
+        "verdict": "made_good",
+        "credibility": "TRUE_RISE · mag",
+        "earliestArrivalTick": 2,
+        "reachedTick": 3
+      }
+    }
+  },
+  "B": {
+    "belief rival over truth tax_authority (the crown believes its vassal a rival)": {
+      "truthType": "tax_authority",
+      "believed": "rival",
+      "beliefsActive": true,
+      "courtArm": "voided",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "belief cold_war over truth tax_authority": {
+      "truthType": "tax_authority",
+      "believed": "cold_war",
+      "beliefsActive": true,
+      "courtArm": "voided",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "belief protector over truth rival (the crown thinks the member loyal)": {
+      "truthType": "rival",
+      "believed": "protector",
+      "beliefsActive": true,
+      "courtArm": "upheld",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "belief hostile over truth hostile": {
+      "truthType": "hostile",
+      "believed": "hostile",
+      "beliefsActive": true,
+      "courtArm": "voided",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "omniscient, truth rival": {
+      "truthType": "rival",
+      "believed": "rival",
+      "beliefsActive": false,
+      "courtArm": "voided",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "omniscient, truth tax_authority (a sworn member)": {
+      "truthType": "tax_authority",
+      "believed": "tax_authority",
+      "beliefsActive": false,
+      "courtArm": "upheld",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    },
+    "omniscient, no edge at all": {
+      "truthType": "",
+      "believed": "",
+      "beliefsActive": false,
+      "courtArm": "upheld",
+      "round5Rule": "courtRegardOf(c:Crown, c:Kell) → null (R51, pair_state) ⇒ the arm never fires"
+    }
+  },
+  "C": {
+    "C1 heard refused at arrival (the DM AMENDED it to admitted — the row keeps the posture heard); default still refused": {
+      "lastHeard": "refused",
+      "defaultNow": "refused",
+      "minted": false
+    },
+    "C2 the posture changes to admitted_under_watch while the party stays": {
+      "lastHeard": "refused",
+      "defaultNow": "admitted_under_watch",
+      "minted": true
+    },
+    "C3 the posture softens to plain admitted (never heard)": {
+      "lastHeard": "refused",
+      "defaultNow": "admitted",
+      "minted": false
+    },
+    "C4 arrival default was plain admitted (no card, no row); the court turns hostile: refused": {
+      "lastHeard": "admitted",
+      "defaultNow": "refused",
+      "minted": true
+    },
+    "C5 a body-half row of Kell's land since the arrival (how `passed`) is not a posture; default refused after C1": {
+      "lastHeard": "refused",
+      "defaultNow": "refused",
+      "minted": false
+    },
+    "C6 the arrival row was EVICTED from the 16-row archive; default still refused (one re-statement)": {
+      "lastHeard": "admitted",
+      "defaultNow": "refused",
+      "minted": true
+    },
+    "C7 a row from an EARLIER stay (closed tick 5, before this arrival) does not count": {
+      "lastHeard": "admitted",
+      "defaultNow": "refused",
+      "minted": true
+    }
+  }
+}

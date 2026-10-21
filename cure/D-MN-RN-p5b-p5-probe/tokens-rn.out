@@ -1,0 +1,13 @@
+# RN P5 token census Tue Oct 20 16:11:29 CDT 2026
+deedRingAt	src=0	tests=0	docs=0	ledger=0
+paid_well	src=0	tests=0	docs=1	ledger=2
+sheltered	src=10	tests=6	docs=6	ledger=6
+slandered	src=1	tests=0	docs=2	ledger=3
+ransomed_by	src=0	tests=0	docs=2	ledger=4
+betrayed	src=13	tests=4	docs=19	ledger=18
+served_with	src=0	tests=0	docs=1	ledger=2
+factionPairOf	src=3	tests=1	docs=0	ledger=4
+# quoted sheltered:
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/mapProfile.js:117:  'exposed', 'open', 'mixed', 'sheltered', 'fortified',
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/mapProfile.js:197:    contributors.push({ source: 'institutions.walls', effect: 'sheltered', reason: 'Walls present; sheltered.' });
+/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963/src/domain/townMap/townMapModel.js:99:const DEFENSIVE_BANDS = Object.freeze(['exposed', 'open', 'mixed', 'sheltered', 'fortified']);

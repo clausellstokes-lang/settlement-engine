@@ -1,0 +1,83 @@
+bodyHabitat:
+bodySecurity:
+bodyBalance:
+bodyPresenceFeeder: FP_ARCH_MN.md=3 FP_ARCH_PR.md=1 FP_ARCH_ST.md=2 FP_COHERENCE_FOLD.md=5
+bodyPresenceTermOf: FP_ARCH_ST.md=4
+bodyReadiness01: FP_ARCH_ST.md=1 FP_COHERENCE_FOLD.md=1
+bodyStrength: FP_ARCH_PR.md=6 FP_ARCH_ST.md=9
+bodyChoiceSet: FP_ARCH_PT.md=2
+courtStanceOf: FP_ARCH_PR.md=3 FP_ARCH_ST.md=4
+believedStanceOf:
+bodyOnRoute:
+bodiesIn:
+bodyRadius:
+hiddenWayEdges: FP_ARCH_CH.md=7 FP_ARCH_PR.md=16 FP_ARCH_PS.md=3 FP_COHERENCE_FOLD.md=3
+believedBodies: FP_ARCH_MN.md=2 FP_ARCH_PR.md=7 FP_ARCH_ST.md=1
+believedBodyOf: FP_ARCH_MN.md=2 FP_ARCH_PR.md=12 FP_ARCH_RN.md=8 FP_ARCH_ST.md=12 FP_COHERENCE_FOLD.md=1
+bodyName:
+bodyProjection:
+almsOf:
+knownTrailsOf: FP_ARCH_CH.md=12 FP_ARCH_PR.md=22 FP_ARCH_PS.md=16 FP_ARCH_PT.md=3 FP_COHERENCE_FOLD.md=5
+commonsStanceOf: FP_ARCH_PR.md=4 FP_ARCH_RN.md=1
+bodyThreat01: FP_ARCH_RN.md=1
+namingOf:
+bodyHabitTilt:
+bodyDefenceOf: FP_ARCH_ST.md=1 FP_COHERENCE_FOLD.md=1
+bodyRouteChoice:
+bodyLeaderOf: FP_ARCH_CH.md=8
+criminalPowerOf: FP_COHERENCE_FOLD.md=2
+conclaveLean:
+ROAD_COVER_BY_MIGHT: FP_ARCH_PR.md=9 FP_COHERENCE_FOLD.md=1
+BODY_HABITS: FP_ARCH_PR.md=5
+bodiesEnabled: FP_ARCH_CH.md=15 FP_ARCH_MN.md=3 FP_ARCH_PL.md=4 FP_ARCH_PR.md=2 FP_ARCH_PS.md=2 FP_ARCH_PT.md=6 FP_ARCH_RN.md=5 FP_ARCH_ST.md=5 FP_COHERENCE_FOLD.md=3
+bodyEffectsEnabled: FP_ARCH_CH.md=6 FP_ARCH_MN.md=2 FP_ARCH_PR.md=5 FP_ARCH_RN.md=4 FP_ARCH_ST.md=11 FP_COHERENCE_FOLD.md=2
+hiddenWaysEnabled: FP_ARCH_CH.md=10 FP_ARCH_PR.md=3 FP_ARCH_PS.md=8 FP_ARCH_PT.md=6 FP_COHERENCE_FOLD.md=1
+bodySpillEnabled: FP_ARCH_PL.md=6 FP_COHERENCE_FOLD.md=3
+bodySponsorshipEnabled: FP_COHERENCE_FOLD.md=1
+bodies_meet: FP_ARCH_PR.md=7 FP_ARCH_PT.md=2 FP_ARCH_RN.md=1 FP_COHERENCE_FOLD.md=4
+body_stance: FP_ARCH_CH.md=2 FP_ARCH_PL.md=10 FP_ARCH_PR.md=3 FP_ARCH_RN.md=3 FP_ARCH_ST.md=5 FP_COHERENCE_FOLD.md=4
+traffic_waylaid: FP_ARCH_RN.md=1 FP_COHERENCE_FOLD.md=4
+alms_requested: FP_COHERENCE_FOLD.md=3
+body_bounty: FP_ARCH_CH.md=5 FP_ARCH_PT.md=3 FP_COHERENCE_FOLD.md=3
+hunt_taken: FP_ARCH_CH.md=11 FP_ARCH_PR.md=8 FP_ARCH_PT.md=2 FP_ARCH_RN.md=10 FP_COHERENCE_FOLD.md=6
+guild_war: FP_COHERENCE_FOLD.md=4
+sponsorship_offered: FP_COHERENCE_FOLD.md=3
+sponsor_exposed: FP_ARCH_CH.md=1 FP_ARCH_PL.md=1 FP_COHERENCE_FOLD.md=3
+body_act: FP_ARCH_PR.md=3 FP_ARCH_RN.md=25 FP_COHERENCE_FOLD.md=3
+peace_unkept: FP_ARCH_PL.md=22 FP_COHERENCE_FOLD.md=10
+peace_kept: FP_COHERENCE_FOLD.md=1
+shared_faith: FP_COHERENCE_FOLD.md=1
+adoptUntiedHolders:
+advanceBodies: FP_ARCH_PR.md=2
+spatialLedgers.bodies: FP_ARCH_CN.md=1 FP_ARCH_PT.md=1 FP_ARCH_RN.md=1 FP_ARCH_ST.md=1 FP_COHERENCE_FOLD.md=1
+spatialLedgers.hiddenWays: FP_ARCH_PS.md=2 FP_ARCH_PT.md=2 FP_COHERENCE_FOLD.md=1
+sponsorships:
+courtStances: FP_ARCH_CH.md=1
+paid_quarter: FP_ARCH_RN.md=7
+robbed_quarter: FP_ARCH_RN.md=6
+fed_poor: FP_ARCH_RN.md=4
+GUILD_WAR_LEASE: FP_COHERENCE_FOLD.md=2
+BODY_KEEP_POINTS: FP_COHERENCE_FOLD.md=2
+wayRung: FP_ARCH_PR.md=2 FP_ARCH_PS.md=7 FP_COHERENCE_FOLD.md=4
+useCount: FP_ARCH_PS.md=2 FP_COHERENCE_FOLD.md=4 W_ARMS.md=3
+by_office: FP_ARCH_CH.md=1 FP_ARCH_PR.md=2 FP_ARCH_PS.md=1 FP_COHERENCE_FOLD.md=2
+by_pursuit: FP_ARCH_PR.md=5 FP_COHERENCE_FOLD.md=1
+by_broker: FP_ARCH_PR.md=1 FP_COHERENCE_FOLD.md=1
+NAMING_BAND: FP_ARCH_MN.md=1 FP_COHERENCE_FOLD.md=1
+GANG_END_GOALS: FP_COHERENCE_FOLD.md=1
+COMMONS_STANCES: FP_COHERENCE_FOLD.md=1
+CARRIER_KINDS: FP_COHERENCE_FOLD.md=1
+SPONSOR_PURPOSES: FP_COHERENCE_FOLD.md=2
+ranged_away: FP_COHERENCE_FOLD.md=2
+bodyKind: FP_ARCH_CH.md=5 FP_ARCH_MN.md=1 FP_ARCH_PR.md=2 FP_ARCH_PS.md=1 FP_ARCH_PT.md=2 FP_ARCH_RN.md=3 FP_ARCH_ST.md=14 FP_COHERENCE_FOLD.md=11 FP_SPINE.md=1
+PROMOTE_BODY: FP_ARCH_CN.md=1 FP_ARCH_MN.md=9 FP_ARCH_ST.md=4 FP_COHERENCE_FOLD.md=1
+PLACE_BODY: FP_ARCH_ST.md=3
+BODY_STANCE:
+BODY_HOLD:
+END_BODY: FP_ARCH_PT.md=9 FP_ARCH_RN.md=1
+TRAIL_KNOWN: FP_ARCH_PT.md=12
+BODY_LEADER: FP_ARCH_CH.md=6
+BODY_GOAL:
+ransom_granted: FP_ARCH_CH.md=2 FP_COHERENCE_FOLD.md=11 FP_SPINE.md=1
+captive_freed: FP_ARCH_CH.md=1 FP_COHERENCE_FOLD.md=10
+captive_released: FP_ARCH_CH.md=2 FP_COHERENCE_FOLD.md=10 FP_SPINE.md=1

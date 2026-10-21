@@ -1,0 +1,5 @@
+positional key shape: tolle:npc_3
+keys after the exposure pass: [ 'tolle:npc_3' ]
+weight(durable wnpc_ id) = 1
+weight(positional key)    = 0.47886806459400866
+keys after the next pass: [ 'tolle:npc_3' ]

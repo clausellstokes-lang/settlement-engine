@@ -1,0 +1,11 @@
+(a) FORCED MARCH: base weeks w, readiness r -> keep_course weeks | forced (r=1) weeks | gain
+  r=0.2  w1:2->2(0)  w2:4->3(1)  w3:6->4(2)  w4:8->5(3)  w5:10->6(4)  w6:12->7(5)  w7:14->8(6)  w8:16->9(7)
+  r=0.5  w1:2->2(0)  w2:3->3(0)  w3:5->4(1)  w4:6->5(1)  w5:8->6(2)  w6:9->7(2)  w7:11->8(3)  w8:12->9(3)
+  r=0.8  w1:2->2(0)  w2:3->3(0)  w3:4->4(0)  w4:5->5(0)  w5:7->6(1)  w6:8->7(1)  w7:9->8(1)  w8:10->9(1)
+  r=1  w1:2->2(0)  w2:3->3(0)  w3:4->4(0)  w4:5->5(0)  w5:6->6(0)  w6:7->7(0)  w7:8->8(0)  w8:9->9(0)
+  cells with ZERO gain: 15/32
+(b) RIDING: nominal hop weeks n -> walk ticks | ride ticks (x0.6) per grade
+  highway: n0.5:1/1  n1:1/1  n1.5:1/1  n2:1/1  n2.5:1/1  n3:2/1  n4:3/1  n6:4/2
+  road: n0.5:1/1  n1:1/1  n1.5:1/1  n2:2/1  n2.5:2/1  n3:3/1  n4:4/2  n6:6/3
+  cells where riding gains NOTHING: 8/16
+(c) FORCED RIDING on road (x0.8): n1:1->1  n2:1->1  n3:1->1  n4:2->1

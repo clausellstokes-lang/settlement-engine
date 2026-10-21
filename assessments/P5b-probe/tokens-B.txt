@@ -1,0 +1,83 @@
+BD-13|bounty|w
+BD-63|bought_off|w
+BD-63b|bought gate|n
+BD-64|applyHomeWarCosts|w
+BD-75|sponsor|n
+BD-82a|by_survey|w
+BD-82b|by_broker|w
+BD-82c|knownTrailsOf|w
+O7a|ADVANCE BY N|n
+O7b|OD-FC-51|w
+O29|age receipt|n
+PL-27|scutage|n
+PL-29|commuted|n
+PL-36a|liegeAnswer|w
+PL-36b|pactAnswers|w
+PL-39|supply_raid|w
+PL-73|ask the vassals|n
+PL-74|succession_reaffirmation|w
+MN-29|recordSighting|w
+MN-34a|lawfulness01|w
+MN-34b|malice01|w
+MN-38|unprotected|w
+MN-39|route disruption|n
+MN-40|protection record|n
+MN-54|committed_to_menace|w
+RN-10|seat_change|w
+RN-11|war_concluded|w
+CH-59|paragon_employer|w
+CH-88|paragon|w
+CH-92a|removeFreeUnit|w
+CH-92b|dissolving|w
+CH-96|paragonsAt|w
+PS-21|passageAnswerOf|w
+PS-30a|humanTermType|w
+PS-30b|termLabel|w
+PS-32|passage_answer|w
+ST-42|riders_quartered|w
+ST-43|traitor|n
+ST-59|site_cession|w
+ST-62|consecrated|w
+ST-64|leave a ruin|n
+ST-65|re-emit|n
+PR-7|keepRiders|w
+PR-9|route_menaced|w
+PR-39|trailWatchOf|w
+PR-54a|patrolEncounter|w
+PR-54b|caravan_seized|w
+PR-56|believedWatch|w
+PR-57|armsNear|w
+PR-61|INVESTIGABLE_EVENT_TYPES|w
+PR-78a|patrol_will|w
+PR-78b|PARAGON_LEAN_SEAMS|w
+DE-BD-69|bodySpillDraw|w
+DE-CH-114|needsOf|w
+DE-CH-134|liaisonId|w
+DE-CH-143a|turnedAt|w
+DE-CH-143b|crossedAt|w
+DE-PT-33a|party_offer|w
+DE-PT-33b|offer_accepted|w
+DE-PT-49a|needPlaceOf|w
+DE-PT-49b|deadlineTick|w
+DE-PT-95|NAME_PARTY|w
+DE-PS-50|gateKeeperOf|w
+DE-PS-51|passageNodesOf|w
+DE-ST-1|siteAt|w
+DE-ST-91|quietWeeks|w
+DE-PR-85|patrolsOf|w
+DE-PR-102|escortedOn|w
+J-PR-22|MIGHT_LATENT|w
+J-BD-55|bodyOnRoute|w
+J-ST-50|denPressOf|w
+J-ST-31|keptSecret|w
+J-ST-93|holderSince|w
+J-RN-49|factionPairStates|w
+J-RN-50a|paid_well|w
+J-RN-50b|sheltered|w
+J-RN-50c|slandered|w
+J-CH-69|under_quarantine|w
+J-MN-57|UNPRICED_LEG_WEEKS|w
+J-PT-42|courtRegardOf|w
+J-PS-64|enemyColumnPresence|w
+J-CH-44|strengthByRef|w
+J-PS-48|favour|n

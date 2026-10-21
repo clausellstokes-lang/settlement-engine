@@ -1,0 +1,10 @@
+greed src=51 tests=55 masterdocs=20 ledgerdocs=33
+need_passed src=0 tests=0 masterdocs=0 ledgerdocs=0
+dues_short src=0 tests=0 masterdocs=0 ledgerdocs=0
+dues_paid src=0 tests=0 masterdocs=0 ledgerdocs=0
+fiscal_raise src=0 tests=0 masterdocs=0 ledgerdocs=0
+fiscal_remit src=0 tests=0 masterdocs=0 ledgerdocs=0
+courtTemperOf src=0 tests=0 masterdocs=0 ledgerdocs=0
+raise_taxes src=0 tests=0 masterdocs=0 ledgerdocs=0
+avarice src=0 tests=0 masterdocs=0 ledgerdocs=0
+rapacity src=0 tests=0 masterdocs=0 ledgerdocs=0

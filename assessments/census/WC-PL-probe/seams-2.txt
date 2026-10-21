@@ -1,0 +1,70 @@
+## treatyAdvance call
+  const treatyAdvance = advanceTreatiesWithDisposition({
+    snapshot: postTimeSnapshot, worldState: memoryState, settlementUpdates,
+    graph: applied.regionalGraph, pIndex, tick: worldState.tick, now,
+    dispositionEnabled: simulationRules.dispositionChannelsEnabled === true, dispositionTransitions,
+  });
+  treatyCoalitionEvidence = mergeWarCoalitionEvidence(treatyAdvance.coalitionEvidence);
+  const treatyCoalitionNews = warCoalitionNewsEntries({
+    evidence: treatyCoalitionEvidence,
+    snapshot: postTimeSnapshot,
+    now,
+  });
+  ({ worldState: memoryState, settlementUpdates, wizardNews } = applyPulseMover({
+    ...treatyAdvance,
+    newsEntries: [...(treatyAdvance.newsEntries || []), ...treatyCoalitionNews],
+  }, memoryState, settlementUpdates, wizardNews, now, newsReceiptSink));
+  // W-PEACE-1 — THE CAUSAL REASONS LAYER (DESIGN_PEACE_ENGINE.md §14). Two
+  // DETERMINISTIC movers (no rng — reasons are reads, not rolls): typed,
+## coup call
+  // the governing faction is locked). The coup's generic residual outcome is
+  // dropped below; the verdict's own condition carries the aftermath.
+  const coupOutcomes = simulationRules.stressorsEnabled
+    ? coupVerdictOutcomes({
+        resolved: agedStressors.resolved,
+        snapshot,
+        rng: rng.fork('coup-verdict'),
+        tick: worldState.tick,
+        warExhaustion: worldState.warExhaustion || {},
+        warDispositionEnabled: simulationRules.warDispositionEnabled,
+        // M10a — route the coup's applyMode through the approval queue under the
+## applyRelationshipPatch allianceCall
+src/domain/worldPulse/relationshipEvolution.js:499:  const allianceCall = outcome.metadata?.allianceCall;
+src/domain/worldPulse/relationshipEvolution.js:500:  if (allianceCall && String(allianceCall.relationshipKey || '') !== String(outcome.relationshipKey)) return worldState;
+src/domain/worldPulse/relationshipEvolution.js:501:  if (allianceCall?.callId && (current.allianceCalls || [])
+src/domain/worldPulse/relationshipEvolution.js:502:    .some((row) => String(row?.callId || '') === String(allianceCall.callId)
+src/domain/worldPulse/relationshipEvolution.js:504:  const nextAllianceCalls = allianceCall
+src/domain/worldPulse/relationshipEvolution.js:505:    ? appendRelationshipAllianceCall(current, allianceCall)
+src/domain/worldPulse/relationshipEvolution.js:507:  if (allianceCall && !nextAllianceCalls.some((row) => (
+src/domain/worldPulse/relationshipEvolution.js:508:    String(row?.callId || '') === String(allianceCall.callId)
+src/domain/worldPulse/relationshipEvolution.js:664:    ...(allianceCall
+src/domain/worldPulse/relationshipEvolution.js:665:      ? { allianceCalls: nextAllianceCalls }
+src/domain/worldPulse/relationshipEvolution.js:490:export function applyRelationshipPatch(/** @type {any} */ worldState, /** @type {any} */ outcome, /** @type {any} */ now, /** @type {RelationshipGraphEdge|null} */ edge = null) {
+## computeAllyRelief
+src/domain/worldPulse/warCapacityReads.js:74:export function computeAllyRelief(snapshot, targetId, capacityFor, besiegedSet, coalitionLit = false) {
+src/domain/worldPulse/warCapacityReads.js-75-  const states = snapshot?.worldState?.relationshipStates || {};
+src/domain/worldPulse/warCapacityReads.js-76-  const allies = new Set();
+src/domain/worldPulse/warCapacityReads.js-77-  for (const rawEdge of snapshot?.regionalGraph?.edges || snapshot?.relationships || []) {
+src/domain/worldPulse/warCapacityReads.js-78-    const edge = normalizeRelationshipEdge(rawEdge);
+src/domain/worldPulse/warCapacityReads.js-79-    const relState = ensureRelationshipState(edge, states[relationshipKeyFromEdge(rawEdge)]);
+src/domain/worldPulse/warCapacityReads.js-80-    if (!ALLY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+## stampDeploymentRecall
+src/domain/worldPulse/warIntent.js:319:export function stampDeploymentRecall(state, attackerId, targetId, cause, tick) {
+## CLOSE_ROADS
+src/domain/worldPulse/concludedWarRecord.js:69:export const CLOSE_ROADS = Object.freeze([
+src/domain/worldPulse/concludedWarRecord.js-70-  'attacker_lost',
+src/domain/worldPulse/concludedWarRecord.js-71-  'authority_verdict',
+src/domain/worldPulse/concludedWarRecord.js-72-  'conquest',
+src/domain/worldPulse/concludedWarRecord.js-73-  'convoy_lost_debark',
+src/domain/worldPulse/concludedWarRecord.js-74-  'envoy_terms_carried_home',
+src/domain/worldPulse/concludedWarRecord.js-75-  'field_battle_retreat',
+src/domain/worldPulse/concludedWarRecord.js-76-  'razing',
+src/domain/worldPulse/concludedWarRecord.js-77-  'return_home',
+src/domain/worldPulse/concludedWarRecord.js-78-  'siege_abandoned',
+src/domain/worldPulse/concludedWarRecord.js-79-  'sue_for_peace',
+src/domain/worldPulse/concludedWarRecord.js-80-  'sue_for_peace_decree',
+src/domain/worldPulse/concludedWarRecord.js-81-  'target_lost',
+src/domain/worldPulse/concludedWarRecord.js-82-  'wind_down',
+src/domain/worldPulse/concludedWarRecord.js-83-]);
+src/domain/worldPulse/concludedWarRecord.js-84-
+src/domain/worldPulse/concludedWarRecord.js-85-const CLOSE_ROAD_SET = new Set(CLOSE_ROADS);

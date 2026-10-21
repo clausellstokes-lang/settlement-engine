@@ -1,0 +1,122 @@
+idFor | 4 | src/domain/worldPulse/stressorsCore.js src/domain/worldPulse/npcLedger.js src/domain/worldPulse/pestilenceKernel.js src/domain/worldPulse/stressors.js 
+normalizeStressor | 17 | src/store/campaignRegionalSlice.js src/store/campaignPulseHelpers.js src/components/map/heraldFeed.js src/domain/crisisLifecycle.js 
+ageRoamingStressors | 6 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/stressorsCore.js src/domain/worldPulse/proposalAdmission.js src/domain/worldPulse/coup.js 
+evaluateStressorRules | 3 | src/domain/certification/subsystemRowsPeople.js src/domain/worldPulse/candidateEvents.js src/domain/worldPulse/stressors.js 
+existingStressorKeys | 1 | src/domain/worldPulse/stressors.js 
+windDownSponsoredStressors | 2 | src/domain/worldPulse/stressorDynamics.js src/domain/worldPulse/applyWorldPulse.js 
+recordWarResolutionIncidents | 2 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/stressorDynamics.js 
+counterforceAssessment | 4 | src/data/dossierStateProse/stressors.generated.js src/domain/worldPulse/stressorDynamics.js src/domain/worldPulse/stressors.js src/domain/display/stateProse/stressorsStateProse.js 
+STRESSOR_COUNTERFORCES | 1 | src/domain/worldPulse/stressorDynamics.js 
+advanceEmbattlement | 2 | src/domain/worldPulse/pulseKernel.js src/domain/spatial/embattlement.js 
+rampThreat | 4 | src/domain/spatial/embattlement.js src/domain/spatial/entrepots.js src/domain/worldPulse/entrepotKernel.js src/domain/worldPulse/pulseKernel.js 
+stepEmbattlement | 1 | src/domain/spatial/embattlement.js 
+ENTER_THRESHOLD | 2 | src/domain/worldPulse/routeNetworkCharterDanger.js src/domain/spatial/embattlement.js 
+EXIT_THRESHOLD | 1 | src/domain/spatial/embattlement.js 
+W_SIEGE | 1 | src/domain/spatial/embattlement.js 
+SECURITY_MAX_RELIEF | 3 | src/domain/worldPulse/pulseKernel.js src/domain/spatial/pestilence.js src/domain/spatial/embattlement.js 
+buildThreatByCid | 4 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/warReasons.js src/domain/worldPulse/martialReadiness.js src/domain/worldPulse/peaceTerms.js 
+raidHot | 1 | src/domain/worldPulse/martialReadiness.js 
+liveSieges | 18 | src/components/admin/AdminSimTuningPanel.jsx src/components/home/RegionWakeReplay.jsx src/utils/generateCampaignPDF.js src/utils/generateWorldBook.js 
+warFrontsInto | 19 | src/domain/briefs/roadScene.js src/domain/worldPulse/conquestDoctrineStage.js src/domain/worldPulse/deploymentReturn.js src/domain/worldPulse/warFrontReads.js 
+resolveSiegeVerdict | 8 | src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/pulseKernel.js src/domain/spatial/supplyShipments.js src/domain/worldPulse/attrition.js 
+SIEGE_VERDICT_BANDS | 4 | src/domain/edit/directives.js src/domain/worldPulse/warSiegeVerdict.js src/domain/worldPulse/espionage/espionageGauntlet.js src/domain/worldPulse/habitForkRegistry.js 
+SIEGE_MAX_AGE | 4 | src/domain/worldPulse/attrition.js src/domain/worldPulse/warSiegeVerdict.js src/domain/spatial/armyTransit.js src/domain/worldPulse/warDeployment.js 
+SIEGE_CAPACITY_K | 2 | src/domain/worldPulse/warSiegeVerdict.js src/domain/worldPulse/warDeployment.js 
+SIEGE_CAPACITY_HOLD_BIAS | 2 | src/domain/worldPulse/warSiegeVerdict.js src/domain/worldPulse/warDeployment.js 
+classifyFeasibility | 7 | src/domain/worldPulse/feasibilityGate.js src/domain/worldPulse/warSiegeVerdict.js src/domain/worldPulse/conquestDoctrineStage.js src/domain/worldPulse/warIntent.js 
+buildCapacityLookup | 3 | src/domain/display/warResolve.js src/domain/worldPulse/warDeployment.js src/domain/worldPulse/warCapacityReads.js 
+computeAllyRelief | 6 | src/domain/certification/subsystemRowsWar.js src/domain/certification/couplingRegistryGrammar.js src/domain/worldPulse/warHomeCosts.js src/domain/worldPulse/warDeployment.js 
+ALLY_SUPPORT_TYPES | 2 | src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/warCapacityReads.js 
+ALLY_RELIEF_FRACTION | 2 | src/domain/certification/subsystemRowsWar.js src/domain/worldPulse/warCapacityReads.js 
+selectStrikeTargets | 2 | src/domain/worldPulse/calamityKernel.js src/domain/spatial/calamity.js 
+resolvePopulationLoss | 2 | src/domain/worldPulse/calamityKernel.js src/domain/spatial/calamity.js 
+ruinInstitution | 3 | src/domain/worldPulse/worldPulseFates.js src/domain/edit/operations.js src/domain/worldPulse/calamityKernel.js 
+buildExodusOutcome | 2 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/realmVerbExecution.js 
+applyExodusToUpdates | 3 | src/domain/certification/subsystemRowsPeople.js src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/realmVerbExecution.js 
+advanceCalamity | 4 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/magicBufferApply.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/realmVerbExecution.js 
+density01Of | 3 | src/domain/spatial/pestilence.js src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/pestilenceKernel.js 
+reconcileProductionAfterStrike | 2 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/resourceDynamicsKernel.js 
+resolveStrikeOnSettlement | 2 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/habitForkRegistry.js 
+applyPopulationOutcomeToSettlement | 5 | src/domain/worldPulse/calamityKernel.js src/domain/worldPulse/populationDynamics.js src/domain/worldPulse/tierOutcomeApply.js src/domain/worldPulse/applyWorldPulse.js 
+WORLD_PULSE_FATES | 1 | src/domain/worldPulse/worldPulseFates.js 
+STRENGTH_BANDS | 5 | src/domain/edit/directions.js src/domain/display/forceComposition.js src/domain/worldPulse/beliefMap.js src/domain/worldPulse/negotiationPictures.js 
+REMAINING_BANDS | 1 | src/domain/display/armyStrength.js 
+REALM_MANIFEST | 3 | src/components/map/RealmVerbComposer.jsx src/domain/events/realmManifest.js src/domain/worldPulse/pactProposals.js 
+COURSE_TARGET_SEP | 1 | src/domain/events/realmManifest.js 
+ACTOR_ARG | 1 | src/domain/worldPulse/realmVerbExecution.js 
+splitCourseTarget | 1 | src/domain/events/realmManifest.js 
+stableArgHash | 1 | src/domain/worldPulse/realmVerbExecution.js 
+captureContent | 1 | src/domain/spatial/rumorNetwork.js 
+degradeTelling | 2 | src/domain/spatial/rumorNetwork.js src/domain/worldPulse/habitForkRegistry.js 
+advanceRumorLedgers | 6 | src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/brokerageStamps.js src/domain/worldPulse/peaceReasons.js 
+magnitudeBandOf | 2 | src/domain/spatial/rumorNetwork.js src/domain/spatial/migrationRumors.js 
+passesSignificanceGate | 2 | src/domain/spatial/rumorNetwork.js src/domain/worldPulse/pulseOutcomePartition.js 
+RUMOR_NOTABLE_SCORE_FLOOR | 5 | src/domain/worldPulse/traditionsKernel.js src/domain/worldPulse/roadsKernel.js src/domain/spatial/rumorNetwork.js src/domain/worldPulse/seasons.js 
+normalizeEntry | 15 | src/domain/certification/subsystemRowsWaves.js src/domain/certification/subsystemRowsGrowth.js src/domain/region/wizardNews.js src/domain/content/customContentCommands.js 
+scoreSharedThreat | 2 | src/domain/worldPulse/pactTriggers.js src/domain/worldPulse/pactFormation.js 
+readAllianceWebRisk | 5 | src/domain/certification/couplingRegistryWar.js src/domain/worldPulse/razingExecution.js src/domain/worldPulse/pactFormation.js src/domain/worldPulse/warCoalitionDecision.js 
+beliefAwareBesieged | 1 | src/domain/worldPulse/settlementStrategy.js 
+besiegedBonus | 2 | src/domain/worldPulse/settlementStrategy.js src/domain/worldPulse/scoringObjective.js 
+collectThreatSources | 2 | src/domain/capacityModel.js src/domain/threatProfile.js 
+deriveThreatProfile | 1 | src/domain/threatProfile.js 
+THREAT_TYPE_TEMPLATES | 1 | src/domain/threatProfile.js 
+siegeInProgress | 4 | src/copy/en.js src/domain/edit/worldConditions.js src/domain/edit/directions.js src/components/edit/EditModeShell.jsx 
+DRAMA_CLASS_REGISTRY | 3 | src/domain/worldPulse/decisionTier.js src/domain/display/chronicleGraph.js src/domain/worldPulse/narrativeTempo.js 
+archetypeForStressor | 3 | src/domain/crisisLifecycle.js src/domain/events/batch.js src/domain/conditionPromotion.js 
+promoteStressorsToConditions | 4 | src/generators/steps/assembleSettlement.js src/domain/events/mutateWorld.js src/domain/crisisLifecycle.js src/domain/conditionPromotion.js 
+applyOffStage | 3 | src/store/editSlice.js src/store/phantomMintAction.js src/domain/edit/phantoms.js 
+TRACKED_LEDGER_KEYS | 2 | src/lib/spatialUsage.js src/domain/worldPulse/pactProposals.js 
+STRESSOR_POLICIES | 2 | src/domain/worldPulse/stressorsCore.js src/domain/worldPulse/stressors.js 
+populationFlows | 1 | src/domain/worldPulse/flows.js 
+DISPLACEMENT_STRESSORS | 1 | src/domain/worldPulse/flows.js 
+countLiveMajorArcs | 1 | src/domain/worldPulse/narrativeTempo.js 
+hopWeeks | 37 | src/lib/spatialUsage.js src/store/mapSlice.js src/domain/certification/subsystemRowsCompact.js src/components/MapOverlay.jsx 
+pathCost | 11 | src/domain/worldPulse/migrationKernel.js src/domain/region/neutralNeighbourEdges.js src/domain/worldPulse/npcCirculationTransit.js src/domain/worldPulse/demographicsLand.js 
+STORM_SEASON_COST | 2 | src/domain/spatial/index.js src/domain/spatial/seaLanes.js 
+SLOW_NOT_SEVER_MAX | 3 | src/domain/spatial/spatialCost.js src/domain/spatial/distanceRead.js src/domain/spatial/index.js 
+classifyLegModes | 2 | src/domain/worldPulse/roadsKernel.js src/domain/roads/seaRoads.js 
+activeSeaLanes | 3 | src/domain/spatial/distanceRead.js src/domain/spatial/navalLayer.js src/components/map/RoadsLayer.jsx 
+riskToleranceOf | 5 | src/domain/worldPulse/strategicPosture.js src/domain/worldPulse/espionage/espionageTap.js src/domain/worldPulse/roadsKernel.js src/domain/roads/state.js 
+chooseRoute | 15 | src/domain/briefs/roadScene.js src/domain/worldPulse/migrationKernel.js src/domain/spatial/armyTransit.js src/domain/spatial/entrepots.js 
+riskToleranceFromAlignment | 7 | src/domain/spatial/armyTransit.js src/domain/spatial/embattlement.js src/domain/spatial/commodityFlow.js src/domain/spatial/navalLayer.js 
+interpretStressorOrigin | 2 | src/domain/worldPulse/stressorDynamics.js src/domain/worldPulse/stressors.js 
+hostileNeighborsOf | 3 | src/domain/worldPulse/stressorDynamics.js src/domain/worldPulse/convergence.js src/domain/worldPulse/stressorGates.js 
+STRESSOR_CATALOG | 7 | src/domain/certification/subsystemRowsPeople.js src/domain/crisisLifecycle.js src/domain/worldPulse/decisionTier.js src/domain/worldPulse/stressorsCore.js 
+CONSERVATION_ENDPOINTS | 1 | src/domain/worldPulse/peopleLedger.js 
+COUNT_EVENTS | 1 | src/domain/worldPulse/peopleLedger.js 
+HIDDEN_PATH_KINDS | 3 | src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/envoyDiplomacy.js src/domain/worldPulse/espionage/espionageDoctrine.js 
+mayUseHiddenPaths | 4 | src/domain/certification/couplingRegistryEspionage.js src/domain/worldPulse/routeNetworkConsumers.js src/domain/worldPulse/routeNetworkConsumersTransit.js src/domain/worldPulse/envoyDiplomacy.js 
+climateBandFor | 1 | src/domain/worldPulse/seasons.js 
+attackerEntity | 2 | src/components/map/WorldPulseData.js src/components/map/WorldPulsePanel.jsx 
+stressorOriginPoolKey | 1 | src/domain/display/stateProse/stressorsStateProse.js 
+monsterRaiderGate | 1 | src/domain/worldPulse/stressorGates.js 
+siegeGate | 1 | src/domain/worldPulse/stressorGates.js 
+INTERVAL_WEEKS | 23 | src/hooks/useAdvanceSession.js src/domain/certification/warConvergenceContract.js src/domain/certification/tradeConvergenceContract.js src/domain/npc/livedExperienceFunnel.js 
+partyImpactKinds | 9 | src/domain/aiCharter.js src/domain/tableLedger.js src/domain/intent/opVocabulary.js src/domain/worldPulse/partyImpactKinds.js 
+POSTURE_ACTOR_KINDS | 1 | src/domain/worldPulse/strategicPosture.js 
+dramaClassForStressorType | 1 | src/domain/worldPulse/narrativeTempo.js 
+advanceEnvoyDiplomacyPulse | 10 | src/domain/certification/couplingRegistryInfo.js src/domain/certification/subsystemRowsEncounters.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/envoyInbound.js 
+advanceTreatiesWithDisposition | 3 | src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/pulseStageManifest.js src/domain/worldPulse/dispositionChannels.js 
+forceAbandonSettlement | 2 | src/domain/worldPulse/settlementLifecycleFirstClass.js src/domain/worldPulse/realmVerbExecution.js 
+WHAT_PHRASES | 12 | src/domain/worldPulse/demographicsHerald.js src/domain/region/wizardNews.js src/domain/worldPulse/grammarNews.js src/domain/display/rumorFallbackPhrasePools.js 
+KIND_REGISTRATION_FREEZES | 0 | 
+EXPECTED_VOICE | 2 | src/domain/worldPulse/demographicsHerald.js src/domain/display/newsVoice.js 
+KIND_PREFIX | 1 | src/domain/dossier/entityLinks.js 
+settlementAlignment | 16 | src/domain/certification/couplingRegistryEspionage.js src/domain/worldPulse/migrationKernel.js src/domain/worldPulse/pulseKernel.js src/domain/worldPulse/conquestDoctrineStage.js 
+pairKey | 31 | src/pdf/lib/liveWorld.js src/generators/npcGenerator.js src/pdf/sections/FaithWar.jsx src/lib/roadNetwork.js 
+wanderStep | 2 | src/domain/worldPulse/stressors.js src/domain/worldPulse/habitForkRegistry.js 
+UNPRICED_LEG_WEEKS | 2 | src/domain/worldPulse/routeNetworkConsumersTransit.js src/domain/worldPulse/namedPersonTransit.js 
+adjustStressorSeverityById | 4 | src/domain/worldPulse/partyImpact.js src/domain/worldPulse/stressors.js src/domain/worldPulse/commonsVoiceKernel.js src/domain/worldPulse/assizeKernel.js 
+applyTwinDirectivesToWorld | 3 | src/store/campaignPulseHelpers.js src/domain/events/drainQueuedEvents.js src/domain/worldPulse/forecastRun.js 
+isSubsystemActive | 9 | src/domain/certification/subsystemRowsBaseline.js src/domain/certification/subsystemRowsVirtual.js src/domain/worldPulse/religiousContest.js src/domain/worldPulse/pulseKernel.js 
+WAR_STRESSOR_TYPES | 9 | src/components/settlement/EventComposer.jsx src/domain/worldPulse/traditionsKernel.js src/domain/events/mutateWorld.js src/domain/worldPulse/stressorDynamics.js 
+interpretOriginContext | 1 | src/domain/worldPulse/stressorDynamics.js 
+mutualDefenseFor | 2 | src/domain/certification/couplingRegistryGrammar.js src/domain/worldPulse/treatyEnforcement.js 
+registerEngagementKind | 0 | 
+presenceTerms | 0 | 
+menaceHolds | 0 | 
+paragonLean | 0 | 
+reliefAnswerOf | 0 | 
+closeSiteWeek | 0 | 
+recordSighting | 0 | 
+absorbBody | 0 | 

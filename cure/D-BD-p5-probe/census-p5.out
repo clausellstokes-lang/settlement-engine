@@ -1,0 +1,22 @@
+sponsor_body src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+spills src=8 (quoted=0) tests=4 masterdocs=8 ledgerdocs=10
+spill src=28 (quoted=0) tests=6 masterdocs=47 ledgerdocs=46
+commitArrival src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+body_raid src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+VISIBLE_OUTMATCH src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+SPILL_DWELL src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+SPILL_FRACTION src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+SPONSOR_OBJECTIVE_CAP src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+sponsorObjectiveScore src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+sponsorObjective src=0 (quoted=0) tests=0 masterdocs=0 ledgerdocs=0
+objective src=48 (quoted=0) tests=74 masterdocs=59 ledgerdocs=122
+intelligence src=81 (quoted=0) tests=20 masterdocs=106 ledgerdocs=124
+spills quoted-in-src=0
+spill quoted-in-src=0
+objective quoted-in-src=0
+intelligence quoted-in-src=0
+sponsor_body quoted-in-src=0
+body_raid quoted-in-src=0
+sponsorObjectiveFor src=0 tests=0 mdocs=0 ldocs=0 (files)
+bodyVisibleDefenceOf src=0 tests=0 mdocs=0 ldocs=0 (files)
+sponsorObjective src=0 tests=0 mdocs=0 ldocs=0 (files)

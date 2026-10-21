@@ -1,0 +1,8 @@
+no entry: {"direction":"neutral","band":"settled","factor":1,"terms":[],"absent":["standing","channels","appetite","books"]}
+after 1 win(s): {"direction":"lower","band":"settled","factor":0.9775,"terms":["standing"],"absent":["channels","appetite","books"]}
+after 2 win(s): {"direction":"lower","band":"marked","factor":0.955,"terms":["standing"],"absent":["channels","appetite","books"]}
+after 3 win(s): {"direction":"lower","band":"marked","factor":0.9325,"terms":["standing"],"absent":["channels","appetite","books"]}
+after 1 loss(es): {"direction":"raise","band":"settled","factor":1.0225,"terms":["standing"],"absent":["channels","appetite","books"]}
+after 2 loss(es): {"direction":"raise","band":"measured","factor":1.045,"terms":["standing"],"absent":["channels","appetite","books"]}
+after 3 loss(es): {"direction":"raise","band":"measured","factor":1.0675,"terms":["standing"],"absent":["channels","appetite","books"]}
+same 3-win court WITH an empty-treasury books term (no master caller passes it): {"direction":"raise","band":"measured","factor":1.038571,"terms":["standing","books"],"absent":["channels","appetite"]}

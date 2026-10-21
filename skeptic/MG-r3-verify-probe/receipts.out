@@ -1,0 +1,22 @@
+== V-MG-r3 receipts (Tue Oct 20 16:41:12 CDT 2026) — volume snapshot MG.at-verify.md (580 lines) ==
+-- MG-V4: wingsEnabled requires PS's wing-passage ruling + PS's march row carrying the wing (§11 l.374):
+PS's ruling on a wing's passage — INCLUDING PS's march row carrying the wing and banking its battle inputs at every re-plan 
+-- §6.3 l.298 (the two PS options; the interim refusal):
+A wing CROSSING A STRANGER'S LAND is a PASSAGE mover by PS's choice — a fifth mover kind, or the wing under its army's key (PS · PL's fealty-episode prefix
+until PS rules, a split is refused where the wing's path would cross a stranger's land 
+PS's border leaf, which names no wing, is never asked one
+-- S21 l.429:
+a source scan: PS's, ST's and PR's leaves take no wing record
+-- OD-MG-25 l.482 (no 'until'):
+a wing's split and every re-plan are refused onto a stranger's land (`stranger_land`)
+-- PS §4.1 step 1 (the march row is written by passageBorderLeaf at first sight):
+272:At first sight** (a record the leaf has no `marches` row for — new this tick, or met when the flag lights)
+-- RULINGS-P6 E.4:
+PS · ST · PR carry no wing text
+-- HB gate (minor m1): HB l.1080-1083 habitAnticipationActive reads the key; HB 'read BY NAME ... exactly once, in this one file':
+1094:every one of the four
+1095:exactly once, in this one file
+-- master: ANTICIPATION_SPAN
+126:  ANTICIPATION_SPAN: 0.2,
+-- diff: §7 (fleet) lines untouched by r3 (changed ranges):
+9a10 27c28 52c53 56c57 62,64c63,65 102c103 191c192 194c195 208c209 216c217 229c230 272c273 275c276 297c298 361,362c362,363 364c365 366c367 373c374 382c383 394c395 427c428,429 430c432 447a450 466c469 477c480 478a482 561a566,579 

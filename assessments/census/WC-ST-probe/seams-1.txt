@@ -1,0 +1,25 @@
+2:  siege: {
+16:  famine: {
+34:  occupation: {
+43:  political_fracture: {
+51:  indebtedness: {
+59:  betrayal: {
+69:  infiltration: {
+76:  disease_outbreak: {
+---
+src/domain/display/warResolve.js:267:  const homeDefense = Math.max(0, offensive - (besieging.length ? ARMY_DEPLOYED_CAPACITY_PENALTY : 0));
+src/domain/worldPulse/warCapacityReads.js:191:    const homeDefense = Math.max(0, offensive - armyAway);
+---
+src/domain/events/realmManifest.js:203:/** Every holding a campaign court could convey — TRANSFER_SOVEREIGNTY's asset dial.
+---
+63:const ALLY_SUPPORT_TYPES = new Set(['allied', 'vassal', 'patron', 'defensive_pact']);
+80:    if (!ALLY_SUPPORT_TYPES.has(relState.relationshipType)) continue;
+---
+136:// STARVE_K: the log-odds slope at full starvation×time; STARVE_FULL_TICKS: ticks of
+141:const STARVE_FULL_TICKS = 12; // a season of total interdiction fully starves the town
+367:    const timeFactor = clamp01(siegeAge / STARVE_FULL_TICKS);
+369:    logOdds = STARVE_K * interdiction * timeFactor - STARVE_RELIEF_BIAS * relief01 - SIEGE_CAPACITY_HOLD_BIAS - willBias;
+---
+src/domain/worldPulse/warDeployment.js:494:    if (!snapshot?.byId?.has?.(targetId)) continue;
+
+1081:    worldState = { ...worldState, ...war.worldStatePatch, deployments: war.deployments, warExhaustion: war.warExhaustion };
