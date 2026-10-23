@@ -27,6 +27,7 @@ import {
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
+  RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   validateSchema3Baseline,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
@@ -53,6 +54,7 @@ import {
   validateSchema22Baseline,
   validateSchema23Baseline,
   validateSchema24Baseline,
+  validateSchema25Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   digestOf,
@@ -348,7 +350,9 @@ describe('observed-shape schema-3 baseline envelope', () => {
     // estate already carried. The bank therefore goes 61/40 -> 69/45, the fence's third
     // exercise and its first over a ROSTER growth.
     // ⭐ SCHEMA 24: THE URBAN BAND'S CORPUS RE-DEAL (2026-10-01, ODQ §934.86 and its addendum 2): schema 23's envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that admits 53 ordinary rows the re-dealt AO-0 year exposes and shrinks one; nothing is declared and the bank holds at 69/45.
-    expect(BASELINE_SCHEMA).toBe(24);
+    // ⭐ SCHEMA 25: THE 2026-10 ADVISORY LOCKFILE BUMP (the chair's ruling of 2026-10-23, under the schema-13 precedent TE-MINT-1, ODQ §783.3/§821/§825): schema 24's envelope, tag law, roster and register UNCHANGED, re-governed to a lockfile that moves dompurify 3.4.12 -> 3.4.17 and fflate 0.8.2 -> 0.8.3 with package.json byte-identical. Like 13, its reconciliation is EMPTY by construction, and measured so.
+    expect(BASELINE_SCHEMA).toBe(25);
+    expect(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA).toBe(24);
     expect(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA).toBe(23);
     expect(RETIRED_DOMAIN_READER_BASELINE_SCHEMA).toBe(22);
     expect(RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA).toBe(21);
@@ -609,6 +613,14 @@ function validSchema22Baseline_fixture() {
 function validSchema23Baseline_fixture() {
   const baseline = validSchema7Baseline();
   baseline.schema = RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA;
+  return baseline;
+}
+
+/** The RETIRED schema-24 envelope, pinned to its own LITERAL number for the reason the
+ *  schema-10 through schema-23 fixtures above record. */
+function validSchema24Baseline_fixture() {
+  const baseline = validSchema7Baseline();
+  baseline.schema = RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA;
   return baseline;
 }
 
@@ -877,10 +889,21 @@ describe('observed-shape schema-7 bank-by-rule envelope', () => {
     // is paired with a fixture rather than with `live`. `live` belongs to 24 now.
     const editModeReaders = validSchema23Baseline_fixture();
     expect(validateSchema23Baseline(editModeReaders)).toBe(editModeReaders);
-    expect(validateSchema24Baseline(live)).toBe(live);
+    // ⭐ 24 IS RETIRED at the schema-25 rung and now validates its OWN literal, so it too
+    // is paired with a fixture rather than with `live`. `live` belongs to 25 now.
+    // ⚠ THE 24/25 PAIR IS AS TIGHT AS 12/13 WAS: schema 25 re-governs schema 24's envelope
+    // with NOT ONE row moved — the two registers differ in the schema number and the recorded
+    // provenance and in nothing else — so the number is the ONLY thing keeping a stale freeze
+    // from validating as a current one.
+    const corpusRedeal = validSchema24Baseline_fixture();
+    expect(validateSchema24Baseline(corpusRedeal)).toBe(corpusRedeal);
+    expect(validateSchema25Baseline(live)).toBe(live);
     expect(() => validateSchema23Baseline(live)).toThrow(/is not schema 23/);
+    expect(() => validateSchema24Baseline(live)).toThrow(/is not schema 24/);
     expect(() => validateSchema24Baseline(editModeReaders)).toThrow(/is not schema 24/);
     expect(() => validateSchema24Baseline(domainReader)).toThrow(/is not schema 24/);
+    expect(() => validateSchema25Baseline(corpusRedeal)).toThrow(/is not schema 25/);
+    expect(() => validateSchema25Baseline(editModeReaders)).toThrow(/is not schema 25/);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
     expect(() => validateSchema20Baseline(live)).toThrow(/is not schema 20/);
     expect(() => validateSchema21Baseline(live)).toThrow(/is not schema 21/);
