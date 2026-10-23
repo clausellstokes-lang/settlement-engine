@@ -1,6 +1,6 @@
 # Claude continuation note
 
-> **THE OPERATING STANDARD (the owner, 2026-09-20: "the standard no matter which claude account i use") binds every session on every account and model: seats, batching, the intake rule, measure-first, the report diet, what stays the owner's. It lives on the ledger branch — read it FIRST:** `git fetch origin review-fixes-2026-07-08 && git show origin/review-fixes-2026-07-08:docs/OPERATING_STANDARD.md`, then `…:docs/HANDOFF_CURRENT.md`.
+> **THE OPERATING STANDARD (the owner, 2026-09-20: "the standard no matter which claude account i use") binds every session on every account and model: seats, batching, the intake rule, measure-first, the report diet, what stays the owner's. Read it FIRST:** [`docs/OPERATING_STANDARD.md`](docs/OPERATING_STANDARD.md), then [`docs/HANDOFF_CURRENT.md`](docs/HANDOFF_CURRENT.md) and the tail of [`docs/OWNER_DECISION_QUEUE.md`](docs/OWNER_DECISION_QUEUE.md). Since 2026-10-23 the records live on master; the docs ledger branch `review-fixes-2026-07-08` is read-only history (the decision queue through §934.95 and every earlier record): `git fetch origin review-fixes-2026-07-08 && git show origin/review-fixes-2026-07-08:<path>`.
 
 This checkout is a live, heavily modified integration worktree. Before changing
 code, read [`CONTRIBUTING.md`](CONTRIBUTING.md),

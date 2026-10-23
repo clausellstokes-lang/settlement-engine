@@ -109,12 +109,15 @@
  *                class move — no live document left the gated corpus — and it hid
  *                nothing: the excluded past-EOF count stayed 377 and ARM 2 stayed
  *                0 on both sides.)
- *   banner (8)   a blockquote status banner naming HISTORICAL in the opening ten
+ *   banner (9)   a blockquote status banner naming HISTORICAL in the opening ten
  *                lines — the estate's OWN marker (docs/README.md §"HISTORICAL —
  *                point-in-time audit / plan / status exhaust (not maintained)"):
  *                A_PLUS_ROADMAP, CAPABILITY_REMEDIATION_PLAN, GAME_GRADE_AUDIT,
  *                GENERATION_COHERENCE_AUDIT, LANDING_HANDOFF_AMENDMENTS,
- *                SIMULATION_LOGIC_AUDIT, SOL_QUEUE, UIUX_AUDIT_AND_PLAN
+ *                SIMULATION_LOGIC_AUDIT, SOL_QUEUE, START_HERE, UIUX_AUDIT_AND_PLAN
+ *                (START_HERE joined 2026-10-23, 8 -> 9: P10 carried the successor
+ *                bootstrap from the docs ledger onto master, born into the roster;
+ *                a GROWTH that hid nothing, zero past-EOF of its own.)
  *                (GAME_GRADE_AUDIT joined 2026-09-20, FIX-C2b: a 2026-07-24 audit
  *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
  *                surface deleted at 43c3ac3805. It hid nothing — the excluded

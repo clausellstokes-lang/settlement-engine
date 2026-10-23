@@ -40,9 +40,10 @@
     "_rosterGrowth2026-10-02-pact-compliance-u1": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-compliance-u1-strain-band.json (the record prepared by cure lane PACT-COMPLIANCE for U1, FP-44 at ODQ §934.89: the pact strain band, re-derived and signed at batch 7's composed point, which moves the knowledge desk golden's year) joined `tree`, 37 -> 38. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-pact-compliance-u2": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-pact-compliance-u2-stream-carry.json (the record prepared by cure lane PACT-COMPLIANCE for U2, FPQ-75 at ODQ §934.89: a stream clause carries the grain the granary could not move, re-derived and signed at batch 7's composed point, which moves the knowledge desk golden's year) joined `tree`, 38 -> 39. A GROWTH, not a class move; no past-EOF citation of its own.",
     "_rosterGrowth2026-10-02-statecraft-band-u1": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/shift-records/2026-10-02-statecraft-band-u1-exposure-band.json (the record prepared by cure lane STATECRAFT-BAND for U1, FPQ-74 at ODQ §934.89: the spy-exposure rate banded 0.06 to 0.01, signed at batch 7's composed point, which moves one row of the npc-credibility dormancy golden) joined `tree`, 39 -> 40. A GROWTH, not a class move; no past-EOF citation of its own.",
+    "_rosterGrowth2026-10-23-p10-start-here": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/START_HERE.md (the successor bootstrap, carried from the docs ledger branch onto master by P10, ONE HOME FOR CODE AND DOCUMENTS, 2026-10-23; its opening block marks everything below its current pointer as HISTORICAL bootstrap context, the estate's own banner) joined `banner`, 8 -> 9. A GROWTH, not a class move; measured with the banner neutralised, the walker read it as a live document with zero past-EOF citations of its own (ARM 2 green, 18/18), so the excluded past-EOF count stays 377.",
     "pastEofCitationsExcluded": 377,
     "byRule": {
-      "banner": 8,
+      "banner": 9,
       "dated": 5,
       "sha-pin": 1,
       "tree": 40
@@ -56,6 +57,7 @@
         "docs/LANDING_HANDOFF_AMENDMENTS.md",
         "docs/SIMULATION_LOGIC_AUDIT.md",
         "docs/SOL_QUEUE.md",
+        "docs/START_HERE.md",
         "docs/UIUX_AUDIT_AND_PLAN.md"
       ],
       "dated": [
