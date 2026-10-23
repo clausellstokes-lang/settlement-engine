@@ -97,11 +97,12 @@ import {
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
+  RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
-  validateSchema24Baseline,
+  validateSchema25Baseline,
 } from './lib/observed-shape-baseline.mjs';
 import {
   parseExactFlags,
@@ -190,7 +191,12 @@ const BASELINE = join(ROOT, 'scripts/.observed-shape-readers-baseline.json');
  *     before — the institution-flags `inst`, the undercity's `facets`, a partial `originContext` —
  *     and 53 ordinary rows land against them (name collisions with same-named records, and keys
  *     written only on branches this year does not reach), each admitted under the review's note.
- *     One row shrinks; nothing is declared; the bank holds at 69/45. THE LIVE AUTHORITY.
+ *     One row shrinks; nothing is declared; the bank holds at 69/45 (RETIRED).
+ * 25 = schema 24's topology, tag law, ten-identity roster and register ALL UNCHANGED, re-governed
+ *     to THE 2026-10 ADVISORY LOCKFILE BUMP (the chair's ruling of 2026-10-23, under the schema-13
+ *     precedent TE-MINT-1): `package-lock.json` moves dompurify 3.4.12 -> 3.4.17 and fflate
+ *     0.8.2 -> 0.8.3 past the advisories that turned CI's `npm audit` red, and `package.json` stays
+ *     byte-identical. Verdict-only like 13: it moves NO row. THE LIVE AUTHORITY.
  * ⚠ THIS LIST WENT STALE FOR EIGHT RUNGS — it marked 10 as "THE LIVE AUTHORITY" while
  *   the number stood at 18 — so it is filled in here rather than extended by one. Each
  *   rung's full rationale lives beside its own target constant in
@@ -210,6 +216,7 @@ export {
   RETIRED_RELATIONSHIPS_MOUNT_BASELINE_SCHEMA,
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
+  RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
   RETIRED_EXACT_BASELINE_SCHEMA, RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -1436,7 +1443,7 @@ export function assertExplainedWriterRowTags(
   baseline,
   entries = EXPLAINED_WRITER_EXEMPTIONS,
 ) {
-  validateSchema24Baseline(baseline);
+  validateSchema25Baseline(baseline);
   assertExplainedWriterExemptions(entries);
   const declarations = new Map(entries.map((entry) => [entry.identity, entry]));
   const genesis = baseline.frozenAtSha === baseline.migrationReview.subjectSha;
@@ -2870,7 +2877,7 @@ export function baselineOf({
       '"declare the identity and leave that row ordinary" is not expressible. The bank therefore',
       'goes 61 reads across 40 tagged addresses -> 69 across 45, MEASURED off the live scan at',
       'the subject and declared as data before the write.',
-      'SCHEMA 24 = schema 23\'s topology, tag law and ten-identity roster, all UNCHANGED,',
+      'SCHEMA 24 (RETIRED) held schema 23\'s topology, tag law and ten-identity roster, all UNCHANGED,',
       're-governed to a register that ADMITS THE URBAN BAND\'S CORPUS RE-DEAL (ODQ §934.86 and its',
       'addendum 2). The same-seed shift re-dealt the AO-0 corpus\'s year: the institution registry',
       'rebuilt every roster and the druid rulings moved the lodge towns, so the year\'s pulse no',
@@ -2887,6 +2894,16 @@ export function baselineOf({
       'GENUINE READER-WITH-NO-WRITER THE RE-DEAL EXPOSED WAS CURED, NOT ADMITTED: the world-pulse',
       'panel\'s coalition branch read `primaryInstigatorId` and `supporterIds`, which no producer',
       'ever wrote, and was removed in its own commit before this rung.',
+      'SCHEMA 25 = schema 24\'s topology, tag law, ten-identity roster and register, ALL UNCHANGED,',
+      're-governed to THE 2026-10 ADVISORY LOCKFILE BUMP (the chair\'s ruling of 2026-10-23, under',
+      'the schema-13 precedent TE-MINT-1, ODQ §783.3/§821/§825). `npm audit --audit-level=high',
+      '--omit=dev` turned CI\'s Gate / validation red on advisories published after master\'s last',
+      'green run: dompurify <= 3.4.16 (critical, GHSA-55q2-fjhq-7xh7 and four related) and fflate',
+      '0.8.0-0.8.2 (moderate, GHSA-px8p-9vwx-vf98). package-lock.json moves dompurify 3.4.12 -> 3.4.17',
+      'and fflate 0.8.2 -> 0.8.3 (version, resolved, integrity; nothing else) and package.json stays',
+      'BYTE-IDENTICAL. The lockfile is a DELIBERATE detector source ("a dependency bump can move the',
+      'parser"), so only a migration binds its new bytes. Verdict-only like 13: the reconciliation',
+      'is EMPTY, so no row, ceiling, identity or bank figure moves.',
       'Of the ten declared bank entries NINE bank reads today; `isCriminal on incomeSources`',
       'has banked nothing since schema 17 made its writer observable, and banked is always a',
       `subset of declared. This envelope banks ${bankPhrase(bankOf(inventory, rowTags))}.`,
@@ -2897,7 +2914,7 @@ export function baselineOf({
       'An untagged row means: a guarded read, of a real record rather than browser or language surface,',
       'of a key no writer the corpus runs produces and no declared out-of-corpus writer explains.',
       'A tagged row stays visible as governed explained-writer debt under its numeric ceiling and reason.',
-      'Schemas 4–23 are the RETIRED numeric predecessors.',
+      'Schemas 4–24 are the RETIRED numeric predecessors.',
     ],
     schema: BASELINE_SCHEMA,
     frozen: new Date().toISOString().slice(0, 10),
@@ -3071,7 +3088,7 @@ export async function run(argv = [], overrides = {}) {
     createScanArtifact,
     validateScanArtifact,
     assertFindingSourceEvidence,
-    validateBaseline: validateSchema24Baseline,
+    validateBaseline: validateSchema25Baseline,
     // ⭐ THE BANK FENCE'S TWO HAND-OWNED SIDES, overridable so the sentinel can drive
     // every refusal: the literal module and the migration script's declared post-bank.
     readBankLiteral: readBankLiteralModule,

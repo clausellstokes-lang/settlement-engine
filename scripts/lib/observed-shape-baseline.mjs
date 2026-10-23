@@ -7,8 +7,23 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **24**: schema 23's tagged numeric heuristic-leaf envelope, tag law
- * and ten-identity roster UNCHANGED, re-governed to a register that ADMITS THE URBAN BAND'S
+ * `BASELINE_SCHEMA` is **25**: schema 24's tagged numeric heuristic-leaf envelope, tag law,
+ * ten-identity roster and register ALL UNCHANGED, re-governed to THE 2026-10 ADVISORY
+ * LOCKFILE BUMP (the chair's ruling of 2026-10-23 on the fix lane's STOP, under the
+ * schema-13 precedent — TE-MINT-1, ODQ §783.3/§821/§825). `npm audit --audit-level=high
+ * --omit=dev` turned CI's `Gate / validation` red on advisories published after master's
+ * last green run — `dompurify` <= 3.4.16 (critical: GHSA-55q2-fjhq-7xh7 and four related
+ * XSS advisories) and `fflate` 0.8.0–0.8.2 (moderate: GHSA-px8p-9vwx-vf98) — so
+ * `package-lock.json` moves dompurify 3.4.12 -> 3.4.17 and fflate 0.8.2 -> 0.8.3 (version,
+ * resolved, integrity; nothing else) while `package.json` stays BYTE-IDENTICAL. The lockfile
+ * is a DELIBERATE detector source, because a dependency bump can move the parser the scan
+ * runs on, so the shrink-only `--write` refuses it by design and only a migration can bind
+ * its new bytes. Like 13, nothing the scanner FINDS may move at such a rung. Its full
+ * rationale lives beside `ADVISORY_LOCKFILE_TARGET_SCHEMA` in
+ * `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA` is **24**: schema 23's tagged numeric heuristic-leaf
+ * envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that ADMITS THE URBAN BAND'S
  * CORPUS RE-DEAL (ODQ §934.86 and its addendum 2). The same-seed shift re-dealt the AO-0
  * corpus's year, so the heuristic now OBSERVES shapes it bound differently before — the
  * institution-flags `inst`, the undercity's `facets`, a partial `originContext` — and 53 rows
@@ -369,7 +384,14 @@ export const RETIRED_DOMAIN_READER_BASELINE_SCHEMA = 22;
  *  validated against BASELINE_SCHEMA, and this constant exists so a schema-23 PREDECESSOR is
  *  still validated as schema 23 after the live number moves past it. */
 export const RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA = 23;
-export const BASELINE_SCHEMA = 24;
+/** The RETIRED corpus-redeal definition — schema 25's predecessor. Same tagged topology
+ *  envelope, roster, fence and the SAME register row for row; schema 25 re-governs it to the
+ *  2026-10 advisory lockfile bump (dompurify 3.4.17, fflate 0.8.3) and moves no row at all,
+ *  exactly as 13 re-governed 12 to the dropped `three`. Never redefined, never deleted — a
+ *  live baseline is validated against BASELINE_SCHEMA, and this constant exists so a
+ *  schema-24 PREDECESSOR is still validated as schema 24 after the live number moves past it. */
+export const RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA = 24;
+export const BASELINE_SCHEMA = 25;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -988,10 +1010,21 @@ export function validateSchema23Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 24's tagged envelope, re-governed by schema 25 to the
+ *  2026-10 advisory lockfile bump. Re-bound to its own LITERAL now that the authority has
+ *  moved to 25, for the same reason as every retired validator above. */
+export function validateSchema24Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema24Baseline(baseline) {
+export function validateSchema25Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
