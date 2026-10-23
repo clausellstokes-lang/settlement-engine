@@ -12,7 +12,7 @@
 
 ## §934.96 · THE FP ARCHITECTURE ON MASTER, ONE TEXT EACH — P8 THE CONSOLIDATION PASS CLOSED (ALL THIRTEEN PROGRAM VOLUMES, THE FOLD, THE SPINE AND CN BRACKET-FREE), P9 THE LANDING AND P10 ONE HOME FOR CODE AND DOCUMENTS (2026-10-23; SEAT: the cloud chair, session `01QuxWCMgVdyKhCNZL3c98y5`; consolidation seats, fidelity verifiers and one seams reader)
 
-**The owner's words (2026-10-23), verbatim, in order:** "Please continue the pending FP architecture work" · "Going forward, please use the best combination in terms of efficiency and efficacy of models and effort per model. And I give all permissions required now, and those emergent in the future." · "Permissions changed" · "Progress?" · "I leave all decisions and judgement to you" · "I’m progress" · "What are the remaining works and what do they do?" · "Why is it taking so long" · "You can unblock from four at a time" · "What’s left?" · "What do you think about the architecture?"
+**The owner's words (2026-10-23), verbatim, in order:** "Please continue the pending FP architecture work" · "Going forward, please use the best combination in terms of efficiency and efficacy of models and effort per model. And I give all permissions required now, and those emergent in the future." · "Permissions changed" · "Progress?" · "I leave all decisions and judgement to you" · "I’m progress" · "What are the remaining works and what do they do?" · "Why is it taking so long" · "You can unblock from four at a time" · "What’s left?" · "What do you think about the architecture?" · "Progress?" · "What’s left after this?" — and the words that open THE REALM'S PAST, recorded in §934.97.
 
 **The chair's reading (vetoable).** "All permissions required now, and those emergent in the future" with "I leave all decisions and judgement to you" is the owner's standing word for this program's gate items: the chair pushed the branches, opened the PRs and merged each one itself on green CI by a merge commit (never squash, never force). Deploy, migration, golden signing and dispatch did not arise and were not touched. "You can unblock from four at a time" lifted the four-seat cap for the rest of this program.
 
@@ -69,3 +69,33 @@ The eight volumes went from 3,373,328 to 2,596,016 bytes, the fold from 811,323 
 4. **`docs/DESIGN_THE_ROADS.md`** is cited (BD, the fold, three older documents) and exists on neither master nor the ledger. It is one of the eleven texts outside the ledger tree that ride the dispatch packet (the fold §3.1 INBOX).
 5. **The dev-dependency audit, non-blocking:** the full tree flags 13 packages (5 moderate · 8 high; vite, vitest, postcss, undici and their kin), shown by CI's non-blocking dev step. CI's blocking step audits the production tree (`--omit=dev --audit-level=high`), which exits 0.
 6. **The gate list, unchanged in kind:** push and merge were exercised under the owner's standing word above. Deploy · migration · golden signing · dispatch stay the owner's. Every FP volume stays DARK and NOT SCHEDULED; the dispatch gate is the release, pushed and deployed.
+
+## §934.97 · THE REALM'S PAST (PA) OPENED — A NEW FP PROGRAM ON THE OWNER'S WORDS: AT BIRTH THE REALM GETS A SHARED PAST, ADDITIVE TO EVERY SETTLEMENT'S OWN HISTORY, NEVER CHANGING A DOSSIER, THE USER'S TO VETO OR CHANGE UNTIL THE FIRST ADVANCE (2026-10-23; SEAT: the cloud chair, session `01QuxWCMgVdyKhCNZL3c98y5`; three research seats)
+
+**The owner's words (2026-10-23), verbatim, in order.** They came on an assessment pasted from the map program's session. That assessment pairs the map with the FP and proposes "A realm pre-history at birth. Run the FP for a chosen span of years before the DM's first week, then hand over" and "Named polities from day one". The owner's words:
+- "Thoughts on this?"
+- "I would say that rather than run the FP a few years into the future, make it additive to each’s past history and run it some time from the past, nothing that changes the current history but something that builds their relationship starting with the oldest and second oldest’s history."
+- "Nothing that changes the current dossier as if intended by the user"
+- "Abd these facts can be vetoed or changed by user before first advance"
+- "Please integrate it into the architecture"
+
+**What it is.** Every generated settlement already carries its own dated past (`src/generators/historyGenerator.js :: generateHistory`): its founding (age, reason, founded by), its events (name, type, years ago, severity, lasting effects) and its current tensions. No town's past touches another's. THE REALM'S PAST replays a shared past over those histories, oldest first. The clock starts when the second-oldest settlement is founded, and each later town joins at its own founding.
+
+**The owner's laws (THE OWNER'S rows ⭐; the wording is the chair's, vetoable in wording only):**
+1. **THE DOSSIER IS CANON.** Every settlement's current dossier, generated or edited, is what the user intended. The past is built around it and never written into it. It adds only what the dossier allows, and a user's later edit to a dossier wins.
+2. **THE PAST IS THE USER'S UNTIL THE FIRST ADVANCE.** Every fact of the past can be vetoed or changed by the user before the first advance. Each fact is shown with its cause; a change is treated as intent and the rest re-derived around it. At the first advance the past becomes history.
+3. **FROM THE PAST, NEVER FORWARD.** No forward run before the first week changes the generated present.
+
+**What the research measured (the kit's `findings/R-PA1..3.md`; CONFIRMED by reads and executed probes):**
+- **A forward run is ruled out by measurement too.** Four real weeks changed every dossier's bytes, and five centuries would take about 1.8 hours. A replay driven by the dossiers' own events costs 1–8 ms and leaves every dossier byte-identical.
+- **Filling the other party contradicts nothing.** No dossier event names its counterpart: every implied party ("an external power", "a partner settlement") is anonymous.
+- **The realm is not born quite blank.** The instant world writes 3, 9 or 12 founding ties into the dossiers at birth (`genesisDiplomacy.js :: materializeGenesisRelations`), sometimes with a younger overlord of an older town. Those ties are dossier facts. PA explains them where they agree with the founding ages and flags them where they do not; it never fixes them.
+- **The past needs its own home.** A negative tick breaks four of six landed readers, so the past lives in one sidecar (`spatialLedgers.realmPast`) holding a seed, re-roll nonces and the user's per-fact choices. Its facts are derived on demand, one labelled seed stream each, so striking one moves no other. At the first advance only present-day consequences enter the landed ledgers, at tick 0, each with a back-pointer.
+- **Other programs' laws bind it.** The engine never names a polity (PA offers a name; the DM's keep is the christening), never spawns a menace, and keeps no town↔town regard.
+
+**The chair's rulings (by delegation, vetoable):**
+- The program code is PA (free) and its volume is `docs/DESIGN_FP_ARCH_PA.md`.
+- **THE AMENDMENT LAW AFTER P8:** a consolidated text is amended in place, in final form, never by a dated bracket in its running text. The date goes to its rulings table, the change is recorded in this queue, and the landed volumes keep the insertions-only law.
+- PA's words avoid the registered homonyms: "seal", "DRAFT", "pin", "lens", and the census's other taken words, including "canon", "briefing", "proposed", "kept" and "settled".
+
+**What follows.** The volume is compiled, reviewed adversarially to 0 BLOCKING and 0 MAJOR, and folded into the coherence fold (status row, rulings, vocabulary, its place in the order as chain C22, and the owner's rows in §7). This lands in its own docs PR, recorded as §934.98. Nothing is scheduled; the dispatch gate is unchanged.
