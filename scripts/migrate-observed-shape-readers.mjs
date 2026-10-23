@@ -183,7 +183,13 @@
  *     first real exercise, since 20's own re-freeze moved nothing. Its full rationale lives
  *     beside `RELATIONSHIPS_MOUNT_TARGET_SCHEMA`.
  *
- *   schema 23 -> 24 (LIVE)   the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR
+ *   schema 24 -> 25 (LIVE)   the same tagged numeric reconciliation, and THE SECOND RUNG DRIVEN BY
+ *     A DEPENDENCY RATHER THAN THE DETECTOR OR THE INVENTORY — the schema-13 dead-dependency rung's
+ *     shape, cut for a lockfile-only security bump (dompurify 3.4.17, fflate 0.8.3, the 2026-10
+ *     advisories). It moves NO row, declares nothing, and leaves the roster and the bank where they
+ *     stood. Its full rationale lives beside `ADVISORY_LOCKFILE_TARGET_SCHEMA`.
+ *
+ *   schema 23 -> 24 (RETIRED) the same tagged numeric reconciliation, and THE FIRST RUNG CUT FOR
  *     A SAME-SEED SHIFT THAT GREW THE REGISTER. Every earlier shift moved figures DOWN; the urban
  *     band's re-deal of the AO-0 year (ODQ §934.86 and its addendum 2) ADMITS 53 ordinary rows and
  *     shrinks one, declares nothing, and leaves the roster and the bank where they stood. Its full
@@ -258,6 +264,7 @@ import {
   validateSchema21Baseline,
   validateSchema22Baseline,
   validateSchema23Baseline,
+  validateSchema24Baseline,
 } from './lib/observed-shape-baseline.mjs';
 
 export const MIGRATION_REPORT_SCHEMA = 2;
@@ -913,6 +920,51 @@ export const EDIT_MODE_READERS_TARGET_SCHEMA = 23;
  *  ratchet-red, and its re-freeze lands next. */
 export const CORPUS_REDEAL_TARGET_SCHEMA = 24;
 
+/* ⭐⭐ THE SCHEMA 24 → 25 RUNG — THE 2026-10 ADVISORY LOCKFILE BUMP
+ *  (the chair's ruling of 2026-10-23 on the fix lane's STOP, by delegation under the owner's
+ *  "I leave all decisions and judgement to you", vetoable: "CHARTER THE SCHEMA-25 MIGRATION,
+ *  following the schema-13 precedent step for step". The precedent is `DEAD_DEPENDENCY_TARGET_SCHEMA`
+ *  above — the dropped `three`, chair order TE-MINT-1, ODQ §783.3/§788.2(d)/§821, discharged §825.)
+ *
+ *  WHAT MOVED, AND IT IS NEITHER THE DETECTOR NOR THE INVENTORY — a LOCKFILE. CI's
+ *  `Gate / validation` job starts with `npm audit --audit-level=high --omit=dev`, and advisories
+ *  published after master's last green run turned it red on master and on every PR:
+ *    • `dompurify` <= 3.4.16 — CRITICAL: GHSA-55q2-fjhq-7xh7 and four related XSS advisories
+ *      (GHSA-6688-9rhm-gjv2, GHSA-cg2g-xh64-v4q7, GHSA-mrv2-3pqr-j5jr, GHSA-c6gr-qvv4-5v3f);
+ *      the lock held 3.4.12 under package.json's "^3.4.8";
+ *    • `fflate` 0.8.0–0.8.2 — moderate: GHSA-px8p-9vwx-vf98; a transitive dependency (jspdf and
+ *      @react-pdf's png-js) the lock held at 0.8.2.
+ *  `npm update dompurify fflate --package-lock-only` moves exactly two lock records — dompurify
+ *  3.4.12 -> 3.4.17 and fflate 0.8.2 -> 0.8.3, their `version`, `resolved` and `integrity` and
+ *  NOTHING ELSE (6 insertions, 6 deletions) — and `package.json` stays BYTE-IDENTICAL, so the
+ *  estate's any-byte mint trigger on the manifest (ODQ §349.2) does not fire; only the lockfile's
+ *  does.
+ *
+ *  ⭐ WHY A RUNG AT ALL FOR A LOCKFILE BUMP — the schema-13 reason, verbatim in substance.
+ *  `package-lock.json` is a DELIBERATE governed detector source — the checker says why in its own
+ *  words, "a dependency bump can move the parser" — so the drift classifier refuses the ordinary
+ *  gate ("DETECTOR SOURCE changed … (package-lock.json)"), the shrink-only `--write` refuses it by
+ *  design, and the walker's live-estate arm reds on it. Only a migration can bind the new bytes.
+ *  Neither bumped package is on the scan's own path, by grep rather than by assumption: dompurify
+ *  has ONE importer in the repository (src/lib/sanitizeGalleryHtml.js, the gallery's sanitizer)
+ *  and fflate NONE (it arrives only under jspdf and @react-pdf's png-js); the scan parses with
+ *  `typescript`, unbumped, and the corpus executes the generation producers, which import neither.
+ *
+ *  ⛔ AND THE RECONCILIATION MUST BE EMPTY, which is this rung's whole claim, exactly as it was
+ *  13's. A lockfile bump changes no source the readers scan, so ANY moved row, ceiling or
+ *  identity would mean the bump was not inert and the mint must STOP rather than bank it.
+ *  MEASURED before this rung was cut, on the bumped tree: the walker's shrink-only arm reported
+ *  violations 0 / stale 0 against the committed schema-24 register, and its live-estate drift arm
+ *  named `package-lock.json` as the ONLY moved detector input.
+ *
+ *  ⭐ THE BANK DOES NOT MOVE: 69 banked reads across 45 tagged addresses, measured off the
+ *  committed register; no row moves, so the literal module stands still.
+ *
+ *  Its delta is the lockfile (the subject) plus the THREE bookkeeping paths every rung moves. See
+ *  `ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS`. The commit pair holds as at every rung: this rung lands
+ *  ratchet-red with the lockfile, and its re-freeze lands next. */
+export const ADVISORY_LOCKFILE_TARGET_SCHEMA = 25;
+
 export const DECLARED_BANK_BY_TARGET = Object.freeze({
   [EXEMPTION_RETIREMENT_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
   [BANK_FENCE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 60, taggedRows: 39 }),
@@ -939,6 +991,10 @@ export const DECLARED_BANK_BY_TARGET = Object.freeze({
   // committed schema-23 register derives. A re-deal that ADDS rows and leaves the bank alone is
   // the fence's fourth exercise and its first over ordinary growth.
   [CORPUS_REDEAL_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
+  // MEASURED off the committed schema-24 register (`bankOf` → 69 reads across 45 addresses), and
+  // a verdict-only rung moves no row, so the pair cannot move. The write refuses if the live
+  // measurement disagrees with this pair or with the walker's hand-owned literal.
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA]: Object.freeze({ bankedReads: 69, taggedRows: 45 }),
 });
 
 /** The declared post-bank of a target, or `null` for a rung that predates the law. */
@@ -1384,6 +1440,31 @@ export const CORPUS_REDEAL_SCANNER_DELTA_PATHS = Object.freeze([
   'scripts/migrate-observed-shape-readers.mjs',
 ]);
 
+/**
+ * The schema-24 → 25 detector delta — FOUR paths, in the same two groups the schema-13
+ * delta (`DEAD_DEPENDENCY_SCANNER_DELTA_PATHS`) drew, which must not be confused:
+ *   • `package-lock.json` — THE SUBJECT OF THIS RUNG. Two lock records move (dompurify
+ *     3.4.12 -> 3.4.17, fflate 0.8.2 -> 0.8.3; version, resolved, integrity; 6 insertions,
+ *     6 deletions). It sits on the DETECTOR side by explicit estate law and by this
+ *     instrument's own classifier, so the lawful response is to name it in the governed
+ *     delta and let the review accept it, exactly as 13 named both package files.
+ *     ⛔ `package.json` is NOT in this delta and may not be: it is byte-identical, and the
+ *     transition refuses a declared path whose content did not change.
+ *   • the three instrument files — the 24 → 25 bump and the retired-24 validator, this rung
+ *     and its declared post-bank, and the checker's live-validator binding, `_doc` and schema
+ *     index. Bookkeeping, carried for the reason every rung carries them; no detector
+ *     semantics move.
+ * ⛔ NOTHING ELSE MOVED, verified rather than assumed: a recorded-vs-computed sweep over all
+ * eleven governed detector inputs against the committed schema-24 register, on the bumped
+ * tree before this rung was written, reported `package-lock.json` MOVED and the other ten SAME.
+ */
+export const ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS = Object.freeze([
+  'package-lock.json',
+  'scripts/check-observed-shape-readers.mjs',
+  'scripts/lib/observed-shape-baseline.mjs',
+  'scripts/migrate-observed-shape-readers.mjs',
+]);
+
 export const BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS = Object.freeze([
   'package-lock.json',
   'package.json',
@@ -1428,6 +1509,8 @@ const EDIT_MODE_READERS_SCANNER_TRANSITION_POLICY =
   'schema-22-to-23-exact-scanner-transition-v1';
 const CORPUS_REDEAL_SCANNER_TRANSITION_POLICY =
   'schema-23-to-24-exact-scanner-transition-v1';
+const ADVISORY_LOCKFILE_SCANNER_TRANSITION_POLICY =
+  'schema-24-to-25-exact-scanner-transition-v1';
 const CORPUS_COVERAGE_SCANNER_TRANSITION_POLICY =
   'schema-7-to-8-exact-scanner-transition-v1';
 const EPOCH_DARK_CORPUS_SCANNER_TRANSITION_POLICY =
@@ -1470,6 +1553,7 @@ export const LEAF_MIGRATION_PREDECESSOR = Object.freeze({
   [DOMAIN_READER_TARGET_SCHEMA]: RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
   [EDIT_MODE_READERS_TARGET_SCHEMA]: DOMAIN_READER_TARGET_SCHEMA,
   [CORPUS_REDEAL_TARGET_SCHEMA]: EDIT_MODE_READERS_TARGET_SCHEMA,
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA]: CORPUS_REDEAL_TARGET_SCHEMA,
 });
 
 /**
@@ -1536,6 +1620,10 @@ const LEAF_PREDECESSOR_VALIDATOR = Object.freeze({
   // RETIRED literal from this rung onward, so this entry keeps validating schema 23
   // as schema 23 after the live number moves past it.
   [EDIT_MODE_READERS_TARGET_SCHEMA]: validateSchema23Baseline,
+  // The schema-25 rung's own predecessor. `validateSchema24Baseline` is bound to the
+  // RETIRED literal from this rung onward, so this entry keeps validating schema 24
+  // as schema 24 after the live number moves past it.
+  [CORPUS_REDEAL_TARGET_SCHEMA]: validateSchema24Baseline,
 });
 
 const RETIRED_EXACT_MIGRATION_KIND = `observed-shape-schema-2-to-${RETIRED_EXACT_TARGET_SCHEMA}-migration`;
@@ -2038,6 +2126,17 @@ const SCANNER_TRANSITION_BY_TARGET = new Map([
     // TRUE, matching every rung since 8→9 — and THIS rung exercises it: the window regenerated two
     // governed execution inputs (the compendium data and the intent-atlas distillate) by their
     // documented commands, and the report records that movement for the review's decision.
+    reviewableUnscannedMovement: true,
+  })],
+  [ADVISORY_LOCKFILE_TARGET_SCHEMA, Object.freeze({
+    deltaPaths: ADVISORY_LOCKFILE_SCANNER_DELTA_PATHS,
+    inputPaths: BANKED_EXPLAINED_WRITER_SCANNER_INPUT_PATHS,
+    policy: ADVISORY_LOCKFILE_SCANNER_TRANSITION_POLICY,
+    // TRUE, matching every rung since 8→9 — the flag is PER-TARGET and never retroactive, and
+    // 13 carried it the same way. The subject tree is `src/**` and this rung touches only the
+    // lockfile at the root and three files under `scripts/`, none of them subject paths, so the
+    // unscanned digest cannot move BY THIS RUNG and the report's `unscannedMovement` is expected
+    // null. The permission is carried because the class is lawful, not because it is exercised.
     reviewableUnscannedMovement: true,
   })],
   [EDIT_MODE_READERS_TARGET_SCHEMA, Object.freeze({
@@ -3131,7 +3230,7 @@ export function run(argv = process.argv.slice(2)) {
   // any mismatch into a refusal rather than a silent mode switch.
   const targetSchema = command.targetSchema
     ? Number(command.targetSchema)
-    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : CORPUS_REDEAL_TARGET_SCHEMA);
+    : (currentPath ? RETIRED_EXACT_TARGET_SCHEMA : ADVISORY_LOCKFILE_TARGET_SCHEMA);
   if (![RETIRED_EXACT_TARGET_SCHEMA, HEURISTIC_TARGET_SCHEMA, FILTERED_TARGET_SCHEMA,
     SURFACE_FILTERED_TARGET_SCHEMA, BANKED_EXPLAINED_WRITER_TARGET_SCHEMA,
     CORPUS_COVERAGE_TARGET_SCHEMA, EPOCH_DARK_CORPUS_TARGET_SCHEMA,
@@ -3142,8 +3241,9 @@ export function run(argv = process.argv.slice(2)) {
     LINEAGE_REANCHOR_TARGET_SCHEMA, EXEMPTION_RETIREMENT_TARGET_SCHEMA,
     BANK_FENCE_TARGET_SCHEMA, RELATIONSHIPS_MOUNT_TARGET_SCHEMA,
     DOMAIN_READER_TARGET_SCHEMA, EDIT_MODE_READERS_TARGET_SCHEMA,
-    CORPUS_REDEAL_TARGET_SCHEMA].includes(targetSchema)) {
-    throw new Error(`observed-shape --target-schema must be ${CORPUS_REDEAL_TARGET_SCHEMA} (live corpus-redeal leaf),`
+    CORPUS_REDEAL_TARGET_SCHEMA, ADVISORY_LOCKFILE_TARGET_SCHEMA].includes(targetSchema)) {
+    throw new Error(`observed-shape --target-schema must be ${ADVISORY_LOCKFILE_TARGET_SCHEMA} (live advisory-lockfile leaf),`
+      + ` ${CORPUS_REDEAL_TARGET_SCHEMA} (retired corpus-redeal leaf),`
       + ` ${EDIT_MODE_READERS_TARGET_SCHEMA} (retired edit-mode-readers leaf),`
       + ` ${DOMAIN_READER_TARGET_SCHEMA} (retired domain-reader leaf),`
       + ` ${RELATIONSHIPS_MOUNT_TARGET_SCHEMA} (retired relationships-mount leaf),`
