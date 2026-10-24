@@ -167,3 +167,103 @@ At close: **0 BLOCKING · 0 MAJOR open.** The owner's three laws hold in every m
 2. OD-PA-32: a DM-set anchor for a newcomer's years (not now).
 3. The ROUTES, each its owner's to confirm at its wave: GR's past-origin signer arm; a DM verb for the relationship plane's `memoryHorizon`; POP's read of founding ties; the map's past window (MF and the world map's H9 · H13); PL's oath dates and offered names.
 4. PA is eligible after THE INSTRUMENTS BEFORE C0, as chain C22, chosen at a read under FP-40. Every FP volume stays DARK and NOT SCHEDULED, and the dispatch gate is the release.
+
+## §934.99 · THE MAP PROGRAM'S FIFTEEN HOST PROMPTS ANSWERED — EACH ASK RE-HOMED TO THE UNIT THAT OWNS ITS FIELD; FPQ-62 DECIDED (THE DEITY OFFER); H31–H45 ACCEPTED; THE GRACE RULE TAKEN; A LIT POPULATION DEFECT CONFIRMED BY EXECUTION (2026-10-24; SEAT: the cloud chair, session `01QuxWCMgVdyKhCNZL3c98y5`; one measure seat and one refuting verifier)
+
+**The owner's words, verbatim:**
+- "Your thoughts on this:", attaching the map program's `host-prompts-2026-10-24.md`: its fifteen prompts S1–S15 for host sessions, pinned at `81f1cd96`.
+- On the chair's answer: "Sorry that was an accident it was not a cancellation it was an accident accept everything".
+- Later: "I leave all judgement to you".
+
+The chair read the second word as YES to the three questions put to the owner:
+1. answer the map program with a reply and record it in the fold;
+2. FPQ-62 as an OFFER the DM confirms;
+3. accept H31–H45.
+
+Its first clause concerns a declined tool call, since made good.
+
+**What lands (the commit that carries this section).** `docs/DESIGN_FP_COHERENCE_FOLD.md`, amended in place in final form (OD-FC-128):
+- §3.1.38 THE MAP PROGRAM'S HOST PROMPTS: every S row's disposition and the unit that owns it;
+- the §3.1 INBOX's map program (v), with its header, and POPULATIONS (h);
+- §5 THE MAP REGISTER's `marker` · `dated fact` row;
+- §6 THE MAP PREREQUISITES' acceptance sentence, now including H31–H45;
+- requirement 17's grace-rule sentences;
+- §2's FAITH row and its one lit chain;
+- §7 OD-FC-134 · OD-FC-135 · OD-FC-136.
+
+THE GRACE RULE is also carried in place into `DESIGN_FP_ARCH_CH.md` (7 sites), `_MN.md` (5), `_PT.md` (2), `_BD.md` (1) and `_RN.md` (1). Every ratchet is CLEAN: no token or cite missing, the fold's rulings 357 → 360, zero review markers.
+
+Also in the commit: THE PRONOUN RULE (OD-FC-133) applied to the living records, wording only, with verbatim quotes untouched: `docs/OPERATING_STANDARD.md` (4 sites) and `docs/HANDOFF_CURRENT.md` (5 sites). These were the owner's pronouns written by earlier sessions.
+
+**The owner's two decisions:**
+- **OD-FC-134 — FPQ-62, THE DEITY OFFER (THE OWNER'S).**
+  - At a birth that names a capital, where the account holds a custom deity, the birth card OFFERS the top-ranked one as the capital's patron.
+  - ONLY the DM's confirm seats it. The card makes the capital the active settlement, and the confirm runs `setPrimaryDeityImpl` (the panel's writer).
+  - Declined or left alone, none is seated.
+  - The engine never seats a deity, there is no premade pool, and the write gate is honoured. OD-FC-125's reading of record holds: the confirm is the user's own edit.
+  - The map program's option B, "seated" at birth, is superseded.
+- **OD-FC-135 — H31–H45 ACCEPTED (THE OWNER'S)**, on H1–H30's terms: accepted work, not scheduled, each built inside the FP unit that owns its field.
+  - The host has read H31 · H32 · H33 · H34 · H45.
+  - H35–H44's text is asked of the map.
+
+**The dispositions (OD-FC-136, by delegation, vetoable; THE INTAKE RULE: none a lane of its own, none pasted as written):**
+
+| S | the answer | where it lands |
+|---|---|---|
+| S1 | the module-only birth door SUPERSEDED (OD-FC-62's door for every new campaign); genesis names STRUCK (PL3; a v2 bundle would move); the honest label kept; the deity is OD-FC-134 | EC's OD-EC-5 car; §3.1.32 (PA offers, the DM christens) |
+| S2 | H13 keeps the map's raw `PolityLink` rows, with PL's walk beside them as an OFFER (§3.1.26); H23's rows through WY's one projection; H9 keyed as written; the regime resolver as written | PL-1 (C9) for the walk; WY; C0 · C0.5 |
+| S3 | THE GRACE RULE taken (the spatial canon only; the World Clock unchanged). The landed move-lock (`mapSlice.js :: updatePlacement`, `applyAutoplacement`, keyed on `canonizedAt`) is RE-KEYED to the spatial canon on a map-module world, a named code change at H22's unit. The canon is adopted inside the first advance's one commit, with PA's inking. A refusal refuses the advance; its degraded arm is one sentence naming the module. An undo reopens the lock and revokes `canonized` | THE CANON ROOT (H22); H12 → C3's first unit |
+| S4 | H31 on plan law 3. A law-3 code carries the module's version, and the module is asked to serve every version it issues, for life. A code that cannot be served is refused fail-closed, never silently rewritten. The bundle freezes its charters | its own unit; the network C3's |
+| S5 | the party's place is PT's `whereaboutsOf` (it may name a pair; the pair's observer asked of PT); a home seat asked of PT; THE COURT VIEWPOINT HELD (§3.1.27) | C13 THE PARTY; H17; the information program |
+| S6 · S9 | `causedBy` and the cause walk inside C0.5 | H9's unit |
+| S7 | the K3 fence, `MAP_FEED_READERS` EMPTY; its bracket, WY's line, the register line and the test with H4's client | with H4's client |
+| S8 | §3.1.29's slot, gross now and net with WC-4 | the war volume's unit |
+| S10 | the claims as written; a standing past pact carries `pastRef` | H13; GR |
+| S11 | the marker / dated-fact split | §5 now; WY's bracket at its next unit |
+| S12 | the handler and `editLaw` are H32; the arrived plague's condition is PG's pg-1; the double service CONFIRMED | EM; PG; POP's pop-1 train |
+| S13 | the outcome word asked of the war volume (dark or new-campaigns-only); `raid` registered on C0's registry by the war volume at that unit; the strength order on H13 | §3.4's owner |
+| S14 | ANSWERED A, decided 2026-10-18 (OD-FC-2, OD-FC-82) | THE PATROLS (C16) carry capture on a patrolled road; H9 · H13 · H23 · H25 |
+| S15 | H33 inside TRADE M8's lanes; H34's readings labelled; depopulation events and the DM's stamps, never rolled | §3.3.14; H9's unit |
+
+Rules that cover every disposition:
+- Every port value that enters a host roll or cost is frozen into the advance's recorded inputs.
+- THE GRACE RULE, the map's own amendment of the accepted H22, is TAKEN BY DELEGATION under the owner's 2026-10-18 "i told the mapmaker i do as it suggested". It was never put to the owner as one of the three questions, so it is not the owner's row.
+
+**The measurement (the kit's `findings/M-HP12.md`, CONFIRMED BY EXECUTION at `81f1cd963`):**
+- **What happens.** In `realistic_regional` (the default), `living_realm`, `dramatic_campaign` and `full_simulation`, ONE CRISIS IS SERVED TWICE IN THE SAME TICK:
+  - `population_emigration` sheds people, and on a canonized world they leave as columns;
+  - an auto-applied `flow_migration` (`flows.js`) debits the same source again and credits a destination at once.
+- **The receipts:** −972 at a source of 10,000 under `dramatic_campaign` (116 as columns, 856 teleported); −817 under the default preset.
+- **Why neither lane catches it:** the column dispatcher collects no `flow_migration`, `flows.js` never reads `migrationActive`, and their exclusive tags never meet.
+- **On the canon** it is a lit defect whatever the map does: the flow's people bypass the column ledger and its conservation invariant.
+- **The cure** is a row in the pop-1 train (§3.1 INBOX POPULATIONS (h)). Its first car measures which lane yields, then ONE SERVICE PER CRISIS. It is a signed shift on every lit preset at its unit.
+
+**The verifier passes (the kit's `skeptic/V-HP-r1.md` and `V-HP-r2.md`):**
+- **First pass:** 21 findings (1 BLOCKING · 5 MAJOR · 15 MINOR). The serious ones:
+  - the map's raw links are kept beside PL's offer, never superseded;
+  - a law-3 code pins the module's version;
+  - the raid's registration is the war volume's;
+  - the owner's dossier law is quoted in its reading of record;
+  - the court viewpoint is held;
+  - THE GRACE RULE is re-filed as a delegated ruling.
+- **Second pass, on the cures:** 19 cured, 1 partly, 1 not, and 6 new errors (2 MAJOR · 4 MINOR). The MAJORs:
+  - the landed move-lock keys on the World Clock, so it is re-keyed at H22's unit;
+  - a law-3 code could die, so the module is asked to serve every version for life.
+- **Third round:** all cured in place. The chair checked the two MAJORs against their receipts: `mapSlice.js :: updatePlacement` and `applyAutoplacement` read `canonizedAt`; `worldPlan.js`'s header holds the share-code promise.
+- At close: 0 BLOCKING · 0 MAJOR open.
+
+**The reply** to the map program is the kit's `refs/REPLY-TO-THE-MAP-PROGRAM-HOST-PROMPTS-2026-10-24.md`, the owner's to send once this commit merges. It asks the map program to:
+- adopt the dispositions;
+- confirm THE REALM'S PAST's routes;
+- type the party's place as PT reads it;
+- carry its world-generation version in a law-3 code and serve every version for life;
+- send H35–H44.
+
+**The proof.** The docs proof on this commit (master's doc-scanning suites plus the kit's 75 extra doc-reading suites): Test Files 290 passed (290) · Tests 4,824 passed (4,824) · exit 0. CI is the full gate.
+
+**Open:**
+1. The map program's adoption of the dispositions, and H35–H44's text.
+2. OD-PA-13b (THE OWNER'S): a plan law 3 is where PA's ordering could inform the genesis ties without moving a v2 code.
+3. ONE CRISIS, ONE SERVICE, at the pop-1 train's unit.
+4. The court viewpoint, at the information program's unit.
+5. No build is dispatched by this section. Every FP volume stays DARK and NOT SCHEDULED, and the dispatch gate is the release.
