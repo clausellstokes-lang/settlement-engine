@@ -34,3 +34,5 @@
 
 ## 5. THE RULES THAT BIND EVERY SEAT
 The gate list is the owner's (push · merge · deploy · migration · dispatch). The code of record is READ-ONLY. Two seats never own one file. Save as you go; stop and report at ~300k tokens saying which section is next. REPORT DIET ≤ 350 words + ONE table (section · old brackets folded · dropped · moved · STOPs). Structured return as the script lists. A lane that cannot keep a count equal says so in the ledger — never pads, never trims silently.
+
+**AMENDMENT (the cloud chair, 2026-10-23, SEAMS-P8-12, by delegation, vetoable):** to §3 (e) — a date or clock stamp ON A VERBATIM QUOTE OF THE OWNER'S WORDS is an allowed class in the running text (the stamp is the quote's provenance: "the owner's 22:51 word"); every other date stays in the header and the rulings tables only.

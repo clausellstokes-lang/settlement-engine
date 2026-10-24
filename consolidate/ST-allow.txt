@@ -1,0 +1,105 @@
+# ST — ALLOW-MISSING (P8 lane C-ST; SEAT 1, header..§2 so far). One token per line; reasons in ST-ledger.md §4. Seats that continue APPEND below.
+# HEADER (the compile header lines, the status blocks and their bracket templates, moved to history)
+HOST-r2
+SEAMS-r2
+⛔ STOP-ST-n
+[REFINED 2026-10-18 (fp-final) — what; why]
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[CURED 2026-10-18 (fp-final r2) — <id>: …]
+[CURED 2026-10-18 (fp-final r3) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-20 (fp-final P5) — …]
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+# PAIRING ARTIFACT (a backtick pair spanning a bracket in old line 184; no token of the design)
+] | each a DATED event on the record (ENC-HL-02's five — 
+# == SEAT 3 (2026-10-23) — MOVED WITH THE CURE RECORD: each cited ONLY in old §15 THE CURE RECORD (old lines 743–949), now `history/ST-cure-record.md` Part 2 verbatim — a receipt, a probe, a review file or a ruling row of the trail; where it is design its full path or symbol stands in the volume (ledger §6c)
+< CARE_MAX_RELIEF
+D-ST-r4-probe/measure-3.out
+PASSAGE_HOLD_CAP_WEEKS
+PROSPERITY_RANK
+Prosperous: 0.8
+SLOW_NOT_SEVER_MAX
+STORM_SEASON_COST
+STRESSOR_COUNTERFORCES.criminal_corridor
+arith-r5.out
+arrived
+believedWhereabouts
+bodyDefenceOf
+briefs/RULINGS-ROUND6.md
+census-r3.out
+classifyFeasibility
+corps
+cure/D-FOLD-p5.md
+cure/D-MG-r3.md
+cure/D-RESIDUE-r6.md
+cure/D-ST-r2-probe/
+cure/D-ST-r3-probe/
+cure/D-ST-r4-probe/
+cure/D-ST-r5-probe/
+cure/D-WS-r1.md
+danger-consumers.out
+envoyChanceMeeting.js :: DISTANCE_BANDS
+falls && roll > 0
+hamlet
+liegeAnswer
+menace_met
+min
+navalLayer.js
+normalizeDeployments
+paragonLean
+party_voiced
+passageFieldForceOf
+realmManifest.js :: COURSE_TARGET_SEP = '␟'
+scaleAndLatch.out
+settlement · person · party · menace · corps
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-ST-r2.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-ST-r3.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-ST-r4.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-ST-r5.md
+sib-mn.out
+siegeMonotone.out
+skeptic/*-r2-verify.md
+skeptic/BD-r5.md
+skeptic/HOST-r2.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r5.md
+skeptic/ST-r5-verify-probe/residue-v.out
+skeptic/ST-r5-verify.md
+stepEmbattlement
+stretch:<a\|b>
+unopposed
+{ kind: 'body', bodyKind: 'gang' \| 'beast', id }
+# == SEAT 3 — MOVED WITH THE STATUS BLOCKS AND THE CURE RECORD: review files cited ONLY in old lines 9–13 and old §15 (history Part 1 and Part 2)
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/L-BD.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-PS-ST-PR-p5.md
+cure/D-PS-ST-PR-p5b-p5.md
+cure/L-BD.md
+skeptic/BD-r4.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+skeptic/ST-r2-verify.md
+skeptic/ST-r2.md
+skeptic/ST-r3-verify.md
+skeptic/ST-r4-verify.md
+# == SEAT 3 — QUOTED ONLY INSIDE A FOLDED CHANGE NOTE OR STAMP (a wrong cite, another volume's term, a withdrawn citation, a review provenance) or SUPERSEDED — each reason in ledger §6c
+buildOriginEnvelope
+columnTerm
+cure/D-BD-r5.md
+cure/D-FS-r1.md
+cure/D-ST-r5.md
+holder.ref
+noLook
+siteTermAt(…, 'security')
+wallsTerm
+# == SEAT 3 — A BARE NAME WHOSE FULL CITE OR QUOTED LINE STANDS IN THE VOLUME (a backtick-pairing difference, no loss)
+captureContent
+coalitionJoinFeasibility
+departTick

@@ -1,0 +1,170 @@
+# MN — ALLOW-MISSING, seat 1 of 2 (header..§5, old lines 1–389). One token per line; reasons in MN-ledger.md §4. Seat 2 appends its own.
+# SUPERSEDED NAMES AND FORMS (a later ruling replaced each; never minted)
+defenderReliefBonus
+held ? stressor.severity : …
+holder.seenBy
+interpretOriginContext
+menaceSightings
+recordMenaceSighting
+seenBy
+side
+worldSites[siteId].holder.seenBy
+{ id, mightBand, tick }
+# SHORT FORMS, CHANGE-NOTE DETAIL AND PAIRING ARTIFACTS (the full symbol stays in the text, or the token stands in seat 2's range, or the string is the ratchet pairing across a removed bracket)
+(worldState, settlementId, domain, seam)
+), so two meanings would have shared one word (fold §5); 
+; the ledger's docs only the fold's register row — 
+countLiveMajorArcs
+deploymentReturnOutcomes
+draw × mult
+embattled
+hopWeeks
+informer
+max-lines
+stretch:<a|b>
+world_stressor.siege.<town>
+{ mult }
+{kind:'menace'|'body', id}
+␟
+# PRESENT IN THE NEW TEXT (the ratchet mis-pairs backticks around a span over 200 characters; each token occurs literally)
+Date.now()
+Math.random()
+arcMax
+if (worldState?.simulationRules?.menacesEnabled === true && s?.originContext?.menaceRelease) continue;
+menaceId = 'menace.' + stablePart(<the RAISE_MENACE outcome id>)
+realm_verb.RAISE_MENACE.<anchor>.<tick>.<stableArgHash(args)>
+war_pressure
+world_stressor.<T>.<town>.menace.<menaceId>
+# REVIEW-TRAIL PATHS AND MARKER TEMPLATES (moved with the header/status block or a change note; they stay in history/MN-cure-record.md and git)
+(fp-final r2)
+P5-RULINGS-2026-10-20.md
+RULINGS-AFTER-RESEARCH.md
+RULINGS-ROUND2b …
+SEAMS-r2-<n>
+WIRING-CENSUS-2026-10-20.md
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[CURED 2026-10-17 (fp-final) — <id>: …]
+[CURED 2026-10-18 (fp-final r1) — <id>: …]
+[CURED 2026-10-18 (fp-final r2) — <id>: …]
+[CURED 2026-10-18 (fp-final r3) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-17 (fp-final) — …]
+[REFINED 2026-10-18 (fp-final r1) — …]
+[REFINED 2026-10-18 (fp-final r2) — …]
+[REFINED 2026-10-18 (fp-final r3) — …]
+[REFINED 2026-10-18 (fp-final r4) — …]
+[REFINED 2026-10-19 (fp-final r5) — …]
+[REFINED 2026-10-20 (fp-final P5) — …]
+[r4: <id>]
+[r5: <id>]
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-BD-r6.md
+cure/D-FOLD-p5.md
+cure/D-MG-r1.md
+cure/D-MN-RN-p5b-p5-probe/
+cure/D-MN-r3-probe/
+cure/D-MN-r4-probe/
+cure/D-MN-r4.md
+cure/D-MN-r5-probe/
+cure/D-MN-r5.md
+cure/D-ST-r4.md
+cure/L-BD.md
+fp-final-a73343ed-2026-10-17/assessments/P5-COMPLETENESS-2026-10-20.md
+fp-final-a73343ed-2026-10-17/cure/L-MN.md
+fp-final-a73343ed-2026-10-17/skeptic/MN-r1-verify.md
+fp-final-a73343ed-2026-10-17/skeptic/MN-r1.md
+fp-final-a73343ed-2026-10-17/skeptic/MN-r2-verify.md
+fp-final-a73343ed-2026-10-17/skeptic/MN-r3-verify.md
+fp-final-a73343ed-2026-10-17/skeptic/MN-r4-verify.md
+fp-final-a73343ed-2026-10-17/skeptic/SEAMS-r2.md
+refs/HOST-REQUIREMENTS-2026-10-18.md
+settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SMN.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/briefs/RULINGS-PL-MN.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+skeptic/HOST-r1.md
+skeptic/HOST-r2.md
+skeptic/MN-r3-verify-probe/receipt.out
+skeptic/MN-r3-verify-probe/union.out
+skeptic/SEAMS-r1.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+skeptic/SX.md
+# --- appended by SEAT 2 (old §6–§13 and the moved cure record, old lines 390–979); reasons in MN-ledger.md §4 ---
+# SUPERSEDED NAMES of §6–§13 (a later ruling replaced each; never minted)
+pressTally.danger01
+repelled · breached
+road{a,b}
+# REVIEW-TRAIL PATHS AND PROBE OUTPUTS cited only in a change note of §6–§13 (they stay in history/MN-cure-record.md and git)
+briefs/RULINGS-AFTER-COMPILE.md
+cure/D-MN-r5-probe/DESIGN_FP_ARCH_MN.pre-r5.md
+hysteresis.out
+relief-timing.out
+# MOVED WITH THE CURE RECORD (tokens only old §14 THE CURE RECORD carried; moved verbatim to history/MN-cure-record.md Part 2)
+*-r2-verify.md
+COUNT_EVENTS
+DESIGN_NAVY.md
+STRESSOR_CATALOG.siege.birthThreshold
+T < (0.55 − 0.35)/(1 − 0.35) ≈ 0.308
+advanceRumorLedgers(
+advanceTreatiesWithDisposition(
+arcsGuard.out
+assessments/P5-COMPLETENESS-2026-10-20.md
+believedWhereabouts
+census-r5.out
+composition.out
+cult
+cure/D-*-r3.md
+cure/D-*-r4.md
+cure/D-FOLD-r5.md
+cure/D-MN-r2-probe/
+cure/D-MN-r2b-probe/
+cure/D-RESIDUE-r6.md
+cut01
+dominion-xf-2fc13d59-2026-10-17/skeptic/{SMN,SX}.md
+enemy_in_service
+exertion.outcome === 'exerted'
+fp-final-a73343ed-2026-10-17/briefs/RULINGS-PL-MN.md
+hashInt
+heldEscalation.out
+hopWeeks(…, season)
+idcollide.out
+interpretStressorOrigin
+interpretStressorOrigin('siege', …).variant === 'declared_war'
+m53.out
+measure-a-b.out
+measure-b.out
+measure-c-d.out
+mintDeed
+namedPersonTransit.js
+p(T) = max(wallsTerm, columnTerm, max(0, roadCountry − σ))
+party_voiced
+pressTally.press01
+readiness01
+receipt.out
+resolvedDeployments
+siegeGate
+siteReadiness01
+skeptic/BD-r4.md
+skeptic/BD-r5.md
+skeptic/MN-r1-verify.md
+skeptic/MN-r1.md
+skeptic/MN-r2-verify.md
+skeptic/MN-r3-verify.md
+skeptic/MN-r4-verify.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r5.md
+spentFence.out
+union.out
+unopposed
+wouldbe.out
+x × mult
+{ subject, name?, mightBand, tick, whereId, siteId? }
+…'menace_raid_wear')

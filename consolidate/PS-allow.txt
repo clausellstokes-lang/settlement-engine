@@ -1,0 +1,106 @@
+# PS — ALLOW-MISSING (P8 lane C-PS; SEAT 1 header..§4 — old lines 1–320; SEAT 2 §5..§18 — old lines 322–1006). One token per line; reasons in PS-ledger.md §4.
+# HEADER TEMPLATE (the header lines' bracket templates, moved with the header block to history)
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[CURED 2026-10-18 (fp-final r2) — <id>: …]
+[CURED 2026-10-18 (fp-final r3) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-18 (fp-final r3) — …]
+[REFINED 2026-10-18 (fp-final r4) — …]
+[REFINED 2026-10-18 (fp-final) — what; why]
+[REFINED 2026-10-19 (fp-final r5) — …]
+[REFINED 2026-10-20 (fp-final P5) — …]
+# REVIEW-TRAIL PATHS (ruling files, lane logs, routes, skeptic and verifier reports and probe folders cited only by header lines or brackets; they stay in history/PS-cure-record.md and git; executed probe receipts that back a measured claim are KEPT in the text)
+*-r2-verify.md
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-*-r3.md
+cure/D-*-r4.md
+cure/D-FOUR-r4.md
+cure/D-MG-r1.md
+cure/D-MG-r2.md
+cure/D-MG-r3.md
+cure/D-PS-ST-PR-p5-probe/
+cure/D-PS-ST-PR-p5.md
+cure/D-PS-ST-PR-p5b-p5.md
+cure/D-PS-r2-probe/
+cure/D-PS-r2.md
+cure/D-PS-r3-probe/
+cure/D-PS-r3.md
+cure/D-PS-r4-probe/
+cure/D-PS-r4.md
+cure/D-PS-r5-probe/
+cure/D-PS-r5.md
+cure/D-ST-r5.md
+cure/L-BD.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+skeptic/BD-r4.md
+skeptic/HOST-r2.md
+skeptic/PS-r2-verify.md
+skeptic/PS-r2.md
+skeptic/PS-r3-verify.md
+skeptic/PS-r4-verify.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+# SUPERSEDED NAMES (each superseded by a later bracket; the latest stands in the text)
+(B)
+(capacity)
+B
+protection_failed
+road (prev, B)
+settlement · person · party · menace
+settlement · person · party · menace · corps
+# SEAT 2 — REVIEW-TRAIL PATHS cited only inside body brackets of §5–§7 (lane logs, skeptic reports, the rulings assessment); they stay in git and the kit
+assessments/P5-RULINGS-2026-10-20.md
+cure/D-BD-r5.md
+cure/D-PL-r5.md
+cure/D-PR-r5.md
+skeptic/BD-r5.md
+# SEAT 2 — MOVED WITH THE CURE RECORD (tokens that occur only in old §18 THE CURE RECORD, old lines 773–1004, now Part 2 of history/PS-cure-record.md, byte-identical)
+MN-r2-verify
+PL-r2-verify
+PS.pre-r5.md
+RN-r2-verify
+SITE_READINESS
+[OPENED …]
+[STOP SEAMS-r5-2-scope]
+_PRODUCED
+apply_r5.py
+apply_r5b.py
+a␟b
+b\|c
+believedWhereabouts
+briefs/RULINGS-ROUND6.md
+crossingsFor
+cult
+cure/D-OP-r1..r3.md
+cure/D-RESIDUE-r6.md
+cure/LANE-C-seams.md
+cut01
+enemy_in_service
+hashInt
+leaveBy?
+master-reads.out
+menace_met
+p7-effective.mjs
+paragonLean
+party_voiced
+passageChooserTermOf(worldState, snapshot, A, target, tick) → { refusalsExpected, reasons[] }
+polity_ban
+readiness01
+road{P,B}
+skeptic/P5-verify.md
+skeptic/SEAMS-P6.md
+skeptic/SEAMS-r5.md
+spatialUsage.js
+tablecheck.py
+tokens-r4.out
+tokens-r5.out
+trail:<a\|c>~<b>

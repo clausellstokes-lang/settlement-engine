@@ -1,0 +1,40 @@
+tokens: old 3029 · new 2790 · missing 0 · new-in-new 28
+  NEW tokens in the new text (each must be a registered name, never a mint):
+   + 1beabdc85
+   + HUNT_THREAT_FLOOR
+   + SITE_STATUS made_known
+   + authored · condemned_a_good_deed · praised · condemned
+   + championForHunt
+   + cut_down
+   + disgrace
+   + engage · withdraw_a · withdraw_b
+   + f:<settlementId>:<factionId>
+   + heard_deed · met · pledge_kept · pledge_broken · ransomed_by
+   + humanTermType
+   + occupied_enemy_settlement
+   + party_gate · party_banned · party_pledge_due · party_visit · party_voiced · backing_voided · backing_repudiated
+   + party_pledge_due · party_slander · party_gate · party_banned · backing_voided · backing_repudiated
+   + party_request · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_slander
+   + party_request · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_visit
+   + refused_at_gate · banned_by
+   + road{actor's town, the party's town}
+   + road{court, first hop toward the party's last-heard place}
+   + road{prev, B}
+   + s:<settlementId>
+   + screened
+   + settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/FOLD-review-record.md
+   + soughtBy.arrivesAt
+   + stays · besieges · toward · wanders · enlists
+   + termLabel
+   + withdrew
+   + { kind: 'menace' \| 'body' \| 'unit', id }
+cites (path :: symbol): old 140 · new 140 · missing 0
+laws (XX1–XXn bold): old 0 · new 0
+OD rulings: old 327 · new 327
+owner rows ⭐: old 143 · new 144
+DRAFT marks: old 56 · new 50  ← FEWER (explain in the ledger)
+UNMEASURED marks: old 27 · new 25  ← FEWER (explain in the ledger)
+wave ids (XX-n): old 12 · new 16
+flags (…Enabled): old 98 · new 97  ← FEWER (explain in the ledger)
+review markers left in the new text: 0
+RATCHET 3 DIFFERENCE CLASSES

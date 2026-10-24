@@ -1,0 +1,3 @@
+import { SIMULATION_RULE_PRESETS } from '/home/user/master-code-of-record/src/domain/worldPulse/simulationRules.js';
+const keys = ['pactFormationEnabled','treatyRenewalEnabled','warLayerEnabled','peaceEngineEnabled','traditionsEnabled','rumorNetworkEnabled','migrationFlowsEnabled','allianceCallsEnabled','beliefAxesEnabled','infoMode','regionalRumorsEnabled','neighbourBackLinkEnabled','vassalageEnabled','spatialEnabled','spatialLayerEnabled','renownEnabled','pestilenceEnabled','calamityEnabled'];
+for (const [id,p] of Object.entries(SIMULATION_RULE_PRESETS)) { const r = p.rules||p; console.log(id, keys.map(k=>`${k}=${r[k]}`).join(' ')); }

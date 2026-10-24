@@ -1,0 +1,20 @@
+  "linksAfter": 22,
+  "laterLinksMoved": false
+ }
+}
+{
+ "realmSize": "large",
+ "members": 14,
+ "startYearsAgo": 372,
+ "eventsInWindow": 56,
+ "links": 52,
+ "pairYears": 10825,
+ "ms": 12.31,
+ "deterministic": true,
+ "dossiersByteIdentical": true,
+ "strikeOne": {
+  "struck": "iw::pa2-probe::3#0",
+  "linksAfter": 51,
+  "laterLinksMoved": false
+ }
+}

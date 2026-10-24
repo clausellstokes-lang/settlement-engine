@@ -1,0 +1,145 @@
+# BD-allow.txt — consolidation lane C-BD. One token per line; lines starting # are comments. Seat 1 (old lines 1–421) wrote the part below;
+# seats 2 and 3 append their own under their own headings. A token marked [late] also occurs in old lines 422+ (seats 2/3 may keep it).
+# == SUPERSEDED NAMES (seat 1): 6 ==
+# [late] the struck 1.5 trail price; the landed gradeLegMultiplier('hidden') 2 stands
+TRAIL_WEEKS_MULT
+# [late] retired into `peace_unkept`
+brigandage_exported
+# the superseded warden predicate quoted in a change note (CH's `isWardenParagon` stands)
+domain
+# renamed `sightings` (MN's generalized store)
+menaceSightings
+# renamed `recordSighting`
+recordMenaceSighting
+# [late] the same superseded predicate
+wildland
+# == SHORT FORMS (seat 1): 1 ==
+# [late] bare short form; `gradeLegMultiplier('hidden')` stays
+gradeLegMultiplier
+# == MARKER TEMPLATES of the header status lines (old 5–12, MOVED to history Part 1): 11 ==
+# [ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+# [CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+# [CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+# [CURED 2026-10-19 (fp-final r6) — <id>: …]
+[CURED 2026-10-19 (fp-final r6) — <id>: …]
+# [CURED 2026-10-20 (fp-final P5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+# [CURED 2026-10-20 (fp-final P5) — D.3 …]
+[CURED 2026-10-20 (fp-final P5) — D.3 …]
+# [REFINED 2026-10-18 (fp-final r4) — …]
+[REFINED 2026-10-18 (fp-final r4) — …]
+# [REFINED 2026-10-18 (fp-final) — what; why]
+[REFINED 2026-10-18 (fp-final) — what; why]
+# [REFINED 2026-10-19 (fp-final r5) — …]
+[REFINED 2026-10-19 (fp-final r5) — …]
+# [REFINED 2026-10-19 (fp-final r6) — …]
+[REFINED 2026-10-19 (fp-final r6) — …]
+# [REFINED 2026-10-20 (fp-final P5) — …]
+[REFINED 2026-10-20 (fp-final P5) — …]
+# == REVIEW-TRAIL PATHS cited only in the header status lines or in change notes of old lines 1–421: 21 ==
+# assessments/P5-COMPLETENESS-2026-10-20.md
+assessments/P5-COMPLETENESS-2026-10-20.md
+# assessments/P5-RULINGS-2026-10-20.md
+assessments/P5-RULINGS-2026-10-20.md
+# briefs/RULINGS-P5.md
+briefs/RULINGS-P5.md
+# cure/D-BD-p5-probe/
+cure/D-BD-p5-probe/
+# [late] cure/D-BD-p5.md
+cure/D-BD-p5.md
+# cure/D-BD-p5b-p5-probe/
+cure/D-BD-p5b-p5-probe/
+# [late] cure/D-BD-p5b-p5.md
+cure/D-BD-p5b-p5.md
+# cure/D-BD-r4-probe/
+cure/D-BD-r4-probe/
+# cure/D-BD-r5-probe/
+cure/D-BD-r5-probe/
+# [late] cure/D-BD-r5.md
+cure/D-BD-r5.md
+# cure/D-BD-r6-probe/
+cure/D-BD-r6-probe/
+# [late] cure/D-BD-r6.md
+cure/D-BD-r6.md
+# [late] cure/D-MG-r1.md
+cure/D-MG-r1.md
+# cure/D-RESIDUE-r6.md
+cure/D-RESIDUE-r6.md
+# cure/L-CH-PD.md
+cure/L-CH-PD.md
+# settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+# skeptic/BD-r4-verify.md
+skeptic/BD-r4-verify.md
+# skeptic/BD-r4.md
+skeptic/BD-r4.md
+# skeptic/BD-r5-verify.md
+skeptic/BD-r5-verify.md
+# skeptic/BD-r5.md
+skeptic/BD-r5.md
+# skeptic/P5-verify.md
+skeptic/P5-verify.md
+# == SUPERSEDED OR CHANGE-NOTE-ONLY TOKENS (seat 2, old lines 422–765): 6 ==
+# B372's change note quoted the dead-end draw's short form; the live part `0.15 × N.level × (1 − age ÷ 13 weeks) × the frontier factor below` stands (§10.1 (ii))
+0.15 × N.level
+# B265's change note on the struck round-4a guild-war spawn-gate rows (the archetype they promoted to); the condition's own `affectedSystems: ['defense_readiness', 'social_trust']` stands (§6.8 (d))
+['criminal_opportunity', 'social_trust', 'trade_connectivity']
+# the same change note (bare); the live text says "the ONE affectedSystems join" and `affectedSystems: ['defense_readiness', 'social_trust']`
+affectedSystems
+# the same change note: the archetype the struck stressor rows promoted to
+regional_criminal_pressure
+# B377's change note on the struck round-4a affinity reuse (`faithProximity` feeds giving, never the pair's trust); the live lean names `generosityKernel.js :: faithProximity(dG, dR)` (§10.2 (a))
+generosityEV
+# B295's change note listed the three quarter acts as one span; each word stands alone (§7.2, §7.6)
+paid_quarter · fed_poor · robbed_quarter
+# == REVIEW-TRAIL PATH (seat 2): 1 ==
+# cited only in the heads of the two P6c brackets B259 and B271 (§6.8 (a) and (e)); their content is folded
+cure/D-MN-RN-p5b-p5.md
+# == RATCHET ARTIFACT (seat 2): present verbatim in the new text; the ratchet tokenizer (a backtick span ≤ 200 characters) mis-pairs the backticks of old line 687 / new §10.2 (a) after the 200+-character `applyRelationshipPatch(…)` spans: 1 ==
+# §10.2 (a), the parity-pin alternative: "(`deityAxes.js :: evil01 · chaos01`)" — `grep -c` finds it once in BD-new.md
+deityAxes.js :: evil01 · chaos01
+# == SUPERSEDED NAMES (seat 3, old lines 766–1457): 3 ==
+# the compile's retired `PLACE_BODY` veto reason (§14 BD-0's EDITOR (b)); a beast may be PLACED nameless (OD-BD-25 on the owner's L-BD 36 word)
+beast_never_placed
+# OD-BD-52's first `affectedSystems` triple; the crime term removed by the later ruling — the condition's `defense_readiness · social_trust` stands (§17 OD-BD-52, §6.8 (d))
+criminal_opportunity · defense_readiness · social_trust
+# the tie's former `exposed` field, replaced by the latch `exposedAt` (§17 OD-BD-1, §2.2)
+exposed
+# == MOVED WITH THE CURE RECORD (old §20, old lines 1189–1383 → history/BD-cure-record.md Part 2, verbatim; seat 3): 17 ==
+# old §20.1's round-4a receipt row; §0.1 quotes the landed `ENTER_THRESHOLD` line in full
+ENTER_THRESHOLD: 0.55
+# old §20's opening paragraph (the compile's marker template)
+[REFINED 2026-10-18 (fp-final) — …]
+# old §20.3's BD-r4-21 row
+[REFINED]
+# old §20.7's heading (the P6c lane's inputs)
+cure/D-OP-r1..r3.md
+# old §20.8's heading
+cure/LANE-C-seams.md
+# old §20.3's B.3 row (a receipt name; the matrix receipt `cure/D-BD-r5-probe/defence-matrix.out` stands in §17 OD-BD-50)
+defence-ledger.out
+# old §20.3's B.3 row (short name; the full path stands in §17 OD-BD-50)
+defence-matrix.out
+# old §20.3's BD-r4-14 row
+ended.kind
+# old §20.4's V-BD residue row
+exposed?
+# old §20.5's P5C-15 row
+fameOf
+# old §20.4's A.4 row (short name; the full path `cure/D-BD-r6-probe/guildwar-r6.out` stands in S45 and §22 A7)
+guildwar-r6.out
+# old §20.5's P5C-9 row (short name; `mapProfile.js` stands in BD-4)
+mapProfile
+# old §20.4's CH-3 row
+mercenaryMarket.js
+# old §20.4's CH-1 row
+securityOfficeOf
+# old §20.8's heading
+skeptic/SEAMS-P6.md
+# old §20.6's D.3 (a) row (the probe `cure/D-BD-p5b-p5-probe/wallsRung.mjs` stands in BD-4)
+wallsRung.out
+# old §20.4's A.2 row
+waymode.out

@@ -1,0 +1,116 @@
+# PL — ALLOW-MISSING (P8 lane C-PL; SEAT 1 header..§6 and SEAT 2 §7..§16 — COMPLETE). One token per line; reasons in PL-ledger.md §4.
+# HEADER TEMPLATE (the compile header line's bracket template, moved with the header block to history)
+[CURED 2026-10-17 (fp-final) — <id>: …]
+[CURED 2026-10-18 (fp-final r1) — <id>: …]
+[CURED 2026-10-18 (fp-final r2) — <id>: …]
+[CURED 2026-10-18 (fp-final r3) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[RE-RULED 2026-10-18 (fp-final r4) — <id>: …]
+[REFINED …]
+# REVIEW-TRAIL PATHS (ruling files, lane logs and routes, skeptic and verifier reports cited only by brackets; they stay in history/PL-cure-record.md and git — executed probe receipts that back a measured or CONFIRMED claim are KEPT in the text)
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-BD-r4.md
+cure/D-PL-MN-RN-p5-probe/
+cure/D-PL-MN-RN-p5.md
+cure/D-PL-r1-probe/
+cure/D-PL-r1.md
+cure/D-PL-r2-probe/
+cure/D-PL-r2.md
+cure/D-PL-r2b-probe/
+cure/D-PL-r2b.md
+cure/D-PL-r3-probe/
+cure/D-PL-r3.md
+cure/D-PL-r4-probe/
+cure/D-PL-r5-probe/
+cure/D-PL-r5.md
+cure/D-PR-r5.md
+cure/D-PS-r3.md
+cure/D-PS-r4.md
+cure/D-PS-r5.md
+cure/D-ST-r4.md
+cure/D-ST-r5.md
+skeptic/BD-r4.md
+skeptic/CH-r2-verify.md
+skeptic/PL-r1-verify.md
+skeptic/PL-r1.md
+skeptic/PL-r2-verify.md
+skeptic/PL-r3-verify.md
+skeptic/PL-r4-verify-probe/ageterm_r4b.out
+skeptic/PL-r4-verify.md
+skeptic/PL-r5-verify-probe/age_r5v.out
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+# SUPERSEDED NAMES (a later ruling replaced the name; the new text states the latest rule)
+floor(n × share01 × hold01)
+# BACKTICK-PARITY ARTEFACTS (not names: the ratchet's 200-character token limit skips §4.6's 210-character `kind ∈ …` list, so the prose between two later code spans of that line reads as a "token"; both are the old B141/B142 bracket prose, folded)
+) and matched by none of the landed hint and wound regexes (executed); no new field: the body's kind rides its episode] [CURED 2026-10-19 (fp-final r5) — RULINGS-ROUND5 A.8 · STOP-PR-r4-1: 
+, a member's default on keeping the peace (§4.8), joins the closed list — free on master (0 · 0, 
+# SEAT 2 — REVIEW-TRAIL PATHS cited only by §7..§15 brackets (the brief and two lane logs; they stay in history/PL-cure-record.md and git)
+briefs/L-PR.md
+cure/D-FOLD-r3.md
+cure/D-ST-r3.md
+# SEAT 2 — SUPERSEDED NAMES (15.9's interim closed lists: `riders_quartered` re-homed to the fealty record, so the final list is `… · charter_granted · riders_lent`)
+recognition_withheld · appointment_imposed · faction_backed · charter_granted · riders_quartered
+recognition_withheld · appointment_imposed · faction_backed · charter_granted · riders_quartered · riders_lent
+# SEAT 2 — MOVED WITH THE CURE RECORD (tokens backticked only inside old §16 THE CURE RECORD, old lines 705–967, moved verbatim to history/PL-cure-record.md)
+D-CH-r5.md
+D-FOLD-r4.md
+D-FOLD-r5.md
+D-MN-r5.md
+D-PL-r3.md
+D-PT-r3.md
+D-PT-r4.md
+D-PT-r5.md
+D-RN-r3.md
+D-RN-r4.md
+D-RN-r5.md
+[RE-RULED 2026-10-18 (fp-final r4)]
+ageterm_r5.out
+assessments/WIRING-CENSUS-2026-10-20.md
+banKeys
+band
+believedWhereabouts
+briefs/RULINGS-ROUND6.md
+cult
+cure/D-*-r4.md
+cure/D-BD-r5.md
+cure/D-CH-r3.md
+cure/D-CH-r4.md
+cure/D-MN-r3.md
+cure/D-MN-r4.md
+cure/D-PL-r2b-probe/round2b-grep.out
+cure/D-PL-r3-probe/a-rows-grep.out
+cure/D-PR-r3.md
+cure/D-PR-r4.md
+cure/D-RESIDUE-r6.md
+cycle.rerun.out
+drainQueuedEvents
+heresy
+homeDefense × ALLY_RELIEF_FRACTION
+max(oathSince, newest surviving protection_kept)
+measure-r5.out
+mintDeed
+of
+pact_refused
+paragonFaithCarriers
+paragonGateEnabled
+paragonLean
+party_voiced
+polityBreakEnabled · politySuccessionEnabled · polityContestEnabled · polityControlEnabled
+polity_ban:corps:…
+settlementStrength
+skeptic/BD-r5.md
+skeptic/HOST-r2.md
+skeptic/PL-r5-verify.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r5.md
+walk.out
+witnessedCrossing

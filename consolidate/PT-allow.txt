@@ -1,0 +1,173 @@
+# PT-allow.txt — tokens of the old text (history/PT-bracketed-1beabdc85.md) absent from the new text, each with its reason (consolidate/PT-ledger.md §4).
+# SEAT 1 (header..§8) entries first; SEAT 2 (§9..the end and the moved cure record) appended below.
+# --- the header's bracket template and review-trail paths, MOVED with old lines 6, 7, 9 to history Part 1
+[CURED 2026-10-18 (fp-final r1) — <finding id>: …]
+[CURED 2026-10-18 (fp-final r2) — <id>: …]
+[CURED 2026-10-18 (fp-final r3) — <id>: …]
+[CURED 2026-10-18 (fp-final r4) — <id>: …]
+[CURED 2026-10-19 (fp-final r5) — <id>: …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-17 (fp-final) — …]
+[REFINED 2026-10-18 (fp-final r1) — …]
+[REFINED 2026-10-18 (fp-final r2) — …]
+[REFINED 2026-10-18 (fp-final r3) — …]
+[REFINED 2026-10-18 (fp-final r4) — …]
+[REFINED 2026-10-19 (fp-final r5) — …]
+[REFINED 2026-10-20 (fp-final P5) — …]
+*-r2-verify.md
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+cure/D-*-r4.md
+cure/D-PT-p5-probe/
+cure/D-PT-r1-probe/
+cure/D-PT-r2-probe/
+cure/D-PT-r2b-probe/
+cure/D-PT-r3-probe/
+cure/D-PT-r4-probe/
+cure/D-PT-r5-probe/
+atOpenWar
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/L-PT.md
+skeptic/BD-r4.md
+skeptic/HOST-r2.md
+skeptic/PT-r1-verify.md
+skeptic/PT-r1.md
+skeptic/PT-r2-verify.md
+skeptic/PT-r3-verify.md
+skeptic/PT-r4-verify.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r4.md
+# --- ruling-file paths removed from §0's binding prior words (the rulings restated by content)
+briefs/L-PT.md
+briefs/RULINGS-AFTER-RESEARCH.md
+RULINGS-AFTER-COMPILE.md
+RULINGS-ROUND1.md
+# --- review-trail paths and probe receipts that lived only inside change notes removed from header..§8
+cure/D-CH-r2b.md
+cure/D-CH-r3.md
+cure/D-OP-r1.md
+cure/D-OP-r2.md
+D-OP-r3.md
+cure/D-PR-r2.md
+cure/D-ST-r2.md
+D-CH-r5
+skeptic/BRACKETS-p6c-verify.md
+census-r2-quoted.out
+census-r4.out
+cure/D-PT-r4-probe/census-r4.out
+cure/D-PT-r4-probe/gateReadAndUndo.rerun.out
+rg M-SITE
+docs/
+# --- SUPERSEDED NAMES AND SHAPES (a later ruling replaced each; the successor stands in the new text)
+a␟b
+kept · broken
+kept · broken · void
+partyWhereabouts
+polity: true
+proof: kept · told · shown
+reachableAtSomeWeek
+seatChangedSince(…, banTick)
+{ kind: 'body', bodyKind: 'gang' | 'beast', id }
+to: party
+settlement · person · party · menace
+settlement · person · party · menace · corps
+# --- DETAIL of a removed change note (a quoted landed line, a ruling's quote of a field the text declares, a sibling's homonym field, a longer path of a cite the text keeps)
+const tick = worldState.tick;
+Engagement.bounty?: { band }
+bounty: { band, sinceTick }
+purseBand
+treatySuccession.js
+src/components/map/TravelersLayer.jsx
+npcCredibility.js
+offer?
+outlawed
+season
+target
+# --- token-regex artefacts (spans between two backticked tokens, or a token present in the new text but mis-paired by the regex on its line)
+, 
+cure/D-PT-r2b-probe/census-r2b-2.out
+"; RULINGS-ROUND3 A.14), 
+'s mirror, so the new deed never reads "a matter of some moment" (P32's wall); FREE (
+# --- SEAT 2: tokens that lived ONLY in old §21 THE CURE RECORD, MOVED verbatim to history/PT-cure-record.md Part 2 (each kept there byte-for-byte)
+D-BD-r4
+D-CH-r4
+D-RN-r4
+INSTITUTION_MORAL_LEAN
+MORAL_INSTITUTION_LEANS
+PT-r1v-c1
+PT-r1v-c9
+PT-r2v-c1
+PT-r2v-c6
+PT-r2v-p
+R2-E-*
+advancePartyEngagements
+assessments/WIRING-CENSUS-2026-10-20.md
+believedWhereabouts
+callSource
+census-p5.out
+classifyLegModes
+cure/D-*-r3.md
+cure/D-MN-r2.md
+cure/D-PR-r3.md
+cure/D-RN-r4.md
+cure/L-CH-PD.md
+drainCampaignQueueIntoState
+fundingSet
+homeDefense
+huntFault.out
+liegeAnswer
+menace_met
+paragonLean
+party_stopped
+readBeliefRelationship(court, served, ws, relationshipTypeBetween(graph, …)) === 'hostile'
+readiness01
+realmVerbExecution.js
+reliefAnswerOf
+seenBy
+sent
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-p5.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r1.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r2.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r2b.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r3.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r4.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-PT-r5.md
+siteDefense
+skeptic/*-r2-verify.md
+skeptic/SEAMS-r3.md
+stretch:
+unopposed
+wantSince
+warKey
+# --- SEAT 2: review-trail paths of the running text replaced by the cure record: old line 640 (each round's STOP line, MOVED verbatim to history Part 1b), the open questions' cure-file pointer (§20 now "detail in the cure record") and the ruling-file path of §18 (the Ruled column carries the date)
+briefs/RULINGS-P5.md
+cure/D-PT-p5.md
+cure/D-PT-r2.md
+cure/D-PT-r2b.md
+cure/D-PT-r3.md
+cure/D-PT-r4.md
+cure/D-PT-r5.md
+cure/D-RN-r2b.md
+cure/D-ST-r3.md
+# --- SEAT 2: the bracket templates quoted in old §20's REFINED list (the list restated by content; the templates stay in the text of record)
+[REFINED 2026-10-18 (fp-final r2) — R2b-…]
+[REFINED 2026-10-20 (fp-final P5) — R-P5-…]
+# --- SEAT 2: review-trail paths and probe-output detail inside removed change notes of §9..§19b (the probes' receipt files the text keeps stand in §17)
+cure/D-PL-r2b.md
+cure/D-PL-r3.md
+stillBannedAtKell: false
+stillBannedAtKell: true
+war_front
+pair_state
+regionalGraph.js
+# --- SEAT 2: SUPERSEDED FORMS (a later ruling replaced each; the successor stands): the withdrawn lean formula and belief factor (→ the mark REPLACES kind01, §11.3); PT's old road notation and MN's quote of the fold's (→ `road{a, b}`, PR's ONE STRETCH KEY)
+kind01 + (marked01 − kind01) × belief
+weight × proofFactor
+road(a, b)
+road{a,b}
+# --- SEAT 2: SHORT FORMS of a token the text keeps whole (`cure/D-PT-r2-probe/lensOneProbe.out`; `passed · reaches_party · struck`)
+lensOneProbe.out
+passed · reaches_party

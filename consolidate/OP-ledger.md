@@ -504,3 +504,18 @@ The one difference class is DRAFT 33 → 32, explained in §3 item 11. The six n
 | S35 | L741 §19 cure record | STOP mark | — | MOVED | history Part 2 | r3 block header's "⛔ STOP" tally |
 | S36 | L758 §19 cure record | STOP mark | — | MOVED | history Part 2 | STOP-C-IN (r2-verify) row |
 | S37 | L766 §19 cure record | STOP mark | — | MOVED | history Part 2 | r4 block header's "⛔ STOP" tally |
+
+## SEAMS CURES (2026-10-23, per SEAMS-P8, the chair's rulings)
+
+- SEAMS-P8-1 · §3.1 (the stage's registration, quoting RN-S1) · the three-pass quotation "It runs, in order, RN's pass → CH's weekly pass → PT's engagement pass … CH and PT REGISTER their passes on a closed registration list, pinned" → RN's four-pass sentence "It runs, in order, RN's pass … → CH's weekly pass → OP's stage (below) → PT's engagement pass; RN OWNS the mount (RN-1's car-0 measures it once for all four), and CH, OP and PT REGISTER their passes on a closed registration list, pinned".
+- SEAMS-P8-7 · §9 (a paragon is not on the errand spine) · "(CH-V1: "no errand row can name one" at master;" → "(CH §0's measured row: "NO persisted errand row can name a paragon" at master;" (the verifier id replaced by the design object it named; the quote now CH §0's own words).
+- SEAMS-P8-14 · THE READER'S GUIDE item 3 · "… the catch law's rung and the traveller's own nature for the outcome." → "… the catch law's rung and the traveller's own nature for the outcome; TRUTH also of its own errand record, and of the courts' standing at the arrival tick (the tie table)." (§2.5's `missionSlack` and `rescueMotiveOf` reads).
+
+## LENS → READINGS (2026-10-23, the chair's ruling on the fold §5 `lens` row)
+The chair's ruling (2026-10-23, by delegation, vetoable; OD-FC-63, the latest ruling wins): on every DM surface a lens is a MAP LAYER, and THE RENOWN's two ways of judging a deed are "readings" in prose, never "lenses". The LENS SWEEP seat renamed every site where "lens"/"lenses" names RN's deed reading; backticked tokens, paths and every other sense are kept (listed below). No owner quotation was edited. Line numbers are the edited text's (the volume or the part; the edits add no lines).
+**Renamed: 1 sites in 1 edits** (each edit an asserted single replacement, `scratchpad/lensweep/apply.py`; an edit naming two sites in one sentence is one line below).
+- L270: "so RN's lens two reads the rescue" → "so RN's reading two reads the rescue"
+**Kept (not RN's deed reading):**
+- none — OP's one `lens` occurrence was RN's reading two (renamed)
+**Ratchet** (`python3 KIT/tools/consolidate-ratchet.py KIT/history/OP-bracketed-1beabdc85.md DOCS/DESIGN_FP_ARCH_OP.md --allow-missing-file KIT/consolidate/OP-allow.txt`): before and after BYTE-IDENTICAL output (diffed) — `tokens: old 824 · new 791 · missing 0 · new-in-new 6`; last line unchanged, `RATCHET 1 DIFFERENCE CLASSES`. No token went missing (prose only).
+DOCS/DESIGN_FP_ARCH_OP.md copied to KIT/consolidate/OP-new.md after the edits (`cmp` identical).

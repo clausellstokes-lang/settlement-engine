@@ -1,0 +1,59 @@
+# FOLD-E — ALLOW-MISSING for the fold's §7 THE OWNER ROWS (P8d, seat FOLD-E, 2026-10-23, cloud). One token per line; the reason for each is in FOLD-E-ledger.md §4.
+# MARKER TEMPLATE (named in OD-FC-47's old text as the bracket form; the refinement rides the owner's word, kept verbatim)
+[REFINED …]
+# SUPERSEDED NAMES (a later ruling of record replaced them)
+settlement · person · party · menace
+settlement · person · party · menace · corps
+# REVIEW-TRAIL PATHS (ruling files, chair notes, lane logs and routes, verifier and seams reports, assessments, cited only in the dropped bracket heads or provenance asides; they stay in history and git)
+assessments/FULL-SIMULATION-ASSESSMENT-2026-10-18.md
+assessments/P5-WORDS-2026-10-20.md
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/CRITIC-P5.md
+briefs/L-FOLD2.md
+briefs/L-FOLD3.md
+briefs/RULINGS-AFTER-COMPILE.md
+briefs/RULINGS-AFTER-RESEARCH.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-PL-MN.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+briefs/RULINGS-ROUND6.md
+cure/BRACKETS-A2-program-volumes.md
+cure/BRACKETS-B-champions.md
+cure/D-BD-p5.md
+cure/D-BD-r4.md
+cure/D-BD-r6.md
+cure/D-CH-PD-r1.md
+cure/D-CH-r4.md
+cure/D-CH-r5.md
+cure/D-FOUR-r4.md
+cure/D-MG-r2.md
+cure/D-MG-r3.md
+cure/D-MN-r2.md
+cure/D-MN-r3.md
+cure/D-MN-r4.md
+cure/D-MN-r5.md
+cure/D-PL-r3.md
+cure/D-PL-r4.md
+cure/D-PL-r5.md
+cure/D-PR-r4.md
+cure/D-RESIDUE-r6.md
+cure/D-RN-r3.md
+cure/D-RN-r5.md
+cure/D-ST-r5.md
+cure/D-WS-r1.md
+r3.md
+cure/L-BD.md
+cure/LANE-C-seams.md
+cure/LANE-D-verify.md
+skeptic/FOLD-r1-verify.md
+skeptic/FOLD-r2-verify.md
+skeptic/FOLD-r4-verify.md
+skeptic/RN-r2-verify.md
+skeptic/SEAMS-r4.md
+# corrected file name (the chair, 2026-10-23): the kit holds the census as -10-20
+assessments/WIRING-CENSUS-2026-10-19.md

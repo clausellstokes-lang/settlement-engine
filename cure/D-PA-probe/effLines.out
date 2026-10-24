@@ -1,0 +1,13 @@
+  316 src/components/new/tabs/HistoryTab.jsx
+  145 src/components/map/TreatyPanel.jsx
+  152 src/components/map/RelationshipChronicleSection.jsx
+  241 src/store/operationRegistry.js
+  700 src/store/campaignAdvanceSession.js
+  193 src/domain/display/relationshipChronicle.js
+  367 src/store/campaignWorldPulseSlice.js
+  565 src/domain/worldPulse/pactFormation.js
+  146 src/domain/worldPulse/pactAmendment.js
+  710 src/store/accountImportBody.js
+  284 src/components/map/HeraldBody.jsx
+  558 src/components/map/WorldPulsePanel.jsx
+  244 src/components/settlements/LivingWorldGates.jsx

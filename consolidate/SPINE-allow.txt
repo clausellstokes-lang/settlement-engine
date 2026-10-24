@@ -1,0 +1,103 @@
+# MOVED with the review record (stand ONLY in the moved Parts of history/<V>-review-record.md):
+'../economyFreshness.js'
+'Struggling'
+'Subsistence'
+(?!:)
+.normalize('NFKC')
+.trim()
+/* … */
+// anchored:
+03dee5fd
+1e96a0fa
+20a7ee24
+23d118eb
+3637c4ec
+47102e4e
+5a3fe844
+6eb6c445
+7385dba3
+824c22fc
+83b18609
+91e5be4c
+99d63d92
+<this row>
+@example
+EDITED
+LABELS
+String(l.type || '')
+Struggling
+UNTIDY
+[dm-only]
+\u
+^
+__mutantJsdoc
+__probe
+a0355434
+a1f633eb
+a277f53d
+ac22447b
+arg
+broker-town
+claude/composite-r4
+controlBytes
+cp
+deriveProsperityLabel
+diff
+display/economyFreshness.js
+dmFieldProjection.test.js
+economyReadModelCoverage.walker
+economyShiftSinceSurvey
+emittedProsperityLabels
+expectAbsentWithAnchor
+export { x } from './economyFreshness.js'
+fnv1a32 % 8
+gate-tail
+git archive
+git status
+heraldCausalVoice.test.js
+import
+mutationCoverageManifest
+negativeAssertionAnchor
+never-further
+never-past
+node_modules
+npx vitest run
+s.arrivalScene = v
+sizeBaseline
+specifierIsDetector
+src
+src/domain/display
+src/domain/display/stateProse/__probe.js
+stateProseKernel 12 → 18
+stateProseKernel.test.js
+strictly-closer
+stripComments
+tests/domain/stateProseKernel.test.js
+tests/generators/settlementOriginProse.test.js
+tests/lint
+tests/lint/couplingDesk.walker.test.js
+trim
+type:'plant_exposed'
+under_siege
+wizard_news.{i}.applied.evt{i}
+{ desc: … }
+# REVIEW-TRAIL paths named only in bracket heads (the trail stays in git at 1beabdc85):
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/L-BD.md
+briefs/L-FOLD3.md
+briefs/RULINGS-P6.md
+briefs/RULINGS-PL-MN.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+briefs/RULINGS-ROUND6.md
+cure/D-FOLD-r2b.md
+settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SX.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+# SUPERSEDED names (the latest text names the successor; reason in the ledger):
+causedBy: dm_seal
+heraldFeed.js:95
+kind ∈ settlement · person · party · menace
+settlement · person · party · menace · corps

@@ -1,0 +1,612 @@
+{
+ "seed": "pa2-probe",
+ "realmSize": "medium",
+ "tone": "dramatic_campaign",
+ "composeMs": 658,
+ "memberCount": 9,
+ "fingerprintStable": true,
+ "bundleBytesStable": true,
+ "planLaw": 2,
+ "planRelations": [
+  {
+   "a": 0,
+   "b": 1,
+   "type": "allied",
+   "cause": "mutual_defence"
+  },
+  {
+   "a": 0,
+   "b": 2,
+   "type": "trade_partner",
+   "cause": "market_exchange"
+  },
+  {
+   "a": 1,
+   "b": 2,
+   "type": "trade_partner",
+   "cause": "market_exchange"
+  },
+  {
+   "a": 3,
+   "b": 5,
+   "type": "allied",
+   "cause": "mutual_defence"
+  },
+  {
+   "a": 3,
+   "b": 8,
+   "type": "overlord_of",
+   "cause": "tier_dominance"
+  },
+  {
+   "a": 4,
+   "b": 7,
+   "type": "rival",
+   "cause": "standing_rivalry"
+  },
+  {
+   "a": 5,
+   "b": 6,
+   "type": "rival",
+   "cause": "standing_rivalry"
+  },
+  {
+   "a": 7,
+   "b": 8,
+   "type": "allied",
+   "cause": "mutual_defence"
+  }
+ ],
+ "worldStateKeys": [
+  "schemaVersion",
+  "canonizedAt",
+  "tick",
+  "calendar",
+  "rngSeed",
+  "volatility",
+  "simulationRules",
+  "stressors",
+  "relationshipStates",
+  "npcStates",
+  "factionStates",
+  "proposals",
+  "pulseHistory",
+  "settlementTickStates",
+  "pendingEvents",
+  "dispositionStats",
+  "deployments",
+  "tradeWarState",
+  "warExhaustion"
+ ],
+ "tick": 0,
+ "canonizedAt": null,
+ "rngSeed": "world-pulse:iw::pa2-probe::0",
+ "presetId": "dramatic_campaign",
+ "pactFormationEnabled": true,
+ "warLayerEnabled": true,
+ "relationshipStatesCount": 0,
+ "pulseHistory": 0,
+ "spatialLedgers": "(absent)",
+ "channels": [
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "military_protection:suggested",
+  "military_protection:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "service_dependency:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "military_protection:suggested",
+  "military_protection:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "political_authority:suggested",
+  "military_protection:suggested",
+  "tax_obligation:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "resource_competition:suggested",
+  "resource_competition:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "resource_competition:suggested",
+  "resource_competition:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "military_protection:suggested",
+  "military_protection:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested"
+ ],
+ "regionalGraphKeys": [
+  "schemaVersion",
+  "nodes",
+  "edges",
+  "channels",
+  "queuedImpacts",
+  "eventLog",
+  "updatedAt"
+ ],
+ "members": [
+  {
+   "slot": 0,
+   "tier": "city",
+   "name": "Padmawadi",
+   "seed": "pa2-probe::iw0",
+   "founding": {
+    "age": 215,
+    "reason": "began when a merchant realised the local sheep produced finer wool than anything available on the open market",
+    "foundedBy": "royal decree and a century of forced investment"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "occupation_infiltration|184|major|The Purge",
+    "economic|131|major|The Guild War",
+    "magical|13|minor|The Arcane Incident"
+   ],
+   "tensions": [
+    "{\"type\":\"population_friction\",\"description\":\"A recently arrived group and the established population fell into sustained, low-level conflict",
+    "{\"type\":\"guild_conflict\",\"description\":\"Rival guilds competed for market share and political influence\",\"factions\":[\"Established guilds\",\"Up"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::2",
+     "name": "Niedergrund",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::3",
+     "name": "Langengrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 1,
+   "tier": "town",
+   "name": "Niedergrund",
+   "seed": "pa2-probe::iw1",
+   "founding": {
+    "age": 296,
+    "reason": "grew from a single logging operation whose owner refused to leave when the contract ended",
+    "foundedBy": "religious authorities who wanted a centre for their regional operations"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "exile_return|244|catastrophic|The Occupation",
+    "political|215|minor|The Land Dispute",
+    "economic|150|major|The Great Harvest Compact",
+    "demographic|133|major|The Migration",
+    "disaster|45|major|The Great Fire"
+   ],
+   "tensions": [
+    "{\"type\":\"resource_scarcity\",\"description\":\"The supply of timber (the settlement's economic backbone) is under pressure. Wartime: conscriptio",
+    "{\"type\":\"crime_wave\",\"description\":\"A surge in criminal activity overwhelmed the authorities; vigilantes began to form\",\"factions\":[\"Militar",
+    "{\"type\":\"external_threat\",\"description\":\"News of approaching danger divided the community on how to respond\",\"factions\":[\"Prepare for war\",\""
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::1",
+     "name": "Padmawadi",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::3",
+     "name": "Langengrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 2,
+   "tier": "town",
+   "name": "Langengrund",
+   "seed": "pa2-probe::iw2",
+   "founding": {
+    "age": 215,
+    "reason": "began as a toll collection point that became a permanent post",
+    "foundedBy": "a noble granted lands by the crown with the resources to develop them"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "occupation_infiltration|199|major|The Purge",
+    "economic|163|major|The Trade Collapse",
+    "disaster|134|catastrophic|The Great Fire",
+    "religious|120|minor|The Religious Conflict",
+    "political|106|catastrophic|The Tyranny",
+    "political|61|major|The Interregnum",
+    "magical|50|minor|The Arcane Incident",
+    "demographic|6|major|The Migration"
+   ],
+   "tensions": [
+    "{\"type\":\"external_threat\",\"description\":\"News of approaching danger divided the community on how to respond\",\"factions\":[\"Prepare for war\",\"",
+    "{\"type\":\"pilgrimage_surge\",\"description\":\"A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and th"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::1",
+     "name": "Padmawadi",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    },
+    {
+     "id": "iw::pa2-probe::2",
+     "name": "Niedergrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 3,
+   "tier": "village",
+   "name": "Mahamala",
+   "seed": "pa2-probe::iw3",
+   "founding": {
+    "age": 33,
+    "reason": "grew as an agricultural market center",
+    "foundedBy": "escaped serfs seeking a place beyond the reach of their former masters"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "siegeNarrative"
+   ],
+   "events": [
+    "occupation_infiltration|25|major|The Purge"
+   ],
+   "tensions": [
+    "{\"type\":\"legitimacy_crisis\",\"description\":\"The right of the current authority to rule was openly and widely questioned, and no one could agr",
+    "{\"type\":\"guild_conflict\",\"description\":\"Rival guilds competed for market share and political influence\",\"factions\":[\"Established guilds\",\"Up"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::6",
+     "name": "Stormland",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::9",
+     "name": "Archoousa",
+     "rel": "vassal",
+     "source": "genesis_diplomacy",
+     "cause": "tier_dominance"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 4,
+   "tier": "village",
+   "name": "Satyapat",
+   "seed": "pa2-probe::iw4",
+   "founding": {
+    "age": 169,
+    "reason": "grew because a famous navigator retired here and others followed",
+    "foundedBy": "refugees fleeing war or persecution who found the location defensible"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "demographic|165|major|The Migration",
+    "disaster|69|catastrophic|The Siege"
+   ],
+   "tensions": [
+    "{\"type\":\"crime_wave\",\"description\":\"A surge in criminal activity overwhelmed the authorities; vigilantes began to form\",\"factions\":[\"Militar",
+    "{\"type\":\"demographic_pressure\",\"description\":\"The population changed faster than the settlement’s institutions could absorb (through arrival"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::8",
+     "name": "Vedagrad",
+     "rel": "rival",
+     "source": "genesis_diplomacy",
+     "cause": "standing_rivalry"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 5,
+   "tier": "village",
+   "name": "Stormland",
+   "seed": "pa2-probe::iw5",
+   "founding": {
+    "age": 80,
+    "reason": "was founded by foresters managing the woodland under charter",
+    "foundedBy": "a community of tradespeople who left a larger settlement under contested circumstances"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "religious|52|minor|The Religious Conflict",
+    "political|11|minor|The Succession Crisis"
+   ],
+   "tensions": [
+    "{\"type\":\"magical_controversy\",\"description\":\"Debate over the role and regulation of magic divided the community\",\"factions\":[\"Pro-magic\",\"An",
+    "{\"type\":\"demographic_pressure\",\"description\":\"The population changed faster than the settlement’s institutions could absorb (through arrival"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::4",
+     "name": "Mahamala",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::7",
+     "name": "Eisenburg",
+     "rel": "rival",
+     "source": "genesis_diplomacy",
+     "cause": "standing_rivalry"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 6,
+   "tier": "hamlet",
+   "name": "Eisenburg",
+   "seed": "pa2-probe::iw6",
+   "founding": {
+    "age": 106,
+    "reason": "was founded by foresters managing the woodland under charter",
+    "foundedBy": "a retired tradesperson whose skills attracted dependents"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "siegeNarrative"
+   ],
+   "events": [
+    "exile_return|25|catastrophic|The Occupation"
+   ],
+   "tensions": [
+    "{\"type\":\"resource_scarcity\",\"description\":\"The supply of key goods (the settlement's economic backbone) is under pressure. Settlement cannot"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::6",
+     "name": "Stormland",
+     "rel": "rival",
+     "source": "genesis_diplomacy",
+     "cause": "standing_rivalry"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 7,
+   "tier": "hamlet",
+   "name": "Vedagrad",
+   "seed": "pa2-probe::iw7",
+   "founding": {
+    "age": 81,
+    "reason": "was founded by foresters managing the woodland under charter",
+    "foundedBy": "a small religious community whose members drifted into secular life over two generations"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "siegeNarrative"
+   ],
+   "events": [
+    "exile_return|78|major|The Occupation"
+   ],
+   "tensions": [
+    "{\"type\":\"crime_wave\",\"description\":\"A surge in criminal activity overwhelmed the authorities; vigilantes began to form\",\"factions\":[\"Militar"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::5",
+     "name": "Satyapat",
+     "rel": "rival",
+     "source": "genesis_diplomacy",
+     "cause": "standing_rivalry"
+    },
+    {
+     "id": "iw::pa2-probe::9",
+     "name": "Archoousa",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 8,
+   "tier": "thorp",
+   "name": "Archoousa",
+   "seed": "pa2-probe::iw8",
+   "founding": {
+    "age": 219,
+    "reason": "grew around fishing weirs and a sheltered barge landing where the river catch could be salted and sold",
+    "foundedBy": "a healer who stopped to treat a traveller and found the location too useful to leave"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "political|150|major|The Succession Crisis",
+    "occupation_infiltration|129|major|The Purge",
+    "economic|22|major|The Economic Divide"
+   ],
+   "tensions": [
+    "{\"type\":\"infiltration_fear\",\"description\":\"Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations\",\"fa"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::4",
+     "name": "Mahamala",
+     "rel": "vassal",
+     "source": "genesis_diplomacy",
+     "cause": "tier_dominance"
+    },
+    {
+     "id": "iw::pa2-probe::8",
+     "name": "Vedagrad",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  }
+ ]
+}

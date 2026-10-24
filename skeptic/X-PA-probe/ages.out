@@ -1,0 +1,29 @@
+== out-small.json ages desc (age, slot, tier): [(246, 1, 'village'), (195, 4, 'thorp'), (175, 2, 'village'), (122, 0, 'town'), (31, 3, 'hamlet')]
+   oldest slot 1 (246y) · second-oldest slot 4 (195y) · genesis tie between them: NONE
+   allied         mutual_defence     town 122y -> village 246y
+   trade_partner  market_exchange    town 122y -> village 175y
+   trade_partner  market_exchange    village 246y -> village 175y
+== out-medium.json ages desc (age, slot, tier): [(296, 1, 'town'), (219, 8, 'thorp'), (215, 2, 'town'), (215, 0, 'city'), (169, 4, 'village'), (106, 6, 'hamlet'), (81, 7, 'hamlet'), (80, 5, 'village'), (33, 3, 'village')]
+   oldest slot 1 (296y) · second-oldest slot 8 (219y) · genesis tie between them: NONE
+   allied         mutual_defence     city 215y -> town 296y
+   trade_partner  market_exchange    city 215y -> town 215y
+   trade_partner  market_exchange    town 296y -> town 215y
+   allied         mutual_defence     village 33y -> village 80y
+   overlord_of    tier_dominance     village 33y -> thorp 219y
+   rival          standing_rivalry   village 169y -> hamlet 81y
+   rival          standing_rivalry   village 80y -> hamlet 106y
+   allied         mutual_defence     hamlet 81y -> thorp 219y
+== out-large.json ages desc (age, slot, tier): [(493, 1, 'city'), (372, 0, 'metropolis'), (364, 2, 'city'), (216, 6, 'village'), (208, 4, 'town'), (187, 8, 'village'), (167, 9, 'village'), (158, 13, 'thorp'), (155, 7, 'village'), (107, 5, 'town'), (106, 10, 'hamlet'), (63, 11, 'hamlet'), (54, 3, 'town'), (39, 12, 'hamlet')]
+   oldest slot 1 (493y) · second-oldest slot 0 (372y) · genesis tie between them: [{'a': 0, 'b': 1, 'type': 'allied', 'cause': 'mutual_defence'}]
+   allied         mutual_defence     metropolis 372y -> city 493y
+   trade_partner  market_exchange    metropolis 372y -> city 364y
+   trade_partner  market_exchange    city 493y -> city 364y
+   allied         mutual_defence     town 54y -> town 107y
+   trade_partner  market_exchange    town 54y -> village 187y
+   rival          standing_rivalry   town 208y -> village 155y
+   rival          standing_rivalry   town 208y -> village 167y
+   allied         mutual_defence     town 107y -> village 187y
+   rival          standing_rivalry   village 216y -> village 155y
+   rival          standing_rivalry   village 216y -> village 167y
+   allied         mutual_defence     hamlet 106y -> hamlet 39y
+   rival          standing_rivalry   hamlet 106y -> thorp 158y

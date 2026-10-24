@@ -1,29 +1,26 @@
 #!/bin/bash
-# THE DOCS PROOF — runs master's doc-scanning tests over the ledger's amended FP volumes
-# in the detached master worktree. Advisory, never the authoritative gate (that runs when
-# the volumes reach master in a docs commit). Usage: bash docs-proof.sh <label>
-# Writes <kit>/logs/docs-proof-<label>.log and prints the summary + exit line.
+# THE DOCS PROOF — runs master's doc-scanning suites plus the kit's extra doc-reading suites
+# (docs-test-extra.txt) in a checkout of the branch under test. Since 2026-10-23 (P10: one home
+# for code and documents) the FP volumes, the fold, the spine and the records live on master, so
+# nothing is copied in: the docs under test are the checkout's own. Advisory; CI is the gate.
+# Two suites read the ledger branch by its local ref, so fetch it first (as CI does):
+#   git fetch --no-tags origin +refs/heads/review-fixes-2026-07-08:refs/heads/review-fixes-2026-07-08
+# Usage: WT=<checkout of the branch> KIT=<this kit> bash docs-proof.sh <label>
+# Writes $KIT/logs/docs-proof-<label>.log and prints the summary + exit line.
 # Never read this through a pipe (CLAUDE.md): the exit is captured explicitly below.
 set -u
-KIT=/Users/cstokes/Desktop/settlement-engine-kits/fp-final-a73343ed-2026-10-17
-WT=/private/tmp/claude-502/-Users-cstokes-Desktop-settlement-engine/a73343ed-904d-46d0-a0f5-2969909eb66e/scratchpad/master-81f1cd963
-LEDGER=/Users/cstokes/Desktop/settlement-engine
+KIT="${KIT:?set KIT to the kit folder}"
+WT="${WT:?set WT to a checkout of the branch under test (master or a docs branch cut from it)}"
 LABEL="${1:-run}"
 LOG="$KIT/logs/docs-proof-$LABEL.log"
+mkdir -p "$KIT/logs"
 cd "$WT" || exit 9
-# the amended set: every FP volume + the fold + the spine + the later volumes the lanes may bracket
-for f in "$LEDGER"/docs/DESIGN_FP_*.md "$LEDGER"/docs/DESIGN_W_SEAT.md "$LEDGER"/docs/DESIGN_W_OPS.md "$LEDGER"/docs/DESIGN_W_COIN.md "$LEDGER"/docs/DESIGN_W_FAITH.md; do
-  [ -f "$f" ] && cp "$f" "$WT/docs/$(basename "$f")"
-done
+git rev-parse --verify --quiet refs/heads/review-fixes-2026-07-08 >/dev/null || {
+  echo "the ledger ref refs/heads/review-fixes-2026-07-08 is missing: fetch it first (see the header)"; exit 8; }
 EXTRA=$(tr '\n' ' ' < "$KIT/docs-test-extra.txt")
 # shellcheck disable=SC2086
 npx vitest run tests/docs tests/lint $EXTRA > "$LOG" 2>&1
 EXIT=$?
 echo "exit=$EXIT" >> "$LOG"
 grep -E 'Test Files|Tests  |exit=' "$LOG" | tail -4
-# restore the worktree's docs so the next run starts clean
-git checkout --quiet -- docs/ 2>/dev/null
-# and remove the UNTRACKED copies the loop above placed (the new FP volumes are not on master): a census seat grepping
-# the worktree's docs/ must never hit a staging copy (hazard found by D-FOUR-r4, 2026-10-20)
-git clean -fq -- docs/ 2>/dev/null
 exit $EXIT

@@ -1,0 +1,61 @@
+# FOLD-D — ALLOW-MISSING for the fold's §5 THE VOCABULARY REGISTER (P8d, seat FOLD-D, 2026-10-23, cloud). One token per line; the reason for each is in FOLD-D-ledger.md §5.
+# (1) SUPERSEDED NAMES AND SPELLINGS — a later ruling or the owning volume's text of record replaced them; the replacement stands in the row
+SITE_STATUS revealed
+seeking · awaiting · reaches_party · gives_up · turns_elsewhere · escalates · struck
+stays · besieges · toward · wanders
+war_abroad · peace_abroad · alliance_abroad · diplomacy_abroad · trade_abroad · justice_at_home · own_seat · fealty_itself
+{ kind: 'menace' \| 'body', id }
+# (2) REVIEW-TRAIL PATHS — ruling briefs, lane routes and logs, verifier and seams reports cited only in the dropped bracket heads or provenance asides; they stay in the kit, the review record and git
+assessments/P5-WORDS-2026-10-20.md
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/L-BD.md
+briefs/L-FOLD2.md
+briefs/L-FOLD3.md
+briefs/RULINGS-AFTER-COMPILE.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+briefs/RULINGS-ROUND6.md
+cure/BRACKETS-A2-program-volumes.md
+cure/BRACKETS-B-champions.md
+cure/D-BD-r4.md
+cure/D-BD-r5.md
+cure/D-BD-r6.md
+cure/D-CH-PD-r1.md
+cure/D-CH-r4.md
+cure/D-CH-r5.md
+cure/D-FOUR-r4.md
+cure/D-FS-r2.md
+cure/D-MG-r1.md
+cure/D-MG-r3.md
+cure/D-MN-RN-p5b-p5.md
+cure/D-MN-r2.md
+cure/D-MN-r2b.md
+cure/D-MN-r5.md
+cure/D-PL-MN-RN-p5.md
+cure/D-PL-r2.md
+cure/D-PL-r3.md
+cure/D-PL-r5.md
+cure/D-PR-r5.md
+cure/D-PS-r5.md
+cure/D-PT-r2.md
+cure/D-PT-r2b.md
+cure/D-PT-r3.md
+cure/D-PT-r5.md
+cure/D-RESIDUE-r6.md
+cure/D-ST-r5.md
+cure/D-{BD,CH,MN,PL,PR,PS,PT,RN,ST}-r5.md
+cure/D-{CH,PL,PR,PS,RN,ST}-r4.md
+cure/D-{PL,MN,PR,PS,PT,ST}-r3.md
+cure/L-BD.md
+cure/LANE-C-seams.md
+cure/LANE-D-verify.md
+skeptic/FOLD-r1-verify.md
+skeptic/FOLD-r2-verify.md
+skeptic/FOLD-r3-verify.md
+skeptic/FOLD-r4-verify.md
+skeptic/SEAMS-r5.md

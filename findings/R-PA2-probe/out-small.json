@@ -1,0 +1,296 @@
+{
+ "seed": "pa2-probe",
+ "realmSize": "small",
+ "tone": "realistic_regional",
+ "composeMs": 417,
+ "memberCount": 5,
+ "fingerprintStable": true,
+ "bundleBytesStable": true,
+ "planLaw": 2,
+ "planRelations": [
+  {
+   "a": 0,
+   "b": 1,
+   "type": "allied",
+   "cause": "mutual_defence"
+  },
+  {
+   "a": 0,
+   "b": 2,
+   "type": "trade_partner",
+   "cause": "market_exchange"
+  },
+  {
+   "a": 1,
+   "b": 2,
+   "type": "trade_partner",
+   "cause": "market_exchange"
+  }
+ ],
+ "worldStateKeys": [
+  "schemaVersion",
+  "canonizedAt",
+  "tick",
+  "calendar",
+  "rngSeed",
+  "volatility",
+  "simulationRules",
+  "stressors",
+  "relationshipStates",
+  "npcStates",
+  "factionStates",
+  "proposals",
+  "pulseHistory",
+  "settlementTickStates",
+  "pendingEvents",
+  "dispositionStats",
+  "deployments",
+  "tradeWarState",
+  "warExhaustion"
+ ],
+ "tick": 0,
+ "canonizedAt": null,
+ "rngSeed": "world-pulse:iw::pa2-probe::0",
+ "presetId": "realistic_regional",
+ "pactFormationEnabled": true,
+ "warLayerEnabled": false,
+ "relationshipStatesCount": 0,
+ "pulseHistory": 0,
+ "spatialLedgers": "(absent)",
+ "channels": [
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "military_protection:suggested",
+  "military_protection:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested",
+  "trade_dependency:suggested",
+  "export_market:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "migration_pressure:suggested",
+  "trade_route:suggested",
+  "trade_route:suggested",
+  "information_flow:suggested",
+  "information_flow:suggested"
+ ],
+ "regionalGraphKeys": [
+  "schemaVersion",
+  "nodes",
+  "edges",
+  "channels",
+  "queuedImpacts",
+  "eventLog",
+  "updatedAt"
+ ],
+ "members": [
+  {
+   "slot": 0,
+   "tier": "town",
+   "name": "Padmawadi",
+   "seed": "pa2-probe::iw0",
+   "founding": {
+    "age": 122,
+    "reason": "began when a merchant realised the local sheep produced finer wool than anything available on the open market",
+    "foundedBy": "religious authorities who wanted a centre for their regional operations"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "economic|112|major|The Economic Divide",
+    "magical|11|minor|The Arcane Incident"
+   ],
+   "tensions": [
+    "{\"type\":\"guild_conflict\",\"description\":\"Rival guilds competed for market share and political influence\",\"factions\":[\"Established guilds\",\"Up",
+    "{\"type\":\"religious_tension\",\"description\":\"Different faiths or interpretations competed for influence and converts\",\"factions\":[\"Religious A"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::2",
+     "name": "Niedergrund",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::3",
+     "name": "Langengrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 1,
+   "tier": "village",
+   "name": "Niedergrund",
+   "seed": "pa2-probe::iw1",
+   "founding": {
+    "age": 246,
+    "reason": "grew because a healer of some local renown settled here and people followed",
+    "foundedBy": "a community of tradespeople who left a larger settlement under contested circumstances"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "exile_return|203|catastrophic|The Occupation",
+    "political|178|minor|The Land Dispute",
+    "economic|124|major|The Great Harvest Compact",
+    "demographic|110|major|The Migration",
+    "disaster|38|major|The Great Fire"
+   ],
+   "tensions": [
+    "{\"type\":\"resource_scarcity\",\"description\":\"The supply of key goods (the settlement's economic backbone) is under pressure. Wartime: conscrip",
+    "{\"type\":\"crime_wave\",\"description\":\"A surge in criminal activity overwhelmed the authorities; vigilantes began to form\",\"factions\":[\"Militar",
+    "{\"type\":\"external_threat\",\"description\":\"News of approaching danger divided the community on how to respond\",\"factions\":[\"Prepare for war\",\""
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::1",
+     "name": "Padmawadi",
+     "rel": "allied",
+     "source": "genesis_diplomacy",
+     "cause": "mutual_defence"
+    },
+    {
+     "id": "iw::pa2-probe::3",
+     "name": "Langengrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 2,
+   "tier": "village",
+   "name": "Langengrund",
+   "seed": "pa2-probe::iw2",
+   "founding": {
+    "age": 175,
+    "reason": "began as a toll collection point that became a permanent post",
+    "foundedBy": "refugees fleeing war or persecution who found the location defensible"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "exile_return|175|major|The Occupation",
+    "political|122|minor|The Succession Crisis",
+    "religious|87|minor|The Religious Conflict",
+    "occupation_infiltration|67|major|The Purge",
+    "demographic|7|minor|The Migration"
+   ],
+   "tensions": [
+    "{\"type\":\"corruption_scandal\",\"description\":\"Evidence of official corruption has surfaced but powerful figures resist investigation\",\"faction",
+    "{\"type\":\"market_crash\",\"description\":\"A speculative frenzy in reeds and thatch and property collapsed almost overnight, ruining fortunes and"
+   ],
+   "neighbourNetwork": [
+    {
+     "id": "iw::pa2-probe::1",
+     "name": "Padmawadi",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    },
+    {
+     "id": "iw::pa2-probe::2",
+     "name": "Niedergrund",
+     "rel": "trade_partner",
+     "source": "genesis_diplomacy",
+     "cause": "market_exchange"
+    }
+   ],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 3,
+   "tier": "hamlet",
+   "name": "Mahamala",
+   "seed": "pa2-probe::iw3",
+   "founding": {
+    "age": 31,
+    "reason": "grew as an agricultural market center",
+    "foundedBy": "a retired tradesperson whose skills attracted dependents"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "siegeNarrative"
+   ],
+   "events": [
+    "occupation_infiltration|24|major|The Purge"
+   ],
+   "tensions": [
+    "{\"type\":\"legitimacy_crisis\",\"description\":\"The right of the current authority to rule was openly and widely questioned, and no one could agr"
+   ],
+   "neighbourNetwork": [],
+   "cfgNeighbourRelationship": null
+  },
+  {
+   "slot": 4,
+   "tier": "thorp",
+   "name": "Satyapat",
+   "seed": "pa2-probe::iw4",
+   "founding": {
+    "age": 195,
+    "reason": "was built around a single family's shipwright operation that outlasted the family",
+    "foundedBy": "a single extended family who came and never left"
+   },
+   "historyKeys": [
+    "age",
+    "founding",
+    "historicalEvents",
+    "currentTensions",
+    "historicalCharacter",
+    "eventsTimeline",
+    "legacyAnnotations",
+    "siegeNarrative"
+   ],
+   "events": [
+    "magical|151|minor|The Arcane Incident",
+    "demographic|127|minor|The Migration",
+    "disaster|54|catastrophic|The Siege"
+   ],
+   "tensions": [
+    "{\"type\":\"demographic_pressure\",\"description\":\"The population changed faster than the settlement’s institutions could absorb (through arrival"
+   ],
+   "neighbourNetwork": [],
+   "cfgNeighbourRelationship": null
+  }
+ ]
+}

@@ -474,3 +474,14 @@ The two remaining difference classes are EXPLAINED, not padded:
 | S38 | L552 §19 | STOP mark | ` no 'horseStock' read while S-MG-3 stands; W` | MOVED | history | inside the moved §19 |
 | S39 | L586 §19 | STOP mark | `OTED 1 (+ ⛔ build-time STOP S-MG-b written i` | MOVED | history | inside the moved §19 |
 | S40 | L589 §19 | STOP mark | `ly as the degraded arm at ⛔ S-MG-b \| header ` | MOVED | history | inside the moved §19 |
+
+## SEAMS CURES (2026-10-23, per SEAMS-P8, the chair's rulings)
+
+- SEAMS-P8-7 · §1 L93 · "the ambush's edge WC's ONE battle-input lean on PS-V2's car" → "the ambush's edge WC's ONE battle-input lean on PS §4.1's battle-inputs car (`leaf.inputOverrides`)".
+- SEAMS-P8-7 · §6.3 L343 (running text) · "carried on PS-V2's ground/fatigue car (`leaf.inputOverrides`;" → "carried on PS §4.1's battle-inputs car (`leaf.inputOverrides`;".
+- SEAMS-P8-7 · §6.3 L343 (inside the L-BD 11i (iv) quotation) · "… PS-V2's ground/fatigue car is the seam" → "… [PS §4.1's battle-inputs car] is the seam" (a bracketed editorial substitution, so the quotation stays honest and the dangling verifier id resolves; PS L296 carries the same quotation and takes the same form).
+- SEAMS-P8-7 · §15 L473 · "the ONE lie-in-wait lean on PS-V2's car" → "the ONE lie-in-wait lean on PS §4.1's battle-inputs car (`leaf.inputOverrides`)".
+- SEAMS-P8-10 · §11 L417 · "LIGHTING IS A DECLARED SHIFT (the idiom of RULINGS-ROUND6 A.3; OP §11, …" → "LIGHTING IS A DECLARED SHIFT (OP §11, …" (the ruling-file tag dropped; the trailing "RULINGS-P6 §I.4" is SEAMS-P8-11's class, not applied in this pass).
+- NOT EDITED · §17 L509 (OD-MG-11's ruling text) · "WC's ONE battle-input lean on PS-V2's car" — the same dangling id, but the report lists no rulings-table site; left for the chair.
+- NOT EDITED · §0.3 L81 · the dated delegation words — dates stamped on verbatim owner quotes, an ALLOWED CLASS under the chair's SEAMS-P8-12 ruling (b).
+- (the chair, 2026-10-23) SEAMS-P8-7 at a site the report did not list: §17's OD-MG-11 row "PS-V2's car" → "PS §4.1's battle-inputs car" (a verifier id out of the rulings table).

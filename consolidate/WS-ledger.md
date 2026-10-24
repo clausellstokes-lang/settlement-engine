@@ -342,3 +342,38 @@ WAY_STEP,wayPersonalityOf,seat_changed,temper_moved,channel_moved,nerve_moved,me
 | S09 | L627 §15 | STOP marker | `\| OD-WS-12 \| ⛔ STOP WS-S1: the HARVEST-L` | KEPT | §15 | STOP WS-S1 kept as a design mark (a ruled slot; THE OPEN STOPS: none) |
 | S10 | L628 §15 | STOP marker | `\| OD-WS-13 \| ⛔ STOP WS-S2: the horse STO` | KEPT | §15 | STOP WS-S2 kept as a design mark (a ruled slot; THE OPEN STOPS: none) |
 | S11 | L629 §15 | STOP marker | `\| OD-WS-14 \| ⛔ STOP WS-S3: the commande` | KEPT | §15 | STOP WS-S3 kept as a design mark (a ruled slot; THE OPEN STOPS: none) |
+
+## SEAMS CURES (2026-10-23, per SEAMS-P8, the chair's rulings)
+
+SEAMS-P8-9: the fold §5 registers "pin" = a test and "seal" = Edit Mode, never "pinned" for a seal. The cure is stated as a rule over WS's prose ("prose "pin" for the directive → "seal""), so it is applied at every prose site that names EM's one-week directive — the eleven the report lists (L34, L71, L86, L136, L140, L186, L191, L202, L206, L306, L355) and the further sites in the same sense (L14, L105, L238, L363, L380, L388, L426–L428, L433, L442, L457, L459, L483, L490, L546, L582, L623, L628), so the volume names one thing with one word. KEPT unchanged: the tokens `pin-fork`, `dm_pinned`, `forkPinsFor`, `chooseOrPinFork`, `PIN_FORK_FIELDS`; every verbatim code quotation ("THE PIN BAG for one tick", "pins[pin.forkId] = pin.outcome"); and every "pin" in the test sense (the lit-mutant pins, the S-row pins, "pinned by the drive's golden", "pin (12) of §9", "the WS↔FS loop's pin", "THE PHYSICS PIN"). (Ratchet: output byte-identical before and after.) Line numbers are the pre-edit ones.
+
+- SEAMS-P8-9 · GUIDE item 4 L14 · "and the week's pin rides EM's landed `pin-fork`." → "and the week's seal rides EM's landed `pin-fork` op." (the one place the seal is named with its landed op).
+- SEAMS-P8-9 · THE ANSWER L34 · "pin this week's turn at any war hearing" → "seal this week's turn at any war hearing".
+- SEAMS-P8-9 · §0.1 L71 · "the DM's ONE-WEEK pin of every court's deviation" → "the DM's ONE-WEEK seal of every court's deviation" (the quoted code cells unchanged).
+- SEAMS-P8-9 · §0.2 L86 · "A.7 the DM's per-war hand is a ONE-WEEK pin in EM's landed shape" → "… a ONE-WEEK seal …" ("The S17 pin" — a test — unchanged).
+- SEAMS-P8-9 · §0.4 L105 · "the director's pin for one week" → "the director's seal for one week".
+- SEAMS-P8-9 · §1 WS8 L136 · "PIN this week's deviation" → "SEAL this week's deviation"; "because the landed pin names no court and no war" → "because the landed seal names no court and no war".
+- SEAMS-P8-9 · §1 WS10 L140 · "is the week's pin (WS8)" → "is the week's seal (WS8)".
+- SEAMS-P8-9 · §2.2 P2 row L186 · "so the pin decides every court's deviation that week" → "so the seal decides …".
+- SEAMS-P8-9 · §2.2 L191 · "the director's pin for one week (P2)" → "the director's seal for one week (P2)".
+- SEAMS-P8-9 · §2.3 L202 · "the week's P2 pin" → "the week's P2 seal".
+- SEAMS-P8-9 · §2.3 L206 · "or the week's pin)" → "or the week's seal)".
+- SEAMS-P8-9 · §2.5 L238 (`dm_pinned` row) · "the same sense (the DM pinned it)" → "the same sense (the DM sealed it)".
+- SEAMS-P8-9 · §2.5 NEW ROW after `dm_pinned` · (none) → "| `pin-fork` · `dm_pinned` | EM's and EC's words (EM's landed op; EC's link kind) versus a pin (a test) | prose says seal: the DM's one-week directive is "the week's seal"; the two tokens stay as landed and registered |".
+- SEAMS-P8-9 · §4.1 L306 · "or the week's pin;" → "or the week's seal;".
+- SEAMS-P8-9 · §5.1 L355 · "(0) the week's P2 pin;" → "(0) the week's P2 seal;".
+- SEAMS-P8-9 · §5.1 L363 (`dm_pinned` cause row) · "a P2 pin due THIS week" → "a P2 seal due THIS week"; "the pinned way" → "the sealed way".
+- SEAMS-P8-9 · §5.2 L380 · "consults the week's pin first and does not draw on a pinned week" → "consults the week's seal first and does not draw on a sealed week".
+- SEAMS-P8-9 · §5.3 L388 · "A pin is a week's act" → "A seal is a week's act".
+- SEAMS-P8-9 · §8 THE HEARINGS L426 · "TILT (pin THIS WEEK's deviation: one P2 pin on" → "TILT (seal THIS WEEK's deviation: one P2 seal on".
+- SEAMS-P8-9 · §8 THE HEARINGS L427, L428 · "TILT (this week's pin)" → "TILT (this week's seal)" (both rows).
+- SEAMS-P8-9 · §8 THE HEARINGS L433 · "A pin made at a hearing binds" → "A seal made at a hearing binds"; "(the landed pin bag names no court" → "(the landed bag names no court".
+- SEAMS-P8-9 · §9 THE FLAGS L442 · "the pin's consumption" → "the seal's consumption" (the lit-mutant pins in the same table unchanged).
+- SEAMS-P8-9 · §10 THE WAVES L457 · "(d) the week's pin at a war hearing" → "(d) the week's seal at a war hearing".
+- SEAMS-P8-9 · §10 THE WAVES L459 (WS-6) · "EM's pin catalogue" → "EM's seal catalogue"; ""pinned this week by the DM"" → ""sealed this week by the DM""; "the week's pin, the hearing's existing decrees" → "the week's seal, …"; "set · lift · the week's pin" → "set · lift · the week's seal".
+- SEAMS-P8-9 · §11 P2 L483 · "a pin "DOES NOT ADVANCE THE STREAM"" → "a seal "DOES NOT ADVANCE THE STREAM""; "the pin bag is built per tick" → "the bag is built per tick"; "so a pin turns every court's war" → "so a seal turns …"; "(a pinned week draws nothing" → "(a sealed week draws nothing" (the heading's `pin-fork` and the quoted code unchanged).
+- SEAMS-P8-9 · §11 P4 L490 · "reads it after the week's pin" → "reads it after the week's seal".
+- SEAMS-P8-9 · §12 THE SCENARIO MATRIX S7 L546 · "a P2 pin due this week | EVERY court's war takes the pinned way" → "a P2 seal due this week | EVERY court's war takes the sealed way".
+- SEAMS-P8-9 · §13 THE COUPLINGS L582 · "the DM layer root and the pin catalogue" → "the DM layer root and the seal catalogue".
+- SEAMS-P8-9 · §15 OD-WS-2 L623 · "THE WEEK'S PIN" → "THE WEEK'S SEAL" (the ruling's word only; its text otherwise unchanged).
+- SEAMS-P8-9 · §15 OD-WS-7 L628 · "the DM's tilt is the week's pin" → "the DM's tilt is the week's seal".

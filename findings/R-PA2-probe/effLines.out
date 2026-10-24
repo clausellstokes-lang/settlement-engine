@@ -1,0 +1,21 @@
+  237 src/lib/instantWorld/composeInstantWorld.js
+  130 src/domain/instantWorld/worldPlan.js
+  154 src/domain/instantWorld/genesisDiplomacy.js
+  188 src/store/instantWorldBody.js
+   58 src/store/instantWorldSlice.js
+  296 src/domain/worldPulse/advanceInterval.js
+  700 src/store/campaignAdvanceSession.js
+  367 src/store/campaignWorldPulseSlice.js
+  745 src/store/campaignWorldPulseDeferred.js
+  351 src/domain/worldPulse/worldState.js
+  385 src/domain/worldPulse/simulationRules.js
+ 1581 src/domain/worldPulse/pulseKernel.js
+  907 src/domain/worldPulse/applyWorldPulse.js
+ERR Parsing error: Unexpected token < src/components/map/WorldPulsePanel.jsx
+ERR Parsing error: Unexpected token < src/components/settlements/LivingWorldGates.jsx
+ERR Parsing error: Unexpected token < src/components/instant/InstantWorldEntry.jsx
+  655 src/generators/historyGenerator.js
+   79 src/domain/worldPulse/forecastRun.js
+  134 src/store/campaignImportedCreation.js
+   29 src/domain/spatial/spatialLedgerAccess.js
+  154 src/domain/worldPulse/hegemony.js

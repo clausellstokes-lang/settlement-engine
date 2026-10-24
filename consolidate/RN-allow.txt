@@ -1,0 +1,166 @@
+# RN — ALLOW-MISSING (COMPLETE: seat 1 of 2, header..§5.6, then seat 2, §6–§19; reasons in RN-ledger.md §4). One token per line.
+# HEADER TEMPLATES AND REVIEW-TRAIL PATHS (moved with the header/status block or a change note; they stay in history and git)
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-17 (fp-final) — …]
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+cure/D-RN-r1.md
+cure/D-RN-r2-probe/
+# SUPERSEDED NAMES AND SHAPES (a later ruling replaced them; never minted)
+bodyKey
+leak:body:<bodyId>:<sponsorId>:<sinceTick>
+party · person · settlement
+polity: true
+week
+# SHORT FORMS AND CHANGE-NOTE QUOTES (the full form stands in the new text)
+components/map/
+leak:body
+hash01
+magnitude/3
+enemy_in_service
+# TOKENIZER ARTIFACTS (the ratchet's 200-character token bound misses the 205-character `REGARD_CAUSES` word list and the double-backtick code spans, so it pairs those rows' backticks off by one; each token below stands backticked in the new text, checked by string search)
+'exposed', 'open', 'mixed', 'sheltered'
+defensiveTerrain
+mapProfile.js
+LURE_AXES
+employer
+handsome
+princely
+paid_well
+slandered
+ransom_granted
+party.remove_npc.remove_an_npc.s1
+, landed in 22 source files and CH's P3 field, is avoided) [CURED 2026-10-18 (fp-final r2) — SEAMS-r2-6 · D-CH-r2 §5.2(c)]. · 
+# §3–§5 (seat 1, continued): REVIEW-TRAIL PATHS dropped with change notes and ruling cites that no other passage of the old text keeps (the rulings stand as OD-RN-18 and OD-RN-49 in §16)
+briefs/RULINGS-AFTER-COMPILE.md
+cure/D-BD-r5.md
+# §3–§5: SUPERSEDED FORMS QUOTED ONLY IN CHANGE NOTES (the text states the standing form)
+arrivalTick = tick + hopWeeks(meeting, seat, season)
+applyMode: 'auto'
+# SEAT 2 (§6–§19), appended 2026-10-23; reasons in RN-ledger.md §4.
+# §6–§18 REVIEW-TRAIL PATHS dropped with change notes, ruling cites and route lists (each ruling stands as its OD id in §16; the paths stay in history/RN-cure-record.md and git)
+cure/D-CH-r5.md
+cure/D-PT-r4.md
+cure/L-BD.md
+cure/L-CH-PD.md
+skeptic/BRACKETS-p6c-verify.md
+briefs/L-BD.md
+briefs/RULINGS-ROUND4.md
+cure/D-RN-r2.md
+cure/D-RN-r2b.md
+cure/D-RN-r3.md
+cure/D-RN-r4.md
+cure/D-RN-r5.md
+# §6.2 PROBE OUTPUT DETAIL of a dropped receipt quote (the superseded round receipt's field names; the re-executed receipt `cure/D-RN-r2-probe/r2Probe.out.json` a with `goodNonRival_m02.reading` = 0.18 stands)
+one
+reading
+# TOKENIZER ARTIFACTS (seat 1's §2.4 `REGARD_CAUSES` row: each stands backticked in the new text, checked by string search; the ratchet pairs that row's backticks off by one; their other occurrences were in the moved cure record)
+betrayed
+sheltered
+# SEAT 1's DROPS (header..§5.6) WHOSE OTHER OCCURRENCES WERE ONLY IN THE MOVED CURE RECORD (seat 1's §4 "FOR SEAT 2" list and the like: review-trail paths, a superseded quote, a reviewer's probe output; seat 2 drops none of them again — they survive verbatim in history/RN-cure-record.md)
+briefs/RULINGS-ROUND2b.md
+cure/D-BD-p5.md
+cure/D-BD-r4.md
+cure/D-BRACKETS-p5.md
+cure/D-CH-r3.md
+cure/D-CH-r4.md
+cure/D-FOLD-p5.md
+cure/D-PL-r2b.md
+cure/D-ST-r4.md
+cure/D-ST-r5.md
+fourth, home, meet, post, third
+hashInt
+menace
+paid_well · sheltered · slandered
+seenBy
+skeptic/FOLD-r2-verify.md
+skeptic/PT-r2-verify.md
+skeptic/RN-r3-verify.md
+skeptic/ST-r4-verify.md
+# MOVED WITH THE CURE RECORD AND THE HEADER BLOCK (tokens only old §19 and old lines 3–9 carried; byte-identical in history/RN-cure-record.md Parts 1 and 2)
+88f23aa5…
+CAUSE_LINE
+D-FOLD-r5.md
+D-MN-r5.md
+D-PL-r4.md
+D-PS-r4.md
+K
+P5-RULINGS-2026-10-20.md
+RN-before-r2b.md
+RN-before-r3.md
+RN-before-r4.md
+RN-before-r5.md
+WIRING-CENSUS-2026-10-20.md
+apply_r2b.py
+apply_r3.py
+apply_r4.py
+assessments/P5-COMPLETENESS-2026-10-20.md
+a␟b
+banner
+briefs/RULINGS-P5.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND5.md
+census.out
+census.sh
+credibilityWeight
+cure/D-*-r4.md
+cure/D-CH-r2.md
+cure/D-FOLD-r4.md
+cure/D-MG-r1.md
+cure/D-MN-RN-p5b-p5-probe/DESIGN_FP_ARCH_RN.pre-p5.md
+cure/D-MN-RN-p5b-p5.md
+cure/D-MN-r2.md
+cure/D-MN-r4.md
+cure/D-OP-r1..r3.md
+cure/D-PR-r4.md
+cure/D-PR-r5.md
+cure/D-PT-r2.md
+cure/D-PT-r3.md
+cure/D-RESIDUE-r6-probe/RN.before.md
+cure/D-RN-r2b-probe/
+cure/D-RN-r3-probe/r3Probe.mjs
+cure/D-RN-r4-probe/r4Probe.mjs
+cure/D-RN-r5-probe/r5Probe.mjs
+cut01
+earlyReturn.mjs
+earlyReturn.out
+efflines.out
+factionPairOf
+feint_exposed
+full · … · empty
+leak:body:<bodyId>:<employerId>:<sinceTick>
+menace_met
+paid_quarter · fed_poor · robbed_quarter
+paragonLean
+passage_*
+r3Probe.out.json
+r5Probe.mjs
+readiness01
+regardOf(s:<town>, party)
+score
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RESIDUE-r6.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r1.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r2.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r2b.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r3.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r4.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/D-RN-r5.md
+significance
+skeptic/*-r2-verify.md
+skeptic/BD-r4.md
+skeptic/CH-r2-verify.md
+skeptic/HOST-r1.md
+skeptic/HOST-r2.md
+skeptic/PS-r2-verify.md
+skeptic/RN-r1-verify.md
+skeptic/RN-r1.md
+skeptic/RN-r2-verify.md
+skeptic/RN-r4-verify.md
+skeptic/SEAMS-r1.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r4.md
+skeptic/SEAMS-r5.md
+volume.diff
+× relationFactor

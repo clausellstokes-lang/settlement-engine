@@ -1,0 +1,210 @@
+# FOLD-B ALLOW-MISSING — one token per line; the reason for each class is in FOLD-B-ledger.md §4
+# (1) REVIEW-TRAIL PATHS named only in bracket heads as a row's source
+assessments/P5-COMPLETENESS-2026-10-20.md
+assessments/P5-RULINGS-2026-10-20.md
+assessments/P5-WORDS-2026-10-20.md
+assessments/WIRING-CENSUS-2026-10-20.md
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/L-BD.md
+briefs/L-FOLD2.md
+briefs/L-FOLD3.md
+briefs/NEXT-PROGRAM-INBOX.md
+briefs/RULINGS-AFTER-COMPILE.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-P6.md
+briefs/RULINGS-PL-MN.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+briefs/RULINGS-ROUND6.md
+cure/BRACKETS-A-war-roads.md
+cure/BRACKETS-A2-program-volumes.md
+cure/BRACKETS-B-champions.md
+cure/D-BD-p5.md
+cure/D-BD-r4.md
+cure/D-BD-r5.md
+cure/D-BD-r6.md
+cure/D-CH-PD-r1.md
+cure/D-CH-p5.md
+cure/D-CH-r4.md
+cure/D-CH-r5.md
+cure/D-FOLD-p5.md
+cure/D-FOLD-r1.md
+cure/D-FOUR-r4.md
+cure/D-FS-r1.md
+cure/D-MG-r2.md
+cure/D-MN-RN-p5b-p5.md
+cure/D-MN-r2.md
+cure/D-MN-r3.md
+cure/D-MN-r4.md
+cure/D-MN-r5.md
+cure/D-PL-MN-RN-p5.md
+cure/D-PL-r2b.md
+cure/D-PL-r3.md
+cure/D-PL-r4.md
+cure/D-PL-r5.md
+cure/D-PR-r3.md
+cure/D-PR-r4.md
+cure/D-PR-r5.md
+cure/D-PS-r3.md
+cure/D-PS-r4.md
+cure/D-PS-r5.md
+cure/D-PT-r2.md
+cure/D-PT-r3.md
+cure/D-PT-r4.md
+cure/D-PT-r5.md
+cure/D-RESIDUE-r6.md
+cure/D-RN-r5.md
+cure/D-ST-r3.md
+cure/D-ST-r5.md
+cure/D-WS-r1.md
+cure/D-{OP,MG,WS,FS}-r1..r3.md
+cure/L-BD.md
+cure/L-CH-PD.md
+cure/L-FS.md
+cure/L-MG.md
+cure/L-MN.md
+cure/L-OP.md
+cure/L-WS.md
+cure/LANE-C-seams.md
+cure/LANE-D-verify.md
+skeptic/BD-r4.md
+skeptic/BD-r5.md
+skeptic/BRACKETS-p6c-verify.md
+skeptic/FOLD-r1-verify.md
+skeptic/FOLD-r2-verify.md
+skeptic/FOLD-r3-verify.md
+skeptic/FOLD-r4-verify.md
+skeptic/HOST-r2.md
+skeptic/MN-r2-verify.md
+skeptic/RN-r2-verify.md
+skeptic/SEAMS-P6.md
+skeptic/SEAMS-r2.md
+skeptic/SEAMS-r4.md
+# (2) STANDS IN ITS OWNING VOLUME (of record) — the old fold's mirror cell or ↳ row; the regenerated row carries the volume's own words
+'crown'
+100 × F × Q
+D-FS-r2.md
+D-FS-r3.md
+DESIGN_FP_ARCH_CH.md
+DESIGN_FP_ARCH_MG.md
+DESIGN_FP_ARCH_PS.md
+DESIGN_FP_ARCH_PT.md
+OFFER_KINDS
+PARTY_ENGAGEMENT_KINDS
+PULL_BANDS
+applyLegitimacyDeltasToUpdates
+applyWorldPulse.js
+appointment
+banned
+beliefAxisSubjects.js
+broken
+c:<id>
+c:<liegeId>
+c:<rootId>
+came_to_nothing
+changeAuthorityPolicy.js
+cleared
+continues
+court
+creed:<deityRef>
+crown
+crown_jewel
+defining
+disgraced
+dm
+drawn
+endowed
+expelled
+f:<id>:<factionId>
+faction
+fealty_defied
+fell_short
+fought
+free
+generationForkRegistry.js
+government_change
+hand
+hatred
+heavy
+held
+historyGenerator.js
+holds_the_line
+honored
+honored_by_silence
+honoured
+indecisive
+jailerOf
+kept
+let_be
+lifted
+made_good
+made_good · fell_short
+overlooked
+pactFormation
+pactRenewal.js
+passageDefenceOf
+passed
+patron_creed
+permitted
+polity
+polity_ban:corps:<unitKey>:<banTick>
+polity_verdict
+previousGovernments
+ransomRegardBand
+regional
+remitted · abated · held_firm
+renewed
+resolveFieldBattle
+seeking
+slight
+sold
+spoken
+strikes
+strong
+struck
+succeeds
+suppressed
+suppressed_creed
+swornLinkSuspended
+truce
+turns
+upheld
+visit_party
+voiced_regard
+warSiegeRefused
+warden_attempted
+withheld
+withstood
+{ kind: 'body', id }
+{kind:'party'}
+␟
+# (3) STANDS ELSEWHERE IN THE FOLD (another seat's range)
+'upheld'
+complianceState: 'honored'
+kind ∈ settlement · person · party · menace
+seeking · awaiting · reaches_party · gives_up · turns_elsewhere · escalates
+settlement · person · party · menace · corps
+voided · upheld
+# (4) SUPERSEDED — a withdrawn list, a superseded vocabulary, a renamed or struck name, or a review bracket template; stands nowhere now
+[RE-RULED 2026-10-18 (fp-final r4)]
+authority_verdict
+backerRole ∈ court · faction · creed · polity
+champion_prevails · villain_prevails · stand_off
+continues · claim_prevails · crown_prevails · partition
+deityRef
+expelled · overlooked · seized
+holds · repelled · breached
+kept · broken · void
+menace_beaten · army_beaten · stand_off
+paragonGate
+proposalPayload.kind === 'relationship_label_change'
+repelled · breached
+repudiated · honored
+repudiated · honoured
+settlement · person · party · menace · site
+submit · remnant · free
+void

@@ -1,0 +1,260 @@
+# FOLD-A — ALLOW-MISSING (P8d THE FOLD, seat FOLD-A: header + THE READER'S GUIDE + old lines 1–44 + §0 + §1 + §4 + §6 + §8/§9 moved). One token per line; the reasons are in FOLD-A-ledger.md §4.
+# (1) MOVED WITH THE REVIEW RECORD — tokens named ONLY in old §8 and §9, now verbatim in history/FOLD-review-record.md Parts 8 and 9 (213)
+2026-10-18 (fp-final r1)
+2026-10-18 (fp-final r2)
+2026-10-18 (fp-final r2b)
+2026-10-18 (fp-final r3)
+2026-10-18 (fp-final r4)
+2026-10-19 (fp-final P4; L-FOLD2; …)
+2026-10-19 (fp-final r5)
+2026-10-20 (fp-final P7; L-FOLD3; …)
+ARCH:nnnn
+BD-r5.md
+CH.md
+DESIGN_FP_ARCH_CN.md
+DISTANCE_BANDS
+FP-ORDER.md
+FP-QUEUE.md
+HOST-r2.md
+MN.md
+PRECEDENCE_CLASSES
+PT.md
+REGARD_CAUSES
+RN.md
+RULINGS-ROUND6.md
+S2.md
+S3.md
+S4.md
+S5.md
+SITE_READINESS
+SKEPTIC-BRIEF.md
+Seat:
+[CURED 2026-10-17 (fp-final) — …]
+[OWNER ROW OD-FC-n — …]
+[REFINED …]
+[RULED BY DELEGATION 2026-10-16 (OD-FC-n — …]
+a399c5956
+abandoned_by
+actRef
+amend/
+amend/LANE-RAISED.md
+amend/docs-dryrun-2.log
+amend/docs-dryrun-3.log
+amend/docs-dryrun-4.log
+armies_meet
+army_beaten
+assessments/
+assessments/P5-COMPLETENESS-2026-10-20.md
+a␟b
+backerRole
+backing_repudiated
+band
+banished_found
+banner
+bash tools/docs-proof.sh final-p6
+believedDoctrineEnabled
+believedWhereabouts
+blocks[]
+bodyKind
+bodySpillEnabled
+briefs/RULINGS-AFTER-COMPILE.md
+briefs/RULINGS-AFTER-RESEARCH.md
+by_broker
+by_office
+by_survey
+call_in_answer
+caravan_seized
+caught/uncaught
+causedBy: dm_seal
+champion_duel
+columnOf
+commodityStocks
+corps
+corps:
+cult
+cure/
+cure/D-<V>-r<n>.md
+cure/D-FOLD-p5.md
+cure/D-FOLD-r1-probe/
+cure/D-FOLD-r1.md
+cure/D-FOLD-r2-probe/
+cure/D-FOLD-r2.md
+cure/D-FOLD-r2b.md
+cure/D-FOLD-r3.md
+cure/D-FOLD-r4.md
+cure/D-FOLD-r5.md
+cure/D-MN-r2.md
+cure/HANDOFF-LINE-DRAFT-2026-10-20.md
+cure/L-CH.md
+cure/L-FOLD.md
+cure/L-FOLD2.md
+cure/L-FOLD3.md
+cure/L-MN.md
+cure/L-PL.md
+cure/L-PT.md
+cure/L-RN.md
+cure/ODQ-934.93-P5-ADDENDUM-DRAFT.md
+cure/ODQ-934.94-DRAFT.md
+cure/OWNER-WORDS-2026-10-20.md
+cut01
+date
+disavowed_by_succession
+dispersed
+disposition
+distanceScale
+distanceUnit
+docs/
+docs/**
+enforcement-claims
+envoyChanceMeeting.js
+envoy_hearing
+envoy_held
+envoy_intercepted
+externalBesiegersEnabled
+factor_parlay
+fealty_*
+findings/R1..R4.md
+foldDemographicMotive
+fp/design-generals-2026-10-02
+git diff --numstat
+git diff --numstat 8a3061070
+good
+hearing · tilt · verdict
+held
+heldStocks
+hidden
+hold
+indecisive
+ledger-citations
+liegeAnswers
+mediation_offer
+narrowed_voice
+ownPressure
+pact_acceptance
+paragonLean
+paragon_employer
+participation
+party_cleared_site
+party_gate
+party_made_known_site
+party_stopped
+passage_of_arms
+patrol:
+peace_unkept
+pending {forTick, epoch}
+person_banned
+polityEnabled
+polityHold
+polityObligationsEnabled
+polityOf
+polity_war
+prosperity
+prosperity01Of
+provision
+raid
+ranged_away
+readiness
+refs/DESIGN_FP_GENERALS.md
+refs/preserve/fp-final-kit-a73343ed-2026-10-20
+reinforcement.js
+reliefAnswerOf
+relief_answer
+removeFreeUnit
+resupply
+revealed
+road
+rooted
+route_wardenship
+scratchpad/s2
+siege
+signed · refused · expired
+site
+siteId
+skeptic/
+skeptic/<V>-r<n>-verify.md
+skeptic/BD-r4.md
+skeptic/HOST-r1.md
+skeptic/HOST-r2.md
+skeptic/P5-verify.md
+skeptic/S1.md
+skeptic/SEAMS-r1.md
+skeptic/SEAMS-r2.md
+spatialUsage.js:184
+sponsor_body
+spread_faith
+spy_at_target
+stock
+struck
+swornDeity
+terms_offered
+tests/docs
+tests/docs/*
+tests/lint
+tests/lint/infoConvergenceContract.walker.test.js
+tithe_share
+tradeConvergenceContract
+traditionsKernel.js:860
+u:
+upheld
+watched
+wf_01e58cbf-90a
+wf_0333c9e3-4c7
+wf_138b6595-781
+wf_31b52ec6-acf
+wf_36e3e93b-86d
+wf_3f52e58b-726
+wf_532f0d21-5f6
+wf_54affd92-789
+wf_6afb1966-af5
+wf_6f84776f-7fd
+wf_78a722d1-7eb
+wf_9ac318be-7a1
+wf_a1c2c062-397
+wf_a6871fc1-a39
+wf_efb5b1a6-b25
+wf_f6ce8f38-768
+# (2) MOVED WITH THE OLD HEADER BLOCK — "Base for amendment" (history/FOLD-review-record.md Part 0) (2)
+volumes-master/
+volumes/
+# (3) REVIEW-TRAIL PATHS cited only in bracket heads — ruling files, lane logs and routes, skeptic and verifier reports, the BOARD as a source line; they stay in git at 1beabdc85 (33)
+BOARD.md
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/L-BD.md
+briefs/L-FOLD2.md
+briefs/L-FOLD3.md
+briefs/NEXT-PROGRAM-INBOX.md
+briefs/RULINGS-P5.md
+briefs/RULINGS-P6.md
+briefs/RULINGS-PL-MN.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND2.md
+briefs/RULINGS-ROUND2b.md
+briefs/RULINGS-ROUND3.md
+briefs/RULINGS-ROUND4.md
+briefs/RULINGS-ROUND5.md
+briefs/RULINGS-ROUND6.md
+cure/D-BD-r4.md
+cure/D-BD-r5.md
+cure/D-MG-r1.md
+cure/D-MN-r3.md
+cure/D-OP-r2.md
+cure/D-OP-r3.md
+cure/D-PL-r4.md
+cure/D-PL-r5.md
+cure/D-PR-r3.md
+cure/D-PT-r2.md
+cure/L-BD.md
+cure/L-CH-PD.md
+settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SX.md
+skeptic/FOLD-r1-verify.md
+skeptic/FOLD-r2-verify.md
+skeptic/FOLD-r3-verify.md
+skeptic/FOLD-r4-verify.md
+# (4) SUPERSEDED NAMES — the four- and five-kind actor conventions; the latest is the six-kind `kind ∈ settlement · person · party · menace · corps · body` (§1 requirement 24, THE ACTOR CONVENTION) (2)
+kind ∈ settlement · person · party · menace
+kind ∈ settlement · person · party · menace · corps
+# (5) A REVIEW NOTE'S QUOTED TITLE — `menace` stood only inside a verifier's minor-note title quoted in a bracket head ("The site rationale also excludes `menace`"); the word stands in prose throughout §1 (1)
+menace
+# (6) A RULED CORRECTION (2026-10-23, the chair's ruling on FV-FOLD-A F2) — `party_gate` moved from the STANDING list to the CLIMAX list in §1's THE WIDENED REGISTRY, aligned with PT §9.2 and PT §13 (the owning volume); both old list tokens are superseded by the corrected lists (2)
+party_request · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_gate · party_visit
+party_pledge_due · party_slander · party_banned · backing_voided · backing_repudiated

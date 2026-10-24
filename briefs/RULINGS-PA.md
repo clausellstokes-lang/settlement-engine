@@ -1,0 +1,46 @@
+# THE CHAIR'S RULINGS AFTER THE COMPILE OF THE REALM'S PAST (PA) — 2026-10-23 (the cloud chair; by delegation under "I leave all decisions and judgement to you", vetoable)
+
+## The two STOPs the compile raised: both RULED, each as its recommended arm
+- **⛔ PA-C-1 → RULED: the relationship plane's own memory law decides.**
+  - On an ordinary (`generational`) pair, PA writes NOTHING to `relationshipStates`. The dossier's present type (rival, hostile, friendly…) is already the living consequence of the past.
+  - Only on a pair the DM has marked `undying` does PA seed the pair's old feeling at the inking, inside the measured `PAST_SEED_BANDS`, with `pastRef` named in the plane's allowlist (+1 line, the plane's car).
+  - No incident is minted at tick 0, so revanchism never reads an old grudge as a fresh wound.
+  - The grudge's lasting home is the inked record, which the relationship desk reads ("what this relationship survived").
+  - Why: one truth per quantity (the plane's landed decay law is not fought by a second); the past explains the present type rather than overwriting it; nothing the owner sees is hidden (PA-L2: every fact is shown and editable before the first advance).
+- **⛔ PA-C-2 → RULED: derive until the first advance, record once at it.**
+  - Before the first advance the derivation is the one truth, re-derived on demand. That is what lets the user cross out, change, confirm and roll again, and see the knock-on.
+  - At the inking the facts are RECORDED ONCE, append-closed, and the record is from then on the one truth of the inked past. A later dossier edit re-resolves references and drops only the link to a removed event; it never re-draws.
+  - Why: this IS the owner's "at the first advance the past becomes history" (PA-L2), and it keeps PA-L1's spirit: an edit to one dossier never silently rewrites another town's history.
+
+R1's "never stored as a second truth" governs the time before inking. After inking the record is the one truth of the past, while the dossiers remain canon for themselves.
+
+## The open items the compile listed
+- **⭐ on persisted shapes: YES**, in the house form ("⭐ marks an owner-signed shape or a volume's owner row"):
+  - the sidecar `spatialLedgers.realmPast` is an OWNER-SIGNED SHAPE, ⭐ VISIBLE, re-confirmed at its unit;
+  - the borrowed `pastRef` fields on other programs' records (GR's treaty, the plane's pair row, PL's and POP's rows) are ⭐ VISIBLE, each its owner's to confirm at its wave.
+
+  These are distinct from the owner's three laws, which are DECIDED (OD-PA-1..3, THE OWNER'S).
+- **A DM-set anchor for a newcomer's years: NOT NOW.** A DM-set anchor stays an OPEN row, a refinement for the owner to ask for. The reading of a newcomer's years is CORRECTED below (S-PA-12): the realm's frozen clock as of week 0, offset zero, never the joining week.
+- **OD-PA-13b, the genesis ties:** THE OWNER'S open row (VISIBLE), as recorded. Whether PA's ordering may inform plan law 2 at birth is the owner's call. Until then PA explains the genesis ties where they agree with the founding ages, flags them where they do not, and never fixes them.
+
+## For the review seats
+Review the volume as if both STOPs are ruled as above: the recommended arms ARE the design. The ⛔ marks in the text will be removed by the disposition seat with the cures. A finding that a recommended arm is wrong is welcome; give its receipt.
+
+## THE CHAIR'S RULINGS ON S-PA'S CHAIR-LEVEL FINDINGS (2026-10-24; by delegation, vetoable)
+- **S-PA-6: ACCEPTED, with one addition.** On every read of the inked record, the agreement check runs again against the current dossiers. An inked fact that an edited dossier now contradicts (an edited founding age, a changed government label, a removed event) is FLAGGED on the surface ("the realm's record and X's own history now disagree"), never redrawn. The addition: the DM may CROSS OUT a flagged inked fact after the first advance. That is an act in PA's own append-only log, receipted, through PA's one writer, never a redraw. So "a user's later edit wins" (PA-L1) holds after inking too, and PA-C-2's record-once stands.
+- **S-PA-10: ACCEPTED.** The past is additive to each town's own history (the owner's word 2), so the dossier's history section gets a READ-ONLY strip of that town's realm-past facts beside its own events. It is rendered from the sidecar with zero dossier bytes, and §19 gets a DOSSIER ROUND-TRIP row (requirement 6: "open the town").
+- **S-PA-11: ACCEPTED.** The "undying" arm of PA-C-1 is reachable only through the settlement facet `memoryHorizon` (`relationshipEvolution.js :: memoryHorizonBandOf`; the edge takes the max of its endpoints). No landed verb lets a DM "mark" a pair. The ruled wording is "a pair whose memory horizon is undying (the settlement facet)". Row 16 is pinned by fixture, and the verb is ROUTED to the relationship plane's owner.
+- **S-PA-12: ACCEPTED; the chair's newcomer sentence is corrected.** A newcomer's years are read on the realm's frozen clock as of the realm's week 0 (offset zero, no re-anchoring), the volume's reading under the pinned two-clocks law (`historyGenerator.js`: "`calendar.year` and `history.age` … must never be compared or added"). A newcomer's past facts are recorded (its links, its founding tie), but NO present-day consequence (no pact "remaining span") is minted from a newcomer's past until a DM-set anchor exists, which stays an OPEN row. No clocks are mixed.
+
+## THE CHAIR'S RULINGS ON X-PA'S CHAIR-LEVEL FINDINGS (2026-10-24; by delegation, vetoable)
+- **X-PA-1 → ⛔ PA-C-1 RE-RULED to arm (c): PA writes NOTHING to `relationshipStates`, ever.** The plane's own law is "no hand-editing of relationshipStates anywhere" (`relationshipEvolution.js`). Its one writer is the plane's. The `undying` horizon is a settlement facet no generator or surface declares, and `vengeanceLicense.js` already refused the `undying` arm. So the undying seeding arm is struck, along with the +1 allowlist line and `pastRef` on a pair row. S-PA-11's ruling is MOOT.
+  - A pair's old feeling lives in the inked record (read by the relationship desk and the cause walk). Its living consequence is the dossier's own present type (rival, hostile, friendly…).
+  - PA mints no pair scalar and no incident.
+- **X-PA-2 (with S-PA-7) — past pacts at tick 0 only through a PAST-ORIGIN arm of GR's signer.** A still-in-force past pact enters the landed treaties at the inking ONLY with provenance naming the past (the word `realm_past`), a lineage "made in the realm's past, N years ago", and no current-ruler signatory. That is GR's car, ROUTED to GR's owner and confirmed at PA-2. Never stamp it `negotiated`/`formed` at tick 0 (a lived event that never happened). Until GR's arm lands, the past pact lives only in the inked record, and the treaty desk reads it there.
+- **X-PA-3 — the POP `departureMemory` mint is STRUCK.** POP's own decay takes a founding tie of 31–493 years to none. The founding tie's home is the inked record, and POP reads it there at its own wave if it chooses (a ROUTE, POP's to confirm).
+- **X-PA-4 — the owner's named pair ("the oldest and second oldest") is honored by an OFFER, never a PA write.** When the realm's two oldest towns share no tie (measured: often, in small and medium realms), PA offers a pencilled `tie_offer` between them, with its cause, in the review. If the DM CONFIRMS it, the DM's own act writes the tie through the landed live door (the event composer, per X-PA-9's receipt, or the landed back-link as that door reaches it). The write is the user's intent, which PA-L1 makes canon, never PA's. The volume states this limit plainly. The disposition seat names the exact door from the code.
+- **X-PA-5 — every felt or example sentence uses the RECORD's own deed.** The external-threat template is "news of approaching danger … watch towers" and names no siege. PA names WHO the threat came from; it never upgrades the deed. Re-word §4.1, §23 and the PA-1 FIRST-VISIBLE line, and grep every example for an upgraded deed.
+- **X-PA-7 (with S-PA-6) — one POST-INKING verb: CROSS OUT.** After the first advance the DM may cross out ANY inked fact, not only a flagged one (requirement 14: the DM's lever is total). It is a mask act in PA's append-only log, receipted, through PA's one writer, and never a redraw. Before the first advance all six verbs remain.
+- **X-PA-8 (with S-PA-2) — references survive an import.** Key a dossier reference on its stable `_seed` (with the event's `name` and `yearsAgo`), never on a save id. Where an id must be carried, remap through the import's own id map (`accountImportBody.js`). State the import truthfully in §18.1. The disposition seat chooses with receipts.
+- **X-PA-9 — name the real door for a genesis tie.** Edit Mode's register is saved-only (`recordRegister.js`), and the link verbs were retired (`neighbourSlice.js`); the live door is the event composer. The genesis flag's exit names it.
+- **X-PA-10 (with S-PA-18) — no confirmed choice is silently lost at the drain-before-ink seam.** Derive and preview over the snapshot's pre-drain saves (or the drained clone, consistently). A confirmed reference a queued edit breaks is inked as "no longer holds", with its cause, never dropped silently.

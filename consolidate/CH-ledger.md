@@ -2238,3 +2238,38 @@ for (_n,_a,_b) in _FV:
 [[941, " (CH-r1-24)", ""], [942, " (CH-r1-9)", ""], [944, " (CH-r1-23)", ""], [945, " (CH-V4)", ""], [945, " (CH-V3)", ""], [945, " (CH-V1)", ""], [946, " (A.4)", ""], [948, " (P5C-21)", ""], [948, " (CH-r1-32)", ""], [950, " (SEAMS-r1-3 · SEAMS-r1-4 · D-PL-r2 §5.4)", ""], [951, " (CH-r1-20 · A.14)", ""], [953, " (CH-V1)", ""], [955, " (CH-r1-13)", ""], [967, " (CH-r1-12)", ""], [970, " (CH-r1-15)", ""], [971, " (CH-r1-16)", ""], [972, " (CH-r1-3)", ""], [973, " (CH-r1-4)", ""], [974, " (CH-V2)", ""], [975, " (B)", ""], [977, " (E)", ""], [977, " (F2)", ""], [978, " (E · HOST-r2-5 · PR-r2-12)", ""], [982, " (CH-V3)", ""], [983, " (SEAMS-r2-11 · A.4)", ""], [985, " (F1)", ""], [987, " (BD route (1))", ""], [988, " (n7)", ""], [988, " (B.5)", ""], [990, " (F6)", ""], [990, " (BD route (3))", ""], [991, " (CH-Wm1)", ""], [993, " (CH-X3)", ""], [994, " (B.13)", ""], [995, " (B.4 · B.13)", ""]]
 ```
 
+
+## SEAMS CURES (2026-10-23, per SEAMS-P8, the chair's rulings)
+
+- SEAMS-P8-1 · §4.1 Where and when · "runs in a closed, pinned order RN's heard pass → CH's pass → PT's engagement pass" → "runs in a closed, pinned order RN's heard pass → CH's pass → OP's stage → PT's engagement pass".
+- SEAMS-P8-3 · §5 (the paragon leading its court's hunt) · "PR's pursuit beyond the gate is PR's and THE PASSAGE's, §10.1 (c) there" → "PR's pursuit beyond the gate is PR's and THE PASSAGE's — PR §10.1 (c)".
+- SEAMS-P8-10 · §10b (the patron deity, opening paragraph) · "(`cure/L-CH-PD.md` §1, M1–M24) and refined where the measurement refuted it." → "(`cure/L-CH-PD.md` §1, M1–M24)."
+- SEAMS-P8-12 (a) · THE READER'S GUIDE, the dispatch-gate paragraph (L20) · "**The dispatch gate is the owner's.** Nothing here builds before … deployed. The rulings in §23 are by delegation under the owner's words of 2026-10-16 ("…") and 2026-10-17 ("…"), vetoable by one clause; push, merge, deploy, migration and dispatch stay the owner's." → PT's undated form: "**The dispatch gate is the owner's:** nothing here builds before the UI + prose release is pushed and deployed; push · merge · deploy · migration · dispatch stay the owner's. The rulings in §23 are by delegation under the owner's words ("…"; "…"), vetoable by one clause." (the two verbatim quotes kept — they stand nowhere else in CH; only the two dates dropped).
+
+## LENS → READINGS (2026-10-23, the chair's ruling on the fold §5 `lens` row)
+The chair's ruling (2026-10-23, by delegation, vetoable; OD-FC-63, the latest ruling wins): on every DM surface a lens is a MAP LAYER, and THE RENOWN's two ways of judging a deed are "readings" in prose, never "lenses". The LENS SWEEP seat renamed every site where "lens"/"lenses" names RN's deed reading; backticked tokens, paths and every other sense are kept (listed below). No owner quotation was edited. Line numbers are the edited text's (the volume or the part; the edits add no lines).
+**Renamed: 24 sites in 19 edits** (each edit an asserted single replacement, `scratchpad/lensweep/apply.py`; an edit naming two sites in one sentence is one line below).
+- L162: "through RN's lens one, mixed with its own flock's tie through RN's lens two" → "through RN's reading one, mixed with its own flock's tie through RN's reading two"
+- L162: "(only its own flock's tie, lens two, moves" → "(only its own flock's tie, reading two, moves"
+- L247: "with the god as holder — lens one with the god's force" → "with the god as holder — reading one with the god's force"
+- L247: "mixed by RN's lens two at μ ½" → "mixed by RN's reading two at μ ½"
+- L329: "RN's "lens two" is "RN's second" → "RN's "reading two" is "RN's second"
+- L587: "never RN's WHOLE lens one, whose kind term" → "never RN's WHOLE reading one, whose kind term"
+- L591: "as its holder — LENS ONE with the god's force" → "as its holder — READING ONE with the god's force"
+- L591: "mixed with RN's LENS TWO at μ ½" → "mixed with RN's READING TWO at μ ½"
+- L601: "on the live record) reads lens one with X's recorded" → "on the live record) takes reading one with X's recorded"
+- L601: ""a person its own" (lens one reads the god's" → ""a person its own" (reading one reads the god's"
+- L603: "(its god's lens one admires" → "(its god's reading one admires"
+- L614: "RN: the lens-one core and the lens-two mix exported" → "RN: the reading-one core and the reading-two mix exported"
+- L854: "RN's exported lens-one core and lens-two mix)" → "RN's exported reading-one core and reading-two mix)"
+- L854: "RN's lens-one and lens-two exports absent" → "RN's reading-one and reading-two exports absent"
+- L854: "recorded axes through RN's two lenses" → "recorded axes through RN's two readings"
+- L854: "(i) RN's lens-one core and lens-two mix exports" → "(i) RN's reading-one core and reading-two mix exports"
+- L1067: "(RN's lens one with the god's `1" → "(RN's reading one with the god's `1"
+- L1067: "mixed at μ ½ with RN's lens two — its own creed" → "mixed at μ ½ with RN's reading two — its own creed"
+- L1067: "RN's whole lens one, refuted by execution" → "RN's whole reading one, refuted by execution"
+**Kept (not RN's deed reading):**
+- L329 `` `lens`: CH says "reading" `` — the token and CH's own register note, kept
+- L591 `lensOne(godCoords, face) / ((a + b) / 2)` — a backticked code expression, kept exactly
+**Ratchet** (`python3 KIT/tools/consolidate-ratchet.py KIT/history/CH-bracketed-1beabdc85.md DOCS/DESIGN_FP_ARCH_CH.md --allow-missing-file KIT/consolidate/CH-allow.txt`): before and after BYTE-IDENTICAL output (diffed) — `tokens: old 2006 · new 1792 · missing 0 · new-in-new 6`; last line unchanged, `RATCHET 5 DIFFERENCE CLASSES`. No token went missing (prose only).
+DOCS/DESIGN_FP_ARCH_CH.md copied to KIT/consolidate/CH-new.md after the edits (`cmp` identical).

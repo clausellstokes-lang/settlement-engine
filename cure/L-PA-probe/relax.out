@@ -1,0 +1,4 @@
+ensure keeps pastRef? false | resentment 0.95 | baseline rival {"trust":0.24,"resentment":0.52,"dependency":0.12,"leverage":0.3,"fear":0.22,"tradeBalance":0.34,"pactStrength":0.05}
+generational  {"1":0.8984,"4":0.7779,"13":0.6016,"26":0.5355,"52":0.5206,"260":0.52}
+long          {"1":0.9328,"4":0.8852,"13":0.7729,"26":0.6688,"52":0.5715,"260":0.52}
+undying       {"1":0.95,"4":0.95,"13":0.95,"26":0.95,"52":0.95,"260":0.95}

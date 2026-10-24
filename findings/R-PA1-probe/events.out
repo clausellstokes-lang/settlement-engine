@@ -1,0 +1,117 @@
+{"thorp":{"min":15,"max":300},"hamlet":{"min":30,"max":120},"village":{"min":30,"max":250},"town":{"min":50,"max":300},"city":{"min":100,"max":500},"metropolis":{"min":200,"max":800}}
+## succession_crisis | name=The Succession Crisis | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: The ruler of the time was aging or ill, and potential heirs jockeyed for position
+  F: Legitimate heir ; Popular candidate ; Power behind throne
+  L: Rival claimant bloodlines still contest ceremonial precedence ; Succession now governed by a charter drafted in the aftermath
+## economic_disparity | name=The Economic Divide | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Growing wealth gap between merchant class and common laborers creates resentment
+  F: Wealthy merchants ; Poor workers ; Moderate reformers
+  L: Wage disputes settled by a standing arbitration council since founded ; The merchant quarter and the labourers' quarter remain walled apart
+## religious_tension | name=The Religious Conflict | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Different faiths or interpretations competed for influence and converts
+  F: Orthodox believers ; Reformists ; Secular faction
+  L: Two rival congregations still divide the settlement's faithful ; Public preaching restricted to licensed grounds after the unrest
+## guild_conflict | name=The Guild War | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Rival guilds competed for market share and political influence
+  F: Established guilds ; Upstart guilds ; Non-guild workers
+  L: Guild membership rolls now audited by an outside adjudicator ; One guild's charter was revoked and never fully restored
+## external_threat | name=The Siege | sev=major/catastrophic | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: News of approaching danger divided the community on how to respond
+  F: Prepare for war ; Seek diplomacy ; Flee/hide
+  L: Watch towers and muster drills maintained since the alarm ; A standing levy roster kept ready in the town archive
+## resource_scarcity | name=The Shortage | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: A critical resource became scarce, causing hoarding and price gouging
+  F: Hoarders ; Desperate poor ; Price regulators
+  L: Emergency granary reserves mandated by ordinance since the shortage ; Price ceilings on the affected goods still enforced in lean seasons
+## crime_wave | name=The Crime Wave | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: A surge in criminal activity overwhelmed the authorities; vigilantes began to form
+  F: Official guards ; Vigilantes ; Criminal organisations
+  L: An expanded watch and a night curfew survive from the crackdown ; Vigilante bands never fully disbanded and still operate quietly
+## magical_controversy | name=The Arcane Incident | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Debate over the role and regulation of magic divided the community
+  F: Pro-magic ; Anti-magic ; Regulation advocates
+  L: Spellcasting now requires a licence from the local authority ; The site of the disputed working remains cordoned and warded
+## generational_divide | name=The Schism | sev=minor | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Old ways vs new ideas creates conflict between age groups
+  F: Traditionalists ; Progressives ; Pragmatic middle
+  L: Council seats now formally split between the old and young factions ; A youth assembly won a permanent advisory voice in the aftermath
+## corruption_scandal | name=The Scandal | sev=major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Evidence of official corruption has surfaced but powerful figures resist investigation
+  F: Corrupt officials ; Reformers ; Complicit beneficiaries
+  L: An oversight office was established to audit officials afterward ; Several old families carry names still quietly disgraced
+## outside_debt | name=The Debt Crisis | sev=major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: The settlement owed a significant debt to an external power that was preparing to collect
+  F: Debtors who took the loans ; Those who will bear the cost ; Those who profited and escaped
+  L: Tribute payments to the external creditor continue on a schedule ; Municipal borrowing now capped by a charter clause
+## occupation_legacy | name=The Occupation | sev=major/catastrophic | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: A previous occupation ended, but collaborators and resisters continued to live side by side, their history unresolved
+  F: Former collaborators ; Former resistance ; New generation wanting to move on
+  L: Collaborator and resistance families still keep to separate quarters ; Wartime property seizures remain legally unresolved
+## infiltration_fear | name=The Purge | sev=major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: Rumours (some true) of enemy agents within the settlement caused suspicion and denunciations
+  F: Security hardliners ; Civil libertarians ; Actual agents exploiting the confusion
+  L: A standing security office and informant network persist ; Denunciation records from the panic remain sealed in the archive
+## disputed_land | name=The Land Dispute | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: A land claim from an old charter contradicts current occupation, with both sides legally plausible
+  F: Original claimants ; Current occupants ; Legal class profiting from ambiguity
+  L: The contested parcel remains legally unassigned and unbuilt ; Rival charters over the land are both still lodged with the court
+## population_friction | name=The Migration | sev=minor/major | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: A recently arrived group and the established population fell into sustained, low-level conflict
+  F: Old families ; Newcomers ; Merchants who benefit from cheap newcomer labour
+  L: Newcomer and old-family districts remain socially distinct ; A resettlement compact governs where new arrivals may hold property
+## leadership_vacuum | name=The Interregnum | sev=major/catastrophic | keys=type,description,factions,lastingEffects,plotHooks,severity
+  D: The last strong leader died or left, and no one has yet consolidated their position
+  F: Multiple weak claimants ; Pragmatists who want stability ; Those who prefer the vacuum
+  L: Rival claimants still hold competing partial authority ; A regency council formed in the interim never fully dissolved
+## market_crash | name=The Crash | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: A speculative frenzy in {resource} and property collapsed almost overnight, ruining fortunes and hardening class resentment for a generation
+  F: Ruined speculators ; Creditors calling in debts ; Those who sold in time
+  L: 
+## trade_collapse | name=The Trade Collapse | sev=major | keys=type,description,factions,plotHooks,severity
+  D: The {route_type} trade the settlement was built upon failed, and the wealth it once carried drained away within a few hard years
+  F: Displaced traders ; Workers left without wages ; Rivals who profited from the diversion
+  L: 
+## great_fire | name=The Great Fire | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: A fire that began in {location} consumed {building_type} across whole districts before it could be checked
+  F: Survivors seeking someone to blame ; Rebuilders and profiteers ; Those accused of setting it
+  L: 
+## plague_years | name=The Plague Years | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: A sickness moved through the settlement for {duration} seasons, thinning families and testing every institution to its limit
+  F: Quarantine hardliners ; The bereaved and the blamed ; Healers and charlatans alike
+  L: 
+## great_flood | name=The Flood | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: Waters rose with little warning and reshaped {location}, drowning livelihoods and redrawing who owned what
+  F: Displaced families ; Landowners pressing newly-convenient claims ; Those who profited from the redrawing
+  L: 
+## heresy_trial | name=The Heresy Trials | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: An accusation of heresy against a prominent figure split the faithful and drew in the secular authorities on both sides
+  F: The accusers ; The accused and their sympathizers ; Authorities exploiting the rift
+  L: 
+## pilgrimage_surge | name=The Pilgrimage | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: A claimed miracle or relic drew pilgrims in numbers the settlement was never built to hold, and the flood of coin and strangers changed it for good
+  F: Temple beneficiaries ; Overwhelmed old residents ; Sceptics who doubt the miracle
+  L: 
+## popular_uprising | name=The Uprising | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: The common people rose against the ruling powers over {demands}, and the settlement has never entirely closed the account
+  F: Former rebels ; The restored order ; Those who changed sides at the right moment
+  L: 
+## tyranny | name=The Tyranny | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: A single figure seized power through {method} and ruled without check for a time, and the memory still shapes who is trusted with authority
+  F: Old loyalists ; Those who suffered under the regime ; Beneficiaries who kept their gains
+  L: 
+## wild_magic | name=The Wild Magic | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: An uncontrolled surge of magic left its mark on {quarter} and on the people who were there, and the effects have never fully faded
+  F: The changed and their descendants ; Those who fear them ; Scholars studying the residue
+  L: 
+## legitimacy_crisis | name=The Mandate | sev=major/catastrophic | keys=type,description,factions,plotHooks,severity
+  D: The right of the current authority to rule was openly and widely questioned, and no one could agree on who, if anyone, held a legitimate claim
+  F: The sitting authority ; Those who deny its mandate ; Pragmatists who want any stable answer
+  L: 
+## demographic_pressure | name=The Influx | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life
+  F: Established residents ; The newly arrived or departing ; Those profiting from the churn
+  L: 
+## trade_dispute | name=The Trade Dispute | sev=minor/major | keys=type,description,factions,plotHooks,severity
+  D: A dispute over the terms of trade with a partner settlement soured into something that touched every merchant and every purse in the market
+  F: Merchants tied to the old partner ; Those who want new partners ; Authorities caught between them
+  L: 

@@ -1,0 +1,12 @@
+1a draft refusal / term count                {"refusal":"","n":2,"types":["resource_share","resource_share"],"span":[208,208]}
+1b treaty key / minted                       {"key":"sA>sB","minted":true,"mintedTick":-520,"expires":[-312,-312],"lineage":[{"act":"formed","tick":-520,"termIds":["resource_share.sA.-520","resource_share.sB.-520"]}],"provenance":"negotiated","complianceState":"honored"}
+1c worldState top keys after sign            ["simulationRules","spatialLedgers"]
+2a beat minted?                              {"id":"wizard_news.-520.signed.sa.sb","tick":-520,"headline":"Ashford and Brindle have set their names to terms, in peace"}
+2b after normalizeEntry: tick / past / eraTick {"tick":0}
+2c source passes through?                    table
+3 normalizeAllianceCalls(neg)                []
+4a normalizeConcludedWarRecord(neg)          null
+4b same record at 0..50                      kept
+5a crossing receipt neg tick                 THROWS: bandedStock.bandCrossingReceipt: grudge tick must be a non-negative integer
+5b grudge 0.9→neutral 0.12 after 60y, a_generation 0.2175
+5c grudge 0.9→neutral 0.12 after 60y, a_few_years 0.1200

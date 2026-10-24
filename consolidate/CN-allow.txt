@@ -1,0 +1,9 @@
+# MOVED with the review record (stand ONLY in the moved Parts of history/<V>-review-record.md):
+# REVIEW-TRAIL paths named only in bracket heads (the trail stays in git at 1beabdc85):
+briefs/L-FOLD3.md
+briefs/RULINGS-P6.md
+cure/D-MN-r1.md
+settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SX.md
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/briefs/RULINGS-PL-MN.md
+skeptic/FOLD-r4-verify.md
+# SUPERSEDED names (the latest text names the successor; reason in the ledger):

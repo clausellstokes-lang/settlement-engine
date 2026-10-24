@@ -1,0 +1,18 @@
+# FOLD-C — ALLOW-MISSING for the fold's §2 THE STATUS OF RECORD (P8d, seat FOLD-C, 2026-10-23, cloud). One token per line; the reason for each is in FOLD-C-ledger.md §4.
+# REVIEW-TRAIL PATHS (ruling files, chair notes, fold briefs, compile and cure logs, a verifier report), cited only in the dropped bracket heads or in the dropped review counts of the PL · MN · CH · PT · BD rows; they stay in git at 1beabdc85 and in the kit
+briefs/CHAIR-NOTES-FOR-THE-FOLD.md
+briefs/L-FOLD2.md
+briefs/L-FOLD3.md
+briefs/RULINGS-AFTER-COMPILE.md
+briefs/RULINGS-AFTER-RESEARCH.md
+briefs/RULINGS-PL-MN.md
+briefs/RULINGS-ROUND1.md
+briefs/RULINGS-ROUND6.md
+cure/D-BD-r4.md
+cure/D-PL-r1.md
+cure/D-PT-r1.md
+cure/L-BD.md
+cure/L-CH.md
+cure/L-MN.md
+cure/L-PL.md
+skeptic/FOLD-r1-verify.md

@@ -1,0 +1,166 @@
+# PR-allow.txt — tokens of the old text absent from the new text, one per line (lane C-PR; seat 1 wrote header..§6; seat 2 appends its own below)
+# HEADER TEMPLATES AND REVIEW-TRAIL PATHS (moved with the header block, old lines 3 and 6–12, to history/PR-cure-record.md Part 1; they stay in git and history)
+[ADDED 2026-10-20 (fp-final P6c; <route>) — …]
+[CURED 2026-10-20 (fp-final P5) — <id>: …]
+[REFINED 2026-10-18 (fp-final) — what; why]
+[REFINED 2026-10-20 (fp-final P5) — …]
+⛔ STOP-PR-n
+cure/D-PS-ST-PR-p5-probe/
+settlement-engine-kits/fp-final-a73343ed-2026-10-17/cure/BRACKETS-A2-program-volumes.md
+# REVIEW-TRAIL PATHS DROPPED WITH CHANGE NOTES (their rulings stand in the text)
+cure/D-PS-r4.md
+# SUPERSEDED FORMS QUOTED ONLY IN CHANGE NOTES (the text states the form that replaced each)
+3 × count
+a␟b
+cause ('cut_down'·'absorbed')
+ceil(max × 0.75)
+{ cadence, since, on }
+watchOf(…, holderId)
+watchOn(…)
+POLITY_LIEGE_SHARE.marginal × POLITY_PARAMOUNT_REACH.staunch
+drawShare01 = drawnCap.offensive / fromCap.offensive
+homeDefense = offensive − armyAway
+# TOKENIZER ARTIFACTS (backtick pairings across a removed bracket or ruling tag; the real tokens stand)
+; EXECUTED 
+, no fraction (a map-side slot the fold's INBOX records, A.14; cells are optional placement data, never asserted — HOST-r2-17's rule). A sea hop (
+, B.13 — and its eyes stand on one of the way's junction halves this week) [CURED 2026-10-18 (fp-final r4) — the PS→PR routes (
+# REVIEW-TRAIL PATH AND QUOTE OF §7.2 DROPPED WITH A CHANGE NOTE (B216; the ruling stands: doer the body, `g:<bodyId>`)
+cure/D-RN-r4.md
+g:
+
+# ===== SEAT 2 (lane C-PR, the continuation: old §8 to the end) =====
+# SEAT 1'S 15 TOKENS WHOSE OTHER OCCURRENCES ARE ONLY IN OLD §19–§20 (moved with the header block and the cure record to history/PR-cure-record.md)
+assessments/P5-COMPLETENESS-2026-10-20.md
+briefs/RULINGS-P5.md
+cure/D-*-r4.md
+cure/D-PR-r3.md
+cure/D-PS-ST-PR-p5b-p5.md
+gateKey
+informer
+season-r5.out
+skeptic/BD-r4.md
+skeptic/BD-r5.md
+skeptic/PR-r2-verify.md
+skeptic/PR-r2.md
+skeptic/PR-r3-verify.md
+skeptic/PR-r4-verify.md
+skeptic/SEAMS-r4.md
+# REVIEW-TRAIL PATHS AND ANOTHER VOLUME'S TOKEN IN ROUTE PROVENANCE, DROPPED WITH CHANGE NOTES IN §8–§16 (their routes stand applied)
+cure/D-BD-r4.md
+cure/D-CH-r3.md
+cure/D-CH-r4.md
+cure/D-FOLD-r3.md
+cure/D-FS-r1.md
+cure/D-MG-r1.md
+cure/D-MN-r5.md
+cure/D-PL-r3.md
+cure/D-PL-r4.md
+cure/D-PS-r5.md
+cure/D-ST-r3.md
+cure/D-ST-r5.md
+skeptic/PR-r4-verify-probe/net.out
+keepBreaches
+# SUPERSEDED FORMS AND WITHDRAWN WORDS QUOTED ONLY IN CHANGE NOTES (the bracket id and what stands instead, one per token):
+#   `POLITY_LIEGE_SHARE.dominant` — B302
+#   `[⛔ STOP-PR-r4-1]` — B300, the closed STOP's marker
+#   `armies_meet` — B268; the registrant is `armiesMeetLeaf`
+#   `arrivalTick + 1` — B264, the r2b clock shift
+#   `departTick + 1` — B264
+#   `position01` — B264
+#   `belief` — B235; the stance idiom stands in §8.1
+#   `record` — B235
+#   `{ source, record? }` — B235
+#   `buildEvent.js` — B279, a short form; the full path stands
+#   `c:` — B293, RN's holder prefixes
+#   `s:` — B293
+#   `cult` — B164, B335: ST's struck untied-holder kind
+#   `full · manned · sparse · skeleton · empty` — B427, the proposed set ST's measured set replaced
+#   `full · … · empty` — B427
+#   `max(1, floor(n × share01 × hold01))` — B303, the ruling's notation; the text writes `max(1, ⌊n × s × hold01⌋)`
+#   `paragonLean` — B318, B532: bare name; the call form stands
+#   `relief_answer` — B307
+#   `requestFealtyRow` — B306
+#   `revealed` — B283: ST's withdrawn word
+#   `road(h)` — B231, the r2b MET test
+#   `seenBy` — B282: ST's withdrawn field
+#   `share01 > 0` — B298, B465, B529: the struck condition (the text keeps `crownReachAt(…).share01 > 0` as never read)
+#   `share01` — B302
+#   `side` — B319
+#   `{ mult, reason }` — B318
+#   `σ` — B323: MN's σ quoted; `min(0.25, σ_site + σ_patrol)` stands
+#   … the tokens themselves
+POLITY_LIEGE_SHARE.dominant
+[⛔ STOP-PR-r4-1]
+armies_meet
+arrivalTick + 1
+departTick + 1
+position01
+belief
+record
+{ source, record? }
+buildEvent.js
+c:
+s:
+cult
+full · manned · sparse · skeleton · empty
+full · … · empty
+max(1, floor(n × share01 × hold01))
+paragonLean
+relief_answer
+requestFealtyRow
+revealed
+road(h)
+seenBy
+share01 > 0
+share01
+side
+{ mult, reason }
+σ
+# THE STRUCK r5 TEXT OF ⭐ OD-PR-51 (master's pinned arrays quoted for the struck `patrol` token): superseded by its re-ruling, dropped with it (§17; the measurement stands in PR16)
+Object.freeze(['army', 'caravan', 'covert_envoy', 'smuggler', 'wanderer'])
+expect([...HIDDEN_PATH_KINDS].sort()).toEqual([...HIDDEN_PATH_KINDS]);
+expect([...TRAVELLER_KINDS]).toEqual(['army', 'caravan', 'covert_envoy', 'smuggler', 'wanderer']);
+# OD-PR-50'S PAIR BEFORE ITS `swept?` SUB-FIELD (the pair now reads `{ seasonStartTick, weeks, swept? }`; the two-field form also in old §19–§20)
+{ seasonStartTick, weeks }
+# TOKENS THAT OCCUR ONLY IN OLD §19's MOVED PARTS OR OLD §20 (history/PR-cure-record.md Parts 2–3, verbatim)
+(hopIndex + cut01) / last
+*-r2-verify.md
+D-FOLD-r5.md
+OPENED
+UPKEEP_LEDGERS = ['deployments']
+[OPENED …]
+bannerCoverOf(worldState, memberId, tick).weeks
+believedWhereabouts
+briefs/RULINGS-ROUND6.md
+cause
+classifyLegModes
+cloneArray(raw?.pendingEvents).slice(-MAX_PENDING)
+corps:
+courtRiskAppetiteOf
+cure/D-*-r3.md
+cure/D-CH-r5.md
+cure/D-OP-r1..r3.md
+cure/D-RESIDUE-r6.md
+drawShare01 = fromCap.offensive > 0 ? … : 0
+drawshare-r5
+drawshare-r5.out
+enemy_in_service
+heresy
+hiddenWays.known
+lend(m) = max(1, ⌊n × s × hold01⌋)
+liegeAnswer
+net-r5
+normalizeDeployments
+party_voiced
+pendingCadence · pendingSince
+pool-r2.out
+season-r5
+sent
+skeptic/P5-verify.md
+skeptic/SEAMS-r3.md
+skeptic/SEAMS-r5.md
+tol ≥ 0.3
+watched?
+weeksCovered > 0
+worldState.js
+{kind:'corps', id: unitKey}
