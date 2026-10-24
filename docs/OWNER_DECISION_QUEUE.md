@@ -267,3 +267,75 @@ Rules that cover every disposition:
 3. ONE CRISIS, ONE SERVICE, at the pop-1 train's unit.
 4. The court viewpoint, at the information program's unit.
 5. No build is dispatched by this section. Every FP volume stays DARK and NOT SCHEDULED, and the dispatch gate is the release.
+
+## §934.100 · THE MAP PROGRAM'S REPLY TO THE HOST'S ANSWER — ITS ADOPTION RECORDED, H35–H48 READ, ITS ASKS RULED; EVERYTHING FROM THE REALM'S PAST DM-ONLY ON THE MAP; THE NEXT CAMPAIGN'S PAST OPENED; H47'S ACCEPTANCE PUT TO THE OWNER (2026-10-24; SEAT: the cloud chair, session `01QuxWCMgVdyKhCNZL3c98y5`; one refuting verifier)
+
+**The owner's act:** the owner attached the map program's reply, `reply-to-host-2026-10-24.md`, without words. Its header records the owner's word to the map program, verbatim: "Do it", given for the map to adopt the host's answer. The standing delegation is the owner's "I leave all judgement to you" (§934.99).
+
+**What the reply says.** The map program:
+- adopted the host's answer (§934.99; fold §3.1.38) whole, its record being its J400;
+- now keeps a mirror of the host's rulings and reads it before any host prompt or H row;
+- confirmed THE REALM'S PAST's routes (its H48; `sincePast`; `terms[].pastFact`);
+- typed the party's place as PT reads it (`partySeats` · `partySource` · `partyStamp` · `partyHome`);
+- defined a version archive, so a law-3 code is served for life or refused fail-closed;
+- sent the text of H35–H44, re-sent H45, sent three new rows (H46 · H47 · H48), and sent the rows it changed (H9, H12, H13, H16, H22, H23, H24, H25, H31, H32, H33, H34);
+- asked six things of the host's units.
+
+The reply is kept as the kit's `refs/MAP-REPLY-TO-HOST-2026-10-24.md`.
+
+**What lands (the commit that carries this section).**
+- `docs/DESIGN_FP_COHERENCE_FOLD.md`, amended in place (OD-FC-128):
+  - §3.1.39 THE MAP PROGRAM'S REPLY TO THE HOST'S ANSWER;
+  - the §3.1 INBOX's map program (w), PL (c), PT's held items, a new THE REALM'S PAST entry, and a new THE CAMPAIGN RECORD entry (the host's own, outside FP's inventory);
+  - §6 THE CANON ROOT and its acceptance sentence;
+  - OD-FC-135, amended: H35–H44 read, and H31–H34 and H45 read again;
+  - §7 OD-FC-137.
+- `docs/DESIGN_FP_ARCH_PA.md`: one OPEN row, OD-PA-37 THE NEXT CAMPAIGN'S PAST.
+
+Both ratchets are CLEAN: no token or cite missing, the fold's OD ids 360 → 363 (one new ruling row, OD-FC-137, which also cites OD-PA-37 and ⭐ OD-PT-3), and zero review markers.
+
+**The rulings (OD-FC-137, by delegation, vetoable):**
+
+| the ask or row | the answer |
+|---|---|
+| H35–H44 · H45 · H31–H34 | read; H45 and H31–H34 read again in their changed text; each read once more at its unit against the code then |
+| H46 | ACCEPTED as S8's slot (§3.1.29); its netting and recall the war volume's to design at WC-4 |
+| H48 | ACCEPTED as PA's own route (§3.1.33); re-sent on a member's dossier edit too (PA6) |
+| H36 | read as OD-FC-134 words it: the offer gated on the custom-content entitlement |
+| H47, a next campaign on a world an earlier campaign used | RECEIVED AND READ. Its acceptance is THE OWNER'S, put to the owner in chat on 2026-10-24 (VISIBLE). Its warrant is the owner's word to the map program, as the reply quotes it: "Campaign is just a term we use for the region of the map. So it means multiple or sequentially" |
+| the party pin's present-at | RULED: a ONE-SEAT pin's `requestPartyPresent` IS the DM's own `SET_PRESENCE` through the port, written by PT's writer at the present tick with its source `toggle` (no new field), with no second confirm and the toggle's every consequence (PT3; H32's standing); ⭐ OD-PT-3 stays VISIBLE, re-confirmed at PT's unit. A TWO-SEAT pin is not sent until PT rules a pair toggle |
+| a pair's observer · the home seat | PT's at its unit; the map's fail-closed reading stands meanwhile |
+| the walk's covert flag | PL-1's export at C9; the map's fail-closed reading stands meanwhile |
+| the court viewpoint | HELD (§3.1.27) |
+| H35 · H47's unit | THE CAMPAIGN RECORD, the host's own (`campaignSlice.js :: createCampaign` and the campaign's persistence). THE OWNER'S gates there: a migration for each; H35's gallery entitlement; H47's closing of a live campaign read-only, with its lifecycle paths (requirement 22) |
+| OD-PA-13b | THE OWNER'S |
+
+**The host's own findings:**
+- **EVERYTHING FROM THE REALM'S PAST IS DM-ONLY ON THE MAP.** PA's sidecar is DM-only and no public or player surface reads it. So every value the map reads from it reaches the map `dmOnly`: the past window (H48) and, on H13, `sincePast` and a `pastFact`'s years and sentence. This holds until a PA row rules a public arm. A still-standing treaty's own GR record keeps GR's audience.
+- **THE NEXT CAMPAIGN'S PAST** is OPEN at PA's unit (OD-PA-37), dated under PA8 when it is ruled. Until then:
+  - a next campaign's past is derived from its own members' dossiers exactly as a first campaign's;
+  - a member founded during an earlier campaign's play keeps no past (PA14);
+  - so H47's felt line "the border I lost is the border they inherit" is the map's own labelled picture of the earlier campaign, never the new campaign's polity.
+- **The reply's lens caption** "a fix in the host is coming" is asked to say the fix is recorded and not scheduled (law 9).
+- **H22's host-run additive re-canonize** is engine-written state, so its unit declares its lifecycle paths (requirement 22). It is geography, entitlement-blind under requirement 17.
+
+**The verifier (the kit's `skeptic/V-HP-r3.md`):** 14 findings (0 BLOCKING · 5 MAJOR · 9 MINOR), all cured in place. The five MAJORs:
+- a pair pin is not the one-settlement toggle;
+- DM-only widened to every value read from the realm past;
+- H47's acceptance put to the owner, not taken by delegation, its gates marked;
+- H47's border line answered;
+- the invented unit name replaced by THE CAMPAIGN RECORD, the host's own.
+
+At close: 0 BLOCKING · 0 MAJOR open.
+
+**The note** to the map program is the kit's `refs/HOST-NOTE-TO-THE-MAP-PROGRAM-2026-10-24b.md`, the owner's to send once this commit merges.
+
+**The proof.** The docs proof on this commit (master's doc-scanning suites plus the kit's 75 extra doc-reading suites): Test Files 290 passed (290) · Tests 4,824 passed (4,824) · exit 0. CI is the full gate.
+
+**Open:**
+1. H47's acceptance (THE OWNER'S, put in chat 2026-10-24).
+2. OD-PA-37 at PA's unit; OD-PA-13b (THE OWNER'S).
+3. PT's present-at for a pair, a pair's observer and the home seat, at PT's unit.
+4. The walk's covert flag, at PL-1's unit.
+5. H35's and H47's owner gates, at THE CAMPAIGN RECORD.
+6. No build is dispatched by this section. Every FP volume stays DARK and NOT SCHEDULED, and the dispatch gate is the release.
