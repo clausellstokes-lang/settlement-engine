@@ -1,0 +1,26 @@
+tokens: old 2965 · new 2979 · missing 0 · new-in-new 14
+  NEW tokens in the new text (each must be a registered name, never a mint):
+   + SET_PRESENCE
+   + dmOnly
+   + partyHome
+   + partySeats
+   + partySource
+   + partyStamp
+   + pastFact
+   + refs/HOST-NOTE-TO-THE-MAP-PROGRAM-2026-10-24b.md
+   + refs/MAP-REPLY-TO-HOST-2026-10-24.md
+   + requestPartyPresent
+   + sincePast
+   + skeptic/V-HP-r3.md
+   + terms[].pastFact
+   + toggle
+cites (path :: symbol): old 154 · new 154 · missing 0
+laws (XX1–XXn bold): old 0 · new 0
+OD rulings: old 360 · new 364
+owner rows ⭐: old 159 · new 163
+DRAFT marks: old 51 · new 51
+UNMEASURED marks: old 26 · new 26
+wave ids (XX-n): old 17 · new 17
+flags (…Enabled): old 99 · new 99
+review markers left in the new text: 0
+RATCHET CLEAN
