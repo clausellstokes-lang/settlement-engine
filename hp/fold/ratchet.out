@@ -1,0 +1,49 @@
+tokens: old 2928 · new 2965 · missing 0 · new-in-new 37
+  NEW tokens in the new text (each must be a registered name, never a mint):
+   + 81f1cd96
+   + MAP_FEED_READERS
+   + PolityFacts.names
+   + PolityLink
+   + applyAutoplacement
+   + asOfWeek
+   + campaign.party
+   + canonized
+   + canonizedAt
+   + changes
+   + dated fact
+   + deityRankStrength
+   + deityWriteGate
+   + editLaw
+   + findings/M-HP12.md
+   + flow_migration
+   + flows.js
+   + flows.js :: populationFlows
+   + heraldIntegrity
+   + hostSeq
+   + mapSlice.js :: updatePlacement
+   + marker
+   + migration.js
+   + migrationActive
+   + migrationKernel.js :: collectRealizedEmigrationEvents
+   + migrationKernel.js :: dispatchMigrations
+   + populationDynamics.js :: populationCandidate
+   + population_emigration
+   + presetAppliedFor
+   + refs/HOST-PROMPTS-2026-10-24.md
+   + refs/REPLY-TO-THE-MAP-PROGRAM-HOST-PROMPTS-2026-10-24.md
+   + route_predation
+   + settlementDeityHelpers.js :: setPrimaryDeityImpl
+   + settlementStrength
+   + skeptic/V-HP-r1.md
+   + spatialCanonVersion ≥ 1
+   + static_campaign
+cites (path :: symbol): old 148 · new 154 · missing 0
+laws (XX1–XXn bold): old 0 · new 0
+OD rulings: old 357 · new 360
+owner rows ⭐: old 159 · new 159
+DRAFT marks: old 51 · new 51
+UNMEASURED marks: old 26 · new 26
+wave ids (XX-n): old 16 · new 17
+flags (…Enabled): old 99 · new 99
+review markers left in the new text: 0
+RATCHET CLEAN
