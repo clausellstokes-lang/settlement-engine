@@ -99,3 +99,71 @@ The eight volumes went from 3,373,328 to 2,596,016 bytes, the fold from 811,323 
 - PA's words avoid the registered homonyms: "seal", "DRAFT", "pin", "lens", and the census's other taken words, including "canon", "briefing", "proposed", "kept" and "settled".
 
 **What follows.** The volume is compiled, reviewed adversarially to 0 BLOCKING and 0 MAJOR, and folded into the coherence fold (status row, rulings, vocabulary, its place in the order as chain C22, and the owner's rows in §7). This lands in its own docs PR, recorded as §934.98. Nothing is scheduled; the dispatch gate is unchanged.
+
+## §934.98 · THE REALM'S PAST (PA) INTEGRATED INTO THE FP ARCHITECTURE — ITS VOLUME COMPILED, REVIEWED ADVERSARIALLY TO 0 BLOCKING AND 0 MAJOR, AND FOLDED INTO THE FOLD AND THE SPINE; THE PRONOUN RULE (2026-10-24; SEAT: the cloud chair, session `01QuxWCMgVdyKhCNZL3c98y5`; research, compile, review, cure, verify and fold seats)
+
+**The owner's word, verbatim:** "Please integrate it into the architecture". It came after the words recorded in §934.97.
+
+**What lands (the commit that carries this section):**
+- **`docs/DESIGN_FP_ARCH_PA.md`, THE REALM'S PAST**, born consolidated. It holds:
+  - 18 laws, the owner's three marked ⭐ (PA1 THE DOSSIER IS CANON, PA2 THE PAST IS THE USER'S UNTIL THE FIRST ADVANCE, PA3 FROM THE PAST, NEVER FORWARD);
+  - one owned persisted shape, the sidecar `spatialLedgers.realmPast` (⭐ VISIBLE, owner-signed, re-confirmed at its unit);
+  - no engagement kind, and two virtual flags (`realmPastEnabled`, `realmPastPactsEnabled`), DARK;
+  - five waves PA-0..PA-4, 39 scenario rows and 34 rulings rows;
+  - zero kernel lines and zero generator lines. The inking mounts at one seam (`campaignAdvanceSession.js :: runAdvanceCampaignWorld`) through its own leaf, on the simulation's clone, so a failed first advance inks nothing.
+- **`docs/DESIGN_FP_COHERENCE_FOLD.md`, amended in place:**
+  - the program's volumes are counted as fourteen;
+  - §2 gains PA's status row;
+  - ruled rows §3.1.31–§3.1.37 and §3.3.29–§3.3.31 cover the genesis ties, PL's christening, the map's past window, the inking, the relationship plane, GR's past-origin arm, the other programs' past rules, the nonces, `realm_past` in the pact provenance, and the past's addresses;
+  - §3.4 states that PA mints no kind (THE COUNT unchanged);
+  - §5 gains a 19-row PA block;
+  - §6 gains chain C22 THE REALM'S PAST and THE ORDER NOTE; the inventory now reads C0..C22;
+  - §7 gains OD-FC-125..133: the owner's three laws, quoted verbatim; THE AMENDMENT LAW AFTER P8; the owner's open row on the genesis ties; the two owner-signed shapes; C22's order; PA's lighting; THE PRONOUN RULE.
+  - The ratchet against master's fold is CLEAN: no token or cite missing, no count fewer, zero review markers.
+- **`docs/DESIGN_FP_SPINE.md`:** C0..C22, two neutral pronouns, and the model name dropped from its header line. The ratchet is CLEAN.
+- **THE PRONOUN RULE across the fourteen program volumes** (eight changed: PL · MN · CH · PR · ST · BD · MG · WS):
+  - 13 owner pronouns at 12 sites and 20 DM pronouns at 18 sites are now neutral;
+  - every ratchet is CLEAN, and the word diffs show only pronouns moved;
+  - in-world persons keep theirs, and no verbatim quote is touched.
+
+**The review (the kit's `skeptic/` and `cure/`):**
+
+| pass | found or judged | result |
+|---|---|---|
+| S-PA (the volume vs the code and the owner's words) | 30: 5 BLOCKING · 13 MAJOR · 12 MINOR | all cured |
+| X-PA (the deep-review seat: the volume vs the corpus and the DM in play) | 16: 1 BLOCKING · 9 MAJOR · 6 MINOR | all cured |
+| D-PA round 1 | 46 cured, 0 refuted, 0 STOP | — |
+| V-PA (refuting verifier) | 28 judged · 25 hold · 3 fail · 1 new MAJOR | the 3 fails and the new one cured |
+| D-PA round 2 | 7 cured | — |
+
+At close: **0 BLOCKING · 0 MAJOR open.** The owner's three laws hold in every mechanism. PA writes no dossier byte and no relationship-plane row, and nothing runs forward.
+
+**The chair's rulings (by delegation, vetoable; `briefs/RULINGS-PA.md` in the kit):**
+- **⛔ PA-C-1, RE-RULED to its third arm.** PA writes NOTHING to `relationshipStates`: the plane keeps its one writer and its own memory law. A pair's old feeling lives in the inked record. Its living consequence is the dossier's own present type.
+- **⛔ PA-C-2.** The past is derived while it is the user's, then RECORDED ONCE at the first advance. A later dossier edit drops only a link, and contradicted facts are flagged on every read, never redrawn.
+- **The DM's pen.** Before the first advance the DM can cross out, change, confirm, roll again or undo; after it, one stroke remains, cross out (requirement 14).
+- **The owner's named pair.** "The oldest and second oldest" is honored by a pencilled tie OFFER. The DM's own confirm writes it through the dossier's link card, so the write is the user's intent, never PA's.
+- **Additive to each town's own history.** A read-only strip in each town's history section shows the town's past, never in player view.
+- **Past pacts** enter the treaties only through a past-origin arm of GR's signer (a ROUTE to GR). The POP `departureMemory` mint is struck.
+- **The two departures the cure seat made, both on receipts.** References are keyed on the SAVE ID, because every import path strips `_seed` and imports remap ids. The tie door is the link card, because the event composer's link field never mounts.
+- **The coverage registry:** `realmPast` is TRACKED, by `spatialUsage.js`'s own test (`routeNetwork`'s reasoning).
+- **THE AMENDMENT LAW AFTER P8:** a consolidated text is amended in place, in final form; the date goes to its rulings table.
+- **THE PRONOUN RULE:** no gendered pronoun for the owner or for the DM, a role.
+
+**Corrections to §934.97 (this section supersedes those sentences; the earlier section stands as written):**
+- the genesis ties number **3, 8 or 12** (the volume's executed probe), not "3, 9 or 12";
+- the sidecar holds **one ordered act log (`penLog`)** and is addressed by the world's own `rngSeed`, not "a seed, re-roll nonces and the user's per-fact choices";
+- references are keyed on the save id (above).
+
+**The kit.**
+- This cloud session's git proxy refuses a push outside `refs/heads` (HTTP 403). So the 2026-10-23 seal lives on the BRANCH `preserve/fp-final-kit-a73343ed-2026-10-23`, not a `refs/preserve/*` ref; the 2026-10-23 handover line is corrected to say so.
+- This program's close is sealed as the branch `preserve/fp-final-kit-a73343ed-2026-10-24`.
+- `tools/cloud-bootstrap.sh` reads either form.
+
+**The proof.** The docs proof on this commit (master's doc-scanning suites plus the kit's 75 extra doc-reading suites, with the ledger ref fetched as CI does): Test Files 290 passed (290) · Tests 4,824 passed (4,824) · exit 0. CI is the full gate.
+
+**Open:**
+1. OD-PA-13b (THE OWNER'S): whether PA's ordering may inform plan law 2's genesis ties at birth.
+2. OD-PA-32: a DM-set anchor for a newcomer's years (not now).
+3. The ROUTES, each its owner's to confirm at its wave: GR's past-origin signer arm; a DM verb for the relationship plane's `memoryHorizon`; POP's read of founding ties; the map's past window (MF and the world map's H9 · H13); PL's oath dates and offered names.
+4. PA is eligible after THE INSTRUMENTS BEFORE C0, as chain C22, chosen at a read under FP-40. Every FP volume stays DARK and NOT SCHEDULED, and the dispatch gate is the release.
