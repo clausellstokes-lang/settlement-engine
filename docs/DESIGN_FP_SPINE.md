@@ -1,16 +1,32 @@
 # DESIGN — THE FOREIGN POLICY SPINE (the unified program's constitution)
 
-## Fable 5 architecture, 2026-08-02. The owner's thesis, ratified by 21 code surveys:
-## foreign policy = four SUBSTANCES (war, trade, faith, populations) perceived through
-## one MEDIUM (information), negotiated in one GRAMMAR (diplomacy), driven by the
-## INTERIOR (books + memory). War is complete; this program brings the other six
-## layers to war's grade — robust AND dramatic — after which foreign policy EMERGES
-## and no seventh module is ever built. Implementation = the external implementer
-## (Sol), sequenced behind the sim-proof path. [CORRECTED 2026-10-16 (coherence fold) — implementation runs as chair-dispatched lane seats under docs/OPERATING_STANDARD.md; "Sol" is historical.] Every wave dark, every band authored,
-## every claim receipted. [CORRECTED 2026-10-16 (coherence fold) — THE STATUS OF RECORD IS docs/DESIGN_FP_COHERENCE_FOLD.md §2; this header is history. In one line: LIT: SP-B scarcity + conditions (FP_LIT_BELIEF, 3 presets); SP-3 via GRAMMAR (pactFormationEnabled, 4 presets incl. the default) · BUILT DARK: SP-A stocks; SP-B devotion; SP-B2 legs (sovereigntyTradeEnabled lit nowhere); SP-C posture (strategicPostureEnabled dark; appetite STARVED, SEAM-0 owed); SP-D errand spine (held dark on purpose); SP-E narration kit; second-order belief; lanes H/HG/HR/CF the causal headline (heraldCausalVoiceEnabled dark); lanes P/PR state-prose WIRED and live · UNBUILT: SP-7 temporal walker (fold §4); SP-8 age layer (OD-FC-17); SP-F era marking corpus-wide] The six program volumes (DESIGN_FP_{TRADE,FAITH,
-## POPULATIONS,INFORMATION,GRAMMAR,INTERIOR}.md) and the coupling volume
-## (DESIGN_FP_COUPLINGS.md) are BOUND BY THIS DOCUMENT; where they conflict with it,
-## this document wins and the conflict is a bug to report. [CORRECTED 2026-10-16 (coherence fold §1, requirement 15) — THE BINDING-SCOPE LAW: the binding extends to every FP volume, present and future — every DESIGN_FP_ARCH_* volume, the later programs (ES, WY, HB, WC, EP, EC, MF, LG, PG, CN, POP, INT, and W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their successors; a volume that declares itself outside says so in its header with the reason. And under requirement 22b "a bug to report" is not a disposition: an erratum lands as a dated bracket in the same commit as the ruling that makes it true.]
+## Fable 5 architecture of 2026-08-02 on the owner's thesis, ratified by 21 code surveys; each SP wave lands dark behind the flag it names at build (what is lit is the fold's §2, and §6 here); nothing scheduled.
+## CONSOLIDATED 2026-10-23 from the bracketed text of record at `1beabdc85` — the old header and the build lanes' progress record of 2026-08-03/04 (old §6) are in `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/SPINE-review-record.md`; the review trail is in git at `1beabdc85`.
+## THE FP CONSTITUTION: requirements 1–14 are §1 here; 15–24 are carried in §1 here and their text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1; the status of record of every SP wave is the fold's §2. ⭐ marks the OWNER's own rows; every ruling cited here is vetoable by one owner clause (the fold's §7).
+
+---
+
+## THE READER'S GUIDE
+
+1. WHAT THIS IS. The constitution of the FP program: the owner's thesis (below); the requirements every mechanism in every FP volume carries (§1); the infrastructure built once and consumed by every program, SP-1..SP-8 (§2); the crux rulings per program (§3); the coupling doctrine (§4); the sequencing discipline (§5); and the built state the spine governs (§6).
+2. WHAT IT BINDS. Every FP volume, present and future (requirement 15; THE BINDING, below). Where a volume conflicts with this document, this document wins, and the conflict lands as an erratum under requirement 22 (b).
+3. WHOSE IT IS. Requirements 1–12 are the owner's thesis, ratified, and requirement 1's Law One is owner-dictated; the doctrines under requirements 1 and 4 are the owner's own words, of record here; 13 and 14 are amendments ruled under the owner's full delegation; 15–24 are the coherence fold's — 16 is the owner's to set and 24 is the owner's own law. Every ruling is vetoable.
+4. WHAT IT OWNS. The shared shapes no volume mints twice: the errand ledger (SP-1), the believed-world families (SP-2), the pact grammar (SP-3, whose term catalog is GRAMMAR's), the posture read and its closed actor set (SP-4), the confidence and banded-stock families (SP-5, SP-5b), the narration kit with its band families and causal voice (SP-6), the temporal walker (SP-7) and the age layer (SP-8).
+5. HOW TO USE §1. Every wave carries every requirement, or the gap is a defect: its clock (9) and first-visible latency (16), its counterforce (2), its dossier round-trip (6), its Alignment line (13), its edit story (14), its TIER line and degraded arm (17), its measured or UNMEASURED bands (18), its felt sentence (19), its `causedBy` links (20), its layer or carrier (21), its lifecycle paths (22 (a)) and its ring horizon (23); every engagement between settlements is a hearing in the fold's registry (24).
+6. WHERE ITS STATUS IS. The fold's §2 is the status of record; §6 here carries the status line and the decisions the built SP waves settled (the Herald's causal voice, the dossier's state-prose reader, SP-A's pure foundations).
+7. THE WORDS NOT TO CONFUSE (the fold's §5). A bare "telling" is SP-6b's SEVERITY rung, never the TELLING register or "worn in the telling"; "grave" is the severity rung, and "a grave rumor" the rumor magnitude; the posture reads are the court reads `courtPostureOf` / `courtRiskAppetiteOf`, while `riskToleranceOf` is the roads NPC read; a hearing's forced outcome is a VERDICT, never a "decree" (the landed Decree Registry's word); a coherence chain (C0..C21) is the fold's §6, never FP-40's "chain n".
+
+**THE THESIS** (the owner's, ratified by 21 code surveys): foreign policy = four SUBSTANCES (war, trade, faith, populations) perceived through
+one MEDIUM (information), negotiated in one GRAMMAR (diplomacy), driven by the
+INTERIOR (books + memory). War is complete; this program brings the other six
+layers to war's grade — robust AND dramatic — after which foreign policy EMERGES
+and no seventh module is ever built. Implementation runs as chair-dispatched lane seats under docs/OPERATING_STANDARD.md, sequenced behind the sim-proof path. Every wave dark, every band authored,
+every claim receipted.
+
+**THE BINDING.** The six program volumes (DESIGN_FP_{TRADE,FAITH,
+POPULATIONS,INFORMATION,GRAMMAR,INTERIOR}.md) and the coupling volume
+(DESIGN_FP_COUPLINGS.md) are BOUND BY THIS DOCUMENT, and so is every FP volume, present and future (requirement 15, THE BINDING-SCOPE LAW) — every DESIGN_FP_ARCH_* volume, the later programs (ES, WY, HB, WC, EP, EC, MF, LG, PG, CN, POP, INT, and W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their successors; a volume that declares itself outside says so in its header with the reason. Where they conflict with it,
+this document wins, and under requirement 22 (b) "a bug to report" is not a disposition: an erratum lands as a dated bracket in the same commit as the ruling that makes it true.
 
 ---
 
@@ -18,13 +34,18 @@
 ## volume carries ALL twelve or it is a defect; the audit stage hunts shallow
 ## spots wearing deep clothing)
 
+Requirements 1–12 are the ratified core; 13 and 14 were added under the owner's full delegation; 15–24 were added by the coherence fold, whose §1 is their text of record. The owner's words stand verbatim; what was ruled under a requirement later follows it as a named paragraph.
+
 1. **THE HEURISTIC LAW (Law One, owner-dictated):** the engine models believers,
    buyers, migrants, and courts — never the underlying truth of a DM's world.
    Band-shaped, reflavorable, integratable into ANY construction. No price
    engines, no theology, no census realism. The engine never confirms the divine,
    never resolves a fate, never contradicts a DM's canon.
-   [AMENDED 2026-10-18 (fp-final r2; `DESIGN_FP_COHERENCE_FOLD.md` §1's 2026-10-18 doctrines bracket and §7 OD-FC-67 · OD-FC-68; `briefs/RULINGS-ROUND2.md` §E; THE OWNER'S OWN WORDS, verbatim) — THE WORLD HOSTS THE CAMPAIGN, NEVER COMPETES WITH IT: "and remember, this does not compete with the campaign, it just provides a living world to host a campaign and story in it." (2026-10-18 01:31), beside his 2026-10-17 word "Think of this tool as the DMs tool not the party … We only supply setting and consequence"; PURPOSE ONLY BY THE DM, MENACES NEVER EMERGENT: "well they have no purpose or destiny unless directed by the user, but if left alone, then absolutely correct. by the way, menaces are DM authored only, never organically emergent." (01:33); MACRO OVER MICRO: "We're keeping a lot of things at the macro level, not the micro in accordance with what matters which is what happens for the dungeon master and the table." (06:32) — no plot, quest or agenda of the engine's own; a champion's destiny and a menace's purpose only by the DM's direction; the level of detail is what reaches the table.]
-   [AMENDED 2026-10-20 (fp-final P7; L-FOLD3; mirrors `DESIGN_FP_COHERENCE_FOLD.md` §1's CHAIR-NOTES 20 bracket, whose text is of record; the fold §7 OD-FC-86; THE OWNER'S OWN WORDS, 2026-10-20 12:50 CDT, verbatim: "ordinary people's lives are teh view of the DM and is the main point of the settlemetn dossier at large. We are not going to be able to give full depth to thousands to hundreds of thousands of NPCs per settlement, we only focus on named NPCs as tey impact the settlement. even military units nad bandats and beasts affect the states of the settlement which is then interpreted by the DM into how they want ot portray the ordinary day to day life.") — THE ORDINARY LIFE IS THE DM'S READING OF THE DOSSIER, beside the hosting doctrine and MACRO OVER MICRO above: the engine deepens NAMED NPCs as they impact the settlement and moves the SETTLEMENT'S STATES; the unnamed thousands are the DM's portrayal, read from the dossier; military units, bodies and beasts matter through the states they move; every FP felt output terminates in a settlement state or a named NPC's deed, and a finding that asks for depth on unnamed people is CLOSED by this doctrine.]
+
+   **THE WORLD HOSTS THE CAMPAIGN, NEVER COMPETES WITH IT** — THE OWNER'S OWN WORDS, verbatim (the fold's §1, THE OWNER'S DOCTRINES OF 2026-10-18; its §7 OD-FC-67 · OD-FC-68): "and remember, this does not compete with the campaign, it just provides a living world to host a campaign and story in it." (2026-10-18 01:31), beside his 2026-10-17 word "Think of this tool as the DMs tool not the party … We only supply setting and consequence"; PURPOSE ONLY BY THE DM, MENACES NEVER EMERGENT: "well they have no purpose or destiny unless directed by the user, but if left alone, then absolutely correct. by the way, menaces are DM authored only, never organically emergent." (01:33); MACRO OVER MICRO: "We're keeping a lot of things at the macro level, not the micro in accordance with what matters which is what happens for the dungeon master and the table." (06:32) — no plot, quest or agenda of the engine's own; a champion's destiny and a menace's purpose only by the DM's direction; the level of detail is what reaches the table.
+
+   **THE ORDINARY LIFE IS THE DM'S READING OF THE DOSSIER** — THE OWNER'S OWN WORDS, 2026-10-20 12:50 CDT, verbatim: "ordinary people's lives are teh view of the DM and is the main point of the settlemetn dossier at large. We are not going to be able to give full depth to thousands to hundreds of thousands of NPCs per settlement, we only focus on named NPCs as tey impact the settlement. even military units nad bandats and beasts affect the states of the settlement which is then interpreted by the DM into how they want ot portray the ordinary day to day life." (the fold's §1 carries the doctrine and its consequences, of record; its §7 OD-FC-86) — beside the hosting doctrine and MACRO OVER MICRO above: the engine deepens NAMED NPCs as they impact the settlement and moves the SETTLEMENT'S STATES; the unnamed thousands are the DM's portrayal, read from the dossier; military units, bodies and beasts matter through the states they move; every FP felt output terminates in a settlement state or a named NPC's deed, and a finding that asks for depth on unnamed people is CLOSED by this doctrine.
+
 2. **FORCES AND COUNTERFORCES:** every force names its opposition, scoring off
    the SAME evidence. A force without a counterforce is a ratchet; ratchets are
    the estate's proven killer (the runaway's lesson).
@@ -35,7 +56,9 @@
    systems — read through their EXISTING planes (powers, factions, temperament
    via W0/H3, flaws, rankings, goals, rivalries). Casting is read-wiring, never
    new NPC state. Never-kill and never-resolve-fates hold absolutely.
-   [AMENDED 2026-10-18 (fp-final r2; the fold's §7 OD-FC-69 · OD-FC-70; THE OWNER'S OWN WORDS, verbatim) — NO ENGINE MORTALITY CLOCK for named persons: "in fantasy settings, there are longed lived or immortal species and characters. this allows the DM to decide" (2026-10-18 05:57) — lifespan is the DM's through species and character, death stays his verdict, and the ages' thinness on heirs is by design; MEDIEVAL FOR MILLENNIA: "We're keeping this strictly to the medieval and in the fantasy setting these last for millennia's on end." (06:32) — no technological eras; the ages are long spans of the same world.]
+
+   **NO ENGINE MORTALITY CLOCK for named persons** — THE OWNER'S OWN WORDS, verbatim (the fold's §7 OD-FC-69 · OD-FC-70): "in fantasy settings, there are longed lived or immortal species and characters. this allows the DM to decide" (2026-10-18 05:57) — lifespan is the DM's through species and character, death stays his verdict, and the ages' thinness on heirs is by design; MEDIEVAL FOR MILLENNIA: "We're keeping this strictly to the medieval and in the fantasy setting these last for millennia's on end." (06:32) — no technological eras; the ages are long spans of the same world.
+
 5. **THE ERRAND SPINE:** all purposeful named-person travel rides ONE substrate
    (the WR-7a design generalized): typed purposes {diplomatic, commercial,
    religious, factional, personal, covert}, DECLARED vs TRUE purpose riding the
@@ -67,7 +90,9 @@
     SETTLEMENT STRATEGIC POSTURE that colours every verb across all layers:
     one character, not seven dice. Out-of-posture acts are priced and
     receipted news, never forbidden.
-    [AMENDED 2026-10-20 (fp-final P7; L-FOLD3; the fold §3.3.19 (P7), whose text is of record; `briefs/RULINGS-P6.md` A.1 · A.8 · D.5 · E.1; the fold §7 OD-FC-107) — ONE CHARACTER, NOT SEVEN DICE, IN THE NEXT PROGRAM: THE WAY OF WAR and THE FISCAL SEAT read ONE derived temper of a court, `courtTemperOf(courtId)` (WS owns it, FS cites it), composed of this requirement's posture (SP-4's `courtPostureOf` / `courtRiskAppetiteOf`), the alignment axes, HB's stocks where lit and the faith's derived temper — never a stored temperament (⭐ OD-WS-5); in a war decision the temper enters ONCE, through the landed `computeAggressiveness` drive, never into the way choice (the strengths alone) or a lean's sign.]
+
+    **ONE CHARACTER, NOT SEVEN DICE, IN THE PROGRAM'S LATER VOLUMES** (the fold §3.3.19, whose text is of record; its §7 OD-FC-107): THE WAY OF WAR and THE FISCAL SEAT read ONE derived temper of a court, `courtTemperOf(courtId)` (WS owns it, FS cites it), composed of this requirement's posture (SP-4's `courtPostureOf` / `courtRiskAppetiteOf`), the alignment axes, HB's stocks where lit and the faith's derived temper — never a stored temperament (⭐ OD-WS-5); in a war decision the temper enters ONCE, through the landed `computeAggressiveness` drive, never into the way choice (the strengths alone) or a lean's sign.
+
 11. **NARRATION PARITY:** war narrates everything it does; so will everyone.
     Each program carries a story-kind expansion to war's density class, an
     ENDINGS VOCABULARY with share envelopes (the WR-9 discipline), receipts in
@@ -77,16 +102,18 @@
     the Herald; every program's news classes register with the pacing/
     significance machinery so depth never becomes wallpaper. Story density has
     flow control by law.
-    [AMENDED 2026-10-17 (fp-final; chair a73343ed, by delegation, vetoable; `DESIGN_FP_COHERENCE_FOLD.md` §7 OD-FC-52; source `settlement-engine-kits/fp-final-a73343ed-2026-10-17/briefs/CHAIR-NOTES-FOR-THE-FOLD.md` item 2) — THE PUSH BUDGET: each advance PUSHES one causal headline (SP-6) and a bounded handful of beats; everything else is the chronicle, reachable and never pushed; effects fold under their causes through the cascade braid (CW-1; both lit per OD-FC-16); beats are RANKED BY FOCUS (the party's position and the DM's pinned settlements define "near"; far events arrive as rumor-scale lines); the docket surface shows a count and the top three hearings by stakes, with one act to run the rest on defaults and one act to open all (every card still exists — requirement 24); the budget is an ENVELOPE in every chain's experience read (lines pushed per advance across a seed family; DRAFT ≤ 8 per week-advance, ≤ 20 for an age receipt, UNMEASURED, on the FP-46 roster).]
-13. **THE ALIGNMENT COUPLING (both axes, both directions) [CHAIR AMENDMENT
-    2026-08-02 under full owner delegation — vetoable; the corpus's "twelve
+
+    **THE PUSH BUDGET** (by delegation, vetoable; the fold's §7 OD-FC-52): each advance PUSHES one causal headline (SP-6) and a bounded handful of beats; everything else is the chronicle, reachable and never pushed; effects fold under their causes through the cascade braid (CW-1; both lit per OD-FC-16); beats are RANKED BY FOCUS (the party's position and the DM's pinned settlements define "near"; far events arrive as rumor-scale lines); the docket surface shows a count and the top three hearings by stakes, with one act to run the rest on defaults and one act to open all (every card still exists — requirement 24); the budget is an ENVELOPE in every chain's experience read (lines pushed per advance across a seed family; DRAFT ≤ 8 per week-advance, ≤ 20 for an age receipt, UNMEASURED, on the FP-46 roster).
+
+13. **THE ALIGNMENT COUPLING (both axes, both directions — an amendment ruled under the owner's full
+    delegation, vetoable; the corpus's "twelve
     requirements" phrases refer to the ratified core above, and waves pick
-    13–14 up at build]:** the settlement's alignment is a DERIVED two-axis
+    13–14 up at build):** the settlement's alignment is a DERIVED two-axis
     read — `settlementAlignment(item, worldState) → { lawfulness01, malice01 }`
     (`src/domain/worldPulse/settlementAlignment.js`, navigated by symbol; the
     earlier `alignmentOf(id)` citation named an injected port, and both of its
     line addresses have rotted) — composed from its people; it is never a
-    stored settlement stock and gains NO writer (never-store-a-derivable). [CLARIFIED 2026-10-16 (coherence fold §3.3.5) — master's sentence above is the text of record (`export function settlementAlignment(item, worldState)`, settlementAlignment.js:44); the ledger copy's `alignmentOf(id)` citation is retired with it. DESIGN_FP_ARCH_EC §6 EC-3 still cites "the exported `alignmentOf`" — no such export exists; EC is amended under §3.3.5.]
+    stored settlement stock and gains NO writer (never-store-a-derivable).
     Every mechanism names its READ engagement — which axes colour it
     (quadrant reads, contraband/conscience gates, the extremity and
     just-razing gates, the world's judgment on the observer's axis) — or
@@ -97,8 +124,11 @@
     defect. Each wave carries an Alignment line; the audit stage enforces
     totality. POPULATIONS' current zero engagement resolves at POP build
     under this requirement.
-14. **THE EDIT VERB (the DM's pen and the clerk's proposal) [CHAIR AMENDMENT
-    2026-08-02 under full owner delegation — vetoable]:** every new
+
+    **THE ALIGNMENT READ'S ADDRESS** (the fold §3.3.5): the sentence above is the text of record — `export function settlementAlignment(item, worldState)` (settlementAlignment.js:44); the `alignmentOf(id)` citation is retired with it, and DESIGN_FP_ARCH_EC §6 EC-3's "the exported `alignmentOf`" (no such export exists) is amended under the fold §3.3.5.
+
+14. **THE EDIT VERB (the DM's pen and the clerk's proposal — an amendment ruled under the owner's full
+    delegation, vetoable):** every new
     player/DM-visible state ships its edit story IN THE SAME WAVE: (a) the
     DM VERB through the established store-action lane (operationRegistry-
     registered, compendium data regenerated, approval-routed where the edit
@@ -112,17 +142,18 @@
     never silence. GRAMMAR's approval-lane rows and INTERIOR's burial verb
     are the house pattern; TRADE/POP/INFO currently name no verbs and pick
     theirs up at build under this requirement.
-   [ADDED 2026-10-16 (coherence fold §1) — requirements 15–23 follow]
+
+**REQUIREMENTS 15–24** were added by the coherence fold. Their text of record is `DESIGN_FP_COHERENCE_FOLD.md` §1, which also carries the paragraphs ruled under each of them; where the text below and the fold's differ, the fold's governs.
+
 15. **THE BINDING-SCOPE LAW.** Every FP volume, present and future — the
     thirteen the compiled fold names, the later programs (EC, MF, LG, PG, CN,
     W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their
     successors — is bound by requirements 1–24. A volume that declares itself
-    outside says so in its header with the reason. (Today the spine binds "the
-    six program volumes and the coupling volume" by name; nine later volumes
-    cite the spine zero times.)
-16. **THE FIRST-VISIBLE-LATENCY LAW** ⛔ RULED BY DELEGATION 2026-10-16, OD-FC-1 (the spine reader
-    rightly says a product rule about what a DM must see is the owner's).
-    Proposed text: every mechanism declares, beside its clock, its FIRST-VISIBLE
+    outside says so in its header with the reason. (At the corpus read the spine bound "the
+    six program volumes and the coupling volume" by name, and nine later
+    volumes cited it zero times.)
+16. **THE FIRST-VISIBLE-LATENCY LAW** (THE OWNER'S TO SET — ruled by delegation, as drafted, in the fold's §7 OD-FC-1: a product rule about what a DM must see is the owner's).
+    Every mechanism declares, beside its clock, its FIRST-VISIBLE
     LATENCY in DM advances — the DM's advance unit is week / month / season /
     year — and a one-month advance must surface at least the mechanism's
     fast-layer sign (a band word, a beat, a dossier line); the slow verdict is
@@ -134,14 +165,19 @@
 17. **THE TIER DECLARATION LAW.** Every wave carries a TIER line: aspatial-safe
     / spatial canon / belief-recording infoMode / host flags it needs, and its
     DEGRADED ARM in the lesser tier — exactly as requirement 13 forces an
-    Alignment line. The paid-tier sense (anonymous = town, free = village +
-    town, premium = deities and spatial canon) is declared where it governs the
-    felt sentence. (Belief, and therefore all of INFO/ES/TR-3/HB-6..8 and
+    Alignment line. The paid-tier sense is declared where it governs the
+    felt sentence: the SIMULATOR is premium (the owner, 10-16); the DEMO CAP
+    (anonymous = town, free = village + town) is the owner's "completely
+    temporary" pre-launch cap with its launch switch beside U16 (FP-77), never a
+    design tier. (Belief, and therefore all of INFO/ES/TR-3/HB-6..8 and
     EC-16/18, runs only under spatial canon with a non-omniscient infoMode;
     faith runs only on deity-bearing premium worlds; no volume says so at the
     top.)
-    [AMENDED 2026-10-18 (fp-final r1; mirrors `DESIGN_FP_COHERENCE_FOLD.md` §1's requirement-17 bracket of 2026-10-18, whose text is of record; HOST-r1-2; `briefs/RULINGS-ROUND1.md` ADDENDUM HOST-r1-2, by delegation, vetoable) — CANONIZED ≠ PREMIUM: the paid-tier sense above is superseded where it reads "premium = … spatial canon". The world canon is geography, a world fact, and not the simulator; the SIMULATOR is premium (the owner, 2026-10-16; the fold's text of record), and the map module's H22 birth canon "whatever its tier" is compatible with this requirement — on a map-module world the spatial arm is the default arm. A TIER line's "spatial canon" names the world's geography tier, never an entitlement. What H22 moves is behaviour (every canon-gated lane from week one), a declared new-world shift carried to the owner (the fold's §7 OD-FC-62).]
-    [AMENDED 2026-10-20 (fp-final P7; L-FOLD3; `briefs/L-FOLD3.md` item 9; the fold §3.3.23 (P7), whose text is of record; `DESIGN_FP_ARCH_MG.md` MG7 · MG8 · MG9 · MG12; `briefs/RULINGS-P6.md` A.6; THE OWNER'S OWN WORDS, 2026-10-20, verbatim: 12:41 CDT "note that there is a limit to splitting up, even if possible at all, for ships (air ships or otherwise) unless we considered them a fleet" · 12:49 CDT "also i forget that we have an institution for mounts... how should those effect movement speed of units and when and what situtaiton and status of a unit or NPC do they apply? in army or military units, you could have a cavalary unit, but for larger armies, it is as slow as its slowest member, unless cavalry splits off. mounts can also be traded as cargo and bandits could steal some maybe. NPCs starting missions from a settlement that has a mount has a speed boost. but then what are the counterforces or what am i missing? what are your thoguhts?") — THE PHYSICAL-WORLD SEAM, two notes for every TIER line that moves a unit: (1) THE CARRIAGE LIMIT — a SHIP, at sea or in the air, is an atom of movement and never splits; a FLEET splits only along LG-2's stored commitments, never below one ship, and with no commitment record nothing splits; FP mints no sea law, so a fleet never re-plans at sea until a naval re-plan exists (OD-MG-21); (2) THE MOUNT'S ONE PHYSICS — a mount is a PACE, never a second speed law: a rider's gain is ONE ratio off WY's one mode table (the `horse` row, WY's, owner-signed), applied by each leg pricer's owner on the `road` and `highway` grades only and ×1 elsewhere; a column moves at its slowest member (the landed `ARMY_SPEED_FACTOR` prices the train, so a whole army never rides; only a part that leaves the train moves faster); the forced pace is WY's ONE `forced` row; THE MOVEMENT GRAMMAR mints no constant. The aspatial arm is honest: without a canonized digest no verb is chosen and the dossier reads as today (MG12).]
+
+    **CANONIZED ≠ PREMIUM** (by delegation, vetoable; the fold's §1 under requirement 17 is of record). The world canon is geography, a world fact, and not the simulator; the SIMULATOR is premium (the owner, 2026-10-16; the fold's text of record), and the map module's H22 birth canon "whatever its tier" is compatible with this requirement — on a map-module world the spatial arm is the default arm. A TIER line's "spatial canon" names the world's geography tier, never an entitlement. What H22 moves is behaviour (every canon-gated lane from week one), a declared new-world shift carried to the owner (the fold's §7 OD-FC-62).
+
+    **THE PHYSICAL-WORLD SEAM** (the fold §3.3.23, whose text is of record; `DESIGN_FP_ARCH_MG.md` MG7 · MG8 · MG9 · MG12; THE OWNER'S OWN WORDS, 2026-10-20, verbatim: 12:41 CDT "note that there is a limit to splitting up, even if possible at all, for ships (air ships or otherwise) unless we considered them a fleet" · 12:49 CDT "also i forget that we have an institution for mounts... how should those effect movement speed of units and when and what situtaiton and status of a unit or NPC do they apply? in army or military units, you could have a cavalary unit, but for larger armies, it is as slow as its slowest member, unless cavalry splits off. mounts can also be traded as cargo and bandits could steal some maybe. NPCs starting missions from a settlement that has a mount has a speed boost. but then what are the counterforces or what am i missing? what are your thoguhts?") — two notes for every TIER line that moves a unit: (1) THE CARRIAGE LIMIT — a SHIP, at sea or in the air, is an atom of movement and never splits; a FLEET splits only along LG-2's stored commitments, never below one ship, and with no commitment record nothing splits; FP mints no sea law, so a fleet never re-plans at sea until a naval re-plan exists (OD-MG-21); (2) THE MOUNT'S ONE PHYSICS — a mount is a PACE, never a second speed law: a rider's gain is ONE ratio off WY's one mode table (the `horse` row, WY's, owner-signed), applied by each leg pricer's owner on the `road` and `highway` grades only and ×1 elsewhere; a column moves at its slowest member (the landed `ARMY_SPEED_FACTOR` prices the train, so a whole army never rides; only a part that leaves the train moves faster); the forced pace is WY's ONE `forced` row; THE MOVEMENT GRAMMAR mints no constant. The aspatial arm is honest: without a canonized digest no verb is chosen and the dossier reads as today (MG12).
+
 18. **THE TUNING-EVIDENCE LAW.** A band row carries its measured spread (seed
     family, preset, window) or the word UNMEASURED; the owner signs measured
     rows only; "absent means zero" needs a dormancy reason written down. (The
@@ -164,11 +200,13 @@
     WC→WAR, HB→INFO, WY→the carriers of TRADE/POP/WAR, EP→all as a clock, INT
     stays INTERIOR); (b) pair ids are closed at CPL-1..21 with a declared
     extension family for within-layer and new-program rows (the registry's
-    CPL-22/23 are re-anchored, §3.3); (c) a new volume prefix is chartered in
+    CPL-22/23 are re-anchored, the fold §3.3); (c) a new volume prefix is chartered in
     the same commit as its first registry row; (d) a closed ladder is minted
-    into the corpus VOCABULARY REGISTER (§5) with a homonym check — one word,
+    into the corpus VOCABULARY REGISTER (the fold §5) with a homonym check — one word,
     one meaning per surface, the J-WR-10-B borrow census generalised.
-    [AMENDED 2026-10-17 (fp-final; mirrors the fold §1's 21(a) brackets, whose text is of record; SX-15, `settlement-engine-kits/dominion-xf-2fc13d59-2026-10-17/skeptic/SX.md`; `briefs/RULINGS-PL-MN.md` A/SX-15 and B/SX-15) — 21(a)'s carrier declarations are widened and three new programs declare: PL (the polity, `DESIGN_FP_ARCH_PL.md`) a CARRIER across GRAMMAR · WAR · INTERIOR · TRADE · INFO (TRADE · INFO added — PL §9's own line); MN (the menace, `DESIGN_FP_ARCH_MN.md`) a CARRIER across WAR · POPULATIONS · TRADE · INFO (INFO added — MN §9's own line); RN (the renown, `DESIGN_FP_ARCH_RN.md`) a CARRIER across INFO · INTERIOR · FAITH · GRAMMAR (the rumor road and the operative's fame; a court's regard derived from its people of power and the person lens out of the seat books; the priest's lean in the faith contest; the envoy's lean at `reserveFor`, ⛔ RN-S4, slot C1); CH (the champions, `DESIGN_FP_ARCH_CH.md`) a CARRIER across all seven — FAITH · WAR · GRAMMAR · INFO · POPULATIONS · TRADE · INTERIOR — one domain seam each (CH §6: faith · war · diplomacy · information · health · trade · order; `wildland` rides MN's siege verdict, WAR); PT (the party, `DESIGN_FP_ARCH_PT.md`) a CARRIER across INFO · INTERIOR · GRAMMAR (the deed's telling and the truth that chases it; the gate, the bans and the summons-to-bounty ladder at a court; requests, offers and pledges between the party and courts). RN, CH and PT carry no coupling line of their own: their three declarations are the fold lane's reading of each volume's seam tables (RN §5.4/§10, CH §6, PT §7.3/§14) — PLAUSIBLE, each volume to state its own line at its next disposition round. Their prefixes `RN`, `CH`, `PT` are chartered in the same commit as each one's first coupling-registry row (21c); the prefix `PT` names the volume, never the party's actor ref.]
+
+    **THE CARRIERS** (the fold's §1 under 21 (a), whose text is of record). Five programs declare themselves CARRIERS across named layers: PL (the polity, `DESIGN_FP_ARCH_PL.md`) a CARRIER across GRAMMAR · WAR · INTERIOR · TRADE · INFO (PL §9's own line); MN (the menace, `DESIGN_FP_ARCH_MN.md`) a CARRIER across WAR · POPULATIONS · TRADE · INFO (MN §9's own line); RN (the renown, `DESIGN_FP_ARCH_RN.md`) a CARRIER across INFO · INTERIOR · FAITH · GRAMMAR (the rumor road and the operative's fame; a court's regard derived from its people of power and the person lens out of the seat books; the priest's lean in the faith contest; the envoy's lean at `reserveFor`, ⛔ RN-S4, slot C1); CH (the champions, `DESIGN_FP_ARCH_CH.md`) a CARRIER across all seven — FAITH · WAR · GRAMMAR · INFO · POPULATIONS · TRADE · INTERIOR — one domain seam each (CH §6: faith · war · diplomacy · information · health · trade · order; `wildland` rides MN's siege verdict, WAR); PT (the party, `DESIGN_FP_ARCH_PT.md`) a CARRIER across INFO · INTERIOR · GRAMMAR (the deed's telling and the truth that chases it; the gate, the bans and the summons-to-bounty ladder at a court; requests, offers and pledges between the party and courts). RN, CH and PT carry no coupling line of their own: their three declarations are the fold's reading of each volume's seam tables (RN §5.4/§10, CH §6, PT §7.3/§14) — PLAUSIBLE until each volume states its own line. Their prefixes `RN`, `CH`, `PT` are chartered in the same commit as each one's first coupling-registry row (21c); the prefix `PT` names the volume, never the party's actor ref.
+
 22. **THE ENGINE-STATE LIFECYCLE AND ERRATUM LAW.** (a) ARCH_SP's L4
     lifecycle-paths clause (create / read / persist / regenerate / undo /
     import / migrate / dark-after-lit / death / veil) binds every engine-written
@@ -189,8 +227,7 @@
     from `historyRingCollapse.test.js:150-159`) — a year-cadence DM's receipt
     and replay horizon is about 29 advances, not 80, and requirement 7's cause
     walk ages out 2.7× faster at that clock. The ring policy itself (collapse
-    before eviction, or raise the cap) is RULED BY DELEGATION 2026-10-16, OD-FC-33.
-   [ADDED 2026-10-16 18:5x (coherence fold §1, the owner's own law) — requirement 24 follows; its text is re-stated in the fold §1 after skeptic S1-01 (SP-9 builds on the LANDED majors docket: decisionTier.js, advanceInterval.js:601, J-D7's adjudication screen; month/season/year advances force auto-resolve by the owner's word), S1-08 (the demo cap is temporary, not a tier) and S1-13 (at a month-or-longer advance the receipt is the sign), and after skeptic S5 (no pause cursor — the tick completes and the next advance resolves the held docket first; the HEARING SEAL is its own seal kind keyed by engagement id, read first in the resolver's module, the frozen kernel untouched; directive 7's majors pause and its DM switch untouched; the registry seeded from the live-act census, nineteen kinds becoming thirty-one; the DM's forced outcome is a VERDICT, never a "decree") — the fold's §1 is the text of record] [EXTENDED 2026-10-17 (OD-MN-8, by delegation) — engagements between a settlement (or its army) and a MENACE, the DM-named outside force of `DESIGN_FP_ARCH_MN.md`, are registered kinds too (`menace_strikes` STANDING, `menace_met` CLIMAX); the kingdom layer's engagements (`DESIGN_FP_ARCH_PL.md` §7) are registered with their own kinds.]
+    before eviction, or raise the cap) is ruled by delegation (the fold's §7 OD-FC-33).
 24. **THE HEARING WEEK** (the owner, 2026-10-16, 18:5x EDT, verbatim: "When it
     comes to conflict, spying, treatise, etc, anything that involves one
     settlement with another, the height of that engagement, regardless of where
@@ -209,32 +246,66 @@
     tide over the course of weeks. still the DM can decide who wins during any
     one of those weeks forcing the hand.")
     (a) Every ENGAGEMENT between two settlements — an act of one court, army,
-    envoy, spy, caravan, column, legate or house upon another — is a row in ONE
-    closed ENGAGEMENT REGISTRY (kind · owning program · its CLIMAX tick · its
+    envoy, spy, caravan, column, legate, house, or any NPC of one settlement
+    upon another settlement or its NPCs — is a row in ONE ENGAGEMENT REGISTRY,
+    seeded from the census of every live inter-settlement act (the fold §3.4) and CLOSED
+    once lit (an unregistered kind may not resolve; registration is the only
+    door) (kind · owning program · its CLIMAX tick · its
     verdict vocabulary · whether it is a CLIMAX kind, settled in one hearing, or
-    a STANDING kind that holds for weeks). (b) At a one-week advance the engine
-    never resolves a climax in the tick it arrives: it MINTS a pending verdict
-    (its own default, computed deterministically with its epoch) into the
-    PENDING LEDGER and stops; the DM may leave it to the engine, TILT it (a
-    bounded thumb for one side: slight · heavy) or DECREE the outcome; the next
-    week resolves it from the seal or the default. A STANDING engagement (a
-    siege, a long negotiation, an occupation's contest, a blockade) offers the
-    same three choices EVERY week it stands, and the decree forces the hand that
-    week. (c) A month, season or year advance runs every hearing on the engine's
-    default without stopping; each still mints its pending record for one tick
-    and leaves its receipt ("resolved by the engine's default verdict"), so the
-    cause walk and the Herald see the same world either way. (d) The seal is a
-    typed DM edit (requirement 14; L10's one door) with provenance
-    (`causedBy: dm_seal`), replayed exactly as an order in the world (EP B2's
-    reading), surviving every lifecycle path (requirement 22a). (e) The
-    simulator is PREMIUM: the hearing, the tilt and the decree are premium
+    a STANDING kind that holds for weeks); its reach beyond two settlements is THE WIDENED
+    REGISTRY, below. (b) THE DOCKET EXISTS BUT THE PAUSE CURSOR CANNOT HOST A
+    HEARING: the landed majors docket (`decisionTier.js`, eleven majors;
+    `advanceInterval.js:601`; J-D7's "ONE gathered adjudication screen" and
+    "durable HELD DOCKET") is the SCREEN and the ledger idiom SP-9 generalises,
+    but its paused cursor re-runs the same parked tick and refuses advances and
+    edits while parked (`advanceInterval.js:327-340`,
+    `campaignWorldPulseSlice.js:450-459`, `settlementPendingEdits.js:136-142`),
+    so a hearing NEVER parks the cursor. At a one-week advance — the DM's
+    chosen unit `one_week`, not a tick labelled `one_week` inside a longer
+    advance — the engine never resolves a climax in the tick it arrives: the
+    resolver writes the engagement to the HELD DOCKET (a flag-gated ledger) with
+    its default verdict, computed deterministically with its epoch, and the tick
+    COMPLETES normally; the world is in its ordinary between-advance state, so
+    the DM may advance, edit or seal; the DM may leave the hearing to the engine,
+    TILT it (a bounded thumb for one side, slight · heavy — a declared bounded
+    term on the decider's score where the decider draws no randomness, a draw
+    bias where it does; each kind declares which) or give a VERDICT (the forced
+    outcome; the word "decree" is the landed Decree Registry's and is not used);
+    the NEXT advance resolves every docketed hearing FIRST, from the seal or the
+    default, before anything else moves. A STANDING engagement (a siege, a
+    blockade, an embargo, an occupation's contest, a long negotiation, a spy's
+    stay) offers the same three choices EVERY week it stands, and the verdict
+    forces the hand that week. The HEARING SEAL is its own Edit Mode seal kind,
+    keyed by ENGAGEMENT id with the registry's verdict vocabulary, read by the
+    resolver FIRST (before any feasibility, max-age or capitulation arm) in the
+    resolver's own module — it is not a fork pin, so the pinnable-fork list in
+    the frozen `pulseKernel.js:362` is untouched; the STRESSOR PIN of
+    ODQ §128 is a different object (it holds a stressor; the hearing seal decides
+    a week's verdict) and both stand. (c) A month, season or year advance runs every HEARING on the engine's
+    default without stopping — the owner's "months seasons and years go by
+    automatically" governs hearings only; the landed majors pause and its DM
+    switch (`advanceAutoResolve`, realm directive 7) are UNTOUCHED (that
+    pause is the DM's option, and its majors include acts that are not between
+    two settlements); each hearing still mints its docket record for one tick and
+    leaves its receipt ("resolved by the engine's default verdict"), so the cause
+    walk and the Herald see the same world either way. When the flag is dark or
+    the world regenerates, docketed hearings are not read: a dark world resolves
+    every climax in its tick as today, and a regeneration re-derives the docket
+    from the world (it is derived state, dropped and re-minted, requirement 22a).
+    (d) The seal is a
+    typed DM edit (requirement 14; L10's one door) whose seal EVENT is minted
+    with its own id and named as the verdict's parent in `causedBy` (the field
+    holds parent ids), replayed exactly as an order in the world, surviving every lifecycle path (requirement 22a). (e) The
+    simulator is PREMIUM: the hearing, the tilt and the verdict are premium
     surfaces (U16's gate), with no free-tier arm to design. (f) Dark-identical
     behind `hearingWeekEnabled`; lit, every climax resolves one tick later than
     today — a declared same-seed shift signed once at lighting. (g) Every
     engagement kind's pending card is its FIRST-VISIBLE sign (requirement 16)
     and is written under the Evidence Law: who, upon whom, where, the default
-    verdict, and nothing about what the DM might do.
-    [RESTATED 2026-10-17 by the owner, verbatim: "Also just to make sure that
+    verdict, and nothing about what the DM might do; at a month-or-longer
+    advance the RECEIPT ("resolved by the engine's default verdict") is the sign.
+
+    **THE OWNER'S RESTATEMENT** (2026-10-17), verbatim: "Also just to make sure that
     the simulator has this right as well for any hearing on a week by week basis
     that the dungeon, master or user has not made a decision on is then left to
     the RnG of the simulator to the side. Hearings only happen on the week.
@@ -247,27 +318,41 @@
     nothing is held over an advance. A party hearing's default is that nothing
     has happened to the party (the party's fate is never the engine's); the RNG
     decides only the other actor's course. The landed majors pause, the DM's own
-    switch, is a different object and stays as (c) rules.]
-    [EXTENDED 2026-10-17 (fp-final; mirrors the fold §1's requirement-24 bracket, whose text is of record; RULED BY DELEGATION, OD-FC-50; precedent OD-MN-8) — (a)'s registry also holds the engagements of THE PARTY (`DESIGN_FP_ARCH_PT.md` §13: fourteen kinds — `party_request · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_gate · party_visit` STANDING; `party_pledge_due · party_slander · party_banned · backing_voided · backing_repudiated` CLIMAX; every party kind's default "nothing has happened to the party yet", the RNG deciding only the other actor's course) and of THE CHAMPIONS (`DESIGN_FP_ARCH_CH.md` §18, OD-CH-3: nine kinds between a court and a person or two persons in a town — `retainer_offer · paragon_resigns · champion_duel · person_at_the_gate · person_banned · banished_found · paragon_disgraced · polarity_turn · never_line_tested`, all CLIMAX), beside the menace's (`menace_strikes` RENAMED `menace_siege`, STANDING, `holds · falls · relieved · lifted`; `menace_met` CLIMAX — `briefs/RULINGS-PL-MN.md` B/SMN-27) and the polity's renamed `polity_*` kinds (fold §3.4). The owner's law speaks of "one settlement with another"; its widening to a menace, a person and the party is RULED BY DELEGATION on OD-MN-8's precedent, vetoable, and carried to the owner as a VISIBLE row in ODQ §934.93 (the chair's; `briefs/RULINGS-PL-MN.md` B/SMN-25). Every such kind's parties use the one actor-ref convention `{kind, id?}` with `kind ∈ settlement · person · party · menace` (fold §3.3.12); the docket's `targetSaveId` is always a real settlement (the anchor) and a non-settlement party rides a `subject` dial (the MN convention). (b) and (c) bind every one of them exactly: a hearing only at the DM's one-week advance, nothing held over an advance, month/season/year advances on defaults — and an ADVANCE BY N YEARS (OD-FC-51) runs its whole span on defaults. The 10-16 bracket above requirement 24 ("nineteen kinds becoming thirty-one") and its 10-17 extension (`menace_strikes`) are superseded: the kind is `menace_siege`, and the live registry holds seventy kind names in sixty-five live rows (the fold §3.4's count).]
-    [AMENDED 2026-10-18 (fp-final r1; mirrors the fold §1's requirement-24 bracket of 2026-10-18, whose text is of record; SEAMS-r1-6 · SEAMS-r1-20 · HOST-r1-6) — the party's kinds are FIFTEEN (`party_voiced`, CLIMAX, `spoken · withheld`, default `spoken`: a court's or a renowned person's public praise or condemnation of the party, produced by RN's `voiced_regard` deed); each kind names its ANCHOR where its actor stands in no settlement (`party_hunted` on the court that set the bounty; a travelling paragon on its leg's origin) and its WHERE (`settlement · road · country · site · border_segment`, the fold's §3.4).]
-    [AMENDED 2026-10-18 (fp-final r2; mirrors the fold §1's requirement-24 r2 bracket, whose text is of record; SEAMS-r1-6 · HOST-r1-6 · FOLD-V1; `briefs/RULINGS-ROUND2.md` A.5 · A.13) — `party_voiced`: the HEARING comes first and RN's `voiced_regard` deed is minted only when it resolves `spoken` (`withheld` mints nothing), so "produced by RN's `voiced_regard` deed" above reads "produced by RN's crossing; the deed is its outcome at `spoken`"; the default `spoken` decides nothing for the party (the voice is the other actor's course). A kind's ANCHOR is the docket's key and its WHERE is the place — two fields, never one. The registry's closure is the fold's; each row's words, default, tilt and WHERE are the owning volume's, of record.]
-    [AMENDED 2026-10-18 (fp-final r3; mirrors the fold §1's requirement-24 r3 bracket, whose text is of record; `briefs/RULINGS-ROUND3.md` A.7 · A.11) — the actor convention is FIVE kinds, `settlement · person · party · menace · corps`: an actor ACTS on a card, by its own choice (a court, a person, a corps), by the table's (the party) or by the DM's authored course (a menace); a site is a WHERE and a subject, never an actor; `party_voiced`'s trigger is a COURT (any), or a PERSON or CORPS of `regional` fame or wider.]
-    [AMENDED 2026-10-18 (fp-final r4; mirrors the fold §1's requirement-24 r4 bracket, whose text is of record; `briefs/RULINGS-ROUND4.md` A.12 and A.15, `briefs/RULINGS-ROUND3.md` §G.3, `briefs/L-BD.md` item 25b) — the actor convention is SIX kinds, `settlement · person · party · menace · corps · body` (a body's `bodyKind ∈ conclave · gang · beast` is a field on its ref); a CLOCKED engagement keeps one card on the docket every week of its clock and closes only at its automatic resolution (the owner, 2026-10-18 18:55 EDT: "the hearing is still avaialble to the DM until its automatically resolved."), with nothing queued and the card pushed at most once; THE BODIES' kinds are registry rows, none a party kind; `party_voiced`'s court arm moves each hearer by its relation to the voicing court.]
-    [AMENDED 2026-10-19 (fp-final r5; mirrors the fold §1's requirement-24 r5 bracket, whose text is of record; `briefs/RULINGS-ROUND5.md` B.6 and B.7) — the r4 bracket's "closes only at its automatic resolution" reads: a CLOCKED engagement is STANDING until its climax week, every week before it AVAILABLE to the DM, and its ONE CLIMAX week is its automatic resolution at the clock's end, where (b)'s "the verdict forces the hand that week" binds; an EARLY act in a standing week (the DM's decision, or a line that resolves it that week — a payment, a hunt's victory) CLOSES it that week, and that close is then its climax (the owner, 2026-10-16: "still the DM can decide who wins during any one of those weeks forcing the hand."); the standing weeks' lines are never pushed, and the close is the card's one pushable line; the ransom race's three closings are a partition (survived and paid · defeated first · no payment and no defeat).]
-    [AMENDED 2026-10-19 (fp-final P4; mirrors the fold §1's requirement-24 P4 bracket, whose text is of record; `briefs/CHAIR-NOTES-FOR-THE-FOLD.md` item 18 (a); `briefs/RULINGS-ROUND6.md` A.1; by delegation, vetoable) — (1) the widening to the party, champion, menace and body kinds STANDS, and its lighting is COUNTED FIRST: C0's first measurement counts a wartime week's docket on three seeds, standing re-mints included; each widened family lights only as that count allows; the docket ranks its cards by the stakes-ranking function (the fold's OD-FC-76; DRAFT, UNMEASURED). (2) The ransom race: surviving the clock is `ransom_granted` (the automatic resolution pays; only the DM's own decision overrides it — the owner's word of 2026-10-18 18:54 EDT); the court's choices during the clock are pay early · hunt · wait; `captive_released` is only the body's own act or the DM's decision. RULINGS-ROUND5 B.7's partition, which the r5 bracket above cites, is corrected.]
-    [AMENDED 2026-10-20 (fp-final P7; L-FOLD3; mirrors the fold §1's requirement-24 P7 bracket, whose text is of record; ⭐ OD-FS-9 (the fold §7 OD-FC-88); OD-OP-15; `briefs/RULINGS-P6.md` B.4 · D.9 · E.9 · §I.2; by delegation, vetoable) — (1) THE INTERIOR WIDENING, the OWNER's, VISIBLE: (a)'s registry holds ONE engagement inside one town, THE FISCAL SEAT's `tax_refusal` (STANDING; WHERE `settlement`; ONE actor, the town's SEAT — the commons are the card's circumstance, never an actor), on THE BODIES' `guild_war` precedent; (b)'s "first" is met at the HEARING and the verdict reaches the NEXT week's mint; the veto arm is whole; (2) THE OPPORTUNITY's `rescue_attempt` (CLIMAX; `caught · freed · refused`; a `person` upon the JAILER's `settlement`, WHERE the venue town) resolves FIRST across resolvers when a `ransom` race stands the same week; (3) THE MOVEMENT GRAMMAR and THE WAY OF WAR mint no kind (a verb is never a hearing); (4) SP-9's charter lines for both kinds are `DESIGN_FP_ARCH_SP.md`'s two P6c brackets; the registry holds NINETY-TWO kind names in EIGHTY-SEVEN live rows (the fold §3.4).]
-[end of the 2026-10-16 addition]
+    switch, is a different object and stays as (c) rules.
+
+    **THE WIDENED REGISTRY** (the fold's §7 OD-FC-50, by delegation on OD-MN-8's precedent, vetoable). The owner's law speaks of "one settlement with another"; its widening to a menace, a person and the party is RULED BY DELEGATION on OD-MN-8's precedent, vetoable, and carried to the owner as a VISIBLE row in ODQ §934.93. (a)'s registry also holds the engagements of: THE MENACE — between a settlement (or its army) and a MENACE, the DM-named outside force of `DESIGN_FP_ARCH_MN.md`: `menace_siege` (STANDING, `holds · falls · relieved · lifted`; the name that replaced `menace_strikes`) and `menace_met` (CLIMAX); the kingdom layer (`DESIGN_FP_ARCH_PL.md` §7), with the polity's renamed `polity_*` kinds (the fold §3.4); THE PARTY (`DESIGN_FP_ARCH_PT.md` §13: FIFTEEN kinds — `party_request · party_offer · party_summons · party_warrant · party_bounty · party_hunted · party_ambush · party_gate · party_visit` STANDING; `party_pledge_due · party_slander · party_banned · backing_voided · backing_repudiated` CLIMAX, and `party_voiced` CLIMAX, below; every party kind's default "nothing has happened to the party yet", the RNG deciding only the other actor's course); THE CHAMPIONS (`DESIGN_FP_ARCH_CH.md` §18, OD-CH-3: nine kinds between a court and a person or two persons in a town — `retainer_offer · paragon_resigns · champion_duel · person_at_the_gate · person_banned · banished_found · paragon_disgraced · polarity_turn · never_line_tested`, all CLIMAX); THE BODIES' kinds, registry rows like any other and none a party kind; and THE FISCAL SEAT's and THE OPPORTUNITY's kinds (below). (b) and (c) bind every one of them exactly: a hearing only at the DM's one-week advance, nothing held over an advance, month/season/year advances on defaults — and an ADVANCE BY N YEARS (OD-FC-51) runs its whole span on defaults.
+
+    **THE REACH, COUNTED FIRST** (the fold's §7 OD-FC-76; by delegation, vetoable). The widening to the party, champion, menace and body kinds STANDS, and its lighting is COUNTED FIRST: C0's first measurement counts a wartime week's docket on three seeds, standing re-mints included; each widened family lights only as that count allows; the docket ranks its cards by the stakes-ranking function (DRAFT, UNMEASURED).
+
+    **THE ACTOR CONVENTION** (the fold §3.3.12; its §7 OD-FC-57; by delegation, vetoable). Every such kind's parties use the one actor-ref convention `{kind, id?}` over SIX kinds, `settlement · person · party · menace · corps · body` (a body's `bodyKind ∈ conclave · gang · beast` is a field on its ref); the docket's `targetSaveId` is always a real settlement (the anchor) and a non-settlement party rides a `subject` dial (the MN convention). An actor ACTS on a card, by its own choice (a court, a person, a corps), by the table's (the party) or by the DM's authored course (a menace); a site is a WHERE and a subject, never an actor.
+
+    **THE ANCHOR AND THE WHERE** (by delegation, vetoable) — two fields, never one: the ANCHOR is the docket's key and the WHERE is the place. Each kind names its ANCHOR where its actor stands in no settlement (`party_hunted` on the court that set the bounty; a travelling paragon on its leg's origin) and its WHERE (`settlement · road · country · site · border_segment`, the fold's §3.4).
+
+    **WHOSE WORDS.** The registry's closure is the fold's; each row's words, default, tilt and WHERE are the owning volume's, of record.
+
+    **`party_voiced` — THE HEARING COMES FIRST.** The party's fifteenth kind is `party_voiced` (CLIMAX, `spoken · withheld`, default `spoken`): a court's or a renowned person's public praise or condemnation of the party, produced by RN's crossing. The HEARING comes first, and RN's `voiced_regard` deed is minted only when it resolves `spoken` (`withheld` mints nothing) — the deed is the hearing's outcome at `spoken`; the default `spoken` decides nothing for the party (the voice is the other actor's course). Its trigger is a COURT (any), or a PERSON or CORPS of `regional` fame or wider; its court arm moves each hearer by its relation to the voicing court.
+
+    **THE CLOCKED CARD** (by delegation, vetoable). A CLOCKED engagement keeps one card on the docket every week of its clock (the owner, 2026-10-18 18:55 EDT: "the hearing is still avaialble to the DM until its automatically resolved."), with nothing queued: it is STANDING until its climax week, every week before it AVAILABLE to the DM, and its ONE CLIMAX week is its automatic resolution at the clock's end, where (b)'s "the verdict forces the hand that week" binds; an EARLY act in a standing week (the DM's decision, or a line that resolves it that week — a payment, a hunt's victory) CLOSES it that week, and that close is then its climax (the owner, 2026-10-16: "still the DM can decide who wins during any one of those weeks forcing the hand."). The standing weeks' lines are never pushed, and the close is the card's one pushable line.
+
+    **THE RANSOM RACE'S CLOSE** (by delegation, vetoable). Surviving the clock is `ransom_granted`: the automatic resolution pays, and only the DM's own decision overrides it (the owner's word of 2026-10-18 18:54 EDT); the court's choices during the clock are pay early · hunt · wait; `captive_released` is only the body's own act or the DM's decision.
+
+    **THE INTERIOR HEARING** (⭐ OD-FS-9, THE OWNER'S, VISIBLE; the fold's §7 OD-FC-88). (a)'s registry holds ONE engagement inside one town, THE FISCAL SEAT's `tax_refusal` (STANDING; WHERE `settlement`; ONE actor, the town's SEAT — the commons are the card's circumstance, never an actor), on THE BODIES' `guild_war` precedent; (b)'s "first" is met at the HEARING and the verdict reaches the NEXT week's mint; the veto arm is whole.
+
+    **THE OPPORTUNITY'S `rescue_attempt`** (OD-OP-15). The kind (CLIMAX; `caught · freed · refused`; a `person` upon the JAILER's `settlement`, WHERE the venue town) resolves FIRST across resolvers when a `ransom` race stands the same week.
+
+    **THE KINDS NOT MINTED.** THE MOVEMENT GRAMMAR and THE WAY OF WAR mint no kind (a verb is never a hearing).
+
+    SP-9's charter lines for the interior and rescue kinds are `DESIGN_FP_ARCH_SP.md`'s two dated brackets; the registry holds NINETY-TWO kind names in EIGHTY-SEVEN live rows when each program kind takes its own row (EIGHTY-ONE as the volumes group them; the fold §3.4 THE COUNT).
 
 ## §2 THE SHARED SPINE INFRASTRUCTURE (built once, consumed by all six —
 ## width through reuse is how constant density stays affordable)
 
-[CORRECTED 2026-08-02 (fp-audit) — SP FLAG NAMES, the convention made law
-where it binds: the six volumes drafted in parallel and could not cite SP
-flag names (the trade drafter flagged the gap). SP waves assign their own
+**SP FLAG NAMES**, the convention made law where it binds: SP waves assign their own
 flag names at build; every volume binds its lit-preconditions by SP NUMBER,
 never a guessed flag name, and the implementer resolves names at build
 (VERIFY-AT-BUILD) — the convention FAITH §3 and COUPLINGS §0 already state,
-authored here so "SP-N landed" resolves corpus-wide.]
+authored here so "SP-N landed" resolves corpus-wide (the six volumes, drafted
+in parallel, could not cite SP flag names).
 
 - **SP-1 THE ERRAND SYSTEM** (extends WR-7a's design): `spatialLedgers.errands`,
   one writer, purpose vocabulary above, declared/true split, per-errand keyed
@@ -275,7 +360,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   lifecycle). Consumers: envoys (GRAMMAR), factors (TRADE), legates + pilgrims
   (FAITH), the ambitious (INTERIOR), couriers + double agents (INFORMATION),
   and column-adjacent movers stay in their existing ledgers (migration is not
-  an errand; it is a flow). [CORRECTED 2026-10-16 (coherence fold §3.3.4) — the ledger lives at top-level `worldState.envoyErrands` (worldState.js:483); SP-1 generalizes it IN PLACE per J-SP-2 / DESIGN_FP_ARCH_SP seam ruling 2; `spatialLedgers.errands` is descriptive, never an address.] [RULED BY DELEGATION 2026-10-16 (OD-FC-14 — confirm keep (chair recommendation KEEP: 14 consumers; migrating the key is owner-gated persistence churn); the erratum is then settled]
+  an errand; it is a flow). The ledger's home is top-level `worldState.envoyErrands` (worldState.js:483): SP-1 generalizes it IN PLACE per J-SP-2 / DESIGN_FP_ARCH_SP seam ruling 2, and `spatialLedgers.errands` above is descriptive, never an address (the fold §3.3.4; its §7 OD-FC-14 keeps the home — 14 consumers, and migrating the key would be owner-gated persistence churn — so the erratum is settled).
 - **SP-2 THE BELIEVED-WORLD EXTENSION:** the beliefMap's per-observer,
   per-faction-slot partition (BUILT, rigorous) gains three banded subject
   families: BELIEVED SCARCITY (trade — "grain is dear in the east, they say"),
@@ -295,8 +380,14 @@ authored here so "SP-N landed" resolves corpus-wide.]
   faith communion, a migration pressure, a shared threat), drafting is
   TWO-SIDED via the two-picture contract (negotiationPictures — WR-7's seam,
   built once, used for war-end AND peacetime), and FAITH + POPULATION TERM
-  FAMILIES join the catalog. [RULED BY DELEGATION 2026-10-16 (OD-FC-5 — the two-picture law is unbuilt in peacetime: no pact module imports `negotiationPictures`; acceptance is the responder's own value-vs-reserve plus dependency fear (pactFormation.js:446-494). CHAIR RECOMMENDATION (coherence fold §3.2.1): AMEND for PEACETIME — the proposer's own-picture arm is the OFFER it chose to make (it already values before asking), the responder's is the answer; two pictures, one at each end, no merged estimate; the war-end path keeps the full contract. The law's text stands until the owner answers.] [CORRECTED 2026-08-02 (fp-audit) — two chair
-  rulings recorded at the constitution: **R1, ONE INSTRUMENT PER PAIR IS
+  FAMILIES join the catalog. Expiry
+  gains its receipt; succession-repudiation lands; the standalone NAP gets
+  its writer; renegotiation-from-strength opens. EVERY TREATY, at last, can
+  be negotiated rather than dictated.
+
+  **THE TWO-PICTURE LAW STANDS** (the fold §3.2.1; its §7 OD-FC-5, by delegation, vetoable): SP-3 is not amended. In peacetime the law is unbuilt and the build is in K3 breach — no pact module imports `negotiationPictures`; acceptance is the responder's own value-vs-reserve plus dependency fear (pactFormation.js:446-494), and the proposer's draft reads the responder's truth (pactFormation.js:1075-1083); the REPAIR (`reciprocal` reads `beliefRecord(from→to)`) is chain C1's first GR car, a signed same-seed shift on every lit preset.
+
+  **TWO RULINGS RECORDED AT THE CONSTITUTION** (by delegation, vetoable): **R1, ONE INSTRUMENT PER PAIR IS
   LAW** — the treaty ledger's one-per-pair key is not a bug; peacetime
   formation AMENDS the pair's standing instrument, minting one only where
   none exists; reciprocal/two-sided pacts are DIRECTIONAL TERMS inside the
@@ -308,48 +399,36 @@ authored here so "SP-N landed" resolves corpus-wide.]
   population included) live in GRAMMAR's canonical TERM_CATALOG list (GR-3
   mints); this document and every volume POINT at that list and never carry
   a second one — the audit found the family specced in two volumes with
-  divergent membership and spelling, and this sentence is the cure.] Expiry
-  gains its receipt; succession-repudiation lands; the standalone NAP gets
-  its writer; renegotiation-from-strength opens. EVERY TREATY, at last, can
-  be negotiated rather than dictated.
+  divergent membership and spelling, and this sentence is the cure.
 - **SP-4 THE POSTURE READ:** one module composing risk tolerance (SP-4a: the
   generalized appetite stock, per settlement + per house/temple actor class —
-  [CORRECTED 2026-08-02 (fp-audit)] the actor-class set is CLOSED at those
+  the actor-class set is CLOSED at those
   two plus the settlement itself; a wave needing a new appetite class
   (the audit caught a congregation-shaped read in WF-5b) binds to an
   existing class or takes an explicit SP-4a amendment HERE, never mints a
   third stock in a volume) with strategic posture bands (SP-4b: derived from
   state × disposition channels × the ruler's books) exposing
-  `postureOf(settlement)` + `riskToleranceOf(actor)` — threshold-shaped
-  reads only (E3's law: posture colours, never selects targets). [CORRECTED 2026-10-16 (coherence fold §3.3.3) — built as `courtPostureOf` / `courtRiskAppetiteOf` (strategicPosture.js:222, :303) under chair ruling CR-C4-1; `riskToleranceOf` is the roads NPC read (roads/state.js:334) and is held single-definition by tests/lint/postureNameCollision.walker.test.js. Every `postureOf` / `riskToleranceOf(actor)` below means the court reads.]
-  [AMENDED 2026-10-18 (fp-final r3; the coherence fold §3.3.12 (its 10-17, r2b and r3 rows) and §7 OD-FC-57; observed by `cure/D-FOLD-r2b.md` §5) — the "explicit SP-4a amendment HERE" that this clause asks for is recorded there for the ACTOR KINDS: `POSTURE_ACTOR_KINDS` (`strategicPosture.js`, `['settlement']` on master) is widened BY NAME to `settlement · person · party · menace · corps` in the first wave that reads a non-settlement actor through the posture door, and no posture is ever computed for a menace or the party.]
-  [AMENDED 2026-10-18 (fp-final r4; the coherence fold §3.3.12 ↳ r4 and §7 OD-FC-57 ↳ r4; `briefs/RULINGS-ROUND4.md` A.12) — the list is SIX kinds, `settlement · person · party · menace · corps · body`; `POSTURE_ACTOR_KINDS` is SP-4a's one closed actor set, which ADMITS the six refs; the posture door computes a posture for a kind only where its owning volume names the read, and refuses a menace or the party with a stated reason, never a number.]
-  [CORRECTED 2026-08-02 (fp-audit) — the sequencing hole the cohesion audit
-  named: the ruler's books land LAST (INTERIOR INT-1, `seatBooksEnabled`)
-  while five programs consume `postureOf` from their first flagged wave. [see the bracket at :250 — the read is `courtPostureOf` (CR-C4-1)]
-  THE DEGRADED ARM, declared: until seatBooks lands, SP-4b composes state ×
-  disposition channels only — the books term is ABSENT, not zero, and the
-  posture receipt names which inputs it had; the SP-4 wave carries the
-  matching golden (posture with and without the books term), and lighting
-  `seatBooksEnabled` is a DISCLOSED same-seed shift for every posture
-  consumer in five programs (INT-1's disclosed-shift list carries it).] [CLARIFIED 2026-10-16 (coherence fold) — no such disclosed-shift sentence was found in DESIGN_FP_ARCH_INT by grep (findings SP-CW §4 X3; ARCH_INT:133 spells `courtPostureOf` / `courtRiskAppetiteOf`); the disclosure is owed at INT-1's charter.]
+  `courtPostureOf` + `courtRiskAppetiteOf` (strategicPosture.js:222, :303; ruling CR-C4-1) — threshold-shaped
+  reads only (E3's law: posture colours, never selects targets). The corpus's earlier spellings `postureOf(settlement)` + `riskToleranceOf(actor)` — every `postureOf` / `riskToleranceOf(actor)` — mean these court reads; `riskToleranceOf` is the roads NPC read (roads/state.js:334), held single-definition by tests/lint/postureNameCollision.walker.test.js (the fold §3.3.3).
   Dossier-rendered as band words.
+
+  **THE ACTOR KINDS** (the fold §3.3.12; its §7 OD-FC-57): the explicit SP-4a amendment this clause asks for is recorded there. `POSTURE_ACTOR_KINDS` (`strategicPosture.js`, `['settlement']` on master) is widened BY NAME to SIX kinds, `settlement · person · party · menace · corps · body`, in the first wave that reads a non-settlement actor through the posture door; it is SP-4a's one closed actor set, which ADMITS the six refs; the posture door computes a posture for a kind only where its owning volume names the read, and refuses a menace or the party with a stated reason, never a number.
+
+  **THE DEGRADED ARM** — declared for the sequencing hole the cohesion audit named: the ruler's books land LAST (INTERIOR INT-1, `seatBooksEnabled`) while five programs consume `courtPostureOf` from their first flagged wave. Until seatBooks lands, SP-4b composes state × disposition channels only — the books term is ABSENT, not zero, and the posture receipt names which inputs it had; the SP-4 wave carries the matching golden (posture with and without the books term), and lighting `seatBooksEnabled` is a DISCLOSED same-seed shift for every posture consumer in five programs. No such disclosed-shift sentence was found in DESIGN_FP_ARCH_INT at the corpus read (ARCH_INT spells `courtPostureOf` / `courtRiskAppetiteOf`), so the disclosure is owed at INT-1's charter.
 - **SP-5 THE CONFIDENCE-STOCK FAMILY:** one idiom (banded stock, event-moved,
   decay toward neutral, receipts on band crossings) instantiated as:
   confidence-in-god (FAITH — exists, extends), house credibility (TRADE),
   the seat's domestic credit (INTERIOR — legitimacy exists; the family makes
   its grammar reusable), source credibility (INFO — exists). No new
-  CONFIDENCE stock outside the family [CORRECTED 2026-08-02 (fp-audit): the
-  old absolute "no new stock outside the family" was contradicted by two
-  volumes' legitimate non-confidence stocks (TRADE's house
-  `books.holdings`/`books.credit`, FAITH's `templeWealth`) — the closure is
-  scoped to what it meant, and note TRADE's `books.credit` is a WEALTH band,
-  spelled distinct from this family's "domestic credit" member].
-- **SP-5b THE BANDED-STOCK FAMILY [CORRECTED 2026-08-02 (fp-audit) — new,
-  from the tuning-ledger audit: the banded-decaying-stock idiom was
+  CONFIDENCE stock outside the family (the closure is scoped to CONFIDENCE
+  stocks: two volumes' legitimate non-confidence stocks — TRADE's house
+  `books.holdings`/`books.credit`, FAITH's `templeWealth` — stand outside it,
+  and TRADE's `books.credit` is a WEALTH band, spelled distinct from this
+  family's "domestic credit" member).
+- **SP-5b THE BANDED-STOCK FAMILY** (from the tuning-ledger audit: the banded-decaying-stock idiom was
   instantiated at least six times with six independently-authored decay
   bands — the per-volume minting problem on the class the runaway lesson
-  makes most dangerous]:** non-confidence banded stocks (house
+  makes most dangerous): non-confidence banded stocks (house
   holdings/credit, temple wealth, the appetite stocks) share ONE idiom:
   banded, event-moved, a decay-toward-neutral half-life drawn from ONE
   shared half-life shape, and ONE crossing-receipt grammar. Volumes tune the
@@ -361,13 +440,12 @@ authored here so "SP-N landed" resolves corpus-wide.]
   the address law, id discipline, WHAT_PHRASES + routing registration, and
   the endings-envelope harness (WR-9's shape) packaged as the checklist every
   program's news classes complete. Plus the pacing registration (§1.12).
-  **THE BAND-FAMILY TABLE [CORRECTED 2026-08-02 (fp-audit) — chair ruling
-  R5: significance/severity band FAMILIES are minted HERE, in the narration
+  **THE BAND-FAMILY TABLE** (R5, by delegation, vetoable: significance/severity band FAMILIES are minted HERE, in the narration
   kit; volumes REFERENCE a family and assign their kinds to its classes —
   they never author a scale. The tuning-ledger audit counted a dozen
   independently-authored significance scales feeding ONE governor, and
   five of the fourteen tuning-table drift instances were significance
-  bands]:**
+  bands):
 
   | Family | Shape (minted once, here) | Volumes do |
   |---|---|---|
@@ -382,9 +460,9 @@ authored here so "SP-N landed" resolves corpus-wide.]
   itself volume-local in its tuning table row — the owner signs one scale
   per family plus assignments, never a dozen scales.
 
-  **THE CONTENT-DEPTH FLOOR + THE REPETITION ENVELOPE [CHAIR AMENDMENT
-  2026-08-02 under full owner delegation — vetoable; from the owner's
-  question "is there enough content, with enough variability?"]:** the
+  **THE CONTENT-DEPTH FLOOR + THE REPETITION ENVELOPE** (ruled under the owner's
+  full delegation, vetoable; from the owner's question "is there enough
+  content, with enough variability?"): the
   volumes spec KINDS and exemplar sentences; the pools are build-time
   authoring, and depth was hoped, not lawed — the measured cautionary tale
   is the ~11-string hook pools' 8.19%/35% repeat rates. Two rules cure it:
@@ -401,11 +479,10 @@ authored here so "SP-N landed" resolves corpus-wide.]
   the envelope reds). Slot variety is not depth: two templates differing
   only in slot fills are ONE family for the floor's count (the hook
   family-id discipline applies). Variability is thereby measured on every
-  soak, never assumed — and the authoring bill this creates for Sol is
+  soak, never assumed — and the authoring bill this creates for the implementer is
   priced, deliberate, and small per kind (three more sentences than the
   exemplar, in the house voice, at the register floor).
-  **[AMENDED 2026-08-03 (owner: "I want more sentences") — THE
-  FREQUENCY-SCALED FLOOR:]** the flat ≥4 floor is the MINIMUM for
+  **THE FREQUENCY-SCALED FLOOR** (the owner, 2026-08-03: "I want more sentences"): the flat ≥4 floor is the MINIMUM for
   rare/major kinds only; variant depth scales with FIRING CADENCE, read
   from each kind's own Clock/significance entries and then MEASURED:
   chronic/routine kinds (weekly-to-seasonal cadence) carry ≥8–12
@@ -420,7 +497,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   J-POP-12/J-INT-13's recorded-ruling pattern; this amendment is that
   recorded ruling's design half — the per-kind golden plan still lands
   at wiring).
-  **[AMENDED 2026-08-03 (owner order) — THE CAUSAL GRAMMAR:]** the
+  **THE CAUSAL GRAMMAR** (the owner's order): the
   narration kit gains the CAUSAL VOICE — authored prose for the JOINS, so
   the Herald can tell a chain as one sentence ("X declares vengeance on
   its weakened neighbour — a generation's grudge will be met"; "Thorp Y
@@ -442,7 +519,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   already persisted, the voice only reads it). The frequency-scaled floor
   applies per join FAMILY; the phrase-repetition envelope covers composed
   sentences at the family grain.
-  **[AMENDED 2026-08-03 (owner constraint) — THE TWO REGISTERS:]** the
+  **THE TWO REGISTERS** (the owner's constraint): the
   causal voice obeys the LEGIBILITY LAW's tiers (glance → sentence →
   table), which it does not flatten: (1) THE HEADLINE REGISTER — the
   Herald list item stays HEADLINE-SHAPED: the event plus AT MOST ONE
@@ -453,13 +530,12 @@ authored here so "SP-N landed" resolves corpus-wide.]
   REGISTER — behind the click, a NEW narrative tier between headline and
   the cause-walk table: the full composed chain (multi-link cascades,
   the complete join molds), coherent and entailed per-link but freed
-  from headline compression. [RULED 2026-10-16 (coherence fold §5) — "telling" is also SP-6b's SEVERITY rung (glancing · telling · grave · ruinous, landed) and the verb family `degradeTelling` / "worn in the telling"; the rung stands; prose says "the telling register" and "worn in the telling" only with those nouns, and a bare "telling" in a design sentence means the rung.] (3) THE TABLE stands beneath both — the
+  from headline compression ("telling" is also SP-6b's SEVERITY rung — glancing · telling · grave · ruinous, landed — and the verb family `degradeTelling` / "worn in the telling"; the rung stands; prose says "the telling register" and "worn in the telling" only with those nouns, and a bare "telling" in a design sentence means the rung — the fold §5). (3) THE TABLE stands beneath both — the
   cause walk's receipts remain the ground truth the telling projects.
   The causal annex labels every mold HEADLINE or TELLING; every join
   family carries both registers; the pacing governor reads headlines
   only (the telling is pull, never push).
-  **[AMENDED 2026-08-03 (owner clarification) — SCOPE + THE SURFACE
-  CONTRACT:]** the causal voice is EXCLUSIVELY THE HERALD'S — the
+  **SCOPE + THE SURFACE CONTRACT** (the owner's clarification): the causal voice is EXCLUSIVELY THE HERALD'S — the
   settlement rumor mill keeps its own local register and REFERENCES
   upward: every rumor whose event reached the Herald carries a LINK to
   its headline (the id join the address law already mandates); a rumor
@@ -477,7 +553,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   dismissal. The causal annex gains the SUBHEADER register (one plain
   form per kind — clarity prose, distinct from both headline and
   telling); the annex header states Herald exclusivity.
-  **[AMENDED 2026-08-03 (owner order) — THE HERALD INDEX:]** headlines
+  **THE HERALD INDEX** (the owner's order): headlines
   are SEARCHABLE by typed facet: settlement (the address chain), NPC,
   faction/house, institution, good, service, route, treaty/war/arc,
   desk/kind, and time band. THE INDEX LAW: the index derives from TYPED
@@ -496,8 +572,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   panels link to "their headlines"; every headline's entities link back
   to their panels — the dossier round-trip extended to the newspaper).
   Display-side, derived, no engine state.
-  **[AMENDED 2026-08-03 (owner law) — THE TRUTH LAW + THE CONTAMINATION
-  FENCE:]** THE HERALD IS THE DM'S PAPER AND IT ALWAYS TELLS THE TRUTH.
+  **THE TRUTH LAW + THE CONTAMINATION FENCE** (the owner's law): THE HERALD IS THE DM'S PAPER AND IT ALWAYS TELLS THE TRUTH.
   Its register is GROUND TRUTH: (a) events print as they happened; no
   belief ever prints as a ground fact and no lie ever prints as an
   event — where a cause was a belief or a lie, the Herald reports the
@@ -524,8 +599,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   RUMOR-MILL and in-world voices, while Herald tiers attribute minds
   only as reported fact — the believing marked as believing, which is
   the truth.
-  **[AMENDED 2026-08-03 (owner order) — THE PORTABLE POPUP + THE
-  MANIPULATION DISCLOSURE:]** the causality popup is ONE component,
+  **THE PORTABLE POPUP + THE MANIPULATION DISCLOSURE** (the owner's order): the causality popup is ONE component,
   summoned from ANY surface carrying a headline id-link — the realm
   Herald, the dossier's rumor mill, an entity panel's headline list —
   and it renders OVER the DM's current context (the dossier stays
@@ -543,7 +617,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   from persisted provenance only — no new state; a link the records
   cannot classify renders UNKNOWN, never guessed (R-28 at the audit
   grain).
-  **[AMENDED 2026-08-03 (owner refinement) — THE MUTATED PLANT:]** the
+  **THE MUTATED PLANT** (the owner's refinement): the
   integrity states are LINEAGE-AWARE, not exclusive — a planted idea may
   mutate further in the carrying, and the disclosure shows BOTH halves:
   the ORIGINAL INTENT always (commissioner, purpose, and the PLANTED
@@ -562,7 +636,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   neither pure wear nor post-plant drift may confabulate or inherit a
   culprit); the popup renders identically from all summoning surfaces
   (one component, source-scan pinned).
-  **[AMENDED 2026-08-03 (owner order) — THE DOSSIER EXTENSION:]** the
+  **THE DOSSIER EXTENSION** (the owner's order): the
   causal voice's consumer set is ALL DM-TRUTH SURFACES — the Herald's
   four tiers, the SETTLEMENT DOSSIER's cause-walks (CW-2 lives on the
   town page by its own spec; the voice is the prose its walks were
@@ -571,8 +645,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   register; the exclusivity ruling's true boundary was always the truth
   register, not the Herald building). The truth law and the
   contamination fence extend to dossier causal prose identically
-  (truth-side sources only, same pins). **THE DOSSIER-NATIVE REGISTER
-  [refined per owner 2026-08-03]:** the dossier does NOT borrow the
+  (truth-side sources only, same pins). **THE DOSSIER-NATIVE REGISTER** (refined per the owner): the dossier does NOT borrow the
   Herald's chronicle voice — every join family gains a FOURTH register
   in the causal annex, written in the dossier's OWN idiom: present-tense,
   descriptive, woven INTO the page's existing prose sections as the
@@ -586,8 +659,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   cover the dossier-native forms at the family grain, per-settlement
   windowed (a town should not explain itself in the same words as its
   neighbour).
-  **[AMENDED 2026-08-03 (owner order) — THE STATE-PROSE CORPUS + THE
-  FOREIGN DESK OF THE TOWN:]** the dossier-native register covers not
+  **THE STATE-PROSE CORPUS + THE FOREIGN DESK OF THE TOWN** (the owner's order): the dossier-native register covers not
   only causal JOINS but EVERY ASPECT OF STANDING STATE — economy,
   supply-chain links and breaks, power dynamics, hooks framing, defense,
   stressors and conditions, faith, war footing, population, relations:
@@ -608,8 +680,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   corpus is the annex RECEIPT_POOLS_DOSSIER_STATE.md; hook CONTENT
   stays the HK program's; coverage is walker-measured against the
   census denominator.
-  **[AMENDED 2026-08-03 (from the corpus's own critical find) — THE
-  DM-FIELD PROJECTION RULE:]** SECTION-TARGET is a READING position,
+  **THE DM-FIELD PROJECTION RULE** (from the corpus's own critical find): SECTION-TARGET is a READING position,
   never a write target: several dossier sections render from
   DM-EDITABLE prose fields (the queue-wired owner-editable surfaces),
   and causal machine prose must PROJECT BESIDE such fields — rendered
@@ -618,12 +689,11 @@ authored here so "SP-N landed" resolves corpus-wide.]
   DM-edited field renders byte-identical with the state-prose corpus
   fully wired (the hardest negative — machine prose must be provably
   incapable of touching the pen's ground).
-- **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion + the
-  mode-speed table (J-D11(b)) landed as spine infrastructure ahead of all six. [RULED 2026-10-16 (coherence fold §3.1.11) — WY-1 owns the mode-speed TABLE (landed, dark: src/domain/spatial/modeSpeeds.js); SP-7 owns the TEMPORAL WALKER only — unbuilt, and re-chartered by the coherence fold §4 as tests/lint/timeBase.walker.test.js (a shrink-only exemption list seeded from the Class A/B/C census, a RED on any new bare 12/13/26/52 in src/domain outside it, zero behaviour, no constant moved in its commit; it rides the next spine unit).]
-- **SP-8 THE AGE LAYER [CORRECTED 2026-08-02 (fp-audit) — new, per the
-  chair's assignment: J-D12 cross-wired into the corpus as its era layer,
+- **SP-7 THE TEMPORAL WALKER:** the INTERVAL_WEEKS trace assertion, built as
+  spine infrastructure ahead of all six programs — unbuilt, and chartered by the fold §4 as tests/lint/timeBase.walker.test.js (a shrink-only exemption list seeded from the Class A/B/C census, a RED on any new bare 12/13/26/52 in src/domain outside it, zero behaviour, no constant moved in its commit; it rides the next spine unit). The mode-speed table (J-D11(b)) is WY-1's (landed, dark: src/domain/spatial/modeSpeeds.js), never SP-7's (the fold §3.1.11).
+- **SP-8 THE AGE LAYER** (J-D12 cross-wired into the corpus as its era layer,
   which J-D12(e) schedules "after the audit lands" — this is that
-  cross-wire]:** the age toggle (DESIGN_REALM_DIRECTIVES.md J-D12, veto
+  cross-wire): the age toggle (DESIGN_REALM_DIRECTIVES.md J-D12, veto
   open) joins the spine as the DISPOSITION SYSTEM AT REALM SCALE with the
   DM's hand on it: two axes — Realm at War ↔ Realm at Peace, and PIOUS ↔
   SECULAR ↔ DYNAMIC — with the axis FAMILY CLOSED at these two (J-D12(f),
@@ -641,7 +711,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   which of its bands are ERA-PRESET-ELIGIBLE (a preset may move only
   marked bands), and the dossier round-trip reads the age through each
   settlement's own posture. One paragraph here is the law; the preset
-  tables land with the age wave itself, owner-signed. [RULED BY DELEGATION 2026-10-16 (OD-FC-17 — SP-8 / J-D12 is unbuilt and absent from FP-ORDER: keep in sequence, defer past launch, or retire; chair recommendation DEFER past launch with the slot "THE AGES". The ERA-PRESET-ELIGIBLE marking (unmet in every non-SP volume) stands or falls with it (coherence fold §5).]
+  tables land with the age wave itself, owner-signed. SP-8 is unbuilt and absent from FP-ORDER; it is sequenced as THE AGES, a PRE-LAUNCH coherence chain (C8 in the fold's §6, after the economy and wayfare chains), because the owner's own word (ODQ §764.1/.4/.5) forbids a post-launch disposition for anything but the map module; nothing is retired (the fold's §7 OD-FC-17), and the ERA-PRESET-ELIGIBLE marking, unmet in every non-SP volume, stands with it (the fold §5).
 
 ## §3 CRUX RULINGS PER PROGRAM (binding; the volumes elaborate, never re-open)
 
@@ -663,7 +733,12 @@ authored here so "SP-N landed" resolves corpus-wide.]
   omen reads (calamities interpreted through the local faith lens as BELIEF
   writes — famine-as-wrath becomes tellable, heuristically); schism completes
   (a temple can actually split; suppression can actually go underground via
-  the covert seam); faith terms join SP-3; tithe coupling to TRADE; [RULED 2026-10-16 (coherence fold §3.1.5) — ONE tithe: W-COIN's `tithe_share` tax form is the coin arm; WF-7's `templeWealth` is NOT a second stock but a BAND derived from the treasury's `tithe_share` row where the treasury is lit and from the piety × temple-presence heuristic where it is dark (the named degraded arm); the house-fortune source (TRADE:610) is struck. This crux line stands: "tithe coupling to TRADE" is the treasury read.] [RE-RULED 2026-10-16 after skeptic S1-02 — the tithe is the CHURCH's (ODQ:32488): WF-7's piety × presence → `templeWealth` band is the flow's source; W-COIN's `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from WF-7's band, never a source — one flow, two ends; the fold §3.1.5 carries the text of record.] the
+  the covert seam); faith terms join SP-3; tithe coupling to TRADE — the treasury read of ONE
+  tithe, one flow with two ends: the tithe is the CHURCH's (ODQ:32488), WF-7's
+  piety × presence → `templeWealth` band is the flow's source, and W-COIN's
+  `tithe_share` is the CROWN's cut of it (treasury.js:269-320), read from
+  WF-7's band, never a source; the house-fortune source (TRADE:610) is struck
+  (the fold §3.1.5 carries the text of record); the
   narration 3× program.
 - **FP-POPULATIONS:** BELIEVED-CONDITIONS MIGRATION (the gold rush: a banded
   belief arm joins the pull evaluation; counterforce = the bust — arrivals'
@@ -687,7 +762,7 @@ authored here so "SP-N landed" resolves corpus-wide.]
   parity (the 1.5% → war-class density; the spy gains an arc, not a beat).
 - **FP-GRAMMAR:** SP-3 IS this program's core (peacetime formation, two-sided
   drafting, the two new term families, expiry receipts, succession-
-  repudiation, the standalone NAP, renegotiation); [see the bracket at :224 — RULED BY DELEGATION 2026-10-16, OD-FC-5 on "two-sided drafting"] plus THE OATH-HOLDER
+  repudiation, the standalone NAP, renegotiation; two-sided drafting stands under SP-3's two-picture law, §2 and the fold's §7 OD-FC-5); plus THE OATH-HOLDER
   IDENTITY (treaties/obligations record WHO swore — the heir who breaks the
   father's oath becomes tellable, and succession-repudiation gains its human
   face); mediation generalizes (any cross-pressured neighbour, the temple arm
@@ -704,28 +779,26 @@ authored here so "SP-N landed" resolves corpus-wide.]
   price — reconciliation as policy, not only clock decay).
 
 ## §4 THE COUPLING DOCTRINE (DESIGN_FP_COUPLINGS.md walks every pair)
-21 pairs / 42 directions across seven layers [CORRECTED 2026-08-02
-(fp-audit): the old "21 ordered pairs" was arithmetically wrong — seven
-layers give 21 unordered pairs and 42 ordered directions; the coupling
-volume walks each pair in both directions and its §3 matrix grades all 42];
+21 unordered pairs / 42 ordered directions across seven layers (the coupling
+volume walks each pair in both directions and its §3 matrix grades all 42);
 the volume walks each with reads, receipts, counterforce, and a named
 historical archetype (the tax dispute that becomes a reformation; the
 pilgrimage route that becomes a war target; the bank broken by a believed
 rumor; the diaspora that funds the reconquest). Pairs with no designed
-coupling are DECLARED empty (silence is a decision, not an omission). [CORRECTED 2026-10-16 (coherence fold) — no pair is empty at direction grain (DESIGN_FP_COUPLINGS §3 grades all 42 directions LIVE/DARK/ADDS and none EMPTY); declared-empty lives at SUB-coupling grain inside COUPLINGS §4 (about 45 of them), and the registry enforces it only as absent (module, module) pairs.]
+coupling are DECLARED empty (silence is a decision, not an omission): at direction grain no pair is empty (DESIGN_FP_COUPLINGS §3 grades all 42 directions LIVE/DARK/ADDS and none EMPTY), so declared-empty lives at SUB-coupling grain inside COUPLINGS §4 (about 45 of them), and the registry enforces it only as absent (module, module) pairs.
 
 ## §5 SEQUENCING + DISCIPLINE
 Behind the sim-proof path (WR waves → lighting → soaks → tuning), programs
 ordered SP → GRAMMAR → INFO → TRADE → FAITH → POP → INTERIOR-completions →
 COUPLINGS' cross-wires, each wave dark, one commit, full gate, ledger row,
 per the standing implementer protocol (the war volume's §10 binds here
-verbatim). [CORRECTED 2026-08-02 (fp-audit)] One standing obligation joins
+verbatim). One standing obligation joins
 the protocol: ANY wave landing a cross-layer read adds its CW-0 coupling-
 registry row (pairId, direction, read, receiptField, counterforce, flags,
 owningVolume, owningWave, intendedDesk) in the SAME commit — the walker
 asserts it; the audit found the obligation lived only in the coupling
 volume, so its inclusion ratchet would have redded the waves it guards.
-The AUDIT STAGE is part of the build: no volume ships to Sol unaudited. [see the bracket at :9]
+The AUDIT STAGE is part of the build: no volume ships to the implementer unaudited.
 Tuning debt is acknowledged: the band count grows into the hundreds (the
 audit's census: roughly 270 named bands plus ~70 envelope shapes across the
 seven volumes); band FAMILIES (spine-shared, SP-6's table) keep the owner's
@@ -733,517 +806,38 @@ signature surface tractable, and SP-6's reconciliation walker keeps the
 volume tables honest; the tuning pass grows accordingly and that is the
 priced cost of the ambition.
 
-## §6 PROGRESS
+## §6 PROGRESS — THE BUILT STATE THE SPINE GOVERNS
 
-> **LANE H — THE HERALD CAUSAL-VOICE SURFACE (SOL_QUEUE item 24): the DISPLAY
-> SLICE IS BUILT AND DARK, 2026-08-03.** [RULED BY DELEGATION 2026-10-16 (OD-FC-16 — light SP-6's causal headline (with CW-1's braid) in the belief presets; chair recommendation YES; a disclosed display shift. At 00b648c9d `heraldCausalVoiceEnabled` is read only at heraldCausalVoice.js:119 and set by no preset or store path.] Five commits on
-> `claude/composite-r4` in the minifold worktree, nothing pushed, everything
-> behind `simulationRules.heraldCausalVoiceEnabled` — dark renders the surface
-> that shipped, byte for byte.
->
-> | Commit | What landed |
-> |---|---|
-> | `6eb6c445` | **THE TWO REGISTERS.** `heraldCausalGrammar.js` — §0c's eight typed edges, §3.1's sixteen connective pools, §3.2's two terminals, §0d's six-band time family in four print positions, drawn through `avalanche32(fnv1a32(seed))`. `heraldCausalVoice.js` — HEADLINE (exactly one link, so a cascade is structurally unreachable), SUBHEADER (the recorded summary, composed from nothing), TELLING (the whole chain, one direction held). |
-> | `3637c4ec` | **THE PORTABLE POPUP + THE DISCLOSURE.** `PortablePopup.jsx` (no acknowledge-control prop exists ⇒ outside-click closes, structurally), `CausalityPopup.jsx` (the four tiers), `heraldIntegrity.js` (§4's five states). `causeWalk.js` gains two additive read-only hop atoms so the disclosure can reach the truth it already holds. |
-> | `47102e4e` | **THE FENCE + THE INDEX.** `heraldContaminationFence.test.js` (K3 inverted: transitive reachability + token scan + guard-the-guard, negative control executed). `heraldIndex.js` (typed facets; refs only, audience fail-closed). |
-> | `a1f633eb` | **THE UPWARD LINK.** `rumorHeraldLink.js` — the rumor mill cites the paper; truthfully unlinked below the pacing floor. |
-> | this row | The progress record. |
->
-> **RECEIPTS.** 162/162 across the composed lane matrix (13 files, `gate-tail`
-> exit 0), covering the four new domain modules, the popup, the fence, and the
-> landed cause-walk and Herald consumers that the additive hop fields touch.
-> The fence's negative control is CONFIRMED: one forbidden import reds four
-> pins, and the probe was reverted from a file copy with `git status` proving
-> the file identical to its committed state.
->
-> **PER-LINK ENTAILMENT, AS BUILT.** The provenance ledger records a parent
-> link and the child's structural type — it does NOT record a relation. So an
-> edge stronger than plain succession must be positively warranted by a field
-> the receipt carries, and everything unwarranted draws `followed`, which
-> asserts succession and refuses causation. Nothing ever falls back to
-> `caused`. Six warrants are wired today (`planted` · `exposed` · `refused` ·
-> `breached` · `dissolved` · `caused`).
->
-> **WHAT THIS SLICE DELIBERATELY DID NOT DO** — recorded so no one re-finds it
-> as a bug:
->
-> 1. **§1's 78 JOIN MOLDS ARE NOT WIRED.** The registers compose from §3's
->    connectives over the cause walk's own byte-verbatim receipt headlines,
->    which satisfies per-link entailment exactly ("the cause walk wearing
->    prose"). The 78 families × 3-4 registers and §2's 175 clause forms are a
->    content-transcription wave of their own, with their own golden plan. The
->    substrate they wire INTO is built and pinned.
->    **[AMENDED 2026-08-03 — LANE HG: THIS DEFERRAL WAS MIS-CLASSIFIED, AND IS
->    NOW DISCHARGED.]** It was recorded as richness postponed. It was a LIGHTING
->    BLOCKER: without the molds, §3's argument tags had no supply, so the
->    composer interpolated a finite clause into every slot and ~89% of
->    back-direction draws printed ungrammatical prose ("against the refusal of
->    the eastern road was cut"). §2's own contract had already said so — "a
->    phrase-taking connective in front of a finite clause is ungrammatical, and
->    a display-side composer with no engine state has no repair for it" — and
->    that sentence is the definition of a blocker, not of polish. Lane HG wires
->    the molds AS ARGUMENT FORMS (see its own record below). What remains
->    deferred is narrower and correctly named: §1's mold SENTENCES and §2's 175
->    clause forms, which are content transcription.
-> 2. **FIVE INDEX FACETS ARE PENDING, WIRED, AND DARK** — institution, good,
->    service, route, treaty/war/arc. Their readers exist and a pin feeds each
->    one a typed ref to prove it lights; they wait on the MINT-TIME typed
->    entity-ref slots, which are the war lane's territory. `facetAvailability`
->    reports declared status beside measured population so the UI dims rather
->    than promises.
-> 3. **THE UPWARD LINK IS DM-ONLY TODAY.** The join key `eventRef` lives only
->    in a rumor projection's DM `truth` block. Correct twice over — the
->    fog-of-war instrument is the DM's, and a player surface must never gain a
->    path to the truthful paper — and reported through `joinable` rather than
->    collapsed into an empty answer.
-> 4. **THE DOSSIER-NATIVE REGISTER IS NOT THIS LANE'S.** SP-6's fourth
->    register belongs to the dossier lane, which is live on
->    `src/domain/display/stateProse/` in the same tree.
+**THE STATUS** (of record: `DESIGN_FP_COHERENCE_FOLD.md` §2, measured at `00b648c9d`). LIT: SP-B scarcity + conditions (FP_LIT_BELIEF, 3 presets); SP-3 via GRAMMAR (pactFormationEnabled, 4 presets incl. the default) · BUILT DARK: SP-A stocks; SP-B devotion; SP-B2 legs (sovereigntyTradeEnabled lit nowhere); SP-C posture (strategicPostureEnabled dark; appetite STARVED, SEAM-0 owed); SP-D errand spine (held dark on purpose); SP-E narration kit; second-order belief; the Herald's causal headline (`heraldCausalVoiceEnabled` dark — read only at heraldCausalVoice.js:119 and set by no preset or store path; ruled lit, with CW-1's braid, in every world-alive preset including the default, a disclosed display shift — the fold's §7 OD-FC-16); the dossier's state-prose reader WIRED and live · UNBUILT: SP-7 temporal walker (the fold §4); SP-8 age layer (the fold's §7 OD-FC-17); SP-F era marking corpus-wide.
 
-> **LANE HG — THE HERALD GRAMMAR WAVE: THE JOINS BECOME SENTENCES, 2026-08-03.**
-> Three commits on `claude/composite-r4` in the minifold worktree, nothing
-> pushed, everything still behind `simulationRules.heraldCausalVoiceEnabled` —
-> dark renders the surface that shipped, byte for byte.
->
-> | Commit | What landed |
-> |---|---|
-> | `ac22447b` | **THE JOIN MOLDS.** `heraldJoinMolds.js` — per §3.1 pool, the FORM each argument type takes, with the receipt's own clause carried through inside it. `heraldCausalVoice.js` dispatches on `connective.arg` in BOTH registers, computes the DRAWABLE subset before the draw, and gained the `fwd` half it never had. |
-> | `1e96a0fa` | **THE PLANT WARRANT IS THE SPELLING** (F2) — the `disinfo:` marker prefix, not lineage presence; the fence gains a quoted, pinned, load-bearing exemption rather than a hole; the popup divergence pin. |
-> | `a0355434` | **ONE WRITER FOR THE UNRECEIPTED HOP** (F3) — `UNRECEIPTED_HOP` exported beside `REDACTED_HOP`, the popup's bare duplicate killed, drift and copy mutants both executed. |
-> | `<this row>` | The progress record (F4 + F5). |
->
-> **THE DEFECT, NAMED PRECISELY.** The grammar module authored four argument
-> tags; the composer read `arg` exactly once. 49 of the 71 back-direction
-> connectives declare a NOUN-PHRASE slot and were handed a finite clause. The
-> molds are the supply those tags were written to receive.
->
-> **THE PINS ARE PARSES.** `conformsToMold` re-derives the argument from the
-> pool's licensed forms and the hop's own clause and demands equality, so the
-> law is checkable at the SHAPE grain rather than by substring. A totality pin
-> asserts molded ∪ declared-unsupplied covers every (pool, arg) the connective
-> corpus spends — a new connective cannot land un-molded and unnoticed. Six
-> mutants were EXECUTED across the three commits, each restored from a file copy
-> with `diff` proving the file identical.
->
-> **THE SEVEN DECLARED HOLES**, all one failure: the connective's argument is an
-> ENTITY the parent's clause is not — the PLANTER (`planted::N`), the judging
-> party (`judged::N`), the ancestor (`inherited::N`/`::F`), the decree
-> (`buried::N`), the carrier (`carried::N`) — plus `refused::V`, a bare verb
-> phrase, which §2 never authored for any kind because no receipt carries its own
-> act de-tensed. Of the seven, only `planted::N` sits on a wired warrant, and its
-> pool still speaks: the one `F` line ("believing exactly what …") molds through a
-> free relative that names no hand. The other six sit on pools no warrant reaches
-> today, so nothing wired is mute.
->
-> **THE READER CONSEQUENCE, MEASURED RATHER THAN ASSUMED (F5).** Drop-never-
-> relabel was expected to make a headline's causal gesture appear and disappear
-> by seed as `A` lines came up. The cure removed that: `A` lines are filtered
-> out BEFORE the draw, so every wired warrant composes a gesture at every seed
-> (pinned). The seed-dependence moved rather than vanished — it now lives in the
-> 160-character headline cap, because molds differ in length. Measured over 200
-> seeds: at a combined event+parent length of 115 characters the gesture always
-> composes; at 123 it drops on 14/200 seeds, at 131 on 99/200, at 139 on
-> 186/200, and at 159 always. THIS IS DESIGNED BEHAVIOUR — the cap is the
-> headline register's honesty, and a gesture that will not fit is dropped rather
-> than shortened into a claim the receipt does not carry. The item still renders
-> its recorded headline exactly as it does today. **TWO** pool-level drops are
-> permanent and deterministic rather than seeded, on the pools a warrant actually
-> reaches: `dissolved` in the `fwd` direction is all-`A`, and `planted` in `fwd`
-> spends only the declared `planted::N` hole — so a forward telling of either
-> names the link and asserts no relation to it. *(CORRECTED 2026-08-03, lane HR:
-> this row said "one" and named `dissolved` alone. Machine-counted over the
-> drawable-subset filter, the wired total is two.)*
->
-> **WHAT THIS WAVE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
-> a bug:
->
-> 1. **§1's MOLD SENTENCES AND §2's 175 CLAUSE FORMS REMAIN A CONTENT WAVE.**
->    They spend `{settlement}`/`{good}`/`{route}` fills no display-side reader
->    holds and assert facts beyond the hop's own receipt, which per-link
->    entailment forbids. What lane HG wired is the argument FORM, filled with the
->    receipt's own words. The clause forms wire in behind a kind→clause map that
->    does not exist yet.
-> 2. **THE MOLD KEY IS THE SIXTEEN POOLS, NOT THE EIGHT EDGES** (chair call,
->    veto open). R-CAU-I makes the sixteen the eight's named inflections; the
->    licence has to be per pool because `exposed` and `followed` share the
->    `succession` tag and not the same lawful nominalisation. `POOL_PARENT` still
->    maps every mold back to its edge, so law 1 is checked where it always was.
-> 3. **THREE TEST FILES KEEP THEIR OWN COPY of the unreceipted-hop literal**
->    (discourseParity, narrativeParity, discourseKernel). They belong to other
->    lanes and a test-side copy cannot mis-classify a link — only make a parity
->    assertion stale. The single-writer scan is scoped to `src/**` deliberately.
-> 4. **THE CHAIN IS STILL TREATED AS A SEQUENCE.** `buildCauseWalk` returns a
->    BFS over a DAG, so two parents of one receipt arrive as consecutive hops and
->    both registers read them as a line. That predates this wave and is unchanged
->    by it; the `fwd` composition inherits the same assumption and guards only the
->    gap a DROPPED hop would leave.
+The build records — the commits, receipts and executed negative controls of the Herald's causal voice, the dossier's state-prose reader, the clause floor and SP-A — are MOVED verbatim to `settlement-engine-kits/fp-final-a73343ed-2026-10-17/history/SPINE-review-record.md` Part 6. What they settled that the spine still governs stands below; the "causal annex" is the Herald's causal annex, whose section numbers these items cite.
 
-> **LANE HR — THE HERALD GRAMMAR CLOSURE: THE CYCLE-11 FINDINGS, CHAIR-RULED AND
-> LANDED, 2026-08-03.** On `claude/composite-r4` in the minifold worktree, nothing
-> pushed, everything still behind `simulationRules.heraldCausalVoiceEnabled`.
->
-> **THE LIGHTING BLOCKER — A CONNECTIVE OVER A RECEIPT NOBODY FOUND.** `causeWalk`
-> prints `UNRECEIPTED_HOP` ("an earlier cause") whenever the provenance ledger
-> names a parent no pulseHistory record resolves — a root `sourceEventId`, or a
-> receipt aged past MAX_HISTORY=80. It is a NOUN PHRASE and it carries
-> `redacted:false`, so nothing structural marked it, and the composer fed it
-> straight into a §1 mold: *"…; the year after the day an earlier cause"*.
-> `chronicleGraph`'s two pulse fallbacks reach the same slot the same way whenever
-> a durable record carries no headline.
->
-> RULED AND IMPLEMENTED: such a hop is TERMINAL, treated exactly as a REDACTED one
-> — the causal clause is dropped, the edge is never re-labelled to fit the prose,
-> and §3.2's terminal carries the honesty instead (`chain_end`, forced, because the
-> walk cannot tell a root from an aged-out receipt and `horizon` claims retention).
-> The guard binds to an EXPORTED constant, never a literal, and the constants
-> needed a home that the contamination fence would accept: `receiptClauseFloor.js`
-> now owns the three PLACEHOLDER CLAUSES and the predicate over them, both
-> producers read their constants from it, and the fence closure gains exactly one
-> reviewed row. `REDACTED_HOP` deliberately stayed in `causeWalk` — a covert hop is
-> already marked structurally, and the composer reads that boolean.
->
-> IN CLASS, FOUND WHILE FIXING, CLOSED HERE: `childKept` now means "the child
-> contributes a USABLE clause". In `fwd` the connective's argument is the child's
-> clause, so a placeholder left "kept" was molded into the NEXT link's slot — the
-> same defect one link deeper, and it was live for REDACTED hops too.
->
-> **THE VOCABULARY AMENDMENTS.** `refused::N` restricts to the AT-ISSUE form: the
-> factive frame composed "for the refusal of the fact that the tribute went
-> unpaid", which reads as the refusal OF A FACT — a denial, a shade the gate edge
-> does not carry and law 1 forbids a mold from adding. `breached::N` is recast
-> whole: "after the breach of the promise that <a past event>" named the event as
-> the CONTENT of the promise, when the promise is the obligation and the event is
-> its breach. The three forms now NAME the obligation and let the clause DATE it —
-> "the promise that stood until …", "the undertaking that stood until …", "the
-> writing that held until …" — all singular, so the `fwd` line agrees in number.
->
-> **`planted::F` IS BOUND TO ITS CONNECTIVE'S SHAPE.** `SAID_WHEN` is a predicate,
-> not a general `F` mold; it composes only because the one line it completes ends
-> in a dangling `what`. A second `F` line without that shape would draw the same
-> mold and print "believing was said when …". Pinned as a shape assertion rather
-> than left to a comment.
->
-> **DIRECTION SAFETY, AND IT RE-OPENS PER POOL.** A TYPE warrant is read off the
-> PARENT's `type` *(CORRECTED 2026-08-03, lane CF: off the parent's RECORDED edge
-> type — a hop's `type` is the chronicle's drama class and never matched any of
-> these families, so the whole rule was unreachable until CR-HR-F4 below)*, so
-> `exposed` / `refused` / `breached` are true in `back`, where
-> the connective points at that parent, and FALSE in `fwd`, where the same corpus
-> lines say "and what came out was the truth that <child>". In `fwd` those three
-> now fall back to the direction-neutral families — `caused` when the origination
-> warrant is independently present, `followed` otherwise. A demotion, never a
-> promotion. `dissolved` and `planted` are deliberately NOT on the list: both are
-> permanent forward drops today, and redirecting them would convert a recorded drop
-> into prose. THE RESTRICTION IS A PROPERTY OF THE CORPUS, NOT THE EDGE — the day
-> §3 authors a forward line for one of these that predicates on the PARENT, that
-> pool comes off the list and keeps its full warrant in both directions.
->
-> **DEFERRED, so it is not re-found as a bug:** the two pulse fallbacks keep four
-> other spellings in `src/**` (chronicleTimeline, worldSnapshotPublic,
-> CampaignStatePanel, and pulseHelpers twice). None reaches a clause slot, so none
-> can compose the defect; the single-writer scan stays scoped to `UNRECEIPTED_HOP`
-> alone, and one of the four lives in a file the war lane is live on.
+**THE HERALD'S CAUSAL VOICE, AS BUILT** (SP-6's causal grammar, two registers, surface contract, index, truth law and fence, portable popup and manipulation disclosure; everything behind `simulationRules.heraldCausalVoiceEnabled` — dark renders the surface that shipped, byte for byte). Its homes: `heraldCausalGrammar.js` (the causal annex's eight typed edges, sixteen connective pools, two terminals and six-band time family in four print positions, drawn through `avalanche32(fnv1a32(seed))`); `heraldCausalVoice.js` (HEADLINE — exactly one link, so a cascade is structurally unreachable; SUBHEADER — the recorded summary, composed from nothing; TELLING — the whole chain, one direction held); `heraldJoinMolds.js` (per connective pool, the FORM each argument type takes, with the receipt's own clause carried through inside it); `receiptClauseFloor.js` (the three PLACEHOLDER CLAUSES and the predicate over them); `PortablePopup.jsx` (no acknowledge-control prop exists ⇒ outside-click closes, structurally), `CausalityPopup.jsx` (the four tiers) and `heraldIntegrity.js` (the causal annex's integrity states); `heraldContaminationFence.test.js` (K3 inverted: transitive reachability + token scan + guard-the-guard); `heraldIndex.js` (typed facets; refs only, audience fail-closed); `rumorHeraldLink.js` (the rumor mill cites the paper; truthfully unlinked below the pacing floor); and `causeWalk.js`, whose two additive read-only hop atoms let the disclosure reach the truth it already holds. Settled with it:
 
-> **LANE P — THE DOSSIER-NATIVE STATE-PROSE PROJECTION: THE READER IS BUILT AND
-> DARK, 2026-08-03.** Five commits on `claude/composite-r4` in the minifold
-> worktree, nothing pushed. Dark by construction rather than by flag: no
-> component imports any of it, so the page is byte-identical. [see the bracket at :911 — superseded: the reader is wired]
->
-> | Commit | What landed |
-> |---|---|
-> | `a277f53d` | **THE CORPUS BECOMES CODE.** `scripts/generate-dossier-state-prose.mjs` — one strict projection of both authored annexes into six desk leaves plus the causal leaf. The doc stays the source the chair vetoes; the runtime never parses markdown. MEASURED: 58 state blocks (DS-GEN-4 is folded into DS-STR-1 by §0h V1-a and keeps its id without a pool), 664 pools, 2,153 variants; 78 causal families, 468 variants. |
-> | `20a7ee24` `23d118eb` | **THE READER.** `stateProseKernel.js` (anchored liveness · fail-closed audience · the avalanche draw · canonical-at-zero), `causalDossierProse.js` (the [angle × arm] join reader), `economyStateProse.js` + `legibilityRung.js` (the reference desk in three rungs). |
-> | `20a7ee24` | **THE DM-FIELD PROJECTION RULE.** `dmFieldProjection.js` — machine prose renders BESIDE the DM's pen and has nowhere to write. |
-> | `<this row>` | The progress record. |
->
-> **RECEIPTS.** 86/86 across the five lane-P files plus the domain any-cast and
-> domain-strict ratchets; eslint clean; domain strict typecheck clean on all
-> five modules. Two negative controls EXECUTED rather than asserted: a raw
-> `fnv1a32 % 8` over the degenerate family `wizard_news.{i}.applied.evt{i}`
-> reaches residues {0,2,4,6} — four of eight variants dead — where the finalized
-> draw reaches all eight; and injecting `s.arrivalScene = v` into the projection
-> leaf reds the no-writer source scan, which greens again on restore.
->
-> **FIVE PROJECTION DEFECTS THE STRICT PARSER CAUGHT**, each of which would have
-> shipped as missing prose nobody reports: WRITER-4's compact one-line pools
-> (225 variants invisible to the per-line grammar); the second `[dm-only]` tag
-> carrying R-DOS-G's audience mark (89 covert variants that would have
-> published); two trailing authoring-note forms; four bold RULE headings taken
-> for pool labels, one of which split a causal family's pool in half; and the
-> arms extractor's hyphen-less character class, which dropped JF-CPL-14a's
-> `broker-town` arm and orphaned two variants — reachable by no arm, renderable
-> never.
->
-> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
-> a bug:
->
-> 1. **FIVE OF THE SIX DESKS ARE UNWIRED.** power, defense, warFaith, stressors
->    and general have their corpus projected and their leaves in place; their
->    state→pool-key maps are not written. The economy desk is the reference
->    shape and the pin pattern (every emittable key asserted against the shipped
->    corpus) transfers verbatim. [see the bracket at :911]
-> 2. **NO COMPONENT CONSUMES THE READER.** The panels, the flag, and the
->    section composition are a wave of their own. The reader's contract is
->    settled and pinned, so that wave is wiring rather than design. [SUPERSEDED BY EVENT 2026-10-16 (coherence fold) — stale: the state-prose reader is WIRED and live. At 00b648c9d src/domain/display/stateProse/ holds the power, defense, general, stressors and warFaith desks with their candidate maps, and twelve src/components files import it — EconomicsTab.jsx, WarFaithDesk.jsx and ProseBlock.jsx among them. Items 1 and 2 are history.]
-> 3. **THE JOIN DERIVATION IS NOT WRITTEN.** `causalDossierProse` renders only
->    joins it is handed; deriving them from `causes[]` / `sourceEventId` / CW-0's
->    `receiptField` map is the caller's job and is unbuilt. This is deliberate —
->    a reader able to select a family from a band would let the page invent
->    history, which is why the module has no path to state at all.
-> 4. **DS-ECO-1's RUNG CUT IS A CHAIR CALL, VETO OPEN.** The annex names "a high
->    rung / the middle rungs / a low rung" and leaves the boundary to the
->    implementer; it is set at low = Subsistence–Poor, middle =
->    Moderate–Comfortable, high = Prosperous–Wealthy.
-> 5. **THE SLOTS-LINE READING IS RECORDED, NOT ENFORCED TO ZERO.** Several
->    blocks use a cluster-minted slot (§0c-2) without restating it on their own
->    SLOTS line. The reader treats an undeclared slot exactly as a declared one,
->    so this is corpus hygiene rather than a runtime hazard; the contract test
->    ratchets the count downward only.
+- **PER-LINK ENTAILMENT, AS BUILT.** The provenance ledger records a parent link and the child's structural type — it does NOT record a relation. So an edge stronger than plain succession must be positively warranted by a field the receipt carries, and everything unwarranted draws `followed`, which asserts succession and refuses causation. Nothing ever falls back to `caused`. Six warrants are wired (`planted` · `exposed` · `refused` · `breached` · `dissolved` · `caused`).
+- **THE MOLDS ARE ARGUMENT FORMS.** Without the join molds the composer's argument tags had no supply and a phrase-taking connective took a finite clause — "a phrase-taking connective in front of a finite clause is ungrammatical, and a display-side composer with no engine state has no repair for it" — so the molds were a LIGHTING BLOCKER, never richness postponed. `heraldCausalVoice.js` dispatches on `connective.arg` in BOTH registers and computes the DRAWABLE subset before the draw; `conformsToMold` re-derives the argument from the pool's licensed forms and the hop's own clause and demands equality, so the law is checkable at the SHAPE grain rather than by substring; a totality pin asserts molded ∪ declared-unsupplied covers every (pool, arg) the connective corpus spends, so a new connective cannot land un-molded and unnoticed. What remains deferred is CONTENT TRANSCRIPTION: the causal annex's §1 mold SENTENCES and its §2's 175 clause forms spend `{settlement}`/`{good}`/`{route}` fills no display-side reader holds and assert facts beyond the hop's own receipt, which per-link entailment forbids; they wire in behind a kind→clause map that does not exist yet.
+- **THE MOLD KEY IS THE SIXTEEN POOLS, NOT THE EIGHT EDGES** (by delegation, veto open). R-CAU-I makes the sixteen the eight's named inflections; the licence has to be per pool because `exposed` and `followed` share the `succession` tag and not the same lawful nominalisation. `POOL_PARENT` still maps every mold back to its edge, so law 1 is checked where it always was.
+- **THE SEVEN DECLARED HOLES**, all one failure: the connective's argument is an ENTITY the parent's clause is not — the PLANTER (`planted::N`), the judging party (`judged::N`), the ancestor (`inherited::N`/`::F`), the decree (`buried::N`), the carrier (`carried::N`) — plus `refused::V`, a bare verb phrase, which the causal annex's §2 never authored for any kind because no receipt carries its own act de-tensed. Of the seven, only `planted::N` sits on a wired warrant, and its pool still speaks: the one `F` line ("believing exactly what …") molds through a free relative that names no hand. The other six sit on pools no warrant reaches, so nothing wired is mute.
+- **THE HEADLINE CAP IS THE HEADLINE REGISTER'S HONESTY** — designed behaviour. `A` lines are filtered out BEFORE the draw, so every wired warrant composes a gesture at every seed (pinned); the seed-dependence lives in the 160-character headline cap, because molds differ in length (measured over 200 seeds: at a combined event+parent length of 115 characters the gesture always composes; at 123 it drops on 14/200 seeds, at 131 on 99/200, at 139 on 186/200, and at 159 always). A gesture that will not fit is dropped rather than shortened into a claim the receipt does not carry, and the item renders its recorded headline exactly as before. **TWO** pool-level drops are permanent and deterministic rather than seeded, on the pools a warrant actually reaches: `dissolved` in the `fwd` direction is all-`A`, and `planted` in `fwd` spends only the declared `planted::N` hole — so a forward telling of either names the link and asserts no relation to it.
+- **THE UNRECEIPTED HOP IS TERMINAL** (by delegation, vetoable). `causeWalk` prints `UNRECEIPTED_HOP` ("an earlier cause") whenever the provenance ledger names a parent no pulseHistory record resolves — a root `sourceEventId`, or a receipt aged past MAX_HISTORY=80; a NOUN PHRASE carrying `redacted:false`, so nothing structural marks it — and `chronicleGraph`'s two pulse fallbacks reach the same slot whenever a durable record carries no headline. Such a hop is TERMINAL, treated exactly as a REDACTED one: the causal clause is dropped, the edge is never re-labelled to fit the prose, and the causal annex's §3.2 terminal carries the honesty instead (`chain_end`, forced, because the walk cannot tell a root from an aged-out receipt and `horizon` claims retention). The guard binds to an EXPORTED constant, never a literal: `receiptClauseFloor.js` owns the three PLACEHOLDER CLAUSES and the predicate over them, both producers read their constants from it (`UNRECEIPTED_HOP` exported beside `REDACTED_HOP`, ONE WRITER FOR THE UNRECEIPTED HOP), and the fence closure carries exactly one reviewed row for it; `REDACTED_HOP` stays in `causeWalk`, because a covert hop is already marked structurally and the composer reads that boolean. `childKept` means "the child contributes a USABLE clause", so in `fwd` a placeholder is never molded into the next link's slot. THE ROOT JOINS THE FLOOR: in `fwd` the root (`walk.root.headline`) IS the nearest link's `childClause`, so `rootClause` is floored by the same predicate, the root's `childKept` starts false, and a clauseless root counts toward the truncation that forbids `horizon`. THE SECOND HABITAT: `realizeCauseWalk` reads the same floor (one import of `receiptClauseFloor.js`), so a placeholder node composes as a bare terminal sentence and is TRANSPARENT to the discourse.
+- **THE VOCABULARY AMENDMENTS.** `refused::N` restricts to the AT-ISSUE form: the factive frame read as the refusal OF A FACT — a denial, a shade the gate edge does not carry and law 1 forbids a mold from adding. `breached::N` NAMES the obligation and lets the clause DATE it — "the promise that stood until …", "the undertaking that stood until …", "the writing that held until …" — all singular, so the `fwd` line agrees in number.
+- **`planted::F` IS BOUND TO ITS CONNECTIVE'S SHAPE.** `SAID_WHEN` is a predicate, not a general `F` mold; it composes only because the one line it completes ends in a dangling `what`. A second `F` line without that shape would draw the same mold and print "believing was said when …", so the shape is pinned as an assertion rather than left to a comment.
+- **THE PLANT WARRANT IS THE SPELLING** — the `disinfo:` marker prefix, not lineage presence; the fence carries a quoted, pinned, load-bearing exemption for it rather than a hole.
+- **DIRECTION SAFETY, RE-OPENED PER POOL.** A TYPE warrant is read off the parent's RECORDED edge type, so `exposed` / `refused` / `breached` are true in `back`, where the connective points at that parent, and FALSE in `fwd`, where the same corpus lines say "and what came out was the truth that <child>". In `fwd` those three fall back to the direction-neutral families — `caused` when the origination warrant is independently present, `followed` otherwise: a demotion, never a promotion. `dissolved` and `planted` are deliberately NOT on the list: both are permanent forward drops, and redirecting them would convert a recorded drop into prose. THE RESTRICTION IS A PROPERTY OF THE CORPUS, NOT THE EDGE — the day the causal annex's §3 authors a forward line for one of these that predicates on the PARENT, that pool comes off the list and keeps its full warrant in both directions.
+- **THE TYPE WARRANTS READ THE RECORDED TYPE** (ruling CR-HR-F4, by delegation, vetoable). A cause-walk hop's `type` is `dramaClass || kind` — the CHRONICLE's eight-class display taxonomy, computed by `chronicleGraph.dramaClassForNode` from `stressor.type` / `candidateType` / `ruleFamily`, which never reads the receipt's own `type` — so a `plant_exposed` outcome resolves as `'outcome'`, and the four type-warranted pools were unreachable from the shipped walk. A resolved hop therefore also carries `recordedType` — the receipt's OWN edge/reason type, read verbatim off its provenance-ledger row (`{ parents, type, tick }`, written by `provenanceKernel.typeOf` as `type ?? candidateType ?? impactKind`). It is a DERIVED READ-MODEL FIELD: no persisted shape, no writer, no migration. `edgeTypeOf` prefers it over `type`, and THE VOCABULARY IS CLOSED — when a hop carries a recorded type, that type is the answer, and an unrecognised one draws `followed` rather than falling back to the display class, because a second bite at the display class would re-open the same category error one level down. The `type` fallback survives for links with no recorded type at all: a root cause named only as its children's parent, and every hand-built link in the pins. REDACTION TAKES THE RECORDED TYPE WITH IT: a redacted hop reports `recordedType:null` beside its `type:'hidden'`, exactly as it does for `lineageIds`.
+- **THE DEFERRALS**, recorded so no one re-finds them as bugs. (1) FIVE INDEX FACETS ARE PENDING, WIRED AND DARK — institution, good, service, route, treaty/war/arc: their readers exist and a pin feeds each one a typed ref to prove it lights; they wait on the MINT-TIME typed entity-ref slots, which are the war program's territory; `facetAvailability` reports declared status beside measured population so the UI dims rather than promises. (2) THE UPWARD LINK IS DM-ONLY: the join key `eventRef` lives only in a rumor projection's DM `truth` block — correct twice over, because the fog-of-war instrument is the DM's and a player surface must never gain a path to the truthful paper — and is reported through `joinable` rather than collapsed into an empty answer. (3) THE CHAIN IS TREATED AS A SEQUENCE: `buildCauseWalk` returns a BFS over a DAG, so two parents of one receipt arrive as consecutive hops and both registers read them as a line; the `fwd` composition guards only the gap a DROPPED hop would leave. (4) The two pulse fallbacks keep four other spellings in `src/**` (chronicleTimeline, worldSnapshotPublic, CampaignStatePanel, and pulseHelpers twice); none reaches a clause slot, so the single-writer scan stays scoped to `UNRECEIPTED_HOP` alone; three test files (discourseParity, narrativeParity, discourseKernel) keep their own copy of the literal, which can make a parity assertion stale but cannot mis-classify a link. (5) `discourseKernel` DOES NOT CARRY `recordedType` THROUGH: `realizeCauseWalk` rebuilds nodes with `type: hop.type || 'event'` and classifies them against its OWN `ADVERSATIVE_TYPES` vocabulary, reading no `poolForLink`, so no false claim can be composed from the omission; whether that register should also prefer the ledger's type is a design question for the discourse program. (6) `refused` / `breached` / `dissolved` have no live-path pin of their own: they travel the identical code path through `edgeTypeOf` as `exposed`, which is pinned end to end, and their regexes are pinned synthetically.
 
-> **LANE PR — THE DOSSIER RESIDUALS: FOUR PINS THAT PROVED LESS THAN THEY SAID,
-> AND ONE RECEIPT THAT SAID MORE THAN IT DID, 2026-08-03.** The cycle-11 PT
-> verifier's four residual findings, each of which it had already confirmed with
-> a mutant, closed in one commit on `claude/composite-r4` in the minifold
-> worktree. Nothing pushed. **No `src/` file changed** — every repair is in the
-> test estate, so the size, strict and any-cast ratchets are untouched by
-> construction.
->
-> | Finding | The repair, and the mutant it now reds under |
-> |---|---|
-> | **R1 — reachability was PROSE.** Lane PT wrote "STRUGGLING is reachable, SUBSISTENCE is not" into a comment. Prose cannot red. | `stateProseKernel.test.js` now EXECUTES `deriveProsperityLabel` over a fifteen-cell sweep (five bases × three stress columns, RNG arm deliberately unreachable because no cell passes the `'Subsistence'` input) and asserts the emitted label set EQUALS DS-ECO-8's pool keys minus the legacy rung, both directions. NC: deleting `'Struggling'` from the ladder's `LABELS` reds 2 of 21. |
-> | **R2 — the consumer needle was PATH-SHAPED.** It matched the substring `display/economyFreshness.js`, which every importer OUTSIDE `src/domain/display` spells and none inside it ever can. | `economyReadModelCoverage.walker` now RESOLVES a relative specifier against the importing file (`specifierIsDetector`), and the census runs over an explicit source list so a synthetic `__probe` rides the same code path. NC, both halves: a real `src/domain/display/stateProse/__probe.js` taking `economyShiftSinceSurvey` via `'../economyFreshness.js'` reds 3 tests today, and reds **only the synthetic probe pin** under the old needle — the frozen consumer map and the detector-monopoly pin both stayed green, which is the finding. |
-> | **R3 — the byte-identity fixture was TIDY.** `EDITED` survives `trim`, whitespace-collapse and NFKC unchanged, so all three mutants of the projection returned an identical string. | `dmFieldProjection.test.js` gains `UNTIDY` — leading + trailing spaces, an internal double space, U+FB01 and U+00A0 — written with `\u` escapes so the exotic codepoints stay reviewable, asserted codepoint-for-codepoint through both doors. NC: a `.trim()` mutant and a `.normalize('NFKC')` mutant each red it. |
-> | **R4 — the guard's comment was FALSE.** It claimed `(?!:)` excluded a type annotation; `(?!:)` excludes a double colon and nothing else, so a JSDoc `@example` showing `{ desc: … }` read as a writer. | The scan now blanks comments first (`stripComments`, line geometry preserved so the `^` arm still anchors), the comment states what the lookahead actually does, and the verifier's `__mutantJsdoc` fixture is a committed pin alongside a real-writer fixture. NC: neutering `stripComments` to the identity reds the JSDoc arm. |
->
-> **RECEIPT CORRECTION (R5).** Commit `91e5be4c`'s message records
-> `stateProseKernel 12 → 18`. The true delta is **13 → 18 (+5)**: the pre-lane
-> file ran 6 + 3 + 2 + 2 = 13 tests (`git show 91e5be4c^:tests/domain/
-> stateProseKernel.test.js`). The commit message cannot be amended, so the
-> correction lives here. After lane PR the same file runs **21**.
->
-> **RECEIPTS.** `npx vitest run` over the three lane files → 3 files, **50
-> passed** (stateProseKernel 18 → 21 · dmFieldProjection 12 → 14 ·
-> economyReadModelCoverage 14 → 15); eslint over the three files exit 0. Five
-> negative controls EXECUTED and restored from `cp` backups, never `git
-> checkout` (the uncommitted-work hazard).
->
-> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
-> a bug:
->
-> 1. **THE CENSUS STILL READS `import` ONLY.** A re-export
->    (`export { x } from './economyFreshness.js'`) would carry the detector past
->    the frozen map. Measured: zero such re-exports exist in `src` today. Left
->    for the same needle to grow an arm when one does, rather than widened
->    speculatively inside a repair lane.
-> 2. **`stripComments` IS TEXTUAL, NOT A PARSER.** A `/* … */` sequence inside a
->    string literal would blank text that is really code. No file in the
->    stateProse family contains one, and the direction of the error is a MISSED
->    offender, which is why the real-writer fixture sits beside the JSDoc one.
+**THE DOSSIER'S STATE-PROSE READER** (SP-6's dossier-native register and the state-prose corpus — WIRED and live: at `00b648c9d` `src/domain/display/stateProse/` holds the power, defense, general, stressors and warFaith desks with their candidate maps, and twelve src/components files import it — EconomicsTab.jsx, WarFaithDesk.jsx and ProseBlock.jsx among them). THE CORPUS BECOMES CODE: `scripts/generate-dossier-state-prose.mjs` is one strict projection of both authored annexes into six desk leaves plus the causal leaf; the doc stays the source, and the runtime never parses markdown. THE READER: `stateProseKernel.js` (anchored liveness · fail-closed audience · the avalanche draw · canonical-at-zero), `causalDossierProse.js` (the [angle × arm] join reader), `economyStateProse.js` + `legibilityRung.js` (the reference desk in three rungs). THE DM-FIELD PROJECTION RULE, as built: `dmFieldProjection.js` — machine prose renders BESIDE the DM's pen and has nowhere to write. Settled with it:
 
-> **LANE CF — THE CLAUSE FLOOR CLOSES: THE CYCLE-12 FINDINGS, 2026-08-03.** Five
-> commits on `claude/composite-r4` in the minifold worktree, nothing pushed,
-> everything still behind `simulationRules.heraldCausalVoiceEnabled` — dark
-> renders the surface that shipped, byte for byte.
->
-> | Commit | What landed |
-> |---|---|
-> | `7385dba3` | **THE ROOT JOINS THE FLOOR** (F1). The clause floor read the CHAIN and left `walk.root.headline` bare, yet in `fwd` the root IS the nearest link's `childClause` — the argument that link's connective molds. `rootClause` is floored by the same predicate, the root's `childKept` starts false, and a clauseless root counts toward the truncation that forbids `horizon`. |
-> | `824c22fc` | **THE SECOND HABITAT** (F2). `realizeCauseWalk` built its own node list off the same walk with no floor at all, so the three placeholder clauses reached the discourse kernel's connective slots untouched. One import of `receiptClauseFloor.js`; a placeholder node composes as a bare terminal sentence and is TRANSPARENT to the discourse. |
-> | `83b18609` | **THE SWEEP STOPS ASKING THE VOCABULARY** (F3). The telling sweep selected which links to inspect with the live placeholder list, so a vocabulary drift made it select nothing and green on the empty set. De-self-referenced against a hand-written frozen copy. |
-> | `5a3fe844` | **THE ANCHOR DEBT** (F5). Five un-anchored negatives in `stateProseKernel.test.js` against a ceiling of zero; two were genuinely vacuous, measured with a mutant rather than argued. |
-> | `<this row>` | **THE TYPE WARRANTS REACH THE LIVE PATH** (F4, chair ruling CR-HR-F4). |
->
-> **CR-HR-F4 — THE FOUR TYPE-WARRANTED POOLS WERE UNREACHABLE FROM THE SHIPPED
-> WALK (chair ruling, vetoable).** `poolForLink` tested `exposed` / `refused` /
-> `breached` / `dissolved` against a link's `type`. A cause-walk hop's `type` is
-> `dramaClass || kind` — the CHRONICLE's eight-class display taxonomy, computed by
-> `chronicleGraph.dramaClassForNode` from `stressor.type` / `candidateType` /
-> `ruleFamily`, which never reads the receipt's own `type` at all. MEASURED on the
-> shipped path: a `plant_exposed` outcome resolves as `'outcome'`. So four pools,
-> their whole §3 corpora, and the direction-safety rule guarding three of them were
-> live, correct, and consulted by nothing. The synthetic pins passed because they
-> hand-build links carrying `type:'plant_exposed'` directly — the recorded
-> self-referential shape one register over.
->
-> **RULED AND IMPLEMENTED:** a resolved hop additionally carries `recordedType` —
-> the receipt's OWN edge/reason type, read verbatim off its provenance-ledger row
-> (`{ parents, type, tick }`, written by `provenanceKernel.typeOf` as
-> `type ?? candidateType ?? impactKind`). It is a DERIVED READ-MODEL FIELD: no
-> persisted shape, no writer, no migration. `edgeTypeOf` prefers it over `type`,
-> and THE VOCABULARY IS CLOSED — when a hop carries a recorded type, that type is
-> the answer, and an unrecognised one draws `followed` rather than falling back to
-> the display class, because a second bite at the display class would re-open the
-> same category error one level down. The `type` fallback survives for links with
-> no recorded type at all: a root cause named only as its children's parent, and
-> every hand-built link in the pins.
->
-> **REDACTION TAKES THE RECORDED TYPE WITH IT.** `plant_exposed` names what the
-> hidden receipt WAS; a non-DM viewer who can read the kind of the thing has been
-> told part of it. So a redacted hop reports `recordedType:null` beside its
-> `type:'hidden'`, exactly as it already does for `lineageIds`.
->
-> **THE PIN IS THE FIRST LIVE-PATH DRAW OF THE EXPOSURE VOICE.** A real
-> `buildCauseWalk` over a real ledger whose parent row carries `plant_exposed`
-> composes the `exposed` pool in `back` at every seed, and the `fwd` restriction
-> still holds on that same fixture (`followed`/`caused` only, and the false claim
-> "and what came out was" never appears). The removal is measured against the same
-> fixture with one field changed — the ledger row's own `type` — which demotes the
-> link to `followed` rather than dropping it. The synthetic pins are KEPT as
-> supplements: they read the fallback arm, which is still live.
->
-> **RECEIPTS.** `heraldCausalVoice.test.js` 52 → 58 passed; the five consumer
-> suites (causeWalk, discourseKernel, both CauseWalkPanel files) 103 passed;
-> spellBreakCensus / discourseLexiconCoverage / discourseParity / narrativeParity
-> / provenanceLedger / chronicleGraph 50 passed; the size, domain-strict and
-> domain-any-cast ratchets and the contamination fence 32 passed; eslint exit 0.
-> **TWO NEGATIVE CONTROLS EXECUTED**, each restored from a `cp` backup: reverting
-> `edgeTypeOf` to `String(l.type || '')` reds 3 of the 6 new tests, and dropping
-> `recordedType` from the chain push reds 4 of them (the two sets overlap on the
-> two that need both halves).
->
-> **F5 — THE ANCHOR DEBT (`5a3fe844`).** `tests/domain/stateProseKernel.test.js`
-> carried five un-anchored negative assertions against a frozen ceiling of ZERO, so
-> the epistemic-prevention walker named the file. Two were genuinely VACUOUS rather
-> than merely un-annotated, MEASURED with a mutant: short-circuiting
-> `emittedProsperityLabels` to an empty Set leaves the pre-cure file at 20 passed /
-> 1 failed — the exclusion pin passes over an empty collection. Those two now go
-> through `expectAbsentWithAnchor` on `Struggling`, the rung the ladder DOES emit
-> by the same `under_siege` clamp, and the same mutant reds them. The
-> unknown-audience negative is anchored on an open sibling that must SURVIVE the
-> restrictive read. The remaining three carry `// anchored:` with the structural
-> reason. The walker stops naming the file.
->
-> **WHAT THIS LANE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as
-> a bug:
->
-> 1. **`discourseKernel` DOES NOT CARRY `recordedType` THROUGH.** `realizeCauseWalk`
->    rebuilds nodes with `type: hop.type || 'event'` and classifies them against its
->    OWN `ADVERSATIVE_TYPES` vocabulary, which is not the edge-warrant vocabulary.
->    Nothing there reads `poolForLink`, so no false claim can be composed from the
->    omission; whether that register should also prefer the ledger's type is a
->    design question for the discourse lane, not a repair.
-> 2. **THE WALKER IS RED ESTATE-WIDE AND STAYS THAT WAY.** 44 test files exceed
->    their frozen un-anchored ceilings at HEAD. This lane closes exactly one of
->    them — the one it owed. The rest is the EP burn-down worklist and is not
->    CF-2's to spend.
-> 3. **`refused` / `breached` / `dissolved` STILL HAVE NO LIVE-PATH PIN.** Only
->    `exposed` is pinned end-to-end. The other three now travel the identical code
->    path through `edgeTypeOf`, so the fix is proven for the class; a per-pool
->    fixture each would pin the REGEX rather than the plumbing, and the regexes are
->    already pinned synthetically.
+- **THE JOIN DERIVATION IS NOT WRITTEN** — deliberately. `causalDossierProse` renders only joins it is handed; deriving them from `causes[]` / `sourceEventId` / CW-0's `receiptField` map is the caller's job, because a reader able to select a family from a band would let the page invent history — which is why the module has no path to state at all.
+- **DS-ECO-1's RUNG CUT** (by delegation, veto open). The annex names "a high rung / the middle rungs / a low rung" and leaves the boundary to the implementer; it is set at low = Subsistence–Poor, middle = Moderate–Comfortable, high = Prosperous–Wealthy.
+- **THE SLOTS-LINE READING IS RECORDED, NOT ENFORCED TO ZERO.** Several blocks use a cluster-minted slot without restating it on their own SLOTS line. The reader treats an undeclared slot exactly as a declared one, so this is corpus hygiene rather than a runtime hazard; the contract test ratchets the count downward only.
 
-> **WAVE SP-A — THE PURE FOUNDATIONS: THE SHARED SHAPES ARE MINTED, AND THE CENSUS
-> FOUND MORE LADDERS THAN THE CHARTER KNEW ABOUT, 2026-08-04.** One commit on
-> `claude/composite-r4` in the minifold worktree, nothing pushed. No flag: the two
-> leaves are imported by nothing at land time — dark by construction, the lane-P
-> precedent — and ZERO existing source files were edited.
->
-> | What landed | Where |
-> |---|---|
-> | **THE BANDED-STOCK FAMILY (SP-5b).** One half-life ladder — `a_season` 13 · `a_year` 52 · `a_few_years` 156 · `a_decade` 520 · `a_generation` 1040 — DERIVED from `INTERVAL_WEEKS` rather than hand-keyed, and every rung a duration the tree already keeps memory on. One decay shape. One crossing-receipt grammar that refuses any non-integer number, so L5 is structural rather than hoped for. | `src/domain/worldPulse/bandedStock.js` (100 effective) |
-> | **THE TWO BAND FAMILIES (SP-6a/6b).** Significance `routine / notable / major` with the section-cap and significance-floor shapes; the severity ladder `glancing / telling / grave / ruinous`. [RULED 2026-10-16 (coherence fold §5) — two rungs here are homonyms: "telling" (see the bracket at :380) and "grave", which is also rumorNetwork.js:245's rumor magnitude (faint/notable/serious/grave); both rungs stand, and prose says "a grave rumor" never for severity.] | `src/domain/worldPulse/bandFamilies.js` (41 effective) |
-> | **THE RECONCILIATION WALKER + THE MINT SCANS.** Bands-line ↔ tuning-table totality both directions with a shrink-only backlog; the SP no-term-literal scan; J-FP-2's pressure-ladder mint census. | `tests/lint/{spBandFamilies,spTermLiteral,pressureLadderMints}.walker.test.js` |
-> | The progress record. | `<this row>` |
->
-> **THE ANTI-RATCHET GUARANTEE IS ASSERTED ONCE, OVER THE SHAPE.** Fifteen call sites
-> spell `Math.pow(0.5, age / halfLife)` by hand today, each promising individually
-> that its stock relaxes toward neutral. The property — never further, never past,
-> strictly closer with any real time elapsed, unchanged at zero, monotone in time —
-> is now a grid property over the one function, with three EXECUTED mutants proving
-> the pair of clauses is load-bearing: a stock that never decays fails ONLY
-> `strictly-closer` (which is the ratchet, exactly), one that overshoots fails
-> `never-past`, one that grows fails `never-further`.
->
-> **⚠⚠ TWO CENSUS PREMISES WERE REFUTED. Both are reported to the chair, and neither
-> was built upon.**
->
-> 1. **`routine` IS LIVE IN THE TREE.** The compiled architecture (§2a class 4) and the
->    CW architecture (S15) both record the ruled significance vocabulary as two-valued
->    and `routine` as absent until SP-6a mints it. It is authored on live kind rows in
->    `eventProse.js` — `war_culture_suppressed`, `lineage_claim_suppressed`,
->    `trajectory_misread`, `envoy_on_the_road` — and read by four news composers
->    (`dispositionNews`, `envoyNews`, `warCostsNews`, `lineageNews`). SP-6a is
->    therefore a BORROW, not a mint: the family adopts the three words the estate
->    already speaks and mints only the frozen order, the rank and the two shapes. Had
->    it been minted two-valued, those rows would have been outside their own canonical
->    vocabulary from the first commit. A pin asserts the family covers every
->    significance any live registry speaks, and it DISCOVERS the registries from the
->    module's exports rather than transcribing them. **CW-1 is unblocked on this row:
->    its damping target exists and always did.**
-> 2. **THERE ARE TWO PRESSURE LADDERS, AND THE SECOND IS DECLARED NINE TIMES.** §2b
->    item 4 calls `OVERFLOW_BANDS` "THE ONE pressure ladder". True of CAPACITY
->    pressure — one authority, exactly as ruled. Not true of the tree: the INTENSITY
->    ladder `{quiet, present, pressing, decisive}` (± an `unknown` head) is declared in
->    NINE files under EIGHT names — `negotiationPictures`, `conquestFeasibility`,
->    `conquestIntent`, `envoyNegotiationPictureBuilder`, `conquestDoctrineStage`,
->    `compromiseRound`, `envoyErrandVocabulary`, `warCosts`, `warTermination`. Reusing
->    one intensity vocabulary across nine subjects is good design; declaring it nine
->    times is the per-volume-minting problem on the class the runaway's lesson makes
->    most dangerous. SP-A does not consolidate them — every one is a war-lane file,
->    several at or near the size ceiling, and this wave's charter is zero existing-src
->    edits — so the set is FROZEN SHRINK-ONLY and all nine are pinned to spell the SAME
->    rungs. The first copy to drift reds and names itself. `pressed` (capacity) and
->    `pressing` (intensity) already differ by one letter across two ladders, so the two
->    vocabularies are pinned disjoint from live imports.
->
-> **THE SEVERITY LADDER IS A GENUINE MINT, AND THE MINT RECORDS WHAT IT LOOKED FOR**
-> (J-WR-10-B). Five severity spellings were measured and not one grades an OUTCOME:
-> `historyBeats` SEVERITY_RANK is module-private and grades authored generator history
-> (and its `major` is the significance family's top class); `activeConditions` /
-> `threatProfile` SEVERITY_BANDS band a 0..1 scalar for an ongoing STATE;
-> `structuralFingerprint` is the analytics plane; `heraldFilter` is display and its
-> bottom rung IS `routine`; `data/constants` SEVERITY is a validation-issue KIND enum,
-> not a ladder. Nothing was borrowable, so four rungs were minted that were measured to
-> appear as quoted literals ZERO times anywhere under `src/` — reading the wrong ladder
-> is now impossible by SPELLING rather than by discipline, and a walker keeps it so.
->
-> **RECEIPTS.** 58/58 across the five suites (`gate-tail` exit 0). Domain strict green
-> at 1313/1313 with both leaves strict-clean. `sizeBaseline` green — both leaves are
-> far under the 800 layer ceiling and take no baseline entry. FOUR NEGATIVE CONTROLS
-> EXECUTED, each restored from a `cp` backup and hash-verified md5-identical (or, for
-> the planted file, deleted in the same shell), with an attribution control returning
-> 58/58 afterwards: a fourth band in the Bands line reds the forward direction; deleting
-> a §7 row reds the reverse; a term-family literal appended to `bandedStock.js` reds two
-> tests in the no-term-literal scan; a tenth intensity declaration reds three tests in
-> the pressure census at once. `tests/lint` reds at base were attributed against a
-> `git archive` of this lane's start HEAD `99d63d92` with `node_modules` symlinked:
-> `negativeAssertionAnchor` is red at base on `tests/generators/settlementOriginProse.test.js`
-> (lane MD's, unchanged since the archive), and `controlBytes` / `mutationCoverageManifest`
-> were GREEN at base and were red in the live tree for a window on the concurrent CW-0w
-> lane's then-untracked `tests/lint/couplingDesk.walker.test.js` — **a raw NUL at 112:52,
-> the Write-tool escape class biting a seventh time, plus a missing manifest entry.**
-> Observed and reported, never touched: another lane's in-flight file. That lane cured
-> both in its own commit `03dee5fd` before this wave committed, and the final
-> verification run here is green on all seven suites.
->
-> **ALIGNMENT LINE (req 13): DECLARED-EMPTY, WITH REASON.** Both leaves are pure
-> vocabulary and shape. They read no world state, name no settlement, and colour no
-> verb, so neither alignment axis is engaged in either direction. Consumers that colour
-> a verb by alignment do so in their own volumes under req 13.
->
-> **EDIT VERB (req 14): ENGINE-ONLY, RECORDED.** These are authored constants under the
-> owner's tuning signature (§7 carries all three rows), not player- or DM-editable
-> state. A DM-set half-life or a DM-set significance scale would be a stored opinion
-> the pacing governor and every instance would immediately fight; the DM's hand on
-> these arrives through J-D12's era presets, which is the owner's designed instrument
-> for exactly this.
->
-> **WHAT THIS WAVE DELIBERATELY DID NOT DO** — recorded so no one re-finds it as a bug:
->
-> 1. **NO BANDING PRIMITIVE IN `bandedStock.js`.** A stock's band EDGES are a
->    per-instance §7 tuning row, and a shared edges table would mint a vocabulary this
->    wave has no authority to author. Instances band through their own tables and hand
->    the family the resulting band WORDS.
-> 2. **THE SIGNIFICANCE MIGRATION IS SP-E's.** `heraldFeed.js:95` still mixes a banded
->    `significance === 'major'` with a raw `severity >= 0.72` float, and every consumer
->    still spells the classes inline. [CORRECTED 2026-10-16 (coherence fold) — the address moved to heraldFeed.js:120 at 00b648c9d; the premise still holds — SP-E's named migration is still owed.] This wave supplies the thing they migrate ONTO
->    and edits no existing source; SP-E lands the census that names the debt, and each
->    surface migrates in its own small wave.
-> 3. **THE FREQUENCY-CADENCE MAPPING IS NOT EXPORTED.** SP-E's floor walker derives a
->    kind's variant floor from its own significance; the cadence-class boundaries are
->    SP-E's §7 row, so `bandFamilies.js` deliberately stops at the scale and its two
->    shapes rather than pre-empting them.
-> 4. **THE NINE INTENSITY DECLARATIONS ARE FROZEN, NOT CONSOLIDATED.** See above. The
->    consolidation is a war-lane edit across nine files and belongs to whoever owns
->    that surface; the ratchet makes it a win to be banked rather than a chore to be
->    re-discovered.
+**SP-A THE PURE FOUNDATIONS** (landed with no flag: the two leaves were imported by nothing at land time — dark by construction — and no existing source file was edited):
+
+- **THE BANDED-STOCK FAMILY (SP-5b)**, `src/domain/worldPulse/bandedStock.js`: one half-life ladder — `a_season` 13 · `a_year` 52 · `a_few_years` 156 · `a_decade` 520 · `a_generation` 1040 — DERIVED from `INTERVAL_WEEKS` rather than hand-keyed, every rung a duration the tree already keeps memory on; one decay shape; one crossing-receipt grammar that refuses any non-integer number, so L5 is structural rather than hoped for. THE ANTI-RATCHET GUARANTEE IS ASSERTED ONCE, OVER THE SHAPE: never further, never past, strictly closer with any real time elapsed, unchanged at zero, monotone in time — a grid property over the one function, where fifteen call sites spell `Math.pow(0.5, age / halfLife)` by hand. NO BANDING PRIMITIVE IN `bandedStock.js`: a stock's band EDGES are a per-instance §7 tuning row, and a shared edges table would mint a vocabulary SP-A had no authority to author; instances band through their own tables and hand the family the resulting band WORDS.
+- **THE TWO BAND FAMILIES (SP-6a/6b)**, `src/domain/worldPulse/bandFamilies.js`: significance `routine / notable / major` with the section-cap and significance-floor shapes; the severity ladder `glancing / telling / grave / ruinous`. SP-6a IS A BORROW, NOT A MINT: `routine` is live in the tree — authored on live kind rows in `eventProse.js` (`war_culture_suppressed`, `lineage_claim_suppressed`, `trajectory_misread`, `envoy_on_the_road`) and read by four news composers (`dispositionNews`, `envoyNews`, `warCostsNews`, `lineageNews`) — so the family adopts the three words the estate already speaks and mints only the frozen order, the rank and the two shapes; a pin asserts the family covers every significance any live registry speaks, DISCOVERING the registries from the module's exports rather than transcribing them, and CW-1's damping target exists. THE SEVERITY LADDER IS A GENUINE MINT (J-WR-10-B): five severity spellings were measured and not one grades an OUTCOME (`historyBeats` SEVERITY_RANK is module-private and grades authored generator history, and its `major` is the significance family's top class; `activeConditions` / `threatProfile` SEVERITY_BANDS band a 0..1 scalar for an ongoing STATE; `structuralFingerprint` is the analytics plane; `heraldFilter` is display and its bottom rung IS `routine`; `data/constants` SEVERITY is a validation-issue KIND enum), so four rungs were minted that appear as quoted literals ZERO times under `src/` — reading the wrong ladder is impossible by SPELLING rather than by discipline, and a walker keeps it so. Two rungs are homonyms (the fold §5): "telling" (§2 SP-6, THE TWO REGISTERS) and "grave", which is also rumorNetwork.js:245's rumor magnitude (faint/notable/serious/grave); both rungs stand, and prose says "a grave rumor" never for severity.
+- **THE RECONCILIATION WALKER + THE MINT SCANS** (`tests/lint/{spBandFamilies,spTermLiteral,pressureLadderMints}.walker.test.js`): Bands-line ↔ tuning-table totality both directions with a shrink-only backlog; the SP no-term-literal scan; J-FP-2's pressure-ladder mint census.
+- **THERE ARE TWO PRESSURE LADDERS.** CAPACITY pressure's `OVERFLOW_BANDS` is the one capacity authority, exactly as ruled. The INTENSITY ladder `{quiet, present, pressing, decisive}` (± an `unknown` head) is declared in NINE files under EIGHT names — `negotiationPictures`, `conquestFeasibility`, `conquestIntent`, `envoyNegotiationPictureBuilder`, `conquestDoctrineStage`, `compromiseRound`, `envoyErrandVocabulary`, `warCosts`, `warTermination`; reusing one intensity vocabulary across nine subjects is good design, declaring it nine times is the per-volume-minting problem, so the set is FROZEN SHRINK-ONLY and all nine are pinned to spell the SAME rungs (the first copy to drift reds and names itself), and `pressed` (capacity) and `pressing` (intensity) are pinned disjoint. The consolidation is a war-surface edit across nine files and belongs to whoever owns that surface.
+- **ALIGNMENT LINE (requirement 13): DECLARED-EMPTY, WITH REASON.** Both leaves are pure vocabulary and shape: they read no world state, name no settlement, and colour no verb, so neither alignment axis is engaged in either direction; consumers that colour a verb by alignment do so in their own volumes. **EDIT VERB (requirement 14): ENGINE-ONLY, RECORDED.** These are authored constants under the owner's tuning signature (their §7 tuning rows), not player- or DM-editable state: a DM-set half-life or a DM-set significance scale would be a stored opinion the pacing governor and every instance would immediately fight; the DM's hand on them arrives through J-D12's era presets (SP-8), the owner's designed instrument for exactly this.
+- **THE SIGNIFICANCE MIGRATION IS SP-E's.** heraldFeed.js:120 (at `00b648c9d`) still mixes a banded `significance === 'major'` with a raw `severity >= 0.72` float, and every consumer still spells the classes inline; SP-A supplies the thing they migrate ONTO, SP-E lands the census that names the debt, and each surface migrates in its own small wave. THE FREQUENCY-CADENCE MAPPING is SP-E's §7 row: SP-E's floor walker derives a kind's variant floor from its own significance, so `bandFamilies.js` stops at the scale and its two shapes.
