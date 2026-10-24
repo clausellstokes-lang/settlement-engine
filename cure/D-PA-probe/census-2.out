@@ -1,0 +1,11 @@
+token                         src  tests   docs ledger
+crossOutPastFact                0      0      0      0
+changePastFact                  0      0      0      0
+confirmPastFact                 0      0      0      0
+rerollPastFact                  0      0      0      0
+rerollRealmPast                 0      0      0      0
+undoPastChoice                  0      0      0      0
+changed_at_inking               0      0      0      0
+reference_lost                  0      0      0      0
+record_disagrees                0      0      0      0
+PAST_TALE_SIGNIFICANCE          0      0      0      0

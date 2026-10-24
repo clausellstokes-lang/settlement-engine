@@ -1,0 +1,5 @@
+  579 src/components/SettlementsPanel.jsx
+  585 src/components/SettlementDetail.jsx
+   56 src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx
+  558 src/components/map/WorldPulsePanel.jsx
+  316 src/components/new/tabs/HistoryTab.jsx

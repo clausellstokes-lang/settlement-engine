@@ -1,0 +1,9 @@
+  600 src/components/OutputContainer.jsx
+  316 src/components/new/tabs/HistoryTab.jsx
+  579 src/components/SettlementsPanel.jsx
+  585 src/components/SettlementDetail.jsx
+   56 src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx
+  558 src/components/map/WorldPulsePanel.jsx
+   18 src/components/map/useRealmEntityNav.js
+  501 src/store/mapSlice.js
+   47 src/hooks/useRoute.js

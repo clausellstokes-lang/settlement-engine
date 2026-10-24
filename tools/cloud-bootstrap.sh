@@ -1,11 +1,13 @@
 #!/bin/bash
 # CLOUD BOOTSTRAP — run once in a fresh cloud checkout of settlement-engine (default branch master).
-# It fetches the FP ledger branch, unpacks the kit from its pushed preserve ref, creates the detached
+# It fetches the FP ledger branch, unpacks the kit from its pushed seal (a branch under preserve/, or a refs/preserve/* ref), creates the detached
 # code-of-record worktree at master's sha, and links node_modules for the docs proof. READ IT FIRST.
 set -eu
 REPO="${1:-$PWD}"; cd "$REPO"
-KITREF="${2:-refs/preserve/fp-final-kit-a73343ed-2026-10-21c}"
-git fetch origin review-fixes-2026-07-08 "$KITREF:$KITREF" 2>/dev/null || git fetch origin review-fixes-2026-07-08
+# Since 2026-10-23 the kit seal is pushed as a BRANCH (a cloud session's git proxy refuses pushes outside refs/heads, HTTP 403):
+# the default is the branch preserve/fp-final-kit-a73343ed-2026-10-23; an older refs/preserve/* seal still works when passed explicitly.
+KITREF="${2:-refs/heads/preserve/fp-final-kit-a73343ed-2026-10-23}"
+git fetch origin review-fixes-2026-07-08 "+$KITREF:$KITREF" 2>/dev/null || git fetch origin review-fixes-2026-07-08
 mkdir -p ../settlement-engine-kits/fp-final-a73343ed-2026-10-17
 git archive "$KITREF" | tar -x -C ../settlement-engine-kits/fp-final-a73343ed-2026-10-17
 KIT="$(cd ../settlement-engine-kits/fp-final-a73343ed-2026-10-17 && pwd)"

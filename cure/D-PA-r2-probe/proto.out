@@ -1,0 +1,10 @@
+  600 src/components/OutputContainer.jsx 
+  600 proto/src/components/OutputContainer.jsx 
+  316 src/components/new/tabs/HistoryTab.jsx 
+  319 proto/src/components/new/tabs/HistoryTab.jsx 
+   56 src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx 
+   56 proto/src/components/settlementDetail/SettlementDetailLinkNeighbourCard.jsx 
+  585 src/components/SettlementDetail.jsx 
+  585 proto/src/components/SettlementDetail.jsx 
+  579 src/components/SettlementsPanel.jsx 
+  587 proto/src/components/SettlementsPanel.jsx 

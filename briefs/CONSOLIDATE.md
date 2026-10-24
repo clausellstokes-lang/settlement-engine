@@ -36,3 +36,7 @@
 The gate list is the owner's (push · merge · deploy · migration · dispatch). The code of record is READ-ONLY. Two seats never own one file. Save as you go; stop and report at ~300k tokens saying which section is next. REPORT DIET ≤ 350 words + ONE table (section · old brackets folded · dropped · moved · STOPs). Structured return as the script lists. A lane that cannot keep a count equal says so in the ledger — never pads, never trims silently.
 
 **AMENDMENT (the cloud chair, 2026-10-23, SEAMS-P8-12, by delegation, vetoable):** to §3 (e) — a date or clock stamp ON A VERBATIM QUOTE OF THE OWNER'S WORDS is an allowed class in the running text (the stamp is the quote's provenance: "the owner's 22:51 word"); every other date stays in the header and the rulings tables only.
+
+**AMENDMENT (the cloud chair, 2026-10-23/24, by delegation, vetoable; the fold §7 OD-FC-128 and OD-FC-133):**
+- **THE AMENDMENT LAW AFTER P8.** A consolidated text (the fourteen program volumes, the fold, the spine and CN) is amended IN PLACE in final form, never by a dated bracket in its running text. The date goes to its rulings table, and the ODQ section records the change. The landed volumes keep the insertions-only law.
+- **THE PRONOUN RULE.** No gendered pronoun is used for the owner, whose pronouns have never been stated, or for the DM, a role. In-world persons keep theirs, and verbatim quotes are untouched.
