@@ -63,6 +63,7 @@ describe('ServicesTab — the counts strip', () => {
     expect(text.split('Not available').length - 1, 'the absence is said more than once').toBe(1);
     for (const cut of ['3 missing', 'Category Status', 'not available', 'No impairments',
       'look elsewhere', '4 services · 3 categories']) {
+      // anchored: the strip is proven above to render its exact Not-available line, said once.
       expect(text, `the cut block "${cut}" is back`).not.toContain(cut);
     }
   });

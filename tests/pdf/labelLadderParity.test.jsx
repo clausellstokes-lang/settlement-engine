@@ -393,12 +393,14 @@ describe('the paid document descends the same label ladder as the screen', () =>
       }
       for (const retired of ['Magic', 'Transport', 'Legal', 'Criminal']) {
         expect(svcLeaves, `${town}: the print still uses its retired category word "${retired}"`)
+          // anchored: svcLeaves is proven above to carry every present category label (more than three).
           .not.toContain(retired);
       }
       // RS-18: the chapter's coaching headline is cut (R1), and the absences callout names a
       // category exactly as a card title would. Driven with a planted absence so the arm does
       // not depend on this fixture town lacking anything.
       expect(svcLeaves.join(' '), `${town}: the coaching headline is back`)
+        // anchored: svcLeaves is proven above to carry every present category label (more than three).
         .not.toContain('Match a need to the right counter');
       const absentLeaves = collectStyled(Services({
         settlement: settlements.get(town), narrativeMode: false, stateProse: null,

@@ -89,6 +89,7 @@ describe('the institution card on the Services tab', () => {
     expect(proxied.length, 'the fixture city surfaced nothing through a proxy host').toBeGreaterThan(0);
     for (const svc of proxied) {
       expect(container.textContent, `the proxied row "${svc.name}" did not render`).toContain(svc.name);
+      // anchored: the line above proves this proxied row's name renders on the same page.
       expect(container.textContent, `"${svc.name}" still credits its proxy host`).not.toContain(svc.institution);
     }
 

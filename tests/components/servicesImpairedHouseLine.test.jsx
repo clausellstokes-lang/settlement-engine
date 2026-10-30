@@ -243,8 +243,10 @@ describe('ServicesTab — the impaired house is named where its row is', () => {
     });
     expect(completeMembers.length).toBeGreaterThan(0);
     for (const member of completeMembers) {
+      // anchored: the pool is proven non-empty above and this render is proven live by "Town crier".
       expect(container.textContent, 'the complete-catalog lens still speaks').not.toContain(member.slice(12, 60));
     }
+    // anchored: the same render is proven live above ("Town crier" renders).
     expect(container.textContent).not.toContain('Not available');
   });
 });
