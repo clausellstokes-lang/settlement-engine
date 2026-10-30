@@ -140,11 +140,15 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 71,266 -> 71,268 at the druid rulings' re-record (2026-10-01, §934.86 addendum 2): Warden's Lodge's
     // towns compose two more cells. 71,268 -> 71,262 at J33's re-record (2026-10-01, the same rulings): a magic town
     // holding the lodge loses the druid readings it alone had opened, and six cells with them.
+    // 71,262 -> 70,230 (404/400/390 -> 400/394/384) at service category fidelity (2026-10-30, ODQ §934.101,
+    // docs/shift-records/2026-10-30-service-category-fidelity.json): DS-SUP-3's catalog lens now composes only
+    // on an INCOMPLETE catalog (RS-15), and the re-filed services complete many towns' catalogs (a false
+    // Transportation absence gone), so those towns lose that cell. Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 71_262, towns: 516 },
-      'gm-seed-a': { cells: 404, towns: 3 },
-      'gm-seed-b': { cells: 400, towns: 3 },
-      'gm-seed-c': { cells: 390, towns: 3 },
+      'golden-master-v3': { cells: 70_230, towns: 516 },
+      'gm-seed-a': { cells: 400, towns: 3 },
+      'gm-seed-b': { cells: 394, towns: 3 },
+      'gm-seed-c': { cells: 384, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
