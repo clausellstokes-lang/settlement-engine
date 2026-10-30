@@ -8,6 +8,9 @@
  *   • Each Deep-constraints section keeps its wizard STEP ID and fires
  *     wizard_step_viewed when opened (funnel analytics continuity).
  *   • The premium "Place in Region" close-out card renders.
+ *   • ONE HOST (owner, 2026-10-30: "you repeat some blocks twice"): with the REAL
+ *     ConfigurationPanel mounted, the Character card and the Place in Region card
+ *     each appear once, and Basic carries no priority sliders.
  */
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
@@ -21,14 +24,27 @@ vi.mock('../../src/lib/analytics.js', () => ({
 
 // Stub the heavy content panels to bare markers. ConfigurationPanel echoes its
 // showFineTune prop so the Basic/Advanced gating is assertable.
-vi.mock('../../src/components/ConfigurationPanel.jsx', () => ({ default: ({ showFineTune }) => <div data-testid="configuration-panel" data-fine-tune={String(showFineTune)}>foundations</div> }));
+// `__realInner` swaps the stubs for the REAL ConfigurationPanel + CharacterPresetCard
+// so the one-card-per-panel pin below sees every mount the real tree makes.
+let __realInner = false;
+vi.mock('../../src/components/ConfigurationPanel.jsx', async (importOriginal) => {
+  const Real = (await importOriginal()).default;
+  return { default: (props) => (__realInner
+    ? <Real {...props} />
+    : <div data-testid="configuration-panel" data-fine-tune={String(props.showFineTune)}>foundations</div>) };
+});
 vi.mock('../../src/components/InstitutionalGrid.jsx', () => ({ default: () => <div data-testid="institutions-panel" /> }));
 vi.mock('../../src/components/ServicesTogglePanel.jsx', () => ({ default: () => <div data-testid="services-panel" /> }));
 vi.mock('../../src/components/TradeDynamicsPanel.jsx', () => ({ default: () => <div data-testid="trade-panel" /> }));
 // CharacterPresetCard + PlaceInRegionCard read the store; render real wrappers
 // over a store mock so the cards mount. CharacterPresetCard echoes its `advanced`
 // prop so the mobile-defer (Advanced chips/sliders -> Basic chip-only) is assertable.
-vi.mock('../../src/components/generate/CharacterPresetCard.jsx', () => ({ default: ({ advanced }) => <div data-testid="character-preset-card" data-advanced={String(advanced)} /> }));
+vi.mock('../../src/components/generate/CharacterPresetCard.jsx', async (importOriginal) => {
+  const Real = (await importOriginal()).default;
+  return { default: (props) => (__realInner
+    ? <div data-testid="character-preset-card" data-advanced={String(props.advanced)}><Real {...props} /></div>
+    : <div data-testid="character-preset-card" data-advanced={String(props.advanced)} />) };
+});
 vi.mock('../../src/components/generate/PlaceInRegionCard.jsx', () => ({ default: () => <div data-testid="place-in-region-card" /> }));
 
 // useIsMobile is a controllable mock: __mobileFlag drives the reactive flag so a
@@ -135,6 +151,36 @@ describe('LayeredConfigurationPanel — Create reorg', () => {
     expect(screen.queryByText('Available Services')).toBeNull();
     expect(screen.queryByText('Trade Dynamics')).toBeNull();
     expect(screen.queryByTestId('place-in-region-card')).toBeNull();
+  });
+
+  // ── ONE HOST (owner, 2026-10-30) ───────────────────────────────────────
+  // ConfigurationPanel used to mount its OWN CharacterPresetCard (always the
+  // Advanced form) and its OWN PlaceInRegionCard beneath Foundations, so Create
+  // showed both cards twice and Basic leaked the Advanced priority sliders. The
+  // layered panel is the one host; the real inner panel must add neither card.
+  describe('one host: each card mounts once (real ConfigurationPanel)', () => {
+    beforeEach(() => { __realInner = true; });
+    afterEach(() => { __realInner = false; });
+
+    it('Basic: one Character card in its chip-only form, no sliders, no Place in Region', () => {
+      render(<LayeredConfigurationPanel mode="basic" />);
+      // anchored: the real Foundations controls are on the page.
+      expect(screen.getByLabelText('Settlement Name (optional)')).toBeTruthy();
+      const cards = screen.getAllByTestId('character-preset-card');
+      expect(cards.map((c) => c.getAttribute('data-advanced'))).toEqual(['false']);
+      expect(screen.getAllByText('Theocracy')).toHaveLength(1);
+      expect(screen.queryByLabelText('Economy'), 'Basic leaked the Advanced priority sliders').toBeNull();
+      expect(screen.queryByTestId('place-in-region-card')).toBeNull();
+    });
+
+    it('Advanced: one Character card with its sliders, one Place in Region card', () => {
+      render(<LayeredConfigurationPanel mode="advanced" />);
+      expect(screen.getByLabelText('Settlement Name (optional)')).toBeTruthy();
+      const cards = screen.getAllByTestId('character-preset-card');
+      expect(cards.map((c) => c.getAttribute('data-advanced'))).toEqual(['true']);
+      expect(screen.getAllByLabelText('Economy')).toHaveLength(1);
+      expect(screen.getAllByTestId('place-in-region-card')).toHaveLength(1);
+    });
   });
 
   // ── Mobile pass (Phase 5) ────────────────────────────────────────────────
