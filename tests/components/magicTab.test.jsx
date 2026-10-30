@@ -49,6 +49,16 @@ describe('MagicTab — the 10-facet magic profile', () => {
     expect(container.textContent).toContain(posture.display);
   });
 
+  test('UX consolidation (T2-26): the headline is the posture word and does not restate the envelope', () => {
+    const { container } = render(<MagicTab settlement={liveMagicTown} />);
+    const posture = deriveMagicPosture(liveMagicTown);
+    const headline = container.querySelector('[data-testid="magic-tab"] > p');
+    expect(headline.textContent).toBe(posture.display);
+    expect(headline.textContent.split(/\s+/)).toHaveLength(1);
+    expect(container.querySelectorAll('[data-facet]')).toHaveLength(6);
+    expect(container.textContent).not.toMatch(/services, \w+ risk/); // anchored: the six facets are asserted on this render above
+  });
+
   test('a dead-magic world says so and shows no envelope/roles', () => {
     const { container } = render(<MagicTab settlement={deadMagicTown} />);
     expect(container.textContent).toMatch(/Magic does not function/i);

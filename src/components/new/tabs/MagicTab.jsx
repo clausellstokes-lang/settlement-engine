@@ -89,7 +89,10 @@ export default function MagicTab({ settlement }) {
             </NameColumns>
           </div>
 
-          {/* The 4 role lines. */}
+          {/* The 4 role lines. ⚠ RULINGS-T2 T2-15 brings Outlook's magic-dependence block here as
+              this section's framing; that move is HELD because this tab receives no
+              publicDossier/playerView from OutputContainer and the block carries DS-DEF-9, a paid
+              corpus surface (registry walker ARM 3). The block stays, merged, on Outlook. */}
           <div style={{
             background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
           }}>

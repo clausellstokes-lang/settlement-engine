@@ -110,7 +110,14 @@ const PANEL_MIN_CHARS = 100;
  * A view belongs here ONLY when its emptiness is a fact about the fixture rather
  * than about the dossier, and the reason must say which. Empty today: none.
  */
-const EMPTY_VIEWS = Object.freeze({});
+const EMPTY_VIEWS = Object.freeze({
+  // 2026-10-30, UX consolidation U4 (RULINGS-T2 T2-26): the Magic page's one long line was the
+  // posture sentence restating the envelope; it is now the posture WORD. Every remaining line
+  // (facet labels and values, "Economic role: moderate") is under the walk's forty-five-character
+  // measuring length, so the view renders (PANEL_MIN_CHARS still proves the chunk resolved)
+  // and contributes nothing to MEASURE. The emptiness is the page's shape, stated here.
+  'Systems/Magic': 'every line is shorter than the measuring length since the posture sentence became a word (T2-26)',
+});
 
 // A REAL pipeline settlement, not a hand fixture: the desks compose their prose
 // from generated state, and a thin fixture renders labels with nothing under
@@ -541,7 +548,8 @@ const DESKTOP_BASELINE = Object.freeze({
   // (moved to Versions) left the page; no token moved.
   "Systems/Outlook":     { measured:  2, sub14:  2 },
   "Systems/Causes":      { measured:  2, sub14:  2 },
-  "Systems/Magic":       { measured:  1, sub14:  1 },
+  // 1 -> 0 (2026-10-30, UX consolidation U4, T2-26): see EMPTY_VIEWS.
+  "Systems/Magic":       { measured:  0, sub14:  0 },
   "World/NPCs":          { measured: 45, sub14: 45 },
   "World/Relationships": { measured: 63, sub14: 63 },
   "World/Faith":         { measured:  1, sub14:  1 },
@@ -597,7 +605,8 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
   "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 1 -> 0 (2026-10-30, UX consolidation U4): see EMPTY_VIEWS.
+  "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 },
   "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 61, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },

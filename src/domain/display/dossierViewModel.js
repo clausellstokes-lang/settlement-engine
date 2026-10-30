@@ -475,9 +475,14 @@ export function deriveMagicPosture(settlement) {
     risk: m.risk,
     religiousAcceptance: m.religiousAcceptance,
     roles: { ...m.roles },
+    // ⭐ THE POSTURE WORD, NOT A SENTENCE OF FACETS (UX consolidation 2026-10-30, RULINGS-T2
+    // T2-26; RUBRIC R2). It used to read `Availability <a>: <legality>, <cost> services, <risk>
+    // risk`, one line above the envelope that prints those four facets (750 of 750 magic
+    // worlds). The envelope owns the facets; the headline keeps the one word. A dead-magic
+    // world keeps its sentence, because there the line IS the page.
     display: m.magicExists === false
       ? 'Magic does not function in this world'
-      : `Availability ${m.availability}: ${m.legality}, ${m.cost} services, ${m.risk} risk`,
+      : String(m.availability || '').charAt(0).toUpperCase() + String(m.availability || '').slice(1),
     roleLines: Object.entries(m.roles).map(([role, band]) => `${MAGIC_ROLE_LABEL[role] || role} role: ${band}`),
   };
 }
