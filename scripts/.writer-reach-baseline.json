@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "987602c075211af39677a11d1b148b00140ccbae",
+ "frozenAtSha": "1db1d3499164f8f861705ba4d2dbc8d5fb13443c",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "e36cf71103fc60ef3095e8e77b0e1f34f2f10aa33b9ec95e0a178f389be22c18",
  "detectorDigest": "36a177190ffb8672286ee01010f4aa5dafc1e872adc3d950345e191953adafff",
- "verdictDigest": "0bc0ffd6b1db400000f6f3bcd898a62eca808ead8b832a3ed6ac89803eb6a118",
+ "verdictDigest": "2c2524093c10de133f35c6eff63a82100ca37455ccddae4a3b48160d5c7a5008",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 734,
+  "web-display": 735,
   "web-transitive": 931,
-  "dossier-pdf": 431,
+  "dossier-pdf": 432,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 340,
@@ -91,15 +91,15 @@
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1666,
-  "sites": 39391,
-  "propRead": 37286,
+  "files": 1667,
+  "sites": 39471,
+  "propRead": 37366,
   "elemRead": 0,
   "destructure": 2090,
   "inOp": 15,
-  "rGrades": 5991,
-  "nGrades": 955459,
-  "resolvedReceivers": 6767
+  "rGrades": 5992,
+  "nGrades": 958139,
+  "resolvedReceivers": 6768
  },
  "registerDigest": "62483840445536e2f843f6ab9cce5d9d2dc7e0f794bc6f41d7ed323e7faa14ef",
  "pendingSurfaceCeiling": 3,
@@ -9285,7 +9285,7 @@
   "category on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "corrupt on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "corruptTies on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "corruptionVector on members": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
+  "corruptionVector on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "factionAffiliation on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "factionGoal on members": "",
   "gender on members": "dossier-pdf=N foundry=N web-display=N",
@@ -9466,7 +9466,7 @@
   "compromiseLifecycle on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "corrupt on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "corruptTies on npcs": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
-  "corruptionVector on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "corruptionVector on npcs": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "criminalInstitution on npcs": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "expectedReturnTick on npcs": "dossier-pdf=N foundry=N web-transitive=N",
   "exposedTick on npcs": "web-transitive=N",
@@ -14291,10 +14291,10 @@
   "archetypeKey on relationships": "",
   "description on relationships": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=N web-transitive=R world-book=R",
   "flagDriven on relationships": "dossier-pdf=R web-display=R",
-  "npc1Id on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "npc1Id on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc1Name on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc1Role on relationships": "web-display=N",
-  "npc2Id on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "npc2Id on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc2Name on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc2Role on relationships": "web-display=N",
   "strength on relationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
@@ -15142,6 +15142,13 @@
    ],
    "previousCohort": 1280,
    "cohort": 1323
+  },
+  {
+   "charter": "§934.101",
+   "sha": "1db1d3499164f8f861705ba4d2dbc8d5fb13443c",
+   "admitted": [],
+   "previousCohort": 1311,
+   "cohort": 1311
   }
  ]
 }
