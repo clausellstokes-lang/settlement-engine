@@ -501,15 +501,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
-          {/* Safety-derived plot hooks */}
-          {sp.plotHooks?.length>0&&<div>
-            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
-            <div style={{display:'flex',flexDirection:'column',gap:5}}>
-              {sp.plotHooks.map((h,i)=>(
-                <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
-              ))}
-            </div>
-          </div>}
+          {/* VERIFIER F11 (X-2): the order & crime plot hooks print on the Plot Hooks tab only. */}
 
         </div>
       </Section>

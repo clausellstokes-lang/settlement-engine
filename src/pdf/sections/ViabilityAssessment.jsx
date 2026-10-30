@@ -1,14 +1,13 @@
 /**
  * ViabilityAssessment — chapter 10. Verdict banner, magic dependency callout
  * with active magic chains, by-design contradictions, issues with suggested
- * fixes per row, warnings, structural violations, active stress with crisis
- * hooks, and key metrics.
+ * fixes per row, warnings, structural violations, active stress effects (the
+ * stress itself and its hook are the Overview crisis card's, X-3), and key metrics.
  *
  * Editable fields:
  *   - viability.summary
  *   - viability.issue.<i>.note
  *   - viability.contradiction.<i>
- *   - viability.stress.<i>.hook
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -38,7 +37,6 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
   const issues = v.issues || [];
   const warnings = (v.warnings || []).filter(Boolean);
   const violations = v.structuralViolations || [];
-  const stress = v.stress || [];
   const stressCons = v.stressConsequences || [];
   const contradictions = v.byDesignContradictions || [];
 
@@ -208,48 +206,22 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
         </View>
       )}
 
-      {/* ── Active stress + consequences ───────────────────── */}
-      {(stress.length > 0 || stressCons.length > 0) && (
+      {/* ── Active stress effects ─────────────────────────────
+          VERIFIER F18 (X-3): the stress label pills and each stress's crisis hook left this
+          chapter; the Overview's crisis card owns them. The consequences stay, the twin of the
+          screen's "Active Stress Effects". */}
+      {stressCons.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
-            ACTIVE STRESS
+            ACTIVE STRESS EFFECTS
           </Text>
-          {stress.length > 0 && (
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 4 }}>
-              {stress.map((s, i) => (
-                <Pill key={`vs-${i}`} tone="bad">{s.label || humanize(String(s))}</Pill>
-              ))}
-            </View>
-          )}
-          {stress.filter(s => s.hook).map((s, i) => (
-            <View key={`vsh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
-              <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>•</Text>
-              <View style={{ flex: 1 }}>
-                <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>
-                  {tokenCase(stripZwnj(humanize(s.label || '')))}
-                </Text>
-                <EditableText
-                  name={`viability.stress.${i}.hook`}
-                  defaultValue={typeof s.hook === 'string' ? s.hook : (s.hook?.text || s.hook?.hook || '')}
-                  style={{ ...type.body, fontSize: pt['9'] }}
-                />
-              </View>
-            </View>
-          ))}
-          {stressCons.length > 0 && (
-            <View style={{ marginTop: 3 }}>
-              <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-                CONSEQUENCES
-              </Text>
-              <BulletList
-                items={stressCons}
-                tone="bad"
-                bullet="·"
-                itemRender={(c) => label(c) || (typeof c === 'string' ? c : c?.text || '')}
-              />
-            </View>
-          )}
+          <BulletList
+            items={stressCons}
+            tone="bad"
+            bullet="·"
+            itemRender={(c) => label(c) || (typeof c === 'string' ? c : c?.text || '')}
+          />
         </View>
       )}
 

@@ -38,6 +38,7 @@ import { buildThreatAssessment } from '../../src/domain/display/threatAssessment
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -397,5 +398,25 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
 
   test('a live-magic world still draws DS-DEF-9 (the gate is the dial, not a blanket silence)', () => {
     expect(defenseMagicDependencyProse(port, opts(port)).arcaneReliance?.sentence).toBeTruthy();
+  });
+});
+
+/**
+ * VERIFIER F11 (RULINGS-CROSS X-2): hook TEXT renders only on the Plot Hooks tab. The Defense
+ * page's "Order & crime plot hooks" block is cut; the PDF Defense chapter already cut its twin
+ * (DefenseSecurity.jsx), so screen and print agree. The hooks stay collected under Safety.
+ */
+describe('F11 / X-2 — Defense prints no plot-hook text', () => {
+  test('the order & crime hooks are not on the Defense page and are still on the Plot Hooks tab', () => {
+    const hook = 'The watch sergeant at the east gate takes coin to forget a face.';
+    const s = { ...port, economicState: { ...port.economicState,
+      safetyProfile: { ...port.economicState.safetyProfile, plotHooks: [hook] } } };
+    expect(collectPlotHooks(s).some((h) => h.text === hook && h.category === 'safety'), 'the Plot Hooks tab keeps it').toBe(true);
+    const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    const marker = () => /Criminal structure:|No organized criminal infrastructure/.test(container.textContent || '');
+    if (!marker()) openSection(container, 'Criminal Architecture & Public Order');
+    expect(marker(), 'the criminal-architecture body is open on this render').toBe(true);
+    expect(container.textContent).not.toContain(hook); // anchored: the section body is asserted open above
+    expect(container.textContent).not.toContain('Order & crime plot hooks'); // anchored: same render
   });
 });

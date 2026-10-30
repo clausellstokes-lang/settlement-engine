@@ -191,6 +191,19 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
   });
 });
 
+describe('F18 / X-3 — the PDF Viability chapter does not restate the active stress', () => {
+  it('prints the stress consequences but neither the stress label pills nor the crisis hook (the Overview crisis owns them)', () => {
+    const stressVm = { ...vm, viability: { ...vm.viability,
+      stress: [{ label: 'Under siege', hook: 'The besiegers want the abbot handed over by the new moon.' }],
+      stressConsequences: [{ title: 'Grain ration halved', text: 'Grain ration halved' }] } };
+    const on = joined(ViabilityAssessment({ settlement, vm: stressVm }));
+    expect(on, 'the consequences still print').toContain('Grain ration halved');
+    expect(on).not.toContain('The besiegers want the abbot'); // anchored: the consequences block is on this render
+    expect(on).not.toContain('ACTIVE STRESS  '); // anchored: same render; the header names the effects
+    expect(on).not.toMatch(/Under siege/i); // anchored: same render
+  });
+});
+
 describe('#19 ViabilityAssessment — MAGIC LEGALITY subsection (liveWorld && magicProfile-gated)', () => {
   it('renders the legality facets for a live campaign export with functioning magic', () => {
     const liveVm = {
