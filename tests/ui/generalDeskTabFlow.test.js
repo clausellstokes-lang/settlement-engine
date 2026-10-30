@@ -293,6 +293,11 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     const line = container.querySelector('[data-testid="overview-identity-line"]')?.textContent || '';
     expect(line).toContain('Germanic-inspired, built in timber and stone, and run by guild and estate.');
     expect(line).toContain('The Burgher Council · Stable');
+    // The governing name is generated text: it wraps like the sentence it closes, never held on
+    // one line by a nowrap that would push a long council name past a phone's edge (ODQ §934.23).
+    const held = [...container.querySelectorAll('[data-testid="overview-identity-line"], [data-testid="overview-identity-line"] *')]
+      .filter((el) => el.style.whiteSpace === 'nowrap');
+    expect(held.length, 'the identity line holds the governing name on one line').toBe(0);
     cleanup();
     // A culture with no authored phrase takes no fallback: the character line stays the strip's quote only.
     const mixed = { ...town, culturalIdentity: { key: 'mixed', label: 'Germanic-inspired + Latin-inspired' } };

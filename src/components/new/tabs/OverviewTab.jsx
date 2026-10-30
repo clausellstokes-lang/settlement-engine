@@ -273,7 +273,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             governs (governing name · stability), the two glance facts the removed DM
             Summary tab alone carried. No historicalCharacter fallback for the first. */}
         {(scopeLine||governs)&&<p data-testid="overview-identity-line" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:'0 0 6px',lineHeight:1.5}}>
-          {scopeLine}{scopeLine&&governs?' ':''}{governs&&<span style={{whiteSpace:'nowrap'}}><span style={{color:MUTED}}>Governed by </span>{governs}</span>}
+          {scopeLine}{scopeLine&&governs?' ':''}{governs&&<><span style={{color:MUTED}}>Governed by </span>{governs}</>}
         </p>}
         {/* Row 2: character + spatial */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
