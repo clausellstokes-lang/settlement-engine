@@ -412,7 +412,10 @@ const ROUTE_BASELINE = Object.freeze({
   // sites left the shell's subtree. Nothing became bare; `ruled` and `bare` hold.
   // (shell) floored 137 -> 136 (W2-SURVEYOR U2): the chat shell floors its small chrome
   // through ONE chromeFontSize call shared by the turn label and the thinking line. `bare` holds.
-  '(shell)':                { roots: 1, files: 61, floored: 136, ruled: 3, bare: 0 },
+  // (shell) floored 136 -> 128 (W2-SURVEYOR U3, X-22(d)(f)): the analyst panel's box, toggle,
+  // chips, cost row and thumbs left with the panel (its reply floors its small chrome through one
+  // call), and the proposal message adds one. Nothing became bare; `ruled` and `bare` hold.
+  '(shell)':                { roots: 1, files: 61, floored: 128, ruled: 3, bare: 0 },
 });
 
 /**

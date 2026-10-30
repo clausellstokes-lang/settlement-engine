@@ -8,7 +8,7 @@
  *   2. The ring widens ONLY when the text names a wider ring (realm/product cues).
  */
 import { describe, it, expect } from 'vitest';
-import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt } from '../../src/domain/intent/doorRouter.js';
+import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt, isAcceptReply } from '../../src/domain/intent/doorRouter.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('doorRouter — destinations vocabulary', () => {
@@ -93,5 +93,34 @@ describe('doorRouter — the cue table (vetoable vocabulary, pinned)', () => {
   it('the ring widens only when named: realm cue → realm; money/plan cues → product (analyst)', () => {
     expect(routeDoorPrompt('who rules the realm?')).toEqual({ destination: 'analyst', scope: 'realm' });
     expect(routeDoorPrompt('how many credits does an answer cost?')).toEqual({ destination: 'analyst', scope: 'product' });
+  });
+});
+
+// X-22(d): with no buttons in the chat, a proposal is accepted by replying in words. The
+// question is asked ONLY of the reply that follows a proposal (SurveyorDoor.jsx); every
+// other reply goes through routeDoorPrompt like any prompt. Vetoable vocabulary, pinned.
+describe('doorRouter — the typed yes (X-22(d))', () => {
+  it('a plain yes, leading the reply, accepts', () => {
+    for (const q of ['yes', 'Yes, add it', 'yeah do it', 'yep', 'add them', 'ok', 'okay', 'sure', 'go ahead', 'yes please, add them', 'approve']) {
+      expect(isAcceptReply(q), `"${q}" accepts`).toBe(true);
+    }
+  });
+
+  it('a yes with a refusal or a condition anywhere in it does NOT accept', () => {
+    for (const q of ['yes but not the duel', 'no, add it later', 'not yet', 'yes except the fire', 'ok wait', "don't add it", 'only the first one']) {
+      expect(isAcceptReply(q), `"${q}" does not accept`).toBe(false);
+    }
+  });
+
+  it('a question or a fresh prompt is not a yes (it routes as a prompt instead)', () => {
+    for (const q of ['why?', 'add a tavern to the town', 'what about the guild', '', '   ', null, undefined, 42]) {
+      expect(isAcceptReply(q), `${JSON.stringify(q)} does not accept`).toBe(false);
+    }
+    // the anchor: the same "add" verb, as a fresh prompt, still routes through the cue table
+    expect(routeDoorPrompt('add a tavern to the town').destination).toBe('content');
+  });
+
+  it('a long reply is a prompt, not a yes, even when it starts with one', () => {
+    expect(isAcceptReply(`yes ${'and then the party went to the harbour '.repeat(3)}`)).toBe(false);
   });
 });

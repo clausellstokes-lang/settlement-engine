@@ -17,12 +17,28 @@
  *      first send grows it into a floating log in the coach's chrome (movable by its
  *      header, remembered per device, Escape and a header tap fold it to a pill, the one
  *      close retires it); the chat is non-modal.
+ *   5. X-22(d)(e)(f) — the routing goes invisible: an analyst answer and a workshop
+ *      proposal both arrive as MESSAGES in the one log; a proposal is accepted by a typed
+ *      yes and lands as PENDING decrees in the registry (edit mode owns approval), with
+ *      the protected-consent barrier holding; the audience is chosen BY PHRASE (a
+ *      player-framed question POSTs the player projection, and the reply is labelled);
+ *      the cost is one muted line under the first reply; nothing in the log is a button
+ *      except the one close.
+ *
+ * The analyst runs END TO END here, real transport and real slicers, with only the
+ * network edge (lib/supabase.js) stubbed, so the audience pins read what would be POSTed.
+ * The proposal hand-off runs the real review, the real bridge and the registry's real one
+ * write site; only the compile's network call (lib/surveyorWrite.js) is stubbed.
  *
  * The shell is presentation: it never reaches the router, a provider, or the store, and
  * its draft and the door's log live and die with the mounted door.
  */
-import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
-import { render, screen, fireEvent, cleanup, act, within, waitFor } from '@testing-library/react';
+import { describe, it, expect, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import { render, screen, fireEvent, cleanup, act, within, waitFor, configure } from '@testing-library/react';
+import { isPlayerSafeSource } from '../../src/domain/briefs/citations.js';
+
+// A reply crosses two dynamic imports and an awaited edge; give each wait room under load.
+configure({ asyncUtilTimeout: 4000 });
 
 afterEach(() => {
   cleanup();
@@ -34,11 +50,59 @@ beforeEach(() => {
   try { localStorage.clear(); } catch { /* jsdom always has it */ }
 });
 
-const { storeRef, entitledRef, mobileRef } = vi.hoisted(() => ({
+const { storeRef, entitledRef, mobileRef, invokeRef, compileRef } = vi.hoisted(() => ({
   storeRef: { current: { auth: {} } },
   entitledRef: { current: true },
   mobileRef: { current: false },
+  invokeRef: { fn: null },
+  compileRef: { fn: null },
 }));
+
+const ANSWER = {
+  answer: 'Thornwall leads a commerce sphere.',
+  claims: [{ text: 'Thornwall leads a commerce sphere.', source: 'x', sourced: true }],
+  musings: [{ text: 'You could stage a betrayal at the next council.' }],
+  citationCoverage: 1,
+  registerPurity: 1,
+  byok: false,
+};
+const RECAP_OPS = [
+  { opType: 'npc_death', params: { npc: 'Mara' }, label: 'inferred', protectedFlags: [] },
+  { opType: 'faction_shift', params: { faction: 'Guild' }, label: 'inferred', protectedFlags: ['named_fate'] },
+];
+
+function freshStore(extra = {}) {
+  storeRef.current = {
+    auth: {},
+    settlement: { id: 's1', name: 'Test Town', decrees: [] },
+    savedSettlements: [],
+    campaigns: [],
+    activeCampaignId: null,
+    selectedSettlementId: null,
+    activeSaveId: 'save-1',
+    creditBalance: 7,
+    phase: 'draft',
+    ...extra,
+  };
+}
+beforeAll(async () => {
+  // The door reaches the transport, the review, the bridge and the registry by DYNAMIC
+  // import (off first paint). Warm them once so each arm's wait measures the door, not
+  // the first cold import of the brief-composer graph.
+  await Promise.all([
+    import('../../src/lib/aiAnalyst.js'),
+    import('../../src/domain/intent/opVocabulary.js'),
+    import('../../src/domain/intent/interpretReview.js'),
+    import('../../src/lib/intent/interpretApply.js'),
+    import('../../src/store/editSlice.js'),
+  ]);
+}, 60000);
+beforeEach(() => {
+  freshStore();
+  // The edge answers with the audience it was POSTed (the server echoes it).
+  invokeRef.fn = vi.fn(async (_name, { body }) => ({ data: { ...ANSWER, audience: body.audience }, error: null }));
+  compileRef.fn = vi.fn(async () => ({ ok: true, interpretation: { ops: RECAP_OPS.map((op) => ({ ...op })) }, seed: 1, interpretRef: 'ref' }));
+});
 
 // The ONE shared viewport authority (src/hooks/useIsMobile.js). The shell reads it for
 // the bottom-sheet form; the Button and IconButton primitives read the same hook for
@@ -48,8 +112,29 @@ vi.mock('../../src/hooks/useIsMobile.js', () => ({
   getIsMobile: () => mobileRef.current,
 }));
 
-vi.mock('../../src/store/index.js', () => ({
-  useStore: (selector) => selector(storeRef.current),
+// The store as the registry's one write site sees it: get/set over a plain object, the
+// immer-style recipe applied in place.
+vi.mock('../../src/store/index.js', () => {
+  const useStore = (selector) => selector(storeRef.current);
+  useStore.getState = () => storeRef.current;
+  useStore.setState = (recipe) => {
+    const next = typeof recipe === 'function' ? recipe(storeRef.current) : recipe;
+    if (next && next !== storeRef.current) Object.assign(storeRef.current, next);
+  };
+  return { useStore };
+});
+// The network edge only: the transport, the slicers and the audience rule run real.
+vi.mock('../../src/lib/supabase.js', () => ({
+  isConfigured: true,
+  supabase: { functions: { invoke: (...a) => invokeRef.fn(...a) } },
+}));
+vi.mock('../../src/lib/analytics.js', () => ({
+  track: () => {},
+  EVENTS: new Proxy({}, { get: (_, key) => String(key) }),
+}));
+// The compile's network call only: the review, the bridge and the registry run real.
+vi.mock('../../src/lib/surveyorWrite.js', () => ({
+  compileInterpretation: (...a) => compileRef.fn(...a),
 }));
 // The Surveyor gate is resolved by the lazy useSurveyorEntitled hook; mock it so
 // the door renders synchronously here. The chokepoint predicate (isSurveyorTier)
@@ -57,25 +142,22 @@ vi.mock('../../src/store/index.js', () => ({
 vi.mock('../../src/components/surveyor/useSurveyorEntitled.js', () => ({
   useSurveyorEntitled: () => entitledRef.current,
 }));
-// X-22: the door derives the composer's rotating placeholder from this context (a page
-// with nothing specific in view, so the suggestions are the world-scope set).
+// X-22: the composer's rotating placeholder is the analyst's zero-cost suggested
+// questions for the page in view: here the generate page with Test Town on it (no
+// factions, no people), so the settlement-scope set, in its own order.
 const NO_PAGE_CTX = { view: '', params: {}, settlement: null, savedSettlements: [], activeCampaign: null, worldState: null };
-const WORLD_SUGGESTIONS = [
-  'What is happening in my world right now?',
-  'Which settlements are under the most pressure?',
-  'What can I share with my players?',
-  'What should I prepare for next session?',
+const TOWN_SUGGESTIONS = [
+  'What is the state of Test Town this week?',
+  'What can I tell the players about Test Town?',
+  'What tensions are building in Test Town?',
 ];
 vi.mock('../../src/components/surveyor/useSurveyorContext.js', () => ({
   useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town', ctx: NO_PAGE_CTX }),
 }));
-// Destinations are stubbed: this file pins the DOOR's routing, not the panels.
-vi.mock('../../src/components/AiAnalystPanel.jsx', () => ({
-  default: ({ open, initialQuestion }) => (
-    <div data-testid="dest-analyst" data-open={String(!!open)} data-q={initialQuestion} />
-  ),
-}));
-vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', () => ({
+// The workshop PANEL is stubbed (its stages have their own suites); its proposal hand-off,
+// message and note stay real.
+vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', async (importOriginal) => ({
+  ...(await importOriginal()),
   default: ({ open, initialStage, initialPrompt, initialScope }) => (
     <div data-testid="dest-workshop" data-open={String(!!open)} data-stage={initialStage} data-prompt={initialPrompt} data-scope={initialScope || ''} />
   ),
@@ -102,6 +184,14 @@ function openDoor() {
 function typeAndSend(text) {
   fireEvent.change(composer(), { target: { value: text } });
   pressEnter();
+}
+
+/** The bodies POSTed to the analyst edge, oldest first. */
+const posted = () => invokeRef.fn.mock.calls.map(([, { body }]) => body);
+/** Send a question and wait for its reply to land in the log. */
+async function askAndWait(text, count = 1) {
+  typeAndSend(text);
+  await waitFor(() => expect(screen.getAllByTestId('analyst-reply')).toHaveLength(count));
 }
 
 /** Stub the layout-only scrollHeight jsdom never computes. */
@@ -168,12 +258,12 @@ describe('SurveyorDoor — X-22 first open: one composer', () => {
       setEntitled(true);
       openDoor();
       const box = composer();
-      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[0]);
+      expect(box.getAttribute('placeholder')).toBe(TOWN_SUGGESTIONS[0]);
       act(() => { vi.advanceTimersByTime(4000); });
-      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[1]);
+      expect(box.getAttribute('placeholder')).toBe(TOWN_SUGGESTIONS[1]);
       fireEvent.change(box, { target: { value: 'a draft' } });
       act(() => { vi.advanceTimersByTime(8000); });
-      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[1]);
+      expect(box.getAttribute('placeholder')).toBe(TOWN_SUGGESTIONS[1]);
     } finally {
       vi.useRealTimers();
     }
@@ -302,20 +392,168 @@ describe('SurveyorDoor — X-22 the first send grows the composer into the float
   });
 });
 
-describe('SurveyorDoor — every prompt goes through the one router', () => {
-  it('routes a question to the ANALYST with the question staged', () => {
+describe('SurveyorDoor — X-22(d): the analyst answers IN THE LOG', () => {
+  it('a question goes through the router to the analyst and its reply lands in the log', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('why is bread so expensive here?');
+    expect(posted()).toHaveLength(1);
+    expect(posted()[0].question).toBe('why is bread so expensive here?');
+    const reply = screen.getByTestId('analyst-reply');
+    expect(within(screen.getByRole('log')).getByTestId('analyst-reply')).toBe(reply);
+    expect(reply.textContent).toContain('Thornwall leads a commerce sphere.');
+    // §3b TWO-VOICES survive the move: the musing register is its own block.
+    expect(within(reply).getByTestId('analyst-musings').textContent).toMatch(/suggestions, not the record/i);
+    expect(reply.textContent).toMatch(/Cited 1\/1/);
+    // no second panel: the analyst is a message, not a destination window
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+  });
+
+  it('X-22(f): the cost is one muted line under the FIRST reply only, never a control', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('why is bread so expensive here?');
+    expect(screen.getAllByTestId('surveyor-cost').map((n) => n.textContent)).toEqual(['3 credits per answer · 7 left']);
+    await askAndWait('who keeps the granary?', 2);
+    expect(screen.getAllByTestId('surveyor-cost')).toHaveLength(1);
+    expect(within(screen.getByTestId('surveyor-cost')).queryAllByRole('button')).toEqual([]);
+  });
+
+  it('RETIRED styleOverhaul: a map-style prompt reaches the ANALYST and opens no write stage', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('reskin the map in a woodcut style');
+    expect(posted()[0].question).toBe('reskin the map in a woodcut style');
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+  });
+
+  it('one turn at a time: a send while a reply is on its way is refused and keeps its draft', async () => {
+    let release;
+    invokeRef.fn = vi.fn((_name, { body }) => new Promise((resolve) => {
+      release = () => resolve({ data: { ...ANSWER, audience: body.audience }, error: null });
+    }));
     setEntitled(true);
     openDoor();
     typeAndSend('why is bread so expensive here?');
-    const dest = screen.getByTestId('dest-analyst');
-    expect(dest.getAttribute('data-open')).toBe('true');
-    expect(dest.getAttribute('data-q')).toBe('why is bread so expensive here?');
+    await waitFor(() => expect(screen.getByTestId('surveyor-busy')).toBeTruthy());
+    await waitFor(() => expect(invokeRef.fn).toHaveBeenCalledTimes(1));
+    typeAndSend('and the granary?');
+    expect(composer().value).toBe('and the granary?');
+    await act(async () => { release(); });
+    await waitFor(() => expect(screen.getAllByTestId('analyst-reply')).toHaveLength(1));
+    expect(turnTexts()).toEqual(['why is bread so expensive here?']);
+  });
+});
+
+describe('SurveyorDoor — X-22(e): the audience by phrase', () => {
+  it('a player-framed question POSTs the PLAYER projection, and the reply is labelled player-safe', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('answer this for my players: who rules here?');
+    const body = posted()[0];
+    // The structural rule decided from the words: the request asked for 'dm' and the
+    // slicers downgraded it, so what left the browser is the player projection only.
+    expect(body.audience).toBe('player');
+    expect(body.slices.length).toBeGreaterThan(0);
+    expect(body.slices.every((slice) => isPlayerSafeSource(slice.source))).toBe(true);
+    const reply = screen.getByTestId('analyst-reply');
+    expect(reply.getAttribute('data-audience')).toBe('player');
+    expect(within(reply).getByTestId('analyst-audience').textContent).toMatch(/^Player-safe/);
+  });
+
+  it('a plain question stays the DM\'s full-truth answer and wears no player label (the anchor)', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('who rules here?');
+    expect(posted()[0].audience).toBe('dm');
+    expect(screen.getByTestId('analyst-reply').getAttribute('data-audience')).toBe('dm');
+    expect(screen.queryByTestId('analyst-audience')).toBeNull();
+  });
+
+  it('the Segmented audience toggle is gone (no "Answer audience" control anywhere)', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('who rules here?');
+    expect(screen.queryByRole('radiogroup')).toBeNull();
+    expect(screen.queryByLabelText(/answer audience/i)).toBeNull();
+    expect(screen.queryByRole('button', { name: /helpful/i })).toBeNull();
+  });
+});
+
+describe('SurveyorDoor — X-22(d): a workshop proposal is a message, accepted by a typed yes', () => {
+  const recap = 'The party sacked the customs house last session and Mara died.';
+
+  it('a session recap compiles to proposed ops in the log, with no control on them', async () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    const proposal = await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    expect(compileRef.fn).toHaveBeenCalledTimes(1);
+    expect(compileRef.fn.mock.calls[0][0].sessionText).toBe(recap);
+    expect([...proposal.querySelectorAll('li')].map((li) => li.getAttribute('data-op-type'))).toEqual(['npc_death', 'faction_shift']);
+    expect(proposal.textContent).toContain('(protected)');
+    expect(proposal.textContent).toMatch(/Say yes to add them to the decree registry\./);
+    expect(within(proposal).queryAllByRole('button')).toEqual([]);
+    // the analyst was not asked: the router sent this to the write stage
+    expect(invokeRef.fn).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+  });
+
+  it('"yes, add it" stages PENDING surveyor decrees through the registry; the protected op is held back', async () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    typeAndSend('yes, add it');
+    await waitFor(() => expect(screen.getByRole('log').textContent).toContain('Added 1 to the decree registry.'));
+    const decrees = storeRef.current.settlement.decrees;
+    expect(decrees).toHaveLength(1);
+    expect(decrees[0]).toMatchObject({ status: 'pending', addedBy: 'surveyor', op: { type: 'npc_death', payload: { npc: 'Mara' } } });
+    expect(screen.getByRole('log').textContent).toContain('Held back as protected: faction_shift.');
+    // the chat only hands off: nothing was applied, the analyst was not asked
+    expect(invokeRef.fn).not.toHaveBeenCalled();
+  });
+
+  it('any other reply lets the proposal lapse: nothing is staged and the reply is routed as a prompt', async () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    await askAndWait('no, why did Mara die?');
+    expect(storeRef.current.settlement.decrees).toEqual([]);
+    expect(posted()[0].question).toBe('no, why did Mara die?');
+    // and a later yes has nothing to accept: it is just a prompt
+    await askAndWait('yes', 2);
+    expect(storeRef.current.settlement.decrees).toEqual([]);
+  });
+
+  it('with no open save the registry has nowhere to live: the log says so and the proposal stays open', async () => {
+    freshStore({ activeSaveId: null });
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    typeAndSend('yes');
+    await waitFor(() => expect(screen.getByRole('log').textContent).toContain('lives on a saved settlement'));
+    expect(storeRef.current.settlement.decrees).toEqual([]);
+    storeRef.current.activeSaveId = 'save-1';
+    typeAndSend('yes');
+    await waitFor(() => expect(storeRef.current.settlement.decrees).toHaveLength(1));
+  });
+
+  it('NO BUTTON INSIDE: with a reply and a proposal in the log, the one control is the close', async () => {
+    setEntitled(true);
+    openDoor();
+    await askAndWait('why is bread so expensive here?');
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    expect(within(chat()).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor']);
   });
 
   // ⚠ Re-pointed off the retired styleOverhaul prompt (ODQ §763.2) onto a CONSTRUCT one:
   // 'content' is the workshop's fallback stage, so only a non-default stage id proves the
   // composer carried the routing through.
-  it('routes a making-prompt to the WORKSHOP (stage, prompt, scope) and folds the log beside it', () => {
+  it('a making-prompt still opens the WORKSHOP (stage, prompt, scope); the log says so and folds beside it', () => {
     setEntitled(true);
     openDoor();
     typeAndSend('build me a new town on the river');
@@ -324,17 +562,8 @@ describe('SurveyorDoor — every prompt goes through the one router', () => {
     expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
     expect(dest.getAttribute('data-scope')).toBe('settlement');
     expect(screen.queryByRole('log')).toBeNull();
-    expect(screen.getByRole('button', { name: 'The Surveyor' })).toBeTruthy();
-  });
-
-  it('RETIRED styleOverhaul: a map-style prompt reaches the ANALYST and opens no write stage', () => {
-    setEntitled(true);
-    openDoor();
-    typeAndSend('reskin the map in a woodcut style');
-    // POSITIVE first — the door still routed it somewhere, so the absence below is a
-    // routing decision and not a door that simply stopped working.
-    expect(screen.getByTestId('dest-analyst').getAttribute('data-q')).toBe('reskin the map in a woodcut style');
-    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'The Surveyor' }));
+    expect(screen.getByRole('log').textContent).toContain('Opened in the workshop.');
   });
 });
 
@@ -345,7 +574,7 @@ describe('SurveyorDoor — absence, the keyboard, and the composer that grows up
     pressEnter();
     fireEvent.change(composer(), { target: { value: '   \n\t ' } });
     pressEnter();
-    expect(screen.queryByTestId('dest-analyst')).toBeNull();
+    expect(invokeRef.fn).not.toHaveBeenCalled();
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
     expect(screen.queryByRole('log')).toBeNull();
     // still open — an absent prompt is not a dismissal
@@ -374,11 +603,11 @@ describe('SurveyorDoor — absence, the keyboard, and the composer that grows up
     openDoor();
     fireEvent.change(composer(), { target: { value: 'why is bread so expensive here?' } });
     fireEvent.keyDown(composer(), { key: 'Enter', shiftKey: true });
-    expect(screen.queryByTestId('dest-analyst')).toBeNull();
+    expect(screen.queryByRole('log')).toBeNull();
     fireEvent.keyDown(composer(), { key: 'Enter', isComposing: true });
-    expect(screen.queryByTestId('dest-analyst')).toBeNull();
+    expect(screen.queryByRole('log')).toBeNull();
     pressEnter();
-    expect(screen.getByTestId('dest-analyst').getAttribute('data-q')).toBe('why is bread so expensive here?');
+    expect(turnTexts()).toEqual(['why is bread so expensive here?']);
   });
 
   it('the composer grows to its content and CLAMPS at 144px, scrolling only at the cap', () => {

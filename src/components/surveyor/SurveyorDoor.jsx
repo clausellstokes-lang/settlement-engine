@@ -40,20 +40,30 @@
  * pill and the close retires the conversation for the visit. The chat is NON-MODAL (the
  * DM reads the dossier beside it), so the modal focus trap gave way to the shell's
  * non-modal dismiss; the tab stays mounted so focus always has a home.
+ *
+ * ⭐ X-22(d) THE ROUTING GOES INVISIBLE, NOT AWAY. Every prompt still goes through the one
+ * router below; what changed is where the destination answers. An analyst question is
+ * answered IN THE LOG (AiAnalystPanel.jsx useAnalyst + AnalystReply); a session recap
+ * routed to the accept→mint stage is compiled into proposed ops and shown IN THE LOG
+ * (SurveyorWorkshop.jsx useWorkshopProposal + ProposalMessage), and the DM's typed yes
+ * (doorRouter isAcceptReply, asked only of the reply that follows a proposal) hands the
+ * approvable ops to the decree registry, where edit mode owns approval. The remaining
+ * write stages (content, construct, autonomy) keep the workshop panel as their
+ * destination; the log says so and folds beside it. The cost is one muted line under the
+ * conversation's first reply, never a control.
  */
 
-import { useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import { useDialogDismiss } from '../primitives/useDialogFocusTrap.js';
 import SurveyorTextIntentShell from './SurveyorTextIntentShell.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
-import { routeDoorPrompt } from '../../domain/intent/doorRouter.js';
-import { deriveAnchor, anchorSettlement } from '../../domain/ai/contextAnchor.js';
-import { suggestedQuestions } from '../../domain/ai/suggestedQuestions.js';
-import AiAnalystPanel from '../AiAnalystPanel.jsx';
-import SurveyorWorkshop from './SurveyorWorkshop.jsx';
+import { routeDoorPrompt, isAcceptReply } from '../../domain/intent/doorRouter.js';
+import { getSurveyorAiCost } from '../../config/pricing.js';
+import AnalystReply, { useAnalyst, costLineFor } from '../AiAnalystPanel.jsx';
+import SurveyorWorkshop, { useWorkshopProposal, ProposalMessage, acceptNote } from './SurveyorWorkshop.jsx';
 
 // The ONE entitlement chokepoint lives in surveyorGate.js (a pure, import-free
 // predicate, kept off the eager closure). Re-exported here so the C13 consumers
@@ -66,20 +76,23 @@ export default function SurveyorDoor({ visible = true }) {
   // THE CONVERSATION: { id, from: 'you'|'surveyor', text?, node? }, oldest first.
   const [messages, setMessages] = useState([]);
   const nextId = useRef(1);
-  // The routed destination: null | { id: 'analyst', question } | { id: stageId, prompt, scope }.
+  // The workshop destination: null | { id: stageId, prompt, scope }.
   const [dest, setDest] = useState(null);
+  const [busy, setBusy] = useState(false);
+  // The proposal the next reply may accept with a typed yes (null: none pending).
+  const pendingRef = useRef(null);
+  // The cost line rides the conversation's first reply only.
+  const costShownRef = useRef(false);
+  // Bumped by the close, so a reply that lands after the conversation was retired is dropped.
+  const epochRef = useRef(0);
   // Remount destinations per routing so initial* props re-seed (panels stay dumb).
   const [nonce, setNonce] = useState(0);
   const surveyorEntitled = useSurveyorEntitled();
-  const { anchorLabel, ctx } = useSurveyorContext();
-  // X-22: the first open is one composer whose placeholder rotates through the zero-cost
-  // suggested questions for the page in view (no chips, no provider call).
-  const suggestions = useMemo(() => {
-    if (!ctx) return [];
-    const anchor = deriveAnchor({ ...ctx, tick: ctx.worldState?.tick ?? null });
-    const subject = anchorSettlement(anchor, { settlement: ctx.settlement, savedSettlements: ctx.savedSettlements }) || ctx.settlement;
-    return suggestedQuestions(anchor, { settlement: subject, worldState: ctx.worldState });
-  }, [ctx]);
+  const { anchorLabel } = useSurveyorContext();
+  // The analyst's reads (the rotating placeholder's suggested questions, the ask) and the
+  // workshop's proposal hand-off. Neither routes; both answer the router's verdict.
+  const analyst = useAnalyst();
+  const proposals = useWorkshopProposal();
   // THE NON-MODAL LIFECYCLE (useDialogDismiss, the coach's and the feedback panel's
   // half): Escape puts the composer away or folds the log, and focus goes home to the
   // tab. Nothing traps Tab: the DM reads the dossier beside the chat.
@@ -96,29 +109,83 @@ export default function SurveyorDoor({ visible = true }) {
     setMessages((prev) => [...prev, { id, ...message }]);
   };
 
-  const openDestination = (routed, promptText) => {
-    // 'analyst' is the QUESTION destination (it carries a question, not a prompt+scope);
-    // every other destination is a workshop stage.
-    setDest(routed.destination === 'analyst'
-      ? { id: 'analyst', question: promptText }
-      : { id: routed.destination, prompt: promptText, scope: routed.scope });
+  /** The first reply of the conversation carries the one muted cost line. */
+  const firstCost = (cost, unit) => {
+    if (costShownRef.current) return null;
+    costShownRef.current = true;
+    return costLineFor(cost, analyst.creditBalance, unit);
+  };
+
+  /** Run one async turn; its reply is dropped if the conversation was retired meanwhile. */
+  const turn = async (work) => {
+    const epoch = epochRef.current;
+    setBusy(true);
+    try {
+      const reply = await work();
+      if (reply && epoch === epochRef.current) say(reply);
+    } finally {
+      if (epoch === epochRef.current) setBusy(false);
+    }
+  };
+
+  const answer = (q) => turn(async () => {
+    const result = await analyst.ask(q);
+    const costLine = result?.error ? null : firstCost(analyst.cost, 'answer');
+    return { from: 'surveyor', node: <AnalystReply result={result} costLine={costLine} /> };
+  });
+
+  const propose = (q) => turn(async () => {
+    const res = await proposals.compile(q);
+    if (res.error) return { from: 'surveyor', text: res.error };
+    const ops = res.interpretation?.ops || [];
+    if (ops.length === 0) return { from: 'surveyor', text: 'Nothing in that recap is a change the engine records.' };
+    pendingRef.current = res;
+    const costLine = firstCost(getSurveyorAiCost('interpret'), 'recap');
+    return { from: 'surveyor', node: <ProposalMessage ops={ops} costLine={costLine} /> };
+  });
+
+  const accept = (proposal) => turn(async () => {
+    const out = await proposals.accept(proposal);
+    // No open save: the registry has nowhere to live yet, so the proposal stays open.
+    if (out.refused === 'no_save') pendingRef.current = proposal;
+    return { from: 'surveyor', text: acceptNote(out, proposal.interpretation?.ops || []) };
+  });
+
+  const openWorkshop = (routed, q) => {
+    setDest({ id: routed.destination, prompt: q, scope: routed.scope });
     setNonce((n) => n + 1);
-    // A workshop stage docks at the same margin: the log folds to its pill beside it.
-    if (routed.destination !== 'analyst') setFolded(true);
+    // The stage docks at the same margin: the log folds to its pill beside it.
+    setFolded(true);
+    say({ from: 'surveyor', text: 'Opened in the workshop.' });
   };
 
   // The door still owns routing: the shell hands up the typed text and is told whether
   // the turn left the composer (true clears the draft). It never sees the router itself.
+  // One turn at a time: while a reply is on its way the box keeps the next draft.
   const send = (raw) => {
     const q = String(raw ?? '').trim();
-    if (!q) return false;
+    if (!q || busy) return false;
     say({ from: 'you', text: q });
-    openDestination(routeDoorPrompt(q), q);
+    const pending = pendingRef.current;
+    pendingRef.current = null; // a proposal is answered by the very next reply, or it lapses
+    if (pending && isAcceptReply(q)) {
+      accept(pending);
+      return true;
+    }
+    const routed = routeDoorPrompt(q);
+    if (routed.destination === 'analyst') answer(q);
+    else if (routed.destination === 'apply') propose(q);
+    else openWorkshop(routed, q);
     return true;
   };
 
-  // The close retires the conversation for the visit: the log and the fold go with it.
+  // The close retires the conversation for the visit: the log, the fold, a pending
+  // proposal and any reply still on its way go with it.
   const retire = () => {
+    epochRef.current += 1;
+    pendingRef.current = null;
+    costShownRef.current = false;
+    setBusy(false);
     setPromptOpen(false);
     setFolded(false);
     setMessages([]);
@@ -145,15 +212,12 @@ export default function SurveyorDoor({ visible = true }) {
       {/* The shell stays MOUNTED while the door is, so a close/reopen keeps the draft;
           it renders nothing while `open` is false. */}
       <SurveyorTextIntentShell
-        open={promptOpen} dialogRef={dialogRef} anchorLabel={anchorLabel} messages={messages} folded={folded}
+        open={promptOpen} dialogRef={dialogRef} anchorLabel={anchorLabel} messages={messages} folded={folded} busy={busy}
         onFold={setFolded} onClose={retire}
-        onSend={send} suggestions={suggestions}
+        onSend={send} suggestions={analyst.suggestions}
       />
 
-      {dest?.id === 'analyst' && (
-        <AiAnalystPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
-      )}
-      {dest && dest.id !== 'analyst' && (
+      {dest && (
         <SurveyorWorkshop
           key={nonce}
           open

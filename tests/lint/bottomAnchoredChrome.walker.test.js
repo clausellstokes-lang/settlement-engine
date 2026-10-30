@@ -68,7 +68,6 @@ const BAR_RE = /\baboveBottomNav\(|\bBOTTOM_NAV_H\b/;
 const LIFTED = Object.freeze({
   // the scroll-button stack (the owner's square arrow), the dossier-claim toast, the onboarding nudge
   'src/App.jsx': 3,
-  'src/components/AiAnalystPanel.jsx': 1,
   'src/components/FeedbackWidget.jsx': 1,
   'src/components/InterviewPanel.jsx': 1,
   // the post-generate coach's desktop corner card (the owner, 2026-10-30), its default anchor

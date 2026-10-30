@@ -21,12 +21,26 @@
  * JUDGMENT (vetoable): destinations dock along the LEFT edge (the door's margin) so the
  * one-door spatial story holds — the routed prompt seeds the stage's own prompt field
  * (initialPrompt/initialScope are initialization-only; absent ⇒ identical behavior).
+ *
+ * ⭐ X-22 (the owner, 2026-10-30): WORKSHOP PROPOSALS ARRIVE AS MESSAGES. A session recap
+ * the door routes to the accept→mint stage no longer opens this panel: the door asks
+ * useWorkshopProposal() below to compile it, shows the proposed ops in its one log, and on
+ * the DM's typed yes hands the approved ops to the DECREE REGISTRY through the existing
+ * bridge (lib/intent/interpretApply.js stageSurveyorDecrees, injected with the registry's
+ * one store write site, editSlice DECREE_ACTIONS.stage). The chat only hands off: every
+ * staged entry is PENDING, and edit mode's registry page owns approval, order and
+ * withdrawal. The protected-consent barrier is untouched: a typed yes approves without
+ * consent, so reviewInterpretation holds every flagged op back, and the log says which.
+ * The other stages keep this panel as their destination; the hook reads the same
+ * transport, vocabulary and review modules the Apply stage reads, and mints nothing.
  */
 
-import { Suspense, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { INK, MUTED, BORDER, CARD, BODY, sans, SP, FS, FOOTER_INSET, BOTTOM_NAV_H, aboveFooter, aboveBottomNav } from '../theme.js';
 import IconButton from '../primitives/IconButton.jsx';
+import { operationLabel } from '../../store/operationRegistry.js';
+import { chromeFontSize } from '../../design/proseScale.js';
 import Segmented from '../primitives/Segmented.jsx';
 import { AnchorChip, EarlyAccessBadge } from './surveyorPanelKit.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
@@ -56,6 +70,137 @@ const ConstructionPanel = lazy(() => import('./ConstructionPanel.jsx'));
 const InterpretApplyPanel = campaignLazy(() => import('./InterpretApplyPanel.jsx'));
 const AutonomyPanel = campaignLazy(() => import('./AutonomyPanel.jsx'));
 const CorpusFactoryPanel = lazy(() => import('./CorpusFactoryPanel.jsx'));
+
+let reviewSequence = 0;
+
+/** One compile, one review artifact: stable for the yes that accepts it, unique from a
+ *  later compile of identical text (the Apply stage's own rule). */
+function mintReviewRef() {
+  const randomId = globalThis.crypto?.randomUUID?.();
+  if (randomId) return `review:${randomId}`;
+  reviewSequence += 1;
+  return `review:${Date.now().toString(36)}:${reviewSequence.toString(36)}`;
+}
+
+/**
+ * THE PROPOSAL HAND-OFF (X-22(d)). `compile(text)` turns a session recap into proposed
+ * ops through the one compile lane; `accept(proposal)` stages the approvable ones as
+ * pending decrees on the open save. Neither renders anything; the door's log does.
+ * @returns {{
+ *   compile: (text: string) => Promise<{ interpretation: { ops: object[] }, reviewRef: string } | { error: string }>,
+ *   accept: (proposal: { interpretation: { ops: object[] }, reviewRef: string }) =>
+ *     Promise<{ staged: readonly object[], blocked: object[], refused?: 'no_save' }>,
+ * }}
+ */
+export function useWorkshopProposal() {
+  const { ctx } = useSurveyorContext();
+  const phase = useStore((s) => s.phase);
+
+  const compile = useCallback(async (text) => {
+    try {
+      const [{ compileInterpretation }, { buildProtectedContext, applyIdentityConsentFlags }] = await Promise.all([
+        import('../../lib/surveyorWrite.js'),
+        import('../../domain/intent/opVocabulary.js'),
+      ]);
+      // The protected context rides the compile so the edge can flag named fates
+      // (Wave R-1), and the identity flag is unioned locally, exactly as the Apply stage does.
+      const res = await compileInterpretation({
+        ...ctx, sessionText: text, protectedContext: buildProtectedContext(ctx?.settlement, phase),
+      });
+      if (!res?.ok) return { error: res?.error || 'The Surveyor could not read that recap.' };
+      return {
+        interpretation: applyIdentityConsentFlags(res.interpretation, { identityLockedPhase: phase === 'canon' }),
+        reviewRef: mintReviewRef(),
+      };
+    } catch {
+      return { error: 'The Surveyor is unavailable right now.' };
+    }
+  }, [ctx, phase]);
+
+  const accept = useCallback(async (proposal) => {
+    const interpretation = proposal?.interpretation;
+    const ops = Array.isArray(interpretation?.ops) ? interpretation.ops : [];
+    const [{ reviewInterpretation }, { stageSurveyorDecrees }, { DECREE_ACTIONS, selectDecrees }] = await Promise.all([
+      import('../../domain/intent/interpretReview.js'),
+      import('../../lib/intent/interpretApply.js'),
+      import('../../store/editSlice.js'),
+    ]);
+    // A typed yes approves every op WITHOUT consent: the barrier holds the flagged ones.
+    const decisions = Object.fromEntries(ops.map((_, i) => [i, { action: 'approve' }]));
+    const { accepted, blocked } = reviewInterpretation(interpretation, decisions);
+    const get = useStore.getState;
+    const set = useStore.setState;
+    const saveId = get().activeSaveId;
+    if (saveId == null || accepted.length === 0) {
+      return { staged: Object.freeze([]), blocked, ...(saveId == null && accepted.length > 0 ? { refused: 'no_save' } : {}) };
+    }
+    const { staged } = stageSurveyorDecrees({
+      accepted, blocked, ops,
+      registry: selectDecrees(get()),
+      reviewRef: proposal.reviewRef,
+      orderedAt: new Date().toISOString(),
+      stageDecree: (rows, op, meta) => {
+        const done = DECREE_ACTIONS.stage(get, set, { saveId, op, meta });
+        return done.ok ? done.decrees : rows;
+      },
+    });
+    return { staged, blocked };
+  }, []);
+
+  return { compile, accept };
+}
+
+/**
+ * One proposal in the door's log: the proposed ops by their authored labels, a protected
+ * op marked as such, and the one line that says how to accept. No control (X-22(d)).
+ * @param {{ ops: object[], costLine?: string|null }} props
+ */
+export function ProposalMessage({ ops, costLine = null }) {
+  const mobile = useIsMobile();
+  const xs = chromeFontSize(FS.xs, mobile);
+  const list = Array.isArray(ops) ? ops : [];
+  return (
+    <div data-testid="surveyor-proposal" style={{ display: 'flex', flexDirection: 'column', gap: SP.xs, fontFamily: sans }}>
+      <span className="sf-smallcap" style={{ fontSize: xs, color: MUTED }}>Proposed changes</span>
+      <ul style={{ margin: 0, paddingLeft: SP.lg, fontSize: FS.sm, color: BODY, lineHeight: 1.45 }}>
+        {list.map((op, i) => (
+          <li key={i} data-op-type={op?.opType}>
+            {operationLabel(op?.opType)}
+            {Array.isArray(op?.protectedFlags) && op.protectedFlags.length > 0 && (
+              <span style={{ color: MUTED }}> (protected)</span>
+            )}
+          </li>
+        ))}
+      </ul>
+      <span style={{ fontSize: FS.sm, color: INK }}>Say yes to add {list.length === 1 ? 'it' : 'them'} to the decree registry.</span>
+      {costLine && <span data-testid="surveyor-cost" style={{ fontSize: xs, color: MUTED }}>{costLine}</span>}
+    </div>
+  );
+}
+
+/**
+ * The log's word on a typed yes. Pure.
+ * @param {{ staged?: readonly object[], blocked?: Array<{ index: number }>, refused?: string }} out
+ * @param {object[]} ops the proposal's ops, for the held-back names
+ * @returns {string}
+ */
+export function acceptNote(out, ops) {
+  if (out?.refused === 'no_save') {
+    return 'The decree registry lives on a saved settlement. Save this one, then say yes again.';
+  }
+  const staged = Array.isArray(out?.staged) ? out.staged.length : 0;
+  const held = (Array.isArray(out?.blocked) ? out.blocked : [])
+    .map((row) => operationLabel(ops?.[row.index]?.opType))
+    .filter(Boolean);
+  const parts = [];
+  if (staged > 0) {
+    parts.push(`Added ${staged} to the decree registry. ${staged === 1 ? 'It waits' : 'They wait'} for your approval in edit mode.`);
+  }
+  if (held.length > 0) {
+    parts.push(`Held back as protected: ${held.join(', ')}. Make ${held.length === 1 ? 'that change' : 'those changes'} yourself in edit mode.`);
+  }
+  return parts.length > 0 ? parts.join(' ') : 'Nothing was added.';
+}
 
 const STAGES = [
   { id: 'content', label: 'Content', Body: CustomContentPanel },
