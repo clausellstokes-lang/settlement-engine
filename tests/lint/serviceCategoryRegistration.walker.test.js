@@ -331,6 +331,13 @@ describe('service-classifier registration ratchet (structural-prevention Pattern
       ['Discreet passage', 'Underground network', 'criminal'], // RS-9, the recorded mis-fold
       ['Escort contracts', 'Free company hall', 'employment'], // RS-10, 'contract'
       ['Rune inscription', "Enchanter's shop", 'magic'], // RS-11
+      ['Political power', 'Craft guilds (100-150+)', 'legal'], // RS-10 reading confirmed
+      // the chair's follow-up rulings on the lane's report (same signed shift)
+      ['Patrol service', 'City walls and gates', 'legal'],
+      ['Curfew enforcement', 'Gates (if walled)', 'legal'],
+      ['Smuggling investigation', 'Customs house', 'legal'],
+      ['Black market access', 'Inn/Tavern District', 'criminal'],
+      ['Gambling', 'Inn/Tavern', 'entertainment'],
     ];
     const wrong = ruled
       .filter(([service, host, category]) => classifyService(service, host) !== category)
