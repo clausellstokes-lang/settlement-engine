@@ -13,11 +13,12 @@
  */
 import React from 'react';
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { pricesMoved } from '../../src/components/new/tabs/MarketPricesSection.jsx';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -241,15 +242,10 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       settlement: withFood({ dailyProduction: 800, dailyNeed: 1000, deficit: 0, surplus: 0, importCoverage: 200, rawDeficit: 200, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     }));
-    // ⚠ THE FOOD SECTION IS `defaultOpen={!!fb.deficit}` AND Primitives renders
-    // `{open && children}`, so on a town that IS fed the narrative is behind a
-    // closed fold — the same trap the DS-ECO-9 note at EconomicsTab.jsx:505 records
-    // for the sentence above it. That is why this arm opens the fold: the defect
-    // was real for every reader who did, and a test that never opened it would
-    // have reported the false sentence as absent.
-    // anchored: the SAME string is asserted PRESENT three lines below, after the click — a payload that stopped rendering would red there.
-    expect(container.textContent).not.toContain('Daily needs are met');
-    fireEvent.click([...container.querySelectorAll('button')].find((b) => b.textContent.includes('Food Security')));
+    // ⭐ THE FOOD SECTION OPENS ON EVERY TOWN (UX consolidation 2026-10-30, T2-1: the Food
+    // tile was cut and this section is the food fact's one home). It used to be
+    // `defaultOpen={!!fb.deficit}`, which hid this very narrative from every fed town
+    // until the reader opened it; the sentence is now on first paint with no click.
     expect(container.textContent).toContain('Daily needs are met, with no surplus');
     // The sentence above is read out of this very render, so the exclusion below
     // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
@@ -604,7 +600,9 @@ function onPage(sentence, lines, settlement) {
  * hands over IN ORDER. Named once so the arm below drives exactly what the tabs drive.
  */
 const DESK_LINE_MOUNTS = Object.freeze({
-  'resources.groundAndWorkings': ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'],
+  // TWO KEYS SINCE THE UX CONSOLIDATION (2026-10-30, RULINGS-T2 T2-9): the terrain lens (the
+  // Overview owns the ground) and the strengths lens (the chips are the strengths) are cut.
+  'resources.groundAndWorkings': ['strategicValue', 'exploitation'],
   // ⭐ ONE KEY SINCE 2026-09-19, AND THE SECOND ONE DID NOT DIE — it MOVED. DS-SUP-3's
   // `impairedService` lens names ONE HOUSE by name, and the owner's order ("some other
   // sections need the same adjustment") put it under that house's own service row, the way
@@ -615,7 +613,8 @@ const DESK_LINE_MOUNTS = Object.freeze({
   'services.catalogStanding': ['catalogStanding'],
   'economics.exportPosture': ['exportPosture'],
   'daily_life.standingOfLiving': ['prosperityRung'],
-  'economics.commercialProfile': ['incomeMix', 'criminalLine', 'tradeProfile'],
+  // The trade-profile lens left this site in the UX consolidation (T2-4).
+  'economics.commercialProfile': ['incomeMix', 'criminalLine'],
 });
 
 /** The sentences one position draws for a settlement, in the order its call site lists them. */
@@ -627,31 +626,33 @@ function positionLines(mount, settlement) {
 }
 
 describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
-  test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
+  test('resources.groundAndWorkings: two lenses render, the cut two do not, and a public dossier renders none', () => {
     const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();
     const pub = render(e(ResourcesTab, { settlement: GROUND, publicDossier: true }));
     const pubText = pub.container.textContent;
-    // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
-    // moved rather than the first.
-    // The four lenses render as ONE woven paragraph, so each anchor is taken in the form the
-    // page prints it: `strengths` is the SECOND sentence and opens on the town's name, so what
-    // reaches the DOM is "The village has more than one thing…" (see `onPage`).
+    // COLLECT-THEN-ASSERT (car 8a-13): both lenses run, so a red names every one that moved.
     const lines = positionLines('resources.groundAndWorkings', GROUND);
     expectNoSeedFailures(collectSeedFailures(Object.entries({
-      terrain: GROUND_LINES.terrain,
-      strengths: GROUND_LINES.strengths,
       worth: GROUND_LINES.worth,
       workings: GROUND_LINES.workings,
     }), ([lens, line]) => expectPresentThenAbsent(
       privText, pubText, onPage(line, lines, GROUND), `resources.groundAndWorkings :: ${lens}`,
-    )), 'all four resources lenses draw privately and none reaches a public dossier');
+    )), 'both resources lenses draw privately and neither reaches a public dossier');
+    // ⭐ UX CONSOLIDATION 2026-10-30 (T2-9): the terrain and strengths lenses are no longer
+    // drawn, in either their raw or their stood-down form.
+    for (const [lens, line] of Object.entries({ terrain: GROUND_LINES.terrain, strengths: GROUND_LINES.strengths })) {
+      expect(privText, `the cut ${lens} lens is on the page`).not.toContain(line); // anchored: the worth/workings lenses were asserted present on this render above
+      expect(privText, `the cut ${lens} lens is on the page, stood down`).not.toContain(line.slice(GROUND.name.length)); // anchored: same render as above
+    }
     // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
     // generator's own strategic-value line are the page's and are not corpus prose.
     expect(pubText).toContain('Plains');
     expect(pubText).toContain('Grain production');
     expect(pubText).toContain('agricultural heartland');
+    // ONE strategic-value sentence: where DS-ECO-11 speaks it, the generator's line yields.
+    expect(privText).not.toContain('agricultural heartland'); // anchored: toContain on pubText above, the same fixture
   });
 
   test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
@@ -758,37 +759,21 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
   });
 
-  test('…and the stand-down really fires in a tab, not only in the weave\'s own unit test', () => {
-    // NON-VACUITY WITH A NAMED SUBJECT. `resources.groundAndWorkings` is the one position this
-    // fixture draws more than one lens at, and its SECOND lens opens on the town's name — so
-    // this is the arm that would red if a call site dropped `settlementName`/`tier`.
+  test('…and the position draws exactly the lenses its call site hands over, in order', () => {
+    // ⭐ REWRITTEN IN THE UX CONSOLIDATION (2026-10-30, T2-9). This arm used the strengths lens
+    // (the one that opened on the town's name) to watch the stand-down fire inside the tab.
+    // That lens is cut; the stand-down at this call site is now proven by the hand-built
+    // two-line arm at the end of this file (the SITES table drives `resources.groundAndWorkings`
+    // with its two surviving keys). What this arm keeps is the ORDER claim: the page prints the
+    // drawn lenses as ONE paragraph in the order the call site lists them.
     useStore.setState({ campaigns: [] });
     const lines = positionLines('resources.groundAndWorkings', GROUND);
-    expect(lines.length, 'the position stopped drawing more than one lens').toBeGreaterThan(1);
-    const stoodDown = onPage(GROUND_LINES.strengths, lines, GROUND);
-    expect(stoodDown, 'the strengths lens no longer opens on the name, so this arm is free')
-      .not.toBe(GROUND_LINES.strengths);
-    // ⛔ THE EXPECTED FORM IS COMPUTED FROM THE DRAWN MEMBER, NEVER TYPED (car 8a-13's rule,
-    // and `proseDrawnAnchors.walker.test.js` is what keeps it so). This assertion used to
-    // pin the stood-down sentence as a LITERAL — 105 characters of DS-ECO-11's own wording —
-    // which is the class that habitat removal exists to end: NEVER TRIM lets the pool grow,
-    // an appended variant wins the draw, and the literal reds while the desk, the contract
-    // and the paid-surface gate this arm guards are all perfectly well.
-    //
-    // The claim does not weaken. It gains a premise and states the TRANSFORMATION instead of
-    // the result: the drawn member opens on the name, and the stand-down is that same member
-    // with its opening name replaced by the tier phrase and nothing else touched. A re-index
-    // or a rewording moves the member and the expectation together; a weave that started
-    // dropping words, renaming mid-sentence, or reaching for the pronoun still reds.
-    expect(GROUND_LINES.strengths.startsWith(GROUND.name),
-      'the drawn member stopped opening on the name, so there is no stand-down to expect')
-      .toBe(true);
-    expect(stoodDown, 'the stand-down is not the drawn member with its opening name replaced')
-      .toBe(`The ${GROUND.tier}${GROUND_LINES.strengths.slice(GROUND.name.length)}`);
+    expect(lines.length, 'the position stopped drawing both lenses').toBe(2);
     const text = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false })).container.textContent;
-    expect(text, 'the tab renders the raw sentence, so the props did not reach DeskLines')
-      .not.toContain(GROUND_LINES.strengths); // anchored: the toContain below proves this same render carries the position
-    expect(text).toContain(stoodDown);
+    const first = text.indexOf(onPage(lines[0], lines, GROUND));
+    const second = text.indexOf(onPage(lines[1], lines, GROUND));
+    expect(first, 'the strategic-value lens is not on the page').toBeGreaterThanOrEqual(0);
+    expect(second, 'the exploitation lens does not follow the strategic-value lens').toBeGreaterThan(first);
   });
 
   test('the ROUTER threads the public condition to all three new tabs', () => {
@@ -885,7 +870,7 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
    * reds here rather than silently testing a position nobody renders.
    */
   const SITES = [
-    ['resources.groundAndWorkings', 'DS-ECO-11', ['terrainIdentity', 'economicStrengths'],
+    ['resources.groundAndWorkings', 'DS-ECO-11', ['strategicValue', 'exploitation'],
       ResourcesTab, { settlement: GROUND, publicDossier: false }],
     ['economics.commercialProfile', 'DS-ECO-12', ['incomeMix', 'criminalLine'],
       EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
@@ -990,5 +975,135 @@ describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => 
     for (const gone of ['Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
       expectAbsentWithAnchor(text, gone, offer, 'the D3/D6 marketing');
     }
+  });
+});
+
+/**
+ * ⭐ UX CONSOLIDATION 2026-10-30 — THE ECONOMICS PAGE SAYS EACH FACT ONCE (RULINGS-T2
+ * T2-1..T2-8; RUBRIC R2, R6; RULINGS-CROSS X-2). Each arm pins the post-consolidation shape
+ * and carries a liveness anchor on the same render, so an absence cannot pass on an empty tab.
+ */
+describe('UX consolidation — the Economics page says each fact once', () => {
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+
+  test('T2-1: ONE prosperity home and the Output score ONCE — the Economy and Food tiles are gone', () => {
+    useStore.setState({ campaigns: [] });
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55 } } };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text, 'the header prints the Output chip').toContain('55/100');
+    expect(text.split('55/100').length - 1, 'the Output score is printed once').toBe(1);
+    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: toContain('55/100') above, same render
+    const exact = (word) => [...container.querySelectorAll('div,span,p')].filter((n) => n.children.length === 0 && n.textContent === word).length;
+    expect(exact('Comfortable'), 'the prosperity word is printed once').toBe(1);
+    expect(exact('Economy'), 'no Economy tile label').toBe(0);
+    expect(exact('Food'), 'no Food tile label').toBe(0);
+    // The Food Security section is the food home and opens on first paint.
+    expect(text).toContain('Production deficit of');
+  });
+
+  test('T2-2: the Trade chip stays, because tradeAccess follows the route', () => {
+    useStore.setState({ campaigns: [] });
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, tradeAccess: 'mountain_pass' } };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    expect(container.textContent).toContain('Trade');
+    expect(container.textContent).toContain('mountain pass');
+  });
+
+  test('T2-3: ONE header paragraph — DS-ECO-1 replaces situationDesc where the desk speaks; situationDesc stands on public', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false })).container.textContent;
+    cleanup();
+    const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true })).container.textContent;
+    expect(priv, 'the DM header speaks DS-ECO-1').toContain(HEADER_SENTENCE);
+    expectPresentThenAbsent(pub, priv, 'The market square keeps its hours.', 'situationDesc stands on public and yields to DS-ECO-1 on the DM view');
+  });
+
+  test('T2-4: the commercial profile draws no trade-profile lens, and the food narrative drops its generic trade-dependence sentence', () => {
+    useStore.setState({ campaigns: [] });
+    deskOverride.current = Object.freeze({
+      ...SILENT_ECONOMY_DESK,
+      incomeMix: line('DS-ECO-12', 'The tolls carry the town.'),
+      tradeProfile: line('DS-ECO-12', 'The same carts go out and come back.'),
+    });
+    const fed = {
+      ...SPEAKING,
+      economicViability: { metrics: { foodBalance: { dailyProduction: 700, dailyNeed: 1000, deficit: 100, surplus: 0, importCoverage: 200, rawDeficit: 300, agricultureModifier: 1 } } },
+    };
+    const text = render(e(EconomicsTab, { settlement: fed, saveId: 'forge_town', publicDossier: false })).container.textContent;
+    expect(text, 'the income-mix lens still draws').toContain('The tolls carry the town.');
+    expect(text, 'the trade-profile lens is not drawn').not.toContain('The same carts go out and come back.'); // anchored: toContain income-mix on this render
+    expect(text).toContain('Residual shortfall is');
+    expect(text).not.toContain('trade-dependent for food security'); // anchored: toContain('Residual shortfall is') on this render
+  });
+
+  test('T2-5: Market Prices renders only when a quote moved or the crier has a highlight', () => {
+    expect(pricesMoved(null)).toBe(false);
+    expect(pricesMoved({ highlight: null, exports: [{ movement: 'usual' }], imports: [{ movement: 'usual' }] })).toBe(false);
+    expect(pricesMoved({ highlight: null, exports: [{ movement: 'usual' }], imports: [{ movement: 'dear' }] })).toBe(true);
+    expect(pricesMoved({ highlight: { id: 'x' }, exports: [], imports: [] })).toBe(true);
+    useStore.setState({ campaigns: [] });
+    // Off-campaign every quote is `usual`, so the tab prints the chips and no price section.
+    const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    expect(container.textContent).toContain('Timber');
+    expect(container.textContent).not.toContain('Market Prices'); // anchored: toContain('Timber') on this render
+    expect(container.textContent).not.toContain('At their usual prices'); // anchored: toContain('Timber') on this render
+  });
+
+  test('T2-6: Economic Flows is the ONE chain rendering and carries the diagram\'s four facts', () => {
+    useStore.setState({ campaigns: [] });
+    const town = {
+      ...SPEAKING,
+      institutions: [{ name: 'Smelter' }],
+      economicState: {
+        ...SPEAKING.economicState,
+        activeChains: [{
+          chainId: 'iron_test', status: 'impaired', label: 'Iron working', needLabel: 'Tools', needColor: '#555',
+          resource: 'Iron ore', resourceDepleted: true,
+          processingInstitutions: ['Smelter', 'Foundry'], outputs: ['Ingots'],
+          upstreamMissing: ['grain'], upstreamNote: 'Charcoal arrives by cart.',
+        }],
+      },
+    };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text).toContain('Economic Flows');
+    expect(text, 'the resource node, depleted').toContain('Iron ore (depleted)');
+    expect(text, 'the upstream import, by label').toContain('Import: Grain & Bread');
+    expect(text, 'the missing house is marked').toContain('Foundry (missing)');
+    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('Foundry (missing)') on this render
+    expect(text, 'the upstream note').toContain('Charcoal arrives by cart.');
+    expect(text, 'the duplicate section is gone').not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on this render
+  });
+
+  test('T2-7: no Economic Plot Hooks, no Resource Exploitation, no Defense pointer on this page', () => {
+    useStore.setState({ campaigns: [] });
+    const town = {
+      ...SPEAKING,
+      economicState: { ...SPEAKING.economicState, safetyProfile: { blackMarketCapture: 20, criminalInstitutions: ['Smugglers\' Den'] } },
+      economicViability: { ...SPEAKING.economicViability, plotHooks: [{ category: 'Trade', hook: 'The bridge toll is skimmed.' }] },
+      resourceAnalysis: { exploitation: { fullyExploited: [{ rawResource: 'timber' }], partiallyExploited: [], unexploited: [] } },
+    };
+    const text = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true })).container.textContent;
+    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% capture');
+    expect(text, 'its operations list moved to Defense, the capture stays').toContain('Off-book');
+    for (const gone of ['Economic Plot Hooks', 'The bridge toll is skimmed.', 'Resource Exploitation', 'Fully Exploited', '→ Defense tab', 'Economic operations', 'Smugglers\' Den']) {
+      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% capture') on this render
+    }
+  });
+});
+
+describe('UX consolidation — Resources (RULINGS-T2 T2-9, T2-10)', () => {
+  test('T2-10: the Nearby Resources labels name the state and stop asserting export potential', () => {
+    const town = {
+      ...GROUND,
+      config: { ...GROUND.config, nearbyResources: ['timber', 'iron_ore'], nearbyResourcesDepleted: ['iron_ore'] },
+    };
+    const text = render(e(ResourcesTab, { settlement: town, publicDossier: true })).container.textContent;
+    expect(text).toContain('Depleted');
+    expect(text).toContain('Abundant');
+    expect(text).toContain('Iron Ore');
+    expect(text).not.toContain('export potential reduced'); // anchored: toContain('Depleted') on this render
+    expect(text).not.toContain('Full export potential'); // anchored: toContain('Abundant') on this render
   });
 });

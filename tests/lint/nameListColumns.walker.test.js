@@ -163,9 +163,6 @@ const RULED = Object.freeze({
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':
     'inline-run — the chain\'s final products run inline with arrow separators, as one flow.',
-  'src/components/new/tabs/ViabilityTab.jsx :: generationReceipt.checks':
-    'short — only the FAILING checks render, and a settlement that ships carries a handful; '
-    + 'the receipt is a short list by construction.',
 });
 
 // ── the walk ─────────────────────────────────────────────────────────────────
@@ -267,8 +264,15 @@ describe('THE NAME-LIST CENSUS — every dossier list of short rows is ruled on'
     // FaithSection's one creed list), three more sites. Re-measured at the merge of S and T3: 25.
     expect(FILES.length, 'the census tree is empty — has src/components/new/tabs moved?')
       .toBeGreaterThanOrEqual(27);
+    // ⚠ 30 -> 29 (2026-10-30, UX consolidation U3), ACCEPTED BY THE CHAIR (ruling 2026-10-30,
+    // item 5): a SURFACE REMOVED BY RULING, NOT A DEFECT ADMITTED. RULINGS-T2 T2-14 moved the
+    // generation receipt off ViabilityTab to src/components/settlement/VersionsTab.jsx, outside
+    // this census tree, so its failing-checks list left the walk and its RULED row was deleted
+    // with it. The walk itself is unchanged; the floor still tightens toward reality and is
+    // never lowered to let a broken scan through.
     expect(SCANNED.length, 'the walk judged almost no list sites — the `.map(` shape it looks for has changed')
-      .toBeGreaterThanOrEqual(25);
+      // and one more by BUILD-T2 (T2-14/T2-19, the Power tab's receipt list and conflicts): 25 -> 24 at the merge.
+      .toBeGreaterThanOrEqual(24);
     expect(COLUMNED.length, 'no site is ruled `columns` — the registry half has emptied')
       .toBeGreaterThanOrEqual(4);
   });

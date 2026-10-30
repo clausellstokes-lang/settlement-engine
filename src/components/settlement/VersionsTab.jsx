@@ -41,10 +41,12 @@ import { flag } from '../../lib/flags.js';
 import { t } from '../../copy/index.js';
 import { EVENTS } from '../../lib/analytics.js';
 import LockedDestination from '../primitives/LockedDestination.jsx';
-import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE } from '../theme.js';
+import { GOLD, INK, BODY, MUTED, BORDER, CARD, sans, serif_, FS, SP, swatch, EMPTY_VALUE, RED, GREEN_DEEP } from '../theme.js';
 import Button from '../primitives/Button.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize } from '../../design/proseScale.js';
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { edged } from '../../design/edgedBox.js';
+import { tokenCase } from '../new/labelLadder.js';
 
 const SLATE = swatch['#5A6E82'];
 const GREEN = swatch['#4A7A3A'];
@@ -171,7 +173,78 @@ const KIND_LABEL = {
   save:     'Save',
 };
 
+/**
+ * THE GENERATION RECEIPT (moved here from the Outlook tab in the UX consolidation of
+ * 2026-10-30, RULINGS-T2 T2-14; RUBRIC R1, R6). It audits the GENERATOR, not the town: whether
+ * the dossier agrees with its own world law and canonical ledgers, checks passed, repairs
+ * recorded, tensions preserved, formal judgments. Reachable on the record's own history page,
+ * off the page a DM plays from. Renders above every branch of this tab (flag off, locked,
+ * open), because the receipt is the record's and not a paid feature.
+ * @param {{ settlement: any }} props
+ */
+function GenerationReceipt({ settlement }) {
+  const mobile = useIsMobile();
+  const receipt = settlement?.generationCoherenceReceipt || null;
+  if (!receipt) return null;
+  const judgments = Array.isArray(receipt.judgments) ? receipt.judgments : [];
+  const supported = judgments.filter(j => j?.status === 'pass' || j?.status === 'pass_with_tension');
+  const review = judgments.filter(j => j?.status === 'needs_review');
+  const needsReview = receipt.status === 'needs_review';
+  const ink = needsReview ? RED : GREEN_DEEP;
+  return (
+    <div data-testid="generation-receipt" style={{
+      background: needsReview ? '#fdf4f4' : '#f4faf5',
+      ...edged(`1px solid ${needsReview ? '#e8c0c0' : '#b8d8bd'}`, `4px solid ${ink}`),
+      padding: '10px 14px', margin: `${SP.lg}px ${SP.lg}px 0`, fontFamily: sans,
+    }}>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'baseline', flexWrap: 'wrap' }}>
+        <span style={{ fontSize: FS.sm, fontWeight: 800, color: ink }}>
+          {needsReview
+            ? 'Generation receipt: needs review'
+            : receipt.status === 'coherent_with_authored_tensions'
+              ? 'Generation receipt: coherent, with authored tensions'
+              : 'Generation receipt: coherent'}
+        </span>
+        {/* The record stores the profile KEY; the settlement's identity carries its label. */}
+        <span style={{ fontSize: proseFontSize(FS.xs, mobile), color: MUTED }}>
+          culture {settlement.culturalIdentity?.label || tokenCase(receipt.cultureProfile)} · themes {tokenCase(receipt.contentProfile)}
+        </span>
+      </div>
+      <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.45, marginTop: 4 }}>
+        {(receipt.checks || []).filter(item => item.status === 'pass').length}/{(receipt.checks || []).length} checks passed
+        {(receipt.repairs || []).length > 0 && ` · ${(receipt.repairs || []).length} deterministic repair${receipt.repairs.length === 1 ? '' : 's'} recorded`}
+        {(receipt.authoredTensions || []).length > 0 && ` · ${(receipt.authoredTensions || []).length} explicit tension${receipt.authoredTensions.length === 1 ? '' : 's'} preserved`}
+      </div>
+      {judgments.length > 0 && (
+        <div style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, lineHeight: 1.45, marginTop: 2 }}>
+          Formal judgments: {supported.length}/{judgments.length} supported
+          {review.length > 0 && ` · ${review.length} need${review.length === 1 ? 's' : ''} review`}
+        </div>
+      )}
+      {(receipt.checks || []).filter(item => item.status === 'fail').map(item => (
+        <div key={item.id} style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: RED, marginTop: 3 }}>
+          {item.label}: {item.findings.length} finding{item.findings.length === 1 ? '' : 's'}
+        </div>
+      ))}
+      {review.map(judgment => (
+        <div key={judgment.id} style={{ fontSize: proseFontSize(FS.xxs, mobile), color: RED, marginTop: 3 }}>
+          {judgment.label}: {judgment.summary || 'Formal judgment needs review.'}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function VersionsTab({ save }) {
+  return (
+    <>
+      <GenerationReceipt settlement={save?.settlement} />
+      <VersionsTimeline save={save} />
+    </>
+  );
+}
+
+function VersionsTimeline({ save }) {
   const mobile = useIsMobile();
   const enabled = flag('versionHistory');
   const tier = useStore(s => s.auth.tier);

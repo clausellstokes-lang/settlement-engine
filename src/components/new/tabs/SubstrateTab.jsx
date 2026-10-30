@@ -19,11 +19,10 @@ import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
-import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
+import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import { edged } from '../../../design/edgedBox.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
@@ -122,39 +121,23 @@ export default function SubstrateTab({ settlement }) {
     );
   }
 
-  const summary = model.summary || {};
-  const pressures = [
-    ...(summary.collapsed || []),
-    ...(summary.critical || []),
-    ...(summary.strained || []),
-  ].map(k => VAR_LABEL[k] || humanizeToken(k) || 'Recorded condition');
-
   return (
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
+      {/* ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-25; RULINGS-CROSS X-12). The page title
+          agrees with the tab's new label, "Foundations", and the sub-line keeps the old title's
+          words. The framing paragraph is TRIMMED to its one fact (the readings include current
+          conditions, which is why a row can disagree with its home page's first-survey reading)
+          and the "Under pressure" callout is CUT: it restated the rows sorted worst-first right
+          below it (999/1000). The sixteen rows are the engine view and stay (R7). */}
+      <div data-testid="substrate-title" style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 2 }}>
+        Foundations
+      </div>
+      <div style={{ fontSize: proseFontSize(FS.sm, mobile), fontWeight: 700, color: BODY, marginBottom: 4 }}>
         What is holding, what is strained
       </div>
       <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        Food, authority, defense, trade, and the other foundations that keep this settlement standing.
-        Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
+        This reading includes current conditions: siege, drawdown, outbreak.
       </p>
-
-      {/* Pressures callout — the systems the model flags strained-or-worse. */}
-      <div data-testid="substrate-pressures" style={{
-        background: CARD_ALT,
-        ...edged(`1px solid ${pressures.length ? BORDER : BORDER2}`, `3px solid ${pressures.length ? RED : GREEN}`),
-        padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
-      }}>
-        {pressures.length ? (
-          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>
-            <strong style={{ color: RED }}>Under pressure:</strong> {pressures.join(', ')}.
-          </div>
-        ) : (
-          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: GREEN, lineHeight: 1.5 }}>
-            <strong>All foundations holding.</strong> No condition reads strained or worse.
-          </div>
-        )}
-      </div>
 
       {/* The 16-variable grid. */}
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>

@@ -131,7 +131,9 @@ const COVERED = [
 const FRAMED = [
   'src/components/new/tabs/DefenseTab.jsx',
   'src/components/new/tabs/OverviewTab.jsx',
-  'src/components/new/tabs/ViabilityTab.jsx',
+  // ViabilityTab.jsx LEFT this list in the UX consolidation (2026-10-30, RULINGS-T2 T2-15): its
+  // one economy read (the magic chain notes under the frozen magicDependency record) moved to
+  // MagicTab.jsx with the block; MagicTab is classified FROZEN_DEFERRED below.
 ];
 
 /** The standing print deferral — every economy reader under src/pdf. */
@@ -153,6 +155,8 @@ const PRINT_DEFERRED = [
 
 /** Reaches a read-model, owns no freshness claim. Reason is mandatory. */
 const FROZEN_DEFERRED = {
+  'src/components/new/tabs/MagicTab.jsx':
+    'Reads `economicState.activeChains[].magicNote` ONLY, to list the chain notes under the generation-frozen `magicDependency` record that moved here from ViabilityTab (UX consolidation 2026-10-30, RULINGS-T2 T2-15). Those notes are frozen with the record, the block they sit in is stamped "as judged at the first survey" on the page, and nothing in it is a tally, so it owns no freshness claim of its own.',
   'src/components/map/heraldRegister.js':
     'Gazetteer register rows: prosperity is banded into ONE word inside a glance sentence ("A prosperous town, at peace") — a register makes no freshness claim, and every row entity-links straight into the settlement dossier where the COVERED surfaces own the note. A second note per roster row would be noise, not honesty.',
   'src/components/map/HeraldGazetteer.jsx':
@@ -174,7 +178,7 @@ const FROZEN_DEFERRED = {
   'src/components/gallery/galleryUtils.js':
     'Gallery facet vocabulary; the economicState.prosperity mention is a comment naming the label source.',
   'src/components/new/SupplyChainsPanel.jsx':
-    'Child of a covered surface: mounted only inside EconomicsTab (and ChainRow inside SupplyChainsManager). The host tab carries the note above it.',
+    'Child of a covered surface: no panel of its own since the UX consolidation of 2026-10-30 (RULINGS-T2 T2-6). `chainFlowFacts` feeds EconomicsTab\'s Economic Flows cards and `ChainRow` renders inside the Compendium\'s SupplyChainsManager; the host tab carries the note above it.',
   'src/components/new/tabs/EconomicsGlance.jsx':
     'Child of a covered surface, on the SupplyChainsPanel.jsx standing directly above: the prosperity header and the at-a-glance tiles were lifted out of EconomicsTab.jsx verbatim (the tab sat exactly on its 600-line ceiling and the dossier mount registry needed a position layer), and this leaf renders only inside that tab. EconomicsTab still renders <EconomyFreshnessNote variant="tallies"> ABOVE it in the same return, so the tallies this leaf prints are already caveated on the same screen; a second note six inches below the first would double the caveat, not the honesty. The corpus sentences it routes are banded prose and carry no figure at all (§0d bans digits from dossier-state prose and the kernel rejects a numeric fill outright), so the lit half of this leaf makes no freshness claim of its own.',
   'src/components/new/dailyLifeLogic.js':

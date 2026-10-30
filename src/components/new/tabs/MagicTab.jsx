@@ -16,6 +16,19 @@ import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '.
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
+import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
+import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
+
+/**
+ * DS-DEF-9's position — the registry's first CROSS-TAB row, now drawn HERE (UX consolidation
+ * 2026-10-30, RULINGS-T2 T2-15): "would this town still work if the practitioners left" is
+ * the same idea as the role bands it frames, so the dependence reading sits with them. The
+ * registry row keeps its id (`viability.magicDependency`); renaming it would re-key the prose
+ * manifest, which is a shift of its own. ONE lens at ONE position.
+ */
+const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 
 const FACET_LABEL = {
   availability: 'Availability',
@@ -40,9 +53,12 @@ function Facet({ label, value }) {
 }
 
 /**
- * @param {{ settlement: any }} props
+ * @param {{ settlement: any, publicDossier?: boolean, playerView?: boolean }} props
+ *   `publicDossier` (§885.3): a free, anonymous gallery viewer draws no corpus prose, so the
+ *   DS-DEF-9 line is not drawn there; `playerView` is the desk audience, the PowerTab term.
+ *   Both are threaded from OutputContainer's magic case.
  */
-export default function MagicTab({ settlement }) {
+export default function MagicTab({ settlement, publicDossier = false, playerView = false }) {
   // THE PHONE PROSE FLOOR — the posture line, the role lines and the deity
   // coupling. Bound above BOTH early returns so the hook order is stable; the
   // facet labels and their values keep their own steps.
@@ -53,6 +69,24 @@ export default function MagicTab({ settlement }) {
   if (!posture.available) {
     return <div data-testid="magic-tab" style={{ padding: 24, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile) }}>Magic not assessed for this settlement.</div>;
   }
+
+  // ── MAGIC DEPENDENCE: ONE BLOCK, THE ROLES' FRAMING (T2-15 MERGE + MOVE, R2/R3) ──────────
+  // The frozen `magicDependency` record (its title and its chain notes) and DS-DEF-9's reading
+  // are one idea. DS-DEF-9 REPLACES the static explanation where the desk speaks; the static
+  // explanation stands on public. The block draws on a FALSE flag too when DS-DEF-9 has its
+  // `magicDependency false` reading (a finding, not an absence). Where magic does not function
+  // nothing here is true (T2-24), so the desk is not drawn and the block does not render.
+  // The block carries the page's only first-survey stamp: `magicDependency` is a G5
+  // generation-frozen record (owner-queue #28, one label per page, X-8).
+  const magicProse = publicDossier || magicWorksAt({ settlement }) === false
+    ? Object.freeze({ arcaneReliance: null })
+    : defenseMagicDependencyProse(settlement, {
+      seed: String(settlement?._seed ?? settlement?.id ?? ''),
+      audience: playerView ? 'player' : 'dm',
+      tierNoun: tierNounFor(settlement.tier),
+    });
+  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
+  const magicFrozen = posture.magicExists && !!settlement?.defenseProfile?.magicDependency;
 
   const deity = settlement?.config?.primaryDeitySnapshot || null;
   // The magic-legality coupling line, surfaced only when a MAJOR deity regulates.
@@ -88,6 +122,31 @@ export default function MagicTab({ settlement }) {
               ))}
             </NameColumns>
           </div>
+
+          {/* The dependence block: the framing the role bands below are read FROM (T2-15). */}
+          {(magicFrozen || magicLine) && (
+            <div data-testid="magic-dependence" style={{
+              background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
+              padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
+            }}>
+              <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SLATE, marginBottom: 4 }}>
+                Reliance on magic, as judged at the first survey
+              </div>
+              {magicLine
+                ? <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.55, margin: 0, fontStyle: 'italic' }}>{magicLine}</p>
+                : magicFrozen && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: 0 }}>
+                  This settlement's resilience relies on active magical infrastructure. One or more supply
+                  chains are magically sustained, or stress conditions are being offset by arcane, divine,
+                  or druidic intervention. Losing those practitioners through conflict, plague, or
+                  political disruption would immediately expose critical vulnerabilities.
+                </p>}
+              {magicFrozen && (settlement.economicState?.activeChains || []).filter(c => c.magicNote).map((c, i) => (
+                <div key={i} style={{ fontSize: proseFontSize(FS.xs, mobile), color: BODY, marginTop: 6, paddingLeft: 8, borderLeft: `2px solid ${BORDER}`, fontStyle: 'italic' }}>
+                  {c.label}: {c.magicNote}
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* The 4 role lines. */}
           <div style={{

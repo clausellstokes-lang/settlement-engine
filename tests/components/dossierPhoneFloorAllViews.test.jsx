@@ -526,16 +526,29 @@ const DESKTOP_BASELINE = Object.freeze({
   "Summary/DM Summary":  { measured:  9, sub14:  8 },
   "Summary/Plot Hooks":  { measured: 58, sub14: 58 },
   "Systems/Services":    { measured: 96, sub14: 96 },
-  "Systems/Economics":   { measured: 47, sub14: 47 },
-  "Systems/Power":       { measured: 28, sub14: 27 },
-  "Systems/Defense":     { measured: 28, sub14: 28 },
-  "Systems/Resources":   { measured:  5, sub14:  5 },
+  // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
+  // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
+  "Systems/Economics":   { measured: 40, sub14: 40 },
+  // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
+  // duplicate governing rows left the page; no token moved.
+  "Systems/Power":       { measured: 22, sub14: 21 },
+  // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
+  // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
+  "Systems/Defense":     { measured: 27, sub14: 27 },
+  // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
+  // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
+  "Systems/Resources":   { measured:  4, sub14:  4 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
-  "Systems/Outlook":     { measured:  5, sub14:  5 },
-  "Systems/Causes":      { measured:  2, sub14:  2 },
-  "Systems/Magic":       { measured:  1, sub14:  1 },
+  // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
+  // (moved to Versions) left the page; no token moved.
+  "Systems/Outlook":     { measured:  2, sub14:  2 },
+  // 2 -> 1 (2026-10-30, UX consolidation U8, T2-25): the pressures callout left; the framing is one line.
+  "Systems/Causes":      { measured:  1, sub14:  1 },
+  // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
+  // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
+  "Systems/Magic":       { measured:  2, sub14:  2 },
   "World/NPCs":          { measured: 45, sub14: 45 },
   "World/Relationships": { measured: 63, sub14: 63 },
   "World/Faith":         { measured:  1, sub14:  1 },
@@ -582,13 +595,21 @@ const MOBILE_BASELINE = Object.freeze({
   "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
   "Summary/Plot Hooks":  { prose: 58, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
-  "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Resources":   { prose:  4, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
+  "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
+  // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
+  "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
+  // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
+  "Systems/Defense":     { prose: 25, chrome: 2, sub14: 2, sub12: 0 },
+  // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
+  "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
+  "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 2 -> 1 (2026-10-30, UX consolidation U8): the pressures callout left.
+  "Systems/Causes":      { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
+  "Systems/Magic":       { prose:  1, chrome: 1, sub14: 1, sub12: 0 },
   "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 61, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },

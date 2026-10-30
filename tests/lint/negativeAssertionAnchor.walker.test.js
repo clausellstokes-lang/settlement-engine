@@ -279,7 +279,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/destroyConfirmSurfaces.test.jsx': 1,
   'tests/components/dossierDepthTabs.test.jsx': 5,
   'tests/components/dossierLadderModal.test.jsx': 1,
-  'tests/components/economicsPlotHookSeam.test.jsx': 1,
   'tests/components/economicsTabMalformedFlows.test.jsx': 1,
   'tests/components/engineSections.test.jsx': 2,
   'tests/components/faithSection.test.jsx': 7,
@@ -292,9 +291,9 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   //   cheaper shape — anchor three, leave one un-anchored so the count still reads 1 — was
   //   refused: four identical assertions with one deliberately left bare is bookkeeping
   //   dressed as a guard. The win is banked by DELETION, never by a lowered ceiling.
-  'tests/components/frozenTenseDefenseCopy.test.js': 2,
-  'tests/components/g5FirstSurveyCopy.test.js': 6,
-  'tests/components/g5FirstSurveyPdfTwins.test.js': 3,
+  'tests/components/frozenTenseDefenseCopy.test.js': 1,
+  'tests/components/g5FirstSurveyCopy.test.js': 2,
+  'tests/components/g5FirstSurveyPdfTwins.test.js': 1,
   'tests/components/gallery/galleryMapsUtils.test.js': 2,
   'tests/components/gallery/mapShareEditorCachedShareKind.test.jsx': 4,
   'tests/components/gallery/mapShareEditorPreserveOnOmit.test.jsx': 4,
@@ -323,7 +322,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/saveQuotaMeter.test.jsx': 2,
   'tests/components/sessionMode.test.jsx': 4,
   'tests/components/simulationDrawerPresentation.test.jsx': 1,
-  'tests/components/statBandsOverDigits.test.jsx': 6,
+  'tests/components/statBandsOverDigits.test.jsx': 5,
   'tests/components/surveyorConsentWiring.test.jsx': 2,
   'tests/components/tableLedgerPanel.test.jsx': 2,
   'tests/components/termsRefundsSection.test.jsx': 1,

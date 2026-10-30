@@ -317,8 +317,8 @@ export const DOSSIER_MOUNTS = Object.freeze([
     visibilityReason: 'DefenseTab\'s "Criminal Architecture & Public Order" is collapsible '
       + 'defaultOpen={orderElevated||crimStructure===\'organized\'}, open on 43 of 60 generated '
       + 'towns (5 tiers x 4 cultures x 3 seeds). The rung arrives already PROJECTED BESIDE the '
-      + 'DM\'s own safetyDesc field, and that field, the Internal Security headline, the order '
-      + 'badge and the safety band word are ALL inside the same fold: on the 17 towns that fold '
+      + 'DM\'s own safetyDesc field, and that field and the safety band word are inside the same '
+      + 'fold (the Internal Security bar above it carries the score): on the 17 towns that fold '
       + 'shut, the page prints no public-order fact anywhere and hides no sentence about one. '
       + 'Hoisting the line out would orphan it from the field it is a projection of. Whether a '
       + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',

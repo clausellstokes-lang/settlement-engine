@@ -61,8 +61,8 @@ directions: growth reds, and a grant that outlives its site reds.
 | site | was | is |
 |---|---|---|
 | `pdf/sections/FaithWar.jsx:155` | `(since tick 60)` | `(since the spring of year 2)` |
-| `pdf/sections/PowerStructure.jsx:309` | `(since tick 60)` | `(since the spring of year 2)` |
-| `pdf/sections/PowerStructure.jsx:325` | `tick 60` | `the spring of year 2` |
+| `pdf/sections/PowerStructure.jsx :: RuleAndSuccession` (occupation line) | `(since tick 60)` | `(since the spring of year 2)` |
+| `pdf/sections/PowerStructure.jsx :: RuleAndSuccession` (lineage cause) | `tick 60` | `the spring of year 2` |
 | `pdf/sections/FaithWar.jsx:168` | `Roughly 6 ticks from marching.` | `Roughly 6 weeks from marching.` |
 | `new/tabs/WarFaithTab.jsx:81` | the same duration, on the screen twin | the same cure |
 | `gallery/CampaignStatePanel.jsx:87` | `Tick 60` | `Week 9 of 52` |

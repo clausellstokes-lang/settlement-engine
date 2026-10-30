@@ -7,8 +7,7 @@
  *   - Stacked power-distribution bar (all factions in one viz)
  *   - Per-faction full card: power meter, description, category, crisis note,
  *     modifiers with deltas, sub-faction members
- *   - Tensions list with severity, parties, plot hooks
- *   - Active conflicts with issue/stakes/intensity/parties/plot hooks
+ *   - (tensions and conflicts print in History / Relationships since 2026-10-30, X-4)
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -23,30 +22,9 @@ import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
-import { cap, label, hookText, humanize } from '../lib/format.js';
-import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
-import { factionIdFromName } from '../../lib/entities.js';
+import { cap, label, humanize } from '../lib/format.js';
+import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
-
-/**
- * Render a conflict/tension party as a link to its faction card when the party
- * name resolves to an in-doc faction (by the canonical faction id), else plain
- * text. Structured-only: the resolution is id-keyed, not a prose scan.
- *
- * @param {object} props
- * @param {*} props.party      The raw party value (string or {name}).
- * @param {object} [props.index]  vm.entityIndex.
- * @param {object} [props.style]  Style merged onto the rendered node.
- * @returns {object|null}
- */
-function PartyRef({ party, index, style }) {
-  const name = label(party);
-  if (!name) return null;
-  const id = factionIdFromName(name);
-  const resolves = !!(index && id && index.resolve?.(id));
-  if (resolves) return <EntityRef id={id} index={index} type="faction" fallback={name} style={style} />;
-  return <Text style={style}>{name}</Text>;
-}
 
 export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   const p = vm.power;
@@ -163,128 +141,9 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
         <FactionCard key={`f-${i}`} faction={f} index={i} entityIndex={index} />
       ))}
 
-      {/* ── Tensions ──────────────────────────────────────────────── */}
-      {p.tensions.length > 0 && (
-        <View style={{ marginTop: space.sm }}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            CURRENT TENSIONS · {p.tensions.length}
-          </Text>
-          {p.tensions.map((t, i) => (
-            <View
-              key={`t-${i}`}
-              style={{
-                marginBottom: 5,
-                paddingLeft: 6,
-                borderLeft: `2pt solid ${palette.warn}`,
-                paddingTop: 1,
-                paddingBottom: 2,
-              }}
-              wrap={false}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
-                {t.severity && <Pill tone={severityTone(t.severity)}>{humanize(t.severity)}</Pill>}
-                <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, marginLeft: t.severity ? 6 : 0, flex: 1 }}>
-                  {humanize(t.label || t.type || 'Tension')}
-                </Text>
-              </View>
-              {t.description && (
-                <Text style={{ ...type.body, fontSize: pt['9'] }}>
-                  {t.description}
-                </Text>
-              )}
-              {t.parties?.length > 0 && (
-                <View style={{ flexDirection: 'row', flexWrap: 'wrap', marginTop: 1 }}>
-                  {t.parties.map((p, pi) => (
-                    <Tag key={`tp-${i}-${pi}`} tone="muted">
-                      <PartyRef party={p} index={index} />
-                    </Tag>
-                  ))}
-                </View>
-              )}
-              {t.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {t.hooks.map((h, hi) => (
-                    <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-      )}
-
-      {/* ── Conflicts ──────────────────────────────────────────── */}
-      {p.conflicts.length > 0 && (
-        <View style={{ marginTop: space.sm }}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
-            ACTIVE CONFLICTS · {p.conflicts.length}
-          </Text>
-          {p.conflicts.map((c, i) => (
-            <View
-              key={`c-${i}`}
-              style={{
-                marginBottom: 5,
-                paddingLeft: 6,
-                borderLeft: `2pt solid ${palette.bad}`,
-                paddingTop: 1,
-                paddingBottom: 2,
-              }}
-              wrap={false}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 1 }}>
-                {c.intensity && <Pill tone={severityTone(c.intensity)}>{humanize(c.intensity)}</Pill>}
-                <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink, marginLeft: c.intensity ? 6 : 0, flex: 1 }}>
-                  {Array.isArray(c.parties) && c.parties.length > 0
-                    ? c.parties
-                        .filter(p => label(p))
-                        .map((p, pi) => (
-                          <Text key={`cp-${i}-${pi}`}>
-                            {pi > 0 ? ' vs ' : ''}
-                            <PartyRef party={p} index={index} style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }} />
-                          </Text>
-                        ))
-                    : 'Conflict'}
-                </Text>
-              </View>
-              {c.issue && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
-                  <Text style={{ color: palette.faint }}>At issue: </Text>
-                  {c.issue}
-                </Text>
-              )}
-              {c.description && (
-                <Text style={{ ...type.body, fontSize: pt['9'], marginTop: 1 }}>
-                  {c.description}
-                </Text>
-              )}
-              {c.stakes && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], fontStyle: 'italic', marginTop: 1 }}>
-                  Stakes: {c.stakes}
-                </Text>
-              )}
-              {c.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {c.hooks.map((h, hi) => (
-                    <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
-            </View>
-          ))}
-        </View>
-      )}
+      {/* Current tensions and active conflicts print in the History and Relationships
+          chapters (UX consolidation 2026-10-30, RULINGS-CROSS X-4, RULINGS-T2 T2-19), and their
+          hooks in the Plot Hooks chapter (X-2), so this chapter carries neither. */}
 
       {/* ── Rule & Succession (self-gating: regime lineage / conquest) ──── */}
       <RuleAndSuccession lineage={p.lineage} occupied={vm?.liveWorld?.occupied || null} />
@@ -426,13 +285,6 @@ function legitTone(score) {
   if (score >= 70) return 'good';
   if (score >= 40) return 'warn';
   return 'bad';
-}
-
-function severityTone(s) {
-  const k = String(s || '').toLowerCase();
-  if (k === 'critical' || k === 'high' || k === 'severe') return 'bad';
-  if (k === 'medium' || k === 'moderate' || k === 'warning') return 'warn';
-  return 'muted';
 }
 
 export default PowerStructure;

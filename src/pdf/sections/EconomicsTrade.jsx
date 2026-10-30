@@ -7,7 +7,7 @@
  *   - Food security balance bar with full breakdown
  *   - Economic Flows (chains) with status badges + processing → outputs
  *   - Institutional services breakdown
- *   - Resource exploitation (full / partial / unexploited)
+ *   - (resource exploitation prints in Resources & Production since 2026-10-30)
  *   - Shadow economy: capture rate + operations + criminal chains + crime types
  *   - Active economic issues with descriptions, priorities, suggested fixes
  */
@@ -22,7 +22,7 @@ import { BarMeter } from '../primitives/BarMeter.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, num, smart, label, hookText, finite, safePct } from '../lib/format.js';
+import { cap, num, smart, label, finite, safePct } from '../lib/format.js';
 import { flag } from '../../lib/flags.js';
 import {
   tradeLabelOwnership,
@@ -238,22 +238,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
                 c.incomeContribution != null ? { label: 'INC', value: smart(c.incomeContribution) } : null,
               ].filter(b => b && b.value)}
               description={c.description || null}
-              body={
-                c.hooks?.length > 0 ? (
-                  <View style={{ marginTop: 2 }}>
-                    {c.hooks.map((h, hi) => (
-                      <View key={`chk-${i}-${hi}`} style={{ flexDirection: 'row' }}>
-                        <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>»</Text>
-                        <EditableText
-                          name={`economics.chain.${i}.hook.${hi}`}
-                          defaultValue={hookText(h)}
-                          style={{ ...type.italic, fontSize: pt['8.5'], color: palette.second }}
-                        />
-                      </View>
-                    ))}
-                  </View>
-                ) : null
-              }
+              /* UX consolidation 2026-10-30 (RULINGS-CROSS X-2): a chain's hooks print in the
+                 Plot Hooks chapter, not under the chain card. */
             />
           ))}
         </View>
@@ -331,38 +317,11 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         </View>
       )}
 
-      {/* ── Resource exploitation ─────────────────────────────── */}
-      {e.resourceExploitation && (e.resourceExploitation.full?.length > 0 || e.resourceExploitation.partial?.length > 0 || e.resourceExploitation.unexploited?.length > 0) && (
-        <View style={{ marginTop: space.sm }}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            RESOURCE EXPLOITATION
-          </Text>
-          <ThreeCol
-            a={
-              <View>
-                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.good }}>FULL</Text>
-                <BulletList items={e.resourceExploitation.full} tone="good" emptyText="None" itemRender={label} />
-              </View>
-            }
-            b={
-              <View>
-                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.warn }}>PARTIAL</Text>
-                <BulletList items={e.resourceExploitation.partial} tone="warn" emptyText="None" itemRender={label} />
-              </View>
-            }
-            c={
-              <View>
-                <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>UNEXPLOITED</Text>
-                <BulletList items={e.resourceExploitation.unexploited} tone="muted" emptyText="None" itemRender={label} />
-              </View>
-            }
-          />
-        </View>
-      )}
+      {/* Resource exploitation prints once, in Resources & Production (RULINGS-T2 T2-7,
+          T2-9 PDF parity: the same exploitation lists were printed in both chapters). */}
 
       {/* ── Shadow economy ─────────────────────────────────────── */}
-      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.operations?.length > 0 || e.shadowEconomy.crimeTypes?.length > 0) && (
+      {(e.shadowEconomy.captureRate != null || e.shadowEconomy.crimeTypes?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
@@ -380,35 +339,8 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
               ))}
             </View>
           )}
-          {e.shadowEconomy.operations?.length > 0 && (
-            <View style={{ marginBottom: 4 }}>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ECONOMIC OPERATIONS</Text>
-              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4, marginTop: 2 }}>
-                {e.shadowEconomy.operations.map((op, i) => (
-                  <View
-                    key={`op-${i}`}
-                    style={{
-                      backgroundColor: palette.badBg,
-                      borderWidth: 0.4,
-                      borderColor: palette.bad,
-                      borderRadius: 3,
-                      paddingHorizontal: 6,
-                      paddingVertical: 2,
-                    }}
-                  >
-                    <Text style={{ ...type.body_em, fontSize: pt['8.5'], color: palette.bad }}>
-                      {label(op)}
-                    </Text>
-                    {op?.econ && (
-                      <Text style={{ ...type.caption, fontSize: pt['7'], color: palette.muted }}>
-                        {op.econ}
-                      </Text>
-                    )}
-                  </View>
-                ))}
-              </View>
-            </View>
-          )}
+          {/* The criminal operations list prints in Defense & Security (T2-7/T2-20 parity);
+              this chapter keeps the capture share. */}
           {e.shadowEconomy.criminalChains?.length > 0 && (
             <View>
               <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted, marginTop: 2 }}>CRIMINAL SUPPLY CHAINS</Text>
@@ -475,25 +407,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
         </View>
       )}
 
-      {/* ── Hooks (compressed) ──────────────────────────────────── */}
-      {(e.viabilityHooks?.length > 0 || e.safetyHooks?.length > 0) && (
-        <View style={{ marginTop: space.sm }}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            ECONOMIC HOOKS
-          </Text>
-          {[...(e.viabilityHooks || []), ...(e.safetyHooks || [])].map((h, i) => (
-            <View key={`eh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['9'] }}>·</Text>
-              <EditableText
-                name={`economics.hook.${i}`}
-                defaultValue={hookText(h)}
-                style={{ ...type.body, fontSize: pt['9'] }}
-              />
-            </View>
-          ))}
-        </View>
-      )}
+      {/* Economic and order hooks print in the Plot Hooks chapter (RULINGS-CROSS X-2). */}
     </PageChrome>
   );
 }

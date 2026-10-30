@@ -670,7 +670,8 @@ describe('one fact, two surfaces, two rungs — the per-site arms', () => {
       expect(printed, `${town}: the viability chapter printed no verdict callout at all`)
         .toContain('VERDICT');
       expect(
-        screened.some((w) => w.startsWith('This tab checks whether your settlement makes')),
+        // The tab's own vintage label since the UX consolidation (T2-11) replaced the caption.
+        screened.some((w) => w.startsWith('Judged at the first survey; not re-run since.')),
         `${town}: the viability tab rendered its empty state, so the parity below is vacuous`,
       ).toBe(true);
 

@@ -582,7 +582,7 @@ const { VERDICT, CONTRADICTIONS, FIRST_SURVEY } = drawnMembers({
 });
 
 describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () => {
-  test('all three DS-GEN-11 lenses reach the DOM privately and none reach a public dossier', () => {
+  test('the ONE surviving DS-GEN-11 lens (the contradictions) reaches the DOM privately and never a public dossier; the cut two do not draw', () => {
     const priv = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: false,
     })).container.textContent;
@@ -590,16 +590,15 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
     const pub = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: true,
     })).container.textContent;
-    // The verdict's three lenses render as ONE woven paragraph, so each anchor is taken in
-    // the form the page prints it (see `onPage`).
+    // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-13): ONE lens of three draws. The verdict
+    // lens restated the headline and the first-survey lens restated the page's vintage label;
+    // the contradiction reading is the one that carries something the panel does not.
     const verdict = generalDeskLines(UNVIABLE, { publicDossier: false }).viability.verdictLines;
-    expectNoSeedFailures(collectSeedFailures([
-      [onPage(VERDICT, verdict, UNVIABLE), 'the verdict'],
-      [onPage(CONTRADICTIONS, verdict, UNVIABLE), 'the contradiction count'],
-      [onPage(FIRST_SURVEY, verdict, UNVIABLE), 'the first-survey caveat'],
-    ], ([sentence, label]) => expectPresentThenAbsent(
-      priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`,
-    )), 'all three DS-GEN-11 lenses draw privately and none reaches a public dossier');
+    expect(verdict, 'the position draws exactly the contradiction lens').toEqual([onPage(CONTRADICTIONS, verdict, UNVIABLE)]);
+    expectPresentThenAbsent(priv, pub, onPage(CONTRADICTIONS, verdict, UNVIABLE), 'DS-GEN-11 the contradiction count (viability.verdict)');
+    expect(priv, 'the cut verdict lens drew').not.toContain(VERDICT); // anchored: expectPresentThenAbsent above proves priv carries the position
+    expect(priv, 'the cut first-survey lens drew').not.toContain(FIRST_SURVEY); // anchored: same render as above
+    expect(priv.slice(1), 'the cut verdict lens drew, stood down').not.toContain(VERDICT.slice(VERDICT.indexOf(' '))); // anchored: same render as above
     // The DATUM survives the gate: the headline and the pill keep their own words.
     // The word moved with the lift: both surfaces now read domain/display/viabilityVerdict.js,
     // which speaks the verdict at rung 3 ('Not viable') instead of the tab's old private shout.
@@ -753,14 +752,18 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
     expect(priv, 'a raw chain id reached the page').not.toContain('fuel —'); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
     expect(priv, 'an unfilled seam reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
     // ⛔ AND IT IS ABOVE THE FOLD. `Section` renders `{open && children}`, so a line placed
-    // inside `Supply Chains` — which is `defaultOpen={false}` — reaches no reader on first
-    // paint while every walker stays green. This asserts the sentence renders WITHOUT the
-    // section being opened, which is the only way that defect stays fixed.
+    // inside `Economic Flows` — folded on this town, which has no impaired chain — reaches
+    // no reader on first paint while every walker stays green. This asserts the sentence
+    // renders WITHOUT the section being opened, which is the only way that defect stays
+    // fixed. (UX consolidation 2026-10-30, T2-6: Supply Chains left the tab; Economic
+    // Flows is the one chain rendering, and this line frames it.)
     expect(priv, 'the corpus line is behind a fold').toContain(CRAFT);
     expect(priv, 'the folded section rendered its own rows — the anchor is wrong')
       .not.toContain('Ingots'); // anchored: the toContain(CRAFT) on the line above proves this same render drew the corpus line
-    // The DATUM survives the gate: the supply-chain section keeps its own heading.
-    expect(pub).toContain('Supply Chains');
+    // The DATUM survives the gate: the one chain section keeps its own heading, and the
+    // retired duplicate does not come back.
+    expect(pub).toContain('Economic Flows');
+    expect(pub).not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on the line above, same render
   });
 
   test('a town with nothing to explain draws NOTHING — the stated silence, in the DOM', () => {

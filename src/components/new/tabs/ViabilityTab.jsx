@@ -1,16 +1,13 @@
 import { tokenCase } from '../labelLadder.js';
 import { viabilityVerdict } from '../../../domain/display/viabilityVerdict.js';
 import React, { useMemo } from 'react';
-import { FS, GREEN_DEEP, RED, swatch, MUTED } from '../../theme.js';
+import { FS, swatch, MUTED } from '../../theme.js';
 import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
-import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
+import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 
-import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
-import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
@@ -23,14 +20,12 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 
-/**
- * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
- * into the `defense` corpus leaf and its fact belongs here: not "does the town have arcane
- * defenses" (DS-DEF-5 speaks that on the defense tab) but "would this town still work if the
- * practitioners left", which is a viability question. ONE lens at ONE position: the block's
- * NAMED-chain pool is a more specific rung of the same reading, not a second sentence.
- */
-const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
+/** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
+export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
+
+// The summary trim lives in viabilityFilter.js, the module web and PDF already share, so the
+// paid document trims exactly what the tab trims.
+export { trimViabilitySummary };
 
 // The verdict palette, keyed on the SHARED tone token so the colour and the word can no
 // longer disagree. The words live in domain/display/viabilityVerdict.js; these do not,
@@ -59,26 +54,16 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
-  // DS-DEF-9. THE PUBLIC GATE (§885.3): a public gallery dossier is a FREE, ANONYMOUS
-  // viewer and corpus prose is a PAID surface, so the desk is NOT DRAWN there. The audience
-  // follows kernel law 2's fail-closed default, stated rather than defaulted. This tab
-  // received neither flag before this car; `OutputContainer` now passes both.
-  const magicProse = publicDossier
-    ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(s, {
-      seed: String(s?._seed ?? s?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(s.tier),
-    });
-  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
+  // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
+  // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
   // this tab supplies its own coherence badge.
   const vmViability = flag('canonicalViewModel') ? deriveViability(s) : null;
-  const summaryClean = vmViability
+  const summaryClean = trimViabilitySummary(vmViability
     ? vmViability.summary.replace(/^[^:]+:\s*/, '').trim()
-    : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim();
+    : (v.summary||'').replace(/^[✗✓]\s*(NOT VIABLE:|VIABLE:)\s*/i, '').trim());
 
   // Stress-consequence issues: expected effects of active stressors (siege, famine, etc.)
   // These are NOT structural problems — they belong in a separate "Active Conditions" section
@@ -95,20 +80,6 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   const structuralReceiptItems = s.structuralViolations || [];
   const structViolations = structuralReceiptItems.filter(item => item?.severity !== 'by_design');
   const structuralByDesign = structuralReceiptItems.filter(item => item?.severity === 'by_design');
-  const generationReceipt = s.generationCoherenceReceipt || null;
-  const generationJudgments = Array.isArray(generationReceipt?.judgments)
-    ? generationReceipt.judgments
-    : [];
-  const supportedGenerationJudgments = generationJudgments.filter(
-    judgment => (
-      judgment?.status === 'pass'
-      || judgment?.status === 'pass_with_tension'
-    ),
-  );
-  const reviewGenerationJudgments = generationJudgments.filter(
-    judgment => judgment?.status === 'needs_review',
-  );
-
   // Critical issues vs lower-severity
   const byDesignIssues = [
     ...(v.issues||[]).filter(i => i.severity==='by_design'),
@@ -168,17 +139,17 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               </span>
             </div>
             {summaryClean&&<p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0}}>{summaryClean}</p>}
-            <p style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
-              This tab checks whether your settlement makes logical sense, as judged at the first survey; later
-              events and edits do not re-run this check. Not whether it&apos;s economically optimised.
-              A viable settlement can have unexploited resources and unsatisfied demand; what matters is whether the
-              pieces fit together plausibly.
+            {/* THE PAGE'S ONE VINTAGE LABEL (owner-queue #28; RULINGS-CROSS X-8, T2-11). The
+                coaching sentences that explained the tab to the DM are cut (R1); section
+                headers on this page carry no "First Survey" suffix, this line covers them. */}
+            <p data-testid="viability-vintage" style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,margin:'6px 0 0',lineHeight:1.4}}>
+              {FIRST_SURVEY_LABEL}
             </p>
             {/* ── DS-GEN-11 (viability.verdict) ─────────────────────────────
-                Three lenses over one verdict at ONE position, in the order the
-                panel above prints them: the verdict, the contradiction count,
-                and when the reading was taken. The DATUM is untouched — the
-                headline, the summary and the pills all keep their own words. */}
+                ONE lens since the UX consolidation (T2-13): the contradiction
+                reading. The verdict lens restated the headline and the
+                first-survey lens restated the vintage label (generalDeskRead.js
+                selects the lens). The DATUM is untouched. */}
             {verdictLines.length>0&&<div style={{borderTop:'1px solid #d8c090',marginTop:10,paddingTop:8}}>
               <ProseBlock lines={verdictLines} settlementName={s?.name} tier={s?.tier}
                 style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -195,100 +166,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
         
       </div>
 
-      {/* The final generation receipt is deliberately separate from the broad
-          viability verdict above. Viability asks whether the settlement can
-          function; this receipt proves that the generated dossier agrees with
-          its own world law and canonical ledgers. */}
-      {generationReceipt&&(
-        <div style={{
-          background:generationReceipt.status==='needs_review'?'#fdf4f4':'#f4faf5',
-          ...edged(`1px solid ${generationReceipt.status==='needs_review'?'#e8c0c0':'#b8d8bd'}`,`4px solid ${generationReceipt.status==='needs_review'?RED:GREEN_DEEP}`),
-          padding:'10px 14px',
-          marginBottom:12,
-        }}>
-          <div style={{display:'flex',gap:8,alignItems:'baseline',flexWrap:'wrap'}}>
-            <span style={{fontSize:FS.sm,fontWeight:800,color:generationReceipt.status==='needs_review'?RED:GREEN_DEEP}}>
-              {generationReceipt.status==='needs_review'
-                ? 'Generation receipt: needs review'
-                : generationReceipt.status==='coherent_with_authored_tensions'
-                  ? 'Generation receipt: coherent, with authored tensions'
-                  : 'Generation receipt: coherent'}
-            </span>
-            {/* A sentence now, not a token pair — 'culture South-Asian-inspired · themes Grounded'
-                reads as prose, so it takes the prose floor (14px on a phone), not chrome's. */}
-            <span style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED}}>
-              {/* ⛔ THE RECEIPT STORES THE PROFILE'S KEY, AND IT SHOULD: the coherence record
-                  is an audit trail, and `south_asian` is what the generator was asked for.
-                  The settlement's own materialized identity carries that key's authored
-                  LABEL ('South-Asian-inspired'), so the reader gets the word and the record
-                  keeps the key. `tokenCase` covers a legacy save with no identity. */}
-              culture {s.culturalIdentity?.label || tokenCase(generationReceipt.cultureProfile)} · themes {tokenCase(generationReceipt.contentProfile)}
-            </span>
-          </div>
-          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:4}}>
-            {(generationReceipt.checks||[]).filter(item=>item.status==='pass').length}/{(generationReceipt.checks||[]).length} checks passed
-            {(generationReceipt.repairs||[]).length>0&&` · ${(generationReceipt.repairs||[]).length} deterministic repair${generationReceipt.repairs.length===1?'':'s'} recorded`}
-            {(generationReceipt.authoredTensions||[]).length>0&&` · ${(generationReceipt.authoredTensions||[]).length} explicit tension${generationReceipt.authoredTensions.length===1?'':'s'} preserved`}
-          </div>
-          {generationJudgments.length>0&&(
-            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.45,marginTop:2}}>
-              Formal judgments: {supportedGenerationJudgments.length}/{generationJudgments.length} supported
-              {reviewGenerationJudgments.length>0&&` · ${reviewGenerationJudgments.length} need${reviewGenerationJudgments.length===1?'s':''} review`}
-            </div>
-          )}
-          {(generationReceipt.checks||[]).filter(item=>item.status==='fail').map(item=>(
-            <div key={item.id} style={{fontSize:chromeFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
-              {item.label}: {item.findings.length} finding{item.findings.length===1?'':'s'}
-            </div>
-          ))}
-          {reviewGenerationJudgments.map(judgment=>(
-            <div key={judgment.id} style={{fontSize:proseFontSize(FS.xxs, mobile),color:RED,marginTop:3}}>
-              {judgment.label}: {judgment.summary||'Formal judgment needs review.'}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* ── MAGIC DEPENDENCY WARNING ───────────────────────────────────────── */}
-      {s?.defenseProfile?.magicDependency&&(
-        <div style={{background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',borderLeft:'4px solid #7a3a9a',
-          padding:'10px 14px',marginBottom:12}}>
-          <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
-            Magic Dependency · First Survey
-          </div>
-          <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.5}}>
-            This settlement's resilience relies on active magical infrastructure. One or more supply
-            chains are magically sustained, or stress conditions are being offset by arcane, divine,
-            or druidic intervention. Losing those practitioners through conflict, plague, or
-            political disruption would immediately expose critical vulnerabilities.
-          </div>
-          {(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
-            <div key={i} style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
-              borderLeft:'2px solid #c0a0e0',fontStyle:'italic'}}>
-              {c.label}: {c.magicNote}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* DS-DEF-9: what the town's dependence on its practitioners means, in its own voice.
-          Rendered OUTSIDE the warning box on purpose — the box draws only when the flag is
-          true, and the block's `magicDependency false` pool is a reading rather than an
-          absence ("losing every practitioner here would be a loss and not a collapse"). A
-          line that could only appear inside the box would leave a third of an authored
-          block permanently unreachable, which is the mounted-but-dark defect. */}
-      {magicLine&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a3a9a',
-          padding:'9px 13px',marginBottom:12}}>
-          <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
-        </div>
-      )}
+      {/* The generation receipt moved to the Versions tab (Notes group) in the UX
+          consolidation (T2-14): it audits the generator, not the town, and stays
+          reachable there. */}
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
       {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
-        <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,marginBottom:8,lineHeight:1.5,fontStyle:'italic'}}>
-          These contradictions are intentional overrides. The settlement has institutions or combinations outside its normal tier. Use these as plot seeds, not problems to fix.
-        </div>
         {byDesignIssues.map((v2,i)=>(
           <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
@@ -301,7 +184,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       </Section>}
 
       {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
-      {structViolations.length>0&&<Section title={`Structural Crises · First Survey (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
+      {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
           <div key={i} style={{background:swatch['#FDF0F0'],border:'1px solid #e0a0a0',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
             <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:3}}>
@@ -360,9 +243,6 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
 
       {/* ── WARNINGS ─────────────────────────────────────────────────────── */}
       {stressConsequences.length>0&&<Section title={`Active Stress Effects (${stressConsequences.length})`} collapsible defaultOpen={true} accent='#6b4c2a'>
-        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:'0 0 10px',fontStyle:'italic'}}>
-          These are expected consequences of active stress conditions. Not structural flaws. A settlement under siege losing supply chain access is working as intended.
-        </p>
         {stressConsequences.map((item,i)=>(
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}

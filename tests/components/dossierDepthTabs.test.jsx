@@ -582,8 +582,14 @@ describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
     // The read-model yields the 16 system variables as rows.
     const rows = [...container.querySelectorAll('[data-substrate-row]')];
     expect(rows.length).toBeGreaterThan(0);
-    expect(screen.getByTestId('substrate-pressures')).toBeTruthy();
+    // UX consolidation 2026-10-30 (RULINGS-T2 T2-25, RULINGS-CROSS X-12): the page title is
+    // "Foundations", the old title is its sub-line, the framing is one fact, and the
+    // "Under pressure" callout (a restatement of the worst-first rows) is gone.
+    expect(screen.getByTestId('substrate-title').textContent).toBe('Foundations');
     expect(screen.getByText('What is holding, what is strained')).toBeTruthy();
+    expect(screen.getByText('This reading includes current conditions: siege, drawdown, outbreak.')).toBeTruthy();
+    expect(screen.queryByTestId('substrate-pressures')).toBeNull();
+    expect(container.textContent).not.toMatch(/Under pressure|All foundations holding/); // anchored: the rows and the title are asserted on this render
     expect(screen.getByText('Settlement foundations')).toBeTruthy();
     expect(container.textContent).not.toMatch(/causal substrate|engine simulates|system|variable/i);
     for (const row of rows) {

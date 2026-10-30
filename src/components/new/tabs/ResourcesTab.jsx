@@ -5,6 +5,7 @@ import { sans, Section, Empty } from '../Primitives';
 import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
@@ -13,6 +14,9 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
+
+/** DS-ECO-11's one position on this page; named once so the header and the paragraph read the same row. */
+const GROUND_MOUNT = 'resources.groundAndWorkings';
 
 /**
  * @param {object} props
@@ -32,6 +36,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const _config = r?.config || {};
   // THE ECONOMY DESK, through its one caller. DS-ECO-11 renders here and nowhere else.
   const deskProse = economyDeskRead(r, { publicDossier, playerView });
+  // ⭐ ONE STRATEGIC-VALUE SENTENCE (UX consolidation 2026-10-30, RULINGS-T2 T2-9; RUBRIC R2).
+  // DS-ECO-11's strategic-value lens REPLACES the generator's line where the desk speaks (DM
+  // and player views); the generator's line stands where it does not (the public dossier, or
+  // a silent corpus). Never both: the header used to print the line and the desk paragraph
+  // below restated it in voice on 856 of 856 towns with a terrain.
+  const deskWorth = drawnAtMount(GROUND_MOUNT, deskProse.strategicValue)?.sentence || null;
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
@@ -61,7 +71,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           <div style={{flex:1,minWidth:160}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:swatch.inkMag,lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
-            {res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
+            {!deskWorth&&res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
@@ -75,13 +85,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       </div>
 
       {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
-          FOUR LENSES OVER ONE RECORD AT ONE POSITION, in the order the header above prints
-          their data: what the country is (`terrain`), what the town is good at
-          (`economicStrengths`), what the ground is worth to somebody else (`strategicValue`),
-          and the ONE resource line the reader meets first in the section below. The DS-ECO-12
-          shape, not a new one. Additive: the terrain word, the strengths chips and the
-          generator's own strategic-value line all stay exactly where they are. */}
-      <DeskLines mount="resources.groundAndWorkings" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.terrainIdentity, deskProse.economicStrengths, deskProse.strategicValue, deskProse.exploitation]} />
+          TWO LENSES SINCE THE UX CONSOLIDATION (2026-10-30, T2-9): the strategic-value
+          sentence (which stands in for the generator's line above on DM views) and the ONE
+          resource line that frames the Resource Exploitation section below. The terrain lens
+          is cut (the Overview's place passage owns the ground, X-1) and the strengths lens is
+          cut (the chips above are the strengths, R2). */}
+      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation]} />
 
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
@@ -157,7 +166,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted. Consumed locally, export potential reduced</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
@@ -165,7 +174,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant. Full export potential</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>

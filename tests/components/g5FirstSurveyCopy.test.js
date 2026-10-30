@@ -51,24 +51,31 @@ const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 const DEFENSE_PDF = 'src/pdf/sections/DefenseSecurity.jsx';
 
 describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
-  test('the tab fine print frames the coherence check as a first-survey verdict', () => {
+  // ⭐ ONE LABEL PER PAGE (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
+  // vetoable; RULINGS-T2 T2-11). The page-level vintage label covers every frozen record on
+  // the page (economicViability, structuralViolations, magicDependency), so the section
+  // headers no longer carry their own "· First Survey" suffix.
+  test('the page carries ONE vintage label, and the coaching caption is gone', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/as judged at the first survey/);
-    expect(src).toMatch(/later\s+events and edits do not re-run this check/);
-    // Negative: the bare present-tense sentence stays dead.
-    expect(src).not.toMatch(/makes logical sense\. Not whether/);
+    expect(src).toMatch(/Judged at the first survey; not re-run since\./);
+    expect(src.match(/first survey/gi) || [], 'the vintage is said once in this file').toHaveLength(1);
+    // Negative: the coaching sentences stay dead.
+    expect(src).not.toMatch(/This tab checks whether/); // anchored: the toMatch on the vintage label above reads this same source
+    expect(src).not.toMatch(/economically optimised/); // anchored: same source as the toMatch above
   });
 
-  test('the Structural Crises section (frozen structuralViolations) carries the vintage', () => {
+  test('the Structural Crises section is covered by the page label, not a suffix', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Structural Crises · First Survey/);
-    expect(src).not.toMatch(/Structural Crises \(\$\{/);
+    expect(src).toMatch(/Structural Crises \(\$\{structViolations\.length\}\)/);
+    expect(src).not.toMatch(/Structural Crises · First Survey/); // anchored: the toMatch on the bare header above reads this same source
   });
 
-  test('the Magic Dependency banner (frozen magicDependency) carries the vintage', () => {
-    const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Magic Dependency · First Survey/);
-    expect(src).not.toMatch(/Magic Dependency Detected/);
+  test('the frozen magicDependency record left Outlook and carries its stamp on the Magic tab', () => {
+    // RULINGS-T2 T2-15: the block moved to the Magic tab, whose only stamp it carries.
+    expect(read(VIABILITY_TAB)).not.toMatch(/Magic Dependency/); // anchored: the Magic tab source below carries the moved block
+    const magic = read('src/components/new/tabs/MagicTab.jsx');
+    expect(magic).toMatch(/Reliance on magic, as judged at the first survey/);
+    expect(magic.match(/first survey/gi) || []).toHaveLength(1);
   });
 });
 
@@ -91,9 +98,12 @@ describe('G5 first-survey framing — OverviewTab', () => {
 });
 
 describe('G5 first-survey framing — PDF DefenseSecurity', () => {
-  test('the VULNERABILITIES list header carries the vintage', () => {
+  // ⭐ ONE LABEL PER CHAPTER (X-8; RULINGS-T2 T2-22 print parity): the threat caption carries
+  // the vintage, and the VULNERABILITIES header no longer repeats it.
+  test('the chapter says the vintage once, in the threat caption; VULNERABILITIES carries no suffix', () => {
     const pdf = read(DEFENSE_PDF);
-    expect(pdf).toMatch(/VULNERABILITIES · FIRST SURVEY/);
-    expect(pdf).not.toMatch(/VULNERABILITIES\s*<\/Text>/);
+    expect(pdf.match(/first survey/gi) || []).toHaveLength(1);
+    expect(pdf).toMatch(/VULNERABILITIES\s*<\/Text>/);
+    expect(pdf).not.toMatch(/VULNERABILITIES · FIRST SURVEY/); // anchored: the bare header is matched in this same source above
   });
 });

@@ -179,9 +179,9 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
 
     expect(text).not.toMatch(/ratio\s*[\d.]+/i);
     expect(text).not.toContain('×');
-    // The typed reads that carry the same fact are still there.
-    expect(text).toMatch(/Internal security · first survey/);
-    expect(text).toMatch(/(Strong|Adequate|Weak) Public Order|Critical: Order Failing/);
+    // The typed read that carries the same fact is still there: the Internal Security bar's
+    // band word (the "<band> Public Order" headline that restated it was cut, T2-20).
+    expect(text).toMatch(/Internal Security(Strong|Adequate|Weak|Critical)/);
   });
 
   test('the ratio is retired from DISPLAY only — safetyProfile.safetyRatio is still derived', () => {
@@ -205,10 +205,12 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
 
-    // Both scored rows (Economic Backing, Arcane Support) are present; the unscored
-    // ones (no bar) carry no band and are untouched.
+    // The scored row (Arcane Support) is present; the unscored ones (no bar) carry no band
+    // and are untouched. ⭐ Economic Backing left the rows in the UX consolidation (T2-23):
+    // the Threat Assessment's Economic Survival row grades the same score, with prose.
     const caps = deriveSupportingCapabilities(settlement);
-    for (const label of ['Economic Backing', 'Arcane Support']) {
+    expect(screen.queryByText('Economic Backing'), 'Economic Backing still renders').toBeNull();
+    for (const label of ['Arcane Support']) {
       const labelEl = screen.getByText(label);
       const row = labelEl.closest('div').parentElement;
       const cap = caps.find((c) => c.label === label);
@@ -262,8 +264,8 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
       }
     }
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
-    const bars = screen.getByText('Economic Backing').closest('div').parentElement;
-    expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/);
+    const bars = screen.getByText('Arcane Support').closest('div').parentElement;
+    expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/); // anchored: getByText('Arcane Support') found this row
   });
 
   /**
@@ -284,27 +286,29 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
    * beside a sentence-case status read as two different marks), so a grade word counts however
    * it is cased.
    */
-  test('Economic Backing says ONE grade at every score, in its own vocabulary', () => {
+  /**
+   * ⭐ REWRITTEN IN THE UX CONSOLIDATION (2026-10-30, RULINGS-T2 T2-23): the Economic Backing
+   * row left the Defense tab, because it graded the same econScore the Threat Assessment's
+   * Economic Survival row grades. The claim this arm made (one score, one grade on the page)
+   * now holds by construction, and it is pinned as such: at every score the economic grade
+   * is said once, by the Economic Survival band, and the status vocabulary never appears.
+   */
+  test('the economic score says ONE grade on the Defense tab at every score, on the Economic Survival row', () => {
     const base = settlements.find(([n]) => n === 'city')[1];
-    const ladderWords = [...ECON_STATUS_LADDER, ...BANDS.map((w) => statusCase(w))];
-    const GRADE_RE = new RegExp(`\\b(?:${ladderWords.join('|')})\\b`, 'gi');
     const reached = new Set();
     for (const economic of [0, 19, 20, 22, 24, 25, 30, 39, 40, 50, 64, 65, 80, 100]) {
       const settlement = withScores(base, { economic });
-      const cap = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Economic Backing');
-      render(<DefenseTab settlement={settlement} />);
+      const { container } = render(<DefenseTab settlement={settlement} />);
       fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
-      const row = screen.getByText('Economic Backing').closest('div').parentElement;
-      const leaves = [...row.querySelectorAll('*')]
-        .filter((el) => el.children.length === 0 && el.textContent.trim());
-      const graded = leaves.flatMap((el) => el.textContent.match(GRADE_RE) || []).map((w) => w.toLowerCase());
-      expect(graded, `econScore ${economic}: the row reads "${leaves.map((el) => el.textContent.trim()).join(' | ')}"`)
-        .toEqual([cap.status.toLowerCase()]);
-      reached.add(cap.status);
+      const row = screen.getByText('Economic Survival').closest('[role="button"]');
+      expect(row.textContent, `econScore ${economic}: the Economic Survival band`).toContain(statusCase(scoreBand(economic)));
+      reached.add(scoreBand(economic));
+      expect(container.textContent).not.toContain('Economic Backing'); // anchored: the Economic Survival row is asserted on this render above
+      expect(container.textContent).not.toMatch(/Well-funded|Underfunded/); // anchored: same render as above
       cleanup();
     }
-    // NON-VACUITY: the sweep really crossed every rung of the status ladder.
-    expect([...reached].sort()).toEqual([...ECON_STATUS_LADDER].sort());
+    // NON-VACUITY: the sweep really crossed every band.
+    expect([...reached].sort()).toEqual([...BANDS].sort());
   });
 
   /**
@@ -450,9 +454,9 @@ describe('Two names, two facts — the Overview score and the Defense presence r
     const { container: defense } = render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
     const defenseLabels = labelsIn(defense);
-    // 'Economic Backing' is the sibling capability row: it proves the fold is open and the
+    // 'Legal Infrastructure' is the sibling capability row: it proves the fold is open and the
     // list rendered, which is exactly the drift that would make a bare exclusion vacuous.
-    expectAbsentWithAnchor(defenseLabels, 'Magical Capability', 'Economic Backing',
+    expectAbsentWithAnchor(defenseLabels, 'Magical Capability', 'Legal Infrastructure',
       `${name}: the Overview's score-row name on the Defense tab`);
     expect(defenseLabels, `${name}: the Defense tab's presence row must render`)
       .toContain('Arcane Support');
