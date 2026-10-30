@@ -60,6 +60,9 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
       <StateProse stateProse={stateProse} tab="resources" />
 
       {/* ── Strategic value ────────────────────────────────────── */}
+      {/* ONE strategic-value sentence in print (RULINGS-T2 T2-9 parity): the DM-editable
+          generator line below is print's home for it, so printProse.js does not print
+          DS-ECO-11's strategic-value lens beside it. */}
       {r.strategicValue && (
         <Callout tone="gold" kicker="STRATEGIC VALUE">
           <EditableProse
@@ -156,7 +159,6 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           {r.nearbyDepleted?.length > 0 && (
             <ResourceRow
               kicker="Depleted"
-              hint="consumed locally · export potential reduced"
               tone="bad"
               items={r.nearbyDepleted}
               customNames={r.nearbyCustom}
@@ -165,7 +167,6 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
           {r.nearbyAbundant?.length > 0 && (
             <ResourceRow
               kicker="Abundant"
-              hint="full export potential"
               tone="good"
               items={r.nearbyAbundant}
               customNames={r.nearbyCustom}

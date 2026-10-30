@@ -97,9 +97,12 @@ describe('G5 first-survey framing — OverviewTab', () => {
 });
 
 describe('G5 first-survey framing — PDF DefenseSecurity', () => {
-  test('the VULNERABILITIES list header carries the vintage', () => {
+  // ⭐ ONE LABEL PER CHAPTER (X-8; RULINGS-T2 T2-22 print parity): the threat caption carries
+  // the vintage, and the VULNERABILITIES header no longer repeats it.
+  test('the chapter says the vintage once, in the threat caption; VULNERABILITIES carries no suffix', () => {
     const pdf = read(DEFENSE_PDF);
-    expect(pdf).toMatch(/VULNERABILITIES · FIRST SURVEY/);
-    expect(pdf).not.toMatch(/VULNERABILITIES\s*<\/Text>/);
+    expect(pdf.match(/first survey/gi) || []).toHaveLength(1);
+    expect(pdf).toMatch(/VULNERABILITIES\s*<\/Text>/);
+    expect(pdf).not.toMatch(/VULNERABILITIES · FIRST SURVEY/); // anchored: the bare header is matched in this same source above
   });
 });

@@ -492,9 +492,11 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('power.legitimacyBanner', power.legitimacyBanner),
     printed('power.legitimacyBanner', power.legitimacyLens),
   ]);
+  // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-9, T2-17, T2-18, T2-20, T2-21, T2-22, T2-4):
+  // the print positions below mirror the screen's lens cuts exactly, so the PDF says what the
+  // tab says and no lens the tab dropped survives in print.
   put('power', 'power.stabilityHeader', [
     printed('power.stabilityHeader', power.stabilityHeader),
-    printed('power.stabilityHeader', power.stabilityLens),
   ]);
   put('power', 'power.criminalUnderside', [
     printed('power.criminalUnderside', power.legitimacyReading),
@@ -503,11 +505,9 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('power', 'power.rulingStructure', [
     printed('power.rulingStructure', power.rulingStructure),
-    printed('power.rulingStructure', power.governingTitle),
   ]);
   put('power', 'power.succession', [
     printed('power.succession', power.successionRisk),
-    printed('power.succession', power.successionHold),
   ]);
 
   // ⚠ EVERY LENS IS READ BY NAME rather than through a key list. The desks return frozen
@@ -524,12 +524,9 @@ export function buildPrintProse(settlement, ctx = {}) {
     ? /** @type {string|null} */ (lens?.beside ?? null) : null);
   put('defense', 'defense.postureHeader', [
     beside('defense.postureHeader', posture.posture),
-    beside('defense.postureHeader', posture.terrain),
-    beside('defense.postureHeader', posture.prize),
   ]);
   put('defense', 'defense.publicOrder', [
     beside('defense.publicOrder', order.publicOrder),
-    beside('defense.publicOrder', order.firstSurvey),
   ]);
   put('defense', 'defense.threatAssessment', [
     printed('defense.threatAssessment', threat.beasts),
@@ -552,7 +549,6 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('defense', 'defense.wallRationale', [printed('defense.wallRationale', wall.rationale)]);
   put('defense', 'defense.criminalStructure', [
     printed('defense.criminalStructure', criminal.structure),
-    printed('defense.criminalStructure', criminal.capture),
   ]);
   put('defense', 'defense.supportingCapabilities', [
     printed('defense.supportingCapabilities', supporting.logistics),
@@ -573,7 +569,6 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('economics', 'economics.commercialProfile', [
     printed('economics.commercialProfile', economy.incomeMix),
     printed('economics.commercialProfile', economy.criminalLine),
-    printed('economics.commercialProfile', economy.tradeProfile),
   ]);
   put('economics', 'economics.shadowEconomy', [
     printed('economics.shadowEconomy', economy.shadowEconomy),
@@ -584,10 +579,10 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('economics', 'economics.craftReason', [general.economics.craftReasonLine]);
 
+  // T2-9 in print: ONE strategic-value sentence. ResourcesProduction prints the DM-EDITABLE
+  // generator line (`resources.strategicValue`), so the DS-ECO-11 strategic-value lens that
+  // replaces it on the screen is not printed beside it; the exploitation lens frames the chains.
   put('resources', 'resources.groundAndWorkings', [
-    printed('resources.groundAndWorkings', economy.terrainIdentity),
-    printed('resources.groundAndWorkings', economy.economicStrengths),
-    printed('resources.groundAndWorkings', economy.strategicValue),
     printed('resources.groundAndWorkings', economy.exploitation),
   ]);
 

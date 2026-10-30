@@ -492,10 +492,13 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // UX CONSOLIDATION U6 (2026-10-30, RULINGS-T2 T2-20) — THE DEBT FELL BY ONE. 216 -> 215,
 // floatInterpolation 145 -> 144: DefenseTab.jsx's `Criminal faction: power {crimFaction.power||0}` became
 // the faction's name and band word (the description and the capture note live on Power).
-const REVIEWED_TOTAL_CEILING = 215;
+// UX CONSOLIDATION U9 (2026-10-30, RULINGS-T2 T2-20 print parity) — THE DEBT FELL BY TWO. 215 -> 213,
+// floatInterpolation 144 -> 143, percentToken 54 -> 53: DefenseSecurity.jsx's `${captureScore}%` left with the
+// criminal-capture card (Power Structure prints capture). Every other PDF row is a pure line move.
+const REVIEWED_TOTAL_CEILING = 213;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 144,
-  percentToken: 54,
+  floatInterpolation: 143,
+  percentToken: 53,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -821,7 +824,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 215-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 213-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -836,8 +839,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 216 exceeds reviewed ceiling 215',
-      'floatInterpolation 145 exceeds reviewed ceiling 144',
+      'total 214 exceeds reviewed ceiling 213',
+      'floatInterpolation 144 exceeds reviewed ceiling 143',
     ]);
   });
 

@@ -45,17 +45,20 @@ const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 const SYSTEMS_HEALTH_CAPTION = 'Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.';
 
 describe('G5 first-survey framing — PDF ViabilityAssessment twin', () => {
-  test('the STRUCTURAL VIOLATIONS header carries the vintage', () => {
+  // ⭐ ONE LABEL PER CHAPTER (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
+  // vetoable; RULINGS-T2 T2-11 print parity). The chapter's verdict callout carries the vintage
+  // once, the same words as the Outlook tab, and the section headers drop their suffix.
+  test('the chapter says the vintage ONCE, in the screen twin\'s words', () => {
     const src = read(VIABILITY_PDF);
-    expect(src).toMatch(/STRUCTURAL VIOLATIONS · FIRST SURVEY/);
-    // Negative: the bare header stays dead.
-    expect(src).not.toMatch(/STRUCTURAL VIOLATIONS\s*<\/Text>/);
+    expect(src).toMatch(/Judged at the first survey; not re-run since\./);
+    expect(src.match(/first survey/gi) || [], 'the vintage is said once in this file').toHaveLength(1);
   });
 
-  test('the MAGIC DEPENDENCY header carries the vintage', () => {
+  test('the STRUCTURAL VIOLATIONS and MAGIC DEPENDENCY headers carry no suffix', () => {
     const src = read(VIABILITY_PDF);
-    expect(src).toMatch(/MAGIC DEPENDENCY · FIRST SURVEY/);
-    expect(src).not.toMatch(/MAGIC DEPENDENCY\s*<\/Text>/);
+    expect(src).toMatch(/STRUCTURAL VIOLATIONS\s*<\/Text>/);
+    expect(src).toMatch(/MAGIC DEPENDENCY\s*<\/Text>/);
+    expect(src).not.toMatch(/· FIRST SURVEY/); // anchored: the two bare headers are matched in this same source above
   });
 });
 

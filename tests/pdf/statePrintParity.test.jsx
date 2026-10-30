@@ -62,6 +62,7 @@ import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.
 import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
+import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
 
 /** The positions the ruling withholds from print WHOLE. Written out, not imported: an arm
  *  that imported the builder's own list would agree with it by construction. */
@@ -227,21 +228,23 @@ function screenProse(s, faithUnlocked = false) {
   set('power.legitimacyBanner', screenParagraph(s, 'power.legitimacyBanner',
     [pw.legitimacyBanner, pw.legitimacyLens]));
   set('power.stabilityHeader', screenParagraph(s, 'power.stabilityHeader',
-    [pw.stabilityHeader, pw.stabilityLens]));
+    // UX consolidation 2026-10-30: the screen draws the ladder line alone (T2-18).
+    [pw.stabilityHeader]));
   // DS-POW-6, the position the ruling gates at the CELL: the ladder cells DS-POW-1 leaves
   // empty print, the two seat-rank pools do not.
   set('power.criminalUnderside', screenParagraph(s, 'power.criminalUnderside',
     [pw.legitimacyReading, pw.captureReading, pw.operationReading]));
   set('power.rulingStructure', screenParagraph(s, 'power.rulingStructure',
-    [pw.rulingStructure, pw.governingTitle]));
+    [pw.rulingStructure])); // T2-17: governingTitle cut on screen
   set('power.succession', screenParagraph(s, 'power.succession',
-    [pw.successionRisk, pw.successionHold]));
+    [pw.successionRisk])); // T2-18: the legitimacy hold cut on screen
 
-  set('defense.postureHeader', screenWeave(s, ['posture', 'terrain', 'prize'].map(
+  // T2-21: the screen draws the posture lens only (terrain and prize cut).
+  set('defense.postureHeader', screenWeave(s, ['posture'].map(
     (k) => (drawnAtMount('defense.postureHeader', posture[k]?.rung)?.sentence ? posture[k].beside : null))));
   set('defense.publicOrder', screenWeave(s, [
     drawnAtMount('defense.publicOrder', order.publicOrder?.rung)?.sentence ? order.publicOrder.beside : null,
-    drawnAtMount('defense.publicOrder', order.firstSurvey?.rung)?.sentence ? order.firstSurvey.beside : null,
+    // T2-22: the first-survey beside line is not drawn on screen.
   ]));
   set('defense.threatAssessment', screenParagraph(s, 'defense.threatAssessment',
     ['beasts', 'invasion', 'internal', 'economic', 'disaster'].map((k) => threat[k])));
@@ -251,25 +254,30 @@ function screenProse(s, faithUnlocked = false) {
     ['fortification', 'force', 'contracted', 'charter', 'arcane'].map((k) => forces[k])));
   set('defense.wallRationale', screenParagraph(s, 'defense.wallRationale', [wall.rationale]));
   set('defense.criminalStructure', screenParagraph(s, 'defense.criminalStructure',
-    ['structure', 'capture'].map((k) => criminal[k])));
+    ['structure'].map((k) => criminal[k]))); // T2-20: the capture lens cut on screen
   set('defense.supportingCapabilities', screenParagraph(s, 'defense.supportingCapabilities',
     ['logistics', 'naval'].map((k) => supporting[k])));
 
   set('viability.verdict', screenWeave(s, general.viability.verdictLines));
+  // T2-24: the screen (and print) draw no DS-DEF-9 reading where magic does not function.
   set('viability.magicDependency', screenParagraph(s, 'viability.magicDependency',
-    [defenseMagicDependencyProse(s, o).arcaneReliance]));
+    [magicWorksAt({ settlement: s }) === false ? null : defenseMagicDependencyProse(s, o).arcaneReliance]));
 
   set('economics.prosperityHeader', screenParagraph(s, 'economics.prosperityHeader', [eco.prosperityHeader]));
   set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity', [eco.foodSecurityRung]));
   set('economics.commercialProfile', screenParagraph(s, 'economics.commercialProfile',
-    [eco.incomeMix, eco.criminalLine, eco.tradeProfile]));
+    [eco.incomeMix, eco.criminalLine])); // T2-4: the trade-profile lens cut on screen
   set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy', [eco.shadowEconomy]));
   set('economics.tradeFlow', screenParagraph(s, 'economics.tradeFlow', [eco.tradeFlow]));
   set('economics.exportPosture', screenParagraph(s, 'economics.exportPosture', [eco.exportPosture]));
   set('economics.craftReason', screenWeave(s, [general.economics.craftReasonLine]));
 
   set('resources.groundAndWorkings', screenParagraph(s, 'resources.groundAndWorkings',
-    ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'].map((k) => eco[k])));
+    // T2-9: terrain and strengths lenses cut on screen. ⚠ A DELIBERATE PRINT DIFFERENCE: the
+    // screen's strategic-value lens REPLACES the generator line; print keeps the DM-editable
+    // generator line (ResourcesProduction's STRATEGIC VALUE callout) instead, so the printed
+    // position carries the exploitation lens alone. One strategic-value sentence either way.
+    ['exploitation'].map((k) => eco[k])));
   // DS-SUP-3. Since 2026-09-19 the screen renders the catalog lens at the position and the
   // IMPAIRED-HOUSE lens under that house's own service row (the owner's order; the
   // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one

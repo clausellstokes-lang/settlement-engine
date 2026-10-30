@@ -6,7 +6,7 @@ import { Ti, sans, Section, Empty } from '../Primitives';
 import { flag } from '../../../lib/flags.js';
 import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
-import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
+import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 
 import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
@@ -36,23 +36,9 @@ const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 /** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
 export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
 
-/**
- * THE SUMMARY SAYS THE VERDICT AND NOTHING ANOTHER BLOCK OWNS (UX consolidation 2026-10-30,
- * RULINGS-T2 T2-12; RUBRIC R2, R6). Display-only: the record's summary is untouched, so the
- * record invariant V-SUMMARY-HOOKS (recordInvariants.js) still reads the count it checks.
- * Cut: the "N plot hooks available." count (the Plot Hooks tab owns hooks) and the
- * dependency clause (Resources' Gaps & Opportunities and the chain cards own what the town
- * must import), in both the record's spelling and the canonical view model's.
- * @param {string} text the summary body, verdict prefix already stripped
- * @returns {string}
- */
-export function trimViabilitySummary(text) {
-  return String(text || '')
-    .replace(/\s*\d+ plot hooks? available\.?/i, '')
-    .replace(/\s+but has \d+ operational dependenc(?:y|ies) that require active management\./i, '.')
-    .replace(/,\s*but its survival depends on \d+ stable trade dependenc(?:y|ies) and protected routes\./i, '.')
-    .trim();
-}
+// The summary trim lives in viabilityFilter.js, the module web and PDF already share, so the
+// paid document trims exactly what the tab trims.
+export { trimViabilitySummary };
 
 // The verdict palette, keyed on the SHARED tone token so the colour and the word can no
 // longer disagree. The words live in domain/display/viabilityVerdict.js; these do not,

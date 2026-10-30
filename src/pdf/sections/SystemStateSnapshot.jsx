@@ -115,10 +115,12 @@ function CausalSubstrate({ settlement, vm }) {
     <View style={{ marginTop: space.md }} wrap={false}>
       <HairRule />
       <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-        CAUSAL SUBSTRATE (16 VARIABLES)
+        FOUNDATIONS
       </Text>
+      {/* UX consolidation 2026-10-30 (RULINGS-T2 T2-25, RULINGS-CROSS X-12) print parity: the
+          screen's title and its one framing fact; the engine-speak caption is cut (R1). */}
       <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 4 }}>
-        The deterministic engine substrate, banded; strained / critical / collapsed float to the top.
+        This reading includes current conditions: siege, drawdown, outbreak.
       </Text>
       {rows.map(row => {
         const color = CAUSAL_BAND_COLOR[row.band] || palette.muted;

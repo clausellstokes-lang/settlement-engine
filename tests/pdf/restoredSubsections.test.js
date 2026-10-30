@@ -47,14 +47,18 @@ beforeAll(() => {
   vmState = buildViewModel({ settlement, systemState: { snapshotAtTick: 0 } });
 });
 
+// The substrate grid's own framing line (UX consolidation 2026-10-30, T2-25/X-12: the header is
+// now "FOUNDATIONS", a word other chapters may carry; the framing fact is unique to the grid).
+const SUBSTRATE_MARK = 'This reading includes current conditions: siege, drawdown, outbreak.';
+
 describe('#20 SettlementPDF — Current-State causal-detail restoration', () => {
   it('the renderer prints the causal substrate ONLY when causalDetail is passed', () => {
     const on  = joined(SystemStateSnapshot({ settlement, vm: vmState, causalDetail: true }));
     const off = joined(SystemStateSnapshot({ settlement, vm: vmState, causalDetail: false }));
     expect(on, 'causalDetail=true must render the 16-variable substrate grid')
-      .toContain('CAUSAL SUBSTRATE (16 VARIABLES)');
+      .toContain(SUBSTRATE_MARK);
     expect(off, 'causalDetail=false stays the byte-identical 4-dim snapshot')
-      .not.toContain('CAUSAL SUBSTRATE (16 VARIABLES)');
+      .not.toContain(SUBSTRATE_MARK);
   });
 
   it('the campaign_state variant threads causalDetail=true into the State chapter', () => {
@@ -62,7 +66,7 @@ describe('#20 SettlementPDF — Current-State causal-detail restoration', () => 
       settlement, systemState: { snapshotAtTick: 0 }, phase: 'canon', variant: 'campaign_state',
     });
     expect(joined(doc), 'campaign_state promotes Current State to state + substrate')
-      .toContain('CAUSAL SUBSTRATE (16 VARIABLES)');
+      .toContain(SUBSTRATE_MARK);
   });
 
   it('the default canon_dossier variant does NOT promote the State chapter to substrate', () => {
@@ -70,7 +74,7 @@ describe('#20 SettlementPDF — Current-State causal-detail restoration', () => 
       settlement, systemState: { snapshotAtTick: 0 }, phase: 'canon', variant: 'canon_dossier',
     });
     expect(joined(doc), 'a non-campaign_state export keeps the substrate off')
-      .not.toContain('CAUSAL SUBSTRATE (16 VARIABLES)');
+      .not.toContain(SUBSTRATE_MARK);
   });
 });
 

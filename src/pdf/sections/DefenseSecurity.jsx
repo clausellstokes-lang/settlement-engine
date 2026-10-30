@@ -16,12 +16,11 @@ import {
   ChapterBand, ChapterHeadline, StatStrip, BulletList, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { defenseHeadline, defenseTone } from '../lib/headlines.js';
-import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
-import { EditableText, EditableProse } from '../primitives/Editable.jsx';
+import { EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
-import { cap, smart, label, hookText } from '../lib/format.js';
+import { cap, smart, label } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
 // ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
@@ -38,19 +37,7 @@ const FORCE_GROUPS = [
 export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   const d = vm.defense;
 
-  // Criminal capture arrives as a ladder string ('none' → 'adversarial' →
-  // 'equilibrium' → 'corrupted' → 'capture') on powerStructure.criminalCaptureState,
-  // not an object — drop the card at 'none', otherwise pair the state with the
-  // same safetyProfile.blackMarketCapture % the economics page renders.
-  const captureState = typeof d.criminalCapture === 'string'
-    ? (d.criminalCapture === 'none' ? null : d.criminalCapture)
-    : (d.criminalCapture?.label || d.criminalCapture?.classification || null);
-  const captureScore = typeof d.blackMarketCapture === 'number'
-    ? d.blackMarketCapture
-    : d.blackMarketCapture?.score ?? null;
-  const captureDesc = typeof d.criminalCapture === 'object'
-    ? d.criminalCapture?.description || null
-    : null;
+  // Criminal capture prints in Power Structure since the UX consolidation (T2-20 parity).
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -213,41 +200,14 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
       </View>
 
       {/* ── Criminal architecture ─────────────────────────────── */}
-      {(captureState || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0) && (
+      {(d.criminalStructure || d.criminalOps?.length > 0 || d.crimeTypes?.length > 0 || d.criminalFaction) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
             CRIMINAL ARCHITECTURE
           </Text>
-          {captureState && (
-            <View
-              style={{
-                padding: 5,
-                marginBottom: 4,
-                backgroundColor: palette.badBg,
-                borderLeft: `2pt solid ${palette.bad}`,
-                borderRadius: 2,
-              }}
-              wrap={false}
-            >
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'], flex: 1, marginRight: 6 }}>
-                  Criminal capture · {cap(captureState)}
-                </Text>
-                {captureScore != null && (
-                  <Pill tone="bad">{`${captureScore}%`}</Pill>
-                )}
-              </View>
-              {captureDesc && (
-                <EditableProse
-                  name="defense.criminalCapture.description"
-                  defaultValue={captureDesc}
-                  lines={1}
-                  style={{ ...type.body, fontSize: pt['9'] }}
-                />
-              )}
-            </View>
-          )}
+          {/* Criminal capture prints in Power Structure (UX consolidation 2026-10-30, RULINGS-T2
+              T2-20 print parity: Power owns capture, Defense owns the structure). */}
           {d.criminalStructure && (
             <View
               wrap={false}
@@ -311,34 +271,15 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           )}
           {d.criminalFaction && (
             <View style={{ padding: 5, border: `0.4pt solid ${palette.bad}`, borderRadius: 2, marginBottom: 4 }}>
+              {/* T2-20: name and band only; the faction's description prints on its Power
+                  Structure card. */}
               <Text style={{ ...type.body_em, fontSize: pt['10'], color: palette.bad }}>
-                {d.criminalFaction.faction || d.criminalFaction.name}
+                Criminal faction: {d.criminalFaction.faction || d.criminalFaction.name}
+                {d.criminalFaction.powerLabel ? ` · ${d.criminalFaction.powerLabel}` : ''}
               </Text>
-              {d.criminalFaction.blurb && (
-                <EditableProse
-                  name="defense.criminalFaction.blurb"
-                  defaultValue={d.criminalFaction.blurb}
-                  lines={1}
-                  style={{ ...type.body, fontSize: pt['9'] }}
-                />
-              )}
             </View>
           )}
-          {d.orderHooks?.length > 0 && (
-            <View>
-              <Text style={{ ...type.label, fontSize: pt['7.5'], color: palette.muted }}>ORDER HOOKS</Text>
-              {d.orderHooks.map((h, i) => (
-                <View key={`oh-${i}`} style={{ flexDirection: 'row' }}>
-                  <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>·</Text>
-                  <EditableText
-                    name={`defense.orderHook.${i}`}
-                    defaultValue={hookText(h)}
-                    style={{ ...type.body, fontSize: pt['9'] }}
-                  />
-                </View>
-              ))}
-            </View>
-          )}
+          {/* Order hooks print in the Plot Hooks chapter (RULINGS-CROSS X-2). */}
         </View>
       )}
 
@@ -349,7 +290,8 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
             SUPPORTING CAPABILITIES
           </Text>
-          {d.supportingCapabilities.map((sc, i) => (
+          {/* T2-23: Economic Backing restates the threat row Economic Survival; dropped as on screen. */}
+          {d.supportingCapabilities.filter((sc) => sc.label !== 'Economic Backing').map((sc, i) => (
             <View
               key={`sc-${i}`}
               wrap={false}
@@ -400,7 +342,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
         <View style={{ marginTop: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            VULNERABILITIES · FIRST SURVEY
+            VULNERABILITIES
           </Text>
           <BulletList
             items={d.vulnerabilities}

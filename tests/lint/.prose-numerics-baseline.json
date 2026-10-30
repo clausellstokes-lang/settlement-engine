@@ -1122,50 +1122,38 @@
     "snippet": "{score ?? '–'}"
   },
   {
-    "path": "src/pdf/sections/DefenseSecurity.jsx",
-    "line": 238,
-    "category": "floatInterpolation",
-    "snippet": "`${captureScore}%`"
-  },
-  {
-    "path": "src/pdf/sections/DefenseSecurity.jsx",
-    "line": 238,
-    "category": "percentToken",
-    "snippet": "`${captureScore}%`"
-  },
-  {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 312,
+    "line": 298,
     "category": "floatInterpolation",
     "snippet": "{flow}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 435,
+    "line": 367,
     "category": "floatInterpolation",
     "snippet": "{iss.severity}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 552,
+    "line": 466,
     "category": "floatInterpolation",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 552,
+    "line": 466,
     "category": "percentToken",
     "snippet": "{fb.deficitPct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 557,
+    "line": 471,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct}"
   },
   {
     "path": "src/pdf/sections/EconomicsTrade.jsx",
-    "line": 557,
+    "line": 471,
     "category": "percentToken",
     "snippet": "{fb.coveragePct}"
   },
@@ -1261,13 +1249,13 @@
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 113,
+    "line": 91,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 362,
+    "line": 221,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },
@@ -1279,7 +1267,7 @@
   },
   {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-    "line": 139,
+    "line": 141,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
   },
