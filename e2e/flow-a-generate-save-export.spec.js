@@ -4,7 +4,8 @@
  * Anonymous user journey:
  *   1. Land on homepage → see HomeHero
  *   2. Eyebrow / title / subtitle render
- *   3. Three size buttons (Hamlet / Village / Town) render and pick one
+ *   3. One fixed size, Town, renders pressed (the owner, 2026-10-30: a signed-out
+ *      visitor forges a town and nothing else)
  *   4. Begin a settlement → loading state → dossier renders
  *   5. Dossier header shows name + tier + population
  *   6. Anon counter incremented in localStorage
@@ -59,7 +60,7 @@ async function seedAnonCapAndRerender(page) {
     } catch { /* private mode */ }
   });
   const hero = page.getByLabel('Anonymous settlement generator');
-  await sizeButton(hero, 'Hamlet').click();
+  await sizeButton(hero, 'Town').click();
 }
 
 function primaryHeroCta(hero) {
@@ -94,32 +95,28 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
     await expect(hero.getByText(/Every street, every faction|pieces explain each other/i)).toBeVisible();
   });
 
-  test('hero exposes the three anonymous size buttons', async ({ page }) => {
+  test('hero exposes one anonymous size, Town, and no other', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    // The button labels come from the copy: 'Hamlet', 'Village', 'Town'.
-    await expect(sizeButton(hero, 'Hamlet')).toBeVisible();
-    await expect(sizeButton(hero, 'Village')).toBeVisible();
     await expect(sizeButton(hero, 'Town')).toBeVisible();
+    // anchored: the Town station is proven visible above, so these absences are real.
+    await expect(sizeButton(hero, 'Hamlet')).toHaveCount(0);
+    await expect(sizeButton(hero, 'Village')).toHaveCount(0);
+    await expect(hero.locator('button[data-settlement-size]')).toHaveCount(1);
   });
 
-  test('default size selection is Village (aria-pressed)', async ({ page }) => {
+  test('the fixed size is Town, pressed from the start (aria-pressed)', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    // The button's accessible name concatenates label + hint copy. We
-    // match by leading word and rely on the hero scope to disambiguate.
-    const village = sizeButton(hero, 'Village');
-    await expect(village).toHaveAttribute('aria-pressed', 'true');
-    await expect(sizeButton(hero, 'Hamlet')).toHaveAttribute('aria-pressed', 'false');
-    await expect(sizeButton(hero, 'Town')).toHaveAttribute('aria-pressed', 'false');
+    await expect(sizeButton(hero, 'Town')).toHaveAttribute('aria-pressed', 'true');
   });
 
-  test('clicking a different size button updates aria-pressed correctly', async ({ page }) => {
+  test('clicking the Town station keeps it pressed (there is nothing else to pick)', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Hamlet').click();
-    await expect(sizeButton(hero, 'Hamlet')).toHaveAttribute('aria-pressed', 'true');
-    await expect(sizeButton(hero, 'Village')).toHaveAttribute('aria-pressed', 'false');
+    await sizeButton(hero, 'Town').click();
+    await expect(sizeButton(hero, 'Town')).toHaveAttribute('aria-pressed', 'true');
+    await expect(hero.locator('button[data-settlement-size]')).toHaveCount(1);
   });
 
   test('"Begin a settlement" button is enabled before generation', async ({ page }) => {
@@ -133,18 +130,18 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
   test('generation produces a dossier with name + tier + population', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Hamlet').click();
+    await sizeButton(hero, 'Town').click();
     await primaryHeroCta(hero).click();
 
     await waitForDossier(page);
 
-    await expect(dossierMeta(page)).toContainText(/hamlet/i);
+    await expect(dossierMeta(page)).toContainText(/town/i);
   });
 
   test('anon counter is bumped in localStorage after a generation', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Village').click();
+    await sizeButton(hero, 'Town').click();
     await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
@@ -230,7 +227,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
   test('returning to the page preserves generated settlement (state persistence)', async ({ page }) => {
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Village').click();
+    await sizeButton(hero, 'Town').click();
     await primaryHeroCta(hero).click();
     await waitForDossier(page);
 
@@ -257,7 +254,7 @@ test.describe('Tier 3.7 Flow A — anonymous generate / preview / save / export'
 
     await waitForHero(page);
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Village').click();
+    await sizeButton(hero, 'Town').click();
     await primaryHeroCta(hero).click();
     await waitForDossier(page);
 

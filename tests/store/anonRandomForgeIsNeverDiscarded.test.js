@@ -99,22 +99,45 @@ async function runLane(store, seed) {
 /** The config the lane actually handed the engine on the last run. */
 const sentConfig = () => engine.lastRequest?.payload?.fullConfig ?? null;
 
-/** The size the lane aimed a capped sentinel at, for one seed. */
-async function aimedFor(tier, seed) {
-  const store = laneStore(tier, 'random');
+const SEEDS = Array.from({ length: 30 }, (_, i) => `pool-seed-${i}`);
+
+/**
+ * A FREE store whose gate admits only hamlet through town: the one shape left that has a
+ * range narrower than the ladder AND the size picker (an anonymous forge is clamped to a
+ * Town before the aim is reached, the owner's word of 2026-10-30). The aim is pinned here
+ * so it stays armed for whatever account is next given a capped range.
+ */
+const CAPPED_RANGE = Object.freeze(['hamlet', 'village', 'town']);
+function cappedStore(settType) {
+  const store = laneStore('free', settType);
+  store.state.isTierAllowed = (size) => size === 'random' || size === 'custom' || CAPPED_RANGE.includes(size);
+  return store;
+}
+
+async function aimedForCapped(seed) {
+  const store = cappedStore('random');
   await runLane(store, seed);
   return sentConfig()?.settType;
 }
 
-const SEEDS = Array.from({ length: 30 }, (_, i) => `pool-seed-${i}`);
-
 describe('THE LANE — the gate aims the sentinel it would otherwise discard', () => {
-  test('thirty anonymous forges are all aimed inside the range, and none at a thorpe', async () => {
+  test('thirty anonymous random forges are all a Town, and none is refused', async () => {
+    for (const seed of SEEDS) {
+      // A fresh day per forge: the anonymous daily cap is not under test here.
+      window.localStorage.clear();
+      const store = laneStore('anon', 'random');
+      await runLane(store, seed);
+      expect(sentConfig()?.settType, `seed ${seed} reached the engine as something other than a Town`).toBe('town');
+      expect(store.state.lastRefusal).toBeNull();
+    }
+  });
+
+  test('thirty capped-range forges are all aimed inside the range, and none at a thorpe', async () => {
     const aimed = [];
-    for (const seed of SEEDS) aimed.push(await aimedFor('anon', seed));
+    for (const seed of SEEDS) aimed.push(await aimedForCapped(seed));
     expect(aimed.length).toBe(30);
     expect(
-      aimed.filter((size) => !ANON_SIZES.includes(size)),
+      aimed.filter((size) => !CAPPED_RANGE.includes(size)),
       'a forge was aimed outside the account\'s range — the store would discard that finished'
       + ' settlement and refuse a reader who chose nothing',
     ).toEqual([]);
@@ -125,10 +148,10 @@ describe('THE LANE — the gate aims the sentinel it would otherwise discard', (
 
   test('the aim is DETERMINISTIC, and drawn off its own stream', async () => {
     // THE PROMISE: same seed, same config, same world — the aim is part of that now.
-    expect(await aimedFor('anon', 'repeatable-seed')).toBe(await aimedFor('anon', 'repeatable-seed'));
+    expect(await aimedForCapped('repeatable-seed')).toBe(await aimedForCapped('repeatable-seed'));
     // …and the world's own seed is unchanged by it: what reaches the pipeline is the
     // caller's seed, not a derived one.
-    const store = laneStore('anon', 'random');
+    const store = cappedStore('random');
     await runLane(store, 'repeatable-seed');
     expect(engine.lastRequest.payload.seed).toBe('repeatable-seed');
   });
@@ -142,24 +165,30 @@ describe('THE LANE — the gate aims the sentinel it would otherwise discard', (
   });
 
   test('a CONCRETE size is passed through — there is no sentinel to aim', async () => {
-    const store = laneStore('anon', 'town');
+    const store = cappedStore('village');
     await runLane(store, 'seed-pool');
-    expect(sentConfig().settType).toBe('town');
+    expect(sentConfig().settType).toBe('village');
   });
 
-  test('\'custom\' is left alone: its size is a number the reader typed', async () => {
+  test('\'custom\' is left alone for an account: its size is a number the reader typed', async () => {
     // A population the reader entered is not a roll, so the post-resolution re-gate
     // stays the honest answer there and its sentence stays true.
-    const store = laneStore('anon', 'custom');
+    const store = cappedStore('custom');
     await runLane(store, 'seed-pool');
     expect(sentConfig().settType).toBe('custom');
+  });
+
+  test('\'custom\' is a Town for an anonymous visitor: the custom population is an account\'s', async () => {
+    const store = laneStore('anon', 'custom');
+    await runLane(store, 'seed-pool');
+    expect(sentConfig().settType).toBe('town');
   });
 
   test('the READER\'S stored config is untouched — they still asked for random', async () => {
     const store = laneStore('anon', 'random');
     await runLane(store, 'seed-pool');
-    expect(store.state.config.settType, 'the aim was written back into the reader\'s config').toBe('random');
-    expect(store.state.lastRefusal, 'the forge was refused rather than aimed').toBeNull();
+    expect(store.state.config.settType, 'the clamp was written back into the reader\'s config').toBe('random');
+    expect(store.state.lastRefusal, 'the forge was refused rather than forged').toBeNull();
   });
 });
 

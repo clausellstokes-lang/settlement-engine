@@ -75,9 +75,15 @@ export const SIZE_LADDER = Object.freeze(['thorp', 'hamlet', 'village', 'town', 
  * holds two bounds — and tests/config/tierFacts.contract.test.js pins the two together.
  * (The paragraph that used to sit here recorded the gap as an open decision for the
  * chair; it outlived the car that closed it.)
+ *
+ * ⛔ AND THE SET IS NOW ONE SIZE (the owner, 2026-10-30: "if you don't sign in the only
+ * option, you have is a town"). TIER_GATE.anon carries `minTier: 'town'` beside its
+ * `maxTier: 'town'`; every sentence that names what signing in adds follows by derivation.
+ * A curated Founding Worlds fork passes the FLOOR, never the ceiling (chair ruling, same
+ * day; store/settlementGenerateAction.js), so Cnocby still forks as a village.
  * @type {ReadonlyArray<string>}
  */
-export const ANON_SIZES = Object.freeze(['hamlet', 'village', 'town']);
+export const ANON_SIZES = Object.freeze(['town']);
 
 /**
  * WHAT SIGNING IN ADDS: the ladder minus what an anonymous visitor already had. Derived,

@@ -80,7 +80,7 @@ import { normalizeSavedSettlementsOwnerId } from './savedSettlementsHydration.js
 //                    a Cartographer capability; the two are deliberately separate fields
 //                    because the owner ruled them on opposite sides.
 export const TIER_GATE = {
-  anon:    { minTier: 'hamlet', maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: false },
+  anon:    { minTier: 'town',   maxTier: 'town',    maxSaves: 0,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: false },
   free:    { minTier: 'thorp',  maxTier: 'capital', maxSaves: 3,        neighbour: false, export: false, mapChains: false, customContent: false, settlementEditor: false, preGenOptions: true  },
   premium: { minTier: 'thorp',  maxTier: 'capital', maxSaves: Infinity, neighbour: true,  export: true,  mapChains: true,  customContent: true,  settlementEditor: true,  preGenOptions: true  },
 };

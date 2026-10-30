@@ -53,11 +53,11 @@ describe('HomeHero — the stage backdrop is interaction-gated (LCP safety)', ()
     const { container } = render(<HomeHero onSignIn={() => {}} onNavigate={() => {}} />);
     expect(backdrop(container)).toBeNull();
 
-    fireEvent.click(container.querySelector('[data-settlement-size="village"]'));
+    fireEvent.click(container.querySelector('[data-settlement-size="town"]'));
 
     const img = backdrop(container);
     expect(img).not.toBeNull();
-    expect(img.getAttribute('src')).toBe('/evolution/village.jpg');
+    expect(img.getAttribute('src')).toBe('/evolution/town.jpg');
     // Decorative: empty alt + aria-hidden so it is never announced.
     expect(img.getAttribute('alt')).toBe('');
     expect(img.getAttribute('aria-hidden')).toBe('true');

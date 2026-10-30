@@ -154,9 +154,12 @@ describe('the lane records a reason for every gate it closes', () => {
     expect(engine.run, 'the engine ran despite the cap').not.toHaveBeenCalled();
   });
 
+  // ⛔ A FREE-FORM ANONYMOUS FORGE NO LONGER MEETS EITHER BOUND: the lane clamps it to a
+  // Town first (the owner, 2026-10-30). The bounds still judge a SAMPLE FORK, which keeps
+  // its curated size (chair ruling, 2026-10-30), so the two sentences are driven there.
   test('TIER: a size above the ceiling is refused BEFORE the engine, naming the size and the ceiling', async () => {
     const store = makeStore({ settType: 'city', maxTier: 'town' });
-    const result = await runLane(store);
+    const result = await runLane(store, undefined, { intent: GENERATION_INTENT_SAMPLE_FORK });
     expect(result).toBeNull();
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER);
     expect(store.state.lastRefusal.vars).toMatchObject({ size: 'City', max: 'Town' });
@@ -173,7 +176,12 @@ describe('the lane records a reason for every gate it closes', () => {
     // ⛔ THE CEILING'S SENTENCE WAS FALSE ON THE ONE RUNG THE FLOOR EXISTS FOR
     // (§934.34): a thorpe is refused BELOW the range, and the reader was told it was
     // "past what this account forges; it reaches up to a Town".
+    // No shipped account meets a floor any more: a free-form anonymous forge is clamped to
+    // a Town and a curated fork passes the floor (chair ruling, 2026-10-30). The branch
+    // stays armed for any account given a floor, so it is driven by a store that may
+    // configure its forge and has one.
     const store = makeStore({ settType: 'thorp' });
+    store.state.canCustomizePreGeneration = () => true;
     const result = await runLane(store);
     expect(result).toBeNull();
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER_TOO_SMALL);
@@ -211,7 +219,7 @@ describe('the lane records a reason for every gate it closes', () => {
 
   test('a fresh attempt clears the previous reason', async () => {
     const store = makeStore({ settType: 'city', maxTier: 'town' });
-    await runLane(store);
+    await runLane(store, undefined, { intent: GENERATION_INTENT_SAMPLE_FORK });
     expect(store.state.lastRefusal).not.toBeNull();
     store.state.config.settType = 'town';
     await runLane(store);

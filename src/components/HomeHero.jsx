@@ -3,8 +3,7 @@
  *
  * Variants:
  *   1. Anonymous — anti-AI headline (GA, heroV2 inlined) + THE GAUGE
- *      (scale-rule size picker, hamlet / village / town — the anon TIER_GATE
- *      ceiling) + Begin CTA. Drives the funnel from cold visitor through first
+ *      (one fixed station, Town: the owner's word of 2026-10-30) + Begin CTA. Drives the funnel from cold visitor through first
  *      dossier.
  *   2. Signed-in — "Welcome back" header + instant generation across
  *      all six tiers (thorp → metropolis). No marketing text, no
@@ -42,13 +41,13 @@ import {
 } from '../config/tierFacts.js';
 import { TIER_ORDER, POPULATION_RANGES } from '../data/constants.js';
 
-// Sizes per audience, READ FROM THE FACTS rather than restated here (ODQ, the owner
-// 2026-09-19). The anonymous set — hamlet, village, town — used to be a literal in this
-// file while the at-cap sentence below named its own list, which is how that sentence
-// came to omit the thorpe a sign-in really unlocks. Both now derive from
-// config/tierFacts.js, so the gauge a visitor sees and the sentence that tells them what
-// they are missing cannot disagree. Order matters — the picker renders left-to-right.
+// Sizes per audience. The signed-in ladder is read from config/tierFacts.js; order
+// matters, the picker renders left-to-right. A signed-out visitor gets one station.
 const ALL_SIZES = SIZE_LADDER;
+/** The one size a signed-out visitor forges: the top of the anonymous set, a Town
+ *  (store/settlementGenerateAction.js clamps to the same derivation). */
+const ANON_FORGE_SIZE = ANON_SIZES[ANON_SIZES.length - 1];
+const ANON_STATIONS = Object.freeze([ANON_FORGE_SIZE]);
 
 // ── THE GAUGE (Deep Craft cluster 1) ─────────────────────────────────────────
 // One scale-rule strip replaces the size cards: the viewer's entitled stations
@@ -59,8 +58,8 @@ const ALL_SIZES = SIZE_LADDER;
 // (the e2e flows' locator contract).
 //
 // OWNER LAW (veto on cluster 1a): the anonymous gauge renders ONLY the anon
-// entitlement (hamlet / village / town) — the strip maps `sizes`, NOT the full
-// TIER_ORDER, so capped stations are ABSENT for anon (not merely faint). The
+// station (Town, the owner 2026-10-30) — the strip maps `sizes`, NOT the full
+// TIER_ORDER, so every other station is ABSENT for anon (not merely faint). The
 // six-station ladder shows solely for signed-in viewers, where every station is
 // enabled.
 
@@ -148,10 +147,16 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
   // Variant: signed-in users see instant generation across all sizes;
   // anonymous users see the marketing hero with the funnel framing.
   const isAnon = authTier === 'anon';
-  const sizes = isAnon ? ANON_SIZES : ALL_SIZES;
-  const defaultSize = isAnon ? 'village' : 'town';
+  // ⛔ A SIGNED-OUT VISITOR FORGES A TOWN (the owner, 2026-10-30: "if you don't sign in
+  // the only option, you have is a town"). One fixed station where the gauge was; the
+  // generation action clamps an anonymous forge to the same size, so this is the half a
+  // reader sees and never the gate.
+  const sizes = isAnon ? ANON_STATIONS : ALL_SIZES;
 
-  const [pickedSize, setPickedSize] = useState(defaultSize);
+  const [pickedStation, setPickedSize] = useState(ANON_FORGE_SIZE);
+  // A visitor who signs OUT keeps whatever station they last picked in state; reading
+  // through this keeps the CTA, the backdrop and the forge on the one size they may forge.
+  const pickedSize = isAnon ? ANON_FORGE_SIZE : pickedStation;
   const [generating, setGenerating] = useState(false);
   // The button's disabled state arrives on the next render; this ref guards the
   // same-tick double-click window synchronously.
@@ -343,8 +348,8 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
       }} />
 
       {/* ── THE GAUGE ─────────────────────────────────────────────────
-          One scale-rule strip. Anon renders ONLY its entitlement
-          (hamlet/village/town) per the owner law; signed-in renders the full
+          One scale-rule strip. Anon renders ONE fixed station, Town (the
+          owner, 2026-10-30); signed-in renders the full
           six-station ladder. The chosen station is ink-filled. Focus stays
           perceivable without pointer state.
       */}
@@ -413,17 +418,6 @@ export default function HomeHero({ onSignIn, onNavigate, bare = false }) {
           ))}
         </div>
       </div>
-      {/* One memo line: the chosen station's hint (the owner law caps visible
-          clerk's notes at one — the cap memo retired with the capped stations). */}
-      {isAnon && (
-        <p style={{
-          margin: `${SP.sm}px auto 0`, maxWidth: 480,
-          fontFamily: serif_, fontStyle: 'italic',
-          fontSize: FS.sm, color: BODY, lineHeight: 1.5,
-        }}>
-          {t(`generate.sizeHint.${pickedSize}`)}
-        </p>
-      )}
 
       {/* ── Primary CTA ──────────────────────────────────────────────── */}
       <div style={{ marginTop: SP.xl }}>

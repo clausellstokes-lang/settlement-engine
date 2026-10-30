@@ -36,7 +36,8 @@ const HERO = readFileSync(join(ROOT, 'src/components/HomeHero.jsx'), 'utf8');
 describe('THE DERIVATION', () => {
   test('the ladder and the anonymous set are both real, and one contains the other', () => {
     expect(SIZE_LADDER.length, 'the size ladder is empty').toBe(6);
-    expect(ANON_SIZES.length, 'the anonymous set is empty').toBe(3);
+    // The owner, 2026-10-30: "if you don't sign in the only option, you have is a town".
+    expect([...ANON_SIZES], 'the anonymous set is not Town alone').toEqual(['town']);
     for (const key of ANON_SIZES) {
       expect(SIZE_LADDER, `the anonymous set names "${key}", which is not a rung`).toContain(key);
     }
@@ -47,11 +48,11 @@ describe('THE DERIVATION', () => {
   test('signing in adds exactly the rungs anon did not have — thorpe among them', () => {
     expect([...SIGN_IN_UNLOCKS]).toEqual(SIZE_LADDER.filter((k) => !ANON_SIZES.includes(k)));
     expect(SIGN_IN_UNLOCKS, 'the owner\'s correction: a free account unlocks THORPE too').toContain('thorp');
-    expect([...SIGN_IN_UNLOCKS]).toEqual(['thorp', 'city', 'metropolis']);
+    expect([...SIGN_IN_UNLOCKS]).toEqual(['thorp', 'hamlet', 'village', 'city', 'metropolis']);
   });
 
   test('the sentence fragment is the owner\'s words, Oxford comma and all', () => {
-    expect(signInUnlocksSizes()).toBe('thorpe, city, and metropolis');
+    expect(signInUnlocksSizes()).toBe('thorpe, hamlet, village, city, and metropolis');
     expect(signInUnlocksSizes(), 'the thorpe is missing again').toContain('thorpe');
   });
 
@@ -138,9 +139,13 @@ describe('THE SENTENCES THAT NAME THEM', () => {
       expect(en.hero.anonCap.spent.toLowerCase(), `the spent line does not name ${key}`)
         .toContain(SIZE_LABEL[key].toLowerCase());
     }
-    expect(
-      en.hero.anonCap.spent.toLowerCase().includes('thorpe'),
-      'the spent line claims an anonymous visitor had a thorpe — the owner says they did not',
-    ).toBe(false);
+    // …and it names NOTHING an anonymous visitor did not have: Town only since 2026-10-30.
+    // The headline twins render the same moment, so they are held to the same rule.
+    for (const line of [en.hero.anonCap.spent, en.hero.capUnlock.headline, en.moments.anon_cap_hit.headline]) {
+      for (const key of SIGN_IN_UNLOCKS) {
+        expect(line.toLowerCase(), `"${line}" claims an anonymous visitor had a ${SIZE_LABEL[key]}`)
+          .not.toContain(SIZE_LABEL[key].toLowerCase());
+      }
+    }
   });
 });
