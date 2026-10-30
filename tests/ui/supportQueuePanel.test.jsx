@@ -220,9 +220,20 @@ describe('A5 — the support queue for a support account (T9)', () => {
       await waitFor(() => {
         expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'claim_ticket', ticketId: 't-1' } });
       });
-      // Only the queue's own actions ran; no highest-role read was attempted.
+      // No highest-role action (admin-actions' isHighest cases) was attempted.
+      const HIGHEST_ONLY = [
+        'get_operational_health', 'acknowledge_operational_obligation', 'update_user_metadata',
+        'get_user_full', 'update_user_credits', 'grant_credits', 'mint_redeem_code',
+        'ai_pricing_resync', 'ai_pricing_cron_status', 'ai_pricing_cron_set', 'set_account_disabled',
+        'set_account_banned', 'soft_delete_settlement', 'remove_gallery_item', 'revoke_share_link',
+        'soft_delete_map', 'remove_gallery_map', 'set_content_banned', 'moderate_comment',
+        'send_operator_message', 'queue_operator_broadcast', 'cancel_operator_broadcast',
+        'list_operator_broadcasts', 'grant_surveyor', 'revoke_surveyor', 'backfill_money_events',
+      ];
       const actions = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
-      expect(actions).toEqual(['list_ticket_pool', 'list_ticket_thread', 'claim_ticket']);
+      // anchored: the claim_ticket waitFor above proves this action list is live
+      expect(actions.filter((a) => HIGHEST_ONLY.includes(a))).toEqual([]);
+      expect(actions).toContain('get_stats');
     } finally {
       vi.doUnmock('../../src/store/index.js');
     }

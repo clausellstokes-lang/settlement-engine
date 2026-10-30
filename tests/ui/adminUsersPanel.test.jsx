@@ -463,24 +463,26 @@ describe('AdminUsersPanel — refusals and claims (T7 survey)', () => {
   });
 });
 
-// ── T9 (2026-10-30): the READ-ONLY console a support account gets. The server
-//    grants support list_users, get_user_summary, review_billing and the
-//    redacted diagnostic_bundle; everything else in this panel is highest-role
-//    or a write, so the read-only console renders none of it. ──
-describe('AdminUsersPanel — read-only console for support (T9)', () => {
+// ── T9 (2026-10-30): the console a support account gets, mirroring the server:
+//    admin-actions grants support list_users, get_user_summary, issue_warning,
+//    add_internal_note, review_billing and the redacted diagnostic_bundle;
+//    everything else in this panel is highest-role, so it does not render. ──
+describe('AdminUsersPanel — the support-desk console (T9)', () => {
   beforeEach(() => {
     invoke.mockReset();
     invoke.mockImplementation(routeInvoke());
   });
 
-  test('search, open, Review billing and Export bundle work; no write or full-PII control renders', async () => {
+  test('search, open, warning, note, Review billing and Export bundle work; no highest-role control renders', async () => {
     const Panel = await importPanel();
-    render(<Panel readOnly />);
+    render(<Panel supportDesk />);
     await openAlice();
     expect(screen.getByRole('button', { name: /review billing/i })).toBeTruthy();
     expect(screen.getByRole('button', { name: /export bundle/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /issue warning/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /add note/i })).toBeTruthy();
     for (const name of [
-      /reveal full details/i, /^send notice$/i, /issue warning/i, /add note/i, /grant \/ refund/i,
+      /reveal full details/i, /^send notice$/i, /grant \/ refund/i,
       /^disable$/i, /^ban$/i, /full debug copy/i, /soft-delete settlement/i, /remove gallery item/i,
       /revoke share link/i, /ban settlement/i, /soft-delete map/i, /set map private/i, /^ban map$/i,
       /remove comment/i, /restore comment/i,
@@ -489,8 +491,16 @@ describe('AdminUsersPanel — read-only console for support (T9)', () => {
     }
     fireEvent.click(screen.getByRole('button', { name: /export bundle/i }));
     await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'diagnostic_bundle', userId: 'user-123' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /issue warning/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /issue warning/i }));
+    await fillDialog(/warning reason/i, 'be civil', /^issue$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'issue_warning', userId: 'user-123', severity: 'minor', reason: 'be civil' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /add note/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /add note/i }));
+    await fillDialog(/note/i, 'called in', /^add$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'add_internal_note', userId: 'user-123', note: 'called in' } }));
     const sent = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
-    expect(sent.sort()).toEqual(['diagnostic_bundle', 'get_user_summary', 'list_users']);
+    expect(sent.sort()).toEqual(['add_internal_note', 'diagnostic_bundle', 'get_user_summary', 'issue_warning', 'list_users']);
   });
 });
 

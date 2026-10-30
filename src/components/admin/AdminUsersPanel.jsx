@@ -23,10 +23,12 @@
  * The panel itself is rendered only for elevated users (the parent gates on
  * isElevated). The real authority is server-side; this gate is UX, not security.
  *
- * `readOnly` (T9) is the console the support desk gets: search, the redacted
- * summary, Review billing and the redacted Export bundle, the read paths
- * admin-actions grants `support`. Every write and every full-PII control is
- * left out, so a support agent is never offered a button the server refuses.
+ * `supportDesk` (T9) is the console the support desk gets, mirroring what
+ * admin-actions grants `support`: search, the redacted summary, Issue warning,
+ * Add note, Review billing and the redacted Export bundle. Every highest-role
+ * control (full PII, notices, credits, disable, ban, the full debug copy, the
+ * by-id moderation tools) is left out, so a support agent is never offered a
+ * button the server refuses.
  */
 import { useCallback, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
@@ -72,7 +74,7 @@ function downloadBundle(bundle, userId, full) {
   return filename;
 }
 
-export default function AdminUsersPanel({ readOnly = false } = {}) {
+export default function AdminUsersPanel({ supportDesk = false } = {}) {
   const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -359,7 +361,7 @@ export default function AdminUsersPanel({ readOnly = false } = {}) {
                 )}
               </div>
             </div>
-            {!readOnly && (
+            {!supportDesk && (
               <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
                 Reveal full details
               </Button>
@@ -395,9 +397,25 @@ export default function AdminUsersPanel({ readOnly = false } = {}) {
             </div>
           )}
 
-          {/* Action set. Read-only (support): the two server-granted reads only. */}
-          {readOnly ? (
+          {/* Action set. Support desk: the four actions the server grants support. */}
+          {supportDesk ? (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
+            <Button variant="warning" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Issue warning', label: 'Warning reason', confirmLabel: 'Issue' },
+                (reason) => runAction(
+                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+                  'Warning issued.',
+                ),
+              )}>Issue warning</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Add internal note', body: 'The user can never read this note.', label: 'Note', confirmLabel: 'Add' },
+                (note) => runAction(
+                  { action: 'add_internal_note', userId: id, note },
+                  'Internal note added.',
+                ),
+              )}>Add note</Button>
             <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
               Review billing</Button>
             <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
@@ -587,9 +605,7 @@ export default function AdminUsersPanel({ readOnly = false } = {}) {
 
       {!selected && !searching && results.length === 0 && (
         <p style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
-          {readOnly
-            ? 'Search for a user to inspect their redacted profile.'
-            : 'Search for a user to inspect their redacted profile and take action.'}
+          Search for a user to inspect their redacted profile and take action.
         </p>
       )}
     </section>

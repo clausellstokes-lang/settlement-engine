@@ -3,10 +3,15 @@
  * credits, roles, and system configuration.
  *
  * Accessible to the 'developer' and 'admin' roles (everything), and to the
- * 'support' desk (T9), which sees only what admin-actions grants that role: the
- * Support Queue and the read paths of the user console (search, the redacted
- * summary, billing review, the redacted diagnostic bundle). No KPI strip, no
- * dashboards, no highest-role panel renders for support.
+ * 'support' desk (T9), which sees exactly what admin-actions grants that role
+ * (every switch case without an `isHighest` gate): the KPI strip (get_stats),
+ * the user console's support set (search, the redacted summary, warnings,
+ * internal notes, billing review, the redacted diagnostic bundle), the Support
+ * Queue, and the read-only dashboards (Usage Trends; Analytics & errors).
+ * Nothing the server denies support renders: no broadcasts, gallery reports
+ * (privileged RPCs), operational obligations, AI pricing, full-PII or account
+ * writes. Sim Tuning makes no server call and is not a server grant, so it
+ * stays with the staff roles.
  * Protected reads AND writes go through the admin-actions edge function so
  * everything is role-gated and audited server-side. In particular the user
  * console is the audited, redacted AdminUsersPanel (list_users / get_user_*),
@@ -86,7 +91,7 @@ export default function AdminPanel({ onBack }) {
   // read, which returned every user's email + columns to any elevated role,
   // unaudited. The full user console below is the redacted AdminUsersPanel.
   const fetchStats = useCallback(async () => {
-    if (!supabase || supportOnly) return;
+    if (!supabase) return;
     try {
       const { data, error } = await supabase.functions.invoke('admin-actions', {
         body: { action: 'get_stats' },
@@ -102,7 +107,7 @@ export default function AdminPanel({ onBack }) {
     } catch (e) {
       setStatsError(e?.message || 'Request failed');
     }
-  }, [supportOnly]);
+  }, []);
 
   // Mount-fetch pattern: fetchStats setStates internally, which trips
   // react-hooks/set-state-in-effect under React Compiler. Migrating away
@@ -136,7 +141,7 @@ export default function AdminPanel({ onBack }) {
         eyebrow="Operator console"
         title="Admin"
         subtitle={supportOnly
-          ? 'Work the support queue and look up accounts.'
+          ? 'Work the support queue, look up accounts, and read the usage dashboards.'
           : 'Manage users, credits, and system settings.'}
         actions={(
           <>
@@ -145,11 +150,9 @@ export default function AdminPanel({ onBack }) {
                 Back
               </Button>
             )}
-            {!supportOnly && (
-              <Button variant="ghost" size="sm" onClick={fetchStats}>
-                Refresh
-              </Button>
-            )}
+            <Button variant="ghost" size="sm" onClick={fetchStats}>
+              Refresh
+            </Button>
           </>
         )}
       />
@@ -181,22 +184,30 @@ export default function AdminPanel({ onBack }) {
           <DesktopOnlyGate
             title="Admin works best on desktop"
             message={supportOnly
-              ? 'The support console covers the support queue and account lookup. It is dense and needs the room a larger screen gives it. Open Admin on desktop to work the queue.'
+              ? 'The support console covers the support queue, account lookup, and the usage dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to work the queue.'
               : 'The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue.'}
           />
         </div>
       ) : supportOnly ? (
-      /* The support desk: exactly the panels admin-actions grants `support`
-          (the A5 ticket queue; list_users / get_user_summary / review_billing /
-          the redacted diagnostic_bundle). Writes and full-PII reads stay with
-          the highest roles, so the user console renders read-only. */
+      /* The support desk: exactly the panels admin-actions grants `support`.
+          The user console renders its support set (supportDesk); the action
+          tools and the read-only dashboards keep the staff layout's spacing. */
       <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
         <Section heading="User Management">
-          <AdminUsersPanel readOnly />
+          <AdminUsersPanel supportDesk />
         </Section>
         <Section heading="Support Queue">
           <SupportQueuePanel />
         </Section>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
+          <Section heading="Usage Trends">
+            <AdminTrendsPanel />
+          </Section>
+          <Section heading="Analytics & errors">
+            <AdminAnalyticsPanel />
+            <AdminClientErrorsPanel />
+          </Section>
+        </div>
       </div>
       ) : (
       /* Management Sections — held off from the header/KPI cluster (P5
