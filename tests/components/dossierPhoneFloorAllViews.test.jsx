@@ -97,6 +97,14 @@ const MIN_VIEWS = 18;
  *  Measured against the SHORTEST real view (Faith's gated panel, ~160 chars), so
  *  the wait proves the chunk resolved without demanding a long tab. */
 const PANEL_MIN_CHARS = 100;
+/** The ONE tab whose correct rendering for this fixture is shorter than the floor, keyed by
+ *  tab id. Its wait is EXACT TEXT (stronger than a length), and every other tab keeps the
+ *  100-character floor. Add a row only for a ruled short form, with the ruling named. */
+const SHORT_PANELS = Object.freeze({
+  // Chair ruling 2026-10-30 (BUILD-T3 U4, Chronicle): the empty state is the one fact, the
+  // pitch cut. This fixture is a fresh generated city with no save and no campaign events.
+  chronicle: { text: 'No chronicle yet.' },
+});
 
 /**
  * ⛔ NO VIEW MAY CONTRIBUTE NOTHING — AND THIS LIST IS WHY THE GLOBAL FLOOR WENT.
@@ -108,9 +116,13 @@ const PANEL_MIN_CHARS = 100;
  * surface that stops rendering is named rather than averaged away.
  *
  * A view belongs here ONLY when its emptiness is a fact about the fixture rather
- * than about the dossier, and the reason must say which. Empty today: none.
+ * than about the dossier, and the reason must say which.
  */
-const EMPTY_VIEWS = Object.freeze({});
+const EMPTY_VIEWS = Object.freeze({
+  // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
+  // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
+  'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
+});
 
 // A REAL pipeline settlement, not a hand fixture: the desks compose their prose
 // from generated state, and a thin fixture renders labels with nothing under
@@ -436,7 +448,8 @@ async function walkEveryView(container) {
         // panel-length floor below is the real wait, and is what actually proves
         // the chunk resolved.
         const text = p.textContent || '';
-        expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
+        if (SHORT_PANELS[tabId]) expect(text).toBe(SHORT_PANELS[tabId].text);
+        else expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
       }, { timeout: 10_000 });
       const panel = container.querySelector(`#sf-panel-${tabId}`);
       const view = `${groupName}/${tabName}`;
@@ -521,6 +534,10 @@ const desktopShape = (perView) => Object.fromEntries(
 // (Systems/Services 64 -> 96, Systems/Economics 34 -> 47, World/Relationships 69 -> 63, Summary/Overview 19 -> 20,
 // Summary/Plot Hooks 59 -> 58, Systems/Power 29 -> 28, Systems/Defense 26 -> 28, Systems/Resources 4 -> 5,
 // World/NPCs 46 -> 45); the rest hold. Re-measured by this file's own walk at the committed tree, not predicted.
+// ── RE-MEASURED 2026-10-30 (cure lane T8): no token moved. Lane T3 consolidated the World group and
+// the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
+// panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
+// NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
 const DESKTOP_BASELINE = Object.freeze({
   "Summary/Overview":    { measured: 20, sub14: 20 },
   "Summary/DM Summary":  { measured:  9, sub14:  8 },
@@ -549,13 +566,13 @@ const DESKTOP_BASELINE = Object.freeze({
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   "Systems/Magic":       { measured:  2, sub14:  2 },
-  "World/NPCs":          { measured: 45, sub14: 45 },
-  "World/Relationships": { measured: 63, sub14: 63 },
+  "World/NPCs":          { measured: 30, sub14: 30 },
+  "World/Relationships": { measured: 59, sub14: 58 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
-  "World/Traditions":    { measured:  3, sub14:  3 },
-  "World/History":       { measured: 19, sub14: 19 },
-  "Notes/Chronicle":     { measured:  1, sub14:  1 },
+  "World/Traditions":    { measured:  1, sub14:  1 },
+  "World/History":       { measured: 13, sub14: 13 },
+  "Notes/Chronicle":     { measured:  0, sub14:  0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
 
 /**
@@ -590,6 +607,10 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-10-01, the urban band (ODQ §934.86): the same fixture town, a re-generated world. Totals prose
 // 373 -> 418, chrome 18 -> 13, sub14 15 -> 11, sub12 0 -> 0 (the one that must stay zero stays zero, and every
 // line still clears its floor: the floors arm above is green on this walk). Nine views moved, nine hold.
+// ── RE-MEASURED 2026-10-30 (cure lane T8): no token moved. Lane T3 consolidated the World group and
+// the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
+// panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
+// NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
 const MOBILE_BASELINE = Object.freeze({
   "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
@@ -610,13 +631,13 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Causes":      { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   "Systems/Magic":       { prose:  1, chrome: 1, sub14: 1, sub12: 0 },
-  "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 61, chrome: 2, sub14: 2, sub12: 0 },
+  "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Relationships": { prose: 57, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Traditions":    { prose:  3, chrome: 0, sub14: 0, sub12: 0 },
-  "World/History":       { prose: 19, chrome: 0, sub14: 0, sub12: 0 },
-  "Notes/Chronicle":     { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Traditions":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/History":       { prose: 13, chrome: 0, sub14: 0, sub12: 0 },
+  "Notes/Chronicle":     { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });
 
 describe('THE PHONE FLOORS — every dossier view', () => {
