@@ -26,10 +26,12 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
+// The roster and its badges live on the Institutions tab since owner addendum T1-15
+// (2026-10-30); the Overview's Institutions collapsible is cut.
+import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { addInstitution } from '../../src/domain/events/mutateEntities.js';
 import { applyInstitutionLifecycleOutcome } from '../../src/domain/worldPulse/institutionLifecycle.js';
 
@@ -51,23 +53,26 @@ beforeAll(() => {
 
 afterEach(() => { cleanup(); });
 
-/** Render the tab with the Institutions collapsible OPEN and return the section. */
+/** Render the Institutions tab and return its container (no fold to open: every card shows). */
 function renderInstitutions(settlement) {
-  const { container } = render(<OverviewTab settlement={settlement} />);
-  const toggle = [...container.querySelectorAll('button')]
-    .find(el => /Expand institutions|Collapse institutions/.test(el.getAttribute('aria-label') || ''));
-  expect(toggle, 'the Institutions collapsible must render').toBeTruthy();
-  if (toggle.getAttribute('aria-label') === 'Expand institutions') fireEvent.click(toggle);
+  const { container } = render(<InstitutionsTab settlement={settlement} />);
+  expect(container.querySelectorAll('[data-testid="institution-card"]').length, 'the roster must render').toBeGreaterThan(0);
   return container;
 }
 
-/** The pill whose text starts with `name` (the badge is a trailing child span). */
+/**
+ * The card for `name`, shaped like the old pill for the arms below: its text carries the
+ * badge mark, and `getAttribute('title')` answers with the name's own hover title.
+ */
 function pillFor(container, name) {
-  return [...container.querySelectorAll('span')]
-    .find(el => el.firstChild?.nodeType === 3 && el.firstChild.textContent === name);
+  const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
+    .find(el => el.firstElementChild?.firstElementChild?.textContent === name);
+  if (!card) return undefined;
+  const nameSpan = card.firstElementChild.firstElementChild;
+  return { textContent: card.firstElementChild.textContent, getAttribute: (k) => nameSpan.getAttribute(k) };
 }
 
-describe('OverviewTab institution pills — the provenance badge', () => {
+describe('InstitutionsTab cards — the provenance badge', () => {
   test('a DM-added institution wears the YOU mark and says so on hover', () => {
     const next = addInstitution(base, {
       id: 'evt.badge.add',
@@ -135,8 +140,7 @@ describe('OverviewTab institution pills — the provenance badge', () => {
     const container = renderInstitutions(base);
     // Nothing on a freshly generated settlement was touched by a DM or an
     // advance, so no pill may claim otherwise.
-    const pills = [...container.querySelectorAll('span')]
-      .filter(el => el.firstChild?.nodeType === 3 && el.getAttribute('title') !== null);
+    const pills = [...container.querySelectorAll('[data-testid="institution-card"] span[title]')];
     for (const pill of pills) {
       expect(pill.getAttribute('title')).not.toBe('Grown by the living world');
     }

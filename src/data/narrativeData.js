@@ -337,14 +337,16 @@ export const STRESS_DESCS = {
       `The road into ${r} is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.`,
     r =>
       `${r} has grown a second settlement outside its walls: tents and lean-tos and cookfires on the ground that used to be common pasture. The people there watch you approach with the wariness of those who arrived too late to get inside.`,
+    // ONE DIRECTION (chair ruling 2, 2026-10-30): these two vignettes told a departure beside a crisis card that says
+    // the town is receiving people; they now tell the arrival. Same count, so the draw does not move.
     r =>
-      `Half of ${r} seems to be leaving. You pass loaded wagons heading the other way on the road, and inside the walls there are shuttered houses and shops with their goods already gone. Those who remain have the look of people deciding whether to be next.`,
+      `Half of ${r} seems to have arrived this year. You pass loaded wagons on the road heading in, and inside the walls every spare room has a family in it. Those who were here first have the look of people deciding how much more they can give.`,
     r =>
       `${r}'s market speaks three languages you can pick out and more you cannot. The old families and the newcomers trade at the same stalls and do not quite look at each other. Everyone is doing business. No one is comfortable.`,
     r =>
       `The road to ${r} has acquired a verge of graves: recent, orderly, unmarked but tended. People arrived here in numbers, and not all of them finished the journey.`,
     r =>
-      `${r}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town in the middle of someone's arithmetic about leaving.`,
+      `${r}'s smithy has a queue for wheel-rims and none for ploughshares. A town where the carts outnumber the fields is a town still filling with people who came here with everything they own.`,
   ],
   wartime: [
     r =>

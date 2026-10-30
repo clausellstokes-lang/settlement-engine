@@ -92,7 +92,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 /** A line long enough to be READ rather than glanced at — `chromeFontSize`'s own bound. */
 const MIN_CHARS = 45;
 /** The dossier's own group/sub-tab count, as a floor the walk cannot silently lose. */
-const MIN_VIEWS = 18;
+// 18 -> 17 (2026-10-30, ODQ §934.101): the DM Summary tab is removed (X-5); 17 -> 18 the same day:
+// the Institutions tab joins Systems (T1-14); 18 -> 20: War and Rumors & News are always registered (X-7a).
+const MIN_VIEWS = 20;
 /** A tab panel holding less text than this has not finished resolving its chunk.
  *  Measured against the SHORTEST real view (Faith's gated panel, ~160 chars), so
  *  the wait proves the chunk resolved without demanding a long tab. */
@@ -122,6 +124,10 @@ const EMPTY_VIEWS = Object.freeze({
   // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
   // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
   'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
+  // The walk mounts a PUBLIC dossier (readOnly, no saveId). Since the router hands MagicTab its audience
+  // (BUILD-T1 U6b, at BUILD-T2's request for T2-15), the magic-dependence block's corpus line is dark there,
+  // as every desk line is on a free viewer's page; the posture word and facets stay under the measuring bound.
+  'Systems/Magic': 'public dossier: the DS-DEF-9 corpus line is gated (§885.3); the rest is chrome under 45 characters (BUILD-T1)',
 });
 
 // A REAL pipeline settlement, not a hand fixture: the desks compose their prose
@@ -539,10 +545,12 @@ const desktopShape = (perView) => Object.fromEntries(
 // panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
 // NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 20, sub14: 20 },
-  "Summary/DM Summary":  { measured:  9, sub14:  8 },
-  "Summary/Plot Hooks":  { measured: 58, sub14: 58 },
+  "Summary/Overview":    { measured: 19, sub14: 18 },
+  // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
+  "Summary/Foundations": { measured:  1, sub14:  1 },
+  "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
   "Systems/Services":    { measured: 96, sub14: 96 },
+  "Systems/Institutions": { measured: 96, sub14: 96 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 40, sub14: 40 },
@@ -561,15 +569,15 @@ const DESKTOP_BASELINE = Object.freeze({
   // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
   // (moved to Versions) left the page; no token moved.
   "Systems/Outlook":     { measured:  2, sub14:  2 },
-  // 2 -> 1 (2026-10-30, UX consolidation U8, T2-25): the pressures callout left; the framing is one line.
-  "Systems/Causes":      { measured:  1, sub14:  1 },
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
-  "Systems/Magic":       { measured:  2, sub14:  2 },
+  "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
   "World/NPCs":          { measured: 30, sub14: 30 },
   "World/Relationships": { measured: 59, sub14: 58 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
+  "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
+  "World/War":           { measured:  1, sub14:  1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured:  1, sub14:  1 },
   "World/History":       { measured: 13, sub14: 13 },
   "Notes/Chronicle":     { measured:  0, sub14:  0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
@@ -612,10 +620,11 @@ const DESKTOP_BASELINE = Object.freeze({
 // panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
 // NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
-  "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
-  "Summary/Plot Hooks":  { prose: 58, chrome: 0, sub14: 0, sub12: 0 },
+  "Summary/Overview":    { prose: 18, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
@@ -627,14 +636,14 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
   "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
-  // prose 2 -> 1 (2026-10-30, UX consolidation U8): the pressures callout left.
-  "Systems/Causes":      { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
-  "Systems/Magic":       { prose:  1, chrome: 1, sub14: 1, sub12: 0 },
+  "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
   "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 57, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/War":           { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/History":       { prose: 13, chrome: 0, sub14: 0, sub12: 0 },
   "Notes/Chronicle":     { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)

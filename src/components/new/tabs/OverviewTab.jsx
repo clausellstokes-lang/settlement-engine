@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
+import React, { useMemo } from 'react';
+import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
@@ -12,9 +12,9 @@ import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
 // drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
 import { normalizeStressor } from '../../../domain/worldPulse/stressorsCore.js';
-import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
+import { FS, swatch, MUTED, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
-import { LITERARY_TITLE, literaryTitle, statusCase, tokenCase } from '../labelLadder.js';
+import { LITERARY_TITLE, literaryTitle, statusCase } from '../labelLadder.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -24,7 +24,6 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -35,44 +34,12 @@ import Button from '../../primitives/Button.jsx';
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
+import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
 
-// ── The institution provenance badge (R-5b item #10) ───────────────────
-// The pill used to badge only the GENERATION source tag, so a forge the living
-// world grew during an advance and one the DM added by event BOTH rendered with
-// the fallback tint and no badge at all — indistinguishable from a building
-// nobody had ever touched. The badge now reads the ONE derived provenance record
-// (domain/provenance/rosterProvenance.js), which joins the composer's
-// *ByEventId stamps and the world-pulse's *ByWorldPulseOutcomeId stamps into a
-// single answer to "who put this here". Nothing is persisted: the record is
-// derived per render from stamps both lanes already write.
-//
-// The old map also gave 'forced' an EMPTY glyph, which is falsy at the render
-// guard — the legend promised a badge that could never appear. 'forced' means
-// the player force-added it at generation, so it now wears the same YOU mark as
-// a DM event, and the legend row says "Added by you" once for both.
-const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
-
-function institutionBadge(inst) {
-  const { created } = institutionProvenanceOf(inst);
-  // A DM realm order (SHIFT_TIER) reaches the roster through the world-pulse
-  // apply path, but the hand on it is still the player's.
-  if (created.origin === 'dm-event' || created.origin === 'dm-realm-order') {
-    return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
-  }
-  if (created.origin === 'world-pulse') {
-    return {
-      label:'WORLD', color:PROVENANCE_TONE.world,
-      title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
-    };
-  }
-  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
-  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
-  if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
-  // Unstamped legacy rows stay unbadged rather than being guessed at. Custom
-  // rows are skinned gold by the caller's own ✦ branch, which is unchanged.
-  return { label:null, color:PROVENANCE_TONE.none, title:undefined };
-}
+// The institution provenance badge and its legend moved to InstitutionsTab.jsx with the
+// roster itself (owner addendum T1-15, 2026-10-30): that tab is the roster's one home.
 
 // ── Module-scope helper components ─────────────────────────────────────
 // React Hooks plugin v7 flags components defined inside render functions
@@ -162,8 +129,7 @@ function worldStressorFor(worldState, settlementId) {
   return mine ? normalizeStressor(mine) : null;
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false, worldState = null}) {
-  const [instOpen, setInstOpen] = useState(false);
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
@@ -192,6 +158,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
+  const scopeLine = cultureScopeLine(r);
+  const governs = governsLine(r);
   // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
   // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
   // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
@@ -241,27 +209,36 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionProvenance),
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDuration),
   ].map((d) => d?.sentence).filter(Boolean);
+  // ⭐ UNDER A CRISIS THE CONDITION IS THE CRISIS (chair ruling T1-3, rubric R2). Measured on
+  // the v2 sample, conditions draw on exactly the 327 crisis towns and the severity lens
+  // restates the card's summary, so the card carries ONE condition line: the DIRECTION lens
+  // (holding, easing or deteriorating), which is the fact the card lacks. The own block below
+  // stays for a played-world condition with no banner beside it (R7).
+  const conditionCardLine = drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDirection)?.sentence
+    || conditionLines[0] || null;
+  // THE PRESSURE SENTENCE has one home per page: under a crisis it is the card's last line
+  // (who controls the response, T1-3); with no crisis it stands alone in the dark box (T1-7),
+  // and it yields when it is the notable connection's phrasing word for word (O-10).
+  const pressureLine = r?.pressureSentence && r.pressureSentence !== r?.prominentRelationship?.phrasing
+    ? r.pressureSentence : null;
 
   // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the
   // §885.3 public gate and every reading the desk needs, because that leaf's blocks land on
   // seven tabs and the registry admits one call site per desk.
   // `healthLines` is deliberately NOT taken: its position glances (owner order 2026-09-17),
   // so it is always empty, and the Systems Health section renders no sentence list.
+  // `conflictLines`, `warningLines` and `connectionLines` are no longer taken (chair rulings
+  // T1-6, T1-9, T1-10): their registry rows glance, so the reader draws no sentence there and
+  // the rows beside them (conflict rows, warning rows, the phrasing) are the one home.
+  // `originLines` and `situationLine` are no longer taken either (T1-8): DS-GEN-6's route
+  // line and tier overlay and DS-GEN-5's situation line glance, and "Settlement Origin"
+  // (settlementReason, DM-editable) is the one home of why the town is here.
   const {
-    conflictLines, warningLines, originLines, siteLines, situationLine,
-    connectionLines, populationLine,
+    siteLines, populationLine,
     // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
     // annex's own named reader and it imports out of a worldPulse module, so the cost
     // belongs in this lazy tab chunk rather than in a leaf six tabs share.
   } = overviewDesk;
-
-  // Institution layout — guard `r.institutions` because sparse saves
-  // (mid-migration, partial gen) can land here without an institutions
-  // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
-  const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
-  const _catOrder = ['government','military','economy','religious','magic','criminal','other'];
-  const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
-  const getCatColor = c => catColors2[c] || '#6b5340';
 
   // ScoreRow and StatusTag are defined at module scope above. Lifting
   // them out of the render function (was here originally) fixed 9
@@ -292,6 +269,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             against the approach, beside the head count and the access word above. Silent
             until the ring carries two readings, which is what the ring honestly is. */}
         {populationLine&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,fontStyle:'italic',margin:'0 0 6px',lineHeight:1.5}}>{populationLine}</p>}
+        {/* X-5 / T1-1: the culture scope phrase (the strip's one identity sentence) and who
+            governs (governing name · stability), the two glance facts the removed DM
+            Summary tab alone carried. No historicalCharacter fallback for the first. */}
+        {(scopeLine||governs)&&<p data-testid="overview-identity-line" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:'0 0 6px',lineHeight:1.5}}>
+          {scopeLine}{scopeLine&&governs?' ':''}{governs&&<span style={{whiteSpace:'nowrap'}}><span style={{color:MUTED}}>Governed by </span>{governs}</span>}
+        </p>}
         {/* Row 2: character + spatial */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
@@ -300,30 +283,26 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             {r.spatialLayout?.layout&&<span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
+        {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
+            composer it opens stays, so a route to it must too. Router-gated on the flag. */}
+        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
       </div>
 
-      {/* ── THE SITE, THE EXCHANGE AND THE ROSTER ─────────────────────────
-            DS-GEN-12 (how the ground disposes the town), DS-GEN-13 (why the
-            town's exchange has the shape it has) and DS-GEN-17 (what keeping a
-            court, a garrison or nothing at all says about the place). Three
-            blocks, three positions, one paragraph: they answer the same
-            question — what kind of place is this — at three scales, and the
-            page reads them as one thought.
-            ⭐ AND IT IS NOW LITERALLY ONE PARAGRAPH (owner finding 2026-09-18). The comment
-            above has said "one paragraph" since the position landed while the code rendered
-            three, each opening on the town's name. It keeps its place directly under the
-            identity strip; only the arrangement changed. */}
-      {siteLines.length>0&&(
+      {/* ── THE PLACE (chair ruling T1-2, 2026-10-30; rubric R5) ──────────
+            ONE passage under one title: the arrival scene first (the owner's Voice
+            Program scene, §934.88, frozen at generation and printed verbatim), then
+            DS-GEN-12 ground, DS-GEN-13 market and DS-GEN-17 roster, each trimmed to
+            its first clause by the reader (generalDeskRead.js :: siteClause). This
+            block replaces "The ground and the company it keeps" and the arrival
+            paragraph of the old dark SITUATION box: two atmospheric passages on one
+            page were one too many. The desk lines stay dark on a public dossier
+            (§885.3); the arrival scene is the datum and shows for every reader.
+            The lead reads at FS.lg, one step above body prose, so it says "start
+            here" (owner finding 2026-09-18). */}
+      {(r.arrivalScene||siteLines.length>0)&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
-          {/* THE LEAD PARAGRAPH reads one step above the dossier's body prose (FS.lg over
-              FS.md), on the phone as well as the desktop. It is the first thing a DM reads —
-              it sits second, directly under the identity strip — and at FS.md it was the same
-              size as the eleven paragraphs below it, so nothing said "start here". The step
-              is passed as the CALL SITE'S style, which is the seam ProseBlock documents:
-              the site owns the skin, the renderer owns the weave and the phone floor. That
-              floor is a max, so FS.lg survives it and the phone reads 15 where its siblings
-              read 14. */}
+          <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
+          {r.arrivalScene&&<p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:siteLines.length>0?'0 0 6px':0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.lg,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -340,33 +319,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
               </div>
               <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
-              {(() => {
-                // DS-STR-1, per banner. The desk keys on v.type — the stable machine
-                // identity — never on the label, because two of the fifteen labels differ
-                // from their pool key and a label route would darken them silently.
-                //
-                // ⛔ AN EMPTY DESK SEED MUST STAY EMPTY THROUGH THE JOIN (the promise's own
-                // degenerate case). `deskSeed` is written `String(r?._seed ?? r?.id ?? '')`,
-                // so it ADMITS the empty string; a bare `${deskSeed}::${v.type}` then hands
-                // the kernel `"::famine"`, which is TRUTHY, so `drawVariant`'s seedless line
-                // (`if (!seed) return eligible[0]`, kernel law 4 — canonical-at-zero) never
-                // runs and the banner is drawn by a hash of a literal. Measured on the shipped
-                // corpus: 26 of the 30 type x audience cells draw a vid other than the
-                // canonical 1 that way. The guard is the estate's own spelling of this —
-                // `marketPrices.js` crierLineFor and `settlementRumors.js` both write
-                // `seed ? hash(`${seed}::${tag}`) : pool[0]` for exactly this reason.
-                // ⚠ NO READ MOVES TODAY, and that is measured rather than assumed: every
-                // production path stamps an id (`normalizeSettlement` mints one from `_seed`
-                // or from content), so `deskSeed` is non-empty even on a gallery import, whose
-                // `_seed` IS nulled. This closes the trap, it does not move the page.
-                const drawn = publicDossier ? null : drawnAtMount(CRISIS_MOUNT, crisisBannerRung(
-                  r, v,
-                  { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience, tierNoun: deskTierNoun },
-                ));
-                return drawn?.sentence ? (
-                  <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
-                ) : null;
-              })()}
+              {/* DS-STR-1's per-banner rung is CUT (T1-3, R2): it restated the summary above on
+                  every crisis town. The condition's direction and the pressure sentence close
+                  the card instead, each once: the first on the first card, the second on the last. */}
+              {i===0&&conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
+              {i===stresses.length-1&&pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
             </div>
           </div>
         ))}
@@ -394,7 +351,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           Five lenses over the settlement's first active condition: how bad, which
           way it is moving, what kind it is, whether an event put it there, and
           whether it is running out. Five pools of ONE block at ONE position. */}
-      {conditionLines.length>0&&(
+      {stresses.length===0&&conditionLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
           <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
@@ -410,7 +367,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             pulse writeback; Food Security is the declared-live exception,
             re-graded every tick — same carve-out grammar as DefenseTab's
             Threat Assessment caption (Wave R-0). */}
-        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
+        {/* THE PAGE'S ONE "First survey" LABEL (X-8, T1-5): the warning headers below carry
+            no suffix. The carve-out stays because it changes how the table reads the bars. */}
+        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8}}>As judged at the first survey · Food Security is re-judged as the campaign advances</div>
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
@@ -426,14 +385,20 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'0 24px'}}>
-          <ScoreRow label="Military Might" score={scores.military}/>
+          {/* Military Might and Internal Security are CUT (owner addendum X-13, 2026-10-30;
+              X-1, R2): Foundations carries the same reading (Defense readiness r=0.925,
+              Law & order r=0.927 against these scores over the v2 sample) and the Defense
+              tab's Threat Assessment prints both scores outright. Monster Defense has no
+              Foundations row; Economic Resilience (r=0.62 against Economic capacity),
+              Magical Capability (r=0.63 against Magical stability) and Food Security
+              (r=-0.03) read different facts, so they stay. The four status tags above are
+              the page's glance. */}
           <ScoreRow label="Monster Defense" score={scores.monster}/>
-          <ScoreRow label="Internal Security" score={scores.internal}/>
           <ScoreRow label="Economic Resilience" score={scores.economic}/>
           {/* ⛔ THIS ROW IS THE WORLD'S MAGIC AS THE ENGINE SCORES IT, AND THAT IS A
               DIFFERENT FACT FROM THE DEFENSE TAB'S ARCANE SUPPORT ROW. `scores.magical`
@@ -502,62 +467,24 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
               </div>
               {c.issue&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
-              {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
-                  badge and issue all still carry their own words; this bands the same
-                  quarrel in the town's voice beside them. */}
-              {conflictLines[i]&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'4px 0 0',fontStyle:'italic'}}>{conflictLines[i]}</p>}
             </div>
           </div>;
         })}
       </Section>}
 
-      {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
-      {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:proseFontSize(FS.md,mobile),color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
-        {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
-        {r.pressureSentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
-        {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
-            R-DST-W4-g: `arrivalScene` is a first-impression artifact composed
-            once at generation and never touched here; this is what the approach
-            looks like given current standing state, sitting beneath it exactly
-            as Food Security sits beneath the frozen bars. Two sentences, two
-            lifetimes — overwriting one with the other breaks THE PROMISE. It
-            SUPPRESSES itself where a primary stress resolves, because the crisis
-            banner's own visitor line is the right companion there. */}
-        {situationLine ? (
-          <>
-            <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
-            {/* ONE LENS, so the weave is a no-op here BY CONSTRUCTION (`lines.length <= 1`
-                returns the line unchanged) and the position renders character for character
-                what it rendered before. It routes anyway so the phone floor reaches it with
-                its siblings — one renderer, one rule about a paragraph's smallest size. */}
-            <ProseBlock lines={[situationLine]} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
-          </>
-        ) : null}
+      {/* ── PRESSURE (no crisis; T1-7). The arrival scene moved up into THE PLACE (T1-2);
+          under a crisis the sentence closes the card (T1-3). DS-GEN-5's situation line is
+          CUT (T1-8, R2): it keyed on the same route-to-scene table as the arrival hook and
+          contradicted the origin line in 164 of 1000. Its row glances. ── */}
+      {stresses.length===0&&pressureLine&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+        <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{pressureLine}</p>
       </div>}
 
-      {/* ── DS-GEN-6 at overview.origin, the route line and the tier overlay ──
-          TWO POOLS of one block at ONE position, which is the registry's one written
-          exception to the one-fact-one-sentence law: the overlay is composed AFTER the
-          route line and never instead of it.
-          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. It was drawn INSIDE
-          the Settlement Origin section, which is `collapsible defaultOpen={false}`, and
-          `Primitives.jsx:120` renders `{open && children}` — so this position produced NO
-          BYTES for any reader on any world, while the reachability arm, the public-dossier
-          guard and the registry law were all green over it. The line now FRAMES the fold
-          (the DS-HK-1 arrangement) and no longer waits on `r.settlementReason`, so a town
-          the generator gave no origin paragraph still hears how it came to be there. The
-          visibility arm in dossierMountRegistry.walker.test.js is what keeps it out here. */}
-      {originLines.length>0&&(
-        <div data-testid="overview-origin-lines" style={{borderLeft:'3px solid #c8b89a',paddingLeft:12,marginBottom:14}}>
-          <ProseBlock lines={originLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
-
       {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}
-      {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen={false} accent="#6b5340">
+      {/* WHY IT IS HERE (T1-8): settlementReason is the one home, shown OPEN. DS-GEN-6's
+          route line and tier overlay are CUT (R2: the reason already names the route on
+          every sampled town, and the overlay restated the strip's tier and population). */}
+      {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen accent="#6b5340">
         <div style={{borderLeft:'3px solid #c8b89a',paddingLeft:12}}>
           {Array.isArray(r.settlementReason)
             ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)
@@ -569,13 +496,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
         <div style={{...literaryTitle(FS.sm),color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
-        {/* ── DS-REL-2 (overview.notableConnection) ───────────────────────────
-            TWO LENSES AT ONE POSITION: the tie the town names first, and how
-            much of its roll this town's own conditions made. The phrasing below
-            is the DATUM and keeps its own words; these band what having it
-            means. See notableConnectionPoolKey / flagDrivenPoolKey. */}
-        <ProseBlock lines={connectionLines} settlementName={r.name} tier={r.tier}
-          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}/>
+        {/* DS-REL-2's two lenses are CUT (T1-9, R4/R6): they restated the title. The row
+            `overview.notableConnection` glances; the phrasing below is the one home. */}
         <p style={{fontSize: proseFontSize(FS['12.5'],mobile),...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
             reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
@@ -583,25 +505,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {onNavigateTab&&<div style={{marginTop:5}}><Button variant="ghost" size="sm" onClick={()=>onNavigateTab('relationships')} style={{padding:'2px 6px'}}>Full relationship web →</Button></div>}
       </div>}
 
-      {/* ── RESOURCE CONTEXT (terrain strengths) ─────────────────────────── */}
-      {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
-          {ra.terrain&&<div style={{flex:'1 1 100px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Terrain</div>
-            <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag}}>{ra.terrain}</div>
-          </div>}
-          {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strengths</div>
-            <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
-            </div>
-          </div>}
-          {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
-            <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
-          </div>}
-        </div>
-      </Section>}
+      {/* "Geography & Resources" is CUT (T1-10, R2): the strip's chip carries the terrain and
+          the Resources tab owns the strengths and the strategic value. */}
 
       {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
           Routed through the shared Section primitive so its header reads at the
@@ -611,7 +516,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
           in with Geography). Inner quarter cards keep the composite's craft. */}
       {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
-        {r.spatialLayout.layout&&<p style={{fontSize:proseFontSize(FS.sm,mobile),fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
           {r.spatialLayout.quarters.map((q,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
@@ -631,12 +535,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {/* Coherence notes (G5): sole web render site of the generation-frozen
-            coherenceNotes record — the header carries the survey vintage. */}
-        {r.coherenceNotes?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
+            coherenceNotes record. The survey vintage is said once per page (X-8), by the
+            Systems Health label, so this header and its two siblings carry no suffix. */}
+        {r.coherenceNotes?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes</div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
@@ -648,18 +553,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
-        {/* ── DS-GEN-7, the record disagreeing with itself, in the town's voice ──
-            One position, several pools: the violation list, the suggestion list,
-            and one line per coherence note. The rows above and below keep their
-            own words; this bands what having them MEANS. */}
-        {warningLines.length>0&&(
-          <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'10px 14px',marginBottom:8}}>
-            <ProseBlock lines={warningLines} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-          </div>
-        )}
+        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above and below are the record's own
+            words, and the row `overview.warnings` glances. */}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
           {/* The suggestion reads as two sentences: the reason (period-normalized —
               producers are inconsistent about trailing stops), then the same
               " Consider: …" form the PDF's format.js renders, so the two surfaces
@@ -669,69 +566,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         </div>}
       </div>}
 
-      {/* ── INSTITUTIONS ──────────────────────────────────────────────────── */}
-      <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
-        <button type="button" onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
-          <div style={{display:'flex',alignItems:'center',gap:10}}>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{(r.institutions||[]).length} total</span>
-          </div>
-          <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
-            {/* Top-5 category chips + an honest remainder: the visible chip counts
-                must SUM to the "N total" beside them — a bare slice(0,5) shipped a
-                page whose own arithmetic disagreed (§767.3(d), the 39-vs-40 gap). */}
-            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
-              <span key={cat} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
-            ))}
-            {(()=>{const rest=Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(5).reduce((n,[,insts])=>n+insts.length,0);
-              return rest>0?<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:MUTED,background:`${MUTED}15`,padding:'1px 5px'}}>+{rest} more</span>:null;})()}
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
-          </div>
-        </button>
-        {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
-          {/* Visual category distribution bar */}
-          <div style={{display:'flex',height:8,overflow:'hidden',gap:1,marginBottom:12}}>
-            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).map(([cat,insts])=>(
-              <div key={cat} title={`${cat}: ${insts.length}`} style={{flex:insts.length,background:getCatColor(cat),minWidth:insts.length>0?4:0}}/>
-            ))}
-          </div>
-          {/* Categories with pills */}
-          <div style={{display:'flex',flexDirection:'column',gap:10}}>
-            {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
-              const cc=getCatColor(cat);
-              return <div key={cat}>
-                <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
-                <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                  {/* Sorted by the DISPLAYED label (§934.13): sorting by the raw key would
-                      file 'House of worship' under P and the reader would see an
-                      alphabetical list that is not alphabetical. Copied before sorting —
-                      `byCategory` holds the arrays this render derives from. */}
-                  {[...insts].sort((a,b)=>institutionDisplayName(a).localeCompare(institutionDisplayName(b))).map((inst,i)=>{
-                    const isCustom = inst.source==='custom' || inst.isCustom===true;
-                    const badge = institutionBadge(inst);
-                    const base = {fontSize:chromeFontSize(FS.xs, mobile),padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
-                    const skin = isCustom
-                      ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
-                      : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
-                    return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
-                      {institutionDisplayName(inst)}
-                      {isCustom
-                        ? <span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
-                        : (badge.label&&<span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
-                    </span>;
-                  })}
-                </div>
-              </div>;
-            })}
-          </div>
-          {/* Legend */}
-          <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexWrap:'wrap'}}>
-            {[['REQ',PROVENANCE_TONE.required,'Historically required'],['YOU',PROVENANCE_TONE.you,'Added by you'],['→',PROVENANCE_TONE.auto,'Auto-resolved dependency'],['WORLD',PROVENANCE_TONE.world,'Grown by the living world'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
-              <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
-            ))}
-          </div>
-        </div>}
-      </div>
+      {/* The Institutions collapsible is CUT (owner addendum T1-15, 2026-10-30; R2): the
+          Systems group's Institutions tab lists every house with its services, its
+          provenance badge and the legend. */}
 
     </div>
   );

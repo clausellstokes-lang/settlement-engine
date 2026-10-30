@@ -123,6 +123,8 @@ const COVERED = [
   'src/components/new/SummaryTab.jsx',
   'src/components/new/SummaryTabV2.jsx',
   'src/components/new/tabs/EconomicsTab.jsx',
+  // T1-14 (2026-10-30, chair ruling 5): the Institutions tab renders the Services tab's own rows and note.
+  'src/components/new/tabs/InstitutionsTab.jsx',
   'src/components/new/tabs/ServicesTab.jsx',
   'src/components/session/SessionMode.jsx',
 ];
@@ -146,6 +148,7 @@ const PRINT_DEFERRED = [
   'src/pdf/sections/Cover.jsx',
   'src/pdf/sections/EconomicsTrade.jsx',
   'src/pdf/sections/IdentityDailyLife.jsx',
+  'src/pdf/sections/Institutions.jsx',
   'src/pdf/sections/Overview.jsx',
   'src/pdf/sections/Services.jsx',
   'src/pdf/sections/SupplyChainFlow.jsx',

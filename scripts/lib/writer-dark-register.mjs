@@ -145,6 +145,24 @@ export const WRITER_DARK_REGISTER = Object.freeze([
     charter: '§7 WRWALKER, the drafted register row 3, adjudicated DARK by Car 0 at C-prime',
   }),
   Object.freeze({
+    identity: 'archetypeKey on relationships',
+    key: 'archetypeKey',
+    shape: 'relationships',
+    writer: 'src/generators/npcGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/generateSettlementPipeline.js',
+      symbol: 'the rename path, which re-renders a tie\'s description and tension from its archetype key',
+    }),
+    why: 'The relationship archetype KEY is the seed of the tie\'s description and tension prose: the generator '
+      + 'writes it so the rename path can re-render both sentences for new names, and that read sits inside '
+      + 'src/generators, behind the closure STOP. Its one surface read was the Plot Hooks collector, which used it to '
+      + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
+      + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
+      + 'player is shown is the tension and type name the key produced, never the key.',
+    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:242',
+  }),
+  Object.freeze({
     identity: 'isolationSupport on settlement',
     key: 'isolationSupport',
     shape: 'settlement',

@@ -83,7 +83,8 @@ const THREADED = Object.freeze({
   'src/components/new/SupplyChainsPanel.jsx': "the chain's processing-institution node",
   'src/components/interior/InteriorView.jsx': "the floor plan's heading and image alt text",
   'src/pdf/lib/viewModelBodySlices.js': "the PDF's institution projection",
-  'src/pdf/sections/Institutions.jsx': 'the PDF institution card title',
+  'src/pdf/sections/Institutions.jsx': 'the PDF institution card title and its service rows',
+  'src/components/new/tabs/InstitutionsTab.jsx': 'the Institutions tab card titles and service rows (T1-14)',
   'src/pdf/sections/Services.jsx': 'the PDF service label',
   'src/pdf/sections/SupplyChainFlow.jsx': 'the PDF supply-chain node',
 });
@@ -101,6 +102,10 @@ const ALLOWED_RAW_READS = Object.freeze({
   'src/components/compendium/CatalogTabs.jsx': {
     count: 1,
     why: 'a React key — an identity, not a word, and it must stay stable when the label changes',
+  },
+  'src/components/new/tabs/InstitutionsTab.jsx': {
+    count: 2,
+    why: 'the JOIN KEY to the service rows (each row names its house by the raw roster name) and a React key; neither is printed — the card title goes through the seam',
   },
   'src/pdf/sections/EconomicsTrade.jsx': {
     count: 1,
@@ -180,7 +185,8 @@ describe('the institution label seam — the roster holds', () => {
   }
 
   test('the roster is not silently shrinking', () => {
-    expect(Object.keys(THREADED)).toHaveLength(14);
+    // 14 -> 15 (2026-10-30, T1-14): the Institutions tab prints house and service names through the seam.
+    expect(Object.keys(THREADED)).toHaveLength(15);
   });
 });
 
@@ -215,7 +221,8 @@ describe('the institution label seam — the habitat is exactly the frozen one',
       expect(row.why.length, file).toBeGreaterThan(20);
       expect(row.count, file).toBeGreaterThan(0);
     }
-    expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(3);
+    // 3 -> 4 (2026-10-30, T1-14): the Institutions tab's join key and React key.
+    expect(Object.keys(ALLOWED_RAW_READS)).toHaveLength(4);
   });
 });
 

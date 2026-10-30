@@ -42,7 +42,7 @@ const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 
 // The Systems Health caption — ONE sentence, kept byte-identical between the
 // web tab and its PDF twin (screen↔PDF parity by construction, not by comment).
-const SYSTEMS_HEALTH_CAPTION = 'Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.';
+const SYSTEMS_HEALTH_CAPTION = 'As judged at the first survey · Food Security is re-judged as the campaign advances';
 
 describe('G5 first-survey framing — PDF ViabilityAssessment twin', () => {
   // ⭐ ONE LABEL PER CHAPTER (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
@@ -68,9 +68,11 @@ describe('G5 first-survey framing — PDF Overview twin', () => {
     expect(read(OVERVIEW_TAB)).toContain(SYSTEMS_HEALTH_CAPTION);
   });
 
-  test('the WARNINGS & NOTES header carries the vintage', () => {
+  test('the vintage is said once in the chapter: the WARNINGS & NOTES header carries no suffix (X-8, 2026-10-30)', () => {
+    // The Systems Health caption above (the screen's twin) is the chapter's one first-survey
+    // label, as on the screen's Overview (RULINGS-CROSS X-8, the chair's reading, vetoable).
     const src = read(OVERVIEW_PDF);
-    expect(src).toMatch(/WARNINGS & NOTES · FIRST SURVEY/);
-    expect(src).not.toMatch(/WARNINGS & NOTES\s*<\/Text>/);
+    expect(src).toMatch(/WARNINGS & NOTES\s*<\/Text>/);
+    expect((src.match(/first survey/gi) || []).length, 'the chapter says "first survey" exactly once').toBe(1);
   });
 });

@@ -140,6 +140,22 @@ function line(mount, rung) {
 }
 
 /**
+ * THE PLACE'S TRIM (chair ruling T1-2, 2026-10-30, rubric R3/R4). The ground, market and
+ * institutions sentences now follow the arrival scene in ONE passage, so each keeps only its
+ * first clause: the fact, without the aphorism that restates it. The cut is the first `;` or
+ * the first comma that opens a joined clause (`and`, `so`, `which`, `because`, `but`); a
+ * sentence with neither is kept whole. Applied HERE, once, so the screen and the print desk
+ * (printProse.js reads this reader) print the same words.
+ * @param {string|null} sentence @returns {string|null}
+ */
+export function siteClause(sentence) {
+  if (typeof sentence !== 'string') return sentence;
+  const t = sentence.trim();
+  const cut = /;|,\s+(?:and|so|which|because|but)\b/.exec(t);
+  return cut ? `${t.slice(0, cut.index).replace(/[\s,:]+$/, '')}.` : t;
+}
+
+/**
  * THE READ. One desk call per render, gated, with every position's lines drawn.
  *
  * @param {object|null|undefined} settlement the record the tab already holds
@@ -292,7 +308,7 @@ export function generalDeskLines(settlement, options = {}) {
         line(GROUND_MOUNT, prose.overview.ground),
         line(MARKET_MOUNT, prose.overview.market),
         line(INSTITUTIONS_MOUNT, prose.overview.institutions),
-      ].filter(Boolean)),
+      ].filter(Boolean).map(siteClause)),
       situationLine: line(SITUATION_MOUNT, prose.overview.situation),
       connectionLines: Object.freeze(prose.overview.notableConnection
         .map((rung) => line(CONNECTION_MOUNT, rung)).filter(Boolean)),

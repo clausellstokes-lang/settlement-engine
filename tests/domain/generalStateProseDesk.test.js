@@ -470,6 +470,21 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       .toBe('MARKET-OPEN');
   });
 
+  it('⛔ THE NO-MARKET POOL STATES THE INSTITUTION FACT AND NEVER DENIES THE TOWN SELLS (chair T1-13)', () => {
+    // Lane T2 measured the Overview saying "Nothing in X is arranged for buying and selling in
+    // quantity" beside an Economics page saying "This is a town that sells" (110 of 1000; 131
+    // of 1000 on the v2 sample, 242 counting the "at the scale the town actually needs"
+    // variant). The absence of a market INSTITUTION is the fact; the absence of trade is not.
+    const pool = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-13'].pools['NO-MARKET'];
+    expect(pool.length).toBeGreaterThan(0);
+    for (const { text } of pool) {
+      expect(text, 'a NO-MARKET variant no longer states that there is no market').toMatch(/\bno market\b/i);
+      // anchored: the toMatch(/no market/) on the line above pins this same variant's text as present
+      expect(text, 'a NO-MARKET variant denies that the town trades').not.toMatch(
+        /buying and selling|scale the town actually needs|no (?:trade|selling|buying)|does not sell|nothing (?:is )?(?:sold|bought)/i);
+    }
+  });
+
   it('THE MARKET: four pools, and the evaluation order is driven rather than described', () => {
     const stalls = [{ name: 'Weekly market' }];
     // NO-MARKET first — a town with no market-class row is not an entrepôt of its own stalls.

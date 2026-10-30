@@ -147,14 +147,17 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           caption, with the same declared-live Food Security carve-out
           (FROZEN_VS_LIVE grammar). One string, vetoable. */}
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
+        As judged at the first survey · Food Security is re-judged as the campaign advances
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
           {/* defense score bars — only render numeric entries (engine may
               include object-shaped fields like magicDependency that aren't
               0-100 scores) */}
+          {/* X-13 (2026-10-30): military and internal are CUT here as on screen; Foundations
+              and the Defense chapter carry the same reading. */}
           {Object.entries(o.defenseScores || {})
+            .filter(([key]) => !PRINT_CUT_SCORES.has(key))
             .map(([key, val]) => [key, scoreNum(val)])
             .filter(([, n]) => n != null)
             .map(([key, n]) => (
@@ -438,12 +441,12 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          {/* G5 first-survey framing (Wave R-2): all three merged sources —
-              warnings, coherenceNotes, structuralSuggestions — are
-              generation-frozen records; the vintage mirrors the web twins
-              (OverviewTab's "Coherence Notes / Suggestions · First Survey"). */}
+          {/* G5: all three merged sources (warnings, coherenceNotes,
+              structuralSuggestions) are generation-frozen records. Since X-8
+              (2026-10-30) the chapter says the vintage once, in the Systems
+              Health caption, as the screen's Overview does; this header is bare. */}
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            WARNINGS & NOTES · FIRST SURVEY
+            WARNINGS & NOTES
           </Text>
           <BulletList
             items={[
@@ -505,6 +508,9 @@ function hasSystemsHealth(o) {
     || o.viabilityVerdict
     || (o.foodBalance && (o.foodBalance.production != null || o.foodBalance.deficit != null));
 }
+
+/** The score bars the Overview no longer draws (owner addendum X-13): Foundations reads the same thing. */
+const PRINT_CUT_SCORES = new Set(['military', 'internal']);
 
 // Defense scores may arrive as numbers or as { score, value, level, ... }
 // objects (the engine sometimes wraps a score with extra metadata). Extract

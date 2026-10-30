@@ -14,22 +14,18 @@ import {
 } from '../primitives/Dense.jsx';
 import { hooksHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
-import { tokenCase } from '../../domain/display/labelCase.js';
 import { type, palette, space, pt } from '../theme.js';
 import { cap, hookText, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+// The screen's grouping, from the same domain leaf (already in this bundle through
+// viewModel.js's collectPlotHooks import, so it costs the worker nothing).
+import { groupPlotHooksBySourcePage } from '../../domain/dossier/plotHooks.js';
 
-const SOURCE_LABELS = {
-  npc:          { label: 'NPC',          tone: 'cool' },
-  conflict:     { label: 'CONFLICT',     tone: 'warn' },
-  crime:        { label: 'UNDERWORLD',   tone: 'bad'  },
-  crisis:       { label: 'CRISIS',       tone: 'bad'  },
-  tension:      { label: 'TENSION',      tone: 'warn' },
-  relationship: { label: 'RELATIONSHIP', tone: 'cool' },
-  history:      { label: 'HISTORY',      tone: 'gold' },
-};
-
-const SOURCE_ORDER = ['crisis', 'conflict', 'tension', 'crime', 'npc', 'relationship', 'history'];
+// THE CARDS ARE GROUPED BY THE PAGE THEIR SOURCE FACT LIVES ON, as on the screen (chair
+// ruling, RULINGS-T1 Plot Hooks, 2026-10-30): domain/dossier/plotHooks.js ::
+// groupPlotHooksBySourcePage, keyed on the collector's own category and source label (the
+// view model carries both as `category` and `sourceName`). The old per-token labels and
+// order, and the per-card category tag, are gone with the screen's.
 
 const PRIORITY_TONE = {
   high: 'bad', critical: 'bad', major: 'bad',
@@ -42,16 +38,9 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
   const tensions = vm.hooks?.tensions || [];
 
   // Group by source
-  const grouped = {};
-  for (const h of hooks) {
-    const key = h.source || 'other';
-    if (!grouped[key]) grouped[key] = [];
-    grouped[key].push(h);
-  }
-  const order = [
-    ...SOURCE_ORDER.filter(s => grouped[s]?.length),
-    ...Object.keys(grouped).filter(s => !SOURCE_ORDER.includes(s) && grouped[s]?.length),
-  ];
+  const groups = groupPlotHooksBySourcePage(
+    hooks.map((row) => ({ row, category: row.category, source: row.sourceName })),
+  ).map(({ page, hooks: members }) => ({ page, list: members.map((m) => m.row) }));
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -76,9 +65,9 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
       )}
 
       {/* ── Source groups ────────────────────────────────────── */}
-      {order.map(source => {
-        const cfg = SOURCE_LABELS[source] || { label: source, tone: 'gold' };
-        const list = (grouped[source] || []).filter(h => hookText(h?.hook).trim().length > 0);
+      {groups.map(({ page, list: members }) => {
+        const source = page.id;
+        const list = members.filter(h => hookText(h?.hook).trim().length > 0);
         if (!list.length) return null;
         return (
           <View key={`grp-${source}`} style={{ marginBottom: space.sm }}>
@@ -92,7 +81,7 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
               }}
               wrap={false}
             >
-              <Pill tone={cfg.tone}>{tokenCase(cfg.label)}</Pill>
+              <Pill tone="gold">{page.label}</Pill>
               <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['8'] }}>
                 {list.length} hook{list.length === 1 ? '' : 's'}
               </Text>
@@ -160,7 +149,6 @@ function HookCard({ hook, number }) {
   const text = hookText(hook.hook);
   const pri  = (hook.priority || '').toLowerCase();
   const priTone = PRIORITY_TONE[pri] || null;
-  const cat = hook.category;
 
   return (
     <View
@@ -192,7 +180,7 @@ function HookCard({ hook, number }) {
           {text}
         </Text>
         {/* Provenance + tags demoted to a small follow-up line */}
-        {(hook.sourceName || priTone || cat) && (
+        {(hook.sourceName || priTone) && (
           <View
             style={{
               flexDirection: 'row',
@@ -207,7 +195,6 @@ function HookCard({ hook, number }) {
               </Text>
             )}
             {priTone && <Tag tone={priTone}>{cap(pri)}</Tag>}
-            {cat && <Tag tone="muted">{humanize(cat)}</Tag>}
           </View>
         )}
       </View>

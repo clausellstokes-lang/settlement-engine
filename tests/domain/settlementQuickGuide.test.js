@@ -8,7 +8,7 @@
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { composeSettlementQuickGuide } from '../../src/domain/summary/settlementQuickGuide.js';
+import { composeSettlementQuickGuide, cultureScopeLine, governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 
 function completeSettlement() {
@@ -206,14 +206,15 @@ describe('composeSettlementQuickGuide', () => {
     // must not be a sentence that stops mid-clause. SCOPE_PHRASE is keyed on the profile id
     // (FP-G16: a corpus sentence stands in exactly one source module), so a record carrying
     // the old `scope` and no `key` finds no phrase and must take the SAME door the blend
-    // takes: the historical-character form, then the bare population form.
+    // takes: the bare population form. The historical-character form is CUT (chair ruling
+    // S-2, 2026-10-30): it built a comma splice and repeated the strip's character line.
     const say = (culturalIdentity, history) => composeSettlementQuickGuide({
       name: 'Testholm', tier: 'village', population: 400, culturalIdentity, ...(history ? { history } : {}),
     }).identitySentence;
     const keyless = { label: 'Germanic-inspired', scope: 'A design grammar of some kind.' };
 
     expect(say(keyless, { historicalCharacter: 'Founded at a ford and never moved from it.' })).toBe(
-      'Testholm is a Germanic-inspired village of 400 people, founded at a ford and never moved from it.',
+      'Testholm is a Germanic-inspired village of 400 people.',
     );
     expect(say(keyless)).toBe('Testholm is a Germanic-inspired village of 400 people.');
     // The blend reaches the same two forms, so the keyless record is not a special case.
@@ -369,7 +370,7 @@ describe('composeSettlementQuickGuide', () => {
     expect(wrong, `${wrong.length} of ${BATTERY.length} leads take the wrong article`).toEqual([]);
   });
 
-  it('falls through to historical character when the scope is not a term list', () => {
+  it('takes the plain sentence (no historical-character fallback) when the scope is not a term list', () => {
     // `materializeCulturalIdentity` synthesises the blend at generation time under
     // `key: 'mixed'`; it is not a corpus profile and has no SCOPE_PHRASE row, because
     // its scope is a sentence about blending rather than the `<article> <terms>
@@ -387,9 +388,24 @@ describe('composeSettlementQuickGuide', () => {
     });
 
     expect(guide.identitySentence).toBe(
-      'Nassenfurt is a Germanic-inspired + Latin-inspired village of 400 people, '
-      + 'founded at a ford and never moved from it.',
+      'Nassenfurt is a Germanic-inspired + Latin-inspired village of 400 people.',
     );
+  });
+
+  it('the Overview strip helpers: the culture scope line and who governs (X-5 / T1-1)', () => {
+    expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' } }))
+      .toBe('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+    // No authored phrase, no line: the cut fallback does not come back through the strip.
+    expect(cultureScopeLine({
+      culturalIdentity: { key: 'mixed', label: 'Germanic-inspired + Latin-inspired' },
+      history: { historicalCharacter: 'Founded at a ford.' },
+    })).toBe('');
+    expect(cultureScopeLine({ culturalIdentity: { key: 'constructor' } })).toBe('');
+    expect(governsLine({ powerStructure: { governingName: 'The Burgher Council', stability: 'Stable' } }))
+      .toBe('The Burgher Council · Stable');
+    expect(governsLine({ powerStructure: { factions: [{ faction: 'The Guild', isGoverning: true }] } }))
+      .toBe('The Guild');
+    expect(governsLine({})).toBe('');
   });
 
   it('states how a settlement lives as a sentence, over every food-security label', () => {

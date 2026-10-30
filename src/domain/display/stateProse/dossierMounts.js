@@ -326,14 +326,29 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
+  // rubric R2). Each of these three positions printed a sentence beside rows that already
+  // carry the same fact: DS-GEN-2 restated each conflict row's parties, issue and intensity
+  // (608 of 614 towns), DS-GEN-7 restated the warning rows (396 of 1000), and DS-REL-2's two
+  // lenses restated the "Notable connection" title. The rows stay; the sentences go. The
+  // systemsHealth precedent above, with the same consequence: the block has NO speaking
+  // position until a later registry act gives it one. The print desk follows (printProse.js
+  // routes through drawnAtMount).
   Object.freeze({
-    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'sentence',
+    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'glance',
+  }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-8; rubric R2). DS-GEN-5's situation
+  // line keyed on the same route-to-scene table as the arrival hook beside it (700 of 1000
+  // unstressed towns heard the road three times) and contradicted DS-GEN-6 in 164 of 1000;
+  // DS-GEN-6's route line restated `settlementReason`, which names the route on every sampled
+  // town, and its tier overlay restated the strip's tier and population (991 of 1000). The
+  // "Settlement Origin" section (settlementReason, DM-editable) is the one home; neither
+  // block has a speaking position until a later registry act gives it one.
+  Object.freeze({
+    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'sentence',
-  }),
-  Object.freeze({
-    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'sentence', dimensions: ['deficit'],
+    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'glance', dimensions: ['deficit'],
   }),
   // ⛔ GLANCE BY OWNER ORDER 2026-09-17. The Systems Health section printed up to ten DS-GEN-3
   // sentences stacked under its bars, one per lens. The owner: "either simply pick just one or
@@ -348,7 +363,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'sentence',
+    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
@@ -466,11 +481,14 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 Plot Hooks; rubric R2/R6): the framing
+  // restated the hook cards' categories as three aphorisms on 991 of 1000 towns. The cards,
+  // grouped by source page, are the position's rows; DS-HK-1 has no speaking position.
   Object.freeze({
-    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'sentence',
+    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'sentence',
+    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'glance',
   }),
   Object.freeze({
     mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',

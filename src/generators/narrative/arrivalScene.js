@@ -40,6 +40,7 @@ import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
+import { liveInstitutions } from '../../domain/institutions/institutionRoster.js';
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { ARRIVAL_SCENES, STRESS_DESCS } from '../../data/narrativeData.js';
 import {
@@ -57,6 +58,26 @@ export const ROUTE_TO_SCENE = Object.freeze({
   isolated: 'smoke',
   mountain_pass: 'smoke',
 });
+
+/**
+ * THE MARKET PREDICATE, and it is DS-GEN-13's own (chair ruling T1-12, 2026-10-30; ODQ §934.101). The Overview's
+ * market sentence (generalStateProse.js :: marketPoolKey) says a town with no market-class row "keeps no market",
+ * and on the v2 sample the arrival SIGHT beat named a market, its stalls or a fair over 55 of those 319 towns. So
+ * the SIGHT asks the same question the same way: the engine's market NAME class over the live roster. Mirrored
+ * rather than imported (a generator does not reach into the display corpus) and pinned equal by the arrival test.
+ */
+export const MARKET_INSTITUTION_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
+/** The words a SIGHT line uses to say there is a market. */
+const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
+
+/**
+ * Whether the live roster carries a market-class institution, by DS-GEN-13's rule.
+ * @param {unknown} institutions
+ * @returns {boolean}
+ */
+export function holdsMarket(institutions) {
+  return liveInstitutions({ institutions }).some((row) => MARKET_INSTITUTION_NAME.test(String(row?.name ?? '')));
+}
 
 /** Severities that leave a visible trace; a minor event does not mark a settlement. */
 const MEMORY_SEVERITIES = Object.freeze(['major', 'catastrophic']);
@@ -200,17 +221,39 @@ export function composeArrivalScene(settlement) {
     : pickRandom(ARRIVAL_SCENES[sceneKey]);
   const hook = typeof hookTemplate === 'function' ? hookTemplate(name, tier) : hookTemplate;
 
+  // THE SCENE AGREES WITH THE INSTITUTIONS (T1-12, extended to every beat by the chair's ruling 3, 2026-10-30): a
+  // line names a market, its stalls or a fair only where the roster holds a market (DS-GEN-13's predicate). A beat
+  // that drew such a line over a market-less roster redraws from its own pool's other lines. The redraw happens ONLY
+  // on that contradiction, so no other settlement's draw moves.
+  const marketHeld = holdsMarket(institutions);
+  const speaks = (/** @type {string} */ line) => marketHeld || !MARKET_WORD.test(line);
+  /**
+   * One beat's line from a pool of name-templates, redrawn once from the lines that agree where the first draw
+   * names a market the roster lacks; null when no line of the pool agrees.
+   * @param {ReadonlyArray<(n: string) => string>} pool
+   */
+  const agreeingLine = (pool) => {
+    const first = pickRandom(pool)(name);
+    if (speaks(first)) return first;
+    const clean = pool.filter((line) => speaks(line(name)));
+    return clean.length ? pickRandom(clean)(name) : null;
+  };
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
   if (!underStress) {
     sight = checkInstCompat(institutions, tier, config.priorityMagic ?? 50);
+    if (sight && !speaks(sight)) sight = null;
     if (!sight) {
       const materialized = typeof culturalIdentity?.architecturalDetail === 'string'
         ? culturalIdentity.architecturalDetail.trim()
         : '';
       const profile = CULTURE_PROFILES[resolveCultureProfileKey(config.culture || 'germanic')];
-      const detail = materialized
+      let detail = materialized
         || (profile?.architecturalDetails?.length ? pickRandom(profile.architecturalDetails) : '');
+      if (detail && !speaks(detail)) {
+        const clean = (profile?.architecturalDetails || []).filter(speaks);
+        detail = clean.length ? pickRandom(clean) : '';
+      }
       if (detail) sight = `${sentenceCase(detail)}.`;
     }
   }
@@ -223,11 +266,11 @@ export function composeArrivalScene(settlement) {
   ].map(lower);
   const chosen = chooseSense(names, tradeWords, magicReal);
   const sensePool = chosen ? (chosen.dominant ? chosen.sense.dominant : chosen.sense.lines) : null;
-  const senseLine = sensePool?.length ? pickRandom(sensePool)(name) : null;
+  const senseLine = sensePool?.length ? agreeingLine(sensePool) : null;
 
   // PEOPLE: the culture, shown.
   const peoplePool = ARRIVAL_PEOPLE[resolveCultureProfileKey(config.culture || 'germanic')] || ARRIVAL_PEOPLE.mixed;
-  const peopleLine = peoplePool?.length ? pickRandom(peoplePool)(name) : null;
+  const peopleLine = peoplePool?.length ? agreeingLine(peoplePool) : null;
 
   // CLOSING: one more visible truth, none under a vignette.
   const closing = underStress ? null : chooseClosing(settlement, magicReal);

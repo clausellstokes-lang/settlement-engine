@@ -288,7 +288,7 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "25f06af7c7b9f8a82612f8bf09f6cd0d8dea80c11fa3c2b1a8303d4f665360ab",
+      "sha256": "1066e911895f827f959484564d7dd94a9009bb6250b78148ef7e9bd2f0aadcfc",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
@@ -824,7 +824,7 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "7035dd43221f9e1a00d92757eed0c56e082090fcd2f9346f3debed76cfd392a9",
+      "sha256": "39f96324f7ba68245bef6b98ef80e61878e9ef35ee713c229a2fbc17102603ec",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,

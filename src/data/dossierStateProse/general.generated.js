@@ -8192,7 +8192,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "NO-MARKET": [
         {
           "angle": "counterforce",
-          "text": "{settlement} keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.",
+          "text": "No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.",
           "slots": [
             "settlement"
           ],
@@ -8200,7 +8200,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.",
+          "text": "A stranger finds no market square in {settlement}, only trade done at the gate, at the inn and along the road.",
           "slots": [
             "settlement"
           ],

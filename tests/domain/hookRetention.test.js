@@ -278,7 +278,11 @@ describe('HK-2 retention — HK-LAW-5, the projection writes nothing', () => {
     // actually did work and actually dropped something.
     expect(kept.length).toBeGreaterThan(0);
     expect(structured.length).toBeGreaterThan(0);
-    expect(collectPlotHooks(settlement).length).toBeGreaterThan(kept.length);
+    // Retention may only drop. Whether it drops on THIS seed moved with ruling X-2 (ODQ
+    // §934.101): the relationship-tension cards left the collector, and this city's overflow
+    // above K went with them. That the layer still bites somewhere is pinned in the dark-
+    // default describe below, over a family rather than one seed's luck.
+    expect(collectPlotHooks(settlement).length).toBeGreaterThanOrEqual(kept.length);
   });
 
   test('the persisted hook arrays themselves are untouched by a retained read', () => {
@@ -297,10 +301,17 @@ describe('HK-2 retention — the seam is DARK by default (J-HK-5 convergence)', 
       const bare = collectPlotHooks(settlement);
       expect(JSON.stringify(collectPlotHooks(settlement, {}))).toBe(JSON.stringify(bare));
       expect(JSON.stringify(collectPlotHooks(settlement, { retention: false }))).toBe(JSON.stringify(bare));
-      // …and lighting it changes something, so "dark" is a real state and not a
-      // description of a layer that does nothing either way.
-      expect(collectPlotHooks(settlement, { retention: true }).length).toBeLessThan(bare.length);
+      // Lighting it never ADDS a hook, on any tier.
+      expect(collectPlotHooks(settlement, { retention: true }).length).toBeLessThanOrEqual(bare.length);
     }
+    // …and lighting it changes something SOMEWHERE, so "dark" is a real state and not a
+    // description of a layer that does nothing either way. Asserted over a family since
+    // ruling X-2 (ODQ §934.101) took the relationship-tension cards out of the collector:
+    // a single seed per tier no longer reliably carries an overflow above K (the HK-3
+    // lesson in deriveAllStructuredHooks' arm below, met again).
+    const family = Array.from({ length: 6 }, (_, i) => gen({ settType: 'metropolis', tradeRouteAccess: 'random_trade', terrainOverride: 'auto', monsterThreat: 'random_threat', culture: 'random_culture' }, `hk2-dark-family-${i}`));
+    expect(family.some((s) => collectPlotHooks(s, { retention: true }).length < collectPlotHooks(s).length),
+      'retention dropped nothing on six metropolises: the layer has gone inert').toBe(true);
   });
 
   test('deriveAllStructuredHooks — same helper, same dark default', () => {

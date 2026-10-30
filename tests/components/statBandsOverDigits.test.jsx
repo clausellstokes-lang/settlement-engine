@@ -49,11 +49,13 @@ import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 const BANDS = ['STRONG', 'ADEQUATE', 'WEAK', 'CRITICAL'];
 const BAND_RE = /^(Strong|Adequate|Weak|Critical)$/;
 
-/** The five Systems Health rows and the score key each one reads. */
+/**
+ * The Systems Health score rows and the score key each one reads. THREE since owner addendum
+ * X-13 (2026-10-30): Military Might and Internal Security were cut because Foundations and
+ * the Defense tab carry the same reading.
+ */
 const SCORE_ROWS = [
-  ['Military Might', 'military'],
   ['Monster Defense', 'monster'],
-  ['Internal Security', 'internal'],
   ['Economic Resilience', 'economic'],
   ['Magical Capability', 'magical'],
 ];
@@ -143,7 +145,7 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       // ONE NAME, ONE FACT, AND NO EXCEPTION (review 10). Magical Capability used to be
       // skipped here, because it printed the Defense tab's PRESENCE word instead of its own
       // grade. The two rows now carry two names for their two facts, so every row in this
-      // list bands its own score and this loop judges all five.
+      // list bands its own score and this loop judges every row it lists.
 
       // The band renders...
       expect(value).toMatch(BAND_RE);
@@ -162,9 +164,9 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
   test('the bar still carries the magnitude (band replaced the digit, not the bar)', () => {
     const settlement = settlements.find(([n]) => n === 'city')[1];
     const { container } = render(<OverviewTab settlement={settlement} />);
-    const labelEl = [...container.querySelectorAll('span')].find((el) => el.textContent === 'Military Might');
+    const labelEl = [...container.querySelectorAll('span')].find((el) => el.textContent === 'Monster Defense');
     const bar = labelEl.parentElement.nextElementSibling.firstElementChild;
-    const n = Math.min(100, Math.max(0, settlement.defenseProfile.scores.military || 0));
+    const n = Math.min(100, Math.max(0, settlement.defenseProfile.scores.monster || 0));
     expect(bar.style.width).toBe(`${n}%`);
   });
 });
@@ -443,9 +445,9 @@ describe('Two names, two facts — the Overview score and the Defense presence r
 
     const { container: overview } = render(<OverviewTab settlement={settlement} />);
     const overviewLabels = labelsIn(overview);
-    // 'Military Might' is the sibling ScoreRow: it proves the Systems Health block rendered,
+    // 'Monster Defense' is the sibling ScoreRow: it proves the Systems Health block rendered,
     // so the exclusion below is a name that is not here rather than a section that is not.
-    expectAbsentWithAnchor(overviewLabels, 'Arcane Support', 'Military Might',
+    expectAbsentWithAnchor(overviewLabels, 'Arcane Support', 'Monster Defense',
       `${name}: the Defense tab's presence-read name on the Overview`);
     expect(overviewLabels, `${name}: the Overview's own magic row must render`)
       .toContain('Magical Capability');
@@ -587,13 +589,15 @@ describe('DefenseTab Threat Assessment — one score, one word, both tabs', () =
   test('the badge for a shared score matches the OverviewTab band for that score', () => {
     const settlement = settlements.find(([n]) => n === 'metropolis')[1];
     const { container: overview } = render(<OverviewTab settlement={settlement} />);
+    // The shared score is `scores.economic` since X-13 cut the Overview's Internal Security
+    // bar: the Overview names it Economic Resilience, the Defense tab Economic Survival.
     const overviewWord = [...overview.querySelectorAll('span')]
-      .find((el) => el.textContent === 'Internal Security').parentElement.lastElementChild.textContent;
+      .find((el) => el.textContent === 'Economic Resilience').parentElement.lastElementChild.textContent;
     cleanup();
 
     const { container: defense } = render(<DefenseTab settlement={settlement} />);
     const threatLabel = [...defense.querySelectorAll('span')]
-      .find((el) => el.textContent === 'Internal Security');
+      .find((el) => el.textContent === 'Economic Survival');
     const badge = [...threatLabel.parentElement.querySelectorAll('span')]
       .find((el) => BAND_RE.test(el.textContent));
 

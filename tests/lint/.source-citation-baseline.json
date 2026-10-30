@@ -44,9 +44,9 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 5,
+      "dated": 6,
       "sha-pin": 1,
-      "tree": 40
+      "tree": 44
     },
     "files": {
       "banner": [
@@ -65,6 +65,7 @@
         "docs/COMPREHENSIVE_REVIEW_2026-07-15.md",
         "docs/COMPREHENSIVE_REVIEW_2026-08-01.md",
         "docs/HANDOFF_2026-08-01_PAUSE.md",
+        "docs/UX_CONSOLIDATION_2026-10-30.md",
         "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md"
       ],
       "sha-pin": [
@@ -109,10 +110,15 @@
         "docs/shift-records/2026-10-02-voice-program-wave-2-substreams.json",
         "docs/shift-records/2026-10-02-voice-program-wave-3-arrival-place.json",
         "docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json",
+        "docs/shift-records/2026-10-30-arrival-market-gate.json",
+        "docs/shift-records/2026-10-30-migration-one-direction.json",
+        "docs/shift-records/2026-10-30-no-market-pool.json",
+        "docs/shift-records/2026-10-30-service-category-fidelity.json",
         "docs/shift-records/README.md",
         "docs/shift-records/_TEMPLATE.json"
       ]
-    }
+    },
+    "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377."
   },
   "rows": []
 }

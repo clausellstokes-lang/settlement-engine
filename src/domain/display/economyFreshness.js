@@ -37,6 +37,7 @@
  *      by economyFreshnessNote() below:
  *        - tabs/EconomicsTab.jsx   — the 'tallies' sentence
  *        - tabs/ServicesTab.jsx    — the 'catalog' sentence
+ *        - tabs/InstitutionsTab.jsx — the 'catalog' sentence, over the same rows house by house (T1-14)
  *        - new/SummaryTab.jsx      — 'tallies', anchored under the SITUATION
  *          ROW so it qualifies the Economy tile, not the whole dossier
  *        - new/SummaryTabV2.jsx    — 'tallies' (the DEFAULT summary tab,
