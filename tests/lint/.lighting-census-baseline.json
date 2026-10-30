@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "7a4255edda484df4d314d023b95957c95414d009",
-  "measuredBy": "the chair, merge of lanes S+T3+T2+T4+T5 on claude/ux-consolidation-2026-10-30",
+  "measuredAtSha": "add84c92c94437f447a07aa9fdba510a4cc8d504",
+  "measuredBy": "the chair, the composed tip of the dossier consolidation program (twelve lanes merged)",
   "date": "2026-10-30",
-  "note": "the dossier consolidation lanes added arms in existing test files; re-measured at the merged tip (ODQ §934.101)",
+  "note": "re-measured once at the composed tip after every lane's merge (ODQ §934.101); the lanes' arms live in existing test files",
   "files": 2805,
-  "parked": 362,
-  "credited": 2443,
-  "titles": 26837,
-  "suiteTitles": 7084
+  "parked": 361,
+  "credited": 2444,
+  "titles": 26967,
+  "suiteTitles": 7116
 }
