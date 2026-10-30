@@ -65,7 +65,7 @@ async function seedAnonCapAndRerender(page) {
     } catch { /* private mode */ }
   });
   const hero = page.getByLabel('Anonymous settlement generator');
-  await sizeButton(hero, 'Hamlet').click();
+  await sizeButton(hero, 'Town').click();
 }
 
 async function openAuthModal(page) {
@@ -192,7 +192,7 @@ test.describe('Tier 3.7 Flow B — auth modal + credits gating', () => {
   test('after generation: anonymous Save attempt routes through auth (no silent save)', async ({ page }) => {
     // Generate a settlement first.
     const hero = page.getByLabel('Anonymous settlement generator');
-    await sizeButton(hero, 'Village').click();
+    await sizeButton(hero, 'Town').click();
     await primaryHeroCta(hero).click();
 
     await waitForDossier(page);
@@ -350,7 +350,8 @@ async function liveGenerate(page) {
     '[aria-label="Welcome back. Instant generator"], [aria-label="Anonymous settlement generator"]',
   ).first();
   await expect(hero).toBeVisible({ timeout: 15_000 });
-  await hero.locator('button[data-settlement-size="hamlet"]').click();
+  // Town: the one size a signed-out visitor has (2026-10-30), and on the ladder for an account.
+  await hero.locator('button[data-settlement-size="town"]').click();
   await hero.getByRole('button', { name: /Forge a|Begin a settlement|Generate a/i }).first().click();
   await waitForDossier(page);
 }
