@@ -28,6 +28,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { DefenseTab, THREAT_ROW_KEY } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   defenseMagicDependencyProse, defenseSupportingProse, defenseThreatProse,
@@ -137,14 +138,20 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
 });
 
 describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-tab row', () => {
-  test('the viability tab renders the EXACT dependency sentence the desk produced', () => {
+  // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-15): the dependence block MOVED to the Magic
+  // tab as the Roles section's framing. These arms follow it there; the registry row keeps its
+  // id. The Outlook page is asserted to carry none of it.
+  test('the magic tab renders the EXACT dependency sentence the desk produced; Outlook does not', () => {
     const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
-    const { container } = render(e(ViabilityTab, { settlement: port, narrativeNote: null }));
+    const { container } = render(e(MagicTab, { settlement: port }));
     expect(container.textContent).toContain(expected);
-    // The tab's own coherence content is untouched beside it (the page's one vintage label
-    // since the UX consolidation, T2-11).
-    expect(container.textContent).toContain('Judged at the first survey; not re-run since.');
+    // The tab's own envelope is untouched beside it.
+    expect(container.querySelectorAll('[data-facet]')).toHaveLength(6);
+    cleanup();
+    const outlook = render(e(ViabilityTab, { settlement: port, narrativeNote: null })).container.textContent;
+    expect(outlook).toContain('Judged at the first survey; not re-run since.');
+    expect(outlook).not.toContain(expected); // anchored: the vintage label is asserted on this render
   });
 
   test('the `magicDependency false` reading DRAWS — it is a finding, not an absence', () => {
@@ -154,25 +161,25 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     expect(port.defenseProfile.magicDependency).toBe(false);
     const drawn = defenseMagicDependencyProse(port, opts(port));
     expect(drawn.arcaneReliance.provenance.poolKey).toBe('magicDependency false');
-    const { container } = render(e(ViabilityTab, { settlement: port, narrativeNote: null }));
+    const { container } = render(e(MagicTab, { settlement: port }));
     const text = container.textContent;
     expect(text).toContain(drawn.arcaneReliance.sentence);
-    // The box itself is correctly absent, and the corpus line is present anyway — which is
-    // the whole point of rendering it outside.
+    // The frozen record's static explanation is correctly absent (the flag is false), and the
+    // corpus line is present anyway — a finding, not an absence.
     // anchored: the assertion two lines above proves `text` carries the rendered sentence,
-    expect(text).not.toContain('Magic Dependency'); // so the container is live
+    expect(text).not.toContain('relies on active magical infrastructure'); // so the container is live
   });
 
-  test('THE PUBLIC GATE: the viability tab stays silent for an anonymous viewer', () => {
+  test('THE PUBLIC GATE: the magic tab stays silent for an anonymous viewer', () => {
     const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
-    const priv = render(e(ViabilityTab, { settlement: port, narrativeNote: null, publicDossier: false }));
+    const priv = render(e(MagicTab, { settlement: port, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();
-    const pub = render(e(ViabilityTab, { settlement: port, narrativeNote: null, publicDossier: true }));
+    const pub = render(e(MagicTab, { settlement: port, publicDossier: true }));
     const pubText = pub.container.textContent;
     expectPresentThenAbsent(privText, pubText, expected, 'public gate: the DS-DEF-9 dependency sentence');
-    // Only the corpus sentence goes: the tab's own viability readout survives.
-    expect(pubText).toContain('Judged at the first survey; not re-run since.');
+    // Only the corpus sentence goes: the tab's own envelope survives.
+    expect(pub.container.querySelectorAll('[data-facet]')).toHaveLength(6);
   });
 
   test('THE ROUTER threads the public condition to a tab that never received it before', () => {
@@ -365,15 +372,15 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Arcane Support') on this render
   });
 
-  test('DS-DEF-9 is silent in a dead-magic world, and the Outlook page draws no magic block', () => {
+  test('DS-DEF-9 is silent in a dead-magic world, and the Magic page draws no dependence block', () => {
     const s = deadMagicTown();
     // The desk itself still builds a rung (its composer is census-stamped); the screen and
     // print callers gate it, so neither surface draws it.
     expect(defenseMagicDependencyProse(s, opts(s)).arcaneReliance?.sentence, 'fixture premise: the desk would speak').toBeTruthy();
     expect(buildPrintProse(s).viability?.['viability.magicDependency'] ?? null, 'print draws no magic reading').toBeFalsy();
-    const { container } = render(e(ViabilityTab, { settlement: s, narrativeNote: null }));
-    expect(container.textContent).toContain('Judged at the first survey');
-    expect(container.querySelector('[data-testid="viability-magic-dependence"]')).toBeNull();
+    const { container } = render(e(MagicTab, { settlement: s }));
+    expect(container.textContent).toMatch(/Magic does not function/);
+    expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
   });
 
   test('a live-magic world still draws DS-DEF-9 (the gate is the dial, not a blanket silence)', () => {

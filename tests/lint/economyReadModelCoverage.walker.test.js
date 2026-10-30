@@ -131,7 +131,9 @@ const COVERED = [
 const FRAMED = [
   'src/components/new/tabs/DefenseTab.jsx',
   'src/components/new/tabs/OverviewTab.jsx',
-  'src/components/new/tabs/ViabilityTab.jsx',
+  // ViabilityTab.jsx LEFT this list in the UX consolidation (2026-10-30, RULINGS-T2 T2-15): its
+  // one economy read (the magic chain notes under the frozen magicDependency record) moved to
+  // MagicTab.jsx with the block; MagicTab is classified FROZEN_DEFERRED below.
 ];
 
 /** The standing print deferral — every economy reader under src/pdf. */
@@ -153,6 +155,8 @@ const PRINT_DEFERRED = [
 
 /** Reaches a read-model, owns no freshness claim. Reason is mandatory. */
 const FROZEN_DEFERRED = {
+  'src/components/new/tabs/MagicTab.jsx':
+    'Reads `economicState.activeChains[].magicNote` ONLY, to list the chain notes under the generation-frozen `magicDependency` record that moved here from ViabilityTab (UX consolidation 2026-10-30, RULINGS-T2 T2-15). Those notes are frozen with the record, the block they sit in is stamped "as judged at the first survey" on the page, and nothing in it is a tally, so it owns no freshness claim of its own.',
   'src/components/map/heraldRegister.js':
     'Gazetteer register rows: prosperity is banded into ONE word inside a glance sentence ("A prosperous town, at peace") — a register makes no freshness claim, and every row entity-links straight into the settlement dossier where the COVERED surfaces own the note. A second note per roster row would be noise, not honesty.',
   'src/components/map/HeraldGazetteer.jsx':

@@ -70,11 +70,12 @@ describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
     expect(src).not.toMatch(/Structural Crises · First Survey/); // anchored: the toMatch on the bare header above reads this same source
   });
 
-  test('the Magic Dependency block (frozen magicDependency) is covered by the page label', () => {
-    const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Magic Dependency\s*</);
-    expect(src).not.toMatch(/Magic Dependency · First Survey/); // anchored: the toMatch on the bare title above reads this same source
-    expect(src).not.toMatch(/Magic Dependency Detected/); // anchored: same source as the toMatch above
+  test('the frozen magicDependency record left Outlook and carries its stamp on the Magic tab', () => {
+    // RULINGS-T2 T2-15: the block moved to the Magic tab, whose only stamp it carries.
+    expect(read(VIABILITY_TAB)).not.toMatch(/Magic Dependency/); // anchored: the Magic tab source below carries the moved block
+    const magic = read('src/components/new/tabs/MagicTab.jsx');
+    expect(magic).toMatch(/Reliance on magic, as judged at the first survey/);
+    expect(magic.match(/first survey/gi) || []).toHaveLength(1);
   });
 });
 

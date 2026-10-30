@@ -1901,7 +1901,9 @@ describe('the defense desk\'s paid-surface gate — every caller, found by impor
     // Two callers today, and the count is asserted so a THIRD arrives as a red rather than
     // as a silent third place to forget the gate.
     expect(importers.map((p) => p.replace(`${SRC}/`, '')).sort())
-      .toEqual(['components/new/tabs/DefenseTab.jsx', 'components/new/tabs/ViabilityTab.jsx']);
+      // DS-DEF-9's screen caller moved ViabilityTab -> MagicTab with the dependence block
+      // (UX consolidation 2026-10-30, RULINGS-T2 T2-15); still two callers, still gated.
+      .toEqual(['components/new/tabs/DefenseTab.jsx', 'components/new/tabs/MagicTab.jsx']);
     for (const path of importers) {
       const code = codeOnly(readFileSync(path, 'utf8'));
       // Every call into the desk must have a publicDossier read within the same expression.

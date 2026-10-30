@@ -78,3 +78,28 @@ describe('MagicTab — the 10-facet magic profile', () => {
     expect(queryByTestId('magic-deity-coupling')).toBeNull();
   });
 });
+
+describe('MagicTab — the dependence block arrives as the Roles framing (UX consolidation, T2-15)', () => {
+  const dependentTown = {
+    ...liveMagicTown,
+    defenseProfile: { magicDependency: true },
+    economicState: { activeChains: [{ label: 'Grain', magicNote: 'Druids keep the blight off.' }] },
+  };
+
+  test('the frozen record, its chain notes and the first-survey stamp render ABOVE the role lines', () => {
+    const { getByTestId, container } = render(<MagicTab settlement={dependentTown} publicDossier />);
+    const block = getByTestId('magic-dependence');
+    expect(block.textContent).toContain('Reliance on magic, as judged at the first survey');
+    expect(block.textContent).toContain('Grain: Druids keep the blight off.');
+    // Public: no corpus line, so the static explanation of the frozen record stands.
+    expect(block.textContent).toContain('relies on active magical infrastructure');
+    const roles = container.querySelector('[data-testid="magic-roles"]');
+    expect(block.compareDocumentPosition(roles) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
+  test('a dead-magic world renders no dependence block', () => {
+    const { container } = render(<MagicTab settlement={{ ...deadMagicTown, defenseProfile: { magicDependency: true } }} />);
+    expect(container.textContent).toMatch(/Magic does not function/i);
+    expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
+  });
+});

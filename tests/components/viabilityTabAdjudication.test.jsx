@@ -134,16 +134,14 @@ describe('UX consolidation — the Outlook page says each fact once (RULINGS-T2 
     expect(container.textContent).not.toMatch(/plot hooks available|operational dependenc|stable trade dependenc/); // anchored: toContain('can function') on this render
   });
 
-  it('T2-15: the frozen magic record and its chain notes are ONE block with no "First Survey" suffix', () => {
+  it('T2-15: the magic-dependence block left the Outlook page (it frames the Magic tab\'s roles)', () => {
     const settlement = settlementWith({ viable: true, summary: 'VIABLE: fine', issues: [], warnings: [] });
     settlement.defenseProfile = { magicDependency: true };
     settlement.economicState = { activeChains: [{ label: 'Grain', magicNote: 'Druids keep the blight off.' }] };
-    const { container } = render(<ViabilityTab settlement={settlement} publicDossier />);
-    const blocks = container.querySelectorAll('[data-testid="viability-magic-dependence"]');
-    expect(blocks).toHaveLength(1);
-    expect(blocks[0].textContent).toContain('Magic Dependency');
-    expect(blocks[0].textContent).toContain('Grain: Druids keep the blight off.');
-    expect(blocks[0].textContent).not.toContain('First Survey'); // anchored: toContain('Magic Dependency') on this block
+    const { container } = render(<ViabilityTab settlement={settlement} />);
+    expect(container.textContent).toContain('Judged at the first survey; not re-run since.');
+    expect(container.textContent).not.toContain('Druids keep the blight off.'); // anchored: the vintage label is asserted on this render
+    expect(container.textContent).not.toMatch(/Magic Dependency|Reliance on magic/); // anchored: same render
   });
 
   it('T2-16: no coaching intros on By-Design or Active Stress; Trade Dependencies leaves the Warnings', () => {

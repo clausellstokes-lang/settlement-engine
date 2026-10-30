@@ -125,14 +125,14 @@
  "digests": {
   "corpusMeta": "36f12c8f770cd42dc1234231a27928d443327661c339877936b2aa60b28f2718",
   "inventory": "d81cc01ea8604f4bfd77d6fef440427169bdd401e9a5444e72cc312d74cba30b",
-  "manifests": "0323c1f89de1d9c6cf81c85bfc6395d25cf40d5b9234b72fa22f9d346153f265",
+  "manifests": "fb4ed314b74401eb1bfdc2c2db977b49e2539fcef74a21bfde1f5c1fdbc1a53c",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "1b9c1373ba074692a998c33bb3b1722859451d49df81c9fba22b2f66a73c7dd4",
-  "sentinel": "85c5efc63f3fa45d8511f128dc9a272b82740af9f02dea0ad9cbeab6daee687a"
+  "scanStats": "d323a413b0c341422cfbd3856314e59c9e6f7b01df8eeca1b65df1c239f30cc6",
+  "sentinel": "af7099ed8cc9e947ac12d7805923d9c53cc69a953470906413f70e0bc3693012"
  },
  "frozen": "2026-10-30",
- "frozenAtSha": "346069da20353d3a6b67996998efe3a2a2cf1a13",
+ "frozenAtSha": "e7f76c78454767afdf1ee3e336bce2bb662e6774",
  "identities": 1443,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2453,7 +2453,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "0941ba4b4985fdddb64777a9447c09337e17388b0b6cd9ba2f86eba8a73d0d13",
+   "digest": "c89b541b206454890d97842aa6285faf66dcb11db41aaf16ab385e9a7450f4ff",
    "entries": [
     {
      "mode": "100644",
@@ -5531,8 +5531,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MagicTab.jsx",
-     "sha256": "93b1687c05fdeedbe9351ceae9208b0b19e8898bc78a5f1b8983db2d53a7ecc1",
-     "size": 6492,
+     "sha256": "ae92b1f16880f740f179635256fc848ed93faf9d081dc5579633632176b7f438",
+     "size": 10343,
      "type": "file"
     },
     {
@@ -5636,8 +5636,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "ff554ee4f670b0690ab9b712e1f4deb03c88b25b0a3d030c8bf1e987b6a24675",
-     "size": 23382,
+     "sha256": "8c43d9eb89b529200010158c4cc1fa62cb0d7f930e21279983a4a3fed81c946e",
+     "size": 19111,
      "type": "file"
     },
     {
@@ -18762,7 +18762,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "4f0c8c21f6237edb405c71897fa4f95f12869cfaa2b2c47d8023d41781cff75b",
+   "digest": "784c3284b86250d659cf5fff835ba90c5142e1a2e16586f74b1b08551eccd757",
    "entries": [
     {
      "mode": "100644",
@@ -21770,8 +21770,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MagicTab.jsx",
-     "sha256": "93b1687c05fdeedbe9351ceae9208b0b19e8898bc78a5f1b8983db2d53a7ecc1",
-     "size": 6492,
+     "sha256": "ae92b1f16880f740f179635256fc848ed93faf9d081dc5579633632176b7f438",
+     "size": 10343,
      "type": "file"
     },
     {
@@ -21875,8 +21875,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "ff554ee4f670b0690ab9b712e1f4deb03c88b25b0a3d030c8bf1e987b6a24675",
-     "size": 23382,
+     "sha256": "8c43d9eb89b529200010158c4cc1fa62cb0d7f930e21279983a4a3fed81c946e",
+     "size": 19111,
      "type": "file"
     },
     {
@@ -34875,7 +34875,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f79b65fe1e0007e633dd45d31d449d0397326d77c696406d48fb22b2366a80fa",
+   "digest": "501efb0edbd417bf80864413b3def4e79f62e9a8bbff674810a6681f50486d5d",
    "entries": [
     {
      "mode": "100644",
@@ -37883,8 +37883,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MagicTab.jsx",
-     "sha256": "93b1687c05fdeedbe9351ceae9208b0b19e8898bc78a5f1b8983db2d53a7ecc1",
-     "size": 6492,
+     "sha256": "ae92b1f16880f740f179635256fc848ed93faf9d081dc5579633632176b7f438",
+     "size": 10343,
      "type": "file"
     },
     {
@@ -37988,8 +37988,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ViabilityTab.jsx",
-     "sha256": "ff554ee4f670b0690ab9b712e1f4deb03c88b25b0a3d030c8bf1e987b6a24675",
-     "size": 23382,
+     "sha256": "8c43d9eb89b529200010158c4cc1fa62cb0d7f930e21279983a4a3fed81c946e",
+     "size": 19111,
      "type": "file"
     },
     {
@@ -51399,19 +51399,19 @@
  "scanStats": {
   "files": 2301,
   "reads": 132920,
-  "resolved": 9939,
-  "unresolved": 122981
+  "resolved": 9944,
+  "unresolved": 122976
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "0941ba4b4985fdddb64777a9447c09337e17388b0b6cd9ba2f86eba8a73d0d13",
-  "scanTreeDigest": "4f0c8c21f6237edb405c71897fa4f95f12869cfaa2b2c47d8023d41781cff75b",
-  "sourceTreeDigest": "f79b65fe1e0007e633dd45d31d449d0397326d77c696406d48fb22b2366a80fa",
+  "executionTreeDigest": "c89b541b206454890d97842aa6285faf66dcb11db41aaf16ab385e9a7450f4ff",
+  "scanTreeDigest": "784c3284b86250d659cf5fff835ba90c5142e1a2e16586f74b1b08551eccd757",
+  "sourceTreeDigest": "501efb0edbd417bf80864413b3def4e79f62e9a8bbff674810a6681f50486d5d",
   "unscannedInputDigest": "7e074a9bf225431bf7a1dca10ede6878eec3a3465ad489735938c453afcb3b9e"
  },
  "schema": 25,
  "sentinel": {
-  "resolvedReads": 9939,
+  "resolvedReads": 9944,
   "totalKeys": 6992,
   "usableShapes": 355
  },

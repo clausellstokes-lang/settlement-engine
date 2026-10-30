@@ -8,10 +8,6 @@ import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import { deriveViability } from '../../../domain/display/dossierViewModel.js';
 import { isViabilityItem, trimViabilitySummary } from '../../../domain/display/viabilityFilter.js';
 
-import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
-import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
-import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
-import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 // THE GENERAL DESK THROUGH ITS ONE CALLER (the registry's ARM 2), which also owns the
@@ -23,15 +19,6 @@ import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
-
-/**
- * The magic-dependency position — the registry's first CROSS-TAB row. DS-DEF-9 is authored
- * into the `defense` corpus leaf and its fact belongs here: not "does the town have arcane
- * defenses" (DS-DEF-5 speaks that on the defense tab) but "would this town still work if the
- * practitioners left", which is a viability question. ONE lens at ONE position: the block's
- * NAMED-chain pool is a more specific rung of the same reading, not a second sentence.
- */
-const MAGIC_DEPENDENCY_MOUNT = 'viability.magicDependency';
 
 /** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
 export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
@@ -67,24 +54,8 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   if (!s?.economicViability) return <Empty message="No coherence data available. Generate a settlement first."/>;
   const v = s.economicViability;
   const metrics = v.metrics || {};
-  // DS-DEF-9. THE PUBLIC GATE (§885.3): a public gallery dossier is a FREE, ANONYMOUS
-  // viewer and corpus prose is a PAID surface, so the desk is NOT DRAWN there. The audience
-  // follows kernel law 2's fail-closed default, stated rather than defaulted. This tab
-  // received neither flag before this car; `OutputContainer` now passes both.
-  // ⛔ T2-24 (red-first): every DS-DEF-9 pool reads the town's relation to its practitioners
-  // ("there is magic at X and the town does not rest on it"), so where magic does not function
-  // the block is not drawn (R-DST-K), as DS-DEF-5's arcane lens already is. Gated HERE, at the
-  // desk's one screen caller (and in printProse.js for print), because the desk composer is
-  // stamped by the wiring census. Measured on ../gen1000v2: 250 of 250 no-magic worlds drew it.
-  const magicProse = publicDossier || magicWorksAt({ settlement: s }) === false
-    ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(s, {
-      seed: String(s?._seed ?? s?.id ?? ''),
-      audience: playerView ? 'player' : 'dm',
-      tierNoun: tierNounFor(s.tier),
-    });
-  const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
-  const magicFrozen = !!s?.defenseProfile?.magicDependency;
+  // DS-DEF-9 and the frozen magicDependency record moved to the Magic tab as the Roles
+  // section's framing (UX consolidation 2026-10-30, RULINGS-T2 T2-15); see MagicTab.jsx.
 
   // Strip the verdict prefix from the summary. Behind canonicalViewModel, use
   // the reconciled verdict from the display model (§1f) — its body only, since
@@ -198,37 +169,6 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       {/* The generation receipt moved to the Versions tab (Notes group) in the UX
           consolidation (T2-14): it audits the generator, not the town, and stays
           reachable there. */}
-
-      {/* ── MAGIC DEPENDENCE: ONE BLOCK (T2-15 MERGE, R2) ─────────────────────
-          The frozen `magicDependency` record (title + its chain notes) and DS-DEF-9's reading
-          are one idea, so they are one block. DS-DEF-9 REPLACES the static explanation where the
-          desk speaks; the static explanation stands on public. The block draws on a FALSE flag
-          too when DS-DEF-9 has its `magicDependency false` reading (a finding, not an absence),
-          without the frozen title. ⚠ THE MOVE TO THE MAGIC TAB IS HELD: MagicTab receives no
-          `publicDossier`/`playerView` from OutputContainer, and DS-DEF-9 is a paid corpus
-          surface whose gate must arrive from outside the drawing file (registry ARM 3). */}
-      {(magicFrozen||magicLine)&&(
-        <div data-testid="viability-magic-dependence" style={{background:magicFrozen?swatch['#F8F0FF']:swatch['#FAF8F4'],...edged(`1px solid ${magicFrozen?'#c0a0e0':'#d8c090'}`,'4px solid #7a3a9a'),
-          padding:'10px 14px',marginBottom:12}}>
-          {magicFrozen&&<div style={{fontSize:FS.sm,fontWeight:700,color:swatch.magic,marginBottom:4}}>
-            Magic Dependency
-          </div>}
-          {magicLine
-            ? <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}>{magicLine}</p>
-            : <div style={{fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,lineHeight:1.5}}>
-              This settlement's resilience relies on active magical infrastructure. One or more supply
-              chains are magically sustained, or stress conditions are being offset by arcane, divine,
-              or druidic intervention. Losing those practitioners through conflict, plague, or
-              political disruption would immediately expose critical vulnerabilities.
-            </div>}
-          {magicFrozen&&(s.economicState?.activeChains||[]).filter(c=>c.magicNote).map((c,i)=>(
-            <div key={i} style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch['#7A4AAA'],marginTop:6,paddingLeft:8,
-              borderLeft:'2px solid #c0a0e0',fontStyle:'italic'}}>
-              {c.label}: {c.magicNote}
-            </div>
-          ))}
-        </div>
-      )}
 
       {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
       {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
