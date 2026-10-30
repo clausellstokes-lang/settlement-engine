@@ -235,9 +235,13 @@ const SHELL_IMPORTS = Object.freeze([
   'react',
   '../../copy/index.js',
   '../theme.js',
-  // X-22 retired the shell's send button and register links, so Button left the set;
-  // the one close control is an IconButton.
+  // X-22: the send button and the register links are gone; Button stays for the folded
+  // log's one-line pill (outside the open chat), IconButton is the one close inside it.
+  '../primitives/Button.jsx',
   '../primitives/IconButton.jsx',
+  // X-22: the floating log wears the coach's chrome through the ONE shared move-and-memory
+  // hook (presentation: a drag, a clamp, a remembered spot; no store, no transport).
+  '../../hooks/useFloatingCard.js',
   './surveyorPanelKit.jsx',
   '../../hooks/useIsMobile.js',
   // The phone floors (ODQ §934.24). A zero-import pure leaf that turns a desktop

@@ -82,3 +82,30 @@
   padding: 8px;
   width: 320px;
 }
+
+/* X-22 THE LOG: the composer grown into a floating card in the coach's idiom (about
+   320 px; the component sets the width and the anchor inline, beside the walker-read
+   lift). Shape and elevation here, never inline (the deep-craft kill-list). */
+.sf-door-chat-card {
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px 12px;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+/* The header runs edge to edge as the drag handle. */
+.sf-door-chat-card > .sf-door-chat-head {
+  margin: 0 -12px;
+  padding: 6px 8px 6px 12px;
+}
+/* THE PILL: the folded log, one line. */
+.sf-door-chat-card.sf-door-chat-card--pill {
+  padding: 0;
+  max-height: none;
+  overflow: visible;
+}

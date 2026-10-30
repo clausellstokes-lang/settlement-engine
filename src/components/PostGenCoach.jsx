@@ -90,7 +90,7 @@
  *   one LIFTED bottom-anchored site, the corner card's default anchor)
  */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
@@ -108,6 +108,7 @@ import {
   selectPageWhisper, deriveGuidanceFirst, deriveGuidanceNewborn,
 } from '../domain/display/guidanceRegistry.js';
 import { chromeFontSize } from '../design/proseScale.js';
+import { useFloatingCard } from '../hooks/useFloatingCard.js';
 
 // The wizard-postgen whisper this coach hosts (the guidance-registry id + the
 // unified dismissal stem). Naming it here is also what the walker's host-wired
@@ -122,40 +123,10 @@ const CORNER = SP.lg;
 
 // ── THE CARD MOVES (the owner, 2026-10-30: "floating and movable") ──────────────────
 // Where the reader put the card is remembered per device, beside the dismissal and in
-// its idiom (src/lib/guidance.js): one sf:guidance:* key, every access try/caught so a
-// blocked localStorage never throws into render. The value is the card's top-left in
-// viewport px; a missing or malformed value means "the default corner".
+// its idiom (src/lib/guidance.js): one sf:guidance:* key. The drag, the 8 px clamp and
+// the try/caught memory live in the shared hook (src/hooks/useFloatingCard.js), which
+// the Surveyor's chat log wears too (X-22); this card names its key and its handle.
 const POS_KEY = `${guidanceDismissalKey(WHISPER_ID)}:pos`;
-const EDGE = 8;
-
-function readCornerPos() {
-  try {
-    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem(POS_KEY) : null;
-    if (!raw) return null;
-    const v = JSON.parse(raw);
-    return Number.isFinite(v?.left) && Number.isFinite(v?.top) ? { left: v.left, top: v.top } : null;
-  } catch {
-    return null;
-  }
-}
-
-function writeCornerPos(p) {
-  try {
-    if (typeof localStorage !== 'undefined') localStorage.setItem(POS_KEY, JSON.stringify(p));
-  } catch {
-    /* storage unavailable: the card stays where it is for this visit */
-  }
-}
-
-/** Keep a w x h box EDGE px inside the viewport on every side. */
-function clampToViewport(p, w, h) {
-  const maxLeft = Math.max(EDGE, window.innerWidth - w - EDGE);
-  const maxTop = Math.max(EDGE, window.innerHeight - h - EDGE);
-  return {
-    left: Math.round(Math.min(Math.max(EDGE, p.left), maxLeft)),
-    top: Math.round(Math.min(Math.max(EDGE, p.top), maxTop)),
-  };
-}
 
 export default function PostGenCoach() {
   const mobile = useIsMobile();
@@ -230,32 +201,15 @@ export default function PostGenCoach() {
     () => (corner ? setCollapsed(true) : setHiddenThisVisit(true)),
   );
 
-  // Where the reader dragged the card (null: the default corner). Read once per mount.
-  const [pos, setPos] = useState(readCornerPos);
-  // True for the one click that ends a drag, so dropping the card is not also a fold.
-  const swallowClickRef = useRef(false);
-  // The live drag's teardown, so an unmount mid-drag leaves no window listener behind.
-  const endDragRef = useRef(null);
-  useEffect(() => () => endDragRef.current?.(), []);
-
-  // A window resize, or the fold changing the card's size, re-clamps the remembered spot
-  // into the viewport. Display only: the stored preference is rewritten by a drag.
-  useEffect(() => {
-    if (!corner) return undefined;
-    const reclamp = () => {
-      const node = cardRef.current;
-      if (!node) return;
-      const r = node.getBoundingClientRect();
-      setPos((p) => {
-        if (!p) return p;
-        const c = clampToViewport(p, r.width, r.height);
-        return c.left === p.left && c.top === p.top ? p : c;
-      });
-    };
-    reclamp();
-    window.addEventListener('resize', reclamp);
-    return () => window.removeEventListener('resize', reclamp);
-  }, [corner, collapsed, cardRef]);
+  // Where the reader dragged the card (null: the default corner), the drag itself and the
+  // re-clamp on resize or fold: the shared floating-card hook, keyed to this whisper.
+  const { pos, startDrag, consumeClick } = useFloatingCard({
+    storageKey: POS_KEY,
+    active: corner,
+    cardRef,
+    remeasure: collapsed,
+    noDragSelector: '[data-coach-nodrag]',
+  });
 
   if (!shown) return null;
 
@@ -304,43 +258,9 @@ export default function PostGenCoach() {
       };
     // Drag by the header, with pointer events (mouse and touch alike). A press that
     // travels under 4 px is a click (the fold); past that it is a move, clamped to the
-    // viewport on every step and remembered where it is dropped.
-    const startDrag = (e) => {
-      if (e.pointerType === 'mouse' && e.button !== 0) return;
-      if (e.target?.closest?.('[data-coach-nodrag]')) return;
-      const node = cardRef.current;
-      if (!node) return;
-      const r = node.getBoundingClientRect();
-      const d = { x: e.clientX, y: e.clientY, left: r.left, top: r.top, moved: false, last: null };
-      const move = (ev) => {
-        const dx = ev.clientX - d.x;
-        const dy = ev.clientY - d.y;
-        if (!d.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
-        d.moved = true;
-        d.last = clampToViewport({ left: d.left + dx, top: d.top + dy }, r.width, r.height);
-        setPos(d.last);
-      };
-      const end = () => {
-        window.removeEventListener('pointermove', move);
-        window.removeEventListener('pointerup', up);
-        window.removeEventListener('pointercancel', up);
-        endDragRef.current = null;
-      };
-      const up = () => {
-        end();
-        if (!d.moved || !d.last) return;
-        writeCornerPos(d.last);
-        swallowClickRef.current = true;
-        setTimeout(() => { swallowClickRef.current = false; }, 0);
-      };
-      endDragRef.current?.();
-      endDragRef.current = end;
-      window.addEventListener('pointermove', move);
-      window.addEventListener('pointerup', up);
-      window.addEventListener('pointercancel', up);
-    };
+    // viewport on every step and remembered where it is dropped (the shared hook).
     const toggleFold = () => {
-      if (swallowClickRef.current) { swallowClickRef.current = false; return; }
+      if (consumeClick()) return;
       setCollapsed(c => !c);
     };
     const pillText = `${guide.headline.replace(/\.$/, '')} \u00b7 What\u2019s next`;

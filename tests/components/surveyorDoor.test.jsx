@@ -1,34 +1,37 @@
 /**
  * @vitest-environment jsdom
  *
- * surveyorDoor.test.jsx — THE ONE DOOR contract (C13, owner ruling 2026-07-18).
+ * surveyorDoor.test.jsx — THE ONE DOOR contract (C13, owner ruling 2026-07-18), as the
+ * simple floating chat the owner ruled on 2026-10-30 (X-22).
  *
- * Pins the four laws of the door:
+ * Pins the laws of the door:
  *   1. ENTITLEMENT (owner ruling 2026-07-19, FINAL) — the marker renders ONLY for a
  *      live Surveyor entitlement, a Founder, or an elevated role (via the isSurveyorTier
  *      chokepoint): no lock-tease — the margin is EMPTY for anon/free AND for
  *      Cartographer 'premium' (the discriminator: 'premium' alone is insufficient).
- *   2. ONE DOOR — the tab opens a prompt slip; prompts route to DESTINATIONS (the
- *      analyst / a workshop stage); the destinations receive the staged prompt.
- *   3. CONTEXT-FIRST — the slip shows the visible anchor (what the Surveyor reads).
- *   4. X-22 (the owner, 2026-10-30) — the first open is ONE composer with a rotating
- *      placeholder of suggested first questions; the promptless register links, the
- *      send button and the chips are gone (Enter sends).
+ *   2. ONE DOOR — every prompt goes through the one router; the destinations receive
+ *      the staged prompt.
+ *   3. CONTEXT-FIRST — the log shows the visible anchor (what the Surveyor reads).
+ *   4. X-22 — the first open is ONE composer with a rotating placeholder of suggested
+ *      first questions (no chips, no send button, no register links; Enter sends); the
+ *      first send grows it into a floating log in the coach's chrome (movable by its
+ *      header, remembered per device, Escape and a header tap fold it to a pill, the one
+ *      close retires it); the chat is non-modal.
  *
- * SC-1A adds the EPHEMERAL TEXT-INTENT SHELL (A1–A5): the slip's prompt block became a
- * transient chat-shaped surface — a user-turn log plus a bottom-anchored auto-growing
- * composer — while the door kept every ownership it already had (entitlement, focus
- * trap, routing, destination state). The shell is presentation: it never reaches the
- * router, a provider, or the store, and its draft/log live and die with the mounted door.
+ * The shell is presentation: it never reaches the router, a provider, or the store, and
+ * its draft and the door's log live and die with the mounted door.
  */
-import { describe, it, expect, afterEach, vi } from 'vitest';
-import { render, screen, fireEvent, cleanup, act, within } from '@testing-library/react';
+import { describe, it, expect, afterEach, beforeEach, vi } from 'vitest';
+import { render, screen, fireEvent, cleanup, act, within, waitFor } from '@testing-library/react';
 
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
   mobileRef.current = false;
   delete window.visualViewport;
+});
+beforeEach(() => {
+  try { localStorage.clear(); } catch { /* jsdom always has it */ }
 });
 
 const { storeRef, entitledRef, mobileRef } = vi.hoisted(() => ({
@@ -38,8 +41,8 @@ const { storeRef, entitledRef, mobileRef } = vi.hoisted(() => ({
 }));
 
 // The ONE shared viewport authority (src/hooks/useIsMobile.js). The shell reads it for
-// the Enter-submits / Enter-newlines split and the bottom-sheet form; the Button and
-// IconButton primitives read the same hook for their mobile tap floor.
+// the bottom-sheet form; the Button and IconButton primitives read the same hook for
+// their mobile tap floor.
 vi.mock('../../src/hooks/useIsMobile.js', () => ({
   default: () => mobileRef.current,
   getIsMobile: () => mobileRef.current,
@@ -66,16 +69,10 @@ const WORLD_SUGGESTIONS = [
 vi.mock('../../src/components/surveyor/useSurveyorContext.js', () => ({
   useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town', ctx: NO_PAGE_CTX }),
 }));
-// Destinations are stubbed: this file pins the DOOR's routing, not the panels
-// (their contracts live in the surveyor*/aiAnalyst* suites).
+// Destinations are stubbed: this file pins the DOOR's routing, not the panels.
 vi.mock('../../src/components/AiAnalystPanel.jsx', () => ({
-  // The stub exposes onClose so a test can return the door to its marker state and
-  // reopen it — the only way to observe that the shell's transient log SURVIVED a
-  // close/reopen round trip within one mount.
-  default: ({ open, initialQuestion, onClose }) => (
-    <div data-testid="dest-analyst" data-open={String(!!open)} data-q={initialQuestion}>
-      <button type="button" onClick={onClose}>close the analyst</button>
-    </div>
+  default: ({ open, initialQuestion }) => (
+    <div data-testid="dest-analyst" data-open={String(!!open)} data-q={initialQuestion} />
   ),
 }));
 vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', () => ({
@@ -85,20 +82,31 @@ vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', () => ({
 }));
 
 import SurveyorDoor, { isSurveyorTier } from '../../src/components/surveyor/SurveyorDoor.jsx';
-import SurveyorTextIntentShell from '../../src/components/surveyor/SurveyorTextIntentShell.jsx';
+import SurveyorTextIntentShell, { CHAT_POS_KEY } from '../../src/components/surveyor/SurveyorTextIntentShell.jsx';
 
 const setEntitled = (v) => { entitledRef.current = v; };
+const composer = () => screen.getByLabelText(/ask the surveyor about this page/i);
+const pressEnter = () => fireEvent.keyDown(composer(), { key: 'Enter' });
+const doorTab = () => screen.getByRole('button', { name: /ask the surveyor$/i });
+const chat = () => screen.getByRole('dialog', { name: 'The Surveyor' });
+const turnTexts = () => within(screen.getByRole('log'))
+  .queryAllByTestId('surveyor-turn')
+  .map((n) => n.textContent);
 
 function openDoor() {
   render(<SurveyorDoor />);
-  fireEvent.click(screen.getByRole('button', { name: /ask the surveyor/i }));
+  fireEvent.click(doorTab());
 }
 
 /** X-22: no send button; Enter is the send key. */
 function typeAndSend(text) {
-  const box = screen.getByLabelText(/ask the surveyor about this page/i);
-  fireEvent.change(box, { target: { value: text } });
-  fireEvent.keyDown(box, { key: 'Enter' });
+  fireEvent.change(composer(), { target: { value: text } });
+  pressEnter();
+}
+
+/** Stub the layout-only scrollHeight jsdom never computes. */
+function stubScrollHeight(el, px) {
+  Object.defineProperty(el, 'scrollHeight', { configurable: true, get: () => px });
 }
 
 describe('SurveyorDoor — entitlement (the marker law)', () => {
@@ -111,7 +119,7 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
   it('renders the tab for an entitled user, no visible text until hover (aria-label carries the name)', () => {
     setEntitled(true);
     render(<SurveyorDoor />);
-    const tab = screen.getByRole('button', { name: /ask the surveyor/i });
+    const tab = doorTab();
     expect(tab.getAttribute('aria-label')).toBe('Ask the Surveyor');
     // the reveal label is aria-hidden (AT hears the aria-label, sighted users hover)
     expect(tab.querySelector('[aria-hidden="true"]')?.textContent).toBe('Ask the Surveyor');
@@ -132,26 +140,34 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
     const { container } = render(<SurveyorDoor visible={false} />);
     expect(container.innerHTML).toBe('');
   });
+
+  it('PRIVACY FLOOR: a non-entitled user gets no shell at all — not even a closed one', () => {
+    setEntitled(false);
+    const { container } = render(<SurveyorDoor />);
+    expect(container.innerHTML).toBe('');
+    expect(screen.queryByRole('log')).toBeNull();
+    expect(screen.queryByLabelText(/ask the surveyor about this page/i)).toBeNull();
+  });
 });
 
-describe('SurveyorDoor — the prompt slip routes to destinations', () => {
-  it('X-22 FIRST OPEN: one composer and nothing else (no heading, anchor, chips or buttons)', () => {
+describe('SurveyorDoor — X-22 first open: one composer', () => {
+  it('one composer and nothing else (no heading, anchor, chips, log or buttons)', () => {
     setEntitled(true);
     openDoor();
-    const dialog = screen.getByRole('dialog');
-    expect(within(dialog).getAllByRole('textbox')).toHaveLength(1);
-    expect(within(dialog).queryAllByRole('button')).toEqual([]);
-    expect(within(dialog).queryByRole('log')).toBeNull();
-    expect(within(dialog).queryByTestId('surveyor-anchor')).toBeNull();
-    expect(dialog.textContent).toBe('');
+    const box = chat();
+    expect(within(box).getAllByRole('textbox')).toHaveLength(1);
+    expect(within(box).queryAllByRole('button')).toEqual([]);
+    expect(within(box).queryByRole('log')).toBeNull();
+    expect(within(box).queryByTestId('surveyor-anchor')).toBeNull();
+    expect(box.textContent).toBe('');
   });
 
-  it('X-22: the empty composer rotates through the suggested first questions, and a draft stops it', () => {
+  it('the empty composer rotates through the suggested first questions, and a draft stops it', () => {
     vi.useFakeTimers();
     try {
       setEntitled(true);
       openDoor();
-      const box = screen.getByLabelText(/ask the surveyor about this page/i);
+      const box = composer();
       expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[0]);
       act(() => { vi.advanceTimersByTime(4000); });
       expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[1]);
@@ -163,6 +179,130 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     }
   });
 
+  // ⚰ THE PROMPTLESS REGISTER LINKS WENT WITH X-22 ("no buttons inside"). This arm used
+  // to open the workshop from a link; it now pins that the links are gone, anchored on
+  // the composer so an empty render cannot pass it.
+  it('the promptless register links and the send button are gone; the composer is the only way in', () => {
+    setEntitled(true);
+    openDoor();
+    expect(composer()).toBeTruthy();
+    for (const name of [/open the analyst/i, /ask the world/i, /open the workshop/i, /take it to the surveyor/i]) {
+      expect(screen.queryByRole('button', { name })).toBeNull();
+    }
+  });
+
+  it('the composer takes focus on open; the chat is NON-modal (a dialog without aria-modal)', async () => {
+    setEntitled(true);
+    openDoor();
+    await waitFor(() => expect(document.activeElement).toBe(composer()));
+    expect(chat().getAttribute('aria-modal')).toBeNull();
+  });
+
+  it('Escape puts the composer away, keeps the draft, and hands focus back to the door tab', async () => {
+    setEntitled(true);
+    render(<SurveyorDoor />);
+    doorTab().focus();
+    fireEvent.click(doorTab());
+    await waitFor(() => expect(document.activeElement).toBe(composer()));
+    fireEvent.change(composer(), { target: { value: 'why is bread' } });
+    fireEvent.keyDown(composer(), { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'The Surveyor' })).toBeNull();
+    expect(document.activeElement).toBe(doorTab());
+    fireEvent.click(doorTab());
+    expect(composer().value).toBe('why is bread');
+  });
+});
+
+describe('SurveyorDoor — X-22 the first send grows the composer into the floating log', () => {
+  it('composer-only before the first send; the log, the anchor and the turn after it', () => {
+    setEntitled(true);
+    openDoor();
+    expect(screen.queryByRole('log')).toBeNull();
+    const box = composer();
+    box.focus();
+    typeAndSend('  why is bread so expensive here?  ');
+    expect(turnTexts()).toEqual(['why is bread so expensive here?']);
+    expect(screen.getByRole('log').textContent).toContain('You asked');
+    expect(within(chat()).getByTestId('surveyor-anchor').textContent).toBe('Reading: Test Town');
+    // THE SAME NODE: the box grew into the log, it was not replaced, so the caret stayed.
+    expect(composer()).toBe(box);
+    expect(document.activeElement).toBe(box);
+    expect(box.value).toBe('');
+  });
+
+  it('the log is a fixed card on the floating-panel layer, about 320 px, lifted over the footer', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    const card = chat();
+    expect(card.style.position).toBe('fixed');
+    expect(card.style.width).toBe('320px');
+    expect(card.style.zIndex).toBe('60');
+    expect(card.style.bottom).toMatch(/calc|px/);
+  });
+
+  it('the only button inside the log is the one close', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    expect(within(chat()).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor']);
+  });
+
+  it('Escape folds the log to a pill; the pill unfolds it with the log intact', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    fireEvent.keyDown(composer(), { key: 'Escape' });
+    expect(screen.queryByRole('log')).toBeNull();
+    const pill = screen.getByRole('button', { name: 'The Surveyor' });
+    expect(pill.getAttribute('aria-expanded')).toBe('false');
+    fireEvent.click(pill);
+    expect(turnTexts()).toEqual(['why is bread so expensive here?']);
+  });
+
+  it('a tap on the header folds it (the header is a handle, not a button)', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    const head = within(chat()).getByText('The Surveyor');
+    fireEvent.pointerDown(head, { clientX: 100, clientY: 100, button: 0, pointerType: 'mouse' });
+    fireEvent.pointerUp(window, { clientX: 100, clientY: 100 });
+    expect(screen.queryByRole('log')).toBeNull();
+    expect(screen.getByRole('button', { name: 'The Surveyor' })).toBeTruthy();
+  });
+
+  it('a drag by the header moves the log and remembers where, per device', () => {
+    setEntitled(true);
+    Object.defineProperty(window, 'innerWidth', { configurable: true, writable: true, value: 1440 });
+    Object.defineProperty(window, 'innerHeight', { configurable: true, writable: true, value: 900 });
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    const card = chat();
+    card.getBoundingClientRect = () => ({ left: 24, top: 500, width: 320, height: 300, right: 344, bottom: 800 });
+    const head = within(card).getByText('The Surveyor');
+    fireEvent.pointerDown(head, { clientX: 100, clientY: 510, button: 0, pointerType: 'mouse' });
+    fireEvent.pointerMove(window, { clientX: 300, clientY: 310 });
+    fireEvent.pointerUp(window, { clientX: 300, clientY: 310 });
+    expect(chat().style.left).toBe('224px');
+    expect(chat().style.top).toBe('300px');
+    expect(JSON.parse(localStorage.getItem(CHAT_POS_KEY))).toEqual({ left: 224, top: 300 });
+    // still open: a drag is not a fold
+    expect(screen.getByRole('log')).toBeTruthy();
+  });
+
+  it('the close retires the conversation for the visit: the next open is one composer again', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('why is bread so expensive here?');
+    fireEvent.click(within(chat()).getByRole('button', { name: 'Close the Surveyor' }));
+    expect(screen.queryByRole('dialog', { name: 'The Surveyor' })).toBeNull();
+    fireEvent.click(doorTab());
+    expect(screen.queryByRole('log')).toBeNull();
+    expect(within(chat()).getAllByRole('textbox')).toHaveLength(1);
+  });
+});
+
+describe('SurveyorDoor — every prompt goes through the one router', () => {
   it('routes a question to the ANALYST with the question staged', () => {
     setEntitled(true);
     openDoor();
@@ -170,24 +310,21 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     const dest = screen.getByTestId('dest-analyst');
     expect(dest.getAttribute('data-open')).toBe('true');
     expect(dest.getAttribute('data-q')).toBe('why is bread so expensive here?');
-    // the slip closed; the one door is not a second panel
-    expect(screen.queryByLabelText(/ask the surveyor about this page/i)).toBeNull();
   });
 
-  // ⚠ THE PROMPT MOVED, THE CLAIM DID NOT (ODQ §763.2). This arm used to drive
-  // 'reskin the map in a woodcut style' → stage 'style'. That capability is retired, so the
-  // prompt now reaches the analyst and would prove nothing here. It is re-pointed at a
-  // CONSTRUCT prompt rather than a content one ON PURPOSE: 'content' is STAGES[0], the
-  // workshop's unknown-id fallback, so a content-routed arm cannot tell "pre-selected the
-  // right stage" from "fell back to the default" — which is exactly the silent failure this
-  // whole wave exists to avoid. The retired prompt's new destination is asserted below.
-  it('routes a making-prompt to the WORKSHOP with the stage pre-selected and the prompt seeded', () => {
+  // ⚠ Re-pointed off the retired styleOverhaul prompt (ODQ §763.2) onto a CONSTRUCT one:
+  // 'content' is the workshop's fallback stage, so only a non-default stage id proves the
+  // composer carried the routing through.
+  it('routes a making-prompt to the WORKSHOP (stage, prompt, scope) and folds the log beside it', () => {
     setEntitled(true);
     openDoor();
     typeAndSend('build me a new town on the river');
     const dest = screen.getByTestId('dest-workshop');
     expect(dest.getAttribute('data-stage')).toBe('construct');
     expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
+    expect(dest.getAttribute('data-scope')).toBe('settlement');
+    expect(screen.queryByRole('log')).toBeNull();
+    expect(screen.getByRole('button', { name: 'The Surveyor' })).toBeTruthy();
   });
 
   it('RETIRED styleOverhaul: a map-style prompt reaches the ANALYST and opens no write stage', () => {
@@ -196,156 +333,51 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     typeAndSend('reskin the map in a woodcut style');
     // POSITIVE first — the door still routed it somewhere, so the absence below is a
     // routing decision and not a door that simply stopped working.
-    const dest = screen.getByTestId('dest-analyst');
-    expect(dest.getAttribute('data-open')).toBe('true');
-    expect(dest.getAttribute('data-q')).toBe('reskin the map in a woodcut style');
+    expect(screen.getByTestId('dest-analyst').getAttribute('data-q')).toBe('reskin the map in a woodcut style');
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
   });
-
-  // ⚰ THE PROMPTLESS REGISTER LINKS WENT WITH X-22 ("no buttons inside"). This arm used
-  // to open the workshop from a link; it now pins that the links are gone, anchored on
-  // the composer so an empty render cannot pass it.
-  it('X-22: the promptless register links are gone; the composer is the only way in', () => {
-    setEntitled(true);
-    openDoor();
-    expect(screen.getByLabelText(/ask the surveyor about this page/i)).toBeTruthy();
-    for (const name of [/open the analyst/i, /ask the world/i, /open the workshop/i, /take it to the surveyor/i]) {
-      expect(screen.queryByRole('button', { name })).toBeNull();
-    }
-  });
 });
 
-describe('SurveyorDoor — the slip is a real modal dialog (a11y-1)', () => {
-  it('the open slip is aria-modal and moves focus into itself (not orphaned on <body>)', () => {
-    setEntitled(true);
-    openDoor();
-    const dialog = screen.getByRole('dialog');
-    expect(dialog.getAttribute('aria-modal')).toBe('true');
-    expect(dialog.contains(document.activeElement)).toBe(true);
-  });
-
-  it('Escape closes the slip and restores focus to the door tab (never orphaned)', () => {
-    setEntitled(true);
-    render(<SurveyorDoor />);
-    const tab = screen.getByRole('button', { name: /ask the surveyor/i });
-    tab.focus(); // the trigger holds focus when the slip opens
-    fireEvent.click(tab);
-    expect(screen.getByRole('dialog')).toBeTruthy();
-
-    // The shared hook's window keydown handler dismisses on Escape.
-    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
-    expect(screen.queryByRole('dialog')).toBeNull();
-    // Focus returns to the still-mounted trigger, not to <body>.
-    expect(document.activeElement).toBe(screen.getByRole('button', { name: /ask the surveyor/i }));
-  });
-});
-
-// ── SC-1A: the ephemeral text-intent shell ───────────────────────────────────
-const composer = () => screen.getByLabelText(/ask the surveyor about this page/i);
-const pressEnter = () => fireEvent.keyDown(composer(), { key: 'Enter' });
-const doorTab = () => screen.getByRole('button', { name: /ask the surveyor$/i });
-// X-22: before the first turn there is no log at all (one composer), so read the turns
-// wherever they are rather than requiring the log to exist.
-const turnTexts = () => screen.queryAllByTestId('surveyor-turn').map((n) => n.textContent);
-
-/** Stub the layout-only scrollHeight jsdom never computes. */
-function stubScrollHeight(el, px) {
-  Object.defineProperty(el, 'scrollHeight', { configurable: true, get: () => px });
-}
-
-describe('SurveyorDoor — A1/A2/A3: the shell routes, records, and treats blank as absence', () => {
-  it('A1 — a question routes to the analyst verbatim, logs ONE trimmed turn, and clears the draft', () => {
-    setEntitled(true);
-    openDoor();
-
-    // A half-written draft survives a plain close/reopen: the shell is kept mounted by
-    // the door, so dismissing the slip is not the same as throwing the sentence away.
-    fireEvent.change(composer(), { target: { value: 'why is bread' } });
-    fireEvent.keyDown(screen.getByRole('dialog'), { key: 'Escape' });
-    expect(screen.queryByRole('dialog')).toBeNull();
-    fireEvent.click(doorTab());
-    expect(composer().value).toBe('why is bread');
-
-    fireEvent.change(composer(), { target: { value: '  why is bread so expensive here?  ' } });
-    pressEnter();
-
-    // The destination writer is unchanged: the trimmed question, staged exactly.
-    const dest = screen.getByTestId('dest-analyst');
-    expect(dest.getAttribute('data-open')).toBe('true');
-    expect(dest.getAttribute('data-q')).toBe('why is bread so expensive here?');
-    expect(screen.queryByRole('dialog')).toBeNull();
-
-    // Return to the marker and reopen: the shell stayed MOUNTED, so its transient log
-    // survived — one user turn, trimmed, under the existing "You asked" register.
-    fireEvent.click(screen.getByRole('button', { name: /close the analyst/i }));
-    fireEvent.click(doorTab());
-    expect(turnTexts()).toEqual(['why is bread so expensive here?']);
-    expect(screen.getByRole('log').textContent).toContain('You asked');
-    // A successful route clears the draft; it does not re-stage the same text.
-    expect(composer().value).toBe('');
-  });
-
-  // ⚠ Re-pointed off the retired styleOverhaul prompt (ODQ §763.2) onto a CONSTRUCT one,
-  // for the same non-vacuity reason as the arm above: 'content' is the workshop's fallback
-  // stage, so only a non-default stage id proves the composer carried the routing through.
-  it('A2 — a making-prompt still reaches the workshop with the unchanged stage, prompt, and scope', () => {
-    setEntitled(true);
-    openDoor();
-    fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
-    pressEnter();
-    const dest = screen.getByTestId('dest-workshop');
-    expect(dest.getAttribute('data-stage')).toBe('construct');
-    expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
-    expect(dest.getAttribute('data-scope')).toBe('settlement');
-  });
-
-  it('A3 — empty and whitespace-only drafts are ABSENCE: Enter is a no-op, nothing is logged', () => {
+describe('SurveyorDoor — absence, the keyboard, and the composer that grows upward', () => {
+  it('empty and whitespace-only drafts are ABSENCE: Enter is a no-op, nothing is logged', () => {
     setEntitled(true);
     openDoor();
     pressEnter();
     fireEvent.change(composer(), { target: { value: '   \n\t ' } });
-    fireEvent.keyDown(composer(), { key: 'Enter' });
+    pressEnter();
     expect(screen.queryByTestId('dest-analyst')).toBeNull();
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
-    expect(turnTexts()).toEqual([]);
-    // The slip is still open — an absent prompt is not a dismissal.
-    expect(screen.getByRole('dialog')).toBeTruthy();
+    expect(screen.queryByRole('log')).toBeNull();
+    // still open — an absent prompt is not a dismissal
+    expect(composer()).toBeTruthy();
   });
 
-  it("A3 — absence stops IN THE SHELL: a blank draft never reaches the door's router at all", () => {
-    // The door refuses an empty prompt too, which makes the shell's own absence arm
-    // invisible through the door. Driven directly, with the route stubbed TRUTHY, the
-    // shell has to be the thing that stops — otherwise an empty turn would be logged.
-    const onRoute = vi.fn(() => ({ destination: 'analyst', scope: 'settlement' }));
-    render(
-      <SurveyorTextIntentShell
-        open
-        dialogRef={{ current: null }}
-        anchorLabel="Reading: Test Town"
-        onClose={() => {}}
-        onRoute={onRoute}
-      />,
-    );
+  it("absence stops IN THE SHELL: a blank draft never reaches the door's send at all", () => {
+    // Driven directly, with the send stubbed TRUTHY, the shell has to be the thing that stops.
+    const onSend = vi.fn(() => true);
+    render(<SurveyorTextIntentShell open anchorLabel="Reading: Test Town" onSend={onSend} />);
     fireEvent.change(composer(), { target: { value: '   \n\t ' } });
-    fireEvent.keyDown(composer(), { key: 'Enter' });
-    expect(onRoute).not.toHaveBeenCalled();
-    expect(turnTexts()).toEqual([]);
+    pressEnter();
+    expect(onSend).not.toHaveBeenCalled();
   });
-});
 
-describe('SurveyorDoor — A4: desktop keyboard + the composer that grows upward', () => {
-  it('only a plain desktop Enter submits — Shift+Enter and an IME composition do not', () => {
+  it('a send the door refuses keeps the draft (the box clears only when the turn left it)', () => {
+    const onSend = vi.fn(() => false);
+    render(<SurveyorTextIntentShell open anchorLabel="Reading: Test Town" onSend={onSend} />);
+    typeAndSend('why is bread so expensive here?');
+    expect(onSend).toHaveBeenCalledWith('why is bread so expensive here?');
+    expect(composer().value).toBe('why is bread so expensive here?');
+  });
+
+  it('only a plain Enter submits — Shift+Enter and an IME composition do not', () => {
     setEntitled(true);
-    mobileRef.current = false;
     openDoor();
     fireEvent.change(composer(), { target: { value: 'why is bread so expensive here?' } });
-
     fireEvent.keyDown(composer(), { key: 'Enter', shiftKey: true });
     expect(screen.queryByTestId('dest-analyst')).toBeNull();
     fireEvent.keyDown(composer(), { key: 'Enter', isComposing: true });
     expect(screen.queryByTestId('dest-analyst')).toBeNull();
-
-    fireEvent.keyDown(composer(), { key: 'Enter' });
+    pressEnter();
     expect(screen.getByTestId('dest-analyst').getAttribute('data-q')).toBe('why is bread so expensive here?');
   });
 
@@ -353,12 +385,10 @@ describe('SurveyorDoor — A4: desktop keyboard + the composer that grows upward
     setEntitled(true);
     openDoor();
     const area = composer();
-
     stubScrollHeight(area, 80);
     fireEvent.change(area, { target: { value: 'two lines\nof draft' } });
     expect(area.style.height).toBe('80px');
     expect(area.style.overflowY).toBe('hidden');
-
     stubScrollHeight(area, 300);
     fireEvent.change(area, { target: { value: 'a much longer draft that overruns the cap' } });
     expect(area.style.height).toBe('144px');
@@ -366,7 +396,7 @@ describe('SurveyorDoor — A4: desktop keyboard + the composer that grows upward
   });
 });
 
-describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor', () => {
+describe('SurveyorDoor — mobile, the keyboard inset', () => {
   function stubVisualViewport({ height = 500, offsetTop = 0 } = {}) {
     const listeners = { resize: [], scroll: [] };
     const vv = {
@@ -403,8 +433,8 @@ describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor
     const { vv, listeners } = stubVisualViewport({ height: 500, offsetTop: 0 });
     openDoor();
 
-    const dialog = screen.getByRole('dialog');
-    expect(dialog.style.getPropertyValue('--sf-door-kbd-inset')).toBe('300px');
+    const sheet = chat();
+    expect(sheet.style.getPropertyValue('--sf-door-kbd-inset')).toBe('300px');
     expect(vv.addEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
     expect(vv.addEventListener).toHaveBeenCalledWith('scroll', expect.any(Function));
 
@@ -413,10 +443,10 @@ describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor
       vv.offsetTop = 0;
       listeners.resize.forEach((fn) => fn());
     });
-    expect(dialog.style.getPropertyValue('--sf-door-kbd-inset')).toBe('160px');
+    expect(sheet.style.getPropertyValue('--sf-door-kbd-inset')).toBe('160px');
 
-    fireEvent.keyDown(dialog, { key: 'Escape' });
-    expect(screen.queryByRole('dialog')).toBeNull();
+    fireEvent.keyDown(composer(), { key: 'Escape' });
+    expect(screen.queryByRole('dialog', { name: 'The Surveyor' })).toBeNull();
     expect(vv.removeEventListener).toHaveBeenCalledWith('resize', expect.any(Function));
     expect(vv.removeEventListener).toHaveBeenCalledWith('scroll', expect.any(Function));
     expect(listeners.resize).toHaveLength(0);
@@ -427,14 +457,6 @@ describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor
     setEntitled(true);
     mobileRef.current = true;
     openDoor();
-    expect(screen.getByRole('dialog').style.getPropertyValue('--sf-door-kbd-inset')).toBe('0px');
-  });
-
-  it('PRIVACY FLOOR: a non-entitled user gets no shell at all — not even a closed one', () => {
-    setEntitled(false);
-    const { container } = render(<SurveyorDoor />);
-    expect(container.innerHTML).toBe('');
-    expect(screen.queryByRole('log')).toBeNull();
-    expect(screen.queryByLabelText(/ask the surveyor about this page/i)).toBeNull();
+    expect(chat().style.getPropertyValue('--sf-door-kbd-inset')).toBe('0px');
   });
 });

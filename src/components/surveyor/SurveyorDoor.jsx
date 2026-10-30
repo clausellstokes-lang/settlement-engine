@@ -32,12 +32,20 @@
  * carry its chrome as CSS classes (the ratchet counts raw line matches, comments included).
  * Colors ride the theme's AI register (the slate conversion lands at the tokens chokepoint).
  * Lazy-only: rides the FloatingAffordances chunk — zero eager bytes.
+ *
+ * ⭐ X-22 (the owner, 2026-10-30: "a simple chat interface floating as a pop-up"). The
+ * door now owns THE CONVERSATION as well as the routing: the log's messages live here
+ * (component memory, ids from a local counter, never persisted), the shell renders them.
+ * The first send grows the one composer into the floating log; Escape folds the log to a
+ * pill and the close retires the conversation for the visit. The chat is NON-MODAL (the
+ * DM reads the dossier beside it), so the modal focus trap gave way to the shell's
+ * non-modal dismiss; the tab stays mounted so focus always has a home.
  */
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
-import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
+import { useDialogDismiss } from '../primitives/useDialogFocusTrap.js';
 import SurveyorTextIntentShell from './SurveyorTextIntentShell.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
@@ -54,6 +62,10 @@ export { isSurveyorTier } from './surveyorGate.js';
 
 export default function SurveyorDoor({ visible = true }) {
   const [promptOpen, setPromptOpen] = useState(false);
+  const [folded, setFolded] = useState(false);
+  // THE CONVERSATION: { id, from: 'you'|'surveyor', text?, node? }, oldest first.
+  const [messages, setMessages] = useState([]);
+  const nextId = useRef(1);
   // The routed destination: null | { id: 'analyst', question } | { id: stageId, prompt, scope }.
   const [dest, setDest] = useState(null);
   // Remount destinations per routing so initial* props re-seed (panels stay dumb).
@@ -68,15 +80,21 @@ export default function SurveyorDoor({ visible = true }) {
     const subject = anchorSettlement(anchor, { settlement: ctx.settlement, savedSettlements: ctx.savedSettlements }) || ctx.settlement;
     return suggestedQuestions(anchor, { settlement: subject, worldState: ctx.worldState });
   }, [ctx]);
-  // Route the slip through the app's shared modal focus standard (the same
-  // useDialogFocusTrap the 14+ sibling dialogs use): focus in on open, trap Tab,
-  // Escape closes, focus restored to the trigger on close. The trigger Button is
-  // kept mounted while the slip is open (tucked behind the panel via CSS) so the
-  // hook has a live element to restore focus to — Button does not forward refs,
-  // so the hook's native document.activeElement restore is the clean path.
-  const doorRef = useDialogFocusTrap(promptOpen, () => setPromptOpen(false));
+  // THE NON-MODAL LIFECYCLE (useDialogDismiss, the coach's and the feedback panel's
+  // half): Escape puts the composer away or folds the log, and focus goes home to the
+  // tab. Nothing traps Tab: the DM reads the dossier beside the chat.
+  const dialogRef = useDialogDismiss(promptOpen && !folded, () => (
+    messages.length > 0 ? setFolded(true) : setPromptOpen(false)
+  ));
 
   if (!visible || !surveyorEntitled) return null;
+
+  /** Append one message to the log. */
+  const say = (message) => {
+    const id = nextId.current;
+    nextId.current += 1;
+    setMessages((prev) => [...prev, { id, ...message }]);
+  };
 
   const openDestination = (routed, promptText) => {
     // 'analyst' is the QUESTION destination (it carries a question, not a prompt+scope);
@@ -85,44 +103,51 @@ export default function SurveyorDoor({ visible = true }) {
       ? { id: 'analyst', question: promptText }
       : { id: routed.destination, prompt: promptText, scope: routed.scope });
     setNonce((n) => n + 1);
-    setPromptOpen(false);
+    // A workshop stage docks at the same margin: the log folds to its pill beside it.
+    if (routed.destination !== 'analyst') setFolded(true);
   };
 
-  // The door still owns routing: the shell hands up the typed text and gets back the
-  // destination it produced (null for absence), which is the shell's ONLY signal that a
-  // turn actually left the composer. It never sees the router itself.
-  const route = (raw) => {
+  // The door still owns routing: the shell hands up the typed text and is told whether
+  // the turn left the composer (true clears the draft). It never sees the router itself.
+  const send = (raw) => {
     const q = String(raw ?? '').trim();
-    if (!q) return null;
-    const routed = routeDoorPrompt(q);
-    openDestination(routed, q);
-    return routed;
+    if (!q) return false;
+    say({ from: 'you', text: q });
+    openDestination(routeDoorPrompt(q), q);
+    return true;
   };
+
+  // The close retires the conversation for the visit: the log and the fold go with it.
+  const retire = () => {
+    setPromptOpen(false);
+    setFolded(false);
+    setMessages([]);
+  };
+  const composing = promptOpen && !folded && messages.length === 0;
 
   return (
     <>
       {/* The marker: no text until hover/focus (the label is a reveal flag; AT reads the
-          aria-label regardless). Kept mounted while the slip is open (tucked behind the
-          panel via sf-door-tab--open) so useDialogFocusTrap can restore focus here on
-          close; hidden only once a destination panel takes over. */}
-      {!dest && (
-        <Button
-          variant="ai"
-          size="sm"
-          className={`sf-door-tab${promptOpen ? ' sf-door-tab--open' : ''}`}
-          onClick={() => setPromptOpen(true)}
-          aria-label={t('surveyorDoor.label')}
-          aria-haspopup="dialog"
-        >
-          <span className="sf-door-label" aria-hidden="true">{t('surveyorDoor.label')}</span>
-        </Button>
-      )}
+          aria-label regardless). ALWAYS mounted, so the non-modal dismiss can hand focus
+          back here; tucked under the composer while that is open (sf-door-tab--open).
+          With a log open it brings the log back (unfolds it). */}
+      <Button
+        variant="ai"
+        size="sm"
+        className={`sf-door-tab${composing ? ' sf-door-tab--open' : ''}`}
+        onClick={() => { setPromptOpen(true); setFolded(false); }}
+        aria-label={t('surveyorDoor.label')}
+        aria-expanded={promptOpen && !folded}
+      >
+        <span className="sf-door-label" aria-hidden="true">{t('surveyorDoor.label')}</span>
+      </Button>
 
-      {/* The shell stays MOUNTED while the door is, so a close/reopen keeps the draft
-          and the transient log; it renders nothing while `open` is false. */}
+      {/* The shell stays MOUNTED while the door is, so a close/reopen keeps the draft;
+          it renders nothing while `open` is false. */}
       <SurveyorTextIntentShell
-        open={promptOpen} dialogRef={doorRef} anchorLabel={anchorLabel}
-        onClose={() => setPromptOpen(false)} onRoute={route} suggestions={suggestions}
+        open={promptOpen} dialogRef={dialogRef} anchorLabel={anchorLabel} messages={messages} folded={folded}
+        onFold={setFolded} onClose={retire}
+        onSend={send} suggestions={suggestions}
       />
 
       {dest?.id === 'analyst' && (

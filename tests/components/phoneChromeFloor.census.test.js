@@ -410,7 +410,9 @@ const ROUTE_BASELINE = Object.freeze({
   // (shell) floored 145 -> 137 (BUILD LANE W2-SURVEYOR U1, X-22): the door no longer mounts
   // InterviewPanel (its only way in was the retired "Ask the world" link), so its eight floored
   // sites left the shell's subtree. Nothing became bare; `ruled` and `bare` hold.
-  '(shell)':                { roots: 1, files: 61, floored: 137, ruled: 3, bare: 0 },
+  // (shell) floored 137 -> 136 (W2-SURVEYOR U2): the chat shell floors its small chrome
+  // through ONE chromeFontSize call shared by the turn label and the thinking line. `bare` holds.
+  '(shell)':                { roots: 1, files: 61, floored: 136, ruled: 3, bare: 0 },
 });
 
 /**
