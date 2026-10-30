@@ -375,6 +375,20 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
     expectNoSeedFailures(failures, 'no SIGHT names a market the roster lacks');
   });
 
+  it('EVERY beat agrees: no PEOPLE or SENSE line names a market over a NO-MARKET roster either (chair ruling 3)', () => {
+    // Seed t12-c drew the PEOPLE line "A notice of the next fair is nailed up…" under the SIGHT-only gate.
+    const town = base({
+      culturalIdentity: { architecturalDetail: MARKET_SIGHT },
+      institutions: [{ name: 'Smithy', category: 'Crafts' }, { name: 'Spice merchants', category: 'Economy' }],
+    });
+    const failures = collectSeedFailures(['t12-a', 't12-b', 't12-c', 't12-d', 't12-e', 't12-f', 't12-g', 't12-h'], (seed) => {
+      const text = scene(town, seed);
+      expect(text, `${seed}: the scene went empty`).toBeTruthy();
+      expect(WORD.test(text), `${seed}: "${text}" names a market over a NO-MARKET roster`).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'no beat names a market the roster lacks');
+  });
+
   it('a town that holds a market keeps its market-worded SIGHT, with no extra draw', () => {
     const town = base({ culturalIdentity: { architecturalDetail: MARKET_SIGHT }, institutions: [{ name: 'Weekly market', category: 'Economy' }] });
     expect(scene(town, 't12-held')).toContain('Arcaded market fronts define the principal square.');

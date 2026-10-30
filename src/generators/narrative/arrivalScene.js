@@ -221,14 +221,26 @@ export function composeArrivalScene(settlement) {
     : pickRandom(ARRIVAL_SCENES[sceneKey]);
   const hook = typeof hookTemplate === 'function' ? hookTemplate(name, tier) : hookTemplate;
 
-  // SIGHT: a landmark the native institutions imply, else the culture's built detail. A SIGHT names a market, its
-  // stalls or a fair only where the roster holds a market (T1-12, DS-GEN-13's predicate): otherwise a market-worded
-  // detail is redrawn from the culture's other details. The redraw happens ONLY on that contradiction, so no other
-  // settlement's draw moves.
+  // THE SCENE AGREES WITH THE INSTITUTIONS (T1-12, extended to every beat by the chair's ruling 3, 2026-10-30): a
+  // line names a market, its stalls or a fair only where the roster holds a market (DS-GEN-13's predicate). A beat
+  // that drew such a line over a market-less roster redraws from its own pool's other lines. The redraw happens ONLY
+  // on that contradiction, so no other settlement's draw moves.
+  const marketHeld = holdsMarket(institutions);
+  const speaks = (/** @type {string} */ line) => marketHeld || !MARKET_WORD.test(line);
+  /**
+   * One beat's line from a pool of name-templates, redrawn once from the lines that agree where the first draw
+   * names a market the roster lacks; null when no line of the pool agrees.
+   * @param {ReadonlyArray<(n: string) => string>} pool
+   */
+  const agreeingLine = (pool) => {
+    const first = pickRandom(pool)(name);
+    if (speaks(first)) return first;
+    const clean = pool.filter((line) => speaks(line(name)));
+    return clean.length ? pickRandom(clean)(name) : null;
+  };
+  // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
   if (!underStress) {
-    const marketHeld = holdsMarket(institutions);
-    const speaks = (/** @type {string} */ line) => marketHeld || !MARKET_WORD.test(line);
     sight = checkInstCompat(institutions, tier, config.priorityMagic ?? 50);
     if (sight && !speaks(sight)) sight = null;
     if (!sight) {
@@ -254,11 +266,11 @@ export function composeArrivalScene(settlement) {
   ].map(lower);
   const chosen = chooseSense(names, tradeWords, magicReal);
   const sensePool = chosen ? (chosen.dominant ? chosen.sense.dominant : chosen.sense.lines) : null;
-  const senseLine = sensePool?.length ? pickRandom(sensePool)(name) : null;
+  const senseLine = sensePool?.length ? agreeingLine(sensePool) : null;
 
   // PEOPLE: the culture, shown.
   const peoplePool = ARRIVAL_PEOPLE[resolveCultureProfileKey(config.culture || 'germanic')] || ARRIVAL_PEOPLE.mixed;
-  const peopleLine = peoplePool?.length ? pickRandom(peoplePool)(name) : null;
+  const peopleLine = peoplePool?.length ? agreeingLine(peoplePool) : null;
 
   // CLOSING: one more visible truth, none under a vignette.
   const closing = underStress ? null : chooseClosing(settlement, magicReal);
