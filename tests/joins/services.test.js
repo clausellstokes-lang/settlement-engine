@@ -15,7 +15,7 @@ import { describe, it, expect } from 'vitest';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { INSTITUTION_SERVICES } from '../../src/data/institutionServices.js';
-import { LOCALE_SERVICE_OVERRIDES } from '../../src/data/servicesData.js';
+import { LOCALE_SERVICE_OVERRIDES, PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 import { generateAvailableServices } from '../../src/generators/servicesGenerator.js';
 import { getInstFlags } from '../../src/generators/priorityHelpers.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -49,6 +49,15 @@ describe('LOCALE_SERVICE_OVERRIDES join integrity', () => {
       .filter(([, target]) => !INSTITUTION_SERVICES[target])
       .map(([src, target]) => `${src} -> ${target}`);
     expect(dangling).toEqual([]);
+    // RS-19 (chair ruling 2026-10-30): the proxy rows the Services tab reads to withhold a
+    // false attribution ARE the locale rows the generator resolves through, same targets,
+    // and none names an institution that has a menu of its own.
+    const proxyRows = Object.entries(PROXY_SERVICE_HOSTS);
+    expect(proxyRows.length).toBeGreaterThanOrEqual(11);
+    for (const [src, target] of proxyRows) {
+      expect(LOCALE_SERVICE_OVERRIDES[src], src).toBe(target);
+      expect(KEYS_LC.has(src), `${src} has a menu of its own, so it is no proxy`).toBe(false);
+    }
   });
 
   it('no override row shadows a dedicated INSTITUTION_SERVICES entry', () => {

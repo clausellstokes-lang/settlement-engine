@@ -38,6 +38,7 @@ vi.mock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false 
 
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 
 /** React's own wording for the defect, in every version that has shipped it. */
 const NESTING_ERROR = /cannot be a descendant of|validateDOMNesting/i;
@@ -79,6 +80,17 @@ describe('the institution card on the Services tab', () => {
     const triggers = [...container.querySelectorAll('[aria-haspopup="dialog"]')];
     expect(triggers.length, 'the Services tab offered no institution to expand')
       .toBeGreaterThan(0);
+
+    // RS-19 (chair ruling 2026-10-30): a service surfaced through a PROXY host (this city's
+    // Housing rows carry the inn's menu) names no institution. Anchored: the city really
+    // has proxy-surfaced rows, and the same rows' names do render.
+    const proxied = Object.values(town.availableServices).flat()
+      .filter((svc) => PROXY_SERVICE_HOSTS[String(svc.institution || '').toLowerCase()]);
+    expect(proxied.length, 'the fixture city surfaced nothing through a proxy host').toBeGreaterThan(0);
+    for (const svc of proxied) {
+      expect(container.textContent, `the proxied row "${svc.name}" did not render`).toContain(svc.name);
+      expect(container.textContent, `"${svc.name}" still credits its proxy host`).not.toContain(svc.institution);
+    }
 
     fireEvent.click(triggers[0]);
 
