@@ -70,10 +70,9 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   const [search, setSearch] = useState('');
   const [openCats, setOpenCats] = useState({});
   const tier = settlement?.tier || 'town';
-  // `mobile` drives the phone layout AND the phone prose floor: the tab's three
-  // reading sentences (the search miss, the absence note, the criminal-category
-  // caution) take the floor below the breakpoint. Counts, chips and category
-  // headers are glanced at and keep their own steps.
+  // `mobile` drives the phone layout AND the phone prose floor: the tab's two
+  // reading sentences (the search miss, the absence note) take the floor below the
+  // breakpoint. Counts and category headers are glanced at and keep their own steps.
   const mobile = useIsMobile();
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
@@ -127,11 +126,6 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     catStats[cat] = { total: list?.length || 0, imp, deg, vul };
   });
 
-  const totalImpaired = Object.values(catStats).reduce((s,c) => s+c.imp, 0);
-  const totalDegraded = Object.values(catStats).reduce((s,c) => s+c.deg, 0);
-
-  const _catsWithIssues = Object.entries(catStats).filter(([,c]) => c.imp>0||c.deg>0).length;
-
   // Category display order: strictly alphabetical — impairment is shown on each card
   const catOrder = Object.keys(services||{}).filter(k => services[k]?.length).sort((a,b) => a.localeCompare(b));
   // THE ONE IMPAIRED HOUSE THE DESK MAY NAME (DS-SUP-3's second lens). Taken from THIS
@@ -184,18 +178,6 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           the one shared sentence pair (domain/display/economyFreshness.js). */}
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
 
-      {/* ── THE CATALOG AND ITS ABSENCES (DS-SUP-3 at services.catalogStanding) ──
-          ONE LENS HERE: where the town stands against what a place its rung is expected to
-          keep. That is a fact about the CATALOG, so it frames the catalog.
-          ⛔ THE SECOND LENS LEFT THIS PARAGRAPH (owner order 2026-09-19). It names one house
-          by name, and a sentence about a named house printed at the top of a tab is a
-          sentence the reader has to go and find a row for. It renders under that house's own
-          row below — same position, same registry ruling, flipping this row to `glance`
-          still silences both together. The counts strip, the category grid and the absence
-          chips are the DATUM and are untouched. Silent on a settlement with no catalog at
-          all, because the tab itself returns early there (R-DST-K). */}
-      <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
-
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
         <div style={{flex:1,minWidth:0}}>
@@ -203,14 +185,13 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
               name and any copy/paste of it read "15 servicesacross 8 categories".
               The space is a real text node; the margin keeps the optical gap. */}
           <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>{' '}
-          <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories</span>
+          <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories{hasCustom?' · custom':''}</span>
         </div>
-        <div style={{display:'flex',gap:6,flexWrap:'wrap'}}>
-          {totalImpaired>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'2px 8px'}}>{totalImpaired} impaired</span>}
-          {totalDegraded>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A3A00'],background:swatch['#FBEAD0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{totalDegraded} reduced</span>}
-          {missing.length>0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#7A5010'],background:swatch['#F0E4C0'],border:'1px solid #e0c080',padding:'2px 8px'}}>{missing.length} missing</span>}
-          {totalImpaired===0&&totalDegraded===0&&missing.length===0&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,background:swatch['#F0EAD8'],border:'1px solid #d0c0a0',padding:'2px 8px'}}>✓ No impairments</span>}
-        </div>
+        {/* RS-15/RS-16 (chair rulings 2026-10-30): this strip is ONE line. The impaired,
+            reduced and missing chips and "✓ No impairments" are cut: impairment is said on
+            each row's pill and its category header badge, an absence once, in the
+            Not-available line below. The footer that repeated this line is cut too; its
+            "custom" marker lives here. */}
       </div>
 
       {/* ── SEARCH ──────────────────────────────────────────────────────── */}
@@ -234,7 +215,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           <div style={{marginTop:8}}>
             {searchResults.length === 0
               ? <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',fontSize:proseFontSize(FS.md,mobile),color:swatch['#5A1A1A']}}>
-                  <strong>Not available</strong>. Nothing matching "{search}" in this settlement.
+                  <strong>Not available.</strong>
                   {missing.length>0&&<span style={{color:swatch.inkMag3}}> Missing categories: {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.</span>}
                 </div>
               : <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #c8b89a',padding:'10px 14px'}}>
@@ -253,61 +234,21 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
 
       {!query && <>
 
-        {/* ── CATEGORY HEALTH GRID ────────────────────────────────────────── */}
-        {(totalImpaired>0||totalDegraded>0||missing.length>0) && (
-          <div style={{marginBottom:14}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:8}}>Category Status</div>
-            <div style={{display:'grid',gridTemplateColumns:mobile?'repeat(2,1fr)':'repeat(3,1fr)',gap:6}}>
-              {catOrder.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
-                const cs = catStats[cat] || {total:0,imp:0,deg:0,vul:0};
-                const hasImp = cs.imp > 0;
-                const hasDeg = cs.deg > 0 && !hasImp;
-                const borderColor = hasImp?'#d8c8a8':hasDeg?'#e0c080':'#d0c0a8';
-                const bg = hasImp?'#f4dede':hasDeg?'#fbead0':'#f0ead8';
-                return (
-                  <div key={cat} role="button" tabIndex={0} style={{background:bg,border:`1px solid ${borderColor}`,borderLeft:`3px solid ${hasImp?'#c0392b':hasDeg?'#b8860b':meta.accent}`,padding:'6px 10px',cursor:'pointer'}}
-                    onClick={()=>{
-                      setOpenCats(prev=>({...prev,[cat]:true}));
-                      setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-                    }}
-                    onKeyDown={e=>{
-                      if(e.key==='Enter'||e.key===' '){
-                        e.preventDefault();
-                        setOpenCats(prev=>({...prev,[cat]:true}));
-                        setTimeout(()=>{const el=document.getElementById('svc-cat-'+cat);el&&el.scrollIntoView({behavior:'smooth',block:'start'});},50);
-                      }
-                    }}>
-                    {/* ODQ §934.23 — no clamp on dossier text: this label may be the raw category token on a catalogue the taxonomy has not named (`Ts[cat] || {label:cat}`), so it is not provably short and it wraps instead of truncating. */}
-                    <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,flex:1,minWidth:0}}>{meta.label}</span>
-                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{cs.total}</span>
-                    </div>
-                    {(hasImp||hasDeg)&&<div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:hasImp?'#7a1a1a':'#7a3a00'}}>
-                      {hasImp&&`${cs.imp} impaired`}{hasDeg&&`${cs.deg} reduced`}
-                    </div>}
-                  </div>
-                );
-              })}
-              {missing.map(cat => {
-                const meta = Ts[cat] || {label:cat,accent:'#6b5340'};
-                return (
-                  <div key={'missing-'+cat} style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'6px 10px',opacity:0.8}}>
-                    <div style={{display:'flex',alignItems:'center',gap:5}}>
-                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch['#5A3A10'],flex:1,minWidth:0}}>{meta.label}</span>
-                    </div>
-                    <div style={{marginTop:3,fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A5010']}}>not available</div>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        )}
-
-        {/* ── NOTABLE ABSENCES ─────────────────────────────────────────────── */}
+        {/* ── THE CATALOG AND ITS ABSENCE, SAID ONCE (RS-15, chair ruling 2026-10-30) ──
+            The Not-available line is the one home of an absence (the header chip, the
+            Category Status grid and its "not available" cards are cut, RS-15/RS-17). DS-SUP-3
+            lens A (services.catalogStanding) sits directly above it, so the sentence and the
+            datum it bands are read together (R3 coupling).
+            ⚠ RS-15 also asks lens A to speak ONLY when the catalog is incomplete. That gate is
+            NOT drawn here: print carries the same position as one woven paragraph (lens A +
+            lens B, printProse.js), so a screen-only gate would split screen from print. It
+            belongs at the desk (economyStateProse.js :: catalogStanding), outside this file;
+            reported to the chair. ⛔ Lens B is not here: it names one house and renders under
+            that house's own row below (owner order 2026-09-19). */}
+        <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
         {missing.length > 0 && (
           <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10']}}>
-            <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}. The party will need to look elsewhere.
+            <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.
           </div>
         )}
 
@@ -343,8 +284,8 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 }}>
                   {/* A GROUP HEADER NESTED INSIDE THE CARD, not the card's eyebrow — the rule
                       DefenseSecurity's pair already set: "ARMED FORCES & FORTIFICATIONS" keeps
-                      its capitals and "Standing forces" beneath it does not. "Category Status"
-                      above is this surface's one eyebrow and is untouched. */}
+                      its capitals and "Standing forces" beneath it does not. This header and its
+                      badge are where a category's impairment is said (RS-16). */}
                   <span style={{fontSize:FS.sm,fontWeight:800,color:isCriminal?'#c06060':accentColor}}>{tokenCase(meta.label)}</span>
                   <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:isCriminal?'#8a5050':'#9c8068'}}>({cs.total})</span>
                   {hasImp&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#7A1A1A'],background:swatch['#F4DEDE'],border:'1px solid #d8c8a8',padding:'1px 5px',marginLeft:2}}>{cs.imp} impaired</span>}
@@ -353,7 +294,6 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
                 </button>
 
                 {open && <div style={{padding:'10px 14px'}}>
-                  {isCriminal&&meta.note&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#8A5050'],fontStyle:'italic',margin:'0 0 10px',lineHeight:1.5,borderLeft:'2px solid #4a1a1a',paddingLeft:8}}>{meta.note}</p>}
                   <div style={{display:'flex',flexDirection:'column',gap:6}}>
                     {/* The comparator is `serviceOrder` at module scope — the DS-SUP-3 join
                         above resolves the first impaired-house row through the SAME function,
@@ -385,9 +325,6 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
           })}
         </div>
 
-        <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:12,fontStyle:'italic',textAlign:'right'}}>
-          {totalCount} services · {catOrder.length} categories{totalImpaired>0?` · ${totalImpaired} impaired`:''}{hasCustom?' · custom':''}
-        </p>
       </>}
     </div>
   );

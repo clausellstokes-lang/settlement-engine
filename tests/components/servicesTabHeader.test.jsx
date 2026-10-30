@@ -52,6 +52,19 @@ describe('ServicesTab — the counts strip', () => {
     const { container } = await renderServices();
     // Four services across three categories, as one readable phrase.
     expect(container.textContent).toContain('4 services across 3 categories');
+
+    // RS-15..RS-17 (chair rulings 2026-10-30): the strip is ONE line and an absence is
+    // said ONCE. A town expects food, healing, goods, information and lodging; this one
+    // lacks three, and the Not-available line is their only home on the page: no
+    // "missing" chip, no Category Status grid with "not available" cards, no coaching
+    // sentence after it, no "No impairments" chip, no footer repeating the strip.
+    const text = container.textContent;
+    expect(text).toContain('Not available for a town: Food & Drink, Goods & Crafts, Information.');
+    expect(text.split('Not available').length - 1, 'the absence is said more than once').toBe(1);
+    for (const cut of ['3 missing', 'Category Status', 'not available', 'No impairments',
+      'look elsewhere', '4 services · 3 categories']) {
+      expect(text, `the cut block "${cut}" is back`).not.toContain(cut);
+    }
   });
 });
 

@@ -273,7 +273,12 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate/WizardOutputToolbar.jsx, which is now the public roster's. Nothing
   // on this surface was floored, written or ruled by the re-measure itself; 97 is the count
   // lane 28 has left to do.
-  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // floored 750 -> 738, and /settlements 991 -> 979, /gallery 794 -> 782 (BUILD LANE S, S-3,
+  // 2026-10-30; chair rulings RS-15..RS-17): ServicesTab.jsx lost TWELVE floored sites, every
+  // one in a CUT block: ten `chromeFontSize` (the header-strip chips, the Category Status
+  // grid) and two `proseFontSize` (the criminal card's note, the footer). Every route that
+  // opens the dossier closure falls by exactly those twelve; `bare` holds.
+  '/create':                { roots: 1, files: 165, floored: 738, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -316,13 +321,13 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 979, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 154, floored: 794, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 154, floored: 782, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

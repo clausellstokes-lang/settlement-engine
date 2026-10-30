@@ -666,8 +666,10 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     expectPresentThenAbsent(privText, pub.container.textContent, GROUND_LINES.catalog,
       'services.catalogStanding');
     // The village tier expects food, healing and equipment; this town keeps two of the
-    // three, so the DATUM the sentence bands is on the page beside it.
-    expect(pub.container.textContent).toContain('1 missing');
+    // three, so the DATUM the sentence bands is on the page beside it, said ONCE, in the
+    // Not-available line (RS-15: the "1 missing" header chip that also said it is cut).
+    expect(pub.container.textContent).toContain('Not available for a village: Healing.');
+    expect(pub.container.textContent).not.toContain('1 missing');
   });
 
   test('economics.exportPosture: the posture sentence renders, and a public dossier renders none', () => {

@@ -158,10 +158,6 @@ const RULED = Object.freeze({
     + 'wanderer verb controls beneath that.',
   'src/components/new/tabs/UnaffiliatesSection.jsx :: rows.settled':
     'card — the same UnaffiliateCard as the roaming half above; one shape, one ruling.',
-  'src/components/new/tabs/ServicesTab.jsx :: catOrder':
-    'card — a whole service CATEGORY: a toggle header and the list of its services inside.',
-  'src/components/new/tabs/ServicesTab.jsx :: missing':
-    'card — an absence tile, already laid in the two- or three-column grid above it.',
   'src/components/new/tabs/power/PowerStrata.jsx :: matchedGroups':
     'card — a faction group\'s sub-row, rendered INSIDE its faction\'s roster card and indented '
     + 'under it; it belongs to that row rather than being a list of its own.',
@@ -267,10 +263,13 @@ describe('THE NAME-LIST CENSUS — every dossier list of short rows is ruled on'
     // the measurement at landing and they TIGHTEN toward reality; they are never
     // lowered to admit a change. Measured by executing this walk against this tree
     // on 2026-09-19: 27 files, 30 distinct sites, 4 of them ruled `columns`.
+    // 30 -> 28 (BUILD LANE S, 2026-10-30): NOT a pattern change. The chair CUT the Services
+    // tab's Category Status grid (RS-15, RS-17), and its two list sites (`catOrder` tiles,
+    // `missing` tiles) went with it; their rulings are deleted above. Re-measured: 28.
     expect(FILES.length, 'the census tree is empty — has src/components/new/tabs moved?')
       .toBeGreaterThanOrEqual(27);
     expect(SCANNED.length, 'the walk judged almost no list sites — the `.map(` shape it looks for has changed')
-      .toBeGreaterThanOrEqual(30);
+      .toBeGreaterThanOrEqual(28);
     expect(COLUMNED.length, 'no site is ruled `columns` — the registry half has emptied')
       .toBeGreaterThanOrEqual(4);
   });
