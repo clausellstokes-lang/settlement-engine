@@ -466,6 +466,27 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
     expect(out.npcs.find(n => n.id === 'npc_2').personality).toEqual({ flaw: 'proud' });
   });
 
+  it('X-21e, THE ONE EXCEPTION: a criminal or clandestine house\'s card is hideable whole, with its services and its people\'s membership; no other card is', () => {
+    const src = town();
+    expect(isHideable('card:institution:underground-network', src)).toBe(true);
+    expect(isHideable('card:institution:smithy', src)).toBe(false);
+    expect(isHideable('card:npc:npc_11', src)).toBe(false);
+    // A non-criminal house cannot be card-hidden: the delta falls back to its depth.
+    const smithy = applyVeil(src, resolveVeil([], [{ address: 'card:institution:smithy', hidden: true }]));
+    expect(smithy.institutions.map(i => i.name)).toEqual(['Smithy', 'Underground network']);
+    expect('desc' in smithy.institutions[0]).toBe(false);
+    // The criminal house vanishes whole: the card, its service rows, and every NPC's
+    // membership reference to it (the identity floor's one exception).
+    const out = applyVeil(src, resolveVeil([], [{ address: 'card:institution:underground-network', hidden: true }]));
+    expect(out.institutions.map(i => i.name)).toEqual(['Smithy']);
+    expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
+    expect(out.availableServices.criminal).toEqual([]);
+    const d = out.npcs.find(n => n.id === 'npc_11');
+    expect(d.name).toBe('Dalla Njálsson');
+    expect('secondaryAffiliation' in d).toBe(false);
+    expect(d.factionAffiliation).toBe('Council');
+  });
+
   it('THE IDENTITY FLOOR can never be hidden: refused, dropped, and spared even by a malformed set', () => {
     for (const k of CARD_KINDS.npc.floor) expect(isHideable(`field:npc:npc_11:${k}`)).toBe(false);
     for (const k of CARD_KINDS.institution.floor) expect(isHideable(`class:institution:${k}`)).toBe(false);
@@ -624,18 +645,21 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
   const rowsOf = (s, cls) => defaultVeilFor(s).filter(d => d.cls === cls).map(d => d.address);
   const project = (s) => applyVeil(s, resolveVeil(defaultVeilFor(s), []));
 
-  it('criminal institution: a town with a thieves\' guild hides its depth (name and category stay); a town without has no such row', () => {
+  it('criminal institution (X-21e): a town with a thieves\' guild hides the house whole; a town without has no such row', () => {
     expect(rowsOf(bailthwaite(), 'criminal-institution')).toEqual(expect.arrayContaining([
+      'card:institution:thieves-guild-chapter',
       "field:institution:thieves-guild-chapter:description", 'field:institution:thieves-guild-chapter:services',
       'field:institution:thieves-guild-chapter:people', 'field:institution:thieves-guild-chapter:function',
     ]));
     expect(rowsOf(temurpolis(), 'criminal-institution')).toEqual([]);
     const out = project(bailthwaite());
-    const guild = out.institutions.find(i => i.name === "Thieves' guild chapter");
+    expect(out.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(out.institutions[0].desc).toBe('One for each neighbourhood.');
+    // Every default is an eye: showing the card brings back its name and category, its depth stays hidden.
+    const shown = applyVeil(bailthwaite(), resolveVeil(defaultVeilFor(bailthwaite()), [{ address: 'card:institution:thieves-guild-chapter', hidden: false }]));
+    const guild = shown.institutions.find(i => i.name === "Thieves' guild chapter");
     expect(guild.category).toBe('Criminal');
     expect('desc' in guild).toBe(false);
-    expect('tags' in guild).toBe(false);
-    expect(out.institutions.find(i => i.category === 'Religious').desc).toBe('One for each neighbourhood.');
   });
 
   it('criminal services category: the classifier category goes whole, and a criminal house\'s rows in other categories go with it', () => {
@@ -646,20 +670,19 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
     expect(project(temurpolis()).availableServices.food.map(r => r.name)).toEqual(['Meals and drink']);
   });
 
-  it('clandestine institution: the declared clandestine/subterranean facets hide the true function; the front (name) stays', () => {
+  it('clandestine institution (X-21e): the declared clandestine/subterranean facets hide the house whole', () => {
     expect(DEFAULT_VEIL_RULES.find(r => r.cls === 'clandestine-institution').select(vikhavn())).toEqual(expect.arrayContaining([
-      'field:institution:underground-network:description', 'field:institution:underground-network:function',
-      'field:institution:underground-city:description',
+      'card:institution:underground-network', 'field:institution:underground-network:description',
+      'field:institution:underground-network:function', 'card:institution:underground-city',
     ]));
     // A criminal house with no declared facet is not clandestine (it is still criminal).
     expect(DEFAULT_VEIL_RULES.find(r => r.cls === 'clandestine-institution').select(bailthwaite())).toEqual([]);
-    const out = project(vikhavn());
-    expect(out.institutions.map(i => i.name)).toEqual(['Underground network', 'Underground city']);
-    expect(out.institutions.every(i => !('desc' in i) && !('facets' in i))).toBe(true);
+    expect(project(vikhavn()).institutions).toEqual([]);
   });
 
   it('covert brokerage: the catalog\'s illegal house (brokerage keys plus the criminal tag) is hidden; the licensed listening post is shown', () => {
-    expect(rowsOf(bailthwaite(), 'covert-brokerage')).toEqual(expect.arrayContaining(['field:institution:whisper-market:description']));
+    expect(rowsOf(bailthwaite(), 'covert-brokerage')).toEqual(expect.arrayContaining(['card:institution:whisper-market', 'field:institution:whisper-market:description']));
+    expect(isHideable('card:institution:listening-post', { institutions: [listeningPost] })).toBe(false);
     const withPost = { ...temurpolis(), institutions: [listeningPost] };
     expect(rowsOf(withPost, 'covert-brokerage')).toEqual([]);
     expect(project(withPost).institutions[0].desc).toBe('A small licensed register office among much larger trades.');

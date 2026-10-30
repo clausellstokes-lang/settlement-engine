@@ -18,6 +18,7 @@
  *                                  depth field of this card" and expands into field
  *                                  addresses; the card address itself never enters the
  *                                  hidden set, and the card's identity fields stay.
+ *                                  ONE EXCEPTION, below (X-21e).
  *   field:<kind>:<id>:<field>      a sentence: one depth fact at its one home
  *   class:<kind>:<field>           a field-class master switch ("Secrets: hidden for
  *                                  everyone"); per-card field eyes are its exceptions
@@ -27,6 +28,17 @@
  * place passage is composed from) and every card's identity fields (CARD_KINDS[k].floor)
  * have no address. `isHideable` refuses them, `resolveVeil` drops them, and `applyVeil`
  * never deletes them even if a malformed set names them.
+ *
+ * ── X-21e, THE ONE EXCEPTION TO THE EXISTENCE FLOOR (the chair, 2026-10-30) ──────────
+ * A CRIMINAL OR CLANDESTINE HOUSE may be hidden WHOLE: an institution whose classifier
+ * category is `criminal`, whose record declares a clandestine/hidden flag (the facets read
+ * through facetOf), or which the catalog marks an illegal brokerage. For that class only,
+ * `card:institution:<id>` is admitted (`isHideable(address, settlement)` checks the data;
+ * `applyVeil` re-checks it), and it is hidden BY DEFAULT. Hiding it removes the card, its
+ * service rows in every category, and every NPC's membership reference to it
+ * (`institution`, `secondaryAffiliation`, `factionAffiliation`, `linkedInstitutionIds`
+ * naming it): the floor yields for those references and nowhere else. A card delta on any
+ * other house (and on every other kind) still reads as its depth, never the card.
  *
  * ── THE VEIL ONLY REMOVES (X-21 (d)) ────────────────────────────────────────────────
  * `applyVeil` takes an ALREADY-PROJECTED public settlement (toPublicSafe's output) and
@@ -312,6 +324,35 @@ export const GROUPING_REMOVERS = Object.freeze({
   'block:housekeeping.decrees': (s) => { delete s.decrees; delete s.dmLayer; },
 });
 
+// ── THE HOUSE CLASSES (the defaults read them; X-21e admits their cards) ──────────
+
+/** @param {Rec} inst @returns {boolean} */
+function isCriminalInstitution(inst) {
+  return str(inst.category).toLowerCase() === 'criminal' || str(inst.priorityCategory).toLowerCase() === 'criminal';
+}
+
+/**
+ * The declared clandestine/hidden flags the data carries, read through the ONE facet
+ * chokepoint (cohesionWeave.js facetOf): the catalog's `clandestine` kind, the custom
+ * `institutionFunction: 'clandestine'` spelling, and the `subterranean` kind (the
+ * catalog's underground network, catacomb sanctuary and black-market bazaar rows).
+ * @param {Rec} inst @returns {boolean}
+ */
+function isClandestineInstitution(inst) {
+  return facetOf(inst, 'clandestine') === 'clandestine'
+    || facetOf(inst, 'institutionFunction') === 'clandestine'
+    || facetOf(inst, 'subterranean') === 'subterranean';
+}
+
+/**
+ * X-21e: the one class of card that may be hidden whole. Criminal by the classifier
+ * category, clandestine by a declared facet, or an illegal brokerage by the catalog.
+ * @param {Rec} inst @returns {boolean}
+ */
+function isHideableHouse(inst) {
+  return isCriminalInstitution(inst) || isClandestineInstitution(inst) || brokerageLegalityOf(inst) === 'illegal';
+}
+
 // ── ADDRESSES ─────────────────────────────────────────────────────────────────────
 
 /**
@@ -352,12 +393,16 @@ export function parseVeilAddress(address) {
 
 /**
  * May this address enter the hidden set? Groupings must be registered; card addresses
- * never (existence is public: a card-level DELTA expands to fields instead); field and
- * class addresses must name a known kind and a field off its identity floor.
+ * never (existence is public: a card-level DELTA expands to fields instead), EXCEPT a
+ * criminal or clandestine institution's card (X-21e): with a settlement, the named house
+ * must qualify; without one the grammar admits `card:institution:*` and `applyVeil`
+ * enforces the class against the data. Field and class addresses must name a known kind
+ * and a field off its identity floor.
  * @param {unknown} address
+ * @param {unknown} [settlement]
  * @returns {boolean}
  */
-export function isHideable(address) {
+export function isHideable(address, settlement) {
   const p = parseVeilAddress(address);
   if (!p) return false;
   if (p.type === 'field' || p.type === 'class') {
@@ -369,7 +414,12 @@ export function isHideable(address) {
     if (keys && keys.some(k => kind.floor.includes(k))) return false;
     return true;
   }
-  if (p.type === 'card') return false;
+  if (p.type === 'card') {
+    if (p.kind !== 'institution') return false;
+    if (settlement === undefined) return true;
+    const s = isRec(settlement) ? settlement : {};
+    return cardsOf(s, 'institution').some(i => CARD_KINDS.institution.idOf(i) === p.id && isHideableHouse(i));
+  }
   return typeof address === 'string' && Object.prototype.hasOwnProperty.call(GROUPING_REMOVERS, address);
 }
 
@@ -399,24 +449,6 @@ const STATIC_DEFAULT_GROUPINGS = Object.freeze([
 ]);
 
 
-/** @param {Rec} inst @returns {boolean} */
-function isCriminalInstitution(inst) {
-  return str(inst.category).toLowerCase() === 'criminal' || str(inst.priorityCategory).toLowerCase() === 'criminal';
-}
-
-/**
- * The declared clandestine/hidden flags the data carries, read through the ONE facet
- * chokepoint (cohesionWeave.js facetOf): the catalog's `clandestine` kind, the custom
- * `institutionFunction: 'clandestine'` spelling, and the `subterranean` kind (the
- * catalog's underground network, catacomb sanctuary and black-market bazaar rows).
- * @param {Rec} inst @returns {boolean}
- */
-function isClandestineInstitution(inst) {
-  return facetOf(inst, 'clandestine') === 'clandestine'
-    || facetOf(inst, 'institutionFunction') === 'clandestine'
-    || facetOf(inst, 'subterranean') === 'subterranean';
-}
-
 /**
  * One table, one row per default class. Each row derives its addresses from the DATA
  * (classifier category, declared facets, catalog service keys, present fields), never
@@ -431,19 +463,22 @@ export const DEFAULT_VEIL_RULES = Object.freeze([
     cls: 'covert-brokerage',
     reason: 'X-21c: a covert information brokerage (the catalog marks it illegal: brokerage service keys plus the criminal tag)',
     select: (s) => recs(s.institutions).filter(i => brokerageLegalityOf(i) === 'illegal')
-      .flatMap(i => ['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+      .flatMap(i => [`card:institution:${CARD_KINDS.institution.idOf(i)}`,
+        ...['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)]),
   },
   {
     cls: 'clandestine-institution',
-    reason: "X-21c: a clandestine or underground institution's true function (its front, the name, stays)",
+    reason: 'X-21c/X-21e: a clandestine or underground institution, hidden whole',
     select: (s) => recs(s.institutions).filter(isClandestineInstitution)
-      .flatMap(i => ['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+      .flatMap(i => [`card:institution:${CARD_KINDS.institution.idOf(i)}`,
+        ...['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)]),
   },
   {
     cls: 'criminal-institution',
-    reason: "X-21c: a criminal institution's description, function, services and people (its name and category stay: existence is public)",
+    reason: "X-21c/X-21e: a criminal institution, hidden whole with its services and its people's membership (every part an eye)",
     select: (s) => recs(s.institutions).filter(isCriminalInstitution)
-      .flatMap(i => ['description', 'function', 'services', 'people'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+      .flatMap(i => [`card:institution:${CARD_KINDS.institution.idOf(i)}`,
+        ...['description', 'function', 'services', 'people'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)]),
   },
   {
     cls: 'criminal-faction',
@@ -494,7 +529,7 @@ export function defaultVeilFor(settlement) {
   for (const [address, cls, reason] of STATIC_DEFAULT_GROUPINGS) out.set(address, { address, cls, reason });
   for (const rule of DEFAULT_VEIL_RULES) {
     for (const address of rule.select(s)) {
-      if (!out.has(address) && isHideable(address)) out.set(address, { address, cls: rule.cls, reason: rule.reason });
+      if (!out.has(address) && isHideable(address, s)) out.set(address, { address, cls: rule.cls, reason: rule.reason });
     }
   }
   return [...out.values()];
@@ -530,7 +565,9 @@ export function resolveVeil(defaults, shareDeltas) {
     if (!delta || typeof delta.hidden !== 'boolean') continue;
     const p = parseVeilAddress(delta.address);
     if (!p) continue;
-    const targets = p.type === 'card' ? cardDepthAddresses(p.kind, p.id) : [delta.address];
+    // X-21e: an institution card stays a card address (applyVeil checks its class);
+    // every other card delta reads as the card's depth.
+    const targets = p.type === 'card' && p.kind !== 'institution' ? cardDepthAddresses(p.kind, p.id) : [delta.address];
     for (const t of targets) {
       if (!isHideable(t)) continue;
       const isField = t.startsWith('field:');
@@ -573,12 +610,14 @@ function dropField(card, kind, field) {
 export function applyVeil(publicSettlement, veil) {
   const s = /** @type {Rec} */ (deepClone(isRec(publicSettlement) ? publicSettlement : {}));
   const entries = [...(veil || [])];
-  const hidden = entries.filter(isHideable);
+  const hidden = entries.filter(a => isHideable(a));
   /** @type {Set<string>} field addresses a class switch must spare */
   const exceptions = new Set(entries
     .filter(a => typeof a === 'string' && a.startsWith(VEIL_EXCEPTION_PREFIX))
     .map(a => a.slice(VEIL_EXCEPTION_PREFIX.length))
-    .filter(isHideable));
+    .filter(a => isHideable(a)));
+  /** @type {Set<string>} institution ids named by a card address (X-21e) */
+  const cardHides = new Set();
   /** @type {string[]} */
   const groupings = [];
   /** @type {Map<string, Set<string>>} kind -> fields hidden on every card */
@@ -589,6 +628,7 @@ export function applyVeil(publicSettlement, veil) {
     const p = parseVeilAddress(a);
     if (!p) continue;
     if (p.type === 'tab' || p.type === 'block') { groupings.push(a); continue; }
+    if (p.type === 'card') { cardHides.add(p.id); continue; }
     if (p.type === 'class') {
       if (!classes.has(p.kind)) classes.set(p.kind, new Set());
       /** @type {Set<string>} */ (classes.get(p.kind)).add(p.field);
@@ -602,12 +642,34 @@ export function applyVeil(publicSettlement, veil) {
     }
   }
 
+  // X-21e: a card-hidden house goes whole only when the data puts it in the class; any
+  // other house named by a card address falls back to its depth eyes.
+  const instKind = CARD_KINDS.institution;
+  /** @type {Set<string>} names of houses removed whole */
+  const goneHouses = new Set();
+  /** @type {Set<string>} ids of houses removed whole */
+  const goneIds = new Set();
+  if (cardHides.size) {
+    for (const inst of cardsOf(s, 'institution')) {
+      const id = instKind.idOf(inst);
+      if (!cardHides.has(id)) continue;
+      if (isHideableHouse(inst)) {
+        goneIds.add(id);
+        if (str(inst.name)) goneHouses.add(str(inst.name));
+        continue;
+      }
+      if (!fields.has('institution')) fields.set('institution', new Map());
+      const byId = /** @type {Map<string, Set<string>>} */ (fields.get('institution'));
+      if (!byId.has(id)) byId.set(id, new Set());
+      for (const f of Object.keys(instKind.fields)) /** @type {Set<string>} */ (byId.get(id)).add(f);
+    }
+  }
+
   // Virtual institution eyes, read BEFORE any card is touched (ids derive from names).
   /** @type {Set<string>} */
-  const servicesOf = new Set();
+  const servicesOf = new Set(goneHouses);
   /** @type {Set<string>} */
   const peopleOf = new Set();
-  const instKind = CARD_KINDS.institution;
   for (const inst of cardsOf(s, 'institution')) {
     const id = instKind.idOf(inst);
     const name = str(inst.name);
@@ -646,6 +708,20 @@ export function applyVeil(publicSettlement, veil) {
   if (peopleOf.size) {
     for (const npc of cardsOf(s, 'npc')) {
       if (peopleOf.has(str(npc.institution))) delete npc.institution;
+    }
+  }
+  // X-21e: a house removed whole takes its card and every membership reference to it.
+  if (goneHouses.size || goneIds.size) {
+    if (Array.isArray(s.institutions)) {
+      s.institutions = s.institutions.filter(i => !(isRec(i) && goneIds.has(instKind.idOf(i)) && isHideableHouse(i)));
+    }
+    for (const npc of cardsOf(s, 'npc')) {
+      for (const key of ['institution', 'secondaryAffiliation', 'factionAffiliation']) {
+        if (goneHouses.has(str(npc[key]))) delete npc[key];
+      }
+      if (Array.isArray(npc.linkedInstitutionIds)) {
+        npc.linkedInstitutionIds = npc.linkedInstitutionIds.filter(v => !(goneIds.has(str(v)) || goneHouses.has(str(v))));
+      }
     }
   }
 

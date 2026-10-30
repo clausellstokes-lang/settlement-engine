@@ -612,10 +612,9 @@ describe('gallery.js — the gallery veil (X-21, W2-VEIL-A U3)', () => {
 
   it('a share marked with a veil renders through it: the defaults hide, a delta shows', async () => {
     const dossier = await fetchRow(dossierRow({ $veil: { v: 1, deltas: [{ address: 'block:services.criminal', hidden: false }] } }));
-    const guild = dossier.settlement.institutions.find(i => i.category === 'Criminal');
-    expect(guild.name).toBe("Thieves' guild chapter");
-    expect('desc' in guild).toBe(false);
-    expect(dossier.settlement.institutions.find(i => i.category === 'Religious').desc).toBe('One for each neighbourhood.');
+    // X-21e: the criminal house is hidden whole by default; the church stays.
+    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(dossier.settlement.institutions[0].desc).toBe('One for each neighbourhood.');
     // The DM's delta flipped one default eye back to shown.
     expect(dossier.settlement.availableServices.criminal).toHaveLength(1);
     expect(dossier.settlement.galleryVeil.hidden.includes('tab:plot_hooks')).toBe(true);
