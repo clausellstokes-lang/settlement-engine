@@ -168,6 +168,24 @@ describe('Z_LAYERS stacking manifest (M10 class)', () => {
     expect(zOf('src/components/FeedbackWidget.jsx')).toBe(layers.feedback);
     expect(layers.coach).toBeLessThan(layers.feedback);
   });
+
+  // X-22 (the owner, 2026-10-30: the Surveyor is "a simple chat interface floating as a
+  // pop-up"). The chat log floats on the floatingPanel layer, UNDER the coach and the
+  // feedback panel, and it is NON-modal: the DM reads the dossier beside it, so the shell
+  // never claims aria-modal and its lifecycle is the non-modal dismiss, supplied by the door.
+  test('X-22: the Surveyor chat floats on the floatingPanel layer and never claims modality', () => {
+    const codeOf = (file) => componentFiles.find((f) => f.rel === file).code;
+    const shell = codeOf('src/components/surveyor/SurveyorTextIntentShell.jsx');
+    const door = codeOf('src/components/surveyor/SurveyorDoor.jsx');
+    const zs = [...shell.matchAll(/zIndex:\s*(\d+)/g)].map((m) => Number(m[1]));
+    expect(zs.length).toBeGreaterThan(0);
+    expect(new Set(zs)).toEqual(new Set([layers.floatingPanel]));
+    expect(layers.floatingPanel).toBeLessThan(layers.coach);
+    expect(shell).toMatch(/position:\s*'fixed'/);
+    expect(shell).not.toMatch(/aria-modal\s*=/);
+    expect(door).toMatch(/useDialogDismiss\(/);
+    expect(door).not.toMatch(/useDialogFocusTrap\(/);
+  });
 });
 
 // ── 2. Keyboard-reachable: no mouse-only ACTIVATION ──────────────────────────
