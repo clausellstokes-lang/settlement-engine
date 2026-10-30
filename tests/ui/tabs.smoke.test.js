@@ -163,6 +163,24 @@ smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
 
+describe('DMCompassTab shape (chair ruling, RULINGS-T1 DM Compass)', () => {
+  test('one name ("Guidance"), the four panels, and no coaching captions under them', () => {
+    const { container } = render(e(DMCompassTab, { settlement: {
+      name: 'X',
+      dmCompass: { hooks: ['Hook fixture one.'], redFlags: ['Flag fixture.'], twist: 'Twist fixture.' },
+      identityMarkers: ['Marker fixture.'],
+      frictionPoints: [{ who: 'Who fixture', what: 'What fixture.' }],
+      connectionsMap: [{ from: 'From fixture', nature: 'owes', to: 'To fixture' }],
+    } }));
+    const text = container.textContent || '';
+    for (const title of ['Guidance', 'Identity Markers', 'Friction Points', 'Connections Map']) expect(text).toContain(title);
+    expectAbsentWithAnchor(text, 'DM Compass', 'Guidance', 'the section kept a second name for the tab');
+    expectAbsentWithAnchor(text, 'Concrete details to drop into a scene', 'Marker fixture.', 'the Identity Markers caption is back');
+    expectAbsentWithAnchor(text, 'Surface them in scenes', 'What fixture.', 'the Friction Points caption is back');
+    expectAbsentWithAnchor(text, 'A map for the table', 'To fixture', 'the Connections Map caption is back');
+  });
+});
+
 // Multi-prop tabs — these take additional slices alongside `settlement`.
 smokeTab('PowerTab',    PowerTab,    s => ({ powerStructure: s.powerStructure, settlement: s }),
   { powerStructure: null, settlement: { name: 'X' } });
