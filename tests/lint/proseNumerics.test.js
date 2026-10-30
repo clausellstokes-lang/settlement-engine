@@ -495,10 +495,15 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // categories, `{unaffiliated}` 198 -> 254). Ceilings fall with the debt: total 218 -> 214,
 // floatInterpolation 147 -> 145, percentToken 54 -> 52.
 // U6b (the launch teaser's pill import, X-7b): RumorsTab.jsx 68 -> 69, a pure line move.
-const REVIEWED_TOTAL_CEILING = 214;
+// ⭐ U7 IS A CURE (the print half of F6): FaithWar.jsx's living pantheon prints the share as
+// its band, so `{d.share}` float + percent at :362 leave; the contest odds re-address 370 ->
+// 383 (both categories) and the belief row 440 -> 453 (three rows, the band-mirror function
+// above them). Ceilings fall: total 214 -> 212, floatInterpolation 145 -> 144, percentToken
+// 52 -> 51.
+const REVIEWED_TOTAL_CEILING = 212;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 145,
-  percentToken: 52,
+  floatInterpolation: 144,
+  percentToken: 51,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -839,8 +844,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 215 exceeds reviewed ceiling 214',
-      'floatInterpolation 146 exceeds reviewed ceiling 145',
+      'total 213 exceeds reviewed ceiling 212',
+      'floatInterpolation 145 exceeds reviewed ceiling 144',
     ]);
   });
 

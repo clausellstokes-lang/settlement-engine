@@ -259,12 +259,21 @@ describe('IdentityDailyLife — the magic word-grade with no writer is gone', ()
   test('the rendered chapter prints no MAGIC chip, for a full settlement or a sparse one', () => {
     // A REAL generated village: the sibling chips are the liveness anchor — the anchor row
     // rendered and chose its labels, so the exclusion is a removal and not an empty page.
+    // (The anchor moved DEFENSE -> FOOD with the chair's D1 print half, 2026-10-30: Defense
+    // readiness prints on the Defense chapter, not here.)
     expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
       settlement: villageSettlement, vm: villageVm,
-    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated village');
+    })), 'MAGIC', 'FOOD', 'chapter 02 on a generated village');
     expectAbsentWithAnchor(chipLabels(IdentityDailyLife({
       settlement: metropolisSettlement, vm: metropolisVm,
-    })), 'MAGIC', 'DEFENSE', 'chapter 02 on a generated metropolis');
+    })), 'MAGIC', 'FOOD', 'chapter 02 on a generated metropolis');
+  });
+
+  test('D1 in print: the anchor facts no longer repeat what the Overview strip, Power and Defense print', () => {
+    const labels = chipLabels(IdentityDailyLife({ settlement: villageSettlement, vm: villageVm }));
+    for (const gone of ['GOVERNING', 'PROSPERITY', 'SAFETY', 'DEFENSE']) {
+      expectAbsentWithAnchor(labels, gone, 'FOOD', `chapter 02 anchor ${gone}`);
+    }
     // ⚠ THE THREADBARE SAVE IS NOT ASSERTED HERE, and the reason is the anchor rather than
     // the claim. Its whole anchor-facts panel is gated on having any anchor fact at all, so
     // it renders NO KeyValRow — the collection is legitimately empty, no sibling label

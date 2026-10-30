@@ -86,6 +86,19 @@ function legitimacyBand(v) {
   return { label: 'contested', tone: 'bad' };
 }
 
+// The share reads as its band on screen and in print (chair ruling F6, 2026-10-30). MIRRORS
+// components/settlement/faithPanelModel.js :: shareBandLabel (same cuts): the print surface
+// may not import from src/components (tests/architecture/layerBoundaries.test.js).
+function shareBandLabel(share) {
+  const s = Number(share) || 0;
+  if (s >= 75) return 'nearly the whole town';
+  if (s >= 50) return 'most of the town';
+  if (s >= 35) return 'about half the town';
+  if (s >= 15) return 'a large minority';
+  if (s >= 5) return 'a small following';
+  return 'a handful';
+}
+
 export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   const lw = vm?.liveWorld;
   if (!lw) return null; // dormant ⇒ byte-identical off-state.
@@ -359,7 +372,7 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
                   {d.name}{d.isPatron ? ' (patron)' : ''}
                 </Text>
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], flex: 1 }}>
-                  {d.share}% · {cap(d.standing)} · legitimacy <Text style={{ color: palette[band.tone] }}>{band.label}</Text>
+                  {cap(d.standing)} · {shareBandLabel(d.share)} · <Text style={{ color: palette[band.tone] }}>{band.label}</Text>
                 </Text>
               </View>
             );

@@ -88,10 +88,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           </Text>
           <KeyValRow
             pairs={[
-              a.governingName    ? { label: 'Governing',  value: humanize(a.governingName) } : null,
-              a.prosperity       ? { label: 'Prosperity', value: humanize(a.prosperity) } : null,
+              // Governing, Prosperity and Safety print on Power and the Overview strip, and
+              // Defense readiness on Defense (chair ruling D1's print half, 2026-10-30).
               a.complexity       ? { label: 'Complexity', value: humanize(a.complexity) } : null,
-              a.safety           ? { label: 'Safety',     value: humanize(a.safety) } : null,
             ].filter(Boolean)}
           />
           <KeyValRow
@@ -110,7 +109,6 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
                   : (a.foodDeficit != null || a.foodSurplus != null)
                     ? { label: 'Food',  value: 'Balanced' }
                     : null,
-              a.defenseLabel     ? { label: 'Defense',   value: humanize(a.defenseLabel) } : null,
               a.defenseScoreAvg != null ? { label: 'Score avg', value: smart(a.defenseScoreAvg) } : null,
               /* ⛔ THE `MAGIC` CHIP IS GONE, AND IT IS A DELETION RATHER THAN A REPAIR.
                  It printed `humanize(a.magicalCapability)`, and `defenseProfile.magicalCapability`
