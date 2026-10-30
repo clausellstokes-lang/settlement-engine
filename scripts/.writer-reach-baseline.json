@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "a5c95813e7ab08ae3b8a1e7a63f53f60817d66a4",
+ "frozenAtSha": "2d6e6a3a58e39213349fdf1307fb3f37e1c3bfaa",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -23,8 +23,8 @@
   "transitionCount": 15248
  },
  "shapesDigest": "7f81feebcd3ecfde04435db8dbc4a6538aa11083579131235e7943d48f7d681e",
- "detectorDigest": "7b4ca40b4ad4737f761bce08dd865107cba14f2033cecfcf16e6811bc0ce93bb",
- "verdictDigest": "ce2f905241fe2f17a25bb1e2c77ae6890198fbad021efb3afd0aca379f8dcb9b",
+ "detectorDigest": "64e2987d693057748ce2d26693644dd7d3eb5d0ce41128247634677475868445",
+ "verdictDigest": "3890a1d890df65222a5a050fa0e871affe3a3733a90d8f56b5ff84932e2565b1",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,7 +72,7 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 735,
+  "web-display": 736,
   "web-transitive": 931,
   "dossier-pdf": 430,
   "campaign-pdf": 75,
@@ -91,15 +91,15 @@
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1667,
-  "sites": 39757,
-  "propRead": 37629,
+  "files": 1668,
+  "sites": 39724,
+  "propRead": 37595,
   "elemRead": 0,
-  "destructure": 2113,
+  "destructure": 2114,
   "inOp": 15,
-  "rGrades": 6060,
-  "nGrades": 957298,
-  "resolvedReceivers": 6847
+  "rGrades": 6065,
+  "nGrades": 957348,
+  "resolvedReceivers": 6852
  },
  "registerDigest": "4420c68d29c3515008a649c939874bcbbec5621643cd7a862606ac19454b99e7",
  "pendingSurfaceCeiling": 3,
@@ -14371,7 +14371,7 @@
   "npc2Role on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "strength on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=R",
   "tension on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "type on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
+  "type on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
   "typeName on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "aidBurden on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
   "clientSaveId on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
