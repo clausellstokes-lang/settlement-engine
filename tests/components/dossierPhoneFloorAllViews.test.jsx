@@ -551,7 +551,8 @@ const DESKTOP_BASELINE = Object.freeze({
   // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
   // (moved to Versions) left the page; no token moved.
   "Systems/Outlook":     { measured:  2, sub14:  2 },
-  "Systems/Causes":      { measured:  2, sub14:  2 },
+  // 2 -> 1 (2026-10-30, UX consolidation U8, T2-25): the pressures callout left; the framing is one line.
+  "Systems/Causes":      { measured:  1, sub14:  1 },
   // 1 -> 0 (2026-10-30, UX consolidation U4, T2-26): see EMPTY_VIEWS.
   "Systems/Magic":       { measured:  0, sub14:  0 },
   "World/NPCs":          { measured: 45, sub14: 45 },
@@ -611,7 +612,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
   "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 2 -> 1 (2026-10-30, UX consolidation U8): the pressures callout left.
+  "Systems/Causes":      { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1 -> 0 (2026-10-30, UX consolidation U4): see EMPTY_VIEWS.
   "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 },
   "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
