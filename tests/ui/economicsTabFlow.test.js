@@ -1107,3 +1107,49 @@ describe('UX consolidation — Resources (RULINGS-T2 T2-9, T2-10)', () => {
     expect(text).not.toContain('Full export potential'); // anchored: toContain('Abundant') on this render
   });
 });
+
+/**
+ * ⭐ WRITER REACH (composition red at the merged tip, 2026-10-30): the T2-6 fold of Supply Chains
+ * into Economic Flows and the T2-7 cut of Economics' Resource Exploitation dropped the only readers
+ * of two generated facts — a chain's `needIcon` and an exploitation row's `dependsOn` — and
+ * check-writer-reach reported both DARK. They are LIT on the surviving homes, red-first: the
+ * Economic Flows card shows the need icon exactly as the retired diagram did, and the Resources
+ * exploitation card (the one home, T2-10) names what each resource draws on.
+ */
+describe('writer reach — the facts the folded sections carried stay on a page', () => {
+  test('the Economic Flows card renders the chain\'s need icon, from the chain record', () => {
+    useStore.setState({ campaigns: [] });
+    const town = {
+      ...SPEAKING,
+      economicState: {
+        ...SPEAKING.economicState,
+        activeChains: [{
+          chainId: 'mill_test', status: 'impaired', label: 'Milling', needLabel: 'Food', needIcon: '⚙', needColor: '#555',
+          processingInstitutions: ['Mill'], outputs: ['Flour'],
+        }],
+      },
+    };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    const icon = container.querySelector('[data-testid="flow-need-icon"]');
+    expect(icon, 'the need icon is not on the Economic Flows card').toBeTruthy();
+    expect(icon.textContent).toBe('⚙');
+  });
+
+  test('the Resources exploitation card names what each resource draws on (dependsOn)', () => {
+    const town = {
+      ...GROUND,
+      resourceAnalysis: {
+        ...GROUND.resourceAnalysis,
+        exploitation: {
+          fullyExploited: [{ rawResource: 'livestock', exportValue: 'medium', dependsOn: ['grazing land'] }],
+          partiallyExploited: [{ rawResource: 'wool', exportValue: 'high', dependsOn: ['sheep', 'grazing land'] }],
+          unexploited: [{ rawResource: 'animal hides', exportValue: 'low', dependsOn: ['livestock', 'game'], processingInstitutions: ['Tannery'] }],
+        },
+      },
+    };
+    const text = render(e(ResourcesTab, { settlement: town, publicDossier: true })).container.textContent;
+    expect(text).toContain('Draws on: grazing land');
+    expect(text).toContain('Draws on: sheep, grazing land');
+    expect(text).toContain('Draws on: livestock, game');
+  });
+});

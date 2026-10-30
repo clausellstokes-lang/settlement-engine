@@ -166,6 +166,9 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
+                {/* WRITER REACH: the chain's need icon, read from the chain record exactly as the
+                    retired Supply Chains diagram's need header read it (T2-6 fold). */}
+                {chain.needIcon && <span data-testid="flow-need-icon" style={{fontSize: FS['14']}}>{chain.needIcon}</span>}
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{tokenCase(chain.needLabel)}</span>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
