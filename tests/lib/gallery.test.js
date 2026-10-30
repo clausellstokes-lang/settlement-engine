@@ -582,3 +582,64 @@ describe('gallery.js — maps Importable facet (migration 072)', () => {
     }));
   });
 });
+
+// ── THE GALLERY VEIL'S STORAGE AND READER (RULINGS-CROSS X-21; W2-VEIL-A U3) ──────────
+// The delta list rides the reserved key inside gallery_member_overrides (migrations are
+// the owner's hand); the reader projects a marked share through the veil after
+// toPublicSafe, so a hidden fact is absent from what renders.
+describe('gallery.js — the gallery veil (X-21, W2-VEIL-A U3)', () => {
+  const dossierRow = (overrides) => ({
+    id: '7', public_slug: 'veil1', name: 'Bailthwaite', tier: 'city', published_at: '2026-10-30', view_count: 1,
+    gallery_share_dm: false,
+    gallery_member_overrides: overrides,
+    data: {
+      name: 'Bailthwaite', tier: 'city', population: 18764,
+      institutions: [
+        { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', desc: 'A chapter of organised crime.', tags: ['criminal'] },
+        { name: 'Parish churches (10-30)', category: 'Religious', priorityCategory: 'religion', desc: 'One for each neighbourhood.', tags: ['religious'] },
+      ],
+      availableServices: { criminal: [{ name: 'Contraband goods', desc: 'Restricted goods.', institution: 'Black market' }] },
+    },
+  });
+  const fetchRow = async (row) => {
+    supabase.rpc
+      .mockResolvedValueOnce({ data: [row], error: null })
+      .mockResolvedValueOnce({ data: null, error: null })
+      .mockResolvedValueOnce({ data: [{ net_votes: 0, voted: false }], error: null })
+      .mockResolvedValueOnce({ data: [], error: null });
+    return fetchPublicDossier(row.public_slug);
+  };
+
+  it('a share marked with a veil renders through it: the defaults hide, a delta shows', async () => {
+    const dossier = await fetchRow(dossierRow({ $veil: { v: 1, deltas: [{ address: 'block:services.criminal', hidden: false }] } }));
+    const guild = dossier.settlement.institutions.find(i => i.category === 'Criminal');
+    expect(guild.name).toBe("Thieves' guild chapter");
+    expect('desc' in guild).toBe(false);
+    expect(dossier.settlement.institutions.find(i => i.category === 'Religious').desc).toBe('One for each neighbourhood.');
+    // The DM's delta flipped one default eye back to shown.
+    expect(dossier.settlement.availableServices.criminal).toHaveLength(1);
+    expect(dossier.settlement.galleryVeil.hidden.includes('tab:plot_hooks')).toBe(true);
+  });
+
+  it('a share exported before the veil (no reserved key) projects exactly as before', async () => {
+    const dossier = await fetchRow(dossierRow({ npc_1: { revealDm: false } }));
+    expect(dossier.settlement.institutions[0].desc).toBe('A chapter of organised crime.');
+    expect(dossier.settlement.galleryVeil).toBe(undefined);
+  });
+
+  it('updateGalleryMetadata keeps the veil\'s deltas (clamped) beside the per-NPC overrides', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', { memberOverrides: {
+      npc_1: { revealDm: false, junk: 1 },
+      $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: true }, { address: 'nonsense', hidden: true }, { address: 'tab:plot_hooks', hidden: 'no' }] },
+    } });
+    expect(update).toHaveBeenCalledWith(expect.objectContaining({
+      gallery_member_overrides: {
+        npc_1: { revealDm: false },
+        $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: true }] },
+      },
+    }));
+  });
+});

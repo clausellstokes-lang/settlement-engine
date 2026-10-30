@@ -742,3 +742,16 @@ export function writeShareVeil(memberOverrides, deltas) {
   out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: rest };
   return out;
 }
+
+/**
+ * The share's projected settlement: defaults derived from the projection itself, the
+ * stored deltas, applied. An unmarked (pre-veil) share is returned unchanged.
+ * @param {Rec} publicSettlement  toPublicSafe's output
+ * @param {unknown} memberOverrides  the share row's gallery_member_overrides
+ * @returns {Rec}
+ */
+export function projectShareVeil(publicSettlement, memberOverrides) {
+  const { marked, deltas } = readShareVeil(memberOverrides);
+  if (!marked) return publicSettlement;
+  return applyVeil(publicSettlement, resolveVeil(defaultVeilFor(publicSettlement), deltas));
+}
