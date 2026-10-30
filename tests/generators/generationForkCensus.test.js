@@ -123,7 +123,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // Then the Voice Program wave 3 (ODQ §934.88), through the signed door (dc8a022e1): 8f5da975... -> f5f19fea..., the arrival scene
 // composed as a place.
 // Then wave 4 block 1 (6990709a0): f5f19fea... -> 2a837ce5..., the arrival hook naming only what the settlement holds.
-const GOLDEN_CONTROL_HASH = '2a837ce5f252e356a049727ac1ba9e9212ab68135c79e6ccc1526c7387433838';
+// 2026-10-30, service category fidelity (RS-1..RS-13, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-30-service-category-fidelity.json): 2a837ce5... -> e49d32f7..., this town's services
+// filed by the registered categories.
+const GOLDEN_CONTROL_HASH = 'e49d32f7c6f3cdcfaed25b8440fdfe854e7c2e260d5fb311579648f39da92a8a';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

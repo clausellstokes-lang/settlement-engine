@@ -18,6 +18,20 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-10-30 — SERVICE CATEGORY FIDELITY (RS-1..RS-13), THROUGH THE SIGNED DOOR (ODQ §934.101; record
+ *   docs/shift-records/2026-10-30-service-category-fidelity.json; the cloud chair signs under the owner's
+ *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).
+ *   460 OF 525 ROWS MOVED; the key set is identical (525 = 525). THE CAUSE, ONE: every authored catalog service
+ *   name is registered in SERVICE_CATEGORY_MAP (serviceCategoryTables.js), so 162 catalog (service, host) pairs
+ *   change bucket (food and drink to Food & Drink, markets to Goods & Crafts, civic/gatekeeping/public order to
+ *   Legal & Financial, maps and scribing to Information, horses and parcels to Transportation). ⚠ STREAM FORKS,
+ *   DISCLOSED: Discreet passage -> criminal forks seeded streams at Underground-network hosts (the crime-scaled
+ *   gate draws before `p`); Parcel forwarding leaving magic now rolls in no-magic worlds, shifting their later
+ *   draws. Measured on the 1000-settlement lane sample (same seeds, HEAD d14c5c56 vs the re-map): 948 of 1000
+ *   settlements' availableServices changed; false notable absences 63 -> 0. Moved in the same shift, one surface
+ *   per commit: dossier-prose-manifest (1,048 rows), espionage-dormancy-fence's constant, and the unregistered
+ *   generationForkCensus control hash, institutionTable count and writerReach digest.
+ *
  * 2026-09-16 — THE GENESIS RE-RECORD, OWNER-SIGNED ("sign the golden", 2026-09-16 ~09:4x EDT, in the chat
  *   of the chair's session f6ac0d98). ALL 525 ROWS OF 525 MOVED, and had stood RED since the em-dash wave
  *   `e3f6029b2` (the voice law: no em dash in any user-facing string; bisected to that car and BANKED at
