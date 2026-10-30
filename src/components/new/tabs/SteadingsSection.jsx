@@ -63,12 +63,9 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
           <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: swatch.danger }}>
             {GRADE_LABEL[grade] || 'Remnant'}
           </div>
-          {desk.remnantLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginBottom: 4 }}>{desk.remnantLine}</div>}
-          <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
-            {grade === 'relic_ruin'
-              ? 'This settlement has died; its stones stand as a relic ruin. The last residents left with the wagons, their fates unresolved. The interior is yours.'
-              : 'This settlement has died; a quiet site marks where it stood. The last residents left with the wagons, their fates unresolved.'}
-          </div>
+          {/* The grade label and ONE line, the desk's (chair ruling T1-11, R2/R1): the fixed
+              "This settlement has died" sentence restated the label and closed by coaching. */}
+          {desk.remnantLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic' }}>{desk.remnantLine}</div>}
         </div>
       ) : null}
 
@@ -78,7 +75,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
             Ancient ruin nearby
           </div>
           <div style={{ fontSize: FS.sm, color: swatch.inkMag, lineHeight: 1.4 }}>
-            The relic ruin of {ancient.name} stands nearby, a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting. Its interior is yours.
+            The relic ruin of {ancient.name} stands nearby, a city fallen {formatCount(ancient.yearsAgo)} years ago, superstition-attracting.
           </div>
           {desk.ruinLine && <div style={{ fontSize: FS.sm, color: swatch.inkMag2, lineHeight: 1.45, fontStyle: 'italic', marginTop: 4 }}>{desk.ruinLine}</div>}
         </div>

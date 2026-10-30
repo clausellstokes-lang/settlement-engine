@@ -86,14 +86,16 @@ describe('G5 first-survey framing — OverviewTab', () => {
     expect(src).toMatch(/Food Security is re-judged as the campaign advances/);
   });
 
-  test('the Structural Issues / Coherence Notes / Suggestions headers carry the vintage', () => {
+  test('the vintage is said ONCE per page: the three warning headers carry no suffix (X-8, chair 2026-10-30)', () => {
+    // Owner-queue #28 requires the frozen-record disclosure at the frozen sites; the chair
+    // read one label per page as satisfying it (RULINGS-CROSS X-8, vetoable). The Systems
+    // Health label is that one; the Structural Issues, Coherence Notes and Suggestions
+    // headers are bare.
     const src = read(OVERVIEW_TAB);
-    expect(src).toMatch(/Structural Issues · First Survey/);
-    expect(src).toMatch(/Coherence Notes · First Survey/);
-    expect(src).toMatch(/Suggestions · First Survey/);
-    // Negative: the bare headers stay dead (word-boundary via the JSX close).
-    expect(src).not.toMatch(/>Structural Issues</);
-    expect(src).not.toMatch(/>Suggestions</);
+    expect(src).toMatch(/>Structural Issues</);
+    expect(src).toMatch(/>Coherence Notes</);
+    expect(src).toMatch(/>Suggestions</);
+    expect((src.match(/first survey/gi) || []).length, 'the page says "first survey" exactly once').toBe(1);
   });
 });
 

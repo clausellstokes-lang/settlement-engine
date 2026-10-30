@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import { stressorsStateProse, crisisBannerRung } from '../../../domain/display/stateProse/stressorsStateProse.js';
+import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
 // owns the §885.3 public gate and the desk's own primary-stress read.
@@ -241,15 +241,29 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionProvenance),
     drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDuration),
   ].map((d) => d?.sentence).filter(Boolean);
+  // ⭐ UNDER A CRISIS THE CONDITION IS THE CRISIS (chair ruling T1-3, rubric R2). Measured on
+  // the v2 sample, conditions draw on exactly the 327 crisis towns and the severity lens
+  // restates the card's summary, so the card carries ONE condition line: the DIRECTION lens
+  // (holding, easing or deteriorating), which is the fact the card lacks. The own block below
+  // stays for a played-world condition with no banner beside it (R7).
+  const conditionCardLine = drawnAtMount(CONDITIONS_MOUNT, stressorProse.conditionDirection)?.sentence
+    || conditionLines[0] || null;
+  // THE PRESSURE SENTENCE has one home per page: under a crisis it is the card's last line
+  // (who controls the response, T1-3); with no crisis it stands alone in the dark box (T1-7),
+  // and it yields when it is the notable connection's phrasing word for word (O-10).
+  const pressureLine = r?.pressureSentence && r.pressureSentence !== r?.prominentRelationship?.phrasing
+    ? r.pressureSentence : null;
 
   // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the
   // §885.3 public gate and every reading the desk needs, because that leaf's blocks land on
   // seven tabs and the registry admits one call site per desk.
   // `healthLines` is deliberately NOT taken: its position glances (owner order 2026-09-17),
   // so it is always empty, and the Systems Health section renders no sentence list.
+  // `conflictLines`, `warningLines` and `connectionLines` are no longer taken (chair rulings
+  // T1-6, T1-9, T1-10): their registry rows glance, so the reader draws no sentence there and
+  // the rows beside them (conflict rows, warning rows, the phrasing) are the one home.
   const {
-    conflictLines, warningLines, originLines, siteLines, situationLine,
-    connectionLines, populationLine,
+    originLines, siteLines, situationLine, populationLine,
     // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
     // annex's own named reader and it imports out of a worldPulse module, so the cost
     // belongs in this lazy tab chunk rather than in a leaf six tabs share.
@@ -333,33 +347,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
               </div>
               <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
               <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
-              {(() => {
-                // DS-STR-1, per banner. The desk keys on v.type — the stable machine
-                // identity — never on the label, because two of the fifteen labels differ
-                // from their pool key and a label route would darken them silently.
-                //
-                // ⛔ AN EMPTY DESK SEED MUST STAY EMPTY THROUGH THE JOIN (the promise's own
-                // degenerate case). `deskSeed` is written `String(r?._seed ?? r?.id ?? '')`,
-                // so it ADMITS the empty string; a bare `${deskSeed}::${v.type}` then hands
-                // the kernel `"::famine"`, which is TRUTHY, so `drawVariant`'s seedless line
-                // (`if (!seed) return eligible[0]`, kernel law 4 — canonical-at-zero) never
-                // runs and the banner is drawn by a hash of a literal. Measured on the shipped
-                // corpus: 26 of the 30 type x audience cells draw a vid other than the
-                // canonical 1 that way. The guard is the estate's own spelling of this —
-                // `marketPrices.js` crierLineFor and `settlementRumors.js` both write
-                // `seed ? hash(`${seed}::${tag}`) : pool[0]` for exactly this reason.
-                // ⚠ NO READ MOVES TODAY, and that is measured rather than assumed: every
-                // production path stamps an id (`normalizeSettlement` mints one from `_seed`
-                // or from content), so `deskSeed` is non-empty even on a gallery import, whose
-                // `_seed` IS nulled. This closes the trap, it does not move the page.
-                const drawn = publicDossier ? null : drawnAtMount(CRISIS_MOUNT, crisisBannerRung(
-                  r, v,
-                  { seed: deskSeed ? `${deskSeed}::${v.type}` : '', audience: deskAudience, tierNoun: deskTierNoun },
-                ));
-                return drawn?.sentence ? (
-                  <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{drawn.sentence}</p>
-                ) : null;
-              })()}
+              {/* DS-STR-1's per-banner rung is CUT (T1-3, R2): it restated the summary above on
+                  every crisis town. The condition's direction and the pressure sentence close
+                  the card instead, each once: the first on the first card, the second on the last. */}
+              {i===0&&conditionCardLine&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0',fontStyle:'italic'}}>{conditionCardLine}</p>}
+              {i===stresses.length-1&&pressureLine&&<p data-testid="overview-crisis-pressure" style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'6px 0 0'}}>{pressureLine}</p>}
             </div>
           </div>
         ))}
@@ -387,7 +379,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           Five lenses over the settlement's first active condition: how bad, which
           way it is moving, what kind it is, whether an event put it there, and
           whether it is running out. Five pools of ONE block at ONE position. */}
-      {conditionLines.length>0&&(
+      {stresses.length===0&&conditionLines.length>0&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
           <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
@@ -495,18 +487,14 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:iHigh?'#8b1a1a':'#a0762a',background:iHigh?'#fdf0f0':'#faf0dc',border:`1px solid ${iHigh?'#e8c0c0':'#d8c080'}`,padding:'0 4px'}}>{iHigh?'High':'Moderate'}</span>
               </div>
               {c.issue&&<p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'2px 0 0',lineHeight:1.3}}>{c.issue}</p>}
-              {/* DS-GEN-2, one line per conflict. The DATUM above is untouched — parties,
-                  badge and issue all still carry their own words; this bands the same
-                  quarrel in the town's voice beside them. */}
-              {conflictLines[i]&&<p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'4px 0 0',fontStyle:'italic'}}>{conflictLines[i]}</p>}
             </div>
           </div>;
         })}
       </Section>}
 
       {/* ── SITUATION (pressure). The arrival scene moved up into THE PLACE (T1-2). ── */}
-      {(r.pressureSentence||situationLine)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.pressureSentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
+      {((stresses.length===0&&pressureLine)||situationLine)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+        {stresses.length===0&&pressureLine&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{pressureLine}</p>}
         {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
             R-DST-W4-g: `arrivalScene` is a first-impression artifact composed
             once at generation and never touched here; this is what the approach
@@ -560,13 +548,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
       {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
         <div style={{...literaryTitle(FS.sm),color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
-        {/* ── DS-REL-2 (overview.notableConnection) ───────────────────────────
-            TWO LENSES AT ONE POSITION: the tie the town names first, and how
-            much of its roll this town's own conditions made. The phrasing below
-            is the DATUM and keeps its own words; these band what having it
-            means. See notableConnectionPoolKey / flagDrivenPoolKey. */}
-        <ProseBlock lines={connectionLines} settlementName={r.name} tier={r.tier}
-          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 5px',fontStyle:'italic'}}/>
+        {/* DS-REL-2's two lenses are CUT (T1-9, R4/R6): they restated the title. The row
+            `overview.notableConnection` glances; the phrasing below is the one home. */}
         <p style={{fontSize: proseFontSize(FS['12.5'],mobile),...serif,color:swatch['#3A2A10'],lineHeight:1.6,margin:0,fontStyle:'italic'}}>{r.prominentRelationship.phrasing}</p>
         {/* Actionable cross-tab jump — restored from the composite's static text
             reference per THE BASE RECONCILIATION MAP SURFACE 1 (master's real
@@ -574,25 +557,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         {onNavigateTab&&<div style={{marginTop:5}}><Button variant="ghost" size="sm" onClick={()=>onNavigateTab('relationships')} style={{padding:'2px 6px'}}>Full relationship web →</Button></div>}
       </div>}
 
-      {/* ── RESOURCE CONTEXT (terrain strengths) ─────────────────────────── */}
-      {(ra.terrain||ra.economicStrengths?.length>0||ra.strategicValue)&&<Section title="Geography & Resources" collapsible defaultOpen={false} accent="#1a5a28">
-        <div style={{display:'flex',gap:12,flexWrap:'wrap'}}>
-          {ra.terrain&&<div style={{flex:'1 1 100px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Terrain</div>
-            <div style={{fontSize:FS.sm,fontWeight:600,color:swatch.inkMag}}>{ra.terrain}</div>
-          </div>}
-          {ra.economicStrengths?.length>0&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strengths</div>
-            <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-              {ra.economicStrengths.slice(0,4).map((s,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E0F0E0'],padding:'1px 6px'}}>{s}</span>)}
-            </div>
-          </div>}
-          {ra.strategicValue&&<div style={{flex:'2 1 160px'}}>
-            <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.success,marginBottom:3}}>Strategic value</div>
-            <div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.4}}>{ra.strategicValue}</div>
-          </div>}
-        </div>
-      </Section>}
+      {/* "Geography & Resources" is CUT (T1-10, R2): the strip's chip carries the terrain and
+          the Resources tab owns the strengths and the strategic value. */}
 
       {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
           Routed through the shared Section primitive so its header reads at the
@@ -602,7 +568,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
           in with Geography). Inner quarter cards keep the composite's craft. */}
       {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
-        {r.spatialLayout.layout&&<p style={{fontSize:proseFontSize(FS.sm,mobile),fontWeight:600,color:swatch.inkMag2,margin:'0 0 10px'}}>{r.spatialLayout.layout}</p>}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
           {r.spatialLayout.quarters.map((q,i)=>(
             <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
@@ -622,12 +587,13 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
         </div>}
         {/* Coherence notes (G5): sole web render site of the generation-frozen
-            coherenceNotes record — the header carries the survey vintage. */}
-        {r.coherenceNotes?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes · First Survey</div>}
+            coherenceNotes record. The survey vintage is said once per page (X-8), by the
+            Systems Health label, so this header and its two siblings carry no suffix. */}
+        {r.coherenceNotes?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Coherence Notes</div>}
         {r.coherenceNotes?.filter(n=>n.severity==='contradiction').map((note,i)=>(
           <div key={i} style={{background:swatch['#FDF4F0'],border:'1px solid #d4a090',borderLeft:'3px solid #8b3a1a',padding:'8px 13px',marginBottom:6,display:'flex',gap:8}}>
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
@@ -639,18 +605,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             <span style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag2,lineHeight:1.5}}>{note.note||Ti(note)}</span>
           </div>
         ))}
-        {/* ── DS-GEN-7, the record disagreeing with itself, in the town's voice ──
-            One position, several pools: the violation list, the suggestion list,
-            and one line per coherence note. The rows above and below keep their
-            own words; this bands what having them MEANS. */}
-        {warningLines.length>0&&(
-          <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'10px 14px',marginBottom:8}}>
-            <ProseBlock lines={warningLines} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-          </div>
-        )}
+        {/* DS-GEN-7's lines are CUT (T1-10, R2): the rows above and below are the record's own
+            words, and the row `overview.warnings` glances. */}
         {r.structuralSuggestions?.length>0&&<div style={{background:swatch['#F4F6FD'],border:'1px solid #c0cce8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px'}}>
-          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions · First Survey</div>
+          <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.info,marginBottom:4}}>Suggestions</div>
           {/* The suggestion reads as two sentences: the reason (period-normalized —
               producers are inconsistent about trailing stops), then the same
               " Consider: …" form the PDF's format.js renders, so the two surfaces

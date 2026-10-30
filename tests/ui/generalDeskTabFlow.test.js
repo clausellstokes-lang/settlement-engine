@@ -43,6 +43,7 @@ import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anch
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { calamityFill } from '../../src/domain/display/stateProse/generalStateProse.js';
+import { crisisBannerPoolKey } from '../../src/domain/display/stateProse/stressorsStateProse.js';
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
 // The two token lists PlotHooksTab derives and hands to the desk — the cap arm below drives
 // the same derivation so the framing it counts is the framing the page is given.
@@ -233,14 +234,24 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       [onPage(siteClause(GROUND), desk.siteLines, SPEAKING), 'DS-GEN-12 the ground (overview.ground)'],
       [onPage(siteClause(MARKET), desk.siteLines, SPEAKING), 'DS-GEN-13 the market (overview.market)'],
       [onPage(siteClause(INSTITUTIONS), desk.siteLines, SPEAKING), 'DS-GEN-17 the roster (overview.institutions)'],
-      // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17:
-      // that position glances, and the arm below pins its silence in the DOM.
-      [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
-      [onPage(WARNING, desk.warningLines, SPEAKING), 'DS-GEN-7 the coherence warning (overview.warnings)'],
-      [onPage(CONNECTION, desk.connectionLines, SPEAKING), 'DS-REL-2 the notable connection (overview.notableConnection)'],
+      // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17,
+      // and DS-GEN-2, DS-GEN-7 and DS-REL-2 left it at the chair's ruling of 2026-10-30
+      // (T1-6, T1-9, T1-10): those positions glance; the arm below pins their silence.
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every Overview position draws privately and is silent on a public dossier');
+  });
+
+  test('DS-GEN-2, DS-GEN-7 and DS-REL-2 print NO sentence beside their rows, even privately (T1-6/T1-9/T1-10)', () => {
+    const priv = renderTab(false);
+    // Each anchor is the datum the cut sentence used to restate, on the same render.
+    expectAbsentWithAnchor(priv, CONFLICT, 'Labor control', 'DS-GEN-2 prints under its conflict row again');
+    expectAbsentWithAnchor(priv, WARNING, 'Structural Issues', 'DS-GEN-7 prints beside the warning rows again');
+    expectAbsentWithAnchor(priv, CONNECTION, 'Mugain and Felix are connected by something neither discusses openly.',
+      'a DS-REL-2 lens prints above the phrasing again');
+    // X-8: the warning headers carry no "First Survey" suffix; one page-level label says it.
+    expectAbsentWithAnchor(priv, 'Structural Issues · First Survey', 'Structural Issues', 'a header suffix is back');
+    expectAbsentWithAnchor(priv, 'Suggestions · First Survey', 'Suggestions', 'a header suffix is back');
   });
 
   test('THE PLACE is one passage: the arrival scene first, then the site lines trimmed to their first clause (T1-2)', () => {
@@ -351,6 +362,57 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       'OverviewTab draws the no-crisis rung inside its crisis block again');
   });
 
+  test('THE CRISIS CARD owns the crisis: no DS-STR-1 rung, one condition line, the pressure sentence last (T1-3)', () => {
+    const configs = [
+      { settType: 'village', culture: 'celtic', stressTypes: ['politically_fractured'] },
+      { settType: 'town', culture: 'germanic', stressTypes: ['famine'] },
+    ];
+    let judged = 0;
+    for (const [i, config] of configs.entries()) {
+      const town = generateSettlementPipeline(config, null, { seed: `crisis-card-${i}`, customContent: {} });
+      const stresses = (Array.isArray(town.stress) ? town.stress : [town.stress]).filter(Boolean);
+      if (!stresses.length || !town.pressureSentence) continue;
+      judged += 1;
+      const { container } = render(e(OverviewTab, {
+        settlement: town, narrativeNote: null, onNavigateTab: () => {},
+        publicDossier: false, playerView: false, worldState: null,
+      }));
+      const text = container.textContent || '';
+      // The pressure sentence prints ONCE, as the last card's last line, not in the dark box.
+      expect(text.split(town.pressureSentence).length - 1, `${town.name}: the pressure sentence prints once`).toBe(1);
+      expect(container.querySelector('[data-testid="overview-crisis-pressure"]')?.textContent).toBe(town.pressureSentence);
+      // The conditions merge into the card: the standalone block is gone under a crisis.
+      expectAbsentWithAnchor(text, 'What the town is living through', 'Active crisis', `${town.name}: the conditions block stands beside the card`);
+      // DS-STR-1's per-banner rung is cut: no member of the banner's pool reaches the page.
+      for (const v of stresses) {
+        const poolKey = crisisBannerPoolKey(v.type);
+        if (!poolKey) continue;
+        for (const member of poolMemberTexts({ leaf: 'stressors', blockId: 'DS-STR-1', poolKey, slots: { settlement: town.name } })) {
+          expectAbsentWithAnchor(text, member, v.label, `${town.name}: the DS-STR-1 rung prints on its card again`);
+        }
+      }
+      cleanup();
+    }
+    expect(judged, 'no generated town carried a crisis and a pressure sentence').toBeGreaterThan(0);
+  });
+
+  test('with no crisis the pressure sentence stands alone, and yields to the notable connection it repeats (T1-7)', () => {
+    const PHRASE = 'Mugain and Felix are connected by something neither discusses openly.';
+    const same = { ...SPEAKING, pressureSentence: PHRASE };
+    const text = render(e(OverviewTab, {
+      settlement: same, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: false, playerView: false, worldState: null,
+    })).container.textContent || '';
+    expect(text.split(PHRASE).length - 1, 'the shared sentence prints once, as the phrasing').toBe(1);
+    cleanup();
+    const own = { ...SPEAKING, pressureSentence: 'Pressure fixture: the council is short three votes.' };
+    const text2 = render(e(OverviewTab, {
+      settlement: own, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: false, playerView: false, worldState: null,
+    })).container.textContent || '';
+    expect(text2).toContain('Pressure fixture: the council is short three votes.');
+  });
+
   test('the gate takes the CORPUS SENTENCES ONLY — every datum on the page survives it', () => {
     const pub = renderTab(true);
     // The conflict row keeps its parties, its badge and its issue; only the banded sentence
@@ -374,14 +436,14 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     // privately, and the six positions around it prove the reader is live.
     expect(drawn.healthLines, 'overview.systemsHealth glances, so no DS-GEN-3 line is drawn').toEqual([]);
     expect(drawn.originLines.length, 'DS-GEN-6 route + tier overlay').toBe(2);
-    expect(drawn.warningLines.length, 'DS-GEN-7').toBeGreaterThan(0);
-    expect(drawn.conflictLines.filter(Boolean).length, 'DS-GEN-2').toBe(1);
     expect(drawn.situationLine, 'DS-GEN-5').toBeTruthy();
-    expect(drawn.connectionLines.length, 'DS-REL-2 both lenses').toBe(2);
-    // ⛔ AND IT DRAWS ONLY WHERE THE DATUM IS. A town with no prominent relationship is a
-    // town whose ties are level, and the position renders nothing rather than a default.
+    // DS-GEN-2, DS-GEN-7 and DS-REL-2 GLANCE since the chair's ruling of 2026-10-30: the
+    // reader draws no sentence there even privately. The conflict list stays INDEX-PAIRED
+    // (one null per conflict row) so a later sentence row cannot slip its pairing.
+    expect(drawn.warningLines, 'overview.warnings glances').toEqual([]);
+    expect(drawn.conflictLines, 'overview.conflicts glances, one null per row').toEqual([null]);
+    expect(drawn.connectionLines, 'overview.notableConnection glances').toEqual([]);
     const level = { ...SPEAKING, prominentRelationship: null, relationships: undefined };
-    expect(generalDeskLines(level, { stresses: [] }).overview.connectionLines).toEqual([]);
     expect(generalDeskLines(level, { stresses: [] }).overview.siteLines.length,
       'the rest of the desk went dark with it').toBe(3);
 
@@ -911,11 +973,13 @@ describe('DS-GEN-8 DRAWS IN THE STEADINGS SECTION — and is silent for a free v
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `DS-GEN-8 ${label} (overview.steadings)`,
     )), 'all three DS-GEN-8 surfaces draw privately and none reaches a public dossier');
-    // ⛔ THE PRESERVE-VERBATIM CLAUSES SURVIVE. The annex marks two phrases as the
-    // never-resolve-a-fate law and the DM's invitation rendered as prose; no variant may
-    // drop either, and the section's own authored banner carries them too.
-    expect(priv).toContain('fates unresolved');
-    expect(priv).toContain('interior is yours');
+    // ⛔ THE BANNER IS THE GRADE LABEL AND ONE LINE, THE DESK'S (chair ruling T1-11). The
+    // section's own fixed sentence ("…has died…fates unresolved…The interior is yours.") and
+    // the ruin banner's "Its interior is yours." are cut; the annex's preserve-verbatim
+    // clauses now live only in the corpus variants that carry them, so a free viewer, who
+    // gets no desk line, sees the label and the ruin's own datum and neither clause.
+    expectAbsentWithAnchor(pub, 'fates unresolved', 'Relic ruin', 'the fixed remnant sentence is back');
+    expectAbsentWithAnchor(pub, 'interior is yours', 'Ancient ruin nearby', 'a fixed "interior is yours" line is back');
     // The DATUM survives the gate: the banner, the ruin line and the steading card all keep
     // their own words; only the corpus sentences go.
     expect(pub).toContain('Relic ruin');

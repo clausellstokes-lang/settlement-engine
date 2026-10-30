@@ -326,8 +326,16 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
+  // rubric R2). Each of these three positions printed a sentence beside rows that already
+  // carry the same fact: DS-GEN-2 restated each conflict row's parties, issue and intensity
+  // (608 of 614 towns), DS-GEN-7 restated the warning rows (396 of 1000), and DS-REL-2's two
+  // lenses restated the "Notable connection" title. The rows stay; the sentences go. The
+  // systemsHealth precedent above, with the same consequence: the block has NO speaking
+  // position until a later registry act gives it one. The print desk follows (printProse.js
+  // routes through drawnAtMount).
   Object.freeze({
-    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'sentence',
+    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'sentence',
@@ -348,7 +356,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'sentence',
+    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
@@ -470,7 +478,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'sentence',
+    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'glance',
   }),
   Object.freeze({
     mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',
