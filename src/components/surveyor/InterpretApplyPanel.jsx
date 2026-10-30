@@ -19,6 +19,12 @@
  * deliberately NOT wired here: turning a compiled proposal into a pending decree instead of a
  * landed command changes a paid surface's behaviour, so it waits behind EM-D1's tier gate and
  * EM-C4b's slice rather than shipping un-gated.
+ * AMENDED (the chair's ruling, 2026-10-30, X-22(d) "confirmed with the gate kept"): the door's
+ * chat now stages compiled proposals as pending decrees on a typed yes
+ * (SurveyorWorkshop.jsx useWorkshopProposal). It is a CALLER OF THE SAME GATE, not a bypass:
+ * it asks EM-D1's canEditSettlement() before EM-C4b's DECREE_ACTIONS.stage, writes nothing
+ * where the account is not admitted, and edit mode still owns approval. This panel's own
+ * Apply path is unchanged.
  */
 
 import { useState, useCallback, useMemo } from 'react';

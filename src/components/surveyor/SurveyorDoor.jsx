@@ -150,8 +150,9 @@ export default function SurveyorDoor({ visible = true }) {
 
   const accept = (proposal) => turn(async () => {
     const out = await proposals.accept(proposal);
-    // No open save: the registry has nowhere to live yet, so the proposal stays open.
-    if (out.refused === 'no_save') pendingRef.current = proposal;
+    // Not admitted to edit mode yet, or no open save: nothing was written, so the proposal
+    // stays open for the yes that can land it.
+    if (out.refused === 'not_admitted' || out.refused === 'no_save') pendingRef.current = proposal;
     return { from: 'surveyor', text: acceptNote(out, proposal.interpretation?.ops || []) };
   });
 

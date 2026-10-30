@@ -82,6 +82,8 @@ function freshStore(extra = {}) {
     activeSaveId: 'save-1',
     creditBalance: 7,
     phase: 'draft',
+    // EM-D1's tier gate, the one edit mode reads: admitted unless an arm says otherwise.
+    canEditSettlement: () => true,
     ...extra,
   };
 }
@@ -547,6 +549,36 @@ describe('SurveyorDoor — X-22(d): a workshop proposal is a message, accepted b
     storeRef.current.activeSaveId = 'save-1';
     typeAndSend('yes');
     await waitFor(() => expect(storeRef.current.settlement.decrees).toHaveLength(1));
+  });
+
+  // THE CHAIR'S RULING (2026-10-30): the hand-off is CONFIRMED WITH THE GATE KEPT. "yes,
+  // add it" calls the same gated writer edit mode uses; where the account's tier does not
+  // admit edit mode, nothing is written and the proposal is noted for when it opens.
+  it('GATE KEPT: where edit mode is not admitted, a yes writes NOTHING and the proposal is noted', async () => {
+    freshStore({ canEditSettlement: () => false });
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    typeAndSend('yes, add it');
+    await waitFor(() => expect(screen.getByRole('log').textContent).toContain('Noted.'));
+    expect(screen.getByRole('log').textContent).toContain('becomes addable when edit mode opens for your account');
+    expect(storeRef.current.settlement.decrees).toEqual([]);
+    // the proposal stays open: once the gate admits the account, the same yes stages it
+    storeRef.current.canEditSettlement = () => true;
+    typeAndSend('yes');
+    await waitFor(() => expect(storeRef.current.settlement.decrees).toHaveLength(1));
+  });
+
+  it('GATE KEPT: a store without the gate reads as NOT admitted (fail closed), never as a bypass', async () => {
+    freshStore({ canEditSettlement: undefined });
+    setEntitled(true);
+    openDoor();
+    typeAndSend(recap);
+    await waitFor(() => screen.getByTestId('surveyor-proposal'));
+    typeAndSend('yes');
+    await waitFor(() => expect(screen.getByRole('log').textContent).toContain('Noted.'));
+    expect(storeRef.current.settlement.decrees).toEqual([]);
   });
 
   it('NO BUTTON INSIDE: with a reply and a proposal in the log, the one control is the close', async () => {

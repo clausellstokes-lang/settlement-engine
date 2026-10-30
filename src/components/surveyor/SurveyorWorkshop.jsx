@@ -27,7 +27,11 @@
  * useWorkshopProposal() below to compile it, shows the proposed ops in its one log, and on
  * the DM's typed yes hands the approved ops to the DECREE REGISTRY through the existing
  * bridge (lib/intent/interpretApply.js stageSurveyorDecrees, injected with the registry's
- * one store write site, editSlice DECREE_ACTIONS.stage). The chat only hands off: every
+ * one store write site, editSlice DECREE_ACTIONS.stage), BEHIND THE SAME GATE edit mode
+ * reads (EM-D1: the store's canEditSettlement(); the chair's ruling, 2026-10-30: "confirmed
+ * with the gate kept"). The chat is a CALLER of that gate, never a bypass: where the account's
+ * tier does not admit edit mode, nothing is written and the proposal is noted until it does,
+ * and a store without the gate reads as not admitted. The chat only hands off: every
  * staged entry is PENDING, and edit mode's registry page owns approval, order and
  * withdrawal. The protected-consent barrier is untouched: a typed yes approves without
  * consent, so reviewInterpretation holds every flagged op back, and the log says which.
@@ -89,7 +93,7 @@ function mintReviewRef() {
  * @returns {{
  *   compile: (text: string) => Promise<{ interpretation: { ops: object[] }, reviewRef: string } | { error: string }>,
  *   accept: (proposal: { interpretation: { ops: object[] }, reviewRef: string }) =>
- *     Promise<{ staged: readonly object[], blocked: object[], refused?: 'no_save' }>,
+ *     Promise<{ staged: readonly object[], blocked: object[], refused?: 'not_admitted'|'no_save' }>,
  * }}
  */
 export function useWorkshopProposal() {
@@ -130,7 +134,12 @@ export function useWorkshopProposal() {
     const { accepted, blocked } = reviewInterpretation(interpretation, decisions);
     const get = useStore.getState;
     const set = useStore.setState;
-    const saveId = get().activeSaveId;
+    // EM-D1'S TIER GATE, the one edit mode reads, asked before anything is written. Fail
+    // closed: a store without the gate is not an admitted one.
+    const state = get();
+    const admitted = typeof state.canEditSettlement === 'function' ? state.canEditSettlement() === true : false;
+    if (!admitted) return { staged: Object.freeze([]), blocked, refused: 'not_admitted' };
+    const saveId = state.activeSaveId;
     if (saveId == null || accepted.length === 0) {
       return { staged: Object.freeze([]), blocked, ...(saveId == null && accepted.length > 0 ? { refused: 'no_save' } : {}) };
     }
@@ -185,6 +194,9 @@ export function ProposalMessage({ ops, costLine = null }) {
  * @returns {string}
  */
 export function acceptNote(out, ops) {
+  if (out?.refused === 'not_admitted') {
+    return 'Noted. This proposal becomes addable when edit mode opens for your account.';
+  }
   if (out?.refused === 'no_save') {
     return 'The decree registry lives on a saved settlement. Save this one, then say yes again.';
   }
