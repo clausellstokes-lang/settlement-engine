@@ -481,10 +481,31 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
 // category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
 // `"line"` value and nothing else.
-const REVIEWED_TOTAL_CEILING = 218;
+// THE DOSSIER CONSOLIDATION, BUILD-T3 (2026-10-30) — PURE LINE MOVES, NO CEILING CHANGE, NO
+// DEBT MOTION. The chair's cuts in the World group remove lines above banked rows in the
+// files that lane owns; each move is path-, category- and snippet-identical, 0 added and
+// 0 removed, census and category counts unchanged. U2 (NPCs, N4 tally cut):
+// npcComponents.jsx 150 -> 146, 157 -> 153. U5 (Daily Life anchor strip trimmed, the
+// unsaved hint and empty state merged): DailyLifeTab.jsx 268 -> 235.
+// ⭐ U6 IS A CURE, NOT A MOVE (chair rulings F3 + F6, 2026-10-30): the merged creed list in
+// FaithSection.jsx prints the share as its band (`shareBandLabel`) and drops the parenthetical
+// "(rightful claim N%)", so FOUR banked rows leave: `{d.share}` float + percent at :184 and
+// `{Math.round(d.legitimacy * 100)}` float + percent at :186. Reviewed row by row; the three
+// survivors re-address (`{d.standing}` 184 -> 240, the bar's aria-label 189 -> 244 both
+// categories, `{unaffiliated}` 198 -> 254). Ceilings fall with the debt: total 218 -> 214,
+// floatInterpolation 147 -> 145, percentToken 54 -> 52.
+// U6b (the launch teaser's pill import, X-7b): RumorsTab.jsx 68 -> 69, a pure line move.
+// ⭐ U7 IS A CURE (the print half of F6): FaithWar.jsx's living pantheon prints the share as
+// its band, so `{d.share}` float + percent at :362 leave; the contest odds re-address 370 ->
+// 383 (both categories) and the belief row 440 -> 453 (three rows, the band-mirror function
+// above them). Ceilings fall: total 214 -> 212, floatInterpolation 145 -> 144, percentToken
+// 52 -> 51.
+// Chair item 3 (the print history chapter reads the X-14b mark): HistoryFounding.jsx 406 -> 420,
+// a pure line move.
+const REVIEWED_TOTAL_CEILING = 212;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 147,
-  percentToken: 54,
+  floatInterpolation: 144,
+  percentToken: 51,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -825,8 +846,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 219 exceeds reviewed ceiling 218',
-      'floatInterpolation 148 exceeds reviewed ceiling 147',
+      'total 213 exceeds reviewed ceiling 212',
+      'floatInterpolation 145 exceeds reviewed ceiling 144',
     ]);
   });
 

@@ -349,19 +349,19 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 150,
+    "line": 146,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 157,
+    "line": 153,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },
   {
     "path": "src/components/new/tabs/DailyLifeTab.jsx",
-    "line": 268,
+    "line": 235,
     "category": "floatInterpolation",
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
@@ -547,7 +547,7 @@
   },
   {
     "path": "src/components/new/tabs/RumorsTab.jsx",
-    "line": 68,
+    "line": 69,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[rumor.confidence] || rumor.confidence}"
   },
@@ -703,49 +703,25 @@
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
-    "category": "floatInterpolation",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
+    "line": 240,
     "category": "floatInterpolation",
     "snippet": "{d.standing}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
-    "category": "percentToken",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 186,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(d.legitimacy * 100)}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 186,
-    "category": "percentToken",
-    "snippet": "{Math.round(d.legitimacy * 100)}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 189,
+    "line": 244,
     "category": "floatInterpolation",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 189,
+    "line": 244,
     "category": "percentToken",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 198,
+    "line": 254,
     "category": "percentToken",
     "snippet": "{unaffiliated}"
   },
@@ -1189,49 +1165,37 @@
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 362,
-    "category": "floatInterpolation",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 362,
-    "category": "percentToken",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 370,
+    "line": 383,
     "category": "floatInterpolation",
     "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 370,
+    "line": 383,
     "category": "percentToken",
     "snippet": "`${i > 0 ? ', ' : ''}${o.name} ${Math.round(o.odds * 100)}%`"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 440,
+    "line": 453,
     "category": "floatInterpolation",
     "snippet": "{b.confidence}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 440,
+    "line": 453,
     "category": "floatInterpolation",
     "snippet": "{b.readiness}"
   },
   {
     "path": "src/pdf/sections/FaithWar.jsx",
-    "line": 440,
+    "line": 453,
     "category": "floatInterpolation",
     "snippet": "{b.strength}"
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 406,
+    "line": 420,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },

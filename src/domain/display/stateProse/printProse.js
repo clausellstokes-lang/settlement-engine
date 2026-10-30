@@ -95,7 +95,7 @@ import { deriveEscalationClocks } from '../../hookEscalation.js';
 import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
 import { relationshipsDeskLists } from './relationshipsDeskRead.js';
-import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../../components/settlement/faithPanelModel.js';
 import { HOOK_FRAMING } from '../hookFraming.js';
 
 /**
@@ -256,7 +256,7 @@ function worldStressorFor(worldState, settlementId) {
 
 /**
  * The TYPED CAUSE of a patron seat that changed hands, recovered by inverting the producer's
- * own exported map. MIRRORS `FaithTab.jsx:226-240`, including its reason for not reading
+ * own exported map. MIRRORS `FaithTab.jsx:125-139`, including its reason for not reading
  * `config.faithProfile.patronFall.cause` directly: the reader-with-no-writer walker convicts
  * that read, because its observation corpus is deity-free and no observed settlement carries
  * the key. Inverting an exported map adds no observed read at all.
@@ -420,16 +420,18 @@ export function buildPrintProse(settlement, ctx = {}) {
   const magic = defenseMagicDependencyProse(r, opts);
   const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
 
-  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:218-242 ───────────
+  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:113-141 ───────────
   // The war half is print-deferred (see PRINT_DEFERRED_MOUNTS), so the war readings are
   // absent and every war rung comes back null — which is exactly what FaithTab itself gets,
   // because that tab holds no worldState either.
   const faithModel = faithPanelModel(r);
-  const faith = warFaithStateProse(r, {
+  // The SAME trim the screen applies (chair rulings F2/F4): a lens that restates a datum row
+  // the faith panel prints is not drawn (faithPanelModel.js :: trimFaithDeskToPanel).
+  const faith = trimFaithDeskToPanel(warFaithStateProse(r, {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
-  }, opts);
+  }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────
   // ⚠ THREE POSITIONS WEAVE MORE THAN ONE MOUNT, because the SCREEN does: DS-GEN-12/13/17

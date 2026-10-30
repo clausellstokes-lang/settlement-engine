@@ -12,7 +12,8 @@
  *  • PREVIEW mode — a draft/uncampaigned settlement has no mirror, so the tab calls
  *    the SAME pure `deriveFoundingTraditions` view-time and shows the FOUNDING
  *    traditions: what the town has kept since the beginning. Ownership and outcomes
- *    exist only where time exists, so those read "—".
+ *    exist only where time exists, so the preview prints no owner or outcome row at all
+ *    (chair ruling 2026-10-30: two placeholder dashes are labels with no content).
  *
  * Pure read: ZERO settlement-object writes, ZERO store writes. Lazy chunk
  * (OutputContainer lazy-imports this file via dossierLazyTabs) — zero first-paint
@@ -24,7 +25,7 @@ import { deriveFoundingTraditions, describeTraditionWindow, motifGlyph } from '.
 import { mergeCustomFoundingTraditions } from '../../../domain/traditions/customFounding.js';
 import { useStore } from '../../../store/index.js';
 import {
-  BODY, BORDER, CARD, CARD_ALT, FS, GOLD, INK, MUTED, SECOND, sans,
+  BODY, BORDER, CARD, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -42,21 +43,31 @@ function humanizeMotif(id) {
     .join(' ');
 }
 
-/** A tradition row: motif glyph, name, motif chip, window phrase, owner, last outcome, provenance. */
+/** A tradition row: motif glyph, name, motif element, window phrase, and (engine mode
+ *  only) owner, last outcome and provenance. */
 function TraditionRow({ rec, preview }) {
   // THE PHONE PROSE FLOOR — the window phrase and the provenance line. The name,
   // the motif chip and the owner/outcome pair keep their own steps.
   const mobile = useIsMobile();
-  const owner = preview ? '–' : (rec.ownerLabel || rec.ownerKey || '–');
-  const outcome = preview ? '–' : (OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '–');
+  const owner = rec.ownerLabel || rec.ownerKey || '–';
+  const outcome = OUTCOME_LABEL[rec.lastOutcome] || rec.lastOutcome || '–';
   const glyph = motifGlyph(rec.coreMotif?.element);
   const log = Array.isArray(rec.mutationLog) ? rec.mutationLog : [];
   // The mutationLog as a provenance line (design §10): a count, then the most recent
   // changes as their own readable causes (the tradition's history, most recent last).
   const recentCauses = log.map((e) => (e && typeof e.cause === 'string' ? e.cause : '')).filter(Boolean).slice(-3);
+  // The epithet stands in for an empty log on a lit mirror, and in the preview only for a
+  // DM-authored custom tradition (R7): the six generated preview epithets were decoration
+  // restating "founding" (chair ruling 2026-10-30).
   const provenance = log.length > 0
     ? `${log.length} ${log.length === 1 ? 'change' : 'changes'} recorded: ${recentCauses.join('; ')}`
-    : (rec.expression?.epithet || null);
+    : ((preview && !rec.custom) ? null : (rec.expression?.epithet || null));
+  // The motif chip names the ELEMENT; the act is printed only when the name does not
+  // already end in it (every generated name does; an authored one may not).
+  const element = humanizeMotif(rec.coreMotif?.element);
+  const act = humanizeMotif(rec.coreMotif?.act);
+  const actInName = !act || String(rec.name || '').toLowerCase().includes(act.toLowerCase());
+  const motifChip = [element, actInName ? '' : act].filter(Boolean).join(' · ');
   // Rule-framed plate (the composite kill-list reconciliation): the card and its
   // motif stamp fell to the flat idiom — radius struck, the gold tinted wash now a
   // gold-ruled ink stamp (the ResumeChip precedent). The motif tooltip is struck
@@ -80,16 +91,18 @@ function TraditionRow({ rec, preview }) {
           marginLeft: 'auto', color: SECOND, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800,
  whiteSpace: 'nowrap',
         }}>
-          {humanizeMotif(rec.coreMotif?.element)} · {humanizeMotif(rec.coreMotif?.act)}
+          {motifChip}
         </span>
       </div>
       <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         Kept in {describeTraditionWindow(rec.window)}.
       </div>
-      <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
-        <span>Owner: {owner}</span>
-        <span>Last held: {outcome}</span>
-      </div>
+      {!preview && (
+        <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
+          <span>Owner: {owner}</span>
+          <span>Last held: {outcome}</span>
+        </div>
+      )}
       {provenance && (
         <div style={{ marginTop: 6, color: SECOND, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), fontStyle: 'italic', lineHeight: 1.5 }}>
           {provenance}
@@ -135,9 +148,7 @@ export default function TraditionsTab({ settlement }) {
     <div data-testid="traditions-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
         {preview ? (
-          <>The <strong style={{ color: INK }}>founding traditions</strong> of {name}: the observances its
-          people have kept since the beginning, reconstructed from what the town is. Ownership and outcomes
-          come once the world turns.</>
+          <>The <strong style={{ color: INK }}>founding traditions</strong> of {name}.</>
         ) : (
           <>The traditions of {name}, as the years have shaped them.</>
         )}
@@ -147,13 +158,6 @@ export default function TraditionsTab({ settlement }) {
           <TraditionRow key={rec.id} rec={rec} preview={preview} />
         ))}
       </div>
-      {preview && (
-        <p style={{ marginTop: 12, color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), background: CARD_ALT, border: `1px dashed ${BORDER}`, padding: '8px 10px' }}>
-          These are <span style={{ color: GOLD, fontWeight: 800 }}>founding traditions</span>: the core each
-          settlement carries from its origin. In a living campaign they gain owners, hold or fail by the year,
-          and slowly change.
-        </p>
-      )}
     </div>
   );
 }

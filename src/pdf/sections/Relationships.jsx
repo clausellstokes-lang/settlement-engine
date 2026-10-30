@@ -219,7 +219,9 @@ export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
               <Text style={{ ...type.body_em, color: palette.bad, fontSize: pt['10'] }}>
                 {humanize(c.title || (Array.isArray(c.parties) ? c.parties.join(' vs ') : `Conflict ${i + 1}`))}
               </Text>
-              {Array.isArray(c.parties) && (
+              {/* The parties print once: when the card's title IS "A vs B", the "Parties:" line
+                  restated it (chair ruling 2026-10-30, the conflict card's one-fact law). */}
+              {Array.isArray(c.parties) && c.title && (
                 <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 1 }}>
                   Parties: {c.parties.map(p => label(p) || humanize(String(p))).join('  vs  ')}
                 </Text>

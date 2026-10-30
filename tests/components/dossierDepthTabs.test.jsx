@@ -38,8 +38,12 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import { useStore } from '../../src/store/index.js';
-import WarTab, { MARTIAL_CRISIS_TYPES } from '../../src/components/new/tabs/WarTab.jsx';
+import WarTab, { MARTIAL_CRISIS_TYPES, warTabHasContent } from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import { warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
+import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
+import RumorsTab from '../../src/components/new/tabs/RumorsTab.jsx';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 // DESK-4: the arms below assert the RENDERED DOM against the corpus itself rather than
@@ -100,7 +104,7 @@ describe('FaithTab — the constitutional gate (free/anon see NO deity names)', 
   });
 });
 
-// ── §805 FAITH layout — the patron seat, niche occupancy, the realm pantheon ──
+// ── §805 FAITH layout — the patron line, ONE creed list (the embed fixture), the realm pantheon ──
 const liveFaithTown = () => ({
   id: 'home', name: 'Sunhold',
   config: {
@@ -120,47 +124,41 @@ const pantheonCampaign = () => ({
 });
 
 describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm pantheon)', () => {
-  it('renders the patron seat with its legitimacy NOW, and the contested marker', () => {
+  it('the patron line carries the seat\'s legitimacy NOW and the contested marker (F1 merged into F6)', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={liveFaithTown()} />);
-    const seat = screen.getByTestId('faith-patron-seat');
-    expect(seat.textContent).toMatch(/Sunlord Aurelian holds the seat/);
-    expect(seat.textContent).toMatch(/secure/);           // legitimacy 0.8 band
-    // ⭐ THE BAND IS THE WHOLE READING, and the raw percentage that used to sit
-    // beside it is GONE (T11 landing, 2026-08-31). It read "(rightful claim 80%)"
-    // one space after the word "secure" — an engine scalar restating a band word,
-    // the prose-numerics class this estate kills; tests/lint/proseNumerics.test.js
-    // reddened on it at the landing gate. This pin is now the humanization itself.
-    // anchored: the seat's name, band and contested marker are all asserted PRESENT on this same textContent (above and below), so an emptied node cannot pass this absence.
-    expect(seat.textContent).not.toMatch(/\d+%/);
-    expect(seat.textContent).toMatch(/contested/i);
+    // One block names the patron: the separate "patron seat" block is gone.
+    expect(screen.queryByTestId('faith-patron-seat')).toBeNull();
+    const patron = screen.getByTestId('faith-patron');
+    expect(patron.textContent).toMatch(/Sunlord Aurelian/);
+    expect(patron.textContent).toMatch(/Its claim is secure/);          // legitimacy 0.8 band
+    expect(patron.textContent).toMatch(/a rival creed presses the seat/);
+    // anchored: the patron's name, band and contested clause are asserted PRESENT on this same textContent above
+    expect(patron.textContent).not.toMatch(/\d+%/);
   });
 
-  it('renders niche occupancy — who occupies which niche, one row per creed', () => {
+  it('ONE ranked creed list (F3 + F6): niche · standing · following band · legitimacy band', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={liveFaithTown()} />);
+    // The embed fixture carries two live creeds; the page lists each ONCE.
     const rows = screen.getAllByTestId('faith-niche-row');
     expect(rows).toHaveLength(2);
-    expect(rows[0].textContent).toMatch(/peacelike · good: Sunlord Aurelian \(patron\)/);
-    expect(rows[1].textContent).toMatch(/warlike · evil: The Gloam/);
-    // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band
-    // table that collapsed to one word could not pass: share 60 and share 25 are
-    // deliberately either side of the 50 cut. The standing token is the engine's
-    // own finite word, rendered verbatim.
-    expect(rows[0].textContent).toMatch(/ascendant · most of the town/);
-    expect(rows[1].textContent).toMatch(/cult · a large minority/);
-    // T11 landing: `{d.share}%` was copied in shape from FaithSection.jsx:174, which is
-    // BANKED prose-numerics debt rather than a sanctioned idiom — hence the absence below.
-    // anchored: BOTH rows are asserted above to carry their creed name, niche and banded following on this exact joined textContent, so an emptied render cannot pass this.
-    expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%/);
+    expect(screen.queryByTestId('faith-niches')).toBeNull();
+    expect(screen.getAllByTestId('pantheon-standings')).toHaveLength(1);
+    expect(rows[0].textContent).toMatch(/Sunlord Aurelian \(patron\): peacelike · good · ascendant · most of the town · secure/);
+    // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band table that
+    // collapsed to one word could not pass: share 60 and share 25 sit either side of the 50 cut.
+    expect(rows[1].textContent).toMatch(/The Gloam: warlike · evil · cult · a large minority · /);
+    // anchored: BOTH rows are asserted above to carry their creed, niche, standing and bands on this exact joined textContent
+    expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%|rightful claim/);
   });
 
-  it('a static embed (no live profile) renders NO fabricated seat or occupancy', () => {
+  it('a static embed (no live profile) renders NO fabricated seat claim or creed list', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={activePatronTown()} />);
     expect(screen.getByTestId('faith-section')).toBeTruthy();
-    expect(screen.queryByTestId('faith-patron-seat')).toBeNull();
-    expect(screen.queryByTestId('faith-niches')).toBeNull();
+    expect(screen.queryByTestId('faith-patron-claim')).toBeNull();
+    expect(screen.queryByTestId('faith-niche-row')).toBeNull();
   });
 
   it('the realm pantheon mounts for the premium DM alone (never playerView / public / anon)', () => {
@@ -256,6 +254,16 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(muster.textContent).toMatch(/rusted|blooded/);
   });
 
+  it('the deployment is told once, in the units-abroad entry (W6): no "Deployed." line, the condition rides the unit', () => {
+    asWarOwner();
+    const { container } = render(<WarTab settlement={homeTown()} saveId="home" />);
+    const units = screen.getByTestId('war-units');
+    expect(screen.getByTestId('war-unit-condition').textContent).toMatch(/^Condition\./);
+    expectAbsentWithAnchor(container.textContent, 'Deployed.', 'The host, marching on', 'W2 deployment line');
+    expectAbsentWithAnchor(screen.getByTestId('war-muster').textContent, 'Condition.', 'The town under arms', 'W5 condition row');
+    expect(units.textContent).toMatch(/The host, marching on Foehold/);
+  });
+
   it('renders the named war with sides read from the war edges', () => {
     asWarOwner();
     render(<WarTab settlement={homeTown()} saveId="home" />);
@@ -287,12 +295,24 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(screen.queryByTestId('war-unit-truth')).toBeNull();
   });
 
-  it('a non-campaign settlement renders the honest absence note', () => {
+  it('a non-campaign settlement renders the launch teaser: the pill and one paragraph, no controls (X-7b)', () => {
     useStore.__set({ auth: { tier: 'premium' } });
     const { container } = render(<WarTab settlement={{ id: 'lone', name: 'Lonetop' }} saveId={null} />);
-    expect(screen.getByTestId('war-tab')).toBeTruthy();
     expect(screen.queryByTestId('war-units')).toBeNull();
-    expect(container.textContent).toMatch(/outside any live campaign/i);
+    const teaser = screen.getByTestId('war-teaser');
+    expect(teaser.textContent).toContain('Available at launch');
+    expect(teaser.textContent).toMatch(/control center for Lonetop's troops and units out in the world: raise them, deploy them, recall them, and read what came home/);
+    expect(teaser.querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
+    // The old explainer and plain line are gone.
+    expectAbsentWithAnchor(container.textContent, 'War is a campaign story', 'Available at launch', 'the W10 explainer');
+    expectAbsentWithAnchor(container.textContent, 'No war.', 'Available at launch', 'the plain line the teaser replaced');
+  });
+
+  it('a live war picture renders the body, never the teaser', () => {
+    asWarOwner();
+    render(<WarTab settlement={homeTown()} saveId="home" />);
+    expect(screen.getByTestId('war-units')).toBeTruthy();
+    expect(screen.queryByTestId('war-teaser')).toBeNull(); // anchored: war-units is asserted present on the line above
   });
 });
 
@@ -340,7 +360,7 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
     expect(line, 'the private render drew no DS-WAR-1 sentence to test the gate with').toBeTruthy();
     expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-WAR-1 on the war tab');
     // The DATUM is untouched by the gate — the war block's own rows still render.
-    expect(pubText).toMatch(/Deployed\./);
+    expect(pubText).toMatch(/The host, marching on Foehold/);
   });
 
   it('the DORMANT NOTE replaces the plain line only when the whole PAGE-SET is at rest', () => {
@@ -362,12 +382,13 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
   });
 });
 
-describe('WarTab — a martial crisis banner is never contradicted by "at peace" (owner order 2026-09-17)', () => {
-  // The Overview prints an ACTIVE CRISIS card for each `settlement.stress` entry. Measured before
-  // the cure on generated towns: a canonized campaign whose ledger had no war beat printed "This
-  // settlement is at peace and keeps no named faith." under an "Under Siege" card, and a town
-  // outside any campaign printed "there is no war picture to tell".
+describe('WarTab — the martial crisis is the Overview\'s (X-3), and the tab never says peace beside it (owner order 2026-09-17)', () => {
+  // The Overview's crisis card OWNS each `settlement.stress` entry (X-3): the War tab's old
+  // "Active crisis" block restated it verbatim (95/95 martial rows in the 1000-town sample) and
+  // is CUT. The 2026-09-17 order still binds: a town under a martial banner is never told
+  // "No war." or the dormant note, in or out of a campaign.
   const PEACE_WORDS = Object.freeze([
+    'No war.',
     'no host abroad, no siege at the walls',
     'there is no war picture to tell',
   ]);
@@ -375,28 +396,30 @@ describe('WarTab — a martial crisis banner is never contradicted by "at peace"
     id: 'held', name: 'Heldmark', config: {},
     stress: [{ type, label: `Crisis ${type}`, summary: `The ${type} summary as generated.` }],
   });
+  const calm = () => ({ id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'famine', label: 'Famine' }] });
+  const quietCampaign = () => [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }];
 
-  it('in a quiet campaign and outside any campaign, each martial banner shows as an active crisis and nothing says peace', () => {
+  it('no martial banner prints on the War tab, and nothing there says peace beside one', () => {
     expect(MARTIAL_CRISIS_TYPES).toEqual(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
-    const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
-    for (const type of MARTIAL_CRISIS_TYPES) {
-      for (const inCampaign of [true, false]) {
+    for (const inCampaign of [true, false]) {
+      useStore.__reset();
+      useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
+      const calmText = render(<WarTab settlement={calm()} saveId="held" />).container.textContent;
+      cleanup();
+      const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
+      // In a quiet campaign the calm town draws its dormant line (the liveness half); outside
+      // one it draws none, and the teaser is the whole page either way.
+      const peace = dormantLines.find((line) => calmText.includes(line));
+      if (inCampaign) expect(peace, 'a calm town in a quiet campaign drew no dormant line').toBeTruthy();
+      for (const type of MARTIAL_CRISIS_TYPES) {
         useStore.__reset();
-        useStore.__set({
-          auth: { tier: 'premium' },
-          campaigns: inCampaign
-            ? [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]
-            : [],
-          savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
-        });
+        useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
         const { container } = render(<WarTab settlement={bannered(type)} saveId="held" />);
-        const block = screen.getByTestId('war-martial-crisis');
-        const anchor = `Crisis ${type}.`;
-        expect(block.textContent).toContain(anchor);
-        expect(block.textContent).toContain(`The ${type} summary as generated.`);
-        for (const words of [...PEACE_WORDS, ...dormantLines]) {
-          expectAbsentWithAnchor(container.textContent, words, anchor, `${type}, in a campaign: ${inCampaign}`);
-        }
+        expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
+        expect(screen.getByTestId('war-teaser')).toBeTruthy();
+        if (peace) expectPresentThenAbsent(calmText, container.textContent, peace, `${type}, in a campaign: ${inCampaign}`);
+        expectAbsentWithAnchor(container.textContent, `The ${type} summary as generated.`, 'Available at launch', `${type} summary (X-3)`);
+        for (const words of PEACE_WORDS) expectAbsentWithAnchor(container.textContent, words, 'Available at launch', `${type} peace words`);
         cleanup();
       }
     }
@@ -405,21 +428,94 @@ describe('WarTab — a martial crisis banner is never contradicted by "at peace"
   it('a calm town in the same quiet campaign still draws its dormant note (the pool is gated, not deleted)', () => {
     useStore.__set({
       auth: { tier: 'premium' },
-      campaigns: [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }],
+      campaigns: quietCampaign(),
       savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
     });
-    const { container } = render(<WarTab settlement={{ id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'famine', label: 'Famine' }] }} saveId="held" />);
+    const { container } = render(<WarTab settlement={calm()} saveId="held" />);
     const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
     expect(dormantLines.some((line) => container.textContent.includes(line))).toBe(true);
     expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
   });
 });
 
+describe('warTabHasContent — the War tab\'s presence predicate (W10 / X-7)', () => {
+  // The treaty ledger's real shape (treatyDossierTab.test.jsx :: campaignWithTreaty), cut
+  // to one honored term: a campaign whose only martial record is the treaty.
+  const treatyCampaign = () => ({
+    id: 'c-treaty', settlementIds: ['iron', 'weak'],
+    worldState: {
+      tick: 60, canonizedAt: '2026-01-01T00:00:00.000Z',
+      spatialLedgers: { treaties: { 'iron>weak': {
+        parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
+        mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 1, complianceState: 'honored',
+        treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+        terms: [
+          { type: 'non_aggression', family: 'security', magnitude: 1, mintedTick: 12, expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 0.4, complianceState: 'honored', trueState: 'honored', burden01: 0, receipt: 'n' },
+        ],
+        receipts: ['The Peace of Weakmoor.'],
+      } } },
+    },
+  });
+
+  it('is false with no campaign, in a quiet campaign, and for a martial banner the war ledger does not carry', () => {
+    const lone = { id: 'lone', name: 'Lonetop' };
+    expect(warTabHasContent(lone)).toBe(false);
+    expect(warTabHasContent(lone, { saveId: 'lone', campaigns: [] })).toBe(false);
+    const quiet = [{ id: 'c-q', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }];
+    expect(warTabHasContent({ id: 'held', name: 'Heldmark', config: {} }, { saveId: 'held', campaigns: quiet })).toBe(false);
+    const sieged = { id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'under_siege', label: 'Under Siege' }] };
+    expect(warTabHasContent(sieged, { saveId: 'held', campaigns: quiet })).toBe(false);
+    // An uncanonized campaign carries no war picture either.
+    expect(warTabHasContent(homeTown(), { saveId: 'home', campaigns: [{ ...warCampaign(), worldState: { ...warCampaign().worldState, canonizedAt: null } }] })).toBe(false);
+  });
+
+  it('is true for a live war picture, and for a treaty alone', () => {
+    expect(warTabHasContent(homeTown(), { saveId: 'home', campaigns: [warCampaign()] })).toBe(true);
+    // The settlement id stands in for the save id when none is passed (the tab's own rule).
+    expect(warTabHasContent(homeTown(), { campaigns: [warCampaign()] })).toBe(true);
+    const weak = { id: 'weak', name: 'Weakmoor' };
+    expect(warTabHasContent(weak, { saveId: 'weak', campaigns: [treatyCampaign()] })).toBe(true);
+  });
+
+  it('agrees with the tab: true exactly when the tab shows its live body rather than the teaser', () => {
+    const cases = [
+      [{ id: 'lone', name: 'Lonetop' }, null, []],
+      [{ id: 'held', name: 'Heldmark', config: {} }, 'held', [{ id: 'c-q', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]],
+      [homeTown(), 'home', [warCampaign()]],
+      [{ id: 'weak', name: 'Weakmoor' }, 'weak', [treatyCampaign()]],
+    ];
+    const answers = [];
+    for (const [settlement, saveId, campaigns] of cases) {
+      useStore.__reset();
+      // Public dossier: the desk is silent, so the plain line is the only absence text.
+      useStore.__set({ auth: { tier: 'anon' }, campaigns, savedSettlements: WAR_SAVES });
+      render(<WarTab settlement={settlement} saveId={saveId} publicDossier />);
+      const showsNoWar = !!screen.queryByTestId('war-teaser');
+      const present = warTabHasContent(settlement, { saveId, campaigns });
+      expect(present, `${settlement.name}`).toBe(!showsNoWar);
+      answers.push(present);
+      cleanup();
+    }
+    // Both answers are exercised, so the agreement cannot hold vacuously.
+    expect(answers).toEqual([false, false, true, true]);
+  });
+});
+
 describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
-  it('draws the DS-FTH-1 seat sentences and the DS-FTH-3 creed sentences', () => {
+  it('DS-FTH-1 is silent where the panel states each lens (F2); DS-FTH-3 still draws its creed sentence', () => {
     useStore.__set({ auth: { tier: 'anon' } });
+    // The desk DOES draw for this fixture: the patron's rank and the standings lenses.
+    const rungs = warFaithDeskRungs({
+      settlement: liveFaithTown(), publicDossier: false,
+      readings: { faith: faithPanelModel(liveFaithTown()), hasPatron: true },
+    });
+    expect(rungs.patronRank, 'the desk drew no rank lens to trim').toBeTruthy();
+    expect(rungs.standings, 'the desk drew no standings lens to trim').toBeTruthy();
     render(<FaithTab settlement={liveFaithTown()} />);
-    expect(screen.getByTestId('faith-desk-seat').textContent).toContain('Sunlord Aurelian');
+    // ...and both restate a datum row the panel prints (the patron's rank on its line, the
+    // ranked creed list), so the seat paragraph draws neither (chair ruling F2).
+    expect(screen.getByTestId('faith-patron').textContent).toMatch(/\(major\)/);
+    expect(screen.queryByTestId('faith-desk-seat')).toBeNull(); // anchored: the two rungs are asserted present above and the panel's rank row two lines up
     // DS-FTH-3 speaks at `faith.creedStanding`: the patron's standing is `ascendant`.
     const creed = screen.getByTestId('faith-desk-creed');
     const authored = WAR_FAITH['DS-FTH-3'].pools['STANDING: ascendant']
@@ -454,8 +550,8 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
       .find((t) => privText.includes(t));
     expect(line, 'the private render drew no DS-FTH-3 sentence to test the gate with').toBeTruthy();
     expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-FTH-3 on the faith tab');
-    // The DATUM survives: the patron seat, its band and the niche rows are all untouched.
-    expect(pubText).toContain('Sunlord Aurelian holds the seat');
+    // The DATUM survives: the patron line, its band and the creed rows are all untouched.
+    expect(pubText).toContain('Its claim is secure');
     expect(pubText).toMatch(/ascendant/);
   });
 
@@ -469,9 +565,9 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
     const authored = WAR_FAITH['DS-FTH-2'].pools['PRIVATE DOSSIER']
       .map((v) => v.text.replace(/\{settlement\}/g, 'Quietford'));
     expect(authored.some((line) => teaser.textContent.includes(line))).toBe(true);
-    // The standing message keeps its call to action beside it — product furniture, not a
-    // fact about the town, so the two are not twins the way the war note and its fallback are.
-    expect(container.textContent).toMatch(/Assign a patron deity/);
+    // The standing message is the fact alone (chair ruling F8): the call to action is gone.
+    expect(container.textContent).toMatch(/This settlement keeps no named faith\./);
+    expectAbsentWithAnchor(container.textContent, 'Assign a patron deity', 'This settlement keeps no named faith.', 'F8 call to action');
     // And the honest-absence guarantee holds: the seat, the niches and the creed lines are
     // all absent, because there is no creed to name.
     expect(screen.queryByTestId('faith-desk-seat')).toBeNull();
@@ -516,5 +612,28 @@ describe('MagicTab — 10-facet posture + magic-free dormancy', () => {
     const settlement = { config: { magicLevel: 'moderate', primaryDeitySnapshot: { name: 'Sunlord Aurelian', rankAxis: 'major' } } };
     render(<MagicTab settlement={settlement} />);
     expect(screen.getByTestId('magic-deity-coupling').textContent).toMatch(/magic legality/i);
+  });
+});
+
+describe('RumorsTab — the launch teaser (X-7b); the DM-truth sentence keeps its gate', () => {
+  it('with no rumor ledger: the pill and one paragraph; the DM sentence only on the owner view', () => {
+    useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
+    const priv = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" />);
+    const teaser = screen.getByTestId('rumors-teaser').textContent;
+    expect(teaser).toContain('Available at launch');
+    expect(teaser).toContain('What Stillwater hears from the rest of the realm, as it believes it, as word moves along the roads.');
+    const dm = 'Beside each telling, what the DM knows to be true.';
+    expect(teaser).toContain(dm);
+    expect(screen.getByTestId('rumors-teaser').querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
+    const privText = priv.container.textContent;
+    cleanup();
+    for (const props of [{ publicDossier: true }, { playerView: true }]) {
+      useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
+      const { container } = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" {...props} />);
+      expectPresentThenAbsent(privText, container.textContent, dm, `the DM sentence under ${Object.keys(props)[0]}`);
+      expect(container.textContent).toContain('What Stillwater hears');
+      cleanup();
+    }
+    expectAbsentWithAnchor(privText, 'the moment it happens', 'Available at launch', 'U3 contradiction');
   });
 });

@@ -17,7 +17,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx';
+import { ChapterBand, ChapterHeadline } from '../primitives/Dense.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { describeTraditionWindow } from '../../domain/traditions/genesis.js';
 
@@ -61,10 +61,16 @@ export function Traditions({ settlement, narrativeMode }) {
       {mirror.map((rec, i) => {
         const suppressed = !!(rec && rec.suppressedBy);
         const motif = (rec && rec.coreMotif) || {};
-        const owner = rec && (rec.ownerLabel || rec.ownerKey) ? String(rec.ownerLabel || rec.ownerKey) : '–';
+        // Owner and last outcome print only when the mirror carries them: a placeholder dash
+        // is a label with no content (chair ruling 2026-10-30).
+        const owner = rec && (rec.ownerLabel || rec.ownerKey) ? String(rec.ownerLabel || rec.ownerKey) : '';
         const outcome = rec && rec.lastOutcome
           ? (OUTCOME_LABEL[/** @type {string} */ (rec.lastOutcome)] || String(rec.lastOutcome))
-          : '–';
+          : '';
+        // The motif chip names the element; the act prints only when the name lacks it.
+        const act = humanizeMotif(motif.act);
+        const actInName = !act || String((rec && rec.name) || '').toLowerCase().includes(act.toLowerCase());
+        const motifChip = [humanizeMotif(motif.element), actInName ? '' : act].filter(Boolean).join(' · ');
         const prov = provenanceLine(rec || {});
         return (
           <View key={(rec && rec.id) || i} style={{ marginBottom: space.sm }} wrap={false}>
@@ -73,12 +79,12 @@ export function Traditions({ settlement, narrativeMode }) {
                 {(rec && rec.name) || 'An observance'}
               </Text>
               <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted }}>
-                {humanizeMotif(motif.element)} · {humanizeMotif(motif.act)}
+                {motifChip}
                 {suppressed ? ' · set aside under an overlord' : ''}
               </Text>
             </View>
             <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4 }}>
-              Kept in {describeTraditionWindow(rec && rec.window)}. · Owner: {owner} · Last held: {outcome}
+              Kept in {describeTraditionWindow(rec && rec.window)}.{owner ? ` · Owner: ${owner}` : ''}{outcome ? ` · Last held: ${outcome}` : ''}
             </Text>
             {prov && (
               <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.muted, fontStyle: 'italic', lineHeight: 1.4 }}>
@@ -89,10 +95,6 @@ export function Traditions({ settlement, narrativeMode }) {
         );
       })}
 
-      <HairRule />
-      <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic' }}>
-        A settlement&apos;s traditions carry its identity forward. Each holding, or failing, is a mark on the year.
-      </Text>
     </PageChrome>
   );
 }

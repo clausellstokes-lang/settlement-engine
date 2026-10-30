@@ -261,6 +261,8 @@ const CENSUS = (() => {
  * and map/RealmPhoneNotice.jsx (§934.26 car 1). Raising the floors to today's counts would red
  * every in-flight branch that adds an import anywhere inside a 208-file subtree, which is the
  * cost this field was deliberately shaped to avoid.
+ *
+ * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -278,7 +280,10 @@ const ROUTE_BASELINE = Object.freeze({
   // one in a CUT block: ten `chromeFontSize` (the header-strip chips, the Category Status
   // grid) and two `proseFontSize` (the criminal card's note, the footer). Every route that
   // opens the dossier closure falls by exactly those twelve; `bare` holds.
-  '/create':                { roots: 1, files: 165, floored: 738, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // and BUILD-T3 (2026-10-30; the World group's cuts: NPCs N4/N7/N8, Relationships, History,
+  // Daily Life, Traditions, War, Faith) took a further THIRTY-ONE floored sites from the same
+  // dossier closure: /create 738 -> 707, /settlements 979 -> 948, /gallery 782 -> 751 at the merge.
+  '/create':                { roots: 1, files: 165, floored: 707, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -321,13 +326,13 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  '/settlements':           { roots: 1, files: 206, floored: 979, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 948, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 154, floored: 782, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 154, floored: 751, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
@@ -385,7 +390,9 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/surveyor/InterpretApplyPanel.jsx without touching this census. EM-E3 and
   // EM-F3 were measured at zero for this row with their component bodies planted. `bare`
   // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
-  '(shell)':                { roots: 1, files: 61, floored: 144, ruled: 3, bare: 0 },
+  // (shell) floored 144 -> 145 (BUILD LANE T4, 2026-10-30; the owner's word): the post-generate
+  // coach's folded pill is one new, correctly floored chrome site in the app shell. `bare` holds.
+  '(shell)':                { roots: 1, files: 61, floored: 145, ruled: 3, bare: 0 },
 });
 
 /**

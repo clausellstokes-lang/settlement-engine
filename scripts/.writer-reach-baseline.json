@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "fb2c3efda6f35964976b25331685b0f7a2436667",
+ "frozenAtSha": "9749a3da25864f899871c88fc64751a81bf69880",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "e36cf71103fc60ef3095e8e77b0e1f34f2f10aa33b9ec95e0a178f389be22c18",
  "detectorDigest": "64e2987d693057748ce2d26693644dd7d3eb5d0ce41128247634677475868445",
- "verdictDigest": "ce2f905241fe2f17a25bb1e2c77ae6890198fbad021efb3afd0aca379f8dcb9b",
+ "verdictDigest": "9246cf455bdcfd84d2e34caa16c050bb33e2ccf6860fca172e1456d32e9d100f",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 735,
+  "web-display": 736,
   "web-transitive": 931,
-  "dossier-pdf": 430,
+  "dossier-pdf": 431,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 340,
@@ -84,26 +84,26 @@
  "population": {
   "judged": 6992,
   "lit": 576,
-  "litName": 5084,
-  "dark": 1332,
+  "litName": 5096,
+  "dark": 1320,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1667,
-  "sites": 39754,
-  "propRead": 37626,
+  "files": 1668,
+  "sites": 39727,
+  "propRead": 37597,
   "elemRead": 0,
-  "destructure": 2113,
+  "destructure": 2115,
   "inOp": 15,
-  "rGrades": 6060,
-  "nGrades": 957250,
-  "resolvedReceivers": 6847
+  "rGrades": 6067,
+  "nGrades": 957793,
+  "resolvedReceivers": 6854
  },
  "registerDigest": "4420c68d29c3515008a649c939874bcbbec5621643cd7a862606ac19454b99e7",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 483,
+ "reviewableDarkCount": 471,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2708,78 +2708,6 @@
    "key": "landform",
    "shape": "site",
    "rows": 312
-  },
-  {
-   "identity": "last on arcane",
-   "key": "last",
-   "shape": "arcane",
-   "rows": 550
-  },
-  {
-   "identity": "last on civic",
-   "key": "last",
-   "shape": "civic",
-   "rows": 800
-  },
-  {
-   "identity": "last on craft",
-   "key": "last",
-   "shape": "craft",
-   "rows": 600
-  },
-  {
-   "identity": "last on criminal",
-   "key": "last",
-   "shape": "criminal",
-   "rows": 1982
-  },
-  {
-   "identity": "last on foreign",
-   "key": "last",
-   "shape": "foreign",
-   "rows": 648
-  },
-  {
-   "identity": "last on industrial",
-   "key": "last",
-   "shape": "industrial",
-   "rows": 800
-  },
-  {
-   "identity": "last on merchant",
-   "key": "last",
-   "shape": "merchant",
-   "rows": 800
-  },
-  {
-   "identity": "last on military",
-   "key": "last",
-   "shape": "military",
-   "rows": 650
-  },
-  {
-   "identity": "last on noble",
-   "key": "last",
-   "shape": "noble",
-   "rows": 250
-  },
-  {
-   "identity": "last on religious",
-   "key": "last",
-   "shape": "religious",
-   "rows": 800
-  },
-  {
-   "identity": "last on residential",
-   "key": "last",
-   "shape": "residential",
-   "rows": 800
-  },
-  {
-   "identity": "last on stocks",
-   "key": "last",
-   "shape": "stocks",
-   "rows": 7690
   },
   {
    "identity": "lastCandidateTick on economyDrift",
@@ -8114,7 +8042,7 @@
   "dotRank on agent_protege": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "name on agent_protege": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "npcId on agent_protege": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
-  "last on arcane": "web-transitive=N",
+  "last on arcane": "web-display=N web-transitive=N",
   "since on arcane": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on arcane": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "actionFamily on autoApplied": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -8428,7 +8356,7 @@
   "id on checks": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "label on checks": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "status on checks": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
-  "last on civic": "web-transitive=N",
+  "last on civic": "web-display=N web-transitive=N",
   "since on civic": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on civic": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "clock.bread_riot.chain.food_security.animal_husbandry on clockStages": "",
@@ -8618,14 +8546,14 @@
   "vector on corruptionProfile": "dossier-pdf=N foundry=N web-transitive=N",
   "criminalInstitution on corruptTies": "dossier-pdf=R foundry=R web-display=N web-transitive=R",
   "thievesGuild on corruptTies": "",
-  "last on craft": "web-transitive=N",
+  "last on craft": "web-display=N web-transitive=N",
   "since on craft": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on craft": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "desc on crimeTypes": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "type on crimeTypes": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=R web-transitive=N world-book=N",
   "desc on criminal": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on criminal": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "last on criminal": "web-transitive=N",
+  "last on criminal": "web-display=N web-transitive=N",
   "name on criminal": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "since on criminal": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on criminal": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -8994,7 +8922,7 @@
   "storageMonths on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "storageNote on foodSecurity": "",
   "surplusPct on foodSecurity": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
-  "last on foreign": "web-transitive=N",
+  "last on foreign": "web-display=N web-transitive=N",
   "since on foreign": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on foreign": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "age on founding": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
@@ -9120,7 +9048,7 @@
   "priorityNote on incomeSources": "dossier-pdf=N foundry=N web-display=N",
   "source on incomeSources": "campaign-pdf=N dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=N",
   "weight on incomeSources": "dossier-pdf=N foundry=N news=N web-transitive=N",
-  "last on industrial": "web-transitive=N",
+  "last on industrial": "web-display=N web-transitive=N",
   "since on industrial": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on industrial": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "desc on information": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -9400,7 +9328,7 @@
   "prosperityCost on mercenaryMarket": "dossier-pdf=R foundry=R web-transitive=R",
   "shortfall on mercenaryMarket": "dossier-pdf=N foundry=N web-transitive=N",
   "supplement on mercenaryMarket": "dossier-pdf=R foundry=R web-transitive=R",
-  "last on merchant": "web-transitive=N",
+  "last on merchant": "web-display=N web-transitive=N",
   "since on merchant": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on merchant": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "actionFamily on metadata": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -9487,7 +9415,7 @@
   "foodBalance on metrics": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "tradeAccess on metrics": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=N world-book=N",
   "warningCount on metrics": "",
-  "last on military": "web-transitive=N",
+  "last on military": "web-display=N web-transitive=N",
   "since on military": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on military": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "departTick on missions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
@@ -9508,7 +9436,7 @@
   "stayWeeks on missions": "web-transitive=N",
   "trappedBySiege on missions": "web-transitive=N",
   "waitReceipted on missions": "",
-  "last on noble": "web-transitive=N",
+  "last on noble": "web-display=N web-transitive=N",
   "since on noble": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on noble": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "proud on npcGrowth": "",
@@ -14371,7 +14299,7 @@
   "npc2Role on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "strength on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=N web-transitive=R world-book=R",
   "tension on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
-  "type on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
+  "type on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",
   "typeName on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "aidBurden on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
   "clientSaveId on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
@@ -14403,7 +14331,7 @@
   "trust on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
   "updatedAt on relationshipStates": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "vassalSaveId on relationshipStates": "dossier-pdf=N foundry=N web-transitive=N",
-  "last on religious": "web-transitive=N",
+  "last on religious": "web-display=N web-transitive=N",
   "since on religious": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on religious": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "action on repairs": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
@@ -14411,7 +14339,7 @@
   "reason on repairs": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "subject on repairs": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N",
   "type on repairs": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
-  "last on residential": "web-transitive=N",
+  "last on residential": "web-display=N web-transitive=N",
   "since on residential": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "v on residential": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "receipt on resource_pressure": "dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -14780,7 +14708,7 @@
   "criminal on stocks": "web-display=N web-transitive=N",
   "foreign on stocks": "dossier-pdf=N foundry=N web-transitive=N",
   "industrial on stocks": "",
-  "last on stocks": "web-transitive=R",
+  "last on stocks": "web-display=N web-transitive=R",
   "merchant on stocks": "",
   "military on stocks": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "noble on stocks": "",

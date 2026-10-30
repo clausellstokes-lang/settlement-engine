@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
-import { relColor } from '../../domain/display/relationshipColors.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
@@ -110,27 +109,6 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
         {link.plotHooks?.length>0&&<div style={{marginTop:8}}>
           {link.plotHooks.map((h,i)=><PlotHook key={i} text={typeof h==='string'?h:Ti(h)}/>)}
         </div>}
-        {/* Cross-settlement NPC contacts for this link */}
-        {open&&(()=>{
-          const _pn = link.neighbourName || link.name;
-          const _isr = (settlement?.interSettlementRelationships||[])
-            .filter(rx => rx.partnerSettlement === _pn || rx.linkId === link.linkId);
-          const _c = relColor(link.relationshipType);
-          return _isr.length>0 ? <div style={{marginTop:10,borderTop:`1px solid ${_c}20`,paddingTop:8}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:800,color:_c,marginBottom:6}}>
-              Known Contacts ({_isr.length})
-            </div>
-            {_isr.map((rx,i)=>{
-              // rx.npcName is a LOCAL NPC (this settlement) -> link to its card.
-              // rx.partnerName lives in the foreign settlement -> plain text.
-              const _lid = localNpcId(index, rx.npcName);
-              return <div key={i} style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,marginBottom:4,lineHeight:1.4,paddingLeft:8,borderLeft:`2px solid ${_c}40`}}>
-                <strong>{_lid ? <EntityLink id={_lid} type="npc" fallback={rx.npcName} style={{fontSize:'inherit',fontWeight:700}} /> : rx.npcName}</strong> ({rx.npcRole}) ↔ <strong style={{color:_c}}>{rx.partnerName}</strong> ({rx.partnerRole})
-                {rx.description&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag3,marginTop:1,fontStyle:'italic'}}>{rx.description}</div>}
-              </div>;
-            })}
-          </div> : null;
-        })()}
       </div>}
     </div>
   );
