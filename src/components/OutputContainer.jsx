@@ -21,7 +21,6 @@ import { useSectionDwell } from '../hooks/useSectionDwell.js';
 import { collectPlotHooks } from '../domain/dossier/plotHooks.js';
 import { buildChronicleFeed } from '../domain/dossier/chronicleFeed.js';
 import { settlementWorldPulseEntries } from '../domain/dossier/settlementWorldChronicle.js';
-import { campaignHasRumorLedger } from '../domain/display/settlementRumors.js';
 import DossierAiConfirms, { toFriendlyAiError } from './dossier/DossierAiConfirms.jsx';
 import { DossierEntityContext } from './dossier/DossierEntityContext.jsx';
 import { useDossierEntityNav } from './dossier/useNavigateToEntity.js';
@@ -273,13 +272,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
   // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
-  // Phase 5.5 STEP 3.5 — Rumors & News tab presence: the owning campaign's
-  // world carries a rumor ledger (the conditionally-materialized rumorLedgers
-  // key exists only under a spatial canon + a live infoMode). Dormant /
-  // legacy / omniscient campaigns have no key ⇒ no tab ⇒ the dossier UI is
-  // byte-identical. Boolean-only selector; the ledger itself is read lazily
-  // inside RumorsTab.
-  const hasRumorLedger = useStore(s => campaignHasRumorLedger(s.campaigns, saveId));
   const phase = useStore(s => s.phase);
 
   const rawSettlement = propSettlement || storeSettlement;
@@ -527,7 +519,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // §805 — WAR and FAITH (World). Reuse the already-bundled Swords / Sparkles
     // glyphs (no new first-paint icon; Sparkles doubles for AI Notes the way
     // Drama doubles for Traditions / Plot Hooks). Presence gates above.
-    ...(inCampaign ? [{ id:'war', label:'War', Icon: Swords }] : []),
+    // X-7a (the owner, 2026-10-30): WAR is always registered; with no live war picture the
+    // tab itself shows its launch teaser (BUILD-T3, WarTab :: warTabHasContent). X-7c
+    // withdrew the strip resolver that would have hidden it.
+    { id:'war', label:'War', Icon: Swords },
     ...(hasFaithTab ? [{ id:'faith', label:'Faith', Icon: Sparkles }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
@@ -542,10 +537,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // so registering the tab adds no new icon to the first-paint vendor-icons
       // chunk — keeps the closure ratchet green.
       ? [{ id:'relationships', label:'Relationships', Icon: Users }] : []),
-    // Rumors & News (World) — present ONLY when the owning campaign's rumor
-    // ledger exists (spatial canon + live infoMode). Reuses the already-bundled
-    // ScrollText glyph — no new first-paint icon.
-    ...(hasRumorLedger ? [{ id:'rumors', label:'Rumors & News', Icon: ScrollText }] : []),
+    // Rumors & News (World) — X-7a (the owner, 2026-10-30): always registered; with no
+    // rumor ledger the tab itself shows its launch teaser (BUILD-T3). Reuses the
+    // already-bundled ScrollText glyph — no new first-paint icon.
+    { id:'rumors', label:'Rumors & News', Icon: ScrollText },
     // Versions — the P109/E-5 snapshot timeline. Owner-only (revert mutates the
     // save): needs an owning saved entry and never renders on the public player
     // view. Self-gates further inside (versionHistory flag, tier lock).

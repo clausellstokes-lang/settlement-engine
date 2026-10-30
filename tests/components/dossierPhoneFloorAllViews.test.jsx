@@ -93,8 +93,8 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 const MIN_CHARS = 45;
 /** The dossier's own group/sub-tab count, as a floor the walk cannot silently lose. */
 // 18 -> 17 (2026-10-30, ODQ §934.101): the DM Summary tab is removed (X-5); 17 -> 18 the same day:
-// the Institutions tab joins Systems (T1-14).
-const MIN_VIEWS = 18;
+// the Institutions tab joins Systems (T1-14); 18 -> 20: War and Rumors & News are always registered (X-7a).
+const MIN_VIEWS = 20;
 /** A tab panel holding less text than this has not finished resolving its chunk.
  *  Measured against the SHORTEST real view (Faith's gated panel, ~160 chars), so
  *  the wait proves the chunk resolved without demanding a long tab. */

@@ -58,8 +58,8 @@ export const WarTab = lazy(() => import('../new/tabs/WarTab.jsx'));
 export const FaithTab = lazy(() => import('../new/tabs/FaithTab.jsx'));
 // Rumors & News (Phase 5.5 STEP 3.5) — what this settlement has HEARD of the
 // realm (the trade-carrier rumor ledger), player-scrubbed, with the DM-truth
-// reveal on the includeGroundTruth seam. Lazy; the tab itself only registers
-// when the owning campaign carries a rumor ledger (dormant ⇒ no tab at all).
+// reveal on the includeGroundTruth seam. Lazy; the tab is always registered (X-7a,
+// 2026-10-30) and shows its launch teaser where no rumor ledger exists.
 export const RumorsTab = lazy(() => import('../new/tabs/RumorsTab.jsx'));
 // THE TRADITIONS wave (Engine Lift #4, T-1) — the founding-traditions register
 // (World group, beside Daily Life). Lazy so the genesis leaf + tradition corpus
