@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
 import {
-  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, readShareVeil, writeShareVeil, clampVeilDeltas,
+  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, readShareVeil, writeShareVeil, clampVeilDeltas, projectShareVeil,
   defaultVeilFor, DEFAULT_VEIL_RULES,
   CARD_KINDS, SETTLEMENT_FLOOR, GROUPING_REMOVERS, VEIL_OVERRIDE_KEY, VEIL_VERSION, VEIL_MAX_DELTAS, VEIL_EXCEPTION_PREFIX,
 } from '../../../src/domain/display/galleryVeil.js';
@@ -730,5 +730,82 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
     expect(out.institutions).toEqual(s.institutions);
     expect(out.npcs).toEqual(s.npcs);
     expect(out.availableServices.food).toEqual(s.availableServices.food);
+  });
+});
+
+// ── THE VEIL ONLY REMOVES (RULINGS-CROSS X-21 (d); W2-VEIL-A U4) ─────────────────────
+// No veil entry, delta or "shown" eye can reveal a DM-only field: the veil runs on the
+// projection and only deletes. "Reveal DM content" (shareDm, per member revealDm) stays
+// the one door.
+describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () => {
+  const dmRecord = () => ({
+    id: 's9', name: 'Harrowgate', tier: 'town', population: 2400, config: { culture: 'generic' },
+    plotHooks: ['the reeve is a doppelganger'], dmCompass: { frictionPoints: 'the guild versus the crown' }, dmNotes: 'my notes',
+    npcs: [
+      { id: 'n1', name: 'Aldric', role: 'Reeve', influence: 'high', personality: { flaw: 'vain' },
+        secret: { what: 'is a spy' }, goal: 'seize the crown', plotHooks: ['x'], relationships: [{ to: 'n2' }], corrupt: true },
+      { id: 'n2', name: 'Mara', role: 'Priest', influence: 'mid', secret: { what: 'embezzles tithes' }, goal: 'flee' },
+    ],
+    institutions: [{ name: 'Fence', category: 'Criminal', priorityCategory: 'criminal', desc: 'Moves stolen goods.', tags: ['criminal'] }],
+    history: { currentTensions: [{ type: 'crime_wave', description: 'A surge in crime.', plotHooks: ['coordinated'] }] },
+  });
+  // Every address a curate UI could flip, shown: every grouping, every class, every card.
+  const everyShown = (s) => [
+    ...Object.keys(GROUPING_REMOVERS),
+    ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map(f => `class:${kind}:${f}`)),
+    ...(s.npcs || []).flatMap(n => [`card:npc:${n.id}`, ...Object.keys(CARD_KINDS.npc.fields).map(f => `field:npc:${n.id}:${f}`)]),
+  ].map(address => ({ address, hidden: false }));
+
+  it('with the door closed, flipping every eye to shown reveals no DM-only field', () => {
+    const projected = toPublicSafe(dmRecord());
+    const out = applyVeil(projected, resolveVeil(defaultVeilFor(projected), everyShown(projected)));
+    for (const k of ['plotHooks', 'dmCompass', 'dmNotes']) expect(k in out).toBe(false);
+    for (const n of out.npcs) {
+      for (const k of ['secret', 'goal', 'plotHooks', 'relationships', 'corrupt']) expect(k in n).toBe(false);
+    }
+    expect(out.history.currentTensions[0].description).toBe('A surge in crime.');
+    expect('plotHooks' in out.history.currentTensions[0]).toBe(false);
+  });
+
+  it('a stored share whose deltas un-hide everything still reveals nothing the projection did not carry', () => {
+    const projected = toPublicSafe(dmRecord());
+    const stored = writeShareVeil({}, everyShown(projected));
+    const out = projectShareVeil(projected, stored);
+    expect(out.npcs.every(n => n.secret === undefined && n.goal === undefined)).toBe(true);
+  });
+
+  it('per-member revealDm stays the door: the veil can close it on that card, never open it on another', () => {
+    const projected = toPublicSafe(dmRecord(), { memberOverrides: { n1: { revealDm: true } } });
+    expect(projected.npcs[0].secret).toEqual({ what: 'is a spy' });
+    const shown = applyVeil(projected, resolveVeil([], [{ address: 'field:npc:n2:secret', hidden: false }]));
+    expect(shown.npcs[1].secret).toBe(undefined);
+    const closed = applyVeil(projected, resolveVeil(defaultVeilFor(projected), []));
+    expect(closed.npcs[0].secret).toBe(undefined);
+  });
+
+  it('PROPERTY: for any veil, every path and value in the output already sits at that path in the projection', () => {
+    const leaves = (v, p = '', out = new Map()) => {
+      if (Array.isArray(v)) { if (!v.length) out.set(p, '[]'); v.forEach((x, i) => leaves(x, `${p}[${i}]`, out)); }
+      else if (v && typeof v === 'object') { if (!Object.keys(v).length) out.set(p, '{}'); for (const [k, c] of Object.entries(v)) leaves(c, `${p}.${k}`, out); }
+      else out.set(p, JSON.stringify(v));
+      return out;
+    };
+    const projected = toPublicSafe(dmRecord(), { full: true });
+    const pool = [...defaultVeilFor(projected).map(d => d.address), ...everyShown(projected).map(d => d.address)];
+    let seed = 7;
+    const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    const before = leaves(projected);
+    for (let trial = 0; trial < 60; trial++) {
+      const defaults = pool.filter(() => rand() < 0.5);
+      const deltas = pool.filter(() => rand() < 0.3).map(address => ({ address, hidden: rand() < 0.5 }));
+      const out = applyVeil(projected, resolveVeil(defaults, deltas));
+      delete out.galleryVeil;
+      for (const [path, value] of leaves(out)) {
+        // A container emptied by removal reads '[]' / '{}' where the projection had children.
+        if (value === '[]' && [...before.keys()].some(k => k.startsWith(`${path}[`))) continue;
+        if (value === '{}' && [...before.keys()].some(k => k.startsWith(`${path}.`))) continue;
+        expect(before.get(path)).toBe(value);
+      }
+    }
   });
 });
