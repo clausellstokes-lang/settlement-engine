@@ -15,6 +15,7 @@
 
 import { supabase, isConfigured } from './supabase.js';
 import { toPublicSafe, veilPublicPayload } from '../domain/display/publicSafe.js';
+import { projectShareVeil, clampVeilDeltas, VEIL_OVERRIDE_KEY, VEIL_VERSION } from '../domain/display/galleryVeil.js';
 import { sanitizeGalleryHtml } from './sanitizeGalleryHtml.js';
 import { getDeviceToken } from './deviceToken.js';
 import { track, EVENTS } from './analytics.js';
@@ -815,11 +816,19 @@ function sanitizeDossier(row) {
     // the client defense-in-depth from re-stripping what the owner chose to show).
     // Per-member overrides (092/093) reveal/hide individual NPCs regardless of the
     // settlement-level flag; the client projection mirrors the server splice.
-    settlement:   toPublicSafe(row.data, {
+    // THE GALLERY VEIL (X-21; galleryVeil.js) runs AFTER the public projection and only
+    // removes: a share marked with a veil (its deltas ride the reserved key inside
+    // gallery_member_overrides) is projected through the one default set plus those
+    // deltas, so a hidden fact is ABSENT from what renders, the Table View included. A
+    // share exported before the veil is unmarked and projects exactly as before.
+    // ⚠ CLIENT MIRROR: the server twin (_gallery_apply_veil in get_gallery_dossier) is a
+    // migration and the owner's hand; until it lands the stored payload still carries the
+    // veiled facts, and this projection is what keeps them off the page.
+    settlement:   projectShareVeil(toPublicSafe(row.data, {
       full: row.gallery_share_dm === true,
       memberOverrides: (row.gallery_member_overrides && typeof row.gallery_member_overrides === 'object' && !Array.isArray(row.gallery_member_overrides))
         ? row.gallery_member_overrides : null,
-    }),
+    }), row.gallery_member_overrides),
     // The event chronicle (separate allowlisted column, migration 032) —
     // deliberately NOT routed through toPublicSafe; see sanitizeChronicle.
     chronicle:    sanitizeChronicle(row.chronicle),
@@ -1038,7 +1047,8 @@ function sanitizeGalleryTitle(value) {
 /**
  * Final shape gate for the gallery_member_overrides column: keep only string keys
  * mapping to an object with boolean revealDm / allowImport, capped at 1000 members
- * so a hand-crafted payload can't bloat the row. Anything malformed collapses to {}.
+ * so a hand-crafted payload can't bloat the row, plus the gallery veil's reserved
+ * key (clamped by galleryVeil.js). Anything malformed collapses to {}.
  * @param {any} raw
  * @returns {Record<string, {revealDm?: boolean, allowImport?: boolean}>}
  */
@@ -1046,8 +1056,16 @@ function clampMemberOverrides(raw) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
   /** @type {Record<string, any>} */
   const out = {};
+  // THE GALLERY VEIL's delta list rides the reserved key (galleryVeil.js): clamped to
+  // grammar-valid, bounded deltas. The server reader only ever reads `overrides -> <npc
+  // key>`, so the reserved key is inert there.
+  const veil = raw[VEIL_OVERRIDE_KEY];
+  if (veil && typeof veil === 'object' && !Array.isArray(veil)) {
+    out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: clampVeilDeltas(veil.deltas) };
+  }
   let n = 0;
   for (const [key, val] of Object.entries(raw)) {
+    if (key === VEIL_OVERRIDE_KEY) continue;
     if (n >= 1000) break;
     if (typeof key !== 'string' || !key || key.length > 200) continue;
     if (!val || typeof val !== 'object') continue;

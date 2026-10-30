@@ -1,5 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
+import {
+  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, readShareVeil, writeShareVeil, clampVeilDeltas, projectShareVeil,
+  defaultVeilFor, DEFAULT_VEIL_RULES,
+  CARD_KINDS, SETTLEMENT_FLOOR, GROUPING_REMOVERS, VEIL_OVERRIDE_KEY, VEIL_VERSION, VEIL_MAX_DELTAS, VEIL_EXCEPTION_PREFIX,
+} from '../../../src/domain/display/galleryVeil.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -403,5 +408,427 @@ describe('toPublicSafe — per-member overrides (migration 093 mirror)', () => {
     expect(hidden.npcs.every(n => n.secret === undefined)).toBe(true);
     const shown = toPublicSafe(dm(), { full: true });
     expect(shown.npcs.every(n => n.secret !== undefined)).toBe(true);
+  });
+});
+
+// ── THE GALLERY VEIL (RULINGS-CROSS X-21, X-21b; build lane W2-VEIL-A U1) ──────────────
+// The model: the address grammar, the identity floor, resolve and apply. Hidden facts are
+// ABSENT from the projection (deleted, never blanked); a card is never hidden whole.
+describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
+  // A trimmed real record: seed ux-audit-v2-2026-10-30-35 (Vikhavn), NPC npc_11.
+  const dalla = () => ({
+    id: 'npc_11', name: 'Dalla Njálsson', gender: 'female', role: 'Council Member', title: 'Ráðgjafi', category: 'government',
+    personality: { flaw: 'paranoid', modifier: 'detached' }, physical: { age: 'late thirties' },
+    goal: { short: 'Stay useful to the wrong people so they stay breathing.' },
+    secret: { what: "Has been reading Ljot Randversson's correspondence through an intermediary." },
+    plotHooks: ['Their most trusted advisor has not been seen in four days.'],
+    influence: 'low', factionAffiliation: 'Council', secondaryAffiliation: 'Underground network',
+    corrupt: true, corruptionVector: 'fear', corruptTies: { criminalInstitution: 'Underground network' },
+  });
+  const town = () => ({
+    id: 's1', name: 'Vikhavn', tier: 'metropolis', population: 45380, config: { culture: 'norse' },
+    npcs: [dalla(), { id: 'npc_2', name: 'Ulf', role: 'Smith', personality: { flaw: 'proud' }, institution: 'Smithy' }],
+    institutions: [
+      { name: 'Smithy', category: 'Crafts', priorityCategory: 'crafts', desc: 'Iron work.', tags: ['metalwork'] },
+      { name: 'Underground network', category: 'Criminal', priorityCategory: 'criminal', catalogId: 'underground_network',
+        desc: 'A warren of tunnels beneath the city.', tags: ['criminal', 'smuggling', 'underground'],
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' } },
+    ],
+    availableServices: {
+      equipment: [{ name: 'Tools', desc: 'Iron tools', institution: 'Smithy' }, { name: 'Passage', desc: 'Unseen passage', institution: 'Underground network' }],
+      criminal: [{ name: 'Contraband delivery', desc: 'Move restricted goods.', institution: 'Underground network' }],
+    },
+  });
+
+  it('parses the address grammar and refuses anything outside it', () => {
+    expect(parseVeilAddress('tab:plot_hooks')).toEqual({ type: 'tab', id: 'plot_hooks' });
+    expect(parseVeilAddress('block:defense.criminalStructure')).toEqual({ type: 'block', id: 'defense.criminalStructure' });
+    expect(parseVeilAddress('card:npc:npc_11')).toEqual({ type: 'card', kind: 'npc', id: 'npc_11' });
+    // An id may itself carry ':' (the field is the last segment).
+    expect(parseVeilAddress('field:npc:npc.a:b:secret')).toEqual({ type: 'field', kind: 'npc', id: 'npc.a:b', field: 'secret' });
+    expect(parseVeilAddress('class:npc:secret')).toEqual({ type: 'class', kind: 'npc', field: 'secret' });
+    for (const bad of ['', 'tab:', 'npc:secret', 'field:npc:secret', 'class:npc:', 'card:npc:', 'x'.repeat(301), 42, null]) {
+      expect(parseVeilAddress(bad)).toBe(null);
+    }
+  });
+
+  it('EXISTENCE IS PUBLIC: a card address is never hideable; a card-level delta hides its depth, the card and its identity stay', () => {
+    expect(isHideable('card:npc:npc_11')).toBe(false);
+    const veil = resolveVeil([], [{ address: 'card:npc:npc_11', hidden: true }]);
+    expect(veil.has('card:npc:npc_11')).toBe(false);
+    expect(veil.has('field:npc:npc_11:secret')).toBe(true);
+    const out = applyVeil(town(), veil);
+    expect(out.npcs).toHaveLength(2);
+    const d = out.npcs.find(n => n.id === 'npc_11');
+    for (const k of CARD_KINDS.npc.floor) expect(d[k]).toEqual(dalla()[k]);
+    for (const k of ['personality', 'physical', 'goal', 'secret', 'plotHooks', 'corrupt', 'corruptTies']) expect(k in d).toBe(false);
+    // The other card is untouched.
+    expect(out.npcs.find(n => n.id === 'npc_2').personality).toEqual({ flaw: 'proud' });
+  });
+
+  it('X-21e, THE ONE EXCEPTION: a criminal or clandestine house\'s card is hideable whole, with its services and its people\'s membership; no other card is', () => {
+    const src = town();
+    expect(isHideable('card:institution:underground-network', src)).toBe(true);
+    expect(isHideable('card:institution:smithy', src)).toBe(false);
+    expect(isHideable('card:npc:npc_11', src)).toBe(false);
+    // A non-criminal house cannot be card-hidden: the delta falls back to its depth.
+    const smithy = applyVeil(src, resolveVeil([], [{ address: 'card:institution:smithy', hidden: true }]));
+    expect(smithy.institutions.map(i => i.name)).toEqual(['Smithy', 'Underground network']);
+    expect('desc' in smithy.institutions[0]).toBe(false);
+    // The criminal house vanishes whole: the card, its service rows, and every NPC's
+    // membership reference to it (the identity floor's one exception).
+    const out = applyVeil(src, resolveVeil([], [{ address: 'card:institution:underground-network', hidden: true }]));
+    expect(out.institutions.map(i => i.name)).toEqual(['Smithy']);
+    expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
+    expect(out.availableServices.criminal).toEqual([]);
+    const d = out.npcs.find(n => n.id === 'npc_11');
+    expect(d.name).toBe('Dalla Njálsson');
+    expect('secondaryAffiliation' in d).toBe(false);
+    expect(d.factionAffiliation).toBe('Council');
+  });
+
+  it('THE IDENTITY FLOOR can never be hidden: refused, dropped, and spared even by a malformed set', () => {
+    for (const k of CARD_KINDS.npc.floor) expect(isHideable(`field:npc:npc_11:${k}`)).toBe(false);
+    for (const k of CARD_KINDS.institution.floor) expect(isHideable(`class:institution:${k}`)).toBe(false);
+    for (const k of SETTLEMENT_FLOOR) expect(isHideable(`field:settlement:s1:${k}`)).toBe(false);
+    expect(resolveVeil(['field:npc:npc_11:name', 'class:institution:name'], [{ address: 'field:npc:npc_11:role', hidden: true }]).size).toBe(0);
+    // Every grouping, every depth class of every kind, and the floor addresses forced in.
+    const everything = [
+      ...Object.keys(GROUPING_REMOVERS),
+      ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map(f => `class:${kind}:${f}`)),
+      'field:npc:npc_11:name', 'field:settlement:s1:name', 'class:npc:role',
+    ];
+    const src = town();
+    const out = applyVeil(src, everything);
+    for (const k of SETTLEMENT_FLOOR) expect(out[k]).toEqual(src[k]);
+    expect(out.npcs.map(n => n.name)).toEqual(['Dalla Njálsson', 'Ulf']);
+    expect(out.institutions.map(i => [i.name, i.category])).toEqual([['Smithy', 'Crafts'], ['Underground network', 'Criminal']]);
+    for (const k of CARD_KINDS.npc.floor) expect(out.npcs[0][k]).toEqual(src.npcs[0][k]);
+  });
+
+  it('a hidden fact is ABSENT, never blanked, and the input is never mutated', () => {
+    const src = town();
+    const before = JSON.stringify(src);
+    const out = applyVeil(src, resolveVeil(['field:institution:underground-network:description', 'class:npc:secret'], []));
+    const inst = out.institutions.find(i => i.name === 'Underground network');
+    expect('desc' in inst).toBe(false);
+    expect(out.npcs.every(n => !('secret' in n))).toBe(true);
+    expect(out.institutions.find(i => i.name === 'Smithy').desc).toBe('Iron work.');
+    expect(JSON.stringify(src)).toBe(before);
+  });
+
+  it('an institution hides its services (its rows in every category) and its people (their link, never the person)', () => {
+    const out = applyVeil(town(), resolveVeil(['field:institution:underground-network:services', 'field:institution:smithy:people'], []));
+    expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
+    expect(out.availableServices.criminal).toEqual([]);
+    const ulf = out.npcs.find(n => n.id === 'npc_2');
+    expect(ulf.name).toBe('Ulf');
+    expect('institution' in ulf).toBe(false);
+  });
+
+  it('a field-class master switch hides the field on every card; a per-card eye is its exception', () => {
+    const veil = resolveVeil(['class:npc:personality'], [{ address: 'field:npc:npc_2:personality', hidden: false }]);
+    expect(veil.has(`${VEIL_EXCEPTION_PREFIX}field:npc:npc_2:personality`)).toBe(true);
+    const out = applyVeil(town(), veil);
+    expect('personality' in out.npcs[0]).toBe(false);
+    expect(out.npcs[1].personality).toEqual({ flaw: 'proud' });
+    // Deltas apply in order: the last word on an address wins.
+    expect(resolveVeil([], [
+      { address: 'field:npc:npc_11:secret', hidden: true },
+      { address: 'field:npc:npc_11:secret', hidden: false },
+    ]).has('field:npc:npc_11:secret')).toBe(false);
+  });
+
+  it('groupings remove their data and are listed on the projection; field and class addresses are never listed', () => {
+    const src = { ...town(), structuralViolations: [{ type: 'x', reason: 'r' }], coherenceNotes: [{ note: 'n' }] };
+    const out = applyVeil(src, resolveVeil(['block:services.criminal', 'block:housekeeping.coherenceNotes', 'class:npc:secret', 'block:not.registered'], []));
+    expect('criminal' in out.availableServices).toBe(false);
+    expect('coherenceNotes' in out).toBe(false);
+    expect(out.structuralViolations).toEqual([{ type: 'x', reason: 'r' }]);
+    expect(out.galleryVeil).toEqual({ v: VEIL_VERSION, hidden: ['block:housekeeping.coherenceNotes', 'block:services.criminal'] });
+    expect(isVeiled(out, 'block:services.criminal')).toBe(true);
+    expect(isVeiled(out, 'class:npc:secret')).toBe(false);
+  });
+
+  it('the per-NPC overrides fold in as card-level deltas, read both ways; a pre-veil share is unmarked', () => {
+    // A share exported before the veil (no reserved key) is unmarked: projected as before.
+    expect(readShareVeil({ npc_11: { revealDm: false } })).toEqual({ marked: false, deltas: [] });
+    // revealDm:false reads as a card-level hide; revealDm:true stays the door, never a veil entry.
+    const read = readShareVeil({ npc_11: { revealDm: false }, npc_2: { revealDm: true }, [VEIL_OVERRIDE_KEY]: { v: 1, deltas: [{ address: 'class:npc:physical', hidden: true }] } });
+    expect(read).toEqual({ marked: true, deltas: [{ address: 'card:npc:npc_11', hidden: true }, { address: 'class:npc:physical', hidden: true }] });
+    // Written back: the NPC card delta becomes revealDm:false (the 093 server splice enforces
+    // it today); everything else rides the reserved key; allowImport is kept.
+    const written = writeShareVeil({ npc_2: { allowImport: false } }, [
+      { address: 'card:npc:npc_2', hidden: true },
+      { address: 'field:institution:smithy:description', hidden: true },
+      { address: 'not an address', hidden: true },
+    ]);
+    expect(written).toEqual({
+      npc_2: { allowImport: false, revealDm: false },
+      [VEIL_OVERRIDE_KEY]: { v: VEIL_VERSION, deltas: [{ address: 'field:institution:smithy:description', hidden: true }] },
+    });
+    // …and un-hiding the card clears the revealDm:false it wrote.
+    expect(writeShareVeil(written, [{ address: 'card:npc:npc_2', hidden: false }]).npc_2).toEqual({ allowImport: false });
+    expect(clampVeilDeltas(Array.from({ length: VEIL_MAX_DELTAS + 5 }, (_, i) => ({ address: `field:npc:n${i}:secret`, hidden: true })))).toHaveLength(VEIL_MAX_DELTAS);
+  });
+});
+
+// ── THE ONE DEFAULT SET (RULINGS-CROSS X-21c as corrected by X-21d; W2-VEIL-A U2) ──────
+// Derived from the DATA (classifier category, declared facets, catalog service keys,
+// present fields), never from a label. Fixtures are trimmed real records from the
+// ux-audit-v2-2026-10-30 thousand (seeds named per fixture).
+describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', () => {
+  // seed ux-audit-v2-2026-10-30-22, Bailthwaite (city): a thieves' guild, a whisper market,
+  // a criminal faction, a parish church, and criminal-category services.
+  const bailthwaite = () => ({
+    id: 'b1', name: 'Bailthwaite', tier: 'city', population: 18764, config: { culture: 'celtic' },
+    institutions: [
+      { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', catalogId: 'thieves_guild_chapter',
+        desc: 'A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.', tags: ['criminal'] },
+      { name: 'Whisper market', category: 'Criminal', priorityCategory: 'criminal', catalogId: 'whisper_market',
+        desc: 'The covert guild scale. Brokers deal in knowledge by the piece.', tags: ['criminal', 'information', 'brokerage'],
+        serviceKeys: ['info_calibration', 'info_query', 'info_feed', 'info_plant'] },
+      { name: 'Parish churches (10-30)', category: 'Religious', priorityCategory: 'religion', catalogId: 'parish_churches_10_30',
+        desc: 'One for each neighbourhood.', tags: ['essential', 'religious', 'church'] },
+    ],
+    availableServices: {
+      equipment: [{ name: 'Graded purchase', desc: "Buy a piece of knowledge with the seller's own grade attached to it.", institution: 'Whisper market' }],
+      healing: [{ name: 'Weekly rite', desc: 'The weekly service.', institution: 'Parish churches (10-30)' }],
+      criminal: [{ name: 'Contraband goods', desc: 'Restricted, stolen, or untaxed goods.', institution: 'Black market' }],
+    },
+    powerStructure: {
+      factions: [
+        { faction: "Thieves' Guild", power: 5, rawPower: 4, powerLabel: 'Suppressed', category: 'criminal',
+          desc: 'Organised criminal network controls the black market.', members: [{ id: 'npc_9', name: 'Fenn' }] },
+        { faction: 'Merchant Guilds', power: 30, powerLabel: 'Strong', category: 'economic', desc: 'The trades.' },
+      ],
+      criminalCaptureState: 'adversarial',
+      factionRelationships: [{ pair: ["Thieves' Guild", 'Merchant Guilds'], type: 'rivalry', captureState: 'adversarial' }],
+    },
+    economicState: { safetyProfile: {
+      criminalInstitutions: ['Smuggling Network', "Thieves' Guild Chapter"], crimeTypes: [{ type: 'Smuggling', desc: 'x' }],
+      blackMarketCapture: 22, safetyLabel: 'Strained' } },
+    history: { historicalEvents: [{ name: 'The Iron Dispute', type: 'economic', yearsAgo: 79, severity: 'major',
+      description: 'Rights to the local iron deposits became the subject of a prolonged dispute.',
+      plotHooks: ['Old deed to the iron rights has resurfaced in an estate sale'] }] },
+    conflicts: [{ parties: ['The Free Alliance', 'The Administrative Circle'], issue: 'Military conscription', stakes: 'Labor control',
+      intensity: 'moderate', plotHooks: ['A neutral figure is being pressured by both.'] }],
+  });
+  // seed ux-audit-v2-2026-10-30-35, Vikhavn (metropolis): the catalog's clandestine and
+  // subterranean facets, and a corrupt council member with a secret (a DM-opened share).
+  const vikhavn = () => ({
+    id: 'v1', name: 'Vikhavn', tier: 'metropolis', population: 45380, config: { culture: 'norse' },
+    institutions: [
+      { name: 'Underground network', category: 'Criminal', priorityCategory: 'criminal', catalogId: 'underground_network',
+        desc: 'A warren of tunnels beneath the city, wide enough for cargo.', tags: ['criminal', 'smuggling', 'underground'],
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' } },
+      { name: 'Underground city', category: 'Criminal', priorityCategory: 'criminal', catalogId: 'underground_city',
+        desc: 'An old warren of catacombs and passages.', tags: ['criminal', 'underground'], facets: { subterranean: 'subterranean' } },
+    ],
+    npcs: [{ id: 'npc_11', name: 'Dalla Njálsson', role: 'Council Member', personality: { flaw: 'paranoid' },
+      secret: { what: "Has been reading Ljot Randversson's correspondence." }, plotHooks: ['A contract they signed has a clause.'],
+      corrupt: true, corruptionVector: 'fear', corruptTies: { criminalInstitution: 'Underground network' } }],
+  });
+  // seed ux-audit-v2-2026-10-30-0, Temürpolis (thorp): no criminal anything, no secrets.
+  const temurpolis = () => ({
+    id: 't1', name: 'Temürpolis', tier: 'thorp', population: 55, config: { culture: 'generic' },
+    institutions: [{ name: 'Subsistence farming', category: 'Economy', priorityCategory: 'economy', catalogId: 'subsistence_farming',
+      desc: 'Each household farms ~12-16 acres for survival.', tags: ['essential', 'agriculture'] }],
+    npcs: [{ id: 'npc_1', name: 'Oyuun', role: 'Elder', personality: { flaw: 'stubborn' } }],
+    availableServices: { food: [{ name: 'Meals and drink', desc: 'Food and ale', institution: 'Dwellings (4-16)' }], criminal: [] },
+  });
+  // seed ux-audit-v2-2026-10-30-15, Roccavilla: the LICENSED listening post (catalog tag 'legal').
+  const listeningPost = { name: 'Listening post', category: 'Economy', priorityCategory: 'economy', catalogId: 'listening_post',
+    desc: 'A small licensed register office among much larger trades.', tags: ['legal', 'information', 'brokerage'],
+    serviceKeys: ['info_calibration', 'info_query'] };
+
+  const rowsOf = (s, cls) => defaultVeilFor(s).filter(d => d.cls === cls).map(d => d.address);
+  const project = (s) => applyVeil(s, resolveVeil(defaultVeilFor(s), []));
+
+  it('criminal institution (X-21e): a town with a thieves\' guild hides the house whole; a town without has no such row', () => {
+    expect(rowsOf(bailthwaite(), 'criminal-institution')).toEqual(expect.arrayContaining([
+      'card:institution:thieves-guild-chapter',
+      "field:institution:thieves-guild-chapter:description", 'field:institution:thieves-guild-chapter:services',
+      'field:institution:thieves-guild-chapter:people', 'field:institution:thieves-guild-chapter:function',
+    ]));
+    expect(rowsOf(temurpolis(), 'criminal-institution')).toEqual([]);
+    const out = project(bailthwaite());
+    expect(out.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(out.institutions[0].desc).toBe('One for each neighbourhood.');
+    // Every default is an eye: showing the card brings back its name and category, its depth stays hidden.
+    const shown = applyVeil(bailthwaite(), resolveVeil(defaultVeilFor(bailthwaite()), [{ address: 'card:institution:thieves-guild-chapter', hidden: false }]));
+    const guild = shown.institutions.find(i => i.name === "Thieves' guild chapter");
+    expect(guild.category).toBe('Criminal');
+    expect('desc' in guild).toBe(false);
+  });
+
+  it('criminal services category: the classifier category goes whole, and a criminal house\'s rows in other categories go with it', () => {
+    const out = project(bailthwaite());
+    expect('criminal' in out.availableServices).toBe(false);
+    expect(out.availableServices.equipment).toEqual([]);
+    expect(out.availableServices.healing.map(r => r.name)).toEqual(['Weekly rite']);
+    expect(project(temurpolis()).availableServices.food.map(r => r.name)).toEqual(['Meals and drink']);
+  });
+
+  it('clandestine institution (X-21e): the declared clandestine/subterranean facets hide the house whole', () => {
+    expect(DEFAULT_VEIL_RULES.find(r => r.cls === 'clandestine-institution').select(vikhavn())).toEqual(expect.arrayContaining([
+      'card:institution:underground-network', 'field:institution:underground-network:description',
+      'field:institution:underground-network:function', 'card:institution:underground-city',
+    ]));
+    // A criminal house with no declared facet is not clandestine (it is still criminal).
+    expect(DEFAULT_VEIL_RULES.find(r => r.cls === 'clandestine-institution').select(bailthwaite())).toEqual([]);
+    expect(project(vikhavn()).institutions).toEqual([]);
+  });
+
+  it('covert brokerage: the catalog\'s illegal house (brokerage keys plus the criminal tag) is hidden; the licensed listening post is shown', () => {
+    expect(rowsOf(bailthwaite(), 'covert-brokerage')).toEqual(expect.arrayContaining(['card:institution:whisper-market', 'field:institution:whisper-market:description']));
+    expect(isHideable('card:institution:listening-post', { institutions: [listeningPost] })).toBe(false);
+    const withPost = { ...temurpolis(), institutions: [listeningPost] };
+    expect(rowsOf(withPost, 'covert-brokerage')).toEqual([]);
+    expect(project(withPost).institutions[0].desc).toBe('A small licensed register office among much larger trades.');
+  });
+
+  it('criminal faction: members, goals, conflicts and description hidden; name, category and standing stay', () => {
+    expect(rowsOf(bailthwaite(), 'criminal-faction')).toEqual(expect.arrayContaining(["field:faction:faction.thieves_guild:members"]));
+    const f = project(bailthwaite()).powerStructure.factions;
+    expect(f[0]).toEqual({ faction: "Thieves' Guild", power: 5, rawPower: 4, powerLabel: 'Suppressed', category: 'criminal' });
+    expect(f[1].desc).toBe('The trades.');
+    expect(rowsOf(temurpolis(), 'criminal-faction')).toEqual([]);
+  });
+
+  it('NPC secrets and corruption flags: class switches where the data carries them (a DM-opened share), none where it does not', () => {
+    expect(rowsOf(vikhavn(), 'npc-secret')).toEqual(['class:npc:secret']);
+    expect(rowsOf(vikhavn(), 'npc-corruption')).toEqual(['class:npc:corruption']);
+    expect(rowsOf(temurpolis(), 'npc-secret')).toEqual([]);
+    expect(rowsOf(temurpolis(), 'npc-corruption')).toEqual([]);
+    const d = project(vikhavn()).npcs[0];
+    for (const k of ['secret', 'corrupt', 'corruptionVector', 'corruptTies']) expect(k in d).toBe(false);
+    expect(d.personality).toEqual({ flaw: 'paranoid' });
+  });
+
+  it("Defense's criminal architecture and Power's capture reading: their data goes and the groupings are listed", () => {
+    const out = project(bailthwaite());
+    const sp = out.economicState.safetyProfile;
+    expect('criminalInstitutions' in sp || 'crimeTypes' in sp || 'blackMarketCapture' in sp).toBe(false);
+    expect(sp.safetyLabel).toBe('Strained');
+    expect('criminalCaptureState' in out.powerStructure).toBe(false);
+    expect(out.powerStructure.factionRelationships[0]).toEqual({ pair: ["Thieves' Guild", 'Merchant Guilds'], type: 'rivalry' });
+    expect(isVeiled(out, 'block:defense.criminalStructure')).toBe(true);
+    expect(isVeiled(out, 'block:power.criminalUnderside')).toBe(true);
+  });
+
+  it('defense vulnerabilities and engine housekeeping: hidden by default', () => {
+    // Constructed: the thousand carries no row the Defense predicate selects (measured, 0 / 1000).
+    const s = { ...temurpolis(), structuralViolations: [{ type: 'defense_gap', reason: 'No garrison despite a frontier position.', severity: 'warning' }],
+      structuralSuggestions: [{ type: 'add', suggested: 'Palisade', reason: 'r' }],
+      coherenceNotes: [{ type: 'power_economic', severity: 'notable', tab: 'power', note: 'Economic activity flows through religious institutions.' }] };
+    const just = applyVeil(s, ['block:defense.vulnerabilities']);
+    expect(just.structuralViolations).toEqual([]);
+    const out = project(s);
+    for (const k of ['structuralViolations', 'structuralSuggestions', 'coherenceNotes']) expect(k in out).toBe(false);
+    for (const g of ['block:housekeeping.firstSurvey', 'block:housekeeping.receipt', 'block:housekeeping.decrees', 'block:rumors.dmTruth', 'block:war.truthVsBelief']) {
+      expect(isVeiled(out, g)).toBe(true);
+    }
+  });
+
+  it('every plot hook (X-21d): the Plot Hooks tab and every hook field on every card', () => {
+    const s = { ...bailthwaite(), ...{ npcs: vikhavn().npcs }, stress: [{ type: 'succession_void', label: 'Succession Void', crisisHook: 'Three factions approach the players.' }] };
+    expect(rowsOf(s, 'plot-hooks')).toEqual(expect.arrayContaining(['tab:plot_hooks', 'class:npc:hooks', 'class:event:hooks', 'class:conflict:hooks']));
+    const out = project(s);
+    expect(/plotHooks|crisisHook/.test(JSON.stringify(out))).toBe(false);
+    expect(JSON.stringify(out).includes('Old deed')).toBe(false);
+    expect(out.history.historicalEvents[0].description).toMatch(/iron deposits/);
+    expect(out.stress[0].label).toBe('Succession Void');
+  });
+
+  it('the groupings are static: every share lists the same ones, so the list never betrays what a town had', () => {
+    const groupingsOf = (s) => project(s).galleryVeil.hidden;
+    expect(groupingsOf(temurpolis())).toEqual(groupingsOf(bailthwaite()));
+    expect(groupingsOf({})).toEqual(groupingsOf(bailthwaite()));
+  });
+
+  it('everything else is shown: a town with nothing to hide loses only its housekeeping and hooks', () => {
+    const s = temurpolis();
+    const out = project(s);
+    expect(out.institutions).toEqual(s.institutions);
+    expect(out.npcs).toEqual(s.npcs);
+    expect(out.availableServices.food).toEqual(s.availableServices.food);
+  });
+});
+
+// ── THE VEIL ONLY REMOVES (RULINGS-CROSS X-21 (d); W2-VEIL-A U4) ─────────────────────
+// No veil entry, delta or "shown" eye can reveal a DM-only field: the veil runs on the
+// projection and only deletes. "Reveal DM content" (shareDm, per member revealDm) stays
+// the one door.
+describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () => {
+  const dmRecord = () => ({
+    id: 's9', name: 'Harrowgate', tier: 'town', population: 2400, config: { culture: 'generic' },
+    plotHooks: ['the reeve is a doppelganger'], dmCompass: { frictionPoints: 'the guild versus the crown' }, dmNotes: 'my notes',
+    npcs: [
+      { id: 'n1', name: 'Aldric', role: 'Reeve', influence: 'high', personality: { flaw: 'vain' },
+        secret: { what: 'is a spy' }, goal: 'seize the crown', plotHooks: ['x'], relationships: [{ to: 'n2' }], corrupt: true },
+      { id: 'n2', name: 'Mara', role: 'Priest', influence: 'mid', secret: { what: 'embezzles tithes' }, goal: 'flee' },
+    ],
+    institutions: [{ name: 'Fence', category: 'Criminal', priorityCategory: 'criminal', desc: 'Moves stolen goods.', tags: ['criminal'] }],
+    history: { currentTensions: [{ type: 'crime_wave', description: 'A surge in crime.', plotHooks: ['coordinated'] }] },
+  });
+  // Every address a curate UI could flip, shown: every grouping, every class, every card.
+  const everyShown = (s) => [
+    ...Object.keys(GROUPING_REMOVERS),
+    ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map(f => `class:${kind}:${f}`)),
+    ...(s.npcs || []).flatMap(n => [`card:npc:${n.id}`, ...Object.keys(CARD_KINDS.npc.fields).map(f => `field:npc:${n.id}:${f}`)]),
+  ].map(address => ({ address, hidden: false }));
+
+  it('with the door closed, flipping every eye to shown reveals no DM-only field', () => {
+    const projected = toPublicSafe(dmRecord());
+    const out = applyVeil(projected, resolveVeil(defaultVeilFor(projected), everyShown(projected)));
+    for (const k of ['plotHooks', 'dmCompass', 'dmNotes']) expect(k in out).toBe(false);
+    for (const n of out.npcs) {
+      for (const k of ['secret', 'goal', 'plotHooks', 'relationships', 'corrupt']) expect(k in n).toBe(false);
+    }
+    expect(out.history.currentTensions[0].description).toBe('A surge in crime.');
+    expect('plotHooks' in out.history.currentTensions[0]).toBe(false);
+  });
+
+  it('a stored share whose deltas un-hide everything still reveals nothing the projection did not carry', () => {
+    const projected = toPublicSafe(dmRecord());
+    const stored = writeShareVeil({}, everyShown(projected));
+    const out = projectShareVeil(projected, stored);
+    expect(out.npcs.every(n => n.secret === undefined && n.goal === undefined)).toBe(true);
+  });
+
+  it('per-member revealDm stays the door: the veil can close it on that card, never open it on another', () => {
+    const projected = toPublicSafe(dmRecord(), { memberOverrides: { n1: { revealDm: true } } });
+    expect(projected.npcs[0].secret).toEqual({ what: 'is a spy' });
+    const shown = applyVeil(projected, resolveVeil([], [{ address: 'field:npc:n2:secret', hidden: false }]));
+    expect(shown.npcs[1].secret).toBe(undefined);
+    const closed = applyVeil(projected, resolveVeil(defaultVeilFor(projected), []));
+    expect(closed.npcs[0].secret).toBe(undefined);
+  });
+
+  it('PROPERTY: for any veil, every path and value in the output already sits at that path in the projection', () => {
+    const leaves = (v, p = '', out = new Map()) => {
+      if (Array.isArray(v)) { if (!v.length) out.set(p, '[]'); v.forEach((x, i) => leaves(x, `${p}[${i}]`, out)); }
+      else if (v && typeof v === 'object') { if (!Object.keys(v).length) out.set(p, '{}'); for (const [k, c] of Object.entries(v)) leaves(c, `${p}.${k}`, out); }
+      else out.set(p, JSON.stringify(v));
+      return out;
+    };
+    const projected = toPublicSafe(dmRecord(), { full: true });
+    const pool = [...defaultVeilFor(projected).map(d => d.address), ...everyShown(projected).map(d => d.address)];
+    let seed = 7;
+    const rand = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    const before = leaves(projected);
+    for (let trial = 0; trial < 60; trial++) {
+      const defaults = pool.filter(() => rand() < 0.5);
+      const deltas = pool.filter(() => rand() < 0.3).map(address => ({ address, hidden: rand() < 0.5 }));
+      const out = applyVeil(projected, resolveVeil(defaults, deltas));
+      delete out.galleryVeil;
+      for (const [path, value] of leaves(out)) {
+        // A container emptied by removal reads '[]' / '{}' where the projection had children.
+        if (value === '[]' && [...before.keys()].some(k => k.startsWith(`${path}[`))) continue;
+        if (value === '{}' && [...before.keys()].some(k => k.startsWith(`${path}.`))) continue;
+        expect(before.get(path)).toBe(value);
+      }
+    }
   });
 });
