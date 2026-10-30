@@ -144,6 +144,7 @@ describe('THE SENTENCES THAT NAME THEM', () => {
     for (const line of [en.hero.anonCap.spent, en.hero.capUnlock.headline, en.moments.anon_cap_hit.headline]) {
       for (const key of SIGN_IN_UNLOCKS) {
         expect(line.toLowerCase(), `"${line}" claims an anonymous visitor had a ${SIZE_LABEL[key]}`)
+          // anchored: registry literals (a lost key throws on toLowerCase); spent proven above to name the anon sizes.
           .not.toContain(SIZE_LABEL[key].toLowerCase());
       }
     }

@@ -126,6 +126,7 @@ describe('THE GATE — one range, one capability flag', () => {
     expect(copy.body).toContain(signInUnlocksSizes());
     expect(copy.body).toContain('thorpe, hamlet, village, city, and metropolis');
     // …and it no longer offers an anonymous visitor a size choice they do not have.
+    // anchored: copy.body is proven above to carry "every dial rolled" and the derived sizes.
     expect(copy.body, 'the locked notice still says the visitor chooses the size').not.toMatch(/choose the size/i);
     expect(copy.body).toMatch(/\btown\b/i);
     // anchored: copy.body was just proven to carry the derived sizes, so an unreplaced {sizes} would be a real leak in a real body.

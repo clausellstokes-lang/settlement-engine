@@ -79,6 +79,7 @@ describe('EconomicsTab M6d thread', () => {
   test('DORMANT: no campaign in the store ⇒ no Live Trade Flow section (baseline only)', () => {
     useStore.setState({ campaigns: [] });
     const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    // anchored: the same render is proven live on the next line (the "modest" prosperity header).
     expect(container.textContent).not.toContain('Live Trade Flow');
     // The generation baseline still renders (prosperity header).
     expect(container.textContent).toContain('modest');
@@ -670,6 +671,7 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     // three, so the DATUM the sentence bands is on the page beside it, said ONCE, in the
     // Not-available line (RS-15: the "1 missing" header chip that also said it is cut).
     expect(pub.container.textContent).toContain('Not available for a village: Healing.');
+    // anchored: the line above proves this public render carries its Not-available line.
     expect(pub.container.textContent).not.toContain('1 missing');
   });
 
