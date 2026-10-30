@@ -258,9 +258,12 @@ export function faithPanelModel(settlement) {
  * DS-FTH-3 lens that restates one of those rows is not drawn. Each lens returns when its datum
  * row is absent (no embed, or a record that lacks it). ONE rule for the screen (FaithTab) and
  * the print (printProse.js's faith position), so the two can never trim differently.
- * @param {Record<string, unknown>} rungs the warFaith desk's rungs
+ * The rungs come back in their OWN type (VERIFIER F2): the lenses are only nulled, never
+ * reshaped, so a caller keeps the desk's rung types rather than reading `unknown`.
+ * @template {object} T
+ * @param {T} rungs the warFaith desk's rungs
  * @param {ReturnType<typeof faithPanelModel>} model
- * @returns {Record<string, unknown>} the same rungs, the restating lenses nulled
+ * @returns {T} the same rungs, the restating lenses nulled
  */
 export function trimFaithDeskToPanel(rungs, model) {
   const m = /** @type {any} */ (model) || {};
