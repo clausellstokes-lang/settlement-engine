@@ -84,7 +84,12 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // src/components/new/npcComponents.jsx with its one unlocked-glyph colour (`'#b8a898'`; the
 // pin beside it keeps its own). Nothing was re-tokenised; the controls are gone. Measured out of
 // its own red run ("raw color literals: 1313 (committed 1317)").
-const BUDGET = 1303; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+// BUILD-T3 (dossier consolidation, 2026-10-30): the chair's CUTS in the World group removed
+// whole blocks with their inline colours (the Relationships crossConns card and the Known
+// Contacts rows, the History Recent Events slice and inline plot-hook kickers, the Faith
+// patron-seat and niche blocks): 1303 -> 1291, measured out of its own red run. Nothing was
+// re-tokenised; the blocks are gone.
+const BUDGET = 1291; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

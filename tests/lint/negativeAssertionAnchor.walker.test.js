@@ -282,7 +282,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/economicsPlotHookSeam.test.jsx': 1,
   'tests/components/economicsTabMalformedFlows.test.jsx': 1,
   'tests/components/engineSections.test.jsx': 2,
-  'tests/components/faithSection.test.jsx': 8,
+  'tests/components/faithSection.test.jsx': 7,
   // ⭐ 2026-08-15, est-1 / EST-B: `tests/components/fogTierGate.test.jsx` LEFT THIS ROSTER AT
   //   ZERO, and it left the way the inventory-honesty arm demands ("a site was anchored;
   //   LOWER the row to 0 (delete it at 0) to bank the win"). Its single un-anchored

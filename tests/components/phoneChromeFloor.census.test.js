@@ -262,7 +262,7 @@ const CENSUS = (() => {
  * every in-flight branch that adds an import anywhere inside a 208-file subtree, which is the
  * cost this field was deliberately shaped to avoid.
  *
- * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769.
+ * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -275,7 +275,7 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate/WizardOutputToolbar.jsx, which is now the public roster's. Nothing
   // on this surface was floored, written or ruled by the re-measure itself; 97 is the count
   // lane 28 has left to do.
-  '/create':                { roots: 1, files: 165, floored: 725, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  '/create':                { roots: 1, files: 165, floored: 719, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -318,13 +318,13 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  '/settlements':           { roots: 1, files: 206, floored: 966, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 960, ruled: 4, bare: 0 },
   '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 154, floored: 769, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 154, floored: 763, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

@@ -29,13 +29,13 @@ import { Sparkles } from 'lucide-react';
 
 import { useStore } from '../../store/index.js';
 import { triggerPricingMoment } from '../../lib/pricingMoments.js';
-import { faithPanelModel } from './faithPanelModel.js';
+import { faithPanelModel, shareBandLabel } from './faithPanelModel.js';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { BODY, BORDER, BORDER2, CARD, CARD_ALT, FS, GOLD, GREEN, INK, MUTED, RED, SECOND, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
-import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';;
+import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 const TONE_COLOR = { good: GREEN, gold: GOLD, bad: RED };
 const TREND = {
@@ -76,6 +76,44 @@ function Cause({ children }) {
   );
 }
 
+/** A `temper:alignment` niche token in plain words ('warlike:good' → 'warlike · good'). */
+function nicheWords(niche) {
+  return String(niche).split(':').filter(Boolean).join(' · ');
+}
+
+/** W-FAITH F7c — one creed's deepening rows: the top-3 authored character in
+ *  the pinned total order, and the boon/bane picks as the band words they are
+ *  authored in. The jealous marker on a boon is the flaw register's typed
+ *  cause, muted so it reads as colour rather than alarm. Absent data renders
+ *  nothing — the rows exist only where a deity authored something. (Moved here
+ *  from FaithTab with the niche rows, 2026-10-30: one creed list, F3 + F6.) */
+function DepthRows({ depth }) {
+  const mobile = useIsMobile();
+  return (
+    <>
+      {depth.top3.length > 0 && (
+        <div data-testid="faith-depth-character" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), lineHeight: 1.5, marginTop: 4 }}>
+          <span style={{ color: MUTED, fontWeight: 700 }}>Known for </span>
+          {depth.top3.map((r, i) => (
+            <span key={`${r.axisId}:${r.pole}`}>
+              {i > 0 && ' · '}
+              <span style={{ textTransform: 'capitalize' }}>{r.word}</span>
+              {` (${r.levelWord})`}
+            </span>
+          ))}
+        </div>
+      )}
+      {depth.gifts.map((g) => (
+        <div key={g.kind} data-testid={`faith-depth-${g.kind}`} style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.pico, mobile), lineHeight: 1.5, marginTop: 2 }}>
+          <span style={{ color: g.kind === 'boon' ? GREEN : RED, fontWeight: 800, textTransform: 'capitalize' }}>{g.kind}</span>
+          {' · '}{g.channelWord}{' · '}{g.strengthWord}
+          {g.flaw && <span style={{ color: MUTED, fontStyle: 'italic' }}>{' · '}{g.flaw}</span>}
+        </div>
+      ))}
+    </>
+  );
+}
+
 /** The full, read-only faith panel (ACTIVE mode). */
 function ActiveFaith({ model }) {
   const [faithOpen, setFaithOpen] = useState(false);
@@ -83,6 +121,11 @@ function ActiveFaith({ model }) {
   // patron line, the standings rows and the band words keep their own steps.
   const mobile = useIsMobile();
   const { patron, cults, effects, live, ranks, piety, unaffiliated, mandate, sinkSentence, patronFallSentence } = model;
+  // THE PATRON SEAT LIVES ON THE PATRON LINE (chair ruling F1, 2026-10-30): the seat's
+  // legitimacy band and the contested marker were a block of their own above this panel,
+  // naming the patron a second time. Live ranks only; a static embed has no band yet.
+  const patronRank = (ranks || []).find((d) => d.isPatron) || null;
+  const byName = model.deepening?.byName || {};
 
   return (
     <section
@@ -108,6 +151,13 @@ function ActiveFaith({ model }) {
           {patron.rankAxis ? ` (${patron.rankAxis})` : ''}
           {patron.lawAxis ? ` · ${patron.lawAxis}` : ''}
           {patron.domain ? ` · ${patron.domain}` : ''}.
+          {patronRank && (
+            <span data-testid="faith-patron-claim">
+              {' Its claim is '}
+              <span style={{ color: TONE_COLOR[patronRank.band.tone], fontWeight: 700 }}>{patronRank.band.label}</span>
+              {model.contested && <span style={{ color: RED }}>{', and a rival creed presses the seat'}</span>}.
+            </span>
+          )}
         </div>
 
         {/* Faith-effects disclosure (the static couplings) */}
@@ -174,16 +224,21 @@ function ActiveFaith({ model }) {
           </div>
         )}
 
-        {/* Pantheon standings — each creed's share + legitimacy band */}
+        {/* THE CREEDS, ONE RANKED LIST (chair ruling F3 + F6, 2026-10-30). The tab's "Niche
+            occupancy" rows and these standings iterated the same ranks; they are one row per
+            creed now: niche · standing · following band · legitimacy band, with the creed's
+            depth rows beneath. The share reads as its band and the legitimacy as its band; the
+            parenthetical "(rightful claim N%)" restated the band word and is gone. */}
         {ranks.length > 0 && (
           <div data-testid="pantheon-standings" style={{ display: 'flex', flexDirection: 'column', gap: 6, borderTop: `1px solid ${BORDER2}`, paddingTop: 10 }}>
             <div style={{ color: INK, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 900 }}>Pantheon standings</div>
             {ranks.map((d) => (
-              <div key={d.name} style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4 }}>
+              <div key={d.name} data-testid="faith-niche-row" style={{ fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), color: BODY, lineHeight: 1.4 }}>
                 <span style={{ fontWeight: 800, color: INK }}>{d.name}</span>
-                {d.isPatron ? ' (patron)' : ''}: {d.share}% · {d.standing} ·{' '}
-                <span style={{ color: TONE_COLOR[d.band.tone], fontWeight: 700 }}>{d.band.label}</span>{' '}
-                <span style={{ color: MUTED }}>(rightful claim {Math.round(d.legitimacy * 100)}%)</span>
+                {d.isPatron ? ' (patron)' : ''}{': '}
+                {d.niche && <span style={{ textTransform: 'capitalize' }}>{nicheWords(d.niche)}{' · '}</span>}
+                {d.standing}{' · '}{shareBandLabel(d.share)}{' · '}
+                <span style={{ color: TONE_COLOR[d.band.tone], fontWeight: 700 }}>{d.band.label}</span>
                 <div
                   role="img"
                   aria-label={`${d.name} adherent share ${d.share} percent`}
@@ -191,6 +246,7 @@ function ActiveFaith({ model }) {
                 >
                   <div style={{ width: `${Math.max(0, Math.min(100, d.share))}%`, height: '100%', background: d.isPatron ? GOLD : SECOND }} />
                 </div>
+                {byName[d.name] && <DepthRows depth={byName[d.name]} />}
               </div>
             ))}
             {unaffiliated != null && unaffiliated > 0 && (

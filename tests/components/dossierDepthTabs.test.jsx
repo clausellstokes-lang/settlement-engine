@@ -40,6 +40,8 @@ vi.mock('../../src/store/index.js', () => {
 import { useStore } from '../../src/store/index.js';
 import WarTab, { MARTIAL_CRISIS_TYPES, warTabHasContent } from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import { warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
+import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import RumorsTab from '../../src/components/new/tabs/RumorsTab.jsx';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
@@ -102,7 +104,7 @@ describe('FaithTab — the constitutional gate (free/anon see NO deity names)', 
   });
 });
 
-// ── §805 FAITH layout — the patron seat, niche occupancy, the realm pantheon ──
+// ── §805 FAITH layout — the patron line, ONE creed list (the embed fixture), the realm pantheon ──
 const liveFaithTown = () => ({
   id: 'home', name: 'Sunhold',
   config: {
@@ -122,47 +124,41 @@ const pantheonCampaign = () => ({
 });
 
 describe('FaithTab — the §805 layout (patron seat + niche occupancy + realm pantheon)', () => {
-  it('renders the patron seat with its legitimacy NOW, and the contested marker', () => {
+  it('the patron line carries the seat\'s legitimacy NOW and the contested marker (F1 merged into F6)', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={liveFaithTown()} />);
-    const seat = screen.getByTestId('faith-patron-seat');
-    expect(seat.textContent).toMatch(/Sunlord Aurelian holds the seat/);
-    expect(seat.textContent).toMatch(/secure/);           // legitimacy 0.8 band
-    // ⭐ THE BAND IS THE WHOLE READING, and the raw percentage that used to sit
-    // beside it is GONE (T11 landing, 2026-08-31). It read "(rightful claim 80%)"
-    // one space after the word "secure" — an engine scalar restating a band word,
-    // the prose-numerics class this estate kills; tests/lint/proseNumerics.test.js
-    // reddened on it at the landing gate. This pin is now the humanization itself.
-    // anchored: the seat's name, band and contested marker are all asserted PRESENT on this same textContent (above and below), so an emptied node cannot pass this absence.
-    expect(seat.textContent).not.toMatch(/\d+%/);
-    expect(seat.textContent).toMatch(/contested/i);
+    // One block names the patron: the separate "patron seat" block is gone.
+    expect(screen.queryByTestId('faith-patron-seat')).toBeNull();
+    const patron = screen.getByTestId('faith-patron');
+    expect(patron.textContent).toMatch(/Sunlord Aurelian/);
+    expect(patron.textContent).toMatch(/Its claim is secure/);          // legitimacy 0.8 band
+    expect(patron.textContent).toMatch(/a rival creed presses the seat/);
+    // anchored: the patron's name, band and contested clause are asserted PRESENT on this same textContent above
+    expect(patron.textContent).not.toMatch(/\d+%/);
   });
 
-  it('renders niche occupancy — who occupies which niche, one row per creed', () => {
+  it('ONE ranked creed list (F3 + F6): niche · standing · following band · legitimacy band', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={liveFaithTown()} />);
+    // The embed fixture carries two live creeds; the page lists each ONCE.
     const rows = screen.getAllByTestId('faith-niche-row');
     expect(rows).toHaveLength(2);
-    expect(rows[0].textContent).toMatch(/peacelike · good: Sunlord Aurelian \(patron\)/);
-    expect(rows[1].textContent).toMatch(/warlike · evil: The Gloam/);
-    // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band
-    // table that collapsed to one word could not pass: share 60 and share 25 are
-    // deliberately either side of the 50 cut. The standing token is the engine's
-    // own finite word, rendered verbatim.
-    expect(rows[0].textContent).toMatch(/ascendant · most of the town/);
-    expect(rows[1].textContent).toMatch(/cult · a large minority/);
-    // T11 landing: `{d.share}%` was copied in shape from FaithSection.jsx:174, which is
-    // BANKED prose-numerics debt rather than a sanctioned idiom — hence the absence below.
-    // anchored: BOTH rows are asserted above to carry their creed name, niche and banded following on this exact joined textContent, so an emptied render cannot pass this.
-    expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%/);
+    expect(screen.queryByTestId('faith-niches')).toBeNull();
+    expect(screen.getAllByTestId('pantheon-standings')).toHaveLength(1);
+    expect(rows[0].textContent).toMatch(/Sunlord Aurelian \(patron\): peacelike · good · ascendant · most of the town · secure/);
+    // THE FOLLOWING IS IN WORDS, and the two rungs are pinned APART so a band table that
+    // collapsed to one word could not pass: share 60 and share 25 sit either side of the 50 cut.
+    expect(rows[1].textContent).toMatch(/The Gloam: warlike · evil · cult · a large minority · /);
+    // anchored: BOTH rows are asserted above to carry their creed, niche, standing and bands on this exact joined textContent
+    expect(`${rows[0].textContent}${rows[1].textContent}`).not.toMatch(/\d+%|rightful claim/);
   });
 
-  it('a static embed (no live profile) renders NO fabricated seat or occupancy', () => {
+  it('a static embed (no live profile) renders NO fabricated seat claim or creed list', () => {
     useStore.__set({ auth: { tier: 'anon' } });
     render(<FaithTab settlement={activePatronTown()} />);
     expect(screen.getByTestId('faith-section')).toBeTruthy();
-    expect(screen.queryByTestId('faith-patron-seat')).toBeNull();
-    expect(screen.queryByTestId('faith-niches')).toBeNull();
+    expect(screen.queryByTestId('faith-patron-claim')).toBeNull();
+    expect(screen.queryByTestId('faith-niche-row')).toBeNull();
   });
 
   it('the realm pantheon mounts for the premium DM alone (never playerView / public / anon)', () => {
@@ -483,10 +479,20 @@ describe('warTabHasContent — the War tab\'s presence predicate (W10 / X-7)', (
 });
 
 describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
-  it('draws the DS-FTH-1 seat sentences and the DS-FTH-3 creed sentences', () => {
+  it('DS-FTH-1 is silent where the panel states each lens (F2); DS-FTH-3 still draws its creed sentence', () => {
     useStore.__set({ auth: { tier: 'anon' } });
+    // The desk DOES draw for this fixture: the patron's rank and the standings lenses.
+    const rungs = warFaithDeskRungs({
+      settlement: liveFaithTown(), publicDossier: false,
+      readings: { faith: faithPanelModel(liveFaithTown()), hasPatron: true },
+    });
+    expect(rungs.patronRank, 'the desk drew no rank lens to trim').toBeTruthy();
+    expect(rungs.standings, 'the desk drew no standings lens to trim').toBeTruthy();
     render(<FaithTab settlement={liveFaithTown()} />);
-    expect(screen.getByTestId('faith-desk-seat').textContent).toContain('Sunlord Aurelian');
+    // ...and both restate a datum row the panel prints (the patron's rank on its line, the
+    // ranked creed list), so the seat paragraph draws neither (chair ruling F2).
+    expect(screen.getByTestId('faith-patron').textContent).toMatch(/\(major\)/);
+    expect(screen.queryByTestId('faith-desk-seat')).toBeNull(); // anchored: the two rungs are asserted present above and the panel's rank row two lines up
     // DS-FTH-3 speaks at `faith.creedStanding`: the patron's standing is `ascendant`.
     const creed = screen.getByTestId('faith-desk-creed');
     const authored = WAR_FAITH['DS-FTH-3'].pools['STANDING: ascendant']
@@ -521,8 +527,8 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
       .find((t) => privText.includes(t));
     expect(line, 'the private render drew no DS-FTH-3 sentence to test the gate with').toBeTruthy();
     expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-FTH-3 on the faith tab');
-    // The DATUM survives: the patron seat, its band and the niche rows are all untouched.
-    expect(pubText).toContain('Sunlord Aurelian holds the seat');
+    // The DATUM survives: the patron line, its band and the creed rows are all untouched.
+    expect(pubText).toContain('Its claim is secure');
     expect(pubText).toMatch(/ascendant/);
   });
 
@@ -536,9 +542,9 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
     const authored = WAR_FAITH['DS-FTH-2'].pools['PRIVATE DOSSIER']
       .map((v) => v.text.replace(/\{settlement\}/g, 'Quietford'));
     expect(authored.some((line) => teaser.textContent.includes(line))).toBe(true);
-    // The standing message keeps its call to action beside it — product furniture, not a
-    // fact about the town, so the two are not twins the way the war note and its fallback are.
-    expect(container.textContent).toMatch(/Assign a patron deity/);
+    // The standing message is the fact alone (chair ruling F8): the call to action is gone.
+    expect(container.textContent).toMatch(/This settlement keeps no named faith\./);
+    expectAbsentWithAnchor(container.textContent, 'Assign a patron deity', 'This settlement keeps no named faith.', 'F8 call to action');
     // And the honest-absence guarantee holds: the seat, the niches and the creed lines are
     // all absent, because there is no creed to name.
     expect(screen.queryByTestId('faith-desk-seat')).toBeNull();

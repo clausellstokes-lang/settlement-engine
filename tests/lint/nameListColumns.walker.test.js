@@ -138,9 +138,6 @@ const RULED = Object.freeze({
     'card — a ForceCard; a chartered company carries its terms under its name.',
   'src/components/new/tabs/DefenseTab.jsx :: magicDef':
     'card — a ForceCard for an arcane defence, with the same inside as its siblings.',
-  'src/components/new/tabs/FaithTab.jsx :: ranks':
-    'card — a niche row carries the creed\'s deepening rows (character, boon and bane) beneath '
-    + 'it, so the row has an inside a column would break.',
   'src/components/new/tabs/NPCsTab.jsx :: presentFactions':
     'card — an NPCCategoryGroup is a whole faction\'s roster, not a row.',
   'src/components/new/tabs/RelationshipsTab.jsx :: filteredRels':
@@ -165,8 +162,6 @@ const RULED = Object.freeze({
     + 'under it; it belongs to that row rather than being a list of its own.',
 
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
-  'src/components/new/tabs/FaithTab.jsx :: depth.top3':
-    'inline-run — the three character words run INLINE in one line, separated by a middot.',
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':
     'inline-run — the chain\'s final products run inline with arrow separators, as one flow.',
   'src/components/new/tabs/ViabilityTab.jsx :: generationReceipt.checks':
@@ -266,12 +261,13 @@ describe('THE NAME-LIST CENSUS — every dossier list of short rows is ruled on'
     // lowered to admit a change. Measured by executing this walk against this tree
     // on 2026-09-19: 27 files, 30 distinct sites, 4 of them ruled `columns`.
     // ⚠ MOVED BY RULING, NOT TO ADMIT A CHANGE (BUILD-T3, 2026-10-30): the consolidation
-    // chair CUT whole list blocks (N8 the NPCs tab's tie fold). Each cut site is a
-    // ruled removal, re-measured on the tree it leaves: 29 sites after N8.
+    // chair CUT whole list blocks (N8 the NPCs tab's tie fold; F3 the Faith tab's niche rows, now
+    // FaithSection's one creed list). Each cut site is a ruled removal, re-measured on the tree
+    // it leaves: 29 sites after N8, 27 after F3.
     expect(FILES.length, 'the census tree is empty — has src/components/new/tabs moved?')
       .toBeGreaterThanOrEqual(27);
     expect(SCANNED.length, 'the walk judged almost no list sites — the `.map(` shape it looks for has changed')
-      .toBeGreaterThanOrEqual(29);
+      .toBeGreaterThanOrEqual(27);
     expect(COLUMNED.length, 'no site is ruled `columns` — the registry half has emptied')
       .toBeGreaterThanOrEqual(4);
   });

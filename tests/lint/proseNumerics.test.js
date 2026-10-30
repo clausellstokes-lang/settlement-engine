@@ -487,10 +487,17 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // 0 removed, census and category counts unchanged. U2 (NPCs, N4 tally cut):
 // npcComponents.jsx 150 -> 146, 157 -> 153. U5 (Daily Life anchor strip trimmed, the
 // unsaved hint and empty state merged): DailyLifeTab.jsx 268 -> 235.
-const REVIEWED_TOTAL_CEILING = 218;
+// ⭐ U6 IS A CURE, NOT A MOVE (chair rulings F3 + F6, 2026-10-30): the merged creed list in
+// FaithSection.jsx prints the share as its band (`shareBandLabel`) and drops the parenthetical
+// "(rightful claim N%)", so FOUR banked rows leave: `{d.share}` float + percent at :184 and
+// `{Math.round(d.legitimacy * 100)}` float + percent at :186. Reviewed row by row; the three
+// survivors re-address (`{d.standing}` 184 -> 240, the bar's aria-label 189 -> 244 both
+// categories, `{unaffiliated}` 198 -> 254). Ceilings fall with the debt: total 218 -> 214,
+// floatInterpolation 147 -> 145, percentToken 54 -> 52.
+const REVIEWED_TOTAL_CEILING = 214;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 147,
-  percentToken: 54,
+  floatInterpolation: 145,
+  percentToken: 52,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -831,8 +838,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 219 exceeds reviewed ceiling 218',
-      'floatInterpolation 148 exceeds reviewed ceiling 147',
+      'total 215 exceeds reviewed ceiling 214',
+      'floatInterpolation 146 exceeds reviewed ceiling 145',
     ]);
   });
 

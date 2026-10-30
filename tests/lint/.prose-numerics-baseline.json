@@ -703,49 +703,25 @@
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
-    "category": "floatInterpolation",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
+    "line": 240,
     "category": "floatInterpolation",
     "snippet": "{d.standing}"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 184,
-    "category": "percentToken",
-    "snippet": "{d.share}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 186,
-    "category": "floatInterpolation",
-    "snippet": "{Math.round(d.legitimacy * 100)}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 186,
-    "category": "percentToken",
-    "snippet": "{Math.round(d.legitimacy * 100)}"
-  },
-  {
-    "path": "src/components/settlement/FaithSection.jsx",
-    "line": 189,
+    "line": 244,
     "category": "floatInterpolation",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 189,
+    "line": 244,
     "category": "percentToken",
     "snippet": "`${d.name} adherent share ${d.share} percent`"
   },
   {
     "path": "src/components/settlement/FaithSection.jsx",
-    "line": 198,
+    "line": 254,
     "category": "percentToken",
     "snippet": "{unaffiliated}"
   },
