@@ -10,6 +10,7 @@ import { isViabilityItem } from '../../../domain/display/viabilityFilter.js';
 
 import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/defenseStateProse.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
+import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 
 import {NarrativeNote} from '../NarrativeNote';
@@ -84,7 +85,12 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // viewer and corpus prose is a PAID surface, so the desk is NOT DRAWN there. The audience
   // follows kernel law 2's fail-closed default, stated rather than defaulted. This tab
   // received neither flag before this car; `OutputContainer` now passes both.
-  const magicProse = publicDossier
+  // ⛔ T2-24 (red-first): every DS-DEF-9 pool reads the town's relation to its practitioners
+  // ("there is magic at X and the town does not rest on it"), so where magic does not function
+  // the block is not drawn (R-DST-K), as DS-DEF-5's arcane lens already is. Gated HERE, at the
+  // desk's one screen caller (and in printProse.js for print), because the desk composer is
+  // stamped by the wiring census. Measured on ../gen1000v2: 250 of 250 no-magic worlds drew it.
+  const magicProse = publicDossier || magicWorksAt({ settlement: s }) === false
     ? Object.freeze({ arcaneReliance: null })
     : defenseMagicDependencyProse(s, {
       seed: String(s?._seed ?? s?.id ?? ''),

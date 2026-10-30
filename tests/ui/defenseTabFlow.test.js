@@ -36,6 +36,7 @@ import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDi
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -328,5 +329,54 @@ describe('UX consolidation — Defense (T2-20..T2-23)', () => {
     expect(text).toContain('Legal Infrastructure');
     expect(text).not.toContain('Economic Backing'); // anchored: toContain('Legal Infrastructure') on this render
     expect(text).not.toContain('No critical defense vulnerabilities'); // anchored: same render
+  });
+});
+
+/**
+ * ⭐ T2-24 — IN A WORLD WHERE MAGIC DOES NOT FUNCTION, NO PAGE SAYS THE TOWN KEEPS ARCANE
+ * PROVISION OR RESTS (OR DOES NOT REST) ON MAGIC. Red-first: on the unfixed tree the
+ * Supporting Capabilities row read "Arcane Support: Present" on 84 of the 250 no-magic worlds
+ * in ../gen1000v2 (an alchemist matches the arcane-roster regex), and DS-DEF-9 drew a magic
+ * reading on 250 of 250 ("There is magic at X and the town does not rest on it"). Both are
+ * display-time derivations, so both are cured where they are derived, through the estate's one
+ * magic accessor (`magicWorksAt`). The generator is untouched.
+ */
+describe('T2-24 — magic does not function: no arcane provision, no magic-dependence reading', () => {
+  const deadMagicTown = () => {
+    for (const seed of ['nomagic-a', 'nomagic-b', 'nomagic-c', 'nomagic-d', 'nomagic-e', 'nomagic-f']) {
+      const s = generateSettlementPipeline(
+        { settType: 'city', culture: 'germanic', terrain: 'grassland', tradeRouteAccess: 'road', magicExists: false },
+        null, { seed, customContent: {} },
+      );
+      if (s.compound?.inst?.hasMagicInst || s.economicState?.compound?.inst?.hasMagicInst) return s;
+    }
+    return null;
+  };
+
+  test('the Arcane Support row reads None in a dead-magic world, even with an alchemist on the roll', () => {
+    const s = deadMagicTown();
+    expect(s, 'fixture premise: a dead-magic city whose roster matches the arcane regex').toBeTruthy();
+    const cap = deriveSupportingCapabilities(s).find((c) => c.label === 'Arcane Support');
+    expect(cap.status).toBe('None');
+    expect(cap.score).toBeNull();
+    const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    openSection(container, 'Supporting Capabilities');
+    expect(container.textContent).toContain('Arcane Support');
+    expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Arcane Support') on this render
+  });
+
+  test('DS-DEF-9 is silent in a dead-magic world, and the Outlook page draws no magic block', () => {
+    const s = deadMagicTown();
+    // The desk itself still builds a rung (its composer is census-stamped); the screen and
+    // print callers gate it, so neither surface draws it.
+    expect(defenseMagicDependencyProse(s, opts(s)).arcaneReliance?.sentence, 'fixture premise: the desk would speak').toBeTruthy();
+    expect(buildPrintProse(s).viability?.['viability.magicDependency'] ?? null, 'print draws no magic reading').toBeFalsy();
+    const { container } = render(e(ViabilityTab, { settlement: s, narrativeNote: null }));
+    expect(container.textContent).toContain('Judged at the first survey');
+    expect(container.querySelector('[data-testid="viability-magic-dependence"]')).toBeNull();
+  });
+
+  test('a live-magic world still draws DS-DEF-9 (the gate is the dial, not a blanket silence)', () => {
+    expect(defenseMagicDependencyProse(port, opts(port)).arcaneReliance?.sentence).toBeTruthy();
   });
 });

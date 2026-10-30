@@ -14,6 +14,7 @@
 import { buildThreatAssessment } from './threatAssessment.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
+import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -212,6 +213,13 @@ export function deriveSupportingCapabilities(settlement) {
   const tradeAccess = r.config?.tradeRouteAccess || 'road';
   const magicDef = inst.magicDef || [];
   const econScore = Math.round(scores.economic || 0);
+  // ⛔ T2-24 (UX consolidation 2026-10-30, red-first): IN A WORLD WHERE MAGIC DOES NOT
+  // FUNCTION THERE IS NO ARCANE PROVISION TO HAVE. `hasMagicInst` is a roster regex, and an
+  // alchemist matches it, so 84 of the 250 no-magic worlds in the corrected sample read
+  // "Arcane Support: Present ... Detection, wards, counterspell." beside a Magic tab saying
+  // magic does not function. The dial is asked of the estate's one accessor (wrapped as
+  // `{ settlement }`, the call shape every caller uses; see defenseStateProse.js).
+  const arcane = !!f.hasMagicInst && magicWorksAt({ settlement: r }) !== false;
 
   const caps = [
     {
@@ -267,23 +275,25 @@ export function deriveSupportingCapabilities(settlement) {
       // reads and the status answers WHETHER it is here, so the two words carry two readings
       // and the band beside them carries the third. The note text is untouched.
       label: 'Arcane Support',
-      status: f.hasMagicInst ? 'Present' : 'None',
+      status: arcane ? 'Present' : 'None',
       // A PRESENCE READ HAS NO MAGNITUDE, which is the shape THIS LIST ALREADY USES for
       // every other one. Legal Infrastructure, Medical Readiness and Logistics & Supply all
       // carry `score: null` and render no bar, because "is there a court" has no size. So
       // does this row when the answer is no, and `scores.magical` is untouched either way —
       // the Overview's Systems Health row still bands it, because THAT row is labelled by
       // the score and not by the institution.
-      color: f.hasMagicInst ? '#5a2a8a' : '#9c8068', score: f.hasMagicInst ? (scores.magical || 0) : null,
+      color: arcane ? '#5a2a8a' : '#9c8068', score: arcane ? (scores.magical || 0) : null,
       // ⚠ THE NOTE ANSWERS THE SAME NARROW QUESTION THE LABEL DOES. It used to say
       // "Conventional defense only. Invisible threats go undetected and unanswered." — a
       // claim about the settlement's WHOLE magical posture, which this flag cannot make: a
       // cathedral is not arcane, and a town with a cathedral, a healer and no wizard reads
       // `hasMagicInst === false` while being anything but conventional. The note now says
       // what is missing (arcane practitioners) and what follows from that specifically.
-      note: f.hasMagicInst
+      note: arcane
         ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.`
-        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
+        : magicWorksAt({ settlement: r }) === false
+          ? 'Magic does not function in this world.'
+          : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
       label: 'Legal Infrastructure',

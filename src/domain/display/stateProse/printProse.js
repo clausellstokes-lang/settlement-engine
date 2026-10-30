@@ -84,6 +84,7 @@ import { stressorsStateProse } from './stressorsStateProse.js';
 import { warFaithStateProse } from './warFaithStateProse.js';
 import { deriveAllActiveConditions } from '../../activeConditions.js';
 import { deriveCriminalStructure } from '../defenseDisplay.js';
+import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../dossierViewModel.js';
 import { populationTrendBand } from '../trendLens.js';
 import { normalizeStressor } from '../../worldPulse/stressorsCore.js';
@@ -417,7 +418,8 @@ export function buildPrintProse(settlement, ctx = {}) {
   const status = defenseMilitaryStatusProse(r, opts);
   const wall = defenseWallRationaleProse(r, opts);
   const supporting = defenseSupportingProse(r, opts);
-  const magic = defenseMagicDependencyProse(r, opts);
+  // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
+  const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
   const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
 
   // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:218-242 ───────────
