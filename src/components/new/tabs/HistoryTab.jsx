@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Collapsible, Section, Empty } from '../Primitives';
-import { LITERARY_TITLE, tokenCase } from '../labelLadder.js';
+import { tokenCase } from '../labelLadder.js';
 import {EVENT_COLORS, SEV_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
@@ -38,7 +38,9 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
   );
   if (!r?.history) return <Empty message="No historical data available."/>;
   const h = r.history;
-  const {identityLines, foundedLine, recordLine} = historyDesk;
+  // DS-GEN-9 (history.identity) and DS-GEN-16 (history.record) are GLANCE rows by chair
+  // ruling (H3, H4): the founding line is the history desk's one sentence on this page.
+  const {foundedLine} = historyDesk;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
   // Extended event type colors (EVENT_COLORS only covers 5 types)
@@ -172,32 +174,8 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
           )}
         </div>
         {historicalCharacter&&<p style={{...serif,fontSize: proseFontSize(FS['13.5'], mobile),color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
-        {/* ── DS-GEN-16 (history.record) ─────────────────────────────────────
-            ⚠ THE CHAIR CUT THIS LINE (H3, 2026-10-30) AND THE CUT IS HELD: `history.record`
-            is a sentence row in dossierMounts.js, the first-paint arm convicts a row with
-            no draw site, and UNMOUNTED_BLOCKS is shrink-only. Reported to the chair. Its
-            DS-GEN-14 partner moved into Founding below (H3). */}
-        {recordLine&&<div style={{borderTop:'1px solid #c8b89a',marginTop:10,paddingTop:8}}>
-          <ProseBlock lines={[recordLine]} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>}
       </div>
 
-      {/* ── DS-GEN-9 (history.identity) ────────────────────────────────────
-          The town's own account of itself: how it began, what it is like, the
-          one event it is still explained by, and how far back that event sits.
-          FOUR POOLS OF ONE BLOCK AT ONE POSITION — the DS-GEN-6 precedent — and
-          never one sentence per event: the record's per-event verdict belongs to
-          DS-GEN-16 above, and two blocks narrating each row in turn is the page
-          repeating itself about one fact.
-          ⚠ THE CHAIR CUT THIS BLOCK (H4, 2026-10-30: two-template boilerplate, and an event
-          that disagrees with the character line above in 78% of towns) AND THE CUT IS HELD
-          for the same registry reason as DS-GEN-16 above. Reported to the chair. */}
-      {identityLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-        <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the years have made of it</div>
-        <ProseBlock lines={identityLines} settlementName={r.name} tier={r.tier}
-          style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-      </div>}
 
       {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">

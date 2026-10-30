@@ -140,6 +140,9 @@ const RULED = Object.freeze({
     'card — a ForceCard for an arcane defence, with the same inside as its siblings.',
   'src/components/new/tabs/NPCsTab.jsx :: presentFactions':
     'card — an NPCCategoryGroup is a whole faction\'s roster, not a row.',
+  'src/components/new/tabs/RelationshipsTab.jsx :: neighbours':
+    'card — a NeighbourLinkCard is a whole neighbour standing with its own fold (cause, status, '
+    + 'tensions, connections); the desk line that rode beside it glances since 2026-10-30.',
   'src/components/new/tabs/RelationshipsTab.jsx :: filteredRels':
     'card — an NPCRelCard2 carries the tie and its description.',
   'src/components/new/tabs/RelationshipsTab.jsx :: conflicts':

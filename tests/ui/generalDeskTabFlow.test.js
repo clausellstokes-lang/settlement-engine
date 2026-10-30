@@ -37,6 +37,7 @@ import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { useStore } from '../../src/store/index.js';
 import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMember, drawnMembers, poolMemberTexts } from '../helpers/drawnProse.js';
@@ -490,22 +491,22 @@ const renderHistory = (publicDossier) => render(e(HistoryTab, {
 })).container.textContent;
 
 describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a free viewer', () => {
-  test('all three history positions reach the DOM privately and none reach a public dossier', () => {
+  test('the one speaking history position reaches the DOM privately, not publicly; the two glance rows print no sentence', () => {
     const priv = renderHistory(false);
     cleanup();
     const pub = renderHistory(true);
-    // DS-GEN-14 now opens the Founding block (chair ruling H3, 2026-10-30) and DS-GEN-16 stands
-    // alone under the identity header, so each is the FIRST sentence of its own paragraph;
-    // DS-GEN-9's four lenses are their own woven position below it.
+    // DS-GEN-14 opens the Founding block (chair ruling H3, 2026-10-30). DS-GEN-9
+    // (history.identity) and DS-GEN-16 (history.record) are GLANCE rows by the same ruling (H3,
+    // H4), so the reader hands back no sentence for them and the page prints none.
     const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
-    expectNoSeedFailures(collectSeedFailures([
-      [onPage(IDENTITY, hist.identityLines, CHRONICLED), 'DS-GEN-9 the founding line (history.identity)'],
-      [onPage(MARKER, hist.identityLines, CHRONICLED), 'DS-GEN-9 the marker event (history.identity)'],
-      [onPage(FOUNDED, [hist.foundedLine], CHRONICLED), 'DS-GEN-14 founded once, grown since (history.founded)'],
-      [onPage(RECORD, [hist.recordLine], CHRONICLED), 'DS-GEN-16 what the record carries (history.record)'],
-    ], ([sentence, label]) => expectPresentThenAbsent(
-      priv, pub, sentence, `the general desk at ${label}`,
-    )), 'every history position draws privately and is silent on a public dossier');
+    expectPresentThenAbsent(priv, pub, onPage(FOUNDED, [hist.foundedLine], CHRONICLED),
+      'the general desk at DS-GEN-14 founded once, grown since (history.founded)');
+    expect(hist.identityLines, 'history.identity speaks again').toEqual([]);
+    expect(hist.recordLine, 'history.record speaks again').toBeNull();
+    const anchor = onPage(FOUNDED, [hist.foundedLine], CHRONICLED);
+    for (const [sentence, label] of [[IDENTITY, 'DS-GEN-9 founding lens'], [MARKER, 'DS-GEN-9 marker lens'], [RECORD, 'DS-GEN-16 record line']]) {
+      expectAbsentWithAnchor(priv, sentence, anchor, `${label} (glance)`);
+    }
   });
 
   test('the gate takes the corpus sentences ONLY — the record itself survives it', () => {
@@ -521,14 +522,13 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     // Filling {calamity} with the event name verbatim printed "The The Economic Divide".
     // This is that defect as a rendered-output assertion rather than a note.
     const priv = renderHistory(false);
-    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a corpus sentence from the calamity pool
-    // ANCHORED: the same render really did draw the record line, so the absence above is the
-    // fix holding rather than the block having fallen silent. The record line is its own
-    // paragraph now (H3), so the page prints it with its opening name intact.
+    expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(FOUNDED) below proves this same render drew a corpus sentence
+    // ANCHORED: the same render really did draw a corpus sentence (the founding line; the
+    // record line GLANCES since chair ruling H3, so the seam is also driven pool-wide below).
     const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
-    expect(priv).toContain(onPage(RECORD, [hist.recordLine], CHRONICLED));
+    expect(priv).toContain(onPage(FOUNDED, [hist.foundedLine], CHRONICLED));
     // And no unfilled seam survived into the page.
-    expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(RECORD) two lines up proves the page carries corpus prose at all
+    expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(FOUNDED) two lines up proves the page carries corpus prose at all
     // ⛔ AND THE DEFECT'S REAL SUBJECT IS NOT LEFT TO SEED LUCK (car 8a-13). Only TWO of
     // ANCHORED-RECENT's three wordings name `{calamity}` at all, so which of them the render
     // above happens to draw decides whether the DOM arm touches the seam. Every wording of the
@@ -950,42 +950,32 @@ const PATRON_LINES = poolMemberTexts({
   leaf: 'general', blockId: 'DS-REL-1', poolKey: 'patron', slots: LINK_SLOTS,
 });
 
-describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free viewer', () => {
+describe('DS-REL-1 GLANCES ON THE RELATIONSHIPS TAB (chair ruling 2026-10-30) — the cards keep every datum', () => {
   const campaignsBefore = useStore.getState().campaigns;
   afterEach(() => { useStore.setState({ campaigns: campaignsBefore }); });
 
-  /** @param {boolean} publicDossier */
-  const renderRels = (publicDossier) => {
+  test('the reader hands back no sentence at relationships.network, and the page prints none of the corpus lines', () => {
+    const lists = relationshipsDeskLists(LINKED);
+    const desk = generalDeskLines(LINKED, {
+      publicDossier: false, playerView: false,
+      neighbours: lists.neighbours, crossEngagements: lists.crossEngagements,
+    }).relationships;
+    expect(desk.networkLines.flat().filter(Boolean), 'relationships.network speaks again').toEqual([]);
+    expect(desk.engagementLines.filter(Boolean), 'relationships.network speaks again').toEqual([]);
     useStore.setState({ campaigns: [] });
-    return render(e(RelationshipsTab, {
+    const page = render(e(RelationshipsTab, {
       settlement: LINKED, narrativeNote: null, saveId: 'steinmark',
-      viewerIsPremium: false, playerView: false, publicDossier,
+      viewerIsPremium: false, playerView: false, publicDossier: false,
     })).container.textContent;
-  };
-
-  test('both tie lenses and the engagement reach the DOM privately and none reaches a public dossier', () => {
-    const priv = renderRels(false);
-    cleanup();
-    const pub = renderRels(true);
-    expectNoSeedFailures(collectSeedFailures([
-      [TIE, 'the standing (this town is the CLIENT)'],
-      [CONTACTS, 'the named people'],
-      [ENGAGEMENT, 'the cross-settlement engagement'],
-    ], ([sentence, label]) => expectPresentThenAbsent(
-      priv, pub, sentence, `DS-REL-1 ${label} (relationships.network)`,
-    )), 'both tie lenses and the engagement draw privately and none reaches a public dossier');
-    // ⛔⛔ THE ARM, DRIVEN IN THE DOM: NO wording of the other end's standing may appear.
-    expectNoSeedFailures(collectSeedFailures(PATRON_LINES, (line) => {
-      expect(priv, 'the wrong town\'s standing reached the reader').not.toContain(line); // anchored: expectPresentThenAbsent above proves this render drew the CLIENT end of the same tie
-    }), `no wording of DS-REL-1 :: patron reaches the client end's page (${PATRON_LINES.length} of 3)`);
-    // ⛔ AND THE FAR END'S PERSON IS NEVER NAMED INSIDE THIS TOWN'S WALLS by the corpus line.
-    expect(priv.slice(priv.indexOf(CONTACTS), priv.indexOf(CONTACTS) + CONTACTS.length + 90))
-      .not.toContain('Felix'); // anchored: the slice is taken around CONTACTS, which expectPresentThenAbsent above proves is present
-    // The DATUM survives the gate: the card, the badge and the engagement row keep their own
-    // words; only the corpus sentences go.
-    expect(pub).toContain('Thornmere');
-    expect(pub).toContain('The Guild');
-    expect(pub).toContain('Two houses, one quarrel.');
+    const anchor = 'Two houses, one quarrel.';
+    for (const [sentence, label] of [[TIE, 'the standing'], [CONTACTS, 'the named people'], [ENGAGEMENT, 'the engagement'], ...PATRON_LINES.map((l) => [l, 'the patron end'])]) {
+      expectAbsentWithAnchor(page, sentence, anchor, `DS-REL-1 ${label} (glance)`);
+    }
+    // The DATUM stays: the card, its type badge and the engagement row keep their own words.
+    expect(page).toContain('Thornmere');
+    expect(page).toContain('patron');
+    expect(page).toContain('The Guild');
+    expect(page).toContain(anchor);
   });
 
   test('the ROUTER threads publicDossier to the Relationships tab (and to Neighbours while that route exists)', () => {

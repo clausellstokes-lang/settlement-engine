@@ -10,7 +10,6 @@ import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
-import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
 import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
 
 export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
@@ -75,18 +74,9 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
   const relLists = useMemo(() => relationshipsDeskLists(r), [r]);
   const crossConflicts = relLists.crossEngagements;
   const neighbours = relLists.neighbours;
-  // DS-REL-1 (`relationships.network`) — the town's own account of each standing it keeps
-  // and of the engagements running between named houses. The lists are the ones this tab
-  // ALREADY assembled above, so the prose and the cards cannot describe two different sets.
-  // Silent on a free dossier and silent where a tie's end is unstated (R-DST-K).
-  // ⚠ THE CHAIR CUT BOTH DRAWS (2026-10-30: the network line is tone without a fact, the
-  // engagement lines generic), and the cut is HELD: `relationships.network` is a sentence row
-  // in dossierMounts.js, and with no draw site the first-paint arm convicts it. Unmounting
-  // DS-REL-1 (registry + print position) lies outside BUILD-T3's files; reported to the chair.
-  const relDesk = useMemo(
-    () => generalDeskLines(r, { publicDossier, playerView, neighbours, crossEngagements: crossConflicts }).relationships,
-    [r, publicDossier, playerView, neighbours, crossConflicts],
-  );
+  // DS-REL-1 (`relationships.network`) is a GLANCE row by chair ruling (2026-10-30): the network
+  // line paraphrased the type badge and the engagement lines were generic. The cards keep
+  // every datum; the desk has no sentence on this page.
 
   if (!r) return null;
 
@@ -148,13 +138,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
       {/* Neighbour Network */}
       {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:12}}>
-          {neighbours.map((link,i)=><React.Fragment key={link.id||i}>
-            <NeighbourLinkCard link={link} settlement={r} styleFor={styleFor}/>
-            {/* INDEX-PAIRED with the desk's own per-link group, nulls kept in place. */}
-            {(relDesk.networkLines[i]||[]).filter(Boolean).map((t,j)=>(
-              <p key={j} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'-6px 0 0',fontStyle:'italic'}}>{t}</p>
-            ))}
-          </React.Fragment>)}
+          {neighbours.map((link,i)=><NeighbourLinkCard key={link.id||i} link={link} settlement={r} styleFor={styleFor}/>)}
         </div>
       </Section>}
 
@@ -209,7 +193,6 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
                 </span>
               </div>
               {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
-              {relDesk.engagementLines[i]&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5,fontStyle:'italic',marginTop:4}}>{relDesk.engagementLines[i]}</div>}
             </div>;
           })}
         </div>

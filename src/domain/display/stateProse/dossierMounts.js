@@ -447,14 +447,21 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H4; rubric R2/R4): "What the years have
+  // made of it" was two-template boilerplate, and its marker event disagreed with the
+  // character line in 351 of 451 towns (77.8%). The character line is the page's one
+  // defining event (X-9); DS-GEN-9 has no speaking position.
   Object.freeze({
-    mount: 'history.identity', tab: 'history', desk: 'general', blockId: 'DS-GEN-9', rung: 'sentence', dimensions: ['anchor'],
+    mount: 'history.identity', tab: 'history', desk: 'general', blockId: 'DS-GEN-9', rung: 'glance', dimensions: ['anchor'],
   }),
   Object.freeze({
     mount: 'history.founded', tab: 'history', desk: 'general', blockId: 'DS-GEN-14', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H3; rubric R2): the record line named the
+  // same event DS-GEN-9 named in 148 of 227 towns; the founding line (DS-GEN-14) is the one
+  // sentence the history page keeps, inside Founding. DS-GEN-16 has no speaking position.
   Object.freeze({
-    mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
+    mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'glance',
   }),
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
@@ -471,8 +478,12 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.steadings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-8', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 Relationships; rubric R2/R4): the network
+  // line paraphrased the type badge printed one line above it (3 templates per type over 394
+  // lines), and the engagement lines were generic (one contradicted its row). The neighbour
+  // cards and engagement rows are the position's rows; DS-REL-1 has no speaking position.
   Object.freeze({
-    mount: 'relationships.network', tab: 'relationships', desk: 'general', blockId: 'DS-REL-1', rung: 'sentence',
+    mount: 'relationships.network', tab: 'relationships', desk: 'general', blockId: 'DS-REL-1', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.populationDirection', tab: 'overview', desk: 'general', blockId: 'DS-POP-3', rung: 'sentence',

@@ -464,7 +464,7 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(Object.keys(printed).length).toBeLessThan(20);
   });
 
-  test('PARITY: `relationships.network` PRINTS on a saved, linked world and equals the screen', () => {
+  test('PARITY: `relationships.network` GLANCES (chair ruling 2026-10-30) — neither the print nor the screen speaks on a linked world', () => {
     // ⛔ NON-VACUITY FIRST, AND IT IS THE WHOLE ARM. A GENERATED world carries none of the
     // three save-time lists, so this position is silent on every other fixture in this file
     // and an arm built on one of them would pass whether the mount printed or not — which is
@@ -477,14 +477,16 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(linked.crossSettlementConflicts, 'the saved fixture lost its NOT-READ control row')
       .toHaveLength(1);
 
-    const paragraph = flat(buildPrintProse(linked, {}))['relationships.network'];
-    expect(paragraph, 'the paid PDF printed NOTHING at relationships.network on a linked world')
-      .toBeTruthy();
-    expect(paragraph.length, 'the position printed an empty paragraph').toBeGreaterThan(40);
-
-    // THE PARITY ITSELF: character for character what the dossier weaves for this position,
-    // from the screen's own desk reader and the same assembler the tab calls.
-    expect(paragraph).toBe(screenProse(linked)['relationships.network']);
+    // The two save-time lists the desk would speak over are really there (the assembler
+    // finds them), so the silence below is the GLANCE row and not an empty fixture.
+    const lists = relationshipsDeskLists(linked);
+    expect(lists.neighbours.length, 'the assembler found no neighbour').toBeGreaterThan(0);
+    expect(lists.crossEngagements.length, 'the assembler found no engagement').toBeGreaterThan(0);
+    // THE PARITY ITSELF: the screen's reader and the print builder agree, and both are silent.
+    expect(flat(buildPrintProse(linked, {}))['relationships.network'],
+      'the paid PDF prints DS-REL-1 again at a glance row').toBeUndefined();
+    expect(screenProse(linked)['relationships.network'],
+      'the screen speaks DS-REL-1 again at a glance row').toBeUndefined();
 
     // THE CONTROL THAT MAKES THE ASSERTION ABOUT THE LISTS RATHER THAN THE BUILDER: the same
     // builder, the same town, no link rows — and the position is absent rather than empty
@@ -493,8 +495,10 @@ describe('the print desk reads the screen\'s own desks', () => {
       'a generated town with no links still printed a neighbour standing').toBeUndefined();
   });
 
-  test('both save-time lists reach the printed paragraph, each proved by its own removal', () => {
-    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+  test('both save-time lists reach the ASSEMBLER that feeds the cards, each proved by its own removal', () => {
+    // relationships.network GLANCES since 2026-10-30, so the lists are proved where they still
+    // speak: relationshipsDeskLists, the one assembler the tab's cards and the print read.
+    const at = (s) => JSON.stringify(relationshipsDeskLists(s));
     const whole = at(linked);
     expect(whole, 'the whole-fixture paragraph is the control and it did not draw').toBeTruthy();
 
@@ -511,11 +515,11 @@ describe('the print desk reads the screen\'s own desks', () => {
     // else in the fixture — DS-REL-1 has no pool for it, so its counterpart must not reach
     // the page, while the faction engagement beside it must. Anchored on the counterpart both
     // typed engagements share, so an empty paragraph cannot satisfy the absence.
-    expectAbsentWithAnchor(whole, 'Ashfen', 'Thornmere',
-      'DS-REL-1 speaks for faction engagements: a conflict-typed row draws no sentence');
+    // (The DS-REL-1 corpus's pool-level "a conflict-typed row draws no sentence" law is pinned
+    // in tests/domain/generalStateProseDesk.test.js; the print no longer draws the block.)
   });
 
-  test('`crossSettlementConflicts` is DELIBERATELY NOT READ, and the key is why, not the row', () => {
+  test('`crossSettlementConflicts` is DELIBERATELY NOT READ by the assembler, and the key is why, not the row', () => {
     // ⭐⭐ THE PIN FOR ODQ §934.16, AND IT IS A BEHAVIOUR CHANGE RECORDED RATHER THAN HIDDEN.
     // The component-side assembler this one replaced merged `settlement.crossSettlementConflicts`
     // alongside the two save-time lists. NOTHING IN `src/` WRITES THAT KEY — the deterministic
@@ -527,9 +531,10 @@ describe('the print desk reads the screen\'s own desks', () => {
     // key for the printed Relationships SECTION, so that surface keeps those rows and the
     // prose no longer does. Vetoable: re-admitting the read is one line plus an ordinary
     // observed-shape row.
-    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+    // Read through the assembler since relationships.network GLANCES (2026-10-30).
+    const at = (s) => JSON.stringify(relationshipsDeskLists(s));
     const whole = at(linked);
-    expect(whole, 'the control paragraph did not draw').toBeTruthy();
+    expect(whole, 'the control lists are empty').not.toBe(JSON.stringify(relationshipsDeskLists({})));
 
     // 1. THE ASSERTION: emptying the key moves NOTHING, because nothing read it.
     expect(at(normalizeSettlement({ ...linked, crossSettlementConflicts: [] })),
