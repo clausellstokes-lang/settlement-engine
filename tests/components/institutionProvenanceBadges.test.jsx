@@ -146,3 +146,32 @@ describe('InstitutionsTab cards — the provenance badge', () => {
     }
   });
 });
+
+/**
+ * VERIFIER F14 (RS-19 regressed through T1-14): a PROXY host (servicesData.js ::
+ * PROXY_SERVICE_HOSTS: Dwellings, Housing, Water source, Sewage system, Farmland, Massive
+ * prison ...) surfaces another house's menu; the Services tab names no institution for those
+ * rows, and the Institutions page must not list them under the proxy either. The house itself
+ * stays on the roster with its own description.
+ */
+describe('F14 / RS-19 — no proxy-surfaced menu under a proxy house', () => {
+  test('the proxy house keeps its card and lists none of the menu it only surfaces', async () => {
+    const { institutionsWithServices } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
+    const { PROXY_SERVICE_HOSTS } = await import('../../src/data/servicesData.js');
+    const rows = Object.values(base.availableServices || {}).flat();
+    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
+    expect(proxied.length, 'fixture premise: the town surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const houses = institutionsWithServices(base);
+    const proxyHouses = houses.filter((h) => PROXY_SERVICE_HOSTS[String(h.inst.name || '').toLowerCase()]);
+    expect(proxyHouses.length, 'the proxy houses stay on the roster').toBeGreaterThan(0);
+    for (const h of proxyHouses) expect(h.services, `${h.inst.name} lists a proxied menu`).toEqual([]);
+    expect(houses.some((h) => h.services.length > 0), 'real houses keep their menus').toBe(true);
+    const container = renderInstitutions(base);
+    for (const r of proxied) {
+      const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
+        .find((el) => el.firstElementChild?.firstElementChild?.textContent === proxyHouses.find((h) => h.inst.name === r.institution)?.label);
+      expect(card, `${r.institution} card`).toBeTruthy();
+      expect(card.querySelectorAll('[data-testid="institution-service"]').length).toBe(0); // anchored: the card itself is asserted present
+    }
+  });
+});

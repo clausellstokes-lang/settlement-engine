@@ -21,6 +21,8 @@ import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
 import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -203,6 +205,18 @@ describe('F13 / X-2 — the PDF Relationships chapter prints each tie with its t
       if (t.tension) expect(on, 'the tension prints beside its tie').toContain(t.tension);
     }
     expect(on).not.toMatch(/\bLink\b/); // anchored: 'Internal relationships' is on this render
+  });
+});
+
+describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced menu under a proxy house', () => {
+  it('a menu surfaced through a proxy host prints in the Services chapter only', () => {
+    const rows = Object.values(settlement.availableServices || {}).flat();
+    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
+    const owned = rows.filter((r) => r && r.institution && !PROXY_SERVICE_HOSTS[String(r.institution).toLowerCase()] && r.desc);
+    expect(proxied.length, 'fixture premise: the city surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const on = joined(Institutions({ settlement, vm }));
+    expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
+    for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
   });
 });
 

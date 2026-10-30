@@ -27,6 +27,7 @@ import { computeChainSets } from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
+import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -86,6 +87,11 @@ export function institutionsWithServices(settlement) {
   for (const svc of rows) {
     const key = String(svc.institution || '');
     if (!key) continue;
+    // VERIFIER F14 (RS-19): a PROXY host (a Sewage system, a Housing row, a Massive prison)
+    // only surfaces another house's menu. The Services tab names no institution for those rows,
+    // so this page lists none of them under the proxy; the house keeps its own card. The host's
+    // name alone answers it, as in serviceComponents.jsx :: viaProxy.
+    if (PROXY_SERVICE_HOSTS[key.toLowerCase()]) continue;
     if (!byInstitution.has(key)) byInstitution.set(key, []);
     byInstitution.get(key).push(svc);
   }

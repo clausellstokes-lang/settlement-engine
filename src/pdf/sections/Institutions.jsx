@@ -21,6 +21,7 @@ import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { edged } from '../../design/edgedBox.js';
+import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
 
 const CATEGORY_ORDER = [
   'government', 'military', 'religious', 'economy', 'magic',
@@ -342,6 +343,9 @@ function servicesByDisplayName(availableServices) {
   for (const list of lists) {
     for (const svc of Array.isArray(list) ? list : []) {
       if (!svc || typeof svc !== 'object' || !svc.institution) continue;
+      // VERIFIER F14 (RS-19): a menu a PROXY host only surfaces prints in the Services chapter,
+      // never under the proxy house (the screen's InstitutionsTab twin).
+      if (PROXY_SERVICE_HOSTS[String(svc.institution).toLowerCase()]) continue;
       const key = institutionDisplayName(svc.institution);
       if (!map.has(key)) map.set(key, []);
       map.get(key).push(svc);
