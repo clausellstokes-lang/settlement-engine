@@ -171,6 +171,19 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     expect(on, 'naming the occupier').toContain('The Iron Legion');
   });
 
+  it('STOP-1 (R7): the GOVERNING box prints the governing faction modifier, the screen power line twin', () => {
+    const modded = structuredClone(settlement);
+    const g = modded.powerStructure.factions.find((f) => f.isGoverning);
+    g.modifier = 'military-dominated';
+    const on = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
+    expect(on).toContain('GOVERNING');
+    expect(on, 'the modifier prints beside the governing name').toContain('military-dominated');
+    delete g.modifier;
+    const off = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
+    expect(off).toContain('GOVERNING');
+    expect(off).not.toContain('military-dominated'); // anchored: the GOVERNING box is on this render
+  });
+
   it('self-gates to nothing with no lineage and no occupation (byte-identical off-state)', () => {
     const offVm = { ...vm, power: { ...vm.power, lineage: [] }, liveWorld: null };
     expect(joined(PowerStructure({ settlement, vm: offVm })), 'no regime history ⇒ no subsection')

@@ -239,6 +239,19 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Serena Copperlane');
   });
 
+  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', () => {
+    const s = base();
+    s.powerStructure.factions[0].modifier = 'corruption-riddled';
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const chip = screen.getByTestId('ruling-chain-modifier');
+    expect(chip.textContent).toBe('corruption-riddled');
+    expect(screen.getByTestId('ruling-chain').textContent.split('corruption-riddled').length - 1, 'said once on the page').toBe(1);
+    cleanup();
+    render(<PowerTab powerStructure={base().powerStructure} settlement={base()} narrativeNote={null} />);
+    expect(screen.getByTestId('ruling-chain').textContent).toContain('Merchant Guild');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'no modifier, no chip').toBeNull(); // anchored: the chain block renders on this render
+  });
+
   it('a pre-density settlement with no NPCs renders the chain as far as the data goes', () => {
     const s = base();
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);

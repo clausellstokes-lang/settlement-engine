@@ -3,7 +3,7 @@
  *
  * Mirrors PowerTab.jsx in full:
  *   - Public legitimacy banner with breakdown chips
- *   - Stability + governing authority + governance fractured warning
+ *   - Stability + governing authority (with the governing modifier, STOP-1) + governance fractured warning
  *   - Stacked power-distribution bar (all factions in one viz)
  *   - Per-faction full card: power meter, description, category, crisis note,
  *     modifiers with deltas, sub-faction members
@@ -25,11 +25,14 @@ import { type, palette, factionColors, space, pt, swatch } from '../theme.js';
 import { cap, label, humanize } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { governingFactionOf } from '../../domain/rulingPower.js';
 
 export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   const p = vm.power;
   const index = vm.entityIndex; // Phase-D id»card resolver
   const governing = p.factions.find(f => f.isGoverning);
+  // STOP-1 (R7): the governing faction's modifier, the twin of the screen's power-line chip.
+  const governingModifier = governing ? String(governingFactionOf(settlement)?.modifier || '') : '';
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -76,6 +79,11 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
             {governing.category && (
               <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'] }}>
                 {cap(governing.category)}
+              </Text>
+            )}
+            {governingModifier && (
+              <Text style={{ ...type.caption, color: palette.second, fontSize: pt['7.5'], fontStyle: 'italic' }}>
+                {governingModifier}
               </Text>
             )}
           </View>
