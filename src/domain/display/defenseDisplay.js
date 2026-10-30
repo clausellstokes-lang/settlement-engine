@@ -404,6 +404,21 @@ export function deriveDefenseReadiness(settlement) {
 const dedupByName = (arr) => [...new Map((arr || []).map((m) => [m?.name, m])).values()];
 
 /**
+ * The arcane-defense force group, gated on the world's magic dial (VERIFIER STOP-2, T2-24's
+ * second reader). `magicDef` is filed by the same roster regex as `hasMagicInst`, so an
+ * alchemist shop or quarter lands in it; where magic does not function there is no arcane
+ * defense to field, and the group is empty on the screen, in print and in the Foundry journal.
+ *
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {ForceEntry[]}
+ */
+export function arcaneDefenseOf(settlement) {
+  const magicDef = settlement?.defenseProfile?.institutions?.magicDef || [];
+  if (!magicDef.length) return magicDef;
+  return magicWorksAt({ settlement: settlement || {} }) === false ? [] : magicDef;
+}
+
+/**
  * Armed forces grouped the way the web Defense tab presents them: fortifications,
  * standing forces (garrison + militia + watch, de-duplicated by name),
  * contracted (mercenary), monster-response charter, and arcane defense. Each
@@ -419,6 +434,6 @@ export function deriveArmedForces(settlement) {
     standing: dedupByName([...(inst.garrison || []), ...(inst.militia || []), ...(inst.watch || [])]),
     contracted: inst.mercenary || [],
     charter: inst.charter || [],
-    arcane: inst.magicDef || [],
+    arcane: arcaneDefenseOf(settlement),
   };
 }

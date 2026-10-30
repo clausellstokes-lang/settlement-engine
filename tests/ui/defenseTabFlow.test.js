@@ -33,7 +33,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import {
   defenseMagicDependencyProse, defenseSupportingProse, defenseThreatProse,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
-import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { deriveArmedForces, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
@@ -381,6 +381,18 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     const { container } = render(e(MagicTab, { settlement: s }));
     expect(container.textContent).toMatch(/Magic does not function/);
     expect(container.querySelector('[data-testid="magic-dependence"]')).toBeNull();
+  });
+
+  test('STOP-2: no "Arcane defense" force group (screen or print) in a dead-magic world, alchemist or not', () => {
+    const s = deadMagicTown();
+    expect(s.defenseProfile.institutions.magicDef.length, 'fixture premise: the roster files an alchemist as arcane defense').toBeGreaterThan(0);
+    expect(deriveArmedForces(s).arcane, 'the PDF Defense chapter reads this group').toEqual([]);
+    const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    const toggle = [...container.querySelectorAll('button')].find((b) => /Armed Forces & Fortifications/.test(b.textContent));
+    expect(toggle.textContent).toContain('Armed Forces & Fortifications');
+    expect(toggle.textContent).not.toMatch(/\d+ arcane/); // anchored: the forces header is on this render
+    expect(container.textContent, 'the forces body opens by default').toContain('Standing forces');
+    expect(container.textContent).not.toContain('Arcane defense'); // anchored: the open forces body is on this render
   });
 
   test('a live-magic world still draws DS-DEF-9 (the gate is the dial, not a blanket silence)', () => {

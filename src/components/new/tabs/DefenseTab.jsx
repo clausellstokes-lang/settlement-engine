@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { statusCase } from '../labelLadder.js';
@@ -264,7 +264,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const mainForces = [...(inst.garrison||[]),...(inst.militia||[]),...(inst.watch||[])];
   const mercForces = inst.mercenary || [];
   const charterForces = inst.charter || [];
-  const magicDef = inst.magicDef || [];
+  const magicDef = arcaneDefenseOf(r); // STOP-2: empty where magic does not function
   const hasAnyForce = mainForces.length||mercForces.length||charterForces.length||magicDef.length;
   const hasAnyFort = walls.length > 0;
 
