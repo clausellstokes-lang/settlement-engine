@@ -26,6 +26,8 @@ const COLUMNS = [
   { key: 'releases', label: 'Releases' },
 ];
 
+// The read sends no range, so admin-actions applies its default window: the
+// last 30 days (handleAdminActions :: pFrom/pTo). The empty state says so.
 function fmt(col, value) {
   if (value == null) return '–';
   if (col === 'last_seen') return new Date(value).toLocaleString('en-US');
@@ -103,9 +105,9 @@ export default function AdminClientErrorsPanel() {
       )}
 
       {loading && <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>Loading…</p>}
-      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Couldn’t load: {error}. (Needs migrations 081 + 156 deployed.)</p>}
+      {error && <p style={{ fontSize: FS.sm, color: swatch.danger, fontFamily: sans }}>Couldn’t load: {error}. (Needs migrations 081 + 167 deployed.)</p>}
       {!loading && !error && rows.length === 0 && (
-        <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>No client errors in the selected window.</p>
+        <p style={{ fontSize: FS.sm, color: MUTED, fontFamily: sans }}>No client errors in the last 30 days.</p>
       )}
 
       {!loading && !error && rows.length > 0 && (

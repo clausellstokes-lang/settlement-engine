@@ -242,3 +242,43 @@ describe('AiPricingResyncPanel — cron status, toggle, dry run, refusal (T7 sur
     expect(alerts.some((t) => /Admin action failed/.test(t))).toBe(true);
   });
 });
+
+describe('AdminClientErrorsPanel — banner, rows, refusal (T7 survey)', () => {
+  async function loadErrors() {
+    vi.resetModules();
+    return (await import('../../src/components/admin/AdminClientErrorsPanel.jsx')).default;
+  }
+
+  test('renders the alert banner and grouped rows from get_client_error_dashboard', async () => {
+    invoke.mockImplementation(routeAdmin({
+      get_client_error_dashboard: { data: { success: true, refreshedAt: '2026-10-30T12:00:00Z',
+        alert: { distinct_signatures: 4, total_events: 9, threshold: 3, over_threshold: true, window_minutes: 60 },
+        rows: [{ signature: 'TypeError: x', kind: 'error', event_count: 5, last_seen: '2026-10-30T11:00:00Z', sample_message: 'x is undefined', sample_url: '/create', releases: 'abc' }] }, error: null },
+    }));
+    const Panel = await loadErrors();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'get_client_error_dashboard' } });
+    expect(utils.getByRole('alert').textContent).toMatch(/over the alert threshold of 3/);
+    expect(utils.getByText('x is undefined')).toBeTruthy();
+  });
+
+  test('a refusal is shown and names the migrations the read really needs (081 + 167)', async () => {
+    invoke.mockImplementation(routeAdmin({ get_client_error_dashboard: { data: { error: 'Admin action failed' }, error: null } }));
+    const Panel = await loadErrors();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    const line = utils.getByText(/couldn.t load: admin action failed/i);
+    expect(line.textContent).toMatch(/081 \+ 167/);
+    // anchored: the line above proves this same text node carries the migration sentence
+    expect(line.textContent).not.toMatch(/156/);
+  });
+
+  test('the empty state names the real window (the last 30 days), not a selector that does not exist', async () => {
+    invoke.mockImplementation(routeAdmin());
+    const Panel = await loadErrors();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    expect(utils.getByText(/no client errors in the last 30 days/i)).toBeTruthy();
+  });
+});
