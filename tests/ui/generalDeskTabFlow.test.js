@@ -582,7 +582,7 @@ const { VERDICT, CONTRADICTIONS, FIRST_SURVEY } = drawnMembers({
 });
 
 describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () => {
-  test('all three DS-GEN-11 lenses reach the DOM privately and none reach a public dossier', () => {
+  test('the ONE surviving DS-GEN-11 lens (the contradictions) reaches the DOM privately and never a public dossier; the cut two do not draw', () => {
     const priv = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: false,
     })).container.textContent;
@@ -590,16 +590,15 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
     const pub = render(e(ViabilityTab, {
       settlement: UNVIABLE, narrativeNote: null, publicDossier: true,
     })).container.textContent;
-    // The verdict's three lenses render as ONE woven paragraph, so each anchor is taken in
-    // the form the page prints it (see `onPage`).
+    // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-13): ONE lens of three draws. The verdict
+    // lens restated the headline and the first-survey lens restated the page's vintage label;
+    // the contradiction reading is the one that carries something the panel does not.
     const verdict = generalDeskLines(UNVIABLE, { publicDossier: false }).viability.verdictLines;
-    expectNoSeedFailures(collectSeedFailures([
-      [onPage(VERDICT, verdict, UNVIABLE), 'the verdict'],
-      [onPage(CONTRADICTIONS, verdict, UNVIABLE), 'the contradiction count'],
-      [onPage(FIRST_SURVEY, verdict, UNVIABLE), 'the first-survey caveat'],
-    ], ([sentence, label]) => expectPresentThenAbsent(
-      priv, pub, sentence, `DS-GEN-11 ${label} (viability.verdict)`,
-    )), 'all three DS-GEN-11 lenses draw privately and none reaches a public dossier');
+    expect(verdict, 'the position draws exactly the contradiction lens').toEqual([onPage(CONTRADICTIONS, verdict, UNVIABLE)]);
+    expectPresentThenAbsent(priv, pub, onPage(CONTRADICTIONS, verdict, UNVIABLE), 'DS-GEN-11 the contradiction count (viability.verdict)');
+    expect(priv, 'the cut verdict lens drew').not.toContain(VERDICT); // anchored: expectPresentThenAbsent above proves priv carries the position
+    expect(priv, 'the cut first-survey lens drew').not.toContain(FIRST_SURVEY); // anchored: same render as above
+    expect(priv.slice(1), 'the cut verdict lens drew, stood down').not.toContain(VERDICT.slice(VERDICT.indexOf(' '))); // anchored: same render as above
     // The DATUM survives the gate: the headline and the pill keep their own words.
     // The word moved with the lift: both surfaces now read domain/display/viabilityVerdict.js,
     // which speaks the verdict at rung 3 ('Not viable') instead of the tab's old private shout.

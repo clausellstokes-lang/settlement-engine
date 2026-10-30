@@ -13,7 +13,8 @@
 
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import { ViabilityTab, trimViabilitySummary } from '../../src/components/new/tabs/ViabilityTab.jsx';
+import VersionsTab from '../../src/components/settlement/VersionsTab.jsx';
 
 afterEach(cleanup);
 
@@ -60,8 +61,8 @@ describe('ViabilityTab routes issues through the shared adjudicator', () => {
   });
 });
 
-describe('ViabilityTab generation receipt projection', () => {
-  it('surfaces formal judgment support and review evidence', () => {
+describe('the generation receipt lives on the Versions tab (UX consolidation, T2-14)', () => {
+  it('surfaces formal judgment support and review evidence on Versions, and no longer on Outlook', () => {
     const settlement = settlementWith({
       viable: true,
       summary: 'VIABLE: test',
@@ -91,13 +92,79 @@ describe('ViabilityTab generation receipt projection', () => {
       ],
     };
 
-    render(<ViabilityTab settlement={settlement} />);
-
+    render(<VersionsTab save={{ id: 'save-1', settlement }} />);
     expect(screen.getByText(
       'Formal judgments: 1/2 supported · 1 needs review',
     )).toBeTruthy();
     expect(screen.getByText(
       /Cross-system semantic agreement: Faction power is not conserved/,
     )).toBeTruthy();
+    expect(screen.getByText('Generation receipt: needs review')).toBeTruthy();
+    cleanup();
+
+    const { container } = render(<ViabilityTab settlement={settlement} />);
+    expect(container.textContent).toContain('Judged at the first survey; not re-run since.');
+    expect(container.textContent).not.toContain('Generation receipt'); // anchored: toContain the vintage label on this render
+    expect(container.textContent).not.toContain('Formal judgments'); // anchored: same render
+  });
+});
+
+describe('UX consolidation — the Outlook page says each fact once (RULINGS-T2 T2-11..T2-16)', () => {
+  it('T2-11: one vintage label, no coaching caption', () => {
+    const { container } = render(<ViabilityTab settlement={settlementWith({ viable: true, summary: 'VIABLE: fine', issues: [], warnings: [] })} />);
+    const text = container.textContent;
+    expect(text).toContain('Judged at the first survey; not re-run since.');
+    expect(text.match(/first survey/gi)).toHaveLength(1);
+    expect(text).not.toContain('This tab checks whether'); // anchored: toContain the label above, same render
+    expect(text).not.toContain('economically optimised'); // anchored: same render
+  });
+
+  it('T2-12: the summary drops the plot-hook count and the dependency clause, in both spellings', () => {
+    expect(trimViabilitySummary('Settlement can survive but has 4 operational dependencies that require active management. 1 plot hooks available.'))
+      .toBe('Settlement can survive.');
+    expect(trimViabilitySummary('the settlement can function, but its survival depends on 3 stable trade dependencies and protected routes.'))
+      .toBe('the settlement can function.');
+    expect(trimViabilitySummary('Settlement is economically self-sufficient and historically plausible.'))
+      .toBe('Settlement is economically self-sufficient and historically plausible.');
+    const { container } = render(<ViabilityTab settlement={settlementWith({
+      viable: true, issues: [], warnings: [], dependencies: [{}, {}],
+      summary: '✓ VIABLE: Settlement can survive but has 2 operational dependencies that require active management. 3 plot hooks available.',
+    })} />);
+    expect(container.textContent).toContain('can function');
+    expect(container.textContent).not.toMatch(/plot hooks available|operational dependenc|stable trade dependenc/); // anchored: toContain('can function') on this render
+  });
+
+  it('T2-15: the frozen magic record and its chain notes are ONE block with no "First Survey" suffix', () => {
+    const settlement = settlementWith({ viable: true, summary: 'VIABLE: fine', issues: [], warnings: [] });
+    settlement.defenseProfile = { magicDependency: true };
+    settlement.economicState = { activeChains: [{ label: 'Grain', magicNote: 'Druids keep the blight off.' }] };
+    const { container } = render(<ViabilityTab settlement={settlement} publicDossier />);
+    const blocks = container.querySelectorAll('[data-testid="viability-magic-dependence"]');
+    expect(blocks).toHaveLength(1);
+    expect(blocks[0].textContent).toContain('Magic Dependency');
+    expect(blocks[0].textContent).toContain('Grain: Druids keep the blight off.');
+    expect(blocks[0].textContent).not.toContain('First Survey'); // anchored: toContain('Magic Dependency') on this block
+  });
+
+  it('T2-16: no coaching intros on By-Design or Active Stress; Trade Dependencies leaves the Warnings', () => {
+    const { container } = render(<ViabilityTab settlement={settlementWith({
+      viable: true, summary: 'VIABLE: fine',
+      issues: [
+        { severity: 'by_design', institution: 'Grand Library', reason: 'A library above its tier.' },
+        { type: 'stress_consequence', title: 'Siege cuts the road', description: 'Carts no longer arrive.' },
+      ],
+      warnings: [
+        { severity: 'note', title: 'Trade Dependencies', description: '4 institutions depend on imported materials (iron).' },
+        { severity: 'warning', title: 'Banking Gap', description: 'No moneylender.' },
+      ],
+    })} />);
+    for (const title of [/By-Design Contradictions/, /Warnings \(1\)/]) fireEvent.click(screen.getByText(title));
+    const text = container.textContent;
+    expect(text).toContain('A library above its tier.');
+    expect(text).toContain('Carts no longer arrive.');
+    expect(text).toContain('No moneylender.');
+    expect(text).not.toContain('plot seeds, not problems to fix'); // anchored: the by-design reason is on this render
+    expect(text).not.toContain('working as intended'); // anchored: the stress description is on this render
+    expect(text).not.toContain('depend on imported materials'); // anchored: the Banking Gap warning is on this render
   });
 });

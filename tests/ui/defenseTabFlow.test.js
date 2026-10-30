@@ -139,8 +139,9 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
     const { container } = render(e(ViabilityTab, { settlement: port, narrativeNote: null }));
     expect(container.textContent).toContain(expected);
-    // The tab's own coherence content is untouched beside it.
-    expect(container.textContent).toContain('This tab checks whether your settlement makes logical sense');
+    // The tab's own coherence content is untouched beside it (the page's one vintage label
+    // since the UX consolidation, T2-11).
+    expect(container.textContent).toContain('Judged at the first survey; not re-run since.');
   });
 
   test('the `magicDependency false` reading DRAWS — it is a finding, not an absence', () => {
@@ -156,7 +157,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // The box itself is correctly absent, and the corpus line is present anyway — which is
     // the whole point of rendering it outside.
     // anchored: the assertion two lines above proves `text` carries the rendered sentence,
-    expect(text).not.toContain('Magic Dependency · First Survey'); // so the container is live
+    expect(text).not.toContain('Magic Dependency'); // so the container is live
   });
 
   test('THE PUBLIC GATE: the viability tab stays silent for an anonymous viewer', () => {
@@ -168,7 +169,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     const pubText = pub.container.textContent;
     expectPresentThenAbsent(privText, pubText, expected, 'public gate: the DS-DEF-9 dependency sentence');
     // Only the corpus sentence goes: the tab's own viability readout survives.
-    expect(pubText).toContain('This tab checks whether your settlement makes logical sense');
+    expect(pubText).toContain('Judged at the first survey; not re-run since.');
   });
 
   test('THE ROUTER threads the public condition to a tab that never received it before', () => {

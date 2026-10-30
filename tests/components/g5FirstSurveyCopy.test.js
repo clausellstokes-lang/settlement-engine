@@ -51,24 +51,30 @@ const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 const DEFENSE_PDF = 'src/pdf/sections/DefenseSecurity.jsx';
 
 describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
-  test('the tab fine print frames the coherence check as a first-survey verdict', () => {
+  // ⭐ ONE LABEL PER PAGE (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
+  // vetoable; RULINGS-T2 T2-11). The page-level vintage label covers every frozen record on
+  // the page (economicViability, structuralViolations, magicDependency), so the section
+  // headers no longer carry their own "· First Survey" suffix.
+  test('the page carries ONE vintage label, and the coaching caption is gone', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/as judged at the first survey/);
-    expect(src).toMatch(/later\s+events and edits do not re-run this check/);
-    // Negative: the bare present-tense sentence stays dead.
-    expect(src).not.toMatch(/makes logical sense\. Not whether/);
+    expect(src).toMatch(/Judged at the first survey; not re-run since\./);
+    expect(src.match(/first survey/gi) || [], 'the vintage is said once in this file').toHaveLength(1);
+    // Negative: the coaching sentences stay dead.
+    expect(src).not.toMatch(/This tab checks whether/); // anchored: the toMatch on the vintage label above reads this same source
+    expect(src).not.toMatch(/economically optimised/); // anchored: same source as the toMatch above
   });
 
-  test('the Structural Crises section (frozen structuralViolations) carries the vintage', () => {
+  test('the Structural Crises section is covered by the page label, not a suffix', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Structural Crises · First Survey/);
-    expect(src).not.toMatch(/Structural Crises \(\$\{/);
+    expect(src).toMatch(/Structural Crises \(\$\{structViolations\.length\}\)/);
+    expect(src).not.toMatch(/Structural Crises · First Survey/); // anchored: the toMatch on the bare header above reads this same source
   });
 
-  test('the Magic Dependency banner (frozen magicDependency) carries the vintage', () => {
+  test('the Magic Dependency block (frozen magicDependency) is covered by the page label', () => {
     const src = read(VIABILITY_TAB);
-    expect(src).toMatch(/Magic Dependency · First Survey/);
-    expect(src).not.toMatch(/Magic Dependency Detected/);
+    expect(src).toMatch(/Magic Dependency\s*</);
+    expect(src).not.toMatch(/Magic Dependency · First Survey/); // anchored: the toMatch on the bare title above reads this same source
+    expect(src).not.toMatch(/Magic Dependency Detected/); // anchored: same source as the toMatch above
   });
 });
 

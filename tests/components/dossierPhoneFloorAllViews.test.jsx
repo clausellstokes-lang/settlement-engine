@@ -537,7 +537,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
-  "Systems/Outlook":     { measured:  5, sub14:  5 },
+  // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
+  // (moved to Versions) left the page; no token moved.
+  "Systems/Outlook":     { measured:  2, sub14:  2 },
   "Systems/Causes":      { measured:  2, sub14:  2 },
   "Systems/Magic":       { measured:  1, sub14:  1 },
   "World/NPCs":          { measured: 45, sub14: 45 },
@@ -592,7 +594,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
+  "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },

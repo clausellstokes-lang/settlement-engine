@@ -305,7 +305,11 @@ export function generalDeskLines(settlement, options = {}) {
       recordLine: line(RECORD_MOUNT, record),
     }),
     viability: Object.freeze({
+      // ONE LENS OF THREE (UX consolidation 2026-10-30, RULINGS-T2 T2-13; RUBRIC R2): the
+      // contradiction reading. The verdict lens restates the headline the panel prints and the
+      // first-survey lens restates the page's one vintage label; both stay authored, undrawn.
       verdictLines: Object.freeze(prose.viability.verdict
+        .filter((rung) => String(rung?.provenance?.poolKey || '').startsWith('criticalIssueCount'))
         .map((rung) => line(VERDICT_MOUNT, rung)).filter(Boolean)),
     }),
     hooks: Object.freeze({

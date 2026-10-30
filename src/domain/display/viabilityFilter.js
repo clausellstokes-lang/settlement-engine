@@ -23,9 +23,19 @@ export const VIABILITY_EXCLUDED_CATEGORIES = Object.freeze([
 ]);
 
 /**
+ * Items routed away by TITLE, because the generator writes them with no type or category.
+ * 'Trade Dependencies' (economy/viability.js, severity 'note') restates the chain dependencies
+ * and Resources' Gaps & Opportunities, which own what the town must import (UX consolidation
+ * 2026-10-30, RULINGS-T2 T2-10/T2-16; RUBRIC R2). Measured co-present with the chain
+ * dependencies on 488 of 495 towns.
+ * @type {readonly string[]}
+ */
+export const VIABILITY_EXCLUDED_TITLES = Object.freeze(['Trade Dependencies']);
+
+/**
  * True when an issue/warning belongs on the VIABILITY surface (i.e. it is NOT one
  * of the dependency/chain/opportunity/food items routed to Economics/Resources).
- * @param {{ type?: string, severity?: string, category?: string } | null | undefined} item
+ * @param {{ type?: string, severity?: string, category?: string, title?: string } | null | undefined} item
  * @returns {boolean}
  */
 export function isViabilityItem(item) {
@@ -33,5 +43,6 @@ export function isViabilityItem(item) {
   if (VIABILITY_EXCLUDED_TYPES.includes(item.type ?? '')) return false;
   if (VIABILITY_EXCLUDED_SEV.includes(item.severity ?? '')) return false;
   if (VIABILITY_EXCLUDED_CATEGORIES.includes(item.category ?? '')) return false;
+  if (VIABILITY_EXCLUDED_TITLES.includes(item.title ?? '')) return false;
   return true;
 }

@@ -292,7 +292,7 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   //   refused: four identical assertions with one deliberately left bare is bookkeeping
   //   dressed as a guard. The win is banked by DELETION, never by a lowered ceiling.
   'tests/components/frozenTenseDefenseCopy.test.js': 2,
-  'tests/components/g5FirstSurveyCopy.test.js': 6,
+  'tests/components/g5FirstSurveyCopy.test.js': 3,
   'tests/components/g5FirstSurveyPdfTwins.test.js': 3,
   'tests/components/gallery/galleryMapsUtils.test.js': 2,
   'tests/components/gallery/mapShareEditorCachedShareKind.test.jsx': 4,
