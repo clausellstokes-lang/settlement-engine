@@ -231,7 +231,9 @@ export function WarTreatyLines({ desk, settlement }) {
  * twice, which is the `shadowEconomy` ruling on the economy desk applied here. The plain
  * line remains the standing text for every reader the desk does not draw for — a public
  * dossier, or a town whose faith is not hidden — so nothing is ever lost.
- * @param {{desk: Record<string, any>, fallback: string|null}} props
+ * @param {{desk: Record<string, any>, fallback?: string|null}} props `fallback` is omitted, not
+ *   passed as a null literal: a `fallback={null}` prop reads as a silent Suspense boundary to
+ *   loadingNarrationRatchet, and an absent fallback already prints nothing.
  */
 export function WarDormantNote({ desk, fallback }) {
   const drawn = drawnAtMount(DORMANT_MOUNT, desk.dormantNote);

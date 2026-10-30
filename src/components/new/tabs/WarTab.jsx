@@ -678,7 +678,7 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
         // voice, under the teaser. It is never printed beside a martial banner (owner order
         // 2026-09-17), and with no corpus draw it prints nothing (the old plain fallback
         // line is replaced by the teaser, X-7b).
-        <WarDormantNote desk={deskProse} fallback={null} />
+        <WarDormantNote desk={deskProse} />
       )}
     </div>
   );
