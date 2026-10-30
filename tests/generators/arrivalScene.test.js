@@ -353,3 +353,45 @@ describe('the scene on real settlements', () => {
     expect(withSense.length / scenes.length).toBeGreaterThan(0.6);
   }, 600_000);
 });
+
+describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10-30; ODQ §934.101)', () => {
+  const MARKET_SIGHT = 'arcaded market fronts define the principal square';
+  const WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
+
+  it('a town with no market-class institution is never shown a market in its SIGHT', async () => {
+    // The materialized culture detail names a market; the roster holds none (DS-GEN-13 reads NO-MARKET).
+    // The SIGHT is the culture's built detail here, so every market-worded detail of the culture is the
+    // set it may not print. (The PEOPLE and SENSE beats are outside T1-12 and are reported, not pinned.)
+    const { CULTURE_PROFILES } = await import('../../src/data/cultureProfiles.js');
+    const forbidden = [MARKET_SIGHT, ...(CULTURE_PROFILES[resolveCultureProfileKey('germanic')]?.architecturalDetails || [])]
+      .filter((d) => WORD.test(d)).map((d) => d.toLowerCase());
+    expect(forbidden.length).toBeGreaterThan(0);
+    const town = base({ culturalIdentity: { architecturalDetail: MARKET_SIGHT }, institutions: [{ name: 'Smithy', category: 'Crafts' }] });
+    const failures = collectSeedFailures(['t12-a', 't12-b', 't12-c', 't12-d'], (seed) => {
+      const text = scene(town, seed);
+      expect(text, `${seed}: the scene went empty`).toBeTruthy();
+      for (const d of forbidden) expect(text.toLowerCase().includes(d), `${seed}: the SIGHT "${d}" over a NO-MARKET roster`).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'no SIGHT names a market the roster lacks');
+  });
+
+  it('a town that holds a market keeps its market-worded SIGHT, with no extra draw', () => {
+    const town = base({ culturalIdentity: { architecturalDetail: MARKET_SIGHT }, institutions: [{ name: 'Weekly market', category: 'Economy' }] });
+    expect(scene(town, 't12-held')).toContain('Arcaded market fronts define the principal square.');
+  });
+
+  it('the generator\'s market predicate IS DS-GEN-13\'s, over real generated towns and the ruin filter', async () => {
+    const { holdsMarket } = await import('../../src/generators/narrative/arrivalScene.js');
+    const { marketPoolKey } = await import('../../src/domain/display/stateProse/generalStateProse.js');
+    const rosters = goldenCorpus().slice(0, 24).map((config) => generateSettlementPipeline(config, null, { seed: config._seed, customContent: {} }).institutions);
+    rosters.push([{ name: 'Grand bazaar', status: 'ruined' }], [{ name: 'Annual fair' }], [{ name: 'Shambles' }], []);
+    let held = 0;
+    for (const institutions of rosters) {
+      const desk = marketPoolKey({ institutions, tradeRouteAccess: 'road' }) !== 'NO-MARKET';
+      expect(holdsMarket(institutions)).toBe(desk);
+      if (desk) held += 1;
+    }
+    expect(held, 'no roster held a market, so the agreement is one-sided').toBeGreaterThan(0);
+    expect(held, 'every roster held a market, so the agreement is one-sided').toBeLessThan(rosters.length);
+  }, 120000);
+});
