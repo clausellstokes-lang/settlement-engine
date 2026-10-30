@@ -288,7 +288,10 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // SIX BECAME TEN (2026-10-02, the Voice Program wave 1, ODQ §934.88): `appliedHeadline` on candidates, selected,
     // autoApplied and outcome, engine-internal. Every producer now writes the deed DONE beside the deed UNDER WAY,
     // and the feed curation's appliedHeadlineFor is its one reader.
-    expect(WRITER_DARK_REGISTER.length).toBe(10);
+    // TEN BECAME ELEVEN (2026-10-30, the dossier consolidation, ODQ §934.101, ruling X-2): `archetypeKey on
+    // relationships`, engine-internal. The Plot Hooks collector no longer turns a tie's tension into a card, so
+    // the key's one surface read went with it; its consumer is the rename path in generateSettlementPipeline.js.
+    expect(WRITER_DARK_REGISTER.length).toBe(11);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -467,7 +470,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // CURE-PEACE-1 adds `supersessionReason on proposals` (registered AND dark): four became five.
     // The Voice Program wave 1 (2026-10-02, ODQ §934.88) adds the four `appliedHeadline` rows, all written on every
     // world and so all in the dark cohort: five became nine.
-    expect(registeredAndDark.length).toBe(9);
+    // The dossier consolidation (2026-10-30, ODQ §934.101, ruling X-2) adds `archetypeKey on relationships`,
+    // written on every world with a tie: nine became ten.
+    expect(registeredAndDark.length).toBe(10);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
