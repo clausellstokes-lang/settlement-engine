@@ -22,7 +22,7 @@ const text = (v) => (typeof v === 'string' ? v : '');
 
 /**
  * Every tension's citable text, lower-cased and joined, so one event check is one search.
- * @param {ReadonlyArray<any>} tensions
+ * @param {unknown} tensions the settlement's `history.currentTensions`; anything else reads as none
  * @returns {string}
  */
 function tensionCorpus(tensions) {
@@ -45,7 +45,7 @@ export function eventHasOpenThread(event, history) {
   if (Array.isArray(event.plotHooks) && event.plotHooks.some((h) => (typeof h === 'string' ? h.trim() : h))) return true;
   const name = text(event.name).trim().toLowerCase();
   if (!name) return false;
-  return tensionCorpus(/** @type {any} */ (history)?.currentTensions).includes(name);
+  return tensionCorpus(history?.currentTensions).includes(name);
 }
 
 /**
@@ -56,7 +56,8 @@ export function eventHasOpenThread(event, history) {
  * @returns {boolean}
  */
 export function timelineEntryHasOpenThread(entry, history) {
-  const events = Array.isArray(/** @type {any} */ (history)?.historicalEvents) ? /** @type {any} */ (history).historicalEvents : [];
+  const raw = history?.historicalEvents;
+  const events = Array.isArray(raw) ? raw : [];
   const match = events.find((e) => e && e.name === entry?.name && (e.yearsAgo ?? null) === (entry?.yearsAgo ?? null))
     || events.find((e) => e && e.name === entry?.name);
   return eventHasOpenThread(match || entry, history);

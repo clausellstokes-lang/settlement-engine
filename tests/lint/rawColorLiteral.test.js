@@ -89,7 +89,23 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // Contacts rows, the History Recent Events slice and inline plot-hook kickers, the Faith
 // patron-seat and niche blocks): 1303 -> 1291, measured out of its own red run. Nothing was
 // re-tokenised; the blocks are gone.
-const BUDGET = 1291; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+// CURE LANE T10 (2026-10-30, the composed tip after twelve lane merges): 1291 -> 1244, measured
+// out of its own red run ("raw color literals: 1244 (committed 1291)") and attributed commit by
+// commit by re-executing this file's counter on each commit and its parent since T3's banking
+// (6a996286 measured 1291). Every movement is a RULED cut or move; nothing was re-tokenised:
+//   lane S  -23: 66d7f048 (RS-14, RS-2) tabConstants.js -11, the category labels' one source;
+//                10b9f2f7 (RS-15..RS-17) ServicesTab.jsx -12, the grid and footer cut.
+//   lane T2 -11: d97793c1 (T2-1..T2-8) SupplyChainsPanel.jsx -5, EconomicsTab.jsx -1;
+//                97d9e66a (T2-14) the generation receipt MOVED ViabilityTab -> VersionsTab.jsx
+//                (its four literals with it; the commit nets +2 in ViabilityTab's restyled
+//                magic block), then cb596a5f (T2-15) took that block to the Magic tab, -2;
+//                cd9b3df2 (T2-17..T2-19) PowerTab.jsx -5.
+//   lane T1 -13: 133a7ada (T1-3) OverviewTab.jsx -1; 9de14b94 (T1-14, T1-15) the Overview's
+//                Institutions roster cut, -21, and the new InstitutionsTab.jsx +9.
+// ⚠ OF THOSE +9, SIX are the provenance badge and legend moved verbatim from the Overview, and
+// THREE are fresh: statusOf's '#8a4010' and '#7a5010' and the service rule's '#d8c8a0' fallback.
+// The net shrink absorbs them; they are named here so the next burn-down finds them first.
+const BUDGET = 1244; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —
