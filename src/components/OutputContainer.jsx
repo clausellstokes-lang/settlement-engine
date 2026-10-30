@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, lazy, Suspense } from 'react';
 import { FS, MUTED, SP, sans, swatch } from './theme.js';
 import { runTemplateNarrative } from '../generators/aiLayer';
-import { Scroll, MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
+import { MapPin, Coins, Building2, Shield, Swords, Users, History, Package, CircleCheckBig, Compass, Cog, StickyNote, Sparkles, Drama, ScrollText, Clock } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { isConfigured } from '../lib/supabase.js';
 import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
@@ -69,7 +69,7 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 import {
   ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, FaithTab, HistoryTab,
   MagicTab, NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, SummaryTab, SummaryTabV2, TraditionsTab, VersionsTab, ViabilityTab, WarTab,
+  ServicesTab, SubstrateTab, TraditionsTab, VersionsTab, ViabilityTab, WarTab,
 } from './dossier/dossierLazyTabs.js';
 
 
@@ -94,8 +94,12 @@ import {
 // (e.g. dm_compass without narration, plot_hooks with no hooks) are dropped
 // from the strip by the resolver below.
 export const TAB_GROUPS = Object.freeze({
-  summary: { label: 'Summary', tabs: ['overview', 'summary', 'plot_hooks', 'dm_compass'] },
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'substrate', 'magic'] },
+  // THE DOSSIER CONSOLIDATION (2026-10-30, ODQ §934.101; docs/UX_CONSOLIDATION_2026-10-30.md).
+  // X-5: the DM Summary web tab (`summary`) is REMOVED; its composer stays for Table View,
+  // Session Mode and the PDF chapter. X-12: `substrate` (labelled Foundations) is the Summary
+  // group's second tab, out of Systems; the id stays so deep links keep their key.
+  summary: { label: 'Summary', tabs: ['overview', 'substrate', 'plot_hooks', 'dm_compass'] },
+  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'magic'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
   // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
@@ -106,14 +110,14 @@ export const TAB_GROUPS = Object.freeze({
   // into this already-placed slot with no reorder. §805 split the Systems-group
   // War & Faith tab into WORLD-group `war` and `faith`, slotted after `rumors` —
   // the epistemic run reads heard → believed (war) → worshipped (faith).
-  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'war', 'faith', 'daily_life', 'traditions', 'history', 'neighbours'] },
+  // X-6: the `neighbours` route is REMOVED; Relationships is one whole page.
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'war', 'faith', 'daily_life', 'traditions', 'history'] },
   // STRIP-1: the Map group is REMOVED. The dossier reads Summary / Systems / World / Notes.
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });
 
 const TABS = [
   { id: 'overview',   label: 'Overview',   Icon: MapPin },
-  { id: 'summary',    label: 'DM Summary', Icon: Scroll },
   { id: 'power',      label: 'Power',      Icon: Shield },
   { id: 'economics',  label: 'Economics',  Icon: Coins },
   { id: 'services',   label: 'Services',   Icon: Building2 },
@@ -123,7 +127,8 @@ const TABS = [
   // Phase 5 W4e — the causal-engine + magic reads. Always available (every
   // settlement derives a substrate / magic posture); each self-handles dormancy
   // inside. Reuse already-bundled icons (Cog / Sparkles) — no new first-paint icon.
-  { id: 'substrate',  label: 'Causes',     Icon: Cog },
+  // X-12 (2026-10-30): the Causes tab reads as "Foundations"; the id is unchanged.
+  { id: 'substrate',  label: 'Foundations', Icon: Cog },
   { id: 'magic',      label: 'Magic',      Icon: Sparkles },
   { id: 'history',    label: 'History',    Icon: History },
   { id: 'daily_life', label: 'Daily Life', Icon: Users },
@@ -264,6 +269,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // PRESENCE and deliberately omits the founder tier.
   const viewerMayAuthor = useStore(viewerCanAuthor);
   const inCampaign = useStore(s => (saveId && typeof s.isSettlementClockBound === 'function') ? s.isSettlementClockBound(saveId) : false);
+  // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
   // Phase 5.5 STEP 3.5 — Rumors & News tab presence: the owning campaign's
   // world carries a rumor ledger (the conditionally-materialized rumorLedgers
   // key exists only under a spatial canon + a live infoMode). Dormant /
@@ -271,7 +277,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // byte-identical. Boolean-only selector; the ledger itself is read lazily
   // inside RumorsTab.
   const hasRumorLedger = useStore(s => campaignHasRumorLedger(s.campaigns, saveId));
-  // Lifecycle-stage input — top-level draft|canon phase enum. (A2.)
   const phase = useStore(s => s.phase);
 
   const rawSettlement = propSettlement || storeSettlement;
@@ -289,8 +294,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     : (readOnly && !saveId ? (propSettlement?.aiSettlement ?? null) : storeAi);
   const setAiSettlement = readOnly ? null : storeSetAi;
   const onRegenerate = readOnly ? null : storeRegenerate;
-  // P142 / D-6 — Table View overlay state. The trigger lives in
-  // SummaryTabV2 (routed through renderTab's onOpenTableView); this reads
+  // P142 / D-6 — Table View overlay state. The trigger lives on the Overview since the DM
+  // Summary tab was removed (X-5; routed through renderTab's onOpenTableView); this reads
   // the pref reactively so the overlay mounts/unmounts on toggle.
   const tableViewOpen = useStore(s => s.userPrefs?.tableViewOpen);
   const setUserPref = useStore(s => s.setUserPref);
@@ -491,7 +496,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // The Chronicle is NOT private — event titles + summaries ship publicly
     // through the gallery RPC's allowlisted `chronicle` column (migration 032,
     // disclosed in the share flow) — so it stays visible in the player view.
-    if (playerView && ['summary', 'dm_notes', 'ai_notes'].includes(t.id)) return false;
+    if (playerView && ['dm_notes', 'ai_notes'].includes(t.id)) return false;
     // DM Notes and AI Notes are private prep spaces — never surface them on a
     // public / shared gallery dossier (readOnly with no owning saveId), even in
     // the full "Reveal DM-private content" view. They're truly confidential to
@@ -534,8 +539,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // so registering the tab adds no new icon to the first-paint vendor-icons
       // chunk — keeps the closure ratchet green.
       ? [{ id:'relationships', label:'Relationships', Icon: Users }] : []),
-    ...(rawSettlement?.neighborRelationship || rawSettlement?.neighbourRelationship || rawSettlement?.neighbourNetwork?.length
-      ? [{ id:'neighbours', label:'Neighbours', Icon: MapPin }] : []),
     // Rumors & News (World) — present ONLY when the owning campaign's rumor
     // ledger exists (spatial canon + live infoMode). Reuses the already-bundled
     // ScrollText glyph — no new first-paint icon.
@@ -676,21 +679,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const renderTab = () => {
     const s = activeSettlement;
     switch (selectedTab) {
-      case 'summary':    return (
-        <>
-          {/* First-dossier teaching callouts now live inside the DM summary (was a
-              top-of-dossier banner above every tab). Self-gates inside. */}
-          {!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}
-          {flag('summaryMagazineV2')
-            ? <SummaryTabV2
-                settlement={s}
-                onOpenTableView={flag('tableView')
-                  ? () => useStore.getState().setUserPref?.('tableViewOpen', true)
-                  : undefined}
-              />
-            : <SummaryTab settlement={s} />}
-        </>
-      );
       case 'plot_hooks': return <PlotHooksTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       case 'chronicle':  return <ChronicleTab entries={chronicle} />;
       case 'versions':   return <VersionsTab save={liveSaveEntry} />;
@@ -699,7 +687,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       // Preview mode (view-time deriveFoundingTraditions) until the T-2 mover writes
       // the settlement.traditions mirror; then this same tab renders the live state.
       case 'traditions': return <TraditionsTab settlement={s} saveId={saveId} />;
-      case 'overview':   return <OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />;
+      // The first-dossier teaching callouts and the Table View trigger moved here when the
+      // DM Summary tab, which carried both, was removed (X-5). The callouts self-gate inside.
+      case 'overview':   return <>{!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}<OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} onOpenTableView={flag('tableView') ? () => useStore.getState().setUserPref?.('tableViewOpen', true) : undefined} /></>;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'power':      return (
@@ -738,7 +728,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'dm_compass': return <DMCompassTab settlement={compassSource || s} />;
       case 'dm_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="dm" />;
       case 'ai_notes':   return <NotesTab saveId={saveId} notes={dossierNotes} section="ai" />;
-      case 'neighbours':    return <RelationshipsTab settlement={s} narrativeNote={null} neighboursOnly={true} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
       case 'relationships': return <RelationshipsTab settlement={s} narrativeNote={null} saveId={saveId} viewerIsPremium={viewerIsPremium} playerView={playerView} publicDossier={publicDossier} />;
       default:           return <div />;
     }
@@ -901,9 +890,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         {!flag('settlementWorkbench') && !publicDossier && !playerView && (
           <Suspense fallback={null}><PendingChangesBar /></Suspense>
         )}
-        {/* P130 / O-2 — First-dossier teaching callouts now render INSIDE the
-            Summary tab (the DM summary), not as a banner above every tab — see
-            renderTab's 'summary' case. */}
+        {/* P130 / O-2 — First-dossier teaching callouts render INSIDE the Overview tab
+            (they moved there with the DM Summary tab's removal, X-5), not as a banner
+            above every tab — see renderTab's 'overview' case. */}
         {/* P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
             Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
             group selects its first sub-tab and filters the strip below. */}

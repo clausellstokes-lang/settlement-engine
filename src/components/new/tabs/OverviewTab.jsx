@@ -164,7 +164,7 @@ function worldStressorFor(worldState, settlementId) {
   return mine ? normalizeStressor(mine) : null;
 }
 
-export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, publicDossier = false, playerView = false, worldState = null}) {
+export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
   const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
@@ -327,6 +327,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             {r.spatialLayout?.layout&&<span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
+        {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
+            composer it opens stays, so a route to it must too. Router-gated on the flag. */}
+        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
       </div>
 
       {/* ── THE PLACE (chair ruling T1-2, 2026-10-30; rubric R5) ──────────
@@ -410,7 +413,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             Threat Assessment caption (Wave R-0). */}
         {/* THE PAGE'S ONE "First survey" LABEL (X-8, T1-5): the warning headers below carry
             no suffix. The carve-out stays because it changes how the table reads the bars. */}
-        <div style={{fontSize:chromeFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8}}>As judged at the first survey · Food Security is re-judged as the campaign advances</div>
+        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8}}>As judged at the first survey · Food Security is re-judged as the campaign advances</div>
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>

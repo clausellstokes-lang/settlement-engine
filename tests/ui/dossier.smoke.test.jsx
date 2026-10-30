@@ -94,11 +94,17 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
   // and the OURS-ahead mounted Versions tab is NOT displaced from Notes.
   // §805 moved War & Faith OUT of Systems into two WORLD-group tabs; the old
   // combined id must never resurface in any group.
-  test('Systems keeps Substrate / Magic; World registers the split War and Faith tabs', async () => {
+  // X-12 (2026-10-30, ODQ §934.101): Substrate (labelled Foundations) moved to the Summary
+  // group as its second tab; X-5 and X-6 removed `summary` and `neighbours`.
+  test('Summary leads with Overview and Foundations; Systems keeps Magic; World registers the split War and Faith tabs', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'substrate', 'plot_hooks', 'dm_compass']);
     expect(mod.TAB_GROUPS.systems.tabs).toEqual(
-      expect.arrayContaining(['substrate', 'magic']),
+      expect.arrayContaining(['magic']),
     );
+    const all = Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs);
+    for (const gone of ['summary', 'neighbours']) expect(all).not.toContain(gone); // anchored: the exact summary list above pins a live group population
+    expect(mod.TAB_GROUPS.systems.tabs).not.toContain('substrate'); // anchored: the arrayContaining above pins the Systems group's live population
     expect(mod.TAB_GROUPS.world.tabs).toEqual(
       expect.arrayContaining(['war', 'faith']),
     );

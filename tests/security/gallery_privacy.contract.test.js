@@ -182,7 +182,8 @@ describe('gallery client chronicle contract', () => {
     const src = readFileSync(OUTPUT_CONTAINER_JSX, 'utf8');
     // The playerView hide-list keeps the owner-private tabs and no longer
     // blocks the chronicle…
-    expect(src).toMatch(/playerView && \['summary', 'dm_notes', 'ai_notes'\]\.includes\(t\.id\)/);
+    // (The DM Summary tab left this list with the tab itself: X-5, ODQ §934.101.)
+    expect(src).toMatch(/playerView && \['dm_notes', 'ai_notes'\]\.includes\(t\.id\)/);
     // …and the hard-block for public dossiers (readOnly, no owning saveId)
     // covers BOTH note surfaces. ai_notes used to fall through this gate, so an
     // owner who opted into "Reveal DM-private content" (shareDm ⇒ playerView

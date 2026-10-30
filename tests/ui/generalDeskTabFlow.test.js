@@ -1088,14 +1088,12 @@ describe('DS-REL-1 GLANCES ON THE RELATIONSHIPS TAB (chair ruling 2026-10-30) â€
     expect(page).toContain(anchor);
   });
 
-  test('the ROUTER threads publicDossier to the Relationships tab (and to Neighbours while that route exists)', () => {
+  test('the ROUTER threads publicDossier to the one tab this component serves (X-6: no neighbours route)', () => {
     const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
-    const line = router.split('\n').find((l) => l.includes(`case 'relationships':`));
+    const line = router.split('\n').find((l) => l.includes("case 'relationships':"));
     expect(line, "no router case for 'relationships'").toBeTruthy();
     expect(line, "'relationships' does not receive the flag").toContain('publicDossier={publicDossier}');
-    // X-6 removes the Neighbours route (BUILD-T1); until it lands, it must still pass the flag.
-    const neighbours = router.split('\n').find((l) => l.includes(`case 'neighbours':`));
-    if (neighbours) expect(neighbours, "'neighbours' does not receive the flag").toContain('publicDossier={publicDossier}');
+    expectAbsentWithAnchor(router, "case 'neighbours':", "case 'relationships':", 'the neighbours route is back');
   });
 });
 

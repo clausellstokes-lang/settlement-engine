@@ -10,11 +10,10 @@
  */
 import { lazy } from 'react';
 
-export const SummaryTab = lazy(() => import('../new/SummaryTab'));
-// P129 / D-2 — Magazine-spread Summary V2. Self-gated by the
-// `summaryMagazineV2` flag in renderTab(); legacy SummaryTab still
-// loads in parallel so toggling the flag is instant.
-export const SummaryTabV2 = lazy(() => import('../new/SummaryTabV2.jsx'));
+// The DM Summary tab is REMOVED (X-5, 2026-10-30, ODQ §934.101): its two lazy exports
+// (SummaryTab, SummaryTabV2) left with it. Both files stay in place; nothing in src
+// imports them now, and the composer they rendered lives on in Table View, Session Mode
+// and the PDF chapter.
 export const PlotHooksTab = lazy(() => import('../new/tabs/PlotHooksTab.jsx'));
 export const ChronicleTab = lazy(() => import('../new/tabs/ChronicleTab.jsx'));
 export const VersionsTab = lazy(() => import('../settlement/VersionsTab.jsx'));

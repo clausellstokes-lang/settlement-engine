@@ -390,10 +390,12 @@ describe('writer-with-no-reader ratchet: the EXECUTED corpus and the closures', 
     // own `resolveSpec` resolves the literal only and would follow neither, which is
     // exactly the blindness ODQ §880.5 recorded; the five-suffix resolution cures it.
     expect(whole.has('src/components/new/tabs/FaithTab.jsx')).toBe(true);
-    expect(whole.has('src/components/new/SummaryTab.jsx')).toBe(true);
+    expect(whole.has('src/components/new/tabs/OverviewTab.jsx')).toBe(true);
     const registry = read('src/components/dossier/dossierLazyTabs.js');
     expect(registry).toContain("import('../new/tabs/FaithTab.jsx')");
-    expect(registry).toContain("import('../new/SummaryTab')");
+    // The extensionless example was SummaryTab until the DM Summary tab was removed (X-5,
+    // ODQ §934.101); OverviewTab is spelled the same way.
+    expect(registry).toContain("import('../new/tabs/OverviewTab')");
   });
 
   test('the dossier-pdf closure contains the view model and the sections, and the campaign-pdf and world-book closures are disjoint from src/pdf', () => {

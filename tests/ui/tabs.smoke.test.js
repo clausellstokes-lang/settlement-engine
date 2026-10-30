@@ -163,6 +163,19 @@ smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
 
+describe('OverviewTab carries the Table View trigger the removed DM Summary tab held (X-5)', () => {
+  test('the button renders only when the router hands a trigger, and calls it', () => {
+    let opened = 0;
+    const { container, getByText } = render(e(OverviewTab, { settlement: villageSettlement, onOpenTableView: () => { opened += 1; } }));
+    getByText('Open in Table View').click();
+    expect(opened).toBe(1);
+    cleanup();
+    const text = render(e(OverviewTab, { settlement: villageSettlement })).container.textContent || '';
+    expectAbsentWithAnchor(text, 'Open in Table View', villageSettlement.name, 'the trigger renders with no route to open');
+    expect(container).toBeTruthy();
+  });
+});
+
 describe('DMCompassTab shape (chair ruling, RULINGS-T1 DM Compass)', () => {
   test('one name ("Guidance"), the four panels, and no coaching captions under them', () => {
     const { container } = render(e(DMCompassTab, { settlement: {
