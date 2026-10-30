@@ -87,7 +87,8 @@ import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, PAGE_MAX } from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, PAGE_MAX,
+  aboveFooter, aboveBottomNav } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useRoute } from '../hooks/useRoute.js';
 import Button from './primitives/Button.jsx';
@@ -104,6 +105,12 @@ import { chromeFontSize } from '../design/proseScale.js';
 // unified dismissal stem). Naming it here is also what the walker's host-wired
 // check reads (import of lib/guidance + a reference to the whisper id).
 const WHISPER_ID = 'wizard_next_steps';
+
+// THE CORNER CARD (the owner, 2026-10-30). From this width up the coach is a small fixed
+// card in the bottom-right corner; below it the card keeps the September in-flow dock.
+const DESKTOP_MIN = 1024;
+const CARD_W = 280;
+const CORNER = SP.lg;
 
 export default function PostGenCoach() {
   const mobile = useIsMobile();
@@ -137,34 +144,48 @@ export default function PostGenCoach() {
   // with the mount, and the mount is keyed to the route (src/App.jsx), so returning to
   // /create brings the hint back exactly as leaving the page does.
   const [hiddenThisVisit, setHiddenThisVisit] = useState(false);
-  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). The coach is NOT modal — it
-  // sits in the page's own flow at every width (THE DOCK, above) — so it takes
-  // the non-modal half of the lifecycle: Escape dismisses and focus goes back, Tab is
-  // never trapped. Trapping here would strand a reader inside a hint about the dossier
-  // they are trying to read.
-  const cardRef = useDialogDismiss(!hiddenThisVisit, () => setHiddenThisVisit(true));
+  // THE FOLD (the owner, 2026-10-30). On the desktop corner card, Escape and a click on
+  // the header fold the card to a one-line pill instead of hiding it; the pill unfolds
+  // on click. Per visit, like the step: it dies with the route-keyed mount.
+  const [collapsed, setCollapsed] = useState(false);
+  // Below 1024 px the card stays in the page flow (REVIEW-P F6: a floating card sat
+  // off-screen on a phone); from 1024 px up it is the corner card.
+  const phone = useIsMobile(DESKTOP_MIN);
 
-  if (alreadyDismissed) return null;
-  if (dismissedThisSession) return null;
-  if (hiddenThisVisit) return null;
-  if (!settlement) return null;
-  // ⛔ AND NOT WHILE THE FORGE IS STILL SPEAKING (REVIEW-P F5). The settlement exists
-  // long before the reveal has said what it exists as; announcing "it is ready" over the
-  // establishing painting both lies and spends the reveal. This gate is the whole cure.
-  if (pipelineRevealActive) return null;
-
+  // ── The gates, evaluated before the dismiss hook so Escape is armed only while the
+  // card is actually on screen (an Escape pressed during the forge must not fold or
+  // hide a card the reader has not yet seen).
+  // ⛔ NOT WHILE THE FORGE IS STILL SPEAKING (REVIEW-P F5). The settlement exists long
+  // before the reveal has said what it exists as; announcing "it is ready" over the
+  // establishing painting both lies and spends the reveal. That gate is the whole cure.
   // ⭐ THE PAGE BUDGET decides, not this component. Off its origin route the registry
   // returns something else (or nothing) and the coach renders nothing; on /create it
   // yields to any higher-priority unbidden whisper rather than stacking beside it.
   // Every signal here is derived from store fields this component already reads.
   const savedCount = Array.isArray(savedSettlements) ? savedSettlements.length : 0;
-  const pageWhisper = selectPageWhisper(route, {
-    isDismissed: isGuidanceDismissed,
-    firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
-    isNewborn: deriveGuidanceNewborn(savedCount),
-    data: { tier: authTier, savedCount, hasSettlement: !!settlement },
-  });
-  if (pageWhisper?.id !== WHISPER_ID) return null;
+  const pageWhisper = settlement && !pipelineRevealActive
+    ? selectPageWhisper(route, {
+      isDismissed: isGuidanceDismissed,
+      firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
+      isNewborn: deriveGuidanceNewborn(savedCount),
+      data: { tier: authTier, savedCount, hasSettlement: !!settlement },
+    })
+    : null;
+  const shown = !alreadyDismissed && !dismissedThisSession && !hiddenThisVisit
+    && pageWhisper?.id === WHISPER_ID;
+  const corner = shown && !phone;
+
+  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). The coach is NOT modal, so it
+  // takes the non-modal half of the lifecycle: Escape answers and focus goes back, Tab is
+  // never trapped. Trapping here would strand a reader inside a hint about the dossier
+  // they are trying to read. On the corner card Escape folds it; on the phone card it
+  // puts the card away for this visit.
+  const cardRef = useDialogDismiss(
+    shown && !(corner && collapsed),
+    () => (corner ? setCollapsed(true) : setHiddenThisVisit(true)),
+  );
+
+  if (!shown) return null;
 
   // Each forward "what's next" move (save, export, refine, place) is its own
   // panel — one idea per screen. "Generate another" is the builder's detached
@@ -191,6 +212,99 @@ export default function PostGenCoach() {
   }
   function back() {
     if (step > 0) setStep(s => s - 1);
+  }
+
+  if (corner) {
+    // THE CORNER CARD (the owner, 2026-10-30): small, fixed bottom-right, lifted over
+    // the pinned footer's band (and the 640-1023 bar, 0px from 1024 up) through the
+    // shared composition. It sits on the `coach` layer (900), one step under the feedback
+    // panel (910) that opens in the same corner, so the panel the reader summoned is
+    // always on top and its close control is never covered.
+    const anchor = {
+      position: 'fixed',
+      right: CORNER,
+      bottom: aboveFooter(aboveBottomNav(CORNER)),
+    };
+    const pillText = `${guide.headline.replace(/\.$/, '')} \u00b7 What\u2019s next`;
+    return (
+      <div
+        ref={cardRef}
+        role="region"
+        aria-label="What is next for this dossier"
+        tabIndex={-1}
+        style={{
+          ...anchor,
+          zIndex: 900,
+          width: collapsed ? 'auto' : CARD_W,
+          maxWidth: CARD_W,
+          boxSizing: 'border-box',
+          background: CARD,
+          border: `1px solid ${BORDER}`,
+          fontFamily: sans, color: INK,
+          overflow: 'hidden',
+        }}
+      >
+        {/* Header: the headline is the fold toggle; the house close retires the hint. */}
+        <div style={{
+          display: 'flex', alignItems: 'center', gap: SP.xs,
+          padding: `${SP.xs}px ${SP.xs}px ${SP.xs}px ${SP.sm}px`,
+          background: CARD_HDR,
+          borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`,
+        }}>
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-expanded={!collapsed}
+            onClick={() => setCollapsed(c => !c)}
+            style={{
+              flex: 1, minWidth: 0, justifyContent: 'flex-start',
+              border: 'none', background: 'transparent', padding: `${SP.xs}px`,
+              fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK,
+              overflow: 'hidden', textOverflow: 'ellipsis',
+            }}
+          >
+            {collapsed ? pillText : guide.headline}
+          </Button>
+          {!collapsed && <DialogClose onClose={close} tone="default" />}
+        </div>
+
+        {!collapsed && (
+          <div style={{ padding: `${SP.sm}px ${SP.md}px ${SP.md}px` }}>
+            <div style={{
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+            }}>
+              What&rsquo;s next &middot; {safeStep + 1} of {total}
+            </div>
+            <h3 style={{
+              margin: `${SP.xs}px 0 0`, fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK,
+            }}>
+              {cur.label}
+            </h3>
+            <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+              {cur.hint}
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.md }}>
+              {step > 0 && (
+                <Button variant="secondary" size="sm" onClick={back} icon={<ChevronLeft size={12} />}>
+                  Back
+                </Button>
+              )}
+              <span style={{ flex: 1 }} />
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={next}
+                icon={isLast ? <Check size={12} /> : undefined}
+                trailingIcon={isLast ? undefined : <ChevronRight size={12} />}
+              >
+                {isLast ? 'Done' : 'Next'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   }
 
   // THE DOCK — one card, in the page's own scroll container, at every width (§934.29 for

@@ -21,13 +21,18 @@
  * — driving the REAL router (window.history + the shell's own `sf:navigate` event) rather
  * than a stubbed route, so the pin measures the wiring and not a prop.
  *
- * ⭐ AND THE TWO REVIEW-P LAWS (ODQ §934.63). The last two describes carry F5 and F6: the
- * coach may not appear before the forge's reveal has reached its readable end (it reads the
- * store's `pipelineRevealActive`, never a timer), and its card docks in the page's own flow
- * at every width instead of taking a fixed bottom-right box that covered 244 px of the
- * dossier's reading column at 1440x900 and its whole 340 px width at 1024. The overlap
- * block carries its own control: it reconstructs the PRE-CURE box from the constants it used
- * and asserts that box really did overlap, so "no overlap" is a cure and not a tautology.
+ * ⭐ AND THE REVIEW-P LAW (ODQ §934.63). The forge describe carries F5: the coach may not
+ * appear before the forge's reveal has reached its readable end (it reads the store's
+ * `pipelineRevealActive`, never a timer). Its September in-flow dock (F5/F6) survives on the
+ * phone only; the desktop shape is the owner's corner card, below.
+ *
+ * ⭐ AND THE CORNER CARD (the owner, 2026-10-30: "a relatively small floating and movable
+ * pop-up … at the corner of the window"). The owner re-decided the dock. On the desktop
+ * (1024 px and up) the card is fixed, 280 px, bottom-right and lifted over the pinned footer
+ * band through aboveFooter(...); a click on its header or Escape folds it to a one-line pill.
+ * On a phone it stays in the page flow exactly as before (REVIEW-P F6). jsdom has no
+ * matchMedia, so the viewport block below installs a small one that useIsMobile's shared
+ * store subscribes to; every describe starts at 1440 x 900 unless it says otherwise.
  *
  * ⚠ jsdom's default location is `/`, which src/lib/routes.js resolves to DEFAULT_VIEW
  * ('generate') — the coach's page of origin. That is why the pins above need no
@@ -57,6 +62,38 @@ vi.mock('../../src/store/index.js', () => {
 
 import PostGenCoach from '../../src/components/PostGenCoach.jsx';
 import { useStore } from '../../src/store/index.js';
+import { aboveFooter, aboveBottomNav } from '../../src/lib/chromeInsets.js';
+
+// ── THE VIEWPORT (jsdom has no matchMedia) ────────────────────────────────────────
+// useIsMobile keeps ONE store per breakpoint and creates its MediaQueryList lazily on
+// the first render, so installing this before any render is enough. setViewport moves
+// the width, fires every query's change listeners, and fires the window resize event.
+const viewport = { w: 1440, h: 900, queries: [] };
+window.matchMedia = (query) => {
+  const m = /max-width:\s*(\d+)px/.exec(query);
+  const max = m ? Number(m[1]) : Infinity;
+  const listeners = new Set();
+  const mql = {
+    media: query,
+    get matches() { return viewport.w <= max; },
+    addEventListener: (_type, fn) => listeners.add(fn),
+    removeEventListener: (_type, fn) => listeners.delete(fn),
+    fire: () => listeners.forEach((fn) => fn({ matches: viewport.w <= max })),
+  };
+  viewport.queries.push(mql);
+  return mql;
+};
+function setViewport(w, h = 900) {
+  act(() => {
+    viewport.w = w;
+    viewport.h = h;
+    Object.defineProperty(window, 'innerWidth', { configurable: true, value: w });
+    Object.defineProperty(window, 'innerHeight', { configurable: true, value: h });
+    viewport.queries.forEach((q) => q.fire());
+    window.dispatchEvent(new Event('resize'));
+  });
+}
+beforeEach(() => setViewport(1440));
 
 // Walk the coach forward by clicking "Next" until the matcher resolves or the
 // final ("Done") step is reached. The forward moves appear in order, so a
@@ -151,7 +188,10 @@ describe('PostGenCoach — what\'s-next steps', () => {
     expect(second.container.firstChild).toBeNull();
   });
 
-  it('the ghost "got it" control dismisses from any step and persists', () => {
+  it('the ghost "got it" control dismisses from any step and persists (phone card)', () => {
+    // The desktop corner card carries one exit, the house close; the phone card keeps
+    // its in-flow shape and with it this second, worded exit.
+    setViewport(390, 844);
     const view = render(<PostGenCoach />);
     fireEvent.click(screen.getByRole('button', { name: /got it from here/i }));
     expect(view.container.firstChild).toBeNull();
@@ -224,7 +264,8 @@ describe('PostGenCoach — the page of origin (ODQ §934.29)', () => {
 
   it('DISMISS — the explicit close retires it, and returning does NOT bring it back', () => {
     const view = render(<PostGenCoach />);
-    fireEvent.click(screen.getByRole('button', { name: /got it from here/i }));
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }));
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBe('1');
     expect(view.container.firstChild).toBeNull();
     navigateTo('/gallery');
     navigateTo('/create');
@@ -329,21 +370,12 @@ describe('PostGenCoach — the coach waits for the forge (REVIEW-P F5)', () => {
   });
 });
 
-describe('PostGenCoach — the dock is clear of the reading column (REVIEW-P F5/F6)', () => {
-  // The dossier body is `maxWidth: PAGE_MAX, margin: '0 auto'` (GenerateWizard), inside
-  // <main>, whose desktop side padding is SP.xxl (24). The card was `position: fixed;
-  // right: 24; width: 340`, so at the two rungs REVIEW-P walked:
-  //   1440: column [120,1320] vs card [1076,1416]  → 244 px of live prose covered
-  //   1024: column  [24,1000] vs card  [660,1000]  → the card's whole 340 px, 34.8% of it
-  // A viewport-anchored card clears a CENTRED column only when the column is under 712 px
-  // at 1440 and under 616 px at 1024; it is 1200 and 976. There is no placement to move it
-  // to, so the card leaves the viewport layer and joins the flow, where it cannot overlap.
-  const RUNGS = [1440, 1024];
-  const MAIN_PAD = 24;   // src/App.jsx <main> paddingLeft/Right = SP.xxl on desktop
-  const OLD_CARD_W = 340;
-  const OLD_CARD_RIGHT = 24;
-
-  beforeEach(() => {
+// ── THE CORNER CARD (the owner, 2026-10-30) ──────────────────────────────────────
+// The owner re-decided the September dock: on the desktop the coach is "a relatively small
+// floating and movable pop-up … at the corner of the window". These pins carry its shape
+// at the two desktop rungs, the fold to a pill, and the phone, which keeps the dock.
+describe('PostGenCoach — the corner card (the owner, 2026-10-30)', () => {
+  const coachSetup = () => {
     try { localStorage.clear(); } catch { /* no-op */ }
     navigateTo('/create');
     useStore.__set({
@@ -354,55 +386,96 @@ describe('PostGenCoach — the dock is clear of the reading column (REVIEW-P F5/
       savedSettlements: [],
       pipelineRevealActive: false,
     });
-  });
+  };
+  beforeEach(coachSetup);
   afterEach(() => { cleanup(); navigateTo('/'); });
 
-  it('the card takes NO viewport layer: not fixed, no z-index, no bottom anchor', () => {
-    const { container } = render(<PostGenCoach />);
-    const card = container.firstChild;
-    expect(card).not.toBeNull();
-    expect(card.style.position).toBe('relative');
-    expect(card.style.zIndex).toBe('');
-    expect(card.style.bottom).toBe('');
-    expect(card.style.right).toBe('');
+  for (const vw of [1440, 1024]) {
+    it(`at ${vw}: fixed, bottom-right, lifted over the footer band and the bar, 280 wide`, () => {
+      setViewport(vw);
+      const { container } = render(<PostGenCoach />);
+      const card = container.firstChild;
+      expect(card).not.toBeNull();
+      expect(card.style.position).toBe('fixed');
+      expect(card.style.right).toBe('16px');
+      // The lift is the shared composition, read from chromeInsets, not a copied number.
+      const lift = aboveFooter(aboveBottomNav(16));
+      expect(lift).toContain('--sf-footer-inset');
+      expect(card.getAttribute('style')).toContain(`bottom: ${lift}`);
+      expect(card.style.width).toBe('280px');
+      // The coach layer (900) sits under the feedback panel (910), which shares the corner.
+      expect(card.style.zIndex).toBe('900');
+      expect(Number(card.style.zIndex)).toBeLessThan(910);
+    });
+  }
+
+  it('one idea per panel: the headline, the current step and back/next, nothing else', () => {
+    render(<PostGenCoach />);
+    expect(screen.getByText('Erdenkul is ready.')).toBeTruthy();
+    expect(screen.getByText(/create a free account/i)).toBeTruthy();
+    expect(screen.queryByText('Export a PDF')).toBeNull();
+    expect(screen.getByRole('button', { name: 'Next' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Close' })).toBeTruthy();
+    // One exit on the small card: the house close (the worded ghost exit is the phone's).
+    expect(screen.queryByRole('button', { name: /got it from here/i })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Next' }));
+    expect(screen.getByRole('button', { name: 'Back' })).toBeTruthy();
+    expect(screen.getByText('Export a PDF')).toBeTruthy();
   });
 
-  it('it shares the dossier column\'s own frame (PAGE_MAX, auto margins)', () => {
+  it('a click on the header folds it to a one-line pill, and the pill unfolds it', () => {
     const { container } = render(<PostGenCoach />);
-    const card = container.firstChild;
-    // The same two declarations GenerateWizard gives the dossier body, so the card lands
-    // directly below the reading column and on its measure.
-    expect(card.style.maxWidth).toBe('1200px');
-    expect(card.style.marginLeft).toBe('auto');
-    expect(card.style.marginRight).toBe('auto');
-    expect(card.style.width).toBe('100%');
+    const toggle = screen.getByRole('button', { name: /Erdenkul is ready/ });
+    expect(toggle.getAttribute('aria-expanded')).toBe('true');
+    fireEvent.click(toggle);
+    const pill = screen.getByRole('button', { name: /Erdenkul is ready/ });
+    expect(pill.getAttribute('aria-expanded')).toBe('false');
+    expect(pill.textContent).toBe('Erdenkul is ready · What’s next');
+    expect(screen.queryByRole('button', { name: 'Next' })).toBeNull();
+    // Folded is not dismissed: the card is still there, still in its corner.
+    expect(container.firstChild.style.position).toBe('fixed');
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBeNull();
+    fireEvent.click(pill);
+    expect(screen.getByRole('button', { name: 'Next' })).toBeTruthy();
   });
 
-  it('NO OVERLAP at 1440 and at 1024, where the old fixed box overlapped by 244 and 340', () => {
+  it('Escape folds the desktop card to the pill rather than hiding it', () => {
     const { container } = render(<PostGenCoach />);
-    const card = container.firstChild;
-    const cardMax = Number(card.style.maxWidth.replace('px', ''));
-    const inFlow = card.style.position !== 'fixed';
+    act(() => { window.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' })); });
+    expect(container.firstChild).not.toBeNull();
+    expect(screen.getByRole('button', { name: /Erdenkul is ready/ }).getAttribute('aria-expanded')).toBe('false');
+  });
 
-    for (const vw of RUNGS) {
-      const content = vw - MAIN_PAD * 2;
-      const colW = Math.min(1200, content);
-      const col = [MAIN_PAD + (content - colW) / 2, MAIN_PAD + (content - colW) / 2 + colW];
+  it('the fold is per visit: a fresh mount (a return to /create) opens unfolded', () => {
+    render(<PostGenCoach />);
+    fireEvent.click(screen.getByRole('button', { name: /Erdenkul is ready/ }));
+    cleanup();
+    render(<PostGenCoach />);
+    expect(screen.getByRole('button', { name: /Erdenkul is ready/ }).getAttribute('aria-expanded')).toBe('true');
+  });
 
-      // The control: the PRE-CURE box, reconstructed from the constants it used, really did
-      // overlap — so "no overlap" below is a cure and not a tautology about an empty probe.
-      const old = [vw - OLD_CARD_RIGHT - OLD_CARD_W, vw - OLD_CARD_RIGHT];
-      const oldOverlap = Math.max(0, Math.min(col[1], old[1]) - Math.max(col[0], old[0]));
-      expect(oldOverlap, `the fixed box at ${vw} should have overlapped`).toBeGreaterThan(0);
-      expect(oldOverlap).toBe(vw === 1440 ? 244 : 340);
+  for (const vw of [1023, 390]) {
+    it(`on a phone-width page (${vw}) it keeps the dock: in the flow, PAGE_MAX, no layer`, () => {
+      setViewport(vw, 844);
+      const { container } = render(<PostGenCoach />);
+      const card = container.firstChild;
+      expect(card).not.toBeNull();
+      expect(card.style.position).toBe('relative');
+      expect(card.style.zIndex).toBe('');
+      expect(card.style.bottom).toBe('');
+      expect(card.style.right).toBe('');
+      expect(card.style.maxWidth).toBe('1200px');
+      expect(card.style.marginLeft).toBe('auto');
+      expect(card.style.marginRight).toBe('auto');
+      expect(card.style.width).toBe('100%');
+    });
+  }
 
-      // The cure: the card is in the flow, so it occupies its own band BELOW the column and
-      // its horizontal frame is the column's own. A flow box cannot intersect the box it
-      // follows, and its measure never exceeds the column's.
-      expect(inFlow, `the card re-entered the viewport layer at ${vw}`).toBe(true);
-      expect(Math.min(cardMax, content), `the card outgrew the column at ${vw}`)
-        .toBe(colW);
-    }
+  it('a window narrowed past 1024 moves the card from the corner into the flow', () => {
+    const { container } = render(<PostGenCoach />);
+    expect(container.firstChild.style.position).toBe('fixed');
+    setViewport(900);
+    expect(container.firstChild.style.position).toBe('relative');
   });
 
   it('it is a labelled REGION, not a dialog (REVIEW-P F6)', () => {
@@ -410,8 +483,8 @@ describe('PostGenCoach — the dock is clear of the reading column (REVIEW-P F5/
     const card = container.firstChild;
     // The estate spends role="dialog" on modals and trapped popovers; CommandPalette and
     // WorldMap both discriminate on [role="dialog"][aria-modal="true"]. This card is
-    // deliberately non-modal and untrapped (§934.31), and in the page's own flow, which is
-    // FirstDossierCallouts' labelled-region shape.
+    // deliberately non-modal and untrapped (§934.31), so it stays a labelled region even
+    // in its corner.
     expect(card.getAttribute('role')).toBe('region');
     expect(card.getAttribute('aria-modal')).toBeNull();
     expect(card.getAttribute('aria-label')).toBeTruthy();
