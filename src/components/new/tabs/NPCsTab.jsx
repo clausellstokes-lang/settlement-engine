@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
-import { serif, Collapsible, Empty } from '../Primitives';
-import {relStyle} from '../tabConstants';
+import { serif, Empty } from '../Primitives';
 
-import {NPCCategoryGroup, NPCRelCard2} from '../npcComponents';
+// THE TIES LIVE ON RELATIONSHIPS (chair ruling N8, 2026-10-30): this tab's old
+// "NPC Relationships" fold was a truncated copy of that page's list (same card, same
+// strings, 100% superset), so it is cut and every tie stays reachable there.
+import {NPCCategoryGroup} from '../npcComponents';
 
 import {NarrativeNote} from '../NarrativeNote';
 // W-H4 §6c — the LOCAL half of the wanderer register. A static child of this
@@ -13,7 +15,7 @@ import {NarrativeNote} from '../NarrativeNote';
 import UnaffiliatesSection from './UnaffiliatesSection.jsx';
 import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
-import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { chromeFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 
 export function NPCsTab({
@@ -147,30 +149,11 @@ export function NPCsTab({
           group={byFaction[factionName]}
           impFilter={impFilter}
           search={q}
-          relationships={settlement?.relationships || []}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
         />
       ))}
-
-      <p style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,marginTop:8,fontStyle:'italic',textAlign:'right'}}>
-        {npcs.length} figures · tap any card to expand
-      </p>
-    
-      {/* NPC Relationships */}
-      {(settlement?.relationships?.length > 0) && (
-        <Collapsible title={`NPC Relationships (${settlement.relationships.length})`} defaultOpen={false}>
-          <div style={{display:'flex',flexDirection:'column',gap:8,padding:'4px 0'}}>
-            {(settlement?.relationships||[]).filter(r=>r.flagDriven).slice(0,6).map((r,i)=>(
-              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
-            ))}
-            {(settlement?.relationships||[]).filter(r=>!r.flagDriven).slice(0,8).map((r,i)=>(
-              <NPCRelCard2 key={i} rel={r} style={relStyle(r.type)}/>
-            ))}
-          </div>
-        </Collapsible>
-      )}
 
       {unaffiliates}
 </div>

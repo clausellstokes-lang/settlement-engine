@@ -481,6 +481,11 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
 // category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
 // `"line"` value and nothing else.
+// THE DOSSIER CONSOLIDATION, BUILD-T3 (2026-10-30) — PURE LINE MOVES, NO CEILING CHANGE, NO
+// DEBT MOTION. The chair's cuts in the World group remove lines above banked rows in the
+// files that lane owns; each move is path-, category- and snippet-identical, 0 added and
+// 0 removed, census and category counts unchanged. U2 (NPCs, N4 tally cut):
+// npcComponents.jsx 150 -> 146, 157 -> 153.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

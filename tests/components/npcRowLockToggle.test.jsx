@@ -180,3 +180,59 @@ describe('GATED — a viewer who may not roll sees neither a Reroll nor a lock r
     }
   });
 });
+
+/**
+ * CONSOLIDATION (chair rulings N2/N4/N5/N7/N8, 2026-10-30). The roster's size is said once
+ * (the header), the per-group high-influence tally is gone (the header tally and each card's
+ * dots stay), a card inside its own faction's group no longer repeats that faction, and the
+ * "NPC Relationships" fold is cut: the Relationships page owns every tie.
+ */
+describe('CONSOLIDATION — one count, one faction label, no tie fold', () => {
+  const tie = {
+    npc1Name: 'Alda Reeve', npc2Name: 'Bran Smith', type: 'rivalry', typeName: 'Professional Rivalry',
+    npc1Role: 'reeve', npc2Role: 'smith', strength: 'strong',
+    description: 'Alda Reeve and Bran Smith answer each other within the season.',
+  };
+
+  test('the header carries the count once; no footer, no per-group tally, no tie fold', () => {
+    const town = { ...townOf(roster()), relationships: [tie, { ...tie, flagDriven: true, npc1Name: 'Bran Smith', npc2Name: 'Alda Reeve' }] };
+    const { container } = mountNpcs({ npcs: town.npcs, settlement: town });
+    const text = container.textContent;
+    const anchor = '2 Key Figures';
+    expect(text).toContain(anchor);
+    expect(text).toContain('1 high influence');
+    expectAbsentWithAnchor(text, 'tap any card to expand', anchor, 'N7 footer');
+    expectAbsentWithAnchor(text, '2 figures', anchor, 'N7 footer count');
+    expectAbsentWithAnchor(text, '●●● ×', anchor, 'N4 per-group tally');
+    expectAbsentWithAnchor(text, 'NPC Relationships', anchor, 'N8 tie fold');
+    expectAbsentWithAnchor(text, 'Professional Rivalry', anchor, 'N8 tie card');
+    // The group header still names the faction and its size.
+    expect(text).toContain('Council (2)');
+  });
+
+  test('a card inside its own faction group drops the faction suffix; the role stays', () => {
+    const { container } = mountNpcs();
+    const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve'));
+    expect(row.textContent).toContain('reeve');
+    expectAbsentWithAnchor(row.textContent, '· Council', 'reeve', 'N5 faction suffix inside its own group');
+  });
+
+  test('the secret is gated upstream: the public projection carries none, the DM view does', async () => {
+    const { toPublicSafe } = await import('../../src/domain/display/publicSafe.js');
+    const secret = 'Skims the toll box every market day.';
+    const town = townOf([{ ...roster()[0], secret: { what: secret } }, roster()[1]]);
+    const openAlda = (container) => {
+      const row = [...container.querySelectorAll('button')].find((b) => b.textContent.includes('Alda Reeve'));
+      fireEvent.click(row);
+      return container.textContent;
+    };
+    const dmText = openAlda(mountNpcs({ npcs: town.npcs, settlement: town, canAuthorNpc: false }).container);
+    cleanup();
+    const projected = toPublicSafe(town);
+    const playerText = openAlda(render(
+      <NPCsTab npcs={projected.npcs} settlement={projected} pinnedIds={new Set()} playerView publicDossier />,
+    ).container);
+    expect(dmText).toContain(secret);
+    expectAbsentWithAnchor(playerText, secret, 'Alda Reeve', 'the player projection of the secret');
+  });
+});

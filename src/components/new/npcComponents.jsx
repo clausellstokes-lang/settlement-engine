@@ -66,7 +66,6 @@ export function NPCCategoryGroup({
   group,
   impFilter,
   search,
-  relationships = [],
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -99,9 +98,6 @@ export function NPCCategoryGroup({
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
-        {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
-        }
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
@@ -109,7 +105,7 @@ export function NPCCategoryGroup({
         <NPCInlineCard
           key={durableNpcId(npc) || `legacy-presentation-${index}`}
           npc={npc}
-          relationships={relationships}
+          groupLabel={displayLabel}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
@@ -185,7 +181,7 @@ export function ConflictCard({conflict:c}) {
 // Inline NPC card — replaces the removed NPCCard export
 function NPCInlineCard({
   npc,
-  _relationships = [],
+  groupLabel = '',
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -330,7 +326,9 @@ function NPCInlineCard({
           <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
             {nativeRole}
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
+            {/* The group header above already names the faction (chair ruling N5): the
+                suffix prints only where the card stands outside its own faction's group. */}
+            {npc.factionAffiliation && npc.factionAffiliation !== groupLabel ? ` · ${npc.factionAffiliation}` : ''}
           </div>
         </div>
         {pinAvailable && (
