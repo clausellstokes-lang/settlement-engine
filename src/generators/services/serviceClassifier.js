@@ -7,6 +7,16 @@
  * SERVICE_CATEGORY_MAP wins; otherwise a keyword heuristic over the
  * lowercased service name (`y`) and institution name (`v`) decides, with
  * INSTITUTION_DEFAULT_CATEGORY as the final fallback.
+ *
+ * Since RS-13 (chair ruling 2026-10-30) EVERY authored catalog service name is
+ * registered in SERVICE_CATEGORY_MAP, so for the catalog the map is the whole
+ * answer and the keyword ternary below is UNREACHABLE (the registration walker,
+ * tests/lint/serviceCategoryRegistration.walker.test.js, holds both of its
+ * quarantine ledgers at zero). The ternary is kept as the safety net for a name
+ * that is not in the catalog (a future catalog row before it is registered, or a
+ * caller outside the authored menus); DM-authored custom services never reach it,
+ * they declare their own category. Do not tune it to fix a catalog verdict:
+ * register the name instead.
  */
 import { SERVICE_CATEGORY_MAP, INSTITUTION_DEFAULT_CATEGORY } from './serviceCategoryTables.js';
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
@@ -25,7 +35,7 @@ const PARTY_REGISTRATION = 'party registration';
 export const classifyService = (serviceName, instName) => {
   const y = serviceName.toLowerCase(),
     v = instName.toLowerCase();
-  // Explicit lookup first — covers all 260 known services unambiguously
+  // Explicit lookup first: covers every authored catalog service name (RS-13)
   const _mapped = SERVICE_CATEGORY_MAP[serviceName];
   if (_mapped) return _mapped;
   return y === 'lodging' ||
