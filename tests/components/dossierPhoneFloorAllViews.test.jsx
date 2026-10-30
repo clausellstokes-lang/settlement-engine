@@ -124,6 +124,10 @@ const EMPTY_VIEWS = Object.freeze({
   // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
   // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
   'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
+  // The walk mounts a PUBLIC dossier (readOnly, no saveId). Since the router hands MagicTab its audience
+  // (BUILD-T1 U6b, at BUILD-T2's request for T2-15), the magic-dependence block's corpus line is dark there,
+  // as every desk line is on a free viewer's page; the posture word and facets stay under the measuring bound.
+  'Systems/Magic': 'public dossier: the DS-DEF-9 corpus line is gated (§885.3); the rest is chrome under 45 characters (BUILD-T1)',
 });
 
 // A REAL pipeline settlement, not a hand fixture: the desks compose their prose
@@ -567,11 +571,13 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Outlook":     { measured:  2, sub14:  2 },
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
-  "Systems/Magic":       { measured:  2, sub14:  2 },
+  "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
   "World/NPCs":          { measured: 30, sub14: 30 },
   "World/Relationships": { measured: 59, sub14: 58 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
+  "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
+  "World/War":           { measured:  1, sub14:  1 }, // X-7a launch teaser, same
   "World/Traditions":    { measured:  1, sub14:  1 },
   "World/History":       { measured: 13, sub14: 13 },
   "Notes/Chronicle":     { measured:  0, sub14:  0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
@@ -631,11 +637,13 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
   "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
-  "Systems/Magic":       { prose:  1, chrome: 1, sub14: 1, sub12: 0 },
+  "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
   "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 57, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/War":           { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Traditions":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/History":       { prose: 13, chrome: 0, sub14: 0, sub12: 0 },
   "Notes/Chronicle":     { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)

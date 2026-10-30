@@ -479,6 +479,7 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
     expect(pool.length).toBeGreaterThan(0);
     for (const { text } of pool) {
       expect(text, 'a NO-MARKET variant no longer states that there is no market').toMatch(/\bno market\b/i);
+      // anchored: the toMatch(/no market/) on the line above pins this same variant's text as present
       expect(text, 'a NO-MARKET variant denies that the town trades').not.toMatch(
         /buying and selling|scale the town actually needs|no (?:trade|selling|buying)|does not sell|nothing (?:is )?(?:sold|bought)/i);
     }
