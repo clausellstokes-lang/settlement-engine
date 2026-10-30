@@ -395,6 +395,17 @@ describe('the paid document descends the same label ladder as the screen', () =>
         expect(svcLeaves, `${town}: the print still uses its retired category word "${retired}"`)
           .not.toContain(retired);
       }
+      // RS-18: the chapter's coaching headline is cut (R1), and the absences callout names a
+      // category exactly as a card title would. Driven with a planted absence so the arm does
+      // not depend on this fixture town lacking anything.
+      expect(svcLeaves.join(' '), `${town}: the coaching headline is back`)
+        .not.toContain('Match a need to the right counter');
+      const absentLeaves = collectStyled(Services({
+        settlement: settlements.get(town), narrativeMode: false, stateProse: null,
+        vm: { ...vm, services: { ...vm.services, notableAbsences: [{ key: 'equipment', label: serviceLabel('equipment') }] } },
+      })).map((leaf) => rendered(leaf));
+      expect(absentLeaves, `${town}: the absences callout spells a category unlike its card title`)
+        .toContain(tokenCase(serviceLabel('equipment')));
     }
   });
 

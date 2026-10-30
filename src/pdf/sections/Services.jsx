@@ -15,7 +15,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, HairRule, Tag,
+  ChapterBand, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
@@ -63,10 +63,6 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
         sub={`${total} buyable across ${cats.length} ${plural(cats.length, 'category', 'categories')}`}
       />
 
-      <ChapterHeadline tone="gold">
-        What players can actually purchase here. Match a need to the right counter.
-      </ChapterHeadline>
-
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="services" />
 
@@ -86,7 +82,11 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
               {s.notableAbsences.map((a, i) => (
                 <Tag key={`abs-${i}`} tone="warn">
-                  {label(a) || humanize(String(a))}
+                  {/* RS-18: the callout names a category exactly as its card title does, the
+                      one label (servicesDisplay.js) through the same ladder. */}
+                  {a && typeof a === 'object' && a.key
+                    ? tokenCase(stripZwnj(serviceLabel(a.key)))
+                    : (label(a) || humanize(String(a)))}
                 </Tag>
               ))}
             </View>
