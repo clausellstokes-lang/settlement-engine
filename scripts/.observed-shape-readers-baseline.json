@@ -124,16 +124,16 @@
  },
  "digests": {
   "corpusMeta": "36f12c8f770cd42dc1234231a27928d443327661c339877936b2aa60b28f2718",
-  "inventory": "6d32378771a71b45836d2d8f96994b1d59afc465989f775c29eb171d497f08bf",
-  "manifests": "4295cc729e62fd73d38a28e0f8f355c45b5cda6f215371d068057a0640ba038a",
+  "inventory": "1381a2a75a7adf62a1fd73fa3fe9ca0ec85b8e9ee603fd36ce8a3b9a4bc22b97",
+  "manifests": "778db79b2522f8cc2f3951a278140a26703758230bcfec803797b20923307a15",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "a558eaa4c5f28c3fddca23651cd632fc92d9b1a90e9c6f689827e389748299ee",
-  "sentinel": "ee7c95f3da32af4cf028b3dd9b367f2b0b70fae8095aa46d73655ad68ce7af6c"
+  "scanStats": "d8b8aa363633177bd53397b107bb9a40dcaa5d9e144039b71166839ec1d00d74",
+  "sentinel": "79845c9e531d342f7a65e8658d08e053132f2f3a58d4a318f2f1fcedc16ad07d"
  },
- "frozen": "2026-10-23",
- "frozenAtSha": "a9d469ecb7ed3e78ae724439ea34fe7734c002b8",
- "identities": 1445,
+ "frozen": "2026-10-30",
+ "frozenAtSha": "6a996286bc075f4391e950d3ac860afe211122b9",
+ "identities": 1444,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -271,9 +271,6 @@
    "description on conflicts": 1,
    "incomeSources on economicViability": 1,
    "type on conflicts": 1
-  },
-  "src/components/new/neighbourComponents.jsx": {
-   "interSettlementRelationships on settlement": 1
   },
   "src/components/new/tabs/EconomicsTab.jsx": {
    "customChains on economicState": 1,
@@ -2455,7 +2452,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f9f40d8ff8ad1af658d1c3135ee62f778c279434e9eadb621ed070fe07139eed",
+   "digest": "a9727882fcba8f6490437b022a7d564e5f1e8dffbf45eaf35bd75fa6a2c40173",
    "entries": [
     {
      "mode": "100644",
@@ -5435,15 +5432,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "30a102df8a88e379b86755b564dda9377b785a077e1ea91a04989d29ab3dc6e7",
-     "size": 10411,
+     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
+     "size": 8801,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "56f756132a5922059126d006b901d83580db5bd16c010b2a3a34f236999c7f3a",
-     "size": 27144,
+     "sha256": "687a4f152187636de83ba496ad82f443d5399443a1e99909122ac089de3dfa30",
+     "size": 27270,
      "type": "file"
     },
     {
@@ -5470,8 +5467,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ChronicleTab.jsx",
-     "sha256": "baffb82a21f6326c182dd637cee81a561916191a4253313da0c9ccc82d07a13c",
-     "size": 7787,
+     "sha256": "e1d72adab0bf78f139c3a6170d8e82494ea48a12bd4c03229377c89f4f5b2b39",
+     "size": 7737,
      "type": "file"
     },
     {
@@ -5484,8 +5481,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "0f61892285383ec1286b5a984e461e2e1edb122efa41bc6c9ef1e11b23e7fd60",
-     "size": 19240,
+     "sha256": "ebbd2028feb2ac6c5334e049413cf496534231b183f48aa637cc43e0c02a6685",
+     "size": 15849,
      "type": "file"
     },
     {
@@ -5512,15 +5509,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/FaithTab.jsx",
-     "sha256": "24afeb2270ec98ff26349e76b35c8c584c547b0ce94afd85b177faf45f119f93",
-     "size": 18306,
+     "sha256": "ae4356446df6e4b1ea09882440a7adedab2b1379f8b5000de13a74068b626ecb",
+     "size": 12960,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "5bcae2ac2f846efaa73b405fc1f4a83fe760db710e18f203099340e6f2ab243a",
-     "size": 25472,
+     "sha256": "bb6bc4c60600b7b5e009f89678760440dce89c8e1e5f82fe4a698feb827a5ffd",
+     "size": 20646,
      "type": "file"
     },
     {
@@ -5547,8 +5544,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "a8e26e5d4d10355592b73782c9916f6bcc83d6e77b97d62923ee82d47c0dfe20",
-     "size": 8042,
+     "sha256": "d14a665870f53f52b759ebab26b9090b69ed4427036350edb197d99c977511c9",
+     "size": 7268,
      "type": "file"
     },
     {
@@ -5582,8 +5579,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "1118842c7cdbae8884f10c0c8e1b6d65fd35f51f9c0882ace5613b467f72077e",
-     "size": 20856,
+     "sha256": "e46cbfbb902f3e1b83fb8bc93efba4b4727de3f00eb1f32ef64af515c286c3ac",
+     "size": 18594,
      "type": "file"
     },
     {
@@ -5596,8 +5593,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "998d8690067da4f4d58103461c9217e68dee8cf928f6b6fbf41ce59fb381e8e2",
-     "size": 9420,
+     "sha256": "e9cd68dc553bba4bb28592acc7bcdc2dfea468b5c02fd79b644f7d16875fcb0b",
+     "size": 9404,
      "type": "file"
     },
     {
@@ -5624,8 +5621,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "8b9e7a5270b79d872279cf1dc0f394727c6c80c8ce254cf2035d7ae4529d7fe6",
-     "size": 8182,
+     "sha256": "65c0123e80715e5622a35a35ebd8506fe447e3245eee1296663090c6b9063f6c",
+     "size": 8326,
      "type": "file"
     },
     {
@@ -5652,8 +5649,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "aaceec2916fd1335cdcc5b04038514042dca2a5cf5998aed28726a005022ef2d",
-     "size": 34274,
+     "sha256": "c6f2c8a12c2116a25b4f9e8518bce0548d56906bcaa6adb1be1ed395784ef0dc",
+     "size": 35484,
      "type": "file"
     },
     {
@@ -6170,8 +6167,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "741b82e2eb4edf3c23efed17ca02a7eecd33bcccade606acbebc95929221b957",
-     "size": 14744,
+     "sha256": "83be299e4395374db989ff6e623d4c1911e146558d1467ecc1f94004e706ee95",
+     "size": 17903,
      "type": "file"
     },
     {
@@ -18764,7 +18761,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "af596c2571963ad62e731e19d8c32e9e1a8068a1f5705bda2de96c0fb8e1f4a5",
+   "digest": "59bd2e487561ee978205f25b8965d065034d623ec6dd05228a137873a8b30f8c",
    "entries": [
     {
      "mode": "100644",
@@ -21674,15 +21671,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "30a102df8a88e379b86755b564dda9377b785a077e1ea91a04989d29ab3dc6e7",
-     "size": 10411,
+     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
+     "size": 8801,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "56f756132a5922059126d006b901d83580db5bd16c010b2a3a34f236999c7f3a",
-     "size": 27144,
+     "sha256": "687a4f152187636de83ba496ad82f443d5399443a1e99909122ac089de3dfa30",
+     "size": 27270,
      "type": "file"
     },
     {
@@ -21709,8 +21706,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ChronicleTab.jsx",
-     "sha256": "baffb82a21f6326c182dd637cee81a561916191a4253313da0c9ccc82d07a13c",
-     "size": 7787,
+     "sha256": "e1d72adab0bf78f139c3a6170d8e82494ea48a12bd4c03229377c89f4f5b2b39",
+     "size": 7737,
      "type": "file"
     },
     {
@@ -21723,8 +21720,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "0f61892285383ec1286b5a984e461e2e1edb122efa41bc6c9ef1e11b23e7fd60",
-     "size": 19240,
+     "sha256": "ebbd2028feb2ac6c5334e049413cf496534231b183f48aa637cc43e0c02a6685",
+     "size": 15849,
      "type": "file"
     },
     {
@@ -21751,15 +21748,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/FaithTab.jsx",
-     "sha256": "24afeb2270ec98ff26349e76b35c8c584c547b0ce94afd85b177faf45f119f93",
-     "size": 18306,
+     "sha256": "ae4356446df6e4b1ea09882440a7adedab2b1379f8b5000de13a74068b626ecb",
+     "size": 12960,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "5bcae2ac2f846efaa73b405fc1f4a83fe760db710e18f203099340e6f2ab243a",
-     "size": 25472,
+     "sha256": "bb6bc4c60600b7b5e009f89678760440dce89c8e1e5f82fe4a698feb827a5ffd",
+     "size": 20646,
      "type": "file"
     },
     {
@@ -21786,8 +21783,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "a8e26e5d4d10355592b73782c9916f6bcc83d6e77b97d62923ee82d47c0dfe20",
-     "size": 8042,
+     "sha256": "d14a665870f53f52b759ebab26b9090b69ed4427036350edb197d99c977511c9",
+     "size": 7268,
      "type": "file"
     },
     {
@@ -21821,8 +21818,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "1118842c7cdbae8884f10c0c8e1b6d65fd35f51f9c0882ace5613b467f72077e",
-     "size": 20856,
+     "sha256": "e46cbfbb902f3e1b83fb8bc93efba4b4727de3f00eb1f32ef64af515c286c3ac",
+     "size": 18594,
      "type": "file"
     },
     {
@@ -21835,8 +21832,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "998d8690067da4f4d58103461c9217e68dee8cf928f6b6fbf41ce59fb381e8e2",
-     "size": 9420,
+     "sha256": "e9cd68dc553bba4bb28592acc7bcdc2dfea468b5c02fd79b644f7d16875fcb0b",
+     "size": 9404,
      "type": "file"
     },
     {
@@ -21863,8 +21860,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "8b9e7a5270b79d872279cf1dc0f394727c6c80c8ce254cf2035d7ae4529d7fe6",
-     "size": 8182,
+     "sha256": "65c0123e80715e5622a35a35ebd8506fe447e3245eee1296663090c6b9063f6c",
+     "size": 8326,
      "type": "file"
     },
     {
@@ -21891,8 +21888,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "aaceec2916fd1335cdcc5b04038514042dca2a5cf5998aed28726a005022ef2d",
-     "size": 34274,
+     "sha256": "c6f2c8a12c2116a25b4f9e8518bce0548d56906bcaa6adb1be1ed395784ef0dc",
+     "size": 35484,
      "type": "file"
     },
     {
@@ -22409,8 +22406,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "741b82e2eb4edf3c23efed17ca02a7eecd33bcccade606acbebc95929221b957",
-     "size": 14744,
+     "sha256": "83be299e4395374db989ff6e623d4c1911e146558d1467ecc1f94004e706ee95",
+     "size": 17903,
      "type": "file"
     },
     {
@@ -34877,7 +34874,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f783b7317218dbdbcabbf9ab9dfa924d1746325d039fcc439d3aaa1e58cdeab2",
+   "digest": "2283d8518aa816f5655145284571647fa6f5366ca0211b5c454c61f65158aba3",
    "entries": [
     {
      "mode": "100644",
@@ -37787,15 +37784,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "30a102df8a88e379b86755b564dda9377b785a077e1ea91a04989d29ab3dc6e7",
-     "size": 10411,
+     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
+     "size": 8801,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "56f756132a5922059126d006b901d83580db5bd16c010b2a3a34f236999c7f3a",
-     "size": 27144,
+     "sha256": "687a4f152187636de83ba496ad82f443d5399443a1e99909122ac089de3dfa30",
+     "size": 27270,
      "type": "file"
     },
     {
@@ -37822,8 +37819,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/ChronicleTab.jsx",
-     "sha256": "baffb82a21f6326c182dd637cee81a561916191a4253313da0c9ccc82d07a13c",
-     "size": 7787,
+     "sha256": "e1d72adab0bf78f139c3a6170d8e82494ea48a12bd4c03229377c89f4f5b2b39",
+     "size": 7737,
      "type": "file"
     },
     {
@@ -37836,8 +37833,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DailyLifeTab.jsx",
-     "sha256": "0f61892285383ec1286b5a984e461e2e1edb122efa41bc6c9ef1e11b23e7fd60",
-     "size": 19240,
+     "sha256": "ebbd2028feb2ac6c5334e049413cf496534231b183f48aa637cc43e0c02a6685",
+     "size": 15849,
      "type": "file"
     },
     {
@@ -37864,15 +37861,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/FaithTab.jsx",
-     "sha256": "24afeb2270ec98ff26349e76b35c8c584c547b0ce94afd85b177faf45f119f93",
-     "size": 18306,
+     "sha256": "ae4356446df6e4b1ea09882440a7adedab2b1379f8b5000de13a74068b626ecb",
+     "size": 12960,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "5bcae2ac2f846efaa73b405fc1f4a83fe760db710e18f203099340e6f2ab243a",
-     "size": 25472,
+     "sha256": "bb6bc4c60600b7b5e009f89678760440dce89c8e1e5f82fe4a698feb827a5ffd",
+     "size": 20646,
      "type": "file"
     },
     {
@@ -37899,8 +37896,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/NPCsTab.jsx",
-     "sha256": "a8e26e5d4d10355592b73782c9916f6bcc83d6e77b97d62923ee82d47c0dfe20",
-     "size": 8042,
+     "sha256": "d14a665870f53f52b759ebab26b9090b69ed4427036350edb197d99c977511c9",
+     "size": 7268,
      "type": "file"
     },
     {
@@ -37934,8 +37931,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "1118842c7cdbae8884f10c0c8e1b6d65fd35f51f9c0882ace5613b467f72077e",
-     "size": 20856,
+     "sha256": "e46cbfbb902f3e1b83fb8bc93efba4b4727de3f00eb1f32ef64af515c286c3ac",
+     "size": 18594,
      "type": "file"
     },
     {
@@ -37948,8 +37945,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RumorsTab.jsx",
-     "sha256": "998d8690067da4f4d58103461c9217e68dee8cf928f6b6fbf41ce59fb381e8e2",
-     "size": 9420,
+     "sha256": "e9cd68dc553bba4bb28592acc7bcdc2dfea468b5c02fd79b644f7d16875fcb0b",
+     "size": 9404,
      "type": "file"
     },
     {
@@ -37976,8 +37973,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "8b9e7a5270b79d872279cf1dc0f394727c6c80c8ce254cf2035d7ae4529d7fe6",
-     "size": 8182,
+     "sha256": "65c0123e80715e5622a35a35ebd8506fe447e3245eee1296663090c6b9063f6c",
+     "size": 8326,
      "type": "file"
     },
     {
@@ -38004,8 +38001,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "aaceec2916fd1335cdcc5b04038514042dca2a5cf5998aed28726a005022ef2d",
-     "size": 34274,
+     "sha256": "c6f2c8a12c2116a25b4f9e8518bce0548d56906bcaa6adb1be1ed395784ef0dc",
+     "size": 35484,
      "type": "file"
     },
     {
@@ -38522,8 +38519,8 @@
     {
      "mode": "100644",
      "path": "src/components/settlement/FaithSection.jsx",
-     "sha256": "741b82e2eb4edf3c23efed17ca02a7eecd33bcccade606acbebc95929221b957",
-     "size": 14744,
+     "sha256": "83be299e4395374db989ff6e623d4c1911e146558d1467ecc1f94004e706ee95",
+     "size": 17903,
      "type": "file"
     },
     {
@@ -51400,22 +51397,22 @@
  },
  "scanStats": {
   "files": 2301,
-  "reads": 133209,
-  "resolved": 9983,
-  "unresolved": 123226
+  "reads": 133078,
+  "resolved": 9976,
+  "unresolved": 123102
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "f9f40d8ff8ad1af658d1c3135ee62f778c279434e9eadb621ed070fe07139eed",
-  "scanTreeDigest": "af596c2571963ad62e731e19d8c32e9e1a8068a1f5705bda2de96c0fb8e1f4a5",
-  "sourceTreeDigest": "f783b7317218dbdbcabbf9ab9dfa924d1746325d039fcc439d3aaa1e58cdeab2",
+  "executionTreeDigest": "a9727882fcba8f6490437b022a7d564e5f1e8dffbf45eaf35bd75fa6a2c40173",
+  "scanTreeDigest": "59bd2e487561ee978205f25b8965d065034d623ec6dd05228a137873a8b30f8c",
+  "sourceTreeDigest": "2283d8518aa816f5655145284571647fa6f5366ca0211b5c454c61f65158aba3",
   "unscannedInputDigest": "7e074a9bf225431bf7a1dca10ede6878eec3a3465ad489735938c453afcb3b9e"
  },
  "schema": 25,
  "sentinel": {
-  "resolvedReads": 9983,
+  "resolvedReads": 9976,
   "totalKeys": 6992,
   "usableShapes": 355
  },
- "total": 2039
+ "total": 2038
 }
