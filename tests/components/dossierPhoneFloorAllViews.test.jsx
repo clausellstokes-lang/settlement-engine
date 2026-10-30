@@ -526,7 +526,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "Summary/DM Summary":  { measured:  9, sub14:  8 },
   "Summary/Plot Hooks":  { measured: 58, sub14: 58 },
   "Systems/Services":    { measured: 96, sub14: 96 },
-  "Systems/Economics":   { measured: 47, sub14: 47 },
+  // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
+  // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
+  "Systems/Economics":   { measured: 40, sub14: 40 },
   "Systems/Power":       { measured: 28, sub14: 27 },
   "Systems/Defense":     { measured: 28, sub14: 28 },
   "Systems/Resources":   { measured:  5, sub14:  5 },
@@ -582,7 +584,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
   "Summary/Plot Hooks":  { prose: 58, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
+  // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
+  "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
   "Systems/Resources":   { prose:  4, chrome: 1, sub14: 1, sub12: 0 },

@@ -13,11 +13,12 @@
  */
 import React from 'react';
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, cleanup } from '@testing-library/react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
+import { pricesMoved } from '../../src/components/new/tabs/MarketPricesSection.jsx';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { drawnMembers } from '../helpers/drawnProse.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -241,15 +242,10 @@ describe('THE PUBLIC GATE — the economy desk stays silent on a public dossier'
       settlement: withFood({ dailyProduction: 800, dailyNeed: 1000, deficit: 0, surplus: 0, importCoverage: 200, rawDeficit: 200, agricultureModifier: 1 }),
       saveId: null, publicDossier: true,
     }));
-    // ⚠ THE FOOD SECTION IS `defaultOpen={!!fb.deficit}` AND Primitives renders
-    // `{open && children}`, so on a town that IS fed the narrative is behind a
-    // closed fold — the same trap the DS-ECO-9 note at EconomicsTab.jsx:505 records
-    // for the sentence above it. That is why this arm opens the fold: the defect
-    // was real for every reader who did, and a test that never opened it would
-    // have reported the false sentence as absent.
-    // anchored: the SAME string is asserted PRESENT three lines below, after the click — a payload that stopped rendering would red there.
-    expect(container.textContent).not.toContain('Daily needs are met');
-    fireEvent.click([...container.querySelectorAll('button')].find((b) => b.textContent.includes('Food Security')));
+    // ⭐ THE FOOD SECTION OPENS ON EVERY TOWN (UX consolidation 2026-10-30, T2-1: the Food
+    // tile was cut and this section is the food fact's one home). It used to be
+    // `defaultOpen={!!fb.deficit}`, which hid this very narrative from every fed town
+    // until the reader opened it; the sentence is now on first paint with no click.
     expect(container.textContent).toContain('Daily needs are met, with no surplus');
     // The sentence above is read out of this very render, so the exclusion below
     // measures the wording rather than an empty tree. // anchored: positive toContain on this same textContent
@@ -949,5 +945,120 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
     // is the one-line rule and not the weave having stopped working.
     expect(weaveBlock([OPENER, REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
       .toContain(STOOD_DOWN);
+  });
+});
+
+/**
+ * ⭐ UX CONSOLIDATION 2026-10-30 — THE ECONOMICS PAGE SAYS EACH FACT ONCE (RULINGS-T2
+ * T2-1..T2-8; RUBRIC R2, R6; RULINGS-CROSS X-2). Each arm pins the post-consolidation shape
+ * and carries a liveness anchor on the same render, so an absence cannot pass on an empty tab.
+ */
+describe('UX consolidation — the Economics page says each fact once', () => {
+  const line = (blockId, text) => legibilityRung('', { blockId, poolKey: 'hand-built', angle: 'plain', text }, []);
+
+  test('T2-1: ONE prosperity home and the Output score ONCE — the Economy and Food tiles are gone', () => {
+    useStore.setState({ campaigns: [] });
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, compound: { economyOutput: 55 } } };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text, 'the header prints the Output chip').toContain('55/100');
+    expect(text.split('55/100').length - 1, 'the Output score is printed once').toBe(1);
+    expect(text, 'the tile sub-line is gone').not.toContain('Output score'); // anchored: toContain('55/100') above, same render
+    const exact = (word) => [...container.querySelectorAll('div,span,p')].filter((n) => n.children.length === 0 && n.textContent === word).length;
+    expect(exact('Comfortable'), 'the prosperity word is printed once').toBe(1);
+    expect(exact('Economy'), 'no Economy tile label').toBe(0);
+    expect(exact('Food'), 'no Food tile label').toBe(0);
+    // The Food Security section is the food home and opens on first paint.
+    expect(text).toContain('Production deficit of');
+  });
+
+  test('T2-2: the Trade chip stays, because tradeAccess follows the route', () => {
+    useStore.setState({ campaigns: [] });
+    const town = { ...SPEAKING, economicState: { ...SPEAKING.economicState, tradeAccess: 'mountain_pass' } };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    expect(container.textContent).toContain('Trade');
+    expect(container.textContent).toContain('mountain pass');
+  });
+
+  test('T2-3: ONE header paragraph — DS-ECO-1 replaces situationDesc where the desk speaks; situationDesc stands on public', () => {
+    useStore.setState({ campaigns: [] });
+    const priv = render(e(EconomicsTab, { settlement: SPEAKING, saveId: 'forge_town', publicDossier: false })).container.textContent;
+    cleanup();
+    const pub = render(e(EconomicsTab, { settlement: SPEAKING, saveId: null, publicDossier: true })).container.textContent;
+    expect(priv, 'the DM header speaks DS-ECO-1').toContain(HEADER_SENTENCE);
+    expectPresentThenAbsent(pub, priv, 'The market square keeps its hours.', 'situationDesc stands on public and yields to DS-ECO-1 on the DM view');
+  });
+
+  test('T2-4: the commercial profile draws no trade-profile lens, and the food narrative drops its generic trade-dependence sentence', () => {
+    useStore.setState({ campaigns: [] });
+    deskOverride.current = Object.freeze({
+      ...SILENT_ECONOMY_DESK,
+      incomeMix: line('DS-ECO-12', 'The tolls carry the town.'),
+      tradeProfile: line('DS-ECO-12', 'The same carts go out and come back.'),
+    });
+    const fed = {
+      ...SPEAKING,
+      economicViability: { metrics: { foodBalance: { dailyProduction: 700, dailyNeed: 1000, deficit: 100, surplus: 0, importCoverage: 200, rawDeficit: 300, agricultureModifier: 1 } } },
+    };
+    const text = render(e(EconomicsTab, { settlement: fed, saveId: 'forge_town', publicDossier: false })).container.textContent;
+    expect(text, 'the income-mix lens still draws').toContain('The tolls carry the town.');
+    expect(text, 'the trade-profile lens is not drawn').not.toContain('The same carts go out and come back.'); // anchored: toContain income-mix on this render
+    expect(text).toContain('Residual shortfall is');
+    expect(text).not.toContain('trade-dependent for food security'); // anchored: toContain('Residual shortfall is') on this render
+  });
+
+  test('T2-5: Market Prices renders only when a quote moved or the crier has a highlight', () => {
+    expect(pricesMoved(null)).toBe(false);
+    expect(pricesMoved({ highlight: null, exports: [{ movement: 'usual' }], imports: [{ movement: 'usual' }] })).toBe(false);
+    expect(pricesMoved({ highlight: null, exports: [{ movement: 'usual' }], imports: [{ movement: 'dear' }] })).toBe(true);
+    expect(pricesMoved({ highlight: { id: 'x' }, exports: [], imports: [] })).toBe(true);
+    useStore.setState({ campaigns: [] });
+    // Off-campaign every quote is `usual`, so the tab prints the chips and no price section.
+    const { container } = render(e(EconomicsTab, { economicState: ECO, settlement: SETTLEMENT, saveId: 'forge_town' }));
+    expect(container.textContent).toContain('Timber');
+    expect(container.textContent).not.toContain('Market Prices'); // anchored: toContain('Timber') on this render
+    expect(container.textContent).not.toContain('At their usual prices'); // anchored: toContain('Timber') on this render
+  });
+
+  test('T2-6: Economic Flows is the ONE chain rendering and carries the diagram\'s four facts', () => {
+    useStore.setState({ campaigns: [] });
+    const town = {
+      ...SPEAKING,
+      institutions: [{ name: 'Smelter' }],
+      economicState: {
+        ...SPEAKING.economicState,
+        activeChains: [{
+          chainId: 'iron_test', status: 'impaired', label: 'Iron working', needLabel: 'Tools', needColor: '#555',
+          resource: 'Iron ore', resourceDepleted: true,
+          processingInstitutions: ['Smelter', 'Foundry'], outputs: ['Ingots'],
+          upstreamMissing: ['grain'], upstreamNote: 'Charcoal arrives by cart.',
+        }],
+      },
+    };
+    const { container } = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true }));
+    const text = container.textContent;
+    expect(text).toContain('Economic Flows');
+    expect(text, 'the resource node, depleted').toContain('Iron ore (depleted)');
+    expect(text, 'the upstream import, by label').toContain('Import: Grain & Bread');
+    expect(text, 'the missing house is marked').toContain('Foundry (missing)');
+    expect(text, 'a present house is not').not.toContain('Smelter (missing)'); // anchored: toContain('Foundry (missing)') on this render
+    expect(text, 'the upstream note').toContain('Charcoal arrives by cart.');
+    expect(text, 'the duplicate section is gone').not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on this render
+  });
+
+  test('T2-7: no Economic Plot Hooks, no Resource Exploitation, no Defense pointer on this page', () => {
+    useStore.setState({ campaigns: [] });
+    const town = {
+      ...SPEAKING,
+      economicState: { ...SPEAKING.economicState, safetyProfile: { blackMarketCapture: 20, criminalInstitutions: ['Smugglers\' Den'] } },
+      economicViability: { ...SPEAKING.economicViability, plotHooks: [{ category: 'Trade', hook: 'The bridge toll is skimmed.' }] },
+      resourceAnalysis: { exploitation: { fullyExploited: [{ rawResource: 'timber' }], partiallyExploited: [], unexploited: [] } },
+    };
+    const text = render(e(EconomicsTab, { settlement: town, saveId: null, publicDossier: true })).container.textContent;
+    expect(text, 'the shadow economy section stays').toContain('Shadow Economy: 20% capture');
+    expect(text, 'its operations list moved to Defense, the capture stays').toContain('Off-book');
+    for (const gone of ['Economic Plot Hooks', 'The bridge toll is skimmed.', 'Resource Exploitation', 'Fully Exploited', '→ Defense tab', 'Economic operations', 'Smugglers\' Den']) {
+      expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% capture') on this render
+    }
   });
 });

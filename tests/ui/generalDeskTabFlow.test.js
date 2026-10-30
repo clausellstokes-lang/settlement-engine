@@ -753,14 +753,18 @@ describe('DS-GEN-18 DRAWS ON THE ECONOMICS TAB — and is silent for a free view
     expect(priv, 'a raw chain id reached the page').not.toContain('fuel —'); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
     expect(priv, 'an unfilled seam reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: expectPresentThenAbsent above proves this render carries the corpus sentence
     // ⛔ AND IT IS ABOVE THE FOLD. `Section` renders `{open && children}`, so a line placed
-    // inside `Supply Chains` — which is `defaultOpen={false}` — reaches no reader on first
-    // paint while every walker stays green. This asserts the sentence renders WITHOUT the
-    // section being opened, which is the only way that defect stays fixed.
+    // inside `Economic Flows` — folded on this town, which has no impaired chain — reaches
+    // no reader on first paint while every walker stays green. This asserts the sentence
+    // renders WITHOUT the section being opened, which is the only way that defect stays
+    // fixed. (UX consolidation 2026-10-30, T2-6: Supply Chains left the tab; Economic
+    // Flows is the one chain rendering, and this line frames it.)
     expect(priv, 'the corpus line is behind a fold').toContain(CRAFT);
     expect(priv, 'the folded section rendered its own rows — the anchor is wrong')
       .not.toContain('Ingots'); // anchored: the toContain(CRAFT) on the line above proves this same render drew the corpus line
-    // The DATUM survives the gate: the supply-chain section keeps its own heading.
-    expect(pub).toContain('Supply Chains');
+    // The DATUM survives the gate: the one chain section keeps its own heading, and the
+    // retired duplicate does not come back.
+    expect(pub).toContain('Economic Flows');
+    expect(pub).not.toContain('Supply Chains'); // anchored: toContain('Economic Flows') on the line above, same render
   });
 
   test('a town with nothing to explain draws NOTHING — the stated silence, in the DOM', () => {

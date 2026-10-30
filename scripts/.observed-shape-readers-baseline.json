@@ -124,16 +124,16 @@
  },
  "digests": {
   "corpusMeta": "36f12c8f770cd42dc1234231a27928d443327661c339877936b2aa60b28f2718",
-  "inventory": "6d32378771a71b45836d2d8f96994b1d59afc465989f775c29eb171d497f08bf",
-  "manifests": "4295cc729e62fd73d38a28e0f8f355c45b5cda6f215371d068057a0640ba038a",
+  "inventory": "8fe5e1bee42bd988be3c3d920afb9eecfb7affb24538b9ba48a7aa16f68c1644",
+  "manifests": "4daa99857cae612a91ca85d527225c770d309a7a94fa3fd286384154ace5873a",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "a558eaa4c5f28c3fddca23651cd632fc92d9b1a90e9c6f689827e389748299ee",
-  "sentinel": "ee7c95f3da32af4cf028b3dd9b367f2b0b70fae8095aa46d73655ad68ce7af6c"
+  "scanStats": "4ef67807eea8bec99bee0eccd8e143396dfc880eb150e81d665ac2b51013b3a0",
+  "sentinel": "087617825528b1f584d853a1bdc8b21c0a73f77f33a37d0f2fa781b4f1ba56a7"
  },
- "frozen": "2026-10-23",
- "frozenAtSha": "a9d469ecb7ed3e78ae724439ea34fe7734c002b8",
- "identities": 1445,
+ "frozen": "2026-10-30",
+ "frozenAtSha": "457517469144a7d0a55f79b328ad00254d7c6b3a",
+ "identities": 1444,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -264,8 +264,7 @@
    "status on settlement": 1
   },
   "src/components/new/SupplyChainsPanel.jsx": {
-   "id on chains": 2,
-   "status on chains": 3
+   "id on chains": 2
   },
   "src/components/new/dailyLifeLogic.js": {
    "description on conflicts": 1,
@@ -2455,7 +2454,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f9f40d8ff8ad1af658d1c3135ee62f778c279434e9eadb621ed070fe07139eed",
+   "digest": "f9cd158798f3b1cc4cfa80c4b4747b6aa672c7ed03da99a13adf0d27b519cc72",
    "entries": [
     {
      "mode": "100644",
@@ -5393,8 +5392,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/SupplyChainsPanel.jsx",
-     "sha256": "e7f7d94aa45582700f902b9326c610af1243baeb177f820eef94c2773374c8ca",
-     "size": 19400,
+     "sha256": "dade1a683d723a72e188fabc4b529ead4852a5d3574da0675e05ae3611d7e767",
+     "size": 13960,
      "type": "file"
     },
     {
@@ -5498,15 +5497,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "b9e4b5ac625c28c32e54639a2f7af22a3939acda591fa9b9f03e0f8b325f6b54",
-     "size": 13187,
+     "sha256": "25695ae5cceca44b4dd60d3efceea6eda0b1ef671a04c407f63df9f8af866884",
+     "size": 13077,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "678689b29e69ce934bc026346d344f34bfc78266b873ada026fb74527e7cf4ab",
-     "size": 57827,
+     "sha256": "45fb7dba2e7e8907bfad4f026a85f60378cd4044d70347d886d50ee4d500529c",
+     "size": 52303,
      "type": "file"
     },
     {
@@ -5540,8 +5539,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MarketPricesSection.jsx",
-     "sha256": "f9e07b554616a395f4882b516dcee70c1ddb81916f8632045ec88c40b58a1ea3",
-     "size": 5484,
+     "sha256": "78dd8e37f231a10949bafb89154252b61d1060bf507249a6b86a09f30083c16b",
+     "size": 6353,
      "type": "file"
     },
     {
@@ -18764,7 +18763,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "af596c2571963ad62e731e19d8c32e9e1a8068a1f5705bda2de96c0fb8e1f4a5",
+   "digest": "228558e1d5f8662fc27ac31839c94d6d301af8595f3b3b7c6927485ca4d0c268",
    "entries": [
     {
      "mode": "100644",
@@ -21632,8 +21631,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/SupplyChainsPanel.jsx",
-     "sha256": "e7f7d94aa45582700f902b9326c610af1243baeb177f820eef94c2773374c8ca",
-     "size": 19400,
+     "sha256": "dade1a683d723a72e188fabc4b529ead4852a5d3574da0675e05ae3611d7e767",
+     "size": 13960,
      "type": "file"
     },
     {
@@ -21737,15 +21736,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "b9e4b5ac625c28c32e54639a2f7af22a3939acda591fa9b9f03e0f8b325f6b54",
-     "size": 13187,
+     "sha256": "25695ae5cceca44b4dd60d3efceea6eda0b1ef671a04c407f63df9f8af866884",
+     "size": 13077,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "678689b29e69ce934bc026346d344f34bfc78266b873ada026fb74527e7cf4ab",
-     "size": 57827,
+     "sha256": "45fb7dba2e7e8907bfad4f026a85f60378cd4044d70347d886d50ee4d500529c",
+     "size": 52303,
      "type": "file"
     },
     {
@@ -21779,8 +21778,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MarketPricesSection.jsx",
-     "sha256": "f9e07b554616a395f4882b516dcee70c1ddb81916f8632045ec88c40b58a1ea3",
-     "size": 5484,
+     "sha256": "78dd8e37f231a10949bafb89154252b61d1060bf507249a6b86a09f30083c16b",
+     "size": 6353,
      "type": "file"
     },
     {
@@ -34877,7 +34876,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f783b7317218dbdbcabbf9ab9dfa924d1746325d039fcc439d3aaa1e58cdeab2",
+   "digest": "4a1bde1b0129df873ba33c436fd31abbf51e1da5bb031e9fac107a63063605b5",
    "entries": [
     {
      "mode": "100644",
@@ -37745,8 +37744,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/SupplyChainsPanel.jsx",
-     "sha256": "e7f7d94aa45582700f902b9326c610af1243baeb177f820eef94c2773374c8ca",
-     "size": 19400,
+     "sha256": "dade1a683d723a72e188fabc4b529ead4852a5d3574da0675e05ae3611d7e767",
+     "size": 13960,
      "type": "file"
     },
     {
@@ -37850,15 +37849,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsGlance.jsx",
-     "sha256": "b9e4b5ac625c28c32e54639a2f7af22a3939acda591fa9b9f03e0f8b325f6b54",
-     "size": 13187,
+     "sha256": "25695ae5cceca44b4dd60d3efceea6eda0b1ef671a04c407f63df9f8af866884",
+     "size": 13077,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/EconomicsTab.jsx",
-     "sha256": "678689b29e69ce934bc026346d344f34bfc78266b873ada026fb74527e7cf4ab",
-     "size": 57827,
+     "sha256": "45fb7dba2e7e8907bfad4f026a85f60378cd4044d70347d886d50ee4d500529c",
+     "size": 52303,
      "type": "file"
     },
     {
@@ -37892,8 +37891,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/MarketPricesSection.jsx",
-     "sha256": "f9e07b554616a395f4882b516dcee70c1ddb81916f8632045ec88c40b58a1ea3",
-     "size": 5484,
+     "sha256": "78dd8e37f231a10949bafb89154252b61d1060bf507249a6b86a09f30083c16b",
+     "size": 6353,
      "type": "file"
     },
     {
@@ -51400,22 +51399,22 @@
  },
  "scanStats": {
   "files": 2301,
-  "reads": 133209,
-  "resolved": 9983,
-  "unresolved": 123226
+  "reads": 133143,
+  "resolved": 9955,
+  "unresolved": 123188
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "f9f40d8ff8ad1af658d1c3135ee62f778c279434e9eadb621ed070fe07139eed",
-  "scanTreeDigest": "af596c2571963ad62e731e19d8c32e9e1a8068a1f5705bda2de96c0fb8e1f4a5",
-  "sourceTreeDigest": "f783b7317218dbdbcabbf9ab9dfa924d1746325d039fcc439d3aaa1e58cdeab2",
+  "executionTreeDigest": "f9cd158798f3b1cc4cfa80c4b4747b6aa672c7ed03da99a13adf0d27b519cc72",
+  "scanTreeDigest": "228558e1d5f8662fc27ac31839c94d6d301af8595f3b3b7c6927485ca4d0c268",
+  "sourceTreeDigest": "4a1bde1b0129df873ba33c436fd31abbf51e1da5bb031e9fac107a63063605b5",
   "unscannedInputDigest": "7e074a9bf225431bf7a1dca10ede6878eec3a3465ad489735938c453afcb3b9e"
  },
  "schema": 25,
  "sentinel": {
-  "resolvedReads": 9983,
+  "resolvedReads": 9955,
   "totalKeys": 6992,
   "usableShapes": 355
  },
- "total": 2039
+ "total": 2036
 }

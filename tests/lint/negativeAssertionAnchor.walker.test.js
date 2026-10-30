@@ -279,7 +279,6 @@ const FROZEN_UNANCHORED_NEGATIVES = Object.freeze({
   'tests/components/destroyConfirmSurfaces.test.jsx': 1,
   'tests/components/dossierDepthTabs.test.jsx': 5,
   'tests/components/dossierLadderModal.test.jsx': 1,
-  'tests/components/economicsPlotHookSeam.test.jsx': 1,
   'tests/components/economicsTabMalformedFlows.test.jsx': 1,
   'tests/components/engineSections.test.jsx': 2,
   'tests/components/faithSection.test.jsx': 8,

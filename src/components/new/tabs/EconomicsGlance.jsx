@@ -29,31 +29,32 @@
  * cite nothing.
  *
  * ── THE FOUR POSITIONS, AND WHICH OF THEM SPEAKS ─────────────────────────────────────
- * ⚠ CORRECTED 2026-09-05 (DESK-11). This paragraph read "all three positions in this file
- * are GLANCE rungs, so none of them prints a corpus sentence today". It was wrong on both
- * counts and had been since the file landed, which is why it is corrected here rather than
- * quietly reworded: a docblock that undercounts its own draws is the false-report shape,
- * and the next reader would have looked for a fourth position that the docblock said did
- * not exist. The file carries FOUR positions and ONE of them SPEAKS:
+ * The file carries FOUR positions and ONE of them SPEAKS:
  *
- *   `economics.prosperityHeader`  DS-ECO-1   **sentence** — printed at the header, below
- *                                            `situationDesc` (the `header?.sentence` line)
- *   `economics.economyTile`       DS-ECO-8   glance
- *   `economics.foodTile`          DS-ECO-2   glance
- *   `economics.seasonTile`        DS-ECO-2   glance
+ *   `economics.prosperityHeader`  DS-ECO-1   **sentence** — THE header paragraph on DM views
+ *   `economics.economyTile`       DS-ECO-8   glance (read at the header: the prosperity word
+ *                                            is the economy glance since the tile was cut)
+ *   `economics.foodTile`          DS-ECO-2   glance (read at the Food Security section in
+ *                                            EconomicsTab, the food fact's one home)
+ *   `economics.seasonTile`        DS-ECO-2   glance (the Season tile, campaign-only)
  *
- * THE THREE TILES ARE GLANCE RUNGS and that is R-DST-A held, not a shortfall: DS-ECO-1
- * already speaks in the header about prosperity, and a second prosperity sentence in a
- * 120px tile would be the page contradicting itself about one fact. A tile is a glance
- * surface by construction — a label, a value, one sub-line — and the sub-line keeps its
- * DATUM (`Output score: n/100`, the lbs/day pair, the season gloss). Lighting a dark door
- * adds; it never displaces a number the reader already had.
+ * ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-1, T2-3, T2-8; RUBRIC R2). ONE prosperity
+ * home: the header word, with the Output score printed ONCE on the header chip. The Economy
+ * tile restated both (1000/1000 identical) and is cut; the Food tile is cut because the Food
+ * Security section is the food fact's home and now opens on every town. The header carries
+ * ONE paragraph: DS-ECO-1 REPLACES `situationDesc` where the desk speaks (DM and player
+ * views), and `situationDesc` stands where it does not (the public dossier, or a silent
+ * corpus) — never both, because the two disagreed on 99 of 1000 towns. The Trade chip stays:
+ * `tradeAccess` follows the route on the corrected sample (six values, 1000/1000 matched).
+ * Only the Season and Treasury tiles remain, and both are campaign-only facts.
  *
- * The tiles nevertheless read `drawn?.sentence` in their map body. That is not dead code
- * and must not be "cleaned up": the depth is the REGISTRY's to decide, so flipping
- * `economics.foodTile` to `sentence` in dossierMounts.js must start that tile speaking
- * with no edit here. Removing the read would put the depth decision back in the component,
- * which is the thing this whole layer exists to take away from it.
+ * ⚠ T2-8 (remove the never-rendering glance `drawn.sentence` read) IS HELD, NOT DONE. The
+ * three glance rows are registered in dossierMounts.js, the registry walker's reachability
+ * arm demands exactly one site per registered position, and the prose manifest's REFUSAL 2
+ * pins the registered count; retiring the rows is a manifest shift, not a UI edit. So each
+ * glance position is read once where its surface now lives (economy at the header word,
+ * food at the Food Security section, season at its tile), and flipping a row to `sentence`
+ * still starts that surface speaking with no edit here. Recorded for the chair.
  *
  * ── THE SECOND EXPORT: `DeskLines`, NOW THE SHARED POSITION RENDERER ─────────────────
  * A position whose rungs are PARAGRAPHS rather than tiles. It reads no economy read-model
@@ -77,7 +78,6 @@
  * @enforced-by tests/lint/dossierMountRegistry.walker.test.js (reachability + the rungs)
  */
 import { FS, swatch, MUTED } from '../../theme.js';
-import { formatCount } from '../../../domain/formatNumber.js';
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -91,24 +91,28 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
  * @param {string} props.prosColor
  * @param {string} props.tradeLabel
  * @param {number} props.ecoScore
- * @param {object|null} props.fb the canonical food balance
- * @param {string} props.foodLabel
- * @param {string} props.foodColor
  * @param {object} props.granary the seasonal granary outlook (`seasonTitle` + `detail` are the tile's two parts)
  * @param {string} props.granaryColor
  * @param {object} props.treasury the coin-band glance
  * @param {object|null} [props.headerRung] the DS-ECO-1 rung the desk built
  * @param {object|null} [props.economyRung] the DS-ECO-8 rung the desk built
- * @param {object|null} [props.foodRung] the DS-ECO-2 food rung
  * @param {object|null} [props.seasonRung] the DS-ECO-2 granary rung
  */
 export default function EconomicsGlance({
-  eco, prosColor, tradeLabel, ecoScore, fb, foodLabel, foodColor,
+  eco, prosColor, tradeLabel, ecoScore,
   granary, granaryColor, treasury,
-  headerRung = null, economyRung = null, foodRung = null, seasonRung = null,
+  headerRung = null, economyRung = null, seasonRung = null,
 }) {
   const mobile = useIsMobile();
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
+  const economyGlance = drawnAtMount('economics.economyTile', economyRung);
+  const season = drawnAtMount('economics.seasonTile', seasonRung);
+  // ONE paragraph: the desk's sentence where it speaks, the generator's datum where it does not.
+  const headerProse = header?.sentence || eco.situationDesc || null;
+  const tiles = [
+    ...(granary.available ? [{ label: 'Season', value: granary.seasonTitle, sub: granary.detail, color: granaryColor, line: season?.sentence }] : []),
+    ...(treasury.available ? [{ label: 'Treasury', value: treasury.band, color: treasury.color }] : []),
+  ];
 
   return (
     <>
@@ -130,25 +134,21 @@ export default function EconomicsGlance({
             </div>}
           </div>
         </div>
-        {eco.situationDesc&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8}}>{eco.situationDesc}</p>}
-        {header?.sentence&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'8px 0 0',fontStyle:'italic'}}>{header.sentence}</p>}
+        {economyGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{economyGlance.sentence}</p>}
+        {headerProse&&<p data-testid="economics-header-prose" style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8,fontStyle:header?.sentence?'italic':'normal'}}>{headerProse}</p>}
       </div>
 
-      {/* ── AT-A-GLANCE TILES ───────────────────────────────────────────── */}
-      <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
-        {[
-          {label:'Economy',value:eco.prosperity,sub:ecoScore?`Output score: ${ecoScore}/100`:undefined,color:prosColor,drawn:drawnAtMount('economics.economyTile',economyRung)},
-          {label:'Food',value:foodLabel,sub:fb?`${formatCount(fb.dailyProduction)} / ${formatCount(fb.dailyNeed)} lbs/day`:undefined,color:foodColor,drawn:drawnAtMount('economics.foodTile',foodRung)},
-          ...(granary.available?[{label:'Season',value:granary.seasonTitle,sub:granary.detail,color:granaryColor,drawn:drawnAtMount('economics.seasonTile',seasonRung)}]:[]), ...(treasury.available?[{label:'Treasury',value:treasury.band,color:treasury.color,drawn:null}]:[]),
-        ].map(({label,value,sub,color,drawn})=>(
+      {/* ── AT-A-GLANCE TILES (campaign-only: Season, Treasury) ────────── */}
+      {tiles.length>0&&<div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+        {tiles.map(({label,value,sub,color,line})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,marginBottom:3}}>{label}</div>
             <div style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag,lineHeight:1.2,marginBottom:sub?2:0}}>{value}</div>
             {sub&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.3}}>{sub}</div>}
-            {drawn?.sentence&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{drawn.sentence}</div>}
+            {line&&<div style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch.inkMag2,lineHeight:1.4,marginTop:3,fontStyle:'italic'}}>{line}</div>}
           </div>
         ))}
-      </div>
+      </div>}
     </>
   );
 }

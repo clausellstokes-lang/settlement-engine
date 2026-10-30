@@ -481,9 +481,14 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
 // category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
 // `"line"` value and nothing else.
-const REVIEWED_TOTAL_CEILING = 218;
+// UX CONSOLIDATION U1 (2026-10-30, RULINGS-T2 T2-1) — THE DEBT FELL BY ONE. 218 -> 217,
+// floatInterpolation 147 -> 146: EconomicsGlance.jsx's `Output score: ${ecoScore}/100` left with the
+// Economy tile (the Output score is printed once, on the header chip). The food narrative's two
+// rows changed snippet only (the generic trade-dependence sentence was cut; no numeral moved);
+// every other EconomicsTab/EconomicsGlance row is a pure line move.
+const REVIEWED_TOTAL_CEILING = 217;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 147,
+  floatInterpolation: 146,
   percentToken: 54,
   multiplier: 8,
   twoDecimalScore: 9,
@@ -810,7 +815,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 218-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 217-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -825,8 +830,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 219 exceeds reviewed ceiling 218',
-      'floatInterpolation 148 exceeds reviewed ceiling 147',
+      'total 218 exceeds reviewed ceiling 217',
+      'floatInterpolation 147 exceeds reviewed ceiling 146',
     ]);
   });
 
