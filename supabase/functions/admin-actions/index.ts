@@ -1053,20 +1053,45 @@ export async function handleAdminActions(
       }
 
       case "get_stats": {
-        const { data: profiles } = await adminClient
-          .from("profiles")
-          .select("tier, role, credits");
+        // The header figures FAIL LOUDLY. This arm used to destructure only
+        // `data` from one `select("tier, role, credits")`, so a failed read
+        // answered 200 with confident zeros, and counting by fetching every row
+        // let PostgREST's max_rows cap `total` silently once the table outgrew
+        // it. Users are now counted by head-only count queries (no rows cross
+        // the wire) and any read error is returned to the client as a refusal.
+        const head = { count: "exact" as const, head: true };
+        const [all, premium, staff] = await Promise.all([
+          adminClient.from("profiles").select("id", head),
+          adminClient.from("profiles").select("id", head).eq("tier", "premium"),
+          adminClient.from("profiles").select("id", head).in("role", ["developer", "admin"]),
+        ]);
+        const countError = all.error || premium.error || staff.error;
+        if (countError) return adminFail(countError, 500);
+        if (all.count == null || premium.count == null || staff.count == null) {
+          return adminFail("get_stats: a count query returned no count", 500);
+        }
+        const total = all.count;
+        const premiumCount = premium.count;
+        const developerCount = staff.count;
 
-        const total = profiles?.length || 0;
-        const premiumCount =
-          profiles?.filter((p: any) => p.tier === "premium").length || 0;
-        const totalCredits =
-          profiles?.reduce((sum: number, p: any) => sum + (p.credits || 0), 0) ||
-          0;
-        const developerCount =
-          profiles?.filter((p: any) =>
-            ["developer", "admin"].includes(p.role)
-          ).length || 0;
+        // The credits pool is a SUM, which a count query cannot give. Page by
+        // whatever size the server actually returns and stop only on an empty
+        // page, so a max_rows below the requested page size cannot end the walk
+        // early and undercount.
+        const CREDITS_PAGE = 1000;
+        let totalCredits = 0;
+        for (let from = 0; ;) {
+          const { data: page, error: pageError } = await adminClient
+            .from("profiles")
+            .select("credits")
+            .order("id")
+            .range(from, from + CREDITS_PAGE - 1);
+          if (pageError) return adminFail(pageError, 500);
+          const rows = Array.isArray(page) ? page : [];
+          if (rows.length === 0) break;
+          for (const p of rows) totalCredits += Number((p as { credits?: unknown }).credits) || 0;
+          from += rows.length;
+        }
 
         return json({
           total,
