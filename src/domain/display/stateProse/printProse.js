@@ -464,13 +464,20 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('overview.stressorLifecycle', stressor.worldStressorLifecycle),
     printed('overview.stressorLifecycle', stressor.worldStressorOrigin),
   ]);
-  put('overview', 'overview.activeConditions', [
+  // THE SCREEN'S RULE, MIRRORED (chair ruling T1-3, 2026-10-30): under a crisis the condition
+  // is the crisis, so the position prints ONE line, the direction lens (the first drawn lens
+  // where it is silent), exactly as OverviewTab puts one line on the crisis card. With no
+  // banner (a played-world condition) all five lenses print as before.
+  const conditionLines = [
     printed('overview.activeConditions', stressor.conditionSeverity),
     printed('overview.activeConditions', stressor.conditionDirection),
     printed('overview.activeConditions', stressor.conditionArchetype),
     printed('overview.activeConditions', stressor.conditionProvenance),
     printed('overview.activeConditions', stressor.conditionDuration),
-  ]);
+  ];
+  put('overview', 'overview.activeConditions', stresses.length > 0
+    ? [printed('overview.activeConditions', stressor.conditionDirection) || conditionLines.find(Boolean) || null]
+    : conditionLines);
   put('overview', 'overview.origin', g.originLines);
   put('overview', 'overview.conflicts', g.conflictLines);
   put('overview', 'overview.warnings', g.warningLines);

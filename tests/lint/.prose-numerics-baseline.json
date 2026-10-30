@@ -1195,19 +1195,19 @@
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 583,
+    "line": 589,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 583,
+    "line": 589,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 583,
+    "line": 589,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },

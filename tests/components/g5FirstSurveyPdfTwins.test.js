@@ -68,9 +68,11 @@ describe('G5 first-survey framing — PDF Overview twin', () => {
     expect(read(OVERVIEW_TAB)).toContain(SYSTEMS_HEALTH_CAPTION);
   });
 
-  test('the WARNINGS & NOTES header carries the vintage', () => {
+  test('the vintage is said once in the chapter: the WARNINGS & NOTES header carries no suffix (X-8, 2026-10-30)', () => {
+    // The Systems Health caption above (the screen's twin) is the chapter's one first-survey
+    // label, as on the screen's Overview (RULINGS-CROSS X-8, the chair's reading, vetoable).
     const src = read(OVERVIEW_PDF);
-    expect(src).toMatch(/WARNINGS & NOTES · FIRST SURVEY/);
-    expect(src).not.toMatch(/WARNINGS & NOTES\s*<\/Text>/);
+    expect(src).toMatch(/WARNINGS & NOTES\s*<\/Text>/);
+    expect((src.match(/first survey/gi) || []).length, 'the chapter says "first survey" exactly once').toBe(1);
   });
 });

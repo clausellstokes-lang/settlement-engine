@@ -907,7 +907,8 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    expect(kickerNode.props.children).toBe('The ground and the company it keeps');
+    // "The place" since the chair's ruling T1-2 (2026-10-30): the site lines are THE PLACE's.
+    expect(kickerNode.props.children).toBe('The place');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
     expect(proseNode.props.children).toBe('The village keeps to itself.');
@@ -921,5 +922,25 @@ describe('SILENCE — no corpus, no Callout', () => {
       const callouts = React.Children.toArray(el.props.children);
       expect(callouts.map((c) => c.key.replace(/^\.\$/, ''))).toEqual(Object.keys(rows));
     }
+  });
+});
+
+describe('THE CONSOLIDATION IN PRINT (chair rulings T1-2/T1-3/T1-6..T1-10, 2026-10-30)', () => {
+  test('under a crisis the conditions print ONE line (the direction lens), and the cut positions print nothing', () => {
+    const town = normalizeSettlement(generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', stressTypes: ['famine'] }, null, { seed: 'print-crisis-card', customContent: {} },
+    ));
+    const stresses = (Array.isArray(town.stress) ? town.stress : [town.stress]).filter(Boolean);
+    expect(stresses.length, 'the fixture carries no crisis, so the arm is free').toBeGreaterThan(0);
+    const overview = buildPrintProse(town).overview || {};
+    const conditions = overview['overview.activeConditions'];
+    expect(conditions, 'the conditions position printed nothing on a crisis town').toBeTruthy();
+    // ONE sentence: no second line woven in after the first.
+    expect(conditions.split(/(?<=[.!?])\s+(?=[A-Z])/).length, conditions).toBeLessThanOrEqual(2);
+    for (const cut of ['overview.origin', 'overview.conflicts', 'overview.warnings', 'overview.notableConnection', 'overview.situation']) {
+      expect(Object.keys(overview), `${cut} printed`).not.toContain(cut); // anchored: `conditions` above proves this town's overview positions were built
+    }
+    const hooks = buildPrintProse(town).plot_hooks || {};
+    expect(Object.keys(hooks)).not.toContain('plot_hooks.framing'); // anchored: the overview half of the same build drew above
   });
 });
