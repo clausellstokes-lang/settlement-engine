@@ -256,7 +256,7 @@ function worldStressorFor(worldState, settlementId) {
 
 /**
  * The TYPED CAUSE of a patron seat that changed hands, recovered by inverting the producer's
- * own exported map. MIRRORS `FaithTab.jsx:226-240`, including its reason for not reading
+ * own exported map. MIRRORS `FaithTab.jsx:125-139`, including its reason for not reading
  * `config.faithProfile.patronFall.cause` directly: the reader-with-no-writer walker convicts
  * that read, because its observation corpus is deity-free and no observed settlement carries
  * the key. Inverting an exported map adds no observed read at all.
@@ -420,7 +420,7 @@ export function buildPrintProse(settlement, ctx = {}) {
   const magic = defenseMagicDependencyProse(r, opts);
   const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
 
-  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:218-242 ───────────
+  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:113-141 ───────────
   // The war half is print-deferred (see PRINT_DEFERRED_MOUNTS), so the war readings are
   // absent and every war rung comes back null — which is exactly what FaithTab itself gets,
   // because that tab holds no worldState either.

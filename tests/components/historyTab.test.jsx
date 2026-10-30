@@ -125,8 +125,8 @@ describe('HistoryTab — the consolidated page', () => {
       founding: { reason: 'A ford on the salt road', foundedBy: 'Three drover families' },
       historicalCharacter: 'A town that never forgave the flood.',
       eventsTimeline: [
-        { type: 'economic', yearsAgo: 38, anchored: true },
-        { type: 'military', yearsAgo: 90, anchored: false },
+        { name: 'The Iron Dispute', type: 'economic', yearsAgo: 38, anchored: true },
+        { name: 'The Long Siege', type: 'military', yearsAgo: 90, anchored: false },
       ],
       currentTensions: [{ type: 'guild_conflict', description: 'The tanners and the dyers share one stream.', severity: 'major', plotHooks: ['A dyer asks the party to foul the tannery outflow.'] }],
       historicalEvents: [
@@ -172,5 +172,46 @@ describe('HistoryTab — the consolidated page', () => {
     expectAbsentWithAnchor(text, 'A dyer asks the party to foul the tannery outflow.', 'The tanners and the dyers share one stream.', 'H7 tension hooks (X-2)');
     expectAbsentWithAnchor(text, 'An old deed to the iron rights has resurfaced.', 'Rights still contested', 'H9 event hooks (X-2)');
     expectAbsentWithAnchor(text, 'Plot hooks', 'Rights still contested', 'the inline hooks kicker');
+  });
+});
+
+/**
+ * X-14b (the owner, 2026-10-30): "Still relevant today" is a HOOK MARKER for the DM. An event
+ * wears it when it carries an open thread: it has a plot hook, or a current tension cites it
+ * by name. The generator's `anchored` flag is template provenance and is NOT read; age,
+ * severity and the character line play no part. The timeline's big dot is the one mark.
+ */
+describe('HistoryTab — the still-relevant mark is a hook marker (X-14b)', () => {
+  const town = () => ({
+    name: 'Briarwatch',
+    history: {
+      age: 300, founding: null, historicalCharacter: 'The Old Flood made this town.',
+      eventsTimeline: [
+        { name: 'The Old Flood', type: 'natural_disaster', yearsAgo: 150, anchored: true },
+        { name: 'The Tithe Riot', type: 'political', yearsAgo: 220, anchored: false },
+        { name: 'The Salt Pact', type: 'economic', yearsAgo: 12, anchored: false },
+      ],
+      currentTensions: [{ type: 'guild_conflict', description: 'The guilds still quarrel over what The Tithe Riot settled.' }],
+      historicalEvents: [
+        { name: 'The Old Flood', type: 'natural_disaster', yearsAgo: 150, severity: 'minor', anchored: true, plotHooks: [], description: 'The river rose.' },
+        { name: 'The Tithe Riot', type: 'political', yearsAgo: 220, severity: 'minor', anchored: false, plotHooks: [], description: 'A riot over tithes.' },
+        { name: 'The Salt Pact', type: 'economic', yearsAgo: 12, severity: 'minor', anchored: false, plotHooks: ['A copy of the pact is missing a clause.'], description: 'A trade pact.' },
+      ],
+    },
+  });
+  const YEARS = { 'The Old Flood': 150, 'The Tithe Riot': 220, 'The Salt Pact': 12 };
+  const dot = (container, name) => [...container.querySelectorAll('[data-testid="history-timeline"] [title]')]
+    .find((n) => n.getAttribute('title').includes(`- ${YEARS[name]}y ago`));
+
+  it('a 150-year-old minor event with no hook and no citing tension loses the mark, even when anchored and named by the character line', () => {
+    const { container } = render(<HistoryTab settlement={town()} />);
+    expect(dot(container, 'The Old Flood'), 'no dot for The Old Flood').toBeTruthy();
+    expect(dot(container, 'The Old Flood').getAttribute('title')).not.toMatch(/still relevant today/); // anchored: the two arms below prove the same render marks other events
+  });
+
+  it('an event a current tension cites by name, and an event with a plot hook, both wear it', () => {
+    const { container } = render(<HistoryTab settlement={town()} />);
+    expect(dot(container, 'The Tithe Riot').getAttribute('title')).toMatch(/still relevant today/);
+    expect(dot(container, 'The Salt Pact').getAttribute('title')).toMatch(/still relevant today/);
   });
 });

@@ -11,6 +11,8 @@ import Button from '../../primitives/Button.jsx';
 // also owns the §885.3 public gate: corpus prose is a PAID surface and this tab is not
 // filtered off a free gallery dossier.
 import { generalDeskLines } from '../generalDeskRead.js';
+// THE STILL-RELEVANT MARK IS A HOOK MARKER (owner addendum X-14b), derived in one place.
+import { eventHasOpenThread, timelineEntryHasOpenThread } from '../../../domain/display/historyOpenThreads.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). The founding/record pair and the
 // four identity lenses each rendered one `<p>` per sentence; they are now one paragraph
 // each. The DRAW is unchanged — the same strings `drawnAtMount` ruled on in the reader.
@@ -99,6 +101,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
             // Sort by position to detect collisions
             const positioned = eventsTimeline.map((te,i) => ({
               ...te, i,
+              open: timelineEntryHasOpenThread(te, h),
               pct: Math.min(97, Math.max(3, Math.round(((age - te.yearsAgo) / age) * 100))),
               ec: ALL_EC[te.type] || ALL_EC.political,
             })).sort((a,b) => a.pct - b.pct);
@@ -112,13 +115,13 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
             return positioned.map(te => (
               <div key={te.i}>
                 {/* Dot */}
-                <div title={`${te.ec.label} - ${te.yearsAgo}y ago${te.anchored?' · still relevant today':''}`}
+                <div title={`${te.ec.label} - ${te.yearsAgo}y ago${te.open?' · still relevant today':''}`}
                   style={{position:'absolute',left:`${te.pct}%`,top:'50%',
                     transform:'translate(-50%,-50%)',
-                    width:te.anchored?14:10,height:te.anchored?14:10,
+                    width:te.open?14:10,height:te.open?14:10,
                     background:te.ec.color,
-                    border:`2px solid ${te.anchored?'#fff':swatch['#F0EAD8']}`,
-                    outline:te.anchored?`2px solid ${te.ec.color}`:'none',
+                    border:`2px solid ${te.open?'#fff':swatch['#F0EAD8']}`,
+                    outline:te.open?`2px solid ${te.ec.color}`:'none',
                     cursor:'pointer',zIndex:2}}>
                 </div>
                 {/* Year label — alternates above/below to avoid overlap */}
@@ -263,7 +266,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
             const ec = ALL_EC[evt.type] || ALL_EC.political;
             const sev = typeof evt.severity==='string'&&evt.severity.length>2 ? evt.severity : null;
             const {label:typeLabel, name:evtName, desc} = eventTitle(evt);
-            const isAnchored = !!evt.anchored;
+            const isAnchored = eventHasOpenThread(evt, h);
             const isExp = expandedEvent===i;
             const yrsColor = recencyColor(evt.yearsAgo||0);
             const yrsLabel = recencyLabel(evt.yearsAgo||0);
