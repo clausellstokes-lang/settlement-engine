@@ -22,6 +22,9 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { literaryTitle, tokenCase } from '../labelLadder.js';
 import { computeChainSets } from '../tabHelpers';
+// The rows can shift with an economy event exactly as the Services tab's do, so the page carries
+// the same freshness note (economyReadModelCoverage: COVERED; chair ruling 5, 2026-10-30).
+import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
@@ -116,6 +119,7 @@ export default function InstitutionsTab({ settlement }) {
 
   return (
     <div style={{ padding: '14px 18px' }}>
+      <EconomyFreshnessNote settlement={settlement} variant="catalog" />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {houses.map(({ inst, category, label, services }, i) => {
           const isCustom = inst.source === 'custom' || inst.isCustom === true;

@@ -201,9 +201,10 @@ describe('THE SHORTHAND/LONGHAND CLASS — a varying shorthand never sits beside
     // are the measurement at landing (2026-09-19: 2,230 files, 233 shorthand/longhand
     // co-occurrences), tightened toward reality and never relaxed.
     expect(SCAN.files, 'the src tree is empty — has it moved?').toBeGreaterThanOrEqual(2200);
-    // 200 -> 195 (2026-10-30, BUILD-T1, re-measured 197 on the merged tip): the Summary group's cuts deleted
-    // blocks that carried a border/borderLeft pair (the Overview's Geography, Institutions and desk-line
-    // boxes, the DM Summary tab's mount). Code removed, not a parser broken: the floor follows it down once.
+    // 200 -> 195 (2026-10-30, BUILD-T1; accepted by chair ruling 8, ODQ §934.101): SURFACES REMOVED BY RULING,
+    // NOT A RELAXATION. The Summary group's consolidation cut blocks that carried a border/borderLeft pair (the
+    // Overview's Geography, Institutions and desk-line boxes; the DM Summary tab's mount), so the measured
+    // co-occurrences fell to 197 with the shape and the parser unchanged. The floor follows the ruled cuts once.
     expect(SCAN.pairs, 'the walk found almost no shorthand/longhand pairs — the shape it looks for changed')
       .toBeGreaterThanOrEqual(195);
   });

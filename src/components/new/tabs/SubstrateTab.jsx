@@ -27,7 +27,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
 const VAR_LABEL = {
-  food_security: 'Food security',
+  food_security: 'Food supply chains', // chair ruling 4 (T1, 2026-10-30): the score is the food chains' status (causalState.js :: deriveFoodSecurity), not the Overview's Food Security band
   labor_capacity: 'Labor capacity',
   public_legitimacy: 'Public legitimacy',
   ruling_authority: 'Ruling authority',
