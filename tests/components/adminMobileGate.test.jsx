@@ -149,6 +149,53 @@ function routeAdmin(overrides = {}) {
 }
 const actionsCalled = () => invoke.mock.calls.map(([, { body }]) => body.action);
 
+describe('AdminPanel shell — KPI strip and mobile gate (T7 survey)', () => {
+  test('mobile: no panel below the gate fires an admin action; only get_stats runs', async () => {
+    installMatchMedia(true);
+    invoke.mockImplementation(routeAdmin());
+    const AdminPanel = await loadAdminPanel();
+    let utils;
+    await act(async () => { utils = render(<AdminPanel />); });
+    expect([...new Set(actionsCalled())]).toEqual(['get_stats']);
+    expect(utils.getByText('7')).toBeTruthy();
+    expect(utils.getByText('140')).toBeTruthy();
+  });
+
+  test('a refused get_stats is shown, not swallowed into an empty strip', async () => {
+    installMatchMedia(true);
+    invoke.mockImplementation(routeAdmin({ get_stats: { data: { error: 'Insufficient privileges' }, error: null } }));
+    const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+    const AdminPanel = await loadAdminPanel();
+    let utils;
+    await act(async () => { utils = render(<AdminPanel />); });
+    const alert = utils.getByRole('alert');
+    expect(alert.textContent).toMatch(/Insufficient privileges/);
+    errorSpy.mockRestore();
+  });
+
+  test('Refresh re-reads get_stats', async () => {
+    installMatchMedia(true);
+    invoke.mockImplementation(routeAdmin());
+    const AdminPanel = await loadAdminPanel();
+    let utils;
+    await act(async () => { utils = render(<AdminPanel />); });
+    const before = actionsCalled().filter((a) => a === 'get_stats').length;
+    await act(async () => { fireEvent.click(utils.getByRole('button', { name: /refresh/i })); });
+    expect(actionsCalled().filter((a) => a === 'get_stats').length).toBe(before + 1);
+  });
+
+  test('desktop: every real panel mounts and asks the server for its own read', async () => {
+    installMatchMedia(false);
+    invoke.mockImplementation(routeAdmin());
+    const AdminPanel = await loadAdminPanel();
+    await act(async () => { render(<AdminPanel />); });
+    const called = new Set(actionsCalled());
+    for (const a of ['get_stats', 'list_operator_broadcasts', 'get_operational_health', 'ai_pricing_cron_status', 'get_client_error_dashboard']) {
+      expect(called.has(a), a).toBe(true);
+    }
+  });
+});
+
 describe('AiPricingResyncPanel — cron status, toggle, dry run, refusal (T7 survey)', () => {
   async function loadPricing() {
     vi.resetModules();
