@@ -61,7 +61,7 @@ describe('AdminUsersPanel — no raw-PII path (W4g)', () => {
 
     render(<AdminUsersPanel />);
 
-    const input = screen.getByLabelText('Search users by email or display name');
+    const input = screen.getByLabelText('Search users by email, name or id');
     fireEvent.change(input, { target: { value: 'alice' } });
     fireEvent.click(screen.getByRole('button', { name: 'Search' }));
 

@@ -363,16 +363,25 @@ describe('AdminUsersPanel — refusals and claims (T7 survey)', () => {
     invoke.mockImplementation(routeInvoke());
   });
 
-  test('the search box claims what list_users really matches (email and display name, not id)', async () => {
+  test('the search box claims what list_users really matches (email, name or id; T9 S2 taught the server the id)', async () => {
     const Panel = await importPanel();
     render(<Panel />);
     const box = screen.getByRole('textbox', { name: /search users/i });
-    expect(box.getAttribute('aria-label')).toMatch(/email or display name/i);
-    expect(box.getAttribute('placeholder')).toMatch(/email or display name/i);
-    // anchored: both attributes were just shown to carry the search claim
-    expect(box.getAttribute('aria-label')).not.toMatch(/\bid\b/i);
-    // anchored: both attributes were just shown to carry the search claim
-    expect(box.getAttribute('placeholder')).not.toMatch(/\bid\b/i);
+    // T7 cut "id" from the claim because list_users never matched the id column.
+    // T9 (S2) made list_users match an exact user id, so the claim comes back.
+    expect(box.getAttribute('aria-label')).toBe('Search users by email, name or id');
+    expect(box.getAttribute('placeholder')).toMatch(/^Search by email, name or id/);
+  });
+
+  test('an id typed into the search box rides list_users unchanged', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    const id = '0f8fad5b-d9cb-469f-a165-70867728950e';
+    fireEvent.change(screen.getByRole('textbox', { name: /search users/i }), { target: { value: id } });
+    fireEvent.click(screen.getByRole('button', { name: /search/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', {
+      body: { action: 'list_users', metadata: { search: id } },
+    }));
   });
 
   test('a refused search is shown and leaves no stale rows', async () => {

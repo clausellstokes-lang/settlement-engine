@@ -948,7 +948,15 @@ export async function handleAdminActions(
           .order("created_at", { ascending: false })
           .limit(100);
 
-        if (search) {
+        // An exact user id (UUID) is matched on the id column; anything else is
+        // the email / display-name substring search. Support works from ticket
+        // rows and the moderation tools from ids, so the box takes either. The
+        // UUID test runs on the already-stripped value, which cannot carry a
+        // PostgREST metacharacter, and `.eq` takes it as one literal value.
+        const UUID_SHAPE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+        if (search && UUID_SHAPE.test(search)) {
+          query = query.eq("id", search);
+        } else if (search) {
           query = query.or(`email.ilike.%${search}%,display_name.ilike.%${search}%`);
         }
 
