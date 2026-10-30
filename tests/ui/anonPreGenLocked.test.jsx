@@ -57,6 +57,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { TIER_GATE, createAuthSlice } from '../../src/store/authSlice.js';
 import { accountHolderPhrase, ANON_SIZES, SIZE_LADDER, signInUnlocksSizes } from '../../src/config/tierFacts.js';
 import { SAMPLE_SETTLEMENTS, forkConfigFor } from '../../src/data/sampleSettlements.js';
+import { fixture as landingFixture } from '../../src/components/home/landingFixture.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import { REFUSAL_REASONS } from '../../src/lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
@@ -349,6 +350,20 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     expect(await runLane(store, { intent: GENERATION_INTENT_SAMPLE_FORK })).toBeNull();
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER);
     expect(refusalCopy(store.state.lastRefusal.reason, store.state.lastRefusal.vars).body).toMatch(/sign in/i);
+  });
+
+  test('the exact-town replay (lf-033, a village) reaches the engine as the fixture recorded it', async () => {
+    // components/howto/ForgeExactDemo.jsx writes the fixture's config and asks as a
+    // curated fork; a signed-out visitor must get the identical town, not a Town clamp.
+    const store = laneStore('anon', landingFixture.forge.config.settType);
+    store.state.config = { ...DEFAULT_CONFIG, ...landingFixture.forge.config };
+    expect(await runLane(store, { intent: GENERATION_INTENT_SAMPLE_FORK })).toBeTruthy();
+    expect(store.state.lastRefusal).toBeNull();
+    const forged = sent();
+    expect(forged.settType).toBe('village');
+    for (const [key, value] of Object.entries(landingFixture.forge.config)) {
+      expect(forged[key], `the replay lost the fixture's ${key}`).toEqual(value);
+    }
   });
 
   test('a free-form anonymous village is still a Town, floor or no floor', async () => {
