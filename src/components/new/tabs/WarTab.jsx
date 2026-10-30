@@ -55,6 +55,7 @@ import { hasMartialRecord, readinessOf, experienceOf, rustOf } from '../../../do
 import { faithPanelModel } from '../../settlement/faithPanelModel.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import AvailableAtLaunchPill from '../../primitives/AvailableAtLaunchPill.jsx';
 // THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
 // does NOT call the desk itself: `warFaith` is one corpus leaf spanning two tabs, and the
 // mount walker admits exactly one caller per desk so the public-dossier gate stays in one
@@ -106,6 +107,24 @@ export function martialCrisisBanners(settlement) {
   const raw = settlement?.stress;
   const banners = (Array.isArray(raw) ? raw : raw ? [raw] : []).filter(Boolean);
   return banners.filter((banner) => MARTIAL_CRISIS_TYPES.includes(banner?.type));
+}
+
+/**
+ * THE LAUNCH TEASER (owner addendum X-7b, 2026-10-30). The War tab is always in the strip;
+ * when `warTabHasContent` is false it shows the estate's launch idiom (the "Available at
+ * launch" pill) and one short paragraph in the owner's sense. No controls, no explainer.
+ * (LockedDestination itself always renders a purchase button, so the pill is used bare.)
+ */
+function WarLaunchTeaser({ name }) {
+  const mobile = useIsMobile();
+  return (
+    <div data-testid="war-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px', marginBottom: 14 }}>
+      <AvailableAtLaunchPill />
+      <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
+        {`From here, this dossier becomes the control center for ${name}'s troops and units out in the world: raise them, deploy them, recall them, and read what came home, as the simulator runs.`}
+      </p>
+    </div>
+  );
 }
 
 /** The war half — pure OUR light war read-models (moved verbatim from WarFaithTab). */
@@ -629,12 +648,13 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
       {/* ── war.treaties (DS-WAR-2) — the clause that is under the most strain ── */}
       {hasTreaties && <WarTreatyLines desk={deskProse} settlement={settlement} />}
+      {!anything && <WarLaunchTeaser name={settlement?.name || 'this settlement'} />}
       {!anything && martialCrises.length === 0 && (
-        // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest. The corpus line
-        // REPLACES the plain line rather than standing under it: both say the town is
-        // at peace. The plain line is the chair's W10 wording: the fact, without the
-        // product explainer.
-        <WarDormantNote desk={deskProse} fallback="No war." />
+        // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest, in the town's own
+        // voice, under the teaser. It is never printed beside a martial banner (owner order
+        // 2026-09-17), and with no corpus draw it prints nothing (the old plain fallback
+        // line is replaced by the teaser, X-7b).
+        <WarDormantNote desk={deskProse} fallback={null} />
       )}
     </div>
   );

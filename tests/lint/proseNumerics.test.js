@@ -494,6 +494,7 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // survivors re-address (`{d.standing}` 184 -> 240, the bar's aria-label 189 -> 244 both
 // categories, `{unaffiliated}` 198 -> 254). Ceilings fall with the debt: total 218 -> 214,
 // floatInterpolation 147 -> 145, percentToken 54 -> 52.
+// U6b (the launch teaser's pill import, X-7b): RumorsTab.jsx 68 -> 69, a pure line move.
 const REVIEWED_TOTAL_CEILING = 214;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 145,

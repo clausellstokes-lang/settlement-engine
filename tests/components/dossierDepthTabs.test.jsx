@@ -285,13 +285,24 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(screen.queryByTestId('war-unit-truth')).toBeNull();
   });
 
-  it('a non-campaign settlement renders the one plain absence line, "No war." (W10)', () => {
+  it('a non-campaign settlement renders the launch teaser: the pill and one paragraph, no controls (X-7b)', () => {
     useStore.__set({ auth: { tier: 'premium' } });
-    render(<WarTab settlement={{ id: 'lone', name: 'Lonetop' }} saveId={null} />);
-    expect(screen.getByTestId('war-tab')).toBeTruthy();
+    const { container } = render(<WarTab settlement={{ id: 'lone', name: 'Lonetop' }} saveId={null} />);
     expect(screen.queryByTestId('war-units')).toBeNull();
-    // The product explainer is gone (R1): the line states the fact and nothing else.
-    expect(screen.getByTestId('war-dormant').textContent).toBe('No war.');
+    const teaser = screen.getByTestId('war-teaser');
+    expect(teaser.textContent).toContain('Available at launch');
+    expect(teaser.textContent).toMatch(/control center for Lonetop's troops and units out in the world: raise them, deploy them, recall them, and read what came home/);
+    expect(teaser.querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
+    // The old explainer and plain line are gone.
+    expectAbsentWithAnchor(container.textContent, 'War is a campaign story', 'Available at launch', 'the W10 explainer');
+    expectAbsentWithAnchor(container.textContent, 'No war.', 'Available at launch', 'the plain line the teaser replaced');
+  });
+
+  it('a live war picture renders the body, never the teaser', () => {
+    asWarOwner();
+    render(<WarTab settlement={homeTown()} saveId="home" />);
+    expect(screen.getByTestId('war-units')).toBeTruthy();
+    expect(screen.queryByTestId('war-teaser')).toBeNull(); // anchored: war-units is asserted present on the line above
   });
 });
 
@@ -381,22 +392,24 @@ describe('WarTab — the martial crisis is the Overview\'s (X-3), and the tab ne
   it('no martial banner prints on the War tab, and nothing there says peace beside one', () => {
     expect(MARTIAL_CRISIS_TYPES).toEqual(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
     for (const inCampaign of [true, false]) {
-      // The liveness half: the SAME roster with a calm town draws a peace line, so the
-      // absences below cannot pass on a page that simply renders nothing ever.
       useStore.__reset();
       useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
       const calmText = render(<WarTab settlement={calm()} saveId="held" />).container.textContent;
       cleanup();
       const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
-      const peace = [...PEACE_WORDS, ...dormantLines].find((line) => calmText.includes(line));
-      expect(peace, `a calm town (in a campaign: ${inCampaign}) drew no peace line`).toBeTruthy();
+      // In a quiet campaign the calm town draws its dormant line (the liveness half); outside
+      // one it draws none, and the teaser is the whole page either way.
+      const peace = dormantLines.find((line) => calmText.includes(line));
+      if (inCampaign) expect(peace, 'a calm town in a quiet campaign drew no dormant line').toBeTruthy();
       for (const type of MARTIAL_CRISIS_TYPES) {
         useStore.__reset();
         useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
         const { container } = render(<WarTab settlement={bannered(type)} saveId="held" />);
         expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
-        expectPresentThenAbsent(calmText, container.textContent, peace, `${type}, in a campaign: ${inCampaign}`);
-        expect(container.textContent).not.toContain(`The ${type} summary as generated.`); // anchored: expectPresentThenAbsent on the line above proves the same roster's page is live
+        expect(screen.getByTestId('war-teaser')).toBeTruthy();
+        if (peace) expectPresentThenAbsent(calmText, container.textContent, peace, `${type}, in a campaign: ${inCampaign}`);
+        expectAbsentWithAnchor(container.textContent, `The ${type} summary as generated.`, 'Available at launch', `${type} summary (X-3)`);
+        for (const words of PEACE_WORDS) expectAbsentWithAnchor(container.textContent, words, 'Available at launch', `${type} peace words`);
         cleanup();
       }
     }
@@ -454,7 +467,7 @@ describe('warTabHasContent — the War tab\'s presence predicate (W10 / X-7)', (
     expect(warTabHasContent(weak, { saveId: 'weak', campaigns: [treatyCampaign()] })).toBe(true);
   });
 
-  it('agrees with the tab: true exactly when the tab shows something other than "No war."', () => {
+  it('agrees with the tab: true exactly when the tab shows its live body rather than the teaser', () => {
     const cases = [
       [{ id: 'lone', name: 'Lonetop' }, null, []],
       [{ id: 'held', name: 'Heldmark', config: {} }, 'held', [{ id: 'c-q', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]],
@@ -467,7 +480,7 @@ describe('warTabHasContent — the War tab\'s presence predicate (W10 / X-7)', (
       // Public dossier: the desk is silent, so the plain line is the only absence text.
       useStore.__set({ auth: { tier: 'anon' }, campaigns, savedSettlements: WAR_SAVES });
       render(<WarTab settlement={settlement} saveId={saveId} publicDossier />);
-      const showsNoWar = screen.queryByTestId('war-dormant')?.textContent === 'No war.';
+      const showsNoWar = !!screen.queryByTestId('war-teaser');
       const present = warTabHasContent(settlement, { saveId, campaigns });
       expect(present, `${settlement.name}`).toBe(!showsNoWar);
       answers.push(present);
@@ -592,12 +605,25 @@ describe('MagicTab — 10-facet posture + magic-free dormancy', () => {
   });
 });
 
-describe('RumorsTab — the absence states the fact (chair ruling U3, 2026-10-30)', () => {
-  it('with no rumor ledger the tab says no word has reached the town, and promises nothing', () => {
+describe('RumorsTab — the launch teaser (X-7b); the DM-truth sentence keeps its gate', () => {
+  it('with no rumor ledger: the pill and one paragraph; the DM sentence only on the owner view', () => {
     useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
-    const { container } = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" />);
-    const text = screen.getByTestId('rumors-tab').textContent;
-    expect(text).toBe('No word has reached Stillwater.');
-    expectAbsentWithAnchor(container.textContent, 'the moment it happens', 'No word has reached Stillwater.', 'U3 contradiction');
+    const priv = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" />);
+    const teaser = screen.getByTestId('rumors-teaser').textContent;
+    expect(teaser).toContain('Available at launch');
+    expect(teaser).toContain('What Stillwater hears from the rest of the realm, as it believes it, as word moves along the roads.');
+    const dm = 'Beside each telling, what the DM knows to be true.';
+    expect(teaser).toContain(dm);
+    expect(screen.getByTestId('rumors-teaser').querySelectorAll('button, a, [role="button"]')).toHaveLength(0);
+    const privText = priv.container.textContent;
+    cleanup();
+    for (const props of [{ publicDossier: true }, { playerView: true }]) {
+      useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
+      const { container } = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" {...props} />);
+      expectPresentThenAbsent(privText, container.textContent, dm, `the DM sentence under ${Object.keys(props)[0]}`);
+      expect(container.textContent).toContain('What Stillwater hears');
+      cleanup();
+    }
+    expectAbsentWithAnchor(privText, 'the moment it happens', 'Available at launch', 'U3 contradiction');
   });
 });

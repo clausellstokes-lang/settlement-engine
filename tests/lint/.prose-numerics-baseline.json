@@ -547,7 +547,7 @@
   },
   {
     "path": "src/components/new/tabs/RumorsTab.jsx",
-    "line": 68,
+    "line": 69,
     "category": "floatInterpolation",
     "snippet": "{CONFIDENCE_LABEL[rumor.confidence] || rumor.confidence}"
   },
