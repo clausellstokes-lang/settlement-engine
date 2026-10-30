@@ -390,24 +390,46 @@ describe('PostGenCoach — the corner card (the owner, 2026-10-30)', () => {
   beforeEach(coachSetup);
   afterEach(() => { cleanup(); navigateTo('/'); });
 
-  for (const vw of [1440, 1024]) {
-    it(`at ${vw}: fixed, bottom-right, lifted over the footer band and the bar, 280 wide`, () => {
-      setViewport(vw);
-      const { container } = render(<PostGenCoach />);
-      const card = container.firstChild;
-      expect(card).not.toBeNull();
-      expect(card.style.position).toBe('fixed');
-      expect(card.style.right).toBe('16px');
-      // The lift is the shared composition, read from chromeInsets, not a copied number.
-      const lift = aboveFooter(aboveBottomNav(16));
-      expect(lift).toContain('--sf-footer-inset');
-      expect(card.getAttribute('style')).toContain(`bottom: ${lift}`);
-      expect(card.style.width).toBe('280px');
-      // The coach layer (900) sits under the feedback panel (910), which shares the corner.
-      expect(card.style.zIndex).toBe('900');
-      expect(Number(card.style.zIndex)).toBeLessThan(910);
-    });
+  // The two desktop rungs share one body; each rung is its own literal-titled test so the
+  // lighting census registers both (no loop around it()).
+  function expectLiftedCorner(vw) {
+    setViewport(vw);
+    const { container } = render(<PostGenCoach />);
+    const card = container.firstChild;
+    expect(card).not.toBeNull();
+    expect(card.style.position).toBe('fixed');
+    expect(card.style.right).toBe('16px');
+    // The lift is the shared composition, read from chromeInsets, not a copied number.
+    const lift = aboveFooter(aboveBottomNav(16));
+    expect(lift).toContain('--sf-footer-inset');
+    expect(card.getAttribute('style')).toContain(`bottom: ${lift}`);
+    expect(card.style.width).toBe('280px');
+    // The coach layer (900) sits under the feedback panel (910), which shares the corner.
+    expect(card.style.zIndex).toBe('900');
+    expect(Number(card.style.zIndex)).toBeLessThan(910);
   }
+  function expectPhoneDock(vw) {
+    setViewport(vw, 844);
+    const { container } = render(<PostGenCoach />);
+    const card = container.firstChild;
+    expect(card).not.toBeNull();
+    expect(card.style.position).toBe('relative');
+    expect(card.style.zIndex).toBe('');
+    expect(card.style.bottom).toBe('');
+    expect(card.style.right).toBe('');
+    expect(card.style.maxWidth).toBe('1200px');
+    expect(card.style.marginLeft).toBe('auto');
+    expect(card.style.marginRight).toBe('auto');
+    expect(card.style.width).toBe('100%');
+  }
+
+  it('at 1440: fixed, bottom-right, lifted over the footer band and the bar, 280 wide', () => {
+    expectLiftedCorner(1440);
+  });
+
+  it('at 1024: fixed, bottom-right, lifted over the footer band and the bar, 280 wide', () => {
+    expectLiftedCorner(1024);
+  });
 
   it('one idea per panel: the headline, the current step and back/next, nothing else', () => {
     render(<PostGenCoach />);
@@ -454,22 +476,13 @@ describe('PostGenCoach — the corner card (the owner, 2026-10-30)', () => {
     expect(screen.getByRole('button', { name: /Erdenkul is ready/ }).getAttribute('aria-expanded')).toBe('true');
   });
 
-  for (const vw of [1023, 390]) {
-    it(`on a phone-width page (${vw}) it keeps the dock: in the flow, PAGE_MAX, no layer`, () => {
-      setViewport(vw, 844);
-      const { container } = render(<PostGenCoach />);
-      const card = container.firstChild;
-      expect(card).not.toBeNull();
-      expect(card.style.position).toBe('relative');
-      expect(card.style.zIndex).toBe('');
-      expect(card.style.bottom).toBe('');
-      expect(card.style.right).toBe('');
-      expect(card.style.maxWidth).toBe('1200px');
-      expect(card.style.marginLeft).toBe('auto');
-      expect(card.style.marginRight).toBe('auto');
-      expect(card.style.width).toBe('100%');
-    });
-  }
+  it('on a phone-width page (1023) it keeps the dock: in the flow, PAGE_MAX, no layer', () => {
+    expectPhoneDock(1023);
+  });
+
+  it('on a phone-width page (390) it keeps the dock: in the flow, PAGE_MAX, no layer', () => {
+    expectPhoneDock(390);
+  });
 
   it('a window narrowed past 1024 moves the card from the corner into the flow', () => {
     const { container } = render(<PostGenCoach />);
