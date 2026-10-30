@@ -47,6 +47,7 @@ import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
 import { isChunkLoadError } from '../lib/staleDeploy.js';
 import { DEFAULT_CONFIG } from './configSlice.js';
+import { anonDraftExpired } from './persistMerge.js';
 
 /**
  * The DISPLAY label for a size token, and the ceiling label for an account tier.
@@ -211,6 +212,19 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // A refusal from a PREVIOUS attempt must not outlive this one: the reader clicked
   // again, and whatever they read before is now either cured or about to be re-raised.
   set(state => { state.lastRefusal = null; });
+  // ⛔ A LONG-OPEN TAB AGREES WITH A FRESH BOOT (chair ruling, 2026-10-30). An unsaved
+  // anonymous draft past its 24 hours is gone after a reload (persistMerge.js), so it is
+  // dropped here too before anything reads it: this forge is then a FIRST forge, not a
+  // reroll of a world the device no longer holds. Only a draft BORN anonymous with nobody
+  // signed in is asked; a signed-in keeper's world of any age is left exactly as it is.
+  // It leaves through `clearSettlement`, the chokepoint, so the device slot retires with it.
+  {
+    const before = get();
+    if (before.draftOrigin === 'anon' && before.auth?.user == null && before.settlement
+      && anonDraftExpired(before.generatedAt, Date.now())) {
+      before.clearSettlement?.();
+    }
+  }
   // ⛔ SAMPLE FORKS ARE EXEMPT FROM THE ANONYMOUS DAILY CAP (owner ruling, ODQ
   // §934.24(b)) — and from nothing else. `intentOf` fails CLOSED: anything it does not
   // recognise reads as an ordinary generation, so the exemption must be asked for by

@@ -1228,6 +1228,9 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       displayPrefs: { ...DEFAULT_DISPLAY_PREFS },
       advanceAutoResolve: false,
     });
+    // An UNSTAMPED envelope (written before the 24-hour stamp existed): a boot adopts it
+    // and stamps it at that boot (persistMerge.js), so a draft booted from this blob writes
+    // its envelope back with a `generatedAt` beside the same payload.
     const anonBlob = () => ({ ...bareBlob(), anonDraft: { settlement: world, lastSeed: 'sf-seed-1' } });
 
     // This suite runs in the NODE environment (no `@vitest-environment jsdom`), and
@@ -1289,6 +1292,29 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       expect(rebooted.getState().draftOrigin).toBe('anon');
     });
 
+    // ⛔ THE DAILY RESET (the owner, 2026-10-30), driven through the REAL generate, the
+    // REAL projection and the REAL merge: the envelope carries the forge's own stamp, a
+    // boot inside 24 hours adopts it, and a boot past them does not.
+    test('an anonymous draft carries its forge stamp, survives 23 hours and is gone at 25', async () => {
+      const store = liveStore();
+      await store.getState().generateSettlement('anon-seed-ttl');
+      const blob = deviceWrite(store);
+      expect(blob.anonDraft.generatedAt, 'the envelope carries no generation stamp').toBe(store.getState().generatedAt);
+      const HOUR = 60 * 60 * 1000;
+      const born = Date.parse(blob.anonDraft.generatedAt);
+      const bootAt = (hours) => {
+        const next = liveStore();
+        next.setState(mergePersistedState(JSON.parse(JSON.stringify(blob)), next.getState(), born + hours * HOUR), true);
+        return next.getState();
+      };
+      const at23 = bootAt(23);
+      expect(at23.settlement?.name).toBe(blob.anonDraft.settlement.name);
+      expect(at23.draftOrigin).toBe('anon');
+      const at25 = bootAt(25);
+      expect(at25.settlement, 'a day-old anonymous draft survived the reload').toBeNull();
+      expect(at25.draftOrigin).toBe('account');
+    });
+
     test("a signed-in generation stamps 'account' and the device keeps nothing", async () => {
       const store = liveStore();
       store.getState().setAuth(USER, { access_token: 't' }, 'free', 'user');
@@ -1324,7 +1350,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // anchored: signing out again re-offers it, because a world born anonymous
       // and never saved is still this device's draft.
       store.getState().clearAuth();
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1', generatedAt: expect.any(String) });
     });
 
     test("a signed-in account's world never lands in storage, and sign-out does not change that", async () => {
@@ -1440,7 +1466,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       const visitor = bootFrom(anonBlob());
       visitor.getState().canonize();
       expect(visitor.getState().draftOrigin).toBe('anon');
-      expect(deviceWrite(visitor).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
+      expect(deviceWrite(visitor).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1', generatedAt: expect.any(String) });
     });
 
     test('a redirect sign-in door writes nothing to the device, and the return boot still has the draft', async () => {
@@ -1517,7 +1543,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       // keeps nothing rather than guessing.
       const store = bootFrom(anonBlob());
       // anchored: the boot really did adopt a draft this device was keeping
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1', generatedAt: expect.any(String) });
       store.getState().setSettlement({ ...world, name: 'Arrived by another door' });
       expect(store.getState().draftOrigin).toBeNull();
       expect(deviceWrite(store).anonDraft).toBeNull();
@@ -1547,7 +1573,7 @@ describe('E-C settings substrate — partialize blob ↔ rehydrate merge round-t
       const store = bootFrom(anonBlob());
       expect(store.getState().draftOrigin).toBe('anon');
       expectByteEqual(store.getState().settlement, world);
-      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1' });
+      expect(deviceWrite(store).anonDraft).toEqual({ settlement: world, lastSeed: 'sf-seed-1', generatedAt: expect.any(String) });
     });
 
     test('a stale, half-migrated or hand-edited envelope is refused outright', () => {
