@@ -38,8 +38,9 @@ vi.mock('../../src/store/index.js', () => {
 });
 
 import { useStore } from '../../src/store/index.js';
-import WarTab, { MARTIAL_CRISIS_TYPES } from '../../src/components/new/tabs/WarTab.jsx';
+import WarTab, { MARTIAL_CRISIS_TYPES, warTabHasContent } from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
 // DESK-4: the arms below assert the RENDERED DOM against the corpus itself rather than
@@ -287,12 +288,13 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(screen.queryByTestId('war-unit-truth')).toBeNull();
   });
 
-  it('a non-campaign settlement renders the honest absence note', () => {
+  it('a non-campaign settlement renders the one plain absence line, "No war." (W10)', () => {
     useStore.__set({ auth: { tier: 'premium' } });
-    const { container } = render(<WarTab settlement={{ id: 'lone', name: 'Lonetop' }} saveId={null} />);
+    render(<WarTab settlement={{ id: 'lone', name: 'Lonetop' }} saveId={null} />);
     expect(screen.getByTestId('war-tab')).toBeTruthy();
     expect(screen.queryByTestId('war-units')).toBeNull();
-    expect(container.textContent).toMatch(/outside any live campaign/i);
+    // The product explainer is gone (R1): the line states the fact and nothing else.
+    expect(screen.getByTestId('war-dormant').textContent).toBe('No war.');
   });
 });
 
@@ -362,12 +364,13 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
   });
 });
 
-describe('WarTab — a martial crisis banner is never contradicted by "at peace" (owner order 2026-09-17)', () => {
-  // The Overview prints an ACTIVE CRISIS card for each `settlement.stress` entry. Measured before
-  // the cure on generated towns: a canonized campaign whose ledger had no war beat printed "This
-  // settlement is at peace and keeps no named faith." under an "Under Siege" card, and a town
-  // outside any campaign printed "there is no war picture to tell".
+describe('WarTab — the martial crisis is the Overview\'s (X-3), and the tab never says peace beside it (owner order 2026-09-17)', () => {
+  // The Overview's crisis card OWNS each `settlement.stress` entry (X-3): the War tab's old
+  // "Active crisis" block restated it verbatim (95/95 martial rows in the 1000-town sample) and
+  // is CUT. The 2026-09-17 order still binds: a town under a martial banner is never told
+  // "No war." or the dormant note, in or out of a campaign.
   const PEACE_WORDS = Object.freeze([
+    'No war.',
     'no host abroad, no siege at the walls',
     'there is no war picture to tell',
   ]);
@@ -375,28 +378,28 @@ describe('WarTab — a martial crisis banner is never contradicted by "at peace"
     id: 'held', name: 'Heldmark', config: {},
     stress: [{ type, label: `Crisis ${type}`, summary: `The ${type} summary as generated.` }],
   });
+  const calm = () => ({ id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'famine', label: 'Famine' }] });
+  const quietCampaign = () => [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }];
 
-  it('in a quiet campaign and outside any campaign, each martial banner shows as an active crisis and nothing says peace', () => {
+  it('no martial banner prints on the War tab, and nothing there says peace beside one', () => {
     expect(MARTIAL_CRISIS_TYPES).toEqual(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
-    const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
-    for (const type of MARTIAL_CRISIS_TYPES) {
-      for (const inCampaign of [true, false]) {
+    for (const inCampaign of [true, false]) {
+      // The liveness half: the SAME roster with a calm town draws a peace line, so the
+      // absences below cannot pass on a page that simply renders nothing ever.
+      useStore.__reset();
+      useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
+      const calmText = render(<WarTab settlement={calm()} saveId="held" />).container.textContent;
+      cleanup();
+      const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
+      const peace = [...PEACE_WORDS, ...dormantLines].find((line) => calmText.includes(line));
+      expect(peace, `a calm town (in a campaign: ${inCampaign}) drew no peace line`).toBeTruthy();
+      for (const type of MARTIAL_CRISIS_TYPES) {
         useStore.__reset();
-        useStore.__set({
-          auth: { tier: 'premium' },
-          campaigns: inCampaign
-            ? [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]
-            : [],
-          savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
-        });
+        useStore.__set({ auth: { tier: 'premium' }, campaigns: inCampaign ? quietCampaign() : [], savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }] });
         const { container } = render(<WarTab settlement={bannered(type)} saveId="held" />);
-        const block = screen.getByTestId('war-martial-crisis');
-        const anchor = `Crisis ${type}.`;
-        expect(block.textContent).toContain(anchor);
-        expect(block.textContent).toContain(`The ${type} summary as generated.`);
-        for (const words of [...PEACE_WORDS, ...dormantLines]) {
-          expectAbsentWithAnchor(container.textContent, words, anchor, `${type}, in a campaign: ${inCampaign}`);
-        }
+        expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
+        expectPresentThenAbsent(calmText, container.textContent, peace, `${type}, in a campaign: ${inCampaign}`);
+        expect(container.textContent).not.toContain(`The ${type} summary as generated.`);
         cleanup();
       }
     }
@@ -405,13 +408,76 @@ describe('WarTab — a martial crisis banner is never contradicted by "at peace"
   it('a calm town in the same quiet campaign still draws its dormant note (the pool is gated, not deleted)', () => {
     useStore.__set({
       auth: { tier: 'premium' },
-      campaigns: [{ id: 'c-held', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }],
+      campaigns: quietCampaign(),
       savedSettlements: [{ id: 'held', settlement: { name: 'Heldmark' } }],
     });
-    const { container } = render(<WarTab settlement={{ id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'famine', label: 'Famine' }] }} saveId="held" />);
+    const { container } = render(<WarTab settlement={calm()} saveId="held" />);
     const dormantLines = WAR_FAITH['DS-WAR-3'].pools['*'].map((v) => v.text.replace(/\{settlement\}/g, 'Heldmark'));
     expect(dormantLines.some((line) => container.textContent.includes(line))).toBe(true);
     expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
+  });
+});
+
+describe('warTabHasContent — the War tab\'s presence predicate (W10 / X-7)', () => {
+  // The treaty ledger's real shape (treatyDossierTab.test.jsx :: campaignWithTreaty), cut
+  // to one honored term: a campaign whose only martial record is the treaty.
+  const treatyCampaign = () => ({
+    id: 'c-treaty', settlementIds: ['iron', 'weak'],
+    worldState: {
+      tick: 60, canonizedAt: '2026-01-01T00:00:00.000Z',
+      spatialLedgers: { treaties: { 'iron>weak': {
+        parties: ['iron', 'weak'], victorId: 'iron', loserId: 'weak', victorName: 'Ironhold', loserName: 'Weakmoor',
+        mintedTick: 12, believedMarginAtSignature: 0.4, budgetGranted: 3, budgetSpent: 1, complianceState: 'honored',
+        treatyTicksPerYear: CURRENT_TREATY_TICKS_PER_YEAR,
+        terms: [
+          { type: 'non_aggression', family: 'security', magnitude: 1, mintedTick: 12, expiresTick: 60 + (3 * CURRENT_TREATY_TICKS_PER_YEAR), weightSpent: 0.4, complianceState: 'honored', trueState: 'honored', burden01: 0, receipt: 'n' },
+        ],
+        receipts: ['The Peace of Weakmoor.'],
+      } } },
+    },
+  });
+
+  it('is false with no campaign, in a quiet campaign, and for a martial banner the war ledger does not carry', () => {
+    const lone = { id: 'lone', name: 'Lonetop' };
+    expect(warTabHasContent(lone)).toBe(false);
+    expect(warTabHasContent(lone, { saveId: 'lone', campaigns: [] })).toBe(false);
+    const quiet = [{ id: 'c-q', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }];
+    expect(warTabHasContent({ id: 'held', name: 'Heldmark', config: {} }, { saveId: 'held', campaigns: quiet })).toBe(false);
+    const sieged = { id: 'held', name: 'Heldmark', config: {}, stress: [{ type: 'under_siege', label: 'Under Siege' }] };
+    expect(warTabHasContent(sieged, { saveId: 'held', campaigns: quiet })).toBe(false);
+    // An uncanonized campaign carries no war picture either.
+    expect(warTabHasContent(homeTown(), { saveId: 'home', campaigns: [{ ...warCampaign(), worldState: { ...warCampaign().worldState, canonizedAt: null } }] })).toBe(false);
+  });
+
+  it('is true for a live war picture, and for a treaty alone', () => {
+    expect(warTabHasContent(homeTown(), { saveId: 'home', campaigns: [warCampaign()] })).toBe(true);
+    // The settlement id stands in for the save id when none is passed (the tab's own rule).
+    expect(warTabHasContent(homeTown(), { campaigns: [warCampaign()] })).toBe(true);
+    const weak = { id: 'weak', name: 'Weakmoor' };
+    expect(warTabHasContent(weak, { saveId: 'weak', campaigns: [treatyCampaign()] })).toBe(true);
+  });
+
+  it('agrees with the tab: true exactly when the tab shows something other than "No war."', () => {
+    const cases = [
+      [{ id: 'lone', name: 'Lonetop' }, null, []],
+      [{ id: 'held', name: 'Heldmark', config: {} }, 'held', [{ id: 'c-q', settlementIds: ['held'], worldState: { tick: 3, canonizedAt: '2026-01-01T00:00:00.000Z' } }]],
+      [homeTown(), 'home', [warCampaign()]],
+      [{ id: 'weak', name: 'Weakmoor' }, 'weak', [treatyCampaign()]],
+    ];
+    const answers = [];
+    for (const [settlement, saveId, campaigns] of cases) {
+      useStore.__reset();
+      // Public dossier: the desk is silent, so the plain line is the only absence text.
+      useStore.__set({ auth: { tier: 'anon' }, campaigns, savedSettlements: WAR_SAVES });
+      render(<WarTab settlement={settlement} saveId={saveId} publicDossier />);
+      const showsNoWar = screen.queryByTestId('war-dormant')?.textContent === 'No war.';
+      const present = warTabHasContent(settlement, { saveId, campaigns });
+      expect(present, `${settlement.name}`).toBe(!showsNoWar);
+      answers.push(present);
+      cleanup();
+    }
+    // Both answers are exercised, so the agreement cannot hold vacuously.
+    expect(answers).toEqual([false, false, true, true]);
   });
 });
 

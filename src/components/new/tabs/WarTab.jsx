@@ -86,15 +86,15 @@ function Eyebrow({ color = SECOND, children }) {
 }
 
 /**
- * THE TOWN'S OWN MARTIAL CRISES (owner order 2026-09-17, "fix the remaining contradictions").
+ * THE TOWN'S OWN MARTIAL CRISES (owner order 2026-09-17, "fix the remaining contradictions";
+ * re-ruled by the consolidation chair 2026-10-30, X-3 and W1).
  *
- * The Overview prints an ACTIVE CRISIS card for every entry in `settlement.stress`, and five of
- * those stressors are martial facts: a siege at the walls, an occupier in the hall, a war the
- * town is supplying, an insurgency against its authority, a slave revolt in its districts. The
- * campaign's war ledger is a DIFFERENT record and can be silent about all five (a generated
- * siege is not a ledger siege), so a tab that read only the ledger said "This settlement is at
- * peace: no host abroad, no siege at the walls" beside that card. This reader is the one place
- * the tab asks the town's own record; the rows are the banners themselves, never a re-derivation.
+ * The Overview's crisis card OWNS every entry in `settlement.stress`, and five of those
+ * stressors are martial facts: a siege at the walls, an occupier in the hall, a war the town
+ * is supplying, an insurgency against its authority, a slave revolt in its districts. This tab
+ * used to print them a second time ("Active crisis"); X-3 cuts that restatement. What stays is
+ * the 2026-09-17 guard: the campaign's war ledger is a DIFFERENT record and can be silent about
+ * all five, so this reader is still asked before the tab says "No war." beside such a crisis.
  */
 export const MARTIAL_CRISIS_TYPES = Object.freeze(['under_siege', 'occupied', 'wartime', 'insurgency', 'slave_revolt']);
 
@@ -106,23 +106,6 @@ export function martialCrisisBanners(settlement) {
   const raw = settlement?.stress;
   const banners = (Array.isArray(raw) ? raw : raw ? [raw] : []).filter(Boolean);
   return banners.filter((banner) => MARTIAL_CRISIS_TYPES.includes(banner?.type));
-}
-
-/** The martial crises the town's own record carries, in the banners' own words. */
-function MartialCrisisBlock({ crises }) {
-  return (
-    <div data-testid="war-martial-crisis" style={{
-      background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
-      padding: '12px 14px', marginBottom: 14,
-    }}>
-      <Eyebrow color={RED}>Active crisis</Eyebrow>
-      {crises.map((crisis, index) => (
-        <Line key={`${crisis.type}:${index}`} strong={`${crisis.label || crisis.type}.`} tone={RED}>
-          {crisis.summary || ''}
-        </Line>
-      ))}
-    </div>
-  );
 }
 
 /** The war half — pure OUR light war read-models (moved verbatim from WarFaithTab). */
@@ -392,6 +375,178 @@ function TreatyBlock({ treaties, sid }) {
 }
 
 /**
+ * THE WAR PICTURE, read as a pure function of the settlement and the campaign roster, so the
+ * tab and the strip's presence predicate below can never disagree about whether there is
+ * anything to show. Moved verbatim out of the tab's memo (2026-10-30, X-7 / W10).
+ *
+ * @param {{ settlement: any, sid: string|null, campaigns: any, nameFor: (id: unknown) => string,
+ *   includeGroundTruth?: boolean }} args
+ * @returns {any|null} null outside a canonized campaign
+ */
+export function readWarPicture({ settlement, sid, campaigns, nameFor, includeGroundTruth = false }) {
+  // Resolve the owning campaign's LIVE worldState from the settlement's save id —
+  // a plain roster scan (the WarFaithTab lineage). worldState feeds ONLY the war
+  // read-models; no deity data is read here.
+  if (!sid || !Array.isArray(campaigns)) return null;
+  const campaign = campaigns.find(c =>
+    (c.settlementIds || []).map(String).includes(sid) && c.worldState?.canonizedAt);
+  if (!campaign) return null;
+  const worldState = campaign.worldState;
+  const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
+  const status = settlementWarStatus({ settlementId: sid, worldState, regionalGraph });
+  const exhaustionRaw = settlementWarExhaustion({ settlementId: sid, worldState });
+  const deployments = worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {};
+  const record = deployments[sid] || null;
+  const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
+
+  // §805 UNITS: our own column's BELIEVED position, derived from the transit
+  // record's own courier umbilical — the position as of the last credible word
+  // (lastTick − beliefStaleness), re-stepped through the ledger's own kinematics
+  // (stepArmyPosition / currentRegion — reuse, never a re-derivation).
+  const transit = armyTransitLedger(worldState);
+  const ours = transit && transit[sid] ? transit[sid] : null;
+  let unit = null;
+  if (ours) {
+    const staleness = Math.max(0, Math.floor(Number(ours.beliefStaleness) || 0));
+    const believedTick = Math.max(ours.departTick, (Number(ours.lastTick) || tick) - staleness);
+    const believedRegionId = currentRegion(stepArmyPosition(ours, believedTick));
+    const trueRegionId = currentRegion(ours);
+    unit = {
+      roleWord: ROLE_WORD[ours.role] || 'marching on',
+      destName: nameFor(ours.destId),
+      believedAt: { name: nameFor(believedRegionId), same: believedRegionId === ours.destId },
+      trueAt: { name: nameFor(trueRegionId) },
+      staleness,
+      stalenessBand: beliefStalenessBand(staleness),
+      arrivedWord: null,
+    };
+  } else if (record && record.targetId != null && status?.besiegingTargets?.length > 0) {
+    // Arrived and in place: the deployment record without a transit column.
+    unit = {
+      roleWord: 'besieging',
+      destName: nameFor(record.targetId),
+      believedAt: { name: nameFor(record.targetId), same: true },
+      trueAt: { name: nameFor(record.targetId) },
+      staleness: 0,
+      stalenessBand: 'current',
+      arrivedWord: `Stands before the walls of ${nameFor(record.targetId)}.`,
+    };
+  }
+
+  // Muster & condition — each row self-gates on its record existing.
+  const musterLine = record ? forceCompositionLine({ settlement, record, homeId: sid, nameFor }) : null;
+  const armyStatus = deployedArmyStatus({ settlementId: sid, worldState, nameFor });
+  const martial = hasMartialRecord(settlement)
+    ? {
+        readinessWord: readinessWords(readinessOf(settlement)),
+        experience: experienceWords(experienceOf(settlement), rustOf(settlement)),
+      }
+    : null;
+
+  // The named wars this settlement stands in (attacker side rides participants;
+  // the defender is the row's defenderId).
+  const wars = liveWarNames({ worldState, nameFor })
+    .filter(w => w.participants.includes(sid) || w.defenderId === sid);
+
+  // DM-only: the town's private picture of its neighbours (fail-closed).
+  const beliefs = includeGroundTruth && hasBeliefMaps(worldState)
+    ? settlementBeliefs({ worldState, observerId: sid, includeGroundTruth: true, nameFor })
+    : [];
+
+  // THE DESK'S TWO EXTRA READINGS, and both are deliberate rather than convenient.
+  //
+  // `postureState` is the RAW ledger token. `settlementMobilization` converts it to a
+  // PHRASE and the desk cannot key on a phrase (the label trap), but the sharper reason
+  // is that `ticksToDeploy` returns 0 at BOTH ends of the ramp — for `mobilized` and for
+  // `demobilizing` alike — so a desk without the token would print the muster complete
+  // over a town standing down. The token is the producer's own datum, not a re-derivation.
+  //
+  // `counterpart` is the ONE opposing town resolved to a NAME here, with this tab's own
+  // roster, because the ids in `status` are save ids and the desk never turns an id into
+  // a name. A COALITION HAS NO COUNTERPART: the corpus's `{counterpart}` seams are
+  // singular, so two besiegers leave it empty and anchored liveness drops those variants
+  // rather than the page naming an enemy by array order.
+  const posture = worldState.warPosture && typeof worldState.warPosture === 'object'
+    ? worldState.warPosture[sid] : null;
+  const lone = (ids) => (Array.isArray(ids) && ids.length === 1 ? nameFor(ids[0]) : '');
+
+  // ⛔ THE OCCUPIER'S WIDER POSITION, TAKEN FOR THE OCCUPIER AND NOT FOR US. The corpus
+  // pools named `occupierHoldings.*` are written from the OCCUPIED town's chair —
+  // "{counterpart} holds more than it can garrison properly, and {settlement} is one of
+  // the places where the thinness shows" — while `occupierHoldings()` is the reading for
+  // the HOLDER's own dossier. Handing it our own holdings would print "the garrison at
+  // <us> is stronger for the occupier's other successes" about the town that owns the
+  // garrison: fluent, confident and false. So the reading is taken for the power holding
+  // US. The occupier's ID comes off the ledger record because `settlementOccupation`
+  // returns its NAME and not its id.
+  const occupationRecord = worldState.occupations && typeof worldState.occupations === 'object'
+    ? worldState.occupations[sid] : null;
+  const occupierId = occupationRecord && occupationRecord.occupierId != null
+    ? occupationRecord.occupierId : null;
+
+  return {
+    status,
+    exhaustionRaw,
+    exhaustionBand: warExhaustionBand(exhaustionRaw),
+    mobilization: settlementMobilization({ settlementId: sid, worldState }), // covert excluded
+    occupied: settlementOccupation({ settlementId: sid, worldState, nameFor }),
+    holdings: occupierHoldings({ settlementId: sid, worldState, nameFor }),
+    treaties: renderTreatiesForSettlement(worldState, sid),
+    postureState: posture && typeof posture === 'object' ? String(posture.state || '') : '',
+    counterpart: lone(status?.besiegedBy) || lone(status?.besiegingTargets),
+    occupierPosition: occupierId != null
+      ? occupierHoldings({ settlementId: occupierId, worldState, nameFor })
+      : null,
+    unit, musterLine, armyStatus, martial, wars, beliefs,
+  };
+}
+
+/**
+ * What the war picture carries, block by block. `anything` is the tab's whole answer to
+ * "is there a war picture or a treaty to show"; the town's own martial banners are NOT part
+ * of it (the Overview owns them, X-3).
+ * @param {any|null} war the readWarPicture result
+ * @returns {{ hasWar: boolean, hasTreaties: boolean, hasMuster: boolean, anything: boolean }}
+ */
+export function warPictureFlags(war) {
+  const hasWar = !!war && (
+    war.status?.besiegedBy?.length > 0
+    || war.status?.besiegingTargets?.length > 0
+    || war.exhaustionRaw > 0
+    || !!war.mobilization
+    || !!war.occupied
+    || !!war.holdings
+  );
+  const hasTreaties = !!war && war.treaties?.length > 0;
+  const hasMuster = !!war && !!(war.musterLine || war.armyStatus || war.martial);
+  const anything = !!war && (hasWar || hasTreaties || hasMuster || !!war.unit
+    || war.wars.length > 0 || war.beliefs.length > 0);
+  return { hasWar, hasTreaties, hasMuster, anything };
+}
+
+/**
+ * THE WAR TAB'S PRESENCE PREDICATE (chair ruling W10 / X-7, 2026-10-30): true when a campaign
+ * war picture or a treaty exists for this settlement, i.e. exactly when the tab has something
+ * other than "No war." to say. Pure: it reads only its arguments, never the store, so the strip
+ * resolver passes the roster it already holds.
+ *
+ * The campaign roster is REQUIRED for a true answer: the war picture lives on the owning
+ * campaign's worldState, not on the settlement record, so `warTabHasContent(settlement)` alone
+ * answers false. `includeGroundTruth` (the DM belief band) defaults false, so a viewer who may
+ * not see that band never gets a tab that holds only it.
+ *
+ * @param {any} settlement
+ * @param {{ saveId?: string|number|null, campaigns?: any[], includeGroundTruth?: boolean }} [context]
+ * @returns {boolean}
+ */
+export function warTabHasContent(settlement, { saveId = null, campaigns = [], includeGroundTruth = false } = {}) {
+  const sid = saveId != null ? String(saveId)
+    : (settlement?.id != null ? String(settlement.id) : null);
+  const war = readWarPicture({ settlement, sid, campaigns, nameFor: (id) => String(id), includeGroundTruth });
+  return warPictureFlags(war).anything;
+}
+
+/**
  * @param {{ settlement: any, saveId?: string|null, playerView?: boolean, publicDossier?: boolean }} props
  */
 export default function WarTab({ settlement, saveId = null, playerView = false, publicDossier = false }) {
@@ -415,139 +570,16 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
     return (id) => byId.get(String(id)) || String(id);
   }, [savedSettlements]);
 
-  // Resolve the owning campaign's LIVE worldState from the settlement's save id —
-  // a plain roster scan (the WarFaithTab lineage). worldState feeds ONLY the war
-  // read-models; no deity data is read here.
-  const war = useMemo(() => {
-    if (!sid || !Array.isArray(campaigns)) return null;
-    const campaign = campaigns.find(c =>
-      (c.settlementIds || []).map(String).includes(sid) && c.worldState?.canonizedAt);
-    if (!campaign) return null;
-    const worldState = campaign.worldState;
-    const regionalGraph = campaign.regionalGraph || worldState.regionalGraph || null;
-    const status = settlementWarStatus({ settlementId: sid, worldState, regionalGraph });
-    const exhaustionRaw = settlementWarExhaustion({ settlementId: sid, worldState });
-    const deployments = worldState.deployments && typeof worldState.deployments === 'object' ? worldState.deployments : {};
-    const record = deployments[sid] || null;
-    const tick = Math.max(0, Math.floor(Number(worldState.tick) || 0));
-
-    // §805 UNITS: our own column's BELIEVED position, derived from the transit
-    // record's own courier umbilical — the position as of the last credible word
-    // (lastTick − beliefStaleness), re-stepped through the ledger's own kinematics
-    // (stepArmyPosition / currentRegion — reuse, never a re-derivation).
-    const transit = armyTransitLedger(worldState);
-    const ours = transit && transit[sid] ? transit[sid] : null;
-    let unit = null;
-    if (ours) {
-      const staleness = Math.max(0, Math.floor(Number(ours.beliefStaleness) || 0));
-      const believedTick = Math.max(ours.departTick, (Number(ours.lastTick) || tick) - staleness);
-      const believedRegionId = currentRegion(stepArmyPosition(ours, believedTick));
-      const trueRegionId = currentRegion(ours);
-      unit = {
-        roleWord: ROLE_WORD[ours.role] || 'marching on',
-        destName: nameFor(ours.destId),
-        believedAt: { name: nameFor(believedRegionId), same: believedRegionId === ours.destId },
-        trueAt: { name: nameFor(trueRegionId) },
-        staleness,
-        stalenessBand: beliefStalenessBand(staleness),
-        arrivedWord: null,
-      };
-    } else if (record && record.targetId != null && status?.besiegingTargets?.length > 0) {
-      // Arrived and in place: the deployment record without a transit column.
-      unit = {
-        roleWord: 'besieging',
-        destName: nameFor(record.targetId),
-        believedAt: { name: nameFor(record.targetId), same: true },
-        trueAt: { name: nameFor(record.targetId) },
-        staleness: 0,
-        stalenessBand: 'current',
-        arrivedWord: `Stands before the walls of ${nameFor(record.targetId)}.`,
-      };
-    }
-
-    // Muster & condition — each row self-gates on its record existing.
-    const musterLine = record ? forceCompositionLine({ settlement, record, homeId: sid, nameFor }) : null;
-    const armyStatus = deployedArmyStatus({ settlementId: sid, worldState, nameFor });
-    const martial = hasMartialRecord(settlement)
-      ? {
-          readinessWord: readinessWords(readinessOf(settlement)),
-          experience: experienceWords(experienceOf(settlement), rustOf(settlement)),
-        }
-      : null;
-
-    // The named wars this settlement stands in (attacker side rides participants;
-    // the defender is the row's defenderId).
-    const wars = liveWarNames({ worldState, nameFor })
-      .filter(w => w.participants.includes(sid) || w.defenderId === sid);
-
-    // DM-only: the town's private picture of its neighbours (fail-closed).
-    const beliefs = includeGroundTruth && hasBeliefMaps(worldState)
-      ? settlementBeliefs({ worldState, observerId: sid, includeGroundTruth: true, nameFor })
-      : [];
-
-    // THE DESK'S TWO EXTRA READINGS, and both are deliberate rather than convenient.
-    //
-    // `postureState` is the RAW ledger token. `settlementMobilization` converts it to a
-    // PHRASE and the desk cannot key on a phrase (the label trap), but the sharper reason
-    // is that `ticksToDeploy` returns 0 at BOTH ends of the ramp — for `mobilized` and for
-    // `demobilizing` alike — so a desk without the token would print the muster complete
-    // over a town standing down. The token is the producer's own datum, not a re-derivation.
-    //
-    // `counterpart` is the ONE opposing town resolved to a NAME here, with this tab's own
-    // roster, because the ids in `status` are save ids and the desk never turns an id into
-    // a name. A COALITION HAS NO COUNTERPART: the corpus's `{counterpart}` seams are
-    // singular, so two besiegers leave it empty and anchored liveness drops those variants
-    // rather than the page naming an enemy by array order.
-    const posture = worldState.warPosture && typeof worldState.warPosture === 'object'
-      ? worldState.warPosture[sid] : null;
-    const lone = (ids) => (Array.isArray(ids) && ids.length === 1 ? nameFor(ids[0]) : '');
-
-    // ⛔ THE OCCUPIER'S WIDER POSITION, TAKEN FOR THE OCCUPIER AND NOT FOR US. The corpus
-    // pools named `occupierHoldings.*` are written from the OCCUPIED town's chair —
-    // "{counterpart} holds more than it can garrison properly, and {settlement} is one of
-    // the places where the thinness shows" — while `occupierHoldings()` is the reading for
-    // the HOLDER's own dossier. Handing it our own holdings would print "the garrison at
-    // <us> is stronger for the occupier's other successes" about the town that owns the
-    // garrison: fluent, confident and false. So the reading is taken for the power holding
-    // US. The occupier's ID comes off the ledger record because `settlementOccupation`
-    // returns its NAME and not its id.
-    const occupationRecord = worldState.occupations && typeof worldState.occupations === 'object'
-      ? worldState.occupations[sid] : null;
-    const occupierId = occupationRecord && occupationRecord.occupierId != null
-      ? occupationRecord.occupierId : null;
-
-    return {
-      status,
-      exhaustionRaw,
-      exhaustionBand: warExhaustionBand(exhaustionRaw),
-      mobilization: settlementMobilization({ settlementId: sid, worldState }), // covert excluded
-      occupied: settlementOccupation({ settlementId: sid, worldState, nameFor }),
-      holdings: occupierHoldings({ settlementId: sid, worldState, nameFor }),
-      treaties: renderTreatiesForSettlement(worldState, sid),
-      postureState: posture && typeof posture === 'object' ? String(posture.state || '') : '',
-      counterpart: lone(status?.besiegedBy) || lone(status?.besiegingTargets),
-      occupierPosition: occupierId != null
-        ? occupierHoldings({ settlementId: occupierId, worldState, nameFor })
-        : null,
-      unit, musterLine, armyStatus, martial, wars, beliefs,
-    };
-  }, [sid, campaigns, nameFor, settlement, includeGroundTruth]);
-
-  const hasWar = !!war && (
-    war.status?.besiegedBy?.length > 0
-    || war.status?.besiegingTargets?.length > 0
-    || war.exhaustionRaw > 0
-    || !!war.mobilization
-    || !!war.occupied
-    || !!war.holdings
+  const war = useMemo(
+    () => readWarPicture({ settlement, sid, campaigns, nameFor, includeGroundTruth }),
+    [sid, campaigns, nameFor, settlement, includeGroundTruth],
   );
-  const hasTreaties = !!war && war.treaties?.length > 0;
-  const hasMuster = !!war && (war.musterLine || war.armyStatus || war.martial);
-  // The town's own martial banners count as "anything" in or out of a campaign, so neither the
-  // dormant note nor either fallback ("at peace", "no war picture to tell") can print beside one.
+
+  const { hasWar, hasTreaties, hasMuster, anything } = warPictureFlags(war);
+  // The town's own martial banners are owned by the Overview (X-3) and no longer print here,
+  // but they still forbid "No war." (owner order 2026-09-17): the page never says peace beside
+  // a siege. Without a war picture the strip hides this tab, so that case renders nothing.
   const martialCrises = martialCrisisBanners(settlement);
-  const anything = martialCrises.length > 0
-    || (!!war && (hasWar || hasTreaties || hasMuster || war.unit || war.wars.length > 0 || war.beliefs.length > 0));
 
   // THE DESK, read ONCE per render through its single gated call site and routed by the
   // mount registry below. `warBeat` is this tab's own reading of "anything martial is
@@ -582,7 +614,6 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
 
   return (
     <div data-testid="war-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      {!hasWar && martialCrises.length > 0 && <MartialCrisisBlock crises={martialCrises} />}
       {hasWar && <WarBlock war={war} nameFor={nameFor} />}
       {/* ── war.standing (DS-WAR-1) — the martial record in the town's own voice ── */}
       <WarStandingLines desk={deskProse} settlement={settlement} />
@@ -598,15 +629,12 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
       {/* ── war.treaties (DS-WAR-2) — the clause that is under the most strain ── */}
       {hasTreaties && <WarTreatyLines desk={deskProse} settlement={settlement} />}
-      {!anything && (
+      {!anything && martialCrises.length === 0 && (
         // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest. The corpus line
-        // REPLACES the plain sentence rather than standing under it: both say the town is
-        // at peace, and printing them an inch apart is the page saying one thing twice.
-        // The plain sentence stays the standing text for every reader the desk does not
-        // draw for — a public dossier, or a town whose faith is not hidden.
-        <WarDormantNote desk={deskProse} fallback={war
-          ? 'This settlement is at peace: no host abroad, no siege at the walls, no treaty binding it.'
-          : 'War is a campaign story. This settlement stands outside any live campaign, so there is no war picture to tell.'} />
+        // REPLACES the plain line rather than standing under it: both say the town is
+        // at peace. The plain line is the chair's W10 wording: the fact, without the
+        // product explainer.
+        <WarDormantNote desk={deskProse} fallback="No war." />
       )}
     </div>
   );
