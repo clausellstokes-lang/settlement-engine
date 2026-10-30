@@ -91,7 +91,7 @@ const allowedTierPoolOf = (st) => {
   const pool = TIER_ORDER.filter((rung) => st.isTierAllowed(rung) === true);
   return pool.length > 0 && pool.length < TIER_ORDER.length ? pool : null;
 };
-import { accountHolderPhrase, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
+import { accountHolderPhrase, ANON_SIZES, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
 // THE LADDER the generator's 'random' rolls over, read here so the pool this lane sends
 // is cut from the same array `resolveConfig` picks from rather than from a parallel list.
 // No new first-paint cost: components/HomeHero.jsx already holds this leaf eagerly.
@@ -126,6 +126,14 @@ import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } fro
 // library shelf). This is the second, and the row that arm is owed is
 // 'src/store/settlementGenerateAction.js imports src/domain/edit/phantoms.js'.
 import { PHANTOM_RECORD_KEYS, isPhantomSave } from '../domain/edit/phantoms.js';
+
+/**
+ * THE ONE SIZE A SIGNED-OUT VISITOR FORGES (the owner, 2026-10-30): a Town, the top of the
+ * anonymous set in config/tierFacts.js. components/HomeHero.jsx and
+ * components/ConfigurationPanel.jsx show the same derivation; tests/ui/anonPreGenLocked
+ * drives all three.
+ */
+const ANON_FORGE_SIZE = ANON_SIZES[ANON_SIZES.length - 1];
 
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
@@ -227,7 +235,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   } = state;
   // ⛔ AN ANONYMOUS GENERATION IS EVERYTHING ON RANDOM (the owner, §934.34: "only hamlet,
   // village, and town can be accessed without signing in and only with everything on
-  // random"). The SIZE is theirs; every other dial rolls.
+  // random"). Every dial rolls, and the size is a Town (see `baseConfig` below).
   //
   // ⭐ THE FORCING IS HERE, NOT IN THE WIZARD, AND THAT IS THE WHOLE POINT. `config` is
   // PERSISTED (store/persistProjection.js), so a disabled control is a courtesy and never
@@ -241,7 +249,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // "Everything on random" is not invented here: DEFAULT_CONFIG already IS that shape —
   // settType random, random_trade, random_culture, random_threat, every priority at 50,
   // resources and stresses rolling, no custom name and no constraint bags. So the
-  // anonymous config is the defaults with the reader's own size on top, which also means
+  // anonymous config is the defaults with a Town on top, which also means
   // this can never drift from what the wizard calls "random".
   //
   // ⛔ A CURATED SAMPLE FORK IS NOT THE READER'S CONFIGURATION, AND FORCING RANDOM ON IT
@@ -284,9 +292,16 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       .find(row => String(row?.id) === promoteId && isPhantomSave(row)) || null
     : null;
   const phantom = promoting ? promoting.settlement : null;
+  // ⛔ AND THE SIZE IS A TOWN (the owner, 2026-10-30: "if you don't sign in the only
+  // option, you have is a town"). Not the stored size, whatever it reads: a stale or
+  // hand-edited config cannot forge a hamlet, a city or a typed population for a signed-out
+  // visitor, because the clamp sits HERE, at the point every free-form forge funnels
+  // through, and not in the pickers that merely stopped offering the choice. A curated
+  // sample fork is exempt (chair ruling, 2026-10-30) through `isSampleFork` above, an
+  // argument that dies with the call, never through the persisted `_forkedFromSample`.
   const baseConfig = canCustomize
     ? storedConfig
-    : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };
+    : { ...DEFAULT_CONFIG, settType: ANON_FORGE_SIZE };
   // ⭐ A PROMOTION FORGES THE PHANTOM'S OWN FACTS, NOT THE READER'S DIALS (design §2.8:
   // "forging the phantom as a real settlement takes the phantom's seed, so traits and
   // written history carry over"). The three rolled traits ARE the generation's three
