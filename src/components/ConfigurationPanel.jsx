@@ -13,8 +13,6 @@ import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
-import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
-import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 import { useRealmMagicDefault } from './generate/useRealmMagicDefault.js';
 
 const PARCHMENT=swatch['#F7F0E4'];
@@ -51,8 +49,10 @@ const popRange = (tier) => {
     : `${fmt(r.min)}–${fmt(r.max)}`;
 };
 
-// The 17 archetypes + priority sliders moved to the Character preset card
-// (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
+// The 17 archetypes + priority sliders live in the Character preset card
+// (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js), and
+// generate/LayeredConfigurationPanel.jsx is its one host, as it is for the Place
+// in Region card. This panel mounts neither, so neither card renders twice.
 // Applying a preset writes the SAME config values the old SliderPanel
 // dropdown wrote, so generation stays byte-identical.
 
@@ -488,11 +488,10 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           )}
         </div>
       </div>
-      <CharacterPresetCard advanced={true}/>
       {/* ── Fine-tune ───────────────────────────────────────────────────────
             Nearby resources + settlement stress behind ONE "Fine-tune"
-            disclosure. Priority sliders moved up to the Character card, where
-            the archetype chips and sliders are reconciled into one control.
+            disclosure. Priority sliders live in the Character card (mounted by
+            the layered panel), where the archetype chips and sliders are one control.
             Flattened to a single level (the resource + stress panels were
             collapsibles side by side); each shows its own compact "Random"
             default until tuned. Callers can hide the whole block with
@@ -505,10 +504,6 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           </Disclosure>
         </div>
       )}
-      {/* Place in Region — birth-time campaign + patron-deity intent (premium;
-          free sees a teaser). Mounted pre-generation so the choice bakes into
-          settlement._config and persists on save. */}
-      <div style={{marginTop:10}}><PlaceInRegionCard/></div>
     </div>
   </div>;
 }
