@@ -209,7 +209,7 @@ export default function AdminTrendsPanel() {
     setVarianceLoading(true);
     callAdmin({ action: 'get_config_variance', configSignature: configSig, from, to })
       .then((d) => { if (!ignore) setVariance(Array.isArray(d?.rows) ? d.rows : []); })
-      .catch(() => { if (!ignore) setVariance([]); })
+      .catch((e) => { if (!ignore) setVariance({ error: e?.message || String(e) }); }) // a refusal is shown in the card, never an empty table
       .finally(() => { if (!ignore) setVarianceLoading(false); });
     return () => { ignore = true; };
   }, [configSig, from, to]);
@@ -219,7 +219,7 @@ export default function AdminTrendsPanel() {
     let ignore = false;
     callAdmin({ action: 'get_npc_distribution', field: npcField, from, to })
       .then((d) => { if (!ignore) setNpcDist(Array.isArray(d?.rows) ? d.rows : []); })
-      .catch(() => { if (!ignore) setNpcDist([]); });
+      .catch((e) => { if (!ignore) setNpcDist({ error: e?.message || String(e) }); }); // shown in the card, never an empty table
     return () => { ignore = true; };
   }, [npcField, from, to]);
 
@@ -396,8 +396,9 @@ export default function AdminTrendsPanel() {
         }>
           {!configSig && <Empty msg="Pick a config signature to see the output spread across seeds." />}
           {configSig && varianceLoading && <Empty msg="Loading variance…" />}
-          {configSig && !varianceLoading && (
-            <MiniTable rows={variance || []}
+          {configSig && !varianceLoading && variance?.error && <Empty msg={`Variance could not load: ${variance.error}.`} />}
+          {configSig && !varianceLoading && !variance?.error && (
+            <MiniTable rows={Array.isArray(variance) ? variance : []}
               columns={['metric', 'n', 'mean', 'stddev', 'p10', 'p50', 'p90']}
               numeric={['n', 'mean', 'stddev', 'p10', 'p50', 'p90']} />
           )}
@@ -432,7 +433,9 @@ export default function AdminTrendsPanel() {
             { key: 'structural_rank', label: 'Structural rank' },
           ]} />
         }>
-          <MiniTable rows={npcDist || []} columns={['dim', 'n']} numeric={['n']} />
+          {npcDist?.error
+            ? <Empty msg={`NPC distribution could not load: ${npcDist.error}.`} />
+            : <MiniTable rows={Array.isArray(npcDist) ? npcDist : []} columns={['dim', 'n']} numeric={['n']} />}
         </Card>
       </div>
 

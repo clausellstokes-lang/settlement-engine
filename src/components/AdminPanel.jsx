@@ -28,7 +28,7 @@ import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Stat from './primitives/Stat.jsx';
-import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, FS } from './theme.js';
+import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, RED, sans, serif_, SP, FS } from './theme.js';
 
 // Icons-off surface: the section header is text-only. The action-vs-reference
 // boundary the old header glyph carried is now held by the differential
@@ -68,6 +68,9 @@ export default function AdminPanel({ onBack }) {
   const isMobile = useIsMobile();
 
   const [stats, setStats] = useState(null);
+  // A refused or failed KPI read is SHOWN (on mobile the strip is the whole
+  // read surface), never swallowed into an absent strip with a console line.
+  const [statsError, setStatsError] = useState(null);
 
   // KPI figures via the audited admin-actions `get_stats` action. It returns
   // aggregate counts ONLY (total / premium / credits pool) — no raw PII crosses
@@ -87,8 +90,9 @@ export default function AdminPanel({ onBack }) {
         premiumCount: data?.premiumCount ?? 0,
         totalCredits: data?.totalCredits ?? 0,
       });
+      setStatsError(null);
     } catch (e) {
-      console.error('Failed to fetch stats:', e);
+      setStatsError(e?.message || 'Request failed');
     }
   }, []);
 
@@ -148,6 +152,11 @@ export default function AdminPanel({ onBack }) {
           <Stat label="Premium" value={stats.premiumCount} />
           <Stat label="Credits Pool" value={stats.totalCredits} />
         </div>
+      )}
+      {statsError && (
+        <p role="alert" style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, color: RED }}>
+          The figures could not be loaded: {statsError}
+        </p>
       )}
 
       {/* Mobile: the read-only KPI strip above is the whole admin read surface;
@@ -214,7 +223,7 @@ export default function AdminPanel({ onBack }) {
         {/* Observability cluster — the read-only analytics dashboards + the
             production crash sink (client_error_events, 081; grouped by signature
             with the always-visible last-hour alert banner from
-            report_client_error_alert, 156). Both live in ONE Section (rather than
+            report_client_error_alert, 167). Both live in ONE Section (rather than
             a second "Client Errors" Section) so the admin view adds no native
             title= to the shrink-only guidance-walker census; the errors panel
             carries its own <h3> delimiter. Read-only, service-role-gated. */}

@@ -145,3 +145,50 @@ describe('A5 — SupportQueuePanel (agent queue)', () => {
     });
   });
 });
+
+// ── T7 survey (2026-10-30). set_ticket_status writes its reason into the
+//    USER-VISIBLE thread breadcrumb ('Status changed to X — <reason>', migration
+//    055) and into the owner's lifecycle email ('Note: <reason>'). A hard-coded
+//    internal label must never ride that wire to the customer. ──
+describe('A5 — SupportQueuePanel refusals and the customer-facing wire (T7 survey)', () => {
+  test('set_ticket_status carries no hard-coded reason (it would reach the ticket owner)', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openTicket();
+    fireEvent.change(screen.getByLabelText(/set status/i), { target: { value: 'waiting_on_user' } });
+    await waitFor(() => {
+      expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'set_ticket_status', ticketId: 't-1', status: 'waiting_on_user' } });
+    });
+    expect(await screen.findByText('Status set to Waiting on user.')).toBeTruthy();
+  });
+
+  test('a refused claim is shown and the queue does not pretend it succeeded', async () => {
+    invoke.mockImplementation(async (_fn, { body }) => {
+      if (body.action === 'list_ticket_pool') return { data: { tickets: POOL }, error: null };
+      if (body.action === 'list_ticket_thread') return { data: { events: AGENT_THREAD }, error: null };
+      return { data: { error: 'Admin action failed' }, error: null };
+    });
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openTicket();
+    fireEvent.click(screen.getByRole('button', { name: /^claim$/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/admin action failed/i);
+    expect(screen.queryByText('Ticket claimed.')).toBeNull();
+  });
+
+  test('a failed pool read is shown', async () => {
+    invoke.mockImplementation(async () => ({ data: null, error: { message: 'Insufficient privileges' } }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.click(screen.getByRole('button', { name: /load queue/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/insufficient privileges/i);
+  });
+
+  test('the status filter rides list_ticket_pool', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.change(screen.getByLabelText(/^status/i), { target: { value: 'waiting_on_user' } });
+    fireEvent.click(screen.getByRole('button', { name: /load queue/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'list_ticket_pool', status: 'waiting_on_user' } }));
+  });
+});
