@@ -3,8 +3,9 @@
  *
  * Built on the A3 least-privilege foundation: every read is REDACTED by default
  * and every write goes through the audited, role-gated admin-actions edge fn.
- *   • Search users (by id / email / display-name) via the audited `list_users`
- *     action — the response carries only MASKED emails (no raw PII).
+ *   • Search users (by email / display-name substring) via the audited
+ *     `list_users` action — the response carries only MASKED emails (no raw
+ *     PII). list_users never matches the id column, so the box does not claim it.
  *   • Open a user → REDACTED summary from `admin_user_summary` (masked email,
  *     account age, tier, credits, settlement/gallery/campaign/ticket/warning
  *     counts, ban/disable status).
@@ -275,8 +276,8 @@ export default function AdminUsersPanel() {
         background: swatch.white, border: `1px solid ${BORDER}`,
       }}>
         <input
-          type="text" aria-label="Search users by id, email, or name"
-          placeholder="Search by id, email, or display name…"
+          type="text" aria-label="Search users by email or display name"
+          placeholder="Search by email or display name…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && search()}
