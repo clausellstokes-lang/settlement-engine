@@ -655,7 +655,9 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
       dossier.length,
       'the derivation reaches no dossier panel — it has stopped following the lazy edge that mounts '
       + 'them, so the eighteen views this census is the source-side twin of are unmeasured',
-    ).toBeGreaterThanOrEqual(45);
+    // 45 -> 44 (2026-10-30, BUILD-T1): SummaryTab and SummaryTabV2 leave the lazy registry (X-5) and
+    // InstitutionsTab joins it (T1-14), a net of one panel fewer.
+    ).toBeGreaterThanOrEqual(44);
 
     const primitives = CENSUS_FILES.filter((f) => f.startsWith('src/components/primitives/'));
     expect(
