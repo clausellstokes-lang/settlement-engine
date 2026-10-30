@@ -18,7 +18,7 @@
  * store does not leak across renders.
  */
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
-import { act, cleanup, render } from '@testing-library/react';
+import { act, cleanup, fireEvent, render } from '@testing-library/react';
 
 // ── supabase mock — list_users resolves a small roster so `stats` (the KPI
 //    strip) populates on mount. ────────────────────────────────────────────────
@@ -122,5 +122,76 @@ describe('AdminPanel — mobile defer-to-desktop gate', () => {
     // Sanity: the inline-edit ledger search box (a write surface) is present on
     // desktop only.
     expect(queryByTestId).toBeTruthy();
+  });
+});
+
+// ── T7 survey (2026-10-30): the page shell and the panels this file mounts for
+//    real (AiPricingResyncPanel, AdminClientErrorsPanel, AdminBroadcastPanel,
+//    AdminOperationalHealthPanel are NOT stubbed above). Each tool calls the
+//    right admin-actions action and shows a refusal instead of swallowing it. ──
+function routeAdmin(overrides = {}) {
+  return vi.fn(async (_fn, { body }) => {
+    if (Object.prototype.hasOwnProperty.call(overrides, body.action)) {
+      const o = overrides[body.action];
+      return typeof o === 'function' ? o(body) : o;
+    }
+    switch (body.action) {
+      case 'get_stats':
+        return { data: { total: 7, premiumCount: 2, totalCredits: 140 }, error: null };
+      case 'ai_pricing_cron_status':
+        return { data: { success: true, enabled: false, configured: true, timezone: 'America/New_York', applyCreditCosts: true, lastDispatchedOn: null, lastRun: null }, error: null };
+      case 'get_client_error_dashboard':
+        return { data: { success: true, rows: [], alert: null, refreshedAt: '2026-10-30T12:00:00Z' }, error: null };
+      default:
+        return { data: { success: true, rows: [], broadcasts: [], attention: [], health: null }, error: null };
+    }
+  });
+}
+const actionsCalled = () => invoke.mock.calls.map(([, { body }]) => body.action);
+
+describe('AiPricingResyncPanel — cron status, toggle, dry run, refusal (T7 survey)', () => {
+  async function loadPricing() {
+    vi.resetModules();
+    return (await import('../../src/components/admin/AiPricingResyncPanel.jsx')).default;
+  }
+
+  test('renders the nightly status and the toggle sends the opposite enabled flag', async () => {
+    invoke.mockImplementation(routeAdmin({ ai_pricing_cron_set: (b) => ({ data: { success: true, enabled: b.enabled }, error: null }) }));
+    const Panel = await loadPricing();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    expect(utils.getByText('Disabled')).toBeTruthy();
+    await act(async () => { fireEvent.click(utils.getByRole('button', { name: /^enable$/i })); });
+    expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'ai_pricing_cron_set', enabled: true } });
+  });
+
+  test('Resync defaults to a dry run; unchecking sends dryRun:false; the report renders', async () => {
+    invoke.mockImplementation(routeAdmin({
+      ai_pricing_resync: (b) => ({ data: { success: true, dryRun: b.dryRun, updatedAt: '2026-10-30T00:00:00Z', creditChanges: [], priceChanges: [], warnings: [] }, error: null }),
+    }));
+    const Panel = await loadPricing();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    await act(async () => { fireEvent.click(utils.getByRole('button', { name: /resync ai pricing/i })); });
+    expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'ai_pricing_resync', dryRun: true } });
+    expect(utils.getByText(/dry run \(nothing written\)/i)).toBeTruthy();
+    fireEvent.click(utils.getByLabelText(/dry run \(preview without writing\)/i));
+    await act(async () => { fireEvent.click(utils.getByRole('button', { name: /resync ai pricing/i })); });
+    expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'ai_pricing_resync', dryRun: false } });
+    expect(utils.getByText(/^applied$/i)).toBeTruthy();
+  });
+
+  test('a refused resync and a refused cron status are both shown', async () => {
+    invoke.mockImplementation(routeAdmin({
+      ai_pricing_cron_status: { data: { error: 'Insufficient privileges' }, error: null },
+      ai_pricing_resync: { data: { error: 'Admin action failed' }, error: null },
+    }));
+    const Panel = await loadPricing();
+    let utils;
+    await act(async () => { utils = render(<Panel />); });
+    await act(async () => { fireEvent.click(utils.getByRole('button', { name: /resync ai pricing/i })); });
+    const alerts = utils.getAllByRole('alert').map((n) => n.textContent);
+    expect(alerts.some((t) => /Insufficient privileges/.test(t))).toBe(true);
+    expect(alerts.some((t) => /Admin action failed/.test(t))).toBe(true);
   });
 });

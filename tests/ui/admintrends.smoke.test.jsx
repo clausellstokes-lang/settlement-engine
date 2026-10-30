@@ -33,3 +33,45 @@ describe('AdminTrendsPanel — decomposition smoke', () => {
     expect(typeof mod.default).toBe('function');
   });
 });
+
+// ── T7 survey (2026-10-30): the Usage Trends and Analytics dashboards exercised
+//    in jsdom. Every read goes to the right admin-actions action with the right
+//    keys, and a failed read is shown, never rendered as an empty table. ──
+import { render, screen, fireEvent, cleanup, waitFor, act } from '@testing-library/react';
+import { supabase as mockedSupabase } from '../../src/lib/supabase.js';
+import { afterEach, beforeEach } from 'vitest';
+
+afterEach(cleanup);
+
+const trendInvoke = () => mockedSupabase.functions.invoke;
+function routeTrends(fail = {}) {
+  trendInvoke().mockImplementation(async (_fn, { body }) => {
+    if (fail[body.action]) return { data: { error: fail[body.action] }, error: null };
+    if (body.action === 'get_analytics_distribution' && body.field === 'config_signature') {
+      return { data: { rows: [{ dim: 'sig-aaaaaaaaaaaa', value: 12 }] }, error: null };
+    }
+    return { data: { rows: [] }, error: null };
+  });
+}
+const trendCalls = () => trendInvoke().mock.calls.map(([, { body }]) => body);
+
+describe('AdminAnalyticsPanel — dashboard switch and refusal (T7 survey)', () => {
+  beforeEach(() => { trendInvoke().mockReset(); });
+
+  test('mount reads the funnel; each segment reads its own dashboard', async () => {
+    routeTrends();
+    const Panel = (await import('../../src/components/admin/AdminAnalyticsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    expect(trendCalls()[0]).toEqual({ action: 'get_analytics_dashboard', dashboard: 'funnel' });
+    await act(async () => { fireEvent.click(screen.getByRole('button', { name: /retention/i })); });
+    expect(trendCalls().at(-1)).toEqual({ action: 'get_analytics_dashboard', dashboard: 'retention' });
+  });
+
+  test('a refused dashboard read is shown in place of the table', async () => {
+    routeTrends({ get_analytics_dashboard: 'Insufficient privileges' });
+    const Panel = (await import('../../src/components/admin/AdminAnalyticsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    expect(await screen.findByText(/couldn.t load: insufficient privileges/i)).toBeTruthy();
+    expect(screen.queryByText(/no data yet for this dashboard/i)).toBeNull();
+  });
+});
