@@ -39,6 +39,67 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
 });
 
 /**
+ * THE PAGE EACH HOOK'S SOURCE FACT LIVES ON (chair ruling X-2 / RULINGS-T1 Plot Hooks). The
+ * Plot Hooks tab is the hooks' one home and groups its cards by that page, under a caption
+ * naming it, so a DM can see which page holds the fact a hook grows from. Keyed on the
+ * collector's own category; traditions ride the `tension` category and are told apart by
+ * the source label the collector writes for them. Labels are the strip's own tab labels.
+ * @type {ReadonlyArray<{ id: string, label: string }>}
+ */
+export const PLOT_HOOK_SOURCE_PAGES = Object.freeze([
+  Object.freeze({ id: 'npcs', label: 'NPCs' }),
+  Object.freeze({ id: 'relationships', label: 'Relationships' }),
+  Object.freeze({ id: 'history', label: 'History' }),
+  Object.freeze({ id: 'traditions', label: 'Traditions' }),
+  Object.freeze({ id: 'viability', label: 'Outlook' }),
+  Object.freeze({ id: 'defense', label: 'Defense' }),
+]);
+
+/** @type {Readonly<Record<string, string>>} */
+const SOURCE_PAGE_OF_CATEGORY = Object.freeze({
+  npc: 'npcs',
+  faction: 'relationships',
+  relationship: 'relationships',
+  tension: 'history',
+  history: 'history',
+  economics: 'viability',
+  safety: 'defense',
+});
+
+/**
+ * The source page of one hook, as an entry of PLOT_HOOK_SOURCE_PAGES.
+ * @param {{ category?: unknown, source?: unknown }|null|undefined} hook
+ * @returns {{ id: string, label: string }}
+ */
+export function plotHookSourcePage(hook) {
+  const id = hook?.source === 'Traditions'
+    ? 'traditions'
+    : (SOURCE_PAGE_OF_CATEGORY[String(hook?.category ?? '')] || 'history');
+  return PLOT_HOOK_SOURCE_PAGES.find((page) => page.id === id) || PLOT_HOOK_SOURCE_PAGES[2];
+}
+
+/**
+ * The hooks grouped by source page, in PLOT_HOOK_SOURCE_PAGES order, each group keeping the
+ * collector's own order. Empty pages are absent.
+ * @template {{ category?: unknown, source?: unknown }} H
+ * @param {ReadonlyArray<H>} hooks
+ * @returns {Array<{ page: { id: string, label: string }, hooks: H[] }>}
+ */
+export function groupPlotHooksBySourcePage(hooks) {
+  /** @type {Map<string, H[]>} */
+  const byPage = new Map();
+  for (const hook of hooks || []) {
+    const { id } = plotHookSourcePage(hook);
+    if (!byPage.has(id)) byPage.set(id, []);
+    /** @type {H[]} */ (byPage.get(id)).push(hook);
+  }
+  return PLOT_HOOK_SOURCE_PAGES
+    .filter((page) => byPage.has(page.id))
+    .map((page) => ({ page, hooks: /** @type {H[]} */ (byPage.get(page.id)) }));
+}
+
+
+/**
  * A raw hook as produced by the generators: either a bare string, or an object
  * carrying the prose under `hook`/`text` (plus optional category/severity).
  * @typedef {string | { hook?: unknown, text?: unknown, category?: unknown, severity?: unknown }} PlotHookRaw

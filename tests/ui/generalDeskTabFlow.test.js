@@ -45,10 +45,8 @@ import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailur
 import { calamityFill } from '../../src/domain/display/stateProse/generalStateProse.js';
 import { crisisBannerPoolKey } from '../../src/domain/display/stateProse/stressorsStateProse.js';
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
-// The two token lists PlotHooksTab derives and hands to the desk — the cap arm below drives
-// the same derivation so the framing it counts is the framing the page is given.
-import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
-import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
+// The collector and its source-page grouping, as the Plot Hooks page uses them.
+import { collectPlotHooks, groupPlotHooksBySourcePage } from '../../src/domain/dossier/plotHooks.js';
 
 const e = React.createElement;
 afterEach(cleanup);
@@ -741,10 +739,10 @@ describe('THE VIABILITY VERDICT DRAWS — and is silent for a free viewer', () =
   });
 });
 
-describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
+describe('THE PLOT HOOKS PAGE IS THE CARDS, GROUPED BY SOURCE PAGE (chair rulings, 2026-10-30)', () => {
   /**
-   * A town whose hooks really do span categories. The framing is derived from the hooks the
-   * page itself collects, so this fixture carries the rows `collectPlotHooks` reads.
+   * A town whose hooks really do span source pages. The page collects them itself, so this
+   * fixture carries the rows `collectPlotHooks` reads.
    */
   const HOOKED = Object.freeze({
     id: 'steinmark', name: 'Steinmark', _seed: 'steinmark',
@@ -757,58 +755,35 @@ describe('THE HOOK FRAMING DRAWS — and is silent for a free viewer', () => {
     },
   });
 
-  test('the framing reaches the DOM privately, is absent publicly, and the hooks keep their own words', () => {
-    const priv = render(e(PlotHooksTab, { settlement: HOOKED, publicDossier: false }))
-      .container.textContent;
-    cleanup();
-    const pub = render(e(PlotHooksTab, { settlement: HOOKED, publicDossier: true }))
-      .container.textContent;
-    // NON-VACUITY: the page really collected hooks, or both halves below are free.
-    expect(priv).toContain('Plot hooks');
-    expect(priv.length, 'the hooks page rendered nothing').toBeGreaterThan(200);
-    // ⛔ THE BLOCK IS THE FRAMING, NEVER THE HOOK PROSE. The hooks themselves are a DATUM and
-    // survive the gate; only the corpus framing above them goes.
-    expect(pub).toContain('A ledger has gone missing from the hall.');
-    // The framing itself: present privately, gone publicly. Derived rather than hardcoded
-    // because which categories a fixture reaches is the collector's business, not this
-    // test's — but the DIFFERENCE between the two renders is asserted exactly.
-    expect(priv.length, 'the public render was not shorter — the gate drew nothing')
-      .toBeGreaterThan(pub.length);
-    expect(pub, 'an unfilled seam reached a free viewer').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain hook-prose assertion above proves the public render is non-empty
+  test('no "Plot hooks" title and no DS-HK-1 framing, privately or publicly; the hooks keep their own words', () => {
+    for (const publicDossier of [false, true]) {
+      const { container } = render(e(PlotHooksTab, { settlement: HOOKED, publicDossier }));
+      const text = container.textContent || '';
+      expectAbsentWithAnchor(text, 'Plot hooks', 'A ledger has gone missing from the hall.', 'the tab title is back');
+      expect(text).toContain('Somebody is paying the watch to look the other way.');
+      cleanup();
+    }
+    // The desk position glances: the reader hands the page no framing line even privately.
+    const hooks = collectPlotHooks(HOOKED);
+    const { framingLines } = generalDeskLines(HOOKED, {
+      publicDossier: false, hookCategories: hooks.map((h) => h && h.category), clockIds: [],
+    }).hooks;
+    expect(framingLines, 'plot_hooks.framing glances').toEqual([]);
   });
 
-  /**
-   * ⭐ THE FRAMING IS CAPPED AT THREE SENTENCES (owner finding 4, 2026-09-18), and the cap is
-   * proved on a REAL town rather than the hand fixture above: DS-HK-1 draws one line per hook
-   * category the page carries plus one per live escalation clock, so a generated town reaches
-   * SIX OR SEVEN — a page of preamble above the hooks it is meant to frame, every sentence
-   * opening on the town's name. The hand fixture could never show that; a town with 31 hooks
-   * across six categories does.
-   */
-  test('THE CAP: a real town draws six framing lines and the page prints the first three, woven', () => {
+  test('the cards are grouped under their source page, in page order, each group in collector order', () => {
     const town = generateSettlementPipeline(
       { settType: 'town', culture: 'germanic' }, null, { seed: 'hooks-a', customContent: {} },
     );
-    const hooks = collectPlotHooks(town);
-    const { framingLines } = generalDeskLines(town, {
-      publicDossier: false,
-      hookCategories: hooks.map((h) => h && h.category),
-      clockIds: deriveEscalationClocks(town).map((c) => c && c.id),
-    }).hooks;
-    // NON-VACUITY: the cap means nothing unless the desk really draws past it.
-    expect(framingLines.length, 'this town no longer overflows the cap, so the arm is free')
-      .toBeGreaterThan(3);
-    const text = render(e(PlotHooksTab, { settlement: town, publicDossier: false }))
-      .container.textContent;
-    // The first three render AS ONE WOVEN PARAGRAPH — the exact string, not a substring of it.
-    const woven = weaveBlock(framingLines.slice(0, 3), {
-      settlementName: town.name, tierNoun: tierNounFor(town.tier),
-    }).paragraph;
-    expect(text, 'the capped framing paragraph is not on the page').toContain(woven);
-    // …and every line past the cap is DROPPED. ANCHORED on the woven paragraph itself, so a
-    // page that had stopped drawing the framing entirely cannot pass this half.
-    for (const dropped of framingLines.slice(3)) {
-      expectAbsentWithAnchor(text, dropped, woven, 'a framing line past the cap reached the page');
+    const { container } = render(e(PlotHooksTab, { settlement: town, publicDossier: false }));
+    const groups = groupPlotHooksBySourcePage(collectPlotHooks(town));
+    expect(groups.length, 'this town no longer spans two source pages, so the arm is free').toBeGreaterThan(1);
+    const sections = [...container.querySelectorAll('section[data-testid^="plot-hooks-from-"]')];
+    expect(sections.map((n) => n.getAttribute('data-testid'))).toEqual(groups.map((g) => `plot-hooks-from-${g.page.id}`));
+    for (const [i, { page, hooks }] of groups.entries()) {
+      const text = sections[i].textContent || '';
+      expect(text.startsWith(page.label), `${page.label}: the caption does not lead its group`).toBe(true);
+      expect(text).toContain(hooks[0].text);
     }
   });
 

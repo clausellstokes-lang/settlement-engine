@@ -481,8 +481,11 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 Plot Hooks; rubric R2/R6): the framing
+  // restated the hook cards' categories as three aphorisms on 991 of 1000 towns. The cards,
+  // grouped by source page, are the position's rows; DS-HK-1 has no speaking position.
   Object.freeze({
-    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'sentence',
+    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'glance',

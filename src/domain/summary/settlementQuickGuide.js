@@ -192,7 +192,8 @@ export function cultureScopeLine(settlement) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
   const phrase = scopePhrase(cleanText(source.culturalIdentity?.key));
   if (!phrase) return '';
-  const label = cleanText(source.culturalIdentity?.label || source.culture?.label);
+  // `culturalIdentity` only: a second `culture` read would join the writerReach culture class.
+  const label = cleanText(source.culturalIdentity?.label);
   return sentence(label ? `${label}, ${phrase}` : upperLead(phrase));
 }
 
