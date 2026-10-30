@@ -165,3 +165,21 @@ describe('AccountPage — the profile role badge (T9)', () => {
     expect(within(await badgeRowFor('developer')).getByText('Developer')).toBeTruthy();
   });
 });
+
+// ── T9 (2026-10-30): AccountPage tells the nav when the account is the support
+//    desk, so the admin row appears for it. ──
+describe('AccountPage — the support desk reaches /admin from the account menu (T9)', () => {
+  test('a support account sees the Support console row and it opens /admin', async () => {
+    const prior = storeState.auth.role;
+    storeState.auth.role = 'support';
+    try {
+      const onNavigateAdmin = vi.fn();
+      const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+      render(<AccountPage onNavigateAdmin={onNavigateAdmin} />);
+      screen.getByRole('button', { name: /support console/i }).click();
+      expect(onNavigateAdmin).toHaveBeenCalledTimes(1);
+    } finally {
+      storeState.auth.role = prior;
+    }
+  });
+});
