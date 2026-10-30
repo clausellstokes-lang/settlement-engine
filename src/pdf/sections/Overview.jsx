@@ -5,7 +5,7 @@
  *   - Identity strip
  *   - Active crises (chips + per-crisis hook + summary)
  *   - Systems Health Dashboard (5 score bars, prosperity/safety, food)
- *   - Tensions & Conflicts list with descriptions and parties
+ *   - Tensions & Conflicts list with descriptions and parties (their hooks: the Plot Hooks chapter, X-2)
  *   - Situation prose (arrival scene + pressure sentence in AI mode)
  *   - Settlement origin
  *   - Prominent relationship
@@ -241,18 +241,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   {t.parties.map(label).filter(Boolean).join(' / ')}
                 </Text>
               )}
-              {t.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {t.hooks.slice(0, 3).map((h, hi) => (
-                    <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
+              {/* VERIFIER N6 (X-2): a tension's hooks print in the Plot Hooks chapter only, as on screen. */}
             </View>
           ))}
           {o.conflicts.map((c, i) => (
@@ -297,18 +286,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   Stakes: {c.stakes}
                 </Text>
               )}
-              {c.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {c.hooks.slice(0, 3).map((h, hi) => (
-                    <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
+              {/* VERIFIER N6 (X-2): a conflict's hooks print in the Plot Hooks chapter only, as on screen. */}
             </View>
           ))}
         </View>

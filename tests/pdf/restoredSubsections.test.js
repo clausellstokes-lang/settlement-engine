@@ -22,6 +22,8 @@ import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
 import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
+import { Overview } from '../../src/pdf/sections/Overview.jsx';
 import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
@@ -217,6 +219,31 @@ describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced m
     const on = joined(Institutions({ settlement, vm }));
     expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
     for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
+  });
+});
+
+describe('N6 / X-2 — the PDF Notable NPCs chapter prints no hook text (the Plot Hooks chapter is its one home)', () => {
+  it('no NPC sheet, major or compact, prints a plot hook; the sheets themselves still print', () => {
+    const hooks = (settlement.npcs || []).flatMap((n) => (n.plotHooks || []).map((h) => (typeof h === 'string' ? h : h?.hook || h?.text || '')))
+      .filter(Boolean);
+    expect(hooks.length, 'fixture premise: the city NPCs carry plot hooks').toBeGreaterThan(0);
+    const on = joined(NotableNPCs({ settlement, vm }));
+    expect(on, 'the top NPC sheet prints').toContain(settlement.npcs[0].name);
+    for (const h of hooks) expect(on).not.toContain(h); // anchored: the sheets are on this render
+    expect(on).not.toContain('PLOT HOOKS'); // anchored: same render
+  });
+
+  it('the PDF Overview prints no tension or conflict hook (the screen Overview prints none); the crisis hook stays (X-3)', () => {
+    const vmHooked = { ...vm, overview: { ...vm.overview,
+      tensions: [{ label: 'guild_conflict', severity: 'high', description: 'The guilds quarrel over the wharf.', parties: [], hooks: ['A guild clerk wants the old charter burned.'] }],
+      conflicts: [{ parties: ['The Wharf', 'The Hall'], issue: 'Tolls', intensity: 'high', hooks: ['Someone pays the toll-takers twice.'] }],
+      stress: [{ label: 'Under siege', summary: 'The walls are ringed.', hook: 'The besiegers want the abbot.' }] } };
+    const on = joined(Overview({ settlement, vm: vmHooked }));
+    expect(on).toContain('The guilds quarrel over the wharf.');
+    expect(on).toContain('Tolls');
+    expect(on, 'the crisis card owns its hook (X-3)').toContain('The besiegers want the abbot.');
+    expect(on).not.toContain('A guild clerk wants the old charter burned.'); // anchored: the tension row is on this render
+    expect(on).not.toContain('Someone pays the toll-takers twice.'); // anchored: the conflict row is on this render
   });
 });
 
