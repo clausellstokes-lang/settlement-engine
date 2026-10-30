@@ -124,16 +124,16 @@
  },
  "digests": {
   "corpusMeta": "36f12c8f770cd42dc1234231a27928d443327661c339877936b2aa60b28f2718",
-  "inventory": "ffe5469bfc4ed778b3aafdaaa65797c06de0b60975db792657f326563ae15d21",
-  "manifests": "f8e2012864a8032ed4611f50110ee60076e0ba7f7e99597888abfaa3e568c2aa",
+  "inventory": "857060fd9a7f17834b591c95a089549d45f79f318b919de79aadf01178609ec8",
+  "manifests": "460e851c5d598dbfae1dc22073d0d51310de45b80e3a8db0b551be7de63a92bf",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "2d8ce1a092aa08c52f12f8b53bf2fce80f2e8d49fd20d9db494ddca0682cc420",
-  "sentinel": "80bcd4472683aeb22ee5e2e9f5b1220051dcb1703587c658fe2d645cd41977fd"
+  "scanStats": "ba83174cedf01186927cd9c848d8c8077e3d43f3c90e2cc1dc0fda6b0bef5aa2",
+  "sentinel": "e06f6381f3ec046f610cbaedb36c474ce77f39a3d80b95b75e09d5c0df56f544"
  },
  "frozen": "2026-10-30",
- "frozenAtSha": "729c90e1240c2a62348e78c8b77f1f1ba5f84b37",
- "identities": 1442,
+ "frozenAtSha": "e088c16d4bbfadf410c77ab33fe8c782d2f1142d",
+ "identities": 1441,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
    "mapEdits on settlement": 1
@@ -2279,9 +2279,6 @@
    "id on chains": 2,
    "status on chains": 3
   },
-  "src/pdf/sections/ViabilityAssessment.jsx": {
-   "hook on stress": 5
-  },
   "src/store/aiChronicleContext.js": {
    "canonizedAt on campaignState": 1,
    "worldPulse on campaignState": 1,
@@ -2450,7 +2447,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "d973b79a001f9d617d6de05d62536128576458f717da0050a7509959bac50288",
+   "digest": "3c966cb27e026bbd135b8ac8123de6dca55147f42e86d53dea89ce2f2c7854a7",
    "entries": [
     {
      "mode": "100644",
@@ -2532,8 +2529,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "e9db219491d562d9c00cba61171c10011166bebeb91786400708c47220cac514",
-     "size": 15565,
+     "sha256": "12486d115d9e8ba8c459c42b789a1f6174af126ab90616dbf2d2c2bc2f735f44",
+     "size": 16043,
      "type": "file"
     },
     {
@@ -2665,15 +2662,15 @@
     {
      "mode": "100644",
      "path": "src/components/AccountPage.jsx",
-     "sha256": "ba277c771a34c61e0457f4b3aba469c40503f2cce5b604c0a92789813d8235b3",
-     "size": 25316,
+     "sha256": "3a4e185b595fe04d2002f800d43010e0c6293e84137b716ca173babcfee95b07",
+     "size": 25615,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/AdminPanel.jsx",
-     "sha256": "ed7d2aea08f9e9250ba31650f4016fb34eb2fed96c41c329e5f5f166dc8f4e03",
-     "size": 11410,
+     "sha256": "6c59342ee8958648a5e14b7ebd297fca3449634258c731ffca5e3d55bbffe9c1",
+     "size": 13669,
      "type": "file"
     },
     {
@@ -3092,8 +3089,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountNav.jsx",
-     "sha256": "ee2aed837fcd244ca6812629c5f2d342f2109f702575f960ab4a52f6b782b50d",
-     "size": 6408,
+     "sha256": "7898717625cf933a11f60a221329fb619720a9eca33af057b8907f0fa616b970",
+     "size": 6946,
      "type": "file"
     },
     {
@@ -3106,8 +3103,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountProfileSection.jsx",
-     "sha256": "8caf44799a118dab9c26643b3a5d7767deee093fed2c45e0bf9877a7fe2b0b4f",
-     "size": 9057,
+     "sha256": "ae2e45d197afd1fd517b2dc3bec4f677ad69a443b3d0064e0d5519b0aa7090eb",
+     "size": 9349,
      "type": "file"
     },
     {
@@ -3295,8 +3292,8 @@
     {
      "mode": "100644",
      "path": "src/components/admin/AdminUsersPanel.jsx",
-     "sha256": "73412f8800200bffee31481e7d85dab895fabf3ed43b838c5749ce5fc3791c8a",
-     "size": 29726,
+     "sha256": "0af1627f0f497d91552a385f39fbe89139db610c5f73c963d5a6a145d8347740",
+     "size": 31580,
      "type": "file"
     },
     {
@@ -5486,8 +5483,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "ed67cce45c114a7f1efabe77f55fd991028c3fc2c2eb87dd9eb1c256572ebf79",
-     "size": 47169,
+     "sha256": "703934d0ee0cbb15c7f51d457ceff5e7f264a86c2b8c2f30b12165097e0e8f5b",
+     "size": 46697,
      "type": "file"
     },
     {
@@ -5528,8 +5525,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "af36f554cd5d8aaaf25425123d7fd1262ae7a10eb92b70da8dae1c5ffc9099fb",
-     "size": 9845,
+     "sha256": "c7ec80e8c12f6f8b956842c7dfc4b1b44d891e0f88b9ec07e495a38a5fe66219",
+     "size": 10330,
      "type": "file"
     },
     {
@@ -5563,22 +5560,22 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "f2113b4f43ae4186c8adfbae06fde96d8c92141539ce07ebd9c516023c9845b0",
-     "size": 43569,
+     "sha256": "6980fecb8e1d29b6fb27918bd727effe4c70ef835d6f333dcb53bbd16692f293",
+     "size": 43531,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "62661dac1cb97dc6bf5f25bd020c3218a02b71c9b4150187f245ba2e282578b9",
-     "size": 4511,
+     "sha256": "c97129b1b5c2a946f499957ebad605d0aaf16b5f1fbf218cbf94cc93705cb7ad",
+     "size": 4423,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0ef643e961ee5da5382649d98280e25d0565f71b846c5f2ce821ececc3e073ac",
-     "size": 32387,
+     "sha256": "0aaca9d4e8aa7ea905d634a1ae51ad803b8573332abd53806de948b0f2aae958",
+     "size": 33199,
      "type": "file"
     },
     {
@@ -5647,15 +5644,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarFaithDesk.jsx",
-     "sha256": "6c33f2a83b6793a09485c3647906bb64ff620538419a2ade4b1821911e9db4c9",
-     "size": 18157,
+     "sha256": "a53572a8158ae1ab4d774d53e30d364fe31cfe4918abe43d6cb579c78830365c",
+     "size": 18357,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "8d21f50792c71ca4202dc62b934010b8b1fbfb75634e8841737af76ebb0900b4",
-     "size": 38243,
+     "sha256": "18e91cd2f7ac3ee7825df0e89931b4c2c58e0a3f32b24974c120203ba2718874",
+     "size": 38227,
      "type": "file"
     },
     {
@@ -8678,8 +8675,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "29bd8f93983e8dda94b949a9c0c15bb47e2da6b645eefa38546a740b5a0c6d08",
-     "size": 24674,
+     "sha256": "6323e7182771320700d380e33414b4c12fa300e73c694bbcbc5115e9ab9722c8",
+     "size": 25406,
      "type": "file"
     },
     {
@@ -8867,8 +8864,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/historyOpenThreads.js",
-     "sha256": "d14bab83c8a1aaaf07fbfe353b9d84cacac2c835c299946b8102d5b9e1565771",
-     "size": 2995,
+     "sha256": "a0615ad8428d912eded0e3e0f5fa157860b15b48544d2a60cc67ae279b8d8fe0",
+     "size": 2991,
      "type": "file"
     },
     {
@@ -16455,8 +16452,8 @@
     {
      "mode": "100644",
      "path": "src/lib/auth.js",
-     "sha256": "09edea65dc7f0add87d5ee266c88691a9f2392bcda9198d1a50d679d0aa37596",
-     "size": 26181,
+     "sha256": "6f5894b389e39c59ff3cccca1537e17b4457b65a937c38bf5ff6bf273ebd5597",
+     "size": 26510,
      "type": "file"
     },
     {
@@ -17519,8 +17516,8 @@
     {
      "mode": "100644",
      "path": "src/lib/staffEntitlements.js",
-     "sha256": "a195489ab9ad6609dcd372b9a975fea338cf37d842e08bc73b0cdc397637c7a8",
-     "size": 8572,
+     "sha256": "0f65eef7074874057fc8dfbc384b525204cf0fcbc6e6a1c9fd422c2eb124b837",
+     "size": 9274,
      "type": "file"
     },
     {
@@ -17883,8 +17880,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "a0f3cf7fcbd4cb7fa2e2b700fa74c2ab3e9cd4a118f9507d7f7fcec938d3f927",
-     "size": 17383,
+     "sha256": "06482888c5c6c111e563de63ab54f470ca76cb6160928818d1fbf483f9ed49f3",
+     "size": 15893,
      "type": "file"
     },
     {
@@ -17897,8 +17894,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Institutions.jsx",
-     "sha256": "9590f1e57060cc06754776fa27186df6cc7ec45d60586f0e9a2426fecfcdffbb",
-     "size": 14915,
+     "sha256": "c15a65a3ee39f37c0378a6d33051e946296c022a1eabdc036c03c388069fbe6b",
+     "size": 15232,
      "type": "file"
     },
     {
@@ -17932,15 +17929,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "303f909733c03b6b00c581b0001fa70a24e5c315a54a40422132eba5607025a1",
-     "size": 12278,
+     "sha256": "88a616a82ebcd7ddfc34322dfe4b9c719b3ae921627e03e13d9b6b4c2b48032c",
+     "size": 12800,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "5f13326a14d53798e77cb01bb7e5b8873aa69b0197c8eaecad87e7f09c83b7f6",
-     "size": 14780,
+     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
+     "size": 15911,
      "type": "file"
     },
     {
@@ -18002,8 +17999,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d40e1a019a83e7ba333eec9c3bbb3cebdd0732e367d367b23eaa9180cf7994f5",
-     "size": 15072,
+     "sha256": "0d9cef827ea395c18e5159ec1978ae834e081e382b8038832ed7ddbd9e325641",
+     "size": 13892,
      "type": "file"
     },
     {
@@ -18773,7 +18770,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "b7c569c9c38aa773ddeb3ab015e9b3724de0325ceea143c194a7266d7a08c4fc",
+   "digest": "8b6d7a5fbcbd49ad1877c5c714c285bce8576da8e78c7304a5c959342c638f18",
    "entries": [
     {
      "mode": "100644",
@@ -18785,8 +18782,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "e9db219491d562d9c00cba61171c10011166bebeb91786400708c47220cac514",
-     "size": 15565,
+     "sha256": "12486d115d9e8ba8c459c42b789a1f6174af126ab90616dbf2d2c2bc2f735f44",
+     "size": 16043,
      "type": "file"
     },
     {
@@ -18918,15 +18915,15 @@
     {
      "mode": "100644",
      "path": "src/components/AccountPage.jsx",
-     "sha256": "ba277c771a34c61e0457f4b3aba469c40503f2cce5b604c0a92789813d8235b3",
-     "size": 25316,
+     "sha256": "3a4e185b595fe04d2002f800d43010e0c6293e84137b716ca173babcfee95b07",
+     "size": 25615,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/AdminPanel.jsx",
-     "sha256": "ed7d2aea08f9e9250ba31650f4016fb34eb2fed96c41c329e5f5f166dc8f4e03",
-     "size": 11410,
+     "sha256": "6c59342ee8958648a5e14b7ebd297fca3449634258c731ffca5e3d55bbffe9c1",
+     "size": 13669,
      "type": "file"
     },
     {
@@ -19345,8 +19342,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountNav.jsx",
-     "sha256": "ee2aed837fcd244ca6812629c5f2d342f2109f702575f960ab4a52f6b782b50d",
-     "size": 6408,
+     "sha256": "7898717625cf933a11f60a221329fb619720a9eca33af057b8907f0fa616b970",
+     "size": 6946,
      "type": "file"
     },
     {
@@ -19359,8 +19356,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountProfileSection.jsx",
-     "sha256": "8caf44799a118dab9c26643b3a5d7767deee093fed2c45e0bf9877a7fe2b0b4f",
-     "size": 9057,
+     "sha256": "ae2e45d197afd1fd517b2dc3bec4f677ad69a443b3d0064e0d5519b0aa7090eb",
+     "size": 9349,
      "type": "file"
     },
     {
@@ -19548,8 +19545,8 @@
     {
      "mode": "100644",
      "path": "src/components/admin/AdminUsersPanel.jsx",
-     "sha256": "73412f8800200bffee31481e7d85dab895fabf3ed43b838c5749ce5fc3791c8a",
-     "size": 29726,
+     "sha256": "0af1627f0f497d91552a385f39fbe89139db610c5f73c963d5a6a145d8347740",
+     "size": 31580,
      "type": "file"
     },
     {
@@ -21739,8 +21736,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "ed67cce45c114a7f1efabe77f55fd991028c3fc2c2eb87dd9eb1c256572ebf79",
-     "size": 47169,
+     "sha256": "703934d0ee0cbb15c7f51d457ceff5e7f264a86c2b8c2f30b12165097e0e8f5b",
+     "size": 46697,
      "type": "file"
     },
     {
@@ -21781,8 +21778,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "af36f554cd5d8aaaf25425123d7fd1262ae7a10eb92b70da8dae1c5ffc9099fb",
-     "size": 9845,
+     "sha256": "c7ec80e8c12f6f8b956842c7dfc4b1b44d891e0f88b9ec07e495a38a5fe66219",
+     "size": 10330,
      "type": "file"
     },
     {
@@ -21816,22 +21813,22 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "f2113b4f43ae4186c8adfbae06fde96d8c92141539ce07ebd9c516023c9845b0",
-     "size": 43569,
+     "sha256": "6980fecb8e1d29b6fb27918bd727effe4c70ef835d6f333dcb53bbd16692f293",
+     "size": 43531,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "62661dac1cb97dc6bf5f25bd020c3218a02b71c9b4150187f245ba2e282578b9",
-     "size": 4511,
+     "sha256": "c97129b1b5c2a946f499957ebad605d0aaf16b5f1fbf218cbf94cc93705cb7ad",
+     "size": 4423,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0ef643e961ee5da5382649d98280e25d0565f71b846c5f2ce821ececc3e073ac",
-     "size": 32387,
+     "sha256": "0aaca9d4e8aa7ea905d634a1ae51ad803b8573332abd53806de948b0f2aae958",
+     "size": 33199,
      "type": "file"
     },
     {
@@ -21900,15 +21897,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarFaithDesk.jsx",
-     "sha256": "6c33f2a83b6793a09485c3647906bb64ff620538419a2ade4b1821911e9db4c9",
-     "size": 18157,
+     "sha256": "a53572a8158ae1ab4d774d53e30d364fe31cfe4918abe43d6cb579c78830365c",
+     "size": 18357,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "8d21f50792c71ca4202dc62b934010b8b1fbfb75634e8841737af76ebb0900b4",
-     "size": 38243,
+     "sha256": "18e91cd2f7ac3ee7825df0e89931b4c2c58e0a3f32b24974c120203ba2718874",
+     "size": 38227,
      "type": "file"
     },
     {
@@ -24812,8 +24809,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "29bd8f93983e8dda94b949a9c0c15bb47e2da6b645eefa38546a740b5a0c6d08",
-     "size": 24674,
+     "sha256": "6323e7182771320700d380e33414b4c12fa300e73c694bbcbc5115e9ab9722c8",
+     "size": 25406,
      "type": "file"
     },
     {
@@ -25001,8 +24998,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/historyOpenThreads.js",
-     "sha256": "d14bab83c8a1aaaf07fbfe353b9d84cacac2c835c299946b8102d5b9e1565771",
-     "size": 2995,
+     "sha256": "a0615ad8428d912eded0e3e0f5fa157860b15b48544d2a60cc67ae279b8d8fe0",
+     "size": 2991,
      "type": "file"
     },
     {
@@ -32589,8 +32586,8 @@
     {
      "mode": "100644",
      "path": "src/lib/auth.js",
-     "sha256": "09edea65dc7f0add87d5ee266c88691a9f2392bcda9198d1a50d679d0aa37596",
-     "size": 26181,
+     "sha256": "6f5894b389e39c59ff3cccca1537e17b4457b65a937c38bf5ff6bf273ebd5597",
+     "size": 26510,
      "type": "file"
     },
     {
@@ -33653,8 +33650,8 @@
     {
      "mode": "100644",
      "path": "src/lib/staffEntitlements.js",
-     "sha256": "a195489ab9ad6609dcd372b9a975fea338cf37d842e08bc73b0cdc397637c7a8",
-     "size": 8572,
+     "sha256": "0f65eef7074874057fc8dfbc384b525204cf0fcbc6e6a1c9fd422c2eb124b837",
+     "size": 9274,
      "type": "file"
     },
     {
@@ -34017,8 +34014,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "a0f3cf7fcbd4cb7fa2e2b700fa74c2ab3e9cd4a118f9507d7f7fcec938d3f927",
-     "size": 17383,
+     "sha256": "06482888c5c6c111e563de63ab54f470ca76cb6160928818d1fbf483f9ed49f3",
+     "size": 15893,
      "type": "file"
     },
     {
@@ -34031,8 +34028,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Institutions.jsx",
-     "sha256": "9590f1e57060cc06754776fa27186df6cc7ec45d60586f0e9a2426fecfcdffbb",
-     "size": 14915,
+     "sha256": "c15a65a3ee39f37c0378a6d33051e946296c022a1eabdc036c03c388069fbe6b",
+     "size": 15232,
      "type": "file"
     },
     {
@@ -34066,15 +34063,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "303f909733c03b6b00c581b0001fa70a24e5c315a54a40422132eba5607025a1",
-     "size": 12278,
+     "sha256": "88a616a82ebcd7ddfc34322dfe4b9c719b3ae921627e03e13d9b6b4c2b48032c",
+     "size": 12800,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "5f13326a14d53798e77cb01bb7e5b8873aa69b0197c8eaecad87e7f09c83b7f6",
-     "size": 14780,
+     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
+     "size": 15911,
      "type": "file"
     },
     {
@@ -34136,8 +34133,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d40e1a019a83e7ba333eec9c3bbb3cebdd0732e367d367b23eaa9180cf7994f5",
-     "size": 15072,
+     "sha256": "0d9cef827ea395c18e5159ec1978ae834e081e382b8038832ed7ddbd9e325641",
+     "size": 13892,
      "type": "file"
     },
     {
@@ -34900,7 +34897,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "ab418fd93124411934e47807f7cfbd11d9f955143832f1b2c407c9ecb3873210",
+   "digest": "8d829748479635a595fc465e3b6d6744b468feba72123f99766e20904a2da302",
    "entries": [
     {
      "mode": "100644",
@@ -34912,8 +34909,8 @@
     {
      "mode": "100644",
      "path": "src/AppViews.jsx",
-     "sha256": "e9db219491d562d9c00cba61171c10011166bebeb91786400708c47220cac514",
-     "size": 15565,
+     "sha256": "12486d115d9e8ba8c459c42b789a1f6174af126ab90616dbf2d2c2bc2f735f44",
+     "size": 16043,
      "type": "file"
     },
     {
@@ -35045,15 +35042,15 @@
     {
      "mode": "100644",
      "path": "src/components/AccountPage.jsx",
-     "sha256": "ba277c771a34c61e0457f4b3aba469c40503f2cce5b604c0a92789813d8235b3",
-     "size": 25316,
+     "sha256": "3a4e185b595fe04d2002f800d43010e0c6293e84137b716ca173babcfee95b07",
+     "size": 25615,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/AdminPanel.jsx",
-     "sha256": "ed7d2aea08f9e9250ba31650f4016fb34eb2fed96c41c329e5f5f166dc8f4e03",
-     "size": 11410,
+     "sha256": "6c59342ee8958648a5e14b7ebd297fca3449634258c731ffca5e3d55bbffe9c1",
+     "size": 13669,
      "type": "file"
     },
     {
@@ -35472,8 +35469,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountNav.jsx",
-     "sha256": "ee2aed837fcd244ca6812629c5f2d342f2109f702575f960ab4a52f6b782b50d",
-     "size": 6408,
+     "sha256": "7898717625cf933a11f60a221329fb619720a9eca33af057b8907f0fa616b970",
+     "size": 6946,
      "type": "file"
     },
     {
@@ -35486,8 +35483,8 @@
     {
      "mode": "100644",
      "path": "src/components/account/AccountProfileSection.jsx",
-     "sha256": "8caf44799a118dab9c26643b3a5d7767deee093fed2c45e0bf9877a7fe2b0b4f",
-     "size": 9057,
+     "sha256": "ae2e45d197afd1fd517b2dc3bec4f677ad69a443b3d0064e0d5519b0aa7090eb",
+     "size": 9349,
      "type": "file"
     },
     {
@@ -35675,8 +35672,8 @@
     {
      "mode": "100644",
      "path": "src/components/admin/AdminUsersPanel.jsx",
-     "sha256": "73412f8800200bffee31481e7d85dab895fabf3ed43b838c5749ce5fc3791c8a",
-     "size": 29726,
+     "sha256": "0af1627f0f497d91552a385f39fbe89139db610c5f73c963d5a6a145d8347740",
+     "size": 31580,
      "type": "file"
     },
     {
@@ -37866,8 +37863,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "ed67cce45c114a7f1efabe77f55fd991028c3fc2c2eb87dd9eb1c256572ebf79",
-     "size": 47169,
+     "sha256": "703934d0ee0cbb15c7f51d457ceff5e7f264a86c2b8c2f30b12165097e0e8f5b",
+     "size": 46697,
      "type": "file"
     },
     {
@@ -37908,8 +37905,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "af36f554cd5d8aaaf25425123d7fd1262ae7a10eb92b70da8dae1c5ffc9099fb",
-     "size": 9845,
+     "sha256": "c7ec80e8c12f6f8b956842c7dfc4b1b44d891e0f88b9ec07e495a38a5fe66219",
+     "size": 10330,
      "type": "file"
     },
     {
@@ -37943,22 +37940,22 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "f2113b4f43ae4186c8adfbae06fde96d8c92141539ce07ebd9c516023c9845b0",
-     "size": 43569,
+     "sha256": "6980fecb8e1d29b6fb27918bd727effe4c70ef835d6f333dcb53bbd16692f293",
+     "size": 43531,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "62661dac1cb97dc6bf5f25bd020c3218a02b71c9b4150187f245ba2e282578b9",
-     "size": 4511,
+     "sha256": "c97129b1b5c2a946f499957ebad605d0aaf16b5f1fbf218cbf94cc93705cb7ad",
+     "size": 4423,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "0ef643e961ee5da5382649d98280e25d0565f71b846c5f2ce821ececc3e073ac",
-     "size": 32387,
+     "sha256": "0aaca9d4e8aa7ea905d634a1ae51ad803b8573332abd53806de948b0f2aae958",
+     "size": 33199,
      "type": "file"
     },
     {
@@ -38027,15 +38024,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarFaithDesk.jsx",
-     "sha256": "6c33f2a83b6793a09485c3647906bb64ff620538419a2ade4b1821911e9db4c9",
-     "size": 18157,
+     "sha256": "a53572a8158ae1ab4d774d53e30d364fe31cfe4918abe43d6cb579c78830365c",
+     "size": 18357,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/WarTab.jsx",
-     "sha256": "8d21f50792c71ca4202dc62b934010b8b1fbfb75634e8841737af76ebb0900b4",
-     "size": 38243,
+     "sha256": "18e91cd2f7ac3ee7825df0e89931b4c2c58e0a3f32b24974c120203ba2718874",
+     "size": 38227,
      "type": "file"
     },
     {
@@ -41058,8 +41055,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/defenseDisplay.js",
-     "sha256": "29bd8f93983e8dda94b949a9c0c15bb47e2da6b645eefa38546a740b5a0c6d08",
-     "size": 24674,
+     "sha256": "6323e7182771320700d380e33414b4c12fa300e73c694bbcbc5115e9ab9722c8",
+     "size": 25406,
      "type": "file"
     },
     {
@@ -41247,8 +41244,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/historyOpenThreads.js",
-     "sha256": "d14bab83c8a1aaaf07fbfe353b9d84cacac2c835c299946b8102d5b9e1565771",
-     "size": 2995,
+     "sha256": "a0615ad8428d912eded0e3e0f5fa157860b15b48544d2a60cc67ae279b8d8fe0",
+     "size": 2991,
      "type": "file"
     },
     {
@@ -48835,8 +48832,8 @@
     {
      "mode": "100644",
      "path": "src/lib/auth.js",
-     "sha256": "09edea65dc7f0add87d5ee266c88691a9f2392bcda9198d1a50d679d0aa37596",
-     "size": 26181,
+     "sha256": "6f5894b389e39c59ff3cccca1537e17b4457b65a937c38bf5ff6bf273ebd5597",
+     "size": 26510,
      "type": "file"
     },
     {
@@ -49899,8 +49896,8 @@
     {
      "mode": "100644",
      "path": "src/lib/staffEntitlements.js",
-     "sha256": "a195489ab9ad6609dcd372b9a975fea338cf37d842e08bc73b0cdc397637c7a8",
-     "size": 8572,
+     "sha256": "0f65eef7074874057fc8dfbc384b525204cf0fcbc6e6a1c9fd422c2eb124b837",
+     "size": 9274,
      "type": "file"
     },
     {
@@ -50263,8 +50260,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/HistoryFounding.jsx",
-     "sha256": "a0f3cf7fcbd4cb7fa2e2b700fa74c2ab3e9cd4a118f9507d7f7fcec938d3f927",
-     "size": 17383,
+     "sha256": "06482888c5c6c111e563de63ab54f470ca76cb6160928818d1fbf483f9ed49f3",
+     "size": 15893,
      "type": "file"
     },
     {
@@ -50277,8 +50274,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/Institutions.jsx",
-     "sha256": "9590f1e57060cc06754776fa27186df6cc7ec45d60586f0e9a2426fecfcdffbb",
-     "size": 14915,
+     "sha256": "c15a65a3ee39f37c0378a6d33051e946296c022a1eabdc036c03c388069fbe6b",
+     "size": 15232,
      "type": "file"
     },
     {
@@ -50312,15 +50309,15 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/PowerStructure.jsx",
-     "sha256": "303f909733c03b6b00c581b0001fa70a24e5c315a54a40422132eba5607025a1",
-     "size": 12278,
+     "sha256": "88a616a82ebcd7ddfc34322dfe4b9c719b3ae921627e03e13d9b6b4c2b48032c",
+     "size": 12800,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/pdf/sections/Relationships.jsx",
-     "sha256": "5f13326a14d53798e77cb01bb7e5b8873aa69b0197c8eaecad87e7f09c83b7f6",
-     "size": 14780,
+     "sha256": "526eef50ffc439a5b681ddc3c997d06703bdad314b24cdab166a6bf4ed8ca63d",
+     "size": 15911,
      "type": "file"
     },
     {
@@ -50382,8 +50379,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/ViabilityAssessment.jsx",
-     "sha256": "d40e1a019a83e7ba333eec9c3bbb3cebdd0732e367d367b23eaa9180cf7994f5",
-     "size": 15072,
+     "sha256": "0d9cef827ea395c18e5159ec1978ae834e081e382b8038832ed7ddbd9e325641",
+     "size": 13892,
      "type": "file"
     },
     {
@@ -51437,22 +51434,22 @@
  },
  "scanStats": {
   "files": 2303,
-  "reads": 132913,
-  "resolved": 9934,
-  "unresolved": 122979
+  "reads": 132908,
+  "resolved": 9928,
+  "unresolved": 122980
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "d973b79a001f9d617d6de05d62536128576458f717da0050a7509959bac50288",
-  "scanTreeDigest": "b7c569c9c38aa773ddeb3ab015e9b3724de0325ceea143c194a7266d7a08c4fc",
-  "sourceTreeDigest": "ab418fd93124411934e47807f7cfbd11d9f955143832f1b2c407c9ecb3873210",
+  "executionTreeDigest": "3c966cb27e026bbd135b8ac8123de6dca55147f42e86d53dea89ce2f2c7854a7",
+  "scanTreeDigest": "8b6d7a5fbcbd49ad1877c5c714c285bce8576da8e78c7304a5c959342c638f18",
+  "sourceTreeDigest": "8d829748479635a595fc465e3b6d6744b468feba72123f99766e20904a2da302",
   "unscannedInputDigest": "2bec8b0357dc302a11bff0b0fc0055b2e8918507769f0f04f96045f650d0932d"
  },
  "schema": 25,
  "sentinel": {
-  "resolvedReads": 9934,
+  "resolvedReads": 9928,
   "totalKeys": 6992,
   "usableShapes": 355
  },
- "total": 2033
+ "total": 2028
 }
