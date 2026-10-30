@@ -302,28 +302,21 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         </div>
       </div>
 
-      {/* ── THE SITE, THE EXCHANGE AND THE ROSTER ─────────────────────────
-            DS-GEN-12 (how the ground disposes the town), DS-GEN-13 (why the
-            town's exchange has the shape it has) and DS-GEN-17 (what keeping a
-            court, a garrison or nothing at all says about the place). Three
-            blocks, three positions, one paragraph: they answer the same
-            question — what kind of place is this — at three scales, and the
-            page reads them as one thought.
-            ⭐ AND IT IS NOW LITERALLY ONE PARAGRAPH (owner finding 2026-09-18). The comment
-            above has said "one paragraph" since the position landed while the code rendered
-            three, each opening on the town's name. It keeps its place directly under the
-            identity strip; only the arrangement changed. */}
-      {siteLines.length>0&&(
+      {/* ── THE PLACE (chair ruling T1-2, 2026-10-30; rubric R5) ──────────
+            ONE passage under one title: the arrival scene first (the owner's Voice
+            Program scene, §934.88, frozen at generation and printed verbatim), then
+            DS-GEN-12 ground, DS-GEN-13 market and DS-GEN-17 roster, each trimmed to
+            its first clause by the reader (generalDeskRead.js :: siteClause). This
+            block replaces "The ground and the company it keeps" and the arrival
+            paragraph of the old dark SITUATION box: two atmospheric passages on one
+            page were one too many. The desk lines stay dark on a public dossier
+            (§885.3); the arrival scene is the datum and shows for every reader.
+            The lead reads at FS.lg, one step above body prose, so it says "start
+            here" (owner finding 2026-09-18). */}
+      {(r.arrivalScene||siteLines.length>0)&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The ground and the company it keeps</div>
-          {/* THE LEAD PARAGRAPH reads one step above the dossier's body prose (FS.lg over
-              FS.md), on the phone as well as the desktop. It is the first thing a DM reads —
-              it sits second, directly under the identity strip — and at FS.md it was the same
-              size as the eleven paragraphs below it, so nothing said "start here". The step
-              is passed as the CALL SITE'S style, which is the seam ProseBlock documents:
-              the site owns the skin, the renderer owns the weave and the phone floor. That
-              floor is a max, so FS.lg survives it and the phone reads 15 where its siblings
-              read 14. */}
+          <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
+          {r.arrivalScene&&<p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:siteLines.length>0?'0 0 6px':0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.lg,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
@@ -511,10 +504,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         })}
       </Section>}
 
-      {/* ── SITUATION (arrival + pressure — more compact here) ───────────── */}
-      {(r.arrivalScene||r.pressureSentence)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {r.arrivalScene&&<p className="oc-dropcap-prose" style={{...serif,fontSize:proseFontSize(FS.md,mobile),color:swatch['#F0E8D8'],lineHeight:1.7,margin:0,fontStyle:'italic','--oc-dropcap-ink':'var(--oc-field-entry)'}}>{r.arrivalScene}</p>}
-        {r.arrivalScene&&r.pressureSentence&&<hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>}
+      {/* ── SITUATION (pressure). The arrival scene moved up into THE PLACE (T1-2). ── */}
+      {(r.pressureSentence||situationLine)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
         {r.pressureSentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{r.pressureSentence}</p>}
         {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
             R-DST-W4-g: `arrivalScene` is a first-impression artifact composed

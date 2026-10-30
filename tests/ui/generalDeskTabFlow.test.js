@@ -36,7 +36,7 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { useStore } from '../../src/store/index.js';
-import { generalDeskLines } from '../../src/components/new/generalDeskRead.js';
+import { generalDeskLines, siteClause } from '../../src/components/new/generalDeskRead.js';
 import { relationshipsDeskLists } from '../../src/domain/display/stateProse/relationshipsDeskRead.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
@@ -230,9 +230,9 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // the seven behind them were invisible. Every position now runs and the roster travels
     // with the true count (tests/helpers/seedFailures.js).
     expectNoSeedFailures(collectSeedFailures([
-      [onPage(GROUND, desk.siteLines, SPEAKING), 'DS-GEN-12 the ground (overview.ground)'],
-      [onPage(MARKET, desk.siteLines, SPEAKING), 'DS-GEN-13 the market (overview.market)'],
-      [onPage(INSTITUTIONS, desk.siteLines, SPEAKING), 'DS-GEN-17 the roster (overview.institutions)'],
+      [onPage(siteClause(GROUND), desk.siteLines, SPEAKING), 'DS-GEN-12 the ground (overview.ground)'],
+      [onPage(siteClause(MARKET), desk.siteLines, SPEAKING), 'DS-GEN-13 the market (overview.market)'],
+      [onPage(siteClause(INSTITUTIONS), desk.siteLines, SPEAKING), 'DS-GEN-17 the roster (overview.institutions)'],
       // DS-GEN-3 (overview.systemsHealth) is NOT in this list since owner order 2026-09-17:
       // that position glances, and the arm below pins its silence in the DOM.
       [CONFLICT, 'DS-GEN-2 the conflict line (overview.conflicts)'],
@@ -241,6 +241,44 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every Overview position draws privately and is silent on a public dossier');
+  });
+
+  test('THE PLACE is one passage: the arrival scene first, then the site lines trimmed to their first clause (T1-2)', () => {
+    const ARRIVAL = 'Arrival scene fixture: a bell rings twice, then stops.';
+    const town = { ...SPEAKING, arrivalScene: ARRIVAL, pressureSentence: 'The guild and the council are counting votes.' };
+    const { container } = render(e(OverviewTab, {
+      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: false, playerView: false, worldState: null,
+    }));
+    const text = container.textContent || '';
+    expectAbsentWithAnchor(text, 'The ground and the company it keeps', 'The place', 'the old site title is back');
+    // The arrival scene prints ONCE, verbatim, and before the site lines.
+    expect(text.split(ARRIVAL).length - 1, 'the arrival scene prints once').toBe(1);
+    const desk = generalDeskLines(town, { publicDossier: false, stresses: [] }).overview;
+    const firstSite = onPage(siteClause(GROUND), desk.siteLines, town);
+    expect(text.indexOf(ARRIVAL)).toBeLessThan(text.indexOf(firstSite));
+    expect(text.indexOf('The place')).toBeLessThan(text.indexOf(ARRIVAL));
+    // Each site line is its first clause only: the aphorism after `;` or a joined clause is cut.
+    expect(desk.siteLines.length, 'the site lines drew').toBe(3);
+    for (const line of desk.siteLines) expect(siteClause(line), 'a site line keeps a second clause').toBe(line);
+    cleanup();
+    // On a public dossier the desk lines go dark and the arrival scene (the datum) stays.
+    const pub = render(e(OverviewTab, {
+      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: true, playerView: false, worldState: null,
+    })).container.textContent || '';
+    expectAbsentWithAnchor(pub, firstSite, ARRIVAL, 'a desk site line reached a public dossier');
+  });
+
+  test('siteClause keeps the first clause and leaves a one-clause sentence whole', () => {
+    // Synthetic sentences, not corpus members (the drawn-anchor law): the rule is the claim.
+    expect(siteClause('The quay is short; the boats tie up two deep.')).toBe('The quay is short.');
+    expect(siteClause('The mill is old, because the river moved.')).toBe('The mill is old.');
+    expect(siteClause('The wall is low, not only in places, and nobody mends it.'))
+      .toBe('The wall is low, not only in places.');
+    const whole = 'The bell tower leans a little to the east.';
+    expect(siteClause(whole)).toBe(whole);
+    expect(siteClause(null)).toBeNull();
   });
 
   test('SYSTEMS HEALTH keeps its bars and prints NO sentence list under them (owner order 2026-09-17)', () => {
@@ -1034,6 +1072,6 @@ describe('DS-POP-3 DRAWS ON THE OVERVIEW TAB — and is silent for a free viewer
       expect(out, 'the LEVEL default reached the page').not.toContain(line); // anchored: same render, same GROUND anchor below
     }), `no wording of DS-POP-3 :: LEVEL reaches an unread ring (${LEVEL_LINES.length} of 2)`);
     // NON-VACUITY: the rest of the desk drew on this very render.
-    expect(out).toContain(GROUND);
+    expect(out).toContain(siteClause(GROUND));
   });
 });
