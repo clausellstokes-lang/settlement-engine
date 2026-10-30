@@ -55,6 +55,51 @@ function routeTrends(fail = {}) {
 }
 const trendCalls = () => trendInvoke().mock.calls.map(([, { body }]) => body);
 
+describe('AdminTrendsPanel — reads and refusals (T7 survey)', () => {
+  beforeEach(() => { trendInvoke().mockReset(); });
+
+  test('one load fires every report read with its keys and the date range', async () => {
+    routeTrends();
+    const Panel = (await import('../../src/components/admin/AdminTrendsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    const actions = new Set(trendCalls().map((b) => b.action));
+    for (const a of ['get_analytics_summary', 'get_analytics_distribution', 'get_analytics_crosstab', 'get_referral_funnel',
+      'get_pulse_mutations', 'get_stressor_genesis', 'get_proposal_decisions', 'get_regional_impacts', 'get_channel_funnel',
+      'get_regional_arcs', 'get_regional_propagation', 'get_analytics_trend', 'get_npc_distribution']) {
+      expect(actions.has(a), a).toBe(true);
+    }
+    for (const b of trendCalls()) {
+      expect(b.from, b.action).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(b.to, b.action).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
+    expect(trendCalls().find((b) => b.action === 'get_analytics_crosstab')).toMatchObject({ rowField: 'culture', colField: 'terrain' });
+  });
+
+  test('a refused report read surfaces the soft error line', async () => {
+    routeTrends({ get_analytics_summary: 'Admin action failed' });
+    const Panel = (await import('../../src/components/admin/AdminTrendsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    expect(await screen.findByText(/some panels could not load: admin action failed/i)).toBeTruthy();
+  });
+
+  test('a refused NPC distribution read is shown in its card, not as an empty table', async () => {
+    routeTrends({ get_npc_distribution: 'Admin action failed' });
+    const Panel = (await import('../../src/components/admin/AdminTrendsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    expect(await screen.findByText(/npc distribution could not load: admin action failed/i)).toBeTruthy();
+  });
+
+  test('picking a config signature reads get_config_variance; a refusal is shown, not an empty table', async () => {
+    routeTrends({ get_config_variance: 'Admin action failed' });
+    const Panel = (await import('../../src/components/admin/AdminTrendsPanel.jsx')).default;
+    await act(async () => { render(<Panel />); });
+    const select = await screen.findByDisplayValue(/pick a config/i);
+    await act(async () => { fireEvent.change(select, { target: { value: 'sig-aaaaaaaaaaaa' } }); });
+    await waitFor(() => expect(trendCalls().some((b) => b.action === 'get_config_variance' && b.configSignature === 'sig-aaaaaaaaaaaa')).toBe(true));
+    expect(await screen.findByText(/variance could not load: admin action failed/i)).toBeTruthy();
+  });
+});
+
 describe('AdminAnalyticsPanel — dashboard switch and refusal (T7 survey)', () => {
   beforeEach(() => { trendInvoke().mockReset(); });
 
