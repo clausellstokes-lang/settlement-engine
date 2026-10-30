@@ -20,6 +20,8 @@ export const VersionsTab = lazy(() => import('../settlement/VersionsTab.jsx'));
 export const OverviewTab = lazy(() => import('../new/tabs/OverviewTab'));
 export const EconomicsTab = lazy(() => import('../new/tabs/EconomicsTab'));
 export const ServicesTab = lazy(() => import('../new/tabs/ServicesTab'));
+// T1-14 (2026-10-30): the roster house by house, each with its own service rows.
+export const InstitutionsTab = lazy(() => import('../new/tabs/InstitutionsTab.jsx'));
 export const PowerTab = lazy(() => import('../new/tabs/PowerTab'));
 // Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
 // legitimacy / cause chains), tier-gated inside. It now renders inside the

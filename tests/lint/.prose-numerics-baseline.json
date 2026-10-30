@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 968,
+    "line": 974,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },

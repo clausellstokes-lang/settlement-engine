@@ -29,6 +29,7 @@ import { PowerTab }         from '../../src/components/new/tabs/PowerTab.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { ServicesTab }      from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ViabilityTab }     from '../../src/components/new/tabs/ViabilityTab.jsx';
+import InstitutionsTab, { institutionsWithServices } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import DMCompassTab         from '../../src/components/new/tabs/DMCompassTab.jsx';
 
 const e = React.createElement;
@@ -162,6 +163,32 @@ smokeTab('HistoryTab',       HistoryTab,       s => ({ settlement: s }));
 smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
+smokeTab('InstitutionsTab',  InstitutionsTab,  s => ({ settlement: s }));
+
+describe('InstitutionsTab shape (owner addendum T1-14)', () => {
+  test('every institution appears once, with the service rows that name it beneath, and the legend', () => {
+    const s = villageSettlement;
+    const houses = institutionsWithServices(s);
+    expect(houses.length).toBe((s.institutions || []).length);
+    const { container } = render(e(InstitutionsTab, { settlement: s }));
+    const cards = container.querySelectorAll('[data-testid="institution-card"]');
+    expect(cards.length).toBe(houses.length);
+    const withRows = houses.findIndex((h) => h.services.length > 0);
+    expect(withRows, 'no house in the fixture provides a service row').toBeGreaterThanOrEqual(0);
+    const rows = cards[withRows].querySelectorAll('[data-testid="institution-service"]');
+    expect(rows.length).toBe(houses[withRows].services.length);
+    // Each service row sits under the house its own `institution` field names.
+    for (const svc of houses[withRows].services) expect(svc.institution).toBe(houses[withRows].inst.name);
+    expect(container.textContent).toContain('= Historically required');
+  });
+
+  test('a house with no service row still appears, with its description line', () => {
+    const lone = { name: 'Y', institutions: [{ name: 'Old mill', category: 'Economy', desc: 'Mill fixture description.' }], availableServices: {} };
+    const text = render(e(InstitutionsTab, { settlement: lone })).container.textContent || '';
+    expect(text).toContain('Old mill');
+    expect(text).toContain('Mill fixture description.');
+  });
+});
 
 describe('OverviewTab carries the Table View trigger the removed DM Summary tab held (X-5)', () => {
   test('the button renders only when the router hands a trigger, and calls it', () => {

@@ -92,8 +92,9 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 /** A line long enough to be READ rather than glanced at — `chromeFontSize`'s own bound. */
 const MIN_CHARS = 45;
 /** The dossier's own group/sub-tab count, as a floor the walk cannot silently lose. */
-// 18 -> 17 (2026-10-30, ODQ §934.101): the DM Summary tab is removed (X-5).
-const MIN_VIEWS = 17;
+// 18 -> 17 (2026-10-30, ODQ §934.101): the DM Summary tab is removed (X-5); 17 -> 18 the same day:
+// the Institutions tab joins Systems (T1-14).
+const MIN_VIEWS = 18;
 /** A tab panel holding less text than this has not finished resolving its chunk.
  *  Measured against the SHORTEST real view (Faith's gated panel, ~160 chars), so
  *  the wait proves the chunk resolved without demanding a long tab. */
@@ -545,6 +546,7 @@ const DESKTOP_BASELINE = Object.freeze({
   "Summary/Foundations": { measured:  1, sub14:  1 },
   "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
   "Systems/Services":    { measured: 96, sub14: 96 },
+  "Systems/Institutions": { measured: 96, sub14: 96 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 40, sub14: 40 },
@@ -616,6 +618,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.

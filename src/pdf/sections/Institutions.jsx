@@ -40,6 +40,11 @@ export function Institutions({ settlement, narrativeMode, vm }) {
   const detailed = s.detailed || [];
   const grouped  = groupBy(detailed, i => (i.category || 'other').toLowerCase());
   const categories = orderedCategories(grouped);
+  // T1-15 (the owner, 2026-10-30): each house lists the service rows that name it, the same
+  // rows the screen's Institutions tab prints under it. Joined HERE on the display name
+  // (the slice carries the display label, and `institutionDisplayName` is the one spelling
+  // both sides use), so the pinned view model does not move.
+  const servicesByHouse = servicesByDisplayName(settlement?.availableServices);
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -91,7 +96,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
         return (
           <View key={`cat-${cat}`} style={{ marginBottom: space.sm }}>
             <CategoryHeader cat={cat} count={list.length} stats={catStats} />
-            <CategoryGrid items={list} catKey={cat} entityIndex={index} />
+            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} />
           </View>
         );
       })}
@@ -139,7 +144,7 @@ function CategoryHeader({ cat, count, stats }) {
  * category sections stack tighter and the chapter fits on one page in
  * the common case.
  */
-function CategoryGrid({ items, catKey, entityIndex }) {
+function CategoryGrid({ items, catKey, entityIndex, servicesByHouse }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -149,10 +154,10 @@ function CategoryGrid({ items, catKey, entityIndex }) {
       {rows.map((pair, ri) => (
         <View key={`r-${catKey}-${ri}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
           <View style={{ flex: 1, marginRight: 4 }}>
-            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} />}
+            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} />}
+            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} />}
           </View>
         </View>
       ))}
@@ -160,7 +165,7 @@ function CategoryGrid({ items, catKey, entityIndex }) {
   );
 }
 
-function InstitutionCard({ inst, idx, entityIndex }) {
+function InstitutionCard({ inst, idx, entityIndex, services = [] }) {
   const status = (inst.status || 'healthy').toLowerCase();
   // Phase-D: this card is the anchor TARGET for any institution id reference.
   const anchor = anchorTarget(entityIndex, inst.id);
@@ -243,6 +248,18 @@ function InstitutionCard({ inst, idx, entityIndex }) {
         </Text>
       )}
 
+      {services.length > 0 && (
+        <View style={{ marginTop: 2 }}>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Services</Text>
+          {services.map((svc, i) => (
+            <Text key={`sv-${idx}-${i}`} style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>
+              <Text style={{ color: palette.ink }}>{institutionDisplayName(svc.name)}</Text>
+              {svc.desc ? `: ${svc.desc}` : ''}
+            </Text>
+          ))}
+        </View>
+      )}
+
       {inst.products?.length > 0 && (
         <View style={{ marginTop: 2 }}>
           <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Produces</Text>
@@ -309,6 +326,29 @@ function InstitutionCard({ inst, idx, entityIndex }) {
 }
 
 // ── Helpers ────────────────────────────────────────────────────
+
+/**
+ * The service rows of `availableServices`, keyed by the DISPLAY name of the institution each
+ * row names (T1-15). Rows naming no house on the roster (proxy attributions such as
+ * "(smuggling)") key under a name no card carries, and stay in the Services chapter only.
+ * @param {unknown} availableServices
+ * @returns {Map<string, Array<{name?: string, desc?: string}>>}
+ */
+function servicesByDisplayName(availableServices) {
+  const map = new Map();
+  const lists = Array.isArray(availableServices)
+    ? [availableServices]
+    : Object.values(availableServices && typeof availableServices === 'object' ? availableServices : {});
+  for (const list of lists) {
+    for (const svc of Array.isArray(list) ? list : []) {
+      if (!svc || typeof svc !== 'object' || !svc.institution) continue;
+      const key = institutionDisplayName(svc.institution);
+      if (!map.has(key)) map.set(key, []);
+      map.get(key).push(svc);
+    }
+  }
+  return map;
+}
 
 function groupBy(list, fn) {
   const out = {};

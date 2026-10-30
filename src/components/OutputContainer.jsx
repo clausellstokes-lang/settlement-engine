@@ -69,7 +69,7 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 import {
   ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, FaithTab, HistoryTab,
   MagicTab, NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, TraditionsTab, VersionsTab, ViabilityTab, WarTab,
+  ServicesTab, SubstrateTab, TraditionsTab, VersionsTab, ViabilityTab, WarTab, InstitutionsTab,
 } from './dossier/dossierLazyTabs.js';
 
 
@@ -99,7 +99,8 @@ export const TAB_GROUPS = Object.freeze({
   // Session Mode and the PDF chapter. X-12: `substrate` (labelled Foundations) is the Summary
   // group's second tab, out of Systems; the id stays so deep links keep their key.
   summary: { label: 'Summary', tabs: ['overview', 'substrate', 'plot_hooks', 'dm_compass'] },
-  systems: { label: 'Systems', tabs: ['services', 'economics', 'power', 'defense', 'resources', 'viability', 'magic'] },
+  // T1-14 (the owner, 2026-10-30): `institutions` follows `services`, the roster house by house.
+  systems: { label: 'Systems', tabs: ['services', 'institutions', 'economics', 'power', 'defense', 'resources', 'viability', 'magic'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
   // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
@@ -121,6 +122,8 @@ const TABS = [
   { id: 'power',      label: 'Power',      Icon: Shield },
   { id: 'economics',  label: 'Economics',  Icon: Coins },
   { id: 'services',   label: 'Services',   Icon: Building2 },
+  // T1-14: the Institutions tab reuses the already-bundled Building2 glyph (no new first-paint icon).
+  { id: 'institutions', label: 'Institutions', Icon: Building2 },
   { id: 'defense',    label: 'Defense',    Icon: Swords },
   { id: 'resources',  label: 'Resources',  Icon: Package },
   { id: 'viability',  label: 'Outlook',    Icon: CircleCheckBig },
@@ -692,6 +695,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'overview':   return <>{!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}<OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} onOpenTableView={flag('tableView') ? () => useStore.getState().setUserPref?.('tableViewOpen', true) : undefined} /></>;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
+      case 'institutions': return <InstitutionsTab settlement={s} />;
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />
@@ -706,7 +710,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       );
       case 'substrate':  return <SubstrateTab settlement={s} />;
       // STRIP-1: the `map` case is REMOVED with the tab (owner ruling, ODQ §725).
-      case 'magic':      return <MagicTab settlement={s} />;
+      // BUILD-T2 (T2-15): the magic-dependence block moves here from Outlook, so the audience
+      // gate arrives from the router like every other desk-bearing tab's.
+      case 'magic':      return <MagicTab settlement={s} publicDossier={publicDossier} playerView={playerView} />;
       // §805 — WAR (the believed unit picture + DM truth) and FAITH (OUR gated
       // FaithSection: full panel on an embed, generic teaser for free/anon naming
       // NO deity, nothing for a premium deity-free town). Never THEIRS' ungated

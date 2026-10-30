@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
@@ -12,9 +12,9 @@ import { deriveAllActiveConditions } from '../../../domain/activeConditions.js';
 // normalizer costs no additional bytes. Its sibling `stressorDynamics.js` is NOT — that one
 // drags 29 modules / 602 KB, which is why the synergy and counterforce lenses stay dark.
 import { normalizeStressor } from '../../../domain/worldPulse/stressorsCore.js';
-import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP, EMPTY_VALUE } from '../../theme.js';
+import { FS, swatch, MUTED, EMPTY_VALUE } from '../../theme.js';
 import { Ti, serif, Section } from '../Primitives';
-import { LITERARY_TITLE, literaryTitle, statusCase, tokenCase } from '../labelLadder.js';
+import { LITERARY_TITLE, literaryTitle, statusCase } from '../labelLadder.js';
 import { formatCount } from '../../../domain/formatNumber.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -24,7 +24,6 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
-import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -39,42 +38,8 @@ import { institutionDisplayName } from '../../../domain/display/institutionDispl
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
 
-// ── The institution provenance badge (R-5b item #10) ───────────────────
-// The pill used to badge only the GENERATION source tag, so a forge the living
-// world grew during an advance and one the DM added by event BOTH rendered with
-// the fallback tint and no badge at all — indistinguishable from a building
-// nobody had ever touched. The badge now reads the ONE derived provenance record
-// (domain/provenance/rosterProvenance.js), which joins the composer's
-// *ByEventId stamps and the world-pulse's *ByWorldPulseOutcomeId stamps into a
-// single answer to "who put this here". Nothing is persisted: the record is
-// derived per render from stamps both lanes already write.
-//
-// The old map also gave 'forced' an EMPTY glyph, which is falsy at the render
-// guard — the legend promised a badge that could never appear. 'forced' means
-// the player force-added it at generation, so it now wears the same YOU mark as
-// a DM event, and the legend row says "Added by you" once for both.
-const PROVENANCE_TONE = { you:'#2d7a44', world:'#2a6b6b', required:'#a0762a', auto:'#2a3a7a', none:'#6b5340' };
-
-function institutionBadge(inst) {
-  const { created } = institutionProvenanceOf(inst);
-  // A DM realm order (SHIFT_TIER) reaches the roster through the world-pulse
-  // apply path, but the hand on it is still the player's.
-  if (created.origin === 'dm-event' || created.origin === 'dm-realm-order') {
-    return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
-  }
-  if (created.origin === 'world-pulse') {
-    return {
-      label:'WORLD', color:PROVENANCE_TONE.world,
-      title: created.reason ? `Grown by the living world. ${created.reason}` : 'Grown by the living world',
-    };
-  }
-  if (created.sourceTag === 'required') return { label:'REQ', color:PROVENANCE_TONE.required, title:'Historically required' };
-  if (created.sourceTag === 'forced') return { label:'YOU', color:PROVENANCE_TONE.you, title:'Added by you' };
-  if (created.sourceTag === 'auto-resolved') return { label:'→', color:PROVENANCE_TONE.auto, title:'Auto-resolved dependency' };
-  // Unstamped legacy rows stay unbadged rather than being guessed at. Custom
-  // rows are skinned gold by the caller's own ✦ branch, which is unchanged.
-  return { label:null, color:PROVENANCE_TONE.none, title:undefined };
-}
+// The institution provenance badge and its legend moved to InstitutionsTab.jsx with the
+// roster itself (owner addendum T1-15, 2026-10-30): that tab is the roster's one home.
 
 // ── Module-scope helper components ─────────────────────────────────────
 // React Hooks plugin v7 flags components defined inside render functions
@@ -165,7 +130,6 @@ function worldStressorFor(worldState, settlementId) {
 }
 
 export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpenTableView, publicDossier = false, playerView = false, worldState = null}) {
-  const [instOpen, setInstOpen] = useState(false);
   const mobile = useIsMobile(); // hook must precede the early return (rules-of-hooks)
   // THE STRESS LIST AND THE GENERAL DESK, BOTH LIFTED ABOVE THE EARLY RETURN (rules-of-hooks,
   // the note on `mobile` above). ⭐ WHY THE DESK IS MEMOISED (ARCH §4.1, X-F9, SEAM car 3g):
@@ -275,14 +239,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
     // annex's own named reader and it imports out of a worldPulse module, so the cost
     // belongs in this lazy tab chunk rather than in a leaf six tabs share.
   } = overviewDesk;
-
-  // Institution layout — guard `r.institutions` because sparse saves
-  // (mid-migration, partial gen) can land here without an institutions
-  // array. The smoke test in tests/ui/tabs.smoke.test.js caught this.
-  const byCategory = (r.institutions || []).reduce((acc,m)=>((acc[m.category]=acc[m.category]||[]).push(m),acc),{});
-  const _catOrder = ['government','military','economy','religious','magic','criminal','other'];
-  const catColors2 = {government:'#2a3a7a',military:'#8b1a1a',economy:'#a0762a',religious:'#1a5a28',magic:'#5a2a8a',criminal:'#4a1a4a',other:'#5a4a2a',Essential:'#6b5340',Crafts:'#7a4a1a',Infrastructure:'#1a4a5a',Defense:'#8b1a1a',Entertainment:'#7a1a5a',Adventuring:'#1a5a3a'};
-  const getCatColor = c => catColors2[c] || '#6b5340';
 
   // ScoreRow and StatusTag are defined at module scope above. Lifting
   // them out of the render function (was here originally) fixed 9
@@ -610,69 +566,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>}
       </div>}
 
-      {/* ── INSTITUTIONS ──────────────────────────────────────────────────── */}
-      <div style={{border:'1px solid #e0d0b0',overflow:'hidden'}}>
-        <button type="button" onClick={()=>setInstOpen(v=>!v)} aria-label={instOpen?'Collapse institutions':'Expand institutions'} style={{width:'100%',display:'flex',alignItems:'center',justifyContent:'space-between',padding:'10px 14px',background:instOpen?'#f0e8d8':'#f7f0e4',border:'none',cursor:'pointer',WebkitTapHighlightColor:'transparent'}}>
-          <div style={{display:'flex',alignItems:'center',gap:10}}>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em'}}>Institutions</span>
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED}}>{(r.institutions||[]).length} total</span>
-          </div>
-          <div style={{display:'flex',gap:6,alignItems:'center',flexWrap:'wrap',justifyContent:'flex-end'}}>
-            {/* Top-5 category chips + an honest remainder: the visible chip counts
-                must SUM to the "N total" beside them — a bare slice(0,5) shipped a
-                page whose own arithmetic disagreed (§767.3(d), the 39-vs-40 gap). */}
-            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(0,5).map(([cat,insts])=>(
-              <span key={cat} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:getCatColor(cat),background:`${getCatColor(cat)}15`,padding:'1px 5px'}}>{cat} {insts.length}</span>
-            ))}
-            {(()=>{const rest=Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).slice(5).reduce((n,[,insts])=>n+insts.length,0);
-              return rest>0?<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:MUTED,background:`${MUTED}15`,padding:'1px 5px'}}>+{rest} more</span>:null;})()}
-            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:4}}>{instOpen?'▲':'▼'}</span>
-          </div>
-        </button>
-        {instOpen&&<div style={{padding:'10px 14px',borderTop:'1px solid #e0d0b0'}}>
-          {/* Visual category distribution bar */}
-          <div style={{display:'flex',height:8,overflow:'hidden',gap:1,marginBottom:12}}>
-            {Object.entries(byCategory).sort((a,b)=>b[1].length-a[1].length).map(([cat,insts])=>(
-              <div key={cat} title={`${cat}: ${insts.length}`} style={{flex:insts.length,background:getCatColor(cat),minWidth:insts.length>0?4:0}}/>
-            ))}
-          </div>
-          {/* Categories with pills */}
-          <div style={{display:'flex',flexDirection:'column',gap:10}}>
-            {Object.entries(byCategory).sort((a,b)=>a[0].localeCompare(b[0])).map(([cat,insts])=>{
-              const cc=getCatColor(cat);
-              return <div key={cat}>
-                <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:cc,marginBottom:4}}>{tokenCase(cat)} ({insts.length})</div>
-                <div style={{display:'flex',flexWrap:'wrap',gap:4}}>
-                  {/* Sorted by the DISPLAYED label (§934.13): sorting by the raw key would
-                      file 'House of worship' under P and the reader would see an
-                      alphabetical list that is not alphabetical. Copied before sorting —
-                      `byCategory` holds the arrays this render derives from. */}
-                  {[...insts].sort((a,b)=>institutionDisplayName(a).localeCompare(institutionDisplayName(b))).map((inst,i)=>{
-                    const isCustom = inst.source==='custom' || inst.isCustom===true;
-                    const badge = institutionBadge(inst);
-                    const base = {fontSize:chromeFontSize(FS.xs, mobile),padding:'2px 8px',color:swatch.inkMag,fontWeight:500,display:'inline-flex',alignItems:'center',gap:4};
-                    const skin = isCustom
-                      ? {...GOLD_TINT, borderWidth:1, borderStyle:'solid'}   // sparkling-gold custom row
-                      : {background:`${badge.color}10`,border:`1px solid ${badge.color}30`};
-                    return <span key={i} title={isCustom?'Your custom content':badge.title} style={{...base,...skin}}>
-                      {institutionDisplayName(inst)}
-                      {isCustom
-                        ? <span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:GOLD_DEEP,letterSpacing:'0.04em'}}>✦</span>
-                        : (badge.label&&<span style={{fontSize:chromeFontSize(FS.nano, mobile),fontWeight:800,color:badge.color,letterSpacing:'0.04em'}}>{badge.label}</span>)}
-                    </span>;
-                  })}
-                </div>
-              </div>;
-            })}
-          </div>
-          {/* Legend */}
-          <div style={{display:'flex',gap:14,marginTop:10,paddingTop:8,borderTop:'1px solid #f0e8d8',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexWrap:'wrap'}}>
-            {[['REQ',PROVENANCE_TONE.required,'Historically required'],['YOU',PROVENANCE_TONE.you,'Added by you'],['→',PROVENANCE_TONE.auto,'Auto-resolved dependency'],['WORLD',PROVENANCE_TONE.world,'Grown by the living world'],['✦',GOLD_DEEP,'custom']].map(([lbl,c,desc])=>(
-              <span key={lbl}><span style={{color:c,fontWeight:800}}>{lbl}</span> = {desc}</span>
-            ))}
-          </div>
-        </div>}
-      </div>
+      {/* The Institutions collapsible is CUT (owner addendum T1-15, 2026-10-30; R2): the
+          Systems group's Institutions tab lists every house with its services, its
+          provenance badge and the legend. */}
 
     </div>
   );

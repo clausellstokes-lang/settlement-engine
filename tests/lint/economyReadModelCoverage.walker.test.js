@@ -146,6 +146,7 @@ const PRINT_DEFERRED = [
   'src/pdf/sections/Cover.jsx',
   'src/pdf/sections/EconomicsTrade.jsx',
   'src/pdf/sections/IdentityDailyLife.jsx',
+  'src/pdf/sections/Institutions.jsx',
   'src/pdf/sections/Overview.jsx',
   'src/pdf/sections/Services.jsx',
   'src/pdf/sections/SupplyChainFlow.jsx',
@@ -163,6 +164,8 @@ const FROZEN_DEFERRED = {
     'DESK-1 census table: renders heraldRegister\'s own banded prosperity WORD as a sortable column — the same one-word band the register sentence carries, never a tally or a count. The note leaf is per-settlement (it walks one settlement\'s trail) and this is a realm-wide roster; every row entity-links into the settlement dossier where the COVERED surfaces own the note. Same standing as heraldRegister.js above.',
   'src/components/map/RealmComparisons.jsx':
     'DESK-3 authored comparisons: counts of settlements grouped BY heraldRegister\'s own banded prosperity word (prosperityRank orders the bars) — denominator facts over the register rows, never an economicState read of its own and never a per-settlement freshness claim. Same realm-roster standing as HeraldGazetteer.jsx above.',
+  'src/components/new/tabs/InstitutionsTab.jsx':
+    'T1-14 roster view (2026-10-30): every row it prints is one of the Services tab\'s own availableServices rows, regrouped house by house, and the Services tab (COVERED) carries the economy-freshness note for exactly these rows. Moving the note here too is one docblock row in src/domain/display/economyFreshness.js, outside BUILD-T1, reported to the chair.',
   'src/components/OutputContainer.jsx':
     'Routing only: hands s.availableServices to ServicesTab as a prop. The covered child owns the note; a second one here would double it.',
   'src/components/new/generalDeskRead.js':
