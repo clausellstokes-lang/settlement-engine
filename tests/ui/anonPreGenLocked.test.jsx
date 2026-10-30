@@ -55,7 +55,8 @@ import { immer } from 'zustand/middleware/immer';
 
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { TIER_GATE, createAuthSlice } from '../../src/store/authSlice.js';
-import { accountHolderPhrase, ANON_SIZES, SIZE_LADDER } from '../../src/config/tierFacts.js';
+import { accountHolderPhrase, ANON_SIZES, SIZE_LADDER, signInUnlocksSizes } from '../../src/config/tierFacts.js';
+import { SAMPLE_SETTLEMENTS, forkConfigFor } from '../../src/data/sampleSettlements.js';
 import { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import { REFUSAL_REASONS } from '../../src/lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
@@ -69,12 +70,15 @@ afterEach(() => { cleanup(); });
 beforeEach(() => { H.tier = 'anon'; H.mobile = false; });
 
 describe('THE GATE — one range, one capability flag', () => {
-  test('an anonymous visitor reaches exactly hamlet, village and town', () => {
+  test('an anonymous visitor reaches exactly a town (the owner, 2026-10-30)', () => {
     const reachable = SIZE_LADDER.filter((size) => allowedFor('anon', size));
     expect(reachable).toEqual([...ANON_SIZES]);
-    // anchored: the three above are asserted present in the same derivation, so a gate
-    // that admitted nothing at all reds there first.
+    expect(reachable).toEqual(['town']);
+    // anchored: town is asserted present in the same derivation, so a gate that admitted
+    // nothing at all reds there first.
     expect(allowedFor('anon', 'thorp'), 'a thorpe requires an account (§934.34)').toBe(false);
+    expect(allowedFor('anon', 'hamlet')).toBe(false);
+    expect(allowedFor('anon', 'village')).toBe(false);
     expect(allowedFor('anon', 'city')).toBe(false);
     expect(allowedFor('anon', 'metropolis')).toBe(false);
   });
@@ -118,7 +122,11 @@ describe('THE GATE — one range, one capability flag', () => {
     expect(copy, 'the reason renders nothing — the notice would be blank').not.toBeNull();
     expect(copy.body).toContain('every dial rolled');
     // The sizes come from the shared derivation, so the two halves of the offer agree.
-    expect(copy.body).toContain('thorpe, city, and metropolis');
+    expect(copy.body).toContain(signInUnlocksSizes());
+    expect(copy.body).toContain('thorpe, hamlet, village, city, and metropolis');
+    // …and it no longer offers an anonymous visitor a size choice they do not have.
+    expect(copy.body, 'the locked notice still says the visitor chooses the size').not.toMatch(/choose the size/i);
+    expect(copy.body).toMatch(/\btown\b/i);
     // anchored: copy.body was just proven to carry the derived sizes, so an unreplaced {sizes} would be a real leak in a real body.
     expect(copy.body, 'the sentence still carries an uninterpolated placeholder').not.toContain('{sizes}');
   });
@@ -317,6 +325,37 @@ describe('THE LANE — what an anonymous forge actually generates', () => {
     await runLane(store, { intent: GENERATION_INTENT_SAMPLE_FORK });
     expect(sent()?.settType, 'the curated village was clamped to a Town').toBe('village');
     expect(sent()?.culture, 'the curated dials were rolled').toBe('celtic');
+  });
+
+  // ⛔ THE FLOOR IS BYPASSED BY A CURATED FORK, NEVER THE CEILING (chair ruling,
+  // 2026-10-30). The anonymous range is now Town alone, so a gate that judged a fork by
+  // the floor would refuse Cnocby; a fork at or under the ceiling forges at its own tier,
+  // and Black Crag (a city, over the ceiling) still refuses with the sign-in door.
+  test('the three Founding Worlds, forked anonymously: Cnocby a village, Mossgate a town, Black Crag refused', async () => {
+    const byTier = Object.fromEntries(SAMPLE_SETTLEMENTS.map((sample) => [sample.tier, sample]));
+    expect(Object.keys(byTier).sort(), 'the Founding Worlds fixture moved').toEqual(['city', 'town', 'village']);
+    for (const tier of ['village', 'town']) {
+      const sample = byTier[tier];
+      const store = laneStore('anon', tier);
+      store.state.config = { ...DEFAULT_CONFIG, ...forkConfigFor(sample), _forkedFromSample: sample.id };
+      const forged = await runLane(store, { intent: GENERATION_INTENT_SAMPLE_FORK });
+      expect(forged, `${sample.name} was refused for an anonymous visitor`).toBeTruthy();
+      expect(store.state.lastRefusal).toBeNull();
+      expect(sent()?.settType, `${sample.name} was not forged at its own tier`).toBe(tier);
+    }
+    const crag = byTier.city;
+    const store = laneStore('anon', 'city');
+    store.state.config = { ...DEFAULT_CONFIG, ...forkConfigFor(crag), _forkedFromSample: crag.id };
+    expect(await runLane(store, { intent: GENERATION_INTENT_SAMPLE_FORK })).toBeNull();
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER);
+    expect(refusalCopy(store.state.lastRefusal.reason, store.state.lastRefusal.vars).body).toMatch(/sign in/i);
+  });
+
+  test('a free-form anonymous village is still a Town, floor or no floor', async () => {
+    const store = laneStore('anon', 'village');
+    expect(await runLane(store), 'the free-form village was refused').toBeTruthy();
+    expect(sent()?.settType).toBe('town');
+    expect(store.state.lastRefusal).toBeNull();
   });
 
   test('a stale _forkedFromSample stamp without the fork intent is still clamped', async () => {

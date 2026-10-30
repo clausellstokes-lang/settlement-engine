@@ -33,10 +33,12 @@ function makeStore() {
 describe('isTierAllowed fails CLOSED for unknown tiers (finding #12)', () => {
   it('still gates RANKED tiers by the user max (anon caps at town)', () => {
     const store = makeStore();
-    // anon is a RANGE: minAllowedTier 'hamlet' (rank 1) .. maxAllowedTier 'town' (rank 3).
-    expect(store.getState().isTierAllowed('thorp')).toBe(false);  // 0 >= 1 -> no (§934.34)
-    expect(store.getState().isTierAllowed('hamlet')).toBe(true);  // 1 in [1, 3]
-    expect(store.getState().isTierAllowed('town')).toBe(true);    // 3 in [1, 3]
+    // anon is a RANGE of one rung since 2026-10-30 (the owner: "the only option, you have
+    // is a town"): minAllowedTier 'town' (rank 3) .. maxAllowedTier 'town' (rank 3).
+    expect(store.getState().isTierAllowed('thorp')).toBe(false);  // 0 >= 3 -> no (§934.34)
+    expect(store.getState().isTierAllowed('hamlet')).toBe(false); // 1 >= 3 -> no
+    expect(store.getState().isTierAllowed('village')).toBe(false); // 2 >= 3 -> no
+    expect(store.getState().isTierAllowed('town')).toBe(true);    // 3 in [3, 3]
     expect(store.getState().isTierAllowed('city')).toBe(false);   // 4 <= 3 -> no
     expect(store.getState().isTierAllowed('capital')).toBe(false); // 5 <= 3 -> no
     expect(store.getState().isTierAllowed('metropolis')).toBe(false); // 5 <= 3
@@ -48,7 +50,8 @@ describe('isTierAllowed fails CLOSED for unknown tiers (finding #12)', () => {
     // visitor asking for a thorpe that it was "past what this account forges".
     const store = makeStore();
     expect(store.getState().isTierBelowFloor('thorp'), 'the floor refusal is not named as one').toBe(true);
-    expect(store.getState().isTierBelowFloor('hamlet')).toBe(false); // the floor itself is allowed
+    expect(store.getState().isTierBelowFloor('village'), 'a village is under the Town floor').toBe(true);
+    expect(store.getState().isTierBelowFloor('town')).toBe(false); // the floor itself is allowed
     expect(store.getState().isTierBelowFloor('city'), 'a CEILING refusal must not read as a floor one').toBe(false);
     // A free account has no floor above rung 0, so nothing is ever below it.
     store.setState(s => { s.auth.tier = 'free'; });

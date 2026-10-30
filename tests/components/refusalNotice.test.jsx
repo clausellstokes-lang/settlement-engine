@@ -176,8 +176,13 @@ describe('the lane records a reason for every gate it closes', () => {
     // ⛔ THE CEILING'S SENTENCE WAS FALSE ON THE ONE RUNG THE FLOOR EXISTS FOR
     // (§934.34): a thorpe is refused BELOW the range, and the reader was told it was
     // "past what this account forges; it reaches up to a Town".
+    // No shipped account meets a floor any more: a free-form anonymous forge is clamped to
+    // a Town and a curated fork passes the floor (chair ruling, 2026-10-30). The branch
+    // stays armed for any account given a floor, so it is driven by a store that may
+    // configure its forge and has one.
     const store = makeStore({ settType: 'thorp' });
-    const result = await runLane(store, undefined, { intent: GENERATION_INTENT_SAMPLE_FORK });
+    store.state.canCustomizePreGeneration = () => true;
+    const result = await runLane(store);
     expect(result).toBeNull();
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.TIER_TOO_SMALL);
     expect(store.state.lastRefusal.vars).toMatchObject({ size: 'Thorpe', min: 'Hamlet' });

@@ -111,9 +111,10 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
     expect(rung(TIER_GATE.anon.minTier), 'the gate floor is not a rung of the ladder').toBeGreaterThanOrEqual(0);
     expect(rung(TIER_GATE.anon.maxTier), 'the gate ceiling is not a rung of the ladder').toBeGreaterThanOrEqual(0);
     expect([...ANON_SIZES]).toEqual(SIZE_LADDER.slice(rung(TIER_GATE.anon.minTier), rung(TIER_GATE.anon.maxTier) + 1));
-    expect([...ANON_SIZES]).toEqual(['hamlet', 'village', 'town']);
+    // The owner, 2026-10-30: "if you don't sign in the only option, you have is a town".
+    expect([...ANON_SIZES]).toEqual(['town']);
     // …and a thorpe is on the OTHER side of the floor, which is the whole ruling.
-    // anchored: ANON_SIZES was just proven equal to ['hamlet', 'village', 'town'], so this absence is a real one.
+    // anchored: ANON_SIZES was just proven equal to ['town'], so this absence is a real one.
     expect(ANON_SIZES).not.toContain('thorp');
     expect(SIGN_IN_UNLOCKS).toContain('thorp');
   });
@@ -127,7 +128,7 @@ describe('tierFacts ↔ TIER_GATE enforcement parity', () => {
 
   // The sentence the conversion surfaces render, held to the facts it is composed from.
   it('the unlock clause is composed from the facts, not typed', () => {
-    expect(signInUnlocksSizes()).toBe('thorpe, city, and metropolis');
+    expect(signInUnlocksSizes()).toBe('thorpe, hamlet, village, city, and metropolis');
     expect(signInUnlocksCustomize()).toBe(TIER_FACTS.free.preGenOptions && !TIER_FACTS.anon.preGenOptions);
     expect(signInUnlocksClause()).toBe(`${signInUnlocksSizes()}, to customize, and save up to ${FREE_SAVE_LIMIT} drafts`);
     expect(signInUnlocksClause()).toContain('thorpe');

@@ -107,9 +107,10 @@ const SEEDS = Array.from({ length: 30 }, (_, i) => `pool-seed-${i}`);
  * Town before the aim is reached, the owner's word of 2026-10-30). The aim is pinned here
  * so it stays armed for whatever account is next given a capped range.
  */
+const CAPPED_RANGE = Object.freeze(['hamlet', 'village', 'town']);
 function cappedStore(settType) {
   const store = laneStore('free', settType);
-  store.state.isTierAllowed = (size) => size === 'random' || size === 'custom' || ANON_SIZES.includes(size);
+  store.state.isTierAllowed = (size) => size === 'random' || size === 'custom' || CAPPED_RANGE.includes(size);
   return store;
 }
 
@@ -136,7 +137,7 @@ describe('THE LANE — the gate aims the sentinel it would otherwise discard', (
     for (const seed of SEEDS) aimed.push(await aimedForCapped(seed));
     expect(aimed.length).toBe(30);
     expect(
-      aimed.filter((size) => !ANON_SIZES.includes(size)),
+      aimed.filter((size) => !CAPPED_RANGE.includes(size)),
       'a forge was aimed outside the account\'s range — the store would discard that finished'
       + ' settlement and refuse a reader who chose nothing',
     ).toEqual([]);

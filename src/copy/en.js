@@ -116,10 +116,11 @@ export const en = Object.freeze({
     // among them (the owner, 2026-09-19). ⚠ THIS STRING IS NOT INTERPOLATED — nothing
     // supplies it vars — so the list is written out, and tests/copy/signInUnlocks.test.js
     // binds it to config/tierFacts.js signInUnlocksSizes(): the words cannot drift from
-    // the derivation without redding.
+    // the derivation without redding. Since 2026-10-30 the anonymous set is Town alone
+    // (the owner), so the written-out list grew hamlet and village.
     capUnlock: {
-      headline:   'You’ve explored hamlet, village, town.',
-      body:       'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      headline:   'You’ve forged today’s free towns.',
+      body:       'Sign in (free) to reach thorpe, hamlet, village, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
       primaryCta: 'Create free account →',
       sideDoor:   'or keep this one: buy the dossier for $2.99 ↓',
     },
@@ -129,7 +130,7 @@ export const en = Object.freeze({
     // template carries a {signin} placeholder where that bold span renders.
     anonCap: {
       signin:    'Sign in (free)',
-      spent:     'You’ve explored hamlet, village, town.',
+      spent:     'You’ve forged today’s free towns.',
       // ⛔ THE SIZES ARE INTERPOLATED, NEVER TYPED (the owner, 2026-09-19). This twin
       // said "city and metropolis" and so did the sentence that renders (HomeHero) —
       // both owed the reader a THORPE as well, since the anonymous sizes are the three
@@ -473,12 +474,12 @@ export const en = Object.freeze({
     },
     // ⛔ THE PRE-GENERATION OPTIONS ARE AN ACCOUNT'S (the owner, §934.34: "only hamlet,
     // village, and town can be accessed without signing in and only with everything on
-    // random"). Nothing is hidden — the options are drawn and disabled, and this is the
+    // random"; and 2026-10-30: a signed-out forge is a town). Nothing is hidden — the options are drawn and disabled, and this is the
     // sentence beside them. `{sizes}` comes from the same derivation every other unlock
     // sentence reads, so the two halves of the offer cannot drift.
     preGenLocked: {
       rubric: 'Everything on random',
-      body:   'Without an account a settlement forges with every dial rolled: you choose the size and the simulator does the rest. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
+      body:   'Without an account every settlement forges as a town with every dial rolled. Sign in (free) to set the name, the ground, the culture and the priorities yourself, and to reach {sizes}.',
     },
     // ⛔ THE REALM LEAVES THE PHONE (the owner, ODQ §934.26). The first sentence is the
     // owner's own words. The second is the DOOR — the gate law's "every gate ends in an
@@ -1465,11 +1466,11 @@ export const en = Object.freeze({
       body:     'Your dossier is yours to keep. Free tier holds 3 saves, plenty for a campaign’s first arc.',
     },
     anon_cap_hit: {
-      headline: 'You’ve explored hamlet, village, town.',
+      headline: 'You’ve forged today’s free towns.',
       // The sizes signing in ADDS (see hero.capUnlock). Written out because this
       // moment's card renders the string with no vars; bound to the derivation by
       // tests/copy/signInUnlocks.test.js so it cannot drift from it.
-      body:     'Sign in (free) to reach thorpe, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
+      body:     'Sign in (free) to reach thorpe, hamlet, village, city, and metropolis and save your drafts. Keep any dossier’s PDF for $2.99.',
     },
     first_pdf_export: {
       headline: 'You just downloaded your first dossier.',

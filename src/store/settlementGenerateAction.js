@@ -348,7 +348,13 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
 
   // Tier gate check
   const settType = config.settType;
-  if (settType && settType !== 'random' && settType !== 'custom') {
+  // ⛔ A CURATED FORK PASSES THE FLOOR, NEVER THE CEILING (chair ruling, 2026-10-30). The
+  // anonymous range is Town alone, so the floor would refuse Cnocby, a curated village; a
+  // fixed-seed showcase at or under the ceiling forges at its own tier, and Black Crag (a
+  // city, over the ceiling) still meets the ceiling's refusal and its sign-in door. Asked
+  // by the same fail-closed intent as the cap exemption, so a free-form forge cannot borrow it.
+  const curatedUnderCeiling = isSampleFork && belowFloor(state, settType);
+  if (settType && settType !== 'random' && settType !== 'custom' && !curatedUnderCeiling) {
     if (!state.isTierAllowed(settType)) {
       console.warn(`Tier "${settType}" not allowed for current user tier.`);
       // …and SAY so where the reader clicked. The sentence names the size asked for
