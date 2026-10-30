@@ -250,3 +250,31 @@ export function faithPanelModel(settlement) {
     effects, ranks, unaffiliated, contested, patronSecurity, piety, mandate, sinkSentence, patronFallSentence,
   };
 }
+
+/**
+ * THE DESK LENSES THE PANEL ALREADY STATES (chair rulings F2 and F4, 2026-10-30). FaithSection's
+ * ACTIVE panel prints the patron's rank, the cults, the devotion band and its arc, the creed
+ * standings, the sink sentence, the mandate and the patron's fall as datum rows; a DS-FTH-1 /
+ * DS-FTH-3 lens that restates one of those rows is not drawn. Each lens returns when its datum
+ * row is absent (no embed, or a record that lacks it). ONE rule for the screen (FaithTab) and
+ * the print (printProse.js's faith position), so the two can never trim differently.
+ * @param {Record<string, unknown>} rungs the warFaith desk's rungs
+ * @param {ReturnType<typeof faithPanelModel>} model
+ * @returns {Record<string, unknown>} the same rungs, the restating lenses nulled
+ */
+export function trimFaithDeskToPanel(rungs, model) {
+  const m = /** @type {any} */ (model) || {};
+  const active = !!m.hasEmbed;
+  const r = /** @type {any} */ (rungs) || {};
+  return {
+    ...r,
+    patronRank: active && m.patron?.rankAxis ? null : r.patronRank,
+    patronCults: active && m.cults?.length > 0 ? null : r.patronCults,
+    devotion: active && m.piety ? null : r.devotion,
+    pietyArc: active && m.piety ? null : r.pietyArc,
+    standings: active && m.ranks?.length > 0 ? null : r.standings,
+    sink: active && m.sinkSentence ? null : r.sink,
+    mandate: active && m.mandate ? null : r.mandate,
+    creedFall: active && m.patronFallSentence ? null : r.creedFall,
+  };
+}

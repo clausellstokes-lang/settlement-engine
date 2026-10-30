@@ -37,7 +37,7 @@ import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
-import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 
@@ -297,13 +297,14 @@ function screenProse(s, faithUnlocked = false) {
   // the patron-less town's own voice and names no god, so it is NOT behind the premium seam;
   // the two that can name a patron or a creed are.
   const fm = faithPanelModel(s);
-  const fa = warFaithStateProse(s, {
+  // The screen trims lenses the panel already states (FaithTab, chair rulings F2/F4).
+  const fa = trimFaithDeskToPanel(warFaithStateProse(s, {
     faith: fm,
     hasPatron: !!fm.hasEmbed,
     patronFallCause: fm.patronFallSentence
       ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === fm.patronFallSentence)
       : undefined,
-  }, o);
+  }, o), fm);
   set('faith.teaser', screenParagraph(s, 'faith.teaser', [fa.faithTeaser]));
   if (faithUnlocked) {
     set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
@@ -708,6 +709,36 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(copiesInDocument({ ...base, variant: 'canon_dossier' }, paragraph),
       'canon_dossier: chapter 07 carries it, so the live chapter must be fed null')
       .toBe(1);
+  });
+
+  test('F2/F4 IN PRINT: a lens the faith panel states is trimmed in print exactly as on screen', () => {
+    // A live embed (two creeds, a rank on the patron): the desk draws the rank and standings
+    // lenses, and both restate datum rows, so neither the screen nor the print speaks them.
+    const live = {
+      id: 'home', name: 'Sunhold',
+      config: {
+        primaryDeitySnapshot: { name: 'Sunlord Aurelian', rankAxis: 'major' },
+        faithProfile: {
+          deities: [
+            { deityRef: 'a', name: 'Sunlord Aurelian', niche: 'peacelike:good', share: 60, standing: 'ascendant', legitimacy: 0.8, isPatron: true },
+            { deityRef: 'b', name: 'The Gloam', niche: 'warlike:evil', share: 25, standing: 'cult', legitimacy: 0.2, isPatron: false },
+          ],
+          contested: true, patronSecurity: 0.55, unaffiliated: 15,
+        },
+      },
+    };
+    const fm = faithPanelModel(live);
+    const raw = warFaithStateProse(live, { faith: fm, hasPatron: true }, { seed: 'home', audience: 'dm' });
+    expect(raw.patronRank, 'the live fixture drew no rank lens to trim').toBeTruthy();
+    const trimmed = trimFaithDeskToPanel(raw, fm);
+    expect(trimmed.patronRank).toBeNull();
+    expect(trimmed.standings).toBeNull();
+    const printed = flat(buildPrintProse(live, { faithUnlocked: true }));
+    const screen = screenProse(live, true);
+    expect(printed['faith.patronSeat'] ?? null).toBe(screen['faith.patronSeat'] ?? null);
+    if (printed['faith.patronSeat']) {
+      expectAbsentWithAnchor(printed['faith.patronSeat'], raw.patronRank.sentence, printed['faith.patronSeat'].slice(0, 12), 'the trimmed rank lens in print');
+    }
   });
 
   test('THE PREMIUM FAITH SEAM: unlocked, the deity positions print and match the screen', () => {

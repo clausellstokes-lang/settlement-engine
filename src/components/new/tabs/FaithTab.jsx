@@ -22,7 +22,7 @@
 
 import { Suspense, lazy, useMemo } from 'react';
 import FaithSection from '../../settlement/FaithSection.jsx';
-import { FALL_SENTENCE, faithPanelModel } from '../../settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../settlement/faithPanelModel.js';
 import { hasPantheon } from '../../map/PantheonPanel.jsx';
 // THE WAR & FAITH DESK, drawn through its one gated call site (WarFaithDesk.jsx). This tab
 // does NOT call the desk itself — `warFaith` is one corpus leaf spanning this tab and the
@@ -146,17 +146,7 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
   // datum rows; a DS-FTH-1 / DS-FTH-3 lens that restates one of those rows is not drawn.
   // Each lens returns when its datum row is absent (no embed, or a record that lacks it).
   const active = !!model.hasEmbed;
-  const panelDesk = {
-    ...deskProse,
-    patronRank: active && model.patron?.rankAxis ? null : deskProse.patronRank,
-    patronCults: active && model.cults?.length > 0 ? null : deskProse.patronCults,
-    devotion: active && model.piety ? null : deskProse.devotion,
-    pietyArc: active && model.piety ? null : deskProse.pietyArc,
-    standings: active && model.ranks?.length > 0 ? null : deskProse.standings,
-    sink: active && model.sinkSentence ? null : deskProse.sink,
-    mandate: active && model.mandate ? null : deskProse.mandate,
-    creedFall: active && model.patronFallSentence ? null : deskProse.creedFall,
-  };
+  const panelDesk = trimFaithDeskToPanel(deskProse, model);
 
   return (
     <div data-testid="faith-tab" style={{ padding: '12px 14px', fontFamily: sans }}>

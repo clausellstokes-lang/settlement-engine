@@ -95,7 +95,7 @@ import { deriveEscalationClocks } from '../../hookEscalation.js';
 import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
 import { relationshipsDeskLists } from './relationshipsDeskRead.js';
-import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../../components/settlement/faithPanelModel.js';
 import { HOOK_FRAMING } from '../hookFraming.js';
 
 /**
@@ -425,11 +425,13 @@ export function buildPrintProse(settlement, ctx = {}) {
   // absent and every war rung comes back null — which is exactly what FaithTab itself gets,
   // because that tab holds no worldState either.
   const faithModel = faithPanelModel(r);
-  const faith = warFaithStateProse(r, {
+  // The SAME trim the screen applies (chair rulings F2/F4): a lens that restates a datum row
+  // the faith panel prints is not drawn (faithPanelModel.js :: trimFaithDeskToPanel).
+  const faith = trimFaithDeskToPanel(warFaithStateProse(r, {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
-  }, opts);
+  }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────
   // ⚠ THREE POSITIONS WEAVE MORE THAN ONE MOUNT, because the SCREEN does: DS-GEN-12/13/17
