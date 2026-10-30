@@ -786,10 +786,10 @@ export default function App() {
                 authLoading={authLoading}
                 params={params}
               />
-              {/* ⭐ THE PAGE'S OWN HINT (ODQ §934.29). The post-generate coach lives in
-                  the page's content flow, not in the shell's fixed chrome, so on a phone
-                  it sits inside what the reader is scrolling rather than over the bottom
-                  bar. `key={view}` makes the scoping STRUCTURAL: navigating away really
+              {/* ⭐ THE PAGE'S OWN HINT (ODQ §934.29). The post-generate coach is a fixed,
+                  movable corner card on the desktop (the owner, 2026-10-30) and lives in
+                  the page's content flow on phones, so there it sits inside what the reader
+                  is scrolling rather than over the bottom bar. `key={view}` makes the scoping STRUCTURAL: navigating away really
                   unmounts it (its step position goes with it) and returning mounts it
                   fresh, re-reading the dismissal. Which pages it may appear on is the
                   registry's to say, not the shell's — the host asks. */}

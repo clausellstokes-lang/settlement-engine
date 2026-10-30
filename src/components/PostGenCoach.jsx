@@ -33,8 +33,7 @@
  *     stacks beside a higher-priority band on the same page (the first-dossier teaching
  *     callouts outrank it at 60 to 50 and it waits for them to be closed).
  *   • sits INSIDE the page's content flow on a phone instead of floating over the
- *     chrome. (It kept a lifted bottom-right card on the desktop until REVIEW-P F5
- *     measured what that box costs the reader; see THE DOCK below.)
+ *     chrome; on the desktop it is the owner's small corner card (THE CORNER CARD below).
  * Only the explicit close retires it, through the device-local sf:guidance:* dismissal,
  * which outlives the route change, the reload and the session (src/lib/guidance.js).
  *
@@ -50,21 +49,29 @@
  * constant is read here: the coach becomes visible on exactly the field the DOSSIER appears
  * on (GenerateWizard.jsx `dossierVisible`), so the hint can never outrun the thing it hints at.
  *
- * ⭐ THE DOCK (REVIEW-P F5/F6, ODQ §934.63). The card sits in the page's own flow at EVERY
- * width, capped to the dossier's own column (PAGE_MAX) and centred on it, so it lands BELOW
- * the reading column and cannot cover it. The old fixed desktop box (position: fixed, z 900,
- * 340 wide at right: 24) overlapped live dossier prose by 244 px at 1440x900 and by its whole
- * 340 px width at 1024: the reading column is [120,1320] and [24,1000] at those rungs, the card
- * was [1076,1416] and [660,1000]. There was no placement to move it to — a viewport-anchored
- * card clears a CENTRED column only when the column is under 712 px at 1440 and under 616 px at
- * 1024, and it is 1200 and 976 — and insetting the column instead would have cost the reader
- * 20%, then 35%, of the dossier's width for a dismissible hint.
- *   It is a `region`, not a `dialog`. An in-flow, non-modal, untrapped card is the shape of
+ * ⭐ THE CORNER CARD (the owner, 2026-10-30, in chat, verbatim: "fix the 'What's next /
+ * [settlement] is ready.' that is supposed to be a relatively small floating and movable
+ * pop-up … at the corner of the window"). The owner re-decided the September dock. From
+ * 1024 px up the card is position: fixed, 280 px wide, bottom-right, lifted over the pinned
+ * footer's band (and the 640-1023 bottom bar) through aboveFooter(aboveBottomNav(...)), on
+ * the `coach` layer (900) one step under the feedback panel (910) that opens in the same
+ * corner, so the panel the reader summoned is always on top. It carries the headline, the
+ * current step (title and one line), back / next and the house close: one idea per panel. A
+ * click on the header, or Escape, folds it to a one-line pill ("{name} is ready · What's
+ * next") that unfolds on click; the fold is per visit. The header is a drag handle (pointer
+ * events, mouse and touch), the card is clamped 8 px inside the viewport and re-clamped on
+ * resize, and where it was dropped is remembered per device under
+ * sf:guidance:wizard_next_steps:pos, beside the dismissal. Below 1024 px the card stays in
+ * the page's own flow, capped to PAGE_MAX and centred under the dossier (REVIEW-P F6: the
+ * old floating card sat at rect top 2,857, off-screen on a phone).
+ *   History, one line: REVIEW-P F5/F6 (ODQ §934.63) had docked the card in the page flow at
+ * every width because a fixed 340 px box covered 244 px of the 1440 reading column and 340 px
+ * at 1024; the owner's 2026-10-30 word answers that with a smaller, foldable, movable card.
+ *   It is a `region`, not a `dialog`. A non-modal, untrapped card is the shape of
  * FirstDossierCallouts, its own higher-priority sibling on this surface, while role="dialog"
  * is this estate's MODAL marker (CommandPalette and WorldMap both discriminate on
- * [role="dialog"][aria-modal="true"]). On the phone the old role sat on a card at rect
- * top 2,857 and off-screen, which is REVIEW-P F6.
- *
+ * [role="dialog"][aria-modal="true"]).
+
  * Visibility: a settlement is on screen, THE FORGE'S REVEAL HAS FINISHED, the route is this
  * whisper's page of origin, the page budget picks this whisper, AND the unified guidance
  * dismissal (sf:guidance:wizard_next_steps) is not set. Renders nothing otherwise. The pure
@@ -76,25 +83,27 @@
  * @enforced-by tests/lint/guidanceOrigin.walker.test.js (the origin law: every
  *   whisper declares a page, and no guidance host is mounted in the app shell)
  * @enforced-by tests/components/postGenCoach.test.jsx (leave → gone, return → back,
- *   close → gone forever; and the two REVIEW-P laws: absent while the reveal runs,
- *   present once it clears, and in the page flow at both desktop rungs)
- * @enforced-by tests/lint/bottomAnchoredChrome.walker.test.js (this file names NO
- *   bottom-anchored fixed site any more; re-adding one reds there)
+ *   close → gone forever; absent while the reveal runs, present once it clears; the
+ *   corner card fixed and lifted at 1440 and 1024, its fold, drag, clamp and memory;
+ *   the phone card in the page flow)
+ * @enforced-by tests/lint/bottomAnchoredChrome.walker.test.js (this file holds exactly
+ *   one LIFTED bottom-anchored site, the corner card's default anchor)
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
 import {
-  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, PAGE_MAX } from './theme.js';
+  GOLD, INK, BODY, MUTED, BORDER, CARD, CARD_HDR, sans, serif_, FS, SP, PAGE_MAX,
+  aboveFooter, aboveBottomNav } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useRoute } from '../hooks/useRoute.js';
 import Button from './primitives/Button.jsx';
 import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogDismiss } from './primitives/useDialogFocusTrap.js';
 import { buildNextSteps } from './generate/nextSteps.js';
-import { isGuidanceDismissed, markGuidanceDismissed } from '../lib/guidance.js';
+import { isGuidanceDismissed, markGuidanceDismissed, guidanceDismissalKey } from '../lib/guidance.js';
 import {
   selectPageWhisper, deriveGuidanceFirst, deriveGuidanceNewborn,
 } from '../domain/display/guidanceRegistry.js';
@@ -104,6 +113,49 @@ import { chromeFontSize } from '../design/proseScale.js';
 // unified dismissal stem). Naming it here is also what the walker's host-wired
 // check reads (import of lib/guidance + a reference to the whisper id).
 const WHISPER_ID = 'wizard_next_steps';
+
+// THE CORNER CARD (the owner, 2026-10-30). From this width up the coach is a small fixed
+// card in the bottom-right corner; below it the card keeps the September in-flow dock.
+const DESKTOP_MIN = 1024;
+const CARD_W = 280;
+const CORNER = SP.lg;
+
+// ── THE CARD MOVES (the owner, 2026-10-30: "floating and movable") ──────────────────
+// Where the reader put the card is remembered per device, beside the dismissal and in
+// its idiom (src/lib/guidance.js): one sf:guidance:* key, every access try/caught so a
+// blocked localStorage never throws into render. The value is the card's top-left in
+// viewport px; a missing or malformed value means "the default corner".
+const POS_KEY = `${guidanceDismissalKey(WHISPER_ID)}:pos`;
+const EDGE = 8;
+
+function readCornerPos() {
+  try {
+    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem(POS_KEY) : null;
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    return Number.isFinite(v?.left) && Number.isFinite(v?.top) ? { left: v.left, top: v.top } : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeCornerPos(p) {
+  try {
+    if (typeof localStorage !== 'undefined') localStorage.setItem(POS_KEY, JSON.stringify(p));
+  } catch {
+    /* storage unavailable: the card stays where it is for this visit */
+  }
+}
+
+/** Keep a w x h box EDGE px inside the viewport on every side. */
+function clampToViewport(p, w, h) {
+  const maxLeft = Math.max(EDGE, window.innerWidth - w - EDGE);
+  const maxTop = Math.max(EDGE, window.innerHeight - h - EDGE);
+  return {
+    left: Math.round(Math.min(Math.max(EDGE, p.left), maxLeft)),
+    top: Math.round(Math.min(Math.max(EDGE, p.top), maxTop)),
+  };
+}
 
 export default function PostGenCoach() {
   const mobile = useIsMobile();
@@ -137,34 +189,75 @@ export default function PostGenCoach() {
   // with the mount, and the mount is keyed to the route (src/App.jsx), so returning to
   // /create brings the hint back exactly as leaving the page does.
   const [hiddenThisVisit, setHiddenThisVisit] = useState(false);
-  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). The coach is NOT modal — it
-  // sits in the page's own flow at every width (THE DOCK, above) — so it takes
-  // the non-modal half of the lifecycle: Escape dismisses and focus goes back, Tab is
-  // never trapped. Trapping here would strand a reader inside a hint about the dossier
-  // they are trying to read.
-  const cardRef = useDialogDismiss(!hiddenThisVisit, () => setHiddenThisVisit(true));
+  // THE FOLD (the owner, 2026-10-30). On the desktop corner card, Escape and a click on
+  // the header fold the card to a one-line pill instead of hiding it; the pill unfolds
+  // on click. Per visit, like the step: it dies with the route-keyed mount.
+  const [collapsed, setCollapsed] = useState(false);
+  // Below 1024 px the card stays in the page flow (REVIEW-P F6: a floating card sat
+  // off-screen on a phone); from 1024 px up it is the corner card.
+  const phone = useIsMobile(DESKTOP_MIN);
 
-  if (alreadyDismissed) return null;
-  if (dismissedThisSession) return null;
-  if (hiddenThisVisit) return null;
-  if (!settlement) return null;
-  // ⛔ AND NOT WHILE THE FORGE IS STILL SPEAKING (REVIEW-P F5). The settlement exists
-  // long before the reveal has said what it exists as; announcing "it is ready" over the
-  // establishing painting both lies and spends the reveal. This gate is the whole cure.
-  if (pipelineRevealActive) return null;
-
+  // ── The gates, evaluated before the dismiss hook so Escape is armed only while the
+  // card is actually on screen (an Escape pressed during the forge must not fold or
+  // hide a card the reader has not yet seen).
+  // ⛔ NOT WHILE THE FORGE IS STILL SPEAKING (REVIEW-P F5). The settlement exists long
+  // before the reveal has said what it exists as; announcing "it is ready" over the
+  // establishing painting both lies and spends the reveal. That gate is the whole cure.
   // ⭐ THE PAGE BUDGET decides, not this component. Off its origin route the registry
   // returns something else (or nothing) and the coach renders nothing; on /create it
   // yields to any higher-priority unbidden whisper rather than stacking beside it.
   // Every signal here is derived from store fields this component already reads.
   const savedCount = Array.isArray(savedSettlements) ? savedSettlements.length : 0;
-  const pageWhisper = selectPageWhisper(route, {
-    isDismissed: isGuidanceDismissed,
-    firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
-    isNewborn: deriveGuidanceNewborn(savedCount),
-    data: { tier: authTier, savedCount, hasSettlement: !!settlement },
-  });
-  if (pageWhisper?.id !== WHISPER_ID) return null;
+  const pageWhisper = settlement && !pipelineRevealActive
+    ? selectPageWhisper(route, {
+      isDismissed: isGuidanceDismissed,
+      firstAvailable: (key) => deriveGuidanceFirst(key, { hasSettlement: !!settlement, savedCount }),
+      isNewborn: deriveGuidanceNewborn(savedCount),
+      data: { tier: authTier, savedCount, hasSettlement: !!settlement },
+    })
+    : null;
+  const shown = !alreadyDismissed && !dismissedThisSession && !hiddenThisVisit
+    && pageWhisper?.id === WHISPER_ID;
+  const corner = shown && !phone;
+
+  // ⭐ ESCAPE AND THE WAY BACK (owner order, ODQ §934.31). The coach is NOT modal, so it
+  // takes the non-modal half of the lifecycle: Escape answers and focus goes back, Tab is
+  // never trapped. Trapping here would strand a reader inside a hint about the dossier
+  // they are trying to read. On the corner card Escape folds it; on the phone card it
+  // puts the card away for this visit.
+  const cardRef = useDialogDismiss(
+    shown && !(corner && collapsed),
+    () => (corner ? setCollapsed(true) : setHiddenThisVisit(true)),
+  );
+
+  // Where the reader dragged the card (null: the default corner). Read once per mount.
+  const [pos, setPos] = useState(readCornerPos);
+  // True for the one click that ends a drag, so dropping the card is not also a fold.
+  const swallowClickRef = useRef(false);
+  // The live drag's teardown, so an unmount mid-drag leaves no window listener behind.
+  const endDragRef = useRef(null);
+  useEffect(() => () => endDragRef.current?.(), []);
+
+  // A window resize, or the fold changing the card's size, re-clamps the remembered spot
+  // into the viewport. Display only: the stored preference is rewritten by a drag.
+  useEffect(() => {
+    if (!corner) return undefined;
+    const reclamp = () => {
+      const node = cardRef.current;
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      setPos((p) => {
+        if (!p) return p;
+        const c = clampToViewport(p, r.width, r.height);
+        return c.left === p.left && c.top === p.top ? p : c;
+      });
+    };
+    reclamp();
+    window.addEventListener('resize', reclamp);
+    return () => window.removeEventListener('resize', reclamp);
+  }, [corner, collapsed, cardRef]);
+
+  if (!shown) return null;
 
   // Each forward "what's next" move (save, export, refine, place) is its own
   // panel — one idea per screen. "Generate another" is the builder's detached
@@ -193,15 +286,161 @@ export default function PostGenCoach() {
     if (step > 0) setStep(s => s - 1);
   }
 
-  // THE DOCK — one card, in the page's own scroll container, at every width (§934.29 for
-  // the phone; REVIEW-P F5 for the desktop, see THE DOCK in this file's header). It is
-  // capped to PAGE_MAX and centred, which is the SAME frame GenerateWizard gives the
-  // dossier body (`maxWidth: PAGE_MAX, margin: '0 auto'`), so the card lands directly below
-  // the reading column and shares its measure instead of covering it. On a phone the cap is
-  // inert (the container is narrower than it), so the phone rendering is byte-for-byte the
-  // box it already had. No fixed position anywhere here: no bottom bar to clear, no footer
-  // to lift over, and no layer to claim — which is why the bottom-anchored-chrome census and
-  // the Z_LAYERS M10 pairing both lose their row for this file.
+  if (corner) {
+    // THE CORNER CARD (the owner, 2026-10-30): small, fixed bottom-right, lifted over
+    // the pinned footer's band (and the 640-1023 bar, 0px from 1024 up) through the
+    // shared composition. It sits on the `coach` layer (900), one step under the feedback
+    // panel (910) that opens in the same corner, so the panel the reader summoned is
+    // always on top and its close control is never covered.
+    // Once dragged, the card is placed by its top-left; until then it keeps the lifted
+    // corner anchor. Two literals on purpose: the bottom-anchored-chrome walker reads the
+    // second as this file's one LIFTED site.
+    const anchor = pos
+      ? { position: 'fixed', left: pos.left, top: pos.top }
+      : {
+        position: 'fixed',
+        right: CORNER,
+        bottom: aboveFooter(aboveBottomNav(CORNER)),
+      };
+    // Drag by the header, with pointer events (mouse and touch alike). A press that
+    // travels under 4 px is a click (the fold); past that it is a move, clamped to the
+    // viewport on every step and remembered where it is dropped.
+    const startDrag = (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target?.closest?.('[data-coach-nodrag]')) return;
+      const node = cardRef.current;
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      const d = { x: e.clientX, y: e.clientY, left: r.left, top: r.top, moved: false, last: null };
+      const move = (ev) => {
+        const dx = ev.clientX - d.x;
+        const dy = ev.clientY - d.y;
+        if (!d.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+        d.moved = true;
+        d.last = clampToViewport({ left: d.left + dx, top: d.top + dy }, r.width, r.height);
+        setPos(d.last);
+      };
+      const end = () => {
+        window.removeEventListener('pointermove', move);
+        window.removeEventListener('pointerup', up);
+        window.removeEventListener('pointercancel', up);
+        endDragRef.current = null;
+      };
+      const up = () => {
+        end();
+        if (!d.moved || !d.last) return;
+        writeCornerPos(d.last);
+        swallowClickRef.current = true;
+        setTimeout(() => { swallowClickRef.current = false; }, 0);
+      };
+      endDragRef.current?.();
+      endDragRef.current = end;
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+      window.addEventListener('pointercancel', up);
+    };
+    const toggleFold = () => {
+      if (swallowClickRef.current) { swallowClickRef.current = false; return; }
+      setCollapsed(c => !c);
+    };
+    const pillText = `${guide.headline.replace(/\.$/, '')} \u00b7 What\u2019s next`;
+    return (
+      <div
+        ref={cardRef}
+        role="region"
+        aria-label="What is next for this dossier"
+        tabIndex={-1}
+        style={{
+          ...anchor,
+          zIndex: 900,
+          width: collapsed ? 'auto' : CARD_W,
+          maxWidth: CARD_W,
+          boxSizing: 'border-box',
+          background: CARD,
+          border: `1px solid ${BORDER}`,
+          fontFamily: sans, color: INK,
+          overflow: 'hidden',
+        }}
+      >
+        {/* Header: the drag handle. The headline is the fold toggle; the house close
+            retires the hint and is never a drag start. The pointer listener sits on the
+            box, not on a control, so every press inside it can move the card while the
+            keyboard reaches the same two controls by Tab. */}
+        <div
+          onPointerDown={startDrag}
+          style={{
+            display: 'flex', alignItems: 'center', gap: SP.xs,
+            padding: `${SP.xs}px ${SP.xs}px ${SP.xs}px ${SP.sm}px`,
+            background: CARD_HDR,
+            borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`,
+            cursor: 'grab', touchAction: 'none', userSelect: 'none',
+          }}
+        >
+          <Button
+            variant="ghost"
+            size="sm"
+            aria-expanded={!collapsed}
+            onClick={toggleFold}
+            style={{
+              flex: 1, minWidth: 0, justifyContent: 'flex-start',
+              border: 'none', background: 'transparent', padding: `${SP.xs}px`,
+              fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK,
+              overflow: 'hidden', textOverflow: 'ellipsis', cursor: 'inherit',
+            }}
+          >
+            {collapsed ? pillText : guide.headline}
+          </Button>
+          {!collapsed && (
+            <span data-coach-nodrag="" style={{ display: 'inline-flex' }}>
+              <DialogClose onClose={close} tone="default" />
+            </span>
+          )}
+        </div>
+
+        {!collapsed && (
+          <div style={{ padding: `${SP.sm}px ${SP.md}px ${SP.md}px` }}>
+            <div style={{
+              fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 700, color: MUTED,
+              letterSpacing: '0.08em', textTransform: 'uppercase',
+            }}>
+              What&rsquo;s next &middot; {safeStep + 1} of {total}
+            </div>
+            <h3 style={{
+              margin: `${SP.xs}px 0 0`, fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK,
+            }}>
+              {cur.label}
+            </h3>
+            <p style={{ margin: `${SP.xs}px 0 0`, fontSize: FS.sm, color: BODY, lineHeight: 1.5 }}>
+              {cur.hint}
+            </p>
+            <div style={{ display: 'flex', alignItems: 'center', gap: SP.sm, marginTop: SP.md }}>
+              {step > 0 && (
+                <Button variant="secondary" size="sm" onClick={back} icon={<ChevronLeft size={12} />}>
+                  Back
+                </Button>
+              )}
+              <span style={{ flex: 1 }} />
+              <Button
+                variant="primary"
+                size="sm"
+                onClick={next}
+                icon={isLast ? <Check size={12} /> : undefined}
+                trailingIcon={isLast ? undefined : <ChevronRight size={12} />}
+              >
+                {isLast ? 'Done' : 'Next'}
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // THE PHONE DOCK (below 1024 px): one card in the page's own scroll container (§934.29;
+  // REVIEW-P F6). It is capped to PAGE_MAX and centred, the SAME frame GenerateWizard gives
+  // the dossier body (`maxWidth: PAGE_MAX, margin: '0 auto'`), so it lands below the
+  // reading column on its measure. On a phone the cap is inert (the container is narrower
+  // than it). No fixed position and no layer here; the corner card above owns those.
   const dock = {
     position: 'relative',
     width: '100%', maxWidth: PAGE_MAX, marginLeft: 'auto', marginRight: 'auto',
@@ -211,7 +450,7 @@ export default function PostGenCoach() {
   return (
     <div
       ref={cardRef}
-      // A `region`, not a `dialog` (REVIEW-P F6). See THE DOCK in the header: the estate
+      // A `region`, not a `dialog` (REVIEW-P F6). See THE CORNER CARD in the header: the estate
       // spends role="dialog" on modals and trapped popovers, and its in-flow guidance shape
       // is FirstDossierCallouts' labelled region. The name is the card's own stable rubric,
       // not the step heading, which changes under the reader as they page through.
