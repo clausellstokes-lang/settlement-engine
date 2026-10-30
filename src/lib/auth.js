@@ -14,6 +14,8 @@
  *   - 'user'      = default, normal user
  *   - 'developer' = full access, bypasses all gates
  *   - 'admin'     = admin panel access
+ *   - 'support'   = the support desk: /admin with the support queue and the
+ *                   user console's redacted reads only (not staff, no paid unlock)
  *   (set via profiles.role only; user_metadata is not trusted)
  */
 
@@ -39,8 +41,10 @@ function normalizeTier(value, fallback = 'free') {
   return value === 'premium' || value === 'free' ? value : fallback;
 }
 
+// 'support' passes through (T9): admin-actions admits it, and collapsing it to
+// 'user' here refused a support account at /admin. Anything else is 'user'.
 function normalizeRole(value) {
-  return ['developer', 'admin'].includes(value) ? value : 'user';
+  return ['developer', 'admin', 'support'].includes(value) ? value : 'user';
 }
 
 function isOwnerEmail(email) {

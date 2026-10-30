@@ -36,7 +36,7 @@ vi.mock('../../src/store/index.js', () => ({
 
 // ── Stub the heavy operator panels as bare markers so the test isolates the
 //    mobile gate wiring (and so the deferred panels are individually probeable). ─
-vi.mock('../../src/components/admin/AdminUsersPanel.jsx', () => ({ default: () => <div data-testid="admin-users-panel" /> }));
+vi.mock('../../src/components/admin/AdminUsersPanel.jsx', () => ({ default: ({ readOnly }) => <div data-testid="admin-users-panel" data-read-only={readOnly ? 'true' : 'false'} /> }));
 vi.mock('../../src/components/gallery/GalleryModerationPanel.jsx', () => ({ default: () => <div data-testid="gallery-moderation-panel" /> }));
 vi.mock('../../src/components/admin/SupportQueuePanel.jsx', () => ({ default: () => <div data-testid="support-queue-panel" /> }));
 vi.mock('../../src/components/admin/AdminTrendsPanel.jsx', () => ({ default: () => <div data-testid="admin-trends-panel" /> }));
@@ -280,5 +280,71 @@ describe('AdminClientErrorsPanel — banner, rows, refusal (T7 survey)', () => {
     let utils;
     await act(async () => { utils = render(<Panel />); });
     expect(utils.getByText(/no client errors in the last 30 days/i)).toBeTruthy();
+  });
+});
+
+// ── T9 (2026-10-30): THE SUPPORT DOOR. admin-actions admits `support` for the
+//    ticket queue and the user console's redacted reads; the page used to refuse
+//    that role outright. A support account now sees exactly the panels the
+//    server grants it, a developer sees everything, a plain user is refused. ──
+describe('AdminPanel — the support door (T9)', () => {
+  const ELEVATED_STORE = { auth: STORE.auth, isElevated: STORE.isElevated };
+  afterEach(() => {
+    STORE.auth = ELEVATED_STORE.auth;
+    STORE.isElevated = ELEVATED_STORE.isElevated;
+  });
+
+  async function renderAs(role, { mobile = false } = {}) {
+    STORE.auth = { user: { id: `${role}-1` }, role, tier: 'free' };
+    STORE.isElevated = () => role === 'developer' || role === 'admin';
+    installMatchMedia(mobile);
+    invoke.mockImplementation(routeAdmin());
+    const AdminPanel = await loadAdminPanel();
+    let utils;
+    await act(async () => { utils = render(<AdminPanel />); });
+    return utils;
+  }
+
+  test('a support account sees the support queue and a read-only user console, and nothing else', async () => {
+    const utils = await renderAs('support');
+    expect(utils.getByTestId('support-queue-panel')).toBeTruthy();
+    expect(utils.getByTestId('admin-users-panel').getAttribute('data-read-only')).toBe('true');
+    // Highest-role panels and the dashboards are not rendered for support.
+    for (const id of ['gallery-moderation-panel', 'admin-trends-panel', 'admin-analytics-panel', 'admin-sim-tuning-panel']) {
+      expect(utils.queryByTestId(id), id).toBeNull();
+    }
+    const headings = utils.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    expect(headings).toEqual(['User Management', 'Support Queue']);
+    // No unstubbed panel fired a read the server would refuse, and no KPI read ran.
+    expect(actionsCalled()).toEqual([]);
+    expect(utils.queryByText(/access denied/i)).toBeNull();
+  });
+
+  test('a developer sees every panel, with the full (not read-only) user console', async () => {
+    const utils = await renderAs('developer');
+    expect(utils.getByTestId('admin-users-panel').getAttribute('data-read-only')).toBe('false');
+    for (const id of ['support-queue-panel', 'gallery-moderation-panel', 'admin-trends-panel', 'admin-analytics-panel', 'admin-sim-tuning-panel']) {
+      expect(utils.getByTestId(id), id).toBeTruthy();
+    }
+    const headings = utils.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    for (const h of ['Broadcast Messages', 'Gallery Reports', 'Operational Obligations', 'AI Pricing']) {
+      expect(headings, h).toContain(h);
+    }
+    expect(utils.getByText('Total Users')).toBeTruthy();
+  });
+
+  test('a plain user is refused and no panel mounts', async () => {
+    const utils = await renderAs('user');
+    expect(utils.getByText(/access denied/i)).toBeTruthy();
+    expect(utils.queryByTestId('support-queue-panel')).toBeNull();
+    expect(utils.queryByTestId('admin-users-panel')).toBeNull();
+  });
+
+  test('support on a phone meets the desktop gate with its own words and no figures', async () => {
+    const utils = await renderAs('support', { mobile: true });
+    expect(utils.getByText(/best on desktop/i)).toBeTruthy();
+    expect(utils.getByText(/support queue and account lookup/i)).toBeTruthy();
+    expect(utils.queryByText('Total Users')).toBeNull();
+    expect(actionsCalled()).toEqual([]);
   });
 });

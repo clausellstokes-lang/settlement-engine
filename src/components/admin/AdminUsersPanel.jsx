@@ -22,6 +22,11 @@
  *
  * The panel itself is rendered only for elevated users (the parent gates on
  * isElevated). The real authority is server-side; this gate is UX, not security.
+ *
+ * `readOnly` (T9) is the console the support desk gets: search, the redacted
+ * summary, Review billing and the redacted Export bundle, the read paths
+ * admin-actions grants `support`. Every write and every full-PII control is
+ * left out, so a support agent is never offered a button the server refuses.
  */
 import { useCallback, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
@@ -67,7 +72,7 @@ function downloadBundle(bundle, userId, full) {
   return filename;
 }
 
-export default function AdminUsersPanel() {
+export default function AdminUsersPanel({ readOnly = false } = {}) {
   const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -354,9 +359,11 @@ export default function AdminUsersPanel() {
                 )}
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
-              Reveal full details
-            </Button>
+            {!readOnly && (
+              <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
+                Reveal full details
+              </Button>
+            )}
           </div>
 
           {/* Redacted counters */}
@@ -388,7 +395,16 @@ export default function AdminUsersPanel() {
             </div>
           )}
 
-          {/* Action set */}
+          {/* Action set. Read-only (support): the two server-granted reads only. */}
+          {readOnly ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
+              Review billing</Button>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
+              Export bundle</Button>
+          </div>
+          ) : (
+          <>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => setDirectMessageOpen(true)}>Send notice</Button>
@@ -564,12 +580,16 @@ export default function AdminUsersPanel() {
                 ),
               )}>Restore comment</Button>
           </div>
+          </>
+          )}
         </div>
       )}
 
       {!selected && !searching && results.length === 0 && (
         <p style={{ fontSize: FS.sm, color: BODY, fontFamily: sans }}>
-          Search for a user to inspect their redacted profile and take action.
+          {readOnly
+            ? 'Search for a user to inspect their redacted profile.'
+            : 'Search for a user to inspect their redacted profile and take action.'}
         </p>
       )}
     </section>

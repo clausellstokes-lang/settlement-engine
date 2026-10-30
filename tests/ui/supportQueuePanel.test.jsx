@@ -192,3 +192,39 @@ describe('A5 — SupportQueuePanel refusals and the customer-facing wire (T7 sur
     await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'list_ticket_pool', status: 'waiting_on_user' } }));
   });
 });
+
+// ── T9 (2026-10-30): THE SUPPORT DOOR. admin-actions grants the `support` role
+//    the whole ticket queue (list_ticket_pool, list_ticket_thread, claim,
+//    set_ticket_status, post_ticket_reply, link_ticket_faq). A support account
+//    now reaches /admin and works this queue there. ──
+describe('A5 — the support queue for a support account (T9)', () => {
+  test('a support account opens /admin, finds the Support Queue, and works a ticket', async () => {
+    vi.resetModules();
+    window.matchMedia = vi.fn((query) => ({
+      media: query, matches: false,
+      addEventListener: () => {}, removeEventListener: () => {}, addListener: () => {}, removeListener: () => {},
+    }));
+    vi.doMock('../../src/store/index.js', () => {
+      const state = { auth: { user: { id: 'support-1' }, role: 'support', tier: 'free' }, isElevated: () => false };
+      function useStore(sel) { return sel(state); }
+      useStore.getState = () => state;
+      useStore.subscribe = () => () => {};
+      return { useStore };
+    });
+    try {
+      const AdminPanel = (await import('../../src/components/AdminPanel.jsx')).default;
+      render(<AdminPanel onBack={() => {}} />);
+      expect(screen.getByRole('heading', { level: 2, name: 'Support Queue' })).toBeTruthy();
+      await openTicket();
+      fireEvent.click(screen.getByRole('button', { name: /^claim$/i }));
+      await waitFor(() => {
+        expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'claim_ticket', ticketId: 't-1' } });
+      });
+      // Only the queue's own actions ran; no highest-role read was attempted.
+      const actions = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
+      expect(actions).toEqual(['list_ticket_pool', 'list_ticket_thread', 'claim_ticket']);
+    } finally {
+      vi.doUnmock('../../src/store/index.js');
+    }
+  });
+});

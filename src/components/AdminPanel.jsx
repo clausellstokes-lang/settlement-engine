@@ -2,7 +2,11 @@
  * AdminPanel.jsx — Developer admin panel for managing users,
  * credits, roles, and system configuration.
  *
- * Only accessible to users with 'developer' or 'admin' role.
+ * Accessible to the 'developer' and 'admin' roles (everything), and to the
+ * 'support' desk (T9), which sees only what admin-actions grants that role: the
+ * Support Queue and the read paths of the user console (search, the redacted
+ * summary, billing review, the redacted diagnostic bundle). No KPI strip, no
+ * dashboards, no highest-role panel renders for support.
  * Protected reads AND writes go through the admin-actions edge function so
  * everything is role-gated and audited server-side. In particular the user
  * console is the audited, redacted AdminUsersPanel (list_users / get_user_*),
@@ -11,6 +15,7 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../store/index.js';
+import { isSupportRole } from '../lib/staffEntitlements.js';
 import { supabase } from '../lib/supabase.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
@@ -60,6 +65,9 @@ function Section({ heading, children, actions }) {
 
 export default function AdminPanel({ onBack }) {
   const isElevated = useStore(s => s.isElevated());
+  // The support desk (T9): admitted, but only to the panels the server grants
+  // it. Staff wins if both ever read true.
+  const supportOnly = useStore(s => isSupportRole(s.auth?.role)) && !isElevated;
   // Admin is a dense, multi-column operator console whose every action is a
   // consequential server-audited mutation; it cannot meaningfully reflow to a
   // phone. On mobile we keep the read-only KPI orientation strip and gate the
@@ -78,7 +86,7 @@ export default function AdminPanel({ onBack }) {
   // read, which returned every user's email + columns to any elevated role,
   // unaudited. The full user console below is the redacted AdminUsersPanel.
   const fetchStats = useCallback(async () => {
-    if (!supabase) return;
+    if (!supabase || supportOnly) return;
     try {
       const { data, error } = await supabase.functions.invoke('admin-actions', {
         body: { action: 'get_stats' },
@@ -94,7 +102,7 @@ export default function AdminPanel({ onBack }) {
     } catch (e) {
       setStatsError(e?.message || 'Request failed');
     }
-  }, []);
+  }, [supportOnly]);
 
   // Mount-fetch pattern: fetchStats setStates internally, which trips
   // react-hooks/set-state-in-effect under React Compiler. Migrating away
@@ -106,7 +114,7 @@ export default function AdminPanel({ onBack }) {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [fetchStats]);
 
-  if (!isElevated) {
+  if (!isElevated && !supportOnly) {
     return (
       <div style={{ textAlign: 'center', padding: '60px 20px', color: BODY, fontFamily: sans }}>
         <p style={{ fontSize: FS.lg }}>Access denied. Developer or Admin role required.</p>
@@ -127,7 +135,9 @@ export default function AdminPanel({ onBack }) {
       <PageHeader
         eyebrow="Operator console"
         title="Admin"
-        subtitle="Manage users, credits, and system settings."
+        subtitle={supportOnly
+          ? 'Work the support queue and look up accounts.'
+          : 'Manage users, credits, and system settings.'}
         actions={(
           <>
             {onBack && (
@@ -135,9 +145,11 @@ export default function AdminPanel({ onBack }) {
                 Back
               </Button>
             )}
-            <Button variant="ghost" size="sm" onClick={fetchStats}>
-              Refresh
-            </Button>
+            {!supportOnly && (
+              <Button variant="ghost" size="sm" onClick={fetchStats}>
+                Refresh
+              </Button>
+            )}
           </>
         )}
       />
@@ -168,9 +180,24 @@ export default function AdminPanel({ onBack }) {
         <div style={{ marginTop: SP.sm }}>
           <DesktopOnlyGate
             title="Admin works best on desktop"
-            message="The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
+            message={supportOnly
+              ? 'The support console covers the support queue and account lookup. It is dense and needs the room a larger screen gives it. Open Admin on desktop to work the queue.'
+              : 'The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue.'}
           />
         </div>
+      ) : supportOnly ? (
+      /* The support desk: exactly the panels admin-actions grants `support`
+          (the A5 ticket queue; list_users / get_user_summary / review_billing /
+          the redacted diagnostic_bundle). Writes and full-PII reads stay with
+          the highest roles, so the user console renders read-only. */
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
+        <Section heading="User Management">
+          <AdminUsersPanel readOnly />
+        </Section>
+        <Section heading="Support Queue">
+          <SupportQueuePanel />
+        </Section>
+      </div>
       ) : (
       /* Management Sections — held off from the header/KPI cluster (P5
           differential spacing) and spaced wider from one another than the
