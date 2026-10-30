@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-30, SERVICE CATEGORY FIDELITY (RS-1..RS-13): EVERY SERVICE IN ITS ONE BUCKET ──────
+ * THE THIRTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101, which the chair names this fence's chartered window); the record is
+ * docs/shift-records/2026-10-30-service-category-fidelity.json.
+ * THE MOVER: every authored catalog service name is registered in SERVICE_CATEGORY_MAP, so 162
+ * catalog (service, host) pairs change bucket (Discreet passage -> criminal forks the crime-gate
+ * stream at Underground-network hosts). The base d14c5c56 held `b9945f18…` (reproduced from its
+ * tree before this value was taken). On THIS corpus 336 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE: with `availableServices` removed, all 360 rows hash
+ * identically at the base and here. `b9945f18…` -> `ddbfd9e8…`.
+ *
  * ── 2026-10-02, THE VOICE PROGRAM WAVE 4 BLOCK 1: THE ARRIVAL HOOK NAMES ONLY WHAT IT HOLDS ──
  * THE TWELFTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
  * record is docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json.
@@ -415,7 +426,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'b9945f18189f0833f2a0691f5e2da5b7691e0b1b0efe9e437abc8601bf3be128';
+const PRE_COUPLING_CORPUS_SHA = 'ddbfd9e83ca7fe76edbc0507e024706f12e3e1c618ea0de4e9926a5223f498aa';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
