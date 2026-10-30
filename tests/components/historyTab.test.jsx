@@ -249,4 +249,18 @@ describe('the print history chapter marks the same events (X-14b, chair item 3)'
     expect(screen).toBe(2);
     expect(marks).toBe(screen);
   });
+
+  it('F12 (X-2): the print chapter prints no event or tension hook text; the Plot Hooks chapter is their one print home', async () => {
+    const { HistoryFounding } = await import('../../src/pdf/sections/HistoryFounding.jsx');
+    const h = {
+      age: 300, historicalCharacter: null, founding: {},
+      events: [{ title: 'The Salt Pact', type: 'economic', yearsAgo: 12, severity: 'minor', hooks: ['A clause is missing from the sealed copy.'], lastingEffects: ['Tolls halved'] }],
+      tensions: [{ label: 'guild_conflict', description: 'The guilds still quarrel.', hooks: ['A guild clerk wants the old charter burned.'] }],
+      timeline: [],
+    };
+    const text = collectText(HistoryFounding({ settlement: { name: 'Briarwatch' }, vm: { history: h }, stateProse: null })).join(' ');
+    expectAbsentWithAnchor(text, 'A clause is missing from the sealed copy.', 'Tolls halved', 'F12 event hooks in print');
+    expectAbsentWithAnchor(text, 'A guild clerk wants the old charter burned.', 'The guilds still quarrel.', 'F12 tension hooks in print');
+    expectAbsentWithAnchor(text, 'Plot hooks', 'Still relevant today', 'the print hooks kicker');
+  });
 });

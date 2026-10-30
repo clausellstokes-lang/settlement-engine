@@ -20,6 +20,7 @@ import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
+import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -188,6 +189,20 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     const offVm = { ...vm, power: { ...vm.power, lineage: [] }, liveWorld: null };
     expect(joined(PowerStructure({ settlement, vm: offVm })), 'no regime history ⇒ no subsection')
       .not.toContain('RULE & SUCCESSION');
+  });
+});
+
+describe('F13 / X-2 — the PDF Relationships chapter prints each tie with its tension (a fact of the tie)', () => {
+  it('every internal tie prints its pair and its tension line; no "Link" fallback label', () => {
+    const ties = settlement.relationships || [];
+    expect(ties.filter((t) => t.tension).length, 'fixture premise: the city has ties with tensions').toBeGreaterThan(12);
+    const on = joined(Relationships({ settlement, vm }));
+    expect(on).toContain('Internal relationships');
+    for (const t of ties) {
+      expect(on, `${t.npc1Name} / ${t.npc2Name}`).toContain(t.npc1Name);
+      if (t.tension) expect(on, 'the tension prints beside its tie').toContain(t.tension);
+    }
+    expect(on).not.toMatch(/\bLink\b/); // anchored: 'Internal relationships' is on this render
   });
 });
 
