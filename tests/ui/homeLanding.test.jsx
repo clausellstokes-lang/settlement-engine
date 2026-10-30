@@ -197,7 +197,7 @@ describe('HomeLanding — scrollable landing', () => {
     // the same pin: they are REAL buttons, because they really forge (the Create
     // page's own action). §3.8 forbids decorative chips that look like controls,
     // not controls that work.
-    const forks = await screen.findAllByRole('button', { name: /Fork this sample/ });
+    const forks = await screen.findAllByRole('button', { name: /^Visit / });
     expect(forks).toHaveLength(SAMPLE_SETTLEMENTS.length);
 
     // The ONE interactive artifact control (owner addition W-L2/5).
@@ -390,7 +390,10 @@ describe('HomeLanding — scrollable landing', () => {
     const reserve = screen.getByTestId('commons-awaiting-gallery');
     expect(reserve.getAttribute('data-reserve')).toBe('curated');
     expect(screen.queryByRole('heading', { name: 'Founding Worlds' })).toBeNull();
-    expect(screen.queryByText(SAMPLE_SETTLEMENTS[0].name)).toBeNull();
+    // The curated strip's own buttons are the one text unique to the strip; a sample's
+    // NAME is not (the owner's 2026-10-30 reorder put Cnocby first, and the fixture town
+    // is named elsewhere on the landing), so the absence is read on the buttons.
+    expect(screen.queryAllByRole('button', { name: /^Visit / })).toHaveLength(0);
 
     // Settled (empty) — now, and only now, the curated strip is reached for.
     release();

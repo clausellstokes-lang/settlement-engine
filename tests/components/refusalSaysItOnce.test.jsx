@@ -143,7 +143,7 @@ describe('F12 — one click raises exactly one notice', () => {
   test('forking the city card says it ONCE, on the strip that was clicked', async () => {
     useStore.setState((s) => { s.generateSettlement = refusesWith(REFUSAL_REASONS.TIER, CITY_VARS); });
     await renderCreateLandingPair();
-    fireEvent.click((await screen.findAllByRole('button', { name: /fork this sample/i }))[1]);
+    fireEvent.click(await screen.findByRole('button', { name: /^Visit Black Crag/i })); // the CITY card, by name (the owner's 2026-10-30 reorder moved it to the third slot)
 
     const alerts = await screen.findAllByRole('alert');
     expect(alerts, 'one refusal was announced by more than one surface').toHaveLength(1);
@@ -179,7 +179,7 @@ describe('F12 — one click raises exactly one notice', () => {
       });
     });
     await renderCreateLandingPair();
-    fireEvent.click((await screen.findAllByRole('button', { name: /fork this sample/i }))[1]);
+    fireEvent.click(await screen.findByRole('button', { name: /^Visit Black Crag/i })); // the CITY card, by name (the owner's 2026-10-30 reorder moved it to the third slot)
 
     expect(
       (await screen.findAllByRole('alert')).length,

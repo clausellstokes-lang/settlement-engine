@@ -223,7 +223,7 @@ describe('The Library fork — a null is not always a price, and a fork is not a
   async function renderPanel() {
     const SettlementsPanel = (await import('../../src/components/SettlementsPanel.jsx')).default;
     render(<SettlementsPanel onNavigate={() => {}} />);
-    return (await screen.findAllByRole('button', { name: /fork this sample/i }))[0];
+    return (await screen.findAllByRole('button', { name: /^Visit /i }))[0];
   }
 
   test('a CAP refusal is said, and no checkout is opened', async () => {
