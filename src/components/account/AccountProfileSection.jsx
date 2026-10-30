@@ -23,19 +23,23 @@ import FounderChairBio from './FounderChairBio.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import PublicAvatar from '../primitives/PublicAvatar.jsx';
 import AccountIdentitySection from './AccountIdentitySection.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, SLATE_DEEP, SLATE_BG, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
+// A role the badge does not know renders NO badge. It used to fall back to the
+// Admin badge, so the support desk (T9) read "Admin" on its own profile.
+const ROLE_BADGES = {
+  developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
+  admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
+  support:   { color: SLATE_DEEP, bg: SLATE_BG, label: 'Support' },
+};
+
 function RoleBadge({ role }) {
   const mobile = useIsMobile();
-  if (role === 'user') return null;
-  const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
-  };
-  const c = cfg[role] || cfg.admin;
+  const c = Object.prototype.hasOwnProperty.call(ROLE_BADGES, role) ? ROLE_BADGES[role] : null;
+  if (!c) return null;
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,

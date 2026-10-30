@@ -114,3 +114,33 @@ describe('the guard no longer answers by navigating', () => {
     );
   });
 });
+
+// ── T9 (2026-10-30): THE SUPPORT DOOR. The server (admin-actions) admits the
+//    `support` role for the ticket queue and redacted user reads; the client
+//    collapsed that role to 'user' and refused it at /admin. The door now admits
+//    support, and the refusal stays exactly as it was for every other non-staff
+//    role. Support is NOT staff: it unlocks no paid surface and no authoring. ──
+describe('the /admin door admits the support role, and only at /admin', () => {
+  const viewsSrc = readFileSync(join(ROOT, 'src/AppViews.jsx'), 'utf8');
+
+  test('the admin route branch opens for staff OR support, and refuses everyone else', () => {
+    expectAbsentWithAnchor(
+      viewsSrc,
+      "isElevated ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />",
+      "(isElevated || isSupport) ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />",
+      "the admin route branch",
+    );
+  });
+
+  test('support is its own identity: not staff, no paid unlock', async () => {
+    const ent = await import('../../src/lib/staffEntitlements.js');
+    expect(ent.isSupportRole('support')).toBe(true);
+    for (const other of ['user', 'developer', 'admin', 'Support', 'support ', '', null, undefined]) {
+      expect(ent.isSupportRole(other), String(other)).toBe(false);
+    }
+    expect(ent.isStaffRole('support')).toBe(false);
+    expect(ent.staffUnlocksPaidFeatures('support')).toBe(false);
+    expect(ent.resolveStaffEntitlements({ role: 'support', tier: 'free' }))
+      .toEqual({ isStaff: false, unlocksPaid: false, effectiveTier: 'free' });
+  });
+});

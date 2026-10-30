@@ -9,7 +9,10 @@
  *
  * Render selection remains prop-driven, so this component re-renders only when
  * the shell passes new values. The campaignLazy module loaders consult the store
- * only while arming a campaign-capable route; AppViews itself does not subscribe.
+ * only while arming a campaign-capable route. AppViews subscribes to ONE store
+ * fact itself: whether the account is the support desk, which opens /admin (T9).
+ * It is read here rather than passed from App.jsx, which stands at its line
+ * ceiling.
  *
  * NOTE on HomeLanding: the redesign template imported it statically (the Welcome
  * landing IS first paint for anon). This tree's first-paint byte budget is tighter
@@ -23,6 +26,7 @@ import { IconsContext } from './components/primitives/IconsContext.js';
 import { MUTED, sans } from './components/theme.js';
 import HouseDevice from './components/brand/HouseDevice.jsx';
 import { useStore } from './store/index.js';
+import { isSupportRole } from './lib/staffEntitlements.js';
 import useMissedPath from './hooks/useMissedPath.js';
 import {
   createRetryableCampaignLazy,
@@ -126,6 +130,7 @@ export function Loading() {
  */
 export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, isElevated, authLoading, params }) {
   const { missedPath, dismiss } = useMissedPath();
+  const isSupport = useStore(s => isSupportRole(s.auth?.role));
   return (
     <>
       {/* ⛔ THE FRONT DOOR SAYS WHEN IT HAD NO SUCH PAGE (REVIEW-P F11, ODQ §934.24(c)).
@@ -196,8 +201,10 @@ export function AppViews({ view, isMobile, setView, setAuthModalOpen, authTier, 
           the class lib/refusalReasons.js exists against. The guard no longer moves
           anyone at an 'elevated' route; the refusal is rendered here instead, where
           the reader is. `isElevated` is IDENTITY (staff), not the §934.28 paid unlock,
-          so revoking that unlock can never close the admin panel. */}
-      {view === 'admin'       && (authLoading ? <Loading /> : isElevated ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />)}
+          so revoking that unlock can never close the admin panel. The support desk
+          (T9) is admitted too: admin-actions grants it the ticket queue and the
+          redacted user reads, and AdminPanel renders only those for it. */}
+      {view === 'admin'       && (authLoading ? <Loading /> : (isElevated || isSupport) ? <AdminPanel onBack={() => setView('account')} /> : <StaffOnlyPage />)}
       {view === 'pricing'     && <PricingPage onNavigate={setView} />}
       {view === 'gallery'     && <GalleryPage onNavigate={setView} routeSlug={params.slug} routeHub={params.hub} />}
       {view === 'founders'    && <FoundersHallPage onNavigate={setView} />}

@@ -93,4 +93,16 @@ describe('auth profile source of truth', () => {
     expect(session.isFounder).toBe(false);
     expect(session.displayName).toBe('Metadata Name');
   });
+
+  // T9 (2026-10-30): the server's `support` role (migration 050, admin-actions)
+  // used to collapse to 'user' here, so a support account met the staff-only
+  // refusal at /admin. It now reaches the client as itself; any other unknown
+  // value still collapses to 'user'.
+  it('keeps a support profile role as support, and still collapses unknown roles to user', async () => {
+    await loadAuthWithProfile({ error: null, data: { tier: 'free', role: 'support', display_name: 'Desk' } });
+    expect((await auth.getSession()).role).toBe('support');
+
+    await loadAuthWithProfile({ error: null, data: { tier: 'free', role: 'owner', display_name: 'Nobody' } });
+    expect((await auth.getSession()).role).toBe('user');
+  });
 });

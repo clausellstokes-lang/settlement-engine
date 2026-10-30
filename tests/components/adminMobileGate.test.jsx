@@ -36,7 +36,7 @@ vi.mock('../../src/store/index.js', () => ({
 
 // ── Stub the heavy operator panels as bare markers so the test isolates the
 //    mobile gate wiring (and so the deferred panels are individually probeable). ─
-vi.mock('../../src/components/admin/AdminUsersPanel.jsx', () => ({ default: () => <div data-testid="admin-users-panel" /> }));
+vi.mock('../../src/components/admin/AdminUsersPanel.jsx', () => ({ default: ({ supportDesk }) => <div data-testid="admin-users-panel" data-support-desk={supportDesk ? 'true' : 'false'} /> }));
 vi.mock('../../src/components/gallery/GalleryModerationPanel.jsx', () => ({ default: () => <div data-testid="gallery-moderation-panel" /> }));
 vi.mock('../../src/components/admin/SupportQueuePanel.jsx', () => ({ default: () => <div data-testid="support-queue-panel" /> }));
 vi.mock('../../src/components/admin/AdminTrendsPanel.jsx', () => ({ default: () => <div data-testid="admin-trends-panel" /> }));
@@ -280,5 +280,76 @@ describe('AdminClientErrorsPanel — banner, rows, refusal (T7 survey)', () => {
     let utils;
     await act(async () => { utils = render(<Panel />); });
     expect(utils.getByText(/no client errors in the last 30 days/i)).toBeTruthy();
+  });
+});
+
+// ── T9 (2026-10-30): THE SUPPORT DOOR. admin-actions admits `support` for every
+//    case without an isHighest gate; the page used to refuse that role outright.
+//    A support account now sees exactly the panels the server grants it (the
+//    chair: "mirror the server exactly"), a developer sees everything, a plain
+//    user is refused. ──
+describe('AdminPanel — the support door (T9)', () => {
+  const ELEVATED_STORE = { auth: STORE.auth, isElevated: STORE.isElevated };
+  afterEach(() => {
+    STORE.auth = ELEVATED_STORE.auth;
+    STORE.isElevated = ELEVATED_STORE.isElevated;
+  });
+
+  async function renderAs(role, { mobile = false } = {}) {
+    STORE.auth = { user: { id: `${role}-1` }, role, tier: 'free' };
+    STORE.isElevated = () => role === 'developer' || role === 'admin';
+    installMatchMedia(mobile);
+    invoke.mockImplementation(routeAdmin());
+    const AdminPanel = await loadAdminPanel();
+    let utils;
+    await act(async () => { utils = render(<AdminPanel />); });
+    return utils;
+  }
+
+  test('a support account sees exactly what the server grants it: figures, the support console, the queue, the dashboards', async () => {
+    const utils = await renderAs('support');
+    expect(utils.getByTestId('support-queue-panel')).toBeTruthy();
+    expect(utils.getByTestId('admin-users-panel').getAttribute('data-support-desk')).toBe('true');
+    expect(utils.getByTestId('admin-trends-panel')).toBeTruthy();
+    expect(utils.getByTestId('admin-analytics-panel')).toBeTruthy();
+    // The header figures (get_stats is granted to support).
+    expect(utils.getByText('Total Users')).toBeTruthy();
+    // Gallery reports ride privileged RPCs; Sim Tuning is no server grant.
+    for (const id of ['gallery-moderation-panel', 'admin-sim-tuning-panel']) {
+      expect(utils.queryByTestId(id), id).toBeNull();
+    }
+    const headings = utils.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    expect(headings).toEqual(['User Management', 'Support Queue', 'Usage Trends', 'Analytics & errors']);
+    // Only granted reads ran: the figures and the (unstubbed) client-errors panel.
+    expect([...new Set(actionsCalled())].sort()).toEqual(['get_client_error_dashboard', 'get_stats']);
+    expect(utils.queryByText(/access denied/i)).toBeNull();
+  });
+
+  test('a developer sees every panel, with the full (not support-desk) user console', async () => {
+    const utils = await renderAs('developer');
+    expect(utils.getByTestId('admin-users-panel').getAttribute('data-support-desk')).toBe('false');
+    for (const id of ['support-queue-panel', 'gallery-moderation-panel', 'admin-trends-panel', 'admin-analytics-panel', 'admin-sim-tuning-panel']) {
+      expect(utils.getByTestId(id), id).toBeTruthy();
+    }
+    const headings = utils.getAllByRole('heading', { level: 2 }).map((h) => h.textContent);
+    for (const h of ['Broadcast Messages', 'Gallery Reports', 'Operational Obligations', 'AI Pricing']) {
+      expect(headings, h).toContain(h);
+    }
+    expect(utils.getByText('Total Users')).toBeTruthy();
+  });
+
+  test('a plain user is refused and no panel mounts', async () => {
+    const utils = await renderAs('user');
+    expect(utils.getByText(/access denied/i)).toBeTruthy();
+    expect(utils.queryByTestId('support-queue-panel')).toBeNull();
+    expect(utils.queryByTestId('admin-users-panel')).toBeNull();
+  });
+
+  test('support on a phone meets the desktop gate with its own words above the figures', async () => {
+    const utils = await renderAs('support', { mobile: true });
+    expect(utils.getByText(/best on desktop/i)).toBeTruthy();
+    expect(utils.getByText(/support queue, account lookup, and the usage dashboards/i)).toBeTruthy();
+    expect(utils.getByText('Total Users')).toBeTruthy();
+    expect([...new Set(actionsCalled())]).toEqual(['get_stats']);
   });
 });

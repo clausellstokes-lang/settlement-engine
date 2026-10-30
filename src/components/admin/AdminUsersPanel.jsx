@@ -3,9 +3,10 @@
  *
  * Built on the A3 least-privilege foundation: every read is REDACTED by default
  * and every write goes through the audited, role-gated admin-actions edge fn.
- *   • Search users (by email / display-name substring) via the audited
- *     `list_users` action — the response carries only MASKED emails (no raw
- *     PII). list_users never matches the id column, so the box does not claim it.
+ *   • Search users (by email / display-name substring, or an exact user id)
+ *     via the audited `list_users` action — the response carries only MASKED
+ *     emails (no raw PII). The id match is server-side (T9 S2); the box claims
+ *     only what list_users matches.
  *   • Open a user → REDACTED summary from `admin_user_summary` (masked email,
  *     account age, tier, credits, settlement/gallery/campaign/ticket/warning
  *     counts, ban/disable status).
@@ -21,6 +22,13 @@
  *
  * The panel itself is rendered only for elevated users (the parent gates on
  * isElevated). The real authority is server-side; this gate is UX, not security.
+ *
+ * `supportDesk` (T9) is the console the support desk gets, mirroring what
+ * admin-actions grants `support`: search, the redacted summary, Issue warning,
+ * Add note, Review billing and the redacted Export bundle. Every highest-role
+ * control (full PII, notices, credits, disable, ban, the full debug copy, the
+ * by-id moderation tools) is left out, so a support agent is never offered a
+ * button the server refuses.
  */
 import { useCallback, useState } from 'react';
 import { supabase } from '../../lib/supabase.js';
@@ -66,7 +74,7 @@ function downloadBundle(bundle, userId, full) {
   return filename;
 }
 
-export default function AdminUsersPanel() {
+export default function AdminUsersPanel({ supportDesk = false } = {}) {
   const mobile = useIsMobile();
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -276,8 +284,8 @@ export default function AdminUsersPanel() {
         background: swatch.white, border: `1px solid ${BORDER}`,
       }}>
         <input
-          type="text" aria-label="Search users by email or display name"
-          placeholder="Search by email or display name…"
+          type="text" aria-label="Search users by email, name or id"
+          placeholder="Search by email, name or id…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && search()}
@@ -353,9 +361,11 @@ export default function AdminUsersPanel() {
                 )}
               </div>
             </div>
-            <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
-              Reveal full details
-            </Button>
+            {!supportDesk && (
+              <Button variant="ghost" size="sm" onClick={revealFull} disabled={busy}>
+                Reveal full details
+              </Button>
+            )}
           </div>
 
           {/* Redacted counters */}
@@ -387,7 +397,32 @@ export default function AdminUsersPanel() {
             </div>
           )}
 
-          {/* Action set */}
+          {/* Action set. Support desk: the four actions the server grants support. */}
+          {supportDesk ? (
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
+            <Button variant="warning" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Issue warning', label: 'Warning reason', confirmLabel: 'Issue' },
+                (reason) => runAction(
+                  { action: 'issue_warning', userId: id, severity: 'minor', reason },
+                  'Warning issued.',
+                ),
+              )}>Issue warning</Button>
+            <Button variant="ghost" size="sm" disabled={busy}
+              onClick={() => ask(
+                { title: 'Add internal note', body: 'The user can never read this note.', label: 'Note', confirmLabel: 'Add' },
+                (note) => runAction(
+                  { action: 'add_internal_note', userId: id, note },
+                  'Internal note added.',
+                ),
+              )}>Add note</Button>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={reviewBilling}>
+              Review billing</Button>
+            <Button variant="ghost" size="sm" disabled={busy} onClick={exportBundle}>
+              Export bundle</Button>
+          </div>
+          ) : (
+          <>
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: SP.sm }}>
             <Button variant="ghost" size="sm" disabled={busy}
               onClick={() => setDirectMessageOpen(true)}>Send notice</Button>
@@ -563,6 +598,8 @@ export default function AdminUsersPanel() {
                 ),
               )}>Restore comment</Button>
           </div>
+          </>
+          )}
         </div>
       )}
 

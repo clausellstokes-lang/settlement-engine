@@ -363,16 +363,25 @@ describe('AdminUsersPanel — refusals and claims (T7 survey)', () => {
     invoke.mockImplementation(routeInvoke());
   });
 
-  test('the search box claims what list_users really matches (email and display name, not id)', async () => {
+  test('the search box claims what list_users really matches (email, name or id; T9 S2 taught the server the id)', async () => {
     const Panel = await importPanel();
     render(<Panel />);
     const box = screen.getByRole('textbox', { name: /search users/i });
-    expect(box.getAttribute('aria-label')).toMatch(/email or display name/i);
-    expect(box.getAttribute('placeholder')).toMatch(/email or display name/i);
-    // anchored: both attributes were just shown to carry the search claim
-    expect(box.getAttribute('aria-label')).not.toMatch(/\bid\b/i);
-    // anchored: both attributes were just shown to carry the search claim
-    expect(box.getAttribute('placeholder')).not.toMatch(/\bid\b/i);
+    // T7 cut "id" from the claim because list_users never matched the id column.
+    // T9 (S2) made list_users match an exact user id, so the claim comes back.
+    expect(box.getAttribute('aria-label')).toBe('Search users by email, name or id');
+    expect(box.getAttribute('placeholder')).toMatch(/^Search by email, name or id/);
+  });
+
+  test('an id typed into the search box rides list_users unchanged', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    const id = '0f8fad5b-d9cb-469f-a165-70867728950e';
+    fireEvent.change(screen.getByRole('textbox', { name: /search users/i }), { target: { value: id } });
+    fireEvent.click(screen.getByRole('button', { name: /search/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', {
+      body: { action: 'list_users', metadata: { search: id } },
+    }));
   });
 
   test('a refused search is shown and leaves no stale rows', async () => {
@@ -451,6 +460,47 @@ describe('AdminUsersPanel — refusals and claims (T7 survey)', () => {
       await screen.findByText(/account age/i);
       await waitFor(() => expect(screen.getByRole('button', { name: /review billing/i }).hasAttribute('disabled')).toBe(false));
     }
+  });
+});
+
+// ── T9 (2026-10-30): the console a support account gets, mirroring the server:
+//    admin-actions grants support list_users, get_user_summary, issue_warning,
+//    add_internal_note, review_billing and the redacted diagnostic_bundle;
+//    everything else in this panel is highest-role, so it does not render. ──
+describe('AdminUsersPanel — the support-desk console (T9)', () => {
+  beforeEach(() => {
+    invoke.mockReset();
+    invoke.mockImplementation(routeInvoke());
+  });
+
+  test('search, open, warning, note, Review billing and Export bundle work; no highest-role control renders', async () => {
+    const Panel = await importPanel();
+    render(<Panel supportDesk />);
+    await openAlice();
+    expect(screen.getByRole('button', { name: /review billing/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /export bundle/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /issue warning/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /add note/i })).toBeTruthy();
+    for (const name of [
+      /reveal full details/i, /^send notice$/i, /grant \/ refund/i,
+      /^disable$/i, /^ban$/i, /full debug copy/i, /soft-delete settlement/i, /remove gallery item/i,
+      /revoke share link/i, /ban settlement/i, /soft-delete map/i, /set map private/i, /^ban map$/i,
+      /remove comment/i, /restore comment/i,
+    ]) {
+      expect(screen.queryByRole('button', { name }), String(name)).toBeNull();
+    }
+    fireEvent.click(screen.getByRole('button', { name: /export bundle/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'diagnostic_bundle', userId: 'user-123' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /issue warning/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /issue warning/i }));
+    await fillDialog(/warning reason/i, 'be civil', /^issue$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'issue_warning', userId: 'user-123', severity: 'minor', reason: 'be civil' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /add note/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /add note/i }));
+    await fillDialog(/note/i, 'called in', /^add$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'add_internal_note', userId: 'user-123', note: 'called in' } }));
+    const sent = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
+    expect(sent.sort()).toEqual(['add_internal_note', 'diagnostic_bundle', 'get_user_summary', 'issue_warning', 'list_users']);
   });
 });
 

@@ -1168,3 +1168,161 @@ scopedEnv.test('broadcast list and cancellation remain highest-role RPC routes w
   assertEquals(res.status, 403);
   assertEquals(support.calls.length, 0);
 });
+
+// ── T9 (2026-10-30): get_stats fails loudly and counts by count query (S1);
+// list_users matches an exact user id (S2). Each test is named for the defect
+// it pins. The stubs below model only the query chains those two arms build.
+
+/** Admin stub for get_stats: head-only count queries, the paged credits read,
+ *  and an optional read error on every profiles read but the caller's. A read
+ *  of any other column set is recorded as a FULL-ROW read (the defect shape). */
+function makeStatsAdminClient(options: {
+  counts?: { all: number; premium: number; staff: number };
+  credits?: number[];
+  maxRows?: number;
+  readError?: boolean;
+} = {}) {
+  const counts = options.counts ?? { all: 0, premium: 0, staff: 0 };
+  const credits = options.credits ?? [];
+  const maxRows = options.maxRows ?? 1000;
+  const selects: Array<{ columns: string; options: Record<string, unknown> | null }> = [];
+  const fullReads: string[] = [];
+  const failure = { data: null, count: null, error: { message: 'profiles read failed' } };
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_table: string) => ({
+      select: (columns: string, opts?: Record<string, unknown>) => {
+        selects.push({ columns, options: opts ?? null });
+        if (columns === 'role, email') {
+          return {
+            eq: () => ({
+              single: () => Promise.resolve({ data: { role: 'admin', email: 'admin@x.com' }, error: null }),
+            }),
+          };
+        }
+        if (opts?.head === true) {
+          const answer = (which: 'all' | 'premium' | 'staff') => Promise.resolve(
+            options.readError ? failure : { data: null, count: counts[which], error: null },
+          );
+          return Object.assign(answer('all'), {
+            eq: () => answer('premium'),
+            in: () => answer('staff'),
+          });
+        }
+        if (columns === 'credits') {
+          return {
+            order: () => ({
+              range: (from: number, to: number) => {
+                if (options.readError) return Promise.resolve(failure);
+                const end = Math.min(to + 1, from + maxRows);
+                return Promise.resolve({ data: credits.slice(from, end).map((c) => ({ credits: c })), error: null });
+              },
+            }),
+          };
+        }
+        fullReads.push(columns);
+        return Promise.resolve(options.readError ? failure : { data: [], error: null });
+      },
+    }),
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    rpc: () => Promise.resolve({ data: null, error: null }),
+  };
+  return { selects, fullReads, adminClient: () => client };
+}
+
+// UNRUN HERE: no Deno in the chair's environment; run by the owner with deno task test:edge
+scopedEnv.test('get_stats FAILS LOUDLY on a profiles read error: a 500 refusal, never 200 with confident zeros', async () => {
+  const stub = makeStatsAdminClient({ readError: true });
+  const res = await handleAdminActions(
+    req({ action: 'get_stats' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 500);
+  const body = await res.json();
+  assertEquals(body.error, 'Admin action failed');
+  assertEquals('total' in body, false);
+  assertEquals('totalCredits' in body, false);
+});
+
+// UNRUN HERE: no Deno in the chair's environment; run by the owner with deno task test:edge
+scopedEnv.test('get_stats counts users with head-only count queries, never by fetching every profile row', async () => {
+  const stub = makeStatsAdminClient({ counts: { all: 3, premium: 1, staff: 1 }, credits: [10, 20, 30] });
+  const res = await handleAdminActions(
+    req({ action: 'get_stats' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  // The response shape is unchanged; the figures come from the counts.
+  assertEquals(await res.json(), { total: 3, premiumCount: 1, totalCredits: 60, developerCount: 1 });
+  // No full-row read of profiles (the old `select("tier, role, credits")`).
+  assertEquals(stub.fullReads, []);
+  const countReads = stub.selects.filter((s) => s.options?.head === true);
+  assertEquals(countReads.length, 3);
+  for (const read of countReads) assertEquals(read.options, { count: 'exact', head: true });
+});
+
+// UNRUN HERE: no Deno in the chair's environment; run by the owner with deno task test:edge
+scopedEnv.test('get_stats sums the credits pool past a max_rows cap: a short page does not end the walk early', async () => {
+  // The server caps every page at 2 rows although 1000 were asked for; a walk
+  // that stopped on the first short page would report 30, not 150.
+  const stub = makeStatsAdminClient({ counts: { all: 5, premium: 0, staff: 0 }, credits: [10, 20, 30, 40, 50], maxRows: 2 });
+  const res = await handleAdminActions(
+    req({ action: 'get_stats' }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals((await res.json()).totalCredits, 150);
+});
+
+/** Admin stub for list_users: records the filter the search builds on the
+ *  profiles query (`.or` substring search vs `.eq` id match). */
+function makeListUsersAdminClient(callerRole = 'support') {
+  const filters: Array<{ op: string; args: unknown[] }> = [];
+  const rows = [{ id: '0f8fad5b-d9cb-469f-a165-70867728950e', role: 'user', tier: 'free', display_name: 'Alice', email: 'alice@example.com' }];
+  // deno-lint-ignore no-explicit-any
+  const listQuery: any = {
+    or: (...args: unknown[]) => { filters.push({ op: 'or', args }); return listQuery; },
+    eq: (...args: unknown[]) => { filters.push({ op: 'eq', args }); return listQuery; },
+    // deno-lint-ignore no-explicit-any
+    then: (resolve: any, reject: any) => Promise.resolve({ data: rows, error: null }).then(resolve, reject),
+  };
+  // deno-lint-ignore no-explicit-any
+  const client: any = {
+    from: (_table: string) => ({
+      select: (columns: string) => (columns === 'role, email'
+        ? { eq: () => ({ single: () => Promise.resolve({ data: { role: callerRole, email: 'caller@x.com' }, error: null }) }) }
+        : { order: () => ({ limit: () => listQuery }) }),
+    }),
+    auth: { admin: { updateUserById: () => Promise.resolve({ error: null }) } },
+    rpc: () => Promise.resolve({ data: null, error: null }),
+  };
+  return { filters, adminClient: () => client };
+}
+
+// UNRUN HERE: no Deno in the chair's environment; run by the owner with deno task test:edge
+scopedEnv.test('list_users matches an exact user id on the id column (it never matched the id before S2)', async () => {
+  const id = '0f8fad5b-d9cb-469f-a165-70867728950e';
+  const stub = makeListUsersAdminClient('support');
+  const res = await handleAdminActions(
+    req({ action: 'list_users', metadata: { search: id } }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'support1', email: 'support@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.filters, [{ op: 'eq', args: ['id', id] }]);
+  const body = await res.json();
+  assertEquals(body.users[0].id, id);
+  // Still redacted: the raw email never leaves the server.
+  assertEquals(JSON.stringify(body).includes('alice@example.com'), false);
+  assertEquals(body.users[0].email_masked, 'a***@example.com');
+});
+
+// UNRUN HERE: no Deno in the chair's environment; run by the owner with deno task test:edge
+scopedEnv.test('list_users keeps the email / display-name substring search for a value that is not an id', async () => {
+  const stub = makeListUsersAdminClient('admin');
+  const res = await handleAdminActions(
+    req({ action: 'list_users', metadata: { search: 'alice' } }, { Authorization: 'Bearer jwt' }),
+    { userClient: makeUserClient({ id: 'admin1', email: 'admin@x.com' }), adminClient: stub.adminClient },
+  );
+  assertEquals(res.status, 200);
+  assertEquals(stub.filters, [{ op: 'or', args: ['email.ilike.%alice%,display_name.ilike.%alice%'] }]);
+});
