@@ -122,14 +122,23 @@ async function aimedForCapped(seed) {
 
 describe('THE LANE — the gate aims the sentinel it would otherwise discard', () => {
   test('thirty anonymous random forges are all a Town, and none is refused', async () => {
+    // EVERY seed runs, and the misses are asserted once as a whole list: an inline expect
+    // would stop at the first bad seed and report a floor (seedLoopTotality). The lane is
+    // async, so the synchronous collectSeedFailures helper cannot carry it.
+    const misses = [];
+    let attempted = 0;
     for (const seed of SEEDS) {
       // A fresh day per forge: the anonymous daily cap is not under test here.
       window.localStorage.clear();
       const store = laneStore('anon', 'random');
       await runLane(store, seed);
-      expect(sentConfig()?.settType, `seed ${seed} reached the engine as something other than a Town`).toBe('town');
-      expect(store.state.lastRefusal).toBeNull();
+      attempted += 1;
+      const sent = sentConfig()?.settType;
+      if (sent !== 'town') misses.push(`${seed}: reached the engine as ${String(sent)}, not a Town`);
+      if (store.state.lastRefusal !== null) misses.push(`${seed}: refused (${JSON.stringify(store.state.lastRefusal)})`);
     }
+    expect(attempted, 'a seed never ran').toBe(SEEDS.length);
+    expect(misses, `${misses.length} miss(es) across ${SEEDS.length} anonymous random forges`).toEqual([]);
   });
 
   test('thirty capped-range forges are all aimed inside the range, and none at a thorpe', async () => {
