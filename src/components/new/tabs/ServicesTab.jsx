@@ -239,12 +239,11 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
             Category Status grid and its "not available" cards are cut, RS-15/RS-17). DS-SUP-3
             lens A (services.catalogStanding) sits directly above it, so the sentence and the
             datum it bands are read together (R3 coupling).
-            ⚠ RS-15 also asks lens A to speak ONLY when the catalog is incomplete. That gate is
-            NOT drawn here: print carries the same position as one woven paragraph (lens A +
-            lens B, printProse.js), so a screen-only gate would split screen from print. It
-            belongs at the desk (economyStateProse.js :: catalogStanding), outside this file;
-            reported to the chair. ⛔ Lens B is not here: it names one house and renders under
-            that house's own row below (owner order 2026-09-19). */}
+            Lens A speaks ONLY when the catalog is incomplete (RS-15). That gate is the desk's
+            (economyStateProse.js :: catalogStanding), not this file's, because print weaves the
+            same position (lens A + lens B, printProse.js) and must fall silent with the screen.
+            ⛔ Lens B is not here: it names one house and renders under that house's own row
+            below (owner order 2026-09-19). */}
         <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
         {missing.length > 0 && (
           <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10']}}>

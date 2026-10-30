@@ -36,6 +36,7 @@ import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx'
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { EXPECTED_SERVICES_BY_TIER } from '../../src/domain/display/servicesDisplay.js';
 import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
 import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -275,7 +276,8 @@ function screenProse(s, faithUnlocked = false) {
   // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one
   // paragraph in the desk's own order — the `relationships.network` precedent above, and the
   // reason this stays `screenParagraph`: the parity claim is about WHICH SENTENCES the two
-  // surfaces carry, and the desk hands both to both.
+  // surfaces carry, and the desk hands both to both. Since RS-15 (2026-10-30) the desk hands
+  // the catalog lens to NEITHER surface on a complete catalog (economyStateProse.js).
   set('services.catalogStanding', screenParagraph(s, 'services.catalogStanding',
     [eco.catalogStanding, eco.impairedService]));
   set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving', [eco.prosperityRung]));
@@ -448,6 +450,24 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(drift, `the PDF and the dossier disagree about ${drift.length} position(s)`).toEqual([]);
     // NON-VACUITY: the comparison ran over real prose, not an empty map.
     expect(Object.keys(printed).length).toBeGreaterThan(20);
+
+    // RS-15 (chair ruling 2026-10-30): the catalog lens of services.catalogStanding speaks
+    // ONLY on an incomplete catalog, and print follows the screen because the gate is the
+    // desk's. Planted both ways on this town with its impairments removed (so lens B, which
+    // shares the position, is silent and the position IS the catalog lens).
+    const quiet = { ...full, economicState: { ...(full.economicState || {}), tradeDependencies: [] } };
+    const expected = EXPECTED_SERVICES_BY_TIER[full.tier] || [];
+    const row = [{ name: 'Planted', desc: '', institution: '' }];
+    const complete = { ...quiet, availableServices: { ...(full.availableServices || {}),
+      ...Object.fromEntries(expected.map((k) => [k, (full.availableServices || {})[k]?.length ? full.availableServices[k] : row])) } };
+    const gappy = { ...complete, availableServices: { ...complete.availableServices, [expected[0]]: [] } };
+    expect(expected.length, 'the fixture tier expects no category, so the gate arm is vacuous').toBeGreaterThan(0);
+    for (const [label, s, speaks] of [['complete', complete, false], ['incomplete', gappy, true]]) {
+      const p = flat(buildPrintProse(s, {}))['services.catalogStanding'];
+      const sc = screenProse(s)['services.catalogStanding'];
+      expect(Boolean(p), `${label} catalog: the print ${speaks ? 'lost' : 'still carries'} the catalog lens`).toBe(speaks);
+      expect(p ?? '', `${label} catalog: print and screen disagree`).toBe(sc ?? '');
+    }
   });
 
   test('PARITY: the same holds on a sparse settlement, where most desks are silent', () => {

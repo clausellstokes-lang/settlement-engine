@@ -229,5 +229,22 @@ describe('ServicesTab — the impaired house is named where its row is', () => {
     // …and the catalog lens still speaks, so the silence above is about lens B
     // alone rather than about a desk that stopped being called.
     expect(screen.getByText(drawnPair(s).catalog)).toBeTruthy();
+    cleanup();
+    // RS-15 (chair ruling 2026-10-30): on a COMPLETE catalog lens A is silent too, and so is
+    // the Not-available line. Every member of the complete-catalog pool is absent from the
+    // page, anchored on the rows that do render.
+    const full = { ...SERVICES, information: [{ name: 'Town crier' }] };
+    const done = { ...s, availableServices: full };
+    const { container } = render(<ServicesTab services={full} settlement={done} narrativeNote={null} />);
+    expect(container.textContent).toContain('Town crier');
+    const completeMembers = poolMemberTexts({
+      leaf: 'economy', blockId: 'DS-SUP-3', seed: SEED, audience: 'dm',
+      poolKey: serviceCatalogPoolKey([], 'town'), slots: { settlement: TOWN },
+    });
+    expect(completeMembers.length).toBeGreaterThan(0);
+    for (const member of completeMembers) {
+      expect(container.textContent, 'the complete-catalog lens still speaks').not.toContain(member.slice(12, 60));
+    }
+    expect(container.textContent).not.toContain('Not available');
   });
 });
