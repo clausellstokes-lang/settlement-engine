@@ -90,5 +90,17 @@ describe('ServicesTogglePanel toggle-key contract', () => {
     for (const v of Object.values(toggles)) {
       expect(v).toMatchObject({ allow: true, force: true, forceExclude: false });
     }
+
+    // RS-20 (chair ruling 2026-10-30): the forced count is said ONCE per row (the duplicate
+    // badge beside the name is cut), and each service shows the category it files under.
+    const rowHeader = screen.getByRole('button', { name: /services, expand$/ });
+    const forcedBadges = [...rowHeader.querySelectorAll('span')]
+      .filter((el) => /^\d+ forced$/.test(el.textContent || ''));
+    expect(forcedBadges, 'the row header says its forced count more than once').toHaveLength(1);
+    fireEvent.click(rowHeader);
+    // 'Price discovery' is a Market service registered as information.
+    const card = screen.getByText('Price discovery').closest('.svc-card-row');
+    expect(card, 'the Market row did not expand to its services').toBeTruthy();
+    expect(card.textContent).toContain('Information');
   });
 });
