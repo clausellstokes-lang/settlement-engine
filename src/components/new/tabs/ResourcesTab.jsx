@@ -15,6 +15,18 @@ import { resourceDisplayName } from '../../../domain/display/resourceDisplayName
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
 
+/**
+ * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
+ * Resource Exploitation section, cut in the UX consolidation (T2-7) because this page is the
+ * one home; the fact comes here with it (writer reach). Plain words, one line.
+ * @param {{ deps?: unknown, mobile: boolean }} props
+ */
+function DrawsOn({ deps, mobile }) {
+  const list = Array.isArray(deps) ? deps.filter((d) => typeof d === 'string' && d) : [];
+  if (!list.length) return null;
+  return <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:4}}>Draws on: {list.join(', ')}</div>;
+}
+
 /** DS-ECO-11's one position on this page; named once so the header and the paragraph read the same row. */
 const GROUND_MOUNT = 'resources.groundAndWorkings';
 
@@ -123,6 +135,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
               {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
                 Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
               </div>}
+              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
             </div>
           ))}
 
@@ -140,6 +153,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                   <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
                 ))}
               </div>
+              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
             </div>
           ))}
 
@@ -151,6 +165,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
                 <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
               </div>
+              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
             </div>
           ))}
         </div>
