@@ -337,11 +337,18 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'glance',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-8; rubric R2). DS-GEN-5's situation
+  // line keyed on the same route-to-scene table as the arrival hook beside it (700 of 1000
+  // unstressed towns heard the road three times) and contradicted DS-GEN-6 in 164 of 1000;
+  // DS-GEN-6's route line restated `settlementReason`, which names the route on every sampled
+  // town, and its tier overlay restated the strip's tier and population (991 of 1000). The
+  // "Settlement Origin" section (settlementReason, DM-editable) is the one home; neither
+  // block has a speaking position until a later registry act gives it one.
   Object.freeze({
-    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'sentence',
+    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'sentence', dimensions: ['deficit'],
+    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'glance', dimensions: ['deficit'],
   }),
   // ⛔ GLANCE BY OWNER ORDER 2026-09-17. The Systems Health section printed up to ten DS-GEN-3
   // sentences stacked under its bars, one per lens. The owner: "either simply pick just one or

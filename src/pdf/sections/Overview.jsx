@@ -147,7 +147,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           caption, with the same declared-live Food Security carve-out
           (FROZEN_VS_LIVE grammar). One string, vetoable. */}
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
+        As judged at the first survey · Food Security is re-judged as the campaign advances
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>

@@ -173,14 +173,46 @@ function composeIdentity(settlement) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
 
-  const historicalCharacter = cleanText(settlement.history?.historicalCharacter);
-  if (historicalCharacter) {
-    return sentence(
-      `${name} is ${article} ${descriptors}${populationPhrase}, ${lowerLead(firstSentence(historicalCharacter))}`,
-    );
-  }
-
+  // ⛔ NO historicalCharacter FALLBACK (chair ruling T1, S-2, 2026-10-30). It built a comma
+  // splice ("…of 37 people, the calendar here is crowded…") and repeated the character line
+  // the Overview strip and History already print. A culture with no scope phrase gets the
+  // plain sentence.
   return sentence(`${name} is ${article} ${descriptors}${populationPhrase}`);
+}
+
+/**
+ * THE CULTURE SCOPE LINE, for the Overview identity strip (chair rulings X-5 / T1-1). The
+ * scope phrase was the one fact of the DM Summary with no other home; the strip already
+ * prints name, tier and population, so this carries only the culture and its phrase.
+ * Empty when the culture has no authored phrase (no fallback, by the same ruling).
+ * @param {SettlementQuickGuideSource | null | undefined} settlement
+ * @returns {string}
+ */
+export function cultureScopeLine(settlement) {
+  const source = settlement && typeof settlement === 'object' ? settlement : {};
+  const phrase = scopePhrase(cleanText(source.culturalIdentity?.key));
+  if (!phrase) return '';
+  const label = cleanText(source.culturalIdentity?.label || source.culture?.label);
+  return sentence(label ? `${label}, ${phrase}` : upperLead(phrase));
+}
+
+/**
+ * WHO GOVERNS, as one glance line for the Overview strip (X-5 / T1-1): the governing name
+ * and the stability band, joined by a middle dot. Reads the same fields, in the same order
+ * of preference, as the composer's "Who holds power" truth. Empty when neither is recorded.
+ * @param {SettlementQuickGuideSource | null | undefined} settlement
+ * @returns {string}
+ */
+export function governsLine(settlement) {
+  const source = settlement && typeof settlement === 'object' ? settlement : {};
+  const factions = Array.isArray(source.powerStructure?.factions) ? source.powerStructure.factions : [];
+  const governing = cleanText(
+    source.powerStructure?.governingName
+      || source.powerStructure?.government
+      || factions.find((faction) => faction?.isGoverning)?.faction,
+  );
+  const stability = cleanText(source.powerStructure?.stability);
+  return [governing, stability].filter(Boolean).join(' · ');
 }
 
 /**
@@ -784,12 +816,6 @@ function upperLead(value) {
 /** @param {string} value @returns {string} */
 function stripInfinitive(value) {
   return value.replace(/^to\s+/i, '');
-}
-
-/** @param {string} value @returns {string} */
-function firstSentence(value) {
-  const match = cleanText(value).match(/^.*?[.!?](?:\s|$)/);
-  return (match ? match[0] : cleanText(value)).replace(/[.!?]+$/, '');
 }
 
 /** @param {string} value @returns {string} */

@@ -80,10 +80,10 @@ describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
 });
 
 describe('G5 first-survey framing — OverviewTab', () => {
-  test('the Systems Health caption frames the frozen bars/statuses with the live Food Security carve-out', () => {
+  test('the Systems Health label is the page\'s one "First survey" label, with the live Food Security carve-out (T1-5)', () => {
     const src = read(OVERVIEW_TAB);
-    expect(src).toMatch(/as judged at the first survey/);
-    expect(src).toMatch(/Food Security is re-judged as the campaign advances/);
+    expect(src).toMatch(/>As judged at the first survey · Food Security is re-judged as the campaign advances</);
+    expect(src).not.toMatch(/See Viability tab/); // anchored: the same source carries the label matched above
   });
 
   test('the vintage is said ONCE per page: the three warning headers carry no suffix (X-8, chair 2026-10-30)', () => {

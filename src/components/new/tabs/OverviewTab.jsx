@@ -35,6 +35,8 @@ import Button from '../../primitives/Button.jsx';
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
+// The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
+import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
 
 // ── The institution provenance badge (R-5b item #10) ───────────────────
@@ -192,6 +194,8 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
   const ra = r.resourceAnalysis || {};
+  const scopeLine = cultureScopeLine(r);
+  const governs = governsLine(r);
   // THE STRESSOR DESK, read ONCE per render and routed by the mount registry. THE PUBLIC
   // GATE (§885.3): a public gallery dossier is a PAID surface and the `overview` tab is not
   // filtered off one, so the desk is NOT DRAWN there and every rung is null ⇒ drawnAtMount
@@ -262,8 +266,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
   // `conflictLines`, `warningLines` and `connectionLines` are no longer taken (chair rulings
   // T1-6, T1-9, T1-10): their registry rows glance, so the reader draws no sentence there and
   // the rows beside them (conflict rows, warning rows, the phrasing) are the one home.
+  // `originLines` and `situationLine` are no longer taken either (T1-8): DS-GEN-6's route
+  // line and tier overlay and DS-GEN-5's situation line glance, and "Settlement Origin"
+  // (settlementReason, DM-editable) is the one home of why the town is here.
   const {
-    originLines, siteLines, situationLine, populationLine,
+    siteLines, populationLine,
     // DS-POP-3's band is READ HERE and handed over whole: `populationTrendBand` is the
     // annex's own named reader and it imports out of a worldPulse module, so the cost
     // belongs in this lazy tab chunk rather than in a leaf six tabs share.
@@ -306,6 +313,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             against the approach, beside the head count and the access word above. Silent
             until the ring carries two readings, which is what the ring honestly is. */}
         {populationLine&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,fontStyle:'italic',margin:'0 0 6px',lineHeight:1.5}}>{populationLine}</p>}
+        {/* X-5 / T1-1: the culture scope phrase (the strip's one identity sentence) and who
+            governs (governing name · stability), the two glance facts the removed DM
+            Summary tab alone carried. No historicalCharacter fallback for the first. */}
+        {(scopeLine||governs)&&<p data-testid="overview-identity-line" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:'0 0 6px',lineHeight:1.5}}>
+          {scopeLine}{scopeLine&&governs?' ':''}{governs&&<span style={{whiteSpace:'nowrap'}}><span style={{color:MUTED}}>Governed by </span>{governs}</span>}
+        </p>}
         {/* Row 2: character + spatial */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
@@ -395,7 +408,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
             pulse writeback; Food Security is the declared-live exception,
             re-graded every tick — same carve-out grammar as DefenseTab's
             Threat Assessment caption (Wave R-0). */}
-        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.</div>
+        {/* THE PAGE'S ONE "First survey" LABEL (X-8, T1-5): the warning headers below carry
+            no suffix. The carve-out stays because it changes how the table reads the bars. */}
+        <div style={{fontSize:chromeFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8}}>As judged at the first survey · Food Security is re-judged as the campaign advances</div>
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
@@ -411,7 +426,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
           padding:'5px 10px',marginTop:6}}>
           <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure. See Viability tab.</span>
+          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure.</span>
         </div>}
 
         {/* Score bars — 2-col grid */}
@@ -492,51 +507,19 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
         })}
       </Section>}
 
-      {/* ── SITUATION (pressure). The arrival scene moved up into THE PLACE (T1-2). ── */}
-      {((stresses.length===0&&pressureLine)||situationLine)&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
-        {stresses.length===0&&pressureLine&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{pressureLine}</p>}
-        {/* ── DS-GEN-5, the LIVE COMPANION to the frozen scene above ─────────
-            R-DST-W4-g: `arrivalScene` is a first-impression artifact composed
-            once at generation and never touched here; this is what the approach
-            looks like given current standing state, sitting beneath it exactly
-            as Food Security sits beneath the frozen bars. Two sentences, two
-            lifetimes — overwriting one with the other breaks THE PROMISE. It
-            SUPPRESSES itself where a primary stress resolves, because the crisis
-            banner's own visitor line is the right companion there. */}
-        {situationLine ? (
-          <>
-            <hr style={{border:'none',borderTop:'1px solid #3a2a10',margin:'8px 0'}}/>
-            {/* ONE LENS, so the weave is a no-op here BY CONSTRUCTION (`lines.length <= 1`
-                returns the line unchanged) and the position renders character for character
-                what it rendered before. It routes anyway so the phone floor reaches it with
-                its siblings — one renderer, one rule about a paragraph's smallest size. */}
-            <ProseBlock lines={[situationLine]} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.sm,color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
-          </>
-        ) : null}
+      {/* ── PRESSURE (no crisis; T1-7). The arrival scene moved up into THE PLACE (T1-2);
+          under a crisis the sentence closes the card (T1-3). DS-GEN-5's situation line is
+          CUT (T1-8, R2): it keyed on the same route-to-scene table as the arrival hook and
+          contradicted the origin line in 164 of 1000. Its row glances. ── */}
+      {stresses.length===0&&pressureLine&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+        <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{pressureLine}</p>
       </div>}
 
-      {/* ── DS-GEN-6 at overview.origin, the route line and the tier overlay ──
-          TWO POOLS of one block at ONE position, which is the registry's one written
-          exception to the one-fact-one-sentence law: the overlay is composed AFTER the
-          route line and never instead of it.
-          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. It was drawn INSIDE
-          the Settlement Origin section, which is `collapsible defaultOpen={false}`, and
-          `Primitives.jsx:120` renders `{open && children}` — so this position produced NO
-          BYTES for any reader on any world, while the reachability arm, the public-dossier
-          guard and the registry law were all green over it. The line now FRAMES the fold
-          (the DS-HK-1 arrangement) and no longer waits on `r.settlementReason`, so a town
-          the generator gave no origin paragraph still hears how it came to be there. The
-          visibility arm in dossierMountRegistry.walker.test.js is what keeps it out here. */}
-      {originLines.length>0&&(
-        <div data-testid="overview-origin-lines" style={{borderLeft:'3px solid #c8b89a',paddingLeft:12,marginBottom:14}}>
-          <ProseBlock lines={originLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
-
       {/* ── SETTLEMENT ORIGIN ─────────────────────────────────────────────── */}
-      {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen={false} accent="#6b5340">
+      {/* WHY IT IS HERE (T1-8): settlementReason is the one home, shown OPEN. DS-GEN-6's
+          route line and tier overlay are CUT (R2: the reason already names the route on
+          every sampled town, and the overlay restated the strip's tier and population). */}
+      {r.settlementReason&&<Section title="Settlement Origin" collapsible defaultOpen accent="#6b5340">
         <div style={{borderLeft:'3px solid #c8b89a',paddingLeft:12}}>
           {Array.isArray(r.settlementReason)
             ?r.settlementReason.map((line,i)=><p key={i} style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 4px',fontStyle:'italic'}}>{line}</p>)

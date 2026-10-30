@@ -170,14 +170,27 @@ describe('THE FIRST-PAINT LAW — the four cured positions reach a reader with n
     expect(publicText).toBeNull();
   });
 
-  test('overview.origin (DS-GEN-6) draws above the Settlement Origin fold', () => {
-    const { publicText } = provePosition({
-      Tab: OverviewTab,
-      selector: '[data-testid="overview-origin-lines"]',
-      foldTitle: 'Settlement Origin',
-      label: 'overview.origin',
-    });
-    expect(publicText).toBeNull();
+  test('overview.origin (DS-GEN-6) is CUT and "Settlement Origin" is the one home, OPEN on first paint (T1-8)', () => {
+    // The chair's ruling of 2026-10-30 glances the row: the route line and tier overlay no
+    // longer draw anywhere, so the first-paint question moves to the datum itself. The
+    // section that holds settlementReason must show it with no click, on every town that
+    // carries one, for the private and the public reader alike.
+    let judged = 0;
+    for (const town of TOWNS) {
+      if (!town.settlementReason) continue;
+      for (const publicDossier of [false, true]) {
+        const { container } = render(e(OverviewTab, { settlement: town, publicDossier }));
+        const fold = foldOf(container, 'Settlement Origin');
+        expect(fold, `${town.name}: the Settlement Origin section is gone`).toBeTruthy();
+        expect(fold.open, `${town.name}: Settlement Origin is shut on first paint`).toBe(true);
+        const reason = Array.isArray(town.settlementReason) ? town.settlementReason[0] : String(town.settlementReason?.primary || town.settlementReason);
+        expect(fold.host.textContent).toContain(reason);
+        expect(container.querySelector('[data-testid="overview-origin-lines"]'), `${town.name}: DS-GEN-6 drew again`).toBeNull();
+        cleanup();
+        judged += 1;
+      }
+    }
+    expect(judged, 'no generated town carried a settlementReason').toBeGreaterThan(0);
   });
 
   test('economics.foodSecurity (DS-ECO-9) draws above the Food Security fold', () => {

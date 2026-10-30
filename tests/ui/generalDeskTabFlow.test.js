@@ -281,6 +281,30 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     expectAbsentWithAnchor(pub, firstSite, ARRIVAL, 'a desk site line reached a public dossier');
   });
 
+  test('the identity strip carries the culture scope phrase and who governs (X-5 / T1-1)', () => {
+    const town = {
+      ...SPEAKING,
+      culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' },
+      powerStructure: { governingName: 'The Burgher Council', stability: 'Stable', factions: [] },
+      history: { historicalCharacter: 'Character fixture line.' },
+    };
+    const { container } = render(e(OverviewTab, {
+      settlement: town, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: true, playerView: false, worldState: null,
+    }));
+    const line = container.querySelector('[data-testid="overview-identity-line"]')?.textContent || '';
+    expect(line).toContain('Germanic-inspired, built in timber and stone, and run by guild and estate.');
+    expect(line).toContain('The Burgher Council · Stable');
+    cleanup();
+    // A culture with no authored phrase takes no fallback: the character line stays the strip's quote only.
+    const mixed = { ...town, culturalIdentity: { key: 'mixed', label: 'Germanic-inspired + Latin-inspired' } };
+    const text = render(e(OverviewTab, {
+      settlement: mixed, narrativeNote: null, onNavigateTab: () => {},
+      publicDossier: true, playerView: false, worldState: null,
+    })).container.textContent || '';
+    expect(text.split('Character fixture line.').length - 1, 'the character line prints once').toBe(1);
+  });
+
   test('siteClause keeps the first clause and leaves a one-clause sentence whole', () => {
     // Synthetic sentences, not corpus members (the drawn-anchor law): the rule is the claim.
     expect(siteClause('The quay is short; the boats tie up two deep.')).toBe('The quay is short.');
@@ -435,8 +459,10 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     // DS-GEN-3 GLANCES since owner order 2026-09-17: the reader draws no sentence there even
     // privately, and the six positions around it prove the reader is live.
     expect(drawn.healthLines, 'overview.systemsHealth glances, so no DS-GEN-3 line is drawn').toEqual([]);
-    expect(drawn.originLines.length, 'DS-GEN-6 route + tier overlay').toBe(2);
-    expect(drawn.situationLine, 'DS-GEN-5').toBeTruthy();
+    // DS-GEN-6 and DS-GEN-5 GLANCE since the chair's ruling of 2026-10-30 (T1-8):
+    // "Settlement Origin" is the one home of why the town is here.
+    expect(drawn.originLines, 'overview.origin glances').toEqual([]);
+    expect(drawn.situationLine, 'overview.situation glances').toBeNull();
     // DS-GEN-2, DS-GEN-7 and DS-REL-2 GLANCE since the chair's ruling of 2026-10-30: the
     // reader draws no sentence there even privately. The conflict list stays INDEX-PAIRED
     // (one null per conflict row) so a later sentence row cannot slip its pairing.
@@ -457,15 +483,16 @@ describe('THE ONE CALLER — the reader, not the tabs, holds the desk and the ga
     expect(silent.connectionLines).toEqual([]);
   });
 
-  test('DS-GEN-6 fails CLOSED on a town with no food arithmetic (kernel law 5)', () => {
-    // The demoted `deficit` dimension has no answer without `metrics.foodBalance`, and an
-    // unanswered dimension is UNREADABLE rather than "readable with everything". Silence
-    // here is the honest state of an unmeasured town, not a town that feeds itself.
+  test('DS-GEN-6 draws no line on a measured or an unmeasured town now that its row glances (T1-8)', () => {
+    // The desk's own fail-closed rule (kernel law 5, the demoted `deficit` dimension) is
+    // still pinned at the desk in tests/domain/generalStateProseDesk.test.js; at the reader
+    // the position is silent on both kinds of town, and the rest of the desk still draws.
     const unmeasured = { ...SPEAKING, economicViability: { viable: false, metrics: {} } };
-    expect(generalDeskLines(unmeasured, { stresses: [] }).overview.originLines).toEqual([]);
-    // ...and the rest of the desk is UNAFFECTED, so the line above is the dimension closing
-    // and not the whole desk falling over.
-    expect(generalDeskLines(unmeasured, { stresses: [] }).overview.siteLines.length).toBe(3);
+    for (const town of [SPEAKING, unmeasured]) {
+      const overview = generalDeskLines(town, { stresses: [] }).overview;
+      expect(overview.originLines).toEqual([]);
+      expect(overview.siteLines.length).toBe(3);
+    }
   });
 });
 
