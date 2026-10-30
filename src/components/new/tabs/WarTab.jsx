@@ -128,7 +128,7 @@ function WarLaunchTeaser({ name }) {
 }
 
 /** The war half — pure OUR light war read-models (moved verbatim from WarFaithTab). */
-function WarBlock({ war, nameFor }) {
+function WarBlock({ war, nameFor, unitAbroad = false }) {
   const mobile = useIsMobile();
   const { status, exhaustionRaw, exhaustionBand, mobilization, occupied, holdings } = war;
   const besieged = status?.besiegedBy?.length > 0;
@@ -152,7 +152,9 @@ function WarBlock({ war, nameFor }) {
             : `${nameFor(status.besiegedBy[0])} lays siege.`}
         </Line>
       )}
-      {deploying && (
+      {/* THE DEPLOYMENT IS TOLD ONCE (chair ruling W6): when the units-abroad entry renders,
+          it owns the column's position and condition, so this line stands down. */}
+      {deploying && !unitAbroad && (
         <Line strong="Deployed." tone={GOLD}>
           An army is abroad, besieging {status.besiegingTargets.map(nameFor).join(', ')}; the home garrison is thinned while it campaigns.
         </Line>
@@ -275,7 +277,7 @@ const STALENESS_TONE = Object.freeze({ current: GREEN, aging: GOLD, stale: RED }
 
 /** One unit entry: the believed position + staleness band + source grade, with the
  *  DM-truth disclosure showing the true picture and the divergence. */
-function UnitEntry({ unit, includeGroundTruth }) {
+function UnitEntry({ unit, includeGroundTruth, armyStatus = null }) {
   const mobile = useIsMobile();
   const { roleWord, destName, believedAt, trueAt, staleness, stalenessBand, arrivedWord } = unit;
   return (
@@ -291,6 +293,13 @@ function UnitEntry({ unit, includeGroundTruth }) {
           ? arrivedWord
           : <>Believed {believedAt.same ? 'at' : 'near'} <strong style={{ color: INK }}>{believedAt.name}</strong>.</>}
       </div>
+      {/* The army's condition before its target, moved here from Muster (W6): one entry. */}
+      {armyStatus && (
+        <div data-testid="war-unit-condition" style={{ color: armyStatus.weakened ? RED : BODY, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.5, marginTop: 3 }}>
+          <strong>Condition.</strong> {armyStatus.remainingPhrase}
+          {armyStatus.conditionPhrase && <span style={{ color: MUTED }}>{`; ${armyStatus.conditionPhrase}`}</span>}.
+        </div>
+      )}
       <div style={{ color: SECOND, fontSize: chromeFontSize(FS.pico, mobile), fontWeight: 700, marginTop: 3 }}>
         {staleness > 0
           ? `Last credible word, ${tickDurationLabel(staleness)} old. The courier line home is cut.`
@@ -631,17 +640,32 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
       : {},
   });
 
+  // W3: a DS-WAR-1 lens stands down where the war block prints the same fact as a line.
+  const st = war?.status;
+  const statesStatus = hasWar && (st?.besiegedBy?.length > 0 || (st?.besiegingTargets?.length > 0 && !war.unit));
+  const standingDesk = {
+    ...deskProse,
+    warStatus: statesStatus ? null : deskProse.warStatus,
+    warExhaustion: hasWar && war.exhaustionRaw > 0 ? null : deskProse.warExhaustion,
+    warMobilization: hasWar && war.mobilization ? null : deskProse.warMobilization,
+    warOccupation: hasWar && war.occupied ? null : deskProse.warOccupation,
+    warHoldings: hasWar && war.holdings ? null : deskProse.warHoldings,
+  };
+
   return (
     <div data-testid="war-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      {hasWar && <WarBlock war={war} nameFor={nameFor} />}
-      {/* ── war.standing (DS-WAR-1) — the martial record in the town's own voice ── */}
-      <WarStandingLines desk={deskProse} settlement={settlement} />
+      {hasWar && <WarBlock war={war} nameFor={nameFor} unitAbroad={!!war.unit} />}
+      {/* ── war.standing (DS-WAR-1) — only the lenses the war block's datum lines do not
+          already state (chair ruling W3) ── */}
+      <WarStandingLines desk={standingDesk} settlement={settlement} />
       {war && war.wars.length > 0 && <WarsBlock wars={war.wars} sid={sid} nameFor={nameFor} />}
-      {hasMuster && <MusterBlock musterLine={war.musterLine} armyStatus={war.armyStatus} martial={war.martial} />}
+      {hasMuster && (war.musterLine || war.martial || (war.armyStatus && !war.unit)) && (
+        <MusterBlock musterLine={war.musterLine} armyStatus={war.unit ? null : war.armyStatus} martial={war.martial} />
+      )}
       {war && war.unit && (
         <div data-testid="war-units" style={{ marginBottom: 14 }}>
           <Eyebrow>Units abroad, as this town believes</Eyebrow>
-          <UnitEntry unit={war.unit} includeGroundTruth={includeGroundTruth} />
+          <UnitEntry unit={war.unit} includeGroundTruth={includeGroundTruth} armyStatus={war.armyStatus} />
         </div>
       )}
       {war && war.beliefs.length > 0 && <BeliefsBlock beliefs={war.beliefs} />}

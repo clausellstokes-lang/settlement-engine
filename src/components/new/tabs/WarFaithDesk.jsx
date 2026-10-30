@@ -214,9 +214,12 @@ export function WarStandingLines({ desk, settlement }) {
  */
 export function WarTreatyLines({ desk, settlement }) {
   requireSettlement(settlement, 'WarTreatyLines');
+  // ONE LINE (chair ruling W9, 2026-10-30): the treaty card already prints each term's strain
+  // and the fraying seam, so the fraying lens is not drawn and the clause lens speaks only when
+  // the document lens is silent.
   return <DeskLines mount={TREATIES_MOUNT} testId="war-desk-treaties"
     settlementName={settlement?.name} tier={settlement?.tier} rungs={[
-      desk.treatyTerm, desk.treatyFraying, desk.treatyDocument,
+      desk.treatyDocument || desk.treatyTerm,
     ]} />;
 }
 

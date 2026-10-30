@@ -254,6 +254,16 @@ describe('WarTab — believed units, staleness bands, and the DM-truth divergenc
     expect(muster.textContent).toMatch(/rusted|blooded/);
   });
 
+  it('the deployment is told once, in the units-abroad entry (W6): no "Deployed." line, the condition rides the unit', () => {
+    asWarOwner();
+    const { container } = render(<WarTab settlement={homeTown()} saveId="home" />);
+    const units = screen.getByTestId('war-units');
+    expect(screen.getByTestId('war-unit-condition').textContent).toMatch(/^Condition\./);
+    expectAbsentWithAnchor(container.textContent, 'Deployed.', 'The host, marching on', 'W2 deployment line');
+    expectAbsentWithAnchor(screen.getByTestId('war-muster').textContent, 'Condition.', 'The town under arms', 'W5 condition row');
+    expect(units.textContent).toMatch(/The host, marching on Foehold/);
+  });
+
   it('renders the named war with sides read from the war edges', () => {
     asWarOwner();
     render(<WarTab settlement={homeTown()} saveId="home" />);
@@ -350,7 +360,7 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
     expect(line, 'the private render drew no DS-WAR-1 sentence to test the gate with').toBeTruthy();
     expectPresentThenAbsent(privText, pubText, line, 'the public gate: DS-WAR-1 on the war tab');
     // The DATUM is untouched by the gate — the war block's own rows still render.
-    expect(pubText).toMatch(/Deployed\./);
+    expect(pubText).toMatch(/The host, marching on Foehold/);
   });
 
   it('the DORMANT NOTE replaces the plain line only when the whole PAGE-SET is at rest', () => {
