@@ -74,3 +74,11 @@
   max-height: 82vh;
   padding-bottom: calc(16px + var(--sf-door-kbd-inset, 0px));
 }
+
+/* X-22 FIRST OPEN: the one composer at the door, nothing else in the frame. It keeps
+   the base slip's dock at the tab's margin (index.css .sf-door-panel) and only trims
+   the frame to the box. */
+.sf-door-panel.sf-door-composer {
+  padding: 8px;
+  width: 320px;
+}

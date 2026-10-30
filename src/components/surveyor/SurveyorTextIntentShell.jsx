@@ -3,6 +3,13 @@
  * (SC-1A). The prompt slip's single 3-row box became a chat-shaped surface: a transient
  * user-turn log above a bottom-anchored composer that grows upward as you type.
  *
+ * ⭐ X-22 (the owner, 2026-10-30: "when first clicked it is a single text box, nothing
+ * fancy"). Before the first send the shell is ONE composer at the door and nothing else:
+ * no heading, no chips, no send button, no register links. Its placeholder ROTATES
+ * through the door's suggested first questions (src/domain/ai/suggestedQuestions.js, the
+ * zero-cost read-model prompts), so the suggestions survive as words in the box rather
+ * than as buttons around it. Enter sends; Shift+Enter breaks the line.
+ *
  * IT IS NOT A SECOND DOOR. Everything that decides anything stays in SurveyorDoor:
  * entitlement, the modal focus trap, the router call, the destination state, and the
  * remount nonce. This module imports no router, no provider transport, no store slice,
@@ -29,7 +36,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { t } from '../../copy/index.js';
 import { CARD, INK, MUTED, BORDER, SLATE, SLATE_DEEP, sans, serif_, FS } from '../theme.js';
-import Button from '../primitives/Button.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import { AnchorChip } from './surveyorPanelKit.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -38,6 +44,8 @@ import { chromeFontSize } from '../../design/proseScale.js';
 
 /** The composer's growth cap in px (≈6 lines). Above it the box scrolls instead. */
 const MAX_COMPOSER_PX = 144;
+/** How long each suggested question holds the empty composer's placeholder. */
+const PLACEHOLDER_HOLD_MS = 4000;
 
 export default function SurveyorTextIntentShell({
   open,
@@ -45,17 +53,18 @@ export default function SurveyorTextIntentShell({
   anchorLabel,
   onClose,
   onRoute,
-  onOpenAnalyst,
-  onOpenInterview,
-  onOpenWorkshop,
+  suggestions = [],
 }) {
   const mobile = useIsMobile();
   const [draft, setDraft] = useState('');
   const [turns, setTurns] = useState([]);
   const [keyboardInset, setKeyboardInset] = useState(0);
+  const [hint, setHint] = useState(0);
   const nextTurnId = useRef(1);
   const areaRef = useRef(null);
   const isMobile = useIsMobile();
+  const hints = Array.isArray(suggestions) ? suggestions.filter(Boolean) : [];
+  const hintCount = hints.length;
 
   // THE UPWARD GROWTH. Height is measured, not guessed: collapse to zero so
   // scrollHeight reports the content's true height, then take the smaller of that
@@ -93,6 +102,15 @@ export default function SurveyorTextIntentShell({
     };
   }, [open, isMobile]);
 
+  // THE ROTATING PLACEHOLDER. Only while the box is open and empty, and only when
+  // there is more than one suggestion to rotate through; a typed draft stops it.
+  const rotating = open && !draft && hintCount > 1;
+  useEffect(() => {
+    if (!rotating) return undefined;
+    const id = setInterval(() => setHint((n) => n + 1), PLACEHOLDER_HOLD_MS);
+    return () => clearInterval(id);
+  }, [rotating]);
+
   // ABSENCE: a blank or whitespace-only draft is not a prompt. Nothing is routed,
   // nothing is logged, and no empty turn is ever stored.
   const submit = () => {
@@ -106,17 +124,50 @@ export default function SurveyorTextIntentShell({
     setDraft('');
   };
 
-  // Desktop: Enter sends, Shift+Enter breaks the line. Mobile: Enter ALWAYS breaks the
-  // line (the on-screen Return key is how people type a paragraph) and only Send routes.
-  // An Enter that ends an IME composition commits the candidate — it must never submit.
+  // Enter sends and Shift+Enter breaks the line, at every width: X-22 leaves no send
+  // button in the box, so the on-screen Return key is the send key (enterKeyHint says
+  // so). An Enter that ends an IME composition commits the candidate; it never submits.
   const onKeyDown = (event) => {
-    if (event.key !== 'Enter' || isMobile || event.shiftKey) return;
+    if (event.key !== 'Enter' || event.shiftKey) return;
     if (event.nativeEvent?.isComposing || event.isComposing) return;
     event.preventDefault();
     submit();
   };
 
   if (!open) return null;
+
+  const placeholder = hintCount > 0 ? hints[hint % hintCount] : t('surveyorDoor.placeholder');
+  const composer = (
+    <textarea
+      ref={areaRef}
+      className="sf-door-chat-area"
+      value={draft}
+      onChange={(event) => setDraft(event.target.value)}
+      onKeyDown={onKeyDown}
+      aria-label={t('surveyorDoor.promptLabel')}
+      placeholder={placeholder}
+      enterKeyHint="send"
+      rows={1}
+      style={{ background: CARD, border: `1px solid ${BORDER}`, color: INK, fontSize: FS.sm, fontFamily: sans }}
+    />
+  );
+
+  // FIRST OPEN: the one composer, floating at the door, and nothing else.
+  if (turns.length === 0) {
+    return (
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        tabIndex={-1}
+        aria-label={t('surveyorDoor.heading')}
+        className={`sf-door-panel sf-door-composer${isMobile ? ' sf-door-panel--sheet' : ''}`}
+        style={{ background: CARD, border: `1px solid ${SLATE}`, fontFamily: sans, '--sf-door-kbd-inset': `${keyboardInset}px` }}
+      >
+        {composer}
+      </div>
+    );
+  }
 
   return (
     <div
@@ -161,35 +212,9 @@ export default function SurveyorTextIntentShell({
         ))}
       </div>
 
-      {/* Promptless doors (capability retention: the retired launchers allowed opening
-          the panels without a prompt — these quiet register links keep that path). */}
-      <div className="sf-door-chat-register">
-        <Button variant="ghost" size="sm" onClick={onOpenAnalyst}>{t('surveyorDoor.openAnalyst')}</Button>
-        <Button variant="ghost" size="sm" onClick={onOpenInterview}>{t('surveyorDoor.openInterview')}</Button>
-        <Button variant="ghost" size="sm" onClick={onOpenWorkshop}>{t('surveyorDoor.openWorkshop')}</Button>
-      </div>
-
       {/* THE COMPOSER IS THE LAST FLEX CHILD: its bottom edge is pinned and its top
           edge rises, so the caret never moves as the box grows. */}
-      <div className="sf-door-chat-composer">
-        <textarea
-          ref={areaRef}
-          className="sf-door-chat-area"
-          value={draft}
-          onChange={(event) => setDraft(event.target.value)}
-          onKeyDown={onKeyDown}
-          aria-label={t('surveyorDoor.promptLabel')}
-          placeholder={t('surveyorDoor.placeholder')}
-          rows={1}
-          style={{ background: CARD, border: `1px solid ${BORDER}`, color: INK, fontSize: FS.sm, fontFamily: sans }}
-        />
-        <div className="sf-door-chat-actions">
-          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{t('surveyorDoor.routeHint')}</span>
-          <Button variant="aiSolid" size="sm" disabled={!draft.trim()} onClick={submit}>
-            {t('surveyorDoor.route')}
-          </Button>
-        </div>
-      </div>
+      <div className="sf-door-chat-composer">{composer}</div>
     </div>
   );
 }

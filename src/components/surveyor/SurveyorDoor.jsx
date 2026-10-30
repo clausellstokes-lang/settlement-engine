@@ -34,7 +34,7 @@
  * Lazy-only: rides the FloatingAffordances chunk — zero eager bytes.
  */
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
@@ -42,8 +42,9 @@ import SurveyorTextIntentShell from './SurveyorTextIntentShell.jsx';
 import { useSurveyorContext } from './useSurveyorContext.js';
 import { useSurveyorEntitled } from './useSurveyorEntitled.js';
 import { routeDoorPrompt } from '../../domain/intent/doorRouter.js';
+import { deriveAnchor, anchorSettlement } from '../../domain/ai/contextAnchor.js';
+import { suggestedQuestions } from '../../domain/ai/suggestedQuestions.js';
 import AiAnalystPanel from '../AiAnalystPanel.jsx';
-import InterviewPanel from '../InterviewPanel.jsx';
 import SurveyorWorkshop from './SurveyorWorkshop.jsx';
 
 // The ONE entitlement chokepoint lives in surveyorGate.js (a pure, import-free
@@ -58,7 +59,15 @@ export default function SurveyorDoor({ visible = true }) {
   // Remount destinations per routing so initial* props re-seed (panels stay dumb).
   const [nonce, setNonce] = useState(0);
   const surveyorEntitled = useSurveyorEntitled();
-  const { anchorLabel } = useSurveyorContext();
+  const { anchorLabel, ctx } = useSurveyorContext();
+  // X-22: the first open is one composer whose placeholder rotates through the zero-cost
+  // suggested questions for the page in view (no chips, no provider call).
+  const suggestions = useMemo(() => {
+    if (!ctx) return [];
+    const anchor = deriveAnchor({ ...ctx, tick: ctx.worldState?.tick ?? null });
+    const subject = anchorSettlement(anchor, { settlement: ctx.settlement, savedSettlements: ctx.savedSettlements }) || ctx.settlement;
+    return suggestedQuestions(anchor, { settlement: subject, worldState: ctx.worldState });
+  }, [ctx]);
   // Route the slip through the app's shared modal focus standard (the same
   // useDialogFocusTrap the 14+ sibling dialogs use): focus in on open, trap Tab,
   // Escape closes, focus restored to the trigger on close. The trigger Button is
@@ -70,13 +79,11 @@ export default function SurveyorDoor({ visible = true }) {
   if (!visible || !surveyorEntitled) return null;
 
   const openDestination = (routed, promptText) => {
-    // 'analyst' and 'interview' are QUESTION destinations (they carry a question, not a
-    // prompt+scope); every other destination is a workshop stage.
+    // 'analyst' is the QUESTION destination (it carries a question, not a prompt+scope);
+    // every other destination is a workshop stage.
     setDest(routed.destination === 'analyst'
       ? { id: 'analyst', question: promptText }
-      : routed.destination === 'interview'
-        ? { id: 'interview', question: promptText }
-        : { id: routed.destination, prompt: promptText, scope: routed.scope });
+      : { id: routed.destination, prompt: promptText, scope: routed.scope });
     setNonce((n) => n + 1);
     setPromptOpen(false);
   };
@@ -115,19 +122,13 @@ export default function SurveyorDoor({ visible = true }) {
           and the transient log; it renders nothing while `open` is false. */}
       <SurveyorTextIntentShell
         open={promptOpen} dialogRef={doorRef} anchorLabel={anchorLabel}
-        onClose={() => setPromptOpen(false)} onRoute={route}
-        onOpenAnalyst={() => openDestination({ destination: 'analyst' }, '')}
-        onOpenInterview={() => openDestination({ destination: 'interview' }, '')}
-        onOpenWorkshop={() => openDestination({ destination: 'content', scope: 'settlement' }, '')}
+        onClose={() => setPromptOpen(false)} onRoute={route} suggestions={suggestions}
       />
 
       {dest?.id === 'analyst' && (
         <AiAnalystPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
       )}
-      {dest?.id === 'interview' && (
-        <InterviewPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
-      )}
-      {dest && dest.id !== 'analyst' && dest.id !== 'interview' && (
+      {dest && dest.id !== 'analyst' && (
         <SurveyorWorkshop
           key={nonce}
           open

@@ -235,7 +235,8 @@ const SHELL_IMPORTS = Object.freeze([
   'react',
   '../../copy/index.js',
   '../theme.js',
-  '../primitives/Button.jsx',
+  // X-22 retired the shell's send button and register links, so Button left the set;
+  // the one close control is an IconButton.
   '../primitives/IconButton.jsx',
   './surveyorPanelKit.jsx',
   '../../hooks/useIsMobile.js',

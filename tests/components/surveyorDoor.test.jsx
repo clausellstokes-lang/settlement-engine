@@ -11,8 +11,9 @@
  *   2. ONE DOOR — the tab opens a prompt slip; prompts route to DESTINATIONS (the
  *      analyst / a workshop stage); the destinations receive the staged prompt.
  *   3. CONTEXT-FIRST — the slip shows the visible anchor (what the Surveyor reads).
- *   4. RETENTION — the promptless register links keep the retired launchers' open-
- *      without-a-prompt capability reachable.
+ *   4. X-22 (the owner, 2026-10-30) — the first open is ONE composer with a rotating
+ *      placeholder of suggested first questions; the promptless register links, the
+ *      send button and the chips are gone (Enter sends).
  *
  * SC-1A adds the EPHEMERAL TEXT-INTENT SHELL (A1–A5): the slip's prompt block became a
  * transient chat-shaped surface — a user-turn log plus a bottom-anchored auto-growing
@@ -53,8 +54,17 @@ vi.mock('../../src/store/index.js', () => ({
 vi.mock('../../src/components/surveyor/useSurveyorEntitled.js', () => ({
   useSurveyorEntitled: () => entitledRef.current,
 }));
+// X-22: the door derives the composer's rotating placeholder from this context (a page
+// with nothing specific in view, so the suggestions are the world-scope set).
+const NO_PAGE_CTX = { view: '', params: {}, settlement: null, savedSettlements: [], activeCampaign: null, worldState: null };
+const WORLD_SUGGESTIONS = [
+  'What is happening in my world right now?',
+  'Which settlements are under the most pressure?',
+  'What can I share with my players?',
+  'What should I prepare for next session?',
+];
 vi.mock('../../src/components/surveyor/useSurveyorContext.js', () => ({
-  useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town' }),
+  useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town', ctx: NO_PAGE_CTX }),
 }));
 // Destinations are stubbed: this file pins the DOOR's routing, not the panels
 // (their contracts live in the surveyor*/aiAnalyst* suites).
@@ -82,6 +92,13 @@ const setEntitled = (v) => { entitledRef.current = v; };
 function openDoor() {
   render(<SurveyorDoor />);
   fireEvent.click(screen.getByRole('button', { name: /ask the surveyor/i }));
+}
+
+/** X-22: no send button; Enter is the send key. */
+function typeAndSend(text) {
+  const box = screen.getByLabelText(/ask the surveyor about this page/i);
+  fireEvent.change(box, { target: { value: text } });
+  fireEvent.keyDown(box, { key: 'Enter' });
 }
 
 describe('SurveyorDoor — entitlement (the marker law)', () => {
@@ -118,19 +135,38 @@ describe('SurveyorDoor — entitlement (the marker law)', () => {
 });
 
 describe('SurveyorDoor — the prompt slip routes to destinations', () => {
-  it('shows the visible anchor (context-first made tangible) in the slip', () => {
+  it('X-22 FIRST OPEN: one composer and nothing else (no heading, anchor, chips or buttons)', () => {
     setEntitled(true);
     openDoor();
-    expect(screen.getByTestId('surveyor-anchor').textContent).toBe('Reading: Test Town');
+    const dialog = screen.getByRole('dialog');
+    expect(within(dialog).getAllByRole('textbox')).toHaveLength(1);
+    expect(within(dialog).queryAllByRole('button')).toEqual([]);
+    expect(within(dialog).queryByRole('log')).toBeNull();
+    expect(within(dialog).queryByTestId('surveyor-anchor')).toBeNull();
+    expect(dialog.textContent).toBe('');
+  });
+
+  it('X-22: the empty composer rotates through the suggested first questions, and a draft stops it', () => {
+    vi.useFakeTimers();
+    try {
+      setEntitled(true);
+      openDoor();
+      const box = screen.getByLabelText(/ask the surveyor about this page/i);
+      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[0]);
+      act(() => { vi.advanceTimersByTime(4000); });
+      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[1]);
+      fireEvent.change(box, { target: { value: 'a draft' } });
+      act(() => { vi.advanceTimersByTime(8000); });
+      expect(box.getAttribute('placeholder')).toBe(WORLD_SUGGESTIONS[1]);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 
   it('routes a question to the ANALYST with the question staged', () => {
     setEntitled(true);
     openDoor();
-    fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
-      target: { value: 'why is bread so expensive here?' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
+    typeAndSend('why is bread so expensive here?');
     const dest = screen.getByTestId('dest-analyst');
     expect(dest.getAttribute('data-open')).toBe('true');
     expect(dest.getAttribute('data-q')).toBe('why is bread so expensive here?');
@@ -148,10 +184,7 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
   it('routes a making-prompt to the WORKSHOP with the stage pre-selected and the prompt seeded', () => {
     setEntitled(true);
     openDoor();
-    fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
-      target: { value: 'build me a new town on the river' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
+    typeAndSend('build me a new town on the river');
     const dest = screen.getByTestId('dest-workshop');
     expect(dest.getAttribute('data-stage')).toBe('construct');
     expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
@@ -160,10 +193,7 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
   it('RETIRED styleOverhaul: a map-style prompt reaches the ANALYST and opens no write stage', () => {
     setEntitled(true);
     openDoor();
-    fireEvent.change(screen.getByLabelText(/ask the surveyor about this page/i), {
-      target: { value: 'reskin the map in a woodcut style' },
-    });
-    fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
+    typeAndSend('reskin the map in a woodcut style');
     // POSITIVE first — the door still routed it somewhere, so the absence below is a
     // routing decision and not a door that simply stopped working.
     const dest = screen.getByTestId('dest-analyst');
@@ -172,12 +202,16 @@ describe('SurveyorDoor — the prompt slip routes to destinations', () => {
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
   });
 
-  it('RETENTION: the promptless register links open the analyst / the workshop directly', () => {
+  // ⚰ THE PROMPTLESS REGISTER LINKS WENT WITH X-22 ("no buttons inside"). This arm used
+  // to open the workshop from a link; it now pins that the links are gone, anchored on
+  // the composer so an empty render cannot pass it.
+  it('X-22: the promptless register links are gone; the composer is the only way in', () => {
     setEntitled(true);
     openDoor();
-    fireEvent.click(screen.getByRole('button', { name: /open the workshop/i }));
-    expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('content');
-    expect(screen.getByTestId('dest-workshop').getAttribute('data-prompt')).toBe('');
+    expect(screen.getByLabelText(/ask the surveyor about this page/i)).toBeTruthy();
+    for (const name of [/open the analyst/i, /ask the world/i, /open the workshop/i, /take it to the surveyor/i]) {
+      expect(screen.queryByRole('button', { name })).toBeNull();
+    }
   });
 });
 
@@ -208,11 +242,11 @@ describe('SurveyorDoor — the slip is a real modal dialog (a11y-1)', () => {
 
 // ── SC-1A: the ephemeral text-intent shell ───────────────────────────────────
 const composer = () => screen.getByLabelText(/ask the surveyor about this page/i);
-const sendButton = () => screen.getByRole('button', { name: /take it to the surveyor/i });
+const pressEnter = () => fireEvent.keyDown(composer(), { key: 'Enter' });
 const doorTab = () => screen.getByRole('button', { name: /ask the surveyor$/i });
-const turnTexts = () => within(screen.getByRole('log'))
-  .queryAllByTestId('surveyor-turn')
-  .map((n) => n.textContent);
+// X-22: before the first turn there is no log at all (one composer), so read the turns
+// wherever they are rather than requiring the log to exist.
+const turnTexts = () => screen.queryAllByTestId('surveyor-turn').map((n) => n.textContent);
 
 /** Stub the layout-only scrollHeight jsdom never computes. */
 function stubScrollHeight(el, px) {
@@ -233,7 +267,7 @@ describe('SurveyorDoor — A1/A2/A3: the shell routes, records, and treats blank
     expect(composer().value).toBe('why is bread');
 
     fireEvent.change(composer(), { target: { value: '  why is bread so expensive here?  ' } });
-    fireEvent.click(sendButton());
+    pressEnter();
 
     // The destination writer is unchanged: the trimmed question, staged exactly.
     const dest = screen.getByTestId('dest-analyst');
@@ -258,19 +292,18 @@ describe('SurveyorDoor — A1/A2/A3: the shell routes, records, and treats blank
     setEntitled(true);
     openDoor();
     fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
-    fireEvent.click(sendButton());
+    pressEnter();
     const dest = screen.getByTestId('dest-workshop');
     expect(dest.getAttribute('data-stage')).toBe('construct');
     expect(dest.getAttribute('data-prompt')).toBe('build me a new town on the river');
     expect(dest.getAttribute('data-scope')).toBe('settlement');
   });
 
-  it('A3 — empty and whitespace-only drafts are ABSENCE: Send is dead, Enter is a no-op, nothing is logged', () => {
+  it('A3 — empty and whitespace-only drafts are ABSENCE: Enter is a no-op, nothing is logged', () => {
     setEntitled(true);
     openDoor();
-    expect(sendButton().disabled).toBe(true);
+    pressEnter();
     fireEvent.change(composer(), { target: { value: '   \n\t ' } });
-    expect(sendButton().disabled).toBe(true);
     fireEvent.keyDown(composer(), { key: 'Enter' });
     expect(screen.queryByTestId('dest-analyst')).toBeNull();
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
@@ -291,14 +324,10 @@ describe('SurveyorDoor — A1/A2/A3: the shell routes, records, and treats blank
         anchorLabel="Reading: Test Town"
         onClose={() => {}}
         onRoute={onRoute}
-        onOpenAnalyst={() => {}}
-        onOpenInterview={() => {}}
-        onOpenWorkshop={() => {}}
       />,
     );
     fireEvent.change(composer(), { target: { value: '   \n\t ' } });
     fireEvent.keyDown(composer(), { key: 'Enter' });
-    fireEvent.click(screen.getByRole('button', { name: /take it to the surveyor/i }));
     expect(onRoute).not.toHaveBeenCalled();
     expect(turnTexts()).toEqual([]);
   });
@@ -353,15 +382,18 @@ describe('SurveyorDoor — A5: mobile, the keyboard inset, and the privacy floor
     return { vv, listeners };
   }
 
-  it('on mobile Enter inserts a newline — only Send submits', () => {
+  // X-22 retired the send button, so the phone's Return key is the send key and the
+  // box says so (enterKeyHint). Shift+Enter still breaks the line on a hardware keyboard.
+  it('on mobile the Return key sends (enterKeyHint="send"); Shift+Enter does not', () => {
     setEntitled(true);
     mobileRef.current = true;
     stubVisualViewport();
     openDoor();
+    expect(composer().getAttribute('enterkeyhint')).toBe('send');
     fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
-    fireEvent.keyDown(composer(), { key: 'Enter' });
+    fireEvent.keyDown(composer(), { key: 'Enter', shiftKey: true });
     expect(screen.queryByTestId('dest-workshop')).toBeNull();
-    fireEvent.click(sendButton());
+    pressEnter();
     expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('construct');
   });
 

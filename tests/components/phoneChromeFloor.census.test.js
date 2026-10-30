@@ -407,7 +407,10 @@ const ROUTE_BASELINE = Object.freeze({
   // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
   // (shell) floored 144 -> 145 (BUILD LANE T4, 2026-10-30; the owner's word): the post-generate
   // coach's folded pill is one new, correctly floored chrome site in the app shell. `bare` holds.
-  '(shell)':                { roots: 1, files: 61, floored: 145, ruled: 3, bare: 0 },
+  // (shell) floored 145 -> 137 (BUILD LANE W2-SURVEYOR U1, X-22): the door no longer mounts
+  // InterviewPanel (its only way in was the retired "Ask the world" link), so its eight floored
+  // sites left the shell's subtree. Nothing became bare; `ruled` and `bare` hold.
+  '(shell)':                { roots: 1, files: 61, floored: 137, ruled: 3, bare: 0 },
 });
 
 /**
