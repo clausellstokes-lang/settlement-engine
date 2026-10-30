@@ -539,7 +539,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
   // duplicate governing rows left the page; no token moved.
   "Systems/Power":       { measured: 22, sub14: 21 },
-  "Systems/Defense":     { measured: 28, sub14: 28 },
+  // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
+  // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
+  "Systems/Defense":     { measured: 27, sub14: 27 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
   "Systems/Resources":   { measured:  4, sub14:  4 },
@@ -602,7 +604,9 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
   "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
+  // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
+  // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
+  "Systems/Defense":     { prose: 25, chrome: 2, sub14: 2, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.

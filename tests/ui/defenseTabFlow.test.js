@@ -89,7 +89,9 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     // additive, and a car that had replaced the rows would be caught here.
     const caps = deriveSupportingCapabilities(port);
     expect(container.textContent).toContain(caps.find((c) => c.label === 'Logistics & Supply').note);
-    expect(container.textContent).toContain('Economic Backing');
+    expect(container.textContent).toContain('Legal Infrastructure');
+    // UX consolidation (T2-23): Economic Backing left the rows; Economic Survival owns it.
+    expect(container.textContent).not.toContain('Economic Backing'); // anchored: toContain('Legal Infrastructure') on this render
   });
 
   test('the naval lens draws where there is water, and is SILENT where there is none', () => {
@@ -274,5 +276,57 @@ describe('DS-DEF-2 at defense.threatAssessment — each sentence under ITS OWN b
     // The DATUM survives: every bar, its band word and its label still render for the
     // anonymous viewer — this is a gate on the prose, not a blank.
     for (const { label } of buildThreatAssessment(port)) expect(pubText).toContain(label);
+  });
+});
+
+/**
+ * ⭐ UX CONSOLIDATION 2026-10-30 — THE DEFENSE PAGE SAYS EACH FACT ONCE (RULINGS-T2
+ * T2-20..T2-23; RUBRIC R2, R6; RULINGS-CROSS X-8). Every absence is anchored on the same render.
+ */
+describe('UX consolidation — Defense (T2-20..T2-23)', () => {
+  // Opens each fold only when it is shut (a Section's header shows ▼ shut, ▲ open), because the
+  // criminal fold opens itself on an elevated town and a blind click would shut it.
+  const openIfShut = (container, title) => {
+    const button = [...container.querySelectorAll('button')].find((b) => (b.textContent || '').includes(title));
+    expect(button, `no collapsible section titled ${title}`).toBeTruthy();
+    if (button.textContent.includes('▼')) fireEvent.click(button);
+  };
+  const dmText = (s) => {
+    const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
+    openIfShut(container, 'Criminal Architecture');
+    openIfShut(container, 'Supporting Capabilities');
+    return container.textContent;
+  };
+
+  test('T2-20: the Internal Security bar is the one order score; the order headline and badge are gone', () => {
+    const text = dmText(port);
+    expect(text).toMatch(/Internal Security(Strong|Adequate|Weak|Critical)/);
+    expect(text).not.toMatch(/(Strong|Adequate|Weak) Public Order|Order Failing/); // anchored: the Internal Security band is asserted on this render
+    expect(text).toContain(port.economicState.safetyProfile.safetyDesc);
+  });
+
+  test('T2-20: the criminal faction is one name-and-band line; the capture lens and its description are not here', () => {
+    const crim = port.powerStructure.factions.find((f) => f.category === 'criminal');
+    expect(crim, 'fixture premise: a criminal faction').toBeTruthy();
+    const text = dmText(port);
+    expect(text).toContain(`Criminal faction: ${crim.faction}`);
+    if (crim.desc) expect(text).not.toContain(crim.desc); // anchored: the faction line is asserted on this render above
+    expect(text).not.toMatch(/Criminal faction: power \d/); // anchored: same render
+  });
+
+  test('T2-21: no terrain or strategic-value chips in the posture header', () => {
+    const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null, publicDossier: true }));
+    const header = container.firstChild.firstChild;
+    expect(header.textContent).toContain('Defensive posture');
+    expect(header.textContent).not.toContain(port.resourceAnalysis.terrain); // anchored: the header's own label is asserted above
+    expect(header.textContent).not.toContain(port.resourceAnalysis.strategicValue.split(' - ')[0]); // anchored: same header
+  });
+
+  test('T2-22/T2-23: "first survey" is said once on the page; Economic Backing and the empty-state line are gone', () => {
+    const text = dmText(port);
+    expect(text.match(/first survey/gi), 'the vintage label appears once').toHaveLength(1);
+    expect(text).toContain('Legal Infrastructure');
+    expect(text).not.toContain('Economic Backing'); // anchored: toContain('Legal Infrastructure') on this render
+    expect(text).not.toContain('No critical defense vulnerabilities'); // anchored: same render
   });
 });

@@ -366,12 +366,6 @@
     "snippet": "{storeAiProgress || 'Regenerating…'}"
   },
   {
-    "path": "src/components/new/tabs/DefenseTab.jsx",
-    "line": 505,
-    "category": "floatInterpolation",
-    "snippet": "{crimFaction.power||0}"
-  },
-  {
     "path": "src/components/new/tabs/EconomicsGlance.jsx",
     "line": 133,
     "category": "floatInterpolation",

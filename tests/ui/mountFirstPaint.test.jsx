@@ -145,14 +145,14 @@ describe('THE FIRST-PAINT LAW — the four cured positions reach a reader with n
     expect(shut.open, 'the fold is not shut on first paint, so this arm proves nothing').toBe(false);
     const before = shut.host.textContent;
     // anchored: `after` below is asserted to contain a string absent here, on the same node
-    expect(before).not.toContain('Economic Backing');
+    expect(before).not.toContain('Legal Infrastructure');
     fireEvent.click(shut.button);
     const opened = foldOf(container, 'Supporting Capabilities');
     const after = opened.host.textContent;
     expect(opened.open, 'the click did not open the fold').toBe(true);
     expect(after.length, 'the container did not gain the fold\'s children, so it is the wrong node')
       .toBeGreaterThan(before.length);
-    expect(after).toContain('Economic Backing');
+    expect(after).toContain('Legal Infrastructure');
     // …and the cured position is STILL outside it, in BOTH fold states.
     expect(opened.host.querySelector('[data-testid="defense-supporting-lines"]')).toBeNull();
     expect(container.querySelector('[data-testid="defense-supporting-lines"]')).toBeTruthy();
