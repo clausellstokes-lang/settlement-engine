@@ -113,9 +113,9 @@ function RulingChainBlock({ settlement }) {
             ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>
       )}
-      {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it
-          renders only when the seat is held by a faction other than the power, or stands vacant. */}
-      {chain.faction && (chain.faction.name !== chain.power?.name || chain.faction.vacant) && (
+      {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it renders only when
+          the seat stands vacant or another faction holds it (vacant first: factionNamePrecedenceScan). */}
+      {chain.faction && (chain.faction.vacant || chain.faction.name !== chain.power?.name) && (
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
           {` holds the governing seat`}
