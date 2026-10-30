@@ -600,7 +600,9 @@ function onPage(sentence, lines, settlement) {
  * hands over IN ORDER. Named once so the arm below drives exactly what the tabs drive.
  */
 const DESK_LINE_MOUNTS = Object.freeze({
-  'resources.groundAndWorkings': ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'],
+  // TWO KEYS SINCE THE UX CONSOLIDATION (2026-10-30, RULINGS-T2 T2-9): the terrain lens (the
+  // Overview owns the ground) and the strengths lens (the chips are the strengths) are cut.
+  'resources.groundAndWorkings': ['strategicValue', 'exploitation'],
   // ⭐ ONE KEY SINCE 2026-09-19, AND THE SECOND ONE DID NOT DIE — it MOVED. DS-SUP-3's
   // `impairedService` lens names ONE HOUSE by name, and the owner's order ("some other
   // sections need the same adjustment") put it under that house's own service row, the way
@@ -611,7 +613,8 @@ const DESK_LINE_MOUNTS = Object.freeze({
   'services.catalogStanding': ['catalogStanding'],
   'economics.exportPosture': ['exportPosture'],
   'daily_life.standingOfLiving': ['prosperityRung'],
-  'economics.commercialProfile': ['incomeMix', 'criminalLine', 'tradeProfile'],
+  // The trade-profile lens left this site in the UX consolidation (T2-4).
+  'economics.commercialProfile': ['incomeMix', 'criminalLine'],
 });
 
 /** The sentences one position draws for a settlement, in the order its call site lists them. */
@@ -623,31 +626,33 @@ function positionLines(mount, settlement) {
 }
 
 describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => {
-  test('resources.groundAndWorkings: four lenses render, and a public dossier renders none', () => {
+  test('resources.groundAndWorkings: two lenses render, the cut two do not, and a public dossier renders none', () => {
     const priv = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();
     const pub = render(e(ResourcesTab, { settlement: GROUND, publicDossier: true }));
     const pubText = pub.container.textContent;
-    // COLLECT-THEN-ASSERT (car 8a-13): all four lenses run, so a red names every one that
-    // moved rather than the first.
-    // The four lenses render as ONE woven paragraph, so each anchor is taken in the form the
-    // page prints it: `strengths` is the SECOND sentence and opens on the town's name, so what
-    // reaches the DOM is "The village has more than one thing…" (see `onPage`).
+    // COLLECT-THEN-ASSERT (car 8a-13): both lenses run, so a red names every one that moved.
     const lines = positionLines('resources.groundAndWorkings', GROUND);
     expectNoSeedFailures(collectSeedFailures(Object.entries({
-      terrain: GROUND_LINES.terrain,
-      strengths: GROUND_LINES.strengths,
       worth: GROUND_LINES.worth,
       workings: GROUND_LINES.workings,
     }), ([lens, line]) => expectPresentThenAbsent(
       privText, pubText, onPage(line, lines, GROUND), `resources.groundAndWorkings :: ${lens}`,
-    )), 'all four resources lenses draw privately and none reaches a public dossier');
+    )), 'both resources lenses draw privately and neither reaches a public dossier');
+    // ⭐ UX CONSOLIDATION 2026-10-30 (T2-9): the terrain and strengths lenses are no longer
+    // drawn, in either their raw or their stood-down form.
+    for (const [lens, line] of Object.entries({ terrain: GROUND_LINES.terrain, strengths: GROUND_LINES.strengths })) {
+      expect(privText, `the cut ${lens} lens is on the page`).not.toContain(line); // anchored: the worth/workings lenses were asserted present on this render above
+      expect(privText, `the cut ${lens} lens is on the page, stood down`).not.toContain(line.slice(GROUND.name.length)); // anchored: same render as above
+    }
     // The DATUM is untouched by the gate — the terrain word, the strengths chips and the
     // generator's own strategic-value line are the page's and are not corpus prose.
     expect(pubText).toContain('Plains');
     expect(pubText).toContain('Grain production');
     expect(pubText).toContain('agricultural heartland');
+    // ONE strategic-value sentence: where DS-ECO-11 speaks it, the generator's line yields.
+    expect(privText).not.toContain('agricultural heartland'); // anchored: toContain on pubText above, the same fixture
   });
 
   test('services.catalogStanding: the gap sentence renders, and a public dossier renders none', () => {
@@ -751,37 +756,21 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     expect(judged, 'no mount spoke on this fixture, so the arm judged nothing').toBeGreaterThan(0);
   });
 
-  test('…and the stand-down really fires in a tab, not only in the weave\'s own unit test', () => {
-    // NON-VACUITY WITH A NAMED SUBJECT. `resources.groundAndWorkings` is the one position this
-    // fixture draws more than one lens at, and its SECOND lens opens on the town's name — so
-    // this is the arm that would red if a call site dropped `settlementName`/`tier`.
+  test('…and the position draws exactly the lenses its call site hands over, in order', () => {
+    // ⭐ REWRITTEN IN THE UX CONSOLIDATION (2026-10-30, T2-9). This arm used the strengths lens
+    // (the one that opened on the town's name) to watch the stand-down fire inside the tab.
+    // That lens is cut; the stand-down at this call site is now proven by the hand-built
+    // two-line arm at the end of this file (the SITES table drives `resources.groundAndWorkings`
+    // with its two surviving keys). What this arm keeps is the ORDER claim: the page prints the
+    // drawn lenses as ONE paragraph in the order the call site lists them.
     useStore.setState({ campaigns: [] });
     const lines = positionLines('resources.groundAndWorkings', GROUND);
-    expect(lines.length, 'the position stopped drawing more than one lens').toBeGreaterThan(1);
-    const stoodDown = onPage(GROUND_LINES.strengths, lines, GROUND);
-    expect(stoodDown, 'the strengths lens no longer opens on the name, so this arm is free')
-      .not.toBe(GROUND_LINES.strengths);
-    // ⛔ THE EXPECTED FORM IS COMPUTED FROM THE DRAWN MEMBER, NEVER TYPED (car 8a-13's rule,
-    // and `proseDrawnAnchors.walker.test.js` is what keeps it so). This assertion used to
-    // pin the stood-down sentence as a LITERAL — 105 characters of DS-ECO-11's own wording —
-    // which is the class that habitat removal exists to end: NEVER TRIM lets the pool grow,
-    // an appended variant wins the draw, and the literal reds while the desk, the contract
-    // and the paid-surface gate this arm guards are all perfectly well.
-    //
-    // The claim does not weaken. It gains a premise and states the TRANSFORMATION instead of
-    // the result: the drawn member opens on the name, and the stand-down is that same member
-    // with its opening name replaced by the tier phrase and nothing else touched. A re-index
-    // or a rewording moves the member and the expectation together; a weave that started
-    // dropping words, renaming mid-sentence, or reaching for the pronoun still reds.
-    expect(GROUND_LINES.strengths.startsWith(GROUND.name),
-      'the drawn member stopped opening on the name, so there is no stand-down to expect')
-      .toBe(true);
-    expect(stoodDown, 'the stand-down is not the drawn member with its opening name replaced')
-      .toBe(`The ${GROUND.tier}${GROUND_LINES.strengths.slice(GROUND.name.length)}`);
+    expect(lines.length, 'the position stopped drawing both lenses').toBe(2);
     const text = render(e(ResourcesTab, { settlement: GROUND, publicDossier: false })).container.textContent;
-    expect(text, 'the tab renders the raw sentence, so the props did not reach DeskLines')
-      .not.toContain(GROUND_LINES.strengths); // anchored: the toContain below proves this same render carries the position
-    expect(text).toContain(stoodDown);
+    const first = text.indexOf(onPage(lines[0], lines, GROUND));
+    const second = text.indexOf(onPage(lines[1], lines, GROUND));
+    expect(first, 'the strategic-value lens is not on the page').toBeGreaterThanOrEqual(0);
+    expect(second, 'the exploitation lens does not follow the strategic-value lens').toBeGreaterThan(first);
   });
 
   test('the ROUTER threads the public condition to all three new tabs', () => {
@@ -878,7 +867,7 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
    * reds here rather than silently testing a position nobody renders.
    */
   const SITES = [
-    ['resources.groundAndWorkings', 'DS-ECO-11', ['terrainIdentity', 'economicStrengths'],
+    ['resources.groundAndWorkings', 'DS-ECO-11', ['strategicValue', 'exploitation'],
       ResourcesTab, { settlement: GROUND, publicDossier: false }],
     ['economics.commercialProfile', 'DS-ECO-12', ['incomeMix', 'criminalLine'],
       EconomicsTab, { settlement: GROUND, saveId: null, publicDossier: false }],
@@ -1060,5 +1049,20 @@ describe('UX consolidation — the Economics page says each fact once', () => {
     for (const gone of ['Economic Plot Hooks', 'The bridge toll is skimmed.', 'Resource Exploitation', 'Fully Exploited', '→ Defense tab', 'Economic operations', 'Smugglers\' Den']) {
       expect(text, `${gone} is still on the page`).not.toContain(gone); // anchored: toContain('Shadow Economy: 20% capture') on this render
     }
+  });
+});
+
+describe('UX consolidation — Resources (RULINGS-T2 T2-9, T2-10)', () => {
+  test('T2-10: the Nearby Resources labels name the state and stop asserting export potential', () => {
+    const town = {
+      ...GROUND,
+      config: { ...GROUND.config, nearbyResources: ['timber', 'iron_ore'], nearbyResourcesDepleted: ['iron_ore'] },
+    };
+    const text = render(e(ResourcesTab, { settlement: town, publicDossier: true })).container.textContent;
+    expect(text).toContain('Depleted');
+    expect(text).toContain('Abundant');
+    expect(text).toContain('Iron Ore');
+    expect(text).not.toContain('export potential reduced'); // anchored: toContain('Depleted') on this render
+    expect(text).not.toContain('Full export potential'); // anchored: toContain('Abundant') on this render
   });
 });

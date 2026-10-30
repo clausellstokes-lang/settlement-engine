@@ -531,7 +531,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Economics":   { measured: 40, sub14: 40 },
   "Systems/Power":       { measured: 28, sub14: 27 },
   "Systems/Defense":     { measured: 28, sub14: 28 },
-  "Systems/Resources":   { measured:  5, sub14:  5 },
+  // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
+  // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
+  "Systems/Resources":   { measured:  4, sub14:  4 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
@@ -588,7 +590,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Resources":   { prose:  4, chrome: 1, sub14: 1, sub12: 0 },
+  // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
+  "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
