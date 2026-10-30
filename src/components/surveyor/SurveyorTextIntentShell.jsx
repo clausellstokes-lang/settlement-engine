@@ -18,6 +18,10 @@
  *     close, which retires the conversation for the visit. The composer element is the
  *     same node in both shapes, so the caret and focus survive the growth.
  *   • THE PILL — the folded log: one line naming the Surveyor, which unfolds on click.
+ *   • THE PHONE SHEET (X-22(c): "phone: a bottom sheet") — below the phone breakpoint
+ *     the log is a full-width sheet on the viewport's bottom edge, lifted clear of the
+ *     software keyboard (the visualViewport inset). It does not move: the header still
+ *     folds it on a tap, but a drag neither moves the sheet nor writes the memory.
  *
  * IT IS NOT A SECOND DOOR. Everything that decides anything stays in SurveyorDoor:
  * entitlement, the dismiss lifecycle, the router call, the turn dispatch, the
@@ -84,7 +88,7 @@ export default function SurveyorTextIntentShell({
   const hints = Array.isArray(suggestions) ? suggestions.filter(Boolean) : [];
   const hintCount = hints.length;
   const grown = messages.length > 0;
-  const floating = open && grown;
+  const floating = open && grown && !mobile;
 
   // The door's dismiss ref is the card's node (a local ref stands in when the shell is
   // rendered alone, as its own tests do).
@@ -195,7 +199,7 @@ export default function SurveyorTextIntentShell({
   const sheet = mobile ? ' sf-door-panel--sheet' : '';
   const shape = !grown
     ? `sf-door-panel sf-door-composer${sheet}`
-    : 'sf-door-chat-card';
+    : (mobile ? `sf-door-panel sf-door-panel--chat${sheet}` : 'sf-door-chat-card');
   return (
     <div
       ref={cardRef}
@@ -204,7 +208,7 @@ export default function SurveyorTextIntentShell({
       aria-label={t('surveyorDoor.heading')}
       className={shape}
       style={{
-        ...(grown ? { ...anchor, zIndex: 60, width: CHAT_W } : null),
+        ...(grown && !mobile ? { ...anchor, zIndex: 60, width: CHAT_W } : null),
         background: CARD,
         border: `1px solid ${SLATE}`,
         fontFamily: sans,
@@ -217,7 +221,7 @@ export default function SurveyorTextIntentShell({
         <div
           className="sf-door-chat-head"
           onPointerDown={(e) => startDrag(e, { onTap: () => onFold?.(true) })}
-          style={{ background: CARD_HDR, cursor: 'grab', touchAction: 'none', userSelect: 'none' }}
+          style={{ background: CARD_HDR, cursor: mobile ? 'default' : 'grab', touchAction: 'none', userSelect: 'none' }}
         >
           <span className="sf-smallcap" style={{ fontSize: FS.sm, fontWeight: 700, color: SLATE_DEEP }}>
             {t('surveyorDoor.heading')}

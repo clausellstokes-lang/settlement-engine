@@ -625,7 +625,7 @@ describe('SurveyorDoor — absence, the keyboard, and the composer that grows up
   });
 });
 
-describe('SurveyorDoor — mobile, the keyboard inset', () => {
+describe('SurveyorDoor — mobile: the keyboard inset and the bottom sheet', () => {
   function stubVisualViewport({ height = 500, offsetTop = 0 } = {}) {
     const listeners = { resize: [], scroll: [] };
     const vv = {
@@ -680,6 +680,37 @@ describe('SurveyorDoor — mobile, the keyboard inset', () => {
     expect(vv.removeEventListener).toHaveBeenCalledWith('scroll', expect.any(Function));
     expect(listeners.resize).toHaveLength(0);
     expect(listeners.scroll).toHaveLength(0);
+  });
+
+  it('X-22(c) PHONE: the log is a bottom sheet (no floating anchor, no fixed width), lifted over the keyboard', async () => {
+    setEntitled(true);
+    mobileRef.current = true;
+    stubVisualViewport({ height: 500, offsetTop: 0 });
+    openDoor();
+    await askAndWait('why is bread so expensive here?');
+    const sheet = chat();
+    expect(sheet.className).toContain('sf-door-panel--sheet');
+    expect(sheet.style.position).toBe('');
+    expect(sheet.style.width).toBe('');
+    expect(sheet.style.getPropertyValue('--sf-door-kbd-inset')).toBe('300px');
+    expect(within(sheet).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor']);
+  });
+
+  it('PHONE: a drag on the sheet header neither moves it nor writes the memory; a tap still folds it', async () => {
+    setEntitled(true);
+    mobileRef.current = true;
+    openDoor();
+    await askAndWait('why is bread so expensive here?');
+    const head = within(chat()).getByText('The Surveyor');
+    fireEvent.pointerDown(head, { clientX: 100, clientY: 700, button: 0, pointerType: 'touch' });
+    fireEvent.pointerMove(window, { clientX: 100, clientY: 300 });
+    fireEvent.pointerUp(window, { clientX: 100, clientY: 300 });
+    expect(chat().style.top).toBe('');
+    expect(localStorage.getItem(CHAT_POS_KEY)).toBeNull();
+    fireEvent.pointerDown(within(chat()).getByText('The Surveyor'), { clientX: 100, clientY: 700, button: 0, pointerType: 'touch' });
+    fireEvent.pointerUp(window, { clientX: 100, clientY: 700 });
+    expect(screen.queryByRole('log')).toBeNull();
+    expect(screen.getByRole('button', { name: 'The Surveyor' })).toBeTruthy();
   });
 
   it('with no visualViewport API the inset is zero — the shell degrades, it never throws', () => {
