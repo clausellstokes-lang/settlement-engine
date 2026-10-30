@@ -409,3 +409,24 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
     expect(held, 'every roster held a market, so the agreement is one-sided').toBeLessThan(rosters.length);
   }, 120000);
 });
+
+describe('MASS MIGRATION NAMES ONE DIRECTION (chair ruling 2, 2026-10-30; ODQ §934.101)', () => {
+  // The crisis card says the town is RECEIVING people; the pressure line and the arrival vignette said it was
+  // emptying on 20 of 29 mass-migration towns of the v2 sample. Every line now tells the arrival.
+  const LEAVING = /\b(?:leav(?:e|es|ing)|departure|exodus|emptying|smaller than it was|fewer households|road out of \S+ is busier)\b/i;
+
+  it('no arrival vignette and no pressure line, on either economy arm, tells a departure', async () => {
+    const { PRESSURE_SENTENCES } = await import('../../src/generators/narrativeText.js');
+    const vignettes = STRESS_DESCS.mass_migration.map((line) => line(NAME));
+    const pressure = [
+      ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 80 } }),
+      ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 20 } }),
+    ];
+    expect(vignettes.length).toBe(6);
+    expect(pressure.length).toBe(6);
+    const failures = collectSeedFailures([...vignettes, ...pressure], (line) => {
+      expect(LEAVING.test(line), `a mass-migration line tells a departure: "${line}"`).toBe(false);
+    });
+    expectNoSeedFailures(failures, 'every mass-migration line tells the arrival');
+  });
+});
