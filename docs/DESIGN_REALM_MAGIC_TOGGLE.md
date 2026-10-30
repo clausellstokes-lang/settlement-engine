@@ -481,10 +481,20 @@ is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
 mundane vs magical: members 5 vs 5 (1.000), institutions 147 vs 145 (1.014), factions
-26 vs 28 (0.929), services 214 vs 213 (1.005), history events 21 vs 22 (0.955). A mundane
+26 vs 28 (0.929), services 215 vs 213 (1.009), history events 21 vs 22 (0.955). A mundane
 realm is not a thinner realm — it is at or above parity on three of the five axes and inside
 the provisional bands on the other two, and suppression rides the substitution arms exactly
 as the law requires.
+
+⚠️ **RE-RECORDED 2026-10-30 BY THE SERVICE RE-MAP (RS-1..RS-13, ODQ §934.101), ONE DECLARED
+SAME-SEED SHIFT, MUNDANE TWIN ONLY.** services `214 vs 213` → `215 vs 213` (1.005 → 1.009); every
+other axis holds. The harness bisects it to f39d5ae2 (services: register every catalog service
+name): the one added row is member 0's `Parcel forwarding` at its `Post relay station`, which the
+re-map filed out of magic, so it now rolls in a no-magic world (the signed shift record
+`docs/shift-records/2026-10-30-service-category-fidelity.json` names this). The arcane census over
+the mundane realm is still EMPTY; the ratio stays inside PENDING_BANDS, so no band is asked to
+move. Copied from the MG-4.2 pin's own measured line by cure lane T12. This block and the test
+header were moved in ONE act.
 
 ⚠️ **RE-RECORDED 2026-09-30 BY THE URBAN BAND (ODQ §934.86), ONE DECLARED SAME-SEED SHIFT, AND
 BOTH TWINS MOVE.** institutions `142 vs 136` → `147 vs 145`, factions `24 vs 24` → `26 vs 28`,
