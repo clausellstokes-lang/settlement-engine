@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4dd7672667e9a5e0ca7d1bf8a49883a4c340a035",
-  "measuredBy": "fp-batch-7-assembly-93391427",
-  "date": "2026-10-02",
-  "note": "FP batch 7 composed tip: PACT-REASK U1 +4 titles (pactFormation FPQ-72 block); PACT-ANSWER U1 +2 (FP-42 block); PACT-COMPLIANCE U1/U2 two new files pactStrainBandFp44 and treatyStreamCarryFpq75; STATECRAFT-BAND U1 one new file statecraftExposureBand; IN-6 U1-U6 new walker, domain, ui and ops files and arms; FPQ-86 none",
+  "measuredAtSha": "e69922550884a6cf4c536709211ea9198f7582a2",
+  "measuredBy": "build-lane-T2",
+  "date": "2026-10-30",
+  "note": "UX consolidation lane T2 (RULINGS-T2): new arms in existing test files only (economicsTabFlow, powerTabSupport, defenseTabFlow, viabilityTabAdjudication, magicTab, viabilityFilter and rewritten pins); no new test file",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 26804,
-  "suiteTitles": 7072
+  "titles": 26832,
+  "suiteTitles": 7079
 }
