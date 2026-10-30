@@ -988,13 +988,14 @@ describe('DS-REL-1 DRAWS ON THE RELATIONSHIPS TAB — and is silent for a free v
     expect(pub).toContain('Two houses, one quarrel.');
   });
 
-  test('the ROUTER threads publicDossier to BOTH tabs this component serves', () => {
+  test('the ROUTER threads publicDossier to the Relationships tab (and to Neighbours while that route exists)', () => {
     const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
-    for (const tab of ['relationships', 'neighbours']) {
-      const line = router.split('\n').find((l) => l.includes(`case '${tab}':`));
-      expect(line, `no router case for '${tab}'`).toBeTruthy();
-      expect(line, `'${tab}' does not receive the flag`).toContain('publicDossier={publicDossier}');
-    }
+    const line = router.split('\n').find((l) => l.includes(`case 'relationships':`));
+    expect(line, "no router case for 'relationships'").toBeTruthy();
+    expect(line, "'relationships' does not receive the flag").toContain('publicDossier={publicDossier}');
+    // X-6 removes the Neighbours route (BUILD-T1); until it lands, it must still pass the flag.
+    const neighbours = router.split('\n').find((l) => l.includes(`case 'neighbours':`));
+    if (neighbours) expect(neighbours, "'neighbours' does not receive the flag").toContain('publicDossier={publicDossier}');
   });
 });
 

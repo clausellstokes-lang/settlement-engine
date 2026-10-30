@@ -3,7 +3,7 @@ import { FS, MUTED, swatch } from '../theme.js';
 import { edged } from '../../design/edgedBox.js';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
-import {Ti, serif, PlotHook} from './Primitives';
+import { serif } from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import Button from '../primitives/Button.jsx';
 import ProseParagraph from '../ProseParagraph.jsx';
@@ -157,22 +157,23 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
 }
 
 export function ConflictCard({conflict:c}) {
-  const [_open,_setOpen]=useState(false);
-  // THE PHONE PROSE FLOOR — the description and the stakes sentence.
+  // THE PHONE PROSE FLOOR — the stakes sentence (and a legacy description).
   const mobile = useIsMobile();
+  // ONE CARD, EACH FACT ONCE (chair ruling 2026-10-30). The generator's `desc` is a fixed
+  // template restating the parties, the intensity and the stakes the card already prints,
+  // so the head carries the one new fact (the issue) and `desc` is not rendered. A record
+  // with no issue (another writer, or a legacy save) still shows its description. The
+  // conflict's plot hooks live on the Plot Hooks page (X-2).
   const intStyle={high:{color:'#8b1a1a',label:'High tension'},moderate:{color:'#a0762a',label:'Moderate tension'},low:{color:'#1a5a28',label:'Low tension'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
-        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}{c.issue?` · ${c.issue}`:''}</span>
       </div>
-      <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
-      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
-      {c.plotHooks?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8,marginTop:4}}>
-        {c.plotHooks.map((h,i)=><PlotHook key={i} text={typeof h==='string'?h:h.hook||Ti(h)}/>)}
-      </div>}
+      {!c.issue&&(c.desc||c.description)&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>}
+      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED}}><strong>At stake:</strong> {c.stakes}</div>}
     </div>
   );
 }
