@@ -494,3 +494,125 @@ describe('PostGenCoach — the corner card (the owner, 2026-10-30)', () => {
     expect(card.getAttribute('aria-label')).toBe(name);
   });
 });
+
+// ── THE CARD MOVES (the owner, 2026-10-30: "floating and movable") ───────────────
+// Dragged by its header with pointer events (mouse and touch alike), clamped to the
+// viewport with an 8 px margin, and remembered per device beside the dismissal, under
+// sf:guidance:wizard_next_steps:pos. jsdom lays nothing out, so the card's box is stubbed:
+// 280 x 200 at its own left/top when it has one, else at the default corner.
+describe('PostGenCoach — the corner card moves and remembers where (the owner, 2026-10-30)', () => {
+  const POS_KEY = 'sf:guidance:wizard_next_steps:pos';
+  const W = 280;
+  const H = 200;
+  let rectSpy;
+  // A PointerEvent where jsdom has one, else a MouseEvent of the same type (both carry
+  // clientX/clientY, which is all the drag reads).
+  const ptr = (type, init) => new (window.PointerEvent || window.MouseEvent)(
+    type, { bubbles: true, cancelable: true, button: 0, ...init },
+  );
+  const cardOf = (container) => container.firstChild;
+  const header = () => screen.getByRole('button', { name: /Erdenkul is ready/ });
+  function drag(from, to, pointerType = 'mouse') {
+    act(() => { header().dispatchEvent(ptr('pointerdown', { clientX: from[0], clientY: from[1], pointerType })); });
+    act(() => { window.dispatchEvent(ptr('pointermove', { clientX: to[0], clientY: to[1], pointerType })); });
+    act(() => { window.dispatchEvent(ptr('pointerup', { clientX: to[0], clientY: to[1], pointerType })); });
+  }
+
+  beforeEach(() => {
+    try { localStorage.clear(); } catch { /* no-op */ }
+    navigateTo('/create');
+    useStore.__set({
+      settlement: { tier: 'Village', name: 'Erdenkul' },
+      canSave: () => false,
+      auth: { tier: 'anon' },
+      activeSaveId: null,
+      savedSettlements: [],
+      pipelineRevealActive: false,
+    });
+    rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function rect() {
+      if (this.getAttribute('role') !== 'region') {
+        return { left: 0, top: 0, right: 0, bottom: 0, width: 0, height: 0, x: 0, y: 0 };
+      }
+      const left = this.style.left ? parseFloat(this.style.left) : viewport.w - 16 - W;
+      const top = this.style.top ? parseFloat(this.style.top) : viewport.h - 16 - H;
+      return { left, top, right: left + W, bottom: top + H, width: W, height: H, x: left, y: top };
+    });
+  });
+  afterEach(() => { rectSpy.mockRestore(); cleanup(); navigateTo('/'); });
+
+  it('a drag by the header moves the card and persists where it was put', () => {
+    const { container } = render(<PostGenCoach />);
+    // Default corner at 1440 x 900: left 1144, top 684. Grab at (1200, 700), drop at (900, 380).
+    drag([1200, 700], [900, 380]);
+    const card = cardOf(container);
+    expect(card.style.position).toBe('fixed');
+    expect(card.style.left).toBe('844px');
+    expect(card.style.top).toBe('364px');
+    expect(card.style.bottom).toBe('');
+    expect(card.style.right).toBe('');
+    expect(JSON.parse(localStorage.getItem(POS_KEY))).toEqual({ left: 844, top: 364 });
+    // The click that ends a drag is not a fold.
+    fireEvent.click(header());
+    expect(header().getAttribute('aria-expanded')).toBe('true');
+    // The position lives beside the dismissal and is not one.
+    expect(localStorage.getItem('sf:guidance:wizard_next_steps')).toBeNull();
+  });
+
+  it('a touch drag moves it the same way', () => {
+    const { container } = render(<PostGenCoach />);
+    drag([1200, 700], [1000, 500], 'touch');
+    expect(cardOf(container).style.left).toBe('944px');
+    expect(cardOf(container).style.top).toBe('484px');
+  });
+
+  it('the drag is clamped to the viewport with an 8 px margin, on every side', () => {
+    const { container } = render(<PostGenCoach />);
+    drag([1200, 700], [-2000, -2000]);
+    expect(cardOf(container).style.left).toBe('8px');
+    expect(cardOf(container).style.top).toBe('8px');
+    drag([20, 20], [5000, 5000]);
+    expect(cardOf(container).style.left).toBe(`${1440 - W - 8}px`);
+    expect(cardOf(container).style.top).toBe(`${900 - H - 8}px`);
+    expect(JSON.parse(localStorage.getItem(POS_KEY))).toEqual({ left: 1440 - W - 8, top: 900 - H - 8 });
+  });
+
+  it('a press on the close control is not a drag', () => {
+    const { container } = render(<PostGenCoach />);
+    const closeBtn = screen.getByRole('button', { name: 'Close' });
+    act(() => { closeBtn.dispatchEvent(ptr('pointerdown', { clientX: 1400, clientY: 700 })); });
+    act(() => { window.dispatchEvent(ptr('pointermove', { clientX: 900, clientY: 300 })); });
+    act(() => { window.dispatchEvent(ptr('pointerup', { clientX: 900, clientY: 300 })); });
+    expect(cardOf(container).style.left).toBe('');
+    expect(localStorage.getItem(POS_KEY)).toBeNull();
+  });
+
+  it('a remembered position is where the card opens next time; a corrupt one is ignored', () => {
+    localStorage.setItem(POS_KEY, JSON.stringify({ left: 100, top: 120 }));
+    const first = render(<PostGenCoach />);
+    expect(cardOf(first.container).style.left).toBe('100px');
+    expect(cardOf(first.container).style.top).toBe('120px');
+    cleanup();
+    localStorage.setItem(POS_KEY, '{not json');
+    const second = render(<PostGenCoach />);
+    expect(cardOf(second.container).style.left).toBe('');
+    expect(cardOf(second.container).getAttribute('style')).toContain('bottom: calc(');
+  });
+
+  it('a window resize re-clamps a remembered position into the new viewport', () => {
+    localStorage.setItem(POS_KEY, JSON.stringify({ left: 1100, top: 600 }));
+    const { container } = render(<PostGenCoach />);
+    expect(cardOf(container).style.left).toBe('1100px');
+    setViewport(1200, 700);
+    expect(cardOf(container).style.left).toBe(`${1200 - W - 8}px`);
+    expect(cardOf(container).style.top).toBe(`${700 - H - 8}px`);
+  });
+
+  it('on a phone the remembered position is not read: the card stays in the flow', () => {
+    localStorage.setItem(POS_KEY, JSON.stringify({ left: 100, top: 120 }));
+    setViewport(390, 844);
+    const { container } = render(<PostGenCoach />);
+    expect(cardOf(container).style.position).toBe('relative');
+    expect(cardOf(container).style.left).toBe('');
+    expect(cardOf(container).style.top).toBe('');
+  });
+});

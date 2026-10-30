@@ -82,7 +82,7 @@
  *   bottom-anchored fixed site any more; re-adding one reds there)
  */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { ChevronRight, ChevronLeft, Check } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import { t } from '../copy/index.js';
@@ -95,7 +95,7 @@ import Button from './primitives/Button.jsx';
 import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogDismiss } from './primitives/useDialogFocusTrap.js';
 import { buildNextSteps } from './generate/nextSteps.js';
-import { isGuidanceDismissed, markGuidanceDismissed } from '../lib/guidance.js';
+import { isGuidanceDismissed, markGuidanceDismissed, guidanceDismissalKey } from '../lib/guidance.js';
 import {
   selectPageWhisper, deriveGuidanceFirst, deriveGuidanceNewborn,
 } from '../domain/display/guidanceRegistry.js';
@@ -111,6 +111,43 @@ const WHISPER_ID = 'wizard_next_steps';
 const DESKTOP_MIN = 1024;
 const CARD_W = 280;
 const CORNER = SP.lg;
+
+// ── THE CARD MOVES (the owner, 2026-10-30: "floating and movable") ──────────────────
+// Where the reader put the card is remembered per device, beside the dismissal and in
+// its idiom (src/lib/guidance.js): one sf:guidance:* key, every access try/caught so a
+// blocked localStorage never throws into render. The value is the card's top-left in
+// viewport px; a missing or malformed value means "the default corner".
+const POS_KEY = `${guidanceDismissalKey(WHISPER_ID)}:pos`;
+const EDGE = 8;
+
+function readCornerPos() {
+  try {
+    const raw = typeof localStorage !== 'undefined' ? localStorage.getItem(POS_KEY) : null;
+    if (!raw) return null;
+    const v = JSON.parse(raw);
+    return Number.isFinite(v?.left) && Number.isFinite(v?.top) ? { left: v.left, top: v.top } : null;
+  } catch {
+    return null;
+  }
+}
+
+function writeCornerPos(p) {
+  try {
+    if (typeof localStorage !== 'undefined') localStorage.setItem(POS_KEY, JSON.stringify(p));
+  } catch {
+    /* storage unavailable: the card stays where it is for this visit */
+  }
+}
+
+/** Keep a w x h box EDGE px inside the viewport on every side. */
+function clampToViewport(p, w, h) {
+  const maxLeft = Math.max(EDGE, window.innerWidth - w - EDGE);
+  const maxTop = Math.max(EDGE, window.innerHeight - h - EDGE);
+  return {
+    left: Math.round(Math.min(Math.max(EDGE, p.left), maxLeft)),
+    top: Math.round(Math.min(Math.max(EDGE, p.top), maxTop)),
+  };
+}
 
 export default function PostGenCoach() {
   const mobile = useIsMobile();
@@ -185,6 +222,33 @@ export default function PostGenCoach() {
     () => (corner ? setCollapsed(true) : setHiddenThisVisit(true)),
   );
 
+  // Where the reader dragged the card (null: the default corner). Read once per mount.
+  const [pos, setPos] = useState(readCornerPos);
+  // True for the one click that ends a drag, so dropping the card is not also a fold.
+  const swallowClickRef = useRef(false);
+  // The live drag's teardown, so an unmount mid-drag leaves no window listener behind.
+  const endDragRef = useRef(null);
+  useEffect(() => () => endDragRef.current?.(), []);
+
+  // A window resize, or the fold changing the card's size, re-clamps the remembered spot
+  // into the viewport. Display only: the stored preference is rewritten by a drag.
+  useEffect(() => {
+    if (!corner) return undefined;
+    const reclamp = () => {
+      const node = cardRef.current;
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      setPos((p) => {
+        if (!p) return p;
+        const c = clampToViewport(p, r.width, r.height);
+        return c.left === p.left && c.top === p.top ? p : c;
+      });
+    };
+    reclamp();
+    window.addEventListener('resize', reclamp);
+    return () => window.removeEventListener('resize', reclamp);
+  }, [corner, collapsed, cardRef]);
+
   if (!shown) return null;
 
   // Each forward "what's next" move (save, export, refine, place) is its own
@@ -220,10 +284,56 @@ export default function PostGenCoach() {
     // shared composition. It sits on the `coach` layer (900), one step under the feedback
     // panel (910) that opens in the same corner, so the panel the reader summoned is
     // always on top and its close control is never covered.
-    const anchor = {
-      position: 'fixed',
-      right: CORNER,
-      bottom: aboveFooter(aboveBottomNav(CORNER)),
+    // Once dragged, the card is placed by its top-left; until then it keeps the lifted
+    // corner anchor. Two literals on purpose: the bottom-anchored-chrome walker reads the
+    // second as this file's one LIFTED site.
+    const anchor = pos
+      ? { position: 'fixed', left: pos.left, top: pos.top }
+      : {
+        position: 'fixed',
+        right: CORNER,
+        bottom: aboveFooter(aboveBottomNav(CORNER)),
+      };
+    // Drag by the header, with pointer events (mouse and touch alike). A press that
+    // travels under 4 px is a click (the fold); past that it is a move, clamped to the
+    // viewport on every step and remembered where it is dropped.
+    const startDrag = (e) => {
+      if (e.pointerType === 'mouse' && e.button !== 0) return;
+      if (e.target?.closest?.('[data-coach-nodrag]')) return;
+      const node = cardRef.current;
+      if (!node) return;
+      const r = node.getBoundingClientRect();
+      const d = { x: e.clientX, y: e.clientY, left: r.left, top: r.top, moved: false, last: null };
+      const move = (ev) => {
+        const dx = ev.clientX - d.x;
+        const dy = ev.clientY - d.y;
+        if (!d.moved && Math.abs(dx) + Math.abs(dy) < 4) return;
+        d.moved = true;
+        d.last = clampToViewport({ left: d.left + dx, top: d.top + dy }, r.width, r.height);
+        setPos(d.last);
+      };
+      const end = () => {
+        window.removeEventListener('pointermove', move);
+        window.removeEventListener('pointerup', up);
+        window.removeEventListener('pointercancel', up);
+        endDragRef.current = null;
+      };
+      const up = () => {
+        end();
+        if (!d.moved || !d.last) return;
+        writeCornerPos(d.last);
+        swallowClickRef.current = true;
+        setTimeout(() => { swallowClickRef.current = false; }, 0);
+      };
+      endDragRef.current?.();
+      endDragRef.current = end;
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+      window.addEventListener('pointercancel', up);
+    };
+    const toggleFold = () => {
+      if (swallowClickRef.current) { swallowClickRef.current = false; return; }
+      setCollapsed(c => !c);
     };
     const pillText = `${guide.headline.replace(/\.$/, '')} \u00b7 What\u2019s next`;
     return (
@@ -244,28 +354,39 @@ export default function PostGenCoach() {
           overflow: 'hidden',
         }}
       >
-        {/* Header: the headline is the fold toggle; the house close retires the hint. */}
-        <div style={{
-          display: 'flex', alignItems: 'center', gap: SP.xs,
-          padding: `${SP.xs}px ${SP.xs}px ${SP.xs}px ${SP.sm}px`,
-          background: CARD_HDR,
-          borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`,
-        }}>
+        {/* Header: the drag handle. The headline is the fold toggle; the house close
+            retires the hint and is never a drag start. The pointer listener sits on the
+            box, not on a control, so every press inside it can move the card while the
+            keyboard reaches the same two controls by Tab. */}
+        <div
+          onPointerDown={startDrag}
+          style={{
+            display: 'flex', alignItems: 'center', gap: SP.xs,
+            padding: `${SP.xs}px ${SP.xs}px ${SP.xs}px ${SP.sm}px`,
+            background: CARD_HDR,
+            borderBottom: collapsed ? 'none' : `1px solid ${BORDER}`,
+            cursor: 'grab', touchAction: 'none', userSelect: 'none',
+          }}
+        >
           <Button
             variant="ghost"
             size="sm"
             aria-expanded={!collapsed}
-            onClick={() => setCollapsed(c => !c)}
+            onClick={toggleFold}
             style={{
               flex: 1, minWidth: 0, justifyContent: 'flex-start',
               border: 'none', background: 'transparent', padding: `${SP.xs}px`,
               fontFamily: serif_, fontSize: FS.md, fontWeight: 600, color: INK,
-              overflow: 'hidden', textOverflow: 'ellipsis',
+              overflow: 'hidden', textOverflow: 'ellipsis', cursor: 'inherit',
             }}
           >
             {collapsed ? pillText : guide.headline}
           </Button>
-          {!collapsed && <DialogClose onClose={close} tone="default" />}
+          {!collapsed && (
+            <span data-coach-nodrag="" style={{ display: 'inline-flex' }}>
+              <DialogClose onClose={close} tone="default" />
+            </span>
+          )}
         </div>
 
         {!collapsed && (
