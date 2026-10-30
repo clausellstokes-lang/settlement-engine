@@ -215,3 +215,38 @@ describe('HistoryTab — the still-relevant mark is a hook marker (X-14b)', () =
     expect(dot(container, 'The Salt Pact').getAttribute('title')).toMatch(/still relevant today/);
   });
 });
+
+describe('the print history chapter marks the same events (X-14b, chair item 3)', () => {
+  function collectText(node, out = []) {
+    if (node == null || typeof node === 'boolean') return out;
+    if (typeof node === 'string' || typeof node === 'number') { out.push(String(node)); return out; }
+    if (Array.isArray(node)) { for (const n of node) collectText(n, out); return out; }
+    if (typeof node === 'object') {
+      if (typeof node.type === 'function') return collectText(node.type(node.props), out);
+      return collectText(node.props?.children, out);
+    }
+    return out;
+  }
+  it('HistoryFounding spells "Still relevant today" on exactly the events the screen marks', async () => {
+    const { HistoryFounding } = await import('../../src/pdf/sections/HistoryFounding.jsx');
+    const { eventHasOpenThread } = await import('../../src/domain/display/historyOpenThreads.js');
+    const h = {
+      age: 300, historicalCharacter: null, founding: {},
+      events: [
+        { title: 'The Old Flood', type: 'natural_disaster', yearsAgo: 150, severity: 'minor', hooks: [], lastingEffects: [] },
+        { title: 'The Tithe Riot', type: 'political', yearsAgo: 220, severity: 'minor', hooks: [], lastingEffects: [] },
+        { title: 'The Salt Pact', type: 'economic', yearsAgo: 12, severity: 'minor', hooks: ['A clause is missing.'], lastingEffects: [] },
+      ],
+      tensions: [{ label: 'guild_conflict', description: 'The guilds still quarrel over what The Tithe Riot settled.', hooks: [] }],
+      timeline: [],
+    };
+    const texts = collectText(HistoryFounding({ settlement: { name: 'Briarwatch' }, vm: { history: h }, stateProse: null }));
+    const marks = texts.filter((t) => t === 'Still relevant today').length;
+    // The screen's derivation over the same record: the riot (cited) and the pact (hooked).
+    const screen = [
+      { name: 'The Old Flood', plotHooks: [] }, { name: 'The Tithe Riot', plotHooks: [] }, { name: 'The Salt Pact', plotHooks: ['A clause is missing.'] },
+    ].filter((e) => eventHasOpenThread(e, { currentTensions: [{ description: h.tensions[0].description }] })).length;
+    expect(screen).toBe(2);
+    expect(marks).toBe(screen);
+  });
+});

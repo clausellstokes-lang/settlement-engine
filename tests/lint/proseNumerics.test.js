@@ -500,6 +500,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // 383 (both categories) and the belief row 440 -> 453 (three rows, the band-mirror function
 // above them). Ceilings fall: total 214 -> 212, floatInterpolation 145 -> 144, percentToken
 // 52 -> 51.
+// Chair item 3 (the print history chapter reads the X-14b mark): HistoryFounding.jsx 406 -> 420,
+// a pure line move.
 const REVIEWED_TOTAL_CEILING = 212;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 144,

@@ -25,6 +25,9 @@ import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, hookText, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+// THE STILL-RELEVANT MARK, read from the screen's own derivation (owner addendum X-14b): an
+// event carries an open thread when it has a plot hook or a current tension names it.
+import { eventHasOpenThread } from '../../domain/display/historyOpenThreads.js';
 
 const FOUNDING_FIELDS = [
   { key: 'origin',           label: 'Origin' },
@@ -40,7 +43,13 @@ const nonBlank = (v) => typeof v === 'string' ? v.trim().length > 0 : !!v;
 
 export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   const h = vm.history;
-  const events = [...(h.events || [])].sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0));
+  // The view-model slice renames the fields (title, hooks; tensions' hooks), so it is handed to
+  // the shared derivation in the record's own spelling: one function marks screen and print.
+  const tensions = h.tensions || [];
+  const threadHistory = { currentTensions: tensions.map(t => ({ description: t?.description, plotHooks: t?.hooks || [] })) };
+  const events = [...(h.events || [])]
+    .sort((a, b) => (a?.yearsAgo ?? 0) - (b?.yearsAgo ?? 0))
+    .map(ev => ({ ...ev, open: eventHasOpenThread({ name: ev?.title, plotHooks: ev?.hooks }, threadHistory) }));
   const hasFoundingDetail = FOUNDING_FIELDS.some(f => nonBlank(h.founding?.[f.key]));
   const hasFoundingSummary = nonBlank(h.founding?.summary);
 
@@ -171,7 +180,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label_plain, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             Live tensions · {h.tensions.length}
           </Text>
-          {h.tensions.map((t, i) => (
+          {tensions.map((t, i) => (
             <TensionRow key={`t-${i}`} tension={t} idx={i} />
           ))}
         </View>
@@ -197,6 +206,10 @@ function EventRow({ ev, idx }) {
     >
       <View style={{ width: 60, alignItems: 'flex-start' }}>
         <Text style={{ ...type.label_plain, color: palette.gold, fontSize: pt['7.5'] }}>{yearLabel}</Text>
+        {/* Print has no hover title, so the mark the screen's big dot carries is spelled here. */}
+        {ev.open && (
+          <Text style={{ ...type.caption, color: palette.ai, fontSize: pt['6.5'], marginTop: 2 }}>Still relevant today</Text>
+        )}
         {ev.severity && (
           <View style={{ marginTop: 3 }}>
             <Tag tone={sevTone}>{cap(ev.severity)}</Tag>
@@ -378,17 +391,18 @@ function Timeline({ events, age }) {
           }}
         />
         {/* Dots */}
-        {items.map(({ _ev, i, pct, tone }) => (
+        {/* The big dot is the still-relevant mark, as on screen (X-14b). */}
+        {items.map(({ ev, i, pct, tone }) => (
           <View
             key={`tl-${i}`}
             style={{
               position: 'absolute',
               left: `${pct}%`,
-              top: 7,
-              width: 9,
-              height: 9,
-              marginLeft: -4.5,
-              borderRadius: 4.5,
+              top: ev.open ? 5 : 7,
+              width: ev.open ? 13 : 9,
+              height: ev.open ? 13 : 9,
+              marginLeft: ev.open ? -6.5 : -4.5,
+              borderRadius: ev.open ? 6.5 : 4.5,
               backgroundColor: palette[tone] || palette.gold,
               borderColor: palette.card,
               borderWidth: 1,

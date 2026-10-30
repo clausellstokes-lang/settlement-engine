@@ -1195,7 +1195,7 @@
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 406,
+    "line": 420,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },
