@@ -40,6 +40,7 @@ vi.mock('../../src/store/index.js', () => {
 import { useStore } from '../../src/store/index.js';
 import WarTab, { MARTIAL_CRISIS_TYPES, warTabHasContent } from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
+import RumorsTab from '../../src/components/new/tabs/RumorsTab.jsx';
 import { CURRENT_TREATY_TICKS_PER_YEAR } from '../../src/domain/worldPulse/treatyClock.js';
 import SubstrateTab from '../../src/components/new/tabs/SubstrateTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
@@ -582,5 +583,15 @@ describe('MagicTab — 10-facet posture + magic-free dormancy', () => {
     const settlement = { config: { magicLevel: 'moderate', primaryDeitySnapshot: { name: 'Sunlord Aurelian', rankAxis: 'major' } } };
     render(<MagicTab settlement={settlement} />);
     expect(screen.getByTestId('magic-deity-coupling').textContent).toMatch(/magic legality/i);
+  });
+});
+
+describe('RumorsTab — the absence states the fact (chair ruling U3, 2026-10-30)', () => {
+  it('with no rumor ledger the tab says no word has reached the town, and promises nothing', () => {
+    useStore.__set({ auth: { tier: 'premium' }, campaigns: [], savedSettlements: [] });
+    const { container } = render(<RumorsTab settlement={{ id: 'quiet', name: 'Stillwater' }} saveId="quiet" />);
+    const text = screen.getByTestId('rumors-tab').textContent;
+    expect(text).toBe('No word has reached Stillwater.');
+    expectAbsentWithAnchor(container.textContent, 'the moment it happens', 'No word has reached Stillwater.', 'U3 contradiction');
   });
 });

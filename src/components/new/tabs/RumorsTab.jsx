@@ -178,7 +178,8 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   if (!view) {
     return (
       <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: FS.sm }}>
-        No word travels here yet. The realm's news reaches {settlement?.name || 'this settlement'} the moment it happens.
+        {/* The fact, not a promise about delivery (chair ruling U3): word travels with delay. */}
+        No word has reached {settlement?.name || 'this settlement'}.
       </div>
     );
   }
@@ -186,8 +187,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   return (
     <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
-        What {settlement?.name || 'this settlement'} has heard, as it believes it. Word travels the
-        trade roads, and the roads are long.
+        What {settlement?.name || 'this settlement'} has heard, as it believes it.
       </p>
       <div style={{
         display: 'grid',

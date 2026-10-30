@@ -68,6 +68,7 @@ import SessionMode from '../../src/components/session/SessionMode.jsx';
 import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { extractSettlementContext } from '../../src/components/new/dailyLifeLogic.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 /** Deliberately lower case, with the reason. Anything else that starts lower is a defect. */
 const ALLOWED = new Set([
@@ -503,7 +504,7 @@ describe('the three mounts browser pass 3 met, each pinned to the band it must r
     cleanup();
   }, 60000);
 
-  test('World → Daily Life speaks the readiness band on its anchor strip', () => {
+  test('World → Daily Life no longer carries the readiness band (chair ruling D1: the Overview glance owns it)', () => {
     const s = settlements.get('village');
     const dp = s.defenseProfile || {};
     const fixture = {
@@ -512,11 +513,13 @@ describe('the three mounts browser pass 3 met, each pinned to the band it must r
     };
     const { container } = render(<DailyLifeTab settlement={fixture} />);
     const text = container.textContent || '';
-    expect(text, 'the Defense anchor fact did not render').toContain('Well-defended');
-    // anchored: the line above proves the anchor fact rendered.
-    expect(text).not.toContain('Well-Defended');
+    // The strip still renders its own facts; the readiness band is the Overview's (X-1),
+    // in either spelling.
+    expect(text, 'the Food anchor fact did not render').toContain('Food');
+    expectAbsentWithAnchor(text, 'Well-defended', 'Food', 'the Defense anchor (D1)');
+    expectAbsentWithAnchor(text, 'Well-Defended', 'Food', 'the Defense anchor (D1)');
     // The reader that keys the daily-life prose off this label still sees the declared
-    // spelling, which is the whole reason the case is made at the mount.
+    // spelling, which the local narrative and the AI prompt read.
     expect(extractSettlementContext(fixture).defenseReadinessLabel).toBe('Well-Defended');
     cleanup();
   }, 60000);

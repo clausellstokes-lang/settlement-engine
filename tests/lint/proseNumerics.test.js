@@ -485,7 +485,8 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // DEBT MOTION. The chair's cuts in the World group remove lines above banked rows in the
 // files that lane owns; each move is path-, category- and snippet-identical, 0 added and
 // 0 removed, census and category counts unchanged. U2 (NPCs, N4 tally cut):
-// npcComponents.jsx 150 -> 146, 157 -> 153.
+// npcComponents.jsx 150 -> 146, 157 -> 153. U5 (Daily Life anchor strip trimmed, the
+// unsaved hint and empty state merged): DailyLifeTab.jsx 268 -> 235.
 const REVIEWED_TOTAL_CEILING = 218;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 147,

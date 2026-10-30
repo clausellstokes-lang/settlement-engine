@@ -691,8 +691,9 @@ describe('DESK-ECON2 — the mounted positions are DRAWS, not citations', () => 
     const pub = render(e(DailyLifeTab, { settlement: GROUND, publicDossier: true }));
     const pubText = pub.container.textContent;
     expectPresentThenAbsent(privText, pubText, GROUND_LINES.standing, 'daily_life.standingOfLiving');
-    // The band word is the page's own anchor fact and is NOT corpus prose.
-    expect(pubText).toContain('Comfortable');
+    // The band word is no longer an anchor fact here (chair ruling D1: the Overview's glance
+    // owns it); the public page still renders its own strip.
+    expect(pubText).toContain('Food');
     cleanup();
     // ⭐ THE ONE-FACT-ONE-SENTENCE LAW, DRIVEN RATHER THAN ASSERTED FROM THE TABLE: the same
     // rung is mounted at `economics.economyTile` as a GLANCE, so the economics page must NOT
@@ -949,5 +950,43 @@ describe('DeskLines — the name props reach the real call sites, non-vacuously'
     // is the one-line rule and not the weave having stopped working.
     expect(weaveBlock([OPENER, REPEAT], { settlementName: NAME, tierNoun: tierNounFor(GROUND.tier) }).paragraph)
       .toContain(STOOD_DOWN);
+  });
+});
+
+/**
+ * DAILY LIFE, CONSOLIDATED (chair rulings D1, D3+D6, X-1, X-3; 2026-10-30). The anchor strip
+ * carries the four facts no other page owns (Food, Access, Culture, Active stress); the
+ * stress is said once, as its own anchor; the unsaved hint and the empty state are one plain
+ * line; the product marketing is gone.
+ */
+describe('DAILY LIFE — the four anchors, one offer line, no marketing', () => {
+  const STRESSED = () => ({
+    ...GROUND,
+    config: { ...(GROUND.config || {}), culture: 'germanic', tradeRouteAccess: 'river' },
+    stress: [{ type: 'mass_migration', label: 'Mass Migration' }],
+  });
+
+  test('the strip carries Food, Access, Culture and Active stress, and nothing the Overview or Power owns', () => {
+    useStore.setState({ campaigns: [] });
+    const text = render(e(DailyLifeTab, { settlement: STRESSED(), publicDossier: true })).container.textContent;
+    for (const label of ['Food', 'Access', 'Culture', 'Active stress']) expect(text).toContain(label);
+    expect(text).toContain('Mass Migration');
+    // Said once: the anchor, never again as a Safety suffix.
+    expect(text.split('Mass Migration').length - 1).toBe(1);
+    for (const gone of ['Settlement', 'Economy', 'Safety', 'Governed by', 'Terrain', 'Defense', 'Magic']) {
+      expectAbsentWithAnchor(text, gone, 'Active stress', `the ${gone} anchor (D1)`);
+    }
+  });
+
+  test('one plain offer line; no pitch, no marketing', () => {
+    useStore.setState({ campaigns: [] });
+    const { container, getByTestId } = render(e(DailyLifeTab, { settlement: STRESSED(), publicDossier: false }));
+    const text = container.textContent;
+    const offer = getByTestId('daily-life-offer').textContent;
+    expect(offer).toMatch(/^Ordinary life here in prose|^Save this settlement/);
+    expect(container.querySelectorAll('[data-testid="daily-life-offer"]')).toHaveLength(1);
+    for (const gone of ['Opus-grade', 'evocative', 'five paragraphs', 'Five paragraphs', 'What is daily life like here?', 'Anchor facts above remain available']) {
+      expectAbsentWithAnchor(text, gone, offer, 'the D3/D6 marketing');
+    }
   });
 });
