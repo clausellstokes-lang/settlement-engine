@@ -399,7 +399,7 @@ describe('WarTab — the martial crisis is the Overview\'s (X-3), and the tab ne
         const { container } = render(<WarTab settlement={bannered(type)} saveId="held" />);
         expect(screen.queryByTestId('war-martial-crisis')).toBeNull();
         expectPresentThenAbsent(calmText, container.textContent, peace, `${type}, in a campaign: ${inCampaign}`);
-        expect(container.textContent).not.toContain(`The ${type} summary as generated.`);
+        expect(container.textContent).not.toContain(`The ${type} summary as generated.`); // anchored: expectPresentThenAbsent on the line above proves the same roster's page is live
         cleanup();
       }
     }

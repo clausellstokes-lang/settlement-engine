@@ -494,15 +494,15 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     cleanup();
     const pub = renderHistory(true);
-    // DS-GEN-14 and DS-GEN-16 render as ONE paragraph under the identity header, in that
-    // order; DS-GEN-9's four lenses are their own woven position below it.
+    // DS-GEN-14 now opens the Founding block (chair ruling H3, 2026-10-30) and DS-GEN-16 stands
+    // alone under the identity header, so each is the FIRST sentence of its own paragraph;
+    // DS-GEN-9's four lenses are their own woven position below it.
     const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
-    const foundedRecord = [hist.foundedLine, hist.recordLine];
     expectNoSeedFailures(collectSeedFailures([
       [onPage(IDENTITY, hist.identityLines, CHRONICLED), 'DS-GEN-9 the founding line (history.identity)'],
       [onPage(MARKER, hist.identityLines, CHRONICLED), 'DS-GEN-9 the marker event (history.identity)'],
-      [onPage(FOUNDED, foundedRecord, CHRONICLED), 'DS-GEN-14 founded once, grown since (history.founded)'],
-      [onPage(RECORD, foundedRecord, CHRONICLED), 'DS-GEN-16 what the record carries (history.record)'],
+      [onPage(FOUNDED, [hist.foundedLine], CHRONICLED), 'DS-GEN-14 founded once, grown since (history.founded)'],
+      [onPage(RECORD, [hist.recordLine], CHRONICLED), 'DS-GEN-16 what the record carries (history.record)'],
     ], ([sentence, label]) => expectPresentThenAbsent(
       priv, pub, sentence, `the general desk at ${label}`,
     )), 'every history position draws privately and is silent on a public dossier');
@@ -523,10 +523,10 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     expect(priv, 'a doubled article reached the page').not.toMatch(/\bThe The\b/); // anchored: the toContain(RECORD) below proves this same render drew a corpus sentence from the calamity pool
     // ANCHORED: the same render really did draw the record line, so the absence above is the
-    // fix holding rather than the block having fallen silent. The record line is the SECOND
-    // sentence of its woven paragraph, so the page prints it with its opening name stood down.
+    // fix holding rather than the block having fallen silent. The record line is its own
+    // paragraph now (H3), so the page prints it with its opening name intact.
     const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
-    expect(priv).toContain(onPage(RECORD, [hist.foundedLine, hist.recordLine], CHRONICLED));
+    expect(priv).toContain(onPage(RECORD, [hist.recordLine], CHRONICLED));
     // And no unfilled seam survived into the page.
     expect(priv, 'an unfilled slot reached the reader').not.toMatch(/\{[a-z_]+\}/i); // anchored: the toContain(RECORD) two lines up proves the page carries corpus prose at all
     // ⛔ AND THE DEFECT'S REAL SUBJECT IS NOT LEFT TO SEED LUCK (car 8a-13). Only TWO of

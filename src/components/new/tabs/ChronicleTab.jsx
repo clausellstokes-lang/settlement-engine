@@ -10,7 +10,7 @@
  * The merge/normalize/classify/sort/relative-timing all live in the pure,
  * tested domain/dossier/chronicleFeed helper; this is presentation only.
  */
-import { Section, Empty } from '../Primitives';
+import { Empty } from '../Primitives';
 import { FS } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -63,12 +63,13 @@ export default function ChronicleTab({ entries = [] }) {
   const mobile = useIsMobile();
   if (!entries.length) {
     return (
-      <Empty message="No chronicle yet. Your changes, the party's actions, and the world's own turns will gather here as the settlement's living history, timed from canonization." />
+      // One plain sentence (chair ruling 2026-10-30): the fact, without the pitch.
+      <Empty message="No chronicle yet." />
     );
   }
   return (
+    // No "Chronicle (n)" title under a tab already named Chronicle (chair ruling R6).
     <div style={{ padding: '16px 18px' }}>
-      <Section title={`Chronicle (${entries.length})`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
           {entries.map((event, i) => {
             const accent = event.source === 'party' ? PARTY : event.source === 'manual' ? SRC_EDIT : WORLD;
@@ -126,7 +127,6 @@ export default function ChronicleTab({ entries = [] }) {
             );
           })}
         </div>
-      </Section>
     </div>
   );
 }
