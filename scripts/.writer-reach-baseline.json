@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "729c90e1240c2a62348e78c8b77f1f1ba5f84b37",
+ "frozenAtSha": "987602c075211af39677a11d1b148b00140ccbae",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "e36cf71103fc60ef3095e8e77b0e1f34f2f10aa33b9ec95e0a178f389be22c18",
  "detectorDigest": "36a177190ffb8672286ee01010f4aa5dafc1e872adc3d950345e191953adafff",
- "verdictDigest": "cfa6d2f5e238c499f809f75cf2098232237d35ad6178e4db07e2e71cd778a608",
+ "verdictDigest": "0bc0ffd6b1db400000f6f3bcd898a62eca808ead8b832a3ed6ac89803eb6a118",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -83,8 +83,8 @@
  },
  "population": {
   "judged": 6992,
-  "lit": 571,
-  "litName": 5100,
+  "lit": 572,
+  "litName": 5099,
   "dark": 1321,
   "thinKeys": 9162,
   "thinShapes": 978,
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1666,
-  "sites": 39394,
-  "propRead": 37289,
+  "sites": 39391,
+  "propRead": 37286,
   "elemRead": 0,
   "destructure": 2090,
   "inOp": 15,
-  "rGrades": 5992,
-  "nGrades": 955433,
-  "resolvedReceivers": 6774
+  "rGrades": 5991,
+  "nGrades": 955459,
+  "resolvedReceivers": 6767
  },
  "registerDigest": "62483840445536e2f843f6ab9cce5d9d2dc7e0f794bc6f41d7ed323e7faa14ef",
  "pendingSurfaceCeiling": 3,
@@ -8814,7 +8814,7 @@
   "legitimacyCrisis on factions": "web-display=N",
   "manpower on factions": "dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "members on factions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
-  "modifier on factions": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
+  "modifier on factions": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
   "modifiers on factions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "name on factions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "power on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
@@ -13983,7 +13983,7 @@
   "type on paths": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "dominant on personality": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
   "flaw on personality": "campaign-pdf=R dossier-pdf=R foundry=R news=N web-display=R web-transitive=R world-book=R",
-  "modifier on personality": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
+  "modifier on personality": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "speech on personality": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "tell on personality": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "age on physical": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
