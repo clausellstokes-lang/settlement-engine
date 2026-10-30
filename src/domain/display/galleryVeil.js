@@ -51,8 +51,10 @@
 import { galleryMemberKey } from './publicSafe.js';
 import { deriveDefenseVulnerabilities } from './defenseDisplay.js';
 import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.js';
+import { facetOf } from '../spatial/cohesionWeave.js';
 import { deepClone } from '../clone.js';
 import { factionIdFromName } from '../../lib/entities.js';
+import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 
 /** @typedef {Record<string, unknown>} Rec */
 /** @typedef {{ address: string, hidden: boolean }} VeilDelta */
@@ -376,6 +378,126 @@ function cardDepthAddresses(kind, id) {
   const k = CARD_KINDS[kind];
   if (!k) return [];
   return Object.keys(k.fields).map(f => `field:${kind}:${id}:${f}`);
+}
+
+// ── THE ONE DEFAULT SET (X-21c as corrected by X-21d) ───────────────────────────────
+
+/** The grouping addresses the default set always carries (static, data-independent). */
+const STATIC_DEFAULT_GROUPINGS = Object.freeze([
+  ['tab:plot_hooks', 'plot-hooks', 'X-21d: every plot hook is hidden by default'],
+  ['block:services.criminal', 'criminal-services', 'X-21c: the criminal services category'],
+  ['block:defense.criminalStructure', 'defense-criminal-architecture', "X-21c: Defense's criminal architecture"],
+  ['block:power.criminalUnderside', 'power-capture', "X-21c: Power's capture reading"],
+  ['block:defense.vulnerabilities', 'defense-vulnerabilities', 'X-21c: defense vulnerabilities and watch gaps'],
+  ['block:rumors.dmTruth', 'rumor-truth', "X-21c: rumors' DM truth"],
+  ['block:war.truthVsBelief', 'war-truth', 'X-21c: war truth versus belief'],
+  ['block:housekeeping.structuralIssues', 'housekeeping', 'X-21c: engine housekeeping (structural issues)'],
+  ['block:housekeeping.coherenceNotes', 'housekeeping', 'X-21c: engine housekeeping (coherence notes)'],
+  ['block:housekeeping.firstSurvey', 'housekeeping', 'X-21c: engine housekeeping (first-survey warnings)'],
+  ['block:housekeeping.receipt', 'housekeeping', 'X-21c: engine housekeeping (the generation receipt)'],
+  ['block:housekeeping.decrees', 'housekeeping', 'X-21c: engine housekeeping (pending decrees)'],
+]);
+
+
+/** @param {Rec} inst @returns {boolean} */
+function isCriminalInstitution(inst) {
+  return str(inst.category).toLowerCase() === 'criminal' || str(inst.priorityCategory).toLowerCase() === 'criminal';
+}
+
+/**
+ * The declared clandestine/hidden flags the data carries, read through the ONE facet
+ * chokepoint (cohesionWeave.js facetOf): the catalog's `clandestine` kind, the custom
+ * `institutionFunction: 'clandestine'` spelling, and the `subterranean` kind (the
+ * catalog's underground network, catacomb sanctuary and black-market bazaar rows).
+ * @param {Rec} inst @returns {boolean}
+ */
+function isClandestineInstitution(inst) {
+  return facetOf(inst, 'clandestine') === 'clandestine'
+    || facetOf(inst, 'institutionFunction') === 'clandestine'
+    || facetOf(inst, 'subterranean') === 'subterranean';
+}
+
+/**
+ * One table, one row per default class. Each row derives its addresses from the DATA
+ * (classifier category, declared facets, catalog service keys, present fields), never
+ * from a label. Grouping rows are static (see GROUPING_REMOVERS). Order matters only for
+ * the reason a shared address reports: the most specific class comes first (a whisper
+ * market is reported as a covert brokerage, an underground network as clandestine, before
+ * the general criminal row that also covers them).
+ * @type {ReadonlyArray<{ cls: string, reason: string, select: (s: Rec) => string[] }>}
+ */
+export const DEFAULT_VEIL_RULES = Object.freeze([
+  {
+    cls: 'covert-brokerage',
+    reason: 'X-21c: a covert information brokerage (the catalog marks it illegal: brokerage service keys plus the criminal tag)',
+    select: (s) => recs(s.institutions).filter(i => brokerageLegalityOf(i) === 'illegal')
+      .flatMap(i => ['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+  },
+  {
+    cls: 'clandestine-institution',
+    reason: "X-21c: a clandestine or underground institution's true function (its front, the name, stays)",
+    select: (s) => recs(s.institutions).filter(isClandestineInstitution)
+      .flatMap(i => ['description', 'function', 'services'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+  },
+  {
+    cls: 'criminal-institution',
+    reason: "X-21c: a criminal institution's description, function, services and people (its name and category stay: existence is public)",
+    select: (s) => recs(s.institutions).filter(isCriminalInstitution)
+      .flatMap(i => ['description', 'function', 'services', 'people'].map(f => `field:institution:${CARD_KINDS.institution.idOf(i)}:${f}`)),
+  },
+  {
+    cls: 'criminal-faction',
+    reason: "X-21c: a criminal faction's depth (members, goals, conflicts, description)",
+    select: (s) => {
+      const out = new Set();
+      for (const path of CARD_KINDS.faction.lists) {
+        for (const f of listAt(s, path)) {
+          if (str(f.category).toLowerCase() !== 'criminal') continue;
+          for (const field of ['members', 'goals', 'conflicts', 'description']) out.add(`field:faction:${CARD_KINDS.faction.idOf(f)}:${field}`);
+        }
+      }
+      return [...out];
+    },
+  },
+  {
+    cls: 'npc-secret',
+    reason: 'X-21c: NPC secrets',
+    select: (s) => (recs(s.npcs).some(n => n.secret != null) ? ['class:npc:secret'] : []),
+  },
+  {
+    cls: 'npc-corruption',
+    reason: 'X-21c: NPC corruption and compromise flags',
+    select: (s) => (recs(s.npcs).some(n => n.corrupt != null || n.corruptionVector != null || n.corruptTies != null)
+      ? ['class:npc:corruption'] : []),
+  },
+  {
+    cls: 'plot-hooks',
+    reason: 'X-21d: every hook field on a card',
+    select: (s) => Object.keys(CARD_KINDS)
+      .filter(kind => CARD_KINDS[kind].fields.hooks && cardsOf(s, kind).some(c => c.plotHooks != null))
+      .map(kind => `class:${kind}:hooks`),
+  },
+]);
+
+/**
+ * The one default veil for a settlement (X-21d: no profiles). Static groupings plus the
+ * data-derived class and field rows, deduplicated, each with its class and reason so the
+ * curate preview can mark "hidden by default" apart from "hidden by you". Every default
+ * is an eye, never a lock: a delta may flip any of them.
+ * @param {unknown} settlement
+ * @returns {VeilDefault[]}
+ */
+export function defaultVeilFor(settlement) {
+  const s = isRec(settlement) ? settlement : {};
+  /** @type {Map<string, VeilDefault>} */
+  const out = new Map();
+  for (const [address, cls, reason] of STATIC_DEFAULT_GROUPINGS) out.set(address, { address, cls, reason });
+  for (const rule of DEFAULT_VEIL_RULES) {
+    for (const address of rule.select(s)) {
+      if (!out.has(address) && isHideable(address)) out.set(address, { address, cls: rule.cls, reason: rule.reason });
+    }
+  }
+  return [...out.values()];
 }
 
 // ── RESOLVE ───────────────────────────────────────────────────────────────────────
