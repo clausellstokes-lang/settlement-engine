@@ -69,10 +69,10 @@ describe('buildDossierEntityIndex', () => {
     expect(inst).toBeTruthy();
     expect(inst.type).toBe('institution');
     expect(inst.currentName).toBe('Town Watch');
-    // Institutions are enumerated only on the Overview tab's Institutions
-    // disclosure (their sink), so the link routes there — not the Power tab,
-    // which renders no institution as its own object.
-    expect(inst.tab).toBe('overview');
+    // VERIFIER F15: the Overview no longer lists institutions (T1-15); the
+    // Institutions tab (T1-14, always registered) is their one sink, so the link
+    // routes there.
+    expect(inst.tab).toBe('institutions');
 
     const settlement = index.resolve('settlement.ashford');
     expect(settlement).toBeTruthy();
@@ -259,16 +259,16 @@ describe('buildDossierEntityIndex', () => {
  * contract the destination cards rely on: the anchor string a SINK card declares
  * (entityAnchor(...)) is byte-identical to the index entry's stored anchor, and
  * the identity a link carries (entry.id) is what the card's focus effect matches.
- * (OverviewTab institutions, NeighbourLinkCard, WarFaithSection deity.)
+ * (InstitutionsTab cards, NeighbourLinkCard, WarFaithSection deity.)
  */
 describe('dossier sink anchors + ids', () => {
-  it('institution: link routes to overview and the index anchor == the sink pill anchor', () => {
+  it('institution: link routes to the Institutions tab and the index anchor == the sink card anchor', () => {
     const s = sampleSettlement();
     const index = buildDossierEntityIndex(s);
     const inst = s.institutions[0];
     const entry = index.resolve('institution.town_watch');
-    expect(entry.tab).toBe('overview');
-    // The OverviewTab pill declares id={entityAnchor('institution', inst)}; it
+    expect(entry.tab).toBe('institutions');
+    // The InstitutionsTab card declares id={entityAnchor('institution', inst)}; it
     // must equal the index entry's anchor so getElementById + the href resolve.
     expect(entityAnchor('institution', inst)).toBe(entry.anchor);
     // And the link's id (what EntityLink carries + the focus effect matches)

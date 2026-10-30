@@ -175,3 +175,17 @@ describe('F14 / RS-19 — no proxy-surfaced menu under a proxy house', () => {
     }
   });
 });
+
+/** VERIFIER F15: an institution link opens this tab, so each card is the link's anchor target. */
+describe('F15 — each institution card is its entity link\'s sink', () => {
+  test('the card carries id = entityAnchor(institution) and the index routes the link here', async () => {
+    const { buildDossierEntityIndex, entityAnchor, entityIdFor } = await import('../../src/domain/dossier/entityLinks.js');
+    const container = renderInstitutions(base);
+    const inst = base.institutions[0];
+    const entry = buildDossierEntityIndex(base).resolve(entityIdFor('institution', inst));
+    expect(entry.tab).toBe('institutions');
+    const card = [...container.querySelectorAll('[data-testid="institution-card"]')].find((el) => el.id === entityAnchor('institution', inst));
+    expect(card?.getAttribute('data-testid')).toBe('institution-card');
+    expect(entry.anchor).toBe(card.id);
+  });
+});

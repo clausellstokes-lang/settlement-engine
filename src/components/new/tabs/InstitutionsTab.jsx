@@ -28,6 +28,7 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
+import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -131,7 +132,7 @@ export default function InstitutionsTab({ settlement }) {
           const isCustom = inst.source === 'custom' || inst.isCustom === true;
           const badge = institutionBadge(inst);
           return (
-            <section key={`${inst.name}-${i}`} data-testid="institution-card" style={{
+            <section key={`${inst.name}-${i}`} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
               padding: '8px 11px', background: swatch['#FAF8F4'],
               ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
             }}>

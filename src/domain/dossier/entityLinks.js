@@ -189,14 +189,15 @@ export function normalizeNpcTraits(npc = {}) {
 /**
  * Which dossier tab owns each entity type. `navigateToEntity` reads this to
  * decide which tab to switch to before scrolling. Institutions land on
- * 'overview' (their only self-enumerated sink); neighbours route to the
+ * 'institutions', their one roster home since the Overview's Institutions
+ * block was cut (T1-14/T1-15; VERIFIER F15); neighbours route to the
  * superset 'relationships' tab so a neighbour link never no-ops.
  * @type {Readonly<Record<string, string>>}
  */
 export const TYPE_TO_TAB = Object.freeze({
   npc: 'npcs',
   faction: 'power',
-  institution: 'overview',
+  institution: 'institutions',
   deity: 'faith',
   settlement: 'overview',
   neighbour: 'relationships',
