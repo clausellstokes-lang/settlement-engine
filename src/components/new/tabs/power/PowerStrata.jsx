@@ -108,9 +108,11 @@ function groupSupportByBasis(support) {
 // ── THE POWERS ───────────────────────────────────────────────────────────────
 
 /**
- * @param {{ settlement: any, powers: import('../../../../domain/dossier/powerStrata.js').PowerEntry[], factionSupport: Map<string, any[]> }} props
+ * `showCoupChip` (UX consolidation 2026-10-30, RULINGS-T2 T2-18): the ruler's coup-risk chip
+ * yields to the DS-POW-4 coup-risk sentence where that sentence speaks; PowerTab decides.
+ * @param {{ settlement: any, powers: import('../../../../domain/dossier/powerStrata.js').PowerEntry[], factionSupport: Map<string, any[]>, showCoupChip?: boolean }} props
  */
-export function ThePowers({ settlement, powers, factionSupport }) {
+export function ThePowers({ settlement, powers, factionSupport, showCoupChip = true }) {
   const [openIdx, setOpenIdx] = useState(null);
   // THE PHONE PROSE FLOOR — the stratum's caption and the support BASIS line,
   // the two reading passages here. Read BEFORE the early return so the hook
@@ -158,7 +160,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                     {p.powerLabel}
                   </span>
                 )}
-                {isRuler && risk && (
+                {isRuler && risk && showCoupChip && (
                   <span aria-label={`Coup risk: ${risk.label}`} style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: risk.color, background: `${risk.color}12`, border: `1px solid ${risk.color}40`, padding: '1px 5px', flexShrink: 0 }}>
                     {risk.label}
                   </span>
@@ -399,16 +401,16 @@ export function TheWeb({ groups }) {
  * The three strata, composed. PowerTab owns the roster expand/focus state and
  * threads it through so the NPC-faction-link focus affordance keeps working.
  *
- * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any }} props
+ * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any, showCoupChip?: boolean }} props
  */
-export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef }) {
+export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef, showCoupChip = true }) {
   const { powers, roster } = derivePowerStrata(settlement);
   const groups = groupRelationships(powerStructure?.factionRelationships);
   const factionSupport = deriveFactionSupport(settlement);
 
   return (
     <>
-      <ThePowers settlement={settlement} powers={powers} factionSupport={factionSupport} />
+      <ThePowers settlement={settlement} powers={powers} factionSupport={factionSupport} showCoupChip={showCoupChip} />
       <TheFactions
         settlement={settlement}
         roster={roster}

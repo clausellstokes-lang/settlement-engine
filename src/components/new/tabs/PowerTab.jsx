@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
-import { serif, Section, TabIntro } from '../Primitives';
+import { Section } from '../Primitives';
 import { LITERARY_TITLE, literaryTitle, tokenCase } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
@@ -113,7 +113,9 @@ function RulingChainBlock({ settlement }) {
             ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>
       )}
-      {chain.faction && (
+      {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it
+          renders only when the seat is held by a faction other than the power, or stands vacant. */}
+      {chain.faction && (chain.faction.name !== chain.power?.name || chain.faction.vacant) && (
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
           {` holds the governing seat`}
@@ -175,13 +177,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
     criminalCaptureState:crimCapture,
   } = r;
 
-  const conflicts     = s?.conflicts || [];
-  const tensions      = s?.history?.currentTensions || [];
 
   const isStable   = (m||'').toLowerCase().includes('stable') && !(m||'').toLowerCase().includes('unstable');
   const isCritical = (m||'').toLowerCase().includes('critical') || m?.includes('siege') || m?.includes('Desperate');
   const stabilityColor = isCritical ? '#8b1a1a' : isStable ? '#1a5a28' : '#a0762a';
-  const governing  = pf.find(f => f.isGoverning) || pf[0];
 
   // ── Criminal capture state display ─────────────────────────────────────────
   const CAPTURE = {
@@ -244,29 +243,35 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
-  const drawnStabLens = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityLens);
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
   const undersideLines = [drawnReading, drawnCapture, drawnOperation]
     .map((d) => d?.sentence).filter(Boolean);
-  const blocLines = [
+  // T2-18: the DORMANT presence line ("the hall is not organized into sides") is true of every
+  // unplayed world and plays nothing, so off-campaign the bloc position is silent (R4).
+  const blocsDormant = String(deskProse.blocPresence?.provenance?.poolKey || '').startsWith('layer DORMANT');
+  const blocLines = blocsDormant ? [] : [
     drawnAtMount(BLOCS_MOUNT, deskProse.blocPresence),
     drawnAtMount(BLOCS_MOUNT, deskProse.blocGlue),
     drawnAtMount(BLOCS_MOUNT, deskProse.blocEnd),
   ].map((d) => d?.sentence).filter(Boolean);
   const structureLines = [
     drawnAtMount(STRUCTURE_MOUNT, deskProse.rulingStructure),
-    drawnAtMount(STRUCTURE_MOUNT, deskProse.governingTitle),
+    // T2-17: the governing-title lens (the hall's NAME, which the ruling chain prints) is cut.
   ].map((d) => d?.sentence).filter(Boolean);
   const successionLines = [
     drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk),
-    drawnAtMount(SUCCESSION_MOUNT, deskProse.successionHold),
+    // T2-18: the legitimacy-hold lens is cut; the legitimacy banner owns legitimacy (R2).
   ].map((d) => d?.sentence).filter(Boolean);
+  // T2-18: where the coup-risk sentence speaks (DM/player), the ruler's coup-risk chip yields
+  // to it; the chip stands on public. The same for the capture chip against DS-POW-6's capture
+  // reading: Power owns capture, said once.
+  const coupRiskSpoken = !!drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk)?.sentence;
+  const captureSpoken = !!drawnCapture?.sentence;
 
   return (
     <div style={{paddingBottom:16}}>
-      <TabIntro tabKey="power" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── §815 — THE RULING CHAIN (the one answer, first) ──────────────── */}
@@ -294,7 +299,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             {/* Breakdown chips */}
             <div style={{flex:1,minWidth:180}}>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
-                Score breakdown (base 50)
+                Breakdown
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
                 {Object.entries(leg.breakdown || {}).map(([k,v]) => (
@@ -310,7 +315,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               </div>
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
-                  <strong>Governance fractured.</strong> Real decisions are being made informally. The faction that appears to govern is not the faction that governs.
+                  <strong>Governance fractured.</strong> Real decisions are being made informally.
                 </div>
               )}
             </div>
@@ -347,22 +352,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
             <div style={{fontSize:FS.lg,fontWeight:700,color:stabilityColor,lineHeight:1.3}}>{m}</div>
           </div>
-          {governing && <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
-            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
-              <span style={{fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{governing.faction}</span>
-              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:stabilityColor}}>
-                {governing.powerLabel || ''} ({governing.power})
-              </span>
-              {governing.modifier && (
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
-                  {governing.modifier}
-                </span>
-              )}
-            </div>
-          </div>}
+          {/* T2-17: "Governing authority" left this box; the ruling chain above is the one
+              answer to who governs and how strongly. */}
           {/* Criminal capture state badge */}
-          {crimCapture && crimCapture !== 'none' && (
+          {crimCapture && crimCapture !== 'none' && !captureSpoken && (
             <div style={{flexShrink:0}}>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
               <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
@@ -374,10 +367,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         {h && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
         {/* DS-POW-2: the stability ladder line, then its lens — two pools of one block at
             ONE position, routed through one mount, exactly as the legitimacy banner above. */}
-        {(drawnStab?.sentence || drawnStabLens?.sentence) && (
+        {drawnStab?.sentence && (
           <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
-            {/* The ladder line and its lens, as one paragraph — the banner above's twin. */}
-            <ProseBlock lines={[drawnStab?.sentence, drawnStabLens?.sentence]}
+            {/* The ladder line alone: the DS-POW-2 lens was one boilerplate sentence on 991 of
+                1000 towns that said only that there had been trouble (T2-18, R4). */}
+            <ProseBlock lines={[drawnStab.sentence]}
               settlementName={s?.name} tier={s?.tier}
               style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
           </div>
@@ -447,6 +441,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         setExpandedFaction={setExpandedFaction}
         focusIndex={focusIndex}
         focusedRowRef={focusedRowRef}
+        showCoupChip={!coupRiskSpoken}
       />
 
       {/* ── THE LADDER (intra-faction standings; hidden when the ladder is dark) ──
@@ -531,57 +526,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         );
       })()}
 
-      {/* ── CURRENT TENSIONS ─────────────────────────────────────────────── */}
-      {tensions.length > 0 && (
-        <Section title={`Current Tensions (${tensions.length})`} collapsible defaultOpen accent="#b8860b">
-          <div style={{display:'flex',flexDirection:'column',gap:6}}>
-            {tensions.map((t,i) => (
-              <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'9px 13px'}}>
-                <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{typeof t==='object'?t.description:t}</p>
-                {t.factions?.length > 0 && (
-                  <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-                    {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </Section>
-      )}
-
-      {/* ── ACTIVE CONFLICTS ─────────────────────────────────────────────── */}
-      {conflicts.length > 0 && (
-        <Section title={`Active Conflicts (${conflicts.length})`} collapsible defaultOpen accent="#8b1a1a">
-          {conflicts.map((c,i) => {
-            const iHigh = c.intensity==='high', iLow = c.intensity==='low';
-            const intColor = iHigh?'#8b1a1a':iLow?'#1a5a28':'#a0762a';
-            const intLabel = iHigh?'High tension':iLow?'Low tension':'Moderate';
-            return (
-              <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
-                <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                  <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
-                </div>
-                {c.issue  && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
-                {c.stakes && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
-                {c.plotHooks?.length > 0 && (
-                  <div style={{borderTop:`1px solid ${intColor}30`,paddingTop:8}}>
-                    <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
-                    {c.plotHooks.map((hook,j) => (
-                      <div key={j} style={{display:'flex',gap:6,marginBottom:4}}>
-                        <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>
-                        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{typeof hook==='string'?hook:hook.hook||''}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </Section>
-      )}
+      {/* Current Tensions and Active Conflicts left this page (T2-19, RULINGS-CROSS X-4):
+          History owns tensions, Relationships owns conflicts, the Overview glances at both. */}
 
     </div>
   );

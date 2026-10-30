@@ -486,9 +486,12 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // Economy tile (the Output score is printed once, on the header chip). The food narrative's two
 // rows changed snippet only (the generic trade-dependence sentence was cut; no numeral moved);
 // every other EconomicsTab/EconomicsGlance row is a pure line move.
-const REVIEWED_TOTAL_CEILING = 217;
+// UX CONSOLIDATION U5 (2026-10-30, RULINGS-T2 T2-17) — THE DEBT FELL BY ONE. 217 -> 216,
+// floatInterpolation 146 -> 145: PowerTab.jsx's `{governing.power}` left with the "Governing authority"
+// row (the ruling chain is the one answer to who governs). Every other Power row is a pure line move.
+const REVIEWED_TOTAL_CEILING = 216;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 146,
+  floatInterpolation: 145,
   percentToken: 54,
   multiplier: 8,
   twoDecimalScore: 9,
@@ -815,7 +818,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 217-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 216-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -830,8 +833,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 218 exceeds reviewed ceiling 217',
-      'floatInterpolation 147 exceeds reviewed ceiling 146',
+      'total 217 exceeds reviewed ceiling 216',
+      'floatInterpolation 146 exceeds reviewed ceiling 145',
     ]);
   });
 

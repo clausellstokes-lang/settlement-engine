@@ -536,7 +536,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 40, sub14: 40 },
-  "Systems/Power":       { measured: 28, sub14: 27 },
+  // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
+  // duplicate governing rows left the page; no token moved.
+  "Systems/Power":       { measured: 22, sub14: 21 },
   "Systems/Defense":     { measured: 28, sub14: 28 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
@@ -598,7 +600,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
-  "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
+  "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
