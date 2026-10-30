@@ -7,26 +7,11 @@ import EmptyState from './primitives/EmptyState.jsx';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
 import { classifyService } from '../generators/services/serviceClassifier.js';
+// RS-20: the generator's own resolver (exact key -> LOCALE_SERVICE_OVERRIDES -> fuzzy). The
+// panel used a fuzzy-only copy that put 29 of 268 live institution names on a different menu,
+// so a toggle keyed by that menu never reached the generator.
+import { resolveServiceCatalogKey } from '../generators/services/institutionServices.js';
 import { serviceLabel } from '../domain/display/servicesDisplay.js';
-
-function matchServiceName(instName) {
-  const lower = instName.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
-  let best=null, bestScore=0;
-  for (const key of Object.keys(INSTITUTION_SERVICES)) {
-    const kw = key.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
-    let score=0;
-    for (const kp of kw) for (const lp of lower) {
-      if (kp===lp) score+=2;
-      else if (kp.length>3&&lp.startsWith(kp)) score+=1;
-      else if (lp.length>4&&kp.startsWith(lp)) score+=1;
-    }
-    const norm = kw.length>0 ? score/(kw.length*2) : 0;
-    if (score>bestScore||(score===bestScore&&score>0&&norm>(bestScore/(kw.length*2||1)))) {
-      bestScore=score; best=key;
-    }
-  }
-  return bestScore>0?best:null;
-}
 
 // Card-click cycle: allow → force → exclude → allow
 function ServiceCard({ svcName, def, toggled, onCycle, categoryLabel }) {
@@ -81,7 +66,7 @@ export default function ServicesTogglePanel() {
     const map = {};
     Object.values(currentCatalog).forEach(cat => {
       Object.keys(cat).forEach(instName => {
-        const svcKey = matchServiceName(instName);
+        const svcKey = resolveServiceCatalogKey(instName);
         if (!svcKey || !INSTITUTION_SERVICES[svcKey]) return;
         if (!map[svcKey]) map[svcKey] = { catalogNames:[], services:INSTITUTION_SERVICES[svcKey] };
         if (!map[svcKey].catalogNames.includes(instName)) map[svcKey].catalogNames.push(instName);

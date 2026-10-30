@@ -92,35 +92,19 @@ function _customProducedServices(institution, tier, opts = {}) {
   return out;
 }
 
-// getServicesForInstitution
-// Key resolution precedence: a dedicated INSTITUTION_SERVICES entry (exact
-// name, case-insensitive) always wins; LOCALE_SERVICE_OVERRIDES only redirects
-// institutions with NO dedicated entry; the token-overlap fuzzy match is the
-// last resort. All paths share one roll block so toggle objects (allow/force),
-// guaranteed p>=1 services, and requiredTradeRoute gates apply uniformly
-// regardless of how the key was resolved.
-export const getServicesForInstitution = (
-  institution,
-  tier,
-  overrides = {},
-) => {
-  const instName = typeof institution === 'string'
-    ? institution
-    : String(institution?.name || '');
+/**
+ * The catalog key an institution NAME resolves to — the one resolver (RS-20, chair grant
+ * 2026-10-30). Precedence: a dedicated INSTITUTION_SERVICES entry (exact name,
+ * case-insensitive) always wins; LOCALE_SERVICE_OVERRIDES only redirects a name with NO
+ * dedicated entry; the token-overlap fuzzy match is the last resort. Pure: no RNG, no
+ * state. getServicesForInstitution resolves through it, and ServicesTogglePanel imports it
+ * so a toggle is keyed by the menu the generator will actually read.
+ * @param {string} instName
+ * @returns {string|null}
+ */
+export function resolveServiceCatalogKey(instName) {
   const serviceCatalogKeys = Object.keys(INSTITUTION_SERVICES),
     localeKey = LOCALE_SERVICE_OVERRIDES[instName.toLowerCase()];
-  // Custom-content extension: any services declared via `produces` augment
-  // (or, for unknown custom institutions, replace) the prebuilt service set.
-  const _customServices = _customProducedServices(
-    institution,
-    tier,
-    overrides,
-  );
-  // A current custom institution has an explicit dependency vocabulary.
-  // Never let its presentation label fuzzy-match a native service catalog
-  // entry; authored `produces` is its sole service authority. Unstamped legacy
-  // string callers retain the historical compatibility matcher below.
-  if (isMaterializedCustomContent(institution)) return _customServices;
   const _exactKey = serviceCatalogKeys.find((k) => k.toLowerCase() === instName.toLowerCase());
   let resolvedKey = _exactKey || (localeKey && INSTITUTION_SERVICES[localeKey] ? localeKey : null);
   if (!resolvedKey) {
@@ -156,6 +140,37 @@ export const getServicesForInstitution = (
     }
     resolvedKey = bestScore > 0 ? bestKey : null;
   }
+  return resolvedKey;
+}
+
+// getServicesForInstitution
+// Key resolution precedence: a dedicated INSTITUTION_SERVICES entry (exact
+// name, case-insensitive) always wins; LOCALE_SERVICE_OVERRIDES only redirects
+// institutions with NO dedicated entry; the token-overlap fuzzy match is the
+// last resort. All paths share one roll block so toggle objects (allow/force),
+// guaranteed p>=1 services, and requiredTradeRoute gates apply uniformly
+// regardless of how the key was resolved.
+export const getServicesForInstitution = (
+  institution,
+  tier,
+  overrides = {},
+) => {
+  const instName = typeof institution === 'string'
+    ? institution
+    : String(institution?.name || '');
+  // Custom-content extension: any services declared via `produces` augment
+  // (or, for unknown custom institutions, replace) the prebuilt service set.
+  const _customServices = _customProducedServices(
+    institution,
+    tier,
+    overrides,
+  );
+  // A current custom institution has an explicit dependency vocabulary.
+  // Never let its presentation label fuzzy-match a native service catalog
+  // entry; authored `produces` is its sole service authority. Unstamped legacy
+  // string callers retain the historical compatibility matcher below.
+  if (isMaterializedCustomContent(institution)) return _customServices;
+  const resolvedKey = resolveServiceCatalogKey(instName);
   if (!resolvedKey) {
     // No prebuilt service mapping, but custom institution may declare its own.
     return _customServices;
