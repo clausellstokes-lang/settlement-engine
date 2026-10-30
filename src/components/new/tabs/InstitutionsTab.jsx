@@ -113,8 +113,8 @@ function statusOf(svc, sets) {
   const name = String(svc.name || '');
   const inst = String(svc.institution || '');
   if (sets.impaired.has(name) || sets.impaired.has(inst)) return { label: 'Impaired', color: '#8b1a1a' };
-  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: '#8a4010' };
-  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: '#7a5010' };
+  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: swatch['#8A4010'] };
+  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: swatch['#7A5010'] };
   return null;
 }
 
@@ -151,7 +151,7 @@ export default function InstitutionsTab({ settlement }) {
               {services.map((svc, j) => {
                 const status = statusOf(svc, sets);
                 return (
-                  <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || '#d8c8a0'}`, marginTop: 4 }}>
+                  <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || swatch['#D8C8A0']}`, marginTop: 4 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: FS['12.5'], fontWeight: 600, color: swatch.inkMag }}>{institutionDisplayName(svc.name)}</span>
                       {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}

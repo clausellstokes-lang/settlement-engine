@@ -418,6 +418,7 @@ export const swatch = Object.freeze({
   '#1A4A5A': '#1a4a5a', // category: Infrastructure
   '#7A1A5A': '#7a1a5a', // category: Entertainment
   '#1A5A3A': '#1a5a3a', // category: Adventuring
+  '#D8C8A0': '#d8c8a0', // InstitutionsTab service-row rule when the row carries no status
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────
