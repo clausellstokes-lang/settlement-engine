@@ -1,5 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
+import {
+  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, readShareVeil, writeShareVeil, clampVeilDeltas,
+  CARD_KINDS, SETTLEMENT_FLOOR, GROUPING_REMOVERS, VEIL_OVERRIDE_KEY, VEIL_VERSION, VEIL_MAX_DELTAS, VEIL_EXCEPTION_PREFIX,
+} from '../../../src/domain/display/galleryVeil.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -403,5 +407,146 @@ describe('toPublicSafe — per-member overrides (migration 093 mirror)', () => {
     expect(hidden.npcs.every(n => n.secret === undefined)).toBe(true);
     const shown = toPublicSafe(dm(), { full: true });
     expect(shown.npcs.every(n => n.secret !== undefined)).toBe(true);
+  });
+});
+
+// ── THE GALLERY VEIL (RULINGS-CROSS X-21, X-21b; build lane W2-VEIL-A U1) ──────────────
+// The model: the address grammar, the identity floor, resolve and apply. Hidden facts are
+// ABSENT from the projection (deleted, never blanked); a card is never hidden whole.
+describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
+  // A trimmed real record: seed ux-audit-v2-2026-10-30-35 (Vikhavn), NPC npc_11.
+  const dalla = () => ({
+    id: 'npc_11', name: 'Dalla Njálsson', gender: 'female', role: 'Council Member', title: 'Ráðgjafi', category: 'government',
+    personality: { flaw: 'paranoid', modifier: 'detached' }, physical: { age: 'late thirties' },
+    goal: { short: 'Stay useful to the wrong people so they stay breathing.' },
+    secret: { what: "Has been reading Ljot Randversson's correspondence through an intermediary." },
+    plotHooks: ['Their most trusted advisor has not been seen in four days.'],
+    influence: 'low', factionAffiliation: 'Council', secondaryAffiliation: 'Underground network',
+    corrupt: true, corruptionVector: 'fear', corruptTies: { criminalInstitution: 'Underground network' },
+  });
+  const town = () => ({
+    id: 's1', name: 'Vikhavn', tier: 'metropolis', population: 45380, config: { culture: 'norse' },
+    npcs: [dalla(), { id: 'npc_2', name: 'Ulf', role: 'Smith', personality: { flaw: 'proud' }, institution: 'Smithy' }],
+    institutions: [
+      { name: 'Smithy', category: 'Crafts', priorityCategory: 'crafts', desc: 'Iron work.', tags: ['metalwork'] },
+      { name: 'Underground network', category: 'Criminal', priorityCategory: 'criminal', catalogId: 'underground_network',
+        desc: 'A warren of tunnels beneath the city.', tags: ['criminal', 'smuggling', 'underground'],
+        facets: { clandestine: 'clandestine', subterranean: 'subterranean' } },
+    ],
+    availableServices: {
+      equipment: [{ name: 'Tools', desc: 'Iron tools', institution: 'Smithy' }, { name: 'Passage', desc: 'Unseen passage', institution: 'Underground network' }],
+      criminal: [{ name: 'Contraband delivery', desc: 'Move restricted goods.', institution: 'Underground network' }],
+    },
+  });
+
+  it('parses the address grammar and refuses anything outside it', () => {
+    expect(parseVeilAddress('tab:plot_hooks')).toEqual({ type: 'tab', id: 'plot_hooks' });
+    expect(parseVeilAddress('block:defense.criminalStructure')).toEqual({ type: 'block', id: 'defense.criminalStructure' });
+    expect(parseVeilAddress('card:npc:npc_11')).toEqual({ type: 'card', kind: 'npc', id: 'npc_11' });
+    // An id may itself carry ':' (the field is the last segment).
+    expect(parseVeilAddress('field:npc:npc.a:b:secret')).toEqual({ type: 'field', kind: 'npc', id: 'npc.a:b', field: 'secret' });
+    expect(parseVeilAddress('class:npc:secret')).toEqual({ type: 'class', kind: 'npc', field: 'secret' });
+    for (const bad of ['', 'tab:', 'npc:secret', 'field:npc:secret', 'class:npc:', 'card:npc:', 'x'.repeat(301), 42, null]) {
+      expect(parseVeilAddress(bad)).toBe(null);
+    }
+  });
+
+  it('EXISTENCE IS PUBLIC: a card address is never hideable; a card-level delta hides its depth, the card and its identity stay', () => {
+    expect(isHideable('card:npc:npc_11')).toBe(false);
+    const veil = resolveVeil([], [{ address: 'card:npc:npc_11', hidden: true }]);
+    expect(veil.has('card:npc:npc_11')).toBe(false);
+    expect(veil.has('field:npc:npc_11:secret')).toBe(true);
+    const out = applyVeil(town(), veil);
+    expect(out.npcs).toHaveLength(2);
+    const d = out.npcs.find(n => n.id === 'npc_11');
+    for (const k of CARD_KINDS.npc.floor) expect(d[k]).toEqual(dalla()[k]);
+    for (const k of ['personality', 'physical', 'goal', 'secret', 'plotHooks', 'corrupt', 'corruptTies']) expect(k in d).toBe(false);
+    // The other card is untouched.
+    expect(out.npcs.find(n => n.id === 'npc_2').personality).toEqual({ flaw: 'proud' });
+  });
+
+  it('THE IDENTITY FLOOR can never be hidden: refused, dropped, and spared even by a malformed set', () => {
+    for (const k of CARD_KINDS.npc.floor) expect(isHideable(`field:npc:npc_11:${k}`)).toBe(false);
+    for (const k of CARD_KINDS.institution.floor) expect(isHideable(`class:institution:${k}`)).toBe(false);
+    for (const k of SETTLEMENT_FLOOR) expect(isHideable(`field:settlement:s1:${k}`)).toBe(false);
+    expect(resolveVeil(['field:npc:npc_11:name', 'class:institution:name'], [{ address: 'field:npc:npc_11:role', hidden: true }]).size).toBe(0);
+    // Every grouping, every depth class of every kind, and the floor addresses forced in.
+    const everything = [
+      ...Object.keys(GROUPING_REMOVERS),
+      ...Object.entries(CARD_KINDS).flatMap(([kind, k]) => Object.keys(k.fields).map(f => `class:${kind}:${f}`)),
+      'field:npc:npc_11:name', 'field:settlement:s1:name', 'class:npc:role',
+    ];
+    const src = town();
+    const out = applyVeil(src, everything);
+    for (const k of SETTLEMENT_FLOOR) expect(out[k]).toEqual(src[k]);
+    expect(out.npcs.map(n => n.name)).toEqual(['Dalla Njálsson', 'Ulf']);
+    expect(out.institutions.map(i => [i.name, i.category])).toEqual([['Smithy', 'Crafts'], ['Underground network', 'Criminal']]);
+    for (const k of CARD_KINDS.npc.floor) expect(out.npcs[0][k]).toEqual(src.npcs[0][k]);
+  });
+
+  it('a hidden fact is ABSENT, never blanked, and the input is never mutated', () => {
+    const src = town();
+    const before = JSON.stringify(src);
+    const out = applyVeil(src, resolveVeil(['field:institution:underground-network:description', 'class:npc:secret'], []));
+    const inst = out.institutions.find(i => i.name === 'Underground network');
+    expect('desc' in inst).toBe(false);
+    expect(out.npcs.every(n => !('secret' in n))).toBe(true);
+    expect(out.institutions.find(i => i.name === 'Smithy').desc).toBe('Iron work.');
+    expect(JSON.stringify(src)).toBe(before);
+  });
+
+  it('an institution hides its services (its rows in every category) and its people (their link, never the person)', () => {
+    const out = applyVeil(town(), resolveVeil(['field:institution:underground-network:services', 'field:institution:smithy:people'], []));
+    expect(out.availableServices.equipment.map(r => r.name)).toEqual(['Tools']);
+    expect(out.availableServices.criminal).toEqual([]);
+    const ulf = out.npcs.find(n => n.id === 'npc_2');
+    expect(ulf.name).toBe('Ulf');
+    expect('institution' in ulf).toBe(false);
+  });
+
+  it('a field-class master switch hides the field on every card; a per-card eye is its exception', () => {
+    const veil = resolveVeil(['class:npc:personality'], [{ address: 'field:npc:npc_2:personality', hidden: false }]);
+    expect(veil.has(`${VEIL_EXCEPTION_PREFIX}field:npc:npc_2:personality`)).toBe(true);
+    const out = applyVeil(town(), veil);
+    expect('personality' in out.npcs[0]).toBe(false);
+    expect(out.npcs[1].personality).toEqual({ flaw: 'proud' });
+    // Deltas apply in order: the last word on an address wins.
+    expect(resolveVeil([], [
+      { address: 'field:npc:npc_11:secret', hidden: true },
+      { address: 'field:npc:npc_11:secret', hidden: false },
+    ]).has('field:npc:npc_11:secret')).toBe(false);
+  });
+
+  it('groupings remove their data and are listed on the projection; field and class addresses are never listed', () => {
+    const src = { ...town(), structuralViolations: [{ type: 'x', reason: 'r' }], coherenceNotes: [{ note: 'n' }] };
+    const out = applyVeil(src, resolveVeil(['block:services.criminal', 'block:housekeeping.coherenceNotes', 'class:npc:secret', 'block:not.registered'], []));
+    expect('criminal' in out.availableServices).toBe(false);
+    expect('coherenceNotes' in out).toBe(false);
+    expect(out.structuralViolations).toEqual([{ type: 'x', reason: 'r' }]);
+    expect(out.galleryVeil).toEqual({ v: VEIL_VERSION, hidden: ['block:housekeeping.coherenceNotes', 'block:services.criminal'] });
+    expect(isVeiled(out, 'block:services.criminal')).toBe(true);
+    expect(isVeiled(out, 'class:npc:secret')).toBe(false);
+  });
+
+  it('the per-NPC overrides fold in as card-level deltas, read both ways; a pre-veil share is unmarked', () => {
+    // A share exported before the veil (no reserved key) is unmarked: projected as before.
+    expect(readShareVeil({ npc_11: { revealDm: false } })).toEqual({ marked: false, deltas: [] });
+    // revealDm:false reads as a card-level hide; revealDm:true stays the door, never a veil entry.
+    const read = readShareVeil({ npc_11: { revealDm: false }, npc_2: { revealDm: true }, [VEIL_OVERRIDE_KEY]: { v: 1, deltas: [{ address: 'class:npc:physical', hidden: true }] } });
+    expect(read).toEqual({ marked: true, deltas: [{ address: 'card:npc:npc_11', hidden: true }, { address: 'class:npc:physical', hidden: true }] });
+    // Written back: the NPC card delta becomes revealDm:false (the 093 server splice enforces
+    // it today); everything else rides the reserved key; allowImport is kept.
+    const written = writeShareVeil({ npc_2: { allowImport: false } }, [
+      { address: 'card:npc:npc_2', hidden: true },
+      { address: 'field:institution:smithy:description', hidden: true },
+      { address: 'not an address', hidden: true },
+    ]);
+    expect(written).toEqual({
+      npc_2: { allowImport: false, revealDm: false },
+      [VEIL_OVERRIDE_KEY]: { v: VEIL_VERSION, deltas: [{ address: 'field:institution:smithy:description', hidden: true }] },
+    });
+    // …and un-hiding the card clears the revealDm:false it wrote.
+    expect(writeShareVeil(written, [{ address: 'card:npc:npc_2', hidden: false }]).npc_2).toEqual({ allowImport: false });
+    expect(clampVeilDeltas(Array.from({ length: VEIL_MAX_DELTAS + 5 }, (_, i) => ({ address: `field:npc:n${i}:secret`, hidden: true })))).toHaveLength(VEIL_MAX_DELTAS);
   });
 });
