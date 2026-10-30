@@ -318,7 +318,9 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // The owner: "Regarding the 10 different sentences, either simply pick just one or remove
     // that entire section." The chair ruled REMOVE. The section is found by its own header, so
     // the absence below is judged inside the section that used to print the stack.
-    const BAR_LABELS = ['Military Might', 'Monster Defense', 'Internal Security', 'Economic Resilience', 'Magical Capability', 'Food Security'];
+    // X-13 (2026-10-30): Military Might and Internal Security are cut (Foundations and the
+    // Defense tab carry the same reading); the three below and Food Security remain.
+    const BAR_LABELS = ['Monster Defense', 'Economic Resilience', 'Magical Capability', 'Food Security'];
     const towns = [
       SPEAKING,
       ...[['town', 'germanic'], ['city', 'norse'], ['village', 'celtic']].map(([settType, culture], i) => (
@@ -334,7 +336,8 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
       const host = header.closest('div');
       const text = host.textContent || '';
       // THE BARS AND THEIR LABELS STILL RENDER — the datum was never the stack.
-      for (const label of BAR_LABELS.slice(0, 5)) expect(text, `${town.name}: the ${label} bar is gone`).toContain(label);
+      for (const label of BAR_LABELS.slice(0, 3)) expect(text, `${town.name}: the ${label} bar is gone`).toContain(label);
+      for (const cut of ['Military Might', 'Internal Security']) expectAbsentWithAnchor(text, cut, 'Monster Defense', `${town.name}: the ${cut} bar is back`);
       if (town.economicState?.foodSecurity?.label) expect(text).toContain('Food Security');
       // …AND NO SENTENCE LIST. Every DS-GEN-3 line was a <p> in this section; nothing else in
       // it is (the caption is a div, the badge is spans), so a returning stack reds here.
@@ -344,7 +347,7 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     // The drawn DS-GEN-3 member SPEAKING used to print here is absent from the whole page,
     // anchored on the bar label that sits in the same section.
     const priv = renderTab(false);
-    expectAbsentWithAnchor(priv, HEALTH, 'Internal Security', 'DS-GEN-3 still prints under the Systems Health bars');
+    expectAbsentWithAnchor(priv, HEALTH, 'Monster Defense', 'DS-GEN-3 still prints under the Systems Health bars');
   });
 
   test('⛔ THE OVERVIEW NEVER PRINTS "NO CRISIS" BESIDE ITS OWN CRISIS BANNER (owner order 2026-09-17)', () => {

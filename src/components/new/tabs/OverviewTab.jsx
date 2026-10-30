@@ -431,9 +431,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, public
 
         {/* Score bars — 2-col grid */}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'0 24px'}}>
-          <ScoreRow label="Military Might" score={scores.military}/>
+          {/* Military Might and Internal Security are CUT (owner addendum X-13, 2026-10-30;
+              X-1, R2): Foundations carries the same reading (Defense readiness r=0.925,
+              Law & order r=0.927 against these scores over the v2 sample) and the Defense
+              tab's Threat Assessment prints both scores outright. Monster Defense has no
+              Foundations row; Economic Resilience (r=0.62 against Economic capacity),
+              Magical Capability (r=0.63 against Magical stability) and Food Security
+              (r=-0.03) read different facts, so they stay. The four status tags above are
+              the page's glance. */}
           <ScoreRow label="Monster Defense" score={scores.monster}/>
-          <ScoreRow label="Internal Security" score={scores.internal}/>
           <ScoreRow label="Economic Resilience" score={scores.economic}/>
           {/* ⛔ THIS ROW IS THE WORLD'S MAGIC AS THE ENGINE SCORES IT, AND THAT IS A
               DIFFERENT FACT FROM THE DEFENSE TAB'S ARCANE SUPPORT ROW. `scores.magical`
