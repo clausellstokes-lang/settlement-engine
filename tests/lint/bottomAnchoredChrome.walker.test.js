@@ -68,7 +68,6 @@ const BAR_RE = /\baboveBottomNav\(|\bBOTTOM_NAV_H\b/;
 const LIFTED = Object.freeze({
   // the scroll-button stack (the owner's square arrow), the dossier-claim toast, the onboarding nudge
   'src/App.jsx': 3,
-  'src/components/AiAnalystPanel.jsx': 1,
   'src/components/FeedbackWidget.jsx': 1,
   'src/components/InterviewPanel.jsx': 1,
   // the post-generate coach's desktop corner card (the owner, 2026-10-30), its default anchor
@@ -76,6 +75,8 @@ const LIFTED = Object.freeze({
   'src/components/map/WorldMapOverlays.jsx': 1,
   'src/components/pricing/PricingMomentCard.jsx': 1,
   'src/components/surveyor/SurveyorWorkshop.jsx': 1,
+  // the Surveyor chat's floating log (X-22, the owner, 2026-10-30), its default anchor at the door's margin
+  'src/components/surveyor/SurveyorTextIntentShell.jsx': 1,
 });
 
 /** Unlifted sites per file, each deliberately left where it is. */

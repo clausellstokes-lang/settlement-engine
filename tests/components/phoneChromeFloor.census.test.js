@@ -407,7 +407,18 @@ const ROUTE_BASELINE = Object.freeze({
   // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
   // (shell) floored 144 -> 145 (BUILD LANE T4, 2026-10-30; the owner's word): the post-generate
   // coach's folded pill is one new, correctly floored chrome site in the app shell. `bare` holds.
-  '(shell)':                { roots: 1, files: 61, floored: 145, ruled: 3, bare: 0 },
+  // (shell) floored 145 -> 137 (BUILD LANE W2-SURVEYOR U1, X-22): the door no longer mounts
+  // InterviewPanel (its only way in was the retired "Ask the world" link), so its eight floored
+  // sites left the shell's subtree. Nothing became bare; `ruled` and `bare` hold.
+  // (shell) floored 137 -> 136 (W2-SURVEYOR U2): the chat shell floors its small chrome
+  // through ONE chromeFontSize call shared by the turn label and the thinking line. `bare` holds.
+  // (shell) floored 136 -> 128 (W2-SURVEYOR U3, X-22(d)(f)): the analyst panel's box, toggle,
+  // chips, cost row and thumbs left with the panel (its reply floors its small chrome through one
+  // call), and the proposal message adds one. Nothing became bare; `ruled` and `bare` hold.
+  // (shell) floored 128 -> 135 (W2-SURVEYOR, the chair's ruling: the Interview keeps a way in
+  // BY PHRASE, so the door mounts InterviewPanel again and its SEVEN floored sites return; the
+  // U1 note's "eight" counted the shell's retired route hint with them). `bare` holds.
+  '(shell)':                { roots: 1, files: 61, floored: 135, ruled: 3, bare: 0 },
 });
 
 /**

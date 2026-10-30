@@ -206,7 +206,6 @@ const GATE_PRIMITIVES = Object.freeze([
 const FROZEN_DIRECT_IMPORTERS = Object.freeze([
   'src/App.jsx',
   'src/components/AccountMenu.jsx',
-  'src/components/AiAnalystPanel.jsx',
   'src/components/AuthModal.jsx',
   'src/components/BuyThisDossier.jsx',
   'src/components/CampaignSyncBanner.jsx',

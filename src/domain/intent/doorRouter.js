@@ -32,7 +32,7 @@
  *  destination WITHOUT removing the cue row would have mis-routed them to the Content
  *  panel via SurveyorWorkshop's unknown-id fallback, silently and without a red. */
 export const DOOR_DESTINATIONS = Object.freeze([
-  'analyst', 'content', 'construct', 'apply', 'autonomy',
+  'analyst', 'interview', 'content', 'construct', 'apply', 'autonomy',
 ]);
 
 /** The grounding rings, innermost first (the context-first law's ladder). */
@@ -51,6 +51,10 @@ export const DOOR_SCOPES = Object.freeze(['settlement', 'realm', 'product']);
 // match them. Verified by pin, not by inspection (tests/domain/doorRouter.test.js).
 /** @type {ReadonlyArray<[string, RegExp]>} */
 const CUES = [
+  // THE INTERVIEW BY PHRASE (the chair's ruling, 2026-10-30): X-22 retired its "Ask the
+  // world" link, and it keeps a way in by the words that named it rather than a silent
+  // retirement. First, because "ask the world" outranks every write cue it might contain.
+  ['interview', /\b(interview|ask the world|question the world|(a|another) line of questions)\b/i],
   ['apply', /\b(session|recap|the party|last session|what happened|we (fought|killed|sacked|burned|met|found|took|rescued|freed))\b/i],
   ['autonomy', /\b(advance (the )?(world|campaign|weeks?)|keep (running|advancing)|until (a|the|it)|standing instructions?|autonomous|run the (world|campaign))\b/i],
   ['construct', /\bnew (settlement|town|village|city|hamlet|thorp|capital|realm)\b|\b(build|construct|found|lay out|place)\b[^.?!]*\b(settlement|town|village|city|hamlet|thorp|capital|realm|district|quarter)\b|\bgenerate (a|an) (settlement|town|village|city|realm)\b/i],
@@ -80,4 +84,24 @@ export function routeDoorPrompt(text, anchor = null) {
     if (cue.test(q)) return { destination, scope };
   }
   return { destination: 'analyst', scope };
+}
+
+// ── The typed yes (X-22(d), the owner, 2026-10-30) ───────────────────────────
+// With no buttons in the chat, a proposal in the log is accepted by REPLYING in words
+// ("yes, add it"). This is not a second router: it asks one question of the reply that
+// follows a proposal, and anything that is not a plain yes goes through routeDoorPrompt
+// above like any other prompt (the proposal lapses). A yes must LEAD the reply and carry
+// no refusal anywhere in it, so "yes but not the duel" or "no, add it later" is never an
+// acceptance. VETOABLE vocabulary, pinned in tests/domain/doorRouter.test.js.
+const ACCEPT_LEAD = /^\s*(yes|yeah|yep|yup|aye|ok(ay)?|sure|do it|go ahead|please do|add (it|them|those|these)|stage (it|them)|sounds good|approved?)\b/i;
+const ACCEPT_REFUSAL = /\b(no|not|don'?t|do not|never|wait|hold|cancel|except|but|only)\b/i;
+
+/**
+ * True iff the reply accepts the proposal it answers. Pure, deterministic.
+ * @param {unknown} text the DM's reply as typed
+ * @returns {boolean}
+ */
+export function isAcceptReply(text) {
+  const q = typeof text === 'string' ? text.trim() : '';
+  return q.length > 0 && q.length <= 80 && ACCEPT_LEAD.test(q) && !ACCEPT_REFUSAL.test(q);
 }

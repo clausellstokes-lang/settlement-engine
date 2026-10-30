@@ -63,6 +63,8 @@ vi.mock('../../src/store/index.js', () => {
 import PostGenCoach from '../../src/components/PostGenCoach.jsx';
 import { useStore } from '../../src/store/index.js';
 import { aboveFooter, aboveBottomNav } from '../../src/lib/chromeInsets.js';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 // ── THE VIEWPORT (jsdom has no matchMedia) ────────────────────────────────────────
 // useIsMobile keeps ONE store per breakpoint and creates its MediaQueryList lazily on
@@ -627,5 +629,24 @@ describe('PostGenCoach — the corner card moves and remembers where (the owner,
     expect(cardOf(container).style.position).toBe('relative');
     expect(cardOf(container).style.left).toBe('');
     expect(cardOf(container).style.top).toBe('');
+  });
+});
+
+// X-22 (the owner, 2026-10-30): the Surveyor's chat log wears this card's chrome. The move,
+// the clamp and the memory were EXTRACTED into one shared hook rather than copied, so the
+// two cards cannot drift apart; the behaviour arms above pass unedited against the hook.
+describe('PostGenCoach — the move and the memory live once (X-22 extraction)', () => {
+  const read = (p) => readFileSync(resolve(process.cwd(), p), 'utf8');
+  it('the coach and the Surveyor chat both use useFloatingCard, and the coach keeps no private copy', () => {
+    const coach = read('src/components/PostGenCoach.jsx');
+    const chat = read('src/components/surveyor/SurveyorTextIntentShell.jsx');
+    const hook = read('src/hooks/useFloatingCard.js');
+    expect(hook).toMatch(/export function useFloatingCard\(/);
+    expect(hook).toMatch(/export function clampToViewport\(/);
+    for (const card of [coach, chat]) expect(card).toMatch(/useFloatingCard\(\{/);
+    // the private copy is gone from the coach: no clamp, no storage read/write of its own
+    expect(coach).not.toMatch(/function clampToViewport|localStorage\.(get|set)Item/);
+    // and the coach still names its own key, beside the dismissal
+    expect(coach).toMatch(/storageKey: POS_KEY/);
   });
 });
