@@ -154,6 +154,13 @@ const TOWN_SUGGESTIONS = [
 vi.mock('../../src/components/surveyor/useSurveyorContext.js', () => ({
   useSurveyorContext: () => ({ anchorLabel: 'Reading: Test Town', ctx: NO_PAGE_CTX }),
 }));
+// The Interview PANEL is stubbed too (its file is untouched and has its own contract);
+// the chair's ruling gives it a PHRASE, so the door must open it from the chat.
+vi.mock('../../src/components/InterviewPanel.jsx', () => ({
+  default: ({ open, initialQuestion }) => (
+    <div data-testid="dest-interview" data-open={String(!!open)} data-q={initialQuestion} />
+  ),
+}));
 // The workshop PANEL is stubbed (its stages have their own suites); its proposal hand-off,
 // message and note stay real.
 vi.mock('../../src/components/surveyor/SurveyorWorkshop.jsx', async (importOriginal) => ({
@@ -180,10 +187,11 @@ function openDoor() {
   fireEvent.click(doorTab());
 }
 
-/** X-22: no send button; Enter is the send key. */
+/** X-22: on the desktop Enter is the send key; on a phone the composer's one send glyph. */
 function typeAndSend(text) {
   fireEvent.change(composer(), { target: { value: text } });
-  pressEnter();
+  if (mobileRef.current) fireEvent.click(screen.getByRole('button', { name: 'Send' }));
+  else pressEnter();
 }
 
 /** The bodies POSTed to the analyst edge, oldest first. */
@@ -563,7 +571,33 @@ describe('SurveyorDoor — X-22(d): a workshop proposal is a message, accepted b
     expect(dest.getAttribute('data-scope')).toBe('settlement');
     expect(screen.queryByRole('log')).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'The Surveyor' }));
-    expect(screen.getByRole('log').textContent).toContain('Opened in the workshop.');
+    expect(screen.getByRole('log').textContent).toContain('Opening the workshop.');
+    expect(within(chat()).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor']);
+  });
+
+  // THE CHAIR'S RULING (2026-10-30): the Interview keeps a way in BY PHRASE, never a silent
+  // retirement. "interview" / "ask the world" open its panel from the chat; the log says so.
+  it('the Interview opens by PHRASE from the chat ("ask the world …"), seeded, and the log says so', () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('ask the world why the river road is closed');
+    const dest = screen.getByTestId('dest-interview');
+    expect(dest.getAttribute('data-open')).toBe('true');
+    expect(dest.getAttribute('data-q')).toBe('ask the world why the river road is closed');
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+    expect(invokeRef.fn).not.toHaveBeenCalled();
+    fireEvent.click(screen.getByRole('button', { name: 'The Surveyor' }));
+    expect(screen.getByRole('log').textContent).toContain('Opening the Interview.');
+  });
+
+  it('"interview" names it too; a plain question still goes to the analyst (the anchor)', async () => {
+    setEntitled(true);
+    openDoor();
+    typeAndSend('interview the harbourmaster about the fire');
+    expect(screen.getByTestId('dest-interview').getAttribute('data-q')).toBe('interview the harbourmaster about the fire');
+    fireEvent.click(screen.getByRole('button', { name: 'The Surveyor' }));
+    await askAndWait('why is bread so expensive here?');
+    expect(posted()[0].question).toBe('why is bread so expensive here?');
   });
 });
 
@@ -641,19 +675,31 @@ describe('SurveyorDoor — mobile: the keyboard inset and the bottom sheet', () 
     return { vv, listeners };
   }
 
-  // X-22 retired the send button, so the phone's Return key is the send key and the
-  // box says so (enterKeyHint). Shift+Enter still breaks the line on a hardware keyboard.
-  it('on mobile the Return key sends (enterKeyHint="send"); Shift+Enter does not', () => {
+  // THE CHAIR'S RULING (2026-10-30): on a phone Return inserts a newline (people type a
+  // paragraph on the on-screen keyboard) and ONE send glyph inside the composer sends: the
+  // single exception to "no buttons", for input only. The desktop keeps Enter to send.
+  it('on mobile Return inserts a newline and the ONE send glyph in the composer sends', () => {
     setEntitled(true);
     mobileRef.current = true;
     stubVisualViewport();
     openDoor();
-    expect(composer().getAttribute('enterkeyhint')).toBe('send');
+    expect(composer().getAttribute('enterkeyhint')).toBe('enter');
+    // the composer-only first open on a phone: the box and its one send glyph, nothing else
+    expect(within(chat()).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Send']);
+    expect(screen.getByRole('button', { name: 'Send' }).disabled).toBe(true);
     fireEvent.change(composer(), { target: { value: 'build me a new town on the river' } });
-    fireEvent.keyDown(composer(), { key: 'Enter', shiftKey: true });
-    expect(screen.queryByTestId('dest-workshop')).toBeNull();
     pressEnter();
+    expect(screen.queryByTestId('dest-workshop')).toBeNull();
+    expect(composer().value).toBe('build me a new town on the river');
+    fireEvent.click(screen.getByRole('button', { name: 'Send' }));
     expect(screen.getByTestId('dest-workshop').getAttribute('data-stage')).toBe('construct');
+  });
+
+  it('on the desktop there is no send glyph: Enter sends, and the box says so', () => {
+    setEntitled(true);
+    openDoor();
+    expect(composer().getAttribute('enterkeyhint')).toBe('send');
+    expect(screen.queryByRole('button', { name: 'Send' })).toBeNull();
   });
 
   it('publishes the keyboard inset as a CSS custom property, updates it, and removes BOTH listeners on close', () => {
@@ -693,7 +739,8 @@ describe('SurveyorDoor — mobile: the keyboard inset and the bottom sheet', () 
     expect(sheet.style.position).toBe('');
     expect(sheet.style.width).toBe('');
     expect(sheet.style.getPropertyValue('--sf-door-kbd-inset')).toBe('300px');
-    expect(within(sheet).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor']);
+    // the phone's two controls: the close, and the composer's one send glyph (input only)
+    expect(within(sheet).getAllByRole('button').map((b) => b.getAttribute('aria-label'))).toEqual(['Close the Surveyor', 'Send']);
   });
 
   it('PHONE: a drag on the sheet header neither moves it nor writes the memory; a tap still folds it', async () => {

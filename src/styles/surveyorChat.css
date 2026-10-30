@@ -41,7 +41,9 @@
 
 .sf-door-chat-turn { display: flex; flex-direction: column; gap: 2px; }
 .sf-door-chat-register { display: flex; flex-wrap: wrap; gap: 8px; }
-.sf-door-chat-composer { display: flex; flex-direction: column; gap: 6px; }
+/* A row: the box takes the width; on a phone its one send glyph sits at its foot. */
+.sf-door-chat-composer { display: flex; align-items: flex-end; gap: 6px; }
+.sf-door-chat-composer > .sf-door-chat-area { flex: 1 1 auto; min-width: 0; }
 
 .sf-door-chat-actions {
   display: flex;

@@ -12,8 +12,8 @@ import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt, isAcceptReply } from '
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('doorRouter — destinations vocabulary', () => {
-  it('exposes the analyst + the four routable workshop stage ids (the reachability denominator)', () => {
-    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'content', 'construct', 'apply', 'autonomy']);
+  it('exposes the analyst, the Interview + the four routable workshop stage ids (the reachability denominator)', () => {
+    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'interview', 'content', 'construct', 'apply', 'autonomy']);
     expect(DOOR_SCOPES).toEqual(['settlement', 'realm', 'product']);
     // ⚰ 'style' left with the styleOverhaul capability (ODQ §763.2). Driven through the
     // estate's anchored-negative helper, so an emptied or re-keyed vocabulary reds on the
@@ -40,6 +40,23 @@ describe('doorRouter — destinations vocabulary', () => {
 });
 
 describe('doorRouter — the cue table (vetoable vocabulary, pinned)', () => {
+  // THE CHAIR'S RULING (2026-10-30): the Interview lost its "Ask the world" link with X-22;
+  // it keeps a way in BY PHRASE (stasis, never a silent retirement).
+  it('the Interview is reached by phrase: "interview", "ask the world" and their nearest intents', () => {
+    for (const q of [
+      'interview the harbourmaster about the fire',
+      'ask the world why the river road is closed',
+      'Ask the world: is the road safe?',
+      'question the world about the plague',
+      'start a line of questions about the guild',
+    ]) {
+      expect(routeDoorPrompt(q).destination, `"${q}" opens the Interview`).toBe('interview');
+    }
+    // the anchors: a plain question is still the analyst's, and the realm word still widens
+    expect(routeDoorPrompt('why is the road closed?').destination).toBe('analyst');
+    expect(routeDoorPrompt('ask the world what the realm fears').scope).toBe('realm');
+  });
+
   it('session recaps route to APPLY (S3 accept→mint)', () => {
     expect(routeDoorPrompt('The party sacked the customs house last session.').destination).toBe('apply');
     expect(routeDoorPrompt('quick recap of what happened at the council').destination).toBe('apply');

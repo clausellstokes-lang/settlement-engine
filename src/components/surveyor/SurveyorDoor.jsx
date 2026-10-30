@@ -49,7 +49,10 @@
  * (doorRouter isAcceptReply, asked only of the reply that follows a proposal) hands the
  * approvable ops to the decree registry, where edit mode owns approval. The remaining
  * write stages (content, construct, autonomy) keep the workshop panel as their
- * destination; the log says so and folds beside it. The cost is one muted line under the
+ * destination, opened BY PHRASE from the chat (the chair's ruling, 2026-10-30: accepted as
+ * panels for now; a later wave folds them into messages); the log says the workshop is
+ * opening and folds beside it. The Interview is opened the same way by its own phrase
+ * ("interview", "ask the world"), its panel file untouched. The cost is one muted line under the
  * conversation's first reply, never a control.
  */
 
@@ -63,6 +66,7 @@ import { useSurveyorEntitled } from './useSurveyorEntitled.js';
 import { routeDoorPrompt, isAcceptReply } from '../../domain/intent/doorRouter.js';
 import { getSurveyorAiCost } from '../../config/pricing.js';
 import AnalystReply, { useAnalyst, costLineFor } from '../AiAnalystPanel.jsx';
+import InterviewPanel from '../InterviewPanel.jsx';
 import SurveyorWorkshop, { useWorkshopProposal, ProposalMessage, acceptNote } from './SurveyorWorkshop.jsx';
 
 // The ONE entitlement chokepoint lives in surveyorGate.js (a pure, import-free
@@ -76,7 +80,7 @@ export default function SurveyorDoor({ visible = true }) {
   // THE CONVERSATION: { id, from: 'you'|'surveyor', text?, node? }, oldest first.
   const [messages, setMessages] = useState([]);
   const nextId = useRef(1);
-  // The workshop destination: null | { id: stageId, prompt, scope }.
+  // The panel destination: null | { id: 'interview', question } | { id: stageId, prompt, scope }.
   const [dest, setDest] = useState(null);
   const [busy, setBusy] = useState(false);
   // The proposal the next reply may accept with a typed yes (null: none pending).
@@ -151,12 +155,13 @@ export default function SurveyorDoor({ visible = true }) {
     return { from: 'surveyor', text: acceptNote(out, proposal.interpretation?.ops || []) };
   });
 
-  const openWorkshop = (routed, q) => {
-    setDest({ id: routed.destination, prompt: q, scope: routed.scope });
+  const openPanel = (routed, q) => {
+    const interview = routed.destination === 'interview';
+    setDest(interview ? { id: 'interview', question: q } : { id: routed.destination, prompt: q, scope: routed.scope });
     setNonce((n) => n + 1);
-    // The stage docks at the same margin: the log folds to its pill beside it.
+    // The panel docks at the same margin: the log folds to its pill beside it.
     setFolded(true);
-    say({ from: 'surveyor', text: 'Opened in the workshop.' });
+    say({ from: 'surveyor', text: interview ? 'Opening the Interview.' : 'Opening the workshop.' });
   };
 
   // The door still owns routing: the shell hands up the typed text and is told whether
@@ -175,7 +180,7 @@ export default function SurveyorDoor({ visible = true }) {
     const routed = routeDoorPrompt(q);
     if (routed.destination === 'analyst') answer(q);
     else if (routed.destination === 'apply') propose(q);
-    else openWorkshop(routed, q);
+    else openPanel(routed, q);
     return true;
   };
 
@@ -217,7 +222,10 @@ export default function SurveyorDoor({ visible = true }) {
         onSend={send} suggestions={analyst.suggestions}
       />
 
-      {dest && (
+      {dest?.id === 'interview' && (
+        <InterviewPanel key={nonce} open initialQuestion={dest.question} onClose={() => setDest(null)} />
+      )}
+      {dest && dest.id !== 'interview' && (
         <SurveyorWorkshop
           key={nonce}
           open

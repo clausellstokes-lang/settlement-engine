@@ -9,7 +9,10 @@
  *     send button, no register links. Its placeholder ROTATES through the door's suggested
  *     first questions (src/domain/ai/suggestedQuestions.js, zero-cost read-model prompts),
  *     so the suggestions survive as words in the box rather than as buttons around it.
- *     Enter sends; Shift+Enter breaks the line. Escape puts it away (the draft stays).
+ *     On the desktop Enter sends and Shift+Enter breaks the line. On a phone Return
+ *     breaks the line and ONE send glyph inside the composer sends: the single exception
+ *     to "no buttons" (the chair's ruling, 2026-10-30), for input only. Escape puts it
+ *     away (the draft stays).
  *   • THE LOG — the first send grows the composer into a floating card wearing the
  *     post-generate coach's chrome (src/hooks/useFloatingCard.js, one copy of the move
  *     and the memory): about 320 px, lifted over the pinned footer and the bottom bar,
@@ -166,11 +169,12 @@ export default function SurveyorTextIntentShell({
     if (onSend?.(q)) setDraft('');
   };
 
-  // Enter sends and Shift+Enter breaks the line, at every width: X-22 leaves no send
-  // button in the box, so the on-screen Return key is the send key (enterKeyHint says
-  // so). An Enter that ends an IME composition commits the candidate; it never submits.
+  // Desktop: Enter sends, Shift+Enter breaks the line (no send control in the box). Phone:
+  // Return ALWAYS breaks the line (the on-screen Return key is how people type a paragraph)
+  // and the composer's one send glyph sends. An Enter that ends an IME composition commits
+  // the candidate; it never submits.
   const onKeyDown = (event) => {
-    if (event.key !== 'Enter' || event.shiftKey) return;
+    if (event.key !== 'Enter' || event.shiftKey || mobile) return;
     if (event.nativeEvent?.isComposing || event.isComposing) return;
     event.preventDefault();
     submit();
@@ -264,10 +268,14 @@ export default function SurveyorTextIntentShell({
           onKeyDown={onKeyDown}
           aria-label={t('surveyorDoor.promptLabel')}
           placeholder={hintCount > 0 ? hints[hint % hintCount] : t('surveyorDoor.placeholder')}
-          enterKeyHint="send"
+          enterKeyHint={mobile ? 'enter' : 'send'}
           rows={1}
           style={{ background: CARD, border: `1px solid ${BORDER}`, color: INK, fontSize: FS.sm, fontFamily: sans }}
         />
+        {mobile && (
+          // The phone's ONE send glyph (input only; the chair's exception to "no buttons").
+          <IconButton glyph="↑" label="Send" size="sm" disabled={!draft.trim()} onClick={submit} />
+        )}
       </div>
     </div>
   );

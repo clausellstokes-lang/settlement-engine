@@ -415,7 +415,10 @@ const ROUTE_BASELINE = Object.freeze({
   // (shell) floored 136 -> 128 (W2-SURVEYOR U3, X-22(d)(f)): the analyst panel's box, toggle,
   // chips, cost row and thumbs left with the panel (its reply floors its small chrome through one
   // call), and the proposal message adds one. Nothing became bare; `ruled` and `bare` hold.
-  '(shell)':                { roots: 1, files: 61, floored: 128, ruled: 3, bare: 0 },
+  // (shell) floored 128 -> 135 (W2-SURVEYOR, the chair's ruling: the Interview keeps a way in
+  // BY PHRASE, so the door mounts InterviewPanel again and its SEVEN floored sites return; the
+  // U1 note's "eight" counted the shell's retired route hint with them). `bare` holds.
+  '(shell)':                { roots: 1, files: 61, floored: 135, ruled: 3, bare: 0 },
 });
 
 /**

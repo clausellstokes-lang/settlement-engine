@@ -32,7 +32,7 @@
  *  destination WITHOUT removing the cue row would have mis-routed them to the Content
  *  panel via SurveyorWorkshop's unknown-id fallback, silently and without a red. */
 export const DOOR_DESTINATIONS = Object.freeze([
-  'analyst', 'content', 'construct', 'apply', 'autonomy',
+  'analyst', 'interview', 'content', 'construct', 'apply', 'autonomy',
 ]);
 
 /** The grounding rings, innermost first (the context-first law's ladder). */
@@ -51,6 +51,10 @@ export const DOOR_SCOPES = Object.freeze(['settlement', 'realm', 'product']);
 // match them. Verified by pin, not by inspection (tests/domain/doorRouter.test.js).
 /** @type {ReadonlyArray<[string, RegExp]>} */
 const CUES = [
+  // THE INTERVIEW BY PHRASE (the chair's ruling, 2026-10-30): X-22 retired its "Ask the
+  // world" link, and it keeps a way in by the words that named it rather than a silent
+  // retirement. First, because "ask the world" outranks every write cue it might contain.
+  ['interview', /\b(interview|ask the world|question the world|(a|another) line of questions)\b/i],
   ['apply', /\b(session|recap|the party|last session|what happened|we (fought|killed|sacked|burned|met|found|took|rescued|freed))\b/i],
   ['autonomy', /\b(advance (the )?(world|campaign|weeks?)|keep (running|advancing)|until (a|the|it)|standing instructions?|autonomous|run the (world|campaign))\b/i],
   ['construct', /\bnew (settlement|town|village|city|hamlet|thorp|capital|realm)\b|\b(build|construct|found|lay out|place)\b[^.?!]*\b(settlement|town|village|city|hamlet|thorp|capital|realm|district|quarter)\b|\bgenerate (a|an) (settlement|town|village|city|realm)\b/i],
