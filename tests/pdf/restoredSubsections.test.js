@@ -20,6 +20,11 @@ import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
 import { PowerStructure } from '../../src/pdf/sections/PowerStructure.jsx';
 import { ViabilityAssessment } from '../../src/pdf/sections/ViabilityAssessment.jsx';
+import { Relationships } from '../../src/pdf/sections/Relationships.jsx';
+import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
+import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
+import { Overview } from '../../src/pdf/sections/Overview.jsx';
+import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -171,10 +176,87 @@ describe('#18 PowerStructure — RULE & SUCCESSION subsection (regime lineage / 
     expect(on, 'naming the occupier').toContain('The Iron Legion');
   });
 
+  it('STOP-1 (R7): the GOVERNING box prints the governing faction modifier, the screen power line twin', () => {
+    const modded = structuredClone(settlement);
+    const g = modded.powerStructure.factions.find((f) => f.isGoverning);
+    g.modifier = 'military-dominated';
+    const on = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
+    expect(on).toContain('GOVERNING');
+    expect(on, 'the modifier prints beside the governing name').toContain('military-dominated');
+    delete g.modifier;
+    const off = joined(PowerStructure({ settlement: modded, vm: buildViewModel({ settlement: modded }) }));
+    expect(off).toContain('GOVERNING');
+    expect(off).not.toContain('military-dominated'); // anchored: the GOVERNING box is on this render
+  });
+
   it('self-gates to nothing with no lineage and no occupation (byte-identical off-state)', () => {
     const offVm = { ...vm, power: { ...vm.power, lineage: [] }, liveWorld: null };
     expect(joined(PowerStructure({ settlement, vm: offVm })), 'no regime history ⇒ no subsection')
       .not.toContain('RULE & SUCCESSION');
+  });
+});
+
+describe('F13 / X-2 — the PDF Relationships chapter prints each tie with its tension (a fact of the tie)', () => {
+  it('every internal tie prints its pair and its tension line; no "Link" fallback label', () => {
+    const ties = settlement.relationships || [];
+    expect(ties.filter((t) => t.tension).length, 'fixture premise: the city has ties with tensions').toBeGreaterThan(12);
+    const on = joined(Relationships({ settlement, vm }));
+    expect(on).toContain('Internal relationships');
+    for (const t of ties) {
+      expect(on, `${t.npc1Name} / ${t.npc2Name}`).toContain(t.npc1Name);
+      if (t.tension) expect(on, 'the tension prints beside its tie').toContain(t.tension);
+    }
+    expect(on).not.toMatch(/\bLink\b/); // anchored: 'Internal relationships' is on this render
+  });
+});
+
+describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced menu under a proxy house', () => {
+  it('a menu surfaced through a proxy host prints in the Services chapter only', () => {
+    const rows = Object.values(settlement.availableServices || {}).flat();
+    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
+    const owned = rows.filter((r) => r && r.institution && !PROXY_SERVICE_HOSTS[String(r.institution).toLowerCase()] && r.desc);
+    expect(proxied.length, 'fixture premise: the city surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const on = joined(Institutions({ settlement, vm }));
+    expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
+    for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
+  });
+});
+
+describe('N6 / X-2 — the PDF Notable NPCs chapter prints no hook text (the Plot Hooks chapter is its one home)', () => {
+  it('no NPC sheet, major or compact, prints a plot hook; the sheets themselves still print', () => {
+    const hooks = (settlement.npcs || []).flatMap((n) => (n.plotHooks || []).map((h) => (typeof h === 'string' ? h : h?.hook || h?.text || '')))
+      .filter(Boolean);
+    expect(hooks.length, 'fixture premise: the city NPCs carry plot hooks').toBeGreaterThan(0);
+    const on = joined(NotableNPCs({ settlement, vm }));
+    expect(on, 'the top NPC sheet prints').toContain(settlement.npcs[0].name);
+    for (const h of hooks) expect(on).not.toContain(h); // anchored: the sheets are on this render
+    expect(on).not.toContain('PLOT HOOKS'); // anchored: same render
+  });
+
+  it('the PDF Overview prints no tension or conflict hook (the screen Overview prints none); the crisis hook stays (X-3)', () => {
+    const vmHooked = { ...vm, overview: { ...vm.overview,
+      tensions: [{ label: 'guild_conflict', severity: 'high', description: 'The guilds quarrel over the wharf.', parties: [], hooks: ['A guild clerk wants the old charter burned.'] }],
+      conflicts: [{ parties: ['The Wharf', 'The Hall'], issue: 'Tolls', intensity: 'high', hooks: ['Someone pays the toll-takers twice.'] }],
+      stress: [{ label: 'Under siege', summary: 'The walls are ringed.', hook: 'The besiegers want the abbot.' }] } };
+    const on = joined(Overview({ settlement, vm: vmHooked }));
+    expect(on).toContain('The guilds quarrel over the wharf.');
+    expect(on).toContain('Tolls');
+    expect(on, 'the crisis card owns its hook (X-3)').toContain('The besiegers want the abbot.');
+    expect(on).not.toContain('A guild clerk wants the old charter burned.'); // anchored: the tension row is on this render
+    expect(on).not.toContain('Someone pays the toll-takers twice.'); // anchored: the conflict row is on this render
+  });
+});
+
+describe('F18 / X-3 — the PDF Viability chapter does not restate the active stress', () => {
+  it('prints the stress consequences but neither the stress label pills nor the crisis hook (the Overview crisis owns them)', () => {
+    const stressVm = { ...vm, viability: { ...vm.viability,
+      stress: [{ label: 'Under siege', hook: 'The besiegers want the abbot handed over by the new moon.' }],
+      stressConsequences: [{ title: 'Grain ration halved', text: 'Grain ration halved' }] } };
+    const on = joined(ViabilityAssessment({ settlement, vm: stressVm }));
+    expect(on, 'the consequences still print').toContain('Grain ration halved');
+    expect(on).not.toContain('The besiegers want the abbot'); // anchored: the consequences block is on this render
+    expect(on).not.toContain('ACTIVE STRESS  '); // anchored: same render; the header names the effects
+    expect(on).not.toMatch(/Under siege/i); // anchored: same render
   });
 });
 

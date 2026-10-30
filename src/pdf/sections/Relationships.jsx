@@ -243,15 +243,25 @@ export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
           <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
             Internal relationships
           </Text>
-          {r.internal.slice(0, 12).map((rel, i) => (
+          {/* VERIFIER F13 (X-2: a tie's tension is a FACT of the tie, not a hook) and N9: every tie
+              prints, named by its pair and type rather than the "Link" fallback, with its tension
+              line beside it, as the screen's tie card carries it. */}
+          {r.internal.map((rel, i) => (
             <View key={`i-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
               <Text style={{ color: palette.cool, marginRight: 4, fontSize: pt['9'] }}>•</Text>
-              <Text style={{ ...type.body, flex: 1, fontSize: pt['9'] }}>
-                <Text style={{ ...type.body_em, color: palette.ink }}>
-                  {humanize(rel.label || rel.title || (rel.from && rel.to ? `${rel.from} <-> ${rel.to}` : 'Link'))}
+              <View style={{ flex: 1 }}>
+                <Text style={{ ...type.body, fontSize: pt['9'] }}>
+                  <Text style={{ ...type.body_em, color: palette.ink }}>
+                    {tieName(rel)}
+                  </Text>
+                  {rel.description ? `  ${rel.description}` : ''}
                 </Text>
-                {rel.description ? `  ${rel.description}` : ''}
-              </Text>
+                {tieTensionLine(rel) ? (
+                  <Text style={{ ...type.caption, color: palette.warn, fontSize: pt['8.5'], fontStyle: 'italic', marginTop: 1 }}>
+                    {tieTensionLine(rel)}
+                  </Text>
+                ) : null}
+              </View>
             </View>
           ))}
         </View>
@@ -261,6 +271,20 @@ export function Relationships({ settlement, narrativeMode, vm, stateProse }) {
 }
 
 // ── Sub-components ─────────────────────────────────────────────
+
+/** A tie's tension: the generator's sentence about what strains it (prose, never a scalar). */
+function tieTensionLine(rel) {
+  return typeof rel?.tension === 'string' ? rel.tension.trim() : '';
+}
+
+/** An internal tie's printed name: its two people and its type, else the record's own label. */
+function tieName(rel) {
+  if (rel?.npc1Name && rel?.npc2Name) {
+    const kind = rel.typeName || (rel.type ? humanize(rel.type) : '');
+    return `${rel.npc1Name} and ${rel.npc2Name}${kind ? ` · ${kind}` : ''}`;
+  }
+  return humanize(rel?.label || rel?.title || (rel?.from && rel?.to ? `${rel.from} and ${rel.to}` : 'Tie'));
+}
 
 function NeighbourCard({ n, idx }) {
   const color = relColor(n.type);

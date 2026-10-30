@@ -559,7 +559,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "Systems/Power":       { measured: 22, sub14: 21 },
   // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
   // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
-  "Systems/Defense":     { measured: 27, sub14: 27 },
+  // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
+  // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
+  "Systems/Defense":     { measured: 26, sub14: 26 },
   // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
   // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
   "Systems/Resources":   { measured:  4, sub14:  4 },
@@ -631,7 +633,8 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
   // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
   // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
-  "Systems/Defense":     { prose: 25, chrome: 2, sub14: 2, sub12: 0 },
+  // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
+  "Systems/Defense":     { prose: 24, chrome: 2, sub14: 2, sub12: 0 },
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.

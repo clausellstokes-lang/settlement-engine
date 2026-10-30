@@ -27,6 +27,8 @@ import { computeChainSets } from '../tabHelpers';
 import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
+import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
+import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -86,6 +88,11 @@ export function institutionsWithServices(settlement) {
   for (const svc of rows) {
     const key = String(svc.institution || '');
     if (!key) continue;
+    // VERIFIER F14 (RS-19): a PROXY host (a Sewage system, a Housing row, a Massive prison)
+    // only surfaces another house's menu. The Services tab names no institution for those rows,
+    // so this page lists none of them under the proxy; the house keeps its own card. The host's
+    // name alone answers it, as in serviceComponents.jsx :: viaProxy.
+    if (PROXY_SERVICE_HOSTS[key.toLowerCase()]) continue;
     if (!byInstitution.has(key)) byInstitution.set(key, []);
     byInstitution.get(key).push(svc);
   }
@@ -106,8 +113,8 @@ function statusOf(svc, sets) {
   const name = String(svc.name || '');
   const inst = String(svc.institution || '');
   if (sets.impaired.has(name) || sets.impaired.has(inst)) return { label: 'Impaired', color: '#8b1a1a' };
-  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: '#8a4010' };
-  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: '#7a5010' };
+  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: swatch['#8A4010'] };
+  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: swatch['#7A5010'] };
   return null;
 }
 
@@ -125,7 +132,7 @@ export default function InstitutionsTab({ settlement }) {
           const isCustom = inst.source === 'custom' || inst.isCustom === true;
           const badge = institutionBadge(inst);
           return (
-            <section key={`${inst.name}-${i}`} data-testid="institution-card" style={{
+            <section key={`${inst.name}-${i}`} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
               padding: '8px 11px', background: swatch['#FAF8F4'],
               ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
             }}>
@@ -144,7 +151,7 @@ export default function InstitutionsTab({ settlement }) {
               {services.map((svc, j) => {
                 const status = statusOf(svc, sets);
                 return (
-                  <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || '#d8c8a0'}`, marginTop: 4 }}>
+                  <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || swatch['#D8C8A0']}`, marginTop: 4 }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
                       <span style={{ fontSize: FS['12.5'], fontWeight: 600, color: swatch.inkMag }}>{institutionDisplayName(svc.name)}</span>
                       {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}

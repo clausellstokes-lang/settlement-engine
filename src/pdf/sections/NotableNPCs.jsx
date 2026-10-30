@@ -1,5 +1,6 @@
 /**
- * NotableNPCs — chapter 09. Full NPC sheets with motivation, secrets, hooks.
+ * NotableNPCs — chapter 09. Full NPC sheets with motivation and secrets; their plot hooks
+ * print in the Plot Hooks chapter (X-2, VERIFIER N6).
  *
  * Tiered relative to the cast (so a low-power-mostly settlement still gets
  * full-card treatment for its three top figures):
@@ -12,7 +13,7 @@
  * isn't artificially trimmed.
  *
  * Every content text field is editable so the DM can adjust personalities,
- * motivations, and plot hooks per session.
+ * and motivations per session.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -20,7 +21,7 @@ import { ChapterBand, ChapterHeadline, KeyValRow, HairRule, Tag } from '../primi
 import { npcsHeadline } from '../lib/headlines.js';
 import { Pill } from '../primitives/Pill.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { label, hookText, humanize, safe } from '../lib/format.js';
+import { label, humanize, safe } from '../lib/format.js';
 import { EntityRef, anchorTarget } from '../primitives/EntityRef.jsx';
 import { ProseText } from '../primitives/ProseText.jsx';
 import { tokenCase } from '../../domain/display/labelCase.js';
@@ -152,7 +153,7 @@ function FullCard({ npc, index }) {
         backgroundColor: palette.card,
       }}
       // Was wrap={false}: for a top-power NPC with a long AI blurb + several
-      // secrets/plot-hooks, the (unbounded) card exceeds a full page, and react-pdf
+      // secrets (and, before X-2, plot hooks), the (unbounded) card exceeds a full page, and react-pdf
       // cannot split a no-wrap block — so it CLIPPED the overflow tail, silently
       // dropping secrets/hooks on the settlement's most important NPC. Allowing the
       // card to wrap breaks it across a page boundary instead: never lossy. The
@@ -244,24 +245,7 @@ function FullCard({ npc, index }) {
         </View>
       )}
 
-      {/* Plot hooks (full list, not capped) */}
-      {npc.plotHooks?.length > 0 && (
-        <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['7.5'], marginBottom: 1 }}>
-            PLOT HOOKS
-          </Text>
-          {npc.plotHooks.map((h, hi) => {
-            const t = hookText(h);
-            if (!t) return null;
-            return (
-              <View key={`h-${hi}`} style={{ flexDirection: 'row', marginBottom: 1, alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['9'] }}>•</Text>
-                <Text style={{ ...type.body, fontSize: pt['9'], flex: 1 }}>{t}</Text>
-              </View>
-            );
-          })}
-        </View>
-      )}
+      {/* VERIFIER N6 (X-2): an NPC's plot hooks print in the Plot Hooks chapter only. */}
 
       {/* Relationships */}
       {npc.relationships?.length > 0 && (
@@ -412,20 +396,7 @@ function CompactCard({ npc, index }) {
           {safe(npc.motivation)}
         </Text>
       )}
-      {npc.plotHooks?.length > 0 && (
-        <View style={{ marginTop: 2 }}>
-          {npc.plotHooks.slice(0, 2).map((h, hi) => {
-            const t = hookText(h);
-            if (!t) return null;
-            return (
-              <View key={`h-${hi}`} style={{ flexDirection: 'row', alignItems: 'flex-start' }}>
-                <Text style={{ color: palette.gold, marginRight: 3, fontSize: pt['8'] }}>•</Text>
-                <Text style={{ ...type.body, fontSize: pt['8'], flex: 1, lineHeight: 1.3 }}>{t}</Text>
-              </View>
-            );
-          })}
-        </View>
-      )}
+      {/* VERIFIER N6 (X-2): the compact card's two hooks print in the Plot Hooks chapter only. */}
     </View>
   );
 }

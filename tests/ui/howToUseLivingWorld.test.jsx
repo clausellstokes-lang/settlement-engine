@@ -73,6 +73,18 @@ describe('The Practical Guide — the de-collapsed Keeper\'s Handbook (/about/gu
     expect(ownDisclosures.length, 'a guide SECTION must never be collapsible').toBe(0);
   });
 
+  it('VERIFIER F17: the guide names only tabs the dossier has (no DM Summary, no Neighbours tab; Foundations, Institutions, Outlook listed)', async () => {
+    const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
+    const { container } = render(<HowToUse />);
+    const text = container.textContent;
+    expect(text).toContain('Settlement Detail Tabs');
+    expect(text, 'the DM Summary tab was removed (X-5)').not.toContain('DM Summary'); // anchored: the tab table heading is on this render
+    expect(text, 'the Neighbours route was removed (X-6)').not.toMatch(/Neighbours tab/); // anchored: same render
+    const cells = [...container.querySelectorAll('td, th, dt, strong, b, span, div')].map((n) => n.textContent.trim());
+    for (const tab of ['Foundations', 'Institutions', 'Outlook', 'Relationships', 'Plot Hooks']) expect(cells, `${tab} row`).toContain(tab);
+    for (const gone of ['Neighbours', 'Viability', 'DM Summary']) expect(cells, `${gone} row`).not.toContain(gone); // anchored: the live rows are asserted above
+  });
+
   it('The Living World content renders WITHOUT a click (it is no longer behind a tab)', async () => {
     const HowToUse = (await import('../../src/components/HowToUse.jsx')).default;
     const { getAllByText, container } = render(<HowToUse />);

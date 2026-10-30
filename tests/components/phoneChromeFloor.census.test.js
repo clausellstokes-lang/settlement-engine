@@ -291,6 +291,11 @@ const ROUTE_BASELINE = Object.freeze({
   // 154 -> 151, a ruled removal, X-5 / X-6, not a collapse), the Overview's Geography, Institutions and two score
   // bars go and the Institutions tab arrives (T1-10, T1-14/15, X-13): /create 681 -> 605, /settlements 922 -> 852,
   // /gallery 725 -> 649.
+  // and CURE LANE T11 U1 (2026-10-30; VERIFIER STOP-1, R7): the governing faction's modifier returns as ONE
+  // floored chip (`chromeFontSize`) on Power's ruling-chain power line: /create 605 -> 606, /settlements
+  // 852 -> 853, /gallery 649 -> 650; `bare` holds. T11 U3 (VERIFIER F11, X-2) cuts Defense's "Order & crime
+  // plot hooks" block with its floored lines, as measured: /create 606 -> 605, /settlements 853 -> 852,
+  // /gallery 650 -> 649.
   '/create':                { roots: 1, files: 162, floored: 605, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory

@@ -1,17 +1,15 @@
 /**
  * HistoryFounding — chapter 08. Founding decomposition (origin / foundedBy /
  * initial challenge / overcoming / stress note), age + character, sorted
- * historical events with severity + lasting effects + plot hooks, and live
- * tensions with parties + severity + plot hooks.
+ * historical events with severity + lasting effects, and live tensions with
+ * parties + severity. Their hooks print in the Plot Hooks chapter (X-2, F12).
  *
  * Editable fields:
  *   - history.character
  *   - history.founding.<key>
  *   - history.event.<i>.description
  *   - history.event.<i>.lasting.<j>
- *   - history.event.<i>.hook.<j>
  *   - history.tension.<i>.description
- *   - history.tension.<i>.hook.<j>
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -23,7 +21,7 @@ import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
 import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt, swatch } from '../theme.js';
-import { cap, label, hookText, humanize } from '../lib/format.js';
+import { cap, label, humanize } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 // THE STILL-RELEVANT MARK, read from the screen's own derivation (owner addendum X-14b): an
 // event carries an open thread when it has a plot hook or a current tension names it.
@@ -264,25 +262,7 @@ function EventRow({ ev, idx }) {
             ))}
           </View>
         )}
-        {ev.hooks?.length > 0 && (
-          <View style={{ marginTop: 2 }}>
-            <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-              Plot hooks
-            </Text>
-            {ev.hooks.map((hk, j) => (
-              <View key={`eh-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>•</Text>
-                <View style={{ flex: 1 }}>
-                  <EditableText
-                    name={`history.event.${idx}.hook.${j}`}
-                    defaultValue={hookText(hk)}
-                    style={{ ...type.body, fontSize: pt['8.5'] }}
-                  />
-                </View>
-              </View>
-            ))}
-          </View>
-        )}
+        {/* VERIFIER F12 (X-2): the event's hooks print in the Plot Hooks chapter only. */}
       </View>
     </View>
   );
@@ -321,25 +301,7 @@ function TensionRow({ tension, idx }) {
           style={{ ...type.body, fontSize: pt['9'] }}
         />
       )}
-      {tension.hooks?.length > 0 && (
-        <View style={{ marginTop: 3 }}>
-          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-            Plot hooks
-          </Text>
-          {tension.hooks.map((hk, j) => (
-            <View key={`th-${idx}-${j}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-              <Text style={{ color: palette.gold, marginRight: 4, fontSize: pt['8'] }}>•</Text>
-              <View style={{ flex: 1 }}>
-                <EditableText
-                  name={`history.tension.${idx}.hook.${j}`}
-                  defaultValue={hookText(hk)}
-                  style={{ ...type.body, fontSize: pt['8.5'] }}
-                />
-              </View>
-            </View>
-          ))}
-        </View>
-      )}
+      {/* VERIFIER F12 (X-2): the tension's hooks print in the Plot Hooks chapter only. */}
     </View>
   );
 }

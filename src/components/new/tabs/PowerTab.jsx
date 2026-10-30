@@ -10,6 +10,7 @@ import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } fro
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
+import { governingFactionOf } from '../../../domain/rulingPower.js';
 import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
@@ -86,6 +87,7 @@ function ChainRow({ label, children }) {
 /** §815 — the full RULING CHAIN: power → faction → named NPC, three legible
  *  rows of one answer ("Who runs this place?"), honest absence at each link. */
 function RulingChainBlock({ settlement }) {
+  const mobile = useIsMobile();
   const chain = rulingChainOf(settlement);
   if (!chain.power && !chain.faction) return null;
   const missingSeat = chain.absence?.kind === 'missing_seat';
@@ -96,6 +98,10 @@ function RulingChainBlock({ settlement }) {
   // "this is a word" is the suffix; the sibling reads on this row already pass
   // by it (`powerLabel`, `.name`). This one just lacked the declaration.
   const governmentWord = chain.power?.government || '';
+  // STOP-1 (R7): the governing faction's character word (corruption-riddled, theocratic-aligned,
+  // military-dominated ...), which the migration kernel reads. Its one screen home since T2-17
+  // cut the "Governing authority" box is this chip on the power line.
+  const governingModifier = chain.power ? String(governingFactionOf(settlement)?.modifier || '') : '';
   return (
     <div data-testid="ruling-chain" style={{
       background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,
@@ -109,6 +115,9 @@ function RulingChainBlock({ settlement }) {
         <ChainRow label="The power">
           <strong>{chain.power.name}</strong>
           {chain.power.powerLabel ? ` (${chain.power.powerLabel.toLowerCase()})` : ''}
+          {governingModifier && (
+            <span data-testid="ruling-chain-modifier" style={{marginLeft:6,fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:`1px solid ${swatch['#5A6A1A']}40`,padding:'0 5px'}}>{governingModifier}</span>
+          )}
           {governmentWord && governmentWord !== chain.power.name
             ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>

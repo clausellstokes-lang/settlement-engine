@@ -139,7 +139,8 @@ export const CUSTOM_CONTENT_CHARSET = deepFreeze({
       },
       "produces": {
         "surfaces": [
-          "web-display"
+          "web-display",
+          "dossier-pdf"
         ],
         "multiline": false,
         "maxCodepoints": 240,

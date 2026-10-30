@@ -362,10 +362,15 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the arrival scene and the pressure sentence on their own streams; the prose manifest did not move.
     // Then wave 3, the arrival scene as a place: 238a6374.. -> 74a4c58d.. (dc8a022e1). Then wave 4 block 1, the hook's
     // structures: 74a4c58d.. -> f27114ca.. (6990709a0).
+    // Then the UX consolidation (ODQ §934.101), each through the signed door, restated here by cure lane T11
+    // (VERIFIER F10: this pin was the sixth the RS-21 shift did not restate): the generator master
+    // f27114ca.. -> 3cc2b272.. (b16b40bb, service category fidelity RS-1..RS-13, 460 of 525 rows) and the prose
+    // manifest 7990bbfb.. -> 7035dd43.. (2295930e, the same shift, 1,048 rows) -> 39f96324.. (8700be2c, T1-13's
+    // no-market pool, 406 rows). No lane moved either file outside its door; the stride below still re-derives.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('f27114cae7ca43c921061917e66375daf24ce115a147444013b0651251368eae');
+      .toBe('3cc2b2722c433126acdf7caf33fb5d096cc1c3dad67bea0d1f944b3a61274ca4');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
+      .toBe('39f96324f7ba68245bef6b98ef80e61878e9ef35ee713c229a2fbc17102603ec');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

@@ -686,7 +686,8 @@
             "inferSupplyChains"
           ],
           "surfaces": [
-            "web-display"
+            "web-display",
+            "dossier-pdf"
           ]
         },
         {

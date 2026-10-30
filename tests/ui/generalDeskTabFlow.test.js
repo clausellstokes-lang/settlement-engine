@@ -795,6 +795,11 @@ describe('THE PLOT HOOKS PAGE IS THE CARDS, GROUPED BY SOURCE PAGE (chair ruling
     }
   });
 
+  test('F16 (R1): the empty state says what is absent and does not coach where hooks come from', () => {
+    const { container } = render(e(PlotHooksTab, { settlement: { id: 'bare', name: 'Bare', history: {} }, publicDossier: false }));
+    expectAbsentWithAnchor(container.textContent || '', 'They are drawn from', 'No structural plot hooks surfaced yet.', 'the coaching sentence is back');
+  });
+
   test('the ROUTER threads publicDossier to the plot-hooks tab', () => {
     const router = readFileSync(join(HERE, '../../src/components/OutputContainer.jsx'), 'utf8');
     const line = router.split('\n').find((l) => l.includes("case 'plot_hooks':"));

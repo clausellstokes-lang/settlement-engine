@@ -505,25 +505,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 295,
+    "line": 304,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 479,
+    "line": 488,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 479,
+    "line": 488,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 517,
+    "line": 526,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -1165,7 +1165,7 @@
   },
   {
     "path": "src/pdf/sections/HistoryFounding.jsx",
-    "line": 420,
+    "line": 382,
     "category": "floatInterpolation",
     "snippet": "{Math.round(min + span * p)}"
   },
@@ -1177,49 +1177,49 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 182,
+    "line": 183,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 338,
+    "line": 322,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 391,
+    "line": 375,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 589,
+    "line": 567,
     "category": "floatInterpolation",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 589,
+    "line": 567,
     "category": "floatInterpolation",
     "snippet": "{fb.coveragePct != null ? ` · imports cover ${fb.coveragePct}% of gap` : ''}"
   },
   {
     "path": "src/pdf/sections/Overview.jsx",
-    "line": 589,
+    "line": 567,
     "category": "percentToken",
     "snippet": "` · imports cover ${fb.coveragePct}% of gap`"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 91,
+    "line": 99,
     "category": "floatInterpolation",
     "snippet": "{p.criminalCapture.score}"
   },
   {
     "path": "src/pdf/sections/PowerStructure.jsx",
-    "line": 221,
+    "line": 229,
     "category": "floatInterpolation",
     "snippet": "{f.power}"
   },

@@ -5,7 +5,7 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { statusCase } from '../labelLadder.js';
@@ -264,7 +264,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const mainForces = [...(inst.garrison||[]),...(inst.militia||[]),...(inst.watch||[])];
   const mercForces = inst.mercenary || [];
   const charterForces = inst.charter || [];
-  const magicDef = inst.magicDef || [];
+  const magicDef = arcaneDefenseOf(r); // STOP-2: empty where magic does not function
   const hasAnyForce = mainForces.length||mercForces.length||charterForces.length||magicDef.length;
   const hasAnyFort = walls.length > 0;
 
@@ -501,15 +501,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
-          {/* Safety-derived plot hooks */}
-          {sp.plotHooks?.length>0&&<div>
-            <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.magic,marginBottom:6}}>Order & crime plot hooks</div>
-            <div style={{display:'flex',flexDirection:'column',gap:5}}>
-              {sp.plotHooks.map((h,i)=>(
-                <div key={i} style={{background:swatch['#F8F0FC'],border:'1px solid #d0a8e0',borderLeft:'3px solid #7a3a9a',padding:'8px 12px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch['#3A1A5A'],lineHeight:1.5}}>{h}</div>
-              ))}
-            </div>
-          </div>}
+          {/* VERIFIER F11 (X-2): the order & crime plot hooks print on the Plot Hooks tab only. */}
 
         </div>
       </Section>
