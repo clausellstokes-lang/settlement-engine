@@ -24,6 +24,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { Ts } from '../../src/components/new/tabConstants.js';
+import { SERVICE_LABELS } from '../../src/domain/display/servicesDisplay.js';
 
 /**
  * Pictographic glyph classes: emoji planes, dingbats, misc symbols, geometric
@@ -43,6 +44,11 @@ describe('service categories carry no icons (owner icon sweep, 2026-08-03)', () 
     expect(keys.length).toBeGreaterThanOrEqual(11);
     // Spot-anchor a few known categories so a rename-to-empty cannot pass.
     expect(keys).toEqual(expect.arrayContaining(['lodging', 'food', 'magic', 'criminal']));
+    // RS-14 (chair ruling 2026-10-30): the table takes its labels from the ONE source,
+    // keeps only the accent of its own, and the criminal card's note is gone.
+    expect(Object.fromEntries(Object.entries(Ts).map(([k, v]) => [k, v.label]))).toEqual({ ...SERVICE_LABELS });
+    expect(SERVICE_LABELS.equipment).toBe('Goods & Crafts');
+    expect(Object.values(Ts).every((v) => Object.keys(v).sort().join() === 'accent,label')).toBe(true);
   });
 
   it('no category declares an icon field', () => {

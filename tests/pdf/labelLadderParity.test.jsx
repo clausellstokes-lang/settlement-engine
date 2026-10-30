@@ -63,6 +63,7 @@ import { viabilityVerdict } from '../../src/domain/display/viabilityVerdict.js';
 import { scoreBand } from '../../src/domain/display/defenseScoreBands.js';
 import { deriveSystemState } from '../../src/domain/state/deriveSystemState.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { serviceLabel } from '../../src/domain/display/servicesDisplay.js';
 
 // ── THE PRINT SIDE ───────────────────────────────────────────────────────────────────
 import { SystemStateSnapshot } from '../../src/pdf/sections/SystemStateSnapshot.jsx';
@@ -120,14 +121,15 @@ const SHOUTED_STATUS_WORDS = Object.freeze([
  * THE RUNG-2 FIELD-NAME VOCABULARIES, in the case they used to reach the page in.
  *
  * Three group-header families that were shouting on BOTH surfaces, transcribed from their
- * own declaration sites: `tabConstants.Ts` / `Services.jsx`'s `SERVICE_CAT_LABEL` (the two
- * differ in WORDS as well as case, so both spellings are listed), `supplyChainData.js`'s
- * need labels, and `PlotHooks.jsx`'s `SOURCE_LABELS`.
+ * own declaration sites: the service-category labels (since RS-14 ONE map,
+ * `servicesDisplay.js :: SERVICE_LABELS`, which both `tabConstants.Ts` and the PDF's card
+ * titles read; the PDF's retired shorter words stay listed so a revert to them, shouting,
+ * is still caught), `supplyChainData.js`'s need labels, and `PlotHooks.jsx`'s `SOURCE_LABELS`.
  * @type {ReadonlyArray<string>}
  */
 const SHOUTED_FIELD_NAMES = Object.freeze([
-  // Service categories — screen (`Ts`) then the PDF's own shorter map.
-  'LODGING', 'FOOD & DRINK', 'EQUIPMENT', 'INFORMATION', 'HEALING', 'ENTERTAINMENT',
+  // Service categories: the one spelling (RS-14), then the PDF's retired shorter words.
+  'LODGING', 'FOOD & DRINK', 'GOODS & CRAFTS', 'EQUIPMENT', 'INFORMATION', 'HEALING', 'ENTERTAINMENT',
   'EMPLOYMENT', 'MAGICAL SERVICES', 'TRANSPORTATION', 'LEGAL & FINANCIAL',
   'CRIMINAL SERVICES', 'MAGIC', 'TRANSPORT', 'LEGAL', 'CRIMINAL',
   // Supply-chain need groups.
@@ -372,6 +374,27 @@ describe('the paid document descends the same label ladder as the screen', () =>
         .filter((word) => LADDER_WORDS.includes(word.toUpperCase()));
       expect(spoken.length, `${town}: no status word reached the page, so the arm is vacuous`)
         .toBeGreaterThan(0);
+
+      // RS-14 (chair ruling 2026-10-30): ONE SPELLING PER CATEGORY. Every card title the
+      // print draws is the screen's label (servicesDisplay.js :: SERVICE_LABELS) through the
+      // same ladder, and the print's old shorter words ('Magic', 'Transport', 'Legal',
+      // 'Criminal') are gone from the chapter.
+      const vm = viewModels.get(town);
+      const svcLeaves = collectStyled(Services({
+        settlement: settlements.get(town), narrativeMode: false, vm, stateProse: null,
+      })).map((leaf) => rendered(leaf));
+      const present = Object.entries(vm.services?.available || {})
+        .filter(([, list]) => Array.isArray(list) && list.length > 0).map(([key]) => key);
+      expect(present.length, `${town}: no service category printed, so the label arm is vacuous`)
+        .toBeGreaterThan(3);
+      for (const key of present) {
+        expect(svcLeaves, `${town}: the print titles "${key}" with a spelling the screen does not use`)
+          .toContain(tokenCase(serviceLabel(key)));
+      }
+      for (const retired of ['Magic', 'Transport', 'Legal', 'Criminal']) {
+        expect(svcLeaves, `${town}: the print still uses its retired category word "${retired}"`)
+          .not.toContain(retired);
+      }
     }
   });
 
