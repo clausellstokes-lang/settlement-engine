@@ -53,7 +53,10 @@ describe('LOCALE_SERVICE_OVERRIDES join integrity', () => {
     // false attribution ARE the locale rows the generator resolves through, same targets,
     // and none names an institution that has a menu of its own.
     const proxyRows = Object.entries(PROXY_SERVICE_HOSTS);
-    expect(proxyRows.length).toBeGreaterThanOrEqual(11);
+    expect(proxyRows.length).toBeGreaterThanOrEqual(12);
+    // The chair's follow-up (2026-10-30): a Massive prison surfaces the courthouse menu but
+    // is not credited with "Criminal trials".
+    expect(PROXY_SERVICE_HOSTS['massive prison']).toBe('Courthouse');
     for (const [src, target] of proxyRows) {
       expect(LOCALE_SERVICE_OVERRIDES[src], src).toBe(target);
       expect(KEYS_LC.has(src), `${src} has a menu of its own, so it is no proxy`).toBe(false);

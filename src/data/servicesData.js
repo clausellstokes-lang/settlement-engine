@@ -35,6 +35,9 @@ export const PROXY_SERVICE_HOSTS = Object.freeze({
   "multiple water sources": "Inn/Tavern",
   "water source": "Inn/Tavern",
   "sewage system": INN_TAVERN_DISTRICT,
+  // A prison holds the condemned; it does not try them. Its courthouse menu is surfaced
+  // here, but "Criminal trials" is not the prison's to offer (chair ruling, 2026-10-30).
+  "massive prison": "Courthouse",
 });
 
 export const LOCALE_SERVICE_OVERRIDES = {
@@ -58,7 +61,6 @@ export const LOCALE_SERVICE_OVERRIDES = {
   "magical banking (high magic)": "Banking district",
   "stock exchange (early)": "Banking district",
   // Law, defence & hire
-  "massive prison": "Courthouse",
   "multiple courthouses": "Courthouse",
   "professional guard (hundreds)": "Garrison",
   "mercenary company hq": "Mercenary quarter",
