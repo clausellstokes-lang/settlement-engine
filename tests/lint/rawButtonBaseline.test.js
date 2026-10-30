@@ -96,7 +96,13 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // genuine new raw button and a single explanatory comment were indistinguishable to the
 // gate. The third prose sighting is what finally bought the cure the two earlier ones asked
 // for and were refused.
-const BUTTON_BUDGET = 36;
+// CURE LANE T10 (2026-10-30): tightened 36 → 35 and OverviewTab.jsx leaves the baseline, by
+// a RULED cut. Owner addendum T1-14 / T1-15 (RULINGS-T1; ODQ §934.101), landed by T1's
+// 9de14b94, moved the institution roster to its own Institutions tab and cut the Overview's
+// collapsible with it; its header toggle was the file's one raw button, so the file reads
+// zero and its row was a stale grandfather (which would also have kept
+// jsx-hygiene/no-raw-button OFF for the Overview). The unit is locked, not left as headroom.
+const BUTTON_BUDGET = 35;
 
 const BUTTON_FILE_RE = /<button[\s/>]/;
 const BUTTON_OCC_RE = /<button[\s/>]/g;
