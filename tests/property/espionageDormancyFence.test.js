@@ -189,6 +189,15 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-30, THE MIGRATION CRISIS NAMES ONE DIRECTION (ruling 2) ─────────────────────────────
+ * THE FIFTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-30-migration-one-direction.json.
+ * THE MOVER: the mass-migration pressure line's weak-economy arm and two arrival vignettes told a
+ * departure beside a crisis card that says the town is receiving people; they now tell the arrival
+ * (pool sizes unchanged, so no draw moves). On THIS corpus 6 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360
+ * rows hash identically before and after. `e90e078f…` -> `607ea755…`.
+ *
  * ── 2026-10-30, THE ARRIVAL SCENE AGREES WITH THE INSTITUTIONS (T1-12, ruling 3) ───────────────
  * THE FOURTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
  * delegation (ODQ §934.101, this fence's chartered window by the chair's ruling); the record is
@@ -437,7 +446,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'e90e078f50fe093ffbc2703efa83024992d2670bb4503797d03f66290c3bc00c';
+const PRE_COUPLING_CORPUS_SHA = '607ea7556e41895c4e69a2906478eb0e364bb012d49671d67fb69a8a71c3e82f';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
