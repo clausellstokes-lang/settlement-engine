@@ -199,8 +199,13 @@ describe('the column census, measured across the estate', () => {
     // Compendium's institutions.entryCount 316 → 518) and seats more institutions per
     // settlement, and every seated institution carries its services onto `availableServices`.
     // The liveness anchor is unchanged in kind: the duty source the table reads is populated.
-    expect(serviceRows, 'the header claims 2,228 instantiated service rows over these thirty')
-      .toBe(2228);
+    // ⭐ RE-MEASURED 2026-10-30, SERVICE CATEGORY FIDELITY (ODQ §934.101; record
+    // docs/shift-records/2026-10-30-service-category-fidelity.json), ONE SIGNED SAME-SEED SHIFT:
+    // 2,228 → 2,230, measured on this walk; not attributed row by row. The re-map files 162
+    // catalog pairs in new buckets, and a pair entering or leaving 'magic' or 'criminal' is gated
+    // differently, so the rolled row count on these thirty may move; it moved by two.
+    expect(serviceRows, 'the header claims 2,230 instantiated service rows over these thirty')
+      .toBe(2230);
     expect(
       carriers,
       'a generation step began writing `settlement.services`. The schema declares the field and'
