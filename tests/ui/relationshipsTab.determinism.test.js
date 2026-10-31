@@ -129,6 +129,17 @@ describe('RelationshipsTab — the consolidated page', () => {
     ]) expectAbsentWithAnchor(text, gone, anchor, 'R3-R6 explainer copy');
   });
 
+  test('the Factions section is cut: the conflicts name their factions, the page lists no groups (GS-2)', () => {
+    // GS-2 (ODQ §934.101): the groups were tie-components wearing minted names. The power
+    // factions are the factions, the NPCs tab owns membership, so this page lists none.
+    const text = render(e(RelationshipsTab, { settlement: town() })).container.textContent;
+    const anchor = 'Active Conflicts (1)';
+    expect(text).toContain(anchor);
+    expectAbsentWithAnchor(text, 'Factions (1)', anchor, 'GS-2: the Factions section');
+    // The member chip the section printed ("Mugain (Clerk)") is gone with it.
+    expectAbsentWithAnchor(text, 'Mugain (Clerk)', anchor, 'GS-2: the group member chip');
+  });
+
   test('the conflict card: "A vs B · issue", stakes kept, template and plot hooks cut', () => {
     const text = render(e(RelationshipsTab, { settlement: town() })).container.textContent;
     const head = 'The Guild vs The Wardens · Control of the toll bridge';

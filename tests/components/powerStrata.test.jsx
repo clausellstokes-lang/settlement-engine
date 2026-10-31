@@ -27,6 +27,7 @@ import { governingFactionOf, nameOf } from '../../src/domain/rulingPower.js';
 import { coupContenders } from '../../src/domain/rulingPowerCoup.js';
 import { factionArchetype } from '../../src/domain/factionArchetypes.js';
 import { factionIdFromName } from '../../src/lib/entities.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 afterEach(cleanup);
@@ -163,6 +164,27 @@ describe('powerStrata — the holds-power marker links to the power card (in-tab
 
     // The criminal faction is roster-only → NO holds-power marker.
     expect(screen.queryByRole('button', { name: /Thieves Guild holds power/i })).toBeNull();
+  });
+});
+
+describe('powerStrata — a faction row counts its members by their own affiliation (GS-2)', () => {
+  it('the member line reads the NPCs filed under the faction, never a minted group', () => {
+    // GS-2 (ODQ §934.101): the sub-row used to print a tie-component's invented name bound to
+    // this faction by category. It now counts the named NPCs whose own power affiliation is it.
+    const s = {
+      ...craftedSettlement(),
+      npcs: [
+        { id: 'n1', name: 'Ada', factionAffiliation: 'Merchant Guilds' },
+        { id: 'n2', name: 'Bram', factionAffiliation: 'Merchant Guilds' },
+        { id: 'n3', name: 'Cole', factionAffiliation: 'Town Council' },
+      ],
+      factions: [{ name: 'The Merchant Bloc', powerFactionName: 'Merchant Guilds', members: [{ id: 'n3', name: 'Cole' }] }],
+    };
+    const { container } = render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const text = container.textContent;
+    expect(text).toContain('2 members');
+    expect(text).toContain('1 member');
+    expectAbsentWithAnchor(text, 'The Merchant Bloc', '2 members', 'GS-2: no minted group name on the roster');
   });
 });
 

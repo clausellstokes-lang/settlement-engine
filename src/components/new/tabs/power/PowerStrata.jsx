@@ -247,7 +247,6 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
   // figure and the 'holds power' marker keep their own steps.
   const mobile = useIsMobile();
   if (!roster.length) return null;
-  const factionGroups = settlement?.factions || [];
   const powerGold = powerAccent('ruler');
 
   const jumpToPower = (name) => {
@@ -278,7 +277,7 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
 
       <div style={{ border: `1px solid ${SEAM}` }}>
         {roster.map((r, i) => (
-          <FactionRow key={i} settlement={settlement} r={r} i={i} last={i === roster.length - 1} powerGold={powerGold} matchedGroups={factionGroups.filter((fg) => fg.powerFactionName === r.name)}
+          <FactionRow key={i} settlement={settlement} r={r} i={i} last={i === roster.length - 1} powerGold={powerGold}
             isExp={expandedFaction === i} onToggle={() => setExpandedFaction(expandedFaction === i ? null : i)} rowRef={i === focusIndex ? focusedRowRef : null} onJumpToPower={jumpToPower} />
         ))}
       </div>
@@ -287,11 +286,14 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
 }
 
 /** One roster row, extracted verbatim from TheFactions (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search mounts a faction through its own row; TheFactions keeps the expanded index and the focus ref. */
-export function FactionRow({ settlement, r, i, last = false, matchedGroups, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler') }) {
+export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler') }) {
   const mobile = useIsMobile();
   const c = FACTION_COLORS[i % FACTION_COLORS.length];
   const f = r.faction || {};
-  const expandable = !!(f.desc || f.crisisNote || matchedGroups.length);
+  // GS-2 (ODQ §934.101): the members are the named NPCs whose own power affiliation is this faction; the minted
+  // tie-component group this row used to print beneath it is gone with the second faction vocabulary.
+  const memberCount = (settlement?.npcs || []).filter((npc) => npc?.factionAffiliation === r.name).length;
+  const expandable = !!(f.desc || f.crisisNote);
   return (
     <div ref={rowRef}
       style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
@@ -315,13 +317,12 @@ export function FactionRow({ settlement, r, i, last = false, matchedGroups, isEx
         {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
       </div>
 
-      {matchedGroups.map((fg, gi) => (
-        <div key={gi} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
+      {memberCount > 0 && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
           <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
-          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}</span>
         </div>
-      ))}
+      )}
 
       {isExp && expandable && (
         <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
