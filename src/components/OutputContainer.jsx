@@ -45,6 +45,8 @@ const TableView = lazy(() => import('./TableView.jsx'));
 // §807(b) — the READ-ONLY shared dossier KEEPS "How this was simulated"
 // (§777's survivor). The band is a sibling leaf; the drawer stays lazy inside.
 const PublicSimulationBand = lazy(() => import('./dossier/PublicSimulationBand.jsx'));
+const DossierSearchBar = lazy(() => import('./dossier/DossierSearchBar.jsx')); // X-19b: the dossier search (bar + results), both lazy
+const DossierSearchResults = lazy(() => import('./dossier/DossierSearchResults.jsx'));
 // STRIP-1 (owner ruling, ODQ §725): the legacy settlement-map tab is GONE from the
 // product. The dossier's tab set is Summary / Systems / World / Notes — there is no
 // fifth Map tab, no MapTabShell specifier, and no map body to keep off first paint.
@@ -300,9 +302,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // back to a different tab (or the initial mount) reports 'auto_select'. Read +
   // cleared by the DOSSIER_TAB_VIEWED effect below. Additive — never affects flow.
   const pendingTabViaRef = useRef('auto_select');
+  const [searchQuery, setSearchQuery] = useState(''); // X-19b: the tab state is never touched while searching
   const setActiveTab = (id, via = 'tab_click') => {
     pendingTabViaRef.current = via;
-    _setActiveTab(id);
+    _setActiveTab(id); setSearchQuery(''); // opening any tab ends a search
   };
   const [pendingAiAction, setPendingAiAction] = useState(null);
   // Whether the first-save WelcomeCreditCard is currently showing. When it is, it
@@ -894,13 +897,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
         {/* P130 / O-2 — First-dossier teaching callouts render INSIDE the Overview tab
             (they moved there with the DM Summary tab's removal, X-5), not as a banner
             above every tab — see renderTab's 'overview' case. */}
-        {/* P102 / D-1 — Thematic group tab strip (Summary / Systems / World /
-            Notes). Renders only when the dossierFiveTabs flag is on. Clicking a
-            group selects its first sub-tab and filters the strip below. */}
+        {/* The dossier search (X-19b; its placeholder holds the row while the chunk loads), then the group strip (P102 / D-1). */}
+        <Suspense fallback={<div aria-hidden="true" style={{ minHeight: 34 }} />}><DossierSearchBar query={searchQuery} onQueryChange={setSearchQuery} settlement={activeSettlement} tabs={allTabs} publicDossier={publicDossier} playerView={playerView} onOpenTab={setActiveTab} /></Suspense>
         <DossierGroupTabStrip
-          visibleGroupEntries={visibleGroupEntries}
-          selectedGroup={selectedGroup}
-          handleGroupClick={handleGroupClick}
+          visibleGroupEntries={visibleGroupEntries} selectedGroup={selectedGroup} handleGroupClick={handleGroupClick}
         />
         {/* Sub-tab strip. Desktop = scroll-arrow strip (unchanged); mobile =
             MobileTabStrip. idPrefix="sf" keeps the sf-tab-/sf-panel- id namespace
@@ -1002,7 +1002,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
                 tabIndex={0}
                 style={{ opacity: aiRegenerating ? 0.6 : 1, transition: 'opacity 0.2s' }}
               >
-                {renderTab()}
+                {searchQuery.trim() ? (
+                  <DossierSearchResults settlement={activeSettlement} query={searchQuery} tabs={allTabs} publicDossier={publicDossier} playerView={playerView}
+                    npcProps={{ pinnedIds, onTogglePin, canAuthorNpc: npcAuthoringAllowed }} onOpenTab={setActiveTab}>{renderTab()}</DossierSearchResults>
+                ) : renderTab()}
               </div>
             </FeatureErrorBoundary>
           </Suspense>

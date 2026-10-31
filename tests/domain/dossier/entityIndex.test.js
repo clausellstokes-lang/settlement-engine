@@ -15,6 +15,11 @@ import {
   localNpcId,
 } from '../../../src/domain/dossier/entityLinks.js';
 import { factionIdFromName } from '../../../src/lib/entities.js';
+import {
+  searchDossier,
+  enumerateDossierObjects,
+  MATCH,
+} from '../../../src/domain/dossier/dossierSearch.js';
 
 function sampleSettlement() {
   return {
@@ -327,5 +332,117 @@ describe('dossier sink anchors + ids', () => {
     expect(localNpcId(index, '  mara the reeve ')).toBe('npc_1');
     // A foreign contact (absent from the index) degrades to null → plain text.
     expect(localNpcId(index, 'Nobody')).toBeNull();
+  });
+});
+
+/**
+ * THE DOSSIER SEARCH, its pure half (RULINGS-CROSS X-19 / X-19b; BUILD-W2-SEARCH U1). The
+ * enumerator walks the same index the links resolve through, so these sit beside it. A
+ * result is the dossier's OWN object (the raw record its tab renders), grouped under the
+ * owning tab: exact name > name prefix > a word in the name > a name containing the query >
+ * the text containing it; prominence breaks a tie; the groups run by their best object, then
+ * people first. Audience: a player view is enumerated from the public projection, and a
+ * public dossier never matches a secret.
+ */
+describe('dossierSearch (X-19b): the one-stop shop of the dossier\'s own objects', () => {
+  function searchTown() {
+    return {
+      id: 'settlement.ashford',
+      name: 'Ashford',
+      npcs: [
+        { id: 'npc_1', name: 'Mara Voss', role: 'Reeve', influence: 'low', factionAffiliation: 'Iron Guild',
+          secret: 'She buried the tithe ledger under the mill race.',
+          plotHooks: ['Mara Voss needs the ledger found before the audit.'] },
+        { id: 'npc_2', name: 'Mara Voskov', role: 'Factor', influence: 'high', factionAffiliation: 'Free Wharf' },
+        { id: 'npc_3', name: 'Tomas Marabel', role: 'Smith', influence: 'moderate' },
+        { id: 'npc_4', name: 'Odo Penn', role: 'Clerk', influence: 'low', title: 'Keeper of the Mara rolls' },
+      ],
+      relationships: [
+        { type: 'rival', typeName: 'Rivals', npc1Name: 'Mara Voss', npc2Name: 'Odo Penn', description: 'An old quarrel.', tension: 'Penn wants the reeve\'s seat.' },
+        { type: 'ally', typeName: 'Allies', npc1Name: 'Tomas Marabel', npc2Name: 'Odo Penn', description: 'Drinking companions.' },
+      ],
+      conflicts: [
+        { parties: ['Iron Guild', 'Free Wharf'], issue: 'dock tolls', stakes: 'Whether Mara Voss keeps the toll books.', intensity: 'high' },
+      ],
+      powerStructure: { factions: [{ faction: 'Iron Guild', power: 60 }, { faction: 'Free Wharf', power: 40 }] },
+      neighbourNetwork: [{ id: 'link_a_b', name: 'Greymoor', neighbourName: 'Greymoor', relationshipType: 'trade_partner' }],
+      history: {
+        historicalEvents: [{ id: 'evt_flood', name: 'The Great Flood', yearsAgo: 40, severity: 'major', description: 'The river took the lower town.' }],
+        currentTensions: [{ type: 'guild_conflict', description: 'The guild and the wharf will not share the quay.', severity: 'major' }],
+      },
+    };
+  }
+
+  it('ranks exact name > prefix > word > text, prominence breaking a tie, groups by their best object', () => {
+    const order = (result, tab) => result.groups.find(g => g.tab === tab)?.objects.map(o => o.names[0]);
+
+    // "mara": no exact name. Two prefixes (the HIGH-influence Voskov before the low Voss),
+    // then a word in a name (Marabel's surname starts it), then a text match (a title).
+    const mara = searchDossier(searchTown(), 'mara');
+    expect(order(mara, 'npcs')).toEqual(['Mara Voskov', 'Mara Voss', 'Tomas Marabel', 'Odo Penn']);
+    expect(mara.groups.find(g => g.tab === 'npcs').objects.map(o => o.score))
+      .toEqual([MATCH.PREFIX, MATCH.PREFIX, MATCH.WORD, MATCH.TEXT]);
+
+    // An exact name: the person's own card leads its group, and the people group leads the
+    // page even though the tie and the hook name her exactly too (a tie runs people first).
+    const exact = searchDossier(searchTown(), 'Mara Voss');
+    expect(exact.groups.map(g => g.tab)).toEqual(['npcs', 'relationships', 'plot_hooks']);
+    expect(exact.groups[0].objects[0].raw).toBe(exact.settlement.npcs[0]);
+    expect(exact.groups[0].objects[0].score).toBe(MATCH.EXACT);
+  });
+
+  it('an exact NPC name returns their card, and every tie, conflict and hook naming them, under their own tabs', () => {
+    const town = searchTown();
+    const { groups } = searchDossier(town, 'mara voss');
+    const byType = (type) => groups.flatMap(g => g.objects).filter(o => o.type === type);
+    expect(byType('npc').map(o => o.raw)).toContain(town.npcs[0]);
+    expect(byType('tie').map(o => o.raw)).toEqual([town.relationships[0]]);
+    expect(byType('conflict').map(o => o.raw)).toEqual([town.conflicts[0]]);
+    expect(byType('hook').map(o => o.raw.text)).toEqual(['Mara Voss needs the ledger found before the audit.']);
+    // Every object is the raw record its tab renders and carries the tab that owns it.
+    expect(byType('tie')[0].tab).toBe('relationships');
+    expect(byType('conflict')[0].tab).toBe('relationships');
+    expect(byType('hook')[0].tab).toBe('plot_hooks');
+    expect(byType('npc')[0].id).toBe('npc_1');
+  });
+
+  it('enumerates the families the index does not hold, each under its owning tab', () => {
+    const { objects } = enumerateDossierObjects(searchTown());
+    const tabsOf = (type) => [...new Set(objects.filter(o => o.type === type).map(o => o.tab))];
+    expect(tabsOf('event')).toEqual(['history']);
+    expect(tabsOf('tension')).toEqual(['history']);
+    expect(tabsOf('faction')).toEqual(['power']);
+    expect(tabsOf('neighbour')).toEqual(['relationships']);
+    expect(objects.find(o => o.type === 'neighbour').id).toBe('link_a_b');
+    expect(objects.find(o => o.type === 'event').id).toBe('evt_flood');
+    expect(searchDossier(searchTown(), 'guild conflict').groups[0].objects[0].type).toBe('tension');
+  });
+
+  it('a player view never carries a secret or a hook, and a public dossier never matches a secret', () => {
+    const secretWords = 'tithe ledger';
+    // The DM finds the card by its secret: the secret is part of the card the DM reads.
+    expect(searchDossier(searchTown(), secretWords).groups[0].objects[0].raw.name).toBe('Mara Voss');
+
+    // PLAYER VIEW: the secret cannot be matched, the card that IS found carries no secret
+    // field to render, and the plot hooks family is not enumerated at all.
+    const player = searchDossier(searchTown(), 'Mara Voss', { playerView: true });
+    const card = player.groups[0].objects[0].raw;
+    expect(card.name).toBe('Mara Voss');
+    // anchored: the line above proves the card is the live, found record, so its missing secret cannot be vacuous
+    expect(card).not.toHaveProperty('secret');
+    expect(player.groups.map(g => g.tab)).toEqual(['npcs', 'relationships']);
+    expect(searchDossier(searchTown(), secretWords, { playerView: true }).total).toBe(0);
+
+    // PUBLIC DOSSIER: the card is still found by name, but never by its secret.
+    expect(searchDossier(searchTown(), 'Mara Voss', { publicDossier: true }).groups[0].objects[0].raw.name).toBe('Mara Voss');
+    expect(searchDossier(searchTown(), secretWords, { publicDossier: true }).total).toBe(0);
+  });
+
+  it('drops a family whose tab the viewer does not have, and a one-letter query is no query', () => {
+    const tabs = ['npcs', 'history'];
+    expect(searchDossier(searchTown(), 'Mara Voss', {}, { tabs }).groups.map(g => g.tab)).toEqual(['npcs']);
+    expect(searchDossier(searchTown(), 'm').total).toBe(0);
+    expect(searchDossier(searchTown(), '  ').groups).toEqual([]);
+    expect(searchDossier(null, 'Mara').total).toBe(0);
   });
 });

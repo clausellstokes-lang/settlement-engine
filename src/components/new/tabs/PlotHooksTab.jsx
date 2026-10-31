@@ -33,11 +33,44 @@ const BODY = swatch['#3A2F18'];
 const BORDER = swatch['#E8D9B0'];
 const SERIF = 'Crimson Text, Georgia, serif';
 
-export default function PlotHooksTab({ settlement }) {
-  // THE PHONE PROSE FLOOR — every hook body. Bound above the empty-state early return so
-  // the hook order is stable on a town that surfaces no hooks. The source name and the group
-  // caption are the card's furniture and keep their own steps.
+/**
+ * One hook card, extracted verbatim from the tab's group list (BUILD-W2-SEARCH U2, no
+ * behaviour change) so the dossier search mounts a hook through its own card.
+ */
+export function PlotHookCard({ hook }) {
+  // THE PHONE PROSE FLOOR — the hook body. The source name is the card's furniture and keeps
+  // its own step (it moved here from the tab with the card).
   const mobile = useIsMobile();
+  const cat = PLOT_HOOK_CATEGORIES[hook.category] || PLOT_HOOK_CATEGORIES.tension;
+  return (
+    <div
+      style={{
+        padding: '8px 11px',
+        background: swatch.white,
+        border: `1px solid ${BORDER}`,
+        borderLeft: `3px solid ${cat.color}`,
+      }}
+    >
+      <div style={{
+        // The source NAME — furniture, and long enough to be read (a conflict
+        // source reads "X vs Y"), so it takes the chrome floor and wraps rather
+        // than clamping (ODQ §934.23: a floor inside a clamp shows less).
+        fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
+        color: INK, minWidth: 0, overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal',
+      }}>
+        {/* `nameOrTokenCase`: this field is `npc.name` for an NPC hook and
+            `parties.join(' vs ')` for a faction one; it cases a raw token ("npc"
+            reads "NPC") and leaves a generated name exactly as spelled. */}
+        {nameOrTokenCase(hook.source)}
+      </div>
+      <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
+        {hook.text}
+      </div>
+    </div>
+  );
+}
+
+export default function PlotHooksTab({ settlement }) {
   const groups = useMemo(() => groupPlotHooksBySourcePage(collectPlotHooks(settlement || {})), [settlement]);
 
   if (!groups.length) {
@@ -52,36 +85,7 @@ export default function PlotHooksTab({ settlement }) {
         <section key={page.id} data-testid={`plot-hooks-from-${page.id}`}>
           <div style={{ ...literaryTitle(FS.sm), color: INK, marginBottom: 6 }}>{page.label}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {hooks.map((hook, i) => {
-              const cat = PLOT_HOOK_CATEGORIES[hook.category] || PLOT_HOOK_CATEGORIES.tension;
-              return (
-                <div
-                  key={i}
-                  style={{
-                    padding: '8px 11px',
-                    background: swatch.white,
-                    border: `1px solid ${BORDER}`,
-                    borderLeft: `3px solid ${cat.color}`,
-                  }}
-                >
-                  <div style={{
-                    // The source NAME — furniture, and long enough to be read (a conflict
-                    // source reads "X vs Y"), so it takes the chrome floor and wraps rather
-                    // than clamping (ODQ §934.23: a floor inside a clamp shows less).
-                    fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
-                    color: INK, minWidth: 0, overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal',
-                  }}>
-                    {/* `nameOrTokenCase`: this field is `npc.name` for an NPC hook and
-                        `parties.join(' vs ')` for a faction one; it cases a raw token ("npc"
-                        reads "NPC") and leaves a generated name exactly as spelled. */}
-                    {nameOrTokenCase(hook.source)}
-                  </div>
-                  <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-                    {hook.text}
-                  </div>
-                </div>
-              );
-            })}
+            {hooks.map((hook, i) => <PlotHookCard key={i} hook={hook} />)}
           </div>
         </section>
       ))}

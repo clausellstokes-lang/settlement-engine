@@ -118,6 +118,48 @@ function statusOf(svc, sets) {
   return null;
 }
 
+/**
+ * One institution with the service rows it provides, extracted verbatim from InstitutionsTab
+ * (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search mounts a house through
+ * its own card. `sets` is the tab's chain-status reading (`computeChainSets`).
+ */
+export function InstitutionCard({ inst, category, label, services, sets }) {
+  const mobile = useIsMobile();
+  const isCustom = inst.source === 'custom' || inst.isCustom === true;
+  const badge = institutionBadge(inst);
+  return (
+    <section id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
+      padding: '8px 11px', background: swatch['#FAF8F4'],
+      ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
+    }}>
+      <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
+        <span title={isCustom ? 'Your custom content' : badge.title} style={{ ...literaryTitle(FS.sm), color: swatch.inkMag }}>
+          {label}
+        </span>
+        {isCustom
+          ? <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: GOLD_DEEP, letterSpacing: '0.04em' }}>✦</span>
+          : (badge.label && <span title={badge.title} style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: badge.color, letterSpacing: '0.04em' }}>{badge.label}</span>)}
+        {category && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{tokenCase(category)}</span>}
+      </div>
+      {services.length === 0 && inst.desc && (
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}>{inst.desc}</p>
+      )}
+      {services.map((svc, j) => {
+        const status = statusOf(svc, sets);
+        return (
+          <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || swatch['#D8C8A0']}`, marginTop: 4 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
+              <span style={{ fontSize: FS['12.5'], fontWeight: 600, color: swatch.inkMag }}>{institutionDisplayName(svc.name)}</span>
+              {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}
+            </div>
+            {svc.desc && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.3, margin: '1px 0 0' }}>{svc.desc}</p>}
+          </div>
+        );
+      })}
+    </section>
+  );
+}
+
 export default function InstitutionsTab({ settlement }) {
   const mobile = useIsMobile();
   const houses = useMemo(() => institutionsWithServices(settlement), [settlement]);
@@ -128,41 +170,9 @@ export default function InstitutionsTab({ settlement }) {
     <div style={{ padding: '14px 18px' }}>
       <EconomyFreshnessNote settlement={settlement} variant="catalog" />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {houses.map(({ inst, category, label, services }, i) => {
-          const isCustom = inst.source === 'custom' || inst.isCustom === true;
-          const badge = institutionBadge(inst);
-          return (
-            <section key={`${inst.name}-${i}`} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
-              padding: '8px 11px', background: swatch['#FAF8F4'],
-              ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
-            }}>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
-                <span title={isCustom ? 'Your custom content' : badge.title} style={{ ...literaryTitle(FS.sm), color: swatch.inkMag }}>
-                  {label}
-                </span>
-                {isCustom
-                  ? <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: GOLD_DEEP, letterSpacing: '0.04em' }}>✦</span>
-                  : (badge.label && <span title={badge.title} style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: badge.color, letterSpacing: '0.04em' }}>{badge.label}</span>)}
-                {category && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{tokenCase(category)}</span>}
-              </div>
-              {services.length === 0 && inst.desc && (
-                <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}>{inst.desc}</p>
-              )}
-              {services.map((svc, j) => {
-                const status = statusOf(svc, sets);
-                return (
-                  <div key={`${svc.name}-${j}`} data-testid="institution-service" style={{ padding: '4px 0 0 10px', borderLeft: `2px solid ${status?.color || swatch['#D8C8A0']}`, marginTop: 4 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}>
-                      <span style={{ fontSize: FS['12.5'], fontWeight: 600, color: swatch.inkMag }}>{institutionDisplayName(svc.name)}</span>
-                      {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}
-                    </div>
-                    {svc.desc && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.3, margin: '1px 0 0' }}>{svc.desc}</p>}
-                  </div>
-                );
-              })}
-            </section>
-          );
-        })}
+        {houses.map(({ inst, category, label, services }, i) => (
+          <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} />
+        ))}
       </div>
       <div style={{ display: 'flex', gap: 14, marginTop: 12, paddingTop: 8, borderTop: '1px solid #f0e8d8', fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, flexWrap: 'wrap' }}>
         {LEGEND.map(([lbl, c, desc]) => (
