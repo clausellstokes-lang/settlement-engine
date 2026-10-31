@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "1b13d888737642e8e74cdf0f303bccfcbdcb1525",
+ "frozenAtSha": "7cfe0bfa79f18fb7361aa7d2bc2f0286f9d6a45d",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -22,9 +22,9 @@
   "originCount": 9143,
   "transitionCount": 15264
  },
- "shapesDigest": "bf16184bcdfeed9b7f6194a9a2d1b18fb800aa1774160d59c147058ede32bbcd",
- "detectorDigest": "36a177190ffb8672286ee01010f4aa5dafc1e872adc3d950345e191953adafff",
- "verdictDigest": "c5c635124d7a98be63a0625adf614210911746e2d9a29fb7a0cf8a0f05ef0beb",
+ "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
+ "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
+ "verdictDigest": "0af82803f40d5fc6b487132aed2180ce3d0361a7a86e369c3037ab41e499434e",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -82,10 +82,10 @@
   "news": 29
  },
  "population": {
-  "judged": 6997,
+  "judged": 6998,
   "lit": 570,
   "litName": 5107,
-  "dark": 1320,
+  "dark": 1321,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
@@ -101,9 +101,9 @@
   "nGrades": 961621,
   "resolvedReceivers": 6834
  },
- "registerDigest": "62483840445536e2f843f6ab9cce5d9d2dc7e0f794bc6f41d7ed323e7faa14ef",
+ "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 471,
+ "reviewableDarkCount": 472,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -14296,6 +14296,7 @@
   "npc2Id on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc2Name on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "npc2Role on relationships": "web-display=N web-transitive=R",
+  "proseVariant on relationships": "",
   "strength on relationships": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "tension on relationships": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "type on relationships": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=R",

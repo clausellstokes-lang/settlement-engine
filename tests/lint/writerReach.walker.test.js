@@ -480,7 +480,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // world and so all in the dark cohort: five became nine.
     // The dossier consolidation (2026-10-30, ODQ §934.101, ruling X-2) adds `archetypeKey on relationships`,
     // written on every world with a tie: nine became ten.
-    expect(registeredAndDark.length).toBe(10);
+    // GS-1 tension variety (2026-10-31, ODQ §934.101): `proseVariant on relationships` is registered engine-internal and
+    // written on every world with a tie: ten became eleven.
+    expect(registeredAndDark.length).toBe(11);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
