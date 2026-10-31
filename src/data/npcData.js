@@ -1345,11 +1345,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`,
       (r, s) =>
         `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`,
+      (r, s) =>
+        `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
+      (r, s) =>
+        `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`,
+      (r, s) =>
+        `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`,
+      (r, s) =>
+        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`,
+      (r, s) =>
+        `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
       (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.',
       (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`,
+      (r, s) =>
+        `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`,
+      (r, s) =>
+        `A customs officer has asked ${r.name} for the names of every supplier. ${s.name}'s name is missing from the list, and the officer has noticed the gap.`,
+      (r, s) =>
+        `${r.name} has started paying off the guild debts that tied the two of them together. ${s.name} reads it as a plan to leave.`,
+      (r, s) =>
+        `${s.name} has been seen at ${r.name}'s counting-house in daylight. That was never part of the arrangement.`,
+      (r, s) => `${r.name}'s eldest has found the second ledger and asked what ${s.name}'s initials mean.`,
     ]),
     type: 'patron_client',
   },
@@ -1362,11 +1381,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`,
       (r, s) =>
         `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`,
+      (r, s) =>
+        `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`,
+      (r, s) =>
+        `${s.name}'s collectors visit ${r.name} on the same day each month and leave with a sealed purse. Nobody in the street watches them go.`,
+      (r, s) =>
+        `${r.name} owes ${s.name} for protection that was never asked for and cannot be cancelled. The debt is renewed in person, at the door.`,
+      (r, s) =>
+        `${s.name} sets the fee, ${r.name} pays it, and the price goes on every customer's bill without a line of its own.`,
+      (r, s) =>
+        `${r.name}'s premises are the only ones on the row that have never been robbed. ${s.name} reminds ${r.name} of this when the fee is due.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
       (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`,
       (r, s) => `A rival crew has offered ${r.name} a better rate. Accepting would be a declaration of war on ${s.name}.`,
+      (r, s) => `${r.name} has hired two guards of their own. ${s.name} has asked, politely, what they are for.`,
+      (r, s) =>
+        `${s.name} wants a cut of ${r.name}'s new venture before it opens. The fee was never meant to grow with the business.`,
+      (r, s) =>
+        `${r.name} missed this month's payment by three days. ${s.name} has not sent anyone yet, and that is worse.`,
+      (r, s) =>
+        `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
+      (r, s) =>
+        `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`,
     ]),
     type: 'debtor_creditor',
   },
@@ -1379,12 +1417,32 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`,
       (r, s) =>
         `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`,
+      (r, s) =>
+        `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`,
+      (r, s) =>
+        `${s.name}'s people are never searched on ${r.name}'s watch. The arrangement is three years old and has never been put in writing.`,
+      (r, s) =>
+        `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`,
+      (r, s) =>
+        `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`,
+      (r, s) =>
+        `${r.name} commands the patrols and ${s.name} pays for their routes. The streets ${s.name} uses are the quietest in the settlement.`,
     ]),
     tension: pairProse('t', [
       (r, s) =>
         'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
       (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`,
       (r, s) => 'The payments have started arriving late. In this trade, late is a message.',
+      (r, s) =>
+        `${r.name} was promoted last month, and ${s.name} expects the price of silence to stay the same. ${r.name} does not.`,
+      (r, s) =>
+        `One of ${s.name}'s runners was arrested by a patrol ${r.name} did not assign. The runner knows both their names.`,
+      (r, s) =>
+        `${s.name} has asked ${r.name} to lose a piece of evidence that three other officers have already seen.`,
+      (r, s) =>
+        `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`,
+      (r, s) =>
+        `An auditor from the garrison is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`,
     ]),
     type: 'ally',
   },
@@ -1394,11 +1452,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
       (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
       (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
+      (r, s) => `${r.name} has closed three of ${s.name}'s houses this year. ${s.name} has opened four.`,
+      (r, s) =>
+        `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`,
+      (r, s) =>
+        `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`,
+      (r, s) =>
+        `${r.name} hunts ${s.name}'s operation street by street, and ${s.name} moves it one street ahead. The chase has lasted two winters.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
       (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`,
       (r, s) => `Someone in ${r.name}'s command reports to ${s.name}. The file says so; it does not say who.`,
+      (r, s) =>
+        `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`,
+      (r, s) =>
+        `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`,
+      (r, s) =>
+        `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`,
+      (r, s) =>
+        `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`,
+      (r, s) =>
+        `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`,
     ]),
     type: 'enemy',
   },
@@ -1411,12 +1488,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`,
       (r, s) =>
         `The contract between ${r.name} and ${s.name} is renewed annually with a handshake; what it actually covers has never been written down anywhere.`,
+      (r, s) =>
+        `${s.name}'s company guards ${r.name}'s warehouses and wagons for a fixed fee each season. ${r.name} pays on time and asks for nothing in writing.`,
+      (r, s) =>
+        `${r.name} is ${s.name}'s largest client and ${s.name} is ${r.name}'s only protection. Each would be badly hurt by losing the other.`,
+      (r, s) =>
+        `${s.name}'s soldiers wear ${r.name}'s colours on the road and take ${r.name}'s orders without question. No magistrate has a say over them.`,
+      (r, s) =>
+        `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`,
+      (r, s) =>
+        `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s company would march.`,
     ]),
     tension: pairProse('t', [
       (r, s) =>
         `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
       (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`,
       (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.',
+      (r, s) =>
+        `${r.name} has cut ${s.name}'s fee by a fifth. ${s.name}'s company still guards the wagons, but more slowly.`,
+      (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`,
+      (r, s) =>
+        `A guard from ${s.name}'s company was killed protecting ${r.name}'s cargo. ${s.name} wants compensation the contract does not mention.`,
+      (r, s) =>
+        `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`,
+      (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`,
     ]),
     type: 'patron_client',
   },
@@ -1429,11 +1524,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Between ${r.name}'s pulpit and ${s.name}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
       (r, s) =>
         `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
+      (r, s) =>
+        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the garrison's swords.`,
+      (r, s) =>
+        `${s.name}'s soldiers take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
+      (r, s) =>
+        `${r.name} names the settlement's enemies from the pulpit, and ${s.name} rides against them within the week.`,
+      (r, s) =>
+        `${r.name} and ${s.name} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.`,
+      (r, s) =>
+        `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
       (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.',
       (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
+      (r, s) =>
+        `${r.name} has declared a holy day on which no soldier may bear arms. ${s.name} has a patrol scheduled for it.`,
+      (r, s) =>
+        `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`,
+      (r, s) =>
+        `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`,
+      (r, s) =>
+        `A soldier under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
+      (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`,
     ]),
     type: 'ally',
   },
@@ -1446,11 +1560,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
       (r, s) =>
         `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`,
+      (r, s) =>
+        `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`,
+      (r, s) =>
+        `${r.name} records ${s.name}'s payments as gifts from a pious donor. The donor has never attended a service.`,
+      (r, s) =>
+        `${s.name} funds ${r.name}'s alms, and ${r.name} vouches for ${s.name}'s good character to anyone who asks. Both are paid in the same coin.`,
+      (r, s) =>
+        `${r.name}'s charity runs the soup kitchen, and ${s.name}'s couriers collect their parcels from the kitchen's back door.`,
+      (r, s) =>
+        `${r.name} hears ${s.name}'s confession each week and keeps ${s.name}'s accounts each month. Neither duty is written down.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
       (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`,
       (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
+      (r, s) =>
+        `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`,
+      (r, s) =>
+        `${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.`,
+      (r, s) =>
+        `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`,
+      (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`,
+      (r, s) =>
+        `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`,
     ]),
     type: 'ally',
   },
@@ -1463,12 +1596,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`,
       (r, s) =>
         `${r.name} takes commissions from ${s.name} that no guild register records: small workings, expertly done, each one deniable and none of them innocent.`,
+      (r, s) =>
+        `${r.name} brews what ${s.name} sells: sleeping draughts, truth-tinctures, and inks that vanish after a day.`,
+      (r, s) =>
+        `${s.name} brings ${r.name} the jobs and the payment, and ${r.name} asks no questions about who the work is for.`,
+      (r, s) => `${r.name}'s workshop has a back door, and ${s.name}'s couriers are the only ones who use it.`,
+      (r, s) =>
+        `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`,
+      (r, s) =>
+        `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`,
     ]),
     tension: pairProse('t', [
       (r, s) =>
         `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
       (r, s) => `${s.name} has begun asking for workings of a different order: the kind with witnesses. ${r.name} has not yet said no.`,
       (r, s) => `Another practitioner has noticed ${r.name}'s signature in the residue. Professional courtesy has limits.`,
+      (r, s) =>
+        `${r.name}'s apprentice has started asking where the night commissions go. ${s.name} has noticed the apprentice.`,
+      (r, s) => `${s.name} owes ${r.name} for three months of work and has offered information instead of coin.`,
+      (r, s) =>
+        `A ward ${r.name} made for ${s.name} failed during a robbery. ${s.name} blames the ward; ${r.name} blames the thief.`,
+      (r, s) =>
+        `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`,
+      (r, s) =>
+        `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`,
     ]),
     type: 'patron_client',
   },
@@ -1481,11 +1632,30 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`,
       (r, s) =>
         `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`,
+      (r, s) =>
+        `${r.name}'s treasury borrowed from ${s.name} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.`,
+      (r, s) =>
+        `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`,
+      (r, s) =>
+        `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`,
+      (r, s) =>
+        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`,
+      (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
       (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
       (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`,
+      (r, s) =>
+        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`,
+      (r, s) =>
+        `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`,
+      (r, s) =>
+        `${s.name} is calling in a third of the debt at once. ${r.name} has until the next quarter day to find it.`,
+      (r, s) =>
+        `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`,
+      (r, s) =>
+        `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`,
     ]),
     type: 'debtor_creditor',
   },
@@ -1498,11 +1668,31 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`,
       (r, s) =>
         `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`,
+      (r, s) =>
+        `${r.name} controls the garrison's pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
+      (r, s) =>
+        `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`,
+      (r, s) =>
+        `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`,
+      (r, s) =>
+        `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`,
+      (r, s) =>
+        `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
       (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
+      (r, s) =>
+        `${r.name} has cut the garrison's pay to fund the market repairs. ${s.name} has told the soldiers who signed the order.`,
+      (r, s) =>
+        `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`,
+      (r, s) =>
+        `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`,
+      (r, s) =>
+        `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`,
+      (r, s) =>
+        `${s.name} has begun collecting a road toll for the garrison. ${r.name} calls it theft from the treasury.`,
     ]),
     type: 'political',
   },
@@ -1515,11 +1705,28 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`,
       (r, s) =>
         `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`,
+      (r, s) =>
+        `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`,
+      (r, s) =>
+        `${r.name} and ${s.name} trained together and have competed ever since. The settlement keeps score, and so do they.`,
+      (r, s) =>
+        `${r.name} wants ${s.name}'s position, and ${s.name} wants ${r.name}'s reputation. They are civil in public and unforgiving in private.`,
+      (r, s) =>
+        `Every client ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
       (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.',
       (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.',
+      (r, s) => `${r.name} has hired away ${s.name}'s best assistant. ${s.name} has said nothing about it, to anyone.`,
+      (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`,
+      (r, s) =>
+        `${s.name} has been telling clients that ${r.name}'s work is slipping. Two of the clients have repeated it to ${r.name}.`,
+      (r, s) =>
+        `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`,
+      (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`,
     ]),
     type: 'rival',
   },
@@ -1532,12 +1739,27 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`,
       (r, s) =>
         `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`,
+      (r, s) =>
+        `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`,
+      (r, s) =>
+        `${s.name} learned the work at ${r.name}'s side for seven years. Half of ${s.name}'s clients first came through ${r.name}'s door.`,
+      (r, s) => `${r.name} vouched for ${s.name} when nobody else would. ${s.name}'s first post came from that word.`,
+      (r, s) =>
+        `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`,
+      (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`,
     ]),
     tension: pairProse('t', [
       (r, s) =>
         `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
       (r, s) => `${r.name} has one favour left to call in, and is saving it. ${s.name} knows, and is watching for it.`,
       (r, s) => `A third party has asked ${r.name}, quietly, whether ${s.name} can be trusted. The answer took too long.`,
+      (r, s) => `${s.name} has taken on a client ${r.name} turned away on principle.`,
+      (r, s) =>
+        `${r.name} has taken a new apprentice, and ${s.name} has heard the apprentice is being taught things ${s.name} never was.`,
+      (r, s) => `${s.name} corrected ${r.name} in public last month, and was right.`,
+      (r, s) =>
+        `${r.name} has asked ${s.name} for a loan. It is the first time a debt between teacher and student has run that way.`,
+      (r, s) => `${s.name} has begun teaching ${r.name}'s methods as ${s.name}'s own.`,
     ]),
     type: 'mentor_student',
   },
@@ -1550,11 +1772,27 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`,
       (r, s) =>
         `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`,
+      (r, s) =>
+        `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`,
+      (r, s) =>
+        `${r.name} controls a vote ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.`,
+      (r, s) =>
+        `${r.name} and ${s.name} each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.`,
+      (r, s) =>
+        `${s.name} needs ${r.name}'s seal on certain papers; ${r.name} needs ${s.name}'s silence about certain others. Neither has asked for more than the other could pay.`,
+      (r, s) =>
+        `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`,
     ]),
     tension: pairProse('t', [
       (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
       (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.',
       (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`,
+      (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`,
+      (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`,
+      (r, s) => `The vote ${s.name} needs from ${r.name} comes up next week, and ${r.name} has named a new price.`,
+      (r, s) =>
+        `${r.name}'s secret is about to come out by other means. Once it does, ${s.name} holds nothing over ${r.name}.`,
+      (r, s) => `${s.name} has written down what ${r.name} owes and left a copy with a notary.`,
     ]),
     type: 'political',
   },
@@ -1567,11 +1805,28 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
       (r, s) =>
         `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
+      (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`,
+      (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`,
+      (r, s) =>
+        `${r.name} brings the votes and ${s.name} brings the money. The alliance is three years old and has won every vote it needed.`,
+      (r, s) =>
+        `${r.name} and ${s.name} signed a pact after their last quarrel cost them both. They keep to its terms exactly.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'A third party is actively working to change that calculation.',
       (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.',
       (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`,
+      (r, s) => `${s.name} has been dining with ${r.name}'s rivals. ${r.name} heard about it from a servant.`,
+      (r, s) =>
+        `${r.name} wants to bring a third member into the alliance. ${s.name} thinks the newcomer would take ${s.name}'s place.`,
+      (r, s) =>
+        `${s.name} voted against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.`,
+      (r, s) =>
+        `${r.name} and ${s.name} both want the same office, and the alliance cannot survive one of them winning it.`,
+      (r, s) =>
+        `${s.name} has asked ${r.name} to back a candidate ${r.name} distrusts. Refusing would cost the alliance its majority.`,
     ]),
     type: 'ally',
   },
@@ -1584,11 +1839,28 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`,
       (r, s) =>
         `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`,
+      (r, s) =>
+        `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`,
+      (r, s) =>
+        `${r.name} and ${s.name} have stood on opposite sides of three disputes and praised each other after every one.`,
+      (r, s) =>
+        `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`,
+      (r, s) =>
+        `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`,
+      (r, s) =>
+        `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'They are about to be on opposite sides of a significant decision.',
       (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.',
       (r, s) => 'The respect is real and the interests are diverging. Both can read a map.',
+      (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`,
+      (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`,
+      (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`,
+      (r, s) =>
+        `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`,
+      (r, s) =>
+        `${s.name} has publicly backed a plan that ${r.name} thinks will fail. ${r.name} has said so once, in private.`,
     ]),
     type: 'respect',
   },
@@ -1601,11 +1873,26 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`,
       (r, s) =>
         `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`,
+      (r, s) =>
+        `${s.name} paid ${r.name}'s bail eleven years ago and has never mentioned it. ${r.name} mentions it to no one.`,
+      (r, s) =>
+        `${r.name} owes ${s.name} a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.`,
+      (r, s) =>
+        `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has voted with ${s.name} ever since.`,
+      (r, s) =>
+        `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`,
+      (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${s.name} is about to call it in.`,
       (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`,
       (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.',
+      (r, s) =>
+        `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`,
+      (r, s) => `${r.name} has started repaying the debt in coin. ${s.name} wants it repaid in favours.`,
+      (r, s) => `${s.name} has mentioned the debt aloud, at a dinner, in front of ${r.name}'s partners.`,
+      (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`,
+      (r, s) => `${s.name} has fallen on hard times, and the debt ${r.name} owes is now the only asset ${s.name} has.`,
     ]),
     type: 'debtor_creditor',
   },
@@ -1618,11 +1905,29 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`,
       (r, s) =>
         `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`,
+      (r, s) =>
+        `${r.name} married into ${s.name}'s family. ${s.name} opposed the match and still calls ${r.name} by surname.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.`,
+      (r, s) => `${s.name} is ${r.name}'s half-sibling, raised in the same house and left out of the same will.`,
+      (r, s) =>
+        `${r.name} and ${s.name} are in-laws. They are polite at family dinners and avoid each other everywhere else.`,
+      (r, s) =>
+        `${r.name} is godparent to ${s.name}'s eldest child. The tie was made before their careers set them against each other.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
       (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.',
       (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.',
+      (r, s) => `${r.name}'s child wants to marry into ${s.name}'s household. Neither parent has given an answer.`,
+      (r, s) =>
+        `${s.name} has gone into business against ${r.name}'s partners, and the family expects ${r.name} to keep the peace.`,
+      (r, s) =>
+        `A family property must be sold, and ${r.name} and ${s.name} each want the money for a different purpose.`,
+      (r, s) =>
+        `${r.name}'s rivals have learned that ${s.name} is family, and have started asking ${s.name} questions.`,
+      (r, s) =>
+        `The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.`,
     ]),
     type: 'family',
   },
@@ -1635,11 +1940,26 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`,
       (r, s) =>
         `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`,
+      (r, s) =>
+        `${r.name} testified against ${s.name} in a case ten years ago. ${s.name} lost a fortune and has not spoken to ${r.name} since.`,
+      (r, s) =>
+        `${s.name} took the post ${r.name} had been promised. ${r.name} has treated ${s.name} as an enemy from that day.`,
+      (r, s) =>
+        `${r.name} and ${s.name} were partners until one of them emptied the shared account. Each says it was the other.`,
+      (r, s) => `${r.name} blames ${s.name} for a death in ${r.name}'s family. ${s.name} has never denied it.`,
+      (r, s) =>
+        `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`,
     ]),
     tension: pairProse('t', [
       (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
       (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.',
       (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
+      (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
+      (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`,
+      (r, s) =>
+        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`,
+      (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`,
+      (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`,
     ]),
     type: 'enemy',
   },

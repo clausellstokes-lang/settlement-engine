@@ -469,15 +469,12 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   /** The line with both names masked: two ties sharing it share a template. */
   const templateOf = (text, nameA, nameB) =>
     longestFirst([nameA, nameB]).reduce((out, name) => out.split(name).join('X'), String(text));
-  /** How many distinct templates a field's pool can render, measured over 400 synthetic pairs. */
+  /** How many distinct templates a field's pool renders, read index by index (the pool's own `size`). */
   const poolSize = (key, field) => {
-    const seen = new Set();
-    for (let index = 0; index < 400; index++) {
-      const a = { name: `Ravel${index}` };
-      const b = { name: `Sorn${index}` };
-      seen.add(templateOf(STRESS_ECONOMIC_EFFECTS[key][field](a, b), a.name, b.name));
-    }
-    return seen.size;
+    const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+    const a = { name: 'Ravel Probe' };
+    const b = { name: 'Sorn Probe' };
+    return new Set(Array.from({ length: pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
   };
   const institutions = [
     { name: 'Town watch', category: 'Defense', tags: ['defense'] },
@@ -524,11 +521,11 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
 
   /** Does this archetype's tension pool hold a line that names both parties? */
   const hasBothNamedTension = key => {
-    const a = { name: 'Ravel-probe' };
-    const b = { name: 'Sorn-probe' };
-    return Array.from({ length: 400 }, (_, index) => STRESS_ECONOMIC_EFFECTS[key].tension(
-      { name: `${a.name}${index}` }, { name: `${b.name}${index}` },
-    )).some((line, index) => line.includes(`${a.name}${index}`) && line.includes(`${b.name}${index}`));
+    const pool = STRESS_ECONOMIC_EFFECTS[key].tension;
+    const a = { name: 'Ravel Probe' };
+    const b = { name: 'Sorn Probe' };
+    return Array.from({ length: pool.size }, (_, index) => pool(a, b, index))
+      .some(line => line.includes(a.name) && line.includes(b.name));
   };
 
   test('ties of one archetype never share a line until the pool is exhausted, then cycle', () => {
@@ -563,5 +560,48 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
     expect(offenders, `same-page repeats:\n${JSON.stringify(offenders.slice(0, 4), null, 2)}`).toEqual([]);
     // LIVENESS: the cycle arm must actually fire, or "cycles rather than repeats" is untested.
     expect(overflowing, 'the corpus holds a town with more ties of one archetype than variants').toBeGreaterThan(0);
+  });
+});
+
+/**
+ * GS-1 U2: THE POOLS. Every one of the 18 archetypes carries EIGHT description and EIGHT tension
+ * variants (index 0-2 are the pre-existing lines, verbatim; 3-7 are the GS-1 lines). Every new
+ * line names both parties, and no line on either pool shares a template with another.
+ */
+describe('relationship archetype pools hold eight variants each (GS-1)', () => {
+  const A = { name: 'Aldo Pyrewright' };
+  const B = { name: 'Bessa Morrow' };
+  const masked = line => line.split(A.name).join('X').split(B.name).join('Y');
+  const keys = Object.keys(STRESS_ECONOMIC_EFFECTS);
+
+  test('all 18 archetypes, both fields, eight distinct variants', () => {
+    expect(keys).toHaveLength(18);
+    for (const key of keys) {
+      for (const field of ['desc', 'tension']) {
+        const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+        expect(pool.size, `${key}.${field} pool size`).toBe(8);
+        const lines = Array.from({ length: 8 }, (_, index) => masked(pool(A, B, index)));
+        expect(new Set(lines).size, `${key}.${field} has a duplicated variant`).toBe(8);
+      }
+    }
+  });
+
+  test('every GS-1 line names both parties, and no line carries a dash where a sentence should break', () => {
+    let scanned = 0;
+    for (const key of keys) {
+      for (const field of ['desc', 'tension']) {
+        const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+        for (let index = 0; index < 8; index++) {
+          const line = pool(A, B, index);
+          expect(line, `${key}.${field}[${index}] carries an em or en dash`).not.toMatch(/[–—]/);
+          if (index >= 3) {
+            expect(line, `${key}.${field}[${index}] names the first party`).toContain(A.name);
+            expect(line, `${key}.${field}[${index}] names the second party`).toContain(B.name);
+          }
+          scanned++;
+        }
+      }
+    }
+    expect(scanned).toBe(18 * 2 * 8);
   });
 });
