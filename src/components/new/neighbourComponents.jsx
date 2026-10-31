@@ -1,9 +1,9 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
-import { useStore } from '../../store/index.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { entityAnchor, neighbourIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -31,16 +31,9 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
   // entries by (id → else `neighbour.<slug(name)>`), so identity matches by id,
   // never by name. Focus only forces OPEN — a manual collapse afterward still
   // works. Keyed on focus `ts` so a repeat click of the same link re-fires.
+  // The one convention every card follows (X-20 (c); components/dossier/useEntityFocus.js).
   const neighbourId = neighbourIdFor(link);
-  const focusedEntity = useStore(s => s.focusedEntity);
-  const cardRef = useRef(null);
-  const isFocused = !!focusedEntity?.id && !!neighbourId && focusedEntity.id === neighbourId;
-  useEffect(() => {
-    if (!isFocused) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
-    setOpen(true);
-    cardRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
-  }, [focusedEntity?.ts, isFocused]);
+  const { ref: cardRef, isFocused } = useEntityFocus(neighbourId, () => setOpen(true));
 
   return (
     <div ref={cardRef} id={entityAnchor('neighbour', { id: neighbourId, name: link.neighbourName||link.name })} style={{border:`1px solid ${st.border}`,borderLeft:`3px solid ${st.color}`,overflow:'hidden',outline:isFocused?`2px solid ${st.color}55`:'none'}}>

@@ -527,6 +527,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // 624/630 (the commercial-profile, food and shadow lines moved under their facts, the campaign
 // blocks to the foot); PowerTab.jsx 488 -> 491, 526 -> 529 (the strata moved above the desk
 // passages). Path, category and snippet are byte-identical on every row; no ceiling moves.
+// BUILD-W2-LINKS U2 (wave 2, X-20 (c), the focus convention): npcComponents.jsx 146 -> 147 and
+// 153 -> 154, two pure line moves (the useEntityFocus import line). Path, category and snippet
+// byte-identical; no ceiling moves.
 const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 140,

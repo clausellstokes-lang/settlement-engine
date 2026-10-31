@@ -11,6 +11,7 @@
  *   - the PILOT round-trip: an NPC's faction link lands the Power tab on that
  *     faction's expanded row (the open-one-card affordance).
  */
+import React from 'react';
 import { describe, it, expect, afterEach, vi } from 'vitest';
 import { render, screen, fireEvent, cleanup, act } from '@testing-library/react';
 import { useStore } from '../../src/store/index.js';
@@ -195,5 +196,62 @@ describe('PILOT round-trip: NPC faction link -> Power tab opens that faction', (
     expect(screen.getByText('The metalworkers who hold the forge.')).toBeTruthy();
     // The OTHER faction stays collapsed.
     expect(screen.queryByText('The dockers who run the quay.')).toBeNull();
+  });
+});
+
+describe('X-20 (c): the focus convention on every card type (useEntityFocus)', () => {
+  it('an NPC card, an institution card and a history event card each open and scroll on focus', async () => {
+    const { NPCInlineCard } = await import('../../src/components/new/npcComponents.jsx');
+    const { InstitutionCard } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
+    const { HistoryEventCard } = await import('../../src/components/new/tabs/HistoryTab.jsx');
+    const { entityIdFor, eventIdFor } = await import('../../src/domain/dossier/entityLinks.js');
+    const scrolled = [];
+    const original = Element.prototype.scrollIntoView;
+    Element.prototype.scrollIntoView = function scrollIntoView() { scrolled.push(this.id); };
+    try {
+      const npc = { id: 'npc_1', name: 'Mara Voss', role: 'Reeve', structuralPosition: 'Holds the reeve seat by habit.' };
+      const inst = { name: 'Granary', category: 'Economy', desc: 'Grain in, grain out.' };
+      const evt = { id: 'evt_fire', name: 'The Great Fire', type: 'disaster', yearsAgo: 40, description: 'Half the quay burned.', lastingEffects: ['A stone quay replaced the timber one'] };
+      function EventHost() {
+        const [open, setOpen] = React.useState(false);
+        return <HistoryEventCard evt={evt} h={{ historicalEvents: [evt] }} isExp={open} onToggle={() => setOpen((v) => !v)} />;
+      }
+      render(<>
+        <NPCInlineCard npc={npc} />
+        <InstitutionCard inst={inst} category="Economy" label="Granary" services={[]} sets={{ impaired: new Set(), degraded: new Set(), vulnerable: new Set() }} />
+        <EventHost />
+      </>);
+      expect(screen.queryByText('Holds the reeve seat by habit.')).toBeNull();
+      expect(screen.queryByText('A stone quay replaced the timber one')).toBeNull();
+
+      act(() => { useStore.getState().focusEntity(entityIdFor('npc', npc)); });
+      expect(screen.getByText('Holds the reeve seat by habit.')).toBeTruthy();
+      expect(scrolled).toContain('dossier-npc-npc-1');
+
+      act(() => { useStore.getState().focusEntity(entityIdFor('institution', inst)); });
+      expect(scrolled).toContain('dossier-institution-granary');
+
+      act(() => { useStore.getState().focusEntity(eventIdFor(evt)); });
+      expect(screen.getByText('A stone quay replaced the timber one')).toBeTruthy();
+      expect(scrolled).toContain('dossier-event-evt-fire');
+    } finally {
+      Element.prototype.scrollIntoView = original;
+    }
+  });
+
+  it('a focus on one card leaves its siblings closed, and a repeat click re-fires', async () => {
+    const { NPCInlineCard } = await import('../../src/components/new/npcComponents.jsx');
+    render(<>
+      <NPCInlineCard npc={{ id: 'npc_1', name: 'Mara Voss', structuralPosition: 'Mara sits the bench.' }} />
+      <NPCInlineCard npc={{ id: 'npc_2', name: 'Odo Penn', structuralPosition: 'Odo keeps the forge.' }} />
+    </>);
+    act(() => { useStore.getState().focusEntity('npc_1'); });
+    expect(screen.getByText('Mara sits the bench.')).toBeTruthy();
+    expect(screen.queryByText('Odo keeps the forge.')).toBeNull();
+    // The reader collapses the card, then follows the same link again: it opens again.
+    fireEvent.click(screen.getAllByRole('button', { expanded: true })[0]);
+    expect(screen.queryByText('Mara sits the bench.')).toBeNull();
+    act(() => { useStore.getState().focusEntity('npc_1'); });
+    expect(screen.getByText('Mara sits the bench.')).toBeTruthy();
   });
 });

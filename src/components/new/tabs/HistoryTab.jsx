@@ -19,6 +19,8 @@ import { eventHasOpenThread, timelineEntryHasOpenThread } from '../../../domain/
 import ProseBlock from '../ProseBlock.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
+import { entityAnchor, eventIdFor } from '../../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
 const ALL_EC = {
@@ -102,8 +104,12 @@ export function HistoryEventCard({evt, h, isExp, onToggle}) {
   const isAnchored = eventHasOpenThread(evt, h);
   const yrsColor = recencyColor(evt.yearsAgo||0);
   const yrsLabel = recencyLabel(evt.yearsAgo||0);
+  // X-20 (c): a link to this event opens its detail and scrolls the card to the top. The tab
+  // owns which card is open, so focus asks it through `onToggle`, and only when closed.
+  const evtId = eventIdFor(evt);
+  const { ref: focusRef } = useEntityFocus(evtId, () => { if (!isExp && evt.lastingEffects?.length) onToggle(); });
   return (
-    <div style={{
+    <div ref={focusRef} id={evtId ? entityAnchor('event', { id: evtId }) : undefined} style={{
       ...edged(`1px solid ${isAnchored?ec.color+'60':ec.border}`,`3px solid ${ec.color}`),
       overflow:'hidden',
       background: isAnchored?ec.bg:'#faf8f4',

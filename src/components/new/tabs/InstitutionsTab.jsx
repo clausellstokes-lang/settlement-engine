@@ -28,7 +28,8 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
-import { entityAnchor } from '../../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -127,8 +128,10 @@ export function InstitutionCard({ inst, category, label, services, sets }) {
   const mobile = useIsMobile();
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
+  // X-20 (c): the card is always open; a link to the house scrolls it to the top.
+  const { ref: focusRef } = useEntityFocus(entityIdFor('institution', inst));
   return (
-    <section id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
+    <section ref={focusRef} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
       padding: '8px 11px', background: swatch['#FAF8F4'],
       ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
     }}>

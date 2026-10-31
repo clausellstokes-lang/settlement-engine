@@ -349,13 +349,13 @@
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 146,
+    "line": 147,
     "category": "floatInterpolation",
     "snippet": "{rel.strength}"
   },
   {
     "path": "src/components/new/npcComponents.jsx",
-    "line": 153,
+    "line": 154,
     "category": "floatInterpolation",
     "snippet": "{rel.tension}"
   },

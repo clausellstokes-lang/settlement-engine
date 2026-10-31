@@ -12,7 +12,8 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
-import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
@@ -224,6 +225,8 @@ export function NPCInlineCard({
     if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
   };
   const [open, setOpen] = useState(false);
+  // X-20 (c): a link to this person opens the card fully and scrolls it to the top.
+  const { ref: focusRef } = useEntityFocus(entityIdFor('npc', npc), () => setOpen(true));
   // THE PHONE PROSE FLOOR — every SENTENCE in the expanded card (the
   // compromise phrase, the replacement note, the whereabouts line, the
   // structural position, the constraint, the wants, the disposition and the
@@ -311,7 +314,7 @@ export function NPCInlineCard({
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
   return (
-    <div id={entityAnchor('npc', npc)} style={{
+    <div ref={focusRef} id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
       // LONGHANDS ONLY — the shorthand varies with `isPinned`, and pinning a card is
       // exactly the re-render on which React would reset the 3px accent beside it.
