@@ -116,12 +116,12 @@ const PRE_CHANGE = Object.freeze({
     replay: 'e79004ad0585bb0c99e127e4019d107fbc4b1560d23f7fe28e71c9fab7b5a607',
   }),
   21: Object.freeze({
-    derived: '2a837ce5f252e356a049727ac1ba9e9212ab68135c79e6ccc1526c7387433838',
-    replay: 'c906a415016c207d856c12d34629b35fa5e22f7296fc8809f6ff851dd789ae88',
+    derived: 'e49d32f7c6f3cdcfaed25b8440fdfe854e7c2e260d5fb311579648f39da92a8a',
+    replay: '08993542abcdd9992916c237e351f33d36aeb8fead733523f457d695519d76ce',
   }),
   42: Object.freeze({
-    derived: '5f1ffc6717cf3c74855fe541b59aa4eb0ac5ddb77a8ea34709d0931cc6fe11aa',
-    replay: 'a3311d52fd972b3fb2a6549984b0c026d532cd00cc8f1ce1bfbc59b1725efc25',
+    derived: '2366906e1b014ddaa2cc8e003c883fd64c7140340d60147c124207403044fe2b',
+    replay: 'a7975a20f239adcf3df32a8e93a218683c932f47418f2f5371e11691aed8c6da',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -147,6 +147,15 @@ const PRE_CHANGE = Object.freeze({
 // The three rows' arrival hooks now name only structures they hold (e76ea7f3c), so all six digests moved again. The
 // pre-EM-B2b2 step (sha256 62e16d59...) planted over a COPY of this tree at 310e57f06 and the live step produced the SAME
 // six digests. Row 21's `derived` is the re-recorded golden's control row (6990709a0).
+// ── RE-CAPTURED 2026-10-30, the dossier consolidation's service re-map (ODQ §934.101), BY THE SAME PLANT (cure lane T12) ──
+// Rows 21 and 42 moved (four digests); row 0 did not. BISECTED, not assumed: `git bisect` between eb8cd386 (the wave-4
+// re-capture, digests equal to the block above) and 46109419 names f39d5ae2 (services: register every catalog service name,
+// RS-1..RS-13) the first commit at which they move, and the program's later generator shifts (lane T1's arrival market gate,
+// no-market pool and migration direction, 07184d91..8bc953c7) move none of the three rows. The cause is the signed shift
+// docs/shift-records/2026-10-30-service-category-fidelity.json. Re-captured as above: the pre-EM-B2b2 step (12c437de4, fetched
+// raw; sha256 62e16d59...) planted over a COPY of this tree at ffb4df58 (a detached probe worktree, never this checkout, and
+// restored to 1c069be1...), and the planted step and the live step produced the SAME six digests, so EM-B2b2 still moves no
+// byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control row (b16b40bb, lane S's signed re-record).
 describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources', () => {
   it('A1 — THE DM\'S ROSTER STANDS AT ITS OWN DECLARED LEAF: byte-equal on three fixed seeds, and carried on every census row', () => {
     // ANTI-VACUITY FIRST. The leaf is read from EM-R0a's register through the row's own tier1
