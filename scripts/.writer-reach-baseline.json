@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "f5ef8662a6c5184f7503416e2d69fc40e9075346",
+ "frozenAtSha": "1b13d888737642e8e74cdf0f303bccfcbdcb1525",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -19,12 +19,12 @@
   "simulationFlagsLit": 92,
   "steadingsMinted": 12,
   "shapeCount": 1333,
-  "originCount": 9139,
-  "transitionCount": 15248
+  "originCount": 9143,
+  "transitionCount": 15264
  },
- "shapesDigest": "e36cf71103fc60ef3095e8e77b0e1f34f2f10aa33b9ec95e0a178f389be22c18",
+ "shapesDigest": "bf16184bcdfeed9b7f6194a9a2d1b18fb800aa1774160d59c147058ede32bbcd",
  "detectorDigest": "36a177190ffb8672286ee01010f4aa5dafc1e872adc3d950345e191953adafff",
- "verdictDigest": "1d84070da008818ec1ff9f23eb69914da5426bfe323bfc9e50f3c0930a0c5615",
+ "verdictDigest": "c5c635124d7a98be63a0625adf614210911746e2d9a29fb7a0cf8a0f05ef0beb",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -82,9 +82,9 @@
   "news": 29
  },
  "population": {
-  "judged": 6992,
-  "lit": 572,
-  "litName": 5100,
+  "judged": 6997,
+  "lit": 570,
+  "litName": 5107,
   "dark": 1320,
   "thinKeys": 9162,
   "thinShapes": 978,
@@ -92,14 +92,14 @@
  },
  "scanStats": {
   "files": 1671,
-  "sites": 39646,
-  "propRead": 37527,
+  "sites": 39632,
+  "propRead": 37513,
   "elemRead": 0,
   "destructure": 2104,
   "inOp": 15,
-  "rGrades": 6074,
-  "nGrades": 961738,
-  "resolvedReceivers": 6836
+  "rGrades": 6072,
+  "nGrades": 961621,
+  "resolvedReceivers": 6834
  },
  "registerDigest": "62483840445536e2f843f6ab9cce5d9d2dc7e0f794bc6f41d7ed323e7faa14ef",
  "pendingSurfaceCeiling": 3,
@@ -187,7 +187,7 @@
    "identity": "_timePressure on factions",
    "key": "_timePressure",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "accusedNid on osr007",
@@ -1879,79 +1879,79 @@
    "identity": "fac.arcane_orders on factions",
    "key": "fac.arcane_orders",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.craft_guilds on factions",
    "key": "fac.craft_guilds",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.guild_council on factions",
    "key": "fac.guild_council",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.landed_gentry on factions",
    "key": "fac.landed_gentry",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.manor_household on factions",
    "key": "fac.manor_household",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.merchant_guild_council on factions",
    "key": "fac.merchant_guild_council",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.merchant_guilds on factions",
    "key": "fac.merchant_guilds",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.merchant_oligarchy on factions",
    "key": "fac.merchant_oligarchy",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.military_guard on factions",
    "key": "fac.military_guard",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.noble_families on factions",
    "key": "fac.noble_families",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.religious_authorities on factions",
    "key": "fac.religious_authorities",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.thieves_guild on factions",
    "key": "fac.thieves_guild",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "fac.town_council on factions",
    "key": "fac.town_council",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "factionCaptureEvents on pulseHistory",
@@ -1963,7 +1963,7 @@
    "identity": "factionGoal on members",
    "key": "factionGoal",
    "shape": "members",
-   "rows": 3437
+   "rows": 3935
   },
   {
    "identity": "factionGoal on npcs",
@@ -2168,6 +2168,12 @@
    "key": "gemstones",
    "shape": "reasons",
    "rows": 4358
+  },
+  {
+   "identity": "generatedAs on members",
+   "key": "generatedAs",
+   "shape": "members",
+   "rows": 3935
   },
   {
    "identity": "generatedAs on npcs",
@@ -5614,18 +5620,6 @@
    "rows": 2700
   },
   {
-   "identity": "powerFactionFallback on factions",
-   "key": "powerFactionFallback",
-   "shape": "factions",
-   "rows": 7353
-  },
-  {
-   "identity": "powerFactionPower on factions",
-   "key": "powerFactionPower",
-   "shape": "factions",
-   "rows": 7353
-  },
-  {
    "identity": "powerProjectionVersion on powerStructure",
    "key": "powerProjectionVersion",
    "shape": "powerStructure",
@@ -5983,7 +5977,7 @@
    "identity": "publicTrust on factions",
    "key": "publicTrust",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "purposeKind on npcs",
@@ -6721,7 +6715,7 @@
    "identity": "settlementCondition on members",
    "key": "settlementCondition",
    "shape": "members",
-   "rows": 3437
+   "rows": 3935
   },
   {
    "identity": "settlementCondition on npcs",
@@ -7114,6 +7108,12 @@
    "rows": 60
   },
   {
+   "identity": "thievesGuild on members",
+   "key": "thievesGuild",
+   "shape": "members",
+   "rows": 3935
+  },
+  {
    "identity": "thievesGuild on npcs",
    "key": "thievesGuild",
    "shape": "npcs",
@@ -7411,7 +7411,7 @@
    "identity": "updatedByPulse on factions",
    "key": "updatedByPulse",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "upstreamWeak on activeChains",
@@ -7957,7 +7957,7 @@
    "identity": "wealth on factions",
    "key": "wealth",
    "shape": "factions",
-   "rows": 7353
+   "rows": 8952
   },
   {
    "identity": "wetland on byTerrain",
@@ -8812,10 +8812,6 @@
   "modifiers on factions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "name on factions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=R web-display=R web-transitive=R world-book=R",
   "power on factions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=R",
-  "powerFactionCat on factions": "web-display=R",
-  "powerFactionFallback on factions": "",
-  "powerFactionName on factions": "web-display=R",
-  "powerFactionPower on factions": "",
   "powerLabel on factions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
   "powerModifier on factions": "dossier-pdf=R foundry=R web-transitive=R",
   "publicTrust on factions": "",
@@ -9280,13 +9276,19 @@
   "corrupt on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "corruptTies on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "corruptionVector on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "criminalInstitution on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "factionAffiliation on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "factionGoal on members": "",
   "gender on members": "dossier-pdf=N foundry=N web-display=N",
+  "generatedAs on members": "",
   "goal on members": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
   "id on members": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
+  "importance on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "influence on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "institution on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "legitimacyContribution on members": "dossier-pdf=N foundry=N web-transitive=N",
+  "linkedFactionIds on members": "dossier-pdf=N foundry=N web-transitive=N",
+  "linkedInstitutionIds on members": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "name on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "personality on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "physical on members": "dossier-pdf=N foundry=N json-export=N web-display=N world-book=N",
@@ -9297,9 +9299,12 @@
   "secondaryAffiliation on members": "json-export=N web-display=N web-transitive=N world-book=N",
   "secret on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "settlementCondition on members": "",
+  "stabilityContribution on members": "dossier-pdf=N foundry=N web-transitive=N",
+  "status on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "stressNote on members": "dossier-pdf=N foundry=N web-display=N",
   "structuralPosition on members": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "structuralRank on members": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
+  "thievesGuild on members": "",
   "title on members": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "baseChance on mercenary": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "catalogId on mercenary": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -15143,6 +15148,16 @@
    "admitted": [],
    "previousCohort": 1311,
    "cohort": 1311
+  },
+  {
+   "charter": "§934.101",
+   "sha": "458495a16cfc7515bed99a06d05d1277b1d4f965",
+   "admitted": [
+    "generatedAs on members",
+    "thievesGuild on members"
+   ],
+   "previousCohort": 1310,
+   "cohort": 1310
   }
  ]
 }

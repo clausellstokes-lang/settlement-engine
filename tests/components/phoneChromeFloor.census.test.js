@@ -299,7 +299,11 @@ const ROUTE_BASELINE = Object.freeze({
   // and BUILD-W2-BLOCKLAW U2 (2026-10-31, X-18): the Overview's ONE routing sentence under the identity
   // strip is one floored site (`proseFontSize`): /create 605 -> 606, /settlements 852 -> 853, /gallery
   // 649 -> 650; `bare` holds. The block-law moves (X-16) add and remove no floored site.
-  '/create':                { roots: 1, files: 162, floored: 606, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // and LANE G2 (2026-10-31, GS-2 one faction set, ODQ §934.101): the Relationships "Factions" section is cut
+  // (its member chips were one floored site) and PowerStrata's FactionRow sub-row drops the minted group name
+  // (one floored site) for a member count on the line already there: /create 606 -> 604, /settlements
+  // 853 -> 851, /gallery 650 -> 648; `bare` holds. A surface only shrank.
+  '/create':                { roots: 1, files: 162, floored: 604, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -342,7 +346,7 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  '/settlements':           { roots: 1, files: 206, floored: 853, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 851, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -350,7 +354,7 @@ const ROUTE_BASELINE = Object.freeze({
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 151, floored: 650, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 648, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },

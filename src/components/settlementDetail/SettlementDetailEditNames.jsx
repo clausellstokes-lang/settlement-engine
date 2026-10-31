@@ -32,9 +32,11 @@ export default function SettlementDetailEditNames({
     : (settlement?.factions || []).map((fac, fi) => ({
         key: `group-${fi}`,
         name: fac?.name,
+        // GS-2 (ODQ §934.101): the grouping list is a projection of the power factions and carries no
+        // power-faction binding any more, so the label reads only the group's own category.
         label: fac?.dominantCategory && fac.dominantCategory !== 'other'
           ? fac.dominantCategory
-          : fac?.powerFactionName || fac?.powerFactionCat || 'mixed',
+          : 'mixed',
       }))
   ).filter(row => row.name);
   return (
