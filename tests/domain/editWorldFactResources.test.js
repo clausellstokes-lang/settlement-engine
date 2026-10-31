@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '98320fa5649edfe79bfdfeb129163c9f3021dac03d8a2a8557dd0768c79a41eb',
-    replay: 'e79004ad0585bb0c99e127e4019d107fbc4b1560d23f7fe28e71c9fab7b5a607',
+    derived: '9aefa92c16e0a54661630938b42f5f5710fb4ad59b5f2869f37333c6c28e3fe4',
+    replay: '9b4a580115eb0b131f897db38cc372e9a587fc55da67a27fd0a834f64ebc9f9a',
   }),
   21: Object.freeze({
-    derived: 'e49d32f7c6f3cdcfaed25b8440fdfe854e7c2e260d5fb311579648f39da92a8a',
-    replay: '08993542abcdd9992916c237e351f33d36aeb8fead733523f457d695519d76ce',
+    derived: '9f94ab2875a3785840e18ba58f520fe8256c6bd8df54bbfbd01eec64a447891a',
+    replay: '613a9bc9cb54812d80e88b3e7eb9500d8add4b81468784288ed1e359f325fe84',
   }),
   42: Object.freeze({
-    derived: '2366906e1b014ddaa2cc8e003c883fd64c7140340d60147c124207403044fe2b',
-    replay: 'a7975a20f239adcf3df32a8e93a218683c932f47418f2f5371e11691aed8c6da',
+    derived: 'af51092bf1d17607c06710fe8e3d5ef973e3f3a51ea587b834adc13a421b286a',
+    replay: '8d6e92d90b306a5eafb0dd732ce8e1ffcdf0655f60c8746c0fea32c37233422f',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -166,6 +166,13 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
     expect(census.length, 'the census corpus is live').toBe(63);
     expect(OPTION_SETS.resources.includes(DM_ROSTER[0]), 'the DM\'s word is a real member of the '
       + 'option set, or the re-derivation below would be refused rather than carried').toBe(true);
+// ── RE-CAPTURED 2026-10-31, one faction set (GS-2, ODQ §934.101), BY THE SAME PLANT (lane G2) ─────────────────────────
+// All three rows moved (six digests): every world's factions[] is now the power-faction projection and its conflicts the
+// crossing rivalries, derived at assembly (docs/shift-records/2026-10-31-one-faction-set.json). Re-captured as above: the
+// pre-EM-B2b2 step (sha256 62e16d59..., scratchpad probe-src) planted over a COPY of this tree at the lane's manifest re-record (the detached
+// proof worktree, never this checkout, restored afterwards), and the planted step and the live step produced the SAME
+// six digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control
+// row (the GS-2 golden re-record).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

@@ -59,6 +59,10 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // assembleInstitutions, the institution passes and the economy/population/corruption passes draw on the
 // 63-row corpus; no row was added or removed and no key set changed. RE-MEASURED AGAIN at the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): one row,
 // generatePopulation|conflicts keyMoves 60 -> 61, pasted from the arm's printed literal.
+// RE-MEASURED AT ONE FACTION SET (GS-2, 2026-10-31, ODQ §934.101; docs/shift-records/2026-10-31-one-faction-set.json):
+// three rows leave the register with the keys they declared. generatePopulation no longer provides `factions` or
+// `conflicts` (assembleSettlement derives both from the FINAL roster, inside its own `settlement` row), and
+// corruptionPass no longer mutates `factions` (the key is no longer in the context). 75 -> 72 pairs.
 /**
  * ⛔ TWO COMPARANDS, BECAUSE THEY ARE DIFFERENT CLAIMS (design §22; chair ruling Q-6).
  * `onRecord` answers whether the key's FINAL value lands on the record. `producedOnRecord`
@@ -139,9 +143,6 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'structuralValidationPass', key: 'structural', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'generatePopulation', key: 'npcs', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generatePopulation', key: 'relationships', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.relationships' },
-  { step: 'generatePopulation', key: 'factions', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.factions' },
-  { step: 'generatePopulation', key: 'conflicts', via: 'provides', stepDraws: 63, keyMoves: 61, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.conflicts' },
-  { step: 'corruptionPass', key: 'factions', via: 'mutates', stepDraws: 44, keyMoves: 39, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.factions' },
   { step: 'corruptionPass', key: 'npcs', via: 'mutates', stepDraws: 44, keyMoves: 39, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.npcs' },
   { step: 'generateNarratives', key: 'settlementReason', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.settlementReason' },
   { step: 'generateNarratives', key: 'resourceAnalysis', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.resourceAnalysis' },
