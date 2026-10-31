@@ -644,7 +644,7 @@ describe('PostGenCoach — the move and the memory live once (X-22 extraction)',
     expect(hook).toMatch(/export function useFloatingCard\(/);
     expect(hook).toMatch(/export function clampToViewport\(/);
     for (const card of [coach, chat]) expect(card).toMatch(/useFloatingCard\(\{/);
-    // the private copy is gone from the coach: no clamp, no storage read/write of its own
+    // anchored: the private copy is gone from the coach, and the positive useFloatingCard match two lines above proves this same source was read live
     expect(coach).not.toMatch(/function clampToViewport|localStorage\.(get|set)Item/);
     // and the coach still names its own key, beside the dismissal
     expect(coach).toMatch(/storageKey: POS_KEY/);

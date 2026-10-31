@@ -82,11 +82,14 @@ import { brokerageLegalityOf } from '../../data/informationBrokerageTuning.js';
 
 /** The reserved key inside gallery_member_overrides that carries the veil's deltas. */
 export const VEIL_OVERRIDE_KEY = '$veil';
-/** The stored shape's version. */
-export const VEIL_VERSION = 1;
-/** Write-path bounds (a hand-crafted payload cannot bloat the row). */
-export const VEIL_MAX_DELTAS = 2000;
-const ADDRESS_MAX = 300;
+/**
+ * The stored shape's version and the write-path bounds (a hand-crafted payload cannot
+ * bloat the row). One frozen record, not tuning: a schema version and two storage caps.
+ */
+export const VEIL_LIMITS = Object.freeze({ version: 1, maxDeltas: 2000, addressMax: 300 });
+export const VEIL_VERSION = VEIL_LIMITS.version;
+export const VEIL_MAX_DELTAS = VEIL_LIMITS.maxDeltas;
+const ADDRESS_MAX = VEIL_LIMITS.addressMax;
 
 /** @param {unknown} v @returns {v is Rec} */
 function isRec(v) {
@@ -244,8 +247,10 @@ function cardsOf(s, kind) {
 // Each registered tab/block names the data it removes. A grouping whose display is
 // DERIVED from identity facts (Defense's criminal-structure label reads institution
 // names; the first-survey label reads nothing) cannot be made absent by deletion
-// alone, so the projection also carries the effective grouping list (`galleryVeil`)
-// for the renderers. Grouping DEFAULTS are therefore emitted STATICALLY, never from the
+// alone, so the projection also records the effective grouping list for the renderers —
+// BESIDE the settlement (`VEILED_GROUPINGS`, read through `isVeiled` / `veilGroupingsOf`),
+// never as a key on it: the generator writes no such key, and the observed-shape register
+// refuses a reader of a key no producer writes. Grouping DEFAULTS are emitted STATICALLY, never from the
 // data: the list a visitor can read names only what every share hides, plus the DM's
 // own choices, and never betrays that a town had a thieves' guild.
 
@@ -728,8 +733,33 @@ export function applyVeil(publicSettlement, veil) {
   // Groupings last (a tab remover sees the cards already trimmed).
   for (const g of groupings) GROUPING_REMOVERS[g](s);
 
-  s.galleryVeil = { v: VEIL_VERSION, hidden: [...groupings].sort() };
+  markVeiled(s, [...groupings].sort());
   return s;
+}
+
+/**
+ * The effective grouping list of every projected settlement, held beside the object
+ * (a projection re-runs on every load, so the register lives exactly as long as the copy).
+ * @type {WeakMap<object, readonly string[]>}
+ */
+const VEILED_GROUPINGS = new WeakMap();
+
+/**
+ * Record the groupings a projection removed. Exported so a server-projected payload
+ * (the migration twin) can install its list on the client copy it arrives with.
+ * @param {unknown} settlement @param {readonly string[]} hidden
+ */
+export function markVeiled(settlement, hidden) {
+  if (!isRec(settlement) || !Array.isArray(hidden)) return;
+  VEILED_GROUPINGS.set(settlement, Object.freeze(hidden.filter(h => typeof h === 'string')));
+}
+
+/**
+ * The groupings veiled on this projected settlement (empty for an unveiled copy).
+ * @param {unknown} settlement @returns {readonly string[]}
+ */
+export function veilGroupingsOf(settlement) {
+  return (isRec(settlement) && VEILED_GROUPINGS.get(settlement)) || Object.freeze([]);
 }
 
 /**
@@ -737,9 +767,7 @@ export function applyVeil(publicSettlement, veil) {
  * @param {unknown} settlement @param {string} address @returns {boolean}
  */
 export function isVeiled(settlement, address) {
-  if (!isRec(settlement)) return false;
-  const gv = settlement.galleryVeil;
-  return isRec(gv) && Array.isArray(gv.hidden) && gv.hidden.includes(address);
+  return veilGroupingsOf(settlement).includes(address);
 }
 
 // ── STORAGE (inside gallery_member_overrides) ───────────────────────────────────────

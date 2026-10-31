@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "2c5b8a47bc8d6717b3296c0996b315a2b43bb4b7",
-  "measuredBy": "build lane W2-SEARCH",
+  "measuredAtSha": "f63b489da5ae04bdfea3fc2884dbded9e78a9fba",
+  "measuredBy": "chair (integration f63b489d, wave-2 merges)",
   "date": "2026-10-31",
-  "note": "build lane W2-SEARCH added eight search arms in existing test files (5 in tests/domain/dossier/entityIndex.test.js, 3 in tests/ui/dossier.smoke.test.jsx); re-measured once at its branch tip",
+  "note": "test-title census moved 26989→27047 at the search, veil-a and surveyor merges: new tests only, no lighting marker moved",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 26989,
-  "suiteTitles": 7125
+  "titles": 27047,
+  "suiteTitles": 7133
 }

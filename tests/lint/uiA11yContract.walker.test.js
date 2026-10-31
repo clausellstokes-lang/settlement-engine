@@ -182,8 +182,10 @@ describe('Z_LAYERS stacking manifest (M10 class)', () => {
     expect(new Set(zs)).toEqual(new Set([layers.floatingPanel]));
     expect(layers.floatingPanel).toBeLessThan(layers.coach);
     expect(shell).toMatch(/position:\s*'fixed'/);
+    // anchored: the positive position:'fixed' match on the line above proves the shell source is live
     expect(shell).not.toMatch(/aria-modal\s*=/);
     expect(door).toMatch(/useDialogDismiss\(/);
+    // anchored: the positive useDialogDismiss match on the line above proves the door source is live
     expect(door).not.toMatch(/useDialogFocusTrap\(/);
   });
 });

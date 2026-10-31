@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { toPublicSafe, PRIVATE_KEY_RE, galleryMemberKey } from '../../../src/domain/display/publicSafe.js';
 import {
-  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, readShareVeil, writeShareVeil, clampVeilDeltas, projectShareVeil,
+  parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, veilGroupingsOf, readShareVeil, writeShareVeil, clampVeilDeltas, projectShareVeil,
   defaultVeilFor, DEFAULT_VEIL_RULES,
   CARD_KINDS, SETTLEMENT_FLOOR, GROUPING_REMOVERS, VEIL_OVERRIDE_KEY, VEIL_VERSION, VEIL_MAX_DELTAS, VEIL_EXCEPTION_PREFIX,
 } from '../../../src/domain/display/galleryVeil.js';
@@ -545,7 +545,8 @@ describe('galleryVeil — the model (X-21 / X-21b, W2-VEIL-A U1)', () => {
     expect('criminal' in out.availableServices).toBe(false);
     expect('coherenceNotes' in out).toBe(false);
     expect(out.structuralViolations).toEqual([{ type: 'x', reason: 'r' }]);
-    expect(out.galleryVeil).toEqual({ v: VEIL_VERSION, hidden: ['block:housekeeping.coherenceNotes', 'block:services.criminal'] });
+    expect('galleryVeil' in out).toBe(false); // the list rides beside the copy, never as a key the generator does not write
+    expect(veilGroupingsOf(out)).toEqual(['block:housekeeping.coherenceNotes', 'block:services.criminal']);
     expect(isVeiled(out, 'block:services.criminal')).toBe(true);
     expect(isVeiled(out, 'class:npc:secret')).toBe(false);
   });
@@ -742,7 +743,7 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
   });
 
   it('the groupings are static: every share lists the same ones, so the list never betrays what a town had', () => {
-    const groupingsOf = (s) => project(s).galleryVeil.hidden;
+    const groupingsOf = (s) => veilGroupingsOf(project(s));
     expect(groupingsOf(temurpolis())).toEqual(groupingsOf(bailthwaite()));
     expect(groupingsOf({})).toEqual(groupingsOf(bailthwaite()));
   });
@@ -822,7 +823,6 @@ describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () =>
       const defaults = pool.filter(() => rand() < 0.5);
       const deltas = pool.filter(() => rand() < 0.3).map(address => ({ address, hidden: rand() < 0.5 }));
       const out = applyVeil(projected, resolveVeil(defaults, deltas));
-      delete out.galleryVeil;
       for (const [path, value] of leaves(out)) {
         // A container emptied by removal reads '[]' / '{}' where the projection had children.
         if (value === '[]' && [...before.keys()].some(k => k.startsWith(`${path}[`))) continue;

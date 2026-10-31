@@ -43,6 +43,7 @@ import {
   fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
 import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
+import { isVeiled, veilGroupingsOf } from '../../src/domain/display/galleryVeil.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -617,13 +618,13 @@ describe('gallery.js — the gallery veil (X-21, W2-VEIL-A U3)', () => {
     expect(dossier.settlement.institutions[0].desc).toBe('One for each neighbourhood.');
     // The DM's delta flipped one default eye back to shown.
     expect(dossier.settlement.availableServices.criminal).toHaveLength(1);
-    expect(dossier.settlement.galleryVeil.hidden.includes('tab:plot_hooks')).toBe(true);
+    expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
   });
 
   it('a share exported before the veil (no reserved key) projects exactly as before', async () => {
     const dossier = await fetchRow(dossierRow({ npc_1: { revealDm: false } }));
     expect(dossier.settlement.institutions[0].desc).toBe('A chapter of organised crime.');
-    expect(dossier.settlement.galleryVeil).toBe(undefined);
+    expect(veilGroupingsOf(dossier.settlement)).toEqual([]);
   });
 
   it('updateGalleryMetadata keeps the veil\'s deltas (clamped) beside the per-NPC overrides', async () => {
