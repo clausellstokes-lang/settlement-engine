@@ -211,7 +211,8 @@ export const GENERATION_BLIND_HALVES = Object.freeze([
  */
 export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 6 }),
+  // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 }),
 });
 
 /**

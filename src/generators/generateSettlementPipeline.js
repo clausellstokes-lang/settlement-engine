@@ -212,9 +212,12 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  * Repairing the four structured fields alone is actively worse than repairing
  * none: generationReceiptJudgments checks EXACTLY those four, so a half repair
  * turns the certifier green over prose the reader can see is wrong. The prose is
- * re-derived from the same archetype the generator used — `pairProse` picks its
- * variant with an FNV hash of the directed name pair, not an RNG draw, so this
- * consumes no randomness and cannot perturb a seeded run.
+ * re-derived from the same archetype the generator used, AT THE VARIANT THE
+ * GENERATOR DREW: the tie stores it as `proseVariant` (GS-1, ODQ §934.101), because
+ * the draw is without replacement across the whole town and re-hashing the new
+ * name pair would re-open the repeats it closed. A legacy edge with no stored
+ * variant falls back to `pairProse`'s FNV hash of the directed name pair. Neither
+ * path draws an RNG value, so this cannot perturb a seeded run.
  *
  * Ids are never touched, so every edge still resolves.
  *
@@ -241,8 +244,9 @@ function refreshRelationshipProjections(relationships, npcs) {
     // A legacy edge carrying no archetypeKey keeps the prose it shipped with.
     const archetype = STRESS_ECONOMIC_EFFECTS[/** @type {string} */ (rel?.archetypeKey)];
     if (archetype && first && second) {
-      next.description = archetype.desc(first, second);
-      next.tension = archetype.tension(first, second);
+      const variant = /** @type {number | undefined} */ (rel?.proseVariant);
+      next.description = archetype.desc(first, second, variant);
+      next.tension = archetype.tension(first, second, variant);
     }
     return next;
   });

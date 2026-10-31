@@ -18,6 +18,19 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-10-31 — TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1), THROUGH THE
+ *   SIGNED DOOR (ODQ §934.101; record docs/shift-records/2026-10-31-tension-variety.json; the cloud chair signs
+ *   under the owner's delegation "I also now defer and give all judgment to you that is required now or in the
+ *   future", vetoable). 525 OF 525 ROWS MOVED; the key set is identical (525 = 525). A PROSE SHIFT, ONE CAUSE: a
+ *   tie's description and tension are drawn without replacement per settlement (draw-free; the index stored on
+ *   the tie as `proseVariant`) from pools widened to eight per archetype (90 + 90 new lines). ZERO RNG DRAWS: no
+ *   stream forks. ATTRIBUTION, ZERO RESIDUE (every differing JSON path against the integration tip 458495a1):
+ *   relationships[].description/tension/proseVariant (525), prominentRelationship.tension/phrasing/full
+ *   (446/446/472), pressureSentence (3; it quotes the relationship phrasing), nothing else. Measured on gen1000v2:
+ *   same-page verbatim tension repeats 4,367 -> 0, template repeats per town 7.11 -> 0.46. Moved in the same
+ *   shift, one surface per commit: espionage-dormancy-fence's constant (360 of 360, the same paths), and the
+ *   unregistered generationForkCensus control hash and A6 counts with the fork registry's external fnv count.
+ *
  * 2026-10-31 — ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2), THROUGH THE SIGNED DOOR (ODQ
  *   §934.101; record docs/shift-records/2026-10-31-one-faction-set.json; the cloud chair signs under the owner's
  *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).

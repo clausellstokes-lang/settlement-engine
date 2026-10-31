@@ -294,7 +294,10 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // TEN BECAME ELEVEN (2026-10-30, the dossier consolidation, ODQ §934.101, ruling X-2): `archetypeKey on
     // relationships`, engine-internal. The Plot Hooks collector no longer turns a tie's tension into a card, so
     // the key's one surface read went with it; its consumer is the rename path in generateSettlementPipeline.js.
-    expect(WRITER_DARK_REGISTER.length).toBe(11);
+    // ELEVEN BECAME TWELVE (2026-10-31, GS-1 tension variety, ODQ §934.101): `proseVariant on relationships`,
+    // engine-internal. The tie's line is drawn without replacement across the town, so the generator stores the
+    // drawn index and the rename path in generateSettlementPipeline.js re-renders at it; no surface reads it.
+    expect(WRITER_DARK_REGISTER.length).toBe(12);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -477,7 +480,9 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // world and so all in the dark cohort: five became nine.
     // The dossier consolidation (2026-10-30, ODQ §934.101, ruling X-2) adds `archetypeKey on relationships`,
     // written on every world with a tie: nine became ten.
-    expect(registeredAndDark.length).toBe(10);
+    // GS-1 tension variety (2026-10-31, ODQ §934.101): `proseVariant on relationships` is registered engine-internal and
+    // written on every world with a tie: ten became eleven.
+    expect(registeredAndDark.length).toBe(11);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);

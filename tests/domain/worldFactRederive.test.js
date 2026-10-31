@@ -370,8 +370,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then GS-2, one faction set (ODQ §934.101; docs/shift-records/2026-10-31-one-faction-set.json), lane G2: the
     // generator master 3cc2b272.. -> 590cb9ab.. (the GS-2 golden re-record, 525 of 525 rows) and the prose manifest
     // 39f96324.. -> aafa41e4.. (the GS-2 manifest re-record, 784 rows, every moved cell DS-GEN-2).
+    // Then GS-1, tension variety (ODQ §934.101; docs/shift-records/2026-10-31-tension-variety.json), lane G3: the
+    // generator master 590cb9ab.. -> 8355c460.. (the GS-1 golden re-record, 525 of 525 rows); the prose manifest
+    // did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('590cb9ab3ad7621435fcc5102b375b92f2939639b2b6780a5c95148a17522e3b');
+      .toBe('8355c460c4bc822967b7fc96042dae2d09fdf01b3b634e1317eecc32af32945c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b');
 

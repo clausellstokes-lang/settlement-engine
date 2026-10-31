@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-31, TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1) ──────
+ * THE SEVENTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-tension-variety.json.
+ * THE MOVER: a tie's description and tension are drawn without replacement per settlement from
+ * pools widened to eight per archetype, the drawn index stored on the tie (`proseVariant`); zero
+ * rng draws. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE (every differing JSON path, measured at the integration tip 458495a1
+ * against the lane): relationships[].proseVariant (360), .tension (355), .description (351),
+ * prominentRelationship.tension/phrasing/full (192/192/187) and pressureSentence (134, which
+ * quotes the relationship phrasing); nothing else moves. `6f6dae34…` -> `8c4a42c5…`.
+ *
  * ── 2026-10-31, ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2) ───────────────────────
  * THE SIXTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
  * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-one-faction-set.json.
@@ -458,7 +469,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '6f6dae34e836fcb4f6dafaf6bc86aef30f9ac6f40ac7d0a1d6e3899c0ec41541';
+const PRE_COUPLING_CORPUS_SHA = '8c4a42c5ee4d01db9cdf355e52b2e37e1381d00a99fda6195e5158caca1d3194';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

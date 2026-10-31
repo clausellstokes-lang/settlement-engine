@@ -32,6 +32,7 @@ import {
   generateRelationships,
 } from '../../src/generators/npcGenerator.js';
 import { disambiguateNPCDisplayNames } from '../../src/generators/npcDisplayNames.js';
+import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import {
   genRelNarrative,
   genSuccessionNarr,
@@ -450,5 +451,157 @@ describe('NPC display identity is unique without perturbing RNG', () => {
         }
       }
     }
+  });
+});
+
+/**
+ * GS-1 (ODQ §934.101): a tie's description and tension are drawn WITHOUT REPLACEMENT per
+ * settlement. Before the cure each line was hashed per directed name pair WITH replacement,
+ * so two ties of one archetype in the same town shared a line one time in three (measured on
+ * gen1000v2: 24.2% verbatim tension repeats on one page). Now the Nth tie of an archetype in a
+ * town takes the next unused variant, the index is stored on the tie (`proseVariant`), and a
+ * town with more ties of one archetype than the pool holds spends the WHOLE pool before any
+ * line comes round again; past that it cycles through the lines that name both parties, so an
+ * overflow tie may share a template but never prints the same sentence twice.
+ */
+describe('relationship tie prose is drawn without replacement per settlement (GS-1)', () => {
+  const longestFirst = names => names.filter(Boolean).sort((a, b) => b.length - a.length);
+  /** The line with both names masked: two ties sharing it share a template. */
+  const templateOf = (text, nameA, nameB) =>
+    longestFirst([nameA, nameB]).reduce((out, name) => out.split(name).join('X'), String(text));
+  /** How many distinct templates a field's pool renders, read index by index (the pool's own `size`). */
+  const poolSize = (key, field) => {
+    const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+    const a = { name: 'Ravel Probe' };
+    const b = { name: 'Sorn Probe' };
+    return new Set(Array.from({ length: pool.size }, (_, index) => templateOf(pool(a, b, index), a.name, b.name))).size;
+  };
+  const institutions = [
+    { name: 'Town watch', category: 'Defense', tags: ['defense'] },
+    { name: 'Parish church', category: 'Religious', tags: ['religious', 'church'] },
+    { name: 'Merchant guilds (3-8)', category: 'Economy', tags: ['guild', 'trade'] },
+  ];
+  const corpus = [];
+  for (const tier of ['city', 'metropolis']) {
+    for (let index = 0; index < 12; index++) {
+      const seed = `tie-prose-draw-${tier}-${index}`;
+      corpus.push(withSeed(seed, () => {
+        const npcs = generateNPCs(
+          {
+            tier,
+            institutions,
+            powerStructure: { factions: [{ faction: 'the town council', category: 'government', isGoverning: true }] },
+            economicState: { primaryExports: ['Grain sales'], prosperity: 'Modest' },
+          },
+          'germanic',
+          { stressTypes: ['politically_fractured'], priorityMilitary: 60, priorityEconomy: 60 },
+        );
+        return { seed, npcs, relationships: generateRelationships(npcs, {}, institutions) };
+      }));
+    }
+  }
+
+  test('every tie stores the variant it drew, and that index renders its own lines', () => {
+    let checked = 0;
+    for (const { seed, npcs, relationships } of corpus) {
+      const byId = new Map(npcs.map(npc => [npc.id, npc]));
+      for (const rel of relationships) {
+        const archetype = STRESS_ECONOMIC_EFFECTS[rel.archetypeKey];
+        expect(archetype, `${seed}: ${rel.archetypeKey} is a real archetype`).toBeDefined();
+        expect(Number.isInteger(rel.proseVariant), `${seed}: tie carries an integer proseVariant`).toBe(true);
+        const first = byId.get(rel.npc1Id);
+        const second = byId.get(rel.npc2Id);
+        expect(rel.tension).toBe(archetype.tension(first, second, rel.proseVariant));
+        expect(rel.description).toBe(archetype.desc(first, second, rel.proseVariant));
+        checked++;
+      }
+    }
+    expect(checked, 'the corpus renders ties to check').toBeGreaterThan(200);
+  });
+
+  /** Does this archetype's tension pool hold a line that names both parties? */
+  const hasBothNamedTension = key => {
+    const pool = STRESS_ECONOMIC_EFFECTS[key].tension;
+    const a = { name: 'Ravel Probe' };
+    const b = { name: 'Sorn Probe' };
+    return Array.from({ length: pool.size }, (_, index) => pool(a, b, index))
+      .some(line => line.includes(a.name) && line.includes(b.name));
+  };
+
+  test('ties of one archetype never share a line until the pool is exhausted, then cycle', () => {
+    let overflowing = 0;
+    const offenders = [];
+    for (const { seed, relationships } of corpus) {
+      const byKey = new Map();
+      for (const rel of relationships) {
+        if (!byKey.has(rel.archetypeKey)) byKey.set(rel.archetypeKey, []);
+        byKey.get(rel.archetypeKey).push(rel);
+      }
+      for (const [key, ties] of byKey) {
+        for (const field of ['tension', 'description']) {
+          const size = poolSize(key, field === 'tension' ? 'tension' : 'desc');
+          const lines = ties.map(rel => templateOf(rel[field], rel.npc1Name, rel.npc2Name));
+          const head = lines.slice(0, size);
+          if (new Set(head).size !== head.length) offenders.push({ seed, key, field, size, head });
+        }
+        // THE CYCLE ARM: a tie past the pool's end reuses a template, never a sentence.
+        const size = poolSize(key, 'tension');
+        if (ties.length <= size || !hasBothNamedTension(key)) continue;
+        overflowing++;
+        ties.forEach((rel, index) => {
+          const earlier = ties.slice(0, index).map(prior => prior.tension);
+          if (earlier.includes(rel.tension)) offenders.push({ seed, key, size, verbatim: rel.tension });
+          if (index >= size && !(rel.tension.includes(rel.npc1Name) && rel.tension.includes(rel.npc2Name))) {
+            offenders.push({ seed, key, size, overflowNamesOne: rel.tension });
+          }
+        });
+      }
+    }
+    expect(offenders, `same-page repeats:\n${JSON.stringify(offenders.slice(0, 4), null, 2)}`).toEqual([]);
+    // LIVENESS: the cycle arm must actually fire, or "cycles rather than repeats" is untested.
+    expect(overflowing, 'the corpus holds a town with more ties of one archetype than variants').toBeGreaterThan(0);
+  });
+});
+
+/**
+ * GS-1 U2: THE POOLS. Every one of the 18 archetypes carries EIGHT description and EIGHT tension
+ * variants (index 0-2 are the pre-existing lines, verbatim; 3-7 are the GS-1 lines). Every new
+ * line names both parties, and no line on either pool shares a template with another.
+ */
+describe('relationship archetype pools hold eight variants each (GS-1)', () => {
+  const A = { name: 'Aldo Pyrewright' };
+  const B = { name: 'Bessa Morrow' };
+  const masked = line => line.split(A.name).join('X').split(B.name).join('Y');
+  const keys = Object.keys(STRESS_ECONOMIC_EFFECTS);
+
+  test('all 18 archetypes, both fields, eight distinct variants', () => {
+    expect(keys).toHaveLength(18);
+    for (const key of keys) {
+      for (const field of ['desc', 'tension']) {
+        const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+        expect(pool.size, `${key}.${field} pool size`).toBe(8);
+        const lines = Array.from({ length: 8 }, (_, index) => masked(pool(A, B, index)));
+        expect(new Set(lines).size, `${key}.${field} has a duplicated variant`).toBe(8);
+      }
+    }
+  });
+
+  test('every GS-1 line names both parties, and no line carries a dash where a sentence should break', () => {
+    let scanned = 0;
+    for (const key of keys) {
+      for (const field of ['desc', 'tension']) {
+        const pool = STRESS_ECONOMIC_EFFECTS[key][field];
+        for (let index = 0; index < 8; index++) {
+          const line = pool(A, B, index);
+          expect(line, `${key}.${field}[${index}] carries an em or en dash`).not.toMatch(/[–—]/);
+          if (index >= 3) {
+            expect(line, `${key}.${field}[${index}] names the first party`).toContain(A.name);
+            expect(line, `${key}.${field}[${index}] names the second party`).toContain(B.name);
+          }
+          scanned++;
+        }
+      }
+    }
+    expect(scanned).toBe(18 * 2 * 8);
   });
 });
