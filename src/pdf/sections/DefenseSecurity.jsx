@@ -42,7 +42,7 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="11"
+        eyebrow="10"
         title="Defense & Security"
         accent={narrativeMode ? palette.ai : palette.gold}
       />

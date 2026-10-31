@@ -387,31 +387,23 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         )}
       </div>
 
-      {/* ── THE CRIMINAL UNDERSIDE (DS-POW-6) ────────────────────────────────
-          The ladder cells the surfaces above do not reach: whether there is a
-          legitimacy reading at all, how far criminal capture has gone, and what
-          the operation actually does for a living. Three pools of ONE block at
-          ONE position, so the registry silences them together. */}
-      {undersideLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
-          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
-
-      {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
-          Whether the hall is organized into sides at all, what binds the first
-          bloc, and what it is for. Three pools of ONE block at ONE position. The
-          politics layer is written during play, so a world that has not been
-          played reads the DORMANT line — which is true, not a fallback. */}
-      {blocLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
-          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
+      {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
+          The flat "Power Distribution" list is replaced by three semantically
+          distinct strata: THE POWERS (the seat + its contenders, dominant),
+          THE FACTIONS (the full roster, lighter), THE WEB (the typed ties
+          between them). Derived read-only from the settlement's own data.
+          PowerTab keeps the roster expand/focus state so the NPC-faction-link
+          focus affordance keeps landing on the right row. The facts come before the prose that
+          couples them (the block law, X-16), so the strata precede the desk passages. */}
+      <PowerStrata
+        settlement={s}
+        powerStructure={r}
+        expandedFaction={expandedFaction}
+        setExpandedFaction={setExpandedFaction}
+        focusIndex={focusIndex}
+        focusedRowRef={focusedRowRef}
+        showCoupChip={!coupRiskSpoken}
+      />
 
       {/* ── RULING STRUCTURE (DS-POW-5) ──────────────────────────────────────
           What KIND of power governs, what the town lives on, and what the hall
@@ -436,22 +428,33 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         </div>
       )}
 
-      {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
-          The flat "Power Distribution" list is replaced by three semantically
-          distinct strata: THE POWERS (the seat + its contenders, dominant),
-          THE FACTIONS (the full roster, lighter), THE WEB (the typed ties
-          between them). Derived read-only from the settlement's own data.
-          PowerTab keeps the roster expand/focus state so the NPC-faction-link
-          focus affordance keeps landing on the right row. */}
-      <PowerStrata
-        settlement={s}
-        powerStructure={r}
-        expandedFaction={expandedFaction}
-        setExpandedFaction={setExpandedFaction}
-        focusIndex={focusIndex}
-        focusedRowRef={focusedRowRef}
-        showCoupChip={!coupRiskSpoken}
-      />
+      {/* ── THE CRIMINAL UNDERSIDE (DS-POW-6) ────────────────────────────────
+          The ladder cells the surfaces above do not reach: whether there is a
+          legitimacy reading at all, how far criminal capture has gone, and what
+          the operation actually does for a living. Three pools of ONE block at
+          ONE position, so the registry silences them together. Its capture pools are all
+          dm-only, so it follows the coupling prose (the block law, X-16 rung 4). */}
+      {undersideLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
+          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
+
+      {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
+          Whether the hall is organized into sides at all, what binds the first
+          bloc, and what it is for. Three pools of ONE block at ONE position. The
+          politics layer is written during play, so a world that has not been
+          played reads the DORMANT line — which is true, not a fallback. Off-campaign it is
+          silent (T2-18), so it sits with the campaign-only blocks at the foot (X-16 rung 6). */}
+      {blocLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
+          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
 
       {/* ── THE LADDER (intra-faction standings; hidden when the ladder is dark) ──
           Wires the secrets-safe DM read-model (ladderRead / mirrorOf) into its declared

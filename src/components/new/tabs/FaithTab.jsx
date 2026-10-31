@@ -150,19 +150,22 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
 
   return (
     <div data-testid="faith-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      {/* ── faith.patronSeat (DS-FTH-1) — the lenses the panel below does not state ── */}
-      <FaithSeatLines desk={panelDesk} settlement={settlement} />
+      {/* THE BLOCK LAW (X-16; BUILD-W2-BLOCKLAW U5): the panel's datum rows (the patron line
+          is the page's answer), the glance row and the field rows first; the desk passages
+          that couple them after. Every block moved verbatim. */}
+      {/* The gated faith surface — the constitutional seam, unchanged. */}
+      <FaithSection settlement={settlement} publicDossier={publicDossier} />
       {/* ── faith.nicheRow (DS-FTH-3, GLANCE) — the leaf's one glance position. The creed
           rows themselves are FaithSection's one ranked list now (F3 + F6). ── */}
       {active && model.ranks.length > 0 && <FaithNicheGlance desk={deskProse} />}
-      {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy and the niche contest;
-          the fall lens is cut where the panel prints the fall sentence (F4) ── */}
-      <FaithCreedLines desk={panelDesk} settlement={settlement} />
       {/* W-FAITH F7c — the cumulative field, band words only; absent when the
           projection is (dark world, nothing authored, or a dead-magic dial). */}
       {model.hasEmbed && deepening.fieldRows.length > 0 && <FieldBlock rows={deepening.fieldRows} />}
-      {/* The gated faith surface — the constitutional seam, unchanged. */}
-      <FaithSection settlement={settlement} publicDossier={publicDossier} />
+      {/* ── faith.patronSeat (DS-FTH-1) — the lenses the panel above does not state ── */}
+      <FaithSeatLines desk={panelDesk} settlement={settlement} />
+      {/* ── faith.creedStanding (DS-FTH-3) — standing, legitimacy and the niche contest;
+          the fall lens is cut where the panel prints the fall sentence (F4) ── */}
+      <FaithCreedLines desk={panelDesk} settlement={settlement} />
       {pantheonCampaign && (
         <div data-testid="faith-realm-pantheon" style={{ marginTop: 16 }}>
           {/* The wait is WITNESSED, not confessed (the witnessed-wait ratchet's

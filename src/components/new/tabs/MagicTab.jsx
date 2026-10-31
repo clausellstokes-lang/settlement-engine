@@ -123,7 +123,23 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
             </NameColumns>
           </div>
 
-          {/* The dependence block: the framing the role bands below are read FROM (T2-15). */}
+          {/* The 4 role lines. */}
+          <div style={{
+            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
+          }}>
+            <div style={{
+              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
+              background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
+            }}>Roles</div>
+            <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
+              {posture.roleLines.map((line, i) => (
+                <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* The dependence block (T2-15), UNDER the role bands it frames: the block law (X-16)
+              puts the facts first and the passage that couples them after. */}
           {(magicFrozen || magicLine) && (
             <div data-testid="magic-dependence" style={{
               background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
@@ -147,21 +163,6 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               ))}
             </div>
           )}
-
-          {/* The 4 role lines. */}
-          <div style={{
-            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
-          }}>
-            <div style={{
-              fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
-              background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
-            }}>Roles</div>
-            <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
-              {posture.roleLines.map((line, i) => (
-                <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
-              ))}
-            </div>
-          </div>
 
           {/* Deity ⇄ magic-legality coupling (self-gates to nothing without a major deity). */}
           {magicCoupling.length > 0 && (

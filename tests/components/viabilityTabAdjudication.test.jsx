@@ -92,10 +92,15 @@ describe('the generation receipt lives on the Versions tab (UX consolidation, T2
       ],
     };
 
-    render(<VersionsTab save={{ id: 'save-1', settlement }} />);
+    const versions = render(<VersionsTab save={{ id: 'save-1', settlement }} />);
     expect(screen.getByText(
       'Formal judgments: 1/2 supported · 1 needs review',
     )).toBeTruthy();
+    // THE BLOCK LAW (X-16 rung 5, BUILD-W2-BLOCKLAW U6): the receipt is reference, so it
+    // follows the page's own body (the timeline, or its gate) and is never its first block.
+    const receipt = screen.getByTestId('generation-receipt');
+    expect(versions.container.firstElementChild).not.toBe(receipt);
+    expect(versions.container.lastElementChild).toBe(receipt);
     expect(screen.getByText(
       /Cross-system semantic agreement: Faction power is not conserved/,
     )).toBeTruthy();
@@ -160,6 +165,9 @@ describe('UX consolidation — the Outlook page says each fact once (RULINGS-T2 
     const text = container.textContent;
     expect(text).toContain('A library above its tier.');
     expect(text).toContain('Carts no longer arrive.');
+    // THE BLOCK LAW (X-16 rung 5, BUILD-W2-BLOCKLAW U4): the collapsed By-Design reference
+    // follows the open Active Stress facts.
+    expect(text.indexOf('By-Design Contradictions')).toBeGreaterThan(text.indexOf('Active Stress Effects'));
     expect(text).toContain('No moneylender.');
     expect(text).not.toContain('plot seeds, not problems to fix'); // anchored: the by-design reason is on this render
     expect(text).not.toContain('working as intended'); // anchored: the stress description is on this render

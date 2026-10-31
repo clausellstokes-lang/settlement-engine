@@ -628,7 +628,7 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     const priv = renderHistory(false);
     cleanup();
     const pub = renderHistory(true);
-    // DS-GEN-14 opens the Founding block (chair ruling H3, 2026-10-30). DS-GEN-9
+    // DS-GEN-14 closes the Founding block (chair ruling H3; under its facts, X-16). DS-GEN-9
     // (history.identity) and DS-GEN-16 (history.record) are GLANCE rows by the same ruling (H3,
     // H4), so the reader hands back no sentence for them and the page prints none.
     const hist = generalDeskLines(CHRONICLED, { publicDossier: false }).history;
@@ -640,6 +640,11 @@ describe('THE HISTORY CHAPTER DRAWS ON THE HISTORY TAB — and is silent for a f
     for (const [sentence, label] of [[IDENTITY, 'DS-GEN-9 founding lens'], [MARKER, 'DS-GEN-9 marker lens'], [RECORD, 'DS-GEN-16 record line']]) {
       expectAbsentWithAnchor(priv, sentence, anchor, `${label} (glance)`);
     }
+    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U5): the sentence of texture sits UNDER the
+    // founding facts it explains, never above them.
+    const facts = priv.indexOf('a miller who built a mill');
+    expect(facts).toBeGreaterThanOrEqual(0);
+    expect(priv.indexOf(anchor)).toBeGreaterThan(facts);
   });
 
   test('the gate takes the corpus sentences ONLY — the record itself survives it', () => {

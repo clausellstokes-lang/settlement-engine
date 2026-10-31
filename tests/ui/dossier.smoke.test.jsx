@@ -123,6 +123,31 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     expect(Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs)).not.toContain('war_faith'); // anchored: the arrayContaining assertions above pin both groups' live populations, so this absence cannot pass vacuously.
   });
 
+  // X-17 (wave 2, BUILD-W2-BLOCKLAW U1): within a group the tabs run from the broadest reading to
+  // the narrowest. The ids are unchanged; only the declared order moves, and it is pinned whole.
+  test('each group runs general to specific, the epistemic run kept at the World tail', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'substrate', 'plot_hooks', 'dm_compass']);
+    expect(mod.TAB_GROUPS.systems.tabs).toEqual(
+      ['services', 'institutions', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'],
+    );
+    expect(mod.TAB_GROUPS.world.tabs).toEqual(
+      ['npcs', 'relationships', 'daily_life', 'traditions', 'history', 'rumors', 'war', 'faith'],
+    );
+    expect(mod.TAB_GROUPS.notes.tabs).toEqual(['dm_notes', 'ai_notes', 'chronicle', 'versions']);
+  });
+
+  // X-25c: the dossier search breaks its group ties in the strip's own order; one order, not two.
+  test('the search tie order is the strip order (SEARCH_TAB_ORDER is a subsequence of TAB_GROUPS)', async () => {
+    const mod = await import('../../src/components/OutputContainer.jsx');
+    const { SEARCH_TAB_ORDER } = await import('../../src/domain/dossier/dossierSearch.js');
+    const strip = Object.values(mod.TAB_GROUPS).flatMap((g) => g.tabs);
+    const at = SEARCH_TAB_ORDER.map((tab) => strip.indexOf(tab));
+    expect(SEARCH_TAB_ORDER.length).toBeGreaterThan(0);
+    expect(at.every((i) => i >= 0)).toBe(true);
+    expect(at).toEqual([...at].sort((a, b) => a - b));
+  });
+
   test('the mounted Versions tab (F26) stays registered under Notes', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(mod.TAB_GROUPS.notes.tabs).toContain('versions');
@@ -190,7 +215,8 @@ describe('the dossier search bar: mount, results in the body, keyboard path, aud
     fireEvent.change(field, { target: { value: 'Mara Voss' } });
     const results = await findByRole('region', { name: 'Search results for Mara Voss' }, { timeout: 15000 });
     const groups = [...results.querySelectorAll('[data-testid^="search-group-"]')].map((g) => g.dataset.testid);
-    expect(groups).toEqual(['search-group-npcs', 'search-group-relationships', 'search-group-plot_hooks']);
+    // The three groups tie (each names her exactly) and run in the strip's own order (X-25c).
+    expect(groups).toEqual(['search-group-plot_hooks', 'search-group-npcs', 'search-group-relationships']);
     // Each group is headed by its tab's name, and each object is its tab's own component: the
     // person's card, the tie card, the hook card.
     const people = within(results.querySelector('[data-testid="search-group-npcs"]'));

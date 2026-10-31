@@ -459,13 +459,6 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             No organized criminal infrastructure detected. Crime exists at a petty, individual level.
           </div>}
 
-          {/* DS-DEF-4: the shape of the crime and how far it has reached, in the town's own
-              voice. Two lenses of one block at one position. */}
-          {criminalLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px'}}>
-            <ProseBlock lines={criminalLines} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
-          </div>}
-
           {/* Criminal institutions as power structures */}
           {crimInsts.length>0&&<div>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
@@ -501,6 +494,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             </div>
           </div>}
 
+          {/* DS-DEF-4: the shape of the crime and how far it has reached, in the town's own
+              voice. Two lenses of one block at one position, UNDER the operations, faction and
+              patterns they read (the block law, X-16). */}
+          {criminalLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'9px 13px'}}>
+            <ProseBlock lines={criminalLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
+          </div>}
+
           {/* VERIFIER F11 (X-2): the order & crime plot hooks print on the Plot Hooks tab only. */}
 
         </div>
@@ -526,12 +527,6 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         </Button>
 
         {showForces&&<div>
-          {/* DS-DEF-5: what the town can actually field, in its own voice. Five lenses of
-              one block at one position; the force cards below are untouched. */}
-          {forceLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a3a1a',padding:'9px 13px',marginBottom:10}}>
-            <ProseBlock lines={forceLines} settlementName={r.name} tier={r.tier}
-              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
-          </div>}
           {walls.length>0&&<div style={{marginBottom:10}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch['#4A3A1A'],marginBottom:6}}>Fortifications</div>
             {walls.map((w,i)=><ForceCard key={i} inst={w} accent="#4a3a1a"/>)}
@@ -560,26 +555,30 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {!hasAnyForce&&<div style={{background:swatch['#FDF8F0'],border:'1px solid #e8d0b0',borderLeft:'3px solid #8a5010',padding:'10px 13px',fontSize:proseFontSize(FS.md, isMobile),color:swatch.inkMag3}}>
             <strong style={{color:swatch['#8A5010']}}>No organized force.</strong> Defense relies on individual armed citizens. No command structure, no training, no coordinated response.
           </div>}
+          {/* DS-DEF-5: what the town can actually field, in its own voice. Five lenses of
+              one block at one position, UNDER the force cards they read (the block law, X-16). */}
+          {forceLines.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a3a1a',padding:'9px 13px',marginTop:10}}>
+            <ProseBlock lines={forceLines} settlementName={r.name} tier={r.tier}
+              style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
+          </div>}
         </div>}
       </div>
 
-      {/* ── SUPPORTING CAPABILITIES ──────────────────────────────────────── */}
-      {/* DS-DEF-6 at defense.supportingCapabilities: how supply reaches this town and who
-          holds its water, in its own voice. Two lenses of one block at one position; the
-          capability rows below are untouched.
-          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section beneath is
-          `collapsible defaultOpen={false}` and `Primitives.jsx:120` renders `{open &&
-          children}`, so a child of it produces NO BYTES for a reader until the header is
-          clicked. Drawn inside, this position was a sentence the registry called lit and no
-          reader ever saw — the walker's reachability arm, the public-dossier guard and the
-          registry law were all green over it, and only a render told the truth. The line is
-          now the FRAMING of the fold rather than a thing inside it (the DS-HK-1
-          arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
-          keeps it there. */}
-      {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
-        <ProseBlock lines={supportingLines} settlementName={r.name} tier={r.tier}
-          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
-      </div>}
+      {/* ── VULNERABILITIES ───────────────────────────────────────────────── */}
+      {/* T2-22/T2-23: no "First Survey" suffix (the Threat caption covers the page) and no
+          empty-state line announcing an absence (R6). */}
+      {defViolations.length>0
+        &&<Section title={`Vulnerabilities (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
+          {defViolations.map((v,i)=>{
+            const crit=v.severity==='error'||v.severity==='critical';
+            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',...edged(`1px solid ${crit?'#e8c0c0':'#e0c860'}`,`3px solid ${crit?'#8b1a1a':'#b8860b'}`),padding:'9px 13px',marginBottom:6}}>
+              <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
+              <div style={{fontSize:proseFontSize(FS.md, isMobile),color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
+            </div>;
+          })}
+        </Section>}
+
+      {/* ── SUPPORTING CAPABILITIES (collapsed reference, after the open facts: X-16 rung 5) ── */}
       <Section title="Supporting Capabilities" collapsible defaultOpen={false}>
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
           {caps.map((cap,i)=>{
@@ -637,19 +636,23 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         </div>
       </Section>
 
-      {/* ── VULNERABILITIES ───────────────────────────────────────────────── */}
-      {/* T2-22/T2-23: no "First Survey" suffix (the Threat caption covers the page) and no
-          empty-state line announcing an absence (R6). */}
-      {defViolations.length>0
-        &&<Section title={`Vulnerabilities (${defViolations.length})`} collapsible defaultOpen accent="#8b1a1a">
-          {defViolations.map((v,i)=>{
-            const crit=v.severity==='error'||v.severity==='critical';
-            return <div key={i} style={{background:crit?'#fdf4f4':'#faf6ec',...edged(`1px solid ${crit?'#e8c0c0':'#e0c860'}`,`3px solid ${crit?'#8b1a1a':'#b8860b'}`),padding:'9px 13px',marginBottom:6}}>
-              <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:crit?'#8b1a1a':'#7a5010',marginBottom:3}}>{crit?'Structural':'Warning'}</div>
-              <div style={{fontSize:proseFontSize(FS.md, isMobile),color:crit?'#5a1a1a':'#4a3010',lineHeight:1.45}}>{v.reason}</div>
-            </div>;
-          })}
-        </Section>}
+      {/* DS-DEF-6 at defense.supportingCapabilities: how supply reaches this town and who
+          holds its water, in its own voice. Two lenses of one block at one position; the
+          capability rows above are untouched.
+          ⛔ IT SITS OUTSIDE THE FOLD, AND THAT PLACEMENT IS THE POINT; since the block law
+          (X-16) it sits UNDER the section rather than above it, still outside. The section is
+          `collapsible defaultOpen={false}` and `Primitives.jsx:120` renders `{open &&
+          children}`, so a child of it produces NO BYTES for a reader until the header is
+          clicked. Drawn inside, this position was a sentence the registry called lit and no
+          reader ever saw — the walker's reachability arm, the public-dossier guard and the
+          registry law were all green over it, and only a render told the truth. The line is
+          now the FRAMING of the fold rather than a thing inside it (the DS-HK-1
+          arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
+          keeps it there. */}
+      {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
+        <ProseBlock lines={supportingLines} settlementName={r.name} tier={r.tier}
+          style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
+      </div>}
 
     </div>
   );

@@ -84,35 +84,29 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 /**
- * The prosperity header and the at-a-glance tile row.
+ * The prosperity header: the page's one-line answer (the prosperity word) and its chips.
+ *
+ * ⭐ THE BLOCK LAW SPLIT THE TILE ROW OFF (X-16 rung 6; BUILD-W2-BLOCKLAW U4). The Season and
+ * Treasury tiles are campaign-only facts, so they no longer ride under the header: they are
+ * `EconomicsCampaignTiles` below, which EconomicsTab mounts last. Both bodies moved verbatim.
  *
  * @param {object} props
  * @param {object} props.eco the economic state (prosperity, economicComplexity, situationDesc)
  * @param {string} props.prosColor
  * @param {string} props.tradeLabel
  * @param {number} props.ecoScore
- * @param {object} props.granary the seasonal granary outlook (`seasonTitle` + `detail` are the tile's two parts)
- * @param {string} props.granaryColor
- * @param {object} props.treasury the coin-band glance
  * @param {object|null} [props.headerRung] the DS-ECO-1 rung the desk built
  * @param {object|null} [props.economyRung] the DS-ECO-8 rung the desk built
- * @param {object|null} [props.seasonRung] the DS-ECO-2 granary rung
  */
 export default function EconomicsGlance({
   eco, prosColor, tradeLabel, ecoScore,
-  granary, granaryColor, treasury,
-  headerRung = null, economyRung = null, seasonRung = null,
+  headerRung = null, economyRung = null,
 }) {
   const mobile = useIsMobile();
   const header = drawnAtMount('economics.prosperityHeader', headerRung);
   const economyGlance = drawnAtMount('economics.economyTile', economyRung);
-  const season = drawnAtMount('economics.seasonTile', seasonRung);
   // ONE paragraph: the desk's sentence where it speaks, the generator's datum where it does not.
   const headerProse = header?.sentence || eco.situationDesc || null;
-  const tiles = [
-    ...(granary.available ? [{ label: 'Season', value: granary.seasonTitle, sub: granary.detail, color: granaryColor, line: season?.sentence }] : []),
-    ...(treasury.available ? [{ label: 'Treasury', value: treasury.band, color: treasury.color }] : []),
-  ];
 
   return (
     <>
@@ -137,7 +131,30 @@ export default function EconomicsGlance({
         {economyGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'6px 0 0',fontStyle:'italic'}}>{economyGlance.sentence}</p>}
         {headerProse&&<p data-testid="economics-header-prose" style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.65,margin:'10px 0 0',borderTop:'1px solid #e0c890',paddingTop:8,fontStyle:header?.sentence?'italic':'normal'}}>{headerProse}</p>}
       </div>
+    </>
+  );
+}
 
+/**
+ * The at-a-glance tile row: campaign-only facts (Season, Treasury), mounted LAST on the
+ * Economics page by the block law (X-16 rung 6). Renders nothing off-campaign.
+ *
+ * @param {object} props
+ * @param {object} props.granary the seasonal granary outlook (`seasonTitle` + `detail` are the tile's two parts)
+ * @param {string} props.granaryColor
+ * @param {object} props.treasury the coin-band glance
+ * @param {object|null} [props.seasonRung] the DS-ECO-2 granary rung
+ */
+export function EconomicsCampaignTiles({ granary, granaryColor, treasury, seasonRung = null }) {
+  const mobile = useIsMobile();
+  const season = drawnAtMount('economics.seasonTile', seasonRung);
+  const tiles = [
+    ...(granary.available ? [{ label: 'Season', value: granary.seasonTitle, sub: granary.detail, color: granaryColor, line: season?.sentence }] : []),
+    ...(treasury.available ? [{ label: 'Treasury', value: treasury.band, color: treasury.color }] : []),
+  ];
+
+  return (
+    <>
       {/* ── AT-A-GLANCE TILES (campaign-only: Season, Treasury) ────────── */}
       {tiles.length>0&&<div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
         {tiles.map(({label,value,sub,color,line})=>(

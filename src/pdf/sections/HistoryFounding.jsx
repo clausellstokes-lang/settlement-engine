@@ -54,7 +54,7 @@ export function HistoryFounding({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="12"
+        eyebrow="17"
         title="History & Founding"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={h.age != null ? `${h.age}y old` : null}

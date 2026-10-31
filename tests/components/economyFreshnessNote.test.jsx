@@ -97,6 +97,14 @@ describe('EconomicsTab freshness note', () => {
     expect(screen.getByText(ECON_NOTE)).toBeTruthy();
   });
 
+  it('closes the page, below the prosperity header (the block law, X-16: campaign-only last)', () => {
+    const { container } = render(<EconomicsTab settlement={makeSettlement(STALE_TRAIL)} narrativeNote={null} />);
+    const note = screen.getByText(ECON_NOTE);
+    const header = screen.getByText('Simple market town');
+    expect(header.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(container.textContent.trim().endsWith(note.textContent.trim())).toBe(true);
+  });
+
   it('hides the note on a fresh settlement and after a rebuild boundary', () => {
     const { unmount } = render(<EconomicsTab settlement={makeSettlement(null)} narrativeNote={null} />);
     expect(screen.queryByText(ECON_NOTE)).toBeNull();
@@ -110,6 +118,13 @@ describe('ServicesTab freshness note', () => {
   it('shows the note when an economy event postdates the last survey', () => {
     render(<ServicesTab services={SERVICES} settlement={makeSettlement(STALE_TRAIL)} narrativeNote={null} />);
     expect(screen.getByText(SVC_NOTE)).toBeTruthy();
+  });
+
+  it('closes the page, below the catalog it qualifies (the block law, X-16: campaign-only last)', () => {
+    render(<ServicesTab services={SERVICES} settlement={makeSettlement(STALE_TRAIL)} narrativeNote={null} />);
+    const note = screen.getByText(SVC_NOTE);
+    const row = screen.getByText('Blacksmithing');
+    expect(row.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('hides the note on a fresh settlement and after a rebuild boundary', () => {
