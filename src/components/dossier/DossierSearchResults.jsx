@@ -22,7 +22,8 @@ import Button from '../primitives/Button.jsx';
 import { literaryTitle } from '../new/labelLadder.js';
 import { useStore } from '../../store/index.js';
 import { useDossierEntities } from './DossierEntityContext.jsx';
-import { enumerateDossierObjects, rankDossierObjects, isSearchActive, SEARCH_RESULTS_ID } from '../../domain/dossier/dossierSearch.js';
+import { enumerateDossierObjects, rankDossierObjects, isSearchActive, SEARCH_RESULTS_ID, MATCH } from '../../domain/dossier/dossierSearch.js';
+import { EntityFocusOverride } from './useEntityFocus.js';
 import { derivePowerStrata } from '../../domain/dossier/powerStrata.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { computeChainSets } from '../new/tabHelpers.js';
@@ -125,14 +126,25 @@ const RENDERERS = Object.freeze({
   resource: { Component: ResourceChainCard, props: (o) => ({ chain: o.raw, stage: o.meta.stage }) },
 });
 
-/** One found object, mounted through its tab's component. */
+/**
+ * One found object, mounted through its tab's component. X-20 (c): the object whose NAME the
+ * reader typed (an exact match) lands the way a link lands, fully expanded: an indexed card
+ * opens through the one focus convention (useEntityFocus, forced by EntityFocusOverride, no
+ * scroll), and a card whose open state the result holds starts open. Every other result keeps
+ * its tab's collapsed shape (X-19b "same collapsibles").
+ */
 function FoundObject({ object, ctx }) {
-  const [open, setOpen] = useState(false);
+  const exact = object.score === MATCH.EXACT;
+  const [open, setOpen] = useState(exact);
   const entry = RENDERERS[object.type];
   const props = entry ? entry.props(object, ctx, { open, toggle: () => setOpen((v) => !v) }) : null;
   if (!entry || !props) return null;
   const { Component } = entry;
-  return <div data-search-object={object.type}><Component {...props} /></div>;
+  return (
+    <EntityFocusOverride.Provider value={exact && object.id ? String(object.id) : null}>
+      <div data-search-object={object.type}><Component {...props} /></div>
+    </EntityFocusOverride.Provider>
+  );
 }
 
 /**
