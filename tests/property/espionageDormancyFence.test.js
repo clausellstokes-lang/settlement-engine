@@ -189,6 +189,18 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-31, ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2) ───────────────────────
+ * THE SIXTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-one-faction-set.json.
+ * THE MOVER: `factions[]` is a projection of the power factions derived at assembly from the final
+ * roster, and `conflicts[]` (with its `powerStructure.conflicts` mirror) the power-faction pairs a
+ * rivalry crosses, drawn on a new named assembly child stream; the faction-linkage trace is retired
+ * and the receipt explains each conflict. On THIS corpus 360 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE (measured at the integration tip b3d457b0 against the lane):
+ * with `factions`, `conflicts`, `powerStructure.conflicts`, the linkage trace (and its clock) and the
+ * receipt's conflict/faction evidence entries removed, all 360 rows hash identically before and
+ * after. `607ea755…` -> `6f6dae34…`.
+ *
  * ── 2026-10-30, THE MIGRATION CRISIS NAMES ONE DIRECTION (ruling 2) ─────────────────────────────
  * THE FIFTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
  * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-30-migration-one-direction.json.
@@ -446,7 +458,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '607ea7556e41895c4e69a2906478eb0e364bb012d49671d67fb69a8a71c3e82f';
+const PRE_COUPLING_CORPUS_SHA = '6f6dae34e836fcb4f6dafaf6bc86aef30f9ac6f40ac7d0a1d6e3899c0ec41541';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
