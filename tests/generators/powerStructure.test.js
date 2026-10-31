@@ -37,6 +37,9 @@ const MODULE_LINE_CEILING = 800;
 // deliberate API change: update this list in the same commit.
 const PUBLIC_EXPORTS = [
   'computeRelTension',
+  // GS-1 (2026-10-31, lane G3): the per-settlement tie prose draw, re-exported beside computeRelTension so
+  // npcGenerator keeps one import path; the deliberate API change this list exists to record.
+  'createTieProseDraw',
   'genRelNarrative',
   'genSuccessionNarr',
   'generateConflicts',

@@ -580,7 +580,9 @@ const DESKTOP_BASELINE = Object.freeze({
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
   "World/NPCs":          { measured: 30, sub14: 30 },
-  "World/Relationships": { measured: 60, sub14: 58 },
+  // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
+  // line longer in the fixture; no token moved.
+  "World/Relationships": { measured: 61, sub14: 59 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
   "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
@@ -652,7 +654,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
   "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 58, chrome: 2, sub14: 2, sub12: 0 },
+  "World/Relationships": { prose: 59, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
