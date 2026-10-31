@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "f9cb960c8768f0aa4894955bf0481443b6110685",
-  "measuredBy": "fp-batch-7-assembly-93391427",
-  "date": "2026-10-02",
-  "note": "FP batch 7 composed tip, nothing signed (FP-47, FP-53): STATECRAFT-BAND U1 SIGHT_TUNING.EXPOSE_BASE 0.06 to 0.01 (table stays draft); PACT-COMPLIANCE U1 FP-44 PEACE_TERMS_TUNING keys 24 to 26, PACT_HONORED_FLOOR and PACT_DEFAULT_FLOOR (table stays draft); IN-6 U5 INFO_CONVERGENCE_TUNING new table (draft); IN-6 U3 beliefTruthBands a new dependent of BELIEF_TUNING and ALLY_INTEL_TUNING",
+  "measuredAtSha": "9e41644ab79de96d935ebe6cc449b58b5b919d03",
+  "measuredBy": "chair (integration, W2-VEIL-A landing)",
+  "date": "2026-10-31",
+  "note": "dependents moved: galleryVeil.js now imports brokerageLegalityOf (INFORMATION_BROKERAGE_TUNING) and facetOf (QUADRANT_TUNING) to select the hideable houses and the quadrant facet; no value moved, no ceiling rose",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -64,6 +64,7 @@
         "MASTERED_CHANNELS.illegal.1": "persons"
       },
       "dependents": [
+        "src/domain/display/galleryVeil.js",
         "src/domain/worldPulse/brokerageFidelity.js",
         "src/domain/worldPulse/brokerageServices.js",
         "src/domain/worldPulse/brokerageServicesFeed.js",
@@ -1371,6 +1372,7 @@
       },
       "dependents": [
         "src/components/new/tabs/PowerTab.jsx",
+        "src/domain/display/galleryVeil.js",
         "src/domain/display/stateProse/printProse.js",
         "src/domain/interior/interiorTemplates.js",
         "src/domain/npc/npcBank.js",
