@@ -270,11 +270,11 @@
       "suite": "tests/property/dispositionChannelsDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "cf3c11924d7827e868ea7edabbe55feb00bf347d323d27d879c5747e6cdd30d1",
+      "sha256": "77edb60358d45785100604d1045ecf24279b779cc3412618d2032622648fb2df",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.101",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -355,11 +355,11 @@
       "suite": "tests/property/generosityDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "9b57f25d3d6015d76dcc2ec9e46e70643c4f115b0d3f0b0daed32d8fc4e0321d",
+      "sha256": "89c1817e2a4442ef7a2c3ff0746b606e6d79f48e7227a88a31178bf7175f908f",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.101",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -381,11 +381,11 @@
       "suite": "tests/property/intelTradeDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "978c88f8726b67fe448cb6b7bedae58f6325d40ed86ba9ef5343d32dad94a693",
+      "sha256": "c1419cafb27ad79bc11a20f90c885edfb658e96a2a19ccdb9b875d48ad817c29",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.101",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -433,11 +433,11 @@
       "suite": "tests/property/momentumDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "277b599a588a3e1587e9f04c77124c55dc58c81aae9e970e90a6a9971be4322e",
+      "sha256": "71d7ebbe1e41035d0a706c4e67cdbeb91067e51894ad6ff4edaa244ed7de7e66",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.101",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -798,11 +798,11 @@
       "suite": "tests/property/worldpulseSeasonsGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "26eed82fd6c9f3e7432271c4398491d120eddd3efdbec0a406ca0a3e1cd5245a",
+      "sha256": "258ed0cc2c43fdbe8f0b141cc6a6847be05f27c11dcf9f2f2e286d02121609a8",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.101",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
@@ -850,11 +850,11 @@
       "suite": "tests/property/heraldKnowledgeDeskGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "a4a845af2f5879e215d6f7c5344860945d81a9108f9aef3aef067c609f6b8598",
-      "rows": 387,
+      "sha256": "37ae833712c06bfba63567e1552dfaf5ec7ed48ac28a2292562852dfd8231d8d",
+      "rows": 475,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.89 (FP-46: the chair signs the chain's golden re-records by delegation)",
+      "ownerRow": "§934.101",
       "note": "ENROLLED 2026-09-24 by lane FP-I5 (IN-5) under the FP chair's dispatch, record docs/shift-records/2026-09-24-in5-herald-knowledge-desk.json (action enroll, chair-signed). THE NON-OMNISCIENT HERALD GOLDEN of the belief_misjudgment refile (J-INF-6), captured FIRST at the clean base 57b52b510 before the routing table moved: the reader corpus full_simulation row rr-fresh-full after one year, read through buildHeraldFeed campaign lens. Keys: <row>|contentSha256 (every item's content except its desk, sorted by id), <row>|itemCount, and <row>|section|<id> (the desk at capture). tests/property/heraldKnowledgeDeskGolden.test.js holds the digest and count byte-stable and asserts every desk equals its captured desk except the declared refile set, which reads the knowledge desk: the one-time shift, recorded. The single producer is tests/helpers/heraldDeskGolden.js, imported by the suite; the capture ran it byte-identical from outside the tree so the door's clean-tree refusal held."
     }
   ]

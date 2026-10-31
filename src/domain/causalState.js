@@ -520,42 +520,54 @@ function deriveFoodSecurity(s) {
   /** @type {CausalContributor[]} */
   const contributors = [];
 
-  // Supply chain stability for the food_security need
+  // ⛔ THE BALANCE AND THE RESERVES, NOT A SUM OF CHAINS (GS-3a, ODQ §934.101). This score
+  // used to be 50 plus the SUM of the food chains' statuses: each extra shaky chain cost 8,
+  // reserves and imports never counted, and the best-stocked tier read the worst (metropolis
+  // 30.2 on the 1000-town sample, 15 months in store). The pulse's food pressure reads this
+  // score, so the simulation pushed famine hardest on the best-provisioned towns. It now reads
+  // the conserved ledger: the balance after imports and magic, the months in store, famine;
+  // the chains move it as a MEAN (each weighted 1/n), so diversifying never lowers it.
+  const food = foodLedger(s);
+  if (food.present) {
+    const net = Math.max(-50, Math.min(50, food.surplusPct - food.deficitPct));
+    const balance = Math.round(net * 0.6);
+    if (balance > 0) {
+      score += balance; push(contributors, 'economicState.foodSecurity', 'surplus', balance, `${food.surplusPct}% grain surplus.`);
+    } else if (balance < 0) {
+      score += balance; push(contributors, 'economicState.foodSecurity', 'deficit', balance, `${food.deficitPct}% food deficit.`);
+    }
+    const reserves = Math.round(Math.min(food.storageMonths, 12) * 1.5);
+    if (reserves > 0) {
+      score += reserves; push(contributors, 'economicState.foodSecurity.storageMonths', 'reserves', reserves, `${food.storageMonths} months of food in store.`);
+    }
+    if (/** @type {any} */ (s)?.economicState?.foodSecurity?.hasFamine) {
+      score -= 20; push(contributors, 'economicState.foodSecurity.hasFamine', 'famine', -20, 'Famine grips the settlement.');
+    }
+  }
+
+  // Supply chain stability for the food_security need, as a mean modifier.
   /** @type {DerivedSupplyChainState[]} */
   const chains = deriveAllSupplyChainStates(s);
   const foodChains = chains.filter(c => c.needKey === 'food_security');
   for (const c of foodChains) {
-    if (c.status === 'stable') {
-      score += 8; push(contributors, c.id, 'stable', +8, `${c.name} runs normally.`);
-    } else if (c.status === 'strained' || c.status === 'substituted') {
-      score -= 8; push(contributors, c.id, c.status, -8, `${c.name} is ${c.status}.`);
-    } else if (c.status === 'scarce') {
-      score -= 15; push(contributors, c.id, 'scarce', -15, `${c.name} produces below normal.`);
-    } else if (c.status === 'blocked' || c.status === 'captured') {
-      score -= 20; push(contributors, c.id, c.status, -20, `${c.name} is ${c.status}.`);
-    } else if (c.status === 'collapsing') {
-      score -= 28; push(contributors, c.id, 'collapsing', -28, `${c.name} is collapsing.`);
-    }
+    const d = c.status === 'stable' ? 8
+      : c.status === 'strained' || c.status === 'substituted' ? -8
+        : c.status === 'scarce' ? -15
+          : c.status === 'blocked' || c.status === 'captured' ? -20
+            : c.status === 'collapsing' ? -28 : 0;
+    if (!d) continue;
+    const share = Math.round(d / foodChains.length);
+    if (!share) continue;
+    score += share;
+    push(contributors, c.id, c.status, share,
+      c.status === 'stable' ? `${c.name} runs normally.`
+        : c.status === 'scarce' ? `${c.name} produces below normal.`
+          : `${c.name} is ${c.status}.`);
   }
 
   score += applyConditions(s, contributors, 'food_security', {
     scale: 20, effect: ['lift', 'pressure'], tail: ['restores food security.', 'taxes food security.'],
   });
-
-  // Generator food band, via the conserved ledger. The old code read
-  // `surplusMonths`/`deficitMonths` — fields foodGenerator never produces — so this
-  // contribution was silently dead. The ledger reads the real quantities
-  // (surplusPct/deficitPct), so a food deficit now actually lowers food_security.
-  const food = foodLedger(s);
-  if (food.present) {
-    if (food.surplusPct >= 40) {
-      score += 5; push(contributors, 'economicState.foodSecurity', 'surplus', +5, `${food.surplusPct}% grain surplus.`);
-    }
-    if (food.deficitPct > 0) {
-      const d = food.deficitPct > 40 ? 15 : food.deficitPct > 15 ? 10 : 5;
-      score -= d; push(contributors, 'economicState.foodSecurity', 'deficit', -d, `${food.deficitPct}% food deficit.`);
-    }
-  }
 
   // W-FAITH F4c — the `harvest` channel. 0 (no contributor) on every world today.
   score += applyFaithChannel(s, 'harvest', contributors);

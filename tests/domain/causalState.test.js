@@ -183,6 +183,53 @@ describe('food_security derivation', () => {
   });
 });
 
+// GS-3(a) (chair ruling on G-SEAMS S3, ODQ §934.101; build lane G1 U2). The score SUMMED the
+// food chains' statuses, so each extra chain a town carried moved it, it ignored reserves
+// (r -0.24 with storage) and imports, and the best-stocked tier read the worst: metropolis
+// 30.2 on the 1000-town sample. It now reads the food balance and the reserves, with the
+// chains as a mean modifier, and the pulse's food pressure follows it.
+const GS3_FOOD_TOWNS = (() => {
+  const chain = (chainId, status) => ({ needKey: 'food_security', chainId, label: chainId, status });
+  return {
+    // Fifteen months in the granaries, a quarter over need, six chains (four of them shaky).
+    metropolis: { economicState: {
+      activeChains: [chain('grain', 'running'), chain('livestock', 'running'), chain('fishing', 'vulnerable'),
+        chain('forage', 'vulnerable'), chain('brewing', 'vulnerable'), chain('beekeeping_wax', 'impaired')],
+      foodSecurity: { surplusPct: 25, deficitPct: 0, storageMonths: 15 },
+    } },
+    // One sound chain, a fifth short of need, a month of stores.
+    thinHamlet: { economicState: {
+      activeChains: [chain('grain', 'running')],
+      foodSecurity: { surplusPct: 0, deficitPct: 20, storageMonths: 1 },
+    } },
+  };
+})();
+
+describe('food_security reads the balance and the reserves (GS-3a)', () => {
+  it('the best-stocked metropolis no longer reads worse than a thin-stocked hamlet', () => {
+    const metropolis = deriveSystemVariable('food_security', GS3_FOOD_TOWNS.metropolis);
+    const thin = deriveSystemVariable('food_security', GS3_FOOD_TOWNS.thinHamlet);
+    expect(metropolis.score).toBeGreaterThan(thin.score);
+    expect(metropolis.band).toBe('surplus');
+  });
+
+  it('a town is not punished for carrying more chains: the chains move the score as a mean', () => {
+    const chain = (chainId, status) => ({ needKey: 'food_security', chainId, label: chainId, status });
+    const ledger = { surplusPct: 0, deficitPct: 0, storageMonths: 6 };
+    const one = deriveSystemVariable('food_security', { economicState: { activeChains: [chain('a', 'vulnerable')], foodSecurity: ledger } });
+    const four = deriveSystemVariable('food_security', { economicState: {
+      activeChains: ['a', 'b', 'c', 'd'].map(id => chain(id, 'vulnerable')), foodSecurity: ledger } });
+    expect(four.score).toBe(one.score);
+  });
+
+  it('reserves raise the score, and the contributors still sum to it', () => {
+    const at = (storageMonths) => deriveSystemVariable('food_security', { economicState: { activeChains: [], foodSecurity: { storageMonths } } });
+    expect(at(12).score).toBeGreaterThan(at(1).score);
+    const v = at(12);
+    expect(50 + v.contributors.reduce((sum, c) => sum + c.delta, 0)).toBe(v.score);
+  });
+});
+
 describe('public_legitimacy derivation', () => {
   it('reads directly from powerStructure.publicLegitimacy.score', () => {
     const high = deriveSystemVariable('public_legitimacy', {

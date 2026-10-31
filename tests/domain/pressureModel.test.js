@@ -4,6 +4,7 @@ import {
   deriveSettlementPressures,
   pressureIndex,
 } from '../../src/domain/worldPulse/index.js';
+import { deriveCausalState } from '../../src/domain/causalState.js';
 
 // H5 pins: conditions feed pressures by archetype id ONLY. Label/description
 // prose must never score ('Warehouse collapse' is not a war), custom_crisis
@@ -130,5 +131,30 @@ describe('pressure model — condition matching by archetype id', () => {
       expect(reasons, `${kind} reason`).not.toMatch(/_/);
       expect(reasons, `${kind} reason`).not.toMatch(/[a-z][A-Z]/);
     }
+  });
+});
+
+// GS-3(a) (ODQ §934.101; build lane G1 U2): the pulse's food pressure is computed from the
+// causal food score, so while that score summed chain statuses the simulation pushed famine
+// pressure hardest on the best-provisioned towns. Through the real derivation, end to end.
+describe('food pressure follows the food balance and the reserves (GS-3a)', () => {
+  test('the best-stocked metropolis carries less food pressure than a thin-stocked hamlet', () => {
+    // The same two towns as causalState.test.js's GS-3a block.
+    const chain = (chainId, status) => ({ needKey: 'food_security', chainId, label: chainId, status });
+    const GS3_FOOD_TOWNS = {
+      metropolis: { economicState: {
+        activeChains: [chain('grain', 'running'), chain('livestock', 'running'), chain('fishing', 'vulnerable'),
+          chain('forage', 'vulnerable'), chain('brewing', 'vulnerable'), chain('beekeeping_wax', 'impaired')],
+        foodSecurity: { surplusPct: 25, deficitPct: 0, storageMonths: 15 },
+      } },
+      thinHamlet: { economicState: {
+        activeChains: [chain('grain', 'running')],
+        foodSecurity: { surplusPct: 0, deficitPct: 20, storageMonths: 1 },
+      } },
+    };
+    const live = (id, settlement) => ({ id, name: id, activeConditions: [], causal: deriveCausalState(settlement) });
+    const idx = indexFor([live('metropolis', GS3_FOOD_TOWNS.metropolis), live('thin', GS3_FOOD_TOWNS.thinHamlet)]);
+    expect(idx.get('metropolis', 'food').score).toBeLessThan(idx.get('thin', 'food').score);
+    expect(idx.get('metropolis', 'economy').score).toBeLessThanOrEqual(idx.get('thin', 'economy').score);
   });
 });
