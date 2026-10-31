@@ -34,15 +34,15 @@ afterEach(() => { cleanup(); vi.clearAllMocks(); });
 
 const { storeRef, galleryRef } = vi.hoisted(() => ({
   storeRef: { current: {} },
-  galleryRef: { updateCalls: [] },
+  galleryRef: { updateCalls: [], publishCalls: [], unpublishCalls: [] },
 }));
 
 vi.mock('../../src/store/index.js', () => ({
   useStore: (selector) => selector(storeRef.current),
 }));
 vi.mock('../../src/lib/gallery.js', () => ({
-  publishSettlement: vi.fn(async () => 'slug'),
-  unpublishSettlement: vi.fn(async () => {}),
+  publishSettlement: vi.fn(async (id, metadata) => { galleryRef.publishCalls.push({ id, metadata }); return 'slug'; }),
+  unpublishSettlement: vi.fn(async (id) => { galleryRef.unpublishCalls.push(id); }),
   updateGalleryMetadata: vi.fn(async (id, metadata) => {
     galleryRef.updateCalls.push({ id, metadata });
     return metadata;
@@ -105,8 +105,9 @@ describe('ShareToGallery — reload round-trip preserves the gallery opt-ins', (
       />
     );
 
-    // Open the details form and save WITHOUT touching the opt-ins.
-    fireEvent.click(screen.getByRole('button', { name: /gallery details/i }));
+    // Open Manage gallery (X-24 (c): the published dossier's one door; it replaced "Gallery
+    // details") and save the details WITHOUT touching the opt-ins.
+    fireEvent.click(screen.getByRole('button', { name: /^manage gallery$/i }));
     fireEvent.click(screen.getByRole('button', { name: /save gallery details/i }));
 
     await waitFor(() => expect(galleryRef.updateCalls).toHaveLength(1));
@@ -209,5 +210,95 @@ describe('ShareToGallery — every mount wires the opt-in props', () => {
         expect(content.includes(prop), `${file} mounts ShareToGallery without wiring ${prop} — an unwired mount loses the unlisted party-link state on reload and offers a re-mint that rotates (kills) the shared link`).toBe(true);
       }
     }
+  });
+});
+
+// ── W2-VEIL-B U4: EXPORT TO GALLERY / MANAGE GALLERY (X-21 (e), X-21d, X-24, X-24b) ──────────
+describe('ShareToGallery — Export to gallery, then Manage gallery (W2-VEIL-B)', () => {
+  const SETTLEMENT = {
+    name: 'Rivermouth', tier: 'town', population: 2400, config: { culture: 'generic' },
+    institutions: [
+      { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', desc: 'Organised crime.', tags: ['criminal'] },
+      { name: 'Parish church', category: 'Religious', priorityCategory: 'religion', desc: 'One for the parish.', tags: ['religious'] },
+    ],
+    npcs: [{ id: 'n1', name: 'Aldric', role: 'Reeve', personality: { flaw: 'vain' } }],
+  };
+  async function mount(props) {
+    galleryRef.updateCalls.length = 0; galleryRef.publishCalls.length = 0; galleryRef.unpublishCalls.length = 0;
+    const { default: ShareToGallery } = await import('../../src/components/ShareToGallery.jsx');
+    storeRef.current = { auth: { user: { id: 'u1' } }, updateSavedSettlement: vi.fn(), savedSettlements: [], campaigns: [] };
+    render(
+      <ShareToGallery saveId="sb-1" campaignState={{ phase: 'canon' }} settlement={SETTLEMENT}
+        visibility="public" unlistedSlug={null} galleryImportable={false} galleryMemberOverrides={null} {...props} />
+    );
+  }
+
+  test('the first export writes the veil marker with no deltas (the one default set), snapshot by default, import off', async () => {
+    await mount({ isPublic: false, publicSlug: null });
+    expect(screen.queryByRole('button', { name: /share to gallery/i })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Snapshot' }).getAttribute('aria-pressed')).toBe('true');
+    fireEvent.click(screen.getByRole('button', { name: /^export to gallery$/i }));
+    await waitFor(() => expect(galleryRef.publishCalls).toHaveLength(1));
+    const { metadata } = galleryRef.publishCalls[0];
+    expect(metadata.importable).toBe(false);
+    expect(metadata.memberOverrides.$veil).toMatchObject({ v: 1, deltas: [], mode: 'snapshot', at: expect.any(String) });
+    // The frozen copy is the visitor's projection: the criminal house is still in it (the veil
+    // hides it at view time, so un-hiding needs no refresh).
+    expect(metadata.memberOverrides.$veil.snapshot.institutions.map(i => i.name)).toContain('Parish church');
+    // Exported: the button now reads Manage gallery.
+    expect(await screen.findByRole('button', { name: /^manage gallery$/i })).toBeTruthy();
+    expect(screen.queryByRole('button', { name: /^export to gallery$/i })).toBeNull();
+  });
+
+  test('a live export keeps no copy and is view only: import off even when it was ticked', async () => {
+    await mount({ isPublic: false, publicSlug: null, galleryImportable: true });
+    fireEvent.click(screen.getByRole('button', { name: 'Live' }));
+    expect(screen.getByRole('checkbox', { name: /allow others to import/i }).disabled).toBe(true);
+    fireEvent.click(screen.getByRole('button', { name: /^export to gallery$/i }));
+    await waitFor(() => expect(galleryRef.publishCalls).toHaveLength(1));
+    const { metadata } = galleryRef.publishCalls[0];
+    expect(metadata.importable).toBe(false);
+    expect(metadata.memberOverrides.$veil.mode).toBe('live');
+    expect(metadata.memberOverrides.$veil.snapshot).toBeUndefined();
+  });
+
+  test('Manage gallery lists what is hidden; curate flips an eye in place and Done saves the delta', async () => {
+    await mount({ isPublic: true, publicSlug: 'rivermouth', galleryMemberOverrides: { $veil: { v: 1, deltas: [], mode: 'live', at: '2026-10-31T10:00:00.000Z' } } });
+    fireEvent.click(screen.getByRole('button', { name: /^manage gallery$/i }));
+    const manage = screen.getByRole('region', { name: 'Manage gallery' });
+    expect(manage.textContent).toContain('The Plot Hooks tab (by default)');
+    expect(manage.textContent).toContain("Thieves' guild chapter: hidden whole (by default)");
+    const before = Number(/Hidden from visitors \((\d+)\)/.exec(manage.textContent)[1]);
+    fireEvent.click(screen.getByRole('button', { name: /^curate for visitors$/i }));
+    const curate = screen.getByRole('region', { name: 'Curate for visitors' });
+    expect(curate.textContent).toContain(`${before} items hidden`);
+    const eye = screen.getByRole('button', { name: 'Show The Plot Hooks tab' });
+    expect(eye.getAttribute('data-affordance-slot')).toBe('eye');
+    fireEvent.click(eye);
+    expect(curate.textContent).toContain(`${before - 1} items hidden`);
+    expect(screen.getByRole('button', { name: 'Hide The Plot Hooks tab' }).getAttribute('aria-pressed')).toBe('false');
+    // Preview as visitor drops the hidden rows (the criminal house's row is gone, the church stays).
+    fireEvent.click(screen.getByRole('button', { name: /open the 2 boxes/i }));
+    expect(curate.textContent).toContain("Thieves' guild chapter");
+    fireEvent.click(screen.getByRole('button', { name: /preview as visitor/i }));
+    expect(curate.textContent).not.toContain("Thieves' guild chapter");
+    expect(curate.textContent).toContain('Parish church');
+    fireEvent.click(screen.getByRole('button', { name: /^done$/i }));
+    await waitFor(() => expect(galleryRef.updateCalls).toHaveLength(1));
+    expect(galleryRef.updateCalls[0].metadata.memberOverrides.$veil).toMatchObject({
+      deltas: [{ address: 'tab:plot_hooks', hidden: false }], mode: 'live',
+    });
+  });
+
+  test('Remove from gallery unpublishes, clears the veil and the mode, and reverts to Export to gallery', async () => {
+    await mount({ isPublic: true, publicSlug: 'rivermouth', galleryImportable: true,
+      galleryMemberOverrides: { n1: { revealDm: false }, $veil: { v: 1, deltas: [{ address: 'tab:plot_hooks', hidden: false }], mode: 'live' } } });
+    fireEvent.click(screen.getByRole('button', { name: /^manage gallery$/i }));
+    fireEvent.click(screen.getByRole('button', { name: /^remove from gallery$/i }));
+    await waitFor(() => expect(galleryRef.unpublishCalls).toEqual(['sb-1']));
+    await waitFor(() => expect(galleryRef.updateCalls).toHaveLength(1));
+    expect(galleryRef.updateCalls[0].metadata).toEqual({ memberOverrides: {}, importable: false });
+    expect(await screen.findByRole('button', { name: /^export to gallery$/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Snapshot' }).getAttribute('aria-pressed')).toBe('true');
   });
 });

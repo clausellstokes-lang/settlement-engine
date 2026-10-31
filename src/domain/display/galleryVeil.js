@@ -60,7 +60,7 @@
  * Pure; never mutates its inputs.
  */
 
-import { galleryMemberKey } from './publicSafe.js';
+import { galleryMemberKey, toPublicSafe } from './publicSafe.js';
 import { deriveDefenseVulnerabilities } from './defenseDisplay.js';
 import { entityIdFor, eventIdFor, slugifyEntity } from '../dossier/entityLinks.js';
 import { facetOf } from '../spatial/cohesionWeave.js';
@@ -86,7 +86,12 @@ export const VEIL_OVERRIDE_KEY = '$veil';
  * The stored shape's version and the write-path bounds (a hand-crafted payload cannot
  * bloat the row). One frozen record, not tuning: a schema version and two storage caps.
  */
-export const VEIL_LIMITS = Object.freeze({ version: 1, maxDeltas: 2000, addressMax: 300 });
+export const VEIL_LIMITS = Object.freeze({
+  version: 1, maxDeltas: 2000, addressMax: 300,
+  // X-24 (a): the frozen public copy a snapshot share stores. The thousand's largest
+  // projection is 304,925 characters (full DM view; 187,792 closed); three times that.
+  snapshotMaxChars: 1000000,
+});
 export const VEIL_VERSION = VEIL_LIMITS.version;
 export const VEIL_MAX_DELTAS = VEIL_LIMITS.maxDeltas;
 const ADDRESS_MAX = VEIL_LIMITS.addressMax;
@@ -818,11 +823,14 @@ export function readShareVeil(memberOverrides) {
  * not mutated). NPC card-level deltas go to the member's `revealDm` (hidden:true writes
  * revealDm:false, which the server's 093 splice already enforces; hidden:false clears a
  * revealDm:false), everything else into the reserved key. Writing marks the share.
+ * The share's mode record (X-24: mode, the publish time, the snapshot copy) is carried
+ * forward from the input unless `mode` names a change; `snapshot: null` drops the copy.
  * @param {unknown} memberOverrides
  * @param {ReadonlyArray<VeilDelta>} deltas
+ * @param {{ mode?: string, at?: string, snapshot?: Rec|null }} [mode]
  * @returns {Rec}
  */
-export function writeShareVeil(memberOverrides, deltas) {
+export function writeShareVeil(memberOverrides, deltas, mode = {}) {
   /** @type {Rec} */
   const out = {};
   if (isRec(memberOverrides)) {
@@ -843,8 +851,267 @@ export function writeShareVeil(memberOverrides, deltas) {
     }
     rest.push(d);
   }
-  out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: rest };
+  const prior = readShareMode(memberOverrides);
+  const next = clampShareMode({
+    mode: mode.mode !== undefined ? mode.mode : prior.mode,
+    at: mode.at !== undefined ? mode.at : prior.at,
+    snapshot: mode.snapshot !== undefined ? mode.snapshot : prior.snapshot,
+  });
+  out[VEIL_OVERRIDE_KEY] = { v: VEIL_VERSION, deltas: rest, ...next };
   return out;
+}
+
+// ── SNAPSHOT OR LIVE (X-24) ─────────────────────────────────────────────────────────
+// SNAPSHOT (the default) freezes the public copy at export, with its time; the reader
+// renders that copy until the DM refreshes it. LIVE renders the saved row, which every
+// save and every advance already rewrites (saves.js :: supabaseUpdate writes `data`; the
+// campaign advance persists each member through campaignSliceShared's savesService.update),
+// so the reader is the republish and needs no second write. Both run the same projection
+// and the same veil; only the source differs. The record rides the reserved key until the
+// owner's migration gives it columns (the SQL draft).
+
+/** The two modes, the first the default. */
+export const VEIL_MODES = Object.freeze(['snapshot', 'live']);
+
+/**
+ * Clamp a share's mode record: a known mode, an ISO-shaped time, a bounded snapshot copy
+ * (dropped whole when over VEIL_LIMITS.snapshotMaxChars, never truncated). Keys with no
+ * valid value are omitted.
+ * @param {unknown} raw
+ * @returns {{ mode?: string, at?: string, snapshot?: Rec }}
+ */
+export function clampShareMode(raw) {
+  /** @type {{ mode?: string, at?: string, snapshot?: Rec }} */
+  const out = {};
+  if (!isRec(raw)) return out;
+  if (typeof raw.mode === 'string' && VEIL_MODES.includes(raw.mode)) out.mode = raw.mode;
+  if (typeof raw.at === 'string' && raw.at.length <= 40 && !Number.isNaN(Date.parse(raw.at))) out.at = raw.at;
+  if (out.mode === 'snapshot' && isRec(raw.snapshot)) {
+    let size = Infinity;
+    try { size = JSON.stringify(raw.snapshot).length; } catch { /* unserialisable: dropped */ }
+    if (size <= VEIL_LIMITS.snapshotMaxChars) out.snapshot = raw.snapshot;
+  }
+  return out;
+}
+
+/**
+ * Read a share's mode record. `mode` is null for a share exported before X-24 (the reader
+ * then renders the saved row, as it always has).
+ * @param {unknown} memberOverrides
+ * @returns {{ mode: string|null, at: string|null, snapshot: Rec|null }}
+ */
+export function readShareMode(memberOverrides) {
+  const stored = isRec(memberOverrides) ? memberOverrides[VEIL_OVERRIDE_KEY] : null;
+  const m = clampShareMode(stored);
+  return { mode: m.mode || null, at: m.at || null, snapshot: m.snapshot || null };
+}
+
+/**
+ * The public copy a share publishes: the SAME projection the gallery reader runs on the
+ * saved row (toPublicSafe with the DM door and the per-member overrides), before the veil.
+ * A snapshot freezes exactly this; the reader veils it at view time, so the DM's eyes keep
+ * working on a frozen copy and an un-hidden fact comes back without a refresh.
+ * @param {unknown} settlement  the raw saved settlement
+ * @param {{ shareDm?: boolean, memberOverrides?: unknown }} [opts]
+ * @returns {Rec}
+ */
+export function galleryPayloadFor(settlement, { shareDm = false, memberOverrides = null } = {}) {
+  return /** @type {Rec} */ (toPublicSafe(settlement, {
+    full: shareDm === true,
+    memberOverrides: isRec(memberOverrides)
+      ? /** @type {Record<string, { revealDm?: boolean, allowImport?: boolean }>} */ (memberOverrides) : null,
+  }));
+}
+
+// ── CURATE (X-21 (e), X-21b): the model the curate screen draws ───────────────────────
+
+/**
+ * The curate screen's sections in the dossier's tab order (TAB_GROUPS, X-17; the search's
+ * SEARCH_TAB_ORDER follows the same order, X-25c), engine housekeeping last. Each names the
+ * groupings it owns, its FIELD-CLASS MASTER SWITCHES (X-21b: "Secrets: hidden for
+ * everyone", per-card eyes the exceptions), and the card kinds whose boxes it lists.
+ * @type {ReadonlyArray<{ id: string, label: string, groupings: ReadonlyArray<readonly [string, string]>, switches: ReadonlyArray<readonly [string, string]>, kinds: ReadonlyArray<string> }>}
+ */
+export const CURATE_SECTIONS = Object.freeze([
+  { id: 'plot_hooks', label: 'Plot Hooks', kinds: [],
+    groupings: [['tab:plot_hooks', 'The Plot Hooks tab']],
+    switches: [['class:npc:hooks', 'Hooks on people'], ['class:event:hooks', 'Hooks on events'], ['class:tension:hooks', 'Hooks on tensions'],
+      ['class:conflict:hooks', 'Hooks on conflicts'], ['class:relationship:hooks', 'Hooks on ties']] },
+  { id: 'services', label: 'Services', kinds: [], switches: [],
+    groupings: [['block:services.criminal', 'Criminal services']] },
+  { id: 'institutions', label: 'Institutions', kinds: ['institution'], groupings: [],
+    switches: [['class:institution:description', 'Descriptions'], ['class:institution:services', 'Services offered'], ['class:institution:people', 'People']] },
+  { id: 'power', label: 'Power', kinds: ['faction', 'conflict'],
+    groupings: [['block:power.criminalUnderside', 'The capture reading']],
+    switches: [['class:faction:goals', 'Faction goals'], ['class:faction:conflicts', 'Faction conflicts'], ['class:faction:members', 'Faction members'],
+      ['class:conflict:stakes', 'Conflict stakes']] },
+  { id: 'defense', label: 'Defense', kinds: [], switches: [],
+    groupings: [['block:defense.criminalStructure', 'Criminal architecture'], ['block:defense.vulnerabilities', 'Vulnerabilities and watch gaps']] },
+  { id: 'npcs', label: 'NPCs', kinds: ['npc'], groupings: [],
+    switches: [['class:npc:personality', 'Personalities'], ['class:npc:goals', 'Goals'], ['class:npc:constraint', 'Constraints'],
+      ['class:npc:whereabouts', 'Whereabouts'], ['class:npc:secret', 'Secrets'], ['class:npc:corruption', 'Corruption'], ['class:npc:ties', 'Ties']] },
+  { id: 'relationships', label: 'Relationships', kinds: ['relationship'], groupings: [],
+    switches: [['class:relationship:tension', 'Tension lines']] },
+  { id: 'history', label: 'History', kinds: ['event', 'tension'], groupings: [],
+    switches: [['class:event:description', 'Event descriptions'], ['class:event:lastingEffects', 'Lasting effects'], ['class:tension:description', 'Tension descriptions']] },
+  { id: 'rumors', label: 'Rumors & News', kinds: [], switches: [],
+    groupings: [['block:rumors.dmTruth', 'What the DM knows to be true']] },
+  { id: 'war', label: 'War', kinds: [], switches: [],
+    groupings: [['block:war.truthVsBelief', 'Truth versus belief']] },
+  { id: 'housekeeping', label: 'Engine housekeeping', kinds: [], switches: [],
+    groupings: [['block:housekeeping.structuralIssues', 'Structural issues'], ['block:housekeeping.coherenceNotes', 'Coherence notes'],
+      ['block:housekeeping.firstSurvey', 'First-survey warnings'], ['block:housekeeping.receipt', 'The generation receipt'],
+      ['block:housekeeping.decrees', 'Pending decrees']] },
+]);
+
+/** The words an eye carries for each depth field (X-21b's ladder). @type {Readonly<Record<string, string>>} */
+const FIELD_LABELS = Object.freeze({
+  personality: 'Personality', physical: 'Appearance', goals: 'Goals', constraint: 'Constraint', whereabouts: 'Whereabouts',
+  secret: 'Secret', ties: 'Ties', hooks: 'Hooks', corruption: 'Corruption', description: 'Description', function: 'Function',
+  services: 'Services', people: 'People', conflicts: 'Conflicts', members: 'Members', capture: 'Capture',
+  lastingEffects: 'Lasting effects', stakes: 'Stakes', tension: 'Tension',
+});
+
+/**
+ * Depth fields a grouping already removes on every card (Power's capture reading deletes
+ * each faction's captureState): the grouping's eye speaks for them, so no card eye is drawn.
+ */
+const GROUPING_OWNED_FIELDS = Object.freeze(new Set(['faction:capture']));
+
+/** @param {Rec} card @param {string} kind @returns {string} */
+function cardName(card, kind) {
+  if (kind === 'faction') return str(card.faction) || str(card.name);
+  if (kind === 'conflict') return [Array.isArray(card.parties) ? card.parties.map(str).filter(Boolean).join(' and ') : '', str(card.issue)].filter(Boolean).join(': ');
+  if (kind === 'relationship') return [str(card.npc1Name), str(card.npc2Name)].filter(Boolean).join(' and ') || str(card.typeName) || str(card.type);
+  return str(card.name) || str(card.title) || str(card.type);
+}
+
+/** @param {unknown} v @returns {string} */
+function excerptOf(v) {
+  /** @type {string} */
+  let text;
+  if (typeof v === 'string') text = v;
+  else if (typeof v === 'number' || typeof v === 'boolean') text = String(v);
+  else if (Array.isArray(v)) {
+    const words = v.map(x => (typeof x === 'string' ? x : isRec(x) ? str(x.name) || str(x.text) || str(x.what) : '')).filter(Boolean);
+    text = words.length ? words.join(' · ') : `${v.length}`;
+  } else if (isRec(v)) text = Object.values(v).filter(x => typeof x === 'string').join(' · ');
+  else text = '';
+  return text.length > 140 ? `${text.slice(0, 139).trimEnd()}…` : text;
+}
+
+/**
+ * Is an address hidden under an effective set? A field reads its own address, then its
+ * class switch unless the card holds an exception.
+ * @param {Set<string>} hidden @param {string} address @returns {boolean}
+ */
+export function isAddressHidden(hidden, address) {
+  if (hidden.has(address)) return true;
+  const p = parseVeilAddress(address);
+  if (!p || p.type !== 'field') return false;
+  return hidden.has(`class:${p.kind}:${p.field}`) && !hidden.has(VEIL_EXCEPTION_PREFIX + address);
+}
+
+/**
+ * Flip one eye. The address's delta is replaced; when the flipped state is what the
+ * defaults (and the other deltas) already give, the delta is dropped, so a list returned to
+ * the defaults is empty again ("changes nothing until touched").
+ * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
+ * @param {string} address
+ * @param {ReadonlyArray<VeilDefault|string>} defaults
+ * @returns {VeilDelta[]}
+ */
+export function toggleVeilDelta(deltas, address, defaults) {
+  const all = clampVeilDeltas(deltas);
+  const rest = all.filter(d => d.address !== address);
+  const want = !isAddressHidden(resolveVeil(defaults, all), address);
+  const baseline = isAddressHidden(resolveVeil(defaults, rest), address);
+  return baseline === want ? rest : [...rest, { address, hidden: want }];
+}
+
+/**
+ * The curate screen's model: every section in tab order with its grouping eyes, its master
+ * switches (only for a field some card carries), and its boxes with their depth eyes (only
+ * for a field the visitor's copy carries: the veil only removes, so an eye on an absent
+ * field would be noise). Identity fields carry no eye; a criminal or clandestine house
+ * carries a card eye (X-21e). Each eye reports `hidden` and `defaultHidden`, so the screen
+ * marks "hidden by default" apart from "hidden by you". `lines` is the hidden-items list
+ * (plain lines; a field hidden by its class switch or its card is said once, by the switch
+ * or the card) and its length is the counter.
+ * @param {unknown} publicSettlement  galleryPayloadFor's output (before the veil)
+ * @param {ReadonlyArray<VeilDelta>|null|undefined} deltas
+ */
+export function curateModelFor(publicSettlement, deltas) {
+  const s = isRec(publicSettlement) ? publicSettlement : {};
+  const defaults = defaultVeilFor(s);
+  const now = resolveVeil(defaults, deltas);
+  const base = resolveVeil(defaults, []);
+  /** @param {string} address */
+  const eye = (address) => ({ address, hidden: isAddressHidden(now, address), defaultHidden: isAddressHidden(base, address) });
+  /** @type {Array<{ address: string, text: string, byDefault: boolean }>} */
+  const lines = [];
+  /** @param {{ address: string, hidden: boolean, defaultHidden: boolean }} e @param {string} text */
+  const note = (e, text) => { if (e.hidden) lines.push({ address: e.address, text, byDefault: e.defaultHidden }); };
+
+  const services = recAt(s, 'availableServices') || {};
+  const offered = new Set(Object.values(services).flatMap(rows => recs(rows).map(r => str(r.institution))).filter(Boolean));
+  const staffed = new Set(recs(s.npcs).map(n => str(n.institution)).filter(Boolean));
+  /** @param {Rec} card @param {string} kind @param {string} field @returns {unknown} */
+  const valueOf = (card, kind, field) => {
+    if (kind === 'institution' && field === 'services') return offered.has(str(card.name)) ? 'Its rows on the Services tab' : undefined;
+    if (kind === 'institution' && field === 'people') return staffed.has(str(card.name)) ? 'Its people on their cards' : undefined;
+    for (const key of CARD_KINDS[kind].fields[field] || []) {
+      const v = card[key];
+      if (v != null && !(Array.isArray(v) && !v.length) && v !== '') return v;
+    }
+    return undefined;
+  };
+
+  const sections = CURATE_SECTIONS.map((sec) => {
+    const groupings = sec.groupings.map(([address, label]) => {
+      const e = { ...eye(address), label };
+      note(e, label);
+      return e;
+    });
+    /** @type {Set<string>} switch addresses some card can use */
+    const usable = new Set();
+    const cards = sec.kinds.flatMap((kind) => {
+      const k = CARD_KINDS[kind];
+      /** @type {Set<string>} */
+      const seen = new Set();
+      return listAt(s, k.lists[0]).flatMap((card) => {
+        const id = k.idOf(card);
+        if (!id || seen.has(id)) return [];
+        seen.add(id);
+        const name = cardName(card, kind) || id;
+        const whole = kind === 'institution' && isHideableHouse(card) ? eye(`card:institution:${id}`) : null;
+        const eyes = Object.keys(k.fields).flatMap((field) => {
+          if (GROUPING_OWNED_FIELDS.has(`${kind}:${field}`)) return [];
+          const v = valueOf(card, kind, field);
+          if (v === undefined) return [];
+          usable.add(`class:${kind}:${field}`);
+          return [{ ...eye(`field:${kind}:${id}:${field}`), field, label: FIELD_LABELS[field] || field, text: excerptOf(v) }];
+        });
+        if (!whole && !eyes.length) return [];
+        return [{ kind, id, name, whole, eyes }];
+      });
+    });
+    const switches = sec.switches.filter(([address]) => usable.has(address)).map(([address, label]) => {
+      const e = { ...eye(address), label };
+      note(e, `${label}: hidden for everyone`);
+      return e;
+    });
+    for (const c of cards) {
+      if (c.whole?.hidden) { note(c.whole, `${c.name}: hidden whole`); continue; }
+      for (const e of c.eyes) {
+        if (!e.hidden) continue;
+        if (now.has(`class:${c.kind}:${e.field}`) && !now.has(e.address)) continue;
+        note(e, `${c.name}: ${e.label.toLowerCase()}`);
+      }
+    }
+    return { id: sec.id, label: sec.label, groupings, switches, cards };
+  });
+  return { sections, lines, count: lines.length, defaults };
 }
 
 /**

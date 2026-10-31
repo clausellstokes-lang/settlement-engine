@@ -16,6 +16,7 @@ import { truncateAtWord } from '../../../lib/text.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
+import { isVeiled } from '../../../domain/display/galleryVeil.js';
 // THE ONE PARAGRAPH RENDERER (owner finding 2026-09-18). Every position on this tab used to
 // map its drawn sentences to one `<p>` EACH, so a five-lens position printed five paragraphs
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
@@ -268,10 +269,15 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const hasAnyForce = mainForces.length||mercForces.length||charterForces.length||magicDef.length;
   const hasAnyFort = walls.length > 0;
 
+  // THE GALLERY VEIL (X-21c): a visitor's copy whose criminal architecture is veiled keeps the
+  // identity facts this block derives from (house names, the faction roster), so the block
+  // reads the grouping list beside the copy and says nothing: no classification, no
+  // "no organized crime" line, no faction line. Public order stays.
+  const crimeVeiled = isVeiled(r, 'block:defense.criminalStructure');
   // Criminal architecture data
   const crimInsts  = sp.criminalInstitutions || [];
   const crimeTypes = sp.crimeTypes || [];
-  const crimFaction = r.powerStructure?.factions?.find(f=>f.category==='criminal');
+  const crimFaction = crimeVeiled ? null : r.powerStructure?.factions?.find(f=>f.category==='criminal');
   // R-5b item #20: the raw `safetyRatio` float ("ratio 1.23×") that used to sit
   // in the Internal Security banner is RETIRED here, extending the owner's
   // 2026-07-22 retirement of the identical Enforcement Ratio display on
@@ -283,12 +289,12 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const _bmc         = sp.blackMarketCapture || 0;
 
   // Criminal structure classification (shared with the PDF viewModel)
-  const csd = deriveCriminalStructure(r);
+  const csd = crimeVeiled ? null : deriveCriminalStructure(r);
   const crimStructure = csd?.key || null;
   // DS-DEF-4, the criminal architecture. Same public gate as every other mount on this tab;
   // the desk is handed the SAME structure key the card below renders from, so the sentence
   // and the classification beneath it cannot be about two different readings.
-  const criminalProse = publicDossier
+  const criminalProse = publicDossier || crimeVeiled
     ? Object.freeze({ structure: null, capture: null })
     : defenseCriminalProse(r, crimStructure, deskOpts);
   // T2-20: the capture lens is cut (Power owns capture; Defense owns the structure).
@@ -455,7 +461,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
           {/* T2-20: the static no-organised-crime line stands where the DS-DEF-4 structure lens
               does not speak (public); the lens says it in the town's voice elsewhere. */}
-          {!crimStructure&&criminalLines.length===0&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
+          {!crimeVeiled&&!crimStructure&&criminalLines.length===0&&<div style={{background:swatch['#F0FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #2d7a44',padding:'8px 13px',fontSize:proseFontSize(FS.sm, isMobile),color:swatch.success}}>
             No organized criminal infrastructure detected. Crime exists at a petty, individual level.
           </div>}
 

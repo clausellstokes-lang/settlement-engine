@@ -39,6 +39,8 @@ import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
+import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
+import { projectShareVeil, writeShareVeil, isVeiled } from '../../src/domain/display/galleryVeil.js';
 
 const e = React.createElement;
 const HERE = dirname(fileURLToPath(import.meta.url));
@@ -418,5 +420,36 @@ describe('F11 / X-2 — Defense prints no plot-hook text', () => {
     expect(marker(), 'the criminal-architecture body is open on this render').toBe(true);
     expect(container.textContent).not.toContain(hook); // anchored: the section body is asserted open above
     expect(container.textContent).not.toContain('Order & crime plot hooks'); // anchored: same render
+  });
+});
+
+// ── W2-VEIL-B U5: THE VEILED CRIMINAL ARCHITECTURE (X-21c; galleryVeil.js :: isVeiled) ─────────
+// The veil removes the criminal houses and the safety profile's crime rows from a visitor's
+// copy, but this block DERIVES its classification from institution names and its faction line
+// from the faction roster (identity facts the veil keeps). On the thousand, the default veil
+// left 301 towns saying "No organized criminal infrastructure detected" where the house had
+// only been hidden, 298 still classifying, and 323 still naming the criminal faction. The
+// block reads the grouping list beside the copy and stands down whole; Public order stays.
+describe('DefenseTab — a veiled criminal architecture says nothing (W2-VEIL-B)', () => {
+  const CRIME_RE = /Criminal structure:|No organized criminal infrastructure|Criminal faction:|Active criminal operations|Active crime patterns/;
+  const openCriminal = (view) => {
+    const head = view.queryAllByText('Criminal Architecture & Public Order')[0];
+    if (head && !CRIME_RE.test(view.container.textContent)) fireEvent.click(head);
+  };
+  test('the public copy reads the block; the veiled copy of the same town does not (port and inland)', () => {
+    for (const town of [port, inland]) {
+      const pub = toPublicSafe(town);
+      const plain = render(e(DefenseTab, { settlement: pub, narrativeNote: null, publicDossier: true }));
+      openCriminal(plain);
+      expect(plain.container.textContent).toMatch(CRIME_RE);
+      cleanup();
+      const veiled = projectShareVeil(pub, writeShareVeil({}, []));
+      expect(isVeiled(veiled, 'block:defense.criminalStructure')).toBe(true);
+      const view = render(e(DefenseTab, { settlement: veiled, narrativeNote: null, publicDossier: true }));
+      openCriminal(view);
+      expect(view.container.textContent).not.toMatch(CRIME_RE);
+      expect(view.container.textContent).toContain('Criminal Architecture & Public Order');
+      cleanup();
+    }
   });
 });
