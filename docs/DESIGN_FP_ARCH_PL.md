@@ -663,6 +663,7 @@ Every sentence names who, upon whom, and what happened; none says what might hap
 **The owner's question (2026-10-17), verbatim:** "how does the conversion of culture and relligion happen in kindgom through chains of vassalage"
 
 **The answer.** Culture in this engine has no stored value to convert: it is DERIVED from faith, alignment, economy, the form of government and shared rites (`cultureDistance.js`: "NEVER a new authored coordinate"). So a kingdom converts its towns when their RITES, their FAITH and their GOVERNMENT drift toward the crown's — slowly, a link at a time, a year at a time — and the town's closeness to its liege (inside the owner's scalar) rises as they do. No culture writer is minted.
+Amended 2026-10-31: the culture volume mints one, dark (DESIGN_FP_ARCH_CU.md CU-R1).
 
 **14.1 What already happens (R4, CONFIRMED).** Rites: one trade per CONQUEST-made vassalage on a year-keyed draw, restored when the vassalage ends. Faith: the vassal edge carries faith both ways and the overlord's `political_authority` channel carries the liege's creed down, distance-weighted — but only where `faithSpreadEnabled` is lit (dramatic, full). Closeness already reads faith axes, rites and government.
 

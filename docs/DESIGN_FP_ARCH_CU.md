@@ -615,6 +615,8 @@ None in the cure. Three PLAUSIBLE points are car-0's to settle (the step's mount
 ---
 ## §21 THE FOLD ENTRIES, READY TO PASTE (each in the fold's own form; the fold seat pastes, this volume does not edit the fold; where the fold's form carries a leading dash in a cell this volume writes "none", and the fold seat restores the fold's own glyph)
 
+**PASTED 2026-10-31 by CU-F at `3bb999b8`** (the fold's §2, §3.1, §3.4 with its count edits and THE WHERE, §5, §6, §7 OD-FC-139..144 as numbered, the guide's and §0's edits; the spine's thesis, binding, requirement 21, requirement 24 and §3; PHASE55 §II.5-2 and PL §14 one dated line each; ODQ §934.102; HANDOFF_CURRENT one line). The "none" cells were pasted as written: the fold seat's rule of the day admits no new em dash, so the fold's glyph was not restored.
+
 **§2 THE STATUS OF RECORD, one row (the review phrase after the refuting verifier):**
 
 ```text
@@ -772,3 +774,4 @@ Two adversarial reads of the draft `ab11a31a` (`findings/CU-REVIEW-A.md`: STOP 4
 | W2 | MINOR | CURED: §19's heading reads CU-R13..R21 and §21's OD-FC-143 reads CU-R1..R21 and OD-CU-1..16 |
 | W3 | MINOR | CURED: two floors stand by OD-CU-14 (the quarter's at fifteen, the enclave's at five); CU-R19's Kind cell says its "enclave floor" is read as the quarter floor (§3.3, §19) |
 | W4 | MINOR | CURED: "gives up up to six tenths of a point a year … within about eight years" (§3.3); `composition` tests 105 at the census's pinned commit (§2.3, §18) |
+| CU-F | FOLD | PASTED 2026-10-31 at `3bb999b8`: every §21 entry into the fold, the spine, PHASE55 §II.5-2, PL §14, ODQ §934.102 and HANDOFF_CURRENT, each in its file's live row form; the live latest owner row was OD-FC-138, so OD-FC-139..144 stand as numbered; no em dash added in any touched file |

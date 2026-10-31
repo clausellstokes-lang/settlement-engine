@@ -14,18 +14,20 @@
 4. WHAT IT OWNS. The shared shapes no volume mints twice: the errand ledger (SP-1), the believed-world families (SP-2), the pact grammar (SP-3, whose term catalog is GRAMMAR's), the posture read and its closed actor set (SP-4), the confidence and banded-stock families (SP-5, SP-5b), the narration kit with its band families and causal voice (SP-6), the temporal walker (SP-7) and the age layer (SP-8).
 5. HOW TO USE §1. Every wave carries every requirement, or the gap is a defect: its clock (9) and first-visible latency (16), its counterforce (2), its dossier round-trip (6), its Alignment line (13), its edit story (14), its TIER line and degraded arm (17), its measured or UNMEASURED bands (18), its felt sentence (19), its `causedBy` links (20), its layer or carrier (21), its lifecycle paths (22 (a)) and its ring horizon (23); every engagement between settlements is a hearing in the fold's registry (24).
 6. WHERE ITS STATUS IS. The fold's §2 is the status of record; §6 here carries the status line and the decisions the built SP waves settled (the Herald's causal voice, the dossier's state-prose reader, SP-A's pure foundations).
-7. THE WORDS NOT TO CONFUSE (the fold's §5). A bare "telling" is SP-6b's SEVERITY rung, never the TELLING register or "worn in the telling"; "grave" is the severity rung, and "a grave rumor" the rumor magnitude; the posture reads are the court reads `courtPostureOf` / `courtRiskAppetiteOf`, while `riskToleranceOf` is the roads NPC read; a hearing's forced outcome is a VERDICT, never a "decree" (the landed Decree Registry's word); a coherence chain (C0..C22) is the fold's §6, never FP-40's "chain n".
+7. THE WORDS NOT TO CONFUSE (the fold's §5). A bare "telling" is SP-6b's SEVERITY rung, never the TELLING register or "worn in the telling"; "grave" is the severity rung, and "a grave rumor" the rumor magnitude; the posture reads are the court reads `courtPostureOf` / `courtRiskAppetiteOf`, while `riskToleranceOf` is the roads NPC read; a hearing's forced outcome is a VERDICT, never a "decree" (the landed Decree Registry's word); a coherence chain (C0..C23) is the fold's §6, never FP-40's "chain n".
 
-**THE THESIS** (the owner's, ratified by 21 code surveys): foreign policy = four SUBSTANCES (war, trade, faith, populations) perceived through
+**THE THESIS** (the owner's, ratified by 21 code surveys): foreign policy = five SUBSTANCES (war, trade, faith, populations, culture) perceived through
 one MEDIUM (information), negotiated in one GRAMMAR (diplomacy), driven by the
-INTERIOR (books + memory). War is complete; this program brings the other six
+INTERIOR (books + memory). War is complete; this program brings the other seven
 layers to war's grade — robust AND dramatic — after which foreign policy EMERGES
 and no seventh module is ever built. Implementation runs as chair-dispatched lane seats under docs/OPERATING_STANDARD.md, sequenced behind the sim-proof path. Every wave dark, every band authored,
 every claim receipted.
 
+**THE FIFTH SUBSTANCE** (⭐ THE OWNER'S row, recommended and vetoable; the fold's §7 OD-FC-139; `DESIGN_FP_ARCH_CU.md` §20 row 1, CU-R2, CU-R14): on the owner's words of 2026-10-31 (word 4, verbatim: "Basically culture is every bit as important in all of these aspects"), the thesis above reads "five SUBSTANCES (war, trade, faith, populations, culture)" and "the other seven layers"; seven coupling layers become eight (requirement 21 (a)), the closed pair set grows by culture's seven rows (requirement 21 (b), THE CULTURE LAYER below), and "no seventh module is ever built" stands, because culture is a STATE of a settlement (`worldState.cultureStates`, CU §2.1) carried by one kernel in worldPulse, not a module. The owner has not ruled; until they do the amendment stands as written and falls by one clause.
+
 **THE BINDING.** The six program volumes (DESIGN_FP_{TRADE,FAITH,
 POPULATIONS,INFORMATION,GRAMMAR,INTERIOR}.md) and the coupling volume
-(DESIGN_FP_COUPLINGS.md) are BOUND BY THIS DOCUMENT, and so is every FP volume, present and future (requirement 15, THE BINDING-SCOPE LAW) — every DESIGN_FP_ARCH_* volume, the later programs (ES, WY, HB, WC, EP, EC, MF, LG, PG, CN, POP, INT, and W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their successors; a volume that declares itself outside says so in its header with the reason. Where they conflict with it,
+(DESIGN_FP_COUPLINGS.md) are BOUND BY THIS DOCUMENT, and so is every FP volume, present and future (requirement 15, THE BINDING-SCOPE LAW) — every DESIGN_FP_ARCH_* volume (THE CULTURE, `DESIGN_FP_ARCH_CU.md`, the fifth substance, among them), the later programs (ES, WY, HB, WC, EP, EC, MF, LG, PG, CN, POP, INT, and W-SEAT, W-OPS, W-COIN, W-FAITH where they touch an FP seam) and their successors; a volume that declares itself outside says so in its header with the reason. Where they conflict with it,
 this document wins, and under requirement 22 (b) "a bug to report" is not a disposition: an erratum lands as a dated bracket in the same commit as the ruling that makes it true.
 
 ---
@@ -196,9 +198,9 @@ Requirements 1–12 are the ratified core; 13 and 14 were added under the owner'
     `causedBy`, unchanged since August; CW-3's chain-depth envelope reds by
     design.)
 21. **THE COUPLING-IDENTITY AND VOCABULARY LAW.** (a) Each program's modules
-    belong to ONE of the seven coupling layers, declared once (ES→INFO, EC→TRADE,
+    belong to ONE of the eight coupling layers, declared once (ES→INFO, EC→TRADE,
     WC→WAR, HB→INFO, WY→the carriers of TRADE/POP/WAR, EP→all as a clock, INT
-    stays INTERIOR); (b) pair ids are closed at CPL-1..21 with a declared
+    stays INTERIOR; CU→CULTURE, the eighth layer, ⭐ OD-FC-139); (b) pair ids are closed at CPL-1..21 with a declared
     extension family for within-layer and new-program rows (the registry's
     CPL-22/23 are re-anchored, the fold §3.3); (c) a new volume prefix is chartered in
     the same commit as its first registry row; (d) a closed ladder is minted
@@ -206,6 +208,8 @@ Requirements 1–12 are the ratified core; 13 and 14 were added under the owner'
     one meaning per surface, the J-WR-10-B borrow census generalised.
 
     **THE CARRIERS** (the fold's §1 under 21 (a), whose text is of record). Five programs declare themselves CARRIERS across named layers: PL (the polity, `DESIGN_FP_ARCH_PL.md`) a CARRIER across GRAMMAR · WAR · INTERIOR · TRADE · INFO (PL §9's own line); MN (the menace, `DESIGN_FP_ARCH_MN.md`) a CARRIER across WAR · POPULATIONS · TRADE · INFO (MN §9's own line); RN (the renown, `DESIGN_FP_ARCH_RN.md`) a CARRIER across INFO · INTERIOR · FAITH · GRAMMAR (the rumor road and the operative's fame; a court's regard derived from its people of power and the person lens out of the seat books; the priest's lean in the faith contest; the envoy's lean at `reserveFor`, ⛔ RN-S4, slot C1); CH (the champions, `DESIGN_FP_ARCH_CH.md`) a CARRIER across all seven — FAITH · WAR · GRAMMAR · INFO · POPULATIONS · TRADE · INTERIOR — one domain seam each (CH §6: faith · war · diplomacy · information · health · trade · order; `wildland` rides MN's siege verdict, WAR); PT (the party, `DESIGN_FP_ARCH_PT.md`) a CARRIER across INFO · INTERIOR · GRAMMAR (the deed's telling and the truth that chases it; the gate, the bans and the summons-to-bounty ladder at a court; requests, offers and pledges between the party and courts). RN, CH and PT carry no coupling line of their own: their three declarations are the fold's reading of each volume's seam tables (RN §5.4/§10, CH §6, PT §7.3/§14) — PLAUSIBLE until each volume states its own line. Their prefixes `RN`, `CH`, `PT` are chartered in the same commit as each one's first coupling-registry row (21c); the prefix `PT` names the volume, never the party's actor ref.
+
+    **THE CULTURE LAYER** (⭐ THE OWNER'S, OD-FC-139, recommended and vetoable; `DESIGN_FP_ARCH_CU.md` §14 (21), CU-R14). Culture is the fifth substance and so the EIGHTH coupling layer: CU's modules belong to the CULTURE layer, declared once; it is no carrier; the closed pair set grows by culture's seven rows under 21 (b)'s declared extension family, numbered by the registry's re-anchoring rule (the fold §3.3.2), one row each: CULTURE×WAR (the muster's make-up line; the occupation's carried share and imposition; the peace reason at the chooser), CULTURE×TRADE (the carried share over `trade_partner` edges; EC-6's stance gate, ROUTE), CULTURE×FAITH (the shared carriers; creeds ride cultures; the borrowed forms), CULTURE×POPULATIONS (the column's `composition`, the blend at the release, the clearing, the grievance row), CULTURE×INFO (believed composition on read), CULTURE×GRAMMAR (the term rows, the lens's gates, the appraisal and the valuation), CULTURE×INTERIOR (the court's declaration, the commons' acceptance, the posture's patience, the DM verb); the prefix `CU` is chartered with its first registry row (21 (c)), and its vocabulary rows are the fold §5's CU block (21 (d)).
 
 22. **THE ENGINE-STATE LIFECYCLE AND ERRATUM LAW.** (a) ARCH_SP's L4
     lifecycle-paths clause (create / read / persist / regenerate / undo /
@@ -342,7 +346,7 @@ Requirements 1–12 are the ratified core; 13 and 14 were added under the owner'
 
     **THE KINDS NOT MINTED.** THE MOVEMENT GRAMMAR and THE WAY OF WAR mint no kind (a verb is never a hearing).
 
-    SP-9's charter lines for the interior and rescue kinds are `DESIGN_FP_ARCH_SP.md`'s two dated brackets; the registry holds NINETY-TWO kind names in EIGHTY-SEVEN live rows when each program kind takes its own row (EIGHTY-ONE as the volumes group them; the fold §3.4 THE COUNT).
+    SP-9's charter lines for the interior and rescue kinds are `DESIGN_FP_ARCH_SP.md`'s two dated brackets; the registry holds NINETY-THREE kind names in EIGHTY-EIGHT live rows when each program kind takes its own row (EIGHTY-TWO as the volumes group them; the fold §3.4 THE COUNT).
 
 ## §2 THE SHARED SPINE INFRASTRUCTURE (built once, consumed by all six —
 ## width through reuse is how constant density stays affordable)
@@ -777,6 +781,11 @@ in parallel, could not cite SP flag names).
   legitimacy gains its certification row; memory closes its documented decay
   seam; forgiveness gains the DELIBERATE arm (a seat may bury a grudge at a
   price — reconciliation as policy, not only clock decay).
+- **FP-CULTURE** (`DESIGN_FP_ARCH_CU.md`, the fifth substance, ⭐ OD-FC-139): the crux
+  rulings are the volume's own, CU-R1..R21 and OD-CU-1..16 (CU §19), bound here as
+  every volume's are; the one owner-signed shape `worldState.cultureStates` (⭐ OD-CU-1);
+  DARK behind `cultureEnabled` · `cultureCrownEnabled` · `cultureTermsEnabled`, lit in no
+  preset; nothing scheduled; the volume elaborates, never re-opens.
 
 ## §4 THE COUPLING DOCTRINE (DESIGN_FP_COUPLINGS.md walks every pair)
 21 unordered pairs / 42 ordered directions across seven layers (the coupling
