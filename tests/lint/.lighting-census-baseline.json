@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "bcb40b08b668e0d2a3d52fbaae64efc01fb3762d",
-  "measuredBy": "chair (integration, G3 merge)",
+  "measuredAtSha": "0264742d9ff8dee7481a0b06b9843caa6a056948",
+  "measuredBy": "chair (integration, W2-VEIL-B merge)",
   "date": "2026-10-31",
-  "note": "test-title census re-measured at the G3 merge (tension variety, GS-1): the lane added its pool and draw tests; no lighting marker moved",
+  "note": "test-title census re-measured at the veil-b merge (X-21..X-24: curate model, snapshot reader, Export/Manage, Defense gate); no lighting marker moved",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 27081,
-  "suiteTitles": 7141
+  "titles": 27092,
+  "suiteTitles": 7144
 }
