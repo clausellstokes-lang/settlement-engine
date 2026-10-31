@@ -160,7 +160,25 @@ export const WRITER_DARK_REGISTER = Object.freeze([
       + 'theme relationship-tension cards; the chair\'s ruling X-2 (2026-10-30, under the owner\'s delegation) moved '
       + 'a tie\'s tension back to the Relationships tab beside its tie and dropped that card category, so what a '
       + 'player is shown is the tension and type name the key produced, never the key.',
-    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:242',
+    charter: 'ODQ §934.101 (the chair, 2026-10-30, ruling X-2 in docs/UX_CONSOLIDATION_2026-10-30.md), consumer CONFIRMED at generateSettlementPipeline.js:245',
+  }),
+  Object.freeze({
+    identity: 'proseVariant on relationships',
+    key: 'proseVariant',
+    shape: 'relationships',
+    writer: 'src/generators/npcGenerator.js',
+    reason: 'engine-internal',
+    consumer: Object.freeze({
+      file: 'src/generators/generateSettlementPipeline.js',
+      symbol: 'refreshRelationshipProjections, which re-renders a tie\'s description and tension at its stored variant',
+    }),
+    why: 'A stored draw index for deterministic re-render; no customer surface reads it by design. GS-1 draws each '
+      + 'tie\'s description and tension WITHOUT REPLACEMENT across the whole town, so the line a tie carries depends '
+      + 'on the rest of the town and can no longer be re-derived from its own name pair. The generator stores the '
+      + 'index it drew, and the rename path re-renders both sentences at that index for the new names; that read sits '
+      + 'inside src/generators, behind the closure STOP. What a player is shown is the description and tension the '
+      + 'index selected, never the index.',
+    charter: 'ODQ §934.101 (the chair, 2026-10-31, ruling GS-1 on G-SEAMS S1 and the G3 item-1 ruling), consumer CONFIRMED at generateSettlementPipeline.js:247',
   }),
   Object.freeze({
     identity: 'isolationSupport on settlement',
