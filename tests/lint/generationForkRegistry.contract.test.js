@@ -8,7 +8,7 @@
  *       `getStepMeta()` and `getStepOrder()` at run time, never transcribed, so a step added
  *       or a key renamed reds here rather than drifting past a hand-kept list.
  *   A3s EVERY DERIVED FIELD IS DERIVED, NOT AUTHORED — `class` from its two counts, and each
- *       landing class from its OWN triple, for all 75 rows and for both comparands. `class` is
+ *       landing class from its OWN triple, for all 72 rows (75 before GS-2) and for both comparands. `class` is
  *       redundant with the counts BY DESIGN: the redundancy is what makes a hand-edited word
  *       impossible to hide.
  *   A8s TIER 2's STATIC HALF — every row's holding `(step, key)` exists in Tier 1 with
@@ -99,7 +99,9 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(getStepOrder().length, 'the live step order').toBe(22);
 
     expect(GENERATION_TIER1.length, 'the register declares one row per live pair').toBe(pairs.length);
-    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(75);
+    // GS-2 one faction set (2026-10-31, ODQ §934.101): 75 -> 72; generatePopulation|factions, generatePopulation|conflicts
+    // and corruptionPass|factions left with the keys (the groups and conflicts are derived at assembly).
+    expect(GENERATION_TIER1.length, 'the measured denominator at this base').toBe(72);
 
     const declared = GENERATION_TIER1.map((row) => `${row.step}|${row.key}`);
     const live = pairs.map((pair) => `${pair.step}|${pair.key}`);
@@ -112,8 +114,9 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
       .filter((pair, index) => GENERATION_TIER1[index].via !== pair.via)
       .map((pair) => `${pair.step}|${pair.key}: registry ${pair.via}`);
     expect(viaMismatch, 'a row\'s `via` disagrees with the registry').toEqual([]);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(57);
-    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(18);
+    // GS-2 one faction set (2026-10-31, ODQ §934.101): provides 57 -> 55, mutates 18 -> 17 (the three retired rows).
+    expect(GENERATION_TIER1.filter((row) => row.via === 'provides').length, 'provides entries').toBe(55);
+    expect(GENERATION_TIER1.filter((row) => row.via === 'mutates').length, 'mutates-only entries').toBe(17);
 
     // The accessors: a miss is `null` and `[]`, never `undefined` and never `null`.
     expect(tier1For('resolveConfig', 'tier'), 'tier1For hit').toBe(GENERATION_TIER1[0]);
@@ -122,7 +125,7 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
     expect(tier2For('npc', 'no.such.key'), 'tier2For miss is [], never null').toEqual([]);
   });
 
-  it('A3s — every derived field is derived: class from its counts, each landing class from its own triple, both comparands, all 75 rows', () => {
+  it('A3s — every derived field is derived: class from its counts, each landing class from its own triple, both comparands, all 72 rows', () => {
     expect(GENERATION_TIER1.length, 'anti-vacuity: the register is populated').toBeGreaterThan(70);
     expect(GENERATION_CENSUS_ROWS, 'the declared denominator').toBe(63);
 
@@ -162,16 +165,19 @@ describe('EM-P2 — the generation fork register: totality, derivation, and Tier
 
     // 2026-10-01, the urban band (ODQ §934.86): drawn 28 -> 29, pure 46 -> 45. The register's re-measure (fc0e2205f)
     // flipped assembleInstitutions|generationRepairs pure -> drawn (2 of 63 rows), and this tally follows the register.
-    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 29, label: 1, pure: 45 });
+    // GS-2 one faction set (2026-10-31, ODQ §934.101): drawn 29 -> 26; the three retired rows were all drawn.
+    expect(tallyOf(GENERATION_TIER1, 'class'), 'the entropy tally').toEqual({ drawn: 26, label: 1, pure: 45 });
     expect(GENERATION_TIER1.filter((row) => row.class === 'label').map((row) => `${row.step}|${row.key}`),
       'the single label row: a key that moves under a zero-draw step').toEqual(['generatePower|powerIntent']);
+    // GS-2 (2026-10-31, ODQ §934.101): same 35 -> 34 and transformed 15 -> 13 in BOTH comparands below, the three
+    // retired rows (generatePopulation|conflicts same; generatePopulation|factions and corruptionPass|factions transformed).
     expect(tallyOf(GENERATION_TIER1, 'onRecordClass'), 'the FINAL comparand tally')
-      .toEqual({ absent: 19, same: 35, transformed: 15, varies: 6 });
+      .toEqual({ absent: 19, same: 34, transformed: 13, varies: 6 });
     // 2026-10-01, the urban band (ODQ §934.86): absent 27 -> 26, same 18 -> 19. The same re-measure moved two rows'
     // post-step comparand (generationRepairs absent -> varies; isolationSupport varies -> same), and both now agree
     // with their final comparand, so the disagreeing rows below go 18 -> 16 (generationForkCensus records the same).
     expect(tallyOf(GENERATION_TIER1, 'producedOnRecordClass'), 'the POST-STEP comparand tally')
-      .toEqual({ absent: 26, same: 19, transformed: 15, varies: 15 });
+      .toEqual({ absent: 26, same: 18, transformed: 13, varies: 15 });
 
     // §6.2b: the register carries both comparands BECAUSE sixteen rows disagree, and every
     // one of them is a key a LATER step rewrites. The set is derived from the register itself.

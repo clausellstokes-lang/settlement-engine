@@ -527,6 +527,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // 624/630 (the commercial-profile, food and shadow lines moved under their facts, the campaign
 // blocks to the foot); PowerTab.jsx 488 -> 491, 526 -> 529 (the strata moved above the desk
 // passages). Path, category and snippet are byte-identical on every row; no ceiling moves.
+// GS-2 ONE FACTION SET (2026-10-31, ODQ §934.101, lane G2) — NO DEBT MOTION, A PURE LINE MOVE. PowerStrata.jsx
+// lost TheFactions' `factionGroups` read and FactionRow's sub-row now counts members by affiliation, so its four
+// rows re-address 271 -> 270 (both categories), 273 -> 272 and 314 -> 316. Totals stay 207 / 140 / 50.
 const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 140,

@@ -1,72 +1,42 @@
 /**
- * power/factionGrouping.js — group NPCs into factions by connected components
- * of positive relationships, naming each by its dominant member category.
+ * power/factionGrouping.js — the named roster grouped by POWER faction.
+ *
+ * ⭐ ONE FACTION SET (GS-2, chair ruling on G-SEAMS S2, ODQ §934.101). The power factions ARE
+ * the factions. This list used to be the connected components of positive ties, each wearing a
+ * name drawn from FACTION_DESCRIPTORS ("The Merchant Bloc") and then BOUND to a power faction by
+ * category, attraction or a power-weighted scatter. Measured over gen1000v2: 0 of 2,386 group
+ * names were power names, 47.9% of groups were one person, and the binding agreed with the
+ * members' own affiliation 32.4% of the time. It was a by-product of tie connectivity wearing
+ * invented names, and it printed a second politics beside the one the simulation runs.
+ *
+ * Now each entry is a PROJECTION of one power faction: its name is the power faction's own
+ * name (the id every faction link, rename and mention keys on), its members are the NPCs whose
+ * `factionAffiliation` names it, and its category is the power faction's. A power faction no
+ * named NPC belongs to has no entry. Pure and draw-free: no name is minted, so nothing here
+ * can spend a draw or collide.
+ *
+ * The shape `{ name, members, dominantCategory }` is the one every reader of this list already
+ * takes (the simulation's member bookkeeping, the rename cascades, the gallery veil, the
+ * neighbour engagement pairing), so those readers keep working unchanged.
  */
-import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
-import { pick } from '../helpers.js';
 
-// pickDominantCategory (local) — pick the most common member category among `members`
-const pickDominantCategory = (members) => {
-  var topEntry;
-  const categoryCounts = {};
-  members.forEach((member) => {
-    categoryCounts[member.category] = (categoryCounts[member.category] || 0) + 1;
-  });
-  return (
-    ((topEntry = Object.entries(categoryCounts).sort((a, b) => b[1] - a[1])[0]) == null ? void 0 : topEntry[0]) ||
-    'other'
-  );
-};
-
-// generateFactions — group NPCs into factions by connected components of
-// positive relationships (ally / political / patron_client / respect).
-export const generateFactions = (npcs, relationships) => {
+/**
+ * @param {Array<{ id?: unknown, factionAffiliation?: string }>|null|undefined} npcs
+ * @param {Array<{ faction?: string, name?: string, category?: string }>|null|undefined} powerFactions
+ * @returns {Array<{ name: string, members: Array<object>, dominantCategory: string }>}
+ */
+export const generateFactions = (npcs, powerFactions) => {
   if (!(npcs != null && npcs.length)) return [];
-  // Undirected adjacency: npc id → set of positively-connected npc ids
-  const adjacency = new Map(npcs.map((npc) => [npc.id, new Set()]));
-  relationships.forEach((rel) => {
-    var set1, set2;
-    if (['ally', 'political', 'patron_client', 'respect'].includes(rel.type)) {
-      (set1 = adjacency.get(rel.npc1Id)) == null || set1.add(rel.npc2Id);
-      (set2 = adjacency.get(rel.npc2Id)) == null || set2.add(rel.npc1Id);
-    }
-  });
-  const visited = new Set(),
-    factions = [];
-  npcs.forEach((npc) => {
-    var neighbors;
-    if (visited.has(npc.id)) return;
-    const members = [],
-      queue = [npc.id];
-    while (queue.length) {
-      const currentId = queue.shift();
-      if (visited.has(currentId)) continue;
-      visited.add(currentId);
-      const memberNpc = npcs.find((n) => n.id === currentId);
-      if (memberNpc) members.push(memberNpc);
-      (neighbors = adjacency.get(currentId)) == null ||
-        neighbors.forEach((neighborId) => {
-          if (!visited.has(neighborId)) queue.push(neighborId);
-        });
-    }
-    if (members.length >= 1) {
-      const dominantCategory = pickDominantCategory(members),
-        descriptors = FACTION_DESCRIPTORS[dominantCategory] || FACTION_DESCRIPTORS.other;
-      (() => {
-        const usedNames = new Set(factions.map((f) => f.name));
-        let chosenName = pick(descriptors);
-        // Retry up to 5 times to avoid duplicate faction names
-        for (let attempt = 0; attempt < 5 && usedNames.has(chosenName); attempt++) {
-          chosenName = pick(descriptors);
-        }
-        // If still duplicate after retries, append a distinguishing suffix
-        if (usedNames.has(chosenName)) {
-          const suffixes = ['Inner Circle', 'Bloc', 'Alliance', 'Faction', 'Assembly'];
-          chosenName = chosenName + ' ' + pick(suffixes);
-        }
-        factions.push({ name: chosenName, members, dominantCategory });
-      })();
-    }
-  });
-  return factions.sort((a, b) => b.members.length - a.members.length);
+  const roster = Array.isArray(powerFactions) ? powerFactions : [];
+  const groups = [];
+  const seen = new Set();
+  for (const pf of roster) {
+    const name = pf?.faction || pf?.name;
+    if (!name || seen.has(name)) continue;
+    seen.add(name);
+    const members = npcs.filter((npc) => npc?.factionAffiliation === name);
+    if (!members.length) continue;
+    groups.push({ name, members, dominantCategory: pf.category || 'other' });
+  }
+  return groups;
 };

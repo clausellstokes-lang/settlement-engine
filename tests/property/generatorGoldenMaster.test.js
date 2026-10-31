@@ -18,6 +18,22 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-10-31 — ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2), THROUGH THE SIGNED DOOR (ODQ
+ *   §934.101; record docs/shift-records/2026-10-31-one-faction-set.json; the cloud chair signs under the owner's
+ *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).
+ *   525 OF 525 ROWS MOVED; the key set is identical (525 = 525). THE CAUSE, ONE: settlement.factions[] is a
+ *   projection of powerStructure.factions (same names, members by each NPC's own factionAffiliation, no minted
+ *   name), derived at assembleSettlement from the final roster; conflicts are the power-faction pairs a rival or
+ *   enemy tie crosses, with powerStructure.conflicts dual-written; the faction-linkage trace is retired; the
+ *   receipt explains each conflict. ⚠ STREAMS, DISCLOSED: generatePopulation loses its name picks, scatter and
+ *   conflict draws, all after its last kept draw (npcs and relationships unmoved); the conflict draws take a new
+ *   named assembly child stream 'faction-conflicts', so nothing generated after them moves. Measured on gen1000v2
+ *   regenerated at the lane tip: 0 of 4,835 group names off the power roster; 2,480 of 2,480 parties power
+ *   factions; towns with a conflict 618 -> 755. Moved in the same shift, one surface per commit:
+ *   dossier-prose-manifest (784 rows, every moved cell DS-GEN-2), espionage-dormancy-fence's constant (360 of
+ *   360, zero residue outside the GS-2 fields), and the unregistered fork-registry generatePopulation rows with
+ *   generationForkCensus's control hash.
+ *
  * 2026-10-30 — SERVICE CATEGORY FIDELITY (RS-1..RS-13), THROUGH THE SIGNED DOOR (ODQ §934.101; record
  *   docs/shift-records/2026-10-30-service-category-fidelity.json; the cloud chair signs under the owner's
  *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).

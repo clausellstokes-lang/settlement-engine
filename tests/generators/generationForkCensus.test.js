@@ -2,7 +2,7 @@
  * generationForkCensus.test.js — EM-P2's CENSUS BY EXECUTION.
  *
  * The register at src/domain/generation/generationForkRegistry.js declares what generation's
- * 75 `(step, key)` pairs DO. This file measures the same things by RUNNING the pipeline and
+ * 72 `(step, key)` pairs DO (75 until GS-2 retired three, 2026-10-31). This file measures the same things by RUNNING the pipeline and
  * holds the declaration equal to the measurement. On any difference the arm builds the fresh
  * literal as the exact source text of the declaration, PRINTS it, and FAILS — it writes no
  * file and takes no update flag (§6.7, STOP-10). A census that rewrites its own baseline
@@ -126,18 +126,23 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-30, service category fidelity (RS-1..RS-13, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-30-service-category-fidelity.json): 2a837ce5... -> e49d32f7..., this town's services
 // filed by the registered categories.
-const GOLDEN_CONTROL_HASH = 'e49d32f7c6f3cdcfaed25b8440fdfe854e7c2e260d5fb311579648f39da92a8a';
-/** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
+// 2026-10-31, one faction set (GS-2, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-31-one-faction-set.json): e49d32f7... -> 9f94ab28..., this town's factions the power
+// factions and its conflicts the crossing rivalries.
+const GOLDEN_CONTROL_HASH = '9f94ab2875a3785840e18ba58f520fe8256c6bd8df54bbfbd01eec64a447891a';
+/** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
   tradeRouteAccess: 'river', monsterThreat: 'civilized', _seed: 'em-p0-pinned-mode',
 };
 const POPULATION_STEP = 'generatePopulation';
-const CHOOSER_KEYS = ['npcs', 'relationships', 'factions', 'conflicts'];
+// GS-2 one faction set (2026-10-31, ODQ §934.101): four -> two; the groups and the conflicts are derived at assembly.
+const CHOOSER_KEYS = ['npcs', 'relationships'];
 // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307 draws on the pin row's unpinned population step (measured; the same
 // figure pipelinePinnedMode's A2 reads as the unpinned total on this row).
 // Then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310 (measured; pipelinePinnedMode's A2 reads the same 310).
-const POPULATION_UNPINNED_DRAWS = 310;
+// Then GS-2 one faction set (2026-10-31, ODQ §934.101): 310 -> 306 (measured; the name picks and the conflict draws left the step).
+const POPULATION_UNPINNED_DRAWS = 306;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -239,7 +244,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     ).toEqual([]);
   };
 
-  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 310 draws unpinned and 0 pinned', () => {
+  it('A1 — the instrument reaches the generator graph: mints split 4 direct / 31 via fork, no golden moves, 306 draws unpinned and 0 pinned', () => {
     // ── C0 — the mocks lose no export. A replacement that dropped a name would break
     // importers silently, and every figure below would be measured on a crippled module.
     expect(mintCensus.actualKeys.length, 'the prng mock factory never ran').toBeGreaterThan(0);
@@ -325,6 +330,8 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // 2026-10-02, the Voice Program wave 2 (ODQ §934.88): 36 -> 38, the measured 35 plus the assembly step's two new
     // named child streams ('pressure-sentence', 'arrival-scene'; ed3768dc1), with the same one mint of slack. Measured
     // on this row: total 37, direct 4, via fork 33, foreign 0.
+    // GS-2 one faction set (2026-10-31, ODQ §934.101): the assembly step's 'faction-conflicts' child stream is one more
+    // mint. Measured on this row: total 38, direct 4, via fork 34, foreign 0; the one mint of slack is spent, not widened.
     expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(38);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);

@@ -531,44 +531,10 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       economicState: settlement.economicState,
     }, config.culture || 'germanic', rollConfig, generationContext);
     const relationships = generateRelationships(npcs, config, settlement.institutions || []);
-    const factions = generateFactions(npcs, relationships);
-
-    // ── RE-LINK TO EXISTING POWER FACTIONS ───────────────────────────────────────────
-    // ⚠⚠ THIS IS A KNOWN DIVERGENCE FROM GENERATION, MEASURED AND SCHEDULED (§759 weakness 5,
-    // investigated in T7 · HYGIENE). `steps/generatePopulation.js` links each NPC faction
-    // group by a THREE-TIER policy — (1) direct category match, (2) attraction, (3) a
-    // power-weighted scatter that spends an rng draw and stamps `powerFactionFallback: true` —
-    // and emits a linkage trace counting direct/attraction/scatter. THIS PATH DOES TIER 1 AND
-    // STOPS. A group whose category has no matching power faction leaves here with NO
-    // `powerFaction*` fields at all, where generation would have given it one.
-    //
-    // CONSEQUENCE: rerolling the NPC section of a settlement whose groups linked by attraction
-    // or scatter produces a POORER roster than generating it did, and nothing reds — the
-    // shapes are valid either way. Unlike every other divergence between these two files, no
-    // comment marked it deliberate; this one does, and it does not claim to be.
-    //
-    // WHY IT IS NOT UNIFIED HERE: tier 3 CONSUMES AN RNG DRAW, and this path carries no seeded
-    // stream to spend it from. Extracting the three-tier linker and calling it from both is
-    // therefore a DECLARED SHIFT on the reroll path with its own stream-position question, not
-    // a refactor — it wants its own car with a measured before/after on rerolled rosters.
-    // Scheduled, not parked (§764.4(a)).
-    const existingPF = settlement.powerStructure?.factions || [];
-    const pfByCategory = existingPF.reduce((acc, pf) => {
-      const cat = pf.category || 'other';
-      if (!acc[cat] || pf.power > acc[cat].power) acc[cat] = pf;
-      return acc;
-    }, {});
-    factions.forEach(fg => {
-      const cat = fg.dominantCategory || 'other';
-      const matched = pfByCategory[cat];
-      if (matched) {
-        fg.powerFactionName = matched.faction;
-        fg.powerFactionPower = matched.power;
-        fg.powerFactionCat = matched.category;
-      }
-    });
-
-    const conflicts = generateConflicts(factions, relationships, config, settlement.institutions || []);
+    // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
+    // roster below, exactly as assembly derives them, because an NPC's power affiliation is
+    // decided by the enrichment tail. The tier-1-only re-link that used to sit here (the
+    // §759 weakness-5 divergence from generation) goes with the linker it diverged from.
 
     // domain-3: run the SAME NPC coherence-enrichment tail assembly runs, so a
     // rerolled roster carries factionAffiliation, the secrets overlay, and
@@ -598,17 +564,18 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       ? refreshRosterProse(merged, displacements, new Set(preserved.map(p => p.id)))
       : merged;
 
-    // Re-link the fresh faction rosters to the FINAL npcs (not the raw generateNPCs
-    // shape their members were built from) — the same one-source repair generateCoherence
-    // applies on the full-assembly path. [experience-faction-member-staleness]
-    // A preserved character inherits its slot's id, so this also swaps the displaced
-    // stranger out of every faction that had recruited them.
+    // The faction groups are built FROM the final npcs, so their members are the same records
+    // the roster carries (the one-source property relinkFactionMembers used to repair), and a
+    // displaced stranger can never sit in a group: a preserved character inherits its slot.
+    const finalRelationships = preserved.length
+      ? refreshRelationshipProjections(relationships, roster)
+      : relationships;
+    const factions = generateFactions(roster, settlement.powerStructure?.factions);
+    const conflicts = generateConflicts(factions, finalRelationships, config, settlement.institutions || []);
     return {
       npcs: roster,
-      relationships: preserved.length
-        ? refreshRelationshipProjections(relationships, roster)
-        : relationships,
-      factions: relinkFactionMembers(factions, roster),
+      relationships: finalRelationships,
+      factions,
       conflicts,
       _regenSeed: seed,
       // The preservation REPORT, out of band of the settlement parts. A keeper

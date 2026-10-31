@@ -1,8 +1,7 @@
 /**
- * power/conflicts.js — inter-faction conflicts from rivalries/enmities, plus
- * the per-conflict plot-hook builder.
+ * power/conflicts.js — the standing quarrels between power factions, grounded in
+ * the rival and enemy ties that cross them, plus the per-conflict plot-hook builder.
  */
-import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, pick, randInt } from '../helpers.js';
 import { createGenerationWorldLaw } from '../generationContext.js';
 
@@ -50,10 +49,52 @@ const buildConflictPlotHooks = (factionA, factionB, conflict, instFlags, stressF
   return hooks.slice(0, 3);
 };
 
-// generateConflicts — produce inter-faction conflicts from rivalries/enmities.
+/**
+ * The pairs of POWER factions a rival or enemy tie crosses, strongest first (GS-2, ODQ
+ * §934.101). `factions` is the power projection `factionGrouping.js` builds, so each NPC sits
+ * in at most one group and the group's name is a power faction's own. A tie whose two ends
+ * share a faction, or whose end belongs to none, grounds nothing. Ranked by tie count, then by
+ * the factions' order on the power roster, so the ranking is a pure function of the record.
+ * Pure: no draw.
+ * @param {Array<{ name: string, members?: Array<{ id?: unknown }> }>} factions
+ * @param {Array<{ type?: string, npc1Id?: unknown, npc2Id?: unknown }>} relationships
+ * @returns {Array<{ factionA: object, factionB: object, ties: number }>}
+ */
+const crossFactionRivalPairs = (factions, relationships) => {
+  const homeOf = new Map();
+  const rank = new Map();
+  factions.forEach((faction, index) => {
+    rank.set(faction, index);
+    (faction.members || []).forEach((member) => {
+      if (member?.id != null && !homeOf.has(member.id)) homeOf.set(member.id, faction);
+    });
+  });
+  const pairs = new Map();
+  for (const rel of relationships || []) {
+    if (!['rival', 'enemy'].includes(rel?.type)) continue;
+    const a = homeOf.get(rel.npc1Id), b = homeOf.get(rel.npc2Id);
+    if (!a || !b || a === b) continue;
+    const [first, second] = rank.get(a) < rank.get(b) ? [a, b] : [b, a];
+    const key = `${rank.get(first)}:${rank.get(second)}`;
+    const entry = pairs.get(key) || { factionA: first, factionB: second, ties: 0 };
+    entry.ties += 1;
+    pairs.set(key, entry);
+  }
+  return [...pairs.values()].sort((p, q) => q.ties - p.ties
+    || rank.get(p.factionA) - rank.get(q.factionA)
+    || rank.get(p.factionB) - rank.get(q.factionB));
+};
+
+// generateConflicts — the standing quarrels between POWER factions (GS-2, ODQ §934.101).
+// A conflict is two power factions a rival or enemy tie crosses; its intensity is the count of
+// those ties. A town where no such tie crosses two factions has no conflict row, honestly: the
+// old pairing put adjacent tie-components against each other with no rivalry at all four times
+// in ten. Draws (on the caller's stream): the count, then one issue pick per conflict.
 //   factions, relationships, config, institutions
 export const generateConflicts = (factions, relationships, config = {}, institutions = []) => {
-  if (factions.length < 2) return [];
+  if (!Array.isArray(factions) || factions.length < 2) return [];
+  const rivalPairs = crossFactionRivalPairs(factions, relationships);
+  if (!rivalPairs.length) return [];
   const worldLaw = createGenerationWorldLaw(config, {
     tradeRoute: config.tradeRouteAccess,
     terrainType: config.terrainType,
@@ -61,7 +102,7 @@ export const generateConflicts = (factions, relationships, config = {}, institut
   const instFlags = getInstFlags(config, institutions),
     stressFlags = getStressFlags(config, institutions),
     conflicts = [],
-    conflictCount = Math.min(randInt(1, 3), Math.floor(factions.length / 2)),
+    conflictCount = Math.min(randInt(1, 3), rivalPairs.length),
     issueTemplates = [
       {
         issue: 'Control of the market licensing process',
@@ -209,15 +250,8 @@ export const generateConflicts = (factions, relationships, config = {}, institut
       stakes: 'Survival',
       flag: null,
     });
-  for (let i = 0; i < conflictCount && i < factions.length - 1; i++) {
-    const factionA = factions[i],
-      factionB = factions[i + 1],
-      rivalries = relationships.filter((rel) => {
-        const inA = factionA.members.some((member) => member.id === rel.npc1Id || member.id === rel.npc2Id),
-          inB = factionB.members.some((member) => member.id === rel.npc1Id || member.id === rel.npc2Id);
-        return inA && inB && ['rival', 'enemy'].includes(rel.type);
-      });
-    if (rivalries.length === 0 && _rng() < 0.4) continue;
+  for (let i = 0; i < conflictCount; i++) {
+    const { factionA, factionB, ties } = rivalPairs[i];
     const applicableTemplates = issueTemplates.filter((template) => {
       if (template.flag && !stressFlags[template.flag]) return false;
       if (template.requires === 'magic' && !worldLaw.magicFunctions()) {
@@ -235,7 +269,7 @@ export const generateConflicts = (factions, relationships, config = {}, institut
       );
     }),
       chosen = pick(applicableTemplates.length ? applicableTemplates : issueTemplates),
-      intensity = rivalries.length > 1 ? 'high' : rivalries.length === 1 ? 'moderate' : 'low';
+      intensity = ties > 1 ? 'high' : 'moderate';
     conflicts.push({
       parties: [factionA.name, factionB.name],
       issue: chosen.issue,

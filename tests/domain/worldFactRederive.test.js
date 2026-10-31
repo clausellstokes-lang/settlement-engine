@@ -367,10 +367,13 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // f27114ca.. -> 3cc2b272.. (b16b40bb, service category fidelity RS-1..RS-13, 460 of 525 rows) and the prose
     // manifest 7990bbfb.. -> 7035dd43.. (2295930e, the same shift, 1,048 rows) -> 39f96324.. (8700be2c, T1-13's
     // no-market pool, 406 rows). No lane moved either file outside its door; the stride below still re-derives.
+    // Then GS-2, one faction set (ODQ §934.101; docs/shift-records/2026-10-31-one-faction-set.json), lane G2: the
+    // generator master 3cc2b272.. -> 590cb9ab.. (the GS-2 golden re-record, 525 of 525 rows) and the prose manifest
+    // 39f96324.. -> aafa41e4.. (the GS-2 manifest re-record, 784 rows, every moved cell DS-GEN-2).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('3cc2b2722c433126acdf7caf33fb5d096cc1c3dad67bea0d1f944b3a61274ca4');
+      .toBe('590cb9ab3ad7621435fcc5102b375b92f2939639b2b6780a5c95148a17522e3b');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('39f96324f7ba68245bef6b98ef80e61878e9ef35ee713c229a2fbc17102603ec');
+      .toBe('aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

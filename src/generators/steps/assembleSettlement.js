@@ -10,6 +10,7 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
+import { generateFactions, generateConflicts } from '../powerGenerator.js';
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
@@ -86,7 +87,7 @@ registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
-  reads: ['availableServices', 'conflicts', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'factions', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
   // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
   readsVersion: { economicState: 'reconciled', stress: 'reconciled', isolationSupport: 'reconciled' },
@@ -106,7 +107,7 @@ registerStep('assembleSettlement', {
     tier, population, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
     economicState, spatialLayout, availableServices, powerStructure,
-    settlementReason, npcs, relationships, factions, conflicts,
+    settlementReason, npcs, relationships,
     resourceAnalysis, economicViability, history, stress, structural,
     isolationSupport,
     culture, culturalIdentity,
@@ -138,16 +139,19 @@ registerStep('assembleSettlement', {
     economicState,
     spatialLayout,
     availableServices,
-    // Seam fix: conflicts are generated top-level (below) but several readers
-    // — aiLayer, dailyLifeLogic, and the generate-narrative edge function the
-    // owner deploys separately — expect powerStructure.conflicts. Dual-write
-    // so both addresses are live.
-    powerStructure: powerStructure ? { ...powerStructure, conflicts: powerStructure.conflicts ?? conflicts ?? [] } : powerStructure,
+    // Seam fix: conflicts are generated top-level but several readers — aiLayer,
+    // dailyLifeLogic, and the generate-narrative edge function the owner deploys
+    // separately — expect powerStructure.conflicts. Dual-written below, where the
+    // conflicts are derived (GS-2), so both addresses are live.
+    powerStructure: powerStructure ? { ...powerStructure } : powerStructure,
     settlementReason,
     npcs,
     relationships,
-    factions,
-    conflicts,
+    // GS-2: derived from the FINAL roster below, after the coherence tail and the structural
+    // seats have settled every NPC's power affiliation. Empty until then, which is what every
+    // reader in between (the coherence tail's member re-link) already tolerates.
+    factions: [],
+    conflicts: [],
     resourceAnalysis,
     economicViability,
     history,
@@ -304,6 +308,24 @@ registerStep('assembleSettlement', {
       ctx.generationContext,
     );
     Object.assign(settlement, withStructural);
+  }
+
+  // ── GS-2 ONE FACTION SET (chair ruling on G-SEAMS S2, ODQ §934.101). The power factions are
+  // the factions. `factions` groups the FINAL roster by each NPC's power affiliation and mints
+  // no name; the conflicts are the power-faction pairs a rival or enemy tie crosses. Both read
+  // the roster only now, because affiliation is decided by the coherence tail and the seats
+  // above. The conflict draws (the count and the issue picks) take their own named child
+  // stream, so they move nothing generated after them, and a town with no crossing tie has no
+  // conflict row. Under a held roster both re-derive from the held NPCs: a pure projection and
+  // a seed-stable stream.
+  settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+  settlement.conflicts = inAssemblySubstream(
+    rng,
+    'faction-conflicts',
+    () => generateConflicts(settlement.factions, settlement.relationships || [], effectiveConfig, settlement.institutions || []),
+  );
+  if (settlement.powerStructure) {
+    settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
   }
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
