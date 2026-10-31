@@ -161,6 +161,26 @@ function buildFactionDesc(facA, facB, settA, settB, relType, rng) {
 }
 
 /**
+ * The factions a settlement engages with (GS-2, ODQ §934.101): its POWER factions, the set the
+ * simulation runs and every other surface names, strongest first. A shape with no power roster
+ * (the generator's own neighbour summary, a pre-pipeline save) falls back to its top-level
+ * `factions`, which since GS-2 is itself a projection of the power set. A legacy save's minted
+ * group names therefore never reach a new engagement when its power roster is present.
+ * @param {any} settlement
+ * @returns {Array<{ name: string, dominantCategory: string }>}
+ */
+function engagingFactions(settlement) {
+  const roster = settlement?.powerStructure?.factions;
+  if (Array.isArray(roster) && roster.length) {
+    return [...roster]
+      .sort((a, b) => (b?.power || 0) - (a?.power || 0))
+      .map((f) => ({ name: f?.faction || f?.name, dominantCategory: f?.category || 'other' }))
+      .filter((f) => f.name);
+  }
+  return Array.isArray(settlement?.factions) ? settlement.factions : [];
+}
+
+/**
  * Stable identity for a settlement, used to seed conflict generation.
  * Prefers the generation seed (survives reruns of the same seed), then the
  * persisted save/settlement id, then the name. Never the object reference —
@@ -238,8 +258,8 @@ export function generateCrossSettlementConflicts(settlementA, settlementB, relTy
   // Only for relationship types where factions clash meaningfully
   const doFaction = ['rival','cold_war','hostile','allied','patron','vassal','criminal_network'].includes(relType);
   if (doFaction) {
-    const factionsA = settlementA.factions || [];
-    const factionsB = settlementB.factions || [];
+    const factionsA = engagingFactions(settlementA);
+    const factionsB = engagingFactions(settlementB);
 
     // Pair by matching dominant category, or just the largest factions
     let bestA = null, bestB = null;

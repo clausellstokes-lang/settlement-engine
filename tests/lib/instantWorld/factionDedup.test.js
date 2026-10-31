@@ -83,6 +83,20 @@ describe('dedupeWorldFactionNames — unit', () => {
     expect(new Set(names).size, `no dup after intra-settlement collision: ${names}`).toBe(names.length);
   });
 
+  it('never renames a group named for one of its own POWER factions (GS-2, ODQ §934.101)', () => {
+    // The power factions are the factions: "Merchant Guilds" in two towns is two guilds, each
+    // its own town's label, and renaming one would mint the second vocabulary GS-2 removed.
+    const town = (id, slot) => ({ id, _slot: slot, settlement: {
+      powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy' }] },
+      factions: [{ name: 'Merchant Guilds', dominantCategory: 'economy' }],
+      conflicts: [{ parties: ['Merchant Guilds', 'Military/Guard'], desc: 'Merchant Guilds and Military/Guard are at odds.' }],
+    } });
+    const members = [town('a', 0), town('b', 1)];
+    expect(dedupeWorldFactionNames(members)).toEqual([]);
+    expect(allFacNames(members)).toEqual(['Merchant Guilds', 'Merchant Guilds']);
+    expect(members[1].settlement.conflicts[0].parties).toEqual(['Merchant Guilds', 'Military/Guard']);
+  });
+
   it('is a no-op when there are no collisions', () => {
     const members = [
       { id: 'a', _slot: 0, settlement: { factions: [{ name: 'The Merchant Bloc', category: 'economy' }] } },
@@ -99,11 +113,19 @@ describe('composeInstantWorld — no cross-settlement faction collisions + deter
   // the default 20s testTimeout on a loaded/parallel runner — a wall-clock false positive,
   // not a correctness fault (the generatorGoldenMaster block uses the same allowance for
   // the same reason). The dedup post-pass itself is O(collisions) and adds negligible time.
-  it('a composed realm has zero duplicate faction names across its members', () => {
+  // GS-2 (ODQ §934.101) REWROTE THIS PIN. It held "zero duplicate faction names across the
+  // realm", which was true of the minted names and is false by design of the power labels:
+  // every town may hold its own "Merchant Guilds". What a composed realm must hold now is that
+  // each member names its factions by its OWN power factions, untouched by the world pass.
+  it('a composed realm names every member faction by that member\'s own power factions', () => {
     const { settlements } = compose('realm-dedup-1');
     const names = allFacNames(settlements);
     expect(names.length, 'the realm has factions to check').toBeGreaterThan(1);
-    expect(new Set(names).size, `duplicates: ${names.filter((n, i) => names.indexOf(n) !== i)}`).toBe(names.length);
+    const strays = settlements.flatMap((m) => {
+      const power = new Set((m.settlement?.powerStructure?.factions || []).map((f) => f.faction));
+      return facNames(m).filter((n) => !power.has(n)).map((n) => `${m.id}: ${n}`);
+    });
+    expect(strays).toEqual([]);
   }, 120_000);
 
   it('same seed → identical member faction names (determinism preserved)', () => {

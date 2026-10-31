@@ -297,6 +297,8 @@ describe('faction rename — the declared surface set', () => {
         governingName: OLD,
         government: OLD,
         recentConflict: `The ${OLD} broke the grain cartel.`,
+        // GS-2 (ODQ §934.101): the conflict mirror, a SEPARATE record as on a reloaded save.
+        conflicts: [{ parties: [OLD, 'Militia'], desc: `${OLD} and Militia are in high conflict.`, plotHooks: [`A clerk of the ${OLD} sells the Militia a ledger.`] }],
         factionRelationships: [{
           pair: [OLD, 'Militia'],
           narrative: `${OLD} commands, Militia executes.`,
@@ -312,6 +314,9 @@ describe('faction rename — the declared surface set', () => {
       }],
       institutions: [{ name: 'Customs House', factionSource: OLD }],
       factions: [{ name: OLD, powerFactionName: OLD, members: [npcRecord()] }],
+      // GS-2 (ODQ §934.101): a conflict is fought between POWER factions, so its party keys,
+      // its sentence and its hooks carry the faction's name at the top-level home too.
+      conflicts: [{ parties: [OLD, 'Militia'], desc: `${OLD} and Militia are in high conflict.`, plotHooks: [`A clerk of the ${OLD} sells the Militia a ledger.`] }],
       history: {
         founding: { story: `The ${OLD} laid the first stone.` },
         currentTensions: [{ type: 'guild_conflict', factions: [OLD, 'Militia'] }],

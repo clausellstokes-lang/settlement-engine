@@ -205,8 +205,14 @@ export function dedupeWorldFactionNames(members) {
     // would collapse both to one string. The index in the seed guarantees two same-named
     // factions get DIFFERENT new names; pickUniqueName's `used` probe keeps them world-unique.
     const renameMap = new Map();
+    // GS-2 (ODQ §934.101): a group named for one of the settlement's own POWER factions is that
+    // faction, and a power faction's name is a fixed label every town may share ("Merchant
+    // Guilds"). Renaming it here would mint the second vocabulary GS-2 removed, so it is never
+    // renamed and never claims a world-wide slot. Only a legacy save's minted name dedupes.
+    const powerNames = new Set((s.powerStructure?.factions || []).map((pf) => pf?.faction || pf?.name).filter(Boolean));
     s.factions = s.factions.map((f, i) => {
       if (!f || typeof f.name !== 'string' || !f.name) return f;
+      if (powerNames.has(f.name)) return f;
       if (!used.has(f.name)) { used.add(f.name); return f; }
       const category = f.category || f.dominantCategory || 'other';
       const newName = pickUniqueName(category, used, `${m.id}:${m._slot}:${i}:${f.name}:${category}`);
