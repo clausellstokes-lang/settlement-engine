@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "be17ca91a5bd253a335144418b358e09e2a7381a",
-  "measuredBy": "chair (integration, W2-LINKS merge)",
+  "measuredAtSha": "bcb40b08b668e0d2a3d52fbaae64efc01fb3762d",
+  "measuredBy": "chair (integration, G3 merge)",
   "date": "2026-10-31",
-  "note": "test-title census re-measured at the links merge (X-20): the lane added titles for the linker, the focus hook and the expanded search match; no lighting marker moved",
+  "note": "test-title census re-measured at the G3 merge (tension variety, GS-1): the lane added its pool and draw tests; no lighting marker moved",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 27080,
+  "titles": 27081,
   "suiteTitles": 7141
 }
