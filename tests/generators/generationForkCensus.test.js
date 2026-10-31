@@ -126,7 +126,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-30, service category fidelity (RS-1..RS-13, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-30-service-category-fidelity.json): 2a837ce5... -> e49d32f7..., this town's services
 // filed by the registered categories.
-const GOLDEN_CONTROL_HASH = 'e49d32f7c6f3cdcfaed25b8440fdfe854e7c2e260d5fb311579648f39da92a8a';
+// 2026-10-31, one faction set (GS-2, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-31-one-faction-set.json): e49d32f7... -> 9f94ab28..., this town's factions the power
+// factions and its conflicts the crossing rivalries.
+const GOLDEN_CONTROL_HASH = '9f94ab2875a3785840e18ba58f520fe8256c6bd8df54bbfbd01eec64a447891a';
 /** EM-P0's own pinned-mode row and its four chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
