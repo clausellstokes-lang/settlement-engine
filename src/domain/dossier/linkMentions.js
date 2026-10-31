@@ -52,8 +52,6 @@ const PROSE_TYPES = Object.freeze(['npc', 'faction', 'institution', 'event', 'ne
 const STRUCTURED_ONLY_TYPES = Object.freeze(['resource', 'service']);
 /** Every indexed family the linker reads, in index order. The settlement entry is never read. */
 const INDEX_FAMILIES = Object.freeze(['npcs', 'factions', 'institutions', 'resources', 'neighbours', 'events', 'deities']);
-/** A name shorter than this is too likely to be a word; it never links. */
-const MIN_NAME_LENGTH = 3;
 
 /** @param {string} type @param {string} id @returns {string} */
 const scopeKey = (type, id) => `${type}:${id}`;
@@ -78,7 +76,7 @@ function indexEntries(index) {
  * The viewer's mention scope, computed once per page: which tabs the viewer has and, in a
  * player or public view, which objects survive the public projection.
  *
- * @param {Record<string, any> | null | undefined} settlement
+ * @param {object | null | undefined} settlement
  * @param {{ playerView?: boolean, publicDossier?: boolean, tabs?: ReadonlyArray<string> | null }} [viewer]
  * @returns {MentionScope}
  */
@@ -111,6 +109,9 @@ export function isMentionAllowed(scope, entry) {
 
 /** @param {string} value @returns {string} */
 const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+/** A match may not touch a letter or a digit on its left, or on its right. */
+const WORD_START = /(?<![\p{L}\p{N}])/u;
+const WORD_END = /(?![\p{L}\p{N}])/u;
 
 /**
  * The linkable names, longest first, with ambiguous names dropped.
@@ -125,7 +126,8 @@ function collectTargets(index, scope, structural) {
     const linkable = PROSE_TYPES.includes(type) || (structural && STRUCTURED_ONLY_TYPES.includes(type));
     if (!linkable || !isMentionAllowed(scope, entry)) continue;
     const name = String(entry.currentName || '').trim();
-    if (name.length < MIN_NAME_LENGTH) continue;
+    // A one- or two-letter name is too likely to be a word; it never links.
+    if (name.length < 3) continue;
     const prior = byName.get(name);
     if (prior === undefined) byName.set(name, { name, id: String(entry.id), type });
     // Two distinct objects answer to one name: the name links to neither.
@@ -161,7 +163,7 @@ function matcherFor(index, scope, structural) {
   /** @type {CompiledMatcher} */
   const compiled = {
     pattern: targets.length
-      ? new RegExp(`(?<![\\p{L}\\p{N}])(?:${targets.map((t) => escapeRegExp(t.name)).join('|')})(?![\\p{L}\\p{N}])`, 'gu')
+      ? new RegExp(`${WORD_START.source}(?:${targets.map((t) => escapeRegExp(t.name)).join('|')})${WORD_END.source}`, 'gu')
       : null,
     byName: new Map(targets.map((t) => [t.name, t])),
   };
