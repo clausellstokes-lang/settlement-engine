@@ -32,7 +32,7 @@ export default function ManageGallery({
 }) {
   const mobile = useIsMobile();
   const lineStyle = { fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), color: INK };
-  const snapshotWhen = share.at ? new Date(share.at).toLocaleString() : '';
+  const snapshotWhen = share.at ? new Date(share.at).toLocaleString('en-US') : '';
   return (
     <div role="region" aria-label="Manage gallery" style={{
       width: '100%', display: 'grid', gap: SP.sm, padding: SP.sm,

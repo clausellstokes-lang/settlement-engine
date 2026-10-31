@@ -502,20 +502,24 @@ describe('relationship tie prose is drawn without replacement per settlement (GS
   }
 
   test('every tie stores the variant it drew, and that index renders its own lines', () => {
+    // Collected, not asserted inline (seedLoopTotality, cure lane T13): the first bad tie would
+    // otherwise end the corpus walk and report a floor; the roster below carries the true count.
     let checked = 0;
+    const misdrawn = [];
     for (const { seed, npcs, relationships } of corpus) {
       const byId = new Map(npcs.map(npc => [npc.id, npc]));
       for (const rel of relationships) {
+        checked++;
         const archetype = STRESS_ECONOMIC_EFFECTS[rel.archetypeKey];
-        expect(archetype, `${seed}: ${rel.archetypeKey} is a real archetype`).toBeDefined();
-        expect(Number.isInteger(rel.proseVariant), `${seed}: tie carries an integer proseVariant`).toBe(true);
+        if (!archetype) { misdrawn.push(`${seed}: ${rel.archetypeKey} is not a real archetype`); continue; }
+        if (!Number.isInteger(rel.proseVariant)) { misdrawn.push(`${seed}: tie carries no integer proseVariant`); continue; }
         const first = byId.get(rel.npc1Id);
         const second = byId.get(rel.npc2Id);
-        expect(rel.tension).toBe(archetype.tension(first, second, rel.proseVariant));
-        expect(rel.description).toBe(archetype.desc(first, second, rel.proseVariant));
-        checked++;
+        if (rel.tension !== archetype.tension(first, second, rel.proseVariant)) misdrawn.push(`${seed}: tension is not variant ${rel.proseVariant}`);
+        if (rel.description !== archetype.desc(first, second, rel.proseVariant)) misdrawn.push(`${seed}: description is not variant ${rel.proseVariant}`);
       }
     }
+    expect(misdrawn).toEqual([]);
     expect(checked, 'the corpus renders ties to check').toBeGreaterThan(200);
   });
 

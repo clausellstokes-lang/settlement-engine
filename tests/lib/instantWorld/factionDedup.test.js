@@ -86,10 +86,15 @@ describe('dedupeWorldFactionNames — unit', () => {
   it('never renames a group named for one of its own POWER factions (GS-2, ODQ §934.101)', () => {
     // The power factions are the factions: "Merchant Guilds" in two towns is two guilds, each
     // its own town's label, and renaming one would mint the second vocabulary GS-2 removed.
+    // The conflict desc is FIXTURE INPUT that only has to name both parties (the rename pass
+    // rewrites names inside it), so it is built from the parties rather than written out: the
+    // literal sentence aligned with a dossier state-prose variant (DS-GEN-2) and read as a
+    // drawn-prose anchor to proseDrawnAnchors (cure lane T13, at the GS-2 merge).
+    const parties = ['Merchant Guilds', 'Military/Guard'];
     const town = (id, slot) => ({ id, _slot: slot, settlement: {
       powerStructure: { factions: [{ faction: 'Merchant Guilds', category: 'economy' }] },
       factions: [{ name: 'Merchant Guilds', dominantCategory: 'economy' }],
-      conflicts: [{ parties: ['Merchant Guilds', 'Military/Guard'], desc: 'Merchant Guilds and Military/Guard are at odds.' }],
+      conflicts: [{ parties: [...parties], desc: `${parties[0]} and ${parties[1]} are at odds.` }],
     } });
     const members = [town('a', 0), town('b', 1)];
     expect(dedupeWorldFactionNames(members)).toEqual([]);

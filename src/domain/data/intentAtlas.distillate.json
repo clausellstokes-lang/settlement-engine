@@ -95,7 +95,7 @@
       "coBucket": "moderate",
       "n": 133,
       "effect": 0.12,
-      "weight": 0.34,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -104,8 +104,18 @@
       "bucket": "heartland",
       "coBucket": "low",
       "n": 127,
-      "effect": 0.12,
-      "weight": 0.29,
+      "effect": 0.13,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "monsterThreat.volatility",
+      "bucket": "heartland",
+      "coBucket": "moderate",
+      "n": 127,
+      "effect": -0.13,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -115,7 +125,7 @@
       "coBucket": "high",
       "n": 56,
       "effect": 0.12,
-      "weight": 0.36,
+      "weight": 0.39,
       "source": "soak"
     },
     {
@@ -271,71 +281,81 @@
     {
       "surface": "construct",
       "dimension": "settType.volatility",
+      "bucket": "city",
+      "coBucket": "low",
+      "n": 56,
+      "effect": -0.15,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "city",
+      "coBucket": "moderate",
+      "n": 56,
+      "effect": 0.15,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
       "bucket": "hamlet",
       "coBucket": "low",
       "n": 72,
+      "effect": 0.14,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "metropolis",
+      "coBucket": "low",
+      "n": 63,
+      "effect": -0.16,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "metropolis",
+      "coBucket": "moderate",
+      "n": 63,
       "effect": 0.12,
-      "weight": 0.32,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.volatility",
-      "bucket": "metropolis",
-      "coBucket": "low",
-      "n": 63,
-      "effect": -0.17,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.volatility",
-      "bucket": "metropolis",
-      "coBucket": "moderate",
-      "n": 63,
-      "effect": 0.17,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.volatility",
-      "bucket": "thorp",
-      "coBucket": "low",
-      "n": 61,
-      "effect": 0.31,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.volatility",
-      "bucket": "thorp",
-      "coBucket": "moderate",
-      "n": 61,
-      "effect": -0.31,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "settType.volatility",
-      "bucket": "village",
-      "coBucket": "low",
-      "n": 67,
-      "effect": -0.12,
       "weight": 0.35,
       "source": "soak"
     },
     {
       "surface": "construct",
       "dimension": "settType.volatility",
-      "bucket": "village",
+      "bucket": "thorp",
+      "coBucket": "low",
+      "n": 61,
+      "effect": 0.37,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "thorp",
       "coBucket": "moderate",
-      "n": 67,
-      "effect": 0.12,
-      "weight": 0.41,
+      "n": 61,
+      "effect": -0.32,
+      "weight": 0.5,
+      "source": "soak"
+    },
+    {
+      "surface": "construct",
+      "dimension": "settType.volatility",
+      "bucket": "town",
+      "coBucket": "low",
+      "n": 81,
+      "effect": -0.13,
+      "weight": 0.5,
       "source": "soak"
     },
     {
@@ -455,7 +475,7 @@
       "coBucket": "moderate",
       "n": 75,
       "effect": 0.12,
-      "weight": 0.37,
+      "weight": 0.4,
       "source": "soak"
     },
     {
@@ -501,30 +521,10 @@
     {
       "surface": "construct",
       "dimension": "tradeRoute.volatility",
-      "bucket": "isolated",
-      "coBucket": "low",
-      "n": 69,
-      "effect": -0.14,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "tradeRoute.volatility",
-      "bucket": "isolated",
-      "coBucket": "moderate",
-      "n": 69,
-      "effect": 0.15,
-      "weight": 0.5,
-      "source": "soak"
-    },
-    {
-      "surface": "construct",
-      "dimension": "tradeRoute.volatility",
       "bucket": "road",
       "coBucket": "low",
       "n": 75,
-      "effect": 0.18,
+      "effect": 0.17,
       "weight": 0.5,
       "source": "soak"
     },
@@ -534,7 +534,7 @@
       "bucket": "road",
       "coBucket": "moderate",
       "n": 75,
-      "effect": -0.17,
+      "effect": -0.15,
       "weight": 0.5,
       "source": "soak"
     },
