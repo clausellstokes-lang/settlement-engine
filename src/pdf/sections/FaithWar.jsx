@@ -150,7 +150,7 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="03D"
+        eyebrow="18"
         title="Faith & War"
         accent={narrativeMode ? palette.ai : palette.bad}
         sub={lw.hasLive ? 'live campaign state' : 'pantheon'}
@@ -158,11 +158,11 @@ export function FaithWar({ settlement, narrativeMode, vm, stateProse }) {
       <ChapterHeadline tone={lw.atWar ? 'bad' : 'gold'}>{headline}</ChapterHeadline>
 
       {/* ── The faith prose, THE SECOND HALF OF ITS HOME (review 5).
-          It normally renders from chapter 07 (IdentityDailyLife), because this chapter is
+          It normally renders from chapter 15 (IdentityDailyLife), because this chapter is
           null on a dormant `vm.liveWorld` — every export without a live campaign. But the
-          `campaign_state` variant EXCLUDES chapter 07 while keeping this one `if-canon`, so
+          `campaign_state` variant EXCLUDES chapter 15 while keeping this one `if-canon`, so
           on premium + canon + a live world the faith positions had no page at all. The
-          caller feeds `stateProse` here ONLY when chapter 07 is out of the variant, so the
+          caller feeds `stateProse` here ONLY when chapter 15 is out of the variant, so the
           two homes can never both print it.
           ⛔ NO `war` TAB: the three war positions are print-deferred (printProse.js's ruling
           block), so the builder emits none. ── */}

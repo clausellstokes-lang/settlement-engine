@@ -45,7 +45,7 @@ export function PlotHooks({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="05"
+        eyebrow="04"
         title="Plot Hooks & Quests"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${hooks.length} hook${hooks.length === 1 ? '' : 's'}`}

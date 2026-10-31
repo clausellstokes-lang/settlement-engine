@@ -62,7 +62,7 @@ export function EconomicsTrade({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="09"
+        eyebrow="07"
         title="Economics & Trade"
         accent={narrativeMode ? palette.ai : palette.gold}
       />

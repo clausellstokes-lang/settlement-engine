@@ -57,7 +57,7 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="08A"
+        eyebrow="05"
         title="Services"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${total} buyable across ${cats.length} ${plural(cats.length, 'category', 'categories')}`}

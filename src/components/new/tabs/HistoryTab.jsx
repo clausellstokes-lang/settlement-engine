@@ -270,10 +270,6 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       {/* ── FOUNDING ─────────────────────────────────────────────────────── */}
       {founding&&<Collapsible title="Founding">
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #a0762a',padding:'12px 14px'}}>
-          {/* ── DS-GEN-14 (history.founded) — the one sentence of texture, coupled to the
-              founding facts it explains (chair ruling H3). Open on first paint (H8). */}
-          {foundedLine&&<ProseBlock lines={[foundedLine]} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 8px',fontStyle:'italic'}}/>}
           <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'6px 14px',marginBottom:founding.stressNote?10:0}}>
             {[
               {label:'Origin',     value:founding.reason},
@@ -290,6 +286,11 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
           {founding.stressNote&&<div style={{background:swatch['#FDF4EC'],border:'1px solid #e0c090',borderLeft:'3px solid #b8860b',padding:'8px 10px'}}>
             <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3010'],lineHeight:1.5,margin:0,fontStyle:'italic'}}>{founding.stressNote}</p>
           </div>}
+          {/* ── DS-GEN-14 (history.founded) — the one sentence of texture, coupled to the
+              founding facts it explains (chair ruling H3), UNDER them (the block law, X-16:
+              prose never above the fact it explains). Open on first paint (H8). */}
+          {foundedLine&&<ProseBlock lines={[foundedLine]} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.6,margin:'8px 0 0',fontStyle:'italic'}}/>}
         </div>
       </Collapsible>}
 

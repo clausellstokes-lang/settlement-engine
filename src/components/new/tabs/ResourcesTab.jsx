@@ -160,14 +160,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         </div>
       </div>
 
-      {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
-          TWO LENSES SINCE THE UX CONSOLIDATION (2026-10-30, T2-9): the strategic-value
-          sentence (which stands in for the generator's line above on DM views) and the ONE
-          resource line that frames the Resource Exploitation section below. The terrain lens
-          is cut (the Overview's place passage owns the ground, X-1) and the strengths lens is
-          cut (the chips above are the strengths, R2). */}
-      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation]} />
-
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
@@ -182,6 +174,15 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           {fullExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="full"/>)}
         </div>
       </Section>}
+
+      {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
+          TWO LENSES SINCE THE UX CONSOLIDATION (2026-10-30, T2-9): the strategic-value
+          sentence (which stands in for the generator's line in the header on DM views) and the
+          ONE resource line on the Resource Exploitation section, UNDER the chains it reads (the
+          block law, X-16: prose never above the fact it explains). The terrain lens
+          is cut (the Overview's place passage owns the ground, X-1) and the strengths lens is
+          cut (the chips above are the strengths, R2). */}
+      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation]} />
 
       {/* ── AVAILABLE RAW RESOURCES ───────────────────────────────────────── */}
       {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
@@ -218,22 +219,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         })()}
       </Section>}
 
-      {/* ── EXPORT POTENTIAL ─────────────────────────────────────────────── */}
-      {res.exports?.length>0&&<Section title="Export Potential" collapsible defaultOpen={false}>
-        <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
-          {[...res.exports].sort((a,b)=>{
-              const vOrder={['very high']:0,high:1,medium:2,low:3};
-              return (vOrder[a.value||'medium']??2)-(vOrder[b.value||'medium']??2)||(a.good||'').localeCompare(b.good||'');
-            }).map((e,i)=>{
-            const v = e.value||'medium';
-            return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:`3px solid ${valColor(v)}`,padding:'6px 10px',minWidth:0}}>
-              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{e.product||e.good||e.name}</div>
-              {e.reason&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:2}}>{e.reason}</div>}
-            </div>;
-          })}
-        </div>
-      </Section>}
-
       {/* ── GAPS & OPPORTUNITIES (combined) ──────────────────────────────── */}
       {(res.gaps?.length>0||res.priorityNotes?.length>0)&&<Section title="Gaps & Opportunities" collapsible defaultOpen accent="#5a2a8a">
         <div style={{display:'flex',flexDirection:'column',gap:6}}>
@@ -266,6 +251,22 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                 {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,marginRight:6}}>{chain}:</span>}
                 <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{impact}</span>
               </div>
+            </div>;
+          })}
+        </div>
+      </Section>}
+
+      {/* ── EXPORT POTENTIAL ─────────────────────────────────────────────── */}
+      {res.exports?.length>0&&<Section title="Export Potential" collapsible defaultOpen={false}>
+        <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+          {[...res.exports].sort((a,b)=>{
+              const vOrder={['very high']:0,high:1,medium:2,low:3};
+              return (vOrder[a.value||'medium']??2)-(vOrder[b.value||'medium']??2)||(a.good||'').localeCompare(b.good||'');
+            }).map((e,i)=>{
+            const v = e.value||'medium';
+            return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:`3px solid ${valColor(v)}`,padding:'6px 10px',minWidth:0}}>
+              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{e.product||e.good||e.name}</div>
+              {e.reason&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:2}}>{e.reason}</div>}
             </div>;
           })}
         </div>

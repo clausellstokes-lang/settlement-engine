@@ -383,12 +383,14 @@ describe('dossierSearch (X-19b): the one-stop shop of the dossier\'s own objects
     expect(mara.groups.find(g => g.tab === 'npcs').objects.map(o => o.score))
       .toEqual([MATCH.PREFIX, MATCH.PREFIX, MATCH.WORD, MATCH.TEXT]);
 
-    // An exact name: the person's own card leads its group, and the people group leads the
-    // page even though the tie and the hook name her exactly too (a tie runs people first).
+    // An exact name: the person's own card leads its group. The tie and the hook name her
+    // exactly too, so the three groups tie and run in the strip's own tab order (chair ruling
+    // X-25c: SEARCH_TAB_ORDER follows TAB_GROUPS, Summary's Plot Hooks before World's NPCs).
     const exact = searchDossier(searchTown(), 'Mara Voss');
-    expect(exact.groups.map(g => g.tab)).toEqual(['npcs', 'relationships', 'plot_hooks']);
-    expect(exact.groups[0].objects[0].raw).toBe(exact.settlement.npcs[0]);
-    expect(exact.groups[0].objects[0].score).toBe(MATCH.EXACT);
+    expect(exact.groups.map(g => g.tab)).toEqual(['plot_hooks', 'npcs', 'relationships']);
+    const people = exact.groups.find(g => g.tab === 'npcs');
+    expect(people.objects[0].raw).toBe(exact.settlement.npcs[0]);
+    expect(people.objects[0].score).toBe(MATCH.EXACT);
   });
 
   it('an exact NPC name returns their card, and every tie, conflict and hook naming them, under their own tabs', () => {
@@ -434,7 +436,8 @@ describe('dossierSearch (X-19b): the one-stop shop of the dossier\'s own objects
     expect(searchDossier(searchTown(), secretWords, { playerView: true }).total).toBe(0);
 
     // PUBLIC DOSSIER: the card is still found by name, but never by its secret.
-    expect(searchDossier(searchTown(), 'Mara Voss', { publicDossier: true }).groups[0].objects[0].raw.name).toBe('Mara Voss');
+    // (X-25c: the tied Plot Hooks group now runs first, so the card is read from its own group.)
+    expect(searchDossier(searchTown(), 'Mara Voss', { publicDossier: true }).groups.find(g => g.tab === 'npcs').objects[0].raw.name).toBe('Mara Voss');
     expect(searchDossier(searchTown(), secretWords, { publicDossier: true }).total).toBe(0);
   });
 

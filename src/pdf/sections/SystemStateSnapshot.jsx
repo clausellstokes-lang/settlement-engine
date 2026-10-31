@@ -58,7 +58,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm, causalDetai
     return (
       <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
         <ChapterBand
-          eyebrow="03B"
+          eyebrow="03"
           title="Current State"
           accent={narrativeMode ? palette.ai : palette.gold}
         />
@@ -72,7 +72,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm, causalDetai
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="03B"
+        eyebrow="03"
         title="Current State"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub="Four dimensions, scored 0-100, banded for quick reads"

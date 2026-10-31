@@ -101,7 +101,9 @@ export const TAB_GROUPS = Object.freeze({
   // group's second tab, out of Systems; the id stays so deep links keep their key.
   summary: { label: 'Summary', tabs: ['overview', 'substrate', 'plot_hooks', 'dm_compass'] },
   // T1-14 (the owner, 2026-10-30): `institutions` follows `services`, the roster house by house.
-  systems: { label: 'Systems', tabs: ['services', 'institutions', 'economics', 'power', 'defense', 'resources', 'viability', 'magic'] },
+  // X-17 (wave 2, 2026-10-30): each group runs from the broadest reading to the narrowest; the
+  // verdict (Outlook) closes Systems, read from everything before it.
+  systems: { label: 'Systems', tabs: ['services', 'institutions', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
   // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the
@@ -113,7 +115,9 @@ export const TAB_GROUPS = Object.freeze({
   // War & Faith tab into WORLD-group `war` and `faith`, slotted after `rumors` —
   // the epistemic run reads heard → believed (war) → worshipped (faith).
   // X-6: the `neighbours` route is REMOVED; Relationships is one whole page.
-  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'rumors', 'war', 'faith', 'daily_life', 'traditions', 'history'] },
+  // X-17 (wave 2): general to specific, the epistemic run heard → believed → worshipped kept
+  // at the World tail (rumors → war → faith).
+  world:   { label: 'World',   tabs: ['npcs', 'relationships', 'daily_life', 'traditions', 'history', 'rumors', 'war', 'faith'] },
   // STRIP-1: the Map group is REMOVED. The dossier reads Summary / Systems / World / Notes.
   notes:   { label: 'Notes',   tabs: ['dm_notes', 'ai_notes', 'chronicle', 'versions'] },
 });

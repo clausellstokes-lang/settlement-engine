@@ -136,10 +136,6 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
   return (
     <div>
 
-      {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
-        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
-      </Section>}
-
       {/* Neighbour Network */}
       {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:12}}>
@@ -258,6 +254,12 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
       {/* Active Conflicts */}
       {conflicts.length>0&&<Section title={`Active Conflicts (${conflicts.length})`}>
         {conflicts.map((c,i)=><ConflictCard key={i} conflict={c}/>)}
+      </Section>}
+
+      {/* The neighbour mirror reads the campaign's own ledger, so it is campaign-only and closes
+          the page (the block law, X-16 rung 6). Moved verbatim. */}
+      {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
+        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
       </Section>}
 
       {!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>

@@ -215,6 +215,10 @@ describe('C5 — the rendered-surface phrase scan, standing on a presence pin', 
     const line = composedLine();
     expect(governedPool()).toContain(line);
     expect(text).toContain(line);
+    // THE BLOCK LAW (X-16 rung 6, BUILD-W2-BLOCKLAW U5): the mirror reads the campaign's own
+    // ledger, so it is campaign-only and follows the generated neighbour cards.
+    expect(text.indexOf('Neighbour Network')).toBeGreaterThanOrEqual(0);
+    expect(text.indexOf(NEIGHBOUR_MIRROR_HEADING)).toBeGreaterThan(text.indexOf('Neighbour Network'));
   });
 
   test('the scanner itself CONVICTS — a mutant string carrying each banned form is flagged', () => {

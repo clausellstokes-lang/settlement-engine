@@ -23,7 +23,7 @@
  * then the name containing the query anywhere, then the text containing it. Ties break by
  * prominence (influence, power share, service count, severity, priority), then by the order
  * the tab itself lists them. Results group under their owning tab; the groups run by their
- * best object, and a tie runs in TAB_ORDER (people first).
+ * best object, and a tie runs in SEARCH_TAB_ORDER (the strip's own tab order, X-25c).
  *
  * AUDIENCE (X-19: "no DM secret in a public or player-view result"):
  *   playerView     the whole settlement is projected through `toPublicSafe` before anything
@@ -80,10 +80,13 @@ export function isSearchActive(query) {
   return foldSearchText(query).length > 1;
 }
 
-/** The tie order of groups whose best objects score alike: people first, then the systems. */
+/** The tie order of groups whose best objects score alike: the strip's own order
+ *  (OutputContainer.jsx :: TAB_GROUPS, Summary · Systems · World), so the dossier has ONE tab
+ *  order and not two (chair ruling X-25c, BUILD-W2-BLOCKLAW). Pinned against TAB_GROUPS in
+ *  tests/ui/dossier.smoke.test.jsx. */
 export const SEARCH_TAB_ORDER = Object.freeze([
-  'npcs', 'institutions', 'services', 'power', 'relationships',
-  'history', 'traditions', 'plot_hooks', 'resources',
+  'plot_hooks', 'services', 'institutions', 'resources', 'power',
+  'npcs', 'relationships', 'traditions', 'history',
 ]);
 
 /** Match tiers, best first. */
@@ -448,7 +451,7 @@ export function enumerateDossierObjects(settlement, viewer = {}, options = {}) {
 
 /**
  * Rank one query over an enumeration: every object the query matches, grouped under its
- * owning tab, the groups by their best object then TAB_ORDER, the objects by match tier then
+ * owning tab, the groups by their best object then SEARCH_TAB_ORDER, the objects by match tier then
  * prominence then the tab's own order.
  *
  * @param {SearchEnumeration} enumeration

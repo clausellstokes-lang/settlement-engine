@@ -79,14 +79,14 @@ describe('MagicTab — the 10-facet magic profile', () => {
   });
 });
 
-describe('MagicTab — the dependence block arrives as the Roles framing (UX consolidation, T2-15)', () => {
+describe('MagicTab — the dependence block arrives as the Roles framing (UX consolidation, T2-15; under them by the block law, X-16)', () => {
   const dependentTown = {
     ...liveMagicTown,
     defenseProfile: { magicDependency: true },
     economicState: { activeChains: [{ label: 'Grain', magicNote: 'Druids keep the blight off.' }] },
   };
 
-  test('the frozen record, its chain notes and the first-survey stamp render ABOVE the role lines', () => {
+  test('the frozen record, its chain notes and the first-survey stamp render BELOW the role lines', () => {
     const { getByTestId, container } = render(<MagicTab settlement={dependentTown} publicDossier />);
     const block = getByTestId('magic-dependence');
     expect(block.textContent).toContain('Reliance on magic, as judged at the first survey');
@@ -94,7 +94,9 @@ describe('MagicTab — the dependence block arrives as the Roles framing (UX con
     // Public: no corpus line, so the static explanation of the frozen record stands.
     expect(block.textContent).toContain('relies on active magical infrastructure');
     const roles = container.querySelector('[data-testid="magic-roles"]');
-    expect(block.compareDocumentPosition(roles) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // BUILD-W2-BLOCKLAW U4: the facts (the role lines) come first, the passage that frames
+    // them after; prose never sits above the fact it explains.
+    expect(roles.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   test('a dead-magic world renders no dependence block', () => {

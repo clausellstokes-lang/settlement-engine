@@ -43,7 +43,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="13"
+        eyebrow="11"
         title="Viability Assessment"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={verdict.label}

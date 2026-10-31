@@ -84,7 +84,7 @@ export function NotableNPCs({ settlement, narrativeMode, vm }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="04"
+        eyebrow="13"
         title="Notable NPCs"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${all.length} figure${all.length === 1 ? '' : 's'}`}

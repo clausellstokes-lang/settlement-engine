@@ -18,7 +18,7 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE 
 import { customSupplyChainPresentation } from '../../../domain/content/customSupplyChainPresentation.js';
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
-import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
+import EconomicsGlance, { DeskLines, EconomicsCampaignTiles } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
 import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE caller + the §885.3 gate (walker ARM 2)
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
@@ -379,18 +379,9 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
     <div style={{...sans}}>
       <NarrativeNote note={narrativeNote} />
 
-      <EconomyFreshnessNote settlement={s} variant="tallies" />
-
-      {/* ── PROSPERITY HEADER + AT-A-GLANCE TILES (the tab's glance surface) ── */}
+      {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
       <EconomicsGlance eco={eco} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
-        granary={granary} granaryColor={granaryColor} treasury={treasury}
-        headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung}
-        seasonRung={deskProse.granaryTile} />
-
-      {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line) ──
-          The trade-profile lens is not drawn here (T2-4, R2): the DS-ECO-10 export-posture
-          sentence beside the Trade Profile chips is the one trade-posture sentence. */}
-      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine]} />
+        headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
@@ -433,14 +424,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </div>
       </Section>}
 
+      {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line), UNDER the
+          income rows it reads (the block law, X-16). The trade-profile lens is not drawn here
+          (T2-4, R2): the DS-ECO-10 export-posture sentence is the one trade-posture sentence. */}
+      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine]} />
+
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
       {(eco.primaryExports?.length>0||eco.primaryImports?.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
-        {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, framing
-            the chips below. ADDITIVE: the "No significant exports." column empty-state is a
-            LABEL and stays; this is the town's own account of the same reading. The section
-            itself is the surface, so a town with no trade rosters at all renders neither
-            (R-DST-K). */}
-        <DeskLines mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]} />
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>
@@ -499,6 +489,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             }
           </div>
         </div>
+        {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, UNDER the
+            chips it reads (the block law, X-16). ADDITIVE: the "No significant exports." column
+            empty-state is a LABEL and stays; this is the town's own account of the same reading.
+            The section itself is the surface, so a town with no trade rosters at all renders
+            neither (R-DST-K). */}
+        <DeskLines mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]} />
         {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
         {eco.tradeLinks?.length>0&&(()=>{
           const byPartner={};
@@ -524,27 +520,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </div>}
       </Section>}
 
-      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
-      {flowDrift && <LiveTradeFlowSection drift={flowDrift} rung={deskProse.tradeFlow} />}
-
       {/* ── MARKET PRICES (Wave 7 — movement vs the usual, §776; only when a quote moved, T2-5) ── */}
       {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
 
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
 
 
-      {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
-          ADDITIVE beside the arithmetic in the section below, never instead of it. Silent
-          when the corpus has nothing to say (R-DST-K), and silent when the registry mounts
-          this position at a glance. It is the FRAMING of the section (the DS-HK-1
-          arrangement), drawn outside it so a reader who folds the section keeps the tone;
-          the section itself opens on every town since the Food tile was cut (T2-1). The
-          visibility arm in dossierMountRegistry.walker.test.js keeps it on first paint. */}
-      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
-
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
       {fb&&<Section title="Food Security" collapsible defaultOpen accent={foodColor}>
-        {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
@@ -572,12 +555,16 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'Daily needs are met, with no surplus: production, imports and any magical provision cover the day between them.'
           }
         </div>
+        {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
       </Section>}
 
-      {/* ── DS-GEN-18: the craft reason, framing the chains below ──────────────
-          It drew above the retired Supply Chains fold for first-paint reasons; that section
-          left the tab (T2-6, Economic Flows is the one chain rendering), and the line now frames Economic Flows as the craft reason the chain rows do not carry (E15 KEEP). */}
-      {craftReasonLine && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
+      {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
+          ADDITIVE beside the arithmetic in the section above, never instead of it, and UNDER
+          it (the block law, X-16: prose never above the fact it explains). Silent when the
+          corpus has nothing to say (R-DST-K), and silent when the registry mounts this
+          position at a glance. Drawn outside the section so a reader who folds it keeps the
+          tone; the visibility arm in dossierMountRegistry.walker.test.js keeps it on first paint. */}
+      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
       {eco.activeChains?.length > 0 && (
@@ -588,6 +575,86 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           instNames={(s?.institutions || []).map(i => i?.name || '')}
         />
       )}
+
+      {/* ── DS-GEN-18: the craft reason, UNDER the chains it explains (the block law, X-16) ──
+          Economic Flows is the one chain rendering (T2-6); the line carries the craft reason
+          the chain rows do not (E15 KEEP). Outside the fold, so it stays on first paint. */}
+      {craftReasonLine && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
+
+      {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
+      {(()=>{
+        const sp = s?.economicState?.safetyProfile;
+        const bmc = sp?.blackMarketCapture || 0;
+        const dragDesc = sp?.economicDragDesc;
+        const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
+        const crimeTypes = sp?.crimeTypes || [];
+        if (!sp || bmc < 3) return null;
+
+        const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
+        const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
+
+        // Scale context: same % means different things at different tiers
+        const _tier = s?.tier || 'village';
+        const scaleNote = bmc>=30
+          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
+          : bmc>=15
+          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
+          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
+
+        // What goods flow through the shadow economy (from crime types)
+        const _shadowGoods = crimeTypes
+          .filter(ct => ct.type && ct.type.toLowerCase().includes('smuggl') ||
+                        ct.type?.toLowerCase().includes('contraband') ||
+                        ct.type?.toLowerCase().includes('black market'))
+          .slice(0, 2);
+
+        return <>
+        {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
+            joining it: two of this block's variants are byte-identical copies of scaleNote itself,
+            so printing both is the page saying one thing twice. Undrawn (public dossier, or the
+            corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
+            ⛔ IT SITS OUTSIDE THE FOLD, AND THE FIGURE IS WHY; since the block law (X-16) it
+            sits UNDER the section rather than above it, still outside. The section opens only
+            `defaultOpen={bmc>=15}` and `Primitives.jsx:120` renders `{open && children}`;
+            measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
+            true on 1 of 60, so drawn inside, DS-ECO-6's
+            ONE speaking position reached a first-paint reader on under two percent of the
+            worlds this generator builds. The scale note travels WITH it, so nothing is
+            doubled and the fold's own reader loses nothing. */}
+        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+          <div style={{display:'flex',flexDirection:'column',gap:10}}>
+
+            {/* Capture rate + scale context */}
+            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
+              <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
+                <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
+                <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:sevColor,marginTop:2}}>Off-book</div>
+              </div>
+              <div style={{flex:1}}>
+                {dragDesc&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
+              </div>
+            </div>
+
+            {/* The criminal OPERATIONS list lives on Defense (T2-7/T2-20, R2): it printed the
+                same criminalInstitutions there and here. This page keeps the capture share. */}
+
+            {/* Active criminal supply chains */}
+            {crimChains.length>0&&<div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Criminal supply chains</div>
+              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+                {crimChains.map((c,i)=>(
+                  <span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
+                    {tokenCase(humanizeToken(c.chainId))} · {displayLabel('supplyChainStatus', c.status)}
+                  </span>
+                ))}
+              </div>
+            </div>}
+
+          </div>
+        </Section>
+        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        </>;
+      })()}
 
       {/* ── CUSTOM SUPPLY CHAINS (§14 — user-confirmed in the Compendium) ──────── */}
       {customChainViews.length > 0 && (
@@ -634,79 +701,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </Section>
       )}
 
-      {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
-      {(()=>{
-        const sp = s?.economicState?.safetyProfile;
-        const bmc = sp?.blackMarketCapture || 0;
-        const dragDesc = sp?.economicDragDesc;
-        const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
-        const crimeTypes = sp?.crimeTypes || [];
-        if (!sp || bmc < 3) return null;
-
-        const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
-        const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
-
-        // Scale context: same % means different things at different tiers
-        const _tier = s?.tier || 'village';
-        const scaleNote = bmc>=30
-          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
-          : bmc>=15
-          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
-          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
-
-        // What goods flow through the shadow economy (from crime types)
-        const _shadowGoods = crimeTypes
-          .filter(ct => ct.type && ct.type.toLowerCase().includes('smuggl') ||
-                        ct.type?.toLowerCase().includes('contraband') ||
-                        ct.type?.toLowerCase().includes('black market'))
-          .slice(0, 2);
-
-        return <>
-        {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
-            joining it: two of this block's variants are byte-identical copies of scaleNote itself,
-            so printing both is the page saying one thing twice. Undrawn (public dossier, or the
-            corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
-            ⛔ IT SITS ABOVE THE FOLD, AND THE FIGURE IS WHY. The section below opens only
-            `defaultOpen={bmc>=15}` and `Primitives.jsx:120` renders `{open && children}`;
-            measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
-            true on 1 of 60, so drawn inside, DS-ECO-6's
-            ONE speaking position reached a first-paint reader on under two percent of the
-            worlds this generator builds. The scale note travels WITH it, so nothing is
-            doubled and the fold's own reader loses nothing. */}
-        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
-        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
-          <div style={{display:'flex',flexDirection:'column',gap:10}}>
-
-            {/* Capture rate + scale context */}
-            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
-              <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
-                <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
-                <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:sevColor,marginTop:2}}>Off-book</div>
-              </div>
-              <div style={{flex:1}}>
-                {dragDesc&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
-              </div>
-            </div>
-
-            {/* The criminal OPERATIONS list lives on Defense (T2-7/T2-20, R2): it printed the
-                same criminalInstitutions there and here. This page keeps the capture share. */}
-
-            {/* Active criminal supply chains */}
-            {crimChains.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Criminal supply chains</div>
-              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
-                {crimChains.map((c,i)=>(
-                  <span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
-                    {tokenCase(humanizeToken(c.chainId))} · {displayLabel('supplyChainStatus', c.status)}
-                  </span>
-                ))}
-              </div>
-            </div>}
-
-          </div>
-        </Section>
-        </>;
-      })()}
+      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive); campaign-only, so it,
+          the Season/Treasury tiles and the stale-window note close the page (X-16 rung 6) ── */}
+      {flowDrift && <LiveTradeFlowSection drift={flowDrift} rung={deskProse.tradeFlow} />}
+      <EconomicsCampaignTiles granary={granary} granaryColor={granaryColor} treasury={treasury} seasonRung={deskProse.granaryTile} />
+      <EconomyFreshnessNote settlement={s} variant="tallies" />
 
     </div>
   );

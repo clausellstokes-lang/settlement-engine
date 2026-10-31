@@ -37,7 +37,7 @@ export function PowerStructure({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="06"
+        eyebrow="09"
         title="Power Structure"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={p.governmentType ? cap(p.governmentType) : undefined}

@@ -203,6 +203,54 @@ describe('OverviewTab carries the Table View trigger the removed DM Summary tab 
   });
 });
 
+describe('OverviewTab carries one routing sentence under the identity strip (X-18)', () => {
+  test('the sentence names the four groups once, directly under the strip, and instructs nothing', () => {
+    const { container } = render(e(OverviewTab, { settlement: villageSettlement }));
+    const line = container.querySelector('[data-testid="overview-routing-line"]');
+    expect(line).toBeTruthy();
+    const text = line.textContent || '';
+    for (const group of ['Summary', 'Systems', 'World', 'Notes']) expect(text).toContain(group);
+    expect(text).toContain('how the village trades');
+    // No verb of instruction and no em dash (the copy law).
+    for (const verb of ['Click', 'click', 'Tap', 'tap', 'Select', 'select', 'Go to', 'go to', 'See ', 'see ']) {
+      expectAbsentWithAnchor(text, verb, 'Summary holds', 'the routing line turned into a tutorial');
+    }
+    expectAbsentWithAnchor(text, '\u2014', 'Summary holds', 'the routing line carries an em dash');
+    // One sentence, under the strip: its previous sibling is the identity strip that names the town.
+    expect(container.querySelectorAll('[data-testid="overview-routing-line"]')).toHaveLength(1);
+    expect(line.previousElementSibling?.textContent || '').toContain(villageSettlement.name);
+  });
+});
+
+describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () => {
+  test('answer (strip, routing line, the place), then the facts, then the prose, then the DM material, then the reference', () => {
+    const s = {
+      name: 'Orderby', tier: 'village', population: 300,
+      arrivalScene: 'Arrival fixture scene.',
+      history: { currentTensions: [{ description: 'Tension fixture.' }] },
+      settlementReason: 'Origin fixture.',
+      structuralSuggestions: [{ reason: 'Suggestion fixture', suggested: ['A wall'] }],
+      spatialLayout: { quarters: [{ name: 'Quarter fixture', desc: 'q' }] },
+    };
+    const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
+    const at = (needle) => {
+      const i = text.indexOf(needle);
+      expect(i, `${needle} is missing from the Overview`).toBeGreaterThanOrEqual(0);
+      return i;
+    };
+    const sequence = [
+      'Summary holds',          // (1) the answer: identity strip + its routing line
+      'Arrival fixture scene.', // (1) the answer: THE PLACE, the walk-in scene (chair ruling X-25a)
+      'Systems Health',         // (2) the facts: status tags
+      'Tension fixture.',       // (2) the facts: tension rows
+      'Origin fixture.',        // (3) prose: why it is here
+      'Suggestion fixture',     // (4) DM material: warnings and suggestions
+      'Spatial Layout',         // (5) collapsed reference
+    ].map(at);
+    expect(sequence).toEqual([...sequence].sort((a, b) => a - b));
+  });
+});
+
 describe('DMCompassTab shape (chair ruling, RULINGS-T1 DM Compass)', () => {
   test('one name ("Guidance"), the four panels, and no coaching captions under them', () => {
     const { container } = render(e(DMCompassTab, { settlement: {

@@ -519,6 +519,14 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // AT THE MERGE OF T3 AND T2 (the chair, 2026-10-30): both lanes' cures are summed from the
 // 218 base — T3 total -6 / float -3 / percent -3, T2 total -5 / float -4 / percent -1 — so the
 // ceilings are 207 / 140 / 50; the live scan at the merged tree is the receipt.
+// BUILD-W2-BLOCKLAW U1 (wave 2, X-17): OutputContainer.jsx 969 -> 973, a pure line move (the
+// tab-order comment lines above TAB_GROUPS). Path, category and snippet byte-identical.
+// BUILD-W2-BLOCKLAW U4 (wave 2, the block law X-16; MOVE ONLY): twenty-two pure line moves and
+// no debt motion. EconomicsGlance.jsx 133 -> 127 (the campaign tiles split off below the header);
+// EconomicsTab.jsx 422/424 -> 413/415, 561..563 -> 544..546, 568..572 -> 551..555, 677/683 ->
+// 624/630 (the commercial-profile, food and shadow lines moved under their facts, the campaign
+// blocks to the foot); PowerTab.jsx 488 -> 491, 526 -> 529 (the strata moved above the desk
+// passages). Path, category and snippet are byte-identical on every row; no ceiling moves.
 const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 140,
