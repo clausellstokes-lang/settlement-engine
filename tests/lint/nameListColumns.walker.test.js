@@ -159,6 +159,27 @@ const RULED = Object.freeze({
   'src/components/new/tabs/power/PowerStrata.jsx :: matchedGroups':
     'card — a faction group\'s sub-row, rendered INSIDE its faction\'s roster card and indented '
     + 'under it; it belongs to that row rather than being a list of its own.',
+  // BUILD-W2-SEARCH U2 (2026-10-30): the dossier search mounts each object through its own
+  // renderer, so these rows were extracted into named components. The rows did not change; the
+  // scan can no longer read the inline body it used to skip, so each takes its verdict here.
+  'src/components/new/tabs/HistoryTab.jsx :: currentTensions':
+    'card — a TensionRow: the tension kind, its severities, the description and its factions.',
+  'src/components/new/tabs/HistoryTab.jsx :: sortedEvents':
+    'card — a HistoryEventCard: name, type, description and age, with a lasting-effects fold.',
+  'src/components/new/tabs/InstitutionsTab.jsx :: houses':
+    'card — an InstitutionCard: the house, its badge and category, and its service rows beneath.',
+  'src/components/new/tabs/PlotHooksTab.jsx :: groups':
+    'card — a source-page section: the page caption and the hook cards that grow from it.',
+  'src/components/new/tabs/PlotHooksTab.jsx :: hooks':
+    'card — a PlotHookCard: the source name and the hook, which is a sentence.',
+  'src/components/new/tabs/ResourcesTab.jsx :: unexploited':
+    'card — a ResourceChainCard: the resource, its value, the chain flow and what it needs.',
+  'src/components/new/tabs/ResourcesTab.jsx :: partExploited':
+    'card — a ResourceChainCard, the partial variant of the same card.',
+  'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
+    'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  'src/components/new/tabs/power/PowerStrata.jsx :: roster':
+    'card — a FactionRow: the faction with its archetype and share, its groups beneath and a fold.',
 
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':

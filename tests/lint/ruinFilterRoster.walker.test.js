@@ -453,7 +453,11 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // rest on a ruin — a calamity-flattened wall cannot satisfy a citadel's gate — which is this
     // walker's own class arriving as a guard rather than as a defect. Read from this arm's own
     // failure message ("expected 95 to be 94"), never computed: a re-measurement, not a raise.
-    expect(readers.length).toBe(95);
+    // ⭐ 95 → 96 WITH BUILD-W2-SEARCH's `src/domain/dossier/dossierSearch.js`, COMPLIANT and with
+    // no exempt row: the dossier search lists every house the Institutions tab lists (display),
+    // and reads `isLiveInstitution` so a ruin ranks under every live house, shown but never
+    // credited with function. Read from this arm's own failure message ("expected 96 to be 95").
+    expect(readers.length).toBe(96);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {
