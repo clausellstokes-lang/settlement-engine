@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "9e41644ab79de96d935ebe6cc449b58b5b919d03",
-  "measuredBy": "chair (integration, W2-VEIL-A landing)",
+  "measuredAtSha": "0c104fe807a27c4600ec741616ed111a2ff94712",
+  "measuredBy": "G2",
   "date": "2026-10-31",
-  "note": "dependents moved: galleryVeil.js now imports brokerageLegalityOf (INFORMATION_BROKERAGE_TUNING) and facetOf (QUADRANT_TUNING) to select the hideable houses and the quadrant facet; no value moved, no ceiling rose",
+  "note": "GS-2 one faction set (ODQ §934.101): bare decimals 6975 -> 6962, a win banked; npcGenerator.js 83 -> 71 (the dead _generateFactionConflict deleted) and power/conflicts.js 1 -> 0 (the no-rivalry 0.4 coin gone); no value moved, no ceiling rose",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8408,9 +8408,8 @@
     "src/generators/narrativeGenerator.js": 2,
     "src/generators/neighbourGenerator.js": 43,
     "src/generators/npc/factionLeaderSecret.js": 48,
-    "src/generators/npcGenerator.js": 83,
+    "src/generators/npcGenerator.js": 71,
     "src/generators/npcStructure.js": 2,
-    "src/generators/power/conflicts.js": 1,
     "src/generators/power/relationshipArchetypes.js": 13,
     "src/generators/power/rulingStructure.js": 13,
     "src/generators/power/settlementNarrative.js": 3,
@@ -8435,7 +8434,7 @@
     "tables": 257,
     "keys": 2187,
     "unregisteredNamed": 535,
-    "bareDecimals": 6975,
+    "bareDecimals": 6962,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 168
   }

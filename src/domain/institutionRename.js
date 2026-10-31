@@ -216,6 +216,14 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'each pairwise relationship is keyed by the two faction names, and the faction ledger rewrites the pair' },
   { path: 'npcs[].factionAffiliation', kind: 'label', readable: false,
     why: 'a character\'s link to its faction by name, owned by the faction ledger like the member stamp above' },
+  // GS-2 (ODQ §934.101): the grouping list and the conflicts are named by the POWER factions now, so the
+  // governing body's faction name ('Democratic assembly') reaches them too; the faction ledger owns all three.
+  { path: 'factions[].name', kind: 'label', readable: false,
+    why: 'the grouping list is a projection of the power factions since GS-2, so its name IS the faction name, owned by the faction ledger (factionRename.js rewrites it), for the reason the powerFactionName row gives' },
+  { path: 'conflicts[].parties[]', kind: 'label', readable: false,
+    why: 'a conflict party is a power faction\'s exact name since GS-2; the faction ledger rewrites it at both conflict homes' },
+  { path: 'powerStructure.conflicts[].parties[]', kind: 'label', readable: false,
+    why: 'the conflict mirror\'s party key, the same faction name, rewritten by the faction ledger with its twin above' },
   { path: 'economicState.safetyProfile.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the SECOND independent stamp, not an alias: economicState and safetyProfile each call getInstFlags, so the two arrays are never the same object. Aliased or duplicated stamps DECLARE ONCE PER PATH by design, because the walk addresses by path and a reloaded save has already split any alias' },
 ]);
