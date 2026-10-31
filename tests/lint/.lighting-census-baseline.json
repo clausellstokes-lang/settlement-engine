@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "14b32ee0c34c386df54a6d613dafeef250a9ddc4",
-  "measuredBy": "chair (integration, W2-BLOCKLAW merge)",
+  "measuredAtSha": "ab11a31a83716561bae12be05f9f0d02705b87d8",
+  "measuredBy": "chair (integration, G2 and G1-U1 merges)",
   "date": "2026-10-31",
-  "note": "test-title census re-measured at the block-law merge: the lane added 7 titles in 3 suites (tab order, routing line, block order pins); no lighting marker moved",
+  "note": "test-title census re-measured at the G2 (one faction set, 9 tests) and G1-U1 (mages quarter gate, 3 tests) merges; no lighting marker moved",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 27051,
-  "suiteTitles": 7133
+  "titles": 27063,
+  "suiteTitles": 7138
 }
