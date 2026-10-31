@@ -223,7 +223,10 @@ describe('the dossier search bar: mount, results in the body, keyboard path, aud
     expect(people.getByRole('button', { name: 'NPCs' })).toBeTruthy();
     expect(people.getByText('Mara Voss')).toBeTruthy();
     expect(within(results).getByRole('button', { name: 'Toggle relationship between Mara Voss and Odo Penn' })).toBeTruthy();
-    expect(within(results).getByText('Mara Voss needs the ledger found before the audit.')).toBeTruthy();
+    // The hook card's text is whole, and her name inside it is a door to her card (X-20).
+    const hooks = within(results.querySelector('[data-testid="search-group-plot_hooks"]'));
+    expect(hooks.getByText((_, el) => el?.tagName === 'DIV' && el.textContent === 'Mara Voss needs the ledger found before the audit.')).toBeTruthy();
+    expect(hooks.getAllByRole('button', { name: 'Go to Mara Voss' }).length).toBeGreaterThan(0);
     expect(field.getAttribute('aria-controls')).toBe(results.id);
 
     // Escape clears the query; the results leave and the tab the reader was on is still open.

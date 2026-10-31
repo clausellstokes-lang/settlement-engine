@@ -16,6 +16,7 @@ import { collectPlotHooks, groupPlotHooksBySourcePage, PLOT_HOOK_CATEGORIES } fr
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { literaryTitle, nameOrTokenCase } from '../labelLadder.js';
+import { MentionText } from '../../ProseParagraph.jsx';
 
 /**
  * ⭐ THE PAGE IS THE HOOK CARDS AND NOTHING ABOVE THEM (chair rulings, RULINGS-T1 Plot
@@ -61,10 +62,10 @@ export function PlotHookCard({ hook }) {
         {/* `nameOrTokenCase`: this field is `npc.name` for an NPC hook and
             `parties.join(' vs ')` for a faction one; it cases a raw token ("npc"
             reads "NPC") and leaves a generated name exactly as spelled. */}
-        {nameOrTokenCase(hook.source)}
+        <MentionText text={nameOrTokenCase(hook.source)} structural />
       </div>
       <div style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: 2, lineHeight: 1.45 }}>
-        {hook.text}
+        <MentionText text={hook.text} />
       </div>
     </div>
   );

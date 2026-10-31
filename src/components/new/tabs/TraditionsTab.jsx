@@ -28,6 +28,7 @@ import {
   BODY, BORDER, CARD, FS, GOLD, INK, MUTED, SECOND, sans,
 } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { MentionText } from '../../ProseParagraph.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
 const OUTCOME_LABEL = {
@@ -99,7 +100,7 @@ export function TraditionRow({ rec, preview }) {
       </div>
       {!preview && (
         <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
-          <span>Owner: {owner}</span>
+          <span>Owner: <MentionText text={owner} structural /></span>
           <span>Last held: {outcome}</span>
         </div>
       )}

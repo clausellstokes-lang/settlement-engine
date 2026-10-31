@@ -1,5 +1,6 @@
 import { swatch, FS } from '../theme.js';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
+import { isMentionAllowed } from '../../domain/dossier/linkMentions.js';
 
 /**
  * EntityLink — an inline, in-dossier cross-reference. Renders an entity's
@@ -15,7 +16,11 @@ import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
  *   - resolves by STABLE id, never by name-matching;
  *   - shows `entry.currentName` (a live getter) when the entity is present;
  *   - renders the `fallback` as PLAIN TEXT (not a dead link) when the id no
- *     longer resolves or the target tab is gated out of this settlement.
+ *     longer resolves, or the viewer may not open it (X-20 (d): its tab is gated out of
+ *     this settlement, or a player/public view's projection does not carry it).
+ *
+ * A link click never also acts on the card around it: a mention inside a clickable card
+ * (a history event, a roster row) navigates and does not toggle the card.
  *
  * VERBATIM (pronoun) links: when `verbatim` is set the link shows `fallback`
  * exactly — the wrapped word — instead of the entity's current name. A pronoun
@@ -35,12 +40,13 @@ import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
  * @param {object} [props.style]     Extra inline style merged onto the link.
  */
 export default function EntityLink({ id, type, fallback = '', verbatim = false, style }) {
-  const { index, navigateToEntity } = useDossierEntities();
+  const { index, navigateToEntity, scope } = useDossierEntities();
   const entry = id ? index?.resolve?.(id) : null;
 
   // Broken, unresolved, or identity-ambiguous references stay plain text. An
-  // imported collision must never turn "first record wins" into navigation.
-  if (!entry || entry?.identity?.interactive === false) {
+  // imported collision must never turn "first record wins" into navigation, and
+  // an object this viewer may not open is never a door (X-20 (d)).
+  if (!entry || !isMentionAllowed(scope, entry)) {
     const text = fallback || '';
     return text ? (
       <span
@@ -56,11 +62,14 @@ export default function EntityLink({ id, type, fallback = '', verbatim = false, 
   const destination = entry.currentName || fallback || entry.label || '';
   const label = verbatim ? fallback : destination;
 
-  const activate = () => navigateToEntity(id);
+  const activate = (e) => {
+    e?.stopPropagation?.();
+    navigateToEntity(id);
+  };
   const onKeyDown = (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault();
-      activate();
+      activate(e);
     }
   };
 

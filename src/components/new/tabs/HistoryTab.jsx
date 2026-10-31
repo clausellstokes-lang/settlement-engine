@@ -21,6 +21,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 import { entityAnchor, eventIdFor } from '../../../domain/dossier/entityLinks.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
+import { MentionText } from '../../ProseParagraph.jsx';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
 const ALL_EC = {
@@ -82,10 +83,10 @@ export function TensionRow({t}) {
         ))}
       </div>
       {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
-      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
+      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}><MentionText text={typeof t==='object'?t.description||t.issue||t.type:String(t)}/></p>
       {/* Factions */}
       {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-        {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
+        {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}><MentionText text={f} structural/></span>)}
       </div>}
     </div>
   );
@@ -124,7 +125,7 @@ export function HistoryEventCard({evt, h, isExp, onToggle}) {
               {evtName!==typeLabel&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:ec.color}}>{typeLabel}</span>}
               {sev&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
             </div>
-            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
+            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}><MentionText text={desc} selfId={evtId}/></p>
           </div>
           <div style={{flexShrink:0,textAlign:'right'}}>
             <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>
@@ -138,7 +139,7 @@ export function HistoryEventCard({evt, h, isExp, onToggle}) {
       {isExp&&evt.lastingEffects?.length>0&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
         {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
           <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
-          <span style={{fontSize: chromeFontSize(FS['11.5'], mobile),color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
+          <span style={{fontSize: chromeFontSize(FS['11.5'], mobile),color:swatch.inkMag3}}><MentionText text={evt.lastingEffects.join(' · ')} selfId={evtId}/></span>
         </div>}
       </div>}
     </div>
@@ -262,7 +263,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
             </Button>
           )}
         </div>
-        {historicalCharacter&&<p style={{...serif,fontSize: proseFontSize(FS['13.5'], mobile),color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"{historicalCharacter}"</p>}
+        {historicalCharacter&&<p style={{...serif,fontSize: proseFontSize(FS['13.5'], mobile),color:swatch['#4A3020'],lineHeight:1.65,margin:0,fontStyle:'italic'}}>"<MentionText text={historicalCharacter}/>"</p>}
       </div>
 
 
@@ -285,7 +286,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
             ].filter(f=>f.value).map(({label,value})=>(
               <div key={label}>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginRight:5}}>{label}:</span>
-                <span style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{value}</span>
+                <span style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}><MentionText text={value}/></span>
               </div>
             ))}
           </div>

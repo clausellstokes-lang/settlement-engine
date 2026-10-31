@@ -530,6 +530,11 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // BUILD-W2-LINKS U2 (wave 2, X-20 (c), the focus convention): npcComponents.jsx 146 -> 147 and
 // 153 -> 154, two pure line moves (the useEntityFocus import line). Path, category and snippet
 // byte-identical; no ceiling moves.
+// BUILD-W2-LINKS U3 (wave 2, X-20 (a, b), every mention is a door): six pure line moves, no debt
+// motion. npcComponents.jsx 147 -> 149 and 154 -> 155 (the MentionText + EntityLink import line;
+// the tie header's names now sit above its toggle, one line shorter); PowerStrata.jsx 271 -> 272
+// (two rows), 273 -> 274 and 314 -> 315 (the MentionText import line). Path, category and
+// snippet byte-identical on every row; no ceiling moves.
 const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 140,

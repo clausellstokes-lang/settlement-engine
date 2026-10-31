@@ -30,6 +30,7 @@ import { institutionProvenanceOf } from '../../../domain/provenance/rosterProven
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { entityAnchor, entityIdFor } from '../../../domain/dossier/entityLinks.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
+import { MentionText } from '../../ProseParagraph.jsx';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -145,7 +146,7 @@ export function InstitutionCard({ inst, category, label, services, sets }) {
         {category && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{tokenCase(category)}</span>}
       </div>
       {services.length === 0 && inst.desc && (
-        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}>{inst.desc}</p>
+        <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={inst.desc} selfId={entityIdFor('institution', inst)} /></p>
       )}
       {services.map((svc, j) => {
         const status = statusOf(svc, sets);
@@ -155,7 +156,7 @@ export function InstitutionCard({ inst, category, label, services, sets }) {
               <span style={{ fontSize: FS['12.5'], fontWeight: 600, color: swatch.inkMag }}>{institutionDisplayName(svc.name)}</span>
               {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}
             </div>
-            {svc.desc && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.3, margin: '1px 0 0' }}>{svc.desc}</p>}
+            {svc.desc && <p style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.3, margin: '1px 0 0' }}><MentionText text={svc.desc} selfId={entityIdFor('institution', inst)} /></p>}
           </div>
         );
       })}

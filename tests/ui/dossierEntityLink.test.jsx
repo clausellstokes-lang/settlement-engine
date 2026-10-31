@@ -129,7 +129,7 @@ describe('EntityLink', () => {
     expect(useStore.getState().focusedEntity?.id).toBe(id);
   });
 
-  it('no-ops when the target tab is gated out of this settlement', () => {
+  it('renders plain text, not a door, when the target tab is gated out of this settlement (X-20 (d))', () => {
     const settlement = makeSettlement();
     const setActiveTab = vi.fn();
     const id = factionIdFromName('Iron Guild');
@@ -139,9 +139,10 @@ describe('EntityLink', () => {
         <EntityLink id={id} type="faction" fallback="the guild" />
       </Harness>
     );
-    act(() => {
-      fireEvent.click(screen.getByRole('button', { name: 'Go to Iron Guild' }));
-    });
+    // Before X-20 this rendered a button whose click no-oped; a door the viewer cannot open
+    // is now plain text, and the navigator still refuses the gated tab.
+    expect(screen.queryByRole('button', { name: 'Go to Iron Guild' })).toBeNull();
+    fireEvent.click(screen.getByText('the guild'));
     expect(setActiveTab).not.toHaveBeenCalled();
   });
 });
@@ -253,5 +254,107 @@ describe('X-20 (c): the focus convention on every card type (useEntityFocus)', (
     expect(screen.queryByText('Mara sits the bench.')).toBeNull();
     act(() => { useStore.getState().focusEntity('npc_1'); });
     expect(screen.getByText('Mara sits the bench.')).toBeTruthy();
+  });
+});
+
+describe('X-20 (a, b, d): every mention is a door, rendered', () => {
+  function tieTown() {
+    return {
+      ...makeSettlement(),
+      npcs: [
+        { id: 'npc_1', name: 'Mara Voss', role: 'Reeve', factionAffiliation: 'Iron Guild' },
+        { id: 'npc_2', name: 'Odo Penn', role: 'Smith' },
+      ],
+    };
+  }
+  const TIE = {
+    type: 'rival', typeName: 'Old Grudge', npc1Id: 'npc_1', npc2Id: 'npc_2', npc1Name: 'Mara Voss', npc2Name: 'Odo Penn',
+    npc1Role: 'Reeve', npc2Role: 'Smith', strength: 'strong',
+    description: 'Mara Voss still blames Odo Penn for the forge fire.', tension: 'The Iron Guild wants Odo Penn gone.',
+  };
+
+  it('a tie card links both names in its header and every name in its body, and only the names', async () => {
+    const { NPCRelCard2 } = await import('../../src/components/new/npcComponents.jsx');
+    const setActiveTab = vi.fn();
+    render(
+      <Harness settlement={tieTown()} tabs={ALL_TABS} setActiveTab={setActiveTab}>
+        <NPCRelCard2 rel={TIE} />
+      </Harness>,
+    );
+    expect(screen.getAllByRole('button', { name: 'Go to Mara Voss' })).toHaveLength(1);
+    fireEvent.click(screen.getByRole('button', { name: 'Toggle relationship between Mara Voss and Odo Penn' }));
+    expect(screen.getAllByRole('button', { name: 'Go to Mara Voss' })).toHaveLength(2);
+    expect(screen.getAllByRole('button', { name: 'Go to Odo Penn' })).toHaveLength(3);
+    expect(screen.getByRole('button', { name: 'Go to Iron Guild' }).textContent).toBe('Iron Guild');
+    // The text around the names is untouched.
+    expect(screen.getByText((_, el) => el?.tagName === 'P' && el.textContent === TIE.description)).toBeTruthy();
+    act(() => { fireEvent.click(screen.getAllByRole('button', { name: 'Go to Odo Penn' })[1]); });
+    expect(setActiveTab).toHaveBeenCalledWith('npcs', 'entity_link');
+    expect(useStore.getState().focusedEntity?.id).toBe('npc_2');
+  });
+
+  it('narrative tokens keep their own path: a token is never linked twice, the plain text around it is linked', async () => {
+    const { default: ProseParagraph } = await import('../../src/components/ProseParagraph.jsx');
+    render(
+      <Harness settlement={tieTown()} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <p><ProseParagraph text={'⟦entity:npc_1|Mara Voss⟧ meets Odo Penn; ⟦pronoun:npc_1|she⟧ leaves.'} /></p>
+      </Harness>,
+    );
+    expect(screen.getAllByRole('button', { name: 'Go to Mara Voss' }).map((b) => b.textContent)).toEqual(['Mara Voss', 'she']);
+    expect(screen.getAllByRole('button', { name: 'Go to Odo Penn' })).toHaveLength(1);
+  });
+
+  it('a card never links its own name, and with no dossier above it the markup is the bare string', async () => {
+    const { MentionText } = await import('../../src/components/ProseParagraph.jsx');
+    const { container } = render(<p><MentionText text="Mara Voss and Odo Penn" /></p>);
+    expect(container.innerHTML).toBe('<p>Mara Voss and Odo Penn</p>');
+    cleanup();
+    render(
+      <Harness settlement={tieTown()} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <p><MentionText text="Mara Voss trusts Odo Penn." selfId="npc_1" /></p>
+      </Harness>,
+    );
+    expect(screen.queryByRole('button', { name: 'Go to Mara Voss' })).toBeNull();
+    expect(screen.getByRole('button', { name: 'Go to Odo Penn' })).toBeTruthy();
+  });
+
+  it('a desk paragraph (ProseBlock) links its mentions', async () => {
+    const { default: ProseBlock } = await import('../../src/components/new/ProseBlock.jsx');
+    render(
+      <Harness settlement={tieTown()} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <ProseBlock lines={['The Iron Guild answers to Mara Voss.']} />
+      </Harness>,
+    );
+    expect(screen.getByRole('button', { name: 'Go to Iron Guild' })).toBeTruthy();
+    expect(screen.getByRole('button', { name: 'Go to Mara Voss' })).toBeTruthy();
+  });
+
+  it('a mention inside a clickable card navigates and does not toggle the card', async () => {
+    const { HistoryEventCard } = await import('../../src/components/new/tabs/HistoryTab.jsx');
+    const onToggle = vi.fn();
+    const evt = { id: 'evt_x', name: 'The Quarrel', type: 'political', yearsAgo: 3, description: 'Mara Voss broke with the Iron Guild.', lastingEffects: ['A new bench'] };
+    render(
+      <Harness settlement={tieTown()} tabs={ALL_TABS} setActiveTab={vi.fn()}>
+        <HistoryEventCard evt={evt} h={{}} isExp={false} onToggle={onToggle} />
+      </Harness>,
+    );
+    act(() => { fireEvent.click(screen.getByRole('button', { name: 'Go to Mara Voss' })); });
+    fireEvent.keyDown(screen.getByRole('button', { name: 'Go to Iron Guild' }), { key: 'Enter' });
+    expect(onToggle).not.toHaveBeenCalled();
+    expect(useStore.getState().focusedEntity?.id).toBe(factionIdFromName('Iron Guild'));
+  });
+
+  it('a player view links no object its projection does not carry', () => {
+    const town = tieTown();
+    town.npcs.push({ id: 'npc_9', name: 'Hidden Hand', role: '' });
+    function PlayerHarness({ settlement, children }) {
+      const value = useDossierEntityNav(settlement, vi.fn(), ALL_TABS, { playerView: true });
+      // The DM's record carries npc_9 by name; the player's projection is told it has none.
+      return <DossierEntityContext.Provider value={{ ...value, scope: { ...value.scope, allow: new Set([...value.scope.allow].filter((k) => k !== 'npc:npc_9')) } }}>{children}</DossierEntityContext.Provider>;
+    }
+    render(<PlayerHarness settlement={town}><EntityLink id="npc_9" type="npc" fallback="Hidden Hand" /><EntityLink id="npc_1" type="npc" fallback="Mara Voss" /></PlayerHarness>);
+    expect(screen.queryByRole('button', { name: 'Go to Hidden Hand' })).toBeNull();
+    expect(screen.getByText('Hidden Hand').tagName).toBe('SPAN');
+    expect(screen.getByRole('button', { name: 'Go to Mara Voss' })).toBeTruthy();
   });
 });
