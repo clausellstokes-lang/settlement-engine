@@ -27,6 +27,7 @@ import Button from '../../../primitives/Button.jsx';
 import InstitutionLink from '../../../primitives/InstitutionLink.jsx';
 import NameColumns from '../../../primitives/NameColumns.jsx';
 import EntityLink from '../../../primitives/EntityLink.jsx';
+import { MentionText } from '../../../ProseParagraph.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
 import { derivePowerStrata, groupRelationships } from '../../../../domain/dossier/powerStrata.js';
@@ -326,7 +327,7 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
 
       {isExp && expandable && (
         <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
-          {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
+          {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}><MentionText text={f.desc} selfId={factionIdFromName(f.faction)} /></p>}
           {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
         </div>
       )}

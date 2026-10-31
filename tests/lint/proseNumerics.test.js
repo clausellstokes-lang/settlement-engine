@@ -530,6 +530,16 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // GS-2 ONE FACTION SET (2026-10-31, ODQ §934.101, lane G2) — NO DEBT MOTION, A PURE LINE MOVE. PowerStrata.jsx
 // lost TheFactions' `factionGroups` read and FactionRow's sub-row now counts members by affiliation, so its four
 // rows re-address 271 -> 270 (both categories), 273 -> 272 and 314 -> 316. Totals stay 207 / 140 / 50.
+// BUILD-W2-LINKS U2 (wave 2, X-20 (c), the focus convention): npcComponents.jsx 146 -> 147 and
+// 153 -> 154, two pure line moves (the useEntityFocus import line). Path, category and snippet
+// byte-identical; no ceiling moves.
+// BUILD-W2-LINKS U3 (wave 2, X-20 (a, b), every mention is a door): six pure line moves, no debt
+// motion. npcComponents.jsx 147 -> 149 and 154 -> 155 (the MentionText + EntityLink import line;
+// the tie header's names now sit above its toggle, one line shorter); PowerStrata.jsx 271 -> 272
+// (two rows), 273 -> 274 and 314 -> 315 (the MentionText import line). Path, category and
+// snippet byte-identical on every row; no ceiling moves.
+// MERGE (chair, 2026-10-31): G2 and W2-LINKS both re-addressed PowerStrata.jsx and npcComponents.jsx rows; the
+// addresses below are re-read from the merged tree's own failure diff, pure line moves, totals 207 / 140 / 50.
 const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
   floatInterpolation: 140,

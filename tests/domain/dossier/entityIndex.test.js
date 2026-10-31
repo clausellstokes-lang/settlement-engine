@@ -20,6 +20,11 @@ import {
   enumerateDossierObjects,
   MATCH,
 } from '../../../src/domain/dossier/dossierSearch.js';
+import {
+  linkMentions,
+  mentionScopeFor,
+  isMentionAllowed,
+} from '../../../src/domain/dossier/linkMentions.js';
 
 function sampleSettlement() {
   return {
@@ -447,5 +452,95 @@ describe('dossierSearch (X-19b): the one-stop shop of the dossier\'s own objects
     expect(searchDossier(searchTown(), 'm').total).toBe(0);
     expect(searchDossier(searchTown(), '  ').groups).toEqual([]);
     expect(searchDossier(null, 'Mara').total).toBe(0);
+  });
+});
+
+describe('linkMentions (X-20): every mention is a door', () => {
+  function mentionTown() {
+    return {
+      id: 'settlement.ashford',
+      name: 'Ashford',
+      npcs: [
+        { id: 'npc_1', name: 'Mara Voss', role: 'Reeve' },
+        { id: 'npc_2', name: 'Odo Penn', role: 'Smith' },
+        { id: 'npc_3', name: 'Al', role: 'Child' },
+      ],
+      powerStructure: {
+        factions: [
+          { faction: 'Guild', power: 10 },
+          { faction: 'Iron Guild', power: 60 },
+        ],
+      },
+      institutions: [{ name: 'Granary' }],
+      config: { nearbyResources: ['timber'] },
+      history: { historicalEvents: [{ id: 'evt_fire', name: 'The Great Fire', yearsAgo: 40 }] },
+    };
+  }
+  const links = (segments) => segments.filter((s) => s.type === 'link').map((s) => [s.value, s.id]);
+  const rejoin = (segments) => segments.map((s) => s.value).join('');
+
+  it('links exact whole-word canonical names and keeps every character of the text', () => {
+    const index = buildDossierEntityIndex(mentionTown());
+    const text = 'Mara Voss owes Odo Penn, and the Granary knows it; Mara Voss\'s debt dates from The Great Fire.';
+    const segs = linkMentions(text, index);
+    expect(rejoin(segs)).toBe(text);
+    expect(links(segs)).toEqual([
+      ['Mara Voss', 'npc_1'], ['Odo Penn', 'npc_2'], ['Granary', index.institutions[0].id],
+      ['Mara Voss', 'npc_1'], ['The Great Fire', 'evt_fire'],
+    ]);
+  });
+
+  it('links the longer name when a faction is named inside another faction', () => {
+    const index = buildDossierEntityIndex(mentionTown());
+    const segs = linkMentions('The Iron Guild outbids the Guild.', index);
+    expect(links(segs)).toEqual([['Iron Guild', factionIdFromName('Iron Guild')], ['Guild', factionIdFromName('Guild')]]);
+  });
+
+  it('never links a surname alone, a different case, a name inside a word, or a too-short name', () => {
+    const index = buildDossierEntityIndex(mentionTown());
+    for (const text of ['Voss signed it.', 'mara voss signed it.', 'MARA VOSS signed it.', 'Guilds and Guildhall', 'Al came', 'Mara Vossberg came.']) {
+      expect(links(linkMentions(text, index))).toEqual([]);
+    }
+    expect(links(linkMentions('(Mara Voss), "Odo Penn"!', index))).toEqual([['Mara Voss', 'npc_1'], ['Odo Penn', 'npc_2']]);
+  });
+
+  it('keeps a card from linking to itself and keeps resources out of prose', () => {
+    const index = buildDossierEntityIndex(mentionTown());
+    expect(links(linkMentions('Mara Voss trusts Odo Penn.', index, null, { selfId: 'npc_1' }))).toEqual([['Odo Penn', 'npc_2']]);
+    expect(links(linkMentions('Ashford sells timber.', index))).toEqual([]);
+    expect(links(linkMentions('timber', index, null, { structural: true }))).toEqual([['timber', 'timber']]);
+  });
+
+  it('leaves an ambiguous name as text: two people sharing one name link to neither', () => {
+    const town = mentionTown();
+    town.npcs.push({ id: 'npc_4', name: 'Odo Penn', role: 'Cousin' });
+    const index = buildDossierEntityIndex(town);
+    expect(links(linkMentions('Odo Penn and Mara Voss', index))).toEqual([['Mara Voss', 'npc_1']]);
+  });
+
+  it('links only what the viewer may open: the tab must be present', () => {
+    const town = mentionTown();
+    const index = buildDossierEntityIndex(town);
+    const scope = mentionScopeFor(town, { tabs: ['npcs'] });
+    expect(links(linkMentions('Mara Voss and the Iron Guild', index, scope))).toEqual([['Mara Voss', 'npc_1']]);
+    expect(isMentionAllowed(scope, index.factions[1])).toBe(false);
+    expect(isMentionAllowed(null, index.factions[1])).toBe(true);
+  });
+
+  it('a player view links only objects that survive the public projection', () => {
+    const town = mentionTown();
+    // The DM's record holds a person the projection the player receives does not carry
+    // (toPublicSafe drops an NPC with neither name nor role; the gallery veil drops more).
+    const dmIndex = buildDossierEntityIndex({ ...town, npcs: [...town.npcs, { id: 'npc_9', name: 'Hidden Hand', role: 'Spy' }] });
+    const projected = { ...town, npcs: [...town.npcs, { id: 'npc_9', name: '', role: '' }] };
+    const player = mentionScopeFor(projected, { playerView: true, tabs: ['npcs', 'power', 'history', 'institutions'] });
+    expect(links(linkMentions('Hidden Hand pays Mara Voss.', dmIndex, player))).toEqual([['Mara Voss', 'npc_1']]);
+    const owner = mentionScopeFor(projected, { tabs: ['npcs'] });
+    expect(links(linkMentions('Hidden Hand pays Mara Voss.', dmIndex, owner))).toEqual([['Hidden Hand', 'npc_9'], ['Mara Voss', 'npc_1']]);
+  });
+
+  it('returns no segments for a non-string and one text segment with no index', () => {
+    expect(linkMentions(null, null)).toEqual([]);
+    expect(linkMentions('Mara Voss', null)).toEqual([{ type: 'text', value: 'Mara Voss' }]);
   });
 });

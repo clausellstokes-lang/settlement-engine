@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { FS, swatch, MUTED } from '../theme.js';
 import {Ti, serif, Tag, PlotHook} from './Primitives';
 import EntityLink from '../primitives/EntityLink.jsx';
 import { useDossierEntities } from '../dossier/DossierEntityContext.jsx';
-import { useStore } from '../../store/index.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
+import { MentionText } from '../ProseParagraph.jsx';
 import { entityAnchor, neighbourIdFor, localNpcId } from '../../domain/dossier/entityLinks.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -31,16 +32,9 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
   // entries by (id → else `neighbour.<slug(name)>`), so identity matches by id,
   // never by name. Focus only forces OPEN — a manual collapse afterward still
   // works. Keyed on focus `ts` so a repeat click of the same link re-fires.
+  // The one convention every card follows (X-20 (c); components/dossier/useEntityFocus.js).
   const neighbourId = neighbourIdFor(link);
-  const focusedEntity = useStore(s => s.focusedEntity);
-  const cardRef = useRef(null);
-  const isFocused = !!focusedEntity?.id && !!neighbourId && focusedEntity.id === neighbourId;
-  useEffect(() => {
-    if (!isFocused) return;
-    // eslint-disable-next-line react-hooks/set-state-in-effect -- force-open + scroll on hyperlink focus is the intended additive affordance; keyed on `ts` to re-fire on repeat clicks
-    setOpen(true);
-    cardRef.current?.scrollIntoView?.({ behavior: 'smooth', block: 'start' });
-  }, [focusedEntity?.ts, isFocused]);
+  const { ref: cardRef, isFocused } = useEntityFocus(neighbourId, () => setOpen(true));
 
   return (
     <div ref={cardRef} id={entityAnchor('neighbour', { id: neighbourId, name: link.neighbourName||link.name })} style={{border:`1px solid ${st.border}`,borderLeft:`3px solid ${st.color}`,overflow:'hidden',outline:isFocused?`2px solid ${st.color}55`:'none'}}>
@@ -58,20 +52,20 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
       {open&&<div style={{padding:'12px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${st.border}`}}>
         {link.cause&&<div style={{marginBottom:10}}>
           <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Cause</div>
-          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.cause}</p>
+          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}><MentionText text={link.cause} selfId={neighbourId}/></p>
         </div>}
         {link.diplomaticStatus&&<div style={{marginBottom:10}}>
           <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Diplomatic status</div>
-          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}>{link.diplomaticStatus}</p>
+          <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:0}}><MentionText text={link.diplomaticStatus} selfId={neighbourId}/></p>
         </div>}
         {(link.tensions?.length>0||link.opportunities?.length>0)&&<div style={{display:'grid',gridTemplateColumns:'repeat(auto-fit,minmax(180px,1fr))',gap:10,marginBottom:10}}>
           {link.tensions?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',padding:'8px 10px'}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.danger,marginBottom:5}}>Tensions</div>
-            {link.tensions.map((t,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.4}}>▸ {t}</div>)}
+            {link.tensions.map((t,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,marginBottom:3,lineHeight:1.4}}>▸ <MentionText text={t} selfId={neighbourId}/></div>)}
           </div>}
           {link.opportunities?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',padding:'8px 10px'}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,marginBottom:5}}>Opportunities</div>
-            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ {o}</div>)}
+            {link.opportunities.map((o,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,marginBottom:3,lineHeight:1.4}}>▸ <MentionText text={o} selfId={neighbourId}/></div>)}
           </div>}
         </div>}
         {link.npcConnections?.length>0&&<div>
@@ -98,7 +92,7 @@ export function NeighbourLinkCard({link,settlement,styleFor}) {
                   <div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#5A6A9A']}}>{conn.neighbourNPCRole?`${conn.neighbourNPCRole} · `:''}  {link.neighbourName}</div>
                 </div>
               </div>
-              {conn.description&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,lineHeight:1.5,margin:0}}>{conn.description}</p>}
+              {conn.description&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag,lineHeight:1.5,margin:0}}><MentionText text={conn.description} selfId={neighbourId}/></p>}
             </div>
           ))}
         </div>}

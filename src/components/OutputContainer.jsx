@@ -793,7 +793,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // because this component owns the active settlement and the tab state. All
   // renderable tabs are passed (not the group-filtered `tabs`) so a link can
   // reach any tab across group boundaries; setActiveTab re-derives the group.
-  const entityNav = useDossierEntityNav(activeSettlement, setActiveTab, allTabs);
+  const entityNav = useDossierEntityNav(activeSettlement, setActiveTab, allTabs, { playerView, publicDossier });
   // THE NEWS ADDRESS LAW, realm-wide (owner 2026-07-22). The dossier's own
   // Chronicle names entities that may live in OTHER settlements (cross-settlement
   // world-pulse refs). This provides the realm entity web + cross-settlement

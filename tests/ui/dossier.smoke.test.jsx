@@ -223,7 +223,10 @@ describe('the dossier search bar: mount, results in the body, keyboard path, aud
     expect(people.getByRole('button', { name: 'NPCs' })).toBeTruthy();
     expect(people.getByText('Mara Voss')).toBeTruthy();
     expect(within(results).getByRole('button', { name: 'Toggle relationship between Mara Voss and Odo Penn' })).toBeTruthy();
-    expect(within(results).getByText('Mara Voss needs the ledger found before the audit.')).toBeTruthy();
+    // The hook card's text is whole, and her name inside it is a door to her card (X-20).
+    const hooks = within(results.querySelector('[data-testid="search-group-plot_hooks"]'));
+    expect(hooks.getByText((_, el) => el?.tagName === 'DIV' && el.textContent === 'Mara Voss needs the ledger found before the audit.')).toBeTruthy();
+    expect(hooks.getAllByRole('button', { name: 'Go to Mara Voss' }).length).toBeGreaterThan(0);
     expect(field.getAttribute('aria-controls')).toBe(results.id);
 
     // Escape clears the query; the results leave and the tab the reader was on is still open.
@@ -232,6 +235,24 @@ describe('the dossier search bar: mount, results in the body, keyboard path, aud
     expect(field.value).toBe('');
     expect(activeTabId(container)).toBe('plot_hooks');
     expect(container.querySelector('#sf-panel-plot_hooks')).toBeTruthy();
+  });
+
+  test('X-20 (c): the object whose name the reader typed renders fully expanded where it was found; a partial name does not', async () => {
+    const { default: OutputContainer } = await import('../../src/components/OutputContainer.jsx');
+    const town = searchTown();
+    town.npcs[1].structuralPosition = 'Odo keeps the tally sticks.';
+    const { findByRole } = render(<OutputContainer settlement={town} readOnly saveId="save-1" />);
+    const field = await findByRole('searchbox', { name: 'Search this dossier' }, { timeout: 15000 });
+    fireEvent.change(field, { target: { value: 'Odo Penn' } });
+    const exact = await findByRole('region', { name: 'Search results for Odo Penn' }, { timeout: 15000 });
+    const people = within(exact.querySelector('[data-testid="search-group-npcs"]'));
+    expect(people.getByText('Odo keeps the tally sticks.')).toBeTruthy();
+    // A fresh partial query (the reader cleared the field): the card keeps its tab's collapsed shape.
+    fireEvent.keyDown(field, { key: 'Escape' });
+    await waitFor(() => expect(field.value).toBe(''));
+    fireEvent.change(field, { target: { value: 'Odo' } });
+    const partial = await findByRole('region', { name: 'Search results for Odo' }, { timeout: 15000 });
+    expect(within(partial).queryByText('Odo keeps the tally sticks.')).toBeNull();
   });
 
   test('Enter opens the best result\'s owning tab and ends the search; a group header opens its tab', async () => {

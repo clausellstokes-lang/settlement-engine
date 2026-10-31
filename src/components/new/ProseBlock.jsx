@@ -44,6 +44,7 @@ import { FS } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { proseFontSize } from '../../design/proseScale.js';
 import { tierNounFor, weaveBlock } from '../../domain/display/stateProse/weaveBlock.js';
+import { MentionText } from '../ProseParagraph.jsx';
 
 /**
  * One mounted position, woven into one paragraph.
@@ -67,7 +68,7 @@ export default function ProseBlock({ lines, settlementName, tier, style, testId 
   const base = typeof style?.fontSize === 'number' ? style.fontSize : FS.md;
   return (
     <p data-testid={testId} style={{ ...style, fontSize: proseFontSize(base, mobile) }}>
-      {paragraph}
+      <MentionText text={paragraph} />
     </p>
   );
 }
