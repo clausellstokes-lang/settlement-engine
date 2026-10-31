@@ -1,10 +1,18 @@
 /**
- * ShareToGallery.jsx — Publish / unpublish a saved settlement.
+ * ShareToGallery.jsx — Export a saved settlement to the gallery, then manage it.
  *
  * Mounts in the dossier toolbar for owned, persisted settlements. When
  * the dossier hasn't been saved yet, the button shows a soft-disabled
- * "save first" hint. Once published, swaps to an "unshare" affordance
- * plus a copyable /gallery/{slug} link.
+ * "save first" hint. Unexported, it offers "Export to gallery" with the
+ * snapshot-or-live toggle (X-24). Exported, the button reads "Manage gallery"
+ * (X-24 (c)): curate for visitors (the veil's eyes, X-21), snapshot or live,
+ * refresh the snapshot, import on/off with the veil warning, the gallery
+ * details, and "Remove from gallery" (X-24b), which reverts the button and
+ * clears the veil and the mode so a later export starts from the defaults.
+ *
+ * THE FIRST EXPORT writes the share's veil marker with an EMPTY delta list
+ * (galleryVeil.js :: writeShareVeil): the one default set (defaultVeilFor)
+ * applies from that moment, every default an eye the DM may flip.
  *
  * Visibility:
  *   - Hidden for anonymous users (they have no saved row to publish).
@@ -18,7 +26,7 @@ import { useMemo, useState } from 'react';
 import { Globe, Lock, Copy, Check, AlertCircle, Image as ImageIcon, Save, Link2 } from 'lucide-react';
 import { useStore } from '../store/index.js';
 import {
-  publishSettlement, unpublishSettlement, updateGalleryMetadata,
+  publishSettlement, updateGalleryMetadata,
   shareSettlementUnlisted, rotateSettlementUnlistedSlug, revokeSettlementUnlisted,
 } from '../lib/gallery.js';
 import UnlistedShareBar from './gallery/UnlistedShareBar.jsx';
@@ -31,7 +39,10 @@ import { computeAliveness } from '../lib/galleryAliveness.js';
 import GalleryDescriptionEditor from './GalleryDescriptionEditor.jsx';
 import CoverImageField from './gallery/CoverImageField.jsx';
 import GalleryMemberVisibility from './GalleryMemberVisibility.jsx';
+import ManageGallery, { GalleryModeToggle } from './gallery/ManageGallery.jsx';
 import Button from './primitives/Button.jsx';
+import { readShareVeil, writeShareVeil } from '../domain/display/galleryVeil.js';
+import useGalleryShareControls from '../hooks/useGalleryShareControls.js';
 import { BORDER, BORDER2, CARD, CARD_ALT, sans, SP, FS, GREEN, RED, INK, BODY, swatch } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
@@ -159,6 +170,14 @@ export default function ShareToGallery({
       ? galleryMemberOverrides
       : {}
   ));
+  // X-24 / X-21: snapshot or live, the Manage panel, curate, remove (the hook owns the writes).
+  const {
+    mode, manageOpen, setManageOpen, curating, setCurating, veil, share, visitorCopy, veilModel,
+    modeRecord, handleMode, handleRefreshSnapshot, handleCurateDone, handleRemove,
+  } = useGalleryShareControls({
+    saveId, settlement, shareDm, memberOverrides, setMemberOverrides, importable, setImportable,
+    isPublic, setIsPublic, updateSavedSettlement, onSaved, setBusy, setError, galleryMemberOverrides,
+  });
   const canonReady = isCampaignCanonized(campaignState);
   // §S4 — derive the public-safe realm-arc digest from the owning campaign's LIVE
   // war/pantheon ledgers. Empty for a no-war/no-deity campaign (the field is then
@@ -269,9 +288,16 @@ export default function ShareToGallery({
     }
     setBusy(true); setError(null);
     try {
-      const newSlug = await publishSettlement(saveId, metadata);
+      // THE FIRST EXPORT: the veil marker with the deltas already held (none after a removal),
+      // so the one default set applies; the chosen mode; a live page is view only.
+      const exportOverrides = writeShareVeil(memberOverrides, readShareVeil(memberOverrides).deltas, modeRecord(mode));
+      const exportImportable = mode === 'live' ? false : importable;
+      const newSlug = await publishSettlement(saveId, { ...metadata, memberOverrides: exportOverrides, importable: exportImportable });
+      setMemberOverrides(exportOverrides);
+      setImportable(exportImportable);
       setSlug(newSlug);
       setIsPublic(true);
+      setDetailsOpen(false);
       // Best-effort: update the cached saved-settlement row so other
       // surfaces (Settlements panel, AccountPage) see the new state
       // without a refetch. updateSavedSettlement may not be defined
@@ -287,8 +313,8 @@ export default function ShareToGallery({
           gallery_tags: tagsInput.split(',').map(tag => tag.trim()).filter(Boolean),
           gallery_share_dm: shareDm,
           gallery_share_narrated: shareNarrated,
-          gallery_importable: importable,
-          gallery_member_overrides: memberOverrides,
+          gallery_importable: exportImportable,
+          gallery_member_overrides: exportOverrides,
         });
       } catch { /* non-fatal */ }
     } catch (e) {
@@ -338,20 +364,6 @@ export default function ShareToGallery({
     }
   }
 
-  async function handleUnpublish() {
-    setBusy(true); setError(null);
-    try {
-      await unpublishSettlement(saveId);
-      setIsPublic(false);
-      try {
-        updateSavedSettlement?.(saveId, { is_public: false });
-      } catch { /* non-fatal */ }
-    } catch (e) {
-      setError(e.message || 'Unpublish failed');
-    } finally {
-      setBusy(false);
-    }
-  }
 
   function handleCopy() {
     if (!slug || typeof navigator === 'undefined' || !navigator.clipboard) return;
@@ -416,7 +428,7 @@ export default function ShareToGallery({
       .catch(() => { /* clipboard refused */ });
   }
 
-  const detailsForm = detailsOpen && (
+  const detailsBody = (
     <div style={{
       width: '100%',
       display: 'grid',
@@ -473,12 +485,16 @@ export default function ShareToGallery({
           id="share-to-gallery-importable"
           type="checkbox"
           aria-label="Allow others to import this settlement"
-          checked={importable}
+          checked={importable && mode !== 'live'}
+          disabled={mode === 'live'}
           onChange={event => setImportable(event.target.checked)}
           style={{ marginTop: 2, flexShrink: 0 }}
         />
         <span style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
           <strong style={{ color: INK }}>Allow others to import this settlement</strong>. Let other DMs clone the public version into their own library. Private DM content (secrets, notes) is never included in an import. Off by default; save details (or re-share) to apply.
+          {mode === 'live'
+            ? <> A live page is view only: import stays off.</>
+            : <> An import copies the public dossier as the server sends it, which still includes what you hide from visitors.</>}
         </span>
       </label>
       {/* Per-member (per-NPC) visibility (migration 092/093). Self-hides when the
@@ -548,6 +564,26 @@ export default function ShareToGallery({
       )}
     </div>
   );
+  const detailsForm = detailsOpen && detailsBody;
+
+  const modeToggle = <GalleryModeToggle mode={mode} onChange={handleMode} />;
+  const managePanel = manageOpen && (
+    <ManageGallery
+      mode={mode}
+      onMode={handleMode}
+      share={share}
+      veil={veil}
+      veilModel={veilModel}
+      visitorCopy={visitorCopy}
+      curating={curating}
+      setCurating={setCurating}
+      onCurateDone={handleCurateDone}
+      onRefresh={handleRefreshSnapshot}
+      onRemove={handleRemove}
+      busy={busy}
+      details={detailsBody}
+    />
+  );
 
   // V-20 UNLISTED state — party link: copy + rotate (revoke) + stop sharing.
   if (isUnlisted && unlistedSlug) {
@@ -592,18 +628,11 @@ export default function ShareToGallery({
         <Button
           variant="ghost"
           size="sm"
-          onClick={() => setDetailsOpen(open => !open)}
+          aria-expanded={manageOpen}
+          onClick={() => setManageOpen(open => !open)}
           icon={<ImageIcon size={12} />}
         >
-          Gallery details
-        </Button>
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={handleUnpublish}
-          busy={busy}
-        >
-          {busy ? 'Working…' : 'Unshare'}
+          Manage gallery
         </Button>
         {error && (
           <span style={{
@@ -619,9 +648,9 @@ export default function ShareToGallery({
             time, so their event log is visible retroactively. */}
         <span style={{ flexBasis: '100%', fontSize: chromeFontSize(FS.xs, mobile), color: INK, opacity: 0.75 }}>
           Your settlement's event chronicle (event titles and summaries) is publicly
-          visible on the gallery page. Unshare to remove it.
+          visible on the gallery page. Remove from gallery to take it down.
         </span>
-        {detailsForm}
+        {managePanel}
       </div>
     );
   }
@@ -641,8 +670,9 @@ export default function ShareToGallery({
         title="Make this dossier readable to anyone with the link"
         icon={<Globe size={12} />}
       >
-        {busy ? 'Publishing…' : 'Share to gallery'}
+        {busy ? 'Exporting…' : 'Export to gallery'}
       </Button>
+      {modeToggle}
       <Button
         variant="secondary"
         size="sm"
