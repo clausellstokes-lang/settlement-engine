@@ -184,9 +184,10 @@ const _getPriorityModifiers = (tier, goodsToggles = {}) => {
  * @param {string[]} instNames    - Lowercase institution names present in settlement
  * @param {string}   tier         - Settlement tier
  * @param {string}   [govOverride]- Override for the governing body name
+ * @param {boolean}  [magicWorks] - worldLaw.magicFunctions(); a no-magic world names no mages' quarter (GS-4)
  * @returns {string} Adapted text
  */
-const _getTierConstraints = (text, instNames, tier, govOverride) => {
+const _getTierConstraints = (text, instNames, tier, govOverride, magicWorks = true) => {
   const has = (keyword) => instNames.some(n => n.includes(keyword));
   const isSmall = ['thorp', 'hamlet', 'village'].includes(tier);
 
@@ -236,7 +237,7 @@ const _getTierConstraints = (text, instNames, tier, govOverride) => {
 
   // Resolve the arcane reference
   const arcaneRef =
-    has('wizard') || has('mage') || has('alchemist')
+    magicWorks && (has('wizard') || has('mage') || has('alchemist'))
       ? "the mages' quarter"
       : 'the arcane practitioners';
 
