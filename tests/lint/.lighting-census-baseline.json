@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ab11a31a83716561bae12be05f9f0d02705b87d8",
-  "measuredBy": "chair (integration, G2 and G1-U1 merges)",
+  "measuredAtSha": "3011e02ecf717811ec305e5405023ab961b8bb4e",
+  "measuredBy": "build lane W2-VEIL-B",
   "date": "2026-10-31",
-  "note": "test-title census re-measured at the G2 (one faction set, 9 tests) and G1-U1 (mages quarter gate, 3 tests) merges; no lighting marker moved",
+  "note": "W2-VEIL-B test arms in existing files (publicSafe, gallery, shareToGalleryReloadSeed, defenseTabFlow): live titles 27063 -> 27074, suiteTitles 7138 -> 7141; no test file created, no lighting marker moved",
   "files": 2805,
   "parked": 361,
   "credited": 2444,
-  "titles": 27063,
-  "suiteTitles": 7138
+  "titles": 27074,
+  "suiteTitles": 7141
 }
