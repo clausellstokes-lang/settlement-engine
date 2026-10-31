@@ -551,7 +551,9 @@ const DESKTOP_BASELINE = Object.freeze({
   "Summary/Overview":    { measured: 20, sub14: 19 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured:  1, sub14:  1 },
-  "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
+  // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
+  // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
+  "Summary/Plot Hooks":  { measured: 38, sub14: 38 },
   "Systems/Services":    { measured: 96, sub14: 96 },
   "Systems/Institutions": { measured: 96, sub14: 96 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
@@ -578,7 +580,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
   "World/NPCs":          { measured: 30, sub14: 30 },
-  "World/Relationships": { measured: 59, sub14: 58 },
+  "World/Relationships": { measured: 60, sub14: 58 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
   "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
@@ -630,7 +632,9 @@ const DESKTOP_BASELINE = Object.freeze({
 const MOBILE_BASELINE = Object.freeze({
   "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
+  // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
+  // line more (X-26a); both sub-floor counts stay where they were.
+  "Summary/Plot Hooks":  { prose: 38, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
@@ -648,7 +652,7 @@ const MOBILE_BASELINE = Object.freeze({
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
   "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 57, chrome: 2, sub14: 2, sub12: 0 },
+  "World/Relationships": { prose: 58, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
