@@ -20,6 +20,125 @@ import ProseBlock from '../ProseBlock.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
 
+// Extended event type colors (EVENT_COLORS only covers 5 types)
+const ALL_EC = {
+  ...EVENT_COLORS,
+  demographic: {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0',label:'Demographic'},
+  exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Exile & Return'},
+  occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Occupation'},
+};
+
+// Tension type colors + labels
+const TENSION_META = {
+  crime_wave:          {color:'#8b1a1a',label:'Crime Wave'},
+  economic_disparity:  {color:'#7a5010',label:'Economic Disparity'},
+  guild_conflict:      {color:'#8a4010',label:'Guild Conflict'},
+  infiltration_fear:   {color:'#3a1a6a',label:'Infiltration Fear'},
+  leadership_vacuum:   {color:'#5a5a1a',label:'Leadership Vacuum'},
+  magical_controversy: {color:'#5a2a8a',label:'Magical Controversy'},
+  occupation_legacy:   {color:'#1a2a5a',label:'Occupation Legacy'},
+  outside_debt:        {color:'#6b4010',label:'External Debt'},
+  resource_scarcity:   {color:'#7a4010',label:'Resource Scarcity'},
+  succession_crisis:   {color:'#8b1a1a',label:'Succession Crisis'},
+};
+
+// Recency label
+const recencyLabel = yrs => yrs<=10?'Recent':yrs<=30?'Living memory':yrs<=80?'Last century':yrs<=200?'Ancient':'Deep history';
+const recencyColor = yrs => yrs<=10?'#8b1a1a':yrs<=30?'#a0762a':yrs<=80?'#5a6a1a':yrs<=200?'#2a4a7a':'#5a2a8a';
+
+// Build event card text: the event's own name is the title (falling back to
+// the type label), and the description renders IN FULL — it is the card's
+// only body and runs at most ~117 chars, so truncation only ever hid prose.
+const eventTitle = (evt) => {
+  const ec = ALL_EC[evt.type] || ALL_EC.political;
+  const name = typeof evt.name === 'string' && evt.name.trim() ? evt.name.trim() : ec.label;
+  const desc = typeof evt.description === 'string' ? evt.description : '';
+  return {label: ec.label, name, desc};
+};
+
+/**
+ * One current-tension row, extracted verbatim from the tab (BUILD-W2-SEARCH U2, no behaviour
+ * change) so the dossier search mounts a tension through its own row.
+ */
+export function TensionRow({t}) {
+  const mobile = useIsMobile();
+  // The table above names ten tension types and the engine writes more than ten
+  // (the campaign path adds `external_threat` and its siblings), so the fallback
+  // was printing the raw kind. A kind the table has not styled still reads as a
+  // phrase rather than as an identifier.
+  const tm = TENSION_META[t.type] || {color:'#b8860b',label:tokenCase(t.type)||'Tension'};
+  const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
+  const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
+  const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
+  return (
+    <div style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
+      {/* Header */}
+      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:tm.color}}>{tm.label}</span>
+        {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
+          <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
+        ))}
+      </div>
+      {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
+      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
+      {/* Factions */}
+      {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
+        {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
+      </div>}
+    </div>
+  );
+}
+
+/**
+ * One historical-event card, extracted verbatim from the tab (BUILD-W2-SEARCH U2, no behaviour
+ * change). `h` is the settlement's history (the still-relevant mark reads it); the tab owns
+ * which card is open and hands each card `isExp` and `onToggle`.
+ */
+export function HistoryEventCard({evt, h, isExp, onToggle}) {
+  const mobile = useIsMobile();
+  const ec = ALL_EC[evt.type] || ALL_EC.political;
+  const sev = typeof evt.severity==='string'&&evt.severity.length>2 ? evt.severity : null;
+  const {label:typeLabel, name:evtName, desc} = eventTitle(evt);
+  const isAnchored = eventHasOpenThread(evt, h);
+  const yrsColor = recencyColor(evt.yearsAgo||0);
+  const yrsLabel = recencyLabel(evt.yearsAgo||0);
+  return (
+    <div style={{
+      ...edged(`1px solid ${isAnchored?ec.color+'60':ec.border}`,`3px solid ${ec.color}`),
+      overflow:'hidden',
+      background: isAnchored?ec.bg:'#faf8f4',
+      cursor:'pointer',
+    }} role="button" tabIndex={0} onClick={onToggle} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();onToggle();}}}>
+      {/* Event header */}
+      <div style={{padding:'10px 14px'}}>
+        <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:4,flexWrap:'wrap'}}>
+          <div style={{flex:1,minWidth:120}}>
+            <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
+              <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
+              {evtName!==typeLabel&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:ec.color}}>{typeLabel}</span>}
+              {sev&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
+            </div>
+            <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
+          </div>
+          <div style={{flexShrink:0,textAlign:'right'}}>
+            <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>
+            <div style={{fontSize:chromeFontSize(FS.micro, mobile),color:yrsColor,marginTop:1}}>{yrsLabel}</div>
+          </div>
+          {evt.lastingEffects?.length>0&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{isExp?'▲':'▼'}</span>}
+        </div>
+      </div>
+      {/* Expanded detail */}
+      {/* The event's plot hooks live on the Plot Hooks tab (X-2). */}
+      {isExp&&evt.lastingEffects?.length>0&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
+        {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
+          <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
+          <span style={{fontSize: chromeFontSize(FS['11.5'], mobile),color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
+        </div>}
+      </div>}
+    </div>
+  );
+}
+
 // RECENT EVENTS ARE THE CHRONICLE'S (chair ruling H5, 2026-10-30): the slice this tab
 // re-styled was the Chronicle feed's first eight rows, so it is cut and the Chronicle tab
 // is the feed's one home. The router may still pass `recentEvents`; nothing reads it.
@@ -43,44 +162,8 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
   const {foundedLine} = historyDesk;
   const {founding, historicalEvents=[], currentTensions=[], historicalCharacter, age, eventsTimeline=[]} = h;
 
-  // Extended event type colors (EVENT_COLORS only covers 5 types)
-  const ALL_EC = {
-    ...EVENT_COLORS,
-    demographic: {color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0',label:'Demographic'},
-    exile_return: {color:'#7a4010',bg:'#faf4ec',border:'#d8c090',label:'Exile & Return'},
-    occupation_infiltration: {color:'#3a1a6a',bg:'#f4f0fd',border:'#c0b0e0',label:'Occupation'},
-  };
-
-  // Tension type colors + labels
-  const TENSION_META = {
-    crime_wave:          {color:'#8b1a1a',label:'Crime Wave'},
-    economic_disparity:  {color:'#7a5010',label:'Economic Disparity'},
-    guild_conflict:      {color:'#8a4010',label:'Guild Conflict'},
-    infiltration_fear:   {color:'#3a1a6a',label:'Infiltration Fear'},
-    leadership_vacuum:   {color:'#5a5a1a',label:'Leadership Vacuum'},
-    magical_controversy: {color:'#5a2a8a',label:'Magical Controversy'},
-    occupation_legacy:   {color:'#1a2a5a',label:'Occupation Legacy'},
-    outside_debt:        {color:'#6b4010',label:'External Debt'},
-    resource_scarcity:   {color:'#7a4010',label:'Resource Scarcity'},
-    succession_crisis:   {color:'#8b1a1a',label:'Succession Crisis'},
-  };
-
   // Sort events most recent first
   const sortedEvents = [...historicalEvents].sort((a,b) => (a.yearsAgo||0)-(b.yearsAgo||0));
-
-  // Recency label
-  const recencyLabel = yrs => yrs<=10?'Recent':yrs<=30?'Living memory':yrs<=80?'Last century':yrs<=200?'Ancient':'Deep history';
-  const recencyColor = yrs => yrs<=10?'#8b1a1a':yrs<=30?'#a0762a':yrs<=80?'#5a6a1a':yrs<=200?'#2a4a7a':'#5a2a8a';
-
-  // Build event card text: the event's own name is the title (falling back to
-  // the type label), and the description renders IN FULL — it is the card's
-  // only body and runs at most ~117 chars, so truncation only ever hid prose.
-  const eventTitle = (evt) => {
-    const ec = ALL_EC[evt.type] || ALL_EC.political;
-    const name = typeof evt.name === 'string' && evt.name.trim() ? evt.name.trim() : ec.label;
-    const desc = typeof evt.description === 'string' ? evt.description : '';
-    return {label: ec.label, name, desc};
-  };
 
   // ── THE TIMELINE IS THE EVENTS' HEADER (chair ruling H6, 2026-10-30) ──────────────
   // Every dot is one of the events listed beneath it, so the strip is drawn once, at the
@@ -180,33 +263,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       {/* ── CURRENT TENSIONS (most DM-relevant — first) ──────────────────── */}
       {currentTensions.length>0&&<Section title={`Current Tensions (${currentTensions.length})`} collapsible defaultOpen accent="#b8860b">
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          {currentTensions.map((t,i)=>{
-            // The table above names ten tension types and the engine writes more than ten
-            // (the campaign path adds `external_threat` and its siblings), so the fallback
-            // was printing the raw kind. A kind the table has not styled still reads as a
-            // phrase rather than as an identifier.
-            const tm = TENSION_META[t.type] || {color:'#b8860b',label:tokenCase(t.type)||'Tension'};
-            const sevArr = Array.isArray(t.severity)?t.severity:[t.severity].filter(Boolean);
-            const maxSev = sevArr.includes('catastrophic')?'catastrophic':sevArr.includes('major')?'major':'minor';
-            const border = maxSev==='catastrophic'?'#8b1a1a':maxSev==='major'?'#b8860b':'#a0762a';
-            return (
-              <div key={i} style={{border:`1px solid ${border}40`,borderLeft:`3px solid ${border}`,background:swatch['#FDF8E8'],padding:'12px 14px'}}>
-                {/* Header */}
-                <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:tm.color}}>{tm.label}</span>
-                  {sevArr.filter(s=>s&&SEV_COLORS[s]).map((s,j)=>(
-                    <span key={j} style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[s]||'#6b5340',background:`${SEV_COLORS[s]||'#6b5340'}18`,padding:'0 5px',letterSpacing:'0.04em'}}>{s}</span>
-                  ))}
-                </div>
-                {/* Description. The tension's plot hooks live on the Plot Hooks tab (X-2). */}
-                <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{typeof t==='object'?t.description||t.issue||t.type:String(t)}</p>
-                {/* Factions */}
-                {t.factions?.length>0&&<div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-                  {t.factions.map((f,j)=><span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px'}}>{f}</span>)}
-                </div>}
-              </div>
-            );
-          })}
+          {currentTensions.map((t,i)=><TensionRow key={i} t={t}/>)}
         </div>
       </Section>}
 
@@ -240,50 +297,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       {sortedEvents.length>0&&<Collapsible title={`Major Historical Events (${sortedEvents.length})`}>
         {timeline}
         <div style={{display:'flex',flexDirection:'column',gap:10}}>
-          {sortedEvents.map((evt,i)=>{
-            const ec = ALL_EC[evt.type] || ALL_EC.political;
-            const sev = typeof evt.severity==='string'&&evt.severity.length>2 ? evt.severity : null;
-            const {label:typeLabel, name:evtName, desc} = eventTitle(evt);
-            const isAnchored = eventHasOpenThread(evt, h);
-            const isExp = expandedEvent===i;
-            const yrsColor = recencyColor(evt.yearsAgo||0);
-            const yrsLabel = recencyLabel(evt.yearsAgo||0);
-            return (
-              <div key={i} style={{
-                ...edged(`1px solid ${isAnchored?ec.color+'60':ec.border}`,`3px solid ${ec.color}`),
-                overflow:'hidden',
-                background: isAnchored?ec.bg:'#faf8f4',
-                cursor:'pointer',
-              }} role="button" tabIndex={0} onClick={()=>setExpandedEvent(isExp?null:i)} onKeyDown={e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();setExpandedEvent(isExp?null:i);}}}>
-                {/* Event header */}
-                <div style={{padding:'10px 14px'}}>
-                  <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                    <div style={{flex:1,minWidth:120}}>
-                      <div style={{display:'flex',alignItems:'baseline',gap:6,flexWrap:'wrap',marginBottom:2}}>
-                        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{evtName}</span>
-                        {evtName!==typeLabel&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:ec.color}}>{typeLabel}</span>}
-                        {sev&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:SEV_COLORS[sev]||'#6b5340',background:`${SEV_COLORS[sev]||'#6b5340'}15`,padding:'0 5px'}}>{sev}</span>}
-                      </div>
-                      <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{desc}</p>
-                    </div>
-                    <div style={{flexShrink:0,textAlign:'right'}}>
-                      <div style={{fontSize:FS.sm,fontWeight:700,color:yrsColor}}>{evt.yearsAgo}y ago</div>
-                      <div style={{fontSize:chromeFontSize(FS.micro, mobile),color:yrsColor,marginTop:1}}>{yrsLabel}</div>
-                    </div>
-                    {evt.lastingEffects?.length>0&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{isExp?'▲':'▼'}</span>}
-                  </div>
-                </div>
-                {/* Expanded detail */}
-                {/* The event's plot hooks live on the Plot Hooks tab (X-2). */}
-                {isExp&&evt.lastingEffects?.length>0&&<div style={{padding:'0 14px 12px 14px',borderTop:`1px solid ${ec.border}`}}>
-                  {evt.lastingEffects?.length>0&&<div style={{marginBottom:8}}>
-                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3}}>Lasting Effects: </span>
-                    <span style={{fontSize: chromeFontSize(FS['11.5'], mobile),color:swatch.inkMag3}}>{evt.lastingEffects.join(' · ')}</span>
-                  </div>}
-                </div>}
-              </div>
-            );
-          })}
+          {sortedEvents.map((evt,i)=><HistoryEventCard key={i} evt={evt} h={h} isExp={expandedEvent===i} onToggle={()=>setExpandedEvent(expandedEvent===i?null:i)}/>)}
         </div>
       </Collapsible>}
 

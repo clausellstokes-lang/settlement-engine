@@ -44,8 +44,8 @@ function humanizeMotif(id) {
 }
 
 /** A tradition row: motif glyph, name, motif element, window phrase, and (engine mode
- *  only) owner, last outcome and provenance. */
-function TraditionRow({ rec, preview }) {
+ *  only) owner, last outcome and provenance. Exported for the dossier search (W2-SEARCH U2). */
+export function TraditionRow({ rec, preview }) {
   // THE PHONE PROSE FLOOR — the window phrase and the provenance line. The name,
   // the motif chip and the owner/outcome pair keep their own steps.
   const mobile = useIsMobile();

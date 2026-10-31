@@ -27,6 +27,74 @@ function DrawsOn({ deps, mobile }) {
   return <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:4}}>Draws on: {list.join(', ')}</div>;
 }
 
+// Value badge
+const valColor = v => v==='high'?'#1a5a28':v==='medium'?'#a0762a':'#6b5340';
+const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
+
+/**
+ * One worked-resource chain card, extracted verbatim from the Resource Exploitation section
+ * (BUILD-W2-SEARCH U2, no behaviour change): `stage` is 'unexploited', 'partial' or 'full',
+ * the section's three variants, so the dossier search mounts a chain through its own card.
+ */
+export function ResourceChainCard({ chain, stage }) {
+  const mobile = useIsMobile();
+  if (stage === 'unexploited') return (
+    <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      {/* Chain flow */}
+      <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        {(chain.intermediateGoods||[]).map((g,j)=>(
+          <React.Fragment key={j}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
+          </React.Fragment>
+        ))}
+        {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
+          <React.Fragment key={j}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
+          </React.Fragment>
+        ))}
+      </div>
+      {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
+        Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
+      </div>}
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+  if (stage === 'partial') return (
+    <div style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        {(chain.intermediateGoods||[]).map((g,j)=>(
+          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
+        ))}
+      </div>
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+  return (
+    <div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+}
+
 /** DS-ECO-11's one position on this page; named once so the header and the paragraph read the same row. */
 const GROUND_MOUNT = 'resources.groundAndWorkings';
 
@@ -61,10 +129,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const unexploited    = [...(res.exploitation?.unexploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
   const partExploited  = [...(res.exploitation?.partiallyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
   const fullExploited  = [...(res.exploitation?.fullyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-
-  // Value badge
-  const valColor = v => v==='high'?'#1a5a28':v==='medium'?'#a0762a':'#6b5340';
-  const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
 
   // Terrain accent color
   const terrainColor = {
@@ -109,65 +173,13 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-              {/* Chain flow */}
-              <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-                {(chain.intermediateGoods||[]).map((g,j)=>(
-                  <React.Fragment key={j}>
-                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
-                  </React.Fragment>
-                ))}
-                {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
-                  <React.Fragment key={j}>
-                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
-                  </React.Fragment>
-                ))}
-              </div>
-              {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
-                Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
-              </div>}
-              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
-            </div>
-          ))}
+          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited"/>)}
 
           {/* Partially exploited */}
-          {partExploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-              <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-                {(chain.intermediateGoods||[]).map((g,j)=>(
-                  <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
-                ))}
-              </div>
-              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
-            </div>
-          ))}
+          {partExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="partial"/>)}
 
           {/* Fully exploited */}
-          {fullExploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-              <DrawsOn deps={chain.dependsOn} mobile={mobile} />
-            </div>
-          ))}
+          {fullExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="full"/>)}
         </div>
       </Section>}
 

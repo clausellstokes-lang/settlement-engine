@@ -277,63 +277,59 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
       </div>
 
       <div style={{ border: `1px solid ${SEAM}` }}>
-        {roster.map((r, i) => {
-          const c = FACTION_COLORS[i % FACTION_COLORS.length];
-          const f = r.faction || {};
-          const matchedGroups = factionGroups.filter((fg) => fg.powerFactionName === r.name);
-          const isExp = expandedFaction === i;
-          const expandable = !!(f.desc || f.crisisNote || matchedGroups.length);
-          const last = i === roster.length - 1;
-          return (
-            <div key={i} ref={i === focusIndex ? focusedRowRef : null}
-              style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '5px 9px', cursor: expandable ? 'pointer' : 'default' }}
-                {...(expandable ? {
-                  role: 'button', tabIndex: 0,
-                  'aria-label': `${r.name} faction details`,
-                  'aria-expanded': isExp,
-                  'aria-controls': `roster-faction-${i}-detail`,
-                  onClick: () => setExpandedFaction(isExp ? null : i),
-                  onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
-                } : {})}>
-                <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
-                {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
-                <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
-                  <InstitutionLink name={r.name} settlement={settlement} />
-                </div>
-                {r.isPower && (
-                  <Button variant="ghost" size="sm"
-                    aria-label={`${r.name} holds power, jump to its power card`}
-                    onClick={(e) => { e.stopPropagation(); jumpToPower(r.name); }}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
-                    style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
-                    {'↑ Holds power'}
-                  </Button>
-                )}
-                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
-                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
-                {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
-              </div>
-
-              {matchedGroups.map((fg, gi) => (
-                <div key={gi} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
-                </div>
-              ))}
-
-              {isExp && expandable && (
-                <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
-                  {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
-                  {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {roster.map((r, i) => (
+          <FactionRow key={i} settlement={settlement} r={r} i={i} last={i === roster.length - 1} powerGold={powerGold} matchedGroups={factionGroups.filter((fg) => fg.powerFactionName === r.name)}
+            isExp={expandedFaction === i} onToggle={() => setExpandedFaction(expandedFaction === i ? null : i)} rowRef={i === focusIndex ? focusedRowRef : null} onJumpToPower={jumpToPower} />
+        ))}
       </div>
     </Section>
+  );
+}
+
+/** One roster row, extracted verbatim from TheFactions (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search mounts a faction through its own row; TheFactions keeps the expanded index and the focus ref. */
+export function FactionRow({ settlement, r, i, last = false, matchedGroups, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler') }) {
+  const mobile = useIsMobile();
+  const c = FACTION_COLORS[i % FACTION_COLORS.length];
+  const f = r.faction || {};
+  const expandable = !!(f.desc || f.crisisNote || matchedGroups.length);
+  return (
+    <div ref={rowRef}
+      style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '5px 9px', cursor: expandable ? 'pointer' : 'default' }}
+        {...(expandable ? {
+          role: 'button', tabIndex: 0, 'aria-label': `${r.name} faction details`, 'aria-expanded': isExp, 'aria-controls': `roster-faction-${i}-detail`,
+          onClick: onToggle, onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } } } : {})}>
+        <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
+        {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
+        <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}><InstitutionLink name={r.name} settlement={settlement} /></div>
+        {r.isPower && (
+          <Button variant="ghost" size="sm"
+            aria-label={`${r.name} holds power, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
+            style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
+            {'↑ Holds power'}
+          </Button>
+        )}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
+        {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
+      </div>
+
+      {matchedGroups.map((fg, gi) => (
+        <div key={gi} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
+        </div>
+      ))}
+
+      {isExp && expandable && (
+        <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
+          {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
+          {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
+        </div>
+      )}
+    </div>
   );
 }
 

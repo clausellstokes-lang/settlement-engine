@@ -12,6 +12,21 @@ import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
 import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
 
+/** A tie's card palette by its type (the NPC relationship cards and the neighbour cards), hoisted
+ *  from the tab (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search styles a tie as
+ *  this tab does. */
+export const relationshipTypeStyle=(t)=>({
+  ally:{color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
+  rival:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},
+  enemy:{color:'#5a0a0a',bg:'#fdf0f0',border:'#e0a0a0'},
+  patron_client:{color:'#a0762a',bg:'#faf8e4',border:'#e0d090'},
+  political:{color:'#2a3a7a',bg:'#f0f4ff',border:'#a8b8e8'},
+  respect:{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'},
+  debtor_creditor:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8'},
+  mentor_student:{color:'#2a5a2a',bg:'#f4faf4',border:'#b0d8b0'},
+  family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
+}[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
+
 export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
@@ -100,17 +115,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
     {key:'patron_client',label:'Patronage'},
   ];
 
-  const styleFor=(t)=>({
-    ally:{color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
-    rival:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},
-    enemy:{color:'#5a0a0a',bg:'#fdf0f0',border:'#e0a0a0'},
-    patron_client:{color:'#a0762a',bg:'#faf8e4',border:'#e0d090'},
-    political:{color:'#2a3a7a',bg:'#f0f4ff',border:'#a8b8e8'},
-    respect:{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'},
-    debtor_creditor:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8'},
-    mentor_student:{color:'#2a5a2a',bg:'#f4faf4',border:'#b0d8b0'},
-    family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
-  }[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
+  const styleFor=relationshipTypeStyle;
 
   // Build NPC → settlement map
   const npcSettlement={};

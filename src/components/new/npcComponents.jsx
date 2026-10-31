@@ -179,8 +179,9 @@ export function ConflictCard({conflict:c}) {
 }
 
 
-// Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({
+// Inline NPC card — replaces the removed NPCCard export. Exported for the dossier search
+// (BUILD-W2-SEARCH U2), which mounts a person through this same card.
+export function NPCInlineCard({
   npc,
   groupLabel = '',
   pinnedIds,

@@ -58,6 +58,29 @@ function serviceOrder(impaired, degraded) {
 const institutionOf = (svc) => (typeof svc === 'object' ? svc?.institution || '' : '');
 
 /**
+ * Service -> chain depth lookup from the active chains, keyed by the lower-cased processing
+ * institution. Hoisted verbatim from the tab body (BUILD-W2-SEARCH U2, no behaviour change) so
+ * the dossier search hands a ServiceItem the same `chainDepth` this tab does.
+ * @param {object} settlement
+ * @returns {Map<string, number>}
+ */
+export function serviceChainDepthMap(settlement) {
+  const chainDepthMap = computeChainDepthMap(settlement);
+  // Build service → chain depth lookup from active chains
+  const serviceChainDepth = new Map();
+  (settlement?.economicState?.activeChains||[]).forEach(chain => {
+    const depth = chainDepthMap.get(chain.chainId) || 1;
+    (chain.processingInstitutions||[]).forEach(inst => {
+      const key = inst.toLowerCase();
+      if (!serviceChainDepth.has(key) || serviceChainDepth.get(key) < depth) {
+        serviceChainDepth.set(key, depth);
+      }
+    });
+  });
+  return serviceChainDepth;
+}
+
+/**
  * @param {object} props
  * @param {object} props.services
  * @param {object} props.settlement
@@ -82,18 +105,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
 
   // Chain impairment
   const {tradeDeps, impaired, degraded, vulnerable, depReasons} = computeChainSets(settlement);
-  const chainDepthMap = computeChainDepthMap(settlement);
-  // Build service → chain depth lookup from active chains
-  const serviceChainDepth = new Map();
-  (settlement?.economicState?.activeChains||[]).forEach(chain => {
-    const depth = chainDepthMap.get(chain.chainId) || 1;
-    (chain.processingInstitutions||[]).forEach(inst => {
-      const key = inst.toLowerCase();
-      if (!serviceChainDepth.has(key) || serviceChainDepth.get(key) < depth) {
-        serviceChainDepth.set(key, depth);
-      }
-    });
-  });
+  const serviceChainDepth = serviceChainDepthMap(settlement);
 
   // Build flat list for search
   const allServices = [];
