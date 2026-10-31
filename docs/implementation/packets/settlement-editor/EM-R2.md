@@ -223,8 +223,9 @@ The charter says the run is "wasted … under a held roster". Measured:
 
 ```
 $ git grep -n -P 'powerLinkage\(' -- src tests
-src/generators/steps/generatePopulation.js:36:function powerLinkage(powerStructure) {
-src/generators/steps/generatePopulation.js:160:  const power = powerLinkage(powerStructure);
+(no output: RE-RUN 2026-10-31 after GS-2, the one faction set (ODQ §934.101, lane G2), which deleted powerLinkage and
+linkFactions outright; at this packet's own base c69d16a5d the command printed two lines, the function at line 36 and
+its one call at line 160 of generatePopulation.js, and the packet landed against those.)
 (a grep receipt: the two addresses are the command's OWN output, quoted with their text, which is §P2.22's second exception)
 ```
 

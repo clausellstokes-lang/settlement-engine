@@ -30977,14 +30977,14 @@
           "symbol": "registerStep('generatePopulation', {"
         },
         {
-          "_note": "⛔ ALL FOUR CHOOSER KEYS, DECLARED. This `provides` line is the pin key spelling EM-P2 later registers its rows' outputKey against (§0R.4: P0 defines the spelling, P2 registers against it — the chooser call sites are inside the step's own body, so a registry is a GUARD over the mechanism rather than an input to it). UNCHANGED by this packet.",
+          "_note": "⛔ ALL FOUR CHOOSER KEYS, DECLARED. This `provides` line is the pin key spelling EM-P2 later registers its rows' outputKey against (§0R.4: P0 defines the spelling, P2 registers against it — the chooser call sites are inside the step's own body, so a registry is a GUARD over the mechanism rather than an input to it). UNCHANGED by this packet. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): factions and conflicts are now built in assembleSettlement from the power set, so the step provides two keys; EM-P2 registers against the live spelling.",
           "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "provides: ['npcs', 'relationships', 'factions', 'conflicts'],"
+          "symbol": "provides: ['npcs', 'relationships'],"
         },
         {
-          "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three.",
-          "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "const roll = rng.random() * totalPower;"
+          "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): linkFactions and its power-weighted scatter are deleted; members are the NPCs whose own affiliation names the faction, drawn nowhere. The anchor is the live faction build.",
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);"
         },
         {
           "_note": "CHOOSER 1, the root draw. Takes no roster.",
@@ -30997,9 +30997,9 @@
           "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
         },
         {
-          "_note": "CHOOSER 3 — takes both and draws twice.",
+          "_note": "CHOOSER 3 — takes both and draws twice. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the chooser now takes the power factions, not the relationships, and draws nothing.",
           "path": "src/generators/power/factionGrouping.js",
-          "symbol": "export const generateFactions = (npcs, relationships) => {"
+          "symbol": "export const generateFactions = (npcs, powerFactions) => {"
         },
         {
           "_note": "CHOOSER 4 — draws three times. Its home is power/conflicts.js, not powerGenerator.js.",
@@ -39640,9 +39640,9 @@
           "_note": "src/generators/steps/assembleSettlement.js :: the `canonical-coherence` inAssemblySubstream call — the call this member widens by ONE argument; the assembly substream itself is unchanged; count 1, verbatim at c69d16a5d."
         },
         {
-          "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "const roll = rng.random() * totalPower;",
-          "_note": "src/generators/steps/generatePopulation.js :: linkFactions — EM-P0's own required row, inside that function, which this member's split does not enter; count 1, verbatim at c69d16a5d."
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "'faction-conflicts',",
+          "_note": "src/generators/steps/generatePopulation.js :: linkFactions — EM-P0's own required row, inside that function, which this member's split does not enter; count 1, verbatim at c69d16a5d. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the roll is gone with linkFactions; conflicts draw on the named child stream faction-conflicts in assembleSettlement."
         },
         {
           "path": "src/domain/prose/holderTable.js",

@@ -40,14 +40,16 @@
  * assertion would red every time a document legitimately restates an address it
  * already carries, and a gate that reds on correct behaviour gets turned off.
  *
- * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 33 documents are frozen records
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 35 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
  * sha and states that all its cited lines matched AT THAT SHA. They carry 377
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (44)    docs/review-r2/**, docs/shift-records/**
+ *   tree (46)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
+ *                GROWTHS that hid nothing, each a signature with no path:line citation of its own.)
  *                (2026-10-30, the dossier consolidation, 40 -> 44: BUILD-S's service-category-fidelity record and
  *                BUILD-T1's arrival-market-gate, no-market-pool and migration-one-direction records; GROWTHS
  *                that hid nothing, each a signature with no path:line citation of its own.)
