@@ -1,10 +1,13 @@
 /**
  * SettlementPDF — top-level Document tree.
  *
- * Order (prep-friendly): Cover → Overview → Tonight at the Table →
- * People (NPCs, Hooks) → Power & Place (Power, Identity, Services) →
- * Systems (Economics, Resources, Defense) → Background (History, Viability) →
- * External (Relationships) → optional AI Appendix.
+ * Order: THE DOSSIER'S OWN GROUP ORDER (BUILD-W2-BLOCKLAW, X-17; OutputContainer.jsx ::
+ * TAB_GROUPS). Cover → Contents → SUMMARY (Overview, Tonight at the Table, Current State,
+ * Plot Hooks) → SYSTEMS (Services, Institutions, Economics, Resources, Power, Defense,
+ * Viability) → WORLD (NPC Quick Reference, Notable NPCs, Relationships, Identity & Daily
+ * Life, Traditions, History, Faith & War) → NOTES (Timeline) → optional AI Appendix, kept
+ * last as an appendix. Chapter numbers run 01..20 in document order (the move forced the
+ * renumber: a printed contents list must count up).
  *
  * The legacy Summary page was removed — Overview already carries everything
  * the one-pager held, and the duplication was confusing readers.
@@ -138,29 +141,29 @@ export function SettlementPDF({
   // are now variant-gated. Build by filtering against the same `inc()`
   // helper so the ToC and the rendered set never diverge.
   // §1i — each entry carries the chapter's actual eyebrow (`no`) and the list is
-  // in document order, so the ToC numbers match the rendered chapter headings
-  // (no sequential 01-N that drifts from the 03B/08A scheme).
+  // in document order, so the ToC numbers match the rendered chapter headings. Since the
+  // group-order move (BUILD-W2-BLOCKLAW) the eyebrows themselves run 01..20 in that order.
   const tocEntries = [
-    inc('overview')            && { no: '01',  title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
-    inc('tonightAtTheTable')   && { no: '02',  title: 'Tonight at the Table', note: 'quick prep' },
-    inc('npcQuickRef')         && { no: '03',  title: 'NPC Quick Reference', note: 'index' },
-    showState                  && { no: '03B', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
-    showTimeline               && { no: '03C', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
-    showFaithWar               && { no: '03D', title: 'Faith & War', note: 'live campaign state' },
-    inc('notableNpcs')         && { no: '04',  title: 'Notable NPCs', note: 'detailed sheets' },
-    inc('plotHooks')           && { no: '05',  title: 'Plot Hooks & Quests' },
-    inc('powerStructure')      && { no: '06',  title: 'Power Structure' },
-    inc('identityDailyLife')   && { no: '07',  title: 'Identity & Daily Life' },
-    showTraditions             && { no: '07B', title: 'Traditions', note: 'festivals & rites' },
-    inc('services')            && { no: '08A', title: 'Services', note: 'what players can buy' },
-    inc('institutions')        && { no: '08B', title: 'Institutions', note: 'who runs what' },
-    inc('economicsTrade')      && { no: '09',  title: 'Economics & Trade' },
-    inc('resourcesProduction') && { no: '10',  title: 'Resources & Production' },
-    inc('defenseSecurity')     && { no: '11',  title: 'Defense & Security' },
-    inc('historyFounding')     && { no: '12',  title: 'History & Founding' },
-    inc('viabilityAssessment') && { no: '13',  title: 'Viability Assessment' },
-    inc('relationships')       && { no: '14',  title: 'Relationships' },
-    inc('aiAppendix')          && { no: '15',  title: 'AI Appendix', note: 'compass + connections' },
+    inc('overview')            && { no: '01', title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
+    inc('tonightAtTheTable')   && { no: '02', title: 'Tonight at the Table', note: 'quick prep' },
+    showState                  && { no: '03', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
+    inc('plotHooks')           && { no: '04', title: 'Plot Hooks & Quests' },
+    inc('services')            && { no: '05', title: 'Services', note: 'what players can buy' },
+    inc('institutions')        && { no: '06', title: 'Institutions', note: 'who runs what' },
+    inc('economicsTrade')      && { no: '07', title: 'Economics & Trade' },
+    inc('resourcesProduction') && { no: '08', title: 'Resources & Production' },
+    inc('powerStructure')      && { no: '09', title: 'Power Structure' },
+    inc('defenseSecurity')     && { no: '10', title: 'Defense & Security' },
+    inc('viabilityAssessment') && { no: '11', title: 'Viability Assessment' },
+    inc('npcQuickRef')         && { no: '12', title: 'NPC Quick Reference', note: 'index' },
+    inc('notableNpcs')         && { no: '13', title: 'Notable NPCs', note: 'detailed sheets' },
+    inc('relationships')       && { no: '14', title: 'Relationships' },
+    inc('identityDailyLife')   && { no: '15', title: 'Identity & Daily Life' },
+    showTraditions             && { no: '16', title: 'Traditions', note: 'festivals & rites' },
+    inc('historyFounding')     && { no: '17', title: 'History & Founding' },
+    showFaithWar               && { no: '18', title: 'Faith & War', note: 'live campaign state' },
+    showTimeline               && { no: '19', title: 'Timeline', note: `${eventLog.length} event${eventLog.length === 1 ? '' : 's'}` },
+    inc('aiAppendix')          && { no: '20', title: 'AI Appendix', note: 'compass + connections' },
   ].filter(Boolean);
 
   return (
@@ -180,27 +183,27 @@ export function SettlementPDF({
       {inc('toc')                 && <TableOfContents      settlement={safe} narrativeMode={useAi} entries={tocEntries} />}
       {inc('overview')            && <Overview             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('tonightAtTheTable')   && <TonightAtTheTable    settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {showState                  && <SystemStateSnapshot  settlement={safe} narrativeMode={useAi} vm={vm} causalDetail={stateCausalDetail} />}
-      {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
-      {/* ⛔ THE FAITH PROSE HAS ONE HOME PER VARIANT, and this is where that is decided,
-          because `inc` lives here and no chapter can see the variant. Chapter 07 carries it
-          wherever the variant includes chapter 07; `campaign_state` drops chapter 07 and keeps
-          this one, so there it is fed here instead. Never both. */}
-      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={inc('identityDailyLife') ? null : stateProse} />}
-      {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('plotHooks')           && <PlotHooks            settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('services')            && <Services             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('institutions')        && <Institutions         settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('economicsTrade')      && <EconomicsTrade       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('resourcesProduction') && <ResourcesProduction  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('powerStructure')      && <PowerStructure       settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('defenseSecurity')     && <DefenseSecurity      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
-      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
       {inc('viabilityAssessment') && <ViabilityAssessment  settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('npcQuickRef')         && <NPCQuickRef          settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('notableNpcs')         && <NotableNPCs          settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('relationships')       && <Relationships        settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {inc('identityDailyLife')   && <IdentityDailyLife    settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {showTraditions             && <Traditions           settlement={safe} narrativeMode={useAi} vm={vm} />}
+      {inc('historyFounding')     && <HistoryFounding      settlement={safe} narrativeMode={useAi} vm={vm} stateProse={stateProse} />}
+      {/* ⛔ THE FAITH PROSE HAS ONE HOME PER VARIANT, and this is where that is decided,
+          because `inc` lives here and no chapter can see the variant. Chapter 15 (Identity &
+          Daily Life) carries it wherever the variant includes that chapter; `campaign_state`
+          drops it and keeps this one, so there it is fed here instead. Never both. */}
+      {showFaithWar               && <FaithWar             settlement={safe} narrativeMode={useAi} vm={vm} stateProse={inc('identityDailyLife') ? null : stateProse} />}
+      {showTimeline               && <TimelineChapter      settlement={safe} narrativeMode={useAi} vm={vm} />}
       {inc('aiAppendix')          && <AIAppendix           settlement={safe} narrativeMode={useAi} vm={vm} />}
     </Document>
   );

@@ -52,7 +52,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="07"
+        eyebrow="15"
         title="Identity & Daily Life"
         accent={accent}
         sub={id.tier || null}
@@ -65,7 +65,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
           — so on a measured 12 of 12 generated settlements the builder composed a faith
           position and NOT ONE of them could reach a page. The PDF has no faith chapter
           outside that premium live-world one, and DS-FTH-1/2/3 are facts about what the town
-          IS, so chapter 07 is where they belong. The premium seam is untouched: the builder
+          IS, so chapter 15 is where they belong. The premium seam is untouched: the builder
           withholds the two deity-naming positions unless `faithUnlocked`. ── */}
       <StateProse stateProse={stateProse} tab="daily_life" />
       <StateProse stateProse={stateProse} tab="faith" />

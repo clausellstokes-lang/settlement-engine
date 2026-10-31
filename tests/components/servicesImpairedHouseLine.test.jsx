@@ -205,17 +205,18 @@ describe('ServicesTab — the impaired house is named where its row is', () => {
       positionBlock.textContent, impaired, catalog,
       'DS-SUP-3 lens B left the catalog paragraph for the row it names',
     );
-    // RS-15 (chair ruling 2026-10-30): lens A sits DIRECTLY above the one Not-available
-    // line it bands (coupling), and both sit above the first category card. This town
-    // keeps four of a town's five categories, so the line names the fifth.
+    // RS-15 (chair ruling 2026-10-30) under THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U4): lens A
+    // sits DIRECTLY UNDER the one Not-available line it bands (coupling; prose never above
+    // the fact it explains), and both sit above the first category card. This town keeps
+    // four of a town's five categories, so the line names the fifth.
     const absence = screen.getByText((_, el) => el?.tagName === 'DIV'
       && /^Not available for a town:/.test(el.textContent || ''));
     expect(absence.textContent).toBe('Not available for a town: Information.');
-    expect(positionBlock.compareDocumentPosition(absence) & Node.DOCUMENT_POSITION_FOLLOWING,
-      'the absence line does not follow the catalog sentence').toBeTruthy();
+    expect(absence.compareDocumentPosition(positionBlock) & Node.DOCUMENT_POSITION_FOLLOWING,
+      'the catalog sentence does not follow the absence line it explains').toBeTruthy();
     const firstCard = document.getElementById('svc-cat-equipment');
-    expect(absence.compareDocumentPosition(firstCard) & Node.DOCUMENT_POSITION_FOLLOWING,
-      'the absence line is not above the category cards').toBeTruthy();
+    expect(positionBlock.compareDocumentPosition(firstCard) & Node.DOCUMENT_POSITION_FOLLOWING,
+      'the catalog sentence is not above the category cards').toBeTruthy();
   });
 
   test('a town with no impaired house draws nothing there (R-DST-K)', () => {

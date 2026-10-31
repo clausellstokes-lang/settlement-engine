@@ -170,19 +170,6 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           consolidation (T2-14): it audits the generator, not the town, and stays
           reachable there. */}
 
-      {/* ── BY-DESIGN CONTRADICTIONS ────────────────────────────────────── */}
-      {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
-        {byDesignIssues.map((v2,i)=>(
-          <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
-            <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
-            <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
-            {v2.suggestedFixes?.[0] && (
-              <div style={{fontSize: proseFontSize(FS['10.5'], mobile),color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
-            )}
-          </div>
-        ))}
-      </Section>}
-
       {/* ── SURVIVAL CRISES (structural violations) ──────────────────────── */}
       {structViolations.length>0&&<Section title={`Structural Crises (${structViolations.length})`} collapsible defaultOpen accent='#8b1a1a'>
         {structViolations.map((v2,i)=>(
@@ -247,6 +234,19 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
           <div key={i} style={{background:swatch['#F9F3E8'],border:'1px solid #d4a96a',padding:'8px 10px',marginBottom:6}}>
             {item.title&&<span style={{fontSize: FS['12.5'],fontWeight:700,color:swatch['#6B4C2A'],display:'block',marginBottom:2}}>{item.title}</span>}
             <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3E28'],lineHeight:1.5,margin:0}}>{typeof item.description==='object'?item.description.short||item.description.text||'':item.description||item.message||''}</p>
+          </div>
+        ))}
+      </Section>}
+
+      {/* ── BY-DESIGN CONTRADICTIONS (collapsed reference, after the open facts: X-16 rung 5) ── */}
+      {byDesignIssues.length>0&&<Section title={`By-Design Contradictions (${byDesignIssues.length})`} collapsible defaultOpen={false} accent='#8a3010'>
+        {byDesignIssues.map((v2,i)=>(
+          <div key={i} style={{padding:'8px 12px',background:swatch['#FDF8F0'],border:'1px solid #d8b880',borderLeft:'3px solid #c05010',marginBottom:6}}>
+            <div style={{fontSize:FS.sm,fontWeight:700,color:swatch['#8A3010'],marginBottom:3}}>{v2.institution}</div>
+            <div style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag2,lineHeight:1.6}}>{v2.reason}</div>
+            {v2.suggestedFixes?.[0] && (
+              <div style={{fontSize: proseFontSize(FS['10.5'], mobile),color:MUTED,marginTop:4,fontStyle:'italic'}}>{v2.suggestedFixes[0]}</div>
+            )}
           </div>
         ))}
       </Section>}

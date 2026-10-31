@@ -50,7 +50,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="08B"
+        eyebrow="06"
         title="Institutions"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${detailed.length} ${plural(detailed.length, 'institution')}`}

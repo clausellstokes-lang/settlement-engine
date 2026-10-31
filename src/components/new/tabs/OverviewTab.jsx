@@ -249,12 +249,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
     <div>
       <NarrativeNote note={narrativeNote} />
 
-      {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit
-            (renders NOTHING for a world without lifecycle state). ─────────── */}
-      {/* DS-GEN-8 draws inside this section, which owns the steadings ledger read.
-          The paid-surface flag is threaded to it rather than assumed there. */}
-      <SteadingsSection settlement={r} publicDossier={publicDossier} playerView={playerView} />
-
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>
         <div style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
@@ -287,6 +281,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             composer it opens stays, so a route to it must too. Router-gated on the flag. */}
         {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
       </div>
+      {/* ── THE ROUTING LINE (X-18; BUILD-W2-BLOCKLAW U2) ── the one page every reader lands on
+          says once, plainly, what the four groups of the strip hold. A statement, not a
+          tutorial: no verb tells the reader what to do. */}
+      <p data-testid="overview-routing-line" style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.5,margin:'-6px 0 14px'}}>
+        {`Summary holds the glance and the open threads; Systems, how the ${deskTierNoun || 'settlement'} trades, rules and holds together; World, its people, customs, past and beliefs; Notes, the records kept in play.`}
+      </p>
 
       {/* ── THE PLACE (chair ruling T1-2, 2026-10-30; rubric R5) ──────────
             ONE passage under one title: the arrival scene first (the owner's Voice
@@ -297,8 +297,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             paragraph of the old dark SITUATION box: two atmospheric passages on one
             page were one too many. The desk lines stay dark on a public dossier
             (§885.3); the arrival scene is the datum and shows for every reader.
-            The lead reads at FS.lg, one step above body prose, so it says "start
-            here" (owner finding 2026-09-18). */}
+            The lead reads at FS.lg, one step above body prose (owner finding
+            2026-09-18). Under the block law it is the page's ANSWER, class (1), not
+            coupling prose (chair ruling X-25a): it stays directly under the identity strip
+            and the routing line, before the crisis card. */}
       {(r.arrivalScene||siteLines.length>0)&&(
         <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
@@ -334,30 +336,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           </div>
         )}
       </div>}
-
-      {/* ── THE WORLD STRESSOR (DS-STR-2) ────────────────────────────────
-          Where a regional stressor sits in its lifecycle, and what put it there.
-          Two pools of ONE block at ONE position. Dark until the world is played:
-          worldState.stressors is written by the pulse, never by generation. */}
-      {stressorLines.length>0&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The pressure from outside</div>
-          <ProseBlock lines={stressorLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
-
-      {/* ── ACTIVE CONDITIONS (DS-CND-1) ──────────────────────────────────
-          Five lenses over the settlement's first active condition: how bad, which
-          way it is moving, what kind it is, whether an event put it there, and
-          whether it is running out. Five pools of ONE block at ONE position. */}
-      {stresses.length===0&&conditionLines.length>0&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
-          <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
 
       {/* ── SYSTEMS HEALTH DASHBOARD ─────────────────────────────────────── */}
       <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a">
@@ -508,30 +486,6 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       {/* "Geography & Resources" is CUT (T1-10, R2): the strip's chip carries the terrain and
           the Resources tab owns the strengths and the strategic value. */}
 
-      {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
-          Routed through the shared Section primitive so its header reads at the
-          same serif altitude as Systems Health / Tensions / Geography and the
-          layer-cake scan has one consistent top-level collapsible level (P6) —
-          restored from the composite's bespoke green sub-collapsible per THE
-          BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
-          in with Geography). Inner quarter cards keep the composite's craft. */}
-      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
-        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
-          {r.spatialLayout.quarters.map((q,i)=>(
-            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
-              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
-              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
-              {/* A QUARTER'S LANDMARK IS A RAW CATALOGUE KEY. spatialGenerator fills `landmarks`
-                * by filtering `instNames`, so the Religious Quarter's bullet printed 'Parish
-                * churches (2-5)' — the very word §934.13's seam exists to keep off a reader's
-                * page — while the roster pill eighty lines below already read 'Houses of worship
-                * (2-5)'. One settlement, two spellings of one institution, on the same tab. */}
-              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {institutionDisplayName(lm)}</p>)}
-            </div>
-          ))}
-        </div>
-      </Section>}
-
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
       {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
@@ -566,9 +520,66 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>}
       </div>}
 
+      {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
+          Routed through the shared Section primitive so its header reads at the
+          same serif altitude as Systems Health / Tensions / Geography and the
+          layer-cake scan has one consistent top-level collapsible level (P6) —
+          restored from the composite's bespoke green sub-collapsible per THE
+          BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
+          in with Geography). Inner quarter cards keep the composite's craft. */}
+      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
+        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
+          {r.spatialLayout.quarters.map((q,i)=>(
+            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
+              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
+              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
+              {/* A QUARTER'S LANDMARK IS A RAW CATALOGUE KEY. spatialGenerator fills `landmarks`
+                * by filtering `instNames`, so the Religious Quarter's bullet printed 'Parish
+                * churches (2-5)' — the very word §934.13's seam exists to keep off a reader's
+                * page — while the roster pill eighty lines below already read 'Houses of worship
+                * (2-5)'. One settlement, two spellings of one institution, on the same tab. */}
+              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {institutionDisplayName(lm)}</p>)}
+            </div>
+          ))}
+        </div>
+      </Section>}
+
       {/* The Institutions collapsible is CUT (owner addendum T1-15, 2026-10-30; R2): the
           Systems group's Institutions tab lists every house with its services, its
           provenance badge and the legend. */}
+
+      {/* ── W-LIFECYCLE: remnant / ancient-ruin banners + the steadings orbit
+            (renders NOTHING for a world without lifecycle state). It reads the active
+            campaign's ledger, so it sits with the campaign-only blocks at the foot of the
+            page (the block law, X-16 rung 6). ─────────── */}
+      {/* DS-GEN-8 draws inside this section, which owns the steadings ledger read.
+          The paid-surface flag is threaded to it rather than assumed there. */}
+      <SteadingsSection settlement={r} publicDossier={publicDossier} playerView={playerView} />
+
+      {/* ── THE WORLD STRESSOR (DS-STR-2) ────────────────────────────────
+          Where a regional stressor sits in its lifecycle, and what put it there.
+          Two pools of ONE block at ONE position. Dark until the world is played:
+          worldState.stressors is written by the pulse, never by generation; campaign-only,
+          so it closes the page with the played-world condition below (X-16 rung 6). */}
+      {stressorLines.length>0&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The pressure from outside</div>
+          <ProseBlock lines={stressorLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
+
+      {/* ── ACTIVE CONDITIONS (DS-CND-1) ──────────────────────────────────
+          Five lenses over the settlement's first active condition: how bad, which
+          way it is moving, what kind it is, whether an event put it there, and
+          whether it is running out. Five pools of ONE block at ONE position. */}
+      {stresses.length===0&&conditionLines.length>0&&(
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
+          <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
 
     </div>
   );

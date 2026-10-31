@@ -132,12 +132,9 @@ export default function SubstrateTab({ settlement }) {
       <div data-testid="substrate-title" style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 2 }}>
         Foundations
       </div>
-      <div style={{ fontSize: proseFontSize(FS.sm, mobile), fontWeight: 700, color: BODY, marginBottom: 4 }}>
+      <div style={{ fontSize: proseFontSize(FS.sm, mobile), fontWeight: 700, color: BODY, marginBottom: 12 }}>
         What is holding, what is strained
       </div>
-      <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        This reading includes current conditions: siege, drawdown, outbreak.
-      </p>
 
       {/* The 16-variable grid. */}
       <div style={{ background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden' }}>
@@ -164,6 +161,11 @@ export default function SubstrateTab({ settlement }) {
           ))}
         </NameColumns>
       </div>
+      {/* THE BLOCK LAW (X-16; BUILD-W2-BLOCKLAW U3): the one fact sentence sits UNDER the rows
+          it qualifies, never above them. Moved verbatim. */}
+      <p data-testid="substrate-conditions-note" style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '12px 0 0' }}>
+        This reading includes current conditions: siege, drawdown, outbreak.
+      </p>
     </div>
   );
 }

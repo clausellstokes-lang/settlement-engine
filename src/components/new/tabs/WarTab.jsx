@@ -655,9 +655,6 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
   return (
     <div data-testid="war-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       {hasWar && <WarBlock war={war} nameFor={nameFor} unitAbroad={!!war.unit} />}
-      {/* ── war.standing (DS-WAR-1) — only the lenses the war block's datum lines do not
-          already state (chair ruling W3) ── */}
-      <WarStandingLines desk={standingDesk} settlement={settlement} />
       {war && war.wars.length > 0 && <WarsBlock wars={war.wars} sid={sid} nameFor={nameFor} />}
       {hasMuster && (war.musterLine || war.martial || (war.armyStatus && !war.unit)) && (
         <MusterBlock musterLine={war.musterLine} armyStatus={war.unit ? null : war.armyStatus} martial={war.martial} />
@@ -668,10 +665,15 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
           <UnitEntry unit={war.unit} includeGroundTruth={includeGroundTruth} armyStatus={war.armyStatus} />
         </div>
       )}
-      {war && war.beliefs.length > 0 && <BeliefsBlock beliefs={war.beliefs} />}
+      {/* ── war.standing (DS-WAR-1) — only the lenses the war block's datum lines do not
+          already state (chair ruling W3), UNDER the martial facts it couples (the block law,
+          X-16: prose never above the fact it explains) ── */}
+      <WarStandingLines desk={standingDesk} settlement={settlement} />
       {hasTreaties && <TreatyBlock treaties={war.treaties} sid={sid} />}
       {/* ── war.treaties (DS-WAR-2) — the clause that is under the most strain ── */}
       {hasTreaties && <WarTreatyLines desk={deskProse} settlement={settlement} />}
+      {/* The DM-only belief maps follow the facts and their prose (X-16 rung 4). */}
+      {war && war.beliefs.length > 0 && <BeliefsBlock beliefs={war.beliefs} />}
       {!anything && <WarLaunchTeaser name={settlement?.name || 'this settlement'} />}
       {!anything && martialCrises.length === 0 && (
         // ── war.dormantNote (DS-WAR-3) — the WHOLE PAGE-SET at rest, in the town's own

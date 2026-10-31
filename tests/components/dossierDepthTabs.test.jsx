@@ -344,6 +344,10 @@ describe('WarTab — the war half of the warFaith desk (DESK-4)', () => {
     const authored = WAR_FAITH['DS-WAR-1'].pools['statusLabel: On campaign']
       .map((v) => v.text.replace(/\{settlement\}/g, 'Homestead').replace(/\{counterpart\}/g, 'Foehold'));
     expect(authored.some((line) => standing.textContent.includes(line))).toBe(true);
+    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U5): the standing sentence follows the martial
+    // facts it couples (the units abroad), never above them.
+    const units = screen.getByTestId('war-units');
+    expect(units.compareDocumentPosition(standing) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('THE PUBLIC GATE: the same town draws the sentence privately and NOTHING publicly', () => {
@@ -521,6 +525,9 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
     const authored = WAR_FAITH['DS-FTH-3'].pools['STANDING: ascendant']
       .map((v) => v.text.replace(/\{creed\}/g, 'Sunlord Aurelian').replace(/\{settlement\}/g, 'Sunhold'));
     expect(authored.some((line) => creed.textContent.includes(line))).toBe(true);
+    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U5): the panel's patron line (the datum) comes
+    // first and the creed passage that couples it follows.
+    expect(screen.getByTestId('faith-patron').compareDocumentPosition(creed) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
   });
 
   it('⭐ THE ONE GLANCE ROW: the niche row keeps the band word and does NOT speak', () => {
@@ -587,7 +594,11 @@ describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
     // "Under pressure" callout (a restatement of the worst-first rows) is gone.
     expect(screen.getByTestId('substrate-title').textContent).toBe('Foundations');
     expect(screen.getByText('What is holding, what is strained')).toBeTruthy();
-    expect(screen.getByText('This reading includes current conditions: siege, drawdown, outbreak.')).toBeTruthy();
+    const note = screen.getByText('This reading includes current conditions: siege, drawdown, outbreak.');
+    expect(note).toBeTruthy();
+    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U3): the fact sentence sits UNDER the rows it
+    // qualifies; every row precedes it in document order.
+    for (const row of rows) expect(row.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
     expect(screen.queryByTestId('substrate-pressures')).toBeNull();
     expect(container.textContent).not.toMatch(/Under pressure|All foundations holding/); // anchored: the rows and the title are asserted on this render
     expect(screen.getByText('Settlement foundations')).toBeTruthy();

@@ -544,8 +544,11 @@ const desktopShape = (perView) => Object.fromEntries(
 // the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
 // panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
 // NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
+// ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
+// sentence under the identity strip (proseFontSize), one new line: Summary/Overview measured 19 -> 20, sub14 18 -> 19. The block-law moves
+// (X-16) reorder lines and add none; every other view holds.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 19, sub14: 18 },
+  "Summary/Overview":    { measured: 20, sub14: 19 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured:  1, sub14:  1 },
   "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
@@ -621,8 +624,11 @@ const DESKTOP_BASELINE = Object.freeze({
 // the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
 // panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
 // NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
+// ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
+// sentence under the identity strip (proseFontSize), one new line: Summary/Overview prose 18 -> 19. The block-law moves
+// (X-16) reorder lines and add none; every other view holds.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 18, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },

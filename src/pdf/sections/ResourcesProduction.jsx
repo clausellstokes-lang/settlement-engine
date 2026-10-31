@@ -43,7 +43,7 @@ export function ResourcesProduction({ settlement, narrativeMode, vm, stateProse 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="10"
+        eyebrow="08"
         title="Resources & Production"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={r.terrain ? cap(r.terrain) : null}

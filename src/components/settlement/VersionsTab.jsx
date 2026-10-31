@@ -178,8 +178,9 @@ const KIND_LABEL = {
  * 2026-10-30, RULINGS-T2 T2-14; RUBRIC R1, R6). It audits the GENERATOR, not the town: whether
  * the dossier agrees with its own world law and canonical ledgers, checks passed, repairs
  * recorded, tensions preserved, formal judgments. Reachable on the record's own history page,
- * off the page a DM plays from. Renders above every branch of this tab (flag off, locked,
- * open), because the receipt is the record's and not a paid feature.
+ * off the page a DM plays from. Renders under every branch of this tab (flag off, locked,
+ * open), because the receipt is the record's and not a paid feature; it is reference, so the
+ * block law (X-16 rung 5, BUILD-W2-BLOCKLAW U6) puts it after the timeline, not above it.
  * @param {{ settlement: any }} props
  */
 function GenerationReceipt({ settlement }) {
@@ -238,8 +239,8 @@ function GenerationReceipt({ settlement }) {
 export default function VersionsTab({ save }) {
   return (
     <>
-      <GenerationReceipt settlement={save?.settlement} />
       <VersionsTimeline save={save} />
+      <GenerationReceipt settlement={save?.settlement} />
     </>
   );
 }

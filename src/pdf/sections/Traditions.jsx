@@ -49,7 +49,7 @@ export function Traditions({ settlement, narrativeMode }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="07B"
+        eyebrow="16"
         title="Traditions"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub="festivals & rites"

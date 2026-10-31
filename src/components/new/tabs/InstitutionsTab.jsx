@@ -168,7 +168,6 @@ export default function InstitutionsTab({ settlement }) {
 
   return (
     <div style={{ padding: '14px 18px' }}>
-      <EconomyFreshnessNote settlement={settlement} variant="catalog" />
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {houses.map(({ inst, category, label, services }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} />
@@ -179,6 +178,8 @@ export default function InstitutionsTab({ settlement }) {
           <span key={lbl}><span style={{ color: c, fontWeight: 800 }}>{lbl}</span> = {desc}</span>
         ))}
       </div>
+      {/* The campaign-only stale-window note closes the page (the block law, X-16 rung 6). */}
+      <EconomyFreshnessNote settlement={settlement} variant="catalog" />
     </div>
   );
 }
