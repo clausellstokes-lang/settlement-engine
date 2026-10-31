@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { relColor } from '../../../domain/display/relationshipColors.js';
-import { serif, Section } from '../Primitives';
+import { Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import Button from '../../primitives/Button.jsx';
@@ -98,7 +98,6 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
   const rels=(Array.isArray(r.relationships)?r.relationships:[]);
   const interSettlementRels=r.interSettlementRelationships||[];
   const conflicts=Array.isArray(r.conflicts)?r.conflicts:[];
-  const factionGroups=Array.isArray(r.factions)?r.factions:[];
   const flagDriven=rels.filter(rel=>rel.flagDriven);
 
   // Settlement names for "From" filter
@@ -131,7 +130,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
     return typeOk&&fromOk;
   });
 
-  const hasAny=neighbours.length>0||rels.length>0||factionGroups.length>0||conflicts.length>0;
+  const hasAny=neighbours.length>0||rels.length>0||conflicts.length>0;
 
   return (
     <div>
@@ -237,24 +236,9 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
         {filteredRels.map((rel,i)=><NPCRelCard2 key={`rel_${i}`} rel={rel} style={styleFor(rel.type)}/>)}
       </Section>}
 
-      {/* Faction Groups */}
-      {factionGroups.length>0&&<Section title={`Factions (${factionGroups.length})`}>
-        {factionGroups.map((fac,i)=>{
-          const catColors={economy:'#a0762a',government:'#2a3a7a',military:'#8b1a1a',religious:'#1a4a2a',magic:'#3a1a7a',criminal:'#4a1a4a',other:'#5a4a2a'};
-          const c=catColors[fac.dominantCategory]||'#6b5340';
-          return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,padding:'10px 14px',marginBottom:10}}>
-            <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag,marginBottom:6}}>{fac.name}</div>
-            <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-              {(fac.members||[]).map(m=>(
-                <span key={m.id||m.name} style={{fontSize:chromeFontSize(FS.xs, mobile),color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'2px 9px'}}>
-                  {m.name} <span style={{color:MUTED}}>({m.role})</span>
-                </span>
-              ))}
-            </div>
-          </div>;
-        })}
-      </Section>}
-
+      {/* GS-2 (ODQ §934.101): the "Factions" section is CUT. Its groups were tie-components
+          wearing minted names; the power factions are the factions now, the NPCs tab owns
+          membership, and the conflicts below name power factions directly. */}
       {/* Active Conflicts */}
       {conflicts.length>0&&<Section title={`Active Conflicts (${conflicts.length})`}>
         {conflicts.map((c,i)=><ConflictCard key={i} conflict={c}/>)}

@@ -56,7 +56,6 @@ function renderContext(settlement) {
     chainDepth: serviceChainDepthMap(settlement),
     houses: new Map(institutionsWithServices(settlement).map((house) => [house.inst, house])),
     roster: derivePowerStrata(settlement).roster,
-    factionGroups: Array.isArray(settlement?.factions) ? settlement.factions : [],
     history: settlement?.history || {},
   };
 }
@@ -100,7 +99,6 @@ const RENDERERS = Object.freeze({
       const r = ctx.roster[i];
       return {
         settlement: ctx.settlement, r, i, last: true,
-        matchedGroups: ctx.factionGroups.filter((fg) => fg.powerFactionName === r.name),
         isExp: ui.open, onToggle: ui.toggle,
         onJumpToPower: (name) => ctx.navigateToEntity(factionIdFromName(name)),
       };

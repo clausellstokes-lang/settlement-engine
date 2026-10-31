@@ -156,9 +156,6 @@ const RULED = Object.freeze({
     + 'wanderer verb controls beneath that.',
   'src/components/new/tabs/UnaffiliatesSection.jsx :: rows.settled':
     'card — the same UnaffiliateCard as the roaming half above; one shape, one ruling.',
-  'src/components/new/tabs/power/PowerStrata.jsx :: matchedGroups':
-    'card — a faction group\'s sub-row, rendered INSIDE its faction\'s roster card and indented '
-    + 'under it; it belongs to that row rather than being a list of its own.',
   // BUILD-W2-SEARCH U2 (2026-10-30): the dossier search mounts each object through its own
   // renderer, so these rows were extracted into named components. The rows did not change; the
   // scan can no longer read the inline body it used to skip, so each takes its verdict here.
@@ -179,7 +176,7 @@ const RULED = Object.freeze({
   'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
     'card — a ResourceChainCard, the fully-worked variant of the same card.',
   'src/components/new/tabs/power/PowerStrata.jsx :: roster':
-    'card — a FactionRow: the faction with its archetype and share, its groups beneath and a fold.',
+    'card — a FactionRow: the faction with its archetype and share, its member count beneath and a fold.',
 
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':
