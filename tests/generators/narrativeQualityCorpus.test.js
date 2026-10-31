@@ -593,6 +593,8 @@ describe('relationship archetype pools hold eight variants each (GS-1)', () => {
         const pool = STRESS_ECONOMIC_EFFECTS[key][field];
         for (let index = 0; index < 8; index++) {
           const line = pool(A, B, index);
+          expect(line, `${key}.${field}[${index}] is empty`).toMatch(/\w/);
+          // anchored: the line was produced by the pool two lines above and proved non-empty on the line above
           expect(line, `${key}.${field}[${index}] carries an em or en dash`).not.toMatch(/[–—]/);
           if (index >= 3) {
             expect(line, `${key}.${field}[${index}] names the first party`).toContain(A.name);

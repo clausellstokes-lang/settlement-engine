@@ -281,6 +281,7 @@ describe('ShareToGallery — Export to gallery, then Manage gallery (W2-VEIL-B)'
     fireEvent.click(screen.getByRole('button', { name: /open the 2 boxes/i }));
     expect(curate.textContent).toContain("Thieves' guild chapter");
     fireEvent.click(screen.getByRole('button', { name: /preview as visitor/i }));
+    // anchored: the same text was proved present two lines above, before the preview removed it
     expect(curate.textContent).not.toContain("Thieves' guild chapter");
     expect(curate.textContent).toContain('Parish church');
     fireEvent.click(screen.getByRole('button', { name: /^done$/i }));

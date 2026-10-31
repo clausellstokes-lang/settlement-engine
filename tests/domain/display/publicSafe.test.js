@@ -872,6 +872,7 @@ describe('galleryVeil — the curate model and the share mode (W2-VEIL-B U2)', (
     expect(church.eyes.find(e => e.field === 'description')).toMatchObject({ hidden: false, defaultHidden: false, text: 'One for the parish.' });
     for (const e of eyesOf(model)) {
       const field = e.address.split(':').pop();
+      // anchored: eyesOf(model) is non-empty (the church's description eye matched above), so this body runs
       expect(['name', 'role', 'category', 'id']).not.toContain(field);
     }
     expect(model.count).toBe(model.lines.length);

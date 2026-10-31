@@ -109,7 +109,10 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // InstitutionsTab.jsx literals are routed through `swatch` (statusOf's swatch['#8A4010'] and
 // swatch['#7A5010'], both existing tokens, and the service rule's swatch['#D8C8A0'], the one token
 // added to src/design/tokens.js for it): 1244 -> 1241, measured out of its own red run.
-const BUDGET = 1241; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+// 1241 -> 1233 (2026-10-31, measured at the W2-VEIL-B merge out of this test's own red run): the wave-2 lanes
+// built the curate screen, the search bar and the links on the primitives; eight raw literals left with the
+// surfaces they replaced. A shrink, banked.
+const BUDGET = 1233; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —

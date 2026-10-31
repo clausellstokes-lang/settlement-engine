@@ -447,6 +447,7 @@ describe('DefenseTab — a veiled criminal architecture says nothing (W2-VEIL-B)
       expect(isVeiled(veiled, 'block:defense.criminalStructure')).toBe(true);
       const view = render(e(DefenseTab, { settlement: veiled, narrativeNote: null, publicDossier: true }));
       openCriminal(view);
+      // anchored: isVeiled proved the veil applied three lines above, and openCriminal proved the block mounted
       expect(view.container.textContent).not.toMatch(CRIME_RE);
       expect(view.container.textContent).toContain('Criminal Architecture & Public Order');
       cleanup();
