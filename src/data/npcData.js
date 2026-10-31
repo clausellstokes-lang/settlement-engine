@@ -1321,17 +1321,19 @@ export const NPC_PRESENTATION_MODES = {
 // purged symbol is pinned absent by tests/joins/deadCode.test.js (do not re-name
 // it here — the ratchet greps this file for the literal name).
 
-// CONTENT-GT-FINAL (Charge 3): pair-keyed, draw-FREE variety for the relationship
-// archetype prose (the survey's "every 'old_debt' pair in the world is described
-// identically" cell). Each archetype's desc/tension grew 1→3 template closures; the
-// closure used for a given pair is selected by a pure fnv hash of the DIRECTED pair
-// key (`${r.name}>${s.name}`, salted per field) — ZERO rng draws, so the relationship
-// roll stream is byte-identical, and the archetype OBJECTS are unchanged (consumers
-// compare them with === and Object.entries().find — identity is load-bearing). The
-// same pair always renders the same line; different pairs stop sharing one realm-wide
-// template. Index 0 of every pool is the pre-existing canonical closure, verbatim.
-const pairProse = (salt, variants) => (r, s) =>
-  pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`)(r, s);
+// CONTENT-GT-FINAL (Charge 3) + GS-1 (ODQ §934.101): draw-free variety for the relationship
+// archetype prose. The generator draws each tie's line WITHOUT REPLACEMENT per settlement
+// (npcGenerator.js :: generateRelationships) and passes the drawn index as the third argument;
+// the tie stores it as `proseVariant`, so a re-render (refreshRelationshipProjections) keeps the
+// same line under new names. With no index (a legacy edge, a seedless caller) the closure falls
+// back to the pure fnv hash of the DIRECTED pair key, salted per field. ZERO rng draws either
+// way, and the archetype OBJECTS are unchanged (consumers compare them with === and
+// Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
+// Index 0 of every pool is the pre-existing canonical closure, verbatim.
+const pairProse = (salt, variants) => Object.assign((r, s, variant) => (isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s), { size: variants.length });
+/** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
+const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
 
 export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {

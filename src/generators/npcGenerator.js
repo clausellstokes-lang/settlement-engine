@@ -27,7 +27,7 @@ import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
-import { computeRelTension } from './powerGenerator.js';
+import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
 import {
@@ -1586,6 +1586,9 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
   const stressFlags = getStressFlags(config, institutions);
   const relationships = [];
   const seen = new Set();
+  // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
+  // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
+  const drawTieProse = createTieProseDraw();
 
   npcs.forEach(npc => {
     const maxRelationships = randInt(2, 3);
@@ -1606,17 +1609,16 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
       if (_rng() >= score && count > 0) continue;
 
       const archetype = computeRelTension(npc, partner, stressFlags, instFlags);
-      const strengths = RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect;
-      const strength = pick(strengths);
+      const strength = pick(RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect);
 
-      // Find the archetype key from STRESS_ECONOMIC_EFFECTS for UI rendering
-      const archetypeKey = Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, v]) => v === archetype)?.[0];
+      // The archetype key (for UI rendering) and the tie's prose, drawn without replacement.
+      const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, npc, partner);
 
       relationships.push({
         type: archetype.type,
         typeName: archetype.label,
-        description: archetype.desc(npc, partner),
-        tension: archetype.tension(npc, partner),
+        description,
+        tension,
         strength,
         npc1Id: npc.id,
         npc2Id: partner.id,
@@ -1624,7 +1626,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
         npc2Name: partner.name,
         npc1Role: npc.role,
         npc2Role: partner.role,
-        archetypeKey,
+        archetypeKey, proseVariant,
         flagDriven:
           stressFlags.anyActive &&
           (archetype === STRESS_ECONOMIC_EFFECTS.econ_crim_blur ||

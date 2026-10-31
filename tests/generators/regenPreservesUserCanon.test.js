@@ -20,6 +20,7 @@ import {
 } from '../../src/generators/generateSettlementPipeline.js';
 import { applyUserEdit } from '../../src/domain/userEdits.js';
 import { deepClone } from '../../src/domain/clone.js';
+import { STRESS_ECONOMIC_EFFECTS } from '../../src/data/npcData.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
@@ -203,6 +204,25 @@ describe('nobody in the dossier talks about a character who left', () => {
       expect(prose).toContain(byId.get(rel.npc1Id).name);
       expect(prose).toContain(byId.get(rel.npc2Id).name);
     }
+  });
+
+  test('a refreshed tie re-renders the variant its draw stored, not a fresh pair hash (GS-1)', () => {
+    // refreshRelationshipProjections rewrites the prose for the keeper's name. The tie's
+    // line was drawn WITHOUT REPLACEMENT against the rest of the town, so a re-derive that
+    // re-hashed the new name pair would re-open the repeats the draw closed.
+    const byId = new Map(parts.npcs.map((/** @type {{id: string}} */ n) => [n.id, n]));
+    let rendered = 0;
+    for (const rel of parts.relationships || []) {
+      const archetype = STRESS_ECONOMIC_EFFECTS[/** @type {keyof typeof STRESS_ECONOMIC_EFFECTS} */ (rel.archetypeKey)];
+      if (!archetype) continue;
+      expect(Number.isInteger(rel.proseVariant), `rel ${rel.npc1Id}→${rel.npc2Id} stores its variant`).toBe(true);
+      const first = byId.get(rel.npc1Id);
+      const second = byId.get(rel.npc2Id);
+      expect(rel.tension).toBe(archetype.tension(first, second, rel.proseVariant));
+      expect(rel.description).toBe(archetype.desc(first, second, rel.proseVariant));
+      rendered++;
+    }
+    expect(rendered, 'the reroll carries archetype ties to check').toBeGreaterThan(0);
   });
 
   test('no relationship prose names a displaced character', () => {
