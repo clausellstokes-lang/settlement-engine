@@ -99,6 +99,17 @@
  * ledger row, in the report and the pull request, and is vetoable — a veto returns the constant and
  * takes a headroom hunt (a shrink) in its place. The ceiling stays MONOTONE-DOWN from this value.
  *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-10-31 UX CONSOLIDATION (Fable chair, ODQ §934.101; the
+ * integration tip 3dcb3c6f, measured by the full gate's own build, generation.worker-DumDp2-f.js):
+ * 1,438,517 -> 1,480,690 bytes. The 42,173 B are the owner's ordered generator content, counted in the
+ * bundle: GS-1 tension variety (180 authored tie lines, eight per archetype, relationshipArchetypes.js
+ * +392 lines with its draw), GS-2 one faction set (factions and conflicts built from the power set in
+ * assembleSettlement), GS-4 the world-law gate on the arcane governance line, the arrival scene's
+ * no-market pool and the service-category tables (every catalog name registered). No eager module
+ * re-merged (the lazy edge below still holds). The rise is declared here, in the ledger row and in the
+ * owner's report, and is vetoable: a veto returns the constant and takes a headroom hunt (a shrink) in
+ * its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
  * @enforced-by this test
  */
 
@@ -277,7 +288,7 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // that content was priced at about 1 KB (lines as plain strings rather than functions) and offered against the raise. A
 // fresh `vite build` at c39ce8640 reads 1,438,517 B (generation.worker-aM8fOsDp.js), the second gate's figure to the byte.
 // MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1438517;
+export const WORKER_BUNDLE_CEILING_BYTES = 1480690;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 

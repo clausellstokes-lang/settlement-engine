@@ -77,7 +77,7 @@ export const fixture = {
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Inghean MacCarthy and Odhrán MacCarthy are connected by something neither discusses openly: Inghean MacCarthy has begun to act like someone who considers the debt paid. Odhrán MacCarthy does not.",
+    "pressure": "Inghean MacCarthy and Odhrán MacCarthy are connected by something neither discusses openly: A third party has learned what the original favour was. The debt just changed hands.",
     "hooks": [
       {
         "kind": "NPC",
@@ -87,17 +87,20 @@ export const fixture = {
         "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
       },
       {
-        "kind": "NPC",
-        "tone": "success",
-        "tag": "derived · npcs",
-        "lead": "Rónnat Sullivan, lord/lady of the manor",
-        "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
+        "kind": "Hook",
+        "tone": "warning",
+        "tag": "derived · factions",
+        "text": "A neutral figure is being pressured by both Elder Council and Craft Guilds to take a side before the next council session."
       }
     ],
-    "hooksMore": 5
+    "hooksMore": 7
   },
   "voice": {
     "receipts": [
+      {
+        "label": "conflict",
+        "text": "Elder Council × Craft Guilds · military conscription of guild apprentices · stakes: labor control"
+      },
       {
         "label": "route",
         "text": "road · Picked from coherence-safe pool: road, road, road, isolated, isolated."
