@@ -125,14 +125,14 @@
  "digests": {
   "corpusMeta": "252deb6ad7685fbd3be1ce0ceceda37e3fc3e0227d58e5b80c70a77bcfb8351b",
   "inventory": "857060fd9a7f17834b591c95a089549d45f79f318b919de79aadf01178609ec8",
-  "manifests": "aaa250b0e08b28468c7530acd724a941a582542c7c4aaa1f9e0ac46f2ad73a8e",
+  "manifests": "58d845f7363ebe64f50b9dfc8162033e6530fe61266c1d870309de9150386bbe",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "8c5cf9a0ee8d4479957b6debc99aa85a04ed036e61d28a1406fc49d8258ea641",
+  "scanStats": "0ec3f94e1bd86a97e2533a1398936213d25ff29f58becec9a4b8672982335553",
   "sentinel": "3f285fa975e69e5ecda4800d6c0952247da75b5b8c3bdc74f968a266507ec8e8"
  },
  "frozen": "2026-10-31",
- "frozenAtSha": "7cfe0bfa79f18fb7361aa7d2bc2f0286f9d6a45d",
+ "frozenAtSha": "db7d04c9b29db90943fd85a4ec6e39298a53bf6d",
  "identities": 1441,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2447,7 +2447,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "2119c102b8db3dd9f40c332119e544546b087741af86b48bc7057a82cd6dd40e",
+   "digest": "1c153848290e36f4bee0e63d9fe6e22badb8f07d261e1303efcb1c94a15307f4",
    "entries": [
     {
      "mode": "100644",
@@ -2865,8 +2865,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "49ca8e30cddbebcd92119a2be970376b5775aaf09424ab4894c4449d83c1ace7",
-     "size": 66229,
+     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
+     "size": 66260,
      "type": "file"
     },
     {
@@ -2900,8 +2900,8 @@
     {
      "mode": "100644",
      "path": "src/components/ProseParagraph.jsx",
-     "sha256": "da1d2aa489c08f30e548a956c2449c576dbba81a05da73e1d24002e57547002c",
-     "size": 1697,
+     "sha256": "929b3bbd8129663ac8c168b6b443373753f6bb1ba7ab37b4927b331c171cbab9",
+     "size": 3599,
      "type": "file"
     },
     {
@@ -2949,8 +2949,8 @@
     {
      "mode": "100644",
      "path": "src/components/ShareToGallery.jsx",
-     "sha256": "13440906c3c5d4c842ec1de250be3c0961c905baa6aefb11c4d544b113ece459",
-     "size": 28598,
+     "sha256": "635278a661f129d3083856f57101002f018e33ac3ee84aa66d50a4fc47ee12fc",
+     "size": 30798,
      "type": "file"
     },
     {
@@ -3677,8 +3677,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierEntityContext.jsx",
-     "sha256": "dec8f7861476f392e6fe719a61dbeef4ed60f46974b37cdafdcebcd8c6d7b919",
-     "size": 1201,
+     "sha256": "d701f81bed646bc99c73e3f7eec35f8427ef9949cfe646742447aef1efbeb7ec",
+     "size": 1421,
      "type": "file"
     },
     {
@@ -3726,8 +3726,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSearchResults.jsx",
-     "sha256": "bc5bde43c01a54981c5dbde8f0e681e2e6cf51d08a4e0290f2461220c98dc1b8",
-     "size": 9566,
+     "sha256": "0dd733f9d340d43d88b933861d39577213f1179b287547f2a5cfe5486a9e05c3",
+     "size": 10194,
      "type": "file"
     },
     {
@@ -3844,9 +3844,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/dossier/useEntityFocus.js",
+     "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
+     "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/dossier/useNavigateToEntity.js",
-     "sha256": "e051a8748ff7b76428639d28f99f8d1056f3d61c7aa7611a1d546081a63d1694",
-     "size": 4344,
+     "sha256": "72cc7c3fcb892fbad888a5a8ca433c97fb6945880875e1c33efaad066bd8d475",
+     "size": 5224,
      "type": "file"
     },
     {
@@ -3977,6 +3984,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/gallery/CurateMode.jsx",
+     "sha256": "928c7a4048c72c50177fb6a9ce8c743bf6b1572266b6b0b863b5857fad1ce286",
+     "size": 8198,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/gallery/GalleryCampaigns.jsx",
      "sha256": "fc436ebab0e7d896f03217989033e8d6f13827d524c0aba0be229bffc0b1d37f",
      "size": 16443,
@@ -4092,6 +4106,13 @@
      "path": "src/components/gallery/ImageCropper.jsx",
      "sha256": "68125266cbe031e8d0e199bb0a3026f8b7c341396e42d07294b7e5b18f425a13",
      "size": 10879,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/gallery/ManageGallery.jsx",
+     "sha256": "9067997018f7889015ab72325bcf292d574a21e7167bfe974df9db488554a184",
+     "size": 3937,
      "type": "file"
     },
     {
@@ -5378,8 +5399,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/ProseBlock.jsx",
-     "sha256": "b9e60e1931b15ebc5aa3bc2b39b0c70cb348ced32c091c8a5e16f934ded137e2",
-     "size": 4514,
+     "sha256": "f95384c95c2bc2d868d629a07f1da743c699edaca346f1b25a16038b85d5242e",
+     "size": 4588,
      "type": "file"
     },
     {
@@ -5441,15 +5462,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
-     "size": 8801,
+     "sha256": "2e2ad3b8b592e0bc6713a1aa9c7a4a76174225e9cbb116b6a7be0c9cac597521",
+     "size": 8684,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "5f67e1bb0199d0fdbcf96d10c66b5be97bfbce925eae5d0e8a2c29ef90f87576",
-     "size": 27381,
+     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
+     "size": 28463,
      "type": "file"
     },
     {
@@ -5497,8 +5518,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "c81bddcff06fac69627b948e2c9ac2624682d5aecb67940e81b3469c2ac9fdce",
-     "size": 46840,
+     "sha256": "c9f1b53f964d3309dfb154157ef45d6b934f70f0ee3c291132bc4fd4749e4aa3",
+     "size": 47390,
      "type": "file"
     },
     {
@@ -5525,8 +5546,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "813b53cc56b42742d54322a67eb833ae38228f47f2b90099c754b1ed926cba45",
-     "size": 18869,
+     "sha256": "18029dd88aacb9b1af7a15962f495274ad27f0fc8d36607d65d4e44c3ec7ba4e",
+     "size": 19644,
      "type": "file"
     },
     {
@@ -5539,8 +5560,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "78be462255dc193ec79ff9a5bcab2602fe0ff493aa87f5ba483696f7bf9ac0c2",
-     "size": 10788,
+     "sha256": "b92efdd53346e89d7de56c8e5c6b5dc972e160a03d93faa7d84df8a9972b247f",
+     "size": 11225,
      "type": "file"
     },
     {
@@ -5581,8 +5602,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "e54e5067e6c2191dcd9761a86aa3992f70e9dfd2ecede9ed01875e9a15046200",
-     "size": 4220,
+     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
+     "size": 4329,
      "type": "file"
     },
     {
@@ -5637,8 +5658,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "f39170f9a2eef4c984d99d7c87ef05b5e158c7dea8edb2dd128ef82ec826756a",
-     "size": 8381,
+     "sha256": "eb1b8e656b806960f3a8d9378f6b75a6ae4367bdd88ce2bed032d94f359920f0",
+     "size": 8469,
      "type": "file"
     },
     {
@@ -5679,8 +5700,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "c61af31cbe6e3a98510e426b25fb3ec3e882a3baedb575c8d563804f39c38ac7",
-     "size": 26601,
+     "sha256": "d96881b183ea5c7fe98e39b32ad3a1de7233a0d1879cbd848d0f780904b5e19d",
+     "size": 26719,
      "type": "file"
     },
     {
@@ -5931,8 +5952,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/EntityLink.jsx",
-     "sha256": "0e93b8aa5aa1d78f4c153722cea8bca5532e4a663fc2c2a7aed24eb3aa104271",
-     "size": 3944,
+     "sha256": "5789ad24b49435795a495c1e3d81ba46a70e477cebc1050f583906620b8b08fd",
+     "size": 4393,
      "type": "file"
     },
     {
@@ -8409,8 +8430,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "e5f95d913de1b3ad754af65e68d25b1f92559defe0c2116b38525a4fff1b9f3c",
-     "size": 18615,
+     "sha256": "897442aa9f4d3330efc755380067c2610bac878f557b4bcef580e662ccdfff9c",
+     "size": 18604,
      "type": "file"
     },
     {
@@ -8808,8 +8829,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "4c0340e95ea985a955ec1aac0f89c6e685208b8d84cf7fe589d4e2a15d095503",
-     "size": 40153,
+     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
+     "size": 55329,
      "type": "file"
     },
     {
@@ -9214,8 +9235,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "35fdd6b101093537d5c47d6b18f6901c01c673004011f91e2ccd24f103d06f01",
-     "size": 115074,
+     "sha256": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
+     "size": 115130,
      "type": "file"
     },
     {
@@ -9468,6 +9489,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/linkMentions.js",
+     "sha256": "c5a9d59062a9f5c94c94030da259dc29f3991717c97df05e153aaa36c7fa4949",
+     "size": 10612,
      "type": "file"
     },
     {
@@ -16150,6 +16178,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/hooks/useGalleryShareControls.js",
+     "sha256": "ffda275b4bc31a3d374c5ae8f07519d8e5be749d9d163d18adec321175de0350",
+     "size": 4647,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/hooks/useInstantWorldMaterialize.js",
      "sha256": "e6afd257e104dbfa2a9ca7c2a65a28dcf8f79b41a445fdf2eae92fde9eef0f85",
      "size": 2716,
@@ -17026,8 +17061,8 @@
     {
      "mode": "100644",
      "path": "src/lib/gallery.js",
-     "sha256": "290e1ea20acbfa09bcfe3e1a0a450962c10aaf387b8352cdb59762694ca462ee",
-     "size": 62122,
+     "sha256": "320599b8ba1fcfe645bc67105a35911d5d5df82a5e48c2eb877dd226ac135618",
+     "size": 63262,
      "type": "file"
     },
     {
@@ -18805,7 +18840,7 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "e152e8daf179c982a9270b436cf8b8b38c8ab7df74d00760f3d00ebad7389cd2",
+   "digest": "6ec0900a1d558c5f9ca3992856cdc4d2ca44e02990083125b90b47e3808f14d6",
    "entries": [
     {
      "mode": "100644",
@@ -19153,8 +19188,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "49ca8e30cddbebcd92119a2be970376b5775aaf09424ab4894c4449d83c1ace7",
-     "size": 66229,
+     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
+     "size": 66260,
      "type": "file"
     },
     {
@@ -19188,8 +19223,8 @@
     {
      "mode": "100644",
      "path": "src/components/ProseParagraph.jsx",
-     "sha256": "da1d2aa489c08f30e548a956c2449c576dbba81a05da73e1d24002e57547002c",
-     "size": 1697,
+     "sha256": "929b3bbd8129663ac8c168b6b443373753f6bb1ba7ab37b4927b331c171cbab9",
+     "size": 3599,
      "type": "file"
     },
     {
@@ -19237,8 +19272,8 @@
     {
      "mode": "100644",
      "path": "src/components/ShareToGallery.jsx",
-     "sha256": "13440906c3c5d4c842ec1de250be3c0961c905baa6aefb11c4d544b113ece459",
-     "size": 28598,
+     "sha256": "635278a661f129d3083856f57101002f018e33ac3ee84aa66d50a4fc47ee12fc",
+     "size": 30798,
      "type": "file"
     },
     {
@@ -19965,8 +20000,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierEntityContext.jsx",
-     "sha256": "dec8f7861476f392e6fe719a61dbeef4ed60f46974b37cdafdcebcd8c6d7b919",
-     "size": 1201,
+     "sha256": "d701f81bed646bc99c73e3f7eec35f8427ef9949cfe646742447aef1efbeb7ec",
+     "size": 1421,
      "type": "file"
     },
     {
@@ -20014,8 +20049,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSearchResults.jsx",
-     "sha256": "bc5bde43c01a54981c5dbde8f0e681e2e6cf51d08a4e0290f2461220c98dc1b8",
-     "size": 9566,
+     "sha256": "0dd733f9d340d43d88b933861d39577213f1179b287547f2a5cfe5486a9e05c3",
+     "size": 10194,
      "type": "file"
     },
     {
@@ -20132,9 +20167,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/dossier/useEntityFocus.js",
+     "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
+     "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/dossier/useNavigateToEntity.js",
-     "sha256": "e051a8748ff7b76428639d28f99f8d1056f3d61c7aa7611a1d546081a63d1694",
-     "size": 4344,
+     "sha256": "72cc7c3fcb892fbad888a5a8ca433c97fb6945880875e1c33efaad066bd8d475",
+     "size": 5224,
      "type": "file"
     },
     {
@@ -20265,6 +20307,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/gallery/CurateMode.jsx",
+     "sha256": "928c7a4048c72c50177fb6a9ce8c743bf6b1572266b6b0b863b5857fad1ce286",
+     "size": 8198,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/gallery/GalleryCampaigns.jsx",
      "sha256": "fc436ebab0e7d896f03217989033e8d6f13827d524c0aba0be229bffc0b1d37f",
      "size": 16443,
@@ -20380,6 +20429,13 @@
      "path": "src/components/gallery/ImageCropper.jsx",
      "sha256": "68125266cbe031e8d0e199bb0a3026f8b7c341396e42d07294b7e5b18f425a13",
      "size": 10879,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/gallery/ManageGallery.jsx",
+     "sha256": "9067997018f7889015ab72325bcf292d574a21e7167bfe974df9db488554a184",
+     "size": 3937,
      "type": "file"
     },
     {
@@ -21666,8 +21722,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/ProseBlock.jsx",
-     "sha256": "b9e60e1931b15ebc5aa3bc2b39b0c70cb348ced32c091c8a5e16f934ded137e2",
-     "size": 4514,
+     "sha256": "f95384c95c2bc2d868d629a07f1da743c699edaca346f1b25a16038b85d5242e",
+     "size": 4588,
      "type": "file"
     },
     {
@@ -21729,15 +21785,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
-     "size": 8801,
+     "sha256": "2e2ad3b8b592e0bc6713a1aa9c7a4a76174225e9cbb116b6a7be0c9cac597521",
+     "size": 8684,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "5f67e1bb0199d0fdbcf96d10c66b5be97bfbce925eae5d0e8a2c29ef90f87576",
-     "size": 27381,
+     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
+     "size": 28463,
      "type": "file"
     },
     {
@@ -21785,8 +21841,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "c81bddcff06fac69627b948e2c9ac2624682d5aecb67940e81b3469c2ac9fdce",
-     "size": 46840,
+     "sha256": "c9f1b53f964d3309dfb154157ef45d6b934f70f0ee3c291132bc4fd4749e4aa3",
+     "size": 47390,
      "type": "file"
     },
     {
@@ -21813,8 +21869,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "813b53cc56b42742d54322a67eb833ae38228f47f2b90099c754b1ed926cba45",
-     "size": 18869,
+     "sha256": "18029dd88aacb9b1af7a15962f495274ad27f0fc8d36607d65d4e44c3ec7ba4e",
+     "size": 19644,
      "type": "file"
     },
     {
@@ -21827,8 +21883,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "78be462255dc193ec79ff9a5bcab2602fe0ff493aa87f5ba483696f7bf9ac0c2",
-     "size": 10788,
+     "sha256": "b92efdd53346e89d7de56c8e5c6b5dc972e160a03d93faa7d84df8a9972b247f",
+     "size": 11225,
      "type": "file"
     },
     {
@@ -21869,8 +21925,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "e54e5067e6c2191dcd9761a86aa3992f70e9dfd2ecede9ed01875e9a15046200",
-     "size": 4220,
+     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
+     "size": 4329,
      "type": "file"
     },
     {
@@ -21925,8 +21981,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "f39170f9a2eef4c984d99d7c87ef05b5e158c7dea8edb2dd128ef82ec826756a",
-     "size": 8381,
+     "sha256": "eb1b8e656b806960f3a8d9378f6b75a6ae4367bdd88ce2bed032d94f359920f0",
+     "size": 8469,
      "type": "file"
     },
     {
@@ -21967,8 +22023,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "c61af31cbe6e3a98510e426b25fb3ec3e882a3baedb575c8d563804f39c38ac7",
-     "size": 26601,
+     "sha256": "d96881b183ea5c7fe98e39b32ad3a1de7233a0d1879cbd848d0f780904b5e19d",
+     "size": 26719,
      "type": "file"
     },
     {
@@ -22219,8 +22275,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/EntityLink.jsx",
-     "sha256": "0e93b8aa5aa1d78f4c153722cea8bca5532e4a663fc2c2a7aed24eb3aa104271",
-     "size": 3944,
+     "sha256": "5789ad24b49435795a495c1e3d81ba46a70e477cebc1050f583906620b8b08fd",
+     "size": 4393,
      "type": "file"
     },
     {
@@ -24977,8 +25033,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "4c0340e95ea985a955ec1aac0f89c6e685208b8d84cf7fe589d4e2a15d095503",
-     "size": 40153,
+     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
+     "size": 55329,
      "type": "file"
     },
     {
@@ -25383,8 +25439,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "35fdd6b101093537d5c47d6b18f6901c01c673004011f91e2ccd24f103d06f01",
-     "size": 115074,
+     "sha256": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
+     "size": 115130,
      "type": "file"
     },
     {
@@ -25637,6 +25693,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/linkMentions.js",
+     "sha256": "c5a9d59062a9f5c94c94030da259dc29f3991717c97df05e153aaa36c7fa4949",
+     "size": 10612,
      "type": "file"
     },
     {
@@ -32319,6 +32382,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/hooks/useGalleryShareControls.js",
+     "sha256": "ffda275b4bc31a3d374c5ae8f07519d8e5be749d9d163d18adec321175de0350",
+     "size": 4647,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/hooks/useInstantWorldMaterialize.js",
      "sha256": "e6afd257e104dbfa2a9ca7c2a65a28dcf8f79b41a445fdf2eae92fde9eef0f85",
      "size": 2716,
@@ -33195,8 +33265,8 @@
     {
      "mode": "100644",
      "path": "src/lib/gallery.js",
-     "sha256": "290e1ea20acbfa09bcfe3e1a0a450962c10aaf387b8352cdb59762694ca462ee",
-     "size": 62122,
+     "sha256": "320599b8ba1fcfe645bc67105a35911d5d5df82a5e48c2eb877dd226ac135618",
+     "size": 63262,
      "type": "file"
     },
     {
@@ -34967,7 +35037,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "119a46805e8504d1f0ae19e81f42870d62af1f99741a7bb8c5774e38a441a0ed",
+   "digest": "f7edd984544f3b31f3228868c590201704886ccea63d0afc522e7f57f21db4da",
    "entries": [
     {
      "mode": "100644",
@@ -35315,8 +35385,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "49ca8e30cddbebcd92119a2be970376b5775aaf09424ab4894c4449d83c1ace7",
-     "size": 66229,
+     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
+     "size": 66260,
      "type": "file"
     },
     {
@@ -35350,8 +35420,8 @@
     {
      "mode": "100644",
      "path": "src/components/ProseParagraph.jsx",
-     "sha256": "da1d2aa489c08f30e548a956c2449c576dbba81a05da73e1d24002e57547002c",
-     "size": 1697,
+     "sha256": "929b3bbd8129663ac8c168b6b443373753f6bb1ba7ab37b4927b331c171cbab9",
+     "size": 3599,
      "type": "file"
     },
     {
@@ -35399,8 +35469,8 @@
     {
      "mode": "100644",
      "path": "src/components/ShareToGallery.jsx",
-     "sha256": "13440906c3c5d4c842ec1de250be3c0961c905baa6aefb11c4d544b113ece459",
-     "size": 28598,
+     "sha256": "635278a661f129d3083856f57101002f018e33ac3ee84aa66d50a4fc47ee12fc",
+     "size": 30798,
      "type": "file"
     },
     {
@@ -36127,8 +36197,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierEntityContext.jsx",
-     "sha256": "dec8f7861476f392e6fe719a61dbeef4ed60f46974b37cdafdcebcd8c6d7b919",
-     "size": 1201,
+     "sha256": "d701f81bed646bc99c73e3f7eec35f8427ef9949cfe646742447aef1efbeb7ec",
+     "size": 1421,
      "type": "file"
     },
     {
@@ -36176,8 +36246,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierSearchResults.jsx",
-     "sha256": "bc5bde43c01a54981c5dbde8f0e681e2e6cf51d08a4e0290f2461220c98dc1b8",
-     "size": 9566,
+     "sha256": "0dd733f9d340d43d88b933861d39577213f1179b287547f2a5cfe5486a9e05c3",
+     "size": 10194,
      "type": "file"
     },
     {
@@ -36294,9 +36364,16 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/dossier/useEntityFocus.js",
+     "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
+     "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/dossier/useNavigateToEntity.js",
-     "sha256": "e051a8748ff7b76428639d28f99f8d1056f3d61c7aa7611a1d546081a63d1694",
-     "size": 4344,
+     "sha256": "72cc7c3fcb892fbad888a5a8ca433c97fb6945880875e1c33efaad066bd8d475",
+     "size": 5224,
      "type": "file"
     },
     {
@@ -36427,6 +36504,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/components/gallery/CurateMode.jsx",
+     "sha256": "928c7a4048c72c50177fb6a9ce8c743bf6b1572266b6b0b863b5857fad1ce286",
+     "size": 8198,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/components/gallery/GalleryCampaigns.jsx",
      "sha256": "fc436ebab0e7d896f03217989033e8d6f13827d524c0aba0be229bffc0b1d37f",
      "size": 16443,
@@ -36542,6 +36626,13 @@
      "path": "src/components/gallery/ImageCropper.jsx",
      "sha256": "68125266cbe031e8d0e199bb0a3026f8b7c341396e42d07294b7e5b18f425a13",
      "size": 10879,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/gallery/ManageGallery.jsx",
+     "sha256": "9067997018f7889015ab72325bcf292d574a21e7167bfe974df9db488554a184",
+     "size": 3937,
      "type": "file"
     },
     {
@@ -37828,8 +37919,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/ProseBlock.jsx",
-     "sha256": "b9e60e1931b15ebc5aa3bc2b39b0c70cb348ced32c091c8a5e16f934ded137e2",
-     "size": 4514,
+     "sha256": "f95384c95c2bc2d868d629a07f1da743c699edaca346f1b25a16038b85d5242e",
+     "size": 4588,
      "type": "file"
     },
     {
@@ -37891,15 +37982,15 @@
     {
      "mode": "100644",
      "path": "src/components/new/neighbourComponents.jsx",
-     "sha256": "44cf1d26c7b54a7a8660c82cdaf5c37d1e4fce262e25a471bb2ad09f628560f9",
-     "size": 8801,
+     "sha256": "2e2ad3b8b592e0bc6713a1aa9c7a4a76174225e9cbb116b6a7be0c9cac597521",
+     "size": 8684,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/npcComponents.jsx",
-     "sha256": "5f67e1bb0199d0fdbcf96d10c66b5be97bfbce925eae5d0e8a2c29ef90f87576",
-     "size": 27381,
+     "sha256": "a76cdca7aaf69f44bbff38f77e0fecf29a1a08e1697d1be3929923f3d8bccccc",
+     "size": 28463,
      "type": "file"
     },
     {
@@ -37947,8 +38038,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/DefenseTab.jsx",
-     "sha256": "c81bddcff06fac69627b948e2c9ac2624682d5aecb67940e81b3469c2ac9fdce",
-     "size": 46840,
+     "sha256": "c9f1b53f964d3309dfb154157ef45d6b934f70f0ee3c291132bc4fd4749e4aa3",
+     "size": 47390,
      "type": "file"
     },
     {
@@ -37975,8 +38066,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/HistoryTab.jsx",
-     "sha256": "813b53cc56b42742d54322a67eb833ae38228f47f2b90099c754b1ed926cba45",
-     "size": 18869,
+     "sha256": "18029dd88aacb9b1af7a15962f495274ad27f0fc8d36607d65d4e44c3ec7ba4e",
+     "size": 19644,
      "type": "file"
     },
     {
@@ -37989,8 +38080,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/InstitutionsTab.jsx",
-     "sha256": "78be462255dc193ec79ff9a5bcab2602fe0ff493aa87f5ba483696f7bf9ac0c2",
-     "size": 10788,
+     "sha256": "b92efdd53346e89d7de56c8e5c6b5dc972e160a03d93faa7d84df8a9972b247f",
+     "size": 11225,
      "type": "file"
     },
     {
@@ -38031,8 +38122,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "e54e5067e6c2191dcd9761a86aa3992f70e9dfd2ecede9ed01875e9a15046200",
-     "size": 4220,
+     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
+     "size": 4329,
      "type": "file"
     },
     {
@@ -38087,8 +38178,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/TraditionsTab.jsx",
-     "sha256": "f39170f9a2eef4c984d99d7c87ef05b5e158c7dea8edb2dd128ef82ec826756a",
-     "size": 8381,
+     "sha256": "eb1b8e656b806960f3a8d9378f6b75a6ae4367bdd88ce2bed032d94f359920f0",
+     "size": 8469,
      "type": "file"
     },
     {
@@ -38129,8 +38220,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/power/PowerStrata.jsx",
-     "sha256": "c61af31cbe6e3a98510e426b25fb3ec3e882a3baedb575c8d563804f39c38ac7",
-     "size": 26601,
+     "sha256": "d96881b183ea5c7fe98e39b32ad3a1de7233a0d1879cbd848d0f780904b5e19d",
+     "size": 26719,
      "type": "file"
     },
     {
@@ -38381,8 +38472,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/EntityLink.jsx",
-     "sha256": "0e93b8aa5aa1d78f4c153722cea8bca5532e4a663fc2c2a7aed24eb3aa104271",
-     "size": 3944,
+     "sha256": "5789ad24b49435795a495c1e3d81ba46a70e477cebc1050f583906620b8b08fd",
+     "size": 4393,
      "type": "file"
     },
     {
@@ -40859,8 +40950,8 @@
     {
      "mode": "100644",
      "path": "src/domain/data/intentAtlas.distillate.json",
-     "sha256": "e5f95d913de1b3ad754af65e68d25b1f92559defe0c2116b38525a4fff1b9f3c",
-     "size": 18615,
+     "sha256": "897442aa9f4d3330efc755380067c2610bac878f557b4bcef580e662ccdfff9c",
+     "size": 18604,
      "type": "file"
     },
     {
@@ -41258,8 +41349,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "4c0340e95ea985a955ec1aac0f89c6e685208b8d84cf7fe589d4e2a15d095503",
-     "size": 40153,
+     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
+     "size": 55329,
      "type": "file"
     },
     {
@@ -41664,8 +41755,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/stateProse/generalStateProse.js",
-     "sha256": "35fdd6b101093537d5c47d6b18f6901c01c673004011f91e2ccd24f103d06f01",
-     "size": 115074,
+     "sha256": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
+     "size": 115130,
      "type": "file"
     },
     {
@@ -41918,6 +42009,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/linkMentions.js",
+     "sha256": "c5a9d59062a9f5c94c94030da259dc29f3991717c97df05e153aaa36c7fa4949",
+     "size": 10612,
      "type": "file"
     },
     {
@@ -48600,6 +48698,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/hooks/useGalleryShareControls.js",
+     "sha256": "ffda275b4bc31a3d374c5ae8f07519d8e5be749d9d163d18adec321175de0350",
+     "size": 4647,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/hooks/useInstantWorldMaterialize.js",
      "sha256": "e6afd257e104dbfa2a9ca7c2a65a28dcf8f79b41a445fdf2eae92fde9eef0f85",
      "size": 2716,
@@ -49476,8 +49581,8 @@
     {
      "mode": "100644",
      "path": "src/lib/gallery.js",
-     "sha256": "290e1ea20acbfa09bcfe3e1a0a450962c10aaf387b8352cdb59762694ca462ee",
-     "size": 62122,
+     "sha256": "320599b8ba1fcfe645bc67105a35911d5d5df82a5e48c2eb877dd226ac135618",
+     "size": 63262,
      "type": "file"
     },
     {
@@ -51538,17 +51643,17 @@
   }
  },
  "scanStats": {
-  "files": 2308,
-  "reads": 133786,
+  "files": 2313,
+  "reads": 134020,
   "resolved": 10019,
-  "unresolved": 123767
+  "unresolved": 124001
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "2119c102b8db3dd9f40c332119e544546b087741af86b48bc7057a82cd6dd40e",
-  "scanTreeDigest": "e152e8daf179c982a9270b436cf8b8b38c8ab7df74d00760f3d00ebad7389cd2",
-  "sourceTreeDigest": "119a46805e8504d1f0ae19e81f42870d62af1f99741a7bb8c5774e38a441a0ed",
-  "unscannedInputDigest": "aef21016aee33adee9c629a4c14e5e4fa58dc0aaa1e4ccbf301e434ae96bbda7"
+  "executionTreeDigest": "1c153848290e36f4bee0e63d9fe6e22badb8f07d261e1303efcb1c94a15307f4",
+  "scanTreeDigest": "6ec0900a1d558c5f9ca3992856cdc4d2ca44e02990083125b90b47e3808f14d6",
+  "sourceTreeDigest": "f7edd984544f3b31f3228868c590201704886ccea63d0afc522e7f57f21db4da",
+  "unscannedInputDigest": "bf766875efd4620888f50644608c21553a63875340a9b44543fbde2abbeb6229"
  },
  "schema": 25,
  "sentinel": {
