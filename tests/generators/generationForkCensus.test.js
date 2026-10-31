@@ -129,7 +129,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-31, one faction set (GS-2, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-31-one-faction-set.json): e49d32f7... -> 9f94ab28..., this town's factions the power
 // factions and its conflicts the crossing rivalries.
-const GOLDEN_CONTROL_HASH = '9f94ab2875a3785840e18ba58f520fe8256c6bd8df54bbfbd01eec64a447891a';
+// 2026-10-31, tension variety (GS-1, ODQ §934.101), through the signed door
+// (docs/shift-records/2026-10-31-tension-variety.json): 9f94ab28... -> 67a3cc18..., this town's tie prose drawn
+// without replacement from eight-variant pools.
+const GOLDEN_CONTROL_HASH = '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -153,8 +156,11 @@ const REPEATED_SEED = `${CENSUS_ROW._seed}::generatePower::power-structure`;
 const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // 2026-10-01, the urban band (ODQ §934.86): 96 -> 107 pickVariant calls on the probe row (+11, measured; the institution
 // registry rebuild changed what the same seed assembles); every call is still a real choice with its own seed.
-const PICK_VARIANT_CALLS = 107;
-const FNV_EXTERNAL_CALLS = 6;
+// 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
+// on the probe row (measured). The tie prose left the pair-hash door: its 19 ties' 38 desc/tension picks now render
+// at a drawn index, and the draw opens one fnv offset per archetype present (9 here) through the external channel.
+const PICK_VARIANT_CALLS = 69;
+const FNV_EXTERNAL_CALLS = 15;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -461,7 +467,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
   }, 120_000);
 
-  it('A6 — the hash channel: 107 distinct pickVariant seeds, six external fnv1a32 calls, and two censuses disjoint by construction', () => {
+  it('A6 — the hash channel: 69 distinct pickVariant seeds, fifteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
     const seen = censusRun(CENSUS_ROW);
     const realChoices = seen.picks.filter((pick) => pick.poolLen > 1 && pick.seed && pick.seed !== ' undefined');
     const pickSeeds = new Set(seen.picks.map((pick) => pick.seed));

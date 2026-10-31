@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '9aefa92c16e0a54661630938b42f5f5710fb4ad59b5f2869f37333c6c28e3fe4',
-    replay: '9b4a580115eb0b131f897db38cc372e9a587fc55da67a27fd0a834f64ebc9f9a',
+    derived: '2d6f74d83e2d11ac28f968b26add256bd6d7cb6ad30a58742c120867672e92c1',
+    replay: '051a74a765060065d71e81652a87cb6ce60f7bd7a873d96b07b3d1a659c5d204',
   }),
   21: Object.freeze({
-    derived: '9f94ab2875a3785840e18ba58f520fe8256c6bd8df54bbfbd01eec64a447891a',
-    replay: '613a9bc9cb54812d80e88b3e7eb9500d8add4b81468784288ed1e359f325fe84',
+    derived: '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529',
+    replay: '40919b8e2db83f61ec7d313aedac39e1298856113e39339c830f663842d08d25',
   }),
   42: Object.freeze({
-    derived: 'af51092bf1d17607c06710fe8e3d5ef973e3f3a51ea587b834adc13a421b286a',
-    replay: '8d6e92d90b306a5eafb0dd732ce8e1ffcdf0655f60c8746c0fea32c37233422f',
+    derived: 'c34b6b57a40ea89a6ecae273136f26b6ca85916fc84a17fc6e8c852246a60f27',
+    replay: '8e15ee00bd22dddc53acb02f8146759e5646218e93ca5b491753dbb068914556',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -173,6 +173,13 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // proof worktree, never this checkout, restored afterwards), and the planted step and the live step produced the SAME
 // six digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control
 // row (the GS-2 golden re-record).
+// ── RE-CAPTURED 2026-10-31, tension variety (GS-1, ODQ §934.101), BY THE SAME PLANT (lane G3) ────────────────────────
+// All three rows moved (six digests): every tie's description and tension are drawn without replacement from eight-variant
+// pools, the index stored on the tie (docs/shift-records/2026-10-31-tension-variety.json). Re-captured as above: the
+// pre-EM-B2b2 step (scratchpad probe-src/resolveResources.preB2b2.js, sha256 62e16d59...) planted over a COPY of this tree
+// at the lane's committed tip (the detached worktree wt-G3-plant, never this checkout, restored afterwards), and the planted
+// step and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's
+// `derived` is the re-recorded golden's control row (the GS-1 golden re-record).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 
