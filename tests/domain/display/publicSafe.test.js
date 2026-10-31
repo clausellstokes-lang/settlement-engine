@@ -4,7 +4,9 @@ import {
   parseVeilAddress, isHideable, resolveVeil, applyVeil, isVeiled, veilGroupingsOf, readShareVeil, writeShareVeil, clampVeilDeltas, projectShareVeil,
   defaultVeilFor, DEFAULT_VEIL_RULES,
   CARD_KINDS, SETTLEMENT_FLOOR, GROUPING_REMOVERS, VEIL_OVERRIDE_KEY, VEIL_VERSION, VEIL_MAX_DELTAS, VEIL_EXCEPTION_PREFIX,
+  curateModelFor, toggleVeilDelta, CURATE_SECTIONS, readShareMode, clampShareMode, galleryPayloadFor, VEIL_LIMITS, VEIL_MODES,
 } from '../../../src/domain/display/galleryVeil.js';
+import { SEARCH_TAB_ORDER } from '../../../src/domain/dossier/dossierSearch.js';
 
 describe('toPublicSafe (§1k)', () => {
   it('strips DM-private top-level blocks and denied keys', () => {
@@ -830,5 +832,105 @@ describe('galleryVeil — the veil only removes (X-21 (d), W2-VEIL-A U4)', () =>
         expect(before.get(path)).toBe(value);
       }
     }
+  });
+});
+
+// ── W2-VEIL-B U2: THE CURATE MODEL AND THE SHARE MODE (X-21 (e), X-21b, X-21e, X-24) ──────
+describe('galleryVeil — the curate model and the share mode (W2-VEIL-B U2)', () => {
+  const town = () => ({
+    id: 'c1', name: 'Coldharbour', tier: 'town', population: 3100, config: { culture: 'generic' },
+    institutions: [
+      { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', desc: 'Organised crime.', tags: ['criminal'] },
+      { name: 'Parish church', category: 'Religious', priorityCategory: 'religion', desc: 'One for the parish.', tags: ['religious'] },
+    ],
+    availableServices: { healing: [{ name: 'Weekly rite', desc: 'The weekly service.', institution: 'Parish church' }] },
+    npcs: [
+      { id: 'n1', name: 'Aldric', role: 'Reeve', personality: { flaw: 'vain' }, secret: { what: 'is a spy' }, institution: 'Parish church' },
+      { id: 'n2', name: 'Mara', role: 'Priest', personality: { flaw: 'proud' }, secret: { what: 'embezzles tithes' } },
+    ],
+  });
+  const eyesOf = (model) => model.sections.flatMap(sec => [...sec.groupings, ...sec.switches,
+    ...sec.cards.flatMap(c => [...(c.whole ? [c.whole] : []), ...c.eyes])]);
+
+  it('the sections run in the dossier tab order (the search order, X-25c), housekeeping last', () => {
+    const ids = CURATE_SECTIONS.map(sec => sec.id);
+    expect(ids[ids.length - 1]).toBe('housekeeping');
+    const shared = ids.filter(id => SEARCH_TAB_ORDER.includes(id));
+    expect(shared).toEqual(SEARCH_TAB_ORDER.filter(id => shared.includes(id)));
+    expect(shared.length).toBeGreaterThanOrEqual(6);
+  });
+
+  it('a criminal house carries a card eye, hidden by default; every other box keeps the floor (no eye on identity)', () => {
+    const model = curateModelFor(galleryPayloadFor(town()), []);
+    const inst = model.sections.find(sec => sec.id === 'institutions');
+    const guild = inst.cards.find(c => c.name === "Thieves' guild chapter");
+    const church = inst.cards.find(c => c.name === 'Parish church');
+    expect(guild.whole).toMatchObject({ address: expect.stringMatching(/^card:institution:/), hidden: true, defaultHidden: true });
+    expect(church.whole).toBe(null);
+    // The closed copy drops the NPC's institution link (toPublicSafe), so no people eye.
+    expect(church.eyes.map(e => e.field)).toEqual(['description', 'function', 'services']);
+    expect(church.eyes.find(e => e.field === 'description')).toMatchObject({ hidden: false, defaultHidden: false, text: 'One for the parish.' });
+    for (const e of eyesOf(model)) {
+      const field = e.address.split(':').pop();
+      expect(['name', 'role', 'category', 'id']).not.toContain(field);
+    }
+    expect(model.count).toBe(model.lines.length);
+    expect(model.lines.map(l => l.text)).toEqual(expect.arrayContaining(['The Plot Hooks tab', "Thieves' guild chapter: hidden whole"]));
+    expect(model.lines.every(l => l.byDefault)).toBe(true);
+  });
+
+  it('an eye flips in place and flipping it back returns the list to the defaults (empty)', () => {
+    const pub = galleryPayloadFor(town());
+    const { defaults } = curateModelFor(pub, []);
+    const once = toggleVeilDelta([], 'tab:plot_hooks', defaults);
+    expect(once).toEqual([{ address: 'tab:plot_hooks', hidden: false }]);
+    const shown = curateModelFor(pub, once).sections[0].groupings[0];
+    expect(shown).toMatchObject({ hidden: false, defaultHidden: true });
+    expect(toggleVeilDelta(once, 'tab:plot_hooks', defaults)).toEqual([]);
+    const church = curateModelFor(pub, []).sections.find(sec => sec.id === 'institutions').cards.find(c => c.name === 'Parish church');
+    const desc = church.eyes.find(e => e.field === 'description').address;
+    const hid = toggleVeilDelta([], desc, defaults);
+    expect(curateModelFor(pub, hid).lines.map(l => [l.text, l.byDefault])).toContainEqual(['Parish church: description', false]);
+  });
+
+  it('a master switch hides a field class for everyone; one card eye is its exception, and the reader agrees', () => {
+    // The DM door open, so the secrets ride the copy (the veil only removes).
+    const pub = galleryPayloadFor(town(), { shareDm: true });
+    const { defaults, sections } = curateModelFor(pub, []);
+    const npcs = sections.find(sec => sec.id === 'npcs');
+    expect(npcs.switches.find(sw => sw.address === 'class:npc:secret')).toMatchObject({ hidden: true, defaultHidden: true, label: 'Secrets' });
+    const deltas = toggleVeilDelta([], 'field:npc:n2:secret', defaults);
+    const after = curateModelFor(pub, deltas);
+    const cards = after.sections.find(sec => sec.id === 'npcs').cards;
+    expect(cards.find(c => c.id === 'n1').eyes.find(e => e.field === 'secret').hidden).toBe(true);
+    expect(cards.find(c => c.id === 'n2').eyes.find(e => e.field === 'secret')).toMatchObject({ hidden: false, defaultHidden: true });
+    // The switch is said once; the exception is not a hidden line.
+    expect(after.lines.filter(l => /secret/i.test(l.text)).map(l => l.text)).toEqual(['Secrets: hidden for everyone']);
+    const out = projectShareVeil(pub, writeShareVeil({}, deltas));
+    expect(out.npcs.find(n => n.id === 'n1').secret).toBe(undefined);
+    expect(out.npcs.find(n => n.id === 'n2').secret).toEqual({ what: 'embezzles tithes' });
+  });
+
+  it('the share mode rides the reserved key: snapshot by default order, carried forward, clamped', () => {
+    expect(VEIL_MODES[0]).toBe('snapshot');
+    expect(readShareMode({ npc_1: { revealDm: false } })).toEqual({ mode: null, at: null, snapshot: null });
+    const copy = galleryPayloadFor(town());
+    const first = writeShareVeil({}, [], { mode: 'snapshot', at: '2026-10-31T10:00:00.000Z', snapshot: copy });
+    expect(readShareMode(first)).toEqual({ mode: 'snapshot', at: '2026-10-31T10:00:00.000Z', snapshot: copy });
+    // A later write of deltas only keeps the mode, the time and the copy.
+    const later = writeShareVeil(first, [{ address: 'tab:plot_hooks', hidden: false }]);
+    expect(readShareMode(later).snapshot).toEqual(copy);
+    expect(later[VEIL_OVERRIDE_KEY].deltas).toEqual([{ address: 'tab:plot_hooks', hidden: false }]);
+    // Live drops the copy; an unknown mode, a bad time and an oversize copy are refused.
+    expect(readShareMode(writeShareVeil(first, [], { mode: 'live', snapshot: null }))).toMatchObject({ mode: 'live', snapshot: null });
+    expect(clampShareMode({ mode: 'forever', at: 'yesterday' })).toEqual({});
+    const huge = { blob: 'x'.repeat(VEIL_LIMITS.snapshotMaxChars + 1) };
+    expect(clampShareMode({ mode: 'snapshot', snapshot: huge })).toEqual({ mode: 'snapshot' });
+  });
+
+  it('the published copy is the reader\'s own projection (toPublicSafe with the door and the overrides)', () => {
+    const ov = { n1: { revealDm: true } };
+    expect(galleryPayloadFor(town(), { memberOverrides: ov })).toEqual(toPublicSafe(town(), { full: false, memberOverrides: ov }));
+    expect(galleryPayloadFor(town(), { shareDm: true })).toEqual(toPublicSafe(town(), { full: true }));
   });
 });
