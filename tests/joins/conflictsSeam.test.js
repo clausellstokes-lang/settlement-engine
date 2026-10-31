@@ -112,7 +112,10 @@ describe('GS-2: one faction set, the power factions', () => {
   });
 
   test('factions[] groups the roster by each NPC\'s own power affiliation', () => {
+    // Collected, not asserted inline (seedLoopTotality, cure lane T13): every seed runs and
+    // the two rosters carry the true count.
     const misfiled = [];
+    const miscounted = [];
     for (const seed of GS2_SEEDS) {
       const s = gen(GS2_CFGS[0], seed);
       for (const f of s.factions || []) {
@@ -120,9 +123,10 @@ describe('GS-2: one faction set, the power factions', () => {
       }
       const grouped = (s.factions || []).reduce((n, f) => n + (f.members || []).length, 0);
       const affiliated = (s.npcs || []).filter((n) => n.factionAffiliation).length;
-      expect(grouped, `${seed}: every affiliated NPC sits in exactly one group`).toBe(affiliated);
+      if (grouped !== affiliated) miscounted.push(`${seed}: ${grouped} grouped vs ${affiliated} affiliated`);
     }
     expect(misfiled).toEqual([]);
+    expect(miscounted, 'every affiliated NPC sits in exactly one group').toEqual([]);
   });
 
   test('each conflict is grounded in a rival or enemy tie that crosses its two power factions', () => {
