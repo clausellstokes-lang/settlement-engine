@@ -130,6 +130,15 @@ const ROSTER = Object.freeze([
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'reconcilePowerStructure', file: RECONCILE_FILE, cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resizePoliticalRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
+  // ⭐ 11 -> 13 AT THE GS-2 MERGE (lane G2, ODQ §934.101, one faction set; rows added by cure lane
+  // T13). `factions` and `conflicts` left generatePopulation's choosers and are DERIVED in the
+  // assembly body from the final roster: `generateFactions` projects the roster onto the power
+  // factions (no draw, so the step's own stream), `generateConflicts` pairs the power factions a
+  // rival or enemy tie crosses, drawing its count and issues on its OWN assembly child stream
+  // 'faction-conflicts'. NEITHER consults a pin: no step declares either key any more, so the
+  // pin bag can never carry them (see A2) and both re-derive on every run.
+  { symbol: 'generateFactions', file: 'src/generators/power/factionGrouping.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
+  { symbol: 'generateConflicts', file: 'src/generators/power/conflicts.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -202,16 +211,20 @@ function liveStepRows() {
 }
 
 /** THE FROZEN STEP-LEVEL ROSTER, in the same spelling the derivation above produces. */
+// ⭐ 16 -> 13 AT THE GS-2 MERGE (lane G2, ODQ §934.101, one faction set; re-measured by cure lane
+// T13). Three rows RETIRED with the ctx keys: `generatePopulation|factions|provides`,
+// `generatePopulation|conflicts|provides` and `corruptionPass|factions|mutates`. Both keys are now
+// written on the assembled `settlement` object inside assembleSettlement (whose declared ctx key is
+// `settlement`), so the STEP registry names no writer of either; the writers are held at the
+// FUNCTION level instead (ROSTER, `generateFactions` and `generateConflicts`), the shape `name`
+// already had. The writer-step count is unmoved at 12: both retiring steps still write `npcs`.
 const STEP_ROSTER = Object.freeze([
   'assembleInstitutions|institutions|provides',
   'assembleSettlement|powerStructure|mutates',
   'cascadePass|institutions|mutates',
   'coherenceRepairPass|institutions|mutates',
-  'corruptionPass|factions|mutates',
   'corruptionPass|npcs|mutates',
   'factionCorrelationPass|institutions|mutates',
-  'generatePopulation|conflicts|provides',
-  'generatePopulation|factions|provides',
   'generatePopulation|npcs|provides',
   'generatePopulation|relationships|provides',
   'generatePower|powerStructure|provides',
@@ -477,7 +490,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(11);
+    expect(ROSTER).toHaveLength(13); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -536,6 +549,18 @@ describe('EM-R1 — the writer census of every held key', () => {
     const declaredNamed = ROSTER.filter((row) => row.stream === NAMED_CHILD).map((row) => row.symbol).sort();
     const narrative = source(NARRATIVE_FILE);
 
+    // ⭐ THE GS-2 ROW (lane G2, ODQ §934.101; classed by cure lane T13): `generateConflicts` takes
+    // its draws on its OWN assembly child stream, read here from source. It is NOT a second lawful
+    // SKIP: it consults no pin, so it always draws, and the child exists so its variable draw count
+    // moves nothing after it. The one-skip law below is about the writer a pin can skip, and stays
+    // exactly `enrichNpcCoherence`.
+    const factionConflicts = rawSource(ASSEMBLY_FILE).match(/'faction-conflicts'/g) || [];
+    expect(factionConflicts, 'the faction-conflicts child stream label moved or multiplied').toHaveLength(1);
+    expect(rawSource(ASSEMBLY_FILE), 'generateConflicts is no longer wrapped by its own assembly child stream')
+      .toMatch(/inAssemblySubstream\(\s*rng,\s*'faction-conflicts',\s*\(\)\s*=>\s*generateConflicts\(/);
+    expect(/\bchooseOrPin\b|__pins/.test(bodyOf('src/generators/power/conflicts.js', 'generateConflicts')),
+      'generateConflicts consults a pin, so it is a skip and the one-skip law below must be re-ruled').toBe(false);
+
     // The ONE lawful skip, read from source: enrichNpcCoherence's own 'npc-enrichment' child.
     const enrichment = rawSource(NARRATIVE_FILE).match(/'npc-enrichment'/g) || [];
     expect(enrichment, 'the one named child stream label moved or multiplied').toHaveLength(1);
@@ -547,7 +572,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'ensureFactionStructuralNpcs', 'generateCoherence', 'generateSettlementName',
+      'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
       'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
@@ -556,7 +581,7 @@ describe('EM-R1 — the writer census of every held key', () => {
 
     // THE OTHER NAMED-CHILD ROWS ARE INSIDE THAT ONE STREAM, not streams of their own: each is
     // called from `enrichNpcCoherence`'s own body, so they inherit its child stream.
-    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence');
+    const inside = declaredNamed.filter((symbol) => symbol !== 'enrichNpcCoherence' && symbol !== 'generateConflicts');
     const enrichmentBody = bodyOf(NARRATIVE_FILE, 'enrichNpcCoherence');
     expect(enrichmentBody.length, 'enrichNpcCoherence was not found: the claim below is vacuous').toBeGreaterThan(500);
     expect(inside.filter((symbol) => !called(enrichmentBody, symbol)),
