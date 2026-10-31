@@ -86,6 +86,29 @@ describe('crossSettlementConflicts — determinism (F10)', () => {
   });
 });
 
+describe('crossSettlementConflicts — one faction set (GS-2, ODQ §934.101)', () => {
+  test('a settlement with a power roster engages through its POWER factions, never a minted group name', () => {
+    const withPower = (idPart, seed) => ({
+      ...makeSettlement(idPart, seed),
+      // A legacy save still carrying its minted grouping list beside the power roster.
+      factions: [{ name: `The ${idPart} Bloc`, dominantCategory: 'economy' }],
+      powerStructure: { factions: [
+        { faction: `${idPart} Council`, category: 'government', power: 40 },
+        { faction: `${idPart} Merchant Guilds`, category: 'economy', power: 35 },
+        { faction: `${idPart} Watch`, category: 'military', power: 25 },
+      ] },
+    });
+    const { forA, forB } = generateCrossSettlementConflictsDeterministic(
+      withPower('A', 'seed-a'), withPower('B', 'seed-b'), 'rival', 'l');
+    const engagement = forA.find((e) => e.type === 'faction_engagement');
+    expect(engagement, 'a rival pair engages its factions').toBeDefined();
+    // rival pairs economy first: both sides' merchant power factions meet.
+    expect([engagement.factionName, engagement.partnerFactionName]).toEqual(['A Merchant Guilds', 'B Merchant Guilds']);
+    const named = [...forA, ...forB].flatMap((e) => [e.factionName, e.partnerFactionName, e.description]).join(' | ');
+    expectAbsentWithAnchor(named, 'Bloc', 'Merchant Guilds', 'GS-2: no minted group name reaches an engagement');
+  });
+});
+
 describe('crossSettlementConflicts — explicit rng contract', () => {
   test('core requires an rng and throws a helpful error without one', () => {
     const a = makeSettlement('A', 'seed-a');
