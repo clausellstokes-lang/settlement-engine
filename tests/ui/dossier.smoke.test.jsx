@@ -129,7 +129,8 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
     expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'substrate', 'plot_hooks', 'dm_compass']);
     expect(mod.TAB_GROUPS.systems.tabs).toEqual(
-      ['services', 'institutions', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'],
+      // THE OWNER, 2026-11-01 (ODQ §934.103): Institutions first, then Services.
+      ['institutions', 'services', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'],
     );
     expect(mod.TAB_GROUPS.world.tabs).toEqual(
       ['npcs', 'relationships', 'daily_life', 'traditions', 'history', 'rumors', 'war', 'faith'],

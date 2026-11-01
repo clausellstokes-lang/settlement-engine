@@ -100,10 +100,13 @@ export const TAB_GROUPS = Object.freeze({
   // Session Mode and the PDF chapter. X-12: `substrate` (labelled Foundations) is the Summary
   // group's second tab, out of Systems; the id stays so deep links keep their key.
   summary: { label: 'Summary', tabs: ['overview', 'substrate', 'plot_hooks', 'dm_compass'] },
-  // T1-14 (the owner, 2026-10-30): `institutions` follows `services`, the roster house by house.
+  // T1-14 (the owner, 2026-10-30): the Institutions tab, the roster house by house, beside
+  // Services. THE OWNER, 2026-11-01 (ODQ §934.103): "Put institutions first then services. I
+  // think that these are their individual places" — Institutions leads, Services follows, and
+  // both stay (neither is folded into the other).
   // X-17 (wave 2, 2026-10-30): each group runs from the broadest reading to the narrowest; the
   // verdict (Outlook) closes Systems, read from everything before it.
-  systems: { label: 'Systems', tabs: ['services', 'institutions', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'] },
+  systems: { label: 'Systems', tabs: ['institutions', 'services', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'] },
   // World — NPC-FIRST (master's P8 "first-click-lands" ordering law, restored from
   // the composite's relationships-first regression per THE BASE RECONCILIATION MAP
   // SURFACE 1). Keeps the composite's `rumors` addition. `traditions` (owner: "the

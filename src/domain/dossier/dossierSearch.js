@@ -85,7 +85,8 @@ export function isSearchActive(query) {
  *  order and not two (chair ruling X-25c, BUILD-W2-BLOCKLAW). Pinned against TAB_GROUPS in
  *  tests/ui/dossier.smoke.test.jsx. */
 export const SEARCH_TAB_ORDER = Object.freeze([
-  'plot_hooks', 'services', 'institutions', 'resources', 'power',
+  // THE OWNER, 2026-11-01 (ODQ §934.103): Institutions first, then Services, as the strip runs.
+  'plot_hooks', 'institutions', 'services', 'resources', 'power',
   'npcs', 'relationships', 'traditions', 'history',
 ]);
 

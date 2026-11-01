@@ -937,10 +937,11 @@ export const CURATE_SECTIONS = Object.freeze([
     groupings: [['tab:plot_hooks', 'The Plot Hooks tab']],
     switches: [['class:npc:hooks', 'Hooks on people'], ['class:event:hooks', 'Hooks on events'], ['class:tension:hooks', 'Hooks on tensions'],
       ['class:conflict:hooks', 'Hooks on conflicts'], ['class:relationship:hooks', 'Hooks on ties']] },
-  { id: 'services', label: 'Services', kinds: [], switches: [],
-    groupings: [['block:services.criminal', 'Criminal services']] },
+  // THE OWNER, 2026-11-01 (ODQ §934.103): Institutions first, then Services, as the strip runs.
   { id: 'institutions', label: 'Institutions', kinds: ['institution'], groupings: [],
     switches: [['class:institution:description', 'Descriptions'], ['class:institution:services', 'Services offered'], ['class:institution:people', 'People']] },
+  { id: 'services', label: 'Services', kinds: [], switches: [],
+    groupings: [['block:services.criminal', 'Criminal services']] },
   { id: 'power', label: 'Power', kinds: ['faction', 'conflict'],
     groupings: [['block:power.criminalUnderside', 'The capture reading']],
     switches: [['class:faction:goals', 'Faction goals'], ['class:faction:conflicts', 'Faction conflicts'], ['class:faction:members', 'Faction members'],
