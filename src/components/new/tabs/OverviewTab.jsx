@@ -251,13 +251,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>
-        <div style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
+        <div data-testid="overview-identity-row" style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.tier}</span>
-          <span style={{fontSize:FS.sm,color:MUTED}}>·</span>
-          <span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{formatCount(r.population)} pop.</span>
-          {r.config?.tradeRouteAccess&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span></>}
-          {hist.age&&<><span style={{fontSize:FS.sm,color:MUTED}}>·</span><span style={{fontSize:FS.sm,color:swatch.inkMag3}}>{hist.age} years old</span></>}
+          {/* THE PHONE FIX (the owner, 2026-11-01, ODQ §934.103): each fact carries its own
+              separator inside one unbreakable span, so the row wraps BETWEEN facts and never
+              leaves a dangling dot at the end of a line or a fact split across two. */}
+          <span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{formatCount(r.population)} pop.</span>
+          {r.config?.tradeRouteAccess&&<span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize',whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
+          {hist.age&&<span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{hist.age} years old</span>}
         </div>
         {/* DS-POP-3 at `overview.populationDirection` — the direction of the roll read
             against the approach, beside the head count and the access word above. Silent

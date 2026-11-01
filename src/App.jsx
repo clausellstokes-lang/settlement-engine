@@ -848,7 +848,11 @@ export default function App() {
               <Button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
                 title="Back to top" aria-label="Scroll to top" style={btn}>↑</Button>
             )}
-            {showScrollBottom && (
+            {/* THE PHONE FIX (the owner, 2026-11-01, ODQ §934.103): a phone has no margin for
+                a floating control, so the jump-to-bottom button sat on the content column
+                (over the identity strip's layout chip). Phones keep only the back-to-top
+                button, which appears after a scroll; a page end is one flick away there. */}
+            {showScrollBottom && !isMobile && (
               <Button onClick={() => window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' })}
                 title="Jump to bottom" aria-label="Scroll to bottom" style={btn}>↓</Button>
             )}
