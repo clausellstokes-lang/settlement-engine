@@ -46,13 +46,15 @@ export function rumorsTabHasContent(settlement, { saveId = null, campaigns = [] 
 /**
  * FaithTab renders a live panel only over an embedded deity snapshot; every other
  * viewer who sees the tab sees the generic teaser (OutputContainer's `hasFaithTab`
- * and FaithTab's `faithWillRender`).
- * @param {any} settlement
+ * and FaithTab's `faithWillRender`). Takes the embed VALUE, not the settlement: the
+ * key it lives under is one the generator never writes (an owner's embed), so the
+ * observed-shape instrument allows its read only where it is already banked
+ * (OutputContainer), which reads it once and hands the value down.
+ * @param {unknown} deityEmbed the settlement's `config.primaryDeitySnapshot`, as read by the caller
  * @returns {boolean} true when the tab has a live body
  */
-export function faithTabHasContent(settlement) {
-  const snap = settlement?.config?.primaryDeitySnapshot;
-  return !!snap && typeof snap === 'object';
+export function faithTabHasContent(deityEmbed) {
+  return !!deityEmbed && typeof deityEmbed === 'object';
 }
 
 /**

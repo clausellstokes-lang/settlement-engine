@@ -25,8 +25,7 @@ describe('useLaunchTones', () => {
 
   it('a deity embed lights Faith; a rumor ledger on an owning campaign lights Rumors', () => {
     storeState.campaigns = [{ id: 'c1', settlementIds: ['town-1'], worldState: { spatialLedgers: { rumorLedgers: {} } } }];
-    const withDeity = { ...town, config: { primaryDeitySnapshot: { name: 'Sunlord Aurelian' } } };
-    const { result } = renderHook(() => useLaunchTones({ settlement: withDeity }));
+    const { result } = renderHook(() => useLaunchTones({ settlement: town, deityEmbed: { name: 'Sunlord Aurelian' } }));
     expect(result.current.rumors).toBe(false);
     expect(result.current.faith).toBe(false);
   });

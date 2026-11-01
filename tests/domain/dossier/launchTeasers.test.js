@@ -24,11 +24,11 @@ describe('launchTeasers — the predicates mirror the tab bodies', () => {
     expect(rumorsTabHasContent(town, { saveId: 'save-9', campaigns: [{ id: 'c3', settlementIds: ['save-9'], worldState: { spatialLedgers: { rumorLedgers: {} } } }] })).toBe(true);
   });
 
-  it('faith: live only over an embedded deity snapshot', () => {
-    expect(faithTabHasContent(town)).toBe(false);
-    expect(faithTabHasContent({ ...town, config: { primaryDeitySnapshot: null } })).toBe(false);
-    expect(faithTabHasContent({ ...town, config: { primaryDeitySnapshot: 'Sunlord' } })).toBe(false);
-    expect(faithTabHasContent({ ...town, config: { primaryDeitySnapshot: { name: 'Sunlord Aurelian' } } })).toBe(true);
+  it('faith: live only over an embedded deity snapshot (the value the container read)', () => {
+    expect(faithTabHasContent(undefined)).toBe(false);
+    expect(faithTabHasContent(null)).toBe(false);
+    expect(faithTabHasContent('Sunlord')).toBe(false);
+    expect(faithTabHasContent({ name: 'Sunlord Aurelian' })).toBe(true);
   });
 
   it('war: a settlement no campaign owns is a teaser without the war chunk; an owned one defers to the full predicate', () => {

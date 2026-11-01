@@ -16,10 +16,12 @@ import { useStore } from '../../store/index.js';
 import { faithTabHasContent, rumorsTabHasContent, warTeaserSync } from '../../domain/dossier/launchTeasers.js';
 
 /**
- * @param {{ settlement: any, saveId?: string|number|null, viewerIsPremium?: boolean, playerView?: boolean, publicDossier?: boolean }} args
+ * @param {{ settlement: any, deityEmbed?: unknown, saveId?: string|number|null, viewerIsPremium?: boolean, playerView?: boolean, publicDossier?: boolean }} args
+ *   `deityEmbed` is the settlement's `config.primaryDeitySnapshot` as the container already
+ *   reads it (the observed-shape instrument banks that read there and nowhere new).
  * @returns {{ war: boolean, rumors: boolean, faith: boolean }} true = the tab is a teaser
  */
-export default function useLaunchTones({ settlement, saveId = null, viewerIsPremium = false, playerView = false, publicDossier = false }) {
+export default function useLaunchTones({ settlement, deityEmbed = null, saveId = null, viewerIsPremium = false, playerView = false, publicDossier = false }) {
   const campaigns = useStore(s => s.campaigns);
   const warQuick = warTeaserSync(settlement, { saveId, campaigns });
   const [warResolved, setWarResolved] = useState(null);
@@ -40,6 +42,6 @@ export default function useLaunchTones({ settlement, saveId = null, viewerIsPrem
   return {
     war: warQuick !== null ? warQuick : (warResolved ?? false),
     rumors: !rumorsTabHasContent(settlement, { saveId, campaigns }),
-    faith: !faithTabHasContent(settlement),
+    faith: !faithTabHasContent(deityEmbed),
   };
 }
