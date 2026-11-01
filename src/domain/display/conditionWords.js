@@ -13,7 +13,7 @@ import { deriveAllActiveConditions } from '../activeConditions.js';
 
 /**
  * The active conditions as lower-case words, deduplicated, in record order.
- * @param {any} settlement
+ * @param {Parameters<typeof deriveAllActiveConditions>[0]} settlement
  * @returns {string[]}
  */
 export function activeConditionWords(settlement) {

@@ -19,13 +19,18 @@
  * import after first paint.
  */
 
-/** @param {any} settlement @param {string|number|null|undefined} saveId */
+/**
+ * @typedef {{ id?: string|number|null }} TeaserSettlement
+ * @typedef {{ settlementIds?: Array<string|number>, worldState?: { spatialLedgers?: { rumorLedgers?: unknown } } }} TeaserCampaign
+ */
+
+/** @param {TeaserSettlement|null|undefined} settlement @param {string|number|null|undefined} saveId */
 function sidOf(settlement, saveId) {
   if (saveId != null) return String(saveId);
   return settlement?.id != null ? String(settlement.id) : null;
 }
 
-/** @param {any[]} campaigns @param {string|null} sid */
+/** @param {TeaserCampaign[]|null|undefined} campaigns @param {string|null} sid @returns {TeaserCampaign[]} */
 function owningCampaigns(campaigns, sid) {
   if (!sid || !Array.isArray(campaigns)) return [];
   return campaigns.filter((c) => (c?.settlementIds || []).map(String).includes(sid));
@@ -34,8 +39,8 @@ function owningCampaigns(campaigns, sid) {
 /**
  * RumorsTab shows its launch card when no campaign that owns the settlement carries a
  * rumor ledger (RumorsTab :: `view` is null). Mirrors that test exactly.
- * @param {any} settlement
- * @param {{ saveId?: string|number|null, campaigns?: any[] }} [context]
+ * @param {TeaserSettlement|null|undefined} settlement
+ * @param {{ saveId?: string|number|null, campaigns?: TeaserCampaign[]|null }} [context]
  * @returns {boolean} true when the tab has a live body
  */
 export function rumorsTabHasContent(settlement, { saveId = null, campaigns = [] } = {}) {
@@ -62,8 +67,8 @@ export function faithTabHasContent(deityEmbed) {
  * a settlement no campaign owns has no war picture, so the tab is a teaser.
  * Where a campaign owns it, only WarTab :: warTabHasContent can answer, so this
  * returns null and the caller resolves it after first paint.
- * @param {any} settlement
- * @param {{ saveId?: string|number|null, campaigns?: any[] }} [context]
+ * @param {TeaserSettlement|null|undefined} settlement
+ * @param {{ saveId?: string|number|null, campaigns?: TeaserCampaign[]|null }} [context]
  * @returns {boolean|null} true = teaser, false = live, null = ask the full predicate
  */
 export function warTeaserSync(settlement, { saveId = null, campaigns = [] } = {}) {

@@ -13,7 +13,7 @@
   },
   {
     "path": "src/components/OutputContainer.jsx",
-    "line": 973,
+    "line": 985,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
@@ -511,19 +511,19 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 491,
+    "line": 499,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 491,
+    "line": 499,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 529,
+    "line": 537,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },
@@ -1231,7 +1231,7 @@
   },
   {
     "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-    "line": 141,
+    "line": 150,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
   },
