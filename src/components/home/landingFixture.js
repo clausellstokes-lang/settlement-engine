@@ -114,7 +114,7 @@ export const fixture = {
         "text": "travelers_inn · selected (Base chance 59% lifted by ×1.01 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The Elder Council wants the guilds’ apprentices for soldiers and the Craft Guilds mean to keep them, and a neutral name is being pressed to choose a side before the council next sits. The mayor still means to mend the structure while the weather holds. He and Inghean MacCarthy are bound by an old favour neither will name, and a third party has just learned what it was. The debt has changed hands."
   },
   "realm": {
     "whyTrace": [

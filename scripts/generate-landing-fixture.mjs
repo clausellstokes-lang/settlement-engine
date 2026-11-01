@@ -285,8 +285,18 @@ export function advanceTimelineFor(news, townId = 't', limit = ADVANCE_ENTRIES) 
  * nothing is added: the three surviving receipts (the road roll, the cleared
  * stands, the travelers' inn) and the pressure sentence and mayor's goal ground
  * every clause that remains.
+ *
+ * ⚠ RE-GROUNDED 2026-11-01 (the landing of the dossier consolidation program,
+ * ODQ §934.101 GS-2 "one faction set"; recorded at §934.103). With the power
+ * factions as the factions, lf-033 derives a conflict again (the Elder Council
+ * and the Craft Guilds over conscripting guild apprentices) and the "pressured
+ * neutral" faction hook beside it, so the card prints FOUR receipts and one
+ * sentence narrates the quarrel. The pressure sentence moved too: the
+ * MacCarthys' favour is now known to a third party and the debt has changed
+ * hands, so the "his own man" clause, no longer derived, gives way to that.
+ * Every clause below is traceable to a field emitted in the same run.
  */
-const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The mayor still means to mend the structure while the weather holds. His own man no longer does what he would approve of, and neither of them says so.';
+const STOCK_NARRATION = 'The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The Elder Council wants the guilds’ apprentices for soldiers and the Craft Guilds mean to keep them, and a neutral name is being pressed to choose a side before the council next sits. The mayor still means to mend the structure while the weather holds. He and Inghean MacCarthy are bound by an old favour neither will name, and a third party has just learned what it was. The debt has changed hands.';
 
 /**
  * The frozen fixture object for one seed — every selection COMPUTED from engine
