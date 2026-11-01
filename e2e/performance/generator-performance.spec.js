@@ -171,14 +171,17 @@ test.describe('production-build browser performance', () => {
     });
 
     /*
-     * Exercise several real controls. Multiple samples avoid treating one
+     * Exercise a real control several times. Multiple samples avoid treating one
      * sub-threshold Event Timing entry as proof that interaction measurement
-     * worked.
+     * worked. A signed-out visitor's gauge renders ONE station, Town (the owner's
+     * 2026-10-30 anon law in HomeHero.jsx; e2e/flow-a pins the count), so every
+     * sample comes from that station: it stays pressed, and the count stays one.
      */
-    for (const size of ['Hamlet', 'Village', 'Town']) {
-      const button = settlementSizeButton(hero, size);
-      await button.click();
-      await expect(button).toHaveAttribute('aria-pressed', 'true');
+    const town = settlementSizeButton(hero, 'Town');
+    await expect(hero.locator('button[data-settlement-size]')).toHaveCount(1);
+    for (let sample = 0; sample < 3; sample += 1) {
+      await town.click();
+      await expect(town).toHaveAttribute('aria-pressed', 'true');
     }
 
     const measurements = await readBrowserMeasurements(page);
