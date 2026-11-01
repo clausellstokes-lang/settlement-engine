@@ -73,6 +73,16 @@ const lightColors = Object.freeze({
   'slate-700': '#435463',  // AI TEXT on slate-100
   'slate-100': '#E4E9EE',
 
+  // Launch — THE OWNER, 2026-11-01 (ODQ §934.103): the dossier tabs that stand in the
+  // strip as "Available at launch" teasers (War, Rumors & News, Faith while no live body
+  // exists) wear "a purpleish hue just for distinction". A register of its own, not the
+  // AI slate (C13) and not the gold of the simulation's live tabs: launch-500 is the
+  // idle label and the active underline, launch-700 the active label (AA on parchment
+  // and on launch-100), launch-100 the active tab's wash.
+  'launch-500': '#6B4FB8',
+  'launch-700': '#4A3A8C',
+  'launch-100': '#EFEAF8',
+
   // Red — destructive actions and hard errors; the only non-destructive use is
   // the named operatorAlert semantic alias, fenced to unread-count chrome.
   'red-600': '#A23434',
@@ -638,6 +648,9 @@ export const legacy = Object.freeze({
   SLATE:    color['slate-500'],
   SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
   SLATE_BG: color['slate-100'],
+  LAUNCH:   color['launch-500'],    // the teaser tabs' hue (the owner, 2026-11-01)
+  LAUNCH_DEEP: color['launch-700'], // the active teaser tab's label
+  LAUNCH_BG: color['launch-100'],   // the active teaser tab's wash
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

@@ -1,6 +1,7 @@
-import { FS, swatch } from '../theme.js';
+import { FS, swatch, LAUNCH, LAUNCH_DEEP, LAUNCH_BG } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
+import { LAUNCH_TONE } from '../../domain/dossier/launchTeasers.js';
 
 // Dossier tab strip — extracted verbatim from OutputContainer's render.
 // Presentational only: scroll, the scroll-container ref, the resolved `tabs`
@@ -46,16 +47,21 @@ export default function DossierTabStrip({
             }}
             style={{ display: 'flex', overflowX: 'auto', scrollbarWidth: 'none', paddingLeft: 28, paddingRight: 28, WebkitOverflowScrolling: 'touch' }}
           >
-            {tabs.map(({ id, label, Icon }) => {
+            {tabs.map(({ id, label, Icon, tone }) => {
               const active = selectedTab === id;
               // Guidance (DM Compass) is the AI-narrated layer — give it a subtle
               // purple tint so the AI surface reads as distinct from the
               // simulation tabs.
               const purple = id === 'dm_compass';
-              const accent = purple ? '#7a3aa8' : '#a0762a';
-              const idle   = purple ? '#7a5a92' : swatch.inkMag3;
+              // THE LAUNCH TONE (the owner, 2026-11-01, ODQ §934.103): a tab that is still an
+              // "Available at launch" teaser (domain/dossier/launchTeasers.js, set by
+              // OutputContainer) wears the launch register's purple so it reads as distinct
+              // from the live tabs; the hue leaves the tab the moment it has a live body.
+              const launch = tone === LAUNCH_TONE;
+              const accent = purple ? '#7a3aa8' : launch ? LAUNCH_DEEP : '#a0762a';
+              const idle   = purple ? '#7a5a92' : launch ? LAUNCH : swatch.inkMag3;
               const bg = active
-                ? (purple ? '#f7f0fa' : '#fffbf5')
+                ? (purple ? '#f7f0fa' : launch ? LAUNCH_BG : '#fffbf5')
                 : (purple ? 'rgba(122,58,168,0.05)' : 'transparent');
               return (
                 <button
@@ -65,6 +71,7 @@ export default function DossierTabStrip({
                   id={'sf-tab-' + id}
                   role="tab"
                   aria-selected={active}
+                  data-tone={tone || undefined}
                   // Completes the WAI-ARIA tabs relationship: this tab points at
                   // the content panel OutputContainer labels with the matching id.
                   aria-controls={'sf-panel-' + id}

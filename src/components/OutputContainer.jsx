@@ -8,6 +8,8 @@ import FeatureErrorBoundary from './FeatureErrorBoundary.jsx';
 import LifecycleSpine from './primitives/LifecycleSpine.jsx';
 import Button from './primitives/Button.jsx';
 import MobileTabStrip from './primitives/MobileTabStrip.jsx';
+import { LAUNCH_TONE } from '../domain/dossier/launchTeasers.js';
+import useLaunchTones from './dossier/useLaunchTones.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { useLiveAiCostResolver } from '../hooks/useLivePricing.js';
 import { navigate } from '../hooks/useRoute.js';
@@ -454,6 +456,10 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // is stripped from the payload unless the owner opted into shareDm, so this can
   // never reveal more than is already shared.
   const publicDossier = readOnly && !saveId;
+  // THE LAUNCH TONE (the owner, 2026-11-01, ODQ §934.103): the World tabs that are still
+  // "Available at launch" teasers wear a purple hue in the strip (dossier/useLaunchTones.js).
+  const teasers = useLaunchTones({ settlement: rawSettlement, saveId, viewerIsPremium, playerView, publicDossier });
+  const launchTone = (teaser) => (teaser ? { tone: LAUNCH_TONE } : {});
   // NPC authoring is an explicit owner capability supplied by SettlementDetail,
   // not an inference from the process-wide editMode flag. Intersect it again
   // with this surface's identity so a stale flag or an accidentally permissive
@@ -532,8 +538,8 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // X-7a (the owner, 2026-10-30): WAR is always registered; with no live war picture the
     // tab itself shows its launch teaser (BUILD-T3, WarTab :: warTabHasContent). X-7c
     // withdrew the strip resolver that would have hidden it.
-    { id:'war', label:'War', Icon: Swords },
-    ...(hasFaithTab ? [{ id:'faith', label:'Faith', Icon: Sparkles }] : []),
+    { id:'war', label:'War', Icon: Swords, ...launchTone(teasers.war) },
+    ...(hasFaithTab ? [{ id:'faith', label:'Faith', Icon: Sparkles, ...launchTone(teasers.faith) }] : []),
     // Guidance (DM Compass) — the AI-narrated layer; only present once narration
     // produced it, and tinted purple in the strip below.
     ...(!playerView && hasDMCompass ? [{ id:'dm_compass', label:'Guidance', Icon: Compass }] : []),
@@ -550,7 +556,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
     // Rumors & News (World) — X-7a (the owner, 2026-10-30): always registered; with no
     // rumor ledger the tab itself shows its launch teaser (BUILD-T3). Reuses the
     // already-bundled ScrollText glyph — no new first-paint icon.
-    { id:'rumors', label:'Rumors & News', Icon: ScrollText },
+    { id:'rumors', label:'Rumors & News', Icon: ScrollText, ...launchTone(teasers.rumors) },
     // Versions — the P109/E-5 snapshot timeline. Owner-only (revert mutates the
     // save): needs an owning saved entry and never renders on the public player
     // view. Self-gates further inside (versionHistory flag, tier lock).
