@@ -23,6 +23,7 @@ import { ChapterBand, ChapterHeadline, HairRule } from '../primitives/Dense.jsx'
 import { type, palette, space, pt, swatch } from '../theme.js';
 import { BAND_COLOR, BAND_HINT, dimensionScaleNote } from '../../domain/state/bands.js';
 import { causalBandWord, deriveCausalState, SYSTEM_VARIABLES } from '../../domain/causalState.js';
+import { activeConditionWords, conditionsSentence } from '../../domain/display/conditionWords.js';
 import { humanize } from '../lib/format.js';
 import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 
@@ -103,6 +104,7 @@ export function SystemStateSnapshot({ settlement, narrativeMode, vm, causalDetai
  */
 function CausalSubstrate({ settlement, vm }) {
   const causal = deriveCausalState(vm?.active || settlement);
+  const conditionWords = activeConditionWords(vm?.active || settlement);
   const rows = SYSTEM_VARIABLES
     .map(name => {
       const v = causal.variables[name] || {};
@@ -118,10 +120,17 @@ function CausalSubstrate({ settlement, vm }) {
         FOUNDATIONS
       </Text>
       {/* UX consolidation 2026-10-30 (RULINGS-T2 T2-25, RULINGS-CROSS X-12) print parity: the
-          screen's title and its one framing fact; the engine-speak caption is cut (R1). */}
+          screen's title and its sub-line; the engine-speak caption is cut (R1). THE TRIM (the
+          owner, 2026-11-01, ODQ §934.103; R4): the conditions sentence prints only when the
+          reading folds a condition in, naming it, exactly as the screen does. */}
       <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 4 }}>
-        This reading includes current conditions: siege, drawdown, outbreak.
+        What is holding, what is strained
       </Text>
+      {conditionWords.length > 0 && (
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['7.5'], fontStyle: 'italic', marginBottom: 4 }}>
+          {conditionsSentence(conditionWords)}
+        </Text>
+      )}
       {rows.map(row => {
         const color = CAUSAL_BAND_COLOR[row.band] || palette.muted;
         return (

@@ -167,8 +167,10 @@ const RULED = Object.freeze({
     'card — an InstitutionCard: the house, its badge and category, and its service rows beneath.',
   'src/components/new/tabs/PlotHooksTab.jsx :: groups':
     'card — a source-page section: the page caption and the hook cards that grow from it.',
-  'src/components/new/tabs/PlotHooksTab.jsx :: hooks':
-    'card — a PlotHookCard: the source name and the hook, which is a sentence.',
+  // THE TRIM (the owner, 2026-11-01, ODQ §934.103): the per-hook `hooks` site became the
+  // per-source `sourceGroups` site — a source's name once over all of its hook sentences.
+  'src/components/new/tabs/PlotHooksTab.jsx :: sourceGroups':
+    'card — a PlotHookCard or a PlotHookSourceCard: the source name once, then its hook sentences.',
   'src/components/new/tabs/ResourcesTab.jsx :: unexploited':
     'card — a ResourceChainCard: the resource, its value, the chain flow and what it needs.',
   'src/components/new/tabs/ResourcesTab.jsx :: partExploited':

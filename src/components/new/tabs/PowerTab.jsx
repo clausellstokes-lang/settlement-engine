@@ -305,13 +305,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                 <span style={{fontSize: FS['14'],fontWeight:700,color:leg.color}}>{leg.label}</span>
               </div>
             </div>
-            {/* Breakdown chips */}
+            {/* Breakdown chips — THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): a
+                modifier of 0 says nothing, so only the modifiers that moved the score are
+                shown, and the heading goes with them when none did. The fracture note below
+                keeps its place either way. */}
             <div style={{flex:1,minWidth:180}}>
+              {(() => {
+                const moved = Object.entries(leg.breakdown || {}).filter(([, v]) => Number(v) !== 0);
+                return moved.length > 0 && (<>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
                 Breakdown
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
-                {Object.entries(leg.breakdown || {}).map(([k,v]) => (
+                {moved.map(([k,v]) => (
                   <div key={k} style={{
                     fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, padding:'2px 8px',
                     background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
@@ -322,6 +328,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                   </div>
                 ))}
               </div>
+                </>);
+              })()}
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
                   <strong>Governance fractured.</strong> Real decisions are being made informally.

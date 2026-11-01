@@ -18,6 +18,7 @@
 import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
+import { activeConditionWords, conditionsSentence } from '../../../domain/display/conditionWords.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -112,6 +113,10 @@ export default function SubstrateTab({ settlement }) {
         || healthOrientedScore(a) - healthOrientedScore(b)
         || a.label.localeCompare(b.label));
   }, [model]);
+  // THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): the sentence under the rows
+  // names the conditions the reading folds in, and says nothing when there are none
+  // (domain/display/conditionWords.js, shared with print).
+  const conditionWords = useMemo(() => activeConditionWords(settlement), [settlement]);
 
   if (!model || rows.length === 0) {
     return (
@@ -162,10 +167,12 @@ export default function SubstrateTab({ settlement }) {
         </NameColumns>
       </div>
       {/* THE BLOCK LAW (X-16; BUILD-W2-BLOCKLAW U3): the one fact sentence sits UNDER the rows
-          it qualifies, never above them. Moved verbatim. */}
-      <p data-testid="substrate-conditions-note" style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '12px 0 0' }}>
-        This reading includes current conditions: siege, drawdown, outbreak.
-      </p>
+          it qualifies, never above them. It prints only when there is a condition to name. */}
+      {conditionWords.length > 0 && (
+        <p data-testid="substrate-conditions-note" style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '12px 0 0' }}>
+          {conditionsSentence(conditionWords)}
+        </p>
+      )}
     </div>
   );
 }

@@ -52,11 +52,23 @@ beforeAll(() => {
   vmState = buildViewModel({ settlement, systemState: { snapshotAtTick: 0 } });
 });
 
-// The substrate grid's own framing line (UX consolidation 2026-10-30, T2-25/X-12: the header is
-// now "FOUNDATIONS", a word other chapters may carry; the framing fact is unique to the grid).
-const SUBSTRATE_MARK = 'This reading includes current conditions: siege, drawdown, outbreak.';
+// The substrate grid's own sub-line (UX consolidation 2026-10-30, T2-25/X-12: the header is
+// now "FOUNDATIONS", a word other chapters may carry; the sub-line is unique to the grid).
+// THE TRIM (the owner, 2026-11-01, ODQ §934.103): the conditions sentence that used to be
+// this marker now prints only when the reading folds a condition in (see the parity case).
+const SUBSTRATE_MARK = 'What is holding, what is strained';
 
 describe('#20 SettlementPDF — Current-State causal-detail restoration', () => {
+  it('the conditions sentence prints only when a condition is active, naming it (screen parity, THE TRIM 2026-11-01)', () => {
+    const plain = joined(SystemStateSnapshot({ settlement, vm: vmState, causalDetail: true }));
+    expect(plain).toContain(SUBSTRATE_MARK);
+    expect(plain).not.toContain('This reading includes'); // anchored: the grid's sub-line is on this render
+    const besieged = { ...settlement, activeConditions: [{ archetype: 'siege' }] };
+    const vmBesieged = buildViewModel({ settlement: besieged, systemState: { snapshotAtTick: 0 } });
+    const printed = joined(SystemStateSnapshot({ settlement: besieged, vm: vmBesieged, causalDetail: true }));
+    expect(printed).toContain('This reading includes the current condition: siege.');
+  });
+
   it('the renderer prints the causal substrate ONLY when causalDetail is passed', () => {
     const on  = joined(SystemStateSnapshot({ settlement, vm: vmState, causalDetail: true }));
     const off = joined(SystemStateSnapshot({ settlement, vm: vmState, causalDetail: false }));

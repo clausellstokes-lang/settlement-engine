@@ -583,6 +583,17 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
 });
 
 describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
+  it('names the active condition the reading folds in, under the rows (THE TRIM, 2026-11-01)', () => {
+    const { container } = render(<SubstrateTab settlement={{ name: 'Testburg', config: { size: 'town' }, activeConditions: [{ archetype: 'siege' }] }} />);
+    const rows = [...container.querySelectorAll('[data-substrate-row]')];
+    expect(rows.length).toBeGreaterThan(0);
+    const note = screen.getByTestId('substrate-conditions-note');
+    expect(note.textContent).toBe('This reading includes the current condition: siege.');
+    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U3): the fact sentence sits UNDER the rows it
+    // qualifies; every row precedes it in document order.
+    for (const row of rows) expect(row.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+
   it('renders the substrate grid for a settlement', () => {
     const { container } = render(<SubstrateTab settlement={{ name: 'Testburg', config: { size: 'town' } }} />);
     expect(screen.getByTestId('substrate-tab')).toBeTruthy();
@@ -594,15 +605,14 @@ describe('SubstrateTab — surfaces OUR 16-variable causal read-model', () => {
     // "Under pressure" callout (a restatement of the worst-first rows) is gone.
     expect(screen.getByTestId('substrate-title').textContent).toBe('Foundations');
     expect(screen.getByText('What is holding, what is strained')).toBeTruthy();
-    const note = screen.getByText('This reading includes current conditions: siege, drawdown, outbreak.');
-    expect(note).toBeTruthy();
-    // THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U3): the fact sentence sits UNDER the rows it
-    // qualifies; every row precedes it in document order.
-    for (const row of rows) expect(row.compareDocumentPosition(note) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    // THE TRIM (the owner, 2026-11-01, ODQ §934.103; R4): with no active condition there is no
+    // conditions sentence at all. anchored: the rows and the title are asserted on this render.
+    expect(screen.queryByTestId('substrate-conditions-note')).toBeNull();
     expect(screen.queryByTestId('substrate-pressures')).toBeNull();
     expect(container.textContent).not.toMatch(/Under pressure|All foundations holding/); // anchored: the rows and the title are asserted on this render
     expect(screen.getByText('Settlement foundations')).toBeTruthy();
     expect(container.textContent).not.toMatch(/causal substrate|engine simulates|system|variable/i);
+    expect(container.textContent).not.toMatch(/This reading includes/); // anchored: as above
     for (const row of rows) {
       expect(row.textContent).not.toMatch(/\b(?:100|[1-9]?\d)\b/);
     }

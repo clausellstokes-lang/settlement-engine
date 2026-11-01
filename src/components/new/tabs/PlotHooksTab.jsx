@@ -45,6 +45,7 @@ export function PlotHookCard({ hook }) {
   const cat = PLOT_HOOK_CATEGORIES[hook.category] || PLOT_HOOK_CATEGORIES.tension;
   return (
     <div
+      data-testid="plot-hook-card"
       style={{
         padding: '8px 11px',
         background: swatch.white,
@@ -71,6 +72,55 @@ export function PlotHookCard({ hook }) {
   );
 }
 
+/**
+ * THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R6): within a page group, every hook
+ * of one source sits under that source's name ONCE, in the collector's order of first
+ * appearance, instead of one card per hook repeating the name. A source with a single hook
+ * keeps the single card (which the dossier search also mounts).
+ * @param {Array<{source:string}>} hooks
+ * @returns {Array<{source:string, hooks:any[]}>}
+ */
+export function groupHooksBySource(hooks) {
+  const groups = [];
+  const bySource = new Map();
+  for (const hook of hooks) {
+    const key = String(hook?.source ?? '');
+    let g = bySource.get(key);
+    if (!g) { g = { source: key, hooks: [] }; bySource.set(key, g); groups.push(g); }
+    g.hooks.push(hook);
+  }
+  return groups;
+}
+
+/** One source, several hooks: the name once, then each hook on its own line. */
+export function PlotHookSourceCard({ source, hooks }) {
+  const mobile = useIsMobile();
+  const cat = PLOT_HOOK_CATEGORIES[hooks[0]?.category] || PLOT_HOOK_CATEGORIES.tension;
+  return (
+    <div
+      data-testid="plot-hook-source-card"
+      style={{
+        padding: '8px 11px',
+        background: swatch.white,
+        border: `1px solid ${BORDER}`,
+        borderLeft: `3px solid ${cat.color}`,
+      }}
+    >
+      <div style={{
+        fontFamily: SERIF, fontWeight: 700, fontSize: chromeFontSize(FS['11.5'], mobile),
+        color: INK, minWidth: 0, overflow: 'visible', textOverflow: 'clip', whiteSpace: 'normal',
+      }}>
+        <MentionText text={nameOrTokenCase(source)} structural />
+      </div>
+      {hooks.map((hook, i) => (
+        <div key={i} data-testid="plot-hook-line" style={{ fontSize: proseFontSize(FS.xxs, mobile), color: BODY, marginTop: i === 0 ? 2 : 6, lineHeight: 1.45 }}>
+          <MentionText text={hook.text} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export default function PlotHooksTab({ settlement }) {
   const groups = useMemo(() => groupPlotHooksBySourcePage(collectPlotHooks(settlement || {})), [settlement]);
 
@@ -82,14 +132,19 @@ export default function PlotHooksTab({ settlement }) {
 
   return (
     <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-      {groups.map(({ page, hooks }) => (
+      {groups.map(({ page, hooks }) => {
+        const sourceGroups = groupHooksBySource(hooks);
+        return (
         <section key={page.id} data-testid={`plot-hooks-from-${page.id}`}>
           <div style={{ ...literaryTitle(FS.sm), color: INK, marginBottom: 6 }}>{page.label}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-            {hooks.map((hook, i) => <PlotHookCard key={i} hook={hook} />)}
+            {sourceGroups.map((g, i) => (g.hooks.length === 1
+              ? <PlotHookCard key={i} hook={g.hooks[0]} />
+              : <PlotHookSourceCard key={i} source={g.source} hooks={g.hooks} />))}
           </div>
         </section>
-      ))}
+        );
+      })}
     </div>
   );
 }

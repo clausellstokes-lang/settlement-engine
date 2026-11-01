@@ -209,6 +209,9 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
         <div style={{display:'flex',gap:6,marginBottom:8,flexWrap:'wrap'}}>
           {relTypes.map(({key,label})=>{
             const n=key==='all'?rels.length:rels.filter(rel=>rel.type===key).length;
+            // THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R6): a filter with nothing
+            // behind it ("Patronage (0)") is a label re-announcing nothing, so it is not offered.
+            if(key!=='all'&&n===0) return null;
             return <Button key={key} onClick={()=>setTypeFilter(key)}
               variant={typeFilter===key?'primary':'secondary'} size="sm"
               aria-pressed={typeFilter===key} style={{flexShrink:0}}>

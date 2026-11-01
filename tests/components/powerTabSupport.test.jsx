@@ -286,6 +286,22 @@ describe('UX consolidation — Power (T2-17..T2-19)', () => {
     expect(text).not.toContain('Governing authority'); // anchored: the chain block is on this render
   });
 
+  it('THE TRIM (2026-11-01): a modifier of 0 is not a chip, and the heading goes when nothing moved', () => {
+    const leg = town.powerStructure.publicLegitimacy;
+    const mixed = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 8, safety: 0, defense: -3, food: 0 } } } };
+    const a = render(<PowerTab powerStructure={mixed.powerStructure} settlement={mixed} narrativeNote={null} publicDossier />).container.textContent;
+    expect(a).toContain('Breakdown');
+    expect(a).toContain('Prosperity +8');
+    expect(a).toContain('Defense -3');
+    expect(a).not.toContain('Safety 0'); // anchored: the two moved chips are asserted on this render
+    expect(a).not.toContain('Food 0');
+    cleanup();
+    const still = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 }, governanceFractured: true } } };
+    const b = render(<PowerTab powerStructure={still.powerStructure} settlement={still} narrativeNote={null} publicDossier />).container.textContent;
+    expect(b).toContain('Governance fractured.');
+    expect(b).not.toContain('Breakdown'); // anchored: the fracture note on this render
+  });
+
   it('T2-18: the legitimacy breakdown label is "Breakdown" and the fracture note is one sentence', () => {
     const text = view({ publicDossier: true });
     expect(text).toContain('Breakdown');
