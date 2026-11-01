@@ -458,6 +458,9 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   const publicDossier = readOnly && !saveId;
   // THE LAUNCH TONE (the owner, 2026-11-01, ODQ §934.103): the World tabs that are still
   // "Available at launch" teasers wear a purple hue in the strip (dossier/useLaunchTones.js).
+  // The deity embed is read ONCE here (the observed-shape instrument banks this file's read of
+  // `config.primaryDeitySnapshot`); the hook and the faith tab's presence below take the value.
+  const deityEmbed = rawSettlement?.config?.primaryDeitySnapshot;
   const teasers = useLaunchTones({ settlement: rawSettlement, deityEmbed, saveId, viewerIsPremium, playerView, publicDossier });
   const launchTone = (teaser) => (teaser ? { tone: LAUNCH_TONE } : {});
   // NPC authoring is an explicit owner capability supplied by SettlementDetail,
@@ -527,9 +530,6 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // teaser (names NO deity). Premium + deity-free ⇒ no tab; a public deity-free
   // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
   // CONTENT is — it never leaks a name.
-  // The embed is read ONCE here (the observed-shape instrument banks this file's read of
-  // `config.primaryDeitySnapshot`; the launch-tone hook takes the value, never the key).
-  const deityEmbed = rawSettlement?.config?.primaryDeitySnapshot;
   const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || (!viewerIsPremium && !publicDossier);
   const allTabs = [...baseTabs,
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
