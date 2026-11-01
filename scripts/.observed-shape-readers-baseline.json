@@ -124,15 +124,15 @@
  },
  "digests": {
   "corpusMeta": "252deb6ad7685fbd3be1ce0ceceda37e3fc3e0227d58e5b80c70a77bcfb8351b",
-  "inventory": "857060fd9a7f17834b591c95a089549d45f79f318b919de79aadf01178609ec8",
-  "manifests": "58d845f7363ebe64f50b9dfc8162033e6530fe61266c1d870309de9150386bbe",
+  "inventory": "d10c8120b82e8dd6b8171041c993a05a2fc0eee8416ae04d6222a75fccbececc",
+  "manifests": "6af2f7a907cc46e5fbce0dfc6dd531549ea9d5139e216e57991fe38eb6ce872c",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
-  "scanStats": "0ec3f94e1bd86a97e2533a1398936213d25ff29f58becec9a4b8672982335553",
-  "sentinel": "3f285fa975e69e5ecda4800d6c0952247da75b5b8c3bdc74f968a266507ec8e8"
+  "scanStats": "ea8a67137494cb1f3a49f3dc989c55bfd309a05abba5c45cfb523cc16c2305bc",
+  "sentinel": "86dfa3934da70a51048022ae17b22da2b4d6ae595cf0899dde4ae1dc8cdba4f5"
  },
- "frozen": "2026-10-31",
- "frozenAtSha": "db7d04c9b29db90943fd85a4ec6e39298a53bf6d",
+ "frozen": "2026-11-01",
+ "frozenAtSha": "db187cdd7ebd1a5761d52884a46d9beaf0df16c1",
  "identities": 1441,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -140,7 +140,7 @@
   },
   "src/components/OutputContainer.jsx": {
    "canonizedAt on campaignState": 1,
-   "primaryDeitySnapshot on config": 2,
+   "primaryDeitySnapshot on config": 1,
    "startedAt on campaignState": 1,
    "worldPulse on campaignState": 1,
    "worldState on campaignState": 2
@@ -2447,7 +2447,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "1c153848290e36f4bee0e63d9fe6e22badb8f07d261e1303efcb1c94a15307f4",
+   "digest": "2ef3857df443a67fb46b8cc21ee849961c73e831a391fff84e21f7190dbaf7bf",
    "entries": [
     {
      "mode": "100644",
@@ -2522,8 +2522,8 @@
     {
      "mode": "100644",
      "path": "src/App.jsx",
-     "sha256": "72e23c705b472d161ef8f7277b8ba926c6747dde34da00aa062d72a355750fec",
-     "size": 59861,
+     "sha256": "40965d0570c3a0cca9115deb407a4ed83ad769edfcbd8fc2b15f698a58196943",
+     "size": 60245,
      "type": "file"
     },
     {
@@ -2865,8 +2865,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
-     "size": 66260,
+     "sha256": "ab3add5f20eb8ae0122438de77e16464772237ba3910b7f933772d7374278cd1",
+     "size": 67279,
      "type": "file"
     },
     {
@@ -3740,8 +3740,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierTabStrip.jsx",
-     "sha256": "2b5d2d4ff8a90064cf9845ffbb732700c69c1ad4b21e98b6f323774299c64891",
-     "size": 5157,
+     "sha256": "71f17e691782f7cc9ef0a7f8c455cc2bac9d069eba41732023d2eb8b8db035e1",
+     "size": 5792,
      "type": "file"
     },
     {
@@ -3847,6 +3847,13 @@
      "path": "src/components/dossier/useEntityFocus.js",
      "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
      "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/dossier/useLaunchTones.js",
+     "sha256": "b1b95ed5b6d1c85b193dc2d6baae6951c4df6db832936c18994aba18e67ac918",
+     "size": 2647,
      "type": "file"
     },
     {
@@ -4363,8 +4370,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7ee44cbd4454396f8b7aeab7d106a221e9d451b1791f7bbaf8b52357f129d90f",
-     "size": 8661,
+     "sha256": "ed0c59a5673144e1cd5b966a479ef101cfb77de8ca7c388499ffdc22c7b8d4f4",
+     "size": 9029,
      "type": "file"
     },
     {
@@ -5595,29 +5602,29 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "13ea4d7a470912da0749b6c3410631c1de2a98da3487d30b9f45f48b8f0e2c4f",
-     "size": 44611,
+     "sha256": "1aae43a746882469c8b2b8609dedb2fdbe172cfb4c4791e317563d0f6daba49a",
+     "size": 45032,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
-     "size": 4329,
+     "sha256": "66b7f0579b2279096b5f59139494ae0919e7277154f194d61f56bbc60d35bbe3",
+     "size": 6425,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "2f95e051506ead5efe363b71dc872284561ba20816d0ffdc6521b4208e792742",
-     "size": 33544,
+     "sha256": "b92aff38583b1b08ec3b1ef3c5432cd5ef2f185725098844691174ca3bfa402a",
+     "size": 34023,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "5ca74d7215a6cf9eaa09d19e810e7ba3bf19e510d08231b33f3fc58d5b53e796",
-     "size": 16689,
+     "sha256": "1c05e3d07e650b2ae4e9b7027f2c2df6ce069db1c047336084be87b9694fdb85",
+     "size": 16933,
      "type": "file"
     },
     {
@@ -5651,8 +5658,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "971033835640fb7c50a87b9ff8f6b468f29a0885cfde0597935630f811ebbbfd",
-     "size": 8553,
+     "sha256": "5c20f89540972adf9f70c91d3b6b8b7740c9d17827fff19bccc4616a743e776d",
+     "size": 9036,
      "type": "file"
     },
     {
@@ -6008,8 +6015,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/MobileTabStrip.jsx",
-     "sha256": "c9eff6041c8fd909039f3cc37041d2f04a760a521513202d0ca378d21b8e8814",
-     "size": 7524,
+     "sha256": "2429edd87a9d4b9da48f5e2727d12ed4f7ee5bdda89d9ad3a5eef36371e80d8c",
+     "size": 7937,
      "type": "file"
     },
     {
@@ -6764,8 +6771,8 @@
     {
      "mode": "100644",
      "path": "src/components/theme.js",
-     "sha256": "8edf61cd05eb306cb7029053781ee3aa18ef9091d081aca72010bce05b834ecd",
-     "size": 13970,
+     "sha256": "86dca3c0356d26e9c31ac7f8cbc78f6576137da3ed9d7ff0a879a9f7a17b1a0e",
+     "size": 14341,
      "type": "file"
     },
     {
@@ -6862,8 +6869,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "d0b62cd6e4ec33c16d97e504928ee2663ddadbd315b1fe4edc40293b5b17b796",
-     "size": 22225,
+     "sha256": "7a5c5f57d799a76a1c552c777a713f84f4286b06a600d605e5baa6a0dfa0ddda",
+     "size": 22524,
      "type": "file"
     },
     {
@@ -7464,8 +7471,8 @@
     {
      "mode": "100644",
      "path": "src/design/tokens.js",
-     "sha256": "43ff46b100f9035bab76163b305ff41009d79feed50011ad1492bfc2dd3c2265",
-     "size": 35346,
+     "sha256": "d0b8128b09a546027fa8c10ce6c2164a9a580bee8abc5cef155f6ada1acdddbb",
+     "size": 36150,
      "type": "file"
     },
     {
@@ -8695,6 +8702,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/conditionWords.js",
+     "sha256": "b7eed2b053a032da1ef24609b899e70375b322436e704715fb163d0baa1e5210",
+     "size": 1544,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/credibilityRead.js",
      "sha256": "c0f3c00772c453218acf7395d94780f83b0eead0d510f42a9efb727e7a06dc9d",
      "size": 6005,
@@ -8829,8 +8843,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
-     "size": 55329,
+     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
+     "size": 55427,
      "type": "file"
     },
     {
@@ -9473,8 +9487,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/dossierSearch.js",
-     "sha256": "8e9a013ac3f07342d43fada9b47fe3e9c6f7d005c338e843c4d71b24bb5bc2bd",
-     "size": 23294,
+     "sha256": "226998e2022d6385e7596d9da0b0bcb8a9c0815ab83a393f99015482529e9a5d",
+     "size": 23392,
      "type": "file"
     },
     {
@@ -9489,6 +9503,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/launchTeasers.js",
+     "sha256": "502b8c79c23967e27436a425116a7da5b8d5643762f6df1dc06f0e7a804a8738",
+     "size": 3770,
      "type": "file"
     },
     {
@@ -9592,8 +9613,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/mergeConsequence.js",
-     "sha256": "5bf749b5c253d625a6f508a800a500da4e3146e3987b4e5a7b7a5c5dcbba6077",
-     "size": 15622,
+     "sha256": "3c84ec99c9b41c5e0fa23c61d48a7cb570b389944f81621fb56f1c9b37503192",
+     "size": 18416,
      "type": "file"
     },
     {
@@ -18034,8 +18055,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-     "sha256": "3496b11d2a97b26aa56bdc94570426ec7f25ef83e7559428b5ab7395c270081b",
-     "size": 10101,
+     "sha256": "ece00372f5c48ee2dee02b5e80ed6db6b32f0ca23fa9cde51549a86ceb795196",
+     "size": 10651,
      "type": "file"
     },
     {
@@ -18840,13 +18861,13 @@
   },
   "scanTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "6ec0900a1d558c5f9ca3992856cdc4d2ca44e02990083125b90b47e3808f14d6",
+   "digest": "1d99af2674038669c5f2e5bebdadb8827405ec6f39b195ee545d002180a8fc43",
    "entries": [
     {
      "mode": "100644",
      "path": "src/App.jsx",
-     "sha256": "72e23c705b472d161ef8f7277b8ba926c6747dde34da00aa062d72a355750fec",
-     "size": 59861,
+     "sha256": "40965d0570c3a0cca9115deb407a4ed83ad769edfcbd8fc2b15f698a58196943",
+     "size": 60245,
      "type": "file"
     },
     {
@@ -19188,8 +19209,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
-     "size": 66260,
+     "sha256": "ab3add5f20eb8ae0122438de77e16464772237ba3910b7f933772d7374278cd1",
+     "size": 67279,
      "type": "file"
     },
     {
@@ -20063,8 +20084,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierTabStrip.jsx",
-     "sha256": "2b5d2d4ff8a90064cf9845ffbb732700c69c1ad4b21e98b6f323774299c64891",
-     "size": 5157,
+     "sha256": "71f17e691782f7cc9ef0a7f8c455cc2bac9d069eba41732023d2eb8b8db035e1",
+     "size": 5792,
      "type": "file"
     },
     {
@@ -20170,6 +20191,13 @@
      "path": "src/components/dossier/useEntityFocus.js",
      "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
      "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/dossier/useLaunchTones.js",
+     "sha256": "b1b95ed5b6d1c85b193dc2d6baae6951c4df6db832936c18994aba18e67ac918",
+     "size": 2647,
      "type": "file"
     },
     {
@@ -20686,8 +20714,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7ee44cbd4454396f8b7aeab7d106a221e9d451b1791f7bbaf8b52357f129d90f",
-     "size": 8661,
+     "sha256": "ed0c59a5673144e1cd5b966a479ef101cfb77de8ca7c388499ffdc22c7b8d4f4",
+     "size": 9029,
      "type": "file"
     },
     {
@@ -21918,29 +21946,29 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "13ea4d7a470912da0749b6c3410631c1de2a98da3487d30b9f45f48b8f0e2c4f",
-     "size": 44611,
+     "sha256": "1aae43a746882469c8b2b8609dedb2fdbe172cfb4c4791e317563d0f6daba49a",
+     "size": 45032,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
-     "size": 4329,
+     "sha256": "66b7f0579b2279096b5f59139494ae0919e7277154f194d61f56bbc60d35bbe3",
+     "size": 6425,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "2f95e051506ead5efe363b71dc872284561ba20816d0ffdc6521b4208e792742",
-     "size": 33544,
+     "sha256": "b92aff38583b1b08ec3b1ef3c5432cd5ef2f185725098844691174ca3bfa402a",
+     "size": 34023,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "5ca74d7215a6cf9eaa09d19e810e7ba3bf19e510d08231b33f3fc58d5b53e796",
-     "size": 16689,
+     "sha256": "1c05e3d07e650b2ae4e9b7027f2c2df6ce069db1c047336084be87b9694fdb85",
+     "size": 16933,
      "type": "file"
     },
     {
@@ -21974,8 +22002,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "971033835640fb7c50a87b9ff8f6b468f29a0885cfde0597935630f811ebbbfd",
-     "size": 8553,
+     "sha256": "5c20f89540972adf9f70c91d3b6b8b7740c9d17827fff19bccc4616a743e776d",
+     "size": 9036,
      "type": "file"
     },
     {
@@ -22331,8 +22359,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/MobileTabStrip.jsx",
-     "sha256": "c9eff6041c8fd909039f3cc37041d2f04a760a521513202d0ca378d21b8e8814",
-     "size": 7524,
+     "sha256": "2429edd87a9d4b9da48f5e2727d12ed4f7ee5bdda89d9ad3a5eef36371e80d8c",
+     "size": 7937,
      "type": "file"
     },
     {
@@ -23087,8 +23115,8 @@
     {
      "mode": "100644",
      "path": "src/components/theme.js",
-     "sha256": "8edf61cd05eb306cb7029053781ee3aa18ef9091d081aca72010bce05b834ecd",
-     "size": 13970,
+     "sha256": "86dca3c0356d26e9c31ac7f8cbc78f6576137da3ed9d7ff0a879a9f7a17b1a0e",
+     "size": 14341,
      "type": "file"
     },
     {
@@ -23185,8 +23213,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "d0b62cd6e4ec33c16d97e504928ee2663ddadbd315b1fe4edc40293b5b17b796",
-     "size": 22225,
+     "sha256": "7a5c5f57d799a76a1c552c777a713f84f4286b06a600d605e5baa6a0dfa0ddda",
+     "size": 22524,
      "type": "file"
     },
     {
@@ -23703,8 +23731,8 @@
     {
      "mode": "100644",
      "path": "src/design/tokens.js",
-     "sha256": "43ff46b100f9035bab76163b305ff41009d79feed50011ad1492bfc2dd3c2265",
-     "size": 35346,
+     "sha256": "d0b8128b09a546027fa8c10ce6c2164a9a580bee8abc5cef155f6ada1acdddbb",
+     "size": 36150,
      "type": "file"
     },
     {
@@ -24899,6 +24927,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/conditionWords.js",
+     "sha256": "b7eed2b053a032da1ef24609b899e70375b322436e704715fb163d0baa1e5210",
+     "size": 1544,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/credibilityRead.js",
      "sha256": "c0f3c00772c453218acf7395d94780f83b0eead0d510f42a9efb727e7a06dc9d",
      "size": 6005,
@@ -25033,8 +25068,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
-     "size": 55329,
+     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
+     "size": 55427,
      "type": "file"
     },
     {
@@ -25677,8 +25712,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/dossierSearch.js",
-     "sha256": "8e9a013ac3f07342d43fada9b47fe3e9c6f7d005c338e843c4d71b24bb5bc2bd",
-     "size": 23294,
+     "sha256": "226998e2022d6385e7596d9da0b0bcb8a9c0815ab83a393f99015482529e9a5d",
+     "size": 23392,
      "type": "file"
     },
     {
@@ -25693,6 +25728,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/launchTeasers.js",
+     "sha256": "502b8c79c23967e27436a425116a7da5b8d5643762f6df1dc06f0e7a804a8738",
+     "size": 3770,
      "type": "file"
     },
     {
@@ -25796,8 +25838,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/mergeConsequence.js",
-     "sha256": "5bf749b5c253d625a6f508a800a500da4e3146e3987b4e5a7b7a5c5dcbba6077",
-     "size": 15622,
+     "sha256": "3c84ec99c9b41c5e0fa23c61d48a7cb570b389944f81621fb56f1c9b37503192",
+     "size": 18416,
      "type": "file"
     },
     {
@@ -34238,8 +34280,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-     "sha256": "3496b11d2a97b26aa56bdc94570426ec7f25ef83e7559428b5ab7395c270081b",
-     "size": 10101,
+     "sha256": "ece00372f5c48ee2dee02b5e80ed6db6b32f0ca23fa9cde51549a86ceb795196",
+     "size": 10651,
      "type": "file"
     },
     {
@@ -35037,13 +35079,13 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "f7edd984544f3b31f3228868c590201704886ccea63d0afc522e7f57f21db4da",
+   "digest": "242efe42f4823464af7ce4c1f2af0798036ab30891c286eaf60b6e247e10b31e",
    "entries": [
     {
      "mode": "100644",
      "path": "src/App.jsx",
-     "sha256": "72e23c705b472d161ef8f7277b8ba926c6747dde34da00aa062d72a355750fec",
-     "size": 59861,
+     "sha256": "40965d0570c3a0cca9115deb407a4ed83ad769edfcbd8fc2b15f698a58196943",
+     "size": 60245,
      "type": "file"
     },
     {
@@ -35385,8 +35427,8 @@
     {
      "mode": "100644",
      "path": "src/components/OutputContainer.jsx",
-     "sha256": "92462f44843070b173066e8a7753e18c0b42f89191c802d3e1186a23f7de5ead",
-     "size": 66260,
+     "sha256": "ab3add5f20eb8ae0122438de77e16464772237ba3910b7f933772d7374278cd1",
+     "size": 67279,
      "type": "file"
     },
     {
@@ -36260,8 +36302,8 @@
     {
      "mode": "100644",
      "path": "src/components/dossier/DossierTabStrip.jsx",
-     "sha256": "2b5d2d4ff8a90064cf9845ffbb732700c69c1ad4b21e98b6f323774299c64891",
-     "size": 5157,
+     "sha256": "71f17e691782f7cc9ef0a7f8c455cc2bac9d069eba41732023d2eb8b8db035e1",
+     "size": 5792,
      "type": "file"
     },
     {
@@ -36367,6 +36409,13 @@
      "path": "src/components/dossier/useEntityFocus.js",
      "sha256": "ca91223feba2de30efa8d526c4222c888e75bdf1e8e9173616e98fb8a32e1741",
      "size": 2545,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/components/dossier/useLaunchTones.js",
+     "sha256": "b1b95ed5b6d1c85b193dc2d6baae6951c4df6db832936c18994aba18e67ac918",
+     "size": 2647,
      "type": "file"
     },
     {
@@ -36883,8 +36932,8 @@
     {
      "mode": "100644",
      "path": "src/components/home/landingFixture.js",
-     "sha256": "7ee44cbd4454396f8b7aeab7d106a221e9d451b1791f7bbaf8b52357f129d90f",
-     "size": 8661,
+     "sha256": "ed0c59a5673144e1cd5b966a479ef101cfb77de8ca7c388499ffdc22c7b8d4f4",
+     "size": 9029,
      "type": "file"
     },
     {
@@ -38115,29 +38164,29 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/OverviewTab.jsx",
-     "sha256": "13ea4d7a470912da0749b6c3410631c1de2a98da3487d30b9f45f48b8f0e2c4f",
-     "size": 44611,
+     "sha256": "1aae43a746882469c8b2b8609dedb2fdbe172cfb4c4791e317563d0f6daba49a",
+     "size": 45032,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PlotHooksTab.jsx",
-     "sha256": "1af9a3ae3e0687660e521fbc1c5e629ef043478c7499fa9b2c53127d9ef6c46c",
-     "size": 4329,
+     "sha256": "66b7f0579b2279096b5f59139494ae0919e7277154f194d61f56bbc60d35bbe3",
+     "size": 6425,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/PowerTab.jsx",
-     "sha256": "2f95e051506ead5efe363b71dc872284561ba20816d0ffdc6521b4208e792742",
-     "size": 33544,
+     "sha256": "b92aff38583b1b08ec3b1ef3c5432cd5ef2f185725098844691174ca3bfa402a",
+     "size": 34023,
      "type": "file"
     },
     {
      "mode": "100644",
      "path": "src/components/new/tabs/RelationshipsTab.jsx",
-     "sha256": "5ca74d7215a6cf9eaa09d19e810e7ba3bf19e510d08231b33f3fc58d5b53e796",
-     "size": 16689,
+     "sha256": "1c05e3d07e650b2ae4e9b7027f2c2df6ce069db1c047336084be87b9694fdb85",
+     "size": 16933,
      "type": "file"
     },
     {
@@ -38171,8 +38220,8 @@
     {
      "mode": "100644",
      "path": "src/components/new/tabs/SubstrateTab.jsx",
-     "sha256": "971033835640fb7c50a87b9ff8f6b468f29a0885cfde0597935630f811ebbbfd",
-     "size": 8553,
+     "sha256": "5c20f89540972adf9f70c91d3b6b8b7740c9d17827fff19bccc4616a743e776d",
+     "size": 9036,
      "type": "file"
     },
     {
@@ -38528,8 +38577,8 @@
     {
      "mode": "100644",
      "path": "src/components/primitives/MobileTabStrip.jsx",
-     "sha256": "c9eff6041c8fd909039f3cc37041d2f04a760a521513202d0ca378d21b8e8814",
-     "size": 7524,
+     "sha256": "2429edd87a9d4b9da48f5e2727d12ed4f7ee5bdda89d9ad3a5eef36371e80d8c",
+     "size": 7937,
      "type": "file"
     },
     {
@@ -39284,8 +39333,8 @@
     {
      "mode": "100644",
      "path": "src/components/theme.js",
-     "sha256": "8edf61cd05eb306cb7029053781ee3aa18ef9091d081aca72010bce05b834ecd",
-     "size": 13970,
+     "sha256": "86dca3c0356d26e9c31ac7f8cbc78f6576137da3ed9d7ff0a879a9f7a17b1a0e",
+     "size": 14341,
      "type": "file"
     },
     {
@@ -39382,8 +39431,8 @@
     {
      "mode": "100644",
      "path": "src/copy/landing.js",
-     "sha256": "d0b62cd6e4ec33c16d97e504928ee2663ddadbd315b1fe4edc40293b5b17b796",
-     "size": 22225,
+     "sha256": "7a5c5f57d799a76a1c552c777a713f84f4286b06a600d605e5baa6a0dfa0ddda",
+     "size": 22524,
      "type": "file"
     },
     {
@@ -39984,8 +40033,8 @@
     {
      "mode": "100644",
      "path": "src/design/tokens.js",
-     "sha256": "43ff46b100f9035bab76163b305ff41009d79feed50011ad1492bfc2dd3c2265",
-     "size": 35346,
+     "sha256": "d0b8128b09a546027fa8c10ce6c2164a9a580bee8abc5cef155f6ada1acdddbb",
+     "size": 36150,
      "type": "file"
     },
     {
@@ -41215,6 +41264,13 @@
     },
     {
      "mode": "100644",
+     "path": "src/domain/display/conditionWords.js",
+     "sha256": "b7eed2b053a032da1ef24609b899e70375b322436e704715fb163d0baa1e5210",
+     "size": 1544,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
      "path": "src/domain/display/credibilityRead.js",
      "sha256": "c0f3c00772c453218acf7395d94780f83b0eead0d510f42a9efb727e7a06dc9d",
      "size": 6005,
@@ -41349,8 +41405,8 @@
     {
      "mode": "100644",
      "path": "src/domain/display/galleryVeil.js",
-     "sha256": "3bb1995848a86055ab731f8a893b02802271c9864bda40931dee79521012f3ba",
-     "size": 55329,
+     "sha256": "b79011e01e29fc73b6a8cfc7c72474e9f106d114a5fe5efa41147f7f95f92f95",
+     "size": 55427,
      "type": "file"
     },
     {
@@ -41993,8 +42049,8 @@
     {
      "mode": "100644",
      "path": "src/domain/dossier/dossierSearch.js",
-     "sha256": "8e9a013ac3f07342d43fada9b47fe3e9c6f7d005c338e843c4d71b24bb5bc2bd",
-     "size": 23294,
+     "sha256": "226998e2022d6385e7596d9da0b0bcb8a9c0815ab83a393f99015482529e9a5d",
+     "size": 23392,
      "type": "file"
     },
     {
@@ -42009,6 +42065,13 @@
      "path": "src/domain/dossier/hookRetention.js",
      "sha256": "69931ca1e7a781dd95826411d09005275f64df11ac64d5e78386697cd83134cd",
      "size": 13857,
+     "type": "file"
+    },
+    {
+     "mode": "100644",
+     "path": "src/domain/dossier/launchTeasers.js",
+     "sha256": "502b8c79c23967e27436a425116a7da5b8d5643762f6df1dc06f0e7a804a8738",
+     "size": 3770,
      "type": "file"
     },
     {
@@ -42112,8 +42175,8 @@
     {
      "mode": "100644",
      "path": "src/domain/edit/mergeConsequence.js",
-     "sha256": "5bf749b5c253d625a6f508a800a500da4e3146e3987b4e5a7b7a5c5dcbba6077",
-     "size": 15622,
+     "sha256": "3c84ec99c9b41c5e0fa23c61d48a7cb570b389944f81621fb56f1c9b37503192",
+     "size": 18416,
      "type": "file"
     },
     {
@@ -50554,8 +50617,8 @@
     {
      "mode": "100644",
      "path": "src/pdf/sections/SystemStateSnapshot.jsx",
-     "sha256": "3496b11d2a97b26aa56bdc94570426ec7f25ef83e7559428b5ab7395c270081b",
-     "size": 10101,
+     "sha256": "ece00372f5c48ee2dee02b5e80ed6db6b32f0ca23fa9cde51549a86ceb795196",
+     "size": 10651,
      "type": "file"
     },
     {
@@ -51643,23 +51706,23 @@
   }
  },
  "scanStats": {
-  "files": 2313,
-  "reads": 134020,
-  "resolved": 10019,
-  "unresolved": 124001
+  "files": 2316,
+  "reads": 134071,
+  "resolved": 10029,
+  "unresolved": 124042
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "1c153848290e36f4bee0e63d9fe6e22badb8f07d261e1303efcb1c94a15307f4",
-  "scanTreeDigest": "6ec0900a1d558c5f9ca3992856cdc4d2ca44e02990083125b90b47e3808f14d6",
-  "sourceTreeDigest": "f7edd984544f3b31f3228868c590201704886ccea63d0afc522e7f57f21db4da",
+  "executionTreeDigest": "2ef3857df443a67fb46b8cc21ee849961c73e831a391fff84e21f7190dbaf7bf",
+  "scanTreeDigest": "1d99af2674038669c5f2e5bebdadb8827405ec6f39b195ee545d002180a8fc43",
+  "sourceTreeDigest": "242efe42f4823464af7ce4c1f2af0798036ab30891c286eaf60b6e247e10b31e",
   "unscannedInputDigest": "bf766875efd4620888f50644608c21553a63875340a9b44543fbde2abbeb6229"
  },
  "schema": 25,
  "sentinel": {
-  "resolvedReads": 10019,
+  "resolvedReads": 10029,
   "totalKeys": 6998,
   "usableShapes": 355
  },
- "total": 2028
+ "total": 2027
 }
