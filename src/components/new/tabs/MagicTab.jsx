@@ -20,6 +20,7 @@ import { defenseMagicDependencyProse } from '../../../domain/display/stateProse/
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../../domain/display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../../../domain/worldPulse/magicWorksAt.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /**
  * DS-DEF-9's position — the registry's first CROSS-TAB row, now drawn HERE (UX consolidation
@@ -105,7 +106,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
         <>
           {/* The 6 envelope facets. */}
           <div style={{
-            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
+            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', ...FLUSH,
           }}>
             <div style={{
               fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -125,7 +126,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
 
           {/* The 4 role lines. */}
           <div style={{
-            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', marginBottom: 12,
+            background: CARD, border: `1px solid ${BORDER}`, overflow: 'hidden', ...FLUSH,
           }}>
             <div style={{
               fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, color: MUTED, textTransform: 'uppercase', letterSpacing: '0.05em',
@@ -143,7 +144,7 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
           {(magicFrozen || magicLine) && (
             <div data-testid="magic-dependence" style={{
               background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${SLATE}`,
-              padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
+              padding: `${SP.sm}px ${SP.md}px`, ...FLUSH,
             }}>
               <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: SLATE, marginBottom: 4 }}>
                 Reliance on magic, as judged at the first survey

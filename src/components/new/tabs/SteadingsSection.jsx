@@ -16,6 +16,7 @@ import { formatCount } from '../../../domain/formatNumber.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-8 · the general desk's ONE caller
+import { FLUSH } from '../../../design/flush.js';
 
 const GRADE_LABEL = {
   relic_ruin: 'Relic ruin',
@@ -57,7 +58,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
   if (!steadings.length && !grade && !ancient) return null;
 
   return (
-    <div style={{ marginTop: 14 }}>
+    <div style={{ ...FLUSH }}>
       {grade ? (
         <div style={{ background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`, borderLeft: `3px solid ${swatch.danger}`, padding: '8px 12px', marginBottom: 10 }}>
           <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: swatch.danger }}>

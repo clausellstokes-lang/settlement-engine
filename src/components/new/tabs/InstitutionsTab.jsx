@@ -48,6 +48,7 @@ import { MentionText } from '../../ProseParagraph.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
+import { FLUSH, FLUSH_PAGE, FLUSH_STACK } from '../../../design/flush.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -183,7 +184,7 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   const status = houseStatus(services, sets);
   return (
     <section ref={focusRef} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
-      padding: '8px 11px', background: swatch['#FAF8F4'],
+      ...FLUSH, padding: '8px 11px', background: swatch['#FAF8F4'],
       ...(isCustom ? { ...GOLD_TINT, borderWidth: 1, borderStyle: 'solid' } : { border: `1px solid ${badge.color}30`, borderLeft: `3px solid ${badge.color}` }),
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap' }}>
@@ -240,13 +241,14 @@ export default function InstitutionsTab({ settlement }) {
   if (!houses.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
-    <div style={{ padding: '14px 18px' }}>
+    <div style={FLUSH_PAGE}>
       {/* THE PAGE'S ONE MARK (X-42): the ? pill, right-aligned above the houses; the page has no
           title of its own (the tab names it), and no sentence about itself (X-38). */}
-      <div data-testid="institutions-header" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 6 }}>
+      <div data-testid="institutions-header" style={{ display: 'flex', justifyContent: 'flex-end', padding: '4px 12px' }}>
         <InfoPill text={SECTION_HELP.institutions} />
       </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
+      <div data-testid="institutions-stack" style={FLUSH_STACK}>
         {houses.map(({ inst, category, label, services, backs }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} sets={sets} />
         ))}

@@ -19,6 +19,7 @@ import Button from '../../primitives/Button.jsx';
 import IconButton from '../../primitives/IconButton.jsx';
 import { chromeFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { FLUSH_RULED } from '../../../design/flush.js';
 
 export function NPCsTab({
   npcs,
@@ -92,7 +93,7 @@ export function NPCsTab({
     <div>
       <NarrativeNote note={narrativeNote} />
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
-      <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
+      <div style={{display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',...FLUSH_RULED}}>
         <div style={{flex:1}}>
           <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span><InfoPill text={SECTION_HELP.npcs} />
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
@@ -119,7 +120,7 @@ export function NPCsTab({
       </div>
 
       {/* ── SEARCH + FILTER ─────────────────────────────────────────────── */}
-      <div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+      <div style={{display:'flex',gap:8,flexWrap:'wrap',...FLUSH_RULED}}>
         <div style={{position:'relative',flex:1,minWidth:140}}>
           <span style={{position:'absolute',left:9,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={14}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}

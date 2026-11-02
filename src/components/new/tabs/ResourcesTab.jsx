@@ -14,6 +14,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /**
  * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
@@ -142,7 +143,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <NarrativeNote note={narrativeNote} />
 
       {/* ── TERRAIN IDENTITY HEADER ───────────────────────────────────────── */}
-      <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',marginBottom:14}}>
+      <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',...FLUSH}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:160}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>

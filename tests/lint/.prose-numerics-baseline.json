@@ -367,7 +367,7 @@
   },
   {
     "path": "src/components/new/tabs/EconomicsGlance.jsx",
-    "line": 127,
+    "line": 128,
     "category": "floatInterpolation",
     "snippet": "{ecoScore}"
   },
@@ -505,25 +505,25 @@
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 306,
+    "line": 307,
     "category": "floatInterpolation",
     "snippet": "{leg.score}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 501,
+    "line": 502,
     "category": "floatInterpolation",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 501,
+    "line": 502,
     "category": "percentToken",
     "snippet": "{Math.round(instab*100)}"
   },
   {
     "path": "src/components/new/tabs/PowerTab.jsx",
-    "line": 539,
+    "line": 540,
     "category": "floatInterpolation",
     "snippet": "{Math.round(rung.standing*100)}"
   },

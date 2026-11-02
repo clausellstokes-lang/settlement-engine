@@ -82,6 +82,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import ProseBlock from '../ProseBlock.jsx'; // the shared one-paragraph renderer (see DeskLines)
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /**
  * The prosperity header: the page's one-line answer (the prosperity word) and its chips.
@@ -111,7 +112,7 @@ export default function EconomicsGlance({
   return (
     <>
       {/* ── PROSPERITY HEADER ───────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#faf6ec,#f5ede0)',border:'1px solid #d8c090',borderLeft:`4px solid ${prosColor}`,padding:'12px 16px',...FLUSH}}>
         <div style={{display:'flex',alignItems:'flex-start',justifyContent:'space-between',gap:12,flexWrap:'wrap'}}>
           <div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:prosColor,lineHeight:1.1,marginBottom:3}}>{eco.prosperity}</div>
@@ -156,7 +157,7 @@ export function EconomicsCampaignTiles({ granary, granaryColor, treasury, season
   return (
     <>
       {/* ── AT-A-GLANCE TILES (campaign-only: Season, Treasury) ────────── */}
-      {tiles.length>0&&<div style={{display:'flex',gap:8,marginBottom:14,flexWrap:'wrap'}}>
+      {tiles.length>0&&<div style={{display:'flex',gap:8,flexWrap:'wrap',padding:'8px 0 0',...FLUSH}}>
         {tiles.map(({label,value,sub,color,line})=>(
           <div key={label} style={{flex:'1 1 120px',background:swatch['#FAF8F4'],border:`1px solid ${color}30`,borderTop:`3px solid ${color}`,padding:'8px 10px',minWidth:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color,marginBottom:3}}>{label}</div>

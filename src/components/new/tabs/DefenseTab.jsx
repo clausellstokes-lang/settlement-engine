@@ -22,6 +22,7 @@ import { isVeiled } from '../../../domain/display/galleryVeil.js';
 // that each opened on the town's name. The DRAW is unchanged: the lines handed over are the
 // same strings `drawnAtMount` ruled on.
 import ProseBlock from '../ProseBlock.jsx';
+import { FLUSH, FLUSH_RULED } from '../../../design/flush.js';
 
 /**
  * The public-order position. ⚠ Its rungs arrive already PROJECTED BESIDE the DM's field —
@@ -342,7 +343,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       <NarrativeNote note={narrativeNote} />
 
       {/* ── DEFENSE OVERVIEW HEADER ──────────────────────────────────────── */}
-      <div style={{background:readiness.background,border:`1px solid ${readiness.border}`,borderLeft:`4px solid ${readiness.color}`,padding:'14px 18px',marginBottom:14}}>
+      <div style={{background:readiness.background,border:`1px solid ${readiness.border}`,borderLeft:`4px solid ${readiness.color}`,padding:'14px 18px',...FLUSH}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:16,flexWrap:'wrap'}}>
           <div style={{flexShrink:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Defensive posture</div>
@@ -363,7 +364,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       </div>
 
       {/* ── ACTIVE MILITARY STATUS (stress override) ─────────────────────── */}
-      {stressStatus&&<div style={{background:`${stressStatus.colour}0e`,border:`2px solid ${stressStatus.colour}`,padding:'12px 16px',marginBottom:14,display:'flex',gap:12,alignItems:'flex-start'}}>
+      {stressStatus&&<div style={{background:`${stressStatus.colour}0e`,border:`2px solid ${stressStatus.colour}`,padding:'12px 16px',display:'flex',gap:12,alignItems:'flex-start',...FLUSH}}>
         <div style={{flexShrink:0,textAlign:'center',minWidth:80}}>
           <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:800,color:stressStatus.colour,marginBottom:2}}>Military status</div>
           <div style={{fontSize:FS.md,fontWeight:800,color:stressStatus.colour,lineHeight:1.2}}>{statusCase(stressStatus.posture)}</div>
@@ -378,7 +379,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       </div>}
 
       {/* ── THREAT ASSESSMENT ────────────────────────────────────────────── */}
-      <div style={{marginBottom:14}}>
+      <div style={FLUSH_RULED}>
         <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,textTransform:'uppercase',letterSpacing:'0.06em',marginBottom:2}}>Threat Assessment</div>
         <div style={{fontSize:proseFontSize(FS.xxs, isMobile),color:MUTED,marginBottom:8,fontStyle:'italic'}}>Bars show the settlement&apos;s defense readiness against each threat, as judged at the first survey; Disasters & Famine is re-judged as the campaign advances. Higher is better.</div>
         {/* ⛔ NO SENTENCE STACK ABOVE THE BARS (owner finding 3, 2026-09-18). DS-DEF-2's five
@@ -514,7 +515,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
       </Section>
 
       {/* ── ARMED FORCES & FORTIFICATIONS ───────────────────────────────── */}
-      <div style={{marginBottom:14}}>
+      <div style={FLUSH_RULED}>
         <Button variant="ghost" fullWidth aria-expanded={showForces} onClick={()=>setShowForces(v=>!v)} style={{justifyContent:'space-between',padding:'8px 0',borderColor:'transparent',borderBottom:'1px solid #e0d0b0',borderRadius:0,marginBottom:showForces?10:0,WebkitTapHighlightColor:'transparent'}}>
           <span style={{...serif,fontSize: FS['16'],fontWeight:600,color:swatch.inkMag}}>
             Armed Forces & Fortifications
@@ -655,7 +656,7 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           now the FRAMING of the fold rather than a thing inside it (the DS-HK-1
           arrangement), and the visibility arm in dossierMountRegistry.walker.test.js is what
           keeps it there. */}
-      {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',marginBottom:10}}>
+      {supportingLines.length>0&&<div data-testid="defense-supporting-lines" style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #1a3a6a',padding:'9px 13px',...FLUSH}}>
         <ProseBlock lines={supportingLines} settlementName={r.name} tier={r.tier}
           style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:0,fontStyle:'italic'}}/>
       </div>}

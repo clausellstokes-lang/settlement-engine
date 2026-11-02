@@ -22,6 +22,7 @@ import { edged } from '../../../design/edgedBox.js';
 import { entityAnchor, eventIdFor } from '../../../domain/dossier/entityLinks.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
+import { FLUSH } from '../../../design/flush.js';
 
 // Extended event type colors (EVENT_COLORS only covers 5 types)
 const ALL_EC = {
@@ -251,7 +252,7 @@ export function HistoryTab({settlement:r, narrativeNote, onReroll, publicDossier
       <NarrativeNote note={narrativeNote} />
 
       {/* ── IDENTITY HEADER ───────────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'14px 18px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'14px 18px',...FLUSH}}>
         <div style={{display:'flex',alignItems:'baseline',gap:12,marginBottom:historicalCharacter?8:0,flexWrap:'wrap'}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3}}>{age} years old</span>

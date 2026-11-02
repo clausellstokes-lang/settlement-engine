@@ -4,6 +4,7 @@ import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
 import InfoPill from '../primitives/InfoPill.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { FLUSH } from '../../design/flush.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
@@ -71,7 +72,7 @@ export function Collapsible({ title, defaultOpen = true, children }) {
   return (
     // marginBottom 0 (owner order 2026-07-22, flush sweep): dossier cards sit
     // flush, no inter-card parchment gap.
-    <div style={{ marginBottom: 0, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
+    <div style={{ ...FLUSH, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
       <Button
         variant="secondary"
         aria-expanded={open}
@@ -106,9 +107,12 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     const headerBg   = accent ? `${accent}12` : (open ? '#f5ede0' : '#faf8f4');
     const titleColor = accent || '#1c1409';
     return (
-      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards.
-      <div style={{ marginBottom: 0, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
-        <div style={{ display: 'flex', alignItems: 'stretch', background: headerBg, borderBottom: open ? `1px solid ${borderColor}` : 'none' }}>
+      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards. FLUSH (X-44,
+      // 2026-11-02): the top edge over the previous block's bottom edge, so two edges paint as one.
+      <div style={{ ...FLUSH, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
+        {/* A span, not a div: a reader that finds the title and walks up to the nearest div lands
+            on the section itself, as it did before the pill had a row of its own. */}
+        <span style={{ display: 'flex', alignItems: 'stretch', background: headerBg, borderBottom: open ? `1px solid ${borderColor}` : 'none' }}>
           <Button
             variant="secondary"
             aria-expanded={open}
@@ -124,7 +128,7 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
             <span style={{ fontSize: FS.sm, color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
           </Button>
           {help && <span style={{ display: 'inline-flex', alignItems: 'center', paddingRight: 10 }}><InfoPill text={help} /></span>}
-        </div>
+        </span>
         {open && <div style={{ padding: '12px 13px', background: swatch['#FAF8F4'] }}>{children}</div>}
       </div>
     );

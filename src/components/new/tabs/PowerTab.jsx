@@ -25,6 +25,7 @@ import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -108,7 +109,7 @@ function RulingChainBlock({ settlement }) {
     <div data-testid="ruling-chain" style={{
       background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
-      padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
+      padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 6, ...FLUSH,
     }}>
       <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
         Who runs this place?<InfoPill text={SECTION_HELP.rulers} />
@@ -294,7 +295,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           background: leg.bg || '#faf8ec',
           border: `1px solid ${leg.color}40`,
           borderLeft: `4px solid ${leg.color}`,
-          padding: '12px 16px', marginBottom: 14,
+          padding: '12px 16px', ...FLUSH,
         }}>
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
@@ -364,7 +365,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       <div style={{
         background: isCritical?'#fdf4f4': isStable?'#f0faf4':'#fdf8e8',
         ...edged(`1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`, `4px solid ${stabilityColor}`),
-        padding:'12px 16px', marginBottom:14,
+        padding:'12px 16px', ...FLUSH,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
@@ -419,7 +420,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           What KIND of power governs, what the town lives on, and what the hall
           calls itself. Three pools of ONE block at ONE position. */}
       {structureLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The shape of authority</div>
           <ProseBlock lines={structureLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -431,7 +432,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           whether the seat has a recorded lineage. Three pools of ONE block at ONE
           position; the registry silences them together. */}
       {successionLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Rule and succession</div>
           <ProseBlock lines={successionLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -445,7 +446,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           ONE position, so the registry silences them together. Its capture pools are all
           dm-only, so it follows the coupling prose (the block law, X-16 rung 4). */}
       {undersideLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
           <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -459,7 +460,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           played reads the DORMANT line — which is true, not a fallback. Off-campaign it is
           silent (T2-18), so it sits with the campaign-only blocks at the foot (X-16 rung 6). */}
       {blocLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
           <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>

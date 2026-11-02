@@ -64,6 +64,7 @@ import AvailableAtLaunchPill from '../../primitives/AvailableAtLaunchPill.jsx';
 import {
   WarDormantNote, WarStandingLines, WarTreatyLines, warFaithDeskRungs,
 } from './WarFaithDesk.jsx';
+import { FLUSH, FLUSH_RULED } from '../../../design/flush.js';
 import {
   FS, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, INK, RED, GOLD, GREEN, SECOND, sans,
 } from '../../theme.js';
@@ -118,7 +119,7 @@ export function martialCrisisBanners(settlement) {
 function WarLaunchTeaser({ name }) {
   const mobile = useIsMobile();
   return (
-    <div data-testid="war-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px', marginBottom: 14 }}>
+    <div data-testid="war-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px', ...FLUSH }}>
       <AvailableAtLaunchPill />
       <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
         {`From here, this dossier becomes the control center for ${name}'s troops and units out in the world: raise them, deploy them, recall them, and read what came home, as the simulator runs.`}
@@ -138,7 +139,7 @@ function WarBlock({ war, nameFor, unitAbroad = false }) {
   return (
     <div data-testid="war-block" style={{
       background: CARD, border: `1px solid ${BORDER}`, borderLeft: `3px solid ${RED}`,
-      padding: '12px 14px', marginBottom: 14,
+      padding: '12px 14px', ...FLUSH,
     }}>
       <div style={{ display: 'flex', alignItems: 'baseline', gap: 8, flexWrap: 'wrap', marginBottom: 8 }}>
         <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: RED, textTransform: 'uppercase', letterSpacing: '0.07em' }}>War</span>
@@ -197,7 +198,7 @@ function WarBlock({ war, nameFor, unitAbroad = false }) {
 function WarsBlock({ wars, sid, nameFor }) {
   const mobile = useIsMobile();
   return (
-    <div data-testid="war-wars" style={{ marginBottom: 14 }}>
+    <div data-testid="war-wars" style={FLUSH_RULED}>
       <Eyebrow color={RED}>{wars.length === 1 ? 'The war' : 'The wars'}</Eyebrow>
       {wars.map((war) => {
         const onAttack = war.participants.includes(sid);
@@ -247,7 +248,7 @@ function readinessWords(readiness01) {
  *  town's own martial condition. Every row self-gates on its data existing. */
 function MusterBlock({ musterLine, armyStatus, martial }) {
   return (
-    <div data-testid="war-muster" style={{ marginBottom: 14 }}>
+    <div data-testid="war-muster" style={FLUSH_RULED}>
       <Eyebrow>Muster &amp; condition</Eyebrow>
       {musterLine && <Line strong="Marched out.">{musterLine}</Line>}
       {armyStatus && (
@@ -332,7 +333,7 @@ function UnitEntry({ unit, includeGroundTruth, armyStatus = null }) {
 function BeliefsBlock({ beliefs }) {
   const mobile = useIsMobile();
   return (
-    <div data-testid="war-beliefs" style={{ marginBottom: 14 }}>
+    <div data-testid="war-beliefs" style={FLUSH_RULED}>
       <Eyebrow color={GOLD}>DM · what this town believes of its neighbours</Eyebrow>
       {beliefs.map((b) => {
         // BOTH OF THESE ARE BAND WORDS, and they are named as words here.
@@ -365,7 +366,7 @@ function BeliefsBlock({ beliefs }) {
 function TreatyBlock({ treaties, sid }) {
   const mobile = useIsMobile();
   return (
-    <div data-testid="treaty-block" style={{ marginBottom: 14 }}>
+    <div data-testid="treaty-block" style={FLUSH_RULED}>
       <Eyebrow>{treaties.length === 1 ? 'Treaty' : 'Treaties'}</Eyebrow>
       {treaties.map((doc) => {
         // THE ROLE WORD COMES FROM THE LEDGER'S OWN ORIENTATION (chair ruling
@@ -660,7 +661,7 @@ export default function WarTab({ settlement, saveId = null, playerView = false, 
         <MusterBlock musterLine={war.musterLine} armyStatus={war.unit ? null : war.armyStatus} martial={war.martial} />
       )}
       {war && war.unit && (
-        <div data-testid="war-units" style={{ marginBottom: 14 }}>
+        <div data-testid="war-units" style={FLUSH_RULED}>
           <Eyebrow>Units abroad, as this town believes</Eyebrow>
           <UnitEntry unit={war.unit} includeGroundTruth={includeGroundTruth} armyStatus={war.armyStatus} />
         </div>

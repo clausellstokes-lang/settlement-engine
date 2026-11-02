@@ -37,6 +37,7 @@ import ProseBlock from '../ProseBlock.jsx';
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
+import { FLUSH, FLUSH_STACK } from '../../../design/flush.js';
 
 // The institution provenance badge and its legend moved to InstitutionsTab.jsx with the
 // roster itself (owner addendum T1-15, 2026-10-30): that tab is the roster's one home.
@@ -250,7 +251,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       <NarrativeNote note={narrativeNote} />
 
       {/* ── IDENTITY + KEY FACTS STRIP ───────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',marginBottom:14}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'12px 16px',...FLUSH}}>
         <div data-testid="overview-identity-row" style={{display:'flex',alignItems:'baseline',gap:10,flexWrap:'wrap',marginBottom:6}}>
           <span style={{...serif,fontSize:FS.xxl,fontWeight:600,color:swatch.inkMag}}>{r.name}</span>
           <span style={{fontSize:FS.md,color:swatch.inkMag3,textTransform:'capitalize'}}>{r.tier}</span>
@@ -305,7 +306,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             coupling prose (chair ruling X-25a): it stays directly under the identity strip
             and the routing line, before the crisis card. */}
       {(r.arrivalScene||siteLines.length>0)&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #6b5340',padding:'10px 14px',...FLUSH}}>
           <div style={{...literaryTitle(FS.lg),color:swatch.inkMag,marginBottom:5}}>The place</div>
           {r.arrivalScene&&<p className="oc-dropcap-prose" data-testid="overview-place-arrival" style={{...serif,fontSize:proseFontSize(FS.lg,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:siteLines.length>0?'0 0 6px':0,fontStyle:'italic'}}>{r.arrivalScene}</p>}
           <ProseBlock lines={siteLines} settlementName={r.name} tier={r.tier}
@@ -314,9 +315,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       )}
 
       {/* ── ACTIVE CRISIS (compact if present) ───────────────────────────── */}
-      {stresses.length>0&&<div style={{display:'flex',flexDirection:'column',gap:8,marginBottom:14}}>
+      {stresses.length>0&&<div style={{...FLUSH_STACK,...FLUSH}}>
         {stresses.map((v,i)=>(
-          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px'}}>
+          <div key={i} style={{display:'flex',gap:12,alignItems:'flex-start',background:`${v.colour}0e`,border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
             <div style={{flex:1,minWidth:0}}>
               <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4}}>
                 <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:v.colour}}>{v.label}</span>
@@ -453,7 +454,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           under a crisis the sentence closes the card (T1-3). DS-GEN-5's situation line is
           CUT (T1-8, R2): it keyed on the same route-to-scene table as the arrival hook and
           contradicted the origin line in 164 of 1000. Its row glances. ── */}
-      {stresses.length===0&&pressureLine&&<div style={{background:swatch.inkMag,padding:'12px 16px',marginBottom:14,border:'1px solid #3a2a10'}}>
+      {stresses.length===0&&pressureLine&&<div style={{background:swatch.inkMag,padding:'12px 16px',border:'1px solid #3a2a10',...FLUSH}}>
         <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#D4C4A0'],lineHeight:1.55,margin:0,fontStyle:'italic'}}>{pressureLine}</p>
       </div>}
 
@@ -471,7 +472,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       </Section>}
 
       {/* ── NOTABLE CONNECTION ────────────────────────────────────────────── */}
-      {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',marginBottom:14}}>
+      {r.prominentRelationship?.phrasing&&<div style={{background:swatch['#F7F0E4'],border:'1px solid #d8c090',borderLeft:'3px solid #6b5340',padding:'9px 13px',...FLUSH}}>
         <div style={{...literaryTitle(FS.sm),color:swatch.inkMag,marginBottom:4}}>Notable connection</div>
         {/* DS-REL-2's two lenses are CUT (T1-9, R4/R6): they restated the title. The row
             `overview.notableConnection` glances; the phrasing below is the one home. */}
@@ -486,7 +487,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           the Resources tab owns the strengths and the strategic value. */}
 
       {/* ── WARNINGS & COHERENCE NOTES ────────────────────────────────────── */}
-      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{marginBottom:14}}>
+      {((r.structuralViolations?.length||0)+(r.coherenceNotes?.length||0)+(r.structuralSuggestions?.length||0)>0)&&<div style={{...FLUSH}}>
         {r.structuralViolations?.length>0&&<div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'10px 14px',marginBottom:8}}>
           <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger,marginBottom:4}}>Structural Issues</div>
           {r.structuralViolations.map((v,i)=><div key={i} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A1A1A'],marginBottom:3}}><span style={{fontWeight:700}}>{v.institution||v.group}: </span>{v.reason}</div>)}
@@ -541,7 +542,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           worldState.stressors is written by the pulse, never by generation; campaign-only,
           so it closes the page with the played-world condition below (X-16 rung 6). */}
       {stressorLines.length>0&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #8b1a1a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The pressure from outside</div>
           <ProseBlock lines={stressorLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -553,7 +554,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           way it is moving, what kind it is, whether an event put it there, and
           whether it is running out. Five pools of ONE block at ONE position. */}
       {stresses.length===0&&conditionLines.length>0&&(
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #7a4a1a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>What the town is living through</div>
           <ProseBlock lines={conditionLines} settlementName={r.name} tier={r.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>

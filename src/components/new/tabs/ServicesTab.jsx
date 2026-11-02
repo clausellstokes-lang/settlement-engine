@@ -19,6 +19,7 @@ import { compareCodepoint } from '../../../domain/deterministicSort.js';
 import { edged } from '../../../design/edgedBox.js';
 import InfoPill from '../../primitives/InfoPill.jsx';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
+import { FLUSH, FLUSH_RULED, FLUSH_STACK } from '../../../design/flush.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -206,7 +207,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
       <NarrativeNote note={narrativeNote} />
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
-      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
+      <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',display:'flex',alignItems:'center',gap:10,flexWrap:'wrap',...FLUSH}}>
         <div style={{flex:1,minWidth:0,display:'flex',alignItems:'center',gap:8}}>
           {/* THE COUNT LINE IS GONE (X-38/X-42, the owner, 2026-11-02: no sentence about the page).
               The strip carries the page's ? pill and the custom marker, nothing else. */}
@@ -221,7 +222,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
       </div>
 
       {/* ── SEARCH ──────────────────────────────────────────────────────── */}
-      <div style={{marginBottom:14}}>
+      <div style={FLUSH_RULED}>
         <div style={{position:'relative'}}>
           <span style={{position:'absolute',left:10,top:'50%',transform:'translateY(-50%)',display:'inline-flex',color:MUTED,pointerEvents:'none'}}><Search size={15}/></span>
           <input value={search} onChange={e=>setSearch(e.target.value)}
@@ -272,14 +273,14 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
             ⛔ Lens B is not here: it names one house and renders under that house's own row
             below (owner order 2026-09-19). */}
         {missing.length > 0 && (
-          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',marginBottom:14,fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10']}}>
+          <div style={{background:swatch['#F0E4C0'],border:'1px solid #e0c080',borderLeft:'3px solid #b8860b',padding:'9px 14px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],...FLUSH}}>
             <strong>Not available for a {tier}:</strong> {missing.map(k=>Ts[k]?.label).filter(Boolean).join(', ')}.
           </div>
         )}
         <DeskLines mount={CATALOG_MOUNT} settlementName={settlement?.name} tier={settlement?.tier} rungs={[deskProse.catalogStanding]} />
 
         {/* ── SERVICE CATEGORIES ───────────────────────────────────────────── */}
-        <div style={{display:'flex',flexDirection:'column',gap:10}}>
+        <div style={FLUSH_STACK}>
           {catOrder.map(cat => {
             const list = services[cat];
             if (!list?.length) return null;
@@ -295,7 +296,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
               <div key={cat} id={'svc-cat-'+cat} style={{
                 background: isCriminal?'#1a0a0a':`${meta.accent}08`,
                 ...edged(`1px solid ${isCriminal?'#4a1a1a':`${meta.accent}28`}`,`3px solid ${accentColor}`),
-                overflow:'hidden'
+                overflow:'hidden', ...FLUSH,
               }}>
                 {/* Category toggle — bespoke: full-width header row with left-aligned
                     label/count, conditional impairment badges, an auto-pushed

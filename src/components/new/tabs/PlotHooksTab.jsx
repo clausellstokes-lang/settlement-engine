@@ -17,6 +17,7 @@ import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { literaryTitle, nameOrTokenCase } from '../labelLadder.js';
 import { MentionText } from '../../ProseParagraph.jsx';
+import { FLUSH_PAGE, FLUSH_RULED, FLUSH_STACK } from '../../../design/flush.js';
 
 /**
  * ⭐ THE PAGE IS THE HOOK CARDS AND NOTHING ABOVE THEM (chair rulings, RULINGS-T1 Plot
@@ -131,11 +132,11 @@ export default function PlotHooksTab({ settlement }) {
   }
 
   return (
-    <div style={{ padding: '16px 18px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+    <div style={{ ...FLUSH_PAGE, ...FLUSH_STACK }}>
       {groups.map(({ page, hooks }) => {
         const sourceGroups = groupHooksBySource(hooks);
         return (
-        <section key={page.id} data-testid={`plot-hooks-from-${page.id}`}>
+        <section key={page.id} data-testid={`plot-hooks-from-${page.id}`} style={FLUSH_RULED}>
           <div style={{ ...literaryTitle(FS.sm), color: INK, marginBottom: 6 }}>{page.label}</div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
             {sourceGroups.map((g, i) => (g.hooks.length === 1

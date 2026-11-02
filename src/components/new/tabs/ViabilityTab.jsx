@@ -19,6 +19,7 @@ import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /** The page's one first-survey vintage label (owner-queue #28 at one site per page, X-8). */
 export const FIRST_SURVEY_LABEL = 'Judged at the first survey; not re-run since.';
@@ -129,7 +130,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
       <div style={{
         background: VERDICT_BG[verdict.tone] || VERDICT_BG.warn,
         ...edged(`2px solid ${VERDICT_BORDER[verdict.tone] || VERDICT_BORDER.warn}`, `6px solid ${VERDICT_INK[verdict.tone] || VERDICT_INK.warn}`),
-        padding: '14px 18px', marginBottom: 14,
+        padding: '14px 18px', ...FLUSH,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1}}>
