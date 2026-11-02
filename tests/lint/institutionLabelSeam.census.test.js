@@ -74,7 +74,6 @@ const SEAM_MODULE = 'institutionDisplayName';
 const THREADED = Object.freeze({
   'src/domain/display/institutionProfile.js': "the profile card's heading and aria-label",
   'src/components/primitives/InstitutionLink.jsx': 'every inline institution trigger and its title',
-  'src/components/new/tabs/OverviewTab.jsx': 'the Overview roster pills',
   'src/components/new/SummaryTab.jsx': 'the Summary roster pills',
   'src/components/new/serviceComponents.jsx': "the service row's name",
   'src/components/compendium/CatalogTabs.jsx': "the Compendium's institution catalogue",
@@ -186,7 +185,11 @@ describe('the institution label seam — the roster holds', () => {
 
   test('the roster is not silently shrinking', () => {
     // 14 -> 15 (2026-10-30, T1-14): the Institutions tab prints house and service names through the seam.
-    expect(Object.keys(THREADED)).toHaveLength(15);
+    // 15 -> 14 (2026-11-01, X-37): the Overview prints NO institution name any more. Its roster
+    // pills left with T1-15 and its last seam call, the Religious Quarter's landmark bullet, left
+    // with the Spatial Layout section the owner cut from the summary page. A file with nothing
+    // to thread cannot hold a roster row; the cured-surface arm below keeps the WORD off it.
+    expect(Object.keys(THREADED)).toHaveLength(14);
   });
 });
 
@@ -357,8 +360,10 @@ describe('the institution label seam — the WORD does not reach a reader', () =
     // knows that a file has no row — it cannot say which DEFECT a row's absence proves gone.
     // anchored: each file below is read from disk in this same test, so a rename reds here
     // rather than passing vacuously.
+    // The Overview's row left this list with X-37 (2026-11-01): the landmark bullet is gone
+    // with the Spatial Layout section, so the file threads nothing; the WORD check on it is
+    // the separate assertion after the loop.
     for (const file of [
-      'src/components/new/tabs/OverviewTab.jsx',      // the Religious Quarter's landmark bullet
       'src/components/new/SummaryTab.jsx',            // the same landmarks, compactly
       'src/pdf/sections/Overview.jsx',                // the document's QUARTERS block
       'src/pdf/sections/IdentityDailyLife.jsx',       // the fillable LANDMARKS field
@@ -369,6 +374,11 @@ describe('the institution label seam — the WORD does not reach a reader', () =
       expect(source.includes(SEAM_MODULE), `${file} threads the seam`).toBe(true);
       expect(scanWordSites(source), `${file} carries the word again`).toEqual([]);
     }
+    // X-37: the Overview carries neither the seam nor the word. anchored: read from disk here.
+    const overview = readFileSync(join(ROOT, 'src/components/new/tabs/OverviewTab.jsx'), 'utf8');
+    expect(overview.length).toBeGreaterThan(0);
+    expect(overview.includes(SEAM_MODULE), 'the Overview prints no institution name (X-37)').toBe(false);
+    expect(scanWordSites(overview), 'the Overview carries the word again').toEqual([]);
     // The two authored strings that simply SAID the word, with no institution in sight.
     for (const [file, gone, kept] of [
       ['src/domain/display/defenseDisplay.js', 'Parish care', 'Clerical care'],

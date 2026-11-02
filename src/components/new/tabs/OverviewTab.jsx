@@ -33,7 +33,6 @@ import Button from '../../primitives/Button.jsx';
 // stands the repeated opening name down to the tier noun. The DRAW is unchanged — the lines
 // handed over are the same strings `drawnAtMount` ruled on above.
 import ProseBlock from '../ProseBlock.jsx';
-import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 // The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
@@ -271,12 +270,16 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         {(scopeLine||governs)&&<p data-testid="overview-identity-line" style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:'0 0 6px',lineHeight:1.5}}>
           {scopeLine}{scopeLine&&governs?' ':''}{governs&&<><span style={{color:MUTED}}>Governed by </span>{governs}</>}
         </p>}
-        {/* Row 2: character + spatial */}
+        {/* Row 2: character + terrain. THE SPATIAL LAYOUT IS CUT FROM THIS PAGE (the owner,
+            2026-11-01, X-37): the layout line that stood beside the terrain chip, and the
+            "Spatial Layout (N quarters)" reference section below, both go. The owner's word:
+            it all comes from the plat later and "makes no sense to be there without a visual
+            spatial component". `spatialLayout` stays in the record; nothing on this page
+            reads it. */}
         <div style={{display:'flex',gap:16,flexWrap:'wrap'}}>
           {hist.historicalCharacter&&<p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A1A'],fontStyle:'italic',margin:0,flex:'2 1 200px',lineHeight:1.5}}>"{hist.historicalCharacter}"</p>}
           <div style={{display:'flex',gap:8,flex:'1 1 160px',alignItems:'flex-start',flexWrap:'wrap'}}>
             {ra.terrain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#1A4A2A'],background:swatch['#E8F0E8'],border:'1px solid #a8d0a8',padding:'2px 8px',fontWeight:600}}>{ra.terrain}</span>}
-            {r.spatialLayout?.layout&&<span style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],border:'1px solid #d0c090',padding:'2px 8px'}}>{r.spatialLayout.layout}</span>}
           </div>
         </div>
         {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
@@ -522,29 +525,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>}
       </div>}
 
-      {/* ── SPATIAL LAYOUT ──────────────────────────────────────────────────
-          Routed through the shared Section primitive so its header reads at the
-          same serif altitude as Systems Health / Tensions / Geography and the
-          layer-cake scan has one consistent top-level collapsible level (P6) —
-          restored from the composite's bespoke green sub-collapsible per THE
-          BASE RECONCILIATION MAP SURFACE 1 (own top-level Section, not folded
-          in with Geography). Inner quarter cards keep the composite's craft. */}
-      {r.spatialLayout?.quarters?.length>0&&<Section title={`Spatial Layout (${r.spatialLayout.quarters.length} ${r.spatialLayout.quarters.length===1?'quarter':'quarters'})`} collapsible defaultOpen={false} accent="#1a5a28">
-        <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'repeat(auto-fill,minmax(180px,1fr))',gap:8}}>
-          {r.spatialLayout.quarters.map((q,i)=>(
-            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #d8c8a0',padding:'8px 10px'}}>
-              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag,marginBottom:3}}>{q.name}</div>
-              <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.4,margin:0}}>{q.desc}</p>
-              {/* A QUARTER'S LANDMARK IS A RAW CATALOGUE KEY. spatialGenerator fills `landmarks`
-                * by filtering `instNames`, so the Religious Quarter's bullet printed 'Parish
-                * churches (2-5)' — the very word §934.13's seam exists to keep off a reader's
-                * page — while the roster pill eighty lines below already read 'Houses of worship
-                * (2-5)'. One settlement, two spellings of one institution, on the same tab. */}
-              {q.landmarks?.slice(0,1).map((lm,j)=><p key={j} style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,margin:'3px 0 0'}}>• {institutionDisplayName(lm)}</p>)}
-            </div>
-          ))}
-        </div>
-      </Section>}
+      {/* THE SPATIAL LAYOUT SECTION IS CUT (the owner, 2026-11-01, X-37; see Row 2 above):
+          "Spatial Layout (N quarters)" and its quarter cards leave the summary page. The plat
+          program owns the settlement's space; a text-only quarters list was its shadow. */}
 
       {/* The Institutions collapsible is CUT (owner addendum T1-15, 2026-10-30; R2): the
           Systems group's Institutions tab lists every house with its services, its

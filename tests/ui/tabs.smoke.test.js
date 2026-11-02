@@ -90,19 +90,24 @@ describe('OverviewTab smoke', () => {
     expectAbsentWithAnchor(text, 'ConsiderPalisade', pair, 'structural suggestion sentence pair');
   });
 
-  test('a single quarter is a "quarter", not "1 quarters"', () => {
+  // X-37 (the owner, 2026-11-01): "Remove the spatial layouts from the summary page". The
+  // layout line, the Spatial Layout section and its quarter cards are gone from the Overview;
+  // the record keeps `spatialLayout` for the plat. Anchored on the page's own name and the
+  // terrain chip that still stands where the layout line stood.
+  test('the Overview prints no spatial layout: not the layout line, not the quarters (X-37)', () => {
     const s = {
-      name: 'X', tier: 'village', population: 300,
-      spatialLayout: { layout: 'Village green beside the mill', quarters: [{ name: 'Market Quarter', desc: 'stalls' }] },
+      name: 'Orderby', tier: 'village', population: 300,
+      resourceAnalysis: { terrain: 'grassland' },
+      spatialLayout: {
+        layout: 'Village green beside the mill',
+        quarters: [{ name: 'Market Quarter', desc: 'stalls and a well', landmarks: ['Parish churches (2-5)'] }],
+      },
     };
-    const { container } = render(e(OverviewTab, { settlement: s }));
-    expectAbsentWithAnchor(container.textContent, '1 quarters', 'Spatial Layout (1 quarter)',
-      'single-quarter pluralization');
-    // Plural control: two quarters still read as quarters.
-    cleanup();
-    const two = { ...s, spatialLayout: { ...s.spatialLayout, quarters: [...s.spatialLayout.quarters, { name: 'Shrine', desc: 'quiet' }] } };
-    const second = render(e(OverviewTab, { settlement: two }));
-    expect(second.container.textContent).toContain('Spatial Layout (2 quarters)');
+    const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
+    expect(text).toContain('grassland');
+    for (const gone of ['Village green beside the mill', 'Spatial Layout', 'Market Quarter', 'stalls and a well', 'Parish']) {
+      expectAbsentWithAnchor(text, gone, 'grassland', 'the spatial layout cut from the summary page (X-37)');
+    }
   });
 });
 
@@ -230,7 +235,6 @@ describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () =>
       history: { currentTensions: [{ description: 'Tension fixture.' }] },
       settlementReason: 'Origin fixture.',
       structuralSuggestions: [{ reason: 'Suggestion fixture', suggested: ['A wall'] }],
-      spatialLayout: { quarters: [{ name: 'Quarter fixture', desc: 'q' }] },
     };
     const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
     const at = (needle) => {
@@ -245,7 +249,8 @@ describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () =>
       'Tension fixture.',       // (2) the facts: tension rows
       'Origin fixture.',        // (3) prose: why it is here
       'Suggestion fixture',     // (4) DM material: warnings and suggestions
-      'Spatial Layout',         // (5) collapsed reference
+      // (5) the collapsed reference was the Spatial Layout section, cut by X-37 (2026-11-01);
+      // the page now ends on its DM material and the campaign-only blocks beneath it.
     ].map(at);
     expect(sequence).toEqual([...sequence].sort((a, b) => a - b));
   });

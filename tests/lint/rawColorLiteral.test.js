@@ -112,7 +112,9 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 // 1241 -> 1233 (2026-10-31, measured at the W2-VEIL-B merge out of this test's own red run): the wave-2 lanes
 // built the curate screen, the search bar and the links on the primitives; eight raw literals left with the
 // surfaces they replaced. A shrink, banked.
-const BUDGET = 1233; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
+// 1233 -> 1232 (2026-11-01, X-37, measured out of this test's own red run): the Overview's spatial layout left
+// the summary page (the owner's word), and the layout chip's raw border literal left with it. A shrink, banked.
+const BUDGET = 1232; // committed raw-color-literal occurrences. EXACT. Lower on a shrink; never raise. 1313 -> 1303 on 2026-09-19: the fixes consist's label ladder and the band-primitive deletion removed ten raw literals.
 // Pure-hex TEMPLATE elements are their OWN population with their OWN number. They are NOT
 // folded into BUDGET: one number per population, so a future movement stays attributable to
 // the population that moved. Today's single occurrence is real debt, not a placeholder —
