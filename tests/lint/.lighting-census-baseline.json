@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "0296cb5af4984f3b58df28861a688713784be588",
-  "measuredBy": "the cloud chair, session 01FbPLbfGHtg4xEGSkj1zE5B (X-39)",
+  "measuredAtSha": "8a5120f4608a18a1b1795666258e5a3d9ada7489",
+  "measuredBy": "the cloud chair, session 01FbPLbfGHtg4xEGSkj1zE5B (X-42)",
   "date": "2026-11-02",
-  "note": "one new test file, tests/components/buttonLaunchSkin.test.jsx (the launch skin, X-39); no marker moved",
-  "files": 2813,
-  "parked": 361,
-  "credited": 2452,
-  "titles": 27128,
-  "suiteTitles": 7160
+  "note": "two new test files, tests/components/infoPill.test.jsx and tests/copy/sectionHelp.test.js (the ? pills, X-42); no marker moved",
+  "files": 2815,
+  "parked": 362,
+  "credited": 2453,
+  "titles": 27134,
+  "suiteTitles": 7161
 }
