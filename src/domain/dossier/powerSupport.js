@@ -50,7 +50,7 @@
 import { institutionBackingFactionName } from '../display/institutionProfile.js';
 import { factionArchetype, FACTION_ARCHETYPES as A } from '../factionArchetypes.js';
 import { governingFactionOf, nameOf } from '../rulingPower.js';
-import { getEditRecord } from '../userEdits.js';
+import { walkUserEdits } from '../userEdits.js';
 import { backingRowFor } from '../../data/institutionBacking.js';
 
 /**
@@ -225,8 +225,16 @@ export function houseBacksOf(settlement) {
   const institutions = settlement?.institutions;
   if (!Array.isArray(factions) || !Array.isArray(institutions)) return byHouse;
   const { roster, ruler, leaderOf, archOf } = powerIndex(settlement);
+  // THE DM'S WORD, read once through the settlement-level walk of the edit records (the
+  // one read of `_userEdits` the observed-shape register banks), keyed by roster index.
+  /** @type {Map<number, unknown>} */
+  const authoredBacks = new Map();
+  for (const edit of walkUserEdits(/** @type {import('../userEdits.js').EditableEntity} */ (settlement))) {
+    if (edit.kind === 'institution' && edit.path === 'backs' && edit.record) authoredBacks.set(edit.entityIndex, edit.record.value);
+  }
 
-  for (const inst of institutions) {
+  for (let index = 0; index < institutions.length; index += 1) {
+    const inst = institutions[index];
     const key = String(inst?.name || '');
     if (!key) continue;
     const row = backingRowFor(key);
@@ -244,11 +252,9 @@ export function houseBacksOf(settlement) {
       return true;
     };
     // THE DM'S WORD REPLACES EVERY DERIVED REASON, an empty word included: a house the DM
-    // cleared stands behind nobody. The weight splits equally. Read through the edit record,
-    // never off the row.
-    const edit = getEditRecord(inst, 'backs');
-    if (edit) {
-      const names = parseBacksValue(edit.value).filter((n) => roster.has(n.toLowerCase()));
+    // cleared stands behind nobody. The weight splits equally.
+    if (authoredBacks.has(index)) {
+      const names = parseBacksValue(authoredBacks.get(index)).filter((n) => roster.has(n.toLowerCase()));
       for (const n of names) add(n, 'authored', AUTHORED_BASIS, 1 / names.length);
       byHouse.set(key, list);
       continue;

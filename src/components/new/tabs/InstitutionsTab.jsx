@@ -49,7 +49,7 @@ import { institutionProvenanceOf } from '../../../domain/provenance/rosterProven
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
 import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
-import { isEdited } from '../../../domain/userEdits.js';
+import { walkUserEdits } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
@@ -111,6 +111,9 @@ function serviceRows(availableServices) {
 export function institutionsWithServices(settlement) {
   const rows = serviceRows(settlement?.availableServices);
   const backers = houseBacksOf(/** @type {any} */ (settlement) || {});
+  // X-45: the houses the DM spoke for, through the settlement-level walk of the edit records
+  const spoken = new Set();
+  for (const edit of walkUserEdits(settlement)) if (edit.kind === 'institution' && edit.path === 'backs') spoken.add(edit.entityIndex);
   /** @type {Map<string, object[]>} */
   const byInstitution = new Map();
   for (const svc of rows) {
@@ -128,7 +131,7 @@ export function institutionsWithServices(settlement) {
   // the institution shape itself (the observed-shape scan grounds the receiver that way).
   return (Array.isArray(settlement?.institutions) ? settlement.institutions : [])
     .filter(Boolean)
-    .map((inst) => {
+    .map((inst, i) => {
       const key = String(inst.name || '');
       return {
         inst,
@@ -137,7 +140,7 @@ export function institutionsWithServices(settlement) {
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
         // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
-        authored: isEdited(inst, 'backs'),
+        authored: spoken.has(i),
       };
     })
     .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
