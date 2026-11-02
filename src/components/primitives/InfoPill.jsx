@@ -14,7 +14,7 @@
  *
  * @param {{ text: string, label?: string }} props
  */
-import { useEffect, useId, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { BORDER_STRONG, CARD, FS, GOLD_DEEP, INK, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -24,7 +24,11 @@ export default function InfoPill({ text, label = 'What this shows' }) {
   const [hover, setHover] = useState(false);
   const mobile = useIsMobile();
   const ref = useRef(null);
-  const id = useId();
+  // A STABLE id spelled from the words themselves, never React's per-render counter: the
+  // dossier's dark goldens hash a rendered surface, and a counter made the same surface
+  // differ render to render. Each help sentence is used on one section (its walker pins
+  // that), so the slug is unique on a page.
+  const id = `info-pill-${String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48)}`;
   const open = pinned || hover;
 
   useEffect(() => {

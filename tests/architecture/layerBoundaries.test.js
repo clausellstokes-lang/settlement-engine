@@ -305,11 +305,12 @@ const PDF_ALLOWED_TREES = Object.freeze({
   pdf:    'its own tree',
   domain: 'the headless read-models and display leaves both surfaces share',
   lib:    'headless helpers (flags, proseSeams, entities, entityRefTokenizer)',
-  // ⛔ `copy` IS DELIBERATELY ABSENT, and the arm below is why. The rule as handed down
-  // named src/copy among the permitted trees; the MEASUREMENT says src/pdf never reaches
-  // it — the document's strings are authored in its own sections. Banking a permission the
-  // tree does not use would be a door left open onto an empty room, so it is not banked.
-  // If the PDF ever does read src/copy, that is a one-line addition with a reason.
+  // `copy` was DELIBERATELY ABSENT until X-42 (the owner, 2026-11-02): the measurement had
+  // said src/pdf never reached it. It does now, for exactly one constant — the Systems
+  // Health vintage sentence the screen's ? pill and the document's caption share
+  // (copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE), so the two can never drift. The
+  // reached-tree arm below holds it honest: if that read ever leaves, this row reds as stale.
+  copy:   'the one Systems Health vintage sentence shared with the screen (sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE)',
   data:   'engine data tables — supplyChainData\'s chain definitions',
   design: 'the shared token + ornament tree the PDF theme derives from (logo, emblemPaths, tokens)',
 });

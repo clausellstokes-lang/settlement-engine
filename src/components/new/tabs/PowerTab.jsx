@@ -111,8 +111,11 @@ function RulingChainBlock({ settlement }) {
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
       padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 6, ...FLUSH,
     }}>
-      <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
-        Who runs this place?<InfoPill text={SECTION_HELP.rulers} />
+      {/* the title and its ? pill are separate elements, so the pill's sentence never
+          joins the title's line (the phone floor reads a line by its element) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>Who runs this place?</span>
+        <InfoPill text={SECTION_HELP.rulers} />
       </div>
       {chain.power && (
         <ChainRow label="The power">

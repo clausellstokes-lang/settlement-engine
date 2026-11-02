@@ -31,7 +31,7 @@ import { cleanup, render } from '@testing-library/react';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 // The roster and its badges live on the Institutions tab since owner addendum T1-15
 // (2026-10-30); the Overview's Institutions collapsible is cut.
-import InstitutionsTab from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import InstitutionsTab, { institutionBadge } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { addInstitution } from '../../src/domain/events/mutateEntities.js';
 import { applyInstitutionLifecycleOutcome } from '../../src/domain/worldPulse/institutionLifecycle.js';
 
@@ -124,16 +124,28 @@ describe('InstitutionsTab cards — the provenance badge', () => {
     expect(pill.getAttribute('title')).toBe('Added by you');
   });
 
-  test('every legend mark is a non-empty glyph, and each one is reachable', () => {
+  test('the key lives in the page\'s ? pill (the legend row left with X-38/X-42), and every mark it promises is a non-empty glyph with a title', () => {
     const container = renderInstitutions(base);
+    // the legend row is gone: no "mark = meaning" span renders anywhere on the page
     const legendRows = [...container.querySelectorAll('span')]
       .filter(el => / = /.test(el.textContent) && el.children.length === 1);
-    const marks = legendRows.map(el => el.firstElementChild.textContent);
-    expect(marks.length, 'the badge legend must render').toBeGreaterThanOrEqual(5);
-    for (const mark of marks) {
-      expect(mark.trim(), 'a legend row promising a badge with no glyph is the defect this pins').not.toBe('');
+    expect(legendRows).toEqual([]);
+    // the key is the pill's second sentence, on the page header
+    const pillText = container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill-text"]');
+    expect(pillText, 'the page\'s ? pill must render').toBeTruthy();
+    expect(pillText.textContent).toContain('history, you, the living world, or a dependency');
+    // every mark the key promises is a glyph the badge really draws, each with its title
+    const marks = [
+      institutionBadge({ name: 'A', source: 'required' }),
+      institutionBadge({ name: 'B', source: 'forced' }),
+      institutionBadge({ name: 'C', source: 'auto-resolved' }),
+    ];
+    expect(marks.map(m => m.label)).toEqual(['REQ', 'YOU', '→']);
+    for (const m of marks) {
+      expect(String(m.label).trim(), 'a mark promised with no glyph is the defect this pins').not.toBe('');
+      expect(typeof m.title).toBe('string');
+      expect(m.title.length).toBeGreaterThan(0);
     }
-    expect(marks).toEqual(expect.arrayContaining(['REQ', 'YOU', '→', 'WORLD', '✦']));
   });
 
   test('an ordinary generated roster still badges only what generation stamped', () => {

@@ -994,6 +994,8 @@ const AGNOSTIC_TELLS = Object.freeze([
 // below means a NEW tell reds, a row that leaves must be struck here, and the
 // keys car cannot land without emptying its own entries.
 const AGNOSTIC_TELLS_DEFERRED = Object.freeze({
+  'src/data/institutionBacking.js :: spell-level scale':
+    'The same INSTITUTION key `Healer (divine, 1st level)`, repeated as the backing catalogue\'s row key (X-45, the owner 2026-11-02: one judgment call per catalogue family, keyed by the catalogue name); it leaves with the keys car together with its siblings below.',
   'src/data/institutionServices.js :: spell-level scale':
     'The INSTITUTION key `Healer (divine, 1st level)`, deferred to the keys car: it is pinned BY NAME in magicLicenceCensus.walker (four places) and arcaneIdentity.test, and lives in the order-authoritative institutionServiceKeys.generated.js.',
   'src/data/institutionDescVariants.js :: spell-level scale':

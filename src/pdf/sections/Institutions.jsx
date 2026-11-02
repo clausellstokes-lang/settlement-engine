@@ -253,12 +253,16 @@ function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) 
         </Text>
       )}
 
-      {/* X-40/X-45: the powers the house stands behind, the screen's Backs line in print. */}
+      {/* X-40/X-45: the powers the house stands behind, the screen's Backs line in print. ONE
+          text line, label and names together: the two-text block in its own view (the shape
+          the Services block uses below) made the renderer emit an invalid border geometry
+          wherever a non-wrapping card met a page break once the heights changed (pdfkit
+          "unsupported number"); a single line never did, measured lane by lane. */}
       {backs.length > 0 && (
-        <View style={{ marginTop: 2 }}>
-          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Backs</Text>
-          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>{backs.join(' · ')}</Text>
-        </View>
+        <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second, marginTop: 2 }}>
+          <Text style={{ color: palette.muted }}>Backs </Text>
+          {backs.join(' · ')}
+        </Text>
       )}
 
       {services.length > 0 && (

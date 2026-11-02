@@ -38,6 +38,9 @@ vi.mock('../../src/store/index.js', () => {
   const data = { campaigns: [] };
   function useStore(selector) { return selector(data); }
   useStore.__set = (next) => Object.assign(data, next);
+  // X-35: ServicesTab subscribes to the store to open a folded category for a focused row.
+  useStore.subscribe = () => () => {};
+  useStore.getState = () => data;
   return { useStore, default: useStore };
 });
 

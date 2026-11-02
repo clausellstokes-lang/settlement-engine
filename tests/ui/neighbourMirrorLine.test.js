@@ -48,8 +48,11 @@ const e = React.createElement;
  * this packet, against the very fixture below. Length and digest together: a digest alone
  * cannot say how far a drift went, and a length alone cannot say a byte changed.
  */
-const DARK_GOLDEN_BYTES = 2323;
-const DARK_GOLDEN_SHA256 = '7887e8db43028e683f4bd2141d21198ee12dc6b48b919337c8241eeb4190e216';
+// RE-RECORDED 2026-11-02 (the fifth round): 2323 → 3785 bytes. The dark surface grew by the
+// section's ? pill (X-42, copy/sectionHelp.js :: relationships) and the flush rule's edges
+// (X-44); the probe confirmed both strings in the rendered HTML and nothing of the mirror line.
+const DARK_GOLDEN_BYTES = 3785;
+const DARK_GOLDEN_SHA256 = '3e57d8808596bfbf663337587ba33458093fb313d095a40fc6bb173e5ea83985';
 
 const SETTLEMENT = {
   _seed: 'seed-in1b',

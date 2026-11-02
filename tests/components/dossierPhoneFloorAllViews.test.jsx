@@ -547,15 +547,20 @@ const desktopShape = (perView) => Object.fromEntries(
 // ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
 // sentence under the identity strip (proseFontSize), one new line: Summary/Overview measured 19 -> 20, sub14 18 -> 19. The block-law moves
 // (X-16) reorder lines and add none; every other view holds.
+// ── RE-MEASURED 2026-11-02 (the fifth round, X-35..X-45): the content moved, no token did. The Overview lost
+// the spatial layout and its routing line (X-37, X-38); the Institutions tab leads with the description and the
+// service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
+// pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
+// and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 20, sub14: 19 },
+  "Summary/Overview":    { measured: 11, sub14: 10 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured:  1, sub14:  1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
   "Summary/Plot Hooks":  { measured: 38, sub14: 38 },
-  "Systems/Services":    { measured: 96, sub14: 96 },
-  "Systems/Institutions": { measured: 96, sub14: 96 }, // T1-14, measured 2026-10-30 by this walk
+  "Systems/Services":    { measured: 97, sub14: 97 },
+  "Systems/Institutions": { measured: 64, sub14: 64 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
   // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
   "Systems/Economics":   { measured: 40, sub14: 40 },
@@ -579,7 +584,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
-  "World/NPCs":          { measured: 30, sub14: 30 },
+  "World/NPCs":          { measured: 31, sub14: 31 },
   // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
   // line longer in the fixture; no token moved.
   "World/Relationships": { measured: 61, sub14: 59 },
@@ -631,14 +636,19 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
 // sentence under the identity strip (proseFontSize), one new line: Summary/Overview prose 18 -> 19. The block-law moves
 // (X-16) reorder lines and add none; every other view holds.
+// ── RE-MEASURED 2026-11-02 (the fifth round, X-35..X-45): the content moved, no token did. The Overview lost
+// the spatial layout and its routing line (X-37, X-38); the Institutions tab leads with the description and the
+// service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
+// pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
+// and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
   "Summary/Plot Hooks":  { prose: 38, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Institutions": { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Services":    { prose: 96, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 63, chrome: 1, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
   "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
   // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
@@ -653,7 +663,7 @@ const MOBILE_BASELINE = Object.freeze({
   "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
-  "World/NPCs":          { prose: 30, chrome: 0, sub14: 0, sub12: 0 },
+  "World/NPCs":          { prose: 30, chrome: 1, sub14: 0, sub12: 0 },
   "World/Relationships": { prose: 59, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
