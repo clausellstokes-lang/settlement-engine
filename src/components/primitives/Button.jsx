@@ -191,37 +191,37 @@ export default function Button({
         borderRadius: R.sm,
         '--sf-btn-bg': v.bg,
         color: v.fg,
-        // THE LAUNCH SKIN'S TWO LAYERS. The letters: the gold gradient clipped to the glyphs
-        // of the button's OWN text, so the label stays a direct text node (a screen reader,
-        // a test and a copy all read the button as before). The ground: the glossed gradient
-        // on an inert layer beneath (the span below), inside the button's own stacking
-        // context. The border stays the button's. The hover rule's flat fill sits under the
-        // gradient and is never seen.
-        ...(launch ? {
-          position: 'relative',
-          isolation: 'isolate',
-          overflow: 'hidden', // the ground layer takes the button's own rounded edge
-          backgroundImage: launchSkin.shimmer.backgroundImage,
-          backgroundSize: launchSkin.shimmer.backgroundSize,
-          WebkitBackgroundClip: 'text',
-          backgroundClip: 'text',
-          color: 'transparent',
-          animation: launchSkin.shimmer.animation,
-        } : null),
         fontFamily: sans,
         fontSize: chromeFontSize(s.fontSize, isMobile),
         fontWeight: 800,
         cursor: inert ? 'not-allowed' : 'pointer',
-        // A launch-locked control is not a dimmed control: the register IS its state.
-        opacity: inert && !launch ? 0.62 : 1,
+        opacity: inert ? 0.62 : 1, // a launch-locked control is re-set to 1 below: the register IS its state
         boxShadow: v.shadow,
         transition: 'background 120ms ease-out, box-shadow 120ms ease-out, opacity 120ms ease-out',
         whiteSpace: 'nowrap',
         ...style,
+        // THE LAUNCH SKIN, TWO BACKGROUND LAYERS ON ONE ELEMENT, AFTER THE CALLER'S STYLE
+        // (a purchase button wears the register whatever look its site gave it). The first
+        // layer is the gold gradient clipped to the glyphs of the button's OWN text, so the
+        // label stays a direct text node (a screen reader, a test and a copy read the button
+        // as before); the second is the glossed ground, clipped to the border box beneath
+        // it. One element, so the letters paint over the ground, and the border and the
+        // rounded edge stay the button's. The house shimmer moves the first layer only (the
+        // ground is sized to its box). The hover rule's flat fill sits under both.
+        ...(launch ? {
+          backgroundImage: `${launchSkin.shimmer.backgroundImage}, ${launchSkin.ground}`,
+          backgroundSize: `${launchSkin.shimmer.backgroundSize}, 100% 100%`,
+          backgroundRepeat: 'no-repeat, no-repeat',
+          WebkitBackgroundClip: 'text, border-box',
+          backgroundClip: 'text, border-box',
+          color: 'transparent',
+          animation: launchSkin.shimmer.animation,
+          border: `1px solid ${launchSkin.border}`,
+          opacity: 1,
+        } : null),
       }}
       {...rest}
     >
-      {launch && <span aria-hidden="true" data-launch-ground="" style={{ position: 'absolute', inset: 0, zIndex: -1, background: launchSkin.ground }} />}
       {Icon && (launch ? <span style={{ display: 'inline-flex', color: launchSkin.ink }}>{Icon}</span> : Icon)}
       {children}
       {iconsOn && trailingIcon ? (launch ? <span style={{ display: 'inline-flex', color: launchSkin.ink }}>{trailingIcon}</span> : trailingIcon) : null}

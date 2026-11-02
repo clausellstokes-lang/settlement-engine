@@ -18,7 +18,8 @@ import { describe, it, expect, afterEach, beforeAll } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import Button from '../../src/components/primitives/Button.jsx';
 import AvailableAtLaunchPill, { AVAILABLE_AT_LAUNCH } from '../../src/components/primitives/AvailableAtLaunchPill.jsx';
-import { launchSkin } from '../../src/components/theme.js';
+import { PackTile } from '../../src/components/pricing/PricingTierCards.jsx';
+import { CARD, INK, launchSkin } from '../../src/components/theme.js';
 
 beforeAll(() => {
   if (typeof window !== 'undefined' && !window.matchMedia) {
@@ -33,9 +34,12 @@ function cssBackground(value) {
   el.style.background = value;
   return el.style.background || el.style.backgroundImage;
 }
-const ground = (el) => el.style.background || el.style.backgroundImage;
 const GROUND = () => cssBackground(launchSkin.ground);
 const SHIMMER = () => cssBackground(launchSkin.shimmer.backgroundImage);
+/** Both layers on the one element: the letters' gradient first, the ground beneath it. */
+const LAYERS = () => cssBackground(`${launchSkin.shimmer.backgroundImage}, ${launchSkin.ground}`);
+const layers = (el) => cssBackground(el.style.backgroundImage);
+const skinned = (el) => el.getAttribute('data-skin') === 'launch' && layers(el) === LAYERS() && el.style.animation.includes('sf-goldShimmer');
 
 describe('the Button primitive and the launch skin', () => {
   it('a locked purchase control (the pill inside it) wears the skin and is not dimmed', () => {
@@ -45,20 +49,35 @@ describe('the Button primitive and the launch skin', () => {
     </>);
     const locked = screen.getByRole('button', { name: new RegExp(`Buy this dossier.*${AVAILABLE_AT_LAUNCH}`) });
     const plain = screen.getByRole('button', { name: 'Save it' });
-    expect(locked.getAttribute('data-skin')).toBe('launch');
-    expect(ground(locked.querySelector('[data-launch-ground]'))).toBe(GROUND());
+    expect(skinned(locked), 'the locked control wears both layers and the shimmer').toBe(true);
     expect(locked.disabled).toBe(true);
     expect(locked.style.opacity).toBe('1'); // the register is the state; no 0.62 dim
-    // the letters: the gold gradient on the button's OWN text, so the label stays a direct text node
-    expect(cssBackground(locked.style.backgroundImage)).toBe(SHIMMER());
-    expect(locked.style.animation).toContain('sf-goldShimmer');
+    // the letters are the button's OWN text node (the gradient is clipped on the button)
     expect([...locked.childNodes].some((n) => n.nodeType === 3 && n.textContent.includes('Buy this dossier'))).toBe(true);
-    // the pill keeps its own gold-on-soft-gold colours inside the button
     expect(locked.querySelector('[data-launch-pill]')).toBeTruthy();
     // anchored: the plain primary beside it keeps its variant
     expect(plain.getAttribute('data-skin')).toBeNull();
-    expect(plain.querySelector('[data-launch-ground]')).toBeNull();
+    expect(layers(plain)).not.toBe(LAYERS());
     expect(plain.style.animation).toBe('');
+  });
+
+  it("a site's own background or colour does not strip the skin (the register wins on a purchase button)", () => {
+    render(<Button variant="primary" disabled style={{ background: CARD, color: INK }}>Subscribe<AvailableAtLaunchPill /></Button>);
+    const b = screen.getByRole('button', { name: /^Subscribe/ });
+    expect(skinned(b)).toBe(true);
+    expect(b.style.color).toBe('transparent');
+  });
+
+  it('a locked credit-pack tile gives its parchment inks to the skin (the price shimmers, the rest is gold)', () => {
+    const pack = { key: 'starter', credits: 25, price: '$4.99', perCredit: '$0.20', discount: null, tier: 'starter' };
+    render(<PackTile pack={pack} onBuy={() => {}} loading={false} emphasised={false} />);
+    const tile = screen.getByRole('button', { name: new RegExp(AVAILABLE_AT_LAUNCH) });
+    expect(skinned(tile)).toBe(true);
+    const price = tile.querySelector('[data-testid="pack-price"]');
+    const per = tile.querySelector('[data-testid="pack-per-credit"]');
+    expect(cssBackground(price.style.backgroundImage)).toBe(SHIMMER());
+    expect(price.style.color).toBe('transparent');
+    expect(per.style.color.toLowerCase()).toBe(cssColor(launchSkin.ink).toLowerCase());
   });
 
   it('variant="launch" wears the skin without the pill (the AI pass button), and a disabled one dims nothing', () => {
@@ -71,13 +90,18 @@ describe('the Button primitive and the launch skin', () => {
     const regen = screen.getByRole('button', { name: 'Regenerate' });
     const ai = screen.getByRole('button', { name: 'Stage it' });
     for (const b of [narrate, regen]) {
-      expect(b.getAttribute('data-skin')).toBe('launch');
-      expect(ground(b.querySelector('[data-launch-ground]'))).toBe(GROUND());
-      expect(cssBackground(b.style.backgroundImage)).toBe(SHIMMER());
+      expect(skinned(b)).toBe(true);
       expect(b.style.opacity).toBe('1');
     }
     expect(regen.disabled).toBe(true);
     expect(ai.getAttribute('data-skin')).toBeNull();
-    expect(ai.querySelector('[data-launch-ground]')).toBeNull();
+    expect(layers(ai)).not.toBe(LAYERS());
   });
 });
+
+/** jsdom serialises hex colours as rgb(); normalise a token to the same form. */
+function cssColor(token) {
+  const el = document.createElement('div');
+  el.style.color = token;
+  return el.style.color;
+}
