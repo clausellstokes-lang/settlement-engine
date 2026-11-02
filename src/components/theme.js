@@ -69,8 +69,12 @@ export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate
 export const LAUNCH          = L.LAUNCH;          // the idle rule and the accent
 export const LAUNCH_DEEP     = L.LAUNCH_DEEP;     // the active fill
 export const LAUNCH_BG       = L.LAUNCH_BG;       // the idle wash
-export const LAUNCH_INK      = L.LAUNCH_INK;      // gold letters on the active fill
-export const LAUNCH_INK_IDLE = L.LAUNCH_INK_IDLE; // gold letters on the idle wash
+export const LAUNCH_INK      = L.LAUNCH_INK;      // gold letters on the launch ground
+export const LAUNCH_INK_IDLE = L.LAUNCH_INK_IDLE; // gold letters on the launch wash
+export const LAUNCH_GROUND   = L.LAUNCH_GROUND;   // the regal ground (X-39)
+export const LAUNCH_DEEPEST  = L.LAUNCH_DEEPEST;  // the gloss's deep end
+export const LAUNCH_SHEEN    = L.LAUNCH_SHEEN;    // the gloss's highlight, the lightest ground a gold letter sits on
+export { launchSkin } from '../design/tokens.js';
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const GREEN_DEEP = L.GREEN_DEEP; // legible green text on green-100 tints (== color['green-700'])
 export const RED       = L.RED;

@@ -87,6 +87,14 @@ const lightColors = Object.freeze({
   'launch-500': '#6B4FB8',
   'launch-700': '#4A3A8C',
   'launch-100': '#EFEAF8',
+  // THE REGAL GROUND (the owner's third word, 2026-11-01: "a regal purple dark with a gloss
+  // and shimmering gold lettering just to give the feel that it is in fact till launch").
+  // launch-800 is the ground, launch-900 the gloss's deep end, launch-sheen the gloss's
+  // highlight: launch-800 under eight parts of white, spelled as a hex so the contrast pins
+  // can measure the LIGHTEST ground a gold letter ever sits on (gold-400 on it: 5.8:1).
+  'launch-800': '#2B2158',
+  'launch-900': '#1C1540',
+  'launch-sheen': '#3C3365',
 
   // Red — destructive actions and hard errors; the only non-destructive use is
   // the named operatorAlert semantic alias, fenced to unread-count chrome.
@@ -615,6 +623,39 @@ export function emitCssTokens(target = document.documentElement) {
   }
 }
 
+// ── THE LAUNCH SKIN ──────────────────────────────────────────────────────────
+// The owner, 2026-11-01 (ODQ §934.103, X-39): "a regal purple dark with a gloss and shimmering
+// gold lettering just to give the feel that it is in fact till launch", worn by everything that
+// is "until launch": the dossier's teaser tabs, every launch-locked purchase control (the one
+// that carries the Available-at-launch pill, lib/launchGate.js) and the AI pass button.
+//
+// THE GROUND is a gloss, which is a GRADIENT SHEEN and never a shadow: print has no z-axis
+// (design/organic/ink.js) and the deep-craft kill-list counts every boxShadow. THE LETTERS
+// are a gold gradient clipped to the glyphs and moved by the house shimmer keyframe
+// (index.css :: sf-goldShimmer), which stands still under prefers-reduced-motion. The
+// darkest letter stop is gold-400 and the lightest ground stop is launch-sheen, 5.8:1, and
+// every pair is pinned in tests/design/contrast.test.js. No rgba, no new literal outside
+// this file: the kill-list and the raw-colour budget read src/components, not here.
+export const launchSkin = Object.freeze({
+  /** The glossed ground. */
+  ground: `linear-gradient(180deg, ${color['launch-sheen']} 0%, ${color['launch-800']} 42%, ${color['launch-900']} 100%)`,
+  /** The ground's edge. */
+  border: color['launch-700'],
+  /** The rule under a LIT launch tab: brand gold on the deep ground (6:1, non-text). */
+  rule: color['gold-500'],
+  /** The letters' flat colour, for an icon or a glyph that cannot take the gradient. */
+  ink: color['gold-400'],
+  /** The shimmering letters: merge onto the label's own span, never onto an element that holds an icon. */
+  shimmer: Object.freeze({
+    backgroundImage: `linear-gradient(100deg, ${color['gold-400']} 0%, ${color['gold-100']} 45%, ${color['gold-400']} 62%, ${color['gold-400']} 100%)`,
+    backgroundSize: '220% 100%',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    color: 'transparent',
+    animation: 'sf-goldShimmer 3.8s ease-in-out infinite',
+  }),
+});
+
 // ── Backward-compat shim ───────────────────────────────────────────────────
 // These constants mirror the legacy `src/components/theme.js` exports so
 // the ~80 components that import from theme keep working unchanged. The
@@ -656,8 +697,11 @@ export const legacy = Object.freeze({
   LAUNCH:   color['launch-500'],    // the teaser tabs' hue: the idle rule, the strip's accent (the owner, 2026-11-01)
   LAUNCH_DEEP: color['launch-700'], // the ACTIVE teaser tab's fill
   LAUNCH_BG: color['launch-100'],   // the IDLE teaser tab's wash
-  LAUNCH_INK: color['gold-400'],    // gold lettering on the active teaser's fill (4.7:1)
-  LAUNCH_INK_IDLE: color['gold-800'], // gold lettering on the idle teaser's wash (6.3:1)
+  LAUNCH_INK: color['gold-400'],    // gold lettering on the launch ground (5.8:1 on the sheen)
+  LAUNCH_INK_IDLE: color['gold-800'], // gold lettering on the launch wash (6.3:1)
+  LAUNCH_GROUND: color['launch-800'],
+  LAUNCH_DEEPEST: color['launch-900'],
+  LAUNCH_SHEEN: color['launch-sheen'],
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

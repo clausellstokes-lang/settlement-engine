@@ -1,4 +1,4 @@
-import { FS, swatch, GOLD, LAUNCH, LAUNCH_DEEP, LAUNCH_BG, LAUNCH_INK, LAUNCH_INK_IDLE } from '../theme.js';
+import { FS, swatch, launchSkin } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 import { LAUNCH_TONE } from '../../domain/dossier/launchTeasers.js';
@@ -53,19 +53,18 @@ export default function DossierTabStrip({
               // purple tint so the AI surface reads as distinct from the
               // simulation tabs.
               const purple = id === 'dm_compass';
-              // THE LAUNCH TONE (the owner, 2026-11-01, ODQ §934.103): a tab that is still an
-              // "Available at launch" teaser (domain/dossier/launchTeasers.js, set by
-              // OutputContainer) wears the launch register, "purple hue with gold lettering"
-              // (the owner's second word, X-36): at rest the launch wash with gold letters
-              // under a launch rule; lit, the deep launch fill with brighter gold letters
-              // under a gold rule. The pairs are measured in tokens.js. The register leaves
-              // the tab the moment it has a live body.
+              // THE LAUNCH SKIN (the owner, 2026-11-01, ODQ §934.103, X-39): a tab that is
+              // still an "Available at launch" teaser (domain/dossier/launchTeasers.js, set by
+              // OutputContainer) wears the regal ground with shimmering gold letters, idle and
+              // lit alike; the lit one carries the gold rule. The same skin every launch-locked
+              // purchase control and the AI pass button wear (primitives/Button.jsx). The
+              // register leaves the tab the moment it has a live body.
               const launch = tone === LAUNCH_TONE;
-              const accent = purple ? '#7a3aa8' : launch ? GOLD : '#a0762a';
-              const idle   = purple ? '#7a5a92' : launch ? LAUNCH_INK_IDLE : swatch.inkMag3;
+              const accent = purple ? '#7a3aa8' : launch ? launchSkin.rule : '#a0762a';
+              const idle   = purple ? '#7a5a92' : launch ? launchSkin.ink : swatch.inkMag3;
               const bg = active
-                ? (purple ? '#f7f0fa' : launch ? LAUNCH_DEEP : '#fffbf5')
-                : (purple ? 'rgba(122,58,168,0.05)' : launch ? LAUNCH_BG : 'transparent');
+                ? (purple ? '#f7f0fa' : launch ? launchSkin.ground : '#fffbf5')
+                : (purple ? 'rgba(122,58,168,0.05)' : launch ? launchSkin.ground : 'transparent');
               return (
                 <button
                   type="button"
@@ -81,8 +80,8 @@ export default function DossierTabStrip({
                   // Roving tabIndex: only the selected tab is tabbable; the rest are
                   // reached via the arrow-key handler on the tablist.
                   tabIndex={active ? 0 : -1}
-                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : launch ? LAUNCH : 'transparent'), borderTop: active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? (launch ? LAUNCH_INK : accent) : idle, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
-                ><Icon size={14} />{label}</button>
+                  style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 3, padding: '10px 12px 8px', flexShrink: 0, background: bg, borderBottom: '2px solid ' + (active ? accent : 'transparent'), borderTop: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderLeft: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', borderRight: launch ? `1px solid ${launchSkin.border}` : active ? '1px solid #e0d0b0' : '1px solid transparent', cursor: 'pointer', color: active ? (launch ? launchSkin.ink : accent) : idle, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: active ? 700 : 500, fontFamily: 'Nunito, sans-serif', marginBottom: -1, whiteSpace: 'nowrap', WebkitTapHighlightColor: 'transparent' }}
+                ><Icon size={14} />{launch ? <span data-launch-ink="" style={launchSkin.shimmer}>{label}</span> : label}</button>
               );
             })}
           </div>

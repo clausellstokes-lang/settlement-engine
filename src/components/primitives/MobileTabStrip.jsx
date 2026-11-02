@@ -21,10 +21,9 @@
  *
  * @param {Object} props
  * @param {{id:string,label:React.ReactNode,tone?:string}[]} props.tabs  `tone: 'launch'` paints the
- *   launch register (the owner, 2026-11-01, ODQ §934.103, X-36): a tab that is still an
- *   "Available at launch" teaser reads "purple hue with gold lettering", as on the desktop
- *   strip — the launch wash with gold-800 letters at rest, the deep launch fill with
- *   gold-400 letters when lit (the pairs are measured in tokens.js).
+ *   launch skin (the owner, 2026-11-01, ODQ §934.103, X-39): a tab that is still an
+ *   "Available at launch" teaser wears the regal ground with shimmering gold letters, idle
+ *   and lit alike, as on the desktop strip; the lit one carries the gold rule.
  * @param {string} props.value               selected tab id
  * @param {(id:string)=>void} props.onChange selection setter
  * @param {string} [props.ariaLabel='Tabs']  tablist accessible name
@@ -32,8 +31,7 @@
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import {
-  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans,
-  LAUNCH, LAUNCH_DEEP, LAUNCH_BG, LAUNCH_INK, LAUNCH_INK_IDLE,
+  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans, launchSkin,
 } from '../theme.js';
 
 export default function MobileTabStrip({
@@ -175,10 +173,10 @@ export default function MobileTabStrip({
                 minHeight: 44,
                 flexShrink: 0,
                 border: 'none',
-                borderBottom: `2px solid ${active ? GOLD : launch ? LAUNCH : 'transparent'}`,
+                borderBottom: `2px solid ${active ? (launch ? launchSkin.rule : GOLD) : 'transparent'}`,
                 marginBottom: -1,
-                background: active ? (launch ? LAUNCH_DEEP : CARD) : (launch ? LAUNCH_BG : 'transparent'),
-                color: active ? (launch ? LAUNCH_INK : GOLD_DEEP) : (launch ? LAUNCH_INK_IDLE : MUTED),
+                background: launch ? launchSkin.ground : active ? CARD : 'transparent',
+                color: launch ? launchSkin.ink : active ? GOLD_DEEP : MUTED,
                 fontFamily: sans,
                 fontSize: FS.sm,
                 fontWeight: active ? 800 : 600,
@@ -187,7 +185,7 @@ export default function MobileTabStrip({
                 WebkitTapHighlightColor: 'transparent',
               }}
             >
-              {label}
+              {launch ? <span data-launch-ink="" style={launchSkin.shimmer}>{label}</span> : label}
             </button>
           );
         })}

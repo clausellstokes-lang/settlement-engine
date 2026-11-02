@@ -109,13 +109,13 @@
   },
   {
     "path": "src/components/dossier/DossierNarrativeButtons.jsx",
-    "line": 79,
+    "line": 81,
     "category": "floatInterpolation",
     "snippet": "{displayProgress || 'Weaving\\u2026'}"
   },
   {
     "path": "src/components/dossier/DossierNarrativeButtons.jsx",
-    "line": 116,
+    "line": 118,
     "category": "floatInterpolation",
     "snippet": "{regenerating ? (displayProgress || 'Regenerating\\u2026') : `Regenerate${costLabel}`}"
   },

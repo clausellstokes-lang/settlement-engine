@@ -21,6 +21,7 @@ import {
   GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, INK_DEEP, MUTED, PARCH, PARCH_100, RED, RED_BG,
   SECOND, SLATE, SLATE_BG, SLATE_DEEP,
   LAUNCH, LAUNCH_BG, LAUNCH_DEEP, LAUNCH_INK, LAUNCH_INK_IDLE,
+  LAUNCH_DEEPEST, LAUNCH_SHEEN, launchSkin,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -91,6 +92,7 @@ describe('Button variant text legibility (WCAG AA 4.5:1)', () => {
     ['aiSolid',   '#FFFFFF',   SLATE],     // loud AI primary — white on slate-500
     ['success',   GREEN,      GREEN_BG],
     ['info',      BLUE,       BLUE_BG],
+    ['launch',    LAUNCH_INK, LAUNCH_SHEEN], // the launch skin — gold-400 on the gloss's lightest stop
   ];
   for (const [name, fg, bg] of pairs) {
     test(`${name}: ${fg} on ${bg} >= ${AA_TEXT}:1`, () => {
@@ -164,6 +166,35 @@ describe('Launch register legibility (WCAG AA 4.5:1 text, 1.4.11 3:1 rules)', ()
     expect(ratio(GOLD, LAUNCH_DEEP)).toBeLessThan(AA_TEXT);
     expect(ratio(GOLD, LAUNCH_BG)).toBeLessThan(AA_TEXT);
     expect(ratio(GOLD, PARCH)).toBeLessThan(AA_TEXT);
+  });
+});
+
+// THE LAUNCH SKIN (the owner, 2026-11-01, X-39): a regal ground with a gloss and shimmering
+// gold letters. The gloss runs from launch-sheen (its lightest stop) down to launch-900; the
+// letters run from gold-400 (their darkest stop) up to gold-100. The worst pair the skin can
+// ever show is the darkest letter on the lightest ground, and that is the one pinned.
+describe('Launch skin legibility (WCAG AA 4.5:1 text, 1.4.11 3:1 rules)', () => {
+  test('the darkest letter stop on the lightest ground stop, and on the deepest', () => {
+    expect(ratio(LAUNCH_INK, LAUNCH_SHEEN)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(LAUNCH_INK, LAUNCH_DEEPEST)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(launchSkin.ink).toBe(LAUNCH_INK);
+  });
+  test('the gold rule under a lit tab clears the non-text floor on every ground stop', () => {
+    expect(ratio(launchSkin.rule, LAUNCH_SHEEN)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(launchSkin.rule, LAUNCH_DEEPEST)).toBeGreaterThanOrEqual(AA_UI);
+  });
+  test('the darker gold steps would fail on the sheen (documents why the letters run gold-400 to gold-100)', () => {
+    // Measured, not assumed: brand gold itself still clears AA on the sheen (4.7:1); the
+    // gradient starts one step lighter so its darkest stop keeps a margin, and gold-700 is
+    // the first step that fails.
+    expect(ratio(GOLD, LAUNCH_SHEEN)).toBeGreaterThanOrEqual(AA_TEXT);
+    expect(ratio(GOLD_DEEP, LAUNCH_SHEEN)).toBeLessThan(AA_TEXT);
+  });
+  test('the ground and the letters are the tokens, spelled once', () => {
+    expect(launchSkin.ground).toContain(LAUNCH_SHEEN);
+    expect(launchSkin.ground).toContain(LAUNCH_DEEPEST);
+    expect(launchSkin.shimmer.backgroundImage).toContain(LAUNCH_INK);
+    expect(launchSkin.shimmer.animation).toContain('sf-goldShimmer');
   });
 });
 

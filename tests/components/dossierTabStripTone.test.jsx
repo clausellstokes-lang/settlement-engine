@@ -1,23 +1,22 @@
 /** @vitest-environment jsdom */
 /**
- * dossierTabStripTone.test.jsx — THE LAUNCH REGISTER ON BOTH STRIPS (THE OWNER, 2026-11-01,
- * ODQ §934.103: the teaser tabs "give them a purpleish hue just for distinction", then
- * "Purple hue with gold lettering if that helps" — X-36).
+ * dossierTabStripTone.test.jsx — THE LAUNCH SKIN ON BOTH STRIPS (THE OWNER, 2026-11-01,
+ * ODQ §934.103: "a purpleish hue just for distinction" → "Purple hue with gold lettering" →
+ * "a regal purple dark with a gloss and shimmering gold lettering just to give the feel that it
+ * is in fact till launch" — X-39).
  *
- * A tab entry carrying `tone: 'launch'` reads in the launch register on the desktop strip
- * and on the phone strip alike: at rest the launch wash with gold-800 letters under a launch
- * rule, lit the deep launch fill with gold-400 letters under a gold rule. A tab without the
- * tone keeps the simulation's own colours — asserted on the same render, so the absence is
- * anchored on the presence. The contrast of each pair is pinned in tests/design/contrast.test.js.
+ * A tab entry carrying `tone: 'launch'` wears the regal ground with shimmering gold letters on
+ * the desktop strip and on the phone strip alike, idle and lit; the lit one carries the gold
+ * rule. A tab without the tone keeps the simulation's own colours — asserted on the same
+ * render, so the absence is anchored on the presence. The pairs are pinned in
+ * tests/design/contrast.test.js; the skin itself is the one in design/tokens.js :: launchSkin.
  */
 import React from 'react';
 import { describe, it, expect, afterEach, beforeAll } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
 import DossierTabStrip from '../../src/components/dossier/DossierTabStrip.jsx';
 import MobileTabStrip from '../../src/components/primitives/MobileTabStrip.jsx';
-import {
-  GOLD, GOLD_DEEP, LAUNCH, LAUNCH_DEEP, LAUNCH_BG, LAUNCH_INK, LAUNCH_INK_IDLE,
-} from '../../src/components/theme.js';
+import { GOLD_DEEP, launchSkin } from '../../src/components/theme.js';
 import { LAUNCH_TONE } from '../../src/domain/dossier/launchTeasers.js';
 
 const Icon = () => <svg aria-hidden="true" />;
@@ -35,50 +34,58 @@ beforeAll(() => {
 afterEach(() => cleanup());
 
 const hex = (s) => String(s).toLowerCase();
+/** jsdom keeps a gradient background as the author wrote it. */
+/** jsdom re-serialises the colours inside a gradient; read a value back the same way. */
+function cssBackground(value) {
+  const el = document.createElement('div');
+  el.style.background = value;
+  return el.style.background || el.style.backgroundImage;
+}
+const ground = (el) => el.style.background || el.style.backgroundImage;
+const GROUND = () => cssBackground(launchSkin.ground);
+const SHIMMER = () => cssBackground(launchSkin.shimmer.backgroundImage);
+
+function expectLaunchTab(tab, { lit }) {
+  expect(tab.getAttribute('data-tone')).toBe('launch');
+  expect(ground(tab)).toBe(GROUND());
+  expect(hex(tab.style.color)).toBe(hex(cssColor(launchSkin.ink)));
+  const ink = tab.querySelector('[data-launch-ink]');
+  expect(ink, 'the label shimmers on its own span').toBeTruthy();
+  expect(cssBackground(ink.style.backgroundImage)).toBe(SHIMMER());
+  expect(ink.style.animation).toContain('sf-goldShimmer');
+  if (lit) expect(tab.style.borderBottom).toContain(cssColor(launchSkin.rule));
+  else expect(tab.style.borderBottom).toContain('transparent');
+}
 
 describe('the desktop strip', () => {
-  it('paints a launch-toned tab purple with gold letters, idle and active, and leaves the live tab alone', () => {
+  it('wears the regal ground with shimmering gold letters on a launch tab, idle and lit, and leaves the live tab alone', () => {
     render(<DossierTabStrip scroll={() => {}} scrollRef={{ current: null }} tabs={TABS} selectedTab="war" setActiveTab={() => {}} />);
     const war = screen.getByRole('tab', { name: 'War' });
     const rumors = screen.getByRole('tab', { name: 'Rumors & News' });
     const history = screen.getByRole('tab', { name: 'History' });
-    expect(war.getAttribute('data-tone')).toBe('launch');
-    expect(rumors.getAttribute('data-tone')).toBe('launch');
-    expect(history.getAttribute('data-tone')).toBeNull(); // anchored: the two launch tabs carry the attribute on this render
-    // the ACTIVE launch tab: gold letters on the deep launch fill, under a gold rule
-    expect(hex(war.style.color)).toBe(hex(cssColor(LAUNCH_INK)));
-    expect(hex(war.style.background)).toBe(hex(cssColor(LAUNCH_DEEP)));
-    expect(war.style.borderBottom).toContain(cssColor(GOLD));
-    // the IDLE launch tab: gold letters on the launch wash
-    expect(hex(rumors.style.color)).toBe(hex(cssColor(LAUNCH_INK_IDLE)));
-    expect(hex(rumors.style.background)).toBe(hex(cssColor(LAUNCH_BG)));
-    // the live tab keeps its own ink and no wash
-    expect(hex(history.style.color)).not.toBe(hex(cssColor(LAUNCH_INK_IDLE)));
-    expect(hex(history.style.background)).not.toBe(hex(cssColor(LAUNCH_BG)));
+    expectLaunchTab(war, { lit: true });
+    expectLaunchTab(rumors, { lit: false });
+    // the live tab keeps its own ink, ground and label
+    expect(history.getAttribute('data-tone')).toBeNull();
+    expect(ground(history)).not.toBe(GROUND());
+    expect(hex(history.style.color)).not.toBe(hex(cssColor(launchSkin.ink)));
+    expect(history.querySelector('[data-launch-ink]')).toBeNull();
   });
 });
 
 describe('the phone strip', () => {
-  it('paints a launch-toned tab purple with gold letters, idle and active, and leaves the live tab alone', () => {
+  it('wears the regal ground with shimmering gold letters on a launch tab, idle and lit, and leaves the live tab alone', () => {
     render(<MobileTabStrip tabs={TABS} value="rumors" onChange={() => {}} ariaLabel="Dossier tabs" />);
     const war = screen.getByRole('tab', { name: 'War' });
     const rumors = screen.getByRole('tab', { name: 'Rumors & News' });
     const history = screen.getByRole('tab', { name: 'History' });
-    expect(rumors.getAttribute('data-tone')).toBe('launch');
-    expect(war.getAttribute('data-tone')).toBe('launch');
-    expect(history.getAttribute('data-tone')).toBeNull(); // anchored: as above
-    // the ACTIVE launch tab: gold letters on the deep launch fill, under the strip's gold rule
-    expect(hex(rumors.style.color)).toBe(hex(cssColor(LAUNCH_INK)));
-    expect(hex(rumors.style.background)).toBe(hex(cssColor(LAUNCH_DEEP)));
-    expect(rumors.style.borderBottom).toContain(cssColor(GOLD));
-    // the IDLE launch tab: gold letters on the launch wash under a launch rule
-    expect(hex(war.style.color)).toBe(hex(cssColor(LAUNCH_INK_IDLE)));
-    expect(hex(war.style.background)).toBe(hex(cssColor(LAUNCH_BG)));
-    expect(war.style.borderBottom).toContain(cssColor(LAUNCH));
-    // the idle live tab is muted, not gold, and carries no wash
-    expect(hex(history.style.color)).not.toBe(hex(cssColor(LAUNCH_INK_IDLE)));
-    expect(hex(history.style.color)).not.toBe(hex(cssColor(GOLD_DEEP)));
-    expect(hex(history.style.background)).not.toBe(hex(cssColor(LAUNCH_BG)));
+    expectLaunchTab(rumors, { lit: true });
+    expectLaunchTab(war, { lit: false });
+    expect(history.getAttribute('data-tone')).toBeNull();
+    expect(ground(history)).not.toBe(GROUND());
+    expect(hex(history.style.color)).not.toBe(hex(cssColor(launchSkin.ink)));
+    expect(hex(history.style.color)).not.toBe(hex(cssColor(GOLD_DEEP))); // idle live tab is muted, not gold
+    expect(history.querySelector('[data-launch-ink]')).toBeNull();
   });
 });
 

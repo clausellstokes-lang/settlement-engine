@@ -1,3 +1,4 @@
+import { Children, isValidElement } from 'react';
 import { Loader2 } from 'lucide-react';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -5,7 +6,7 @@ import { chromeFontSize } from '../../design/proseScale.js';
 import {
   AMBER, AMBER_BG, AMBER_DEEP, BLUE, BLUE_BG, FS,
   GOLD, GOLD_SOFT, GOLD_TXT, GREEN, GREEN_BG, INK, RED, RED_BG, R, SECOND, SP,
-  SLATE, SLATE_BG, SLATE_DEEP, sans, swatch,
+  SLATE, SLATE_BG, SLATE_DEEP, sans, swatch, launchSkin,
 } from '../theme.js';
 
 // Variant foreground/background pairs are chosen so every text+surface pair
@@ -93,7 +94,30 @@ const VARIANTS = {
     border: GOLD,
     shadow: 'none',
   },
+  // THE LAUNCH SKIN (the owner, 2026-11-01, X-39): "a regal purple dark with a gloss and
+  // shimmering gold lettering just to give the feel that it is in fact till launch". The
+  // fill is the glossed ground (a gradient, never a shadow), the letters shimmer on their
+  // own span below. Worn explicitly by the AI pass button, and IMPLICITLY by every control
+  // that carries the Available-at-launch pill (lib/launchGate.js): a launch-locked purchase
+  // button never has to ask for it. Gold-400 on the sheen is 5.8:1 (contrast.test.js).
+  launch: {
+    bg: launchSkin.ground,
+    fg: launchSkin.ink,
+    border: launchSkin.border,
+    shadow: 'none',
+  },
 };
+
+/**
+ * A control carrying the Available-at-launch pill as a direct child is launch-locked. The pill
+ * marks itself (`AvailableAtLaunchPill.isLaunchPill`), so this reads a flag and imports nothing:
+ * the Button sits in every route's first-paint graph and must not pull the pill into it.
+ * @param {import('react').ReactNode} children
+ */
+function carriesLaunchPill(children) {
+  return Children.toArray(children).some((child) =>
+    isValidElement(child) && typeof child.type === 'function' && /** @type {any} */ (child.type).isLaunchPill === true);
+}
 
 // minHeights are raised toward the ~44px at-the-table usability floor (P7/P8):
 // the prompt notes mobile matters and the previous 28/34/40 sat under it. Bumped
@@ -125,7 +149,10 @@ export default function Button({
   className = '',
   ...rest
 }) {
-  const v = VARIANTS[variant] || VARIANTS.secondary;
+  // The launch skin is worn by request or by the pill (X-39); the pill is the launch gate's
+  // own mark, so a locked purchase control wears the register without naming it.
+  const launch = variant === 'launch' || carriesLaunchPill(children);
+  const v = launch ? VARIANTS.launch : (VARIANTS[variant] || VARIANTS.secondary);
   const s = SIZES[size] || SIZES.md;
   // Mobile-only 44px tap floor (at-the-table reachability). Desktop density is
   // unchanged: the existing SIZES.minHeight (sm 32 / md 40 / lg 44) win there.
@@ -151,6 +178,7 @@ export default function Button({
       // --sf-btn-bg custom property so :hover can derive a perceivable shift
       // for EVERY variant; a caller's inline `background` override still wins.
       className={`oc-m-press sf-btn ${className}`.trim()}
+      data-skin={launch ? 'launch' : undefined}
       style={{
         display: 'inline-flex',
         alignItems: 'center',
@@ -163,11 +191,29 @@ export default function Button({
         borderRadius: R.sm,
         '--sf-btn-bg': v.bg,
         color: v.fg,
+        // THE LAUNCH SKIN'S TWO LAYERS. The letters: the gold gradient clipped to the glyphs
+        // of the button's OWN text, so the label stays a direct text node (a screen reader,
+        // a test and a copy all read the button as before). The ground: the glossed gradient
+        // on an inert layer beneath (the span below), inside the button's own stacking
+        // context. The border stays the button's. The hover rule's flat fill sits under the
+        // gradient and is never seen.
+        ...(launch ? {
+          position: 'relative',
+          isolation: 'isolate',
+          overflow: 'hidden', // the ground layer takes the button's own rounded edge
+          backgroundImage: launchSkin.shimmer.backgroundImage,
+          backgroundSize: launchSkin.shimmer.backgroundSize,
+          WebkitBackgroundClip: 'text',
+          backgroundClip: 'text',
+          color: 'transparent',
+          animation: launchSkin.shimmer.animation,
+        } : null),
         fontFamily: sans,
         fontSize: chromeFontSize(s.fontSize, isMobile),
         fontWeight: 800,
         cursor: inert ? 'not-allowed' : 'pointer',
-        opacity: inert ? 0.62 : 1,
+        // A launch-locked control is not a dimmed control: the register IS its state.
+        opacity: inert && !launch ? 0.62 : 1,
         boxShadow: v.shadow,
         transition: 'background 120ms ease-out, box-shadow 120ms ease-out, opacity 120ms ease-out',
         whiteSpace: 'nowrap',
@@ -175,9 +221,10 @@ export default function Button({
       }}
       {...rest}
     >
-      {Icon}
+      {launch && <span aria-hidden="true" data-launch-ground="" style={{ position: 'absolute', inset: 0, zIndex: -1, background: launchSkin.ground }} />}
+      {Icon && (launch ? <span style={{ display: 'inline-flex', color: launchSkin.ink }}>{Icon}</span> : Icon)}
       {children}
-      {iconsOn ? trailingIcon : null}
+      {iconsOn && trailingIcon ? (launch ? <span style={{ display: 'inline-flex', color: launchSkin.ink }}>{trailingIcon}</span> : trailingIcon) : null}
     </button>
   );
 }

@@ -26,3 +26,10 @@ export default function AvailableAtLaunchPill({ style } = {}) {
     </Pill>
   );
 }
+
+/**
+ * THE MARK THE BUTTON READS (X-39): a Button carrying this pill as a direct child wears the
+ * launch skin. A static flag rather than an import, so the Button primitive (in every route's
+ * first-paint graph) pulls nothing new and the pill stays the launch gate's own mark.
+ */
+AvailableAtLaunchPill.isLaunchPill = true;
