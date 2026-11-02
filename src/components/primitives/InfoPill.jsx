@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from 'react';
 import { BORDER_STRONG, CARD, FS, GOLD_DEEP, INK, sans } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
+import { slugify } from '../../kernel/slugify.js';
 
 export default function InfoPill({ text, label = 'What this shows' }) {
   const [pinned, setPinned] = useState(false);
@@ -27,8 +28,10 @@ export default function InfoPill({ text, label = 'What this shows' }) {
   // A STABLE id spelled from the words themselves, never React's per-render counter: the
   // dossier's dark goldens hash a rendered surface, and a counter made the same surface
   // differ render to render. Each help sentence is used on one section (its walker pins
-  // that), so the slug is unique on a page.
-  const id = `info-pill-${String(text).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48)}`;
+  // that), so the slug is unique on a page. The kernel's one slugify primitive spells it (a
+  // hand-rolled slug is a shrink-only idiom), at the cap the inline copy had, so every id
+  // reads exactly as before.
+  const id = `info-pill-${slugify(text, { max: 48 })}`;
   const open = pinned || hover;
 
   useEffect(() => {
