@@ -75,10 +75,15 @@ const lightColors = Object.freeze({
 
   // Launch — THE OWNER, 2026-11-01 (ODQ §934.103): the dossier tabs that stand in the
   // strip as "Available at launch" teasers (War, Rumors & News, Faith while no live body
-  // exists) wear "a purpleish hue just for distinction". A register of its own, not the
-  // AI slate (C13) and not the gold of the simulation's live tabs: launch-500 is the
-  // idle label and the active underline, launch-700 the active label (AA on parchment
-  // and on launch-100), launch-100 the active tab's wash.
+  // exists) wear "a purpleish hue just for distinction" and, the owner's second word the
+  // same day, "purple hue with gold lettering". A register of its own, not the AI slate
+  // (C13) and not the gold of the simulation's live tabs. The pairs, each measured
+  // (tests/design/contrast.test.js recomputes): an IDLE teaser tab is the launch-100 wash
+  // with gold-800 letters (6.3:1, AA) under a launch-500 rule; the ACTIVE teaser tab is
+  // the launch-700 fill with gold-400 letters (4.7:1, AA) under a gold-500 rule
+  // (3.3:1 on the fill, the non-text floor). Gold-500 as TEXT fails on parchment (2.4:1)
+  // and on the fill (3.3:1), which is why the lettering is gold-800 at rest and gold-400
+  // when lit, never gold-500. launch-500 stays the idle rule and the strip's accent.
   'launch-500': '#6B4FB8',
   'launch-700': '#4A3A8C',
   'launch-100': '#EFEAF8',
@@ -648,9 +653,11 @@ export const legacy = Object.freeze({
   SLATE:    color['slate-500'],
   SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
   SLATE_BG: color['slate-100'],
-  LAUNCH:   color['launch-500'],    // the teaser tabs' hue (the owner, 2026-11-01)
-  LAUNCH_DEEP: color['launch-700'], // the active teaser tab's label
-  LAUNCH_BG: color['launch-100'],   // the active teaser tab's wash
+  LAUNCH:   color['launch-500'],    // the teaser tabs' hue: the idle rule, the strip's accent (the owner, 2026-11-01)
+  LAUNCH_DEEP: color['launch-700'], // the ACTIVE teaser tab's fill
+  LAUNCH_BG: color['launch-100'],   // the IDLE teaser tab's wash
+  LAUNCH_INK: color['gold-400'],    // gold lettering on the active teaser's fill (4.7:1)
+  LAUNCH_INK_IDLE: color['gold-800'], // gold lettering on the idle teaser's wash (6.3:1)
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

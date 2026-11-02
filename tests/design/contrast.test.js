@@ -20,6 +20,7 @@ import {
   GOLD, GOLD_DEEP, GOLD_SOFT,
   GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, INK_DEEP, MUTED, PARCH, PARCH_100, RED, RED_BG,
   SECOND, SLATE, SLATE_BG, SLATE_DEEP,
+  LAUNCH, LAUNCH_BG, LAUNCH_DEEP, LAUNCH_INK, LAUNCH_INK_IDLE,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -139,6 +140,30 @@ describe('Pricing decorative gold-mark legibility (WCAG 1.4.11 — 3:1 on card)'
   });
   test('brand GOLD would fail the graphics floor as a lone mark (documents the lift)', () => {
     expect(ratio(GOLD, CARD)).toBeLessThan(AA_UI);
+  });
+});
+
+// THE LAUNCH REGISTER (the owner, 2026-11-01, ODQ §934.103, X-36): the dossier's
+// "Available at launch" teaser tabs wear "purple hue with gold lettering". Gold-500 as
+// TEXT fails on parchment and on the launch fill, which is why the letters are gold-800 at
+// rest (on the launch wash) and gold-400 when lit (on the deep launch fill); the rules
+// beneath are non-text and owe the 3:1 floor. Both strips read these four tokens.
+describe('Launch register legibility (WCAG AA 4.5:1 text, 1.4.11 3:1 rules)', () => {
+  test('the active teaser tab: gold-400 letters on the deep launch fill', () => {
+    expect(ratio(LAUNCH_INK, LAUNCH_DEEP)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('the idle teaser tab: gold-800 letters on the launch wash', () => {
+    expect(ratio(LAUNCH_INK_IDLE, LAUNCH_BG)).toBeGreaterThanOrEqual(AA_TEXT);
+  });
+  test('the rules clear the non-text floor: gold on the fill, launch on the wash and on parchment', () => {
+    expect(ratio(GOLD, LAUNCH_DEEP)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(LAUNCH, LAUNCH_BG)).toBeGreaterThanOrEqual(AA_UI);
+    expect(ratio(LAUNCH, PARCH)).toBeGreaterThanOrEqual(AA_UI);
+  });
+  test('brand gold as lettering would fail on both grounds (documents why the letters are not gold-500)', () => {
+    expect(ratio(GOLD, LAUNCH_DEEP)).toBeLessThan(AA_TEXT);
+    expect(ratio(GOLD, LAUNCH_BG)).toBeLessThan(AA_TEXT);
+    expect(ratio(GOLD, PARCH)).toBeLessThan(AA_TEXT);
   });
 });
 
