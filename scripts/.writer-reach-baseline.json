@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "7cfe0bfa79f18fb7361aa7d2bc2f0286f9d6a45d",
+ "frozenAtSha": "4f9dc4d7060423921ecee6a7a3e313a4d3720043",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
  "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
- "verdictDigest": "0af82803f40d5fc6b487132aed2180ce3d0361a7a86e369c3037ab41e499434e",
+ "verdictDigest": "b973136d089b9f5e4b8e4a73b8e3ce14085c1ea7549dafc23c133a34074a5e09",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -72,9 +72,9 @@
   "json-export"
  ],
  "closureSizes": {
-  "web-display": 737,
-  "web-transitive": 933,
-  "dossier-pdf": 432,
+  "web-display": 743,
+  "web-transitive": 937,
+  "dossier-pdf": 434,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 340,
@@ -83,23 +83,23 @@
  },
  "population": {
   "judged": 6998,
-  "lit": 570,
-  "litName": 5107,
+  "lit": 571,
+  "litName": 5106,
   "dark": 1321,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1671,
-  "sites": 39632,
-  "propRead": 37513,
+  "files": 1681,
+  "sites": 39749,
+  "propRead": 37610,
   "elemRead": 0,
-  "destructure": 2104,
+  "destructure": 2124,
   "inOp": 15,
-  "rGrades": 6072,
-  "nGrades": 961621,
-  "resolvedReceivers": 6834
+  "rGrades": 6074,
+  "nGrades": 966627,
+  "resolvedReceivers": 6833
  },
  "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
@@ -8150,7 +8150,7 @@
   "warEconomy on autoApplied": "",
   "desc on availableServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "institution on availableServices": "campaign-pdf=N dossier-pdf=R foundry=N web-display=R web-transitive=N world-book=N",
-  "name on availableServices": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
+  "name on availableServices": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=N web-transitive=R world-book=N",
   "awareSince on b": "dossier-pdf=N foundry=N web-transitive=N",
   "heardProgress on b": "dossier-pdf=N foundry=N web-transitive=N",
   "heardWeek on b": "dossier-pdf=N foundry=N web-transitive=N",
