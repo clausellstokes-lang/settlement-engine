@@ -286,13 +286,10 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
             composer it opens stays, so a route to it must too. Router-gated on the flag. */}
         {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
       </div>
-      {/* ── THE ROUTING LINE (X-18; BUILD-W2-BLOCKLAW U2) ── the one page every reader lands on
-          says once, plainly, what the four groups of the strip hold. A statement, not a
-          tutorial: no verb tells the reader what to do. */}
-      <p data-testid="overview-routing-line" style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,lineHeight:1.5,margin:'-6px 0 14px'}}>
-        {`Summary holds the glance and the open threads; Systems, how the ${deskTierNoun || 'settlement'} trades, rules and holds together; World, its people, customs, past and beliefs; Notes, the records kept in play.`}
-      </p>
-
+      {/* THE ROUTING LINE (X-18) IS CUT (the owner, 2026-11-01, X-38): "sentences that are
+          meta descriptive such as 'summary holds the glance…' … remove them. We're going to do
+          something better." The orientation a reader needs moves to the section headers' own
+          marks (the ? pills), never to a sentence about the page. */}
       {/* ── THE PLACE (chair ruling T1-2, 2026-10-30; rubric R5) ──────────
             ONE passage under one title: the arrival scene first (the owner's Voice
             Program scene, §934.88, frozen at generation and printed verbatim), then

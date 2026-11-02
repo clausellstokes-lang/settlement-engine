@@ -108,6 +108,8 @@ describe('OverviewTab smoke', () => {
     for (const gone of ['Village green beside the mill', 'Spatial Layout', 'Market Quarter', 'stalls and a well', 'Parish']) {
       expectAbsentWithAnchor(text, gone, 'grassland', 'the spatial layout cut from the summary page (X-37)');
     }
+    // X-38 (the owner, 2026-11-01): no sentence about the page itself. The routing line is gone.
+    expectAbsentWithAnchor(text, 'Summary holds', 'grassland', 'the routing line cut from the Overview (X-38)');
   });
 });
 
@@ -213,24 +215,8 @@ describe('OverviewTab carries the Table View trigger the removed DM Summary tab 
   });
 });
 
-describe('OverviewTab carries one routing sentence under the identity strip (X-18)', () => {
-  test('the sentence names the four groups once, directly under the strip, and instructs nothing', () => {
-    const { container } = render(e(OverviewTab, { settlement: villageSettlement }));
-    const line = container.querySelector('[data-testid="overview-routing-line"]');
-    expect(line).toBeTruthy();
-    const text = line.textContent || '';
-    for (const group of ['Summary', 'Systems', 'World', 'Notes']) expect(text).toContain(group);
-    expect(text).toContain('how the village trades');
-    // No verb of instruction and no em dash (the copy law).
-    for (const verb of ['Click', 'click', 'Tap', 'tap', 'Select', 'select', 'Go to', 'go to', 'See ', 'see ']) {
-      expectAbsentWithAnchor(text, verb, 'Summary holds', 'the routing line turned into a tutorial');
-    }
-    expectAbsentWithAnchor(text, '\u2014', 'Summary holds', 'the routing line carries an em dash');
-    // One sentence, under the strip: its previous sibling is the identity strip that names the town.
-    expect(container.querySelectorAll('[data-testid="overview-routing-line"]')).toHaveLength(1);
-    expect(line.previousElementSibling?.textContent || '').toContain(villageSettlement.name);
-  });
-});
+// The X-18 routing sentence's own describe left with the sentence (X-38, the owner, 2026-11-01:
+// no sentence about the page itself); its absence is pinned in the Overview smoke block above.
 
 describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () => {
   test('answer (strip, routing line, the place), then the facts, then the prose, then the DM material, then the reference', () => {
@@ -248,7 +234,7 @@ describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () =>
       return i;
     };
     const sequence = [
-      'Summary holds',          // (1) the answer: identity strip + its routing line
+      'Orderby',                // (1) the answer: the identity strip (its routing line left with X-38)
       'Arrival fixture scene.', // (1) the answer: THE PLACE, the walk-in scene (chair ruling X-25a)
       'Systems Health',         // (2) the facts: status tags
       'Tension fixture.',       // (2) the facts: tension rows
