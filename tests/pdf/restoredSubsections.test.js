@@ -25,6 +25,8 @@ import { Institutions } from '../../src/pdf/sections/Institutions.jsx';
 import { NotableNPCs } from '../../src/pdf/sections/NotableNPCs.jsx';
 import { Overview } from '../../src/pdf/sections/Overview.jsx';
 import { PROXY_SERVICE_HOSTS } from '../../src/data/servicesData.js';
+import { institutionBackers } from '../../src/domain/dossier/powerSupport.js';
+import { institutionDisplayName } from '../../src/domain/display/institutionDisplayName.js';
 
 // Recursively flatten an element tree to its text leaves. Function components are
 // executed (plain functions in src/pdf — no hooks); hosts walked via children.
@@ -231,6 +233,19 @@ describe('F14 / RS-19 — the PDF Institutions chapter lists no proxy-surfaced m
     const on = joined(Institutions({ settlement, vm }));
     expect(on, 'a real house still lists its menu').toContain(owned[0].desc);
     for (const r of proxied) if (r.desc && !owned.some((o) => o.desc === r.desc)) expect(on).not.toContain(r.desc); // anchored: a real menu row is asserted on this render
+  });
+});
+
+describe('X-40 / X-45 — the PDF Institutions chapter prints the Backs line under each house', () => {
+  it('every backed house prints its powers, keyed by the display name the chapter prints', () => {
+    const backers = institutionBackers(settlement);
+    expect(backers.size, 'fixture premise: the city has backed houses').toBeGreaterThan(0);
+    const on = joined(Institutions({ settlement, vm }));
+    expect(on).toContain('Backs');
+    for (const [raw, powers] of backers) {
+      expect(on, `${raw} prints`).toContain(institutionDisplayName(raw));
+      for (const p of powers) expect(on, `${raw} backs ${p}`).toContain(p);
+    }
   });
 });
 

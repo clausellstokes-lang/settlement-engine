@@ -20,6 +20,7 @@ import { type, palette, space, factionColors, pt } from '../theme.js';
 import { cap, label, humanize, hookText, plural } from '../lib/format.js';
 import { anchorTarget } from '../primitives/EntityRef.jsx';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+import { institutionBackers } from '../../domain/dossier/powerSupport.js';
 import { edged } from '../../design/edgedBox.js';
 import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
 
@@ -46,6 +47,9 @@ export function Institutions({ settlement, narrativeMode, vm }) {
   // (the slice carries the display label, and `institutionDisplayName` is the one spelling
   // both sides use), so the pinned view model does not move.
   const servicesByHouse = servicesByDisplayName(settlement?.availableServices);
+  // X-40/X-45 (the owner, 2026-11-02): the powers each house backs, keyed by the display name
+  // like the service rows above, so the card's one raw read stays the one it has.
+  const backsByHouse = new Map([...institutionBackers(settlement || {})].map(([raw, list]) => [institutionDisplayName(raw), list]));
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
@@ -97,7 +101,7 @@ export function Institutions({ settlement, narrativeMode, vm }) {
         return (
           <View key={`cat-${cat}`} style={{ marginBottom: space.sm }}>
             <CategoryHeader cat={cat} count={list.length} stats={catStats} />
-            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} />
+            <CategoryGrid items={list} catKey={cat} entityIndex={index} servicesByHouse={servicesByHouse} backsByHouse={backsByHouse} />
           </View>
         );
       })}
@@ -145,7 +149,7 @@ function CategoryHeader({ cat, count, stats }) {
  * category sections stack tighter and the chapter fits on one page in
  * the common case.
  */
-function CategoryGrid({ items, catKey, entityIndex, servicesByHouse }) {
+function CategoryGrid({ items, catKey, entityIndex, servicesByHouse, backsByHouse }) {
   const rows = [];
   for (let i = 0; i < items.length; i += 2) {
     rows.push([items[i], items[i + 1] || null]);
@@ -155,10 +159,10 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse }) {
       {rows.map((pair, ri) => (
         <View key={`r-${catKey}-${ri}`} style={{ flexDirection: 'row', marginBottom: 3 }}>
           <View style={{ flex: 1, marginRight: 4 }}>
-            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} />}
+            {pair[0] && <InstitutionCard inst={pair[0]} idx={`${catKey}-${ri}-a`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[0].name)} backs={backsByHouse?.get(institutionDisplayName(pair[0]))} />}
           </View>
           <View style={{ flex: 1 }}>
-            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} />}
+            {pair[1] && <InstitutionCard inst={pair[1]} idx={`${catKey}-${ri}-b`} entityIndex={entityIndex} services={servicesByHouse?.get(pair[1].name)} backs={backsByHouse?.get(institutionDisplayName(pair[1]))} />}
           </View>
         </View>
       ))}
@@ -166,7 +170,7 @@ function CategoryGrid({ items, catKey, entityIndex, servicesByHouse }) {
   );
 }
 
-function InstitutionCard({ inst, idx, entityIndex, services = [] }) {
+function InstitutionCard({ inst, idx, entityIndex, services = [], backs = [] }) {
   const status = (inst.status || 'healthy').toLowerCase();
   // Phase-D: this card is the anchor TARGET for any institution id reference.
   const anchor = anchorTarget(entityIndex, inst.id);
@@ -247,6 +251,14 @@ function InstitutionCard({ inst, idx, entityIndex, services = [] }) {
         }}>
           {inst.statusReason}
         </Text>
+      )}
+
+      {/* X-40/X-45: the powers the house stands behind, the screen's Backs line in print. */}
+      {backs.length > 0 && (
+        <View style={{ marginTop: 2 }}>
+          <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>Backs</Text>
+          <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.second }}>{backs.join(' · ')}</Text>
+        </View>
       )}
 
       {services.length > 0 && (

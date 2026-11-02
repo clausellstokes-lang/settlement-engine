@@ -15,9 +15,14 @@
  * (the engine's raw roster name). THE HOUSE WEARS ONE STATUS TAG beside its name (the owner,
  * 2026-11-01, X-41): the worst state across what it renders, impaired over reduced over
  * vulnerable (`tabHelpers.js :: computeChainSets`), and the doors carry none. Under the
- * description, THE BACKS LINE (X-40): the powers the house stands behind, each a door to the
- * Power tab, read off the same web the Power tab prints the other way round
- * (`powerSupport.js :: institutionBackers`). No category cards: the Services tab already groups
+ * description, THE BACKS LINE (X-40, X-45): the powers the house stands behind — every house at
+ * least one, where the settlement has a ruler, and more than one where more than one reason
+ * holds — each a door to the Power tab, read off the one per-house truth the Power tab's web is
+ * built from (`powerSupport.js :: houseBacksOf`). THE DM EDITS IT (X-45): a viewer who may
+ * author, in edit mode, toggles the roster's powers on the line; the authored list wears the ✎
+ * mark and replaces every derived reason, and "As the engine has it" lets it go. The edit rides
+ * the house's own edit record (`applyUserEditAction('institution', index, 'backs', …)`), so it
+ * is saved with the settlement and reverted like any other. No category cards: the Services tab already groups
  * by service category, and this page's one job is the other axis, house by house. An
  * institution with no service row still appears, with its description and no subtitle.
  *
@@ -26,8 +31,10 @@
  * the engine's answer to "who put this here" (R7). Same audience as the Services tab: every
  * fact here is public roster and catalogue data, so no public or player gate applies.
  */
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
+import { useStore } from '../../../store/index.js';
+import Button from '../../primitives/Button.jsx';
 import { Empty } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
@@ -41,8 +48,10 @@ import { identityForInstitution } from '../../../domain/display/institutionVocab
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
-import { institutionBackers } from '../../../domain/dossier/powerSupport.js';
+import { formatBacksValue, houseBacksOf } from '../../../domain/dossier/powerSupport.js';
+import { isEdited } from '../../../domain/userEdits.js';
 import { factionIdFromName } from '../../../lib/entities.js';
+import { nameOf } from '../../../domain/rulingPower.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -101,7 +110,7 @@ function serviceRows(availableServices) {
  */
 export function institutionsWithServices(settlement) {
   const rows = serviceRows(settlement?.availableServices);
-  const backers = institutionBackers(/** @type {any} */ (settlement) || {});
+  const backers = houseBacksOf(/** @type {any} */ (settlement) || {});
   /** @type {Map<string, object[]>} */
   const byInstitution = new Map();
   for (const svc of rows) {
@@ -127,6 +136,8 @@ export function institutionsWithServices(settlement) {
         label: institutionDisplayName(inst),
         services: byInstitution.get(key) || [],
         backs: backers.get(key) || [],
+        // X-45: the DM spoke, even to say nobody (the mark outlives an emptied list)
+        authored: isEdited(inst, 'backs'),
       };
     })
     .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
@@ -168,12 +179,43 @@ export function institutionDescription(inst) {
   return own || identityForInstitution(inst) || null;
 }
 
+/** The roster's power names, in the roster's order (the choices the backs editor offers). */
+export function rosterPowerNames(settlement) {
+  const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
+  return factions.map((f) => nameOf(f)).filter(Boolean);
+}
+
 /**
- * One institution: what it is, then the doors to the services it renders (X-35). Mounted by the
- * tab and, through its own card, by the dossier search (BUILD-W2-SEARCH U2). `sets` is the
- * tab's chain-status reading (`computeChainSets`).
+ * THE BACKS EDITOR (X-45): the roster's powers as toggles, Done writes the house's `backs` edit
+ * as one line of names, "As the engine has it" reverts it. Chips are the Button primitive (the
+ * raw-button baseline holds), in a WRAPPING row (the name-list census reads it as no list).
  */
-export function InstitutionCard({ inst, category, label, services, sets, backs = [] }) {
+function BacksEditor({ label, powers, selected, authored, onDone, onRevert, onClose }) {
+  const mobile = useIsMobile();
+  const [chosen, setChosen] = useState(() => new Set(selected));
+  const toggle = (name) => setChosen((prev) => { const next = new Set(prev); if (next.has(name)) next.delete(name); else next.add(name); return next; });
+  return (
+    <div data-testid="institution-backs-editor" style={{ display: 'flex', alignItems: 'center', gap: '4px 6px', flexWrap: 'wrap', marginTop: 4 }}>
+      {powers.map((name) => (
+        <Button key={name} variant={chosen.has(name) ? 'gold' : 'secondary'} size="sm" aria-pressed={chosen.has(name)} onClick={() => toggle(name)}>
+          {name}
+        </Button>
+      ))}
+      <Button variant="primary" size="sm" onClick={() => onDone(powers.filter((name) => chosen.has(name)))} aria-label={`Done editing who ${label} backs`}>Done</Button>
+      {authored && <Button variant="ghost" size="sm" onClick={onRevert}>As the engine has it</Button>}
+      <Button variant="ghost" size="sm" onClick={onClose} aria-label={`Stop editing who ${label} backs`}>Cancel</Button>
+      <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexBasis: '100%' }}>Who this house stands behind. Your choice replaces what the engine derived.</span>
+    </div>
+  );
+}
+
+/**
+ * One institution: what it is, the powers it backs, then the doors to the services it renders
+ * (X-35, X-40, X-45). Mounted by the tab and, through its own card, by the dossier search
+ * (BUILD-W2-SEARCH U2). `sets` is the tab's chain-status reading (`computeChainSets`); `backs`
+ * is the house's list from `houseBacksOf`; `canAuthor` and `index` arm the editor.
+ */
+export function InstitutionCard({ inst, category, label, services, sets, backs = [], authored = false, canAuthor = false, index = -1, powers = [] }) {
   const mobile = useIsMobile();
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
@@ -182,6 +224,13 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   const selfId = entityIdFor('institution', inst);
   const description = institutionDescription(inst);
   const status = houseStatus(services, sets);
+  // X-45: the editor is offered to a viewer who may author, in edit mode, on a house the
+  // roster can address (the NPC card's own gate, `authorEditMode`).
+  const editMode = useStore((s) => s.editMode);
+  const applyUserEditAction = useStore((s) => s.applyUserEditAction);
+  const revertUserEditAction = useStore((s) => s.revertUserEditAction);
+  const [editingBacks, setEditingBacks] = useState(false);
+  const mayEditBacks = canAuthor && editMode && index >= 0 && powers.length > 0;
   return (
     <section ref={focusRef} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
       ...FLUSH, padding: '8px 11px', background: swatch['#FAF8F4'],
@@ -202,15 +251,32 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
       {description && (
         <p data-testid="institution-desc" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={description} selfId={selfId} /></p>
       )}
-      {/* THE BACKS LINE (X-40): who the house contributes to, each name a door to the Power
-          tab. A wrapping row like the doors below (the name-list census reads it as no list). */}
-      {backs.length > 0 && (
+      {/* THE BACKS LINE (X-40, X-45): who the house contributes to, each name a door to the Power
+          tab; the ✎ mark when the DM named them; the pencil when the DM may. A wrapping row like
+          the doors below (the name-list census reads it as no list). */}
+      {(backs.length > 0 || authored || mayEditBacks) && (
         <div data-testid="institution-backs" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 8px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
           <span>Backs</span>
-          {backs.map((faction) => (
-            <EntityLink key={faction} id={factionIdFromName(faction) || faction} type="faction" fallback={faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          {backs.map((back) => (
+            <EntityLink key={back.faction} id={factionIdFromName(back.faction) || back.faction} type="faction" fallback={back.faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
           ))}
+          {backs.length === 0 && <span style={{ fontStyle: 'italic' }}>nobody</span>}
+          {authored && <span data-testid="institution-backs-authored" title="Named by you" style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: PROVENANCE_TONE.you }}>✎ YOU</span>}
+          {mayEditBacks && !editingBacks && (
+            <Button variant="ghost" size="sm" onClick={() => setEditingBacks(true)} aria-label={`Edit who ${label} backs`} style={{ padding: '0 6px', minHeight: 0 }}>✎ Edit</Button>
+          )}
         </div>
+      )}
+      {mayEditBacks && editingBacks && (
+        <BacksEditor
+          label={label}
+          powers={powers}
+          selected={backs.map((b) => b.faction)}
+          authored={authored}
+          onDone={(names) => { applyUserEditAction?.('institution', index, 'backs', formatBacksValue(names)); setEditingBacks(false); }}
+          onRevert={() => { revertUserEditAction?.('institution', index, 'backs'); setEditingBacks(false); }}
+          onClose={() => setEditingBacks(false)}
+        />
       )}
       {/* THE SUBTITLE OF DOORS (X-35): each service the house renders, as a link that opens the
           Services tab with that row at the top (ServiceItem is the sink, X-20 (c)). The row's
@@ -235,9 +301,12 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
   );
 }
 
-export default function InstitutionsTab({ settlement }) {
+export default function InstitutionsTab({ settlement, canAuthor = false }) {
   const houses = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const sets = useMemo(() => computeChainSets(settlement || {}), [settlement]);
+  // X-45: the editor's choices and each house's address in the roster (the edit action's index).
+  const powers = useMemo(() => rosterPowerNames(settlement), [settlement]);
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   if (!houses.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
@@ -249,8 +318,9 @@ export default function InstitutionsTab({ settlement }) {
       </div>
       {/* THE FLUSH RULE (X-44): the houses sit edge to edge, parted by their own hairlines. */}
       <div data-testid="institutions-stack" style={FLUSH_STACK}>
-        {houses.map(({ inst, category, label, services, backs }, i) => (
-          <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} sets={sets} />
+        {houses.map(({ inst, category, label, services, backs, authored }, i) => (
+          <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} authored={authored} sets={sets}
+            canAuthor={canAuthor} index={roster.indexOf(inst)} powers={powers} />
         ))}
       </div>
       {/* The campaign-only stale-window note closes the page (the block law, X-16 rung 6). */}

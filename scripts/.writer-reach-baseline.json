@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "4f9dc4d7060423921ecee6a7a3e313a4d3720043",
+ "frozenAtSha": "7c63271d104e520bb3b9ac47cd7d7c7171f1078f",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
  "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
- "verdictDigest": "b973136d089b9f5e4b8e4a73b8e3ce14085c1ea7549dafc23c133a34074a5e09",
+ "verdictDigest": "5ecdd376c7871e258fdb7f3dcfb7c9fcfbbfdb5490f9938640ca3b524a8320ad",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,8 +73,8 @@
  ],
  "closureSizes": {
   "web-display": 743,
-  "web-transitive": 937,
-  "dossier-pdf": 434,
+  "web-transitive": 939,
+  "dossier-pdf": 445,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 340,
@@ -91,15 +91,15 @@
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1681,
-  "sites": 39749,
-  "propRead": 37610,
+  "files": 1683,
+  "sites": 39796,
+  "propRead": 37655,
   "elemRead": 0,
-  "destructure": 2124,
+  "destructure": 2126,
   "inOp": 15,
-  "rGrades": 6074,
-  "nGrades": 966627,
-  "resolvedReceivers": 6833
+  "rGrades": 6091,
+  "nGrades": 967276,
+  "resolvedReceivers": 6850
  },
  "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
@@ -8927,7 +8927,7 @@
   "finalProducts on fullyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on fullyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on fullyExploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on fullyExploited": "web-display=N",
+  "processingTags on fullyExploited": "dossier-pdf=N web-display=N",
   "rawResource on fullyExploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "chain on gaps": "campaign-pdf=N dossier-pdf=N foundry=N web-display=R web-transitive=N world-book=N",
   "impact on gaps": "dossier-pdf=N web-display=R web-transitive=N",
@@ -13974,7 +13974,7 @@
   "finalProducts on partiallyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on partiallyExploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on partiallyExploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on partiallyExploited": "web-display=N",
+  "processingTags on partiallyExploited": "dossier-pdf=N web-display=N",
   "rawResource on partiallyExploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "capacity on paths": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "evidence on paths": "campaign-pdf=N dossier-pdf=N foundry=N news=N web-display=N web-transitive=N world-book=N",
@@ -14366,7 +14366,7 @@
   "finalProducts on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "intermediateGoods on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "processingInstitutions on resourceChains": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "processingTags on resourceChains": "web-display=N",
+  "processingTags on resourceChains": "dossier-pdf=N web-display=N",
   "rawResource on resourceChains": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "condition on resourceConditions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "conditionDescription on resourceConditions": "dossier-pdf=N foundry=N web-transitive=N",
@@ -14882,7 +14882,7 @@
   "finalProducts on unexploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "intermediateGoods on unexploited": "dossier-pdf=N foundry=N web-display=N web-transitive=R",
   "processingInstitutions on unexploited": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=R world-book=N",
-  "processingTags on unexploited": "web-display=N",
+  "processingTags on unexploited": "dossier-pdf=N web-display=N",
   "rawResource on unexploited": "dossier-pdf=R foundry=N web-display=R web-transitive=R",
   "drift on urbanFabric": "web-display=N web-transitive=N",
   "led on urbanFabric": "web-transitive=N",

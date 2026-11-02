@@ -82,6 +82,11 @@ export const EDITABLE_FIELDS = Object.freeze({
   ]),
   institution: Object.freeze([
     'desc',
+    // X-45 (the owner, 2026-11-02): the powers the house backs, ONE line of power names parted
+    // by a middle dot (domain/dossier/powerSupport.js :: formatBacksValue), a list spelled as
+    // prose so every reader of an edit record still reads a string. Served by the Institutions
+    // card alone, never by the prose queue (tests/store/editProseQueueSpine.test.js).
+    'backs',
   ]),
   hook: Object.freeze([
     'description',

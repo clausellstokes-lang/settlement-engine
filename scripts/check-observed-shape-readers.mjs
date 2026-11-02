@@ -1187,6 +1187,18 @@ export const EXPLAINED_WRITER_EXEMPTIONS = Object.freeze([
       + ' roster and is a chair act, not a lane one.',
   }),
   Object.freeze({
+    identity: '_userEdits on institutions',
+    mechanism: 'save-time-writer',
+    writer: 'src/domain/userEdits.js',
+    ruling: 'X-45 / M9 — the DM edit record on a house, minted by applyUserEdit through settlementSlice.applyUserEditAction and persisted with the save (ODQ 934.103)',
+    why: 'The `backs` edit (the owner, 2026-11-02: in editing a user can add, remove or change which'
+      + ' power an institution backs) lives in the house\'s own edit record, written by applyUserEdit'
+      + ' when the DM commits the Institutions card editor and persisted by persistActiveSaveEdit —'
+      + ' never during generation, which is the only thing the corpus executes. The readers are the'
+      + ' domain helpers (isEdited / getEditRecord) called from powerSupport.js :: houseBacksOf and'
+      + ' the Institutions card, the same path the NPC card has read for its own authored fields.',
+  }),
+  Object.freeze({
     identity: 'neighbourNetwork on settlement',
     mechanism: 'save-time-writer',
     writer: 'src/lib/saves.js',

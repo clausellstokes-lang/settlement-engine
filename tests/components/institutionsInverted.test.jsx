@@ -27,6 +27,7 @@ import { ServiceItem } from '../../src/components/new/serviceComponents.jsx';
 import { DossierEntityContext } from '../../src/components/dossier/DossierEntityContext.jsx';
 import { useDossierEntityNav } from '../../src/components/dossier/useNavigateToEntity.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../src/domain/dossier/entityLinks.js';
+import { deriveFactionSupport } from '../../src/domain/dossier/powerSupport.js';
 import { INSTITUTION_IDENTITY } from '../../src/domain/display/institutionVocabulary.js';
 import { useStore } from '../../src/store/index.js';
 
@@ -100,7 +101,7 @@ describe('2. the subtitle is a row of doors', () => {
     expect(granary.querySelectorAll('[data-testid="institution-service"]').length).toBe(1);
     // the inverse, not a copy: the row's own sentence is NOT on this page (anchored on the name)
     expect(container.textContent).toContain('Grain sale');
-    expect(container.textContent).not.toContain('Sacks by the stone');
+    expect(container.textContent).not.toContain('Sacks by the stone'); // anchored: the row name is asserted present one line above
   });
 
   it('outside a dossier (the search mount, an isolated card) the names print as plain text, never dead links', () => {
@@ -151,14 +152,14 @@ describe('4. a folded category opens for its focused row', () => {
     expect(container.textContent).toContain('A bed above the taproom.');
     const toggle = screen.getByRole('button', { name: /^Lodging/ });
     fireEvent.click(toggle);
-    expect(container.textContent).not.toContain('A bed above the taproom.');
+    expect(container.textContent).not.toContain('A bed above the taproom.'); // anchored: the same row text is asserted present after a focus in this test
     act(() => { useStore.getState().focusEntity(entityIdFor('service', serviceEntityOf(LODGING))); });
     expect(container.textContent).toContain('A bed above the taproom.');
     // an unrelated focus does not reopen a category the reader folded (anchored on the reopen above)
     fireEvent.click(screen.getByRole('button', { name: /^Lodging/ }));
-    expect(container.textContent).not.toContain('A bed above the taproom.');
+    expect(container.textContent).not.toContain('A bed above the taproom.'); // anchored: the same row text is asserted present after a focus in this test
     act(() => { useStore.getState().focusEntity(entityIdFor('service', serviceEntityOf(GRAIN))); });
-    expect(container.textContent).not.toContain('A bed above the taproom.');
+    expect(container.textContent).not.toContain('A bed above the taproom.'); // anchored: the same row text is asserted present after a focus in this test
   });
 });
 
@@ -207,5 +208,84 @@ describe('6. the Backs line (X-40): who the house contributes to, each a door to
     // a house that backs nobody prints no line (anchored on the granary's line above)
     const mill = cards.find((c) => c.textContent.includes('Old mill'));
     expect(mill.querySelector('[data-testid="institution-backs"]')).toBeNull();
+  });
+});
+
+describe('7. the backs editor (X-45): the DM adds, removes or changes who a house backs', () => {
+  // The same town with a seat: the granary is raised by the Merchant Council (the exact mark),
+  // the root cellar is a civic store (the catalogue), the mill is a stranger with nothing of its
+  // own (the default), so every house backs a power.
+  const RULED = () => ({
+    ...structuredClone(SETTLEMENT),
+    powerStructure: { factions: [
+      { faction: 'Merchant Council', category: 'merchant', power: 60 },
+      { faction: 'Town Council', category: 'government', power: 40, isGoverning: true },
+    ] },
+  });
+  /** The tab as the dossier mounts it: on the store's own settlement, so an edit re-renders it. */
+  function Live({ canAuthor = true }) {
+    const settlement = useStore((s) => s.settlement);
+    return <InstitutionsTab settlement={settlement} canAuthor={canAuthor} />;
+  }
+  const cardOf = (container, name) => [...container.querySelectorAll('[data-testid="institution-card"]')].find((c) => c.textContent.includes(name));
+  const lineOf = (container, name) => cardOf(container, name).querySelector('[data-testid="institution-backs"]');
+  beforeEach(() => { act(() => { useStore.setState({ settlement: RULED(), editMode: true }); }); });
+  afterEach(() => { act(() => { useStore.setState({ settlement: null, editMode: false }); }); });
+
+  it('every house backs a power: the mill, with nothing of its own, answers to the seat; no edit affordance without authoring rights', () => {
+    const { container } = render(<Live canAuthor={false} />);
+    expect(lineOf(container, 'Old mill').textContent).toContain('Town Council');
+    expect(lineOf(container, 'Communal root cellar').textContent).toContain('Town Council');
+    expect(lineOf(container, 'Granary').textContent).toContain('Merchant Council');
+    expect(within(cardOf(container, 'Granary')).queryByRole('button', { name: /Edit who/ })).toBeNull();
+  });
+
+  it('a viewer who may author, in edit mode, toggles the roster; the house keeps the DM word as one line and wears the mark', () => {
+    const { container } = render(<Live />);
+    fireEvent.click(within(cardOf(container, 'Granary')).getByRole('button', { name: 'Edit who Granary backs' }));
+    const editor = cardOf(container, 'Granary').querySelector('[data-testid="institution-backs-editor"]');
+    // the chips are the roster, the derived backer already pressed
+    expect(within(editor).getByRole('button', { name: 'Merchant Council' }).getAttribute('aria-pressed')).toBe('true');
+    expect(within(editor).getByRole('button', { name: 'Town Council' }).getAttribute('aria-pressed')).toBe('false');
+    fireEvent.click(within(editor).getByRole('button', { name: 'Town Council' }));
+    fireEvent.click(within(editor).getByRole('button', { name: 'Done editing who Granary backs' }));
+    const house = useStore.getState().settlement.institutions[0];
+    expect(house._userEdits.backs.value).toBe('Merchant Council · Town Council');
+    const line = lineOf(container, 'Granary');
+    expect(line.textContent).toContain('Merchant Council');
+    expect(line.textContent).toContain('Town Council');
+    expect(line.querySelector('[data-testid="institution-backs-authored"]')).toBeTruthy();
+    expect(cardOf(container, 'Granary').querySelector('[data-testid="institution-backs-editor"]')).toBeNull();
+    // the Power tab's web agrees: the granary stands under both, by the DM word
+    const web = deriveFactionSupport(useStore.getState().settlement);
+    expect(web.get('Town Council').map((e) => [e.name, e.basis])).toContainEqual(['Granary', 'authored']);
+    expect(web.get('Merchant Council').map((e) => [e.name, e.basis])).toContainEqual(['Granary', 'authored']);
+  });
+
+  it('clearing every chip means nobody, still marked; "As the engine has it" lets the DM word go', () => {
+    const { container } = render(<Live />);
+    fireEvent.click(within(cardOf(container, 'Granary')).getByRole('button', { name: 'Edit who Granary backs' }));
+    let editor = cardOf(container, 'Granary').querySelector('[data-testid="institution-backs-editor"]');
+    fireEvent.click(within(editor).getByRole('button', { name: 'Merchant Council' })); // off
+    fireEvent.click(within(editor).getByRole('button', { name: 'Done editing who Granary backs' }));
+    expect(useStore.getState().settlement.institutions[0]._userEdits.backs.value).toBe('');
+    let line = lineOf(container, 'Granary');
+    expect(line.textContent).toContain('nobody');
+    expect(line.querySelector('[data-testid="institution-backs-authored"]')).toBeTruthy();
+    // outside edit mode the emptied line still shows, marked, so the DM can see what they said
+    act(() => { useStore.setState({ editMode: false }); });
+    line = lineOf(container, 'Granary');
+    expect(line.textContent).toContain('nobody');
+    expect(within(cardOf(container, 'Granary')).queryByRole('button', { name: /Edit who/ })).toBeNull();
+    act(() => { useStore.setState({ editMode: true }); });
+    // revert
+    fireEvent.click(within(cardOf(container, 'Granary')).getByRole('button', { name: 'Edit who Granary backs' }));
+    editor = cardOf(container, 'Granary').querySelector('[data-testid="institution-backs-editor"]');
+    fireEvent.click(within(editor).getByRole('button', { name: 'As the engine has it' }));
+    expect(useStore.getState().settlement.institutions[0]._userEdits).toBeUndefined();
+    line = lineOf(container, 'Granary');
+    expect(line.textContent).toContain('Merchant Council');
+    expect(line.textContent).not.toContain('nobody'); // anchored: the power name is asserted present on this line one line above
+    expect(line.querySelector('[data-testid="institution-backs-authored"]')).toBeNull();
   });
 });

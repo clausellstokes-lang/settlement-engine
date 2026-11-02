@@ -709,7 +709,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'overview':   return <>{!readOnly && <Suspense fallback={null}><FirstDossierCallouts /></Suspense>}<OverviewTab settlement={s} narrativeNote={null} onNavigateTab={setActiveTab} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} onOpenTableView={flag('tableView') ? () => useStore.getState().setUserPref?.('tableViewOpen', true) : undefined} /></>;
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
-      case 'institutions': return <InstitutionsTab settlement={s} />;
+      case 'institutions': return <InstitutionsTab settlement={s} canAuthor={npcAuthoringAllowed} />;
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />

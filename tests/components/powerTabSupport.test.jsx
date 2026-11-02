@@ -171,6 +171,38 @@ describe('PowerTab — the support basis is said once per group', () => {
   });
 });
 
+// ── X-45 (the owner, 2026-11-02): every house backs a power, some back two ───────────────
+describe('PowerTab — every house backs a power (X-45)', () => {
+  it('a stranger with nothing of its own is listed under the seat, captioned as the default; a split house is listed under both powers', () => {
+    const s = {
+      id: 'settlement.totalburg',
+      name: 'Totalburg',
+      powerStructure: { factions: [
+        { faction: 'Town Council', power: 55, category: 'government', isGoverning: true, desc: 'The seat.' },
+        { faction: 'Merchant Guild', power: 45, category: 'economy', desc: 'The traders who hold the market.' },
+      ] },
+      institutions: [
+        { name: 'Hermit shrine' },            // not in the catalogue, no economy tag: the default
+        { name: 'Docks/port facilities' },    // the catalogue: merchant 0.6, government 0.4
+      ],
+    };
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const council = screen.getByRole('button', { name: 'Town Council power details' });
+    fireEvent.click(council);
+    const councilDetail = document.getElementById(council.getAttribute('aria-controls'));
+    expect(within(councilDetail).getByText('Hermit shrine')).toBeTruthy();
+    expect(within(councilDetail).getAllByText(SUPPORT_BASIS.default)).toHaveLength(1);
+    expect(within(councilDetail).getByText('Docks/port facilities')).toBeTruthy();
+    expect(within(councilDetail).getAllByText(SUPPORT_BASIS.aligned.government)).toHaveLength(1);
+    const guild = screen.getByRole('button', { name: 'Merchant Guild power details' });
+    fireEvent.click(guild);
+    const guildDetail = document.getElementById(guild.getAttribute('aria-controls'));
+    expect(within(guildDetail).getByText('Docks/port facilities')).toBeTruthy();
+    expect(within(guildDetail).getAllByText(SUPPORT_BASIS.aligned.merchant)).toHaveLength(1);
+    expect(within(guildDetail).queryByText('Hermit shrine')).toBeNull(); // anchored: the shrine is under the seat above
+  });
+});
+
 // ── §815 — THE RULING CHAIN: power → faction → named NPC, honest absence ─────
 describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
   const base = () => ({
