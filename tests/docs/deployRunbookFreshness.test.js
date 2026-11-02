@@ -146,7 +146,7 @@ describe('canonical deploy safety — durable work and Stripe cutover', () => {
     const refundWorkerReady = deploySh.indexOf(
       '\nwait_for_edge_function_route "payment-refund-worker"\n',
     );
-    const migrationPush = deploySh.indexOf('npx supabase db push');
+    const migrationPush = deploySh.indexOf('supabase_cli db push') // the pinned CLI wrapper (2026-11-02);
     const accountActivation = deploySh.indexOf(
       '\nconfigure_worker_dispatcher \\\n  "account_deletion_cron"',
     );
@@ -196,7 +196,7 @@ describe('canonical deploy safety — durable work and Stripe cutover', () => {
   });
 
   it('proves the migration-181 lease RPC is visible before webhook creation and deploy', () => {
-    const migrationPush = deploySh.indexOf('npx supabase db push');
+    const migrationPush = deploySh.indexOf('supabase_cli db push') // the pinned CLI wrapper (2026-11-02);
     const readinessCall = deploySh.lastIndexOf(
       '\nwait_for_stripe_webhook_lease_rpc\n',
     );
