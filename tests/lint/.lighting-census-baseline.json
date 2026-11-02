@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "8a5120f4608a18a1b1795666258e5a3d9ada7489",
-  "measuredBy": "the cloud chair, session 01FbPLbfGHtg4xEGSkj1zE5B (X-42)",
+  "measuredAtSha": "72dfbb5284ec3883403602ab3fdcc533b4955f9b",
+  "measuredBy": "the cloud chair, session 01FbPLbfGHtg4xEGSkj1zE5B (X-44)",
   "date": "2026-11-02",
-  "note": "two new test files, tests/components/infoPill.test.jsx and tests/copy/sectionHelp.test.js (the ? pills, X-42); no marker moved",
-  "files": 2815,
+  "note": "one new test file, tests/components/dossierFlush.test.jsx (the flush rule, X-44); no marker moved",
+  "files": 2816,
   "parked": 362,
-  "credited": 2453,
-  "titles": 27134,
-  "suiteTitles": 7161
+  "credited": 2454,
+  "titles": 27139,
+  "suiteTitles": 7166
 }
