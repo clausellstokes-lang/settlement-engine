@@ -14,6 +14,7 @@
 
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
+import { institutionDisplayName } from '../display/institutionDisplayName.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -105,6 +106,7 @@ const INFLUENCE_RANK = Object.freeze({
  * @property {QuickGuideStress[]} [stress]
  * @property {QuickGuideConflict[]} [conflicts]
  * @property {QuickGuideNpc[]} [npcs]
+ * @property {Array<{ name?: unknown } | null | undefined>} [institutions]
  */
 
 /**
@@ -168,7 +170,8 @@ function composeIdentity(settlement) {
 
   const article = articleFor(descriptors);
 
-  const phrase = scopePhrase(cultureKey);
+  // X-43: the seat of government by its real name, here as on the Overview strip.
+  const phrase = seatIntoPhrase(scopePhrase(cultureKey), settlement);
   if (phrase) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
@@ -190,11 +193,45 @@ function composeIdentity(settlement) {
  */
 export function cultureScopeLine(settlement) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
-  const phrase = scopePhrase(cleanText(source.culturalIdentity?.key));
+  const phrase = seatIntoPhrase(scopePhrase(cleanText(source.culturalIdentity?.key)), source);
   if (!phrase) return '';
   // `culturalIdentity` only: a second `culture` read would join the writerReach culture class.
   const label = cleanText(source.culturalIdentity?.label);
   return sentence(label ? `${label}, ${phrase}` : upperLead(phrase));
+}
+
+/**
+ * THE SEAT OF GOVERNMENT BY ITS REAL NAME (X-43, the owner 2026-11-02: "replace the hall by the
+ * actual name of the institution representing the government … the building that actually
+ * where they make decisions at where that's appropriate. Like the palace or the Guild Hall").
+ * The catalogue's seats are buildings, in order of weight; the first the roster carries is the
+ * seat. A body (a council, an oligarchy, a governor) is who governs, not where, so it is never
+ * the seat; with no seat building the authored phrase stands as written.
+ * @type {ReadonlyArray<string>}
+ */
+const GOVERNMENT_SEATS = Object.freeze(['Palace/government complex', 'City hall', 'Town hall']);
+
+/**
+ * The display name of the settlement's seat of government, or null.
+ * @param {SettlementQuickGuideSource | null | undefined} settlement
+ * @returns {string | null}
+ */
+export function governmentSeatName(settlement) {
+  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  const names = new Set(roster.map((inst) => cleanText(inst?.name)).filter(Boolean));
+  const seat = GOVERNMENT_SEATS.find((name) => names.has(name));
+  return seat ? institutionDisplayName(seat) : null;
+}
+
+/**
+ * A scope phrase that says "the hall" names the seat instead when the roster has one.
+ * @param {string} phrase @param {SettlementQuickGuideSource} source
+ * @returns {string}
+ */
+function seatIntoPhrase(phrase, source) {
+  if (!phrase || !phrase.includes('the hall')) return phrase;
+  const seat = governmentSeatName(source);
+  return seat ? phrase.replace('the hall', `the ${seat}`) : phrase;
 }
 
 /**

@@ -8,7 +8,7 @@
 import { describe, expect, it } from 'vitest';
 import { createHash } from 'node:crypto';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { composeSettlementQuickGuide, cultureScopeLine, governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
+import { composeSettlementQuickGuide, cultureScopeLine, governmentSeatName, governsLine } from '../../src/domain/summary/settlementQuickGuide.js';
 import { CULTURE_PROFILES } from '../../src/data/cultureProfiles.js';
 
 function completeSettlement() {
@@ -406,6 +406,31 @@ describe('composeSettlementQuickGuide', () => {
     expect(governsLine({ powerStructure: { factions: [{ faction: 'The Guild', isGoverning: true }] } }))
       .toBe('The Guild');
     expect(governsLine({})).toBe('');
+  });
+
+  it('names the seat of government in place of "the hall" when the roster has a seat building (X-43, the owner 2026-11-02)', () => {
+    const norse = { culturalIdentity: { key: 'norse', label: 'Norse-inspired' } };
+    // the building where decisions are made, by its display name; a body is who, not where
+    expect(governmentSeatName({ institutions: [{ name: 'Town council' }, { name: 'Town hall' }] })).toBe('Town hall');
+    expect(governmentSeatName({ institutions: [{ name: 'Town hall' }, { name: 'Palace/government complex' }] }))
+      .toBe('Palace/government complex');
+    expect(governmentSeatName({ institutions: [{ name: 'Merchant oligarchy' }, { name: 'Town council' }] })).toBeNull();
+    expect(governmentSeatName({})).toBeNull();
+    expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town hall' }] }))
+      .toBe('Norse-inspired, built around the Town hall and the water, on assembly and what the season allows.');
+    // no seat building: the authored phrase stands as written (anchored on the line above)
+    expect(cultureScopeLine({ ...norse, institutions: [{ name: 'Town council' }] }))
+      .toBe('Norse-inspired, built around the hall and the water, on assembly and what the season allows.');
+    // the identity sentence names the seat the same way
+    expect(composeSettlementQuickGuide({
+      name: 'Testholm', tier: 'town', population: 1200, culturalIdentity: { key: 'norse', label: 'Norse-inspired' },
+      institutions: [{ name: 'Town hall' }],
+    }).identitySentence).toBe(
+      'Testholm is a Norse-inspired town of 1,200 people, built around the Town hall and the water, on assembly and what the season allows.',
+    );
+    // a culture whose phrase never says "the hall" is untouched by a seat
+    expect(cultureScopeLine({ culturalIdentity: { key: 'germanic', label: 'Germanic-inspired' }, institutions: [{ name: 'Town hall' }] }))
+      .toBe('Germanic-inspired, built in timber and stone, and run by guild and estate.');
   });
 
   it('states how a settlement lives as a sentence, over every food-security label', () => {
