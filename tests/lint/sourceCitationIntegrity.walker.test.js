@@ -122,8 +122,12 @@
  *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
  *                surface deleted at 43c3ac3805. It hid nothing — the excluded
  *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
- *   dated (5)    an ISO date in the filename: the three COMPREHENSIVE_REVIEWs,
- *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19
+ *   dated (7)    an ISO date in the filename: the three COMPREHENSIVE_REVIEWs,
+ *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19,
+ *                GENERATION_COHERENCE_AUDIT_2026-11-02 and GENERATION_ROOT_CAUSES_2026-11-02
+ *                (both joined 2026-11-02, born into the roster at the owner's word to
+ *                save the audit and its root-cause trace; their citations address
+ *                c0ef42c13; a GROWTH that hid nothing)
  *   sha-pin (1)  a header that pins the tree it describes (`**Snapshot base:**`):
  *                SETTLEMENT_CAPABILITY_ATLAS
  * The BLOCKQUOTE is required, not decoration: docs/README.md discusses the word
