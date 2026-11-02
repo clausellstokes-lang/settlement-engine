@@ -52,7 +52,7 @@ describe('ServicesTab — the header strip', () => {
     const { container } = await renderServices();
     // The strip's only furniture is the ? pill; the "N services across M categories" line is gone.
     expect(container.querySelector('[data-testid="info-pill"]')).toBeTruthy();
-    expect(container.textContent).not.toContain('services across');
+    expect(container.textContent).not.toContain('services across'); // anchored: the pill is asserted present on this container one line above
 
     // RS-15..RS-17 (chair rulings 2026-10-30): the strip is ONE line and an absence is
     // said ONCE. A town expects food, healing, goods, information and lodging; this one

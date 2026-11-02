@@ -15,6 +15,7 @@
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -217,7 +218,8 @@ const GOVERNMENT_SEATS = Object.freeze(['Palace/government complex', 'City hall'
  * @returns {string | null}
  */
 export function governmentSeatName(settlement) {
-  const roster = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  // the seat is a LIVE house: a ruined palace is not where decisions are made
+  const roster = liveInstitutions(settlement);
   const names = new Set(roster.map((inst) => cleanText(inst?.name)).filter(Boolean));
   const seat = GOVERNMENT_SEATS.find((name) => names.has(name));
   return seat ? institutionDisplayName(seat) : null;

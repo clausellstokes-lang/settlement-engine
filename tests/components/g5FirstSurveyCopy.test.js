@@ -85,7 +85,7 @@ describe('G5 first-survey framing — OverviewTab', () => {
     // whose second sentence is the shared vintage constant the document's chapter prints too.
     const src = read(OVERVIEW_TAB);
     expect(src).toMatch(/help=\{SECTION_HELP\.systemsHealth\}/);
-    expect(src).not.toMatch(/>As judged at the first survey/);
+    expect(src).not.toMatch(/>As judged at the first survey/); // anchored: the help prop is asserted on this same source one line above
     const copy = read('src/copy/sectionHelp.js');
     expect(copy).toMatch(/As judged at the first survey · Food Security is re-judged as the campaign advances\./);
     expect(src).not.toMatch(/See Viability tab/); // anchored: the same source carries the help prop matched above

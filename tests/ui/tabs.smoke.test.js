@@ -192,7 +192,7 @@ describe('InstitutionsTab shape (owner addendum T1-14, inverted by X-35 on 2026-
     expect(desc.textContent.length).toBeGreaterThan(10);
     expect(desc.compareDocumentPosition(cards[withRows].querySelector('[data-testid="institution-services"]')) & 4).toBeTruthy();
     // X-38/X-42: the legend row is gone; the page's ? pill carries the badge key.
-    expect(container.textContent).not.toContain('= Historically required');
+    expect(container.textContent).not.toContain('= Historically required'); // anchored: the pill that replaced the legend is asserted present one line below
     expect(container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill"]')).toBeTruthy();
   });
 

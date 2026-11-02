@@ -321,7 +321,7 @@ describe('services are indexed entities (X-35, the owner 2026-11-01: each servic
     const index = buildDossierEntityIndex({ availableServices: { faith: [{ name: 'Parish church', institution: 'Parish church' }] } });
     const entry = index.services[0];
     expect(entry.currentName).toBe(institutionDisplayName('Parish church'));
-    expect(entry.currentName.toLowerCase()).not.toContain('parish');
+    expect(entry.currentName.toLowerCase()).not.toContain('parish'); // anchored: the display name is asserted by equality one line above
   });
 
   it('a public or player scope admits a service door on a page that has the services tab, and never from prose', () => {
