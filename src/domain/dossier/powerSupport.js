@@ -149,3 +149,28 @@ export function deriveFactionSupport(settlement) {
 
   return byFaction;
 }
+
+/**
+ * THE INVERSE (X-40, the owner 2026-11-01: on an institution "mention which power(s) they
+ * support. A simple line underneath that just lists who they contribute to"). The same web,
+ * read from the house's side: for each institution (by its raw roster name) the display names
+ * of the powers it stands behind, in the Power roster's own order. Derived from
+ * `deriveFactionSupport` and nothing else, so the Institutions card and the Power tab can
+ * never disagree about who backs whom. A house that backs no power is absent.
+ * @param {SupportSettlement} settlement
+ * @returns {Map<string, string[]>}
+ */
+export function institutionBackers(settlement) {
+  /** @type {Map<string, string[]>} */
+  const byInstitution = new Map();
+  for (const [faction, edges] of deriveFactionSupport(settlement)) {
+    for (const edge of edges) {
+      const key = String(edge.institution?.name || edge.name || '');
+      if (!key) continue;
+      const list = byInstitution.get(key) || [];
+      if (!list.includes(faction)) list.push(faction);
+      byInstitution.set(key, list);
+    }
+  }
+  return byInstitution;
+}

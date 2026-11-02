@@ -21,7 +21,7 @@ import { render, cleanup, screen, fireEvent, act, within } from '@testing-librar
 
 vi.mock('../../src/lib/supabase.js', () => ({ supabase: {}, isConfigured: false }));
 
-import InstitutionsTab, { InstitutionCard, institutionDescription, institutionsWithServices } from '../../src/components/new/tabs/InstitutionsTab.jsx';
+import InstitutionsTab, { InstitutionCard, houseStatus, institutionDescription, institutionsWithServices } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ServiceItem } from '../../src/components/new/serviceComponents.jsx';
 import { DossierEntityContext } from '../../src/components/dossier/DossierEntityContext.jsx';
@@ -36,14 +36,15 @@ const LODGING = { name: 'Lodging', desc: 'A bed above the taproom.', institution
 const SETTLEMENT = {
   id: 'settlement.orderby', name: 'Orderby', tier: 'village', population: 300,
   institutions: [
-    { name: 'Granary', category: 'Economy', desc: 'Grain in, grain out.' },
+    { name: 'Granary', category: 'Economy', desc: 'Grain in, grain out.', factionSource: 'Merchant Council' },
     { name: 'Communal root cellar', category: 'Economy' }, // no desc → the authored identity line
     { name: 'Inn', category: 'Economy', desc: 'Beds and a fire.' },
     { name: 'Old mill', category: 'Economy', desc: 'A mill with nothing to sell.' }, // no service
   ],
+  powerStructure: { factions: [{ faction: 'Merchant Council', category: 'merchant', power: 60 }] },
   availableServices: { provisioning: [GRAIN, ROOTS], lodging: [LODGING] },
 };
-const TABS = [{ id: 'overview' }, { id: 'institutions' }, { id: 'services' }];
+const TABS = [{ id: 'overview' }, { id: 'institutions' }, { id: 'services' }, { id: 'power' }];
 
 /** The dossier's own provider, with a spy for the tab setter the navigator drives. */
 function Dossier({ settlement, setActiveTab, children }) {
@@ -94,7 +95,7 @@ describe('2. the subtitle is a row of doors', () => {
       <Dossier settlement={SETTLEMENT} setActiveTab={() => {}}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>,
     );
     const granary = [...container.querySelectorAll('[data-testid="institution-card"]')].find((c) => c.textContent.includes('Granary'));
-    const doors = within(granary).getAllByRole('button', { name: /^Go to / });
+    const doors = within(granary.querySelector('[data-testid="institution-services"]')).getAllByRole('button', { name: /^Go to / });
     expect(doors.map((d) => d.textContent)).toEqual(['Grain sale']);
     expect(granary.querySelectorAll('[data-testid="institution-service"]').length).toBe(1);
     // the inverse, not a copy: the row's own sentence is NOT on this page (anchored on the name)
@@ -164,3 +165,47 @@ describe('4. a folded category opens for its focused row', () => {
 // A component wrapper is referenced so React's static-components lint sees a real use of useState
 // in this file's helpers (the Dossier provider above holds no state of its own).
 void useState;
+
+describe('5. the house wears one tag; the doors carry none (X-41)', () => {
+  it('houseStatus is the worst state across the services, impaired over reduced over vulnerable', () => {
+    const sets = { impaired: new Set(['Grain sale']), degraded: new Set(['Root storage']), vulnerable: new Set(['Lodging']) };
+    expect(houseStatus([GRAIN, ROOTS], sets)?.label).toBe('Impaired');
+    expect(houseStatus([ROOTS, LODGING], sets)?.label).toBe('Reduced');
+    expect(houseStatus([LODGING], sets)?.label).toBe('Vulnerable');
+    expect(houseStatus([], sets)).toBeNull();
+    expect(houseStatus([GRAIN], { impaired: new Set(), degraded: new Set(), vulnerable: new Set() })).toBeNull();
+  });
+
+  it('the tag sits beside the name and the service doors print no state word', () => {
+    const house = institutionsWithServices(SETTLEMENT).find((h) => h.inst.name === 'Granary');
+    const sets = { impaired: new Set(), degraded: new Set(), vulnerable: new Set(['Grain sale']) };
+    const { container } = render(<InstitutionCard {...house} sets={sets} />);
+    const tag = container.querySelector('[data-testid="institution-status"]');
+    expect(tag.textContent).toBe('Vulnerable');
+    const doors = container.querySelector('[data-testid="institution-services"]');
+    expect(doors.textContent).not.toContain('Vulnerable'); // anchored: the tag above carries the word
+    expect(tag.compareDocumentPosition(doors) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+  });
+});
+
+describe('6. the Backs line (X-40): who the house contributes to, each a door to the Power tab', () => {
+  it('lists the powers from the support web and opens the Power tab on the faction', () => {
+    const setActiveTab = vi.fn();
+    const { container } = render(
+      <Dossier settlement={SETTLEMENT} setActiveTab={setActiveTab}><InstitutionsTab settlement={SETTLEMENT} /></Dossier>,
+    );
+    const cards = [...container.querySelectorAll('[data-testid="institution-card"]')];
+    const granary = cards.find((c) => c.textContent.includes('Granary'));
+    const backs = granary.querySelector('[data-testid="institution-backs"]');
+    expect(backs.textContent).toContain('Backs');
+    expect(backs.textContent).toContain('Merchant Council');
+    // under the description, above the doors
+    expect(granary.querySelector('[data-testid="institution-desc"]').compareDocumentPosition(backs) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    expect(backs.compareDocumentPosition(granary.querySelector('[data-testid="institution-services"]')) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy();
+    fireEvent.click(within(backs).getByRole('button', { name: 'Go to Merchant Council' }));
+    expect(setActiveTab).toHaveBeenCalledWith('power', 'entity_link');
+    // a house that backs nobody prints no line (anchored on the granary's line above)
+    const mill = cards.find((c) => c.textContent.includes('Old mill'));
+    expect(mill.querySelector('[data-testid="institution-backs"]')).toBeNull();
+  });
+});

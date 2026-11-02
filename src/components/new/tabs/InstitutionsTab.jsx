@@ -12,11 +12,14 @@
  * services it renders as DOORS: each name an EntityLink to the Services tab, where the row
  * itself (its description, its chain chip, its reasons) lives. The join is the same as before —
  * the `availableServices` rows the Services tab renders, on the row's own `institution` field
- * (the engine's raw roster name) — and the status pill (`tabHelpers.js :: computeChainSets`)
- * stays beside the door, because an impaired service is a fact of the house. No category
- * cards: the Services tab already groups by service category, and this page's one job is the
- * other axis, house by house. An institution with no service row still appears, with its
- * description and no subtitle.
+ * (the engine's raw roster name). THE HOUSE WEARS ONE STATUS TAG beside its name (the owner,
+ * 2026-11-01, X-41): the worst state across what it renders, impaired over reduced over
+ * vulnerable (`tabHelpers.js :: computeChainSets`), and the doors carry none. Under the
+ * description, THE BACKS LINE (X-40): the powers the house stands behind, each a door to the
+ * Power tab, read off the same web the Power tab prints the other way round
+ * (`powerSupport.js :: institutionBackers`). No category cards: the Services tab already groups
+ * by service category, and this page's one job is the other axis, house by house. An
+ * institution with no service row still appears, with its description and no subtitle.
  *
  * The provenance badges and their legend moved here from the Overview's Institutions
  * block, which is CUT (T1-15): this tab is the roster's one home (R2), and the badges are
@@ -38,6 +41,8 @@ import { identityForInstitution } from '../../../domain/display/institutionVocab
 import { institutionProvenanceOf } from '../../../domain/provenance/rosterProvenance.js';
 import { PROXY_SERVICE_HOSTS } from '../../../data/servicesData.js';
 import { entityAnchor, entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
+import { institutionBackers } from '../../../domain/dossier/powerSupport.js';
+import { factionIdFromName } from '../../../lib/entities.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -89,12 +94,15 @@ function serviceRows(availableServices) {
 }
 
 /**
- * The roster with each house's own service rows, sorted by category then by the DISPLAYED
- * name (§934.13: sorting by the raw key files 'House of worship' under P).
- * @param {{institutions?: unknown, availableServices?: unknown}} settlement
+ * The roster with each house's own service rows and the powers it backs (X-40), sorted by
+ * category then by the DISPLAYED name (§934.13: sorting by the raw key files 'House of
+ * worship' under P). The ONE raw-name read of the join serves both lists, so the label seam's
+ * census count for this file does not move.
+ * @param {{institutions?: unknown, availableServices?: unknown, powerStructure?: unknown}} settlement
  */
 export function institutionsWithServices(settlement) {
   const rows = serviceRows(settlement?.availableServices);
+  const backers = institutionBackers(/** @type {any} */ (settlement) || {});
   /** @type {Map<string, object[]>} */
   const byInstitution = new Map();
   for (const svc of rows) {
@@ -112,22 +120,41 @@ export function institutionsWithServices(settlement) {
   // the institution shape itself (the observed-shape scan grounds the receiver that way).
   return (Array.isArray(settlement?.institutions) ? settlement.institutions : [])
     .filter(Boolean)
-    .map((inst) => ({
-      inst,
-      category: String(inst.category || ''),
-      label: institutionDisplayName(inst),
-      services: byInstitution.get(String(inst.name || '')) || [],
-    }))
+    .map((inst) => {
+      const key = String(inst.name || '');
+      return {
+        inst,
+        category: String(inst.category || ''),
+        label: institutionDisplayName(inst),
+        services: byInstitution.get(key) || [],
+        backs: backers.get(key) || [],
+      };
+    })
     .sort((a, b) => a.category.localeCompare(b.category) || a.label.localeCompare(b.label));
 }
 
 function statusOf(svc, sets) {
   const name = String(svc.name || '');
   const inst = String(svc.institution || '');
-  if (sets.impaired.has(name) || sets.impaired.has(inst)) return { label: 'Impaired', color: '#8b1a1a' };
-  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: swatch['#8A4010'] };
-  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: swatch['#7A5010'] };
+  if (sets.impaired.has(name) || sets.impaired.has(inst)) return { label: 'Impaired', color: '#8b1a1a', rank: 3 };
+  if (sets.degraded.has(name) || sets.degraded.has(inst)) return { label: 'Reduced', color: swatch['#8A4010'], rank: 2 };
+  if (sets.vulnerable.has(name) || sets.vulnerable.has(inst)) return { label: 'Vulnerable', color: swatch['#7A5010'], rank: 1 };
   return null;
+}
+
+/**
+ * The ONE tag a house wears (X-41): the worst state across the services it renders, impaired
+ * over reduced over vulnerable; null when every service stands.
+ * @param {Array<{ name?: unknown, institution?: unknown }>} services
+ * @param {{ impaired: Set<string>, degraded: Set<string>, vulnerable: Set<string> }} sets
+ */
+export function houseStatus(services, sets) {
+  let worst = null;
+  for (const svc of services) {
+    const status = statusOf(svc, sets);
+    if (status && (!worst || status.rank > worst.rank)) worst = status;
+  }
+  return worst;
 }
 
 /**
@@ -147,7 +174,7 @@ export function institutionDescription(inst) {
  * tab and, through its own card, by the dossier search (BUILD-W2-SEARCH U2). `sets` is the
  * tab's chain-status reading (`computeChainSets`).
  */
-export function InstitutionCard({ inst, category, label, services, sets }) {
+export function InstitutionCard({ inst, category, label, services, sets, backs = [] }) {
   const mobile = useIsMobile();
   const isCustom = inst.source === 'custom' || inst.isCustom === true;
   const badge = institutionBadge(inst);
@@ -155,6 +182,7 @@ export function InstitutionCard({ inst, category, label, services, sets }) {
   const { ref: focusRef } = useEntityFocus(entityIdFor('institution', inst));
   const selfId = entityIdFor('institution', inst);
   const description = institutionDescription(inst);
+  const status = houseStatus(services, sets);
   return (
     <section ref={focusRef} id={entityAnchor('institution', inst)} data-testid="institution-card" style={{
       padding: '8px 11px', background: swatch['#FAF8F4'],
@@ -168,27 +196,37 @@ export function InstitutionCard({ inst, category, label, services, sets }) {
           ? <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: GOLD_DEEP, letterSpacing: '0.04em' }}>✦</span>
           : (badge.label && <span title={badge.title} style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: badge.color, letterSpacing: '0.04em' }}>{badge.label}</span>)}
         {category && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{tokenCase(category)}</span>}
+        {/* THE HOUSE'S ONE TAG (X-41): the worst state across what it renders. */}
+        {status && <span data-testid="institution-status" style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}
       </div>
       {/* WHAT IT IS, FIRST (X-35): the house's general description leads every card. */}
       {description && (
         <p data-testid="institution-desc" style={{ fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3, lineHeight: 1.4, margin: '2px 0 0' }}><MentionText text={description} selfId={selfId} /></p>
       )}
+      {/* THE BACKS LINE (X-40): who the house contributes to, each name a door to the Power
+          tab. A wrapping row like the doors below (the name-list census reads it as no list). */}
+      {backs.length > 0 && (
+        <div data-testid="institution-backs" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 8px', flexWrap: 'wrap', marginTop: 4, fontSize: proseFontSize(FS.xs, mobile), color: swatch.inkMag3 }}>
+          <span>Backs</span>
+          {backs.map((faction) => (
+            <EntityLink key={faction} id={factionIdFromName(faction) || faction} type="faction" fallback={faction} style={{ color: swatch.inkMag, fontWeight: 600 }} />
+          ))}
+        </div>
+      )}
       {/* THE SUBTITLE OF DOORS (X-35): each service the house renders, as a link that opens the
           Services tab with that row at the top (ServiceItem is the sink, X-20 (c)). The row's
           own description stays on the Services tab — the inverse of that tab, not a copy of it.
-          The status pill stays beside the door: an impaired service is a fact of the house. A
-          WRAPPING row, so a long name moves whole to the next line (the name-list census reads
-          a wrapping chip row as no list). */}
+          The doors carry no status pill (X-41): the house wears the one tag above. A WRAPPING
+          row, so a long name moves whole to the next line (the name-list census reads a
+          wrapping chip row as no list). */}
       {services.length > 0 && (
         <div data-testid="institution-services" style={{ display: 'flex', alignItems: 'baseline', gap: '2px 10px', flexWrap: 'wrap', marginTop: 6 }}>
           <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, letterSpacing: '0.06em', color: MUTED }}>Services</span>
           {services.map((svc, j) => {
-            const status = statusOf(svc, sets);
             const entity = serviceEntityOf(svc);
             return (
-              <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ display: 'inline-flex', alignItems: 'baseline', gap: 4, fontSize: FS['12.5'] }}>
+              <span key={`${entity.id}-${j}`} data-testid="institution-service" style={{ fontSize: FS['12.5'] }}>
                 <EntityLink id={entityIdFor('service', entity)} type="service" fallback={institutionDisplayName(svc.name)} style={{ color: swatch.inkMag, fontWeight: 600 }} />
-                {status && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: status.color, background: `${status.color}18`, padding: '0 5px', letterSpacing: '0.04em' }}>{status.label}</span>}
               </span>
             );
           })}
@@ -207,8 +245,8 @@ export default function InstitutionsTab({ settlement }) {
   return (
     <div style={{ padding: '14px 18px' }}>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-        {houses.map(({ inst, category, label, services }, i) => (
-          <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} sets={sets} />
+        {houses.map(({ inst, category, label, services, backs }, i) => (
+          <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} sets={sets} />
         ))}
       </div>
       <div style={{ display: 'flex', gap: 14, marginTop: 12, paddingTop: 8, borderTop: '1px solid #f0e8d8', fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, flexWrap: 'wrap' }}>

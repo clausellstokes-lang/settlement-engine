@@ -16,7 +16,7 @@
 
 import { describe, test, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../../src/generators/generateSettlementPipeline.js';
-import { deriveFactionSupport, SUPPORT_BASIS } from '../../../src/domain/dossier/powerSupport.js';
+import { deriveFactionSupport, institutionBackers, SUPPORT_BASIS } from '../../../src/domain/dossier/powerSupport.js';
 import { institutionBackingFactionName } from '../../../src/domain/display/institutionProfile.js';
 import { nameOf } from '../../../src/domain/rulingPower.js';
 
@@ -135,5 +135,37 @@ describe('deriveFactionSupport — the power support web', () => {
     expect(map.get('Templars').map((e) => e.name)).toEqual(['Alms Market']);
     expect(map.get('Templars')[0].basis).toBe('founded');
     expect(map.get('Merchant Guild')).toEqual([]);
+  });
+});
+
+describe('institutionBackers — the same web read from the house (X-40, the owner 2026-11-01)', () => {
+  test('every edge of deriveFactionSupport appears once under its house, in the roster order, and nothing else does', () => {
+    const settlement = {
+      powerStructure: { factions: [
+        { faction: 'Religious Authorities', category: 'religious', power: 55 },
+        { faction: 'Merchant Council', category: 'merchant', power: 40 },
+      ] },
+      institutions: [
+        { name: 'Great cathedral', factionSource: 'Religious Authorities' },
+        { name: 'Counting house', factionSource: 'Merchant Council' },
+        { name: 'Hermit shrine' }, // backs nobody
+      ],
+    };
+    const web = deriveFactionSupport(settlement);
+    const inverse = institutionBackers(settlement);
+    const expected = new Map();
+    for (const [faction, edges] of web) for (const edge of edges) {
+      const list = expected.get(edge.institution.name) || [];
+      list.push(faction); expected.set(edge.institution.name, list);
+    }
+    expect([...inverse.entries()]).toEqual([...expected.entries()]);
+    expect(inverse.get('Great cathedral')).toEqual(['Religious Authorities']);
+    expect(inverse.get('Counting house')).toEqual(['Merchant Council']);
+    expect(inverse.has('Hermit shrine')).toBe(false); // anchored on the two houses above
+  });
+
+  test('degrades to an empty map on missing input', () => {
+    expect(institutionBackers({}).size).toBe(0);
+    expect(institutionBackers(/** @type {any} */ (null)).size).toBe(0);
   });
 });
