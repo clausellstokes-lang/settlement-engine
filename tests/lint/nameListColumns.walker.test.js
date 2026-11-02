@@ -164,7 +164,7 @@ const RULED = Object.freeze({
   'src/components/new/tabs/HistoryTab.jsx :: sortedEvents':
     'card — a HistoryEventCard: name, type, description and age, with a lasting-effects fold.',
   'src/components/new/tabs/InstitutionsTab.jsx :: houses':
-    'card — an InstitutionCard: the house, its badge and category, and its service rows beneath.',
+    'card — an InstitutionCard: the house, its badge and category, what it is, and the doors to its services beneath (X-35).',
   'src/components/new/tabs/PlotHooksTab.jsx :: groups':
     'card — a source-page section: the page caption and the hook cards that grow from it.',
   // THE TRIM (the owner, 2026-11-01, ODQ §934.103): the per-hook `hooks` site became the

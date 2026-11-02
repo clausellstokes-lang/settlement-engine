@@ -170,8 +170,8 @@ smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
 smokeTab('InstitutionsTab',  InstitutionsTab,  s => ({ settlement: s }));
 
-describe('InstitutionsTab shape (owner addendum T1-14)', () => {
-  test('every institution appears once, with the service rows that name it beneath, and the legend', () => {
+describe('InstitutionsTab shape (owner addendum T1-14, inverted by X-35 on 2026-11-01)', () => {
+  test('every institution appears once, its description first, the doors to its services beneath, and the legend', () => {
     const s = villageSettlement;
     const houses = institutionsWithServices(s);
     expect(houses.length).toBe((s.institutions || []).length);
@@ -180,10 +180,15 @@ describe('InstitutionsTab shape (owner addendum T1-14)', () => {
     expect(cards.length).toBe(houses.length);
     const withRows = houses.findIndex((h) => h.services.length > 0);
     expect(withRows, 'no house in the fixture provides a service row').toBeGreaterThanOrEqual(0);
-    const rows = cards[withRows].querySelectorAll('[data-testid="institution-service"]');
-    expect(rows.length).toBe(houses[withRows].services.length);
-    // Each service row sits under the house its own `institution` field names.
+    const doors = cards[withRows].querySelectorAll('[data-testid="institution-service"]');
+    expect(doors.length).toBe(houses[withRows].services.length);
+    // Each door sits under the house its row's own `institution` field names.
     for (const svc of houses[withRows].services) expect(svc.institution).toBe(houses[withRows].inst.name);
+    // What the house is comes first: a generated house carries the catalogue's own line.
+    const desc = cards[withRows].querySelector('[data-testid="institution-desc"]');
+    expect(desc, 'the house leads with no description').toBeTruthy();
+    expect(desc.textContent.length).toBeGreaterThan(10);
+    expect(desc.compareDocumentPosition(cards[withRows].querySelector('[data-testid="institution-services"]')) & 4).toBeTruthy();
     expect(container.textContent).toContain('= Historically required');
   });
 

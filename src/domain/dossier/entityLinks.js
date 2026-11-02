@@ -1,6 +1,9 @@
 import { factionIdFromName } from '../../lib/entities.js';
 import { slugify as kernelSlugify } from '../../kernel/slugify.js';
 import { fnv1a32 } from '../../kernel/proseHash.js';
+// THE LABEL SEAM (ODQ §934.13): a service entry's live name is the DISPLAY name, so every door
+// that prints it (EntityLink's label, the search) reads the setting-neutral word.
+import { institutionDisplayName } from '../display/institutionDisplayName.js';
 
 /**
  * @typedef {{ id?: string, refId?: string, name?: string, label?: string, faction?: string, [key: string]: unknown }} EntityLike
@@ -57,6 +60,52 @@ export function entityAnchor(kind, entity, fallback = '') {
 export function entityIdFor(kind, entity, fallback = '') {
   const label = entity?.name || entity?.label || fallback || String(entity?.id || kind || 'item');
   return String(entity?.id || entity?.refId || slugifyEntity(label));
+}
+
+/**
+ * THE SERVICE ENTITY (X-35, the owner, 2026-11-01: each service an institution renders "ties to a
+ * hyperlink that is appropriate to the services tab"). A catalogue row has no id of its own, so its
+ * identity is derived from the two facts that place it on the Services tab: the house that renders
+ * it and its raw name. `service.<house>.<name>`, slugs of the engine's own spellings, so the
+ * Institutions card, the index and the row itself (serviceComponents.jsx :: ServiceItem) compute
+ * the SAME id and anchor with no name-matching. Two houses rendering a service of one name are
+ * two entities; one house listing one name twice collides and the index marks it non-interactive.
+ * @param {unknown} svc  a catalogue row (`{ name, institution, … }`) or a bare name
+ * @returns {{ id: string, name: string }}
+ */
+export function serviceEntityOf(svc) {
+  const row = svc && typeof svc === 'object' ? /** @type {Record<string, unknown>} */ (svc) : null;
+  const name = row ? String(row.name || '') : typeof svc === 'string' ? svc : '';
+  const host = row ? String(row.institution || '') : '';
+  return { id: `service.${slugifyEntity(host)}.${slugifyEntity(name)}`, name };
+}
+
+/**
+ * Every service row of the catalogue, flattened out of the category map the generator writes
+ * (`availableServices`: category -> rows; a bare array reads as one unnamed category). Rows that
+ * are not objects with a name are not entities (the Services tab prints a bare string, but nothing
+ * can link to it).
+ * @param {unknown} availableServices
+ * @returns {Array<{ category: string, svc: Record<string, unknown> }>}
+ */
+export function serviceRowsOf(availableServices) {
+  /** @type {Array<{ category: string, svc: Record<string, unknown> }>} */
+  const out = [];
+  const push = (/** @type {string} */ category, /** @type {unknown} */ list) => {
+    if (!Array.isArray(list)) return;
+    for (const svc of list) {
+      if (svc && typeof svc === 'object' && String(/** @type {Record<string, unknown>} */ (svc).name || '')) {
+        out.push({ category, svc: /** @type {Record<string, unknown>} */ (svc) });
+      }
+    }
+  };
+  if (Array.isArray(availableServices)) push('', availableServices);
+  else if (availableServices && typeof availableServices === 'object') {
+    for (const category of Object.keys(availableServices)) {
+      push(category, /** @type {Record<string, unknown>} */ (availableServices)[category]);
+    }
+  }
+  return out;
 }
 
 /** @param {string} kind @param {EntityLike | null | undefined} entity @param {string} [fallback] */
@@ -220,6 +269,8 @@ function readCurrentName(type, raw, fallback) {
   if (type === 'neighbour') return raw.neighbourName || raw.name || raw.label || fallback;
   // Historical events title off name/title/type.
   if (type === 'event') return raw.name || raw.title || raw.label || raw.type || fallback;
+  // A service's live name goes through the label seam (§934.13): the door prints the display word.
+  if (type === 'service') return institutionDisplayName(raw.name || fallback);
   return raw.name || raw.label || fallback;
 }
 
@@ -336,7 +387,7 @@ function stableEntityClone(value, ancestors = new WeakSet()) {
  * Build a navigable index of the dossier's structured entities.
  *
  * Returns the original per-kind arrays (npcs / factions / institutions /
- * resources / neighbours / events / deities) PLUS a flat `byId` map and a
+ * resources / services / neighbours / events / deities) PLUS a flat `byId` map and a
  * `resolve(id)` lookup so the hyperlink layer can turn a stable id into
  * `{ id, type, tab, anchor, currentName }`. Faction ids are the canonical
  * `factionIdFromName` (snake) so a name-stated NPC affiliation resolves with no
@@ -380,6 +431,17 @@ export function buildDossierEntityIndex(settlement = {}) {
       ? { id: resource, name: resource.replace(/_/g, ' ') }
       : resource;
     return decorateEntry('resource', { ...entityLink('resource', entity) }, entity);
+  });
+
+  // SERVICES (X-35) — every catalogue row the Services tab lists, indexed as a link TARGET so an
+  // Institutions card's service door lands on the row. Identity is the house + the raw name
+  // (`serviceEntityOf`); the label is the seamed display name; the category rides along for a
+  // reader that wants the row's home. Derived per render like every family here: nothing is
+  // persisted and generation stays byte-identical.
+  const services = serviceRowsOf(settlement.availableServices).map(({ category, svc }) => {
+    const entity = serviceEntityOf(svc);
+    const base = { ...entityLink('service', entity), label: institutionDisplayName(entity.name), category };
+    return decorateEntry('service', base, svc);
   });
 
   // NEIGHBOURS — the unified neighbourNetwork plus the live generator
@@ -464,7 +526,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   // wins a shared slug; deities + settlement last as catch-alls.
   const all = [
     ...npcs, ...factions, ...institutions,
-    ...resources, ...neighbourEntries, ...eventEntries,
+    ...resources, ...services, ...neighbourEntries, ...eventEntries,
     ...deities, ...settlementEntries,
   ];
 
@@ -505,6 +567,7 @@ export function buildDossierEntityIndex(settlement = {}) {
     factions,
     institutions,
     resources,
+    services,
     neighbours: neighbourEntries,
     events: eventEntries,
     deities,

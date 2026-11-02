@@ -40,7 +40,8 @@ import { toPublicSafe } from '../display/publicSafe.js';
 /**
  * @typedef {{ id: string, type: string, tab?: string, currentName?: string, identity?: { interactive?: boolean } }} MentionEntry
  * @typedef {{ npcs?: MentionEntry[], factions?: MentionEntry[], institutions?: MentionEntry[],
- *   resources?: MentionEntry[], neighbours?: MentionEntry[], events?: MentionEntry[], deities?: MentionEntry[] }} MentionIndex
+ *   resources?: MentionEntry[], services?: MentionEntry[], neighbours?: MentionEntry[], events?: MentionEntry[],
+ *   deities?: MentionEntry[] }} MentionIndex
  * @typedef {{ tabs: Set<string> | null, allow: Set<string> | null }} MentionScope
  * @typedef {{ type: 'text', value: string } | { type: 'link', value: string, id: string, entityType: string }} MentionSegment
  * @typedef {{ name: string, id: string, type: string }} MentionTarget
@@ -50,8 +51,10 @@ import { toPublicSafe } from '../display/publicSafe.js';
 const PROSE_TYPES = Object.freeze(['npc', 'faction', 'institution', 'event', 'neighbour', 'deity']);
 /** The families that link only from a structured name (a chip, a row): common-word names. */
 const STRUCTURED_ONLY_TYPES = Object.freeze(['resource', 'service']);
-/** Every indexed family the linker reads, in index order. The settlement entry is never read. */
-const INDEX_FAMILIES = Object.freeze(['npcs', 'factions', 'institutions', 'resources', 'neighbours', 'events', 'deities']);
+/** Every indexed family the linker reads, in index order. The settlement entry is never read.
+ *  `services` joined with X-35 (2026-11-01): a structured-only family like resources, so a
+ *  service name links from a chip or a row (the Institutions card's doors) and never from prose. */
+const INDEX_FAMILIES = Object.freeze(['npcs', 'factions', 'institutions', 'resources', 'services', 'neighbours', 'events', 'deities']);
 
 /** @param {string} type @param {string} id @returns {string} */
 const scopeKey = (type, id) => `${type}:${id}`;

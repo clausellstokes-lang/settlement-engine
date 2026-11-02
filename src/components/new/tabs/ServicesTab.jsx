@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Search, X } from 'lucide-react';
+import { useStore } from '../../../store/index.js';
+import { entityIdFor, serviceEntityOf } from '../../../domain/dossier/entityLinks.js';
 import { FS, MUTED, swatch } from '../../theme.js';
 import IconButton from '../../primitives/IconButton.jsx';
 import { sans } from '../Primitives';
@@ -97,6 +99,25 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   // reading sentences (the search miss, the absence note) take the floor below the
   // breakpoint. Counts and category headers are glanced at and keep their own steps.
   const mobile = useIsMobile();
+  // X-35: a service door from the Institutions tab stamps the store's focused entity; the row
+  // scrolls itself (ServiceItem's focus effect), but a row inside a category the reader has
+  // FOLDED cannot be seen, so the category opens first. A store SUBSCRIPTION rather than a
+  // render read: the tab re-renders for nothing when a person or a house is focused, and the
+  // open state moves only in the callback (the external-system shape the hooks rule asks for).
+  // Only a folded category moves: the default is open. A tab mounted AFTER the stamp needs
+  // nothing — its categories are open by default.
+  useEffect(() => useStore.subscribe((state, prev) => {
+    const focused = state.focusedEntity;
+    if (!focused || focused === prev.focusedEntity) return;
+    const id = String(focused.id || '');
+    if (!id.startsWith('service.')) return;
+    for (const [cat, list] of Object.entries(services || {})) {
+      if ((list || []).some((svc) => entityIdFor('service', serviceEntityOf(svc)) === id)) {
+        setOpenCats((cur) => (cur[cat] === false ? { ...cur, [cat]: true } : cur));
+        return;
+      }
+    }
+  }), [services]);
   const hasServices = services && Object.values(services).some(v => v?.length > 0);
 
   if (!hasServices) return (

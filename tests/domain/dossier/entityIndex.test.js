@@ -13,7 +13,10 @@ import {
   eventIdFor,
   neighbourIdFor,
   localNpcId,
+  serviceEntityOf,
+  serviceRowsOf,
 } from '../../../src/domain/dossier/entityLinks.js';
+import { institutionDisplayName } from '../../../src/domain/display/institutionDisplayName.js';
 import { factionIdFromName } from '../../../src/lib/entities.js';
 import {
   searchDossier,
@@ -271,6 +274,71 @@ describe('buildDossierEntityIndex', () => {
  * the identity a link carries (entry.id) is what the card's focus effect matches.
  * (InstitutionsTab cards, NeighbourLinkCard, WarFaithSection deity.)
  */
+describe('services are indexed entities (X-35, the owner 2026-11-01: each service a door to the Services tab)', () => {
+  const town = () => ({
+    name: 'Ashford',
+    institutions: [{ name: 'Granary', category: 'Economy' }, { name: 'Parish church', category: 'Religion' }],
+    availableServices: {
+      provisioning: [{ name: 'Grain sale', institution: 'Granary' }, { name: 'Alms', institution: 'Parish church' }],
+      lodging: [{ name: 'Alms', institution: 'Granary' }, 'A bare string row', { desc: 'no name' }],
+    },
+  });
+
+  it('serviceRowsOf flattens the category map to the object rows that carry a name', () => {
+    expect(serviceRowsOf(town().availableServices).map((r) => `${r.category}:${r.svc.name}`))
+      .toEqual(['provisioning:Grain sale', 'provisioning:Alms', 'lodging:Alms']);
+    expect(serviceRowsOf([{ name: 'Only', institution: 'X' }]).map((r) => r.category)).toEqual(['']);
+    expect(serviceRowsOf(null)).toEqual([]);
+  });
+
+  it('each row resolves to a `services` entry on the services tab, keyed by house + name', () => {
+    const index = buildDossierEntityIndex(town());
+    expect(index.services.map((e) => e.id)).toEqual([
+      'service.granary.grain-sale', 'service.parish-church.alms', 'service.granary.alms',
+    ]);
+    const entry = index.resolve('service.granary.grain-sale');
+    expect(entry.type).toBe('service');
+    expect(entry.tab).toBe('services');
+    expect(entry.category).toBe('provisioning');
+    expect(entry.identity.interactive).toBe(true);
+  });
+
+  it('two houses rendering one service name are two doors, each its own entity', () => {
+    const index = buildDossierEntityIndex(town());
+    expect(index.resolve('service.parish-church.alms').raw.institution).toBe('Parish church');
+    expect(index.resolve('service.granary.alms').raw.institution).toBe('Granary');
+  });
+
+  it('the row computes the same id and anchor the index holds (X-20 (c), no name-matching)', () => {
+    const index = buildDossierEntityIndex(town());
+    const svc = town().availableServices.provisioning[0];
+    const entry = index.resolve(entityIdFor('service', serviceEntityOf(svc)));
+    expect(entry).toBeTruthy();
+    expect(entityAnchor('service', serviceEntityOf(svc))).toBe(entry.anchor);
+  });
+
+  it('the live name goes through the label seam (§934.13)', () => {
+    const index = buildDossierEntityIndex({ availableServices: { faith: [{ name: 'Parish church', institution: 'Parish church' }] } });
+    const entry = index.services[0];
+    expect(entry.currentName).toBe(institutionDisplayName('Parish church'));
+    expect(entry.currentName.toLowerCase()).not.toContain('parish');
+  });
+
+  it('a public or player scope admits a service door on a page that has the services tab, and never from prose', () => {
+    const settlement = town();
+    const index = buildDossierEntityIndex(settlement);
+    const entry = index.resolve('service.granary.grain-sale');
+    const scope = mentionScopeFor(settlement, { publicDossier: true, tabs: ['overview', 'institutions', 'services'] });
+    expect(isMentionAllowed(scope, entry)).toBe(true);
+    expect(isMentionAllowed(mentionScopeFor(settlement, { publicDossier: true, tabs: ['overview'] }), entry)).toBe(false);
+    // prose never links a service name (structured-only, like a resource)
+    const prose = linkMentions('The Grain sale is held at the Granary.', index, null, {});
+    expect(prose.filter((seg) => seg.type === 'link').map((seg) => seg.value)).toEqual(['Granary']);
+    const chip = linkMentions('Grain sale', index, null, { structural: true });
+    expect(chip.filter((seg) => seg.type === 'link').map((seg) => seg.id)).toEqual(['service.granary.grain-sale']);
+  });
+});
+
 describe('dossier sink anchors + ids', () => {
   it('institution: link routes to the Institutions tab and the index anchor == the sink card anchor', () => {
     const s = sampleSettlement();

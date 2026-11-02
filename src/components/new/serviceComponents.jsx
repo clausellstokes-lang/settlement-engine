@@ -7,6 +7,11 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
+// X-35 (the owner, 2026-11-01): the row is the SINK of the Institutions card's service door. It
+// declares the index's own anchor and follows THE ONE FOCUS CONVENTION (X-20 (c)), so a click on a
+// house's service lands with this row at the top of the Services tab.
+import { entityAnchor, entityIdFor, serviceEntityOf } from '../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
 export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
@@ -15,6 +20,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // and the institution attribution keep their own steps: they are the row's
   // scannable furniture, and this row repeats dozens of times down the tab.
   const mobile = useIsMobile();
+  // X-35: the row's own entity id and anchor, computed exactly as the index computes them.
+  const entity = serviceEntityOf(svc);
+  const { ref: focusRef } = useEntityFocus(entityIdFor('service', entity));
   // ⛔ TWO BINDINGS, AND THE SPLIT IS THE POINT (§934.13). `name` stays the RAW service
   // key because it is a LOOKUP below — impaired/degraded/vulnerable sets and depReasons are
   // all keyed by the engine's spelling. `displayName` is the only one that reaches the page.
@@ -45,7 +53,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
     : null;
 
   return (
-    <div style={{
+    <div ref={focusRef} id={entityAnchor('service', entity)} data-testid="service-row" style={{
       display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px',
       ...(isCustom && !isImp && !isDeg
         ? { ...GOLD_TINT, borderWidth:1, borderStyle:'solid' }
