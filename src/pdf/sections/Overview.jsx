@@ -15,6 +15,8 @@
  *   - Institutions panel with category distribution + counts
  */
 import { View, Text } from '@react-pdf/renderer';
+// The Systems Health vintage, the byte-for-byte twin of the screen's ? pill (X-42; the G5 vintage law).
+import { SYSTEMS_HEALTH_VINTAGE } from '../../copy/sectionHelp.js';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import {
@@ -147,7 +149,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           caption, with the same declared-live Food Security carve-out
           (FROZEN_VS_LIVE grammar). One string, vetoable. */}
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        As judged at the first survey · Food Security is re-judged as the campaign advances
+        {SYSTEMS_HEALTH_VINTAGE}
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>

@@ -80,10 +80,15 @@ describe('G5 first-survey framing — ViabilityTab (Outlook)', () => {
 });
 
 describe('G5 first-survey framing — OverviewTab', () => {
-  test('the Systems Health label is the page\'s one "First survey" label, with the live Food Security carve-out (T1-5)', () => {
+  test('the Systems Health header\'s ? pill is the page\'s one "First survey" label, with the live Food Security carve-out (T1-5; X-42)', () => {
+    // X-38/X-42 (the owner, 2026-11-02): the caption left the section body for the header's ? pill,
+    // whose second sentence is the shared vintage constant the document's chapter prints too.
     const src = read(OVERVIEW_TAB);
-    expect(src).toMatch(/>As judged at the first survey · Food Security is re-judged as the campaign advances</);
-    expect(src).not.toMatch(/See Viability tab/); // anchored: the same source carries the label matched above
+    expect(src).toMatch(/help=\{SECTION_HELP\.systemsHealth\}/);
+    expect(src).not.toMatch(/>As judged at the first survey/);
+    const copy = read('src/copy/sectionHelp.js');
+    expect(copy).toMatch(/As judged at the first survey · Food Security is re-judged as the campaign advances\./);
+    expect(src).not.toMatch(/See Viability tab/); // anchored: the same source carries the help prop matched above
   });
 
   test('the vintage is said ONCE per page: the three warning headers carry no suffix (X-8, chair 2026-10-30)', () => {
@@ -95,7 +100,9 @@ describe('G5 first-survey framing — OverviewTab', () => {
     expect(src).toMatch(/>Structural Issues</);
     expect(src).toMatch(/>Coherence Notes</);
     expect(src).toMatch(/>Suggestions</);
-    expect((src.match(/first survey/gi) || []).length, 'the page says "first survey" exactly once').toBe(1);
+    // The one label is the pill's (copy/sectionHelp.js); the tab's own source prints the words nowhere.
+    expect((src.match(/>[^<]*first survey/gi) || []).length, 'the page prints "first survey" in no label of its own').toBe(0);
+    expect((read('src/copy/sectionHelp.js').match(/first survey/gi) || []).length, 'the pill copy says it once').toBe(1);
   });
 });
 

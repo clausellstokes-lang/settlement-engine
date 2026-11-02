@@ -1,3 +1,4 @@
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { tokenCase } from '../labelLadder.js';
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
@@ -118,7 +119,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
   return (
     <Section title={`Economic Flows (${chains.length + institutionalServices.length} active${impairedCount > 0 ? ` · ${impairedCount} impaired` : ''})`}
-      collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined}>
+      collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined} help={SECTION_HELP.supplyChains}>
       {/* Filter tabs */}
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
         {[

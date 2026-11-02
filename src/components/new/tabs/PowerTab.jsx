@@ -1,3 +1,5 @@
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { Section } from '../Primitives';
@@ -109,7 +111,7 @@ function RulingChainBlock({ settlement }) {
       padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
     }}>
       <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
-        Who runs this place?
+        Who runs this place?<InfoPill text={SECTION_HELP.rulers} />
       </div>
       {chain.power && (
         <ChainRow label="The power">

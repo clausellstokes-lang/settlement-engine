@@ -40,9 +40,10 @@ const VIABILITY_PDF = 'src/pdf/sections/ViabilityAssessment.jsx';
 const OVERVIEW_PDF = 'src/pdf/sections/Overview.jsx';
 const OVERVIEW_TAB = 'src/components/new/tabs/OverviewTab.jsx';
 
-// The Systems Health caption — ONE sentence, kept byte-identical between the
-// web tab and its PDF twin (screen↔PDF parity by construction, not by comment).
-const SYSTEMS_HEALTH_CAPTION = 'As judged at the first survey · Food Security is re-judged as the campaign advances';
+// The Systems Health caption — ONE sentence, kept byte-identical between the web tab's ? pill
+// and its PDF twin by BOTH reading copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE (X-42; parity by
+// construction: one constant, two readers).
+const SYSTEMS_HEALTH_CAPTION = 'As judged at the first survey · Food Security is re-judged as the campaign advances.';
 
 describe('G5 first-survey framing — PDF ViabilityAssessment twin', () => {
   // ⭐ ONE LABEL PER CHAPTER (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
@@ -63,9 +64,12 @@ describe('G5 first-survey framing — PDF ViabilityAssessment twin', () => {
 });
 
 describe('G5 first-survey framing — PDF Overview twin', () => {
-  test('the Systems Health caption is the byte-for-byte twin of OverviewTab', () => {
-    expect(read(OVERVIEW_PDF)).toContain(SYSTEMS_HEALTH_CAPTION);
-    expect(read(OVERVIEW_TAB)).toContain(SYSTEMS_HEALTH_CAPTION);
+  test('the Systems Health caption is the byte-for-byte twin of the screen\'s pill: one constant, two readers', () => {
+    const copy = read('src/copy/sectionHelp.js');
+    expect(copy).toContain(SYSTEMS_HEALTH_CAPTION);
+    expect(read(OVERVIEW_PDF)).toMatch(/\{SYSTEMS_HEALTH_VINTAGE\}/);
+    expect(read(OVERVIEW_TAB)).toMatch(/help=\{SECTION_HELP\.systemsHealth\}/);
+    expect(copy).toMatch(/systemsHealth: `[^`]*\$\{SYSTEMS_HEALTH_VINTAGE\}`/);
   });
 
   test('the vintage is said once in the chapter: the WARNINGS & NOTES header carries no suffix (X-8, 2026-10-30)', () => {
@@ -73,6 +77,9 @@ describe('G5 first-survey framing — PDF Overview twin', () => {
     // label, as on the screen's Overview (RULINGS-CROSS X-8, the chair's reading, vetoable).
     const src = read(OVERVIEW_PDF);
     expect(src).toMatch(/WARNINGS & NOTES\s*<\/Text>/);
-    expect((src.match(/first survey/gi) || []).length, 'the chapter says "first survey" exactly once').toBe(1);
+    // The chapter's one vintage label is the imported constant, drawn once; its own source spells
+    // the words nowhere (the comment beside the import names the twin, not the vintage).
+    expect((src.match(/\{SYSTEMS_HEALTH_VINTAGE\}/g) || []).length, 'the chapter draws the vintage exactly once').toBe(1);
+    expect((src.match(/first survey/gi) || []).length, 'the chapter spells the vintage nowhere of its own').toBe(0);
   });
 });

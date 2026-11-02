@@ -36,6 +36,7 @@ import ProseBlock from '../ProseBlock.jsx';
 // The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
 import { edged } from '../../../design/edgedBox.js';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 
 // The institution provenance badge and its legend moved to InstitutionsTab.jsx with the
 // roster itself (owner addendum T1-15, 2026-10-30): that tab is the roster's one home.
@@ -340,16 +341,12 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       </div>}
 
       {/* ── SYSTEMS HEALTH DASHBOARD ─────────────────────────────────────── */}
-      <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a">
-
-        {/* First-survey framing (G5 / FROZEN_VS_LIVE): the five score bars and
-            the Viability + Defense statuses are generation verdicts with no
-            pulse writeback; Food Security is the declared-live exception,
-            re-graded every tick — same carve-out grammar as DefenseTab's
-            Threat Assessment caption (Wave R-0). */}
-        {/* THE PAGE'S ONE "First survey" LABEL (X-8, T1-5): the warning headers below carry
-            no suffix. The carve-out stays because it changes how the table reads the bars. */}
-        <div style={{fontSize:proseFontSize(FS.xxs,mobile),color:MUTED,marginBottom:8}}>As judged at the first survey · Food Security is re-judged as the campaign advances</div>
+      {/* THE VINTAGE CAPTION LEFT THIS SECTION (X-38/X-42, the owner, 2026-11-02): the G5
+          framing (the five score bars and the Viability + Defense statuses are generation
+          verdicts; Food Security is the declared-live exception) is now the second sentence
+          of this header's ? pill (copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE), said once
+          per page as X-8 asks; the document's Overview chapter prints the same words. */}
+      <Section title="Systems Health" collapsible defaultOpen accent="#3d2b1a" help={SECTION_HELP.systemsHealth}>
 
         {/* Status tags row */}
         <div style={{display:'flex',gap:8,flexWrap:'wrap',marginBottom:14}}>
@@ -426,7 +423,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
       </Section>
 
       {/* ── CURRENT TENSIONS & CONFLICTS ─────────────────────────────────── */}
-      {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b">
+      {(hist.currentTensions?.length>0||(r.conflicts||[]).length>0)&&<Section title="Tensions & Conflicts" collapsible defaultOpen accent="#b8860b" help={SECTION_HELP.tensions}>
         {hist.currentTensions?.map((t,i)=>(
           <div key={i} style={{display:'flex',gap:8,marginBottom:6,paddingBottom:6,borderBottom:i<(hist.currentTensions?.length||0)-1||(r.conflicts||[]).length>0?'1px solid #e8d080':'none'}}>
             <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch['#B8860B']}}>▸</span>

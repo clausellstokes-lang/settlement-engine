@@ -381,8 +381,12 @@ describe('each bucket means what it says', () => {
 
   test('FRAMED tabs really carry the first-survey framing', () => {
     for (const rel of FRAMED) {
+      // X-42 (the owner, 2026-11-02): the Overview's framing sentence left the section body for
+      // its header's ? pill, whose second sentence is copy/sectionHelp.js :: SYSTEMS_HEALTH_VINTAGE
+      // ("As judged at the first survey …"); the tab wears it as `help={SECTION_HELP.systemsHealth}`.
+      const src = read(rel);
       expect(
-        read(rel).includes('at the first survey'),
+        src.includes('at the first survey') || src.includes('SECTION_HELP.systemsHealth'),
         `${rel} is classified FRAMED but carries no first-survey framing sentence`,
       ).toBe(true);
     }

@@ -47,11 +47,12 @@ async function renderServices() {
 beforeEach(() => installMatchMedia(false));
 afterEach(cleanup);
 
-describe('ServicesTab — the counts strip', () => {
-  it('puts a real space between the service count and the category count', async () => {
+describe('ServicesTab — the header strip', () => {
+  it('carries the page\'s ? pill and no count line (X-38/X-42, the owner 2026-11-02), and the absence once', async () => {
     const { container } = await renderServices();
-    // Four services across three categories, as one readable phrase.
-    expect(container.textContent).toContain('4 services across 3 categories');
+    // The strip's only furniture is the ? pill; the "N services across M categories" line is gone.
+    expect(container.querySelector('[data-testid="info-pill"]')).toBeTruthy();
+    expect(container.textContent).not.toContain('services across');
 
     // RS-15..RS-17 (chair rulings 2026-10-30): the strip is ONE line and an absence is
     // said ONCE. A town expects food, healing, goods, information and lodging; this one
@@ -62,7 +63,7 @@ describe('ServicesTab — the counts strip', () => {
     expect(text).toContain('Not available for a town: Food & Drink, Goods & Crafts, Information.');
     expect(text.split('Not available').length - 1, 'the absence is said more than once').toBe(1);
     for (const cut of ['3 missing', 'Category Status', 'not available', 'No impairments',
-      'look elsewhere', '4 services · 3 categories']) {
+      'look elsewhere', '4 services · 3 categories', '4 services across 3 categories']) {
       // anchored: the strip is proven above to render its exact Not-available line, said once.
       expect(text, `the cut block "${cut}" is back`).not.toContain(cut);
     }

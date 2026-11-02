@@ -15,6 +15,8 @@
  * short note rather than a fabricated grid.
  */
 
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
@@ -134,8 +136,11 @@ export default function SubstrateTab({ settlement }) {
           conditions, which is why a row can disagree with its home page's first-survey reading)
           and the "Under pressure" callout is CUT: it restated the rows sorted worst-first right
           below it (999/1000). The sixteen rows are the engine view and stay (R7). */}
-      <div data-testid="substrate-title" style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 2 }}>
-        Foundations
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+        <div data-testid="substrate-title" style={{ fontSize: FS.lg, fontWeight: 800, color: INK }}>
+          Foundations
+        </div>
+        <InfoPill text={SECTION_HELP.foundations} />
       </div>
       <div style={{ fontSize: proseFontSize(FS.sm, mobile), fontWeight: 700, color: BODY, marginBottom: 12 }}>
         What is holding, what is strained

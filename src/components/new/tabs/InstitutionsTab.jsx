@@ -46,6 +46,8 @@ import { factionIdFromName } from '../../../lib/entities.js';
 import { useEntityFocus } from '../../dossier/useEntityFocus.js';
 import { MentionText } from '../../ProseParagraph.jsx';
 import EntityLink from '../../primitives/EntityLink.jsx';
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 
 // ── The institution provenance badge (R-5b item #10), moved from OverviewTab ──────────
 // The badge reads the ONE derived provenance record (domain/provenance/rosterProvenance.js),
@@ -77,13 +79,9 @@ export function institutionBadge(inst) {
   return { label:null, color:PROVENANCE_TONE.none, title:undefined };
 }
 
-const LEGEND = [
-  ['REQ', PROVENANCE_TONE.required, 'Historically required'],
-  ['YOU', PROVENANCE_TONE.you, 'Added by you'],
-  ['→', PROVENANCE_TONE.auto, 'Auto-resolved dependency'],
-  ['WORLD', PROVENANCE_TONE.world, 'Grown by the living world'],
-  ['✦', GOLD_DEEP, 'custom'],
-];
+// THE LEGEND ROW IS GONE (X-38/X-42, the owner, 2026-11-02): its key — history, you, the
+// living world, a dependency — is the second sentence of the page's ? pill
+// (copy/sectionHelp.js :: institutions); each badge keeps its own title.
 
 /** Every service row as `{ svc }`, flattened out of the category map the generator writes. */
 function serviceRows(availableServices) {
@@ -237,21 +235,20 @@ export function InstitutionCard({ inst, category, label, services, sets, backs =
 }
 
 export default function InstitutionsTab({ settlement }) {
-  const mobile = useIsMobile();
   const houses = useMemo(() => institutionsWithServices(settlement), [settlement]);
   const sets = useMemo(() => computeChainSets(settlement || {}), [settlement]);
   if (!houses.length) return <Empty message="No institutions are recorded for this settlement." />;
 
   return (
     <div style={{ padding: '14px 18px' }}>
+      {/* THE PAGE'S ONE MARK (X-42): the ? pill, right-aligned above the houses; the page has no
+          title of its own (the tab names it), and no sentence about itself (X-38). */}
+      <div data-testid="institutions-header" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: 6 }}>
+        <InfoPill text={SECTION_HELP.institutions} />
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {houses.map(({ inst, category, label, services, backs }, i) => (
           <InstitutionCard key={`${inst.name}-${i}`} inst={inst} category={category} label={label} services={services} backs={backs} sets={sets} />
-        ))}
-      </div>
-      <div style={{ display: 'flex', gap: 14, marginTop: 12, paddingTop: 8, borderTop: '1px solid #f0e8d8', fontSize: proseFontSize(FS.xxs, mobile), color: MUTED, flexWrap: 'wrap' }}>
-        {LEGEND.map(([lbl, c, desc]) => (
-          <span key={lbl}><span style={{ color: c, fontWeight: 800 }}>{lbl}</span> = {desc}</span>
         ))}
       </div>
       {/* The campaign-only stale-window note closes the page (the block law, X-16 rung 6). */}

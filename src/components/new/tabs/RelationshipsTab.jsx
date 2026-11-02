@@ -1,3 +1,4 @@
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { relColor } from '../../../domain/display/relationshipColors.js';
@@ -136,7 +137,7 @@ export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=fa
     <div>
 
       {/* Neighbour Network */}
-      {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>
+      {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen help={SECTION_HELP.relationships}>
         <div style={{display:'flex',flexDirection:'column',gap:12}}>
           {neighbours.map((link,i)=><NeighbourLinkCard key={link.id||i} link={link} settlement={r} styleFor={styleFor}/>)}
         </div>

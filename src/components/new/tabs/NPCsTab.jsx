@@ -1,3 +1,5 @@
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useState } from 'react';
 import { Search, X } from 'lucide-react';
 import { FS, swatch, MUTED } from '../../theme.js';
@@ -92,7 +94,7 @@ export function NPCsTab({
       {/* ── HEADER ──────────────────────────────────────────────────────── */}
       <div style={{display:'flex',alignItems:'center',gap:10,marginBottom:14,flexWrap:'wrap'}}>
         <div style={{flex:1}}>
-          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span>
+          <span style={{...serif,fontSize:FS.xl,fontWeight:600,color:swatch.inkMag}}>{npcs.length} Key Figures</span><InfoPill text={SECTION_HELP.npcs} />
           <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,marginLeft:8}}>
             {highCount>0&&`${highCount} high influence · `}{modCount>0&&`${modCount} moderate`}
           </span>

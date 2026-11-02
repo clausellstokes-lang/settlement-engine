@@ -17,6 +17,8 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { compareCodepoint } from '../../../domain/deterministicSort.js';
 import { edged } from '../../../design/edgedBox.js';
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 
 /**
  * ⛔ DS-SUP-3'S POSITION, BOUND ONCE AND SPELLED ONCE.
@@ -142,7 +144,6 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
   const query = search.trim().toLowerCase();
   const searchResults = query ? allServices.filter(s => s.text.includes(query)) : null;
   const missing = (J0[tier] || []).filter(k => !services?.[k]?.length);
-  const totalCount = allServices.length;
   const hasCustom = allServices.some(s => typeof s.svc === 'object' && (s.svc.custom === true || s.svc.source === 'custom'));
 
   // Per-category impairment counts
@@ -206,12 +207,11 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
 
       {/* ── HEADER STRIP ────────────────────────────────────────────────── */}
       <div style={{background:'linear-gradient(to right,#f5ede0,#ede3cc)',border:'1px solid #c8b89a',padding:'10px 14px',marginBottom:14,display:'flex',alignItems:'center',gap:10,flexWrap:'wrap'}}>
-        <div style={{flex:1,minWidth:0}}>
-          {/* The two spans were separated by margin ALONE, so the strip's accessible
-              name and any copy/paste of it read "15 servicesacross 8 categories".
-              The space is a real text node; the margin keeps the optical gap. */}
-          <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{totalCount} services</span>{' '}
-          <span style={{fontSize:FS.sm,color:MUTED,marginLeft:6}}>across {catOrder.length} categories{hasCustom?' · custom':''}</span>
+        <div style={{flex:1,minWidth:0,display:'flex',alignItems:'center',gap:8}}>
+          {/* THE COUNT LINE IS GONE (X-38/X-42, the owner, 2026-11-02: no sentence about the page).
+              The strip carries the page's ? pill and the custom marker, nothing else. */}
+          <InfoPill text={SECTION_HELP.services} />
+          {hasCustom&&<span style={{fontSize:FS.sm,color:MUTED}}>custom content</span>}
         </div>
         {/* RS-15/RS-16 (chair rulings 2026-10-30): this strip is ONE line. The impaired,
             reduced and missing chips and "✓ No impairments" are cut: impairment is said on

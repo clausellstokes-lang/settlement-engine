@@ -191,7 +191,9 @@ describe('InstitutionsTab shape (owner addendum T1-14, inverted by X-35 on 2026-
     expect(desc, 'the house leads with no description').toBeTruthy();
     expect(desc.textContent.length).toBeGreaterThan(10);
     expect(desc.compareDocumentPosition(cards[withRows].querySelector('[data-testid="institution-services"]')) & 4).toBeTruthy();
-    expect(container.textContent).toContain('= Historically required');
+    // X-38/X-42: the legend row is gone; the page's ? pill carries the badge key.
+    expect(container.textContent).not.toContain('= Historically required');
+    expect(container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill"]')).toBeTruthy();
   });
 
   test('a house with no service row still appears, with its description line', () => {
