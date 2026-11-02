@@ -62,18 +62,10 @@ export const SLATE_BG = L.SLATE_BG;
 // source; this is a token DEFINITION file, exempt from no-raw-color.
 // (VIOLET*→SLATE* rename completed at fold batch 2, 2026-07-19 — no aliases.)
 export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate-700'])
-// THE LAUNCH REGISTER (the owner, 2026-11-01, ODQ §934.103): the purple hue of the dossier
-// tabs that are still "Available at launch" teasers, "with gold lettering" (the owner's
-// second word). Defined in tokens.js with the measured pairs; read by the two tab strips
-// through domain/dossier/launchTeasers.js's tone word.
-export const LAUNCH          = L.LAUNCH;          // the idle rule and the accent
-export const LAUNCH_DEEP     = L.LAUNCH_DEEP;     // the active fill
-export const LAUNCH_BG       = L.LAUNCH_BG;       // the idle wash
-export const LAUNCH_INK      = L.LAUNCH_INK;      // gold letters on the launch ground
-export const LAUNCH_INK_IDLE = L.LAUNCH_INK_IDLE; // gold letters on the launch wash
-export const LAUNCH_GROUND   = L.LAUNCH_GROUND;   // the regal ground (X-39)
-export const LAUNCH_DEEPEST  = L.LAUNCH_DEEPEST;  // the gloss's deep end
-export const LAUNCH_SHEEN    = L.LAUNCH_SHEEN;    // the gloss's highlight, the lightest ground a gold letter sits on
+// THE LAUNCH REGISTER (the owner, 2026-11-01, ODQ §934.103; X-36, X-39): the teaser tabs and
+// every launch-locked control wear `launchSkin`, defined in tokens.js with its measured pairs.
+// The eight flat LAUNCH_* aliases left this eager shim on 2026-11-02: no app module read them,
+// and the first-paint closure paid for every one.
 export { launchSkin } from '../design/tokens.js';
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const GREEN_DEEP = L.GREEN_DEEP; // legible green text on green-100 tints (== color['green-700'])

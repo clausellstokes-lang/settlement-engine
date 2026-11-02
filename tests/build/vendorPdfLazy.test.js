@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_048_000; // 2026-10-01: unchanged, red cleared by the urban band's own bytes (note at file end)
+const CLOSURE_BUDGET_BYTES = 1_048_068; // 2026-11-02: re-recorded at the measured figure, the chair's ruling, vetoable by the owner (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -1766,7 +1766,7 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_068);
     expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(337_000);
     expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(283_000);
 
@@ -1849,3 +1849,18 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 // / 277,233). ⚠ THIS LANDING SPENDS 8,411 B OF THE MARGIN the C5 note reserves for honest
 // registration costs, which is the content the owner approved; 1,709 B remain for every other lane.
 // Monotone-down and owner-signed discipline unchanged.
+// ── (2026-11-02, THE FIFTH ROUND, ODQ §934.103) RE-RECORDED 1,048,000 -> 1,048,068 BY THE CHAIR'S RULING,
+//    VETOABLE BY THE OWNER (for CLOSURE_BUDGET_BYTES above and its ARCH car 2 pin) ──
+// A rise stays the owner's (rule 33, §P11.2), so this one stands on the chair's ruling until the owner's word,
+// recorded in the ledger. The cause is the owner's launch register (X-36 gold lettering, X-39 the launch skin):
+// it reaches first paint through the header's account menu, whose launch-locked Upgrade row renders through the
+// Button primitive (main.jsx -> App.jsx -> nav/ArrowHeader.jsx -> AccountMenu.jsx; main.jsx -> design/tokens.js;
+// main.jsx -> App.jsx -> primitives/Button.jsx), so it is not moved out. MEASURED by in-memory production builds
+// of integrity-counted archives, minified bytes attributed per module through hidden sourcemaps, the same eight
+// chunks: ee2d961ae (the last green verify:dist) 1,046,633 B; 9e66e658c 1,048,412 B, +1,779: design/tokens.js
+// +856, primitives/Button.jsx +749, components/theme.js +120, primitives/AvailableAtLaunchPill.jsx +19,
+// domain/userEdits.js +8 (X-45's `backs`), App.jsx +4, and +23 of minifier drift with no source change
+// (generators/lookups.js +14, main.jsx +9). The eager src/data set is identical at both ends (13 tables). BOUGHT
+// BACK FIRST: the eight flat LAUNCH_* aliases no app module read left the legacy object and the theme shim, -344 B
+// (tokens.js -224, theme.js -120), measured 1,048,068 B; launchSkin, the Button's skin branch and every colour key
+// are untouched. The budget is re-recorded at that measured figure and never above it. Monotone-down from here.

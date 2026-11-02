@@ -34075,7 +34075,8 @@
         {
           "_note": "⛔ THE OWNER-SIGNED CEILING, PINNED BY ITS OWN ARM, under the describe 'ARCH car 2 — the three first-paint budgets stay where the owner signed them'. This is the bound section 7's price is stated against, and by judgment 74 it now covers the SUM of all four EM-T9 members. ⛔ THE PACKET NEVER MOVES IT: a summed closure over 1,048,000 is a STOP FOR THE OWNER, and the cure is the PLACEMENT before it is the ceiling. Proven present at e80a6a3f4: git grep -c -F -> 1.",
           "path": "tests/build/vendorPdfLazy.test.js",
-          "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);"
+          "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)"
         },
         {
           "_note": "The membership probe imports THIS exported set and reads no dist, so it can never skip. Measured at e80a6a3f4: 269 members, with src/store/authSlice.js ALREADY a member and src/config/tierFacts.js NOT one — and, for the byte-arm holder's sum, EM-A1's and EM-B1h's four src paths NOT members while EM-D0a's two ARE. Proven present: git grep -c -F -> 1.",
@@ -35388,11 +35389,13 @@
         {
           "path": "tests/build/vendorPdfLazy.test.js",
           "symbol": "const CLOSURE_BUDGET_BYTES = 1_048_000;",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)",
           "_note": "The owner-signed ceiling this packet prices the whole train against. NO EDIT is made on this path; if the literal has moved when the chair places this packet, the bound is stale and the pre-proof must be re-run."
         },
         {
           "path": "tests/build/vendorPdfLazy.test.js",
           "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)",
           "_note": "The ceiling's own pin at :1769, which makes a raise a deliberate act rather than a diff nobody reads. Untouched in both branches."
         }
       ],

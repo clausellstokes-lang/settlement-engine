@@ -694,14 +694,8 @@ export const legacy = Object.freeze({
   SLATE:    color['slate-500'],
   SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
   SLATE_BG: color['slate-100'],
-  LAUNCH:   color['launch-500'],    // the teaser tabs' hue: the idle rule, the strip's accent (the owner, 2026-11-01)
-  LAUNCH_DEEP: color['launch-700'], // the ACTIVE teaser tab's fill
-  LAUNCH_BG: color['launch-100'],   // the IDLE teaser tab's wash
-  LAUNCH_INK: color['gold-400'],    // gold lettering on the launch ground (5.8:1 on the sheen)
-  LAUNCH_INK_IDLE: color['gold-800'], // gold lettering on the launch wash (6.3:1)
-  LAUNCH_GROUND: color['launch-800'],
-  LAUNCH_DEEPEST: color['launch-900'],
-  LAUNCH_SHEEN: color['launch-sheen'],
+  // THE LAUNCH REGISTER is worn through `launchSkin` above (X-39). Its eight flat LAUNCH_*
+  // aliases left this eager object on 2026-11-02: no app module read them (ODQ §934.103).
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

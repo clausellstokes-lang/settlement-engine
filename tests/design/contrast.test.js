@@ -20,8 +20,7 @@ import {
   GOLD, GOLD_DEEP, GOLD_SOFT,
   GOLD_TXT, GREEN, GREEN_BG, GREEN_DEEP, INK, INK_DEEP, MUTED, PARCH, PARCH_100, RED, RED_BG,
   SECOND, SLATE, SLATE_BG, SLATE_DEEP,
-  LAUNCH, LAUNCH_BG, LAUNCH_DEEP, LAUNCH_INK, LAUNCH_INK_IDLE,
-  LAUNCH_DEEPEST, LAUNCH_SHEEN, launchSkin,
+  launchSkin,
   swatch,
 } from '../../src/components/theme.js';
 // THE LIVING BACKDROP wash strength — imported (not hard-coded) so raising the
@@ -48,8 +47,19 @@ import { BAND_COLOR } from '../../src/domain/state/bands.js';
 import { resolveTownMapStyle, ILLUSTRATED_STYLE_ID, TOWN_MAP_STYLE_IDS } from '../../src/design/townMapStyles.js';
 import { buildTownMapModel } from '../../src/domain/townMap/townMapModel.js';
 import { makeTownFixture } from '../fixtures/townMapFixtures.js';
-import { semantic } from '../../src/design/tokens.js';
+import { color, semantic } from '../../src/design/tokens.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+// THE LAUNCH PAIRS, named at their one home: the flat LAUNCH_* aliases left the eager theme
+// shim on 2026-11-02 (no app module read them; ODQ §934.103), so this file reads the same
+// colour-table values, value for value, and every pair and title below is unchanged.
+const LAUNCH = color['launch-500'];
+const LAUNCH_BG = color['launch-100'];
+const LAUNCH_DEEP = color['launch-700'];
+const LAUNCH_INK = color['gold-400'];
+const LAUNCH_INK_IDLE = color['gold-800'];
+const LAUNCH_DEEPEST = color['launch-900'];
+const LAUNCH_SHEEN = color['launch-sheen'];
 
 // ── WCAG relative-luminance contrast ─────────────────────────────────────────
 function channel(c) {
