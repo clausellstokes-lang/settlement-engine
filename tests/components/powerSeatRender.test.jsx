@@ -43,14 +43,21 @@ describe('"Holds power" is the ruler\'s word alone', () => {
 });
 
 describe('the governs note names the rival or goes', () => {
-  it('names the outranking rival when one outranks the governing faction (thorp 1: Religious Authorities)', () => {
-    const s = born('thorp', 1);
+  // Fixture re-pointed thorp 1 → thorp 3 (TIPFIX, 2026-11-03): FOOD-2's base numbers (a7f13fef,
+  // foodBalance.js :: grownShareOf / hinterlandShareOf) feed thorp 1, so its governance is no longer
+  // fractured and the generator writes no crisis note for it (Religious Authorities 53 still outrank
+  // the Elder Council 22). Thorp 3 is the first rulers-thorp-<i> whose governing faction carries the
+  // note AND is outranked: People's Council 39 over the Elder Council 26.
+  it('names the outranking rival when one outranks the governing faction (thorp 3: People\'s Council)', () => {
+    const s = born('thorp', 3);
     const gov = governingFactionOf(s);
     expect(String(gov.crisisNote), 'fixture premise: the generator wrote the note').toContain(NOTE);
+    const rival = (s.powerStructure.factions || []).find((f) => nameOf(f) === "People's Council");
+    expect(rival?.power, 'fixture premise: the rival outranks the governing faction on power').toBeGreaterThan(gov.power);
     tab(s);
     openGoverning(s);
     const text = document.body.textContent;
-    expect(text).toContain(`${NOTE}; the real decisions rest with Religious Authorities.`);
+    expect(text).toContain(`${NOTE}; the real decisions rest with People's Council.`);
   });
 
   it('drops the claim when no rival outranks the governing faction (thorp 13), keeping the fracture reading', () => {
