@@ -27,10 +27,13 @@ import { npcArchetypeBreakdown } from '../../src/domain/npcProfile.js';
 // magicLedger's canonical band so 'high' (generator) and 'pervasive' (legacy)
 // both count as the top tier.
 describe('magicProfile — generator-vocabulary high magic can reach integral roles (#1)', () => {
+  // Lane MAGIC (chair ruling 2, 2026-11-03): 'integral' needs a practitioner AND a dependent on
+  // the record, never the band alone, so the top-band fixture carries a catalogue practitioner and the magic chains it runs.
   const highMagicCity = {
     config: { magicLevel: 'high', priorityMagic: 90 },
-    institutions: [{ name: 'Grand Tower' }, { name: 'Temple of Light' }, { name: 'House of Healing' }],
+    institutions: [{ name: 'Grand Tower' }, { name: "Wizard's tower" }, { name: 'Temple of Light' }, { name: 'House of Healing' }],
     powerStructure: { factions: [{ faction: 'Arcane Conclave', power: 60 }] },
+    economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }, { chainId: 'magical_goods', label: 'Magical Items & Enchanting' }] },
   };
 
   it("'high' (the generator's top band) yields integral economic + infrastructure roles", () => {
@@ -48,8 +51,9 @@ describe('magicProfile — generator-vocabulary high magic can reach integral ro
   it('legacy pervasive remains integral (no regression — both canon to the top band)', () => {
     const m = deriveMagicProfile({
       config: { magicLevel: 'pervasive' },
-      institutions: [{ name: 'Grand Tower' }, { name: 'Temple of Light' }, { name: 'Apothecary' }],
+      institutions: [{ name: 'Grand Tower' }, { name: "Wizard's tower" }, { name: 'Temple of Light' }, { name: 'Apothecary' }],
       powerStructure: { factions: [{ faction: 'Arcane Conclave', power: 60 }] },
+      economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }, { chainId: 'magical_goods', label: 'Magical Items & Enchanting' }] },
     });
     expect(m.roles.economic).toBe('integral');
     expect(m.roles.infrastructure).toBe('integral');

@@ -22,6 +22,7 @@ import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
 import { activeConditionWords, conditionsSentence } from '../../../domain/display/conditionWords.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
+import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
@@ -101,7 +102,10 @@ export default function SubstrateTab({ settlement }) {
 
   const rows = useMemo(() => {
     if (!model?.variables) return [];
-    return Object.entries(model.variables)
+    // ONE PREDICATE, ASKED ONCE (lane MAGIC, chair ruling 1, 2026-11-03): the variable list
+    // passes the shared magic gate, so "Magical stability" steps aside where magic does not
+    // work instead of grading "Adequate" off a base of 50 that never read the switch.
+    return magicRowsGated(settlement, Object.entries(model.variables), ([key]) => key)
       .map(([key, v]) => ({
         key,
         label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
@@ -114,7 +118,10 @@ export default function SubstrateTab({ settlement }) {
         (BAND_RANK[a.band] ?? 5) - (BAND_RANK[b.band] ?? 5)
         || healthOrientedScore(a) - healthOrientedScore(b)
         || a.label.localeCompare(b.label));
-  }, [model]);
+  }, [model, settlement]);
+  // THE ONE RELIANCE READING (lane MAGIC, chair ruling 2): the same word the Overview and the
+  // Magic tab print, from the one derivation; absent where magic does not work.
+  const magicReliance = useMemo(() => deriveMagicRelianceView(settlement), [settlement]);
   // THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): the sentence under the rows
   // names the conditions the reading folds in, and says nothing when there are none
   // (domain/display/conditionWords.js, shared with print).
@@ -171,6 +178,11 @@ export default function SubstrateTab({ settlement }) {
           ))}
         </NameColumns>
       </div>
+      {magicReliance.shown && (
+        <p data-testid="substrate-magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '12px 0 0' }}>
+          Reliance on magic: {magicReliance.word}
+        </p>
+      )}
       {/* THE BLOCK LAW (X-16; BUILD-W2-BLOCKLAW U3): the one fact sentence sits UNDER the rows
           it qualifies, never above them. It prints only when there is a condition to name. */}
       {conditionWords.length > 0 && (

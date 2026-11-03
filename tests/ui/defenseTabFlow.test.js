@@ -29,6 +29,7 @@ import { dirname, join } from 'node:path';
 import { DefenseTab, THREAT_ROW_KEY } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
+import { magicRelianceDeskSettlement } from '../../src/domain/display/dossierViewModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   defenseMagicDependencyProse, defenseSupportingProse, defenseThreatProse,
@@ -144,8 +145,11 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
   // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-15): the dependence block MOVED to the Magic
   // tab as the Roles section's framing. These arms follow it there; the registry row keeps its
   // id. The Outlook page is asserted to carry none of it.
+  // Lane MAGIC (chair ruling 2, 2026-11-03): the Magic tab hands the desk the settlement with
+  // its dependency flag READ FROM the one reliance reading (`magicRelianceDeskSettlement`), not
+  // the siege/famine/plague flag, so every arm below asks the desk through that same view.
   test('the magic tab renders the EXACT dependency sentence the desk produced; Outlook does not', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
+    const expected = defenseMagicDependencyProse(magicRelianceDeskSettlement(port), opts(port)).arcaneReliance.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
     const { container } = render(e(MagicTab, { settlement: port }));
     expect(container.textContent).toContain(expected);
@@ -161,10 +165,13 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // The tab's own magic-dependency warning box renders only when the flag is TRUE, which
     // is why the corpus line sits outside it. A line that could only appear inside the box
     // would leave a third of an authored block permanently unreachable.
-    expect(port.defenseProfile.magicDependency).toBe(false);
-    const drawn = defenseMagicDependencyProse(port, opts(port));
+    // A settlement whose magic nothing depends on: the port with its supply chains set aside,
+    // so the one reliance reading is not relied-upon and the desk reads the FALSE pool.
+    const unrelied = { ...port, economicState: { ...port.economicState, activeChains: [] } };
+    expect(magicRelianceDeskSettlement(unrelied).defenseProfile.magicDependency).toBe(false);
+    const drawn = defenseMagicDependencyProse(magicRelianceDeskSettlement(unrelied), opts(unrelied));
     expect(drawn.arcaneReliance.provenance.poolKey).toBe('magicDependency false');
-    const { container } = render(e(MagicTab, { settlement: port }));
+    const { container } = render(e(MagicTab, { settlement: unrelied }));
     const text = container.textContent;
     expect(text).toContain(drawn.arcaneReliance.sentence);
     // The frozen record's static explanation is correctly absent (the flag is false), and the
@@ -174,7 +181,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
   });
 
   test('THE PUBLIC GATE: the magic tab stays silent for an anonymous viewer', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
+    const expected = defenseMagicDependencyProse(magicRelianceDeskSettlement(port), opts(port)).arcaneReliance.sentence;
     const priv = render(e(MagicTab, { settlement: port, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();

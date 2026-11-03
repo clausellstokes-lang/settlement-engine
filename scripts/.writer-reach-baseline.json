@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "a35a59fcfacfce65e8fdc620b76bce3be7b8efab",
+ "frozenAtSha": "7c63271d104e520bb3b9ac47cd7d7c7171f1078f",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
  "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
- "verdictDigest": "811e5b2cbd3dd0b86dab3e80642141fc0ae4cffe481cc63b3026f2e9d973cd93",
+ "verdictDigest": "5ecdd376c7871e258fdb7f3dcfb7c9fcfbbfdb5490f9938640ca3b524a8320ad",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,8 +73,8 @@
  ],
  "closureSizes": {
   "web-display": 743,
-  "web-transitive": 940,
-  "dossier-pdf": 446,
+  "web-transitive": 939,
+  "dossier-pdf": 445,
   "campaign-pdf": 75,
   "world-book": 92,
   "foundry": 340,
@@ -91,15 +91,15 @@
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1684,
-  "sites": 39854,
-  "propRead": 37711,
+  "files": 1683,
+  "sites": 39796,
+  "propRead": 37655,
   "elemRead": 0,
-  "destructure": 2128,
+  "destructure": 2126,
   "inOp": 15,
-  "rGrades": 6113,
-  "nGrades": 969248,
-  "resolvedReceivers": 6872
+  "rGrades": 6091,
+  "nGrades": 967276,
+  "resolvedReceivers": 6850
  },
  "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
@@ -9049,7 +9049,7 @@
   "hasBlackMarket on inst": "",
   "hasCathedral on inst": "",
   "hasCharterHall on inst": "",
-  "hasChurch on inst": "dossier-pdf=R foundry=R web-display=R web-transitive=N",
+  "hasChurch on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasCourtSystem on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasCriminalInst on inst": "dossier-pdf=N foundry=N web-transitive=N",
   "hasFreeCompany on inst": "",

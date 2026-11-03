@@ -176,13 +176,16 @@ describe('roles', () => {
     expect(m.roles.infrastructure).toBe('absent');
   });
 
+  // Lane MAGIC (chair ruling 2, 2026-11-03): 'integral' needs a practitioner AND a dependent on
+  // the record, never the band alone, so the top-band fixture carries a catalogue practitioner and the magic chains it runs.
   it('pervasive magic produces integral roles', () => {
     const m = deriveMagicProfile({
       config: { magicLevel: 'pervasive' },
-      institutions: [{ name: "Grand Tower" }, { name: 'Temple of Light' }, { name: 'Apothecary' }],
+      institutions: [{ name: "Grand Tower" }, { name: "Wizard's tower" }, { name: 'Temple of Light' }, { name: 'Apothecary' }],
       powerStructure: {
         factions: [{ faction: 'Arcane Conclave', power: 60 }],
       },
+      economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }, { chainId: 'magical_goods', label: 'Magical Items & Enchanting' }] },
     });
     expect(m.roles.economic).toBe('integral');
     expect(m.roles.infrastructure).toBe('integral');
