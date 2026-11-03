@@ -324,10 +324,14 @@ describe('EM-R0b — recordInvariants: the town\'s own invariants as a module', 
     for (const row of rows) {
       const card = row.record.economicState?.foodSecurity;
       const derived = Boolean(card) && card.deficitPct > FOOD_SECURITY_CUTS.importDependent;
-      if (card && derived !== card.isDeficit) disagreements.push(`${row.key} -> the record says ${card.isDeficit}`);
+      // The published share is ROUNDED; the flag was cut from the raw share, so only a row
+      // more than half a point from the cut is a real disagreement.
+      const clearOfCut = card && Math.abs(card.deficitPct - FOOD_SECURITY_CUTS.importDependent) > 0.5;
+      if (card && clearOfCut && derived !== card.isDeficit) disagreements.push(`${row.key} -> the record says ${card.isDeficit}`);
     }
-    expect(disagreements.length, 'a flag DERIVED from the published share disagrees with the record it describes, '
-      + 'which is why the table is taught rather than computed').toBeGreaterThan(0);
+    // FOOD-1 (chair ruling 1, 2026-11-03): the flags cut where the band cuts, so the base's
+    // disagreement (a flag ladder of its own at 20) is gone; the table stays taught, not computed.
+    expect(disagreements, 'a flag derived from the published share agrees with the record, clear of the rounding window').toEqual([]);
   });
 
   it('EM-R0b A7 — absence, an unseen band, purity, idempotency and the duplication pairs', () => {

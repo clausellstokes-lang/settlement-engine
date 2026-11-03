@@ -116,11 +116,12 @@ function preMoveFoodLabel(stressFamine, deficitPct, surplusPct) {
   return { label, color, bg };
 }
 
-/** foodGenerator.js's `Stress flags` block, transcribed at the base, in the record's key order. */
+/** foodGenerator.js's `Stress flags` block, as FOOD-1 ruled it (chair ruling 1, 2026-11-03: one set
+ *  of cut-offs): the base's private deficit cut of 20 is the label ladder's 15 now. */
 function preMoveFoodFlags(stressFamine, deficitPct, surplusPct) {
   return {
-    isDeficit: deficitPct > 20 || stressFamine,
-    isPressured: deficitPct > 5 && deficitPct <= 20,
+    isDeficit: deficitPct > 15 || stressFamine,
+    isPressured: deficitPct > 5 && deficitPct <= 15,
     isSecure: deficitPct <= 5 && surplusPct <= 40,
     isSurplus: surplusPct > 40,
   };
@@ -195,12 +196,12 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     ]);
     expect(FOOD_FLAG_CUTS.pressured, 'the two ladders SHARE the pressured cut by reference').toBe(FOOD_SECURITY_CUTS.pressured);
     expect(FOOD_FLAG_CUTS.surplus, 'and the surplus cut, by reference').toBe(FOOD_SECURITY_CUTS.surplus);
-    expect(FOOD_FLAG_CUTS.deficit, 'while the deficit cut is the flag ladder\'s OWN 20').toBe(20);
+    expect(FOOD_FLAG_CUTS.deficit, 'and the deficit cut is the label ladder\'s Import-Dependent cut (FOOD-1: one set of cut-offs)').toBe(FOOD_SECURITY_CUTS.importDependent);
     expect(LEGITIMACY_BANDS.map((b) => b.label)).toEqual(LEGITIMACY_LABELS);
     expect(READINESS_BANDS.map((b) => b.label)).toEqual(READINESS_LABELS);
     expect(Object.values(FOOD_SECURITY_BANDS).map((b) => b.label)).toEqual(FOOD_LABELS);
     const leafCode = codeOf(LADDER_LEAF);
-    const spelledTwice = [75, 60, 45, 30, 76, 55, 38, 24, 12, 15, 5, 20]
+    const spelledTwice = [75, 60, 45, 30, 76, 55, 38, 24, 12, 15, 5] // the flag ladder's own 20 retired (FOOD-1)
       .map((cut) => ({ cut, n: [...leafCode.matchAll(new RegExp(`(?<![\\w.])${cut}(?![\\w.])`, 'g'))].length }))
       .filter((row) => row.n !== 1);
     expect(spelledTwice, 'every cut point is spelled ONCE in the leaf; a *_BANDS entry references its *_CUTS field').toEqual([]);
@@ -258,7 +259,7 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     expect(foodSecurityBandOf(true, 0, 0).label, 'famine is read FIRST, before any number').toBe('Deficit — Active Famine');
   });
 
-  it('A4 — the food FLAG ladder is a SECOND ladder, and its disagreement with the label is PINNED', () => {
+  it('A4 — the food FLAGS cut where the label cuts: one ladder (FOOD-1)', () => {
     const grid = foodBoundaryGrid();
     const disagreements = grid.filter((row) => {
       const leaf = foodSecurityFlagsOf(row.stressFamine, row.deficitPct, row.surplusPct);
@@ -269,11 +270,11 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     expect(Object.keys(foodSecurityFlagsOf(false, 0, 0)), 'the record\'s own key order is golden-bearing').toEqual(['isDeficit', 'isPressured', 'isSecure', 'isSurplus']);
     for (const deficitPct of [15 + EPS, 16, 20]) {
       expect(foodSecurityBandOf(false, deficitPct, 0).label, `deficitPct ${deficitPct} labels Import-Dependent`).toBe('Import-Dependent');
-      expect(foodSecurityFlagsOf(false, deficitPct, 0).isPressured, `and carries isPressured (ODQ 934.57)`).toBe(true);
-      expect(foodSecurityFlagsOf(false, deficitPct, 0).isDeficit, `and NOT isDeficit — the two ladders cut at 15 and at 20`).toBe(false);
+      expect(foodSecurityFlagsOf(false, deficitPct, 0).isPressured, `and is not also merely pressured (FOOD-1 answers ODQ 934.57)`).toBe(false);
+      expect(foodSecurityFlagsOf(false, deficitPct, 0).isDeficit, `but a deficit: the flags cut at 15 as the label does`).toBe(true);
     }
-    expect(FOOD_SECURITY_CUTS.importDependent, 'the measured disagreement is a 5-wide window, not a rounding artefact').toBe(15);
-    expect(FOOD_FLAG_CUTS.deficit, 'and this packet RECONCILES NOTHING: folding them would move the golden').toBe(20);
+    expect(FOOD_SECURITY_CUTS.importDependent, 'the one deficit cut').toBe(15);
+    expect(FOOD_FLAG_CUTS.deficit, 'FOOD-1 folds the two ladders (this moves the golden; the door is the chair\'s)').toBe(FOOD_SECURITY_CUTS.importDependent);
   });
 
   it('A5 — every band function is total: a member of its own table, never null, undefined or a throw', () => {
@@ -315,7 +316,7 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     expect(rows.map((row) => row.rows), 'the corpus is the 2-row prose manifest and the 525-row golden master').toEqual([2, 525]);
   });
 
-  it('A7 — the three producers spell no ladder cut of their own, and prosperityMod is untouched', () => {
+  it('A7 — the three producers spell no ladder cut of their own, and prosperityMod cuts at the leaf', () => {
     const faction = codeOf(FACTION_SRC);
     const defense = codeOf(DEFENSE_SRC);
     const food = codeOf(FOOD_SRC);
@@ -341,8 +342,9 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     const join = (faction.match(/export const DEFENSE_CONTRIB = \{[\s\S]*?\};/) || [''])[0];
     expect([...join.matchAll(/'([^']+)':/g)].map((m) => m[1]), 'and the cross-ladder join still speaks the leaf\'s readiness vocabulary, lowest rung first')
       .toEqual([...READINESS_BANDS].reverse().map((band) => band.label));
-    expect(food.includes('deficitPct > 8'), 'prosperityMod\'s own 40/20/8 chain is STILL PRESENT').toBe(true);
-    expect([...food.matchAll(/prosperityMod = \{/g)].length, 'and every rung of it is untouched: eight assignments, none moved — it is a chooser, not a ladder').toBe(8);
+    // anchored: the positive arm on the next line proves the chooser is live and re-pointed.
+    expect(/deficitPct > (?:8|20|40)\b/.test(food), 'prosperityMod\'s private 40/20/8 chain is gone (FOOD-1)').toBe(false);
+    expect(['FOOD_SECURITY_CUTS.deficit', 'FOOD_SECURITY_CUTS.importDependent', 'FOOD_SECURITY_CUTS.pressured'].every((cut) => food.includes(`f.deficitPct > ${cut}`)), 'the chooser cuts at the leaf\'s own points').toBe(true);
   });
 
   it('A8 — there is ONE address, the homonym is a different file, and no layering edge is added', () => {
@@ -360,8 +362,11 @@ describe('EM-R0d — the band ladders have one home, and the producers read it',
     const domainBandImporters = generators.filter((rel) => /from\s+['"][^'"]*domain\/[^'"]*bandLadders[^'"]*['"]/.test(src(rel)));
     expect(domainBandImporters, 'no file under src/generators imports a src/domain band address; one would take the eager first-paint set 283 -> 285').toEqual([]);
     const leafImporters = generators.filter((rel) => src(rel).includes('bandLadders.js'));
-    expect(leafImporters.sort(), 'and every generator that reads a ladder reads THIS leaf').toEqual([FACTION_SRC, DEFENSE_SRC, FOOD_SRC].sort());
-    const specifiers = leafImporters.map((rel) => (src(rel).match(/from '([^']*bandLadders\.js)'/) || [])[1]);
-    expect([...new Set(specifiers)], 'by one specifier, into src/data').toEqual(['../data/bandLadders.js']);
+    expect(leafImporters.sort(), 'and every generator that reads a ladder reads THIS leaf').toEqual([FACTION_SRC, DEFENSE_SRC, FOOD_SRC, 'src/generators/economy/foodBalance.js', 'src/generators/economy/prosperity.js'].sort());
+    const resolved = leafImporters.map((rel) => {
+      const spec = (src(rel).match(/from '([^']*bandLadders\.js)'/) || [])[1] || '';
+      return resolve(ROOT, dirname(rel), spec).slice(ROOT.length + 1);
+    });
+    expect([...new Set(resolved)], 'each by its relative specifier, into src/data').toEqual([LADDER_LEAF]);
   });
 });

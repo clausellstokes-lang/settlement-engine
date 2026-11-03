@@ -243,7 +243,7 @@ describe('generators-domain-4 — single-writer food model', () => {
 
     expect(balance.deficitPercent).toBe(48);
     expect(settlement.economicState.situationDesc).toMatch(
-      /48% of daily need uncovered/i,
+      /After imports, 48% of daily need goes uncovered/i,
     );
     expect(settlement.economicState.situationDesc).toMatch(
       /rationing and outside supply/i,
