@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "23dceff6070b95183ceb0c7ce4ced839fc62be0a",
-  "measuredBy": "the X-45 lane (the owner, 2026-11-02)",
-  "date": "2026-11-02",
-  "note": "X-45 and the lint cures of rounds two to three-b: the backing suite rewritten (catalogue walker, rules, ledger), the backs editor describe, the Power tab, document and spine pins, the anchor markers",
-  "files": 2816,
-  "parked": 362,
-  "credited": 2454,
-  "titles": 27145,
-  "suiteTitles": 7169
+  "measuredAtSha": "a2c4a50a3b4a1052a89fcb6c865c8e02f92fcd7c",
+  "measuredBy": "ENGINE-1 (Opus 5.5), session 019yED1Rc3svZxTNcEJVRr77",
+  "date": "2026-11-03",
+  "note": "ENGINE-1: engineBundleReplay (tests/build) + the engine-generate/engine-version Deno suites; the tip at 1169b3cd5 was already off the frozen register (files 2847 vs 2816) from other lanes, absorbed here",
+  "files": 2848,
+  "parked": 366,
+  "credited": 2482,
+  "titles": 27318,
+  "suiteTitles": 7229
 }
