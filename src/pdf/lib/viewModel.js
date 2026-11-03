@@ -24,6 +24,7 @@
 import { flag } from '../../lib/flags.js';
 import { plotHookText } from '../../lib/proseSeams.js';
 import { collectPlotHooks } from '../../domain/dossier/plotHooks.js';
+import { crisisNoteFor } from '../../domain/dossier/powerStrata.js';
 import { deriveFoodBalance, deriveViability } from '../../domain/display/dossierViewModel.js';
 import { isViabilityItem } from '../../domain/display/viabilityFilter.js';
 import { summarizeMagic, deriveMagicProfile } from '../../domain/magicProfile.js';
@@ -463,7 +464,9 @@ function powerSlice(active) {
     blurb:       f?.blurb || null,
     description: f?.description || f?.desc || null,
     category:    f?.category || null,
-    crisisNote:  f?.crisisNote || null,
+    // The Power tab's one reading (RULERS R3): the "appears to govern" claim names
+    // the outranking rival or is dropped, so the PDF never prints an unnamed claim.
+    crisisNote:  crisisNoteFor(s, f) || null,
     modifiers:   (f?.modifiers || []).map(m => ({
       label: typeof m === 'string' ? m : (m?.label || m?.name || ''),
       delta: typeof m === 'object' ? (m?.delta ?? m?.value ?? null) : null,
