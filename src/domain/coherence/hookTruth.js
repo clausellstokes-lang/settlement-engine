@@ -110,7 +110,13 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {boolean} hasWatch a watch or militia exists
  * @property {boolean} hasHospital a real hospital exists
  * @property {boolean} defenseKnown does the record carry a defence roster at all?
- * @property {boolean} magicWorks does magic function in this world?
+ * @property {boolean} magicFunctions does magic function in this world?
+ *   ⚠ NOT SPELLED `magicWorks`, and the reason is machinery rather than taste: two DS-DEF-5
+ *   prose pools (`arcane defense PRESENT` / `ABSENT`) branch on a `magicWorks` field that
+ *   nothing in the estate produces, and the wiring census indexes producers BY KEY NAME —
+ *   so a facts object carrying that spelling flips both rows from `not-produced` to
+ *   `measured` and records a producer that feeds neither pool. Measured by running
+ *   `node scripts/wiring-census.mjs` with each spelling.
  * @property {boolean} speaksOfVillagers may a hook call the residents villagers?
  */
 
@@ -204,7 +210,7 @@ export function settlementHookFacts(settlement) {
     hasWatch: watch.length > 0 || militia.length > 0,
     hasHospital,
     defenseKnown,
-    magicWorks: magicWorksAt(/** @type {Parameters<typeof magicWorksAt>[0]} */ (settlement)),
+    magicFunctions: magicWorksAt(/** @type {Parameters<typeof magicWorksAt>[0]} */ (settlement)),
     speaksOfVillagers: tier === '' || VILLAGER_TIERS.has(tier),
   });
 }
@@ -292,7 +298,7 @@ export function hookTruthViolations(text, facts) {
   if (WORDS.hospital.test(line) && !facts.hasHospital) {
     add('hospital_without_a_hospital', 'no hospital among the institutions');
   }
-  if (!facts.magicWorks && WORDS.magic.test(line)) {
+  if (!facts.magicFunctions && WORDS.magic.test(line)) {
     add('magic_words_where_magic_is_off', 'the world law says magic does not function here');
   }
   if (WORDS.villagers.test(line) && !facts.speaksOfVillagers) {
