@@ -123,13 +123,18 @@ export function warFaithDeskRungs({
  * The shape is `EconomicsGlance.DeskLines` deliberately: one idiom for "a position that is
  * a paragraph", so a reader who has met one has met both.
  * @param {{mount: string, rungs: ReadonlyArray<object|null>, testId?: string,
- *   settlementName?: unknown, tier?: unknown}} props `settlementName` and `tier` are the
+ *   settlementName?: unknown, tier?: unknown, lead?: ReadonlyArray<string>}} props `settlementName` and `tier` are the
  *   town's own `name` and `tier`; without them the sentences still join and no opening name
  *   is stood down, so a call site that has not caught up cannot break.
  */
-export function DeskLines({ mount, rungs, testId, settlementName, tier }) {
+export function DeskLines({ mount, rungs, testId, settlementName, tier, lead = [] }) {
   const mobile = useIsMobile();
-  const lines = (rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean);
+  // `lead`: already-composed sentences that open the paragraph before the drawn lenses (the
+  // faith line at `faith.teaser`, lane FAITH). Woven exactly as the print desk weaves them.
+  const lines = [
+    ...(lead || []).filter(Boolean),
+    ...(rungs || []).map((rung) => drawnAtMount(mount, rung)?.sentence).filter(Boolean),
+  ];
   if (lines.length === 0) return null;
   // ⭐ ONE PARAGRAPH, THROUGH THE SHARED RENDERER (owner finding 2026-09-18) — the same move
   // as `EconomicsGlance.DeskLines`, in the same shape, because the two renderers are
@@ -281,21 +286,24 @@ export function FaithCreedLines({ desk, settlement }) {
  * ⭐ THE PATRON-LESS TOWN'S OWN VOICE — DS-FTH-2, and the position that matters most on
  * the corpus the review actually runs against.
  *
- * A settlement with no `config.primaryDeitySnapshot` is the COMMON case, not the edge: the
- * whole 44-settlement review corpus is deity-free today. `faithPanelModel` answers
- * `{ hasEmbed: false }` there and the tab's standing message is "This settlement keeps no
- * named faith." This position draws the corpus's four authored variants for exactly that
- * town — none of which names a creed or a god, because the block was written for it.
+ * A settlement with no `config.primaryDeitySnapshot` is the COMMON case, not the edge: every
+ * generated settlement is deity-free (the gods are the DM's custom content). LANE FAITH
+ * (2026-11-03): the tab's standing message above this position is now the FAITH LINE
+ * (faithPanelModel's `line`, from the ONE FAITH READING), which describes the church that
+ * exists. DS-FTH-2's one reachable pool (PRIVATE DOSSIER) denies an organised faith in every
+ * variant, which beside a church is the contradiction and beside nothing restates the line,
+ * so on a patron-less town `trimFaithDeskToPanel` stands the lens down and this position
+ * carries the line alone. No variant names a creed or a god.
  *
- * IT SITS UNDER the standing message rather than replacing it: that message carries a CALL
- * TO ACTION ("Assign a patron deity to awaken its pantheon") which is product furniture and
- * not a fact about the town, so the two are not twins the way the war dormant note and its
- * fallback are.
- * @param {{desk: Record<string, any>, settlement: object}} props `settlement` is REQUIRED.
+ * `lead` is the faith line itself, which opens this paragraph: the print desk puts the same
+ * line at the same position (printProse.js :: buildPrintProse), so the screen and the PDF
+ * weave one paragraph from one reading.
+ * @param {{desk: Record<string, any>, settlement: object, lead?: ReadonlyArray<string>}} props
+ *   `settlement` is REQUIRED.
  */
-export function FaithTeaserLines({ desk, settlement }) {
+export function FaithTeaserLines({ desk, settlement, lead = [] }) {
   requireSettlement(settlement, 'FaithTeaserLines');
-  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser"
+  return <DeskLines mount={TEASER_MOUNT} testId="faith-desk-teaser" lead={lead}
     settlementName={settlement?.name} tier={settlement?.tier} rungs={[desk.faithTeaser]} />;
 }
 

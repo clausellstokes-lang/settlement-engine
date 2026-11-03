@@ -39,6 +39,7 @@ vi.mock('../../src/store/index.js', () => {
 
 import { useStore } from '../../src/store/index.js';
 import WarTab, { MARTIAL_CRISIS_TYPES, warTabHasContent } from '../../src/components/new/tabs/WarTab.jsx';
+import { faithDenialFindings } from '../../src/domain/coherence/faithDenialFindings.js';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import { warFaithDeskRungs } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
@@ -100,7 +101,10 @@ describe('FaithTab — the constitutional gate (free/anon see NO deity names)', 
     const { container } = render(<FaithTab settlement={{ name: 'Quietford', config: {} }} />);
     expect(screen.queryByTestId('faith-section')).toBeNull();
     expect(screen.queryByTestId('faith-teaser')).toBeNull();
-    expect(container.textContent).toMatch(/keeps no named faith/i);
+    // LANE FAITH (2026-11-03): the absence note is the faith line, read off the one faith
+    // reading; a town with nothing of a church keeps the quiet-observances line.
+    expect(screen.getByTestId('faith-desk-teaser').textContent).toMatch(/quiet observances/);
+    expect(container.textContent.length).toBeGreaterThan(0);
   });
 });
 
@@ -562,19 +566,19 @@ describe('FaithTab — the faith half of the warFaith desk (DESK-4)', () => {
     expect(pubText).toMatch(/ascendant/);
   });
 
-  it('⭐ THE PATRON-LESS TOWN speaks DS-FTH-2, and names no creed', () => {
-    // A premium viewer of a deity-free town: FaithSection renders NOTHING (its HIDDEN
-    // mode), which is the only branch where DS-FTH-2 can draw without doubling — its
-    // `[street]` variant is a byte-identical copy of FaithSection's own teaser body.
+  it('⭐ THE PATRON-LESS TOWN beside its church: the faith line speaks, and no denial', () => {
+    // LANE FAITH (2026-11-03): a premium viewer of a deity-free town with a parish church sees
+    // the faith line (the church, and the god and the name left to the DM). DS-FTH-2's PRIVATE
+    // DOSSIER pool denies an organised faith, so beside a church its lens is silent.
+    // FaithSection renders NOTHING here (its HIDDEN mode).
     useStore.__set({ auth: { tier: 'premium' } });
-    const { container } = render(<FaithTab settlement={{ id: 'quiet', name: 'Quietford', config: {} }} />);
-    const teaser = screen.getByTestId('faith-desk-teaser');
-    const authored = WAR_FAITH['DS-FTH-2'].pools['PRIVATE DOSSIER']
-      .map((v) => v.text.replace(/\{settlement\}/g, 'Quietford'));
-    expect(authored.some((line) => teaser.textContent.includes(line))).toBe(true);
-    // The standing message is the fact alone (chair ruling F8): the call to action is gone.
-    expect(container.textContent).toMatch(/This settlement keeps no named faith\./);
-    expectAbsentWithAnchor(container.textContent, 'Assign a patron deity', 'This settlement keeps no named faith.', 'F8 call to action');
+    const town = { id: 'quiet', name: 'Quietford', tier: 'village', config: {}, institutions: [{ name: 'Parish church', category: 'Religious' }] };
+    const { container } = render(<FaithTab settlement={town} />);
+    // The position carries the line alone: the PRIVATE DOSSIER lens is stood down.
+    expect(screen.getByTestId('faith-desk-teaser').textContent).toBe(faithPanelModel(town).line.join(' '));
+    // The standing message carries no call to action (chair ruling F8) and no denial.
+    expectAbsentWithAnchor(container.textContent, 'Assign a patron deity', 'A parish church keeps the faith in the village.', 'F8 call to action');
+    expect(faithDenialFindings(town, container.textContent)).toEqual([]);
     // And the honest-absence guarantee holds: the seat, the niches and the creed lines are
     // all absent, because there is no creed to name.
     expect(screen.queryByTestId('faith-desk-seat')).toBeNull();

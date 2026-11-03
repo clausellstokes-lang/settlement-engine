@@ -642,7 +642,15 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('faith.patronSeat', faith.mandate),
     printed('faith.patronSeat', faith.faithDark),
   ]);
-  put('faith', 'faith.teaser', [printed('faith.teaser', faith.faithTeaser)]);
+  // LANE FAITH (2026-11-03): the FAITH LINE leads the position, exactly as it leads the
+  // screen's (FaithTab's standing message, FaithSection's teaser), so the printed faith says
+  // what the place keeps (the church, the walk to a neighbour's, or the quiet observances)
+  // before the desk's voice, never a denial beside the church. The line is the model's, read
+  // off the ONE FAITH READING; a settlement with a patron prints the panel's positions instead.
+  put('faith', 'faith.teaser', [
+    ...(faithModel.hasEmbed ? [] : [(faithModel.line || []).join(' ')]),
+    printed('faith.teaser', faith.faithTeaser),
+  ]);
   if (faithSeam) put('faith', 'faith.creedStanding', [
     printed('faith.creedStanding', faith.creedStanding),
     printed('faith.creedStanding', faith.creedLegitimacy),

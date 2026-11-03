@@ -64,9 +64,13 @@ const project = (state, rules) => projectReligionStateOntoSettlement(settlementF
 
 describe('faithPanelModel', () => {
   it('returns { hasEmbed:false } for a deity-free (or latent-only) settlement', () => {
-    expect(faithPanelModel({ config: {} })).toEqual({ hasEmbed: false });
+    // LANE FAITH (2026-11-03): the no-embed model carries the one faith reading and its line.
+    expect(faithPanelModel({ config: {} })).toMatchObject({ hasEmbed: false, reading: { hasChurch: false, deity: null } });
     // A latent record alone is NOT an embed — the model never reads it.
-    expect(faithPanelModel({ config: { latentPantheon: { patron: { name: 'Secret' } } } })).toEqual({ hasEmbed: false });
+    const latent = faithPanelModel({ config: { latentPantheon: { patron: { name: 'Secret' } } } });
+    expect(latent).toMatchObject({ hasEmbed: false, reading: { deity: null } });
+    expect(latent.line.join(' ')).toMatch(/quiet observances/);
+    expect(JSON.stringify(latent)).not.toMatch(/Secret/); // anchored: the quiet-observances line is asserted on the same model above
   });
 
   it('builds a static (day-one) model from embeds alone, with the effects disclosure', () => {
