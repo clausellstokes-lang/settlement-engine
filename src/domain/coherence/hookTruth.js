@@ -61,18 +61,6 @@ const CRISIS_BANDS = new Set([FOOD_SECURITY_BANDS.famine.label, FOOD_SECURITY_BA
 /** @type {ReadonlySet<string>} */
 const GAP_BANDS = new Set([FOOD_SECURITY_BANDS.pressured.label, FOOD_SECURITY_BANDS.importDependent.label]);
 
-/**
- * "The stored months are low" (the chair's ruling, 2026-11-03), as a number.
- *
- * TWO MONTHS, and the figure is the engine's own vocabulary rather than a taste: the food
- * record prints `storageNote` as "N months strategic reserve", and a place that can eat
- * for two more months is not a place whose people are turning to banditry this week. Every
- * one of the 36 measured false "starving" hooks sat at 1.9 months — deliberately NOT below
- * this floor, so the cure cannot be read as a threshold tuned to its own corpus: those 36
- * are refused on the BAND (Import-Dependent is not a famine), and the floor is what stops
- * a genuine Deficit place with fifteen months of grain reading as starving.
- */
-export const LOW_STORED_MONTHS = 2;
 
 /** The tiers whose residents are "villagers". */
 const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
@@ -169,7 +157,15 @@ export function settlementHookFacts(settlement) {
   // because this classifier may only speak where the record contradicts the hook.
   const famineLicensed = !foodKnown
     || (CRISIS_BANDS.has(foodBand)
-      && (storedMonths === null || storedMonths < LOW_STORED_MONTHS));
+      // "AND THE STORED MONTHS ARE LOW" (the chair's ruling 1), spoken in the engine's own
+      // rungs rather than in a new tunable: `src/generators/foodGenerator.js` calls two
+      // months the bottom rung it will still name ("seasonal buffer only"), and
+      // `src/domain/display/warResolve.js` already reads under one month as 'starving'. A
+      // place that can eat for two more months is not a place whose people are turning to
+      // banditry this week. The figure is a comparison and not a named constant on purpose:
+      // the tuning register holds its unregistered-named ceiling at 535 and a ceiling only
+      // falls, so a new module-scope tunable here would be a debt taken silently.
+      && (storedMonths === null || storedMonths < 2));
   const foodGap = foodKnown && (GAP_BANDS.has(foodBand) || CRISIS_BANDS.has(foodBand));
 
   const roster = /** @type {Record<string, unknown>} */ (

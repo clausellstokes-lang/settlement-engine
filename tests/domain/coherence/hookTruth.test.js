@@ -14,7 +14,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { FOOD_SECURITY_BANDS } from '../../../src/data/bandLadders.js';
-import { LOW_STORED_MONTHS, hookTruthViolations, settlementHookFacts } from '../../../src/domain/coherence/hookTruth.js';
+import { hookTruthViolations, settlementHookFacts } from '../../../src/domain/coherence/hookTruth.js';
 import { hookTruthFindings, renderedHookTruthFindings } from '../../../src/domain/coherence/hookTruthFindings.js';
 
 const STARVING = 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
@@ -62,7 +62,6 @@ describe('hookTruthFindings — the record is read, not the page', () => {
   test('the stored-months floor is the band, not the corpus: 1.9 months of Import-Dependent is a finding', () => {
     const findings = hookTruthFindings(record({ tier: 'thorp', band: 'Import-Dependent', months: 1.9, hooks: [STARVING] }));
     expect(findings.map((f) => f.code)).toContain('famine_words_on_a_fed_place');
-    expect(LOW_STORED_MONTHS).toBe(2);
   });
 
   test('a hook stored on an NPC is read too', () => {
