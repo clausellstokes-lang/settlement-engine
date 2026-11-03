@@ -3104,7 +3104,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town eats what arrives and what households laid in; a season when nothing arrives would empty both.",
+          "text": "The town eats what arrives and what households laid in, and a season of no arrivals would empty both.",
           "slots": [],
           "vid": 2
         },

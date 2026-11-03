@@ -3045,7 +3045,7 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 
 **`Logistics & Supply: No reserves, landlocked`**
 1. `[ledger]` {settlement} has no granary, only what its households keep. Any long interruption to supply becomes a survival question within the season.
-2. `[street]` The town eats what arrives and what households laid in; a season when nothing arrives would empty both.
+2. `[street]` The town eats what arrives and what households laid in, and a season of no arrivals would empty both.
 3. `[unfolding]` {settlement} is one long interruption from a genuine crisis and has been for as long as anybody has bothered to check.
 
 **`Naval Defense: Naval force`**
