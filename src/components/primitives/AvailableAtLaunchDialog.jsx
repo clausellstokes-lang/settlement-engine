@@ -49,7 +49,12 @@ export default function AvailableAtLaunchDialog({ open, onClose }) {
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         padding: SP.lg, background: EDITOR_GROUND,
       }}
-      onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}
+      // A portal's React events still bubble through the tree that rendered it: a click on OK
+      // would otherwise reach the host's own handlers (a menu that closes on a button press, a
+      // folder header that toggles), and a press would reach a host's outside-press listener.
+      // The dialog's events end here. Keys are left alone: Escape is read on window.
+      onClick={(event) => event.stopPropagation()}
+      onMouseDown={(event) => { event.stopPropagation(); if (event.target === event.currentTarget) onClose(); }}
     >
       <section
         ref={dialogRef}

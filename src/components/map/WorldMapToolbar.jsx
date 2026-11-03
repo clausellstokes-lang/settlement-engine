@@ -110,7 +110,8 @@ function MoreMenu({ children }) {
     function onDoc(e) {
       if (wrapRef.current && !wrapRef.current.contains(e.target)) setOpen(false);
     }
-    function onKey(e) { if (e.key === 'Escape') setOpen(false); }
+    // Escape inside the launch dialog (X-53) is the dialog's own: the menu stays open beneath it.
+    function onKey(e) { if (e.key === 'Escape' && !e.target?.closest?.('[data-launch-dialog]')) setOpen(false); }
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onKey);
     return () => {
@@ -623,9 +624,9 @@ function WorldMapToolbarImpl({
                     {/* Realm-map PNG export (terrain + settlement markers). Reuses
                         the already-bundled Image glyph so no new lucide icon lands
                         in the first-paint vendor chunk. Withheld for anon (the prop
-                        is undefined), so it is its own gate. */}
+                        is undefined), so it is its own gate. Launch teaser for non-staff (X-53). */}
                     {typeof handleExportMap === 'function' && (
-                      <IconButton onClick={handleExportMap} disabled={exportingMap}>
+                      <IconButton exportGate onClick={handleExportMap} disabled={exportingMap}>
                         <ImageIcon size={13} /> {exportingMap ? 'Exporting…' : 'Download map (PNG)'}
                       </IconButton>
                     )}

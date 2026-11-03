@@ -131,6 +131,13 @@ describe('export controls outside the gallery, NON-STAFF, before launch', () => 
       await settle();
       expect(screen.getByRole('dialog', { name: PILL })).toBeTruthy();
       expect(fired()).toBe(0);
+      // OK closes the dialog, and its click ends there: the host (a menu, a folder header)
+      // is left as it was, so the control is still on the page.
+      fireEvent.mouseDown(screen.getByRole('dialog', { name: PILL }));
+      fireEvent.click(screen.getByRole('button', { name: 'OK' }));
+      expect(screen.queryByRole('dialog', { name: PILL })).toBeNull();
+      expect(screen.getAllByRole(control.getAttribute('role') || 'button').some(b => b.textContent.includes(label))).toBe(true);
+      expect(fired()).toBe(0);
     });
   }
 });
