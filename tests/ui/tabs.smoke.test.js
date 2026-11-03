@@ -208,11 +208,13 @@ describe('OverviewTab carries the Table View trigger the removed DM Summary tab 
   test('the button renders only when the router hands a trigger, and calls it', () => {
     let opened = 0;
     const { container, getByText } = render(e(OverviewTab, { settlement: villageSettlement, onOpenTableView: () => { opened += 1; } }));
-    getByText('Open in Table View').click();
+    // TRIM-2 request 4: the trigger opens the one Tonight sheet, so it is called by that sheet's name.
+    getByText('Open Tonight').click();
     expect(opened).toBe(1);
+    expectAbsentWithAnchor(container.textContent || '', 'Open in Table View', 'Open Tonight', 'the old label left with the old view');
     cleanup();
     const text = render(e(OverviewTab, { settlement: villageSettlement })).container.textContent || '';
-    expectAbsentWithAnchor(text, 'Open in Table View', villageSettlement.name, 'the trigger renders with no route to open');
+    expectAbsentWithAnchor(text, 'Open Tonight', villageSettlement.name, 'the trigger renders with no route to open');
     expect(container).toBeTruthy();
   });
 });

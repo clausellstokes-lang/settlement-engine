@@ -36,6 +36,7 @@ import Button from '../../primitives/Button.jsx';
 import ProseBlock from '../ProseBlock.jsx';
 // The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
+import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
 import { edged } from '../../../design/edgedBox.js';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_STACK } from '../../../design/flush.js';
@@ -315,7 +316,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>
         {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
             composer it opens stays, so a route to it must too. Router-gated on the flag. */}
-        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
+        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>{TONIGHT_COPY.open}</Button></div>}
       </div>
       {/* THE ROUTING LINE (X-18) IS CUT (the owner, 2026-11-01, X-38): "sentences that are
           meta descriptive such as 'summary holds the glance…' … remove them. We're going to do
