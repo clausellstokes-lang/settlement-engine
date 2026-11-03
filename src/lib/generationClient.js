@@ -49,6 +49,33 @@ import {
   GENERATION_STEP_WATCHDOG_MS,
   GENERATION_WORKER_CONTRACT,
 } from './generationProtocol.js';
+// THE LOCAL ENGINE'S VERSION, read at BUILD time: the content hash of the committed
+// engine bundle (`scripts/build-edge-shared.mjs`), the same value the `engine-generate`
+// service reports. A named JSON import, so the client build carries the one string and
+// nothing else of the meta (its input list stays out of every chunk).
+import { engineVersion as LOCAL_ENGINE_VERSION } from '../../supabase/functions/_shared/engineBundle.meta.json';
+
+/**
+ * ⭐ THE ENGINE-VERSION STAMP (docs/DESIGN_ENGINE_SERVICE.md "The replay guarantee" §3:
+ * "the record carries `engineVersion`"). It is written HERE, at the transport, and never
+ * inside the pipeline: the bundle's output must stay byte-identical to the in-process
+ * pipeline's (`tests/build/engineBundleReplay.test.js`), and the same-seed goldens hash
+ * the pipeline's output, which this does not touch. The local transports (the worker and
+ * every in-thread outcome) stamp the committed bundle's hash through this function; the
+ * remote one stamps the version the service ANSWERED, in the same shape
+ * (`engineRemote.js :: runRemoteGeneration`), so a town made locally and one made
+ * remotely from the same sources carry the same version. A packet without a settlement
+ * object is returned as it came.
+ *
+ * @param {any} result a transport's result packet
+ * @param {string} engineVersion
+ * @returns {any}
+ */
+export function stampEngineVersion(result, engineVersion) {
+  const settlement = result?.settlement;
+  if (!settlement || typeof settlement !== 'object' || Array.isArray(settlement)) return result;
+  return { ...result, settlement: { ...settlement, engineVersion } };
+}
 
 /**
  * The `remote` transport's build flag, read with `engineRemote.js :: engineRemoteOpen`'s
@@ -113,7 +140,8 @@ export async function runGeneration(request, {
   remote = remoteFlagOpen(),
   remoteTransport = defaultRemoteTransport,
 } = /** @type {any} */ ({})) {
-  const inThread = async (outcome) => ({ result: await fallback(request, onStep), outcome });
+  const local = async () => stampEngineVersion(await fallback(request, onStep), LOCAL_ENGINE_VERSION);
+  const inThread = async (outcome) => ({ result: await local(), outcome });
 
   if (signal?.aborted) throw cancelledError();
   if (remote) return { result: await remoteTransport(request, { signal }), outcome: 'remote' };
@@ -150,7 +178,7 @@ export async function runGeneration(request, {
       if (settled) return;
       settled = true;
       cleanup();
-      resolve({ result, outcome: 'worker' });
+      resolve({ result: stampEngineVersion(result, LOCAL_ENGINE_VERSION), outcome: 'worker' });
     };
     const fail = (error) => {
       if (settled) return;
@@ -166,7 +194,7 @@ export async function runGeneration(request, {
       settled = true;
       cleanup();
       Promise.resolve()
-        .then(() => fallback(request, onStep))
+        .then(local)
         .then(result => resolve({ result, outcome: 'in-thread:transport-failed' }), reject);
     };
     const arm = () => {

@@ -237,7 +237,10 @@ export async function runRemoteGeneration(request, opts = {}) {
     throw engineRemoteError('engine_reply_invalid', 'The engine service answered without a settlement.');
   }
   return {
-    settlement: reply.settlement,
+    // THE STAMP is the version the service ANSWERED, not the one this build carries: the
+    // record says which engine made it. Same shape as the local transports' stamp
+    // (`generationClient.js :: stampEngineVersion`): the key appended last.
+    settlement: { ...reply.settlement, engineVersion: reply.engineVersion },
     // The locked-roster carry is dormant (owner order 2026-09-17 retired every lock
     // control; `domain/locksPreservation.js :: normalizeLocks` honours nothing), so the
     // local core's report is null on every request and the service's is the same.

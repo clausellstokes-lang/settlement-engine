@@ -22,6 +22,10 @@
  */
 import { describe, it, expect, vi, afterEach } from 'vitest';
 import { runGeneration } from '../../src/lib/generationClient.js';
+// ENGINE-2 unit 2: every local transport stamps the committed engine bundle's version
+// onto the settlement (generationClient.js :: stampEngineVersion), so a result's
+// settlement reads back with `engineVersion` beside the fields the double answered.
+import { engineVersion as LOCAL_ENGINE_VERSION } from '../../supabase/functions/_shared/engineBundle.meta.json';
 import {
   GENERATION_ERROR_KIND,
   GENERATION_PROTOCOL_VERSION,
@@ -91,7 +95,7 @@ describe('runGeneration — the in-thread paths', () => {
     });
 
     expect(outcome).toBe('in-thread:flag-off');
-    expect(result).toEqual({ settlement: { name: 'Fallowmere' } });
+    expect(result).toEqual({ settlement: { name: 'Fallowmere', engineVersion: LOCAL_ENGINE_VERSION } });
     expect(fallback).toHaveBeenCalledOnce();
     expect(double.instance).toBe(null);
   });
@@ -154,7 +158,7 @@ describe('runGeneration — the worker protocol', () => {
 
     const { result, outcome } = await pending;
     expect(outcome).toBe('worker');
-    expect(result).toEqual({ settlement: { name: 'Ashenford' } });
+    expect(result).toEqual({ settlement: { name: 'Ashenford', engineVersion: LOCAL_ENGINE_VERSION } });
     expect(seen).toEqual(['terrain', 'people']);
     expect(fallback).toHaveBeenCalledTimes(0);
     expect(double.posted).toEqual([requestFor('gen-7')]);
@@ -173,7 +177,7 @@ describe('runGeneration — the worker protocol', () => {
     double.instance.emit(resultPacket('gen-8', { settlement: { name: 'Right' } }));
 
     const { result } = await pending;
-    expect(result).toEqual({ settlement: { name: 'Right' } });
+    expect(result).toEqual({ settlement: { name: 'Right', engineVersion: LOCAL_ENGINE_VERSION } });
     expect(seen).toEqual([]);
   });
 
@@ -237,7 +241,7 @@ describe('runGeneration — the worker protocol', () => {
     // A worker that posts after we committed to an answer must not be able to
     // change it, and must not throw either.
     double.instance.emit(resultPacket('gen-11', { settlement: { name: 'Second' } }));
-    expect(result).toEqual({ settlement: { name: 'First' } });
+    expect(result).toEqual({ settlement: { name: 'First', engineVersion: LOCAL_ENGINE_VERSION } });
     expect(double.terminated).toBe(1);
   });
 });
@@ -256,7 +260,7 @@ describe('runGeneration — the transport-failure taxonomy', () => {
 
     const { result, outcome } = await pending;
     expect(outcome).toBe('in-thread:transport-failed');
-    expect(result).toEqual({ settlement: { name: 'Recovered' } });
+    expect(result).toEqual({ settlement: { name: 'Recovered', engineVersion: LOCAL_ENGINE_VERSION } });
     expect(fallback).toHaveBeenCalledTimes(1);
   });
 

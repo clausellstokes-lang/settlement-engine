@@ -33,9 +33,13 @@ import { settlementContentRuntimeOptions } from '../../src/store/settlementConte
 import { eligibleCustomContent } from '../../src/domain/customContentSchema.js';
 import { contentRuntimeFromCampaignBinding } from '../../src/domain/content/contentEnvironment.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
+import { engineVersion as LOCAL_ENGINE_VERSION } from '../../supabase/functions/_shared/engineBundle.meta.json';
 
 const URL_ = 'https://stub.supabase.co/functions/v1/engine-generate';
-const SERVED = 'abcdef0123456789';
+// The service built from THESE sources serves the committed bundle's version.
+const SERVED = LOCAL_ENGINE_VERSION;
 
 /** The request the generate action builds for a signed-in, no-homebrew, standalone forge. */
 function actionRequest(seed, settType) {
@@ -186,7 +190,9 @@ describe('the remote packet is the worker packet', () => {
 
   it.each(CASES)('seed %s (%s): every key of the packet equals the local core\'s, over the wire', async (seed, settType) => {
     const request = actionRequest(seed, settType);
-    const local = structuredClone(runGenerationRequest(structuredClone(request)));
+    const { result: local } = await runGeneration(request, {
+      flagOn: false, remote: false, fallback: (r) => structuredClone(runGenerationRequest(structuredClone(r))),
+    });
     const { impl, calls } = okFetch();
     const { result, outcome } = await remoteRun(request, impl);
     expect(outcome).toBe('remote');
@@ -197,6 +203,9 @@ describe('the remote packet is the worker packet', () => {
     expect(result.pipelineHistory.length).toBeGreaterThan(0);
     expect(result.preservation).toBe(local.preservation);
     expect(result.resolvedConfig).toEqual(local.resolvedConfig);
+    // Same sources, same version: both records carry the committed bundle's hash.
+    expect(result.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
+    expect(local.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
   });
 
   it('posts { seed, config } with the caller\'s session token, and nothing pinned by default', async () => {
@@ -283,5 +292,67 @@ describe('a remote failure is shown, never replaced by a local town', () => {
     withHomebrew.payload.contentRuntime = { ...withHomebrew.payload.contentRuntime, customContent: { institutions: [{ id: 'x' }] } };
     expect((await remoteRun(withHomebrew, impl).catch(e => e)).inputs).toEqual(['customContent']);
     expect(calls).toHaveLength(0);
+  });
+});
+
+describe('the engineVersion stamp lives at the transport (ENGINE-2 unit 2)', () => {
+  const request = () => actionRequest('stamp-a', 'town');
+
+  it('the build carries the committed engine bundle meta\'s version, a 16-hex content hash', () => {
+    const meta = JSON.parse(readFileSync(resolve(__dirname, '..', '..', 'supabase', 'functions', '_shared', 'engineBundle.meta.json'), 'utf8'));
+    expect(LOCAL_ENGINE_VERSION).toBe(meta.engineVersion);
+    expect(LOCAL_ENGINE_VERSION).toMatch(/^[0-9a-f]{16}$/);
+  });
+
+  it('the pipeline\'s own output is NOT stamped (the byte replay and the goldens read it)', () => {
+    const core = runGenerationRequest(request());
+    expect(Object.keys(core.settlement).length).toBeGreaterThan(10);
+    // anchored: the line above proves the settlement is a populated record before its key set is read.
+    expect(Object.keys(core.settlement)).not.toContain('engineVersion');
+  });
+
+  it('every local outcome stamps the build\'s version: in-thread, worker, transport-failed', async () => {
+    const fallback = async () => ({ settlement: { name: 'Local' } });
+    const flagOff = await runGeneration(request(), { flagOn: false, remote: false, fallback });
+    expect(flagOff.result.settlement).toEqual({ name: 'Local', engineVersion: LOCAL_ENGINE_VERSION });
+
+    const worker = {
+      onmessage: null, onerror: null, onmessageerror: null,
+      postMessage(req) {
+        queueMicrotask(() => this.onmessage({ data: {
+          kind: 'generation.result', requestId: req.requestId,
+          workerContract: 'settlementforge:generation:worker-v1', result: { settlement: { name: 'Worker' } },
+        } }));
+      },
+      terminate() {},
+    };
+    const viaWorker = await runGeneration(request(), { flagOn: true, remote: false, fallback, workerFactory: () => worker });
+    expect(viaWorker.outcome).toBe('worker');
+    expect(viaWorker.result.settlement).toEqual({ name: 'Worker', engineVersion: LOCAL_ENGINE_VERSION });
+
+    const broken = {
+      onmessage: null, onerror: null, onmessageerror: null,
+      postMessage() { queueMicrotask(() => this.onerror(new Error('script error'))); },
+      terminate() {},
+    };
+    const failed = await runGeneration(request(), { flagOn: true, remote: false, fallback, workerFactory: () => broken });
+    expect(failed.outcome).toBe('in-thread:transport-failed');
+    expect(failed.result.settlement).toEqual({ name: 'Local', engineVersion: LOCAL_ENGINE_VERSION });
+  });
+
+  it('the remote transport stamps the version the service ANSWERED, even when this build carries another', async () => {
+    const other = 'ffffffffffffffff';
+    const { impl } = fetchDouble(async (_url, init) => {
+      const body = { ...serviceReply(init.body), engineVersion: other };
+      return { ok: true, status: 200, json: async () => body };
+    });
+    const { result } = await remoteRun(request(), impl);
+    expect(result.settlement.engineVersion).toBe(other);
+    expect(other).not.toBe(LOCAL_ENGINE_VERSION);
+  });
+
+  it('a packet without a settlement object is returned as it came', async () => {
+    const { result } = await runGeneration(request(), { flagOn: false, remote: false, fallback: async () => ({ settlement: null }) });
+    expect(result).toEqual({ settlement: null });
   });
 });
