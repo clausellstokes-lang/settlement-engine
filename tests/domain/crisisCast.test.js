@@ -151,6 +151,19 @@ describe('the eleven rules, each over a hand-built town', () => {
     expect(faceCandidates(s).candidates[0]).toMatchObject({ name: 'Varo Quill', reason: CAST_REASONS.face });
   });
 
+  it('the generator\'s own "Occupation Authority", filed under the military category, is read as the occupier', () => {
+    const s = town({ extraFactions: [{ faction: 'Occupation Authority', category: 'military', power: 30 }], extraNpcs: [{ id: 'n9', name: 'Varo Quill', role: 'Guard Captain', power: 9, factionAffiliation: 'Occupation Authority' }] });
+    expect(faceCandidates(s).candidates[0]).toMatchObject({ name: 'Varo Quill', reason: CAST_REASONS.face });
+    expect(stakeOf(deriveStakes(s, 'occupied'), 'Occupation Authority')).toBe('gains');
+  });
+
+  it('an office stand-in names an office, not a person, and is never cast', () => {
+    const s = town();
+    s.npcs = s.npcs.map((n) => (n.id === 'n2' ? { ...n, name: 'The Guard Captain' } : n));
+    expect(defenderCandidates(s).candidates.map((r) => r.name)).not.toContain('The Guard Captain'); // anchored: the candidates are non-empty (the watch house stands)
+    expect(defenderCandidates(s).candidates.length).toBeGreaterThan(0);
+  });
+
   it('a temporary person is minted only for a natural kind\'s lever with neither a house nor an office-holder, and only once per town', () => {
     const s = town({ institutions: [{ name: 'Town council' }] });
     s.npcs = s.npcs.filter((n) => !/healer|priest/i.test(n.role));

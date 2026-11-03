@@ -30,6 +30,7 @@ import { GEN_TO_PULSE_TYPE } from '../stressorPicker.js';
 import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
+import { isOfficeStandIn } from '../dossier/seatHolder.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -364,9 +365,23 @@ function traitsOf(n) {
   return [str(p.dominant), str(p.flaw), str(p.modifier)].filter(Boolean).map((t) => t.toLowerCase());
 }
 
-/** The live roster: no temporary person, nobody ousted. @param {CastSettlement} s @returns {CastNpc[]} */
+/**
+ * The live roster: no temporary person, nobody ousted, and no office stand-in ("The Watch
+ * Captain" names an office, not a person; the ruling chain refuses one for the same reason).
+ * @param {CastSettlement} s @returns {CastNpc[]}
+ */
 function rosterOf(s) {
-  return (Array.isArray(s.npcs) ? s.npcs : []).filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name));
+  return (Array.isArray(s.npcs) ? s.npcs : [])
+    .filter((n) => !!n && typeof n === 'object' && !n.temporary && !n.ousted && !!str(n.name) && !isOfficeStandIn(/** @type {never} */ (n)));
+}
+
+/**
+ * An occupying power. The generator files its "Occupation Authority" under the military
+ * category, so the archetype alone (category first) misses it; the name decides too.
+ * @param {CastFaction} f @returns {boolean}
+ */
+function isOccupier(f) {
+  return factionArchetype(f) === A.OCCUPATION || /occupation|occupying|garrison\s+rule|imperial\s+presence|annex/i.test(factionName(f));
 }
 
 /** @param {CastSettlement} s @returns {CastFaction[]} */
@@ -438,7 +453,7 @@ export function deriveStakes(s, kind) {
     const isGov = name === govName;
     /** @type {string | null} */
     let gains = null;
-    if (arch === A.OCCUPATION && kind === 'occupied') gains = STAKE_REASONS.gainsOccupier;
+    if (isOccupier(f) && kind === 'occupied') gains = STAKE_REASONS.gainsOccupier;
     else if (scarce && scarce.test(name)) gains = STAKE_REASONS.gainsHolds;
     else if ((nature === 'social' || nature === 'engineered') && name === rival) gains = STAKE_REASONS.gainsRival;
     else if (nature === 'social' && !isGov && arch === A.GOVERNMENT) gains = STAKE_REASONS.gainsClaim;
@@ -448,7 +463,8 @@ export function deriveStakes(s, kind) {
     else if (arch === A.MERCHANT && /** @type {{ isEndorsed?: boolean }} */ (pl).isEndorsed) gains = STAKE_REASONS.gainsMerchants;
 
     let loses = false;
-    for (const sys of systems) {
+    const occupierHere = kind === 'occupied' && isOccupier(f);
+    for (const sys of occupierHere ? [] : systems) {
       const base = SYSTEM_BASE[sys];
       if (!base) continue;
       if ((base.governing && isGov) || base.archetypes.includes(arch)) { loses = true; break; }
@@ -565,7 +581,7 @@ export function instigatorCandidates(s, kind, stakes) {
   const nature = natureOf(kind);
   // An occupying power is never the town's own instigator (the design's "never a local
   // instigator"): a rising against the occupier is cast against it, not by it.
-  const factions = factionsOf(s).filter((f) => factionArchetype(f) !== A.OCCUPATION);
+  const factions = factionsOf(s).filter((f) => !isOccupier(f));
   const rivalName = outrankingRivalOf(/** @type {never} */ (s));
   const rival = factions.some((f) => factionName(f) === rivalName) ? rivalName : null;
   const gainers = stakes.filter((k) => k.stake === 'gains')
@@ -737,7 +753,7 @@ export function wavererCandidates(s, stakes) {
 export function faceCandidates(s) {
   /** @type {CastRow[]} */
   const out = [];
-  for (const f of factionsOf(s).filter((x) => factionArchetype(x) === A.OCCUPATION)) {
+  for (const f of factionsOf(s).filter(isOccupier)) {
     for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'face', CAST_REASONS.face));
     out.push(factionRow(f, 'face', CAST_REASONS.face));
   }

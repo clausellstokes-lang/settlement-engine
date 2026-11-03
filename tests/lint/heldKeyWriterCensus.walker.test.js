@@ -479,7 +479,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     expect(live, 'a held-key writer step appeared or retired').toEqual([...STEP_ROSTER]);
     const writerSteps = [...new Set(STEP_ROSTER.map((row) => row.split('|')[0]))];
     expect(writerSteps).toHaveLength(12);
-    expect(getStepMeta()).toHaveLength(22);
+    expect(getStepMeta()).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03); its roster write is gated on chooseOrPin(pins, 'npcs')
   });
 
   it('A3 — the FUNCTION-LEVEL roster is live and exact, and its discovery set is closed', () => {

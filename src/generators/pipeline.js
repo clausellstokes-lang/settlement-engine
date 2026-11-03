@@ -68,7 +68,7 @@ const _PINS_KEY = '__pins';
 // `tests/lint/transientChooserRegistry.walker.test.js` holds the two equal in both directions.
 // A transient chooser a caller DOES supply is still honoured: `chooseOrPin` is untouched.
 const _TRANSIENT_CHOOSERS = new Set([
-  'catalogForTier', 'categoryToggles', 'generationContentProfile', 'generationContext',
+  'catalogForTier', 'categoryToggles', 'crisisCast', 'generationContentProfile', 'generationContext',
   'goodsToggles', 'institutionToggles', 'neighbourEconBias', 'neighbourFacBias', 'neighbourProfile',
   'noMagic', 'powerIntent', 'priorityMagicEffective', 'rawNeighbour', 'resolvedTerrain',
   'servicesToggles', 'structural', 'threat', 'townPlus', 'tradeRoute',

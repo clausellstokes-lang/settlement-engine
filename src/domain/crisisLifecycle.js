@@ -351,6 +351,33 @@ export function crisisEscalate(args) {
 }
 
 /**
+ * The settlement without the temporary people a resolved crisis brought in (the crisis cast's
+ * one exception to "no invented people", docs/DESIGN_CRISIS_TAB.md). A temporary person whose
+ * `crisisIds` still names another crisis stays, with the resolved one struck from the list.
+ * Same reference when nothing changes.
+ * @template {{ npcs?: unknown }} S
+ * @param {S} s
+ * @param {string} crisisId
+ * @returns {S}
+ */
+function withoutTemporaryPeopleOf(s, crisisId) {
+  const npcs = Array.isArray(s?.npcs) ? /** @type {unknown[]} */ (s.npcs) : null;
+  if (!npcs || !crisisId) return s;
+  let changed = false;
+  /** @type {unknown[]} */
+  const kept = [];
+  for (const row of npcs) {
+    const n = /** @type {{ temporary?: unknown, crisisIds?: unknown } | null} */ (row && typeof row === 'object' ? row : null);
+    const ids = n && n.temporary && Array.isArray(n.crisisIds) ? /** @type {unknown[]} */ (n.crisisIds) : null;
+    if (!ids || !ids.includes(crisisId)) { kept.push(row); continue; }
+    changed = true;
+    const rest = ids.filter((c) => c !== crisisId);
+    if (rest.length) kept.push({ ...n, crisisIds: rest });
+  }
+  return changed ? { ...s, npcs: kept } : s;
+}
+
+/**
  * The shared settlement half of every resolution. Removes the matching
  * stress entry (same container probe crisisOnset uses) and winds down the
  * conditions that crisis promoted — both the directly stamped one
@@ -417,6 +444,9 @@ function windDownCrisis(s, { types, label: labelOverride, origin }) {
       for (const k of objectKeys) next[k] = null;
     }
   }
+  // A temporary person (src/generators/steps/resolveCrisisCast.js) leaves with the last crisis
+  // it was brought in for; one that still serves another active crisis stays, that crisis kept.
+  if (removed) next = withoutTemporaryPeopleOf(next, String(removed.type || removed.name || ''));
   const label = labelOverride || removed?.label || removed?.name || labelFromTarget(candidates[0]);
   const resolutionCause = origin?.kind === 'event'
     ? { source: 'event', eventId: origin.eventId, detail: `${label} was resolved.` }
