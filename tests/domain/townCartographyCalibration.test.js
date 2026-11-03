@@ -280,6 +280,15 @@
  *   stays 0 of 504; `CORPUS_ROWS` stays 504; W2's live re-measure reproduces every sampled row;
  *   and the three town-map goldens and eleven other cartography suites are green.
  *
+ *   2026-11-03 — FOOD-1, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-1-one-food-record.json; the chair signs by the owner's delegation, vetoable).
+ *   One stored food record and one set of cut-offs move prosperity, and with it the institution draws of 7 sampled
+ *   rows. Written from the staged tree S1 (S0 green on the committed corpus). ONE PASS: the per-tier maximum roster
+ *   reads 12/25/42/69/83/86 again, so CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move and the corpus is the
+ *   fixed point. Re-keyed by measurement: `FROZEN.city.maxBuildings` 212 → 211; `DUPLICATES.permille`
+ *   139/212/84/64/50/55 → 146/215/82/62/50/56 (derived ceilings 223/340/135/103/80/88 →
+ *   234/344/132/100/80/90). CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -351,7 +360,7 @@ const FROZEN = Object.freeze({
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 29 }),
   village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 47 }),
   town: Object.freeze({ throws: 0, maxInstitutions: 69, maxBuildings: 122 }),
-  city: Object.freeze({ throws: 0, maxInstitutions: 83, maxBuildings: 212 }),
+  city: Object.freeze({ throws: 0, maxInstitutions: 83, maxBuildings: 211 }),
   metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 271 }),
 });
 
@@ -397,12 +406,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 139 }),
-  hamlet: Object.freeze({ permille: 212 }),
-  village: Object.freeze({ permille: 84 }),
-  town: Object.freeze({ permille: 64 }),
+  thorp: Object.freeze({ permille: 146 }),
+  hamlet: Object.freeze({ permille: 215 }),
+  village: Object.freeze({ permille: 82 }),
+  town: Object.freeze({ permille: 62 }),
   city: Object.freeze({ permille: 50 }),
-  metropolis: Object.freeze({ permille: 55 }),
+  metropolis: Object.freeze({ permille: 56 }),
 });
 
 /**
@@ -1080,7 +1089,9 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // constant, which is UNCHANGED; the ceiling is a readout of it, and a reader who wants
     // the bound should read the headroom, not these six numbers.
     // 236/349/125/103/84/93 -> 223/340/135/103/80/88 on 2026-09-30: the urban band's re-record (header).
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([223, 340, 135, 103, 80, 88]);
+    // 223/340/135/103/80/88 -> 234/344/132/100/80/90 on 2026-11-03: FOOD-1 (header), the derived ceilings of the re-keyed
+    // readings by the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([234, 344, 132, 100, 80, 90]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
