@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "a2c4a50a3b4a1052a89fcb6c865c8e02f92fcd7c",
-  "measuredBy": "ENGINE-1 (Opus 5.5), session 019yED1Rc3svZxTNcEJVRr77",
+  "measuredAtSha": "2bd4343756446ada387b9768a35ad6a41591b2ee",
+  "measuredBy": "ENGINE-2 (Opus 5.5)",
   "date": "2026-11-03",
-  "note": "ENGINE-1: engineBundleReplay (tests/build) + the engine-generate/engine-version Deno suites; the tip at 1169b3cd5 was already off the frozen register (files 2847 vs 2816) from other lanes, absorbed here",
-  "files": 2848,
+  "note": "two new test files: tests/lib/engineRemoteTransport.test.js, tests/build/engineServiceCore.test.js (the engine service remote transport + stamp)",
+  "files": 2850,
   "parked": 366,
-  "credited": 2482,
-  "titles": 27318,
-  "suiteTitles": 7229
+  "credited": 2484,
+  "titles": 27339,
+  "suiteTitles": 7234
 }
