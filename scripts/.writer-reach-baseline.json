@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "7c63271d104e520bb3b9ac47cd7d7c7171f1078f",
+ "frozenAtSha": "69dbadeb15f156818d18fa83f5a16349844c6578",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
  "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
- "verdictDigest": "5ecdd376c7871e258fdb7f3dcfb7c9fcfbbfdb5490f9938640ca3b524a8320ad",
+ "verdictDigest": "4003d69829f2516e0b3416b43d5cbaa48e653938992ec106d3082059cd861dcd",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 743,
-  "web-transitive": 939,
-  "dossier-pdf": 445,
+  "web-transitive": 941,
+  "dossier-pdf": 447,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 340,
+  "foundry": 342,
   "json-export": 8,
   "news": 29
  },
  "population": {
   "judged": 6998,
   "lit": 571,
-  "litName": 5106,
-  "dark": 1321,
+  "litName": 5109,
+  "dark": 1318,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1683,
-  "sites": 39796,
-  "propRead": 37655,
+  "files": 1685,
+  "sites": 39827,
+  "propRead": 37683,
   "elemRead": 0,
-  "destructure": 2126,
+  "destructure": 2129,
   "inOp": 15,
-  "rGrades": 6091,
-  "nGrades": 967276,
-  "resolvedReceivers": 6850
+  "rGrades": 6098,
+  "nGrades": 968046,
+  "resolvedReceivers": 6858
  },
  "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 472,
+ "reviewableDarkCount": 469,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -3134,24 +3134,6 @@
    "key": "magicInfluence",
    "shape": "compound",
    "rows": 840
-  },
-  {
-   "identity": "magicLicense on charter",
-   "key": "magicLicense",
-   "shape": "charter",
-   "rows": 394
-  },
-  {
-   "identity": "magicLicense on institutions",
-   "key": "magicLicense",
-   "shape": "institutions",
-   "rows": 24746
-  },
-  {
-   "identity": "magicLicense on magicDef",
-   "key": "magicLicense",
-   "shape": "magicDef",
-   "rows": 341
   },
   {
    "identity": "magicMilitarized on flags",
@@ -8339,7 +8321,7 @@
   "catalogId on charter": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "category on charter": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N web-display=N web-transitive=N world-book=N",
   "desc on charter": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "magicLicense on charter": "web-transitive=N",
+  "magicLicense on charter": "dossier-pdf=N foundry=N web-transitive=N",
   "name on charter": "campaign-pdf=N dossier-pdf=N foundry=N json-export=N news=N web-display=N web-transitive=N world-book=N",
   "priorityCategory on charter": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "required on charter": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -9108,7 +9090,7 @@
   "garrison on institutions": "dossier-pdf=N foundry=N web-display=N",
   "impairments on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicDef on institutions": "dossier-pdf=N foundry=N web-display=N",
-  "magicLicense on institutions": "web-transitive=N",
+  "magicLicense on institutions": "dossier-pdf=N foundry=N web-transitive=N",
   "mercenary on institutions": "dossier-pdf=N foundry=N web-display=N",
   "militia on institutions": "dossier-pdf=N foundry=N web-display=N",
   "name on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
@@ -9194,7 +9176,7 @@
   "desc on magicDef": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
   "exclusiveGroup on magicDef": "web-display=N web-transitive=N",
   "forbiddenTradeRoutes on magicDef": "web-transitive=N",
-  "magicLicense on magicDef": "web-transitive=N",
+  "magicLicense on magicDef": "dossier-pdf=N foundry=N web-transitive=N",
   "name on magicDef": "campaign-pdf=N dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=N world-book=N",
   "priorityCategory on magicDef": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "required on magicDef": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
