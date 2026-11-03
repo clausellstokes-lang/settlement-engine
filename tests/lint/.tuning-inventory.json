@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "0c104fe807a27c4600ec741616ed111a2ff94712",
-  "measuredBy": "G2",
-  "date": "2026-10-31",
-  "note": "GS-2 one faction set (ODQ §934.101): bare decimals 6975 -> 6962, a win banked; npcGenerator.js 83 -> 71 (the dead _generateFactionConflict deleted) and power/conflicts.js 1 -> 0 (the no-rivalry 0.4 coin gone); no value moved, no ceiling rose",
+  "measuredAtSha": "a7f13fef4f508bcd0881e43832d9c63b0ab050d9",
+  "measuredBy": "FOOD seat",
+  "date": "2026-11-03",
+  "note": "FOOD-2: foodGenerator.js loses TERRAIN_AGRI, the /1.3 and the 0.4/6 workforce constants (bare decimals and named constants fall); foodBalance.js loses STORAGE_BUFFER and the legacy workforce decimals",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8050,7 +8050,7 @@
     "src/domain/worldPulse/worldState.js": 7,
     "src/generators/demandProfile.js": 1,
     "src/generators/economy/viability.js": 1,
-    "src/generators/foodGenerator.js": 7,
+    "src/generators/foodGenerator.js": 5,
     "src/generators/generationReceiptJudgments.js": 1,
     "src/generators/historyGenerator.js": 1,
     "src/generators/power/economyReconciliation.js": 2
@@ -8392,12 +8392,12 @@
     "src/generators/density/densityRoll.js": 6,
     "src/generators/density/successionGrammar.js": 3,
     "src/generators/economy/economicState.js": 6,
-    "src/generators/economy/foodBalance.js": 27,
+    "src/generators/economy/foodBalance.js": 25,
     "src/generators/economy/neighbourEconomicBias.js": 2,
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 63,
+    "src/generators/foodGenerator.js": 50,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,
@@ -8433,8 +8433,8 @@
   "totals": {
     "tables": 257,
     "keys": 2187,
-    "unregisteredNamed": 535,
-    "bareDecimals": 6962,
+    "unregisteredNamed": 533,
+    "bareDecimals": 6947,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 168
   }
