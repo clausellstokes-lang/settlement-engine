@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "76ccd4deafabff877ce6540b7ba927aec0065623",
+  "measuredAtSha": "604f3c3cbf8e4c55a392bc9acae0181d4d542f9a",
   "measuredBy": "FOOD seat",
   "date": "2026-11-03",
-  "note": "FOOD-2: foodBaseNumbers.test.js added; foodModelSingleWriter isolated-village arm re-titled (the 48% witness re-anchored)",
-  "files": 2819,
+  "note": "FOOD-1 addendum 2: economicsFoodStores.test.jsx added",
+  "files": 2820,
   "parked": 362,
-  "credited": 2457,
-  "titles": 27166,
-  "suiteTitles": 7174
+  "credited": 2458,
+  "titles": 27168,
+  "suiteTitles": 7175
 }
