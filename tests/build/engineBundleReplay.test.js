@@ -22,6 +22,11 @@
  *      the bundle produces. A bundle-only drift, or a key-set change, fails instead.
  *   3. NEGATIVE CONTROL: a temp copy of the bundle with a planted edit is NOT accepted
  *      by the comparison title 1 makes (the guard is not vacuous).
+ *   4. THE SERVICE'S BIRTH (unit 3's chain, Node link): for the three cases of
+ *      tests/fixtures/engine-generate-cases.json, the bundle's birth (its own
+ *      loadGenerationLawPayloads + birthConfig + pipeline — what engine-generate runs)
+ *      equals the in-process birth. supabase/functions/engine-generate/index.test.ts is
+ *      the Deno link: the function's settlement equals the bundle's birth, same cases.
  */
 
 import { describe, it, expect } from 'vitest';
@@ -31,11 +36,13 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const ROOT = process.cwd();
 const BUNDLE = resolve(ROOT, 'supabase', 'functions', '_shared', 'engineBundle.js');
 const FIXTURE = resolve(ROOT, 'tests', 'fixtures', 'generator-golden-master.json');
+const SERVICE_CASES = resolve(ROOT, 'tests', 'fixtures', 'engine-generate-cases.json');
 const ROWS = goldenCorpus();
 const WALL_MS = 600_000;
 
@@ -120,6 +127,19 @@ describe('engine bundle replay — the bundle generates what the app generates',
     // Straight to stderr: the runner drops console output of a title that ends skipped.
     process.stderr.write(`\n⚠ ${reason}\n`);
     ctx.skip(reason);
+  }, WALL_MS);
+
+  it('the engine-generate birth: for the three service cases, the bundle\'s birth equals the in-process birth', async () => {
+    const { config, seeds } = JSON.parse(readFileSync(SERVICE_CASES, 'utf8'));
+    expect(seeds.length).toBe(3);
+    const bundle = await loadBundle(BUNDLE);
+    await bundle.loadGenerationLawPayloads();
+    await loadGenerationLawPayloads();
+    for (const seed of seeds) {
+      const viaBundle = JSON.stringify(bundle.generateSettlementPipeline(bundle.birthConfig(config), null, { seed, customContent: {} }));
+      const inProcess = JSON.stringify(generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} }));
+      expect(sha256(viaBundle), `seed ${seed}`).toBe(sha256(inProcess));
+    }
   }, WALL_MS);
 
   it('NEGATIVE CONTROL: a temp copy of the bundle with a planted edit is not accepted by the same comparison', async () => {
