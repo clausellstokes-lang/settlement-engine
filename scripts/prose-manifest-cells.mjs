@@ -98,7 +98,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' and draw the hinterland as normal supply; 978 of the 1,050 rows move, none added or removed.'
     + ' 2026-11-03 (FOOD-3, docs/shift-records/2026-11-03-food-3-food-diversity.json, ODQ §934.104, THE COHERENCE AND'
     + ' SCALE WINDOW): re-recorded because the food record holds the sources a place has and preserved sources lengthen'
-    + ' the stores the defence lines read; 120 of the 1,050 rows move, none added or removed.',
+    + ' the stores the defence lines read; 120 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (SIZE-3, docs/shift-records/2026-11-03-size-3-guild-market.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because a small place with no real market no longer seats a merchant guild, so its'
+    + ' power lines and the conflict line the guild carried move; 174 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
