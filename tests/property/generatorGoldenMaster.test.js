@@ -18,6 +18,16 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — FOOD-2: THE FOOD BASE NUMBERS — ONE TERRAIN TABLE, NO HIDDEN STORAGE DIVISOR, THE HINTERLAND AS NORMAL
+ *   SUPPLY, PER CAPITA AND PER TIER, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-2-food-base-numbers.json; the cloud chair signs under the owner's delegation,
+ *   vetoable). 525 OF 525 ROWS MOVED; the key set is identical. THE CAUSE, ONE (a7f13fef4): production reads the one
+ *   terrain table with no /1.3 divisor and the tier's hinterland share arrives as supply, so the food record, the
+ *   viability metrics and the defence scores move on every row, and legitimacy and prosperity re-deal what follows
+ *   them (factions 170 rows, npcs 155, founding history 195). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from
+ *   the staged tree S2 = S1 + this cause, where S1 (FOOD-1's stage, its writes committed) reproduces e9fe8b5b.. on all
+ *   525 rows. e9fe8b5b.. -> 8d3ce803..
+ *
  * 2026-11-03 — FOOD-1: ONE FOOD RECORD EVERY FOOD SENTENCE READS, ONE SET OF CUT-OFFS; THE FOUNDATIONS FOOD SCORE
  *   READS THE BALANCE AND THE RESERVES (GS-3a RE-CUT); THE SURPLUS WORDS READ THE RECORD, THROUGH THE SIGNED DOOR (ODQ
  *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-food-1-one-food-record.json; the
