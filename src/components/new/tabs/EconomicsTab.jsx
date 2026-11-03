@@ -565,8 +565,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
         {/* ── THE STORES, ONE HOME (FOOD-1, chair addendum 2; the owner 2026-11-03: "Do add storehouse
             months the economy tab.") — the food record's months in store (economicState.foodSecurity.
-            foodRecord.storageMonths) and whether a granary stands, in plain words, printed here once. */}
-        {storesLine&&<div data-testid="economics-food-stores" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,marginTop:8}}>{storesLine}</div>}
+            foodRecord.storageMonths) and whether a granary stands, printed once; the id is the Food endurance door (FOOD_STORES_DOOR). */}
+        {storesLine&&<div id="dossier-stores-economy-food-stores" data-testid="economics-food-stores" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,marginTop:8}}>{storesLine}</div>}
       </Section>}
 
       {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──

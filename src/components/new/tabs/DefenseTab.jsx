@@ -5,7 +5,8 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
+import EntityLink from '../../primitives/EntityLink.jsx';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { statusCase } from '../labelLadder.js';
@@ -323,6 +324,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // economic-capacity read per page, R2); the row with prose under its bar stays.
   const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
   const guardAssessment = deriveGuardAssessment(r);
+  // X-52 FOOD ENDURANCE (lane DEFENSE-3): the one food record read for a siege, one sentence.
+  const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
 
   // Force card component
@@ -429,6 +432,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           })}
         </div>
       </div>
+
+      {/* ── FOOD ENDURANCE (X-52, lane DEFENSE-3; the owner, 2026-11-03: "call it food endurance
+          rather than siege endurance") — what the one food record's stores mean under siege,
+          read by `foodEnduranceLine`, the leaf the PDF's defence chapter prints too. The months
+          in store stay the Economy tab's row: the stores words are the door to it. */}
+      {foodEndurance&&<p data-testid="defense-food-endurance" style={{...FLUSH_RULED,fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55}}>
+        <strong style={{color:swatch.inkMag}}>{foodEndurance.label}:</strong> {foodEndurance.before}<EntityLink id={FOOD_STORES_DOOR.id} type={FOOD_STORES_DOOR.type} fallback={foodEndurance.door} verbatim />{foodEndurance.after}
+      </p>}
 
       {/* ── CRIMINAL ARCHITECTURE & PUBLIC ORDER ─────────────────────────── */}
       <Section title="Criminal Architecture & Public Order" collapsible

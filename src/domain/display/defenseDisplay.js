@@ -12,7 +12,8 @@
  */
 
 import { buildThreatAssessment, healerSubject } from './threatAssessment.js';
-import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
+import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
@@ -468,4 +469,77 @@ export function deriveArmedForces(settlement) {
     charter: inst.charter || [],
     arcane: arcaneDefenseOf(settlement),
   };
+}
+
+// ── FOOD ENDURANCE, THE LINE (lane DEFENSE-3, X-52, 2026-11-03) ─────────────────────────
+// The owner: "call it food endurance rather than siege endurance". ONE sentence, read by the
+// Defense tab and by the PDF's defence chapter alike, from `defenseFacts.js :: foodEnduranceOf`
+// (which reads the one food record). The figures are said in words; no digit is minted.
+
+/** The line's label, one spelling for both readers. */
+export const FOOD_ENDURANCE_LABEL = 'Food endurance';
+
+/**
+ * The door from the line to the Economy tab's stores row, where the months in store are
+ * printed once. `anchor` is `entityLinks.js :: entityAnchor('stores', { id })`, spelled as a
+ * literal so this display leaf takes no import for it (the test holds the two equal); the
+ * Economy tab's stores row carries it as its element id.
+ */
+export const FOOD_STORES_DOOR = Object.freeze({
+  id: 'economy.food-stores',
+  type: 'stores',
+  anchor: 'dossier-stores-economy-food-stores',
+});
+
+const TIER_NOUNS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+
+/** A length of time in plain words, never a decimal. Under seven weeks it is said in weeks.
+ * @param {number} months @returns {string} */
+function monthsInWords(months) {
+  const weeks = Math.round((months * 52) / 12);
+  if (weeks <= 3) return 'a few weeks';
+  if (weeks <= 6) return 'about a month';
+  const whole = Math.round(months);
+  if (whole < 12) return `about ${numberWord(whole)} months`;
+  if (whole === 12) return 'about a year';
+  return whole < 24 ? 'more than a year' : 'more than two years';
+}
+
+/**
+ * THE FOOD ENDURANCE LINE: what the stores mean under siege, in words. `door` is the words
+ * that name the stores (the granary, or household stores where none stands); the tab makes
+ * them the door to the Economy tab's stores row, the PDF prints `sentence` whole.
+ *
+ * @param {{ tier?: unknown, economicState?: unknown } | null | undefined} settlement
+ * @returns {{ label: string, before: string, door: string, after: string, sentence: string } | null}
+ */
+export function foodEnduranceLine(settlement) {
+  const end = foodEnduranceOf(settlement);
+  if (!end) return null;
+  const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
+  const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
+  const opening = end.besieged ? 'the siege has taken the outlying fields' : 'under siege the outlying fields are lost';
+  const lead = end.hasGranary
+    ? `${opening.charAt(0).toUpperCase()}${opening.slice(1)}`
+    : `No granary: ${opening}`;
+  /** @type {string} */
+  let before;
+  /** @type {string} */
+  let door;
+  /** @type {string} */
+  let after;
+  if (end.fullRationMonths === null) {
+    before = `${lead}, but what the ${noun} still grows feeds it at full rations; `;
+    door = end.hasGranary ? 'the granary' : 'its household stores';
+    after = end.hasGranary ? ' stands in reserve.' : ' stand in reserve.';
+  } else {
+    const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
+    const half = end.halfRationMonths === null
+      ? '; on half rations the harvest alone is enough'
+      : `, ${monthsInWords(end.halfRationMonths)} on half`;
+    before = `${lead}; ${stretched}`;
+    door = end.hasGranary ? 'the granary' : 'household stores';
+    after = ` ${end.hasGranary ? 'carries' : 'carry'} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}.`;
+  }
+  return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }
