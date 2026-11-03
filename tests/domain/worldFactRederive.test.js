@@ -378,11 +378,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then FOOD-2 (ODQ §934.104; docs/shift-records/2026-11-03-food-2-food-base-numbers.json), lane DOORS: the generator
     // master e9fe8b5b.. -> 8d3ce803.. (525 of 525 rows) and the prose manifest f85bdd7a.. -> 74b3963f.. (978 rows).
     // Then FOOD-3 (ODQ §934.104; docs/shift-records/2026-11-03-food-3-food-diversity.json), lane DOORS: the generator
-    // master 8d3ce803.. -> f1f24e86.. (525 of 525 rows).
+    // master 8d3ce803.. -> f1f24e86.. (525 of 525 rows) and the prose manifest 74b3963f.. -> aeee81fa.. (120 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('f1f24e8608a8f808a89a9a8352ca6154a309b706cff7824f17e5c357f7f3252a');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('74b3963fb67011eb38247a6a6597767a7f92bfb2229e240172a8c9ae71d4bc63');
+      .toBe('aeee81fa176b52722a9ccf287635a171eb810647f92de3c4fb04f9034372ae05');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
