@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/pow */
+var f=Object.create;var m=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var d=Object.getOwnPropertyNames;var i=Object.getPrototypeOf,j=Object.prototype.hasOwnProperty;var l=(s,t)=>()=>(t||s((t={exports:{}}).exports,t),t.exports);var x=(s,t,e,a)=>{if(t&&typeof t=="object"||typeof t=="function")for(let o of d(t))!j.call(s,o)&&o!==e&&m(s,o,{get:()=>t[o],enumerable:!(a=u(t,o))||a.enumerable});return s};var h=(s,t,e)=>(e=s!=null?f(i(s)):{},x(t||!s||!s.__esModule?m(e,"default",{value:s,enumerable:!0}):e,s));var c=l((M,p)=>{"use strict";p.exports=Math.pow});var r=h(c()),b=r.default??r;export{b as default};
+//# sourceMappingURL=pow.mjs.map

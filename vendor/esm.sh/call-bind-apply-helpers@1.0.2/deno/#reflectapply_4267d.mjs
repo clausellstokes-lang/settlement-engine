@@ -1,0 +1,3 @@
+/* esm.sh - call-bind-apply-helpers@1.0.2/reflectApply */
+var a=Object.create;var s=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var u=Object.getPrototypeOf,i=Object.prototype.hasOwnProperty;var R=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports);var j=(t,e,f,p)=>{if(e&&typeof e=="object"||typeof e=="function")for(let c of m(e))!i.call(t,c)&&c!==f&&s(t,c,{get:()=>e[c],enumerable:!(p=d(e,c))||p.enumerable});return t};var n=(t,e,f)=>(f=t!=null?a(u(t)):{},j(e||!t||!t.__esModule?s(f,"default",{value:t,enumerable:!0}):f,t));var r=R((y,o)=>{"use strict";o.exports=typeof Reflect<"u"&&Reflect&&Reflect.apply});var l=n(r()),b=l.default??l;export{b as default};
+//# sourceMappingURL=reflectApply.mjs.map
