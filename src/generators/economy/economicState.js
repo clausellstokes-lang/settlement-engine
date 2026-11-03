@@ -890,7 +890,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
         tier,
         incomeNormalized.length,
         primaryExports.length,
-        hasInst('market', 'trading', 'merchant', 'guild')
+        hasInst('market', 'trading', 'merchant', 'guild'),
+        _foodSec?.foodRecord ?? null,
       ),
     };
 };
