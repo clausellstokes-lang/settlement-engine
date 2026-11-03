@@ -377,8 +377,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // master 8355c460.. -> e9fe8b5b.. (525 of 525 rows) and the prose manifest aafa41e4.. -> f85bdd7a.. (222 rows).
     // Then FOOD-2 (ODQ §934.104; docs/shift-records/2026-11-03-food-2-food-base-numbers.json), lane DOORS: the generator
     // master e9fe8b5b.. -> 8d3ce803.. (525 of 525 rows) and the prose manifest f85bdd7a.. -> 74b3963f.. (978 rows).
+    // Then FOOD-3 (ODQ §934.104; docs/shift-records/2026-11-03-food-3-food-diversity.json), lane DOORS: the generator
+    // master 8d3ce803.. -> f1f24e86.. (525 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('8d3ce803ce9db8d2fb3a2d509bf3198b8c49db48976bfa85a9db38390137e87c');
+      .toBe('f1f24e8608a8f808a89a9a8352ca6154a309b706cff7824f17e5c357f7f3252a');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('74b3963fb67011eb38247a6a6597767a7f92bfb2229e240172a8c9ae71d4bc63');
 

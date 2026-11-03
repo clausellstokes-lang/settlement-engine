@@ -18,6 +18,15 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — FOOD-3: FOOD DIVERSITY — THE SOURCES A PLACE HAS, THE FAMINE THAT FAILS ONE NAMED SOURCE, THE FOODWAYS
+ *   LINE FROM THE PLACE'S OWN TABLE, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-3-food-diversity.json; the cloud chair signs under the owner's delegation,
+ *   vetoable). 525 OF 525 ROWS MOVED; the key set is identical. THE CAUSE, ONE (bd888a47a): the food record stores its
+ *   sources, its failed source and its foodways line on every row, and preserved non-grain sources lengthen the
+ *   stores, so the defence scores (144 rows) and readiness (54 rows) that read the stores' months follow. ATTRIBUTION,
+ *   ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S3 = S2 + this cause, where S2 (FOOD-2's stage, its
+ *   writes committed) reproduces 8d3ce803.. on all 525 rows. 8d3ce803.. -> f1f24e86..
+ *
  * 2026-11-03 — FOOD-2: THE FOOD BASE NUMBERS — ONE TERRAIN TABLE, NO HIDDEN STORAGE DIVISOR, THE HINTERLAND AS NORMAL
  *   SUPPLY, PER CAPITA AND PER TIER, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
  *   docs/shift-records/2026-11-03-food-2-food-base-numbers.json; the cloud chair signs under the owner's delegation,
