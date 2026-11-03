@@ -243,3 +243,25 @@ describe('osr-prominent-relationship — writer/reader key parity', () => {
     expectAbsentWithAnchor(page.markdown, 'Neighbour ·', WRITTEN.phrasing, 'prominent relationship journal section');
   });
 });
+
+describe('the PDF crisis note reads the Power tab\'s one reading (powerStrata.crisisNoteFor)', () => {
+  const CLAIM = 'The faction that appears to govern is not the faction that governs.';
+  const settlementWith = (rivalPower) => ({
+    powerStructure: {
+      factions: [
+        { faction: 'Town Council', power: 30, isGoverning: true, crisisNote: `${CLAIM} The council splits on the levy.` },
+        { faction: 'Merchant League', power: rivalPower },
+      ],
+    },
+  });
+  const noteOf = (s, name) => buildViewModel({ settlement: s }).power.factions.find(f => f.name === name).crisisNote;
+
+  test('a rival outranks the governing faction: the PDF names that rival', () => {
+    expect(noteOf(settlementWith(60), 'Town Council'))
+      .toBe('The faction that appears to govern is not the faction that governs; the real decisions rest with Merchant League. The council splits on the levy.');
+  });
+
+  test('no rival outranks it: the unnamed claim is dropped and the rest of the note stands', () => {
+    expect(noteOf(settlementWith(10), 'Town Council')).toBe('The council splits on the levy.');
+  });
+});

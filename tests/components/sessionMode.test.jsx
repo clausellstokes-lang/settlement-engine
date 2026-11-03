@@ -159,6 +159,22 @@ describe('SessionMode — the constitutional faith seam', () => {
     expect(screen.queryByRole('button', { name: 'Faith' })).toBeNull();
   });
 
+  it('PREMIUM + deity-free + a church: the Faith section stays and says the church, not faithless', () => {
+    useStore.__set({ auth: { tier: 'premium' } });
+    const { container } = render(
+      <SessionMode
+        settlement={settlementFixture({ config: {}, institutions: [{ name: 'Parish church', category: 'Religious' }] })}
+        saveId="11"
+        onClose={() => {}}
+      />,
+    );
+    const section = container.querySelector('#sf-session-faith');
+    expect(section).not.toBeNull();
+    expect(screen.getByRole('button', { name: 'Faith' })).toBeTruthy();
+    expect(section.textContent).toMatch(/church/i);
+    expect(section.textContent).not.toContain('quiet observances');
+  });
+
   it('FREE viewer: deity-event narration is dropped from the recent-events tail', () => {
     useStore.__set({
       auth: { tier: 'free' },

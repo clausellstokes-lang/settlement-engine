@@ -35,15 +35,14 @@ import { magicLicenceAtLeast } from '../data/constants.js';
 // arcane-identity detector reads them too. Re-exported below — the world law's answers
 // are unchanged; only the address of the patterns moved.
 import {
+  MAGIC_ROLE_PATTERN,
   textAssertsFunctionalMagic,
 } from '../domain/magicAssertionText.js';
 
 export { textAssertsFunctionalMagic };
 
-// `druid` left this list 2026-09-30 with MAGIC_ASSERTION_PATTERN's (J24, TE-CH-6): a druid is a
-// faith role, and a magic-free world still has them.
-const MAGIC_ROLE_PATTERN =
-  /\b(?:archmag(?:e|ister)|artificer|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b/i;
+// MAGIC_ROLE_PATTERN (the world law's role vocabulary) lives in domain/magicAssertionText.js
+// since WIRING-1 item 6, imported above; the pattern is unchanged.
 
 const MAGIC_HISTORY_TYPES = new Set([
   'magical',

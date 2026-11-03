@@ -77,3 +77,13 @@ describe('economic generator monolith split — structure pin', () => {
     }
   });
 });
+
+describe('the surplus words read the food record (FOOD R-economicState)', () => {
+  it('a settlement that grows less than it eats no longer prints "Subsistence with surplus"', async () => {
+    const { generateSettlementPipeline } = await import('../../src/generators/generateSettlementPipeline.js');
+    const config = { settType: 'hamlet', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
+    const s = generateSettlementPipeline(config, null, { seed: 'golden-master-v3', customContent: {} });
+    expect(s.economicState.foodSecurity.foodRecord.growsMoreThanEats).toBe(false);
+    expect(s.economicState.economicComplexity).not.toMatch(/surplus/i);
+  });
+});
