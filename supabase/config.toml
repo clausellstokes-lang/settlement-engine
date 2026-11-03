@@ -509,6 +509,11 @@ verify_jwt = false
 [functions.engine-generate]
 verify_jwt = false
 
+# engine-version — a public read of the engine bundle's version stamp (ENGINE-1), like
+# health: no user data, no write path, no client.
+[functions.engine-version]
+verify_jwt = false
+
 # ── verify_jwt = true: functions that REQUIRE an authenticated user ──────────
 # Pinned true (the default) as defense-in-depth: an accidental `--no-verify-jwt`
 # on any of these would expose an authenticated/money/admin endpoint to unauth

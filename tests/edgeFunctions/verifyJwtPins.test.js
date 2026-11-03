@@ -76,6 +76,9 @@ const SELF_AUTH_FALSE = new Set([
   // behind the botGuard and a fail-closed rate guard, spends no credits and writes no
   // account row. See supabase/functions/engine-generate/index.ts.
   'engine-generate',
+  // engine-version — a public read of the engine bundle's version stamp (ENGINE-1), like
+  // health: no user data, no write path. See supabase/functions/engine-version/index.ts.
+  'engine-version',
   // Public token-bearing opt-out endpoint. GET confirms; POST can only disable
   // an allowed category through unsubscribe_via_token.
   'unsubscribe',

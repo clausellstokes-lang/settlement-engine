@@ -58,6 +58,7 @@ const INTENDED_ANON = new Set([
   'founder-transfer',      // run_due cron (x-cron-secret, no JWT); user actions self-auth in-handler
   'health',                // uptime monitors / the ops probe (no JWT); reads no user data
   'engine-generate',       // engine service: anon served by design; optional JWT self-resolved, fail-closed rate guard (ENGINE-1)
+  'engine-version',        // engine service: public read of the bundle's version stamp; no user data (ENGINE-1)
 ]);
 // Everything else must be JWT-gated (platform default), notably:
 const INTENDED_JWT = [
