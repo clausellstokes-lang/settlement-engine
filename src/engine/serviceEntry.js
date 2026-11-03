@@ -29,6 +29,12 @@
  *                                   module). esbuild inlines the seam's dynamic
  *                                   `import(` into the bundle, so in the service it
  *                                   resolves without a fetch.
+ *   - runGenerationRequest        — THE ONE CORE the Web Worker and the in-thread
+ *                                   fallback run (`src/workers/generationRequest.js`):
+ *                                   the pipeline plus the per-step summaries the
+ *                                   reveal plays back, so the service's reply carries
+ *                                   the same `pipelineHistory` the worker posts
+ *                                   (ENGINE-2 unit 1, the `remote` transport).
  *
  * ⚠ RESERVED SLOT — THE ADVANCE ENTRY (not implemented). The engine service's
  * second operation, advancing an existing settlement through time, will be
@@ -40,3 +46,4 @@
 
 export { generateSettlementPipeline } from '../generators/generateSettlementPipeline.js';
 export { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
+export { runGenerationRequest } from '../workers/generationRequest.js';

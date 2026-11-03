@@ -7,6 +7,7 @@
  *     same `_shared/engineBundle.js`, in this Deno process). The other link of the chain —
  *     the bundle's birth equals the IN-PROCESS birth for the same cases — is
  *     tests/build/engineBundleReplay.test.js, which reads the same fixture in Node.
+ *   - the step list (ENGINE-2 unit 1): the reply carries the core's `pipelineHistory`;
  *   - the version pin: a version the server does not serve is 409 engine_version_retired
  *     carrying the served version, and generates nothing;
  *   - the rate guard: anonymous per IP and signed-in per account, 6 a minute, the 7th 429;
@@ -116,6 +117,21 @@ scopedEnv.test('REPLAY: three seeds — the function\'s settlement hashes to the
     const expected = generateSettlementPipeline(birthConfig(cases.config), null, { seed, customContent: {} });
     assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
   }
+});
+
+scopedEnv.test('REPLAY: the reply carries the core\'s pipelineHistory — the reveal\'s step list, one row per step (ENGINE-2 unit 1)', async () => {
+  await loadGenerationLawPayloads();
+  const seed = cases.seeds[0];
+  const admin = makeAdmin();
+  const res = await handleEngineGenerate(post({ seed, config: cases.config }), { adminClient: admin.adminClient });
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assert(Array.isArray(body.pipelineHistory) && body.pipelineHistory.length > 0, 'a non-empty step list');
+  for (const row of body.pipelineHistory) {
+    assertEquals(Object.keys(row).sort(), ['id', 'summary']);
+    assert(typeof row.id === 'string' && row.id.length > 0);
+  }
+  assertEquals(new Set(body.pipelineHistory.map((row: { id: string }) => row.id)).size, body.pipelineHistory.length);
 });
 
 scopedEnv.test('REPLAY: a pinned engineVersion equal to the served one is honoured', async () => {

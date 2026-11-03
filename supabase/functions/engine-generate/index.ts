@@ -1,7 +1,14 @@
 /**
  * Supabase Edge Function: engine-generate — THE ENGINE SERVICE'S GENERATE CALL (ENGINE-1 unit 3).
  *
- *   POST { seed, config, engineVersion? }  →  200 { settlement, engineVersion, generatedAt }
+ *   POST { seed, config, engineVersion? }  →  200 { settlement, pipelineHistory, engineVersion, generatedAt }
+ *
+ * `pipelineHistory` (ENGINE-2 unit 1) is the per-step list the generation reveal plays
+ * back, `[{ id, summary }]`: the run goes through `runGenerationRequest`, the ONE core the
+ * Web Worker and the in-thread fallback run, so the reply is the worker's result packet
+ * and the client's `remote` transport (`src/lib/engineRemote.js`) hands phase B the same
+ * shape. With no neighbour, no previous settlement and no locks the core's settlement IS
+ * `generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} })`.
  *
  * Runs the app's own generator, bundled: `_shared/engineBundle.js` is esbuild's bundle of
  * `src/engine/serviceEntry.js` (scripts/build-edge-shared.mjs), and
@@ -37,8 +44,8 @@ import { checkUserIpRate } from '../_shared/rateLimit.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import {
   birthConfig,
-  generateSettlementPipeline,
   loadGenerationLawPayloads,
+  runGenerationRequest,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
 
@@ -196,9 +203,13 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   // ── Generate: the app's birth, unchanged ────────────────────────────────────────────
   try {
     await loadGenerationLawPayloads();
-    const settlement = generateSettlementPipeline(birthConfig(config), null, { seed, customContent: {} });
+    const { settlement, pipelineHistory } = runGenerationRequest({
+      op: 'settlement',
+      requestId: null,
+      payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
+    });
     const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
-    return json({ settlement, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+    return json({ settlement, pipelineHistory, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
   } catch (e) {
     logError(FN, userId, e, { stage: 'generate', engineVersion: ENGINE_VERSION });
     return json({ error: 'generation_failed' }, 422, cors);

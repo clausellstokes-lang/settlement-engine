@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-11-03T22:48:13.917Z",
+  "generatedAt": "2026-11-03T23:35:30.791Z",
   "entry": "src/engine/serviceEntry.js",
-  "sourceHash": "c99d2129f35faeed",
-  "engineVersion": "37a17c51c3f992e4",
-  "builtFromCommit": "1169b3cd50607401059434537014b70827633516",
+  "sourceHash": "dccec2f70ad7bee3",
+  "engineVersion": "ad1fb77918fb6dde",
+  "builtFromCommit": "16cda02a93e8598e4dc4c4f72ad37f9e8857a152",
   "inputs": [
     "node_modules/seedrandom/seedrandom.js",
     "src/data/arrivalProse.js",
@@ -219,6 +219,7 @@
     "src/generators/steps/resolveNeighbour.js",
     "src/generators/steps/resolveResources.js",
     "src/generators/steps/resolveStress.js",
+    "src/generators/steps/stepMetadata.js",
     "src/generators/steps/stressConfirmPass.js",
     "src/generators/steps/structuralValidationPass.js",
     "src/generators/steps/subsumptionPass.js",
@@ -238,7 +239,9 @@
     "src/lib/customRegistry.js",
     "src/lib/dependencyEngine.js",
     "src/lib/entities.js",
+    "src/lib/generationProtocol.js",
     "src/lib/narrativeMutations.js",
-    "src/lib/prebuiltResourceChains.js"
+    "src/lib/prebuiltResourceChains.js",
+    "src/workers/generationRequest.js"
   ]
 }
