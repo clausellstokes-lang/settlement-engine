@@ -69,8 +69,9 @@ function findServiceRoleJwt(text) {
 const ALLOWLIST = Object.freeze({
   // Deno's std `http/server.ts`, vendored whole under vendor/ (deno.json `"vendor": true`;
   // the edge functions import three std versions). Each carries ONE JSDoc usage example
-  // for serveTls whose placeholder reads `const key = "-----BEGIN PRIVATE KEY-----\n...\n…"`
-  // with a literal "..." body — documentation, not a key. Verified by reading the three
+  // for serveTls whose placeholder key is the PEM header and footer around a literal "..."
+  // body (the header is not spelled here: this file must never match itself) —
+  // documentation, not a key. Verified by reading the three
   // sites on 2026-11-03; the paths are version-exact, so a std bump retires the entry
   // through the stale-exemption test below and the new file is re-read before it is
   // allowlisted again.
