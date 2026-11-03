@@ -49,7 +49,7 @@ const calmTown = () => generateSettlementPipeline({ settType: 'village', selecte
 afterEach(() => { cleanup(); mocks.storeState.editMode = false; });
 
 describe('the Crisis tab is present only in a crisis', () => {
-  test.each([['desktop', false], ['phone', true]])('%s: a crisis town carries the Crisis tab beside the Overview, in the crisis tone; a calm town carries none', async (_w, mobile) => {
+  const presenceAt = async (mobile) => {
     installMatchMedia(mobile);
     const OutputContainer = await loadOutput();
     const { container, unmount } = render(<OutputContainer settlement={crisisTown()} />);
@@ -64,7 +64,9 @@ describe('the Crisis tab is present only in a crisis', () => {
     const second = render(<OutputContainer settlement={calm} />);
     await screen.findByRole('tab', { name: /Overview/ });
     expect(second.container.querySelector('#sf-tab-crisis')).toBeNull(); // anchored: the Overview tab is found in this same strip
-  });
+  };
+  test('desktop: a crisis town carries the Crisis tab beside the Overview, in the crisis tone; a calm town carries none', () => presenceAt(false));
+  test('phone: a crisis town carries the Crisis tab beside the Overview, in the crisis tone; a calm town carries none', () => presenceAt(true));
 
   test('a player view never carries the Crisis tab, crisis or not', async () => {
     installMatchMedia(false);
