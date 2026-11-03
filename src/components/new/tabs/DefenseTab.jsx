@@ -471,11 +471,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
-                const note = criminalOpNote(name);
+                // X-50 (BOILERPLATE ONCE): two operations that fall to the same note (the
+                // catch-all, or two names one rule matches) print it on the first row only.
+                const note = crimInsts.slice(0, i).some(prev => criminalOpNote(prev) === criminalOpNote(name))
+                  ? null : criminalOpNote(name);
                 return (
                   <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',padding:'8px 12px'}}>
-                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:3}}>{name}</div>
-                    <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>
+                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:note?3:0}}>{name}</div>
+                    {note&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>}
                   </div>
                 );
               })}

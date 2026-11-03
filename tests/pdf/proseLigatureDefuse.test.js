@@ -124,11 +124,11 @@ describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
     expect(text).toContain('Griffin Bellwether');
   });
 
-  test('personality / appearance / secret / relationship prose all render verbatim', () => {
+  // X-48 (2026-11-03): the card prints no look, voice or tell, so `appearance` left this row.
+  test('personality / secret / relationship prose all render verbatim', () => {
     const npc = {
       id: 'npc.y', name: 'Flora', power: 8,
       personality: 'Fiercely efficient; a fixer who never reflects.',
-      appearance: 'A fine, fluid gait and a fitted officer coat.',
       motivation: 'To fortify the guild.',
       secrets: ['She falsified the fief ledgers to shield a friend.'],
       relationships: [{ with: 'The Guild', type: 'affiliate', description: 'a fickle, shifting truce' }],
@@ -136,10 +136,9 @@ describe('NotableNPCs — body prose renders verbatim (FullCard)', () => {
     const tree = NotableNPCs({ settlement: {}, vm: vmWithNpc(npc) });
     const text = deepText(tree).join("");
     // Every body field's content reaches the leaf verbatim, joiner-free.
-    // anchored: the four toContain below prove every body field rendered.
+    // anchored: the three toContain below prove every body field rendered.
     expect(text).not.toContain(ZWNJ);
     expect(text).toContain('Fiercely efficient');
-    expect(text).toContain('fitted officer coat');
     expect(text).toContain('falsified the fief ledgers');
     expect(text).toContain('fickle, shifting truce');
   });

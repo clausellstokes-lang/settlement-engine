@@ -241,7 +241,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // THE PRESSURE SENTENCE has one home per page: under a crisis it is the card's last line
   // (who controls the response, T1-3); with no crisis it stands alone in the dark box (T1-7),
   // and it yields when it is the notable connection's phrasing word for word (O-10).
-  const pressureLine = r?.pressureSentence && r.pressureSentence !== r?.prominentRelationship?.phrasing
+  // X-50 (BOILERPLATE ONCE): it also yields when it tells the same pair's story as the
+  // phrasing — the two share a sentence word for word under different openings — so the
+  // notable connection, which names the bond, keeps the fact's words.
+  const sentenceSet = (text) => new Set(String(text || '').split(/(?<=[.!?])\s+/)
+    .map(x => x.trim().replace(/[.!?]+$/, '')).filter(x => x.split(/\s+/).length >= 4));
+  const phrasingSentences = sentenceSet(r?.prominentRelationship?.phrasing);
+  const pressureShared = [...sentenceSet(r?.pressureSentence)].some(x => phrasingSentences.has(x));
+  const pressureLine = r?.pressureSentence && !pressureShared
+    && r.pressureSentence !== r?.prominentRelationship?.phrasing
     ? r.pressureSentence : null;
 
   // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the

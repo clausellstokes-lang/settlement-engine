@@ -212,10 +212,9 @@ function FullCard({ npc, index }) {
         </View>
       )}
 
-      {/* Personality, appearance, motivation — labeled prose blocks */}
+      {/* Personality and motivation — labeled prose blocks. X-48: no look, voice or tell. */}
       <View style={{ marginTop: 4 }}>
         <TextRow label="PERSONALITY" value={npc.personality} multiline />
-        <TextRow label="APPEARANCE"  value={npc.appearance}  multiline />
         <TextRow label="MOTIVATION"  value={npc.motivation}  multiline index={index} />
       </View>
 

@@ -779,12 +779,13 @@ function personDetail(npc) {
   );
   if (goal) return sentence(`Wants to ${lowerLead(stripInfinitive(goal))}`);
 
-  const tell = cleanText(
+  // X-48: the temperament, never the nervous habit (`tell`), which prints nowhere.
+  const temperament = cleanText(
     typeof npc.personality === 'object'
-      ? (npc.personality?.tell || npc.personality?.dominant)
+      ? npc.personality?.dominant
       : npc.personality,
   );
-  if (tell) return sentence(tell);
+  if (temperament) return sentence(temperament);
 
   const secret = cleanText(
     typeof npc.secret === 'object'

@@ -159,7 +159,6 @@ function notableNpcPage(n) {
     kv('Power', n.power),
     kv('Influence', n.influenceLabel),
     n.blurb ? md('', esc(n.blurb)) : null,
-    n.appearance ? md('', '## Appearance', esc(n.appearance)) : null,
     n.personality ? md('', '## Personality', esc(n.personality)) : null,
     n.motivation ? md('', '## Wants', esc(n.motivation)) : null,
     n.secrets.length ? md('', '## Secrets (GM only)', n.secrets.map(s =>
