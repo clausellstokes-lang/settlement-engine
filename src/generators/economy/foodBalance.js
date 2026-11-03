@@ -3,6 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
+import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
@@ -32,10 +33,70 @@ const UNCOVERED_LOCAL_FOOD_DEFICIT = 'Uncovered Local Food Deficit';
 // ECONOMIC_CONSTANTS
 const ECONOMIC_CONSTANTS = {
   PER_CAPITA_NEED: 2,
-  FARMER_PRODUCTION: 6,
-  AGRICULTURAL_WORKFORCE: 0.4,
-  STORAGE_BUFFER: 1.3,
 };
+
+
+// ── THE BASE NUMBERS (FOOD-2) — shared by the canonical writer and the legacy view ──
+/** The share of need a town and larger draw from their hinterland as NORMAL supply (FOOD-2):
+ *  the tier import shares the food writer always carried, now counted as supply, not a gap. */
+const HINTERLAND_SHARE_PCT = Object.freeze({ thorp: 0, hamlet: 0, village: 5, town: 20, city: 38, metropolis: 52 });
+/** @param {string} tier @returns {number} 0..1 */
+export function hinterlandShareOf(tier) {
+  return (HINTERLAND_SHARE_PCT[/** @type {keyof typeof HINTERLAND_SHARE_PCT} */ (tier)] ?? 0) / 100;
+}
+/**
+ * The share of its own need a household grows on land of this effective capacity
+ * (geographyData's agricultureCapacity plus the resource bonus). A place is sized to what its
+ * land feeds, so the land moves the share gently: ordinary land grows about 100–125%, poor
+ * land runs short.
+ * @param {number} effectiveAgri
+ * @returns {number}
+ */
+export function grownShareOf(effectiveAgri) {
+  return (11 / 10) * (1 + ((effectiveAgri - 1) * 5) / 20);
+}
+
+// ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
+/**
+ * @typedef {Object} FoodRecord
+ * @property {number} grownPct          share of daily need grown by the place itself, %
+ * @property {number} normalImportPct   share of daily need that arrives by ordinary supply
+ *                                      (hinterland carts and trade), %
+ * @property {number} magicPct          share of daily need closed by magic, %
+ * @property {number} gapPct            the gap that remains after all of that, % (the band's number)
+ * @property {number} surplusPct        what the place grows beyond its need, %
+ * @property {'famine'|'deficit'|'importDependent'|'pressured'|'secure'|'surplus'} band
+ * @property {number} storageMonths     months of food in store (granary, households, the mill)
+ * @property {boolean} hasGranary       a real granary stands (a stand-in does not count)
+ * @property {boolean} growsMoreThanEats the only condition under which a writer may say "surplus"
+ */
+/**
+ * ONE ANSWER TO "HOW FED IS THIS PLACE". Derived once, by the canonical food writer
+ * (foodGenerator.js :: generateFoodSecurity), stored once at economicState.foodSecurity.foodRecord.
+ * Every sentence that speaks of food reads it: the band, the flags, the prosperity modifier,
+ * the situation sentence, the economy line's surplus words, the Foundations food row, and —
+ * through the field names below — the Defense stores row (`storageMonths`).
+ * Pure: a function of its numbers only.
+ * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, magicOffset?: number,
+ *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean }} input
+ * @returns {FoodRecord}
+ */
+export function deriveFoodRecord(input) {
+  const need = input.dailyNeed > 0 ? input.dailyNeed : 0;
+  /** @param {number|undefined} lb */
+  const pctOfNeed = (lb) => (need > 0 ? Math.round((Math.max(0, Number(lb) || 0) / need) * 100) : 0);
+  return {
+    grownPct: pctOfNeed(input.dailyProduction),
+    normalImportPct: pctOfNeed(input.importCoverage),
+    magicPct: pctOfNeed(input.magicOffset),
+    gapPct: Math.round(input.deficitPct),
+    surplusPct: Math.round(input.surplusPct),
+    band: foodSecurityBandKeyOf(input.stressFamine, input.deficitPct, input.surplusPct),
+    storageMonths: input.storageMonths,
+    hasGranary: input.hasGranary,
+    growsMoreThanEats: need > 0 && input.dailyProduction > need,
+  };
+}
 
 
 // deriveFoodBalanceAnalysis
@@ -150,12 +211,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
   }
 
-  const dailyProduction =
-    (Math.floor(population * ECONOMIC_CONSTANTS.AGRICULTURAL_WORKFORCE) *
-      ECONOMIC_CONSTANTS.FARMER_PRODUCTION *
-      effectiveAgri *
-      productionMult) /
-    ECONOMIC_CONSTANTS.STORAGE_BUFFER;
+  // The legacy view (no canonical record) grows by the same base numbers as the writer
+  // (FOOD-2): the grown share of the need the place feeds itself, no /1.3.
+  const dailyProduction = dailyNeed * (1 - hinterlandShareOf(config?.tier || config?.settType || ''))
+    * grownShareOf(effectiveAgri) * productionMult;
   const adjustedNeed = dailyNeed * consumptionMult;
   const effectiveRoute = routeOverride || config?.tradeRouteAccess || 'isolated';
   const disconnectedRoute = isTradeRouteDisconnected(effectiveRoute);
@@ -351,8 +410,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     }
   }
 
+  // The viability verdicts cut the gap at the band's own points (FOOD-1: one set of cut-offs;
+  // these were a private 50 and 20).
   if (surplusFinal < 0) {
-    if (deficitPercent > 50) {
+    if (deficitPercent > FOOD_SECURITY_CUTS.deficit) {
       if (disconnectedRoute) {
         // An uncovered deficit is a survival fact, not merely an economic
         // mood. Isolated settlements have no routine import channel that can
@@ -403,7 +464,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           severity: 'high',
         });
       }
-    } else if (deficitPercent > 20) {
+    } else if (deficitPercent > FOOD_SECURITY_CUTS.importDependent) {
       if (disconnectedRoute) {
         issues.push({
           severity: SEVERITY.CRITICAL,
@@ -464,7 +525,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
 
   // Mill check for towns
   const hasMill = instNames.some((n) => n.includes('mill') || n === 'miller');
-  if (population > 1000 && !hasMill && population < 5000) {
+  // A tier read, not a headcount (FOOD-2: the arithmetic holds under any population scale).
+  if ((config?.tier || config?.settType) === 'town' && !hasMill) {
     warnings.push({
       severity: SEVERITY.CRITICAL,
       category: 'Food Processing',

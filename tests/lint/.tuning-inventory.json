@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "641692769efb15aec348ec1dd9ef3f344ea4eace",
-  "measuredBy": "RULERS seat",
-  "date": "2026-11-03",
-  "note": "LADDER_TUNING dependents only (lane RULERS): src/domain/dossier/powerStrata.js no longer imports npcLadderState.js; its seat read moved to src/domain/dossier/seatHolder.js, and src/domain/coherence/seatHolderFindings.js imports it too; no value moved, no ceiling rose",
+  "measuredAtSha": "0c104fe807a27c4600ec741616ed111a2ff94712",
+  "measuredBy": "G2",
+  "date": "2026-10-31",
+  "note": "GS-2 one faction set (ODQ §934.101): bare decimals 6975 -> 6962, a win banked; npcGenerator.js 83 -> 71 (the dead _generateFactionConflict deleted) and power/conflicts.js 1 -> 0 (the no-rivalry 0.4 coin gone); no value moved, no ceiling rose",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -5640,10 +5640,9 @@
         "SEAT_TRANSITION_CAP": 24
       },
       "dependents": [
-        "src/domain/coherence/seatHolderFindings.js",
         "src/domain/display/npcInteriorityRead.js",
+        "src/domain/dossier/powerStrata.js",
         "src/domain/dossier/realmEntityWeb.js",
-        "src/domain/dossier/seatHolder.js",
         "src/domain/roads/thirdPartyRansom.js",
         "src/domain/worldPulse/assizeKernel.js",
         "src/domain/worldPulse/commonsVoiceKernel.js",

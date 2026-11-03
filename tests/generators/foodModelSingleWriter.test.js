@@ -15,7 +15,7 @@
 
 import { describe, it, expect } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { deriveFoodBalanceAnalysis } from '../../src/generators/economy/foodBalance.js';
+import { deriveFoodBalanceAnalysis, grownShareOf, hinterlandShareOf } from '../../src/generators/economy/foodBalance.js';
 import { deriveFoodBalance } from '../../src/domain/display/dossierViewModel.js';
 import { generateEconomicViability } from '../../src/generators/economicGenerator.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
@@ -32,9 +32,13 @@ const gen = (config, seed) => generateSettlementPipeline(config, null, { seed, c
  * (town|germanic|mountain|mountain_pass|civilized|golden-master-v3) no longer files a DEPENDENCY under `issues`, and no
  * row of the 525 does, so the arm pins the first configuration that meets its own precondition. Measured red-first at
  * b5c28d8e2 WITHOUT the cure: "has 4 operational dependencies" against a list of 3; with it, 3 and 3.
+ * RE-PINNED 2026-11-03 (FOOD-2, the food base numbers): a mountain town on a pass is now fed by its hinterland,
+ * so the habitat (a DEPENDENCY under `issues`, a gap over 40% on a connected route that is not a road) needs
+ * a place whose own harvest has collapsed. The first configuration of a search over the habitat's own
+ * precondition: a desert town on the pass with slave revolt, wartime and migration (gap > 40%, still viable).
  */
-const CONVICTED_CONFIG = Object.freeze({ settType: 'town', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'mountain_pass', monsterThreat: 'civilized', magicExists: false });
-const CONVICTED_SEED = 'fix-g1-mountain_pass-mountain-town-n-0';
+const CONVICTED_CONFIG = Object.freeze({ settType: 'town', culture: 'germanic', terrainOverride: 'desert', tradeRouteAccess: 'mountain_pass', monsterThreat: 'civilized', magicExists: false, selectedStresses: ['slave_revolt', 'wartime', 'mass_migration'], selectedStressesRandom: false });
+const CONVICTED_SEED = 'fix-g1-mountain_pass-desert-town-n-2';
 
 describe('generators-domain-4 — single-writer food model', () => {
   it('CONTRADICTION KILLER — viability foodBalance never disagrees with foodSecurity on deficit sign or magnitude', () => {
@@ -133,11 +137,12 @@ describe('generators-domain-4 — single-writer food model', () => {
         if (!fb || !fs || !(s.population > 0)) continue;
         checked++;
         expect(fb.agricultureModifier).toBe(fs.effectiveAgriculture);
-        // dailyProduction = ⌊pop × 0.4⌋ × 6 × agri × stress × cropFortune ÷ 1.3, and
-        // cropFortune is the writer's seeded ±8% harvest band — the only term the
-        // printed pair does not name, so the reconstruction lands inside it.
-        const predicted = Math.floor(s.population * 0.4) * 6
-          * fb.agricultureModifier * (fb.stressModifier ?? 1) / 1.3;
+        // dailyProduction = need × (1 − hinterland share) × grownShareOf(agri) × stress ×
+        // cropFortune (FOOD-2's base numbers), and cropFortune is the writer's seeded ±8%
+        // harvest band — the only term the printed pair does not name, so the
+        // reconstruction lands inside it.
+        const predicted = s.population * 2 * (1 - hinterlandShareOf(s.tier))
+          * grownShareOf(fb.agricultureModifier) * (fb.stressModifier ?? 1);
         const ratio = fb.dailyProduction / predicted;
         expect(ratio, `${settType}|${terrainOverride} predicted ${Math.round(predicted)} vs ${fb.dailyProduction}`)
           .toBeGreaterThan(0.91);
@@ -155,7 +160,8 @@ describe('generators-domain-4 — single-writer food model', () => {
     let compared = 0;
     for (const settType of ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']) {
       for (const tradeRouteAccess of ['road', 'river', 'port', 'isolated']) {
-        const s = gen({ settType, terrainOverride: 'plains', tradeRouteAccess }, 'pct-seed');
+        // Desert: since FOOD-2 plains rarely leave a residual to compare.
+        const s = gen({ settType, terrainOverride: 'desert', tradeRouteAccess }, 'pct-seed');
         const fb = s.economicViability?.metrics?.foodBalance;
         if (!fb || !(fb.deficit > 0)) continue;
         compared++;
@@ -228,11 +234,15 @@ describe('generators-domain-4 — single-writer food model', () => {
     ]));
   });
 
-  it('keeps the audited isolated-village verdict aligned with its 48% food gap', () => {
+  it('keeps the audited isolated-village verdict aligned with its food gap', () => {
+    // RE-PINNED 2026-11-03 (FOOD-2): the audited row (48%) is fed by its land now; the same seed
+    // on desert, with wartime and migration, is the isolated village a quarter short.
     const settlement = gen({
       settType: 'village',
       culture: 'random_culture',
-      terrainOverride: 'auto',
+      terrainOverride: 'desert',
+      selectedStresses: ['wartime', 'mass_migration'],
+      selectedStressesRandom: false,
       tradeRouteAccess: 'isolated',
       magicExists: true,
       priorityMagic: 57,
@@ -241,14 +251,14 @@ describe('generators-domain-4 — single-writer food model', () => {
     }, 'food-verdict-audit-140');
     const balance = settlement.economicViability.metrics.foodBalance;
 
-    expect(balance.deficitPercent).toBe(48);
+    expect(balance.deficitPercent).toBe(26);
     expect(settlement.economicState.situationDesc).toMatch(
-      /48% of daily need uncovered/i,
+      /After imports, 26% of daily need goes uncovered/i,
     );
     expect(settlement.economicState.situationDesc).toMatch(
       /rationing and outside supply/i,
     );
-    // The 48%-uncovered figure and the rationing clause are both pinned on this
+    // The 26%-uncovered figure and the rationing clause are both pinned on this
     // same string above, so this exclusion measures wording, not absence.
     // anchored: two positive toMatch pins on this same situationDesc above.
     expect(settlement.economicState.situationDesc).not.toMatch(
@@ -268,7 +278,7 @@ describe('generators-domain-4 — single-writer food model', () => {
     const settlement = gen({
       settType: 'thorp',
       culture: 'east_asian',
-      terrainOverride: 'forest',
+      terrainOverride: 'desert', // FOOD-2: a forest thorp feeds itself; desert leaves the gap this arm reads
       tradeRouteAccess: 'none',
       monsterThreat: 'heartland',
       contentProfile: 'grounded',
@@ -286,17 +296,18 @@ describe('generators-domain-4 — single-writer food model', () => {
     expect(settlement.economicState.tradeDependencies).toEqual([]);
     expect(balance.importCoverage).toBeUndefined();
     expect(balance.importChannel).toBeUndefined();
-    expect(balance.deficitPercent).toBeGreaterThan(50);
-    // 'salt' is the anchor: a route-less thorp cannot produce it, so the critical
-    // list is demonstrably still being computed. Without it, a critical list that
-    // stopped being populated would pass the grain exclusion forever.
+    expect(balance.deficitPercent).toBeGreaterThan(0);
+    // Timber is the anchor: a route-less DESERT thorp cannot grow it (salt was the anchor on
+    // forest, where the land yields timber and not salt), so the critical list is demonstrably
+    // still being computed. Without it, a critical list that stopped being populated would
+    // pass the grain exclusion forever.
     expectAbsentWithAnchor(
-      settlement.resourceAnalysis.imports.critical, 'grain', 'salt',
+      settlement.resourceAnalysis.imports.critical, 'grain', 'Timber and building wood',
       'a route-less thorp still names its critical imports',
     );
     // A settlement with tradeRouteAccess:'none' must never render 'via none'.
     // Liveness: `balance` above is read out of this very object and its
-    // deficitPercent is pinned above 50, so this payload cannot be empty.
+    // deficitPercent is pinned above 0, so this payload cannot be empty.
     expect(
       JSON.stringify(settlement.economicViability),
     ).not.toMatch(/\bvia none\b/i); // anchored: `balance` is read out of this object above
@@ -316,11 +327,12 @@ describe('generators-domain-4 — single-writer food model', () => {
     ).foodBalance;
     expect(fb).toMatchObject({
       dailyNeed: 6000,
-      dailyProduction: 5538,
-      deficit: 300,
-      deficitPercent: 5,
-      importCoverage: 162,
-      rawDeficit: 462,
+      // FOOD-2: need × (1 − 20% hinterland) × grownShareOf(1.0) = 6000 × 0.8 × 1.1, no /1.3.
+      dailyProduction: 5280,
+      deficit: 468,
+      deficitPercent: 8,
+      importCoverage: 252,
+      rawDeficit: 720,
       importChannel: 'road trade',
     });
   });
@@ -380,7 +392,7 @@ describe('FIX-G1 — the viability summary counts the list the record publishes'
     // read 4 against a list of 3 (measured at b5c28d8e2).
     expect(statedCount(v.summary), 'the headline stated no count at all').not.toBeNull();
     expect(statedCount(v.summary)).toBe((v.dependencies || []).length);
-    expect(statedCount(v.summary)).toBe(3);
+    expect(statedCount(v.summary)).toBe(4);
     // The record's three readings of one fact now agree, which is the invariant.
     expect(v.metrics.dependencyCount).toBe((v.dependencies || []).length);
   });

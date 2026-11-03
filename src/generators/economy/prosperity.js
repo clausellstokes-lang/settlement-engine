@@ -5,6 +5,7 @@
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags, getStressFlags, getTradeRouteFeatures, hasTeleportationInfra } from '../helpers.js';
 import { generateFoodSecurity } from '../foodGenerator.js';
+import { FOOD_SECURITY_CUTS } from '../../data/bandLadders.js';
 import { priorityBand } from '../../domain/priorityBands.js';
 import {
   isMaterializedCustomContent,
@@ -77,9 +78,11 @@ export const deriveEconomicSituationDesc = (
   if (primaryStress === 'politically_fractured')
     return 'Economic activity requires navigating factional lines that did not exist a year ago. Some merchants have aligned with specific factions. Cross-faction trade continues but it is slower and more expensive than it should be.';
 
-  const foodDeficitPct = Number(foodSecurity?.deficitPct) || 0;
-  if (foodDeficitPct > 25) {
-    return `Local food production leaves ${Math.round(foodDeficitPct)}% of daily need uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap.`;
+  // The gap is the food record's (FOOD-1): what remains AFTER imports and magic, cut where
+  // the band cuts it (a private 25 before), and said as what it is.
+  const foodGapPct = Number(foodSecurity?.foodRecord?.gapPct ?? foodSecurity?.deficitPct) || 0;
+  if (foodGapPct > FOOD_SECURITY_CUTS.importDependent) {
+    return `After imports, ${Math.round(foodGapPct)}% of daily need goes uncovered. Rationing and outside supply are economic necessities; commercial strength in other sectors cannot cover that gap.`;
   }
 
   if (isolated) {
@@ -290,7 +293,23 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
 };
 
 // deriveEconomicComplexity — one-line complexity classification (extracted from generateEconomicState)
-export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst) =>
+// FOOD-1: the surplus words ("Subsistence with surplus", "Agricultural surplus…", "…minor surplus")
+// are a food claim, so they read the food record and appear only when the place grows more than
+// it eats. Without a record (an old caller) the export count still decides, as before.
+/**
+ * @param {string} tier @param {number} incomeSourceCount @param {number} exportCount
+ * @param {boolean} hasMarketInst @param {{ growsMoreThanEats?: boolean } | null} [foodRecord]
+ * @returns {string}
+ */
+export const deriveEconomicComplexity = (tier, incomeSourceCount, exportCount, hasMarketInst, foodRecord = null) => {
+  const label = complexityByExports(tier, incomeSourceCount, exportCount, hasMarketInst);
+  if (!foodRecord || foodRecord.growsMoreThanEats || !/surplus/i.test(label)) return label;
+  // The small-place ladder's own no-surplus rung (no exports to sell, nothing over).
+  return complexityByExports('hamlet', incomeSourceCount, 0, false);
+};
+
+/** @param {string} tier @param {number} incomeSourceCount @param {number} exportCount @param {boolean} hasMarketInst */
+const complexityByExports = (tier, incomeSourceCount, exportCount, hasMarketInst) =>
   tier === 'metropolis' || tier === 'city'
           ? incomeSourceCount >= 9
             ? 'Highly diversified — multiple major revenue streams'

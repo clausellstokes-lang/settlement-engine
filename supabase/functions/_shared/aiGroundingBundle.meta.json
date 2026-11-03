@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-02T04:15:47.926Z",
+  "generatedAt": "2026-11-03T16:27:45.490Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "a5d6564397997c4c",
+  "sourceHash": "cd4a5503f5e7d9f7",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
