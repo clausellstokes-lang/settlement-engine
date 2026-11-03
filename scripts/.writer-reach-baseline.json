@@ -8,7 +8,7 @@
   "The reviewable slice is computed by RULE (reviewableDark), never hand-listed."
  ],
  "schema": 1,
- "frozenAtSha": "593e643caaf68c938ce9aec8b06d16ea582f9046",
+ "frozenAtSha": "7c63271d104e520bb3b9ac47cd7d7c7171f1078f",
  "charter": "§18.1 WRWALKER Car 1 (HORIZON) — chair-signed vetoably at the INSTR-WRW pre-stage",
  "minRows": 40,
  "corpusMeta": {
@@ -24,7 +24,7 @@
  },
  "shapesDigest": "129077273b69b9dd184bd2521086d112239068036b5ad6e0a591f613e34fe274",
  "detectorDigest": "ef42785e3d649871d47bbb756bf678fce9d4b56092137f5726de5edc1506286c",
- "verdictDigest": "fa2e637c1b7a92dc41ebcad1631d397d7b5dea25f7a33bda5fafbd17f2873f23",
+ "verdictDigest": "5ecdd376c7871e258fdb7f3dcfb7c9fcfbbfdb5490f9938640ca3b524a8320ad",
  "surfaceRoots": {
   "web": [
    "src/main.jsx"
@@ -73,37 +73,37 @@
  ],
  "closureSizes": {
   "web-display": 743,
-  "web-transitive": 940,
-  "dossier-pdf": 446,
+  "web-transitive": 939,
+  "dossier-pdf": 445,
   "campaign-pdf": 75,
   "world-book": 92,
-  "foundry": 342,
+  "foundry": 340,
   "json-export": 8,
   "news": 29
  },
  "population": {
   "judged": 6998,
   "lit": 571,
-  "litName": 5108,
-  "dark": 1319,
+  "litName": 5106,
+  "dark": 1321,
   "thinKeys": 9162,
   "thinShapes": 978,
   "knownShapes": 355
  },
  "scanStats": {
-  "files": 1684,
-  "sites": 39832,
-  "propRead": 37688,
+  "files": 1683,
+  "sites": 39796,
+  "propRead": 37655,
   "elemRead": 0,
-  "destructure": 2129,
+  "destructure": 2126,
   "inOp": 15,
-  "rGrades": 6089,
-  "nGrades": 967358,
-  "resolvedReceivers": 6844
+  "rGrades": 6091,
+  "nGrades": 967276,
+  "resolvedReceivers": 6850
  },
  "registerDigest": "9cef18101c1a584e1e08c61741718ab543f83327b44143eeea79f84db4c0cce9",
  "pendingSurfaceCeiling": 3,
- "reviewableDarkCount": 470,
+ "reviewableDarkCount": 472,
  "darkUnregistered": [
   {
    "identity": "Bulk grain and flour on reasons",
@@ -2338,6 +2338,12 @@
    "rows": 840
   },
   {
+   "identity": "hasGarrison on inst",
+   "key": "hasGarrison",
+   "shape": "inst",
+   "rows": 840
+  },
+  {
    "identity": "hasGates on inst",
    "key": "hasGates",
    "shape": "inst",
@@ -2370,6 +2376,12 @@
   {
    "identity": "hasMerchantGuild on inst",
    "key": "hasMerchantGuild",
+   "shape": "inst",
+   "rows": 840
+  },
+  {
+   "identity": "hasMilitia on inst",
+   "key": "hasMilitia",
    "shape": "inst",
    "rows": 840
   },
@@ -9042,7 +9054,7 @@
   "hasCriminalInst on inst": "dossier-pdf=N foundry=N web-transitive=N",
   "hasFreeCompany on inst": "",
   "hasGangInfra on inst": "",
-  "hasGarrison on inst": "dossier-pdf=N foundry=N web-display=N",
+  "hasGarrison on inst": "",
   "hasGates on inst": "",
   "hasGranary on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasGuild on inst": "",
@@ -9053,18 +9065,18 @@
   "hasMercenary on inst": "",
   "hasMerchantGuild on inst": "",
   "hasMilitaryInst on inst": "dossier-pdf=R web-display=R",
-  "hasMilitia on inst": "dossier-pdf=N foundry=N web-display=N",
+  "hasMilitia on inst": "",
   "hasMonastery on inst": "",
   "hasNavy on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasPort on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasPrison on inst": "dossier-pdf=R foundry=R web-display=R",
   "hasSmuggling on inst": "",
   "hasThievesGuild on inst": "",
-  "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
+  "hasWalls on inst": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "hasWarehouse on inst": "",
   "hasWatch on inst": "dossier-pdf=R web-display=R",
   "hasWizardTower on inst": "",
-  "names on inst": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "names on inst": "dossier-pdf=N web-display=N web-transitive=N",
   "color on institutionalServices": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
   "exportLabel on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-transitive=N world-book=N",
   "exportable on institutionalServices": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
@@ -9082,7 +9094,7 @@
   "catalogId on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "category on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N web-display=R web-transitive=R world-book=R",
   "causeEventId on institutions": "dossier-pdf=N foundry=N web-transitive=N",
-  "charter on institutions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "charter on institutions": "dossier-pdf=N foundry=N web-display=N",
   "clandestine on institutions": "",
   "coherenceRepair on institutions": "",
   "desc on institutions": "campaign-pdf=N dossier-pdf=R foundry=R web-display=R web-transitive=R world-book=N",
@@ -9093,12 +9105,12 @@
   "factionSource on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-transitive=R world-book=R",
   "forbiddenResources on institutions": "web-transitive=R",
   "forbiddenTradeRoutes on institutions": "web-transitive=N",
-  "garrison on institutions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "garrison on institutions": "dossier-pdf=N foundry=N web-display=N",
   "impairments on institutions": "campaign-pdf=R dossier-pdf=R foundry=R web-display=N web-transitive=R world-book=R",
   "magicDef on institutions": "dossier-pdf=N foundry=N web-display=N",
   "magicLicense on institutions": "web-transitive=N",
-  "mercenary on institutions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
-  "militia on institutions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "mercenary on institutions": "dossier-pdf=N foundry=N web-display=N",
+  "militia on institutions": "dossier-pdf=N foundry=N web-display=N",
   "name on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "nativeTier on institutions": "web-display=N web-transitive=N",
   "priorityCategory on institutions": "dossier-pdf=R foundry=R web-display=R web-transitive=R",
@@ -9116,7 +9128,7 @@
   "tradeRouteRequired on institutions": "web-transitive=N",
   "type on institutions": "campaign-pdf=R dossier-pdf=R foundry=R json-export=N news=N web-display=R web-transitive=R world-book=R",
   "walls on institutions": "campaign-pdf=N dossier-pdf=N foundry=N web-display=N web-transitive=N world-book=N",
-  "watch on institutions": "dossier-pdf=N foundry=N web-display=N web-transitive=N",
+  "watch on institutions": "dossier-pdf=N foundry=N web-display=N",
   "agent_protege on internalSeats": "",
   "leader_champion on internalSeats": "dossier-pdf=N foundry=N web-transitive=N",
   "lieutenant_operator on internalSeats": "",

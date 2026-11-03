@@ -1,7 +1,9 @@
 import { compareCodepoint } from '../deterministicSort.js';
+import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
 import { traditionHook } from '../traditions/prose.js';
 import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
+import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 
 const TENSION_LABELS = Object.freeze({
@@ -189,6 +191,38 @@ function dedupeHooks(sorted) {
   return out;
 }
 
+// ── THE TRUTH GATE: A HOOK CHECKS THE PLACE BEFORE IT SPEAKS ─────────────────
+// (the chair's rulings 1, 2 and 4, 2026-11-03; docs/GENERATION_ROOT_CAUSES_2026-11-02.md
+// traces 1, 4 and 8.) Measured on this lane's 120-settlement corpus BEFORE the gate: 36 of
+// 120 settlements read "The settlement is starving. Villagers are turning to banditry…"
+// while the engine's own food analysis called them Import-Dependent with 1.9 months of
+// grain in store; 5 of 5 "N days of reserves" hooks printed the harvest share × 30 rather
+// than the store; 4 named soldiers where no force existed; 21 called the residents of a
+// town, city or metropolis "villagers"; 4 of 60 small places read "the town's leaders".
+//
+// ⚠ THIS IS THE DISPLAY'S DOOR, NOT THE WRITER'S CURE, AND THE DIFFERENCE IS RECORDED.
+// The sentences are stored on the RECORD by writers this lane does not own —
+// `src/generators/economy/foodBalance.js :: deriveSupplyRiskAnalysis` (the food crisis and
+// the reserves figure), `src/generators/power/conflicts.js :: buildConflictPlotHooks` (the
+// two fixed conflict hooks), `src/data/historyData.js` (the "town's leaders" line) — so the
+// collector, which is the ONE point every surface's hooks pass through, is where a false
+// sentence can be refused today. `src/domain/coherence/hookTruthFindings.js ::
+// hookTruthFindings` reports the record's own remaining debt so the cure at the writer is
+// not quietly papered over by this gate.
+//
+// WHAT IT DOES, IN ORDER: reword what is merely mis-worded (the stored figure, the tier
+// noun), then REFUSE what the record contradicts outright. A display layer may not invent
+// the fact that would make a claim true, so a refused hook is dropped, not rewritten
+// (HK-LAW-1 — drop or redraw, never rewrite).
+
+/** @type {RegExp} */
+// The two fixed conflict sentences `buildConflictPlotHooks` writes unconditionally: one
+// naming nobody at all, one wearing the two faction names. Matched narrowly, by the shape
+// the writer gives them, so a flag-conditioned conflict hook (which IS specific, and true)
+// passes through untouched. SWITCH THIS to a drawn library at the writer when the engine
+// side opens; the matcher is this lane's door, not a preference.
+const FIXED_CONFLICT_HOOK = /^Evidence has surfaced suggesting a third party is deliberately escalating the tension between the two factions\.$|^A neutral figure is being pressured by both .+ to take a side before .+\.$/;
+
 /**
  * @param {PlotHook[]} out
  * @param {Record<string, unknown>} hook
@@ -203,6 +237,51 @@ function push(out, hook) {
     priority: Number.isFinite(hook.priority) ? hook.priority : 5,
     accent: Boolean(hook.accent),
   }));
+}
+
+/**
+ * Every collected hook, spoken as this place may speak it.
+ *
+ * A hook whose only fault is a word is REWORDED (the stored figure, the tier noun); a hook
+ * the record contradicts is REFUSED. When the refusal takes the place's only food hook away
+ * and the record still shows a real gap, one drawn food-gap line takes its slot, so a place
+ * with a shortfall still hands the DM a food hook — the chair's ruling 1: a grain-price hook
+ * for a moderate gap, nothing for a fed place.
+ *
+ * @param {PlotHook[]} collected
+ * @param {import('../coherence/hookTruth.js').HookFacts} facts
+ * @param {PlotHookSettlement} settlement
+ * @returns {PlotHook[]}
+ */
+function speakHooks(collected, facts, settlement) {
+  /** @type {PlotHook[]} */
+  const out = [];
+  let refusedFamine = false;
+  let keptFoodHook = false;
+  for (const hook of collected) {
+    const text = speakHookTruthfully(hook.text, facts);
+    const violations = hookTruthViolations(text, facts);
+    if (violations.length > 0) {
+      if (violations.some((finding) => finding.code === 'famine_words_on_a_fed_place')) {
+        refusedFamine = true;
+      }
+      continue;
+    }
+    if (hook.category === 'economics' && /\bgrain\b|\bfood\b|\bharvest\b/i.test(text)) {
+      keptFoodHook = true;
+    }
+    out.push(text === hook.text ? hook : /** @type {PlotHook} */ ({ ...hook, text }));
+  }
+  if (refusedFamine && !keptFoodHook && facts.foodGap) {
+    push(out, {
+      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }),
+      source: 'Economy',
+      role: '',
+      category: 'economics',
+      priority: 7,
+    });
+  }
+  return out;
 }
 
 /**
@@ -273,6 +352,8 @@ function push(out, hook) {
 export function collectPlotHooks(settlement = {}, options = {}) {
   /** @type {PlotHook[]} */
   const hooks = [];
+  const facts = settlementHookFacts(settlement);
+  const drawConflictHook = createConflictHookDraw();
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
@@ -292,8 +373,17 @@ export function collectPlotHooks(settlement = {}, options = {}) {
 
   (settlement.conflicts || []).forEach((conflict) => {
     const intensity = conflict.intensity || 'moderate';
-    (conflict.plotHooks || []).forEach((hook) => push(hooks, {
-      text: plotHookText(hook),
+    // ONE HOOK PER CONFLICT, CHOSEN (the chair's ruling 3). The two sentences
+    // `buildConflictPlotHooks` writes for every conflict in the estate are replaced by one
+    // line drawn from this issue's own library, naming both parties and the issue from the
+    // record; the writer's FLAG-CONDITIONED hooks are specific already and ride through.
+    const stored = (conflict.plotHooks || []).map((hook) => normalizePlotHook(plotHookText(hook)));
+    const specific = stored.filter((text) => !FIXED_CONFLICT_HOOK.test(text));
+    const texts = specific.length === stored.length
+      ? stored
+      : [...drawConflictHook(conflict), ...specific];
+    texts.forEach((hook) => push(hooks, {
+      text: hook,
       source: (conflict.parties || []).join(' vs ') || 'Conflict',
       role: conflict.issue || '',
       sub: `${intensity} tension`,
@@ -372,9 +462,13 @@ export function collectPlotHooks(settlement = {}, options = {}) {
     });
   });
 
+  // THE TRUTH GATE runs before the sort, so a reworded sentence is the one the dedupe
+  // folds on and a refused one never competes for a slot.
+  const spoken = speakHooks(hooks, facts, settlement);
+
   // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the
   // kept instance of any repeated hook is always the highest-priority one.
-  const sorted = hooks.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
+  const sorted = spoken.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
   const deduped = dedupeHooks(sorted);
 
   // ── HK-2 SEAM (dark by default) ────────────────────────────────────────────
