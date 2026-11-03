@@ -374,11 +374,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // generator master 590cb9ab.. -> 8355c460.. (the GS-1 golden re-record, 525 of 525 rows); the prose manifest
     // did not move.
     // Then FOOD-1 (ODQ §934.104; docs/shift-records/2026-11-03-food-1-one-food-record.json), lane DOORS: the generator
-    // master 8355c460.. -> e9fe8b5b.. (525 of 525 rows).
+    // master 8355c460.. -> e9fe8b5b.. (525 of 525 rows) and the prose manifest aafa41e4.. -> f85bdd7a.. (222 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('e9fe8b5b4a173d081df9219fbc6b34456896a4fa6f8916375b7dde4da80d3766');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b');
+      .toBe('f85bdd7a4a39524ac70e40a08b943bf5fdb44f3493dcba477bf284e520be4a52');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

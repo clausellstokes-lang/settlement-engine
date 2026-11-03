@@ -148,8 +148,11 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // docs/shift-records/2026-10-31-one-faction-set.json): DS-GEN-2 composes one line per conflict, and a
     // conflict is now a pair of power factions a rivalry crosses, so towns hold a different number of them
     // (every moved cell is DS-GEN-2: 650 changed, 616 added, 74 removed). Towns unmoved at 516/3/3/3.
+    // 70,776 -> 70,782 (398/392/384 unmoved) at FOOD-1 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-food-1-one-food-record.json): prosperity, legitimacy and viability now read the
+    // stored food record, so their rungs move in 222 rows (cells changed, 48 added, 42 removed: PROSPERITY breakdowns). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 70_776, towns: 516 },
+      'golden-master-v3': { cells: 70_782, towns: 516 },
       'gm-seed-a': { cells: 398, towns: 3 },
       'gm-seed-b': { cells: 392, towns: 3 },
       'gm-seed-c': { cells: 384, towns: 3 },
