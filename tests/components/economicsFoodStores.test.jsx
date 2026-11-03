@@ -24,6 +24,8 @@ import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
+import { readFileSync } from 'node:fs';
 
 /** A stored-food figure: a span of time in store. */
 const STORES_FIGURE = /\b(?:\w+ months?|a month|a few weeks|weeks)\b[^.]{0,30}\b(?:of grain|in store|in the larder|household stores)\b/gi;
@@ -45,6 +47,22 @@ describe('the stored food is printed once, on the Economics tab', () => {
       const row1 = container.querySelector('[data-testid="economics-food-stores"]');
       if (hits.length !== 1 || !row1) wrong.push(`${row.seed}: ${hits.length} figures`);
       else if (/granary/i.test(row1.textContent) && /^No granary/.test(row1.textContent) === record.hasGranary) wrong.push(`${row.seed}: granary words disagree`);
+      unmount();
+    }
+    expect(wrong).toEqual([]);
+  });
+
+  it('the stores sentence has one writer: the Economics row prints the Tonight sheet\'s own words, over 60 seeds', () => {
+    const src = readFileSync('src/components/new/tabs/EconomicsTab.jsx', 'utf8');
+    expect(src).toMatch(/import \{[^}]*\bfoodStoresWords\b[^}]*\} from '\.\.\/\.\.\/\.\.\/domain\/summary\/tonightSheet\.js'/);
+    // anchored: the import above is the one writer; a second spelling of the sentence is what left.
+    expect(src).not.toMatch(/function foodStoresLine\(/);
+    const wrong = [];
+    for (const row of seeds(10)) {
+      const s = gen(row);
+      const { container, unmount } = render(<EconomicsTab settlement={s} narrativeNote={null} />);
+      const printed = container.querySelector('[data-testid="economics-food-stores"]')?.textContent || '';
+      if (printed !== foodStoresWords(s.economicState.foodSecurity.foodRecord)) wrong.push(`${row.seed}: ${printed}`);
       unmount();
     }
     expect(wrong).toEqual([]);

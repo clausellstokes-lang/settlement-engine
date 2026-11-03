@@ -27,7 +27,7 @@ import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
-import { numberWord } from '../../../domain/display/numberWords.js';
+import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -291,7 +291,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
   const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
-  const storesLine = foodStoresLine(eco?.foodSecurity?.foodRecord);
+  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
   const flowDrift = useMemo(() => {
     const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
     if (!sid || !Array.isArray(campaigns)) return null;
@@ -723,17 +723,3 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 }
 
 export default React.memo(EconomicsTab);
-
-/**
- * The stores row's words, from the one food record: the months in store and the granary.
- * @param {{ storageMonths?: number, hasGranary?: boolean } | null | undefined} record
- * @returns {string | null}
- */
-function foodStoresLine(record) {
-  const months = Number(record?.storageMonths);
-  if (!record || !Number.isFinite(months) || months <= 0) return null;
-  const whole = Math.round(months);
-  const span = months < 1 ? 'a few weeks' : whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
-  if (record.hasGranary) return `Stores: a granary, ${span} of grain.`;
-  return months < 1 ? 'No granary; a few weeks in the larder.' : `No granary; ${span} in household stores.`;
-}
