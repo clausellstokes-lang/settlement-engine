@@ -18,6 +18,16 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — DEFENSE-2: THE CULTURE, STRESS AND WARTIME LINES SAY NOTHING A ROSTER CAN CONTRADICT, THROUGH THE SIGNED
+ *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-roster-lines.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 267 OF 525 ROWS MOVED (thorp 42, hamlet 42, village
+ *   42, town 57, city 42, metropolis 42); the key set is identical. THE CAUSE, ONE (8284242ef: cultureProfiles.js,
+ *   stressInstitutionEffects.js, stressNarrative.js reworded to hold on every roster; defenseInstitutionBuckets.js ::
+ *   DEFENSE_BUCKET_KEYWORDS.militia reads 'household levy'): on THIS corpus every moved row moves in
+ *   culturalIdentity.defensePattern alone. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree
+ *   S8 = S7 + this cause, where S7 (X-49's stage, its write committed) reproduces efa49945.. on all 525 rows.
+ *   efa49945.. -> 7f1312d2..
+ *
  * 2026-11-03 — SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET, THROUGH THE SIGNED DOOR (ODQ §934.104, THE
  *   COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-3-guild-market.json; the cloud chair signs
  *   under the owner's delegation, vetoable). 191 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 35; town, city and

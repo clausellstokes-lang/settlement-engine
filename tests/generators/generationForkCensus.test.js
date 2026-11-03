@@ -138,7 +138,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 48f22f18... -> f0ec823b..., this town's food base read from the one terrain table and its hinterland drawn as supply.
 // 2026-11-03, FOOD-3 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-3-food-diversity.json):
 // f0ec823b... -> 908c8abd..., this town's food sources, failed source and foodways line stored on its food record.
-const GOLDEN_CONTROL_HASH = '908c8abd9b750028efe19c08b493edd1902adfec24d69f3ba6669e418a53ea62';
+// 2026-11-03, DEFENSE-2 roster lines (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-roster-lines.json): 908c8abd... -> c957dd78..., this town's germanic
+// defence pattern reworded to hold on every roster.
+const GOLDEN_CONTROL_HASH = 'c957dd782cf206cf7585c24a64a98258951ac5c1ef1100e4eeebd049c064fa8e';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
