@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/isNaN */
+var a=Object.create;var m=Object.defineProperty;var c=Object.getOwnPropertyDescriptor;var f=Object.getOwnPropertyNames;var n=Object.getPrototypeOf,p=Object.prototype.hasOwnProperty;var d=(r,t)=>()=>(t||r((t={exports:{}}).exports,t),t.exports);var j=(r,t,s,i)=>{if(t&&typeof t=="object"||typeof t=="function")for(let e of f(t))!p.call(r,e)&&e!==s&&m(r,e,{get:()=>t[e],enumerable:!(i=c(t,e))||i.enumerable});return r};var l=(r,t,s)=>(s=r!=null?a(n(r)):{},j(t||!r||!r.__esModule?m(s,"default",{value:r,enumerable:!0}):s,r));var N=d((b,o)=>{"use strict";o.exports=Number.isNaN||function(t){return t!==t}});var u=l(N()),g=u.default??u;export{g as default};
+//# sourceMappingURL=isNaN.mjs.map

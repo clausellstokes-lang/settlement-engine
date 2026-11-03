@@ -53,3 +53,7 @@ docs/.review_findings.json
 
 # dev-only overrides (the preview persona lives in .env.development.local; a production build never loads a mode-scoped local file)
 .env.*.local
+
+# The vendored edge-function modules (vendor/, deno.json "vendor": true) are committed whole;
+# esm.sh paths carry dist/ directories that the build-output pattern above would hide.
+!vendor/**/dist/

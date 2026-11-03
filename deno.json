@@ -1,6 +1,8 @@
 {
   "//": "Deno toolchain for Supabase edge functions. Deployment and gate rationale lives in docs/DEPLOY.md.",
   "//gate": "check:edge type-checks production before test:edge runs the structural-mock suite; run both through npm run check:edge-behavior.",
+  "//vendor": "Remote modules are vendored under vendor/ (committed) so deno check/test --frozen never fetch esm.sh or deno.land in CI: esm.sh served two builds of one pinned URL within two days (ODQ §934.103), so a bare hash pin cannot be stable. Refresh recipe in docs/DEPLOY.md (Edge function — manual).",
+  "vendor": true,
   "nodeModulesDir": "manual",
   "tasks": {
     "test:edge": "deno test --allow-env --allow-net --no-check --frozen supabase/functions/",

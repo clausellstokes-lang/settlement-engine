@@ -66,7 +66,19 @@ function findServiceRoleJwt(text) {
 
 // Triaged allowlist: exact tracked path → reason. Keep EMPTY unless a hit is a
 // verified fake fixture; every entry is a reviewed act.
-const ALLOWLIST = Object.freeze({});
+const ALLOWLIST = Object.freeze({
+  // Deno's std `http/server.ts`, vendored whole under vendor/ (deno.json `"vendor": true`;
+  // the edge functions import three std versions). Each carries ONE JSDoc usage example
+  // for serveTls whose placeholder key is the PEM header and footer around a literal "..."
+  // body (the header is not spelled here: this file must never match itself) —
+  // documentation, not a key. Verified by reading the three
+  // sites on 2026-11-03; the paths are version-exact, so a std bump retires the entry
+  // through the stale-exemption test below and the new file is re-read before it is
+  // allowlisted again.
+  'vendor/deno.land/std@0.168.0/http/server.ts': 'std serveTls JSDoc example; placeholder PEM with a "..." body',
+  'vendor/deno.land/std@0.177.0/http/server.ts': 'std serveTls JSDoc example; placeholder PEM with a "..." body',
+  'vendor/deno.land/std@0.224.0/http/server.ts': 'std serveTls JSDoc example; placeholder PEM with a "..." body',
+});
 
 const tracked = execFileSync('git', ['ls-files', '-z'], { cwd: ROOT, maxBuffer: 64 * 1024 * 1024 })
   .toString('utf8')
