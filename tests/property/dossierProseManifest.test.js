@@ -155,8 +155,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // docs/shift-records/2026-11-03-food-2-food-base-numbers.json): the food base numbers move the food, viability,
     // legitimacy and defence rungs in 978 rows (5,116 cells changed; 64 added, DS-POW-1; 26 removed, DS-GEN-2 24 and
     // DS-ECO-1 2). Towns unmoved at 516/3/3/3.
+    // 70,820 -> 70,724 (398/392/384 unmoved) at SIZE-3 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-size-3-guild-market.json): the merchant guild is no longer seated over a
+    // market-less small place, so 174 rows move (78 DS-POW-4 cells changed in thorps; 96 DS-GEN-2 cells removed in
+    // hamlets, the conflict line the dropped guild carried). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 70_820, towns: 516 },
+      'golden-master-v3': { cells: 70_724, towns: 516 },
       'gm-seed-a': { cells: 398, towns: 3 },
       'gm-seed-b': { cells: 392, towns: 3 },
       'gm-seed-c': { cells: 384, towns: 3 },

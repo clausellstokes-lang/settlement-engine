@@ -382,11 +382,11 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then SIZE-2 (ODQ §934.104; docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json), lane DOORS: the
     // generator master f1f24e86.. -> 1f402a82.. (192 of 525 rows); the prose manifest did not move.
     // Then SIZE-3 (ODQ §934.104; docs/shift-records/2026-11-03-size-3-guild-market.json), lane DOORS: the generator
-    // master 1f402a82.. -> efa49945.. (191 of 525 rows).
+    // master 1f402a82.. -> efa49945.. (191 of 525 rows) and the prose manifest aeee81fa.. -> cd112d2b.. (174 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('efa4994587e7bd819e63693ae81421e2a7c3e219a8a6055b127f7aebc13cd829');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('aeee81fa176b52722a9ccf287635a171eb810647f92de3c4fb04f9034372ae05');
+      .toBe('cd112d2bc97e7899e78185f44d15b8c52fae4a948fdfa4adbd614064b2e912be');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
