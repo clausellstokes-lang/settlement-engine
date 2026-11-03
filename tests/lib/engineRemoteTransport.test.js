@@ -188,24 +188,26 @@ describe('the VITE_ENGINE_REMOTE flag is closed unless explicitly opened', () =>
 describe('the remote packet is the worker packet', () => {
   const CASES = [['remote-a', 'town'], ['remote-b', 'village'], ['remote-c', 'city']];
 
-  it.each(CASES)('seed %s (%s): every key of the packet equals the local core\'s, over the wire', async (seed, settType) => {
-    const request = actionRequest(seed, settType);
-    const { result: local } = await runGeneration(request, {
-      flagOn: false, remote: false, fallback: (r) => structuredClone(runGenerationRequest(structuredClone(r))),
-    });
-    const { impl, calls } = okFetch();
-    const { result, outcome } = await remoteRun(request, impl);
-    expect(outcome).toBe('remote');
-    expect(calls).toHaveLength(1);
-    expect(Object.keys(result).sort()).toEqual(Object.keys(local).sort());
-    expect(JSON.stringify(result.settlement)).toBe(JSON.stringify(local.settlement));
-    expect(result.pipelineHistory).toEqual(local.pipelineHistory);
-    expect(result.pipelineHistory.length).toBeGreaterThan(0);
-    expect(result.preservation).toBe(local.preservation);
-    expect(result.resolvedConfig).toEqual(local.resolvedConfig);
-    // Same sources, same version: both records carry the committed bundle's hash.
-    expect(result.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
-    expect(local.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
+  it('for three seeds (town, village, city), every key of the packet equals the local core\'s, over the wire', async () => {
+    for (const [seed, settType] of CASES) {
+      const request = actionRequest(seed, settType);
+      const { result: local } = await runGeneration(request, {
+        flagOn: false, remote: false, fallback: (r) => structuredClone(runGenerationRequest(structuredClone(r))),
+      });
+      const { impl, calls } = okFetch();
+      const { result, outcome } = await remoteRun(request, impl);
+      expect(outcome).toBe('remote');
+      expect(calls).toHaveLength(1);
+      expect(Object.keys(result).sort()).toEqual(Object.keys(local).sort());
+      expect(JSON.stringify(result.settlement)).toBe(JSON.stringify(local.settlement));
+      expect(result.pipelineHistory).toEqual(local.pipelineHistory);
+      expect(result.pipelineHistory.length).toBeGreaterThan(0);
+      expect(result.preservation).toBe(local.preservation);
+      expect(result.resolvedConfig).toEqual(local.resolvedConfig);
+      // Same sources, same version: both records carry the committed bundle's hash.
+      expect(result.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
+      expect(local.settlement.engineVersion).toBe(LOCAL_ENGINE_VERSION);
+    }
   });
 
   it('posts { seed, config } with the caller\'s session token, and nothing pinned by default', async () => {
