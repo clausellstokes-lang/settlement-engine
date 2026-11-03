@@ -88,6 +88,20 @@ VITE_STRIPE_PUBLISHABLE_KEY=...     # for Stripe.js
 VITE_GENERATE_NARRATIVE_URL=...      # the edge function URL
 ```
 
+**The engine service's client switch (docs/DESIGN_ENGINE_SERVICE.md, ENGINE-2):**
+
+```
+VITE_ENGINE_REMOTE=true              # generate through engine-generate; CLOSED unless exactly 'true'
+VITE_ENGINE_GENERATE_URL=...         # optional; default VITE_SUPABASE_URL + /functions/v1/engine-generate
+VITE_ENGINE_ADVANCE_URL=...          # reserved for engine-advance (not built; read by src/lib/engineRemote.js :: engineFunctionUrl)
+```
+
+`VITE_ENGINE_REMOTE` is read by `src/lib/engineRemote.js :: engineRemoteOpen` (and by
+`src/lib/generationClient.js`, same rule): a missing, empty or misspelled value keeps
+generation in the browser. Open, a generation the service cannot make (an imported
+neighbour, reviewed homebrew, content tunables) is REFUSED with a typed error, never
+made locally instead; leave it off until `engine-generate` is deployed and proven.
+
 Set these in Vercel's dashboard → Project → Settings → Environment
 Variables. Redeploy after changing them so the new values bake into the
 client bundle.
