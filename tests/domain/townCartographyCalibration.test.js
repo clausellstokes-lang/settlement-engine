@@ -299,6 +299,15 @@
  *   `FROZEN.city.maxBuildings` 211 → 212; `DUPLICATES.permille` 146/215/82/62/50/56 → 143/221/85/64/51/58 (derived
  *   ceilings 234/344/132/100/80/90 → 229/354/136/103/82/93). CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-03 — FOOD-3, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-3-food-diversity.json; the chair signs by the owner's delegation, vetoable).
+ *   Food diversity lengthens the stores of places with preserved sources, and the defence readings that read them
+ *   move the drawn rosters of 4 sampled rows and the thorp argmax row. Written from the staged tree S3 (S2 green on
+ *   the committed corpus). ONE PASS: the per-tier maximum roster reads 12/25/42/69/83/86 again, so
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move. `FROZEN` does not move (W4 green). Re-keyed by
+ *   measurement (W8's exact readings): `DUPLICATES.permille` 143/221/85/64/51/58 → 130/204/88/64/51/58 (derived ceilings 229/354/136/103/82/93 → 208/327/141/103/82/93).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -416,9 +425,9 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 143 }),
-  hamlet: Object.freeze({ permille: 221 }),
-  village: Object.freeze({ permille: 85 }),
+  thorp: Object.freeze({ permille: 130 }),
+  hamlet: Object.freeze({ permille: 204 }),
+  village: Object.freeze({ permille: 88 }),
   town: Object.freeze({ permille: 64 }),
   city: Object.freeze({ permille: 51 }),
   metropolis: Object.freeze({ permille: 58 }),
@@ -1102,7 +1111,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 223/340/135/103/80/88 -> 234/344/132/100/80/90 on 2026-11-03: FOOD-1 (header), the derived ceilings of the re-keyed
     // readings by the same operator.
     // 234/344/132/100/80/90 -> 229/354/136/103/82/93 on 2026-11-03: FOOD-2 (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([229, 354, 136, 103, 82, 93]);
+    // 229/354/136/103/82/93 -> 208/327/141/103/82/93 on 2026-11-03: FOOD-3 (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([208, 327, 141, 103, 82, 93]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
