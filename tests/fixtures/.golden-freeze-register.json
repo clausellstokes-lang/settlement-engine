@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "8355c460c4bc822967b7fc96042dae2d09fdf01b3b634e1317eecc32af32945c",
+      "sha256": "e9fe8b5b4a173d081df9219fbc6b34456896a4fa6f8916375b7dde4da80d3766",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
+      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {

@@ -18,6 +18,18 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — FOOD-1: ONE FOOD RECORD EVERY FOOD SENTENCE READS, ONE SET OF CUT-OFFS; THE FOUNDATIONS FOOD SCORE
+ *   READS THE BALANCE AND THE RESERVES (GS-3a RE-CUT); THE SURPLUS WORDS READ THE RECORD, THROUGH THE SIGNED DOOR (ODQ
+ *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-food-1-one-food-record.json; the
+ *   cloud chair signs under the owner's delegation "I also now hereby defer all judgement to you and defer and give all
+ *   permissions to you required now or in the future", vetoable). 525 OF 525 ROWS MOVED; the key set is identical.
+ *   THE CAUSE, ONE (b2aa5f5fa + 22d458883): economicState.foodSecurity.foodRecord is stored on every row; prosperity,
+ *   the situation sentence and economicComplexity read it, and the prosperity change re-deals the draws downstream
+ *   of it. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S1 = S0 + this cause, where S0
+ *   (the window's tip 71541a9e6 with every one of its golden-moving commits reverse-applied) reproduces this
+ *   manifest's previous bytes 8355c460.. on all 525 rows and the whole register estate green (52 files / 473 tests).
+ *   8355c460.. -> e9fe8b5b..
+ *
  * 2026-10-31 — TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1), THROUGH THE
  *   SIGNED DOOR (ODQ §934.101; record docs/shift-records/2026-10-31-tension-variety.json; the cloud chair signs
  *   under the owner's delegation "I also now defer and give all judgment to you that is required now or in the

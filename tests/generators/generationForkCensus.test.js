@@ -132,7 +132,9 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-31, tension variety (GS-1, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-31-tension-variety.json): 9f94ab28... -> 67a3cc18..., this town's tie prose drawn
 // without replacement from eight-variant pools.
-const GOLDEN_CONTROL_HASH = '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529';
+// 2026-11-03, FOOD-1 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-1-one-food-record.json):
+// 67a3cc18... -> 48f22f18..., this town's food record stored and its prosperity read from it.
+const GOLDEN_CONTROL_HASH = '48f22f187e625d2403062c781ed0264eac997fcc78fafee447c6004dfea4da63';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
