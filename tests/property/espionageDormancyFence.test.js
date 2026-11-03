@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-03, SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-size-3-guild-market.json. THE MOVER, FOUND: 43f9c0dcc
+ * (rulingStructure.js :: generatePowerStructure reads viability.js :: hasMarketInstitution): a thorp, hamlet or
+ * village with no real market no longer seats a merchant guild. On THIS corpus 109 of 360 rows move (thorp 55,
+ * hamlet 43, village 11; town, city, metropolis 0), in powerStructure and the power step's simulationTrace;
+ * 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree
+ * S5 = S4 + this cause, where S4 (SIZE-2's stage, its writes committed) reproduces `62338588…` exactly.
+ * FENCE 3 (call-path dormancy) re-run green at the write: zero espionage calls. `62338588…` -> `5d0e4fb4…`.
+ *
  * ── 2026-11-03, SIZE-2: GENERATED STORY TEXT NAMES THE PLACE BY ITS OWN TIER NOUN (THE COHERENCE AND SCALE WINDOW) ──
  * THE TWENTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
@@ -513,7 +524,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '6233858816c5c4f695747621a893a13f2e5df843253811e600ef113cd584ab51';
+const PRE_COUPLING_CORPUS_SHA = '5d0e4fb4a2fc5ef615e6ce1698856c1a890745ea102cd47158425e858c5c6743';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
