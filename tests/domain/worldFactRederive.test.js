@@ -389,8 +389,10 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // manifest 5b26b0d4.. -> 4b28e712.. (1,050 rows); the generator master did not move.
     // Then DEFENSE-2, the roster lines (ODQ §934.104; docs/shift-records/2026-11-03-defense-roster-lines.json), lane
     // DOORS: the generator master efa49945.. -> 7f1312d2.. (267 of 525 rows); the prose manifest did not move.
+    // Then DEFENSE-2, the magic dependency (ODQ §934.104; docs/shift-records/2026-11-03-defense-magic-dependency.json),
+    // lane DOORS: the generator master 7f1312d2.. -> 4c42885b.. (256 of 525 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('7f1312d227b96085d3eaaa2bdde01fee5f80829eae099e95944a85888e7282c3');
+      .toBe('4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
       .toBe('4b28e712960a5b8907595d81b5d1fa5b3bd72817630052e06f4856ea3ade732a');
 

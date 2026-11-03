@@ -141,7 +141,10 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-11-03, DEFENSE-2 roster lines (ODQ §934.104), through the signed door
 // (docs/shift-records/2026-11-03-defense-roster-lines.json): 908c8abd... -> c957dd78..., this town's germanic
 // defence pattern reworded to hold on every roster.
-const GOLDEN_CONTROL_HASH = 'c957dd782cf206cf7585c24a64a98258951ac5c1ef1100e4eeebd049c064fa8e';
+// 2026-11-03, DEFENSE-2 magic dependency (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-magic-dependency.json): c957dd78... -> b1b9502a..., this town's defence
+// record storing the one magic reliance reading.
+const GOLDEN_CONTROL_HASH = 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

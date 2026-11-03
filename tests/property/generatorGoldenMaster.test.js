@@ -18,6 +18,16 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING, THROUGH THE SIGNED
+ *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-magic-dependency.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 256 OF 525 ROWS MOVED (village 12, town 76, city 84,
+ *   metropolis 84; thorp and hamlet 0); the key set is identical. THE CAUSE, ONE (09694e448: defenseGenerator.js ::
+ *   generateDefenseProfile stores magicReliance.js :: deriveMagicReliance at relied-upon or integral; f47cdd20d, the
+ *   Defense tab's reading of it, moves no settlement byte): every moved row is a false -> true flip of exactly
+ *   defenseProfile.magicDependency and its mirror defenseProfile.scores.magicDependency. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S9 = S8 + this cause, where S8 (the roster-lines stage, its writes
+ *   committed) reproduces 7f1312d2.. on all 525 rows. 7f1312d2.. -> 4c42885b..
+ *
  * 2026-11-03 — DEFENSE-2: THE CULTURE, STRESS AND WARTIME LINES SAY NOTHING A ROSTER CAN CONTRADICT, THROUGH THE SIGNED
  *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-roster-lines.json;
  *   the cloud chair signs under the owner's delegation, vetoable). 267 OF 525 ROWS MOVED (thorp 42, hamlet 42, village
