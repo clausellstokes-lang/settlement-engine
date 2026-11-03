@@ -1547,6 +1547,8 @@ export function defenseSupportingProse(settlement, options = {}) {
  * gives the paragraph the town's own voice beside the generator's.
  *
  * ── ⭐ REACHABILITY, MEASURED OVER GENERATED WORLDS RATHER THAN ASSUMED ─────────────
+ * ⚠ SUPERSEDED 2026-11-03 (lane DEFENSE-2): the stored flag is now the one magic reliance
+ * reading, and this desk keys on that reading; the census below describes the earlier producer.
  * `defenseProfile.magicDependency` is written by `defenseGenerator.js :: computeDefenseScores` as
  * `magicOn && ((under_siege && (arcane||druid||divine)) || (famine && (druid||divine)) ||
  * (plague_onset && (divine||alchemy)) || (arcaneGuild && (under_siege||famine)))`, and the
