@@ -20,6 +20,7 @@ import {
 } from '../../lib/contentPacks.js';
 import { SECOND as SEC, BORDER as BOR, CARD, FS, swatch } from '../theme.js';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
@@ -328,12 +329,15 @@ export default function ContentPackBar() {
       <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: ACCENT, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         Content packs
       </span>
-      <Button
-        variant="secondary" size="sm"
-        onClick={handleExport} disabled={totalAuthored === 0}
-      >
-        Export
-      </Button>
+      {/* Before launch, the launch teaser for every non-staff account (X-53). */}
+      <LaunchGatedExport>
+        <Button
+          variant="secondary" size="sm"
+          onClick={handleExport} disabled={totalAuthored === 0}
+        >
+          Export
+        </Button>
+      </LaunchGatedExport>
       <Button
         variant="secondary" size="sm"
         onClick={() => fileRef.current?.click()}

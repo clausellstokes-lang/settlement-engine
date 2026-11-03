@@ -14,9 +14,12 @@
  * control is disabled by the launch gate and not by a missing payments setup.
  *
  * The gate is scoped, not blanket, and the same closed build pins that: the ladder's
- * create-account rung, the signed-in save-first rung, a premium owner's Edit Dossier
- * and Export Dossier, a free owner's Export once a durable right is held, the popup's
- * Not now and the rail's Polish with AI all stay live with no pill.
+ * create-account rung, the signed-in save-first rung, a premium owner's Edit Dossier, the
+ * popup's Not now and the rail's Polish with AI all stay live with no pill. Since the owner's
+ * 2026-11-03 word a non-staff owner's EXPORT (a premium owner's, or a free owner's holding a
+ * durable right) is the export launch teaser instead (LaunchGatedExport, X-53; pinned whole by
+ * tests/components/exportLaunchTeaser.test.jsx): live, no pill inside, its click opens the
+ * Available-at-launch dialog.
  *
  * The open (post-launch) behavior stays pinned by the components' own suites, which
  * mock the gate open (dossierLadderModal, buyThisDossierSaveFirst,
@@ -212,7 +215,12 @@ describe('launch lock (dossier): NextActionRail', () => {
     expect(handlers.onPolishAi).toHaveBeenCalledTimes(1);
   });
 
-  it('a premium owner: Edit Dossier and Export Dossier are not purchases, so both stay live with no pill', () => {
+  // THE OWNER (2026-11-03): "export (outside of gallery) buttons are not to work are to say
+  // available at launch" / "Anyone that is not a developer can only have access to the free
+  // account version." A non-staff owner's Export rung is no longer a purchase lock but the
+  // EXPORT teaser (LaunchGatedExport, X-53): live, unpilled inside, and a click opens the
+  // Available-at-launch dialog instead of the export. Edit Dossier is untouched.
+  it('a premium owner: Edit Dossier stays live; Export Dossier is the export launch teaser, not a purchase lock', () => {
     storeRef.current = freeOwnerStore({ auth: { tier: 'premium' }, canExport: () => true });
     const handlers = { onEdit: vi.fn(), onExport: vi.fn() };
     render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={handlers} canEdit />);
@@ -221,19 +229,23 @@ describe('launch lock (dossier): NextActionRail', () => {
     const exportRung = screen.getByRole('button', { name: 'Export Dossier' });
     expectLiveWithoutPill(edit);
     expectLiveWithoutPill(exportRung);
+    expect(exportRung.getAttribute('data-skin')).toBe('launch');
     fireEvent.click(exportRung);
-    expect(handlers.onExport).toHaveBeenCalledTimes(1);
+    expect(handlers.onExport).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('dialog', { name: PILL })).toBeTruthy();
   });
 
-  it('a free owner holding the durable right for this save: Export stays live, Edit (Cartographer) stays locked', () => {
+  it('a free owner holding the durable right for this save: Export is the export launch teaser, Edit (Cartographer) stays locked', () => {
     storeRef.current = freeOwnerStore({ dossierEntitlements: { 'save-1': true } });
     const handlers = { onEdit: vi.fn(), onExport: vi.fn() };
     render(<NextActionRail settlement={{ name: 'X' }} save={{ id: 'save-1' }} handlers={handlers} canEdit={false} />);
 
     const exportRung = screen.getByRole('button', { name: 'Export Dossier' });
     expectLiveWithoutPill(exportRung);
+    expect(exportRung.getAttribute('data-skin')).toBe('launch');
     fireEvent.click(exportRung);
-    expect(handlers.onExport).toHaveBeenCalledTimes(1);
+    expect(handlers.onExport).toHaveBeenCalledTimes(0);
+    expect(screen.getByRole('dialog', { name: PILL })).toBeTruthy();
     expectLockedWithPill(screen.getByRole('button', { name: 'Edit (Cartographer)' }));
   });
 });
@@ -261,7 +273,7 @@ describe('launch lock (dossier): SettlementDetailActions', () => {
     expectLockedWithPill(screen.getByRole('button', { name: /unlock all exports for this settlement/i }));
   });
 
-  it('a premium editor: Stop Editing and Export Dossier stay live with no pill', () => {
+  it('a premium editor: Stop Editing stays live with no pill; Export Dossier is the export launch teaser', () => {
     storeRef.current = freeOwnerStore({ auth: { tier: 'premium' }, canExport: () => true });
     const toggleEditMode = vi.fn();
     render(<SettlementDetailActions {...baseProps} canEdit toggleEditMode={toggleEditMode} setPurchaseModalOpen={vi.fn()} exportAllowed />);
@@ -270,6 +282,8 @@ describe('launch lock (dossier): SettlementDetailActions', () => {
     expectLiveWithoutPill(stop);
     fireEvent.click(stop);
     expect(toggleEditMode).toHaveBeenCalledTimes(1);
-    expectLiveWithoutPill(screen.getByRole('button', { name: 'Export Dossier' }));
+    const exportDossier = screen.getByRole('button', { name: 'Export Dossier' });
+    expectLiveWithoutPill(exportDossier);
+    expect(exportDossier.getAttribute('data-skin')).toBe('launch');
   });
 });
