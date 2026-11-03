@@ -254,8 +254,10 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     s.npcs = [{ id: 'n1', name: 'Old Mayor', role: 'Mayor (deposed)', factionAffiliation: 'Merchant Guild' }];
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const absence = screen.getByTestId('ruling-chain-absence');
-    expect(absence.textContent).toMatch(/The seat stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\./);
-    expect(screen.getByTestId('ruling-chain').textContent).toMatch(/the seat itself stands vacant/);
+    // The row's label is "The seat", so the line opens on the verb (lane RULERS: it read "The seat The seat stands empty").
+    expect(absence.textContent).toMatch(/^Stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\./);
+    // The vacancy is said once, by the seat row (lane RULERS, chair ruling b): no faction-row clause.
+    expect(screen.getByTestId('ruling-chain').textContent.match(/stands (empty|vacant)/gi)).toHaveLength(1);
     expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
   });
 

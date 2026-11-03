@@ -129,12 +129,12 @@ function RulingChainBlock({ settlement }) {
         </ChainRow>
       )}
       {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it renders only when
-          the seat stands vacant or another faction holds it (vacant first: factionNamePrecedenceScan). */}
-      {chain.faction && (chain.faction.vacant || chain.faction.name !== chain.power?.name) && (
+          another faction holds the seat. A vacancy is said ONCE, by the seat row's "Stands empty" (lane RULERS,
+          chair ruling b, X-50: every fact said once); its ", but the seat itself stands vacant" clause is gone. */}
+      {chain.faction && chain.faction.name !== chain.power?.name && (
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
-          {` holds the governing seat`}
-          {chain.faction.vacant && <span style={{color:swatch['#8B1A1A'],fontWeight:700}}>{', but the seat itself stands vacant'}</span>}.
+          {` holds the governing seat`}.
         </ChainRow>
       )}
       {chain.npc && (
