@@ -127,7 +127,7 @@ export function buildFoundryModuleFiles({ settlement, vm, variant = 'canon_dossi
   const variantSlug = { draft_brief: 'draft', canon_dossier: 'canon', timeline_packet: 'timeline', campaign_state: 'war' }[variant] || slugify(variant);
   const moduleId = `settlementforge-${slug}-${variantSlug}-${idTail(settlement)}`;
 
-  const pages = buildJournalPages(vm, { variant, faithUnlocked });
+  const pages = buildJournalPages(vm, { variant, faithUnlocked, settlement });
 
   const journal = {
     name: `${name}: Settlement Dossier`,

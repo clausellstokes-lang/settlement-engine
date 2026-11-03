@@ -47,6 +47,7 @@ import {
   RETIRED_DOMAIN_READER_BASELINE_SCHEMA,
   RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA,
   RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA,
+  RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
   RETIRED_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_SURFACE_FILTERED_LEAF_BASELINE_SCHEMA,
   RETIRED_UNFILTERED_LEAF_BASELINE_SCHEMA,
@@ -79,6 +80,7 @@ import {
   validateSchema23Baseline,
   validateSchema24Baseline,
   validateSchema25Baseline,
+  validateSchema26Baseline,
 } from '../../scripts/lib/observed-shape-baseline.mjs';
 import {
   artifactBaselineSchemaOf,
@@ -100,6 +102,7 @@ import {
   EDIT_MODE_READERS_TARGET_SCHEMA,
   CORPUS_REDEAL_TARGET_SCHEMA,
   ADVISORY_LOCKFILE_TARGET_SCHEMA,
+  FED_WORLD_TARGET_SCHEMA,
 } from '../../scripts/migrate-observed-shape-readers.mjs';
 
 const HASH_A = 'a'.repeat(64);
@@ -1525,7 +1528,11 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ AND 25 HOLDS IT TOO: the advisory lockfile bump is verdict-only, like 13 — no row moves,
     // so the pair stays 69/45. MEASURED off the committed schema-24 register.
     expect(declaredBankOf(ADVISORY_LOCKFILE_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
-    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(ADVISORY_LOCKFILE_TARGET_SCHEMA));
+    // ⭐ AND 26 HOLDS IT TOO: the fed-world rung admits 22 ordinary rows and drops or shrinks six,
+    // none on a declared identity, so the pair stays 69/45. MEASURED off the live scan.
+    expect(declaredBankOf(FED_WORLD_TARGET_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
+    expect(declaredBankOf(BASELINE_SCHEMA)).toEqual(declaredBankOf(FED_WORLD_TARGET_SCHEMA));
+    expect(declaredBankOf(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA)).toEqual({ bankedReads: 69, taggedRows: 45 });
     expect(declaredBankOf(RETIRED_DOMAIN_READER_BASELINE_SCHEMA)).toEqual({ bankedReads: 61, taggedRows: 40 });
@@ -1607,7 +1614,9 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // them, and unlike 21 it grows the ROSTER rather than only the tagged row count.
     // ⭐ SCHEMA 24: THE URBAN BAND'S CORPUS RE-DEAL (2026-10-01, ODQ §934.86 and its addendum 2): schema 23's envelope, tag law and ten-identity roster UNCHANGED, re-governed to a register that admits 53 ordinary rows the re-dealt AO-0 year exposes and shrinks one; nothing is declared and the bank holds at 69/45.
     // ⭐ SCHEMA 25: THE 2026-10 ADVISORY LOCKFILE BUMP (the chair's ruling of 2026-10-23, under the schema-13 precedent TE-MINT-1): schema 24's envelope re-governed to a lockfile that moves dompurify 3.4.17 and fflate 0.8.3 with package.json byte-identical — and, like 13's, its reconciliation must be, and measurably is, EMPTY.
-    expect(BASELINE_SCHEMA).toBe(25);
+    // ⭐ SCHEMA 26: THE FED WORLD (the chair's ruling (i) on lane OSR-RUNG's STOP, 2026-11-03, ODQ §934.104): a famine topology pass in the corpus and 22 admitted rows the self-feeding worlds no longer resolve; four rows go, two shrink, the bank holds at 69/45.
+    expect(BASELINE_SCHEMA).toBe(26);
+    expect(RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA).toBe(25);
     expect(RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA).toBe(24);
     expect(RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA).toBe(23);
     expect(RETIRED_DOMAIN_READER_BASELINE_SCHEMA).toBe(22);
@@ -1631,9 +1640,10 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // ⭐ 15 retired at §893.4, 16 at the stress-topology rung, 17 at the lineage-reanchor
     // rung, 18 at the exemption-retirement rung, 19 at the bank-fence rung; the LIVE
     // envelope is validated by 20 now.
-    expect(validateSchema25Baseline(live)).toBe(live);
+    expect(validateSchema26Baseline(live)).toBe(live);
     // … and 18, 19, 20, 21 and 22 keep their own literals, so each refuses the live envelope
     // it used to accept.
+    expect(() => validateSchema25Baseline(live)).toThrow(/is not schema 25/);
     expect(() => validateSchema24Baseline(live)).toThrow(/is not schema 24/);
     expect(() => validateSchema18Baseline(live)).toThrow(/is not schema 18/);
     expect(() => validateSchema19Baseline(live)).toThrow(/is not schema 19/);
@@ -1774,7 +1784,7 @@ describe('observed-shape anti-vacuity sentinel telemetry', () => {
     // `artifactBaselineSchemaOf` exists to prevent.
     expect(artifactBaselineSchemaOf('legacy-leaf')).toBe(2);
     expect(artifactBaselineSchemaOf('exact-origin')).toBe(3);
-    expect(BASELINE_SCHEMA).toBe(25);
+    expect(BASELINE_SCHEMA).toBe(26);
     expect(() => artifactBaselineSchemaOf('heuristic')).toThrow(/scan mode is unsupported/);
   });
 

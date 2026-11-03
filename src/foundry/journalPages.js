@@ -128,10 +128,12 @@ function statePage(vm) {
 
 /**
  * THE ONE TONIGHT SHEET (X-51) as a journal page: the same composer the screen and the PDF
- * read (domain/summary/tonightSheet.js), over the raw settlement the view model carries.
+ * read (domain/summary/tonightSheet.js), over the settlement itself. The settlement is passed
+ * in, not read off `vm.raw`: the two are the same object, but a composer handed `vm.raw` reads
+ * as fed by two record shapes, which hides its reads from the observed-shape instrument.
  */
-function tonightPage(vm) {
-  const sheet = composeTonightSheet(vm.raw);
+function tonightPage(settlement) {
+  const sheet = composeTonightSheet(settlement);
   const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
@@ -428,12 +430,14 @@ function aiAppendixPage(vm) {
  * Build the journal page list for a settlement export.
  *
  * @param {ReturnType<import('../pdf/lib/viewModel.js').buildViewModel>} vm
- * @param {{ variant?: string, faithUnlocked?: boolean }} [opts]
+ * @param {{ variant?: string, faithUnlocked?: boolean, settlement?: any }} [opts]
  *   `faithUnlocked` is the premium seam result the export surface passes
  *   (tier === 'premium' || isElevated()); the default (false) is the safe one.
+ *   `settlement` is the settlement the view model was built from; it defaults to `vm.raw`,
+ *   which is that same object.
  * @returns {Array<{ name: string, markdown: string }>}
  */
-export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked = false } = {}) {
+export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked = false, settlement = vm.raw } = {}) {
   const spec = PDF_VARIANTS[variant] || PDF_VARIANTS.canon_dossier;
   const ctx = { phase: vm.phase, narrated: vm.narrativeMode, eventCount: vm.eventLog?.length ?? 0 };
   const inc = (key) => shouldInclude(spec.chapters[key], ctx);
@@ -446,7 +450,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
 
   if (inc('overview'))            push('Overview', overviewPage(vm));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
-  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(vm));
+  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(settlement));
   if (inc('npcQuickRef'))         push('NPC Quick Reference', npcQuickRefPage(vm));
   if (inc('notableNpcs')) {
     for (const n of notableNpcs(vm.npcs.sorted || [])) {
