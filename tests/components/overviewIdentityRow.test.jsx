@@ -34,4 +34,22 @@ describe('Overview — the identity facts wrap as units', () => {
     }
     void container;
   });
+
+  // X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104): the record counts households beside its
+  // residents, and the strip prints the count right after the population fact.
+  it('the households fact follows the population fact', () => {
+    render(<OverviewTab settlement={town} narrativeNote={null} />);
+    const facts = screen.getAllByTestId('overview-identity-fact').map(f => f.textContent);
+    const at = facts.findIndex(text => text.endsWith(' pop.'));
+    expect(at).toBeGreaterThanOrEqual(0);
+    expect(facts[at + 1]).toBe(`· ${town.households.toLocaleString('en-US')} households`);
+  });
+
+  it('a record saved before households existed prints no households fact', () => {
+    const { households: _dropped, ...older } = town;
+    render(<OverviewTab settlement={older} narrativeNote={null} />);
+    const facts = screen.getAllByTestId('overview-identity-fact').map(f => f.textContent);
+    expect(facts.filter(text => text.includes('household'))).toEqual([]); // anchored: the strip above still renders its other facts
+    expect(facts.length).toBeGreaterThanOrEqual(1);
+  });
 });

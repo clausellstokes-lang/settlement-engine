@@ -50,7 +50,7 @@ registerStep('resolveConfig', {
   deps: [],
   reads: [], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [
-    'tier', 'population', 'tradeRoute', 'terrainType', 'resolvedTerrain',
+    'tier', 'population', 'households', 'tradeRoute', 'terrainType', 'resolvedTerrain',
     'culture', 'culturalIdentity', 'generationContentProfile',
     'magicLevel', 'threat', 'priorityMagicEffective',
     'noMagic', 'townPlus', 'effectiveConfig',
@@ -361,8 +361,19 @@ registerStep('resolveConfig', {
     });
   }
 
+  // X-46 THE HISTORICAL SCALE (ODQ §934.104): a settlement is counted in households as well as
+  // residents. ONE hearth size (residents per household) is rolled uniformly in [3.8, 4.6] from
+  // this step's own stream. ⛔ IT IS THE STEP'S LAST DRAW and must stay last: every draw above
+  // (priorities, tier, population, terrain, route, threat, culture) keeps its exact position, so
+  // no existing seed moves anything but this one new field. The owner's household bands
+  // (thorp 1-8 … metropolis 3,500+) are met by construction from the population bands.
+  const hearth = rng.randFloat(3.8, 4.6);
+  // The draw is unconditional (the stream never depends on the input); a 'custom' config with
+  // no usable population records no count rather than NaN.
+  const households = Number.isFinite(population) ? Math.max(1, Math.round(population / hearth)) : null;
+
   return {
-    tier, population, tradeRoute, terrainType, resolvedTerrain,
+    tier, population, households, tradeRoute, terrainType, resolvedTerrain,
     culture, culturalIdentity, generationContentProfile,
     magicLevel, threat, priorityMagicEffective,
     noMagic, townPlus, effectiveConfig,

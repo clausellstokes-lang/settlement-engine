@@ -63,6 +63,8 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // three rows leave the register with the keys they declared. generatePopulation no longer provides `factions` or
 // `conflicts` (assembleSettlement derives both from the FINAL roster, inside its own `settlement` row), and
 // corruptionPass no longer mutates `factions` (the key is no longer in the context). 75 -> 72 pairs.
+// X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104, 2026-11-03): resolveConfig provides `households`, the
+// hearth roll placed as the step's LAST draw and carried onto the record. 72 -> 73 pairs.
 /**
  * ⛔ TWO COMPARANDS, BECAUSE THEY ARE DIFFERENT CLAIMS (design §22; chair ruling Q-6).
  * `onRecord` answers whether the key's FINAL value lands on the record. `producedOnRecord`
@@ -81,6 +83,7 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} */ ([
   { step: 'resolveConfig', key: 'tier', via: 'provides', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.tier' },
   { step: 'resolveConfig', key: 'population', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.population' },
+  { step: 'resolveConfig', key: 'households', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.households' },
   { step: 'resolveConfig', key: 'tradeRoute', via: 'provides', stepDraws: 63, keyMoves: 5, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
   { step: 'resolveConfig', key: 'terrainType', via: 'provides', stepDraws: 63, keyMoves: 3, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.config.terrainType' },
   { step: 'resolveConfig', key: 'resolvedTerrain', via: 'provides', stepDraws: 63, keyMoves: 3, rows: 63, class: 'drawn', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },

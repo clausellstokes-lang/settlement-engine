@@ -87,7 +87,7 @@ registerStep('assembleSettlement', {
   // structuralValidationPass provides ctx.structural — the coherence receipt
   // for the FINAL roster (Wave 4b moved it out of assembleInstitutions).
   deps: ['generateNarratives', 'generatePopulation', 'corruptionPass', 'structuralValidationPass'],
-  reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['availableServices', 'culture', 'culturalIdentity', 'economicState', 'economicViability', 'effectiveConfig', 'generationContext', 'generationRepairs', 'history', 'households', 'institutions', 'isolationSupport', 'neighbourProfile', 'npcs', 'population', 'powerIntent', 'powerStructure', 'rawNeighbour', 'relationships', 'resourceAnalysis', 'settlementReason', 'spatialLayout', 'stress', 'structural', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   // The terminal step bundles the FINAL value of every re-derived key. Declared rather than
   // assumed: 'it runs last' is a fact about today's order, and the contract now checks it.
   readsVersion: { economicState: 'reconciled', stress: 'reconciled', isolationSupport: 'reconciled' },
@@ -104,7 +104,7 @@ registerStep('assembleSettlement', {
   // same spelling `generatePopulation.js` and `assembleInstitutions.js` already carry.
   const pins = ctx.__pins || null;
   const {
-    tier, population, institutions, effectiveConfig,
+    tier, population, households, institutions, effectiveConfig,
     neighbourProfile, rawNeighbour,
     economicState, spatialLayout, availableServices, powerStructure,
     settlementReason, npcs, relationships,
@@ -126,6 +126,7 @@ registerStep('assembleSettlement', {
     name: settlementName,
     tier,
     population,
+    households,
     institutions,
     structuralViolations: structural?.violations || [],
     structuralSuggestions: structural?.suggestions || [],

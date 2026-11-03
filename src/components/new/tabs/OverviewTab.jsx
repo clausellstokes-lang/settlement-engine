@@ -289,6 +289,9 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               separator inside one unbreakable span, so the row wraps BETWEEN facts and never
               leaves a dangling dot at the end of a line or a fact split across two. */}
           <span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{formatCount(r.population)} pop.</span>
+          {/* X-46 (ODQ §934.104): households are counted on the record beside the residents; a
+              record saved before the count existed prints nothing here rather than a guess. */}
+          {Number.isFinite(r.households)&&<span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{formatCount(r.households)} {r.households===1?'household':'households'}</span>}
           {r.config?.tradeRouteAccess&&<span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,textTransform:'capitalize',whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{r.config.tradeRouteAccess.replace(/_/g,' ')}</span>}
           {hist.age&&<span data-testid="overview-identity-fact" style={{fontSize:FS.sm,color:swatch.inkMag3,whiteSpace:'nowrap'}}><span style={{color:MUTED}}>· </span>{hist.age} years old</span>}
         </div>
