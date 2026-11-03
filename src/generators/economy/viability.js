@@ -2,7 +2,7 @@
  * economy/viability.js — resource-chain, water, and structural/priority viability checks, plus the viability assembler and its summary + severity sort.
  */
 
-import { SEVERITY, TIER_ORDER } from '../../data/constants.js';
+import { SEVERITY, TIER_ORDER, popToTier, tierAtLeast } from '../../data/constants.js';
 import { institutionalCatalog } from '../../data/institutionalCatalog.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { INDUSTRY_WATER_NEEDS } from '../../data/goods/chains.js';
@@ -244,8 +244,75 @@ const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
 };
 
 
+/**
+ * The catalogue's own tags for every institution name it knows, across all tiers (a name
+ * keeps its tags at every rung it appears on). Read by `hasMarketInstitution`.
+ * @type {ReadonlyMap<string, ReadonlyArray<string>>}
+ */
+const CATALOGUE_TAGS_BY_NAME = (() => {
+  /** @type {Map<string, string[]>} */
+  const byName = new Map();
+  const tiers = /** @type {Record<string, Record<string, Record<string, {tags?: unknown}>>>} */ (
+    /** @type {unknown} */ (institutionalCatalog));
+  for (const shelves of Object.values(tiers)) {
+    for (const rows of Object.values(shelves || {})) {
+      for (const [name, row] of Object.entries(rows || {})) {
+        const tags = Array.isArray(row?.tags) ? row.tags.filter((t) => typeof t === 'string') : [];
+        const key = name.toLowerCase();
+        byName.set(key, [...new Set([...(byName.get(key) || []), ...tags])]);
+      }
+    }
+  }
+  return byName;
+})();
+
+/**
+ * IS THERE A REAL MARKET HERE? (SIZE lane, 2026-11-03, root-cause failure 8, ruling 3.)
+ *
+ * A market is an institution the catalogue tags 'market' (a periodic, weekly or fish market,
+ * a market square, a fair, an auction house) or a trading house it tags both 'guild' and
+ * 'trade' (merchant guilds, carriers, a caravaneer's post). NEVER "any Economy-shelf
+ * building": every thorp and hamlet must have "Subsistence farming", which is filed on that
+ * shelf, and it is not commerce. An institution that carries its own `tags` (authored
+ * content) is read by them; otherwise its native name is looked up in the catalogue.
+ *
+ * The roster's guild seat (`generators/power/rulingStructure.js :: generatePowerStructure`)
+ * is the consumer this was written for; that call site is engine-side, not this lane's.
+ *
+ * @param {ReadonlyArray<unknown> | null | undefined} institutions
+ * @returns {boolean}
+ */
+export function hasMarketInstitution(institutions) {
+  return (Array.isArray(institutions) ? institutions : []).some((inst) => {
+    if (!inst || typeof inst !== 'object') return false;
+    const own = /** @type {{tags?: unknown}} */ (inst).tags;
+    const tags = Array.isArray(own)
+      ? own
+      : (CATALOGUE_TAGS_BY_NAME.get(nativeSemanticName(/** @type {any} */ (inst)).toLowerCase()) || []);
+    return tags.includes('market') || (tags.includes('guild') && tags.includes('trade'));
+  });
+}
+
+/**
+ * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",
+ * "insufficient craft industries") used to read a fixed `population > 5000`, which is today's
+ * town/city band edge spelled as a literal. They read the TIER now, so when the scale program
+ * moves the bands the cuts move with them. A place with no known tier falls back to its
+ * population's tier (`popToTier`), and a place with neither is not city-scale. At today's
+ * bands the two readings agree everywhere (tests/generators/smallPlaceMarket.test.js).
+ * @param {unknown} tier
+ * @param {unknown} population
+ * @returns {boolean}
+ */
+export function isCityScale(tier, population) {
+  const rung = typeof tier === 'string' && TIER_ORDER.includes(tier)
+    ? tier
+    : (typeof population === 'number' && Number.isFinite(population) ? popToTier(population) : null);
+  return rung !== null && tierAtLeast(rung, 'city');
+}
+
 // generatePowerDynamics
-const generatePowerDynamics = (population, institutions, economicState, config = {}) => {
+const generatePowerDynamics = (population, institutions, economicState, config = {}, sizeTier = null) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
@@ -256,7 +323,8 @@ const generatePowerDynamics = (population, institutions, economicState, config =
 
   // City+ without markets
   const hasMarket = hasInst('market', 'merchant', 'district');
-  if (population > 5000 && !hasMarket) {
+  const cityScale = isCityScale(sizeTier, population);
+  if (cityScale && !hasMarket) {
     warnings.push({
       severity: SEVERITY.CRITICAL,
       category: 'Economic Structure',
@@ -271,7 +339,7 @@ const generatePowerDynamics = (population, institutions, economicState, config =
   const craftCount = instNames.filter(
     (n) => n.includes('guild') || n.includes('craft') || n.includes('workshop')
   ).length;
-  if (population > 5000 && craftCount < 2) {
+  if (cityScale && craftCount < 2) {
     const water = evaluateWaterDependency(config, institutions);
     if (water.strength === 'strong') {
       suggestions.push({
@@ -531,7 +599,8 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   plotHooks.push(...stabilityAnalysis.plotHooks);
 
   // Power dynamics checks
-  const powerAnalysis = generatePowerDynamics(population, insts, economicState, cfg);
+  // The settlement's OWN tier for the city-scale cuts — never the 'village' default above.
+  const powerAnalysis = generatePowerDynamics(population, insts, economicState, cfg, settlement.tier || config?.tier || null);
   issues.push(...powerAnalysis.issues);
   warnings.push(...powerAnalysis.warnings);
   suggestions.push(...(powerAnalysis.suggestions || []));
