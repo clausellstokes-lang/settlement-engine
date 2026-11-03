@@ -92,6 +92,13 @@ export const EDITABLE_FIELDS = Object.freeze({
     'description',
     'stakes',
   ]),
+  // The crisis record's cast (docs/DESIGN_CRISIS_TAB.md, the owner 2026-11-03: "Do it"): the DM's
+  // roles, spelled as one line (domain/crisis/crisisCast.js :: formatCastRoles), riding the stress
+  // entry beside the engine's `cast`. Served by the Crisis tab alone, never by the prose queue
+  // (tests/store/editProseQueueSpine.test.js).
+  crisis: Object.freeze([
+    'castRoles',
+  ]),
   historicalEvent: Object.freeze([
     'description',
     'summary',
@@ -348,7 +355,7 @@ function readNestedArray(settlement, segments) {
  *   { kind: 'faction', entityIndex: 1, entity, path: 'desc', record }
  *
  * `kind` is the singular entity type ('npc' / 'faction' / 'institution'
- * / 'historicalEvent' / 'currentTension' / 'hook' / 'plotHook' /
+ * / 'historicalEvent' / 'currentTension' / 'hook' / 'plotHook' / 'crisis' (a stress entry) /
  * 'condition' / 'supplyChain' / 'settlement').
  * @param {EditableEntity | null | undefined} settlement
  * @returns {Array<{ kind: string, entityIndex: number, entity: EditableEntity, path: string, record: EditRecord | undefined }>}
@@ -382,6 +389,19 @@ export function walkUserEdits(settlement) {
     historicalEvents: 'historicalEvent',
     currentTensions: 'currentTension',
   };
+
+  // The crisis records: the stress container's entries (an array, or a bare object for one
+  // crisis), each read by its own type as the crisis id. The `stressors` alias is the same
+  // record under a second name and is not walked twice.
+  const stress = /** @type {unknown} */ (settlement.stress);
+  const crises = Array.isArray(stress) ? stress : (stress && typeof stress === 'object' ? [stress] : []);
+  crises.forEach((entity, idx) => {
+    if (!entity || typeof entity !== 'object') return;
+    const e = /** @type {EditableEntity} */ (entity);
+    for (const path of getEditedPaths(e)) {
+      out.push({ kind: 'crisis', entityIndex: idx, entity: e, path, record: (/** @type {Record<string, EditRecord>} */ (e._userEdits))[path] });
+    }
+  });
 
   for (const segments of ENTITY_ARRAY_PATHS) {
     const arr = readNestedArray(settlement, segments);

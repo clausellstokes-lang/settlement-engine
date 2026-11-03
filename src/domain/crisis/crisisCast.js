@@ -178,6 +178,7 @@ export const CAST_REASONS = Object.freeze({
   waverer: 'its faction could go either way',
   face: 'leads the occupying power',
   nextInLine: 'next in line, the first choice already holding a role that contradicts this one',
+  dm: "the DM's word",
 });
 
 /** The fixed absence vocabulary: why a role has no holder. */
@@ -927,4 +928,77 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
     });
   });
   return casts;
+}
+
+// ── The DM's word (EDITABLE_FIELDS.crisis) ────────────────────────────────────────────────
+
+/**
+ * The crisis entry's editable path. The DM's cast is spelled as ONE line of
+ * `role=kind:id` parts joined by `CAST_EDIT_SEPARATOR` (the X-45 idiom: a list spelled as one
+ * string, so every reader of an edit record still reads a string), and it lives beside the
+ * engine's `cast`, never over it, so "As the engine has it" reverts to the derived record.
+ */
+export const CAST_EDIT_PATH = 'castRoles';
+export const CAST_EDIT_SEPARATOR = ' · ';
+
+/**
+ * @param {Array<{ role: string, kind: string, id: string }>} rows
+ * @returns {string}
+ */
+export function formatCastRoles(rows) {
+  return rows.map((r) => `${r.role}=${r.kind}:${r.id}`).join(CAST_EDIT_SEPARATOR);
+}
+
+/**
+ * The DM's line read back: only roles of the vocabulary and kinds of the record survive.
+ * @param {unknown} value
+ * @returns {Array<{ role: CrisisRole, kind: 'npc' | 'faction' | 'institution', id: string }>}
+ */
+export function parseCastRoles(value) {
+  if (typeof value !== 'string' || !value.trim()) return [];
+  /** @type {Array<{ role: CrisisRole, kind: 'npc' | 'faction' | 'institution', id: string }>} */
+  const out = [];
+  for (const part of value.split(CAST_EDIT_SEPARATOR)) {
+    const m = /^([a-z]+)=(npc|faction|institution):(.+)$/.exec(part.trim());
+    if (!m || !CRISIS_ROLES.includes(/** @type {CrisisRole} */ (m[1]))) continue;
+    out.push({ role: /** @type {CrisisRole} */ (m[1]), kind: /** @type {'npc' | 'faction' | 'institution'} */ (m[2]), id: m[3] });
+  }
+  return out;
+}
+
+/**
+ * The cast as the page shows it: the DM's word where the DM spoke (each row resolved against
+ * the roster, the faction set and the houses; a row whose holder is gone is dropped, never
+ * shown nameless), else the engine's record.
+ * @param {CastSettlement} settlement
+ * @param {{ cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> } | null | undefined} entry
+ * @returns {{ cast: CrisisCast | null, edited: boolean }}
+ */
+export function effectiveCastOf(settlement, entry) {
+  const engine = entry?.cast || null;
+  const record = entry?._userEdits?.[CAST_EDIT_PATH];
+  if (!record) return { cast: engine, edited: false };
+  const npcs = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
+  const factions = factionsOf(settlement || {});
+  const houses = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
+  /** @type {CastRow[]} */
+  const roles = [];
+  for (const r of parseCastRoles(record.value)) {
+    /** @type {string} */
+    let name;
+    let temporary = false;
+    if (r.kind === 'npc') {
+      const n = npcs.find((x) => !!x && (str(x.id) || str(x.name)) === r.id);
+      name = n ? str(n.name) : '';
+      temporary = !!n?.temporary;
+    } else if (r.kind === 'faction') {
+      name = factions.some((f) => factionName(f) === r.id) ? r.id : '';
+    } else {
+      name = houses.some((h) => str(h?.name) === r.id) ? r.id : '';
+    }
+    if (name) roles.push({ role: r.role, kind: r.kind, id: r.id, name, reason: CAST_REASONS.dm, temporary });
+  }
+  /** @type {CrisisCast} */
+  const base = engine || { nature: natureOf(''), rank: 0, roles: [], absent: [], stakes: [], levers: [], ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] };
+  return { cast: { ...base, roles, absent: [] }, edited: true };
 }
