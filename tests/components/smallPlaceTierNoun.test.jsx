@@ -13,10 +13,12 @@
  * ⛔ THE RENDER, NOT A GREP: a screen that does not pass the noun is invisible to a source
  * search for the call; it is visible on the page.
  *
- * WHAT THIS DOES NOT YET HOLD: story text written into the record AT GENERATION (history
- * events, migration narration, plot hooks) is a separate cause with its own signed shift. A
- * finding whose words stand verbatim in the stored record is partitioned out here and counted
- * by the second arm, which names that residual rather than hiding it.
+ * STORY TEXT WRITTEN AT GENERATION (history events, their effects and hooks, the founding,
+ * the migration pressure line) speaks the same noun since SIZE ruling 2. ONE residual is named
+ * rather than hidden: the arrival vignettes (`ARRIVAL_SCENES` / `STRESS_DESCS`) reach the page
+ * through `generators/narrative/arrivalScene.js`, which holds only the name and is not this
+ * lane's file — a finding inside one of those vignettes is the REQUEST's, and is excluded here
+ * BY MATCHING THE VIGNETTE ITSELF, never by tab or by a loose pattern.
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -40,6 +42,7 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { tierNounFindings } from '../../src/domain/coherence/tierNounFindings.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
+import { ARRIVAL_SCENES, STRESS_DESCS } from '../../src/data/narrativeData.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
@@ -49,6 +52,7 @@ import { DailyLifeTab } from '../../src/components/new/tabs/DailyLifeTab.jsx';
 import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
+import PlotHooksTab from '../../src/components/new/tabs/PlotHooksTab.jsx';
 
 const TIERS = ['thorp', 'hamlet', 'village'];
 const PER_TIER = 20;
@@ -62,6 +66,7 @@ const TABS = [
   ['DailyLife', (s) => <DailyLifeTab settlement={s} />],
   ['Defense', (s) => <DefenseTab settlement={s} />],
   ['Power', (s) => <PowerTab powerStructure={s.powerStructure} settlement={s} />],
+  ['PlotHooks', (s) => <PlotHooksTab settlement={s} />],
 ];
 const HEADER = /The roads into this \p{L}+ are busy and the \p{L}+ is poor/u;
 
@@ -73,7 +78,7 @@ function expandAll(container) {
   }
 }
 
-/** @type {Array<{s: object, record: string, pages: Record<string, string>}>} */
+/** @type {Array<{s: object, pages: Record<string, string>}>} */
 const PLACES = [];
 beforeAll(async () => {
   await loadGenerationLawPayloads();
@@ -92,16 +97,32 @@ beforeAll(async () => {
         pages[tab] = container.textContent || '';
         cleanup();
       }
-      PLACES.push({ s, record: JSON.stringify(s), pages });
+      PLACES.push({ s, pages });
     }
   }
 }, 600_000);
 afterEach(cleanup);
 
-/** Is the finding's own wording stored in the record (written at generation)? */
-function storedAtGeneration(record, text, index) {
-  const around = text.slice(Math.max(0, index - 18), index + 12);
-  return record.includes(around);
+/** Every arrival vignette as it reads for this settlement's name (the REQUEST's residual). */
+function vignettesFor(name) {
+  const out = [];
+  const walk = (node) => {
+    if (typeof node === 'function') { try { walk(node(name)); } catch { /* a vignette that needs more than the name */ } }
+    else if (typeof node === 'string') out.push(node);
+    else if (Array.isArray(node)) node.forEach(walk);
+    else if (node && typeof node === 'object') Object.values(node).forEach(walk);
+  };
+  walk(ARRIVAL_SCENES);
+  walk(STRESS_DESCS);
+  return out;
+}
+
+/** Does the finding sit inside an arrival vignette drawn by arrivalScene.js? */
+function insideVignette(vignettes, text, index) {
+  return vignettes.some((line) => {
+    const at = text.indexOf(line);
+    return at !== -1 && at <= index && index < at + line.length;
+  });
 }
 
 describe('the screen calls a small place by its own noun', () => {
@@ -113,10 +134,11 @@ describe('the screen calls a small place by its own noun', () => {
 
   test('no rendered tab calls a thorp, hamlet or village a town (outside a kept comparison)', () => {
     const offenders = [];
-    for (const { s, record, pages } of PLACES) {
+    for (const { s, pages } of PLACES) {
+      const vignettes = vignettesFor(s.name);
       for (const [tab, text] of Object.entries(pages)) {
         for (const f of tierNounFindings(s, text)) {
-          if (!storedAtGeneration(record, text, f.index)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
+          if (!insideVignette(vignettes, text, f.index)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
         }
       }
     }

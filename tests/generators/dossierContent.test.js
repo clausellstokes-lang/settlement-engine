@@ -21,6 +21,8 @@ import { pickVariant } from '../../src/kernel/proseHash.js';
 import { PRESSURE_SENTENCES } from '../../src/generators/narrativeText.js';
 import { generatePressureSentence } from '../../src/generators/narrativeGenerator.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { speakTierNoun } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { setActiveRng, clearActiveRng } from '../../src/kernel/rngContext.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
@@ -264,7 +266,11 @@ describe('HISTORY_DESC_VARIANTS — Charge 1: banked history-event descriptions'
         // anchored: the two assertions above pin a non-empty event roster and non-empty description prose, so the residue scan always reads real text.
         expect(String(ev.description), `${ev.templateType} residue`).not.toMatch(/\{[a-z_]+\}/);
         if (tokenFree.has(ev.templateType)) {
-          const pool = [CANON[ev.templateType], ...HISTORY_DESC_VARIANTS[ev.templateType]];
+          // SIZE ruling 2 (ODQ §934.104): the stored text speaks the place's own tier noun, so the pool is read as
+          // this settlement would speak it (identity for a town).
+          const noun = tierNounFor(s.tier);
+          const pool = [CANON[ev.templateType], ...HISTORY_DESC_VARIANTS[ev.templateType]]
+            .map((line) => speakTierNoun(line, noun));
           expect(pool, `${ev.templateType} desc in pool`).toContain(ev.description);
         }
       }
