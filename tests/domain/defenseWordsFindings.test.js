@@ -6,8 +6,15 @@
  * seeds `defense-<tier>-<i>`. The text read is what the Defense tab renders from the writers
  * this lane owns: the five threat rows and their upkeep notes, the supporting-capability
  * rows the tab keeps, and every desk sentence the tab draws at its mounts.
+ *
+ * ⛔ The owner's word (2026-11-03, verbatim): "Do add storehouse months the economy tab." The
+ * chair's ruling: the Defense tab prints NO stored food; its granary/stores row leaves the tab
+ * entirely and the Economy tab prints the months once. `defenseFactsOf` keeps
+ * `storedFoodMonths` for the certification check only.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
@@ -23,8 +30,12 @@ import {
 import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { deriveCriminalStructure } from '../../src/domain/display/defenseDisplay.js';
+import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 
 const SMALL = ['thorp', 'hamlet', 'village'];
+
+/** Any sentence about stored food or a granary: the Economy tab's fact, never the Defense tab's. */
+const STORED_FOOD_RE = /\bgranar(?:y|ies)\b|\bfood (?:reserves|buffer|stored)\b|\b(?:household|common) stores\b|\bstored food\b|\bmonths? (?:of food|in store)\b|\bweeks of food\b|\bput by\b|\bLogistics & Supply\b|\bNo reserves\b/i;
 
 /** @param {string} tier @param {number} i */
 function born(tier, i) {
@@ -161,15 +172,15 @@ describe('the Defense tab says only what the place has', () => {
     expect(disaster).not.toMatch(/Hospital/);
   });
 
-  it('the stored-food row prints the engine\'s months, once', () => {
+  it('the Defense tab\'s rendered text carries no stored-food or granary sentence (the owner\'s word: stored food is the Economy tab\'s)', () => {
+    // The tab's own markup (React SSR; collapsed rows are not in it) PLUS every row the tab
+    // renders on expansion, drawn the way the tab draws it.
     for (const { seed, settlement } of CORPUS) {
-      const months = settlement.economicState.foodSecurity.storageMonths;
-      const text = ownedDefenseText(settlement).join('\n');
-      const logistics = deriveSupportingCapabilities(settlement).find((c) => c.label === 'Logistics & Supply');
-      expect(`${logistics.status}. ${logistics.note}`, seed).toMatch(/\bmonths?\b|\bweeks?\b/);
-      expect((text.match(/\bmonths? of food\b|\bweeks of food\b/g) || []).length, seed).toBe(1);
-      expect(text, seed).not.toMatch(/\bdays of (?:food|reserves)\b/);
-      expect(months, seed).toBeGreaterThan(0);
+      const markup = renderToStaticMarkup(React.createElement(DefenseTab, { settlement }))
+        .replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&#x27;/g, "'").replace(/&amp;/g, '&');
+      const text = [markup, ...ownedDefenseText(settlement)].join('\n');
+      expect(text, seed).toMatch(/\bDisasters & Famine\b/);
+      expect(text, seed).not.toMatch(STORED_FOOD_RE);
     }
   });
 

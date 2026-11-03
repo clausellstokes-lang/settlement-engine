@@ -553,8 +553,14 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF2_POOLS).length);
+    // ⛔ THE FIVE DISASTERS & FAMINE POOLS ARE SILENT BY THE OWNER'S WORD (2026-11-03,
+    // verbatim: "Do add storehouse months the economy tab."): every one of them speaks of the
+    // granary or the stores, and the Defense tab prints no stored food (lane DEFENSE). The
+    // other twenty-one still all speak; the silent five are named, not merely counted.
+    const silent = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('Disasters & Famine: '));
+    expect(silent).toHaveLength(5);
+    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual(silent);
+    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length);
     expect(Object.keys(DEF2_POOLS)).toHaveLength(26);
   });
 
@@ -1421,6 +1427,10 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
     // describing another. The producer's own asymmetry (institution `hasPort` on the granary
     // side, config `=== 'port'` on the other) is what makes this worth executing rather
     // than reasoning about.
+    // ⛔ THE LOGISTICS HALF OF THE MIRROR IS RETIRED WITH ITS ROW (the owner's word,
+    // 2026-11-03: "Do add storehouse months the economy tab."): the producer prints no
+    // Logistics & Supply row on a Defense surface and the desk draws no logistics lens, so
+    // both halves are pinned ABSENT here, and the naval half still mirrors.
     const seenLogistics = new Set();
     for (const { label, settlement } of WORLDS) {
       const caps = deriveSupportingCapabilities(settlement);
@@ -1429,17 +1439,9 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
         inst.hasGranary === true, inst.hasPort === true, settlement.config?.tradeRouteAccess,
       );
       seenLogistics.add(key);
-      const note = caps.find((c) => c.label === 'Logistics & Supply')?.note || '';
-      // The corpus suffix and the producer's note are two spellings of one branch; the
-      // branch identity is what is asserted, via the producer's own status + note pairing.
-      const granaryNote = /^Granary/.test(note);
-      expect(granaryNote, `${label}: producer note ${JSON.stringify(note)} vs key ${key}`)
-        .toBe(key.includes(': Granary'));
-      if (key === 'Logistics & Supply: Granary + port') expect(note).toContain('sea access');
-      if (key === 'Logistics & Supply: Granary in isolation') expect(note).toContain('isolation');
-      if (key === 'Logistics & Supply: Granary with road supply') expect(note).toContain('road supply');
-      if (key === 'Logistics & Supply: No reserves, port open') expect(note).toContain('sea supply');
-      if (key === 'Logistics & Supply: No reserves, landlocked') expect(note).toContain('survival crisis');
+      expect(caps.map((c) => c.label), `${label}: no Logistics & Supply row`).not.toContain('Logistics & Supply');
+      expect(caps.map((c) => c.label), `${label}: the Medical Readiness row still renders`).toContain('Medical Readiness');
+      expect(defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' }).logistics, `${label}: no logistics lens`).toBeNull();
       // The naval row exists exactly when the desk has a naval key, both ways.
       const navalRow = caps.find((c) => c.label === 'Naval Defense') || null;
       const navalKey = navalDefensePoolKey(inst.hasNavy === true, inst.hasPort === true, false);
@@ -1454,12 +1456,8 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
   it('the desk RENDERS on every generated world, and the sentence carries no slot marker', () => {
     for (const { label, settlement } of WORLDS) {
       const drawn = defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' });
-      expect(drawn.logistics, `${label} drew no logistics rung`).toBeTruthy();
-      expect(typeof drawn.logistics.sentence, `${label} logistics sentence`).toBe('string');
-      expect(drawn.logistics.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
-      // anchored: the length arm on the line above proves the subject is a real rendered
-      expect(drawn.logistics.sentence).not.toContain('{'); // sentence and not an empty string
-      expect(drawn.logistics.provenance.blockId).toBe('DS-DEF-6');
+      // The logistics lens is silent by the owner's word (2026-11-03); see the mirror above.
+      expect(drawn.logistics, `${label} drew a logistics rung`).toBeNull();
       if (drawn.naval) {
         expect(drawn.naval.sentence.length, `${label} drew an empty naval line`).toBeGreaterThan(40);
         // anchored: the length arm on the line above proves the subject is a real sentence

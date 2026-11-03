@@ -616,9 +616,12 @@ export function defenseThreatProse(settlement, options = {}) {
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
     )),
     economic: rung(economicRowPoolKey(dp.scores?.economic)),
-    disaster: rung(disasterRowPoolKey(
-      civicFlag(compound.hasGranary), civicFlag(compound.hasHospital), civicFlag(compound.hasChurch),
-    )),
+    // ⛔ SILENT BY THE OWNER'S WORD (2026-11-03, verbatim: "Do add storehouse months the economy
+    // tab."), the chair's ruling amending lane DEFENSE's brief: the Defense tab prints NO
+    // stored-food or granary sentence; stored food is the Economy tab's, once, in months. Every
+    // variant of this row's five pools speaks of the granary or the stores, so the lens is not
+    // drawn on any Defense surface. The key function and its pools stand, unread here.
+    disaster: null,
   });
 }
 
@@ -1522,10 +1525,10 @@ export function defenseSupportingProse(settlement, options = {}) {
     : null);
 
   return Object.freeze({
-    logistics: rung(supplyLogisticsPoolKey(
-      civicFlag(compound.hasGranary), civicFlag(compound.hasPort),
-      settlement?.config?.tradeRouteAccess,
-    )),
+    // ⛔ SILENT BY THE OWNER'S WORD (2026-11-03): stored food leaves the Defense tab entirely and
+    // is printed once, in months, on the Economy tab. The logistics lens IS the granary read, so
+    // it is not drawn here; `supplyLogisticsPoolKey` and its pools stand, unread by this desk.
+    logistics: null,
     naval: rung(navalDefensePoolKey(
       civicFlag(compound.hasNavy), civicFlag(compound.hasPort),
       stockpile ? stockpile.blockaded === true : false,

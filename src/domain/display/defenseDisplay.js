@@ -211,7 +211,6 @@ export function deriveSupportingCapabilities(settlement) {
   const scores = d.scores || {};
   const inst = d.institutions || {};
   const f = r.economicState?.compound?.inst || {};
-  const tradeAccess = r.config?.tradeRouteAccess || 'road';
   const magicDef = inst.magicDef || [];
   const econScore = Math.round(scores.economic || 0);
   // ⛔ T2-24 (UX consolidation 2026-10-30, red-first): IN A WORLD WHERE MAGIC DOES NOT
@@ -221,12 +220,9 @@ export function deriveSupportingCapabilities(settlement) {
   // magic does not function. The dial is asked of the estate's one accessor (wrapped as
   // `{ settlement }`, the call shape every caller uses; see defenseStateProse.js).
   const arcane = !!f.hasMagicInst && magicWorksAt({ settlement: r }) !== false;
-  // The one set of defence facts (lane DEFENSE): a hospital only where one stands, a healer
-  // named as a healer, and the engine's own months of stored food printed on this tab once,
-  // here, on the Logistics & Supply row.
+  // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
+  // healer named as a healer.
   const facts = defenseFactsOf(r);
-  const months = facts.storedFoodMonths;
-  const stored = months !== null && months > 0 ? storedFoodPhrase(months) : null;
 
   const caps = [
     {
@@ -318,18 +314,9 @@ export function deriveSupportingCapabilities(settlement) {
         : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
           : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
     },
-    {
-      label: 'Logistics & Supply',
-      status: f.hasGranary ? 'Granary present' : stored ? 'Household stores' : 'No reserves',
-      color: f.hasGranary ? '#1a5a28' : stored ? '#7a5010' : '#8b1a1a', score: null,
-      note: f.hasGranary
-        ? (f.hasPort ? 'Granary + sea access. Historically the hardest siege posture to break.' : tradeAccess === 'isolated' ? 'Granary in isolation. Endurance depends entirely on stored reserves.' : 'Granary with road supply. Cut the roads, cut the supply.')
-          + (stored ? ` ${stored} of food in store.` : '')
-        : stored
-          ? `${stored} of food in household and common stores, no granary. `
-            + (tradeAccess === 'port' ? 'Beyond that, sea supply continues while the port is open.' : 'Once those are eaten, any supply disruption becomes a survival crisis.')
-          : (tradeAccess === 'port' ? 'No reserves, but sea supply continues while port is open.' : 'No food buffer. Any supply disruption becomes a survival crisis within days.'),
-    },
+    // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
+    // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
+    // food is printed once, in months, on the Economy tab, and no Defense surface prints it.
   ];
   if (f.hasNavy || f.hasPort) {
     // experience-product-fit-5: the STANDING naval reality, not just the static
@@ -356,16 +343,6 @@ export function deriveSupportingCapabilities(settlement) {
     });
   }
   return caps;
-}
-
-/**
- * The engine's months of stored food in plain words: weeks under two months, else months.
- * @param {number} months `economicState.foodSecurity.storageMonths`
- * @returns {string} e.g. "About 8 weeks", "About 4 months"
- */
-export function storedFoodPhrase(months) {
-  if (months < 2) return `About ${Math.max(1, Math.round(months * 30 / 7))} weeks`;
-  return `About ${Math.round(months)} months`;
 }
 
 /**

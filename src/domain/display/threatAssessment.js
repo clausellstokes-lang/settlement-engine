@@ -9,10 +9,10 @@
  * plain row objects; it draws no randomness and touches no clock.
  *
  * ⭐ IT ASKS THE ONE SET OF DEFENCE FACTS BEFORE IT SAYS ANYTHING (lane DEFENSE,
- * 2026-11-03). What stands, what tends the sick and how much food is stored come from
- * `domain/defense/defenseFacts.js :: defenseFactsOf` — the live roster and the engine's
- * own months — so a row never speaks of garrison pay where no garrison stands, of a
- * hospital where there is one healer, or of no food where the record holds months of it.
+ * 2026-11-03). What stands and what tends the sick come from
+ * `domain/defense/defenseFacts.js :: defenseFactsOf` — the live roster — so a row never
+ * speaks of garrison pay where no garrison stands, or of a hospital where there is one
+ * healer. It prints no stored food: that is the Economy tab's (the owner's word, 2026-11-03).
  * Its only import is that domain leaf, so the no-generator-edge reason below still holds.
  *
  * It lives here (dependency-free leaf) rather than in generators/defenseGenerator
@@ -203,21 +203,16 @@ export function buildThreatAssessment(r) {
     assess: econA,
   });
 
-  // The stored months are printed once, on the Logistics & Supply row; this row says what
-  // kind of store it is and never that there is none while the engine holds some.
-  const months = facts.storedFoodMonths;
-  const disA = (f.hasGranary
-    ? 'Granary provides food buffer. The community can absorb a bad harvest without immediate hardship.'
-    : months !== null && months > 0
-      ? 'No granary. Household and common stores carry the community a short way into a bad harvest; a crop failure becomes hardship within the season.'
-      : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
-    + (facts.hasHospital
-      ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
-      : facts.hasHealer
-        ? ' ' + healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
-        : f.hasChurch
-          ? ' Clergy provide basic wound care: better than nothing, worse than a hospital.'
-          : ' No medical infrastructure. Plague spreads until it burns out.');
+  // ⛔ NO STORED-FOOD OR GRANARY SENTENCE ON THE DEFENSE TAB (the owner's word, 2026-11-03:
+  // "Do add storehouse months the economy tab."). Stored food is the Economy tab's, printed once
+  // in months; this row speaks only of who tends the sick.
+  const disA = facts.hasHospital
+    ? 'Hospital infrastructure enables disease containment and systematic quarantine.'
+    : facts.hasHealer
+      ? healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
+      : f.hasChurch
+        ? 'Clergy provide basic wound care: better than nothing, worse than a hospital.'
+        : 'No medical infrastructure. Plague spreads until it burns out.';
   result.push({
     label: 'Disasters & Famine',
     color: '#1a4a5a',
