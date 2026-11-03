@@ -73,6 +73,18 @@ describe('hasMarketInstitution — the catalogue decides, never the shelf', () =
     expect(FRESH.filter((s) => !hasMarketInstitution(s.institutions || [])).length,
       'most fresh thorps and hamlets have no market at all').toBeGreaterThan(6);
   });
+
+  it('SIZE-3: a thorp or hamlet seats its merchant guild only over a real market, never through farming', () => {
+    // rulingStructure.js :: generatePowerStructure asks hasMarketInstitution, the catalogue's question, where it used
+    // to ask the shelf (a name holding 'market' or any Economy row, which "Subsistence farming" always passed).
+    const marketless = FRESH.filter((s) => !hasMarketInstitution(s.institutions || []));
+    expect(marketless.length, 'anti-vacuity: market-less small places exist to be read').toBeGreaterThan(6);
+    const seated = marketless
+      .filter((s) => (s.powerStructure?.factions || [])
+        .some((f) => !f.isGoverning && String(f.faction || '').startsWith('Merchant Guilds')))
+      .map((s) => `${s.tier} ${s.name}`);
+    expect(seated, 'market-less thorps and hamlets that seat a merchant guild').toEqual([]);
+  });
 });
 
 describe('isCityScale — the city cuts read the tier', () => {
