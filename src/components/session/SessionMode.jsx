@@ -181,7 +181,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const dialogRef = useDialogFocusTrap(true, onClose);
   // THE PHONE PROSE FLOOR — this takeover covers the whole viewport, phone
   // included, so its READING text takes the floor: the Tonight sheet (its own
-  // leaf), the event tail, each NPC's tell / want / secret, and the
+  // leaf), the event tail, each NPC's temperament / want / secret, and the
   // hook bodies. Eyebrows, kind tags, band figures and PWR counts are glanced at.
   const mobile = useIsMobile();
 
@@ -374,7 +374,8 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: 8 }}>
                 {npcs.map((n, i) => {
                   const p = n?.personality;
-                  const tell = typeof p === 'object' && p ? (p.tell || p.dominant) : (typeof p === 'string' ? p : null);
+                  // X-48: the temperament, never the nervous habit (`tell`), which prints nowhere.
+                  const temperament = typeof p === 'object' && p ? p.dominant : (typeof p === 'string' ? p : null);
                   const goal = typeof n?.goal === 'object' && n.goal ? (n.goal.short || n.goal.long) : n?.goal;
                   const secret = n?.secret && typeof n.secret === 'object' ? n.secret.what : n?.secret;
                   return (
@@ -384,7 +385,7 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
                         <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: MUTED, flexShrink: 0 }}>PWR {n?.power || 0}</span>
                       </div>
                       {(n?.role || n?.title) && <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, marginBottom: 3 }}>{n.role || n.title}</div>}
-                      {tell && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}>{tell}</div>}
+                      {temperament && <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45 }}>{temperament}</div>}
                       {/* "Wants" reads the same way here as on the dossier NPC card and
                           as the SECRET label directly below: a bold inline label, no
                           colon, the want as ordinary body copy after it. */}

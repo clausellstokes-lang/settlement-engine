@@ -67,8 +67,18 @@ describe('SessionMode — run-of-play composition', () => {
     );
     expect(container.textContent).toContain('The granaries are watched day and night.');
     expect(container.textContent).toContain('Serah Voss');
-    expect(container.textContent).toContain('taps her scabbard when lying');
+    expect(container.textContent).toContain('iron-spined');
     expect(container.textContent).toContain('A midnight muster nobody ordered');
+  });
+
+  it('X-48: no NPC nervous habit prints on the session screen; the temperament stands in its place', () => {
+    const { container } = render(
+      <SessionMode settlement={settlementFixture()} saveId="11" onClose={() => {}} />,
+    );
+    const text = container.textContent;
+    // the card rendered: the name and the temperament are on the page
+    expect(text.includes('Serah Voss') && text.includes('iron-spined')).toBe(true);
+    expect(text.includes('taps her scabbard when lying'), 'the tell printed').toBe(false);
   });
 
   it('shows the four-dimension state bands when the store carries systemState', () => {
