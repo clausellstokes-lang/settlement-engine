@@ -138,13 +138,14 @@ describe('the NPC card', () => {
   });
 });
 
-describe('the table-night cards', () => {
+describe('the Tonight sheet cards (X-51)', () => {
   const SETTLEMENT = {
     name: 'Hollowmere',
     tier: 'village',
     population: 320,
     pressureSentence: 'The reeve runs a quiet skim and the harvest is failing.',
     npcs: [{ name: 'Maren', role: 'Reeve', power: 9, secret: { what: 'skims the tithe' } }],
+    conflicts: [{ parties: ['The Salt Debt'], intensity: 'high', plotHooks: ['A caravan master calls in a favor.'] }],
   };
 
   async function renderTableView() {
@@ -153,16 +154,16 @@ describe('the table-night cards', () => {
     return render(<TableView settlement={SETTLEMENT} onClose={() => {}} />);
   }
 
-  it('reads a card body at the floor on a phone and at its own step on a desktop', async () => {
+  it('reads a hook body at the floor on a phone and at its own step on a desktop', async () => {
     installMatchMedia(true);
     const phone = await renderTableView();
-    expect(px(screen.getByText(/skims the tithe/).closest('div')))
+    expect(px(screen.getByText(/calls in a favor/).closest('div')))
       .toBeGreaterThanOrEqual(PHONE_PROSE_FLOOR);
     phone.unmount();
 
     installMatchMedia(false);
     await renderTableView();
-    expect(px(screen.getByText(/skims the tithe/).closest('div'))).toBe(12);
+    expect(px(screen.getByText(/calls in a favor/).closest('div'))).toBe(12);
   });
 });
 

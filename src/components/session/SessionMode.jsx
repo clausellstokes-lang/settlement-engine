@@ -8,8 +8,9 @@
  * rail, big serif type, and nothing else.
  *
  * COMPOSITION, NEVER FORKS — every panel renders an existing read-model:
- *   • Tonight   — tonightAtTheTable() (the same pure composer TableView and
- *                 the magazine Summary use).
+ *   • Tonight   — THE ONE TONIGHT SHEET (X-51): components/TonightSheet.jsx over
+ *                 composeTonightSheet(), the same sheet the Table View renders.
+ *                 The NPC and hook panels below skip what the sheet printed.
  *   • State     — the store's hydrated systemState (four dims) + the eventLog
  *                 tail; both empty/absent on a draft settlement, and the
  *                 panels degrade to nothing.
@@ -19,8 +20,8 @@
  *                 the pantheon, never THEIRS' useSettlementLiveWorld).
  *   • Faith     — FaithSection AS-IS: the constitutional premium seam,
  *                 unchanged. Free/anon never see a latent deity name here.
- *   • NPCs      — settlement.npcs by power (the NotableNPCs ordering).
- *   • Hooks     — collectPlotHooks() (the canonical hook collector).
+ *   • NPCs      — settlement.npcs by power (the NotableNPCs ordering), less the sheet's people.
+ *   • Hooks     — collectPlotHooks() (the canonical hook collector), less the sheet's hooks.
  *
  * Mounting is the TableView doctrine: the caller (SettlementDetail) gates on
  * flag('sessionMode') and lazy-mounts this chunk only when opened — zero
@@ -35,10 +36,10 @@ import { isFaithEventEntry } from '../../domain/display/faithEventFilter.js';
 import { useDialogFocusTrap } from '../primitives/useDialogFocusTrap.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
-import { tonightAtTheTable, TABLE_KIND_LABEL } from '../../domain/summary/tonightAtTheTable.js';
-import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
+import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
+import TonightSheet from '../TonightSheet.jsx';
 import EconomyFreshnessNote from '../new/EconomyFreshnessNote.jsx';
-import { literaryTitle, tokenCase } from '../new/labelLadder.js';
+import { tokenCase } from '../new/labelLadder.js';
 import { collectPlotHooks, PLOT_HOOK_CATEGORIES } from '../../domain/dossier/plotHooks.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../domain/display/warStatus.js';
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
@@ -62,7 +63,10 @@ const RED = swatch['#A23434'];
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
-const KIND_ACCENT = { NPC: GREEN, HOOK: AMBER, TWIST: SLATE, RED };
+// The parchment palette for the one Tonight sheet.
+const DAY_PALETTE = Object.freeze({
+  ink: INK, body: BODY, faint: MUTED, rule: BORDER, card: swatch.white, alarm: RED, accent: AMBER,
+});
 
 const BAND_TONE = {
   Stable: GREEN, Strained: AMBER, Vulnerable: AMBER, Critical: RED,
@@ -176,8 +180,8 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // close — the shared primitive every modal here uses.
   const dialogRef = useDialogFocusTrap(true, onClose);
   // THE PHONE PROSE FLOOR — this takeover covers the whole viewport, phone
-  // included, so its READING text takes the floor: the defining truths, the
-  // table-night bodies, the event tail, each NPC's tell / want / secret, and the
+  // included, so its READING text takes the floor: the Tonight sheet (its own
+  // leaf), the event tail, each NPC's tell / want / secret, and the
   // hook bodies. Eyebrows, kind tags, band figures and PWR counts are glanced at.
   const mobile = useIsMobile();
 
@@ -192,14 +196,18 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   const elevated = useStore(s => (typeof s.isElevated === 'function' ? s.isElevated() : false));
   const isPremium = tier === 'premium' || elevated;
 
-  const guide = useMemo(
-    () => composeSettlementQuickGuide(settlement),
-    [settlement],
-  );
-  const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
-  const hooks = useMemo(() => collectPlotHooks(settlement || {}), [settlement]);
-  const npcs = useMemo(() => (settlement?.npcs || [])
-    .slice().sort((a, b) => (b?.power || 0) - (a?.power || 0)).slice(0, 8), [settlement]);
+  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
+  // ONE FACT, ONE PLACE ON THIS SCREEN: the panels below skip the people and hooks the
+  // Tonight sheet already printed.
+  const hooks = useMemo(() => {
+    const shown = new Set(sheet.hooks.map((h) => h.text.replace(/[.!?]$/, '')));
+    return collectPlotHooks(settlement || {}).filter((h) => !shown.has(String(h.text || '').replace(/[.!?]$/, '')));
+  }, [settlement, sheet]);
+  const npcs = useMemo(() => {
+    const shown = new Set(sheet.people.map((p) => p.name));
+    return (settlement?.npcs || []).filter((n) => !shown.has(n?.name))
+      .slice().sort((a, b) => (b?.power || 0) - (a?.power || 0)).slice(0, 8);
+  }, [settlement, sheet]);
   const war = useMemo(
     () => warModel({ saveId, settlement, campaigns, savedSettlements }),
     [saveId, settlement, campaigns, savedSettlements],
@@ -225,8 +233,8 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
   // Quick-nav targets are DOM ids (the overlay owns the document while open),
   // which keeps render free of ref reads.
   const nav = [
-    entries.length ? ["Tonight", "sf-session-tonight"] : null,
-    (dims.length || recent.length || guide.immediatePressure.text) ? ["State", "sf-session-state"] : null,
+    [TONIGHT_COPY.title, "sf-session-tonight"],
+    (dims.length || recent.length) ? ["State", "sf-session-state"] : null,
     war ? ["War", "sf-session-war"] : null,
     faithVisible ? ["Faith", "sf-session-faith"] : null,
     npcs.length ? ["NPCs", "sf-session-npcs"] : null,
@@ -300,88 +308,17 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
           display: 'flex', flexDirection: 'column', gap: 26,
           scrollPaddingTop: 12,
         }}>
-          {/* Shared first glance: identity + three canonical defining truths. */}
-          <section aria-label="Settlement quick guide">
-            <SectionTitle>Settlement quick guide</SectionTitle>
-            <div style={{
-              padding: '12px 16px', background: swatch.white,
-              border: `1px solid ${BORDER}`,
-            }}>
-              <div style={{
-                fontFamily: serif, fontSize: FS.lg,
-                color: INK_DEEP, lineHeight: 1.5,
-              }}>
-                {guide.identitySentence}
-              </div>
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-                gap: 10, marginTop: 10,
-              }}>
-                {guide.definingTruths.map((truth) => (
-                  <div key={truth.id} style={{
-                    paddingLeft: 9,
-                    borderLeft: `2px solid ${BORDER}`,
-                  }}>
-                    <div style={{ ...literaryTitle(FS.sm), color: INK }}>
-                      {tokenCase(truth.label)}
-                    </div>
-                    <div style={{
-                      marginTop: 2,
-                      fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.45,
-                    }}>
-                      {truth.text}
-                    </div>
-                  </div>
-                ))}
-              </div>
-              {/* ECONOMY FRESHNESS (Wave R-4) — JUDGMENT, vetoable: this surface
-                  IS wired rather than frozen-deferred. The register argument
-                  ("session play should stay in-fiction") does not separate it
-                  from TableView, which is equally a run-of-play takeover and is
-                  covered; and the audience of both is the DM, for whom a
-                  staleness caveat is accuracy, not narration. It renders the
-                  identical "How it lives" truth (composeMaterialTruth over the
-                  generation-time economicState), and sessionMode ships TRUE in
-                  flagRegistry, so the obligation is live. Conditional and inside
-                  the guide card, so an un-shifted session renders byte-identically
-                  and the distraction-free promise is kept in the normal case. */}
-              <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
-            </div>
-          </section>
-
-          {/* Pressure line — the one-sentence tension, front and center. */}
-          {guide.immediatePressure.text && (
-            <div style={{
-              padding: '12px 16px', background: swatch.white,
-              border: `1px solid ${BORDER}`, borderLeft: `3px solid ${GOLD_ACCENT}`,
-              fontFamily: serif, fontSize: FS.xl,
-              fontStyle: 'italic', color: INK_DEEP, lineHeight: 1.5,
-            }}>
-              {guide.immediatePressure.text}
-            </div>
-          )}
-
-          {entries.length > 0 && (
-            <section id="sf-session-tonight" aria-label="Tonight at the table">
-              <SectionTitle>Tonight at the table</SectionTitle>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {entries.map((row, i) => (
-                  <Card key={i} accent={KIND_ACCENT[row.kind] || GOLD_ACCENT}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', gap: 8, marginBottom: 3 }}>
-                      <span style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: INK, minWidth: 0 }}>{row.title}</span>
-                      {/* THE EYEBROW IDIOM (ODQ §934.22 item 4): the WORD is 'Hook', the CAPITALS are the
-                      * style's. This badge printed the raw model token with no transform under
-                      * it — literal caps in the string, which is the one thing rung 1 forbids,
-                      * and the reason the cheat sheet said 'Hook' where this said 'HOOK'. */}
-                    <span style={{ fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800, color: KIND_ACCENT[row.kind] || GOLD_ACCENT, letterSpacing: '0.08em', textTransform: 'uppercase', flexShrink: 0 }}>{TABLE_KIND_LABEL[row.kind] || row.kind}</span>
-                    </div>
-                    <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>{row.body}</div>
-                  </Card>
-                ))}
-              </div>
-            </section>
-          )}
+          {/* THE ONE TONIGHT SHEET (X-51): the crisis, the people to voice, the two facts the
+              players test first, and the hooks. */}
+          <div id="sf-session-tonight">
+            <TonightSheet sheet={sheet} palette={DAY_PALETTE} />
+            {/* ECONOMY FRESHNESS (Wave R-4) — JUDGMENT, vetoable: this surface IS wired rather
+                than frozen-deferred, as the Table View is. The sheet's food fact reads the
+                generation-time economicState.foodSecurity record, which is not re-derived when
+                an event lands; for the DM a staleness caveat is accuracy, not narration.
+                Conditional, so an un-shifted session renders byte-identically. */}
+            <EconomyFreshnessNote settlement={settlement} variant="tallies" margin="10px 0 0" />
+          </div>
 
           {(dims.length > 0 || recent.length > 0) && (
             <section id="sf-session-state" aria-label="Settlement state">

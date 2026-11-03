@@ -26,6 +26,7 @@ import { Cover } from './sections/Cover.jsx';
 import { TableOfContents } from './sections/TableOfContents.jsx';
 import { Overview } from './sections/Overview.jsx';
 import { TonightAtTheTable } from './sections/TonightAtTheTable.jsx';
+import { TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { NPCQuickRef } from './sections/NPCQuickRef.jsx';
 import { IdentityDailyLife } from './sections/IdentityDailyLife.jsx';
 import { PowerStructure } from './sections/PowerStructure.jsx';
@@ -145,7 +146,7 @@ export function SettlementPDF({
   // group-order move (BUILD-W2-BLOCKLAW) the eyebrows themselves run 01..20 in that order.
   const tocEntries = [
     inc('overview')            && { no: '01', title: 'Overview', note: useAi ? 'narrative + raw' : 'systems' },
-    inc('tonightAtTheTable')   && { no: '02', title: 'Tonight at the Table', note: 'quick prep' },
+    inc('tonightAtTheTable')   && { no: '02', title: TONIGHT_COPY.title, note: 'quick prep' },
     showState                  && { no: '03', title: 'Current State', note: stateCausalDetail ? 'state + substrate' : '4-dim snapshot' },
     inc('plotHooks')           && { no: '04', title: 'Plot Hooks & Quests' },
     inc('services')            && { no: '05', title: 'Services', note: 'what players can buy' },
