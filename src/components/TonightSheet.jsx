@@ -66,7 +66,7 @@ export default function TonightSheet({ sheet, palette }) {
               <div key={p.name} style={{ paddingLeft: 9, borderLeft: `2px solid ${palette.rule}` }}>
                 <div style={{ fontFamily: serif, fontWeight: 700, fontSize: FS.md, color: palette.ink }}>{p.name}</div>
                 <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: palette.faint }}>
-                  {[p.role, why[p.why]].filter(Boolean).join(' · ')}
+                  {[p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · ')}
                 </div>
                 {p.line && (
                   <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>
