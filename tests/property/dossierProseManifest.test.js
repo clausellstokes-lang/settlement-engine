@@ -151,8 +151,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // 70,776 -> 70,782 (398/392/384 unmoved) at FOOD-1 (2026-11-03, ODQ §934.104,
     // docs/shift-records/2026-11-03-food-1-one-food-record.json): prosperity, legitimacy and viability now read the
     // stored food record, so their rungs move in 222 rows (cells changed, 48 added, 42 removed: PROSPERITY breakdowns). Towns unmoved at 516/3/3/3.
+    // 70,782 -> 70,820 (398/392/384 unmoved) at FOOD-2 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-food-2-food-base-numbers.json): the food base numbers move the food, viability,
+    // legitimacy and defence rungs in 978 rows (5,116 cells changed; 64 added, DS-POW-1; 26 removed, DS-GEN-2 24 and
+    // DS-ECO-1 2). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 70_782, towns: 516 },
+      'golden-master-v3': { cells: 70_820, towns: 516 },
       'gm-seed-a': { cells: 398, towns: 3 },
       'gm-seed-b': { cells: 392, towns: 3 },
       'gm-seed-c': { cells: 384, towns: 3 },
