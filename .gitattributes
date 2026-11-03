@@ -28,3 +28,5 @@
 # pin's binary census carried 25 undeclared rows in its denominator. The declaration
 # is what tests/lint/controlBytes.test.js reads; detection is not a contract.
 *.glb   binary
+# Collapse the vendored edge modules in review; they are third-party bytes pinned by deno.lock.
+vendor/** linguist-vendored=true

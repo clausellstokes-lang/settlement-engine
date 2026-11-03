@@ -1,0 +1,3 @@
+/* esm.sh - get-proto@1.0.1/Reflect.getPrototypeOf */
+var u=Object.create;var s=Object.defineProperty;var d=Object.getOwnPropertyDescriptor;var m=Object.getOwnPropertyNames;var a=Object.getPrototypeOf,i=Object.prototype.hasOwnProperty;var n=(t,e)=>()=>(e||t((e={exports:{}}).exports,e),e.exports);var j=(t,e,f,r)=>{if(e&&typeof e=="object"||typeof e=="function")for(let o of m(e))!i.call(t,o)&&o!==f&&s(t,o,{get:()=>e[o],enumerable:!(r=d(e,o))||r.enumerable});return t};var x=(t,e,f)=>(f=t!=null?u(a(t)):{},j(e||!t||!t.__esModule?s(f,"default",{value:t,enumerable:!0}):f,t));var p=n((R,c)=>{"use strict";c.exports=typeof Reflect<"u"&&Reflect.getPrototypeOf||null});var l=x(p()),g=l.default??l;export{g as default};
+//# sourceMappingURL=Reflect.getPrototypeOf.mjs.map

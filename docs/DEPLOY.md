@@ -613,6 +613,34 @@ Legacy SKU keys (`credits_5`, `credits_15`, `credits_40`, etc.) are
 kept in the price map for refund/replay continuity — set them if you
 want old refund links to resolve, otherwise leave them unset.
 
+### Refreshing the vendored edge modules
+
+The edge functions' remote imports (`https://esm.sh/…`, `https://deno.land/std@…`) are
+**vendored**: `deno.json` carries `"vendor": true`, and the modules live under `vendor/`,
+committed whole. CI's `deno-tests` job and the local `check:edge-behavior` leg read them from
+there with the frozen lock and never fetch the hosts — esm.sh served two different builds of
+one pinned URL within two days (ODQ §934.103), so a lock that only pinned hashes could never
+be stable. Deno treats a vendored file as local and does not re-hash it, so
+`tests/build/edgeVendorLock.test.js` is where the lock keeps its grip: every runtime module
+the lock pins must be present in `vendor/` with exactly the locked bytes.
+
+To bump or add a remote import, on a machine that reaches esm.sh:
+
+```bash
+# 1. edit the import URL(s) under supabase/functions/
+# 2. re-vendor the whole graph and re-pin the lock to the bytes served now
+deno install --entrypoint --frozen=false $(find supabase/functions -name '*.ts' | sort)
+# 3. the type-check pulls the type declarations (X-TypeScript-Types) into vendor/ too
+deno task check:edge && deno task test:edge
+# 4. review the vendor/ diff like any other third-party change, then commit
+git add -A vendor deno.lock && git commit
+```
+
+`vendor/**/dist/` is un-ignored in `.gitignore` on purpose (esm.sh paths carry `dist/`
+directories the build-output pattern would otherwise hide). The production deploy
+(`supabase functions deploy`) bundles from the sources as before; the vendored tree changes
+nothing about what ships.
+
 ## Stripe webhook endpoint
 
 Set the webhook destination in Stripe dashboard → Developers →

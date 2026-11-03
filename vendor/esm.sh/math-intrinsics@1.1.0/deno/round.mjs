@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/round */
+var d=Object.create;var m=Object.defineProperty;var f=Object.getOwnPropertyDescriptor;var p=Object.getOwnPropertyNames;var i=Object.getPrototypeOf,j=Object.prototype.hasOwnProperty;var l=(r,t)=>()=>(t||r((t={exports:{}}).exports,t),t.exports);var x=(r,t,s,a)=>{if(t&&typeof t=="object"||typeof t=="function")for(let e of p(t))!j.call(r,e)&&e!==s&&m(r,e,{get:()=>t[e],enumerable:!(a=f(t,e))||a.enumerable});return r};var h=(r,t,s)=>(s=r!=null?d(i(r)):{},x(t||!r||!r.__esModule?m(s,"default",{value:r,enumerable:!0}):s,r));var c=l((M,u)=>{"use strict";u.exports=Math.round});var o=h(c()),b=o.default??o;export{b as default};
+//# sourceMappingURL=round.mjs.map

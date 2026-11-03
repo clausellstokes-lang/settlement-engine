@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/max */
+var p=Object.create;var o=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var x=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,i=Object.prototype.hasOwnProperty;var j=(s,t)=>()=>(t||s((t={exports:{}}).exports,t),t.exports);var l=(s,t,a,r)=>{if(t&&typeof t=="object"||typeof t=="function")for(let e of x(t))!i.call(s,e)&&e!==a&&o(s,e,{get:()=>t[e],enumerable:!(r=u(t,e))||r.enumerable});return s};var h=(s,t,a)=>(a=s!=null?p(d(s)):{},l(t||!s||!s.__esModule?o(a,"default",{value:s,enumerable:!0}):a,s));var f=j((b,c)=>{"use strict";c.exports=Math.max});var m=h(f()),g=m.default??m;export{g as default};
+//# sourceMappingURL=max.mjs.map

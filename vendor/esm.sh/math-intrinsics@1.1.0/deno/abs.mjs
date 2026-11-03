@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/abs */
+var p=Object.create;var o=Object.defineProperty;var u=Object.getOwnPropertyDescriptor;var d=Object.getOwnPropertyNames;var i=Object.getPrototypeOf,j=Object.prototype.hasOwnProperty;var l=(s,t)=>()=>(t||s((t={exports:{}}).exports,t),t.exports);var x=(s,t,a,m)=>{if(t&&typeof t=="object"||typeof t=="function")for(let e of d(t))!j.call(s,e)&&e!==a&&o(s,e,{get:()=>t[e],enumerable:!(m=u(t,e))||m.enumerable});return s};var b=(s,t,a)=>(a=s!=null?p(i(s)):{},x(t||!s||!s.__esModule?o(a,"default",{value:s,enumerable:!0}):a,s));var f=l((M,c)=>{"use strict";c.exports=Math.abs});var r=b(f()),g=r.default??r;export{g as default};
+//# sourceMappingURL=abs.mjs.map
