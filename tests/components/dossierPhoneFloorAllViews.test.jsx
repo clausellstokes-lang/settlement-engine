@@ -106,6 +106,10 @@ const SHORT_PANELS = Object.freeze({
   // Chair ruling 2026-10-30 (BUILD-T3 U4, Chronicle): the empty state is the one fact, the
   // pitch cut. This fixture is a fresh generated city with no save and no campaign events.
   chronicle: { text: 'No chronicle yet.' },
+  // FOOD-2 (the food base numbers, 2026-11-03): the fixture city is fed by its hinterland, so it
+  // carries no food warning and its viability reading is the verdict alone. The short form is
+  // the fact about this fixture, not an empty tab.
+  viability: { text: '✓ Viablethe settlement can function.Judged at the first survey; not re-run since.' },
 });
 
 /**
@@ -552,13 +556,16 @@ const desktopShape = (perView) => Object.fromEntries(
 // service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
 // pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
 // and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
+// ── RE-MEASURED 2026-11-03 (FOOD-2, the food base numbers): content moved, no token did. The fixture city is
+// fed by its hinterland now, so one food hook no longer fires (Summary/Plot Hooks 38 -> 37) and the Outlook
+// loses one line (Systems/Outlook 2 -> 1); the Viability panel is the verdict alone (SHORT_PANELS).
 const DESKTOP_BASELINE = Object.freeze({
   "Summary/Overview":    { measured: 11, sub14: 10 },
   // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
   "Summary/Foundations": { measured:  1, sub14:  1 },
   // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
   // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
-  "Summary/Plot Hooks":  { measured: 38, sub14: 38 },
+  "Summary/Plot Hooks":  { measured: 37, sub14: 37 },
   "Systems/Services":    { measured: 97, sub14: 97 },
   "Systems/Institutions": { measured: 64, sub14: 64 }, // T1-14, measured 2026-10-30 by this walk
   // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
@@ -580,7 +587,7 @@ const DESKTOP_BASELINE = Object.freeze({
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
   // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
   // (moved to Versions) left the page; no token moved.
-  "Systems/Outlook":     { measured:  2, sub14:  2 },
+  "Systems/Outlook":     { measured:  1, sub14:  1 },
   // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
   // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
   "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
@@ -641,12 +648,15 @@ const DESKTOP_BASELINE = Object.freeze({
 // service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
 // pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
 // and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
+// ── RE-MEASURED 2026-11-03 (FOOD-2, the food base numbers): content moved, no token did. The fixture city is
+// fed by its hinterland now, so one food hook no longer fires (Summary/Plot Hooks 38 -> 37) and the Outlook
+// loses one line (Systems/Outlook 2 -> 1); the Viability panel is the verdict alone (SHORT_PANELS).
 const MOBILE_BASELINE = Object.freeze({
   "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
   "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
   // line more (X-26a); both sub-floor counts stay where they were.
-  "Summary/Plot Hooks":  { prose: 38, chrome: 0, sub14: 0, sub12: 0 },
+  "Summary/Plot Hooks":  { prose: 37, chrome: 0, sub14: 0, sub12: 0 },
   "Systems/Services":    { prose: 96, chrome: 1, sub14: 0, sub12: 0 },
   "Systems/Institutions": { prose: 63, chrome: 1, sub14: 0, sub12: 0 },
   // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
@@ -660,7 +670,7 @@ const MOBILE_BASELINE = Object.freeze({
   // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
   "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
   // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
-  "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Outlook":     { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
   "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
   "World/NPCs":          { prose: 30, chrome: 1, sub14: 0, sub12: 0 },
