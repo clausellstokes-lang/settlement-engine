@@ -62,6 +62,11 @@ export const SLATE_BG = L.SLATE_BG;
 // source; this is a token DEFINITION file, exempt from no-raw-color.
 // (VIOLET*→SLATE* rename completed at fold batch 2, 2026-07-19 — no aliases.)
 export const SLATE_DEEP = L.SLATE_DEEP; // AI text on slate-100 (== color['slate-700'])
+// THE LAUNCH REGISTER (the owner, 2026-11-01, ODQ §934.103; X-36, X-39): the teaser tabs and
+// every launch-locked control wear `launchSkin`, defined in tokens.js with its measured pairs.
+// The eight flat LAUNCH_* aliases left this eager shim on 2026-11-02: no app module read them,
+// and the first-paint closure paid for every one.
+export { launchSkin } from '../design/tokens.js';
 export const AMBER_DEEP  = '#8A5212'; // amber text on amber-100 (== color['amber-700'])
 export const GREEN_DEEP = L.GREEN_DEEP; // legible green text on green-100 tints (== color['green-700'])
 export const RED       = L.RED;

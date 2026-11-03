@@ -8,6 +8,7 @@
 
 import { describe, test, expect, afterEach } from 'vitest';
 import { render, cleanup, screen } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import SteadingsSection from '../../src/components/new/tabs/SteadingsSection.jsx';
 import { useStore } from '../../src/store/index.js';
 
@@ -24,10 +25,16 @@ describe('SteadingsSection — render gates', () => {
     expect(container.firstChild).toBeNull();
   });
 
-  test('a remnant settlement shows the grade banner with the fates prose', () => {
-    render(<SteadingsSection settlement={baseSettlement({ lifecycleStatus: 'relic_ruin' })} />);
+  test('a remnant settlement shows the grade banner: the label and ONE line, the desk\'s (chair ruling T1-11)', () => {
+    const { container } = render(<SteadingsSection settlement={baseSettlement({ lifecycleStatus: 'relic_ruin' })} />);
     expect(screen.getByText('Relic ruin')).toBeTruthy();
-    expect(screen.getByText(/fates unresolved/)).toBeTruthy();
+    // The fixed "This settlement has died; ... The interior is yours." sentence is CUT (BUILD-T1 U2); the
+    // banner carries the DS-GEN-8 remnant line (the corpus keeps the preserve-verbatim clauses where its
+    // variants carry them), so the banner holds exactly one prose line under the label.
+    const text = container.textContent || '';
+    expectAbsentWithAnchor(text, 'This settlement has died;', 'Relic ruin', 'the fixed remnant sentence is back');
+    const banner = screen.getByText('Relic ruin').parentElement;
+    expect(banner.children.length, 'the banner is the label and one line').toBe(2);
   });
 
   test('a generation-seeded ancient shows the nearby-ruin banner', () => {

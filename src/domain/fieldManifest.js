@@ -329,7 +329,7 @@ export const ENGINE_FIELD_REGISTRY = Object.freeze([
       'src/domain/supplyChainState.js',
       'src/domain/worldPulse/stressorGates.js',
       'src/components/new/tabs/EconomicsTab.jsx',
-      'src/components/new/tabs/ViabilityTab.jsx',
+      'src/components/new/tabs/MagicTab.jsx',
     ],
   },
   {

@@ -4,7 +4,7 @@
  *
  * The cards render the Mossgate / Black Crag / Cnocby sample trio (imported
  * from src/data/sampleSettlements.js — the same source the Library empty-state
- * uses), and 'Fork this sample' drives the SAME fork wiring as the Library
+ * uses), and 'Visit <name>' (the owner's copy, 2026-10-30) drives the SAME fork wiring as the Library
  * (SettlementsPanel.forkSample): the sample's config loaded WITHOUT its seed, then
  * generateSettlement(seed) with a user-suffixed seed, then navigate. (Walk W1, owner
  * order 2026-07-21, ledger 13da1e95.) The seed left the config patch on 2026-09-16:
@@ -63,7 +63,7 @@ describe('FoundingWorlds', () => {
     for (const s of SAMPLE_SETTLEMENTS) {
       expect(screen.getByText(s.name)).toBeTruthy();
     }
-    expect(screen.getAllByRole('button', { name: /Fork this sample/i })).toHaveLength(SAMPLE_SETTLEMENTS.length);
+    expect(screen.getAllByRole('button', { name: /^Visit /i })).toHaveLength(SAMPLE_SETTLEMENTS.length);
   });
 
   test('forking a sample drives the library fork path with the user-suffixed seed', async () => {
@@ -75,7 +75,7 @@ describe('FoundingWorlds', () => {
     const first = SAMPLE_SETTLEMENTS[0];
 
     render(<FoundingWorlds onNavigate={onNavigate} />);
-    const forkButtons = screen.getAllByRole('button', { name: /Fork this sample/i });
+    const forkButtons = screen.getAllByRole('button', { name: /^Visit /i });
     fireEvent.click(forkButtons[0]);
 
     // No auth.user in the mock, so the door resolves the suffix through

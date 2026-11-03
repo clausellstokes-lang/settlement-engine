@@ -46,7 +46,7 @@ registerStep('corruptionPass', {
   // that sentence made machine-checkable.
   readsVersion: { economicState: 'reconciled' },
   provides: [],
-  mutates: ['factions', 'npcs'], // stamps corruption onto the rosters in place (A+ P1.7)
+  mutates: ['npcs'], // stamps corruption onto the roster in place (A+ P1.7); the faction groups are derived from it at assembly (GS-2)
   phase: 'population',
 }, (ctx, rng) => {
   const npcs = Array.isArray(ctx.npcs) ? ctx.npcs : [];

@@ -65,6 +65,7 @@ MUTATED_FILES=(
   src/generators/cascadeGenerator.js
   src/data/stressTypes.js
   src/copy/en.js
+  src/copy/sectionHelp.js
   src/data/categoryVocabulary.js
   src/data/entityTags.js
   src/domain/display/parityContract.js
@@ -1619,6 +1620,13 @@ check_caught_planted "citations/past-EOF address planted in live code" \
   scripts/_mutsweepStaleCitation.mjs \
   "// The census roster is assembled in scripts/wiring-census.mjs:$((999999))." \
   "npx vitest run tests/lint/sourceCitationIntegrity.walker.test.js --no-file-parallelism"
+
+# 114. THE PILL COPY LAW (X-42, the owner 2026-11-02: the ? pills "in simple direct
+#      language", one or two sentences, "don't make it meta"). The Systems Health pill is
+#      given an em dash, which tests/copy/sectionHelp.test.js forbids on every pill (no
+#      figure, no dash, no meta word, at most two sentences); the copy test must red.
+perl -0pi -e "s/read side by side/read — side by side/" src/copy/sectionHelp.js
+check_caught "copy/section-help pill copy law" src/copy/sectionHelp.js "npx vitest run tests/copy/sectionHelp.test.js"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

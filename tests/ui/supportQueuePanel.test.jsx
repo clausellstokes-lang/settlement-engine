@@ -145,3 +145,97 @@ describe('A5 — SupportQueuePanel (agent queue)', () => {
     });
   });
 });
+
+// ── T7 survey (2026-10-30). set_ticket_status writes its reason into the
+//    USER-VISIBLE thread breadcrumb ('Status changed to X — <reason>', migration
+//    055) and into the owner's lifecycle email ('Note: <reason>'). A hard-coded
+//    internal label must never ride that wire to the customer. ──
+describe('A5 — SupportQueuePanel refusals and the customer-facing wire (T7 survey)', () => {
+  test('set_ticket_status carries no hard-coded reason (it would reach the ticket owner)', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openTicket();
+    fireEvent.change(screen.getByLabelText(/set status/i), { target: { value: 'waiting_on_user' } });
+    await waitFor(() => {
+      expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'set_ticket_status', ticketId: 't-1', status: 'waiting_on_user' } });
+    });
+    expect(await screen.findByText('Status set to Waiting on user.')).toBeTruthy();
+  });
+
+  test('a refused claim is shown and the queue does not pretend it succeeded', async () => {
+    invoke.mockImplementation(async (_fn, { body }) => {
+      if (body.action === 'list_ticket_pool') return { data: { tickets: POOL }, error: null };
+      if (body.action === 'list_ticket_thread') return { data: { events: AGENT_THREAD }, error: null };
+      return { data: { error: 'Admin action failed' }, error: null };
+    });
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openTicket();
+    fireEvent.click(screen.getByRole('button', { name: /^claim$/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/admin action failed/i);
+    expect(screen.queryByText('Ticket claimed.')).toBeNull();
+  });
+
+  test('a failed pool read is shown', async () => {
+    invoke.mockImplementation(async () => ({ data: null, error: { message: 'Insufficient privileges' } }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.click(screen.getByRole('button', { name: /load queue/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/insufficient privileges/i);
+  });
+
+  test('the status filter rides list_ticket_pool', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.change(screen.getByLabelText(/^status/i), { target: { value: 'waiting_on_user' } });
+    fireEvent.click(screen.getByRole('button', { name: /load queue/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'list_ticket_pool', status: 'waiting_on_user' } }));
+  });
+});
+
+// ── T9 (2026-10-30): THE SUPPORT DOOR. admin-actions grants the `support` role
+//    the whole ticket queue (list_ticket_pool, list_ticket_thread, claim,
+//    set_ticket_status, post_ticket_reply, link_ticket_faq). A support account
+//    now reaches /admin and works this queue there. ──
+describe('A5 — the support queue for a support account (T9)', () => {
+  test('a support account opens /admin, finds the Support Queue, and works a ticket', async () => {
+    vi.resetModules();
+    window.matchMedia = vi.fn((query) => ({
+      media: query, matches: false,
+      addEventListener: () => {}, removeEventListener: () => {}, addListener: () => {}, removeListener: () => {},
+    }));
+    vi.doMock('../../src/store/index.js', () => {
+      const state = { auth: { user: { id: 'support-1' }, role: 'support', tier: 'free' }, isElevated: () => false };
+      function useStore(sel) { return sel(state); }
+      useStore.getState = () => state;
+      useStore.subscribe = () => () => {};
+      return { useStore };
+    });
+    try {
+      const AdminPanel = (await import('../../src/components/AdminPanel.jsx')).default;
+      render(<AdminPanel onBack={() => {}} />);
+      expect(screen.getByRole('heading', { level: 2, name: 'Support Queue' })).toBeTruthy();
+      await openTicket();
+      fireEvent.click(screen.getByRole('button', { name: /^claim$/i }));
+      await waitFor(() => {
+        expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'claim_ticket', ticketId: 't-1' } });
+      });
+      // No highest-role action (admin-actions' isHighest cases) was attempted.
+      const HIGHEST_ONLY = [
+        'get_operational_health', 'acknowledge_operational_obligation', 'update_user_metadata',
+        'get_user_full', 'update_user_credits', 'grant_credits', 'mint_redeem_code',
+        'ai_pricing_resync', 'ai_pricing_cron_status', 'ai_pricing_cron_set', 'set_account_disabled',
+        'set_account_banned', 'soft_delete_settlement', 'remove_gallery_item', 'revoke_share_link',
+        'soft_delete_map', 'remove_gallery_map', 'set_content_banned', 'moderate_comment',
+        'send_operator_message', 'queue_operator_broadcast', 'cancel_operator_broadcast',
+        'list_operator_broadcasts', 'grant_surveyor', 'revoke_surveyor', 'backfill_money_events',
+      ];
+      const actions = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
+      // anchored: the claim_ticket waitFor above proves this action list is live
+      expect(actions.filter((a) => HIGHEST_ONLY.includes(a))).toEqual([]);
+      expect(actions).toContain('get_stats');
+    } finally {
+      vi.doUnmock('../../src/store/index.js');
+    }
+  });
+});

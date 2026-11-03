@@ -167,16 +167,18 @@ authorize a production write by itself.
 
 For the attended production push:
 
+Every Supabase command in this runbook names the CLI version (`npx supabase@2.122.0`), the same pin `scripts/deploy.sh` carries in `SUPABASE_CLI_VERSION`. A bare `npx supabase` resolves npm's `latest` tag, which became CLI 3.0.0 on 2026-11-02: it rejects this repository's `supabase/config.toml` (`[inbucket]`) and no longer takes `--project-ref`. Raise the pin deliberately, in both places, after checking the new CLI against the config and those flags.
+
 ```bash
 # Link the local repo to your Supabase project (one-time):
-npx supabase login
-npx supabase link --project-ref <your-project-ref>
+npx supabase@2.122.0 login
+npx supabase@2.122.0 link --project-ref <your-project-ref>
 
 # Apply every pending migration:
-npx supabase db push
+npx supabase@2.122.0 db push
 
 # Optional: verify the migration ran without errors:
-npx supabase db diff
+npx supabase@2.122.0 db diff
 ```
 
 **SECURITY — MUST APPLY.** Migrations **057, 059, 060** enforce account-status
@@ -241,8 +243,8 @@ two-phase exception. Confirm applied vs pending (don't trust any number written
 here — ask the tooling):
 
 ```bash
-npx supabase migration list   # applied (local + remote) vs pending — the authority
-npx supabase db diff          # an empty diff means remote schema matches the tree
+npx supabase@2.122.0 migration list   # applied (local + remote) vs pending — the authority
+npx supabase@2.122.0 db diff          # an empty diff means remote schema matches the tree
 ```
 
 **Is prod actually at head?** Three in-repo checks answer this:
@@ -261,7 +263,7 @@ npx supabase db diff          # an empty diff means remote schema matches the tr
 **Edge functions are the one UNGATED path to production — deploy them by hand,
 deliberately.** The client deploy is fail-closed CI-gated (`vercel-ignore-build.mjs`)
 and the DB has the `applied-head.json` currency gate, but edge functions ship via a
-bare `npx supabase functions deploy` (or `scripts/deploy.sh`) straight from whatever
+bare `npx supabase@2.122.0 functions deploy` (or `scripts/deploy.sh`) straight from whatever
 your **local working tree** contains. Nothing checks that CI is green, nothing checks
 the tree is clean, and — unlike the migration ledger — nothing records which commit's
 functions are live. This matters because the edge layer IS the money + auth trust
@@ -310,39 +312,39 @@ and mirror what the script derives — the sixteen self-authenticating functions
 
 ```bash
 # verify_jwt = false (self-authenticating — signature, shared secret, or anon path):
-npx supabase functions deploy stripe-webhook --no-verify-jwt          # Stripe posts a signature, not a JWT
-npx supabase functions deploy verify-single-dossier --no-verify-jwt   # Stripe session id, not auth
-npx supabase functions deploy ingest-events --no-verify-jwt           # anonymous analytics sink
-npx supabase functions deploy log-client-error --no-verify-jwt        # anonymous crash-report sink
-npx supabase functions deploy analytics-export --no-verify-jwt        # x-export-secret shared secret (cron)
-npx supabase functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-secret shared secret (nightly)
-npx supabase functions deploy send-email --no-verify-jwt              # per-template self-auth + anon cap-warning
-npx supabase functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
-npx supabase functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
-npx supabase functions deploy health --no-verify-jwt                  # uptime liveness + deep DB probe (no JWT)
-npx supabase functions deploy founder-transfer --no-verify-jwt        # run_due cron x-cron-secret; user actions self-auth in-handler
-npx supabase functions deploy retention-warning-cron --no-verify-jwt  # nightly pg_net cron, x-cron-secret shared secret
-npx supabase functions deploy account-deletion-worker --no-verify-jwt # hourly durable deletion cleanup, x-cron-secret
-npx supabase functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
-npx supabase functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
-npx supabase functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
+npx supabase@2.122.0 functions deploy stripe-webhook --no-verify-jwt          # Stripe posts a signature, not a JWT
+npx supabase@2.122.0 functions deploy verify-single-dossier --no-verify-jwt   # Stripe session id, not auth
+npx supabase@2.122.0 functions deploy ingest-events --no-verify-jwt           # anonymous analytics sink
+npx supabase@2.122.0 functions deploy log-client-error --no-verify-jwt        # anonymous crash-report sink
+npx supabase@2.122.0 functions deploy analytics-export --no-verify-jwt        # x-export-secret shared secret (cron)
+npx supabase@2.122.0 functions deploy pricing-resync-cron --no-verify-jwt     # x-cron-secret shared secret (nightly)
+npx supabase@2.122.0 functions deploy send-email --no-verify-jwt              # per-template self-auth + anon cap-warning
+npx supabase@2.122.0 functions deploy auth-recovery --no-verify-jwt           # logged-out password recovery (no JWT)
+npx supabase@2.122.0 functions deploy og-image --no-verify-jwt                # social-unfurl bots (no JWT), public data only
+npx supabase@2.122.0 functions deploy health --no-verify-jwt                  # uptime liveness + deep DB probe (no JWT)
+npx supabase@2.122.0 functions deploy founder-transfer --no-verify-jwt        # run_due cron x-cron-secret; user actions self-auth in-handler
+npx supabase@2.122.0 functions deploy retention-warning-cron --no-verify-jwt  # nightly pg_net cron, x-cron-secret shared secret
+npx supabase@2.122.0 functions deploy account-deletion-worker --no-verify-jwt # hourly durable deletion cleanup, x-cron-secret
+npx supabase@2.122.0 functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
+npx supabase@2.122.0 functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
+npx supabase@2.122.0 functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
 # verify_jwt = true (require an authenticated user — no flag):
-npx supabase functions deploy create-checkout
-npx supabase functions deploy verify-checkout-session                 # account-bound checkout verification
-npx supabase functions deploy create-customer-portal                  # "Manage subscription" billing portal
-npx supabase functions deploy generate-narrative
-npx supabase functions deploy generate-chronicle
-npx supabase functions deploy ai-analyst                             # Surveyor S1 analyst (requires ANTHROPIC_API_KEY)
-npx supabase functions deploy surveyor-byok                          # Surveyor BYOK key verification + health
-npx supabase functions deploy interview                               # V-1 THE INTERVIEW — cited answers + conjecture register (JWT + entitlement, metered 'analysis')
-npx supabase functions deploy interpret-session                       # Surveyor S3 intent compiler (JWT + entitlement + kill-switch)
-npx supabase functions deploy parley                                  # Surveyor S3 in-character parley (JWT + entitlement + kill-switch)
-npx supabase functions deploy custom-content                          # Surveyor S4 custom-content compiler (JWT + entitlement + kill-switch)
-npx supabase functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
-npx supabase functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
-npx supabase functions deploy surveyor-autonomy                       # Surveyor S7 autonomy composer (JWT + entitlement + kill-switch)
-npx supabase functions deploy account-actions
-npx supabase functions deploy admin-actions
+npx supabase@2.122.0 functions deploy create-checkout
+npx supabase@2.122.0 functions deploy verify-checkout-session                 # account-bound checkout verification
+npx supabase@2.122.0 functions deploy create-customer-portal                  # "Manage subscription" billing portal
+npx supabase@2.122.0 functions deploy generate-narrative
+npx supabase@2.122.0 functions deploy generate-chronicle
+npx supabase@2.122.0 functions deploy ai-analyst                             # Surveyor S1 analyst (requires ANTHROPIC_API_KEY)
+npx supabase@2.122.0 functions deploy surveyor-byok                          # Surveyor BYOK key verification + health
+npx supabase@2.122.0 functions deploy interview                               # V-1 THE INTERVIEW — cited answers + conjecture register (JWT + entitlement, metered 'analysis')
+npx supabase@2.122.0 functions deploy interpret-session                       # Surveyor S3 intent compiler (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy parley                                  # Surveyor S3 in-character parley (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy custom-content                          # Surveyor S4 custom-content compiler (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy construct-settlement                    # Surveyor S5 settlement construction (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy construct-realm                         # Surveyor S6 realm construction (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy surveyor-autonomy                       # Surveyor S7 autonomy composer (JWT + entitlement + kill-switch)
+npx supabase@2.122.0 functions deploy account-actions
+npx supabase@2.122.0 functions deploy admin-actions
 ```
 
 There are **32 deployable functions** (every `supabase/functions/*` dir except
@@ -530,7 +532,7 @@ reuses the secret already stored in the private dispatcher row; on first install
 it generates one. The commands below are the manual equivalent.
 
 ```bash
-npx supabase secrets set ACCOUNT_DELETION_CRON_SECRET='<random-secret>'
+npx supabase@2.122.0 secrets set ACCOUNT_DELETION_CRON_SECRET='<random-secret>'
 ```
 
 ```sql
@@ -564,7 +566,7 @@ deletion and refuses to finish unless the persisted row has `enabled=true`, the
 deployed worker URL, and the exact function-side secret.
 
 ```bash
-npx supabase secrets set PAYMENT_REFUND_CRON_SECRET='<random-secret>'
+npx supabase@2.122.0 secrets set PAYMENT_REFUND_CRON_SECRET='<random-secret>'
 ```
 
 ```sql
@@ -610,6 +612,34 @@ authoritative database transaction; a missing mail provider is recorded as
 Legacy SKU keys (`credits_5`, `credits_15`, `credits_40`, etc.) are
 kept in the price map for refund/replay continuity — set them if you
 want old refund links to resolve, otherwise leave them unset.
+
+### Refreshing the vendored edge modules
+
+The edge functions' remote imports (`https://esm.sh/…`, `https://deno.land/std@…`) are
+**vendored**: `deno.json` carries `"vendor": true`, and the modules live under `vendor/`,
+committed whole. CI's `deno-tests` job and the local `check:edge-behavior` leg read them from
+there with the frozen lock and never fetch the hosts — esm.sh served two different builds of
+one pinned URL within two days (ODQ §934.103), so a lock that only pinned hashes could never
+be stable. Deno treats a vendored file as local and does not re-hash it, so
+`tests/build/edgeVendorLock.test.js` is where the lock keeps its grip: every runtime module
+the lock pins must be present in `vendor/` with exactly the locked bytes.
+
+To bump or add a remote import, on a machine that reaches esm.sh:
+
+```bash
+# 1. edit the import URL(s) under supabase/functions/
+# 2. re-vendor the whole graph and re-pin the lock to the bytes served now
+deno install --entrypoint --frozen=false $(find supabase/functions -name '*.ts' | sort)
+# 3. the type-check pulls the type declarations (X-TypeScript-Types) into vendor/ too
+deno task check:edge && deno task test:edge
+# 4. review the vendor/ diff like any other third-party change, then commit
+git add -A vendor deno.lock && git commit
+```
+
+`vendor/**/dist/` is un-ignored in `.gitignore` on purpose (esm.sh paths carry `dist/`
+directories the build-output pattern would otherwise hide). The production deploy
+(`supabase functions deploy`) bundles from the sources as before; the vendored tree changes
+nothing about what ships.
 
 ## Stripe webhook endpoint
 
@@ -708,7 +738,7 @@ also re-deploy from the prior good commit:
 
 ```bash
 git checkout <good-sha> -- supabase/functions/<name>/
-npx supabase functions deploy <name>
+npx supabase@2.122.0 functions deploy <name>
 git checkout master
 ```
 

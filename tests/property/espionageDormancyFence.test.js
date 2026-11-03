@@ -189,6 +189,60 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-10-31, TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1) ──────
+ * THE SEVENTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-tension-variety.json.
+ * THE MOVER: a tie's description and tension are drawn without replacement per settlement from
+ * pools widened to eight per archetype, the drawn index stored on the tie (`proseVariant`); zero
+ * rng draws. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct.
+ * ATTRIBUTION, ZERO RESIDUE (every differing JSON path, measured at the integration tip 458495a1
+ * against the lane): relationships[].proseVariant (360), .tension (355), .description (351),
+ * prominentRelationship.tension/phrasing/full (192/192/187) and pressureSentence (134, which
+ * quotes the relationship phrasing); nothing else moves. `6f6dae34…` -> `8c4a42c5…`.
+ *
+ * ── 2026-10-31, ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2) ───────────────────────
+ * THE SIXTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-one-faction-set.json.
+ * THE MOVER: `factions[]` is a projection of the power factions derived at assembly from the final
+ * roster, and `conflicts[]` (with its `powerStructure.conflicts` mirror) the power-faction pairs a
+ * rivalry crosses, drawn on a new named assembly child stream; the faction-linkage trace is retired
+ * and the receipt explains each conflict. On THIS corpus 360 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE (measured at the integration tip b3d457b0 against the lane):
+ * with `factions`, `conflicts`, `powerStructure.conflicts`, the linkage trace (and its clock) and the
+ * receipt's conflict/faction evidence entries removed, all 360 rows hash identically before and
+ * after. `607ea755…` -> `6f6dae34…`.
+ *
+ * ── 2026-10-30, THE MIGRATION CRISIS NAMES ONE DIRECTION (ruling 2) ─────────────────────────────
+ * THE FIFTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-30-migration-one-direction.json.
+ * THE MOVER: the mass-migration pressure line's weak-economy arm and two arrival vignettes told a
+ * departure beside a crisis card that says the town is receiving people; they now tell the arrival
+ * (pool sizes unchanged, so no draw moves). On THIS corpus 6 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` and `pressureSentence` removed, all 360
+ * rows hash identically before and after. `e90e078f…` -> `607ea755…`.
+ *
+ * ── 2026-10-30, THE ARRIVAL SCENE AGREES WITH THE INSTITUTIONS (T1-12, ruling 3) ───────────────
+ * THE FOURTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101, this fence's chartered window by the chair's ruling); the record is
+ * docs/shift-records/2026-10-30-arrival-market-gate.json.
+ * THE MOVER: every beat of the arrival scene (SIGHT, SENSE, PEOPLE) redraws a market-, stall- or
+ * fair-worded line where the roster holds no market-class institution (DS-GEN-13's predicate,
+ * arrivalScene.js :: holdsMarket). The merged tip 2acd0206 held `ddbfd9e8…` (reproduced from its
+ * tree before this value was taken). On THIS corpus 48 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE: with `arrivalScene` removed, all 360 rows hash identically
+ * before and after. `ddbfd9e8…` -> `e90e078f…`.
+ *
+ * ── 2026-10-30, SERVICE CATEGORY FIDELITY (RS-1..RS-13): EVERY SERVICE IN ITS ONE BUCKET ──────
+ * THE THIRTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
+ * delegation (ODQ §934.101, which the chair names this fence's chartered window); the record is
+ * docs/shift-records/2026-10-30-service-category-fidelity.json.
+ * THE MOVER: every authored catalog service name is registered in SERVICE_CATEGORY_MAP, so 162
+ * catalog (service, host) pairs change bucket (Discreet passage -> criminal forks the crime-gate
+ * stream at Underground-network hosts). The base d14c5c56 held `b9945f18…` (reproduced from its
+ * tree before this value was taken). On THIS corpus 336 of 360 rows move; 360/360 hashes stay
+ * distinct. ATTRIBUTION, ZERO RESIDUE: with `availableServices` removed, all 360 rows hash
+ * identically at the base and here. `b9945f18…` -> `ddbfd9e8…`.
+ *
  * ── 2026-10-02, THE VOICE PROGRAM WAVE 4 BLOCK 1: THE ARRIVAL HOOK NAMES ONLY WHAT IT HOLDS ──
  * THE TWELFTH MOVEMENT OF THIS CONSTANT, owner-signed through the door under ODQ §934.88; the
  * record is docs/shift-records/2026-10-02-voice-program-wave-4-hook-structures.json.
@@ -415,7 +469,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'b9945f18189f0833f2a0691f5e2da5b7691e0b1b0efe9e437abc8601bf3be128';
+const PRE_COUPLING_CORPUS_SHA = '8c4a42c5ee4d01db9cdf355e52b2e37e1381d00a99fda6195e5158caca1d3194';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

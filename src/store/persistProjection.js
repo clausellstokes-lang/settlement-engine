@@ -119,7 +119,7 @@
  * write a thinner world than saving before it — the same-path/other-path write
  * that this codebase has been bitten by before.
  */
-import { readAnonDraft } from './persistMerge.js';
+import { anonDraftExpired, readAnonDraft } from './persistMerge.js';
 
 /**
  * The localStorage key zustand's persist writes this projection under, named ONCE
@@ -182,7 +182,7 @@ export function draftIdentity(settlement, lastSeed) {
  * that payload back verbatim, so the parse is not waste. A device with no draft
  * parses a few KB of settings and toggles.
  *
- * @returns {{ settlement: any, lastSeed: any }|null}
+ * @returns {{ settlement: any, lastSeed: any, generatedAt?: string }|null}
  */
 function storedAnonDraft() {
   try {
@@ -190,7 +190,12 @@ function storedAnonDraft() {
     // this projection's own return value — so the envelope is two levels down.
     const raw = globalThis.localStorage?.getItem(PERSIST_KEY);
     if (!raw) return null;
-    return readAnonDraft(JSON.parse(raw)?.state?.anonDraft);
+    const stored = readAnonDraft(JSON.parse(raw)?.state?.anonDraft);
+    // ⛔ A DRAFT PAST ITS DAY HAS NO STANDING TO PROTECT (persistMerge.js
+    // ANON_DRAFT_TTL_MS): answering "none" lets cases (b) and (c) write the slot empty,
+    // so the expired world leaves storage on the next write rather than lingering
+    // unread. The predicate is the rehydrate's own, so the boot and the slot agree.
+    return stored && !anonDraftExpired(stored.generatedAt, Date.now()) ? stored : null;
   } catch {
     // A blocked, full or half-written device has no draft to protect.
     return null;
@@ -248,7 +253,7 @@ export function partializeStoreState(state) {
   // projection's keys by scanning the return block for `name: state.field`, so an
   // inline `{ settlement: state.settlement }` inside the envelope would register
   // as two more TOP-LEVEL persisted keys that do not exist.
-  const { settlement = null, lastSeed = null } = state || {};
+  const { settlement = null, lastSeed = null, generatedAt = null } = state || {};
   return {
     config: state.config,
     configExplicitFields: state.configExplicitFields,
@@ -277,8 +282,10 @@ export function partializeStoreState(state) {
     // The else-branch is no longer a bare null: it retires the slot only when the
     // slot holds a world this tab has standing over — the one on screen, or the one
     // its last swap retired — and otherwise re-emits what another tab put there.
+    // The generation stamp rides beside the payload (when the store has one) so the
+    // device knows when the draft's 24 hours run out (persistMerge.js ANON_DRAFT_TTL_MS).
     anonDraft: state.auth?.user == null && state.draftOrigin === 'anon' && settlement
-      ? { settlement, lastSeed }
+      ? { settlement, lastSeed, ...(typeof generatedAt === 'string' ? { generatedAt } : {}) }
       : retireOrKeepStoredDraft(settlement, lastSeed, state.retiringDraftIdentity),
   };
 }

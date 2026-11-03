@@ -12,6 +12,7 @@
 import { describe, it, expect } from 'vitest';
 import { Traditions } from '../../src/pdf/sections/Traditions.jsx';
 import { describeTraditionWindow } from '../../src/domain/traditions/genesis.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 function collectText(node, out = []) {
   if (node == null || typeof node === 'boolean') return out;
@@ -48,5 +49,19 @@ describe('PDF Traditions section (07B) — mirror-only, self-gating', () => {
     expect(joined).toContain('a triumph');   // last outcome label
     expect(joined).toContain('the town outgrew the old scale'); // provenance line
     expect(joined).toContain('Founding'); // the motif element, humanized (no dingbat glyph in the PDF)
+  });
+
+  it('consolidated (chair rulings 2026-10-30): element-only chip, no placeholder dashes, no footer', () => {
+    const anchor = 'The Founders’ Feast';
+    const joined = collectText(Traditions({ settlement: { name: 'Ashford', traditions: MIRROR } })).join(' | ');
+    // The act already ends the name, so the chip prints the element alone.
+    expectAbsentWithAnchor(joined, 'Feast | ·', anchor, 'the act half of the chip');
+    expectAbsentWithAnchor(joined, 'Founding · Feast', anchor, 'the act half of the chip');
+    expectAbsentWithAnchor(joined, 'carry its identity forward', anchor, 'the footer');
+    // A mirror row with no owner and no outcome prints no "Owner: –" placeholder.
+    const bare = [{ ...MIRROR[0], ownerKey: null, ownerLabel: null, lastOutcome: null }];
+    const bareText = collectText(Traditions({ settlement: { name: 'Ashford', traditions: bare } })).join(' | ');
+    expectAbsentWithAnchor(bareText, 'Owner:', anchor, 'owner placeholder');
+    expectAbsentWithAnchor(bareText, 'Last held:', anchor, 'outcome placeholder');
   });
 });

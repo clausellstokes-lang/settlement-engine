@@ -26,10 +26,12 @@
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test } from 'vitest';
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { cleanup, render } from '@testing-library/react';
 
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
-import { OverviewTab } from '../../src/components/new/tabs/OverviewTab.jsx';
+// The roster and its badges live on the Institutions tab since owner addendum T1-15
+// (2026-10-30); the Overview's Institutions collapsible is cut.
+import InstitutionsTab, { institutionBadge } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import { addInstitution } from '../../src/domain/events/mutateEntities.js';
 import { applyInstitutionLifecycleOutcome } from '../../src/domain/worldPulse/institutionLifecycle.js';
 
@@ -51,23 +53,26 @@ beforeAll(() => {
 
 afterEach(() => { cleanup(); });
 
-/** Render the tab with the Institutions collapsible OPEN and return the section. */
+/** Render the Institutions tab and return its container (no fold to open: every card shows). */
 function renderInstitutions(settlement) {
-  const { container } = render(<OverviewTab settlement={settlement} />);
-  const toggle = [...container.querySelectorAll('button')]
-    .find(el => /Expand institutions|Collapse institutions/.test(el.getAttribute('aria-label') || ''));
-  expect(toggle, 'the Institutions collapsible must render').toBeTruthy();
-  if (toggle.getAttribute('aria-label') === 'Expand institutions') fireEvent.click(toggle);
+  const { container } = render(<InstitutionsTab settlement={settlement} />);
+  expect(container.querySelectorAll('[data-testid="institution-card"]').length, 'the roster must render').toBeGreaterThan(0);
   return container;
 }
 
-/** The pill whose text starts with `name` (the badge is a trailing child span). */
+/**
+ * The card for `name`, shaped like the old pill for the arms below: its text carries the
+ * badge mark, and `getAttribute('title')` answers with the name's own hover title.
+ */
 function pillFor(container, name) {
-  return [...container.querySelectorAll('span')]
-    .find(el => el.firstChild?.nodeType === 3 && el.firstChild.textContent === name);
+  const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
+    .find(el => el.firstElementChild?.firstElementChild?.textContent === name);
+  if (!card) return undefined;
+  const nameSpan = card.firstElementChild.firstElementChild;
+  return { textContent: card.firstElementChild.textContent, getAttribute: (k) => nameSpan.getAttribute(k) };
 }
 
-describe('OverviewTab institution pills — the provenance badge', () => {
+describe('InstitutionsTab cards — the provenance badge', () => {
   test('a DM-added institution wears the YOU mark and says so on hover', () => {
     const next = addInstitution(base, {
       id: 'evt.badge.add',
@@ -119,26 +124,80 @@ describe('OverviewTab institution pills — the provenance badge', () => {
     expect(pill.getAttribute('title')).toBe('Added by you');
   });
 
-  test('every legend mark is a non-empty glyph, and each one is reachable', () => {
+  test('the key lives in the page\'s ? pill (the legend row left with X-38/X-42), and every mark it promises is a non-empty glyph with a title', () => {
     const container = renderInstitutions(base);
+    // the legend row is gone: no "mark = meaning" span renders anywhere on the page
     const legendRows = [...container.querySelectorAll('span')]
       .filter(el => / = /.test(el.textContent) && el.children.length === 1);
-    const marks = legendRows.map(el => el.firstElementChild.textContent);
-    expect(marks.length, 'the badge legend must render').toBeGreaterThanOrEqual(5);
-    for (const mark of marks) {
-      expect(mark.trim(), 'a legend row promising a badge with no glyph is the defect this pins').not.toBe('');
+    expect(legendRows).toEqual([]);
+    // the key is the pill's second sentence, on the page header
+    const pillText = container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill-text"]');
+    expect(pillText, 'the page\'s ? pill must render').toBeTruthy();
+    expect(pillText.textContent).toContain('history, you, the living world, or a dependency');
+    // every mark the key promises is a glyph the badge really draws, each with its title
+    const marks = [
+      institutionBadge({ name: 'A', source: 'required' }),
+      institutionBadge({ name: 'B', source: 'forced' }),
+      institutionBadge({ name: 'C', source: 'auto-resolved' }),
+    ];
+    expect(marks.map(m => m.label)).toEqual(['REQ', 'YOU', '→']);
+    for (const m of marks) {
+      expect(String(m.label).trim(), 'a mark promised with no glyph is the defect this pins').not.toBe('');
+      expect(typeof m.title).toBe('string');
+      expect(m.title.length).toBeGreaterThan(0);
     }
-    expect(marks).toEqual(expect.arrayContaining(['REQ', 'YOU', '→', 'WORLD', '✦']));
   });
 
   test('an ordinary generated roster still badges only what generation stamped', () => {
     const container = renderInstitutions(base);
     // Nothing on a freshly generated settlement was touched by a DM or an
     // advance, so no pill may claim otherwise.
-    const pills = [...container.querySelectorAll('span')]
-      .filter(el => el.firstChild?.nodeType === 3 && el.getAttribute('title') !== null);
+    const pills = [...container.querySelectorAll('[data-testid="institution-card"] span[title]')];
     for (const pill of pills) {
       expect(pill.getAttribute('title')).not.toBe('Grown by the living world');
     }
+  });
+});
+
+/**
+ * VERIFIER F14 (RS-19 regressed through T1-14): a PROXY host (servicesData.js ::
+ * PROXY_SERVICE_HOSTS: Dwellings, Housing, Water source, Sewage system, Farmland, Massive
+ * prison ...) surfaces another house's menu; the Services tab names no institution for those
+ * rows, and the Institutions page must not list them under the proxy either. The house itself
+ * stays on the roster with its own description.
+ */
+describe('F14 / RS-19 — no proxy-surfaced menu under a proxy house', () => {
+  test('the proxy house keeps its card and lists none of the menu it only surfaces', async () => {
+    const { institutionsWithServices } = await import('../../src/components/new/tabs/InstitutionsTab.jsx');
+    const { PROXY_SERVICE_HOSTS } = await import('../../src/data/servicesData.js');
+    const rows = Object.values(base.availableServices || {}).flat();
+    const proxied = rows.filter((r) => r && PROXY_SERVICE_HOSTS[String(r.institution || '').toLowerCase()]);
+    expect(proxied.length, 'fixture premise: the town surfaces a menu through a proxy host').toBeGreaterThan(0);
+    const houses = institutionsWithServices(base);
+    const proxyHouses = houses.filter((h) => PROXY_SERVICE_HOSTS[String(h.inst.name || '').toLowerCase()]);
+    expect(proxyHouses.length, 'the proxy houses stay on the roster').toBeGreaterThan(0);
+    for (const h of proxyHouses) expect(h.services, `${h.inst.name} lists a proxied menu`).toEqual([]);
+    expect(houses.some((h) => h.services.length > 0), 'real houses keep their menus').toBe(true);
+    const container = renderInstitutions(base);
+    for (const r of proxied) {
+      const card = [...container.querySelectorAll('[data-testid="institution-card"]')]
+        .find((el) => el.firstElementChild?.firstElementChild?.textContent === proxyHouses.find((h) => h.inst.name === r.institution)?.label);
+      expect(card, `${r.institution} card`).toBeTruthy();
+      expect(card.querySelectorAll('[data-testid="institution-service"]').length).toBe(0); // anchored: the card itself is asserted present
+    }
+  });
+});
+
+/** VERIFIER F15: an institution link opens this tab, so each card is the link's anchor target. */
+describe('F15 — each institution card is its entity link\'s sink', () => {
+  test('the card carries id = entityAnchor(institution) and the index routes the link here', async () => {
+    const { buildDossierEntityIndex, entityAnchor, entityIdFor } = await import('../../src/domain/dossier/entityLinks.js');
+    const container = renderInstitutions(base);
+    const inst = base.institutions[0];
+    const entry = buildDossierEntityIndex(base).resolve(entityIdFor('institution', inst));
+    expect(entry.tab).toBe('institutions');
+    const card = [...container.querySelectorAll('[data-testid="institution-card"]')].find((el) => el.id === entityAnchor('institution', inst));
+    expect(card?.getAttribute('data-testid')).toBe('institution-card');
+    expect(entry.anchor).toBe(card.id);
   });
 });

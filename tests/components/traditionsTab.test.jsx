@@ -3,10 +3,12 @@
  * traditionsTab.test.jsx — THE TRADITIONS wave (T-1). The dossier tab renders in
  * PREVIEW mode for a draft settlement (no engine mirror): it labels the register
  * "founding traditions", lists the derived observances by name with their window
- * phrase, and shows owner/last-outcome as "—" (they exist only where time exists).
+ * phrase, and (consolidation chair, 2026-10-30) prints NO owner/last-outcome row, no
+ * epithet and no footer: ownership and outcomes exist only where time exists.
  */
 import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, cleanup } from '@testing-library/react';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 import TraditionsTab from '../../src/components/new/tabs/TraditionsTab.jsx';
 import { deriveFoundingTraditions, describeTraditionWindow } from '../../src/domain/traditions/genesis.js';
 
@@ -40,9 +42,30 @@ describe('TraditionsTab — preview mode (draft settlement)', () => {
       expect(screen.getAllByText(new RegExp(phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'))).length).toBeGreaterThan(0);
     }
 
-    // preview: ownership + outcomes read "—" (no time has passed)
-    expect(screen.getAllByText(/Owner: –/).length).toBe(expected.length);
-    expect(screen.getAllByText(/Last held: –/).length).toBe(expected.length);
+    // preview: no owner/outcome placeholders, no epithet, no footer, and the intro is its
+    // first clause (chair rulings T1-T3, 2026-10-30).
+    const text = container.textContent;
+    const anchor = expected[0].name;
+    expectAbsentWithAnchor(text, 'Owner:', anchor, 'preview owner placeholder');
+    expectAbsentWithAnchor(text, 'Last held:', anchor, 'preview outcome placeholder');
+    expectAbsentWithAnchor(text, 'In a living campaign they gain owners', anchor, 'T3 footer');
+    expectAbsentWithAnchor(text, 'Ownership and outcomes come once the world turns.', anchor, 'T1 second clause');
+    for (const rec of expected) {
+      if (rec.expression?.epithet) expectAbsentWithAnchor(text, rec.expression.epithet, anchor, 'preview epithet');
+    }
+    expect(text).toMatch(/The founding traditions of Briarwatch\./);
+  });
+
+  it('the motif chip names the element; the act already ends the generated name', () => {
+    const expected = deriveFoundingTraditions(DRAFT);
+    render(<TraditionsTab settlement={DRAFT} />);
+    const text = screen.getByTestId('traditions-tab').textContent;
+    for (const rec of expected) {
+      const act = String(rec.coreMotif?.act || '');
+      // Generated names carry the act (measured 3074/3074 in the 1000-town sample).
+      expect(rec.name.toLowerCase()).toContain(act.split('-').join(' ').toLowerCase());
+      expectAbsentWithAnchor(text, ` · ${act.split('-').map((w) => w[0].toUpperCase() + w.slice(1)).join(' ')}`, rec.name, 'the act half of the chip');
+    }
   });
 
   it('renders an empty-state for a null settlement without throwing', () => {

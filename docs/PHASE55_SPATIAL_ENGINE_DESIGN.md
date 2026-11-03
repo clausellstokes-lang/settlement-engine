@@ -1111,6 +1111,7 @@ snapshots the aspatial `regionalGraph` beside it. The spatial digest slots in ri
    and the §4d "culturally-different" contraband gate BOTH read this ONE composite metric
    (`cultureDistance(a,b)`), built as a new pure selector over existing state — no new persisted
    culture field, no authoring.
+   2026-10-31: SUPERSEDED FOR THE CULTURE SUBSTANCE ONLY by the owner's words of 2026-10-31 (DESIGN_FP_ARCH_CU.md §0.2, ⭐); cultureDistance stays as the derived similarity.
 3. **Imported / flat maps — SETTLED (architect judgment): option (b).** v1 restricts the spatial
    engine to GENERATED maps; IMPORTED-image maps stay ASPATIAL (byte-identical to today) until a
    real persisted terrain/road authoring layer is built later. Avoids the flat-plain degenerate-

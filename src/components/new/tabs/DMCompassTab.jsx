@@ -45,7 +45,8 @@ function CompassPanel({ compass }) {
   if (!hooks.length && !redFlags.length && !twist) return null;
 
   return (
-    <Section title="DM Compass" accent="#6a2a9a">
+    // The section takes the tab's own label (chair ruling, RULINGS-T1 DM Compass; R6): one name.
+    <Section title="Guidance" accent="#6a2a9a">
       {hooks.length > 0 && (
         <div style={{ marginBottom: 12 }}>
           <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 800, color: swatch.ai, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 4 }}>
@@ -81,13 +82,9 @@ function CompassPanel({ compass }) {
 }
 
 function IdentityMarkersPanel({ markers }) {
-  const mobile = useIsMobile();
   if (!Array.isArray(markers) || !markers.length) return null;
   return (
     <Section title="Identity Markers" accent="#1a5a28">
-      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 6, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Concrete details to drop into a scene as you describe the place.
-      </div>
       {markers.map((m, i) => (
         <BulletRow key={i} color="#1a5a28">{m}</BulletRow>
       ))}
@@ -100,9 +97,6 @@ function FrictionPointsPanel({ points }) {
   if (!Array.isArray(points) || !points.length) return null;
   return (
     <Section title="Friction Points" accent="#a0762a">
-      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Small-scale grievances between named parties. Surface them in scenes to texture daily life.
-      </div>
       {points.map((p, i) => (
         <div key={i} style={{ display: 'flex', gap: 10, padding: '7px 10px', marginBottom: 5, background: swatch['#FAF8F4'], border: '1px solid #d8c090'}}>
           <div style={{ flex: 1, minWidth: 0 }}>
@@ -124,9 +118,6 @@ function ConnectionsMapPanel({ edges }) {
   if (!Array.isArray(edges) || !edges.length) return null;
   return (
     <Section title="Connections Map" accent="#2a3a7a">
-      <div style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, marginBottom: 8, fontStyle: 'italic', fontFamily: 'Nunito, sans-serif' }}>
-        Named ties between people, factions, and institutions. A map for the table's politics.
-      </div>
       {edges.map((e, i) => (
         <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'center', padding: '5px 10px', borderBottom: i < edges.length - 1 ? '1px solid #e0d0b0' : 'none', flexWrap: 'wrap' }}>
           <span style={{ fontSize: chromeFontSize(FS['11.5'], mobile), fontWeight: 700, color: swatch.inkMag, fontFamily: 'Nunito, sans-serif' }}>{e.from}</span>

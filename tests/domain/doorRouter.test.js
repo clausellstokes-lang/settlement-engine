@@ -8,12 +8,12 @@
  *   2. The ring widens ONLY when the text names a wider ring (realm/product cues).
  */
 import { describe, it, expect } from 'vitest';
-import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt } from '../../src/domain/intent/doorRouter.js';
+import { DOOR_DESTINATIONS, DOOR_SCOPES, routeDoorPrompt, isAcceptReply } from '../../src/domain/intent/doorRouter.js';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 describe('doorRouter — destinations vocabulary', () => {
-  it('exposes the analyst + the four routable workshop stage ids (the reachability denominator)', () => {
-    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'content', 'construct', 'apply', 'autonomy']);
+  it('exposes the analyst, the Interview + the four routable workshop stage ids (the reachability denominator)', () => {
+    expect(DOOR_DESTINATIONS).toEqual(['analyst', 'interview', 'content', 'construct', 'apply', 'autonomy']);
     expect(DOOR_SCOPES).toEqual(['settlement', 'realm', 'product']);
     // ⚰ 'style' left with the styleOverhaul capability (ODQ §763.2). Driven through the
     // estate's anchored-negative helper, so an emptied or re-keyed vocabulary reds on the
@@ -40,6 +40,23 @@ describe('doorRouter — destinations vocabulary', () => {
 });
 
 describe('doorRouter — the cue table (vetoable vocabulary, pinned)', () => {
+  // THE CHAIR'S RULING (2026-10-30): the Interview lost its "Ask the world" link with X-22;
+  // it keeps a way in BY PHRASE (stasis, never a silent retirement).
+  it('the Interview is reached by phrase: "interview", "ask the world" and their nearest intents', () => {
+    for (const q of [
+      'interview the harbourmaster about the fire',
+      'ask the world why the river road is closed',
+      'Ask the world: is the road safe?',
+      'question the world about the plague',
+      'start a line of questions about the guild',
+    ]) {
+      expect(routeDoorPrompt(q).destination, `"${q}" opens the Interview`).toBe('interview');
+    }
+    // the anchors: a plain question is still the analyst's, and the realm word still widens
+    expect(routeDoorPrompt('why is the road closed?').destination).toBe('analyst');
+    expect(routeDoorPrompt('ask the world what the realm fears').scope).toBe('realm');
+  });
+
   it('session recaps route to APPLY (S3 accept→mint)', () => {
     expect(routeDoorPrompt('The party sacked the customs house last session.').destination).toBe('apply');
     expect(routeDoorPrompt('quick recap of what happened at the council').destination).toBe('apply');
@@ -93,5 +110,34 @@ describe('doorRouter — the cue table (vetoable vocabulary, pinned)', () => {
   it('the ring widens only when named: realm cue → realm; money/plan cues → product (analyst)', () => {
     expect(routeDoorPrompt('who rules the realm?')).toEqual({ destination: 'analyst', scope: 'realm' });
     expect(routeDoorPrompt('how many credits does an answer cost?')).toEqual({ destination: 'analyst', scope: 'product' });
+  });
+});
+
+// X-22(d): with no buttons in the chat, a proposal is accepted by replying in words. The
+// question is asked ONLY of the reply that follows a proposal (SurveyorDoor.jsx); every
+// other reply goes through routeDoorPrompt like any prompt. Vetoable vocabulary, pinned.
+describe('doorRouter — the typed yes (X-22(d))', () => {
+  it('a plain yes, leading the reply, accepts', () => {
+    for (const q of ['yes', 'Yes, add it', 'yeah do it', 'yep', 'add them', 'ok', 'okay', 'sure', 'go ahead', 'yes please, add them', 'approve']) {
+      expect(isAcceptReply(q), `"${q}" accepts`).toBe(true);
+    }
+  });
+
+  it('a yes with a refusal or a condition anywhere in it does NOT accept', () => {
+    for (const q of ['yes but not the duel', 'no, add it later', 'not yet', 'yes except the fire', 'ok wait', "don't add it", 'only the first one']) {
+      expect(isAcceptReply(q), `"${q}" does not accept`).toBe(false);
+    }
+  });
+
+  it('a question or a fresh prompt is not a yes (it routes as a prompt instead)', () => {
+    for (const q of ['why?', 'add a tavern to the town', 'what about the guild', '', '   ', null, undefined, 42]) {
+      expect(isAcceptReply(q), `${JSON.stringify(q)} does not accept`).toBe(false);
+    }
+    // the anchor: the same "add" verb, as a fresh prompt, still routes through the cue table
+    expect(routeDoorPrompt('add a tavern to the town').destination).toBe('content');
+  });
+
+  it('a long reply is a prompt, not a yes, even when it starts with one', () => {
+    expect(isAcceptReply(`yes ${'and then the party went to the harbour '.repeat(3)}`)).toBe(false);
   });
 });

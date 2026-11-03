@@ -18,6 +18,49 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-10-31 — TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1), THROUGH THE
+ *   SIGNED DOOR (ODQ §934.101; record docs/shift-records/2026-10-31-tension-variety.json; the cloud chair signs
+ *   under the owner's delegation "I also now defer and give all judgment to you that is required now or in the
+ *   future", vetoable). 525 OF 525 ROWS MOVED; the key set is identical (525 = 525). A PROSE SHIFT, ONE CAUSE: a
+ *   tie's description and tension are drawn without replacement per settlement (draw-free; the index stored on
+ *   the tie as `proseVariant`) from pools widened to eight per archetype (90 + 90 new lines). ZERO RNG DRAWS: no
+ *   stream forks. ATTRIBUTION, ZERO RESIDUE (every differing JSON path against the integration tip 458495a1):
+ *   relationships[].description/tension/proseVariant (525), prominentRelationship.tension/phrasing/full
+ *   (446/446/472), pressureSentence (3; it quotes the relationship phrasing), nothing else. Measured on gen1000v2:
+ *   same-page verbatim tension repeats 4,367 -> 0, template repeats per town 7.11 -> 0.46. Moved in the same
+ *   shift, one surface per commit: espionage-dormancy-fence's constant (360 of 360, the same paths), and the
+ *   unregistered generationForkCensus control hash and A6 counts with the fork registry's external fnv count.
+ *
+ * 2026-10-31 — ONE FACTION SET: THE POWER FACTIONS ARE THE FACTIONS (GS-2), THROUGH THE SIGNED DOOR (ODQ
+ *   §934.101; record docs/shift-records/2026-10-31-one-faction-set.json; the cloud chair signs under the owner's
+ *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).
+ *   525 OF 525 ROWS MOVED; the key set is identical (525 = 525). THE CAUSE, ONE: settlement.factions[] is a
+ *   projection of powerStructure.factions (same names, members by each NPC's own factionAffiliation, no minted
+ *   name), derived at assembleSettlement from the final roster; conflicts are the power-faction pairs a rival or
+ *   enemy tie crosses, with powerStructure.conflicts dual-written; the faction-linkage trace is retired; the
+ *   receipt explains each conflict. ⚠ STREAMS, DISCLOSED: generatePopulation loses its name picks, scatter and
+ *   conflict draws, all after its last kept draw (npcs and relationships unmoved); the conflict draws take a new
+ *   named assembly child stream 'faction-conflicts', so nothing generated after them moves. Measured on gen1000v2
+ *   regenerated at the lane tip: 0 of 4,835 group names off the power roster; 2,480 of 2,480 parties power
+ *   factions; towns with a conflict 618 -> 755. Moved in the same shift, one surface per commit:
+ *   dossier-prose-manifest (784 rows, every moved cell DS-GEN-2), espionage-dormancy-fence's constant (360 of
+ *   360, zero residue outside the GS-2 fields), and the unregistered fork-registry generatePopulation rows with
+ *   generationForkCensus's control hash.
+ *
+ * 2026-10-30 — SERVICE CATEGORY FIDELITY (RS-1..RS-13), THROUGH THE SIGNED DOOR (ODQ §934.101; record
+ *   docs/shift-records/2026-10-30-service-category-fidelity.json; the cloud chair signs under the owner's
+ *   delegation "I also now defer and give all judgment to you that is required now or in the future", vetoable).
+ *   460 OF 525 ROWS MOVED; the key set is identical (525 = 525). THE CAUSE, ONE: every authored catalog service
+ *   name is registered in SERVICE_CATEGORY_MAP (serviceCategoryTables.js), so 162 catalog (service, host) pairs
+ *   change bucket (food and drink to Food & Drink, markets to Goods & Crafts, civic/gatekeeping/public order to
+ *   Legal & Financial, maps and scribing to Information, horses and parcels to Transportation). ⚠ STREAM FORKS,
+ *   DISCLOSED: Discreet passage -> criminal forks seeded streams at Underground-network hosts (the crime-scaled
+ *   gate draws before `p`); Parcel forwarding leaving magic now rolls in no-magic worlds, shifting their later
+ *   draws. Measured on the 1000-settlement lane sample (same seeds, HEAD d14c5c56 vs the re-map): 948 of 1000
+ *   settlements' availableServices changed; false notable absences 63 -> 0. Moved in the same shift, one surface
+ *   per commit: dossier-prose-manifest (1,048 rows), espionage-dormancy-fence's constant, and the unregistered
+ *   generationForkCensus control hash, institutionTable count and writerReach digest.
+ *
  * 2026-09-16 — THE GENESIS RE-RECORD, OWNER-SIGNED ("sign the golden", 2026-09-16 ~09:4x EDT, in the chat
  *   of the chair's session f6ac0d98). ALL 525 ROWS OF 525 MOVED, and had stood RED since the em-dash wave
  *   `e3f6029b2` (the voice law: no em dash in any user-facing string; bisected to that car and BANKED at

@@ -4,6 +4,7 @@
  * pair, power gap, personalities and active stress flags.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
 import { STRESS_ECONOMIC_EFFECTS } from '../../data/npcData.js';
 
 export const computeRelTension = (factionA, factionB, stressFlags, instFlags) => {
@@ -96,4 +97,62 @@ export const computeRelTension = (factionA, factionB, stressFlags, instFlags) =>
     if (roll <= 0) return archetype;
   }
   return STRESS_ECONOMIC_EFFECTS.wary_alliance;
+};
+
+/** Two stand-in names no generated NPC carries, for reading which lines name both parties. */
+const PARTY_A = { name: 'Party-A-of-the-tie' };
+const PARTY_B = { name: 'Party-B-of-the-tie' };
+/** @type {WeakMap<object, number[]>} */
+const bothNamedCache = new WeakMap();
+/** The indices of an archetype's tension lines that name BOTH parties (pure; cached per archetype). */
+const bothNamedTensions = (archetype) => {
+  let indices = bothNamedCache.get(archetype);
+  if (!indices) {
+    indices = [];
+    for (let index = 0; index < archetype.tension.size; index++) {
+      const line = archetype.tension(PARTY_A, PARTY_B, index);
+      if (line.includes(PARTY_A.name) && line.includes(PARTY_B.name)) indices.push(index);
+    }
+    bothNamedCache.set(archetype, indices);
+  }
+  return indices;
+};
+
+/**
+ * GS-1 (ODQ §934.101): THE TIE-PROSE DRAW, WITHOUT REPLACEMENT PER SETTLEMENT. One draw per
+ * `generateRelationships` call (one town). The first tie of an archetype opens at a draw-free
+ * fnv offset keyed on its own directed pair; each further tie of that archetype in the town takes
+ * the next variant, so no description or tension line repeats on the page until the archetype's
+ * whole pool is spent. Past that point the draw cycles through the lines that name BOTH parties
+ * (when the pool has any), so an overflow tie can share a template with an earlier one but never
+ * print the same sentence. ZERO rng draws: the relationship roll stream is untouched. The
+ * returned `proseVariant` is stored on the tie because the line now depends on the rest of the
+ * town, so a re-render under new names
+ * (generateSettlementPipeline.js :: refreshRelationshipProjections) reuses it instead of re-hashing.
+ * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
+ *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
+ */
+export const createTieProseDraw = () => {
+  /** @type {Map<unknown, {base: number, used: number}>} */
+  const draws = new Map();
+  return (archetype, npc, partner) => {
+    const archetypeKey = Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, value]) => value === archetype)?.[0];
+    let draw = draws.get(archetype);
+    if (!draw) {
+      draw = { base: fnv1a32(`${npc?.name ?? ''}>${partner?.name ?? ''}::${archetypeKey ?? archetype?.label}`), used: 0 };
+      draws.set(archetype, draw);
+    }
+    const size = archetype.tension.size;
+    const named = bothNamedTensions(archetype);
+    const proseVariant = draw.used < size || named.length === 0
+      ? (draw.base + draw.used) % size
+      : named[(draw.base + draw.used - size) % named.length];
+    draw.used += 1;
+    return {
+      archetypeKey,
+      proseVariant,
+      description: archetype.desc(npc, partner, proseVariant),
+      tension: archetype.tension(npc, partner, proseVariant),
+    };
+  };
 };

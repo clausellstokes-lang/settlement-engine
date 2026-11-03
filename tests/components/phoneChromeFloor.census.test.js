@@ -261,6 +261,8 @@ const CENSUS = (() => {
  * and map/RealmPhoneNotice.jsx (§934.26 car 1). Raising the floors to today's counts would red
  * every in-flight branch that adds an import anywhere inside a 208-file subtree, which is the
  * cost this field was deliberately shaped to avoid.
+ *
+ * ⭐ BUILD-T3 (dossier consolidation, 2026-10-30): chair-ruled CUTS in the World group remove floored lines with their blocks, never a site that stopped being floored. U2+U3 (NPCs footer, per-group tally; Relationships intros, slider sentence, crossConns, Known Contacts, conflict desc/hooks): /create 750 -> 738, /settlements 991 -> 979, /gallery 794 -> 782. U4 (History count span, Recent Events, banner, legend mark, inline hooks): 738 -> 727, 979 -> 968, 782 -> 771. U5 (Rumors second sentence, Daily Life marketing line, Traditions footer and placeholders): 727 -> 725, 968 -> 966, 771 -> 769. U6 Faith (the patron-seat block and the niche block merged into FaithSection's patron line and one creed list): 725 -> 719, 966 -> 960, 769 -> 763. U6c War ROSE by one: the army's condition line moved into the units-abroad entry as its own floored row (W6): 719 -> 720, 960 -> 961, 763 -> 764. Glance rows (DS-REL-1 network line render removed): 720 -> 719, 961 -> 960, 764 -> 763.
  */
 const ROUTE_BASELINE = Object.freeze({
   // ⛔ lane 28 (the create page, the tier picker, the landing and the header nav)
@@ -273,7 +275,43 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/generate/WizardOutputToolbar.jsx, which is now the public roster's. Nothing
   // on this surface was floored, written or ruled by the re-measure itself; 97 is the count
   // lane 28 has left to do.
-  '/create':                { roots: 1, files: 165, floored: 750, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // floored 750 -> 738, and /settlements 991 -> 979, /gallery 794 -> 782 (BUILD LANE S, S-3,
+  // 2026-10-30; chair rulings RS-15..RS-17): ServicesTab.jsx lost TWELVE floored sites, every
+  // one in a CUT block: ten `chromeFontSize` (the header-strip chips, the Category Status
+  // grid) and two `proseFontSize` (the criminal card's note, the footer). Every route that
+  // opens the dossier closure falls by exactly those twelve; `bare` holds.
+  // and BUILD-T3 (2026-10-30; the World group's cuts: NPCs N4/N7/N8, Relationships, History,
+  // Daily Life, Traditions, War, Faith) took a further THIRTY-ONE floored sites from the same
+  // dossier closure: /create 738 -> 707, /settlements 979 -> 948, /gallery 782 -> 751 at the merge.
+  // and BUILD-T6 (2026-10-30; the owner's word: anonymous forging is town only) cut the size grid's
+  // sub-floor chrome (ConfigurationPanel's per-size notes and the custom-population field, HomeHero's
+  // per-size hint): /create 707 -> 681, /settlements 948 -> 922, /gallery 751 -> 725, /compendium 211 -> 206.
+  // and BUILD-T1 (2026-10-30, re-measured on claude/ux-T1 rebased onto 2acd0206; the Summary group's cuts): the DM
+  // Summary tab (SummaryTab, SummaryTabV2) and the Neighbours route leave the dossier closure (files 165 -> 162 and
+  // 154 -> 151, a ruled removal, X-5 / X-6, not a collapse), the Overview's Geography, Institutions and two score
+  // bars go and the Institutions tab arrives (T1-10, T1-14/15, X-13): /create 681 -> 605, /settlements 922 -> 852,
+  // /gallery 725 -> 649.
+  // and CURE LANE T11 U1 (2026-10-30; VERIFIER STOP-1, R7): the governing faction's modifier returns as ONE
+  // floored chip (`chromeFontSize`) on Power's ruling-chain power line: /create 605 -> 606, /settlements
+  // 852 -> 853, /gallery 649 -> 650; `bare` holds. T11 U3 (VERIFIER F11, X-2) cuts Defense's "Order & crime
+  // plot hooks" block with its floored lines, as measured: /create 606 -> 605, /settlements 853 -> 852,
+  // /gallery 650 -> 649.
+  // and BUILD-W2-BLOCKLAW U2 (2026-10-31, X-18): the Overview's ONE routing sentence under the identity
+  // strip is one floored site (`proseFontSize`): /create 605 -> 606, /settlements 852 -> 853, /gallery
+  // 649 -> 650; `bare` holds. The block-law moves (X-16) add and remove no floored site.
+  // and LANE G2 (2026-10-31, GS-2 one faction set, ODQ §934.101): the Relationships "Factions" section is cut
+  // (its member chips were one floored site) and PowerStrata's FactionRow sub-row drops the minted group name
+  // (one floored site) for a member count on the line already there: /create 606 -> 604, /settlements
+  // 853 -> 851, /gallery 650 -> 648; `bare` holds. A surface only shrank.
+  // GROWN BY A NAMED CAUSE (2026-10-31, W2-VEIL-B, X-24): the shared gallery panel gains Export to gallery /
+  // Manage gallery, the snapshot-or-live toggle, the hidden list and the curate door: eight floored sites on each
+  // route that mounts the panel: /create 604 -> 612, /settlements 851 -> 859, /gallery 648 -> 656; `bare` holds.
+  // and X-37 (2026-11-01, the owner: "Remove the spatial layouts from the summary page"): the Overview's
+  // layout chip and its Spatial Layout section leave, three floored sites with them (the chip, a quarter's
+  // description, its landmark line): /create 614 -> 611, /settlements 861 -> 858, /gallery 658 -> 655;
+  // `bare` holds. A surface only shrank, measured out of this test's own red run.
+  // floored 611 → 613 (2026-11-02, X-45): the Institutions card's ✎ YOU mark and the backs editor's caption, both floored by chromeFontSize.
+  '/create':                { roots: 1, files: 162, floored: 613, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -316,13 +354,17 @@ const ROUTE_BASELINE = Object.freeze({
   // the cure is pinned in tests/components/publicChromeFloor.census.test.js, which grew a
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
-  '/settlements':           { roots: 1, files: 206, floored: 991, ruled: 4, bare: 0 },
-  '/compendium':            { roots: 1, files: 51, floored: 211, ruled: 3, bare: 0 },
+  // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
+  '/settlements':           { roots: 1, files: 206, floored: 860, ruled: 4, bare: 0 },
+  // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
+  // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
+  '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
   '/about/what-this-is':    { roots: 1, files: 16, floored: 5, ruled: 1, bare: 0 },
   '/about/guide':           { roots: 1, files: 12, floored: 11, ruled: 3, bare: 0 },
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
-  '/gallery':               { roots: 1, files: 154, floored: 794, ruled: 4, bare: 0 },
+  // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
+  '/gallery':               { roots: 1, files: 151, floored: 657, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
@@ -380,7 +422,20 @@ const ROUTE_BASELINE = Object.freeze({
   // src/components/surveyor/InterpretApplyPanel.jsx without touching this census. EM-E3 and
   // EM-F3 were measured at zero for this row with their component bodies planted. `bare`
   // stays 0 and `ruled` stays 3; `files` is a FLOOR the grown tree still clears.
-  '(shell)':                { roots: 1, files: 61, floored: 144, ruled: 3, bare: 0 },
+  // (shell) floored 144 -> 145 (BUILD LANE T4, 2026-10-30; the owner's word): the post-generate
+  // coach's folded pill is one new, correctly floored chrome site in the app shell. `bare` holds.
+  // (shell) floored 145 -> 137 (BUILD LANE W2-SURVEYOR U1, X-22): the door no longer mounts
+  // InterviewPanel (its only way in was the retired "Ask the world" link), so its eight floored
+  // sites left the shell's subtree. Nothing became bare; `ruled` and `bare` hold.
+  // (shell) floored 137 -> 136 (W2-SURVEYOR U2): the chat shell floors its small chrome
+  // through ONE chromeFontSize call shared by the turn label and the thinking line. `bare` holds.
+  // (shell) floored 136 -> 128 (W2-SURVEYOR U3, X-22(d)(f)): the analyst panel's box, toggle,
+  // chips, cost row and thumbs left with the panel (its reply floors its small chrome through one
+  // call), and the proposal message adds one. Nothing became bare; `ruled` and `bare` hold.
+  // (shell) floored 128 -> 135 (W2-SURVEYOR, the chair's ruling: the Interview keeps a way in
+  // BY PHRASE, so the door mounts InterviewPanel again and its SEVEN floored sites return; the
+  // U1 note's "eight" counted the shell's retired route hint with them). `bare` holds.
+  '(shell)':                { roots: 1, files: 61, floored: 135, ruled: 3, bare: 0 },
 });
 
 /**
@@ -638,7 +693,9 @@ describe('THE PHONE CHROME FLOOR — a census of the source, on every route the 
       dossier.length,
       'the derivation reaches no dossier panel — it has stopped following the lazy edge that mounts '
       + 'them, so the eighteen views this census is the source-side twin of are unmeasured',
-    ).toBeGreaterThanOrEqual(45);
+    // 45 -> 44 (2026-10-30, BUILD-T1): SummaryTab and SummaryTabV2 leave the lazy registry (X-5) and
+    // InstitutionsTab joins it (T1-14), a net of one panel fewer.
+    ).toBeGreaterThanOrEqual(44);
 
     const primitives = CENSUS_FILES.filter((f) => f.startsWith('src/components/primitives/'));
     expect(

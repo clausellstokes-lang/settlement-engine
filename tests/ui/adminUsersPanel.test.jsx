@@ -355,6 +355,155 @@ describe('AdminUsersPanel — A4 user-management UI', () => {
   });
 });
 
+// ── T7 survey (2026-10-30): refusals are shown, the two-key ceremony fails
+//    closed, and the search box claims only what list_users searches. ──
+describe('AdminUsersPanel — refusals and claims (T7 survey)', () => {
+  beforeEach(() => {
+    invoke.mockReset();
+    invoke.mockImplementation(routeInvoke());
+  });
+
+  test('the search box claims what list_users really matches (email, name or id; T9 S2 taught the server the id)', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    const box = screen.getByRole('textbox', { name: /search users/i });
+    // T7 cut "id" from the claim because list_users never matched the id column.
+    // T9 (S2) made list_users match an exact user id, so the claim comes back.
+    expect(box.getAttribute('aria-label')).toBe('Search users by email, name or id');
+    expect(box.getAttribute('placeholder')).toMatch(/^Search by email, name or id/);
+  });
+
+  test('an id typed into the search box rides list_users unchanged', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    const id = '0f8fad5b-d9cb-469f-a165-70867728950e';
+    fireEvent.change(screen.getByRole('textbox', { name: /search users/i }), { target: { value: id } });
+    fireEvent.click(screen.getByRole('button', { name: /search/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', {
+      body: { action: 'list_users', metadata: { search: id } },
+    }));
+  });
+
+  test('a refused search is shown and leaves no stale rows', async () => {
+    invoke.mockImplementation(async () => ({ data: { error: 'Insufficient privileges' }, error: null }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.click(screen.getByRole('button', { name: /search/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/insufficient privileges/i);
+    expect(screen.queryByRole('table', { name: /search results/i })).toBeNull();
+  });
+
+  test('a refused action is shown and the success line is not', async () => {
+    const base = routeInvoke();
+    invoke.mockImplementation(async (fn, arg) => (arg.body.action === 'add_internal_note'
+      ? { data: { error: 'Admin action failed' }, error: null }
+      : base(fn, arg)));
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    fireEvent.click(screen.getByRole('button', { name: /add note/i }));
+    await fillDialog(/note/i, 'saw a thing', /^add$/i);
+    expect((await screen.findByRole('alert')).textContent).toMatch(/admin action failed/i);
+    expect(screen.queryByText('Internal note added.')).toBeNull();
+  });
+
+  test('a wrong password keeps the two-key modal open with its error and never calls the edge action', async () => {
+    vi.doMock('../../src/lib/authSecurity.js', () => ({
+      reauthenticateWithPassword: async () => { throw new Error('Incorrect password.'); },
+    }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    fireEvent.click(screen.getByRole('button', { name: /^ban$/i }));
+    await submitTwoKey('user-123');
+    const dialog = await screen.findByRole('dialog');
+    expect((await within(dialog).findByRole('alert')).textContent).toMatch(/incorrect password/i);
+    expect(invoke).not.toHaveBeenCalledWith('admin-actions', expect.objectContaining({
+      body: expect.objectContaining({ action: 'set_account_banned' }),
+    }));
+    vi.doUnmock('../../src/lib/authSecurity.js');
+  });
+
+  test('Review billing renders the redacted billing summary', async () => {
+    const base = routeInvoke();
+    invoke.mockImplementation(async (fn, arg) => (arg.body.action === 'review_billing'
+      ? { data: { success: true, billing: { tier: 'premium', credits: 9, is_founder: true, customer_masked: 'cus_***42' } }, error: null }
+      : base(fn, arg)));
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    fireEvent.click(screen.getByRole('button', { name: /review billing/i }));
+    expect(await screen.findByText('cus_***42')).toBeTruthy();
+    expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'review_billing', userId: 'user-123' } });
+  });
+
+  test('every by-id moderation tool sends its action and id', async () => {
+    const Panel = await importPanel();
+    render(<Panel />);
+    await openAlice();
+    const cases = [
+      [/soft-delete settlement/i, /settlement id/i, 's-1', /soft-delete/i, { action: 'soft_delete_settlement', settlementId: 's-1', reason: 'moderation' }],
+      [/remove gallery item/i, /settlement id/i, 's-2', /^remove$/i, { action: 'remove_gallery_item', settlementId: 's-2', reason: 'moderation' }],
+      [/revoke share link/i, /settlement id/i, 's-3', /^revoke$/i, { action: 'revoke_share_link', settlementId: 's-3', reason: 'moderation' }],
+      [/unban settlement/i, /settlement id/i, 's-4', /^unban$/i, { action: 'set_content_banned', contentKind: 'settlement', settlementId: 's-4', banned: false, reason: 'moderation' }],
+      [/restore map/i, /map id/i, 'm-1', /^restore$/i, { action: 'soft_delete_map', mapId: 'm-1', enabled: true, reason: 'moderation' }],
+      [/set map private/i, /map id/i, 'm-2', /set private/i, { action: 'remove_gallery_map', mapId: 'm-2', reason: 'moderation' }],
+      [/^ban map$/i, /map id/i, 'm-3', /^ban$/i, { action: 'set_content_banned', contentKind: 'map', mapId: 'm-3', banned: true, reason: 'moderation' }],
+      [/unban map/i, /map id/i, 'm-4', /^unban$/i, { action: 'set_content_banned', contentKind: 'map', mapId: 'm-4', banned: false, reason: 'moderation' }],
+      [/remove comment/i, /comment id/i, 'c-1', /^remove$/i, { action: 'moderate_comment', commentId: 'c-1', reason: 'moderation' }],
+      [/restore comment/i, /comment id/i, 'c-2', /^restore$/i, { action: 'moderate_comment', commentId: 'c-2', enabled: true, reason: 'moderation' }],
+    ];
+    for (const [button, label, value, submit, body] of cases) {
+      fireEvent.click(screen.getByRole('button', { name: button }));
+      await fillDialog(label, value, submit);
+      await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body }));
+      await screen.findByText(/account age/i);
+      await waitFor(() => expect(screen.getByRole('button', { name: /review billing/i }).hasAttribute('disabled')).toBe(false));
+    }
+  });
+});
+
+// ── T9 (2026-10-30): the console a support account gets, mirroring the server:
+//    admin-actions grants support list_users, get_user_summary, issue_warning,
+//    add_internal_note, review_billing and the redacted diagnostic_bundle;
+//    everything else in this panel is highest-role, so it does not render. ──
+describe('AdminUsersPanel — the support-desk console (T9)', () => {
+  beforeEach(() => {
+    invoke.mockReset();
+    invoke.mockImplementation(routeInvoke());
+  });
+
+  test('search, open, warning, note, Review billing and Export bundle work; no highest-role control renders', async () => {
+    const Panel = await importPanel();
+    render(<Panel supportDesk />);
+    await openAlice();
+    expect(screen.getByRole('button', { name: /review billing/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /export bundle/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /issue warning/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /add note/i })).toBeTruthy();
+    for (const name of [
+      /reveal full details/i, /^send notice$/i, /grant \/ refund/i,
+      /^disable$/i, /^ban$/i, /full debug copy/i, /soft-delete settlement/i, /remove gallery item/i,
+      /revoke share link/i, /ban settlement/i, /soft-delete map/i, /set map private/i, /^ban map$/i,
+      /remove comment/i, /restore comment/i,
+    ]) {
+      expect(screen.queryByRole('button', { name }), String(name)).toBeNull();
+    }
+    fireEvent.click(screen.getByRole('button', { name: /export bundle/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'diagnostic_bundle', userId: 'user-123' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /issue warning/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /issue warning/i }));
+    await fillDialog(/warning reason/i, 'be civil', /^issue$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'issue_warning', userId: 'user-123', severity: 'minor', reason: 'be civil' } }));
+    await waitFor(() => expect(screen.getByRole('button', { name: /add note/i }).hasAttribute('disabled')).toBe(false));
+    fireEvent.click(screen.getByRole('button', { name: /add note/i }));
+    await fillDialog(/note/i, 'called in', /^add$/i);
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: { action: 'add_internal_note', userId: 'user-123', note: 'called in' } }));
+    const sent = [...new Set(invoke.mock.calls.map(([, { body }]) => body.action))];
+    expect(sent.sort()).toEqual(['add_internal_note', 'diagnostic_bundle', 'get_user_summary', 'issue_warning', 'list_users']);
+  });
+});
+
 // ── The panel is hidden for a non-elevated user (AdminPanel gate) ───────────
 describe('AdminPanel — hides user management for non-elevated users', () => {
   beforeEach(() => {

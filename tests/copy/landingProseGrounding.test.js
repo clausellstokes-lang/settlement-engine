@@ -161,20 +161,22 @@ describe('the landing prose quotes the fixture it is about', () => {
     expect(receipts.institution, 'the fixture institution is no longer the travellers\' inn').toContain('inn');
   });
 
-  it('the 02 body names the three receipts the card shows', () => {
+  it('the 02 body names the four receipts the card shows', () => {
     const body = landing.voice.body.toLowerCase();
     expect(body).toContain(fixture.town.name.toLowerCase());
-    for (const word of ['road', 'timber', 'inn']) {
+    // The conflict receipt is bound by BOTH its parties, the other three by their nouns.
+    for (const word of ['elder council', 'craft guilds', 'road', 'timber', 'inn']) {
       expect(body, `the voice body stopped naming the "${word}" receipt`).toContain(word);
     }
     const receipts = fixture.voice.receipts.map((r) => r.text.toLowerCase()).join(' | ');
-    for (const word of ['road', 'timber', 'inn']) {
+    for (const word of ['elder council', 'craft guilds', 'road', 'timber', 'inn']) {
       expect(receipts, `the fixture no longer carries a "${word}" receipt for the voice card`).toContain(word);
     }
-    // The card prints THREE receipt lines and the sentence says so (four until the urban band's
-    // re-emitted fixture, 2026-09-30).
-    expect(fixture.voice.receipts).toHaveLength(3);
-    expect(body, 'the voice body counts a number of facts the card does not print').toContain('three facts');
+    // The card prints FOUR receipt lines and the sentence says so. It printed three from the
+    // urban band's re-emitted fixture (2026-09-30), which derived no conflict for lf-033, until
+    // the one-faction-set fixture (GS-2, ODQ §934.101; re-emitted 2026-10-31) derived one again.
+    expect(fixture.voice.receipts).toHaveLength(4);
+    expect(body, 'the voice body counts a number of facts the card does not print').toContain('four facts');
   });
 
   it('the commons body offers a town the curated trio actually carries', () => {

@@ -15,20 +15,22 @@
  * short note rather than a fabricated grid.
  */
 
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { tokenCase } from '../labelLadder.js';
 import { useMemo } from 'react';
 import { causalBandWord, deriveCausalState, variablePolarity } from '../../../domain/causalState.js';
+import { activeConditionWords, conditionsSentence } from '../../../domain/display/conditionWords.js';
 import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
-import { FS, INK, MUTED, BODY, BORDER, BORDER2, CARD, CARD_ALT, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
+import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import { edged } from '../../../design/edgedBox.js';
 
 // Humanized labels for the 16 SYSTEM_VARIABLES (mirrors causalState.js's internal
 // VARIABLE_LABEL, kept here so the display layer owns its own copy).
 const VAR_LABEL = {
-  food_security: 'Food security',
+  food_security: 'Food supply chains', // chair ruling 4 (T1, 2026-10-30): the score is the food chains' status (causalState.js :: deriveFoodSecurity), not the Overview's Food Security band
   labor_capacity: 'Labor capacity',
   public_legitimacy: 'Public legitimacy',
   ruling_authority: 'Ruling authority',
@@ -113,6 +115,10 @@ export default function SubstrateTab({ settlement }) {
         || healthOrientedScore(a) - healthOrientedScore(b)
         || a.label.localeCompare(b.label));
   }, [model]);
+  // THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): the sentence under the rows
+  // names the conditions the reading folds in, and says nothing when there are none
+  // (domain/display/conditionWords.js, shared with print).
+  const conditionWords = useMemo(() => activeConditionWords(settlement), [settlement]);
 
   if (!model || rows.length === 0) {
     return (
@@ -122,38 +128,22 @@ export default function SubstrateTab({ settlement }) {
     );
   }
 
-  const summary = model.summary || {};
-  const pressures = [
-    ...(summary.collapsed || []),
-    ...(summary.critical || []),
-    ...(summary.strained || []),
-  ].map(k => VAR_LABEL[k] || humanizeToken(k) || 'Recorded condition');
-
   return (
     <div data-testid="substrate-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
-      <div style={{ fontSize: FS.lg, fontWeight: 800, color: INK, marginBottom: 4 }}>
-        What is holding, what is strained
+      {/* ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-25; RULINGS-CROSS X-12). The page title
+          agrees with the tab's new label, "Foundations", and the sub-line keeps the old title's
+          words. The framing paragraph is TRIMMED to its one fact (the readings include current
+          conditions, which is why a row can disagree with its home page's first-survey reading)
+          and the "Under pressure" callout is CUT: it restated the rows sorted worst-first right
+          below it (999/1000). The sixteen rows are the engine view and stay (R7). */}
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: 2 }}>
+        <div data-testid="substrate-title" style={{ fontSize: FS.lg, fontWeight: 800, color: INK }}>
+          Foundations
+        </div>
+        <InfoPill text={SECTION_HELP.foundations} />
       </div>
-      <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '0 0 12px' }}>
-        Food, authority, defense, trade, and the other foundations that keep this settlement standing.
-        Each reading already includes its recorded siege, drawdown, outbreak, and other current conditions.
-      </p>
-
-      {/* Pressures callout — the systems the model flags strained-or-worse. */}
-      <div data-testid="substrate-pressures" style={{
-        background: CARD_ALT,
-        ...edged(`1px solid ${pressures.length ? BORDER : BORDER2}`, `3px solid ${pressures.length ? RED : GREEN}`),
-        padding: `${SP.sm}px ${SP.md}px`, marginBottom: 12,
-      }}>
-        {pressures.length ? (
-          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5 }}>
-            <strong style={{ color: RED }}>Under pressure:</strong> {pressures.join(', ')}.
-          </div>
-        ) : (
-          <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: GREEN, lineHeight: 1.5 }}>
-            <strong>All foundations holding.</strong> No condition reads strained or worse.
-          </div>
-        )}
+      <div style={{ fontSize: proseFontSize(FS.sm, mobile), fontWeight: 700, color: BODY, marginBottom: 12 }}>
+        What is holding, what is strained
       </div>
 
       {/* The 16-variable grid. */}
@@ -181,6 +171,13 @@ export default function SubstrateTab({ settlement }) {
           ))}
         </NameColumns>
       </div>
+      {/* THE BLOCK LAW (X-16; BUILD-W2-BLOCKLAW U3): the one fact sentence sits UNDER the rows
+          it qualifies, never above them. It prints only when there is a condition to name. */}
+      {conditionWords.length > 0 && (
+        <p data-testid="substrate-conditions-note" style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, lineHeight: 1.5, margin: '12px 0 0' }}>
+          {conditionsSentence(conditionWords)}
+        </p>
+      )}
     </div>
   );
 }

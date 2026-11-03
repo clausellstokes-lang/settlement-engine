@@ -15,7 +15,7 @@
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import {
-  ChapterBand, ChapterHeadline, HairRule, Tag,
+  ChapterBand, HairRule, Tag,
 } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { Callout } from '../primitives/Callout.jsx';
@@ -25,25 +25,14 @@ import { humanize, label, plural, stripZwnj } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
+// RS-14: the card titles read the one label map the screen and the absences callout read.
+import { serviceLabel } from '../../domain/display/servicesDisplay.js';
 
 const SERVICE_CATEGORY_ORDER = [
   'lodging', 'food', 'equipment', 'magic', 'healing',
   'information', 'transport', 'legal', 'employment',
   'entertainment', 'criminal',
 ];
-const SERVICE_CAT_LABEL = {
-  lodging: 'Lodging',
-  food: 'Food & Drink',
-  equipment: 'Equipment',
-  magic: 'Magic',
-  healing: 'Healing',
-  information: 'Information',
-  transport: 'Transport',
-  legal: 'Legal',
-  employment: 'Employment',
-  entertainment: 'Entertainment',
-  criminal: 'Criminal',
-};
 const SERVICE_CAT_TONE = {
   lodging: 'good',
   food: 'good',
@@ -68,15 +57,11 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="08A"
+        eyebrow="05"
         title="Services"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${total} buyable across ${cats.length} ${plural(cats.length, 'category', 'categories')}`}
       />
-
-      <ChapterHeadline tone="gold">
-        What players can actually purchase here. Match a need to the right counter.
-      </ChapterHeadline>
 
       {/* ── The mounted state prose (the screen's ProseBlock positions) ── */}
       <StateProse stateProse={stateProse} tab="services" />
@@ -97,7 +82,11 @@ export function Services({ settlement, narrativeMode, vm, stateProse }) {
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
               {s.notableAbsences.map((a, i) => (
                 <Tag key={`abs-${i}`} tone="warn">
-                  {label(a) || humanize(String(a))}
+                  {/* RS-18: the callout names a category exactly as its card title does, the
+                      one label (servicesDisplay.js) through the same ladder. */}
+                  {a && typeof a === 'object' && a.key
+                    ? tokenCase(stripZwnj(serviceLabel(a.key)))
+                    : (label(a) || humanize(String(a)))}
                 </Tag>
               ))}
             </View>
@@ -160,7 +149,7 @@ function CategoryCard({ cat }) {
     >
       <View style={{ flexDirection: 'row', alignItems: 'baseline', marginBottom: 3 }}>
         <Text style={{ ...type.label_em, color: palette.ink, fontSize: pt['9'] }}>
-          {tokenCase(stripZwnj(SERVICE_CAT_LABEL[cat.key] || humanize(cat.key)))}
+          {tokenCase(stripZwnj(serviceLabel(cat.key)))}
         </Text>
         <Text style={{ ...type.caption, color: palette.muted, marginLeft: 5, fontSize: pt['7.5'] }}>
           {cat.items.length} option{cat.items.length === 1 ? '' : 's'}

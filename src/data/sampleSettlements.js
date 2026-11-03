@@ -53,6 +53,33 @@
 
 export const SAMPLE_SETTLEMENTS = Object.freeze([
   {
+    id:      'sample-cnocby',
+    name:    'Cnocby',
+    tier:    'village',
+    terrain: 'mountain',
+    teaser:  'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
+    tags:    ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
+    config: {
+      settType:         'village',
+      tradeRouteAccess: 'road',
+      terrainOverride:  'mountain',
+      monsterThreat:    'heartland',
+      culture:          'celtic',
+      customName:       'Cnocby',
+      // lf-033's resolved priority roll, kept exactly — the landing's Cnocby is
+      // the town these five numbers make.
+      priorityMilitary: 47,
+      priorityReligion: 23,
+      priorityEconomy:  49,
+      priorityCriminal: 64,
+      priorityMagic:    21,
+      nearbyResourcesRandom: false,
+      nearbyResources:       ['mountain_timber', 'alpine_pasture', 'hunting_grounds', 'ancient_grove', 'stone_quarry'],
+      nearbyResourcesState:  { mountain_timber: 'depleted' },
+      seed:                  'cnocby-033a',
+    },
+  },
+  {
     id:      'sample-mossgate',
     name:    'Mossgate',
     tier:    'town',
@@ -129,33 +156,6 @@ export const SAMPLE_SETTLEMENTS = Object.freeze([
   // holds 12/12 across suffixed forks (measured 2026-09-19). The inn, the market
   // and the faction conflict are NOT pinned and NOT promised: they held 6/12,
   // 8/12 and 8/12, so the teaser says nothing about them.
-  {
-    id:      'sample-cnocby',
-    name:    'Cnocby',
-    tier:    'village',
-    terrain: 'mountain',
-    teaser:  'A mountain village on a through road, where the good timber was cut out a generation ago and the carters who still stop know exactly whose cousin to ask about the rest.',
-    tags:    ['Mountain road', 'Exhausted timber', 'Quiet criminal pressure'],
-    config: {
-      settType:         'village',
-      tradeRouteAccess: 'road',
-      terrainOverride:  'mountain',
-      monsterThreat:    'heartland',
-      culture:          'celtic',
-      customName:       'Cnocby',
-      // lf-033's resolved priority roll, kept exactly — the landing's Cnocby is
-      // the town these five numbers make.
-      priorityMilitary: 47,
-      priorityReligion: 23,
-      priorityEconomy:  49,
-      priorityCriminal: 64,
-      priorityMagic:    21,
-      nearbyResourcesRandom: false,
-      nearbyResources:       ['mountain_timber', 'alpine_pasture', 'hunting_grounds', 'ancient_grove', 'stone_quarry'],
-      nearbyResourcesState:  { mountain_timber: 'depleted' },
-      seed:                  'cnocby-033a',
-    },
-  },
 ]);
 
 /**

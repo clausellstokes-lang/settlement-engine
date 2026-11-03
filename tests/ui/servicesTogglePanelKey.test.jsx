@@ -54,6 +54,23 @@ vi.mock('../../src/store/selectors.js', async (importOriginal) => {
 
 import { useStore } from '../../src/store/index.js';
 import ServicesTogglePanel from '../../src/components/ServicesTogglePanel.jsx';
+import { resolveServiceCatalogKey } from '../../src/generators/services/institutionServices.js';
+
+/**
+ * RS-20's red-first set: the 29 of 268 live institution names (the 1000-settlement corpus,
+ * 2026-10-30) whose menu the panel's old fuzzy-only matcher resolved DIFFERENTLY from the
+ * generator (exact key -> LOCALE_SERVICE_OVERRIDES -> fuzzy). Measured, not chosen.
+ */
+const MISMATCHED_29 = Object.freeze([
+  'Alehouse', 'Apothecary', "Assassins' guild", 'Beast trainers', 'Brothel', 'Carpenter',
+  'Common grazing land', 'Craft guilds (30-80)', 'District markets (5-10)', 'Dwellings (17-80)',
+  'Dwellings (4-16)', 'Dwellings (80-180)', 'Farmland', 'Housing (1000-5000 structures)',
+  'Housing (180-1000 structures)', 'International trade center', "Mages' district",
+  'Massive prison', 'Merchant guilds (15-40)', 'Merchant guilds (50-100+)',
+  'Multiple courthouses', 'Multiple water sources', 'Parish churches (10-30)',
+  'Red light district', 'Sewage system', 'Taverns (5-20)', 'Theaters', 'Water source',
+  "Wizard's tower",
+]);
 
 afterEach(cleanup);
 beforeEach(() => {
@@ -89,6 +106,38 @@ describe('ServicesTogglePanel toggle-key contract', () => {
     // And every value is the forced object shape.
     for (const v of Object.values(toggles)) {
       expect(v).toMatchObject({ allow: true, force: true, forceExclude: false });
+    }
+
+    // RS-20 (chair ruling 2026-10-30): the forced count is said ONCE per row (the duplicate
+    // badge beside the name is cut), and each service shows the category it files under.
+    const rowHeader = screen.getByRole('button', { name: /services, expand$/ });
+    const forcedBadges = [...rowHeader.querySelectorAll('span')]
+      .filter((el) => /^\d+ forced$/.test(el.textContent || ''));
+    expect(forcedBadges, 'the row header says its forced count more than once').toHaveLength(1);
+    fireEvent.click(rowHeader);
+    // 'Price discovery' is a Market service registered as information.
+    const card = screen.getByText('Price discovery').closest('.svc-card-row');
+    expect(card, 'the Market row did not expand to its services').toBeTruthy();
+    expect(card.textContent).toContain('Information');
+
+    // RS-20, THE RESOLVER (chair grant 2026-10-30): the panel keys a toggle by the menu the
+    // GENERATOR will read. Over the 29 names the old matcher sent elsewhere, force-all must
+    // write exactly the catalog keys resolveServiceCatalogKey returns for them.
+    cleanup();
+    useStore.getState().setServiceToggles({});
+    MOCK_CATALOG.Mixed = Object.fromEntries(MISMATCHED_29.map((name) => [name, {}]));
+    try {
+      render(<ServicesTogglePanel />);
+      fireEvent.click(screen.getByRole('button', { name: /force all/i }));
+      const written = new Set(Object.keys(useStore.getState().servicesToggles)
+        .map((k) => k.slice(0, k.indexOf('_service_'))));
+      const expected = new Set(['Grand Market', 'Market', ...MISMATCHED_29]
+        .map((name) => resolveServiceCatalogKey(name)).filter(Boolean));
+      expect(expected.size, 'the generator resolves none of the 29, so the arm is vacuous').toBeGreaterThan(10);
+      expect([...written].sort(), 'the panel keys toggles by a menu the generator does not read')
+        .toEqual([...expected].sort());
+    } finally {
+      delete MOCK_CATALOG.Mixed;
     }
   });
 });

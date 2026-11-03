@@ -12,6 +12,8 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
+import { resolveGenerationWorldLaw } from '../generationContext.js';
+
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
 const ADVERSARIAL_RELATIONSHIP_TYPES = new Set([
@@ -152,6 +154,7 @@ const rewriteFactionPhrasing = (
   institutionNames,
   tier,
   governingBodyOverride,
+  magicWorks,
 ) => {
   const isSmallSettlement = SMALL_SETTLEMENT_TIERS.has(tier);
   const guardLabel = deriveGuardLabel(institutionNames, isSmallSettlement);
@@ -159,7 +162,7 @@ const rewriteFactionPhrasing = (
   const merchantLabel = deriveMerchantLabel(institutionNames, isSmallSettlement);
   const healerLabel = deriveHealerLabel(institutionNames, isSmallSettlement);
   const watchLabel = deriveWatchLabel(institutionNames, isSmallSettlement);
-  const hasArcaneInstitution = includesAnyInstitution(
+  const hasArcaneInstitution = magicWorks && includesAnyInstitution(
     institutionNames,
     ['wizard', 'mage', 'alchemist'],
   );
@@ -331,7 +334,9 @@ const annotateMonsterThreat = (stability, monsterThreat) => {
     : 'Tense — regional monster threat';
 };
 
-const deriveInstitutionSignals = (institutionNames) => ({
+// ⛔ THE ARCANE SIGNAL ASKS THE WORLD LAW FIRST (GS-4, ODQ §934.101): a mundane 'Alchemist shop' (licence `none`)
+// raised the hedge-wizard line in 11 of 250 no-magic towns, each convicted by the coherence receipt and shipped.
+const deriveInstitutionSignals = (institutionNames, magicWorks) => ({
   hasMilitaryInstitution: includesAnyInstitution(
     institutionNames,
     ['garrison', 'barracks', 'militia', 'watch', 'guard', 'mercenary'],
@@ -340,7 +345,7 @@ const deriveInstitutionSignals = (institutionNames) => ({
     institutionNames,
     ['guild', 'market district', 'merchant house', 'trading company'],
   ),
-  hasArcaneInstitution: includesAnyInstitution(
+  hasArcaneInstitution: magicWorks && includesAnyInstitution(
     institutionNames,
     ['mage', 'wizard', 'arcane', 'alchemist'],
   ),
@@ -704,7 +709,9 @@ export const buildGovernanceLabels = ({
   hasNobleInstitution,
   stressTypes,
   fallbackStressType,
+  worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
 }) => {
+  const magicWorks = resolveGenerationWorldLaw(worldLaw, config).magicFunctions();
   const hasStress = stressType => stressTypes.includes(stressType);
   const monsterThreat = config?.monsterThreat || 'frontier';
 
@@ -719,7 +726,7 @@ export const buildGovernanceLabels = ({
   );
   const stability = annotateMonsterThreat(stressStability, monsterThreat);
 
-  const institutionSignals = deriveInstitutionSignals(institutionNames);
+  const institutionSignals = deriveInstitutionSignals(institutionNames, magicWorks);
   const hasRoyalAuthority =
     configuredGoverningFaction &&
     configuredGoverningFaction.includes('Royal Authority');
@@ -772,6 +779,7 @@ export const buildGovernanceLabels = ({
       institutionNames,
       tier,
       governingFactionName,
+      magicWorks,
     );
   }
   if (primaryStress && stressNarratives[primaryStress]) {
@@ -780,6 +788,7 @@ export const buildGovernanceLabels = ({
       institutionNames,
       tier,
       governingFactionName,
+      magicWorks,
     );
   }
 

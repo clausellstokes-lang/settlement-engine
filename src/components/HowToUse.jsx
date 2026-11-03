@@ -247,10 +247,10 @@ function QuickStart() {
         <div style={{ width:6, height:6, borderRadius:'50%', background:swatch['#B8860B'], flexShrink:0, marginTop:7 }}/>
         <p style={{ fontSize: FS['12.5'], color:swatch['#5A3A00'], lineHeight:1.6, margin:0, fontStyle:'italic' }}>Looking for a specific service? If you need <em>Remove Curse</em>, <em>Healing</em>, or any institutional service, search for it in the <strong>Compendium → Institutions</strong> tab, find the institution that provides it, then use Advanced Generate to force that institution in the <strong>Institutions</strong> step.</p>
       </div>
-      <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>DM Summary</strong> tab first. It gives you the one-paragraph version ready for the table.</Step>
+      <Step n={4}>Hit <strong>Generate</strong>. Read the <strong>Overview</strong> tab first. It gives you the town at a glance, ready for the table.</Step>
       <Step n={5}>Browse <strong>NPCs</strong> and <strong>Power</strong> tabs to build your session picture. The Power tab shows public legitimacy, faction relationships, and (where relevant) legacy annotations connecting the settlement's history to its current power structure. Daily Life is for mid-session quick reference.</Step>
       <Step n={6}><strong>Save</strong> to the Settlements tab to keep it for future sessions. You can also <strong>Export</strong> using the PDF button for a print-ready briefing, or copy the Narrative AI Prompt for any AI assistant.</Step>
-      <Tip>You don't need to read every section before the session starts. DM Summary and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
+      <Tip>You don't need to read every section before the session starts. The Overview and Daily Life are designed for the table. The other tabs are for prep and immersion.</Tip>
     </>
   );
 
@@ -282,7 +282,7 @@ function PowerUser() {
         </p>
         <Step n={1}>Open <strong>Institution Configuration</strong> to force or exclude specific institutions. A temple-city forces a Cathedral regardless of tier. A hermit kingdom excludes all trade infrastructure.</Step>
         <Step n={2}>Apply <strong>Stress Conditions</strong> (Famine, Plague, Siege, Political Fracture, etc.) to shift the entire output. Stresses are not cosmetic. They modify institution probabilities, NPC goals, faction tensions, and safety profiles.</Step>
-        <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The DM Summary names the compound condition.</Step>
+        <Step n={3}>Multiple stresses <strong>compound</strong>. Famine + Political Fracture means food distribution is contested by factions, not just scarce. The Overview's crisis card carries each active stress.</Step>
         <Tip>Forces and exclusions persist through regeneration. Configure once, generate many variations.</Tip>
       </div>
 
@@ -295,7 +295,7 @@ function PowerUser() {
         <Step n={1}>Open a saved settlement in the <strong>Settlements tab</strong>. In the detail view, click <strong>Link Neighbour</strong> and choose another saved settlement.</Step>
         <Step n={2}>Pick a relationship type: Trade Partner, Allied, Patron, Client, Rival, Cold War, or Hostile. The relationship is bidirectional and both settlements update immediately.</Step>
         <Step n={3}>To bias a <em>new</em> settlement against an existing neighbour: in the Settlements tab, click <strong>Set as Neighbour</strong> on a saved settlement. The Create tab opens with that neighbour active, and the engine adjusts its economy and faction weights before generation.</Step>
-        <Step n={4}>Open either settlement's <strong>Neighbours tab</strong> to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
+        <Step n={4}>Open either settlement's <strong>Relationships</strong> tab to see the inter-settlement picture: relationship, NPC contacts, and active engagements.</Step>
         <Step n={5}>Use <strong>Edit Names</strong> in the Settlements tab to rename any NPC or faction. Changes cascade to all linked partner records automatically.</Step>
         <Tip>Relationship types matter mechanically. A Rival crowds into the same export markets, hardens the military posture, and seeds embedded agents and saboteur factions. A Patron creates dependency chains in the client's economy. A Cold War seeds clandestine intelligence factions (deep-cover operatives, commercial fronts) on both sides.</Tip>
       </div>
@@ -374,18 +374,20 @@ function Reference() {
       ['About','What this is (the trust page) and this Practical Guide.'],
     ]},
     { heading: 'Settlement Detail Tabs', rows: [
-      ['DM Summary','One-paragraph brief, arrival scene, and consolidated plot hooks for mid-session quick reference.'],
-      ['Overview','Physical layout, key institutions, recent history hook.'],
+      ['Overview','The town at a glance: identity, status tags, any active crisis, and who governs.'],
+      ['Foundations','What is holding and what is strained, reading by reading.'],
+      ['Plot Hooks','Every plot hook in the dossier, grouped by the page it comes from.'],
       ['Daily Life','Wealth level, diet, crime, safety. What it feels like to live here.'],
       ['Economics','Full export/import profile, prosperity analysis, supply chains, trade dependencies.'],
       ['Services','Available services and goods by category, with availability indicators.'],
+      ['Institutions','Every institution, house by house, with the services each provides.'],
       ['Power','Government type, dominant faction, NPC power rankings, political dynamics.'],
       ['Defense','Walls, garrison, threat response, fortification profile.'],
       ['NPCs','All named characters with personality, goals, secrets, and plot hooks.'],
       ['History','Generated historical events that explain current conditions.'],
       ['Resources','Nearby natural resources and their economic implications.'],
-      ['Viability','Economic stress analysis. What is working, what is fragile, what will break.'],
-      ['Neighbours','Cross-settlement view: linked settlements, NPC contacts, active conflicts.'],
+      ['Outlook','Economic stress analysis. What is working, what is fragile, what will break.'],
+      ['Relationships','Ties between people, active conflicts, and linked settlements with their contacts.'],
     ]},
     { heading: 'Settlement Workflow', rows: [
       ['Campaigns','Create named campaign folders in the Settlements tab to group settlements together. Move settlements between campaigns using the arrow button. Export a whole campaign as PDF from its folder header.'],

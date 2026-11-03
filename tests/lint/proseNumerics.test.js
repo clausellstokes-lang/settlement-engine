@@ -481,10 +481,69 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // all seven, 0 added and 0 removed, the census holds at 218 against a 218 ceiling and no
 // category count moves. The whole baseline diff is fourteen lines, seven -/+ pairs, each a
 // `"line"` value and nothing else.
-const REVIEWED_TOTAL_CEILING = 218;
+// THE DOSSIER CONSOLIDATION, BUILD-T3 (2026-10-30) — PURE LINE MOVES, NO CEILING CHANGE, NO
+// DEBT MOTION. The chair's cuts in the World group remove lines above banked rows in the
+// files that lane owns; each move is path-, category- and snippet-identical, 0 added and
+// 0 removed, census and category counts unchanged. U2 (NPCs, N4 tally cut):
+// npcComponents.jsx 150 -> 146, 157 -> 153. U5 (Daily Life anchor strip trimmed, the
+// unsaved hint and empty state merged): DailyLifeTab.jsx 268 -> 235.
+// ⭐ U6 IS A CURE, NOT A MOVE (chair rulings F3 + F6, 2026-10-30): the merged creed list in
+// FaithSection.jsx prints the share as its band (`shareBandLabel`) and drops the parenthetical
+// "(rightful claim N%)", so FOUR banked rows leave: `{d.share}` float + percent at :184 and
+// `{Math.round(d.legitimacy * 100)}` float + percent at :186. Reviewed row by row; the three
+// survivors re-address (`{d.standing}` 184 -> 240, the bar's aria-label 189 -> 244 both
+// categories, `{unaffiliated}` 198 -> 254). Ceilings fall with the debt: total 218 -> 214,
+// floatInterpolation 147 -> 145, percentToken 54 -> 52.
+// U6b (the launch teaser's pill import, X-7b): RumorsTab.jsx 68 -> 69, a pure line move.
+// ⭐ U7 IS A CURE (the print half of F6): FaithWar.jsx's living pantheon prints the share as
+// its band, so `{d.share}` float + percent at :362 leave; the contest odds re-address 370 ->
+// 383 (both categories) and the belief row 440 -> 453 (three rows, the band-mirror function
+// above them). Ceilings fall: total 214 -> 212, floatInterpolation 145 -> 144, percentToken
+// 52 -> 51.
+// Chair item 3 (the print history chapter reads the X-14b mark): HistoryFounding.jsx 406 -> 420,
+// a pure line move.
+// UX CONSOLIDATION U1 (2026-10-30, RULINGS-T2 T2-1) — THE DEBT FELL BY ONE. 218 -> 217,
+// floatInterpolation 147 -> 146: EconomicsGlance.jsx's `Output score: ${ecoScore}/100` left with the
+// Economy tile (the Output score is printed once, on the header chip). The food narrative's two
+// rows changed snippet only (the generic trade-dependence sentence was cut; no numeral moved);
+// every other EconomicsTab/EconomicsGlance row is a pure line move.
+// UX CONSOLIDATION U5 (2026-10-30, RULINGS-T2 T2-17) — THE DEBT FELL BY ONE. 217 -> 216,
+// floatInterpolation 146 -> 145: PowerTab.jsx's `{governing.power}` left with the "Governing authority"
+// row (the ruling chain is the one answer to who governs). Every other Power row is a pure line move.
+// UX CONSOLIDATION U6 (2026-10-30, RULINGS-T2 T2-20) — THE DEBT FELL BY ONE. 216 -> 215,
+// floatInterpolation 145 -> 144: DefenseTab.jsx's `Criminal faction: power {crimFaction.power||0}` became
+// the faction's name and band word (the description and the capture note live on Power).
+// UX CONSOLIDATION U9 (2026-10-30, RULINGS-T2 T2-20 print parity) — THE DEBT FELL BY TWO. 215 -> 213,
+// floatInterpolation 144 -> 143, percentToken 54 -> 53: DefenseSecurity.jsx's `${captureScore}%` left with the
+// criminal-capture card (Power Structure prints capture). Every other PDF row is a pure line move.
+// AT THE MERGE OF T3 AND T2 (the chair, 2026-10-30): both lanes' cures are summed from the
+// 218 base — T3 total -6 / float -3 / percent -3, T2 total -5 / float -4 / percent -1 — so the
+// ceilings are 207 / 140 / 50; the live scan at the merged tree is the receipt.
+// BUILD-W2-BLOCKLAW U1 (wave 2, X-17): OutputContainer.jsx 969 -> 973, a pure line move (the
+// tab-order comment lines above TAB_GROUPS). Path, category and snippet byte-identical.
+// BUILD-W2-BLOCKLAW U4 (wave 2, the block law X-16; MOVE ONLY): twenty-two pure line moves and
+// no debt motion. EconomicsGlance.jsx 133 -> 127 (the campaign tiles split off below the header);
+// EconomicsTab.jsx 422/424 -> 413/415, 561..563 -> 544..546, 568..572 -> 551..555, 677/683 ->
+// 624/630 (the commercial-profile, food and shadow lines moved under their facts, the campaign
+// blocks to the foot); PowerTab.jsx 488 -> 491, 526 -> 529 (the strata moved above the desk
+// passages). Path, category and snippet are byte-identical on every row; no ceiling moves.
+// GS-2 ONE FACTION SET (2026-10-31, ODQ §934.101, lane G2) — NO DEBT MOTION, A PURE LINE MOVE. PowerStrata.jsx
+// lost TheFactions' `factionGroups` read and FactionRow's sub-row now counts members by affiliation, so its four
+// rows re-address 271 -> 270 (both categories), 273 -> 272 and 314 -> 316. Totals stay 207 / 140 / 50.
+// BUILD-W2-LINKS U2 (wave 2, X-20 (c), the focus convention): npcComponents.jsx 146 -> 147 and
+// 153 -> 154, two pure line moves (the useEntityFocus import line). Path, category and snippet
+// byte-identical; no ceiling moves.
+// BUILD-W2-LINKS U3 (wave 2, X-20 (a, b), every mention is a door): six pure line moves, no debt
+// motion. npcComponents.jsx 147 -> 149 and 154 -> 155 (the MentionText + EntityLink import line;
+// the tie header's names now sit above its toggle, one line shorter); PowerStrata.jsx 271 -> 272
+// (two rows), 273 -> 274 and 314 -> 315 (the MentionText import line). Path, category and
+// snippet byte-identical on every row; no ceiling moves.
+// MERGE (chair, 2026-10-31): G2 and W2-LINKS both re-addressed PowerStrata.jsx and npcComponents.jsx rows; the
+// addresses below are re-read from the merged tree's own failure diff, pure line moves, totals 207 / 140 / 50.
+const REVIEWED_TOTAL_CEILING = 207;
 const REVIEWED_CATEGORY_CEILINGS = Object.freeze({
-  floatInterpolation: 147,
-  percentToken: 54,
+  floatInterpolation: 140,
+  percentToken: 50,
   multiplier: 8,
   twoDecimalScore: 9,
   pushIndirection: 0,
@@ -810,7 +869,7 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     ).toEqual([]);
     expect(
       ceilingViolations(LIVE.hits),
-      'The live tree exceeds the reviewed 218-row census. Humanize the new leak; never raise a ceiling.',
+      'The live tree exceeds the reviewed 213-row census. Humanize the new leak; never raise a ceiling.',
     ).toEqual([]);
   });
 
@@ -825,8 +884,8 @@ describe('prose numerics live-tree ratchet (exact legacy identity, shrink-only)'
     const temporaryRegeneratedBaseline = JSON.parse(JSON.stringify(mutatedLive));
     expect(mutatedLive).toEqual(temporaryRegeneratedBaseline);
     expect(ceilingViolations(temporaryRegeneratedBaseline)).toEqual([
-      'total 219 exceeds reviewed ceiling 218',
-      'floatInterpolation 148 exceeds reviewed ceiling 147',
+      'total 208 exceeds reviewed ceiling 207',
+      'floatInterpolation 141 exceeds reviewed ceiling 140',
     ]);
   });
 

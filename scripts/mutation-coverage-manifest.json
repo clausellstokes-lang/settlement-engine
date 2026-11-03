@@ -408,6 +408,10 @@
     "tests/copy/noGmailCopy.test.js": {
       "kind": "uncovered"
     },
+    "tests/copy/sectionHelp.test.js": {
+      "kind": "mutation",
+      "label": "copy/section-help pill copy law"
+    },
     "tests/copy/pricingP9.test.js": {
       "kind": "uncovered"
     },

@@ -470,6 +470,21 @@ describe('DS-GEN-12 / DS-GEN-13 / DS-GEN-17 — three total partitions', () => {
       .toBe('MARKET-OPEN');
   });
 
+  it('⛔ THE NO-MARKET POOL STATES THE INSTITUTION FACT AND NEVER DENIES THE TOWN SELLS (chair T1-13)', () => {
+    // Lane T2 measured the Overview saying "Nothing in X is arranged for buying and selling in
+    // quantity" beside an Economics page saying "This is a town that sells" (110 of 1000; 131
+    // of 1000 on the v2 sample, 242 counting the "at the scale the town actually needs"
+    // variant). The absence of a market INSTITUTION is the fact; the absence of trade is not.
+    const pool = DOSSIER_STATE_PROSE_GENERAL['DS-GEN-13'].pools['NO-MARKET'];
+    expect(pool.length).toBeGreaterThan(0);
+    for (const { text } of pool) {
+      expect(text, 'a NO-MARKET variant no longer states that there is no market').toMatch(/\bno market\b/i);
+      // anchored: the toMatch(/no market/) on the line above pins this same variant's text as present
+      expect(text, 'a NO-MARKET variant denies that the town trades').not.toMatch(
+        /buying and selling|scale the town actually needs|no (?:trade|selling|buying)|does not sell|nothing (?:is )?(?:sold|bought)/i);
+    }
+  });
+
   it('THE MARKET: four pools, and the evaluation order is driven rather than described', () => {
     const stalls = [{ name: 'Weekly market' }];
     // NO-MARKET first — a town with no market-class row is not an entrepôt of its own stalls.
@@ -655,8 +670,7 @@ describe('the general desk — the mount registry', () => {
       'DS-GEN-18': 'economics.craftReason',
       // DESK-GEN3 car 2 — a lawful DARK mount, on the DS-STR-2 precedent.
       'DS-GEN-8': 'overview.steadings',
-      // DESK-GEN3 car 3.
-      'DS-REL-1': 'relationships.network',
+      // DESK-GEN3 car 3. (DS-REL-1 left this table 2026-10-30: it GLANCES, pinned below.)
       'DS-POP-3': 'overview.populationDirection',
     };
     for (const [blockId, mount] of Object.entries(expected)) {
@@ -682,6 +696,16 @@ describe('the general desk — the mount registry', () => {
     const drawn = drawnAtMount('overview.systemsHealth', health);
     expect(drawn.glance, 'the position is still mounted and keeps its glance').toBe('x');
     expect(drawn.sentence, 'overview.systemsHealth draws no sentence').toBeNull();
+    // ⛔ THE CONSOLIDATION CHAIR'S GLANCES (RULINGS-T3, 2026-10-30), on the DS-GEN-3 precedent:
+    // each block stays MOUNTED (never parked dark; the unmounted list is shrink-only) at a
+    // glance row that strips the sentence.
+    for (const [blockId, mount] of [['DS-REL-1', 'relationships.network'], ['DS-GEN-9', 'history.identity'], ['DS-GEN-16', 'history.record']]) {
+      expect(sentenceMountForBlock(blockId), `${blockId} speaks again`).toBeNull();
+      expectAbsentWithAnchor(UNMOUNTED_BLOCKS, blockId, UNMOUNTED_BLOCKS[0], `${blockId} was parked dark instead of glanced`);
+      const r = { glance: 'x', sentence: 'y', detail: [], provenance: { blockId, poolKey: 'p', angle: 'a' } };
+      expect(drawnAtMount(mount, r).glance, `${mount} keeps its glance`).toBe('x');
+      expect(drawnAtMount(mount, r).sentence, `${mount} draws no sentence`).toBeNull();
+    }
   });
 });
 

@@ -200,13 +200,9 @@ const CHART_CENSUS = Object.freeze([
       + ' "the bar tracks the derived 0-100 resilienceScore; the VALUE shown is the band label".'
       + ' Reported with the arithmetic; the door is the chair’s.',
   },
-  {
-    id: 'overview-institution-distribution',
-    path: 'src/components/new/tabs/OverviewTab.jsx', dim: 'flex',
-    drawn: 'insts.length',
-    figure: 'insts.length',
-    verdict: 'one-source', sharedOn: ['insts'],
-  },
+  // `overview-institution-distribution` (the category bar inside the Overview's Institutions
+  // collapsible) left with that block (owner addendum T1-15, 2026-10-30); the Institutions
+  // tab that replaced it draws no proportion.
   // ── POWER
   {
     id: 'power-standing-rung',

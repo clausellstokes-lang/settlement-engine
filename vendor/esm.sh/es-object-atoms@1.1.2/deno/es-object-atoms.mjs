@@ -1,0 +1,3 @@
+/* esm.sh - es-object-atoms@1.1.2 */
+var j=Object.create;var o=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,i=Object.prototype.hasOwnProperty;var l=(e,t)=>()=>(t||e((t={exports:{}}).exports,t),t.exports);var x=(e,t,s,m)=>{if(t&&typeof t=="object"||typeof t=="function")for(let r of u(t))!i.call(e,r)&&r!==s&&o(e,r,{get:()=>t[r],enumerable:!(m=p(t,r))||m.enumerable});return e};var b=(e,t,s)=>(s=e!=null?j(d(e)):{},x(t||!e||!e.__esModule?o(s,"default",{value:e,enumerable:!0}):s,e));var f=l((g,a)=>{"use strict";a.exports=Object});var c=b(f()),h=c.default??c;export{h as default};
+//# sourceMappingURL=es-object-atoms.mjs.map

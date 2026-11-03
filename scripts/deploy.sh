@@ -9,7 +9,7 @@
 #   4. Environment variable configuration
 #
 # Prerequisites:
-#   - Supabase CLI (npx supabase)
+#   - Supabase CLI, run through npx at the pinned SUPABASE_CLI_VERSION below
 #   - curl
 #   - jq (optional, for pretty output)
 #
@@ -34,6 +34,14 @@ fail()  { echo -e "${RED}[FAIL]${NC}  $1"; exit 1; }
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 ENV_FILE="$PROJECT_DIR/.env"
 CONFIG_TOML="$PROJECT_DIR/supabase/config.toml"
+# THE SUPABASE CLI IS PINNED (2026-11-02). A bare `npx supabase` resolves npm's
+# `latest` tag, which became CLI 3.0.0 on 2026-11-02: it rejects this repository's
+# supabase/config.toml ([inbucket]) and no longer takes --project-ref, which every
+# deploy step below passes. 2.122.0 is the version the edge-function deploy payloads
+# were last measured with (docs/DEPLOY.md). Raise it deliberately, after checking the
+# new CLI against config.toml and these flags, never by letting `latest` move.
+SUPABASE_CLI_VERSION="2.122.0"
+supabase_cli() { npx -y "supabase@${SUPABASE_CLI_VERSION}" "$@"; }
 # Route and schema-cache propagation normally complete quickly. Both readiness
 # probes allow roughly 40 seconds before refusing a partial cutover.
 EDGE_READINESS_ATTEMPTS=20
@@ -63,7 +71,7 @@ deploy_function() {
   if [[ -n "$flag" ]]; then
     args+=("$flag")
   fi
-  npx supabase "${args[@]}"
+  supabase_cli "${args[@]}"
   ok "Deployed: $fn${flag:+ (no-verify-jwt)}"
 }
 
@@ -238,7 +246,7 @@ ok "Token set"
 info "Step 2: Supabase project setup"
 echo ""
 echo "  Existing projects:"
-npx supabase projects list 2>/dev/null || warn "Could not list projects"
+supabase_cli projects list 2>/dev/null || warn "Could not list projects"
 echo ""
 echo "  Options:"
 echo "    1) Create a new project"
@@ -261,7 +269,7 @@ if [[ "$PROJ_CHOICE" == "1" ]]; then
   [[ -z "$DB_PASS" ]] && fail "Database password required"
 
   info "Creating project '$PROJ_NAME'..."
-  npx supabase projects create "$PROJ_NAME" \
+  supabase_cli projects create "$PROJ_NAME" \
     --org-id "$ORG_ID" \
     --region "$REGION" \
     --db-password "$DB_PASS"
@@ -271,7 +279,7 @@ if [[ "$PROJ_CHOICE" == "1" ]]; then
   sleep 30
 
   # Get the project ref from the list
-  PROJECT_REF=$(npx supabase projects list 2>/dev/null | grep "$PROJ_NAME" | awk '{print $1}' | head -1)
+  PROJECT_REF=$(supabase_cli projects list 2>/dev/null | grep "$PROJ_NAME" | awk '{print $1}' | head -1)
   [[ -z "$PROJECT_REF" ]] && fail "Could not determine project ref. Check dashboard."
 
   ok "Project created: $PROJECT_REF"
@@ -283,13 +291,13 @@ fi
 # Link the project
 cd "$PROJECT_DIR"
 info "Linking project $PROJECT_REF..."
-npx supabase link --project-ref "$PROJECT_REF"
+supabase_cli link --project-ref "$PROJECT_REF"
 ok "Project linked"
 
 # ── Step 3: Get project API keys ────────────────────────────────────────────
 
 info "Step 3: Retrieving API keys..."
-API_KEYS=$(npx supabase projects api-keys --project-ref "$PROJECT_REF" 2>/dev/null || echo "")
+API_KEYS=$(supabase_cli projects api-keys --project-ref "$PROJECT_REF" 2>/dev/null || echo "")
 SUPABASE_URL="https://${PROJECT_REF}.supabase.co"
 
 # Parse anon key
@@ -340,7 +348,7 @@ PAYMENT_REFUND_CRON_SECRET="${PAYMENT_REFUND_CRON_SECRET:-$EXISTING_PAYMENT_REFU
 ACCOUNT_DELETION_CRON_SECRET="${ACCOUNT_DELETION_CRON_SECRET:-$(openssl rand -hex 32)}"
 PAYMENT_REFUND_CRON_SECRET="${PAYMENT_REFUND_CRON_SECRET:-$(openssl rand -hex 32)}"
 
-npx supabase secrets set \
+supabase_cli secrets set \
   --project-ref "$PROJECT_REF" \
   STRIPE_SECRET_KEY="$STRIPE_SK" \
   ACCOUNT_DELETION_CRON_SECRET="$ACCOUNT_DELETION_CRON_SECRET" \
@@ -355,7 +363,7 @@ wait_for_edge_function_route "payment-refund-worker"
 # ── Step 5: Run migrations ──────────────────────────────────────────────────
 
 info "Step 5: Running database migrations..."
-npx supabase db push
+supabase_cli db push
 ok "Migrations applied"
 
 # ── Step 6: Activate workers and prove webhook-lease schema readiness ────────
@@ -500,7 +508,7 @@ read -rp "  Resend from-address (RESEND_FROM_EMAIL) [skip]: " RESEND_FROM
 # NOTE: SUPABASE_SERVICE_ROLE_KEY / SUPABASE_URL / SUPABASE_ANON_KEY are RESERVED —
 # Supabase injects them into every edge function automatically and rejects setting
 # them via `secrets set`. Do not add them here.
-npx supabase secrets set \
+supabase_cli secrets set \
   --project-ref "$PROJECT_REF" \
   STRIPE_WEBHOOK_SECRET="$WEBHOOK_SECRET" \
   STRIPE_PRICE_CREDITS_10="$CREDITS_10" \
@@ -510,7 +518,7 @@ npx supabase secrets set \
   CLIENT_URL="$CLIENT_URL"
 
 if [ -n "$RESEND_KEY" ]; then
-  npx supabase secrets set --project-ref "$PROJECT_REF" \
+  supabase_cli secrets set --project-ref "$PROJECT_REF" \
     RESEND_API_KEY="$RESEND_KEY" RESEND_FROM_EMAIL="$RESEND_FROM"
   ok "Resend secrets configured"
 fi
@@ -523,12 +531,12 @@ read -rp "  Analytics device-hash pepper (ANALYTICS_HASH_PEPPER) [auto-generate]
 ANALYTICS_PEPPER="${ANALYTICS_PEPPER:-$(openssl rand -hex 32)}"
 read -rp "  Research export secret (EXPORT_SHARED_SECRET) [auto-generate]: " EXPORT_SECRET
 EXPORT_SECRET="${EXPORT_SECRET:-$(openssl rand -hex 32)}"
-npx supabase secrets set --project-ref "$PROJECT_REF" \
+supabase_cli secrets set --project-ref "$PROJECT_REF" \
   ANALYTICS_HASH_PEPPER="$ANALYTICS_PEPPER" EXPORT_SHARED_SECRET="$EXPORT_SECRET"
 ok "Analytics secrets configured (pepper + export secret)"
 
 # OPTIONAL: also add the owner-override email (fail-closed when unset):
-#   npx supabase secrets set --project-ref "$PROJECT_REF" OWNER_EMAIL="you@example.com"
+#   supabase_cli secrets set --project-ref "$PROJECT_REF" OWNER_EMAIL="you@example.com"
 
 ok "All secrets configured"
 

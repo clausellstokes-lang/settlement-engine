@@ -2,7 +2,16 @@
  * AdminPanel.jsx — Developer admin panel for managing users,
  * credits, roles, and system configuration.
  *
- * Only accessible to users with 'developer' or 'admin' role.
+ * Accessible to the 'developer' and 'admin' roles (everything), and to the
+ * 'support' desk (T9), which sees exactly what admin-actions grants that role
+ * (every switch case without an `isHighest` gate): the KPI strip (get_stats),
+ * the user console's support set (search, the redacted summary, warnings,
+ * internal notes, billing review, the redacted diagnostic bundle), the Support
+ * Queue, and the read-only dashboards (Usage Trends; Analytics & errors).
+ * Nothing the server denies support renders: no broadcasts, gallery reports
+ * (privileged RPCs), operational obligations, AI pricing, full-PII or account
+ * writes. Sim Tuning makes no server call and is not a server grant, so it
+ * stays with the staff roles.
  * Protected reads AND writes go through the admin-actions edge function so
  * everything is role-gated and audited server-side. In particular the user
  * console is the audited, redacted AdminUsersPanel (list_users / get_user_*),
@@ -11,6 +20,7 @@
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useStore } from '../store/index.js';
+import { isSupportRole } from '../lib/staffEntitlements.js';
 import { supabase } from '../lib/supabase.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import GalleryModerationPanel from './gallery/GalleryModerationPanel.jsx';
@@ -28,7 +38,7 @@ import DesktopOnlyGate from './primitives/DesktopOnlyGate.jsx';
 import Page from './primitives/Page.jsx';
 import PageHeader from './primitives/PageHeader.jsx';
 import Stat from './primitives/Stat.jsx';
-import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, sans, serif_, SP, FS } from './theme.js';
+import { GOLD_TXT, INK, BODY, BORDER, BORDER2, CARD, CARD_HDR, RED, sans, serif_, SP, FS } from './theme.js';
 
 // Icons-off surface: the section header is text-only. The action-vs-reference
 // boundary the old header glyph carried is now held by the differential
@@ -60,6 +70,9 @@ function Section({ heading, children, actions }) {
 
 export default function AdminPanel({ onBack }) {
   const isElevated = useStore(s => s.isElevated());
+  // The support desk (T9): admitted, but only to the panels the server grants
+  // it. Staff wins if both ever read true.
+  const supportOnly = useStore(s => isSupportRole(s.auth?.role)) && !isElevated;
   // Admin is a dense, multi-column operator console whose every action is a
   // consequential server-audited mutation; it cannot meaningfully reflow to a
   // phone. On mobile we keep the read-only KPI orientation strip and gate the
@@ -68,6 +81,9 @@ export default function AdminPanel({ onBack }) {
   const isMobile = useIsMobile();
 
   const [stats, setStats] = useState(null);
+  // A refused or failed KPI read is SHOWN (on mobile the strip is the whole
+  // read surface), never swallowed into an absent strip with a console line.
+  const [statsError, setStatsError] = useState(null);
 
   // KPI figures via the audited admin-actions `get_stats` action. It returns
   // aggregate counts ONLY (total / premium / credits pool) — no raw PII crosses
@@ -87,8 +103,9 @@ export default function AdminPanel({ onBack }) {
         premiumCount: data?.premiumCount ?? 0,
         totalCredits: data?.totalCredits ?? 0,
       });
+      setStatsError(null);
     } catch (e) {
-      console.error('Failed to fetch stats:', e);
+      setStatsError(e?.message || 'Request failed');
     }
   }, []);
 
@@ -102,7 +119,7 @@ export default function AdminPanel({ onBack }) {
     /* eslint-enable react-hooks/set-state-in-effect */
   }, [fetchStats]);
 
-  if (!isElevated) {
+  if (!isElevated && !supportOnly) {
     return (
       <div style={{ textAlign: 'center', padding: '60px 20px', color: BODY, fontFamily: sans }}>
         <p style={{ fontSize: FS.lg }}>Access denied. Developer or Admin role required.</p>
@@ -123,7 +140,9 @@ export default function AdminPanel({ onBack }) {
       <PageHeader
         eyebrow="Operator console"
         title="Admin"
-        subtitle="Manage users, credits, and system settings."
+        subtitle={supportOnly
+          ? 'Work the support queue, look up accounts, and read the usage dashboards.'
+          : 'Manage users, credits, and system settings.'}
         actions={(
           <>
             {onBack && (
@@ -149,6 +168,11 @@ export default function AdminPanel({ onBack }) {
           <Stat label="Credits Pool" value={stats.totalCredits} />
         </div>
       )}
+      {statsError && (
+        <p role="alert" style={{ margin: 0, fontFamily: sans, fontSize: FS.sm, color: RED }}>
+          The figures could not be loaded: {statsError}
+        </p>
+      )}
 
       {/* Mobile: the read-only KPI strip above is the whole admin read surface;
           the management toolset is gated to desktop. The plain "gate" variant
@@ -159,9 +183,32 @@ export default function AdminPanel({ onBack }) {
         <div style={{ marginTop: SP.sm }}>
           <DesktopOnlyGate
             title="Admin works best on desktop"
-            message="The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue."
+            message={supportOnly
+              ? 'The support console covers the support queue, account lookup, and the usage dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to work the queue.'
+              : 'The operator console covers user management, gallery reports, the support queue, AI pricing, and the usage and simulation dashboards. It is dense and needs the room a larger screen gives it. The figures above are a read-only snapshot. Open Admin on desktop to manage users or work the queue.'}
           />
         </div>
+      ) : supportOnly ? (
+      /* The support desk: exactly the panels admin-actions grants `support`.
+          The user console renders its support set (supportDesk); the action
+          tools and the read-only dashboards keep the staff layout's spacing. */
+      <div style={{ display: 'flex', flexDirection: 'column', gap: SP.xl, marginTop: SP.sm }}>
+        <Section heading="User Management">
+          <AdminUsersPanel supportDesk />
+        </Section>
+        <Section heading="Support Queue">
+          <SupportQueuePanel />
+        </Section>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: SP.lg, marginTop: SP.lg }}>
+          <Section heading="Usage Trends">
+            <AdminTrendsPanel />
+          </Section>
+          <Section heading="Analytics & errors">
+            <AdminAnalyticsPanel />
+            <AdminClientErrorsPanel />
+          </Section>
+        </div>
+      </div>
       ) : (
       /* Management Sections — held off from the header/KPI cluster (P5
           differential spacing) and spaced wider from one another than the
@@ -214,7 +261,7 @@ export default function AdminPanel({ onBack }) {
         {/* Observability cluster — the read-only analytics dashboards + the
             production crash sink (client_error_events, 081; grouped by signature
             with the always-visible last-hour alert banner from
-            report_client_error_alert, 156). Both live in ONE Section (rather than
+            report_client_error_alert, 167). Both live in ONE Section (rather than
             a second "Client Errors" Section) so the admin view adds no native
             title= to the shrink-only guidance-walker census; the errors panel
             carries its own <h3> delimiter. Read-only, service-role-gated. */}

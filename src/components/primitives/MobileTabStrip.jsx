@@ -20,7 +20,10 @@
  * read surfaces).
  *
  * @param {Object} props
- * @param {{id:string,label:React.ReactNode}[]} props.tabs
+ * @param {{id:string,label:React.ReactNode,tone?:string}[]} props.tabs  `tone: 'launch'` paints the
+ *   launch skin (the owner, 2026-11-01, ODQ §934.103, X-39): a tab that is still an
+ *   "Available at launch" teaser wears the regal ground with shimmering gold letters, idle
+ *   and lit alike, as on the desktop strip; the lit one carries the gold rule.
  * @param {string} props.value               selected tab id
  * @param {(id:string)=>void} props.onChange selection setter
  * @param {string} [props.ariaLabel='Tabs']  tablist accessible name
@@ -28,7 +31,7 @@
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import {
-  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans,
+  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans, launchSkin,
 } from '../theme.js';
 
 export default function MobileTabStrip({
@@ -146,8 +149,9 @@ export default function MobileTabStrip({
           WebkitOverflowScrolling: 'touch',
         }}
       >
-        {tabs.map(({ id, label }) => {
+        {tabs.map(({ id, label, tone }) => {
           const active = value === id;
+          const launch = tone === 'launch';
           return (
             <button
               type="button"
@@ -155,6 +159,7 @@ export default function MobileTabStrip({
               id={`${idPrefix}-tab-${id}`}
               role="tab"
               aria-selected={active}
+              data-tone={tone || undefined}
               aria-controls={`${idPrefix}-panel-${id}`}
               // Roving tabIndex: only the active tab is in the tab order; the
               // rest are reached via the arrow-key handler on the tablist.
@@ -168,10 +173,10 @@ export default function MobileTabStrip({
                 minHeight: 44,
                 flexShrink: 0,
                 border: 'none',
-                borderBottom: `2px solid ${active ? GOLD : 'transparent'}`,
+                borderBottom: `2px solid ${active ? (launch ? launchSkin.rule : GOLD) : 'transparent'}`,
                 marginBottom: -1,
-                background: active ? CARD : 'transparent',
-                color: active ? GOLD_DEEP : MUTED,
+                background: launch ? launchSkin.ground : active ? CARD : 'transparent',
+                color: launch ? launchSkin.ink : active ? GOLD_DEEP : MUTED,
                 fontFamily: sans,
                 fontSize: FS.sm,
                 fontWeight: active ? 800 : 600,
@@ -180,7 +185,7 @@ export default function MobileTabStrip({
                 WebkitTapHighlightColor: 'transparent',
               }}
             >
-              {label}
+              {launch ? <span data-launch-ink="" style={launchSkin.shimmer}>{label}</span> : label}
             </button>
           );
         })}

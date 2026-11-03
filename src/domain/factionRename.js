@@ -122,6 +122,10 @@ const CASCADE_BUCKETS = Object.freeze([
   // immutable caller spreads TOP-LEVEL buckets, not sub-paths; history is small
   // beside the map and the economy tables this list still excludes.
   'history',
+  // GS-2 (ODQ §934.101): a conflict's parties are POWER faction names now, so the
+  // conflict list carries the faction token in its party keys, its sentence and its
+  // hooks. Its `powerStructure` mirror is already inside the bucket above.
+  'conflicts',
   // A top-level STRING rather than a bucket. The generated pressure sentence
   // names the governing faction and is rendered on the summary tab, the map
   // quick-inspector, the PDF overview and the Foundry journal page.
@@ -148,6 +152,9 @@ const NPC_CASCADE_BUCKETS = Object.freeze([
 // access off the roster. Composing keeps that guard sharp instead of teaching it
 // an exception. Do NOT inline these back.
 const ROSTER = 'powerStructure.factions[]';
+// GS-2 (ODQ §934.101): the two homes of the conflict list, which since GS-2 holds power-faction
+// names. Declared once so the surface ledger and the cascade walk cannot drift.
+const CONFLICT_HOMES = Object.freeze(['conflicts[]', 'powerStructure.conflicts[]']);
 const PAIRWISE = 'powerStructure.factionRelationships[]';
 
 /**
@@ -276,6 +283,13 @@ export const FACTION_RENAME_SURFACES = Object.freeze([
   { path: 'powerStructure.recentConflict', kind: 'prose', why: 'the recent-conflict line is faction-phrased prose' },
   { path: 'history.currentTensions[].factions[]', kind: 'prose', why: 'the tension PARTY roster: the dossier renders each entry as a faction chip and the PDF prints it as a tension party' },
   { path: 'pressureSentence', kind: 'prose', why: 'the generated pressure line names the governing faction on the summary tab, the map inspector, the PDF overview and the Foundry journal' },
+  // GS-2 (ODQ §934.101): a conflict is fought between two POWER factions, so both homes of the
+  // conflict list hold the faction's exact name as a party key and its token in the prose.
+  ...CONFLICT_HOMES.flatMap(home => [
+    { path: `${home}.parties[]`, kind: /** @type {'key'} */ ('key'), why: 'a conflict party, the exact name of a power faction the Relationships page, the PDF and the Foundry journal print' },
+    { path: `${home}.desc`, kind: /** @type {'prose'} */ ('prose'), why: 'the conflict sentence names both parties' },
+    { path: `${home}.plotHooks[]`, kind: /** @type {'prose'} */ ('prose'), why: 'a conflict hook can name a party' },
+  ]),
 ]);
 
 /**
@@ -767,6 +781,32 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
 
   // 13. The generated pressure line, which names the governing faction.
   mark('pressureSentence', rewriteProse(settlement, 'pressureSentence', oldName, newName));
+
+  // 14. The conflicts, at both homes (GS-2): the parties are exact power-faction names, the
+  // sentence and the hooks name them in prose. On a live settlement the two homes are separate
+  // arrays of separate records once saved, so each is walked.
+  /** @type {Array<[string, unknown[] | null]>} */
+  const conflictHomes = [
+    [CONFLICT_HOMES[0], listOf(settlement.conflicts)],
+    [CONFLICT_HOMES[1], listOf(power?.conflicts)],
+  ];
+  for (const [home, conflicts] of conflictHomes) {
+    for (const conflict of conflicts || []) {
+      if (!isRecord(conflict)) continue;
+      const parties = listOf(conflict.parties);
+      if (parties) {
+        let moved = false;
+        for (let i = 0; i < parties.length; i += 1) {
+          if (!isSameName(parties[i], oldName)) continue;
+          parties[i] = newName;
+          moved = true;
+        }
+        mark(`${home}.parties[]`, moved);
+      }
+      mark(`${home}.desc`, rewriteProse(conflict, 'desc', oldName, newName));
+      mark(`${home}.plotHooks[]`, rewriteProseList(conflict, 'plotHooks', oldName, newName));
+    }
+  }
 
   return { changed: touched.length > 0, touched };
 }

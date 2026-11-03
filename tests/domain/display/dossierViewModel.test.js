@@ -117,7 +117,8 @@ describe('deriveMagicPosture (Wave 7 — MagicProfile surfaced)', () => {
     expect(m.legality).toBe('regulated');
     expect(m.cost).toBe('costly');
     expect(m.risk).toBeTruthy();
-    expect(m.display).toBe('Availability moderate: regulated, costly services, moderate risk');
+    // The posture WORD since the UX consolidation (T2-26): the four facets live in the envelope.
+    expect(m.display).toBe('Moderate');
   });
 
   it('emits the four role lines', () => {

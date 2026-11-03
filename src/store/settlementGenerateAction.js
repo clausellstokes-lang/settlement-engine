@@ -47,6 +47,7 @@ import { REFUSAL_REASONS, refusalOf } from '../lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK, intentOf } from '../lib/generationIntent.js';
 import { isChunkLoadError } from '../lib/staleDeploy.js';
 import { DEFAULT_CONFIG } from './configSlice.js';
+import { anonDraftExpired } from './persistMerge.js';
 
 /**
  * The DISPLAY label for a size token, and the ceiling label for an account tier.
@@ -91,7 +92,7 @@ const allowedTierPoolOf = (st) => {
   const pool = TIER_ORDER.filter((rung) => st.isTierAllowed(rung) === true);
   return pool.length > 0 && pool.length < TIER_ORDER.length ? pool : null;
 };
-import { accountHolderPhrase, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
+import { accountHolderPhrase, ANON_SIZES, SIZE_LABEL, TIER_FACTS } from '../config/tierFacts.js';
 // THE LADDER the generator's 'random' rolls over, read here so the pool this lane sends
 // is cut from the same array `resolveConfig` picks from rather than from a parallel list.
 // No new first-paint cost: components/HomeHero.jsx already holds this leaf eagerly.
@@ -126,6 +127,14 @@ import { activateFaithIfEntitled, resetSettlementIdentity, retiringDraftOf } fro
 // library shelf). This is the second, and the row that arm is owed is
 // 'src/store/settlementGenerateAction.js imports src/domain/edit/phantoms.js'.
 import { PHANTOM_RECORD_KEYS, isPhantomSave } from '../domain/edit/phantoms.js';
+
+/**
+ * THE ONE SIZE A SIGNED-OUT VISITOR FORGES (the owner, 2026-10-30): a Town, the top of the
+ * anonymous set in config/tierFacts.js. components/HomeHero.jsx and
+ * components/ConfigurationPanel.jsx show the same derivation; tests/ui/anonPreGenLocked
+ * drives all three.
+ */
+const ANON_FORGE_SIZE = ANON_SIZES[ANON_SIZES.length - 1];
 
 /** Request correlation. A counter, never a clock and never a random draw. */
 let _requestSeq = 0;
@@ -203,6 +212,19 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // A refusal from a PREVIOUS attempt must not outlive this one: the reader clicked
   // again, and whatever they read before is now either cured or about to be re-raised.
   set(state => { state.lastRefusal = null; });
+  // ⛔ A LONG-OPEN TAB AGREES WITH A FRESH BOOT (chair ruling, 2026-10-30). An unsaved
+  // anonymous draft past its 24 hours is gone after a reload (persistMerge.js), so it is
+  // dropped here too before anything reads it: this forge is then a FIRST forge, not a
+  // reroll of a world the device no longer holds. Only a draft BORN anonymous with nobody
+  // signed in is asked; a signed-in keeper's world of any age is left exactly as it is.
+  // It leaves through `clearSettlement`, the chokepoint, so the device slot retires with it.
+  {
+    const before = get();
+    if (before.draftOrigin === 'anon' && before.auth?.user == null && before.settlement
+      && anonDraftExpired(before.generatedAt, Date.now())) {
+      before.clearSettlement?.();
+    }
+  }
   // ⛔ SAMPLE FORKS ARE EXEMPT FROM THE ANONYMOUS DAILY CAP (owner ruling, ODQ
   // §934.24(b)) — and from nothing else. `intentOf` fails CLOSED: anything it does not
   // recognise reads as an ordinary generation, so the exemption must be asked for by
@@ -227,7 +249,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   } = state;
   // ⛔ AN ANONYMOUS GENERATION IS EVERYTHING ON RANDOM (the owner, §934.34: "only hamlet,
   // village, and town can be accessed without signing in and only with everything on
-  // random"). The SIZE is theirs; every other dial rolls.
+  // random"). Every dial rolls, and the size is a Town (see `baseConfig` below).
   //
   // ⭐ THE FORCING IS HERE, NOT IN THE WIZARD, AND THAT IS THE WHOLE POINT. `config` is
   // PERSISTED (store/persistProjection.js), so a disabled control is a courtesy and never
@@ -241,7 +263,7 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
   // "Everything on random" is not invented here: DEFAULT_CONFIG already IS that shape —
   // settType random, random_trade, random_culture, random_threat, every priority at 50,
   // resources and stresses rolling, no custom name and no constraint bags. So the
-  // anonymous config is the defaults with the reader's own size on top, which also means
+  // anonymous config is the defaults with a Town on top, which also means
   // this can never drift from what the wizard calls "random".
   //
   // ⛔ A CURATED SAMPLE FORK IS NOT THE READER'S CONFIGURATION, AND FORCING RANDOM ON IT
@@ -284,9 +306,16 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
       .find(row => String(row?.id) === promoteId && isPhantomSave(row)) || null
     : null;
   const phantom = promoting ? promoting.settlement : null;
+  // ⛔ AND THE SIZE IS A TOWN (the owner, 2026-10-30: "if you don't sign in the only
+  // option, you have is a town"). Not the stored size, whatever it reads: a stale or
+  // hand-edited config cannot forge a hamlet, a city or a typed population for a signed-out
+  // visitor, because the clamp sits HERE, at the point every free-form forge funnels
+  // through, and not in the pickers that merely stopped offering the choice. A curated
+  // sample fork is exempt (chair ruling, 2026-10-30) through `isSampleFork` above, an
+  // argument that dies with the call, never through the persisted `_forkedFromSample`.
   const baseConfig = canCustomize
     ? storedConfig
-    : { ...DEFAULT_CONFIG, settType: storedConfig?.settType ?? DEFAULT_CONFIG.settType };
+    : { ...DEFAULT_CONFIG, settType: ANON_FORGE_SIZE };
   // ⭐ A PROMOTION FORGES THE PHANTOM'S OWN FACTS, NOT THE READER'S DIALS (design §2.8:
   // "forging the phantom as a real settlement takes the phantom's seed, so traits and
   // written history carry over"). The three rolled traits ARE the generation's three
@@ -319,7 +348,13 @@ export async function generateSettlementAction(set, get, seedOverride, options) 
 
   // Tier gate check
   const settType = config.settType;
-  if (settType && settType !== 'random' && settType !== 'custom') {
+  // ⛔ A CURATED FORK PASSES THE FLOOR, NEVER THE CEILING (chair ruling, 2026-10-30). The
+  // anonymous range is Town alone, so the floor would refuse Cnocby, a curated village; a
+  // fixed-seed showcase at or under the ceiling forges at its own tier, and Black Crag (a
+  // city, over the ceiling) still meets the ceiling's refusal and its sign-in door. Asked
+  // by the same fail-closed intent as the cap exemption, so a free-form forge cannot borrow it.
+  const curatedUnderCeiling = isSampleFork && belowFloor(state, settType);
+  if (settType && settType !== 'random' && settType !== 'custom' && !curatedUnderCeiling) {
     if (!state.isTierAllowed(settType)) {
       console.warn(`Tier "${settType}" not allowed for current user tier.`);
       // …and SAY so where the reader clicked. The sentence names the size asked for

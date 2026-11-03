@@ -1,14 +1,13 @@
 /**
  * ViabilityAssessment — chapter 10. Verdict banner, magic dependency callout
  * with active magic chains, by-design contradictions, issues with suggested
- * fixes per row, warnings, structural violations, active stress with crisis
- * hooks, and key metrics.
+ * fixes per row, warnings, structural violations, active stress effects (the
+ * stress itself and its hook are the Overview crisis card's, X-3), and key metrics.
  *
  * Editable fields:
  *   - viability.summary
  *   - viability.issue.<i>.note
  *   - viability.contradiction.<i>
- *   - viability.stress.<i>.hook
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -23,6 +22,7 @@ import { type, palette, space, pt, swatch } from '../theme.js';
 import { cap, label, noteText, smart, humanize, stripZwnj, safe } from '../lib/format.js';
 import { tokenCase } from '../../domain/display/labelCase.js';
 import { viabilityVerdict } from '../../domain/display/viabilityVerdict.js';
+import { trimViabilitySummary } from '../../domain/display/viabilityFilter.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 
 const SEVERITY_TONE = {
@@ -37,14 +37,13 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
   const issues = v.issues || [];
   const warnings = (v.warnings || []).filter(Boolean);
   const violations = v.structuralViolations || [];
-  const stress = v.stress || [];
   const stressCons = v.stressConsequences || [];
   const contradictions = v.byDesignContradictions || [];
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="13"
+        eyebrow="11"
         title="Viability Assessment"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={verdict.label}
@@ -58,13 +57,20 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
       <StateProse stateProse={stateProse} tab="viability" />
 
       {/* ── Verdict callout ────────────────────────────────── */}
+      {/* UX consolidation 2026-10-30 (RULINGS-T2 T2-11, T2-12; X-8), print parity with the
+          Outlook tab: the summary drops the plot-hook count and the dependency clause (display
+          only, the DM-editable field keeps its name), and the chapter carries ONE vintage label
+          below; the section headers carry no "First Survey" suffix. */}
       <Callout tone={verdict.tone} kicker="VERDICT" title={verdict.label}>
         <EditableProse
           name="viability.summary"
-          defaultValue={v.summary || ''}
+          defaultValue={trimViabilitySummary(v.summary || '')}
           lines={2}
           style={{ ...type.body, fontSize: pt['9.5'] }}
         />
+        <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'], marginTop: 2 }}>
+          Judged at the first survey; not re-run since.
+        </Text>
       </Callout>
 
       {/* ── Magic dependency ───────────────────────────────── */}
@@ -79,17 +85,18 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
           }}
           wrap={false}
         >
-          {/* G5 first-survey framing (Wave R-2, atlas queue #28 remainder):
-              magicDependency is generation-frozen; the header carries the
-              vintage exactly like its web twin (ViabilityTab's Magic
-              Dependency banner). One string, vetoable. */}
+          {/* magicDependency is generation-frozen; the chapter's one vintage label covers it (X-8). */}
           <Text style={{ ...type.label, color: palette.ai, fontSize: pt['8'], marginBottom: 2 }}>
-            MAGIC DEPENDENCY · FIRST SURVEY
+            MAGIC DEPENDENCY
           </Text>
-          <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
-            This settlement leans on arcane infrastructure. If magic-supporting institutions
-            are removed or their staff lost, the dependent chains below would fail.
-          </Text>
+          {/* T2-15 MERGE in print: DS-DEF-9's reading (printed with the chapter's state prose)
+              replaces this static explanation where it speaks. */}
+          {!stateProse?.viability?.['viability.magicDependency'] && (
+            <Text style={{ ...type.body, fontSize: pt['9.5'], color: palette.ink }}>
+              This settlement leans on arcane infrastructure. If magic-supporting institutions
+              are removed or their staff lost, the dependent chains below would fail.
+            </Text>
+          )}
           {v.activeMagicChains?.length > 0 && (
             <View style={{ marginTop: 3, flexDirection: 'row', flexWrap: 'wrap', gap: 3 }}>
               {v.activeMagicChains.map((ch, i) => (
@@ -133,9 +140,7 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
             BY-DESIGN CONTRADICTIONS
           </Text>
-          <Text style={{ ...type.body, color: palette.muted, fontSize: pt['8'], marginBottom: 3 }}>
-            Intentional tensions: plot seeds, not defects.
-          </Text>
+          {/* T2-16: the coaching intro is cut in print as on screen. */}
           {contradictions.map((c, i) => (
             <View
               key={`bdc-${i}`}
@@ -186,11 +191,9 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
           )}
           {violations.length > 0 && (
             <View style={{ flex: 1 }}>
-              {/* G5 first-survey framing (Wave R-2): structuralViolations is
-                  generation-frozen; the vintage mirrors the web twin
-                  (ViabilityTab's "Structural Crises · First Survey"). */}
+              {/* structuralViolations is generation-frozen; the chapter's one vintage label covers it (X-8). */}
               <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 2 }}>
-                STRUCTURAL VIOLATIONS · FIRST SURVEY
+                STRUCTURAL VIOLATIONS
               </Text>
               <BulletList
                 items={violations}
@@ -203,48 +206,22 @@ export function ViabilityAssessment({ settlement, narrativeMode, vm, stateProse 
         </View>
       )}
 
-      {/* ── Active stress + consequences ───────────────────── */}
-      {(stress.length > 0 || stressCons.length > 0) && (
+      {/* ── Active stress effects ─────────────────────────────
+          VERIFIER F18 (X-3): the stress label pills and each stress's crisis hook left this
+          chapter; the Overview's crisis card owns them. The consequences stay, the twin of the
+          screen's "Active Stress Effects". */}
+      {stressCons.length > 0 && (
         <View style={{ marginBottom: space.sm }}>
           <HairRule />
           <Text style={{ ...type.label, color: palette.bad, fontSize: pt['8'], marginBottom: 3 }}>
-            ACTIVE STRESS
+            ACTIVE STRESS EFFECTS
           </Text>
-          {stress.length > 0 && (
-            <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 3, marginBottom: 4 }}>
-              {stress.map((s, i) => (
-                <Pill key={`vs-${i}`} tone="bad">{s.label || humanize(String(s))}</Pill>
-              ))}
-            </View>
-          )}
-          {stress.filter(s => s.hook).map((s, i) => (
-            <View key={`vsh-${i}`} style={{ flexDirection: 'row', marginBottom: 2 }} wrap={false}>
-              <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['9'] }}>•</Text>
-              <View style={{ flex: 1 }}>
-                <Text style={{ ...type.label_plain, fontSize: pt['7'], color: palette.muted }}>
-                  {tokenCase(stripZwnj(humanize(s.label || '')))}
-                </Text>
-                <EditableText
-                  name={`viability.stress.${i}.hook`}
-                  defaultValue={typeof s.hook === 'string' ? s.hook : (s.hook?.text || s.hook?.hook || '')}
-                  style={{ ...type.body, fontSize: pt['9'] }}
-                />
-              </View>
-            </View>
-          ))}
-          {stressCons.length > 0 && (
-            <View style={{ marginTop: 3 }}>
-              <Text style={{ ...type.label, fontSize: pt['7'], color: palette.muted, marginBottom: 1 }}>
-                CONSEQUENCES
-              </Text>
-              <BulletList
-                items={stressCons}
-                tone="bad"
-                bullet="·"
-                itemRender={(c) => label(c) || (typeof c === 'string' ? c : c?.text || '')}
-              />
-            </View>
-          )}
+          <BulletList
+            items={stressCons}
+            tone="bad"
+            bullet="·"
+            itemRender={(c) => label(c) || (typeof c === 'string' ? c : c?.text || '')}
+          />
         </View>
       )}
 

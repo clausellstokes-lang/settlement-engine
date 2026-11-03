@@ -6,28 +6,15 @@ import Button from './primitives/Button.jsx';
 import EmptyState from './primitives/EmptyState.jsx';
 import { useStore } from '../store/index.js';
 import { selectTierForGrid, selectCurrentCatalog } from '../store/selectors.js';
-
-function matchServiceName(instName) {
-  const lower = instName.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
-  let best=null, bestScore=0;
-  for (const key of Object.keys(INSTITUTION_SERVICES)) {
-    const kw = key.toLowerCase().split(/[\s'(),\-/]+/).filter(w=>w.length>2);
-    let score=0;
-    for (const kp of kw) for (const lp of lower) {
-      if (kp===lp) score+=2;
-      else if (kp.length>3&&lp.startsWith(kp)) score+=1;
-      else if (lp.length>4&&kp.startsWith(lp)) score+=1;
-    }
-    const norm = kw.length>0 ? score/(kw.length*2) : 0;
-    if (score>bestScore||(score===bestScore&&score>0&&norm>(bestScore/(kw.length*2||1)))) {
-      bestScore=score; best=key;
-    }
-  }
-  return bestScore>0?best:null;
-}
+import { classifyService } from '../generators/services/serviceClassifier.js';
+// RS-20: the generator's own resolver (exact key -> LOCALE_SERVICE_OVERRIDES -> fuzzy). The
+// panel used a fuzzy-only copy that put 29 of 268 live institution names on a different menu,
+// so a toggle keyed by that menu never reached the generator.
+import { resolveServiceCatalogKey } from '../generators/services/institutionServices.js';
+import { serviceLabel } from '../domain/display/servicesDisplay.js';
 
 // Card-click cycle: allow → force → exclude → allow
-function ServiceCard({ svcName, def, toggled, onCycle }) {
+function ServiceCard({ svcName, def, toggled, onCycle, categoryLabel }) {
   const { _allow, force, forceExclude } = toggled;
   const isForced   = force && !forceExclude;
   const isExcluded = forceExclude;
@@ -53,6 +40,9 @@ function ServiceCard({ svcName, def, toggled, onCycle }) {
       <div style={{flex:1, minWidth:0}}>
         <div style={{display:'flex', alignItems:'center', gap:6, flexWrap:'wrap'}}>
           <span style={{fontWeight:600, fontSize:FS.sm, color:isExcluded?MUTED:INK, textDecoration:isExcluded?'line-through':'none'}}>{svcName}</span>
+          {/* RS-20: the category the service files under, so a forced service's home is
+              visible before it lands in the dossier. */}
+          {categoryLabel&&<span style={{fontSize:FS.xxs,color:MUTED}}>{categoryLabel}</span>}
           {def.requiredInstitution&&<span style={{fontSize:FS.xxs,color:MUTED,fontStyle:'italic'}}>needs {def.requiredInstitution}</span>}
         </div>
         {def.desc&&<p style={{fontSize:FS.xs,color:SECOND,lineHeight:1.3,margin:'1px 0 0'}}>{def.desc}</p>}
@@ -76,7 +66,7 @@ export default function ServicesTogglePanel() {
     const map = {};
     Object.values(currentCatalog).forEach(cat => {
       Object.keys(cat).forEach(instName => {
-        const svcKey = matchServiceName(instName);
+        const svcKey = resolveServiceCatalogKey(instName);
         if (!svcKey || !INSTITUTION_SERVICES[svcKey]) return;
         if (!map[svcKey]) map[svcKey] = { catalogNames:[], services:INSTITUTION_SERVICES[svcKey] };
         if (!map[svcKey].catalogNames.includes(instName)) map[svcKey].catalogNames.push(instName);
@@ -214,8 +204,9 @@ export default function ServicesTogglePanel() {
                     }}>
                     <span style={{flex:1, display:'flex', alignItems:'center', gap:6}}>
                         <span style={{fontSize:FS.sm, fontWeight:700, color:swatch.inkMag, fontFamily:'Crimson Text, Georgia, serif'}}>{catName}</span>
-                        {forcedCount>0 && <span style={{fontSize:FS.micro, fontWeight:800, color:GOLD, background:`${GOLD}18`, padding:'1px 5px'}}>{forcedCount} forced</span>}
                       </span>
+                    {/* RS-20: the forced count is said ONCE, in the right-hand cluster; the
+                        duplicate badge beside the name is cut. */}
                     {forcedCount===0 && <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>}
                     {forcedCount>0 && <>
                       <span style={{fontSize:FS.micro, color:MUTED, background:swatch['#EDE3CC'], padding:'1px 5px'}}>{allowedCount} allowed</span>
@@ -230,6 +221,7 @@ export default function ServicesTogglePanel() {
                         const tog = getToggle(catName, svcKey, svcName, def);
                         return (
                           <ServiceCard key={svcName} svcName={svcName} def={def} toggled={tog}
+                            categoryLabel={serviceLabel(classifyService(svcName, svcKey))}
                             onCycle={() => cycleService(catName, svcKey, svcName, def)}/>
                         );
                       })}

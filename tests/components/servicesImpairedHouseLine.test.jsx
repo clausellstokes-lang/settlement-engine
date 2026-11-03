@@ -205,6 +205,18 @@ describe('ServicesTab — the impaired house is named where its row is', () => {
       positionBlock.textContent, impaired, catalog,
       'DS-SUP-3 lens B left the catalog paragraph for the row it names',
     );
+    // RS-15 (chair ruling 2026-10-30) under THE BLOCK LAW (X-16, BUILD-W2-BLOCKLAW U4): lens A
+    // sits DIRECTLY UNDER the one Not-available line it bands (coupling; prose never above
+    // the fact it explains), and both sit above the first category card. This town keeps
+    // four of a town's five categories, so the line names the fifth.
+    const absence = screen.getByText((_, el) => el?.tagName === 'DIV'
+      && /^Not available for a town:/.test(el.textContent || ''));
+    expect(absence.textContent).toBe('Not available for a town: Information.');
+    expect(absence.compareDocumentPosition(positionBlock) & Node.DOCUMENT_POSITION_FOLLOWING,
+      'the catalog sentence does not follow the absence line it explains').toBeTruthy();
+    const firstCard = document.getElementById('svc-cat-equipment');
+    expect(positionBlock.compareDocumentPosition(firstCard) & Node.DOCUMENT_POSITION_FOLLOWING,
+      'the catalog sentence is not above the category cards').toBeTruthy();
   });
 
   test('a town with no impaired house draws nothing there (R-DST-K)', () => {
@@ -218,5 +230,24 @@ describe('ServicesTab — the impaired house is named where its row is', () => {
     // …and the catalog lens still speaks, so the silence above is about lens B
     // alone rather than about a desk that stopped being called.
     expect(screen.getByText(drawnPair(s).catalog)).toBeTruthy();
+    cleanup();
+    // RS-15 (chair ruling 2026-10-30): on a COMPLETE catalog lens A is silent too, and so is
+    // the Not-available line. Every member of the complete-catalog pool is absent from the
+    // page, anchored on the rows that do render.
+    const full = { ...SERVICES, information: [{ name: 'Town crier' }] };
+    const done = { ...s, availableServices: full };
+    const { container } = render(<ServicesTab services={full} settlement={done} narrativeNote={null} />);
+    expect(container.textContent).toContain('Town crier');
+    const completeMembers = poolMemberTexts({
+      leaf: 'economy', blockId: 'DS-SUP-3', seed: SEED, audience: 'dm',
+      poolKey: serviceCatalogPoolKey([], 'town'), slots: { settlement: TOWN },
+    });
+    expect(completeMembers.length).toBeGreaterThan(0);
+    for (const member of completeMembers) {
+      // anchored: the pool is proven non-empty above and this render is proven live by "Town crier".
+      expect(container.textContent, 'the complete-catalog lens still speaks').not.toContain(member.slice(12, 60));
+    }
+    // anchored: the same render is proven live above ("Town crier" renders).
+    expect(container.textContent).not.toContain('Not available');
   });
 });

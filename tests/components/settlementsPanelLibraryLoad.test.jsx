@@ -306,7 +306,7 @@ describe('SettlementsPanel — the sample fork binds the row it just created', (
   async function forkTheFirstSample() {
     saves.list.mockResolvedValueOnce([]);
     render(<SettlementsPanel onNavigate={() => {}} />);
-    const forkButton = (await screen.findAllByRole('button', { name: /Fork this sample/ }))[0];
+    const forkButton = (await screen.findAllByRole('button', { name: /^Visit / }))[0];
     fireEvent.click(forkButton);
     await waitFor(() => expect(saves.save).toHaveBeenCalledTimes(1));
   }
@@ -331,7 +331,7 @@ describe('SettlementsPanel — the sample fork binds the row it just created', (
 
     saves.list.mockResolvedValueOnce([]);
     render(<SettlementsPanel onNavigate={() => {}} />);
-    const forkButton = (await screen.findAllByRole('button', { name: /Fork this sample/ }))[0];
+    const forkButton = (await screen.findAllByRole('button', { name: /^Visit / }))[0];
     fireEvent.click(forkButton);
     await waitFor(() => expect(storeState.generateSettlement).toHaveBeenCalledTimes(1));
 

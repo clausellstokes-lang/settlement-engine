@@ -1,0 +1,3 @@
+/* esm.sh - math-intrinsics@1.1.0/floor */
+var l=Object.create;var f=Object.defineProperty;var p=Object.getOwnPropertyDescriptor;var u=Object.getOwnPropertyNames;var d=Object.getPrototypeOf,i=Object.prototype.hasOwnProperty;var j=(o,t)=>()=>(t||o((t={exports:{}}).exports,t),t.exports);var x=(o,t,r,a)=>{if(t&&typeof t=="object"||typeof t=="function")for(let s of u(t))!i.call(o,s)&&s!==r&&f(o,s,{get:()=>t[s],enumerable:!(a=p(t,s))||a.enumerable});return o};var h=(o,t,r)=>(r=o!=null?l(d(o)):{},x(t||!o||!o.__esModule?f(r,"default",{value:o,enumerable:!0}):r,o));var c=j((b,m)=>{"use strict";m.exports=Math.floor});var e=h(c()),g=e.default??e;export{g as default};
+//# sourceMappingURL=floor.mjs.map

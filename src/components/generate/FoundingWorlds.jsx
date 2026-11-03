@@ -5,7 +5,7 @@
  * a new DM witnesses depth in their first ten minutes. The trio is the SAME
  * Mossgate / Black Crag / Cnocby samples the Library's saves empty-state shows
  * (imported from src/data/sampleSettlements.js — single source, zero string
- * duplication); 'Fork this sample' drives the SAME fork wiring as the Library
+ * duplication); 'Visit <name>' (the owner's copy, 2026-10-30; was 'Fork this sample') drives the SAME fork wiring as the Library
  * (SettlementsPanel.forkSample): load the sample's config with a user-suffixed
  * seed, generate, and open the dossier. (Walk W1, owner order 2026-07-21, ledger
  * 13da1e95.)
@@ -78,7 +78,7 @@ export default function FoundingWorlds({ onNavigate }) {
   const clearRefusal = useStore((s) => s.clearRefusal);
   const [busyId, setBusyId] = useState(null);
 
-  // 'Fork this sample' — identical wiring to the Library's SettlementsPanel.forkSample:
+  // 'Visit <name>' — identical wiring to the Library's SettlementsPanel.forkSample:
   // load the sample's config minus its seed (forkConfigFor), run the engine with a
   // seed suffixed by WHO IS FORKING (so two people forking the same sample get
   // mechanically-different towns), and reveal the dossier.
@@ -159,7 +159,7 @@ export default function FoundingWorlds({ onNavigate }) {
             <div style={{ flex: 1 }} />
             <div style={{ borderTop: `1px solid ${BORDER}`, paddingTop: SP.sm, background: CARD }}>
               <Button variant="primary" size="sm" busy={busyId === sample.id} onClick={forkSample(sample)}>
-                {busyId === sample.id ? 'Forking…' : 'Fork this sample'}
+                {busyId === sample.id ? 'Visiting…' : `Visit ${sample.name}`}
               </Button>
             </div>
           </article>

@@ -27,7 +27,7 @@ import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
 
-import { computeRelTension } from './powerGenerator.js';
+import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
 import {
@@ -844,79 +844,7 @@ export const getStressHistory = secret => {
   return null;
 };
 
-// computeRelTension (local)
-const _generateFactionConflict = (npcA, npcB, stressFlags, instFlags) => {
-  const cats = [npcA.category, npcB.category].sort().join('_');
-  const powerGap = npcA.power - npcB.power;
-
-  // Stress-flag driven relationship archetypes (checked in priority order)
-  if (stressFlags.merchantCriminalBlur && cats.includes('economy') && cats.includes('criminal'))
-    return _rng() < 0.6 ? STRESS_ECONOMIC_EFFECTS.econ_crim_blur : STRESS_ECONOMIC_EFFECTS.econ_crim_exploitation;
-
-  if (stressFlags.stateCrime && cats.includes('military') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-
-  if (!stressFlags.stateCrime && cats.includes('military') && cats.includes('criminal'))
-    return instFlags.militaryEffective > instFlags.criminalEffective
-      ? STRESS_ECONOMIC_EFFECTS.mil_crim_suppression
-      : STRESS_ECONOMIC_EFFECTS.mil_crim_corruption;
-
-  if (stressFlags.merchantArmy && cats.includes('economy') && cats.includes('military'))
-    return STRESS_ECONOMIC_EFFECTS.econ_mil_contract;
-  if (stressFlags.crusaderSynthesis && cats.includes('religious') && cats.includes('military'))
-    return STRESS_ECONOMIC_EFFECTS.rel_mil_crusader;
-  if (stressFlags.religiousFraud && cats.includes('religious') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.rel_crim_fraud;
-  if (stressFlags.arcaneBlackMarket && cats.includes('magic') && cats.includes('criminal'))
-    return STRESS_ECONOMIC_EFFECTS.mag_crim_market;
-
-  if (cats.includes('government') && cats.includes('economy') && instFlags.economyOutput > 65)
-    return STRESS_ECONOMIC_EFFECTS.gov_econ_dependence;
-
-  if (cats.includes('government') && cats.includes('military'))
-    return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.gov_mil_friction : STRESS_ECONOMIC_EFFECTS.peer_rivalry;
-
-  // Large power differential → mentorship or old debt dynamic
-  if (Math.abs(powerGap) >= 4)
-    return _rng() < 0.5 ? STRESS_ECONOMIC_EFFECTS.mentor_legacy : STRESS_ECONOMIC_EFFECTS.old_debt;
-
-  // Personality-driven archetypes
-  const getPersonalityStr = npc => {
-    const p = npc.personality;
-    if (!p) return '';
-    return Array.isArray(p) ? p.join(' ') : [p.dominant, p.flaw, p.modifier].filter(Boolean).join(' ');
-  };
-  const persA = getPersonalityStr(npcA);
-  const persB = getPersonalityStr(npcB);
-
-  if (
-    (persA.includes('arrogant') && persB.includes('arrogant')) ||
-    (persA.includes('greedy') && persB.includes('greedy')) ||
-    (npcA.category === npcB.category && _rng() < 0.4)
-  )
-    return STRESS_ECONOMIC_EFFECTS.peer_rivalry;
-
-  if (persA.includes('pragmatic') || persB.includes('pragmatic')) return STRESS_ECONOMIC_EFFECTS.mutual_leverage;
-
-  // Weighted random fallback
-  const WEIGHTED_ARCHETYPES = [
-    { archetype: STRESS_ECONOMIC_EFFECTS.wary_alliance, weight: 2.0 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.mutual_leverage, weight: 1.8 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.genuine_respect, weight: 1.5 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.peer_rivalry, weight: 1.5 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.old_debt, weight: 1.2 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.bitter_history, weight: 0.8 * (instFlags.criminalEffective / 50) },
-    { archetype: STRESS_ECONOMIC_EFFECTS.family_complication, weight: 0.7 },
-    { archetype: STRESS_ECONOMIC_EFFECTS.mentor_legacy, weight: 0.8 },
-  ];
-  const total = WEIGHTED_ARCHETYPES.reduce((sum, a) => sum + a.weight, 0);
-  let roll = _rng() * total;
-  for (const { archetype, weight } of WEIGHTED_ARCHETYPES) {
-    roll -= weight;
-    if (roll <= 0) return archetype;
-  }
-  return STRESS_ECONOMIC_EFFECTS.wary_alliance;
-};
+// The live faction-pair archetype selector is power/relationshipArchetypes.js :: computeRelTension.
 
 const _pickFactionName = r => {
   var o;
@@ -1658,6 +1586,9 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
   const stressFlags = getStressFlags(config, institutions);
   const relationships = [];
   const seen = new Set();
+  // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
+  // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
+  const drawTieProse = createTieProseDraw();
 
   npcs.forEach(npc => {
     const maxRelationships = randInt(2, 3);
@@ -1678,17 +1609,16 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
       if (_rng() >= score && count > 0) continue;
 
       const archetype = computeRelTension(npc, partner, stressFlags, instFlags);
-      const strengths = RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect;
-      const strength = pick(strengths);
+      const strength = pick(RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect);
 
-      // Find the archetype key from STRESS_ECONOMIC_EFFECTS for UI rendering
-      const archetypeKey = Object.entries(STRESS_ECONOMIC_EFFECTS).find(([, v]) => v === archetype)?.[0];
+      // The archetype key (for UI rendering) and the tie's prose, drawn without replacement.
+      const { archetypeKey, proseVariant, description, tension } = drawTieProse(archetype, npc, partner);
 
       relationships.push({
         type: archetype.type,
         typeName: archetype.label,
-        description: archetype.desc(npc, partner),
-        tension: archetype.tension(npc, partner),
+        description,
+        tension,
         strength,
         npc1Id: npc.id,
         npc2Id: partner.id,
@@ -1696,7 +1626,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
         npc2Name: partner.name,
         npc1Role: npc.role,
         npc2Role: partner.role,
-        archetypeKey,
+        archetypeKey, proseVariant,
         flagDriven:
           stressFlags.anyActive &&
           (archetype === STRESS_ECONOMIC_EFFECTS.econ_crim_blur ||

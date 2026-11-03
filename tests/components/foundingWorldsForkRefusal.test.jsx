@@ -74,9 +74,9 @@ async function mount(onNavigate = vi.fn()) {
   return { onNavigate, samples: SAMPLE_SETTLEMENTS };
 }
 
-const forkButtons = () => screen.getAllByRole('button', { name: /Fork this sample/i });
+const forkButtons = () => screen.getAllByRole('button', { name: /^Visit /i });
 
-describe("'Fork this sample' — the reviewed click, under the owner's rulings", () => {
+describe("'Visit <name>' (was 'Fork this sample') — the reviewed click, under the owner's rulings", () => {
   test('the fixture is the reviewed one: a Town sample, and a City above the anon ceiling', async () => {
     // ANTI-VACUITY for everything below, which means nothing if the trio changed.
     const { samples } = await mount();

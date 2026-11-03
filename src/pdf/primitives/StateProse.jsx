@@ -69,12 +69,13 @@ import { type, palette, pt } from '../theme.js';
  */
 const SCREEN_KICKER = Object.freeze({
   // OverviewTab.jsx — the inline eyebrows and its own Section titles
-  'overview.ground': 'The ground and the company it keeps',
+  // THE PLACE (chair ruling T1-2, 2026-10-30): the ground, market and roster sentences are
+  // the place passage's; the print Overview already has one place passage. The kickers of
+  // `overview.origin`, `overview.conflicts` and `overview.warnings` are gone with their
+  // sentences (those rows glance since the same rulings, so print draws nothing there).
+  'overview.ground': 'The place',
   'overview.stressorLifecycle': 'The pressure from outside',
   'overview.activeConditions': 'What the town is living through',
-  'overview.origin': 'Settlement Origin',
-  'overview.conflicts': 'Tensions & Conflicts',
-  'overview.warnings': 'Coherence Notes · First Survey',
   // PowerTab.jsx
   'power.legitimacyBanner': 'Public Legitimacy',
   'power.stabilityHeader': 'Stability',
@@ -91,9 +92,8 @@ const SCREEN_KICKER = Object.freeze({
   // EconomicsTab.jsx
   'economics.foodSecurity': 'Food Security',
   'economics.tradeFlow': 'Live Trade Flow',
-  // HistoryTab.jsx / PlotHooksTab.jsx
+  // HistoryTab.jsx (`plot_hooks.framing` glances since 2026-10-30, so its kicker is gone)
   'history.identity': 'What the years have made of it',
-  'plot_hooks.framing': 'Plot hooks',
 });
 
 /**
@@ -103,7 +103,6 @@ const SCREEN_KICKER = Object.freeze({
 const PRINT_KICKER = Object.freeze({
   'overview.crisisBanners': 'The crisis on the books',
   'overview.populationDirection': 'Which way the roll is going',
-  'overview.notableConnection': 'The tie the town names first',
   'defense.publicOrder': 'Public order',
   'defense.armedForces': 'What the town can field',
   'viability.verdict': 'The verdict, in the town\'s own voice',

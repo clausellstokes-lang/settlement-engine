@@ -24,6 +24,7 @@ import { useMemo } from 'react';
 import { useStore } from '../../../store/index.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import AvailableAtLaunchPill from '../../primitives/AvailableAtLaunchPill.jsx';
 import {
   settlementRumors,
   activatedDeityNamesFrom,
@@ -175,10 +176,21 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
     return { mine, elsewhere };
   }, [sid, campaigns, includeGroundTruth, activatedDeityNames, nameFor]);
 
+  // THE LAUNCH TEASER (owner addendum X-7b, 2026-10-30): the tab is always in the strip, and
+  // with no rumor ledger it shows the launch idiom and one short paragraph. The DM-truth
+  // sentence keeps the audience gate: never on the player view or a public dossier.
   if (!view) {
+    const name = settlement?.name || 'this settlement';
+    const dmView = !playerView && !publicDossier;
     return (
-      <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans, color: MUTED, fontSize: FS.sm }}>
-        No word travels here yet. The realm's news reaches {settlement?.name || 'this settlement'} the moment it happens.
+      <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
+        <div data-testid="rumors-teaser" style={{ background: CARD, border: `1px solid ${BORDER}`, padding: '14px 16px' }}>
+          <AvailableAtLaunchPill />
+          <p style={{ margin: '8px 0 0', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.6 }}>
+            {`What ${name} hears from the rest of the realm, as it believes it, as word moves along the roads.`}
+            {dmView && <span data-testid="rumors-teaser-dm">{' Beside each telling, what the DM knows to be true.'}</span>}
+          </p>
+        </div>
       </div>
     );
   }
@@ -186,8 +198,7 @@ export default function RumorsTab({ settlement, saveId = null, playerView = fals
   return (
     <div data-testid="rumors-tab" style={{ padding: '12px 14px', fontFamily: sans }}>
       <p style={{ margin: '0 0 12px', color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
-        What {settlement?.name || 'this settlement'} has heard, as it believes it. Word travels the
-        trade roads, and the roads are long.
+        What {settlement?.name || 'this settlement'} has heard, as it believes it.
       </p>
       <div style={{
         display: 'grid',

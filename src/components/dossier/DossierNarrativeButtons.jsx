@@ -49,8 +49,10 @@ export default function DossierNarrativeButtons({
       if (suppressNarrativeCta) return null;
       return (
         <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 6 }}>
+          {/* THE AI PASS BUTTON wears the launch skin (the owner, 2026-11-01, X-39); the
+              free view toggle below keeps the AI register. */}
           <Button
-            variant="ai"
+            variant="launch"
             size="sm"
             onClick={runNarrativeLayer}
             title="Narrative Refinement Layer. Turns the simulator output into prose that feels specific to this settlement. Uses credits."
@@ -106,7 +108,7 @@ export default function DossierNarrativeButtons({
             rail owns the paid Regenerate rung); the free view toggle stays. */}
         {!suppressNarrativeCta && (
         <Button
-          variant="ai"
+          variant="launch"
           size="sm"
           onClick={runNarrativeLayer}
           disabled={regenerating}

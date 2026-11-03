@@ -18,19 +18,52 @@
  */
 import { tokenizeProse } from '../lib/entityRefTokenizer.js';
 import EntityLink from './primitives/EntityLink.jsx';
+import { useDossierEntities } from './dossier/DossierEntityContext.jsx';
+import { linkMentions } from '../domain/dossier/linkMentions.js';
+
+/**
+ * MentionText — EVERY MENTION IS A DOOR (RULINGS-CROSS X-20). Renders one string with each
+ * exact whole-word mention of a canonical entity name as an EntityLink (only the name is the
+ * link), through the one linker (domain/dossier/linkMentions.js) and the viewer's scope from
+ * the dossier context. With no dossier above it (an isolated test, the PDF's own primitives,
+ * a surface outside a dossier) or no mention in the string, it renders the string itself:
+ * the markup is byte-identical to the bare `{text}` it replaces.
+ *
+ * @param {object} props
+ * @param {unknown} props.text            the string the site renders
+ * @param {string|null} [props.selfId]    the card's own entity id: its own name stays text
+ * @param {boolean} [props.structural]    a structured name (a chip, a row): common-word
+ *                                        families (resources, services) may link too
+ */
+export function MentionText({ text, selfId = null, structural = false }) {
+  const { index, scope } = useDossierEntities();
+  if (typeof text !== 'string' || !text) return text ?? null;
+  const segments = linkMentions(text, index, scope, { selfId, structural });
+  if (segments.length === 1 && segments[0].type === 'text') return text;
+  return (
+    <>
+      {segments.map((seg, i) => (seg.type === 'link'
+        ? <EntityLink key={i} id={seg.id} type={seg.entityType} fallback={seg.value} verbatim />
+        : seg.value))}
+    </>
+  );
+}
 
 /**
  * @param {object} props
  * @param {string} props.text  The (possibly token-bearing) prose string.
+ * @param {string|null} [props.selfId]  The card's own entity id (never linked to itself).
  */
-export default function ProseParagraph({ text }) {
+export default function ProseParagraph({ text, selfId = null }) {
   const segments = tokenizeProse(text);
+  // A narrative token is consumed first and keeps its own path; only the plain text between
+  // tokens goes through the mention linker, so a name is never linked twice.
   return (
     <>
       {segments.map((seg, i) =>
         seg.type === 'ref'
           ? <EntityLink key={i} id={seg.id} fallback={seg.value} verbatim={seg.verbatim} />
-          : <span key={i}>{seg.value}</span>,
+          : <span key={i}><MentionText text={seg.value} selfId={selfId} /></span>,
       )}
     </>
   );

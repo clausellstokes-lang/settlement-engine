@@ -288,11 +288,11 @@
         "PRE_COUPLING_CORPUS_SHA"
       ],
       "frozenConstants": null,
-      "sha256": "3b0d256f230232568c08dd1e6cbaaab5ec5f6ac3d07ba6eeafe6a9cbb682b515",
+      "sha256": "606269e8f5bed9de34480d563caaf3cd886640f724fdfe7c3b39e7db85404eca",
       "rows": null,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+      "ownerRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON.",
       "governance": "Charter §1.1 row 15 / §1.1a. Its header carries a hand-maintained enumeration of chartered movement windows which the freeze act retires into one sentence. Implementation-leave: the fence itself is not rebuilt."
     },
@@ -342,11 +342,11 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "f27114cae7ca43c921061917e66375daf24ce115a147444013b0651251368eae",
+      "sha256": "8355c460c4bc822967b7fc96042dae2d09fdf01b3b634e1317eecc32af32945c",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.88 of docs/OWNER_DECISION_QUEUE.md (THE VOICE PROGRAM, recorded 2026-10-02 on the ledger branch review-fixes-2026-07-08 at 757c928ff)",
+      "ownerRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
       "note": "RE-RECORDED THROUGH THE SIGNED DOOR at the genesis freeze 2026-09-16 (owner: 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); 525 rows moved since the em-dash wave e3f6029b2 (banked §901); the key set unchanged."
     },
     {
@@ -824,11 +824,11 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7",
+      "sha256": "aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§934.86 addendum 2 of docs/OWNER_DECISION_QUEUE.md (DRUIDS IN A WORLD WITHOUT MAGIC, recorded 2026-10-01 on the ledger branch review-fixes-2026-07-08 at 381aa20a0)",
+      "ownerRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON. ENROLLED, NOT RECORDED, AND THE DIFFERENCE IS THE WHOLE ROW. The chair's enroll record, verbatim: \"ENROLL dossier-prose-manifest — chair Fable 5.1, 2026-09-08, ARCH-COMPOSED-PROSE-v2 §3.7 / MEASURE car 1: a new golden carrier for the dossier's composed text (DRIFT corpus 525 × 2 audiences); the generator golden master cannot see a dossier sentence; every later change to this carrier is a declared shift on the SHIFT REGISTER, signed per cell class by the classifier's print.\" WHY THE RECORD IS QUOTED HERE AND NOT CUT AS A FILE, and why no capture arm runs through the door today: this register is UNFROZEN, and two of its own arms refuse both acts. goldenFreeze.walker.test.js asserts that while frozenAt is null NO surface row carries a sha256, rows or ownerRow — and recordGolden writes exactly those three in the same act that writes the fixture — and it asserts that docs/shift-records/ holds no cut record at all before the freeze act's own genesis record. A capture arm routed through the door today would therefore poison this register and red two green arms. This row follows the preset-lighting-witness precedent verbatim in shape: tests/helpers/dossierManifest.js is the SINGLE WRITER of the measurement and is imported by the suite, by scripts/prose-manifest-cells.mjs and by scripts/prose-duplicate-units.mjs, so the recorded world and the asserted world cannot diverge; the fixture bytes are exactly manifestBytes(driftRun().rows) and the suite asserts that identity by sha on every run. The path is deliberately named `-golden` so arm 2's tests/fixtures/*golden*.json glob claims it: a carrier named outside that glob would be enrolled only by this lane's good faith, and a later deletion of this row would red nothing. Enrolled by lane MEASURE car 1 (seat Opus 5 — Fable-unvalidated) in the same commit that minted the surface. When the freeze act arms this register, its re-record path becomes the door like every other."
     },
     {

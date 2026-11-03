@@ -173,8 +173,8 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'the generation RECEIPT: it records what the generator decided while the house still bore its old name, so rewriting it would falsify the trace' },
   { path: 'generationCoherenceReceipt.repairs[].subject', kind: 'receipt', readable: false,
     why: 'design §22.3 item 1 classes the generation receipt BY PATH as HISTORY, and lived history is immutable' },
-  { path: 'availableServices.legal[].name', kind: 'label', readable: false,
-    why: 'the service label, not a handle: where it names a roster house it names a DIFFERENT house from the entry own institution field, which is the real handle' },
+  { path: 'availableServices.equipment[].name', kind: 'label', readable: false,
+    why: 'the service label, not a handle: where it names a roster house it names a DIFFERENT house from the entry own institution field, which is the real handle (the Weekly market service a Market square provides, beside a Weekly market house). The row followed that service from legal to equipment when the service re-map filed it under Goods and Crafts (RS-1, ODQ §934.101); legal[].name holds no roster name since' },
   { path: 'resourceAnalysis.resourceConditions[].label', kind: 'label', readable: false,
     why: 'a fixed condition word: the same literal appears both matching and non-matching a roster name' },
   { path: 'economicState.activeChains[].resource', kind: 'label', readable: false,
@@ -216,6 +216,14 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'each pairwise relationship is keyed by the two faction names, and the faction ledger rewrites the pair' },
   { path: 'npcs[].factionAffiliation', kind: 'label', readable: false,
     why: 'a character\'s link to its faction by name, owned by the faction ledger like the member stamp above' },
+  // GS-2 (ODQ §934.101): the grouping list and the conflicts are named by the POWER factions now, so the
+  // governing body's faction name ('Democratic assembly') reaches them too; the faction ledger owns all three.
+  { path: 'factions[].name', kind: 'label', readable: false,
+    why: 'the grouping list is a projection of the power factions since GS-2, so its name IS the faction name, owned by the faction ledger (factionRename.js rewrites it), for the reason the powerFactionName row gives' },
+  { path: 'conflicts[].parties[]', kind: 'label', readable: false,
+    why: 'a conflict party is a power faction\'s exact name since GS-2; the faction ledger rewrites it at both conflict homes' },
+  { path: 'powerStructure.conflicts[].parties[]', kind: 'label', readable: false,
+    why: 'the conflict mirror\'s party key, the same faction name, rewritten by the faction ledger with its twin above' },
   { path: 'economicState.safetyProfile.compound.inst.names[]', kind: 'frozen-stamp', readable: false,
     why: 'the SECOND independent stamp, not an alias: economicState and safetyProfile each call getInstFlags, so the two arrays are never the same object. Aliased or duplicated stamps DECLARE ONCE PER PATH by design, because the walk addresses by path and a reloaded save has already split any alias' },
 ]);

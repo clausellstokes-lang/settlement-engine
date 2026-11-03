@@ -53,6 +53,17 @@ function ActionButton({ children, tone = 'secondary', busy, icon, onClick }) {
   );
 }
 
+// Dormant-safe means ONE refusal is absorbed: the queue RPC is not deployed
+// (PostgREST PGRST202 / Postgres 42883 / "function ... does not exist"). Any
+// other failure, a permission refusal or a dropped connection, is shown; an
+// empty "No open reports" in its place would tell the moderator the queue is
+// clear when it was never read.
+function isUndeployedRpc(e) {
+  const code = String(e?.code || '');
+  if (code === 'PGRST202' || code === '42883') return true;
+  return /could not find the function|function\b.*\bdoes not exist/i.test(String(e?.message || ''));
+}
+
 // The unified cross-kind queue (173): one row per reported TARGET across
 // settlements, maps, campaigns, and comments. Dormant-safe (an undeployed RPC
 // yields an empty queue). Destructive takedown (ban/delete/set-private/remove
@@ -68,8 +79,12 @@ function UnifiedReportQueue() {
     setError(null);
     try {
       const { data, error: e } = await supabase.rpc('list_open_report_targets');
+      if (e && !isUndeployedRpc(e)) throw new Error(e.message || 'Reported content could not be loaded.');
       setTargets(!e && Array.isArray(data) ? data : []);
-    } catch { setTargets([]); }
+    } catch (err) {
+      setTargets([]);
+      setError(err?.message || 'Reported content could not be loaded.');
+    }
   }, []);
 
   useEffect(() => {
@@ -105,11 +120,11 @@ function UnifiedReportQueue() {
       {error && (
         <div role="alert" style={{ borderLeft: '2px solid var(--oc-rubric)', paddingLeft: SP.md, color: RED, fontFamily: sans, fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 850, lineHeight: 1.5 }}>{error}</div>
       )}
-      {targets.length === 0 ? (
+      {targets.length === 0 ? (!error && (
         <div style={{ padding: SP.md, color: MUTED, fontFamily: sans, fontSize: FS.sm, border: `1px dashed ${BORDER}`, background: CARD_ALT }}>
           No open reports.
         </div>
-      ) : (
+      )) : (
         <div style={{ display: 'grid', gap: SP.sm, maxHeight: 320, overflowY: 'auto' }}>
           {targets.map(t => {
             const key = `${t.kind}:${t.target_id}`;

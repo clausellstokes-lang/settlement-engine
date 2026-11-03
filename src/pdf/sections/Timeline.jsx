@@ -19,7 +19,7 @@ export function Timeline({ settlement, narrativeMode, vm }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="03C"
+        eyebrow="19"
         title="Timeline"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${log.length} event${log.length === 1 ? '' : 's'}`}

@@ -3,16 +3,18 @@ import { FS, MUTED, swatch } from '../theme.js';
 import { edged } from '../../design/edgedBox.js';
 import { Pin } from 'lucide-react';
 import { catColor } from './design';
-import {Ti, serif, PlotHook} from './Primitives';
+import { serif } from './Primitives';
 import { EditableText } from '../primitives/EditableText.jsx';
 import Button from '../primitives/Button.jsx';
-import ProseParagraph from '../ProseParagraph.jsx';
+import ProseParagraph, { MentionText } from '../ProseParagraph.jsx';
+import EntityLink from '../primitives/EntityLink.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 import { useStore } from '../../store/index.js';
 import { flag } from '../../lib/flags.js';
 import { isEdited, getOriginalValue } from '../../domain/userEdits.js';
-import { entityAnchor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { entityAnchor, entityIdFor, normalizeNpcTraits } from '../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
 import { describeCompromiseConjunction } from '../../domain/display/causeConjunctionContent.js';
 import { npcInteriority } from '../../domain/display/npcInteriorityRead.js';
 import { whereaboutsLine, whereaboutsBadge } from '../../domain/roads/whereaboutsDisplay.js';
@@ -66,7 +68,6 @@ export function NPCCategoryGroup({
   group,
   impFilter,
   search,
-  relationships = [],
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -99,9 +100,6 @@ export function NPCCategoryGroup({
       <button type="button" aria-expanded={open} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'center',gap:8,background:'none',border:'none',cursor:'pointer',padding:'4px 0',WebkitTapHighlightColor:'transparent',marginBottom:open?8:0}}>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
         <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color,textTransform:'uppercase',letterSpacing:'0.07em',flexShrink:0}}>{displayLabel} ({filtered.length})</span>
-        {sorted.filter(n=>n.influence==='high').length > 0 &&
-          <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color,background:`${color}18`,padding:'0 4px',flexShrink:0}}>●●● ×{sorted.filter(n=>n.influence==='high').length}</span>
-        }
         <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,flexShrink:0}}>{open?'▲':'▼'}</span>
         <div style={{height:1,flex:1,background:`${color}35`}}/>
       </button>
@@ -109,7 +107,7 @@ export function NPCCategoryGroup({
         <NPCInlineCard
           key={durableNpcId(npc) || `legacy-presentation-${index}`}
           npc={npc}
-          relationships={relationships}
+          groupLabel={displayLabel}
           pinnedIds={pinnedIds}
           onTogglePin={onTogglePin}
           canAuthorNpc={canAuthorNpc}
@@ -138,54 +136,56 @@ export function NPCRelCard2({rel, style={color:'#6b5340',bg:'#faf8f4',border:'#e
   const mobile = useIsMobile();
   return (
     <div style={{border:`1px solid ${style.border}`,borderLeft:`3px solid ${style.color}`,overflow:'hidden',marginBottom:10}}>
-      <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',background:open?style.bg:'#faf8f4',border:'none',cursor:'pointer',padding:'10px 14px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
-        <div style={{display:'flex',alignItems:'flex-start',gap:8}}>
-          <div style={{flex:1}}>
-            <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',marginBottom:3}}>
-              <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Name}</span>
-              <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
-              <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Name}</span>
-              {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
-            </div>
-            <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
-          </div>
-          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
+      {/* X-20: each name is a door to that person's card, and only the name, so the names sit
+          above the toggle; the role line and the chevron are the toggle. */}
+      <div style={{background:open?style.bg:'#faf8f4'}}>
+        <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap',padding:'10px 14px 0',marginBottom:3}}>
+          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc1Id?<EntityLink id={rel.npc1Id} type="npc" fallback={rel.npc1Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc1Name} structural/>}</span>
+          <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:style.color,background:style.bg,border:`1px solid ${style.border}`,padding:'1px 6px',letterSpacing:'0.05em'}}>{rel.typeName||rel.type}</span>
+          <span style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag}}>{rel.npc2Id?<EntityLink id={rel.npc2Id} type="npc" fallback={rel.npc2Name} style={{...serif,fontSize:FS.lg}}/>:<MentionText text={rel.npc2Name} structural/>}</span>
+          {rel.flagDriven&&<span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.magic,background:swatch['#F0EBFF'],padding:'1px 6px',textTransform:'uppercase'}}>◆ Emergent</span>}
         </div>
-      </button>
+        <button type="button" aria-expanded={open} aria-label={`Toggle relationship between ${rel.npc1Name} and ${rel.npc2Name}`} onClick={()=>setOpen(v=>!v)} style={{width:'100%',display:'flex',alignItems:'flex-start',gap:8,background:'none',border:'none',cursor:'pointer',padding:'0 14px 10px',textAlign:'left',WebkitTapHighlightColor:'transparent'}}>
+          <div data-sf-chrome="" style={{flex:1,fontSize:chromeFontSize(FS.xs,mobile),color:MUTED}}>{rel.npc1Role} · {rel.strength} · {rel.npc2Role}</div>
+          <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,flexShrink:0,paddingTop:2}}>{open?'▲':'▼'}</span>
+        </button>
+      </div>
       {open&&<div style={{padding:'10px 14px',background:swatch['#FAF8F4'],borderTop:`1px solid ${style.border}`}}>
-        <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}>{rel.description}</p>
-        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],lineHeight:1.5}}>{rel.tension}</div>}
+        <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.6,margin:'0 0 10px'}}><MentionText text={rel.description}/></p>
+        {rel.tension&&<div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'7px 10px',fontSize:proseFontSize(FS.sm,mobile),color:swatch['#5A3A10'],lineHeight:1.5}}><MentionText text={rel.tension}/></div>}
       </div>}
     </div>
   );
 }
 
 export function ConflictCard({conflict:c}) {
-  const [_open,_setOpen]=useState(false);
-  // THE PHONE PROSE FLOOR — the description and the stakes sentence.
+  // THE PHONE PROSE FLOOR — the stakes sentence (and a legacy description).
   const mobile = useIsMobile();
+  // ONE CARD, EACH FACT ONCE (chair ruling 2026-10-30). The generator's `desc` is a fixed
+  // template restating the parties, the intensity and the stakes the card already prints,
+  // so the head carries the one new fact (the issue) and `desc` is not rendered. A record
+  // with no issue (another writer, or a legacy save) still shows its description. The
+  // conflict's plot hooks live on the Plot Hooks page (X-2).
   const intStyle={high:{color:'#8b1a1a',label:'High tension'},moderate:{color:'#a0762a',label:'Moderate tension'},low:{color:'#1a5a28',label:'Low tension'}};
   const d=intStyle[c.intensity]||intStyle.moderate;
   return (
     <div style={{background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'12px 14px',marginBottom:10}}>
       <div style={{display:'flex',alignItems:'baseline',gap:8,marginBottom:6}}>
         <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:d.color,background:`${d.color}18`,padding:'1px 6px',letterSpacing:'0.05em'}}>{d.label}</span>
-        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
+        <span style={{...serif,fontSize: FS['14'],fontWeight:600,color:swatch.inkMag}}><MentionText text={c.parties?.[0]} structural/> vs <MentionText text={c.parties?.[1]} structural/>{c.issue?` · ${c.issue}`:''}</span>
       </div>
-      <p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}>{c.desc||c.description}</p>
-      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,marginBottom:8}}><strong>At stake:</strong> {c.stakes}</div>}
-      {c.plotHooks?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8,marginTop:4}}>
-        {c.plotHooks.map((h,i)=><PlotHook key={i} text={typeof h==='string'?h:h.hook||Ti(h)}/>)}
-      </div>}
+      {!c.issue&&(c.desc||c.description)&&<p style={{fontSize:proseFontSize(FS.md,mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 6px'}}><MentionText text={c.desc||c.description}/></p>}
+      {c.stakes&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED}}><strong>At stake:</strong> <MentionText text={c.stakes}/></div>}
     </div>
   );
 }
 
 
-// Inline NPC card — replaces the removed NPCCard export
-function NPCInlineCard({
+// Inline NPC card — replaces the removed NPCCard export. Exported for the dossier search
+// (BUILD-W2-SEARCH U2), which mounts a person through this same card.
+export function NPCInlineCard({
   npc,
-  _relationships = [],
+  groupLabel = '',
   pinnedIds,
   onTogglePin,
   canAuthorNpc = false,
@@ -226,6 +226,8 @@ function NPCInlineCard({
     if (idx >= 0) revertUserEditAction('npc', idx, 'secret.what');
   };
   const [open, setOpen] = useState(false);
+  // X-20 (c): a link to this person opens the card fully and scrolls it to the top.
+  const { ref: focusRef } = useEntityFocus(entityIdFor('npc', npc), () => setOpen(true));
   // THE PHONE PROSE FLOOR — every SENTENCE in the expanded card (the
   // compromise phrase, the replacement note, the whereabouts line, the
   // structural position, the constraint, the wants, the disposition and the
@@ -313,7 +315,7 @@ function NPCInlineCard({
   const pinColor = swatch['#6A2A9A']; // purple — ties visually to the narrative accent.
 
   return (
-    <div id={entityAnchor('npc', npc)} style={{
+    <div ref={focusRef} id={entityAnchor('npc', npc)} style={{
       background:swatch['#FAF8F4'],
       // LONGHANDS ONLY — the shorthand varies with `isPinned`, and pinning a card is
       // exactly the re-render on which React would reset the 3px accent beside it.
@@ -330,7 +332,9 @@ function NPCInlineCard({
           <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>
             {nativeRole}
             {showRoleArchetype ? `${nativeRole ? ' · ' : ''}${roleArchetype} archetype` : ''}
-            {npc.factionAffiliation ? ` · ${npc.factionAffiliation}` : ''}
+            {/* The group header above already names the faction (chair ruling N5): the
+                suffix prints only where the card stands outside its own faction's group. */}
+            {npc.factionAffiliation && npc.factionAffiliation !== groupLabel ? ` · ${npc.factionAffiliation}` : ''}
           </div>
         </div>
         {pinAvailable && (
@@ -393,7 +397,7 @@ function NPCInlineCard({
                 }}>Exposed</span>
               )}
               {npc.corrupt && npc.corruptTies?.criminalInstitution && (
-                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to {npc.corruptTies.criminalInstitution}</span>
+                <span style={{color:swatch.inkMag3,fontStyle:'italic'}}>tied to <MentionText text={npc.corruptTies.criminalInstitution} structural/></span>
               )}
             </div>
           )}
@@ -418,11 +422,11 @@ function NPCInlineCard({
             </div>
           )}
           {npc.structuralPosition && (
-            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}>{npc.structuralPosition}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag3,margin:'4px 0',lineHeight:1.4,fontStyle:'italic'}}><MentionText text={npc.structuralPosition} selfId={entityIdFor('npc', npc)}/></p>
           )}
           {npc.activeConstraint && (
             <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.danger,margin:'4px 0',lineHeight:1.4}}>
-              <span style={{fontWeight:700}}>Constraint: </span>{npc.activeConstraint}
+              <span style={{fontWeight:700}}>Constraint: </span><MentionText text={npc.activeConstraint} selfId={entityIdFor('npc', npc)}/>
             </p>
           )}
           {(wants.length > 0 || disposition.length > 0) && (
@@ -435,7 +439,7 @@ function NPCInlineCard({
                   <span style={{fontWeight:700,color:swatch['#A0762A']}}>Wants </span>
                   {wants.map((want, i) => (
                     <Fragment key={`${want}-${i}`}>
-                      {i > 0 ? ' · ' : ''}<ProseParagraph text={want} />
+                      {i > 0 ? ' · ' : ''}<ProseParagraph text={want} selfId={entityIdFor('npc', npc)} />
                     </Fragment>
                   ))}
                 </div>

@@ -43,6 +43,7 @@ import {
   fetchGalleryMaps, normalizeMapFilters, shareMap,
 } from '../../src/lib/gallery.js';
 import { activeMapFilterCount, emptyMapFilters } from '../../src/components/gallery/galleryMapsFilters.js';
+import { isVeiled, veilGroupingsOf } from '../../src/domain/display/galleryVeil.js';
 
 afterEach(() => vi.clearAllMocks());
 
@@ -579,6 +580,124 @@ describe('gallery.js — maps Importable facet (migration 072)', () => {
     await shareMap('11111111-2222-3333-4444-555555555555', { kind: 'map' });
     expect(supabase.rpc).toHaveBeenCalledWith('publish_map', expect.objectContaining({
       p_importable: null,
+    }));
+  });
+});
+
+// ── THE GALLERY VEIL'S STORAGE AND READER (RULINGS-CROSS X-21; W2-VEIL-A U3) ──────────
+// The delta list rides the reserved key inside gallery_member_overrides (migrations are
+// the owner's hand); the reader projects a marked share through the veil after
+// toPublicSafe, so a hidden fact is absent from what renders.
+describe('gallery.js — the gallery veil (X-21, W2-VEIL-A U3)', () => {
+  const dossierRow = (overrides) => ({
+    id: '7', public_slug: 'veil1', name: 'Bailthwaite', tier: 'city', published_at: '2026-10-30', view_count: 1,
+    gallery_share_dm: false,
+    gallery_member_overrides: overrides,
+    data: {
+      name: 'Bailthwaite', tier: 'city', population: 18764,
+      institutions: [
+        { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', desc: 'A chapter of organised crime.', tags: ['criminal'] },
+        { name: 'Parish churches (10-30)', category: 'Religious', priorityCategory: 'religion', desc: 'One for each neighbourhood.', tags: ['religious'] },
+      ],
+      availableServices: { criminal: [{ name: 'Contraband goods', desc: 'Restricted goods.', institution: 'Black market' }] },
+    },
+  });
+  const fetchRow = async (row) => {
+    supabase.rpc
+      .mockResolvedValueOnce({ data: [row], error: null })
+      .mockResolvedValueOnce({ data: null, error: null })
+      .mockResolvedValueOnce({ data: [{ net_votes: 0, voted: false }], error: null })
+      .mockResolvedValueOnce({ data: [], error: null });
+    return fetchPublicDossier(row.public_slug);
+  };
+
+  it('a share marked with a veil renders through it: the defaults hide, a delta shows', async () => {
+    const dossier = await fetchRow(dossierRow({ $veil: { v: 1, deltas: [{ address: 'block:services.criminal', hidden: false }] } }));
+    // X-21e: the criminal house is hidden whole by default; the church stays.
+    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(dossier.settlement.institutions[0].desc).toBe('One for each neighbourhood.');
+    // The DM's delta flipped one default eye back to shown.
+    expect(dossier.settlement.availableServices.criminal).toHaveLength(1);
+    expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+  });
+
+  it('PIN: the grouping list survives a masked word (W2-VEIL-B)', async () => {
+    // The grouping list lives beside the projected copy (a WeakMap). toPublicSafe masks
+    // words BEFORE applyVeil copies and marks, so the reader's outer veilPublicPayload pass
+    // returns the same object and the mark holds. Measured green on the VEIL-A reader; this
+    // pins the order, because a mask applied after the mark would drop it silently.
+    const row = dossierRow({ $veil: { v: 1, deltas: [] } });
+    row.data.institutions[1] = { ...row.data.institutions[1], desc: 'One for each shit neighbourhood.' };
+    const dossier = await fetchRow(row);
+    expect(dossier.settlement.institutions[0].desc).toBe('One for each ▒▒▒ neighbourhood.');
+    expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+    expect(isVeiled(dossier.settlement, 'block:defense.criminalStructure')).toBe(true);
+  });
+
+  it('a share exported before the veil (no reserved key) projects exactly as before', async () => {
+    const dossier = await fetchRow(dossierRow({ npc_1: { revealDm: false } }));
+    expect(dossier.settlement.institutions[0].desc).toBe('A chapter of organised crime.');
+    expect(veilGroupingsOf(dossier.settlement)).toEqual([]);
+  });
+
+  // ── W2-VEIL-B U3: SNAPSHOT OR LIVE (X-24) ──────────────────────────────────────────
+  const frozenCopy = () => ({
+    name: 'Bailthwaite', tier: 'city', population: 18764,
+    institutions: [
+      { name: "Thieves' guild chapter", category: 'Criminal', priorityCategory: 'criminal', desc: 'A chapter of organised crime.', tags: ['criminal'] },
+      { name: 'Parish churches (10-30)', category: 'Religious', priorityCategory: 'religion', desc: 'As it stood at export.', tags: ['religious'] },
+    ],
+  });
+
+  it('a snapshot share renders the copy frozen at export, through the veil; the row has moved on', async () => {
+    const row = dossierRow({ $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-10-31T10:00:00.000Z', snapshot: frozenCopy() } });
+    row.data.institutions.push({ name: 'Mages\' college', category: 'Arcane', desc: 'Founded after the export.' });
+    const dossier = await fetchRow(row);
+    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)']);
+    expect(dossier.settlement.institutions[0].desc).toBe('As it stood at export.');
+    expect(dossier.galleryMode).toBe('snapshot');
+    expect(dossier.snapshotAt).toBe('2026-10-31T10:00:00.000Z');
+    expect(isVeiled(dossier.settlement, 'tab:plot_hooks')).toBe(true);
+  });
+
+  it('a live share renders the saved row, which every save and advance rewrites', async () => {
+    const row = dossierRow({ $veil: { v: 1, deltas: [], mode: 'live', at: '2026-10-31T10:00:00.000Z' } });
+    row.data.institutions.push({ name: 'Mages\' college', category: 'Arcane', desc: 'Founded after the export.' });
+    const dossier = await fetchRow(row);
+    expect(dossier.settlement.institutions.map(i => i.name)).toEqual(['Parish churches (10-30)', 'Mages\' college']);
+    expect(dossier.galleryMode).toBe('live');
+    expect(dossier.snapshotAt).toBe(null);
+  });
+
+  it('updateGalleryMetadata keeps the mode record (clamped) on the reserved key', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq }).mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', { memberOverrides: {
+      $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-10-31T10:00:00.000Z', snapshot: frozenCopy(), junk: 1 },
+    } });
+    expect(update).toHaveBeenLastCalledWith(expect.objectContaining({
+      gallery_member_overrides: { $veil: { v: 1, deltas: [], mode: 'snapshot', at: '2026-10-31T10:00:00.000Z', snapshot: frozenCopy() } },
+    }));
+    await updateGalleryMetadata('s1', { memberOverrides: { $veil: { v: 1, deltas: [], mode: 'forever', snapshot: frozenCopy() } } });
+    expect(update).toHaveBeenLastCalledWith(expect.objectContaining({
+      gallery_member_overrides: { $veil: { v: 1, deltas: [] } },
+    }));
+  });
+
+  it('updateGalleryMetadata keeps the veil\'s deltas (clamped) beside the per-NPC overrides', async () => {
+    const update = vi.fn().mockReturnThis();
+    const eq = vi.fn().mockResolvedValue({ error: null });
+    supabase.from.mockReturnValueOnce({ update, eq });
+    await updateGalleryMetadata('s1', { memberOverrides: {
+      npc_1: { revealDm: false, junk: 1 },
+      $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: true }, { address: 'nonsense', hidden: true }, { address: 'tab:plot_hooks', hidden: 'no' }] },
+    } });
+    expect(update).toHaveBeenCalledWith(expect.objectContaining({
+      gallery_member_overrides: {
+        npc_1: { revealDm: false },
+        $veil: { v: 1, deltas: [{ address: 'class:npc:secret', hidden: true }] },
+      },
     }));
   });
 });

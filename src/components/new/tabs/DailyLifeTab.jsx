@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 
 import { sans } from '../Primitives';
-import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import {extractSettlementContext} from '../dailyLifeLogic';
@@ -14,10 +13,9 @@ import { economyDeskRead } from '../economyDeskRead.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
 import { edged } from '../../../design/edgedBox.js';
-import { statusCase } from '../labelLadder.js';
 
 const INK = swatch['#1C1409'], MUTED = swatch['#9C8068'], SECOND = swatch['#6B5340'],
-      BORDER = swatch['#E0D0B0'], GOLD = swatch['#A0762A'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
+      BORDER = swatch['#E0D0B0'], PARCH = swatch['#FDF8F0'], _CARD = swatch['#FFFBF5'];
 
 // ── Data extraction ── (moved to dailyLifeLogic.js)
 
@@ -118,17 +116,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   const displayNarrative = narrative || (aiDailyLife ? formatDailyLifeResult(aiDailyLife) : null);
   const hasContent = !!displayNarrative;
 
-  const tierLabel     = ctx.tierLabel;
-  // Prosperity color from the canonical PROSPERITY_COLORS map (the same source
-  // the Overview and Economics tabs read) so every surface agrees. The engine's
-  // real bands are Struggling/Poor/Moderate/Comfortable/Prosperous/Wealthy
-  // (economicGenerator LABELS); ctx.prospBand is that label lowercased. The old
-  // ad-hoc ternary only handled prosperous/comfortable and a never-emitted
-  // 'subsistence', so the real top band 'wealthy' — and Moderate/Poor — fell
-  // through to crisis red.
-  const prospColor    = PROSPERITY_COLORS[ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1)] || '#a0762a';
-  const safetyBand    = ctx.safetyLabelFromProfile || (ctx.safetyScore >= 70 ? 'Safe' : ctx.safetyScore >= 50 ? 'Moderate' : ctx.safetyScore >= 30 ? 'Dangerous' : 'Hostile');
-  const safetyColor   = ctx.safetyScore >= 70 ? '#1a5a28' : ctx.safetyScore >= 50 ? '#a0762a' : ctx.safetyScore >= 30 ? '#8a4010' : '#8b1a1a';
   const foodLabel     =
     ctx.foodDeficit > 35 ? 'Severe' :
     ctx.foodDeficit > 20 ? 'Serious' :
@@ -161,31 +148,19 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
   return (
     <div style={{ fontFamily: sans, padding: mobile ? '12px 10px' : '16px 18px', maxWidth: 720, margin: '0 auto' }}>
 
-      {/* ── ANCHOR FACTS ─────────────────────────────────────────────────── */}
+      {/* ── ANCHOR FACTS ─────────────────────────────────────────────────────
+          THE FOUR FACTS THAT FRAME DAILY LIFE AND LIVE ON NO OTHER PAGE (chair ruling D1,
+          2026-10-30). Tier, prosperity, safety and defense are the Overview's glance (X-1);
+          who governs, terrain and magic are Power's and the Overview's; the active stress is
+          the Overview crisis card's, and is said here once, as its own anchor (X-3). */}
       <div style={{ display: 'flex', gap: 7, flexWrap: 'wrap', marginBottom: 14 }}>
-        <AnchorFact label="Settlement"  value={tierLabel}                        accent={GOLD} />
-        <AnchorFact label="Economy"  value={ctx.prospBand.charAt(0).toUpperCase() + ctx.prospBand.slice(1)} accent={prospColor} />
-        <AnchorFact label="Safety"      value={safetyBand}                        accent={safetyColor} />
         <AnchorFact label="Food"        value={foodLabel}                          accent={foodColor} />
-        {ctx.govFaction && <AnchorFact label="Governed by" value={ctx.govFaction} accent='#2a3a7a' />}
-        {ctx.terrain && ctx.terrain !== 'auto' && (
-          <AnchorFact label="Terrain" value={ctx.terrain.charAt(0).toUpperCase() + ctx.terrain.slice(1)} accent='#3a5a2a' />
+        {ctx.tradeRoute && (
+          <AnchorFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#5a3a1a' />
         )}
         {ctx.culture && ctx.culture !== 'random' && (
           <AnchorFact label="Culture" value={ctx.culture.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#3a3a6a' />
         )}
-        {ctx.tradeRoute && (
-          <AnchorFact label="Access" value={ctx.tradeRoute.replace(/_/g,' ').split(' ').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')} accent='#5a3a1a' />
-        )}
-        {/* ⛔ RUNG 3 IS CASED AT THIS CALL SITE, NEVER INSIDE `AnchorFact` (browser pass 3).
-            The sibling `StatusTag` on Overview cases its own value because every value it
-            takes is a frozen band word; this strip is not that — "Governed by" holds a
-            generated FACTION NAME, and `statusCase` inside the component would print "The
-            ashford guild". Only the readiness band is a band. */}
-        {ctx.defenseReadinessLabel && (
-          <AnchorFact label="Defense" value={statusCase(ctx.defenseReadinessLabel)} accent='#1a3a6a' />
-        )}
-        <AnchorFact label="Magic" value={ctx.magicLabel} accent={ctx.magicBand==='none'?'#6b5340':ctx.magicBand==='high'?'#5a2a8a':ctx.magicBand==='moderate'?'#6a2a6a':'#4a3a6a'} />
         {ctx.stressTypes.length > 0 && (
           <AnchorFact
             label="Active stress"
@@ -196,34 +171,26 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
       </div>
 
       {/* ── THE STANDING OF LIVING (DS-ECO-8 at daily_life.standingOfLiving) ──
-          THE LADDER BLOCK'S ONE SPEAKING POSITION. The prosperity band word is already the
-          "Economy" anchor fact three lines above, which is exactly the shape a LADDER block
-          wants: the reader has the band, and this is the town's own account of what living
-          at that band is like. It does NOT speak on economics (DS-ECO-1 has the header
+          THE LADDER BLOCK'S ONE SPEAKING POSITION. The prosperity band word is the Overview's
+          glance (the "Economy" anchor that repeated it here is cut, D1), and this is the
+          town's own account of what living at that band is like. It does NOT speak on economics (DS-ECO-1 has the header
           there, R-DST-A) and it does NOT speak on overview (DS-GEN-3's five `prosperity:`
           pools already speak about the rung at overview.systemsHealth — measured, not
           assumed). Additive: every anchor fact and the AI narrative below are untouched. */}
       <DeskLines mount="daily_life.standingOfLiving" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.prosperityRung]} />
 
-      {/* ── GENERATE / REGENERATE BUTTON ──────────────────────────────────── */}
-      {/* Unsaved settlements (Create page) get a slim inline hint instead of
-          a disabled teaser button — tab-contextual, so it explains what saving
-          unlocks for "Daily Life" specifically. */}
-      {!dailyLifeEnabled ? (
-        <div
-          style={{
-            padding: '10px 14px', marginBottom: 16,
-            background: PARCH,
-            border: `1px solid ${BORDER}`,
-            borderLeft: '3px solid #a0762a',
-            fontSize: FS.sm, color: SECOND, lineHeight: 1.5,
-            fontFamily: sans,
-          }}
-        >
-          <strong style={{ color: swatch['#7A5A1A'] }}>Save this settlement</strong>
-          {' '}to refine Daily Life into narrative. Five paragraphs of evocative prose grounded in this town's specific stressors, trade, and cast. Anchor facts above remain available either way.
-        </div>
-      ) : (
+      {/* ── ONE LINE AND THE BUTTON (chair ruling D3 + D6, 2026-10-30) ──────────
+          The unsaved hint and the empty state were one pitch told twice; they are one plain
+          line now, shown until there is prose, with the button beneath it once the
+          settlement is saved. */}
+      {!hasContent && !loading && (
+        <p data-testid="daily-life-offer" style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.sm, mobile), color: SECOND, lineHeight: 1.5 }}>
+          {dailyLifeEnabled
+            ? 'Ordinary life here in prose: dawn, the market, the tavern, the watch.'
+            : 'Save this settlement to write its ordinary life in prose: dawn, the market, the tavern, the watch.'}
+        </p>
+      )}
+      {dailyLifeEnabled && (
         <Button
           variant="primary"
           size="lg"
@@ -287,22 +254,6 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
                 {para.trim()}
               </p>
             ))}
-          </div>
-        </div>
-      )}
-
-      {/* ── EMPTY STATE ───────────────────────────────────────────────────── */}
-      {!hasContent && !loading && !error && (
-        <div style={{
-          background: swatch['#FAF8F4'], border: `1px solid ${BORDER}`,
-          padding: '32px 20px', textAlign: 'center',
-        }}>
-          <div style={{ fontSize: FS.md, fontWeight: 600, color: SECOND, marginBottom: 6 }}>
-            What is daily life like here?
-          </div>
-          <div style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: MUTED, lineHeight: 1.6, maxWidth: 380, margin: '0 auto' }}>
-            Generate a prose description of ordinary life in this settlement. Dawn, the market, the tavern,
-            the watch. Opus-grade writing, five paragraphs, grounded in this settlement's specific stressors and trade.
           </div>
         </div>
       )}

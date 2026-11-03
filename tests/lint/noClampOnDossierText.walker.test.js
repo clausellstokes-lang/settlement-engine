@@ -148,6 +148,17 @@ const NOWRAP_REGISTRY = Object.freeze([
       + ' chip that will not fit moves to the next line rather than being cut.',
   },
   {
+    path: 'src/components/new/tabs/OverviewTab.jsx', nowrap: 3,
+    holds: 'the three identity facts beside the name (head count, trade access, age)',
+    proof: 'THE PHONE FIX (the owner, 2026-11-01, ODQ §934.103). Each fact is a bounded string:'
+      + ' a grouped integer from formatCount plus "pop.", one of the FIVE tradeRouteAccess'
+      + ' config values (humanizeEngineTokens.js names them) with its underscore spaced, and an'
+      + ' integer age plus "years old". Each sits with its own separator dot in a WRAPPING flex'
+      + ' row (`flexWrap: \'wrap\'`), so a fact that will not fit moves WHOLE to the next line,'
+      + ' dot and all, instead of the row breaking after the dot or inside the fact; nothing'
+      + ' clips because the row has no fixed width and no overflow box.',
+  },
+  {
     path: 'src/components/dossier/DossierTabStrip.jsx', nowrap: 1,
     holds: 'a tab label',
     proof: 'The tab vocabulary is a fixed, authored list and the strip SCROLLS horizontally'

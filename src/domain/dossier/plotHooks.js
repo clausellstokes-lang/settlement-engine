@@ -1,7 +1,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { traditionHook } from '../traditions/prose.js';
 import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
-import { themeOfText, themeOfRelArchetype, UNTYPED } from '../hookThemes.js';
+import { themeOfText } from '../hookThemes.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
 
 const TENSION_LABELS = Object.freeze({
@@ -35,8 +35,72 @@ export const PLOT_HOOK_CATEGORIES = Object.freeze({
   economics: { color: '#a0762a', label: 'Economy' },
   safety: { color: '#5a2a8a', label: 'Safety' },
   history: { color: '#1a4a2a', label: 'History' },
+  // ⚠ KEPT FOR THE VOCABULARY, NO LONGER EMITTED (chair ruling X-2, 2026-10-30): a
+  // relationship's `tension` is a fact of the tie and lives on the Relationships tab beside
+  // it. The entry stays so DS-HK-1's 7-for-7 category identity and any stored hook that
+  // still carries the token keep a colour and a label.
   relationship: { color: '#5a3a1a', label: 'Relationships' },
 });
+
+/**
+ * THE PAGE EACH HOOK'S SOURCE FACT LIVES ON (chair ruling X-2 / RULINGS-T1 Plot Hooks). The
+ * Plot Hooks tab is the hooks' one home and groups its cards by that page, under a caption
+ * naming it, so a DM can see which page holds the fact a hook grows from. Keyed on the
+ * collector's own category; traditions ride the `tension` category and are told apart by
+ * the source label the collector writes for them. Labels are the strip's own tab labels.
+ * @type {ReadonlyArray<{ id: string, label: string }>}
+ */
+export const PLOT_HOOK_SOURCE_PAGES = Object.freeze([
+  Object.freeze({ id: 'npcs', label: 'NPCs' }),
+  Object.freeze({ id: 'relationships', label: 'Relationships' }),
+  Object.freeze({ id: 'history', label: 'History' }),
+  Object.freeze({ id: 'traditions', label: 'Traditions' }),
+  Object.freeze({ id: 'viability', label: 'Outlook' }),
+  Object.freeze({ id: 'defense', label: 'Defense' }),
+]);
+
+/** @type {Readonly<Record<string, string>>} */
+const SOURCE_PAGE_OF_CATEGORY = Object.freeze({
+  npc: 'npcs',
+  faction: 'relationships',
+  relationship: 'relationships',
+  tension: 'history',
+  history: 'history',
+  economics: 'viability',
+  safety: 'defense',
+});
+
+/**
+ * The source page of one hook, as an entry of PLOT_HOOK_SOURCE_PAGES.
+ * @param {{ category?: unknown, source?: unknown }|null|undefined} hook
+ * @returns {{ id: string, label: string }}
+ */
+export function plotHookSourcePage(hook) {
+  const id = hook?.source === 'Traditions'
+    ? 'traditions'
+    : (SOURCE_PAGE_OF_CATEGORY[String(hook?.category ?? '')] || 'history');
+  return PLOT_HOOK_SOURCE_PAGES.find((page) => page.id === id) || PLOT_HOOK_SOURCE_PAGES[2];
+}
+
+/**
+ * The hooks grouped by source page, in PLOT_HOOK_SOURCE_PAGES order, each group keeping the
+ * collector's own order. Empty pages are absent.
+ * @template {{ category?: unknown, source?: unknown }} H
+ * @param {ReadonlyArray<H>} hooks
+ * @returns {Array<{ page: { id: string, label: string }, hooks: H[] }>}
+ */
+export function groupPlotHooksBySourcePage(hooks) {
+  /** @type {Map<string, H[]>} */
+  const byPage = new Map();
+  for (const hook of hooks || []) {
+    const { id } = plotHookSourcePage(hook);
+    if (!byPage.has(id)) byPage.set(id, []);
+    /** @type {H[]} */ (byPage.get(id)).push(hook);
+  }
+  return PLOT_HOOK_SOURCE_PAGES
+    .filter((page) => byPage.has(page.id))
+    .map((page) => ({ page, hooks: /** @type {H[]} */ (byPage.get(page.id)) }));
+}
 
 /**
  * A raw hook as produced by the generators: either a bare string, or an object
@@ -209,12 +273,6 @@ function push(out, hook) {
 export function collectPlotHooks(settlement = {}, options = {}) {
   /** @type {PlotHook[]} */
   const hooks = [];
-  // Relationship tension prose is rendered by name-interpolating closures, so it
-  // can never match an exact-text theme key. Its theme is carried by the
-  // relationship's own `archetypeKey` instead, captured here at the one place
-  // that still holds the relationship beside its rendered prose.
-  /** @type {Map<string, string>} */
-  const relationshipThemes = new Map();
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
@@ -259,24 +317,9 @@ export function collectPlotHooks(settlement = {}, options = {}) {
     }));
   });
 
-  (settlement.relationships || []).forEach((rel) => {
-    if (!rel.tension) return;
-    const relTheme = themeOfRelArchetype(/** @type {{ archetypeKey?: unknown }} */ (rel).archetypeKey);
-    if (relTheme !== UNTYPED) relationshipThemes.set(retentionKey(rel.tension), relTheme);
-    push(hooks, {
-      text: rel.tension,
-      source: `${rel.npc1Name || 'NPC'} & ${rel.npc2Name || 'NPC'}`,
-      role: rel.typeName || rel.type || '',
-      sub: [rel.npc1Role, rel.strength, rel.npc2Role].filter(Boolean).join(' · '),
-      category: 'relationship',
-      priority: rel.flagDriven ? 8 : 6,
-      accent: rel.flagDriven,
-      links: [
-        rel.npc1Name ? { kind: 'npc', label: rel.npc1Name, id: rel.npc1Id || rel.npc1Name } : null,
-        rel.npc2Name ? { kind: 'npc', label: rel.npc2Name, id: rel.npc2Id || rel.npc2Name } : null,
-      ].filter(Boolean),
-    });
-  });
+  // ⛔ NO RELATIONSHIP-TENSION CATEGORY (chair ruling X-2, 2026-10-30). A relationship's
+  // `tension` is a FACT of the tie, not a hook: it renders on the Relationships tab beside
+  // its tie, and the Plot Hooks collector no longer repeats it as a card.
 
   (settlement.economicViability?.plotHooks || []).forEach((hook) => {
     const h = /** @type {{ hook?: unknown, text?: unknown, category?: unknown, severity?: unknown }} */ (typeof hook === 'object' && hook ? hook : { hook });
@@ -346,7 +389,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   // not a rewrite — everything below is built, tested, and waiting.
   if (!options.retention) return deduped;
   return /** @type {PlotHook[]} */ (retainHooks(deduped, {
-    themeOf: (hook) => relationshipThemes.get(retentionKey(hook.text)) || themeOfText(hook.text),
+    themeOf: (hook) => themeOfText(hook.text),
     editedTextKeys: editedHookTextKeys(/** @type {import('../userEdits.js').EditableEntity} */ (settlement)),
     // HK-LAW-4's set is EMPTY here, and deliberately so: no hook in this estate
     // anchors an escalation clock. deriveEscalationClocks derives every clock

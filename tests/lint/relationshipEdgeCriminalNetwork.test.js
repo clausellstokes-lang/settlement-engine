@@ -52,11 +52,13 @@ import { REL_HEX, REL_RGB, relRgb } from '../../src/domain/display/relationshipC
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 
-/** Every surface §67.2 named, and the two the compile added. */
+/** Every surface §67.2 named, and the two the compile added.
+ *  `src/components/new/neighbourComponents.jsx` LEFT THE LIST 2026-10-30 (BUILD-T3, chair
+ *  ruling R2): its one palette read was the cut "Known Contacts" block, and the card now
+ *  takes every colour from its host's `styleFor`, so it holds no palette to converge. */
 const CONVERGED_SURFACES = Object.freeze([
   'src/components/settlements/SettlementCard.jsx',
   'src/components/SettlementDetail.jsx',
-  'src/components/new/neighbourComponents.jsx',
   'src/components/new/tabs/RelationshipsTab.jsx',
   'src/utils/generateCampaignPDF.js',
   'src/pdf/theme.js',

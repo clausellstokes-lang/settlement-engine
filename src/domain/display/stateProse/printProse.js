@@ -84,6 +84,7 @@ import { stressorsStateProse } from './stressorsStateProse.js';
 import { warFaithStateProse } from './warFaithStateProse.js';
 import { deriveAllActiveConditions } from '../../activeConditions.js';
 import { deriveCriminalStructure } from '../defenseDisplay.js';
+import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
 import { deriveFoodBalance, deriveGranaryOutlook } from '../dossierViewModel.js';
 import { populationTrendBand } from '../trendLens.js';
 import { normalizeStressor } from '../../worldPulse/stressorsCore.js';
@@ -95,7 +96,7 @@ import { deriveEscalationClocks } from '../../hookEscalation.js';
 import { generalDeskLines } from '../../../components/new/generalDeskRead.js';
 import { economyDeskRead } from '../../../components/new/economyDeskRead.js';
 import { relationshipsDeskLists } from './relationshipsDeskRead.js';
-import { FALL_SENTENCE, faithPanelModel } from '../../../components/settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../../components/settlement/faithPanelModel.js';
 import { HOOK_FRAMING } from '../hookFraming.js';
 
 /**
@@ -256,7 +257,7 @@ function worldStressorFor(worldState, settlementId) {
 
 /**
  * The TYPED CAUSE of a patron seat that changed hands, recovered by inverting the producer's
- * own exported map. MIRRORS `FaithTab.jsx:226-240`, including its reason for not reading
+ * own exported map. MIRRORS `FaithTab.jsx:125-139`, including its reason for not reading
  * `config.faithProfile.patronFall.cause` directly: the reader-with-no-writer walker convicts
  * that read, because its observation corpus is deity-free and no observed settlement carries
  * the key. Inverting an exported map adds no observed read at all.
@@ -417,19 +418,22 @@ export function buildPrintProse(settlement, ctx = {}) {
   const status = defenseMilitaryStatusProse(r, opts);
   const wall = defenseWallRationaleProse(r, opts);
   const supporting = defenseSupportingProse(r, opts);
-  const magic = defenseMagicDependencyProse(r, opts);
+  // T2-24: silent where magic does not function, exactly as ViabilityTab gates it.
+  const magic = magicWorksAt({ settlement: r }) === false ? { arcaneReliance: null } : defenseMagicDependencyProse(r, opts);
   const criminal = defenseCriminalProse(r, deriveCriminalStructure(r)?.key || null, opts);
 
-  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:218-242 ───────────
+  // ── THE FAITH HALF OF THE WAR & FAITH DESK — mirrors FaithTab.jsx:113-141 ───────────
   // The war half is print-deferred (see PRINT_DEFERRED_MOUNTS), so the war readings are
   // absent and every war rung comes back null — which is exactly what FaithTab itself gets,
   // because that tab holds no worldState either.
   const faithModel = faithPanelModel(r);
-  const faith = warFaithStateProse(r, {
+  // The SAME trim the screen applies (chair rulings F2/F4): a lens that restates a datum row
+  // the faith panel prints is not drawn (faithPanelModel.js :: trimFaithDeskToPanel).
+  const faith = trimFaithDeskToPanel(warFaithStateProse(r, {
     faith: faithModel,
     hasPatron: !!faithModel.hasEmbed,
     patronFallCause: patronFallCauseOf(faithModel.patronFallSentence),
-  }, opts);
+  }, opts), faithModel);
 
   // ── THE POSITIONS, IN PAGE ORDER ────────────────────────────────────────────────────
   // ⚠ THREE POSITIONS WEAVE MORE THAN ONE MOUNT, because the SCREEN does: DS-GEN-12/13/17
@@ -460,13 +464,20 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('overview.stressorLifecycle', stressor.worldStressorLifecycle),
     printed('overview.stressorLifecycle', stressor.worldStressorOrigin),
   ]);
-  put('overview', 'overview.activeConditions', [
+  // THE SCREEN'S RULE, MIRRORED (chair ruling T1-3, 2026-10-30): under a crisis the condition
+  // is the crisis, so the position prints ONE line, the direction lens (the first drawn lens
+  // where it is silent), exactly as OverviewTab puts one line on the crisis card. With no
+  // banner (a played-world condition) all five lenses print as before.
+  const conditionLines = [
     printed('overview.activeConditions', stressor.conditionSeverity),
     printed('overview.activeConditions', stressor.conditionDirection),
     printed('overview.activeConditions', stressor.conditionArchetype),
     printed('overview.activeConditions', stressor.conditionProvenance),
     printed('overview.activeConditions', stressor.conditionDuration),
-  ]);
+  ];
+  put('overview', 'overview.activeConditions', stresses.length > 0
+    ? [printed('overview.activeConditions', stressor.conditionDirection) || conditionLines.find(Boolean) || null]
+    : conditionLines);
   put('overview', 'overview.origin', g.originLines);
   put('overview', 'overview.conflicts', g.conflictLines);
   put('overview', 'overview.warnings', g.warningLines);
@@ -490,9 +501,11 @@ export function buildPrintProse(settlement, ctx = {}) {
     printed('power.legitimacyBanner', power.legitimacyBanner),
     printed('power.legitimacyBanner', power.legitimacyLens),
   ]);
+  // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-9, T2-17, T2-18, T2-20, T2-21, T2-22, T2-4):
+  // the print positions below mirror the screen's lens cuts exactly, so the PDF says what the
+  // tab says and no lens the tab dropped survives in print.
   put('power', 'power.stabilityHeader', [
     printed('power.stabilityHeader', power.stabilityHeader),
-    printed('power.stabilityHeader', power.stabilityLens),
   ]);
   put('power', 'power.criminalUnderside', [
     printed('power.criminalUnderside', power.legitimacyReading),
@@ -501,11 +514,9 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('power', 'power.rulingStructure', [
     printed('power.rulingStructure', power.rulingStructure),
-    printed('power.rulingStructure', power.governingTitle),
   ]);
   put('power', 'power.succession', [
     printed('power.succession', power.successionRisk),
-    printed('power.succession', power.successionHold),
   ]);
 
   // ⚠ EVERY LENS IS READ BY NAME rather than through a key list. The desks return frozen
@@ -522,12 +533,9 @@ export function buildPrintProse(settlement, ctx = {}) {
     ? /** @type {string|null} */ (lens?.beside ?? null) : null);
   put('defense', 'defense.postureHeader', [
     beside('defense.postureHeader', posture.posture),
-    beside('defense.postureHeader', posture.terrain),
-    beside('defense.postureHeader', posture.prize),
   ]);
   put('defense', 'defense.publicOrder', [
     beside('defense.publicOrder', order.publicOrder),
-    beside('defense.publicOrder', order.firstSurvey),
   ]);
   put('defense', 'defense.threatAssessment', [
     printed('defense.threatAssessment', threat.beasts),
@@ -550,7 +558,6 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('defense', 'defense.wallRationale', [printed('defense.wallRationale', wall.rationale)]);
   put('defense', 'defense.criminalStructure', [
     printed('defense.criminalStructure', criminal.structure),
-    printed('defense.criminalStructure', criminal.capture),
   ]);
   put('defense', 'defense.supportingCapabilities', [
     printed('defense.supportingCapabilities', supporting.logistics),
@@ -571,7 +578,6 @@ export function buildPrintProse(settlement, ctx = {}) {
   put('economics', 'economics.commercialProfile', [
     printed('economics.commercialProfile', economy.incomeMix),
     printed('economics.commercialProfile', economy.criminalLine),
-    printed('economics.commercialProfile', economy.tradeProfile),
   ]);
   put('economics', 'economics.shadowEconomy', [
     printed('economics.shadowEconomy', economy.shadowEconomy),
@@ -582,10 +588,10 @@ export function buildPrintProse(settlement, ctx = {}) {
   ]);
   put('economics', 'economics.craftReason', [general.economics.craftReasonLine]);
 
+  // T2-9 in print: ONE strategic-value sentence. ResourcesProduction prints the DM-EDITABLE
+  // generator line (`resources.strategicValue`), so the DS-ECO-11 strategic-value lens that
+  // replaces it on the screen is not printed beside it; the exploitation lens frames the chains.
   put('resources', 'resources.groundAndWorkings', [
-    printed('resources.groundAndWorkings', economy.terrainIdentity),
-    printed('resources.groundAndWorkings', economy.economicStrengths),
-    printed('resources.groundAndWorkings', economy.strategicValue),
     printed('resources.groundAndWorkings', economy.exploitation),
   ]);
 

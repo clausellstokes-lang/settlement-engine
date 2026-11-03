@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4dd7672667e9a5e0ca7d1bf8a49883a4c340a035",
-  "measuredBy": "fp-batch-7-assembly-93391427",
-  "date": "2026-10-02",
-  "note": "FP batch 7 composed tip: PACT-REASK U1 +4 titles (pactFormation FPQ-72 block); PACT-ANSWER U1 +2 (FP-42 block); PACT-COMPLIANCE U1/U2 two new files pactStrainBandFp44 and treatyStreamCarryFpq75; STATECRAFT-BAND U1 one new file statecraftExposureBand; IN-6 U1-U6 new walker, domain, ui and ops files and arms; FPQ-86 none",
-  "files": 2805,
-  "parked": 361,
-  "credited": 2444,
-  "titles": 26804,
-  "suiteTitles": 7072
+  "measuredAtSha": "4ae3bcb44ccf6a5d4e66ba09f27dd9adeffbec40",
+  "measuredBy": "the cloud chair (Fable 5.1), master merged into the consolidation branch",
+  "date": "2026-11-03",
+  "note": "master (PR #71) brought tests/build/edgeVendorLock.test.js onto the branch; no marker moved",
+  "files": 2817,
+  "parked": 362,
+  "credited": 2455,
+  "titles": 27148,
+  "suiteTitles": 7170
 }

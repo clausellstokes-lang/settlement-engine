@@ -67,7 +67,8 @@ import { institutionProvenanceOf } from '../../src/domain/provenance/rosterProve
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
 const LEAF = 'src/domain/worldPulse/worldPulseFates.js';
-const BADGE = 'src/components/new/tabs/OverviewTab.jsx';
+// The badge moved from OverviewTab to InstitutionsTab with the roster (owner addendum T1-15, 2026-10-30).
+const BADGE = 'src/components/new/tabs/InstitutionsTab.jsx';
 
 // ── THE MATCHER — a COMMENT-ONLY strip that KEEPS string contents ─────────────
 // Copied verbatim from tests/domain/ruinInstitution.test.js:192. The shared `codeOnly`

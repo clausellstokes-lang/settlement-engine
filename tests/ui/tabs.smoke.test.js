@@ -29,6 +29,7 @@ import { PowerTab }         from '../../src/components/new/tabs/PowerTab.jsx';
 import { RelationshipsTab } from '../../src/components/new/tabs/RelationshipsTab.jsx';
 import { ServicesTab }      from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ViabilityTab }     from '../../src/components/new/tabs/ViabilityTab.jsx';
+import InstitutionsTab, { institutionsWithServices } from '../../src/components/new/tabs/InstitutionsTab.jsx';
 import DMCompassTab         from '../../src/components/new/tabs/DMCompassTab.jsx';
 
 const e = React.createElement;
@@ -89,19 +90,26 @@ describe('OverviewTab smoke', () => {
     expectAbsentWithAnchor(text, 'ConsiderPalisade', pair, 'structural suggestion sentence pair');
   });
 
-  test('a single quarter is a "quarter", not "1 quarters"', () => {
+  // X-37 (the owner, 2026-11-01): "Remove the spatial layouts from the summary page". The
+  // layout line, the Spatial Layout section and its quarter cards are gone from the Overview;
+  // the record keeps `spatialLayout` for the plat. Anchored on the page's own name and the
+  // terrain chip that still stands where the layout line stood.
+  test('the Overview prints no spatial layout: not the layout line, not the quarters (X-37)', () => {
     const s = {
-      name: 'X', tier: 'village', population: 300,
-      spatialLayout: { layout: 'Village green beside the mill', quarters: [{ name: 'Market Quarter', desc: 'stalls' }] },
+      name: 'Orderby', tier: 'village', population: 300,
+      resourceAnalysis: { terrain: 'grassland' },
+      spatialLayout: {
+        layout: 'Village green beside the mill',
+        quarters: [{ name: 'Market Quarter', desc: 'stalls and a well', landmarks: ['Parish churches (2-5)'] }],
+      },
     };
-    const { container } = render(e(OverviewTab, { settlement: s }));
-    expectAbsentWithAnchor(container.textContent, '1 quarters', 'Spatial Layout (1 quarter)',
-      'single-quarter pluralization');
-    // Plural control: two quarters still read as quarters.
-    cleanup();
-    const two = { ...s, spatialLayout: { ...s.spatialLayout, quarters: [...s.spatialLayout.quarters, { name: 'Shrine', desc: 'quiet' }] } };
-    const second = render(e(OverviewTab, { settlement: two }));
-    expect(second.container.textContent).toContain('Spatial Layout (2 quarters)');
+    const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
+    expect(text).toContain('grassland');
+    for (const gone of ['Village green beside the mill', 'Spatial Layout', 'Market Quarter', 'stalls and a well', 'Parish']) {
+      expectAbsentWithAnchor(text, gone, 'grassland', 'the spatial layout cut from the summary page (X-37)');
+    }
+    // X-38 (the owner, 2026-11-01): no sentence about the page itself. The routing line is gone.
+    expectAbsentWithAnchor(text, 'Summary holds', 'grassland', 'the routing line cut from the Overview (X-38)');
   });
 });
 
@@ -162,6 +170,102 @@ smokeTab('HistoryTab',       HistoryTab,       s => ({ settlement: s }));
 smokeTab('RelationshipsTab', RelationshipsTab, s => ({ settlement: s }));
 smokeTab('ViabilityTab',     ViabilityTab,     s => ({ settlement: s }));
 smokeTab('DMCompassTab',     DMCompassTab,     s => ({ settlement: s }));
+smokeTab('InstitutionsTab',  InstitutionsTab,  s => ({ settlement: s }));
+
+describe('InstitutionsTab shape (owner addendum T1-14, inverted by X-35 on 2026-11-01)', () => {
+  test('every institution appears once, its description first, the doors to its services beneath, and the legend', () => {
+    const s = villageSettlement;
+    const houses = institutionsWithServices(s);
+    expect(houses.length).toBe((s.institutions || []).length);
+    const { container } = render(e(InstitutionsTab, { settlement: s }));
+    const cards = container.querySelectorAll('[data-testid="institution-card"]');
+    expect(cards.length).toBe(houses.length);
+    const withRows = houses.findIndex((h) => h.services.length > 0);
+    expect(withRows, 'no house in the fixture provides a service row').toBeGreaterThanOrEqual(0);
+    const doors = cards[withRows].querySelectorAll('[data-testid="institution-service"]');
+    expect(doors.length).toBe(houses[withRows].services.length);
+    // Each door sits under the house its row's own `institution` field names.
+    for (const svc of houses[withRows].services) expect(svc.institution).toBe(houses[withRows].inst.name);
+    // What the house is comes first: a generated house carries the catalogue's own line.
+    const desc = cards[withRows].querySelector('[data-testid="institution-desc"]');
+    expect(desc, 'the house leads with no description').toBeTruthy();
+    expect(desc.textContent.length).toBeGreaterThan(10);
+    expect(desc.compareDocumentPosition(cards[withRows].querySelector('[data-testid="institution-services"]')) & 4).toBeTruthy();
+    // X-38/X-42: the legend row is gone; the page's ? pill carries the badge key.
+    expect(container.textContent).not.toContain('= Historically required'); // anchored: the pill that replaced the legend is asserted present one line below
+    expect(container.querySelector('[data-testid="institutions-header"] [data-testid="info-pill"]')).toBeTruthy();
+  });
+
+  test('a house with no service row still appears, with its description line', () => {
+    const lone = { name: 'Y', institutions: [{ name: 'Old mill', category: 'Economy', desc: 'Mill fixture description.' }], availableServices: {} };
+    const text = render(e(InstitutionsTab, { settlement: lone })).container.textContent || '';
+    expect(text).toContain('Old mill');
+    expect(text).toContain('Mill fixture description.');
+  });
+});
+
+describe('OverviewTab carries the Table View trigger the removed DM Summary tab held (X-5)', () => {
+  test('the button renders only when the router hands a trigger, and calls it', () => {
+    let opened = 0;
+    const { container, getByText } = render(e(OverviewTab, { settlement: villageSettlement, onOpenTableView: () => { opened += 1; } }));
+    getByText('Open in Table View').click();
+    expect(opened).toBe(1);
+    cleanup();
+    const text = render(e(OverviewTab, { settlement: villageSettlement })).container.textContent || '';
+    expectAbsentWithAnchor(text, 'Open in Table View', villageSettlement.name, 'the trigger renders with no route to open');
+    expect(container).toBeTruthy();
+  });
+});
+
+// The X-18 routing sentence's own describe left with the sentence (X-38, the owner, 2026-11-01:
+// no sentence about the page itself); its absence is pinned in the Overview smoke block above.
+
+describe('OverviewTab follows the block law (X-16, BUILD-W2-BLOCKLAW U3)', () => {
+  test('answer (strip, routing line, the place), then the facts, then the prose, then the DM material, then the reference', () => {
+    const s = {
+      name: 'Orderby', tier: 'village', population: 300,
+      arrivalScene: 'Arrival fixture scene.',
+      history: { currentTensions: [{ description: 'Tension fixture.' }] },
+      settlementReason: 'Origin fixture.',
+      structuralSuggestions: [{ reason: 'Suggestion fixture', suggested: ['A wall'] }],
+    };
+    const text = render(e(OverviewTab, { settlement: s })).container.textContent || '';
+    const at = (needle) => {
+      const i = text.indexOf(needle);
+      expect(i, `${needle} is missing from the Overview`).toBeGreaterThanOrEqual(0);
+      return i;
+    };
+    const sequence = [
+      'Orderby',                // (1) the answer: the identity strip (its routing line left with X-38)
+      'Arrival fixture scene.', // (1) the answer: THE PLACE, the walk-in scene (chair ruling X-25a)
+      'Systems Health',         // (2) the facts: status tags
+      'Tension fixture.',       // (2) the facts: tension rows
+      'Origin fixture.',        // (3) prose: why it is here
+      'Suggestion fixture',     // (4) DM material: warnings and suggestions
+      // (5) the collapsed reference was the Spatial Layout section, cut by X-37 (2026-11-01);
+      // the page now ends on its DM material and the campaign-only blocks beneath it.
+    ].map(at);
+    expect(sequence).toEqual([...sequence].sort((a, b) => a - b));
+  });
+});
+
+describe('DMCompassTab shape (chair ruling, RULINGS-T1 DM Compass)', () => {
+  test('one name ("Guidance"), the four panels, and no coaching captions under them', () => {
+    const { container } = render(e(DMCompassTab, { settlement: {
+      name: 'X',
+      dmCompass: { hooks: ['Hook fixture one.'], redFlags: ['Flag fixture.'], twist: 'Twist fixture.' },
+      identityMarkers: ['Marker fixture.'],
+      frictionPoints: [{ who: 'Who fixture', what: 'What fixture.' }],
+      connectionsMap: [{ from: 'From fixture', nature: 'owes', to: 'To fixture' }],
+    } }));
+    const text = container.textContent || '';
+    for (const title of ['Guidance', 'Identity Markers', 'Friction Points', 'Connections Map']) expect(text).toContain(title);
+    expectAbsentWithAnchor(text, 'DM Compass', 'Guidance', 'the section kept a second name for the tab');
+    expectAbsentWithAnchor(text, 'Concrete details to drop into a scene', 'Marker fixture.', 'the Identity Markers caption is back');
+    expectAbsentWithAnchor(text, 'Surface them in scenes', 'What fixture.', 'the Friction Points caption is back');
+    expectAbsentWithAnchor(text, 'A map for the table', 'To fixture', 'the Connections Map caption is back');
+  });
+});
 
 // Multi-prop tabs — these take additional slices alongside `settlement`.
 smokeTab('PowerTab',    PowerTab,    s => ({ powerStructure: s.powerStructure, settlement: s }),
