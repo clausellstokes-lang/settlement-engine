@@ -111,7 +111,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' food-stores lines leave; all 1,050 rows move, none added or removed.'
     + ' 2026-11-03 (DEFENSE-2, docs/shift-records/2026-11-03-defense-magic-dependency.json, ODQ §934.104, THE COHERENCE'
     + ' AND SCALE WINDOW): re-recorded because the defence record stores the one magic reliance reading and the Defense'
-    + ' tab reads it and the one practitioner census; 512 of the 1,050 rows move, none added or removed.',
+    + ' tab reads it and the one practitioner census; 512 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-print, docs/shift-records/2026-11-03-food-print-comfortable-pool.json, ODQ §934.104, THE'
+    + ' COHERENCE AND SCALE WINDOW): re-recorded because the comfortable-prosperity pool stops claiming a food surplus'
+    + ' the food record does not show; 232 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
