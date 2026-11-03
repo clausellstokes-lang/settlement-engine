@@ -1,0 +1,43 @@
+# ONE-OFF, MANUAL: populate vendor/ for the edge functions on a runner that reaches
+# esm.sh (the cloud chair's container cannot), then push the result to the branch
+# this workflow was dispatched on. Removed before the branch merges; the durable
+# recipe lives in docs/DEPLOY.md.
+name: Vendor edge modules (one-off)
+on:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  vendor:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+      - name: Install locked Node type dependencies (npm:@types/node resolution)
+        run: npm ci --ignore-scripts
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: Populate vendor/ and re-pin deno.lock from what esm.sh and deno.land serve now
+        run: |
+          deno --version
+          mapfile -t ENTRYPOINTS < <(find supabase/functions -name '*.ts' | sort)
+          deno install --entrypoint --frozen=false "${ENTRYPOINTS[@]}"
+          echo "vendored files: $(find vendor -type f | wc -l)"; du -sh vendor
+      - name: Prove the gate reads vendor/ (frozen lock, no re-fetch)
+        run: |
+          deno task check:edge
+          deno task test:edge
+      - name: Commit vendor/ and the lock to this branch
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A vendor deno.lock
+          git -c core.hooksPath=/dev/null commit -m "edge: vendor the remote modules the edge functions import (populated on a CI runner; deno.lock re-pinned to the served bytes)"
+          git push origin HEAD:${{ github.ref_name }}
