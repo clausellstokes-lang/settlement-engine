@@ -85,6 +85,7 @@ import { factionArchetype } from '../factionArchetypes.js';
  * @property {number}  power             Base power (0..100).
  * @property {string}  powerLabel        The faction's power-band label.
  * @property {boolean} isPower           True when this faction appears in THE POWERS.
+ * @property {PowerRole | null} powerRole  'ruler' (holds the seat), 'contender' (contests it), or null.
  */
 
 /**
@@ -117,12 +118,12 @@ export function derivePowerStrata(settlement) {
 
   /** @type {PowerEntry[]} */
   const powers = [];
-  /** @type {Set<string>} */
-  const powerNames = new Set();
+  /** @type {Map<string, PowerRole>} */
+  const powerNames = new Map();
   /** @param {PowerEntry} entry */
   const pushPower = (entry) => {
     if (!entry.name || powerNames.has(entry.name)) return;
-    powerNames.add(entry.name);
+    powerNames.set(entry.name, entry.role);
     powers.push(entry);
   };
 
@@ -160,6 +161,8 @@ export function derivePowerStrata(settlement) {
       power: num(f.power),
       powerLabel: f.powerLabel || '',
       isPower: !!name && powerNames.has(name),
+      // "Holds power" is the ruler's word alone; a contender contests the seat.
+      powerRole: (name && powerNames.get(name)) || null,
     };
   });
 
@@ -246,29 +249,27 @@ export function groupRelationships(relationships) {
 // ── §815 — THE RULING CHAIN: power → faction → named NPC ─────────────────────
 
 /**
- * The finite ruler-role vocabulary is npcAgency's NPC_ROLE_ARCHETYPES — the ONE
- * spelling of what a ruler-titled NPC looks like (inferRoleArchetype's own
- * table). Imported rather than re-listed so the display chain can never drift
- * from the agency layer's classification. (powerStrata's only consumer is the
- * lazy Power tab chunk, so the worldPulse import costs no first-paint bytes.)
+ * THE SEAT IS READ BY ONE LEAF (lane RULERS, 2026-11-03). The chain used to guess
+ * the seat from npcAgency's ruler labels, a list with no 'elder' and a substring
+ * test ('chief' caught Chief Magistrate, 'lord' caught Crime Lord), and when the
+ * guess found nobody it seated any lone ruler-titled person in the settlement:
+ * 64 of 64 thorps read no seat-holder beside their Elder, and 12 of 63 hamlets
+ * seated the Manor Household's unnamed "The Lord Mayor". seatHolder.js reads the
+ * generator's own head titles instead, whole words, governing faction only, no
+ * stand-ins, and the settlement-wide fallback is gone.
  */
-import { NPC_ROLE_ARCHETYPES } from '../worldPulse/npcAgency.js';
-import { npcInFaction } from '../worldPulse/npcLadderState.js';
+import { seatCandidatesOf, isOfficeStandIn } from './seatHolder.js';
 import { hasLadder, ladderRungsOf, ladderFactionKeyOf } from '../townMap/ladderRead.js';
 
-/** Does this NPC's text read as a RULER (the agency layer's own labels)?
- *  Reads name/role/title only — the generator writes no npc `label`, and the
- *  observed-shape ratchet holds this file to reads the corpus can ground.
- *  The parameter is declared as the three text keys it reads and nothing else:
- *  this file lives inside the domain kernel's STRICT scope, where an undeclared
- *  parameter is an implicit `any` and a ratchet red. Each key is optional and
- *  each read is `|| ''`-guarded, so a roster row missing any of them is answered
- *  `false` rather than throwing.
- *  @param {{ name?: string, role?: string, title?: string } | null | undefined} npc
- *  @returns {boolean} */
-function isRulerTitled(npc) {
-  const text = `${npc?.name || ''} ${npc?.role || ''} ${npc?.title || ''}`.toLowerCase();
-  return (NPC_ROLE_ARCHETYPES.ruler?.labels || []).some((label) => text.includes(label));
+/**
+ * The seat's candidates, best first (seatHolder.js :: seatCandidatesOf), less anyone
+ * ousted in play: the chain read `ousted` off the roster here from the day it landed,
+ * and the seat's self-check reads the same list so the two never disagree.
+ * @param {RulingChainSettlement | null | undefined} settlement
+ * @returns {import('./seatHolder.js').SeatNpc[]}
+ */
+export function liveSeatCandidatesOf(settlement) {
+  return seatCandidatesOf(settlement).filter((n) => !(/** @type {{ ousted?: unknown }} */ (n)).ousted);
 }
 
 /**
@@ -285,9 +286,10 @@ function isRulerTitled(npc) {
  *   npc     — the named ruling NPC, resolved in the estate's own order:
  *             (1) the governing faction's TOP LADDER RUNG — warSeatBooks'
  *                 rulingSeatId convention (simulation-backed; tick-gated);
- *             (2) a ruler-titled roster NPC (NPC_ROLE_ARCHETYPES.ruler labels),
- *                 preferring one seated IN the governing faction (npcInFaction),
- *                 falling back to a settlement-wide unique ruler title.
+ *             (2) the seat-holder (liveSeatCandidatesOf, through seatHolder.js): the governing
+ *                 faction's named member whose role carries one of the
+ *                 generator's head titles, in its precedence. Never another
+ *                 faction's person, never an office stand-in.
  *             NEVER a merely-senior member: showing seniority as rulership
  *             would paper over the §810.3 seat-floor gap the view must record
  *             instead (the warSeatBooks law — no NPC identity is invented).
@@ -332,19 +334,19 @@ export function rulingChainOf(settlement) {
   let npc = null;
   if (governing && hasLadder(settlement)) {
     const rungs = ladderRungsOf(settlement, ladderFactionKeyOf(governing));
-    if (rungs.length > 0 && !vacant) {
-      npc = { name: rungs[0].name, role: 'first of the governing house', via: /** @type {'ladder'} */ ('ladder') };
+    const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
+    const top = rungs[0];
+    const topRow = top ? roster.find((n) => !!n && typeof n === 'object' && /** @type {{ name?: unknown }} */ (n).name === top.name) : undefined;
+    const standIn = !!topRow && isOfficeStandIn(/** @type {import('./seatHolder.js').SeatNpc} */ (topRow));
+    if (top && !vacant && !standIn) {
+      npc = { name: top.name, role: 'first of the governing house', via: /** @type {'ladder'} */ ('ladder') };
     }
   }
-  // (2) A ruler-titled roster NPC (generation-time; never merely-senior).
+  // (2) The seat-holder (generation-time; never merely-senior, never a stand-in).
   if (!npc && governing && !vacant) {
-    const roster = Array.isArray(settlement?.npcs) ? settlement.npcs : [];
-    const rulers = roster.filter((n) => n && !n.ousted && isRulerTitled(n));
-    const fkey = ladderFactionKeyOf(governing);
-    const seated = rulers.find((n) => npcInFaction(n, governing, fkey, factions));
-    const chosen = seated || (rulers.length === 1 ? rulers[0] : null);
+    const chosen = liveSeatCandidatesOf(settlement)[0] || null;
     if (chosen) {
-      npc = { name: String(chosen.name || ''), role: String(chosen.role || chosen.title || 'ruler'), via: /** @type {'roster'} */ ('roster') };
+      npc = { name: String(chosen.name || ''), role: String(chosen.role || ''), via: /** @type {'roster'} */ ('roster') };
     }
   }
 
@@ -352,7 +354,9 @@ export function rulingChainOf(settlement) {
   let absence = null;
   if (!npc) {
     if (vacant) {
-      const line = `The seat stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
+      // The row's own label is "The seat", so the line opens on the verb: the row
+      // read "The seat The seat stands empty" while it opened on the noun.
+      const line = `Stands empty; ${claimants.length === 1 ? 'a claimant circles' : `${claimants.length} claimants circle`}: ${claimants.join(', ')}.`;
       absence = { kind: /** @type {'missing_seat'} */ ('missing_seat'), claimants, line };
     } else if (governing) {
       absence = {
@@ -364,4 +368,54 @@ export function rulingChainOf(settlement) {
   }
 
   return { power, faction, npc, absence };
+}
+
+// ── WHO REALLY GOVERNS — the fracture note names the rival or goes ───────────
+
+/**
+ * The generator's fixed claim (factionDynamics.js :: applyLegitimacyMultipliers,
+ * re-applied by the economy reconciliation) attached to the governing faction
+ * whenever public legitimacy falls below the contested cut. It names nobody, and
+ * on the audit's 389 no stronger rival existed in 18 of 110 cases.
+ */
+export const APPEARS_TO_GOVERN = 'The faction that appears to govern is not the faction that governs.';
+
+/**
+ * The faction that outranks the governing faction on the power figures: the
+ * strongest non-governing faction whose power is strictly greater, first in the
+ * settlement's own order on a tie. Null when the governing faction is strongest,
+ * or when there is no governing faction.
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @returns {string | null}
+ */
+export function outrankingRivalOf(settlement) {
+  const governing = governingFactionOf(settlement);
+  if (!governing) return null;
+  const factions = /** @type {StrataFaction[]} */ (Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : []);
+  const floor = num(governing.power);
+  /** @type {StrataFaction | null} */
+  let best = null;
+  for (const f of factions) {
+    if (f === governing || nameOf(f) === nameOf(governing)) continue;
+    if (num(f.power) > (best ? num(best.power) : floor)) best = f;
+  }
+  return best ? nameOf(best) || null : null;
+}
+
+/**
+ * A faction's crisis note as the dossier prints it. The "appears to govern" claim
+ * stays only on the governing faction and only when a rival outranks it, and then
+ * it names that rival; otherwise the sentence is dropped and the rest of the note
+ * (the fracture reading) stands.
+ * @param {RulingPowerSettlement | null | undefined} settlement
+ * @param {{ crisisNote?: unknown } | null | undefined} faction
+ * @returns {string}
+ */
+export function crisisNoteFor(settlement, faction) {
+  const note = typeof faction?.crisisNote === 'string' ? faction.crisisNote : '';
+  if (!note.includes(APPEARS_TO_GOVERN)) return note;
+  const governing = governingFactionOf(settlement);
+  const rival = governing && faction === governing ? outrankingRivalOf(settlement) : null;
+  const said = rival ? `${APPEARS_TO_GOVERN.slice(0, -1)}; the real decisions rest with ${rival}.` : '';
+  return note.replace(APPEARS_TO_GOVERN, said).replace(/\s{2,}/g, ' ').trim();
 }

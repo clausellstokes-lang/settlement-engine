@@ -6,8 +6,10 @@
  *   ThePowers   — dominant cards for the seat + its contenders. Each card keeps
  *                 the shipped institution-support disclosure (powerSupport.js).
  *   TheFactions — the lighter full roster, one row each; a power's row carries a
- *                 compact "holds power" marker linking UP to its card (an in-tab
- *                 anchor), never a duplicate of the card.
+ *                 compact marker linking UP to its card (an in-tab anchor), never
+ *                 a duplicate of the card: "Holds power" on the ruler's row alone,
+ *                 "Contests the seat" on a contender's (lane RULERS, 2026-11-03 —
+ *                 four factions all read "Holds power" in 52 of 60 fresh towns).
  *   TheWeb      — the typed relationships between factions, grouped by their
  *                 finite `type` kind. Each side is an EntityLink to its row.
  *
@@ -30,7 +32,7 @@ import EntityLink from '../../../primitives/EntityLink.jsx';
 import { MentionText } from '../../../ProseParagraph.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
-import { derivePowerStrata, groupRelationships } from '../../../../domain/dossier/powerStrata.js';
+import { derivePowerStrata, groupRelationships, crisisNoteFor } from '../../../../domain/dossier/powerStrata.js';
 import useIsMobile from '../../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../../design/proseScale.js';
 
@@ -294,7 +296,11 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
   // GS-2 (ODQ §934.101): the members are the named NPCs whose own power affiliation is this faction; the minted
   // tie-component group this row used to print beneath it is gone with the second faction vocabulary.
   const memberCount = (settlement?.npcs || []).filter((npc) => npc?.factionAffiliation === r.name).length;
-  const expandable = !!(f.desc || f.crisisNote);
+  // The crisis note as the dossier prints it: the "appears to govern" claim names the
+  // outranking rival or goes (powerStrata.js :: crisisNoteFor).
+  const crisisNote = crisisNoteFor(settlement, f);
+  const expandable = !!(f.desc || crisisNote);
+  const holds = r.powerRole === 'ruler';
   return (
     <div ref={rowRef}
       style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
@@ -307,10 +313,10 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
         <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}><InstitutionLink name={r.name} settlement={settlement} /></div>
         {r.isPower && (
           <Button variant="ghost" size="sm"
-            aria-label={`${r.name} holds power, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
+            aria-label={`${r.name} ${holds ? 'holds power' : 'contests the seat'}, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
             onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
             style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
-            {'↑ Holds power'}
+            {holds ? '↑ Holds power' : 'Contests the seat'}
           </Button>
         )}
         <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
@@ -328,7 +334,7 @@ export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, ro
       {isExp && expandable && (
         <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
           {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}><MentionText text={f.desc} selfId={factionIdFromName(f.faction)} /></p>}
-          {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
+          {crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{crisisNote}</p>}
         </div>
       )}
     </div>
