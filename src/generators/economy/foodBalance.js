@@ -33,11 +33,28 @@ const UNCOVERED_LOCAL_FOOD_DEFICIT = 'Uncovered Local Food Deficit';
 // ECONOMIC_CONSTANTS
 const ECONOMIC_CONSTANTS = {
   PER_CAPITA_NEED: 2,
-  FARMER_PRODUCTION: 6,
-  AGRICULTURAL_WORKFORCE: 0.4,
-  STORAGE_BUFFER: 1.3,
 };
 
+
+// ── THE BASE NUMBERS (FOOD-2) — shared by the canonical writer and the legacy view ──
+/** The share of need a town and larger draw from their hinterland as NORMAL supply (FOOD-2):
+ *  the tier import shares the food writer always carried, now counted as supply, not a gap. */
+const HINTERLAND_SHARE_PCT = Object.freeze({ thorp: 0, hamlet: 0, village: 5, town: 20, city: 38, metropolis: 52 });
+/** @param {string} tier @returns {number} 0..1 */
+export function hinterlandShareOf(tier) {
+  return (HINTERLAND_SHARE_PCT[/** @type {keyof typeof HINTERLAND_SHARE_PCT} */ (tier)] ?? 0) / 100;
+}
+/**
+ * The share of its own need a household grows on land of this effective capacity
+ * (geographyData's agricultureCapacity plus the resource bonus). A place is sized to what its
+ * land feeds, so the land moves the share gently: ordinary land grows about 100–125%, poor
+ * land runs short.
+ * @param {number} effectiveAgri
+ * @returns {number}
+ */
+export function grownShareOf(effectiveAgri) {
+  return (11 / 10) * (1 + ((effectiveAgri - 1) * 5) / 20);
+}
 
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**
@@ -194,12 +211,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     stressNotes.push('Mass migration: an influx of newcomers stresses the food balance beyond normal needs.');
   }
 
-  const dailyProduction =
-    (Math.floor(population * ECONOMIC_CONSTANTS.AGRICULTURAL_WORKFORCE) *
-      ECONOMIC_CONSTANTS.FARMER_PRODUCTION *
-      effectiveAgri *
-      productionMult) /
-    ECONOMIC_CONSTANTS.STORAGE_BUFFER;
+  // The legacy view (no canonical record) grows by the same base numbers as the writer
+  // (FOOD-2): the grown share of the need the place feeds itself, no /1.3.
+  const dailyProduction = dailyNeed * (1 - hinterlandShareOf(config?.tier || config?.settType || ''))
+    * grownShareOf(effectiveAgri) * productionMult;
   const adjustedNeed = dailyNeed * consumptionMult;
   const effectiveRoute = routeOverride || config?.tradeRouteAccess || 'isolated';
   const disconnectedRoute = isTradeRouteDisconnected(effectiveRoute);
@@ -510,7 +525,8 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
 
   // Mill check for towns
   const hasMill = instNames.some((n) => n.includes('mill') || n === 'miller');
-  if (population > 1000 && !hasMill && population < 5000) {
+  // A tier read, not a headcount (FOOD-2: the arithmetic holds under any population scale).
+  if ((config?.tier || config?.settType) === 'town' && !hasMill) {
     warnings.push({
       severity: SEVERITY.CRITICAL,
       category: 'Food Processing',

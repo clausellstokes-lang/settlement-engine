@@ -107,7 +107,10 @@ describe('custom foodImpact — canonical generation and tick integration', () =
 
     expect(producerFood.dailyProduction).toBeGreaterThan(neutralFood.dailyProduction);
     expect(producerFood.dailyNeed).toBe(neutralFood.dailyNeed);
-    expect(producerFood.deficitPct).toBeLessThan(neutralFood.deficitPct);
+    // The share of its need the town grows (the food record's grownPct): since FOOD-2 the
+    // neutral town's gap can be covered by its hinterland and trade, so a producer moves the
+    // share grown rather than a gap the town no longer shows.
+    expect(producerFood.foodRecord.grownPct).toBeGreaterThan(neutralFood.foodRecord.grownPct);
     expect(producerFood.customFoodImpact).toEqual({
       producers: 1,
       consumers: 0,
@@ -117,7 +120,7 @@ describe('custom foodImpact — canonical generation and tick integration', () =
 
     expect(consumerFood.dailyProduction).toBe(neutralFood.dailyProduction);
     expect(consumerFood.dailyNeed).toBeGreaterThan(neutralFood.dailyNeed);
-    expect(consumerFood.deficitPct).toBeGreaterThan(neutralFood.deficitPct);
+    expect(consumerFood.foodRecord.grownPct).toBeLessThan(neutralFood.foodRecord.grownPct);
     expect(consumerFood.customFoodImpact).toEqual({
       producers: 0,
       consumers: 1,
