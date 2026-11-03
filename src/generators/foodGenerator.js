@@ -21,6 +21,8 @@ import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
 import { deriveFoodRecord, grownShareOf, hasImportProcessor, hinterlandShareOf } from './economy/foodBalance.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
+import { CULTURE_PROFILES } from '../data/cultureProfiles.js';
+import { composeFoodwaysLine } from '../domain/foodways.js';
 import { POPULATION_RANGES } from '../data/constants.js';
 import { customDeps } from '../lib/dependencyEngine.js';
 import {
@@ -138,6 +140,20 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');
   const hasArcane         = hasInst('mage', 'wizard', 'arcane', 'spellcasting');
 
+  // ── THE FOOD SOURCES (FOOD-3) — the five resource+institution pairings the balance reads,
+  // LARGEST CONTRIBUTION FIRST (the order of their bonuses below: grain .25, livestock .10, fish
+  // .09, mill .08; game, the small-place hunt, last). A place whose pairings all miss lists none.
+  const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
+    ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
+    ['livestock', hasPastoral && hasRes('grazing_land')],
+    ['fish', hasFishing && hasRes('fishing_grounds', 'river_fish')],
+    ['mill', hasMill && hasRes('river_mills')],
+    ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],
+  ].filter(([, fired]) => fired).map(([name]) => name));
+  // Preserved fish, meat and game count beside grain in the stores: a quarter month for each
+  // such source, three quarters at most (FOOD-3, the one diversity term in the stores).
+  const preservedSources = foodSources.filter(source => source === 'livestock' || source === 'fish' || source === 'game').length;
+
   // ── Magical transport check (used in chains AND importCoverageRate) ────────
   // Circles and airships are NOT interchangeable: a teleportation circle is
   // point-to-point and a blockade cannot touch it; an airship must fly over
@@ -167,7 +183,7 @@ export function generateFoodSecurity(tier, institutions, config) {
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
                     : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
-  const storageMonths = Math.round((hasMill ? baseStorage * 1.25 : baseStorage) * 10) / 10;
+  const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -247,7 +263,12 @@ export function generateFoodSecurity(tier, institutions, config) {
   let productionMult  = 1;
   let consumptionMult = 1;
   let effectiveRoute  = route;
-  if (stressFamine)   { productionMult  *= 0.35; }
+  // FOOD-3: the famine fails ONE source — the largest, chosen with zero draws — as deep as that
+  // source's share of the harvest: a single-source place (or one with none) still loses 65%,
+  // two sources lose a half, three a third. The record names it (failedSource).
+  const failedSource = stressFamine ? (foodSources[0] ?? null) : null;
+  const famineKeeps = foodSources.length >= 2 ? 1 - 1 / foodSources.length : 7 / 20;
+  if (stressFamine)   { productionMult  *= famineKeeps; }
   if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
   if (stressPlague)   { productionMult  *= 0.75; }
   if (stressOccupied) { consumptionMult *= 1.20; }
@@ -397,6 +418,14 @@ export function generateFoodSecurity(tier, institutions, config) {
     dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
     importCoverage, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
     hasGranary: hasAnyGranary,
+    foodSources,
+    failedSource,
+    famineCutPct: stressFamine ? Math.round((1 - famineKeeps) * 100) : 0,
+    foodwaysLine: composeFoodwaysLine({
+      sources: foodSources,
+      cultureLines: CULTURE_PROFILES[/** @type {keyof typeof CULTURE_PROFILES} */ (config.cultureProfileKey)]?.foodways || null,
+      identity: `${tier}|${population}|${terrain}|${route}|${config.cultureProfileKey || ''}`,
+    }),
   });
 
   return {
