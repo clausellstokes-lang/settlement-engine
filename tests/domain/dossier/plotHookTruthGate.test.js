@@ -116,7 +116,9 @@ describe('the plot hooks check the place before they speak — the thing must ex
     // anchored: the garrisoned record below collects the same sentence.
     expect(none.map((h) => h.text)).not.toContain(SOLDIERS);
     const garrisoned = collectPlotHooks(record({
-      tier: 'town', roster: { garrison: [{ name: 'Barracks' }] }, hooks: [SOLDIERS],
+      // the force stands on the LIVE roster, which `defenseFactsOf` reads (lane WIRING-2);
+      // the birth snapshot only says the record carries a defence roster at all.
+      tier: 'town', roster: { garrison: [{ name: 'Barracks' }] }, institutions: [{ name: 'Barracks' }], hooks: [SOLDIERS],
     }));
     expect(garrisoned.map((h) => h.text)).toContain(SOLDIERS);
   });

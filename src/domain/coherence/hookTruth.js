@@ -38,9 +38,9 @@
  */
 
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { foodLedger } from '../foodLedger.js';
-import { isLiveInstitution } from '../institutions/institutionRoster.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 
@@ -109,45 +109,17 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  */
 
 /**
- * The institution names a defence roster family holds, as plain strings.
- *
- * ⚠ THE RUIN FILTER IS NOT APPLIED HERE, AND THE GAP IS REPORTED RATHER THAN HIDDEN. The
- * defence roster's rows carry the same `status` / `_worldPulseInactive` stamps the
- * settlement roster's rows carry, so a calamity-flattened barracks sits in
- * `defenseProfile.institutions.garrison` exactly as a standing one does, and a hook asking
- * "does the thing exist" should be asking about a thing that still STANDS. Two reasons it
- * is not cured in this function: the whole function is scaffolding the chair will replace
- * with `src/domain/defense/defenseFacts.js :: defenseFactsOf` the day that leaf lands, and
- * that leaf is where the defence roster's liveness belongs (one reader, one answer);
- * measured, filtering HERE also perturbs the observed-shape detector's inference inside
- * `institutionRoster.js` and erases a frozen row of its register
- * (`_worldPulseInactive on institutions` 1 -> 0, which reds that walker's erasure guard).
- * The hospital read below DOES filter, because it reads the settlement roster the predicate
- * was built for.
- * @param {unknown} family
- * @returns {string[]}
- */
-function rosterNames(family) {
-  if (!Array.isArray(family)) return [];
-  return family
-    .map((entry) => {
-      if (typeof entry === 'string') return entry;
-      const name = /** @type {{ name?: unknown }} */ (entry)?.name;
-      return typeof name === 'string' ? name : '';
-    })
-    .filter((name) => name !== '');
-}
-
-/**
  * Read the facts a hook can contradict out of one settlement record.
  *
- * ⚠ THE DEFENCE READER IS LOCAL AND TEMPORARY. The DEFENSE lane is building
- * `src/domain/defense/defenseFacts.js :: defenseFactsOf(settlement)` → `{ hasGarrison,
- * hasWalls, hasWatch, hasMilitia, hasHospital, … }`. Until it lands this reads the
- * record's own defence roster (`defenseProfile.institutions`, the families
- * `defenseGenerator.js` writes: walls, garrison, militia, watch, mercenary, magicDef) and
- * the institution list for a hospital. SWITCH THE BODY BELOW to that leaf at integration;
- * nothing outside this function reads the roster.
+ * THE DEFENCE HALF IS THE ONE DEFENCE ANSWER (`src/domain/defense/defenseFacts.js ::
+ * defenseFactsOf`, lane WIRING-2, 2026-11-03; HOOKS request 6): what stands is read off the
+ * LIVE, ruin-filtered roster there, so a garrison the world pulse flattened is no garrison
+ * here either, and the hospital is that leaf's hospital (it reads the roster through
+ * `liveInstitutions`, the same ruin filter this module's own hospital read used). The birth
+ * snapshot `defenseProfile.institutions` is read for ONE thing only: whether the record
+ * carries a defence roster at all (`defenseKnown`), because an unknown roster licenses
+ * nothing. Measured before the switch: over the 120 soak settlements
+ * (`generation-certification-<0..119>`) every field below answered the same both ways.
  *
  * @param {unknown} settlement
  * @returns {HookFacts}
@@ -182,36 +154,10 @@ export function settlementHookFacts(settlement) {
       && (storedMonths === null || storedMonths < 2));
   const foodGap = foodKnown && (GAP_BANDS.has(foodBand) || CRISIS_BANDS.has(foodBand));
 
-  const roster = /** @type {Record<string, unknown>} */ (
-    record.defenseProfile?.institutions && typeof record.defenseProfile.institutions === 'object'
-      ? record.defenseProfile.institutions
-      : {}
-  );
   const defenseKnown = Boolean(
     record.defenseProfile?.institutions && typeof record.defenseProfile.institutions === 'object',
   );
-  const garrison = rosterNames(roster.garrison);
-  const militia = rosterNames(roster.militia);
-  const mercenary = rosterNames(roster.mercenary);
-  const watch = rosterNames(roster.watch);
-  const walls = rosterNames(roster.walls);
-  // THE HOSPITAL READ GOES THROUGH THE RUIN FILTER TOO (`isLiveInstitution`): a hospital
-  // that burned down is not a hospital a hook may send somebody to.
-  //
-  // ⚠ THE PREDICATE, NOT THE `liveInstitutions(settlement)` WRAPPER, AND THE REASON IS
-  // MEASURED. Calling the wrapper changes what the observed-shape detector can infer
-  // inside `institutionRoster.js` itself: its own `inst._worldPulseInactive` read stops
-  // resolving to the `institutions` shape and the frozen row for it VANISHES
-  // (`_worldPulseInactive on institutions` 1 -> 0), which reds that walker's erasure guard —
-  // a guard whose whole job is to notice a read going invisible. Same filter, same
-  // predicate, one row of someone else's register left where it stands.
-  /** @type {unknown[]} */
-  const institutions = Array.isArray(record.institutions) ? record.institutions : [];
-  const hasHospital = institutions.some((inst) => {
-    const name = /** @type {{ name?: unknown }} */ (inst)?.name;
-    if (typeof name !== 'string' || !/\bhospital\b/i.test(name)) return false;
-    return isLiveInstitution(/** @type {Parameters<typeof isLiveInstitution>[0]} */ (inst));
-  });
+  const defense = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (settlement));
 
   return Object.freeze({
     tier,
@@ -221,11 +167,11 @@ export function settlementHookFacts(settlement) {
     foodKnown,
     famineLicensed,
     foodGap,
-    hasGarrison: garrison.length > 0,
-    hasArmedForce: garrison.length > 0 || militia.length > 0 || mercenary.length > 0,
-    hasWalls: walls.length > 0,
-    hasWatch: watch.length > 0 || militia.length > 0,
-    hasHospital,
+    hasGarrison: defense.hasGarrison,
+    hasArmedForce: defense.hasGarrison || defense.hasMilitia || defense.hasMercenary,
+    hasWalls: defense.hasWalls,
+    hasWatch: defense.hasWatch || defense.hasMilitia,
+    hasHospital: defense.hasHospital,
     defenseKnown,
     // ⚠ PASSED AS THE WRAPPED ITEM (`{ settlement }`), WHICH IS THE SHAPE `magicWorksAt`'s
     // own docblock names FIRST, and the spelling is load-bearing for a walker. Handed the
