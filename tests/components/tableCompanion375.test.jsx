@@ -56,7 +56,7 @@ describe('TableView — the phone companion at 375px', () => {
     const panel = container.querySelector('div[style*="max-width: 380px"]');
     expect(panel).toBeTruthy();
     // The close affordance is present and reachable.
-    expect(screen.getByRole('button', { name: /close table view/i })).toBeTruthy();
+    expect(screen.getByRole('button', { name: /close tonight/i })).toBeTruthy();
   });
 });
 

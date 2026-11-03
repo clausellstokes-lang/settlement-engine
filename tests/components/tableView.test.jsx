@@ -3,8 +3,8 @@
  * tableView.test.jsx — P142 / D-6 contract over the phone Table View.
  *
  * Pins:
- *   • Renders the settlement name, the tension line, stressor chips, and the
- *     reused "Tonight at the table" cheat-sheet entries.
+ *   • Renders the settlement name and the one Tonight sheet (X-51): the crisis or the
+ *     pressure line, the people, the facts and the hooks, all from the record.
  *   • Closes via the X button, via Escape (the shared focus trap), and via a
  *     backdrop mousedown — but NOT when the inner card is interacted with. The
  *     backdrop is a role="presentation" scrim that dismisses only on a mousedown
@@ -38,28 +38,30 @@ describe('TableView', () => {
   beforeEach(() => { onClose = vi.fn(); });
   afterEach(() => cleanup());
 
-  it('renders name, tension line, stressors, and cheat-sheet entries', () => {
+  it('renders the one Tonight sheet: the pressure line with no crisis, the person and the hook from the record', () => {
     render(<TableView settlement={fixture()} onClose={onClose} />);
     expect(screen.getByText('Hollowmere')).toBeTruthy();
+    // X-51: with no active crisis the sheet opens on the record's pressure sentence.
     expect(screen.getByText('The reeve runs a quiet skim and the harvest is failing.')).toBeTruthy();
-    expect(screen.getByText('Failing harvest')).toBeTruthy();
-    // Reused tonightAtTheTable entries.
-    expect(screen.getByText('Maren')).toBeTruthy();
-    expect(screen.getByText('NPC')).toBeTruthy();
-    expect(screen.getByText('The Salt Debt')).toBeTruthy();
-    // The DISPLAY word descended with the label ladder; the model token stays 'HOOK'.
-    expect(screen.getByText('Hook')).toBeTruthy();
+    expect(screen.getByText('A caravan master calls in a favor.')).toBeTruthy();
+    expect(document.querySelectorAll('[data-tonight-sheet]').length).toBe(1);
   });
 
-  it('falls back gracefully when there are no entries', () => {
+  it('opens on the active crisis when the record carries one', () => {
+    render(<TableView settlement={{ ...fixture(), stress: [{ type: 'famine', label: 'Famine' }] }} onClose={onClose} />);
+    expect(screen.getByText('Hollowmere: Famine')).toBeTruthy();
+  });
+
+  it('a bare record renders the sheet with nothing invented', () => {
     render(<TableView settlement={{ name: 'Barebones' }} onClose={onClose} />);
     expect(screen.getByText('Barebones')).toBeTruthy();
-    expect(screen.getByText(/No table-night entries derived yet/i)).toBeTruthy();
+    const sheet = document.querySelector('[data-tonight-sheet]');
+    expect(sheet.textContent).toBe('What the players test firstDefence No walls and no standing force.');
   });
 
   it('calls onClose when the X button is clicked', () => {
     render(<TableView settlement={fixture()} onClose={onClose} />);
-    fireEvent.click(screen.getByLabelText('Close table view'));
+    fireEvent.click(screen.getByLabelText('Close Tonight'));
     expect(onClose).toHaveBeenCalledTimes(1);
   });
 

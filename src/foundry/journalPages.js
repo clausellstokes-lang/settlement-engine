@@ -29,6 +29,7 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
+import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
 import {
@@ -125,17 +126,20 @@ function statePage(vm) {
   );
 }
 
+/**
+ * THE ONE TONIGHT SHEET (X-51) as a journal page: the same composer the screen and the PDF
+ * read (domain/summary/tonightSheet.js), over the raw settlement the view model carries.
+ */
 function tonightPage(vm) {
-  const crisis = vm.summary.crisis;
-  const figures = vm.summary.keyFigures || [];
-  const hooks = (vm.hooks.all || []).slice(0, 4);
+  const sheet = composeTonightSheet(vm.raw);
+  const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
   return md(
-    crisis.active ? md('## Crisis on the table', crisis.chips.map(c =>
-      `- **${esc(c.label || 'Crisis')}**: ${esc(c.hook || c.summary || '')}`)) : null,
-    figures.length ? md('', '## Faces they will meet', figures.map(f =>
-      `- **${esc(f.name)}**${f.title ? ` (${esc(f.title)})` : ''}${f.faction ? `: ${esc(f.faction)}` : ''}${f.sentence ? `. ${esc(f.sentence)}` : ''}`)) : null,
-    hooks.length ? md('', '## Threads to pull', hooks.map(h =>
-      `- ${esc(hookText(h.hook))} *(${esc(h.sourceName)})*`)) : null,
+    sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
+    sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
+      `- **${esc(p.name)}** (${esc([p.role, why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${p.why === 'secret' ? '' : `${TONIGHT_COPY.wants} `}${esc(p.line)}` : ''}`)) : null,
+    sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
+    sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
+      `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,
   ) || null;
 }
 
@@ -442,7 +446,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
 
   if (inc('overview'))            push('Overview', overviewPage(vm));
   if (inc('systemState'))         push('Settlement State', statePage(vm));
-  if (inc('tonightAtTheTable'))   push('Tonight at the Table', tonightPage(vm));
+  if (inc('tonightAtTheTable'))   push(TONIGHT_COPY.title, tonightPage(vm));
   if (inc('npcQuickRef'))         push('NPC Quick Reference', npcQuickRefPage(vm));
   if (inc('notableNpcs')) {
     for (const n of notableNpcs(vm.npcs.sorted || [])) {
