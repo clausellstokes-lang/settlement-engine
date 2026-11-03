@@ -7,10 +7,10 @@
     "    npx vitest run tests/lint/tuningRegister.walker.test.js",
     "The refreeze EXITS NON-ZERO by design; the proof is a separate ordinary run."
   ],
-  "measuredAtSha": "a7f13fef4f508bcd0881e43832d9c63b0ab050d9",
+  "measuredAtSha": "bd888a47a14ebaac5926297a97bf466f1c1f129d",
   "measuredBy": "FOOD seat",
   "date": "2026-11-03",
-  "note": "FOOD-2: foodGenerator.js loses TERRAIN_AGRI, the /1.3 and the 0.4/6 workforce constants (bare decimals and named constants fall); foodBalance.js loses STORAGE_BUFFER and the legacy workforce decimals",
+  "note": "FOOD-3: foodGenerator.js loses the famine 0.35 (the cut is an integer ratio of the source count)",
   "schemaVersion": 1,
   "trees": {
     "p1": [
@@ -8397,7 +8397,7 @@
     "src/generators/economy/prosperity.js": 13,
     "src/generators/factionCorrelation.js": 4,
     "src/generators/factionDynamics.js": 38,
-    "src/generators/foodGenerator.js": 50,
+    "src/generators/foodGenerator.js": 49,
     "src/generators/generationCoherence.js": 1,
     "src/generators/history/historyEventStrands.js": 47,
     "src/generators/historyGenerator.js": 13,
@@ -8434,7 +8434,7 @@
     "tables": 257,
     "keys": 2187,
     "unregisteredNamed": 533,
-    "bareDecimals": 6947,
+    "bareDecimals": 6946,
     "zeroDependentTables": 10,
     "zeroNamedDependentTables": 168
   }
