@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-03, FOOD-1: ONE FOOD RECORD EVERY FOOD SENTENCE READS (THE COHERENCE AND SCALE WINDOW) ──
+ * THE EIGHTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-food-1-one-food-record.json. THE MOVER, FOUND: the
+ * stored food record and its one set of cut-offs (b2aa5f5fa), with the surplus words reading it
+ * (22d458883); prosperity reads the record, and what it re-deals downstream follows. On THIS corpus 360
+ * of 360 rows move; 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from
+ * the staged tree S1 = S0 + this cause, where S0 (the window's tip 71541a9e6 with each of its golden-moving
+ * commits reverse-applied) reproduces `8c4a42c5…` exactly. FENCE 3 (call-path dormancy) re-run green at
+ * the write: zero espionage calls. `8c4a42c5…` -> `6260b43e…`.
+ *
  * ── 2026-10-31, TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1) ──────
  * THE SEVENTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
  * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-tension-variety.json.
@@ -469,7 +480,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '8c4a42c5ee4d01db9cdf355e52b2e37e1381d00a99fda6195e5158caca1d3194';
+const PRE_COUPLING_CORPUS_SHA = '6260b43ebee2601ea9630362d63b06f9ea6ba7fc7d82a44813c9ac96408c8b28';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
