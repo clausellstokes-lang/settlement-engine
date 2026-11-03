@@ -14,11 +14,10 @@
  * search for the call; it is visible on the page.
  *
  * STORY TEXT WRITTEN AT GENERATION (history events, their effects and hooks, the founding,
- * the migration pressure line) speaks the same noun since SIZE ruling 2. ONE residual is named
- * rather than hidden: the arrival vignettes (`ARRIVAL_SCENES` / `STRESS_DESCS`) reach the page
- * through `generators/narrative/arrivalScene.js`, which holds only the name and is not this
- * lane's file — a finding inside one of those vignettes is the REQUEST's, and is excluded here
- * BY MATCHING THE VIGNETTE ITSELF, never by tab or by a loose pattern.
+ * the migration pressure line) speaks the same noun since SIZE ruling 2, and so does the arrival
+ * scene's drawn hook (`ARRIVAL_SCENES` / `STRESS_DESCS` through
+ * `generators/narrative/arrivalScene.js :: composeArrivalScene`, the SIZE REQUEST landed by lane
+ * DOORS-2). No residual is excluded: every finding on every tab is an offender.
  */
 import React from 'react';
 import { afterEach, beforeAll, describe, expect, test, vi } from 'vitest';
@@ -42,7 +41,6 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { tierNounFindings } from '../../src/domain/coherence/tierNounFindings.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
-import { ARRIVAL_SCENES, STRESS_DESCS } from '../../src/data/narrativeData.js';
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import { ResourcesTab } from '../../src/components/new/tabs/ResourcesTab.jsx';
@@ -103,28 +101,6 @@ beforeAll(async () => {
 }, 600_000);
 afterEach(cleanup);
 
-/** Every arrival vignette as it reads for this settlement's name (the REQUEST's residual). */
-function vignettesFor(name) {
-  const out = [];
-  const walk = (node) => {
-    if (typeof node === 'function') { try { walk(node(name)); } catch { /* a vignette that needs more than the name */ } }
-    else if (typeof node === 'string') out.push(node);
-    else if (Array.isArray(node)) node.forEach(walk);
-    else if (node && typeof node === 'object') Object.values(node).forEach(walk);
-  };
-  walk(ARRIVAL_SCENES);
-  walk(STRESS_DESCS);
-  return out;
-}
-
-/** Does the finding sit inside an arrival vignette drawn by arrivalScene.js? */
-function insideVignette(vignettes, text, index) {
-  return vignettes.some((line) => {
-    const at = text.indexOf(line);
-    return at !== -1 && at <= index && index < at + line.length;
-  });
-}
-
 describe('the screen calls a small place by its own noun', () => {
   test('every place is small, so the arms below read the population they claim', () => {
     expect(PLACES).toHaveLength(60);
@@ -135,11 +111,8 @@ describe('the screen calls a small place by its own noun', () => {
   test('no rendered tab calls a thorp, hamlet or village a town (outside a kept comparison)', () => {
     const offenders = [];
     for (const { s, pages } of PLACES) {
-      const vignettes = vignettesFor(s.name);
       for (const [tab, text] of Object.entries(pages)) {
-        for (const f of tierNounFindings(s, text)) {
-          if (!insideVignette(vignettes, text, f.index)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
-        }
+        for (const f of tierNounFindings(s, text)) offenders.push(`${s.tier} ${s.name} / ${tab}: …${f.context}…`);
       }
     }
     expect(offenders).toEqual([]);

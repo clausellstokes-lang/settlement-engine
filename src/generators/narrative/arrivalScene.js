@@ -42,6 +42,8 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
 import { liveInstitutions } from '../../domain/institutions/institutionRoster.js';
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
+import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 import { ARRIVAL_SCENES, STRESS_DESCS } from '../../data/narrativeData.js';
 import {
   ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
@@ -219,7 +221,11 @@ export function composeArrivalScene(settlement) {
   const hookTemplate = underStress
     ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])
     : pickRandom(ARRIVAL_SCENES[sceneKey]);
-  const hook = typeof hookTemplate === 'function' ? hookTemplate(name, tier) : hookTemplate;
+  // SIZE ruling 2 (ODQ §934.104): the vignettes and route scenes were written with 'town' for a place of any size,
+  // so the drawn hook speaks the settlement's own tier noun through the dossier kernel's helper, with its kept
+  // phrases ("at the edge of town"). Identity for a town; it draws nothing, so no later pick moves.
+  const drawnHook = typeof hookTemplate === 'function' ? hookTemplate(name, tier) : hookTemplate;
+  const hook = typeof drawnHook === 'string' ? speakTierNoun(drawnHook, tierNounFor(tier)) : drawnHook;
 
   // THE SCENE AGREES WITH THE INSTITUTIONS (T1-12, extended to every beat by the chair's ruling 3, 2026-10-30): a
   // line names a market, its stalls or a fair only where the roster holds a market (DS-GEN-13's predicate). A beat
