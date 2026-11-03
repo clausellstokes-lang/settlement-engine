@@ -116,7 +116,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   if (!res) return <Empty message="No resource data available."/>;
   const _config = r?.config || {};
   // THE ECONOMY DESK, through its one caller. DS-ECO-11 renders here and nowhere else.
-  const deskProse = economyDeskRead(r, { publicDossier, playerView });
+  const deskProse = economyDeskRead(r, { publicDossier, playerView, tier: r?.tier });
   // ⭐ ONE STRATEGIC-VALUE SENTENCE (UX consolidation 2026-10-30, RULINGS-T2 T2-9; RUBRIC R2).
   // DS-ECO-11's strategic-value lens REPLACES the generator's line where the desk speaks (DM
   // and player views); the generator's line stands where it does not (the public dossier, or

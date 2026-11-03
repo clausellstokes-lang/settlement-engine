@@ -29,18 +29,24 @@
  * 'This town', with a possessive riding across. Counted over the corpus: 907 `the town` and
  * 53 `this town`.
  *
- * ⛔ 'A TOWN' IS DELIBERATELY UNTOUCHED — all 87 of them, and the 3 `every town` beside them.
- * An indefinite article in this corpus is a COMPARISON, not a reference: "what a larger town
- * does with buildings, this one does with acquaintance" is a sentence about somewhere else,
- * and "It is a town, in the ordinary sense" is the very line `weaveBlock`'s pronoun branch
- * exists to keep readable. Standing those down would rewrite the comparison into nonsense.
+ * ⭐ 'A TOWN' MOVES TOO, SINCE THE SIZE LANE (coherence program, 2026-11-03), AND THAT IS A
+ * MEASUREMENT OVERTURNING THE RULING THAT USED TO STAND HERE. This paragraph once held that an
+ * indefinite 'a town' is always a comparison. Counted over the six corpora, 63 of the 69
+ * indefinite 'a/every/an … town' clauses describe the settlement itself — "This is a town that
+ * sells.", "Every town this size has both.", "It is an ordinary town's arithmetic" — and a
+ * thorp printed them. So the kernel now also moves an indefinite or quantified reference with up
+ * to two modifiers ('a poorly-paid, poorly-policed town'), and a definite one with a MEASURED
+ * modifier ('the whole / very / wrong / sort of town'). The genuine comparisons stay, by an
+ * explicit allow-list (`TIER_NOUN_KEPT` in the kernel): "what a larger town does with
+ * buildings", "a town with courts", "a comfortable town", "a town without stores", "a farming
+ * town", "a town with the same neighbours", plus the idioms and titles the record carries ("in
+ * town", "Town Crier"). A plural ('towns') never moves. `domain/coherence/tierNounFindings.js`
+ * reads the same list, so what the page keeps and what the check forgives cannot drift.
  *
- * ⛔ AND NO COMPOUND MOVES, WHICH WAS CHECKED RATHER THAN ASSUMED. 'The town watch', 'the
+ * ⛔ NO COMPOUND WAS FOUND TO GUARD, WHICH WAS CHECKED RATHER THAN ASSUMED. 'The town watch', 'the
  * town walls', 'the town gates', 'the town hall', 'the town council', 'the town square', 'the
  * town crier', 'the town militia', 'the town charter' and 'the town market' were each grepped
- * over the whole corpus: ZERO occurrences of any of them. The matcher additionally requires
- * the determiner IMMEDIATELY before the noun, so an adjective ('the whole town', 2
- * occurrences) refuses the substitution rather than producing 'the whole village' on a guess.
+ * over the whole corpus: ZERO occurrences of any of them.
  *
  * ⚠ THE RESIDUAL RISK, NAMED RATHER THAN LEFT TO BE FOUND: a corpus line that says 'the town'
  * about a NEIGHBOUR would be re-pointed at this settlement. Every definite occurrence in the

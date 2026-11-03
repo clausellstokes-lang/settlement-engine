@@ -174,7 +174,7 @@ export function ServicesTab({ services, settlement, narrativeNote, publicDossier
     .flatMap(cat => (services[cat] || []).map(svc => (typeof svc === 'object' ? svc.institution || '' : '')))
     .filter(inst => inst && impaired.has(inst))
     .sort(compareCodepoint)[0] || null;
-  const deskProse = economyDeskRead(settlement, { publicDossier, playerView, impairedInstitution });
+  const deskProse = economyDeskRead(settlement, { publicDossier, playerView, tier: settlement?.tier, impairedInstitution });
   // ⭐ THE ROW DS-SUP-3'S SECOND LENS IS ABOUT (owner order 2026-09-19, the Defense idiom
   // applied here). That lens names `{institution}` — ONE house, by name — and it printed in
   // the catalog paragraph at the top of the tab, a screen and a half above the row that

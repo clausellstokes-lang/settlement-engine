@@ -124,7 +124,9 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
       { settlementName: 'Ford', tierNoun: tierNounFor('thorp') },
     );
     // `Fordé` is the ASCII-\w trap: a diacritic is a letter, so it is a longer word.
-    expect(woven.sentences.slice(1)).toEqual(['Fordwich answers to it.', 'Fordé answers too.', 'Ford3 is a mint, not a town.']);
+    // (SIZE lane, 2026-11-03: the indefinite 'a town' is now spoken in the settlement's noun too;
+    // the NAMES are what this arm is about, and none of them moved.)
+    expect(woven.sentences.slice(1)).toEqual(['Fordwich answers to it.', 'Fordé answers too.', 'Ford3 is a mint, not a thorp.']);
   });
 
   it('carries a POSSESSIVE across, in the apostrophe the corpus actually wrote', () => {
@@ -156,7 +158,7 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
       ['Nothing hems Kilcross in.', 'Kilcross\' is a town in name only.'],
       { settlementName: 'Kilcross', tierNoun: VILLAGE },
     );
-    expect(typo.sentences[1]).toBe('The village\' is a town in name only.');
+    expect(typo.sentences[1]).toBe('The village\' is a village in name only.'); // the indefinite moves since SIZE, 2026-11-03
     // …and not the pronoun, which is the substitution this arm exists to refuse.
     expect(typo.sentences[1]).not.toBe('Its is a town in name only.'); // anchored: the toBe above pins what it IS, so this cannot pass on an empty or absent line
     const bare = weaveBlock(
@@ -308,7 +310,9 @@ describe('weaveBlock — the stand-down, and the three places it must not reach'
       ['Weißmoor holds the ford.', 'Weißmoor is a town, in the ordinary sense, and the ordinariness is accurate.'],
       { settlementName: 'Weißmoor', tierNoun: tierNounFor('village') },
     );
-    expect(village.sentences[1]).toBe('It is a town, in the ordinary sense, and the ordinariness is accurate.');
+    // SIZE lane (2026-11-03): the indefinite now speaks the village's own noun, and the pronoun
+    // branch still stands the name down because the remainder still names a tier.
+    expect(village.sentences[1]).toBe('It is a village, in the ordinary sense, and the ordinariness is accurate.');
     // The CONTRASTIVE readings the ruling was weighed against read correctly with it too.
     const contrastive = weaveBlock(
       ['Adham holds the ford.', 'Adham keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.'],
@@ -423,22 +427,27 @@ describe('the settlement speaks in its own tier noun', () => {
   });
 
   it('⛔ a COMPARISON to somewhere else is left exactly as the corpus wrote it', () => {
-    // 87 `a town` and 3 `every town` stand in the corpus, and every one of them is about
-    // somewhere that is NOT this settlement. Re-pointing them would rewrite the comparison
-    // into nonsense: "what a larger village does with buildings" on a village.
-    const lines = [
+    // ⭐ SIZE lane (2026-11-03) overturned the blanket rule this arm used to pin ("every 'a town'
+    // is a comparison"): measured over the six corpora, 63 of 69 indefinite clauses describe the
+    // settlement itself. What stays is the measured allow-list, `TIER_NOUN_KEPT`.
+    const kept = [
       'It keeps few institutions because it needs few; what a larger town does with buildings, this one does with acquaintance.',
-      'It is a town, in the ordinary sense, and the ordinariness is accurate.',
-      'Every town on this road keeps the same market day.',
+      'Bread is cheap here, as in a comfortable town.',
     ];
-    const woven = weaveBlock(lines, { settlementName: 'Kolstad', tierNoun: VILLAGE });
-    expect(woven.sentences).toEqual(lines);
+    const woven = weaveBlock(kept, { settlementName: 'Kolstad', tierNoun: VILLAGE });
+    expect(woven.sentences).toEqual(kept);
+    // anchored: the self-references beside them DO move, so the arm above is discriminating.
+    expect(weaveBlock(['It is a town, in the ordinary sense, and the ordinariness is accurate.', 'Every town of its kind keeps a pound.'],
+      { settlementName: 'Kolstad', tierNoun: VILLAGE }).sentences)
+      .toEqual(['It is a village, in the ordinary sense, and the ordinariness is accurate.', 'Every village of its kind keeps a pound.']);
   });
 
-  it('⛔ an ADJECTIVE refuses the substitution; a COMPOUND does NOT, which is why the corpus was grepped', () => {
-    // TWO DIFFERENT FACTS, PINNED TOGETHER because they are easy to confuse.
-    //  (1) The determiner must sit IMMEDIATELY before the noun, so 'the whole town' (2
-    //      occurrences in the corpus) is refused rather than guessed into 'the whole village'.
+  it('a MEASURED adjective moves with the noun; a COMPOUND moves too, which is why the corpus was grepped', () => {
+    // SIZE lane (2026-11-03): 'the whole town' (and 'the very/wrong/sort of town') describe the
+    // settlement itself in every corpus occurrence, so the measured adjectives now move.
+    // TWO FACTS, PINNED TOGETHER.
+    //  (1) Between 'the' and the noun only a MEASURED modifier is admitted (whole, very, wrong,
+    //      sort of — `DEFINITE_MODIFIERS` in the kernel); any other word refuses the read.
     //  (2) A COMPOUND is NOT refused: 'the town watch' becomes 'the village watch'. That is
     //      the one substitution this leaf makes that could change a meaning, which is exactly
     //      why 'the town' + watch/walls/gates/guard/council/hall/square/crier/militia/charter/
@@ -449,7 +458,7 @@ describe('the settlement speaks in its own tier noun', () => {
       'The Town watch is a proper name and never moves.',
     ];
     expect(weaveBlock(lines, { settlementName: 'Kolstad', tierNoun: VILLAGE }).sentences).toEqual([
-      'The village watch keeps the gates, and the whole town turns out for the fair.',
+      'The village watch keeps the gates, and the whole village turns out for the fair.',
       'The Town watch is a proper name and never moves.',
     ]);
   });
