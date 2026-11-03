@@ -95,6 +95,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
+import { deriveMagicReliance } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
@@ -1619,6 +1620,18 @@ export function hasNamedMagicChain(activeChains) {
 }
 
 /**
+ * Does this place rely on magic? The one reading (`magicReliance.js :: deriveMagicReliance`) at
+ * relied-upon or integral; the same answer the defence generator stores as `magicDependency`.
+ * @param {object} settlement @returns {boolean}
+ */
+function reliesOnMagic(settlement) {
+  const { reading } = deriveMagicReliance(
+    /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement),
+  );
+  return reading === 'relied-upon' || reading === 'integral';
+}
+
+/**
  * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent.
  * @param {unknown} magicDependency @param {boolean} namedChain @returns {string|null}
  */
@@ -1669,9 +1682,12 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
     settlement: properFill(text(settlement?.name)),
     good: namedMagicChainGood(chains),
   };
-  const poolKey = magicDependencyPoolKey(
-    settlement?.defenseProfile?.magicDependency, hasNamedMagicChain(chains),
-  );
+  // ⛔ THE KEY IS THE ONE RELIANCE READING (lane DEFENSE-2, 2026-11-03, lane MAGIC's request):
+  // relied-upon or integral reads "depends on magic", anything else does not, so this sentence
+  // and the Magic tab's reading cannot disagree.
+  const poolKey = settlement
+    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains))
+    : null;
 
   return Object.freeze({
     arcaneReliance: poolKey

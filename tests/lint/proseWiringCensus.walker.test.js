@@ -1577,8 +1577,13 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // rerooted to the caller's `settlement.config.tradeRouteAccess`. It reaches the census only
     // through DS-GEN-6 :: isolated, which the literal rung resolves through that key function's
     // `access === 'isolated'`. `settlement` stays a root through other reads; `tradeAccess` is
-    // the one new root. Traced by lane DEFENSE-2; the finding below is unmoved.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(90);
+    // the one new root. Traced by lane DEFENSE-2; the finding below is unmoved. 91 AND NOT 90 SINCE
+    // LANE DEFENSE-2 keyed DS-DEF-9 on the one magic reliance reading: the desk now passes
+    // `reliesOnMagic(settlement)` (a call) where it passed `settlement.defenseProfile.magicDependency`,
+    // so the census keeps `magicDependencyPoolKey`'s parameter name `magicDependency` as the read.
+    // It still resolves to the muster holder by name (no licensed row moves); `settlement` stays a
+    // root through other reads; `magicDependency` is the one new root.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(91);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);

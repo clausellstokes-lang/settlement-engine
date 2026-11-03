@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
       "src/domain/display/stateProse/powerStateProse.js": "78d22210d6d2ca5d44a4af32cf3a13b7c123d0577850458e9ce36ec893e3d2c8",
       "src/domain/display/stateProse/economyStateProse.js": "5cfc0125aecbc0f14211dd9b9d5713b50866f26d01dfbdd370c678f178b1f8ea",
-      "src/domain/display/stateProse/defenseStateProse.js": "36901ea076c0b83ebefbffad3ecb1c9118e3d867d15f31330f4f775d0ce51a79",
+      "src/domain/display/stateProse/defenseStateProse.js": "6f148b3bd1f52f99f3bbb96d4192a194e55b1296e69dd262ec5eef8bfc5d9215",
       "src/domain/display/stateProse/stressorsStateProse.js": "e128aa4ece932c8eae009c22eb9ad9f77f47b3967b5652687f80c76933027fd1",
       "src/domain/display/stateProse/warFaithStateProse.js": "95882ecdf30f617f44ed3f460c4a67109107f5e645fc7e9820a60de0e67b1fb0",
       "src/domain/display/stateProse/dossierMounts.js": "6f1b82274e0a255041af154d8050391b0d4d02efa1149a52d9f1eecb843290fa"
@@ -67,7 +67,7 @@
     "modifierEligibleFactsByTab": [
       [
         "viability",
-        39
+        40
       ],
       [
         "economics",
@@ -5394,23 +5394,23 @@
       "grammars": 1,
       "predicate": [],
       "branchReads": [
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency"
       ],
       "fieldsRead": [
-        "namedChain",
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency",
+        "namedChain"
       ],
       "status": "RESOLVED",
       "reason": "",
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "settlement.defenseProfile.magicDependency": "measured"
+        "magicDependency": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -5428,7 +5428,7 @@
           "muster"
         ],
         "fields": {
-          "settlement.defenseProfile.magicDependency": "muster"
+          "magicDependency": "muster"
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -5454,23 +5454,23 @@
       "grammars": 2,
       "predicate": [],
       "branchReads": [
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency"
       ],
       "fieldsRead": [
-        "namedChain",
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency",
+        "namedChain"
       ],
       "status": "RESOLVED",
       "reason": "",
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
-        "settlement.defenseProfile.magicDependency": "measured"
+        "magicDependency": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -5488,7 +5488,7 @@
           "muster"
         ],
         "fields": {
-          "settlement.defenseProfile.magicDependency": "muster"
+          "magicDependency": "muster"
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -5512,22 +5512,22 @@
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [
-        "namedChain",
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency",
+        "namedChain"
       ],
       "status": "RESOLVED",
       "reason": "",
       "keyFunction": "magicDependencyPoolKey",
       "rung": "literal",
       "reads": [
-        "namedChain",
-        "settlement.defenseProfile.magicDependency"
+        "magicDependency",
+        "namedChain"
       ],
       "readsGrain": "function",
       "narrowed": false,
       "absent": {
-        "namedChain": "not-produced",
-        "settlement.defenseProfile.magicDependency": "measured"
+        "magicDependency": "measured",
+        "namedChain": "not-produced"
       },
       "covert": false,
       "objectClasses": [],
@@ -5545,8 +5545,8 @@
           "muster"
         ],
         "fields": {
-          "namedChain": "",
-          "settlement.defenseProfile.magicDependency": "muster"
+          "magicDependency": "muster",
+          "namedChain": ""
         },
         "holder": null,
         "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
@@ -39910,6 +39910,15 @@
         "modifierMounts": []
       },
       {
+        "field": "magicDependency",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "viability"
+        ],
+        "modifierMounts": []
+      },
+      {
         "field": "magicWorks",
         "mountsSpine": 1,
         "mountsModifier": 0,
@@ -41489,13 +41498,15 @@
       },
       {
         "field": "settlement.defenseProfile",
-        "mountsSpine": 2,
-        "mountsModifier": 0,
+        "mountsSpine": 1,
+        "mountsModifier": 2,
         "spineTabs": [
-          "defense",
-          "viability"
+          "defense"
         ],
-        "modifierMounts": []
+        "modifierMounts": [
+          "viability.magicDependency",
+          "viability.verdict"
+        ]
       },
       {
         "field": "settlement.economicState",
@@ -41883,7 +41894,7 @@
     "byTab": [
       [
         "viability",
-        39
+        40
       ],
       [
         "economics",
@@ -42777,15 +42788,15 @@
       "meanReachBp": 3333,
       "byFact": [
         {
+          "field": "magicDependency",
+          "attach": []
+        },
+        {
           "field": "namedChain",
           "attach": [
             "magicDependency true",
             "magicDependency true, with a NAMED dependent chain"
           ]
-        },
-        {
-          "field": "settlement.defenseProfile.magicDependency",
-          "attach": []
         }
       ]
     },
@@ -44955,7 +44966,7 @@
       "modifierEligibleFactsByTab": [
         [
           "viability",
-          39
+          40
         ],
         [
           "economics",
@@ -45073,7 +45084,7 @@
       "modifierEligibleFactsByTab": [
         [
           "viability",
-          39
+          40
         ],
         [
           "economics",
@@ -46824,7 +46835,7 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 90,
+      "deskRoots": 91,
       "deskSegments": 193
     }
   },
@@ -47030,6 +47041,11 @@
       "roll",
       "rolls"
     ],
+    "magicDependency": [
+      "muster",
+      "roll",
+      "rolls"
+    ],
     "marker.yearsAgo": [
       "memory",
       "word"
@@ -47147,11 +47163,6 @@
       "rolls",
       "wage",
       "wages"
-    ],
-    "settlement.defenseProfile.magicDependency": [
-      "muster",
-      "roll",
-      "rolls"
     ],
     "settlement.economicViability.viable": [
       "books",

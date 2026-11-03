@@ -373,16 +373,18 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     return null;
   };
 
-  test('the Arcane Support row reads None in a dead-magic world, even with an alchemist on the roll', () => {
+  // Lane DEFENSE-2 (2026-11-03, lane MAGIC's request): where magic does not work the Arcane
+  // Support row is not drawn at all, as every other magic row is gated (it used to read "None"
+  // with "Magic does not function in this world.").
+  test('no Arcane Support row in a dead-magic world, even with an alchemist on the roll', () => {
     const s = deadMagicTown();
     expect(s, 'fixture premise: a dead-magic city whose roster matches the arcane regex').toBeTruthy();
-    const cap = deriveSupportingCapabilities(s).find((c) => c.label === 'Arcane Support');
-    expect(cap.status).toBe('None');
-    expect(cap.score).toBeNull();
+    expect(deriveSupportingCapabilities(s).map((c) => c.label), 'the capability rows').not.toContain('Arcane Support');
     const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
     openSection(container, 'Supporting Capabilities');
-    expect(container.textContent).toContain('Arcane Support');
-    expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Arcane Support') on this render
+    expect(container.textContent).toContain('Medical Readiness');
+    expect(container.textContent).not.toContain('Arcane Support'); // anchored: toContain('Medical Readiness') on this render
+    expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Medical Readiness') on this render
   });
 
   test('DS-DEF-9 is silent in a dead-magic world, and the Magic page draws no dependence block', () => {
