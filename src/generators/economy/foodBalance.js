@@ -3,6 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
+import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
@@ -36,6 +37,49 @@ const ECONOMIC_CONSTANTS = {
   AGRICULTURAL_WORKFORCE: 0.4,
   STORAGE_BUFFER: 1.3,
 };
+
+
+// ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
+/**
+ * @typedef {Object} FoodRecord
+ * @property {number} grownPct          share of daily need grown by the place itself, %
+ * @property {number} normalImportPct   share of daily need that arrives by ordinary supply
+ *                                      (hinterland carts and trade), %
+ * @property {number} magicPct          share of daily need closed by magic, %
+ * @property {number} gapPct            the gap that remains after all of that, % (the band's number)
+ * @property {number} surplusPct        what the place grows beyond its need, %
+ * @property {'famine'|'deficit'|'importDependent'|'pressured'|'secure'|'surplus'} band
+ * @property {number} storageMonths     months of food in store (granary, households, the mill)
+ * @property {boolean} hasGranary       a real granary stands (a stand-in does not count)
+ * @property {boolean} growsMoreThanEats the only condition under which a writer may say "surplus"
+ */
+/**
+ * ONE ANSWER TO "HOW FED IS THIS PLACE". Derived once, by the canonical food writer
+ * (foodGenerator.js :: generateFoodSecurity), stored once at economicState.foodSecurity.foodRecord.
+ * Every sentence that speaks of food reads it: the band, the flags, the prosperity modifier,
+ * the situation sentence, the economy line's surplus words, the Foundations food row, and —
+ * through the field names below — the Defense stores row (`storageMonths`).
+ * Pure: a function of its numbers only.
+ * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, magicOffset?: number,
+ *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean }} input
+ * @returns {FoodRecord}
+ */
+export function deriveFoodRecord(input) {
+  const need = input.dailyNeed > 0 ? input.dailyNeed : 0;
+  /** @param {number|undefined} lb */
+  const pctOfNeed = (lb) => (need > 0 ? Math.round((Math.max(0, Number(lb) || 0) / need) * 100) : 0);
+  return {
+    grownPct: pctOfNeed(input.dailyProduction),
+    normalImportPct: pctOfNeed(input.importCoverage),
+    magicPct: pctOfNeed(input.magicOffset),
+    gapPct: Math.round(input.deficitPct),
+    surplusPct: Math.round(input.surplusPct),
+    band: foodSecurityBandKeyOf(input.stressFamine, input.deficitPct, input.surplusPct),
+    storageMonths: input.storageMonths,
+    hasGranary: input.hasGranary,
+    growsMoreThanEats: need > 0 && input.dailyProduction > need,
+  };
+}
 
 
 // deriveFoodBalanceAnalysis
@@ -351,8 +395,10 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
     }
   }
 
+  // The viability verdicts cut the gap at the band's own points (FOOD-1: one set of cut-offs;
+  // these were a private 50 and 20).
   if (surplusFinal < 0) {
-    if (deficitPercent > 50) {
+    if (deficitPercent > FOOD_SECURITY_CUTS.deficit) {
       if (disconnectedRoute) {
         // An uncovered deficit is a survival fact, not merely an economic
         // mood. Isolated settlements have no routine import channel that can
@@ -403,7 +449,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
           severity: 'high',
         });
       }
-    } else if (deficitPercent > 20) {
+    } else if (deficitPercent > FOOD_SECURITY_CUTS.importDependent) {
       if (disconnectedRoute) {
         issues.push({
           severity: SEVERITY.CRITICAL,

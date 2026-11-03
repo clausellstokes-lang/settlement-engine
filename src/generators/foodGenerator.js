@@ -18,7 +18,8 @@
 
 import { getActiveRng } from '../kernel/rngContext.js';
 import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
-import { foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
+import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
+import { deriveFoodRecord } from './economy/foodBalance.js';
 import { customDeps } from '../lib/dependencyEngine.js';
 import {
   nativeSemanticNames,
@@ -342,40 +343,17 @@ export function generateFoodSecurity(tier, institutions, config) {
 
   // ── Prosperity modifier ───────────────────────────────────────────────────
   // Food security floors or caps prosperity before other modifiers apply
-  let prosperityMod = null;
   // Magic-trade isolated settlements can import food at extraordinary cost — soften caps to penalties
-  const _magicFoodMitigated = hasMagicTradeImport;
   // Terrain-structural deficits: mountain/desert settlements import food by economic design.
   // A mountain mining town or desert caravan hub with road trade access is NOT in crisis
   // just because it can't grow grain locally. Treat as structural dependency, not crisis cap.
   const _terrainStructural = (terrain === 'mountain' || terrain === 'desert' || terrain === 'hills')
     && hasTradeRouteConnection(effectiveRoute);
-
-  if (stressFamine) {
-    prosperityMod = { type: 'cap', value: 0, reason: 'Active famine: food production collapsed, prosperity cannot exceed Struggling' };
-  } else if (deficitPct > 40) {
-    if (_terrainStructural) {
-      // Mountain/desert: severe deficit is normal — penalty not hard cap, imports cover it
-      prosperityMod = { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports: structural dependency, not crisis' };
-    } else if (_magicFoodMitigated) {
-      prosperityMod = { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports: prosperity capped at Moderate' };
-    } else {
-      prosperityMod = { type: 'cap', value: 1, reason: 'Severe structural food deficit caps prosperity at Poor' };
-    }
-  } else if (deficitPct > 20) {
-    if (_terrainStructural) {
-      // Minor penalty only — importing food is normal for these terrains
-      prosperityMod = null; // no modifier — structural import is priced into economy
-    } else if (_magicFoodMitigated) {
-      prosperityMod = { type: 'penalty', value: -1, reason: 'Food imports via magical infrastructure are reliable but costly' };
-    } else {
-      prosperityMod = { type: 'cap', value: 1, reason: 'Food deficit caps prosperity at Poor' };
-    }
-  } else if (deficitPct > 8) {
-    prosperityMod = { type: 'penalty', value: -1, reason: 'Food pressure reduces prosperity by one level' };
-  } else if (surplusPct > 40 && activeChainsCount >= 3 && (hasGranary || hasCityGranary || hasStateGranary)) {
-    prosperityMod = { type: 'bonus', value: 0.4, reason: 'Agricultural surplus with reserves provides modest prosperity bonus' };
-  }
+  const hasAnyGranary = hasGranary || hasCityGranary || hasStateGranary;
+  const prosperityMod = foodProsperityModOf({
+    stressFamine, deficitPct, surplusPct, activeChainsCount,
+    terrainStructural: _terrainStructural, magicMitigated: hasMagicTradeImport, hasGranary: hasAnyGranary,
+  });
 
   // ── Descriptive narrative ─────────────────────────────────────────────────
   const diversityNote = activeChainsCount >= 4 ? 'highly diversified diet'
@@ -398,6 +376,13 @@ export function generateFoodSecurity(tier, institutions, config) {
                    : importPct >= 20 ? `${importPct}% imported: meaningful external dependency`
                    : importPct >= 5  ? `${importPct}% supplemented by imports`
                    : null;
+
+  // ── THE FOOD RECORD (FOOD-1): derived once, here, from the numbers just published ──
+  const foodRecord = deriveFoodRecord({
+    dailyNeed: Math.round(dailyNeed), dailyProduction: Math.round(dailyProduction),
+    importCoverage, magicOffset, deficitPct, surplusPct, stressFamine, storageMonths,
+    hasGranary: hasAnyGranary,
+  });
 
   return {
     label, color, bg,
@@ -461,6 +446,9 @@ export function generateFoodSecurity(tier, institutions, config) {
     // Prosperity modifier to apply before base calculation
     prosperityMod,
 
+    // The one answer every food sentence reads (foodBalance.js :: deriveFoodRecord).
+    foodRecord,
+
     // For defense Disasters & Famine score
     resilienceScore: Math.round(
       (storageMonths / 12 * 35)          // storage weight
@@ -481,6 +469,38 @@ export function generateFoodSecurity(tier, institutions, config) {
       },
     } : {}),
   };
+}
+
+/**
+ * THE PROSPERITY MODIFIER FOOD IMPOSES, cut at the band's own points (FOOD-1: one set of
+ * cut-offs; this ladder was a private 8 / 20 / 40).
+ * @param {{ stressFamine: boolean, deficitPct: number, surplusPct: number, activeChainsCount: number,
+ *   terrainStructural: boolean, magicMitigated: boolean, hasGranary: boolean }} f
+ * @returns {{ type: 'cap'|'penalty'|'bonus', value: number, reason: string } | null}
+ */
+export function foodProsperityModOf(f) {
+  if (f.stressFamine) {
+    return { type: 'cap', value: 0, reason: 'Active famine: food production collapsed, prosperity cannot exceed Struggling' };
+  }
+  if (f.deficitPct > FOOD_SECURITY_CUTS.deficit) {
+    // Mountain/desert: severe deficit is normal — penalty not hard cap, imports cover it
+    if (f.terrainStructural) return { type: 'penalty', value: -1, reason: 'Terrain requires significant food imports: structural dependency, not crisis' };
+    if (f.magicMitigated) return { type: 'cap', value: 2, reason: 'Severe food deficit mitigated by magical imports: prosperity capped at Moderate' };
+    return { type: 'cap', value: 1, reason: 'Severe structural food deficit caps prosperity at Poor' };
+  }
+  if (f.deficitPct > FOOD_SECURITY_CUTS.importDependent) {
+    // Structural import is priced into the economy for these terrains: no modifier.
+    if (f.terrainStructural) return null;
+    if (f.magicMitigated) return { type: 'penalty', value: -1, reason: 'Food imports via magical infrastructure are reliable but costly' };
+    return { type: 'cap', value: 1, reason: 'Food deficit caps prosperity at Poor' };
+  }
+  if (f.deficitPct > FOOD_SECURITY_CUTS.pressured) {
+    return { type: 'penalty', value: -1, reason: 'Food pressure reduces prosperity by one level' };
+  }
+  if (f.surplusPct > FOOD_SECURITY_CUTS.surplus && f.activeChainsCount >= 3 && f.hasGranary) {
+    return { type: 'bonus', value: 0.4, reason: 'Agricultural surplus with reserves provides modest prosperity bonus' };
+  }
+  return null;
 }
 
 function tierDefaultPop(tier) {
