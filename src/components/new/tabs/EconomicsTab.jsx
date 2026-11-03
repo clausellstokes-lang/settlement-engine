@@ -157,6 +157,10 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
           const facts = chainFlowFacts(chain, instNames);
+          // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
+          // sentence, so it prints on the first card that carries it; each card keeps its need.
+          const impact = chain.dependency?.impact || '';
+          const impactShown = !!impact && filtered.slice(0, i).some(prev => prev?.dependency?.impact === impact);
 
           return (
             <div key={i} style={{
@@ -205,7 +209,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Impairment detail */}
               {chain.dependency && (
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
-                  <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
+                  <strong>Needs {chain.dependency.resource}</strong>{impact && !impactShown && <> - {impact}</>}
                   {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
