@@ -12,7 +12,10 @@
  *   - a click (any device, touch included) is caught in the capture phase before the control's
  *     own handler, which never fires, and opens AvailableAtLaunchDialog.
  *
- * Not gated (staff, the gallery, or launch): the child renders exactly as given.
+ * Whether it is gated is exportLaunchGate.js :: exportsOpenFor's answer for this viewer (a
+ * staff account, the gallery's own export, or a launched build: open), read here so every call
+ * site asks the same question; `gated` overrides it (tests, a host that already knows).
+ * Not gated: the child renders exactly as given.
  *
  * Contract for a non-Button child: forward `aria-describedby`, `aria-haspopup`,
  * `data-launch-gated` and `launch` to the real <button>.
@@ -21,12 +24,17 @@ import { Children, cloneElement, isValidElement, useId, useRef, useState } from 
 import Button from './Button.jsx';
 import AvailableAtLaunchPill from './AvailableAtLaunchPill.jsx';
 import AvailableAtLaunchDialog from './AvailableAtLaunchDialog.jsx';
+import { exportsOpenFor, selectExportStaff } from './exportLaunchGate.js';
+import { useStore } from '../../store/index.js';
 
 /**
- * @param {{ gated: boolean, block?: boolean, children: import('react').ReactElement }} props
- *   gated: true while exports are closed for this viewer; block: the control fills its row
+ * @param {{ gated?: boolean, gallery?: boolean, block?: boolean, children: import('react').ReactElement }} props
+ *   gated: overrides the gate's answer; gallery: the export is the gallery's own (never gated);
+ *   block: the control fills its row
  */
-export default function LaunchGatedExport({ gated, block = false, children }) {
+export default function LaunchGatedExport({ gated: gatedOverride, gallery = false, block = false, children }) {
+  const staff = useStore(selectExportStaff);
+  const gated = typeof gatedOverride === 'boolean' ? gatedOverride : !exportsOpenFor({ staff, gallery });
   const pillId = useId();
   const wrapRef = useRef(/** @type {HTMLSpanElement | null} */ (null));
   const [hover, setHover] = useState(false);

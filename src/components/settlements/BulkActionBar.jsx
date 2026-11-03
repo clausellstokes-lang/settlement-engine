@@ -12,6 +12,7 @@
 import { useState } from 'react';
 import { FolderOpen, BookMarked, Download, Trash2, X } from 'lucide-react';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import { GOLD, INK, BODY, BORDER_STRONG, CARD, RED, RED_BG, FS, SP, sans, swatch } from '../theme.js';
 import DeleteConfirmation from '../DeleteConfirmation';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -145,9 +146,12 @@ export default function BulkActionBar({ bulk, campaigns = [], canManageCampaigns
             </Button>
           )}
 
-          <Button variant="secondary" size="sm" disabled={disabled} icon={<Download size={12} />} onClick={bulk.exportBulk}>
-            Export JSON
-          </Button>
+          {/* Before launch, the launch teaser for every non-staff account (X-53). */}
+          <LaunchGatedExport>
+            <Button variant="secondary" size="sm" disabled={disabled} icon={<Download size={12} />} onClick={bulk.exportBulk}>
+              Export JSON
+            </Button>
+          </LaunchGatedExport>
         </ActionGroup>
 
         {/* Destructive + dismiss. On desktop Delete carries marginLeft:auto to

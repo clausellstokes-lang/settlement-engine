@@ -1,5 +1,6 @@
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import BuyThisDossier from '../BuyThisDossier.jsx';
 import { t } from '../../copy/index.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
@@ -63,15 +64,19 @@ export default function SettlementDetailActions({
         </Button>
       )}
       {exportAllowed ? (
-        <Button
-          variant="danger"
-          size="sm"
-          busy={exporting}
-          onClick={onOpenExportSheet}
-          title="Choose Draft Brief / Canon Dossier / Timeline Packet."
-        >
-          {exporting ? 'Building PDF…' : 'Export Dossier'}
-        </Button>
+        // Before launch, the launch teaser for every non-staff account (X-53): the gate
+        // reads the staff fact itself, the one store read in this cluster.
+        <LaunchGatedExport>
+          <Button
+            variant="danger"
+            size="sm"
+            busy={exporting}
+            onClick={onOpenExportSheet}
+            title="Choose Draft Brief / Canon Dossier / Timeline Packet."
+          >
+            {exporting ? 'Building PDF…' : 'Export Dossier'}
+          </Button>
+        </LaunchGatedExport>
       ) : (
         // Owner ruling: a free tier without a durable right buys the PDF ($2.99,
         // via the ExportUnlockDialog popup) rather than exporting freely.
