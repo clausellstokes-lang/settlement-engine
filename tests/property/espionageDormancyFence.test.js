@@ -189,6 +189,19 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-03, DEFENSE-2: THE CULTURE, STRESS AND WARTIME LINES SAY NOTHING A ROSTER CAN CONTRADICT (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-defense-roster-lines.json. THE MOVER, FOUND: 8284242ef
+ * (the culture, stress and wartime lines reworded to hold on every roster; defenseInstitutionBuckets.js ::
+ * DEFENSE_BUCKET_KEYWORDS.militia reads 'household levy'). On THIS corpus 193 of 360 rows move (thorp 40,
+ * hamlet 34, village 31, town 33, city 27, metropolis 28), in culturalIdentity.defensePattern (179 rows),
+ * defenseProfile.institutions.militia (12 thorps gain the Household levy), the reworded NPC and faction-member
+ * secrets (6 rows) and the wartime stress summary (3 rows); 360/360 hashes stay distinct. ATTRIBUTION, ZERO
+ * RESIDUE BY CONSTRUCTION: written from the staged tree S8 = S7 + this cause, where S7 (X-49's stage, its write
+ * committed) reproduces `5d0e4fb4…` exactly. FENCE 3 (call-path dormancy) re-run green at the write: zero
+ * espionage calls. `5d0e4fb4…` -> `12a9c494…`.
+ *
  * ── 2026-11-03, SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET (THE COHERENCE AND SCALE WINDOW) ──
  * THE TWENTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
@@ -524,7 +537,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '5d0e4fb4a2fc5ef615e6ce1698856c1a890745ea102cd47158425e858c5c6743';
+const PRE_COUPLING_CORPUS_SHA = '12a9c494cc5bcf9d4b3ccff675cefe339f3b59a840741f82759c4357c85aeea0';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
