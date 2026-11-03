@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "f11979cead27c34bacebd9462644ec446742cab2",
+  "measuredAtSha": "1f92b81744a76940ff68ee32bdaabd4a094bd980",
   "measuredBy": "HOOKS seat",
   "date": "2026-11-03",
-  "note": "HOOKS lane 2026-11-03: three new source leaves (coherence/hookTruth.js, coherence/hookTruthFindings.js, dossier/hookLines.js) and three new test files for the plot-hook truth gate and the drawn conflict hooks",
+  "note": "HOOKS lane 2026-11-03: the acceptance-1 case added to plotHookTruthGate.test.js (one new title)",
   "files": 2819,
   "parked": 362,
   "credited": 2457,
-  "titles": 27176,
+  "titles": 27177,
   "suiteTitles": 7176
 }
