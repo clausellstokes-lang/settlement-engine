@@ -10,9 +10,11 @@
  * the generation receipt. Pure: a function of the settlement and the text only.
  */
 
+import { sourcesNamedIn } from '../foodways.js';
+
 /**
  * @typedef {Object} FoodWordsFinding
- * @property {'surplus_without_surplus'|'starving_without_deficit'|'reserve_days_disagree'|'no_reserves_with_stores'} code
+ * @property {'surplus_without_surplus'|'starving_without_deficit'|'reserve_days_disagree'|'no_reserves_with_stores'|'source_not_held'} code
  * @property {string} sentence  the offending sentence, trimmed
  * @property {string} detail    what the record says instead
  */
@@ -23,21 +25,25 @@ const SURPLUS_WORDS = /\b(?:farm|grain|food|agricultural|harvest) surplus\b|\bSu
 const STARVING_WORDS = /\bstarving\b/i;
 /** A count of days of food or reserves. */
 const RESERVE_DAYS = /\b(\d+) days of (?:food left|food in store|reserves)\b/i;
+/** A sentence about what the place eats: the foodways line and its kin. */
+const TABLE_WORDS = /\bthe (?:local )?table\b|\bmeals\b/i;
 /** A claim that no food is stored. */
 const NO_RESERVES = /\bNo food reserves\b|\bholds no food\b|\bNo reserves\b/i;
 
 /**
  * @param {unknown} settlement
- * @returns {{ band: string, storageMonths: number, growsMoreThanEats: boolean } | null}
+ * @returns {{ band: string, storageMonths: number, growsMoreThanEats: boolean, foodSources: string[] | null } | null}
  */
 function recordOf(settlement) {
   const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: unknown } | null } | null } | null | undefined} */ (settlement);
-  const r = /** @type {{ band?: unknown, storageMonths?: unknown, growsMoreThanEats?: unknown } | null | undefined} */ (s?.economicState?.foodSecurity?.foodRecord);
+  const r = /** @type {{ band?: unknown, storageMonths?: unknown, growsMoreThanEats?: unknown, foodSources?: unknown } | null | undefined} */ (s?.economicState?.foodSecurity?.foodRecord);
   if (!r || typeof r !== 'object') return null;
   return {
     band: typeof r.band === 'string' ? r.band : '',
     storageMonths: typeof r.storageMonths === 'number' && Number.isFinite(r.storageMonths) ? r.storageMonths : 0,
     growsMoreThanEats: r.growsMoreThanEats === true,
+    // FOOD-3: a record older than the sources list cannot be held to named sources.
+    foodSources: Array.isArray(r.foodSources) ? r.foodSources.map(String) : null,
   };
 }
 
@@ -69,6 +75,13 @@ export function foodWordsFindings(settlement, renderedText) {
       const said = Number(days[1]);
       if (Math.abs(said - storeDays) > Math.max(2, Math.round(storeDays / 10))) {
         findings.push({ code: 'reserve_days_disagree', sentence, detail: `The stores hold about ${storeDays} days.` });
+      }
+    }
+    if (record.foodSources && TABLE_WORDS.test(sentence)) {
+      const held = new Set(record.foodSources);
+      const lacking = sourcesNamedIn(sentence).filter((source) => !held.has(source));
+      if (lacking.length) {
+        findings.push({ code: 'source_not_held', sentence, detail: `The place has no ${lacking.join(' or ')} source.` });
       }
     }
     if (record.storageMonths >= 1 && NO_RESERVES.test(sentence)) {

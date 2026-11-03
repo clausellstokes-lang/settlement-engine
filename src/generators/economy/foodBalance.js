@@ -56,6 +56,9 @@ export function grownShareOf(effectiveAgri) {
   return (11 / 10) * (1 + ((effectiveAgri - 1) * 5) / 20);
 }
 
+/** The words a famine note uses for the source it failed (FOOD-3). */
+const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: 'herds', fish: 'fishing', mill: 'mill', game: 'hunt' });
+
 // ── THE FOOD RECORD (FOOD-1, chair ruling 1, 2026-11-03) ─────────────────────────────
 /**
  * @typedef {Object} FoodRecord
@@ -69,6 +72,11 @@ export function grownShareOf(effectiveAgri) {
  * @property {number} storageMonths     months of food in store (granary, households, the mill)
  * @property {boolean} hasGranary       a real granary stands (a stand-in does not count)
  * @property {boolean} growsMoreThanEats the only condition under which a writer may say "surplus"
+ * @property {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} foodSources the food sources the place
+ *                                      really has, largest contribution first (FOOD-3)
+ * @property {'grain'|'livestock'|'fish'|'mill'|'game'|null} failedSource the source a famine failed
+ * @property {number} famineCutPct      how much of the harvest the famine took, %
+ * @property {string} foodwaysLine      the foodways sentence composed from the place's own sources
  */
 /**
  * ONE ANSWER TO "HOW FED IS THIS PLACE". Derived once, by the canonical food writer
@@ -78,7 +86,9 @@ export function grownShareOf(effectiveAgri) {
  * through the field names below — the Defense stores row (`storageMonths`).
  * Pure: a function of its numbers only.
  * @param {{ dailyNeed: number, dailyProduction: number, importCoverage?: number, magicOffset?: number,
- *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean }} input
+ *   deficitPct: number, surplusPct: number, stressFamine: boolean, storageMonths: number, hasGranary: boolean,
+ *   foodSources?: Array<'grain'|'livestock'|'fish'|'mill'|'game'>, failedSource?: 'grain'|'livestock'|'fish'|'mill'|'game'|null,
+ *   famineCutPct?: number, foodwaysLine?: string }} input
  * @returns {FoodRecord}
  */
 export function deriveFoodRecord(input) {
@@ -95,6 +105,10 @@ export function deriveFoodRecord(input) {
     storageMonths: input.storageMonths,
     hasGranary: input.hasGranary,
     growsMoreThanEats: need > 0 && input.dailyProduction > need,
+    foodSources: [...(input.foodSources || [])],
+    failedSource: input.failedSource ?? null,
+    famineCutPct: input.famineCutPct ?? 0,
+    foodwaysLine: input.foodwaysLine || '',
   };
 }
 
@@ -179,7 +193,11 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
   const stressNotes = [];
   if (stresses.includes('famine')) {
     productionMult *= 0.35;
-    stressNotes.push('Famine: crop failure has reduced local food production to 35% of normal capacity.');
+    // FOOD-3: the canonical record names the source the famine failed and how deep it cut.
+    const failed = foodSecurity?.foodRecord?.failedSource;
+    stressNotes.push(failed
+      ? `Famine: the ${FAILED_SOURCE_WORDS[failed]} failed, taking ${foodSecurity.foodRecord.famineCutPct}% of local food production.`
+      : 'Famine: crop failure has reduced local food production to 35% of normal capacity.');
   }
   if (stresses.includes('under_siege')) {
     productionMult *= 0.6;
