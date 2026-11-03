@@ -1571,8 +1571,19 @@ describe('car 0 — mounts per fact, custom reachability, and the relation table
     // only by a field some OTHER branch of the same key function tested. 89 AND NOT 85 SINCE
     // SEAM car 3h: the four exposed DS-DEF-2 tables each root in their own synthetic label,
     // which is a root no relation endpoint can ever meet — so the finding below is unmoved
-    // and the denominator it is measured against grew by exactly four.
-    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(89);
+    // and the denominator it is measured against grew by exactly four. 90 AND NOT 89 SINCE LANE
+    // DEFENSE's 0b2548de5 (the owner's word: stored food is the Economy tab's): the Defense desk
+    // stopped calling `supplyLogisticsPoolKey`, so its bare parameter `tradeAccess` is no longer
+    // rerooted to the caller's `settlement.config.tradeRouteAccess`. It reaches the census only
+    // through DS-GEN-6 :: isolated, which the literal rung resolves through that key function's
+    // `access === 'isolated'`. `settlement` stays a root through other reads; `tradeAccess` is
+    // the one new root. Traced by lane DEFENSE-2; the finding below is unmoved. 91 AND NOT 90 SINCE
+    // LANE DEFENSE-2 keyed DS-DEF-9 on the one magic reliance reading: the desk now passes
+    // `reliesOnMagic(settlement)` (a call) where it passed `settlement.defenseProfile.magicDependency`,
+    // so the census keeps `magicDependencyPoolKey`'s parameter name `magicDependency` as the read.
+    // It still resolves to the muster holder by name (no licensed row moves); `settlement` stays a
+    // root through other reads; `magicDependency` is the one new root.
+    expect(join.deskRoots, 'the desks read this many distinct field roots').toBe(91);
     expect(join.strictBoth, 'rows a projector could license today').toBe(0);
     expect(join.strictEither, 'and rows sharing even ONE endpoint with a desk read').toBe(0);
     expect(join.leafBoth, 'nor does a leaf-level normalisation reach a row').toBe(0);
@@ -1794,11 +1805,20 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     // standing is a TOWN standing that no register row can carry. The rule moved 40 rows'
     // `stateOrgan` and not one row's `standing`, so 114 / 3 / 591 and 191 / 5 / 415 are the
     // same integers car 5b measured, now held.
+    // 113 / 592 AND NOT 114 / 591 SINCE LANE DEFENSE's 0b2548de5: ONE row, DS-GEN-6 :: isolated,
+    // moved LICENSED -> SOURCE-UNRESOLVED. The census resolves it through
+    // `supplyLogisticsPoolKey` (a literal-rung collision with that function's 'isolated'), whose
+    // third argument was the Defense desk's `settlement.config.tradeRouteAccess` (a toll-bar
+    // field). The desk no longer calls it, so the read is the bare `tradeAccess`, and no mapping
+    // row resolves it. Traced by lane DEFENSE-2 against the register at da2040ddb.
     expect(summary.rows, 'ROWS by source standing').toEqual({
-      LICENSED: 114, OFFICE: 3, 'SOURCE-UNRESOLVED': 591,
+      LICENSED: 113, OFFICE: 3, 'SOURCE-UNRESOLVED': 592,
     });
+    // 190 / 416 AND NOT 191 / 415, the same one row: its third field entry was the toll-bar's
+    // `settlement.config.tradeRouteAccess` and is now the unresolved `tradeAccess`. The total
+    // of 611 below does not move.
     expect(summary.fields, 'FIELDS by source standing').toEqual({
-      LICENSED: 191, OFFICE: 5, 'SOURCE-UNRESOLVED': 415,
+      LICENSED: 190, OFFICE: 5, 'SOURCE-UNRESOLVED': 416,
     });
     expect(Object.values(summary.rows).reduce((a, b) => a + b, 0),
       'and every pool lands in exactly one row standing').toBe(spines.length);
@@ -1808,9 +1828,11 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     expect(summary.rowsWithNoReading, 'and rows the census recovered no reading for at all').toBe(368);
     // THE TWO UNRESOLVED GROUNDS STAY APART: a field no mapping row names is a different debt
     // from a kind with no institution behind it, and collapsing them would hide which is which.
-    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 415, 'no-institution-in-roster': 0 });
+    // 416 and toll-bar 12 (not 415 and 13) since lane DEFENSE's 0b2548de5: the same one field
+    // entry of DS-GEN-6 :: isolated, traced at 'FIELDS by source standing' above.
+    expect(summary.unresolvedGrounds).toEqual({ 'no-mapping': 416, 'no-institution-in-roster': 0 });
     expect(summary.byKind, 'the licensed field count per kind').toEqual([
-      ['muster', 61], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 13],
+      ['muster', 61], ['market', 49], ['treasury', 22], ['court', 21], ['toll-bar', 12],
       ['watch', 9], ['road', 7], ['elders', 5], ['office', 5], ['parish', 4],
     ]);
     expect(summary.byKind.reduce((n, [, k]) => n + k, 0),
@@ -1925,7 +1947,10 @@ describe('SEAM car 5b — THE HOLDER CENSUS: the source of each construction (SI
     const clean = townOf(CLEAN_TOWN);
     expect(capturedRulingStructure(clean).captured, 'the clean town is not on the arc').toBe(false);
     const held = licensed.filter((row) => sourceOfForTown(row, clean).holder !== null);
-    expect(held.length, 'and it really does keep the records').toBe(62);
+    // 61 AND NOT 62 SINCE LANE DEFENSE's 0b2548de5: the one licensed row that left
+    // (DS-GEN-6 :: isolated, see 'ROWS by source standing') was one this town held, through its
+    // toll-bar. No other licensed row changed its source. Traced by lane DEFENSE-2.
+    expect(held.length, 'and it really does keep the records').toBe(61);
     expect(licensed.filter((row) => sourceOfForTown(row, clean).standing === 'INTERESTED')).toEqual([]);
   });
 

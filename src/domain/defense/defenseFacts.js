@@ -19,11 +19,9 @@
  * monastery, so the word "hospital" was printed over both. Here `hasHospital` is a real
  * hospital and `hasHealer` is a healer, an infirmary or a monastic house.
  *
- * ⚠ AND ONE GAP LEFT AS THE ENGINE HAS IT, on purpose. The thorp militia row is named
- * `Household levy`, which the bucket vocabulary (`militia`) does not match, so the engine's
- * scores and the defence desk both read a levy thorp as having no force. Reading the levy
- * here alone would make this answer disagree with the desk beside it; the cure is the
- * vocabulary itself (a generation-time change, requested of the chair), not a second answer.
+ * The thorp militia row is named `Household levy`. Since lane DEFENSE-2 (2026-11-03) the
+ * bucket vocabulary (`DEFENSE_BUCKET_KEYWORDS.militia`) matches it, so the engine's scores, the
+ * defence desk and this answer all read a levy thorp as having a militia, in one place.
  *
  * Pure: no randomness, no clock, no generator import.
  */

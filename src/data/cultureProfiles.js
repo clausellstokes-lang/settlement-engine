@@ -46,6 +46,11 @@ const profile = (profile) => Object.freeze({
  * These are broad fantasy inspiration families, kept under the existing stable
  * config keys for save compatibility. Text emphasizes institutions and material
  * conditions rather than assigning personality traits to whole peoples.
+ *
+ * A `defensePattern` line is drawn in resolveConfig, before any institution exists, so it
+ * cannot see the roster. Each line therefore names no garrison, soldiers or walls as present:
+ * it says what the tradition does as a place grows (lane DEFENSE-2, 2026-11-03;
+ * pinned by tests/domain/defenseRosterLines.test.js).
  */
 export const CULTURE_PROFILES = Object.freeze({
   germanic: profile({
@@ -73,7 +78,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'The sacred calendar is public and institutional, while wells, groves, and family memorials retain local weight.',
     ],
     defensePattern: [
-      'Earthworks and timber palisades mature into gated stone walls as wealth and threat increase.',
+      'Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase.',
       'A militia tradition supports a smaller permanent watch or retinue.',
     ],
     socialTexture: [
@@ -116,7 +121,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Household devotion and civic cult practice overlap in festivals, memorials, and patronage.',
     ],
     defensePattern: [
-      'Masonry walls, watch posts, and road gates are maintained as civic infrastructure.',
+      'Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.',
       'Professional guards supplement levy forces organized by district and patron.',
     ],
     socialTexture: [
@@ -245,7 +250,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Religious authority remains distributed between local ritual specialists and powerful patrons.',
     ],
     defensePattern: [
-      'Ringworks, timber walls, beacon systems, and readily mobilized crews protect the settlement.',
+      'Readily mobilized crews come first; ringworks, timber ramparts, and beacon systems follow where a place can man them.',
       'A warrior following provides the permanent core around which levy and ship crews assemble.',
     ],
     socialTexture: [
@@ -289,7 +294,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Palisades, ditches, river barriers, and fortified compounds provide layered defense.',
-      'A household levy supports a smaller retinue or garrison.',
+      'A household levy is the common defense; a retinue stands beside it only where a lord can keep one.',
     ],
     socialTexture: [
       'Household and communal labor obligations are enforced through reputation, assembly, and local office.',
@@ -331,7 +336,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Ritual calendars connect family memorials, neighborhood festivals, pilgrimage, and civic legitimacy.',
     ],
     defensePattern: [
-      'Walled wards, controlled gates, watch towers, granaries, and disciplined garrisons support defense in depth.',
+      'Where the state reaches, enclosed wards, controlled gates, watch towers, granaries, and disciplined troops give defense in depth.',
       'Militia and professional troops are organized through districts and administrative chains.',
     ],
     socialTexture: [
@@ -503,7 +508,7 @@ export const CULTURE_PROFILES = Object.freeze({
       'Sacred offices and festival funding are inseparable from civic status and public memory.',
     ],
     defensePattern: [
-      'Stone walls, towers, fortified heights, naval assets where relevant, and citizen or district levies provide defense.',
+      'Citizen or district levies provide defense; stone enclosures, towers, fortified heights, and naval assets where relevant follow as a place grows.',
       'Professional guards and mercenaries supplement civic musters during prolonged threats.',
     ],
     socialTexture: [

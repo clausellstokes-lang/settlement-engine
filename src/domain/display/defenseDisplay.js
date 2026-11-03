@@ -16,6 +16,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
+import { magicPractitioners } from '../magicReliance.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -209,9 +210,7 @@ export function deriveSupportingCapabilities(settlement) {
   const r = settlement || {};
   const d = r.defenseProfile || {};
   const scores = d.scores || {};
-  const inst = d.institutions || {};
   const f = r.economicState?.compound?.inst || {};
-  const magicDef = inst.magicDef || [];
   const econScore = Math.round(scores.economic || 0);
   // ⛔ T2-24 (UX consolidation 2026-10-30, red-first): IN A WORLD WHERE MAGIC DOES NOT
   // FUNCTION THERE IS NO ARCANE PROVISION TO HAVE. `hasMagicInst` is a roster regex, and an
@@ -219,7 +218,19 @@ export function deriveSupportingCapabilities(settlement) {
   // "Arcane Support: Present ... Detection, wards, counterspell." beside a Magic tab saying
   // magic does not function. The dial is asked of the estate's one accessor (wrapped as
   // `{ settlement }`, the call shape every caller uses; see defenseStateProse.js).
-  const arcane = !!f.hasMagicInst && magicWorksAt({ settlement: r }) !== false;
+  //
+  // ⛔ ONE PRACTITIONER CENSUS (lane DEFENSE-2, 2026-11-03, lane MAGIC's request). Presence is
+  // `magicReliance.js :: magicPractitioners`, the census the Magic tab's reading counts: houses the
+  // catalogue says practise, and people whose role says they practise (a Hedge Witch counts). The
+  // roster regex `hasMagicInst` printed "No arcane practitioners on the rolls" in a village the
+  // Magic tab read as integral. The row itself is dropped where magic does not work, by the same
+  // predicate the dossier's gate (`dossierViewModel.js :: magicRowsGated`) asks, `magicWorksAt`.
+  // The gate is not imported: dossierViewModel's closure would add ~826 KB to the Defense desk's,
+  // past ARCH §5.3's refusal precedent; lifting the gate into a light leaf is a request.
+  const practitioners = magicPractitioners(
+    /** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (r)),
+  );
+  const arcane = practitioners.length > 0;
   // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
   // healer named as a healer.
   const facts = defenseFactsOf(r);
@@ -260,15 +271,15 @@ export function deriveSupportingCapabilities(settlement) {
       // ⛔⛔ THE LABEL IS THE QUESTION THIS ROW ASKS, AND IT IS NOT THE OVERVIEW'S QUESTION
       // (review 10, 2026-09-18). It was called `Magical Capability`, which is also the name
       // of the Overview's Systems Health row — and the two read different facts. THIS row
-      // is a NARROW presence read: `compound.inst.hasMagicInst` is
-      // `wizard|mage|alchemist|enchant|arcane|academy of magic|scroll scribe|spellcasting|
-      // hedge wizard` and nothing else. The Overview's row bands `scores.magical`, which
+      // is a NARROW presence read: is anyone practising? (Since lane DEFENSE-2 it asks the
+      // practitioner census, `magicReliance.js :: magicPractitioners`; it used to ask the roster
+      // regex `compound.inst.hasMagicInst`.) The Overview's row bands `scores.magical`, which
       // `defenseGenerator` drives from the WORLD MAGIC SLIDER over a much wider presence
       // (healer, monastery, cathedral, druid, divine, healing all count), so a town with no
       // arcane institution at all can score 49 there. One name over two facts produced the
       // defect the review measured: "None" printed in amber beside a half-full bar on 27 of
       // 144 large settlements. Two facts, two names — this one is ARCANE SUPPORT, which is
-      // the only thing `hasMagicInst` can answer, and the Overview keeps the other name.
+      // the only thing a presence read can answer, and the Overview keeps the other name.
       //
       // ⛔ AND THE STATUS SAYS SOMETHING THE LABEL DOES NOT (the owner's fold of lane 6's
       // capability row). After the rename the row printed "Arcane Support · Arcane support ·
@@ -293,10 +304,8 @@ export function deriveSupportingCapabilities(settlement) {
       // `hasMagicInst === false` while being anything but conventional. The note now says
       // what is missing (arcane practitioners) and what follows from that specifically.
       note: arcane
-        ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.`
-        : magicWorksAt({ settlement: r }) === false
-          ? 'Magic does not function in this world.'
-          : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
+        ? `${practitioners.slice(0, 2).join(', ')}. Detection, wards, counterspell.`
+        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
       label: 'Legal Infrastructure',
@@ -342,7 +351,8 @@ export function deriveSupportingCapabilities(settlement) {
           : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
     });
   }
-  return caps;
+  // The Arcane Support row is the list's one magic row.
+  return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
 }
 
 /**

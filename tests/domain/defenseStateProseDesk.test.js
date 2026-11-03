@@ -45,6 +45,7 @@ import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveMagicReliance } from '../../src/domain/magicReliance.js';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
@@ -1707,11 +1708,15 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       expect(drawn.arcaneReliance.sentence).not.toContain('{'); // sentence and not an empty string
       expect(drawn.arcaneReliance.provenance.blockId).toBe('DS-DEF-9');
     }
-    // And the TRUE flag is reachable — gated entirely by stress incidence, not by magic.
-    // A magic-forced sweep is what makes the state appear; the sweep is small on purpose
-    // (the claim is reachability, and the wide census is recorded in the desk docblock).
+    // And the TRUE flag is reachable. Since lane DEFENSE-2 (2026-11-03) the stored flag IS the one
+    // magic reliance reading (relied-upon or integral), no longer a siege/famine/plague gate, so a
+    // magic-forced sweep reaches it often; the sweep stays small on purpose (the claim is
+    // reachability). ⚠ ONE KNOWN SILENCE, anchored to its cause: every desk's `properFill` refuses
+    // a name that opens on an accented capital (mx-14 is "Ássund"), and every DS-DEF-9 variant needs
+    // {settlement}, so the rung composes no sentence there. Any other silence still reds.
     let trueSeen = 0;
     let namedSeen = 0;
+    let silentByName = 0;
     for (let i = 0; i < 40; i++) {
       const s = generateSettlementPipeline({
         settType: ['village', 'town', 'city', 'metropolis'][i % 4],
@@ -1721,13 +1726,20 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       }, null, { seed: `mx-${i}`, customContent: {} });
       if (s.defenseProfile?.magicDependency !== true) continue;
       trueSeen++;
+      expect(['relied-upon', 'integral'], `mx-${i} the flag is the reading`).toContain(deriveMagicReliance(s).reading);
       const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });
+      if (drawn.arcaneReliance?.sentence == null) {
+        expect(/^[A-Z]/.test(s.name), `mx-${i} is silent only because its name "${s.name}" fails the proper shape`).toBe(false);
+        silentByName++;
+        continue;
+      }
       expect(drawn.arcaneReliance.provenance.poolKey).not.toBe('magicDependency false');
       if (drawn.arcaneReliance.provenance.poolKey.includes('NAMED')) namedSeen++;
     }
     expect(trueSeen, 'no magic-dependent world was generated, so the arm proves nothing')
       .toBeGreaterThan(0);
     expect(namedSeen).toBeGreaterThan(0);
+    expect(silentByName, 'the name-shape silence stays the exception').toBeLessThan(trueSeen);
   });
 
   it('DS-DEF-9 speaks at exactly ONE position, on `viability`, and has left the dark list', () => {
