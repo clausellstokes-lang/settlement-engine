@@ -205,7 +205,7 @@
       "suite": "tests/domain/townCartographyCalibration.test.js",
       "recordEnv": "UPDATE_CARTOGRAPHY_CALIBRATION",
       "proofForm": null,
-      "sha256": "cd17979de9895dcafc41301c1af44d85a3948534f4cea98b762191b0006d6e29",
+      "sha256": "040be5a420dd0673a4db53160c11ce92f68b36210d4768ead6c5378ab0dbffc2",
       "rows": 504,
       "seedSet": null,
       "distinctFloor": null,
