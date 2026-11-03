@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "4ae3bcb44ccf6a5d4e66ba09f27dd9adeffbec40",
-  "measuredBy": "the cloud chair (Fable 5.1), master merged into the consolidation branch",
+  "measuredAtSha": "1f37f1d218a6c93de806a13b00a1c90d8e73d757",
+  "measuredBy": "WIRING-2 seat",
   "date": "2026-11-03",
-  "note": "master (PR #71) brought tests/build/edgeVendorLock.test.js onto the branch; no marker moved",
-  "files": 2817,
-  "parked": 362,
-  "credited": 2455,
-  "titles": 27148,
-  "suiteTitles": 7170
+  "note": "WIRING-2 (2026-11-03): +3 titles (hookTruth ruined-garrison, two PDF foodways titles, the stores one-writer title; one renamed, one renumbered) and the SummaryTabV2 retirement (-4 summaryTabPhase2 pins, -3 freshness titles, -1 quick-guide title); the tip baseline was stale by design, so this also absorbs the composed lanes drift",
+  "files": 2841,
+  "parked": 363,
+  "credited": 2478,
+  "titles": 27290,
+  "suiteTitles": 7222
 }
