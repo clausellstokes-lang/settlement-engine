@@ -8,7 +8,7 @@
  */
 
 import { registerStep } from '../pipeline.js';
-import { TIER_ORDER, POPULATION_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
+import { TIER_ORDER, POPULATION_RANGES, HOUSEHOLD_RANGES, getMagicLevel, TOWN_PLUS_TIERS, popToTier } from '../../data/constants.js';
 import { MONSTER_THREAT_RANDOM_POOL, normalizeMonsterThreat } from '../../data/monsterThreat.js';
 import { getTerrainType } from '../terrainHelpers.js';
 import { recordTrace } from '../../domain/trace.js';
@@ -365,12 +365,15 @@ registerStep('resolveConfig', {
   // residents. ONE hearth size (residents per household) is rolled uniformly in [3.8, 4.6] from
   // this step's own stream. ⛔ IT IS THE STEP'S LAST DRAW and must stay last: every draw above
   // (priorities, tier, population, terrain, route, threat, culture) keeps its exact position, so
-  // no existing seed moves anything but this one new field. The owner's household bands
-  // (thorp 1-8 … metropolis 3,500+) are met by construction from the population bands.
-  const hearth = rng.randFloat(3.8, 4.6);
+  // no existing seed moves anything but this one new field. The count is clamped into the owner's
+  // household band for the tier (HOUSEHOLD_RANGES): the hearth alone misses it in the tails.
   // The draw is unconditional (the stream never depends on the input); a 'custom' config with
   // no usable population records no count rather than NaN.
-  const households = Number.isFinite(population) ? Math.max(1, Math.round(population / hearth)) : null;
+  const hearth = rng.randFloat(3.8, 4.6);
+  const householdBand = HOUSEHOLD_RANGES[tier];
+  const households = Number.isFinite(population)
+    ? Math.min(householdBand.max, Math.max(householdBand.min, Math.max(1, Math.round(population / hearth))))
+    : null;
 
   return {
     tier, population, households, tradeRoute, terrainType, resolvedTerrain,

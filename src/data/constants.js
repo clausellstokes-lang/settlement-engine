@@ -4,14 +4,51 @@ export const TIER_ORDER = ['thorp', 'hamlet', 'village', 'town', 'city', 'metrop
 export const TOWN_PLUS_TIERS = ['town', 'city', 'metropolis'];
 export const SMALL_TIERS = ['thorp', 'hamlet', 'village'];
 
+// X-46 THE HISTORICAL SCALE, car 1 (the owner, 2026-11-03; ODQ §934.104): the ROLL bands are
+// the owner's historical table, and adjacent bands OVERLAP BY DESIGN (a large hamlet and a small
+// village are the same size). A generated settlement's population is rolled uniformly inside
+// the band of the tier the DM chose (resolveConfig), and that tier always wins. The metropolis
+// band is open ("15,000+") in the owner's words; the roll stops at 60,000.
+//   thorp       5–30      "A few farmsteads clustered together"
+//   hamlet      20–100    "Small rural settlement; little or no dedicated infrastructure"
+//   village     75–400    "Established agricultural community, often with a church/mill/inn"
+//   town        300–2,500 "Market/trade center; craftsmen and specialized occupations"
+//   city        2,000–15,000 "Major administrative, religious, military, or commercial center"
+//   metropolis  15,000+   "Major regional/national center"
 export const POPULATION_RANGES = {
-  thorp:      { min: 8,     max: 60 },
-  hamlet:     { min: 61,    max: 400 },
-  village:    { min: 401,   max: 900 },
-  town:       { min: 901,   max: 5000 },
-  city:       { min: 5001,  max: 25000 },
-  metropolis: { min: 25001, max: 100000 },
+  thorp:      { min: 5,     max: 30 },
+  hamlet:     { min: 20,    max: 100 },
+  village:    { min: 75,    max: 400 },
+  town:       { min: 300,   max: 2500 },
+  city:       { min: 2000,  max: 15000 },
+  metropolis: { min: 15000, max: 60000 },
 };
+
+// HOUSEHOLDS (X-46 car 1): the owner's household column of the same table. resolveConfig rolls
+// one hearth size (3.8–4.6 residents per household) and clamps the count into the band of the
+// settlement's tier: the hearth alone misses the owner's band in the tails (measured 0.5–0.9% of
+// rolls per tier above thorp, e.g. 15,000 / 4.6 = 3,261 under the metropolis 3,500), and the
+// owner's table is the authority. The metropolis band is open above.
+export const HOUSEHOLD_RANGES = {
+  thorp:      { min: 1,    max: 8 },
+  hamlet:     { min: 5,    max: 25 },
+  village:    { min: 15,   max: 100 },
+  town:       { min: 75,   max: 650 },
+  city:       { min: 500,  max: 4000 },
+  metropolis: { min: 3500, max: Infinity },
+};
+
+// THE STAMP (X-46 car 1): the one population → tier law, for a 'custom' population and every
+// tier-change resolver. Because the roll bands overlap, the stamp cuts each overlap at ONE point,
+// inside it: a population at or above a tier's cut stamps that tier (or higher). Each value is
+// the LOWEST population that stamps its tier; thorp has no cut.
+export const TIER_STAMP_CUTS = Object.freeze({
+  hamlet:     25,
+  village:    88,
+  town:       350,
+  city:       2250,
+  metropolis: 15000,
+});
 
 export const SEVERITY = {
   CRITICAL:     'critical',
@@ -24,14 +61,14 @@ export const tierAtLeast = (tier, min) =>
   TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(min);
 
 export const popToTier = (pop) =>
-  // Boundaries must agree with POPULATION_RANGES exactly, else a settlement is
-  // stamped with a tier whose own max it exceeds. thorp maxes at 60 (hamlet
-  // starts at 61); this was previously 80, leaking pop 61-80 into `thorp`.
-  pop <= 60    ? 'thorp'
-  : pop <= 400   ? 'hamlet'
-  : pop <= 900   ? 'village'
-  : pop <= 5000  ? 'town'
-  : pop <= 25000 ? 'city'
+  // The cuts live in TIER_STAMP_CUTS (one home); each lies inside the overlap of the two roll
+  // bands it separates, so a stamped tier's own roll band always holds the population. Spelled
+  // with `<` so a non-number falls through every comparison exactly as it always has.
+  pop < TIER_STAMP_CUTS.hamlet       ? 'thorp'
+  : pop < TIER_STAMP_CUTS.village    ? 'hamlet'
+  : pop < TIER_STAMP_CUTS.town       ? 'village'
+  : pop < TIER_STAMP_CUTS.city       ? 'town'
+  : pop < TIER_STAMP_CUTS.metropolis ? 'city'
   : 'metropolis';
 
 export const getMagicLevel = (priority = 50) =>
