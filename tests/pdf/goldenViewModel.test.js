@@ -16,6 +16,11 @@
  *      other five and this fixture's settlement gains exactly one institution. The
  *      +1 IS the review: a required row adds one member and consumes no draw, so a
  *      second moved field here would have meant something else had changed with it.
+ *      ⚠ REVIEWED AND RE-RECORDED THROUGH THE SIGNED DOOR 2026-11-03 (FOOD-2, ODQ §934.104, THE
+ *      COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+ *      `food.deficit (lb/day)` 97 → 0, `food.deficitPct` 1 → 0, `food.surplus (lb/day)` 0 → 547, and
+ *      NOTHING ELSE moved. The food base numbers read one terrain table with no hidden /1.3 divisor and
+ *      draw the town's hinterland as normal supply, so this fixed-seed town now feeds itself.
  *
  *   2. RENDER-LEAF — parity of the view-model is necessary but not sufficient: a
  *      section can read the right value yet fail to PRINT it. This renders the
