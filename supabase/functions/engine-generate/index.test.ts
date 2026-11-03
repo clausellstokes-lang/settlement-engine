@@ -11,7 +11,8 @@
  *     carrying the served version, and generates nothing;
  *   - the rate guard: anonymous per IP and signed-in per account, 6 a minute, the 7th 429;
  *     staff unlimited and never metered; a limiter error fails CLOSED;
- *   - the bot guard: 403 before any body is read or any client is made.
+ *   - the bot guard: 403 before any body is read or any client is made;
+ *   - account_is_active for a signed-in caller: an inactive account is 403, unmetered.
  */
 import { assert, assertEquals } from 'https://deno.land/std@0.224.0/assert/mod.ts';
 import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
@@ -44,12 +45,14 @@ type StubOpts = {
   users?: Record<string, string>; // jwt -> user id
   roles?: Record<string, string>; // user id -> profiles.role
   rateError?: boolean;
+  inactive?: Record<string, boolean>; // user id -> account_is_active false
 };
 
 /** A service-role stub: auth.getUser, profiles.role, the session table, ingest_check_rate. */
 function makeAdmin(opts: StubOpts = {}) {
   const counts = new Map<string, number>();
-  const rpcCalls: Array<Record<string, unknown>> = [];
+  const rpcCalls: Array<Record<string, unknown>> = []; // ingest_check_rate only
+  const activeCalls: string[] = [];
   let made = 0;
   const client = {
     auth: {
@@ -72,6 +75,10 @@ function makeAdmin(opts: StubOpts = {}) {
       return q;
     },
     rpc(fn: string, args: Record<string, unknown> = {}) {
+      if (fn === 'account_is_active') {
+        activeCalls.push(String(args.p_uid));
+        return Promise.resolve({ data: !opts.inactive?.[String(args.p_uid)], error: null });
+      }
       rpcCalls.push({ fn, ...args });
       if (opts.rateError) return Promise.resolve({ data: null, error: { message: 'limiter down' } });
       const key = String(args.p_key);
@@ -80,7 +87,7 @@ function makeAdmin(opts: StubOpts = {}) {
       return Promise.resolve({ data: n <= Number(args.p_max), error: null });
     },
   };
-  return { rpcCalls, adminClient: () => { made++; return client; }, made: () => made };
+  return { rpcCalls, activeCalls, adminClient: () => { made++; return client; }, made: () => made };
 }
 
 function post(body: unknown, headers: Record<string, string> = {}) {
@@ -160,6 +167,23 @@ scopedEnv.test('rate: a signed-in caller is metered per account, not per IP', as
   assertEquals(res.status, 200);
   await res.body?.cancel();
   assertEquals(admin.rpcCalls.map((c) => c.p_key), ['engm:u:u:user-1', 'engd:u:u:user-1']);
+  assertEquals(admin.activeCalls, ['user-1']);
+});
+
+scopedEnv.test('account: an inactive signed-in account is 403 and never metered; anonymous callers skip the check', async () => {
+  const admin = makeAdmin({ users: { 'jwt-u2': 'user-2' }, roles: { 'user-2': 'user' }, inactive: { 'user-2': true } });
+  const res = await handleEngineGenerate(
+    post({ seed: 'inactive', config: { settType: 'thorp' } }, { Authorization: 'Bearer jwt-u2' }),
+    { adminClient: admin.adminClient },
+  );
+  assertEquals(res.status, 403);
+  await res.body?.cancel();
+  assertEquals(admin.rpcCalls.length, 0);
+  const anon = makeAdmin();
+  const ok = await handleEngineGenerate(post({ seed: 'anon-active', config: { settType: 'thorp' } }), { adminClient: anon.adminClient });
+  assertEquals(ok.status, 200);
+  await ok.body?.cancel();
+  assertEquals(anon.activeCalls, []);
 });
 
 scopedEnv.test('rate: staff are unlimited and never metered', async () => {

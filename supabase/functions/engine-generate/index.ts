@@ -14,8 +14,9 @@
  *   CORS preflight → method gate (POST) → bot guard (403) → body cap + parse (413/400)
  *   → shape (400) → version pin (409 `engine_version_retired`, carrying the served
  *   version) → OPTIONAL identity (a Bearer JWT that resolves to a user; anything else is
- *   anonymous) → single-session gate for a signed-in caller (401) → staff read → rate
- *   guard (429; staff skip it) → generate (422 on a generator throw) → 200.
+ *   anonymous) → for a signed-in caller: single-session gate (401) and account_is_active
+ *   (403; the design's spine, docs/DESIGN_ENGINE_SERVICE.md "The contract") → staff read →
+ *   rate guard (429; staff skip it) → generate (422 on a generator throw) → 200.
  *
  * Anonymous callers are served (verify_jwt = false in supabase/config.toml): generation
  * spends no credits and touches no account row, so the rate guard is its only ceiling,
@@ -23,7 +24,8 @@
  * limiter error is a 429), per `_shared/rateLimit.ts`.
  *
  * Staff (profiles.role 'developer' | 'admin' — `src/lib/staffEntitlements.js ::
- * STAFF_ROLES`, mirrored below) are unlimited. A role read error reads as NOT staff.
+ * STAFF_ROLES`, the roles `src/store/authSlice.js :: isElevated` reads, mirrored below)
+ * are unlimited. A role read error reads as NOT staff.
  */
 
 import { serve } from 'https://deno.land/std@0.177.0/http/server.ts';
@@ -174,6 +176,12 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   const userId = await resolveUserId(admin, authHeader);
   if (userId && await isSessionSuperseded(admin, userId, authHeader, deviceLabelFromRequest(req))) {
     return json({ error: 'session_superseded' }, 401, cors);
+  }
+  if (userId) {
+    // Fail closed, as construct-settlement does: only a definite `true` proceeds.
+    const { data: isActive, error: activeErr } = await admin.rpc('account_is_active', { p_uid: userId });
+    if (activeErr) logError(FN, userId, 'account_is_active errored', { stage: 'account' });
+    if (isActive !== true) return json({ error: 'Account is not active' }, 403, cors);
   }
   const staff = userId ? await isStaff(admin, userId) : false;
 
