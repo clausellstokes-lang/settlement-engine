@@ -79,7 +79,10 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 387 → 475 at FOOD-1 (ODQ §934.104, 2026-11-03; record docs/shift-records/2026-11-03-food-1-one-food-record.json):
     // the Foundations food score reads the balance and the reserves, so the pulse's food pressure re-deals the realm's
     // year and the year-one desk carries 88 more items (385 → 473).
-    expect(Object.keys(manifest)).toHaveLength(475);
+    // 475 → 473 at FOOD-2 (ODQ §934.104, 2026-11-03; record docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+    // the food base numbers read one terrain table and draw the hinterland as supply, so the pulse's food pressure
+    // re-deals the year again and the year-one desk carries two fewer items (473 → 471). The misjudgment ids do not move.
+    expect(Object.keys(manifest)).toHaveLength(473);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
