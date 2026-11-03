@@ -838,6 +838,40 @@ export async function buildObservedCorpus({
     });
   }
 
+  // ── Producer 1c: the FED-WORLD famine topology pass (schema 26). TOPOLOGY ONLY. ──
+  //
+  // ⭐ THE SAME LAW AS 1b, ONE STEP WIDER: these settlements enter `roots` and NOT
+  // `generated`, so producer 2's pulse, its saves, its steadings, the scalar stream and
+  // all four execution keys are byte-for-byte untouched.
+  //
+  // WHY IT EXISTS. FOOD-1 (b2aa5f5fa) and FOOD-2 (a7f13fef4) made the sample worlds feed
+  // themselves, so `economy/foodBalance.js` stopped writing its `issues` rows on the
+  // unstressed configs: the shape fell from 186 rows to 30, under `MIN_ROWS` (40), and the
+  // detector stopped judging it at all — `institution on issues` in the PDF view model
+  // read as GONE while both reads still stood (the erasure guard's INSTRUMENT EROSION).
+  // Famine on the three configs 1b does not cover brings the shape back to 49 rows and
+  // both rows back, and MEASURED against the frozen register it creates NOTHING new.
+  //
+  // ⛔ WHY ONLY FAMINE AND ONLY CONFIGS 1–3, AND WHY NOT A PULSE. Every stimulus that
+  // reaches the pulse writers FOOD stopped reaching (tier drift, depletion,
+  // `resourceHistory`) was measured to re-deal 13–197 rows and still missed
+  // `outcome.tierChange` (lane OSR-RUNG, 2026-11-03); the chair ruled those rows admitted
+  // as debt instead (ODQ §934.104). Widen this pass only with the same before/after row
+  // reconciliation, and never through `generated`.
+  const FED_WORLD_TOPOLOGY_TYPES = Object.freeze(['famine']);
+  for (const config of CONFIGS.slice(1)) {
+    for (const seed of SEEDS) {
+      roots.push({
+        name: 'settlement',
+        value: generateSettlementPipeline(
+          { ...config, stressTypes: [...FED_WORLD_TOPOLOGY_TYPES] },
+          null,
+          { seed, customContent: {} },
+        ),
+      });
+    }
+  }
+
   // ── Producer 2: the campaign world pulse over those REAL saves. ──
   const ids = generated.map((_, i) => `osr${String(i).padStart(3, '0')}`);
   const saves = generated.map((settlement, i) => ({

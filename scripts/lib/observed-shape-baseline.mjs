@@ -7,7 +7,20 @@
  *
  * ── ⭐⭐ EIGHT IDENTITY DEFINITIONS LIVE HERE, AND ONLY ONE IS THE AUTHORITY ──
  *
- * `BASELINE_SCHEMA` is **25**: schema 24's tagged numeric heuristic-leaf envelope, tag law,
+ * `BASELINE_SCHEMA` is **26**: schema 25's tagged numeric heuristic-leaf envelope, tag law and
+ * ten-identity roster UNCHANGED, re-governed to THE FED WORLD (the chair's ruling (i) on lane
+ * OSR-RUNG's STOP, 2026-11-03, ODQ §934.104). FOOD-1 (b2aa5f5fa) and FOOD-2 (a7f13fef4) made the
+ * corpus's sample worlds feed themselves, and two things followed. The `issues` shape thinned
+ * from 186 rows to 30, under `MIN_ROWS`, so the detector stopped judging it; the corpus builder
+ * gains a famine TOPOLOGY pass (roots only, the schema-17 shape) that brings it back to 49 rows
+ * and creates nothing new. And the main pulse stopped reaching tier drift, depletion and
+ * `resourceHistory`, so 22 reads in 17 files lost the shapes that resolved them; every stimulus
+ * that reaches those writers re-deals 13–197 rows and still misses `outcome.tierChange`, so the
+ * rows are ADMITTED as ordinary debt under the review's notes (the schema-24 shape), for an
+ * engine lane to cure. Four rows go and two shrink in the same reconciliation. Its full rationale
+ * lives beside `FED_WORLD_TARGET_SCHEMA` in `migrate-observed-shape-readers.mjs`.
+ *
+ * `RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA` is **25**: schema 24's tagged numeric heuristic-leaf envelope, tag law,
  * ten-identity roster and register ALL UNCHANGED, re-governed to THE 2026-10 ADVISORY
  * LOCKFILE BUMP (the chair's ruling of 2026-10-23 on the fix lane's STOP, under the
  * schema-13 precedent — TE-MINT-1, ODQ §783.3/§821/§825). `npm audit --audit-level=high
@@ -391,7 +404,14 @@ export const RETIRED_EDIT_MODE_READERS_BASELINE_SCHEMA = 23;
  *  live baseline is validated against BASELINE_SCHEMA, and this constant exists so a
  *  schema-24 PREDECESSOR is still validated as schema 24 after the live number moves past it. */
 export const RETIRED_CORPUS_REDEAL_BASELINE_SCHEMA = 24;
-export const BASELINE_SCHEMA = 25;
+/** The RETIRED advisory-lockfile definition — schema 26's predecessor. Same tagged topology
+ *  envelope, roster and fence; schema 26 re-governs it to the fed world, with a corpus that
+ *  observes `issues` again and a register that admits the 22 rows the fed world's pulse no
+ *  longer resolves. Never redefined, never deleted — a live baseline is validated against
+ *  BASELINE_SCHEMA, and this constant exists so a schema-25 PREDECESSOR is still validated as
+ *  schema 25 after the live number moves past it. */
+export const RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA = 25;
+export const BASELINE_SCHEMA = 26;
 /** The RETIRED exact per-site definition. Never redefined, never deleted. */
 export const RETIRED_EXACT_BASELINE_SCHEMA = 3;
 /** The RETIRED UNFILTERED heuristic-leaf definition — schema 5's predecessor.
@@ -1021,10 +1041,21 @@ export function validateSchema24Baseline(baseline) {
   );
 }
 
+/** The RETIRED authority — schema 25's tagged envelope, re-governed by schema 26 to the fed
+ *  world. Re-bound to its own LITERAL now that the authority has moved to 26, for the same
+ *  reason as every retired validator above. */
+export function validateSchema25Baseline(baseline) {
+  return validateLeafBaseline(
+    baseline,
+    RETIRED_ADVISORY_LOCKFILE_BASELINE_SCHEMA,
+    { tagged: true },
+  );
+}
+
 /** The LIVE envelope validator. Bound to `BASELINE_SCHEMA` rather than a literal,
  *  so the retired rungs above keep validating their own numbers while this one
  *  always names the authority. */
-export function validateSchema25Baseline(baseline) {
+export function validateSchema26Baseline(baseline) {
   return validateLeafBaseline(baseline, BASELINE_SCHEMA, { tagged: true });
 }
 
