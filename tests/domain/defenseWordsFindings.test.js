@@ -11,6 +11,8 @@
  * chair's ruling: the Defense tab prints NO stored food; its granary/stores row leaves the tab
  * entirely and the Economy tab prints the months once. `defenseFactsOf` keeps
  * `storedFoodMonths` for the certification check only.
+ * ⭐ Since X-52 (lane DEFENSE-3) the tab carries ONE "Food endurance" line that reads the food
+ * record for a siege and links to the Economy tab's stores row; the silence pin lifts it out.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import React from 'react';
@@ -31,6 +33,7 @@ import { drawnAtMount } from '../../src/domain/display/stateProse/dossierMounts.
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 import { deriveCriminalStructure } from '../../src/domain/display/defenseDisplay.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const SMALL = ['thorp', 'hamlet', 'village'];
 
@@ -154,6 +157,7 @@ describe('the Defense tab says only what the place has', () => {
   it('the charter-hall hamlet no longer prints "garrison pay" beside "No walls or garrison"', () => {
     const s = world('defense-hamlet-1');
     const row = deriveDefenseReadiness(s).find((r) => r.label === 'Invasion & War');
+    // anchored: the next line pins the same note's whole text
     expect(row.fundingNote).not.toMatch(/garrison pay/);
     expect(row.fundingNote).toMatch(/^Upkeep underfunded: defence upkeep for the adventurers' charter hall at \d+%$/);
   });
@@ -169,19 +173,29 @@ describe('the Defense tab says only what the place has', () => {
     expect(med.status).toBe('Healer');
     expect(med.note).toContain('Healer (divine, 1st level)');
     const disaster = buildThreatAssessment(s).find((r) => r.label === 'Disasters & Famine').assess;
+    // anchored: the row was found by its label (a missing row throws on .assess) and the healer is named above
     expect(disaster).not.toMatch(/Hospital/);
   });
 
-  it('the Defense tab\'s rendered text carries no stored-food or granary sentence (the owner\'s word: stored food is the Economy tab\'s)', () => {
+  it('the Defense tab\'s rendered text carries no stored-food or granary sentence except the one Food endurance line (the owner\'s words: stored food is the Economy tab\'s; its siege reading is Food endurance)', () => {
     // The tab's own markup (React SSR; collapsed rows are not in it) PLUS every row the tab
     // renders on expansion, drawn the way the tab draws it.
-    for (const { seed, settlement } of CORPUS) {
-      const markup = renderToStaticMarkup(React.createElement(DefenseTab, { settlement }))
+    // ⭐ X-52 (lane DEFENSE-3; the owner, 2026-11-03: "i think stored food should have a version
+    // or reference in defense because that is a major compoenent of a siege warfare", then "call
+    // it food endurance rather than siege endurance"): ONE line reads the food record for a
+    // siege and is a door to the Economy tab's stores row (tests/domain/foodEnduranceLine.test.js
+    // pins it). It is lifted out, once, and everything else stays silent about stored food.
+    expectNoSeedFailures(collectSeedFailures(CORPUS, ({ seed, settlement }) => {
+      const html = renderToStaticMarkup(React.createElement(DefenseTab, { settlement }));
+      const enduranceLines = html.match(/<p data-testid="defense-food-endurance"[\s\S]*?<\/p>/g) || [];
+      expect(enduranceLines, seed).toHaveLength(1);
+      const markup = html.replace(enduranceLines[0], ' ')
         .replace(/<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&#x27;/g, "'").replace(/&amp;/g, '&');
       const text = [markup, ...ownedDefenseText(settlement)].join('\n');
       expect(text, seed).toMatch(/\bDisasters & Famine\b/);
+      // anchored: the same text matched Disasters & Famine on the line above
       expect(text, seed).not.toMatch(STORED_FOOD_RE);
-    }
+    }), 'no stored-food sentence beside the one Food endurance line');
   });
 
   it('over 64 small places, no owned Defense sentence claims a defence, a hospital or an empty store the record lacks', () => {

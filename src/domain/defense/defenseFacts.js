@@ -111,3 +111,63 @@ export function defenseFactsOf(settlement) {
     storedFoodMonths: typeof months === 'number' && Number.isFinite(months) ? months : null,
   });
 }
+
+// ── FOOD ENDURANCE (lane DEFENSE-3, X-52, 2026-11-03) ───────────────────────────────────
+// The owner: "i think stored food should have a version or reference in defense because that
+// is a major compoenent of a siege warfare", then "call it food endurance rather than siege
+// endurance". A READING of the one food record (`economicState.foodSecurity.foodRecord`,
+// `foodBalance.js :: deriveFoodRecord`), never a second figure source: the months in store
+// stay the Economy tab's row; this says how long they last once the place is shut in.
+
+/**
+ * The share of its harvest a place keeps under siege: THE FOOD WRITER'S OWN `under_siege`
+ * multiplier (`foodGenerator.js :: generateFoodSecurity` and `foodBalance.js ::
+ * deriveFoodBalanceAnalysis`, both `productionMult *= 0.6`: the outlying farmland is
+ * abandoned or razed). Neither writer exports it, so it is spelled here once and
+ * tests/domain/foodEnduranceLine.test.js holds it equal to the writer's own `stressModifier`;
+ * it is not a tunable of this file.
+ */
+export const SIEGE_HARVEST_KEPT = 0.6;
+
+/**
+ * @typedef {object} FoodEndurance
+ * @property {number} storedMonths the record's months in store (`foodRecord.storageMonths`)
+ * @property {boolean} hasGranary a real granary stands (`foodRecord.hasGranary`)
+ * @property {boolean} besieged the record was written under a siege, so its harvest is already the siege harvest
+ * @property {number} keptShare the share of the daily need the place still grows once besieged
+ * @property {number|null} fullRationMonths months the stores last at full rations, or null when what is still grown feeds the place
+ * @property {number|null} halfRationMonths months the stores last on half rations, or null when what is still grown covers half rations
+ */
+
+/**
+ * FOOD ENDURANCE: how long the stores carry the place under siege. The hinterland's carts and
+ * the trade routes are cut (the food writer's own siege: `hinterlandSupply` 0, route
+ * isolated), the place keeps `SIEGE_HARVEST_KEPT` of what it grows, and the stores cover the
+ * rest: months = storageMonths ÷ (rations − kept share). A place already besieged at birth
+ * has the siege harvest in its record, so its share is not cut twice. Magic supply is not
+ * counted: the record does not say which channel survives a blockade.
+ *
+ * @param {{ economicState?: unknown } | null | undefined} settlement
+ * @returns {Readonly<FoodEndurance> | null} null when the place carries no food record with months in store
+ */
+export function foodEnduranceOf(settlement) {
+  const foodSecurity = /** @type {{ hasSiege?: unknown, foodRecord?: { storageMonths?: unknown, hasGranary?: unknown, grownPct?: unknown } } | null | undefined} */ (
+    /** @type {{ foodSecurity?: unknown } | null | undefined} */ (settlement?.economicState)?.foodSecurity
+  );
+  const record = foodSecurity?.foodRecord;
+  const stored = record?.storageMonths;
+  if (typeof stored !== 'number' || !Number.isFinite(stored) || stored <= 0) return null;
+  const grown = typeof record?.grownPct === 'number' && Number.isFinite(record.grownPct) ? Math.max(0, record.grownPct) : 0;
+  const besieged = foodSecurity?.hasSiege === true;
+  const keptShare = (grown / 100) * (besieged ? 1 : SIEGE_HARVEST_KEPT);
+  // Full rations draw (1 − kept) of a month's need from the stores each month; half rations
+  // draw (½ − kept), so the stores last 2·stored ÷ (1 − 2·kept) months.
+  return Object.freeze({
+    storedMonths: stored,
+    hasGranary: record?.hasGranary === true,
+    besieged,
+    keptShare,
+    fullRationMonths: keptShare < 1 ? stored / (1 - keptShare) : null,
+    halfRationMonths: 2 * keptShare < 1 ? (2 * stored) / (1 - 2 * keptShare) : null,
+  });
+}
