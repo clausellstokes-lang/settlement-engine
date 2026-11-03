@@ -5933,8 +5933,8 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[street]` In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.
 
 **`NO-MARKET`**
-1. `[counterforce]` {settlement} keeps no market worth the name; exchange here happens at doorsteps and in yards, at the scale the town actually needs.
-2. `[visitor]` Nothing in {settlement} is arranged for buying and selling in quantity, which tells a stranger the essential thing about the place.
+1. `[counterforce]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
+2. `[visitor]` A stranger finds no market square in {settlement}, only trade done at the gate, at the inn and along the road.
 
 ---
 

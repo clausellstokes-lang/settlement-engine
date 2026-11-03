@@ -103,6 +103,14 @@ const OTHER_HOSTS = Object.freeze({
   // drops `whiteSpace: 'nowrap'` to `'normal'` exactly where the pill joins the figure,
   // so the pill takes its own line inside a narrow column instead of spilling out of one.
   'src/components/pricing/PricingBands.jsx': 2, // the ladder's free + cartographer <td> cells
+  // TWO TEASER CARDS, LOOKED AT (cure lane T10, 2026-10-30; owner addendum X-7a..c, landed
+  // by T3's 252530c3). The War and Rumors tabs' launch teasers carry the pill bare, as the
+  // first child of a block <div> card (`war-teaser`, `rumors-teaser`) the full width of the
+  // tab, above one paragraph. Not a Button and no controls (X-7b, pinned by
+  // tests/components/dossierDepthTabs.test.jsx), no flex row and no clipping ancestor, so
+  // the pill has the card's whole line and nothing it can spill out of.
+  'src/components/new/tabs/RumorsTab.jsx': 1, // block <div> teaser card
+  'src/components/new/tabs/WarTab.jsx': 1, // block <div> teaser card
   'src/components/primitives/LockedDestination.jsx': 1, // raw <button>
   'src/components/settlement/NextActionRail.jsx': 1, // block <span>
 });

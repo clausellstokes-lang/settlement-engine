@@ -6,6 +6,12 @@ import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
+import { PROXY_SERVICE_HOSTS } from '../../data/servicesData.js';
+// X-35 (the owner, 2026-11-01): the row is the SINK of the Institutions card's service door. It
+// declares the index's own anchor and follows THE ONE FOCUS CONVENTION (X-20 (c)), so a click on a
+// house's service lands with this row at the top of the Services tab.
+import { entityAnchor, entityIdFor, serviceEntityOf } from '../../domain/dossier/entityLinks.js';
+import { useEntityFocus } from '../dossier/useEntityFocus.js';
 
 // ── ServiceItem ───────────────────────────────────────────────────────────────
 export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDeps, impaired, degraded, vulnerable, depReasons, chainDepth=null, settlement=null }) {
@@ -14,6 +20,9 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // and the institution attribution keep their own steps: they are the row's
   // scannable furniture, and this row repeats dozens of times down the tab.
   const mobile = useIsMobile();
+  // X-35: the row's own entity id and anchor, computed exactly as the index computes them.
+  const entity = serviceEntityOf(svc);
+  const { ref: focusRef } = useEntityFocus(entityIdFor('service', entity));
   // ⛔ TWO BINDINGS, AND THE SPLIT IS THE POINT (§934.13). `name` stays the RAW service
   // key because it is a LOOKUP below — impaired/degraded/vulnerable sets and depReasons are
   // all keyed by the engine's spelling. `displayName` is the only one that reaches the page.
@@ -24,6 +33,13 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
   // §14 — services the user authored (or produced by a custom institution) carry
   // a `custom`/`source` flag; the dossier tints their row gold with a ✦ marker.
   const isCustom = typeof svc === 'object' && (svc.custom === true || svc.source === 'custom');
+  // RS-19: a native service whose host is a PROXY (the generator surfaced an inn's menu
+  // through a Sewage system or a Housing row, servicesData.js :: PROXY_SERVICE_HOSTS) names
+  // no institution: better unsaid than a false claim. A proxy row applies only when no
+  // catalog key matches the name exactly, and tests/joins/services.test.js forbids a row
+  // shadowing one, so the host's name alone answers it. `inst` stays the lookup key below.
+  const viaProxy = !isCustom && Boolean(PROXY_SERVICE_HOSTS[inst.toLowerCase()]);
+  const attribution = viaProxy ? '' : inst;
   const isImp = impaired?.has(name) || impaired?.has(inst);
   const isDeg = !isImp && (degraded?.has(name) || degraded?.has(inst));
   const isVul = !isImp && !isDeg && (vulnerable?.has(name) || vulnerable?.has(inst));
@@ -37,7 +53,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
     : null;
 
   return (
-    <div style={{
+    <div ref={focusRef} id={entityAnchor('service', entity)} data-testid="service-row" style={{
       display:'flex', alignItems:'flex-start', gap:8, padding:'5px 8px',
       ...(isCustom && !isImp && !isDeg
         ? { ...GOLD_TINT, borderWidth:1, borderStyle:'solid' }
@@ -66,7 +82,7 @@ export function ServiceItem({ svc, accent='#6b5340', isCriminal=false, _tradeDep
             honest element for a line whose child may open a dialog. The two paragraphs above
             keep their `<p>`: their children are inline-only.
             @enforced-by tests/components/servicesInstitutionCardNesting.test.jsx */}
-        {inst&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={inst} settlement={settlement} /></div>}
+        {attribution&&<div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:isCriminal?'#7a4040':'#9c8068',margin:'1px 0 0',fontStyle:'italic'}}><InstitutionLink name={attribution} settlement={settlement} /></div>}
         {(isImp||isDeg)&&depReasons&&(depReasons.get(name)||depReasons.get(inst))&&(()=>{
           const r=depReasons.get(name)||depReasons.get(inst);
           return <p style={{fontSize:proseFontSize(FS.xxs,mobile),color:isImp?'#8b1a1a':'#8a4010',margin:'3px 0 0',lineHeight:1.3}}>

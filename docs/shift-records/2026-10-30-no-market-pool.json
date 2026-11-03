@@ -1,0 +1,11 @@
+{
+  "_doc": "THE DOSSIER CONSOLIDATION PROGRAM's NO-MARKET pool rewrite (ODQ §934.101, chair addendum T1-13), one signed shift. DS-GEN-13's two NO-MARKET variants said 'Nothing in X is arranged for buying and selling in quantity' / 'exchange here happens ... at the scale the town actually needs' beside an Economics page saying 'This is a town that sells'; on the v2 sample 131 of 1000 towns (merged tip, with BUILD-T1's first-clause trim) carried the contradiction, 0 after. The variants now state only the institution fact (no market or fair stands; trade is done at the gate, the inn, the road). MEASURED BEFORE THE WRITE at the committed tip 99fd06a7 (claude/ux-T1 rebased on claude/ux-consolidation-2026-10-30 @ 7a4255ed): dossier-prose-manifest 406 rows of composed prose move (the NO-MARKET towns of the drift corpus at both audiences: 203 towns x 2), key set and cell tally unchanged; generator-golden-master unmoved (display-time prose). Also moved, down, in the corpus commit 8a26402d: the prose byte baseline (general leaf raw 249940 -> 249903) and the proseEntryContradiction trailing-coordinate count (329 -> 328). The chair signs under the owner's delegation quoted below (vetoable); a successor chair does not inherit this signature.",
+  "ownerWords": "I also now defer and give all judgment to you that is required now or in the future.",
+  "ownerDate": "2026-10-30",
+  "odqRow": "§934.101 of docs/OWNER_DECISION_QUEUE.md (THE DOSSIER CONSOLIDATION PROGRAM, recorded 2026-10-30 on claude/ux-consolidation-2026-10-30 at 46109419)",
+  "cause": "the no-market pool states the institution fact and no longer denies commerce (T1-13)",
+  "seat": "BUILD LANE T1 under the cloud chair, session 01FE9mEwG1m6iRqUDCrMCQPc (Opus 5.5), executing the door write from the committed tree of claude/ux-T1 rebased on claude/ux-consolidation-2026-10-30 @ 7a4255ed",
+  "surfaces": [
+    { "surface": "dossier-prose-manifest", "action": "re-record", "predictedRows": 2, "proofForm": "derived-artefact" }
+  ]
+}

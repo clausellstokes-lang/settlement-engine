@@ -11,7 +11,7 @@ import { lazy as _lazy, Suspense as _Suspense } from 'react';
 import { getTierDisplayName, getActivePacks } from '../../config/pricing.js';
 import { isConfigured } from '../../lib/supabase.js';
 import { t } from '../../copy/index.js';
-import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER } from '../theme.js';
+import { GOLD, GOLD_BG, INK, MUTED, SECOND, CARD, sans, serif_, SP, FS, swatch, AMBER, launchSkin } from '../theme.js';
 import Section from './AccountSection.jsx';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
@@ -226,9 +226,13 @@ export default function AccountSubscriptionSection({
               return (
                 <button key={key} type="button" onClick={() => handlePurchase(key)}
                   disabled={!purchasesAreOpen || purchasing || !isConfigured}
+                  data-skin={purchasesAreOpen ? undefined : 'launch'}
+                  // THE LAUNCH SKIN (X-39): a raw purchase tile wears the regal ground and the
+                  // gold inks while locked, as every Button carrying the pill does.
                   style={{
                     flex: 1, padding: `${SP.md}px ${SP.sm}px`,
-                    background: CARD, border: `2px solid ${accent}20`,
+                    background: purchasesAreOpen ? CARD : launchSkin.ground,
+                    border: purchasesAreOpen ? `2px solid ${accent}20` : `1px solid ${launchSkin.border}`,
                     cursor: purchasesAreOpen ? 'pointer' : 'not-allowed', fontFamily: sans,
                     display: 'flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs,
                     opacity: purchasing ? 0.6 : 1, position: 'relative',
@@ -240,10 +244,10 @@ export default function AccountSubscriptionSection({
                       color: swatch.white, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
                     }}>{p.discount}</span>
                   )}
-                  <span style={{ fontSize: FS.lg, fontWeight: 700, color: INK }}>{p.credits}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>credits</span>
-                  <span style={{ fontSize: FS.md, fontWeight: 700, color: accent }}>{p.price}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
+                  <span style={{ fontSize: FS.lg, fontWeight: 700, ...(purchasesAreOpen ? { color: INK } : launchSkin.shimmer) }}>{p.credits}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: purchasesAreOpen ? MUTED : launchSkin.ink }}>credits</span>
+                  <span style={{ fontSize: FS.md, fontWeight: 700, color: purchasesAreOpen ? accent : launchSkin.ink }}>{p.price}</span>
+                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: purchasesAreOpen ? MUTED : launchSkin.ink }}>{purchasing === key ? 'Redirecting...' : p.perCredit + '/ea'}</span>
                   {/* The pill wraps inside the tile with narrower side padding, so three
                       tiles still share a 375px phone row; narrower screens wrap the row. */}
                   {!purchasesAreOpen && (

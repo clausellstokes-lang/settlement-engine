@@ -141,6 +141,51 @@ function restateProseCounts(merged) {
   return restated;
 }
 
+/** `V-EVIDENCE-CONFLICT`'s own `CONFLICT_RE`: an evidence row that cites one conflict by position. */
+const CONFLICT_CITED = /^conflicts\[(\d+)\]$/;
+
+/**
+ * THE THIRD RESTATEMENT: the coherence receipt's CONFLICT CITATIONS, rebuilt from the MERGED
+ * record's own `conflicts` (chair ruling X-29, cure lane T13). Since GS-2 (ODQ §934.101) a
+ * conflict is a DERIVATION of the power set and the ties, so a power-card edit can re-derive in
+ * `R1` a list the held record does not carry; a citation taken from `R1` by position is then
+ * stale by construction, exactly as the two prose counts above are, and no rung can cure it
+ * because the only other cure is the held key. The rows are rebuilt the way the receipt's own
+ * producer writes them (`src/generators/generationReceiptJudgments.js ::
+ * dramaticTensionAssessment`): one row per EXPLAINED conflict, labelled by its name, its type or
+ * its ordinal, carrying the judgment's own detail text, in the place the first cited row stood.
+ * A judgment that cites no conflict is left alone: there is no row to restate. On a generated
+ * record this is the identity. `conflicts` keeps its HELD class; only the receipt moves.
+ * ⛔ MODULE-LOCAL, as `restateProseCounts` is (recordMerge.test.js A8 counts five exports).
+ * @param {RecordCard} merged @returns {number} judgments whose conflict citations were restated
+ */
+function restateConflictCitations(merged) {
+  const receipt = merged.generationCoherenceReceipt;
+  const conflicts = merged.conflicts;
+  if (!isObj(receipt) || !Array.isArray(receipt.judgments) || !Array.isArray(conflicts)) return 0;
+  const cites = (/** @type {unknown} */ row) => isObj(row) && CONFLICT_CITED.test(String(row.path));
+  let restated = 0;
+  for (const judgment of receipt.judgments) {
+    if (!isObj(judgment) || !Array.isArray(judgment.evidence)) continue;
+    const first = judgment.evidence.findIndex(cites);
+    if (first < 0) continue;
+    const detail = /** @type {RecordCard} */ (judgment.evidence[first]).detail;
+    /** @type {RecordCard[]} */
+    const rows = [];
+    conflicts.forEach((entry, index) => {
+      const card = isObj(entry) ? entry : {};
+      const explanation = card.description || card.desc || card.tension || card.issue || card.cause || card.reason;
+      if (!String(explanation || '').trim()) return;
+      const label = card.name || card.type || `Conflict ${index + 1}`;
+      rows.push({ path: `conflicts[${index}]`, detail, evidence: String(label) });
+    });
+    const kept = judgment.evidence.filter((row) => !cites(row));
+    const next = [...kept.slice(0, first), ...rows, ...kept.slice(first)];
+    if (JSON.stringify(next) !== JSON.stringify(judgment.evidence)) { judgment.evidence = next; restated += 1; }
+  }
+  return restated;
+}
+
 /**
  * The one declared RECEIPT — `powerStructure.economyInputFingerprint` — recomputed LAST, over the
  * merged record. ⛔ It is never taken from `R1`: wherever a declared group kept the record's own
@@ -149,6 +194,7 @@ function restateProseCounts(merged) {
  */
 export function recomputeReceipts(merged) {
   restateProseCounts(merged);
+  restateConflictCitations(merged);
   const power = merged.powerStructure;
   const economy = merged.economicState;
   if (!isObj(power) || !isObj(economy)) return false;

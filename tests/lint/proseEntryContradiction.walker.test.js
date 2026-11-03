@@ -648,7 +648,10 @@ describe('THE ANTI-VACUITY GUARD — the walker must fail on the corpus it ships
     // R1, or "every variant is withheld" would satisfy the line above.
     const carrying = leaves.filter((e) => walkEntry(e, ground).withheld
       .some((f) => f.klass === 'Q' && /trailing coordinate/.test(f.arm)));
-    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(329);
+    // 329 -> 328 (2026-10-30, ODQ §934.101, chair ruling T1-13): DS-GEN-13's NO-MARKET variant
+    // "Nothing in {settlement} is arranged for buying and selling in quantity, which tells a
+    // stranger..." carried a trailing coordinate; its rewrite states the institution fact only.
+    expect(carrying.length, 'entries carrying the trailing-coordinate class, at this tip').toBe(328);
     expect(carrying.length, 'and it is a minority of the 2,266 R1 variants').toBeLessThan(leaves.length / 2);
     console.log(`  Q · trailing coordinate: ${carrying.length} of ${leaves.length} R1 entries carry the class`);
   });

@@ -1,4 +1,5 @@
 import { swatch } from '../theme.js';
+import { SERVICE_LABELS } from '../../domain/display/servicesDisplay.js';
 // Shared constants for all tab components
 
 // F28 — the old `isMobile = () => window.innerWidth < 640` helper was a
@@ -17,7 +18,6 @@ export const BODY = swatch['#6B5340'];
 export const PROSPERITY_COLORS = {Poverty:'#8b1a1a',Impoverished:'#8b1a1a',Struggling:'#8a4010',Poor:'#8a4010',Moderate:'#7a5010',Modest:'#7a5010',Comfortable:'#1a5a28',Prosperous:'#1a4a2a',Wealthy:'#1a5a28',Thriving:'#0a3a18'};
 export const EVENT_COLORS = {disaster:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0',label:'Disaster'},political:{color:'#1a3a7a',bg:'#f4f6fd',border:'#c0cce8',label:'Political'},economic:{color:'#a0762a',bg:'#faf6ec',border:'#e0d0a0',label:'Economic'},religious:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8',label:'Religious'},magical:{color:'#2a5a8a',bg:'#f4f8fd',border:'#b8cce8',label:'Magical'}};
 export const SEV_COLORS = {minor:'#6b5340',major:'#a0762a',catastrophic:'#8b1a1a'};
-export const SERVICE_META = {lodging:{label:'Lodging',accent:'#2a3a7a',icon:'\u{1F3E0}'},food:{label:'Food & Drink',accent:'#1a5a28',icon:'\u{1F37A}'},equipment:{label:'Equipment',accent:'#a0762a',icon:'\u2694\uFE0F'},magic:{label:'Magical Services',accent:'#5a2a8a',icon:'\u2728'},information:{label:'Information',accent:'#1a5a6a',icon:'\u{1F4DC}'},healing:{label:'Healing',accent:'#8b1a1a',icon:'\u2695\uFE0F'},transport:{label:'Transportation',accent:'#2a4a7a',icon:'\u{1F40E}'},legal:{label:'Legal & Financial',accent:'#3a3a3a',icon:'\u2696\uFE0F'},entertainment:{label:'Entertainment',accent:'#7a3a1a',icon:'\u{1F3AD}'},employment:{label:'Employment',accent:'#1a4a2a',icon:'\u{1F4CB}'},criminal:{label:'Criminal Services',accent:'#3a1a1a',icon:'\u{1F5E1}\uFE0F',note:'Available if you know where to look'}};
 // Canonical index-keyed faction palette for the dossier. Single source of truth
 // for the Power tab's stacked faction bar and the Summary tab's faction bar —
 // both import this instead of forking their own arrays. (Consolidated from four
@@ -40,19 +40,18 @@ export const relStyle = t => REL_STYLES[t] || {color:'#6b5340',bg:'#faf8f4',bord
 // and the accent colour carry the category. Do not reintroduce an icon slot;
 // tests/lint/copyCorruption.test.js SIG 1 bans the empty-string form outright,
 // and tests/components/serviceCategoryIcons.test.jsx pins the absence of glyphs.
-export const Ts = {
-  lodging:     { label:'Lodging',           accent:'#2a3a7a' },
-  food:        { label:'Food & Drink',      accent:'#1a5a28' },
-  equipment:   { label:'Equipment',         accent:'#a0762a' },
-  magic:       { label:'Magical Services',  accent:'#5a2a8a' },
-  information: { label:'Information',       accent:'#1a5a6a' },
-  healing:     { label:'Healing',           accent:'#8b1a1a' },
-  transport:   { label:'Transportation',    accent:'#2a4a7a' },
-  legal:       { label:'Legal & Financial', accent:'#3a3a3a' },
-  entertainment:{ label:'Entertainment',    accent:'#7a3a1a' },
-  employment:  { label:'Employment',        accent:'#1a4a2a' },
-  criminal:    { label:'Criminal Services', accent:'#3a1a1a', note:'Available if you know where to look' },
+// LABELS HAVE ONE SOURCE (RS-14, chair ruling 2026-10-30): servicesDisplay.js ::
+// SERVICE_LABELS. This table keeps only what is the screen's own, the accent. The dead,
+// emoji-bearing SERVICE_META copy and the criminal card's note ("Available if you know
+// where to look", R1: the descs already say so) are deleted.
+const SERVICE_ACCENTS = {
+  lodging: '#2a3a7a', food: '#1a5a28', equipment: '#a0762a', magic: '#5a2a8a',
+  information: '#1a5a6a', healing: '#8b1a1a', transport: '#2a4a7a', legal: '#3a3a3a',
+  entertainment: '#7a3a1a', employment: '#1a4a2a', criminal: '#3a1a1a',
 };
+export const Ts = Object.fromEntries(
+  Object.entries(SERVICE_ACCENTS).map(([key, accent]) => [key, { label: SERVICE_LABELS[key], accent }]),
+);
 
 
 // Expected service categories per tier (used by ServicesTab to flag missing

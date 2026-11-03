@@ -8,7 +8,8 @@
  * MOVED against the settlement's own usual price (the seeded trade profile + the
  * M6a stock bands + the M6d flow drift) — never a coin figure. The coin itself
  * is the DM's to set at the table (§776.1); this section hands them the honest
- * movement to price against. Renders ONLY when `prices.present`.
+ * movement to price against. Renders ONLY when `prices.present` AND something moved
+ * (`pricesMoved`).
  *
  * READING ORDER (the legibility law): the crier's one-line glance, then the
  * moved goods each with their spoken movement, then the steady goods folded
@@ -73,6 +74,21 @@ function TradeColumn({ heading, color, quotes }) {
 }
 
 /**
+ * WHETHER THE CRIER HAS ANYTHING TO SAY (UX consolidation 2026-10-30, RULINGS-T2 T2-5;
+ * RUBRIC R2). Off-campaign every quote reads `usual` (1000/1000 measured), and the section
+ * then printed "At their usual prices:" over the very goods the Trade Profile chips list
+ * one section up. It renders only when at least one quote has MOVED or the crier has a
+ * highlight; a steady market is already said by the chips.
+ * @param {{ exports?: Array<{movement:string}>, imports?: Array<{movement:string}>, highlight?: object|null }|null|undefined} prices
+ * @returns {boolean}
+ */
+export function pricesMoved(prices) {
+  if (!prices) return false;
+  if (prices.highlight) return true;
+  return [...(prices.exports || []), ...(prices.imports || [])].some(q => q?.movement !== 'usual');
+}
+
+/**
  * @param {{ prices: { present:boolean,
  *   exports: Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}>,
  *   imports: Array<{id:string,label:string,phrase:string,movement:string,tag:'dear'|'steady'|'cheap'}>,
@@ -82,6 +98,7 @@ export default function MarketPricesSection({ prices }) {
   // THE PHONE PROSE FLOOR — the crier's line and the reckoning note beneath the
   // columns. The band chips keep their own step.
   const mobile = useIsMobile();
+  if (!pricesMoved(prices)) return null;
   return (
     <Section title="Market Prices" collapsible defaultOpen accent={GOLD_DEEP}>
       {prices.highlight && (

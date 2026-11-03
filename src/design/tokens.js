@@ -73,6 +73,29 @@ const lightColors = Object.freeze({
   'slate-700': '#435463',  // AI TEXT on slate-100
   'slate-100': '#E4E9EE',
 
+  // Launch — THE OWNER, 2026-11-01 (ODQ §934.103): the dossier tabs that stand in the
+  // strip as "Available at launch" teasers (War, Rumors & News, Faith while no live body
+  // exists) wear "a purpleish hue just for distinction" and, the owner's second word the
+  // same day, "purple hue with gold lettering". A register of its own, not the AI slate
+  // (C13) and not the gold of the simulation's live tabs. The pairs, each measured
+  // (tests/design/contrast.test.js recomputes): an IDLE teaser tab is the launch-100 wash
+  // with gold-800 letters (6.3:1, AA) under a launch-500 rule; the ACTIVE teaser tab is
+  // the launch-700 fill with gold-400 letters (4.7:1, AA) under a gold-500 rule
+  // (3.3:1 on the fill, the non-text floor). Gold-500 as TEXT fails on parchment (2.4:1)
+  // and on the fill (3.3:1), which is why the lettering is gold-800 at rest and gold-400
+  // when lit, never gold-500. launch-500 stays the idle rule and the strip's accent.
+  'launch-500': '#6B4FB8',
+  'launch-700': '#4A3A8C',
+  'launch-100': '#EFEAF8',
+  // THE REGAL GROUND (the owner's third word, 2026-11-01: "a regal purple dark with a gloss
+  // and shimmering gold lettering just to give the feel that it is in fact till launch").
+  // launch-800 is the ground, launch-900 the gloss's deep end, launch-sheen the gloss's
+  // highlight: launch-800 under eight parts of white, spelled as a hex so the contrast pins
+  // can measure the LIGHTEST ground a gold letter ever sits on (gold-400 on it: 5.8:1).
+  'launch-800': '#2B2158',
+  'launch-900': '#1C1540',
+  'launch-sheen': '#3C3365',
+
   // Red — destructive actions and hard errors; the only non-destructive use is
   // the named operatorAlert semantic alias, fenced to unread-count chrome.
   'red-600': '#A23434',
@@ -418,6 +441,7 @@ export const swatch = Object.freeze({
   '#1A4A5A': '#1a4a5a', // category: Infrastructure
   '#7A1A5A': '#7a1a5a', // category: Entertainment
   '#1A5A3A': '#1a5a3a', // category: Adventuring
+  '#D8C8A0': '#d8c8a0', // InstitutionsTab service-row rule when the row carries no status
 });
 
 // ── Typography ─────────────────────────────────────────────────────────────
@@ -599,6 +623,39 @@ export function emitCssTokens(target = document.documentElement) {
   }
 }
 
+// ── THE LAUNCH SKIN ──────────────────────────────────────────────────────────
+// The owner, 2026-11-01 (ODQ §934.103, X-39): "a regal purple dark with a gloss and shimmering
+// gold lettering just to give the feel that it is in fact till launch", worn by everything that
+// is "until launch": the dossier's teaser tabs, every launch-locked purchase control (the one
+// that carries the Available-at-launch pill, lib/launchGate.js) and the AI pass button.
+//
+// THE GROUND is a gloss, which is a GRADIENT SHEEN and never a shadow: print has no z-axis
+// (design/organic/ink.js) and the deep-craft kill-list counts every boxShadow. THE LETTERS
+// are a gold gradient clipped to the glyphs and moved by the house shimmer keyframe
+// (index.css :: sf-goldShimmer), which stands still under prefers-reduced-motion. The
+// darkest letter stop is gold-400 and the lightest ground stop is launch-sheen, 5.8:1, and
+// every pair is pinned in tests/design/contrast.test.js. No rgba, no new literal outside
+// this file: the kill-list and the raw-colour budget read src/components, not here.
+export const launchSkin = Object.freeze({
+  /** The glossed ground. */
+  ground: `linear-gradient(180deg, ${color['launch-sheen']} 0%, ${color['launch-800']} 42%, ${color['launch-900']} 100%)`,
+  /** The ground's edge. */
+  border: color['launch-700'],
+  /** The rule under a LIT launch tab: brand gold on the deep ground (6:1, non-text). */
+  rule: color['gold-500'],
+  /** The letters' flat colour, for an icon or a glyph that cannot take the gradient. */
+  ink: color['gold-400'],
+  /** The shimmering letters: merge onto the label's own span, never onto an element that holds an icon. */
+  shimmer: Object.freeze({
+    backgroundImage: `linear-gradient(100deg, ${color['gold-400']} 0%, ${color['gold-100']} 45%, ${color['gold-400']} 62%, ${color['gold-400']} 100%)`,
+    backgroundSize: '220% 100%',
+    WebkitBackgroundClip: 'text',
+    backgroundClip: 'text',
+    color: 'transparent',
+    animation: 'sf-goldShimmer 3.8s ease-in-out infinite',
+  }),
+});
+
 // ── Backward-compat shim ───────────────────────────────────────────────────
 // These constants mirror the legacy `src/components/theme.js` exports so
 // the ~80 components that import from theme keep working unchanged. The
@@ -637,6 +694,8 @@ export const legacy = Object.freeze({
   SLATE:    color['slate-500'],
   SLATE_DEEP: color['slate-700'],   // legible AI text on slate-100
   SLATE_BG: color['slate-100'],
+  // THE LAUNCH REGISTER is worn through `launchSkin` above (X-39). Its eight flat LAUNCH_*
+  // aliases left this eager object on 2026-11-02: no app module read them (ODQ §934.103).
   RED:       color['red-600'],
   RED_BG:    color['red-100'],
   GREEN:     color['green-600'],

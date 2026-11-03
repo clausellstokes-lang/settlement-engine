@@ -119,6 +119,21 @@ const rowAt = (card, path) => evidenceRows(card).find((row) => row.path === path
 /** The evidence text with EVERY digit run masked — the "no other character moved" reading. */
 const masked = (card) => evidenceRows(card)
   .map((row) => `${row.path} :: ${String(row.evidence).replace(/\d+/g, '#')}`).join(' | ');
+/** A row that cites one conflict by position: the THIRD restatement's subject (chair ruling X-29). */
+const CONFLICT_CITED = /^conflicts\[(\d+)\]$/;
+/** The same masked reading with the conflict citations set aside, which the post-pass REBUILDS. */
+const maskedBesideConflicts = (card) => evidenceRows(card).filter((row) => !CONFLICT_CITED.test(String(row.path)))
+  .map((row) => `${row.path} :: ${String(row.evidence).replace(/\d+/g, '#')}`).join(' | ');
+/** The conflict citations alone, verbatim. */
+const conflictCitations = (card) => h(evidenceRows(card).filter((row) => CONFLICT_CITED.test(String(row.path))));
+/** Do the record's conflict citations name exactly its own EXPLAINED conflicts, in order? Null when it cites none. */
+const citesOwnConflicts = (card) => {
+  const cited = evidenceRows(card).filter((row) => CONFLICT_CITED.test(String(row.path))).map((row) => row.path);
+  if (cited.length === 0) return null;
+  const explained = (card.conflicts || []).flatMap((entry, index) => (String((entry && (entry.description || entry.desc
+    || entry.tension || entry.issue || entry.cause || entry.reason)) || '').trim() ? [`conflicts[${index}]`] : []));
+  return h(cited) === h(explained);
+};
 
 /** THE EIGHT EDITS, in EM-R7's own behaviour: four layer ops, two power-card ops, two world facts. */
 const LAYER_EDITS = ['E1 npc name', 'E2 npc role', 'E3 remove institution', 'E4 add institution', 'E5 faction share', 'E6 seat'];
@@ -220,8 +235,10 @@ function trials() {
         statedGraph: statedGraph ? [Number(statedGraph[1]), Number(statedGraph[2])] : null,
         statedEvents: statedEvents ? Number(statedEvents[1]) : null,
         rosters: [merged.npcs.length, merged.relationships.length, merged.history.historicalEvents.length],
-        maskedMerged: masked(merged),
-        maskedPure: masked(pure),
+        maskedMerged: maskedBesideConflicts(merged),
+        maskedPure: maskedBesideConflicts(pure),
+        conflictsRestated: conflictCitations(merged) !== conflictCitations(pure),
+        citesOwn: citesOwnConflicts(merged),
         repairsSame: h(built.record.generationCoherenceReceipt?.repairs) === h(merged.generationCoherenceReceipt?.repairs),
         rungTookReceipt: out.delta.escalations.some((step) => String(step.scope).split(',').includes('generationCoherenceReceipt')),
         mergedIsPipeline: h(merged) === h(pipeline),
@@ -260,7 +277,7 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // anchored: same three, and `movedAnywhere` is a superset of the line above.
     expect(movedAnywhere, `a HELD key moved somewhere in the census:\n${movedAnywhere.join('\n')}`).toEqual([]);
     // anchored: `namesOf` is read from the same merged rosters the two lists above compare, and A2
-    // proves the ladder really fires 40 times (48 before the urban band, 41 before the druid rulings, 2026-10-01), so the roster machinery is live in this very census.
+    // proves the ladder really fires 35 times (48 before the urban band, 41 before the druid rulings, 2026-10-01, 40 before the conflict-citation restatement, X-29), so the roster machinery is live in this very census.
     expect(lost, `an edit DELETED a named person from a saved town:\n${lost.join('\n')}`).toEqual([]);
     // anchored: as the line above.
     expect(invented, `an edit INVENTED a person the DM never wrote:\n${invented.join('\n')}`).toEqual([]);
@@ -285,20 +302,27 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const byEdit = {};
     for (const trial of escalating) byEdit[trial.label] = (byEdit[trial.label] || 0) + 1;
     expect(Object.entries(byEdit).sort(), 'the config channel escalates on both world-fact edits, at the figures measured at this landing')
-      .toEqual([['E7 terrain to desert', 30], ['E8 culture to norse', 10]]);
+      .toEqual([['E7 terrain to desert', 26], ['E8 culture to norse', 9]]);
+    // 2026-10-31, the GS-2 merge (lane G2, ODQ §934.101) then chair ruling X-29 (cure lane T13), each measured:
+    // GS-2 re-dealt the world-fact re-derivations, E7 30 -> 31 and E8 10 -> 9, and its derived conflicts put TWO
+    // power-card trials on the layer channel, exhausting on V-EVIDENCE-CONFLICT; the X-29 restatement of the receipt's
+    // conflict citations cures those two and five E7 trials whose only live check was that one: E7 31 -> 26 (35 of 120).
     // 2026-10-01, the urban band (ODQ §934.86): E7 31 -> 30 and E8 17 -> 11 (48 -> 41 escalating trials of the 120),
     // then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): E8 11 -> 10 (41 -> 40),
     // re-measured by this census itself. Every escalation still EXHAUSTS and the layer channel is still silent.
     const unexhausted = escalating.filter((trial) => !trial.escalations.some((step) => step.step === 'EXHAUSTED')).map((trial) => `${trial.label} ${trial.key}`);
-    // anchored: `escalating` is 40 rows by the equality above, so this list is drawn from a live set.
+    // anchored: `escalating` is 35 rows by the equality above, so this list is drawn from a live set.
     expect(unexhausted, `a config-channel escalation that did NOT exhaust:\n${unexhausted.join('\n')}`).toEqual([]);
 
     const liveById = {};
     for (const trial of config) for (const id of trial.live) liveById[id] = (liveById[id] || 0) + 1;
-    expect(Object.entries(liveById).sort(), 'what the cure LEAVES on the world-fact channel: the two '
-      + 'REFERENTIAL cross-key checks, and no prose-count check at all. EM-B2b owns this seam '
+    expect(Object.entries(liveById).sort(), 'what the cure LEAVES on the world-fact channel: ONE '
+      + 'REFERENTIAL cross-key check, and no prose-count or citation check at all. EM-B2b owns this seam '
       + '(EM-R7 §6 declares it dark)')
-      .toEqual([['V-DEFENSE-INST', 35], ['V-EVIDENCE-CONFLICT', 8]]);
+      .toEqual([['V-DEFENSE-INST', 35]]);
+    // 2026-10-31, the GS-2 merge then chair ruling X-29 (cure lane T13): V-EVIDENCE-CONFLICT 8 -> 9 at the GS-2 re-deal,
+    // then 9 -> 0, because the post-pass now restates the conflict citations from the merged record; V-DEFENSE-INST
+    // unmoved at 35. The roster of what the cure leaves shrinks to one id.
     // the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): V-EVIDENCE-CONFLICT 11 -> 8, V-DEFENSE-INST unmoved at 35 (measured).
     // 2026-10-01, the urban band (ODQ §934.86): V-DEFENSE-INST 31 -> 35 and V-EVIDENCE-CONFLICT 22 -> 11, the same
     // two referential ids and no third (the roster of what the cure leaves is unchanged; only its multiplicities
@@ -323,7 +347,19 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(wrongEvents, `the receipt names an event count the merged history does not carry:\n${wrongEvents.join('\n')}`).toEqual([]);
     // anchored: A4 proves the restatement really rewrites a digit on a real trial, so an empty list
     // here means only the digits moved, not that the comparison never saw a restatement.
-    expect(otherMoved, `a character OUTSIDE the two counted digits moved in the evidence:\n${otherMoved.join('\n')}`).toEqual([]);
+    // ⭐ BESIDE THE CONFLICT CITATIONS since chair ruling X-29 (cure lane T13, at the GS-2 merge, lane G2, ODQ §934.101):
+    // the post-pass now REBUILDS those rows from the merged `conflicts` (mergeConsequence.js ::
+    // restateConflictCitations), so they are set aside here and held by the two expectations below instead.
+    expect(otherMoved, `a character OUTSIDE the two counted digits and the conflict citations moved in the evidence:\n${otherMoved.join('\n')}`).toEqual([]);
+    // THE THIRD RESTATEMENT, at the figure: 18 of the 498 trials have their conflict citations rebuilt (MEASURED, cure
+    // lane T13: the R1 receipt cited R1's re-derived conflicts, the merged record holds its own; in 12 the rows
+    // themselves change, in 6 only an ordinal), among them the two power-card hamlets that EXHAUSTED the ladder before
+    // the cure, and in every trial that cites a conflict the citations name exactly the merged record's own explained
+    // conflicts.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(18);
+    const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
+    // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
+    expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
 
     const row = sample63()[0];
     const { _seed: seed, ...config } = row;
@@ -335,6 +371,23 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect([Number(restated[1]), Number(restated[2])], 'THE PLANTED POSITIVE CONTROL: a record whose graph '
       + 'evidence is off by five is restated to the merged rosters, so the arm above is a cure and not a coincidence')
       .toEqual([cured.npcs.length, cured.relationships.length]);
+
+    // THE THIRD PLANTED CONTROL (chair ruling X-29): a town whose receipt cites one conflict MORE than it carries, the
+    // shape the two power-card hamlets merged to before the cure, is restated to its own list and the check goes quiet.
+    const withConflict = sample63().map((candidate) => {
+      const { _seed: grain, ...cfg } = candidate;
+      return generateSettlementPipeline(cfg, null, { seed: grain, customContent: {} });
+    }).find((card) => (card.conflicts || []).length > 0 && citesOwnConflicts(card) === true);
+    expect(withConflict, 'the corpus carries a town that cites its own conflicts, so the control has a subject').toBeDefined();
+    const stale = cl(withConflict);
+    const hostRows = stale.generationCoherenceReceipt.judgments.find((judgment) => (judgment.evidence || []).some((entry) => CONFLICT_CITED.test(String(entry.path)))).evidence;
+    const last = hostRows.filter((entry) => CONFLICT_CITED.test(String(entry.path))).pop();
+    hostRows.splice(hostRows.indexOf(last) + 1, 0, { ...last, path: `conflicts[${stale.conflicts.length}]`, evidence: `Conflict ${stale.conflicts.length + 1}` });
+    expect(recordInvariants(stale).map((violation) => violation.id), 'THE CONTROL IS LIVE: the planted citation is convicted').toContain('V-EVIDENCE-CONFLICT');
+    const restatedTown = mergeConsequence(cl(stale), cl(stale), cl(stale), { edit: null }).record;
+    // anchored: the line above proves the same check convicts the planted record, so its absence here is the cure.
+    expect(recordInvariants(restatedTown).map((violation) => violation.id), 'the restated receipt cites only what the town carries').not.toContain('V-EVIDENCE-CONFLICT');
+    expect(conflictCitations(restatedTown), 'and the rebuilt rows are byte-identical to what the generator wrote').toBe(conflictCitations(withConflict));
   }, SLOW);
 
   it('A4 · one trial, two declarations: the merge takes the evidence WHOLE and the post-pass restates two digits', () => {
@@ -389,10 +442,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     const noisyRepairs = quiet.filter((trial) => !trial.repairsSame).map((trial) => `${trial.label} ${trial.key}`);
     const unexplained = all.filter((trial) => !trial.repairsSame && !trial.rungTookReceipt).map((trial) => `${trial.label} ${trial.key}`);
     // 2026-10-01, the urban band (ODQ §934.86): quiet 450 -> 457 of 498 (noisy 48 -> 41); the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 457 -> 458 (41 -> 40).
-    expect(quiet.length, 'the trials in which no rung fires at all').toBe(458);
-    // anchored: 458 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
+    // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge, ODQ §934.101): 458 -> 463 (noisy 40 -> 35), the
+    // conflict-citation restatement (A2).
+    expect(quiet.length, 'the trials in which no rung fires at all').toBe(463);
+    // anchored: 463 of 498 trials are quiet by the expectation above, so this list is drawn from a live set.
     expect(noisyRepairs, `repairs moved with no rung firing at all:\n${noisyRepairs.join('\n')}`).toEqual([]);
-    // anchored: the same census carries 40 noisy trials (A2), so the explanation below is exercised.
+    // anchored: the same census carries 35 noisy trials (A2), so the explanation below is exercised.
     expect(unexplained, 'repairs moved for a reason other than a rung taking generationCoherenceReceipt '
       + `whole from R1 — the ladder's own top-level write, which no CLASS_EXCEPTIONS row reaches:\n${unexplained.join('\n')}`).toEqual([]);
     const movedAtAll = all.filter((trial) => !trial.repairsSame).map((trial) => `${trial.label} ${trial.key}`);
@@ -403,13 +458,14 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
   it('A6 · where no rung fires the merged record IS the post-pass pipeline, byte for byte', () => {
     const all = trials();
     const quiet = all.filter((trial) => trial.escalations.length === 0);
-    expect(quiet.length, 'the quiet trials, which are 458 of 498 once the ladder stops repairing held facts').toBe(458);
+    // 2026-10-31, chair ruling X-29 (cure lane T13; the GS-2 merge): 458 -> 463, the restated conflict citations (A2).
+    expect(quiet.length, 'the quiet trials, which are 463 of 498 once the ladder stops repairing held facts').toBe(463);
     const drifted = quiet.filter((trial) => !trial.mergedIsPipeline).map((trial) => `${trial.label} ${trial.key}`);
-    // anchored: `quiet` is 458 rows by the expectation above.
+    // anchored: `quiet` is 463 rows by the expectation above.
     expect(drifted, 'a quiet trial whose merged record is not mergeTree + recomputeMirrors + '
       + `recomputeReceipts of its own inputs — the guard changed something while doing nothing:\n${drifted.join('\n')}`).toEqual([]);
     const noisy = all.filter((trial) => trial.escalations.length > 0);
-    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(40);
+    expect(noisy.length, 'and the blast radius of the ladder is exactly the config channel A2 measures').toBe(35); // X-29: 40 -> 35
   }, SLOW);
 
   it('A7 · the chain: determinism and undo hold, and the power card stops making history it did not make', () => {

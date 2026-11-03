@@ -13,7 +13,7 @@
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, ChapterHeadline, GoldRule, HairRule, Tag } from '../primitives/Dense.jsx';
+import { ChapterBand, GoldRule, HairRule, Tag } from '../primitives/Dense.jsx';
 import { Pill } from '../primitives/Pill.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
@@ -35,9 +35,9 @@ export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
         sub="Quick-grab session prep"
       />
 
-      <ChapterHeadline tone="gold">
-        One place, three truths, one pressure, three faces, one way into play.
-      </ChapterHeadline>
+      {/* The chapter headline "One place, three truths, one pressure, three faces, one way
+          into play." is CUT (chair ruling, RULINGS-T1 DM SUMMARY; R6): it re-announced the
+          five blocks below it. The chapter stays. */}
 
       {/* ── Identity and three defining truths ───────────────── */}
       <View style={{ marginBottom: space.sm }}>

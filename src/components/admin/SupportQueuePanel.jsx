@@ -248,10 +248,14 @@ export default function SupportQueuePanel() {
 
             <label htmlFor="queue-set-status" style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED, fontFamily: sans, display: 'flex', alignItems: 'center', gap: 4 }}>
               Set status
+              {/* No `reason` rides this call: set_ticket_status (migration 055)
+                  writes the reason into the USER-VISIBLE thread breadcrumb and
+                  the owner's lifecycle email ("Note: ..."), so a fixed internal
+                  label here was mailed to the customer on every transition. */}
               <select id="queue-set-status" value={active.status} disabled={busy}
                 onChange={(e) => runAction(
-                  { action: 'set_ticket_status', ticketId: id, status: e.target.value, reason: 'agent transition' },
-                  `Status set to ${e.target.value}.`,
+                  { action: 'set_ticket_status', ticketId: id, status: e.target.value },
+                  `Status set to ${STATUS_LABELS[e.target.value] || e.target.value}.`,
                 )}
                 style={{ fontSize: FS.sm, padding: '4px 6px', border: `1px solid ${BORDER}` }}>
                 {STATUSES.map((s) => <option key={s} value={s}>{STATUS_LABELS[s] || s}</option>)}

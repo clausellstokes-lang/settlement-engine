@@ -113,3 +113,35 @@ describe('AdminOperationalHealthPanel', () => {
     expect(screen.queryByText('healthy')).toBeNull();
   });
 });
+
+// ── T7 survey (2026-10-30): Clear sends clear:true; a stale acknowledgement
+//    (the server's 409 "no longer active") is shown, not swallowed. ──
+describe('AdminOperationalHealthPanel — clear and refusal (T7 survey)', () => {
+  beforeEach(() => { invoke.mockReset(); });
+  afterEach(() => cleanup());
+
+  const ackedRow = {
+    source: 'payment_refund', obligation_key: 'refund:1', status: 'requires_action', attempts: 2,
+    age_seconds: 4000, reason: 'manual_review', acknowledged_at: '2026-07-24T11:00:00.000Z', acknowledgement_note: 'on it',
+  };
+
+  it('Clear sends the clear flag with the opaque identity', async () => {
+    invoke.mockImplementation(async (_fn, { body }) => (body.action === 'get_operational_health'
+      ? healthResponse([ackedRow])
+      : { data: { success: true, acknowledged: false }, error: null }));
+    render(<AdminOperationalHealthPanel />);
+    fireEvent.click(await screen.findByRole('button', { name: /^clear$/i }));
+    await waitFor(() => expect(invoke).toHaveBeenCalledWith('admin-actions', { body: {
+      action: 'acknowledge_operational_obligation', obligationSource: 'payment_refund', obligationKey: 'refund:1', note: null, clear: true,
+    } }));
+  });
+
+  it('a refused acknowledgement is shown', async () => {
+    invoke.mockImplementation(async (_fn, { body }) => (body.action === 'get_operational_health'
+      ? healthResponse([{ ...ackedRow, acknowledged_at: null, acknowledgement_note: null }])
+      : { data: { error: 'Operational obligation is no longer active' }, error: null }));
+    render(<AdminOperationalHealthPanel />);
+    fireEvent.click(await screen.findByRole('button', { name: /^acknowledge$/i }));
+    expect((await screen.findByRole('alert')).textContent).toMatch(/no longer active/i);
+  });
+});

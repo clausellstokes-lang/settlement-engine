@@ -181,7 +181,8 @@ export default function WelcomeCreditCard({ saveId = null, onVisibilityChange })
           <div>Cost: <s>5 credits</s></div>
           <div style={{ fontWeight: 700, color: SLATE }}>This one: free</div>
         </div>
-        <Button variant="ai" size="md" onClick={onNarrate}>
+        {/* THE AI PASS BUTTON wears the launch skin (the owner, 2026-11-01, X-39). */}
+        <Button variant="launch" size="md" onClick={onNarrate}>
           Narrate this town
         </Button>
         <Button variant="ghost" size="sm" onClick={onLater}>

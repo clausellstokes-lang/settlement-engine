@@ -25,6 +25,13 @@ import { describe, it, expect, afterEach } from 'vitest';
 import { render, screen, fireEvent, cleanup, within } from '@testing-library/react';
 import PowerTab from '../../src/components/new/tabs/PowerTab.jsx';
 import { SUPPORT_BASIS } from '../../src/domain/dossier/powerSupport.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { rulingChainOf } from '../../src/domain/dossier/powerStrata.js';
+import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.js';
+import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
+import { settlementBlocs as politicsBlocsOf } from '../../src/domain/display/politicsRead.js';
+import { powerStateProse } from '../../src/domain/display/stateProse/powerStateProse.js';
+import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
 
 afterEach(cleanup);
 
@@ -164,6 +171,38 @@ describe('PowerTab — the support basis is said once per group', () => {
   });
 });
 
+// ── X-45 (the owner, 2026-11-02): every house backs a power, some back two ───────────────
+describe('PowerTab — every house backs a power (X-45)', () => {
+  it('a stranger with nothing of its own is listed under the seat, captioned as the default; a split house is listed under both powers', () => {
+    const s = {
+      id: 'settlement.totalburg',
+      name: 'Totalburg',
+      powerStructure: { factions: [
+        { faction: 'Town Council', power: 55, category: 'government', isGoverning: true, desc: 'The seat.' },
+        { faction: 'Merchant Guild', power: 45, category: 'economy', desc: 'The traders who hold the market.' },
+      ] },
+      institutions: [
+        { name: 'Hermit shrine' },            // not in the catalogue, no economy tag: the default
+        { name: 'Docks/port facilities' },    // the catalogue: merchant 0.6, government 0.4
+      ],
+    };
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const council = screen.getByRole('button', { name: 'Town Council power details' });
+    fireEvent.click(council);
+    const councilDetail = document.getElementById(council.getAttribute('aria-controls'));
+    expect(within(councilDetail).getByText('Hermit shrine')).toBeTruthy();
+    expect(within(councilDetail).getAllByText(SUPPORT_BASIS.default)).toHaveLength(1);
+    expect(within(councilDetail).getByText('Docks/port facilities')).toBeTruthy();
+    expect(within(councilDetail).getAllByText(SUPPORT_BASIS.aligned.government)).toHaveLength(1);
+    const guild = screen.getByRole('button', { name: 'Merchant Guild power details' });
+    fireEvent.click(guild);
+    const guildDetail = document.getElementById(guild.getAttribute('aria-controls'));
+    expect(within(guildDetail).getByText('Docks/port facilities')).toBeTruthy();
+    expect(within(guildDetail).getAllByText(SUPPORT_BASIS.aligned.merchant)).toHaveLength(1);
+    expect(within(guildDetail).queryByText('Hermit shrine')).toBeNull(); // anchored: the shrine is under the seat above
+  });
+});
+
 // ── §815 — THE RULING CHAIN: power → faction → named NPC, honest absence ─────
 describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
   const base = () => ({
@@ -232,11 +271,113 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     expect(screen.getByTestId('ruling-chain-npc').textContent).toBe('Serena Copperlane');
   });
 
+  it('STOP-1 (R7): the governing faction modifier rides the power line, its one home since T2-17 cut the Governing authority box', () => {
+    const s = base();
+    s.powerStructure.factions[0].modifier = 'corruption-riddled';
+    render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
+    const chip = screen.getByTestId('ruling-chain-modifier');
+    expect(chip.textContent).toBe('corruption-riddled');
+    expect(screen.getByTestId('ruling-chain').textContent.split('corruption-riddled').length - 1, 'said once on the page').toBe(1);
+    cleanup();
+    render(<PowerTab powerStructure={base().powerStructure} settlement={base()} narrativeNote={null} />);
+    expect(screen.getByTestId('ruling-chain').textContent).toContain('Merchant Guild');
+    expect(screen.queryByTestId('ruling-chain-modifier'), 'no modifier, no chip').toBeNull(); // anchored: the chain block renders on this render
+  });
+
   it('a pre-density settlement with no NPCs renders the chain as far as the data goes', () => {
     const s = base();
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const chain = screen.getByTestId('ruling-chain');
     expect(chain.textContent).toContain('Merchant Guild');
     expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/ends, honestly, at the faction/);
+  });
+});
+
+/**
+ * ⭐ UX CONSOLIDATION 2026-10-30 — THE POWER PAGE SAYS WHO GOVERNS ONCE (RULINGS-T2 T2-17..T2-19;
+ * RUBRIC R2, R4, R6; RULINGS-CROSS X-4). A REAL generated town, because the desk lines this
+ * describe watches are drawn from generated state. Each absence is anchored on the same render.
+ */
+describe('UX consolidation — Power (T2-17..T2-19)', () => {
+  const town = generateSettlementPipeline({ settType: 'town', tradeRouteAccess: 'road' }, null, { seed: 'power-u5-c', customContent: {} });
+  const desk = (playerView = false) => powerStateProse(town, {
+    ...(coupContenders(town) ? { contenders: coupContenders(town), riskLabel: coupRiskLabel(coupContenders(town)) } : {}),
+    structuralLens: structuralLensOf(town),
+    politics: politicsBlocsOf({ worldState: null, settlementId: town.id, includeGroundTruth: !playerView, includeCovert: !playerView }),
+  }, { seed: String(town._seed ?? town.id ?? ''), audience: playerView ? 'player' : 'dm', tierNoun: tierNounFor(town.tier) });
+  const view = (props = {}) => render(<PowerTab powerStructure={town.powerStructure} settlement={town} narrativeNote={null} {...props} />).container.textContent;
+
+  it('T2-17: the ruling chain names the power once; no faction row, no Governing authority, no TabIntro', () => {
+    const chain = rulingChainOf(town);
+    expect(chain.faction.name, 'fixture premise: the faction IS the power').toBe(chain.power.name);
+    const text = view({ publicDossier: true });
+    const block = screen.getByTestId('ruling-chain');
+    expect(block.textContent).toContain(chain.power.name);
+    expect(block.textContent.split(chain.power.name).length - 1, 'the power is named once in the chain').toBe(1);
+    expect(block.textContent).not.toContain('holds the governing seat'); // anchored: the power name is asserted in this block above
+    expect(text).not.toContain('Governing authority'); // anchored: the chain block is on this render
+  });
+
+  it('THE TRIM (2026-11-01): a modifier of 0 is not a chip, and the heading goes when nothing moved', () => {
+    const leg = town.powerStructure.publicLegitimacy;
+    const mixed = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 8, safety: 0, defense: -3, food: 0 } } } };
+    const a = render(<PowerTab powerStructure={mixed.powerStructure} settlement={mixed} narrativeNote={null} publicDossier />).container.textContent;
+    expect(a).toContain('Breakdown');
+    expect(a).toContain('Prosperity +8');
+    expect(a).toContain('Defense -3');
+    expect(a).not.toContain('Safety 0'); // anchored: the two moved chips are asserted on this render
+    expect(a).not.toContain('Food 0');
+    cleanup();
+    const still = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...leg, breakdown: { prosperity: 0, safety: 0, defense: 0, food: 0 }, governanceFractured: true } } };
+    const b = render(<PowerTab powerStructure={still.powerStructure} settlement={still} narrativeNote={null} publicDossier />).container.textContent;
+    expect(b).toContain('Governance fractured.');
+    expect(b).not.toContain('Breakdown'); // anchored: the fracture note on this render
+  });
+
+  it('T2-18: the legitimacy breakdown label is "Breakdown" and the fracture note is one sentence', () => {
+    const text = view({ publicDossier: true });
+    expect(text).toContain('Breakdown');
+    expect(text).not.toContain('(base 50)'); // anchored: toContain('Breakdown') on this render
+    const fractured = { ...town, powerStructure: { ...town.powerStructure, publicLegitimacy: { ...town.powerStructure.publicLegitimacy, governanceFractured: true } } };
+    cleanup();
+    const f = render(<PowerTab powerStructure={fractured.powerStructure} settlement={fractured} narrativeNote={null} publicDossier />).container.textContent;
+    expect(f).toContain('Governance fractured.');
+    expect(f).not.toContain('appears to govern is not the faction that governs'); // anchored: toContain('Governance fractured.') on this render
+  });
+
+  it('T2-18: the cut lenses do not draw (DS-POW-2 lens, legitimacy hold, governing title, dormant blocs) and the kept ones do', () => {
+    const d = desk(false);
+    const text = view({ publicDossier: false });
+    expect(d.stabilityHeader?.sentence, 'fixture premise: the stability ladder line draws').toBeTruthy();
+    expect(text).toContain(d.stabilityHeader.sentence.slice(-40));
+    expect(text).toContain(d.successionRisk.sentence.slice(-40));
+    for (const [lens, rung] of [['stabilityLens', d.stabilityLens], ['successionHold', d.successionHold], ['governingTitle', d.governingTitle], ['blocPresence (dormant)', d.blocPresence]]) {
+      if (!rung?.sentence) continue;
+      expect(text, `${lens} still draws`).not.toContain(rung.sentence.slice(-40)); // anchored: the stability and succession lines are asserted on this render above
+    }
+    expect(String(d.blocPresence?.provenance?.poolKey)).toMatch(/^layer DORMANT/);
+    expect(text).not.toContain('Sides and combinations'); // anchored: same render as the kept lenses above
+  });
+
+  it('T2-18: the coup-risk and capture chips stand on public and yield where their sentences speak', () => {
+    expect(town.powerStructure.criminalCaptureState).toBe('equilibrium');
+    const pub = view({ publicDossier: true });
+    expect(pub).toContain('Criminal: Tolerated');
+    expect(document.querySelector('[aria-label^="Coup risk:"]'), 'the public ruler card keeps its coup chip').toBeTruthy();
+    cleanup();
+    const d = desk(false);
+    const dm = view({ publicDossier: false });
+    expect(dm).toContain(d.successionRisk.sentence.slice(-40));
+    expect(document.querySelector('[aria-label^="Coup risk:"]'), 'the coup chip beside its own sentence').toBeNull();
+    if (d.captureReading?.sentence) expect(dm).not.toContain('Criminal: Tolerated'); // anchored: the succession sentence is asserted on this render
+  });
+
+  it('T2-19: Current Tensions and Active Conflicts are not on the Power page', () => {
+    expect(town.conflicts.length, 'fixture premise: the town has a conflict').toBeGreaterThan(0);
+    expect(town.history.currentTensions.length, 'fixture premise: the town has tensions').toBeGreaterThan(0);
+    const text = view({ publicDossier: true });
+    expect(text).toContain('The Factions');
+    expect(text).not.toMatch(/Current Tensions \(|Active Conflicts \(/); // anchored: toContain('The Factions') on this render
+    expect(text).not.toContain(town.conflicts[0].issue); // anchored: same render
   });
 });

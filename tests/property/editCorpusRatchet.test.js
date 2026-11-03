@@ -355,7 +355,12 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // the corpus's infiltrated towns that draw is a template naming the governing body ("decisions at the Household
     // Council level…"), so seating another faction reaches the reading (51 pressureSentence leaves). E7 and E8 add
     // arrivalScene and pressureSentence leaves the re-composed prose speaks. No world leaf is among them.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(266);
+    // 2026-10-31 (the GS-2 merge, lane G2's one faction set, ODQ §934.101; re-measured by cure lane T13 against 2cf542ce,
+    // where this arm reads 266): 266 → 268. The two new rows are E5 and E6 on two hamlets: before GS-2 those edits reached
+    // no reading, now each takes ONE, the receipt's judgment evidence, because `R1` derives a different conflict list
+    // from the re-dealt power affiliations (the post-pass then restates its citations to the record's own, chair ruling
+    // X-29, A4). No other row joined or left.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(268);
     expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(98);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
@@ -386,11 +391,18 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 30, E8: 10 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 132, E8: 40 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 30, E8: 10 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(40);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 35, 'V-EVIDENCE-CONFLICT': 8 });
+    // 2026-10-31, the GS-2 merge (lane G2, ODQ §934.101) then chair ruling X-29 (cure lane T13), each measured against
+    // 2cf542ce, where these read as before. GS-2 alone: config rows {30, 10} → {31, 9}, steps {132, 40} → {140, 36}, and
+    // TWO layer rows (E5, E6 on two hamlets) escalating to EXHAUSTED on V-EVIDENCE-CONFLICT, because `R1` re-derives a
+    // conflict list the HELD record does not carry and the receipt cited it by position. X-29 restates those citations
+    // from the merged record (mergeConsequence.js :: restateConflictCitations), so the layer channel is clean again and
+    // config rows {31, 9} → {26, 9}, steps {140, 36} → {104, 36}, every one still EXHAUSTED; the live residue 40 → 35,
+    // V-EVIDENCE-CONFLICT 8 → 0, V-DEFENSE-INST unmoved at 35 (mergeLadderHeldKeys A2 reads the same figures).
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 104, E8: 36 });
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(35);
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 35 });
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
@@ -422,12 +434,19 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 2026-10-01 (the urban band + the druid rulings, ODQ §934.86 and its addendum 2; the urban-band chair, measured against the pre-band base 5d699cc68, where this file is 8/8): [677, 389, 746] → [719, 211, 926], and the
     // ride-along's chain population [11, 11] → [12, 12] below.
     // 2026-10-02 (the Voice Program, as A3 above): [719, 211, 926] → [719, 211, 977], E6's +51 pressureSentence readings.
-    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([719, 211, 977]);
+    // 2026-10-31 (the GS-2 merge, lane G2's one faction set, ODQ §934.101; re-measured by cure lane T13 against 2cf542ce,
+    // leaf by leaf): [719, 211, 977] → [719, 200, 927]. The readings that left are simulationTrace leaves of the
+    // retired `generatePopulation::faction` linkage trace (E5 11, E6 52), whose scatter read the power card; E6 gains
+    // 4 receipt-evidence leaves (the conflict citations `R1` derives, A3).
+    expect([taken.E1, taken.E5, taken.E6], 'the edits that DO reach a reading').toEqual([719, 200, 927]);
     // an npc ROLE reaches ZERO readings over the whole corpus, recorded so the zero is not silence
     expect([taken.E2, taken.E3, taken.E4], 'a role and a dormant membership edit reach none').toEqual([0, 0, 0]);
     // AND THE MACHINERY'S FIRST POPULATION, in the chain: the restatement at the first merge lets
     // the record settle away from R0 at a leaf, so the second merge's receipts carry a ride-along.
-    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([12, 12]);
+    // 2026-10-31 (chair ruling X-29, cure lane T13; measured at the GS-2 tree WITHOUT it, where this reads [12, 12]):
+    // [12, 12] → [21, 23]. The post-pass now also restates the receipt's conflict citations at the first merge, so the
+    // record settles away from R0 at that evidence leaf in nine more chains, and the second merge carries it along.
+    expect([chains().rideAlongChains, chains().rideAlongLeaves], 'the honesty machinery firing').toEqual([21, 23]);
   }, ARM_TIMEOUT);
 
   it('A8 the family declared instruments hold at this seam', () => {
@@ -471,7 +490,10 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // import above is the proof, because institutionRemoval.js throws at import on any other count.
     // 2026-10-01 (the urban band, ODQ §934.86): 15 → 22, the seven faction-ledger paths the window declared NON-CASCADED in
     // institutionRename.js (J16's two, then the five that hold 'Democratic assembly'), every one declaring `readable`.
-    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([22, 22]);
+    // 2026-10-31 (the GS-2 merge, lane G2, ODQ §934.101; re-measured by cure lane T13): 22 → 25, the three paths the
+    // register sweep 3511e283 declared because a power-faction name now reaches them (`factions[].name`,
+    // `conflicts[].parties[]`, `powerStructure.conflicts[].parties[]`), every one declaring `readable: false`.
+    expect([INSTITUTION_NON_CASCADED.length, declaring(INSTITUTION_NON_CASCADED).length]).toEqual([25, 25]);
     expect(INSTITUTION_NON_CASCADED.filter((row) => row.kind === 'matched-pattern' && row.readable).map((row) => row.path)).toEqual(['economicState.activeChains[].processingInstitutions[]']);
     expect(typeof institutionRemovalChanges).toBe('function');
     // EXIT 2, the UNDECLARED ledger: EM-R6's LANDED ruling is that none of its rows has a reader,

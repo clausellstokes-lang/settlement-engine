@@ -67,7 +67,7 @@ import {
 import WarTab from '../../src/components/new/tabs/WarTab.jsx';
 import FaithTab from '../../src/components/new/tabs/FaithTab.jsx';
 import { useStore } from '../../src/store/index.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { DeskLines } from '../../src/components/new/tabs/WarFaithDesk.jsx';
 import { legibilityRung } from '../../src/domain/display/stateProse/legibilityRung.js';
 import { tierNounFor, weaveBlock } from '../../src/domain/display/stateProse/weaveBlock.js';
@@ -154,7 +154,6 @@ describe('the war & faith desk goes dark on a free anonymous dossier', () => {
     for (const [Component, rung, label] of /** @type {const} */ ([
       [WarStandingLines, desk.warStatus, 'war.standing (DS-WAR-1 the martial record)'],
       [WarTreatyLines, desk.treatyDocument, 'war.treaties (DS-WAR-2 the document lens)'],
-      [WarTreatyLines, desk.treatyTerm, 'war.treaties (DS-WAR-2 the clause lens)'],
     ])) {
       expectPresentThenAbsent(
         html(Component, WAR_READINGS, false),
@@ -163,6 +162,11 @@ describe('the war & faith desk goes dark on a free anonymous dossier', () => {
         `the war & faith desk at ${label}`,
       );
     }
+    // W9 (chair ruling 2026-10-30): the treaty paragraph is ONE line. With the document lens
+    // drawn, the clause lens is not printed (the treaty card already shows each term's strain).
+    expect(desk.treatyTerm?.sentence, 'the war fixture drew no clause sentence').toBeTruthy();
+    expectAbsentWithAnchor(html(WarTreatyLines, WAR_READINGS, false), desk.treatyTerm.sentence,
+      desk.treatyDocument.sentence, 'W9: the clause lens beside the document lens');
   });
 
   test('the FAITH positions reach the DOM privately and none of them reaches a public dossier', () => {
@@ -300,7 +304,8 @@ describe('both host tabs hand the desk the paid-surface flag', () => {
     /** @type {Array<[string, any, object, string[]]>} */
     const positions = [
       ['war.standing', WarStandingLines, war, ['warStatus', 'warExhaustion', 'warMobilization', 'warOccupation', 'warHoldings']],
-      ['war.treaties', WarTreatyLines, war, ['treatyTerm', 'treatyFraying', 'treatyDocument']],
+      // W9: one rung, the document lens, or the clause lens when the document is silent.
+      ['war.treaties', WarTreatyLines, war, ['treatyDocument', 'treatyTerm']],
       ['faith.patronSeat', FaithSeatLines, faith, ['patronRank', 'patronCults', 'devotion', 'pietyArc', 'standings', 'sink', 'mandate', 'faithDark']],
       ['faith.creedStanding', FaithCreedLines, faith, ['creedStanding', 'creedLegitimacy', 'creedNiche', 'creedFall']],
     ];
@@ -352,7 +357,8 @@ describe('the wrappers thread the settlement, non-vacuously at every speaking po
   /** [mount, blockId, the two desk keys the wrapper reads first, the wrapper]. */
   const WRAPPERS = [
     ['war.standing', 'DS-WAR-1', ['warStatus', 'warExhaustion'], WarStandingLines],
-    ['war.treaties', 'DS-WAR-2', ['treatyTerm', 'treatyFraying'], WarTreatyLines],
+    // `war.treaties` left this table with W9 (2026-10-30): it draws ONE rung now, so like
+    // `faith.teaser` below it has no second opening to stand down.
     ['faith.patronSeat', 'DS-FTH-1', ['patronRank', 'patronCults'], FaithSeatLines],
     ['faith.creedStanding', 'DS-FTH-3', ['creedStanding', 'creedLegitimacy'], FaithCreedLines],
   ];
@@ -392,7 +398,7 @@ describe('the wrappers thread the settlement, non-vacuously at every speaking po
         settlementName: TOWN.name, tierNoun: tierNounFor(TOWN.tier),
       }).paragraph);
     }
-    expect(judged, 'the wrapper table emptied, so the loop judged nothing').toBe(4);
+    expect(judged, 'the wrapper table emptied, so the loop judged nothing').toBe(3);
   });
 
   test('faith.teaser is INERT by construction, and that is measured rather than assumed', () => {

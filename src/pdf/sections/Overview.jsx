@@ -5,7 +5,7 @@
  *   - Identity strip
  *   - Active crises (chips + per-crisis hook + summary)
  *   - Systems Health Dashboard (5 score bars, prosperity/safety, food)
- *   - Tensions & Conflicts list with descriptions and parties
+ *   - Tensions & Conflicts list with descriptions and parties (their hooks: the Plot Hooks chapter, X-2)
  *   - Situation prose (arrival scene + pressure sentence in AI mode)
  *   - Settlement origin
  *   - Prominent relationship
@@ -15,6 +15,8 @@
  *   - Institutions panel with category distribution + counts
  */
 import { View, Text } from '@react-pdf/renderer';
+// The Systems Health vintage, the byte-for-byte twin of the screen's ? pill (X-42; the G5 vintage law).
+import { SYSTEMS_HEALTH_VINTAGE } from '../../copy/sectionHelp.js';
 import { PageChrome } from '../primitives/PageChrome.jsx';
 import { formatCount } from '../../domain/formatNumber.js';
 import {
@@ -147,14 +149,17 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
           caption, with the same declared-live Food Security carve-out
           (FROZEN_VS_LIVE grammar). One string, vetoable. */}
       <Text style={{ ...type.caption, fontSize: pt['7.5'], color: palette.muted, fontStyle: 'italic', marginBottom: 4 }}>
-        Score bars and the Viability and Defense statuses are as judged at the first survey; Food Security is re-judged as the campaign advances.
+        {SYSTEMS_HEALTH_VINTAGE}
       </Text>
       <View style={{ flexDirection: 'row', gap: space.md }}>
         <View style={{ flex: 1 }}>
           {/* defense score bars — only render numeric entries (engine may
               include object-shaped fields like magicDependency that aren't
               0-100 scores) */}
+          {/* X-13 (2026-10-30): military and internal are CUT here as on screen; Foundations
+              and the Defense chapter carry the same reading. */}
           {Object.entries(o.defenseScores || {})
+            .filter(([key]) => !PRINT_CUT_SCORES.has(key))
             .map(([key, val]) => [key, scoreNum(val)])
             .filter(([, n]) => n != null)
             .map(([key, n]) => (
@@ -238,18 +243,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   {t.parties.map(label).filter(Boolean).join(' / ')}
                 </Text>
               )}
-              {t.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {t.hooks.slice(0, 3).map((h, hi) => (
-                    <View key={`th-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.warn, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
+              {/* VERIFIER N6 (X-2): a tension's hooks print in the Plot Hooks chapter only, as on screen. */}
             </View>
           ))}
           {o.conflicts.map((c, i) => (
@@ -294,18 +288,7 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
                   Stakes: {c.stakes}
                 </Text>
               )}
-              {c.hooks?.length > 0 && (
-                <View style={{ marginTop: 2 }}>
-                  {c.hooks.slice(0, 3).map((h, hi) => (
-                    <View key={`ch-${i}-${hi}`} style={{ flexDirection: 'row', marginBottom: 1 }}>
-                      <Text style={{ color: palette.bad, marginRight: 4, fontSize: pt['8.5'] }}>»</Text>
-                      <Text style={{ ...type.italic, color: palette.second, fontSize: pt['8.5'], flex: 1 }}>
-                        {hookText(h)}
-                      </Text>
-                    </View>
-                  ))}
-                </View>
-              )}
+              {/* VERIFIER N6 (X-2): a conflict's hooks print in the Plot Hooks chapter only, as on screen. */}
             </View>
           ))}
         </View>
@@ -438,12 +421,12 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
         <View style={{ marginTop: space.sm }}>
           <HairRule />
-          {/* G5 first-survey framing (Wave R-2): all three merged sources —
-              warnings, coherenceNotes, structuralSuggestions — are
-              generation-frozen records; the vintage mirrors the web twins
-              (OverviewTab's "Coherence Notes / Suggestions · First Survey"). */}
+          {/* G5: all three merged sources (warnings, coherenceNotes,
+              structuralSuggestions) are generation-frozen records. Since X-8
+              (2026-10-30) the chapter says the vintage once, in the Systems
+              Health caption, as the screen's Overview does; this header is bare. */}
           <Text style={{ ...type.label, color: palette.warn, fontSize: pt['8'], marginBottom: 3 }}>
-            WARNINGS & NOTES · FIRST SURVEY
+            WARNINGS & NOTES
           </Text>
           <BulletList
             items={[
@@ -505,6 +488,9 @@ function hasSystemsHealth(o) {
     || o.viabilityVerdict
     || (o.foodBalance && (o.foodBalance.production != null || o.foodBalance.deficit != null));
 }
+
+/** The score bars the Overview no longer draws (owner addendum X-13): Foundations reads the same thing. */
+const PRINT_CUT_SCORES = new Set(['military', 'internal']);
 
 // Defense scores may arrive as numbers or as { score, value, level, ... }
 // objects (the engine sometimes wraps a score with extra metadata). Extract

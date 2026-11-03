@@ -88,7 +88,7 @@ export function SampleCard({ sample, onFork, forking }) {
         busy={forking}
         style={{ alignSelf: 'flex-start', marginTop: 4 }}
       >
-        {forking ? 'Forking…' : 'Fork this sample'}
+        {forking ? 'Visiting…' : `Visit ${sample.name}`}
       </Button>
     </article>
   );

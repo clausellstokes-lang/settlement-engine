@@ -21,9 +21,16 @@ export const EXPECTED_SERVICES_BY_TIER = Object.freeze({
   metropolis: ['food', 'healing', 'equipment', 'information', 'lodging', 'legal', 'transport', 'entertainment'],
 });
 
-/** @type {Readonly<Record<string, string>>} */
-const SERVICE_LABELS = Object.freeze({
-  lodging: 'Lodging', food: 'Food & Drink', equipment: 'Equipment',
+/**
+ * THE ONE SPELLING of every service-category label (RS-14, chair ruling 2026-10-30).
+ * The screen (tabConstants.js :: Ts takes its labels from here), the PDF's card titles
+ * and its absences callout all read this map, so one category has one name on every
+ * surface. The `equipment` key is labelled "Goods & Crafts" (RS-2): the bucket holds
+ * arms, tools and gear but also raw materials, crafts, livestock sales and markets.
+ * @type {Readonly<Record<string, string>>}
+ */
+export const SERVICE_LABELS = Object.freeze({
+  lodging: 'Lodging', food: 'Food & Drink', equipment: 'Goods & Crafts',
   magic: 'Magical Services', information: 'Information', healing: 'Healing',
   transport: 'Transportation', legal: 'Legal & Financial',
   entertainment: 'Entertainment', employment: 'Employment', criminal: 'Criminal Services',

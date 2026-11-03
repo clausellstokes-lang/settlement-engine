@@ -139,3 +139,31 @@ describe('AdminBroadcastPanel', () => {
     });
   });
 });
+
+// ── T7 survey (2026-10-30): refusals on the list and on queueing are shown. ──
+describe('AdminBroadcastPanel — refusals (T7 survey)', () => {
+  beforeEach(() => { invoke.mockReset(); });
+
+  test('a refused broadcast list is shown', async () => {
+    invoke.mockImplementation(async () => ({ data: { error: 'Insufficient privileges' }, error: null }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    expect((await screen.findByRole('alert')).textContent).toMatch(/insufficient privileges/i);
+  });
+
+  test('a refused queue keeps the modal open with the error and shows it on the panel', async () => {
+    invoke.mockImplementation(async (_fn, { body }) => (body.action === 'list_operator_broadcasts'
+      ? { data: { success: true, broadcasts: [] }, error: null }
+      : { data: { error: 'Admin action failed' }, error: null }));
+    const Panel = await importPanel();
+    render(<Panel />);
+    fireEvent.change(screen.getByLabelText(/^broadcast message$/i), { target: { value: 'Letter' } });
+    fireEvent.click(screen.getByRole('button', { name: /^queue broadcast$/i }));
+    const dialog = await screen.findByRole('dialog');
+    fireEvent.change(within(dialog).getByLabelText(/retype send to all/i), { target: { value: 'SEND TO ALL' } });
+    fireEvent.change(within(dialog).getByLabelText(/your account password/i), { target: { value: 'pw' } });
+    fireEvent.click(within(dialog).getByRole('button', { name: /^queue broadcast$/i }));
+    await waitFor(() => expect(screen.getAllByRole('alert').some((n) => /admin action failed/i.test(n.textContent))).toBe(true));
+    expect(screen.queryByText(/broadcast queued/i)).toBeNull();
+  });
+});

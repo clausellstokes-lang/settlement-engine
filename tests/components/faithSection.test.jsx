@@ -30,6 +30,7 @@ vi.mock('../../src/store/index.js', () => {
 import { useStore } from '../../src/store/index.js';
 import FaithSection from '../../src/components/settlement/FaithSection.jsx';
 import { recordPatronFall } from '../../src/domain/worldPulse/patronFall.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
 
 // A distinctive latent-deity name — if it ever appears in a free render, the
 // privacy gate has failed.
@@ -134,10 +135,13 @@ describe('FaithSection — the live faith panel + cause chains as sentences', ()
     expect(standings.textContent).toMatch(/Sunlord Aurelian/);
     expect(standings.textContent).toMatch(/Ashmother/);
     expect(standings.textContent).toMatch(/secure/);   // 0.82 legitimacy
-    // LEGIBILITY LAW: the 0..1 legitimacy scalar reads as what it measures — a
-    // creed's rightful claim — not as the engine's field name.
-    expect(standings.textContent).toMatch(/rightful claim 82%/);
-    expect(standings.textContent).not.toMatch(/legitimacy/i);
+    // ONE WORD FOR ONE FACT (chair ruling F6, 2026-10-30): the legitimacy band ("secure")
+    // already says the creed's rightful claim, so the parenthetical percentage beside it,
+    // "(rightful claim 82%)", is an engine scalar restating a word and is gone. The engine's
+    // field name never reaches the reader either.
+    expectAbsentWithAnchor(standings.textContent, 'rightful claim', 'secure', 'F6 parenthetical percentage');
+    expectAbsentWithAnchor(standings.textContent, '82%', 'secure', 'F6 legitimacy scalar');
+    expect(standings.textContent).not.toMatch(/legitimacy/i); // anchored: 'secure' is asserted present two lines up
     expect(standings.textContent).toMatch(/14% keep no god/);
     // Cause chains as sentences (legibility law).
     expect(container.textContent).toMatch(/no longer lives like its god/i);   // conduct_drift

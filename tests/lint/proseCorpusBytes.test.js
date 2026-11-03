@@ -300,7 +300,8 @@ describe('the prose byte ratchet — the declared-row chain (the monotone door)'
         at = row.toRaw;
       }
       if (at === null) continue;
-      if (at !== leaves[rel].raw) {
+      // A SHRINK IS ALWAYS ADMISSIBLE; ONLY GROWTH IS GOVERNED (chair ruling 1, 2026-10-30, ODQ §934.101): the chain may end above today's bytes, and its gzipAfter then describes the larger file.
+      if (at < leaves[rel].raw) {
         broken.push(
           `${rel}: the declared chain ends at ${at} but the committed row says ${leaves[rel].raw}. `
           + `A number cannot be raised without a declared row landing on it; a number LOWERED below `
@@ -308,7 +309,7 @@ describe('the prose byte ratchet — the declared-row chain (the monotone door)'
         );
       }
       const last = chain[chain.length - 1];
-      if (last && last.gzipAfter !== leaves[rel].gzip) {
+      if (last && at === leaves[rel].raw && last.gzipAfter !== leaves[rel].gzip) {
         broken.push(`${rel}: the last declared row records gzipAfter ${last.gzipAfter}, the committed row says ${leaves[rel].gzip}`);
       }
     }

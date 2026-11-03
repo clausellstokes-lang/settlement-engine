@@ -23,24 +23,32 @@ import FounderChairBio from './FounderChairBio.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import PublicAvatar from '../primitives/PublicAvatar.jsx';
 import AccountIdentitySection from './AccountIdentitySection.jsx';
-import { GOLD, INK, MUTED, SECOND, BORDER, CARD, sans, serif_, SP, FS, swatch } from '../theme.js';
+import { GOLD, INK, MUTED, SECOND, BORDER, CARD, SLATE_DEEP, sans, serif_, SP, FS, swatch } from '../theme.js';
 import Section from './AccountSection.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 
+// A role the badge does not know renders NO badge. It used to fall back to the
+// Admin badge, so the support desk (T9) read "Admin" on its own profile.
+// The Support stamp carries NO WASH (kill-list cure, lane T12): a slate rule and
+// slate ink carry it, the TreatyPanel true-state-chip cure, so the new role adds
+// no tinted callout to the deep-craft ratchet.
+const ROLE_BADGES = {
+  developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
+  admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
+  support:   { color: SLATE_DEEP, bg: 'transparent', rule: SLATE_DEEP, label: 'Support' },
+};
+
 function RoleBadge({ role }) {
   const mobile = useIsMobile();
-  if (role === 'user') return null;
-  const cfg = {
-    developer: { color: '#7c3aed', bg: 'rgba(124,58,237,0.12)', label: 'Developer' },
-    admin:     { color: '#dc2626', bg: 'rgba(220,38,38,0.12)', label: 'Admin' },
-  };
-  const c = cfg[role] || cfg.admin;
+  const c = Object.prototype.hasOwnProperty.call(ROLE_BADGES, role) ? ROLE_BADGES[role] : null;
+  if (!c) return null;
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 3,
       padding: '3px 10px',
       background: c.bg, color: c.color,
+      border: c.rule ? `1px solid ${c.rule}` : undefined,
       fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700,
       textTransform: 'uppercase', letterSpacing: '0.04em',
     }}>

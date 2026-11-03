@@ -15,6 +15,7 @@
 
 import { useState } from 'react';
 import { fixture } from '../home/landingFixture.js';
+import { GENERATION_INTENT_SAMPLE_FORK } from '../../lib/generationIntent.js';
 import { useStore } from '../../store/index.js';
 import { navigate } from '../../hooks/useRoute.js';
 import RefusalNotice from '../primitives/RefusalNotice.jsx';
@@ -43,7 +44,11 @@ export default function ForgeExactDemo() {
       setRandomSliderMode(fixture.forge.randomSliderMode);
       clearNeighbour();
       updateConfig({ ...fixture.forge.config });
-      const forged = await generate(fixture.seed);
+      // ⛔ A CURATED REPLAY, ASKED AS ONE (chair ruling, 2026-10-30). The fixture is a
+      // village and a signed-out forge is otherwise a Town on random dials; the curated
+      // intent hands every reader the identical town, passing the anonymous floor but
+      // never the ceiling (store/settlementGenerateAction.js).
+      const forged = await generate(fixture.seed, { intent: GENERATION_INTENT_SAMPLE_FORK });
       // A refusal STAYS HERE, under the demo, with its reason. Navigating away from a
       // refusal is what made the class invisible.
       if (!forged) { setForging(false); return; }

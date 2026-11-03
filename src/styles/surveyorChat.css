@@ -41,7 +41,9 @@
 
 .sf-door-chat-turn { display: flex; flex-direction: column; gap: 2px; }
 .sf-door-chat-register { display: flex; flex-wrap: wrap; gap: 8px; }
-.sf-door-chat-composer { display: flex; flex-direction: column; gap: 6px; }
+/* A row: the box takes the width; on a phone its one send glyph sits at its foot. */
+.sf-door-chat-composer { display: flex; align-items: flex-end; gap: 6px; }
+.sf-door-chat-composer > .sf-door-chat-area { flex: 1 1 auto; min-width: 0; }
 
 .sf-door-chat-actions {
   display: flex;
@@ -73,4 +75,39 @@
   max-width: 100%;
   max-height: 82vh;
   padding-bottom: calc(16px + var(--sf-door-kbd-inset, 0px));
+}
+
+/* X-22 FIRST OPEN: the one composer at the door, nothing else in the frame. It keeps
+   the base slip's dock at the tab's margin (index.css .sf-door-panel) and only trims
+   the frame to the box. */
+.sf-door-panel.sf-door-composer {
+  padding: 8px;
+  width: 320px;
+}
+
+/* X-22 THE LOG: the composer grown into a floating card in the coach's idiom (about
+   320 px; the component sets the width and the anchor inline, beside the walker-read
+   lift). Shape and elevation here, never inline (the deep-craft kill-list). */
+.sf-door-chat-card {
+  box-sizing: border-box;
+  max-width: calc(100vw - 32px);
+  max-height: min(70vh, 560px);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 12px 12px;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.28);
+  overflow: hidden;
+}
+/* The header runs edge to edge as the drag handle. */
+.sf-door-chat-card > .sf-door-chat-head {
+  margin: 0 -12px;
+  padding: 6px 8px 6px 12px;
+}
+/* THE PILL: the folded log, one line. */
+.sf-door-chat-card.sf-door-chat-card--pill {
+  padding: 0;
+  max-height: none;
+  overflow: visible;
 }

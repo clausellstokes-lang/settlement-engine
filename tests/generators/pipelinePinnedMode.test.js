@@ -42,7 +42,6 @@ import { describe, expect, it } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { chooseOrPin, getStepMeta, getStepOrder, runPipeline } from '../../src/generators/pipeline.js';
 import { generateRelationships } from '../../src/generators/npcGenerator.js';
-import { generateConflicts, generateFactions } from '../../src/generators/powerGenerator.js';
 import { resolveConfigWithUserContentTunables } from '../../src/domain/content/userContentTunables.js';
 import { pinsFrom, rederive } from '../../src/domain/edit/dmLayer.js';
 import { declarationsFor, isEditableCard } from '../../src/domain/edit/fieldDeclarations.js';
@@ -55,8 +54,10 @@ import { goldenCorpus, keyOf } from '../helpers/goldenMasterCorpus.js';
 
 const GOLDEN_MANIFEST = resolve(process.cwd(), 'tests', 'fixtures', 'generator-golden-master.json');
 const POPULATION_STEP = 'generatePopulation';
-/** The record paths `generatePopulation`'s four choosers write. Pins are keyed by these. */
-const CHOOSER_KEYS = ['npcs', 'relationships', 'factions', 'conflicts'];
+/** The record paths `generatePopulation`'s two choosers write. Pins are keyed by these.
+ *  GS-2 (ODQ §934.101): four -> two. The faction groups and the conflicts left this step for
+ *  assembly, which derives them from the FINAL roster, so they are no longer choosers here. */
+const CHOOSER_KEYS = ['npcs', 'relationships'];
 const SEED = 'em-p0-pinned-mode';
 const CONFIG = {
   settType: 'town',
@@ -65,11 +66,12 @@ const CONFIG = {
   tradeRouteAccess: 'river',
   monsterThreat: 'civilized',
 };
-/** The derive half's measured draw budget: generateRelationships 67 + factions 2 + conflicts 2.
+/** The derive half's measured draw budget: generateRelationships 67.
  *  2026-10-01, the urban band (ODQ §934.86): 62 + 2 + 3 = 67 -> 67 + 2 + 2 = 71. The probe settlement is
  *  the same seed, and its institution set (hence its roster of relationship pairs) moved with the rebuilt
- *  registry; re-measured by the arm's own recipe, not predicted. */
-const DERIVE_HALF_DRAWS = 71;
+ *  registry; re-measured by the arm's own recipe, not predicted.
+ *  GS-2 (ODQ §934.101): 67 + 2 + 2 = 71 -> 67. The name picks and the conflict draws left the step. */
+const DERIVE_HALF_DRAWS = 67;
 /** The seed §0R.1's derive-half probe was measured on, and the settlement it measured over. */
 const DERIVE_PROBE_STREAM = 'em-p0-probe-derive';
 const DERIVE_PROBE_SEED = 'em-p0-probe';
@@ -163,8 +165,6 @@ function pinsFromContext(ctx) {
   return {
     npcs: ctx.npcs,
     relationships: ctx.relationships,
-    factions: ctx.factions,
-    conflicts: ctx.conflicts,
   };
 }
 
@@ -214,7 +214,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(JSON.stringify(second.record)).toBe(JSON.stringify(record));
   }, 120_000);
 
-  it('A3 — a pinned chooser does not draw: 71 derive-half draws unpinned, zero fully pinned', () => {
+  it('A3 — a pinned chooser does not draw: 67 derive-half draws unpinned, zero fully pinned', () => {
     const unpinned = instrumentedRoot(SEED);
     const unpinnedCtx = runHeadless(unpinned.root);
     expect(unpinned.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
@@ -225,7 +225,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
     // The derive half's own budget, re-measured exactly the way §0R.1 measured it — same
     // probe settlement, same seed — because that is the figure the packet predicts. An
-    // argument is not a proof of purity: these three run from a GIVEN roster and still draw.
+    // argument is not a proof of purity: it runs from a GIVEN roster and still draws.
     const probeSettlement = generateSettlementPipeline({}, null, {
       seed: DERIVE_PROBE_SEED, customContent: {},
     });
@@ -234,22 +234,13 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
       const relationships = generateRelationships(
         probeSettlement.npcs, probeSettlement.config || {}, probeSettlement.institutions || [],
       );
-      const afterRelationships = counter.calls;
-      const factions = generateFactions(probeSettlement.npcs, relationships);
-      const afterFactions = counter.calls;
-      generateConflicts(
-        factions, relationships, probeSettlement.config || {}, probeSettlement.institutions || [],
-      );
+      expect(relationships.length, 'the probe roster has ties to draw').toBeGreaterThan(0);
       return {
-        relationships: afterRelationships - start,
-        factions: afterFactions - afterRelationships,
-        conflicts: counter.calls - afterFactions,
+        relationships: counter.calls - start,
         total: counter.calls - start,
       };
     });
     expect(budget.relationships).toBe(67);
-    expect(budget.factions).toBe(2);
-    expect(budget.conflicts).toBe(2);
     expect(budget.total).toBe(DERIVE_HALF_DRAWS);
   }, 180_000);
 
@@ -270,7 +261,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(violations).toContainEqual({
       step: POPULATION_STEP,
       kind: 'pin',
-      keys: ['npcs', 'factions', 'conflicts'],
+      keys: ['npcs'],
     });
   }, 120_000);
 
@@ -289,7 +280,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
     expect(labels, 'the runner forks the step exactly once').toEqual([POPULATION_STEP]);
     expect(instrumented.record.streams, 'exactly one stream object serves the step').toHaveLength(1);
     expect(instrumented.record.innerForks, 'nothing inside the step mints a second stream').toBe(0);
-    // Both halves drew on that ONE object: the derive half's 71 cannot fit alone in a count
+    // Both halves drew on that ONE object: the derive half's 67 cannot fit alone in a count
     // that also carries the root half's density band and roster draws.
     expect(instrumented.record.draws).toBeGreaterThan(DERIVE_HALF_DRAWS);
   }, 120_000);
@@ -332,7 +323,7 @@ describe('EM-P0 — the pipeline seam: pins are consulted per chooser, on one st
 
 /** The step's own unpinned draw count at SEED and CONFIG. AS-OF `bdbf7c89c`, re-measured at
  *  EM-B2a2's base; A2 and A3 both re-measure it rather than trusting the numeral. */
-const UNPINNED_STEP_DRAWS = 310; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config
+const UNPINNED_STEP_DRAWS = 306; // 2026-10-01, the urban band (ODQ §934.86): 315 -> 307; the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310; each re-measured at this seed and config; GS-2 one faction set (ODQ §934.101): 310 -> 306, the name picks and the conflict draws left the step
 /** The overridden VALUE A3 carries through the pin channel into the assembled record. It is
  *  planted by the arm and appears nowhere in the generator's vocabulary. */
 const OVERRIDE_SENTINEL = 'EM-B2a2 SENTINEL BURGRAVE';
@@ -378,9 +369,9 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
       .toContain("import { chooseOrPin, registerStep } from '../pipeline.js';");
     expect(stepSource.match(/function chooseOrPin\(/g), 'the step kept a second DEFINITION')
       .toBeNull();
-    // The SPELLING survives five times over — the widened import plus the four call sites —
-    // so an arm phrased as "no occurrence" would be false rather than strict.
-    expect(stepSource.match(/chooseOrPin/g)).toHaveLength(5);
+    // The SPELLING survives three times over — the widened import plus the two call sites
+    // (GS-2: four -> two) — so an arm phrased as "no occurrence" would be false rather than strict.
+    expect(stepSource.match(/chooseOrPin/g)).toHaveLength(3);
   });
 
   it('A2 — the lift moves nothing: the golden corpus, the draw count and the one-stream shape', () => {
@@ -399,7 +390,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     expect(checked).toBeGreaterThanOrEqual(40);
     expect(moved, 'the lift moved a byte of generated output').toEqual([]);
 
-    // (2) ALL FOUR POPULATION KEYS still reach the assembled record through the lifted
+    // (2) BOTH POPULATION KEYS (GS-2: four -> two) still reach the assembled record through the lifted
     // primitive, at the same count the context carries.
     const instrumented = instrumentedRoot(SEED);
     const ctx = runHeadless(instrumented.root);
@@ -483,7 +474,7 @@ describe('EM-B2a2 — the pin primitive has ONE exported home: chooseOrPin lives
     expect(violations).toContainEqual({
       step: POPULATION_STEP,
       kind: 'pin',
-      keys: ['npcs', 'factions', 'conflicts'],
+      keys: ['npcs'],
     });
   }, 120_000);
 });
@@ -542,7 +533,7 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
         // ANTI-VACUITY, MEASURED AT THE PRODUCER'S OWN BOUNDARY: the pin was TAKEN on this row,
         // which is what tells a cured runner apart from a member that dropped the pin entirely.
         // It is read from the PATCH, never from the finished context: `corruptionPass` mutates
-        // `npcs` and `factions` AFTER the pin lands, so the final context differs on 44 rows by
+        // `npcs` AFTER the pin lands (GS-2: `factions` is no longer in the context to mutate), so the final context differs on 44 rows by
         // design and a check placed there would report a false 19 of 63 (the 2026-10-01 re-measure; was 42 and 21).
         const bypass = mode === 'bypassed' ? bypassEveryRunnerClone(caller, keys) : null;
         const options = {
@@ -578,10 +569,10 @@ describe('EM-R1 — the pin bag is cloned on entry, at the runner', () => {
     expect(through.perKey).toEqual({});
 
     // THE NEGATIVE CONTROL: the same bag with every runner clone defeated is written through on
-    // 44 rows, by npcs and factions alone, so the zero above can never go silently vacuous.
+    // 44 rows, by npcs alone (GS-2: factions left the bag), so the zero above can never go silently vacuous.
     expect(bypassed.moved, 'the control came back clean: the bypass no longer defeats the clones')
       .toBe(LEAKED_ROWS);
-    expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS, factions: LEAKED_ROWS });
+    expect(bypassed.perKey).toEqual({ npcs: LEAKED_ROWS });
     expect(bypassed.took, 'the control must take the pin too, or it measures a different world')
       .toBe(CENSUS_ROWS);
   }, 300_000);
@@ -680,8 +671,8 @@ describe('EM-R1b — a recordPath-less chooser is not counted against a record-b
       .toHaveLength(CENSUS_ROWS);
 
     // ⭐ THE POSITIVE CONTROL, IN THIS ARM: the narrowing must not go wide. A bag supplying ONE of
-    // four RECORD-BACKED choosers is still a partial pin, refused by the whole sentence, with the
-    // same three keys in its strict report.
+    // two RECORD-BACKED choosers is still a partial pin, refused by the whole sentence, with the
+    // same missing key in its strict report.
     const complete = runHeadless(createPRNG(SEED));
     const partial = { relationships: complete.relationships };
     let thrown = null;
@@ -703,7 +694,7 @@ describe('EM-R1b — a recordPath-less chooser is not counted against a record-b
     expect(violations).toContainEqual({
       step: POPULATION_STEP,
       kind: 'pin',
-      keys: ['npcs', 'factions', 'conflicts'],
+      keys: ['npcs'],
     });
   }, 600_000);
 

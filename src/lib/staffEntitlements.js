@@ -123,6 +123,26 @@ export function isStaffRole(role) {
 }
 
 /**
+ * The support-desk role (migration 050's profiles_role_check; admin-actions'
+ * A3/A5 gate). NOT staff: it is absent from STAFF_ROLES on purpose, so it
+ * unlocks no paid surface, no authoring and no Developer row. It opens one
+ * door, /admin, where AdminPanel renders only what the server grants it: the
+ * support queue and the read paths of the user console.
+ */
+export const SUPPORT_ROLE = 'support';
+
+/**
+ * IDENTITY — is this account the support desk? Fail-closed like isStaffRole:
+ * only the exact string reads true.
+ *
+ * @param {unknown} role the `role` from the authenticated profile
+ * @returns {boolean}
+ */
+export function isSupportRole(role) {
+  return role === SUPPORT_ROLE;
+}
+
+/**
  * ENTITLEMENT — does this account get the paid surface for free? Governed by
  * the kill switch, which is the one line that takes the unlock back.
  *

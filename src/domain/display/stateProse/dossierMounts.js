@@ -317,8 +317,8 @@ export const DOSSIER_MOUNTS = Object.freeze([
     visibilityReason: 'DefenseTab\'s "Criminal Architecture & Public Order" is collapsible '
       + 'defaultOpen={orderElevated||crimStructure===\'organized\'}, open on 43 of 60 generated '
       + 'towns (5 tiers x 4 cultures x 3 seeds). The rung arrives already PROJECTED BESIDE the '
-      + 'DM\'s own safetyDesc field, and that field, the Internal Security headline, the order '
-      + 'badge and the safety band word are ALL inside the same fold: on the 17 towns that fold '
+      + 'DM\'s own safetyDesc field, and that field and the safety band word are inside the same '
+      + 'fold (the Internal Security bar above it carries the score): on the 17 towns that fold '
       + 'shut, the page prints no public-order fact anywhere and hides no sentence about one. '
       + 'Hoisting the line out would orphan it from the field it is a projection of. Whether a '
       + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',
@@ -326,14 +326,29 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
+  // rubric R2). Each of these three positions printed a sentence beside rows that already
+  // carry the same fact: DS-GEN-2 restated each conflict row's parties, issue and intensity
+  // (608 of 614 towns), DS-GEN-7 restated the warning rows (396 of 1000), and DS-REL-2's two
+  // lenses restated the "Notable connection" title. The rows stay; the sentences go. The
+  // systemsHealth precedent above, with the same consequence: the block has NO speaking
+  // position until a later registry act gives it one. The print desk follows (printProse.js
+  // routes through drawnAtMount).
   Object.freeze({
-    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'sentence',
+    mount: 'overview.conflicts', tab: 'overview', desk: 'general', blockId: 'DS-GEN-2', rung: 'glance',
+  }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-8; rubric R2). DS-GEN-5's situation
+  // line keyed on the same route-to-scene table as the arrival hook beside it (700 of 1000
+  // unstressed towns heard the road three times) and contradicted DS-GEN-6 in 164 of 1000;
+  // DS-GEN-6's route line restated `settlementReason`, which names the route on every sampled
+  // town, and its tier overlay restated the strip's tier and population (991 of 1000). The
+  // "Settlement Origin" section (settlementReason, DM-editable) is the one home; neither
+  // block has a speaking position until a later registry act gives it one.
+  Object.freeze({
+    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.situation', tab: 'overview', desk: 'general', blockId: 'DS-GEN-5', rung: 'sentence',
-  }),
-  Object.freeze({
-    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'sentence', dimensions: ['deficit'],
+    mount: 'overview.origin', tab: 'overview', desk: 'general', blockId: 'DS-GEN-6', rung: 'glance', dimensions: ['deficit'],
   }),
   // ⛔ GLANCE BY OWNER ORDER 2026-09-17. The Systems Health section printed up to ten DS-GEN-3
   // sentences stacked under its bars, one per lens. The owner: "either simply pick just one or
@@ -348,7 +363,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'sentence',
+    mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.ground', tab: 'overview', desk: 'general', blockId: 'DS-GEN-12', rung: 'sentence',
@@ -447,23 +462,33 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H4; rubric R2/R4): "What the years have
+  // made of it" was two-template boilerplate, and its marker event disagreed with the
+  // character line in 351 of 451 towns (77.8%). The character line is the page's one
+  // defining event (X-9); DS-GEN-9 has no speaking position.
   Object.freeze({
-    mount: 'history.identity', tab: 'history', desk: 'general', blockId: 'DS-GEN-9', rung: 'sentence', dimensions: ['anchor'],
+    mount: 'history.identity', tab: 'history', desk: 'general', blockId: 'DS-GEN-9', rung: 'glance', dimensions: ['anchor'],
   }),
   Object.freeze({
     mount: 'history.founded', tab: 'history', desk: 'general', blockId: 'DS-GEN-14', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H3; rubric R2): the record line named the
+  // same event DS-GEN-9 named in 148 of 227 towns; the founding line (DS-GEN-14) is the one
+  // sentence the history page keeps, inside Founding. DS-GEN-16 has no speaking position.
   Object.freeze({
-    mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'sentence',
+    mount: 'history.record', tab: 'history', desk: 'general', blockId: 'DS-GEN-16', rung: 'glance',
   }),
   Object.freeze({
     mount: 'viability.verdict', tab: 'viability', desk: 'general', blockId: 'DS-GEN-11', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 Plot Hooks; rubric R2/R6): the framing
+  // restated the hook cards' categories as three aphorisms on 991 of 1000 towns. The cards,
+  // grouped by source page, are the position's rows; DS-HK-1 has no speaking position.
   Object.freeze({
-    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'sentence',
+    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'sentence',
+    mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'glance',
   }),
   Object.freeze({
     mount: 'economics.craftReason', tab: 'economics', desk: 'general', blockId: 'DS-GEN-18', rung: 'sentence',
@@ -471,8 +496,12 @@ export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
     mount: 'overview.steadings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-8', rung: 'sentence',
   }),
+  // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 Relationships; rubric R2/R4): the network
+  // line paraphrased the type badge printed one line above it (3 templates per type over 394
+  // lines), and the engagement lines were generic (one contradicted its row). The neighbour
+  // cards and engagement rows are the position's rows; DS-REL-1 has no speaking position.
   Object.freeze({
-    mount: 'relationships.network', tab: 'relationships', desk: 'general', blockId: 'DS-REL-1', rung: 'sentence',
+    mount: 'relationships.network', tab: 'relationships', desk: 'general', blockId: 'DS-REL-1', rung: 'glance',
   }),
   Object.freeze({
     mount: 'overview.populationDirection', tab: 'overview', desk: 'general', blockId: 'DS-POP-3', rung: 'sentence',

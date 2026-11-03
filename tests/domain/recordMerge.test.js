@@ -165,7 +165,10 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
     const subjects = withFood();
     // 2026-10-01, the urban band (ODQ §934.86): 54 -> 61 of the 63 census rows carry a food collection (re-measured by
     // `withFood()` itself; the rebuilt institution registry gives more worlds a second food entry).
-    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(61);
+    // 2026-10-30, the service re-map (RS-1..RS-13, ODQ §934.101; cure lane T12): 61 -> 63, re-measured by `withFood()`
+    // at f39d5ae2^ (61) and f39d5ae2 (63). The two rows are the germanic road metropolises on mountain and desert, where
+    // Fresh fish retail, Grain grinding and Wholesale trade are now filed under food; the stride is now 63 of 63.
+    expect(subjects.length, 'the rows carrying a food collection the two re-derivations can outgrow').toBe(63);
 
     const padded = [];
     const leaked = [];
@@ -190,7 +193,8 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
   it('A4 · keyed by the declared key: a permuted collection joins by name and the order arm is counted', () => {
     const subjects = withFood();
     // 2026-10-01, the urban band (ODQ §934.86): 54 -> 61, the same re-measured denominator as A3's.
-    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(61);
+    // 2026-10-30, the service re-map (RS-1..RS-13, ODQ §934.101): 61 -> 63, A3's re-measured denominator again.
+    expect(subjects.length, 'the rows whose food collection has two entries to permute').toBe(63);
 
     const notJoined = [];
     const neighboursMoved = [];
@@ -217,6 +221,7 @@ describe('EM-R0c — the merge: the consequence of an edit is the difference of 
 
   it('A5 · a cross-entry total is atomic: incomeSources comes from R1 as one value', () => {
     const subjects = withIncome();
+    // 2026-10-30, checked against the service re-map (ODQ §934.101): 61 at f39d5ae2^ and at f39d5ae2, unmoved.
     expect(subjects.length, 'the rows whose income shares have two entries to re-cut').toBe(61);
 
     const notWhole = [];

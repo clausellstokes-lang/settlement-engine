@@ -603,8 +603,9 @@ export default function GenerateWizard({ isMobile, onSignIn, onNavigate }) {
 
           {/* Post-generate "what's next" guidance now lives in the app-level
               PostGenCoach (the guidance registry's wizard-postgen host, mounted
-              in App.jsx), so the canonical Save / Export / New controls above own
-              this in-flow space uncontested. */}
+              in App.jsx): a fixed, movable corner card on the desktop and an
+              in-flow card on phones, so the canonical Save / Export / New
+              controls above own this in-flow space uncontested. */}
           <ConfirmDialog
             open={!!pendingExit}
             tone="warning"

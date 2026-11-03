@@ -11,6 +11,7 @@ import { buildGovernanceLabels } from '../../src/generators/power/governanceNarr
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { STABILITY_BANDS, bandOf } from '../../src/domain/display/labelBands.js';
+import { createGenerationWorldLaw } from '../../src/generators/generationContext.js';
 
 const DEFAULT_INPUT = {
   factions: [{ faction: 'Elected Reeve', isGoverning: true }],
@@ -256,3 +257,63 @@ describe('an active crisis never reads as Stable (owner order 2026-09-17)', () =
   }, 120_000);
 });
 
+
+// ── GS-4 THE MAGES' QUARTER (chair ruling on G-SEAMS S4, ODQ §934.101; build lane G1 U1) ──
+// The heresy arm's hedge-wizard line keyed on institution NAMES alone, so a mundane
+// 'Alchemist shop' (catalog licence `none`, admitted by the world law as ordinary alchemy)
+// raised a working wizard and a mages' quarter in a world where magic does not function:
+// 11 of the 250 no-magic towns of the 1000-town sample, 5 more copied into the pressure
+// line, every one convicted by the generator's own coherence receipt and shipped anyway.
+// The arcane branch now asks the GENERATION WORLD LAW first; the arm falls to its own
+// priest lines, which are belief and stand in any world.
+describe("no arcane governance line in a no-magic world (GS-4)", () => {
+  const HERESY_TOWN = {
+    stressFlags: { heresySuppression: true },
+    instNames: ['alchemist shop', 'parish church', 'council hall'],
+  };
+  const PRIEST_COURT = 'The priest has summoned someone before the church court. The village is divided on whether they deserved it.';
+
+  test('a mundane Alchemist shop cannot raise the hedge-wizard line when magic does not function', () => {
+    const noMagic = deriveGovernance({ ...HERESY_TOWN, config: { monsterThreat: 'frontier', magicExists: false } });
+    expect(noMagic.recentConflict).toBe(PRIEST_COURT);
+    // The control: the same town in a world where magic works keeps its wizard.
+    expect(deriveGovernance(HERESY_TOWN).recentConflict).toMatch(/^A hedge wizard was dragged/);
+  });
+
+  test("the generator's world law is the authority, not a config the caller may have trimmed", () => {
+    const worldLaw = createGenerationWorldLaw({ magicExists: false });
+    expect(deriveGovernance({ ...HERESY_TOWN, worldLaw }).recentConflict).toBe(PRIEST_COURT);
+  });
+
+  test('THE PIPELINE: the eleven sample towns regenerate with no arcane line, and the receipt convicts none', () => {
+    // The eleven no-magic towns of gen1000v2 that shipped the line: [seed n, tier, culture, terrain, route].
+    const ELEVEN = [
+      [63, 'town', 'steppe', 'auto', 'crossroads'], [267, 'town', 'mesoamerican', 'forest', 'port'],
+      [387, 'town', 'arabic', 'coastal', 'river'], [503, 'metropolis', 'greek', 'mountain', 'mountain_pass'],
+      [543, 'town', 'slavic', 'desert', 'mountain_pass'], [599, 'metropolis', 'celtic', 'auto', 'river'],
+      [651, 'town', 'generic', 'plains', 'crossroads'], [755, 'metropolis', 'norse', 'hills', 'mountain_pass'],
+      [759, 'town', 'slavic', 'hills', 'road'], [779, 'metropolis', 'south_asian', 'hills', 'crossroads'],
+      [819, 'town', 'arabic', 'forest', 'crossroads'],
+    ];
+    const ARCANE = /wizard|mage|arcane/i;
+    const offenders = [];
+    let alchemistTowns = 0;
+    let priestLines = 0;
+    for (const [n, settType, culture, terrainOverride, tradeRouteAccess] of ELEVEN) {
+      const settlement = generateSettlementPipeline({
+        settType, culture, terrainOverride, magicExists: false, tradeRouteAccess, _randomizePriorities: true,
+      }, null, { seed: `ux-audit-v2-2026-10-30-${n}`, customContent: {} });
+      if ((settlement.institutions || []).some((i) => /^Alchemist (shop|quarter)$/.test(i.name))) alchemistTowns += 1;
+      const recentConflict = settlement.powerStructure?.recentConflict || '';
+      if (/^The priest has/.test(recentConflict)) priestLines += 1;
+      if (ARCANE.test(recentConflict)) offenders.push(`${n} recentConflict: ${recentConflict}`);
+      if (ARCANE.test(settlement.pressureSentence || '')) offenders.push(`${n} pressureSentence: ${settlement.pressureSentence}`);
+      const magicCheck = (settlement.generationCoherenceReceipt?.checks || []).find((c) => c.id === 'world_law_magic');
+      for (const f of magicCheck?.findings || []) offenders.push(`${n} receipt ${f.path}: ${f.evidence}`);
+    }
+    expect(offenders).toEqual([]);
+    // Non-vacuity: the trip-wire is present in every one, and the heresy arm still fires.
+    expect(alchemistTowns).toBe(ELEVEN.length);
+    expect(priestLines).toBeGreaterThan(0);
+  }, 60_000);
+});

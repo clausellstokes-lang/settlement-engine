@@ -7,7 +7,7 @@
  * sheets. The full-sheet treatment lives in the Notable NPCs chapter.
  *
  * Editable: nothing — this page is a stable index. Edits live on the detailed
- * sheets in chapter 04.
+ * sheets in chapter 13.
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
@@ -92,14 +92,14 @@ export function NPCQuickRef({ settlement, narrativeMode, vm }) {
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
-        eyebrow="03"
+        eyebrow="12"
         title="NPC Quick Reference"
         accent={narrativeMode ? palette.ai : palette.gold}
         sub={`${all.length} face${all.length === 1 ? '' : 's'}`}
       />
 
       <ChapterHeadline tone="gold">
-        Every named figure on one page. Power tints flag who's worth caring about. Detailed sheets in chapter 04.
+        Every named figure on one page. Power tints flag who's worth caring about. Detailed sheets in chapter 13.
       </ChapterHeadline>
 
       {all.length === 0 && (

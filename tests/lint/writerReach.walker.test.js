@@ -92,6 +92,10 @@ const osrBaseline = JSON.parse(read('scripts/.observed-shape-readers-baseline.js
  * composed tip's corpus configs now carry `stressTypes` (writer-reach's register froze `stressTypes on _config` as
  * a new LIT identity at register car 2), so `resolveStress.js:65` stamps `source: 'forced'` in the CONTROL world
  * too, and the key is ordinary rather than dial-gated. A shrink, taken as the walker measured it; no row rowed.
+ * ⭐ 2026-10-31, GS-2 ONE FACTION SET (ODQ §934.101): `importance on members` LEFT the dial-gated set by measurement
+ * (expected 30, received 29; confounded 54 → 53; `both controls` 30 → 29). The grouping list is now derived from the
+ * FINAL roster, so the structural office-holders `ensureFactionStructuralNpcs` stamps with `importance` sit in it in
+ * the CONTROL world too, and the key is ordinary there rather than dial-gated. A shrink; no row rowed.
  */
 const FROZEN_DIAL_GATED = Object.freeze([
   'affects on stressors',
@@ -110,7 +114,6 @@ const FROZEN_DIAL_GATED = Object.freeze([
   'disablesGoods on stressors',
   'disablesInstitutions on stressors',
   'epithet on traditions',
-  'importance on members',
   'isCustom on factions',
   'isCustom on stressors',
   'isCustom on traditions',
@@ -288,7 +291,13 @@ describe('writer-with-no-reader ratchet: the frozen register', () => {
     // SIX BECAME TEN (2026-10-02, the Voice Program wave 1, ODQ §934.88): `appliedHeadline` on candidates, selected,
     // autoApplied and outcome, engine-internal. Every producer now writes the deed DONE beside the deed UNDER WAY,
     // and the feed curation's appliedHeadlineFor is its one reader.
-    expect(WRITER_DARK_REGISTER.length).toBe(10);
+    // TEN BECAME ELEVEN (2026-10-30, the dossier consolidation, ODQ §934.101, ruling X-2): `archetypeKey on
+    // relationships`, engine-internal. The Plot Hooks collector no longer turns a tie's tension into a card, so
+    // the key's one surface read went with it; its consumer is the rename path in generateSettlementPipeline.js.
+    // ELEVEN BECAME TWELVE (2026-10-31, GS-1 tension variety, ODQ §934.101): `proseVariant on relationships`,
+    // engine-internal. The tie's line is drawn without replacement across the town, so the generator stores the
+    // drawn index and the rename path in generateSettlementPipeline.js re-renders at it; no surface reads it.
+    expect(WRITER_DARK_REGISTER.length).toBe(12);
     expect(liveEvidence.map((row) => row.identity).sort())
       .toEqual(WRITER_DARK_REGISTER.map((row) => row.identity).sort());
     for (const row of liveEvidence) {
@@ -387,10 +396,12 @@ describe('writer-with-no-reader ratchet: the EXECUTED corpus and the closures', 
     // own `resolveSpec` resolves the literal only and would follow neither, which is
     // exactly the blindness ODQ §880.5 recorded; the five-suffix resolution cures it.
     expect(whole.has('src/components/new/tabs/FaithTab.jsx')).toBe(true);
-    expect(whole.has('src/components/new/SummaryTab.jsx')).toBe(true);
+    expect(whole.has('src/components/new/tabs/OverviewTab.jsx')).toBe(true);
     const registry = read('src/components/dossier/dossierLazyTabs.js');
     expect(registry).toContain("import('../new/tabs/FaithTab.jsx')");
-    expect(registry).toContain("import('../new/SummaryTab')");
+    // The extensionless example was SummaryTab until the DM Summary tab was removed (X-5,
+    // ODQ §934.101); OverviewTab is spelled the same way.
+    expect(registry).toContain("import('../new/tabs/OverviewTab')");
   });
 
   test('the dossier-pdf closure contains the view model and the sections, and the campaign-pdf and world-book closures are disjoint from src/pdf', () => {
@@ -467,7 +478,11 @@ describe('writer-with-no-reader ratchet: the live judgment', () => {
     // CURE-PEACE-1 adds `supersessionReason on proposals` (registered AND dark): four became five.
     // The Voice Program wave 1 (2026-10-02, ODQ §934.88) adds the four `appliedHeadline` rows, all written on every
     // world and so all in the dark cohort: five became nine.
-    expect(registeredAndDark.length).toBe(9);
+    // The dossier consolidation (2026-10-30, ODQ §934.101, ruling X-2) adds `archetypeKey on relationships`,
+    // written on every world with a tie: nine became ten.
+    // GS-1 tension variety (2026-10-31, ODQ §934.101): `proseVariant on relationships` is registered engine-internal and
+    // written on every world with a tie: ten became eleven.
+    expect(registeredAndDark.length).toBe(11);
     expect(baseline.darkUnregistered.length).toBe(cohort.length - registeredAndDark.length);
     expect(reviewableDark(cohort).length).toBe(baseline.reviewableDarkCount);
     expect(reviewableDark(cohort).length).toBeLessThan(cohort.length);
@@ -935,7 +950,7 @@ describe('writer-with-no-reader ratchet: the register doors convict what they ca
     expect(message).toContain('not an acquittal');
     // The doors carry the measurement themselves, which is why the live run passes.
     expect(live.dialGated, 'measure() must build the dial corpora for the doors').toBeInstanceOf(Set);
-    expect(live.dialGated.size).toBe(30);
+    expect(live.dialGated.size).toBe(29);
   });
 
   test('a second --genesis over an existing baseline is refused', async () => {
@@ -1211,9 +1226,9 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
     // §7.1 compares the lit corpus against the WALKER'S corpus, which moves two
     // variables at once and misses a third. Every reading is asserted TOGETHER so
     // the corrections are measured quantities rather than an argument.
-    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(54);
-    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(34);
-    expect(gated.size, 'both controls applied').toBe(30);
+    expect(confounded.size, 'lit vs the walker corpus: the pack counted as a dial').toBe(53);
+    expect(packControlOnly.size, 'pack held constant, producer set still asymmetric').toBe(33); // GS-2: 34 -> 33 with importance on members
+    expect(gated.size, 'both controls applied').toBe(29);
     expect(confounded.size - packControlOnly.size, '23 pack-attributable, less 3 the pack control also gains (was 24/21 before source on stressors turned ordinary at §900)')
       .toBe(20);
     // The four the DARK-corpus control removes are keys a shipped world does write,
@@ -1232,7 +1247,7 @@ describe('writer-with-no-reader ratchet: the lit-dial arm', () => {
 
   test('every dial-gated identity is in the frozen roster and every frozen entry is still dial-gated — a new dial-gated key reds by name', () => {
     expect([...gated].sort()).toEqual([...FROZEN_DIAL_GATED]);
-    expect(FROZEN_DIAL_GATED.length).toBe(30);
+    expect(FROZEN_DIAL_GATED.length).toBe(29);
     expect(new Set(FROZEN_DIAL_GATED).size).toBe(FROZEN_DIAL_GATED.length);
     for (const identity of FROZEN_DIAL_GATED) {
       expect(identity).toMatch(/^\S+ on \S+$/);

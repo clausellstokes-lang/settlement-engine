@@ -18,7 +18,9 @@
  */
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { render, cleanup } from '@testing-library/react';
+import { render, cleanup, fireEvent, waitFor } from '@testing-library/react';
+import { fixture as landingFixture } from '../../src/components/home/landingFixture.js';
+import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
 
 import { COMPENDIUM_DATA as CD } from '../../src/domain/compendium/generated/compendiumData.generated.js';
 
@@ -76,5 +78,24 @@ describe('About manifesto — the trust page', () => {
     const AboutPage = (await import('../../src/components/about/AboutWhatThisIs.jsx')).default;
     const { container } = render(<AboutPage />);
     expect(container.textContent).toContain('How SettlementForge compares');
+  });
+});
+
+// ⛔ "FORGE THIS EXACT TOWN" IS A CURATED REPLAY (chair ruling, 2026-10-30). It replays the
+// lf-033 fixture (Cnocby, a village) and asks as a curated fork, so a signed-out visitor is
+// handed the identical town rather than a Town clamp or a floor refusal; the lane half of
+// the pin (the fixture's own config reaching the engine) lives in tests/ui/anonPreGenLocked.
+describe('About: the exact-town replay', () => {
+  it('replays the fixture seed as a curated fork', async () => {
+    const generateSettlement = vi.fn(async () => null);
+    Object.assign(storeState, {
+      generateSettlement, updateConfig: vi.fn(), setWizardMode: vi.fn(),
+      setRandomSliderMode: vi.fn(), clearNeighbour: vi.fn(), clearRefusal: vi.fn(), lastRefusal: null,
+    });
+    const AboutPage = (await import('../../src/components/about/AboutWhatThisIs.jsx')).default;
+    const { getByRole } = render(<AboutPage />);
+    fireEvent.click(getByRole('button', { name: 'Forge this exact town' }));
+    await waitFor(() => expect(generateSettlement).toHaveBeenCalledTimes(1));
+    expect(generateSettlement).toHaveBeenCalledWith(landingFixture.seed, { intent: GENERATION_INTENT_SAMPLE_FORK });
   });
 });

@@ -2,7 +2,9 @@ import { useState } from 'react';
 import { FS, BODY, swatch, MUTED } from '../theme.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import InfoPill from '../primitives/InfoPill.jsx';
 import useIsMobile from '../../hooks/useIsMobile.js';
+import { FLUSH } from '../../design/flush.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
 
 export const serif = { fontFamily: 'Crimson Text, Georgia, serif' };
@@ -70,7 +72,7 @@ export function Collapsible({ title, defaultOpen = true, children }) {
   return (
     // marginBottom 0 (owner order 2026-07-22, flush sweep): dossier cards sit
     // flush, no inter-card parchment gap.
-    <div style={{ marginBottom: 0, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
+    <div style={{ ...FLUSH, border: '1px solid #e0d0b0', overflow: 'hidden' }}>
       <Button
         variant="secondary"
         aria-expanded={open}
@@ -93,30 +95,40 @@ export function Collapsible({ title, defaultOpen = true, children }) {
 // Alias for HistoryTab import
 
 // Section header (Ra in original) - optionally collapsible
-export function Section({ title, collapsible = false, defaultOpen = true, accent, children }) {
+/**
+ * `help` (X-42, the owner 2026-11-02): a generic line from copy/sectionHelp.js worn as a ? pill
+ * beside the title. On the collapsible form the pill sits OUTSIDE the toggle (a button inside a
+ * button is not HTML), in the same header row.
+ */
+export function Section({ title, collapsible = false, defaultOpen = true, accent, help, children }) {
   const [open, setOpen] = useState(defaultOpen);
   if (collapsible) {
     const borderColor = accent ? `${accent}50` : '#e0d0b0';
     const headerBg   = accent ? `${accent}12` : (open ? '#f5ede0' : '#faf8f4');
     const titleColor = accent || '#1c1409';
     return (
-      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards.
-      <div style={{ marginBottom: 0, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
-        <Button
-          variant="secondary"
-          aria-expanded={open}
-          onClick={() => setOpen(v => !v)}
-          fullWidth
-          style={{
-            justifyContent: 'space-between',
-            padding: '9px 13px', background: headerBg, border: 'none',
-            textAlign: 'left', borderBottom: open ? `1px solid ${borderColor}` : 'none',
-            borderRadius: 0, fontWeight: 600, WebkitTapHighlightColor: 'transparent',
-          }}
-        >
-          <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: titleColor }}>{title}</span>
-          <span style={{ fontSize: FS.sm, color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
-        </Button>
+      // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier cards. FLUSH (X-44,
+      // 2026-11-02): the top edge over the previous block's bottom edge, so two edges paint as one.
+      <div style={{ ...FLUSH, border: `1px solid ${borderColor}`, borderLeft: accent ? `3px solid ${accent}` : '1px solid #e0d0b0', overflow: 'hidden' }}>
+        {/* A span, not a div: a reader that finds the title and walks up to the nearest div lands
+            on the section itself, as it did before the pill had a row of its own. */}
+        <span style={{ display: 'flex', alignItems: 'stretch', background: headerBg, borderBottom: open ? `1px solid ${borderColor}` : 'none' }}>
+          <Button
+            variant="secondary"
+            aria-expanded={open}
+            onClick={() => setOpen(v => !v)}
+            fullWidth
+            style={{
+              justifyContent: 'space-between', flex: 1, minWidth: 0,
+              padding: '9px 13px', background: 'transparent', border: 'none',
+              textAlign: 'left', borderRadius: 0, fontWeight: 600, WebkitTapHighlightColor: 'transparent',
+            }}
+          >
+            <span style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.lg, fontWeight: 600, color: titleColor }}>{title}</span>
+            <span style={{ fontSize: FS.sm, color: MUTED }}>{open ? '\u25b2' : '\u25bc'}</span>
+          </Button>
+          {help && <span style={{ display: 'inline-flex', alignItems: 'center', paddingRight: 10 }}><InfoPill text={help} /></span>}
+        </span>
         {open && <div style={{ padding: '12px 13px', background: swatch['#FAF8F4'] }}>{children}</div>}
       </div>
     );
@@ -125,7 +137,7 @@ export function Section({ title, collapsible = false, defaultOpen = true, accent
     // marginBottom 0 (owner order 2026-07-22, flush sweep): flush dossier sections.
     <div style={{ marginBottom: 0 }}>
       <div style={{ fontFamily: 'Crimson Text, Georgia, serif', fontSize: FS.xl, fontWeight: 600, color: swatch.inkMag, borderBottom: '1px solid #e0d0b0', paddingBottom: 5, marginBottom: 12 }}>
-        {title}
+        {title}{help && <InfoPill text={help} />}
       </div>
       {children}
     </div>

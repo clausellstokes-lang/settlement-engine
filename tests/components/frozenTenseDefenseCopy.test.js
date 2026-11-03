@@ -73,18 +73,21 @@ describe('frozen-tense display honesty — DefenseTab (FROZEN_VS_LIVE snapshot f
     }
   });
 
-  test('the Internal Security banner (frozen scores.internal) carries the survey vintage', () => {
-    // Sentence case since the label ladder (components/new/labelLadder.js): the vintage
-    // suffix is a rung-2 label, not a section eyebrow.
-    expect(read(DEFENSE_TAB)).toMatch(/Internal security · first survey/);
+  // ⭐ ONE LABEL PER PAGE (RULINGS-CROSS X-8, the chair's reading of owner-queue #28,
+  // vetoable; RULINGS-T2 T2-22). The Threat Assessment caption is the Defense page's one
+  // vintage label and covers every frozen reading on the page (scores.internal, the G5
+  // structuralViolations behind Vulnerabilities); no other site repeats it.
+  test('the first-survey vintage is said ONCE on the Defense page, in the Threat caption', () => {
+    const src = read(DEFENSE_TAB);
+    expect(src.match(/first survey/gi) || [], 'the vintage is said once in this file').toHaveLength(1);
+    expect(src).toMatch(/as judged at the first survey/);
+    expect(src).not.toMatch(/Internal security · first survey/); // anchored: the toMatch on the caption above reads this same source
   });
 
-  test('the Vulnerabilities section (frozen structuralViolations, G5) reads as first-survey verdicts', () => {
+  test('the Vulnerabilities section carries no suffix and no empty-state line', () => {
     const src = read(DEFENSE_TAB);
-    expect(src).toMatch(/Vulnerabilities · First Survey/);
-    expect(src).toMatch(/No critical defense vulnerabilities identified at the first survey/);
-    // Negative: the bare present-tense empty state stays dead ('identified.'
-    // with a terminal stop — the reworded string continues 'identified at').
-    expect(src).not.toMatch(/vulnerabilities identified\./);
+    expect(src).toMatch(/Vulnerabilities \(\$\{defViolations\.length\}\)/);
+    expect(src).not.toMatch(/Vulnerabilities · First Survey/); // anchored: the toMatch on the bare title above reads this same source
+    expect(src).not.toMatch(/No critical defense vulnerabilities/); // anchored: same source as the toMatch above
   });
 });

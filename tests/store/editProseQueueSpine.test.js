@@ -85,8 +85,12 @@ describe('QUEUE_WIRED_PROSE_PATHS stays in lockstep with EDITABLE_FIELDS', () =>
     // For the three queue-wired kinds the wired set EQUALS the registry: a new
     // registered path for these kinds must force an explicit wiring decision
     // here instead of silently staying lever-less.
+    // X-45 (the owner, 2026-11-02): the Institutions card serves `institution.backs` itself
+    // (a list of power names spelled as one line, nothing to polish), so it is registered
+    // but not queue-wired. Any other registered path still has to be wired or listed here.
+    const CARD_SERVED = { faction: [], institution: ['backs'], settlement: [] };
     for (const kind of ['faction', 'institution', 'settlement']) {
-      expect([...QUEUE_WIRED_PROSE_PATHS[kind]].sort())
+      expect([...QUEUE_WIRED_PROSE_PATHS[kind], ...CARD_SERVED[kind]].sort())
         .toEqual([...EDITABLE_FIELDS[kind]].sort());
     }
   });
@@ -142,6 +146,13 @@ describe('edit-prose admission', () => {
     expect(await queue({ entityKind: 'settlement', entityIndex: -1, path: 'arrivalScene', value: 'y'.repeat(4001) })).toBeNull();
     expect(await queue({ entityKind: 'faction', entityIndex: 99, path: 'desc', value: 'No such faction.' })).toBeNull();
     expect(await queue({ entityKind: 'faction', path: 'desc', value: 'Index required.' })).toBeNull();
+  });
+
+  test('a registered path the card serves is refused by the queue (institution.backs, X-45)', async () => {
+    expect(await store.getState().queueEdit('edit-prose', {
+      entityKind: 'institution', entityIndex: 0, path: 'backs', value: 'Merchant Guilds',
+    })).toBeNull();
+    expect(store.getState().pendingEditsQueue || []).toEqual([]);
   });
 
   test('a value identical to the current text is refused as no-effect', async () => {

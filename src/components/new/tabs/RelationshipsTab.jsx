@@ -1,7 +1,8 @@
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useState, useMemo } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
 import { relColor } from '../../../domain/display/relationshipColors.js';
-import { serif, Section } from '../Primitives';
+import { Section } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import Button from '../../primitives/Button.jsx';
@@ -10,10 +11,24 @@ import {NPCRelCard2, ConflictCard} from '../npcComponents';
 import {NeighbourLinkCard} from '../neighbourComponents';
 import { useStore } from '../../../store/index.js';
 import { NEIGHBOUR_MIRROR_HEADING, neighbourMirrorLines } from '../../../domain/display/neighbourMirror.js';
-import { generalDeskLines } from '../generalDeskRead.js'; // DS-REL-1 · the general desk's ONE caller
 import { relationshipsDeskLists } from '../../../domain/display/stateProse/relationshipsDeskRead.js'; // DS-REL-1 · the two lists, assembled ONCE
 
-export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
+/** A tie's card palette by its type (the NPC relationship cards and the neighbour cards), hoisted
+ *  from the tab (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search styles a tie as
+ *  this tab does. */
+export const relationshipTypeStyle=(t)=>({
+  ally:{color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
+  rival:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},
+  enemy:{color:'#5a0a0a',bg:'#fdf0f0',border:'#e0a0a0'},
+  patron_client:{color:'#a0762a',bg:'#faf8e4',border:'#e0d090'},
+  political:{color:'#2a3a7a',bg:'#f0f4ff',border:'#a8b8e8'},
+  respect:{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'},
+  debtor_creditor:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8'},
+  mentor_student:{color:'#2a5a2a',bg:'#f4faf4',border:'#b0d8b0'},
+  family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
+}[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
+
+export function RelationshipsTab({ settlement:r, saveId=null, viewerIsPremium=false, playerView=false, publicDossier=false }) {
   const mobile = useIsMobile();
   const [typeFilter,setTypeFilter]=useState('all');
   const [fromFilter,setFromFilter]=useState('all');
@@ -75,21 +90,15 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
   const relLists = useMemo(() => relationshipsDeskLists(r), [r]);
   const crossConflicts = relLists.crossEngagements;
   const neighbours = relLists.neighbours;
-  // DS-REL-1 (`relationships.network`) — the town's own account of each standing it keeps
-  // and of the engagements running between named houses. The lists are the ones this tab
-  // ALREADY assembled above, so the prose and the cards cannot describe two different sets.
-  // Silent on a free dossier and silent where a tie's end is unstated (R-DST-K).
-  const relDesk = useMemo(
-    () => generalDeskLines(r, { publicDossier, playerView, neighbours, crossEngagements: crossConflicts }).relationships,
-    [r, publicDossier, playerView, neighbours, crossConflicts],
-  );
+  // DS-REL-1 (`relationships.network`) is a GLANCE row by chair ruling (2026-10-30): the network
+  // line paraphrased the type badge and the engagement lines were generic. The cards keep
+  // every datum; the desk has no sentence on this page.
 
   if (!r) return null;
 
   const rels=(Array.isArray(r.relationships)?r.relationships:[]);
   const interSettlementRels=r.interSettlementRelationships||[];
   const conflicts=Array.isArray(r.conflicts)?r.conflicts:[];
-  const factionGroups=Array.isArray(r.factions)?r.factions:[];
   const flagDriven=rels.filter(rel=>rel.flagDriven);
 
   // Settlement names for "From" filter
@@ -106,17 +115,7 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     {key:'patron_client',label:'Patronage'},
   ];
 
-  const styleFor=(t)=>({
-    ally:{color:'#1a5a28',bg:'#f0faf2',border:'#a8d8b0'},
-    rival:{color:'#8b1a1a',bg:'#fdf4f4',border:'#e8c0c0'},
-    enemy:{color:'#5a0a0a',bg:'#fdf0f0',border:'#e0a0a0'},
-    patron_client:{color:'#a0762a',bg:'#faf8e4',border:'#e0d090'},
-    political:{color:'#2a3a7a',bg:'#f0f4ff',border:'#a8b8e8'},
-    respect:{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'},
-    debtor_creditor:{color:'#5a2a8a',bg:'#f8f4fd',border:'#d0b8e8'},
-    mentor_student:{color:'#2a5a2a',bg:'#f4faf4',border:'#b0d8b0'},
-    family:{color:'#6a3a1a',bg:'#faf4ee',border:'#d8b898'},
-  }[t]||{color:'#1a4a6a',bg:'#f0f8ff',border:'#a8c8e8'});
+  const styleFor=relationshipTypeStyle;
 
   // Build NPC → settlement map
   const npcSettlement={};
@@ -132,38 +131,20 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
     return typeOk&&fromOk;
   });
 
-  // Cross-settlement NPC connections
-  const crossConns=fromFilter==='all'
-    ?neighbours.flatMap(n=>(n.npcConnections||[]).map(c=>({...c,_neighbourName:n.neighbourName})))
-    :neighbours.filter(n=>n.neighbourName===fromFilter).flatMap(n=>(n.npcConnections||[]).map(c=>({...c,_neighbourName:n.neighbourName})));
-
-  const hasAny=neighbours.length>0||rels.length>0||factionGroups.length>0||conflicts.length>0;
+  const hasAny=neighbours.length>0||rels.length>0||conflicts.length>0;
 
   return (
     <div>
 
-      {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
-        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
-      </Section>}
-
       {/* Neighbour Network */}
-      {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen>
+      {neighbours.length>0&&<Section title={`Neighbour Network (${neighbours.length})`} collapsible defaultOpen help={SECTION_HELP.relationships}>
         <div style={{display:'flex',flexDirection:'column',gap:12}}>
-          {neighbours.map((link,i)=><React.Fragment key={link.id||i}>
-            <NeighbourLinkCard link={link} settlement={r} styleFor={styleFor}/>
-            {/* INDEX-PAIRED with the desk's own per-link group, nulls kept in place. */}
-            {(relDesk.networkLines[i]||[]).filter(Boolean).map((t,j)=>(
-              <p key={j} style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'-6px 0 0',fontStyle:'italic'}}>{t}</p>
-            ))}
-          </React.Fragment>)}
+          {neighbours.map((link,i)=><NeighbourLinkCard key={link.id||i} link={link} settlement={r} styleFor={styleFor}/>)}
         </div>
       </Section>}
 
       {/* Inter-Settlement NPC Contacts */}
       {(()=>{const npcContacts=interSettlementRels.filter(x=>!x.type);return npcContacts.length>0&&<Section title={`Cross-Settlement Contacts (${npcContacts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
-          Named NPCs with documented ties to figures in linked settlements. Links are removed when neighbours are delinked.
-        </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {npcContacts.map((isr,i)=>{
             const c=relColor(isr.relType);
@@ -189,9 +170,6 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
 
       {/* Cross-Settlement Engagements */}
       {crossConflicts.length>0&&<Section title={`Cross-Settlement Engagements (${crossConflicts.length})`} collapsible defaultOpen>
-        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
-          Conflicts and faction engagements between this settlement and its neighbours. Removed when the link is broken.
-        </p>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
           {crossConflicts.map((c,i)=>{
             const isFaction = c.type==='faction_engagement';
@@ -216,30 +194,25 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
                 </span>
               </div>
               {c.description&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5}}>{c.description}</div>}
-              {relDesk.engagementLines[i]&&<div style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch.inkMag2,lineHeight:1.5,fontStyle:'italic',marginTop:4}}>{relDesk.engagementLines[i]}</div>}
             </div>;
           })}
         </div>
       </Section>}
 
-      {/* Emergent conditions banner */}
-      {!neighboursOnly&&<>
-      {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'10px 14px',marginBottom:16}}>
-        <div style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4,textTransform:'uppercase'}}>◆ Emergent conditions active</div>
-        <p style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,margin:0,lineHeight:1.5}}>
-          {flagDriven.length} relationship{flagDriven.length>1?'s':''} shaped by the settlement's compound dynamics. These would not exist under neutral slider conditions.
-        </p>
+      {/* Emergent ties: the count, once (chair ruling R5). Each such card carries its own ◆ tag. */}
+      {flagDriven.length>0&&<div style={{background:swatch['#F8F4FD'],border:'1px solid #d0b8e8',borderLeft:'3px solid #5a2a8a',padding:'8px 14px',marginBottom:16}}>
+        <div data-testid="relationships-emergent" style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.magic,textTransform:'uppercase'}}>◆ {flagDriven.length} emergent tie{flagDriven.length>1?'s':''}</div>
       </div>}
 
       {/* NPC Relationships */}
       {rels.length>0&&<Section title={`NPC Relationships (${rels.length})`} collapsible defaultOpen>
-        <p style={{fontSize:proseFontSize(FS.xs,mobile),color:MUTED,margin:'0 0 10px',fontStyle:'italic'}}>
-          Internal relationships within {settlementName}. Cross-settlement NPC ties appear in each neighbour card above.
-        </p>
         {/* Type filter */}
         <div style={{display:'flex',gap:6,marginBottom:8,flexWrap:'wrap'}}>
           {relTypes.map(({key,label})=>{
             const n=key==='all'?rels.length:rels.filter(rel=>rel.type===key).length;
+            // THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R6): a filter with nothing
+            // behind it ("Patronage (0)") is a label re-announcing nothing, so it is not offered.
+            if(key!=='all'&&n===0) return null;
             return <Button key={key} onClick={()=>setTypeFilter(key)}
               variant={typeFilter===key?'primary':'secondary'} size="sm"
               aria-pressed={typeFilter===key} style={{flexShrink:0}}>
@@ -261,47 +234,23 @@ export function RelationshipsTab({ settlement:r, neighboursOnly=false, saveId=nu
 
         {/* Relationship cards */}
         {filteredRels.map((rel,i)=><NPCRelCard2 key={`rel_${i}`} rel={rel} style={styleFor(rel.type)}/>)}
-        {/* Cross-settlement connections */}
-        {crossConns.map((conn,i)=>(
-          <div key={`conn_${i}`} style={{border:'1px solid #c0c8e8',borderLeft:'3px solid #2a3a7a',padding:'10px 14px',marginBottom:10,background:swatch['#F8F9FF']}}>
-            <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{conn.primaryNPCName}</span>
-              {conn.primaryNPCRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({conn.primaryNPCRole})</span>}
-              <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:MUTED,margin:'0 4px'}}>↔</span>
-              <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.info}}>{conn.neighbourNPCName||'Unknown'}</span>
-              {conn.neighbourNPCRole&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3}}>({conn.neighbourNPCRole})</span>}
-              {conn._neighbourName&&fromFilter==='all'&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED,marginLeft:'auto',fontStyle:'italic'}}>{conn._neighbourName}</span>}
-            </div>
-            {conn.description&&<div style={{fontSize:proseFontSize(FS.sm,mobile),color:swatch.inkMag2,lineHeight:1.45}}>{conn.description}</div>}
-          </div>
-        ))}
       </Section>}
 
-      {/* Faction Groups */}
-      {factionGroups.length>0&&<Section title={`Factions (${factionGroups.length})`}>
-        {factionGroups.map((fac,i)=>{
-          const catColors={economy:'#a0762a',government:'#2a3a7a',military:'#8b1a1a',religious:'#1a4a2a',magic:'#3a1a7a',criminal:'#4a1a4a',other:'#5a4a2a'};
-          const c=catColors[fac.dominantCategory]||'#6b5340';
-          return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:`3px solid ${c}`,padding:'10px 14px',marginBottom:10}}>
-            <div style={{...serif,fontSize:FS.lg,fontWeight:700,color:swatch.inkMag,marginBottom:6}}>{fac.name}</div>
-            <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-              {(fac.members||[]).map(m=>(
-                <span key={m.id||m.name} style={{fontSize:chromeFontSize(FS.xs, mobile),color:c,background:`${c}18`,border:`1px solid ${c}40`,padding:'2px 9px'}}>
-                  {m.name} <span style={{color:MUTED}}>({m.role})</span>
-                </span>
-              ))}
-            </div>
-          </div>;
-        })}
-      </Section>}
-
+      {/* GS-2 (ODQ §934.101): the "Factions" section is CUT. Its groups were tie-components
+          wearing minted names; the power factions are the factions now, the NPCs tab owns
+          membership, and the conflicts below name power factions directly. */}
       {/* Active Conflicts */}
       {conflicts.length>0&&<Section title={`Active Conflicts (${conflicts.length})`}>
         {conflicts.map((c,i)=><ConflictCard key={i} conflict={c}/>)}
       </Section>}
 
-      </>
-      }{!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
+      {/* The neighbour mirror reads the campaign's own ledger, so it is campaign-only and closes
+          the page (the block law, X-16 rung 6). Moved verbatim. */}
+      {mirrorLines.length>0&&<Section title={NEIGHBOUR_MIRROR_HEADING} collapsible defaultOpen>
+        {mirrorLines.map(l=><div key={l.counterpartId} style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.5,marginBottom:6}}>{l.line}{l.basis&&l.basis.length>0&&<details style={{marginTop:3}}><summary style={{cursor:'pointer',fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>DM truth</summary><div style={{fontSize:proseFontSize(FS.xxs, mobile),color:MUTED,lineHeight:1.45}}>Built from {l.basis.join('; ')}.</div></details>}</div>)}
+      </Section>}
+
+      {!hasAny&&<div style={{padding:'32px 16px',textAlign:'center',color:MUTED,fontSize:proseFontSize(FS.md,mobile)}}>
         Generate a settlement to see relationship data.
       </div>}
     </div>

@@ -92,11 +92,21 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 /** A line long enough to be READ rather than glanced at — `chromeFontSize`'s own bound. */
 const MIN_CHARS = 45;
 /** The dossier's own group/sub-tab count, as a floor the walk cannot silently lose. */
-const MIN_VIEWS = 18;
+// 18 -> 17 (2026-10-30, ODQ §934.101): the DM Summary tab is removed (X-5); 17 -> 18 the same day:
+// the Institutions tab joins Systems (T1-14); 18 -> 20: War and Rumors & News are always registered (X-7a).
+const MIN_VIEWS = 20;
 /** A tab panel holding less text than this has not finished resolving its chunk.
  *  Measured against the SHORTEST real view (Faith's gated panel, ~160 chars), so
  *  the wait proves the chunk resolved without demanding a long tab. */
 const PANEL_MIN_CHARS = 100;
+/** The ONE tab whose correct rendering for this fixture is shorter than the floor, keyed by
+ *  tab id. Its wait is EXACT TEXT (stronger than a length), and every other tab keeps the
+ *  100-character floor. Add a row only for a ruled short form, with the ruling named. */
+const SHORT_PANELS = Object.freeze({
+  // Chair ruling 2026-10-30 (BUILD-T3 U4, Chronicle): the empty state is the one fact, the
+  // pitch cut. This fixture is a fresh generated city with no save and no campaign events.
+  chronicle: { text: 'No chronicle yet.' },
+});
 
 /**
  * ⛔ NO VIEW MAY CONTRIBUTE NOTHING — AND THIS LIST IS WHY THE GLOBAL FLOOR WENT.
@@ -108,9 +118,17 @@ const PANEL_MIN_CHARS = 100;
  * surface that stops rendering is named rather than averaged away.
  *
  * A view belongs here ONLY when its emptiness is a fact about the fixture rather
- * than about the dossier, and the reason must say which. Empty today: none.
+ * than about the dossier, and the reason must say which.
  */
-const EMPTY_VIEWS = Object.freeze({});
+const EMPTY_VIEWS = Object.freeze({
+  // The fixture has no save and no campaign, so it has no chronicle; the empty state is the
+  // ruled 17-character sentence (SHORT_PANELS above), below the 45-character measuring bound.
+  'Notes/Chronicle': 'no events: a fresh unsaved city, empty state ruled to one fact (BUILD-T3 U4)',
+  // The walk mounts a PUBLIC dossier (readOnly, no saveId). Since the router hands MagicTab its audience
+  // (BUILD-T1 U6b, at BUILD-T2's request for T2-15), the magic-dependence block's corpus line is dark there,
+  // as every desk line is on a free viewer's page; the posture word and facets stay under the measuring bound.
+  'Systems/Magic': 'public dossier: the DS-DEF-9 corpus line is gated (§885.3); the rest is chrome under 45 characters (BUILD-T1)',
+});
 
 // A REAL pipeline settlement, not a hand fixture: the desks compose their prose
 // from generated state, and a thin fixture renders labels with nothing under
@@ -436,7 +454,8 @@ async function walkEveryView(container) {
         // panel-length floor below is the real wait, and is what actually proves
         // the chunk resolved.
         const text = p.textContent || '';
-        expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
+        if (SHORT_PANELS[tabId]) expect(text).toBe(SHORT_PANELS[tabId].text);
+        else expect(text.length).toBeGreaterThan(PANEL_MIN_CHARS);
       }, { timeout: 10_000 });
       const panel = container.querySelector(`#sf-panel-${tabId}`);
       const view = `${groupName}/${tabName}`;
@@ -521,28 +540,61 @@ const desktopShape = (perView) => Object.fromEntries(
 // (Systems/Services 64 -> 96, Systems/Economics 34 -> 47, World/Relationships 69 -> 63, Summary/Overview 19 -> 20,
 // Summary/Plot Hooks 59 -> 58, Systems/Power 29 -> 28, Systems/Defense 26 -> 28, Systems/Resources 4 -> 5,
 // World/NPCs 46 -> 45); the rest hold. Re-measured by this file's own walk at the committed tree, not predicted.
+// ── RE-MEASURED 2026-10-30 (cure lane T8): no token moved. Lane T3 consolidated the World group and
+// the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
+// panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
+// NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
+// ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
+// sentence under the identity strip (proseFontSize), one new line: Summary/Overview measured 19 -> 20, sub14 18 -> 19. The block-law moves
+// (X-16) reorder lines and add none; every other view holds.
+// ── RE-MEASURED 2026-11-02 (the fifth round, X-35..X-45): the content moved, no token did. The Overview lost
+// the spatial layout and its routing line (X-37, X-38); the Institutions tab leads with the description and the
+// service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
+// pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
+// and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
 const DESKTOP_BASELINE = Object.freeze({
-  "Summary/Overview":    { measured: 20, sub14: 20 },
-  "Summary/DM Summary":  { measured:  9, sub14:  8 },
-  "Summary/Plot Hooks":  { measured: 58, sub14: 58 },
-  "Systems/Services":    { measured: 96, sub14: 96 },
-  "Systems/Economics":   { measured: 47, sub14: 47 },
-  "Systems/Power":       { measured: 28, sub14: 27 },
-  "Systems/Defense":     { measured: 28, sub14: 28 },
-  "Systems/Resources":   { measured:  5, sub14:  5 },
+  "Summary/Overview":    { measured: 11, sub14: 10 },
+  // T2-25 measured it at 1 under Systems/Causes; X-12 moves it here (BUILD-T1), same count.
+  "Summary/Foundations": { measured:  1, sub14:  1 },
+  // 37 -> 38 (2026-10-31, the G2 + W2-LINKS composition at the integration merge): one conflict line more in
+  // the fixture now that conflict parties are power factions (X-26a); no token moved. Relationships likewise 59 -> 60.
+  "Summary/Plot Hooks":  { measured: 38, sub14: 38 },
+  "Systems/Services":    { measured: 97, sub14: 97 },
+  "Systems/Institutions": { measured: 64, sub14: 64 }, // T1-14, measured 2026-10-30 by this walk
+  // 47 -> 40 (2026-10-30, UX consolidation U1, RULINGS-T2 T2-1..T2-8): no desktop token moved; the page lost
+  // its duplicates (Economy/Food tiles, the Supply Chains rows, the Resource Exploitation chips, the plot hooks).
+  "Systems/Economics":   { measured: 40, sub14: 40 },
+  // 28 -> 22 (2026-10-30, UX consolidation U5, T2-17..T2-19): Current Tensions, Active Conflicts and the
+  // duplicate governing rows left the page; no token moved.
+  "Systems/Power":       { measured: 22, sub14: 21 },
+  // 28 -> 27 (2026-10-30, UX consolidation U6, T2-20..T2-23): the duplicate order headline, the first-survey
+  // beside line, the Economic Backing row and the empty-state line left the page; no token moved.
+  // 27 -> 26 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the fixture town's one order & crime plot
+  // hook left the Defense page for the Plot Hooks tab; no token moved (bisected: 317307cc green, 987602c0 moves it).
+  "Systems/Defense":     { measured: 26, sub14: 26 },
+  // 5 -> 4 (2026-10-30, UX consolidation U2, T2-10): the "Depleted. Consumed locally, export potential
+  // reduced" label shortened to "Depleted" and fell under the walk's measuring length; no token moved.
+  "Systems/Resources":   { measured:  4, sub14:  4 },
   // 4 -> 5 (2026-09-19, browser pass 3 car 4): the receipt strip's culture line now reads the
   // identity's LABEL ("South-Asian-inspired") instead of a key, so it crosses the walk's
   // forty-five characters and is measured — and it is prose, so it takes the prose floor.
-  "Systems/Outlook":     { measured:  5, sub14:  5 },
-  "Systems/Causes":      { measured:  2, sub14:  2 },
-  "Systems/Magic":       { measured:  1, sub14:  1 },
-  "World/NPCs":          { measured: 45, sub14: 45 },
-  "World/Relationships": { measured: 63, sub14: 63 },
+  // 5 -> 2 (2026-10-30, UX consolidation U3, T2-11..T2-14): the coaching caption and the generation receipt
+  // (moved to Versions) left the page; no token moved.
+  "Systems/Outlook":     { measured:  2, sub14:  2 },
+  // 1 -> 2 (2026-10-30, UX consolidation): the posture sentence became a word (T2-26) and the dependence
+  // block arrived from Outlook (T2-15): its DS-DEF-9 line (prose) and its stamped title (chrome).
+  "Systems/Magic":       { measured:  0, sub14:  0 }, // gated on the public walk since the router passes the audience (BUILD-T1)
+  "World/NPCs":          { measured: 31, sub14: 31 },
+  // 60 -> 61 / 58 -> 59 and mobile 58 -> 59 (2026-10-31, G3 at the merge, GS-1): the eight-variant tie lines wrap one
+  // line longer in the fixture; no token moved.
+  "World/Relationships": { measured: 61, sub14: 59 },
   "World/Faith":         { measured:  1, sub14:  1 },
   "World/Daily Life":    { measured:  1, sub14:  1 },
-  "World/Traditions":    { measured:  3, sub14:  3 },
-  "World/History":       { measured: 19, sub14: 19 },
-  "Notes/Chronicle":     { measured:  1, sub14:  1 },
+  "World/Rumors & News": { measured:  1, sub14:  1 }, // X-7a launch teaser (BUILD-T1 registers it always)
+  "World/War":           { measured:  1, sub14:  1 }, // X-7a launch teaser, same
+  "World/Traditions":    { measured:  1, sub14:  1 },
+  "World/History":       { measured: 13, sub14: 13 },
+  "Notes/Chronicle":     { measured:  0, sub14:  0 }, // 1 -> 0: the empty-state pitch cut (BUILD-T3 U4)
 });
 
 /**
@@ -577,25 +629,49 @@ const DESKTOP_BASELINE = Object.freeze({
 // ── RE-MEASURED 2026-10-01, the urban band (ODQ §934.86): the same fixture town, a re-generated world. Totals prose
 // 373 -> 418, chrome 18 -> 13, sub14 15 -> 11, sub12 0 -> 0 (the one that must stay zero stays zero, and every
 // line still clears its floor: the floors arm above is green on this walk). Nine views moved, nine hold.
+// ── RE-MEASURED 2026-10-30 (cure lane T8): no token moved. Lane T3 consolidated the World group and
+// the Chronicle (merge 37d627cd); the Chronicle's 17-character empty state held this walk red at its
+// panel wait, so these falls landed unseen. History 19 -> 13 (H5 Recent Events, H7/H9 hooks cut),
+// NPCs 45 -> 30 (7a2d1aa5), Relationships -4 (04002886), Traditions 3 -> 1 (a64a02f5), Chronicle 1 -> 0.
+// ── RE-MEASURED 2026-10-31 (BUILD-W2-BLOCKLAW, X-18): no token moved. The Overview gains its one routing
+// sentence under the identity strip (proseFontSize), one new line: Summary/Overview prose 18 -> 19. The block-law moves
+// (X-16) reorder lines and add none; every other view holds.
+// ── RE-MEASURED 2026-11-02 (the fifth round, X-35..X-45): the content moved, no token did. The Overview lost
+// the spatial layout and its routing line (X-37, X-38); the Institutions tab leads with the description and the
+// service doors and gains a Backs row on every house (X-35, X-40, X-45); the ? pills add one chrome line per
+// pilled section (X-42); the seat is named (X-43); the flush rule and the trimmed meta lines (X-38, X-44) move
+// and drop lines across the Systems tabs. Each number below is what the walk measured on that view today.
 const MOBILE_BASELINE = Object.freeze({
-  "Summary/Overview":    { prose: 19, chrome: 1, sub14: 0, sub12: 0 },
-  "Summary/DM Summary":  { prose:  9, chrome: 0, sub14: 0, sub12: 0 },
-  "Summary/Plot Hooks":  { prose: 58, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Services":    { prose: 96, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Economics":   { prose: 39, chrome: 7, sub14: 7, sub12: 0 },
-  "Systems/Power":       { prose: 27, chrome: 1, sub14: 0, sub12: 0 },
-  "Systems/Defense":     { prose: 27, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Resources":   { prose:  4, chrome: 1, sub14: 1, sub12: 0 },
-  "Systems/Outlook":     { prose:  5, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Causes":      { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
-  "Systems/Magic":       { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/NPCs":          { prose: 45, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Relationships": { prose: 61, chrome: 2, sub14: 2, sub12: 0 },
+  "Summary/Overview":    { prose: 10, chrome: 1, sub14: 0, sub12: 0 },
+  "Summary/Foundations": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  // 37 -> 38 and Relationships 57 -> 58 (2026-10-31, the G2 + W2-LINKS composition at the merge): one conflict
+  // line more (X-26a); both sub-floor counts stay where they were.
+  "Summary/Plot Hooks":  { prose: 38, chrome: 0, sub14: 0, sub12: 0 },
+  "Systems/Services":    { prose: 96, chrome: 1, sub14: 0, sub12: 0 },
+  "Systems/Institutions": { prose: 63, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 39 -> 33 (2026-10-30, UX consolidation U1): the duplicate blocks left the page; no floor moved.
+  "Systems/Economics":   { prose: 33, chrome: 7, sub14: 7, sub12: 0 },
+  // prose 27 -> 21 (2026-10-30, UX consolidation U5): tensions, conflicts and the duplicate rows left.
+  "Systems/Power":       { prose: 21, chrome: 1, sub14: 0, sub12: 0 },
+  // prose 27 -> 25, chrome 1 -> 2 (2026-10-30, UX consolidation U6): the criminal faction is now one
+  // name-and-band chrome line (12px floor, lawful) instead of a description paragraph.
+  // prose 25 -> 24 (2026-10-30, cure lane T11 U3, VERIFIER F11 / X-2): the inline order & crime hook is cut.
+  "Systems/Defense":     { prose: 24, chrome: 2, sub14: 2, sub12: 0 },
+  // chrome 1 -> 0 (2026-10-30, UX consolidation U2): the long Depleted label is now one word.
+  "Systems/Resources":   { prose:  4, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 5 -> 2 (2026-10-30, UX consolidation U3): the caption and the receipt left the page.
+  "Systems/Outlook":     { prose:  2, chrome: 0, sub14: 0, sub12: 0 },
+  // prose 1, chrome 0 -> 1 (2026-10-30, UX consolidation): the dependence block's line and its title.
+  "Systems/Magic":       { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // gated on the public walk (BUILD-T1)
+  "World/NPCs":          { prose: 30, chrome: 1, sub14: 0, sub12: 0 },
+  "World/Relationships": { prose: 59, chrome: 2, sub14: 2, sub12: 0 },
   "World/Faith":         { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
   "World/Daily Life":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
-  "World/Traditions":    { prose:  3, chrome: 0, sub14: 0, sub12: 0 },
-  "World/History":       { prose: 19, chrome: 0, sub14: 0, sub12: 0 },
-  "Notes/Chronicle":     { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Rumors & News": { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/War":           { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/Traditions":    { prose:  1, chrome: 0, sub14: 0, sub12: 0 },
+  "World/History":       { prose: 13, chrome: 0, sub14: 0, sub12: 0 },
+  "Notes/Chronicle":     { prose:  0, chrome: 0, sub14: 0, sub12: 0 }, // 1 -> 0: the pitch cut (BUILD-T3 U4)
 });
 
 describe('THE PHONE FLOORS — every dossier view', () => {

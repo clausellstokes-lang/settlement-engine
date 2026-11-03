@@ -7,7 +7,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
-import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
+import { collectPlotHooks, groupPlotHooksBySourcePage, plotHookSourcePage } from '../../src/domain/dossier/plotHooks.js';
 
 describe('collectPlotHooks canonical input shapes', () => {
   test('keeps normalized {text} hooks and drops alias-only objects', () => {
@@ -93,5 +93,31 @@ describe('collectPlotHooks — THE TRADITIONS register (T-5)', () => {
     expect(collectPlotHooks({ name: 'Ashford' }).filter(h => h.source === 'Traditions')).toEqual([]);
     expect(collectPlotHooks({ name: 'Ashford', traditions: [rec({ lastOutcome: 'good' })] })
       .filter(h => h.source === 'Traditions')).toEqual([]); // a quiet rite raises none
+  });
+});
+
+describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its cards by the page the fact lives on)', () => {
+  test('each category maps to its page; traditions are told apart by their source label', () => {
+    const page = (hook) => plotHookSourcePage(hook).id;
+    expect(page({ category: 'npc' })).toBe('npcs');
+    expect(page({ category: 'faction' })).toBe('relationships');
+    expect(page({ category: 'relationship' })).toBe('relationships');
+    expect(page({ category: 'tension' })).toBe('history');
+    expect(page({ category: 'tension', source: 'Traditions' })).toBe('traditions');
+    expect(page({ category: 'history' })).toBe('history');
+    expect(page({ category: 'economics' })).toBe('viability');
+    expect(page({ category: 'safety' })).toBe('defense');
+    expect(page({ category: 'unknown-token' })).toBe('history');
+  });
+
+  test('groups follow page order, keep collector order inside, and omit empty pages', () => {
+    const hooks = [
+      { category: 'safety', text: 's1' }, { category: 'npc', text: 'n1' },
+      { category: 'tension', text: 't1' }, { category: 'npc', text: 'n2' },
+    ];
+    const groups = groupPlotHooksBySourcePage(hooks);
+    expect(groups.map((g) => g.page.label)).toEqual(['NPCs', 'History', 'Defense']);
+    expect(groups[0].hooks.map((h) => h.text)).toEqual(['n1', 'n2']);
+    expect(groupPlotHooksBySourcePage([])).toEqual([]);
   });
 });

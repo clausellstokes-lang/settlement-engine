@@ -36,8 +36,9 @@ import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx'
 import { FaithWar } from '../../src/pdf/sections/FaithWar.jsx';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+import { EXPECTED_SERVICES_BY_TIER } from '../../src/domain/display/servicesDisplay.js';
 import { warFaithStateProse } from '../../src/domain/display/stateProse/warFaithStateProse.js';
-import { FALL_SENTENCE, faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
+import { FALL_SENTENCE, faithPanelModel, trimFaithDeskToPanel } from '../../src/components/settlement/faithPanelModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 
@@ -62,6 +63,7 @@ import { coupContenders, coupRiskLabel } from '../../src/domain/rulingPowerCoup.
 import { structuralLensOf } from '../../src/domain/spatial/cohesionWeave.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { deriveEscalationClocks } from '../../src/domain/hookEscalation.js';
+import { magicWorksAt } from '../../src/domain/worldPulse/magicWorksAt.js';
 
 /** The positions the ruling withholds from print WHOLE. Written out, not imported: an arm
  *  that imported the builder's own list would agree with it by construction. */
@@ -227,21 +229,23 @@ function screenProse(s, faithUnlocked = false) {
   set('power.legitimacyBanner', screenParagraph(s, 'power.legitimacyBanner',
     [pw.legitimacyBanner, pw.legitimacyLens]));
   set('power.stabilityHeader', screenParagraph(s, 'power.stabilityHeader',
-    [pw.stabilityHeader, pw.stabilityLens]));
+    // UX consolidation 2026-10-30: the screen draws the ladder line alone (T2-18).
+    [pw.stabilityHeader]));
   // DS-POW-6, the position the ruling gates at the CELL: the ladder cells DS-POW-1 leaves
   // empty print, the two seat-rank pools do not.
   set('power.criminalUnderside', screenParagraph(s, 'power.criminalUnderside',
     [pw.legitimacyReading, pw.captureReading, pw.operationReading]));
   set('power.rulingStructure', screenParagraph(s, 'power.rulingStructure',
-    [pw.rulingStructure, pw.governingTitle]));
+    [pw.rulingStructure])); // T2-17: governingTitle cut on screen
   set('power.succession', screenParagraph(s, 'power.succession',
-    [pw.successionRisk, pw.successionHold]));
+    [pw.successionRisk])); // T2-18: the legitimacy hold cut on screen
 
-  set('defense.postureHeader', screenWeave(s, ['posture', 'terrain', 'prize'].map(
+  // T2-21: the screen draws the posture lens only (terrain and prize cut).
+  set('defense.postureHeader', screenWeave(s, ['posture'].map(
     (k) => (drawnAtMount('defense.postureHeader', posture[k]?.rung)?.sentence ? posture[k].beside : null))));
   set('defense.publicOrder', screenWeave(s, [
     drawnAtMount('defense.publicOrder', order.publicOrder?.rung)?.sentence ? order.publicOrder.beside : null,
-    drawnAtMount('defense.publicOrder', order.firstSurvey?.rung)?.sentence ? order.firstSurvey.beside : null,
+    // T2-22: the first-survey beside line is not drawn on screen.
   ]));
   set('defense.threatAssessment', screenParagraph(s, 'defense.threatAssessment',
     ['beasts', 'invasion', 'internal', 'economic', 'disaster'].map((k) => threat[k])));
@@ -251,31 +255,37 @@ function screenProse(s, faithUnlocked = false) {
     ['fortification', 'force', 'contracted', 'charter', 'arcane'].map((k) => forces[k])));
   set('defense.wallRationale', screenParagraph(s, 'defense.wallRationale', [wall.rationale]));
   set('defense.criminalStructure', screenParagraph(s, 'defense.criminalStructure',
-    ['structure', 'capture'].map((k) => criminal[k])));
+    ['structure'].map((k) => criminal[k]))); // T2-20: the capture lens cut on screen
   set('defense.supportingCapabilities', screenParagraph(s, 'defense.supportingCapabilities',
     ['logistics', 'naval'].map((k) => supporting[k])));
 
   set('viability.verdict', screenWeave(s, general.viability.verdictLines));
+  // T2-24: the screen (and print) draw no DS-DEF-9 reading where magic does not function.
   set('viability.magicDependency', screenParagraph(s, 'viability.magicDependency',
-    [defenseMagicDependencyProse(s, o).arcaneReliance]));
+    [magicWorksAt({ settlement: s }) === false ? null : defenseMagicDependencyProse(s, o).arcaneReliance]));
 
   set('economics.prosperityHeader', screenParagraph(s, 'economics.prosperityHeader', [eco.prosperityHeader]));
   set('economics.foodSecurity', screenParagraph(s, 'economics.foodSecurity', [eco.foodSecurityRung]));
   set('economics.commercialProfile', screenParagraph(s, 'economics.commercialProfile',
-    [eco.incomeMix, eco.criminalLine, eco.tradeProfile]));
+    [eco.incomeMix, eco.criminalLine])); // T2-4: the trade-profile lens cut on screen
   set('economics.shadowEconomy', screenParagraph(s, 'economics.shadowEconomy', [eco.shadowEconomy]));
   set('economics.tradeFlow', screenParagraph(s, 'economics.tradeFlow', [eco.tradeFlow]));
   set('economics.exportPosture', screenParagraph(s, 'economics.exportPosture', [eco.exportPosture]));
   set('economics.craftReason', screenWeave(s, [general.economics.craftReasonLine]));
 
   set('resources.groundAndWorkings', screenParagraph(s, 'resources.groundAndWorkings',
-    ['terrainIdentity', 'economicStrengths', 'strategicValue', 'exploitation'].map((k) => eco[k])));
+    // T2-9: terrain and strengths lenses cut on screen. ⚠ A DELIBERATE PRINT DIFFERENCE: the
+    // screen's strategic-value lens REPLACES the generator line; print keeps the DM-editable
+    // generator line (ResourcesProduction's STRATEGIC VALUE callout) instead, so the printed
+    // position carries the exploitation lens alone. One strategic-value sentence either way.
+    ['exploitation'].map((k) => eco[k])));
   // DS-SUP-3. Since 2026-09-19 the screen renders the catalog lens at the position and the
   // IMPAIRED-HOUSE lens under that house's own service row (the owner's order; the
   // `defense.threatAssessment` idiom). Print has no rows to join to, so the position is one
   // paragraph in the desk's own order — the `relationships.network` precedent above, and the
   // reason this stays `screenParagraph`: the parity claim is about WHICH SENTENCES the two
-  // surfaces carry, and the desk hands both to both.
+  // surfaces carry, and the desk hands both to both. Since RS-15 (2026-10-30) the desk hands
+  // the catalog lens to NEITHER surface on a complete catalog (economyStateProse.js).
   set('services.catalogStanding', screenParagraph(s, 'services.catalogStanding',
     [eco.catalogStanding, eco.impairedService]));
   set('daily_life.standingOfLiving', screenParagraph(s, 'daily_life.standingOfLiving', [eco.prosperityRung]));
@@ -297,13 +307,14 @@ function screenProse(s, faithUnlocked = false) {
   // the patron-less town's own voice and names no god, so it is NOT behind the premium seam;
   // the two that can name a patron or a creed are.
   const fm = faithPanelModel(s);
-  const fa = warFaithStateProse(s, {
+  // The screen trims lenses the panel already states (FaithTab, chair rulings F2/F4).
+  const fa = trimFaithDeskToPanel(warFaithStateProse(s, {
     faith: fm,
     hasPatron: !!fm.hasEmbed,
     patronFallCause: fm.patronFallSentence
       ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === fm.patronFallSentence)
       : undefined,
-  }, o);
+  }, o), fm);
   set('faith.teaser', screenParagraph(s, 'faith.teaser', [fa.faithTeaser]));
   if (faithUnlocked) {
     set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
@@ -448,6 +459,24 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(drift, `the PDF and the dossier disagree about ${drift.length} position(s)`).toEqual([]);
     // NON-VACUITY: the comparison ran over real prose, not an empty map.
     expect(Object.keys(printed).length).toBeGreaterThan(20);
+
+    // RS-15 (chair ruling 2026-10-30): the catalog lens of services.catalogStanding speaks
+    // ONLY on an incomplete catalog, and print follows the screen because the gate is the
+    // desk's. Planted both ways on this town with its impairments removed (so lens B, which
+    // shares the position, is silent and the position IS the catalog lens).
+    const quiet = { ...full, economicState: { ...(full.economicState || {}), tradeDependencies: [] } };
+    const expected = EXPECTED_SERVICES_BY_TIER[full.tier] || [];
+    const row = [{ name: 'Planted', desc: '', institution: '' }];
+    const complete = { ...quiet, availableServices: { ...(full.availableServices || {}),
+      ...Object.fromEntries(expected.map((k) => [k, (full.availableServices || {})[k]?.length ? full.availableServices[k] : row])) } };
+    const gappy = { ...complete, availableServices: { ...complete.availableServices, [expected[0]]: [] } };
+    expect(expected.length, 'the fixture tier expects no category, so the gate arm is vacuous').toBeGreaterThan(0);
+    for (const [label, s, speaks] of [['complete', complete, false], ['incomplete', gappy, true]]) {
+      const p = flat(buildPrintProse(s, {}))['services.catalogStanding'];
+      const sc = screenProse(s)['services.catalogStanding'];
+      expect(Boolean(p), `${label} catalog: the print ${speaks ? 'lost' : 'still carries'} the catalog lens`).toBe(speaks);
+      expect(p ?? '', `${label} catalog: print and screen disagree`).toBe(sc ?? '');
+    }
   });
 
   test('PARITY: the same holds on a sparse settlement, where most desks are silent', () => {
@@ -464,7 +493,7 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(Object.keys(printed).length).toBeLessThan(20);
   });
 
-  test('PARITY: `relationships.network` PRINTS on a saved, linked world and equals the screen', () => {
+  test('PARITY: `relationships.network` GLANCES (chair ruling 2026-10-30) — neither the print nor the screen speaks on a linked world', () => {
     // ⛔ NON-VACUITY FIRST, AND IT IS THE WHOLE ARM. A GENERATED world carries none of the
     // three save-time lists, so this position is silent on every other fixture in this file
     // and an arm built on one of them would pass whether the mount printed or not — which is
@@ -477,14 +506,16 @@ describe('the print desk reads the screen\'s own desks', () => {
     expect(linked.crossSettlementConflicts, 'the saved fixture lost its NOT-READ control row')
       .toHaveLength(1);
 
-    const paragraph = flat(buildPrintProse(linked, {}))['relationships.network'];
-    expect(paragraph, 'the paid PDF printed NOTHING at relationships.network on a linked world')
-      .toBeTruthy();
-    expect(paragraph.length, 'the position printed an empty paragraph').toBeGreaterThan(40);
-
-    // THE PARITY ITSELF: character for character what the dossier weaves for this position,
-    // from the screen's own desk reader and the same assembler the tab calls.
-    expect(paragraph).toBe(screenProse(linked)['relationships.network']);
+    // The two save-time lists the desk would speak over are really there (the assembler
+    // finds them), so the silence below is the GLANCE row and not an empty fixture.
+    const lists = relationshipsDeskLists(linked);
+    expect(lists.neighbours.length, 'the assembler found no neighbour').toBeGreaterThan(0);
+    expect(lists.crossEngagements.length, 'the assembler found no engagement').toBeGreaterThan(0);
+    // THE PARITY ITSELF: the screen's reader and the print builder agree, and both are silent.
+    expect(flat(buildPrintProse(linked, {}))['relationships.network'],
+      'the paid PDF prints DS-REL-1 again at a glance row').toBeUndefined();
+    expect(screenProse(linked)['relationships.network'],
+      'the screen speaks DS-REL-1 again at a glance row').toBeUndefined();
 
     // THE CONTROL THAT MAKES THE ASSERTION ABOUT THE LISTS RATHER THAN THE BUILDER: the same
     // builder, the same town, no link rows — and the position is absent rather than empty
@@ -493,8 +524,10 @@ describe('the print desk reads the screen\'s own desks', () => {
       'a generated town with no links still printed a neighbour standing').toBeUndefined();
   });
 
-  test('both save-time lists reach the printed paragraph, each proved by its own removal', () => {
-    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+  test('both save-time lists reach the ASSEMBLER that feeds the cards, each proved by its own removal', () => {
+    // relationships.network GLANCES since 2026-10-30, so the lists are proved where they still
+    // speak: relationshipsDeskLists, the one assembler the tab's cards and the print read.
+    const at = (s) => JSON.stringify(relationshipsDeskLists(s));
     const whole = at(linked);
     expect(whole, 'the whole-fixture paragraph is the control and it did not draw').toBeTruthy();
 
@@ -511,11 +544,11 @@ describe('the print desk reads the screen\'s own desks', () => {
     // else in the fixture — DS-REL-1 has no pool for it, so its counterpart must not reach
     // the page, while the faction engagement beside it must. Anchored on the counterpart both
     // typed engagements share, so an empty paragraph cannot satisfy the absence.
-    expectAbsentWithAnchor(whole, 'Ashfen', 'Thornmere',
-      'DS-REL-1 speaks for faction engagements: a conflict-typed row draws no sentence');
+    // (The DS-REL-1 corpus's pool-level "a conflict-typed row draws no sentence" law is pinned
+    // in tests/domain/generalStateProseDesk.test.js; the print no longer draws the block.)
   });
 
-  test('`crossSettlementConflicts` is DELIBERATELY NOT READ, and the key is why, not the row', () => {
+  test('`crossSettlementConflicts` is DELIBERATELY NOT READ by the assembler, and the key is why, not the row', () => {
     // ⭐⭐ THE PIN FOR ODQ §934.16, AND IT IS A BEHAVIOUR CHANGE RECORDED RATHER THAN HIDDEN.
     // The component-side assembler this one replaced merged `settlement.crossSettlementConflicts`
     // alongside the two save-time lists. NOTHING IN `src/` WRITES THAT KEY — the deterministic
@@ -527,9 +560,10 @@ describe('the print desk reads the screen\'s own desks', () => {
     // key for the printed Relationships SECTION, so that surface keeps those rows and the
     // prose no longer does. Vetoable: re-admitting the read is one line plus an ordinary
     // observed-shape row.
-    const at = (s) => flat(buildPrintProse(s, {}))['relationships.network'] || '';
+    // Read through the assembler since relationships.network GLANCES (2026-10-30).
+    const at = (s) => JSON.stringify(relationshipsDeskLists(s));
     const whole = at(linked);
-    expect(whole, 'the control paragraph did not draw').toBeTruthy();
+    expect(whole, 'the control lists are empty').not.toBe(JSON.stringify(relationshipsDeskLists({})));
 
     // 1. THE ASSERTION: emptying the key moves NOTHING, because nothing read it.
     expect(at(normalizeSettlement({ ...linked, crossSettlementConflicts: [] })),
@@ -705,6 +739,36 @@ describe('the print desk reads the screen\'s own desks', () => {
       .toBe(1);
   });
 
+  test('F2/F4 IN PRINT: a lens the faith panel states is trimmed in print exactly as on screen', () => {
+    // A live embed (two creeds, a rank on the patron): the desk draws the rank and standings
+    // lenses, and both restate datum rows, so neither the screen nor the print speaks them.
+    const live = {
+      id: 'home', name: 'Sunhold',
+      config: {
+        primaryDeitySnapshot: { name: 'Sunlord Aurelian', rankAxis: 'major' },
+        faithProfile: {
+          deities: [
+            { deityRef: 'a', name: 'Sunlord Aurelian', niche: 'peacelike:good', share: 60, standing: 'ascendant', legitimacy: 0.8, isPatron: true },
+            { deityRef: 'b', name: 'The Gloam', niche: 'warlike:evil', share: 25, standing: 'cult', legitimacy: 0.2, isPatron: false },
+          ],
+          contested: true, patronSecurity: 0.55, unaffiliated: 15,
+        },
+      },
+    };
+    const fm = faithPanelModel(live);
+    const raw = warFaithStateProse(live, { faith: fm, hasPatron: true }, { seed: 'home', audience: 'dm' });
+    expect(raw.patronRank, 'the live fixture drew no rank lens to trim').toBeTruthy();
+    const trimmed = trimFaithDeskToPanel(raw, fm);
+    expect(trimmed.patronRank).toBeNull();
+    expect(trimmed.standings).toBeNull();
+    const printed = flat(buildPrintProse(live, { faithUnlocked: true }));
+    const screen = screenProse(live, true);
+    expect(printed['faith.patronSeat'] ?? null).toBe(screen['faith.patronSeat'] ?? null);
+    if (printed['faith.patronSeat']) {
+      expectAbsentWithAnchor(printed['faith.patronSeat'], raw.patronRank.sentence, printed['faith.patronSeat'].slice(0, 12), 'the trimmed rank lens in print');
+    }
+  });
+
   test('THE PREMIUM FAITH SEAM: unlocked, the deity positions print and match the screen', () => {
     // NON-VACUITY FIRST: this fixture really does carry a patron, and the reading the desk is
     // handed really does contain the deity's NAME — so the negative arm below is a refusal
@@ -843,7 +907,8 @@ describe('SILENCE — no corpus, no Callout', () => {
     // typography lane, 2026-09-18). It is rendered as the Callout's first child rather than
     // through the `kicker` slot, whose `type.label` would upper-case it.
     const [kickerNode, proseNode] = React.Children.toArray(callouts[0].props.children);
-    expect(kickerNode.props.children).toBe('The ground and the company it keeps');
+    // "The place" since the chair's ruling T1-2 (2026-10-30): the site lines are THE PLACE's.
+    expect(kickerNode.props.children).toBe('The place');
     expect(kickerNode.props.style.textTransform, 'the page would shout a heading the screen speaks')
       .toBe('none');
     expect(proseNode.props.children).toBe('The village keeps to itself.');
@@ -857,5 +922,25 @@ describe('SILENCE — no corpus, no Callout', () => {
       const callouts = React.Children.toArray(el.props.children);
       expect(callouts.map((c) => c.key.replace(/^\.\$/, ''))).toEqual(Object.keys(rows));
     }
+  });
+});
+
+describe('THE CONSOLIDATION IN PRINT (chair rulings T1-2/T1-3/T1-6..T1-10, 2026-10-30)', () => {
+  test('under a crisis the conditions print ONE line (the direction lens), and the cut positions print nothing', () => {
+    const town = normalizeSettlement(generateSettlementPipeline(
+      { settType: 'town', culture: 'germanic', stressTypes: ['famine'] }, null, { seed: 'print-crisis-card', customContent: {} },
+    ));
+    const stresses = (Array.isArray(town.stress) ? town.stress : [town.stress]).filter(Boolean);
+    expect(stresses.length, 'the fixture carries no crisis, so the arm is free').toBeGreaterThan(0);
+    const overview = buildPrintProse(town).overview || {};
+    const conditions = overview['overview.activeConditions'];
+    expect(conditions, 'the conditions position printed nothing on a crisis town').toBeTruthy();
+    // ONE sentence: no second line woven in after the first.
+    expect(conditions.split(/(?<=[.!?])\s+(?=[A-Z])/).length, conditions).toBeLessThanOrEqual(2);
+    for (const cut of ['overview.origin', 'overview.conflicts', 'overview.warnings', 'overview.notableConnection', 'overview.situation']) {
+      expect(Object.keys(overview), `${cut} printed`).not.toContain(cut); // anchored: `conditions` above proves this town's overview positions were built
+    }
+    const hooks = buildPrintProse(town).plot_hooks || {};
+    expect(Object.keys(hooks)).not.toContain('plot_hooks.framing'); // anchored: the overview half of the same build drew above
   });
 });

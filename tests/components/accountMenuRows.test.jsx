@@ -168,7 +168,10 @@ describe('(d) Upgrade: free tier only, and launch-locked', () => {
     expect(upgrade.getAttribute('aria-disabled')).toBe('true');
     expect(upgrade.disabled, 'aria-disabled, not native disabled, so it stays reachable').toBe(false);
     expect(within(upgrade).getByText(AVAILABLE_AT_LAUNCH)).toBeTruthy();
-    expect([upgrade.style.opacity, upgrade.style.cursor]).toEqual(['0.62', 'not-allowed']);
+    // X-39 (the owner, 2026-11-02): a launch-locked control wears the launch skin and is NOT dimmed —
+    // the register is its state. The cursor still says it cannot be taken.
+    expect(upgrade.getAttribute('data-skin')).toBe('launch');
+    expect([upgrade.style.opacity, upgrade.style.cursor]).toEqual(['1', 'not-allowed']);
     fireEvent.click(upgrade);
     expect(calls.onUpgrade).not.toHaveBeenCalled();
     expect(screen.getByRole('menu'), 'a click on the locked row leaves the menu open').toBeTruthy();

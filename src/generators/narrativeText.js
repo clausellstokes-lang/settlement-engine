@@ -168,10 +168,14 @@ export const PRESSURE_SENTENCES = {
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `${r.name} has grown a second town at its edges. Newer, poorer, and not quite governed by the same rules as the first. ${capFirst(r.govFaction) || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
         ]
+      // ONE DIRECTION (chair ruling 2, 2026-10-30, ODQ §934.101): mass migration is an INFLUX everywhere it is
+      // named (the crisis card: "receiving more people than its infrastructure was built for"), so the weak-economy
+      // arm tells the same arrival as a town that cannot carry it, never a departure. Three lines for three, so the
+      // draw does not move.
       : [
-          `${r.name} is smaller than it was. The departure is orderly, which is its own kind of alarm. It means the people leaving have thought it through. ${capFirst(r.govFaction) || "The governing authority"} is trying to arrest the decline without acknowledging it publicly. So far neither effort is working.`,
-          `Each season fewer households remain in ${r.name}, and the ones that go are, quietly, the ones that could go: the skilled, the connected, the solvent. What is left behind concentrates, and ${r.govFaction || "the governing authority"} presides over an emptying it dares not name.`,
-          `The road out of ${r.name} is busier than the road in, and both are watched. By ${r.govFaction || "the governing authority"}, which cannot forbid people to leave, and by those who stayed, who are keeping a private account of who did not.`,
+          `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`,
+          `Every season brings more households to ${r.name} and no more work. The newcomers camp where they can, and ${r.govFaction || "the governing authority"} is counting heads it has no plan for.`,
+          `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.`,
         ];
   },
   wartime: (r) => {

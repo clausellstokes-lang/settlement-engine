@@ -5,6 +5,7 @@ import { sans, Section, Empty } from '../Primitives';
 import {NarrativeNote} from '../NarrativeNote';
 import { economyDeskRead } from '../economyDeskRead.js';
 import { DeskLines } from './EconomicsGlance.jsx'; // the shared position renderer (see its docblock)
+import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 // THE TWO LABEL SEAMS (§934.13 / §934.22). `rawResource` is a catalogue key on a desert
@@ -13,6 +14,90 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { engineKeysInText } from '../../../domain/display/engineKeysInText.js';
+import { FLUSH } from '../../../design/flush.js';
+
+/**
+ * WHAT A RESOURCE DRAWS ON (`exploitation.*[].dependsOn`). Its only reader was Economics'
+ * Resource Exploitation section, cut in the UX consolidation (T2-7) because this page is the
+ * one home; the fact comes here with it (writer reach). Plain words, one line.
+ * @param {{ deps?: unknown, mobile: boolean }} props
+ */
+function DrawsOn({ deps, mobile }) {
+  const list = Array.isArray(deps) ? deps.filter((d) => typeof d === 'string' && d) : [];
+  if (!list.length) return null;
+  return <div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,marginTop:4}}>Draws on: {list.join(', ')}</div>;
+}
+
+// Value badge
+const valColor = v => v==='high'?'#1a5a28':v==='medium'?'#a0762a':'#6b5340';
+const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
+
+/**
+ * One worked-resource chain card, extracted verbatim from the Resource Exploitation section
+ * (BUILD-W2-SEARCH U2, no behaviour change): `stage` is 'unexploited', 'partial' or 'full',
+ * the section's three variants, so the dossier search mounts a chain through its own card.
+ */
+export function ResourceChainCard({ chain, stage }) {
+  const mobile = useIsMobile();
+  if (stage === 'unexploited') return (
+    <div style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      {/* Chain flow */}
+      <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        {(chain.intermediateGoods||[]).map((g,j)=>(
+          <React.Fragment key={j}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
+          </React.Fragment>
+        ))}
+        {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
+          <React.Fragment key={j}>
+            <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
+            <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
+          </React.Fragment>
+        ))}
+      </div>
+      {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
+        Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
+      </div>}
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+  if (stage === 'partial') return (
+    <div style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
+        <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
+        {(chain.intermediateGoods||[]).map((g,j)=>(
+          <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
+        ))}
+      </div>
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+  return (
+    <div style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
+      <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
+        <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
+        <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
+        <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
+      </div>
+      <DrawsOn deps={chain.dependsOn} mobile={mobile} />
+    </div>
+  );
+}
+
+/** DS-ECO-11's one position on this page; named once so the header and the paragraph read the same row. */
+const GROUND_MOUNT = 'resources.groundAndWorkings';
 
 /**
  * @param {object} props
@@ -32,6 +117,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const _config = r?.config || {};
   // THE ECONOMY DESK, through its one caller. DS-ECO-11 renders here and nowhere else.
   const deskProse = economyDeskRead(r, { publicDossier, playerView });
+  // ⭐ ONE STRATEGIC-VALUE SENTENCE (UX consolidation 2026-10-30, RULINGS-T2 T2-9; RUBRIC R2).
+  // DS-ECO-11's strategic-value lens REPLACES the generator's line where the desk speaks (DM
+  // and player views); the generator's line stands where it does not (the public dossier, or
+  // a silent corpus). Never both: the header used to print the line and the desk paragraph
+  // below restated it in voice on 856 of 856 towns with a terrain.
+  const deskWorth = drawnAtMount(GROUND_MOUNT, deskProse.strategicValue)?.sentence || null;
 
   // Imports: object {critical:[], recommended:[], reasons:{}}
 
@@ -39,10 +130,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
   const unexploited    = [...(res.exploitation?.unexploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
   const partExploited  = [...(res.exploitation?.partiallyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
   const fullExploited  = [...(res.exploitation?.fullyExploited || [])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-
-  // Value badge
-  const valColor = v => v==='high'?'#1a5a28':v==='medium'?'#a0762a':'#6b5340';
-  const valBg    = v => v==='high'?'#e8f5ec':v==='medium'?'#faf4e8':'#f0ead8';
 
   // Terrain accent color
   const terrainColor = {
@@ -56,12 +143,12 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
       <NarrativeNote note={narrativeNote} />
 
       {/* ── TERRAIN IDENTITY HEADER ───────────────────────────────────────── */}
-      <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',marginBottom:14}}>
+      <div style={{background:`linear-gradient(to right, ${terrainColor}18, ${terrainColor}08)`,border:`1px solid ${terrainColor}35`,borderLeft:`4px solid ${terrainColor}`,padding:'14px 18px',...FLUSH}}>
         <div style={{display:'flex',alignItems:'flex-start',gap:14,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:160}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:terrainColor,marginBottom:4}}>Terrain</div>
             <div style={{fontSize: FS['22'],fontWeight:700,color:swatch.inkMag,lineHeight:1.1,marginBottom:6}}>{res.terrain||'Unknown'}</div>
-            {res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
+            {!deskWorth&&res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
@@ -74,78 +161,29 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
         </div>
       </div>
 
-      {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
-          FOUR LENSES OVER ONE RECORD AT ONE POSITION, in the order the header above prints
-          their data: what the country is (`terrain`), what the town is good at
-          (`economicStrengths`), what the ground is worth to somebody else (`strategicValue`),
-          and the ONE resource line the reader meets first in the section below. The DS-ECO-12
-          shape, not a new one. Additive: the terrain word, the strengths chips and the
-          generator's own strategic-value line all stay exactly where they are. */}
-      <DeskLines mount="resources.groundAndWorkings" settlementName={r?.name} tier={r?.tier} rungs={[deskProse.terrainIdentity, deskProse.economicStrengths, deskProse.strategicValue, deskProse.exploitation]} />
-
       {/* ── CRITICAL IMPORTS (what they can't produce) ───────────────────── */}
       {(unexploited.length>0||partExploited.length>0||fullExploited.length>0)&&<Section title="Resource Exploitation" collapsible defaultOpen>
         <div style={{display:'flex',flexDirection:'column',gap:8}}>
 
           {/* Unexploited — most interesting for DMs */}
-          {unexploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c060',borderLeft:'3px solid #b8860b',padding:'10px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Unexploited</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-              {/* Chain flow */}
-              <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap',marginBottom:6}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-                {(chain.intermediateGoods||[]).map((g,j)=>(
-                  <React.Fragment key={j}>
-                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span>
-                  </React.Fragment>
-                ))}
-                {(chain.finalProducts||[]).slice(0,2).map((g,j)=>(
-                  <React.Fragment key={j}>
-                    <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span>
-                    <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'1px 6px',fontWeight:600}}>{g}</span>
-                  </React.Fragment>
-                ))}
-              </div>
-              {chain.processingInstitutions?.length>0&&<div style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#5A3A10']}}>
-                Needs: {chain.processingInstitutions.map((n) => institutionDisplayName(n) || n).join(', ')}
-              </div>}
-            </div>
-          ))}
+          {unexploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="unexploited"/>)}
 
           {/* Partially exploited */}
-          {partExploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#F4FAF4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #5a6a1a',padding:'10px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,marginBottom:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch['#3A5A1A'],background:swatch['#D8ECD8'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>Partial</span>
-                <span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-              <div style={{display:'flex',alignItems:'center',gap:4,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px',fontWeight:600}}>{resourceDisplayName(chain.rawResource)}</span>
-                {(chain.intermediateGoods||[]).map((g,j)=>(
-                  <React.Fragment key={j}><span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUTED}}>→</span><span style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,background:swatch['#F0EAD8'],padding:'1px 6px'}}>{g}</span></React.Fragment>
-                ))}
-              </div>
-            </div>
-          ))}
+          {partExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="partial"/>)}
 
           {/* Fully exploited */}
-          {fullExploited.map((chain,i)=>(
-            <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:'3px solid #1a5a28',padding:'8px 14px'}}>
-              <div style={{display:'flex',alignItems:'center',gap:8,flexWrap:'wrap'}}>
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:swatch.success,background:swatch['#C8ECD4'],padding:'1px 6px',letterSpacing:'0.05em',textTransform:'uppercase'}}>✓ Fully exploited</span>
-                <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{resourceDisplayName(chain.rawResource)}</span>
-                <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:valColor(chain.exportValue),background:valBg(chain.exportValue),padding:'0 5px'}}>{chain.exportValue} value</span>
-              </div>
-            </div>
-          ))}
+          {fullExploited.map((chain,i)=><ResourceChainCard key={i} chain={chain} stage="full"/>)}
         </div>
       </Section>}
+
+      {/* ── THE GROUND AND ITS WORKINGS (DS-ECO-11 at resources.groundAndWorkings) ──
+          TWO LENSES SINCE THE UX CONSOLIDATION (2026-10-30, T2-9): the strategic-value
+          sentence (which stands in for the generator's line in the header on DM views) and the
+          ONE resource line on the Resource Exploitation section, UNDER the chains it reads (the
+          block law, X-16: prose never above the fact it explains). The terrain lens
+          is cut (the Overview's place passage owns the ground, X-1) and the strengths lens is
+          cut (the chips above are the strengths, R2). */}
+      <DeskLines mount={GROUND_MOUNT} settlementName={r?.name} tier={r?.tier} rungs={[deskProse.strategicValue, deskProse.exploitation]} />
 
       {/* ── AVAILABLE RAW RESOURCES ───────────────────────────────────────── */}
       {(r?.config?.nearbyResources?.length>0||res.availableResources?.length>0)&&<Section title="Nearby Resources" collapsible defaultOpen={true}>
@@ -157,7 +195,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
           const fmtKey = rk => rk.replace(/_/g,' ').replace(/\b./g,c=>c.toUpperCase());
           return <>
             {depleted.length>0&&<div style={{marginBottom:8}}>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted. Consumed locally, export potential reduced</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#C05000'],letterSpacing:'0.06em',marginBottom:4}}>Depleted</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {depleted.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',fontWeight:600,display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
@@ -165,7 +203,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
               </div>
             </div>}
             {abundant.length>0&&<div style={{marginBottom:res.availableResources?.length>0?8:0}}>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant. Full export potential</div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,letterSpacing:'0.06em',marginBottom:4}}>Abundant</div>
               <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
                 {abundant.map((rk,i)=>customSet.has(rk)
                   ? <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:GOLD_DEEP,...GOLD_TINT,borderWidth:1,borderStyle:'solid',padding:'2px 9px',display:'inline-flex',alignItems:'center',gap:4}}>{fmtKey(rk)}<span style={{fontWeight:800}}>✦</span></span>
@@ -180,22 +218,6 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             </div>}
           </>;
         })()}
-      </Section>}
-
-      {/* ── EXPORT POTENTIAL ─────────────────────────────────────────────── */}
-      {res.exports?.length>0&&<Section title="Export Potential" collapsible defaultOpen={false}>
-        <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
-          {[...res.exports].sort((a,b)=>{
-              const vOrder={['very high']:0,high:1,medium:2,low:3};
-              return (vOrder[a.value||'medium']??2)-(vOrder[b.value||'medium']??2)||(a.good||'').localeCompare(b.good||'');
-            }).map((e,i)=>{
-            const v = e.value||'medium';
-            return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:`3px solid ${valColor(v)}`,padding:'6px 10px',minWidth:0}}>
-              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{e.product||e.good||e.name}</div>
-              {e.reason&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:2}}>{e.reason}</div>}
-            </div>;
-          })}
-        </div>
       </Section>}
 
       {/* ── GAPS & OPPORTUNITIES (combined) ──────────────────────────────── */}
@@ -230,6 +252,22 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
                 {chain&&<span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.inkMag,marginRight:6}}>{chain}:</span>}
                 <span style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2}}>{impact}</span>
               </div>
+            </div>;
+          })}
+        </div>
+      </Section>}
+
+      {/* ── EXPORT POTENTIAL ─────────────────────────────────────────────── */}
+      {res.exports?.length>0&&<Section title="Export Potential" collapsible defaultOpen={false}>
+        <div style={{display:'flex',flexWrap:'wrap',gap:6}}>
+          {[...res.exports].sort((a,b)=>{
+              const vOrder={['very high']:0,high:1,medium:2,low:3};
+              return (vOrder[a.value||'medium']??2)-(vOrder[b.value||'medium']??2)||(a.good||'').localeCompare(b.good||'');
+            }).map((e,i)=>{
+            const v = e.value||'medium';
+            return <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #a8d8b0',borderLeft:`3px solid ${valColor(v)}`,padding:'6px 10px',minWidth:0}}>
+              <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{e.product||e.good||e.name}</div>
+              {e.reason&&<div style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,marginTop:2}}>{e.reason}</div>}
             </div>;
           })}
         </div>

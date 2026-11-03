@@ -23,7 +23,6 @@
   "src/components/new/SummaryTab.jsx",
   "src/components/new/neighbourComponents.jsx",
   "src/components/new/npcComponents.jsx",
-  "src/components/new/tabs/OverviewTab.jsx",
   "src/components/new/tabs/ServicesTab.jsx",
   "src/components/settlement/CatalogPicker.jsx",
   "src/components/settlement/ExportSheet.jsx",

@@ -114,12 +114,12 @@ export default function FeedbackWidget({ visible = true }) {
     position: 'fixed',
     right: SP.lg,
     bottom: aboveFooter(isMobile ? bottomClearance(CHROME.fabLift) : aboveBottomNav(SP.lg)),
-    // M10: the FEEDBACK layer (910). It was raised one step above the post-generate
-    // coach (PostGenCoach, 900) because the two were both fixed bottom-right panels
-    // sharing zIndex 900, and stacked ambiguously when shown together. Since REVIEW-P
-    // F5 the coach docks in the page's own flow and claims no layer at all, so this
-    // panel now owns the corner outright; the layer stays where the manifest names it.
-    // See the Z_LAYERS manifest (scripts/.ui-a11y-contract.json).
+    // M10: the FEEDBACK layer (910), one step above the post-generate coach's corner
+    // card (PostGenCoach, `coach` 900). Both are fixed bottom-right on the desktop again
+    // (the owner, 2026-10-30, re-decided the coach's in-flow dock), so the panel the reader
+    // summons opens over the coach and its close control is never covered; the coach can
+    // also be dragged or folded out of the way. See the Z_LAYERS manifest
+    // (scripts/.ui-a11y-contract.json).
     zIndex: 910,
   };
 

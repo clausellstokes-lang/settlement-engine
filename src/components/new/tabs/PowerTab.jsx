@@ -1,6 +1,8 @@
+import InfoPill from '../../primitives/InfoPill.jsx';
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import React, { useEffect, useRef, useState } from 'react';
 import { FS, MUTED, swatch } from '../../theme.js';
-import { serif, Section, TabIntro } from '../Primitives';
+import { Section } from '../Primitives';
 import { LITERARY_TITLE, literaryTitle, tokenCase } from '../labelLadder.js';
 import { NarrativeNote } from '../NarrativeNote';
 import { FACTION_COLORS } from '../tabConstants';
@@ -10,6 +12,7 @@ import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } fro
 import { PowerStrata } from './power/PowerStrata.jsx';
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
+import { governingFactionOf } from '../../../domain/rulingPower.js';
 import { structuralLensOf } from '../../../domain/spatial/cohesionWeave.js';
 import { settlementBlocs as politicsBlocsOf } from '../../../domain/display/politicsRead.js';
 import { powerStateProse, powerLadderRung } from '../../../domain/display/stateProse/powerStateProse.js';
@@ -22,6 +25,7 @@ import ProseBlock from '../ProseBlock.jsx';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { edged } from '../../../design/edgedBox.js';
+import { FLUSH } from '../../../design/flush.js';
 
 /**
  * The legitimacy banner's mount id, bound once. It is used at TWO draws below and the
@@ -86,6 +90,7 @@ function ChainRow({ label, children }) {
 /** §815 — the full RULING CHAIN: power → faction → named NPC, three legible
  *  rows of one answer ("Who runs this place?"), honest absence at each link. */
 function RulingChainBlock({ settlement }) {
+  const mobile = useIsMobile();
   const chain = rulingChainOf(settlement);
   if (!chain.power && !chain.faction) return null;
   const missingSeat = chain.absence?.kind === 'missing_seat';
@@ -96,24 +101,36 @@ function RulingChainBlock({ settlement }) {
   // "this is a word" is the suffix; the sibling reads on this row already pass
   // by it (`powerLabel`, `.name`). This one just lacked the declaration.
   const governmentWord = chain.power?.government || '';
+  // STOP-1 (R7): the governing faction's character word (corruption-riddled, theocratic-aligned,
+  // military-dominated ...), which the migration kernel reads. Its one screen home since T2-17
+  // cut the "Governing authority" box is this chip on the power line.
+  const governingModifier = chain.power ? String(governingFactionOf(settlement)?.modifier || '') : '';
   return (
     <div data-testid="ruling-chain" style={{
       background: swatch['#FAF8F4'], border: `1px solid ${swatch['#E0D0B0']}`,
       borderLeft: `4px solid ${missingSeat ? swatch['#8B1A1A'] : swatch['#A0762A']}`,
-      padding: '12px 16px', marginBottom: 14, display: 'flex', flexDirection: 'column', gap: 6,
+      padding: '12px 16px', display: 'flex', flexDirection: 'column', gap: 6, ...FLUSH,
     }}>
-      <div style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>
-        Who runs this place?
+      {/* the title and its ? pill are separate elements, so the pill's sentence never
+          joins the title's line (the phone floor reads a line by its element) */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+        <span style={{...literaryTitle(FS.sm),color:swatch.inkMag}}>Who runs this place?</span>
+        <InfoPill text={SECTION_HELP.rulers} />
       </div>
       {chain.power && (
         <ChainRow label="The power">
           <strong>{chain.power.name}</strong>
           {chain.power.powerLabel ? ` (${chain.power.powerLabel.toLowerCase()})` : ''}
+          {governingModifier && (
+            <span data-testid="ruling-chain-modifier" style={{marginLeft:6,fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:`1px solid ${swatch['#5A6A1A']}40`,padding:'0 5px'}}>{governingModifier}</span>
+          )}
           {governmentWord && governmentWord !== chain.power.name
             ? <span style={{color:MUTED}}>{` · rule is carried by ${governmentWord}`}</span> : ''}
         </ChainRow>
       )}
-      {chain.faction && (
+      {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it renders only when
+          the seat stands vacant or another faction holds it (vacant first: factionNamePrecedenceScan). */}
+      {chain.faction && (chain.faction.vacant || chain.faction.name !== chain.power?.name) && (
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
           {` holds the governing seat`}
@@ -175,13 +192,10 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
     criminalCaptureState:crimCapture,
   } = r;
 
-  const conflicts     = s?.conflicts || [];
-  const tensions      = s?.history?.currentTensions || [];
 
   const isStable   = (m||'').toLowerCase().includes('stable') && !(m||'').toLowerCase().includes('unstable');
   const isCritical = (m||'').toLowerCase().includes('critical') || m?.includes('siege') || m?.includes('Desperate');
   const stabilityColor = isCritical ? '#8b1a1a' : isStable ? '#1a5a28' : '#a0762a';
-  const governing  = pf.find(f => f.isGoverning) || pf[0];
 
   // ── Criminal capture state display ─────────────────────────────────────────
   const CAPTURE = {
@@ -244,29 +258,35 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
   const drawnBanner = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyBanner);
   const drawnLens   = drawnAtMount(LEGITIMACY_MOUNT, deskProse.legitimacyLens);
   const drawnStab   = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityHeader);
-  const drawnStabLens = drawnAtMount(STABILITY_MOUNT, deskProse.stabilityLens);
   const drawnReading  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.legitimacyReading);
   const drawnCapture  = drawnAtMount(UNDERSIDE_MOUNT, deskProse.captureReading);
   const drawnOperation = drawnAtMount(UNDERSIDE_MOUNT, deskProse.operationReading);
   const undersideLines = [drawnReading, drawnCapture, drawnOperation]
     .map((d) => d?.sentence).filter(Boolean);
-  const blocLines = [
+  // T2-18: the DORMANT presence line ("the hall is not organized into sides") is true of every
+  // unplayed world and plays nothing, so off-campaign the bloc position is silent (R4).
+  const blocsDormant = String(deskProse.blocPresence?.provenance?.poolKey || '').startsWith('layer DORMANT');
+  const blocLines = blocsDormant ? [] : [
     drawnAtMount(BLOCS_MOUNT, deskProse.blocPresence),
     drawnAtMount(BLOCS_MOUNT, deskProse.blocGlue),
     drawnAtMount(BLOCS_MOUNT, deskProse.blocEnd),
   ].map((d) => d?.sentence).filter(Boolean);
   const structureLines = [
     drawnAtMount(STRUCTURE_MOUNT, deskProse.rulingStructure),
-    drawnAtMount(STRUCTURE_MOUNT, deskProse.governingTitle),
+    // T2-17: the governing-title lens (the hall's NAME, which the ruling chain prints) is cut.
   ].map((d) => d?.sentence).filter(Boolean);
   const successionLines = [
     drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk),
-    drawnAtMount(SUCCESSION_MOUNT, deskProse.successionHold),
+    // T2-18: the legitimacy-hold lens is cut; the legitimacy banner owns legitimacy (R2).
   ].map((d) => d?.sentence).filter(Boolean);
+  // T2-18: where the coup-risk sentence speaks (DM/player), the ruler's coup-risk chip yields
+  // to it; the chip stands on public. The same for the capture chip against DS-POW-6's capture
+  // reading: Power owns capture, said once.
+  const coupRiskSpoken = !!drawnAtMount(SUCCESSION_MOUNT, deskProse.successionRisk)?.sentence;
+  const captureSpoken = !!drawnCapture?.sentence;
 
   return (
     <div style={{paddingBottom:16}}>
-      <TabIntro tabKey="power" />
       <NarrativeNote note={narrativeNote} />
 
       {/* ── §815 — THE RULING CHAIN (the one answer, first) ──────────────── */}
@@ -278,7 +298,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           background: leg.bg || '#faf8ec',
           border: `1px solid ${leg.color}40`,
           borderLeft: `4px solid ${leg.color}`,
-          padding: '12px 16px', marginBottom: 14,
+          padding: '12px 16px', ...FLUSH,
         }}>
           <div style={{display:'flex', alignItems:'flex-start', gap:16, flexWrap:'wrap'}}>
             {/* Score + label */}
@@ -291,13 +311,19 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                 <span style={{fontSize: FS['14'],fontWeight:700,color:leg.color}}>{leg.label}</span>
               </div>
             </div>
-            {/* Breakdown chips */}
+            {/* Breakdown chips — THE TRIM (the owner, 2026-11-01, ODQ §934.103; rubric R4): a
+                modifier of 0 says nothing, so only the modifiers that moved the score are
+                shown, and the heading goes with them when none did. The fracture note below
+                keeps its place either way. */}
             <div style={{flex:1,minWidth:180}}>
+              {(() => {
+                const moved = Object.entries(leg.breakdown || {}).filter(([, v]) => Number(v) !== 0);
+                return moved.length > 0 && (<>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
-                Score breakdown (base 50)
+                Breakdown
               </div>
               <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
-                {Object.entries(leg.breakdown || {}).map(([k,v]) => (
+                {moved.map(([k,v]) => (
                   <div key={k} style={{
                     fontSize:chromeFontSize(FS.xxs, mobile), fontWeight:700, padding:'2px 8px',
                     background: v > 0 ? '#f0faf4' : v < 0 ? '#fdf4f4' : '#f5f0e8',
@@ -308,9 +334,11 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
                   </div>
                 ))}
               </div>
+                </>);
+              })()}
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
-                  <strong>Governance fractured.</strong> Real decisions are being made informally. The faction that appears to govern is not the faction that governs.
+                  <strong>Governance fractured.</strong> Real decisions are being made informally.
                 </div>
               )}
             </div>
@@ -340,29 +368,17 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
       <div style={{
         background: isCritical?'#fdf4f4': isStable?'#f0faf4':'#fdf8e8',
         ...edged(`1px solid ${isCritical?'#e8c0c0':isStable?'#a8d8b0':'#e0c860'}`, `4px solid ${stabilityColor}`),
-        padding:'12px 16px', marginBottom:14,
+        padding:'12px 16px', ...FLUSH,
       }}>
         <div style={{display:'flex',alignItems:'flex-start',gap:12,flexWrap:'wrap'}}>
           <div style={{flex:1,minWidth:0}}>
             <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Stability</div>
             <div style={{fontSize:FS.lg,fontWeight:700,color:stabilityColor,lineHeight:1.3}}>{m}</div>
           </div>
-          {governing && <div style={{flex:1,minWidth:0}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Governing authority</div>
-            <div style={{display:'flex',alignItems:'center',gap:6,flexWrap:'wrap'}}>
-              <span style={{fontSize: FS['14'],fontWeight:700,color:swatch.inkMag}}>{governing.faction}</span>
-              <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:stabilityColor}}>
-                {governing.powerLabel || ''} ({governing.power})
-              </span>
-              {governing.modifier && (
-                <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:600,color:swatch['#5A6A1A'],background:swatch['#F0F4E0'],border:'1px solid #c8d890',padding:'0 5px'}}>
-                  {governing.modifier}
-                </span>
-              )}
-            </div>
-          </div>}
+          {/* T2-17: "Governing authority" left this box; the ruling chain above is the one
+              answer to who governs and how strongly. */}
           {/* Criminal capture state badge */}
-          {crimCapture && crimCapture !== 'none' && (
+          {crimCapture && crimCapture !== 'none' && !captureSpoken && (
             <div style={{flexShrink:0}}>
               <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:3}}>Criminal capture</div>
               <span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:captureStyle.color,background:captureStyle.bg,border:`1px solid ${captureStyle.color}40`,padding:'2px 8px'}}>
@@ -374,47 +390,40 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         {h && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch['#5A3A10'],lineHeight:1.5,margin:'8px 0 0',borderTop:`1px solid ${isCritical?'#e8c0c0':isStable?'#c8e8c8':'#e0c860'}`,paddingTop:8,fontStyle:'italic'}}>{h}</p>}
         {/* DS-POW-2: the stability ladder line, then its lens — two pools of one block at
             ONE position, routed through one mount, exactly as the legitimacy banner above. */}
-        {(drawnStab?.sentence || drawnStabLens?.sentence) && (
+        {drawnStab?.sentence && (
           <div style={{marginTop:10,borderTop:`1px solid ${stabilityColor}30`,paddingTop:8}}>
-            {/* The ladder line and its lens, as one paragraph — the banner above's twin. */}
-            <ProseBlock lines={[drawnStab?.sentence, drawnStabLens?.sentence]}
+            {/* The ladder line alone: the DS-POW-2 lens was one boilerplate sentence on 991 of
+                1000 towns that said only that there had been trouble (T2-18, R4). */}
+            <ProseBlock lines={[drawnStab.sentence]}
               settlementName={s?.name} tier={s?.tier}
               style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.65,margin:0,fontStyle:'italic'}}/>
           </div>
         )}
       </div>
 
-      {/* ── THE CRIMINAL UNDERSIDE (DS-POW-6) ────────────────────────────────
-          The ladder cells the surfaces above do not reach: whether there is a
-          legitimacy reading at all, how far criminal capture has gone, and what
-          the operation actually does for a living. Three pools of ONE block at
-          ONE position, so the registry silences them together. */}
-      {undersideLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
-          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
-
-      {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
-          Whether the hall is organized into sides at all, what binds the first
-          bloc, and what it is for. Three pools of ONE block at ONE position. The
-          politics layer is written during play, so a world that has not been
-          played reads the DORMANT line — which is true, not a fallback. */}
-      {blocLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',marginBottom:14}}>
-          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
-          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
-            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
-        </div>
-      )}
+      {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
+          The flat "Power Distribution" list is replaced by three semantically
+          distinct strata: THE POWERS (the seat + its contenders, dominant),
+          THE FACTIONS (the full roster, lighter), THE WEB (the typed ties
+          between them). Derived read-only from the settlement's own data.
+          PowerTab keeps the roster expand/focus state so the NPC-faction-link
+          focus affordance keeps landing on the right row. The facts come before the prose that
+          couples them (the block law, X-16), so the strata precede the desk passages. */}
+      <PowerStrata
+        settlement={s}
+        powerStructure={r}
+        expandedFaction={expandedFaction}
+        setExpandedFaction={setExpandedFaction}
+        focusIndex={focusIndex}
+        focusedRowRef={focusedRowRef}
+        showCoupChip={!coupRiskSpoken}
+      />
 
       {/* ── RULING STRUCTURE (DS-POW-5) ──────────────────────────────────────
           What KIND of power governs, what the town lives on, and what the hall
           calls itself. Three pools of ONE block at ONE position. */}
       {structureLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #5A6A1A',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The shape of authority</div>
           <ProseBlock lines={structureLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
@@ -426,28 +435,40 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
           whether the seat has a recorded lineage. Three pools of ONE block at ONE
           position; the registry silences them together. */}
       {successionLines.length > 0 && (
-        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',marginBottom:14}}>
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #a0762a',padding:'10px 14px',...FLUSH}}>
           <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Rule and succession</div>
           <ProseBlock lines={successionLines} settlementName={s?.name} tier={s?.tier}
             style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
         </div>
       )}
 
-      {/* ── THE THREE STRATA (owner order 2026-07-22) ─────────────────────────
-          The flat "Power Distribution" list is replaced by three semantically
-          distinct strata: THE POWERS (the seat + its contenders, dominant),
-          THE FACTIONS (the full roster, lighter), THE WEB (the typed ties
-          between them). Derived read-only from the settlement's own data.
-          PowerTab keeps the roster expand/focus state so the NPC-faction-link
-          focus affordance keeps landing on the right row. */}
-      <PowerStrata
-        settlement={s}
-        powerStructure={r}
-        expandedFaction={expandedFaction}
-        setExpandedFaction={setExpandedFaction}
-        focusIndex={focusIndex}
-        focusedRowRef={focusedRowRef}
-      />
+      {/* ── THE CRIMINAL UNDERSIDE (DS-POW-6) ────────────────────────────────
+          The ladder cells the surfaces above do not reach: whether there is a
+          legitimacy reading at all, how far criminal capture has gone, and what
+          the operation actually does for a living. Three pools of ONE block at
+          ONE position, so the registry silences them together. Its capture pools are all
+          dm-only, so it follows the coupling prose (the block law, X-16 rung 4). */}
+      {undersideLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #e0c890',borderLeft:'4px solid #4a1a4a',padding:'10px 14px',...FLUSH}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>The quieter arithmetic</div>
+          <ProseBlock lines={undersideLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
+
+      {/* ── BLOCS AND THE DIVIDED COURT (DS-POW-7) ───────────────────────────
+          Whether the hall is organized into sides at all, what binds the first
+          bloc, and what it is for. Three pools of ONE block at ONE position. The
+          politics layer is written during play, so a world that has not been
+          played reads the DORMANT line — which is true, not a fallback. Off-campaign it is
+          silent (T2-18), so it sits with the campaign-only blocks at the foot (X-16 rung 6). */}
+      {blocLines.length > 0 && (
+        <div style={{background:swatch['#FAF8F4'],border:'1px solid #d8c090',borderLeft:'4px solid #4a4a7a',padding:'10px 14px',...FLUSH}}>
+          <div style={{...LITERARY_TITLE,color:swatch.inkMag,marginBottom:5}}>Sides and combinations</div>
+          <ProseBlock lines={blocLines} settlementName={s?.name} tier={s?.tier}
+            style={{fontSize:FS.md,color:swatch.inkMag2,lineHeight:1.6,margin:0,fontStyle:'italic'}}/>
+        </div>
+      )}
 
       {/* ── THE LADDER (intra-faction standings; hidden when the ladder is dark) ──
           Wires the secrets-safe DM read-model (ladderRead / mirrorOf) into its declared
@@ -531,57 +552,8 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         );
       })()}
 
-      {/* ── CURRENT TENSIONS ─────────────────────────────────────────────── */}
-      {tensions.length > 0 && (
-        <Section title={`Current Tensions (${tensions.length})`} collapsible defaultOpen accent="#b8860b">
-          <div style={{display:'flex',flexDirection:'column',gap:6}}>
-            {tensions.map((t,i) => (
-              <div key={i} style={{background:swatch['#FDF8E8'],border:'1px solid #e0c860',borderLeft:'3px solid #b8860b',padding:'9px 13px'}}>
-                <p style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 4px'}}>{typeof t==='object'?t.description:t}</p>
-                {t.factions?.length > 0 && (
-                  <div style={{display:'flex',gap:4,flexWrap:'wrap'}}>
-                    {t.factions.map((f,j) => (
-                      <span key={j} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:600,color:swatch['#7A5010'],background:swatch['#F5E8C0'],padding:'0 6px'}}>{f}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </Section>
-      )}
-
-      {/* ── ACTIVE CONFLICTS ─────────────────────────────────────────────── */}
-      {conflicts.length > 0 && (
-        <Section title={`Active Conflicts (${conflicts.length})`} collapsible defaultOpen accent="#8b1a1a">
-          {conflicts.map((c,i) => {
-            const iHigh = c.intensity==='high', iLow = c.intensity==='low';
-            const intColor = iHigh?'#8b1a1a':iLow?'#1a5a28':'#a0762a';
-            const intLabel = iHigh?'High tension':iLow?'Low tension':'Moderate';
-            return (
-              <div key={i} style={{background:swatch['#FAF8F4'],border:`1px solid ${intColor}40`,borderLeft:`3px solid ${intColor}`,padding:'12px 14px',marginBottom:10}}>
-                <div style={{display:'flex',alignItems:'flex-start',gap:8,marginBottom:6,flexWrap:'wrap'}}>
-                  <span style={{...serif,fontSize: FS['14'],fontWeight:700,color:swatch.inkMag,flex:1}}>{c.parties?.[0]} vs {c.parties?.[1]}</span>
-                  <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:intColor,background:`${intColor}15`,padding:'2px 6px',letterSpacing:'0.05em',flexShrink:0}}>{intLabel}</span>
-                </div>
-                {c.issue  && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 4px'}}><strong>At issue:</strong> {c.issue}</p>}
-                {c.stakes && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag3,margin:'0 0 8px'}}><strong>Stakes:</strong> {c.stakes}</p>}
-                {c.plotHooks?.length > 0 && (
-                  <div style={{borderTop:`1px solid ${intColor}30`,paddingTop:8}}>
-                    <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.magic,marginBottom:4}}>Plot hooks</div>
-                    {c.plotHooks.map((hook,j) => (
-                      <div key={j} style={{display:'flex',gap:6,marginBottom:4}}>
-                        <span style={{color:swatch.magic,flexShrink:0,fontSize:FS.sm}}>✦</span>
-                        <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag,lineHeight:1.45,margin:0}}>{typeof hook==='string'?hook:hook.hook||''}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </Section>
-      )}
+      {/* Current Tensions and Active Conflicts left this page (T2-19, RULINGS-CROSS X-4):
+          History owns tensions, Relationships owns conflicts, the Overview glances at both. */}
 
     </div>
   );

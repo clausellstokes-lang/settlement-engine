@@ -12,7 +12,7 @@ import { isConfigured } from '../../lib/supabase.js';
 import { purchasesOpen } from '../../lib/launchGate.js';
 import { t, tierPriceSlot, tx } from '../../copy/index.js';
 import {
-  GOLD, GOLD_DEEP, GOLD_SOFT, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY,
+  GOLD, GOLD_DEEP, GOLD_SOFT, INK, SECOND, BORDER, BORDER_STRONG, CARD, sans, serif_, SP, FS, BODY, launchSkin,
 } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../design/proseScale.js';
@@ -261,6 +261,11 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
   const mobile = useIsMobile();
   const purchasesAreOpen = purchasesOpen();
   const packName = `${t('pricing.creditPacks.pack', { credits: pack.credits })}, ${pack.price}`;
+  // THE LAUNCH SKIN (X-39): while locked the Button wears the regal ground (it reads the pill
+  // inside it), so the tile's own inks — authored for the parchment plate — give way to the
+  // skin's gold; the price takes the shimmer, the rest the flat gold.
+  const ink = (colour) => (purchasesAreOpen ? { color: colour } : { color: launchSkin.ink });
+  const priceInk = (colour) => (purchasesAreOpen ? { color: colour } : launchSkin.shimmer);
   return (
     // The Button primitive (jsx-hygiene rule — the extraction converted the
     // page's one tracked raw <button>): focus-ring/disabled/target-size come
@@ -298,22 +303,22 @@ export function PackTile({ pack, onBuy, loading, emphasised }) {
           a detached FS.xs corner badge + the page's quietest line. The credit
           quantity recedes to a single supporting label (it was stated twice
           before — the bare number AND the "N credits" label). */}
-      <div style={{ fontSize: FS.xxl, fontWeight: 700, color: emphasised ? GOLD_DEEP : INK }}>
+      <div data-testid="pack-price" style={{ fontSize: FS.xxl, fontWeight: 700, ...priceInk(emphasised ? GOLD_DEEP : INK) }}>
         {pack.price}
       </div>
-      <div style={{ fontSize: FS.md, fontWeight: 700, color: emphasised ? GOLD_DEEP : BODY }}>
+      <div data-testid="pack-per-credit" style={{ fontSize: FS.md, fontWeight: 700, ...ink(emphasised ? GOLD_DEEP : BODY) }}>
         {t('pricing.creditPacks.perEach', { price: pack.perCredit })}
       </div>
       {pack.discount && (
         <div style={{
           fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 800, letterSpacing: '0.04em',
           textTransform: 'uppercase',
-          color: emphasised ? GOLD_DEEP : SECOND,
+          ...ink(emphasised ? GOLD_DEEP : SECOND),
         }}>
           {pack.discount}
         </div>
       )}
-      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), color: BODY, textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+      <div style={{ fontSize: chromeFontSize(FS.xs, mobile), textTransform: 'uppercase', letterSpacing: '0.05em', ...ink(BODY) }}>
         {t('pricing.creditPacks.pack', { credits: pack.credits })}
       </div>
       {/* The launch pill wraps inside a narrow tile instead of overflowing it. */}

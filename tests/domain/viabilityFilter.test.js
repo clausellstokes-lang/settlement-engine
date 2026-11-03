@@ -15,6 +15,7 @@ import {
   VIABILITY_EXCLUDED_TYPES,
   VIABILITY_EXCLUDED_SEV,
   VIABILITY_EXCLUDED_CATEGORIES,
+  VIABILITY_EXCLUDED_TITLES,
 } from '../../src/domain/display/viabilityFilter.js';
 
 describe('[pdf-6] viability filter partitions issues to one home', () => {
@@ -22,6 +23,13 @@ describe('[pdf-6] viability filter partitions issues to one home', () => {
     for (const type of VIABILITY_EXCLUDED_TYPES) expect(isViabilityItem({ type })).toBe(false);
     for (const severity of VIABILITY_EXCLUDED_SEV) expect(isViabilityItem({ severity })).toBe(false);
     for (const category of VIABILITY_EXCLUDED_CATEGORIES) expect(isViabilityItem({ category })).toBe(false);
+  });
+
+  test('the untyped Trade Dependencies note is routed away by title (UX consolidation, T2-10/T2-16)', () => {
+    expect(VIABILITY_EXCLUDED_TITLES).toEqual(['Trade Dependencies']);
+    expect(isViabilityItem({ severity: 'note', title: 'Trade Dependencies', description: '4 institutions depend on imported materials' })).toBe(false);
+    // Another note-severity warning without the title still belongs to viability.
+    expect(isViabilityItem({ severity: 'note', title: 'Banking Gap' })).toBe(true);
   });
 
   test('genuine viability items (logic violations, critical conflicts) pass', () => {

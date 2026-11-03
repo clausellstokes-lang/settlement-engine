@@ -1,17 +1,16 @@
+import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { tokenCase } from '../labelLadder.js';
 import React, { useState, useMemo } from 'react';
 import { FS, swatch, MUTED, GOLD_TINT, GOLD_DEEP } from '../../theme.js';
-import { Ti, sans, Section, Empty } from '../Primitives';
+import { sans, Section, Empty } from '../Primitives';
 import { formatCount } from '../../../domain/formatNumber.js';
-import { normalizePlotHook } from '../../../lib/proseSeams.js';
 import {PROSPERITY_COLORS} from '../tabConstants';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { useStore } from '../../../store/index.js';
 
 import {NarrativeNote} from '../NarrativeNote';
-import {SupplyChainsPanel} from '../SupplyChainsPanel';
-import { criminalOpEcon } from '../../../domain/criminalOpRole.js';
+import { chainFlowFacts } from '../SupplyChainsPanel';
 import { displayLabel, humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveFoodBalance, deriveGranaryOutlook, deriveTreasuryGlance, foodBarSegments } from '../../../domain/display/dossierViewModel.js';
 import { flowDerivedDependency } from '../../../domain/display/tradeFlowEconomics.js';
@@ -20,7 +19,7 @@ import EconomyFreshnessNote from '../EconomyFreshnessNote.jsx'; // R-4: the ONE 
 import { customSupplyChainPresentation } from '../../../domain/content/customSupplyChainPresentation.js';
 import { tradeLabelOwnership } from '../../../domain/content/customTradeLabelOwnership.js';
 import MarketPricesSection from './MarketPricesSection.jsx';
-import EconomicsGlance, { DeskLines } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
+import EconomicsGlance, { DeskLines, EconomicsCampaignTiles } from './EconomicsGlance.jsx'; // the tab's glance surface + its mount positions
 import { economyDeskRead } from '../economyDeskRead.js'; // the desk's ONE caller + the §885.3 gate (walker ARM 2)
 import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.js';
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
@@ -94,7 +93,7 @@ const TRADE_OUT_COLOR = swatch['#1A5A28'];  // → exported to a neighbour
  * Props are the slices of eco that the section actually consumes — keeps
  * the prop surface narrow and the component cheap to memoize.
  */
-function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [] }) {
+function EconomicFlowsSection({ chains, institutionalServices = [], incomeSources = [], instNames = [] }) {
   const [flowFilter, setFlowFilter] = useState('all');
   // THE TWO PHONE FLOORS — a chain's impairment line, its entrepot note and its magic
   // substitution note take the PROSE floor. Its `Via` institution LIST and its income
@@ -120,7 +119,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
 
   return (
     <Section title={`Economic Flows (${chains.length + institutionalServices.length} active${impairedCount > 0 ? ` · ${impairedCount} impaired` : ''})`}
-      collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined}>
+      collapsible defaultOpen={impairedCount > 0} accent={impairedCount > 0 ? '#8b1a1a' : undefined} help={SECTION_HELP.supplyChains}>
       {/* Filter tabs */}
       <div style={{display:'flex',gap:4,flexWrap:'wrap',marginBottom:10}}>
         {[
@@ -153,6 +152,10 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           const incomeEntry = chainKeyword
             ? (safeIncome.find(matchesIncome) || null)
             : (chain.needKey === 'trade_entrepot' ? (safeIncome.find(matchesIncome) || null) : null);
+          // T2-6: the facts the retired Supply Chains diagram alone carried (resource node,
+          // missing houses, upstream imports, the upstream note) — one derivation, shared
+          // with the Compendium's ChainRow.
+          const facts = chainFlowFacts(chain, instNames);
 
           return (
             <div key={i} style={{
@@ -164,15 +167,24 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               <div style={{display:'flex',alignItems:'center',gap:6,marginBottom:4,flexWrap:'wrap'}}>
                 {chain.resourceIcon && <span style={{fontSize:FS.md}}>{chain.resourceIcon}</span>}
                 <span style={{fontSize:FS.sm,fontWeight:700,color:swatch.inkMag}}>{chain.label}</span>
+                {/* WRITER REACH: the chain's need icon, read from the chain record exactly as the
+                    retired Supply Chains diagram's need header read it (T2-6 fold). */}
+                {chain.needIcon && <span data-testid="flow-need-icon" style={{fontSize: FS['14']}}>{chain.needIcon}</span>}
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),color:chain.needColor,background:`${chain.needColor}15`,padding:'0 5px',fontWeight:700}}>{tokenCase(chain.needLabel)}</span>
                 <span style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:800,color:st.color,background:`${st.color}15`,padding:'0 5px',marginLeft:'auto'}}>{st.label}</span>
               </div>
 
-              {/* Institutions + outputs */}
-              <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote?6:0}}>
+              {/* Resource + upstream imports + institutions + outputs */}
+              <div style={{display:'flex',gap:10,flexWrap:'wrap',marginBottom:chain.dependency||chain.entrepotNote||facts.upstreamNote?6:0}}>
+                {(facts.resource||facts.importedUpstream.length>0)&&<div style={{flex:'1 1 140px'}}>
+                  <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>From</div>
+                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>
+                    {[facts.resource&&`${facts.resource}${facts.resourceDepleted?' (depleted)':''}`, ...facts.importedUpstream.map(imp=>`Import: ${imp}`)].filter(Boolean).join(' · ')}
+                  </div>
+                </div>}
                 <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Via</div>
-                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{chain.processingInstitutions.map(institutionDisplayName).join(' · ')}</div>
+                  <div data-sf-chrome="" style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag2,lineHeight:1.3}}>{facts.institutions.map(inst=>`${institutionDisplayName(inst.name)}${inst.present?'':' (missing)'}`).join(' · ')}</div>
                 </div>
                 {chain.outputs.length > 0 && <div style={{flex:'1 1 140px'}}>
                   <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:MUTED,marginBottom:2}}>Outputs</div>
@@ -183,6 +195,11 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
                   </div>
                 </div>}
               </div>
+
+              {/* Upstream note (the generator's own sentence, chain ids resolved to words) */}
+              {facts.upstreamNote && (
+                <p style={{fontSize:proseFontSize(FS.xxs, mobile),color:swatch.inkMag3,fontStyle:'italic',margin:'4px 0 0',lineHeight:1.3}}>{facts.upstreamNote}</p>
+              )}
 
               {/* Impairment detail */}
               {chain.dependency && (
@@ -333,11 +350,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
 
   // Safety tile color
 
-  // Food tile
+  // Food Security section accent
   const foodSurplus = fb?.surplus > 0;
   const foodDeficit = fb?.deficit > 0;
   const foodColor = foodDeficit ? '#8b1a1a' : foodSurplus ? '#1a5a28' : '#a0762a';
-  const foodLabel = foodDeficit ? `Deficit ${fbal.deficitPct}%` : foodSurplus ? 'Surplus' : 'Balanced';
 
   // SEASONS-A: the seasonal granary read (available only on campaigns whose
   // pulse runs with seasons on — the stockpile record carries the season).
@@ -356,22 +372,17 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // situationDesc, the tiles and their sub-lines never read the desk.
   const deskProse = economyDeskRead(s, { publicDossier, playerView, foodBalance: fbal, granaryOutlook: granary, flowDrift });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
+  // The food GLANCE position (DS-ECO-2), read at the Food Security section since the Food
+  // tile was cut (T2-1); see EconomicsGlance.jsx for why the read stays.
+  const drawnFoodGlance = drawnAtMount('economics.foodTile', deskProse.foodTile);
 
   return (
     <div style={{...sans}}>
       <NarrativeNote note={narrativeNote} />
 
-      <EconomyFreshnessNote settlement={s} variant="tallies" />
-
-      {/* ── PROSPERITY HEADER + AT-A-GLANCE TILES (the tab's glance surface) ── */}
+      {/* ── PROSPERITY HEADER (the tab's glance surface; the campaign tiles close the page) ── */}
       <EconomicsGlance eco={eco} prosColor={prosColor} tradeLabel={tradeLabel} ecoScore={ecoScore}
-        fb={fb} foodLabel={foodLabel} foodColor={foodColor}
-        granary={granary} granaryColor={granaryColor} treasury={treasury}
-        headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung}
-        foodRung={deskProse.foodTile} seasonRung={deskProse.granaryTile} />
-
-      {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line, trade) ── */}
-      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine, deskProse.tradeProfile]} />
+        headerRung={deskProse.prosperityHeader} economyRung={deskProse.prosperityRung} />
 
       {/* ── INCOME SOURCES ──────────────────────────────────────────────── */}
       {eco.incomeSources?.length>0&&<Section title="Income Sources" collapsible defaultOpen>
@@ -414,14 +425,13 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </div>
       </Section>}
 
+      {/* ── THE COMMERCIAL PROFILE (DS-ECO-12: concentration, the criminal line), UNDER the
+          income rows it reads (the block law, X-16). The trade-profile lens is not drawn here
+          (T2-4, R2): the DS-ECO-10 export-posture sentence is the one trade-posture sentence. */}
+      <DeskLines mount="economics.commercialProfile" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.incomeMix, deskProse.criminalLine]} />
+
       {/* ── TRADE PROFILE (exports + imports unified) ───────────────────── */}
       {(eco.primaryExports?.length>0||eco.primaryImports?.length>0||eco.localProduction?.length>0)&&<Section title="Trade Profile" collapsible defaultOpen>
-        {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, framing
-            the chips below. ADDITIVE: the "No significant exports." column empty-state is a
-            LABEL and stays; this is the town's own account of the same reading. The section
-            itself is the surface, so a town with no trade rosters at all renders neither
-            (R-DST-K). */}
-        <DeskLines mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]} />
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:12,marginBottom:eco.localProduction?.length>0?12:0}}>
           {/* Exports */}
           <div>
@@ -480,6 +490,12 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             }
           </div>
         </div>
+        {/* DS-ECO-10 at economics.exportPosture — the export POSTURE as a sentence, UNDER the
+            chips it reads (the block law, X-16). ADDITIVE: the "No significant exports." column
+            empty-state is a LABEL and stays; this is the town's own account of the same reading.
+            The section itself is the surface, so a town with no trade rosters at all renders
+            neither (R-DST-K). */}
+        <DeskLines mount="economics.exportPosture" settlementName={s?.name} tier={s?.tier} rungs={[deskProse.exportPosture]} />
         {/* §14 Phase 3b — cross-settlement trade with the neighbour */}
         {eco.tradeLinks?.length>0&&(()=>{
           const byPartner={};
@@ -505,31 +521,14 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </div>}
       </Section>}
 
-      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive) ────── */}
-      {flowDrift && <LiveTradeFlowSection drift={flowDrift} rung={deskProse.tradeFlow} />}
-
-      {/* ── MARKET PRICES (Wave 7 — movement vs the usual, §776, band-derived) ── */}
+      {/* ── MARKET PRICES (Wave 7 — movement vs the usual, §776; only when a quote moved, T2-5) ── */}
       {marketPrices?.present && <MarketPricesSection prices={marketPrices} />}
 
       {/* ── CRITICAL IMPORTS ──────────────────────────────────────────────── */}
 
 
-      {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
-          ADDITIVE beside the arithmetic in the fold below, never instead of it. Silent when
-          the corpus has nothing to say (R-DST-K), and silent when the registry mounts this
-          position at a glance.
-          ⛔ IT SITS ABOVE THE FOLD, AND THAT PLACEMENT IS THE POINT. The section below opens
-          only `defaultOpen={!!fb.deficit}` and `Primitives.jsx:120` renders `{open &&
-          children}`, so drawn inside, this sentence reached NO READER ON ANY TOWN THAT FEEDS
-          ITSELF — the majority case, and the one the block's surplus pools were authored
-          for. `tests/ui/economicsTabFlow.test.js` had already answered that by choosing a
-          fixture with a real deficit, which keeps the arm green and leaves the reader dark.
-          The line is now the FRAMING of the fold (the DS-HK-1 arrangement) and the
-          visibility arm in dossierMountRegistry.walker.test.js keeps it there. */}
-      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
-
       {/* ── FOOD SECURITY ──────────────────────────────────────────────────── */}
-      {fb&&<Section title="Food Security" collapsible defaultOpen={!!fb.deficit} accent={foodColor}>
+      {fb&&<Section title="Food Security" collapsible defaultOpen accent={foodColor}>
         <div style={{marginBottom:10}}>
           <div style={{display:'flex',justifyContent:'space-between',fontSize:proseFontSize(FS.xs, mobile),color:swatch.inkMag3,marginBottom:4}}>
             <span>Production: {formatCount(fb.dailyProduction)} lbs/day</span>
@@ -552,12 +551,21 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         <div style={{background:foodDeficit?'#fdf4f4':'#f0faf2',...edged(`1px solid ${foodDeficit?'#e8c0c0':'#a8d8b0'}`,`3px solid ${foodColor}`),padding:'8px 12px',fontSize:proseFontSize(FS.sm, mobile),color:foodDeficit?'#5a1a1a':'#1a3a10',lineHeight:1.5}}>
           {foodDeficit
             ? fb.importCoverage>0
-              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%. Settlement is trade-dependent for food security.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
+              ? `Production covers ${Math.round(fb.dailyProduction/fb.dailyNeed*100)}% of food needs. Trade imports cover an estimated ${Math.round(fb.importCoverage/(fb.rawDeficit||1)*100)}% of the gap. Residual shortfall is ${fbal.deficitPct}%.${fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:''}`
               : ` Production deficit of ${fbal.deficitPct}%. Settlement requires food imports to sustain population.`+(fb.magicFoodOffset>0?` A further ${formatCount(fb.magicFoodOffset)} lbs/day comes by ${foodBar.magicChannel} provision.`:'')
             : foodSurplus ? `Agricultural surplus of ${Math.round((fb.surplus/Math.max(1,fb.dailyNeed))*100)}% above daily needs.` : 'Daily needs are met, with no surplus: production, imports and any magical provision cover the day between them.'
           }
         </div>
+        {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
       </Section>}
+
+      {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
+          ADDITIVE beside the arithmetic in the section above, never instead of it, and UNDER
+          it (the block law, X-16: prose never above the fact it explains). Silent when the
+          corpus has nothing to say (R-DST-K), and silent when the registry mounts this
+          position at a glance. Drawn outside the section so a reader who folds it keeps the
+          tone; the visibility arm in dossierMountRegistry.walker.test.js keeps it on first paint. */}
+      {drawnFoodLine?.sentence&&<p data-testid="economics-food-security-line" style={{fontSize:FS.sm,color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 10px',fontStyle:'italic'}}>{drawnFoodLine.sentence}</p>}
 
       {/* ── ECONOMIC FLOWS (unified production chains + dependencies) ──────── */}
       {eco.activeChains?.length > 0 && (
@@ -565,44 +573,89 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           chains={eco.activeChains}
           institutionalServices={eco.institutionalServices || []}
           incomeSources={eco.incomeSources || []}
+          instNames={(s?.institutions || []).map(i => i?.name || '')}
         />
       )}
 
-      {/* ── ECONOMIC PLOT HOOKS (currently invisible — now surfaced) ─────── */}
-      {via?.plotHooks?.length>0&&<Section title={`Economic Plot Hooks (${via.plotHooks.length})`} collapsible defaultOpen={false} accent="#5a2a8a">
-        <div style={{display:'flex',flexDirection:'column',gap:6}}>
-          {via.plotHooks.map((h,i)=>{
-            // H2: strip the authored ' PLOT HOOK: ' marker foodBalance.js bakes
-            // into each economic hook (shared chokepoint, src/lib/proseSeams.js).
-            const text=normalizePlotHook(typeof h==='object'?h.hook||Ti(h):String(h));
-            const cat=typeof h==='object'?h.category:null;
-            return <div key={i} style={{display:'flex',gap:10,alignItems:'flex-start'}}>
-              <span style={{fontSize:FS.sm,flexShrink:0,marginTop:1,color:swatch.magic}}>✦</span>
-              <div style={{flex:1}}>
-                {cat&&<span style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.magic,marginRight:6}}>{tokenCase(cat)}</span>}
-                <span style={{fontSize:proseFontSize(FS.md, mobile),color:swatch.inkMag,lineHeight:1.5}}>{text}</span>
-              </div>
-            </div>;
-          })}
-        </div>
-      </Section>}
-
-      {/* ── SUPPLY CHAINS ─────────────────────────────────────────────────────── */}
-      {/* ⛔ DS-GEN-18 DRAWS OUTSIDE THE FOLD, AND THE REASON WAS FOUND IN THE RENDERED DOM.
-          The first placement put this line INSIDE the Supply Chains section, which is
-          `collapsible defaultOpen={false}` — and `Section` renders `{open && children}`, so
-          a collapsed section renders no children at all. The walker was green, the desk was
-          green, and the sentence reached no reader on first paint. It sits above the fold
-          now, as the FRAMING of what follows — the DS-HK-1 arrangement, where the block is
-          the state the rows are read FROM and the rows keep their own words below. Silent on
-          a free dossier and silent where no antecedent holds (R-DST-K). */}
+      {/* ── DS-GEN-18: the craft reason, UNDER the chains it explains (the block law, X-16) ──
+          Economic Flows is the one chain rendering (T2-6); the line carries the craft reason
+          the chain rows do not (E15 KEEP). Outside the fold, so it stays on first paint. */}
       {craftReasonLine && <p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'10px 0 6px',fontStyle:'italic'}}>{craftReasonLine}</p>}
 
-      {(eco?.activeChains?.length > 0) && (
-        <Section title={`Supply Chains (${eco.activeChains.length})`} collapsible defaultOpen={false}>
-          <SupplyChainsPanel settlement={s} eco={eco} />
+      {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
+      {(()=>{
+        const sp = s?.economicState?.safetyProfile;
+        const bmc = sp?.blackMarketCapture || 0;
+        const dragDesc = sp?.economicDragDesc;
+        const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
+        const crimeTypes = sp?.crimeTypes || [];
+        if (!sp || bmc < 3) return null;
+
+        const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
+        const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
+
+        // Scale context: same % means different things at different tiers
+        const _tier = s?.tier || 'village';
+        const scaleNote = bmc>=30
+          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
+          : bmc>=15
+          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
+          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
+
+        // What goods flow through the shadow economy (from crime types)
+        const _shadowGoods = crimeTypes
+          .filter(ct => ct.type && ct.type.toLowerCase().includes('smuggl') ||
+                        ct.type?.toLowerCase().includes('contraband') ||
+                        ct.type?.toLowerCase().includes('black market'))
+          .slice(0, 2);
+
+        return <>
+        {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
+            joining it: two of this block's variants are byte-identical copies of scaleNote itself,
+            so printing both is the page saying one thing twice. Undrawn (public dossier, or the
+            corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
+            ⛔ IT SITS OUTSIDE THE FOLD, AND THE FIGURE IS WHY; since the block law (X-16) it
+            sits UNDER the section rather than above it, still outside. The section opens only
+            `defaultOpen={bmc>=15}` and `Primitives.jsx:120` renders `{open && children}`;
+            measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
+            true on 1 of 60, so drawn inside, DS-ECO-6's
+            ONE speaking position reached a first-paint reader on under two percent of the
+            worlds this generator builds. The scale note travels WITH it, so nothing is
+            doubled and the fold's own reader loses nothing. */}
+        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
+          <div style={{display:'flex',flexDirection:'column',gap:10}}>
+
+            {/* Capture rate + scale context */}
+            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
+              <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
+                <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
+                <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:sevColor,marginTop:2}}>Off-book</div>
+              </div>
+              <div style={{flex:1}}>
+                {dragDesc&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
+              </div>
+            </div>
+
+            {/* The criminal OPERATIONS list lives on Defense (T2-7/T2-20, R2): it printed the
+                same criminalInstitutions there and here. This page keeps the capture share. */}
+
+            {/* Active criminal supply chains */}
+            {crimChains.length>0&&<div>
+              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Criminal supply chains</div>
+              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
+                {crimChains.map((c,i)=>(
+                  <span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
+                    {tokenCase(humanizeToken(c.chainId))} · {displayLabel('supplyChainStatus', c.status)}
+                  </span>
+                ))}
+              </div>
+            </div>}
+
+          </div>
         </Section>
-      )}
+        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
+        </>;
+      })()}
 
       {/* ── CUSTOM SUPPLY CHAINS (§14 — user-confirmed in the Compendium) ──────── */}
       {customChainViews.length > 0 && (
@@ -649,146 +702,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
         </Section>
       )}
 
-            {/* ── RESOURCE EXPLOITATION ───────────────────────────────────────────── */}
-      {(()=>{
-        const res = s?.resourceAnalysis;
-        if(!res) return null;
-        const full = [...(res.exploitation?.fullyExploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-        const part = [...(res.exploitation?.partiallyExploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-        const unex = [...(res.exploitation?.unexploited||[])].sort((a,b)=>(a.rawResource||'').localeCompare(b.rawResource||''));
-        // THE THREE PILL ROWS BELOW PRINT `rawResource`, WHICH IS A CATALOGUE KEY AS OFTEN AS
-        // it is a word (browser pass 3: `hot_springs_mineral`, `mountain_timber`). The seam
-        // beside the Imports pills already knows every one of them, and a value it does not
-        // name still leaves cased rather than raw. The SORT above keys on the raw field, as
-        // it must: the order is the engine's, only the printed word is the reader's.
-        if(full.length===0&&part.length===0&&unex.length===0) return null;
-        return <Section title="Resource Exploitation" collapsible defaultOpen={false}>
-          <div style={{display:'flex',flexDirection:'column',gap:8}}>
-            {full.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.success,marginBottom:5}}>
-                ✓ Fully Exploited ({full.length})
-              </div>
-              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {full.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.success,background:swatch['#E8F5EC'],border:'1px solid #a8d8b0',padding:'2px 8px'}}>{resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'))}</span>)}
-              </div>
-            </div>}
-            {part.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#8A5010'],marginBottom:5}}>
-                ◑ Partially Exploited ({part.length})
-              </div>
-              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {part.map((r,i)=>{
-                const name = resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'));
-                const missing = r.processingInstitutions?.length
-                  ? '' : r.dependsOn?.length ? ' (needs: '+r.dependsOn.slice(0,2).join(', ')+')' : '';
-                return <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch['#8A5010'],background:swatch['#FDF0E0'],border:'1px solid #e0b870',padding:'2px 8px'}}>{name}{missing}</span>;
-              })}
-              </div>
-            </div>}
-            {unex.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>
-                ○ Unexploited Opportunity ({unex.length})
-              </div>
-              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {unex.map((r,i)=><span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),color:swatch.inkMag3,background:swatch['#F5F0E8'],border:'1px solid #c8b89a',padding:'2px 8px'}}>{resourceDisplayName(r.rawResource||r.resource||(typeof r==='string'?r:r.chainKey||'?'))}</span>)}
-              </div>
-            </div>}
-          </div>
-        </Section>;
-      })()}
-
-      {/* ── SHADOW ECONOMY ───────────────────────────────────────────────────── */}
-      {(()=>{
-        const sp = s?.economicState?.safetyProfile;
-        const bmc = sp?.blackMarketCapture || 0;
-        const dragDesc = sp?.economicDragDesc;
-        const crimInsts = sp?.criminalInstitutions || [];
-        const crimChains = (s?.economicState?.activeChains||[]).filter(c=>c.needKey==='criminal_economy');
-        const crimeTypes = sp?.crimeTypes || [];
-        if (!sp || bmc < 3) return null;
-
-        const sevColor = bmc>=30?'#8b1a1a':bmc>=15?'#8a3010':'#7a5010';
-        const sevBg    = bmc>=30?'#fdf4f4':bmc>=15?'#fdf0e8':'#faf8e8';
-
-        // Scale context: same % means different things at different tiers
-        const _tier = s?.tier || 'village';
-        const scaleNote = bmc>=30
-          ? 'A substantial portion of economic activity bypasses legitimate channels. Tax revenue is severely compressed. Guild structures are being undercut.'
-          : bmc>=15
-          ? 'Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.'
-          : 'Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.';
-
-        // What goods flow through the shadow economy (from crime types)
-        const _shadowGoods = crimeTypes
-          .filter(ct => ct.type && ct.type.toLowerCase().includes('smuggl') ||
-                        ct.type?.toLowerCase().includes('contraband') ||
-                        ct.type?.toLowerCase().includes('black market'))
-          .slice(0, 2);
-
-        return <>
-        {/* DS-ECO-6 at economics.shadowEconomy. The corpus line REPLACES scaleNote rather than
-            joining it: two of this block's variants are byte-identical copies of scaleNote itself,
-            so printing both is the page saying one thing twice. Undrawn (public dossier, or the
-            corpus silent) ⇒ scaleNote stands and the surface is byte-identical.
-            ⛔ IT SITS ABOVE THE FOLD, AND THE FIGURE IS WHY. The section below opens only
-            `defaultOpen={bmc>=15}` and `Primitives.jsx:120` renders `{open && children}`;
-            measured over 60 generated towns (5 tiers x 4 cultures x 3 seeds) that cut is
-            true on 1 of 60, so drawn inside, DS-ECO-6's
-            ONE speaking position reached a first-paint reader on under two percent of the
-            worlds this generator builds. The scale note travels WITH it, so nothing is
-            doubled and the fold's own reader loses nothing. */}
-        <p data-testid="economics-shadow-economy-line" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'0 0 8px'}}>{drawnAtMount('economics.shadowEconomy',deskProse.shadowEconomy)?.sentence||scaleNote}</p>
-        <Section title={`Shadow Economy: ${bmc}% capture`} collapsible defaultOpen={bmc>=15}>
-          <div style={{display:'flex',flexDirection:'column',gap:10}}>
-
-            {/* Capture rate + scale context */}
-            <div style={{background:sevBg,border:`1px solid ${sevColor}30`,borderLeft:`4px solid ${sevColor}`,padding:'10px 14px',display:'flex',gap:14,alignItems:'flex-start'}}>
-              <div style={{flexShrink:0,textAlign:'center',minWidth:56}}>
-                <div style={{fontWeight:800,fontSize: FS['26'],color:sevColor,lineHeight:1}}>{bmc}%</div>
-                <div style={{fontSize:chromeFontSize(FS.micro, mobile),fontWeight:700,color:sevColor,marginTop:2}}>Off-book</div>
-              </div>
-              <div style={{flex:1}}>
-                {dragDesc&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch.inkMag3,fontStyle:'italic',margin:0,lineHeight:1.4}}>{dragDesc}</p>}
-              </div>
-            </div>
-
-            {/* What operations generate this revenue */}
-            {crimInsts.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Economic operations</div>
-              <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
-                {crimInsts.map((name,i)=>{
-                  const econ = criminalOpEcon(name);
-                  return (
-                    <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'5px 10px',display:'flex',flexDirection:'column',gap:1}}>
-                      <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:700,color:swatch.danger}}>{name}</span>
-                      <span style={{fontSize:chromeFontSize(FS.xxs, mobile),color:swatch['#6B4040']}}>{econ}</span>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>}
-
-            {/* Active criminal supply chains */}
-            {crimChains.length>0&&<div>
-              <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:5}}>Criminal supply chains</div>
-              <div style={{display:'flex',gap:5,flexWrap:'wrap'}}>
-                {crimChains.map((c,i)=>(
-                  <span key={i} style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch['#5A1A1A'],background:swatch['#FAF8F4'],border:'1px solid #e0b0b0',padding:'2px 8px'}}>
-                    {tokenCase(humanizeToken(c.chainId))} · {displayLabel('supplyChainStatus', c.status)}
-                  </span>
-                ))}
-              </div>
-            </div>}
-
-            {/* Note directing to Defense for power structure */}
-            <div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,fontStyle:'italic',borderTop:'1px solid #e8d8c0',paddingTop:8}}>
-              Criminal power structures, enforcement dynamics, and public order detail → Defense tab
-            </div>
-
-          </div>
-        </Section>
-        </>;
-      })()}
+      {/* ── LIVE TRADE FLOW (M6d — measured throughput drift, additive); campaign-only, so it,
+          the Season/Treasury tiles and the stale-window note close the page (X-16 rung 6) ── */}
+      {flowDrift && <LiveTradeFlowSection drift={flowDrift} rung={deskProse.tradeFlow} />}
+      <EconomicsCampaignTiles granary={granary} granaryColor={granaryColor} treasury={treasury} seasonRung={deskProse.granaryTile} />
+      <EconomyFreshnessNote settlement={s} variant="tallies" />
 
     </div>
   );

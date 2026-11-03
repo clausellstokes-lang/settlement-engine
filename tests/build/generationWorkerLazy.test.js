@@ -99,6 +99,17 @@
  * ledger row, in the report and the pull request, and is vetoable — a veto returns the constant and
  * takes a headroom hunt (a shrink) in its place. The ceiling stays MONOTONE-DOWN from this value.
  *
+ * ⭐ RE-MINTED UPWARD BY THE CHAIR AT THE 2026-10-31 UX CONSOLIDATION (Fable chair, ODQ §934.101; the
+ * integration tip 3dcb3c6f, measured by the full gate's own build, generation.worker-DumDp2-f.js):
+ * 1,438,517 -> 1,480,690 bytes. The 42,173 B are the owner's ordered generator content, counted in the
+ * bundle: GS-1 tension variety (180 authored tie lines, eight per archetype, relationshipArchetypes.js
+ * +392 lines with its draw), GS-2 one faction set (factions and conflicts built from the power set in
+ * assembleSettlement), GS-4 the world-law gate on the arcane governance line, the arrival scene's
+ * no-market pool and the service-category tables (every catalog name registered). No eager module
+ * re-merged (the lazy edge below still holds). The rise is declared here, in the ledger row and in the
+ * owner's report, and is vetoable: a veto returns the constant and takes a headroom hunt (a shrink) in
+ * its place. The ceiling stays MONOTONE-DOWN from this value.
+ *
  * @enforced-by this test
  */
 
@@ -277,7 +288,16 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // that content was priced at about 1 KB (lines as plain strings rather than functions) and offered against the raise. A
 // fresh `vite build` at c39ce8640 reads 1,438,517 B (generation.worker-aM8fOsDp.js), the second gate's figure to the byte.
 // MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1438517;
+// 1,480,690 -> 1,480,698 (2026-11-02, THE FIFTH ROUND, ODQ §934.103): A RISE OF 8 B, THE CHAIR'S RULING WITH ITS
+// REASON (as this file's header requires of a rise), VETOABLE BY THE OWNER. The whole 8 B are the owner's X-45
+// registration: `backs` joins EDITABLE_FIELDS.institution in src/domain/userEdits.js (minified `,"backs"`, exactly 8 B),
+// reached by the worker through generators/generateSettlementPipeline.js -> domain/historyPreservation.js ->
+// domain/userEdits.js. MEASURED by in-memory production builds of integrity-counted archives with per-module
+// attribution through hidden sourcemaps: ee2d961ae (the last green verify:dist) 1,480,690 B
+// (generation.worker-DumDp2-f.js), 9e66e658c 1,480,698 B (generation.worker-XUebZ5Kh.js), userEdits.js 800 -> 808 B
+// and no other module moved. Buying eight bytes back by golfing unrelated code was refused as worse engineering than
+// recording the truth. Placed beside the constant so the cited lines above do not move. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1480698;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -595,7 +615,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-minted by the worker-headroom car, 2026-09-18). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured X-45 figure by the chair's ruling, 2026-11-02). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });

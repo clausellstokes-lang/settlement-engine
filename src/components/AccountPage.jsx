@@ -13,6 +13,7 @@
  */
 import { useEffect, useRef, useState } from 'react';
 import { useStore } from '../store/index.js';
+import { isSupportRole } from '../lib/staffEntitlements.js';
 import {
   captureSavedSettlementsHydration,
   isCurrentSavedSettlementsHydration,
@@ -70,6 +71,9 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
   const auth = useStore(s => s.auth);
   const creditBalance = useStore(s => s.creditBalance);
   const isElevated = useStore(s => s.isElevated());
+  // The support desk (T9) is not staff, but /admin admits it; the nav offers it
+  // the door so it is reachable without typing the address.
+  const isSupport = useStore(s => isSupportRole(s.auth?.role));
   // The AI & keys (BYOK) surface is Surveyor-gated (owner ruling 2026-07-19):
   // the nav tab and section render only for the Surveyor-entitled/Founders/
   // elevated — Cartographer 'premium' gets no AI keys, clean and without a tease.
@@ -511,6 +515,7 @@ export default function AccountPage({ onNavigateAdmin, routeSection, routeMessag
           section={section}
           setSection={setSection}
           isElevated={isElevated}
+          isSupport={isSupport}
           showAiKeys={surveyorEntitled}
           unreadCount={operatorUnreadCount}
           onNavigateAdmin={onNavigateAdmin}

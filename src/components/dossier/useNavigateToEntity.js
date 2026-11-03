@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useStore } from '../../store/index.js';
 import { buildDossierEntityIndex } from '../../domain/dossier/entityLinks.js';
+import { mentionScopeFor } from '../../domain/dossier/linkMentions.js';
 
 /**
  * Build the dossier hyperlink context value for a settlement: the id->entity
@@ -19,9 +20,13 @@ import { buildDossierEntityIndex } from '../../domain/dossier/entityLinks.js';
  * @param {(id: string, via?: string) => void} setActiveTab  OutputContainer's tab setter.
  * @param {{ id: string }[]} [tabs]     The tabs present for this settlement; a
  *        navigation to a gated-out tab is a no-op.
- * @returns {{ index: object, navigateToEntity: (id: string) => void }}
+ * @param {{ playerView?: boolean, publicDossier?: boolean }} [viewer]  The audience. With the
+ *        tabs it builds the mention scope (X-20 (d)): a link renders only for an object the
+ *        viewer may open (its tab is present and, in a player or public view, it survives the
+ *        public projection); otherwise EntityLink and the mention linker print plain text.
+ * @returns {{ index: object, navigateToEntity: (id: string) => void, scope: object }}
  */
-export function useDossierEntityNav(settlement, setActiveTab, tabs = []) {
+export function useDossierEntityNav(settlement, setActiveTab, tabs = [], viewer = {}) {
   const focusEntity = useStore(s => s.focusEntity);
   const index = useMemo(() => buildDossierEntityIndex(settlement || {}), [settlement]);
 
@@ -72,5 +77,13 @@ export function useDossierEntityNav(settlement, setActiveTab, tabs = []) {
     }
   }, [index, tabIdSignature, stableSetActiveTab, focusEntity]);
 
-  return useMemo(() => ({ index, navigateToEntity }), [index, navigateToEntity]);
+  // THE MENTION SCOPE (X-20 (d)), once per settlement, tab set and audience.
+  const playerView = !!viewer.playerView;
+  const publicDossier = !!viewer.publicDossier;
+  const scope = useMemo(
+    () => mentionScopeFor(settlement || {}, { playerView, publicDossier, tabs: tabIdSignature ? tabIdSignature.split('|') : [] }),
+    [settlement, tabIdSignature, playerView, publicDossier],
+  );
+
+  return useMemo(() => ({ index, navigateToEntity, scope }), [index, navigateToEntity, scope]);
 }

@@ -19,7 +19,7 @@
  */
 
 import { describe, test, expect, afterEach, vi } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/react';
+import { render, cleanup, screen, within } from '@testing-library/react';
 
 afterEach(cleanup);
 
@@ -122,5 +122,64 @@ describe('AccountPage — decomposition smoke', () => {
     );
     expect((await screen.findByLabelText(/subject/i)).value).toBe('Re: Route-linked concern');
     expect(screen.getByRole('status').textContent).toMatch(/linked to that notice/i);
+  });
+});
+
+// ── T9 (2026-10-30): THE ROLE BADGE. The badge mapped any role it did not know
+//    to the ADMIN badge, so the support desk (admitted to /admin by T9) read
+//    "Admin" on its own profile. Support reads "Support"; an unknown role reads
+//    no badge at all, never Admin. ──
+describe('AccountPage — the profile role badge (T9)', () => {
+  async function badgeRowFor(role) {
+    const prior = storeState.auth.role;
+    storeState.auth.role = role;
+    try {
+      const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+      render(<AccountPage onNavigateAdmin={() => {}} />);
+      // The email line and the badge row share the identity column (the page
+      // header repeats the email in a <p>; the profile's own line is a <div>).
+      const line = screen.getAllByText('tester@example.com').find((n) => n.tagName === 'DIV');
+      expect(line, 'the profile identity column rendered').toBeTruthy();
+      return line.parentElement;
+    } finally {
+      storeState.auth.role = prior;
+    }
+  }
+
+  test('a support account reads "Support", not Admin', async () => {
+    const column = await badgeRowFor('support');
+    expect(within(column).getByText('Support')).toBeTruthy();
+    expect(within(column).queryByText('Admin')).toBeNull();
+  });
+
+  test('an unknown role renders no badge, never Admin', async () => {
+    const column = await badgeRowFor('owner');
+    expect(within(column).getAllByText('tester@example.com').length).toBeGreaterThan(0);
+    expect(within(column).queryByText('Admin')).toBeNull();
+    expect(within(column).queryByText('Owner')).toBeNull();
+  });
+
+  test('an admin still reads Admin and a developer Developer', async () => {
+    expect(within(await badgeRowFor('admin')).getByText('Admin')).toBeTruthy();
+    cleanup();
+    expect(within(await badgeRowFor('developer')).getByText('Developer')).toBeTruthy();
+  });
+});
+
+// ── T9 (2026-10-30): AccountPage tells the nav when the account is the support
+//    desk, so the admin row appears for it. ──
+describe('AccountPage — the support desk reaches /admin from the account menu (T9)', () => {
+  test('a support account sees the Support console row and it opens /admin', async () => {
+    const prior = storeState.auth.role;
+    storeState.auth.role = 'support';
+    try {
+      const onNavigateAdmin = vi.fn();
+      const AccountPage = (await import('../../src/components/AccountPage.jsx')).default;
+      render(<AccountPage onNavigateAdmin={onNavigateAdmin} />);
+      screen.getByRole('button', { name: /support console/i }).click();
+      expect(onNavigateAdmin).toHaveBeenCalledTimes(1);
+    } finally {
+      storeState.auth.role = prior;
+    }
   });
 });

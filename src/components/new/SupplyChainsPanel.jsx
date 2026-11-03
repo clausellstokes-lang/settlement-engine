@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
-import { FS, swatch, MUTED } from '../theme.js';
-import Button from '../primitives/Button.jsx';
+import React from 'react';
+import { FS, swatch } from '../theme.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
 import { SUPPLY_CHAIN_NEEDS } from '../../data/goods/chains.js';
 import { exactGoodId, goodText } from '../../domain/region/goodsCatalog.js';
-import { tokenCase } from './labelLadder.js';
 import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { supplyChainNoteInWords } from '../../domain/display/engineKeysInText.js';
 
@@ -114,18 +112,49 @@ const OutputNode = ({ label, isExport }) => {
   );
 };
 
+// ── The chain facts only this diagram carried ─────────────────────────────────
+/**
+ * THE FOUR FACTS A CHAIN CARD OWES THE READER BEYOND ITS STATUS (UX consolidation
+ * 2026-10-30, RULINGS-T2 T2-6). The Economics tab used to print every chain twice — once as
+ * an Economic Flows card, once as a Supply Chains diagram row (974/974 identical sets) — and
+ * only the diagram carried these four. Economic Flows is now the ONE rendering on the tab,
+ * so it reads them from here, and `ChainRow` (still the Compendium's chain renderer) reads
+ * the same derivation: one source, two hosts, no drift.
+ *
+ * @param {object} chain an `economicState.activeChains[]` row
+ * @param {ReadonlyArray<string>} instNames the settlement's institution names, raw
+ * @returns {{resource: string|null, resourceDepleted: boolean,
+ *   institutions: Array<{name: string, present: boolean}>, importedUpstream: string[],
+ *   upstreamNote: string|null}}
+ */
+export function chainFlowFacts(chain, instNames = []) {
+  const names = (instNames || []).map(n => String(n || '').toLowerCase());
+  return {
+    resource: chain?.resource || null,
+    resourceDepleted: !!chain?.resourceDepleted,
+    // Which processing institutions are actually present?
+    institutions: (chain?.processingInstitutions || []).map(name => ({
+      name,
+      present: names.some(n => n.includes(String(name).toLowerCase().split(/[\s(]/)[0])),
+    })),
+    // Upstream imports needed — the generator stores chain IDS; the reader gets labels.
+    importedUpstream: (chain?.upstreamMissing || []).map(uid => CHAIN_DEFS[uid]?.label || uid),
+    // The generator joins CHAIN IDS into this sentence, so the seam resolves them against
+    // the same table the labels above are drawn from.
+    upstreamNote: chain?.upstreamNote ? supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS) : null,
+  };
+}
+
 // ── Single chain row ──────────────────────────────────────────────────────────
 export function ChainRow({ chain, instNames, primaryExports, mobile }) {
   const st      = getStatus(chain.status);
   const def     = CHAIN_DEFS[chain.chainId] || {};
   const missing = chain.upstreamMissing || [];
   const isExportable = chain.exportable && !chain.entrepot;
+  const facts = chainFlowFacts(chain, instNames);
 
   // Which processing institutions are actually present?
-  const insts = (chain.processingInstitutions || []).map(name => ({
-    name,
-    present: instNames.some(n => n.toLowerCase().includes(name.toLowerCase().split(/[\s(]/)[0])),
-  }));
+  const insts = facts.institutions;
 
   // Outputs: match against primaryExports — canonical good id first
   // (subsumption renames within a good: 'Boots and shoes' can survive as
@@ -151,10 +180,7 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
   const hasExport = outputs.some(o => o.isExport) || (isExportable && !outputs.length);
 
   // Upstream imports needed
-  const importedUpstream = missing.map(uid => {
-    const upDef = CHAIN_DEFS[uid];
-    return upDef?.label || uid;
-  });
+  const importedUpstream = facts.importedUpstream;
 
   // Mobile: compressed single-line view
   if (mobile) {
@@ -224,168 +250,17 @@ export function ChainRow({ chain, instNames, primaryExports, mobile }) {
 
       {/* Upstream note — the generator joins CHAIN IDS into this sentence, so the seam
           resolves them against the same table the nodes above are drawn from. */}
-      {chain.upstreamNote && (
+      {facts.upstreamNote && (
         <div style={{ marginTop: 4, fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3, fontStyle: 'italic' }}>
-          ↑ {supplyChainNoteInWords(chain.upstreamNote, CHAIN_DEFS)}
+          ↑ {facts.upstreamNote}
         </div>
       )}
     </div>
   );
 }
 
-// ── Category group ────────────────────────────────────────────────────────────
-function CategoryGroup({ needKey, needLabel, needIcon, needColor, chains, instNames, primaryExports, mobile, defaultOpen }) {
-  const [open, setOpen] = useState(defaultOpen !== false);
-  const impaired = chains.filter(c => c.status === 'impaired' || c.status === 'broken').length;
-  const vulnerable = chains.filter(c => c.status === 'vulnerable').length;
-
-  return (
-    <div style={{ marginBottom: 8 }}>
-      <Button
-        variant="secondary"
-        size="sm"
-        fullWidth
-        onClick={() => setOpen(o => !o)}
-        aria-expanded={open}
-        style={{
-          justifyContent: 'flex-start', gap: 8, padding: '6px 10px',
-          background: swatch['#FAF8F4'], border: '1px solid #e0d0b0',
-          textAlign: 'left', fontWeight: 'inherit',
-        }}
-      >
-        {needIcon && <span style={{ fontSize: FS['14'] }}>{needIcon}</span>}
-        {/* THE SAME WORD THE ECONOMICS TAB ALREADY SPEAKS. `EconomicsTab:164` renders this
-            exact `needLabel` through `tokenCase`, so the vocabulary's rung was already
-            settled; this header was the one screen home still shouting it, and the PDF's
-            `SupplyChainFlow` was shouting it too. */}
-        <span style={{ fontSize: FS.sm, fontWeight: 800, color: needColor || '#1c1409', flex: 1 }}>
-          {tokenCase(needLabel || needKey)}
-        </span>
-        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), color: MUTED }}>{chains.length} chain{chains.length !== 1 ? 's' : ''}</span>
-        {impaired > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch.danger, background: swatch['#FAF8F4'], border: '1px solid #e8b0b0', padding: '1px 5px' }}>✕ {impaired}</span>}
-        {vulnerable > 0 && <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800, color: swatch['#8A5010'], background: swatch['#FDF8EC'], border: '1px solid #e0c070', padding: '1px 5px' }}>◐ {vulnerable}</span>}
-        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), color: MUTED }}>{open ? '▲' : '▼'}</span>
-      </Button>
-
-      {open && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 5, marginTop: 4, paddingLeft: 8 }}>
-          {chains.map((c, i) => (
-            <ChainRow key={c.chainId || i} chain={c} instNames={instNames}
-              primaryExports={primaryExports} mobile={mobile} />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
-// ── Main component ────────────────────────────────────────────────────────────
-export function SupplyChainsPanel({ settlement, eco: ecoProp }) {
-  const mobile = useIsMobile();
-  const eco    = ecoProp || settlement?.economicState;
-  const chains = (eco?.activeChains || []).filter(c =>
-    // Show: running, operational, vulnerable (impaired only if has any institution)
-    c.status !== 'unexploited'
-  );
-
-  if (!chains.length) return null;
-
-  const instNames     = (settlement?.institutions || []).map(i => i.name || '');
-  const primaryExports = eco?.primaryExports || [];
-  const tier          = settlement?.tier || 'village';
-  const isTownPlus    = ['town', 'city', 'metropolis'].includes(tier);
-
-  // Group by needKey for town+, flat for smaller
-  if (isTownPlus) {
-    const groups = {};
-    chains.forEach(c => {
-      const key = c.needKey || 'other';
-      if (!groups[key]) groups[key] = {
-        needKey: key,
-        needLabel: c.needLabel,
-        needIcon: c.needIcon,
-        needColor: c.needColor,
-        chains: [],
-      };
-      groups[key].chains.push(c);
-    });
-
-    const sortedGroups = Object.values(groups).sort((a, b) => {
-      // Impaired groups first, then vulnerable, then running
-      const severity = g => g.chains.filter(c => ['impaired','broken'].includes(c.status)).length * 100
-        + g.chains.filter(c => c.status === 'vulnerable').length * 10;
-      return severity(b) - severity(a) || (a.needLabel || '').localeCompare(b.needLabel || '');
-    });
-
-    return (
-      <div>
-        <div style={{ display: 'flex', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
-          <Legend />
-        </div>
-        {sortedGroups.map(g => (
-          <CategoryGroup key={g.needKey} {...g}
-            instNames={instNames} primaryExports={primaryExports}
-            mobile={mobile} defaultOpen={g.chains.some(c => ['impaired','broken','vulnerable'].includes(c.status))} />
-        ))}
-      </div>
-    );
-  }
-
-  // Flat list for village/hamlet/thorp
-  return (
-    <div>
-      <div style={{ display: 'flex', gap: 12, marginBottom: 10, flexWrap: 'wrap' }}>
-        <Legend />
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
-        {chains.map((c, i) => (
-          <ChainRow key={c.chainId || i} chain={c} instNames={instNames}
-            primaryExports={primaryExports} mobile={mobile} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function Legend() {
-  // THE PHONE CHROME FLOOR — a legend is decoded at a glance, not read, but the
-  // whole strip runs past forty-five characters, so it is furniture that is long
-  // enough to need the 12px floor rather than the 14px prose one.
-  const mobile = useIsMobile();
-  const items = [
-    { dot: '●', color: '#1a5a28', label: 'Running' },
-    { dot: '◐', color: '#8a5010', label: 'Vulnerable. Upstream imported' },
-    { dot: '○', color: '#8b1a1a', label: 'Impaired. Institution missing' },
-    { text: '', label: 'Import fills gap' },
-    { text: '↗ EXPORT', color: '#1a5a28', label: 'Exported for income' },
-  ];
-  return (
-    // ⛔ THE SIZE BELONGS TO EACH ITEM, NOT TO THE STRIP (review 13). It sat on the
-    // container, so the floor test measured ONE element whose text was all five
-    // labels run together — a 120-character line with two full stops in it, which
-    // is a sentence by every signal an instrument has, and a legend by every
-    // signal a reader has. The `data-sf-chrome` marker was what stopped that
-    // reading, and a marker whose whole job is to contradict the evidence is the
-    // unbounded escape the walker now refuses. Moving the size down to the items
-    // makes the measurement match the thing: five short labels, each glanced at,
-    // none of them long enough to be read. The strip keeps the layout and nothing
-    // else, so it carries no size for anything to measure.
-    //
-    // ⚠ AND NO ITEM CARRIES `data-sf-chrome` EITHER. It would be refused — each one
-    // wraps its own dot glyph, which is an element carrying its own text — and it
-    // was never doing any work: at under forty-five characters a legend item is
-    // below the bound at which the floor test measures anything at all. What keeps
-    // these five at 12px on a phone is `chromeFontSize` and the source census that
-    // demands it, not a declaration to a walker that never looks at them.
-    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', color: swatch.inkMag3 }}>
-      {items.map((it, i) => (
-        <span key={i} style={{ display: 'flex', alignItems: 'center', gap: 4, fontSize: chromeFontSize(FS.xxs, mobile) }}>
-          <span style={{ fontWeight: 700, color: it.color }}>{it.dot || it.text}</span>
-          {it.label}
-        </span>
-      ))}
-    </div>
-  );
-}
-
-export default SupplyChainsPanel;
+// ── The panel that used to mount here ─────────────────────────────────────────
+// The grouped SupplyChainsPanel (category groups, legend) left the Economics tab in the UX
+// consolidation of 2026-10-30 (RULINGS-T2 T2-6): it rendered the same chain set Economic
+// Flows renders, on 974 of 974 towns. Its four unique facts travel through
+// `chainFlowFacts` above into Economic Flows; `ChainRow` stays for the Compendium.

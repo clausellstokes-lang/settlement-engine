@@ -27,6 +27,7 @@ import Button from '../../../primitives/Button.jsx';
 import InstitutionLink from '../../../primitives/InstitutionLink.jsx';
 import NameColumns from '../../../primitives/NameColumns.jsx';
 import EntityLink from '../../../primitives/EntityLink.jsx';
+import { MentionText } from '../../../ProseParagraph.jsx';
 import { factionIdFromName } from '../../../../lib/entities.js';
 import { deriveFactionSupport } from '../../../../domain/dossier/powerSupport.js';
 import { derivePowerStrata, groupRelationships } from '../../../../domain/dossier/powerStrata.js';
@@ -108,9 +109,11 @@ function groupSupportByBasis(support) {
 // ── THE POWERS ───────────────────────────────────────────────────────────────
 
 /**
- * @param {{ settlement: any, powers: import('../../../../domain/dossier/powerStrata.js').PowerEntry[], factionSupport: Map<string, any[]> }} props
+ * `showCoupChip` (UX consolidation 2026-10-30, RULINGS-T2 T2-18): the ruler's coup-risk chip
+ * yields to the DS-POW-4 coup-risk sentence where that sentence speaks; PowerTab decides.
+ * @param {{ settlement: any, powers: import('../../../../domain/dossier/powerStrata.js').PowerEntry[], factionSupport: Map<string, any[]>, showCoupChip?: boolean }} props
  */
-export function ThePowers({ settlement, powers, factionSupport }) {
+export function ThePowers({ settlement, powers, factionSupport, showCoupChip = true }) {
   const [openIdx, setOpenIdx] = useState(null);
   // THE PHONE PROSE FLOOR — the stratum's caption and the support BASIS line,
   // the two reading passages here. Read BEFORE the early return so the hook
@@ -158,7 +161,7 @@ export function ThePowers({ settlement, powers, factionSupport }) {
                     {p.powerLabel}
                   </span>
                 )}
-                {isRuler && risk && (
+                {isRuler && risk && showCoupChip && (
                   <span aria-label={`Coup risk: ${risk.label}`} style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: risk.color, background: `${risk.color}12`, border: `1px solid ${risk.color}40`, padding: '1px 5px', flexShrink: 0 }}>
                     {risk.label}
                   </span>
@@ -245,7 +248,6 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
   // figure and the 'holds power' marker keep their own steps.
   const mobile = useIsMobile();
   if (!roster.length) return null;
-  const factionGroups = settlement?.factions || [];
   const powerGold = powerAccent('ruler');
 
   const jumpToPower = (name) => {
@@ -275,63 +277,61 @@ export function TheFactions({ settlement, roster, expandedFaction, setExpandedFa
       </div>
 
       <div style={{ border: `1px solid ${SEAM}` }}>
-        {roster.map((r, i) => {
-          const c = FACTION_COLORS[i % FACTION_COLORS.length];
-          const f = r.faction || {};
-          const matchedGroups = factionGroups.filter((fg) => fg.powerFactionName === r.name);
-          const isExp = expandedFaction === i;
-          const expandable = !!(f.desc || f.crisisNote || matchedGroups.length);
-          const last = i === roster.length - 1;
-          return (
-            <div key={i} ref={i === focusIndex ? focusedRowRef : null}
-              style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '5px 9px', cursor: expandable ? 'pointer' : 'default' }}
-                {...(expandable ? {
-                  role: 'button', tabIndex: 0,
-                  'aria-label': `${r.name} faction details`,
-                  'aria-expanded': isExp,
-                  'aria-controls': `roster-faction-${i}-detail`,
-                  onClick: () => setExpandedFaction(isExp ? null : i),
-                  onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setExpandedFaction(isExp ? null : i); } },
-                } : {})}>
-                <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
-                {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
-                <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}>
-                  <InstitutionLink name={r.name} settlement={settlement} />
-                </div>
-                {r.isPower && (
-                  <Button variant="ghost" size="sm"
-                    aria-label={`${r.name} holds power, jump to its power card`}
-                    onClick={(e) => { e.stopPropagation(); jumpToPower(r.name); }}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
-                    style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
-                    {'↑ Holds power'}
-                  </Button>
-                )}
-                <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
-                <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
-                {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
-              </div>
-
-              {matchedGroups.map((fg, gi) => (
-                <div key={gi} style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: swatch.inkMag, flex: 1 }}>{fg.name}</span>
-                  <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{(fg.members || []).length} member{(fg.members || []).length !== 1 ? 's' : ''}</span>
-                </div>
-              ))}
-
-              {isExp && expandable && (
-                <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
-                  {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}>{f.desc}</p>}
-                  {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
-                </div>
-              )}
-            </div>
-          );
-        })}
+        {roster.map((r, i) => (
+          <FactionRow key={i} settlement={settlement} r={r} i={i} last={i === roster.length - 1} powerGold={powerGold}
+            isExp={expandedFaction === i} onToggle={() => setExpandedFaction(expandedFaction === i ? null : i)} rowRef={i === focusIndex ? focusedRowRef : null} onJumpToPower={jumpToPower} />
+        ))}
       </div>
     </Section>
+  );
+}
+
+/** One roster row, extracted verbatim from TheFactions (BUILD-W2-SEARCH U2, no behaviour change) so the dossier search mounts a faction through its own row; TheFactions keeps the expanded index and the focus ref. */
+export function FactionRow({ settlement, r, i, last = false, isExp, onToggle, rowRef = null, onJumpToPower, powerGold = powerAccent('ruler') }) {
+  const mobile = useIsMobile();
+  const c = FACTION_COLORS[i % FACTION_COLORS.length];
+  const f = r.faction || {};
+  // GS-2 (ODQ §934.101): the members are the named NPCs whose own power affiliation is this faction; the minted
+  // tie-component group this row used to print beneath it is gone with the second faction vocabulary.
+  const memberCount = (settlement?.npcs || []).filter((npc) => npc?.factionAffiliation === r.name).length;
+  const expandable = !!(f.desc || f.crisisNote);
+  return (
+    <div ref={rowRef}
+      style={{ borderBottom: last ? 'none' : `1px solid ${SEAM}`, background: isExp ? '#f5f0e8' : f.legitimacyCrisis ? '#fdf4f4' : swatch.white }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 7, padding: '5px 9px', cursor: expandable ? 'pointer' : 'default' }}
+        {...(expandable ? {
+          role: 'button', tabIndex: 0, 'aria-label': `${r.name} faction details`, 'aria-expanded': isExp, 'aria-controls': `roster-faction-${i}-detail`,
+          onClick: onToggle, onKeyDown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onToggle(); } } } : {})}>
+        <span style={{ width: 10, height: 10, background: c, flexShrink: 0 }} />
+        {f.legitimacyCrisis && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.danger, flexShrink: 0 }}>{'⚠'}</span>}
+        <div style={{ fontSize: FS.md, fontWeight: 600, color: swatch.inkMag, flex: 1, minWidth: 0, lineHeight: 1.2 }}><InstitutionLink name={r.name} settlement={settlement} /></div>
+        {r.isPower && (
+          <Button variant="ghost" size="sm"
+            aria-label={`${r.name} holds power, jump to its power card`} onClick={(e) => { e.stopPropagation(); onJumpToPower(r.name); }}
+            onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') e.stopPropagation(); }}
+            style={{ minHeight: 0, borderRadius: 0, fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: powerGold, background: `${powerGold}12`, border: `1px solid ${powerGold}40`, padding: '1px 6px', flexShrink: 0 }}>
+            {'↑ Holds power'}
+          </Button>
+        )}
+        <span style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 600, color: MUTED, flexShrink: 0 }}>{ARCHETYPE_LABEL[r.archetype] || 'Faction'}</span>
+        <span style={{ fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 700, color: c, flexShrink: 0, minWidth: 24, textAlign: 'right' }}>{r.power}</span>
+        {expandable && <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: MUTED, flexShrink: 0 }}>{isExp ? '▲' : '▼'}</span>}
+      </div>
+
+      {memberCount > 0 && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '3px 9px 3px 24px', background: `${c}08`, borderLeft: `2px solid ${c}30` }}>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: c }}>{'↳'}</span>
+          <span style={{ fontSize: chromeFontSize(FS.xxs, mobile), color: swatch.inkMag3 }}>{memberCount} member{memberCount !== 1 ? 's' : ''}</span>
+        </div>
+      )}
+
+      {isExp && expandable && (
+        <div id={`roster-faction-${i}-detail`} style={{ padding: '4px 12px 8px 26px', background: swatch['#FAF8F4'] }}>
+          {f.desc && <p style={{ fontSize: proseFontSize(FS.sm, mobile), color: swatch.inkMag2, lineHeight: 1.6, margin: '0 0 4px' }}><MentionText text={f.desc} selfId={factionIdFromName(f.faction)} /></p>}
+          {f.crisisNote && <p style={{ fontSize: proseFontSize(FS['11.5'], mobile), color: swatch.danger, fontStyle: 'italic', margin: '6px 0 0', lineHeight: 1.4 }}>{f.crisisNote}</p>}
+        </div>
+      )}
+    </div>
   );
 }
 
@@ -399,16 +399,16 @@ export function TheWeb({ groups }) {
  * The three strata, composed. PowerTab owns the roster expand/focus state and
  * threads it through so the NPC-faction-link focus affordance keeps working.
  *
- * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any }} props
+ * @param {{ settlement:any, powerStructure:any, expandedFaction:number|null, setExpandedFaction:(i:number|null)=>void, focusIndex:number, focusedRowRef:any, showCoupChip?: boolean }} props
  */
-export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef }) {
+export function PowerStrata({ settlement, powerStructure, expandedFaction, setExpandedFaction, focusIndex, focusedRowRef, showCoupChip = true }) {
   const { powers, roster } = derivePowerStrata(settlement);
   const groups = groupRelationships(powerStructure?.factionRelationships);
   const factionSupport = deriveFactionSupport(settlement);
 
   return (
     <>
-      <ThePowers settlement={settlement} powers={powers} factionSupport={factionSupport} />
+      <ThePowers settlement={settlement} powers={powers} factionSupport={factionSupport} showCoupChip={showCoupChip} />
       <TheFactions
         settlement={settlement}
         roster={roster}

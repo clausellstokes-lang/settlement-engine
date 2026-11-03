@@ -30977,14 +30977,14 @@
           "symbol": "registerStep('generatePopulation', {"
         },
         {
-          "_note": "⛔ ALL FOUR CHOOSER KEYS, DECLARED. This `provides` line is the pin key spelling EM-P2 later registers its rows' outputKey against (§0R.4: P0 defines the spelling, P2 registers against it — the chooser call sites are inside the step's own body, so a registry is a GUARD over the mechanism rather than an input to it). UNCHANGED by this packet.",
+          "_note": "⛔ ALL FOUR CHOOSER KEYS, DECLARED. This `provides` line is the pin key spelling EM-P2 later registers its rows' outputKey against (§0R.4: P0 defines the spelling, P2 registers against it — the chooser call sites are inside the step's own body, so a registry is a GUARD over the mechanism rather than an input to it). UNCHANGED by this packet. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): factions and conflicts are now built in assembleSettlement from the power set, so the step provides two keys; EM-P2 registers against the live spelling.",
           "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "provides: ['npcs', 'relationships', 'factions', 'conflicts'],"
+          "symbol": "provides: ['npcs', 'relationships'],"
         },
         {
-          "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three.",
-          "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "const roll = rng.random() * totalPower;"
+          "_note": "THE DIRECT DRAW in the deriving half — the power-weighted scatter on the step's own handle. It is wrapped by chooseOrPin like the other three. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): linkFactions and its power-weighted scatter are deleted; members are the NPCs whose own affiliation names the faction, drawn nowhere. The anchor is the live faction build.",
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);"
         },
         {
           "_note": "CHOOSER 1, the root draw. Takes no roster.",
@@ -30997,9 +30997,9 @@
           "symbol": "export const generateRelationships = (npcs, config = {}, institutions = []) => {"
         },
         {
-          "_note": "CHOOSER 3 — takes both and draws twice.",
+          "_note": "CHOOSER 3 — takes both and draws twice. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the chooser now takes the power factions, not the relationships, and draws nothing.",
           "path": "src/generators/power/factionGrouping.js",
-          "symbol": "export const generateFactions = (npcs, relationships) => {"
+          "symbol": "export const generateFactions = (npcs, powerFactions) => {"
         },
         {
           "_note": "CHOOSER 4 — draws three times. Its home is power/conflicts.js, not powerGenerator.js.",
@@ -34075,7 +34075,8 @@
         {
           "_note": "⛔ THE OWNER-SIGNED CEILING, PINNED BY ITS OWN ARM, under the describe 'ARCH car 2 — the three first-paint budgets stay where the owner signed them'. This is the bound section 7's price is stated against, and by judgment 74 it now covers the SUM of all four EM-T9 members. ⛔ THE PACKET NEVER MOVES IT: a summed closure over 1,048,000 is a STOP FOR THE OWNER, and the cure is the PLACEMENT before it is the ceiling. Proven present at e80a6a3f4: git grep -c -F -> 1.",
           "path": "tests/build/vendorPdfLazy.test.js",
-          "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);"
+          "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)"
         },
         {
           "_note": "The membership probe imports THIS exported set and reads no dist, so it can never skip. Measured at e80a6a3f4: 269 members, with src/store/authSlice.js ALREADY a member and src/config/tierFacts.js NOT one — and, for the byte-arm holder's sum, EM-A1's and EM-B1h's four src paths NOT members while EM-D0a's two ARE. Proven present: git grep -c -F -> 1.",
@@ -35388,11 +35389,13 @@
         {
           "path": "tests/build/vendorPdfLazy.test.js",
           "symbol": "const CLOSURE_BUDGET_BYTES = 1_048_000;",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)",
           "_note": "The owner-signed ceiling this packet prices the whole train against. NO EDIT is made on this path; if the literal has moved when the chair places this packet, the bound is stale and the pre-proof must be re-run."
         },
         {
           "path": "tests/build/vendorPdfLazy.test.js",
           "symbol": "expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_000);",
+          "retiredBy": "§934.103 (the fifth round, 2026-11-02: the first-paint budget re-recorded 1_048_000 -> 1_048_068 at the measured figure by the chair's ruling, vetoable by the owner; the owner's launch register, X-36 and X-39, reaches first paint through the header's launch-locked Upgrade row, and the eight dead LAUNCH_* aliases were bought back first, -344 B; judgment 269's landed-pin door, §731.3's idiom)",
           "_note": "The ceiling's own pin at :1769, which makes a raise a deliberate act rather than a diff nobody reads. Untouched in both branches."
         }
       ],
@@ -39640,9 +39643,9 @@
           "_note": "src/generators/steps/assembleSettlement.js :: the `canonical-coherence` inAssemblySubstream call — the call this member widens by ONE argument; the assembly substream itself is unchanged; count 1, verbatim at c69d16a5d."
         },
         {
-          "path": "src/generators/steps/generatePopulation.js",
-          "symbol": "const roll = rng.random() * totalPower;",
-          "_note": "src/generators/steps/generatePopulation.js :: linkFactions — EM-P0's own required row, inside that function, which this member's split does not enter; count 1, verbatim at c69d16a5d."
+          "path": "src/generators/steps/assembleSettlement.js",
+          "symbol": "'faction-conflicts',",
+          "_note": "src/generators/steps/generatePopulation.js :: linkFactions — EM-P0's own required row, inside that function, which this member's split does not enter; count 1, verbatim at c69d16a5d. RE-ANCHORED 2026-10-31 (GS-2 one faction set, ODQ §934.101, lane G2): the roll is gone with linkFactions; conflicts draw on the named child stream faction-conflicts in assembleSettlement."
         },
         {
           "path": "src/domain/prose/holderTable.js",

@@ -1057,7 +1057,12 @@ export function economyStateProse(settlement, readings = {}, options = {}) {
     // THE CATALOG AND ITS ABSENCES (DS-SUP-3), two lenses at one position: where the town
     // stands against what its rung is expected to keep, and the one house that is open and
     // short of what it works with.
-    catalogStanding: commercialRung(line('DS-SUP-3', catalogKey)),
+    // RS-15 (chair ruling 2026-10-30): the catalog lens speaks ONLY when the catalog is
+    // incomplete. On a complete one it carried nothing the page did not (R4), and gating it
+    // HERE is what keeps the screen (ServicesTab) and the print (printProse.js) in step.
+    catalogStanding: Array.isArray(readings.notableAbsences) && readings.notableAbsences.length > 0
+      ? commercialRung(line('DS-SUP-3', catalogKey))
+      : null,
     impairedService: commercialRung(line('DS-SUP-3', impairedKey, impairedSlots)),
   });
 }

@@ -121,3 +121,42 @@ describe('FLAGS registry', () => {
     }
   });
 });
+
+// ── T7 survey (2026-10-30): the DEV tools mounted at the App root. The flag
+//    panel flips and clears an override through setFlagOverride; the email
+//    banner appears on the unconfigured event and its Dismiss persists. ──
+describe('DevFlagPanel and DevEmailBanner (T7 survey)', () => {
+  it('opens, toggles a flag override, and clears it back to the default', async () => {
+    const { createElement } = await import('react');
+    const { render, screen, fireEvent, cleanup } = await import('@testing-library/react');
+    const DevFlagPanel = (await import('../../src/components/dev/DevFlagPanel.jsx')).default;
+    render(createElement(DevFlagPanel));
+    fireEvent.click(screen.getByRole('button', { name: /^flags$/i }));
+    expect(window.localStorage.getItem('flag.__devPanelOpen')).toBe('1');
+    const box = screen.getByLabelText('Toggle copyGuard flag');
+    expect(box.checked).toBe(FLAGS.copyGuard.default);
+    fireEvent.click(box);
+    expect(window.localStorage.getItem('flag.copyGuard')).toBe(String(!FLAGS.copyGuard.default));
+    expect(flag('copyGuard')).toBe(!FLAGS.copyGuard.default);
+    expect(screen.getByText('OVERRIDE')).toBeTruthy();
+    fireEvent.click(screen.getByRole('button', { name: /^clear$/i }));
+    expect(window.localStorage.getItem('flag.copyGuard')).toBeNull();
+    expect(flag('copyGuard')).toBe(FLAGS.copyGuard.default);
+    expect(screen.queryByText('OVERRIDE')).toBeNull();
+    cleanup();
+  });
+
+  it('the email banner shows on sf:email-unconfigured and Dismiss persists', async () => {
+    const { createElement } = await import('react');
+    const { render, screen, fireEvent, cleanup, act } = await import('@testing-library/react');
+    const DevEmailBanner = (await import('../../src/components/dev/DevEmailBanner.jsx')).default;
+    await act(async () => { render(createElement(DevEmailBanner)); });
+    expect(screen.queryByRole('alert')).toBeNull();
+    await act(async () => { window.dispatchEvent(new CustomEvent('sf:email-unconfigured')); });
+    expect(screen.getByRole('alert').textContent).toMatch(/RESEND_API_KEY/);
+    fireEvent.click(screen.getByRole('button', { name: /dismiss email-unconfigured banner/i }));
+    expect(screen.queryByRole('alert')).toBeNull();
+    expect(window.localStorage.getItem('sf.devEmailBanner.dismissed')).toBe('1');
+    cleanup();
+  });
+});

@@ -40,14 +40,19 @@
  * assertion would red every time a document legitimately restates an address it
  * already carries, and a gate that reds on correct behaviour gets turned off.
  *
- * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 33 documents are frozen records
+ * ⚠ THE ARCHIVAL EXCLUSION, MEASURED AND LISTED. 35 documents are frozen records
  * of their day, and re-addressing them to today's tree would FALSIFY a record
  * rather than repair it — `docs/review-r2/VERIFY_SUBSYSTEMS_RESULTS.json` pins a
  * sha and states that all its cited lines matched AT THAT SHA. They carry 377
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (40)    docs/review-r2/**, docs/shift-records/**
+ *   tree (46)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
+ *                GROWTHS that hid nothing, each a signature with no path:line citation of its own.)
+ *                (2026-10-30, the dossier consolidation, 40 -> 44: BUILD-S's service-category-fidelity record and
+ *                BUILD-T1's arrival-market-gate, no-market-pool and migration-one-direction records; GROWTHS
+ *                that hid nothing, each a signature with no path:line citation of its own.)
  *                (2026-10-02-statecraft-band-u1-exposure-band.json joined 2026-10-02, 39 -> 40: cure lane
  *                STATECRAFT-BAND's record for U1, FPQ-74, the spy-exposure band; a GROWTH that hid nothing.)
  *                (2026-10-02-pact-compliance-u2-stream-carry.json joined 2026-10-02, 38 -> 39: cure lane
@@ -122,7 +127,7 @@
  *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
  *                surface deleted at 43c3ac3805. It hid nothing — the excluded
  *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
- *   dated (5)    an ISO date in the filename: the three COMPREHENSIVE_REVIEWs,
+ *   dated (6)    an ISO date in the filename (2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
  *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19
  *   sha-pin (1)  a header that pins the tree it describes (`**Snapshot base:**`):
  *                SETTLEMENT_CAPABILITY_ATLAS

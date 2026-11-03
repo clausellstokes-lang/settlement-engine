@@ -21,6 +21,7 @@
  * @param {string} props.section                 active section id
  * @param {(id:string)=>void} props.setSection   section setter
  * @param {boolean} [props.isElevated=false]     show the Developer-Admin affordance
+ * @param {boolean} [props.isSupport=false]      show the support desk's admin affordance (T9)
  * @param {boolean} [props.showAiKeys=true]      show the Surveyor-gated "AI & keys" row
  * @param {number} [props.unreadCount=0]         shared unopened-message count
  * @param {() => void} [props.onNavigateAdmin]   admin-panel navigator
@@ -58,13 +59,17 @@ export default function AccountNav({
   section,
   setSection,
   isElevated = false,
+  isSupport = false,
   showAiKeys = true,
   unreadCount = 0,
   onNavigateAdmin,
 }) {
   const mobile = useIsMobile();
   const isMobile = useIsMobile();
-  const showAdmin = Boolean(isElevated && onNavigateAdmin);
+  // The support desk (T9) gets the same door to /admin, under its own name;
+  // staff win if both ever read true.
+  const supportDesk = Boolean(isSupport && !isElevated);
+  const showAdmin = Boolean((isElevated || supportDesk) && onNavigateAdmin);
   // The "AI & keys" row is Surveyor-gated (owner ruling 2026-07-19): hidden
   // entirely for non-entitled accounts — no lock-tease, matching the door.
   const sections = useMemo(() => (
@@ -134,8 +139,14 @@ export default function AccountNav({
             style={{ justifyContent: 'flex-start', fontFamily: sans, textAlign: 'left' }}
           >
             <span style={{ flex: 1, textAlign: 'left' }}>
-              <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 700, color: INK }}>Developer Admin Panel</span>
-              <span style={{ display: 'block', fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 400, color: SECOND }}>Manage users, credits, roles, and system configuration</span>
+              <span style={{ display: 'block', fontSize: FS.sm, fontWeight: 700, color: INK }}>
+                {supportDesk ? 'Support console' : 'Developer Admin Panel'}
+              </span>
+              <span style={{ display: 'block', fontSize: chromeFontSize(FS.xs, mobile), fontWeight: 400, color: SECOND }}>
+                {supportDesk
+                  ? 'Work the support queue, look up accounts, and read the usage dashboards'
+                  : 'Manage users, credits, roles, and system configuration'}
+              </span>
             </span>
           </Button>
         </>

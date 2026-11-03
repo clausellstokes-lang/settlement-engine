@@ -138,15 +138,13 @@ const RULED = Object.freeze({
     'card — a ForceCard; a chartered company carries its terms under its name.',
   'src/components/new/tabs/DefenseTab.jsx :: magicDef':
     'card — a ForceCard for an arcane defence, with the same inside as its siblings.',
-  'src/components/new/tabs/FaithTab.jsx :: ranks':
-    'card — a niche row carries the creed\'s deepening rows (character, boon and bane) beneath '
-    + 'it, so the row has an inside a column would break.',
   'src/components/new/tabs/NPCsTab.jsx :: presentFactions':
     'card — an NPCCategoryGroup is a whole faction\'s roster, not a row.',
-  'src/components/new/tabs/NPCsTab.jsx :: settlement?.relationships':
-    'card — an NPCRelCard2 carries the tie and its description.',
+  'src/components/new/tabs/RelationshipsTab.jsx :: neighbours':
+    'card — a NeighbourLinkCard is a whole neighbour standing with its own fold (cause, status, '
+    + 'tensions, connections); the desk line that rode beside it glances since 2026-10-30.',
   'src/components/new/tabs/RelationshipsTab.jsx :: filteredRels':
-    'card — an NPCRelCard2, the same component the NPCs tab lists.',
+    'card — an NPCRelCard2 carries the tie and its description.',
   'src/components/new/tabs/RelationshipsTab.jsx :: conflicts':
     'card — a ConflictCard: parties, issue, stakes and hooks under one head.',
   'src/components/new/tabs/RumorsTab.jsx :: rumors':
@@ -158,22 +156,33 @@ const RULED = Object.freeze({
     + 'wanderer verb controls beneath that.',
   'src/components/new/tabs/UnaffiliatesSection.jsx :: rows.settled':
     'card — the same UnaffiliateCard as the roaming half above; one shape, one ruling.',
-  'src/components/new/tabs/ServicesTab.jsx :: catOrder':
-    'card — a whole service CATEGORY: a toggle header and the list of its services inside.',
-  'src/components/new/tabs/ServicesTab.jsx :: missing':
-    'card — an absence tile, already laid in the two- or three-column grid above it.',
-  'src/components/new/tabs/power/PowerStrata.jsx :: matchedGroups':
-    'card — a faction group\'s sub-row, rendered INSIDE its faction\'s roster card and indented '
-    + 'under it; it belongs to that row rather than being a list of its own.',
+  // BUILD-W2-SEARCH U2 (2026-10-30): the dossier search mounts each object through its own
+  // renderer, so these rows were extracted into named components. The rows did not change; the
+  // scan can no longer read the inline body it used to skip, so each takes its verdict here.
+  'src/components/new/tabs/HistoryTab.jsx :: currentTensions':
+    'card — a TensionRow: the tension kind, its severities, the description and its factions.',
+  'src/components/new/tabs/HistoryTab.jsx :: sortedEvents':
+    'card — a HistoryEventCard: name, type, description and age, with a lasting-effects fold.',
+  'src/components/new/tabs/InstitutionsTab.jsx :: houses':
+    'card — an InstitutionCard: the house, its badge and category, what it is, and the doors to its services beneath (X-35).',
+  'src/components/new/tabs/PlotHooksTab.jsx :: groups':
+    'card — a source-page section: the page caption and the hook cards that grow from it.',
+  // THE TRIM (the owner, 2026-11-01, ODQ §934.103): the per-hook `hooks` site became the
+  // per-source `sourceGroups` site — a source's name once over all of its hook sentences.
+  'src/components/new/tabs/PlotHooksTab.jsx :: sourceGroups':
+    'card — a PlotHookCard or a PlotHookSourceCard: the source name once, then its hook sentences.',
+  'src/components/new/tabs/ResourcesTab.jsx :: unexploited':
+    'card — a ResourceChainCard: the resource, its value, the chain flow and what it needs.',
+  'src/components/new/tabs/ResourcesTab.jsx :: partExploited':
+    'card — a ResourceChainCard, the partial variant of the same card.',
+  'src/components/new/tabs/ResourcesTab.jsx :: fullExploited':
+    'card — a ResourceChainCard, the fully-worked variant of the same card.',
+  'src/components/new/tabs/power/PowerStrata.jsx :: roster':
+    'card — a FactionRow: the faction with its archetype and share, its member count beneath and a fold.',
 
   // ── NOT ROWS, OR TOO FEW TO BE ─────────────────────────────────────────────
-  'src/components/new/tabs/FaithTab.jsx :: depth.top3':
-    'inline-run — the three character words run INLINE in one line, separated by a middot.',
   'src/components/new/tabs/ResourcesTab.jsx :: chain.finalProducts':
     'inline-run — the chain\'s final products run inline with arrow separators, as one flow.',
-  'src/components/new/tabs/ViabilityTab.jsx :: generationReceipt.checks':
-    'short — only the FAILING checks render, and a settlement that ships carries a handful; '
-    + 'the receipt is a short list by construction.',
 });
 
 // ── the walk ─────────────────────────────────────────────────────────────────
@@ -267,10 +276,23 @@ describe('THE NAME-LIST CENSUS — every dossier list of short rows is ruled on'
     // the measurement at landing and they TIGHTEN toward reality; they are never
     // lowered to admit a change. Measured by executing this walk against this tree
     // on 2026-09-19: 27 files, 30 distinct sites, 4 of them ruled `columns`.
+    // 30 -> 28 (BUILD LANE S, 2026-10-30): NOT a pattern change. The chair CUT the Services
+    // tab's Category Status grid (RS-15, RS-17), and its two list sites (`catOrder` tiles,
+    // `missing` tiles) went with it; their rulings are deleted above.
+    // ⚠ MOVED BY RULING, NOT TO ADMIT A CHANGE (BUILD-T3, 2026-10-30): the consolidation
+    // chair also CUT whole list blocks (N8 the NPCs tab's tie fold; F3 the Faith tab's niche rows, now
+    // FaithSection's one creed list), three more sites. Re-measured at the merge of S and T3: 25.
     expect(FILES.length, 'the census tree is empty — has src/components/new/tabs moved?')
       .toBeGreaterThanOrEqual(27);
+    // ⚠ 30 -> 29 (2026-10-30, UX consolidation U3), ACCEPTED BY THE CHAIR (ruling 2026-10-30,
+    // item 5): a SURFACE REMOVED BY RULING, NOT A DEFECT ADMITTED. RULINGS-T2 T2-14 moved the
+    // generation receipt off ViabilityTab to src/components/settlement/VersionsTab.jsx, outside
+    // this census tree, so its failing-checks list left the walk and its RULED row was deleted
+    // with it. The walk itself is unchanged; the floor still tightens toward reality and is
+    // never lowered to let a broken scan through.
     expect(SCANNED.length, 'the walk judged almost no list sites — the `.map(` shape it looks for has changed')
-      .toBeGreaterThanOrEqual(30);
+      // and one more by BUILD-T2 (T2-14/T2-19, the Power tab's receipt list and conflicts): 25 -> 24 at the merge.
+      .toBeGreaterThanOrEqual(24);
     expect(COLUMNED.length, 'no site is ruled `columns` — the registry half has emptied')
       .toBeGreaterThanOrEqual(4);
   });

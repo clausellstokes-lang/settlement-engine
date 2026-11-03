@@ -3,12 +3,8 @@
  * homeHeroAnonGauge.test.jsx — THE ANON GAUGE LAW (owner veto, cluster 1a).
  *
  * The HomeHero gauge must render ONLY the viewer's entitlement:
- *   • Anonymous  → hamlet / village / town ONLY. thorp / city / metropolis
- *     are ABSENT (not merely faint-and-disabled). The pre-remediation gauge
- *     mapped the full TIER_ORDER and rendered all six to anon — a live law
- *     violation the e2e flows never caught (they only assert the three ARE
- *     present, never that the capped three are absent). This test closes that
- *     blind spot: it asserts ABSENCE.
+ *   • Anonymous  → ONE fixed station, Town (the owner, 2026-10-30). Every other
+ *     size is ABSENT (not merely faint-and-disabled).
  *   • Signed-in  → all six stations (thorp → metropolis).
  *
  * The gauge stations are real <button data-settlement-size> nodes (the e2e
@@ -22,7 +18,7 @@
  */
 
 import { describe, it, expect, afterEach, vi } from 'vitest';
-import { render, cleanup, screen } from '@testing-library/react';
+import { render, cleanup, screen, fireEvent, waitFor } from '@testing-library/react';
 import { t } from '../../src/copy/index.js';
 import {
   ANON_SIZES, SIZE_LABEL, signInUnlocksClause, signInUnlocksSizes,
@@ -73,23 +69,24 @@ const sizeValues = (container) =>
 describe('HomeHero — the anon gauge law', () => {
   afterEach(cleanup);
 
-  it('anonymous: renders hamlet/village/town ONLY — thorp/city/metropolis are ABSENT', () => {
+  // ⛔ THE ANONYMOUS HERO FORGES A TOWN (the owner, 2026-10-30: "if you don't sign in the
+  // only option, you have is a town"). One fixed station where the gauge was, and none of
+  // the per-size extras that only meant something while there was a choice.
+  it('anonymous: one fixed station, Town, and the forge asks for a town', async () => {
     storeState.auth = { tier: 'anon', displayName: null };
+    storeState.updateConfig = vi.fn();
+    storeState.generateSettlement = vi.fn(async () => null);
     const { container } = render(<HomeHero onSignIn={() => {}} onNavigate={() => {}} />);
     const values = sizeValues(container);
-
-    // The three anon stations are present…
-    expect(values).toContain('hamlet');
-    expect(values).toContain('village');
-    expect(values).toContain('town');
-    // …and the three capped stations are NOT rendered at all (the law).
-    // anchored: values carries hamlet, village and town (proven above) and has exactly three entries (proven below).
-    expect(values).not.toContain('thorp');
-    // anchored: the same values list, proven populated above and exactly three long below.
-    expect(values).not.toContain('city');
-    // anchored: the same values list, proven populated above and exactly three long below.
-    expect(values).not.toContain('metropolis');
-    expect(values).toHaveLength(3);
+    expect(values).toEqual(['town']);
+    expect(container.querySelector('[data-settlement-size="town"]').getAttribute('aria-pressed')).toBe('true');
+    // anchored: the Town station is proven on this render above.
+    expect(screen.queryByText(t('generate.sizeHint.town')), 'a per-size hint still renders').toBeNull();
+    const cta = screen.getByRole('button', {
+      name: t('hero.v2.ctaTemplate', { tier: t('generate.sizes.town').toLowerCase() }),
+    });
+    fireEvent.click(cta);
+    await waitFor(() => expect(storeState.updateConfig).toHaveBeenCalledWith({ settType: 'town' }));
   });
 
   it('signed-in: renders the full six-station ladder (thorp → metropolis)', () => {

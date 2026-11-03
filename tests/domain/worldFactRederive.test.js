@@ -362,10 +362,21 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // the arrival scene and the pressure sentence on their own streams; the prose manifest did not move.
     // Then wave 3, the arrival scene as a place: 238a6374.. -> 74a4c58d.. (dc8a022e1). Then wave 4 block 1, the hook's
     // structures: 74a4c58d.. -> f27114ca.. (6990709a0).
+    // Then the UX consolidation (ODQ §934.101), each through the signed door, restated here by cure lane T11
+    // (VERIFIER F10: this pin was the sixth the RS-21 shift did not restate): the generator master
+    // f27114ca.. -> 3cc2b272.. (b16b40bb, service category fidelity RS-1..RS-13, 460 of 525 rows) and the prose
+    // manifest 7990bbfb.. -> 7035dd43.. (2295930e, the same shift, 1,048 rows) -> 39f96324.. (8700be2c, T1-13's
+    // no-market pool, 406 rows). No lane moved either file outside its door; the stride below still re-derives.
+    // Then GS-2, one faction set (ODQ §934.101; docs/shift-records/2026-10-31-one-faction-set.json), lane G2: the
+    // generator master 3cc2b272.. -> 590cb9ab.. (the GS-2 golden re-record, 525 of 525 rows) and the prose manifest
+    // 39f96324.. -> aafa41e4.. (the GS-2 manifest re-record, 784 rows, every moved cell DS-GEN-2).
+    // Then GS-1, tension variety (ODQ §934.101; docs/shift-records/2026-10-31-tension-variety.json), lane G3: the
+    // generator master 590cb9ab.. -> 8355c460.. (the GS-1 golden re-record, 525 of 525 rows); the prose manifest
+    // did not move.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('f27114cae7ca43c921061917e66375daf24ce115a147444013b0651251368eae');
+      .toBe('8355c460c4bc822967b7fc96042dae2d09fdf01b3b634e1317eecc32af32945c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('7990bbfbfcfb0672f83d1a37952f45d609dfe7d4835d361696c06c5fe9f5a4d7');
+      .toBe('aafa41e411069427f14a0d6df6a8bc11e9e170a64e7a9d735547daaaa755215b');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.

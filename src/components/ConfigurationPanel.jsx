@@ -8,13 +8,11 @@ import {
 import {getCompatibleResources} from '../generators/terrainHelpers';
 import { GOLD, INK, MUTED, SECOND, BODY, BORDER, BORDER2, CARD, sans, FS, swatch } from './theme.js';
 import { useStore } from '../store/index.js';
-import { SIZE_LABEL, SIZE_LADDER } from '../config/tierFacts.js';
+import { ANON_SIZES, SIZE_LABEL, SIZE_LADDER } from '../config/tierFacts.js';
 import HelpPopover from './compendium/HelpPopover.jsx';
 import Button from './primitives/Button.jsx';
 import Disclosure from './primitives/Disclosure.jsx';
 import { ClerkNote } from './generate/ClerkNote.jsx';
-import CharacterPresetCard from './generate/CharacterPresetCard.jsx';
-import PlaceInRegionCard from './generate/PlaceInRegionCard.jsx';
 import { useRealmMagicDefault } from './generate/useRealmMagicDefault.js';
 
 const PARCHMENT=swatch['#F7F0E4'];
@@ -37,6 +35,10 @@ const CULTURAL_TRADITION_OPTIONS=Object.freeze(
   })),
 );
 
+// The one size a signed-out visitor forges: the top of the anonymous set, a Town (the
+// owner, 2026-10-30; store/settlementGenerateAction.js clamps to the same derivation).
+const ANON_FORGE_SIZE = ANON_SIZES[ANON_SIZES.length - 1];
+
 // Population figure for a tier <option>, derived from the enforced source of
 // truth POPULATION_RANGES (already in the eager data chunk — zero closure cost).
 // Mirrors THE GAUGE's popFigure in HomeHero.jsx so the dropdown and the ranges
@@ -51,8 +53,10 @@ const popRange = (tier) => {
     : `${fmt(r.min)}–${fmt(r.max)}`;
 };
 
-// The 17 archetypes + priority sliders moved to the Character preset card
-// (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js).
+// The 17 archetypes + priority sliders live in the Character preset card
+// (generate/CharacterPresetCard.jsx, data in generate/characterPresets.js), and
+// generate/LayeredConfigurationPanel.jsx is its one host, as it is for the Place
+// in Region card. This panel mounts neither, so neither card renders twice.
 // Applying a preset writes the SAME config values the old SliderPanel
 // dropdown wrote, so generation stays byte-identical.
 
@@ -267,6 +271,12 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
   // and disables the ones this account may not forge (§934.34 put a thorpe behind sign-in
   // the same way a city and a metropolis already were).
   const isTierAllowed = useStore(s => (typeof s.isTierAllowed === 'function' ? s.isTierAllowed : () => true));
+  // ⛔ A SIGNED-OUT VISITOR FORGES A TOWN (the owner, 2026-10-30), so the picker gives way
+  // to one fixed size. Asked of the SAME selector the generation action's clamp reads, so
+  // the panel and the forge cannot disagree; the action is the gate, this is the half a
+  // reader sees. A store that predates the selector keeps the picker, as the layered panel does.
+  const anonTown = useStore(s => (typeof s.canCustomizePreGeneration === 'function'
+    ? s.canCustomizePreGeneration() !== true : false));
   const customCount = useStore(s => (typeof s.getCustomContentCount === 'function' ? s.getCustomContentCount() : 0));
   // ── Isolation + magic constraint flags ──────────────────────────────────
   const magic       = config.priorityMagic || 0;
@@ -304,7 +314,13 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               that puts a thorpe behind sign-in (§934.34) needed no edit here: it is a
               property of the tier, answered by the one gate. The two sentinels stay
               open for every account; the post-resolution re-gate catches a roll that
-              lands out of range. */}
+              lands out of range. A SIGNED-OUT visitor sees one fixed Town instead
+              (the owner, 2026-10-30), and none of the size-dependent notes below. */}
+          {anonTown ? (
+            <div data-anon-size={ANON_FORGE_SIZE} aria-label="Population" style={{padding:'5px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.sm,background:CARD,fontFamily:sans,color:INK}}>
+              {`${SIZE_LABEL[ANON_FORGE_SIZE]} (${popRange(ANON_FORGE_SIZE)})`}
+            </div>
+          ) : (
           <Sel value={config.settType} onChange={e=>updateConfig({settType:e.target.value})}>
             <option value="random">Random</option>
             {SIZE_LADDER.map((key) => {
@@ -317,6 +333,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
             })}
             <option value="custom">Custom…</option>
           </Sel>
+          )}
         </div>
         <div><Lbl topic="trade-route">Trade Route</Lbl>
           <Sel
@@ -333,7 +350,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
         </div>
         {/* ── Isolation + Town+ warning — a rubric-headed clerk's note
             (Deep Craft cluster 1; the blue tinted wash retired). */}
-        {['town','city','metropolis'].includes(config.settType) &&
+        {!anonTown && ['town','city','metropolis'].includes(config.settType) &&
           config.tradeRouteAccess === 'isolated' && (
           <ClerkNote rubric="Isolation support premise" style={{ fontSize: FS.xs }}>
             The generator will test local food, hinterland production, reserves, seasonal access, and patronage first.
@@ -356,7 +373,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           </Sel>
         </div>
       </div>
-      {config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
+      {!anonTown&&config.settType==='custom'&&<div style={{marginBottom:12}}><Lbl>Custom Population</Lbl><input type="number" aria-label="Custom Population" min={10} max={500000} value={config.population||1500} onChange={e=>updateConfig({population:Number(e.target.value)})} style={{width:'100%',padding:'6px 10px',border:`1px solid ${BORDER2}`,fontSize:FS.md,fontFamily:sans,boxSizing:'border-box'}}/></div>}
       <div style={{display:'grid',gridTemplateColumns:'repeat(3, 1fr)',gap:'10px 16px',marginBottom:12}}>
         <div><Lbl topic="culture">Cultural tradition</Lbl>
           <Sel value={config.culture||'random_culture'} onChange={e=>updateConfig({culture:e.target.value})}>
@@ -478,7 +495,7 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
               here. Change it if this one place is the exception.
             </div>
           )}
-          {noMagic && config.tradeRouteAccess === 'isolated'
+          {!anonTown && noMagic && config.tradeRouteAccess === 'isolated'
             && ['town','city','metropolis'].includes(config.settType) && (
             <div style={{fontSize:FS.xs,color:swatch['#C05010'],marginTop:4,lineHeight:1.4}}>
               This explicit isolated premise will be preserved. If local food,
@@ -488,11 +505,10 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           )}
         </div>
       </div>
-      <CharacterPresetCard advanced={true}/>
       {/* ── Fine-tune ───────────────────────────────────────────────────────
             Nearby resources + settlement stress behind ONE "Fine-tune"
-            disclosure. Priority sliders moved up to the Character card, where
-            the archetype chips and sliders are reconciled into one control.
+            disclosure. Priority sliders live in the Character card (mounted by
+            the layered panel), where the archetype chips and sliders are one control.
             Flattened to a single level (the resource + stress panels were
             collapsibles side by side); each shows its own compact "Random"
             default until tuned. Callers can hide the whole block with
@@ -505,10 +521,6 @@ export default function ConfigurationPanel({ showFineTune = true } = {}){
           </Disclosure>
         </div>
       )}
-      {/* Place in Region — birth-time campaign + patron-deity intent (premium;
-          free sees a teaser). Mounted pre-generation so the choice bakes into
-          settlement._config and persists on save. */}
-      <div style={{marginTop:10}}><PlaceInRegionCard/></div>
     </div>
   </div>;
 }
