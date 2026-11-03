@@ -17,7 +17,7 @@
  */
 
 import { getActiveRng } from '../kernel/rngContext.js';
-import { FOOD_IMPORT_RATES } from '../data/foodImportRates.js';
+import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../data/foodImportRates.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandOf, foodSecurityFlagsOf } from '../data/bandLadders.js';
 import { deriveFoodRecord, grownShareOf, hasImportProcessor, hinterlandShareOf } from './economy/foodBalance.js';
 import { TERRAIN_DATA } from '../data/geographyData.js';
@@ -269,7 +269,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const failedSource = stressFamine ? (foodSources[0] ?? null) : null;
   const famineKeeps = foodSources.length >= 2 ? 1 - 1 / foodSources.length : 7 / 20;
   if (stressFamine)   { productionMult  *= famineKeeps; }
-  if (stressSiege)    { productionMult  *= 0.60; effectiveRoute = 'isolated'; }
+  if (stressSiege)    { productionMult  *= SIEGE_PRODUCTION_KEPT; effectiveRoute = 'isolated'; }
   if (stressPlague)   { productionMult  *= 0.75; }
   if (stressOccupied) { consumptionMult *= 1.20; }
   // [generators-domain-1] second-wave stress types whose viabilityNote implies a food

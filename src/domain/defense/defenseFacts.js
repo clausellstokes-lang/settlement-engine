@@ -29,6 +29,7 @@
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 
 /**
  * @typedef {object} DefenseFacts
@@ -119,15 +120,9 @@ export function defenseFactsOf(settlement) {
 // `foodBalance.js :: deriveFoodRecord`), never a second figure source: the months in store
 // stay the Economy tab's row; this says how long they last once the place is shut in.
 
-/**
- * The share of its harvest a place keeps under siege: THE FOOD WRITER'S OWN `under_siege`
- * multiplier (`foodGenerator.js :: generateFoodSecurity` and `foodBalance.js ::
- * deriveFoodBalanceAnalysis`, both `productionMult *= 0.6`: the outlying farmland is
- * abandoned or razed). Neither writer exports it, so it is spelled here once and
- * tests/domain/foodEnduranceLine.test.js holds it equal to the writer's own `stressModifier`;
- * it is not a tunable of this file.
- */
-export const SIEGE_HARVEST_KEPT = 0.6;
+// The share of its harvest a place keeps under siege is THE FOOD WRITERS' OWN dial,
+// `data/foodImportRates.js :: SIEGE_PRODUCTION_KEPT` (the outlying farmland abandoned or razed);
+// this file reads it and spells no copy, so the record and this reading cannot drift.
 
 /**
  * @typedef {object} FoodEndurance
@@ -142,7 +137,7 @@ export const SIEGE_HARVEST_KEPT = 0.6;
 /**
  * FOOD ENDURANCE: how long the stores carry the place under siege. The hinterland's carts and
  * the trade routes are cut (the food writer's own siege: `hinterlandSupply` 0, route
- * isolated), the place keeps `SIEGE_HARVEST_KEPT` of what it grows, and the stores cover the
+ * isolated), the place keeps `SIEGE_PRODUCTION_KEPT` of what it grows, and the stores cover the
  * rest: months = storageMonths ÷ (rations − kept share). A place already besieged at birth
  * has the siege harvest in its record, so its share is not cut twice. Magic supply is not
  * counted: the record does not say which channel survives a blockade.
@@ -159,7 +154,7 @@ export function foodEnduranceOf(settlement) {
   if (typeof stored !== 'number' || !Number.isFinite(stored) || stored <= 0) return null;
   const grown = typeof record?.grownPct === 'number' && Number.isFinite(record.grownPct) ? Math.max(0, record.grownPct) : 0;
   const besieged = foodSecurity?.hasSiege === true;
-  const keptShare = (grown / 100) * (besieged ? 1 : SIEGE_HARVEST_KEPT);
+  const keptShare = (grown / 100) * (besieged ? 1 : SIEGE_PRODUCTION_KEPT);
   // Full rations draw (1 − kept) of a month's need from the stores each month; half rations
   // draw (½ − kept), so the stores last 2·stored ÷ (1 − 2·kept) months.
   return Object.freeze({

@@ -4,7 +4,7 @@
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
 import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
-import { FOOD_IMPORT_RATES } from '../../data/foodImportRates.js';
+import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
   hasTeleportationInfra,
@@ -200,7 +200,7 @@ export const deriveFoodBalanceAnalysis = (population, terrain, institutions, con
       : 'Famine: crop failure has reduced local food production to 35% of normal capacity.');
   }
   if (stresses.includes('under_siege')) {
-    productionMult *= 0.6;
+    productionMult *= SIEGE_PRODUCTION_KEPT;
     routeOverride = 'isolated';
     stressNotes.push('Siege: external supply lines severed and outlying farmland abandoned or razed.');
   }

@@ -27,8 +27,9 @@ import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveFoodBalanceAnalysis } from '../../src/generators/economy/foodBalance.js';
 import * as FACTS from '../../src/domain/defense/defenseFacts.js';
+import { SIEGE_PRODUCTION_KEPT } from '../../src/data/foodImportRates.js';
 import * as DD from '../../src/domain/display/defenseDisplay.js';
-import { entityAnchor } from '../../src/domain/dossier/entityLinks.js';
+import { TYPE_TO_TAB, buildDossierEntityIndex, entityAnchor } from '../../src/domain/dossier/entityLinks.js';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
 import EconomicsTab from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
@@ -97,8 +98,8 @@ describe('food endurance reads the one food record', () => {
   it('the siege share is the food writer\'s own under_siege multiplier, not a second tunable', () => {
     const bare = { tier: 'hamlet', settType: 'hamlet', tradeRouteAccess: 'road', stressTypes: ['under_siege'] };
     const besieged = deriveFoodBalanceAnalysis(1000, { agricultureCapacity: 1 }, [], bare);
-    expect(typeof FACTS.SIEGE_HARVEST_KEPT).toBe('number');
-    expect(besieged.foodBalance.stressModifier).toBe(FACTS.SIEGE_HARVEST_KEPT);
+    expect(typeof SIEGE_PRODUCTION_KEPT).toBe('number');
+    expect(besieged.foodBalance.stressModifier).toBe(SIEGE_PRODUCTION_KEPT);
   });
 
   it('food endurance is the stores divided by the need the place cannot grow under siege', () => {
@@ -106,7 +107,7 @@ describe('food endurance reads the one food record', () => {
     expectNoSeedFailures(collectSeedFailures(CORPUS, ({ seed, s }) => {
       const record = recordOf(s);
       const besieged = s.economicState.foodSecurity.hasSiege === true;
-      const kept = (record.grownPct / 100) * (besieged ? 1 : FACTS.SIEGE_HARVEST_KEPT);
+      const kept = (record.grownPct / 100) * (besieged ? 1 : SIEGE_PRODUCTION_KEPT);
       const end = FACTS.foodEnduranceOf(s);
       expect(end.storedMonths, seed).toBe(record.storageMonths);
       expect(end.hasGranary, seed).toBe(record.hasGranary);
@@ -171,5 +172,17 @@ describe('the Defense tab carries one Food endurance line, and it is a door to t
       const printed = pdfText(DefenseSecurity({ settlement: s, vm: buildViewModel({ settlement: s }) })).join('');
       expect(printed, seed).toContain(`${DD.FOOD_ENDURANCE_LABEL}: ${DD.foodEnduranceLine(s).sentence}`);
     }), 'the PDF prints the same sentence');
+  });
+
+  it('the dossier entity index carries the stores entry the door resolves through: type stores, tab economics, the row\'s anchor', () => {
+    // The chair's wiring for DEFENSE-3's R1: EntityLink renders the door words as plain text
+    // until entityLinks.js indexes a `stores` entry (TYPE_TO_TAB and buildDossierEntityIndex).
+    expect(TYPE_TO_TAB.stores).toBe('economics');
+    expectNoSeedFailures(collectSeedFailures(CORPUS.slice(0, 12), ({ seed, s }) => {
+      const entry = buildDossierEntityIndex(s).byId.get(DD.FOOD_STORES_DOOR.id);
+      expect(entry?.type, seed).toBe('stores');
+      expect(entry?.tab, seed).toBe('economics');
+      expect(entry?.anchor, seed).toBe(DD.FOOD_STORES_DOOR.anchor);
+    }), 'the stores entry in the index');
   });
 });
