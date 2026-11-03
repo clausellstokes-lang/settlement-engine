@@ -142,7 +142,7 @@
   "sentinel": "7d73f205d6740986bfd17a7f53cdc6992a06223e0e21ccc8c31797cc0f69b820"
  },
  "frozen": "2026-11-03",
- "frozenAtSha": "9ad61137e60b1f840ead24f68f58d825296fa580",
+ "frozenAtSha": "772bf0fd427b3ca6d3968b7a45bece45d222c3cf",
  "identities": 1459,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
