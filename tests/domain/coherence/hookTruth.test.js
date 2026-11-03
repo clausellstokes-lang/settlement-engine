@@ -94,6 +94,22 @@ describe('settlementHookFacts — a fact the record does not carry licenses noth
       .toContain('armed_force_without_one');
   });
 
+  test('a garrison the world pulse ruined is no garrison, though the birth roster still lists it', () => {
+    const record = {
+      tier: 'town',
+      institutions: [
+        { name: 'Garrison', category: 'Defense', status: 'ruined' },
+        { name: 'Town watch', category: 'Defense' },
+      ],
+      defenseProfile: { institutions: { garrison: ['Garrison'], watch: ['Town watch'] } },
+    };
+    const facts = settlementHookFacts(record);
+    expect(facts.hasGarrison).toBe(false);
+    expect(facts.hasWatch).toBe(true);
+    expect(hookTruthViolations('The garrison has not been paid in two months.', facts).map((f) => f.code))
+      .toContain('armed_force_without_one');
+  });
+
   test("a building's walls are not the settlement's walls", () => {
     const facts = settlementHookFacts({ tier: 'thorp', defenseProfile: { institutions: { walls: [] } } });
     const findings = hookTruthViolations('Something was sealed inside the walls during construction, deliberately', facts);

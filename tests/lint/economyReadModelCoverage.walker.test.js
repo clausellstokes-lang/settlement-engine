@@ -103,7 +103,9 @@ const ALLOWED_FRESHNESS_CONSUMERS = {
  * the bare word is ordinary product prose in help copy and compendium text.
  */
 const READ_PATTERNS = [
-  ['quickGuide', /\bcomposeSettlementQuickGuide\b/],
+  // The `quickGuide` row (composeSettlementQuickGuide) left with its last surface reader,
+  // SummaryTabV2, retired as dead code by lane WIRING-2 (2026-11-03, TRIM-2 request 5): a
+  // pattern that matches nothing is a dead detector, and the guard-the-guard arm says so.
   // The OTHER composer over the economy read-models: tonightAtTheTable folds
   // economicState.prosperity into its scene lines, so a surface that reaches
   // the models only through it is still an economy reader (R-4 verify probe:
@@ -121,7 +123,6 @@ const READ_PATTERNS = [
 const COVERED = [
   'src/components/TableView.jsx',
   'src/components/new/SummaryTab.jsx',
-  'src/components/new/SummaryTabV2.jsx',
   'src/components/new/tabs/EconomicsTab.jsx',
   // T1-14 (2026-10-30, chair ruling 5): the Institutions tab renders the Services tab's own rows and note.
   'src/components/new/tabs/InstitutionsTab.jsx',

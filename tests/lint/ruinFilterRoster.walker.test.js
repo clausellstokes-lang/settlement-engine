@@ -99,6 +99,7 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   'src/domain/edit/pools.js': 'name-lookup/affordance — the `npc.role` pool offers a DM the roles the record\'s OWN institutions roster already carries, as a SELECTION LIST ("what may a human name for this field"), never a live-provider aggregation: it sums nothing and credits no institution with capacity. RULED EXEMPT BY THE CHAIR (judgment 138, EM-A2b version 7) on the same reason src/domain/events/targetRosters.js and src/domain/tableLedger.js already hold. Routing it through liveInstitutions() would DROP a ruined institution from a picker where it is a legitimate answer — the former warden of a burned keep is a role a DM may still name — and would add a THIRTEENTH import to a leaf whose own header forbids one.',
   'src/domain/mapProfile.js': 'existence-gate (deferred) — .some() walls → hasWalls; a ruined citadel still reads walled (owner glance)',
   'src/domain/contradictions.js': 'existence-gate — narrative QA detectors (.some presence)',
+  'src/domain/coherence/hookTruth.js': 'existence-gate — reads `defenseProfile.institutions` ONLY to know whether the record carries a defence roster at all (`defenseKnown`: an unknown roster licenses nothing). Every defence and hospital FACT comes from defenseFacts.js :: defenseFactsOf, which reads the live roster through liveInstitutions(). Lane WIRING-2 (2026-11-03, HOOKS request 6) moved the facts there; before it this file was COMPLIANT through its own isLiveInstitution hospital read.',
   'src/domain/traditions/politics.js': 'existence/candidate — tradition-owner candidate membership (deferred; owner glance)',
   // MF-UC0 (ODQ §311.1, §441, §445.2): the underground SHEET's existence gate reads the RAW
   // roster ON PURPOSE. §311.3 — "the HIGH-WATER LAW runs underground: dug is forever" — a
@@ -466,7 +467,12 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // RE-MEASURED 2026-11-03 BY LANE DEFENSE: 97 → 96, A SHRINK. threatAssessment.js left the
     // discovery set when its rows moved onto defenseFacts (the live roster); its exempt row is
     // deleted above. Read from this arm's own failure message ("expected 96 to be 97").
-    expect(readers.length).toBe(96);
+    // RE-MEASURED 2026-11-03 BY LANE WIRING-2: 96 → 97. ONE new reader,
+    // src/domain/coherence/hookTruth.js (the HOOKS lane's truth leaf, composed after DEFENSE's
+    // shrink; HOOKS measured it as 97 → 98 on its own base). Since WIRING-2 its facts come from
+    // defenseFactsOf, so it is EXEMPT above as an existence gate rather than compliant. Read
+    // from this arm's own failure message ("expected 97 to be 96"), never computed.
+    expect(readers.length).toBe(97);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

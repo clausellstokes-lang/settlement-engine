@@ -166,27 +166,3 @@ describe('the Tonight sheet cards (X-51)', () => {
     expect(px(screen.getByText(/calls in a favor/).closest('div'))).toBe(12);
   });
 });
-
-describe('the Summary quick guide', () => {
-  const SETTLEMENT = {
-    id: 'settlement.guide',
-    name: 'Eldey',
-    tier: 'village',
-    population: 610,
-  };
-
-  async function renderSummary() {
-    vi.resetModules();
-    const SummaryTabV2 = (await import('../../src/components/new/SummaryTabV2.jsx')).default;
-    return render(<SummaryTabV2 settlement={SETTLEMENT} />);
-  }
-
-  it('reads every defining truth at the floor on a phone', async () => {
-    installMatchMedia(true);
-    const { container } = await renderSummary();
-    const truths = [...container.querySelectorAll('div')]
-      .filter((d) => d.style.lineHeight === '1.5' && d.style.fontSize);
-    expect(truths.length, 'the quick guide should render its defining truths').toBeGreaterThan(0);
-    for (const truth of truths) expect(px(truth)).toBeGreaterThanOrEqual(PHONE_PROSE_FLOOR);
-  });
-});
