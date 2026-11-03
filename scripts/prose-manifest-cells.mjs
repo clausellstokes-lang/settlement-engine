@@ -89,7 +89,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' and defends in every world; 36 of the 1,050 rows move, none added or removed.'
     + ' 2026-10-01 (J33, docs/shift-records/2026-10-01-urban-band-warden-census.json, the same rulings): re-recorded'
     + ' again because Warden\'s Lodge leaves every druid and magic list, so a magic town holding one loses the druid'
-    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.',
+    + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-1, docs/shift-records/2026-11-03-food-1-one-food-record.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because every food sentence reads one stored food record with one set of cut-offs and'
+    + ' the surplus words read it; 222 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
