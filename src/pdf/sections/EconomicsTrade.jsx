@@ -488,7 +488,7 @@ function FoodBalanceBlock({ fb }) {
         )}
         {fb.surplus > 0 && (
           <View style={{ flex: 1 }}>
-            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.good }}>SURPLUS</Text>
+            <Text style={{ ...type.caption, fontSize: pt['8'], color: palette.good }}>Surplus</Text>
             <Text style={{ ...type.numeric, fontSize: pt['13'], color: palette.good }}>{smart(fb.surplus)}</Text>
           </View>
         )}
