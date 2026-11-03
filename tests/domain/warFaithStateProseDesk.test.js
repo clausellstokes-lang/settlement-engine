@@ -47,7 +47,7 @@ import {
 
 // THE REAL PRODUCERS — the whole point of this file's fixtures.
 import { divineMandateStatus, ensureReligionState, projectReligionStateOntoSettlement } from '../../src/domain/worldPulse/religionState.js';
-import { faithPanelModel } from '../../src/components/settlement/faithPanelModel.js';
+import { faithPanelModel, trimFaithDeskToPanel } from '../../src/components/settlement/faithPanelModel.js';
 import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from '../../src/domain/display/warStatus.js';
 import { settlementMobilization } from '../../src/domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../src/domain/display/occupationStatus.js';
@@ -616,8 +616,9 @@ describe('the faith desk over a settlement the pulse actually built', () => {
 describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders', () => {
   test('DS-FTH-2 speaks, and it names no creed and no god', () => {
     const { settlement, model } = patronLessTown();
-    // The producer's own answer for a town with no embed.
-    expect(model).toEqual({ hasEmbed: false });
+    // The producer's own answer for a town with no embed: no patron, and (lane FAITH) a faith
+    // reading that finds nothing of a church, so the quiet-observances pool is the right one.
+    expect(model).toMatchObject({ hasEmbed: false, reading: { hasChurch: false, accessOnly: false } });
     const desk = warFaithStateProse(settlement, { faith: model, hasPatron: !!model.hasEmbed },
       { seed: 'greyford', audience: 'player' });
     expect(desk.faithTeaser.provenance.poolKey).toBe('PRIVATE DOSSIER');
@@ -637,6 +638,21 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     expect(desk.creedStanding).toBeNull();
     expect(desk.standings).toBeNull();
     expect(desk.nicheRow).toBeNull();
+  });
+
+  test('LANE FAITH: the screen and the print stand DS-FTH-2 down on every patron-less town', () => {
+    // Beside church evidence its PRIVATE DOSSIER variants deny the church; beside nothing they
+    // restate the faith line the page already prints. `trimFaithDeskToPanel` is the one rule
+    // the tab and the print share, so it is asserted here on both kinds of town.
+    const church = { id: 'kirkby', name: 'Kirkby', tier: 'village', config: {},
+      institutions: [{ name: 'Parish church', category: 'Religious' }] };
+    for (const settlement of [church, patronLessTown().settlement]) {
+      const model = faithPanelModel(settlement);
+      const desk = warFaithStateProse(settlement, { faith: model, hasPatron: false }, DM);
+      expect(desk.faithTeaser, settlement.name).not.toBeNull();
+      expect(trimFaithDeskToPanel(desk, model).faithTeaser, settlement.name).toBeNull();
+    }
+    expect(faithPanelModel(church).reading.hasChurch).toBe(true);
   });
 
   test('a town WITH a patron draws no teaser — the page cannot say both', () => {

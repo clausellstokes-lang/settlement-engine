@@ -178,27 +178,16 @@ export default function FaithTab({ settlement, saveId = null, playerView = false
       )}
       {!faithWillRender && (
         <div style={{ padding: 24, textAlign: 'center', color: MUTED, fontFamily: sans, fontSize: FS.sm, lineHeight: 1.6 }}>
-          This settlement keeps no named faith.
-          {/* ── faith.teaser (DS-FTH-2) — ⭐ THE PATRON-LESS TOWN'S OWN VOICE, and the
-              position that matters most on the corpus this product actually ships against:
-              a settlement with no `primaryDeitySnapshot` is the COMMON case, not the edge
-              (the whole review corpus is deity-free today). The four authored variants name
-              no creed and no god, because the block was written for exactly this town.
-
-              ⚠ IT SITS HERE, INSIDE THE HONEST-ABSENCE BRANCH, AND THAT PLACEMENT IS THE
-              FINDING RATHER THAN THE LAYOUT. DS-FTH-2's `[street]` variant is a
-              BYTE-IDENTICAL copy of FaithSection's own teaser body ("The people keep their
-              own quiet observances. No single creed holds sway, and the shrines answer to
-              no named god.") — the same `canonical`-angle hazard the economy desk records
-              for `shadowEconomy` and `tradeFlow`, where a corpus line and its live twin an
-              inch apart is the page saying one thing twice. This branch is exactly where
-              FaithSection renders NOTHING (its HIDDEN mode: a premium viewer, no embed), so
-              the two can never appear together. Every other viewer keeps the live teaser,
-              which carries the same sentence — so nothing is lost, and nothing is doubled.
-
-              The deity-assignment call to action that stood above is gone (chair ruling F8,
-              2026-10-30); the standing line is the fact, and the corpus line sits under it. ── */}
-          <FaithTeaserLines desk={deskProse} settlement={settlement} />
+          {/* ── faith.teaser (DS-FTH-2) — THE FAITH LINE OPENS THE POSITION (lane FAITH,
+              2026-11-03): what the place's faith IS, read off the ONE FAITH READING the model
+              carries (domain/dossier/faithReading.js): the church beside a church, the walk to
+              the neighbour's church where there is only access, the quiet observances where
+              there is nothing; the god's and the church's names are the DM's, said once. It
+              replaced the old standing message, which denied the church that generation wrote
+              on every settlement (root-cause failure 2). The print desk puts the same line at
+              the same position. DS-FTH-2's PRIVATE DOSSIER lens denies an organised faith or
+              restates the line, so `trimFaithDeskToPanel` stands it down here (F2/F4). ── */}
+          <FaithTeaserLines desk={panelDesk} settlement={settlement} lead={[(model.line || []).join(' ')]} />
         </div>
       )}
     </div>
