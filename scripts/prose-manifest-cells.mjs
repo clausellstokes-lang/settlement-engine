@@ -92,7 +92,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' readings it alone had opened; 70 of the 1,050 rows move, none added or removed.'
     + ' 2026-11-03 (FOOD-1, docs/shift-records/2026-11-03-food-1-one-food-record.json, ODQ §934.104, THE COHERENCE AND'
     + ' SCALE WINDOW): re-recorded because every food sentence reads one stored food record with one set of cut-offs and'
-    + ' the surplus words read it; 222 of the 1,050 rows move, none added or removed.',
+    + ' the surplus words read it; 222 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (FOOD-2, docs/shift-records/2026-11-03-food-2-food-base-numbers.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the food base numbers read one terrain table with no hidden storage divisor'
+    + ' and draw the hinterland as normal supply; 978 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
