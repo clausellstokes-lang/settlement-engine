@@ -5,10 +5,14 @@
 name: Vendor edge modules (one-off)
 on:
   workflow_dispatch:
+  push:
+    branches: ['fix/vendor-edge-modules-2026-11-03']
 permissions:
   contents: write
 jobs:
   vendor:
+    # The bot's own push must not re-run this job.
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
