@@ -1183,13 +1183,13 @@
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 322,
+    "line": 321,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
   {
     "path": "src/pdf/sections/NotableNPCs.jsx",
-    "line": 375,
+    "line": 374,
     "category": "floatInterpolation",
     "snippet": "{npc.power}"
   },
