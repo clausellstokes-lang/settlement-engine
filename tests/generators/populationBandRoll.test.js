@@ -2,9 +2,10 @@
  * tests/generators/populationBandRoll.test.js — X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104).
  *
  * The owner's historical table, executed: twenty generated settlements per tier land inside the
- * owner's resident band AND household band for the tier the DM chose. The table is spelled here
- * as the owner wrote it (the spec), not read back from the engine, so a drift in
- * POPULATION_RANGES reds this file rather than redefining it.
+ * owner's resident band for the tier the DM chose. The table is spelled here as the owner wrote
+ * it (the spec), not read back from the engine, so a drift in POPULATION_RANGES reds this file
+ * rather than redefining it. The owner withdrew the household count (2026-11-03: "You can
+ * remove the household count."), so the record carries residents only.
  */
 import { describe, expect, test } from 'vitest';
 
@@ -12,31 +13,29 @@ import { popToTier } from '../../src/data/constants.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const OWNER_TABLE = {
-  thorp:      { residents: [5, 30],        households: [1, 8] },
-  hamlet:     { residents: [20, 100],      households: [5, 25] },
-  village:    { residents: [75, 400],      households: [15, 100] },
-  town:       { residents: [300, 2500],    households: [75, 650] },
-  city:       { residents: [2000, 15000],  households: [500, 4000] },
-  metropolis: { residents: [15000, 60000], households: [3500, Infinity] },
+  thorp:      [5, 30],
+  hamlet:     [20, 100],
+  village:    [75, 400],
+  town:       [300, 2500],
+  city:       [2000, 15000],
+  metropolis: [15000, 60000],
 };
 
 const generate = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 
 describe('the owner\'s table, generated', () => {
-  test('twenty settlements per tier: residents and households inside the owner\'s bands, tier as chosen', () => {
+  test('twenty settlements per tier: residents inside the owner\'s band, tier as chosen, no household count', () => {
     const outside = [];
-    for (const [tier, band] of Object.entries(OWNER_TABLE)) {
+    for (const [tier, [lo, hi]] of Object.entries(OWNER_TABLE)) {
       for (let i = 0; i < 20; i++) {
         const seed = `x46-band-${tier}-${i}`;
         const record = generate({ settType: tier, tradeRouteAccess: 'random_trade', culture: 'random_culture', monsterThreat: 'random_threat' }, seed);
-        const [pLo, pHi] = band.residents;
-        const [hLo, hHi] = band.households;
         if (record.tier !== tier) outside.push(`${seed}: tier ${record.tier}`);
-        if (!(record.population >= pLo && record.population <= pHi)) outside.push(`${seed}: population ${record.population}`);
-        if (!(record.households >= hLo && record.households <= hHi)) outside.push(`${seed}: households ${record.households}`);
+        if (!(record.population >= lo && record.population <= hi)) outside.push(`${seed}: population ${record.population}`);
+        if (Object.hasOwn(record, 'households')) outside.push(`${seed}: carries households`);
       }
     }
-    expect(outside).toEqual([]);
+    expect(outside).toEqual([]); // anchored: every row above is a generated record of the chosen tier
   });
 
   test("a 'custom' population of 60 generates a hamlet", () => {

@@ -24,20 +24,6 @@ export const POPULATION_RANGES = {
   metropolis: { min: 15000, max: 60000 },
 };
 
-// HOUSEHOLDS (X-46 car 1): the owner's household column of the same table. resolveConfig rolls
-// one hearth size (3.8–4.6 residents per household) and clamps the count into the band of the
-// settlement's tier: the hearth alone misses the owner's band in the tails (measured 0.5–0.9% of
-// rolls per tier above thorp, e.g. 15,000 / 4.6 = 3,261 under the metropolis 3,500), and the
-// owner's table is the authority. The metropolis band is open above.
-export const HOUSEHOLD_RANGES = {
-  thorp:      { min: 1,    max: 8 },
-  hamlet:     { min: 5,    max: 25 },
-  village:    { min: 15,   max: 100 },
-  town:       { min: 75,   max: 650 },
-  city:       { min: 500,  max: 4000 },
-  metropolis: { min: 3500, max: Infinity },
-};
-
 // THE STAMP (X-46 car 1): the one population → tier law, for a 'custom' population and every
 // tier-change resolver. Because the roll bands overlap, the stamp cuts each overlap at ONE point,
 // inside it: a population at or above a tier's cut stamps that tier (or higher). Each value is
