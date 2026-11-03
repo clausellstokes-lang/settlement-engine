@@ -101,7 +101,11 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' the stores the defence lines read; 120 of the 1,050 rows move, none added or removed.'
     + ' 2026-11-03 (SIZE-3, docs/shift-records/2026-11-03-size-3-guild-market.json, ODQ §934.104, THE COHERENCE AND'
     + ' SCALE WINDOW): re-recorded because a small place with no real market no longer seats a merchant guild, so its'
-    + ' power lines and the conflict line the guild carried move; 174 of the 1,050 rows move, none added or removed.',
+    + ' power lines and the conflict line the guild carried move; 174 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (DEFENSE, docs/shift-records/2026-11-03-defense-roster-pools.json, ODQ §934.104, THE COHERENCE AND'
+    + ' SCALE WINDOW): re-recorded because the Defense tab\'s pools check the roster before they speak, so the defence'
+    + ' lines that presupposed a garrison, soldiers, walls or an empty store are reworded; 1,018 of the 1,050 rows move,'
+    + ' none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
