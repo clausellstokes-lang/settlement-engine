@@ -77,12 +77,13 @@ export const landing = {
     // live. Walk W1 (owner order 2026-07-21, ledger 70a19ce5) corrected these:
     // they were stale by ~a tier (Hamlet 20–80 etc.), contradicting the Create
     // page. En-dash separator + 'min+' for the open top tier match HomeHero.popFigure.
+    // X-46 car 1 (ODQ §934.104, 2026-11-03): re-banded to the owner's historical table.
     sizes: [
-      { name: 'Hamlet',     range: '61–400' },
-      { name: 'Village',    range: '401–900',    selected: true },
-      { name: 'Town',       range: '901–5,000' },
-      { name: 'City',       range: '5,001–25,000', locked: true },
-      { name: 'Metropolis', range: '25,001+',   locked: true },
+      { name: 'Hamlet',     range: '20–100' },
+      { name: 'Village',    range: '75–400',     selected: true },
+      { name: 'Town',       range: '300–2,500' },
+      { name: 'City',       range: '2,000–15,000', locked: true },
+      { name: 'Metropolis', range: '15,000+',   locked: true },
     ],
     modeBasic:    'Basic',
     modeAdvanced: 'Advanced',

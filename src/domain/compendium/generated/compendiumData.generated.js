@@ -56,12 +56,12 @@ export const COMPENDIUM_DATA = Object.freeze({
     ]
   },
   "tiers": [
-    {"id":"thorp","label":"Thorp","min":8,"max":60},
-    {"id":"hamlet","label":"Hamlet","min":61,"max":400},
-    {"id":"village","label":"Village","min":401,"max":900},
-    {"id":"town","label":"Town","min":901,"max":5000},
-    {"id":"city","label":"City","min":5001,"max":25000},
-    {"id":"metropolis","label":"Metropolis","min":25001,"max":100000}
+    {"id":"thorp","label":"Thorp","min":5,"max":30},
+    {"id":"hamlet","label":"Hamlet","min":20,"max":100},
+    {"id":"village","label":"Village","min":75,"max":400},
+    {"id":"town","label":"Town","min":300,"max":2500},
+    {"id":"city","label":"City","min":2000,"max":15000},
+    {"id":"metropolis","label":"Metropolis","min":15000,"max":60000}
   ],
   "prosperity": {
     "tiers": ["Subsistence","Struggling","Poor","Moderate","Comfortable","Prosperous","Wealthy"],

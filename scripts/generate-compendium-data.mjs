@@ -20,7 +20,8 @@
  *   This machinery exists because hand-typed counts rot. Proven in this very tree:
  *   SYSTEM_VARIABLES carries a stale "14 canonical system variables" doc comment
  *   while the array holds 16; the old Compendium hand-typed tier population bands
- *   (Thorp 20-80) that diverge from the engine's POPULATION_RANGES (Thorp 8-60).
+ *   (Thorp 20-80) that diverge from the engine's POPULATION_RANGES (then Thorp 8-60;
+ *   the owner's historical table since X-46 car 1, Thorp 5-30).
  *   Rendering from this artifact makes both classes of drift impossible.
  *
  * WHAT IS DERIVED vs AUTHORED

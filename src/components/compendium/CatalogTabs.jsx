@@ -43,7 +43,7 @@ function SectionHeading({ id, accent=INK, children }) {
 
 // Per-tier display metadata — the population BANDS render from CD.tiers (the engine
 // POPULATION_RANGES, corrected: the old inline bands were wrong, e.g. Thorp 20-80 vs
-// the real 8-60). Only the colour + institution-count prose stays authored here.
+// the engine's then 8-60; since X-46 car 1 the owner's historical table, Thorp 5-30). Only the colour + institution-count prose stays authored here.
 const TIER_META = {
   thorp:      { color:'#8b1a1a', desc:'Single institution. Subsistence only.' },
   hamlet:     { color:'#a05010', desc:'2-3 institutions. Local subsistence. Minimal trade.' },
