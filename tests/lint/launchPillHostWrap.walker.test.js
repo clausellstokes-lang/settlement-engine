@@ -112,6 +112,11 @@ const OTHER_HOSTS = Object.freeze({
   'src/components/new/tabs/RumorsTab.jsx': 1, // block <div> teaser card
   'src/components/new/tabs/WarTab.jsx': 1, // block <div> teaser card
   'src/components/primitives/LockedDestination.jsx': 1, // raw <button>
+  // THE EXPORT TEASER'S HOVER PILL, LOOKED AT (EXPORT-GATE seat, 2026-11-03, the owner: "have
+  // a pill once hovered that says available at launch"). The pill is the body of a tooltip
+  // <span>, absolutely placed under the gated control with `whiteSpace: 'nowrap'`; it is not
+  // inside the Button, so it cannot widen or clip the control's own label.
+  'src/components/primitives/LaunchGatedExport.jsx': 1, // absolute tooltip <span>
   'src/components/settlement/NextActionRail.jsx': 1, // block <span>
 });
 
