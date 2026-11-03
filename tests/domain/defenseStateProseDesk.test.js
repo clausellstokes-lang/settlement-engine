@@ -1439,7 +1439,7 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
       if (key === 'Logistics & Supply: Granary in isolation') expect(note).toContain('isolation');
       if (key === 'Logistics & Supply: Granary with road supply') expect(note).toContain('road supply');
       if (key === 'Logistics & Supply: No reserves, port open') expect(note).toContain('sea supply');
-      if (key === 'Logistics & Supply: No reserves, landlocked') expect(note).toContain('No food buffer');
+      if (key === 'Logistics & Supply: No reserves, landlocked') expect(note).toContain('survival crisis');
       // The naval row exists exactly when the desk has a naval key, both ways.
       const navalRow = caps.find((c) => c.label === 'Naval Defense') || null;
       const navalKey = navalDefensePoolKey(inst.hasNavy === true, inst.hasPort === true, false);

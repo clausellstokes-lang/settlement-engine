@@ -6,8 +6,14 @@
  * War, Internal Security, Economic Survival, Disasters & Famine), each with a
  * colour and a prose assessment. It is a PURE function of the settlement it is
  * handed — it reads `defenseProfile`, `economicState`, and `config` and returns
- * plain row objects; it draws no randomness, touches no clock, and imports
- * nothing.
+ * plain row objects; it draws no randomness and touches no clock.
+ *
+ * ⭐ IT ASKS THE ONE SET OF DEFENCE FACTS BEFORE IT SAYS ANYTHING (lane DEFENSE,
+ * 2026-11-03). What stands, what tends the sick and how much food is stored come from
+ * `domain/defense/defenseFacts.js :: defenseFactsOf` — the live roster and the engine's
+ * own months — so a row never speaks of garrison pay where no garrison stands, of a
+ * hospital where there is one healer, or of no food where the record holds months of it.
+ * Its only import is that domain leaf, so the no-generator-edge reason below still holds.
  *
  * It lives here (dependency-free leaf) rather than in generators/defenseGenerator
  * so the eager Defense/Economics display path (domain/display/defenseDisplay.js
@@ -18,6 +24,17 @@
  * domain→generators edge in the defense surface. Verbatim extraction — behaviour
  * is byte-identical to its former home.
  */
+
+import { defenseFactsOf } from '../defense/defenseFacts.js';
+
+/**
+ * The healer named by what it is: a monastic house's infirmary, or a healer.
+ * @param {string|null} healerName the roster name from `defenseFactsOf`
+ * @returns {string}
+ */
+export function healerSubject(healerName) {
+  return /monaster|friary|infirmar/i.test(String(healerName || '')) ? 'The monastic infirmary' : 'A healer';
+}
 
 /**
  * @param {any} r A settlement object (reads `defenseProfile`, `economicState`,
@@ -32,15 +49,14 @@
  */
 export function buildThreatAssessment(r) {
   const d = r?.defenseProfile || {};
-  const inst = d.institutions || {};
   const scores = d.scores || {};
   const sp = r?.economicState?.safetyProfile || {};
   const f = r?.economicState?.compound?.inst || {};
   const threat = r?.config?.monsterThreat || 'frontier';
-  const hasWalls = (inst.walls || []).length > 0;
-  const hasGarrison = (inst.garrison || []).length > 0;
-  const hasMilitia = (inst.militia || []).length > 0;
-  const hasCharter = (inst.charter || []).length > 0;
+  const facts = defenseFactsOf(r);
+  const { hasWalls, hasGarrison, hasMilitia, hasCharter } = facts;
+  // The enclosure by its own kind: a palisade is never called walls, stone walls never a palisade.
+  const palisade = facts.wallKind === 'palisade';
   const result = [];
 
   const monColor = threat === 'plagued'
@@ -56,14 +72,17 @@ export function buildThreatAssessment(r) {
           ? 'Charter hall coordinates specialist monster response.'
           : 'No specialist monster hunters on retainer: the garrison handles everything.');
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
+      mon = (palisade ? 'Palisade' : 'Walls') + ' and citizen militia provide a viable but demanding posture in an embattled region. Watch rotations are thin. Simultaneous incursions will break coverage. '
         + (hasCharter
           ? 'Charter hall provides specialist backup.'
           : 'No specialist monster hunters.');
     } else if (hasCharter) {
       mon = 'No perimeter, but the charter hall provides specialist response for coordinated threats. Creatures that get past initial response reach homes directly.';
     } else if (hasWalls) {
-      mon = 'Walls exist but no organized force to sustain a watch rotation. The palisade creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
+      mon = (palisade ? 'A palisade stands' : 'Walls exist')
+        + ' but no organized force to sustain a watch rotation. The '
+        + (palisade ? 'palisade' : 'wall')
+        + ' creates a chokepoint but holding it requires people, and there are not enough for sustained watch.';
     } else if (hasGarrison) {
       mon = 'Military force present but no perimeter walls. The garrison engages in the open. Creatures can approach from any direction.';
     } else {
@@ -77,7 +96,7 @@ export function buildThreatAssessment(r) {
           : '')
         + 'Adequate for the threat level.';
     } else if (hasWalls && hasMilitia) {
-      mon = 'Palisade and militia are standard frontier resilience. Effective against most creature threats, strained by simultaneous incursions. '
+      mon = (palisade ? 'Palisade' : 'Walls') + ' and militia are standard frontier resilience. Effective against most creature threats, strained by simultaneous incursions. '
         + (hasCharter
           ? 'Charter hall provides specialist backup. '
           : '')
@@ -112,11 +131,14 @@ export function buildThreatAssessment(r) {
       : '#8b1a1a';
   let mil;
   if (hasWalls && hasGarrison) {
-    mil = 'Walls and professional garrison provide meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
+    mil = (palisade ? 'A palisade and a professional garrison provide' : 'Walls and professional garrison provide')
+      + ' meaningful deterrence against raiding and conventional assault. Not rated for sustained siege without significant supply stockpiles.';
   } else if (hasWalls && hasMilitia) {
-    mil = 'Walls with citizen militia: credible deterrence against raiders, inadequate against any professional force with siege capability.';
+    mil = (palisade ? 'A palisade with citizen militia' : 'Walls with citizen militia') + ': credible deterrence against raiders, inadequate against any professional force with siege capability.';
   } else if (hasWalls) {
-    mil = 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
+    mil = palisade
+      ? 'A palisade but no organized military force to man it. A determined attacker is over it with ladders and time.'
+      : 'Walls present but no organized military force to man them. A determined attacker takes the walls if they have ladders and time.';
   } else if (hasGarrison) {
     mil = 'Professional garrison without perimeter walls. Effective against raiders; cannot hold against a siege.';
   } else if (hasMilitia) {
@@ -164,11 +186,14 @@ export function buildThreatAssessment(r) {
       : '#8b1a1a';
   let econA;
   if (econScore >= 65) {
-    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and sustains garrison pay during prolonged engagement.';
+    econA = 'Strong economic base can absorb a sustained crisis. Tax revenue funds emergency measures and '
+      + (hasGarrison ? 'sustains garrison pay' : 'keeps the defence paid')
+      + ' during prolonged engagement.';
   } else if (econScore >= 40) {
     econA = 'Adequate economic resilience for a short-term crisis. A prolonged siege will begin straining reserves within months.';
   } else if (econScore >= 25) {
-    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and undermine garrison morale.';
+    econA = 'Chronic underfunding limits emergency response. A sustained crisis will exhaust reserves and '
+      + (hasGarrison ? 'undermine garrison morale.' : 'wear down the people who defend the place.');
   } else {
     econA = 'Economic base cannot support crisis response. Any sustained threat quickly overwhelms the capacity to respond.';
   }
@@ -178,14 +203,21 @@ export function buildThreatAssessment(r) {
     assess: econA,
   });
 
+  // The stored months are printed once, on the Logistics & Supply row; this row says what
+  // kind of store it is and never that there is none while the engine holds some.
+  const months = facts.storedFoodMonths;
   const disA = (f.hasGranary
     ? 'Granary provides food buffer. The community can absorb a bad harvest without immediate hardship.'
-    : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
-    + (f.hasHospital
+    : months !== null && months > 0
+      ? 'No granary. Household and common stores carry the community a short way into a bad harvest; a crop failure becomes hardship within the season.'
+      : 'No food reserves. A crop failure or supply disruption causes immediate hardship.')
+    + (facts.hasHospital
       ? ' Hospital infrastructure enables disease containment and systematic quarantine.'
-      : f.hasChurch
-        ? ' Clergy provide basic wound care: better than nothing, worse than a hospital.'
-        : ' No medical infrastructure. Plague spreads until it burns out.');
+      : facts.hasHealer
+        ? ' ' + healerSubject(facts.healerName) + ' treats the sick one at a time; an outbreak would outrun it.'
+        : f.hasChurch
+          ? ' Clergy provide basic wound care: better than nothing, worse than a hospital.'
+          : ' No medical infrastructure. Plague spreads until it burns out.');
   result.push({
     label: 'Disasters & Famine',
     color: '#1a4a5a',
