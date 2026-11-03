@@ -670,16 +670,15 @@ function npcsSlice(active) {
   const s = active || {};
   const culture = s?.config?.dominantCulture || s?.dominantCulture || s?.culture || null;
   const npcs = (s?.npcs || []).map(n => {
-    // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }
+    // Engine's `personality` is an object { dominant, flaw, modifier, tell, speech }.
+    // X-48 (the owner, 2026-11-03): NO LOOK, VOICE OR TELL ANYWHERE. The temperament and
+    // the flaw print; the nervous habit (`tell`) and the voice (`speech`) stay on the record
+    // and print nowhere, and neither does the look (`physical.build/feature/clothes`), so
+    // this slice no longer carries an `appearance` line. Every export reads this one slice
+    // (the PDF's NPC chapters and the Foundry journal), so the cut is made once, here.
     const p = n?.personality;
     const personalityStr = typeof p === 'string' ? p : (p && typeof p === 'object'
-      ? [p.dominant, p.flaw && `Flaw: ${p.flaw}`, p.tell && `Tell: ${p.tell}`, p.speech && `Speech: ${p.speech}`]
-          .filter(Boolean).join(' · ')
-      : null);
-    // Engine puts physical attributes under `physical`, NOT `appearance`
-    const ph = n?.physical || n?.appearance;
-    const appearanceStr = typeof ph === 'string' ? ph : (ph && typeof ph === 'object'
-      ? [ph.age && `${ph.age}`, ph.build, ph.feature, ph.clothes].filter(Boolean).join(' · ')
+      ? [p.dominant, p.flaw && `Flaw: ${p.flaw}`].filter(Boolean).join(' · ')
       : null);
     // Engine puts goals under `goal: { short, long }`, NOT `motivation`
     const g = n?.motivation || n?.goal;
@@ -735,7 +734,6 @@ function npcsSlice(active) {
       influenceDescription,
       blurb: n?.blurb || n?.description || null,
       personality: personalityStr,
-      appearance: appearanceStr,
       motivation: motivationStr,
       secrets: cleanSecrets,
       plotHooks: cleanHooks(n?.plotHooks),
