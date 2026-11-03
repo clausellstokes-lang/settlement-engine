@@ -18,6 +18,16 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — SIZE-2: GENERATED STORY TEXT NAMES THE PLACE BY ITS OWN TIER NOUN, THROUGH THE SIGNED DOOR (ODQ
+ *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 192 OF 525 ROWS MOVED (village 24, city 84,
+ *   metropolis 84; thorp, hamlet and town 0); the key set is identical. THE CAUSE, ONE (the SIZE ruling-2 code on this
+ *   branch: historyGenerator.js, narrativeText.js, the kernel's kept spans, arrivalScene.js's hook): the stored
+ *   history strings and the arrival hook speak the place's own noun, a string map after every draw, so only
+ *   history.* prose (lastingEffects 168 rows, descriptions 24) and arrivalScene (168) move. ATTRIBUTION, ZERO RESIDUE
+ *   BY CONSTRUCTION: written from the staged tree S4 = S3 + this cause, where S3 (FOOD-3's stage, its writes
+ *   committed) reproduces f1f24e86.. on all 525 rows. f1f24e86.. -> 1f402a82..
+ *
  * 2026-11-03 — FOOD-3: FOOD DIVERSITY — THE SOURCES A PLACE HAS, THE FAMINE THAT FAILS ONE NAMED SOURCE, THE FOODWAYS
  *   LINE FROM THE PLACE'S OWN TABLE, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
  *   docs/shift-records/2026-11-03-food-3-food-diversity.json; the cloud chair signs under the owner's delegation,
