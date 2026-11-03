@@ -390,11 +390,12 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // Then DEFENSE-2, the roster lines (ODQ §934.104; docs/shift-records/2026-11-03-defense-roster-lines.json), lane
     // DOORS: the generator master efa49945.. -> 7f1312d2.. (267 of 525 rows); the prose manifest did not move.
     // Then DEFENSE-2, the magic dependency (ODQ §934.104; docs/shift-records/2026-11-03-defense-magic-dependency.json),
-    // lane DOORS: the generator master 7f1312d2.. -> 4c42885b.. (256 of 525 rows).
+    // lane DOORS: the generator master 7f1312d2.. -> 4c42885b.. (256 of 525 rows) and the prose manifest
+    // 4b28e712.. -> 2865af22.. (512 rows).
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
       .toBe('4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('4b28e712960a5b8907595d81b5d1fa5b3bd72817630052e06f4856ea3ade732a');
+      .toBe('2865af22e1f59c9f5689537071662f4cfa14c8af921a9817f35f9a96238aa5a6');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
