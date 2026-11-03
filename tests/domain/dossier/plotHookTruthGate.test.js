@@ -72,6 +72,16 @@ describe('the plot hooks check the place before they speak — food', () => {
     expect(hooks.filter((h) => /\bstarving\b|\bbanditry\b/i.test(h.text))).toHaveLength(0);
   });
 
+  test('the chair\'s case: a very large place one per cent short with months in store never reads starving', () => {
+    // A metropolis 1,000 lb short out of 100,000 lb needed, holding 15 months of grain —
+    // the trace's own example (deriveSupplyRiskAnalysis returns the starving hook for it).
+    // One per cent short is the Secure band, and Secure licenses no famine sentence at all.
+    const hooks = collectPlotHooks(record({ tier: 'metropolis', band: 'Secure', months: 15, hooks: [STARVING] }));
+    expect(hooks.filter((h) => /\bstarving\b|\bbanditry\b/i.test(h.text))).toHaveLength(0);
+    // …and because the place is FED, it gets no replacement food hook either.
+    expect(hooks.filter((h) => h.category === 'economics')).toHaveLength(0);
+  });
+
   test('a Deficit band with fifteen months of grain is not starving either', () => {
     const hooks = collectPlotHooks(record({ tier: 'metropolis', band: 'Deficit', months: 15, hooks: [STARVING] }));
     expect(hooks.filter((h) => /\bstarving\b/i.test(h.text))).toHaveLength(0);
