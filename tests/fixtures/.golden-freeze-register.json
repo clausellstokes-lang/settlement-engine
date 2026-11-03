@@ -433,11 +433,11 @@
       "suite": "tests/property/momentumDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "277b599a588a3e1587e9f04c77124c55dc58c81aae9e970e90a6a9971be4322e",
+      "sha256": "71d7ebbe1e41035d0a706c4e67cdbeb91067e51894ad6ff4edaa244ed7de7e66",
       "rows": 3,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.104 of docs/OWNER_DECISION_QUEUE.md (THE COHERENCE AND SCALE WINDOW, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
