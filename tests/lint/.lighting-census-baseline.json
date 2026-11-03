@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "23dceff6070b95183ceb0c7ce4ced839fc62be0a",
-  "measuredBy": "the X-45 lane (the owner, 2026-11-02)",
-  "date": "2026-11-02",
-  "note": "X-45 and the lint cures of rounds two to three-b: the backing suite rewritten (catalogue walker, rules, ledger), the backs editor describe, the Power tab, document and spine pins, the anchor markers",
-  "files": 2816,
+  "measuredAtSha": "4ae3bcb44ccf6a5d4e66ba09f27dd9adeffbec40",
+  "measuredBy": "the cloud chair (Fable 5.1), master merged into the consolidation branch",
+  "date": "2026-11-03",
+  "note": "master (PR #71) brought tests/build/edgeVendorLock.test.js onto the branch; no marker moved",
+  "files": 2817,
   "parked": 362,
-  "credited": 2454,
-  "titles": 27145,
-  "suiteTitles": 7169
+  "credited": 2455,
+  "titles": 27148,
+  "suiteTitles": 7170
 }
