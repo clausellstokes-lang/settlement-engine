@@ -44,6 +44,8 @@ import { settlementWarStatus, settlementWarExhaustion, warExhaustionBand } from 
 import { settlementMobilization } from '../../domain/display/mobilizationStatus.js';
 import { settlementOccupation, occupierHoldings } from '../../domain/display/occupationStatus.js';
 import FaithSection from '../settlement/FaithSection.jsx';
+import { faithPanelModel } from '../settlement/faithPanelModel.js';
+import { faithReadingOf } from '../../domain/dossier/faithReading.js';
 import IconButton from '../primitives/IconButton.jsx';
 import Button from '../primitives/Button.jsx';
 
@@ -218,9 +220,19 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
 
   // Faith section PRESENCE mirrors WarFaithTab's faithWillRender: an embed
   // renders to everyone; free/anon get the teaser; premium + deity-free is
-  // FaithSection's HIDDEN mode ⇒ no section, no dead nav button.
-  const faithVisible = !!(settlement?.config?.primaryDeitySnapshot
-    && typeof settlement.config.primaryDeitySnapshot === 'object') || !isPremium;
+  // FaithSection's HIDDEN mode. A god is not the only faith, though: a church
+  // generation built (faithReadingOf(settlement).hasChurch) is faith too, so a
+  // premium, deity-free town with a church keeps the section and reads the
+  // faith line there, as FaithTab does. With neither: no section, no dead nav button.
+  const hasEmbed = !!(settlement?.config?.primaryDeitySnapshot
+    && typeof settlement.config.primaryDeitySnapshot === 'object');
+  const hasChurch = useMemo(() => faithReadingOf(settlement).hasChurch, [settlement]);
+  const churchLineOnly = isPremium && !hasEmbed && hasChurch;
+  const faithLine = useMemo(
+    () => (churchLineOnly ? (faithPanelModel(settlement).line || []).join(' ') : ''),
+    [churchLineOnly, settlement],
+  );
+  const faithVisible = hasEmbed || !isPremium || hasChurch;
 
   // Quick-nav targets are DOM ids (the overlay owns the document while open),
   // which keeps render free of ref reads.
@@ -427,7 +439,14 @@ export default function SessionMode({ settlement, saveId = null, onClose }) {
               the section and its nav entry disappear together. */}
           {faithVisible && (
             <section id="sf-session-faith" aria-label="Faith">
-              <FaithSection settlement={settlement} />
+              {churchLineOnly ? (
+                <>
+                  <SectionTitle>Faith</SectionTitle>
+                  <div data-testid="faith-line" style={{ color: BODY, fontFamily: serif, fontSize: proseFontSize(FS.sm, mobile), lineHeight: 1.5 }}>
+                    {faithLine}
+                  </div>
+                </>
+              ) : <FaithSection settlement={settlement} />}
             </section>
           )}
 
