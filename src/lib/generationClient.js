@@ -23,6 +23,16 @@
  *   (b) `protocol_mismatch` REJECTS rather than falling back. A retry would
  *       fetch the same stale cached script and mismatch again.
  *
+ * THE THIRD TRANSPORT, `remote` (docs/DESIGN_ENGINE_SERVICE.md "The client
+ * switch"): when the build carries VITE_ENGINE_REMOTE='true'
+ * (`engineRemote.js :: engineRemoteOpen`, closed unless explicitly opened) the
+ * request goes to the `engine-generate` edge function and the reply is the
+ * worker's result packet. It takes precedence over the worker flag, and it has
+ * NO fallback: a remote failure REJECTS with its typed code and the local
+ * engine never runs in its place (a town the service did not make must not be
+ * handed over as if it had). The service relays no steps, so `onStep` is not
+ * called on this path; the caller stamps receipt times off the packet's list.
+ *
  * DELIBERATELY HAS NO IMPORT OF THE CORE, static or dynamic — the wire-lean
  * law. The caller supplies `fallback`, so on the happy path the main thread
  * never fetches the engine chunk at all; only a fallback pays for it.
@@ -39,6 +49,7 @@ import {
   GENERATION_STEP_WATCHDOG_MS,
   GENERATION_WORKER_CONTRACT,
 } from './generationProtocol.js';
+import { engineRemoteOpen, runRemoteGeneration } from './engineRemote.js';
 
 /** The abort rejection, minted the same way on every cancel path. */
 function cancelledError() {
@@ -63,7 +74,10 @@ function defaultWorkerFactory() {
  *   onStep?: (step: any) => void,
  *   signal?: {aborted?: boolean, addEventListener?: Function, removeEventListener?: Function},
  *   workerFactory?: () => any,
- * }} opts
+ *   remote?: boolean,
+ *   remoteTransport?: (request: any, opts: {signal?: any}) => Promise<any>,
+ * }} opts `remote` defaults to the build flag (`engineRemoteOpen()`); it and
+ *   `remoteTransport` are seams for tests.
  * @returns {Promise<{result: any, outcome: string}>}
  */
 export async function runGeneration(request, {
@@ -72,10 +86,13 @@ export async function runGeneration(request, {
   onStep,
   signal,
   workerFactory = defaultWorkerFactory,
+  remote = engineRemoteOpen(),
+  remoteTransport = runRemoteGeneration,
 } = /** @type {any} */ ({})) {
   const inThread = async (outcome) => ({ result: await fallback(request, onStep), outcome });
 
   if (signal?.aborted) throw cancelledError();
+  if (remote) return { result: await remoteTransport(request, { signal }), outcome: 'remote' };
   if (!flagOn) return inThread('in-thread:flag-off');
   // The `Worker` probe asks whether the DEFAULT transport can exist (Node /
   // vitest / SSR have no Worker constructor). It must not veto a transport the
