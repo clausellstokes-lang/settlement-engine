@@ -41,6 +41,7 @@
 import { economyStateProse } from '../../domain/display/stateProse/economyStateProse.js';
 import { deriveExportPosture } from '../../domain/display/exportPosture.js';
 import { deriveNotableAbsences } from '../../domain/display/servicesDisplay.js';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 
 /**
  * THE SILENT DESK — what a free, anonymous viewer gets, and what a host gets before it has
@@ -83,7 +84,7 @@ export const SILENT_ECONOMY_DESK = Object.freeze({
  * could never draw it. Two tabs disagreeing about who is reading would be the real defect.
  *
  * @param {object|null|undefined} settlement
- * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, tier?: unknown, publicDossier?: boolean, playerView?: boolean,
  *   foodBalance?: object|null, granaryOutlook?: object|null, flowDrift?: object|null,
  *   impairedInstitution?: string|null}} [options]
  *   `impairedInstitution` is ONE house out of the impairment sets ServicesTab already builds
@@ -118,7 +119,11 @@ export function economyDeskRead(settlement, options = {}) {
       // 4,214 of the manifest's 72,240 cells to `vid: null`. So a surface that wants the
       // settlement's voice says so in its bag, and a recorder that wants the corpus's own
       // words simply does not — which is the same rule `composeStateProse` states.
-      tierNoun: options.tierNoun ?? null,
+      // ⭐ A SCREEN SAYS ITS TIER (SIZE lane, 2026-11-03): every dossier tab that draws this desk
+      // forwards `tier`, resolved here through `tierNounFor`, so no tab passes a raw word and no
+      // tab can forget the noun by forgetting an import. Still FORWARDED: a caller that states
+      // neither (the recorder) gets the corpus's own words.
+      tierNoun: options.tierNoun ?? tierNounFor(options.tier),
     },
   );
 }

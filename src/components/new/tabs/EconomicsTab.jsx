@@ -310,7 +310,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // DS-GEN-18 (`economics.craftReason`) — the general desk's ONE caller with that reader's own
   // gate, memoised (ARCH §4.1, X-F9) ABOVE the early return (rules-of-hooks). FOUR LINES, as
   // many as the block it replaced: this file's thirteen prose-numerics rows are keyed on LINE.
-  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView }).economics.craftReasonLine, [s, publicDossier, playerView]);
+  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
@@ -370,7 +370,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // economyDeskRead.js now — four tabs draw this desk and the walker's ARM 2 admits exactly
   // one file that calls it, so the call cannot live in a tab any more. Datum is untouched:
   // situationDesc, the tiles and their sub-lines never read the desk.
-  const deskProse = economyDeskRead(s, { publicDossier, playerView, foodBalance: fbal, granaryOutlook: granary, flowDrift });
+  const deskProse = economyDeskRead(s, { publicDossier, playerView, tier: s?.tier, foodBalance: fbal, granaryOutlook: granary, flowDrift });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
   // The food GLANCE position (DS-ECO-2), read at the Food Security section since the Food
   // tile was cut (T2-1); see EconomicsGlance.jsx for why the read stays.

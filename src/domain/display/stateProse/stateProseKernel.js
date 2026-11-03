@@ -538,6 +538,72 @@ export function hasStateProsePool(corpus, blockId, poolKey) {
 const GENERIC_NOUN = /(^|[^\p{L}\p{N}_])(The|the|This|this) town(['’]s)?(?=[^\p{L}\p{N}_]|$)/gu;
 
 /**
+ * THE PHRASES THAT KEEP 'town' ON A PLACE THAT IS NOT A TOWN — measured, never guessed (SIZE
+ * lane, 2026-11-03, root-cause failure 8). Over the six dossier corpora, 63 of the 69
+ * indefinite 'a/every/an … town' clauses describe the settlement itself ("This is a town that
+ * sells."), so the indefinite reference moves like the definite one. What stays is this list:
+ * each entry is a phrase the corpus or the generated record actually carries, and each one
+ * points at somewhere ELSE (a comparison), at no place at all (an idiom), or names an office
+ * rather than the place (a title). A plural ('towns') is never a self-reference and is not
+ * listed: no rule here ever moves one.
+ *
+ * Matched case-insensitively on word boundaries; a reference inside a kept span is left as
+ * written by `speakTierNoun` and is not a finding for `tierNounFindings`.
+ * @type {ReadonlyArray<Readonly<{phrase: string, why: string}>>}
+ */
+export const TIER_NOUN_KEPT = Object.freeze([
+  Object.freeze({ phrase: 'a larger town', why: 'comparison: general DS corpus, "what a larger town does with buildings, this one does with acquaintance"' }),
+  Object.freeze({ phrase: 'a town with courts', why: 'comparison: defense DS corpus, the stranger contrasts this place with one that has courts' }),
+  Object.freeze({ phrase: 'a comfortable town', why: 'comparison: general DS corpus, "which it is not in a comfortable town"' }),
+  Object.freeze({ phrase: 'a town without stores', why: 'comparison: general DS corpus, "a crisis in a town without stores is, here, an expensive season"' }),
+  Object.freeze({ phrase: 'a farming town', why: 'comparison (simile): power DS corpus, "the way a farming town watches the sky"' }),
+  Object.freeze({ phrase: 'a town with the same neighbours', why: 'comparison (counterfactual): general DS corpus' }),
+  Object.freeze({ phrase: 'one town\'s worth', why: 'a measure of conviction, not this place: warFaith DS corpus' }),
+  Object.freeze({ phrase: 'in any town', why: 'a generalisation over all places: the miller line in domain/display/institutionVocabulary.js' }),
+  Object.freeze({ phrase: 'a nearby town', why: 'somewhere else: NPC secrets in data/npcData.js' }),
+  Object.freeze({ phrase: 'neither town', why: 'a pair: this place and its counterpart together (general and warFaith DS corpora, DS-REL lines)' }),
+  Object.freeze({ phrase: 'through town', why: 'the idiom "the way through town" carries no determiner and no tier (general DS corpus)' }),
+  Object.freeze({ phrase: 'in town', why: 'the idiom "in town" (present locally) carries no determiner and no tier' }),
+  Object.freeze({ phrase: 'town crier', why: 'an office title (Herald/Town Crier), not the place: the roster names it at every size' }),
+]);
+
+/**
+ * The spans of `line` covered by a kept phrase, as [start, end) pairs.
+ * @param {string} line
+ * @returns {Array<[number, number]>}
+ */
+export function tierNounKeptSpans(line) {
+  /** @type {Array<[number, number]>} */
+  const spans = [];
+  for (const { phrase } of TIER_NOUN_KEPT) {
+    const escaped = phrase.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/'/g, '[\'’]');
+    const rx = new RegExp(`(?<=^|[^\\p{L}\\p{N}_])${escaped}(?=[^\\p{L}\\p{N}_]|$)`, 'giu');
+    for (const m of line.matchAll(rx)) spans.push([m.index ?? 0, (m.index ?? 0) + m[0].length]);
+  }
+  return spans;
+}
+
+/**
+ * An indefinite, quantified or modified singular reference: 'a town', 'an ordinary town's',
+ * 'every town', 'a poorly-paid, poorly-policed town', 'the whole town', 'the wrong town'.
+ * Up to two modifier words may stand between the determiner and the noun; a modifier that is
+ * itself a determiner or a function word ('a margin the town') refuses the read, so only the
+ * definite rule above moves such a line. Positive lookarounds only, as at `GENERIC_NOUN`.
+ */
+const MODIFIED_NOUN = /(^|[^\p{L}\p{N}_])(A|a|An|an|Every|every|The|the)((?: [\p{L}]+(?:-[\p{L}]+)*,?){0,2}) town(['’]s)?(?=[^\p{L}\p{N}_]|$)/gu;
+
+/** The adjectives a DEFINITE modified reference may carry: measured over the corpus. */
+const DEFINITE_MODIFIERS = new Set(['whole', 'very', 'wrong', 'sort of']);
+
+/** Words that, between the article and the noun, mean the noun is not the article's head. */
+const NOT_A_MODIFIER = new Set([
+  'the', 'this', 'that', 'these', 'those', 'a', 'an', 'its', 'his', 'her', 'their', 'our', 'your',
+  'of', 'and', 'or', 'but', 'nor', 'in', 'on', 'at', 'to', 'for', 'with', 'by', 'from', 'as',
+  'than', 'which', 'who', 'whom', 'whose', 'what', 'every', 'one', 'no', 'not', 'is', 'was',
+  'are', 'were', 'be', 'it', 'he', 'she', 'they', 'there', 'here', 'if', 'so',
+]);
+
+/**
  * Speak one drawn line in the settlement's own tier noun.
  *
  * @param {unknown} line one sentence (or one composed unit) as the corpus wrote it
@@ -552,7 +618,7 @@ export function speakTierNoun(line, tierNoun) {
   // NO NOUN, OR THE CORPUS'S OWN NOUN ⇒ the line by identity. A town is the corpus's voice
   // already, so it is not merely equal to what it was: it is the same string.
   if (!noun || noun === 'town') return line;
-  return line.replace(
+  const definite = line.replace(
     GENERIC_NOUN,
     /**
      * @param {string} _match @param {string} before @param {string} determiner
@@ -560,4 +626,34 @@ export function speakTierNoun(line, tierNoun) {
      */
     (_match, before, determiner, possessive) => `${before}${determiner} ${noun}${possessive || ''}`,
   );
+  // The modified and indefinite references (SIZE lane, 2026-11-03), each one refused where it
+  // sits inside a kept phrase (`TIER_NOUN_KEPT`). A HAND-DRIVEN SCAN, not `replace`: a refused
+  // candidate ('the ones a town') must not consume the reference inside it ('a town'), so a
+  // refusal steps past its own determiner only and the scan resumes there.
+  const kept = tierNounKeptSpans(definite);
+  const scan = new RegExp(MODIFIED_NOUN.source, 'gu');
+  let out = '';
+  let copied = 0;
+  for (let m = scan.exec(definite); m; m = scan.exec(definite)) {
+    const [match, before, determiner, modifiers, possessive] = m;
+    const start = m.index + before.length;
+    const end = m.index + match.length;
+    const words = modifiers.trim().split(' ').filter(Boolean).map((w) => w.replace(/,$/, '').toLowerCase());
+    const isDefinite = determiner === 'The' || determiner === 'the';
+    const refused = kept.some(([a, b]) => start < b && a < end)
+      || (isDefinite ? !DEFINITE_MODIFIERS.has(words.join(' ')) : words.some((w) => NOT_A_MODIFIER.has(w)));
+    if (refused) {
+      scan.lastIndex = start + determiner.length;
+      continue;
+    }
+    // With no modifier the article agrees with the noun itself ('a hamlet', never 'an hamlet').
+    let spoken = determiner;
+    if (words.length === 0 && /^an?$/i.test(determiner)) {
+      const article = /^[aeiou]/i.test(noun) ? 'an' : 'a';
+      spoken = determiner.charAt(0) === 'A' ? article.charAt(0).toUpperCase() + article.slice(1) : article;
+    }
+    out += `${definite.slice(copied, start)}${spoken}${modifiers} ${noun}${possessive || ''}`;
+    copied = end;
+  }
+  return copied === 0 ? definite : out + definite.slice(copied);
 }
