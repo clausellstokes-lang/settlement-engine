@@ -308,6 +308,15 @@
  *   measurement (W8's exact readings): `DUPLICATES.permille` 143/221/85/64/51/58 → 130/204/88/64/51/58 (derived ceilings 229/354/136/103/82/93 → 208/327/141/103/82/93).
  *   CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-03 — SIZE-3, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-size-3-guild-market.json; the chair signs by the owner's delegation, vetoable).
+ *   The merchant guild is no longer seated over a market-less thorp, hamlet or village, so 39 of the 504 rows draw
+ *   a different town (2 of them sampled by W2; no argmax row moves). Written from the staged tree S5 (S4 green on
+ *   the committed corpus). ONE PASS: the per-tier maximum roster reads 12/25/42/69/83/86 again, so
+ *   CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS does not move. `FROZEN` does not move (W4 green). Re-keyed by
+ *   measurement (W8's exact readings): `DUPLICATES.permille` 130/204/88/64/51/58 → 126/201/89/64/51/58 (derived ceilings 208/327/141/103/82/93 → 202/322/143/103/82/93).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -425,9 +434,9 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 130 }),
-  hamlet: Object.freeze({ permille: 204 }),
-  village: Object.freeze({ permille: 88 }),
+  thorp: Object.freeze({ permille: 126 }),
+  hamlet: Object.freeze({ permille: 201 }),
+  village: Object.freeze({ permille: 89 }),
   town: Object.freeze({ permille: 64 }),
   city: Object.freeze({ permille: 51 }),
   metropolis: Object.freeze({ permille: 58 }),
@@ -1112,7 +1121,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // readings by the same operator.
     // 234/344/132/100/80/90 -> 229/354/136/103/82/93 on 2026-11-03: FOOD-2 (header), the same operator.
     // 229/354/136/103/82/93 -> 208/327/141/103/82/93 on 2026-11-03: FOOD-3 (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([208, 327, 141, 103, 82, 93]);
+    // 208/327/141/103/82/93 -> 202/322/143/103/82/93 on 2026-11-03: SIZE-3 (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 322, 143, 103, 82, 93]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
