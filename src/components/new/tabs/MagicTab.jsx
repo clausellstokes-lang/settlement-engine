@@ -10,7 +10,7 @@
  * only — no store reads, no worldState, no leak surface.
  */
 
-import { deriveMagicPosture } from '../../../domain/display/dossierViewModel.js';
+import { deriveMagicPosture, deriveMagicRelianceView, magicRelianceDeskSettlement } from '../../../domain/display/dossierViewModel.js';
 import { describeDeityEffects } from '../../../domain/display/deityEffects.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, SLATE, sans, SP } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
@@ -79,15 +79,24 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
   // nothing here is true (T2-24), so the desk is not drawn and the block does not render.
   // The block carries the page's only first-survey stamp: `magicDependency` is a G5
   // generation-frozen record (owner-queue #28, one label per page, X-8).
+  //
+  // ⭐ THE ONE RELIANCE READING DECIDES THE BLOCK (lane MAGIC, chair ruling 2, 2026-11-03).
+  // The frozen `defenseProfile.magicDependency` flag is set by the defence generator only
+  // during a siege, famine or plague, so a city of mages exporting enchanted goods printed
+  // "Nothing structural ... depends on arcane work" six lines under "Economic role: integral".
+  // The desk is therefore handed the settlement with that flag READ FROM the view model's one
+  // reading (relied-upon or integral ⇒ true), and the block's own fallback reads the same.
+  // The siege/famine/plague flag no longer decides anything on this tab.
+  const reliance = deriveMagicRelianceView(settlement);
   const magicProse = publicDossier || magicWorksAt({ settlement }) === false
     ? Object.freeze({ arcaneReliance: null })
-    : defenseMagicDependencyProse(settlement, {
+    : defenseMagicDependencyProse(magicRelianceDeskSettlement(settlement), {
       seed: String(settlement?._seed ?? settlement?.id ?? ''),
       audience: playerView ? 'player' : 'dm',
       tierNoun: tierNounFor(settlement.tier),
     });
   const magicLine = drawnAtMount(MAGIC_DEPENDENCY_MOUNT, magicProse.arcaneReliance)?.sentence || null;
-  const magicFrozen = posture.magicExists && !!settlement?.defenseProfile?.magicDependency;
+  const magicFrozen = posture.magicExists && reliance.reliesOnMagic;
 
   const deity = settlement?.config?.primaryDeitySnapshot || null;
   // The magic-legality coupling line, surfaced only when a MAJOR deity regulates.
@@ -133,6 +142,11 @@ export default function MagicTab({ settlement, publicDossier = false, playerView
               background: CARD_HDR, padding: `${SP.sm}px ${SP.md}px`, borderBottom: `1px solid ${BORDER}`,
             }}>Roles</div>
             <div style={{ padding: `${SP.xs}px ${SP.md}px` }} data-testid="magic-roles">
+              {reliance.shown && (
+                <div data-testid="magic-reliance" style={{ fontSize: proseFontSize(FS.sm, mobile), color: INK, fontWeight: 700, padding: `${SP.xs}px 0` }}>
+                  Reliance on magic: {reliance.word}
+                </div>
+              )}
               {posture.roleLines.map((line, i) => (
                 <div key={i} data-role-line style={{ fontSize: proseFontSize(FS.sm, mobile), color: BODY, padding: `${SP.xs}px 0` }}>{line}</div>
               ))}

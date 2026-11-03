@@ -23,7 +23,11 @@ import { deriveAllFactionProfiles } from './factionProfile.js';
 import { liveInstitutions } from './institutions/institutionRoster.js';
 import { deriveCausalState } from './causalState.js';
 import { deriveCapacityProfile } from './capacityModel.js';
-import { ARCANE_INSTITUTION_PATTERN as ARCANE_PATTERN, magicLedger } from './magicLedger.js';
+import { magicLedger } from './magicLedger.js';
+// Lane MAGIC (chair rulings 2 and 3, 2026-11-03): WHO PRACTISES is the one census in
+// magicReliance.js (catalogue identity, never this module's old private name regex), and
+// HOW MUCH THE PLACE RELIES ON MAGIC is its one reading, which caps every role line below.
+import { deriveMagicReliance, magicPractitioners, practisingInstitutions } from './magicReliance.js';
 import { HEALING_INSTITUTION_PATTERN as HEALING_PATTERN } from './healingLedger.js';
 import { nativeSemanticName } from './content/customContentSemanticAuthority.js';
 // Phase 4 W-F5 stage 2 (axis retirement re-plumb): temper is DERIVED from the
@@ -65,7 +69,8 @@ const ROLE_BANDS = Object.freeze([
   'absent', 'occasional', 'common', 'integral',
 ]);
 
-// ARCANE_PATTERN + HEALING_PATTERN now imported (single canonical matchers).
+// HEALING_PATTERN imported (single canonical matcher). The arcane side reads the practitioner
+// census (`practisingInstitutions`), not a name pattern.
 
 /** @typedef {import('./factionProfile.js').FactionProfile} FactionProfile */
 /** @typedef {{ source: string, effect: string, reason: string }} MagicContributor */
@@ -114,7 +119,7 @@ function deriveAvailability(settlement, contributors) {
   contributors.push({ source: 'config.magicLevel', effect: 'baseline', reason: `Magic level: ${magic}.` });
 
   // Arcane institutions raise availability one step
-  const arcane = institutionsByPattern(settlement, ARCANE_PATTERN);
+  const arcane = practisingInstitutions(settlement);
   if (arcane.length >= 1) {
     contributors.push({
       source: 'institutions',
@@ -185,7 +190,7 @@ function deriveLegality(settlement, profiles, contributors) {
  */
 function deriveInstitutionalControl(settlement, profiles, contributors) {
   const arcane = profiles.find(p => p.archetype === 'arcane');
-  const arcaneInst = institutionsByPattern(settlement, ARCANE_PATTERN);
+  const arcaneInst = practisingInstitutions(settlement);
   if (arcane && arcane.power >= 30 && arcaneInst.length >= 1) {
     contributors.push({
       source: arcane.id,
@@ -318,8 +323,14 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
   // reach 'integral'; legacy 'pervasive' configs are unchanged (both canon to 'high').
   const topBand = magicLedger(settlement).magicLevel === 'high';
   const arcanePower = profiles.find(p => p.archetype === 'arcane')?.power || 0;
-  const arcaneInstCount = institutionsByPattern(settlement, ARCANE_PATTERN).length;
+  const arcaneInstCount = practisingInstitutions(settlement).length;
+  const practitionerCount = magicPractitioners(settlement).length;
   const healingInstCount = institutionsByPattern(settlement, HEALING_PATTERN).length;
+  // ⛔ THE SLIDER ALONE NEVER SAYS INTEGRAL (lane MAGIC, chair ruling 2). A role reaches
+  // 'integral' only where the one reliance reading is 'integral' — a practitioner AND a
+  // dependent on the record. Before, the dial at 66 turned "occasional" into "integral" in a
+  // thorp with no practitioner, no arcane institution and no arcane faction.
+  const relianceIntegral = deriveMagicReliance(settlement).reading === 'integral';
 
   /**
    * @param {string} name
@@ -328,7 +339,7 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
    * @returns {string}
    */
   function role(name, present, integral) {
-    if (integral) {
+    if (integral && relianceIntegral) {
       contributors.push({ source: 'magicProfile', effect: `${name}_integral`, reason: `${name} role of magic is integral to settlement function.` });
       return 'integral';
     }
@@ -342,7 +353,7 @@ function deriveRoles(settlement, profiles, capacity, contributors) {
     return 'absent';
   }
 
-  const economic     = role('economic',     arcanePower >= 30 || arcaneInstCount >= 1, topBand);
+  const economic     = role('economic',     arcanePower >= 30 || practitionerCount >= 1, topBand);
   const military     = role('military',     arcanePower >= 35, topBand && arcanePower >= 50);
   const medical      = role('medical',      healingInstCount >= 1 && magic !== 'rare' && magic !== 'low', healingInstCount >= 2 && topBand);
   const infrastructure = role('infrastructure', arcaneInstCount >= 1, topBand && arcaneInstCount >= 1);
@@ -422,7 +433,7 @@ export function deriveMagicProfile(settlement) {
   //     premise to satisfy a display rule would trade one lie for another.
   const ledger = magicLedger(settlement);
   if (ledger.present && ledger.magicLevel === 'none'
-      && institutionsByPattern(settlement, ARCANE_PATTERN).length === 0) {
+      && practisingInstitutions(settlement).length === 0) {
     return {
       magicExists: true,
       availability: 'absent',

@@ -26,6 +26,7 @@
 import { cleanNum } from './placeholders.js';
 import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
+import { deriveMagicReliance, magicWorksAt } from '../magicReliance.js';
 import { formatCount } from '../formatNumber.js';
 // The export-posture derivation lives in its own dependency-free leaf so the
 // EAGER deriveSystemState.js can reach it without dragging this whole display
@@ -43,7 +44,6 @@ import { hasOpenTreasury, treasuryBandOf } from '../worldPulse/treasury.js';
 // the literals they replace. This module returns the chip's accent (J-T2-E) because
 // EconomicsTab.jsx sits exactly on its 600-line ceiling, so the colour has to live here.
 import { swatch } from '../../design/tokens.js';
-
 export { deriveExportPosture } from './exportPosture.js';
 // ODQ §934.20 — THE FOOD BALANCE BAR'S GEOMETRY, beside the food FIGURES this file
 // already derives. The bar and the sentence under it are one fact drawn twice, so
@@ -570,6 +570,7 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     exportPosture: deriveExportPosture(settlement),
     viability: deriveViability(settlement),
     magic: deriveMagicPosture(settlement),
+    magicReliance: deriveMagicRelianceView(settlement),
     blockade: deriveBlockadeRelief(settlement),
     headcounts: deriveHeadcounts(settlement),
     prosperity: deriveProsperityPosture(settlement),
@@ -577,4 +578,84 @@ export function deriveDossierViewModel(settlement, { aiOverlay: _aiOverlay = nul
     defense: deriveDefensePosture(settlement),
     topExport: deriveTopExport(settlement),
   };
+}
+
+/**
+ * ⭐ ONE PREDICATE, ASKED ONCE (lane MAGIC, chair ruling 1, 2026-11-03). Every dossier row
+ * that grades or describes magic asks the world's one answer, `magicWorksAt`, THROUGH THIS
+ * GATE, and where magic does not work the row is ABSENT: no "Critical", no "Adequate", no
+ * row. The Overview's Systems Health bars, the Foundations grid and the reliance rows hand
+ * their whole row list here, so a row added to any of those lists is asked too. A row is a
+ * magic row when its key names magic (`magical`, `magical_stability`, `magicReliance`):
+ * the key is the row's own identity, so a new magic row cannot slip past by its label.
+ *
+ * Why this was needed: the generator already scored magic 0 and dropped it from the
+ * readiness average in historical mode, but the Overview still drew "Magical Capability ·
+ * Critical" and Foundations "Magical stability · Adequate" on 36 of 36 magic-off
+ * settlements (docs/GENERATION_ROOT_CAUSES_2026-11-02.md, appendix 3, cause 1).
+ */
+const MAGIC_ROW_KEY = /magic/i;
+
+/**
+ * Is this row key a magic row?
+ * @param {unknown} key
+ * @returns {boolean}
+ */
+export function isMagicRowKey(key) {
+  return MAGIC_ROW_KEY.test(String(key ?? ''));
+}
+
+/**
+ * The row list with every magic row removed where magic does not work; the list unchanged
+ * where it does.
+ * @template {object} R
+ * @param {unknown} settlement
+ * @param {readonly R[]} rows
+ * @param {(row: R) => unknown} [keyOf]  defaults to the row's `key`
+ * @returns {R[]}
+ */
+export function magicRowsGated(settlement, rows, keyOf = (row) => /** @type {{ key?: unknown }} */ (row).key) {
+  const list = Array.isArray(rows) ? [...rows] : [];
+  if (magicWorksAt({ settlement })) return list;
+  return list.filter((row) => !isMagicRowKey(keyOf(row)));
+}
+
+/**
+ * The reliance reading as the dossier prints it (lane MAGIC, chair ruling 2): ONE reading,
+ * derived once in `domain/magicReliance.js`, printed by Overview, Magic and Foundations in
+ * this one word. `shown` is false where magic does not work (the gate above), so no tab
+ * prints a reliance row in historical mode.
+ * @param {DossierSettlementView | null | undefined} settlement
+ * @returns {{ reading: string, word: string, shown: boolean, practitioners: string[], dependents: string[], reliesOnMagic: boolean }}
+ */
+export function deriveMagicRelianceView(settlement) {
+  const r = deriveMagicReliance(/** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (settlement)));
+  return {
+    reading: r.reading,
+    word: r.word,
+    shown: magicRowsGated(settlement, [{ key: 'magicReliance' }]).length > 0,
+    practitioners: r.practitioners,
+    dependents: r.dependents,
+    reliesOnMagic: r.reading === 'relied-upon' || r.reading === 'integral',
+  };
+}
+
+/**
+ * The settlement as the DS-DEF-9 reliance desk must read it: its `magicDependency` flag
+ * READ FROM the one reliance reading (relied-upon or integral ⇒ true), not from the frozen
+ * defence flag, which the defence generator sets only during a siege, famine or plague. The
+ * Magic tab hands the desk this view, so the reliance sentence and the role lines above it
+ * answer from one reading (lane MAGIC, chair ruling 2).
+ * @template {object} S
+ * @param {S} settlement
+ * @returns {S}
+ */
+export function magicRelianceDeskSettlement(settlement) {
+  const rec = /** @type {Record<string, unknown>} */ (settlement || {});
+  const defenseProfile = /** @type {Record<string, unknown>} */ (rec.defenseProfile || {});
+  const reliance = deriveMagicRelianceView(/** @type {DossierSettlementView} */ (/** @type {unknown} */ (rec)));
+  return /** @type {S} */ (/** @type {unknown} */ ({
+    ...rec,
+    defenseProfile: { ...defenseProfile, magicDependency: reliance.reliesOnMagic },
+  }));
 }
