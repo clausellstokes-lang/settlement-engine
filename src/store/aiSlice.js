@@ -33,7 +33,11 @@ import { persistSaveUpdate } from './campaignSliceShared.js';
 import { settlementFingerprint } from '../lib/settlementFingerprint.js';
 import { getAiCostForModel, isFastModelPreference } from '../config/pricing.js';
 import { track, EVENTS } from '../lib/analytics.js';
-import { captureFingerprint } from '../lib/researchCapture.js';
+// researchCapture.js is reached through import() only (captureAiPolished below), the house
+// idiom saveMoments.js / settlementRenameHelpers.js / canonLifecycleTelemetry.js already use.
+// A static edge here was the ONE eager path into structuralFingerprint.js -> plotHooks.js ->
+// coherence/hookTruth.js + dossier/hookLines.js, and the first paint paid for all of it
+// (FIRSTPAINT, 2026-11-03: +19,922 B at the HOOKS compose; tests/build/vendorPdfLazy.test.js).
 // The chronicle limits / entry constructors and the canon gate moved with
 // _appendChronicleEntry's body into ./aiChronicleAppend.js.
 import {
@@ -141,6 +145,19 @@ async function buildDailyLifeRelationshipMemory(state, saveId) {
     console.warn('[daily-life-memory] failed to build relationship context', error);
     return null;
   }
+}
+
+/**
+ * Structural snapshot at the ai-polish lifecycle moment (consent-gated, best-effort). The
+ * save is read by the caller at the moment itself; only the capture module loads lazily.
+ * @param {Object} result   the polished settlement
+ * @param {string} saveId    the saved-settlement uuid
+ * @param {Object | null} save  the save envelope, read at the moment
+ */
+function captureAiPolished(result, saveId, save) {
+  import('../lib/researchCapture.js').then(({ captureFingerprint }) => {
+    captureFingerprint('ai_polished', result, { settlementUuid: saveId, save: save || undefined });
+  }).catch(() => { /* research capture is best-effort */ });
 }
 
 export const createAiSlice = (set, get) => ({
@@ -493,10 +510,7 @@ export const createAiSlice = (set, get) => ({
       reportVerifier('narrative', verificationN);
       // Structural snapshot at the ai-polish lifecycle moment (consent-gated,
       // best-effort). saveId is a saved-settlement uuid here (gated above).
-      captureFingerprint('ai_polished', result, {
-        settlementUuid: saveId,
-        save: get().savedSettlements.find(s => s.id === saveId) || null,
-      });
+      captureAiPolished(result, saveId, get().savedSettlements.find(s => s.id === saveId) || null);
       // Wave E1 — 'narrate' milestone on the generation-id spine (fire-and-forget).
       import('../lib/generationTelemetry.js').then(({ recordGenerationMilestone }) => {
         recordGenerationMilestone('narrate', settlement, {
@@ -932,10 +946,7 @@ export const createAiSlice = (set, get) => ({
         failed_field_count: Array.isArray(failedFields) ? failedFields.length : 0,
       });
       reportVerifier('progression', verificationP);
-      captureFingerprint('ai_polished', result, {
-        settlementUuid: saveId,
-        save: get().savedSettlements.find(s => s.id === saveId) || null,
-      });
+      captureAiPolished(result, saveId, get().savedSettlements.find(s => s.id === saveId) || null);
 
       // Persist the evolved narrative. Daily life is carried through
       // unchanged — progression v1 doesn't touch it.
