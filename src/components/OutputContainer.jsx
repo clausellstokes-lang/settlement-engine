@@ -72,8 +72,9 @@ import DossierGroupTabStrip from './dossier/DossierGroupTabStrip.jsx';
 import {
   ChronicleTab, DMCompassTab, DailyLifeTab, DefenseTab, DeityAssignmentPanel, EconomicsTab, FaithTab, HistoryTab,
   MagicTab, NPCsTab, NotesTab, OverviewTab, PlotHooksTab, PowerTab, RelationshipsTab, ResourcesTab, RumorsTab,
-  ServicesTab, SubstrateTab, TraditionsTab, VersionsTab, ViabilityTab, WarTab, InstitutionsTab,
+  ServicesTab, SubstrateTab, TraditionsTab, VersionsTab, ViabilityTab, WarTab, InstitutionsTab, CrisisTab,
 } from './dossier/dossierLazyTabs.js';
+import { CRISIS_TONE } from './new/tabs/tabPalette.js';
 
 
 // P102 / D-1 — Thematic group tabs façade (spec §8: Summary / Systems / World /
@@ -101,7 +102,8 @@ export const TAB_GROUPS = Object.freeze({
   // X-5: the DM Summary web tab (`summary`) is REMOVED; its composer stays for Table View,
   // Session Mode and the PDF chapter. X-12: `substrate` (labelled Foundations) is the Summary
   // group's second tab, out of Systems; the id stays so deep links keep their key.
-  summary: { label: 'Summary', tabs: ['overview', 'substrate', 'plot_hooks', 'dm_compass'] },
+  // The Crisis tab (docs/DESIGN_CRISIS_TAB.md) stands beside the Overview, and only in a crisis.
+  summary: { label: 'Summary', tabs: ['overview', 'crisis', 'substrate', 'plot_hooks', 'dm_compass'] },
   // T1-14 (the owner, 2026-10-30): the Institutions tab, the roster house by house, beside
   // Services. THE OWNER, 2026-11-01 (ODQ §934.103): "Put institutions first then services. I
   // think that these are their individual places" — Institutions leads, Services follows, and
@@ -531,7 +533,13 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
   // dossier stays clean. Presence is tier-gated the SAME way FaithSection's
   // CONTENT is — it never leaks a name.
   const hasFaithTab = !!(deityEmbed && typeof deityEmbed === 'object') || (!viewerIsPremium && !publicDossier);
+  // THE CRISIS TAB (the owner, 2026-11-03: "the tab only appears when there is a crises"): registered
+  // only while a stress entry is active, for the DM alone (its cast names who exploits and who is
+  // blamed), painted with the criminal mark. The presence read stays inline: the page's composer
+  // is lazy-only. Reuses the already-bundled Drama glyph (no new first-paint icon).
+  const hasCrisisTab = !playerView && !publicDossier && [rawSettlement?.stress].flat().some(e => !!(e && (e.type || e.label)));
   const allTabs = [...baseTabs,
+    ...(hasCrisisTab ? [{ id:'crisis', label:'Crisis', Icon: Drama, tone: CRISIS_TONE }] : []),
     // Plot Hooks — a Summary sub-tab (spec §8); shown only when the settlement
     // actually surfaces structural hooks.
     ...(hasPlotHooks ? [{ id:'plot_hooks', label:'Plot Hooks', Icon: Drama }] : []),
@@ -710,6 +718,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
       case 'economics':  return <EconomicsTab settlement={s} narrativeNote={null} saveId={saveId} publicDossier={publicDossier} playerView={playerView} />;
       case 'services':   return <ServicesTab services={s.availableServices} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} />;
       case 'institutions': return <InstitutionsTab settlement={s} canAuthor={npcAuthoringAllowed} />;
+      case 'crisis':     return <CrisisTab settlement={s} canAuthor={npcAuthoringAllowed} />;
       case 'power':      return (
         <>
           <PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} publicDossier={publicDossier} playerView={playerView} worldState={owningWorldState} />

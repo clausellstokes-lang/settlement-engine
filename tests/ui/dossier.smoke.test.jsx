@@ -108,7 +108,8 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
   // group as its second tab; X-5 and X-6 removed `summary` and `neighbours`.
   test('Summary leads with Overview and Foundations; Systems keeps Magic; World registers the split War and Faith tabs', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
-    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'substrate', 'plot_hooks', 'dm_compass']);
+    // The Crisis tab (docs/DESIGN_CRISIS_TAB.md) stands beside the Overview; it registers only in a crisis.
+    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'crisis', 'substrate', 'plot_hooks', 'dm_compass']);
     expect(mod.TAB_GROUPS.systems.tabs).toEqual(
       expect.arrayContaining(['magic']),
     );
@@ -127,7 +128,8 @@ describe('OutputContainer (dossier) — decomposition smoke', () => {
   // the narrowest. The ids are unchanged; only the declared order moves, and it is pinned whole.
   test('each group runs general to specific, the epistemic run kept at the World tail', async () => {
     const mod = await import('../../src/components/OutputContainer.jsx');
-    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'substrate', 'plot_hooks', 'dm_compass']);
+    // The Crisis tab (docs/DESIGN_CRISIS_TAB.md) stands beside the Overview; it registers only in a crisis.
+    expect(mod.TAB_GROUPS.summary.tabs).toEqual(['overview', 'crisis', 'substrate', 'plot_hooks', 'dm_compass']);
     expect(mod.TAB_GROUPS.systems.tabs).toEqual(
       // THE OWNER, 2026-11-01 (ODQ §934.103): Institutions first, then Services.
       ['institutions', 'services', 'economics', 'resources', 'power', 'defense', 'magic', 'viability'],
