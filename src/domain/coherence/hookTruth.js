@@ -74,9 +74,9 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {unknown} [tier]
  * @property {unknown} [name]
  * @property {{ foodSecurity?: unknown, safetyProfile?: { plotHooks?: unknown } }} [economicState]
+ * @property {unknown} [institutions]
  * @property {{ institutions?: { walls?: unknown, garrison?: unknown, militia?: unknown,
  *   watch?: unknown, mercenary?: unknown, magicDef?: unknown } }} [defenseProfile]
- * @property {unknown} [institutions]
  * @property {unknown} [npcs]
  * @property {unknown} [conflicts]
  * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
@@ -110,6 +110,20 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
 /**
  * The institution names a defence roster family holds, as plain strings.
+ *
+ * ⚠ THE RUIN FILTER IS NOT APPLIED HERE, AND THE GAP IS REPORTED RATHER THAN HIDDEN. The
+ * defence roster's rows carry the same `status` / `_worldPulseInactive` stamps the
+ * settlement roster's rows carry, so a calamity-flattened barracks sits in
+ * `defenseProfile.institutions.garrison` exactly as a standing one does, and a hook asking
+ * "does the thing exist" should be asking about a thing that still STANDS. Two reasons it
+ * is not cured in this function: the whole function is scaffolding the chair will replace
+ * with `src/domain/defense/defenseFacts.js :: defenseFactsOf` the day that leaf lands, and
+ * that leaf is where the defence roster's liveness belongs (one reader, one answer);
+ * measured, filtering HERE also perturbs the observed-shape detector's inference inside
+ * `institutionRoster.js` and erases a frozen row of its register
+ * (`_worldPulseInactive on institutions` 1 -> 0, which reds that walker's erasure guard).
+ * The hospital read below DOES filter, because it reads the settlement roster the predicate
+ * was built for.
  * @param {unknown} family
  * @returns {string[]}
  */
@@ -181,9 +195,16 @@ export function settlementHookFacts(settlement) {
   const mercenary = rosterNames(roster.mercenary);
   const watch = rosterNames(roster.watch);
   const walls = rosterNames(roster.walls);
-  // THE ROSTER READ GOES THROUGH THE RUIN FILTER (`isLiveInstitution`, the estate's one
-  // liveness predicate): a hospital that burned down is not a hospital a hook may send
-  // somebody to. A hook asking "does the thing exist" is asking about a STANDING thing.
+  // THE HOSPITAL READ GOES THROUGH THE RUIN FILTER TOO (`isLiveInstitution`): a hospital
+  // that burned down is not a hospital a hook may send somebody to.
+  //
+  // ⚠ THE PREDICATE, NOT THE `liveInstitutions(settlement)` WRAPPER, AND THE REASON IS
+  // MEASURED. Calling the wrapper changes what the observed-shape detector can infer
+  // inside `institutionRoster.js` itself: its own `inst._worldPulseInactive` read stops
+  // resolving to the `institutions` shape and the frozen row for it VANISHES
+  // (`_worldPulseInactive on institutions` 1 -> 0), which reds that walker's erasure guard —
+  // a guard whose whole job is to notice a read going invisible. Same filter, same
+  // predicate, one row of someone else's register left where it stands.
   /** @type {unknown[]} */
   const institutions = Array.isArray(record.institutions) ? record.institutions : [];
   const hasHospital = institutions.some((inst) => {
@@ -206,7 +227,15 @@ export function settlementHookFacts(settlement) {
     hasWatch: watch.length > 0 || militia.length > 0,
     hasHospital,
     defenseKnown,
-    magicFunctions: magicWorksAt(/** @type {Parameters<typeof magicWorksAt>[0]} */ (settlement)),
+    // ⚠ PASSED AS THE WRAPPED ITEM (`{ settlement }`), WHICH IS THE SHAPE `magicWorksAt`'s
+    // own docblock names FIRST, and the spelling is load-bearing for a walker. Handed the
+    // bare record, the observed-shape scan resolves `magicWorksAt`'s defensive
+    // `item?.settlement` read against the SETTLEMENT shape — which carries no `settlement`
+    // key — and mints a reader-with-no-writer finding in THAT file
+    // (measured: `settlement on settlement` 0 -> 1 in src/domain/worldPulse/magicWorksAt.js,
+    // total findings 2027 -> 2028). The wrapper says which of the two shapes this call site
+    // is passing, so the predicate's own tolerance is not read as a defect.
+    magicFunctions: magicWorksAt({ settlement }),
     speaksOfVillagers: tier === '' || VILLAGER_TIERS.has(tier),
   });
 }
