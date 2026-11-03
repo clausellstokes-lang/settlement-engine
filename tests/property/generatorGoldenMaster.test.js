@@ -18,6 +18,15 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET, THROUGH THE SIGNED DOOR (ODQ §934.104, THE
+ *   COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-3-guild-market.json; the cloud chair signs
+ *   under the owner's delegation, vetoable). 191 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 35; town, city and
+ *   metropolis 0); the key set is identical. THE CAUSE, ONE (43f9c0dcc: rulingStructure.js :: generatePowerStructure
+ *   reads viability.js :: hasMarketInstitution): a thorp, hamlet or village with no real market no longer seats a
+ *   merchant guild, so powerStructure.factions and factionRelationships and the simulationTrace of the power step move
+ *   on those rows only. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S5 = S4 + this cause,
+ *   where S4 (SIZE-2's stage, its writes committed) reproduces 1f402a82.. on all 525 rows. 1f402a82.. -> efa49945..
+ *
  * 2026-11-03 — SIZE-2: GENERATED STORY TEXT NAMES THE PLACE BY ITS OWN TIER NOUN, THROUGH THE SIGNED DOOR (ODQ
  *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json;
  *   the cloud chair signs under the owner's delegation, vetoable). 192 OF 525 ROWS MOVED (village 24, city 84,
