@@ -49,7 +49,31 @@ import {
   GENERATION_STEP_WATCHDOG_MS,
   GENERATION_WORKER_CONTRACT,
 } from './generationProtocol.js';
-import { engineRemoteOpen, runRemoteGeneration } from './engineRemote.js';
+
+/**
+ * The `remote` transport's build flag, read with `engineRemote.js :: engineRemoteOpen`'s
+ * rule (closed unless VITE_ENGINE_REMOTE is exactly 'true'). Spelled here rather than
+ * imported because this module's static import list is pinned to the protocol leaf
+ * alone (tests/build/generationWorkerLazy.test.js, the wire-lean law) and the worker
+ * path must construct synchronously; tests/lib/engineRemoteTransport.test.js drives the
+ * two over the same env matrix, so the spellings cannot drift.
+ * @returns {boolean}
+ */
+function remoteFlagOpen() {
+  const env = /** @type {{ VITE_ENGINE_REMOTE?: unknown } | undefined} */ (import.meta.env);
+  return Boolean(env) && env?.VITE_ENGINE_REMOTE === 'true';
+}
+
+/**
+ * The default remote transport: the engine-service leaf, fetched only when a remote
+ * generation is actually made.
+ * @param {any} request
+ * @param {{ signal?: any }} opts
+ */
+async function defaultRemoteTransport(request, opts) {
+  const { runRemoteGeneration } = await import('./engineRemote.js');
+  return runRemoteGeneration(request, opts);
+}
 
 /** The abort rejection, minted the same way on every cancel path. */
 function cancelledError() {
@@ -76,7 +100,7 @@ function defaultWorkerFactory() {
  *   workerFactory?: () => any,
  *   remote?: boolean,
  *   remoteTransport?: (request: any, opts: {signal?: any}) => Promise<any>,
- * }} opts `remote` defaults to the build flag (`engineRemoteOpen()`); it and
+ * }} opts `remote` defaults to the build flag (VITE_ENGINE_REMOTE); it and
  *   `remoteTransport` are seams for tests.
  * @returns {Promise<{result: any, outcome: string}>}
  */
@@ -86,8 +110,8 @@ export async function runGeneration(request, {
   onStep,
   signal,
   workerFactory = defaultWorkerFactory,
-  remote = engineRemoteOpen(),
-  remoteTransport = runRemoteGeneration,
+  remote = remoteFlagOpen(),
+  remoteTransport = defaultRemoteTransport,
 } = /** @type {any} */ ({})) {
   const inThread = async (outcome) => ({ result: await fallback(request, onStep), outcome });
 

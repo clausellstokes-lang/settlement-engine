@@ -152,6 +152,26 @@ describe('the VITE_ENGINE_REMOTE flag is closed unless explicitly opened', () =>
     expect(fallback).toHaveBeenCalledTimes(1);
   });
 
+  it('runGeneration\'s own reading of the build flag agrees with engineRemoteOpen on every value', async () => {
+    const remoteTransport = vi.fn(async () => ({ settlement: { name: 'Remote' } }));
+    const fallback = async () => ({ settlement: { name: 'Local' } });
+    for (const value of ['', 'TRUE', 'yes', '1', ' true', 'false', 'true']) {
+      vi.stubEnv('VITE_ENGINE_REMOTE', value);
+      const { outcome } = await runGeneration(actionRequest('s', 'town'), { flagOn: false, fallback, remoteTransport });
+      expect(outcome === 'remote', JSON.stringify(value)).toBe(engineRemoteOpen({ VITE_ENGINE_REMOTE: value }));
+    }
+  });
+
+  it('with the flag open and no seams, the lazily loaded service leaf runs: an unconfigured build rejects typed, never locally', async () => {
+    vi.stubEnv('VITE_ENGINE_REMOTE', 'true');
+    vi.stubEnv('VITE_ENGINE_GENERATE_URL', '');
+    vi.stubEnv('VITE_SUPABASE_URL', '');
+    const fallback = vi.fn();
+    const err = await runGeneration(actionRequest('s', 'town'), { flagOn: true, fallback }).catch(e => e);
+    expect(err.code).toBe('engine_unavailable');
+    expect(fallback).not.toHaveBeenCalled();
+  });
+
   it('the function URL takes its override, else the project functions base, else none', () => {
     expect(engineFunctionUrl('engine-generate', { VITE_ENGINE_GENERATE_URL: 'https://e/g' })).toBe('https://e/g');
     expect(engineFunctionUrl('engine-advance', { VITE_ENGINE_ADVANCE_URL: 'https://e/a' })).toBe('https://e/a');
