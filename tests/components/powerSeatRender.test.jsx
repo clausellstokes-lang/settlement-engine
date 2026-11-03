@@ -74,4 +74,12 @@ describe('the vacant seat reads once', () => {
     expect(screen.getByTestId('ruling-chain-absence').textContent).toMatch(/^Stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\.$/);
     expect(words.replace(/\s+/g, ' ')).not.toMatch(/The seat ?The seat/); // anchored: the absence row is asserted on this render
   });
+
+  it('thorp 11 says the vacancy once: the seat row\'s "Stands empty", no faction-row clause beside it (chair ruling b)', () => {
+    const s = born('thorp', 11);
+    tab(s);
+    const text = screen.getByTestId('ruling-chain').textContent;
+    expect(text).toContain('Stands empty;');
+    expect(text.match(/stands (empty|vacant)|vacan(t|cy)/gi)).toHaveLength(1);
+  });
 });

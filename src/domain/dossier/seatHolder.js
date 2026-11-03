@@ -14,9 +14,12 @@
  *     ("Chief Magistrate", "Crime Lord" and a farmer locally titled Elder are not
  *     heads; the culture title is a translation, the role is the office);
  *   - they are a named person, never an office stand-in ("The " + a role);
- *   - several heads: the generator's precedence decides (Governor over Mayor over
- *     Elder), then a role that IS the title over one that merely contains it, then
- *     roster order.
+ *   - several heads: the TIER decides (chair ruling c, 2026-11-03): the head the
+ *     generator mandates for this tier (TIER_HEAD) seats first; another head title
+ *     seats only when the tier's own is absent from the governing faction, then in
+ *     the title precedence (Governor over Mayor over Elder). Ties: a role that IS
+ *     the title over one that merely contains it, then roster order. A settlement
+ *     with no known tier falls straight to the title precedence.
  * Nobody qualifies: null, and the caller says the seat is empty, once.
  *
  * Pure and deterministic; reads name, role and the faction handle only. A play-time
@@ -47,6 +50,21 @@ import { npcInFaction, ladderFactionKey } from '../worldPulse/npcLadderState.js'
  * if a tier's head is ever missing from this list.
  */
 export const SEAT_TITLES = Object.freeze(['Governor', 'Mayor', 'Elder']);
+
+/**
+ * The head each tier mandates: a READ-ONLY MIRROR of the first role of each tier's
+ * list in npcGenerator.js :: generateNPCs TIER_MANDATORY_ROLES (the seat test reads
+ * that source and fails on any drift).
+ * @type {Readonly<Record<string, string>>}
+ */
+export const TIER_HEAD = Object.freeze({
+  thorp: 'Elder',
+  hamlet: 'Elder',
+  village: 'Mayor',
+  town: 'Mayor',
+  city: 'Mayor',
+  metropolis: 'Governor',
+});
 
 const TITLE_WORDS = SEAT_TITLES.map((t) => new RegExp(`\\b${t}\\b`, 'i'));
 
@@ -86,7 +104,9 @@ export function seatCandidatesOf(settlement) {
   const factions = Array.isArray(settlement?.powerStructure?.factions) ? settlement.powerStructure.factions : [];
   const fkey = ladderFactionKey(governing);
   const roster = /** @type {unknown[]} */ (Array.isArray(settlement?.npcs) ? settlement.npcs : []);
-  /** @type {Array<{ npc: SeatNpc, rank: number, exact: number, at: number }>} */
+  const tierHead = TIER_HEAD[text(settlement?.tier).toLowerCase()] || '';
+  const tierRank = tierHead ? SEAT_TITLES.indexOf(tierHead) : -1;
+  /** @type {Array<{ npc: SeatNpc, own: number, rank: number, exact: number, at: number }>} */
   const found = [];
   roster.forEach((row, at) => {
     if (!row || typeof row !== 'object') return;
@@ -95,9 +115,9 @@ export function seatCandidatesOf(settlement) {
     if (rank < 0 || isOfficeStandIn(npc)) return;
     if (!npcInFaction(/** @type {Record<string, unknown>} */ (row), governing, fkey, factions)) return;
     const exact = text(npc.role).toLowerCase() === SEAT_TITLES[rank].toLowerCase() ? 0 : 1;
-    found.push({ npc, rank, exact, at });
+    found.push({ npc, own: rank === tierRank ? 0 : 1, rank, exact, at });
   });
-  found.sort((a, b) => (a.rank - b.rank) || (a.exact - b.exact) || (a.at - b.at));
+  found.sort((a, b) => (a.own - b.own) || (a.rank - b.rank) || (a.exact - b.exact) || (a.at - b.at));
   return found.map((f) => f.npc);
 }
 

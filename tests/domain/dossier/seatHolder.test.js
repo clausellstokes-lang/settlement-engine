@@ -16,7 +16,7 @@ import { DEFAULT_CONFIG } from '../../../src/store/configSlice.js';
 import { rulingChainOf } from '../../../src/domain/dossier/powerStrata.js';
 import { governingFactionOf, nameOf } from '../../../src/domain/rulingPower.js';
 import { seatHolderFindings } from '../../../src/domain/coherence/seatHolderFindings.js';
-import { SEAT_TITLES } from '../../../src/domain/dossier/seatHolder.js';
+import { SEAT_TITLES, TIER_HEAD } from '../../../src/domain/dossier/seatHolder.js';
 import { readFileSync } from 'node:fs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -88,6 +88,27 @@ function crafted(npcs) {
   };
 }
 
+describe('the tier\'s own head wins (chair ruling c, 2026-11-03)', () => {
+  it('every city seats its required Mayor; rulers-city-9 and rulers-city-12 also hold a Governor', () => {
+    const cities = corpus.filter(({ tier, s }) => tier === 'city' && !isClaimantVacancy(s));
+    expect(cities.length).toBe(20);
+    const both = cities.filter(({ s }) => { const gov = nameOf(governingFactionOf(s)); const roles = (s.npcs || []).filter((n) => n.factionAffiliation === gov).map((n) => n.role); return roles.includes('Mayor') && roles.includes('Governor'); });
+    expect(both.map(({ seed }) => seed), 'fixture premise: the two cities that drew a Governor').toEqual(expect.arrayContaining(['rulers-city-9', 'rulers-city-12']));
+    expect(cities.map(({ seed, s }) => `${seed}:${rulingChainOf(s).npc?.role}`).filter((r) => !r.endsWith(':Mayor'))).toEqual([]);
+  });
+
+  it('the tier decides: a metropolis seats its Governor, a city its Mayor, and another head seats only when the tier\'s own is absent', () => {
+    const mayor = { id: 'm', name: 'Hypatia Kamytzes', role: 'Mayor', factionAffiliation: 'Town Council' };
+    const governor = { id: 'g', name: 'Ioannikios Alexios', role: 'Governor', factionAffiliation: 'Town Council' };
+    const elder = { id: 'e', name: 'Idunn Haraldsson', role: 'Elder', factionAffiliation: 'Town Council' };
+    const at = (tier, npcs) => rulingChainOf({ ...crafted(npcs), tier }).npc?.name;
+    expect(at('city', [governor, mayor])).toBe('Hypatia Kamytzes');
+    expect(at('metropolis', [mayor, governor])).toBe('Ioannikios Alexios');
+    expect(at('hamlet', [mayor, elder])).toBe('Idunn Haraldsson');
+    expect(at('city', [elder, governor])).toBe('Ioannikios Alexios');
+  });
+});
+
 describe('the seat resolver, crafted rosters', () => {
   it('never seats an office stand-in or a person of another faction — the seat reads empty once', () => {
     const s = crafted([
@@ -132,6 +153,7 @@ describe('the seat titles mirror the generator', () => {
     const heads = [...block.matchAll(/^\s*(\w+):\s*\['([^']+)'/gm)].map((m) => [m[1], m[2]]);
     expect(heads.map(([tier]) => tier)).toEqual(TIERS);
     for (const [tier, head] of heads) expect(SEAT_TITLES, `${tier} head ${head}`).toContain(head);
+    expect(Object.fromEntries(heads), 'TIER_HEAD mirrors each tier\'s mandated head').toEqual({ ...TIER_HEAD });
   });
 });
 
