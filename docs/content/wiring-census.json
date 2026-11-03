@@ -5,7 +5,7 @@
       "src/domain/display/stateProse/generalStateProse.js": "628d26a9e76b0d776171e2caee2fb83126414dba138905f0c610a7898f94720b",
       "src/domain/display/stateProse/powerStateProse.js": "78d22210d6d2ca5d44a4af32cf3a13b7c123d0577850458e9ce36ec893e3d2c8",
       "src/domain/display/stateProse/economyStateProse.js": "5cfc0125aecbc0f14211dd9b9d5713b50866f26d01dfbdd370c678f178b1f8ea",
-      "src/domain/display/stateProse/defenseStateProse.js": "a1cfd7adae7f4e01fc8e3038c0ce55a793e8e4c728e283cc3f46f70de4a4ef1f",
+      "src/domain/display/stateProse/defenseStateProse.js": "36901ea076c0b83ebefbffad3ecb1c9118e3d867d15f31330f4f775d0ce51a79",
       "src/domain/display/stateProse/stressorsStateProse.js": "e128aa4ece932c8eae009c22eb9ad9f77f47b3967b5652687f80c76933027fd1",
       "src/domain/display/stateProse/warFaithStateProse.js": "95882ecdf30f617f44ed3f460c4a67109107f5e645fc7e9820a60de0e67b1fb0",
       "src/domain/display/stateProse/dossierMounts.js": "6f1b82274e0a255041af154d8050391b0d4d02efa1149a52d9f1eecb843290fa"
@@ -118,9 +118,9 @@
         5
       ]
     ],
-    "sourceLicensedRows": 114,
+    "sourceLicensedRows": 113,
     "sourceOfficeRows": 3,
-    "sourceUnresolvedRows": 591,
+    "sourceUnresolvedRows": 592,
     "sourceTwoSourceRows": 10,
     "modifierRows": 0
   },
@@ -181,7 +181,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 4,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -3200,7 +3200,7 @@
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "predicate": [
         {
           "field": "forces.watch.present",
@@ -17700,12 +17700,12 @@
       "branchReads": [
         "granary",
         "port",
-        "settlement.config.tradeRouteAccess"
+        "tradeAccess"
       ],
       "fieldsRead": [
         "granary",
         "port",
-        "settlement.config.tradeRouteAccess"
+        "tradeAccess"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -17714,14 +17714,14 @@
       "reads": [
         "granary",
         "port",
-        "settlement.config.tradeRouteAccess"
+        "tradeAccess"
       ],
       "readsGrain": "branch",
       "narrowed": false,
       "absent": {
         "granary": "measured",
         "port": "measured",
-        "settlement.config.tradeRouteAccess": "measured"
+        "tradeAccess": "measured"
       },
       "covert": false,
       "objectClasses": [],
@@ -17734,18 +17734,16 @@
       "rateBp": 1341,
       "departure": null,
       "source": {
-        "kind": "toll-bar",
-        "kinds": [
-          "toll-bar"
-        ],
+        "kind": "",
+        "kinds": [],
         "fields": {
           "granary": "",
           "port": "",
-          "settlement.config.tradeRouteAccess": "toll-bar"
+          "tradeAccess": ""
         },
         "holder": null,
-        "holderReason": "town-resolved: the register is not a town, so the holder is named by holdersOf(kind, settlement)",
-        "standing": "LICENSED",
+        "holderReason": "no mapping row resolves any field this pool reads",
+        "standing": "SOURCE-UNRESOLVED",
         "twoSource": false
       }
     },
@@ -39122,7 +39120,7 @@
         "DS-DEF-5 :: watch PRESENT"
       ],
       "variants": 3,
-      "grammars": 2,
+      "grammars": 1,
       "blocks": [
         "DS-DEF-5"
       ]
@@ -41467,11 +41465,10 @@
       },
       {
         "field": "settlement.config",
-        "mountsSpine": 2,
+        "mountsSpine": 1,
         "mountsModifier": 14,
         "spineTabs": [
-          "defense",
-          "overview"
+          "defense"
         ],
         "modifierMounts": [
           "economics.commercialProfile",
@@ -41839,6 +41836,15 @@
       },
       {
         "field": "token (via CRISIS_POOL_OF in stressorsStateProse",
+        "mountsSpine": 1,
+        "mountsModifier": 0,
+        "spineTabs": [
+          "overview"
+        ],
+        "modifierMounts": []
+      },
+      {
+        "field": "tradeAccess",
         "mountsSpine": 1,
         "mountsModifier": 0,
         "spineTabs": [
@@ -43740,19 +43746,6 @@
           ]
         },
         {
-          "field": "settlement.config.tradeRouteAccess",
-          "attach": [
-            "crossroads",
-            "port",
-            "river",
-            "road",
-            "tier overlay: metropolis",
-            "tier overlay: city",
-            "tier overlay: thorp / hamlet",
-            "tier overlay: other tiers"
-          ]
-        },
-        {
           "field": "text(tier) (via TIER_OVERLAY_OF in generalStateProse.js)",
           "attach": [
             "crossroads",
@@ -43769,6 +43762,19 @@
             "port",
             "river",
             "isolated",
+            "road",
+            "tier overlay: metropolis",
+            "tier overlay: city",
+            "tier overlay: thorp / hamlet",
+            "tier overlay: other tiers"
+          ]
+        },
+        {
+          "field": "tradeAccess",
+          "attach": [
+            "crossroads",
+            "port",
+            "river",
             "road",
             "tier overlay: metropolis",
             "tier overlay: city",
@@ -45407,14 +45413,14 @@
     ],
     "summary": {
       "rows": {
-        "LICENSED": 114,
+        "LICENSED": 113,
         "OFFICE": 3,
-        "SOURCE-UNRESOLVED": 591
+        "SOURCE-UNRESOLVED": 592
       },
       "fields": {
-        "LICENSED": 191,
+        "LICENSED": 190,
         "OFFICE": 5,
-        "SOURCE-UNRESOLVED": 415
+        "SOURCE-UNRESOLVED": 416
       },
       "byKind": [
         [
@@ -45435,7 +45441,7 @@
         ],
         [
           "toll-bar",
-          13
+          12
         ],
         [
           "watch",
@@ -45459,7 +45465,7 @@
         ]
       ],
       "unresolvedGrounds": {
-        "no-mapping": 415,
+        "no-mapping": 416,
         "no-institution-in-roster": 0
       },
       "twoSourceRows": 10,
@@ -46818,8 +46824,8 @@
       "leafBoth": 0,
       "leafEither": 2,
       "leafRows": [],
-      "deskRoots": 89,
-      "deskSegments": 192
+      "deskRoots": 90,
+      "deskSegments": 193
     }
   },
   "ratifiedAliases": {
@@ -46989,11 +46995,6 @@
       "roll",
       "rolls"
     ],
-    "granary": [
-      "book",
-      "books",
-      "toll"
-    ],
     "invasionRowSituation(walls, garrison, militia) (via INVASION_ROW_POOL in defenseStateProse.js)": [
       "muster",
       "roll",
@@ -47137,11 +47138,6 @@
       "books",
       "chest",
       "purse"
-    ],
-    "settlement.config.tradeRouteAccess": [
-      "book",
-      "books",
-      "toll"
     ],
     "settlement.defenseProfile.economicGates.military": [
       "muster",
@@ -47598,7 +47594,7 @@
       "subject": "readiness ADEQUATE",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -48091,7 +48087,7 @@
         "forces.watch.present"
       ],
       "readingFunction": "forceCorePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

@@ -85,16 +85,20 @@ beforeAll(() => {
 afterEach(() => { cleanup(); });
 
 describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a literal', () => {
-  test('the tab renders the EXACT logistics sentence the desk produced for this town', () => {
-    const expected = defenseSupportingProse(port, opts(port)).logistics.sentence;
+  test('the tab renders the EXACT naval sentence the desk produced, and no stored-food row or lens', () => {
+    // ⛔ The logistics lens and the Logistics & Supply row LEFT the Defense tab by the owner's
+    // word (2026-11-03, verbatim: "Do add storehouse months the economy tab."): stored food is
+    // the Economy tab's, printed once in months (lane DEFENSE). The naval lens carries this arm.
+    const expected = defenseSupportingProse(port, opts(port)).naval.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
+    expect(defenseSupportingProse(port, opts(port)).logistics).toBeNull();
     const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
     openSection(container, 'Supporting Capabilities');
     expect(container.textContent).toContain(expected);
-    // The producer's own capability rows are UNTOUCHED beside it — the sentence is
-    // additive, and a car that had replaced the rows would be caught here.
+    // The producer's own capability rows are UNTOUCHED beside it, less the stored-food row.
     const caps = deriveSupportingCapabilities(port);
-    expect(container.textContent).toContain(caps.find((c) => c.label === 'Logistics & Supply').note);
+    expect(caps.map((c) => c.label)).not.toContain('Logistics & Supply');
+    expect(container.textContent).toContain(caps.find((c) => c.label === 'Naval Defense').note);
     expect(container.textContent).toContain('Legal Infrastructure');
     // UX consolidation (T2-23): Economic Backing left the rows; Economic Survival owns it.
     expect(container.textContent).not.toContain('Economic Backing'); // anchored: toContain('Legal Infrastructure') on this render
@@ -116,9 +120,9 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     // ONE anchored act: present on the coastal town, absent on the inland one. A bare
     // exclusion would pass against a tab that had stopped rendering the block entirely.
     expectPresentThenAbsent(wetText, dryText, navalLine, 'the naval lens on a landlocked city');
-    // …and the inland town still draws its OWN logistics sentence, so the absence above is
+    // …and the inland town still renders its OWN capability rows, so the absence above is
     // the lens discriminating rather than the whole position having gone dark.
-    expect(dryText).toContain(defenseSupportingProse(inland, opts(inland)).logistics.sentence);
+    expect(dryText).toContain('Medical Readiness');
   });
 
   test('THE PUBLIC GATE: the same town on a public dossier draws NEITHER sentence', () => {
@@ -131,12 +135,11 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     const pub = render(e(DefenseTab, { settlement: port, narrativeNote: null, publicDossier: true }));
     openSection(pub.container, 'Supporting Capabilities');
     const pubText = pub.container.textContent;
-    expectPresentThenAbsent(privText, pubText, drawn.logistics.sentence, 'public gate: the DS-DEF-6 logistics sentence');
     expectPresentThenAbsent(privText, pubText, drawn.naval.sentence, 'public gate: the DS-DEF-6 naval sentence');
     // The gate removes ONLY the corpus prose — the producer's rows and notes still render
     // for the anonymous viewer, which is what makes it a gate and not a blank.
     const caps = deriveSupportingCapabilities(port);
-    expect(pubText).toContain(caps.find((c) => c.label === 'Logistics & Supply').note);
+    expect(pubText).toContain(caps.find((c) => c.label === 'Naval Defense').note);
     expect(pubText).toContain('Naval Defense');
   });
 });

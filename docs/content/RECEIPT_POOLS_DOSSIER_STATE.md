@@ -2529,7 +2529,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 
 **readiness `ADEQUATE`**
 1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
-2. `[visitor]` A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.
+2. `[visitor]` A stranger sees the town at {settlement} defended in the ordinary way: enough to be serious, not enough to be reassuring.
 3. `[street]` The town believes it could hold against the usual trouble and does not claim more than that, which is a fair reading of what it has.
 4. `[threshold]` {settlement} is at the point where the arrangements are sufficient and nothing is spare. One more demand on them and the town would be choosing which pressure to leave uncovered.
 
@@ -2559,7 +2559,7 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.
 
 **strategic value LOW**
-1. `[counterforce]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.
+1. `[counterforce]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
 2. `[ledger]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
 3. `[street]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
 
@@ -2614,7 +2614,7 @@ supplies the ancestry.
 
 **`Beasts & Monsters`: `frontier`, force without a perimeter**
 1. `[ledger]` {settlement} keeps armed people on an open frontier, which means the defense is reactive: whatever comes chooses where the fighting happens, and the town arrives afterwards.
-2. `[visitor]` A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.
+2. `[visitor]` A stranger finds spears at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.
 3. `[street]` The town can answer trouble and cannot prevent it, and the difference costs it something every season.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need**
@@ -2678,7 +2678,7 @@ supplies the ancestry.
 3. `[visitor]` A stranger wronged at {settlement} discovers there is nowhere to take it, and that the discovery surprises nobody local.
 
 **`Economic Survival`: `STRONG`**
-1. `[ledger]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.
+1. `[ledger]` {settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the defence kept paid while they last.
 2. `[street]` The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.
 3. `[counterforce]` Trouble at {settlement} has not turned into a collapse, and the reason is money. A town that can pay through a crisis mostly does.
 
@@ -2713,12 +2713,12 @@ supplies the ancestry.
 3. `[street]` The town can outlast a hungry year at {settlement} and has no answer at all to a sick one, and knows which of the two it fears.
 
 **`Disasters & Famine`: NO reserves, hospital present**
-1. `[ledger]` {settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.
+1. `[ledger]` {settlement} can tend its sick and keeps no granary against a bad harvest; a crop failure here becomes hardship the same season it happens.
 2. `[street]` The town is better prepared for the sickness than for the hunger, which is an unusual way round and does not comfort anyone.
 3. `[unfolding]` {settlement} is arranged against the sickness it has seen and not against the hunger it has not, and nothing in hand is correcting the imbalance.
 
 **`Disasters & Famine`: NO reserves, NO medical provision**
-1. `[ledger]` {settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.
+1. `[ledger]` {settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plague runs until it burns out.
 2. `[street]` The town's answer to a bad season is the same as its answer to a sickness, which is to endure it and count afterwards.
 3. `[visitor]` A stranger looking for the granary or the sick-house at {settlement} is directed to neither, because there is neither.
 
@@ -2900,7 +2900,7 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[counterforce]` {settlement} could keep soldiers and does not; the town has decided that arming itself when needed costs less than paying anybody to be armed all year.
 
 **watch PRESENT**
-1. `[ledger]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the walls and is not built for what arrives outside them.
+1. `[ledger]` {settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.
 2. `[street]` There are people walking the town at {settlement} at night, and the town's sense of itself rests more on that than on anything at the gate.
 3. `[visitor]` A stranger walking {settlement} late is looked at rather than stopped, and the looking is systematic enough to notice.
 
@@ -2915,14 +2915,14 @@ may not say the contract is failing unless the economic arm supplies that.
 3. `[unfolding]` The contracted companies at {settlement} are doing the work they were engaged for, and the engagement has an end written into it that the town has not yet had to think about.
 
 **charter hall PRESENT (specialist monster response)**
-1. `[ledger]` {settlement} keeps a charter for specialist work. The things a garrison is wrong for go to people retained to handle exactly them.
+1. `[ledger]` {settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them.
 2. `[street]` There is somewhere at {settlement} to take the problems that are not soldiers' problems, and the town uses it more than it likes to say.
-3. `[visitor]` A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.
+3. `[visitor]` A stranger at {settlement} finds a hall whose business is the sort of trouble ordinary arms are the wrong instrument for, and finds it busy.
 
 **charter hall ABSENT where the country warrants one**
-1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is the garrison's problem regardless of whether the garrison is the right answer to it.
+1. `[ledger]` {settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.
 2. `[counterforce]` {settlement} keeps no chartered hall and is not unaware of the need; what stands between the town and one is the cost of retaining specialists rather than any doubt about wanting them.
-3. `[street]` The town sends soldiers to things soldiers are wrong for at {settlement}, and pays for the wrongness each time.
+3. `[street]` The town sends whoever it has to things they are wrong for at {settlement}, and pays for the wrongness each time.
 
 **arcane defense PRESENT**
 1. `[ledger]` {settlement} keeps arcane provision in its defenses: detection, wards, and an answer to things that conventional arrangements cannot see coming.
@@ -3039,14 +3039,14 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 3. `[counterforce]` An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.
 
 **`Logistics & Supply: No reserves, port open`**
-1. `[ledger]` {settlement} keeps nothing back and does not need to while the port runs; the supply continues as long as the water does.
+1. `[ledger]` {settlement} keeps no granary and needs none while the port runs; the supply continues as long as the water does.
 2. `[counterforce]` {settlement} keeps no granary and is not short for want of one. The water answers faster than a store could, and a store is not what this town would spend on.
 3. `[street]` The town eats what the water brings at {settlement}, daily, and has no cause to wonder what it would do otherwise.
 
 **`Logistics & Supply: No reserves, landlocked`**
-1. `[ledger]` {settlement} holds no food buffer at all. Any interruption to supply becomes a survival question within days rather than seasons.
-2. `[street]` The town eats what arrives, and has nothing put by against a season when nothing does.
-3. `[unfolding]` {settlement} is one interrupted week from a genuine crisis and has been for as long as anybody has bothered to check.
+1. `[ledger]` {settlement} has no granary, only what its households keep. Any long interruption to supply becomes a survival question within the season.
+2. `[street]` The town eats what arrives and what households laid in, and a season of no arrivals would empty both.
+3. `[unfolding]` {settlement} is one long interruption from a genuine crisis and has been for as long as anybody has bothered to check.
 
 **`Naval Defense: Naval force`**
 1. `[ledger]` {settlement} controls its own sea approaches; anything coming by water would need to beat the fleet before it reached the town.

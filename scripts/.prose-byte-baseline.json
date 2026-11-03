@@ -55,8 +55,8 @@
   },
   "leaves": {
     "src/data/dossierStateProse/defense.generated.js": {
-      "raw": 154563,
-      "gzip": 23039,
+      "raw": 154546,
+      "gzip": 23025,
       "ceilingRaw": 488168,
       "ceilingGzip": 108482
     },

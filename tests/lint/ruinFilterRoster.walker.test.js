@@ -203,7 +203,9 @@ const RUIN_AGNOSTIC_EXEMPT = Object.freeze({
   // ── display: renders the roster (showing a ruin is correct) ──────────────────────
   'src/domain/display/defenseDisplay.js': 'display — defenseProfile.institutions force buckets, not the roster',
   'src/domain/display/institutionProfile.js': 'display — defenseProfile.institutions buckets',
-  'src/domain/display/threatAssessment.js': 'display — defenseProfile.institutions buckets',
+  // ⭐ threatAssessment.js's exempt row is DELETED (lane DEFENSE, 2026-11-03): its rows now ask
+  // `domain/defense/defenseFacts.js :: defenseFactsOf`, which reads the LIVE roster through
+  // `standingDefenseForces` / `liveInstitutions`, so it names `.institutions` nowhere.
   // ⭐ THE DESK'S EXEMPT ROW IS DELETED, AND THE WIN IS BANKED (lane DESK-DEFENSE,
   // 2026-09-04). It was added hours earlier as "a fourth instance of a settled shape", and
   // the shape was settled — but the READ underneath it was not a display read at all. The
@@ -461,7 +463,10 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // RE-MEASURED 2026-10-31 BY THE CHAIR (W2-VEIL-A landing): 96 → 97. ONE new reader,
     // src/domain/display/galleryVeil.js, DISPOSITIONED above as a mutation exemption (X-21e);
     // read from this arm's own failure message ("expected 97 to be 96"), never computed.
-    expect(readers.length).toBe(97);
+    // RE-MEASURED 2026-11-03 BY LANE DEFENSE: 97 → 96, A SHRINK. threatAssessment.js left the
+    // discovery set when its rows moved onto defenseFacts (the live roster); its exempt row is
+    // deleted above. Read from this arm's own failure message ("expected 96 to be 97").
+    expect(readers.length).toBe(96);
   });
 
   test('exempt honesty: every exempt entry still reads .institutions and is not already compliant', () => {

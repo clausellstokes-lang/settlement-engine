@@ -11,7 +11,8 @@
  * as variables.
  */
 
-import { buildThreatAssessment } from './threatAssessment.js';
+import { buildThreatAssessment, healerSubject } from './threatAssessment.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
@@ -210,7 +211,6 @@ export function deriveSupportingCapabilities(settlement) {
   const scores = d.scores || {};
   const inst = d.institutions || {};
   const f = r.economicState?.compound?.inst || {};
-  const tradeAccess = r.config?.tradeRouteAccess || 'road';
   const magicDef = inst.magicDef || [];
   const econScore = Math.round(scores.economic || 0);
   // ⛔ T2-24 (UX consolidation 2026-10-30, red-first): IN A WORLD WHERE MAGIC DOES NOT
@@ -220,6 +220,9 @@ export function deriveSupportingCapabilities(settlement) {
   // magic does not function. The dial is asked of the estate's one accessor (wrapped as
   // `{ settlement }`, the call shape every caller uses; see defenseStateProse.js).
   const arcane = !!f.hasMagicInst && magicWorksAt({ settlement: r }) !== false;
+  // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
+  // healer named as a healer.
+  const facts = defenseFactsOf(r);
 
   const caps = [
     {
@@ -303,16 +306,17 @@ export function deriveSupportingCapabilities(settlement) {
     },
     {
       label: 'Medical Readiness',
-      status: f.hasHospital ? 'Hospital present' : f.hasChurch ? 'Clergy care' : 'None',
-      color: f.hasHospital ? '#1a5a28' : f.hasChurch ? '#7a5010' : '#8b1a1a', score: null,
-      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+      status: facts.hasHospital ? 'Hospital present'
+        : facts.hasHealer ? (healerSubject(facts.healerName) === 'A healer' ? 'Healer' : 'Infirmary')
+          : f.hasChurch ? 'Clergy care' : 'None',
+      color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || f.hasChurch) ? '#7a5010' : '#8b1a1a', score: null,
+      note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
+        : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
+          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
     },
-    {
-      label: 'Logistics & Supply',
-      status: f.hasGranary ? 'Granary present' : 'No reserves',
-      color: f.hasGranary ? '#1a5a28' : '#8b1a1a', score: null,
-      note: f.hasGranary ? (f.hasPort ? 'Granary + sea access. Historically the hardest siege posture to break.' : tradeAccess === 'isolated' ? 'Granary in isolation. Endurance depends entirely on stored reserves.' : 'Granary with road supply. Cut the roads, cut the supply.') : (tradeAccess === 'port' ? 'No reserves, but sea supply continues while port is open.' : 'No food buffer. Any supply disruption becomes a survival crisis within days.'),
-    },
+    // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
+    // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
+    // food is printed once, in months, on the Economy tab, and no Defense surface prints it.
   ];
   if (f.hasNavy || f.hasPort) {
     // experience-product-fit-5: the STANDING naval reality, not just the static
@@ -341,12 +345,28 @@ export function deriveSupportingCapabilities(settlement) {
   return caps;
 }
 
+/**
+ * "the palisade", "the citizen militia and the adventurers' charter hall" — the roster names of
+ * what the defence purse pays for, in running prose.
+ * @param {ReadonlyArray<string>} names
+ * @returns {string}
+ */
+function namedForUpkeep(names) {
+  const items = names.map((n) => `the ${n.charAt(0).toLowerCase()}${n.slice(1)}`);
+  if (items.length <= 1) return items[0] || '';
+  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
+}
+
 // Which defenseProfile.economicGates key funds each readiness row, and what
-// the underfunded expense is called in the funding note.
+// the underfunded expense is called in the funding note. ⚠ THE MILITARY GATE IS RECORDED
+// FOR ANY DEFENCE AT ALL (walls, militia, watch, hired swords, a charter hall —
+// `defenseGenerator.js :: computeDefenseScores`, `hasAnyDefense`), so its expense is
+// "defence upkeep", and `deriveDefenseReadiness` names the things upkept from the roster;
+// "garrison pay" for a palisade was the contradiction this replaced (lane DEFENSE).
 /** @type {Readonly<Record<string, [string, string]>>} */
 const READINESS_GATE_FOR = Object.freeze({
   'Beasts & Monsters': ['monster', 'patrol provisioning'],
-  'Invasion & War': ['military', 'garrison pay'],
+  'Invasion & War': ['military', 'defence upkeep'],
   'Internal Security': ['internal', 'watch and court funding'],
   'Economic Survival': ['economic', 'crisis logistics'],
   'Disasters & Famine': ['disaster', 'relief funding'],
@@ -358,8 +378,8 @@ const READINESS_GATE_FOR = Object.freeze({
  * generator's buildThreatAssessment (the assessment prose) with the readiness
  * score + STRONG/ADEQUATE/WEAK/CRITICAL badge, exactly as the web Defense tab.
  * When the row's economic-upkeep gate (defenseProfile.economicGates) sits
- * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
- * garrison pay at 60%") instead of leaving a silently lower bar.
+ * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded: defence
+ * upkeep for the palisade at 60%") instead of leaving a silently lower bar.
  * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
  *
  * @param {DefenseDisplaySettlement | null | undefined} settlement
@@ -381,9 +401,11 @@ export function deriveDefenseReadiness(settlement) {
       r.economicState?.foodSecurity?.resilienceScore ??
       Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
   };
+  const upkept = namedForUpkeep(defenseFactsOf(r).defenceNames);
   return buildThreatAssessment(r).map((row) => {
     const score = scoreFor[row.label] ?? 0;
-    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+    const [gateKey, baseExpense] = READINESS_GATE_FOR[row.label] || [];
+    const expense = gateKey === 'military' && upkept ? `${baseExpense} for ${upkept}` : baseExpense;
     const gate = gateKey ? gates[gateKey] : undefined;
     const fundingNote = Number.isFinite(gate) && /** @type {number} */ (gate) < 1
       ? `Upkeep underfunded: ${expense} at ${Math.round(/** @type {number} */ (gate) * 100)}%`

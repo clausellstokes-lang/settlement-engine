@@ -59,7 +59,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger sees an ordinary defended town at {settlement}: enough on the walls to be serious, not enough to be reassuring.",
+          "text": "A stranger sees the town at {settlement} defended in the ordinary way: enough to be serious, not enough to be reassuring.",
           "slots": [
             "settlement"
           ],
@@ -209,7 +209,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "strategic value LOW": [
         {
           "angle": "counterforce",
-          "text": "Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything on its walls.",
+          "text": "Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.",
           "slots": [
             "settlement"
           ],
@@ -484,7 +484,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger finds soldiers at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.",
+          "text": "A stranger finds spears at {settlement} and no wall for them to stand on, and can see how that would go against anything that arrived in more than one place.",
           "slots": [
             "settlement"
           ],
@@ -794,7 +794,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: STRONG": [
         {
           "angle": "ledger",
-          "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the garrison can be kept paid while they last.",
+          "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the defence kept paid while they last.",
           "slots": [
             "settlement"
           ],
@@ -964,7 +964,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: NO reserves, hospital present": [
         {
           "angle": "ledger",
-          "text": "{settlement} can treat and contain an outbreak and keeps no food against a bad harvest; a crop failure here becomes hardship the same season it happens.",
+          "text": "{settlement} can tend its sick and keeps no granary against a bad harvest; a crop failure here becomes hardship the same season it happens.",
           "slots": [
             "settlement"
           ],
@@ -988,7 +988,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Disasters & Famine: NO reserves, NO medical provision": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds no food against a bad year and has nobody to treat the sick; a failed harvest is immediate hardship here and a plague runs until it burns out.",
+          "text": "{settlement} has no granary and nobody to treat the sick; a failed harvest is hardship within the season here and a plague runs until it burns out.",
           "slots": [
             "settlement"
           ],
@@ -2292,7 +2292,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "watch PRESENT": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the walls and is not built for what arrives outside them.",
+          "text": "{settlement} keeps a watch, which is a matter of order rather than of war. It answers what happens inside the town and is not built for what arrives from outside it.",
           "slots": [
             "settlement"
           ],
@@ -2366,7 +2366,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "charter hall PRESENT (specialist monster response)": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps a charter for specialist work. The things a garrison is wrong for go to people retained to handle exactly them.",
+          "text": "{settlement} keeps a charter for specialist work. The things ordinary arms are wrong for go to people retained to handle exactly them.",
           "slots": [
             "settlement"
           ],
@@ -2382,7 +2382,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
-          "text": "A stranger at {settlement} finds a hall whose business is the sort of trouble a garrison is the wrong instrument for, and finds it busy.",
+          "text": "A stranger at {settlement} finds a hall whose business is the sort of trouble ordinary arms are the wrong instrument for, and finds it busy.",
           "slots": [
             "settlement"
           ],
@@ -2392,7 +2392,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "charter hall ABSENT where the country warrants one": [
         {
           "angle": "ledger",
-          "text": "{settlement} retains no specialists. Whatever comes out of the country is the garrison's problem regardless of whether the garrison is the right answer to it.",
+          "text": "{settlement} retains no specialists. Whatever comes out of the country is met by whoever the town has, whether or not they are the right answer to it.",
           "slots": [
             "settlement"
           ],
@@ -2408,7 +2408,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town sends soldiers to things soldiers are wrong for at {settlement}, and pays for the wrongness each time.",
+          "text": "The town sends whoever it has to things they are wrong for at {settlement}, and pays for the wrongness each time.",
           "slots": [
             "settlement"
           ],
@@ -3070,7 +3070,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Logistics & Supply: No reserves, port open": [
         {
           "angle": "ledger",
-          "text": "{settlement} keeps nothing back and does not need to while the port runs; the supply continues as long as the water does.",
+          "text": "{settlement} keeps no granary and needs none while the port runs; the supply continues as long as the water does.",
           "slots": [
             "settlement"
           ],
@@ -3096,7 +3096,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Logistics & Supply: No reserves, landlocked": [
         {
           "angle": "ledger",
-          "text": "{settlement} holds no food buffer at all. Any interruption to supply becomes a survival question within days rather than seasons.",
+          "text": "{settlement} has no granary, only what its households keep. Any long interruption to supply becomes a survival question within the season.",
           "slots": [
             "settlement"
           ],
@@ -3104,13 +3104,13 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "The town eats what arrives, and has nothing put by against a season when nothing does.",
+          "text": "The town eats what arrives and what households laid in, and a season of no arrivals would empty both.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "unfolding",
-          "text": "{settlement} is one interrupted week from a genuine crisis and has been for as long as anybody has bothered to check.",
+          "text": "{settlement} is one long interruption from a genuine crisis and has been for as long as anybody has bothered to check.",
           "slots": [
             "settlement"
           ],
