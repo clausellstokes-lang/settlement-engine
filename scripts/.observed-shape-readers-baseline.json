@@ -125,14 +125,14 @@
  "digests": {
   "corpusMeta": "252deb6ad7685fbd3be1ce0ceceda37e3fc3e0227d58e5b80c70a77bcfb8351b",
   "inventory": "d10c8120b82e8dd6b8171041c993a05a2fc0eee8416ae04d6222a75fccbececc",
-  "manifests": "99b8d52dee1a0d0874983706b2bc1c5de3cc4af253d6960f56e3dd95ec838350",
+  "manifests": "c6fe0a9d892648f9d3c98c02f0da8aa3dd95a70f0fa97e1d7b894cd26098c31e",
   "migrationReview": "bd48a8b07a2bc132a1d4cef6c5ce737fd9e3246b8f9e32f53109296165513698",
   "rowTags": "f62df84be5fe60b58572d1c6c26b1deb1baafa85d0a4748f4f83e83042cc5c06",
   "scanStats": "3e6c450623fbfc0b08fa38400620115db811c0d2e01c2438c71737503577d498",
   "sentinel": "a9e265d893d1cf86d1af55eb1122756803434cbbe3fafdac36fda12173fb860f"
  },
  "frozen": "2026-11-03",
- "frozenAtSha": "e7e155aa6dd7c5c836164ea437910925ce138460",
+ "frozenAtSha": "d34ef2655b2e4ec369f0845432ae5e46a6abd752",
  "identities": 1441,
  "inventory": {
   "src/components/BuyThisDossier.jsx": {
@@ -2447,7 +2447,7 @@
   },
   "executionTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "48dbc8d97fb549d7ec38bd9e050a6c822a7d136d44cce7b521fe35ff6b914521",
+   "digest": "fdfa4988c46ab99a8b384aa0909960911e8b41dba07343d46d71c9a7a8da8b0f",
    "entries": [
     {
      "mode": "100644",
@@ -6981,8 +6981,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "cce38832f40ebac06ab4f8f4aa9a6d8c096c8e1a4a5d22ae72fca4d2ce132aca",
-     "size": 154548,
+     "sha256": "92cb6690ff497312f353d2a290270b029e3e7f2192d2f91074bfb53dd01d5438",
+     "size": 154546,
      "type": "file"
     },
     {
@@ -35163,7 +35163,7 @@
   },
   "sourceTree": {
    "algorithm": "sha256-canonical-path-type-mode-size-content-v2",
-   "digest": "2dbaf00e9ac0edac8d3b88fccac24a2abf3e7c59c51c5ca7b3951ce42215cc15",
+   "digest": "5d23c5f580b5f7f19add5b64081780fd11993ef700d68d6168839b9614182aa1",
    "entries": [
     {
      "mode": "100644",
@@ -39627,8 +39627,8 @@
     {
      "mode": "100644",
      "path": "src/data/dossierStateProse/defense.generated.js",
-     "sha256": "cce38832f40ebac06ab4f8f4aa9a6d8c096c8e1a4a5d22ae72fca4d2ce132aca",
-     "size": 154548,
+     "sha256": "92cb6690ff497312f353d2a290270b029e3e7f2192d2f91074bfb53dd01d5438",
+     "size": 154546,
      "type": "file"
     },
     {
@@ -51839,10 +51839,10 @@
  },
  "scannerProvenance": {
   "detectorDigest": "74f529d2f6c6a46653dd220a19a648eefdcc2548956085e80cff44f07635364f",
-  "executionTreeDigest": "48dbc8d97fb549d7ec38bd9e050a6c822a7d136d44cce7b521fe35ff6b914521",
+  "executionTreeDigest": "fdfa4988c46ab99a8b384aa0909960911e8b41dba07343d46d71c9a7a8da8b0f",
   "scanTreeDigest": "05868a1528ef9b57d3cf1e92ed9bad1cc814880091da4731e4227d0d1dbce7f7",
-  "sourceTreeDigest": "2dbaf00e9ac0edac8d3b88fccac24a2abf3e7c59c51c5ca7b3951ce42215cc15",
-  "unscannedInputDigest": "2410d9c869aab9ae6f7693858f92a638de52734a7a5257da0821ced71daa2c49"
+  "sourceTreeDigest": "5d23c5f580b5f7f19add5b64081780fd11993ef700d68d6168839b9614182aa1",
+  "unscannedInputDigest": "a16e00bb02dfa82e83471432fb02b02e2561c92ddb1599b8b1a9fa5da2853ce7"
  },
  "schema": 25,
  "sentinel": {
