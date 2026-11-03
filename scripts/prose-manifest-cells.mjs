@@ -108,7 +108,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' none added or removed.'
     + ' 2026-11-03 (X-49, docs/shift-records/2026-11-03-x49-stores-off-defense.json, ODQ §934.104, THE COHERENCE AND'
     + ' SCALE WINDOW): re-recorded because the stored-food figure has one home, the Economy tab, so the Defense tab\'s'
-    + ' food-stores lines leave; all 1,050 rows move, none added or removed.',
+    + ' food-stores lines leave; all 1,050 rows move, none added or removed.'
+    + ' 2026-11-03 (DEFENSE-2, docs/shift-records/2026-11-03-defense-magic-dependency.json, ODQ §934.104, THE COHERENCE'
+    + ' AND SCALE WINDOW): re-recorded because the defence record stores the one magic reliance reading and the Defense'
+    + ' tab reads it and the one practitioner census; 512 of the 1,050 rows move, none added or removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
