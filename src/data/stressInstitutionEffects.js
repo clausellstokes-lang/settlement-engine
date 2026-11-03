@@ -12,23 +12,30 @@
 // into first paint. (resourceChains / npcTraitWeights idiom.) PURE DATA (A+ Track
 // H / data-schema.3): no runtime imports — covered by the src/data purity lint +
 // tests/domain/dataPurity.test.js. De-minified from original minified identifiers.
+//
+// The secrets are drawn from the stress type alone, with no roster in reach, so none names a
+// garrison, soldiers or walls: a besieged hamlet has defenders, not necessarily a garrison
+// (lane DEFENSE-2, 2026-11-03; pinned by tests/domain/defenseRosterLines.test.js). A reworded
+// `secret` keeps every keyword npcGenerator.js :: getStressHistory branches on, and no reworded
+// secret or stakes gains or loses a word generateNPCs' criminal-secret and criminal-guild tests read
+// (they match substrings: 'defence' contains 'fence', so the rewording avoids that word).
 
 export const STRESS_INSTITUTION_EFFECTS = {
   under_siege: [
     {
       secret: "Secretly negotiating surrender terms with the besieging force, without the council's knowledge",
-      stakes: "Treason. The garrison would execute them on the spot if they found out",
+      stakes: "Treason. The defenders would execute them on the spot if they found out",
     },
     {
       secret: "Has been rationing their own private food stores while publicly enforcing the communal rationing order",
-      stakes: "The garrison knows about the stores; they've been paid to look the other way",
+      stakes: "Two of the people enforcing the rationing know about the stores; they've been paid to look the other way",
     },
     {
-      secret: "Passed information about the settlement's water supply to someone outside the walls three weeks ago",
+      secret: "Passed information about the settlement's water supply to someone in the besieging camp three weeks ago",
       stakes: "People have already died because of it; they've been living with that knowledge",
     },
     {
-      secret: "Knows a section of the outer wall is structurally compromised and has told no one",
+      secret: "Knows the barricade across the main approach is structurally compromised and has told no one",
       stakes: "Telling the council means explaining why they knew and said nothing for two weeks",
     },
     {
@@ -339,8 +346,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
     },
     {
       secret:
-        "Their private property (inherited land outside the walls) is part of the territory being contested. They've been subtly steering the garrison away from it",
-      stakes: "Two soldiers died in an area they should have been sent to protect",
+        "Their private property (inherited land beyond the last fields) is part of the territory being contested. They've been subtly steering the hunting parties away from it",
+      stakes: "Two defenders died in an area they should have been sent to protect",
     },
   ],
   insurgency: [
@@ -396,7 +403,7 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The newcomers carry the proof in their own stories, if anyone here thinks to listen",
     },
     {
-      secret: "Signed the order closing the settlement to further arrivals, then made a paid exception for one group now already inside the walls",
+      secret: "Signed the order closing the settlement to further arrivals, then made a paid exception for one group now already settled inside",
       stakes: "{npc} was turned away the same week. They saw the paid group admitted. They have not forgotten a face",
     },
   ],
@@ -470,8 +477,8 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The order exists in writing. This person filed it. They have been trying to make it disappear for six days",
     },
     {
-      secret: "Has already arranged to flee with their wealth the moment the walls are breached, abandoning the defence they are publicly organising",
-      stakes: "The garrison is holding partly on faith in this person's leadership. That faith is misplaced",
+      secret: "Has already arranged to flee with their wealth the moment the revolt breaks through, abandoning the defence they are publicly organising",
+      stakes: "Those holding out are doing so partly on faith in this person's leadership. That faith is misplaced",
     },
     {
       secret: "Is protecting one specific enslaved person for private reasons, at the cost of intelligence that would help contain the revolt",
