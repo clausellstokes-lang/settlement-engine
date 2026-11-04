@@ -23,6 +23,8 @@ import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
 import { factionIdFromName } from '../../lib/entities.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { speakTierNoun } from '../display/stateProse/tierVoice.js';
+import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 
 /** The page's one copy constant, on every surface that prints it. */
 export const CRISIS_PAGE_COPY = Object.freeze({
@@ -101,7 +103,7 @@ export const CRISIS_PAGE_COPY = Object.freeze({
  * @typedef {{ name?: unknown, id?: unknown }} PageNpc
  * @typedef {{ name?: unknown, id?: unknown }} PageInstitution
  * @typedef {{ type?: unknown, label?: unknown, summary?: unknown, crisisHook?: unknown, viabilityNote?: unknown, addedByEventId?: unknown, cast?: CrisisCast, _userEdits?: Record<string, { value?: unknown }> }} PageEntry
- * @typedef {{ name?: unknown, stress?: PageEntry | PageEntry[] | null, npcs?: PageNpc[], institutions?: PageInstitution[] }} PageSettlement
+ * @typedef {{ name?: unknown, tier?: unknown, stress?: PageEntry | PageEntry[] | null, npcs?: PageNpc[], institutions?: PageInstitution[] }} PageSettlement
  */
 
 /** @param {unknown} v @returns {string} */
@@ -149,14 +151,16 @@ export function castDoorId(settlement, kind, id) {
 
 /**
  * The event in one line: the crisis, its nature, and its onset where a record holds one.
+ * The nature's copy says "the town"; it is spoken with the place's own noun (`noun`).
  * @param {string} label @param {CrisisNature | null} nature @param {PageEntry} entry
+ * @param {string | null} noun the place's tier noun, or null when the record has no tier
  * @returns {string}
  */
-function eventLine(label, nature, entry) {
+function eventLine(label, nature, entry, noun) {
   const parts = [label];
   if (nature) parts.push(CRISIS_PAGE_COPY.nature[nature]);
   if (str(entry.addedByEventId)) parts.push(CRISIS_PAGE_COPY.begunByYou);
-  return `${parts.join(', ')}.`;
+  return speakTierNoun(`${parts.join(', ')}.`, noun);
 }
 
 /**
@@ -169,6 +173,16 @@ export function composeCrisisPage(settlement) {
   const entries = crisisEntriesOf(s);
   if (!entries.length) return [];
   const facts = composeTonightSheet(/** @type {Parameters<typeof composeTonightSheet>[0]} */ (s)).facts;
+  // THE PLACE'S OWN NOUN (lane RUNG1-TRUTH unit B, 2026-11-04): the nature copy and the cast's
+  // reason vocabulary write "the town" for a place of any size ("a crisis of the town itself",
+  // "the town's defence, …"), and rung 1 counted 326 + 8 of 1,000 non-towns printing it. Every
+  // sentence this page composes from a fixed vocabulary goes through the estate's ONE
+  // substitution, as the fixed pools do (lane TIER-NOUN-POOLS); a town's line is returned by
+  // identity. The record's own sentences (summary, hook, the viability note) are their
+  // writers' business and are not re-spoken here.
+  const noun = tierNounFor(typeof s.tier === 'string' ? s.tier : '');
+  /** @template T @param {T} text @returns {T} a non-string passes through untouched */
+  const speak = (text) => /** @type {T} */ (typeof text === 'string' ? speakTierNoun(text, noun) : text);
   const sections = entries.map(({ entry, index }) => {
     const type = str(entry.type);
     const label = str(entry.label) || type;
@@ -181,7 +195,7 @@ export function composeCrisisPage(settlement) {
       type,
       label,
       nature,
-      line: eventLine(label, nature, entry),
+      line: eventLine(label, nature, entry, noun),
       summary: str(entry.summary),
       hook: crisisHookFor(s, entry),
       cast: (cast?.roles || []).map((r) => ({
@@ -191,12 +205,12 @@ export function composeCrisisPage(settlement) {
         id: r.id,
         doorId: castDoorId(s, r.kind, r.id),
         name: r.name,
-        reason: r.reason,
+        reason: speak(r.reason),
         temporary: !!r.temporary,
       })),
-      absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: a.reason })),
+      absent: (cast?.absent || []).map((a) => ({ role: a.role, roleLabel: CRISIS_ROLE_LABEL[a.role] || a.role, reason: speak(a.reason) })),
       edited,
-      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: k.stake, reason: k.reason })),
+      stakes: (entry.cast?.stakes || []).map((k) => ({ factionId: k.factionId, doorId: castDoorId(s, 'faction', k.factionId), stake: k.stake, reason: speak(k.reason) })),
       levers: (entry.cast?.levers || []).map((l) => ({
         institution: l.institution,
         doorId: castDoorId(s, 'institution', l.institution),
