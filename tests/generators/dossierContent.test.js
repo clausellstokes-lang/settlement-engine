@@ -15,6 +15,7 @@ import { dirname, resolve } from 'node:path';
 
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 import { HISTORY_DESC_VARIANTS } from '../../src/data/historyDescVariants.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
 import { pickVariant } from '../../src/kernel/proseHash.js';
@@ -103,7 +104,10 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
         const key = `${settType}|${inst.category}|${inst.name}`;
         const variants = INSTITUTION_DESC_VARIANTS[key];
         if (!variants) continue; // no authored variants → catalog desc unchanged (not asserted here)
-        const pool = [...canonsFor(inst.category, inst.name), ...variants];
+        // 2026-11-04 (soak 1000 row 7, A-11, under the owner's delegation): an inland place whose
+        // whole pool speaks of water takes the row's authored inland text (src/data/inlandDescriptions.js).
+        const inland = INLAND_DESCRIPTIONS[key];
+        const pool = [...canonsFor(inst.category, inst.name), ...variants, ...(inland ? [inland] : [])];
         expect(pool, `${key} desc from its pool`).toContain(inst.desc);
       }
     });
