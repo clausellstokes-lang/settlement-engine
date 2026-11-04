@@ -119,8 +119,9 @@ describe('behavior: governing faction engages the legitimacy consumers', () => {
     // gives a non-neutral governing faction (11 of the first 25 seeds do).
     // RE-PROBED 2026-11-04 (X-46 car 3, the institution budget; the chair's ruling 6(b)): the
     // density factor changed this town's roster, and `-2` now lands on neutral governing power;
-    // `-0` again gives a non-neutral governing faction (so do -1 and -4).
-    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-0');
+    // `-0` again gives a non-neutral governing faction (so do -1 and -4). Re-probed to `-1` the
+    // same day, same cause (the chair's inverse calibration): -1, -4 and -6 of the first 40 do.
+    const s = gen({ ...BASE_CFG, settType: 'town' }, 'powercfg-leg-1');
     const ra = deriveCausalState(s).variables.ruling_authority;
     const govContrib = (ra.contributors || []).find((c) => c.effect === 'governing_power');
     expect(govContrib, 'deriveRulingAuthority must engage the governing faction').toBeTruthy();

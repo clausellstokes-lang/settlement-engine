@@ -95,7 +95,9 @@ describe('deterministic generation coherence repair', () => {
       // ruling 6(b)): the density factor changes which rows a metropolis rolls, so `-39` no longer
       // adds two; of `-0`..`-59` only `-28` adds two hard dependencies AND leaves the final roster
       // free of hard violations. The claim is unchanged; the subjects follow the seed.
-    }, 'effect-reach-v1-iso-metro-28');
+      // Re-pinned `-28` to `-116` the same day, same cause (the chair's inverse calibration of the
+      // density factor): none of -0..-59 does both now; -116 is the first above them that does.
+    }, 'effect-reach-v1-iso-metro-116');
     const names = new Set(
       settlement.institutions.map(institution => institution.name),
     );
@@ -108,7 +110,7 @@ describe('deterministic generation coherence repair', () => {
       // unchanged: MORE THAN ONE newly visible hard dependency is added and reported.
       expect.objectContaining({
         type: 'hard_dependency',
-        subject: "Sage's quarter",
+        subject: 'Fighting pits',
       }),
       expect.objectContaining({
         type: 'hard_dependency',

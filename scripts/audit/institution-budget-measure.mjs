@@ -4,11 +4,14 @@
  * institution budget.
  *
  *   node scripts/audit/institution-budget-measure.mjs [--out <file.json>] [--seeds 40] [--matrix 120] [--matrix-only]
- *   node scripts/audit/institution-budget-measure.mjs --calibrate 200 [--out <file.json>]
- *   (`--calibrate N` reads only the mean house count at each band's geometric midpoint over N
- *   settlements, and E = that mean − R_tier. Run at a tree whose engine has NO density factor
- *   (d ≡ 1: the chair's ruling of 2026-11-04 took it at d0a3202, U2), it is the calibration of
- *   `INSTITUTION_BUDGET_REALISED`; run at a tip with the factor it reads where the curve lands.)
+ *   X46_FORCE_D=1 node --import ./scripts/audit/institution-budget-force-d.mjs \
+ *     scripts/audit/institution-budget-measure.mjs --calibrate 200 [--tiers a,b] [--ds 0,3,4] [--out <file.json>]
+ *   (`--calibrate N`: the calibration of `INSTITUTION_BUDGET_REALISED` (the chair's rulings of
+ *   2026-11-04). At each band's geometric midpoint, N settlements at each forced d in
+ *   CALIBRATION_DS (0, 0.25, 0.5, 1, 1.5, 2, 3, 4; `--ds` measures a subset — the points are
+ *   deterministic per seed, so a subset run reproduces its rows of the full run), the mean non-fabric house count minus R_tier: realised(d). The force-d hook
+ *   must be loaded (the script refuses to calibrate unforced). The first calibration (U5) was one
+ *   point, d = 1, taken at d0a3202.)
  *   (`--matrix 1000 --matrix-only` reads the soak's 1,000 corpus: the same seeds and configs as soak-review)
  *
  * It reads, all from the app's own birth path (`scripts/audit/soak-review/corpus.mjs :: birth` for the
@@ -76,18 +79,26 @@ const read = (s) => {
 await ensureLaws();
 
 const ORIGINAL = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...POPULATION_RANGES[t] }]));
+const CALIBRATION_DS = opt('--ds', null) ? opt('--ds', null).split(',').map(Number) : [0, 0.25, 0.5, 1, 1.5, 2, 3, 4];
 if (CALIBRATE !== null) {
+  const budget = await import('../../src/data/institutionBudget.js');
+  const forced = (d) => { process.env.X46_FORCE_D = String(d); return budget.densityFactor('town', 1000) === d; };
+  if (!forced(0.5)) throw new Error('--calibrate needs the force-d hook: node --import ./scripts/audit/institution-budget-force-d.mjs');
   const calibration = {};
-  for (const tier of TIER_ORDER) {
+  const only = opt('--tiers', null);
+  for (const tier of only ? only.split(',') : TIER_ORDER) {
     let R = 0;
     for (const group of Object.values(catalog.institutionalCatalog[tier])) {
       for (const [name, row] of Object.entries(group)) if (row.required && !catalog.isFabricRow(tier, name)) R += 1;
     }
     const midpoint = Math.round(Math.sqrt(ORIGINAL[tier].min * ORIGINAL[tier].max));
-    const houses = cell(tier, midpoint, CALIBRATE, 'cal');
-    const meanHouses = mean(houses);
-    calibration[tier] = { midpoint, seeds: CALIBRATE, R, meanHouses, E: meanHouses - R };
+    const points = CALIBRATION_DS.map((d) => {
+      forced(d);
+      return [d, mean(cell(tier, midpoint, CALIBRATE, 'cal')) - R];
+    });
+    calibration[tier] = { midpoint, seeds: CALIBRATE, R, points };
   }
+  delete process.env.X46_FORCE_D;
   const text = JSON.stringify({ calibrate: CALIBRATE, calibration }, null, 1);
   if (OUT) writeFileSync(OUT, text);
   process.stdout.write(`${text}\n`);

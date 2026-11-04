@@ -57,26 +57,50 @@ describe('X-46 car 3 — the density factor', () => {
     }
   });
 
-  // THE CHAIR'S RULING (2026-11-04, X46-3 hand-back ruling 1): E_tier is the REALISED optional
-  // house count at the band's geometric midpoint with d ≡ 1 — after the cascade and the faction
-  // pass, with the priority and resource multipliers — over 200 seeds per tier, so d scales against
-  // what is actually drawn, not the authored chances.
-  it('divides by the realised E (measured at d = 1 over 200 seeds), not the catalogue sum', () => {
-    expect(TIER_ORDER.map((t) => INSTITUTION_BUDGET_REALISED[t].measuredE)).toEqual([3.29, 9.775, 26.045, 46.24, 51.67, 58.65]);
+  // THE CHAIR'S RULINGS (2026-11-04). Hand-back ruling 1: E is what is actually DRAWN, not the
+  // authored chances. Addendum ruling 2: the realised count is convex in d (chances cap at 1, the
+  // cascade adds), so a one-point midpoint calibration overshoots at the band's top. The table is
+  // realised(d) at five d (200 seeds each at the band's geometric midpoint, non-fabric houses after
+  // the cascade and the faction pass, minus R), and d(pop) is its INVERSE at the target
+  // expectedHousesAt(pop) − R, linear between points, clamped at the table's ends. Ruling on the
+  // clamp (2026-11-04): MEASURE, never assume — d = 0 is a measured point (the unscaled repairs),
+  // and d = 3 and 4 extend the top; a target above realised(4) clamps at 4 and is the ceiling.
+  it('holds realised(d) at d = 0, 0.25, 0.5, 1, 1.5, 2, 3, 4 per tier, 200 seeds each, increasing in d', () => {
     for (const tier of TIER_ORDER) {
-      expect(INSTITUTION_BUDGET_REALISED[tier].seeds).toBe(200);
-      expect(tierBudgetTerms(tier).E).toBe(INSTITUTION_BUDGET_REALISED[tier].measuredE);
-      expect(INSTITUTION_BUDGET_REALISED[tier].midpoint).toBe(Math.round(tierBudgetTerms(tier).midpoint));
+      const row = INSTITUTION_BUDGET_REALISED[tier];
+      expect(row.seeds).toBe(200);
+      expect(row.midpoint).toBe(Math.round(tierBudgetTerms(tier).midpoint));
+      expect(row.points.map(([d]) => d)).toEqual([0, 0.25, 0.5, 1, 1.5, 2, 3, 4]);
+      for (let i = 1; i < row.points.length; i += 1) expect(row.points[i][1], `${tier} realised increases`).toBeGreaterThan(row.points[i - 1][1]);
+      expect(tierBudgetTerms(tier).E).toBe(row.points[3][1]); // realised(1), for the report
     }
   });
 
-  it('is (expectedHousesAt(pop) − R_tier) / E_tier, never below zero, and 1 where no population is known', () => {
+  it('d(pop) is the inverse of realised(d) at expectedHousesAt(pop) − R, clamped to the table\'s ends', () => {
+    const realisedAt = (points, d) => {
+      for (let i = 1; i < points.length; i += 1) {
+        const [d0, r0] = points[i - 1]; const [d1, r1] = points[i];
+        if (d <= d1) return r0 + ((r1 - r0) * (d - d0)) / (d1 - d0);
+      }
+      return points[points.length - 1][1];
+    };
     for (const tier of TIER_ORDER) {
-      const { R, E } = tierBudgetTerms(tier);
-      for (const P of [POPULATION_RANGES[tier].min, POPULATION_RANGES[tier].max]) {
-        expect(densityFactor(tier, P)).toBeCloseTo(Math.max(0, (expectedHousesAt(P) - R) / E), 12);
+      const { R } = tierBudgetTerms(tier);
+      const { points } = INSTITUTION_BUDGET_REALISED[tier];
+      const { min, max } = POPULATION_RANGES[tier];
+      for (let k = 0; k <= 10; k += 1) {
+        const P = Math.round(min * (max / min) ** (k / 10));
+        const target = expectedHousesAt(P) - R;
+        const d = densityFactor(tier, P);
+        expect(d).toBeGreaterThan(0); // every target is ≥ 1 house (U9) and above realised(0)
+        expect(d).toBeLessThanOrEqual(4);
+        if (target >= points[points.length - 1][1]) expect(d).toBe(4); // the tier's ceiling
+        else expect(realisedAt(points, d)).toBeCloseTo(target, 9);
       }
     }
+  });
+
+  it('is 1 where no population is known; scaleChance clamps the product to [0, 1]', () => {
     expect(densityFactor('town', null)).toBe(1);
     expect(densityFactor('nowhere', 500)).toBe(1);
     expect(scaleChance(0.6, 2)).toBe(1);
