@@ -3,16 +3,17 @@
  * 2026-11-04: "it should not have a cap"; "bring it back to 1 million, but make it so that
  * anything above ... gets increasingly rarer"; "start that thinning out at 50,000"; "it thins out
  * even harder starting at 100,000+ then again at 200,000+"; "just make it exponential in a way
- * hitting those three benchmarks"; the owner chose the smooth curve, thinning 0.5).
+ * hitting those three benchmarks"; then "i leave everything to your judgement": the seat took
+ * the rarer variant, 30% of rolls past 50,000, Zipf's share there).
  *
- * Uniform over the body [15,000, 50,000]; past it the density per person is exp(-0.5 * D²),
+ * Uniform over the body [15,000, 50,000] for 70% of rolls; for 30%, past it, the density per person is exp(-0.5 * D²),
  * D = doublings past 50,000, to 1,000,000. ONE kernel draw, as the uniform roll was, so no later
  * step of any seed sees a different draw count; no other tier's roll moves (sixty
  * non-metropolis seeds; the full-record hashes were compared base vs tip in the seat's probe).
  */
 import { describe, expect, test } from 'vitest';
 
-import { POPULATION_RANGES, METROPOLIS_ROLL_TUNING, METROPOLIS_ROLL_SHAPE, rollMetropolisPopulation } from '../../src/data/constants.js';
+import { POPULATION_RANGES, METROPOLIS_ROLL_TUNING, rollMetropolisPopulation } from '../../src/data/constants.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const generate = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
@@ -39,18 +40,17 @@ describe('the metropolis roll thins past 50,000 to 1,000,000, harder at every do
   }, 180000);
 
   test('the table is the one home, and the band reads its body', () => {
-    expect(METROPOLIS_ROLL_TUNING).toEqual({ bodyMin: 15000, bodyMax: 50000, tailMax: 1000000, thinning: 0.5 });
+    expect(METROPOLIS_ROLL_TUNING).toEqual({ bodyMin: 15000, bodyMax: 50000, tailMax: 1000000, thinning: 0.5, tailShare: 0.3 });
     expect(POPULATION_RANGES.metropolis).toEqual({ min: 15000, max: 50000 });
   });
 
-  test('the measured shares the owner chose: >50k 70%, >100k 35%, >200k 8.9%, >500k 0.39%, >900k about 1 in 10,000', () => {
-    expect(METROPOLIS_ROLL_SHAPE.tailShare).toBeCloseTo(0.705, 3);
-    expect(shareAbove(50000)).toBeCloseTo(0.705, 2);
-    expect(shareAbove(100000)).toBeCloseTo(0.354, 2);
-    expect(shareAbove(200000)).toBeCloseTo(0.089, 2);
-    expect(shareAbove(500000)).toBeCloseTo(0.0039, 3);
+  test('the measured shares: >50k 30% (Zipf), >100k 15%, >200k 3.8%, >500k 0.16%, >900k about 1 in 25,000', () => {
+    expect(shareAbove(50000)).toBeCloseTo(0.3, 3);
+    expect(shareAbove(100000)).toBeCloseTo(0.151, 2);
+    expect(shareAbove(200000)).toBeCloseTo(0.038, 2);
+    expect(shareAbove(500000)).toBeCloseTo(0.0016, 3);
     expect(shareAbove(900000)).toBeGreaterThan(0);
-    expect(shareAbove(900000)).toBeLessThan(0.0005);
+    expect(shareAbove(900000)).toBeLessThan(0.0002);
   });
 
   test('one draw; the edges; each doubling past 50,000 thins harder than the last', () => {
@@ -58,8 +58,8 @@ describe('the metropolis roll thins past 50,000 to 1,000,000, harder at every do
     rollMetropolisPopulation({ random: () => { draws += 1; return 0.5; } });
     expect(draws).toBe(1);
     expect(at(0)).toBe(50000);
-    expect(at(METROPOLIS_ROLL_SHAPE.tailShare - 1e-12)).toBe(1000000);
-    expect(at(METROPOLIS_ROLL_SHAPE.tailShare)).toBe(15000);
+    expect(at(METROPOLIS_ROLL_TUNING.tailShare - 1e-12)).toBe(1000000);
+    expect(at(METROPOLIS_ROLL_TUNING.tailShare)).toBe(15000);
     expect(at(0.999999999)).toBe(50000);
     // mass per doubling band: 50-100k, 100-200k, 200-400k, 400-800k; each ratio smaller than the last
     const band = (lo, hi) => shareAbove(lo) - shareAbove(hi);

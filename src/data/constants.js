@@ -34,13 +34,16 @@ export const POPULATION_RANGES = {
 // X-46 car 1b, THE THINNING TAIL (the owner, 2026-11-04: thinning starts at 50,000, thins harder
 // at 100,000+ and again at 200,000+, "just make it exponential in a way hitting those three
 // benchmarks"; the owner chose this curve over a three-knee power law and a rarer variant). A
-// rolled metropolis is uniform over the body [bodyMin, bodyMax] like every other tier's band.
-// Past bodyMax the density per person is exp(-thinning * D²), D = doublings past 50,000
-// (D = log2(pop / 50,000)), truncated at tailMax. So the density is continuous at 50,000 (the
-// body's own density, then a smooth bend) and each doubling thins harder than the last: x0.61
-// from 50k to 100k, x0.22 from 100k to 200k, x0.08 from 200k to 400k. With thinning 0.5:
-// above 50,000 70%, above 100,000 35%, above 200,000 8.9%, above 500,000 0.39%, above 900,000
-// 0.01% (1 in 10,000). `tailMax` is the historical extreme (Rome, Baghdad, Constantinople at
+// rolled metropolis is uniform over the body [bodyMin, bodyMax] like every other tier's band
+// with probability 1 - tailShare; with probability tailShare it lands past bodyMax, where the
+// density per person is exp(-thinning * D²), D = doublings past 50,000 (D = log2(pop / 50,000)),
+// truncated at tailMax. Each doubling thins harder than the last: x0.61 from 50k to 100k, x0.22
+// from 100k to 200k, x0.08 from 200k to 400k. tailShare 0.3 is Zipf's share past 50,000 among
+// cities past 15,000 (15,000 / 50,000), so most metropolises stay 15,000-50,000 places; the
+// density steps down at 50,000 (about 5x) and bends from there. Measured: above 50,000 30%,
+// above 100,000 15%, above 200,000 3.8%, above 500,000 0.16%, above 900,000 about 1 in 25,000.
+// The owner delegated the choice ("i leave everything to your judgement", 2026-11-04) after
+// choosing the continuous variant (70% past 50,000); the seat took this one. `tailMax` is the historical extreme (Rome, Baghdad, Constantinople at
 // their height): the edge a draw needs, not a cap on the record (a custom population is never
 // clamped). Registered tuning; for the owner's veto.
 export const METROPOLIS_ROLL_TUNING = Object.freeze({
@@ -48,6 +51,7 @@ export const METROPOLIS_ROLL_TUNING = Object.freeze({
   bodyMax: 50000,
   tailMax: 1000000,
   thinning: 0.5,
+  tailShare: 0.3,
 });
 
 /** Grid resolution of the tail's tabulated CDF (a deterministic numerical inverse). */
@@ -55,11 +59,10 @@ const METROPOLIS_TAIL_STEPS = 4096;
 
 /**
  * The tail's cumulative mass, tabulated once on a grid in D (pure, computed from the table at
- * module load): `cum[i]` is the mass from 50,000 to 50,000 * 2^(i * dD), the body's density
- * being 1. `tailShare` is the derived share of rolls past the body.
+ * module load): `cum[i]` is the unnormalised mass from 50,000 to 50,000 * 2^(i * dD).
  */
 export const METROPOLIS_ROLL_SHAPE = (() => {
-  const { bodyMin, bodyMax, tailMax, thinning } = METROPOLIS_ROLL_TUNING;
+  const { bodyMax, tailMax, thinning } = METROPOLIS_ROLL_TUNING;
   const span = Math.log2(tailMax / bodyMax);
   const dD = span / METROPOLIS_TAIL_STEPS;
   // mass element in pop: density(D) * dpop, dpop = bodyMax * 2^D * ln2 * dD
@@ -68,11 +71,7 @@ export const METROPOLIS_ROLL_SHAPE = (() => {
   for (let i = 1; i <= METROPOLIS_TAIL_STEPS; i++) {
     cum.push(cum[i - 1] + 0.5 * (element((i - 1) * dD) + element(i * dD)) * dD);
   }
-  const tailMass = cum[METROPOLIS_TAIL_STEPS];
-  return Object.freeze({
-    cum: Object.freeze(cum), dD, tailMass,
-    tailShare: tailMass / (bodyMax - bodyMin + tailMass),
-  });
+  return Object.freeze({ cum: Object.freeze(cum), dD, tailMass: cum[METROPOLIS_TAIL_STEPS] });
 })();
 
 /**
@@ -84,8 +83,8 @@ export const METROPOLIS_ROLL_SHAPE = (() => {
  * @returns {number}
  */
 export const rollMetropolisPopulation = (rng) => {
-  const { bodyMin, bodyMax, tailMax } = METROPOLIS_ROLL_TUNING;
-  const { cum, dD, tailMass, tailShare } = METROPOLIS_ROLL_SHAPE;
+  const { bodyMin, bodyMax, tailMax, tailShare } = METROPOLIS_ROLL_TUNING;
+  const { cum, dD, tailMass } = METROPOLIS_ROLL_SHAPE;
   const u = rng.random();
   if (u >= tailShare) {
     const v = (u - tailShare) / (1 - tailShare);
