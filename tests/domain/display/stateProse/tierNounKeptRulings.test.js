@@ -14,6 +14,8 @@ import { describe, expect, it } from 'vitest';
 import { speakTierNoun } from '../../../../src/domain/display/stateProse/stateProseKernel.js';
 import { tierNounFindings } from '../../../../src/domain/coherence/tierNounFindings.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../../../src/data/institutionDescVariants.js';
+import { RESOURCE_CHAINS } from '../../../../src/data/resourceChains.js';
+import { institutionalCatalog } from '../../../../src/data/institutionalCatalog.js';
 
 /** The self-reference planted beside a kept line: it must still be found. */
 const SELF = ' Plainly this is a town that bargains.';
@@ -34,4 +36,19 @@ describe('ruling 1 — "crown or town" (the customs house) is the state or the m
     expect(INSTITUTION_DESC_VARIANTS['metropolis|Economy|Customs house']).toContain(line);
   });
   it.each(['city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
+});
+
+describe('ruling 2 — "Town granary" is a catalogue row\'s proper name, not the tier', () => {
+  // The chair's test for the ruling: if only town-and-larger blocks name it, it is a proper name and is kept;
+  // a thorp, hamlet or village block naming it would instead be renamed "Granary".
+  it('only the town block names it (city and metropolis carry their own names)', () => {
+    const naming = Object.entries(institutionalCatalog)
+      .filter(([, cats]) => Object.values(cats).some((insts) => Object.keys(insts).includes('Town granary')))
+      .map(([tier]) => tier);
+    expect(naming).toEqual(['town']);
+  });
+  // The leak: the grain chain's row lists its processing institutions by catalogue name at every tier.
+  const row = `Grain » ${RESOURCE_CHAINS.grain.processingInstitutions.join(', ')}`;
+  it('the grain chain row names it', () => expect(row).toContain('Town granary'));
+  it.each(['thorp', 'hamlet', 'village', 'city', 'metropolis'])('is kept on a %s', (tier) => expectKept(row, tier));
 });
