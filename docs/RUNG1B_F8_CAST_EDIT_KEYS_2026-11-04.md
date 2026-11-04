@@ -27,3 +27,16 @@ The red: `tests/domain/dmEditKeysFollowRename.test.js`, 7 failed, 3 passed (the 
 | the pending-edit queue (`rename-faction`) | `factionIndex` | no | — | none |
 
 No faction or house carries an id on any record (36 of 36 crisis records: no `id` on `powerStructure.factions[]` or `institutions[]`), and design §22.4 rules a faction's identity IS its display name. So shape (a), "key by the entity's id", has no id to key by; the cure is shape (b).
+
+## Unit 2 — the cure for the cast edit: shape (b), the rename cascades the edit's keys
+
+**Why (b).** Shape (a) needs an id the record does not have: no faction and no house carries one (design §22.4; 17,361 of 17,361 generated houses carry `name` and no `id`), and the engine's own cast already keys a faction or house row by its display name, which F7 cascades. Keying the DM's line by a new id would mint an identity the design rules against and leave the DM's line and the engine's cast on two key conventions. The store is also registered (`EDITABLE_FIELDS.crisis`, the prose-queue spine's `crisis.castRoles` row), so (b) leaves its shape untouched: `role=kind:id`, byte for byte, with only the moved parts re-spelled.
+
+**What landed.**
+
+- `src/domain/userEditLines.js` (new leaf, no imports): the cast line's grammar (`CAST_EDIT_PATH`, `CAST_EDIT_SEPARATOR`, moved here from `crisisCast.js`, which re-exports both) and `rekeyCastLine(value, kind, old, new)`, kind-scoped and exact as the reader is; a line where nothing moves is returned as given.
+- `src/domain/userEdits.js :: rekeyUserEdit(entity, path, rewrite)`: the edit layer's own re-key writer. Both homes of the edit move (`_userEdits[path].value` and the entity field `applyUserEdit` mirrors it to); `editedAt` and `originalValue` are kept, because a rename is not the DM editing.
+- `src/domain/factionRename.js :: rekeyCastEditsOfKind`, called by the faction cascade (`'faction'` parts) and by `applyInstitutionRenameToSettlement` (`'institution'` parts), at every crisis entry of both containers; reported in `touched` as `<home>._userEdits.castRoles`. Not a ledger row: the two ledgers declare GENERATED paths and their walkers read generated records, which carry no DM edit.
+- `npc:` parts are keyed by the durable character id and are not touched (the control).
+
+**Readers** (55 test files: every file naming `castRoles`, `crisisCast`, `userEdits` or a rename module). Green except: `dmEditKeysFollowRename` (the three `backs` reds, unit 3's); and three files red at the base with byte-identical failure output base vs tip (normalised logs diff empty): `institutionRename` A6 ("guild rows 0", F7's), `negativeAssertionAnchor.walker` (two arms, files outside this lane), and `worldGenerationClockSeam.walker` ARM C; `editCorpusRatchet` A3–A8 (F7's) is red at the tip on the same six arms, its base-vs-tip figure diff recorded in unit 3 (the base run was still in flight at this commit). `check-observed-shape-readers.mjs` is red at the base before it scans (its execution-input precondition: three generated data files changed since the last re-freeze), the same message at the tip; so it does not certify the new reads either way.
