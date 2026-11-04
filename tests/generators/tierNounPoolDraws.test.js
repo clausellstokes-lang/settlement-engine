@@ -17,10 +17,9 @@
  * (`historyGenerator.js :: speakRecord`). No pool byte moves, no sentence is added, a town is
  * identity, and nothing draws.
  *
- * ONE NAMED RESIDUE, NOT AN EXCLUSION: the customs-house variant "collected by officials of
- * crown or town" (crown or town = royal or municipal, the canonical's own words) has no
- * determiner for the kernel to move. It is left for the chair's ruling (a kept collocation, or
- * the owner's copy), so the arm below pins it BY TEXT: any other finding is an offender.
+ * NO EXCLUSION: the customs-house variant "collected by officials of crown or town" (crown or
+ * town = royal or municipal) is a kept phrase in the kernel's TIER_NOUN_KEPT since the chair's
+ * ruling 1, so every finding in these lines is an offender.
  */
 import { beforeAll, describe, expect, test } from 'vitest';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -31,7 +30,6 @@ import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
 
 const PER_TIER = 8;
-const RESIDUE = 'Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.';
 /** The routed sentences, in either noun: the arms read them before and after the cure. */
 const ROUTED = [
   /Organised cobblers who shoe the \p{L}+ in boots/u,
@@ -75,12 +73,11 @@ describe('the place\'s own noun in drawn institution text', () => {
     expect(BY_TIER.city.flatMap(income).filter(({ text }) => TOLLS.test(text)).length).toBeGreaterThanOrEqual(4);
   });
 
-  test('no city, metropolis or thorp calls itself a town in a drawn institution desc (the customs collocation named)', () => {
+  test('no city, metropolis or thorp calls itself a town in a drawn institution desc (every finding an offender)', () => {
     const offenders = [];
     for (const tier of ['city', 'metropolis', 'thorp']) {
       for (const s of BY_TIER[tier]) {
         for (const { where, text } of drawn(s)) {
-          if (text === RESIDUE) continue;
           for (const f of tierNounFindings(s, text)) offenders.push(`${tier} ${s.name} / ${where}: …${f.context}…`);
         }
       }

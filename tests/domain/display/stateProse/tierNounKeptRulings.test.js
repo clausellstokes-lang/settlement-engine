@@ -1,0 +1,37 @@
+/**
+ * tests/domain/display/stateProse/tierNounKeptRulings.test.js — THE CHAIR'S RULINGS ON THE
+ * TIER-NOUN RESIDUE (lane TIER-NOUN-POOLS, 2026-11-04, after units 1–2 took the 1,000 corpus
+ * from 287 to 160 places).
+ *
+ * The 160 came from four sources, and the chair ruled on each (vetoable by the owner). Each
+ * arm reads the leaking line FROM ITS OWN MODULE rather than quoting it, so a reworded source
+ * fails here loudly instead of leaving a stale quote green. Each arm also proves the keep is
+ * no wider than its line: a self-reference beside it still finds, and `speakTierNoun` still
+ * returns the line unchanged (a keep changes what the CHECK forgives, never a rendered byte).
+ */
+import { describe, expect, it } from 'vitest';
+
+import { speakTierNoun } from '../../../../src/domain/display/stateProse/stateProseKernel.js';
+import { tierNounFindings } from '../../../../src/domain/coherence/tierNounFindings.js';
+import { INSTITUTION_DESC_VARIANTS } from '../../../../src/data/institutionDescVariants.js';
+
+/** The self-reference planted beside a kept line: it must still be found. */
+const SELF = ' Plainly this is a town that bargains.';
+
+/** The kept line is forgiven on the tier, the planted self-reference beside it is not, and no byte moves. */
+function expectKept(line, tier) {
+  expect(tierNounFindings({ tier }, line), `${tier}: ${line}`).toEqual([]);
+  const found = tierNounFindings({ tier }, line + SELF);
+  expect(found, `${tier}: the self-reference beside it`).toHaveLength(1);
+  expect(found[0].context).toContain('this is a town that bargains');
+  expect(speakTierNoun(line, tier), `${tier}: a keep never moves a rendered byte`).toBe(line);
+}
+
+describe('ruling 1 — "crown or town" (the customs house) is the state or the municipality, not the tier', () => {
+  const line = INSTITUTION_DESC_VARIANTS['city|Economy|Customs house'].find((s) => /crown or town/.test(s));
+  it('the line exists where the soak found it (city and metropolis keys)', () => {
+    expect(line).toBeTruthy();
+    expect(INSTITUTION_DESC_VARIANTS['metropolis|Economy|Customs house']).toContain(line);
+  });
+  it.each(['city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
+});

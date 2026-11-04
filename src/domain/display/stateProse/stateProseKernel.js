@@ -569,6 +569,7 @@ export const TIER_NOUN_KEPT = Object.freeze([
   Object.freeze({ phrase: 'through town', why: 'the idiom "the way through town" carries no determiner and no tier (general DS corpus)' }),
   Object.freeze({ phrase: 'in town', why: 'the idiom "in town" (present locally) carries no determiner and no tier' }),
   Object.freeze({ phrase: 'town crier', why: 'an office title (Herald/Town Crier), not the place: the roster names it at every size' }),
+  Object.freeze({ phrase: 'crown or town', why: 'the state or the municipality, not the tier: the customs-house variant in data/institutionDescVariants.js, whose canonical says "royal or municipal officials" (chair ruling 1, TIER-NOUN-POOLS)' }),
 ]);
 
 /**
