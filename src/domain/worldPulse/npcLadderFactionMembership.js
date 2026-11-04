@@ -1,5 +1,5 @@
 /**
- * domain/worldPulse/ladderFactionMembership.js — the faction ladder's key and membership
+ * domain/worldPulse/npcLadderFactionMembership.js — the faction ladder's key and membership
  * match, moved verbatim out of npcLadderState.js (which re-exports both) so that a reader
  * needing only these two (domain/dossier/seatHolder.js, and through it the generation
  * receipt's coherence battery) does not import the world-pulse engine npcLadderState.js

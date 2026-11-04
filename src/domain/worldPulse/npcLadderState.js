@@ -15,7 +15,7 @@ import { halfLifeFactor } from './bandedStock.js';
 import { npcId } from './npcAgency.js';
 import { clamp, clamp01 } from '../../kernel/math.js';
 import { isOffStage } from '../roads/state.js';
-import { ladderFactionKey, npcInFaction } from './ladderFactionMembership.js';
+import { ladderFactionKey, npcInFaction } from './npcLadderFactionMembership.js';
 
 /** @param {unknown} v @param {number} fallback @returns {number} */
 export function num(v, fallback) {
@@ -110,7 +110,7 @@ export function rungCapForTier(tier) {
   return typeof cap === 'number' ? cap : 3;
 }
 
-// ── Faction key + membership: in ./ladderFactionMembership.js, a leaf with no engine imports,
+// ── Faction key + membership: in ./npcLadderFactionMembership.js, a leaf with no engine imports,
 // so a reader that needs only membership (the dossier's seat holder, and through it the
 // generation receipt's battery) does not load this module's world-pulse graph. Re-exported
 // here unchanged (lane SELF-VOUCH, 2026-11-04).
