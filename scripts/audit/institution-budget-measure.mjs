@@ -1,0 +1,137 @@
+/**
+ * scripts/audit/institution-budget-measure.mjs — X-46 car 3's measurement (docs/DESIGN_X46_SCALE_TRAIN.md §4,
+ * "What it is measured to do"): the house count against the population, before and after the
+ * institution budget.
+ *
+ *   node scripts/audit/institution-budget-measure.mjs [--out <file.json>] [--seeds 40] [--matrix 120] [--matrix-only]
+ *   (`--matrix 1000 --matrix-only` reads the soak's 1,000 corpus: the same seeds and configs as soak-review)
+ *
+ * It reads, all from the app's own birth path (`scripts/audit/soak-review/corpus.mjs :: birth` for the
+ * matrix; `birthConfig` → `generateSettlementPipeline` for the forced-population cells):
+ *   1. the certification matrix (indices 0..matrix-1): per tier the median and p10–p90 of the house
+ *      count and the within-tier Spearman ρ(population, houses);
+ *   2. the band ends: each tier at its POPULATION_RANGES min and max, `seeds` settlements each, the
+ *      p10–p90 against the budget (1–3 / 2–6 / 5–14 / 12–35 / 30–75 / 70+);
+ *   3. the overlap agreement: 100 (hamlet/village), 400 (village/town), 2,500 (town/city), 15,000
+ *      (city/metropolis), `seeds` settlements per side, the mean houses and their relative gap;
+ *   4. the catalogue's R_tier and E_tier, and the largest roster per tier (the
+ *      CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS analogue over this corpus — a reading, never a re-record).
+ *
+ * A HOUSE is a roster row that is not fabric (`institutionalCatalog.js :: isFabricInstitution`).
+ * The forced population is a MEASUREMENT device only: the script narrows the module's own
+ * POPULATION_RANGES row to [P, P] for the cell, so the tier's roll returns P on the same one draw.
+ */
+import { writeFileSync } from 'node:fs';
+
+import { birth, ensureLaws } from './soak-review/corpus.mjs';
+import { configForIndex } from './generation-certification-soak.mjs';
+import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { birthConfig } from '../../src/domain/density/densityCreateBoundary.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import * as catalog from '../../src/data/institutionalCatalog.js';
+
+const args = process.argv.slice(2);
+const opt = (k, d) => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : d; };
+const OUT = opt('--out', null);
+const SEEDS = Number(opt('--seeds', 40));
+const MATRIX = Number(opt('--matrix', 120));
+const MATRIX_ONLY = args.includes('--matrix-only');
+
+// Before the fabric tag exists the measurement uses the same list by name (the "before" run).
+const FALLBACK_FABRIC = new Set(['Dwellings (4-16)', 'Dwellings (17-80)', 'Dwellings (80-180)',
+  'Housing (180-1000 structures)', 'Housing (1000-5000 structures)', 'Housing (5000+ structures)',
+  'Water source', 'Multiple water sources', 'Access to parish church']);
+const isFabric = typeof catalog.isFabricInstitution === 'function'
+  ? (inst) => catalog.isFabricInstitution(inst)
+  : (inst) => !inst?.isCustom && FALLBACK_FABRIC.has(inst?.name);
+
+const BUDGET = { thorp: [1, 3], hamlet: [2, 6], village: [5, 14], town: [12, 35], city: [30, 75], metropolis: [70, Infinity] };
+
+const q = (xs, p) => { const s = [...xs].sort((a, b) => a - b); if (!s.length) return null; const i = (s.length - 1) * p; const lo = Math.floor(i); return s[lo] + (s[Math.ceil(i)] - s[lo]) * (i - lo); };
+const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
+function ranks(xs) {
+  const idx = xs.map((x, i) => [x, i]).sort((a, b) => a[0] - b[0]);
+  const r = new Array(xs.length);
+  for (let i = 0; i < idx.length;) { let j = i; while (j + 1 < idx.length && idx[j + 1][0] === idx[i][0]) j += 1; for (let k = i; k <= j; k += 1) r[idx[k][1]] = (i + j) / 2; i = j + 1; }
+  return r;
+}
+function spearman(xs, ys) {
+  const rx = ranks(xs); const ry = ranks(ys); const mx = mean(rx); const my = mean(ry);
+  let n = 0; let dx = 0; let dy = 0;
+  for (let i = 0; i < rx.length; i += 1) { n += (rx[i] - mx) * (ry[i] - my); dx += (rx[i] - mx) ** 2; dy += (ry[i] - my) ** 2; }
+  return dx && dy ? n / Math.sqrt(dx * dy) : null;
+}
+const read = (s) => {
+  const roster = Array.isArray(s.institutions) ? s.institutions : [];
+  return { houses: roster.filter((i) => !isFabric(i)).length, roster: roster.length, required: roster.filter((i) => i.source === 'required' && !isFabric(i)).length };
+};
+
+await ensureLaws();
+
+// 1. the matrix
+const matrix = [];
+for (let i = 0; i < MATRIX; i += 1) {
+  const b = birth(i);
+  matrix.push({ seed: b.seed, tier: b.settlement.tier, population: b.settlement.population, ...read(b.settlement) });
+}
+const perTier = {};
+for (const tier of TIER_ORDER) {
+  const rows = matrix.filter((r) => r.tier === tier);
+  perTier[tier] = {
+    n: rows.length,
+    rho: spearman(rows.map((r) => r.population), rows.map((r) => r.houses)),
+    median: q(rows.map((r) => r.houses), 0.5), p10: q(rows.map((r) => r.houses), 0.1), p90: q(rows.map((r) => r.houses), 0.9),
+    maxRoster: Math.max(...rows.map((r) => r.roster)),
+    requiredMedian: q(rows.map((r) => r.required), 0.5),
+  };
+}
+
+// forced-population cells
+const ORIGINAL = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...POPULATION_RANGES[t] }]));
+function cell(tier, P, n, tag) {
+  POPULATION_RANGES[tier] = { min: P, max: P };
+  const out = [];
+  try {
+    for (let k = 0; k < n; k += 1) {
+      const matrixCell = configForIndex(k * TIER_ORDER.length + TIER_ORDER.indexOf(tier));
+      const config = birthConfig({ ...DEFAULT_CONFIG, ...matrixCell, settType: tier });
+      const s = generateSettlementPipeline(config, null, { seed: `x46b-${tag}-${tier}-${P}-${k}` });
+      if (s.population !== P || s.tier !== tier) throw new Error(`forced cell missed: ${tier} ${P} → ${s.tier} ${s.population}`);
+      out.push(read(s).houses);
+    }
+  } finally { POPULATION_RANGES[tier] = { ...ORIGINAL[tier] }; }
+  return out;
+}
+
+// 2. the band ends
+const bandEnds = {};
+for (const tier of MATRIX_ONLY ? [] : TIER_ORDER) {
+  bandEnds[tier] = {};
+  for (const end of ['min', 'max']) {
+    const P = ORIGINAL[tier][end];
+    const xs = cell(tier, P, SEEDS, 'end');
+    const [lo, hi] = BUDGET[tier];
+    const p10 = q(xs, 0.1); const p90 = q(xs, 0.9);
+    bandEnds[tier][end] = { population: P, p10, median: q(xs, 0.5), p90, budget: [lo, hi === Infinity ? '70+' : hi], inside: p10 >= lo && p90 <= hi };
+  }
+}
+
+// 3. the overlap agreement
+const OVERLAPS = [[100, 'hamlet', 'village'], [400, 'village', 'town'], [2500, 'town', 'city'], [15000, 'city', 'metropolis']];
+const overlap = (MATRIX_ONLY ? [] : OVERLAPS).map(([P, a, b]) => {
+  const ma = mean(cell(a, P, SEEDS, 'ov')); const mb = mean(cell(b, P, SEEDS, 'ov'));
+  return { population: P, lower: a, upper: b, meanLower: ma, meanUpper: mb, relGap: Math.abs(ma - mb) / Math.max(ma, mb), within10: Math.abs(ma - mb) / Math.max(ma, mb) <= 0.1 };
+});
+
+// 4. the catalogue
+let catalogue;
+try {
+  const budget = await import('../../src/data/institutionBudget.js');
+  catalogue = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...budget.tierBudgetTerms(t), dAtMin: budget.densityFactor(t, ORIGINAL[t].min), dAtMax: budget.densityFactor(t, ORIGINAL[t].max), expectedAtMin: budget.expectedHousesAt(ORIGINAL[t].min), expectedAtMax: budget.expectedHousesAt(ORIGINAL[t].max) }]));
+} catch { catalogue = 'institutionBudget.js absent (the before)'; }
+
+const report = { seeds: SEEDS, matrix: MATRIX, perTier, bandEnds, overlap, catalogue };
+const text = JSON.stringify(report, null, 1);
+if (OUT) writeFileSync(OUT, text);
+process.stdout.write(`${text}\n`);
