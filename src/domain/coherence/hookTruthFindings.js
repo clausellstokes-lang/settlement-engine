@@ -25,6 +25,7 @@
  */
 
 import { collectPlotHooks } from '../dossier/plotHooks.js';
+import { crisisHooksOf } from '../crisis/crisisHooks.js';
 
 import { hookTruthViolations, settlementHookFacts } from './hookTruth.js';
 
@@ -71,11 +72,12 @@ function storedHookTexts(settlement) {
   events.forEach((event) => takeAll(/** @type {{ plotHooks?: unknown }} */ (event)?.plotHooks));
   takeAll(record.economicViability?.plotHooks);
   takeAll(record.economicState?.safetyProfile?.plotHooks);
-  // The hooks each active crisis stores (src/domain/crisis/crisisHooks.js, written by the cast
-  // step): one entry or a list.
+  // The hooks each active crisis's stored CAST derives (src/domain/crisis/crisisHooks.js): they
+  // are a function of the record, never a stored copy, so the record's own answer is to derive
+  // them from the engine's cast (the DM's edit is the page's business, read there).
   /** @type {unknown[]} */
   const crises = Array.isArray(record.stress) ? record.stress : record.stress && typeof record.stress === 'object' ? [record.stress] : [];
-  crises.forEach((entry) => takeAll(/** @type {{ plotHooks?: unknown }} */ (entry)?.plotHooks));
+  crises.forEach((entry) => takeAll(crisisHooksOf(settlement, /** @type {Parameters<typeof crisisHooksOf>[1]} */ (entry))));
   return out;
 }
 

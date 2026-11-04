@@ -123,45 +123,61 @@ describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its car
   });
 });
 
-// THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3): a crisis entry's stored
-// hooks are collected ahead of the place's own, and the record's truth check reads them.
+// THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3): a crisis's cast adds hooks,
+// read off the cast (never stored), collected ahead of the place's own; the record check reads them.
 describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
-  const cast = { nature: 'natural', rank: 1, roles: [{ role: 'brunt', kind: 'npc', id: 'n1', name: 'Mara Vell', reason: 'the hunger falls first on its people', temporary: false }], absent: [], stakes: [], levers: [] };
+  const cast = {
+    nature: 'natural', rank: 1,
+    roles: [{ role: 'brunt', kind: 'npc', id: 'n1', name: 'Mara Vell', reason: 'the hunger falls first on its people', temporary: false }],
+    absent: [], stakes: [{ factionId: 'Town Council', stake: 'loses', reason: 'the crisis hits its base' }],
+    levers: [{ institution: 'Town granary', holderId: 'n1', holderName: 'Mara Vell' }],
+  };
   const npcs = [
-    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', plotHooks: ['Mara keeps a second ledger.'] },
-    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, plotHooks: ['Oswin owes a debt he cannot name.'] },
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', factionAffiliation: 'Millers', plotHooks: ['Mara keeps a second ledger.'] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, factionAffiliation: 'Town Council', plotHooks: ['Oswin owes a debt he cannot name.'] },
   ];
-  const crisisTown = () => ({
-    name: 'Vellbrook', tier: 'town', npcs,
-    stress: [{
-      type: 'famine', label: 'Famine', cast,
-      plotHooks: [{ text: 'In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.', bound: 'cast', link: { kind: 'npc', id: 'n1', label: 'Mara Vell' } }],
-    }],
-  });
+  const crisisTown = () => ({ name: 'Vellbrook', tier: 'town', npcs, stress: [{ type: 'famine', label: 'Famine', cast }] });
+  const OWN = ['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.'];
 
   test('a hand-built town with one crisis and a cast: the hook list leads with the hook naming the holder', () => {
     const hooks = collectPlotHooks(crisisTown());
     expect(hooks[0]).toMatchObject({
-      text: 'In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.',
+      text: 'In the famine, the brunt falls on Mara Vell of Millers: the hunger falls first on its people.',
       source: 'Famine', category: 'tension', priority: 10, crisis: 'famine',
       links: [{ kind: 'npc', id: 'n1', label: 'Mara Vell' }],
     });
-    // the place's own hooks follow, in the order they always had, the count above them a floor
-    expect(hooks.slice(1).map((h) => h.text)).toEqual(['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.']);
+    expect(hooks[1]).toMatchObject({
+      text: 'In the famine, the players can push on the Town granary, run by Mara Vell; Town Council loses most if it gives, because the crisis hits its base.',
+      crisis: 'famine', links: [{ kind: 'faction', id: 'Town Council', label: 'Town Council' }],
+    });
+    // the place's own hooks follow, in the order they always had: the count above them is a floor
+    expect(hooks.slice(2).map((h) => h.text)).toEqual(OWN);
   });
 
   test('a single (non-list) crisis entry is read too, and a calm place\'s list is exactly its own hooks', () => {
     const single = { ...crisisTown(), stress: crisisTown().stress[0] };
-    expect(collectPlotHooks(single)[0].crisis).toBe('famine');
+    expect(collectPlotHooks(single).map((h) => h.crisis)).toEqual(['famine', 'famine', undefined, undefined]);
     const calm = { ...crisisTown(), stress: null };
-    expect(collectPlotHooks(calm).map((h) => h.text)).toEqual(['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.']);
-    expect(collectPlotHooks(calm).some((h) => 'crisis' in h)).toBe(false);
+    expect(collectPlotHooks(calm).map((h) => h.text)).toEqual(OWN);
+    expect(collectPlotHooks(calm).map((h) => 'crisis' in h)).toEqual([false, false]);
   });
 
-  test('the record\'s truth check reads a crisis hook (a false one is a finding; the page refuses it)', () => {
-    const town = { ...crisisTown(), economicState: { foodSecurity: { label: 'Secure' } } };
-    town.stress = [{ ...town.stress[0], plotHooks: ['The settlement is starving and its people turn to banditry.'] }];
-    expect(hookTruthFindings(town).map((f) => f.code)).toEqual(['famine_words_on_a_fed_place']);
-    expect(collectPlotHooks(town).some((h) => h.crisis)).toBe(false);
+  test('the DM\'s cast is the one named: an edited line role moves the hook to the DM\'s person', () => {
+    const town = crisisTown();
+    town.stress[0] = { ...town.stress[0], _userEdits: { castRoles: { value: 'brunt=npc:n2' } } };
+    expect(collectPlotHooks(town)[0].text).toBe("In the famine, the brunt falls on Oswin Hale of Town Council: the DM's word.");
+  });
+
+  test('the record check reads the crisis hooks, and a cast sentence the record contradicts is never spoken on either', () => {
+    const town = crisisTown();
+    expect(hookTruthFindings(town)).toEqual([]);
+    // a reason claiming soldiers where the defence roster holds no armed force
+    const armed = {
+      ...town,
+      defenseProfile: { institutions: {} },
+      stress: [{ type: 'famine', label: 'Famine', cast: { ...cast, levers: [], roles: [{ ...cast.roles[0], reason: 'its soldiers hold the granary' }] } }],
+    };
+    expect(hookTruthFindings(armed)).toEqual([]);
+    expect(collectPlotHooks(armed).map((h) => h.text)).toEqual(OWN);
   });
 });

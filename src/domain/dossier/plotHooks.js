@@ -5,6 +5,8 @@ import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
 import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
 import { retainHooks, retentionKey, editedHookTextKeys } from './hookRetention.js';
+import { crisisHooksOf } from '../crisis/crisisHooks.js';
+import { effectiveCastOf } from '../crisis/crisisCast.js';
 
 const TENSION_LABELS = Object.freeze({
   crime_wave: 'Crime Wave',
@@ -340,13 +342,13 @@ function speakHooks(collected, facts, settlement) {
  * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
  * @property {unknown[]} [traditions]  THE TRADITIONS mirror (T-5) — outcome/relation hooks
- * @property {unknown} [stress]  the crisis container: one entry or a list, each may store `plotHooks`
+ * @property {unknown} [stress]  the crisis container: one entry or a list, each carrying its `cast`
  */
 
 /**
  * The crisis container as a list of entries (one entry, a list, or nothing).
  * @param {unknown} stress
- * @returns {Array<{ type?: unknown, label?: unknown, plotHooks?: unknown }>}
+ * @returns {Array<{ type?: unknown, label?: unknown, cast?: unknown }>}
  */
 function crisisEntriesOf(stress) {
   const list = Array.isArray(stress) ? stress : stress && typeof stress === 'object' ? [stress] : [];
@@ -371,25 +373,27 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const drawConflictHook = createConflictHookDraw();
 
   // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
-  // Each active crisis stores the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
-  // crisisHooksOf`, written by the cast step): one naming a line role's holder, one naming the
-  // lever and the faction that loses. They are collected ahead of every other source and marked
-  // `crisis`, and the sort below keeps them first, so the place's own hooks are the floor of the
-  // count and not the whole. A calm place has no entry, so nothing here runs for it.
+  // Each active crisis adds the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
+  // crisisHooksOf`): one naming a line role's holder with the role's reason, one naming the lever
+  // and the faction that loses. They are read off the cast HERE, never stored, and off the cast
+  // the page shows (`effectiveCastOf`: the DM's word where the DM spoke). They are collected
+  // ahead of every other source and marked `crisis`, and the sort below keeps them first, so the
+  // place's own hooks are the floor of the count and not the whole. A calm place has no entry,
+  // so nothing here runs for it.
   crisisEntriesOf(settlement.stress).forEach((entry) => {
     const kind = typeof entry.type === 'string' ? entry.type : '';
     const label = typeof entry.label === 'string' && entry.label ? entry.label : 'Crisis';
-    (Array.isArray(entry.plotHooks) ? entry.plotHooks : []).forEach((hook) => {
-      const link = /** @type {{ link?: { kind?: unknown, id?: unknown, label?: unknown } | null }} */ (hook && typeof hook === 'object' ? hook : {}).link;
+    const { cast } = effectiveCastOf(/** @type {never} */ (settlement), /** @type {never} */ (entry));
+    crisisHooksOf(settlement, { type: kind, cast }, facts).forEach((hook) => {
       push(hooks, {
-        text: plotHookText(hook),
+        text: hook.text,
         source: label,
         role: '',
         category: 'tension',
         priority: 10,
         accent: true,
-        crisis: kind || 'crisis',
-        links: link && CRISIS_LINK_KINDS.has(String(link.kind)) ? [{ kind: String(link.kind), label: link.label, id: link.id }] : [],
+        crisis: kind,
+        links: hook.link && CRISIS_LINK_KINDS.has(hook.link.kind) ? [{ kind: hook.link.kind, label: hook.link.label, id: hook.link.id }] : [],
       });
     });
   });

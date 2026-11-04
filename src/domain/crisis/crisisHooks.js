@@ -13,9 +13,14 @@
  * sentence frames below are new prose and are listed in the lane's report as proposals for the
  * chair; nothing else here authors a word.
  *
- * ⛔ NO DRAW. The line role, the lever and the losing faction are each the FIRST that fits, in the
- * cast's own order; nothing is chosen by chance, so no stream moves anywhere — a calm place is
- * untouched by construction (it has no crisis entry to read).
+ * ⛔ NO DRAW, AND NOTHING STORED. The line role, the lever and the losing faction are each the
+ * FIRST that fits, in the cast's own order; nothing is chosen by chance, so no stream moves
+ * anywhere — a calm place is untouched by construction (it has no crisis entry to read). The
+ * hooks are read off the cast where the page reads them (`collectPlotHooks`, through
+ * `effectiveCastOf`, so the DM's cast is the one named) and where the record is checked
+ * (`hookTruthFindings`): a stored copy would carry person and faction names that the rename
+ * cascades do not reach (measured: four undeclared paths in each of the two rename
+ * denominators) and would go stale under the DM's cast edit.
  *
  * ⛔ A HOOK CHECKS THE PLACE BEFORE IT IS STORED. Each sentence is spoken through the estate's
  * one tier-noun rewrite and read by the one classifier (`src/domain/coherence/hookTruth.js`);
@@ -27,7 +32,7 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { CAST_REASONS, requiredRolesOf } from './crisisCast.js';
+import { requiredRolesOf } from './crisisCast.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -162,16 +167,16 @@ function speakTrue(compose, noun, facts) {
 /**
  * The hooks one active crisis adds: one bound to its cast, one bound to its lever, each present
  * only where the cast holds what the sentence names and the record does not contradict it.
- * @param {unknown} settlement the assembled record (its NPCs, food and defence facts)
- * @param {{ type?: unknown, cast?: CrisisCast | null }} entry the crisis entry, cast
+ * @param {unknown} settlement the record (its NPCs, food and defence facts)
+ * @param {{ type?: unknown, cast?: CrisisCast | null }} entry the crisis entry and the cast to read
+ * @param {import('../coherence/hookTruth.js').HookFacts} [facts] the place's facts, when the caller holds them
  * @returns {CrisisHook[]}
  */
-export function crisisHooksOf(settlement, entry) {
+export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(settlement)) {
   const cast = entry?.cast;
   const kind = str(entry?.type);
   if (!cast || !kind) return [];
   const s = /** @type {HookSettlement} */ (settlement && typeof settlement === 'object' ? settlement : {});
-  const facts = settlementHookFacts(settlement);
   const noun = CRISIS_NOUN[kind] || PLAIN_NOUN;
   /** @type {CrisisHook[]} */
   const out = [];
@@ -198,11 +203,14 @@ export function crisisHooksOf(settlement, entry) {
 /**
  * The `{holder}` slot of each catalog `crisisHook` that NAMES a role the cast holds. `phrase` is
  * the sentence's own words for the role, which the slot replaces; `fill` says how the name
- * stands in it. Only a holder of the listed `kinds` (and, where given, cast for the listed
- * `reason`) fills the slot; a crisis with no such holder keeps its sentence as written. A test
+ * stands in it. Only a PERSON holding the role fills the slot; a crisis with no such holder
+ * keeps its sentence as written. The two sentences that name the governing FACTION (insurgency,
+ * slave revolt) take no slot here: a faction name stored in prose needs a row in the faction
+ * rename cascade (`src/domain/factionRename.js`), which is the chair's to rule with the cast's
+ * own open rows, so they are a proposal in the lane's report. A test
  * holds every phrase to occur exactly once in its catalog sentence, so this is a slot in the
  * sentence, never a second one.
- * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'>, reason?: string }>>>}
+ * @type {Readonly<Record<string, ReadonlyArray<{ role: CrisisRole, phrase: string, fill: string, kinds: ReadonlyArray<'npc' | 'faction' | 'institution'> }>>>}
  */
 export const CRISIS_HOOK_SLOTS = Object.freeze({
   under_siege: Object.freeze([
@@ -217,12 +225,6 @@ export const CRISIS_HOOK_SLOTS = Object.freeze({
   ]),
   plague_onset: Object.freeze([
     Object.freeze({ role: /** @type {CrisisRole} */ ('lever'), phrase: 'The healer who identified the outbreak first', fill: '{holder}, the healer who identified the outbreak first,', kinds: Object.freeze(/** @type {const} */ (['npc'])) }),
-  ]),
-  insurgency: Object.freeze([
-    Object.freeze({ role: /** @type {CrisisRole} */ ('target'), phrase: 'The governing faction', fill: '{holder}', kinds: Object.freeze(/** @type {const} */ (['faction'])), reason: CAST_REASONS.targetGoverning }),
-  ]),
-  slave_revolt: Object.freeze([
-    Object.freeze({ role: /** @type {CrisisRole} */ ('target'), phrase: 'The governing faction', fill: '{holder}', kinds: Object.freeze(/** @type {const} */ (['faction'])), reason: CAST_REASONS.targetGoverning }),
   ]),
 });
 
@@ -241,8 +243,7 @@ export function slotCrisisHook(kind, text, cast) {
   /** @type {Set<string>} one person fills one slot: two slots of one sentence name two people */
   const named = new Set();
   for (const slot of slots) {
-    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name)
-      && (slot.reason === undefined || r.reason === slot.reason));
+    const row = roles.find((r) => r.role === slot.role && slot.kinds.includes(r.kind) && !!str(r.name));
     if (!row || named.has(`${row.kind}:${row.id}`) || !line.includes(slot.phrase)) continue;
     named.add(`${row.kind}:${row.id}`);
     const filled = slot.fill.split('{holder}').join(row.name);

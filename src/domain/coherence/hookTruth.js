@@ -81,7 +81,7 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {unknown} [conflicts]
  * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
  * @property {{ plotHooks?: unknown }} [economicViability]
- * @property {unknown} [stress] the crisis container (one entry or a list); each entry may store `plotHooks`
+ * @property {unknown} [stress] the crisis container (one entry or a list); each entry carries its `cast`
  */
 
 /**

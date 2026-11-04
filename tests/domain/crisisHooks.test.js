@@ -79,7 +79,7 @@ describe('crisisHooksOf: one hook bound to the cast, one bound to the lever', ()
     const hamlet = town({ tier: 'hamlet' });
     const entry = { type: 'under_siege', cast: cast([{ role: 'defender', kind: 'institution', id: 'Watch house', name: 'Watch house', reason: CAST_REASONS.defenderInstitution, temporary: false }]) };
     const [hook] = crisisHooksOf(hamlet, entry);
-    expect(hook.text).not.toMatch(/\bthe town\b/i);
+    expect(hook.text).toBe("In the siege, the defence is led by the Watch house: the hamlet's defence, with no one on the roster leading it.");
     expect(hookTruthViolations(hook.text, settlementHookFacts(hamlet))).toEqual([]);
   });
 
@@ -121,11 +121,14 @@ describe('slotCrisisHook: the catalog sentence gains a {holder} slot only where 
     const house = cast([{ role: 'lever', kind: 'institution', id: 'Fish market', name: 'Fish market', reason: CAST_REASONS.leverInstitution, temporary: false }]);
     expect(slotCrisisHook('famine', famine, house)).toBe(famine);
     expect(slotCrisisHook('famine', famine, null)).toBe(famine);
+    // the governing-faction sentences take no slot (a faction name stored in prose is the rename
+    // cascade's question, held for the chair): the seat and the governing house leave them as written
     const insurgency = STRESS_TYPE_MAP.insurgency.crisisHook;
     const seat = cast([npcRow('target', 'n2', 'Oswin Hale', CAST_REASONS.targetSeat)]);
     expect(slotCrisisHook('insurgency', insurgency, seat)).toBe(insurgency);
     const governing = cast([{ role: 'target', kind: 'faction', id: 'Town Council', name: 'Town Council', reason: CAST_REASONS.targetGoverning, temporary: false }]);
-    expect(slotCrisisHook('insurgency', insurgency, governing)).toBe(insurgency.replace('The governing faction', 'Town Council'));
+    expect(slotCrisisHook('insurgency', insurgency, governing)).toBe(insurgency);
+    expect(Object.keys(CRISIS_HOOK_SLOTS).sort()).toEqual(['famine', 'occupied', 'plague_onset', 'under_siege']);
   });
 
   it('a kind with no slot, and a sentence that does not carry the phrase, are returned unchanged', () => {
