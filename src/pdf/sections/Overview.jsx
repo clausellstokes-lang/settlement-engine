@@ -10,7 +10,6 @@
  *   - Settlement origin
  *   - Prominent relationship
  *   - Geography (terrainAdvantages, terrainCriticals, nearbyResources)
- *   - Spatial Layout (quarters with descriptions and landmarks)
  *   - Warnings & coherence notes
  *   - Institutions panel with category distribution + counts
  */
@@ -33,7 +32,6 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../lib/format.js';
 import { statusCase } from '../../domain/display/labelCase.js';
-import { institutionDisplayName } from '../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../domain/display/resourceDisplayName.js';
 import { proseToPlainText } from '../primitives/ProseText.jsx';
 import { StateProse } from '../primitives/StateProse.jsx';
@@ -387,35 +385,9 @@ export function Overview({ settlement, narrativeMode, vm, stateProse }) {
         </View>
       )}
 
-      {/* ── Spatial layout: quarters ─────────────────────────────── */}
-      {o.quarters?.length > 0 && (
-        <View style={{ marginTop: space.sm }} wrap={false}>
-          <HairRule />
-          <Text style={{ ...type.label, color: palette.gold, fontSize: pt['8'], marginBottom: 3 }}>
-            QUARTERS
-          </Text>
-          {o.quarters.map((q, i) => (
-            <View key={`q-${i}`} style={{ marginBottom: 4 }} wrap={false}>
-              <Text style={{ ...type.body_em, fontSize: pt['9.5'], color: palette.ink }}>{q.name}</Text>
-              {q.description && (
-                <Text style={{ ...type.body, fontSize: pt['9'] }}>
-                  {q.description}
-                </Text>
-              )}
-              {q.landmarks?.length > 0 && (
-                <Text style={{ ...type.caption, color: palette.muted, fontSize: pt['8'] }}>
-                  {/* A LANDMARK IS A RAW CATALOGUE KEY (spatialGenerator fills it from
-                    * `instNames`), so this line printed 'Parish churches (2-5)' in the paid
-                    * document while `Institutions.jsx` printed 'Houses of worship (2-5)' two
-                    * chapters later. `label` composes with the seam rather than replacing it:
-                    * `humanize` returns any string containing whitespace unchanged. */}
-                  Landmarks: {q.landmarks.map(l => label(institutionDisplayName(l))).filter(Boolean).join(', ')}
-                </Text>
-              )}
-            </View>
-          ))}
-        </View>
-      )}
+      {/* ⛔ NO QUARTERS BLOCK BEFORE THE PLAT (X-47, the owner, 2026-11-03: "No districts or
+          taverns until we get the PLAT working"). The view model keeps `o.quarters` for the
+          plat to read; no text surface prints a quarter's name. tests/pdf/quartersNotPrinted.test.jsx */}
 
       {/* ── Warnings ───────────────────────────────────────────── */}
       {(o.warnings?.length > 0 || o.coherenceNotes?.length > 0 || o.structuralSuggestions?.length > 0) && (
