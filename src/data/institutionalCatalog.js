@@ -849,7 +849,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: "Cartographer's workshop", desc: "A guild of professional cartographers producing regional maps, sea charts, property surveys, and military reconnaissance maps. Sells off-the-shelf maps and takes commissions. The city's maps are the most accurate in the region.", tags: ['education', 'trade'], priorityCategory: 'crafts' },
       at: {
-        village: { baseChance: 0.15, desc: "A craftsman who draws and sells maps: regional road maps, property surveys, and rough wilderness sketches from traveler accounts. Rare enough that most villages don't have one." },
+        // `rare` (the chair's ruling, 2026-11-04, rung-1 pins unit 6): the row's own text calls it rare.
+        village: { baseChance: 0.15, rare: true, desc: "A craftsman who draws and sells maps: regional road maps, property surveys, and rough wilderness sketches from traveler accounts. Rare enough that most villages don't have one." },
         town: { baseChance: 0.4, desc: 'Sells road maps, regional surveys, and coastal charts. Takes commissions for estate surveys and dungeon sketching. Maintains a reference collection of older maps for consultation. Standard stop for adventurers, merchants, and military scouts.' },
         city: { name: "Cartographer's guild", baseChance: 0.65, priorityCategory: 'economy' },
         metropolis: { name: "Cartographer's guild", baseChance: 0.65, priorityCategory: 'economy' },
@@ -1170,8 +1171,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Sewage system', desc: 'Underground drainage. Rare but critical for health.', tags: ['sanitation'], priorityCategory: 'infrastructure' },
       at: {
-        city: { baseChance: 0.4 },
-        metropolis: { baseChance: 0.5 },
+        // `rare` at both tiers (the chair's ruling, 2026-11-04, rung-1 pins unit 6): "Rare but critical".
+        city: { baseChance: 0.4, rare: true },
+        metropolis: { baseChance: 0.5, rare: true },
       },
     },
     // Licensed `none`: a library needs no magic. Filed on Magic until 2026-09-30, which deleted it
@@ -1310,7 +1312,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Teleportation circle', desc: 'Permanent teleportation circle. Access is controlled and expensive to maintain. Transformative infrastructure for any settlement lucky enough to have one.', tags: ['arcane', 'exotic'], magicLicense: 'high', priorityCategory: 'magic' },
       at: {
-        town: { baseChance: 0.08, desc: 'Rare permanent circle. Extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.' },
+        // `rare` (the chair's ruling, 2026-11-04, rung-1 pins unit 6): "Rare permanent circle".
+        town: { baseChance: 0.08, rare: true, desc: 'Rare permanent circle. Extremely expensive to construct and maintain. Requires magical expertise beyond typical town resources.' },
         city: { baseChance: 0.15, forbiddenTradeRoutes: ['isolated'] },
         metropolis: { baseChance: 0.2, forbiddenTradeRoutes: ['isolated'] },
       },

@@ -70,7 +70,10 @@ function world(settType, terrain, tag) {
 /** A city whose roster carries 'Sewage system': UC-1 reads ROSTER_FULL_WEB, so every quarter drains. */
 const FULL_WEB_CITY = world('city', 'plains', '1');
 /** A city WITHOUT the institution: UC-1 reads TIER_FLOOR, so half the quarters stay dry. */
-const FLOOR_CITY = world('city', 'plains', '4');
+// Re-seeded '4' -> '2' on 2026-11-04 (rung-1 pins, unit 6; the Sewage system's rarity mark): the
+// row is exempt from the density factor now, and tag 4's city rolls it (ROSTER_FULL_WEB); of tags
+// 1..40, 2 is the first plains city without it (TIER_FLOOR).
+const FLOOR_CITY = world('city', 'plains', '2');
 /** A village at cesspits: no spine at all, the ARCHIPELAGO case. */
 const CESSPIT_VILLAGE = world('village', 'plains', '2');
 /** A WALLED riverside city: UC-4 digs its bypass and UC-2 licenses a waterside smuggler cellar. */
