@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — TERRAIN-POOLS, SECOND STEP (RE-MERGED AT 30141976), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-09-terrain-pools-2.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   51 OF 525 ROWS MOVED (village 1, town 1, city 37, metropolis 12; thorp, hamlet 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fb5edb7f5): inland texts for the pools that speak only of water, and no ship captain or sailor where there is no water. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S9 (the tree of fb5edb7f5 with the door paths carried from
+ *   the branch, the previous record's writes committed). 54d3a39a.. -> 59ce8a2e..
+ *
  * 2026-11-04 — SELF-VOUCH, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-08-self-vouch.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
