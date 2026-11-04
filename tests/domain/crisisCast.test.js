@@ -11,7 +11,9 @@ import {
   treaterCandidates, collaboratorCandidates, wavererCandidates, faceCandidates,
   CRISIS_CAST_TUNING, CRISIS_LINKS, CONTRADICTORY_ROLE_PAIRS, CAST_REASONS, CAST_ABSENCES,
   STAKE_REASONS, GRASPING_TRAITS, CRISIS_NATURE, catalogFor, castHash, requiredRolesOf,
+  deriveLevers, CRISIS_LEVERS,
 } from '../../src/domain/crisis/crisisCast.js';
+import { isLiveInstitution } from '../../src/domain/institutions/institutionRoster.js';
 import { NPC_PERSONALITY_TRAITS } from '../../src/data/npcData.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
@@ -303,5 +305,107 @@ describe('120 generated towns: every active crisis is cast, totally', () => {
       }
     });
     expectNoSeedFailures(failures, 'every crisis of 120 generated towns is cast totally');
+  }, 240000);
+});
+
+describe('the levers stand: a closed house is never a lever (the ruin filter, CRISIS-3 unit 1)', () => {
+  // The three shapes every inactivating path stamps (src/domain/institutions/institutionRoster.js):
+  // a calamity's ruin, an economic or magic close / moral abolition (`remnant`), an abandonment
+  // or a demotion (`removed`). Before the fix the lever read the raw roster through a status
+  // regex that knew only the first, so a closed granary was still offered as the famine's lever.
+  const SHAPES = [
+    (i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }),
+    (i) => ({ ...i, status: 'remnant', _worldPulseInactive: true }),
+    (i) => ({ ...i, status: 'removed', _worldPulseInactive: true }),
+  ];
+
+  it('one closed granary and one standing: the lever names the standing one only', () => {
+    const s = town({ institutions: [
+      SHAPES[0]({ name: 'Burnt granary' }),
+      SHAPES[1]({ name: 'Old granary' }),
+      SHAPES[2]({ name: 'Abandoned granary' }),
+      { name: 'Town granary' },
+    ] });
+    expect(deriveLevers(s, 'famine').map((l) => l.institution)).toEqual(['Town granary']);
+    s.npcs = s.npcs.filter((n) => !/grain|baker|merchant|mayor/i.test(n.role));
+    const houses = leverCandidates(s, 'famine').candidates.filter((r) => r.kind === 'institution').map((r) => r.name);
+    expect(houses).toEqual(['Town granary']);
+  });
+
+  it('120 generated towns with every second lever house closed: no lever names a closed house', () => {
+    const KINDS = Object.keys(STRESS_TYPE_MAP);
+    const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+    let levers = 0;
+    const failures = collectSeedFailures(Array.from({ length: 120 }, (_, i) => `crisis-cast-${i}`), (seed, i) => {
+      const kinds = [KINDS[i % KINDS.length], KINDS[(i * 7 + 3) % KINDS.length]].filter((k, j, a) => a.indexOf(k) === j);
+      const s = generateSettlementPipeline({ settType: TIERS[i % TIERS.length], stressTypes: kinds }, null, { seed, customContent: {} });
+      const entries = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean);
+      let k = 0;
+      const t = { ...s, institutions: (s.institutions || []).map((inst) => {
+        if (!entries.some((e) => CRISIS_LEVERS[e.type]?.house.test(String(inst?.name || '')))) return inst;
+        k += 1;
+        return k % 2 ? SHAPES[k % 3](inst) : inst;
+      }) };
+      const live = new Set(t.institutions.filter(isLiveInstitution).map((x) => x.name));
+      for (const e of entries) {
+        for (const l of deriveLevers(t, e.type)) {
+          levers += 1;
+          if (!live.has(l.institution)) throw new Error(`${e.type}: lever ${l.institution} is closed`);
+        }
+        for (const r of leverCandidates(t, e.type).candidates) {
+          if (r.kind === 'institution' && !live.has(r.name)) throw new Error(`${e.type}: lever candidate ${r.name} is closed`);
+        }
+      }
+    });
+    expectNoSeedFailures(failures, 'no lever of 120 stamped towns names a closed house');
+    expect(levers).toBeGreaterThan(100);
+  }, 240000);
+});
+
+describe('the defence stands: a closed house is never the defender (the ruin filter, CRISIS-3 unit 1b)', () => {
+  const SHAPES = [
+    (i) => ({ ...i, status: 'ruined', _worldPulseInactive: true }),
+    (i) => ({ ...i, status: 'remnant', _worldPulseInactive: true }),
+    (i) => ({ ...i, status: 'removed', _worldPulseInactive: true }),
+  ];
+  const DEF = /garrison|barracks|watch|militia|wall|guard/i;
+
+  it('a closed garrison and a standing watch: the defender house is the watch only', () => {
+    const s = town({ institutions: [
+      SHAPES[0]({ name: 'Burnt garrison' }),
+      SHAPES[1]({ name: 'Old barracks' }),
+      SHAPES[2]({ name: 'Abandoned militia hall' }),
+      { name: 'Town watch' },
+    ] });
+    s.npcs = s.npcs.filter((n) => n.id !== 'n2');
+    s.powerStructure.factions = s.powerStructure.factions.filter((f) => f.faction !== 'Military/Guard');
+    const houses = defenderCandidates(s).candidates.filter((r) => r.kind === 'institution').map((r) => r.name);
+    expect(houses).toEqual(['Town watch']);
+    const cast = deriveCrisisCast(s, [{ type: 'under_siege' }], 'unit-1b').get('under_siege');
+    expect(roleOf(cast, 'defender')).toMatchObject({ kind: 'institution', name: 'Town watch' });
+  });
+
+  it('120 generated towns with every second defence house closed: no defender names a closed house', () => {
+    const KINDS = Object.keys(STRESS_TYPE_MAP);
+    const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
+    let houses = 0;
+    const failures = collectSeedFailures(Array.from({ length: 120 }, (_, i) => `crisis-cast-${i}`), (seed, i) => {
+      const kinds = [KINDS[i % KINDS.length], KINDS[(i * 7 + 3) % KINDS.length]].filter((k, j, a) => a.indexOf(k) === j);
+      const s = generateSettlementPipeline({ settType: TIERS[i % TIERS.length], stressTypes: kinds }, null, { seed, customContent: {} });
+      let k = 0;
+      const t = { ...s, institutions: (s.institutions || []).map((inst) => {
+        if (!DEF.test(String(inst?.name || ''))) return inst;
+        k += 1;
+        return k % 2 ? SHAPES[k % 3](inst) : inst;
+      }) };
+      const live = new Set(t.institutions.filter(isLiveInstitution).map((x) => x.name));
+      for (const r of defenderCandidates(t).candidates) {
+        if (r.kind !== 'institution') continue;
+        houses += 1;
+        if (!live.has(r.name)) throw new Error(`defender candidate ${r.name} is closed`);
+      }
+    });
+    expectNoSeedFailures(failures, 'no defender of 120 stamped towns names a closed house');
+    expect(houses).toBeGreaterThan(40);
   }, 240000);
 });

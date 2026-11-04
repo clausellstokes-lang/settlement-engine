@@ -31,6 +31,7 @@ import { factionArchetype, FACTION_ARCHETYPES } from '../factionArchetypes.js';
 import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
+import { liveInstitutions } from '../institutions/institutionRoster.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -534,15 +535,19 @@ function officeHoldersOf(s, offices) {
 }
 
 /**
- * The houses a kind turns on, each with its holder where the roster has one.
+ * The STANDING houses a kind turns on (`liveInstitutions`), each with its holder where the
+ * roster has one.
  * @param {CastSettlement} s @param {string} kind
  * @returns {CastLever[]}
  */
 export function deriveLevers(s, kind) {
   const lever = CRISIS_LEVERS[kind];
   if (!lever) return [];
-  const houses = (Array.isArray(s.institutions) ? s.institutions : [])
-    .filter((i) => !!i && lever.house.test(str(i.name)) && !/ruin|abandon|destroy/i.test(str(i.status)));
+  // The STANDING roster only (the ruin filter's one door): a calamity's ruin, an economic or
+  // magic close, an abolition, an abandonment or a demotion leaves the row on the roster,
+  // stamped, and a closed house holds no lever.
+  const houses = liveInstitutions(s)
+    .filter((i) => !!i && lever.house.test(str(i.name)));
   const holders = officeHoldersOf(s, lever.office);
   const seen = new Set();
   /** @type {CastLever[]} */
@@ -689,7 +694,9 @@ export function defenderCandidates(s) {
   for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
     out.push(npcRow(n, 'defender', CAST_REASONS.defenderOffice));
   }
-  for (const i of (Array.isArray(s.institutions) ? s.institutions : []).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(str(x?.name)))) {
+  // The house fallback credits a house with the town's defence, so it reads the STANDING roster
+  // only (`liveInstitutions`): a closed garrison defends nothing.
+  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(str(x?.name)))) {
     out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: CAST_REASONS.defenderInstitution, temporary: false });
   }
   return { candidates: out, absent: CAST_ABSENCES.noMilitary };
