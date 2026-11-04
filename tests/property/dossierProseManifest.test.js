@@ -167,10 +167,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 68,874 -> 68,874 (384/378/372 -> 386/378/372) at X-46 CAR 2 (LANE X46-2-THRESHOLDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json).
     // Towns unmoved at 516/3/3/3.
+    // 68,874 -> 68,904 (386/378/372 -> 384/376/372) at TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 68_874, towns: 516 },
-      'gm-seed-a': { cells: 386, towns: 3 },
-      'gm-seed-b': { cells: 378, towns: 3 },
+      'golden-master-v3': { cells: 68_904, towns: 516 },
+      'gm-seed-a': { cells: 384, towns: 3 },
+      'gm-seed-b': { cells: 376, towns: 3 },
       'gm-seed-c': { cells: 372, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
