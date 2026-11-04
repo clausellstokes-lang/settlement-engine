@@ -202,8 +202,10 @@ describe('P4.2 CAUSAL RISK — continuous, and never a governor', () => {
     expect(readings[2]).toBeGreaterThan(readings[1]);
     // CONTROL, the trap made visible: the existing housing contributor is flat across
     // exactly the same three populations, which is the defect this pin exists against.
+    // (X-46 car 2, 3b: the step now reads the city stamp cut, 2,250, not a bare 5000; it is
+    // still one step, flat across all three populations.)
     const housingStep = read('src/domain/causalState.js');
-    expect(housingStep).toContain("if (pop >= 5000) { score -= 4;");
+    expect(housingStep).toContain("if (pop >= TIER_STAMP_CUTS.city) { score -= 4;");
   });
 
   test('crowding is the CONDITION; sanitation and traffic are accelerants on it', () => {

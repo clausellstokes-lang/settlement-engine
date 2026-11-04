@@ -277,7 +277,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { tags: ['banking', 'trade'], priorityCategory: 'economy' },
       at: {
-        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 3000, desc: 'Exchange foreign currency. Early banking (3,000+ population).' },
+        // X-46 car 2: the owner's bands put a town at 300–2,500; the row stays a town row with its
+        // chain; the floor moves to the band's top fifth (the design's recorded exception, ODQ §934.104).
+        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 2000, desc: 'Exchange foreign currency. Early banking (2,000+ population).' },
         city: { name: 'Banking houses', baseChance: 0.7, desc: 'Loans, currency exchange, letters of credit. Basic banking (5,000+).' },
         metropolis: { name: 'Banking district', baseChance: 0.8, desc: 'Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.' },
       },
@@ -1087,16 +1089,16 @@ export const INSTITUTION_FAMILIES = Object.freeze([
 
   // ══════════════════════ INFRASTRUCTURE ══════════════════════
   ...shelf('Infrastructure', [
-    // Every metropolis read 'Housing (1000-5000 structures)' (inherited from city) until 2026-09-30.
+    // Every metropolis read the city's housing row (inherited from city) until 2026-09-30.
     {
       shared: { required: true, tags: ['essential', 'housing'], priorityCategory: 'infrastructure' },
       at: {
-        thorp: { name: 'Dwellings (4-16)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
-        hamlet: { name: 'Dwellings (17-80)', desc: 'Timber-frame with thatched roofs.' },
-        village: { name: 'Dwellings (80-180)', desc: 'Timber construction with stone foundations.' },
-        town: { name: 'Housing (180-1000 structures)', desc: 'Multi-story timber and stone buildings.' },
-        city: { name: 'Housing (1000-5000 structures)', desc: 'Multi-story buildings. Tenements for poor.' },
-        metropolis: { name: 'Housing (5000+ structures)', desc: 'Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.' },
+        thorp: { name: 'Dwellings (1-8)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
+        hamlet: { name: 'Dwellings (5-25)', desc: 'Timber-frame with thatched roofs.' },
+        village: { name: 'Dwellings (15-100)', desc: 'Timber construction with stone foundations.' },
+        town: { name: 'Housing (75-650 households)', desc: 'Multi-story timber and stone buildings.' },
+        city: { name: 'Housing (500-4000 households)', desc: 'Multi-story buildings. Tenements for poor.' },
+        metropolis: { name: 'Housing (3500+ households)', desc: 'Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.' },
       },
     },
     {
