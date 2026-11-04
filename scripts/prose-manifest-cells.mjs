@@ -123,6 +123,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (FAITH-POOLS, docs/shift-records/2026-11-04-rung1-04-faith-pools.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 2e10cd529 because 0 golden-master rows, the dossier prose moves): DS-FTH-2 reads the one faith reading — no denial, no grade, each sentence a fact the reading gives; 1,050 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (TERRAIN-POOLS, first step, docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of ac09ea83b because the water-speaking pools and lines are licensed on the place\'s water fact (the A-11 licences; the Defense desk\'s harbour line reads the water fact); 282 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
