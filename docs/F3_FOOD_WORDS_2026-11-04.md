@@ -76,3 +76,19 @@ finding class holds its count and its seed set, except `info:battery-would-not-v
 the informational tally, outside the stop rule). Records moved: 5 of 1,000 (soak1k-71, -219, -532,
 -605, -857), all with under_siege. Golden master: 0 of 525 rows moved against the base (the
 manifest is already red at the base, 525 rows; rosterFinalUnderHeldRoster 41; neither re-recorded).
+
+## 6. The chair's rulings on the two STOPs, executed (2026-11-04)
+
+- **2a** (`9bf4bd4b`): the food-words check skips a line made only of the record's own export
+  goods; "Game meat" names game, not livestock. 0 of 525 golden rows move.
+- **2b** (`5fa17f8e`): a processed food good from an own-food source (grain, livestock, brewing,
+  alpine dairy, dates, food processing; the alpine-pasture, date-palm and grazing resources) is an
+  export only where `offersFoodSurplus` holds; salt and wine (import-fed), fish and hives keep
+  theirs. On soak1k-0..119: 22 places lose a good (thorp 4, hamlet 2, village 2, town 7, city 5,
+  metropolis 2), each growing less than it eats. 79 of 525 golden rows move.
+- **3** (`40005c5d`): a fishing row on water is a fish source in the food record. 264 of 1,000
+  places gain fish; 5 flip to growing more than they eat; famine unchanged; no owner band moves.
+  56 of 525 golden rows move.
+
+**The count at the tip** (`artifacts/f3-tip`): coh:food-words **3 → 0**. Every other class holds
+its count and seed set; `info:battery-would-not-vouch` 808 → 807 (soak1k-219, unit 4).
