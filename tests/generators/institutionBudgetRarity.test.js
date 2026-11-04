@@ -4,7 +4,10 @@
  * required, fabric and route-required rows are (`institutionBudget.js :: isDensityExempt`). The mark
  * is the registry key `rare: true` (`institutionalCatalog.js :: isRareRow`), like the guards and the
  * fabric: it never rides onto a row or a save. Tagged: the metropolis 'Dragon resident' (0.06, "a
- * resident dragon stays occasional", chair ruling round 3 item 2).
+ * resident dragon stays occasional", chair ruling round 3 item 2); and, by the chair's rule of
+ * 2026-11-04 (unit 6: a row whose own text calls it rare), the village Cartographer's workshop
+ * ("Rare enough that most villages don't have one"), the town Teleportation circle ("Rare permanent
+ * circle") and the city and metropolis Sewage system ("Rare but critical for health").
  *
  * Red-first (at 03c6395, before the mark): under the factor, high-magic metropolises at d up to 4
  * drew the 0.06 dragon in 19 of 60 (terrainPoolsDragonLicence) — the authored rarity scaled away.
@@ -21,7 +24,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
 const born = (config, seed) => generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...config }), null, { seed });
 
-/** The pipeline with the rarity mark withdrawn from the exemption (fabric and route-required only). */
+/** The pipeline with every rarity mark withdrawn from the exemption (fabric and route-required only). */
 async function pipelineWithoutRarity() {
   vi.resetModules();
   vi.doMock('../../src/data/institutionBudget.js', async (importOriginal) => {
@@ -40,8 +43,12 @@ async function pipelineWithoutRarity() {
 describe('X-46 car 3 — rows with an authored rarity are exempt from the density factor', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  it('marks exactly the metropolis Dragon resident, registry-only, and exempts it', () => {
-    expect(rareRows().map(({ tier, name }) => `${tier}|${name}`)).toEqual(['metropolis|Dragon resident']);
+  it('marks exactly the rows the catalogue authors as rare, registry-only, and exempts them', () => {
+    expect(rareRows().map(({ tier, name }) => `${tier}|${name}`)).toEqual([
+      "village|Cartographer's workshop", 'town|Teleportation circle', 'city|Sewage system',
+      'metropolis|Sewage system', 'metropolis|Dragon resident',
+    ]);
+    expect(isRareRow('town', "Cartographer's workshop")).toBe(false); // the town's text claims no rarity
     expect(isRareRow('metropolis', 'Dragon resident')).toBe(true);
     expect(isRareRow('metropolis', 'Auction house')).toBe(false);
     expect(isDensityExempt('metropolis', 'Dragon resident')).toBe(true);
@@ -60,11 +67,27 @@ describe('X-46 car 3 — rows with an authored rarity are exempt from the densit
     expect(n).toBeLessThanOrEqual(16);
   }, 300_000);
 
-  it('sixty low-magic seeds are byte-identical with the mark in force and withdrawn (and a high-magic one is not)', async () => {
+  // Unit 6 (2026-11-04): at 60,000 people d reads 4, and the 0.5 Sewage system sat in all 60 of 60
+  // metropolises before its mark; at its authored rarity it draws in about half (28 of 60 measured).
+  it('the metropolis Sewage system keeps its authored rarity at 60,000 people: at most 45 of 60', () => {
+    let n = 0;
+    for (let i = 0; i < 60; i += 1) {
+      const s = born({ settType: 'custom', population: 60000, magicExists: true, priorityMagic: 50 }, `x46-rare-sewage-${i}`);
+      if (s.institutions.some((x) => x.name === 'Sewage system')) n += 1;
+    }
+    expect(n).toBeGreaterThan(0);
+    expect(n).toBeLessThanOrEqual(45);
+  }, 300_000);
+
+  // Re-keyed 2026-11-04 (unit 6): the control cells are those where NO marked row can roll — thorps,
+  // hamlets and magic-off towns (the village Cartographer, the town circle's magic, the city and
+  // metropolis sewage and the dragon all out of reach); the first form's magic-off cells of every
+  // tier would now part on the sewage rows, by design.
+  it('sixty cells where no marked row can roll are byte-identical with the marks in force and withdrawn (and a high-magic one is not)', async () => {
     const without = await pipelineWithoutRarity();
     const moved = [];
     for (let i = 0; i < 60; i += 1) {
-      const config = { ...configForIndex(i), magicExists: false };
+      const config = { ...configForIndex(i), settType: ['thorp', 'hamlet', 'town'][i % 3], magicExists: false };
       const seed = `x46-rare-control-${i}`;
       if (hashOf(born(config, seed)) !== hashOf(without(config, seed))) moved.push(i);
     }
