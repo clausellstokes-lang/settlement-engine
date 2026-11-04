@@ -48,3 +48,26 @@ is at the tab: the second card kept in the same weeks names the first instead of
 calendar line.
 
 No other X-50 shape is in the 1000.
+
+## 3. The count at the tip
+
+The cure is `5f91b3540` (the Tonight composer's `wantsOnce` and the Traditions tab's
+`sameWindowPlan`; no generation change, no pool text). `node scripts/audit/soak-review.mjs --count
+1000 --workers 4 --out artifacts/f2-tip` at that commit: 1000 settlements, 5087 findings, 0
+errors, 212 s.
+
+| class | base (settlements / occurrences) | tip |
+|---|---|---|
+| **X-50:boilerplate-twice** | **30 / 30** | **0 / 0** |
+| coh:defense-words | 534 / 3256 | 534 / 3256 |
+| A-05:lacks-access-lines | 977 / 977 | 977 / 977 |
+| info:battery-would-not-vouch | 808 / 808 | 808 / 808 |
+| A-06:crime-absent-and-organised | 16 / 16 | 16 / 16 |
+| A-11:sea-words-landlocked | 14 / 14 | 14 / 14 |
+| coh:food-words | 3 / 7 | 3 / 7 |
+| A-09:behaviour-line-share | 7 / 7 | 7 / 7 |
+| A-12:self-vouch-false | 1 / 1 | 1 / 1 |
+| A-14:guild-power-small | 1 / 1 | 1 / 1 |
+
+5117 − 30 = 5087. No residue by shape: Tonight 23 → 0, Traditions 7 → 0. Record and config hashes
+identical on 1000/1000 (a screen-only change).
