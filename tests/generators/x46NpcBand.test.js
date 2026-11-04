@@ -9,9 +9,18 @@
  * birth boundary (`newSettlementDensityLaw`), never through the file.
  */
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
 import {
-  DENSITY_BANDS, PARTICULAR_TILTS, TIER_ORDER,
+  DENSITY_BANDS, PARTICULAR_TILTS, REGISTER_VII_SIGNATURE, TIER_ORDER,
 } from '../../src/domain/density/densityBands.js';
+import {
+  DENSITY_LAW_CONFIG_KEY, NEW_SETTLEMENT_DENSITY_LAW_VERSION, REGISTER_VII_DENSITY_LAW_VERSION,
+  newSettlementDensityLaw,
+} from '../../src/domain/density/densityLaw.js';
+import { rollNamedMass } from '../../src/generators/density/applyDensityLaw.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { rawBitFormOf } from '../helpers/dormancyOracle.js';
 import { POPULATION_RANGES } from '../../src/data/constants.js';
 import { createPRNG } from '../../src/kernel/prng.js';
 import * as densityRoll from '../../src/generators/density/densityRoll.js';
@@ -138,3 +147,123 @@ describe('X-46 car 4 (ii) — the population tilt moves the centre and never the
   }
 });
 
+describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people', () => {
+  // ⛔ THE DARK ARM. The digests were recorded at 8cc245db0 (the coherence window's tip plus
+  // car 1's bands, BEFORE this car) by this file's own recipe: `rawBitFormOf` of the whole
+  // generated settlement, default config, the signature unflipped. Any byte this car moved on
+  // a v1 world reds here, seed by seed.
+  const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
+    fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
+  )));
+
+  it('the signature is unflipped and the create boundary still mints nothing', () => {
+    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: false, live: false });
+    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(1);
+    expect(newSettlementDensityLaw()).toEqual({});
+  });
+
+  it('sixty seeds (ten a tier) generate byte-identically to 8cc245db0', () => {
+    const seeds = Object.keys(DARK);
+    expect(seeds).toHaveLength(60);
+    /** @type {string[]} */ const moved = [];
+    for (const seed of seeds) {
+      const tier = seed.split('-')[2];
+      const s = generateSettlementPipeline({ settType: tier, tier }, null, { seed, customContent: {} });
+      if (rawBitFormOf(s) !== DARK[seed]) moved.push(seed);
+    }
+    expect(moved, 'v1 worlds this car moved').toEqual([]);
+  }, 300_000);
+
+  // ⭐ THE LIT SEAM. Lighting the signature changes exactly one thing for a new world: the
+  // create boundary mints `{ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION }`
+  // (`newSettlementDensityLaw`), and every seam reads the law from the world's own config.
+  // Handing that marker to the pipeline HERE is the lit world, with the file left dark.
+  const LIT = { [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION };
+  const LIT_SEEDS = 120;
+  /** @type {Map<string, Array<{population: number, named: number, s: any}>>} */
+  const litWorlds = new Map();
+  const litFor = (tier) => {
+    if (!litWorlds.has(tier)) {
+      litWorlds.set(tier, Array.from({ length: LIT_SEEDS }, (_, i) => {
+        const s = generateSettlementPipeline(
+          { settType: tier, tier, ...LIT }, null,
+          { seed: `x46-npc-${tier}-${String(i).padStart(3, '0')}`, customContent: {} },
+        );
+        return { population: s.population, named: s.npcs.length, s };
+      }));
+    }
+    return /** @type {Array<{population: number, named: number, s: any}>} */ (litWorlds.get(tier));
+  };
+
+  for (const tier of TIER_ORDER) {
+    it(`${tier}: 120 lit worlds land inside the owner's band, and ρ(population, named people) > 0.4`, () => {
+      const band = DENSITY_BANDS[tier].mass;
+      const worlds = litFor(tier);
+      const named = worlds.map(w => w.named);
+      expect(Math.min(...named)).toBeGreaterThanOrEqual(band.min);
+      expect(Math.max(...named)).toBeLessThanOrEqual(band.max);
+      // The step function is gone: inside one tier, more people means more named people.
+      expect(spearman(worlds.map(w => w.population), named)).toBeGreaterThan(0.4);
+    }, 300_000);
+  }
+
+  it('§817-Q1 under the lit seam: office coverage stays a constraint on the roll — nothing appended, every house crewed', () => {
+    for (const tier of TIER_ORDER) {
+      for (const { s } of litFor(tier)) {
+        expect(s.npcs.filter(n => n.generatedAs === 'faction_structural')).toHaveLength(0);
+        const crew = new Map();
+        for (const npc of s.npcs) crew.set(npc.factionAffiliation, (crew.get(npc.factionAffiliation) || 0) + 1);
+        for (const f of s.powerStructure?.factions || []) {
+          expect(crew.get(f.faction || f.name) || 0).toBeGreaterThanOrEqual(1);
+        }
+      }
+    }
+  }, 300_000);
+
+  // The overlap through the population seam's own adapter (`rollNamedMass`), lit by config:
+  // the same population read under both tiers whose bands hold it.
+  for (const [population, lower, upper] of [[100, 'hamlet', 'village'], [400, 'village', 'town'],
+    [2500, 'town', 'city'], [15000, 'city', 'metropolis']]) {
+    it(`the overlap agrees within one person at ${population} (${lower} / ${upper}) through the population seam`, () => {
+      const meanAt = (tier) => {
+        let sum = 0;
+        for (let i = 0; i < 400; i += 1) {
+          sum += /** @type {number} */ (rollNamedMass({
+            tier, population: /** @type {number} */ (population), config: LIT,
+            powerStructure: { factions: POWERS.map(p => ({ faction: p.key, category: p.category, power: p.power, isGoverning: p.isGoverning })) },
+            rng: createPRNG(`x46-seam-${tier}-${population}-${i}`),
+          }));
+        }
+        return sum / 400;
+      };
+      expect(Math.abs(meanAt(lower) - meanAt(upper))).toBeLessThanOrEqual(1);
+    });
+  }
+});
+
+/** Spearman's rank correlation, ties averaged. @param {number[]} a @param {number[]} b */
+function spearman(a, b) {
+  const rank = (xs) => {
+    const order = xs.map((v, i) => [v, i]).sort((x, y) => x[0] - y[0]);
+    const r = new Array(xs.length);
+    for (let i = 0; i < order.length;) {
+      let j = i;
+      while (j + 1 < order.length && order[j + 1][0] === order[i][0]) j += 1;
+      for (let k = i; k <= j; k += 1) r[order[k][1]] = (i + j) / 2;
+      i = j + 1;
+    }
+    return r;
+  };
+  const ra = rank(a);
+  const rb = rank(b);
+  const mean = xs => xs.reduce((s, v) => s + v, 0) / xs.length;
+  const ma = mean(ra);
+  const mb = mean(rb);
+  let cov = 0; let va = 0; let vb = 0;
+  for (let i = 0; i < ra.length; i += 1) {
+    cov += (ra[i] - ma) * (rb[i] - mb);
+    va += (ra[i] - ma) ** 2;
+    vb += (rb[i] - mb) ** 2;
+  }
+  return va && vb ? cov / Math.sqrt(va * vb) : 0;
+}
