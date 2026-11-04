@@ -14,7 +14,7 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { defenseFactsOf } from '../../src/domain/defense/defenseFacts.js';
 import { defenseWordsFindings } from '../../src/domain/coherence/defenseWordsFindings.js';
-import { DEFENCE_TWIN_LINES, defenceTwinLine } from '../../src/data/defenceTwinLines.js';
+import { DEFENCE_TWIN_LINES, defenceTwinLine, defenceTwinSentences } from '../../src/data/defenceTwinLines.js';
 
 /** Every string the record stores, depth-first. @param {unknown} v @param {string[]} [out] */
 function strings(v, out = []) {
@@ -56,6 +56,21 @@ describe('F10 unit 4 · the three soak seeds', () => {
     expect(f.hasGarrison || f.hasMercenary).toBe(false);
     expect(text.filter((s) => /conscription pulls away experienced soldiers/.test(s))).toEqual([]);
     expect(text.some((s) => /the call-up pulls away experienced hands/.test(s))).toBe(true);
+  });
+});
+
+describe('F11 unit 2 · the reserve line', () => {
+  it('soak1k-6879 keeps its reserve without the walls it lacks', () => {
+    const s = birth(6879).settlement;
+    expect(defenseFactsOf(s).hasWalls).toBe(false);
+    const line = s.history.historicalCharacter;
+    expect(line).toContain('granaries a little too large, stores a little too deep. The ');
+    expect(defenseWordsFindings(s, line)).toEqual([]);
+  });
+  it('a walled place keeps the line to the byte, sentence by sentence', () => {
+    const line = 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The Flood is the reason.';
+    expect(defenceTwinSentences(line, { hasWalls: true })).toBe(line);
+    expect(defenceTwinSentences(line, { hasWalls: false })).toBe('The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep. The Flood is the reason.');
   });
 });
 

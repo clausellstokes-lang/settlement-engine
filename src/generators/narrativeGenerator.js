@@ -23,7 +23,7 @@
  *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
-import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
+import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // F11: one line
 import {
   clearActiveRng,
   getActiveRng,
@@ -992,7 +992,7 @@ export const generateCoherence = (settlement, coherenceRng = null, pins = null) 
     () => buildStressProfile(
       history.historicalEvents || [],
       settlement.tier,
-      settlement.config,
+      settlement.config, defenseFactsOf(settlement), // F11: the reserve line's wall-free twin; one line, so no cited line moves
     ),
   );
 
