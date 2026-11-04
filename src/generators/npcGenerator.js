@@ -30,6 +30,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js';
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -773,8 +774,8 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   }
 
   // 45% chance: stress-driven institutional secret
-  const activeStresses = summary.stressTypes || (stressType ? [stressType] : []);
-  const stressEffects = activeStresses.flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []);
+  // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
+  const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
     const effect = pickRandom2(stressEffects);
     const otherNpc = allNpcs.filter((_, idx) => idx !== npcIndex)[0];

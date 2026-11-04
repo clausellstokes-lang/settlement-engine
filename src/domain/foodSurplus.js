@@ -23,6 +23,34 @@ export const offersFoodSurplus = (foodRecord) => (
   !foodRecord || (foodRecord.growsMoreThanEats === true && foodRecord.band !== 'famine')
 );
 
+/**
+ * THE STARVING RULE (lane F3 FOOD-WORDS, 2026-11-04; docs/SOAK_1000_RUNG1B_2026-11-04.md §5 F3).
+ * A line that says people are starving is a claim on the food record: it holds only where the
+ * band is deficit or famine. A place that grows less than it eats but whose imports and stores
+ * cover the gap (importDependent, pressured) is short of its own food, not starving. Read by the
+ * stress-secret pool (npcGenerator.js :: generateCrimeLevel) and by the food-words instrument
+ * (domain/coherence/foodWordsFindings.js). A missing record keeps the legacy behaviour.
+ */
+export const CLAIMS_STARVING = /\bstarving\b/i;
+
+/** @param {{ band?: string } | null | undefined} foodRecord */
+export const recordAllowsStarving = (foodRecord) => (
+  !foodRecord || foodRecord.band === 'deficit' || foodRecord.band === 'famine'
+);
+
+/**
+ * The stress secrets a place may draw, read against its food record: a secret or stakes line
+ * that says people are starving is dropped where the record does not go hungry. Draw-neutral —
+ * the caller picks once from whatever remains.
+ * @template {{ secret: string, stakes: string }} T
+ * @param {T[]} effects
+ * @param {{ band?: string } | null | undefined} foodRecord
+ * @returns {T[]}
+ */
+export const secretsHeldByFoodRecord = (effects, foodRecord) => (
+  recordAllowsStarving(foodRecord) ? effects : effects.filter((e) => !CLAIMS_STARVING.test(`${e.secret} ${e.stakes}`))
+);
+
 /** @param {unknown} label */
 export const isFoodSurplusGood = (label) => FOOD_SURPLUS_GOODS.has(String(label).replace(TRADE_SUFFIX, '').toLowerCase());
 

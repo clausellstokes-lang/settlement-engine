@@ -11,6 +11,7 @@
  */
 
 import { sourcesNamedIn } from '../foodways.js';
+import { CLAIMS_STARVING, recordAllowsStarving } from '../foodSurplus.js';
 
 /**
  * @typedef {Object} FoodWordsFinding
@@ -28,8 +29,8 @@ const SURPLUS_WORDS = /\b(?:farm|grain|food|agricultural|harvest) surplus\b|\bSu
  * clause runs to the next sentence or clause break; what follows is still read.
  */
 const REQUIREMENT_CLAUSE = /\bRequires\b[^.;:·]*/gi;
-/** Starvation wording. */
-const STARVING_WORDS = /\bstarving\b/i;
+/** Starvation wording: the starving rule's own words (domain/foodSurplus.js, F3 FOOD-WORDS). */
+const STARVING_WORDS = CLAIMS_STARVING;
 /** A count of days of food or reserves. */
 const RESERVE_DAYS = /\b(\d+) days of (?:food left|food in store|reserves)\b/i;
 /** A sentence about what the place eats: the foodways line and its kin. */
@@ -76,7 +77,7 @@ export function foodWordsFindings(settlement, renderedText) {
   const findings = [];
   const sentences = String(renderedText || '').split(/(?<=[.?])\s+|\n+/).map((x) => x.trim()).filter(Boolean);
   const storeDays = Math.round(record.storageMonths * 30);
-  const hungry = record.band === 'deficit' || record.band === 'famine';
+  const hungry = recordAllowsStarving(record);
   for (const sentence of sentences) {
     if (!record.growsMoreThanEats && SURPLUS_WORDS.test(sentence.replace(REQUIREMENT_CLAUSE, ''))) {
       findings.push({ code: 'surplus_without_surplus', sentence, detail: 'The place grows less than it eats.' });

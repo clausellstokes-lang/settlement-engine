@@ -58,3 +58,12 @@ which of two facts governs: the food record (no fish source: no fishing-grounds 
 fishing rows on water. ONE FACT, ONE HOME points at the record — gate the fish-trade texts on
 `foodSources` including fish, or let a fishing row on water count fish as a source in
 `foodGenerator.js` (which moves the food balance and the goldens). Left for the chair.
+
+## 4. Unit 4 (THE HOOK SECRET) — cured
+
+`soak1k-857` is short of its own food (it grows less than it eats) but the record says it is not
+starving, so the line is false and the instrument is right; the instrument's reach is not licensed.
+The pool is gated on the record: `domain/foodSurplus.js :: recordAllowsStarving` (band deficit or
+famine; no record = legacy) and `secretsHeldByFoodRecord`, read by `generateCrimeLevel` (one draw
+either way); the food-words instrument reads the same rule and words (`CLAIMS_STARVING`). Red-first:
+tests/generators/hookSecretStarving.test.js (two starving secrets on soak1k-857 at the base).
