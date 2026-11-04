@@ -7919,7 +7919,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "readsCount": 1,
+        "readsCount": 2,
         "attach": []
       },
       "criticalIssueCount zero": {
@@ -7935,7 +7935,7 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "readsCount": 1,
+        "readsCount": 2,
         "attach": []
       },
       "THE FIRST-SURVEY QUALIFICATION": {
