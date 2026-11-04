@@ -16,7 +16,7 @@ import { bandReadings } from './bands.mjs';
 import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town', 'reader'];
+const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town', 'reader', 'crisis'];
 
 function* shardLines(out) {
   const dir = join(out, 'shards');

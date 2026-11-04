@@ -46,6 +46,38 @@ import {
 // The shares themselves live beside the record: foodBalance.js :: grownShareOf, hinterlandShareOf.
 const PER_CAPITA_NEED   = 2;   // lbs/day per person
 
+// The famine's months of drawing on the stores ("its second failed harvest season": a year since
+// the first failure) and the world pulse's own drawdown rule it is drawn by, month by month
+// (domain/worldPulse/foodStockpile.js :: STOCKPILE_TUNING: rationFloorPct, maxReleaseFraction,
+// reserveTitheDeficitCap, reserveTitheFloorMonths — each pinned equal by
+// tests/domain/crisisFactFindings.test.js; kept here so the generation bundle loads no pulse graph).
+// Lane RUNG2-F13; see THE STORES A FAMINE LEAVES below.
+export const FAMINE_MONTHS_RUN = 12;
+export const FAMINE_DRAWDOWN = Object.freeze({
+  rationFloorPct: 5,
+  maxReleaseFraction: 0.5,
+  reserveTitheDeficitCap: 25,
+  reserveTitheFloorMonths: 1,
+});
+
+/**
+ * The stores a famine leaves after `months` of the pulse's monthly drawdown: each month releases
+ * the gap above the ration floor, at most half of what may be released (a mild gap spares the
+ * one-month reserve), so a granary is drawn down and never emptied at a stroke.
+ * @param {number} stored months in store before the famine @param {number} gapPct the famine's gap, %
+ * @param {number} months @returns {number}
+ */
+export function famineStoresLeft(stored, gapPct, months) {
+  const D = FAMINE_DRAWDOWN;
+  let st = Math.max(0, stored);
+  if (!(gapPct > D.rationFloorPct)) return st;
+  for (let m = 0; m < months; m += 1) {
+    const releasable = gapPct < D.reserveTitheDeficitCap ? Math.max(0, st - D.reserveTitheFloorMonths) : st;
+    st -= Math.min((gapPct - D.rationFloorPct) / 100, releasable * D.maxReleaseFraction);
+  }
+  return st;
+}
+
 // Registered custom food effects are deliberately small and bounded. These
 // constants live beside the canonical food writer so generation, prosperity,
 // viability, and world-pulse stockpiles can never apply different versions of
@@ -193,7 +225,8 @@ export function generateFoodSecurity(tier, institutions, config) {
                     // thorp/hamlet value.
                     : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
-  const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
+  // What the granary holds in a good year; an ACTIVE famine has been drawing on it (below).
+  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -377,6 +410,17 @@ export function generateFoodSecurity(tier, institutions, config) {
   const deficit       = Math.max(0, rawDeficit - importCoverage - magicOffset);
   const deficitPct    = dailyNeed > 0 ? deficit / dailyNeed * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
+
+  // ── THE STORES A FAMINE LEAVES (lane RUNG2-F13, 2026-11-04; the chair's ruling on rung 2 §3c,
+  // soak1k-3605: "Food Deficit — Active Famine. Stores: a granary, 15 months of grain.") ──────
+  // A famine reads the stores. The famine's own record says how long it has run: "its second
+  // failed harvest season" (stressNarrative.js :: famine), so the stores have been drawn on since
+  // the first failure, FAMINE_MONTHS_RUN months, by the world pulse's own monthly drawdown
+  // (famineStoresLeft). What is printed is what is in hand. Zero draws; outside a famine the full
+  // granary (storageMonthsFull) is untouched.
+  const storageMonths = stressFamine
+    ? Math.max(0.1, Math.round(famineStoresLeft(storageMonthsFull, deficitPct, FAMINE_MONTHS_RUN) * 10) / 10)
+    : storageMonthsFull;
 
   // Normalized food ratio — 1.0 = exactly adequate
   const localRatio    = dailyProduction / Math.max(1, dailyNeed);

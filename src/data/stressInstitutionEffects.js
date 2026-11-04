@@ -395,8 +395,10 @@ export const STRESS_INSTITUTION_EFFECTS = {
       stakes: "The people they would rule against for lying are lying no more than they once did",
     },
     {
-      secret: "Has been quietly buying up the emptied properties of those who fled, through a third party, at a fraction of their worth",
-      stakes: "Some of the departed intend to return. The purchases will not survive their claims, or their questions",
+      // RUNG2-F13: this secret told an exodus ("those who fled") under the influx the crisis is
+      // (ODQ §934.101); it tells the arrival now. Same slot, so no draw moves.
+      secret: "Has been quietly buying up the houses the newcomers need, through a third party, and letting them at a price that rises with every arrival",
+      stakes: "The tenants have begun comparing what they pay. The third party's name will not survive the first honest question",
     },
     {
       secret: "Knows the migration was triggered by something upstream (a failed harvest, a war, a purge) that {faction} helped cause and has been concealing",

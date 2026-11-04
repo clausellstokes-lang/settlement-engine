@@ -77,7 +77,13 @@ const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: '
  * @property {'grain'|'livestock'|'fish'|'mill'|'game'|null} failedSource the source a famine failed
  * @property {number} famineCutPct      how much of the harvest the famine took, %
  * @property {string} foodwaysLine      the foodways sentence composed from the place's own sources
+ * @property {boolean=} storesHeld      an ACTIVE famine beside a granary still holding six months or
+ *                                      more: the stores are kept back, not given out (the famine's
+ *                                      own story: "The wealthy are hoarding."; lane RUNG2-F13)
  */
+
+/** The months a famine's granary may hold before the record says the stores are held back (RUNG2-F13). */
+export const FAMINE_HELD_STORE_MONTHS = 6;
 /**
  * ONE ANSWER TO "HOW FED IS THIS PLACE". Derived once, by the canonical food writer
  * (foodGenerator.js :: generateFoodSecurity), stored once at economicState.foodSecurity.foodRecord.
@@ -109,6 +115,8 @@ export function deriveFoodRecord(input) {
     failedSource: input.failedSource ?? null,
     famineCutPct: input.famineCutPct ?? 0,
     foodwaysLine: input.foodwaysLine || '',
+    // Carried by a famine's record only (absent = no famine, nothing held), so no other record moves.
+    ...(input.stressFamine ? { storesHeld: input.hasGranary === true && input.storageMonths >= FAMINE_HELD_STORE_MONTHS } : {}),
   };
 }
 

@@ -389,6 +389,18 @@ function isOccupier(f) {
   return factionArchetype(f) === A.OCCUPATION || /occupation|occupying|garrison\s+rule|imperial\s+presence|annex/i.test(factionName(f));
 }
 
+/**
+ * Does this house already hold the seat: the governing house, or a criminal house holding it by
+ * capture (rulingStructure.js stamps `criminalCaptureState`; factionDynamics.js "is a front")?
+ * @param {CastSettlement} s @param {CastFaction} f @returns {boolean}
+ */
+function holdsTheSeat(s, f) {
+  const governing = governingFactionOf(/** @type {never} */ (s));
+  if (governing && factionName(/** @type {CastFaction} */ (governing)) === factionName(f)) return true;
+  const captured = /** @type {{ criminalCaptureState?: unknown }} */ (s.powerStructure || {}).criminalCaptureState === 'capture';
+  return captured && factionArchetype(f) === A.CRIMINAL;
+}
+
 /** @param {CastSettlement} s @returns {CastFaction[]} */
 function factionsOf(s) {
   const fs = s.powerStructure?.factions;
@@ -592,7 +604,10 @@ export function instigatorCandidates(s, kind, stakes) {
   const nature = natureOf(kind);
   // An occupying power is never the town's own instigator (the design's "never a local
   // instigator"): a rising against the occupier is cast against it, not by it.
-  const factions = factionsOf(s).filter((f) => !isOccupier(f));
+  // RUNG2-F13 (soak1k-4203): nor is a house that ALREADY holds the seat — the governing house, or
+  // a criminal house that holds it by capture (`criminalCaptureState` 'capture': "the council is a
+  // front") — an instigator against it: instigator and target are a contradictory pair.
+  const factions = factionsOf(s).filter((f) => !isOccupier(f) && !holdsTheSeat(s, f));
   const rivalName = outrankingRivalOf(/** @type {never} */ (s));
   const rival = factions.some((f) => factionName(f) === rivalName) ? rivalName : null;
   const gainers = stakes.filter((k) => k.stake === 'gains')
@@ -870,7 +885,8 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
           const b = prev.get('brunt');
           if (!b) continue;
           const fname = b.kind === 'faction' ? b.id : str(rosterOf(settlement).find((n) => (str(n.id) || str(n.name)) === b.id)?.factionAffiliation);
-          const lead = fname ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
+          const house = fname ? factionsOf(settlement).find((f) => factionName(f) === fname) : undefined;
+          const lead = fname && !(house && holdsTheSeat(settlement, house)) ? membersOf(settlement, fname).find((n) => (str(n.id) || str(n.name)) !== b.id) || null : null;
           if (lead) { links.push(link.from); return npcRow(lead, 'instigator', CAST_REASONS.instigatorLinked); }
         } else if (read === 'targetFromFace') {
           const f = prev.get('face');

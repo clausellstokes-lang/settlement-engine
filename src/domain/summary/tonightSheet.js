@@ -32,7 +32,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
-import { CRISIS_ROLE_LABEL, effectiveCastOf } from '../crisis/crisisCast.js';
+import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -54,6 +54,52 @@ export const TONIGHT_COPY = Object.freeze({
   open: 'Open Tonight',
   close: 'Close Tonight',
 });
+
+/**
+ * WHAT A CAST ROLE WANTS (lane RUNG2-F13, 2026-11-04; the chair's ruling on rung 2 §3c): a person
+ * voiced from the crisis cast wants what the ROLE wants, read after "Wants to". An instigator's
+ * want fits an instigator, never the want of the people answering the crisis ("identify the
+ * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
+ * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
+ */
+export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  instigator: Object.freeze([
+    'keep the pressure on until the seat gives way, and keep their own hand out of sight.',
+    "turn this crisis into the settlement's next arrangement, with themselves at the head of it.",
+    'be the one still standing when the present order runs out of answers.',
+  ]),
+  brunt: Object.freeze([
+    'get their own people through this with what little they have left.',
+    'be heard by someone with power before the crisis takes the rest.',
+    'hold on until the worst has passed, and remember who helped.',
+  ]),
+  lever: Object.freeze([
+    'decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.',
+    'keep the office the crisis turns on working, whatever it costs them.',
+    'hold the one thing everyone now needs without being crushed between those who want it.',
+  ]),
+  exploiter: Object.freeze([
+    'sell what the crisis has made scarce for as long as the crisis lasts.',
+    'come out of this richer than they went in, without anyone tracing how.',
+  ]),
+  defender: Object.freeze([
+    'hold the line until the crisis breaks, with fewer hands than the line needs.',
+    'keep the defence standing long enough for someone else to end this.',
+  ]),
+}));
+
+/**
+ * The want a cast person voices: the role's own pool, one line by `castHash` over the person, the
+ * crisis and the role (no draw). A role with no pool (never voiced today) falls back to the
+ * person's own goal.
+ * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant
+ * @returns {string}
+ */
+export function castWantOf(role, personId, crisis, ownWant) {
+  const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
+  if (!pool || pool.length === 0) return ownWant;
+  return pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
+}
 
 /** How many hooks the sheet carries. */
 const HOOK_COUNT = 3;
@@ -164,14 +210,14 @@ const VOICE_SLOTS = Object.freeze(/** @type {import('../crisis/crisisCast.js').C
  * Every active crisis's cast as the page shows it (the DM's word where the DM spoke), worst
  * first: the cast's own casting order, which is the engine's severity ranking.
  * @param {TonightSource} source
- * @returns {Array<{ label: string, cast: import('../crisis/crisisCast.js').CrisisCast }>}
+ * @returns {Array<{ label: string, kind: string, cast: import('../crisis/crisisCast.js').CrisisCast }>}
  */
 function castsOf(source) {
   return stressesOf(source)
     .map((s, at) => ({ s, at, cast: effectiveCastOf(/** @type {Parameters<typeof effectiveCastOf>[0]} */ (source), s).cast }))
     .filter((x) => !!x.cast)
     .sort((a, b) => ((a.s.cast?.rank || 0) - (b.s.cast?.rank || 0)) || (a.at - b.at))
-    .map((x) => ({ label: clean(x.s.label) || clean(x.s.type), cast: /** @type {import('../crisis/crisisCast.js').CrisisCast} */ (x.cast) }));
+    .map((x) => ({ label: clean(x.s.label) || clean(x.s.type), kind: clean(x.s.type), cast: /** @type {import('../crisis/crisisCast.js').CrisisCast} */ (x.cast) }));
 }
 
 /**
@@ -269,11 +315,13 @@ function peopleOf(source) {
   const casts = castsOf(source);
   for (const slot of VOICE_SLOTS) {
     let filled = false;
-    for (const { cast } of casts) {
+    for (const { cast, kind } of casts) {
       for (const role of slot) {
         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
-        if (hit && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', wantOf(hit.npc), CRISIS_ROLE_LABEL[role]); filled = true; break; }
+        // RUNG2-F13: the cast person wants what the ROLE wants (CAST_WANTS), never the want of
+        // the people answering the crisis (soak1k-1805's instigator "identify the infiltrator").
+        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', castWantOf(role, row.id, kind, wantOf(hit.npc)), CRISIS_ROLE_LABEL[role]); filled = true; break; }
       }
       if (filled) break;
     }
@@ -284,8 +332,16 @@ function peopleOf(source) {
   if (seat) add(seat, 'seat', wantOf(seat.npc));
 
   const patterns = crisisSecretPatterns(source);
+  // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
+  // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
+  // already voiced from the cast (soak1k-3005): their line is the role's want, never overwritten.
+  const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
   const keeper = patterns.length
-    ? npcs.find(({ npc }) => { const s = secretOf(npc); return !!s && patterns.some((re) => re.test(s)); })
+    ? npcs.find(({ npc }) => {
+      const s = secretOf(npc);
+      const castVoiced = out.some((p) => p.why === 'cast' && p.name === clean(npc.name));
+      return !!s && !castVoiced && !targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) && patterns.some((re) => re.test(s));
+    })
     : undefined;
   if (keeper) add(keeper, 'secret', sentence(secretOf(keeper.npc)));
 
@@ -314,13 +370,16 @@ function wantsOnce(people) {
 /**
  * The stores in plain words, from the one food record: the months in store and the granary.
  * The same words as the Economics tab's stores row.
- * @param {{ storageMonths?: unknown, hasGranary?: unknown }} record @returns {string}
+ * @param {{ storageMonths?: unknown, hasGranary?: unknown, storesHeld?: unknown }} record @returns {string}
  */
 export function foodStoresWords(record) {
   const months = Number(record?.storageMonths);
   if (!Number.isFinite(months) || months <= 0) return '';
   const whole = Math.round(months);
   const span = months < 1 ? 'a few weeks' : whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
+  // RUNG2-F13: under an active famine a granary still holding six months or more is HELD — the
+  // record says so (foodRecord.storesHeld), and so does the line.
+  if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that the hall will not open.`;
   if (record.hasGranary === true) return `Stores: a granary, ${span} of grain.`;
   return months < 1 ? 'No granary; a few weeks in the larder.' : `No granary; ${span} in household stores.`;
 }

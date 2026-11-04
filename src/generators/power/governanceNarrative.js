@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -533,7 +533,7 @@ const buildBetrayalNarrative = ({
 
 const buildInsurgencyNarrative = (
   institutionFlags,
-  governingFactionName,
+  _governingFactionName, // RUNG2-F13: the vignette names no house (kept for the call's shape)
 ) => {
   const insurgencyOutmusclesAuthority =
     (institutionFlags.criminalEffective || 0) >
@@ -546,7 +546,10 @@ const buildInsurgencyNarrative = (
   return (
     'The challenge to the governing faction is institutional, not popular. ' +
     'Key officials are slow-walking orders. Revenue is being collected but held rather than forwarded. ' +
-    `${governingFactionName} is conducting meetings with people who should not be meeting privately. ` +
+    // RUNG2-F13 (soak1k-3000): this named the GOVERNING house as the one meeting against the
+    // governing house. The plotter is the crisis cast's instigator (the Crisis tab names them);
+    // the vignette names no house.
+    'Meetings are being held between people who should not be meeting privately. ' +
     'The governing faction has noticed and is considering whether to act before the coalition is complete.'
   );
 };
@@ -598,7 +601,16 @@ const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
       `${governingFactionName} is being asked to do something about it and cannot agree what that something is.`
     );
   }
-  return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
+  // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm told a DEPARTURE under an influx. It
+  // reads the one direction now (domain/crisis/migrationDirection.js); the power step holds the
+  // kind, not the entry, and the entry is born from the same catalog fact. No draw either way.
+  if (migrationDirectionOf(null) === 'exodus') {
+    return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
+  }
+  return (
+    'More families arrived this week, and more the week before. The work they came for is not here, and every household taken in is one more the stores must cover. ' +
+    `${governingFactionName || 'The governing authority'} is being asked to choose between the residents who were here first and the ones still arriving, and has not chosen.`
+  );
 };
 
 const buildSlaveRevoltNarrative = (institutionNames) => {
