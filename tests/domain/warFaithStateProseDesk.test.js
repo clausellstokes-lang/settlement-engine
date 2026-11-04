@@ -32,7 +32,7 @@ import { describe, expect, test } from 'vitest';
 
 import { DOSSIER_STATE_PROSE_WAR_FAITH as WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { poolDimensions } from '../../src/domain/display/stateProse/stateProseKernel.js';
-import { drawnMember } from '../helpers/drawnProse.js';
+import { drawnMember, poolMemberTexts } from '../helpers/drawnProse.js';
 import {
   DOSSIER_MOUNTS, UNMOUNTED_BLOCKS, drawnAtMount, sentenceMountForBlock,
 } from '../../src/domain/display/stateProse/dossierMounts.js';
@@ -670,12 +670,14 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     const reading = faithPanelModel(church).reading;
     expect(reading).toMatchObject({ hasChurch: true, churchWords: 'a parish church',
       seniorCleric: { role: 'Village Priest' }, religiousFaction: { name: 'Parish Council' } });
-    const allowed = [
-      'In Kirkby the faith is kept at a parish church.',
-      'The senior cleric in Kirkby holds the rank of Village Priest.',
-      "Among the factions of Kirkby, the faith's party is the Parish Council.",
-      'Folk in Kirkby keep their observances through the year.',
-    ];
+    // The four members, computed through the shipped pool and filled with the READING's own facts
+    // (proseDrawnAnchors: a literal state-prose sentence may not be an anchor).
+    const allowed = poolMemberTexts({
+      leaf: 'warFaith', blockId: 'DS-FTH-2', poolKey: 'PRIVATE DOSSIER',
+      slots: { settlement: 'Kirkby', houses: 'a parish church', cleric: 'Village Priest',
+        faction: 'Parish Council', observance: 'through the year' },
+    });
+    expect(allowed, 'every member of the pool renders from the reading').toHaveLength(4);
     const drawn = new Set();
     for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
       const desk = warFaithStateProse(church, { faith: faithPanelModel(church), hasPatron: false },

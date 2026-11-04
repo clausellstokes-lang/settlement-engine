@@ -9,6 +9,7 @@ import {
   crimeDeniedAndListedFindings, gradeVsFoodFindings, magicAbsentProseFindings,
 } from '../../src/domain/coherence/readerContradictionFindings.js';
 import { coherenceBattery } from '../../src/domain/coherence/coherenceBattery.js';
+import { variantByVid } from '../helpers/drawnProse.js';
 
 const FAMINE_OVERVIEW = 'Monster Defense Critical\nFood Security Deficit — active famine\nTensions';
 const DEFENSE_ADEQUATE = 'Economic Survival\nWeak ▼\nDisasters & Famine\nAdequate ▼\nFood endurance: Under siege the outlying fields are lost.';
@@ -36,7 +37,7 @@ describe('magic-absent-prose (soak1k-13, Amarthal)', () => {
     ]) expect(magicAbsentProseFindings({ magic: ABSENT_MAGIC + line })).toHaveLength(1);
   });
   it('is silent where availability is present, or the line says no one practises', () => {
-    expect(magicAbsentProseFindings({ magic: ABSENT_MAGIC.replace('Availability absent', 'Availability rare') + 'There is magic at X and the town does not rest on it.' })).toEqual([]);
+    expect(magicAbsentProseFindings({ magic: ABSENT_MAGIC.replace('Availability absent', 'Availability rare') + variantByVid({ leaf: 'defense', blockId: 'DS-DEF-9', poolKey: 'magicDependency false', vid: 2, slots: { settlement: 'X' } }) })).toEqual([]);
     expect(magicAbsentProseFindings({ magic: `${ABSENT_MAGIC}No one works magic at Amarthal, and nothing here waits on it.` })).toEqual([]);
   });
 });
