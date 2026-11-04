@@ -84,6 +84,8 @@ describe('the rung-2 seeds, re-born', () => {
 
   it.each([0, 4204])('MIGRATION-DIRECTION — soak1k-%i: no migration line tells the influx as a departure', (i) => {
     const s = birth(i).settlement;
+    const entry = (Array.isArray(s.stress) ? s.stress : [s.stress]).find((e) => e?.type === 'mass_migration');
+    expect(entry?.direction).toBe('influx');
     expect(migrationDirectionFindings(s, recordText(s)).map((f) => f.quote)).toEqual([]);
   });
 

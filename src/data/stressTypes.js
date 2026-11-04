@@ -166,5 +166,9 @@ export const STRESS_TYPE_MAP = {
     viabilityNote:
       "Immigration: food balance stressed, labour market disrupted, criminal opportunity elevated. Emigration: tax base shrinking, institutions hollowing, labour shortage emerging.",
     historyColour: "demographic",
+    // ONE DIRECTION (lane RUNG2-F13, on the chair's ruling 2 of 2026-10-30, ODQ §934.101): the
+    // kind's direction, copied once onto the crisis entry (stressGenerator.js :: buildStressEntry)
+    // and read by every migration line through domain/crisis/migrationDirection.js.
+    direction: "influx",
   },
 };

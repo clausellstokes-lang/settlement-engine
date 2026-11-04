@@ -4,7 +4,7 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
+import { getInstFlags } from '../helpers.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
 
 /** A roster name compared loosely: case and a leading article set aside. */
@@ -264,7 +264,10 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                     (he.desc || '') +
                     ' The arrival of skilled workers outside guild structures is an existential concern being discussed at every chapter meeting.')));
             }))
-          : (factions.push({
+          // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm minted an emigration under an
+          // influx. It reads the one direction (domain/crisis/migrationDirection.js); same power, same
+          // governing ×0.85, so only the words move.
+          : migrationDirectionOf(null) === 'exodus' ? (factions.push({
               faction: 'Departure Committee',
               power: 8,
               desc: "Informal group coordinating group departures, selling assets, and managing the logistics of relocation. Their existence is a public statement about the settlement's prospects.",
@@ -275,6 +278,18 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 (he.desc =
                   (he.desc || '') +
                   ' Managing the emigration crisis while maintaining the appearance that it is not a crisis.'));
+            }))
+          : (factions.push({
+              faction: "Newcomers' Committee",
+              power: 8,
+              desc: "Informal group speaking for the newcomers camped at the edges: who sleeps where, who is fed, who is turned away. Its existence is a public statement that the settlement has taken in more people than it can keep.",
+            }),
+            factions.forEach(function (he) {
+              he.isGoverning &&
+                ((he.power = Math.round(he.power * 0.85)),
+                (he.desc =
+                  (he.desc || '') +
+                  ' Managing the influx while maintaining the appearance that it is not a crisis.'));
             }));
       })(),
     ke('wartime') &&

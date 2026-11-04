@@ -10,7 +10,7 @@ import { random as _rng } from '../kernel/rngContext.js';
 import {tierAtLeast, getTradeRouteFeatures} from './helpers.js';
 import { rollStressSummary, renderStressSummary } from './stressNarrative.js';
 
-import {STRESS_TYPE_MAP} from '../data/stressTypes.js';
+import {STRESS_TYPE_MAP} from '../data/stressTypes.js'; import { migrationDirectionOf } from '../domain/crisis/migrationDirection.js';
 import {
   nativeSemanticNames,
   nativeSemanticResourceKeys,
@@ -55,6 +55,9 @@ export const buildStressEntry = (settlementName, stressType, stressData) => {
     crisisHook:    stressData.crisisHook,
     viabilityNote: stressData.viabilityNote,
     historyColour: stressData.historyColour,
+    // RUNG2-F13: a mass migration's direction is one fact on its record (influx | exodus), born
+    // here from the kind's catalog entry; every migration line reads it (migrationDirection.js).
+    ...(stressType === 'mass_migration' ? { direction: migrationDirectionOf({ direction: stressData.direction }) } : {}),
   };
 };
 
