@@ -17,7 +17,7 @@ import { random as _rng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
 import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
-import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R6: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3b): one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
@@ -456,6 +456,15 @@ const buildHistoricalEvent = (
       if (guildTmpl) candidate = guildTmpl;
     }
     pool.splice(pool.indexOf(candidate), 1);
+    // ⛔ NO CRIME WAVE WITHOUT CRIME (lane RUNG1B-F4 unit 3b, 2026-11-04;
+    // docs/F4_CRIME_SIGNAL_2026-11-04.md). The fill drew `crime_wave` in places with no criminal
+    // faction and no criminal house, and its "the criminal network" and "A guard captain is on
+    // the payroll of the criminal network" printed beside "No criminal infrastructure" (soak1k-134,
+    // -830, -842: three of A-06's 16). Where the crime signal's one home reads none, the drawn
+    // template is set aside and the loop draws again, so only those places' streams move. The
+    // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
+    // never adds one, so "none here" is "none on the final record".
+    if (candidate.type === 'crime_wave' && !crimeSignalOf({ powerStructure: { factions }, institutions }).present) continue;
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
