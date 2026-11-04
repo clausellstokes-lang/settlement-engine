@@ -9,6 +9,7 @@
  */
 import { describe, test, expect } from 'vitest';
 import { resolveDisplayTier } from '../../src/store/selectors.js';
+import { popToTier } from '../../src/data/constants.js';
 
 describe('resolveDisplayTier (finding #2 — dead-branch removal is behaviour-preserving)', () => {
   test("custom always resolves via the population band, never falls through to 'all'", () => {
@@ -30,5 +31,20 @@ describe('resolveDisplayTier (finding #2 — dead-branch removal is behaviour-pr
   test('a manual tier passes through unchanged', () => {
     expect(resolveDisplayTier({ settType: 'town' })).toBe('town');
     expect(resolveDisplayTier({ settType: 'city' })).toBe('city');
+  });
+});
+
+// X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104): the roll bands overlap, so a scan of band
+// minimums no longer names one tier. The grid's tier for a 'custom' population is the engine's
+// own stamp — one law, one home.
+describe('resolveDisplayTier reads the one stamp popToTier', () => {
+  test('agrees with popToTier on every population from 1 to 20,000', () => {
+    const disagree = [];
+    for (let pop = 1; pop <= 20000; pop++) {
+      const shown = resolveDisplayTier({ settType: 'custom', population: pop });
+      if (shown !== popToTier(pop)) disagree.push(`${pop}: ${shown} vs ${popToTier(pop)}`);
+    }
+    expect(disagree.slice(0, 10)).toEqual([]);
+    expect(disagree.length).toBe(0);
   });
 });

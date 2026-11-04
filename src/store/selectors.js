@@ -12,25 +12,21 @@ import {
   getInstitutionalCatalog,
   getFullCatalogWithTierMeta,
   getInstitutionsForTier,
-  getTierOrder,
-  getPopulationRanges,
 } from '../generators/lookups.js';
+import { popToTier } from '../data/constants.js';
 import { filterCatalogForMagic } from '../domain/magicFilter.js';
 import { activeSaveCount } from '../lib/saveAccess.js';
 
-const TIER_ORDER        = getTierOrder();
-const POPULATION_RANGES = getPopulationRanges();
 
 // ── Tier resolution ──────────────────────────────────────────────────────────
 
 export function resolveDisplayTier(config) {
   const t = config.settType;
   if (t === 'custom') {
+    // X-46 (ODQ §934.104): the roll bands overlap, so a scan of band minimums no longer names
+    // one tier. The grid shows the tier the engine itself stamps (one law, one home).
     const pop = config.population || 1500;
-    for (const tier of [...TIER_ORDER].reverse()) {
-      if (pop >= POPULATION_RANGES[tier].min) return tier;
-    }
-    return 'thorp';
+    return popToTier(pop);
   }
   // NOTE: t === 'custom' is handled by the early return above, so it can never
   // reach here — the branch only needs to catch the falsy/random cases.

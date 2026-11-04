@@ -166,17 +166,19 @@ const PROFILES = Object.freeze([
   },
 ]);
 
+// X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104): the stamp's cut points 25 / 88 / 350 /
+// 2,250 / 15,000 (src/data/constants.js :: TIER_STAMP_CUTS), each population either side of one.
 const POPULATION_BOUNDARIES = Object.freeze([
-  [60, 'thorp'],
-  [61, 'hamlet'],
-  [400, 'hamlet'],
-  [401, 'village'],
-  [900, 'village'],
-  [901, 'town'],
-  [5000, 'town'],
-  [5001, 'city'],
-  [25000, 'city'],
-  [25001, 'metropolis'],
+  [24, 'thorp'],
+  [25, 'hamlet'],
+  [87, 'hamlet'],
+  [88, 'village'],
+  [349, 'village'],
+  [350, 'town'],
+  [2249, 'town'],
+  [2250, 'city'],
+  [14999, 'city'],
+  [15000, 'metropolis'],
 ]);
 
 function generate(config, seed) {
