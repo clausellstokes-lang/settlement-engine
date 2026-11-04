@@ -277,7 +277,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { tags: ['banking', 'trade'], priorityCategory: 'economy' },
       at: {
-        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 3000, desc: 'Exchange foreign currency. Early banking (3,000+ population).' },
+        // X-46 car 2: the owner's bands put a town at 300–2,500; the row stays a town row with its
+        // chain; the floor moves to the band's top fifth (the design's recorded exception, ODQ §934.104).
+        town: { name: 'Money changers', baseChance: 0.5, minPopulation: 2000, desc: 'Exchange foreign currency. Early banking (2,000+ population).' },
         city: { name: 'Banking houses', baseChance: 0.7, desc: 'Loans, currency exchange, letters of credit. Basic banking (5,000+).' },
         metropolis: { name: 'Banking district', baseChance: 0.8, desc: 'Consolidated financial quarter: international banking, letters of credit, currency speculation at scale.' },
       },
