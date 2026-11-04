@@ -85,6 +85,7 @@ import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { defenceOf } from '../../facts/defence.js';
 import { marketOf } from '../../facts/market.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -1739,7 +1740,7 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
