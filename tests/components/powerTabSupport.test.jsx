@@ -301,7 +301,13 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
  * describe watches are drawn from generated state. Each absence is anchored on the same render.
  */
 describe('UX consolidation — Power (T2-17..T2-19)', () => {
-  const town = generateSettlementPipeline({ settType: 'town', tradeRouteAccess: 'road' }, null, { seed: 'power-u5-c', customContent: {} });
+  // Seed re-pointed power-u5-c → power-u5-t (TIPFIX, 2026-11-03): FOOD-2's base numbers
+  // (a7f13fef, foodBalance.js :: grownShareOf / hinterlandShareOf) moved power-u5-c's faction
+  // powers so its underworld no longer reaches equilibrium (Thieves' Guild 6 vs Guild Council 15:
+  // adversarial). power-u5-t is the first power-u5-<a..z> town that keeps every premise below
+  // (equilibrium capture, the faction IS the power, conflicts and tensions present) with the same
+  // desk arms drawing as power-u5-c drew before (no capture reading; lens, hold, title, blocs).
+  const town = generateSettlementPipeline({ settType: 'town', tradeRouteAccess: 'road' }, null, { seed: 'power-u5-t', customContent: {} });
   const desk = (playerView = false) => powerStateProse(town, {
     ...(coupContenders(town) ? { contenders: coupContenders(town), riskLabel: coupRiskLabel(coupContenders(town)) } : {}),
     structuralLens: structuralLensOf(town),
