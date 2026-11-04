@@ -72,6 +72,22 @@ How a twin moves births depends on the draw kind:
 | HOOK_ESCALATION (A lists, 9 lines) | A | 3–6 | Public legitimacy erodes as the seat fails to stabilize supply. · Subsidize the chain through charity or the seat's intervention. · Confront the external force directly, by arms or by talks. · Households begin pooling what food they have. · Those who hold the stores start sleeping beside them. · A crowd gathers where the food is handed out, and it turns ugly. · {controller} makes an example of one smuggler; the rest shift routes. · People grumble openly wherever they gather. · Tax collection slows; orders go unheeded. | see ledger | refused births only |
 | DAILY_LIFE_TAB :: localNarrative (food ×3, order, anchors, paragraphs ×2) | T | 1–5 | food is short for most families, and prices are watched closely · the food supply holds for now, and nobody takes it for granted · stores and kitchen gardens give the place a little breathing room · people still move after dusk, though fewer of them and never alone · the wells, the lanes, and the common ground · (paragraphs [1] and [2], see ledger) | see ledger | refused births only (the local narrative prints after the DM's click) |
 
+### Against `docs/POOL_WRITING_PROCEDURE.md` (merged at `0072e93`, the chair's 23:05 addition)
+
+Every twin in the table above was re-read against the procedure's §3 register and its §8 checklist.
+- **§3, the register.** Each twin is concrete and short, and holds nothing the record lacks.
+  - The K twins write "town"; the kernel speaks the tier noun at render time.
+  - No twin prints rule, validator or legend text.
+  - No twin presumes a season.
+- **§8, item 5.** Each twin is quoted above with its share.
+- **§8, items 6–8.** These are Phase B: projection, `--check`, the census re-take, the red-first pool test on named seeds, and the 60/1,000 with `cert:false-presumption`.
+
+**Where the procedure differs from the design or the brief (the design wins, so the ledger follows the design):**
+1. **Atoms without a home.** §2 lists these as vocabulary atoms: soldiers, temple, priest, trade route kind, tier, faith presence, criminal structure, food sources, imports / exports and culture. None of them has a getter in `factsOf` at `ee3b9c7`. The brief makes a declaration against anything else a STOP, so they stay under `stop`. `temple` is declared as `institution: temple`, which `hasInstitution` reads.
+2. **When to write a twin.** §3 asks for a twin "beside every line that needs a fact most places lack". The brief (item 3) and design §4.4 ask for one only where the gate would leave the slot EMPTY for most births. This lane follows the brief. A pool that keeps a drawable line for most births got no twin, because each twin moves births.
+3. **The twin share.** §3 gives 1/(n+1) for every twin. Design §3.3 gives that share for K pools only; at R, H and T sites the twin resolves after the draw, so it moves refused births only. The table above follows §3.3.
+4. **The crisis words.** §1.3 lists the crisis words as `threat | hunger | succession | unrest | any`. In this ledger `any` means "sayable in every condition" (design §3.2). "Any active crisis" uses F12's fifth family key, `crisis`, because `crisisOf().has('crisis')` reads it.
+
 ## Unit 2 — the Daily Life offer line (applied)
 
 `dailyLifeOfferLine(record, enabled)` (`src/components/new/dailyLifeLogic.js`) names the market (`factsOf.market`), the tavern (`hasInstitution('tavern')`) and the watch (`defence.watch`), each only when present. With none of the three it reads "Ordinary life here in prose." With all three it is the old wording byte for byte.
