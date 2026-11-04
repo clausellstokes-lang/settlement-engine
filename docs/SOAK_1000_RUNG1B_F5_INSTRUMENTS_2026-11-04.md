@@ -65,3 +65,25 @@ This agrees with the record's §3 table tier by tier: the same medians, and 88 s
 On the 1,000, 97 hook lines change in 74 landlocked settlements: 84 "lost at sea" and 13
 "dock-side". No wet line remains. The change is draw-free (**CONFIRMED**): exactly 74 records
 change bytes, and each is byte-identical to the base once the two strings are reversed.
+
+## Addendum: the chair's two rulings, and the tip at `65a31af4`
+
+The chair ruled on the two residue shapes:
+- **(1) "Master Shipwright" in an airship city is LICENSED.** A-11's airship override now also
+  removes ship, ships, shipwright, shipyard and shipping (`6c5381d2`).
+- **(2) "Harbor Master" ×4 is an engine bug, cured as unit 6 (`65a31af4`).** The role is seated by
+  `economy/upgradeOpportunities.js :: getUpgradeOpportunities`, whose `requiresPort` gate used
+  `includes('port')`. The brief named the crafts-role `hasPort` in `npcGenerator.js`. That test
+  has the same defect and is cured too, but measured alone it moves no roster on the 1,000.
+  Both now match whole words only, so "Teleportation circle" is no longer a port.
+
+What unit 6 moved:
+- Harbor Masters on the 1,000 went from 25 to 21.
+- 19 rosters move. Every one is a place whose only port-matching row is a Teleportation circle.
+- No other record moves. Of seeds 0–59, only 46 moves.
+- No golden-master row moves (0 of 525).
+
+The soak at `65a31af4` (`artifacts/f5-tip2`) against the first tip (`artifacts/f5-tip`):
+- **A-11 went from 6 to 0.**
+- Every other class, `mediansOutsideBands` (still none) and the dependence pass are unchanged.
+- Findings went from 5,108 to 5,102.
