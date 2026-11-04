@@ -75,6 +75,11 @@ describe('F11 · a building\'s own walls are not a fortification', () => {
     expect(claims(FOUNDLING, rosterWith(FOUNDLING))).toBe(false);
     expect(claims(TIDEMARK)).toBe(false);
   });
+  it('the Foundry journal\'s labelled, escaped row of the same description is silent too', () => {
+    expect(claims(`- **Caravanserai**: ${CARAVANSERAI}`, rosterWith(CARAVANSERAI))).toBe(false);
+    expect(claims(`- **Foundling home**: ${FOUNDLING}`, rosterWith(FOUNDLING))).toBe(false);
+    expect(claims(`- **Caravanserai**: ${CARAVANSERAI}`)).toBe(true);
+  });
   it('a building named with "of the" or a possessive keeps its walls', () => {
     expect(isDefenceReach('walls', 'Refuge inside the walls of the great temple')).toBe(true);
     expect(isDefenceReach('walls', "The hall's walls sweat in the wet season.")).toBe(true);

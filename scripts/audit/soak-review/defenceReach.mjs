@@ -122,7 +122,13 @@ export function isDefenceReach(term, sentence, context = {}) {
  * @param {string} sentence @param {any} settlement @returns {boolean}
  */
 export function isOwnDescription(sentence, settlement) {
-  const text = String(sentence ?? '').trim();
+  // The Foundry journal prints a house as "- **Name**: desc", escaped for markdown
+  // (foundry-module/scripts/markdownEscape.js): its label and escaping are undone first.
+  const text = String(sentence ?? '')
+    .replace(/^[-*\s]*\*\*[^*]+\*\*:?\s*/, '')
+    .replace(/&#39;/g, "'").replace(/&quot;/g, '"').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&amp;/g, '&')
+    .replace(/\\([\\`*_[\]()#+~|])/g, '$1')
+    .trim();
   if (!text) return false;
   const institutions = Array.isArray(settlement?.institutions) ? settlement.institutions : [];
   return institutions.some((/** @type {any} */ inst) => typeof inst?.desc === 'string' && inst.desc.includes(text));
