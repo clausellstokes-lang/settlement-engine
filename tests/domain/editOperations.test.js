@@ -800,8 +800,10 @@ describe('EM-B1a — the op vocabulary, the fourteen home ops, and the world hal
     // of drifting into a silent pass. (A generic `\bname\s*[:=]` matcher was measured against
     // this leaf and convicts its guardsStated PROSE, which writes nothing: an instrument that
     // cannot tell a sentence from an assignment proves neither.)
-    expect(NPC_RENAME_SURFACES.length, 'the five declared join surfaces are live, or the scan'
-      + ' below measures nothing').toBe(5);
+    // 5, then 13 at RUNG1B-F7: the crisis cast's roles[].name and levers[].holderName at its
+    // four homes (src/domain/factionRename.js :: CRISIS_CAST_HOMES).
+    expect(NPC_RENAME_SURFACES.length, 'the thirteen declared join surfaces are live, or the scan'
+      + ' below measures nothing').toBe(13);
     const surfaceHits = (text) => NPC_RENAME_SURFACES.map((s) => s.path).filter((p) => text.includes(p));
     const plantedWrite = `${leafCode}\nconst planted = { '${NPC_RENAME_SURFACES[0].path}': 'X' };\n`;
     expect(surfaceHits(plantedWrite), 'the matcher is proved LIVE on a planted ASSIGNMENT to'

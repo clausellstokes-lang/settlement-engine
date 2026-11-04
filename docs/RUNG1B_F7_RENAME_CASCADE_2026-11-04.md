@@ -45,3 +45,13 @@ The escalation line (`ifNothingIsDone.residualEffects`, the catalog's) and the c
 ### Noticed, not built (intake)
 
 - The DM's cast edit (`stress…_userEdits.castRoles.value`, `role=kind:id` parts) keys factions and houses by display NAME; after a rename `effectiveCastOf` drops the edited row silently. Not on a generated record, so no walker sees it; rewriting a user-edit value is the edit layer's call.
+
+## Units 2–4 — outcome
+
+- **Unit 2** (`3409e2f8`): the faction and person cascades walk `CRISIS_CAST_HOMES`; the walker's other faction paths cascaded; the collision rows and the receipt row declared NON_CASCADED.
+- **Unit 3** (`b31ae88d`): the institution ledger's twelve cast rows, kind-scoped by a new `where` row filter that the rename and the removal both read (`sitesOf`); the NON_CASCADED rows above, `availableServices.criminal[].name` among them.
+- **Unit 4**: `tests/domain/crisisRenameCascade.test.js` keeps the walker (48 soak records, the three ledgers); red at the base on 31 path shapes, green at the tip. The same walk over 120 records reports 0 undeclared paths for each ledger.
+
+Readers of the two modules (18 files) at the tip: green except `institutionRename.test.js` A6 and `editCorpusRatchet.test.js` A3–A8, both red at the base with byte-identical failure figures (`editCorpusRatchet`'s assertion lines diff empty base vs tip).
+
+Moved and re-recorded, each by this lane, with its cause (the crisis cast's rows): `institutionRename.test.js` A1 exact-row count 34 → 46; `editOperations.test.js` B2 `NPC_RENAME_SURFACES.length` 5 → 13; the totality fixtures of `factionRename.test.js`, `npcRename.test.js` and the store fixture of `editSlice.test.js` A1a hold the new surfaces. No golden, census, baseline or ceiling moved.

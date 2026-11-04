@@ -18,7 +18,9 @@ import { beforeAll, describe, expect, test } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import {
   CRISIS_CAST_HOMES,
+  FACTION_RENAME_SURFACES,
   NON_CASCADED_SURFACES,
+  NPC_NON_CASCADED_SURFACES,
   NPC_RENAME_SURFACES,
   applyFactionRenameToSettlement,
   applyNpcRenameToSettlement,
@@ -266,6 +268,49 @@ describe('the crisis cast follows a HOUSE rename', () => {
     }
     expect(named, 'anti-vacuity: no criminal service in the sample names a roster house').toBeGreaterThan(0);
     expect(sameHouse, 'a criminal service names its OWN house, so the label ruling is refuted: cascade the row').toEqual([]);
+  });
+});
+
+describe('the whole-record walk: a future writer cannot add an undeclared name path', () => {
+  /**
+   * The INDEPENDENT denominator, over records that carry a crisis. Every string on the
+   * record is scored against the roster's faction names (exact or whole word), house names
+   * (exact) and person names (exact), and its path shape must be declared by that kind's
+   * ledger, cascaded or ruled out in writing. It reads the ledgers only to ask "declared?",
+   * never to decide what to look for, so a field the ledgers never heard of reds here.
+   */
+  test('every path holding a faction, house or person name is declared by its ledger', () => {
+    const ledgers = {
+      faction: new Set([...FACTION_RENAME_SURFACES, ...NON_CASCADED_SURFACES].map((row) => row.path)),
+      house: new Set([...INSTITUTION_RENAME_SURFACES, ...INSTITUTION_NON_CASCADED].map((row) => row.path)),
+      person: new Set([...NPC_RENAME_SURFACES, ...NPC_NON_CASCADED_SURFACES].map((row) => row.path)),
+    };
+    /** @type {Map<string, string>} */
+    const undeclared = new Map();
+    const found = { faction: 0, house: 0, person: 0 };
+    for (const { index, save } of crises) {
+      const factions = rosterFactions(save).map((name) => [name, wholeWordRe(name)]);
+      const houses = rosterHouses(save);
+      const people = new Set((save.npcs || []).map((npc) => String(npc?.name || '').trim()).filter(Boolean));
+      for (const [path, value] of stringsOf(save)) {
+        const held = value.trim();
+        const hits = {
+          faction: factions.some(([name, re]) => held === name || re.test(value)),
+          house: houses.has(held),
+          person: people.has(held),
+        };
+        for (const kind of /** @type {const} */ (['faction', 'house', 'person'])) {
+          if (!hits[kind]) continue;
+          found[kind] += 1;
+          if (!ledgers[kind].has(path) && !undeclared.has(`${kind} ${path}`)) undeclared.set(`${kind} ${path}`, `soak1k-${index} e.g. ${JSON.stringify(value.slice(0, 60))}`);
+        }
+      }
+    }
+    for (const kind of Object.keys(found)) expect(found[kind], `anti-vacuity: the walk found no ${kind} name at all`).toBeGreaterThan(100);
+    const rows = [...undeclared.entries()].map(([key, sample]) => `${key}  (${sample})`).sort();
+    expect(rows, '\nStored paths on a crisis-bearing record hold a name that NO ledger of its kind declares.'
+      + '\nCascade the path in its rename module or rule it out in that module\'s NON_CASCADED list:\n'
+      + rows.map((row) => `  ${row}`).join('\n') + '\n').toEqual([]);
   });
 });
 
