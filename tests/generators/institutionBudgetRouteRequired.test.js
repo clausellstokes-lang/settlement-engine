@@ -13,19 +13,19 @@
 import { createHash } from 'node:crypto';
 import { beforeAll, describe, expect, it, vi } from 'vitest';
 import { isDensityExempt } from '../../src/data/institutionBudget.js';
-import { institutionalCatalog, isFabricRow } from '../../src/data/institutionalCatalog.js';
+import { institutionalCatalog, isFabricRow, isRareRow } from '../../src/data/institutionalCatalog.js';
 import { configForIndex } from '../../scripts/audit/generation-certification-soak.mjs';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
-/** The pipeline with the exemption withdrawn (fabric only, the factor's rule before the ruling). */
+/** The pipeline with the route-required exemption withdrawn (fabric and rare rows stay exempt). */
 async function pipelineWithoutExemption() {
   vi.resetModules();
   vi.doMock('../../src/data/institutionBudget.js', async (importOriginal) => {
     const actual = /** @type {Record<string, unknown>} */ (await importOriginal());
     const catalog = await import('../../src/data/institutionalCatalog.js');
-    return { ...actual, isDensityExempt: (tier, name) => catalog.isFabricRow(tier, name) };
+    return { ...actual, isDensityExempt: (tier, name) => catalog.isFabricRow(tier, name) || catalog.isRareRow(tier, name) };
   });
   const boundary = await import('../../src/domain/density/densityCreateBoundary.js');
   const pipeline = await import('../../src/generators/generateSettlementPipeline.js');
@@ -56,7 +56,8 @@ describe('X-46 car 3 — the route-required rows are exempt from the density fac
       for (const group of Object.values(block)) {
         for (const [name, row] of Object.entries(group)) {
           if (isFabricRow(tier, name)) { expect(isDensityExempt(tier, name), `${tier}|${name} (fabric)`).toBe(true); continue; }
-          if (row.required) continue;
+          // the authored rarity is its own exemption (institutionBudgetRarity.test.js), added 2026-11-04
+          if (row.required || isRareRow(tier, name)) continue;
           if (isDensityExempt(tier, name)) exempt.push(`${tier}|${name}`);
         }
       }

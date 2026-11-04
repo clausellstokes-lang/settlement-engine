@@ -23,7 +23,7 @@
  * outside the budget reports the figure; it does not move an anchor.
  */
 
-import { institutionalCatalog, institutionRowGuards, isFabricRow } from './institutionalCatalog.js';
+import { institutionalCatalog, institutionRowGuards, isFabricRow, isRareRow } from './institutionalCatalog.js';
 import { POPULATION_RANGES } from './constants.js';
 
 /**
@@ -83,7 +83,7 @@ export function expectedHousesAt(population) {
 // non-fabric rows whose stated population floor the midpoint reaches) is still read at load as
 // `catalogueE`, and the table records the sum it was calibrated beside, so a catalogue change
 // that moves the sum reds tests/generators/institutionBudgetDensity.test.js.
-// Every non-required, non-fabric, non-route-required row's chance (`isDensityExempt`) is multiplied by d (the product clamped to [0, 1]
+// Every non-required, non-fabric, non-route-required, non-rare row's chance (`isDensityExempt`) is multiplied by d (the product clamped to [0, 1]
 // per row: `scaleChance`) in assembleInstitutions, the cascade and the faction pass. d is a pure
 // function of (tier, population), computed once before the first draw, and it never adds or
 // removes a draw; outcome gates later in the roll and the cascade's count move on some seeds
@@ -187,11 +187,14 @@ export function densityFactor(tier, population) {
  * Measured before the ruling: a port-route city's harbour master starved at the factor while d ≡ 1
  * seated it (tests/joins/subsumption.test.js, "port-route city keeps its docks alongside the
  * harbour master"). A row that only names `terrainAccess` is not marked and is scaled.
+ * THE AUTHORED RARITY (the chair's addendum, 2026-11-04): a row the catalogue marks `rare`
+ * (`isRareRow`; the metropolis Dragon resident) is exempt the same way — its chance is a rarity,
+ * and at d up to 4 the 0.06 dragon sat in 34 of 80 high-magic metropolises.
  * @param {string} tier @param {string} name
- * @returns {boolean} true when the factor does not apply to the row (fabric or route-required)
+ * @returns {boolean} true when the factor does not apply to the row (fabric, route-required or rare)
  */
 export function isDensityExempt(tier, name) {
-  if (isFabricRow(tier, name)) return true;
+  if (isFabricRow(tier, name) || isRareRow(tier, name)) return true;
   const block = institutionalCatalog[tier];
   if (!block) return false;
   for (const group of Object.values(block)) {
