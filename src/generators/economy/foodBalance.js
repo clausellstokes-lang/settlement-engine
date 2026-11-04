@@ -78,8 +78,9 @@ const FAILED_SOURCE_WORDS = Object.freeze({ grain: 'grain harvest', livestock: '
  * @property {number} famineCutPct      how much of the harvest the famine took, %
  * @property {string} foodwaysLine      the foodways sentence composed from the place's own sources
  * @property {boolean=} storesHeld      an ACTIVE famine beside a granary still holding six months or
- *                                      more: the stores are kept back, not given out (the famine's
- *                                      own story: "The wealthy are hoarding."; lane RUNG2-F13)
+ *                                      more (as the stores line rounds them): the stores are kept back,
+ *                                      not given out (the famine's own story: "The wealthy are hoarding.";
+ *                                      lane RUNG2-F13; one rounding, rung 2D)
  */
 
 /** The months a famine's granary may hold before the record says the stores are held back (RUNG2-F13). */
@@ -116,7 +117,9 @@ export function deriveFoodRecord(input) {
     famineCutPct: input.famineCutPct ?? 0,
     foodwaysLine: input.foodwaysLine || '',
     // Carried by a famine's record only (absent = no famine, nothing held), so no other record moves.
-    ...(input.stressFamine ? { storesHeld: input.hasGranary === true && input.storageMonths >= FAMINE_HELD_STORE_MONTHS } : {}),
+    // ONE ROUNDING (rung 2D, the chair's ruling): the flag reads the whole months the stores line
+    // prints (`tonightSheet.js :: foodStoresWords`, Math.round), so 5.5 months prints "six" AND is held.
+    ...(input.stressFamine ? { storesHeld: input.hasGranary === true && Math.round(input.storageMonths) >= FAMINE_HELD_STORE_MONTHS } : {}),
   };
 }
 
