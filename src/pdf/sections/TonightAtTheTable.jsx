@@ -65,7 +65,7 @@ export function TonightAtTheTable({ settlement, narrativeMode }) {
               </Text>
               {p.line ? (
                 <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>
-                  {p.why === 'secret' ? p.line : `${TONIGHT_COPY.wants} ${p.line}`}
+                  {p.why === 'secret' ? p.line : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${p.sameAs}.` : `${TONIGHT_COPY.wants} ${p.line}`}
                 </Text>
               ) : null}
             </View>
