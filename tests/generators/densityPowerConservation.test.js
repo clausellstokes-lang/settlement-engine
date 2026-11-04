@@ -17,6 +17,7 @@ import { conservationFindings } from '../../src/generators/generationReceiptJudg
 import { disperseNamedRoster, resizePoliticalRoster } from '../../src/generators/density/applyDensityLaw.js';
 import { REGISTER_VII_DENSITY_LAW_VERSION } from '../../src/domain/density/densityLaw.js';
 import { createPRNG } from '../../src/kernel/prng.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const total = factions => factions.reduce((sum, f) => sum + Number(f.power || 0), 0);
 
@@ -106,6 +107,24 @@ describe('N1: the soak seeds that failed at 90dc22f18 now conserve', () => {
       expect(
         conservationFindings(settlement).filter(f => /Faction power/.test(JSON.stringify(f))),
       ).toEqual([]);
+    }, 120_000);
+  }
+});
+
+describe('N1 on every path: a v2 world regenerated with a HELD roster conserves faction power', () => {
+  beforeAll(() => ensureLaws());
+  for (const index of [0, 4, 8]) {
+    it(`soak1k-${index}: held npcs regenerate with power totalling 100 and every held figure unmoved`, () => {
+      const { settlement: born, config, seed } = birth(index);
+      expect(born.config._densityLawVersion).toBe(REGISTER_VII_DENSITY_LAW_VERSION);
+      // The runner's pins channel (the EM-R2/EM-R3 suites' instrument): the population
+      // step's two record paths, held from the born world.
+      const pins = structuredClone({ npcs: born.npcs, relationships: born.relationships });
+      const regen = generateSettlementPipeline(config, null, { seed: `${seed}-regen`, pins });
+      expect(total(regen.powerStructure.factions)).toBe(100);
+      for (const f of regen.powerStructure.factions) expect(Number.isInteger(f.power)).toBe(true);
+      const figure = n => [n.name, n.factionAffiliation, n.importance, n.densityRungRole];
+      expect(regen.npcs.map(figure)).toEqual(born.npcs.map(figure));
     }, 120_000);
   }
 });

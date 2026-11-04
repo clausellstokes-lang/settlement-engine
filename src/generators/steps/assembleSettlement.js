@@ -25,7 +25,7 @@ import { ensureFactionStructuralNpcs } from '../factionRoles.js';
 // ODQ §810's tier-gated density law: sizes the political roster to the tier's
 // faction band. Dormant (returns its input by reference, no draw) for any world
 // whose own config carries no density-law marker.
-import { resizePoliticalRoster } from '../density/applyDensityLaw.js';
+import { conserveSeatPower, resizePoliticalRoster } from '../density/applyDensityLaw.js';
 // Canonical-shape adapter (Tier 1.3). Stamps version fields, mints a
 // stable id, defaults canonical containers. Pure — does not restructure
 // legacy fields. Every freshly-generated settlement passes through here
@@ -291,6 +291,15 @@ registerStep('assembleSettlement', {
     coherenceRng => generateCoherence(settlement, coherenceRng, pins),
   );
   Object.assign(settlement, coherenceUpdates);
+  // Rung 1 N1: faction power totals 100 on every path, the held-roster one included (whose
+  // coherence tail skips the dispersal that conserves it). By reference for v1 and for a
+  // roster already at 100; no draw. A HELD powerStructure is the DM's and is not rewritten.
+  if (chooseOrPin(pins, 'powerStructure', () => UNPINNED) === UNPINNED) {
+    const conserved = conserveSeatPower({
+      config: settlement.config, powerStructure: settlement.powerStructure,
+    });
+    if (conserved !== settlement.powerStructure) settlement.powerStructure = conserved;
+  }
 
   // Faction-to-NPC coupling. Walks every faction; for each archetype
   // (temple, watch, merchant, thieves, noble, arcane) ensures the

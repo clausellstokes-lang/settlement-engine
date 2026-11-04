@@ -130,6 +130,9 @@ const ROSTER = Object.freeze([
   { symbol: 'ensureFactionStructuralNpcs', file: 'src/generators/factionRoles.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'reconcilePowerStructure', file: RECONCILE_FILE, cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'resizePoliticalRoster', file: 'src/generators/density/applyDensityLaw.js', cls: 'replay', stream: SHARED, via: ASSEMBLY_STEP },
+  // Rung 1 N1 (2026-11-04): conserves faction power at 100 after the coherence tail, on the
+  // held-roster path too. No draw; gated off under a held powerStructure.
+  { symbol: 'conserveSeatPower', file: 'src/generators/density/applyDensityLaw.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
   // ⭐ 11 -> 13 AT THE GS-2 MERGE (lane G2, ODQ §934.101, one faction set; rows added by cure lane
   // T13). `factions` and `conflicts` left generatePopulation's choosers and are DERIVED in the
   // assembly body from the final roster: `generateFactions` projects the roster onto the power
@@ -490,7 +493,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(13); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts
+    expect(ROSTER).toHaveLength(14); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14 rung 1 N1 (2026-11-04): conserveSeatPower
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -572,7 +575,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     // Every OTHER held writer is SHARED-STREAM and therefore consumes and discards.
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
-      'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
+      'conserveSeatPower', 'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
       'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
