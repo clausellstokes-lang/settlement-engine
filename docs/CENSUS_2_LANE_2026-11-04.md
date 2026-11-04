@@ -99,7 +99,9 @@ Every twin in the table above was re-read against the procedure's §3 register a
 | run | `reader:daily-life-placeholder` | every other class | `coh:*` | `cert:false-presumption` · `declared-share` |
 |---|---|---|---|---|
 | 60 | 30 → **0** | identical | 0 → 0 | do not exist yet (CENSUS-1b's wave 1) |
-| 1,000 | see the report at the end of the lane | | | |
+| 1,000 | 495 → **0** | identical (1,676 → 1,181 findings; 0 errors; CLIMB → CLIMB) | none on either side | do not exist yet |
+
+The soak harness writes no certification field, so "certification 1,000/1,000" cannot be read from it at this base (CENSUS-1 reported none either).
 
 ## Rows moved, by cause (never re-recorded)
 
