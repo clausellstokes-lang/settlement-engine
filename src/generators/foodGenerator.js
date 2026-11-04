@@ -181,7 +181,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   const baseStorage = hasStateGranary ? (tier === 'metropolis' ? 12 : 8)
                     : hasCityGranary  ? (tier === 'city' ? 7 : 5)
                     : hasGranary      ? (tier === 'town' ? 5 : tier === 'village' ? 3.5 : 2.5)
-                    : (['thorp','hamlet'].includes(tier) ? 1.5 : 1.0);
+                    // 2026-11-04 (T2, the soak 1000 dry run §4, adopted by the chair): a village with no
+                    // granary stored 1.0 month to a hamlet's 1.5 (village median 1.3 vs hamlet 1.5 over
+                    // 1,000 places; 0 of 167 villages had a granary), so a village now takes the
+                    // thorp/hamlet value.
+                    : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
   const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
 

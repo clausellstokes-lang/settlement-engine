@@ -30,4 +30,10 @@ export const FOOD_IMPORT_RATES = Object.freeze({
  * Food endurance reading (`domain/defense/defenseFacts.js :: foodEnduranceOf`), so the siege
  * arithmetic cannot drift between the record and the line that reads it (X-52, ODQ §934.104).
  */
-export const SIEGE_PRODUCTION_KEPT = 0.6;
+// 2026-11-04 (T1, the soak 1000 dry run §4, adopted by the chair under the owner's word "I leave it all
+// to your judgment"): 0.6 -> 0.3. At 0.6, 404 of 1,000 places never ran out on half rations under siege
+// (any place growing 84% or more of its need), 37 of 41 small places born besieged among them. The dry
+// run's recomputation from the 1,000 records: places that never run out on half rations 404 -> 0; median
+// months on full rations thorp 3.6 -> 2.2, village 3.0 -> 1.8, town 11.5 -> 8.2, city 13.9 -> 10.8,
+// metropolis 20.7 -> 17.4 (docs/SOAK_1000_2026-11-03.md §4).
+export const SIEGE_PRODUCTION_KEPT = 0.3;

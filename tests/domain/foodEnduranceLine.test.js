@@ -102,6 +102,16 @@ describe('food endurance reads the one food record', () => {
     expect(besieged.foodBalance.stressModifier).toBe(SIEGE_PRODUCTION_KEPT);
   });
 
+  // T1 (soak 1000 dry run §4, adopted by the chair 2026-11-04): at 0.6 a place growing 84% or more
+  // of its need kept half rations for ever under siege (404 of 1,000 never ran out). A thorp growing
+  // 84% of its need, not born besieged, must run out on half rations once shut in.
+  it('a thorp growing 84% of its need runs out on half rations under siege (T1)', () => {
+    const thorp = { tier: 'thorp', economicState: { foodSecurity: { hasSiege: false, foodRecord: { storageMonths: 1.5, grownPct: 84, hasGranary: false } } } };
+    const end = FACTS.foodEnduranceOf(thorp);
+    expect(end.halfRationMonths, 'half rations must end').not.toBeNull();
+    expect(end.halfRationMonths).toBeGreaterThan(0);
+  });
+
   it('food endurance is the stores divided by the need the place cannot grow under siege', () => {
     expect(typeof FACTS.foodEnduranceOf).toBe('function');
     expectNoSeedFailures(collectSeedFailures(CORPUS, ({ seed, s }) => {
