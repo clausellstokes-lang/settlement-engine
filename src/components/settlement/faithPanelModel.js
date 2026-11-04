@@ -292,12 +292,12 @@ export function trimFaithDeskToPanel(rungs, model) {
     sink: active && m.sinkSentence ? null : r.sink,
     mandate: active && m.mandate ? null : r.mandate,
     creedFall: active && m.patronFallSentence ? null : r.creedFall,
-    // LANE FAITH (2026-11-03): DS-FTH-2 is the patron-less town's lens, and its one reachable
-    // pool (PRIVATE DOSSIER) denies an organised faith in every variant. Beside church evidence
-    // that is the contradiction root-cause failure 2 names; beside nothing it restates the
-    // faith line this model already carries (its `[street]` variant byte for byte). So on a
-    // patron-less town the screen and the print draw the LINE and not the lens. The lens
-    // speaks again when a pool that describes the church is authored (lane FAITH's REQUEST).
+    // LANE FAITH (2026-11-03): DS-FTH-2 is the patron-less town's lens. Its first pool denied
+    // an organised faith in every variant, so on a patron-less town the screen and the print
+    // draw the LINE and not the lens. Lane FAITH-POOLS (2026-11-04) re-authored the pool to
+    // read the one faith reading (no denial; tests/lint/faithTeaserLicence.test.js), but each
+    // of its variants states a fact the LINE already prints, so drawing both would say it
+    // twice (X-50). Whether the lens speaks again, and in place of which line, is the chair's.
     faithTeaser: !active && m.line ? null : r.faithTeaser,
   };
 }

@@ -204,6 +204,9 @@ per-block declarations of WRITER-4). Nothing is minted here.*
 | `{steading}` | proper | a satellite steading by its own name | WRITER-4 |
 | `{ruin}` | proper | the ancient ruin by its own name | WRITER-4 |
 | `{event}` | proper | a historical event by its recorded name | WRITER-4 |
+| `{houses}` | phrase | the houses of worship the ONE FAITH READING names (`faithReading.js :: faithReadingOf`, `churchWords`): *a parish church* · *a great cathedral, parish churches and monasteries*; carries its own determiner; offered **only** where `reading.hasChurch` | FAITH-POOLS (`DS-FTH-2`) |
+| `{cleric}` | proper | the senior cleric's ROLE as the reading speaks it (`reading.seniorCleric.role`: *High Priest*, *Abbess*, *Village Priest*), never the person's look, voice or name | FAITH-POOLS (`DS-FTH-2`) |
+| `{observance}` | phrase | the religion dial as the people's observance (`faithReading.js :: observancePhraseOf`, five bands: *seldom, beyond weddings and burials* · *on the great feast days* · *through the year* · *week by week* · *in every part of life*); filled on every reading | FAITH-POOLS (`DS-FTH-2`) |
 | `{founder}` | phrase | `founding.foundedBy` — a lowercase descriptive phrase that carries its OWN determiner (*"a miller who built a mill and found customers before they found customers"*), never a name. **RE-DECLARED 2026-09-05, see §0c-4** | WRITER-4 |
 | `{challenge}` | phrase | `founding.initialChallenge` | WRITER-4 |
 | `{defwork}` | bare-common | the settlement's own wall-class work **by its recorded name** — the roster row `defenseProfile.institutions.walls` matched (wall · citadel · palisade · earthwork); never a baked or invented noun, and never offered to a settlement whose wall-class list is empty | CT-1a |
@@ -4646,24 +4649,40 @@ state carries no provenance for the absence, and a variant explaining *why* the
 town has no faith would be inventing history (R-DST-B). Premium marking follows
 §0e — the gated content is absent, not teased.
 
-**CANONICAL-AT-ZERO (R-DST-C).** Variant 1 of the private pool is the existing
-authored line at `FaithSection.jsx:243-245`, already in register and carried in
-unchanged at index 0. The corpus adds angle-distinct siblings for variance and
-touches the original not at all.
+**THE ONE FAITH READING (lane FAITH-POOLS, 2026-11-04).** Every variant reads
+`src/domain/dossier/faithReading.js :: faithReadingOf` and says nothing the reading
+does not give. The eight variants this block first carried denied an organised faith
+("There is no patron here", "No faith holds the town", "rather than clergy") on towns
+whose record carries a church, a religious faction, a senior cleric and a tithe
+(root-cause failure 2). Both pools are drawn on EVERY patron-less town, so a variant
+that names a church, a cleric or a faction names the slot that carries it, and anchored
+liveness drops it where the reading has no such fact; the one variant per pool that
+names only `{settlement}` and `{observance}` speaks on every reading, the quietest town's
+included. Grades, reliance and look are not the reading's and appear nowhere.
+`tests/lint/faithTeaserLicence.test.js` walks every variant against the reading.
 
-**SLOTS.** `{settlement}`
+**CANONICAL-AT-ZERO (R-DST-C), RETIRED.** Variant 1 of the private pool was the
+quiet-observances line of `FaithSection.jsx`. That line now lives once, in the faith
+line itself (`faithReading.js :: QUIET_OBSERVANCES_LINE`), on exactly the towns it is
+true of; carried here it would deny the church beside a church, and restate the line
+beside none (X-50: every sentence once).
+
+**SLOTS.** `{settlement}` · `{houses}` · `{cleric}` · `{faction}` · `{observance}`, each
+the reading's: `{houses}` is `reading.churchWords` where `reading.hasChurch`; `{cleric}`
+is `reading.seniorCleric.role`; `{faction}` is `reading.religiousFaction.name`;
+`{observance}` is `reading.dial` through `faithReading.js :: observancePhraseOf`.
 
 **PRIVATE DOSSIER**
-1. `[street]` The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god. *— canonical-at-zero*
-2. `[ledger]` There is no patron here. Households keep the rites their households have always kept, and nothing claims the town.
-3. `[visitor]` Worship in {settlement} is a private matter: shrines at crossroads and doorframes, none of them a creed's.
-4. `[elder]` No faith holds the town. The observances are real, and they are nobody's in particular.
+1. `[street]` In {settlement} the faith is kept at {houses}.
+2. `[ledger]` The senior cleric in {settlement} holds the rank of {cleric}.
+3. `[visitor]` Among the factions of {settlement}, the faith's party is the {faction}.
+4. `[elder]` Folk in {settlement} keep their observances {observance}.
 
 **PUBLIC / SHARED DOSSIER**
-1. `[ledger]` The town keeps no named faith. What devotion there is runs through custom rather than clergy.
-2. `[visitor]` Observance here is local and unorganized; nothing in {settlement} speaks for a god.
-3. `[elder]` The shrines are old and unaffiliated. Whatever is kept at them is kept without a name attached.
-4. `[street]` No creed governs the calendar here. The year is marked by the season and the market, not the rite.
+1. `[ledger]` The faith of the place is kept at {houses}.
+2. `[visitor]` The senior cleric here is the {cleric}.
+3. `[elder]` The faith's party in local affairs is the {faction}.
+4. `[street]` The people here keep their observances {observance}.
 
 ---
 

@@ -4502,62 +4502,82 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
   "DS-FTH-2": {
     "title": "DS-FTH-2: War & Faith › Faith teaser (free / anon; names no deity) · `absence of config.primaryDeitySnapshot × viewer tier`",
     "slots": [
-      "settlement"
+      "settlement",
+      "houses",
+      "cleric",
+      "faction",
+      "observance"
     ],
     "pools": {
       "PRIVATE DOSSIER": [
         {
           "angle": "street",
-          "text": "The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.",
-          "slots": [],
+          "text": "In {settlement} the faith is kept at {houses}.",
+          "slots": [
+            "settlement",
+            "houses"
+          ],
           "vid": 1
         },
         {
           "angle": "ledger",
-          "text": "There is no patron here. Households keep the rites their households have always kept, and nothing claims the town.",
-          "slots": [],
+          "text": "The senior cleric in {settlement} holds the rank of {cleric}.",
+          "slots": [
+            "settlement",
+            "cleric"
+          ],
           "vid": 2
         },
         {
           "angle": "visitor",
-          "text": "Worship in {settlement} is a private matter: shrines at crossroads and doorframes, none of them a creed's.",
+          "text": "Among the factions of {settlement}, the faith's party is the {faction}.",
           "slots": [
-            "settlement"
+            "settlement",
+            "faction"
           ],
           "vid": 3
         },
         {
           "angle": "elder",
-          "text": "No faith holds the town. The observances are real, and they are nobody's in particular.",
-          "slots": [],
+          "text": "Folk in {settlement} keep their observances {observance}.",
+          "slots": [
+            "settlement",
+            "observance"
+          ],
           "vid": 4
         }
       ],
       "PUBLIC / SHARED DOSSIER": [
         {
           "angle": "ledger",
-          "text": "The town keeps no named faith. What devotion there is runs through custom rather than clergy.",
-          "slots": [],
+          "text": "The faith of the place is kept at {houses}.",
+          "slots": [
+            "houses"
+          ],
           "vid": 1
         },
         {
           "angle": "visitor",
-          "text": "Observance here is local and unorganized; nothing in {settlement} speaks for a god.",
+          "text": "The senior cleric here is the {cleric}.",
           "slots": [
-            "settlement"
+            "cleric"
           ],
           "vid": 2
         },
         {
           "angle": "elder",
-          "text": "The shrines are old and unaffiliated. Whatever is kept at them is kept without a name attached.",
-          "slots": [],
+          "text": "The faith's party in local affairs is the {faction}.",
+          "slots": [
+            "faction"
+          ],
           "vid": 3
         },
         {
           "angle": "street",
-          "text": "No creed governs the calendar here. The year is marked by the season and the market, not the rite.",
-          "slots": [],
+          "text": "The people here keep their observances {observance}.",
+          "slots": [
+            "observance"
+          ],
           "vid": 4
         }
       ]
