@@ -120,6 +120,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (X-46 car 2, docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of d4bf6431c because the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner\'s household column, Money changers\' floor 3,000 -> 2,000; 8 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (FAITH-POOLS, docs/shift-records/2026-11-04-rung1-04-faith-pools.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 2e10cd529 because 0 golden-master rows, the dossier prose moves): DS-FTH-2 reads the one faith reading — no denial, no grade, each sentence a fact the reading gives; 1,050 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
