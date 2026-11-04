@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — FOOD-EXPORTS (WITH FOOD-4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-07-food-exports.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   139 OF 525 ROWS MOVED (thorp 12, hamlet 12, village 12, town 31, city 36, metropolis 36); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 63bb72785): a place short of food sells no food surplus, and the foodways line has one writer on the record. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S7 (the tree of 63bb72785 with the door paths carried from
+ *   the branch, the previous record's writes committed). a423903f.. -> 75d4ba2c..
+ *
  * 2026-11-04 — TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json; the cloud chair signs under the owner's delegation, vetoable).
  *   367 OF 525 ROWS MOVED (thorp 25, hamlet 60, village 60, town 90, city 60, metropolis 72); the key set is identical. THE CAUSE, ONE (first-parent
