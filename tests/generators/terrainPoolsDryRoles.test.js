@@ -55,3 +55,14 @@ describe('the soak seeds that printed ships or a fisherman inland', () => {
     expect(rope.desc).not.toMatch(/\bships?\b/i);
   });
 });
+
+describe('the ship captain (hand-built; 2026-11-04, the same class as the fisher)', () => {
+  it('no ship captain where there is no water; a river keeps one', () => {
+    expect(createGenerationWorldLaw({ terrainType: 'desert', tradeRouteAccess: 'road' }).allowsRole({ role: 'Ship Captain' })).toBe(false);
+    expect(createGenerationWorldLaw({ terrainType: 'plains', tradeRouteAccess: 'river' }).allowsRole({ role: 'Ship Captain' })).toBe(true);
+  });
+  it('soak1k-971 has no ship captain', async () => {
+    await ensureLaws();
+    expect(birth(971).settlement.npcs.map((n) => n.role)).not.toContain('Ship Captain');
+  });
+});
