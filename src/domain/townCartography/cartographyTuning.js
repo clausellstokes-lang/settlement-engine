@@ -130,7 +130,7 @@ export const CARTOGRAPHY_CALIBRATION = Object.freeze({
    * roughly two rows in three should leave. The derived band rises with it
    * (ceil(450 x 1.6) = 720 from 709), which only ever loosens a ceiling.
    */
-  MAX_BUILDING_ROW_BYTES: 448,
+  MAX_BUILDING_ROW_BYTES: 447,
   /** The corpus this was read from. A row count that moves invalidates the reading. */
   CORPUS_ROWS: 504,
 });

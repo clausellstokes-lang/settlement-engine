@@ -335,6 +335,21 @@
  *   LIVE anti-vacuity floor 600 -> 500 (the six argmax rows now draw 595).
  *   CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-04 — X-46 CAR 2 (LANE X46-2-THRESHOLDS), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record
+ *   docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S2 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION moves BY HAND (MAX_INSTITUTIONS 12/25/42/70/82/86 ->
+ *   12/25/42/70/82/86; the byte input, if moved, below) and the
+ *   corpus re-recorded under it is the FIXED POINT (pass 2 wrote identical bytes; the roster counts are
+ *   cap-independent).
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): MAX_BUILDING_ROW_BYTES 448 ->
+ *   447 (the derived byte band 717 -> 716); FROZEN.maxInstitutions 12/25/42/70/82/86 -> 12/25/42/70/82/86;
+ *   FROZEN.maxBuildings 13/29/47/115/210/271 -> 13/29/48/120/210/272; DUPLICATES.permille 126/200/89/62/49/58 ->
+ *   129/215/84/56/50/54 (derived ceilings 202/320/143/100/79/93 -> 207/344/135/90/80/87).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -404,10 +419,10 @@ const TUNING_SOURCE = resolve(
 const FROZEN = Object.freeze({
   thorp: Object.freeze({ throws: 0, maxInstitutions: 12, maxBuildings: 13 }),
   hamlet: Object.freeze({ throws: 0, maxInstitutions: 25, maxBuildings: 29 }),
-  village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 47 }),
-  town: Object.freeze({ throws: 0, maxInstitutions: 70, maxBuildings: 115 }),
+  village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 48 }),
+  town: Object.freeze({ throws: 0, maxInstitutions: 70, maxBuildings: 120 }),
   city: Object.freeze({ throws: 0, maxInstitutions: 82, maxBuildings: 210 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 271 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 272 }),
 });
 
 /**
@@ -452,12 +467,12 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 126 }),
-  hamlet: Object.freeze({ permille: 200 }),
-  village: Object.freeze({ permille: 89 }),
-  town: Object.freeze({ permille: 62 }),
-  city: Object.freeze({ permille: 49 }),
-  metropolis: Object.freeze({ permille: 58 }),
+  thorp: Object.freeze({ permille: 129 }),
+  hamlet: Object.freeze({ permille: 215 }),
+  village: Object.freeze({ permille: 84 }),
+  town: Object.freeze({ permille: 56 }),
+  city: Object.freeze({ permille: 50 }),
+  metropolis: Object.freeze({ permille: 54 }),
 });
 
 /**
@@ -1141,7 +1156,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 229/354/136/103/82/93 -> 208/327/141/103/82/93 on 2026-11-03: FOOD-3 (header), the same operator.
     // 208/327/141/103/82/93 -> 202/322/143/103/82/93 on 2026-11-03: SIZE-3 (header), the same operator.
     // 202/322/143/103/82/93 -> 202/320/143/100/79/93 on 2026-11-04: X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 320, 143, 100, 79, 93]);
+    // 202/320/143/100/79/93 -> 207/344/135/90/80/87 on 2026-11-04: X-46 CAR 2 (LANE X46-2-THRESHOLDS) (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([207, 344, 135, 90, 80, 87]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
