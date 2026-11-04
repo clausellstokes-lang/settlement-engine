@@ -18,10 +18,13 @@
  *
  * Every bound is `expect.soft`, so a red names every arm that moved rather than the first.
  *
- * THE MUTANT, EXECUTED: with 0.06 planted back, both arms red (the headless total and every
- * seed's lifetime; the seeded run's scandals 46 and mobilizations 70; re-measured 2026-11-04 at the
- * composed tip: scandals 40, so the scandal ceiling still reds it, and mobilizations 82, so the
- * mobilization floor no longer does). Re-measure with the lane's
+ * THE MUTANT, EXECUTED: with 0.06 planted back, both arms red at landing (the headless total and
+ * every seed's lifetime; the seeded run's scandals 46 and mobilizations 70). RE-EXECUTED 2026-11-04
+ * at the composed tip (REGISTERS-4's mutant run, amended by the chair's ruling D5): the mutant is
+ * caught by THE HEADLESS PACE (falls 140 against the ceiling 40; every seed's mean life 13.5 to 18.3
+ * weeks against the floor 52) and by the seeded run's SCANDAL CEILING (40 against 38). The
+ * mobilization arm no longer separates it (82 at 0.06, 82 live): that arm pins the head-dark twin
+ * (81, floor 71), not the dial. Re-measure with the lane's
  * probe (`.lane-scratch/probe/twin-band.mjs`, copied into the FP kit's evidence folder) whenever an
  * unrelated landing moves the realm's world; the figures here are measurements, not targets.
  */
