@@ -312,7 +312,10 @@ const ROUTE_BASELINE = Object.freeze({
   // `bare` holds. A surface only shrank, measured out of this test's own red run.
   // floored 611 → 613 (2026-11-02, X-45): the Institutions card's ✎ YOU mark and the backs editor's caption, both floored by chromeFontSize.
   // floored 613 → 609, /settlements 860 → 855, /gallery 657 → 653 (2026-11-03, X-51): the Table View and Session Mode print the one Tonight sheet in place of the quick guide and the table-night cards; fewer floored lines, `bare` holds.
-  '/create':                { roots: 1, files: 162, floored: 609, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
+  // 2026-11-04, the rung-1 landing (LANDING-1 door 10): lane CRISIS's Crisis tab (src/components/new/tabs/CrisisTab.jsx,
+  // five `chromeFontSize` and one `proseFontSize` site, 0 bare) is in the dossier closure: /create 609 -> 615,
+  // /settlements 855 -> 861, /gallery 653 -> 659; `bare` holds on all three.
+  '/create':                { roots: 1, files: 162, floored: 615, ruled: 5, bare: 97, owner: 'lane 28 — the create page + the tier picker' },
   '/home':                  { roots: 1, files: 19, floored: 6, ruled: 4, bare: 19, owner: 'lane 28 — the landing' },
   // The Realm lazily mounts the create flow's ClerkNote for its one advisory
   // line, so lane 28's file lands on a route it does not own. One site.
@@ -356,7 +359,7 @@ const ROUTE_BASELINE = Object.freeze({
   // PROSE-floor arm over a named pricing roster for exactly this gap.
   '/pricing':               { roots: 1, files: 14, floored: 17, ruled: 3, bare: 0 },
   // floored 858 → 860 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/settlements':           { roots: 1, files: 206, floored: 855, ruled: 4, bare: 0 },
+  '/settlements':           { roots: 1, files: 206, floored: 861, ruled: 4, bare: 0 },
   // /compendium files 51 -> 50 with the same T6 cut: the size grid's one helper module left the
   // compendium's import closure when ConfigurationPanel stopped importing it; floored 211 -> 206.
   '/compendium':            { roots: 1, files: 50, floored: 206, ruled: 3, bare: 0 },
@@ -365,7 +368,7 @@ const ROUTE_BASELINE = Object.freeze({
   '/account':               { roots: 1, files: 46, floored: 105, ruled: 5, bare: 0 },
   '/admin':                 { roots: 2, files: 29, floored: 86, ruled: 1, bare: 0 },
   // floored 655 → 657 (2026-11-02, X-45): the same two floored lines of the Institutions card.
-  '/gallery':               { roots: 1, files: 151, floored: 653, ruled: 4, bare: 0 },
+  '/gallery':               { roots: 1, files: 151, floored: 659, ruled: 4, bare: 0 },
   '/founders':              { roots: 1, files: 13, floored: 6, ruled: 1, bare: 0 },
   '/first-hundred':         { roots: 1, files: 6, floored: 4, ruled: 1, bare: 0 },
   '/roadmap':               { roots: 1, files: 6, floored: 3, ruled: 1, bare: 0 },
