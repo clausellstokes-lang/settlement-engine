@@ -59,7 +59,8 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
   const { reviewSettlement } = await import('./soak-review/checks.mjs');
   const { walkRecord, chainFacts } = await import('./soak-review/features.mjs');
   const { housesReading } = await import('./soak-review/bands.mjs');
-  const { sentencesOf } = await import('./soak-review/checks.mjs');
+  const { sentencesOf, isReaderCheck } = await import('./soak-review/checks.mjs');
+  const { readerDistributions } = await import('../../src/domain/coherence/readerBattery.js');
   const { normalizeRenderedSentence } = await import('./phrase-repetition.mjs');
   const { storySentencesOf, skeletonOf } = await import('./soak-review/prose.mjs');
   await ensureLaws();
@@ -114,7 +115,9 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         story.hooks = storySentencesOf(String(r.tabs.plot_hooks || '').split('\n')).map((x) => sha(x));
       }
       const features = walkRecord(s);
-      const chains = chainFacts(s, { stressCell: b.stressCell, findings });
+      // The reader findings stay off the chain facts (chain.findingCount), so the field walk and
+      // the dependence scan read exactly what they read before the READER battery.
+      const chains = chainFacts(s, { stressCell: b.stressCell, findings: findings.filter((f) => !isReaderCheck(f.check)) });
       line = {
         i, seed: b.seed, tier: s.tier, population: s.population, stressCell: b.stressCell, matrix: b.matrix,
         hashes: { record: sha(s), config: sha(b.config) }, rendered, replay,
@@ -122,6 +125,8 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         // I4's houses ÷ anchor (bands.mjs): kept off `chains` and `features` so the field walk
         // and the dependence scan read exactly what they read before.
         houses: housesReading(s),
+        // The READER battery's distributions (check 2c: the Exports line's item count), apart.
+        reader: readerDistributions(s),
       };
       if (isSampled(i, count) && r) {
         const body = [
