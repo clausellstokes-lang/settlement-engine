@@ -37,6 +37,12 @@
 //                     only)" rolled in cities under 10,000, 14 of 58 before this).
 //   `requiresAny`   — the row needs one of the named institutions already seated
 //                     ("Gates (if walled)" rolled without walls in 46 of 123 towns).
+//
+// THE FABRIC (X-46 car 3, docs/DESIGN_X46_SCALE_TRAIN.md §4): `fabric: true` marks a row that is
+// the place rather than a house with a power behind it — the Dwellings family, the well-level
+// water source, the walk to another settlement's church. It is a registry key like the guards
+// (read through `isFabricRow` / `isFabricInstitution`, never riding onto a row or a save). A
+// fabric row rolls and prints exactly as before; it is not counted in the institution budget.
 
 import { slugify as kernelSlugify } from '../kernel/slugify.js';
 
@@ -56,7 +62,9 @@ const ROW_KEYS = Object.freeze([
 ]);
 /** The keys a tier entry may declare that stay in the registry and never ride onto a row. */
 const GUARD_KEYS = Object.freeze(['minPopulation', 'requiresAny']);
-const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS]);
+/** The registry-only marks a tier entry may declare (the fabric, X-46 car 3); never on a row. */
+const MARK_KEYS = Object.freeze(['fabric']);
+const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS, ...MARK_KEYS]);
 
 /**
  * @typedef {{ tier: string, reason: string }} FamilyCeiling
@@ -876,8 +884,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Access to parish church', tags: ['essential', 'religious', 'church'], priorityCategory: 'religion' },
       at: {
-        thorp: { baseChance: 0.78, desc: 'Walk 2-5km to the village house of worship for services.' },
-        hamlet: { required: true, desc: 'Travel to the village house of worship. 2-5km distance typical.' },
+        thorp: { baseChance: 0.78, fabric: true, desc: 'Walk 2-5km to the village house of worship for services.' },
+        hamlet: { required: true, fabric: true, desc: 'Travel to the village house of worship. 2-5km distance typical.' },
         village: { name: 'Parish church', required: true, exclusiveGroup: 'religiousCenter', desc: 'Center of village life. Stone construction. Mandatory tithes.' },
         town: { name: 'Parish churches (2-5)', required: true, desc: 'Several houses of worship within town.' },
         city: { name: 'Parish churches (10-30)', required: true, desc: 'One per neighborhood.' },
@@ -1089,7 +1097,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
   ...shelf('Infrastructure', [
     // Every metropolis read 'Housing (1000-5000 structures)' (inherited from city) until 2026-09-30.
     {
-      shared: { required: true, tags: ['essential', 'housing'], priorityCategory: 'infrastructure' },
+      shared: { required: true, fabric: true, tags: ['essential', 'housing'], priorityCategory: 'infrastructure' },
       at: {
         thorp: { name: 'Dwellings (4-16)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
         hamlet: { name: 'Dwellings (17-80)', desc: 'Timber-frame with thatched roofs.' },
@@ -1102,10 +1110,10 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Water source', required: true, exclusiveGroup: 'waterSupply', tags: ['essential', 'water'], priorityCategory: 'infrastructure' },
       at: {
-        thorp: { desc: 'Well or spring. 2-4 gallons/person/day minimum.' },
-        hamlet: { desc: 'Well or spring access.' },
-        village: { name: 'Multiple water sources', desc: 'Wells and springs throughout village.' },
-        town: { name: 'Multiple water sources', desc: 'Wells, fountains, or piped water.' },
+        thorp: { fabric: true, desc: 'Well or spring. 2-4 gallons/person/day minimum.' },
+        hamlet: { fabric: true, desc: 'Well or spring access.' },
+        village: { name: 'Multiple water sources', fabric: true, desc: 'Wells and springs throughout village.' },
+        town: { name: 'Multiple water sources', fabric: true, desc: 'Wells, fountains, or piped water.' },
         city: { name: 'Aqueduct or water system', desc: 'Engineered water supply. Conduits, cisterns, fountains.' },
         metropolis: { name: 'Advanced water infrastructure', desc: 'Multiple aqueducts, cisterns, and distributed fountains. City-wide water management at scale.' },
       },
@@ -1651,7 +1659,7 @@ const clonePlain = (value) => (value && typeof value === 'object' ? JSON.parse(J
  * One family's entry at one tier, as the catalog row every reader takes. Throws on an unknown
  * key so a typo'd field can never ride silently into generation.
  * @param {InstitutionFamily} fam @param {string} tier
- * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null }}
+ * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean }}
  */
 function deriveRow(fam, tier) {
   const merged = { ...(fam.shared || {}), ...fam.at[tier] };
@@ -1670,7 +1678,7 @@ function deriveRow(fam, tier) {
   for (const key of GUARD_KEYS) {
     if (merged[key] !== undefined) guards = { ...(guards || {}), [key]: clonePlain(merged[key]) };
   }
-  return { name, row, guards };
+  return { name, row, guards, fabric: merged.fabric === true };
 }
 
 /**
@@ -1683,6 +1691,10 @@ function deriveRow(fam, tier) {
  */
 const GUARDS_BY_ROW = new Map();
 const guardKey = (tier, name) => `${tier}\u0000${name}`;
+/** THE FABRIC, by (tier, name) and by name. Registry-only, like the guards. @type {Set<string>} */
+const FABRIC_ROWS = new Set();
+/** @type {Set<string>} */
+const FABRIC_NAMES = new Set();
 
 /** @returns {Record<string, Record<string, Record<string, Record<string, any>>>>} */
 function buildCatalog() {
@@ -1694,8 +1706,9 @@ function buildCatalog() {
     for (const shelf of SHELF_ORDER) {
       for (const fam of INSTITUTION_FAMILIES) {
         if (fam.shelf !== shelf || !fam.at[tier]) continue;
-        const { name, row, guards } = deriveRow(fam, tier);
+        const { name, row, guards, fabric } = deriveRow(fam, tier);
         if (guards) GUARDS_BY_ROW.set(guardKey(tier, name), Object.freeze(guards));
+        if (fabric) { FABRIC_ROWS.add(guardKey(tier, name)); FABRIC_NAMES.add(name); }
         if (!block[shelf]) block[shelf] = {};
         for (const other of Object.values(block)) {
           if (other[name]) throw new Error(`institutionalCatalog: "${name}" listed twice at ${tier}`);
@@ -1773,6 +1786,35 @@ export function institutionRowGuardsPass(tier, name, { population = null, presen
     if (!presentNames || !guards.requiresAny.some(required => presentNames.has(required))) return false;
   }
   return true;
+}
+
+/**
+ * Is this catalog row FABRIC at this tier (X-46 car 3)? The place, not a house: rolled and
+ * printed as before, never counted in the institution budget.
+ * @param {string} tier @param {string} name
+ * @returns {boolean}
+ */
+export function isFabricRow(tier, name) {
+  return FABRIC_ROWS.has(guardKey(tier, name));
+}
+
+/**
+ * Is this roster row fabric? Read by the catalogue name the generator wrote (every fabric name is
+ * fabric at each tier it is written); a custom or DM-authored institution is never fabric.
+ * @param {{ name?: unknown, isCustom?: unknown, source?: unknown } | null | undefined} institution
+ * @returns {boolean}
+ */
+export function isFabricInstitution(institution) {
+  if (!institution || institution.isCustom === true || institution.source === 'custom') return false;
+  return FABRIC_NAMES.has(String(institution.name ?? ''));
+}
+
+/** Every fabric row, `{ tier, name }`, in tier then draw order (for the walker and the report). */
+export function fabricRows() {
+  return INSTITUTION_TIERS.flatMap(tier => Object.values(institutionalCatalog[tier])
+    .flatMap(group => Object.keys(group))
+    .filter(name => FABRIC_ROWS.has(guardKey(tier, name)))
+    .map(name => Object.freeze({ tier, name })));
 }
 
 // ── Catalog identity (Cohesion Wave 8 — structural prevention) ───────────────
