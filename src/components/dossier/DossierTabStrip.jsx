@@ -71,6 +71,8 @@ export default function DossierTabStrip({
                   key={id}
                   onClick={() => setActiveTab(id)}
                   id={'sf-tab-' + id}
+                  // X-55: the reading paths' anchor (dossier/DossierPathSteps.js).
+                  data-tour={'tab-' + id}
                   role="tab"
                   aria-selected={active}
                   data-tone={tone || undefined}

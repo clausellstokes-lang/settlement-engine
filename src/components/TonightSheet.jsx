@@ -47,7 +47,7 @@ export default function TonightSheet({ sheet, palette }) {
   return (
     <section aria-label={TONIGHT_COPY.title} data-tonight-sheet="" style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
       {sheet.opening && (
-        <div style={{
+        <div data-tour="tonight-crisis" style={{
           padding: '10px 12px', background: palette.card,
           border: `1px solid ${palette.rule}`, borderLeft: `3px solid ${palette.alarm}`,
         }}>
@@ -59,7 +59,7 @@ export default function TonightSheet({ sheet, palette }) {
       )}
 
       {sheet.people.length > 0 && (
-        <div>
+        <div data-tour="tonight-people">
           <Eyebrow color={palette.accent}>{TONIGHT_COPY.people}</Eyebrow>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {sheet.people.map((p) => (
@@ -80,7 +80,7 @@ export default function TonightSheet({ sheet, palette }) {
       )}
 
       {sheet.facts.length > 0 && (
-        <div>
+        <div data-tour="tonight-facts">
           <Eyebrow color={palette.accent}>{TONIGHT_COPY.facts}</Eyebrow>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
             {sheet.facts.map((f) => (
@@ -93,7 +93,7 @@ export default function TonightSheet({ sheet, palette }) {
       )}
 
       {sheet.hooks.length > 0 && (
-        <div>
+        <div data-tour="tonight-hooks">
           <Eyebrow color={palette.accent}>{TONIGHT_COPY.hooks}</Eyebrow>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
             {sheet.hooks.map((h) => (

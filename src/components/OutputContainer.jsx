@@ -922,7 +922,7 @@ export default function OutputContainer({ settlement: propSettlement, readOnly =
             MobileTabStrip. idPrefix="sf" keeps the sf-tab-/sf-panel- id namespace
             the content panel's aria-labelledby needs in both modes. */}
         {mobile ? (
-          <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" />
+          <MobileTabStrip tabs={tabs} value={selectedTab} onChange={setActiveTab} ariaLabel="Dossier tabs" idPrefix="sf" tourPrefix="tab-" />
         ) : (
           <DossierTabStrip
             scroll={scroll}

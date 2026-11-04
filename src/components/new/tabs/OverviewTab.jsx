@@ -316,7 +316,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>
         {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
             composer it opens stays, so a route to it must too. Router-gated on the flag. */}
-        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>{TONIGHT_COPY.open}</Button></div>}
+        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" data-tour="tonight" onClick={onOpenTableView} style={{padding:'2px 6px'}}>{TONIGHT_COPY.open}</Button></div>}
       </div>
       {/* THE ROUTING LINE (X-18) IS CUT (the owner, 2026-11-01, X-38): "sentences that are
           meta descriptive such as 'summary holds the glance…' … remove them. We're going to do

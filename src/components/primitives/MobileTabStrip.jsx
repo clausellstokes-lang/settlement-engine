@@ -28,6 +28,7 @@
  * @param {(id:string)=>void} props.onChange selection setter
  * @param {string} [props.ariaLabel='Tabs']  tablist accessible name
  * @param {string} [props.idPrefix='mts']    id namespace for tab/panel wiring
+ * @param {string} [props.tourPrefix]       X-55: guided-help anchor prefix (data-tour); omitted ⇒ none
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import {
@@ -40,6 +41,8 @@ export default function MobileTabStrip({
   onChange,
   ariaLabel = 'Tabs',
   idPrefix: idPrefixProp,
+  // X-55: an optional guided-help anchor prefix; absent ⇒ no data-tour attribute at all.
+  tourPrefix,
 }) {
   const scrollRef = useRef(null);
   const autoId = useId();
@@ -157,6 +160,7 @@ export default function MobileTabStrip({
               type="button"
               key={id}
               id={`${idPrefix}-tab-${id}`}
+              data-tour={tourPrefix ? `${tourPrefix}${id}` : undefined}
               role="tab"
               aria-selected={active}
               data-tone={tone || undefined}
