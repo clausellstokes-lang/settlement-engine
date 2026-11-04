@@ -475,10 +475,10 @@ describe('ruin-filter roster ratchet (structural-prevention Pattern 2)', () => {
     // RE-MEASURED 2026-11-04 BY LANE CRISIS-3 (unit 1): 97 → 98. ONE new reader,
     // src/domain/crisis/crisisCast.js (the crisis car, CRISIS-1), and it is COMPLIANT: its lever
     // read (`deriveLevers`, which `leverCandidates` also reads) now takes `liveInstitutions()`, so
-    // a closed granary is never a famine's lever. Its two OTHER roster reads stay raw and are
-    // REPORTED, not laundered by the file-granular compliance documented above: `effectiveCastOf`
-    // resolves a DM-named house by name (name-lookup, ruin-agnostic on purpose), and
-    // `defenderCandidates`'s house fallback is a crediting read left to the chair's intake.
+    // a closed granary is never a famine's lever; its defender house fallback (`defenderCandidates`,
+    // unit 1b) reads the same door, so a closed garrison defends nothing. Its one OTHER roster
+    // read stays raw on purpose and is stated, not laundered by the file-granular compliance
+    // documented above: `effectiveCastOf` resolves a DM-named house by name (name-lookup).
     // Read from this arm's own failure message ("expected 98 to be 97"), never computed.
     expect(readers.length).toBe(98);
   });

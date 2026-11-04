@@ -694,7 +694,9 @@ export function defenderCandidates(s) {
   for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
     out.push(npcRow(n, 'defender', CAST_REASONS.defenderOffice));
   }
-  for (const i of (Array.isArray(s.institutions) ? s.institutions : []).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(str(x?.name)))) {
+  // The house fallback credits a house with the town's defence, so it reads the STANDING roster
+  // only (`liveInstitutions`): a closed garrison defends nothing.
+  for (const i of liveInstitutions(s).filter((x) => /garrison|barracks|watch|militia|wall|guard/i.test(str(x?.name)))) {
     out.push({ role: 'defender', kind: 'institution', id: str(i.name), name: str(i.name), reason: CAST_REASONS.defenderInstitution, temporary: false });
   }
   return { candidates: out, absent: CAST_ABSENCES.noMilitary };
