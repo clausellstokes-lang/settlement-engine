@@ -60,3 +60,31 @@ describe('reader:scale-lists', () => {
     expect(R.readerDistributions({})).toEqual({ exports: 0 });
   });
 });
+
+// ── 3. relation-types
+describe('reader:relation-types', () => {
+  const page = (kind, a, b) => `NPC Relationships (2) ▲\nAoife Brennan ${kind} Brigid Ward\n${a} · stable · ${b}\n▼`;
+  test('Mentor and Successor across two trades, and across arcane and clergy', () => {
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Armourer', 'Gravedigger') })[0].detail).toBe('[mentor-and-successor] military / trade');
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Artificer', 'High Priest') })).toHaveLength(1);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Miller', 'Blacksmith') })).toHaveLength(1);
+  });
+  test('Professional Rivalry across a trade and a seat; Jurisdictional Tension where neither holds an office', () => {
+    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Gravedigger', 'Baron/Baroness') })[0].detail).toBe('[professional-rivalry] trade / noble');
+    expect(R.relationTypesFindings(rec(), { relationships: page('Jurisdictional Tension', 'Smuggler', 'Miller') })[0].detail).toBe('[jurisdictional-tension] criminal / trade');
+  });
+  test('negative control: a shared trade or office, an office on one side, and the kinds that presume nothing', () => {
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Blacksmith', 'Master Blacksmith') })).toEqual([]);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Mayor', 'Council Member') })).toEqual([]);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Jurisdictional Tension', 'Garrison Commander', 'Reeve') })).toEqual([]);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Outstanding Debt', 'Armourer', 'Gravedigger') })).toEqual([]);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Sage/Scholar', 'Mayor') })).toEqual([]);
+  });
+  test('the role map classes every role the generator draws', () => {
+    expect(R.classOfRole('Guild Master')).toBe('merchant');
+    expect(R.classOfRole('Baron/Baroness')).toBe('noble');
+    expect(R.classOfRole('Mayor')).toBe('office');
+    expect(R.classOfRole('Gravedigger')).toBe('trade');
+    expect(R.classOfRole('Unheard-of Role')).toBe('other');
+  });
+});

@@ -23,6 +23,8 @@
  * Pure.
  */
 
+import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
+import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 
@@ -164,11 +166,110 @@ export function readerDistributions(s) {
   return { exports: Array.isArray(exports) ? exports.length : 0 };
 }
 
+// ──────────────────────────── 3. relation-types ────────────────────────────
+
+/**
+ * THE ROLE→CLASS MAP: every role the NPC generator draws (`historyData.js ::
+ * POWER_ROLES_BY_CATEGORY`, the noble roles of `factionRoleCatalog.js :: NOBLE_ROLES`) to one of
+ * nine classes. Category → class: government → office (its noble roles → noble), religious →
+ * clergy, crafts → trade, military → military, economy → merchant, criminal → criminal, magic →
+ * arcane; `other` is classed one by one below (a role with no shared trade or office stays
+ * `other` and is not judged). A role the map does not know is `other`.
+ */
+const CATEGORY_CLASS = Object.freeze({ government: 'office', religious: 'clergy', crafts: 'trade', military: 'military', economy: 'merchant', criminal: 'criminal', magic: 'arcane', other: 'other' });
+const ROLE_OVERRIDES = Object.freeze({
+  // economy roles that are a craft, not a counting-house
+  'Master Craftsman': 'trade', 'Master Shipwright': 'trade',
+  // `other`, classed one by one
+  'Miller': 'trade', 'Blacksmith': 'trade', 'Shepherd': 'trade', 'Woodcutter': 'trade', 'Widowed Farmer': 'trade',
+  'Fisherman': 'trade', 'Apothecary': 'trade', 'Master Builder': 'trade', 'Innkeeper': 'trade', 'Tavern Owner': 'trade',
+  'Gravedigger': 'trade', 'Rat Catcher': 'trade', 'Cartographer': 'trade', 'Midwife': 'trade', 'Healer': 'trade',
+  'Dockworker/Stevedore': 'trade',
+  'Village Priest': 'clergy', 'Street Preacher': 'clergy',
+  'Hedge Witch': 'arcane',
+  'Elder': 'office', 'Disgraced Official': 'office',
+  'Mercenary-for-Hire': 'military', 'Wounded Soldier': 'military',
+  'Debt-Ridden Noble': 'noble',
+  'Wandering Peddler': 'merchant', 'Debt Collector': 'merchant',
+  // faction-pool titles (`factionRoles.js :: FACTION_ROLES`)
+  'High Priestess': 'clergy', 'Watch Captain': 'military', 'Guildmaster': 'merchant', 'Senior Trader': 'merchant',
+  'Kingpin': 'criminal', 'Lieutenant': 'criminal', 'Lord Mayor': 'office', 'Archmagister': 'arcane',
+});
+
+/** @returns {Readonly<Record<string,string>>} role → class */
+function buildRoleClass() {
+  /** @type {Record<string,string>} */
+  const map = {};
+  const nobles = new Set(NOBLE_ROLES.map((r) => r.role));
+  for (const [category, roles] of Object.entries(POWER_ROLES_BY_CATEGORY)) {
+    const list = Array.isArray(roles) ? roles : Object.values(roles).flat();
+    for (const r of list) {
+      const role = typeof r === 'string' ? r : str(r?.role);
+      if (!role) continue;
+      map[role] = nobles.has(role) ? 'noble' : (CATEGORY_CLASS[/** @type {keyof typeof CATEGORY_CLASS} */ (category)] ?? 'other');
+    }
+  }
+  return Object.freeze({ ...map, ...ROLE_OVERRIDES });
+}
+export const ROLE_CLASS = buildRoleClass();
+
+/** @param {string} role */
+export const classOfRole = (role) => ROLE_CLASS[role] ?? 'other';
+
+/** Classes that share an office or a trade between them (a governance seat; a counting-house and its craft). */
+const FAMILY = Object.freeze({ office: 'governance', noble: 'governance', clergy: 'faith', military: 'arms', arcane: 'arcane', criminal: 'crime', merchant: 'commerce', trade: 'commerce', other: 'other' });
+/** A craft role that names no one trade (it sits beside any craft). */
+const GENERIC_CRAFT = /^(?:Master Craftsman|Guild Warden|Journeyman Overseer|Craft Guild Representative|Guild Master|Guildmaster)$/;
+/** @param {string} role the trade a trade role names ("Master Blacksmith" → "blacksmith") */
+const tradeOf = (role) => role.replace(/^(?:Master|Head) /, '').toLowerCase();
+/** Holds an office: a seat of government or rank, a command, a senior see, a guild's head. */
+const HOLDS_OFFICE = /Captain|Commander|Chief|Warden|Marshal|Master of Arms|Quartermaster|High Priest|Archbishop|Abbot|Inquisitor|Head of the Faithful|Guild ?[Mm]aster|Market Overseer|Magister|Archmage/;
+/** @param {string} role */
+const holdsOffice = (role) => ['office', 'noble'].includes(classOfRole(role)) || HOLDS_OFFICE.test(role);
+
+/**
+ * Do two roles share a trade or an office? Unknown (`other`) roles are not judged.
+ * @param {string} a @param {string} b @returns {boolean|null} null = not judged
+ */
+export function shareTradeOrOffice(a, b) {
+  const ca = classOfRole(a); const cb = classOfRole(b);
+  if (ca === 'other' || cb === 'other') return null;
+  if (FAMILY[/** @type {keyof typeof FAMILY} */ (ca)] !== FAMILY[/** @type {keyof typeof FAMILY} */ (cb)]) return false;
+  if (ca === 'trade' && cb === 'trade' && !GENERIC_CRAFT.test(a) && !GENERIC_CRAFT.test(b)) return tradeOf(a) === tradeOf(b);
+  return true;
+}
+
+const PRESUMING_KINDS = /** @type {const} */ (['Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension']);
+
+/**
+ * A relationship whose kind presumes a shared trade or office between two roles that share
+ * none: Mentor and Successor or Professional Rivalry across two trades / offices, Jurisdictional
+ * Tension where neither role holds an office. Reads the Relationships tab's two-line rows
+ * ("<A> <kind> <B>" over "<role A> · <strength> · <role B>"). Sub-case = the kind.
+ * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function relationTypesFindings(_s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const lines = linesOf(surfaces.relationships);
+  for (let i = 0; i + 1 < lines.length; i += 1) {
+    const kind = PRESUMING_KINDS.find((k) => lines[i].includes(` ${k} `));
+    if (!kind) continue;
+    const parts = lines[i + 1].split(' · ');
+    if (parts.length !== 3) continue;
+    const [a, , b] = parts;
+    const wrong = kind === 'Jurisdictional Tension' ? (!holdsOffice(a) && !holdsOffice(b)) : shareTradeOrOffice(a, b) === false;
+    if (wrong) out.push({ surface: 'relationships', quote: `${a} · ${kind} · ${b}`, detail: `[${kind.toLowerCase().replace(/ /g, '-')}] ${classOfRole(a)} / ${classOfRole(b)}` });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
   'validation-on-page': validationOnPageFindings,
   'scale-lists': scaleListsFindings,
+  'relation-types': relationTypesFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */
