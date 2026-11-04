@@ -16,6 +16,11 @@
  * temporary person already on the held roster is reused by kind.
  *
  * `crisisResolve` (src/domain/crisisLifecycle.js) removes a resolved crisis's temporary person.
+ *
+ * THE CRISIS HOOKS ARE NOT WRITTEN HERE (the HOOKS-UNDER-STRESS lane; the chair's ruling 4): the
+ * plot hooks a crisis adds and the `{holder}` name in its `crisisHook` are both read off the cast
+ * where they are shown (`src/domain/crisis/crisisHooks.js :: crisisHooksOf`, `crisisHookFor`), so
+ * the entry keeps the catalog's sentence as its template and a DM's cast edit is never stale.
  */
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { STRESS_SEVERITY_WEIGHT } from '../stressGenerator.js';

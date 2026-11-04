@@ -9,6 +9,13 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { crisisResolve } from '../../src/domain/crisisLifecycle.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
+import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
+import { crisisHookFor, crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { applyUserEdit } from '../../src/domain/userEdits.js';
+import { CAST_EDIT_PATH, formatCastRoles } from '../../src/domain/crisis/crisisCast.js';
+import { composeCrisisPage } from '../../src/domain/crisis/crisisPage.js';
+import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KINDS = Object.keys(STRESS_TYPE_MAP);
@@ -55,6 +62,88 @@ describe('resolveCrisisCast writes the cast onto every active crisis', () => {
     const s = generateSettlementPipeline({ settType: 'village', selectedStressesRandom: false, selectedStresses: [] }, null, { seed: 'cast-step-calm', customContent: {} });
     expect(s.stress).toBeNull();
     expect(s.npcs.filter((n) => n.temporary)).toEqual([]); // anchored: s.stress is pinned null on the line above
+  });
+});
+
+// THE HOOKS UNDER STRESS (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3): every generated crisis's cast
+// adds a cast-bound and a lever-bound hook, read first by the collector off the stored cast, and the
+// catalog crisis hook gains its holder's name where the sentence names a role a person holds.
+describe('a generated crisis adds the hooks its cast derives', () => {
+  it('a famine town\'s hook list leads with the hook naming its cast holder, then the lever and the faction that loses', () => {
+    const s = gen('cast-step-famine', 'town', ['famine']);
+    const [entry] = entriesOf(s);
+    const holder = entry.cast.roles.find((r) => r.role === 'brunt' || r.role === 'lever');
+    const hooks = collectPlotHooks(s);
+    expect(hooks[0].crisis).toBe('famine');
+    expect(hooks[0].text).toContain(holder.name);
+    expect(hooks[0].text).toContain(holder.reason);
+    expect(hooks[1].crisis).toBe('famine');
+    expect(hooks[1].text).toContain(entry.cast.levers[0].institution);
+    expect('plotHooks' in entry).toBe(false); // read off the cast, never stored
+  });
+
+  it('120 generated towns: crisis hooks lead; each is true on the record; the place\'s own hooks stay beneath them, in their order', () => {
+    const SEEDS = Array.from({ length: 120 }, (_, i) => `tonight-cast-${i}`);
+    let crises = 0;
+    let bound = 0;
+    const failures = collectSeedFailures(SEEDS, (seed, i) => {
+      const s = i % 2 === 0
+        ? generateSettlementPipeline({ settType: TIERS[i % TIERS.length] }, null, { seed, customContent: {} })
+        : gen(seed, TIERS[i % TIERS.length], [KINDS[i % KINDS.length], KINDS[(i * 5 + 2) % KINDS.length]].filter((k, j, a) => a.indexOf(k) === j));
+      const entries = entriesOf(s);
+      const facts = settlementHookFacts(s);
+      for (const e of entries) {
+        crises += 1;
+        const added = crisisHooksOf(s, e);
+        if (added.some((h) => h.bound === 'cast')) bound += 1;
+        for (const h of added) {
+          const found = hookTruthViolations(h.text, facts);
+          if (found.length) throw new Error(`${e.type}: "${h.text}" — ${found.map((f) => f.code).join(', ')}`);
+        }
+      }
+      const hooks = collectPlotHooks(s);
+      const lead = hooks.findIndex((h) => !h.crisis);
+      if (hooks.slice(lead < 0 ? hooks.length : lead).some((h) => h.crisis)) throw new Error('a crisis hook below a place hook');
+      // the floor: the same record with the crisis hooks taken off collects exactly the place's own hooks
+      const bare = { ...s, stress: entries.length ? entries.map(({ cast: _drop, ...rest }) => rest) : s.stress };
+      const own = hooks.filter((h) => !h.crisis).map((h) => h.text);
+      if (JSON.stringify(collectPlotHooks(bare).map((h) => h.text)) !== JSON.stringify(own)) throw new Error('the place\'s own hooks moved');
+    });
+    expectNoSeedFailures(failures, 'the crisis hooks over 120 towns');
+    // measured at the lane's tip: 128 of 137 crises carry a cast-bound hook; the rest are casts with
+    // no line role held (wartime with no defender, an infiltration's outside hand)
+    expect(bound / crises).toBeGreaterThan(0.9);
+  }, 240000);
+
+  it('the crisis hook is stored as the catalog\'s sentence (its template) and filled with the holder where it is read', () => {
+    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    const plague = entriesOf(s)[0];
+    const lever = plague.cast.roles.find((r) => r.role === 'lever');
+    expect(lever.kind).toBe('npc');
+    expect(plague.crisisHook).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook);
+    expect(crisisHookFor(s, plague)).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook
+      .replace('The healer who identified the outbreak first', `${lever.name}, the healer who identified the outbreak first,`));
+    const m = gen('slot-migration-0', 'town', ['mass_migration']);
+    expect(crisisHookFor(m, entriesOf(m)[0])).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
+  });
+
+  it('a DM\'s cast edit renames the holder in the printed crisis hook: the Crisis page (tab, print chapter, journal) and the print view model', () => {
+    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    const entry = entriesOf(s)[0];
+    const engine = entry.cast.roles.find((r) => r.role === 'lever');
+    const other = s.npcs.find((n) => !n.temporary && n.name && n.name !== engine.name);
+    applyUserEdit(entry, CAST_EDIT_PATH, formatCastRoles([{ role: 'lever', kind: 'npc', id: other.id || other.name }]), { editedAt: '2026-11-04T00:00:00Z' });
+    const named = `${other.name}, the healer who identified the outbreak first,`;
+    expect(composeCrisisPage(s)[0].hook).toContain(named);
+    const vm = JSON.stringify(buildViewModel({ settlement: s }));
+    expect(vm).toContain(named);
+    expect(vm.includes(`${engine.name}, the healer who identified`)).toBe(false); // anchored: the edited name is asserted present on the line above
+  });
+
+  it('a calm place stores no crisis hook and collects none', () => {
+    const s = generateSettlementPipeline({ settType: 'village', selectedStressesRandom: false, selectedStresses: [] }, null, { seed: 'cast-step-calm', customContent: {} });
+    expect(s.stress).toBeNull();
+    expect(collectPlotHooks(s).some((h) => 'crisis' in h)).toBe(false); // anchored: s.stress is pinned null on the line above
   });
 });
 

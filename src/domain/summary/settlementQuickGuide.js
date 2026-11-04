@@ -12,6 +12,7 @@
  * about who matters, what is urgent, or where play begins.
  */
 
+import { crisisHookFor } from '../crisis/crisisHooks.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
@@ -675,7 +676,7 @@ function composePressure(settlement) {
   const stressText = cleanText(
     stress?.summary
       || stress?.description
-      || stress?.crisisHook
+      || crisisHookFor(settlement, stress)
       || stress?.label
       || stress?.type,
   );
