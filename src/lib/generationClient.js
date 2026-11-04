@@ -34,7 +34,8 @@
  * called on this path; the caller stamps receipt times off the packet's list.
  *
  * DELIBERATELY HAS NO IMPORT OF THE CORE, static or dynamic — the wire-lean
- * law. The caller supplies `fallback`, so on the happy path the main thread
+ * law (its one other static edge is the local engine's seam, whose own edges to the
+ * core are dynamic and which constructs the worker). The caller supplies `fallback`, so on the happy path the main thread
  * never fetches the engine chunk at all; only a fallback pays for it.
  *
  * This module reads ONLY protocol-envelope keys (kind, requestId,
@@ -49,6 +50,7 @@ import {
   GENERATION_STEP_WATCHDOG_MS,
   GENERATION_WORKER_CONTRACT,
 } from './generationProtocol.js';
+import { createGenerationWorker } from './localEngine.js';
 // THE LOCAL ENGINE'S VERSION, read at BUILD time: the content hash of the committed
 // engine bundle (`scripts/build-edge-shared.mjs`), the same value the `engine-generate`
 // service reports. A named JSON import, so the client build carries the one string and
@@ -81,7 +83,8 @@ export function stampEngineVersion(result, engineVersion) {
  * The `remote` transport's build flag, read with `engineRemote.js :: engineRemoteOpen`'s
  * rule (closed unless VITE_ENGINE_REMOTE is exactly 'true'). Spelled here rather than
  * imported because this module's static import list is pinned to the protocol leaf
- * alone (tests/build/generationWorkerLazy.test.js, the wire-lean law) and the worker
+ * and the local engine's seam (tests/build/generationWorkerLazy.test.js, the wire-lean
+ * law) and the worker
  * path must construct synchronously; tests/lib/engineRemoteTransport.test.js drives the
  * two over the same env matrix, so the spellings cannot drift.
  * @returns {boolean}
@@ -109,9 +112,14 @@ function cancelledError() {
   return Object.assign(new Error(message), { name: 'AbortError', code: 'cancelled' });
 }
 
-/** The default transport: one worker per request, terminated on every settle path. */
+/**
+ * The default transport: one worker per request, terminated on every settle path. The
+ * worker is constructed by the local engine's seam (`localEngine.js ::
+ * createGenerationWorker`), the ONE module a VITE_ENGINE_REMOTE build leaves out, so a
+ * flagged build carries no generation worker bundle (the protection step).
+ */
 function defaultWorkerFactory() {
-  return new Worker(new URL('../workers/generation.worker.js', import.meta.url), { type: 'module' });
+  return createGenerationWorker();
 }
 
 /**

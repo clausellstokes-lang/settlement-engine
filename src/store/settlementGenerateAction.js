@@ -99,6 +99,7 @@ import { accountHolderPhrase, ANON_SIZES, SIZE_LABEL, TIER_FACTS } from '../conf
 import { TIER_ORDER } from '../data/constants.js';
 import { flag } from '../lib/flags.js';
 import { runGeneration } from '../lib/generationClient.js';
+import { loadGenerationCore } from '../lib/localEngine.js';
 import {
   GENERATION_PROTOCOL_VERSION,
   GENERATION_REQUEST_KIND,
@@ -182,12 +183,13 @@ function carriedHistoryOf(record, forged) {
 
 /**
  * The in-thread half of the ONE code path. Imported lazily so the happy worker
- * path never fetches the engine chunk on the main thread at all.
+ * path never fetches the engine chunk on the main thread at all — through the local
+ * engine's one seam (`lib/localEngine.js`), which a VITE_ENGINE_REMOTE build leaves out.
  * @param {any} request
  * @param {(step: any) => void} [onStep]
  */
 async function inThreadGeneration(request, onStep) {
-  const core = await import('../workers/generationRequest.js');
+  const core = await loadGenerationCore();
   return core.runGenerationRequest(request, (event) => onStep?.(event.step));
 }
 
