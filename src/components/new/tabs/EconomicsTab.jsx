@@ -28,6 +28,7 @@ import { institutionDisplayName } from '../../../domain/display/institutionDispl
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
+import { foodwaysLineOf } from '../../../domain/foodways.js'; // the foodways line's ONE reader (FOOD-4)
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -292,6 +293,8 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
   const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
+  // FOOD-4: the foodways line is the food record's, read through the one reader; never composed here.
+  const foodwaysLine = foodwaysLineOf({ economicState: eco });
   const flowDrift = useMemo(() => {
     const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
     if (!sid || !Array.isArray(campaigns)) return null;
@@ -567,6 +570,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             months the economy tab.") — the food record's months in store (economicState.foodSecurity.
             foodRecord.storageMonths) and whether a granary stands, printed once; the id is the Food endurance door (FOOD_STORES_DOOR). */}
         {storesLine&&<div id="dossier-stores-economy-food-stores" data-testid="economics-food-stores" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,marginTop:8}}>{storesLine}</div>}
+        {foodwaysLine&&<div data-testid="economics-foodways" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,marginTop:6}}>{foodwaysLine}</div>}
       </Section>}
 
       {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──
