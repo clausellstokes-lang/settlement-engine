@@ -40,7 +40,8 @@
 //
 // THE FABRIC (X-46 car 3, docs/DESIGN_X46_SCALE_TRAIN.md §4): `fabric: true` marks a row that is
 // the place rather than a house with a power behind it — the Dwellings family, the well-level
-// water source, the walk to another settlement's church. It is a registry key like the guards
+// water source, the walk to another settlement's church and to another's mill. The rule (the
+// chair's ruling, 2026-11-04): no power behind it (X-45 weight 0), no service, no seat. It is a registry key like the guards
 // (read through `isFabricRow` / `isFabricInstitution`, never riding onto a row or a save). A
 // fabric row rolls and prints exactly as before; it is not counted in the institution budget.
 
@@ -558,8 +559,8 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Mills (2-5)', required: true, desc: 'Grain, fulling, and saw mills along every usable watercourse, many under guild or civic licence.', tags: ['essential'], priorityCategory: 'economy' },
       at: {
-        thorp: { name: 'Access to external mill', desc: 'Must travel to manor/village mill. Home grinding often illegal.', tags: ['essential', 'agriculture'] },
-        hamlet: { name: 'Access to external mill', desc: 'Manor mill with milling monopoly (banalité).', tags: ['essential', 'agriculture'] },
+        thorp: { name: 'Access to external mill', fabric: true, desc: 'Must travel to manor/village mill. Home grinding often illegal.', tags: ['essential', 'agriculture'] },
+        hamlet: { name: 'Access to external mill', fabric: true, desc: 'Manor mill with milling monopoly (banalité).', tags: ['essential', 'agriculture'] },
         village: { name: 'Mill', desc: 'Water or windmill with monopoly milling rights. The miller is often the wealthiest and most resented figure in the village.', tags: ['essential', 'food'], priorityCategory: 'crafts' },
         town: { desc: 'Multiple mills for grain, fulling cloth.' },
         city: {},

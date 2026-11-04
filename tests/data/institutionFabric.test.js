@@ -9,9 +9,15 @@ import {
 } from '../../src/data/institutionalCatalog.js';
 import { backingRowFor } from '../../src/data/institutionBacking.js';
 
+// The rule (the chair's ruling, 2026-11-04, option C): a row is FABRIC when it is the place's
+// baseline — no power behind it (X-45 weight 0), no service a DM would visit, no seat. Applied
+// to every tier block it adds Access to external mill (thorp, hamlet) to the first twelve; the
+// farming and burial rows stay houses (they back powers at weight 1 and carry services), and so
+// do the weight-0 rows a DM would visit (the hedge wizard, the musician, the performers, the
+// fortune tellers, the dragon).
 const FABRIC = [
-  ['thorp', 'Access to parish church'], ['thorp', 'Dwellings (4-16)'], ['thorp', 'Water source'],
-  ['hamlet', 'Access to parish church'], ['hamlet', 'Dwellings (17-80)'], ['hamlet', 'Water source'],
+  ['thorp', 'Access to external mill'], ['thorp', 'Access to parish church'], ['thorp', 'Dwellings (4-16)'], ['thorp', 'Water source'],
+  ['hamlet', 'Access to external mill'], ['hamlet', 'Access to parish church'], ['hamlet', 'Dwellings (17-80)'], ['hamlet', 'Water source'],
   ['village', 'Dwellings (80-180)'], ['village', 'Multiple water sources'],
   ['town', 'Housing (180-1000 structures)'], ['town', 'Multiple water sources'],
   ['city', 'Housing (1000-5000 structures)'],
@@ -19,7 +25,7 @@ const FABRIC = [
 ];
 
 describe('X-46 car 3 — the fabric', () => {
-  it('tags exactly the Dwellings family, the well-level water source and the church-access rows', () => {
+  it('tags exactly the Dwellings family, the well-level water source, the church access and the external mill', () => {
     expect(fabricRows().map(({ tier, name }) => [tier, name])).toEqual(FABRIC);
     for (const [tier, name] of FABRIC) expect(isFabricRow(tier, name)).toBe(true);
   });

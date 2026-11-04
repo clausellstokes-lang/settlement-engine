@@ -3,12 +3,13 @@
  * `expectedHousesAt`, log-linear between the seven anchors, flat outside them.
  */
 import { describe, expect, it } from 'vitest';
-import { INSTITUTION_BUDGET_ANCHORS, expectedHousesAt } from '../../src/data/institutionBudget.js';
+import { INSTITUTION_BUDGET_ANCHORS, expectedHousesAt, tierBudgetTerms } from '../../src/data/institutionBudget.js';
+import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
 
 describe('X-46 car 3 — the institution budget curve', () => {
   it('holds the seven anchors the design names, ascending', () => {
     expect(INSTITUTION_BUDGET_ANCHORS.map((a) => [...a])).toEqual([
-      [5, 1.5], [30, 3], [100, 6], [400, 14], [2500, 35], [15000, 75], [60000, 120],
+      [5, 3], [30, 5], [100, 8], [400, 16], [2500, 36], [15000, 76], [60000, 120],
     ]);
     expect(Object.isFrozen(INSTITUTION_BUDGET_ANCHORS)).toBe(true);
   });
@@ -18,25 +19,27 @@ describe('X-46 car 3 — the institution budget curve', () => {
   });
 
   it('is log-linear between anchors: the geometric mean of two anchors reads their arithmetic mean', () => {
-    expect(expectedHousesAt(Math.sqrt(100 * 400))).toBeCloseTo(10, 9); // 200 people
-    expect(expectedHousesAt(Math.sqrt(2500 * 15000))).toBeCloseTo(55, 9);
+    expect(expectedHousesAt(Math.sqrt(100 * 400))).toBeCloseTo(12, 9); // 200 people
+    expect(expectedHousesAt(Math.sqrt(2500 * 15000))).toBeCloseTo(56, 9);
   });
 
-  it('meets the budget at every band end (1–3 / 2–6 / 5–14 / 12–35 / 30–75 / 70+)', () => {
-    const ends = { thorp: [5, 30, 1, 3], hamlet: [20, 100, 2, 6], village: [75, 400, 5, 14], town: [300, 2500, 12, 35], city: [2000, 15000, 30, 75] };
-    for (const [lo, hi, bLo, bHi] of Object.values(ends)) {
-      expect(expectedHousesAt(lo)).toBeGreaterThanOrEqual(bLo);
-      expect(expectedHousesAt(hi)).toBeLessThanOrEqual(bHi);
+  // THE CHAIR'S RULING (2026-11-04, the fabric STOP, option C): a budget cannot sit below the
+  // catalogue's required baseline, so every band's minimum must exceed its tier's required
+  // non-fabric count R by at least one house. The chair proposed 3 / 4 / 8 / 16 / 36 / 76 / 120;
+  // at the measured R (2 / 3 / 6 / 11 / 15 / 15) the 20-person hamlet read 3.77 against R 3, so
+  // the 30-person anchor rose by the least whole house, 4 → 5 (the ruling's own remedy).
+  it('puts every band minimum at least one house above the tier\'s required houses', () => {
+    for (const tier of TIER_ORDER) {
+      expect(expectedHousesAt(POPULATION_RANGES[tier].min) - tierBudgetTerms(tier).R, tier).toBeGreaterThanOrEqual(1);
     }
-    expect(expectedHousesAt(15000)).toBeGreaterThanOrEqual(70);
   });
 
   it('is monotone and flat outside the table', () => {
     let prev = -Infinity;
     for (let p = 1; p <= 80000; p = Math.ceil(p * 1.07)) { const h = expectedHousesAt(p); expect(h).toBeGreaterThanOrEqual(prev); prev = h; }
-    expect(expectedHousesAt(1)).toBe(1.5);
-    expect(expectedHousesAt(0)).toBe(1.5);
-    expect(expectedHousesAt(Number.NaN)).toBe(1.5);
+    expect(expectedHousesAt(1)).toBe(3);
+    expect(expectedHousesAt(0)).toBe(3);
+    expect(expectedHousesAt(Number.NaN)).toBe(3);
     expect(expectedHousesAt(1e6)).toBe(120);
   });
 });

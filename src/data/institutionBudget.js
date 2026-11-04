@@ -9,9 +9,14 @@
  *
  * THE CURVE: the expected number of HOUSES (non-fabric rows, required and optional together) at
  * seven anchor populations, log-linear between them (linear in ln population), held flat outside
- * the first and last anchor. The anchors are chosen so that the band ends meet the chair's
- * proposed budget (ODQ ledger, 2026-11-02, not vetoed): 1–3 for a thorp, 2–6 for a hamlet, 5–14
- * for a village, 12–35 for a town, 30–75 for a city, 70 and up for a metropolis.
+ * the first and last anchor. The first anchors (5 → 1.5, 30 → 3, 100 → 6, 400 → 14, 2,500 → 35,
+ * 15,000 → 75, 60,000 → 120) met the chair's proposed budget (ODQ ledger, 2026-11-02: 1–3 / 2–6 /
+ * 5–14 / 12–35 / 30–75 / 70+) and put it BELOW the catalogue's required baseline at the bottom of
+ * three bands, so no optional thorp row could ever roll. THE CHAIR'S RULING (2026-11-04, option
+ * C): a budget cannot sit below the catalogue's required baseline — every band's minimum exceeds
+ * its tier's required non-fabric houses by at least one; the chair's 3 / 4 / 8 / 16 / 36 / 76 /
+ * 120, with the 30-person anchor raised by the least whole house (4 → 5) because the 20-person
+ * hamlet read 3.77 against its R of 3.
  *
  * ⛔ THE SEVEN NUMBERS ARE THE OWNER'S VETO POINT (§8 item 2). A lane that measures a band end
  * outside the budget reports the figure; it does not move an anchor.
@@ -26,12 +31,12 @@ import { POPULATION_RANGES } from './constants.js';
  * @type {ReadonlyArray<readonly [number, number]>}
  */
 export const INSTITUTION_BUDGET_ANCHORS = Object.freeze([
-  [5, 1.5],
-  [30, 3],
-  [100, 6],
-  [400, 14],
-  [2500, 35],
-  [15000, 75],
+  [5, 3],
+  [30, 5],
+  [100, 8],
+  [400, 16],
+  [2500, 36],
+  [15000, 76],
   [60000, 120],
 ]);
 for (const anchor of INSTITUTION_BUDGET_ANCHORS) Object.freeze(anchor);

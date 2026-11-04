@@ -46,7 +46,7 @@ describe('X-46 car 3 — the density factor', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('reads R_tier (required houses) from the catalogue and records E_tier\'s catalogue sum beside it, fabric excluded', () => {
-    expect(TIER_ORDER.map((t) => tierBudgetTerms(t).R)).toEqual([3, 4, 6, 11, 15, 15]);
+    expect(TIER_ORDER.map((t) => tierBudgetTerms(t).R)).toEqual([2, 3, 6, 11, 15, 15]);
     for (const tier of TIER_ORDER) {
       const { R, E } = readTerms(tier);
       expect(tierBudgetTerms(tier).R).toBe(R);
