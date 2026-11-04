@@ -250,3 +250,51 @@ export async function runRemoteGeneration(request, opts = {}) {
     resolvedConfig: payload.fullConfig,
   };
 }
+
+/**
+ * THE `derive` OP (ENGINE-4 unit 1): the client's own non-birth pipeline call,
+ * `generateSettlementPipeline(config, null, { seed, pins? })`, served by engine-generate
+ * verbatim (no `birthConfig`, no custom content). Its callers re-run an existing world (the
+ * DM layer's re-derivation) or preview a config (the surveyor's construction preview), so the
+ * settlement comes back UNSTAMPED, exactly as the local pipeline returns it: the caller's
+ * record keeps the engineVersion it was made with.
+ *
+ * @param {{ seed: unknown, config: unknown, pins?: unknown }} call
+ * @param {RemoteOptions} [opts]
+ * @returns {Promise<Record<string, any>>} the settlement
+ */
+export async function runRemoteDerive({ seed, config, pins }, opts = {}) {
+  if (typeof seed !== 'string' || !seed) {
+    throw engineRemoteError('engine_remote_unsupported',
+      'The engine service re-derives only a world with a string seed; this one was not re-derived.',
+      { inputs: ['seed'] });
+  }
+  const pin = opts.engineVersion ?? null;
+  const reply = await postEngine(
+    { op: 'derive', seed, config, ...(pins === undefined ? {} : { pins }), ...(pin ? { engineVersion: pin } : {}) },
+    { ...opts, url: opts.url !== undefined ? opts.url : engineFunctionUrl('engine-generate') },
+  );
+  if (!reply.settlement || typeof reply.settlement !== 'object' || Array.isArray(reply.settlement)) {
+    throw engineRemoteError('engine_reply_invalid', 'The engine service answered without a settlement.');
+  }
+  return reply.settlement;
+}
+
+/**
+ * THE `stepMeta` OP (ENGINE-4 unit 1): the pipeline step registry's `getStepMeta()` rows, the
+ * static metadata the DM layer's re-derivation builds its pins bag from.
+ *
+ * @param {RemoteOptions} [opts]
+ * @returns {Promise<Array<Record<string, any>>>}
+ */
+export async function fetchRemoteStepMeta(opts = {}) {
+  const pin = opts.engineVersion ?? null;
+  const reply = await postEngine(
+    { op: 'stepMeta', ...(pin ? { engineVersion: pin } : {}) },
+    { ...opts, url: opts.url !== undefined ? opts.url : engineFunctionUrl('engine-generate') },
+  );
+  if (!Array.isArray(reply.stepMeta)) {
+    throw engineRemoteError('engine_reply_invalid', 'The engine service answered without step metadata.');
+  }
+  return reply.stepMeta;
+}

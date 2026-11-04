@@ -35,6 +35,11 @@
  *                                   reveal plays back, so the service's reply carries
  *                                   the same `pipelineHistory` the worker posts
  *                                   (ENGINE-2 unit 1, the `remote` transport).
+ *   - getStepMeta                 — the pipeline step registry's metadata
+ *                                   (`src/generators/pipeline.js`), the rows the DM
+ *                                   layer's re-derivation builds its pins bag from;
+ *                                   engine-generate's `stepMeta` op answers it
+ *                                   (ENGINE-4 unit 1).
  *
  * ⚠ RESERVED SLOT — THE ADVANCE ENTRY (not implemented). The engine service's
  * second operation, advancing an existing settlement through time, will be
@@ -47,3 +52,4 @@
 export { generateSettlementPipeline } from '../generators/generateSettlementPipeline.js';
 export { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 export { runGenerationRequest } from '../workers/generationRequest.js';
+export { getStepMeta } from '../generators/pipeline.js';

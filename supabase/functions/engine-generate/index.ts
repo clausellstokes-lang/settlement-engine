@@ -2,6 +2,20 @@
  * Supabase Edge Function: engine-generate — THE ENGINE SERVICE'S GENERATE CALL (ENGINE-1 unit 3).
  *
  *   POST { seed, config, engineVersion? }  →  200 { settlement, pipelineHistory, engineVersion, generatedAt }
+ *   POST { op: 'derive', seed, config, pins?, engineVersion? }
+ *                                          →  200 { settlement, engineVersion, generatedAt }
+ *   POST { op: 'stepMeta', engineVersion? } →  200 { stepMeta, engineVersion }
+ *
+ * THE TWO NON-BIRTH OPS (ENGINE-4 unit 1, the flag-on gaps). `derive` is the client's own
+ * main-thread call `generateSettlementPipeline(config, null, { seed, pins? })` VERBATIM: no
+ * `birthConfig`, no custom content, because its callers re-run an EXISTING world (the DM
+ * layer's re-derivation, `src/store/settlementRederiveAction.js`) or preview a config without
+ * minting a law (the surveyor's construction preview). Minting here would re-birth a world the
+ * DM only meant to edit. `pins` is the re-derivation's bag (`src/domain/edit/dmLayer.js ::
+ * rederive`), handed to the pipeline exactly as the local engine handle hands it.
+ * `stepMeta` is the pipeline step registry's `getStepMeta()` — static engine metadata the
+ * re-derivation reads to build that bag — so it skips identity and the rate guard, like
+ * engine-version: it touches no account and generates nothing.
  *
  * `pipelineHistory` (ENGINE-2 unit 1) is the per-step list the generation reveal plays
  * back, `[{ id, summary }]`: the run goes through `runGenerationRequest`, the ONE core the
@@ -44,6 +58,8 @@ import { checkUserIpRate } from '../_shared/rateLimit.ts';
 import { isSessionSuperseded, deviceLabelFromRequest } from '../_shared/sessionGate.ts';
 import {
   birthConfig,
+  generateSettlementPipeline,
+  getStepMeta,
   loadGenerationLawPayloads,
   runGenerationRequest,
 } from '../_shared/engineBundle.js';
@@ -65,6 +81,9 @@ export const ENGINE_VERSION: string = engineMeta.engineVersion;
 
 const FN = 'engine-generate';
 const MAX_BODY_BYTES = 32 * 1024;
+/** `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB). */
+const MAX_DERIVE_BODY_BYTES = 1024 * 1024;
+const OPS: ReadonlyArray<string> = Object.freeze(['generate', 'derive', 'stepMeta']);
 const MAX_SEED_CHARS = 256;
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
@@ -146,9 +165,12 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   if (guard.reject) return guard.reject;
 
   // ── Body: capped, parsed, shaped ───────────────────────────────────────────────────
+  // The larger cap is read first (no body exceeds it); a `generate` body is then held to its
+  // own 32 KB once the op is known.
   const raw = await req.text();
-  if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) {
-    return json({ error: 'payload_too_large', maxBytes: MAX_BODY_BYTES }, 413, cors);
+  const rawBytes = new TextEncoder().encode(raw).length;
+  if (rawBytes > MAX_DERIVE_BODY_BYTES) {
+    return json({ error: 'payload_too_large', maxBytes: MAX_DERIVE_BODY_BYTES }, 413, cors);
   }
   let body: unknown;
   try {
@@ -157,11 +179,21 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
     return json({ error: 'invalid_json' }, 400, cors);
   }
   if (!isPlainObject(body)) return json({ error: 'invalid_body' }, 400, cors);
-  const { seed, config, engineVersion } = body;
-  if (typeof seed !== 'string' || seed.length === 0 || seed.length > MAX_SEED_CHARS) {
-    return json({ error: 'invalid_seed', maxChars: MAX_SEED_CHARS }, 400, cors);
+  const op = body.op === undefined ? 'generate' : body.op;
+  if (typeof op !== 'string' || !OPS.includes(op)) return json({ error: 'invalid_op', ops: OPS }, 400, cors);
+  if (op !== 'derive' && rawBytes > MAX_BODY_BYTES) {
+    return json({ error: 'payload_too_large', maxBytes: MAX_BODY_BYTES }, 413, cors);
   }
-  if (!isPlainObject(config)) return json({ error: 'invalid_config' }, 400, cors);
+  const { seed, config, engineVersion, pins } = body;
+  if (op !== 'stepMeta') {
+    if (typeof seed !== 'string' || seed.length === 0 || seed.length > MAX_SEED_CHARS) {
+      return json({ error: 'invalid_seed', maxChars: MAX_SEED_CHARS }, 400, cors);
+    }
+    if (!isPlainObject(config)) return json({ error: 'invalid_config' }, 400, cors);
+  }
+  if (op === 'derive' && pins !== undefined && !isPlainObject(pins)) {
+    return json({ error: 'invalid_pins' }, 400, cors);
+  }
   if (engineVersion !== undefined && typeof engineVersion !== 'string') {
     return json({ error: 'invalid_engine_version' }, 400, cors);
   }
@@ -169,6 +201,11 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   // ── The pin: a version this deployment does not serve is refused, never approximated ─
   if (engineVersion !== undefined && engineVersion !== ENGINE_VERSION) {
     return json({ error: 'engine_version_retired', requested: engineVersion, engineVersion: ENGINE_VERSION }, 409, cors);
+  }
+
+  // ── stepMeta: the step registry's static metadata; no account, no generation ────────
+  if (op === 'stepMeta') {
+    return json({ stepMeta: getStepMeta(), engineVersion: ENGINE_VERSION }, 200, cors);
   }
 
   // No service-role client means no rate guard; refuse rather than serve unmetered.
@@ -197,6 +234,20 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
     const identity = userId ? `u:${userId}` : `ip:${guard.meta.ip}`;
     if (!(await underRate(admin, identity))) {
       return json({ error: 'rate_limited', limits: ENGINE_GENERATE_RATE_LIMITS }, 429, cors);
+    }
+  }
+
+  // ── Derive: the client's own non-birth pipeline call, verbatim ───────────────────────
+  if (op === 'derive') {
+    try {
+      await loadGenerationLawPayloads();
+      const settlement = generateSettlementPipeline(config as Record<string, unknown>, null,
+        pins === undefined ? { seed } : { seed, pins });
+      const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
+      return json({ settlement, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+    } catch (e) {
+      logError(FN, userId, e, { stage: 'derive', engineVersion: ENGINE_VERSION });
+      return json({ error: 'generation_failed' }, 422, cors);
     }
   }
 

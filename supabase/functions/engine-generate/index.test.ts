@@ -20,6 +20,7 @@ import { installScopedTestEnv } from '../_shared/scopedTestEnv.ts';
 import {
   birthConfig,
   generateSettlementPipeline,
+  getStepMeta,
   loadGenerationLawPayloads,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
@@ -250,4 +251,61 @@ scopedEnv.test('method and shape: OPTIONS 200, GET 405, bad JSON / seed / config
   assertEquals((await handleEngineGenerate(post({ seed: 's', config: [] }), opts)).status, 400);
   assertEquals((await handleEngineGenerate(post({ seed: 's', config: { pad: 'x'.repeat(40_000) } }), opts)).status, 413);
   assertEquals(admin.rpcCalls.length, 0);
+});
+
+// ── ENGINE-4 unit 1: the two non-birth ops ─────────────────────────────────────────────
+
+scopedEnv.test('DERIVE: three seeds — the settlement is the bundle\'s own pipeline call with the pins, verbatim (no birthConfig)', async () => {
+  await loadGenerationLawPayloads();
+  for (const seed of cases.seeds) {
+    const config = birthConfig(cases.config);
+    const record = generateSettlementPipeline(config, null, { seed });
+    // Every chooser of a step or none (the runner's rule): generatePopulation's two.
+    const pins = JSON.parse(JSON.stringify({ npcs: record.npcs || [], relationships: record.relationships || [] }));
+    const admin = makeAdmin();
+    const res = await handleEngineGenerate(post({ op: 'derive', seed, config, pins }), { adminClient: admin.adminClient });
+    assertEquals(res.status, 200);
+    const body = await res.json();
+    assertEquals(body.engineVersion, ENGINE_VERSION);
+    assertEquals(body.pipelineHistory, undefined);
+    const expected = generateSettlementPipeline(JSON.parse(JSON.stringify(config)), null, { seed, pins: JSON.parse(JSON.stringify(pins)) });
+    assertEquals(await sha256(JSON.stringify(body.settlement)), await sha256(JSON.stringify(expected)), `seed ${seed}`);
+    assertEquals(admin.rpcCalls.length, 2, 'derive is metered by the same two windows as generate');
+  }
+});
+
+scopedEnv.test('DERIVE: a body over 32 KB is accepted for derive and refused 413 for generate', async () => {
+  const pad = 'x'.repeat(40 * 1024);
+  const admin = makeAdmin();
+  const gen = await handleEngineGenerate(post({ seed: 's', config: { pad } }), { adminClient: admin.adminClient });
+  assertEquals(gen.status, 413);
+  assertEquals((await gen.json()).maxBytes, 32 * 1024);
+  const derive = await handleEngineGenerate(post({ op: 'derive', seed: cases.seeds[0], config: cases.config, pins: { pad } }), { adminClient: makeAdmin().adminClient });
+  assert(derive.status !== 413, `derive answered ${derive.status}`);
+  const huge = await handleEngineGenerate(post({ op: 'derive', seed: 's', config: { pad: 'x'.repeat(1024 * 1024) } }), { adminClient: makeAdmin().adminClient });
+  assertEquals(huge.status, 413);
+});
+
+scopedEnv.test('OPS: an unknown op and a non-object pins bag are refused 400', async () => {
+  const admin = makeAdmin();
+  const bad = await handleEngineGenerate(post({ op: 'advance', seed: 's', config: {} }), { adminClient: admin.adminClient });
+  assertEquals(bad.status, 400);
+  assertEquals((await bad.json()).error, 'invalid_op');
+  const pins = await handleEngineGenerate(post({ op: 'derive', seed: 's', config: {}, pins: [1] }), { adminClient: admin.adminClient });
+  assertEquals(pins.status, 400);
+  assertEquals((await pins.json()).error, 'invalid_pins');
+  assertEquals(admin.made(), 0, 'shape refusals reach no client');
+});
+
+scopedEnv.test('STEPMETA: the registry rows, with no identity, no rate guard and no client', async () => {
+  const admin = makeAdmin();
+  const res = await handleEngineGenerate(post({ op: 'stepMeta' }), { adminClient: admin.adminClient });
+  assertEquals(res.status, 200);
+  const body = await res.json();
+  assertEquals(body.engineVersion, ENGINE_VERSION);
+  assertEquals(body.stepMeta, JSON.parse(JSON.stringify(getStepMeta())));
+  assert(body.stepMeta.length > 0);
+  assertEquals(admin.made(), 0);
+  const pinned = await handleEngineGenerate(post({ op: 'stepMeta', engineVersion: 'old0000000000000' }), { adminClient: admin.adminClient });
+  assertEquals(pinned.status, 409);
 });
