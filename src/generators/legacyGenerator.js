@@ -57,7 +57,7 @@ function factionStrength(factions, matcher) {
 // The annotation is always one sentence — structural, no world-specific facts.
 
 function buildAnnotation(ev, relationship, suffix) {
-  const name   = ev.name   || 'a significant historical event';
+  const name   = ev.name   || 'A significant historical event'; // F11: the fallback opens every annotation
   const effect = (ev.lastingEffects || [])[0] || null;
 
   // relationship: 'unresolved' | 'recovery' | 'drift'

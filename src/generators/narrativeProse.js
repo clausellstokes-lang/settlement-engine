@@ -31,10 +31,13 @@ export const sentenceCase = value => {
 export const opensSentence = (text, offset) => /(?:^|[.!?]\s+)$/.test(String(text).slice(0, offset));
 
 /**
- * Fill `{key}` slots: a held value as given; a FALLBACK (lower-case filler such as 'someone',
- * used when there is no name to put in the slot) sentence-cased where its slot opens a sentence
- * (F11, rung 2B: the one-NPC thorp's "…attend. someone has not yet understood…"). An unknown
- * slot stays as written. Draw-free.
+ * Fill `{key}` slots with the held value, else the FALLBACK (lower-case filler such as
+ * 'someone', used when there is no name to put in the slot). A slot that opens a sentence is
+ * sentence-cased (F11, rung 2B: the one-NPC thorp's "…attend. someone has not yet understood…");
+ * a held name is already capitalised and prints unchanged, and a lower-case held phrase (the tier
+ * wording "the village elders" standing for an absent governing faction) is capitalised there too,
+ * as `power/settlementNarrative.js :: sentenceStart` does. Mid-sentence, every value prints as
+ * given. An unknown slot stays as written. Draw-free.
  *
  * @param {string} template
  * @param {Record<string, unknown>} values
@@ -44,11 +47,9 @@ export const opensSentence = (text, offset) => /(?:^|[.!?]\s+)$/.test(String(tex
 export const fillSentenceSlots = (template, values, fallbacks = {}) => String(template).replace(
   /\{(\w+)\}/g,
   (whole, key, offset, text) => {
-    const held = values[key];
-    if (held) return String(held);
-    const fallback = fallbacks[key];
-    if (!fallback) return whole;
-    return opensSentence(text, offset) ? sentenceCase(fallback) : fallback;
+    const value = values[key] || fallbacks[key];
+    if (!value) return whole;
+    return opensSentence(text, offset) ? sentenceCase(value) : String(value);
   },
 );
 

@@ -12,6 +12,7 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { fillSentenceSlots, opensSentence } from '../../src/generators/narrativeProse.js';
+import { genSuccessionNarr } from '../../src/generators/power/settlementNarrative.js';
 
 /** @param {any} s */
 const narrativeQuality = (s) => (s.generationCoherenceReceipt?.checks || []).find((/** @type {any} */ c) => c?.id === 'narrative_quality');
@@ -23,10 +24,22 @@ describe('fillSentenceSlots', () => {
     expect(fillSentenceSlots(t, { npc: 'Ada Lark' }, { npc: 'someone' })).toBe('Ada Lark saw them. Ada Lark has not understood what Ada Lark saw');
     expect(fillSentenceSlots('Ask {npc}! {npc}? {who}', {}, { npc: 'someone' })).toBe('Ask someone! Someone? {who}');
   });
+  it('capitalises a lower-case held phrase that opens a sentence (the tier wording for an absent governing faction)', () => {
+    expect(fillSentenceSlots('{faction} suspects it. The night is close. {faction} still believes', { faction: 'the village elders' }))
+      .toBe('The village elders suspects it. The night is close. The village elders still believes');
+    expect(fillSentenceSlots('They told {faction}.', { faction: 'the council' })).toBe('They told the council.');
+  });
   it('reads a sentence start as the string start or a terminal mark and space', () => {
     expect(opensSentence('x', 0)).toBe(true);
     expect(opensSentence('Done. x', 6)).toBe(true);
     expect(opensSentence('with x', 5)).toBe(false);
+  });
+});
+
+describe('the audited generation-time fallbacks (unit 1b)', () => {
+  it('power/settlementNarrative.js :: genSuccessionNarr opens the surplus sentence on a capital when no faction is named', () => {
+    const lines = genSuccessionNarr({ name: 'Ashby', prosperity: 'Wealthy', viabilityIssues: [] });
+    expect(lines).toContain('Ashby is prosperous enough that the real conflicts are about who controls the surplus. The dominant faction has the most and wants more.');
   });
 });
 

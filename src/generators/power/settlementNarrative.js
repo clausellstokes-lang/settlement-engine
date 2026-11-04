@@ -92,7 +92,7 @@ export const genSuccessionNarr = (ctx) => {
     );
   if (ctx.prosperity === 'Wealthy' || ctx.prosperity === 'Thriving')
     narratives.push(
-      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${ctx.topFaction || 'the dominant faction'} has the most and wants more.`
+      `${ctx.name} is prosperous enough that the real conflicts are about who controls the surplus. ${sentenceStart(ctx.topFaction || 'The dominant faction')} has the most and wants more.`
     );
   if (ctx.prosperity === 'Poor') {
     const [costGov, costTop] = resolvePartyPair(
