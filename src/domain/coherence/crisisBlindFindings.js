@@ -76,6 +76,9 @@ const CLAIMS = Object.freeze([
   { claim: 'nobody would replace the seat', re: /\bdoes not come up, because there is nobody the \p{L}+ would name\b/u, family: 'succession' },
   { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'succession' },
   // unrest: insurgency, slave revolt, wartime
+  // Rung 2D unit 2 (the chair's ruling): an insurgency or a revolt denies the seat's safety as
+  // surely as an open succession (rung 2C §3c: `soak1k-1` slave revolt, `-3001` insurgency).
+  { claim: 'the seat is safe', re: /\bsafe for the plainest reason a seat can be safe\b/, family: 'unrest' },
   { claim: 'very little street violence', re: /\bvery little street violence\b/, family: 'unrest' },
   { claim: 'random violence is put down', re: /\brandom violence is put down\b/, family: 'unrest' },
   // crisis: any active crisis
