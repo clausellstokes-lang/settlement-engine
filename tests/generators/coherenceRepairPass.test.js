@@ -97,7 +97,11 @@ describe('deterministic generation coherence repair', () => {
       // free of hard violations. The claim is unchanged; the subjects follow the seed.
       // Re-pinned `-28` to `-116` the same day, same cause (the chair's inverse calibration of the
       // density factor): none of -0..-59 does both now; -116 is the first above them that does.
-    }, 'effect-reach-v1-iso-metro-116');
+      // Re-pinned `-116` to `-245` on 2026-11-04 (rung-1 pins, unit 1; the composed base): composed
+      // onto the window branch, x46-1b's tailed metropolis roll moves this seed's population and so
+      // its density factor, and `-116` adds none; of -0..-399 only -245 (Fighting pits, Underground
+      // city — the same two subjects) and -318 add two AND leave no hard violation.
+    }, 'effect-reach-v1-iso-metro-245');
     const names = new Set(
       settlement.institutions.map(institution => institution.name),
     );

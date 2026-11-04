@@ -103,7 +103,11 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
     // 6(b)): the density factor reshaped this town's roster, and `-1` now leaves the keeper in its
     // slot (the guard below fails as designed); `-0` moves it again. Re-pinned to `-20` the same
     // day, same cause (the chair's inverse calibration): -20 is the first of -0..-40 that moves it.
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-20', customContent: {} }));
+    // Re-pinned `-20` to `-3` on 2026-11-04 (rung-1 pins, unit 1; the composed base): composed onto
+    // the window branch beneath x46-3 (x46-2's renames and the town Money changers floor, the
+    // sibling lanes' generation), `-20` leaves the keeper in npc_8; of -0..-60, -3 is the first
+    // that moves it (npc_6 → npc_8; also -22, -23, -24, -39, -44, -46, -48, -58).
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-3', customContent: {} }));
     town.npcs[2]._authored = true;
     const target = town.npcs[2];
     store.setState({

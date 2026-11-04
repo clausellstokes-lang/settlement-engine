@@ -42,7 +42,26 @@ function housesAt(tier, P, n) {
 }
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
 
+// Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): the realised table was calibrated at
+// x46-3's own base, metropolis catalogue sum 59.27. Composed onto the window branch, one authored
+// chance beneath it moved: 'Dragon resident' 0.1 → 0.06 (the dragon licence joined the exotic
+// scaler, chair ruling round 3 item 2), so the composed catalogue reads 59.23. Each move is named
+// here by row and pinned at its current value; the table's recorded sum is checked against the
+// catalogue PLUS the named moves, so any OTHER change still reds and still calls for --calibrate.
+const CATALOGUE_MOVES_SINCE_CALIBRATION = Object.freeze({
+  metropolis: [['Dragon resident', 0.1, 0.06]],
+});
+
 describe('X-46 car 3 — the density factor', () => {
+  it('the catalogue moves named since the calibration are the catalogue\'s current chances', () => {
+    for (const [tier, moves] of Object.entries(CATALOGUE_MOVES_SINCE_CALIBRATION)) {
+      for (const [name, , after] of moves) {
+        const row = Object.values(institutionalCatalog[tier]).map((g) => g[name]).find(Boolean);
+        expect(row?.baseChance, `${tier}|${name}`).toBe(after);
+      }
+    }
+  });
+
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
   it('reads R_tier (required houses) from the catalogue and records E_tier\'s catalogue sum beside it, fabric excluded', () => {
@@ -53,7 +72,8 @@ describe('X-46 car 3 — the density factor', () => {
       expect(tierBudgetTerms(tier).catalogueE).toBeCloseTo(E, 9);
       // A catalogue change that moves the authored sum reds here: the realised E is then stale
       // and is re-measured (scripts/audit/institution-budget-measure.mjs --calibrate 200).
-      expect(INSTITUTION_BUDGET_REALISED[tier].catalogueE, tier).toBeCloseTo(E, 2);
+      const moved = (CATALOGUE_MOVES_SINCE_CALIBRATION[tier] || []).reduce((sum, [, before, after]) => sum + (before - after), 0);
+      expect(INSTITUTION_BUDGET_REALISED[tier].catalogueE, tier).toBeCloseTo(E + moved, 2);
     }
   });
 

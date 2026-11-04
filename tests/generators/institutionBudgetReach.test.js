@@ -11,8 +11,12 @@ import { densityFactor, scaleChance } from '../../src/data/institutionBudget.js'
 import { institutionalCatalog, institutionRowGuards, isFabricRow } from '../../src/data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
 
-/** Car 2's: a row whose stated floor sits above its tier's band maximum (§3a, the seven-row table). */
-const FLOOR_ABOVE_BAND = Object.freeze(['town|Money changers']);
+/** Car 2's: a row whose stated floor sits above its tier's band maximum (§3a, the seven-row table).
+ * Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): measured at x46-3's own base the one row
+ * was town Money changers (floor 3,000 over a 2,500 band top); x46-2, composed beneath it, moved that
+ * floor to 2,000 (the band's top fifth, ODQ §934.104), so on the composed base no row's floor sits
+ * above its band and the list is empty. The pin below still names any row a floor kills. */
+const FLOOR_ABOVE_BAND = Object.freeze([]);
 
 const walk = (tier) => {
   const { min, max } = POPULATION_RANGES[tier];

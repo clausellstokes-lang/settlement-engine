@@ -4,8 +4,8 @@
  * The institution budget scales CHANCES only: the density factor is computed once from the
  * population before the first draw, and the catalogue's draw order and the number of draws are
  * the catalogue's own. So with the factor forced to 1.0 every seed must be byte-identical to the
- * tip the budget was built on (8cc245db0, X-46 car 1 U4). The sixty record hashes below were read
- * at that tip, by this file, before a line of the budget existed.
+ * tip the budget was built on (8cc245db0, X-46 car 1 U4; on the composed window, 79c4423). The sixty
+ * record hashes below were read at that tip, by this file, before a line of the budget existed.
  *
  * The cells are the certification matrix's first sixty (`configForIndex`: ten per tier, every
  * culture, terrain, route, threat, content profile and magic scenario it cycles), born the app's
@@ -24,67 +24,72 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
+// Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): the sixty were read at the budget's own
+// base 8cc245db0; composed onto the window branch, "the tip before the budget" is 79c4423 (the
+// window with x46-1b composed, x46-3 not yet), whose generation the sibling lanes moved (x46-2's
+// renames, the dragon licence, the tailed metropolis roll). Re-read at 79c4423 by this file's own
+// loop with no budget module present; the composed tip at d ≡ 1 matches all sixty.
 const BEFORE = Object.freeze([
-  '6f192392089aec0e', // 0
-  'ec0adb0b3b9f1868', // 1
-  '8911c1d2da8a1168', // 2
-  'b1e2a2721f523bef', // 3
-  '39c7eae64b5d4103', // 4
-  '0c6a10fe48aee19a', // 5
-  'b180ff17486ab7db', // 6
-  '90549983c9f68f04', // 7
-  '1c7eaa6c788c78eb', // 8
-  '440b9b3d4f9ae48d', // 9
-  '92bb497b1a9bf851', // 10
-  '7a3f4b5f8f0f8c03', // 11
-  '9fc9827a3a3b0a65', // 12
-  'd2f714afead526ea', // 13
-  '9e845b05817549b9', // 14
-  '6968fad403c0c85f', // 15
-  '2645bb3a3787cf53', // 16
-  '07a2605c2a48380f', // 17
-  '7361d8b0632ec571', // 18
-  'b0975fc6fca6dd75', // 19
-  'b69d81c92484ceca', // 20
-  '27576a6605af8915', // 21
-  '4b8dc75d06c3fa6d', // 22
-  'f40b76d1f53cbbdb', // 23
-  '2910f75379fb3e93', // 24
-  'eb5d00a0a45a9e69', // 25
-  'e625a8d6840298d9', // 26
-  '4464f69e08a8f94a', // 27
-  '0c3bf07c408d3329', // 28
-  '37d61c63415db081', // 29
-  'f43cc9c9e613a38f', // 30
-  '84af4bca507f0e19', // 31
-  '02e8f2d68f719bc7', // 32
-  '35cce954315e1549', // 33
-  '331fe5b5c2ac0b58', // 34
-  'fa75e3416afe10ef', // 35
-  'b9859585d52de2ff', // 36
-  '5142da9d8b3f99eb', // 37
-  '2dc339f0c004fde6', // 38
-  'f42f643e881047a9', // 39
-  'acb52449708521ce', // 40
-  '4a64af79d46def28', // 41
-  '8cdd4ff31d37d348', // 42
-  '991c8bcc909ddbb2', // 43
-  '6a33c325d3aed672', // 44
-  '58953aac52fcd57c', // 45
-  '79352da8fe687a7b', // 46
-  '1f61c412dab82433', // 47
-  '92230207fdd53b22', // 48
-  '1553a433071a96b6', // 49
-  '36eeeccf00d5ab1f', // 50
-  '11e5435fe5dda3e0', // 51
-  'f3dccde776c10903', // 52
-  'ba8fac6a37f5ce0d', // 53
-  'ec515052cd6a1458', // 54
-  '85478a45c528a1c6', // 55
-  '90cfc95db479470a', // 56
-  '2c351dbd0bd72c7f', // 57
-  'c97552938250b04e', // 58
-  '60888736ead271e3', // 59
+  'e6ac9242fde826c5', // 0
+  'd57c30a0385ee1ff', // 1
+  'a7411978c4fe7e44', // 2
+  'ba2b42371aa50a62', // 3
+  'fc879223e88b0d8f', // 4
+  '241ef10b46b8d545', // 5
+  'fd2e0353f8616995', // 6
+  '27a1d22ea2af15ac', // 7
+  'a2114b170b45fa5a', // 8
+  '4f1a2ee9a805e61e', // 9
+  '8364bef6f9f0adba', // 10
+  'a58802dc2a26d4d3', // 11
+  '76ea343961c6cf73', // 12
+  '1b58933eabb3d698', // 13
+  'd4e55d3d1159ab83', // 14
+  'ada0412f8d624c60', // 15
+  '812ef446dbd88864', // 16
+  'c02f0a5e73eb3e63', // 17
+  '58f1faeeecc66eab', // 18
+  'bf3fca3dd85eca7e', // 19
+  '7fdd297290f11021', // 20
+  '33fc6a2099647f33', // 21
+  'cff811402b96b2d0', // 22
+  '667fbdee2fba123d', // 23
+  '01a09a91303fea82', // 24
+  '0a9fd5fa6ba01d3b', // 25
+  '586aaa34a586dcae', // 26
+  '39352e37eac7e550', // 27
+  '1da4fb926165b25c', // 28
+  '89e03d1a1de61c07', // 29
+  'db017088c2d114e7', // 30
+  '4d6390abb38f412d', // 31
+  '83d6fa86a665ed2a', // 32
+  'aeeb2b7a8b95302e', // 33
+  '68a285cc29628922', // 34
+  '3c559247a89eea52', // 35
+  '43cd75d9fde0aced', // 36
+  '884fc212491b7c7a', // 37
+  'bbdfac55a4ab265c', // 38
+  '572174ee260bdd21', // 39
+  '6be2d2de1315eeb0', // 40
+  '202e4d5a12c196d5', // 41
+  '1a181e51a5e6bde6', // 42
+  '958cb056f7b3bc72', // 43
+  '8d028ed452a894b1', // 44
+  '568414947c925d12', // 45
+  '2fae796b112017b3', // 46
+  '6304afeffbcf507c', // 47
+  '67f9f1481e45bd53', // 48
+  'f6bb99cf38e7e2ab', // 49
+  '83684aafce9b2921', // 50
+  '868527fb74f63668', // 51
+  'fd6c3ee6c24d3c8a', // 52
+  'f6338676f90a900c', // 53
+  '81817035c2c632de', // 54
+  'ce6776f5579d5223', // 55
+  '135dd9a9b4373ef2', // 56
+  'cda061cf9f1bea92', // 57
+  '34437d92b079f680', // 58
+  '3c8718026e709b5b', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
