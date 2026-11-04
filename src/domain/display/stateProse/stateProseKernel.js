@@ -201,13 +201,22 @@ export function variantIsAudible(variant, audience) {
  * nothing: the words are already in the corpus, and the contract test refuses drift
  * between this constant and what the corpus actually spells.
  *
+ * ⭐ `walls` IS A FACT DIMENSION, NOT A DEMOTED STATE KEY (F10 WALLS-WORD, rung 1C,
+ * 2026-11-04). A variant that prints the place's own walls ("the walls have settled the
+ * argument") carries `walls`; its wall-free twin carries `no walls`. Every desk answers it at
+ * its entry from the one defence reader (`defense/defenseFacts.js :: wallsAnswered`), so a
+ * pool that names walls is unreadable to a caller who has not asked whether walls stand —
+ * the same fail-closed law, aimed at the defence-words class.
+ *
  * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
+ * @enforced-by tests/domain/wallsWordDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const STATE_MARK_DIMENSIONS = Object.freeze({
   severity: Object.freeze(['minor', 'major', 'catastrophic']),
   deficit: Object.freeze(['deficit', 'no deficit']),
   anchor: Object.freeze(['anchored', 'not anchored']),
+  walls: Object.freeze(['walls', 'no walls']),
 });
 
 /**

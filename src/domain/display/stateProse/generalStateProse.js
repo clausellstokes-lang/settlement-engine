@@ -82,6 +82,7 @@ import { timeBandOf, timeBandWord } from '../heraldCausalGrammar.js';
 import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { wallsAnswered } from '../../defense/defenseFacts.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
 
@@ -1724,10 +1725,13 @@ export const GENERAL_STATE_PROSE_SILENT = Object.freeze({
  *   caller had no typed statement of what the desk needs handed to it. Each row names only
  *   the fields this desk actually reads off it — `intensity` for the pool cut, `parties` /
  *   `issue` / `stakes` for the slots — so a producer change to any of them lands here
- * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
+ * @param {{seed?: string, audience?: string, tierNoun?: string|null,
+ *   dimensions?: Record<string, string>}} [options] `dimensions` is answered for `walls` at entry (F10)
  * @returns {typeof GENERAL_STATE_PROSE_SILENT}
  */
 export function generalStateProse(settlement, readings = {}, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const slots = { settlement: properFill(text(settlement?.name)) };
 
   // ⭐ ROUTED THROUGH THE COMPOSER (SEAM car 3g), at all eleven of this desk's call sites.
@@ -1762,7 +1766,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   /** @param {string|null} poolKey */
   const originLine = (poolKey) => (poolKey && deficit
     ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-6', {
-      ...options, slots, dimensions: { deficit },
+      ...options, slots, dimensions: { ...options.dimensions, deficit },
       spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-6', readings),
     }), [])
     : null);
@@ -1845,7 +1849,7 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
   /** @param {string|null} poolKey @param {Record<string, unknown>} [extra] */
   const identityLine = (poolKey, extra = {}) => (poolKey
     ? legibilityRung('', composeStateProse(CORPUS, 'DS-GEN-9', {
-      ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { anchor } } : {}),
+      ...options, slots: { ...identitySlots, ...extra }, ...(anchor ? { dimensions: { ...options.dimensions, anchor } } : {}),
       spineKey: poolKey, candidates: generalStateProseCandidates('DS-GEN-9', readings),
     }), [])
     : null);

@@ -79,6 +79,7 @@ import { composeStateProse } from './composeStateProse.js';
 import { economyStateProseCandidates } from './economyStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { COMPLEXITY_LABEL } from '../labelBands.js';
+import { wallsAnswered } from '../../defense/defenseFacts.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -879,6 +880,8 @@ export function leadingGoodNoun(exports_) {
  * @returns {Readonly<{prosperityHeader: object|null, prosperityRung: object|null, foodTile: object|null, granaryTile: object|null, foodSecurityRung: object|null, incomeMix: object|null, criminalLine: object|null, tradeProfile: object|null, shadowEconomy: object|null, tradeFlow: object|null, exportPosture: object|null, terrainIdentity: object|null, economicStrengths: object|null, strategicValue: object|null, exploitation: object|null, catalogStanding: object|null, impairedService: object|null}>}
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
+  // F10: the walls dimension answered once, from the defence reader (stateProseKernel law 5).
+  options = wallsAnswered(settlement, options);
   const eco = settlement?.economicState || {};
   const name = text(settlement?.name);
   const prosperity = typeof eco.prosperity === 'string' ? eco.prosperity : text(eco.prosperity?.tier);

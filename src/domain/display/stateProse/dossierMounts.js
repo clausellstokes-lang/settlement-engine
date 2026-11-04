@@ -261,7 +261,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance',
+    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
@@ -270,25 +270,25 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence',
+    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence',
+    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'economics.shadowEconomy', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-6', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence',
+    mount: 'economics.tradeFlow', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-3', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'power.legitimacyBanner', tab: 'power', desk: 'power', blockId: 'DS-POW-1', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence',
+    mount: 'power.stabilityHeader', tab: 'power', desk: 'power', blockId: 'DS-POW-2', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence',
+    mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence',
@@ -300,16 +300,16 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'power.rulingStructure', tab: 'power', desk: 'power', blockId: 'DS-POW-5', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'power.blocs', tab: 'power', desk: 'power', blockId: 'DS-POW-7', rung: 'sentence',
+    mount: 'power.blocs', tab: 'power', desk: 'power', blockId: 'DS-POW-7', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'overview.crisisBanners', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-1', rung: 'sentence',
+    mount: 'overview.crisisBanners', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence',
+    mount: 'overview.activeConditions', tab: 'overview', desk: 'stressors', blockId: 'DS-CND-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-2', rung: 'sentence',
+    mount: 'overview.stressorLifecycle', tab: 'overview', desk: 'stressors', blockId: 'DS-STR-2', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'defense.publicOrder', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-3', rung: 'sentence',
@@ -360,7 +360,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
   // NO speaking position until the sentences are re-homed, which is a registry act. Pinned
   // in the DOM by tests/ui/generalDeskTabFlow.test.js.
   Object.freeze({
-    mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance',
+    mount: 'overview.systemsHealth', tab: 'overview', desk: 'general', blockId: 'DS-GEN-3', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'overview.warnings', tab: 'overview', desk: 'general', blockId: 'DS-GEN-7', rung: 'glance',
@@ -418,22 +418,23 @@ export const DOSSIER_MOUNTS = Object.freeze([
   //     record appears there and must not speak there. No CROSS-tab glance is honest —
   //     a glance draws a band the surface already carries, and neither tab carries the
   //     other's band.
-  // ⭐ NO ROW BELOW DECLARES `dimensions`, and that is MEASURED rather than forgotten: the
-  // only `marks` value anywhere in the 138 warFaith pools is `dm-only` (the audience mark),
-  // so `poolDimensions` is empty for every one of them and the honesty arm is satisfied by
-  // omission. This is the first leaf for which that was checked before positions were
-  // chosen rather than after.
+  // ⭐ THE ONLY DIMENSION BELOW IS `walls` (F10 WALLS-WORD, 2026-11-04), and that is MEASURED
+  // rather than forgotten: until F10 the only `marks` value in the warFaith pools was `dm-only`
+  // (the audience mark). F10 marked the variants that print the place's walls and gave each a
+  // wall-free twin, so DS-WAR-1, DS-WAR-2 and DS-FTH-1 partition by `walls`, which the desk
+  // answers at its entry (`defenseFacts.js :: wallsAnswered`); every other row here still
+  // declares nothing because its block still partitions by nothing.
   Object.freeze({
-    mount: 'war.standing', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-1', rung: 'sentence',
+    mount: 'war.standing', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'war.treaties', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-2', rung: 'sentence',
+    mount: 'war.treaties', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-2', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'war.dormantNote', tab: 'war', desk: 'warFaith', blockId: 'DS-WAR-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence',
+    mount: 'faith.patronSeat', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-1', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'faith.teaser', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-2', rung: 'sentence',
@@ -445,7 +446,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence',
+    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
@@ -460,7 +461,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'services.catalogStanding', tab: 'services', desk: 'economy', blockId: 'DS-SUP-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence',
+    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence', dimensions: ['walls'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H4; rubric R2/R4): "What the years have
   // made of it" was two-template boilerplate, and its marker event disagreed with the
@@ -485,7 +486,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
   // restated the hook cards' categories as three aphorisms on 991 of 1000 towns. The cards,
   // grouped by source page, are the position's rows; DS-HK-1 has no speaking position.
   Object.freeze({
-    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'glance',
+    mount: 'plot_hooks.framing', tab: 'plot_hooks', desk: 'general', blockId: 'DS-HK-1', rung: 'glance', dimensions: ['walls'],
   }),
   Object.freeze({
     mount: 'overview.notableConnection', tab: 'overview', desk: 'general', blockId: 'DS-REL-2', rung: 'glance',
