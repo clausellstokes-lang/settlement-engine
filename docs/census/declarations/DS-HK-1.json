@@ -1,0 +1,602 @@
+{
+  "poolId": "DS-HK-1",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "hookCategoryPoolKey / escalationClockPoolKey → composeStateProse (cap HOOK_FRAMING.cap = 3) → readStateProse → eligibleVariants → drawVariant; mounts plot_hooks.framing + printProse",
+  "pools": [
+    {
+      "pool": "category npc: the people are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category npc"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: it renders under a crisis and line 4 says very little here is a crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s open questions sit with particular people rather than with offices, which is what makes them approachable.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "A stranger with business in {settlement} will be pointed at a person, not at an institution.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s people are individually consequential and collectively agreed; there is a great deal here to get involved with and very little of it is a crisis.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "category faction: the blocs are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category faction"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: bloc politics asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s live questions are questions between groups, and each group would rather have a third party settle it than concede.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nothing in {settlement} gets decided by one person, which means everything in {settlement} can be influenced.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} has more than one authority and no arbiter, and that gap is where anyone from outside would be useful.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The blocs in {settlement} are close enough in strength that a small weight put on either side would be felt.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "category tension: the standing quarrels are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category tension"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 2 sets its difficulties apart from a crisis and line 4 says nothing is about to break; both are false under an active crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} runs on arrangements that everyone here has agreed not to test, and the untested places are where the town is soft.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s difficulties are recorded, chronic and unresolved, which is a different opportunity from a crisis.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What is wrong in {settlement} is not hidden. It is simply nobody's job.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} carries its quarrels well and carries them all the time; nothing here is about to break, and nothing here is about to be fixed either.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "category economics: the books are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category economics"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: a supply gap is a pressure, not a calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What {settlement} needs and what {settlement} can get do not line up, and the gap is a standing invitation to anyone who can close it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The trouble in {settlement} is a supply question before it is anything else, and supply questions are answerable by outsiders.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is short of something specific, and being short of something specific is the most tractable kind of difficulty a town can have.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s margin is thin enough that a change in what arrives would change what the town does.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "category safety: the streets are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category safety"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: lines 4-5 call the town safer than its country, false under a threat (siege, occupation, monsters) or unrest crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} has more trouble than it has people to answer it, and the shortfall is where the work is.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What {settlement} reports and what {settlement} suffers differ by enough that the difference is itself the opening.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is a town where being competent and armed makes you immediately useful, and the town knows it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} is safer than its country, and what threatens it comes from outside the walls rather than inside them.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [
+            "crisis: threat",
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "safety label"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} is safer than its country, and what threatens it comes from the country around it rather than from within.",
+          "needs": [],
+          "excludes": [
+            "crisis: threat",
+            "crisis: unrest",
+            "walls"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "safety label"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "category history: the past is the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category history"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} has business with its own past that has not finished, and the unfinished parts are on the record rather than in dispute.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Things that happened at {settlement} still have consequences with nobody assigned to them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} would rather not revisit certain things, which is a reliable sign that revisiting them would produce something.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The reason {settlement} is the way it is lies further back than anyone here will volunteer.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "category relationship: the ties are the opening",
+      "keyGuarantees": [
+        "the settlement carries hooks of category relationship"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: ties and obligations assert no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What binds people in {settlement} also obliges them, and the obligations do not all point the same way.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s ties are dense enough that a favour asked of one person reaches three, and everyone here knows which three.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Getting anything done in {settlement} means going through somebody, and going through somebody has a price that is rarely money.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "Two of {settlement}'s ties are pulling against each other, and the people caught between them have not yet chosen.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "clock bread_riot",
+      "keyGuarantees": [
+        "a live bread_riot clock: the food supply chain is strained or worse"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 4 says the strain is only an expensive season thanks to the granary, false under a hunger crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s food comes through a chain that is under strain, and a chain under strain has a shape to how it fails.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The price of bread in {settlement} is the number this town watches, and it is going the wrong way.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "food sources (grain)"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} can absorb what is happening to its food for a while, and the while is what everyone here is quietly estimating.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s food chain is strained and its granary is not; what would be a crisis in a town without stores is, here, an expensive season.",
+          "needs": [
+            "institution: granary"
+          ],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "clock smuggling_rise",
+      "keyGuarantees": [
+        "a live smuggling_rise clock: lawful trade is strained"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: no line asserts a calm a crisis contradicts; the watch and gate are presence presumptions.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s lawful trade is under strain, and where lawful trade thins, something else has room.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What is not coming into {settlement} through the gate is a gap, and gaps in a town like this get filled.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement}'s revenue depends on trade passing where it can be counted, and less of it is passing there.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s trade is strained and its watch is not distracted; the gap is real and nobody has yet been able to work it.",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crime structure"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "clock legitimacy_crisis",
+      "keyGuarantees": [
+        "a live legitimacy_crisis clock: the governing power's legitimacy is contested"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: lines 3-4 say no rival claim or opposition exists, false under a succession or unrest crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{governing} governs {settlement} and does not command it, and the difference is audible in the market.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Instructions from {settlement}'s hall are being complied with slowly, which is how a town says no without saying it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{governing}'s standing in {settlement} rests on nobody yet having a better claim.",
+          "needs": [],
+          "excludes": [
+            "crisis: succession"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{governing} is contested in {settlement} and unopposed; the town's complaint is real and has nowhere to go.",
+          "needs": [],
+          "excludes": [
+            "crisis: succession",
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "clock faction_split",
+      "keyGuarantees": [
+        "a live faction_split clock: two factions hold overlapping ground"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 4 says the division holds, false under a succession or unrest crisis.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} and {faction2} hold overlapping ground in {settlement} and want incompatible things with it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Two powers in {settlement} need the same rooms, and the rooms are not getting larger.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The people of {settlement} who deal with both {faction} and {faction2} are the ones who will have to choose first.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{faction} and {faction2} overlap in {settlement} and have divided the overlap; the arrangement holds, and it holds on one person's word.",
+          "needs": [],
+          "excludes": [
+            "crisis: succession",
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

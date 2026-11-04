@@ -1,0 +1,242 @@
+{
+  "poolId": "LINE_ROLE_CLAUSE",
+  "source": "src/domain/crisis/crisisHooks.js :74 LINE_ROLE_CLAUSE",
+  "drawKind": "T",
+  "drawSite": "src/domain/crisis/crisisHooks.js:184-187 lineRoleHolderOf → LINE_ROLE_CLAUSE[holder.role](holderWords) → castSentence → speakTrue",
+  "pools": [
+    {
+      "pool": "brunt",
+      "keyGuarantees": [
+        "the crisis's required line role = brunt (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine",
+        "plague_onset",
+        "mass_migration",
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.brunt",
+          "text": "the brunt falls on ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine",
+            "plague_onset",
+            "mass_migration",
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "lever",
+      "keyGuarantees": [
+        "the crisis's required line role = lever (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "famine",
+        "plague_onset",
+        "mass_migration",
+        "monster_pressure"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.lever",
+          "text": "the lever is held by ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "famine",
+            "plague_onset",
+            "mass_migration",
+            "monster_pressure"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "instigator",
+      "keyGuarantees": [
+        "the crisis's required line role = instigator (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured",
+        "succession_void",
+        "insurgency",
+        "slave_revolt",
+        "religious_conversion",
+        "recently_betrayed",
+        "infiltrated"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.instigator",
+          "text": "the hand stirring it is ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured",
+            "succession_void",
+            "insurgency",
+            "slave_revolt",
+            "religious_conversion",
+            "recently_betrayed",
+            "infiltrated"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "target",
+      "keyGuarantees": [
+        "the crisis's required line role = target (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "politically_fractured",
+        "succession_void",
+        "insurgency",
+        "slave_revolt",
+        "religious_conversion",
+        "recently_betrayed"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.target",
+          "text": "it is aimed at ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "politically_fractured",
+            "succession_void",
+            "insurgency",
+            "slave_revolt",
+            "religious_conversion",
+            "recently_betrayed"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "defender",
+      "keyGuarantees": [
+        "the crisis's required line role = defender (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege",
+        "wartime"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.defender",
+          "text": "the defence is led by ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege",
+            "wartime"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "treater",
+      "keyGuarantees": [
+        "the crisis's required line role = treater (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege",
+        "indebted"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.treater",
+          "text": "the one who would come to terms is ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege",
+            "indebted"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "face",
+      "keyGuarantees": [
+        "the crisis's required line role = face (crisisCast.js requiredRolesOf: nature table + REQUIRED_EXTERNAL)",
+        "${holder} is a cast row (NPC with house, house, or institution)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed through the role table: opts in with the kinds whose required roles include it; the clause presumes nothing beyond the holder.",
+      "lines": [
+        {
+          "lineId": "LINE_ROLE_CLAUSE.face",
+          "text": "the occupier's local face is ${holder}",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

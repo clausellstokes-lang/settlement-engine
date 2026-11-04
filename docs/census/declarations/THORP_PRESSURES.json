@@ -1,0 +1,92 @@
+{
+  "poolId": "THORP_PRESSURES",
+  "source": "src/generators/narrativeGenerator.js :819 generatePressureSentence thorp/hamlet fallback (inline)",
+  "drawKind": "R",
+  "drawSite": "src/generators/narrativeGenerator.js:819-828 thorpPressures[floor(_rng()*7)]",
+  "pools": [
+    {
+      "pool": "thorp|hamlet fallback",
+      "keyGuarantees": [
+        "tier ∈ thorp, hamlet (populationBand small)",
+        "reached only when no PRESSURE_SENTENCES key resolved (no stress type, or a custom one), no succession/relationship narrative and no recentConflict"
+      ],
+      "poolNeeds": [
+        "population: < middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not opted in: it renders only when no stress type resolved, and no line asserts calm (every line is a small pressure).",
+      "lines": [
+        {
+          "lineId": "thorpPressures[0]",
+          "text": "A dispute over grazing rights and water access has been running for two seasons without resolution.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "food sources"
+          ]
+        },
+        {
+          "lineId": "thorpPressures[1]",
+          "text": "The harvest was thin this year. Everyone knows it. Nobody is saying it directly.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpPressures[2]",
+          "text": "A family moved away last spring. The reason is not discussed, but it affected the dynamics here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpPressures[3]",
+          "text": "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.",
+          "needs": [
+            "institution: mill"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "thorpPressures[4]",
+          "text": "Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpPressures[5]",
+          "text": "The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpPressures[6]",
+          "text": "A stranger passed through a month ago and asked questions nobody found comfortable.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}
