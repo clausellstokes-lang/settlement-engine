@@ -28,6 +28,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { tierNounFindings } from '../../src/domain/coherence/tierNounFindings.js';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../src/data/inlandDescriptions.js';
 
 const PER_TIER = 8;
 /** The routed sentences, in either noun: the arms read them before and after the cure. */
@@ -112,7 +113,11 @@ describe('the place\'s own noun in drawn institution text', () => {
         const canonical = institutionalCatalog.town?.[inst.category]?.[inst.name]?.desc;
         if (typeof canonical !== 'string') continue;
         read += 1;
-        const pool = [canonical, ...(INSTITUTION_DESC_VARIANTS[`town|${inst.category}|${inst.name}`] || [])];
+        // 2026-11-04 (soak 1000 row 7, A-11, under the owner's delegation): an inland place whose
+        // whole pool speaks of water takes the row's authored inland text (src/data/inlandDescriptions.js).
+        // Composed with lane TERRAIN-POOLS on the window branch (chair's ruling P3, as for dossierContent).
+        const inland = INLAND_DESCRIPTIONS[`town|${inst.category}|${inst.name}`];
+        const pool = [canonical, ...(INSTITUTION_DESC_VARIANTS[`town|${inst.category}|${inst.name}`] || []), ...(inland ? [inland] : [])];
         if (!pool.includes(inst.desc)) moved.push(`${s.name} / ${inst.name}: ${inst.desc}`);
       }
     }
