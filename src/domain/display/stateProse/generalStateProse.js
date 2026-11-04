@@ -83,6 +83,7 @@ import { composeStateProse } from './composeStateProse.js';
 import { generalStateProseCandidates } from './generalStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
+import { defenceOf } from '../../facts/defence.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
 
 /** @typedef {import('./legibilityRung.js').LegibilityRung} LegibilityRung */
@@ -2011,7 +2012,11 @@ export function generalStateProse(settlement, readings = {}, options = {}) {
       warnings,
       ground: rung('DS-GEN-12', groundPoolKey(readings.terrainType), ''),
       market: rung('DS-GEN-13', marketPoolKey(readings), ''),
-      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst), ''),
+      // CENSUS-1b unit A (b), the chair's ruling: PROVISIONED's hospital is the home's atom
+      // (`facts/defence.js`, the live roster, a hospital only), never the birth flag bag's
+      // hospital-or-monastery-or-healer-or-friary. It moves pages, counted by cause.
+      institutions: rung('DS-GEN-17', institutionsPoolKey(readings.inst && typeof readings.inst === 'object'
+        ? { ...readings.inst, hasHospital: defenceOf(/** @type {{ institutions?: unknown }} */ (settlement)).hospital } : readings.inst), ''),
       // DS-REL-2's two lenses at ONE position: the tie the town names first, then how much
       // of its roll this town's own conditions made. The connection line leads because the
       // page prints its datum directly beneath.

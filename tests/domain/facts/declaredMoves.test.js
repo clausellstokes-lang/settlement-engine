@@ -11,6 +11,7 @@
  */
 import { describe, expect, it } from 'vitest';
 import { generateSafetyProfile } from '../../../src/generators/safetyProfile.js';
+import { generalStateProse } from '../../../src/domain/display/stateProse/generalStateProse.js';
 
 const CALM = { monsterThreat: 'civilized' };
 
@@ -22,5 +23,20 @@ describe('unit A (a): the safety profile reads the militia atom from the home', 
     expect(levy.safetyDesc).toMatch(/militia/i);
     const live = generateSafetyProfile(CALM, 'village', [{ name: 'Citizen militia', category: 'Defense' }]);
     expect(live.safetyDesc).toMatch(/militia/i);
+  });
+});
+
+describe("unit A (b): DS-GEN-17's PROVISIONED reads the hospital atom from the home", () => {
+  const keyFor = (institutions, inst) => generalStateProse(
+    { name: 'Ashford', tier: 'village', institutions }, { inst, institutions, tier: 'village' },
+  ).overview.institutions?.provenance?.poolKey;
+
+  it('RED-FIRST: a monastery is not a hospital; a ruined hospital provisions nothing', () => {
+    // The birth flag bag (`economicState.compound.inst`) folds hospital | monastery | healer | friary.
+    expect(keyFor([{ name: 'Monastery or friary', category: 'Religious' }], { hasHospital: true })).toBe('BARE');
+    expect(keyFor([{ name: 'Hospital', category: 'Religious', status: 'ruined' }], { hasHospital: true })).toBe('BARE');
+    expect(keyFor([{ name: 'Hospital', category: 'Religious' }], { hasHospital: true })).toBe('PROVISIONED');
+    // the granary arm is untouched
+    expect(keyFor([{ name: 'Village granary', category: 'Economy' }], { hasGranary: true })).toBe('PROVISIONED');
   });
 });
