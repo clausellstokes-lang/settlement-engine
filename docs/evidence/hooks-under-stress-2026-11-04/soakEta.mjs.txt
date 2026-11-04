@@ -1,0 +1,64 @@
+// The SOAK-1000 battery's own chain C4c on the soak corpus (seeds soak1k-<i>, cellFor(i) re-spelled
+// from scripts/audit/soak-review/corpus.mjs at 25eab3d5): eta(chain.stressPrimary, collectPlotHooks count).
+// Usage: node soakEta.mjs <root> <count> <out.json>
+import { writeFileSync } from 'node:fs';
+const [root, countArg, out] = process.argv.slice(2);
+const imp = (p) => import(`${root}/${p}`);
+const { configForIndex } = await imp('scripts/audit/generation-certification-soak.mjs');
+const { STRESS_TYPE_MAP } = await imp('src/data/stressTypes.js');
+const { TIER_ORDER } = await imp('src/data/constants.js');
+const { DEFAULT_CONFIG } = await imp('src/store/configSlice.js');
+const { birthConfig, loadGenerationLawPayloads } = await imp('src/domain/density/densityCreateBoundary.js');
+const { generateSettlementPipeline } = await imp('src/generators/generateSettlementPipeline.js');
+const { collectPlotHooks } = await imp('src/domain/dossier/plotHooks.js');
+const { hookTruthFindings, renderedHookTruthFindings } = await imp('src/domain/coherence/hookTruthFindings.js');
+const STRESS_KEYS = Object.keys(STRESS_TYPE_MAP);
+const STRESS_CELLS = ['none', 'random', ...STRESS_KEYS, 'pair', 'pair', 'pair'];
+const tierAtLeast = (tier, floor) => TIER_ORDER.indexOf(tier) >= TIER_ORDER.indexOf(floor);
+const allows = (type, tier) => !STRESS_TYPE_MAP[type]?.requiresTier || tierAtLeast(tier, STRESS_TYPE_MAP[type].requiresTier);
+const PAIRS = []; for (let a = 0; a < STRESS_KEYS.length; a += 1) for (let b = a + 1; b < STRESS_KEYS.length; b += 1) PAIRS.push([STRESS_KEYS[a], STRESS_KEYS[b]]);
+function stressForIndex(i, tier) {
+  const block = Math.floor(i / TIER_ORDER.length); const cellIndex = block % STRESS_CELLS.length; const cell = STRESS_CELLS[cellIndex];
+  if (cell === 'none') return { cell, keys: { selectedStressesRandom: false, selectedStresses: [], stressType: null, stressTypes: [] } };
+  if (cell === 'random') return { cell, keys: {} };
+  if (cell === 'pair') {
+    const pairCell = cellIndex - (STRESS_CELLS.length - 3);
+    const ordinal = ((Math.floor(block / STRESS_CELLS.length) * 3 + pairCell) * TIER_ORDER.length + TIER_ORDER.indexOf(tier)) % PAIRS.length;
+    for (let t = 0; t < PAIRS.length; t += 1) { const pair = PAIRS[(ordinal + t) % PAIRS.length]; if (pair.every((x) => allows(x, tier))) return { cell: 'pair', keys: { stressTypes: [...pair], stressType: null } }; }
+  }
+  return { cell, keys: { stressType: cell, stressTypes: [cell] } };
+}
+await loadGenerationLawPayloads();
+function eta(cat, num) {
+  const groups = new Map(); cat.forEach((c, i) => { if (!groups.has(c)) groups.set(c, []); groups.get(c).push(num[i]); });
+  const m = num.reduce((a, b) => a + b, 0) / num.length; const sst = num.reduce((a, x) => a + (x - m) ** 2, 0);
+  let ssb = 0; for (const g of groups.values()) { const gm = g.reduce((a, b) => a + b, 0) / g.length; ssb += g.length * (gm - m) ** 2; }
+  return sst ? Math.sqrt(ssb / sst) : 0;
+}
+const rows = [];
+for (let i = 0; i < Number(countArg); i += 1) {
+  const matrix = configForIndex(i); const stress = stressForIndex(i, matrix.settType);
+  const s = generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, ...matrix, ...stress.keys }), null, { seed: `soak1k-${i}` });
+  const entries = (Array.isArray(s.stress) ? s.stress : [s.stress]).filter(Boolean);
+  const added = collectPlotHooks(s).filter((h) => h.crisis);
+  const facts = (await imp('src/domain/coherence/hookTruth.js'));
+  const f = facts.settlementHookFacts(s);
+  rows.push({ i, tier: s.tier, primary: entries[0]?.type ?? 'none', crises: entries.length, hooks: collectPlotHooks(s).length,
+    added: added.length, addedRecordFindings: added.flatMap((h) => facts.hookTruthViolations(typeof h === 'string' ? h : h.text, f)).length,
+    record: hookTruthFindings(s).length, page: renderedHookTruthFindings(s).length });
+}
+const tiers = [...new Set(rows.map((r) => r.tier))];
+const mean = (v) => (v.length ? +(v.reduce((a, b) => a + b, 0) / v.length).toFixed(2) : null);
+const tierMean = Object.fromEntries(tiers.map((t) => [t, mean(rows.filter((r) => r.tier === t).map((r) => r.hooks))]));
+const summary = {
+  n: rows.length, crisisTowns: rows.filter((r) => r.crises).length, crises: rows.reduce((a, r) => a + r.crises, 0),
+  etaC4c: +eta(rows.map((r) => r.primary), rows.map((r) => r.hooks)).toFixed(3),
+  etaAnyCrisis: +eta(rows.map((r) => String(r.crises > 0)), rows.map((r) => r.hooks)).toFixed(3),
+  etaWithinTier: +eta(rows.map((r) => r.primary), rows.map((r) => r.hooks - tierMean[r.tier])).toFixed(3),
+  hooksPerCrisisTown: mean(rows.filter((r) => r.crises).map((r) => r.hooks)), hooksPerCalmTown: mean(rows.filter((r) => !r.crises).map((r) => r.hooks)),
+  addedHooks: rows.reduce((a, r) => a + r.added, 0), addedRecordFindings: rows.reduce((a, r) => a + r.addedRecordFindings, 0),
+  recordFindings: rows.reduce((a, r) => a + r.record, 0), pageFindings: rows.reduce((a, r) => a + r.page, 0),
+  byTier: TIER_ORDER.filter((t) => tiers.includes(t)).map((t) => ({ tier: t, calm: mean(rows.filter((r) => r.tier === t && !r.crises).map((r) => r.hooks)), crisis: mean(rows.filter((r) => r.tier === t && r.crises).map((r) => r.hooks)) })),
+};
+writeFileSync(out, JSON.stringify({ summary, rows }));
+console.log(JSON.stringify(summary));
