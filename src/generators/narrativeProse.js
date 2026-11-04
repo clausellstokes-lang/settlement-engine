@@ -19,6 +19,40 @@ export const sentenceCase = value => {
 };
 
 /**
+ * Does a slot at `offset` in `text` open a sentence (the string's start, or just after a
+ * sentence-terminal `.`, `!` or `?` and whitespace)? The grammar reading is the generation
+ * receipt's own (`generationCoherence.js :: buildGenerationCoherenceReceipt`, "Sentence begins
+ * with a lower-case word.").
+ *
+ * @param {string} text
+ * @param {number} offset
+ * @returns {boolean}
+ */
+export const opensSentence = (text, offset) => /(?:^|[.!?]\s+)$/.test(String(text).slice(0, offset));
+
+/**
+ * Fill `{key}` slots: a held value as given; a FALLBACK (lower-case filler such as 'someone',
+ * used when there is no name to put in the slot) sentence-cased where its slot opens a sentence
+ * (F11, rung 2B: the one-NPC thorp's "…attend. someone has not yet understood…"). An unknown
+ * slot stays as written. Draw-free.
+ *
+ * @param {string} template
+ * @param {Record<string, unknown>} values
+ * @param {Record<string, string>} [fallbacks]
+ * @returns {string}
+ */
+export const fillSentenceSlots = (template, values, fallbacks = {}) => String(template).replace(
+  /\{(\w+)\}/g,
+  (whole, key, offset, text) => {
+    const held = values[key];
+    if (held) return String(held);
+    const fallback = fallbacks[key];
+    if (!fallback) return whole;
+    return opensSentence(text, offset) ? sentenceCase(fallback) : fallback;
+  },
+);
+
+/**
  * Collapse article collisions introduced where two authored fragments meet.
  * The retained article preserves the original sentence-position casing.
  *
