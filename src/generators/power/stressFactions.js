@@ -5,6 +5,44 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+
+/** A roster name compared loosely: case and a leading article set aside. */
+const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
+
+/**
+ * A STRESS FACTION'S REAL NAME (lane RUNG1-TRUTH unit D, 2026-11-04;
+ * docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 12; the chair's ruling D): the FIRST name of the
+ * roster's own role pool (`FACTION_DESCRIPTORS[category]`, then the dedup pool
+ * `FACTION_DESCRIPTORS_EXTRA[category]`) that no faction already on the roster carries. It
+ * replaces the placeholders "Claimant Bloc A/B" and "Rival Faction B". No draw is taken; the
+ * pools are keyed by role only (no culture-keyed faction pool exists in the estate).
+ *
+ * ⚠ AN EXHAUSTED POOL (every one of the role's ten names already on the roster, which no
+ * generated roster reaches) answers null and the caller injects nothing rather than a
+ * placeholder.
+ * @param {Array<{ faction: string }>} factions the roster as it stands
+ * @param {string} category the role's pool key
+ * @returns {string | null}
+ */
+const firstUnusedPoolName = (factions, category) => {
+  const used = new Set(factions.map((f) => nameKey(f.faction)));
+  const pool = [...(FACTION_DESCRIPTORS[category] || []), ...(FACTION_DESCRIPTORS_EXTRA[category] || [])];
+  return pool.find((name) => !used.has(nameKey(name))) ?? null;
+};
+
+/**
+ * Push a pool-named stress faction with its role's category stamped, so the category the
+ * placeholder's name inferred (claimants noble, the rival other) does not move with the name.
+ * @param {Array<Record<string, unknown> & { faction: string }>} factions
+ * @param {string} category
+ * @param {number} power
+ * @param {string} desc
+ */
+const pushPoolNamed = (factions, category, power, desc) => {
+  const faction = firstUnusedPoolName(factions, category);
+  if (faction !== null) factions.push({ faction, power, desc, category });
+};
 
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
@@ -56,14 +94,13 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
           (N.faction === 'Noble Families' || N.faction === 'Noble Houses' || N.faction === 'Landed Gentry') &&
             (N.power = Math.round(N.power * 1.4)));
       }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Loyalist Noble Bloc' : 'Rival Faction B',
-        power: 20,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.'
-            : 'Claims legitimate authority through different means; controls a distinct district or institution.',
-      }),
+      P && P.includes('Royal Authority')
+        ? factions.push({
+          faction: 'Loyalist Noble Bloc',
+          power: 20,
+          desc: 'Noble houses backing the current crown line; their support is conditional on continued royal favour and land grants.',
+        })
+        : pushPoolNamed(factions, 'other', 20, 'Claims legitimate authority through different means; controls a distinct district or institution.'),
       factions.push({
         faction: P && P.includes('Royal Authority') ? 'Reform Noble Bloc' : 'Third Bloc (Neutrals)',
         power: 15,
@@ -118,22 +155,19 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               (N.desc || '') +
               ' The succession crisis has transformed latent noble power into active leverage. Every claimant needs their backing.')));
       }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Senior Line)' : 'Claimant Bloc A',
-        power: P && P.includes('Royal Authority') ? 22 : 18,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.'
-            : 'Hereditary or institutional claim; has legal arguments; lacks popular support.',
-      }),
-      factions.push({
-        faction: P && P.includes('Royal Authority') ? 'Noble Claimant (Reform Faction)' : 'Claimant Bloc B',
-        power: P && P.includes('Royal Authority') ? 17 : 15,
-        desc:
-          P && P.includes('Royal Authority')
-            ? 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.'
-            : 'Popular support; questionable legitimacy; moving fast.',
-      })),
+      (P && P.includes('Royal Authority')
+        ? (factions.push({
+          faction: 'Noble Claimant (Senior Line)',
+          power: 22,
+          desc: 'A noble house with a plausible hereditary claim; controls several key military levies. Legally strongest. Not universally liked.',
+        }),
+        factions.push({
+          faction: 'Noble Claimant (Reform Faction)',
+          power: 17,
+          desc: 'A rival noble house backed by popular sentiment and merchant capital; weaker bloodline claim but stronger coalition. Moving fast.',
+        }))
+        : (pushPoolNamed(factions, 'noble', 18, 'Hereditary or institutional claim; has legal arguments; lacks popular support.'),
+        pushPoolNamed(factions, 'noble', 15, 'Popular support; questionable legitimacy; moving fast.')))),
     ke('famine') &&
       (factions.push({
         faction: 'Grain Holders',
