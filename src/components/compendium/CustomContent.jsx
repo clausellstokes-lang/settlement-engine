@@ -17,6 +17,8 @@ import DeleteConfirmation from '../DeleteConfirmation';
 import { Tag } from './primitives.jsx';
 import { DependencySummary } from './Dependencies.jsx';
 import Button from '../primitives/Button.jsx';
+import { selectExportStaff } from '../primitives/exportLaunchGate.js';
+import { CONTENT_PREVIEW_ABSENT, engineServiceBuild } from '../../lib/engineAbsentPaths.js';
 import IconButton from '../primitives/IconButton.jsx';
 import { projectContentEffects } from '../../domain/content/contentEffectProjection.js';
 import {
@@ -96,6 +98,11 @@ export function CustomContentManager({ search, initialCat }) {
     [previewBaseContent],
   );
   const applyCustomContentCommand = useStore(s => s.applyCustomContentCommand);
+  // A build that carries no engine cannot forge the sample (ENGINE-5 unit 2, path c): the editor
+  // shows a non-staff viewer the launch teaser on the forge control; staff are told the path's
+  // plain sentence.
+  const contentStaff = useStore(selectExportStaff);
+  const sampleEngineAbsent = engineServiceBuild();
   const canUseCustomContent = useStore(s => s.canUseCustomContent());
   const authTier = useStore(s => s.auth.tier);
   const customContentLoading = useStore(s => s.customContentLoading);
@@ -246,6 +253,12 @@ export function CustomContentManager({ search, initialCat }) {
   const forgeManualSample = async () => {
     if (!manualAdmission.ok || manualSampleBusy) return;
     const reviewKey = manualReviewKey;
+    if (sampleEngineAbsent) {
+      setManualSample(null);
+      setManualSampleError(CONTENT_PREVIEW_ABSENT);
+      setManualSampleErrorReviewKey(reviewKey);
+      return;
+    }
     const controller = new AbortController();
     manualPreviewAbort.current?.abort();
     manualPreviewAbort.current = controller;
@@ -528,6 +541,7 @@ export function CustomContentManager({ search, initialCat }) {
           draft={draft}
           editingId={editingId}
           forgeManualSample={forgeManualSample}
+          sampleGated={sampleEngineAbsent && !contentStaff}
           handleSave={handleSave}
           manualInterpretation={manualInterpretation}
           manualSample={manualSampleCurrent ? manualSample : null}
