@@ -34,9 +34,9 @@ export const OWNER_BANDS = Object.freeze({
 
 /** Root-cause kind of each check (0 = none of the eight; -2 = informational tally, outside the stop rule). */
 export const KIND_OF = Object.freeze({
-  'coh:food-words': 1, 'coh:hook-truth-page': 1, 'X-49:stores-not-once': 1, 'X-52:endurance-not-once': 1, 'X-52:endurance-disagrees': 1, 'A-01:starving-fed': 1,
+  'coh:food-words': 1, 'coh:grade-vs-food': 1, 'coh:hook-truth-page': 1, 'X-49:stores-not-once': 1, 'X-52:endurance-not-once': 1, 'X-52:endurance-disagrees': 1, 'A-01:starving-fed': 1,
   'coh:faith-denial': 2,
-  'coh:magic-words': 3, 'A-04:dragon-magic-off': 3, 'A-04:alchemist-magic-off': 3,
+  'coh:magic-words': 3, 'coh:magic-absent-prose': 3, 'A-04:dragon-magic-off': 3, 'A-04:alchemist-magic-off': 3,
   'coh:defense-words': 4, 'A-05:hospital-absent': 4, 'A-05:arena-absent': 4,
   'coh:seat-holder': 5, 'A-08:hidden-ruler-note': 5,
   'X-50:boilerplate-twice': 6, 'A-09:behaviour-line-share': 6,
@@ -44,6 +44,9 @@ export const KIND_OF = Object.freeze({
   'A-05:lacks-access-lines': -2,
   // I2: the advisory battery judgment's verdict — "records the battery would not vouch for" — informational.
   'info:battery-would-not-vouch': -2,
+  // F9 (2026-11-04): crime denied beside a listed operation, A-06 in reverse; A-06's own kind
+  // (unlisted, so 0, the stop rule's wording kind) — stated, not defaulted.
+  'coh:crime-denied-and-listed': 0,
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
 });
 
