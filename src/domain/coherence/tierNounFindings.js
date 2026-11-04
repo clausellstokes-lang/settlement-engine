@@ -31,7 +31,7 @@ export function tierNounFindings(settlement, renderedText) {
   const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
   if (!TIER_ORDER.includes(tier) || tier === 'town') return [];
   if (typeof renderedText !== 'string' || renderedText === '') return [];
-  const kept = tierNounKeptSpans(renderedText);
+  const kept = tierNounKeptSpans(renderedText, tier);
   /** @type {TierNounFinding[]} */
   const findings = [];
   for (const m of renderedText.matchAll(SINGULAR_TOWN)) {

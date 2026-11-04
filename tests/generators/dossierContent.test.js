@@ -103,7 +103,10 @@ describe('institution desc variety at generation (draw-free fnv select)', () => 
         const key = `${settType}|${inst.category}|${inst.name}`;
         const variants = INSTITUTION_DESC_VARIANTS[key];
         if (!variants) continue; // no authored variants → catalog desc unchanged (not asserted here)
-        const pool = [...canonsFor(inst.category, inst.name), ...variants];
+        // Lane TIER-NOUN-POOLS (2026-11-04): the drawn desc speaks the place's own tier noun, so the pool is
+        // read as this settlement would speak it (identity for a town), as the history arm below reads its own.
+        const noun = tierNounFor(s.tier);
+        const pool = [...canonsFor(inst.category, inst.name), ...variants].map((line) => speakTierNoun(line, noun));
         expect(pool, `${key} desc from its pool`).toContain(inst.desc);
       }
     });
