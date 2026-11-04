@@ -126,6 +126,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (TERRAIN-POOLS, first step, docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of ac09ea83b because the water-speaking pools and lines are licensed on the place\'s water fact (the A-11 licences; the Defense desk\'s harbour line reads the water fact); 282 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (SELF-VOUCH, docs/shift-records/2026-11-04-rung1-08-self-vouch.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 0be13b5cb because the eighth formal judgment, record_coherence_battery, over the stored record, and DS-GEN-11\'s zero pool vouches only when it passed; 978 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
