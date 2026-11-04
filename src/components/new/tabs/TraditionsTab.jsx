@@ -44,9 +44,30 @@ function humanizeMotif(id) {
     .join(' ');
 }
 
+/**
+ * For each tradition whose window phrase an earlier one on the tab already printed: that
+ * earlier tradition's name, keyed by the later one's id. Render order is the list's order.
+ * @param {ReadonlyArray<any> | null | undefined} traditions @returns {Map<string, string>}
+ */
+function sameWindowPlan(traditions) {
+  /** @type {Map<string, string>} */
+  const plan = new Map();
+  /** @type {Map<string, string>} */
+  const firstBy = new Map();
+  for (const rec of Array.isArray(traditions) ? traditions : []) {
+    const phrase = describeTraditionWindow(rec?.window);
+    const first = firstBy.get(phrase);
+    if (first === undefined) firstBy.set(phrase, String(rec?.name ?? ''));
+    else if (first) plan.set(rec.id, first);
+  }
+  return plan;
+}
+
 /** A tradition row: motif glyph, name, motif element, window phrase, and (engine mode
- *  only) owner, last outcome and provenance. Exported for the dossier search (W2-SEARCH U2). */
-export function TraditionRow({ rec, preview }) {
+ *  only) owner, last outcome and provenance. Exported for the dossier search (W2-SEARCH U2).
+ *  `sameWindowAs` (the tab's plan, X-50 F2 REPEAT-ONCE): the name of an earlier tradition on
+ *  the tab kept in the same weeks; the calendar line then names it instead of repeating. */
+export function TraditionRow({ rec, preview, sameWindowAs = null }) {
   // THE PHONE PROSE FLOOR — the window phrase and the provenance line. The name,
   // the motif chip and the owner/outcome pair keep their own steps.
   const mobile = useIsMobile();
@@ -96,7 +117,9 @@ export function TraditionRow({ rec, preview }) {
         </span>
       </div>
       <div style={{ marginTop: 5, color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
-        Kept in {describeTraditionWindow(rec.window)}.
+        {sameWindowAs
+          ? <>Kept in the same {(Number(rec.window?.weeks) || 1) >= 2 ? 'weeks' : 'week'} as {sameWindowAs}.</>
+          : <>Kept in {describeTraditionWindow(rec.window)}.</>}
       </div>
       {!preview && (
         <div style={{ marginTop: 6, display: 'flex', gap: 14, flexWrap: 'wrap', color: MUTED, fontFamily: sans, fontSize: chromeFontSize(FS.xxs, mobile), fontWeight: 750 }}>
@@ -136,6 +159,9 @@ export default function TraditionsTab({ settlement }) {
   );
 
   const name = settlement?.name || settlement?.identity?.name || 'this settlement';
+  // ONE CALENDAR LINE PER WINDOW (X-50, F2 REPEAT-ONCE): two traditions kept in the same weeks
+  // are two facts and both stand; the window prints once, on the first, and a later card names it.
+  const windowPlan = sameWindowPlan(traditions);
 
   if (!traditions || traditions.length === 0) {
     return (
@@ -156,7 +182,7 @@ export default function TraditionsTab({ settlement }) {
       </p>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {traditions.map((rec) => (
-          <TraditionRow key={rec.id} rec={rec} preview={preview} />
+          <TraditionRow key={rec.id} rec={rec} preview={preview} sameWindowAs={windowPlan.get(rec.id) ?? null} />
         ))}
       </div>
     </div>

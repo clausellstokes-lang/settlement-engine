@@ -70,7 +70,9 @@ export default function TonightSheet({ sheet, palette }) {
                 </div>
                 {p.line && (
                   <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>
-                    {p.why === 'secret' ? p.line : <><span style={{ fontWeight: 800 }}>{TONIGHT_COPY.wants}</span> {p.line}</>}
+                    {p.why === 'secret' ? p.line : p.sameAs
+                      ? <><span style={{ fontWeight: 800 }}>{TONIGHT_COPY.wantsSame}</span> {p.sameAs}.</>
+                      : <><span style={{ fontWeight: 800 }}>{TONIGHT_COPY.wants}</span> {p.line}</>}
                   </div>
                 )}
               </div>

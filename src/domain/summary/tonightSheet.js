@@ -50,6 +50,7 @@ export const TONIGHT_COPY = Object.freeze({
   secret: 'Secret',
   cleric: 'Senior cleric',
   wants: 'Wants to',
+  wantsSame: 'Wants the same as',
   open: 'Open Tonight',
   close: 'Close Tonight',
 });
@@ -71,6 +72,9 @@ const HOOK_COUNT = 3;
  * @property {'seat'|'secret'|'cleric'|'cast'} why
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
+ * @property {string=} sameAs       set when an earlier person on the sheet wants the same: that person's
+ *                                  name. The want prints once, on the first; this one reads
+ *                                  "Wants the same as {sameAs}." (X-50, F2 REPEAT-ONCE)
  * @property {string} sourcePath
  *
  * @typedef {Object} TonightFact
@@ -287,7 +291,24 @@ function peopleOf(source) {
 
   const cleric = npcs.find(({ npc }) => npc.category === 'religious' && !out.some((p) => p.name === clean(npc.name)));
   if (cleric) add(cleric, 'cleric', wantOf(cleric.npc));
-  return out;
+  return wantsOnce(out);
+}
+
+/**
+ * ONE WANT, ONE HOME (X-50, F2 REPEAT-ONCE): two people on the sheet can carry the same want
+ * (two NPCs given one structural goal, npcStructure.js). The first prints it; a later one names
+ * the first instead of repeating the sentence. A secret line is never folded.
+ * @param {TonightPerson[]} people @returns {TonightPerson[]}
+ */
+function wantsOnce(people) {
+  /** @type {Map<string, string>} */
+  const firstBy = new Map();
+  return people.map((p) => {
+    if (p.why === 'secret' || !p.line) return p;
+    const first = firstBy.get(p.line);
+    if (first === undefined) { firstBy.set(p.line, p.name); return p; }
+    return { ...p, sameAs: first };
+  });
 }
 
 /**
