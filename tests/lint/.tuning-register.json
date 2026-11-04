@@ -2659,6 +2659,11 @@
         "sites": 1,
         "introducedAt": "7d327ca733c55e0158b1bd4061cabfa14dad5366",
         "cause": "X-51 (ODQ §934.104): the one Tonight sheet names how many hooks it carries (HOOK_COUNT) instead of a bare 3; the register scores the act it exists to encourage, as the T13 Car P′ row did; the name earns its register row when the owner signs the estate"
+      },
+      "src/generators/recordBatteryFindings.js": {
+        "sites": 1,
+        "introducedAt": "b7a5f778e355c38d439cace06939967f22a8cf8d",
+        "cause": "SELF-VOUCH (the eighth formal judgment, record_coherence_battery): the receipt clips a battery finding's quoted evidence at BATTERY_QUOTE_MAX = 160 characters instead of a bare 160; the register scores the act it exists to encourage, as the T13 Car P' and X-51 rows did; the name earns its register row when the owner signs the estate (LANDING-2, the cloud chair's ruling under ODQ §934.105)"
       }
     },
     "bareDecimals": {
@@ -2666,6 +2671,16 @@
         "sites": 2,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
         "cause": "T13 Car P-prime retired an eager det-math call site by placement, and the two literals 0.6 and 0.4 arrived on a single placement-cure line beside the already-registered GUILD_TUNING table. No value was chosen here: they are the constants the retired call site already computed with, relocated rather than authored."
+      },
+      "src/domain/display/threatAssessment.js": {
+        "sites": 1,
+        "introducedAt": "26ed1b259e5479716644f3dc0999ba0ab7d5799f",
+        "cause": "RUNG1B-F9 unit 1 (the reader contradictions): disasterReadinessScore's fallback weighs the economic score at 0.4 beside the granary and the hospital, the Defense tab's Disasters & Famine reading moved off the old scattered formula onto the one food record; the weight is the formula's own and was relocated with it, not chosen at this landing (LANDING-2, ODQ §934.105)"
+      },
+      "src/generators/density/densityRoll.js": {
+        "sites": 1,
+        "introducedAt": "1c527831aae8f745de94b7c9d87f0e7a59806a8a",
+        "cause": "X-46 car 4 U2 (the population tilt): the settlement's place inside its population band is centred at 0.5 before PARTICULAR_TILTS.population scales it, so a place at the middle of its band tilts by zero; the 0.5 is the band's midpoint, not a tuning value (LANDING-2, ODQ §934.105)"
       }
     }
   },
