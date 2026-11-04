@@ -385,6 +385,10 @@ export const NON_CASCADED_SURFACES = Object.freeze([
   // rows; renaming the faction must not silently rename the house.
   { path: 'institutions[].name', why: 'the house record\'s own name, owned by the institution ledger: it equals a faction name only where the power layer names the governing faction after its body' },
   { path: 'availableServices.legal[].institution', why: 'the house providing the service, owned by the institution ledger, for the reason the row above gives' },
+  // RUNG1B-F7 unit 5 (the chair's ruling; soak1k-35 on the composed window db8ce5da): the same
+  // collision on the crisis cast's levers, which the institution ledger cascades as a HOUSE handle.
+  ...CRISIS_CAST_HOMES.map((home) => ({ path: `${home}.levers[].institution`,
+    why: 'the house a crisis turns on, owned by the institution ledger, which cascades it; it equals a faction name only where the power layer names the governing faction after its body (\'Democratic assembly\')' })),
   { path: 'economicState.safetyProfile.criminalInstitutions[]', why: 'a fixed vocabulary label from the CRIMINAL_INST_LABELS table in generators/safetyProfile.js, naming an INSTITUTION rather than referring to the faction; that a criminal power faction is often generated with a similar name is incidental, and an institution owns its own name' },
   // THE MEMBERSHIP PREDICATE READS A WIDER KEY FAMILY THAN THIS LIST WRITES —
   // see NPC_HANDLE_KEYS_NOT_CASCADED above for the per-key reasons. Only one of
