@@ -1,6 +1,7 @@
 // dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
 import {
   CULTURE_PROFILES,
   resolveCultureProfileKey,
@@ -12,6 +13,28 @@ function legacyCultureContext(culture) {
     return 'Several local traditions remain visible in ordinary institutions, household obligations, and the built environment.';
   }
   return CULTURE_PROFILES[key]?.socialTexture?.[0] || null;
+}
+
+/**
+ * THE DAILY LIFE OFFER LINE (CENSUS-2, the chair's ruling R10; ledger
+ * `docs/census/declarations/DAILY_LIFE_TAB.json`). The line names only what the place has —
+ * each named item is a declared line asking its one reader in `factsOf`: the market
+ * (`market`), the tavern (`institution: tavern`), the watch (`watch`) — and with none of the
+ * three it is "Ordinary life here in prose." alone. A place with all three reads the original
+ * wording byte for byte.
+ * @param {object} s the settlement record
+ * @param {boolean} enabled the saved-settlement variant ("Ordinary life…") or the unsaved one
+ * @returns {string}
+ */
+export function dailyLifeOfferLine(s, enabled) {
+  const facts = factsOf(s);
+  const named = [
+    ...(facts.market ? ['the market'] : []),
+    ...(facts.hasInstitution('tavern') ? ['the tavern'] : []),
+    ...(facts.defence.watch ? ['the watch'] : []),
+  ];
+  const tail = named.length ? `: dawn, ${named.join(', ')}.` : '.';
+  return enabled ? `Ordinary life here in prose${tail}` : `Save this settlement to write its ordinary life in prose${tail}`;
 }
 
 export function extractSettlementContext(s) {

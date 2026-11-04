@@ -4,7 +4,7 @@ import { FS, swatch, CARD, EMPTY_VALUE } from '../../theme.js';
 import { sans } from '../Primitives';
 import useIsMobile from '../../../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
-import {extractSettlementContext} from '../dailyLifeLogic';
+import {extractSettlementContext, dailyLifeOfferLine} from '../dailyLifeLogic';
 import { useStore } from '../../../store/index.js';
 import { isConfigured } from '../../../lib/supabase.js';
 import Button from '../../primitives/Button.jsx';
@@ -185,9 +185,8 @@ export function DailyLifeTab({ settlement: r, _aiSettlement, saveId = null, onRe
           settlement is saved. */}
       {!hasContent && !loading && (
         <p data-testid="daily-life-offer" style={{ margin: '0 0 10px', fontSize: proseFontSize(FS.sm, mobile), color: SECOND, lineHeight: 1.5 }}>
-          {dailyLifeEnabled
-            ? 'Ordinary life here in prose: dawn, the market, the tavern, the watch.'
-            : 'Save this settlement to write its ordinary life in prose: dawn, the market, the tavern, the watch.'}
+          {/* CENSUS-2 (R10): names only the market, tavern and watch the place has */}
+          {dailyLifeOfferLine(r, dailyLifeEnabled)}
         </p>
       )}
       {dailyLifeEnabled && (
