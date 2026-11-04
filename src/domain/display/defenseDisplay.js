@@ -18,7 +18,7 @@ import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
-import { isCriminalInstitution } from '../corruption.js';
+import { crimeSignalOf } from '../crimeSignal.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -207,10 +207,11 @@ export function deriveCriminalStructure(settlement) {
     : hasSemiOrg ? 'semi-organized'
       : hasDiffuse ? 'diffuse'
         : null;
-  const rosterFactions = Array.isArray(r.powerStructure?.factions) ? r.powerStructure.factions : [];
+  // (Lane RUNG1B-F4 unit 3: both facts are read from the crime signal's one home, `crimeSignal.js`.)
+  const signal = crimeSignalOf(r);
   const key = ladder
-    ?? (rosterFactions.some((f) => f?.category === 'criminal') ? 'organized'
-      : (r.institutions || []).some((i) => isCriminalInstitution(/** @type {Parameters<typeof isCriminalInstitution>[0]} */ (i))) ? 'semi-organized'
+    ?? (signal.factions.length ? 'organized'
+      : signal.houses.length ? 'semi-organized'
         : null);
   return key ? CRIM_STRUCTURE_DATA[key] : null;
 }

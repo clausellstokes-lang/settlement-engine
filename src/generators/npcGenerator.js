@@ -11,14 +11,14 @@ import {
   roleToCategory,
   roleTakesMerchantStress,
 } from './roleCategory.js';
-import { nativeSemanticName, nativeSemanticNames } from '../domain/content/customContentSemanticAuthority.js';
+import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; // R6: one line, so no cited line moves
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
@@ -862,9 +862,6 @@ const _pickFactionName = r => {
 export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   if (!npcs || !factions || npcs.length === 0 || factions.length === 0) return npcs;
 
-  const instNames = nativeSemanticNames(institutions)
-    .map(name => name.toLowerCase());
-  const hasInst = kw => instNames.some(n => n.includes(kw));
 
   // Find key faction references — category-first so generic names like "Religious Authorities" still match
   const govFaction = factions.find(f => f.isGoverning) || factions[0];
@@ -876,6 +873,13 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       f.faction?.toLowerCase().includes('smuggl') ||
       f.faction?.toLowerCase().includes('underworld'),
   );
+  // ⛔ NO NETWORK IS NAMED WHERE NONE EXISTS (lane RUNG1B-F4 unit 3, 2026-11-04;
+  // docs/F4_CRIME_SIGNAL_2026-11-04.md). This tail runs after the density law's trim, on the FINAL
+  // roster and estate, so it reads the crime signal's one home (`domain/crimeSignal.js`): with no
+  // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
+  // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
+  // thieves' guild takes the pool's own "a powerful outside interest". No draw.
+  const noCrime = !crimeFaction && !crimeSignalOf({ powerStructure: { factions }, institutions }).present;
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||
@@ -1260,7 +1264,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         !roleLower.includes('thief') &&
         !roleLower.includes('assassin') &&
         !roleLower.includes('criminal');
-      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime) {
+      if (isCriminalSecret && notAlreadyCrime && roleIsNotCrime && !noCrime) {
         enriched.secondaryAffiliation = crimeFaction
           ? crimeFaction.faction
           : secretText.includes('thieves')
@@ -1287,14 +1291,20 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
       const mentionsCriminalGuild =
         secretText.toLowerCase().includes('thieves') ||
         (secretText.toLowerCase().includes('guild') && secretText.toLowerCase().includes('criminal'));
-      if (mentionsCriminalGuild && !hasInst('thieves') && !hasInst('criminal') && !crimeFaction) {
+      // F4 unit 3: the guard reads the crime signal (it implies the old institution-name test), and
+      // the pattern reads "the thieves' guild" too: the pool spells it with the apostrophe, which
+      // `/thieves guild/` never matched, so the secret printed unsanitised in 17 soak places.
+      if (mentionsCriminalGuild && noCrime) {
         enriched.secret = {
-          what: (npc.secret.what || '')
-            .replace(/thieves guild/gi, 'a powerful outside interest')
-            .replace(/criminal guild/gi, 'a powerful outside interest'),
+          what: withoutCriminalGuild(npc.secret.what || ''),
           stakes: npc.secret.stakes,
         };
       }
+    }
+    // F4 unit 3: the role goal ("Identify which of their officers is on the thieves' guild payroll",
+    // drawn at the population step) takes the same substitution where no network exists.
+    if (noCrime && enriched.goal && typeof enriched.goal === 'object' && namesCriminalGuild(enriched.goal)) {
+      enriched.goal = { ...enriched.goal, short: withoutCriminalGuild(enriched.goal.short), long: withoutCriminalGuild(enriched.goal.long) };
     }
 
     return enriched;
