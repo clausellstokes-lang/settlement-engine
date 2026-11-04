@@ -9,11 +9,12 @@ import { institutionCatalogMagicLicence } from '../../src/domain/arcaneInstituti
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 
-const dragons = (magicExists) => {
+const dragons = (magicExists, priorityMagic = 50) => {
   let n = 0;
   for (let i = 0; i < 60; i += 1) {
-    const config = birthConfig({ ...DEFAULT_CONFIG, settType: 'metropolis', magicExists, priorityMagic: 50 });
+    const config = birthConfig({ ...DEFAULT_CONFIG, settType: 'metropolis', magicExists, priorityMagic });
     const s = generateSettlementPipeline(config, null, { seed: `dragon-licence-${i}` });
     if ((s.institutions || []).some((x) => x?.name === 'Dragon resident')) n += 1;
   }
@@ -30,5 +31,13 @@ describe('Dragon resident and the magic gate', () => {
   }, 300000);
   it('a magic-on metropolis still rolls dragons', () => {
     expect(dragons(true)).toBeGreaterThan(0);
+  }, 300000);
+  // Chair ruling, round 3, 2: the licence joined the exotic scaler (×1.8 at magic ≥ 66), so the
+  // row's draw is 0.1 / 1.8 ≈ 0.06; at magic 80, 60 seeds gave 16 dragons at 0.1 and give 11 now.
+  it('the row draws at 0.06, and a high-magic metropolis keeps the dragon occasional', () => {
+    const row = Object.values(institutionalCatalog.metropolis || {})
+      .map((group) => group?.['Dragon resident']).find(Boolean);
+    expect(row?.baseChance).toBe(0.06);
+    expect(dragons(true, 80)).toBeLessThanOrEqual(12);
   }, 300000);
 });

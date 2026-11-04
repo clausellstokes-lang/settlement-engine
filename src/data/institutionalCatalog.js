@@ -1609,7 +1609,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       at: {
         // A dragon is a creature of magic in this world; "magic off" is the historical mode (chair
         // ruling 2, 2026-11-04). Licensed as the shelf's other explicitly magical rows are.
-        metropolis: { baseChance: 0.1, desc: 'Ancient wyrm living in city.', tags: [], magicLicense: 'high', priorityCategory: 'exotic' },
+        // 2026-11-04 (chair ruling, round 3, 2): the licence joined the exotic scaler (×1.8 at
+        // priorityMagic ≥ 66), so the row's draw is 0.1 / 1.8 ≈ 0.06 — a resident dragon stays occasional.
+        metropolis: { baseChance: 0.06, desc: 'Ancient wyrm living in city.', tags: [], magicLicense: 'high', priorityCategory: 'exotic' },
       },
     },
     {
