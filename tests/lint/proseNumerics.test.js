@@ -383,7 +383,7 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // outside the literal, leaving that node's 101 bytes untouched; and `formatCount(...)` is not
 // a numeric-formatting call to this detector, which is why the sibling "+ N imported" chip has
 // never been a row either. The PDF chapters take the same clause through `smart(...)` with no
-// per-cent token, so Overview.jsx:566 and EconomicsTrade.jsx:534/:539 do not move at all.
+// per-cent token, so Overview.jsx :: the `fb.deficit` line (at :541 since X-47) and EconomicsTrade.jsx:534/:539 do not move at all.
 // THE OTHER EIGHT MOVES are the faction share bars, and they are the same shape. SummaryTab
 // and PowerStrata each re-normalised `factions[].power` — a DECLARED unit
 // (domain/factionPowerShare.js: an integer percent share, renormalised by
@@ -413,7 +413,7 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // measured rather than alleged: scanning 2ac3c9c5f's own `src/` against 2ac3c9c5f's own
 // committed baseline yields 224 live rows against 224 banked and ELEVEN STALE ADDRESSES —
 // DefenseTab.jsx:510, PowerStrata.jsx:239/:241/:282, SessionMode.jsx:442,
-// DefenseSecurity.jsx:235 and Overview.jsx:566 (three rows). The label-seam cars moved lines
+// DefenseSecurity.jsx:235 and Overview.jsx :: the `fb.deficit` line (three rows; then at 566). The label-seam cars moved lines
 // above them and did not re-address. Nothing was added and nothing fell; it is the address
 // rot this file's CR-FP-2 note already names, inherited rather than authored. It is cured
 // here because a lane cannot leave its own branch red on a ratchet it can close mechanically,

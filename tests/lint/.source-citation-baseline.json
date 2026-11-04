@@ -47,7 +47,7 @@
     "pastEofCitationsExcluded": 377,
     "byRule": {
       "banner": 9,
-      "dated": 9,
+      "dated": 28,
       "sha-pin": 1,
       "tree": 56
     },
@@ -67,11 +67,30 @@
         "docs/COMPREHENSIVE_REVIEW_2026-07-13.md",
         "docs/COMPREHENSIVE_REVIEW_2026-07-15.md",
         "docs/COMPREHENSIVE_REVIEW_2026-08-01.md",
+        "docs/F1_DEFENCE_WORDS_2026-11-04.md",
+        "docs/F2_REPEAT_ONCE_2026-11-04.md",
+        "docs/F3_FOOD_WORDS_2026-11-04.md",
+        "docs/F4_CRIME_SIGNAL_2026-11-04.md",
         "docs/GENERATION_COHERENCE_AUDIT_2026-11-02.md",
         "docs/GENERATION_ROOT_CAUSES_2026-11-02.md",
         "docs/HANDOFF_2026-08-01_PAUSE.md",
+        "docs/HOOKS_UNDER_STRESS_2026-11-04.md",
+        "docs/R6_PLACE_NOT_TIER_2026-11-04.md",
+        "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.after.json",
+        "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.calibration.json",
+        "docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.md",
+        "docs/RUNG1B_F7_RENAME_CASCADE_2026-11-04.md",
+        "docs/RUNG1B_F8_CAST_EDIT_KEYS_2026-11-04.md",
+        "docs/RUNG1C_F10_WALLS_WORD_2026-11-04.md",
         "docs/SOAK_1000_2026-11-03.md",
+        "docs/SOAK_1000_RUNG1B_2026-11-04.md",
+        "docs/SOAK_1000_RUNG1B_F5_INSTRUMENTS_2026-11-04.md",
+        "docs/SOAK_1000_RUNG1C_2026-11-04.md",
+        "docs/SOAK_1000_RUNG1D_2026-11-04.md",
+        "docs/SOAK_1000_RUNG1_2026-11-04.md",
+        "docs/SOAK_READER_INSTRUMENTS_2026-11-04.md",
         "docs/UX_CONSOLIDATION_2026-10-30.md",
+        "docs/X46_CAR3_BUDGET_REPORT_2026-11-04.md",
         "docs/implementation/surveys/SIM-SEALS-SURVEY-2026-09-19.md"
       ],
       "sha-pin": [
@@ -137,7 +156,8 @@
       ]
     },
     "_rosterGrowth2026-10-30-consolidation": "FIVE documents JOINED the roster by being BORN into it, and they hid NOTHING (re-measured by BUILD-T1 on claude/ux-T1 rebased onto 2acd0206): the integration branch's docs/UX_CONSOLIDATION_2026-10-30.md joined `dated` (5 -> 6) and BUILD-S's docs/shift-records/2026-10-30-service-category-fidelity.json joined `tree` (40 -> 41), both already on the tip; BUILD-T1's three signed records docs/shift-records/2026-10-30-arrival-market-gate.json, -no-market-pool.json and -migration-one-direction.json joined `tree` (41 -> 44). GROWTHS, not class moves: each file entered the tree already archival by rule, and each shift record is a JSON signature with zero path:line citations of its own, so pastEofCitationsExcluded stays at 377.",
-    "_rosterGrowth2026-11-03-soak-1000": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/SOAK_1000_2026-11-03.md joined `dated` (8 -> 9, measured by this walker's own roster test on lane/soak1k-2026-11-03, 2026-11-03), the SOAK-1000 dry-run report the chair commissioned on the owner's word ('run 1000 generated settlements and review each in depth and in aggregate and tune'). WHY dated: it is a point-in-time record whose citations address branch claude/coherence-scale-2026-11-03 at 1169b3cd5, stated in its own header; the run of record is re-taken on the landed tip and re-addressing this one would falsify it. A GROWTH, not a class move: no live document left the gated corpus."
+    "_rosterGrowth2026-11-03-soak-1000": "ONE document JOINED the roster by being BORN into it, and it hid NOTHING: docs/SOAK_1000_2026-11-03.md joined `dated` (8 -> 9, measured by this walker's own roster test on lane/soak1k-2026-11-03, 2026-11-03), the SOAK-1000 dry-run report the chair commissioned on the owner's word ('run 1000 generated settlements and review each in depth and in aggregate and tune'). WHY dated: it is a point-in-time record whose citations address branch claude/coherence-scale-2026-11-03 at 1169b3cd5, stated in its own header; the run of record is re-taken on the landed tip and re-addressing this one would falsify it. A GROWTH, not a class move: no live document left the gated corpus.",
+    "_rosterGrowth2026-11-04-rung1-window": "NINETEEN documents JOINED `dated` by being BORN into it, and they hid NOTHING: the rung-1 window’s lane reports and soak records (F1-F4, F6-F8, F10, HOOKS-UNDER-STRESS, R6 PLACE-NOT-TIER, X46 car 3, READER-INSTRUMENTS, and SOAK rungs 1, 1B, 1B-F5, 1C, 1D; two of them F6’s .after/.calibration JSON), 9 -> 28, measured at the landing (LANDING-1 door 7). Each carries 0 path:line citations. WHY dated: each is a point-in-time record of its own tip, stated in its header; re-addressing would falsify it. A GROWTH, not a class move: no live document left the gated corpus."
   },
   "rows": []
 }
