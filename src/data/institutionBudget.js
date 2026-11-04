@@ -16,7 +16,8 @@
  * C): a budget cannot sit below the catalogue's required baseline — every band's minimum exceeds
  * its tier's required non-fabric houses by at least one; the chair's 3 / 4 / 8 / 16 / 36 / 76 /
  * 120, with the 30-person anchor raised by the least whole house (4 → 5) because the 20-person
- * hamlet read 3.77 against its R of 3.
+ * hamlet read 3.77 against its R of 3. The 60,000 anchor is the catalogue's measured ceiling, 93
+ * (the chair's ruling of 2026-11-04, rung-1 pins: 120 was unreachable as authored).
  *
  * ⛔ THE SEVEN NUMBERS ARE THE OWNER'S VETO POINT (§8 item 2). A lane that measures a band end
  * outside the budget reports the figure; it does not move an anchor.
@@ -37,7 +38,12 @@ export const INSTITUTION_BUDGET_ANCHORS = Object.freeze([
   [400, 16],
   [2500, 36],
   [15000, 76],
-  [60000, 120],
+  // 120 → 93 (the chair's ruling, 2026-11-04, rung-1 pins unit 3): 120 was unreachable as
+  // authored. Measured at d207c81/751c05c (X46-3 report §9): the metropolis catalogue saturates at
+  // realised(4) = 77.92 optional houses + R 15 = 92.92, so 93 is the catalogue's ceiling (its target
+  // 78 sits 0.08 above realised(4): d reads 4 at 60,000 either way). The metropolis roll runs past
+  // 100,000 (x46-1b's tail); beyond 60,000 the curve is flat at this ceiling by design.
+  [60000, 93],
 ]);
 for (const anchor of INSTITUTION_BUDGET_ANCHORS) Object.freeze(anchor);
 

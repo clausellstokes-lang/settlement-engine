@@ -203,7 +203,11 @@ function g6World(kind) {
     const out = [];
     for (const settType of ['village', 'town', 'city', 'metropolis']) {
       for (const culture of ['celtic', 'germanic', 'norse']) {
-        for (let i = 0; i < 5; i++) {
+        // Six seeds a cell from 2026-11-04 (rung-1 pins, unit 3; X-46 car 3's top anchor 60,000 → 93):
+        // the lower metropolis curve between 15,000 and 60,000 seats fewer druid rows, and the five
+        // seeds a cell (-0..-4) read exactly 40 magic-free druid rows against the arms' "> 40";
+        // the same family's next seed (-5) is added in every cell.
+        for (let i = 0; i < 6; i++) {
           out.push(generateSettlementPipeline(
             { settType, culture, terrainOverride: 'forest', tradeRouteAccess: i % 2 ? 'isolated' : 'road',
               priorityReligion: 90, ...G6_WORLDS[kind] },

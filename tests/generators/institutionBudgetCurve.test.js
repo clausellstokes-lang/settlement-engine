@@ -7,9 +7,12 @@ import { INSTITUTION_BUDGET_ANCHORS, expectedHousesAt, tierBudgetTerms } from '.
 import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
 
 describe('X-46 car 3 — the institution budget curve', () => {
+  // THE TOP ANCHOR (the chair's ruling, 2026-11-04, rung-1 pins unit 3): 60,000 → 120 was
+  // unreachable as authored — the metropolis catalogue saturates at realised(4) = 77.92 optional
+  // houses + R 15 ≈ 93 (X46-3 report §9) — so the anchor is the catalogue's measured ceiling, 93.
   it('holds the seven anchors the design names, ascending', () => {
     expect(INSTITUTION_BUDGET_ANCHORS.map((a) => [...a])).toEqual([
-      [5, 3], [30, 5], [100, 8], [400, 16], [2500, 36], [15000, 76], [60000, 120],
+      [5, 3], [30, 5], [100, 8], [400, 16], [2500, 36], [15000, 76], [60000, 93],
     ]);
     expect(Object.isFrozen(INSTITUTION_BUDGET_ANCHORS)).toBe(true);
   });
@@ -40,6 +43,9 @@ describe('X-46 car 3 — the institution budget curve', () => {
     expect(expectedHousesAt(1)).toBe(3);
     expect(expectedHousesAt(0)).toBe(3);
     expect(expectedHousesAt(Number.NaN)).toBe(3);
-    expect(expectedHousesAt(1e6)).toBe(120);
+    // the metropolis roll runs past 100,000 (x46-1b's tail): beyond 60,000 the curve is flat at
+    // the catalogue's ceiling by design
+    expect(expectedHousesAt(1e6)).toBe(93);
+    expect(expectedHousesAt(100000)).toBe(93);
   });
 });
