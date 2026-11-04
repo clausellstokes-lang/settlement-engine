@@ -44,8 +44,12 @@ const FORMAL_JUDGMENT_IDS = Object.freeze([
 const ADVISORY_JUDGMENT = 'record_coherence_battery';
 /** specimen label → the advisory judgment's status, filled as the specimens certify. */
 const ADVISORY_STATUS = new Map();
-/** The specimens whose advisory judgment fails today: 62 of 65, measured 2026-11-04 (see the
- *  pin's own comment for the cause). */
+/** The specimens whose advisory judgment fails today: 65 of 65, RE-KEYED 2026-11-04 on the window
+ *  branch (lane/window-rung1-2026-11-04, the chair's follow-up (b)). Was 62 of 65. Causes: X-46's bands
+ *  moved POPULATION_BOUNDARIES (ten boundary labels changed: 60/61, 400/401, 900/901, 5000/5001,
+ *  25000/25001 became 24/25, 87/88, 349/350, 2249/2250, 14999/15000), and the composed lanes plus the
+ *  kind-7 judgment (I5) made three more specimens fail (criminal-crossroads-town-dun,
+ *  isolated-arcane-town-cinder, mercantile-seaport-town-dun). See the pin's own comment for the cause. */
 const ADVISORY_FAILING = Object.freeze([
   'certification-v1-commercial-metropolis-alder',
   'certification-v1-commercial-metropolis-bracken',
@@ -55,6 +59,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-criminal-crossroads-town-alder',
   'certification-v1-criminal-crossroads-town-bracken',
   'certification-v1-criminal-crossroads-town-cinder',
+  'certification-v1-criminal-crossroads-town-dun',
   'certification-v1-criminal-crossroads-town-ember',
   'certification-v1-frontier-hamlet-alder',
   'certification-v1-frontier-hamlet-bracken',
@@ -68,6 +73,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-grim-seaport-metropolis-ember',
   'certification-v1-isolated-arcane-town-alder',
   'certification-v1-isolated-arcane-town-bracken',
+  'certification-v1-isolated-arcane-town-cinder',
   'certification-v1-isolated-arcane-town-dun',
   'certification-v1-isolated-arcane-town-ember',
   'certification-v1-magical-desert-village-alder',
@@ -78,6 +84,7 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-mercantile-seaport-town-alder',
   'certification-v1-mercantile-seaport-town-bracken',
   'certification-v1-mercantile-seaport-town-cinder',
+  'certification-v1-mercantile-seaport-town-dun',
   'certification-v1-mercantile-seaport-town-ember',
   'certification-v1-mundane-river-port-city-alder',
   'certification-v1-mundane-river-port-city-bracken',
@@ -99,16 +106,16 @@ const ADVISORY_FAILING = Object.freeze([
   'certification-v1-subsistence-thorp-cinder',
   'certification-v1-subsistence-thorp-dun',
   'certification-v1-subsistence-thorp-ember',
-  'population-25000',
-  'population-25001',
-  'population-400',
-  'population-401',
-  'population-5000',
-  'population-5001',
-  'population-60',
-  'population-61',
-  'population-900',
-  'population-901',
+  'population-14999',
+  'population-15000',
+  'population-2249',
+  'population-2250',
+  'population-24',
+  'population-25',
+  'population-349',
+  'population-350',
+  'population-87',
+  'population-88',
 ]);
 
 const PROFILE_SEEDS = Object.freeze([
