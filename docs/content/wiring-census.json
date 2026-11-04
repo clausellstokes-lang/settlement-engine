@@ -2,7 +2,7 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "8349ddd9b6213887aeb3808e582d9522e9f5570c9b54c5c807596956798c9ab9",
+      "src/domain/display/stateProse/generalStateProse.js": "008c9a97445a46a36c0197b725b3fc63aa1fedb28add8c62ca3a6e50b5e530d0",
       "src/domain/display/stateProse/powerStateProse.js": "14666645d1a8b204bda039a5f316442fadb2dbc5301d95a37018825d2d35d216",
       "src/domain/display/stateProse/economyStateProse.js": "11e9c0595cba59a44ecd19eae31f7c8d9133946ef7a30b15bec4f08051549b4e",
       "src/domain/display/stateProse/defenseStateProse.js": "5fe83f187d5be126058faddd22a501a79d1d212235c24bacd5e5ddb606ed9e89",
@@ -23094,7 +23094,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23156,7 +23157,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23218,7 +23220,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23280,7 +23283,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23342,7 +23346,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -45524,7 +45529,7 @@
       "notExecutable": 368,
       "histogram": [
         [
-          -6,
+          -7,
           5
         ],
         [
@@ -45580,7 +45585,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 787,
+      "readPaths": 792,
       "modifierEligibleFactsByTab": [
         [
           "viability",

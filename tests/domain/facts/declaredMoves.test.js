@@ -11,8 +11,10 @@
  */
 import { describe, expect, it } from 'vitest';
 import { generateSafetyProfile } from '../../../src/generators/safetyProfile.js';
-import { generalStateProse } from '../../../src/domain/display/stateProse/generalStateProse.js';
+import { generalStateProse, marketPoolKey } from '../../../src/domain/display/stateProse/generalStateProse.js';
 import { generateEconomicViability } from '../../../src/generators/economy/viability.js';
+import { holdsMarket } from '../../../src/generators/narrative/arrivalScene.js';
+import { marketOf } from '../../../src/domain/facts/market.js';
 
 const CALM = { monsterThreat: 'civilized' };
 
@@ -53,5 +55,20 @@ describe('unit A (c): the viability water-dependency check reads waterAccessKind
     expect(waterWarnings('plains', 'river')).toEqual([]);
     expect(waterWarnings('coastal', 'road')).toEqual([]);
     expect(waterWarnings('hills', 'road')).toHaveLength(1);
+  });
+});
+
+describe("unit A (d): the arrival scene's market and DS-GEN-13's key are homed together on the market fact", () => {
+  const key = (institutions) => marketPoolKey({ institutions, tradeRouteAccess: 'road' });
+
+  it('RED-FIRST: a black market is no market; an annual fair is one (both readers, one answer)', () => {
+    expect(key([{ name: 'Black market', category: 'Criminal' }])).toBe('NO-MARKET');
+    expect(holdsMarket([{ name: 'Black market', category: 'Criminal' }])).toBe(false);
+    expect(key([{ name: 'Annual fair', category: 'Economy' }])).not.toBe('NO-MARKET');
+    expect(holdsMarket([{ name: 'Annual fair', category: 'Economy' }])).toBe(true);
+    for (const institutions of [[{ name: 'Weekly market' }], [{ name: 'Weekly market', status: 'ruined' }], [{ name: 'Shambles' }], []]) {
+      expect(holdsMarket(institutions)).toBe(marketOf({ institutions }));
+      expect(key(institutions) !== 'NO-MARKET').toBe(marketOf({ institutions }));
+    }
   });
 });

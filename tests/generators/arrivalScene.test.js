@@ -397,12 +397,16 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
   it('the generator\'s market predicate IS DS-GEN-13\'s, over real generated towns and the ruin filter', async () => {
     const { holdsMarket } = await import('../../src/generators/narrative/arrivalScene.js');
     const { marketPoolKey } = await import('../../src/domain/display/stateProse/generalStateProse.js');
+    // CENSUS-1b unit A (d): the pair is homed TOGETHER on the market fact, so the equality is
+    // re-keyed to the home: each reader equals `marketOf`, and so they equal each other.
+    const { marketOf } = await import('../../src/domain/facts/market.js');
     const rosters = goldenCorpus().slice(0, 24).map((config) => generateSettlementPipeline(config, null, { seed: config._seed, customContent: {} }).institutions);
-    rosters.push([{ name: 'Grand bazaar', status: 'ruined' }], [{ name: 'Annual fair' }], [{ name: 'Shambles' }], []);
+    rosters.push([{ name: 'Grand bazaar', status: 'ruined' }], [{ name: 'Annual fair' }], [{ name: 'Shambles' }], [{ name: 'Black market' }], []);
     let held = 0;
     for (const institutions of rosters) {
       const desk = marketPoolKey({ institutions, tradeRouteAccess: 'road' }) !== 'NO-MARKET';
       expect(holdsMarket(institutions)).toBe(desk);
+      expect(desk).toBe(marketOf({ institutions }));
       if (desk) held += 1;
     }
     expect(held, 'no roster held a market, so the agreement is one-sided').toBeGreaterThan(0);
