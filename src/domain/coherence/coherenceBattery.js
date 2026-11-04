@@ -76,10 +76,15 @@ function collect(check, surface, run, map, out) {
  * Every coherence finding for one settlement and its rendered surfaces.
  * @param {unknown} settlement the generated record
  * @param {Readonly<Record<string, string>>} surfaces surface id → the text a reader sees there
+ * @param {{ only?: ReadonlyArray<string> }} [options] `only`: run just these checks (the
+ *   generation receipt leaves out `hook-truth-page`, which reads the page, not the record)
  * @returns {BatteryFinding[]}
  */
-export function coherenceBattery(settlement, surfaces) {
+export function coherenceBattery(settlement, surfaces, options = {}) {
   if (settlement == null || typeof settlement !== 'object') return [];
+  const wanted = Array.isArray(options?.only) ? new Set(options.only) : null;
+  /** @param {string} check */
+  const runs = (check) => wanted == null || wanted.has(check);
   // Each instrument types its own narrow read of the record; the battery hands each the
   // record under that instrument's parameter type and reads nothing of it itself.
   const hookRecord = /** @type {Parameters<typeof hookTruthFindings>[0]} */ (settlement);
@@ -90,25 +95,30 @@ export function coherenceBattery(settlement, surfaces) {
   const tier = str(/** @type {{ tier?: unknown }} */ (settlement).tier);
   /** @type {BatteryFinding[]} */
   const out = [];
-  collect('hook-truth-record', 'record', () => hookTruthFindings(hookRecord),
+  if (runs('hook-truth-record')) collect('hook-truth-record', 'record', () => hookTruthFindings(hookRecord),
     (f) => ({ quote: str(f.text), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-  collect('hook-truth-page', 'page', () => renderedHookTruthFindings(hookRecord),
+  if (runs('hook-truth-page')) collect('hook-truth-page', 'page', () => renderedHookTruthFindings(hookRecord),
     (f) => ({ quote: str(f.text), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-  collect('seat-holder', 'record', () => seatHolderFindings(seatRecord),
+  if (runs('seat-holder')) collect('seat-holder', 'record', () => seatHolderFindings(seatRecord),
     (f) => ({ quote: '', detail: `${str(f.code)}: ${str(f.detail)}` }), out);
   for (const [surface, raw] of Object.entries(surfaces ?? {})) {
     const text = str(raw);
     if (text === '') continue;
-    collect('defense-words', surface, () => defenseWordsFindings(defenseRecord, text),
+    if (runs('defense-words')) collect('defense-words', surface, () => defenseWordsFindings(defenseRecord, text),
       (f) => ({ quote: str(f.sentence), detail: `${str(f.term)} without ${str(f.needs)}` }), out);
-    collect('faith-denial', surface, () => faithDenialFindings(faithRecord, text),
+    if (runs('faith-denial')) collect('faith-denial', surface, () => faithDenialFindings(faithRecord, text),
       (f) => ({ quote: str(f.denial), detail: `church evidence: ${Array.isArray(f.evidence) ? f.evidence.join(', ') : ''}` }), out);
-    collect('food-words', surface, () => foodWordsFindings(settlement, text),
+    if (runs('food-words')) collect('food-words', surface, () => foodWordsFindings(settlement, text),
       (f) => ({ quote: str(f.sentence), detail: `${str(f.code)}: ${str(f.detail)}` }), out);
-    collect('magic-words', surface, () => magicWordsFindings(settlement, text),
+    if (runs('magic-words')) collect('magic-words', surface, () => magicWordsFindings(settlement, text),
       (f) => ({ quote: str(f.excerpt), detail: `${str(f.code)}: ${str(f.message)}` }), out);
-    collect('tier-noun', surface, () => tierNounFindings(tierRecord, text),
-      (f) => ({ quote: str(f.context), detail: `"${str(f.phrase)}" for a ${tier}` }), out);
+    // tierNounFindings matches only a singular [Tt]own, so a text without "town" has no finding
+    // to give; skipping it there is findings-identical and spares the kept-span pass, which
+    // costs ~91% of a generation over a record's 48 KB of text (lane SELF-VOUCH, 2026-11-04).
+    if (runs('tier-noun') && /town/i.test(text)) {
+      collect('tier-noun', surface, () => tierNounFindings(tierRecord, text),
+        (f) => ({ quote: str(f.context), detail: `"${str(f.phrase)}" for a ${tier}` }), out);
+    }
   }
   return out;
 }
