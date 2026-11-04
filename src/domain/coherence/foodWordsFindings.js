@@ -27,6 +27,13 @@ const STARVING_WORDS = /\bstarving\b/i;
 const RESERVE_DAYS = /\b(\d+) days of (?:food left|food in store|reserves)\b/i;
 /** A sentence about what the place eats: the foodways line and its kin. */
 const TABLE_WORDS = /\bthe (?:local )?table\b|\bmeals\b/i;
+/**
+ * A "Needs X" row's lead clause (the Economics supply rows: "Needs Grain · affects: meals,
+ * ale, lodging"). It says the place LACKS X, so the sources it names are no claim to hold
+ * them; the clause runs to the row's first " · " or " - " separator, and what follows is
+ * still read (soak R7, docs/SOAK_1000_2026-11-03.md §4b).
+ */
+const NEEDS_CLAUSE = /^Needs\b.*?(?=\s+[·–-]\s+|$)/i;
 /** A claim that no food is stored. */
 const NO_RESERVES = /\bNo food reserves\b|\bholds no food\b|\bNo reserves\b/i;
 
@@ -79,7 +86,7 @@ export function foodWordsFindings(settlement, renderedText) {
     }
     if (record.foodSources && TABLE_WORDS.test(sentence)) {
       const held = new Set(record.foodSources);
-      const lacking = sourcesNamedIn(sentence).filter((source) => !held.has(source));
+      const lacking = sourcesNamedIn(sentence.replace(NEEDS_CLAUSE, '')).filter((source) => !held.has(source));
       if (lacking.length) {
         findings.push({ code: 'source_not_held', sentence, detail: `The place has no ${lacking.join(' or ')} source.` });
       }
