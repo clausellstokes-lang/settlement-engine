@@ -105,8 +105,16 @@ describe('reader:relation-types', () => {
   test('exempted still fires: a Gravedigger mentoring a Baron, and a Professional Rivalry with no shared trade or market', () => {
     const s = roster([['Aoife Brennan', 'Gravedigger', 'Guild Council'], ['Brigid Ward', 'Baron/Baroness', 'Military/Guard']]);
     expect(R.relationTypesFindings(s, { relationships: row('Aoife Brennan', 'Mentor and Successor', 'Brigid Ward', 'Gravedigger', 'Baron/Baroness') }).map((f) => f.detail)).toEqual(['[mentor-and-successor][~strict] trade / noble']);
-    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Mayor', 'Council Member') }).map((f) => f.detail)).toEqual(['[professional-rivalry] office / office']);
+    // Unit 12 (the chair's ruling): rivals for standing pass — two offices, noble and office, noble and noble.
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Mayor', 'Council Member') })).toEqual([]);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Mayor', 'Baron/Baroness') })).toEqual([]);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Baron/Baroness', 'Knight/Dame') })).toEqual([]);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Armourer', 'High Priest') }).map((f) => f.detail)).toEqual(['[professional-rivalry][~strict] military / clergy']);
     expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Wealthiest Merchant', 'Guild Master') })).toEqual([]);
+  });
+  test('exempted: two members of one faction in a Professional Rivalry are silent (unit 12)', () => {
+    const s = roster([['Aoife Brennan', 'Gravedigger', 'Military/Guard'], ['Brigid Ward', 'Baron/Baroness', 'Military/Guard']]);
+    expect(R.relationTypesFindings(s, { relationships: row('Aoife Brennan', 'Professional Rivalry', 'Brigid Ward', 'Gravedigger', 'Baron/Baroness') }).map((f) => f.detail)).toEqual(['[~strict] trade / noble (exempted: same faction)']);
   });
   test('exempted Jurisdictional Tension needs two office-holders; strict fires only where neither holds one', () => {
     expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Jurisdictional Tension', 'C D', 'Garrison Commander', 'Miller') }).map((f) => f.detail)).toEqual(['[jurisdictional-tension] military / trade']);

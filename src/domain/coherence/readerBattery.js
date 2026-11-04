@@ -278,8 +278,11 @@ function seatFactions(s) {
  * criminal↔criminal, merchant↔merchant, noble↔office share. Professional Rivalry needs a shared
  * trade or a shared market (two merchants, two craft masters), else fires. Jurisdictional Tension
  * needs two office-holders (any two offices), else fires."
- * Read here: the faction and seat exemptions apply to Mentor and Successor; Professional Rivalry
- * needs two merchants or two trade roles; `other` roles stay unjudged for both.
+ * Unit 12 (the chair's ruling, 2026-11-04): "Professional Rivalry PASSES between two
+ * office-holders, between noble and office, and between noble and noble … it also passes within
+ * one class … same trade, shared market. It FIRES only across unrelated classes" and "the faction
+ * and seat exemptions apply to Professional Rivalry too". Jurisdictional Tension stays (two
+ * offices). Read here: merchant with trade is a shared market; `other` roles stay unjudged.
  * @param {string} kind @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b @param {Set<string>} seat
  * @returns {{ fires: boolean|null, why: string }} null = not judged
  */
@@ -287,8 +290,13 @@ export function exemptedVerdict(kind, a, b, seat) {
   const ca = classOfRole(a.role); const cb = classOfRole(b.role);
   if (kind === 'Jurisdictional Tension') return { fires: !(holdsOffice(a.role) && holdsOffice(b.role)), why: 'two office-holders' };
   if (ca === 'other' || cb === 'other') return { fires: null, why: '' };
-  if (kind === 'Professional Rivalry') return { fires: !((ca === 'merchant' && cb === 'merchant') || (ca === 'trade' && cb === 'trade')), why: ca === 'merchant' ? 'a shared market' : 'a shared trade' };
-  if (classesShare(ca, cb)) return { fires: false, why: 'same class' };
+  if (kind === 'Professional Rivalry') {
+    // Unit 12 (the chair's ruling): rivals for standing (two offices, noble and office, noble and
+    // noble), one class, a shared trade or a shared market (merchant and trade read as the market).
+    if (ca === cb) return { fires: false, why: 'same class' };
+    if (['office', 'noble'].includes(ca) && ['office', 'noble'].includes(cb)) return { fires: false, why: 'rivals for standing' };
+    if (['merchant', 'trade'].includes(ca) && ['merchant', 'trade'].includes(cb)) return { fires: false, why: 'a shared market' };
+  } else if (classesShare(ca, cb)) return { fires: false, why: 'same class' };
   const fa = str(a.npc?.factionAffiliation); const fb = str(b.npc?.factionAffiliation);
   if (fa && fa === fb) return { fires: false, why: 'same faction' };
   if (fa && fb && seat.has(fa) && seat.has(fb)) return { fires: false, why: 'the seat\'s factions, one office' };

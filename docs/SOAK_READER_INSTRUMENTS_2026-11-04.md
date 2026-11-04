@@ -200,3 +200,43 @@ The real-seed negative control for each check:
 **Open, for the chair:**
 - Should Professional Rivalry pass between two office-holders, or between noble and office, as Mentor and Successor's "noble↔office share" does?
 - Should the faction and seat exemptions apply to Professional Rivalry too? Applied as written, the line stays at 70%.
+
+## 8. Unit 12: the chair's ruling on Professional Rivalry, and the re-measure
+
+**The ruling, verbatim:** "(1) Professional Rivalry PASSES between two office-holders, between noble and office, and between noble and noble (two councillors, a mayor and a baron, are rivals for standing); it also passes within one class (military/military, clergy/clergy, arcane/arcane, criminal/criminal, merchant/merchant, same trade, shared market). It FIRES only across unrelated classes (gravedigger/baron, armourer/high priest, cartographer/gravedigger). (2) Yes — the faction and seat exemptions apply to Professional Rivalry too (a rivalry inside one faction is the most plausible kind). Jurisdictional Tension stays as it is (two offices)."
+
+**How it is read** (`readerBattery.js :: exemptedVerdict`):
+- Professional Rivalry passes for one class; for any two of office and noble; and for merchant with trade. Merchant with trade is my own reading of "shared market".
+- Otherwise it falls to the same faction and seat exemptions as Mentor and Successor.
+- `other` roles stay unjudged.
+- Jurisdictional Tension is unchanged.
+- This supersedes §7's "How Q1 is read" for Professional Rivalry.
+
+**Receipts:**
+- Red-first: the new fixtures against the previous module were 2 failed | 32 passed: Mayor/Baron PR silent, Baron/Knight PR silent, Armourer/High Priest PR fires, and two members of one faction (Gravedigger/Baron) PR silent.
+- Green: the governing suites, 9 files, 80 passed. eslint is clean, and the strict domain tsc shows no error in the file.
+- Artifacts: `artifacts/reader-60u12` and `artifacts/reader-1000u12` (168 s, 0 errors).
+- `finding-classes.json` is byte-identical to the base `64aeda87` without the reader checks, at 60 and 1,000.
+
+**The counts** (1,000 by tier, thorp → metropolis):
+
+| relation-types | 60, unit 11 | 60, unit 12 | 1,000, unit 11 | 1,000, unit 12 | 1,000 by tier (unit 12) |
+|---|---|---|---|---|---|
+| exempted (the line) | 44 | **40** | 705 | **647** | 8/24/127/162/165/161 |
+| ~strict (column) | 48 | 48 | 759 | 759 | 27/85/153/165/166/163 |
+| professional-rivalry | 39 | **29** | 611 | **486** | 5/10/54/109/149/159 |
+| mentor-and-successor | 35 | 35 | 552 | 552 | 3/15/116/144/151/123 |
+| jurisdictional-tension | 9 | 9 | 82 | 82 | 0/0/7/8/26/41 |
+
+Every other class is unchanged from §7.
+
+**What is left in the exempted line:** the largest class pairs at 1,000 are, in settlements:
+
+| kind | class pair | settlements |
+|---|---|---|
+| Mentor and Successor | clergy/office | 213 |
+| Professional Rivalry | military/office | 198 |
+| Mentor and Successor | merchant/office | 148 |
+| Professional Rivalry | clergy/office | 125 |
+| Mentor and Successor | office/trade | 119 |
+| Professional Rivalry | merchant/office | 107 |
