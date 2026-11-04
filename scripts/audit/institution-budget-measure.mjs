@@ -4,6 +4,11 @@
  * institution budget.
  *
  *   node scripts/audit/institution-budget-measure.mjs [--out <file.json>] [--seeds 40] [--matrix 120] [--matrix-only]
+ *   node scripts/audit/institution-budget-measure.mjs --calibrate 200 [--out <file.json>]
+ *   (`--calibrate N` reads only the mean house count at each band's geometric midpoint over N
+ *   settlements, and E = that mean − R_tier. Run at a tree whose engine has NO density factor
+ *   (d ≡ 1: the chair's ruling of 2026-11-04 took it at d0a3202, U2), it is the calibration of
+ *   `INSTITUTION_BUDGET_REALISED`; run at a tip with the factor it reads where the curve lands.)
  *   (`--matrix 1000 --matrix-only` reads the soak's 1,000 corpus: the same seeds and configs as soak-review)
  *
  * It reads, all from the app's own birth path (`scripts/audit/soak-review/corpus.mjs :: birth` for the
@@ -37,6 +42,7 @@ const OUT = opt('--out', null);
 const SEEDS = Number(opt('--seeds', 40));
 const MATRIX = Number(opt('--matrix', 120));
 const MATRIX_ONLY = args.includes('--matrix-only');
+const CALIBRATE = opt('--calibrate', null) === null ? null : Number(opt('--calibrate', 200));
 
 // Before the fabric tag exists the measurement uses the same list by name (the "before" run).
 const FALLBACK_FABRIC = new Set(['Dwellings (4-16)', 'Dwellings (17-80)', 'Dwellings (80-180)',
@@ -69,6 +75,25 @@ const read = (s) => {
 
 await ensureLaws();
 
+const ORIGINAL = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...POPULATION_RANGES[t] }]));
+if (CALIBRATE !== null) {
+  const calibration = {};
+  for (const tier of TIER_ORDER) {
+    let R = 0;
+    for (const group of Object.values(catalog.institutionalCatalog[tier])) {
+      for (const [name, row] of Object.entries(group)) if (row.required && !catalog.isFabricRow(tier, name)) R += 1;
+    }
+    const midpoint = Math.round(Math.sqrt(ORIGINAL[tier].min * ORIGINAL[tier].max));
+    const houses = cell(tier, midpoint, CALIBRATE, 'cal');
+    const meanHouses = mean(houses);
+    calibration[tier] = { midpoint, seeds: CALIBRATE, R, meanHouses, E: meanHouses - R };
+  }
+  const text = JSON.stringify({ calibrate: CALIBRATE, calibration }, null, 1);
+  if (OUT) writeFileSync(OUT, text);
+  process.stdout.write(`${text}\n`);
+  process.exit(0);
+}
+
 // 1. the matrix
 const matrix = [];
 for (let i = 0; i < MATRIX; i += 1) {
@@ -87,8 +112,7 @@ for (const tier of TIER_ORDER) {
   };
 }
 
-// forced-population cells
-const ORIGINAL = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...POPULATION_RANGES[t] }]));
+// forced-population cells (hoisted; ORIGINAL is read before the first call)
 function cell(tier, P, n, tag) {
   POPULATION_RANGES[tier] = { min: P, max: P };
   const out = [];
@@ -128,7 +152,17 @@ const overlap = (MATRIX_ONLY ? [] : OVERLAPS).map(([P, a, b]) => {
 let catalogue;
 try {
   const budget = await import('../../src/data/institutionBudget.js');
-  catalogue = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...budget.tierBudgetTerms(t), dAtMin: budget.densityFactor(t, ORIGINAL[t].min), dAtMax: budget.densityFactor(t, ORIGINAL[t].max), expectedAtMin: budget.expectedHousesAt(ORIGINAL[t].min), expectedAtMax: budget.expectedHousesAt(ORIGINAL[t].max) }]));
+  // How many optional, non-fabric rows reach a chance of 1.0 at the band's top (authored chance
+  // × d, before the priority and resource multipliers): the clamp that caps a large tier.
+  const cappedAtMax = (t) => {
+    const d = budget.densityFactor(t, ORIGINAL[t].max);
+    let n = 0;
+    for (const group of Object.values(catalog.institutionalCatalog[t])) {
+      for (const [name, row] of Object.entries(group)) if (!row.required && !catalog.isFabricRow(t, name) && (row.baseChance || 0) * d >= 1) n += 1;
+    }
+    return n;
+  };
+  catalogue = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...budget.tierBudgetTerms(t), cappedAtMax: cappedAtMax(t), dAtMin: budget.densityFactor(t, ORIGINAL[t].min), dAtMax: budget.densityFactor(t, ORIGINAL[t].max), expectedAtMin: budget.expectedHousesAt(ORIGINAL[t].min), expectedAtMax: budget.expectedHousesAt(ORIGINAL[t].max) }]));
 } catch { catalogue = 'institutionBudget.js absent (the before)'; }
 
 const report = { seeds: SEEDS, matrix: MATRIX, perTier, bandEnds, overlap, catalogue };

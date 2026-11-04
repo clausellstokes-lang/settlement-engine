@@ -62,43 +62,66 @@ export function expectedHousesAt(population) {
 // ── THE MECHANISM (§4): one density factor per settlement ────────────────────────────────────
 //
 // d = (expectedHousesAt(pop) − R_tier) / E_tier, where R_tier is the tier block's number of
-// required HOUSES and E_tier its expected optional house count at the band's geometric midpoint
-// (Σ baseChance over the non-required rows whose stated population floor the midpoint reaches),
-// both read from the catalogue at module load, never hard-coded, fabric excluded from both.
+// required HOUSES (read from the catalogue at module load, fabric excluded) and E_tier the
+// REALISED optional house count at the band's geometric midpoint: `INSTITUTION_BUDGET_REALISED`
+// below (the chair's ruling, 2026-11-04). The catalogue's own sum (Σ baseChance over the
+// non-required, non-fabric rows whose stated population floor the midpoint reaches) is still read
+// at load as `catalogueE`, and the table records the sum it was calibrated beside, so a catalogue
+// change that moves the sum is caught (tests/generators/institutionBudgetDensity.test.js).
 // Every non-required, non-fabric row's chance is multiplied by d (the product clamped to [0, 1]
 // per row: `scaleChance`) in assembleInstitutions, the cascade and the faction pass. d is a pure
 // function of (tier, population), computed once before the first draw, and it never adds,
 // removes or re-orders a draw: a seed's draws are the same draws at different chances.
 
+/**
+ * THE REALISED E (the chair's ruling, 2026-11-04, X46-3 hand-back ruling 1): per tier, the mean
+ * non-fabric house count at the band's geometric midpoint with the density factor ≡ 1 — after the
+ * cascade and the faction pass, with the priority and resource multipliers — minus R_tier, over
+ * `seeds` settlements (the certification matrix's cells), measured by
+ * `scripts/audit/institution-budget-measure.mjs --calibrate 200` at d0a3202 (the fabric tag, no
+ * factor). `catalogueE` is the authored sum it was measured beside. A registered tuning table.
+ * @type {Readonly<Record<string, Readonly<{ midpoint: number, seeds: number, catalogueE: number, measuredE: number }>>>}
+ */
+export const INSTITUTION_BUDGET_REALISED = Object.freeze({
+  thorp:      { midpoint: 12,    seeds: 200, catalogueE: 5.35,  measuredE: 3.29 },
+  hamlet:     { midpoint: 45,    seeds: 200, catalogueE: 9.05,  measuredE: 9.775 },
+  village:    { midpoint: 173,   seeds: 200, catalogueE: 21.29, measuredE: 26.045 },
+  town:       { midpoint: 866,   seeds: 200, catalogueE: 38.81, measuredE: 46.24 },
+  city:       { midpoint: 5477,  seeds: 200, catalogueE: 51.05, measuredE: 51.67 },
+  metropolis: { midpoint: 30000, seeds: 200, catalogueE: 59.27, measuredE: 58.65 },
+});
+for (const row of Object.values(INSTITUTION_BUDGET_REALISED)) Object.freeze(row);
 
-/** @type {Readonly<Record<string, Readonly<{ R: number, E: number, midpoint: number }>>>} */
+/** @type {Readonly<Record<string, Readonly<{ R: number, E: number, catalogueE: number, midpoint: number }>>>} */
 const TERMS = (() => {
-  /** @type {Record<string, Readonly<{ R: number, E: number, midpoint: number }>>} */
+  /** @type {Record<string, Readonly<{ R: number, E: number, catalogueE: number, midpoint: number }>>} */
   const out = {};
   for (const [tier, block] of Object.entries(institutionalCatalog)) {
     const band = POPULATION_RANGES[tier];
     const midpoint = band ? Math.sqrt(band.min * band.max) : Number.NaN;
     let R = 0;
-    let E = 0;
+    let catalogueE = 0;
     for (const group of Object.values(block)) {
       for (const [name, row] of Object.entries(group)) {
         if (isFabricRow(tier, name)) continue;
         if (row.required) { R += 1; continue; }
         const floor = institutionRowGuards(tier, name)?.minPopulation;
         if (typeof floor === 'number' && midpoint < floor) continue;
-        E += typeof row.baseChance === 'number' ? row.baseChance : 0;
+        catalogueE += typeof row.baseChance === 'number' ? row.baseChance : 0;
       }
     }
-    out[tier] = Object.freeze({ R, E, midpoint });
+    const E = INSTITUTION_BUDGET_REALISED[tier]?.measuredE ?? catalogueE;
+    out[tier] = Object.freeze({ R, E, catalogueE, midpoint });
   }
   return Object.freeze(out);
 })();
 
 /**
- * The tier block's budget terms: R (required houses), E (expected optional houses at the band's
- * geometric midpoint) and that midpoint. Null for a tier the catalogue does not hold.
+ * The tier block's budget terms: R (required houses), E (the realised optional houses at the
+ * band's geometric midpoint), catalogueE (the authored sum there) and that midpoint. Null for a
+ * tier the catalogue does not hold.
  * @param {string} tier
- * @returns {Readonly<{ R: number, E: number, midpoint: number }> | null}
+ * @returns {Readonly<{ R: number, E: number, catalogueE: number, midpoint: number }> | null}
  */
 export function tierBudgetTerms(tier) {
   return TERMS[tier] ?? null;

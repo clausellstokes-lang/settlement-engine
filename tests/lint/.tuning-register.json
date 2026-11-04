@@ -150,9 +150,10 @@
       "kind": "tables",
       "file": "src/data/institutionBudget.js",
       "exports": [
-        "INSTITUTION_BUDGET_ANCHORS"
+        "INSTITUTION_BUDGET_ANCHORS",
+        "INSTITUTION_BUDGET_REALISED"
       ],
-      "note": "X-46 car 3 (docs/DESIGN_X46_SCALE_TRAIN.md §4): the institution budget's seven [population, expected houses] anchors, log-linear between them. Not a *_TUNING name, so indexed here by roster. The seven numbers are the owner's veto point (§8 item 2). Declared draft; the measured inventory row is taken at the train's landing refreeze."
+      "note": "X-46 car 3 (docs/DESIGN_X46_SCALE_TRAIN.md §4): the institution budget's seven [population, expected houses] anchors, log-linear between them. Not a *_TUNING name, so indexed here by roster. The seven numbers are the owner's veto point (§8 item 2). Declared draft; the measured inventory row is taken at the train's landing refreeze. INSTITUTION_BUDGET_REALISED (the chair's ruling 2026-11-04): the realised E per tier, measured at d = 1 over 200 seeds, beside the catalogue sum it was taken against."
     }
   ],
   "moduleSide": [
@@ -2453,6 +2454,39 @@
       },
       "band": null,
       "note": "X-46 car 3: [population (people), expected houses (count)] pairs."
+    },
+    "src/data/institutionBudget.js#INSTITUTION_BUDGET_REALISED": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "thorp.midpoint": "people",
+        "thorp.seeds": "count",
+        "thorp.catalogueE": "count",
+        "thorp.measuredE": "count",
+        "hamlet.midpoint": "people",
+        "hamlet.seeds": "count",
+        "hamlet.catalogueE": "count",
+        "hamlet.measuredE": "count",
+        "village.midpoint": "people",
+        "village.seeds": "count",
+        "village.catalogueE": "count",
+        "village.measuredE": "count",
+        "town.midpoint": "people",
+        "town.seeds": "count",
+        "town.catalogueE": "count",
+        "town.measuredE": "count",
+        "city.midpoint": "people",
+        "city.seeds": "count",
+        "city.catalogueE": "count",
+        "city.measuredE": "count",
+        "metropolis.midpoint": "people",
+        "metropolis.seeds": "count",
+        "metropolis.catalogueE": "count",
+        "metropolis.measuredE": "count"
+      },
+      "band": null,
+      "note": "X-46 car 3: the realised optional house count per tier at the band's geometric midpoint (d = 1), and the authored sum beside it."
     }
   },
   "roles": {

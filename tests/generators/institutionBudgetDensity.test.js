@@ -5,7 +5,7 @@
  * E_tier are re-read from the catalogue (fabric excluded; E at the band's geometric midpoint).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import { densityFactor, expectedHousesAt, scaleChance, tierBudgetTerms } from '../../src/data/institutionBudget.js';
+import { INSTITUTION_BUDGET_REALISED, densityFactor, expectedHousesAt, scaleChance, tierBudgetTerms } from '../../src/data/institutionBudget.js';
 import { institutionalCatalog, institutionRowGuards, isFabricInstitution, isFabricRow } from '../../src/data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -45,12 +45,28 @@ const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
 describe('X-46 car 3 — the density factor', () => {
   beforeAll(async () => { await loadGenerationLawPayloads(); });
 
-  it('reads R_tier (required houses) and E_tier (expected optional houses at the band midpoint) from the catalogue, fabric excluded', () => {
+  it('reads R_tier (required houses) from the catalogue and records E_tier\'s catalogue sum beside it, fabric excluded', () => {
     expect(TIER_ORDER.map((t) => tierBudgetTerms(t).R)).toEqual([3, 4, 6, 11, 15, 15]);
     for (const tier of TIER_ORDER) {
       const { R, E } = readTerms(tier);
       expect(tierBudgetTerms(tier).R).toBe(R);
-      expect(tierBudgetTerms(tier).E).toBeCloseTo(E, 9);
+      expect(tierBudgetTerms(tier).catalogueE).toBeCloseTo(E, 9);
+      // A catalogue change that moves the authored sum reds here: the realised E is then stale
+      // and is re-measured (scripts/audit/institution-budget-measure.mjs --calibrate 200).
+      expect(INSTITUTION_BUDGET_REALISED[tier].catalogueE, tier).toBeCloseTo(E, 2);
+    }
+  });
+
+  // THE CHAIR'S RULING (2026-11-04, X46-3 hand-back ruling 1): E_tier is the REALISED optional
+  // house count at the band's geometric midpoint with d ≡ 1 — after the cascade and the faction
+  // pass, with the priority and resource multipliers — over 200 seeds per tier, so d scales against
+  // what is actually drawn, not the authored chances.
+  it('divides by the realised E (measured at d = 1 over 200 seeds), not the catalogue sum', () => {
+    expect(TIER_ORDER.map((t) => INSTITUTION_BUDGET_REALISED[t].measuredE)).toEqual([3.29, 9.775, 26.045, 46.24, 51.67, 58.65]);
+    for (const tier of TIER_ORDER) {
+      expect(INSTITUTION_BUDGET_REALISED[tier].seeds).toBe(200);
+      expect(tierBudgetTerms(tier).E).toBe(INSTITUTION_BUDGET_REALISED[tier].measuredE);
+      expect(INSTITUTION_BUDGET_REALISED[tier].midpoint).toBe(Math.round(tierBudgetTerms(tier).midpoint));
     }
   });
 
