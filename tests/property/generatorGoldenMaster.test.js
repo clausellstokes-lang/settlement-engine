@@ -18,6 +18,76 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-03 — DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING, THROUGH THE SIGNED
+ *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-magic-dependency.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 256 OF 525 ROWS MOVED (village 12, town 76, city 84,
+ *   metropolis 84; thorp and hamlet 0); the key set is identical. THE CAUSE, ONE (09694e448: defenseGenerator.js ::
+ *   generateDefenseProfile stores magicReliance.js :: deriveMagicReliance at relied-upon or integral; f47cdd20d, the
+ *   Defense tab's reading of it, moves no settlement byte): every moved row is a false -> true flip of exactly
+ *   defenseProfile.magicDependency and its mirror defenseProfile.scores.magicDependency. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S9 = S8 + this cause, where S8 (the roster-lines stage, its writes
+ *   committed) reproduces 7f1312d2.. on all 525 rows. 7f1312d2.. -> 4c42885b..
+ *
+ * 2026-11-03 — DEFENSE-2: THE CULTURE, STRESS AND WARTIME LINES SAY NOTHING A ROSTER CAN CONTRADICT, THROUGH THE SIGNED
+ *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-roster-lines.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 267 OF 525 ROWS MOVED (thorp 42, hamlet 42, village
+ *   42, town 57, city 42, metropolis 42); the key set is identical. THE CAUSE, ONE (8284242ef: cultureProfiles.js,
+ *   stressInstitutionEffects.js, stressNarrative.js reworded to hold on every roster; defenseInstitutionBuckets.js ::
+ *   DEFENSE_BUCKET_KEYWORDS.militia reads 'household levy'): on THIS corpus every moved row moves in
+ *   culturalIdentity.defensePattern alone. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree
+ *   S8 = S7 + this cause, where S7 (X-49's stage, its write committed) reproduces efa49945.. on all 525 rows.
+ *   efa49945.. -> 7f1312d2..
+ *
+ * 2026-11-03 — SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET, THROUGH THE SIGNED DOOR (ODQ §934.104, THE
+ *   COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-3-guild-market.json; the cloud chair signs
+ *   under the owner's delegation, vetoable). 191 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 35; town, city and
+ *   metropolis 0); the key set is identical. THE CAUSE, ONE (43f9c0dcc: rulingStructure.js :: generatePowerStructure
+ *   reads viability.js :: hasMarketInstitution): a thorp, hamlet or village with no real market no longer seats a
+ *   merchant guild, so powerStructure.factions and factionRelationships and the simulationTrace of the power step move
+ *   on those rows only. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S5 = S4 + this cause,
+ *   where S4 (SIZE-2's stage, its writes committed) reproduces 1f402a82.. on all 525 rows. 1f402a82.. -> efa49945..
+ *
+ * 2026-11-03 — SIZE-2: GENERATED STORY TEXT NAMES THE PLACE BY ITS OWN TIER NOUN, THROUGH THE SIGNED DOOR (ODQ
+ *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json;
+ *   the cloud chair signs under the owner's delegation, vetoable). 192 OF 525 ROWS MOVED (village 24, city 84,
+ *   metropolis 84; thorp, hamlet and town 0); the key set is identical. THE CAUSE, ONE (the SIZE ruling-2 code on this
+ *   branch: historyGenerator.js, narrativeText.js, the kernel's kept spans, arrivalScene.js's hook): the stored
+ *   history strings and the arrival hook speak the place's own noun, a string map after every draw, so only
+ *   history.* prose (lastingEffects 168 rows, descriptions 24) and arrivalScene (168) move. ATTRIBUTION, ZERO RESIDUE
+ *   BY CONSTRUCTION: written from the staged tree S4 = S3 + this cause, where S3 (FOOD-3's stage, its writes
+ *   committed) reproduces f1f24e86.. on all 525 rows. f1f24e86.. -> 1f402a82..
+ *
+ * 2026-11-03 — FOOD-3: FOOD DIVERSITY — THE SOURCES A PLACE HAS, THE FAMINE THAT FAILS ONE NAMED SOURCE, THE FOODWAYS
+ *   LINE FROM THE PLACE'S OWN TABLE, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-3-food-diversity.json; the cloud chair signs under the owner's delegation,
+ *   vetoable). 525 OF 525 ROWS MOVED; the key set is identical. THE CAUSE, ONE (bd888a47a): the food record stores its
+ *   sources, its failed source and its foodways line on every row, and preserved non-grain sources lengthen the
+ *   stores, so the defence scores (144 rows) and readiness (54 rows) that read the stores' months follow. ATTRIBUTION,
+ *   ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S3 = S2 + this cause, where S2 (FOOD-2's stage, its
+ *   writes committed) reproduces 8d3ce803.. on all 525 rows. 8d3ce803.. -> f1f24e86..
+ *
+ * 2026-11-03 — FOOD-2: THE FOOD BASE NUMBERS — ONE TERRAIN TABLE, NO HIDDEN STORAGE DIVISOR, THE HINTERLAND AS NORMAL
+ *   SUPPLY, PER CAPITA AND PER TIER, THROUGH THE SIGNED DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record
+ *   docs/shift-records/2026-11-03-food-2-food-base-numbers.json; the cloud chair signs under the owner's delegation,
+ *   vetoable). 525 OF 525 ROWS MOVED; the key set is identical. THE CAUSE, ONE (a7f13fef4): production reads the one
+ *   terrain table with no /1.3 divisor and the tier's hinterland share arrives as supply, so the food record, the
+ *   viability metrics and the defence scores move on every row, and legitimacy and prosperity re-deal what follows
+ *   them (factions 170 rows, npcs 155, founding history 195). ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from
+ *   the staged tree S2 = S1 + this cause, where S1 (FOOD-1's stage, its writes committed) reproduces e9fe8b5b.. on all
+ *   525 rows. e9fe8b5b.. -> 8d3ce803..
+ *
+ * 2026-11-03 — FOOD-1: ONE FOOD RECORD EVERY FOOD SENTENCE READS, ONE SET OF CUT-OFFS; THE FOUNDATIONS FOOD SCORE
+ *   READS THE BALANCE AND THE RESERVES (GS-3a RE-CUT); THE SURPLUS WORDS READ THE RECORD, THROUGH THE SIGNED DOOR (ODQ
+ *   §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-food-1-one-food-record.json; the
+ *   cloud chair signs under the owner's delegation "I also now hereby defer all judgement to you and defer and give all
+ *   permissions to you required now or in the future", vetoable). 525 OF 525 ROWS MOVED; the key set is identical.
+ *   THE CAUSE, ONE (b2aa5f5fa + 22d458883): economicState.foodSecurity.foodRecord is stored on every row; prosperity,
+ *   the situation sentence and economicComplexity read it, and the prosperity change re-deals the draws downstream
+ *   of it. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S1 = S0 + this cause, where S0
+ *   (the window's tip 71541a9e6 with every one of its golden-moving commits reverse-applied) reproduces this
+ *   manifest's previous bytes 8355c460.. on all 525 rows and the whole register estate green (52 files / 473 tests).
+ *   8355c460.. -> e9fe8b5b..
+ *
  * 2026-10-31 — TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1), THROUGH THE
  *   SIGNED DOOR (ODQ §934.101; record docs/shift-records/2026-10-31-tension-variety.json; the cloud chair signs
  *   under the owner's delegation "I also now defer and give all judgment to you that is required now or in the

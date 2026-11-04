@@ -19,6 +19,8 @@
 
 import { random as _rng } from "../kernel/rngContext.js";
 import { pickRandom2 } from "./helpers.js";
+import { speakTierNoun } from "../domain/display/stateProse/stateProseKernel.js";
+import { tierNounFor } from "../domain/display/stateProse/weaveBlock.js";
 
 // AMENDMENT B — THE CASING PASS. The ${govFaction}/${topFaction} interpolations
 // carry a value that is usually lowercased ("the town council"), while their
@@ -33,6 +35,17 @@ import { pickRandom2 } from "./helpers.js";
 // fallback (mid-sentence) sites are left untouched. One-time golden shift (this
 // branch parks for the regen); prose-only, so the structural diff stays clean.
 const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() + s.slice(1) : s);
+
+/**
+ * SIZE ruling 2 (2026-11-03): speak each line in the settlement's own tier noun ("the thorp no
+ * longer has"), through the dossier kernel's own helper, on the pressure detail's tier.
+ * Identity for a town or an unknown tier. Mapping the array draws nothing, so no pick moves.
+ * @param {{tier?: unknown}} r @param {string[]} lines @returns {string[]}
+ */
+const speakTierLines = (r, lines) => {
+  const noun = tierNounFor(r && r.tier);
+  return lines.map((line) => speakTierNoun(line, noun));
+};
 
 // ─── Per-stress pressure sentences (consumed by narrativeGenerator) ──────────
 // Each value is a function (detail) => string[]. Only succession_void draws rng
@@ -160,7 +173,7 @@ export const PRESSURE_SENTENCES = {
           `No one in ${r.name} is marching, and that is what makes it dangerous. The opposition to ${r.govFaction || "the current authority"} is a patient, well-lawyered thing that means to inherit the settlement intact rather than take it by force, and it is close to being able to.`,
         ];
   },
-  mass_migration: (r) => {
+  mass_migration: (r) => speakTierLines(r, (() => {
     var o;
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
@@ -177,7 +190,7 @@ export const PRESSURE_SENTENCES = {
           `Every season brings more households to ${r.name} and no more work. The newcomers camp where they can, and ${r.govFaction || "the governing authority"} is counting heads it has no plan for.`,
           `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.`,
         ];
-  },
+  })()),
   wartime: (r) => {
     var o, d;
     return (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&

@@ -76,7 +76,13 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 377 → 387 at PACT-COMPLIANCE U2's pick (FPQ-75, ODQ §934.89 FP-46, FP-54, 2026-10-02; record docs/shift-
     // records/2026-10-02-pact-compliance-u2-stream-carry.json, re-derived at the composed point): a stream clause
     // now moves grain between soak-c and soak-d, ten relief beats join and the tempo items re-deal (375 → 385 items).
-    expect(Object.keys(manifest)).toHaveLength(387);
+    // 387 → 475 at FOOD-1 (ODQ §934.104, 2026-11-03; record docs/shift-records/2026-11-03-food-1-one-food-record.json):
+    // the Foundations food score reads the balance and the reserves, so the pulse's food pressure re-deals the realm's
+    // year and the year-one desk carries 88 more items (385 → 473).
+    // 475 → 473 at FOOD-2 (ODQ §934.104, 2026-11-03; record docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+    // the food base numbers read one terrain table and draw the hinterland as supply, so the pulse's food pressure
+    // re-deals the year again and the year-one desk carries two fewer items (473 → 471). The misjudgment ids do not move.
+    expect(Object.keys(manifest)).toHaveLength(473);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -117,10 +123,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // Re-dealt at the urban band's re-record (2026-09-30): the same-seed shift moves the year's
       // news, so two of the three beats mint at new ids. Still three, still all on knowledge.
       // Re-dealt again at J33 (2026-10-01): one beat mints at a new id. Still three, still all on knowledge.
+      // Re-dealt at FOOD-1 (2026-11-03, ODQ §934.104): the food pressure re-deals the year; one beat mints at a new id
+      // (soak-d -> soak-b, week 47). Still three, still all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.10.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.26.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.47.belief_misjudgment.soak-d.soak-b',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');

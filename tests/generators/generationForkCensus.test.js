@@ -132,7 +132,19 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-10-31, tension variety (GS-1, ODQ §934.101), through the signed door
 // (docs/shift-records/2026-10-31-tension-variety.json): 9f94ab28... -> 67a3cc18..., this town's tie prose drawn
 // without replacement from eight-variant pools.
-const GOLDEN_CONTROL_HASH = '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529';
+// 2026-11-03, FOOD-1 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-1-one-food-record.json):
+// 67a3cc18... -> 48f22f18..., this town's food record stored and its prosperity read from it.
+// 2026-11-03, FOOD-2 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-2-food-base-numbers.json):
+// 48f22f18... -> f0ec823b..., this town's food base read from the one terrain table and its hinterland drawn as supply.
+// 2026-11-03, FOOD-3 (ODQ §934.104), through the signed door (docs/shift-records/2026-11-03-food-3-food-diversity.json):
+// f0ec823b... -> 908c8abd..., this town's food sources, failed source and foodways line stored on its food record.
+// 2026-11-03, DEFENSE-2 roster lines (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-roster-lines.json): 908c8abd... -> c957dd78..., this town's germanic
+// defence pattern reworded to hold on every roster.
+// 2026-11-03, DEFENSE-2 magic dependency (ODQ §934.104), through the signed door
+// (docs/shift-records/2026-11-03-defense-magic-dependency.json): c957dd78... -> b1b9502a..., this town's defence
+// record storing the one magic reliance reading.
+const GOLDEN_CONTROL_HASH = 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',

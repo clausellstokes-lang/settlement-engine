@@ -189,6 +189,86 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-03, DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-defense-magic-dependency.json. THE MOVER, FOUND: 09694e448
+ * (defenseGenerator.js :: generateDefenseProfile stores magicReliance.js :: deriveMagicReliance at relied-upon or
+ * integral); f47cdd20d, its Defense-tab reading, moves no settlement byte. On THIS corpus 163 of 360 rows move
+ * (hamlet 1, village 14, town 35, city 56, metropolis 57), in defenseProfile.magicDependency and its mirror
+ * defenseProfile.scores.magicDependency alone; 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY
+ * CONSTRUCTION: written from the staged tree S9 = S8 + this cause, where S8 (the roster-lines stage, its writes
+ * committed) reproduces `12a9c494…` exactly. FENCE 3 (call-path dormancy) re-run green at the write: zero
+ * espionage calls. `12a9c494…` -> `00440713…`.
+ *
+ * ── 2026-11-03, DEFENSE-2: THE CULTURE, STRESS AND WARTIME LINES SAY NOTHING A ROSTER CAN CONTRADICT (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-defense-roster-lines.json. THE MOVER, FOUND: 8284242ef
+ * (the culture, stress and wartime lines reworded to hold on every roster; defenseInstitutionBuckets.js ::
+ * DEFENSE_BUCKET_KEYWORDS.militia reads 'household levy'). On THIS corpus 193 of 360 rows move (thorp 40,
+ * hamlet 34, village 31, town 33, city 27, metropolis 28), in culturalIdentity.defensePattern (179 rows),
+ * defenseProfile.institutions.militia (12 thorps gain the Household levy), the reworded NPC and faction-member
+ * secrets (6 rows) and the wartime stress summary (3 rows); 360/360 hashes stay distinct. ATTRIBUTION, ZERO
+ * RESIDUE BY CONSTRUCTION: written from the staged tree S8 = S7 + this cause, where S7 (X-49's stage, its write
+ * committed) reproduces `5d0e4fb4…` exactly. FENCE 3 (call-path dormancy) re-run green at the write: zero
+ * espionage calls. `5d0e4fb4…` -> `12a9c494…`.
+ *
+ * ── 2026-11-03, SIZE-3: THE SMALL-PLACE GUILD CHECK REQUIRES A REAL MARKET (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-size-3-guild-market.json. THE MOVER, FOUND: 43f9c0dcc
+ * (rulingStructure.js :: generatePowerStructure reads viability.js :: hasMarketInstitution): a thorp, hamlet or
+ * village with no real market no longer seats a merchant guild. On THIS corpus 109 of 360 rows move (thorp 55,
+ * hamlet 43, village 11; town, city, metropolis 0), in powerStructure and the power step's simulationTrace;
+ * 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree
+ * S5 = S4 + this cause, where S4 (SIZE-2's stage, its writes committed) reproduces `62338588…` exactly.
+ * FENCE 3 (call-path dormancy) re-run green at the write: zero espionage calls. `62338588…` -> `5d0e4fb4…`.
+ *
+ * ── 2026-11-03, SIZE-2: GENERATED STORY TEXT NAMES THE PLACE BY ITS OWN TIER NOUN (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-size-2-tier-noun-story-text.json. THE MOVER, FOUND: the
+ * SIZE ruling-2 code (5eda29d5c + 8c76cf743): the stored history strings, the migration pressure line and the
+ * arrival hook speak the place's own tier noun, a string map after every draw. On THIS corpus 127 of 360 rows
+ * move (thorp 20, hamlet 18, village 24, city 26, metropolis 39, town 0), only in history.*, arrivalScene and
+ * pressureSentence; 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the
+ * staged tree S4 = S3 + this cause, where S3 (FOOD-3's stage, its writes committed) reproduces `5a2c0b5e…`
+ * exactly. FENCE 3 (call-path dormancy) re-run green at the write: zero espionage calls. `5a2c0b5e…` -> `62338588…`.
+ *
+ * ── 2026-11-03, FOOD-3: FOOD DIVERSITY (THE COHERENCE AND SCALE WINDOW) ──
+ * THE TWENTIETH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-food-3-food-diversity.json. THE MOVER, FOUND: food
+ * diversity (bd888a47a): the food record stores the sources a place has, the one source a famine fails and
+ * the foodways line from the place's own table, and preserved non-grain sources lengthen the stores, which
+ * the defence scores read. On THIS corpus 360 of 360 rows move; 360/360 hashes stay distinct. ATTRIBUTION,
+ * ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S3 = S2 + this cause, where S2 (FOOD-2's stage,
+ * its writes committed) reproduces `0c918079…` exactly. FENCE 3 (call-path dormancy) re-run green at the
+ * write: zero espionage calls. `0c918079…` -> `5a2c0b5e…`.
+ *
+ * ── 2026-11-03, FOOD-2: THE FOOD BASE NUMBERS (THE COHERENCE AND SCALE WINDOW) ──
+ * THE NINETEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-food-2-food-base-numbers.json. THE MOVER, FOUND: the
+ * food base numbers (a7f13fef4): one terrain table, no hidden /1.3 storage divisor, the tier's hinterland
+ * share drawn as normal supply; the food record, viability and the defence scores read them, and what
+ * legitimacy and prosperity re-deal downstream follows. On THIS corpus 360 of 360 rows move; 360/360 hashes
+ * stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from the staged tree S2 = S1 + this
+ * cause, where S1 (FOOD-1's stage, its writes committed) reproduces `6260b43e…` exactly. FENCE 3 (call-path
+ * dormancy) re-run green at the write: zero espionage calls. `6260b43e…` -> `0c918079…`.
+ *
+ * ── 2026-11-03, FOOD-1: ONE FOOD RECORD EVERY FOOD SENTENCE READS (THE COHERENCE AND SCALE WINDOW) ──
+ * THE EIGHTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: THE COHERENCE AND SCALE WINDOW, ODQ §934.104 (the §881.4 STOP's own
+ * terms); the record is docs/shift-records/2026-11-03-food-1-one-food-record.json. THE MOVER, FOUND: the
+ * stored food record and its one set of cut-offs (b2aa5f5fa), with the surplus words reading it
+ * (22d458883); prosperity reads the record, and what it re-deals downstream follows. On THIS corpus 360
+ * of 360 rows move; 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written from
+ * the staged tree S1 = S0 + this cause, where S0 (the window's tip 71541a9e6 with each of its golden-moving
+ * commits reverse-applied) reproduces `8c4a42c5…` exactly. FENCE 3 (call-path dormancy) re-run green at
+ * the write: zero espionage calls. `8c4a42c5…` -> `6260b43e…`.
+ *
  * ── 2026-10-31, TENSION VARIETY: EIGHT VARIANTS PER ARCHETYPE, DRAWN WITHOUT REPLACEMENT (GS-1) ──────
  * THE SEVENTEENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's
  * delegation (ODQ §934.101); the record is docs/shift-records/2026-10-31-tension-variety.json.
@@ -469,7 +549,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '8c4a42c5ee4d01db9cdf355e52b2e37e1381d00a99fda6195e5158caca1d3194';
+const PRE_COUPLING_CORPUS_SHA = '00440713a9a1e3cd0855966247ad560fabca788cd118992b68d8a9811e9052ef';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);

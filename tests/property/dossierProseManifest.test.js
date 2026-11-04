@@ -148,11 +148,26 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // docs/shift-records/2026-10-31-one-faction-set.json): DS-GEN-2 composes one line per conflict, and a
     // conflict is now a pair of power factions a rivalry crosses, so towns hold a different number of them
     // (every moved cell is DS-GEN-2: 650 changed, 616 added, 74 removed). Towns unmoved at 516/3/3/3.
+    // 70,776 -> 70,782 (398/392/384 unmoved) at FOOD-1 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-food-1-one-food-record.json): prosperity, legitimacy and viability now read the
+    // stored food record, so their rungs move in 222 rows (cells changed, 48 added, 42 removed: PROSPERITY breakdowns). Towns unmoved at 516/3/3/3.
+    // 70,782 -> 70,820 (398/392/384 unmoved) at FOOD-2 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-food-2-food-base-numbers.json): the food base numbers move the food, viability,
+    // legitimacy and defence rungs in 978 rows (5,116 cells changed; 64 added, DS-POW-1; 26 removed, DS-GEN-2 24 and
+    // DS-ECO-1 2). Towns unmoved at 516/3/3/3.
+    // 70,820 -> 70,724 (398/392/384 unmoved) at SIZE-3 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-size-3-guild-market.json): the merchant guild is no longer seated over a
+    // market-less small place, so 174 rows move (78 DS-POW-4 cells changed in thorps; 96 DS-GEN-2 cells removed in
+    // hamlets, the conflict line the dropped guild carried). Towns unmoved at 516/3/3/3.
+    // 70,724 -> 68,660 (398/392/384 -> 386/380/372) at X-49 (2026-11-03, ODQ §934.104,
+    // docs/shift-records/2026-11-03-x49-stores-off-defense.json): the stored-food figure has one home, the Economy
+    // tab, so every row loses the Defense tab's two food-stores cells (DS-DEF-2's Disasters & Famine reserves line,
+    // DS-DEF-6's Logistics & Supply stores line: 2,100 removed; 150 DS-DEF-6 cells changed). Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 70_776, towns: 516 },
-      'gm-seed-a': { cells: 398, towns: 3 },
-      'gm-seed-b': { cells: 392, towns: 3 },
-      'gm-seed-c': { cells: 384, towns: 3 },
+      'golden-master-v3': { cells: 68_660, towns: 516 },
+      'gm-seed-a': { cells: 386, towns: 3 },
+      'gm-seed-b': { cells: 380, towns: 3 },
+      'gm-seed-c': { cells: 372, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
