@@ -114,3 +114,16 @@ describe('F5 unit 1 — A-11 reads prose, not ledgers of lacks', () => {
     expect(seaWordSentence([row], {})).toBe(row);
   });
 });
+
+describe('F5 ruling (1) — an airship city has shipwrights (the chair, 2026-11-04, on soak1k-377 and -755)', () => {
+  const AIRSHIP = { institutions: [{ name: 'Airship docking (high magic)' }, { name: 'Docks/port facilities' }] };
+  it('an airship metropolis with a Master Shipwright: 0 findings', () => {
+    expect(seaWordSentence(['Master Shipwright'], AIRSHIP)).toBeUndefined();
+  });
+  it('a landlocked place with no airship and a Master Shipwright: still a finding', () => {
+    expect(seaWordSentence(['Master Shipwright'], { institutions: [{ name: 'Town hall' }] })).toBe('Master Shipwright');
+  });
+  it('an airship city\'s harbour claimed outright: still a finding', () => {
+    expect(seaWordSentence(['Fishing boats crowd the harbour.'], AIRSHIP)).toBe('Fishing boats crowd the harbour.');
+  });
+});

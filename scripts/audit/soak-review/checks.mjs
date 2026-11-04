@@ -81,7 +81,9 @@ const COOPER_BARRELS = /\bbarrels? for [^.]*\bfish\b/gi;
 /** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
 // Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
-const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?)\b/gi;
+// F5 ruling (1), 2026-11-04 (soak1k-377, -755): an airship city has shipwrights — the ship words
+// (ship, ships, shipwright, shipyard, shipping) are licensed where the override seats the docks.
+const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?|ship(?:s|wrights?|yards?|ping)?)\b/gi;
 /** F5 (2026-11-04): an A-05 gap line, "<chain>: <house> exists but lacks access to <good>". */
 const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
 
