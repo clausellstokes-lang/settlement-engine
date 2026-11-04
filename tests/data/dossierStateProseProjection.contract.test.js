@@ -799,7 +799,8 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(stateMarks.size).toBeGreaterThanOrEqual(8);
     expect(causalMarks.size).toBeGreaterThanOrEqual(92);
     // F10 WALLS-WORD (2026-11-04): the `walls` fact dimension adds `walls` / `no walls`.
-    expect(vocabulary.length).toBe(9);
+    // F12 CRISIS-BLIND (2026-11-04): the five crisis fact dimensions add ten words.
+    expect(vocabulary.length).toBe(19);
   });
 
   it('reads NOTHING from a partitioned pool the caller did not answer', () => {
@@ -837,8 +838,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(DIMENSIONED_POOLS.length).toBeGreaterThanOrEqual(24);
     expect([...new Set(DIMENSIONED_POOLS.map((p) => p.id))].sort())
       // F10 WALLS-WORD (2026-11-04): sixteen more blocks partition by `walls`.
-      .toEqual(['DS-CND-1', 'DS-DEF-6', 'DS-ECO-12', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+      // F12 CRISIS-BLIND (2026-11-04): six more partition by a crisis dimension (DS-DEF-1, -2, -4, -11, DS-ECO-1, DS-POW-4).
+      .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-ECO-1', 'DS-ECO-12', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {

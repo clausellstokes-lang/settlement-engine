@@ -305,7 +305,8 @@ function routingLedger(mounts, unmounted) {
 /** The design's own worked example: one economy header, one fact speaking once. */
 const CLEAN = Object.freeze([
   Object.freeze({
-    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+    // F12 CRISIS-BLIND (2026-11-04): DS-ECO-1 partitions by two crisis dimensions, as its shipped row declares.
+    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence', dimensions: ['crisis', 'hunger'],
   }),
   Object.freeze({
     mount: 'history.tensions', tab: 'history', desk: 'general', blockId: 'DS-GEN-1', rung: 'sentence', dimensions: ['severity'],
@@ -384,7 +385,7 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     expect(blockDimensions('DS-GEN-1')).toEqual(['severity']);
     expect(blockDimensions('DS-GEN-6')).toEqual(['deficit']);
     expect(blockDimensions('DS-GEN-9')).toEqual(['anchor']);
-    expect(blockDimensions('DS-ECO-1')).toEqual([]);
+    expect(blockDimensions('DS-ECO-1')).toEqual(['crisis', 'hunger']);
   });
 
   test('the clean worked example passes every rule', () => {
@@ -451,7 +452,7 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
     // that will assemble a reading nothing consumes.
     const invented = mutate(0, { dimensions: ['severity'] });
     expect(dimensionDeclarationFaults(invented))
-      .toEqual(['economics.prosperityHeader: DS-ECO-1 partitions by [] and the row declares [severity]']);
+      .toEqual(['economics.prosperityHeader: DS-ECO-1 partitions by [crisis,hunger] and the row declares [severity]']);
     expect(rulesThatSpeak(invented)).toEqual(['dimensions']);
     // A wrong dimension name is caught by the same equality, not by a separate list.
     expect(dimensionDeclarationFaults(mutate(1, { dimensions: ['anchor'] })))

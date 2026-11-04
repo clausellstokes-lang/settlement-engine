@@ -812,7 +812,7 @@ the access.
 **COMBINATION C1: a high rung on a working approach**
 1. `[visitor]` A stranger reads {settlement}'s standing off its {access} before anyone tells him: the traffic is steady, the {complexity} keeps more hands busy than the town strictly needs, and none of it looks improvised.
 2. `[ledger]` {settlement}'s books close with a margin, and the margin is broad rather than lucky. The {complexity} earns from several directions at once and the {access} carries all of it.
-3. `[street]` Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.
+3. `[street · no hunger]` Nobody here talks about the price of bread. The town is well off, the {access} keeps it that way, and the talk is about what to build next.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
 1. `[visitor]` {settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
@@ -822,7 +822,7 @@ the access.
 **COMBINATION C3: the middle rungs**
 1. `[street]` {settlement} manages. The {complexity} covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
 2. `[ledger]` The accounts here balance on a thin margin. Nothing in them is failing; nothing in them is spare either.
-3. `[visitor]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
+3. `[visitor · no crisis]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
 
 **COMBINATION C4: a low rung on a working approach**
 1. `[ledger]` {settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.
@@ -1193,13 +1193,14 @@ contradict** it (R-DST-C).
 
 **POOR** — *getting by, no surplus*
 1. `[ledger]` {settlement} covers what it must and nothing beyond. Every essential is accounted for and there is no line for anything else.
-2. `[street]` The town gets by. Nobody is going without bread and nobody is building anything either.
+2. `[street · no hunger]` The town gets by. Nobody is going without bread and nobody is building anything either.
 3. `[visitor]` {settlement} looks maintained rather than made. What stands is kept standing; nothing new goes up.
 
 **MODERATE** — *steady, thin margin*
 1. `[ledger]` The accounts come out steady with a narrow margin. It is an ordinary town's arithmetic and it works.
-2. `[street]` Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.
-3. `[visitor]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
+2. `[street · no crisis]` Things are fine. Not comfortable, not tight: fine, and fine is what people here expect.
+3. `[visitor · no crisis]` Nothing about {settlement}'s condition asks to be remarked on. The town supports itself and has a little in hand.
+4. `[visitor · crisis]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
 1. `[ledger]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
@@ -1249,9 +1250,11 @@ sentence in two voices. **No named deaths.**
 3. `[visitor]` A stranger will be fed generously and will not be thanked for noticing. There is more than enough and it is unremarkable to anyone local.
 
 **SECURE**
-1. `[ledger]` {settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.
-2. `[street]` The town eats. It is not a subject anyone raises unprompted.
-3. `[threshold]` {settlement} is fed and only just comfortably. The margin is real and thin enough that a good season and a poor one feel different.
+1. `[ledger · no hunger]` {settlement} feeds itself with a small margin. The counts come out ahead by a little, every season, without much drama.
+2. `[street · no hunger]` The town eats. It is not a subject anyone raises unprompted.
+3. `[threshold · no hunger]` {settlement} is fed and only just comfortably. The margin is real and thin enough that a good season and a poor one feel different.
+4. `[street · hunger]` The town ate well enough until the hunger came, and the margin it had is the first thing the hunger has spent.
+5. `[ledger · hunger]` {settlement}'s counts came out ahead before the hunger; they do not now, and nobody at {settlement} calls the town fed.
 
 **PRESSURED**
 1. `[ledger]` The food counts come up short by a little, and the little has to be found somewhere every season.
@@ -1261,7 +1264,7 @@ sentence in two voices. **No named deaths.**
 **IMPORT-DEPENDENT**
 1. `[ledger]` A substantial part of what {settlement} eats is bought rather than grown. The town's food is a trade item, and the trade is not optional.
 2. `[street]` The carts feed this town as much as the fields do. Everybody knows what day they come and what it means if they do not.
-3. `[threshold]` {settlement} is fed and dependent. Nothing about the arrangement is failing; everything about it rests on the road staying open.
+3. `[threshold · no hunger]` {settlement} is fed and dependent. Nothing about the arrangement is failing; everything about it rests on the road staying open.
 
 **DEFICIT**
 1. `[ledger]` {settlement} cannot feed itself and does not come close. The shortfall is large, standing, and covered incompletely.
@@ -2144,9 +2147,11 @@ did not die.
 **PDF PARITY:** parity.
 
 **`riskLabel: Stable` (no challengers)**
-1. `[ledger]` Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.
-2. `[street]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
-3. `[counterforce]` There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.
+1. `[ledger · succession settled]` Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.
+2. `[street · succession settled]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
+3. `[counterforce · succession settled]` There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.
+4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
+5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
 
 **`riskLabel: Holding`**
 1. `[ledger]` {faction} outweighs everyone who wants the {seat} at {settlement}, and the wanting is on the record. The hold is real and it is not comfortable.
@@ -2535,8 +2540,8 @@ margin *arm*. They are different fields on different rows and both are kept;
 **readiness `STRONG`**
 1. `[visitor]` {settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.
 2. `[ledger]` What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.
-3. `[street]` The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.
-4. `[counterforce]` Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.
+3. `[street · no threat]` The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.
+4. `[counterforce · no threat]` Nothing presses {settlement} at present, and the absence is not luck: a town this well set is not worth the price of trying.
 
 **readiness `ADEQUATE`**
 1. `[ledger]` {settlement} is covered against what it is likely to face, with little left over. The arrangements work and would not survive being tested twice at once.
@@ -2629,14 +2634,18 @@ supplies the ancestry.
 3. `[street]` The town can answer trouble and cannot prevent it, and the difference costs it something every season.
 
 **`Beasts & Monsters`: `settled`, defenses beyond the need**
-1. `[counterforce]` There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.
-2. `[ledger]` {settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.
-3. `[visitor]` A stranger notices the perimeter at {settlement} chiefly for how relaxed the people on it are.
+1. `[counterforce · no threat]` There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.
+2. `[ledger · no threat]` {settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.
+3. `[visitor · no threat]` A stranger notices the perimeter at {settlement} chiefly for how relaxed the people on it are.
+4. `[ledger · threat]` {settlement} built more against the country than the country ever asked for, and the threat now at hand is spending that margin.
+5. `[visitor · threat]` A stranger finds {settlement}'s works manned in earnest; what was built against nothing in particular is being held against something now.
 
 **`Beasts & Monsters`: `settled`, nothing organized**
-1. `[ledger]` {settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
-2. `[street]` The town has never needed to think about what is outside it, and does not.
-3. `[visitor]` A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
+1. `[ledger · no threat]` {settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.
+2. `[street · no threat]` The town has never needed to think about what is outside it, and does not.
+3. `[visitor · no threat]` A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.
+4. `[street · threat]` {settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.
+5. `[ledger · threat]` Nothing at {settlement} was organized against the country, and the threat now at hand has found the gap.
 
 **`Invasion & War`: walls AND professional garrison**
 1. `[ledger]` {settlement} has a line and professionals to hold it, which is real deterrence against raiding and against a conventional assault; it is not a posture rated for a long siege without stores behind it.
@@ -2665,8 +2674,9 @@ supplies the ancestry.
 
 **`Invasion & War`: neither walls nor force**
 1. `[ledger]` {settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.
-2. `[counterforce]` Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.
-3. `[street]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+2. `[counterforce · no threat]` Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.
+3. `[street · no threat]` The town's plan for an army is to not be interesting to one, and everybody here can state the plan.
+4. `[counterforce · threat]` {settlement} has no line and no force, and the threat now at hand has noticed both.
 
 **`Internal Security`: full legal chain (court AND prison)**
 1. `[ledger]` {settlement} can arrest, try and hold, and having all three means the town's law is a process rather than a threat.
@@ -2823,10 +2833,10 @@ the leash is the state, not a fate.
 `corrupted` and above (the print chapter carries no audience gate of its own).
 
 **structure `organized`**
-1. `[street]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
+1. `[street · no unrest]` Crime at {settlement} has an order to it. What is permitted is permitted by somebody, random violence is put down because it draws attention, and the arrangement is stable enough to negotiate with.
 2. `[ledger]` The criminal interest at {settlement} is a hierarchy rather than a nuisance: predictable, rule-bound, and extracting steadily from the same places every season.
 3. `[visitor]` A stranger at {settlement} is not robbed and is quietly told what the arrangement is; the danger here is systematic rather than sudden.
-4. `[counterforce]` There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.
+4. `[counterforce · no unrest]` There is very little street violence at {settlement} and it is not the watch's doing. A structured interest suppresses what draws enforcement, and does it more thoroughly than the watch could.
 
 **structure `semi-organized`**
 1. `[ledger]` Criminal work at {settlement} is coordinated enough to hold routes and territories and not coordinated enough to have a head; several interests are running, and none of them is the one to talk to.
@@ -3068,7 +3078,7 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 
 **`Naval Defense: Port only`**
 1. `[ledger]` {settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.
-2. `[unfolding]` The port is the town's living and the town's opening, and nothing has yet arrived that made the second half matter.
+2. `[unfolding · no threat]` The port is the town's living and the town's opening, and nothing has yet arrived that made the second half matter.
 3. `[visitor]` A stranger sails into {settlement} unchallenged and is struck, afterwards, by how easy that was.
 
 **`Naval Defense: Under blockade`** *(recorded cause — clause licensed)*
@@ -6042,17 +6052,20 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 3. `[visitor]` {settlement} is enclosed the way working things are enclosed: against something, and recently attended to.
 
 **`WALLED-QUIET`**
-1. `[visitor]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
-2. `[elder]` The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.
-3. `[ledger]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
+1. `[visitor · no threat]` {settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.
+2. `[elder · no threat]` The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.
+3. `[ledger · no threat]` The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.
+4. `[visitor · threat]` {settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.
+5. `[ledger · threat]` What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.
 
 **`WALLED-STRAINED`**
 1. `[ledger]` {settlement}'s {defwork} stands better than the watch that should man it; stone keeps itself, and wages do not.
 2. `[unfolding]` The {defwork} around {settlement} is sound and the muster behind it is thinning, which is the kind of arithmetic a town notices late.
 
 **`UNWALLED-SMALL`**
-1. `[street]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
+1. `[street · no threat]` {settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.
 2. `[visitor]` No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.
+3. `[street · threat]` {settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.
 
 **`UNWALLED-LARGE`**
 1. `[counterforce]` {settlement} has reached a size that usually buys stone, and has not bought it; whether that is confidence or thrift, the openness is itself a statement.

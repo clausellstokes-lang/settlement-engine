@@ -19,6 +19,7 @@
  *   grade-vs-food            gradeVsFoodFindings          once, surface 'defense' (Overview × Defense)
  *   magic-absent-prose       magicAbsentProseFindings     once, surface 'magic'
  *   crime-denied-and-listed  crimeDeniedAndListedFindings once, surface 'defense' (Defense × Economics)
+ *   crisis-blind-prose       crisisBlindFindings          per surface, read once over every surface
  *   famine-stores            famineStoresFindings         per surface (lane RUNG2-F13)
  *   migration-direction      migrationDirectionFindings   per surface (lane RUNG2-F13)
  *   crisis-cast-sense        crisisCastSenseFindings      once over the Tonight sheet and the page (lane RUNG2-F13)
@@ -26,9 +27,13 @@
  * The three RUNG2-F13 checks (crisisFactFindings.js) are the page battery's too: the soak's kind
  * 10, "crisis" (scripts/audit/soak-review/checks.mjs :: KIND_OF).
  *
- * The last three (lane RUNG1B-F9, readerContradictionFindings.js) read two rendered tabs side by
+ * The three RUNG1B-F9 checks (readerContradictionFindings.js) read two rendered tabs side by
  * side, so like `hook-truth-page` they are the page battery's alone: the record battery the
  * generation receipt runs never sees them, and no receipt moves.
+ *
+ * `crisis-blind-prose` (lane F12, rung 2, crisisBlindFindings.js) is a page check too: a calm
+ * sentence printed under an active crisis it denies. It reads every surface at once and
+ * reports each finding on its own surface.
  *
  * UNSTORED: nothing is written into the record and nothing is read from a clock or a seed,
  * so no golden moves and the same inputs give the same findings. An instrument that throws
@@ -42,6 +47,7 @@ import { collect, recordBattery, str } from './recordBattery.js';
 import {
   crimeDeniedAndListedFindings, gradeVsFoodFindings, magicAbsentProseFindings,
 } from './readerContradictionFindings.js';
+import { crisisBlindFindings } from './crisisBlindFindings.js';
 import {
   crisisCastSenseFindings, famineStoresFindings, migrationDirectionFindings,
 } from './crisisFactFindings.js';
@@ -58,7 +64,7 @@ import {
 export const BATTERY_CHECKS = Object.freeze([
   'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
   'magic-words', 'seat-holder', 'tier-noun',
-  'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed',
+  'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed', 'crisis-blind-prose',
   'famine-stores', 'migration-direction', 'crisis-cast-sense',
 ]);
 
@@ -74,7 +80,7 @@ const CRISIS_SURFACE_CHECKS = Object.freeze(/** @type {const} */ ([
   ['migration-direction', migrationDirectionFindings],
 ]));
 const PAGE_ONLY = new Set([
-  'hook-truth-page', ...READER_CHECKS.map(([check]) => check),
+  'hook-truth-page', 'crisis-blind-prose', ...READER_CHECKS.map(([check]) => check),
   ...CRISIS_SURFACE_CHECKS.map(([check]) => check), 'crisis-cast-sense',
 ]);
 
@@ -105,6 +111,17 @@ export function coherenceBattery(settlement, surfaces, options = {}) {
   const reader = [];
   for (const [check, surface, instrument] of READER_CHECKS) {
     if (runs(check)) collect(check, surface, () => instrument(surfaces ?? {}), (f) => ({ quote: str(f.quote), detail: str(f.detail) }), reader);
+  }
+  if (runs('crisis-blind-prose')) {
+    // Each finding is reported on the surface its sentence is on; a throw is a finding of its
+    // own, on 'page', as `collect` reports one.
+    try {
+      for (const f of crisisBlindFindings(/** @type {object} */ (settlement), surfaces ?? {})) {
+        reader.push({ check: 'crisis-blind-prose', surface: f.surface, quote: f.sentence.trim(), detail: `${f.claim} under ${f.crises.join(', ')}` });
+      }
+    } catch (error) {
+      reader.push({ check: 'crisis-blind-prose', surface: 'page', quote: '', detail: `instrument threw: ${str(error instanceof Error ? error.message : error)}` });
+    }
   }
   /** @type {BatteryFinding[]} */
   const crisis = [];

@@ -258,10 +258,10 @@ export const MOUNT_RUNGS = Object.freeze({
  */
 export const DOSSIER_MOUNTS = Object.freeze([
   Object.freeze({
-    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence',
+    mount: 'economics.prosperityHeader', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-1', rung: 'sentence', dimensions: ['crisis', 'hunger'],
   }),
   Object.freeze({
-    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['walls'],
+    mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['crisis', 'hunger', 'walls'],
   }),
   Object.freeze({
     mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
@@ -270,7 +270,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['walls'],
+    mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['hunger', 'walls'],
   }),
   Object.freeze({
     mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['walls'],
@@ -291,7 +291,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'power.criminalUnderside', tab: 'power', desk: 'power', blockId: 'DS-POW-6', rung: 'sentence', dimensions: ['walls'],
   }),
   Object.freeze({
-    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence',
+    mount: 'power.succession', tab: 'power', desk: 'power', blockId: 'DS-POW-4', rung: 'sentence', dimensions: ['succession'],
   }),
   Object.freeze({
     mount: 'power.factionLadder', tab: 'power', desk: 'power', blockId: 'DS-POW-3', rung: 'sentence',
@@ -324,7 +324,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
       + 'calm town should open that fold is a LAYOUT ruling for the chair, not a lane\'s.',
   }),
   Object.freeze({
-    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence',
+    mount: 'defense.threatAssessment', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-2', rung: 'sentence', dimensions: ['threat'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T1 T1-6/T1-9/T1-10, the owner's delegation;
   // rubric R2). Each of these three positions printed a sentence beside rows that already
@@ -378,16 +378,16 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'defense.armedForces', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-5', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence',
+    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence', dimensions: ['threat'],
   }),
   Object.freeze({
     mount: 'defense.militaryStatus', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-8', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence',
+    mount: 'defense.wallRationale', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-11', rung: 'sentence', dimensions: ['threat'],
   }),
   Object.freeze({
-    mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence',
+    mount: 'defense.criminalStructure', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-4', rung: 'sentence', dimensions: ['unrest'],
     visibility: 'closed-section',
     visibilityReason: 'The same DefenseTab fold as defense.publicOrder above, and the same '
       + 'argument: the criminal-structure CARD the desk was handed the key of (csd.label and '
@@ -446,7 +446,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'faith.nicheRow', tab: 'faith', desk: 'warFaith', blockId: 'DS-FTH-3', rung: 'glance',
   }),
   Object.freeze({
-    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['walls'],
+    mount: 'defense.supportingCapabilities', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-6', rung: 'sentence', dimensions: ['threat', 'walls'],
   }),
   Object.freeze({
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
@@ -461,7 +461,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'services.catalogStanding', tab: 'services', desk: 'economy', blockId: 'DS-SUP-3', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence', dimensions: ['walls'],
+    mount: 'daily_life.standingOfLiving', tab: 'daily_life', desk: 'economy', blockId: 'DS-ECO-8', rung: 'sentence', dimensions: ['crisis', 'hunger', 'walls'],
   }),
   // ⛔ GLANCE BY CHAIR RULING 2026-10-30 (RULINGS-T3 H4; rubric R2/R4): "What the years have
   // made of it" was two-template boilerplate, and its marker event disagreed with the
