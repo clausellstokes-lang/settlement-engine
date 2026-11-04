@@ -476,8 +476,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('fish') || exp.includes('herring');
         })) &&
       !hasIncomeSource('fish') &&
-      // A-11: a catch lands only from water — the world law's, or a landing or dock on the roster.
-      !hasIncomeSource('maritime') && (generationWorldLaw.portKind !== 'none' || hasWaterAccessInstitution(institutions))
+      // A-11: a catch lands only from water — the world law's, or a fishing landing on the roster (not aerial docks, not inland salt).
+      !hasIncomeSource('maritime') && (generationWorldLaw.portKind !== 'none' || hasWaterAccessInstitution((institutions || []).filter((i) => /\bfish/i.test(nativeSemanticName(i) || ''))))
     ) {
       incomeBuild.push({
         source: generationWorldLaw.supportsMaritime()
