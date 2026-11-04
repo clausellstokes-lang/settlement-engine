@@ -50,6 +50,7 @@ type StubOpts = {
   roles?: Record<string, string>; // user id -> profiles.role
   rateError?: boolean;
   inactive?: Record<string, boolean>; // user id -> account_is_active false
+  insertError?: boolean; // analytics_events insert answers an error
 };
 
 /** A service-role stub: auth.getUser, profiles.role, the session table, ingest_check_rate. */
@@ -57,6 +58,7 @@ function makeAdmin(opts: StubOpts = {}) {
   const counts = new Map<string, number>();
   const rpcCalls: Array<Record<string, unknown>> = []; // ingest_check_rate only
   const activeCalls: string[] = [];
+  const inserts: Array<{ table: string; row: Record<string, unknown> }> = []; // the cost log
   let made = 0;
   const client = {
     auth: {
@@ -75,6 +77,10 @@ function makeAdmin(opts: StubOpts = {}) {
           return Promise.resolve({ data: null, error: null });
         },
         upsert() { return Promise.resolve({ error: null }); },
+        insert(row: Record<string, unknown>) {
+          inserts.push({ table, row });
+          return Promise.resolve({ error: opts.insertError ? { message: 'insert down' } : null });
+        },
       };
       return q;
     },
@@ -91,7 +97,7 @@ function makeAdmin(opts: StubOpts = {}) {
       return Promise.resolve({ data: n <= Number(args.p_max), error: null });
     },
   };
-  return { rpcCalls, activeCalls, adminClient: () => { made++; return client; }, made: () => made };
+  return { rpcCalls, activeCalls, inserts, adminClient: () => { made++; return client; }, made: () => made };
 }
 
 function post(body: unknown, headers: Record<string, string> = {}) {
@@ -367,4 +373,62 @@ scopedEnv.test('REGEN: a bad section, settlement, locks or seed is refused 400 w
     assertEquals((await res.json()).error, error);
   }
   assertEquals(admin.made(), 0, 'shape refusals reach no client');
+});
+
+scopedEnv.test('COST LOG: one engine_generate row per metered call — op, outcome, duration, version, a keyed caller hash, no IP (ENGINE-5 unit 4)', async () => {
+  await loadGenerationLawPayloads();
+  const admin = makeAdmin();
+  const res = await handleEngineGenerate(post({ seed: cases.seeds[0], config: cases.config }), { adminClient: admin.adminClient });
+  assertEquals(res.status, 200);
+  assertEquals(admin.inserts.length, 1);
+  const { table, row } = admin.inserts[0];
+  assertEquals(table, 'analytics_events');
+  assertEquals(row.event, 'engine_generate');
+  assertEquals(row.actor_id, null);
+  assertEquals(row.consent_tier, 'product');
+  const props = row.props as Record<string, unknown>;
+  assertEquals(props.op, 'generate');
+  assertEquals(props.outcome, 'ok');
+  assertEquals(props.engine_version, ENGINE_VERSION);
+  assertEquals(props.caller, 'ip');
+  assertEquals(props.staff, false);
+  assert(typeof props.duration_ms === 'number' && props.duration_ms >= 0);
+  assert(/^[0-9a-f]{16}$/.test(String(props.caller_hash)), 'a 16-hex keyed hash');
+  assert(!JSON.stringify(row).includes('203.0.113.7'), 'the IP is never stored');
+  // The same caller hashes the same; an account hashes apart from its IP.
+  const again = makeAdmin({ users: { jwt1: 'user-1' } });
+  await handleEngineGenerate(post({ op: 'derive', seed: cases.seeds[0], config: cases.config }), { adminClient: admin.adminClient });
+  await handleEngineGenerate(post({ op: 'derive', seed: cases.seeds[0], config: cases.config }, { Authorization: 'Bearer jwt1' }), { adminClient: again.adminClient });
+  const second = admin.inserts[1].row.props as Record<string, unknown>;
+  const account = again.inserts[0].row.props as Record<string, unknown>;
+  assertEquals(second.op, 'derive');
+  assertEquals(second.caller_hash, props.caller_hash);
+  assertEquals(account.caller, 'account');
+  assert(account.caller_hash !== props.caller_hash);
+  assert(!JSON.stringify(again.inserts[0].row).includes('user-1'), 'the account id is never stored');
+});
+
+scopedEnv.test('COST LOG: rate_limited, refused (inactive) and failed are logged; stepMeta and shape refusals are not; a log failure never changes the reply', async () => {
+  const limited = makeAdmin();
+  for (let i = 0; i < 7; i++) await handleEngineGenerate(post({ op: 'derive', seed: 's', config: {} }), { adminClient: limited.adminClient });
+  assertEquals(limited.inserts.at(-1)?.row.props && (limited.inserts.at(-1)!.row.props as Record<string, unknown>).outcome, 'rate_limited');
+  assertEquals(limited.inserts.length, 7);
+  const inactive = makeAdmin({ users: { jwtX: 'user-x' }, inactive: { 'user-x': true } });
+  const r403 = await handleEngineGenerate(post({ seed: 's', config: {} }, { Authorization: 'Bearer jwtX' }), { adminClient: inactive.adminClient });
+  assertEquals(r403.status, 403);
+  assertEquals((inactive.inserts[0].row.props as Record<string, unknown>).outcome, 'refused');
+  const failing = makeAdmin();
+  const r422 = await handleEngineGenerate(post({ op: 'regenSection', section: 'npcs', settlement: { institutions: 5 }, config: {} }), { adminClient: failing.adminClient });
+  assertEquals(r422.status, 422);
+  assertEquals((failing.inserts[0].row.props as Record<string, unknown>).outcome, 'failed');
+  assertEquals((failing.inserts[0].row.props as Record<string, unknown>).op, 'regenSection');
+  const quiet = makeAdmin();
+  await handleEngineGenerate(post({ op: 'stepMeta' }), { adminClient: quiet.adminClient });
+  await handleEngineGenerate(post({ op: 'derive', seed: '', config: {} }), { adminClient: quiet.adminClient });
+  assertEquals(quiet.inserts.length, 0);
+  await loadGenerationLawPayloads();
+  const broken = makeAdmin({ insertError: true });
+  const ok = await handleEngineGenerate(post({ seed: cases.seeds[0], config: cases.config }), { adminClient: broken.adminClient });
+  assertEquals(ok.status, 200);
+  assert((await ok.json()).settlement, 'the town still answers');
 });

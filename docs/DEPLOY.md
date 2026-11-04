@@ -131,9 +131,12 @@ The order, every time it is turned on:
    THE GENERATOR OUT of the client (`vite.config.js :: engineAbsentWhenRemote`;
    `tests/build/engineAbsentWhenRemote.test.js`): no generation worker, no pipeline, no step
    registry in `dist/`.
-5. **Watch:** generations today and this month by outcome. The admin analytics line for
-   this is NOT BUILT YET (ENGINE-3 handed it back); until it lands, watch the function's
-   invocations and errors in the Supabase dashboard (Edge Functions → engine-generate → Logs).
+5. **Watch:** generations today and this month by op and outcome — the first line of
+   Admin → Analytics ("Engine generations (today / this month)"), read from the
+   `engine_generate` rows engine-generate writes to `analytics_events` through
+   `report_engine_generations` (migration 204, which must be applied for the line to load;
+   until then it says so). The function's own invocations and errors stay in the Supabase
+   dashboard (Edge Functions → engine-generate → Logs).
 
 **What the engine service serves with the flag on:** a fresh generation, the DM
 re-derivation and the surveyor's settlement preview (`engine-generate`'s `derive` op), and
@@ -266,7 +269,7 @@ remembered number.** Migration numbers grow every release, so this guide
 deliberately does NOT pin a "latest" number that would rot and cause an operator
 to under-apply.
 
-**Current migration head: `203_gallery_scanner_client_mirror_totality.sql`** (this
+**Current migration head: `204_engine_generation_report.sql`** (this
 filename is kept current by a freshness pin — `tests/docs/deployRunbookFreshness.test.js`
 derives the head from `supabase/migrations/` and fails the gate if this line drifts).
 <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->

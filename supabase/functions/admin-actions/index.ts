@@ -658,10 +658,14 @@ export async function handleAdminActions(
           edit_heatmap: "report_edit_heatmap",
           ai_usage: "report_ai_usage",
           retention: "report_retention",
+          // The engine service's cost line (migration 204, ENGINE-5): today and this month
+          // by op and outcome; fixed windows, so it takes no range, like report_retention.
+          engine_generations: "report_engine_generations",
         };
+        const NO_RANGE_FNS = new Set(["report_retention", "report_engine_generations"]);
         const fn = typeof dashboard === "string" ? REPORT_FNS[dashboard] : undefined;
         if (!fn) return json({ error: "Unknown dashboard" }, 400);
-        const args = fn === "report_retention" ? {} : { p_from: pFrom, p_to: pTo };
+        const args = NO_RANGE_FNS.has(fn) ? {} : { p_from: pFrom, p_to: pTo };
         const { data, error } = await adminClient.rpc(fn, args);
         if (error) return adminFail(error, 500);
         return json({ success: true, dashboard, rows: data || [], refreshedAt: new Date().toISOString() });

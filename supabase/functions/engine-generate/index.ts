@@ -55,6 +55,17 @@
  * keyed per account when signed in and per IP otherwise. The guard FAILS CLOSED (a
  * limiter error is a 429), per `_shared/rateLimit.ts`.
  *
+ * THE COST LOG (ENGINE-5 unit 4). Every METERED call — generate, derive, regenSection, from
+ * the identity step on — writes one `engine_generate` row to `analytics_events` (the registry's
+ * own name, `src/lib/analyticsEvents.js`, through the edge bundle): props { op, outcome
+ * ('ok' | 'failed' | 'rate_limited' | 'refused'), duration_ms (from the request's arrival),
+ * engine_version, caller ('account' | 'ip'), caller_hash, staff }. caller_hash is a keyed
+ * HMAC-SHA-256 of the account id or the IP, 16 hex: the table's contract is that an IP is never
+ * stored, and `actor_id` is the pseudonymous actor spine, not an account, so it stays null. A
+ * stepMeta call and a shape refusal are not logged (no account, no generation). A log failure is
+ * logged to logError and never changes the reply. The admin dashboard line reads these rows
+ * through `report_engine_generations` (migration 204).
+ *
  * Staff (profiles.role 'developer' | 'admin' — `src/lib/staffEntitlements.js ::
  * STAFF_ROLES`, the roles `src/store/authSlice.js :: isElevated` reads, mirrored below)
  * are unlimited. A role read error reads as NOT staff.
@@ -77,6 +88,7 @@ import {
   runGenerationRequest,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
+import { EVENTS as ANALYTICS_EVENTS, EVENTS_REV as ANALYTICS_EVENTS_REV } from '../_shared/analyticsEventsBundle.js';
 
 // ── THE OWNER'S DIALS (vetoable; the engine-service design's proposal) ───────────────
 // Per account when signed in, per IP when anonymous; staff skip both. Fixed windows on
@@ -171,11 +183,49 @@ async function underRate(admin: EngineAdmin, identity: string): Promise<boolean>
   return true;
 }
 
+/** The cost log's outcome vocabulary (props.outcome). */
+type GenerationOutcome = 'ok' | 'failed' | 'rate_limited' | 'refused';
+
+/** A keyed hash of the caller's identity: 16 hex of HMAC-SHA-256 under the service key. */
+async function callerHash(identity: string): Promise<string> {
+  const key = await crypto.subtle.importKey('raw', new TextEncoder().encode(SERVICE_KEY || FN),
+    { name: 'HMAC', hash: 'SHA-256' }, false, ['sign']);
+  const mac = await crypto.subtle.sign('HMAC', key, new TextEncoder().encode(identity));
+  return Array.from(new Uint8Array(mac)).slice(0, 8).map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
+/** One cost-log row. Never throws and never changes the reply. */
+async function logGeneration(admin: EngineAdmin, row: {
+  op: string; outcome: GenerationOutcome; startedAt: number; userId: string | null; ip: string; staff: boolean;
+}): Promise<void> {
+  try {
+    const identity = row.userId ? `u:${row.userId}` : `ip:${row.ip}`;
+    const { error } = await admin.from('analytics_events').insert({
+      event: ANALYTICS_EVENTS.ENGINE_GENERATE,
+      actor_id: null, session_id: null, subject_id: null, consent_tier: 'product', events_rev: ANALYTICS_EVENTS_REV,
+      props: {
+        op: row.op,
+        outcome: row.outcome,
+        duration_ms: Math.max(0, Date.now() - row.startedAt),
+        engine_version: ENGINE_VERSION,
+        caller: row.userId ? 'account' : 'ip',
+        caller_hash: await callerHash(identity),
+        staff: row.staff,
+      },
+      batch_id: crypto.randomUUID(), seq: 0,
+    });
+    if (error) logError(FN, row.userId, `engine_generate event failed: ${String((error as { message?: unknown }).message)}`, { stage: 'log' });
+  } catch (e) {
+    logError(FN, row.userId, e, { stage: 'log' });
+  }
+}
+
 function isPlainObject(v: unknown): v is Record<string, unknown> {
   return typeof v === 'object' && v !== null && !Array.isArray(v);
 }
 
 export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promise<Response> {
+  const startedAt = Date.now();
   const cors = getCorsHeaders(req);
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405, cors);
@@ -248,22 +298,28 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   // ── Identity (optional), session gate, staff ────────────────────────────────────────
   const authHeader = req.headers.get('Authorization');
   const userId = await resolveUserId(admin, authHeader);
+  let staff = false;
+  /** The metered reply, logged once (the cost log). */
+  const metered = async (response: Response, outcome: GenerationOutcome): Promise<Response> => {
+    await logGeneration(admin, { op, outcome, startedAt, userId, ip: guard.meta.ip, staff });
+    return response;
+  };
   if (userId && await isSessionSuperseded(admin, userId, authHeader, deviceLabelFromRequest(req))) {
-    return json({ error: 'session_superseded' }, 401, cors);
+    return metered(json({ error: 'session_superseded' }, 401, cors), 'refused');
   }
   if (userId) {
     // Fail closed, as construct-settlement does: only a definite `true` proceeds.
     const { data: isActive, error: activeErr } = await admin.rpc('account_is_active', { p_uid: userId });
     if (activeErr) logError(FN, userId, 'account_is_active errored', { stage: 'account' });
-    if (isActive !== true) return json({ error: 'Account is not active' }, 403, cors);
+    if (isActive !== true) return metered(json({ error: 'Account is not active' }, 403, cors), 'refused');
   }
-  const staff = userId ? await isStaff(admin, userId) : false;
+  staff = userId ? await isStaff(admin, userId) : false;
 
   // ── Rate guard (fail closed) ────────────────────────────────────────────────────────
   if (!staff) {
     const identity = userId ? `u:${userId}` : `ip:${guard.meta.ip}`;
     if (!(await underRate(admin, identity))) {
-      return json({ error: 'rate_limited', limits: ENGINE_GENERATE_RATE_LIMITS }, 429, cors);
+      return metered(json({ error: 'rate_limited', limits: ENGINE_GENERATE_RATE_LIMITS }, 429, cors), 'rate_limited');
     }
   }
 
@@ -274,10 +330,10 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
       const settlement = generateSettlementPipeline(config as Record<string, unknown>, null,
         pins === undefined ? { seed } : { seed, pins });
       const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
-      return json({ settlement, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+      return metered(json({ settlement, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors), 'ok');
     } catch (e) {
       logError(FN, userId, e, { stage: 'derive', engineVersion: ENGINE_VERSION });
-      return json({ error: 'generation_failed' }, 422, cors);
+      return metered(json({ error: 'generation_failed' }, 422, cors), 'failed');
     }
   }
 
@@ -291,10 +347,10 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
           { ...(locks === undefined ? {} : { locks }), ...seeded })
         : regenHistoryPipeline(settlement as Record<string, unknown>, config as Record<string, unknown>, seeded);
       const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
-      return json({ parts, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+      return metered(json({ parts, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors), 'ok');
     } catch (e) {
       logError(FN, userId, e, { stage: 'regenSection', engineVersion: ENGINE_VERSION });
-      return json({ error: 'generation_failed' }, 422, cors);
+      return metered(json({ error: 'generation_failed' }, 422, cors), 'failed');
     }
   }
 
@@ -307,10 +363,10 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
       payload: { fullConfig: birthConfig(config), neighbour: null, seed, contentRuntime: { customContent: {} } },
     });
     const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
-    return json({ settlement, pipelineHistory, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+    return metered(json({ settlement, pipelineHistory, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors), 'ok');
   } catch (e) {
     logError(FN, userId, e, { stage: 'generate', engineVersion: ENGINE_VERSION });
-    return json({ error: 'generation_failed' }, 422, cors);
+    return metered(json({ error: 'generation_failed' }, 422, cors), 'failed');
   }
 }
 

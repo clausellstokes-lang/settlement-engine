@@ -16,7 +16,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join } from 'node:path';
 
 export const MIGRATION_TRAIN_BASE_HEAD = 121;
-export const MIGRATION_TRAIN_REPO_HEAD = 203;
+export const MIGRATION_TRAIN_REPO_HEAD = 204;
 
 const FORWARD_ONLY_REASON = [
   'No automatic schema rollback is admitted for this wave.',
@@ -614,6 +614,33 @@ export const MIGRATION_WAVES = Object.freeze([
     }),
     expectedObjects: Object.freeze([
       Object.freeze({ kind: 'function', name: '_gallery_world_snapshot_is_safe' }),
+    ]),
+  }),
+  Object.freeze({
+    id: 'engine-generation-report',
+    from: 204,
+    to: 204,
+    purpose: 'The READ half of the engine service\'s cost log (ENGINE-5 unit 4): one SECURITY '
+      + 'DEFINER report function, service_role only, that counts the engine_generate rows the '
+      + 'engine-generate edge function writes to public.analytics_events — today and this month, '
+      + 'by op and outcome — for the admin analytics panel\'s one line. Like 199 it creates no '
+      + 'table, alters no column, writes no row and touches no policy; it returns counts only, '
+      + 'never the rows\' caller hash. The operator-visible surface is one admin line, and the '
+      + 'wave exposes no user-facing subsystem at all.',
+    rollback: Object.freeze({
+      mode: 'forward-only',
+      reason: [
+        FORWARD_ONLY_REASON,
+        'Like 199, this wave is one new read-only function and its own @rollback annotation '
+        + 'spells the whole reversal out as a single statement, which is why 204 classifies as '
+        + 'documented-manual-reversal rather than taking the wave policy. Dropping the function '
+        + 'destroys nothing: it holds no state, nothing else depends on it, and the only '
+        + 'consequence is that the admin engine line reports its error while every other '
+        + 'dashboard keeps working.',
+      ].join(' '),
+    }),
+    expectedObjects: Object.freeze([
+      Object.freeze({ kind: 'function', name: 'report_engine_generations' }),
     ]),
   }),
 ]);

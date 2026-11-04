@@ -315,6 +315,18 @@ export const EVENTS = Object.freeze({
   //    reads them through report_referral_funnel (migration 199).
   REFERRAL_INTENT_RECORDED:       'referral_intent_recorded',
   REDEEM_CODE_CHECKED:            'redeem_code_checked',
+
+  // ── ENGINE-5 unit 4: THE ENGINE SERVICE'S COST LOG ─────────────────────
+  //    Emitted SERVER-SIDE ONLY, by the engine-generate edge function, once per
+  //    metered call (generate / derive / regenSection; never stepMeta, never a
+  //    shape refusal). The client never emits it. Structure, never content:
+  //    props { op, outcome ∈ {ok, failed, rate_limited, refused}, duration_ms,
+  //    engine_version, caller ∈ {account, ip}, caller_hash (a keyed hash of the
+  //    account id or the IP, 16 hex — the IP itself is never stored), staff }.
+  //    No actor_id (that column is the pseudonymous actor spine, not an account).
+  //    The admin dashboard line reads it through report_engine_generations
+  //    (migration 204). Additive: the contract's shape is unchanged.
+  ENGINE_GENERATE:                'engine_generate',
 });
 
 /**
