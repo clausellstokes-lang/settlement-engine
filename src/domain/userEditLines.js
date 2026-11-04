@@ -9,12 +9,14 @@
  *
  *   - the crisis cast (`castRoles`, domain/crisis/crisisCast.js): `role=kind:id` parts, where a
  *     `faction:` or `institution:` part's id is the name and an `npc:` part's is the durable
- *     character id.
+ *     character id;
+ *   - the house's backing (`backs`, domain/dossier/powerSupport.js): power names parted by a
+ *     middle dot, read case-folded against the faction roster.
  *
  * A rename that moved the record and left the line would leave the DM's part on a name the
  * roster no longer answers to, and the reader drops such a part without a word. TRUST THE DM:
- * the rename modules re-key the line through `rekeyCastLine`, the one place the grammar lives
- * beside its spelling here.
+ * the rename modules re-key each line through `rekeyCastLine` and `rekeyBacksLine`, beside
+ * the one spelling of each here.
  *
  * A LEAF. No imports, so the rename modules (fetched at the call seam to stay off first paint)
  * take the grammar without taking the crisis derivation's graph.
@@ -53,4 +55,50 @@ export function rekeyCastLine(value, kind, oldName, newName) {
     return `${m[1]}=${kind}:${newName}`;
   });
   return moved ? parts.join(CAST_EDIT_SEPARATOR) : value;
+}
+
+/** The house's editable backing path (EDITABLE_FIELDS.institution). */
+export const BACKS_PATH = 'backs';
+/**
+ * THE `backs` EDIT'S SPELLING (X-45). The DM's list lives in the house's own edit record as ONE
+ * line of power names parted by a middle dot. These two helpers are the only spellers.
+ */
+export const BACKS_SEPARATOR = ' · ';
+
+/** @param {unknown} value @returns {string[]} the names, trimmed, deduplicated (first spelling kept) */
+export function parseBacksValue(value) {
+  if (typeof value !== 'string') return [];
+  /** @type {string[]} */ const out = [];
+  const seen = new Set();
+  for (const part of value.split(/[·,;\n]/)) {
+    const name = part.trim();
+    const key = name.toLowerCase();
+    if (!name || seen.has(key)) continue;
+    seen.add(key); out.push(name);
+  }
+  return out;
+}
+
+/** @param {readonly string[]} names @returns {string} */
+export function formatBacksValue(names) {
+  return parseBacksValue((names || []).join(BACKS_SEPARATOR)).join(BACKS_SEPARATOR);
+}
+
+/**
+ * The DM's backing line with the renamed power re-spelled. Case-folded, because the reader
+ * resolves each name case-folded against the roster (powerSupport.js :: houseBacksOf), so a
+ * name the DM typed in another case named this power and must follow it. A line where nothing
+ * moves is returned AS GIVEN; a line that moves is re-spelled through `formatBacksValue`.
+ *
+ * @param {unknown} value the stored line
+ * @param {string} oldName
+ * @param {string} newName
+ * @returns {unknown} the re-keyed line, or `value` itself when nothing moved
+ */
+export function rekeyBacksLine(value, oldName, newName) {
+  if (typeof value !== 'string' || !oldName || !newName || oldName === newName) return value;
+  const folded = oldName.trim().toLowerCase();
+  const names = parseBacksValue(value);
+  if (!names.some((n) => n.toLowerCase() === folded)) return value;
+  return formatBacksValue(names.map((n) => (n.toLowerCase() === folded ? newName : n)));
 }

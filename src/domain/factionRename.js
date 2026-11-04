@@ -95,8 +95,8 @@
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
 import { deepClone } from './clone.js';
 import { nameOf } from './rulingPower.js';
-import { rekeyUserEdit } from './userEdits.js';
-import { CAST_EDIT_PATH, rekeyCastLine } from './userEditLines.js';
+import { rekeyUserEdit, walkUserEdits } from './userEdits.js';
+import { BACKS_PATH, CAST_EDIT_PATH, rekeyBacksLine, rekeyCastLine } from './userEditLines.js';
 
 /**
  * A stored record as this module sees one: an object whose keys resolve to
@@ -995,6 +995,15 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
 
   // 16. The DM's cast edit (RUNG1B-F8): its faction parts follow the faction.
   for (const path of rekeyCastEditsOfKind(settlement, 'faction', oldName, newName)) mark(path, true);
+
+  // 17. The DM's backing edit (RUNG1B-F8): a house the DM put behind this power still
+  // stands behind it. Read through the settlement-level walk of the edit records (the one
+  // read of `_userEdits` the observed-shape register banks), written through the edit
+  // layer's re-key. A DM edit, not a generated path, so not a ledger row (step 16 says why).
+  for (const edit of walkUserEdits(/** @type {import('./userEdits.js').EditableEntity} */ (settlement))) {
+    if (edit.kind !== 'institution' || edit.path !== BACKS_PATH) continue;
+    mark(`institutions[]._userEdits.${BACKS_PATH}`, rekeyUserEdit(edit.entity, BACKS_PATH, (value) => rekeyBacksLine(value, oldName, newName)));
+  }
 
   return { changed: touched.length > 0, touched };
 }

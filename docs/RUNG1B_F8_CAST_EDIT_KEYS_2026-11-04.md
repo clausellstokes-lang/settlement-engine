@@ -40,3 +40,15 @@ No faction or house carries an id on any record (36 of 36 crisis records: no `id
 - `npc:` parts are keyed by the durable character id and are not touched (the control).
 
 **Readers** (55 test files: every file naming `castRoles`, `crisisCast`, `userEdits` or a rename module). Green except: `dmEditKeysFollowRename` (the three `backs` reds, unit 3's); and three files red at the base with byte-identical failure output base vs tip (normalised logs diff empty): `institutionRename` A6 ("guild rows 0", F7's), `negativeAssertionAnchor.walker` (two arms, files outside this lane), and `worldGenerationClockSeam.walker` ARM C; `editCorpusRatchet` A3–A8 (F7's) is red at the tip on the same six arms, its base-vs-tip figure diff recorded in unit 3 (the base run was still in flight at this commit). `check-observed-shape-readers.mjs` is red at the base before it scans (its execution-input precondition: three generated data files changed since the last re-freeze), the same message at the tip; so it does not certify the new reads either way.
+
+## Unit 3 — the backing edit (`institutions[]._userEdits.backs`)
+
+The same shape (b), for the same reason (a power has no id but its name). `parseBacksValue`, `formatBacksValue` and `BACKS_SEPARATOR` move to `src/domain/userEditLines.js` verbatim (`powerSupport.js` re-exports all three), beside the new `rekeyBacksLine(value, old, new)`, which is case-folded because the reader (`houseBacksOf`) resolves each name case-folded. The faction cascade's step 17 reads the edits through `walkUserEdits` (the banked `_userEdits` reader) and writes through `rekeyUserEdit`; reported in `touched` as `institutions[]._userEdits.backs`. No institution rename is needed for this store: it names powers, not houses.
+
+**Readers at the tip** (67 files: the 55 above plus every file naming `powerSupport`, `houseBacksOf`, `parseBacksValue` or a `backs` path; `editCorpusRatchet` run alone). `dmEditKeysFollowRename` 10 of 10 green. Red, each red at the base (`6c7b611`, an exported copy) with **byte-identical normalised failure output** base vs tip: `institutionRename` A6, `negativeAssertionAnchor.walker` (two arms), `worldGenerationClockSeam.walker` ARM C, `editCorpusRatchet` A3–A8, and `generatorGoldenMaster` ("expected [ …(525) ] to deeply equal []" on both sides). The golden's printed list is truncated, so "the golden did not move" is PLAUSIBLE, not CONFIRMED by that diff; nothing in this lane touches a generator (two constants and two functions moved verbatim, one write path added to the rename modules).
+
+## Noticed, not built
+
+- A DM `desc` edit on a faction or house keeps the old name inside `_userEdits.desc.value` while the faction cascade rewrites the entity's `desc` prose (`rewriteProse` on `powerStructure.factions[].desc`), so the edit record and its mirror can disagree after a rename. Prose, not a key; the edit layer's call.
+- A name containing ` · ` would split either line; `formatCastRoles` has the same limit. Not observed.
+- `dmLayer.roots` keys by the row's `.id`; factions and houses have none, so an institution annotation through the edit shell would key on an empty id (not exercised).
