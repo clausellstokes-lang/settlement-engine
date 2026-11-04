@@ -21,6 +21,8 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
+import { generateFoodSecurity } from '../foodGenerator.js';
+import { goodsHeldByFoodRecord } from './foodBalance.js';
 
 
 export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggles = {}, config = {}) => {
@@ -731,6 +733,12 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     });
   }); // ── Stage 4: Chain derivation — compute before return object ─────────────────
   const depletedResources = nativeDepletedResources;
+  // FOOD-EXPORTS: the food record is written once, here, BEFORE the export writers, so every
+  // chain output and export row can read it (foodBalance.js :: offersFoodSurplus). The same
+  // object is handed to computeBaseProsperity below; its crop-fortune draw is a label-keyed
+  // fork (food.cropFortune), so writing it earlier moves no other stream.
+  const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
+  const _foodRecord = _foodSec?.foodRecord ?? null;
   const activeChainsList = computeActiveChains(
     institutions || [],
     nativeNearbyResources,
@@ -742,7 +750,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     // (mirrors magicLedger) — gates druid/divine/arcane/alchemy substitution.
     config.magicExists === false ? 0 : (config.priorityMagic ?? 50),
   ).map(chain => {
-    const outputs = (chain.outputs || [])
+    const outputs = goodsHeldByFoodRecord(chain.outputs || [], _foodRecord)
       .filter(generationWorldLaw.allowsGeneratedContent);
     return outputs.length === (chain.outputs || []).length
       ? chain
@@ -759,6 +767,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     depletedResources,
     institutions || [],
     generationWorldLaw,
+    _foodRecord,
   );
   const _hasMagicTrade = hasTeleportationInfra(institutions || [], config);
   const chainImports = deriveImportsFromChains(
@@ -853,13 +862,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
   // localeCompare) — this list is persisted in the settlement, so the tiebreak
   // must resolve identically across devices/locales — must be LAST
   incomeNormalized.sort((a, b) => b.percentage - a.percentage || compareCodepoint(a.source, b.source));
-  const { label: baseProsperity, foodSecurity: _foodSec } = computeBaseProsperity(
+  const { label: baseProsperity } = computeBaseProsperity(
     tier,
     tradeRoute,
     institutions,
     config,
     instNames,
-    incomeNormalized
+    incomeNormalized,
+    _foodSec,
   );
   return {
       tier: tier,

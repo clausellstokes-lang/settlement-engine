@@ -22,6 +22,7 @@ import { EditableText, EditableProse } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
 import { smart, humanize, num } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
+import { foodwaysLineOf } from '../../domain/foodways.js';
 
 export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse }) {
   const id = vm.identity;
@@ -283,15 +284,9 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 
 // ── Sub-components ─────────────────────────────────────────────
 
-/**
- * The foodways sentence has ONE home: the food record's line, composed from the sources the
- * place really has (economicState.foodSecurity.foodRecord.foodwaysLine, FOOD-3). The culture's
- * authored line is printed only for a save older than that record (lane WIRING-2, FOOD R-print).
- */
-function foodwaysLineOf(settlement) {
-  const line = settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
-  return typeof line === 'string' && line.trim() ? line.trim() : null;
-}
+// The foodways sentence has ONE home: the food record's line, read through the one reader
+// (domain/foodways.js :: foodwaysLineOf, FOOD-4). The culture's authored line is printed only
+// for a save older than that record (lane WIRING-2, FOOD R-print).
 
 function CultureRows({ culture, foodwaysLine }) {
   const rows = [

@@ -93,4 +93,20 @@ export function composeFoodwaysLine(input) {
   return flavour ? `${line} ${flavour}` : line;
 }
 
+/**
+ * THE ONE READER of the foodways line (FOOD-4, lane food-exports, 2026-11-04). The line is
+ * composed once, at generation (foodGenerator.js :: generateFoodSecurity → composeFoodwaysLine),
+ * and carried on the food record; every surface that prints foodways reads it here — the
+ * Economy tab, the PDF's Identity & Daily Life chapter, the Foundry journal's Identity & Daily
+ * Life page — and none composes its own. A save older than the record yields null (the PDF then
+ * prints the culture's authored line, lane WIRING-2's fallback).
+ * @param {unknown} settlement
+ * @returns {string | null}
+ */
+export function foodwaysLineOf(settlement) {
+  const s = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { foodwaysLine?: unknown } | null } | null } | null } | null | undefined} */ (settlement);
+  const line = s?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
+  return typeof line === 'string' && line.trim() ? line.trim() : null;
+}
+
 export default composeFoodwaysLine;

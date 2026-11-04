@@ -18,6 +18,7 @@ import {customDeps} from '../lib/dependencyEngine.js';
 // unregistered — its slug fallback matches — this keeps the enumerated path live.)
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
+import { goodsHeldByFoodRecord } from './economy/foodBalance.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 import {
   isMaterializedCustomContent,
@@ -689,6 +690,7 @@ export function deriveExportsFromChains(
   depletedResources = [],
   institutions = [],
   worldLaw = null,
+  foodRecord = null,
 ) {
   // Isolated low-tier settlements are subsistence only — nothing leaves, no trade route exists
   const SUBSISTENCE_TIERS = ['thorp', 'hamlet', 'village'];
@@ -736,7 +738,9 @@ export function deriveExportsFromChains(
     if (extractionKws && !extractionKws.some(kw => _hasInstForGate(kw))) return;
     // Processing gate: finished goods within this resource require specific institutions.
     const gatesForResource = RESOURCE_GOOD_INST_GATES[rk] || {};
-    rd.tradeGoods.forEach(g => {
+    // FOOD-EXPORTS: the land's food goods are offered as a surplus only when the food
+    // record says the place grows more than it eats (foodBalance.js :: offersFoodSurplus).
+    goodsHeldByFoodRecord(rd.tradeGoods, foodRecord).forEach(g => {
       const requiredInst = gatesForResource[g];
       if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
       exports.add(g);
@@ -748,7 +752,7 @@ export function deriveExportsFromChains(
   // Also gate byproduct outputs that require a specific additional institution.
   activeChains
     .filter(ch => ch.exportable && ch.status !== 'impaired' && !chainIsDepleted(ch))
-    .forEach(chain => chain.outputs.slice(0, 2).forEach(o => {
+    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 2).forEach(o => {
       const requiredInst = CHAIN_OUTPUT_INST_GATES[o];
       if (requiredInst) {
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
@@ -760,7 +764,7 @@ export function deriveExportsFromChains(
   // 3. Entrepôt transit goods — flagged distinctively
   activeChains
     .filter(c => c.entrepot && c.status !== 'impaired')
-    .forEach(chain => chain.outputs.slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
+    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 1).forEach(o => exports.add(`${o} (transit)`)));
 
   // Apply stress: siege collapses exports, occupation taxes them
   let list = [...exports];

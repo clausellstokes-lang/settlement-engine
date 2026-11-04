@@ -112,6 +112,9 @@ export function deriveFoodRecord(input) {
   };
 }
 
+// ── FOOD-EXPORTS: the food-surplus rule lives in domain/foodSurplus.js (one rule for the
+// export writers here and the readers in components); re-exported for the generators.
+export { offersFoodSurplus, isFoodSurplusGood, goodsHeldByFoodRecord } from '../../domain/foodSurplus.js';
 
 // deriveFoodBalanceAnalysis
 // `foodSecurity` (economicState.foodSecurity from generateFoodSecurity) is the

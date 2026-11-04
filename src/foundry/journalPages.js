@@ -33,6 +33,7 @@ import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightShee
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
+import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
   servicesHeadline, resourcesHeadline, viabilityHeadline, historyHeadline,
@@ -232,7 +233,7 @@ function powerPage(vm) {
   );
 }
 
-function identityPage(vm) {
+function identityPage(vm, settlement = vm.raw) {
   const id = vm.identity;
   return md(
     kv('Layout', id.layout),
@@ -240,6 +241,8 @@ function identityPage(vm) {
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
     kv('Governing faction', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
+    // FOOD-4: the food record's foodways line, through the one reader — the PDF chapter's row.
+    kv('Foodways', foodwaysLineOf(settlement)),
     // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
   ) || null;
 }
@@ -481,7 +484,7 @@ export function buildJournalPages(vm, { variant = 'canon_dossier', faithUnlocked
   }
   if (inc('plotHooks'))           push('Plot Hooks', plotHooksPage(vm));
   if (inc('powerStructure'))      push('Power & Factions', powerPage(vm));
-  if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm));
+  if (inc('identityDailyLife'))   push('Identity & Daily Life', identityPage(vm, settlement));
   if (inc('services'))            push('Services', servicesPage(vm));
   if (inc('institutions'))        push('Institutions', institutionsPage(vm));
   if (inc('economicsTrade'))      push('Economics & Trade', economicsPage(vm));

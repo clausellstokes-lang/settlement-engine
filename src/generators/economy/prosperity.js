@@ -175,7 +175,7 @@ export const deriveProsperityLabel = (prosperity, config = {}, institutions = []
 };
 
 // computeBaseProsperity — base prosperity index + food-security modifier (extracted from generateEconomicState)
-export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _instNames, incomeNormalized) => {
+export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _instNames, incomeNormalized, foodSecurity = null) => {
   // ── Base prosperity model ───────────────────────────────────────────────
   // Inputs: route (channel), tier (capacity), economy slider (investment),
   //         magic (tier-scaled production), threat (drag), military (dual effect),
@@ -223,7 +223,8 @@ export const computeBaseProsperity = (tier, tradeRoute, institutions, config, _i
   const _defPremium = _hasWalls && _hasGarrison && (tradeRoute === 'crossroads' || tradeRoute === 'port') ? 0.3 : 0;
 
   // Food security modifier — computed here so it can cap/floor base prosperity
-  const _foodSec = generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
+  // FOOD-EXPORTS: economicState writes the food record before its export writers and hands it in.
+  const _foodSec = foodSecurity || generateFoodSecurity(tier, institutions, { ...config, tradeRouteAccess: tradeRoute });
   const _foodMod = _foodSec.prosperityMod;
 
   // 7. Institutional depth — count of Economy+Crafts institutions weighted vs tier expectation

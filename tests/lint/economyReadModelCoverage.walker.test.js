@@ -159,6 +159,8 @@ const PRINT_DEFERRED = [
 
 /** Reaches a read-model, owns no freshness claim. Reason is mandatory. */
 const FROZEN_DEFERRED = {
+  'src/components/new/tabs/SubstrateTab.jsx':
+    'Reads `economicState.foodSecurity.foodRecord` ONLY, through domain/foodSurplus.js :: offersFoodSurplus, to keep the Foundations Food row from grading "Surplus" on a place whose record says it grows less than it eats (FOOD-EXPORTS residue, 2026-11-04). The record is written once at generation and the row is a band WORD, never a tally, so the tab owns no freshness claim of its own.',
   'src/components/new/tabs/MagicTab.jsx':
     'Reads `economicState.activeChains[].magicNote` ONLY, to list the chain notes under the generation-frozen `magicDependency` record that moved here from ViabilityTab (UX consolidation 2026-10-30, RULINGS-T2 T2-15). Those notes are frozen with the record, the block they sit in is stamped "as judged at the first survey" on the page, and nothing in it is a tally, so it owns no freshness claim of its own.',
   'src/components/map/heraldRegister.js':
