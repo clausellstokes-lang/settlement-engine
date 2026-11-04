@@ -18,12 +18,6 @@
     "snippet": "{displayProgress || 'Regenerating\\u2026'}"
   },
   {
-    "path": "src/components/TableView.jsx",
-    "line": 248,
-    "category": "floatInterpolation",
-    "snippet": "{pressure}"
-  },
-  {
     "path": "src/components/account/AccountAutoReloadPanel.jsx",
     "line": 160,
     "category": "floatInterpolation",
@@ -1234,11 +1228,5 @@
     "line": 150,
     "category": "floatInterpolation",
     "snippet": "{row.score}"
-  },
-  {
-    "path": "src/pdf/sections/TonightAtTheTable.jsx",
-    "line": 205,
-    "category": "floatInterpolation",
-    "snippet": "{npc.power || 0}"
   }
 ]
