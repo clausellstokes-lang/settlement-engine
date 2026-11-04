@@ -44,6 +44,24 @@ import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
 /** A description that says a settlement builds, sells or supplies ships (A-11). */
 const SHIP_WORD = /\bships?\b/i;
 
+/**
+ * A row's ship-free description where the water fact is 'none' (chair ruling, round 3, 3b): the
+ * catalog text and its authored variants (`${tier}|${category}|${name}`), ship-free ones only,
+ * picked draw-free by the same hash; a pool with none keeps the row's text. For rows added
+ * after the variant pick (the cascade), which never met the pool.
+ * @param {{ desc?: unknown, category?: unknown, name?: unknown }} inst
+ * @param {string} tier
+ * @param {unknown} seed
+ * @returns {string|undefined}
+ */
+export function shipFreeDesc(inst, tier, seed) {
+  const desc = typeof inst?.desc === 'string' ? inst.desc : undefined;
+  if (!desc || !SHIP_WORD.test(desc)) return desc;
+  const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`] || [];
+  const dry = [desc, ...variants].filter((text) => !SHIP_WORD.test(text));
+  return dry.length ? pickVariant(dry, `${seed}:${inst.name}`) : desc;
+}
+
 // Compatibility export: callers historically imported the table from this
 // step module. The single writer now lives in the side-effect-free data leaf.
 export { UPGRADE_CHAINS } from '../../data/institutionLadders.js';

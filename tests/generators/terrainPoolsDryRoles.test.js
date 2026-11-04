@@ -47,4 +47,11 @@ describe('the soak seeds that printed ships or a fisherman inland', () => {
   it.each([108, 192, 85])('soak1k-%i: no fisherman', (i) => {
     expect(birth(i).settlement.npcs.map((n) => n.role)).not.toContain('Fisherman');
   });
+  // Chair ruling, round 3, 3b: a row the cascade adds after the variant pick takes its ship-free text.
+  it.each([573, 171])('soak1k-%i: the cascade-added Ropemaker speaks of no ships', (i) => {
+    const s = birth(i).settlement;
+    const rope = s.institutions.find((x) => x.name === 'Ropemaker');
+    expect(rope?.source).toBe('cascade');
+    expect(rope.desc).not.toMatch(/\bships?\b/i);
+  });
 });
