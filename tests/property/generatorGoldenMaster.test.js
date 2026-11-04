@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — CRISIS (LANE CRISIS, UNITS 1–7, DOCS/DESIGN_CRISIS_TAB.MD), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-03-crisis-derived-cast.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   516 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 96, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step d3e072368): the crisis record carries its derived cast. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S3 (the tree of d3e072368 with the door paths carried from
+ *   the branch, the previous record's writes committed). eca30d70.. -> 3e4fa156..
+ *
  * 2026-11-04 — X-46 CAR 2 (LANE X46-2-THRESHOLDS), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
