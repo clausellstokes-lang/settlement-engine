@@ -138,13 +138,14 @@ const ROLE_NEEDS = Object.freeze({
 
 /**
  * @typedef {object} ForceWords
- * @property {string} body the force as a body, bare: `garrison`, `watch`, `militia`, or `guard` where none stands
+ * @property {string} body the force as a body, bare: `garrison`, `hired company`, `watch`, `militia`, or `guard` where none stands
  * @property {string} members its people: `soldiers`, `watchmen`, `militia`, or `guards`
  * @property {string} member one of them: `soldier`, `watchman`, `militiaman`, or `guard`
  */
 
 /** @type {Readonly<ForceWords>} */
 export const GARRISON_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
+const MERCENARY_WORDS = Object.freeze({ body: 'hired company', members: 'soldiers', member: 'soldier' });
 const WATCH_WORDS = Object.freeze({ body: 'watch', members: 'watchmen', member: 'watchman' });
 const MILITIA_WORDS = Object.freeze({ body: 'militia', members: 'militia', member: 'militiaman' });
 const GUARD_WORDS = Object.freeze({ body: 'guard', members: 'guards', member: 'guard' });
@@ -152,14 +153,15 @@ const GUARD_WORDS = Object.freeze({ body: 'guard', members: 'guards', member: 'g
 /**
  * THE WORDS FOR THE FORCE THAT STANDS (F1, 2026-11-04): a sentence that names the place's
  * armed body takes its noun here, so "a road toll for the garrison" reads "for the watch" in a
- * town that keeps a watch and no garrison. A garrison (or a hired company) keeps the soldiers'
- * words, so a garrisoned place's prose is unchanged to the byte.
+ * town that keeps a watch and no garrison. A garrison keeps its own words, so a garrisoned place's
+ * prose is unchanged to the byte; a hired company keeps the soldiers but is not called a garrison.
  *
  * @param {Pick<DefenseFacts, 'hasGarrison'|'hasWatch'|'hasMilitia'|'hasMercenary'> | null | undefined} facts
  * @returns {Readonly<ForceWords>}
  */
 export function forceWordsOf(facts) {
-  if (!facts || facts.hasGarrison || facts.hasMercenary) return GARRISON_WORDS;
+  if (!facts || facts.hasGarrison) return GARRISON_WORDS;
+  if (facts.hasMercenary) return MERCENARY_WORDS;
   if (facts.hasWatch) return WATCH_WORDS;
   if (facts.hasMilitia) return MILITIA_WORDS;
   return GUARD_WORDS;

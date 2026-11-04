@@ -4,7 +4,7 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf, GARRISON_WORDS } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
+import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
 
 /** A roster name compared loosely: case and a leading article set aside. */
@@ -47,7 +47,7 @@ const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
 
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
-export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force === GARRISON_WORDS; // F1 (rung 1B): the force words read the record
+export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
   (ke('under_siege') &&
     (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&

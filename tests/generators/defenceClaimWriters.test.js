@@ -80,6 +80,10 @@ describe('the force words follow the standing force', () => {
     expect(forceWordsOf({ ...NONE, hasGarrison: true }).body).toBe('garrison');
     expect(forceWordsOf({ ...NONE, hasMercenary: true }).members).toBe('soldiers');
   });
+  it('names a hired company, not a garrison, where only a hired company stands (soak1k-153)', () => {
+    expect(forceWordsOf({ ...NONE, hasMercenary: true }).body).toBe('hired company');
+    expect(forceWordsOf({ ...NONE, hasMercenary: true, hasGarrison: true }).body).toBe('garrison');
+  });
   it('names the watch, the militia, or plain guards otherwise', () => {
     expect(forceWordsOf({ ...NONE, hasWatch: true }).body).toBe('watch');
     expect(forceWordsOf({ ...NONE, hasMilitia: true }).body).toBe('militia');

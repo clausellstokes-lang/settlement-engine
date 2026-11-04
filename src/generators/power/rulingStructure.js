@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf, GARRISON_WORDS } from '../../domain/defense/defenseFacts.js'; // SIZE-3, R6 and F1: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // SIZE-3, R6 and F1: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -589,7 +589,7 @@ export const generatePowerStructure = (
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
-            (forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })) === GARRISON_WORDS ? ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.' : ` Operationally distinct from the command council: these are the ${forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members}, not the officers who govern.`)
+            (forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members === 'soldiers' ? ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.' : ` Operationally distinct from the command council: these are the ${forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members}, not the officers who govern.`)
           : militaryDesc,
       militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
