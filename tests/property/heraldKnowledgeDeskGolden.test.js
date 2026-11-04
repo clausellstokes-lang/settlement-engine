@@ -86,7 +86,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 11 fewer items (473 → 462).
     // 462 → 463 at X-46 CAR 2 (LANE X46-2-THRESHOLDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json): the step re-deals the realm's year and the year-one desk files
     // 1 more items (462 → 463).
-    expect(Object.keys(manifest)).toHaveLength(463);
+    // 463 → 473 at FOOD-EXPORTS (WITH FOOD-4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-07-food-exports.json): the step re-deals the realm's year and the year-one desk files
+    // 10 more items (463 → 473).
+    expect(Object.keys(manifest)).toHaveLength(473);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
