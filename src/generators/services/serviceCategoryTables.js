@@ -38,6 +38,8 @@ export const INSTITUTION_DEFAULT_CATEGORY = {
   'Gladiatorial school': 'employment',
   'Beast trainers': 'employment',
   'Citizen militia': 'employment',
+  // DEFENCE-ROWS: the village's own watch (a catalogue row of the window), filed with the Town watch.
+  'Village watch': 'employment',
   'Town watch': 'employment',
   'Professional city watch': 'employment',
   Garrison: 'employment',
@@ -357,6 +359,9 @@ export const SERVICE_CATEGORY_MAP = {
   'Gated entry': 'legal',
   'Hiring hall': 'employment',
   'Horse training': 'employment',
+  // DEFENCE-ROWS (the Village watch's second service, landed with the window): the watch's own call-out, filed
+  // with Night watch and Patrol and watch, the watch's other two rows.
+  'Hue and cry': 'employment',
   'Hunting guide hire': 'employment',
   'Livestock management': 'employment',
   'Animal training': 'employment',
