@@ -7,8 +7,8 @@
     "car": "SEAM car 4 (ARCH §12 row 4) — M2, the schema, added keys only · RE-PINNED 2026-09-18 (owner §934.9, \"do these as well\"): the DS-DEF-6 magic lens was re-keyed `Magical Capability` → `Arcane Support` so the corpus key matches the live display label the review-10 car moved. FIVE DIGESTS MOVED AND NO COUNT DID — variant-count pin 1, face-count pin 2, vids pin 0, pool-key-rename pin 0 and attach-set pin 1 are all joins keyed on the pool NAME, while every quantity pin beside them held (blocks 68, pools 708, variants 2266, unchanged). No variant text, no vid, no face and no attach set was edited: two pool KEYS were spelled differently. The two pools are DS-DEF-6 blocked pools that `defenseSupportingProse` cannot emit over its whole input space (the desk suite proves it), so no cell moves for any town, and tests/property/generatorGoldenMaster.test.js passes plain at 0 rows. · AND AGAIN, SAME CAR, SAME FIVE DIGESTS: the owner folded lane 6's capability row and ruled the presence row's STATUS vocabulary `Present` / `None` (it had become the label again — \"Arcane Support · Arcane support\" — one reading printed twice), so the second pool key is `Arcane Support: Present`. No count moved here either.",
     "tip": "the six state leaves at the car-4 projection; base c45a46a78",
     "blocks": 68,
-    "pools": 708,
-    "variants": 2266
+    "pools": 709,
+    "variants": 2310
   },
   "mechanisms": [
     {
@@ -21,13 +21,13 @@
         {
           "kind": "integer",
           "over": "the sum of poolMeta.variantCount over all 708 pools",
-          "value": 2266
+          "value": 2310
         },
         {
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.variantCount per pool",
-          "value": "ffddd8cd0cac98946eb4d32680e1fce67dbae7fd942554c2b60c6dcd760d92cf"
+          "value": "3092662b76736b0abcd8bdc8bff90b26c6377de8f5da8d3767b5a5ef756fbee7"
         }
       ]
     },
@@ -42,7 +42,7 @@
         {
           "kind": "integer",
           "over": "the sum of every faceCounts entry over all 708 pools",
-          "value": 2266
+          "value": 2310
         },
         {
           "kind": "integer",
@@ -53,7 +53,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.faceCounts per pool, joined by commas",
-          "value": "38b6344ab185d83aa8a6ebb23ceb0caa57e7764eafc355330ab455cb48885db6"
+          "value": "34ce9502aa8907871b5db2c25d75282ae584bb30c0007fe81c22180562c59a23"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.vids per pool, joined by commas",
-          "value": "426e108cc8a2ae9c3345dafbf8c19ac90b3e127b9cdf8cd6b0a35d5f0049c184"
+          "value": "2c77b91bd5db80dca823ecf353197387f93a6224c41598ae825fb8c348167e88"
         }
       ]
     },
@@ -83,7 +83,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "`${block} :: ${pool}` for all 708 pools, in order",
-          "value": "5b38628f9dceff03bcdcd1c5c9ef5b7dfa821d993a0f0b39b19660236091da09"
+          "value": "aa775fddbfd4d2ace8840069ad85120841324c1e30cdbf610d8e448721985a7a"
         }
       ]
     },
@@ -152,7 +152,7 @@
           "kind": "digest",
           "algo": "sha256",
           "over": "poolMeta.attach per pool, joined by pipes",
-          "value": "77ff35193ff7d105d5912a469cefab3eae5e7fb13c0ded2977fdaec09826cc40"
+          "value": "32422cdf009b2856a33ec3c061daa9c5057ffcc15ce1d122fabb2f9aaf4b1dbc"
         }
       ]
     },
