@@ -297,7 +297,23 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 // (generation.worker-DumDp2-f.js), 9e66e658c 1,480,698 B (generation.worker-XUebZ5Kh.js), userEdits.js 800 -> 808 B
 // and no other module moved. Buying eight bytes back by golfing unrelated code was refused as worse engineering than
 // recording the truth. Placed beside the constant so the cited lines above do not move. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1480698;
+// 1,480,698 -> 1,491,801 (2026-11-04, the coherence window's composed tip, REGISTERS-5 door 12): A RISE OF 11,103 B, THE
+// CHAIR'S RULING (ODQ §934.104, recorded in briefs/REGISTERS.md item 12), VETOABLE BY THE OWNER. Every byte is new feature
+// code from the window. Nothing in it is dead or duplicated; the one pre-existing ~150 B duplicate in foodBalance.js is left
+// alone. MEASURED by a fresh `vite build` of a git archive at each first-parent compose point; the worker bytes are the
+// file's size:
+//   c0ef42c13 base 1,480,698 -> 1169b3cd5 1,486,662 (+5,964, per FIRSTPAINT's bisect: FOOD +4,025 over its two composes,
+//     DEFENSE-2 +1,404, the SIZE compose +462, MAGIC +46, WIRING-1 +21, the chair's X-52 wiring +6);
+//   1169b3cd5 = FIRSTPAINT 7469cd0a6 = SOAK-1000 25653a3f9 = TIPFIX 4edc4917f = 1,486,662 (0);
+//   the DOORS compose 8cd65978e 1,491,801 (+5,139). Its per-module minified pricing sums to +5,654:
+//     - SIZE ruling 2 (5eda29d5c, 8c76cf743), the tier noun in generated story text: historyGenerator.js,
+//       narrativeText.js and arrivalScene.js import speakTierNoun and tierNounFor. That brings stateProseKernel.js
+//       (+4,481) and weaveBlock.js (+96) into the worker, plus +690, +117 and +55 in the three importers.
+//     - SIZE-3 (43f9c0dcc), the small-place guild needs a real market: rulingStructure.js imports
+//       hasMarketInstitution, so viability.js +306 and rulingStructure.js -91.
+//   Nothing moves after the DOORS compose (60ae4c909 and the lane tip 80d485c7e: 1,491,801, generation.worker-BV-oj6mh.js).
+// The ceiling is recorded AT the measured figure, never above it. MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1491801;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
@@ -615,7 +631,7 @@ describe.runIf(DIST_EXISTS)('generation worker — production boundary', () => {
     expect(
       bytes,
       `generation worker bundle ${workers[0]} is ${bytes} B; the ceiling is `
-      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured X-45 figure by the chair's ruling, 2026-11-02). `
+      + `${WORKER_BUNDLE_CEILING_BYTES} B (re-recorded at the measured figure by the chair's ruling, 2026-11-04, ODQ §934.104). `
       + 'A RISE IS NEVER A LANE\'S EDIT: buy the bytes back, or take the ruling.',
     ).toBeLessThanOrEqual(WORKER_BUNDLE_CEILING_BYTES);
   });
