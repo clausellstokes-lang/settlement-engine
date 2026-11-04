@@ -1091,9 +1091,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { required: true, tags: ['essential', 'housing'], priorityCategory: 'infrastructure' },
       at: {
-        thorp: { name: 'Dwellings (4-16)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
-        hamlet: { name: 'Dwellings (17-80)', desc: 'Timber-frame with thatched roofs.' },
-        village: { name: 'Dwellings (80-180)', desc: 'Timber construction with stone foundations.' },
+        thorp: { name: 'Dwellings (1-8)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
+        hamlet: { name: 'Dwellings (5-25)', desc: 'Timber-frame with thatched roofs.' },
+        village: { name: 'Dwellings (15-100)', desc: 'Timber construction with stone foundations.' },
         town: { name: 'Housing (180-1000 structures)', desc: 'Multi-story timber and stone buildings.' },
         city: { name: 'Housing (1000-5000 structures)', desc: 'Multi-story buildings. Tenements for poor.' },
         metropolis: { name: 'Housing (5000+ structures)', desc: 'Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.' },

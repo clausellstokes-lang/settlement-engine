@@ -638,7 +638,7 @@ describe('galleryVeil — the one default set (X-21c / X-21d, W2-VEIL-A U2)', ()
     institutions: [{ name: 'Subsistence farming', category: 'Economy', priorityCategory: 'economy', catalogId: 'subsistence_farming',
       desc: 'Each household farms ~12-16 acres for survival.', tags: ['essential', 'agriculture'] }],
     npcs: [{ id: 'npc_1', name: 'Oyuun', role: 'Elder', personality: { flaw: 'stubborn' } }],
-    availableServices: { food: [{ name: 'Meals and drink', desc: 'Food and ale', institution: 'Dwellings (4-16)' }], criminal: [] },
+    availableServices: { food: [{ name: 'Meals and drink', desc: 'Food and ale', institution: 'Dwellings (1-8)' }], criminal: [] },
   });
   // seed ux-audit-v2-2026-10-30-15, Roccavilla: the LICENSED listening post (catalog tag 'legal').
   const listeningPost = { name: 'Listening post', category: 'Economy', priorityCategory: 'economy', catalogId: 'listening_post',

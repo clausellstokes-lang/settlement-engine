@@ -236,7 +236,7 @@ const ROWS = Object.freeze({
   'Town crier': { shares: { [G]: 1 }, weight: 1 },
 
   // ── Infrastructure ──────────────────────────────────────────────────────────────────────
-  'Dwellings (4-16)': { shares: { [G]: 1 }, weight: 0 },
+  'Dwellings (1-8)': { shares: { [G]: 1 }, weight: 0 },
   'Water source': {
     shares: { [G]: 1 }, weight: 0,
     at: { 'Aqueduct or water system': { weight: 2 }, 'Advanced water infrastructure': { weight: 2 } },
