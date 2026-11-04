@@ -73,7 +73,8 @@ const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
 /** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
-const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage)\b/gi;
+// Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
+const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?)\b/gi;
 
 /**
  * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland

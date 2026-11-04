@@ -72,3 +72,14 @@ describe('A-11, the Fishmonger\'s name inland (chair ruling, round 4, 3)', () =>
     expect(seaWordSentence(['Fishmonger'], {})).toBeUndefined();
   });
 });
+
+describe('A-11, the airship docks\' own services (chair ruling, round 4, 4)', () => {
+  const AIRSHIP = { institutions: [{ name: 'Airship docking (high magic)' }] };
+  const lines = ['Longshoremen and crane equipment for shifting goods between ship and shore.', 'Pilot to guide through harbour approaches.'];
+  it('in an airship city: 0 findings', () => {
+    expect(seaWordSentence(lines, AIRSHIP)).toBeUndefined();
+  });
+  it('in a plain inland town: still a finding', () => {
+    expect(seaWordSentence(lines, {})).toBe(lines[0]);
+  });
+});
