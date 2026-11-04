@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — TIER-NOUN-POOLS (UNITS 1–6), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-05-tier-noun-pools.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   48 OF 525 ROWS MOVED (city 48; thorp, hamlet, village, town, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step a9982e3b9): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S5 (the tree of a9982e3b9 with the door paths carried from
+ *   the branch, the previous record's writes committed). 3e4fa156.. -> 2cc987d7..
+ *
  * 2026-11-04 — CRISIS (LANE CRISIS, UNITS 1–7, DOCS/DESIGN_CRISIS_TAB.MD), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-03-crisis-derived-cast.json; the cloud chair signs under the owner's delegation, vetoable).
  *   516 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 96, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
