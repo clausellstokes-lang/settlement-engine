@@ -77,6 +77,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
     institutionToggles = null,
     worldLaw = null,
     population = null,
+    density: settlementFactor = null,
   } = opts;
   const TIER_ORD  = ['thorp','hamlet','village','town','city','metropolis'];
   const tierIdx   = TIER_ORD.indexOf(tier);
@@ -93,8 +94,9 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
   const mk        = n => n.toLowerCase().slice(0, 16);
   const cascadeMap = getCascadeMap();
   // THE INSTITUTION BUDGET (X-46 car 3): the same density factor assembleInstitutions applies,
-  // from the same (tier, population), read once before the first draw. 1 with no population.
-  const density = densityFactor(tier, population);
+  // read once before the first draw: the pipeline hands the settlement's own factor in
+  // (`settlementDensity`, RUNG1B-F6); a headless call reads the bare curve. 1 with no population.
+  const density = typeof settlementFactor === 'number' ? settlementFactor : densityFactor(tier, population);
 
   // What's already present (match keys)
   const nativeNames = institutions

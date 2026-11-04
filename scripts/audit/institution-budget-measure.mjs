@@ -9,7 +9,8 @@
  *   (`--calibrate N`: the calibration of `INSTITUTION_BUDGET_REALISED` (the chair's rulings of
  *   2026-11-04). At each band's geometric midpoint, N settlements at each forced d in
  *   CALIBRATION_DS (0, 0.25, 0.5, 1, 1.5, 2, 3, 4; `--ds` measures a subset — the points are
- *   deterministic per seed, so a subset run reproduces its rows of the full run), the mean non-fabric house count minus R_tier: realised(d). The force-d hook
+ *   deterministic per seed, so a subset run reproduces its rows of the full run), the mean SCALABLE house
+ *   count (RUNG1B-F6: rows drawn at a scaled chance, not required, fabric or density-exempt): realised(d). The force-d hook
  *   must be loaded (the script refuses to calibrate unforced). The first calibration (U5) was one
  *   point, d = 1, taken at d0a3202.)
  *   (`--matrix 1000 --matrix-only` reads the soak's 1,000 corpus: the same seeds and configs as soak-review)
@@ -71,9 +72,22 @@ function spearman(xs, ys) {
   for (let i = 0; i < rx.length; i += 1) { n += (rx[i] - mx) * (ry[i] - my); dx += (rx[i] - mx) ** 2; dy += (ry[i] - my) ** 2; }
   return dx && dy ? n / Math.sqrt(dx * dy) : null;
 }
+// THE SCALABLE ROWS (the chair's ruling, 2026-11-04, RUNG1B-F6): the houses the density factor can
+// move — a row DRAWN at a scaled chance (source generated, cascade or faction_boost) whose catalogue row
+// is not required, fabric or density-exempt. Required, route-required, rare, coherence-repair and
+// toggle-forced rows stand whatever d is, so realised_scalable(0) = 0 by construction.
+const DRAWN_SOURCES = new Set(['generated', 'cascade', 'faction_boost']);
+let budgetModule = null;
+const isScalable = (inst, tier) => !isFabric(inst) && DRAWN_SOURCES.has(inst?.source) && !inst?.required
+  && !(budgetModule && budgetModule.isDensityExempt(inst.tier || tier, inst.name));
 const read = (s) => {
   const roster = Array.isArray(s.institutions) ? s.institutions : [];
-  return { houses: roster.filter((i) => !isFabric(i)).length, roster: roster.length, required: roster.filter((i) => i.source === 'required' && !isFabric(i)).length };
+  return {
+    houses: roster.filter((i) => !isFabric(i)).length,
+    scalable: roster.filter((i) => isScalable(i, s.tier)).length,
+    roster: roster.length,
+    required: roster.filter((i) => i.source === 'required' && !isFabric(i)).length,
+  };
 };
 
 await ensureLaws();
@@ -82,6 +96,7 @@ const ORIGINAL = Object.fromEntries(TIER_ORDER.map((t) => [t, { ...POPULATION_RA
 const CALIBRATION_DS = opt('--ds', null) ? opt('--ds', null).split(',').map(Number) : [0, 0.25, 0.5, 1, 1.5, 2, 3, 4];
 if (CALIBRATE !== null) {
   const budget = await import('../../src/data/institutionBudget.js');
+  budgetModule = budget;
   const forced = (d) => { process.env.X46_FORCE_D = String(d); return budget.densityFactor('town', 1000) === d; };
   if (!forced(0.5)) throw new Error('--calibrate needs the force-d hook: node --import ./scripts/audit/institution-budget-force-d.mjs');
   const calibration = {};
@@ -92,9 +107,10 @@ if (CALIBRATE !== null) {
       for (const [name, row] of Object.entries(group)) if (row.required && !catalog.isFabricRow(tier, name)) R += 1;
     }
     const midpoint = Math.round(Math.sqrt(ORIGINAL[tier].min * ORIGINAL[tier].max));
+    // realised_scalable(d): the mean SCALABLE house count (RUNG1B-F6; before it, all houses − R).
     const points = CALIBRATION_DS.map((d) => {
       forced(d);
-      return [d, mean(cell(tier, midpoint, CALIBRATE, 'cal')) - R];
+      return [d, mean(cell(tier, midpoint, CALIBRATE, 'cal', 'scalable'))];
     });
     calibration[tier] = { midpoint, seeds: CALIBRATE, R, points };
   }
@@ -124,7 +140,7 @@ for (const tier of TIER_ORDER) {
 }
 
 // forced-population cells (hoisted; ORIGINAL is read before the first call)
-function cell(tier, P, n, tag) {
+function cell(tier, P, n, tag, field = 'houses') {
   POPULATION_RANGES[tier] = { min: P, max: P };
   const out = [];
   try {
@@ -137,7 +153,7 @@ function cell(tier, P, n, tag) {
         : birthConfig({ ...DEFAULT_CONFIG, ...matrixCell, settType: tier });
       const s = generateSettlementPipeline(config, null, { seed: `x46b-${tag}-${tier}-${P}-${k}` });
       if (s.population !== P || s.tier !== tier) throw new Error(`forced cell missed: ${tier} ${P} → ${s.tier} ${s.population}`);
-      out.push(read(s).houses);
+      out.push(read(s)[field]);
     }
   } finally { POPULATION_RANGES[tier] = { ...ORIGINAL[tier] }; }
   return out;

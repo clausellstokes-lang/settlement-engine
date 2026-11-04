@@ -88,26 +88,42 @@ export function expectedHousesAt(population) {
 // function of (tier, population), computed once before the first draw, and it never adds or
 // removes a draw; outcome gates later in the roll and the cascade's count move on some seeds
 // because the gated rolls changed (the chair's wording, 2026-11-04).
+//
+// THE TARGET GIVES WAY (the chair's ruling, 2026-11-04, RUNG1B-F6: "neither the exemptions nor the
+// anchors give way; the TARGET does"). PINS' route-required and rare rows draw at their authored
+// chance whatever d is, so at the band bottoms a target that counted them sat below realised(0) and d
+// read 0 (thorp 5–6, village 75–99; tests/generators/institutionBudgetDensity.test.js red at the
+// composed tip). Now, per settlement, X = Σ the draw's own chance over the exempt, non-required,
+// non-fabric rows that can stand there (assembleInstitutions.js :: exemptHouseExpectation — an
+// expectation: no draw, no table), the factor answers target_scalable = expectedHousesAt(P) − R − X,
+// and the realised curve is measured over the SCALABLE rows only (drawn at a scaled chance; not
+// required, fabric, exempt, a coherence repair or toggle-forced), so realised(0) = 0 by construction.
+// d = 0 exactly where nothing is left (target_scalable ≤ 0), pinned by tier in the density test. The
+// seven anchors are untouched.
 
 /**
  * THE REALISED CURVE (the chair's rulings, 2026-11-04): per tier, at the band's geometric
  * midpoint, `points` = [d, realised(d)] for d = 0, 0.25, 0.5, 1, 1.5, 2, 3, 4 — all MEASURED
  * (the chair's ruling: d = 0 reads the unscaled coherence repairs; d = 3 and 4 show where the
  * authored catalogue saturates, and a target above realised(4) is that tier's CEILING) — realised(d) the mean
- * non-fabric house count over `seeds` settlements (the certification matrix's cells) with the
- * density factor forced to d, after the cascade and the faction pass, minus R_tier. Measured by
+ * SCALABLE house count over `seeds` settlements (the certification matrix's cells) with the density
+ * factor forced to d, after the cascade and the faction pass: rows drawn at a scaled chance (source
+ * generated, cascade or faction_boost) that are not required, fabric or density-exempt (RUNG1B-F6;
+ * before it, every non-fabric house minus R_tier, so realised(0) carried the exempt draws and the
+ * repairs). Measured by
  * `X46_FORCE_D=1 node --import ./scripts/audit/institution-budget-force-d.mjs
  * scripts/audit/institution-budget-measure.mjs --calibrate 200`. `catalogueE` is the authored
  * sum it was measured beside. A registered tuning table.
  * @type {Readonly<Record<string, Readonly<{ midpoint: number, seeds: number, catalogueE: number, points: ReadonlyArray<readonly [number, number]> }>>>}
  */
 export const INSTITUTION_BUDGET_REALISED = Object.freeze({
-  thorp:      { midpoint: 12, seeds: 200, catalogueE: 5.35, points: [[0, 1.23], [0.25, 2.02], [0.5, 2.525], [1, 3.29], [1.5, 3.83], [2, 4.285], [3, 4.89], [4, 5.245]] },
-  hamlet:     { midpoint: 45, seeds: 200, catalogueE: 9.05, points: [[0, 1.195], [0.25, 3.695], [0.5, 6.16], [1, 9.775], [1.5, 12.345], [2, 14.05], [3, 15.83], [4, 17.005]] },
-  village:    { midpoint: 173, seeds: 200, catalogueE: 21.29, points: [[0, 1.985], [0.25, 9.12], [0.5, 16.21], [1, 26.045], [1.5, 32.775], [2, 36.96], [3, 41.9], [4, 44.355]] },
-  town:       { midpoint: 866, seeds: 200, catalogueE: 38.81, points: [[0, 2.12], [0.25, 16.515], [0.5, 29.345], [1, 46.24], [1.5, 56.33], [2, 62.765], [3, 68.45], [4, 70.86]] },
-  city:       { midpoint: 5477, seeds: 200, catalogueE: 51.05, points: [[0, 1.12], [0.25, 19.7], [0.5, 33.765], [1, 51.67], [1.5, 60.725], [2, 66.05], [3, 69.42], [4, 70.15]] },
-  metropolis: { midpoint: 27386, seeds: 200, catalogueE: 59.27, points: [[0, 1.37], [0.25, 23.43], [0.5, 39.77], [1, 58.96], [1.5, 68.75], [2, 73.41], [3, 76.45], [4, 77.15]] },
+  // Re-measured 2026-11-04 on the SCALABLE definition (RUNG1B-F6), same eight d, cells, seeds and script as U10.
+  thorp:      { midpoint: 12, seeds: 200, catalogueE: 5.35, points: [[0, 0], [0.25, 0.855], [0.5, 1.475], [1, 2.355], [1.5, 2.995], [2, 3.5], [3, 4.155], [4, 4.535]] },
+  hamlet:     { midpoint: 45, seeds: 200, catalogueE: 9.05, points: [[0, 0], [0.25, 2.55], [0.5, 5.075], [1, 8.77], [1.5, 11.405], [2, 13.175], [3, 15.025], [4, 16.26]] },
+  village:    { midpoint: 173, seeds: 200, catalogueE: 21.29, points: [[0, 0], [0.25, 7.175], [0.5, 14.285], [1, 24.29], [1.5, 31.08], [2, 35.335], [3, 40.345], [4, 42.895]] },
+  town:       { midpoint: 866, seeds: 200, catalogueE: 38.81, points: [[0, 0], [0.25, 14.58], [0.5, 27.54], [1, 44.62], [1.5, 54.875], [2, 61.375], [3, 67.08], [4, 69.475]] },
+  city:       { midpoint: 5477, seeds: 200, catalogueE: 51.05, points: [[0, 0], [0.25, 18.09], [0.5, 32.025], [1, 49.975], [1.5, 59.165], [2, 64.54], [3, 68.065], [4, 68.81]] },
+  metropolis: { midpoint: 27386, seeds: 200, catalogueE: 59.27, points: [[0, 0], [0.25, 21.35], [0.5, 37.74], [1, 57.04], [1.5, 66.965], [2, 71.62], [3, 74.82], [4, 75.545]] },
 });
 for (const row of Object.values(INSTITUTION_BUDGET_REALISED)) {
   for (const point of row.points) Object.freeze(point);
@@ -155,19 +171,24 @@ export function tierBudgetTerms(tier) {
 }
 
 /**
- * The settlement's density factor: the d at which the realised curve meets
- * expectedHousesAt(population) − R_tier, linear between the table's points and clamped to its
- * first and last d. 1 (the authored chances) where the population is unknown or the tier has no
- * curve — a headless call with no settlement scale is never re-scaled.
+ * The settlement's density factor: the d at which the realised SCALABLE curve meets
+ * target_scalable = expectedHousesAt(population) − R_tier − exempt, linear between the table's
+ * points and clamped to its first and last d. `exempt` is X, the settlement's own expected draws of
+ * the density-exempt rows that can stand there (assembleInstitutions.js :: exemptHouseExpectation;
+ * 0 when a caller has no settlement to read). 0 where nothing is left above the required and exempt
+ * rows (target_scalable ≤ 0); 1 (the authored chances) where the population is unknown or the tier has
+ * no curve — a headless call with no settlement scale is never re-scaled.
  * @param {string} tier
  * @param {number | null | undefined} population
+ * @param {number} [exempt] X, the expected exempt houses (non-finite or negative reads 0)
  * @returns {number}
  */
-export function densityFactor(tier, population) {
+export function densityFactor(tier, population, exempt = 0) {
   const terms = TERMS[tier];
   if (!terms || terms.points.length < 2 || typeof population !== 'number' || !Number.isFinite(population)) return 1;
   const { points } = terms;
-  const target = expectedHousesAt(population) - terms.R;
+  const X = Number.isFinite(exempt) && exempt > 0 ? exempt : 0;
+  const target = expectedHousesAt(population) - terms.R - X;
   const [firstD, firstR] = points[0];
   if (target <= firstR) return firstD;
   for (let i = 1; i < points.length; i += 1) {

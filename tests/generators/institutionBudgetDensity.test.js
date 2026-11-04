@@ -1,11 +1,12 @@
 /**
  * X-46 car 3 — THE MECHANISM (docs/DESIGN_X46_SCALE_TRAIN.md §4): one density factor per
- * settlement, d = (expectedHousesAt(pop) − R_tier) / E_tier, multiplying every non-required,
- * non-fabric row's chance in assembleInstitutions, the cascade and the faction pass. R_tier and
- * E_tier are re-read from the catalogue (fabric excluded; E at the band's geometric midpoint).
+ * settlement, multiplying every non-required, non-fabric, non-exempt row's chance in
+ * assembleInstitutions, the cascade and the faction pass: the inverse of the realised SCALABLE curve
+ * at expectedHousesAt(pop) − R_tier − X (RUNG1B-F6). R_tier and E_tier are re-read from the
+ * catalogue (fabric excluded; E at the band's geometric midpoint).
  */
 import { beforeAll, describe, expect, it } from 'vitest';
-import { INSTITUTION_BUDGET_REALISED, densityFactor, expectedHousesAt, scaleChance, tierBudgetTerms } from '../../src/data/institutionBudget.js';
+import { INSTITUTION_BUDGET_REALISED, densityFactor, expectedHousesAt, isDensityExempt, scaleChance, tierBudgetTerms } from '../../src/data/institutionBudget.js';
 import { institutionalCatalog, institutionRowGuards, isFabricInstitution, isFabricRow } from '../../src/data/institutionalCatalog.js';
 import { POPULATION_RANGES, TIER_ORDER } from '../../src/data/constants.js';
 import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
@@ -41,6 +42,30 @@ function housesAt(tier, P, n) {
   } finally { POPULATION_RANGES[tier] = saved; }
 }
 const mean = (xs) => xs.reduce((a, b) => a + b, 0) / xs.length;
+
+const ROUTES = ['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass', 'none'];
+const TERRAINS = ['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert'];
+/** The largest authored exempt expectation a tier can hold: over every route × terrain, Σ baseChance of the
+ * non-required, non-fabric, density-exempt rows whose route and terrain gates pass (read here, independently). */
+function xMaxAuthored(tier) {
+  let best = 0;
+  for (const route of ROUTES) for (const terrain of TERRAINS) {
+    let x = 0;
+    for (const group of Object.values(institutionalCatalog[tier])) {
+      for (const [name, row] of Object.entries(group)) {
+        if (row.required || isFabricRow(tier, name) || !isDensityExempt(tier, name)) continue;
+        if (row.tradeRouteRequired && !row.tradeRouteRequired.includes(route) && !(row.terrainAccess || []).includes(terrain)) continue;
+        if (row.terrainRequired && !row.terrainRequired.includes(terrain)) continue;
+        if (row.forbiddenTradeRoutes?.includes(route)) continue;
+        x += row.baseChance || 0;
+      }
+    }
+    best = Math.max(best, x);
+  }
+  return best;
+}
+/** Read 2026-11-04 (thorp and village at river/forest; town and up at river/desert). */
+const X_MAX_AUTHORED = Object.freeze({ thorp: 1.27, hamlet: 1, village: 1.89, town: 2.05, city: 2.17, metropolis: 2.23 });
 
 // Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): the realised table was calibrated at
 // x46-3's own base, metropolis catalogue sum 59.27. Composed onto the window branch, one authored
@@ -80,8 +105,8 @@ describe('X-46 car 3 — the density factor', () => {
   // THE CHAIR'S RULINGS (2026-11-04). Hand-back ruling 1: E is what is actually DRAWN, not the
   // authored chances. Addendum ruling 2: the realised count is convex in d (chances cap at 1, the
   // cascade adds), so a one-point midpoint calibration overshoots at the band's top. The table is
-  // realised(d) at five d (200 seeds each at the band's geometric midpoint, non-fabric houses after
-  // the cascade and the faction pass, minus R), and d(pop) is its INVERSE at the target
+  // realised(d) at eight d (200 seeds each at the band's geometric midpoint, after the cascade and the
+  // faction pass; since RUNG1B-F6 the SCALABLE rows only), and d(pop) is its INVERSE at the target
   // expectedHousesAt(pop) − R, linear between points, clamped at the table's ends. Ruling on the
   // clamp (2026-11-04): MEASURE, never assume — d = 0 is a measured point (the unscaled repairs),
   // and d = 3 and 4 extend the top; a target above realised(4) clamps at 4 and is the ceiling.
@@ -96,7 +121,14 @@ describe('X-46 car 3 — the density factor', () => {
     }
   });
 
-  it('d(pop) is the inverse of realised(d) at expectedHousesAt(pop) − R, clamped to the table\'s ends', () => {
+  // THE CHAIR'S RULING (2026-11-04, RUNG1B-F6, "neither the exemptions nor the anchors give way; the TARGET
+  // does"). The factor cannot move a required, route-required or rare row, so the target the factor answers
+  // for is what is left of the anchor after them: target_scalable = expectedHousesAt(P) − R_tier − X, X the
+  // settlement's own expected draws of the exempt rows (assembleInstitutions.js :: exemptHouseExpectation).
+  // realised(d) is measured over the SCALABLE rows only, so realised(0) = 0 by construction, and the floor
+  // is: d ≥ 0 everywhere, d > 0 wherever target_scalable > 0. (Before: "every target ≥ 1 house (U9) and
+  // above realised(0)", red at thorp 5–6 and village 75–99 since PINS' exempt rows drew at d = 0.)
+  it('d(pop, X) is the inverse of realised_scalable(d) at expectedHousesAt(pop) − R − X; 0 exactly where nothing is left; clamped at 4', () => {
     const realisedAt = (points, d) => {
       for (let i = 1; i < points.length; i += 1) {
         const [d0, r0] = points[i - 1]; const [d1, r1] = points[i];
@@ -107,17 +139,56 @@ describe('X-46 car 3 — the density factor', () => {
     for (const tier of TIER_ORDER) {
       const { R } = tierBudgetTerms(tier);
       const { points } = INSTITUTION_BUDGET_REALISED[tier];
+      expect(points[0], `${tier} realised_scalable(0)`).toEqual([0, 0]);
       const { min, max } = POPULATION_RANGES[tier];
-      for (let k = 0; k <= 10; k += 1) {
-        const P = Math.round(min * (max / min) ** (k / 10));
-        const target = expectedHousesAt(P) - R;
-        const d = densityFactor(tier, P);
-        expect(d).toBeGreaterThan(0); // every target is ≥ 1 house (U9) and above realised(0)
-        expect(d).toBeLessThanOrEqual(4);
-        if (target >= points[points.length - 1][1]) expect(d).toBe(4); // the tier's ceiling
-        else expect(realisedAt(points, d)).toBeCloseTo(target, 9);
+      for (const X of [0, X_MAX_AUTHORED[tier] / 2, X_MAX_AUTHORED[tier], 3]) {
+        for (let k = 0; k <= 10; k += 1) {
+          const P = Math.round(min * (max / min) ** (k / 10));
+          const target = expectedHousesAt(P) - R - X;
+          const d = densityFactor(tier, P, X);
+          expect(d, `${tier} @ ${P}, X ${X}`).toBeGreaterThanOrEqual(0);
+          expect(d).toBeLessThanOrEqual(4);
+          if (target <= 0) expect(d, `${tier} @ ${P}, X ${X}: nothing left to scale`).toBe(0);
+          else expect(d, `${tier} @ ${P}, X ${X}: target ${target}`).toBeGreaterThan(0);
+          if (target >= points[points.length - 1][1]) expect(d).toBe(4); // the tier's ceiling
+          else if (target > 0) expect(realisedAt(points, d)).toBeCloseTo(target, 9);
+        }
+      }
+      // With no exempt row standing (X = 0) every population of every band has room: d > 0 (U9 holds).
+      for (let P = min; P <= Math.min(max, 20000); P += P < 1000 ? 1 : 25) expect(densityFactor(tier, P), `${tier} @ ${P}`).toBeGreaterThan(0);
+    }
+  });
+
+  // THE d = 0 POPULATIONS, PINNED (the chair's ruling (5)): the band bottoms where the anchor leaves no
+  // room above the required rows and the exempt rows' largest authored expectation (the route × terrain
+  // that admits the most exempt rows, authored chances, neutral sliders: X_MAX_AUTHORED). A future anchor,
+  // R or exempt-row change moves these and reds here. Read 2026-11-04 at the RUNG1B-F6 tip.
+  // X is read without a draw against the empty roster, which is the draw's own chance only while no
+  // exempt row can lose its roll to the roster: no exclusive group, exclusion condition or row guard.
+  it('no density-exempt row carries an exclusive group, an exclusion condition or a row guard (X is draw-free)', () => {
+    const carrying = [];
+    for (const tier of TIER_ORDER) {
+      for (const group of Object.values(institutionalCatalog[tier])) {
+        for (const [name, row] of Object.entries(group)) {
+          if (row.required || isFabricRow(tier, name) || !isDensityExempt(tier, name)) continue;
+          if (row.exclusiveGroup || row.exclusionConditions?.length || institutionRowGuards(tier, name)) carrying.push(`${tier}|${name}`);
+        }
       }
     }
+    expect(carrying).toEqual([]);
+  });
+
+  it('pins the d = 0 populations by tier at the largest authored X', () => {
+    expect(TIER_ORDER.map((tier) => Number(xMaxAuthored(tier).toFixed(4)))).toEqual(TIER_ORDER.map((tier) => X_MAX_AUTHORED[tier]));
+    /** @type {Record<string, [number, number, number] | null>} */
+    const zero = {};
+    for (const tier of TIER_ORDER) {
+      const { min, max } = POPULATION_RANGES[tier];
+      const ps = [];
+      for (let P = min; P <= Math.min(max, 20000); P += 1) if (densityFactor(tier, P, X_MAX_AUTHORED[tier]) === 0) ps.push(P);
+      zero[tier] = ps.length ? [ps[0], ps[ps.length - 1], ps.length] : null;
+    }
+    expect(zero).toEqual({ thorp: [5, 6, 2], hamlet: null, village: [75, 95, 21], town: null, city: null, metropolis: null });
   });
 
   it('is 1 where no population is known; scaleChance clamps the product to [0, 1]', () => {
