@@ -106,13 +106,23 @@ export const IMPORTANCE_ORDER = Object.freeze([
  * metropolises sit BELOW the mass floor. This ladder is a real two-directional
  * move, not a ratification — which is exactly why it lands behind a version
  * gate rather than as an in-place retune.
+ *
+ * X-46 car 4, 2026-11-04 — THE NPC BAND (`docs/DESIGN_X46_SCALE_TRAIN.md` §5). `mass` is
+ * the owner's historical scale: 1–2 / 2–4 / 4–7 / 6–12 / 12–18 / 18–30 named people (the
+ * chair's proposal on the ledger, 2026-11-02, for the owner's veto, not vetoed; the
+ * metropolis ceiling 30 kept from the earlier draft because "18-and-up" needs an edge the
+ * roll can clamp to). It was 1–3 / 2–4 / 3–6 / 6–10 / 12–20 / 18–30. Adjacent bands now
+ * touch or overlap, as the owner's population bands do, and the sizing stage reads the
+ * settlement's place inside its population band (`PARTICULAR_TILTS.population`) so a
+ * large hamlet and a small village roll the same number of named people. Still a draft
+ * under `REGISTER_VII_SIGNATURE`; v1 (`densityLaw.LEGACY_MASS_RANGE`) does not move.
  */
 export const DENSITY_BANDS = Object.freeze({
-  thorp:      Object.freeze({ factions: { min: 1, max: 1 }, mass: { min: 1,  max: 3  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 1 }),
+  thorp:      Object.freeze({ factions: { min: 1, max: 1 }, mass: { min: 1,  max: 2  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 1 }),
   hamlet:     Object.freeze({ factions: { min: 1, max: 2 }, mass: { min: 2,  max: 4  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  village:    Object.freeze({ factions: { min: 2, max: 3 }, mass: { min: 3,  max: 6  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  town:       Object.freeze({ factions: { min: 3, max: 5 }, mass: { min: 6,  max: 10 }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
-  city:       Object.freeze({ factions: { min: 5, max: 8 }, mass: { min: 12, max: 20 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
+  village:    Object.freeze({ factions: { min: 2, max: 3 }, mass: { min: 4,  max: 7  }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  town:       Object.freeze({ factions: { min: 3, max: 5 }, mass: { min: 6,  max: 12 }, doubledNiches: { min: 0, max: 0 }, suite: { min: 1, max: 2 }, rivalBonusSeat: 0 }),
+  city:       Object.freeze({ factions: { min: 5, max: 8 }, mass: { min: 12, max: 18 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
   metropolis: Object.freeze({ factions: { min: 7, max: 10 }, mass: { min: 18, max: 30 }, doubledNiches: { min: 1, max: 2 }, suite: { min: 2, max: 3 }, rivalBonusSeat: 0 }),
 });
 
