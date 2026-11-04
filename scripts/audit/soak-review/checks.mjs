@@ -37,6 +37,7 @@ import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/cohere
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
 import { famineOf } from '../../../src/domain/facts/famine.js';
+import { terrainClassOf, tradeRouteOf } from '../../../src/domain/facts/terrain.js';
 import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
@@ -215,8 +216,9 @@ export function guildPowerSmall(s) {
 
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
-  const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
-  const route = String(s?.config?.tradeRouteAccess ?? config?.tradeRouteAccess ?? '');
+  // The terrain home's one chain (CENSUS-1 fact 13), the birth config as the last fallback.
+  const terrain = terrainClassOf(s) || String(config?.terrainOverride ?? '');
+  const route = tradeRouteOf(s) || String(config?.tradeRouteAccess ?? '');
   return waterAccessKind(terrain.toLowerCase(), route || null) !== 'none'; // the water home's rule (CENSUS-1 fact 4)
 }
 

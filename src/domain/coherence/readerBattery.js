@@ -29,6 +29,7 @@ import { hasMarketInstitution } from '../facts/market.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 import { waterOf } from '../facts/water.js';
+import { terrainClassOf, tradeRouteOf } from '../facts/terrain.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
 
@@ -37,14 +38,14 @@ import { waterOf } from '../facts/water.js';
 /** @param {string} text @returns {string[]} */
 const linesOf = (text) => str(text).split('\n').map((x) => x.trim()).filter(Boolean);
 
-/** @param {any} s @returns {string} the terrain the Resources tab names */
+/** The terrain home's one chain (`facts/terrain.js`, CENSUS-1 fact 13). @param {any} s @returns {string} */
 export function terrainOf(s) {
-  return str(s?.config?.terrainType ?? s?.config?.terrainOverride ?? s?.terrain ?? s?.resourceAnalysis?.terrain);
+  return terrainClassOf(s);
 }
 
 /** @param {any} s @returns {string} */
 export function routeOf(s) {
-  return str(s?.config?.tradeRouteAccess ?? s?.tradeRouteAccess);
+  return tradeRouteOf(s);
 }
 
 /** Navigable water: the water home (`facts/water.js`, CENSUS-1 fact 4), not a regex of its own.
