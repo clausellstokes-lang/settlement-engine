@@ -84,7 +84,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // re-deals the year again and the year-one desk carries two fewer items (473 → 471). The misjudgment ids do not move.
     // 473 → 462 at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the step re-deals the realm's year and the year-one desk files
     // 11 fewer items (473 → 462).
-    expect(Object.keys(manifest)).toHaveLength(462);
+    // 462 → 463 at X-46 CAR 2 (LANE X46-2-THRESHOLDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json): the step re-deals the realm's year and the year-one desk files
+    // 1 more items (462 → 463).
+    expect(Object.keys(manifest)).toHaveLength(463);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
