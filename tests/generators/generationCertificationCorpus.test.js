@@ -464,7 +464,8 @@ function expectCertified(settlement, label) {
   expect(
     settlement.population,
     `${label} population outside ${settlement.tier}`,
-  ).toBeLessThanOrEqual(range.max);
+    // I3 (the chair, 2026-11-04, on X-46 car 1b): the metropolis band is open above its floor.
+  ).toBeLessThanOrEqual(settlement.tier === 'metropolis' ? Infinity : range.max);
   expectFiniteNumbers(settlement);
   expectIndependentIntegrity(settlement, label);
 }

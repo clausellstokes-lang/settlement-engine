@@ -83,3 +83,12 @@ describe('A-11, the airship docks\' own services (chair ruling, round 4, 4)', ()
     expect(seaWordSentence(lines, {})).toBe(lines[0]);
   });
 });
+
+describe('I6 — the cooper\'s reference line is licensed (the chair, 2026-11-04)', () => {
+  it('an inland cooper\'s barrels "for … fish" give no sea-word sentence', () => {
+    expect(seaWordSentence(['Watertight barrels for ale, wine, salted meat, and fish.'], {})).toBeUndefined();
+  });
+  it('a harbour sentence inland still counts', () => {
+    expect(seaWordSentence(['Ships unload in the harbour at dawn.'], {})).toBe('Ships unload in the harbour at dawn.');
+  });
+});

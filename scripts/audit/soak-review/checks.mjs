@@ -40,6 +40,8 @@ export const KIND_OF = Object.freeze({
   'X-50:boilerplate-twice': 6, 'A-09:behaviour-line-share': 6,
   'A-10:role-only-npc': 7, 'A-10:placeholder-faction': 7, 'A-03:tonight-they': 7,
   'A-05:lacks-access-lines': -2,
+  // I2: the advisory battery judgment's verdict — "records the battery would not vouch for" — informational.
+  'info:battery-would-not-vouch': -2,
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
 });
 
@@ -72,6 +74,9 @@ const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|s
  */
 const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b|\bfishmonger\b/gi;
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
+/** The cooper's reference line, "barrels for ale, wine, salted meat, and fish": what the barrels hold, not a
+ *  catch landed here (the chair's ruling I6, 2026-11-04, on TERRAIN-POOLS' finding). */
+const COOPER_BARRELS = /\bbarrels? for [^.]*\bfish\b/gi;
 /** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
 // Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
@@ -98,7 +103,7 @@ export function seaWordSentence(sentences, s) {
     .flatMap((desc) => sentencesOf(desc)));
   return sentences.find((x) => {
     if (inlandText.has(x)) return false;
-    let text = x.replace(INLAND_FISH, '').replace(ROUTE_DISJUNCTION, '');
+    let text = x.replace(INLAND_FISH, '').replace(COOPER_BARRELS, '').replace(ROUTE_DISJUNCTION, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
     if (airship) text = text.replace(AIRSHIP_PORT, '');
     return SEA_WORDS.test(text);
@@ -147,6 +152,8 @@ export function reviewSettlement(s, config, r) {
 
   // ── cert: the certification soak's own receipts
   for (const f of inspectSettlement(s, config)) add(`cert:${f.code}`, 'record', f.path, f.detail);
+  const batteryVerdict = (s?.generationCoherenceReceipt?.judgments || []).find((j) => j?.id === 'record_coherence_battery');
+  if (batteryVerdict?.status === 'needs_review') add('info:battery-would-not-vouch', 'record', 'generationCoherenceReceipt.judgments.record_coherence_battery', (batteryVerdict.findings || []).map((f) => f?.path).filter(Boolean).join(', '));
 
   // ── X-46 car 1: population inside the owner's band for its tier
   const band = OWNER_BANDS[s.tier];
