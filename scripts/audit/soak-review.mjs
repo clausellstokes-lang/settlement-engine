@@ -58,6 +58,7 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
   const { birth, ensureLaws, sha } = await import('./soak-review/corpus.mjs');
   const { reviewSettlement } = await import('./soak-review/checks.mjs');
   const { walkRecord, chainFacts } = await import('./soak-review/features.mjs');
+  const { housesReading } = await import('./soak-review/bands.mjs');
   const { sentencesOf } = await import('./soak-review/checks.mjs');
   const { normalizeRenderedSentence } = await import('./phrase-repetition.mjs');
   const { storySentencesOf, skeletonOf } = await import('./soak-review/prose.mjs');
@@ -118,6 +119,9 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         i, seed: b.seed, tier: s.tier, population: s.population, stressCell: b.stressCell, matrix: b.matrix,
         hashes: { record: sha(s), config: sha(b.config) }, rendered, replay,
         findings, chains, features, sentences, texts, story, storyTexts,
+        // I4's houses ÷ anchor (bands.mjs): kept off `chains` and `features` so the field walk
+        // and the dependence scan read exactly what they read before.
+        houses: housesReading(s),
       };
       if (isSampled(i, count) && r) {
         const body = [

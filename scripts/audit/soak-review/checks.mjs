@@ -24,6 +24,7 @@ import { normalizeRenderedSentence } from '../phrase-repetition.mjs';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
 import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
+import { hasMarketInstitution } from '../../../src/generators/economy/viability.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -81,6 +82,37 @@ const COOPER_BARRELS = /\bbarrels? for [^.]*\bfish\b/gi;
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
 // Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?)\b/gi;
+/** F5 (2026-11-04): an A-05 gap line, "<chain>: <house> exists but lacks access to <good>". */
+const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
+
+/**
+ * A-11 reads prose, not ledgers of LACKS (lane F5, 2026-11-04, on rung 1B's soak1k-992 and
+ * soak1k-353). A ledger line that names what the place LACKS is no claim that it has it:
+ *  - an A-05 gap line keeps only the house it says exists (a Shipwright there is still read);
+ *    its chain label and the good it lacks are removed;
+ *  - a Services needs row, "Needs <need> <impact> · covers <need>, …" (`serviceComponents.jsx ::
+ *    ServiceItem`, the X-50 impact plan in `ServicesTab.jsx`), names severed needs: the
+ *    "covers" list (on whichever sentence carries it) and the row's own need (one of that list)
+ *    are removed; the impact sentence between them is prose and is still read. A bare
+ *    "Needs <need>" line is a need alone.
+ * @param {string} x one screen sentence
+ * @returns {string}
+ */
+export function withoutLackLedger(x) {
+  const gap = x.match(LACKS_ACCESS_LINE);
+  if (gap) return gap[1];
+  // The "covers" list ends the row; it is stripped wherever the sentence split put it (an impact
+  // of two sentences leaves it on the second, soak1k-605).
+  const covers = x.match(/\s·\scovers\s(.+)$/);
+  let body = covers ? x.slice(0, x.length - covers[0].length) : x;
+  if (!body.startsWith('Needs ')) return body;
+  body = body.slice('Needs '.length);
+  if (covers) {
+    const own = covers[1].split(', ').filter((need) => body.startsWith(need)).sort((a, b) => b.length - a.length)[0];
+    return own ? body.slice(own.length) : body;
+  }
+  return /[.!?]/.test(body) ? body : '';
+}
 
 /**
  * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland
@@ -103,7 +135,7 @@ export function seaWordSentence(sentences, s) {
     .flatMap((desc) => sentencesOf(desc)));
   return sentences.find((x) => {
     if (inlandText.has(x)) return false;
-    let text = x.replace(INLAND_FISH, '').replace(COOPER_BARRELS, '').replace(ROUTE_DISJUNCTION, '');
+    let text = withoutLackLedger(x).replace(INLAND_FISH, '').replace(COOPER_BARRELS, '').replace(ROUTE_DISJUNCTION, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
     if (airship) text = text.replace(AIRSHIP_PORT, '');
     return SEA_WORDS.test(text);
@@ -130,6 +162,26 @@ export function arenaSpectacleSentence(sentences) {
 export function magicAlchemist(institutions) {
   return (institutions || []).find((i) => /alchem/i.test(i?.name || '')
     && institutionCatalogMagicLicence(i.name) !== 'none');
+}
+
+/** The guild powers the engine seats in a small place on a real market (rulingStructure.js, R6 and SIZE-3). */
+const MARKET_GUILD = /\bmerchant|\bthie(?:f|ves)['’]?s?\b/i;
+
+/**
+ * A-14's guild: a guild power in a thorp or hamlet. Licensed (lane F5, 2026-11-04; the chair's
+ * ruling on soak1k-313, "a Periodic market is a market"): a Merchant Guilds or Thieves' Guild
+ * where the record holds a real market by the engine's own predicate
+ * (`src/generators/economy/viability.js :: hasMarketInstitution`, the gate R6 and SIZE-3 put on
+ * those two seats). A small place with no market at all, or any other guild, still counts.
+ * @param {{ tier?: string, institutions?: unknown[], factions?: Array<{ name?: string, faction?: string }>, powerStructure?: { factions?: Array<{ name?: string, faction?: string }> } }} s
+ * @returns {string|undefined}
+ */
+export function guildPowerSmall(s) {
+  if (s?.tier !== 'thorp' && s?.tier !== 'hamlet') return undefined;
+  const market = hasMarketInstitution(s.institutions);
+  return [...(s.factions || []), ...(s.powerStructure?.factions || [])]
+    .map((f) => String(f?.name ?? f?.faction ?? ''))
+    .find((n) => /guild/i.test(n) && !(market && MARKET_GUILD.test(n)));
 }
 
 /** Does the place have water a boat or a net could use? */
@@ -281,10 +333,8 @@ export function reviewSettlement(s, config, r) {
   if (vouch && contradictions) add('A-12:self-vouch-false', 'screen', vouch, `${contradictions} contradiction findings`);
 
   // ── A-14: town furnishings in small places
-  if (s.tier === 'thorp' || s.tier === 'hamlet') {
-    const guild = factionNames.find((n) => /guild/i.test(n));
-    if (guild) add('A-14:guild-power-small', 'record', guild, s.tier);
-    if (/\bLord Mayor\b/.test(allText)) add('A-14:lord-mayor-small', 'screen', 'Lord Mayor', s.tier);
-  }
+  const guild = guildPowerSmall(s);
+  if (guild) add('A-14:guild-power-small', 'record', guild, s.tier);
+  if ((s.tier === 'thorp' || s.tier === 'hamlet') && /\bLord Mayor\b/.test(allText)) add('A-14:lord-mayor-small', 'screen', 'Lord Mayor', s.tier);
   return out;
 }
