@@ -51,3 +51,49 @@ Measured by `scripts/audit/institution-budget-floor-measure.mjs` (run line in it
 
 - **The promise.** `tests/generators/institutionBudgetPromise.test.js` holds 60 of 60 at the tip against its existing digests, with the factor forced to 1.0. The new code reaches the draw only through `densityFactor`, which the promise mocks to 1. No digest moved, so nothing was re-captured, and the red-first step had no red to start from.
 - **The measuring script.** `scripts/audit/institution-budget-measure.mjs --calibrate` now measures realised(d) over the scalable rows: drawn at a scaled chance (source `generated`, `cascade` or `faction_boost`), and not required, fabric or density-exempt.
+
+## Unit 4 — measured after, the rung-1B §3 way
+
+**Method.** Births of the soak's same 1,000 seeds (`soak-review/corpus.mjs :: birth`), at the base `f9ce225c5` and at the tip (src as at `bf3d1258`). Houses are the non-fabric rows; the anchor is `expectedHousesAt` at each settlement's own population; "outside" means beyond ±40%. Each settlement's d is the one assembleInstitutions read, recorded by the measurement-only load hook. The run line is in the header of `scripts/audit/institution-budget-floor-after.mjs`, and the output (base and tip) is in `docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.after.json`.
+
+The base run reproduces §3: 88 outside, the same medians and the same ρ. The tenths below are this script's slices (the 17 lowest- and highest-population settlements per tier), read the same way at base and tip, so a cell can differ by half a house from §3's.
+
+| tier | houses (median) base → tip | anchor | houses ÷ anchor base → tip | outside ±40% base → tip (over / under at tip) | lowest tenth at tip: pop / houses / anchor | highest tenth at tip: pop / houses / anchor | d = 0 base → tip | ρ population → institutions base → tip |
+|---|---|---|---|---|---|---|---|---|
+| thorp | 4 → 5 | 4.5 | 1.00 → 1.074 | 27 → 24 (23 / 1) | 7 / 4 / 3.4 | 29 / 5 / 5.0 | 6 → 0 | 0.23 → 0.18 |
+| hamlet | 6 → 6 | 6.8 | 0.93 → 0.97 | 38 → 41 (24 / 17) | 24 / 6 / 4.8 | 96 / 8 / 7.9 | 0 → 1 | 0.38 → 0.39 |
+| village | 13 → 13 | 13.1 | 1.015 → 1.066 | 18 → 14 (12 / 2) | 94 / 9 / 7.8 | 385 / 14 / 15.8 | 10 → 5 | 0.56 → 0.60 |
+| town | 28 → 29 | 29.7 | 0.98 → 1.013 | 5 → 4 (4 / 0) | 422 / 18 / 16.6 | 2,428 / 38 / 35.7 | 0 → 0 | 0.72 → 0.74 |
+| city | 65 → 66 | 62.8 | 1.05 → 1.049 | 0 → 0 | 2,881 / 37 / 39.2 | 14,566 / 82 / 75.3 | 0 → 0 | 0.80 → 0.83 |
+| metropolis | 87 → 87 | 87.7 | 1.00 → 1.00 | 0 → 0 | 15,881 / 79 / 76.7 | 206,816 / 92 / 93.0 | 0 → 0 | 0.52 → 0.51 |
+| **all** | | | | **88 → 83** | | | **16 → 6** | |
+
+**The six d = 0 settlements at the tip are the ruling working as written.** Each one's own X fills the anchor's room: hamlet 20 (X 1.81 against 1.55 of room), villages at 86, 86, 99, 128 and 151 (X 1.85 to 4.60 against 1.62 to 4.38).
+- The real X exceeds the authored-X pin because the draw's own terrain and resource multipliers raise the exempt chances, and X reads the draw's chance.
+- At the base every thorp of 5–6 and every village of 75–99 read d = 0, whatever its exempt rows were.
+
+**The cost the ruling leaves.** Thorp houses ÷ anchor rose from 1.00 to 1.074, and the over-count went from 18 to 23. Village went from 1.015 to 1.066. The coherence repairs (about 0.66 a settlement at d = 0, unit 1) and the toggle-forced rows are now outside both X and realised_scalable, so they sit on top of the anchor. This attribution is PLAUSIBLE: the repairs were measured at d = 0, not at the tip. A ruling that also subtracts an expected repair term would close it, but that term depends on the draw and cannot be read draw-free.
+
+**Sixty a tier at the band's geometric midpoint, base against tip:**
+- 16 of 360 are byte-identical (thorp 7, hamlet 4, village 4, town 1, city 0, metropolis 0).
+- d changed in all 360, so there is no cell where d is unchanged.
+- The 16 identical cells are ones where the moved d crossed no draw's threshold.
+
+**Goldens and censuses moved** (counted against the base's own reds with the same suites at both ends; none re-recorded):
+- **The generator golden master:** 504 of 525 rows moved (per-row hashes, base against tip, by this lane's harness). It was already red on all 525 against the committed manifest at the base.
+- **Newly red** (the cause in both is the density change):
+  - `x46NpcBand` dark digests: 52 of 60 moved;
+  - `institutionBudgetRouteRequired`'s port-city anchor: the without-exemption arm reads X = 0, its d rises from 0.3349 to 0.3645, and the 0.4 Harbour master's office now draws on `joins-subsumption-0`. The arm's mountain sixty stay byte-identical. This is PINS' pin, so it was not re-keyed.
+- **Newly green:**
+  - `institutionBudgetDensity` (this lane's re-key);
+  - `institutionBudgetReach` (every band step is above d = 0 again with X = 0).
+- **Red at both ends, with moved figures:**
+  - `generationCertificationCorpus`: the advisory list 64 → 63 of 65;
+  - `generationForkCensus` A6 control hash: `eab06b85…` → `cacb9070…`;
+  - `governanceNarrative`: 6 → 7 of 11;
+  - `hookThemeDraws`' NPC denominator: 588 → 594 of 613;
+  - `pipelinePinnedChoosers` A3: 33 → 32 of 52;
+  - `powerEconomyFreshness` A1/A4: 31 → 28 of 37 and 34 → 31 of 47;
+  - `dossierProseManifest`'s mixed-pool arm: 220 → 208 of 296;
+  - `heraldKnowledgeDeskGolden` digest: `1068b3a0…` → `1ba9225e…`.
+  - The remaining reds present at both ends (the dormancy goldens, `pipelineContract`'s `resolveCrisisCast` `stress` write and others, 38 files at each end) read the same message at both ends.
