@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-04, TIER-NOUN-POOLS (units 1–6) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-FIFTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-05-tier-noun-pools.json. THE MOVER, FOUND: first-parent step a9982e3b9 of the rung-1
+ * landing and nothing else (TIER-NOUN-POOLS (units 1–6): a city's drawn institution description and its Gate Tolls line speak the place's own tier noun). On THIS corpus 76 of 360 rows move
+ * (city 40, metropolis 36; thorp, hamlet, village, town 0); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S5 (the tree of a9982e3b9 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `5103a51e…` -> `8ef28c7f…`.
+ *
  * ── 2026-11-04, CRISIS (lane crisis, units 1–7, docs/DESIGN_CRISIS_TAB.md) (RUNG 1 OF THE SOAK LADDER) ──
  * THE THIRTY-FOURTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -579,7 +589,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = '5103a51e1585c79c4450898d8af750913429ca3660b42068c917903338cd357e';
+const PRE_COUPLING_CORPUS_SHA = '8ef28c7fff34f8c01c27c5120b1afdb754e17670154bc9b433cb9b3d40351343';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
