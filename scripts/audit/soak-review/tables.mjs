@@ -20,6 +20,7 @@ const dep = J('aggregates/dependence-strong.json');
 const rep = J('aggregates/repetition.json');
 const fields = J('aggregates/fields.json');
 let res = null; try { res = J('aggregates/dependence-residual.json'); } catch { /* a run older than the second pass */ }
+let prose = null; try { prose = J('aggregates/repetition-prose.json'); } catch { /* a run older than the prose instrument */ }
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const cell = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').slice(0, 160);
 const L = [];
@@ -47,6 +48,16 @@ if (res) {
 }
 L.push('', '## Repetition across the corpus', '', `towns ${rep.towns} · distinct sentences ${rep.distinctSentences} · sentences in ≥10% of towns ${rep.sharedByTenPercent} · median share of a town's sentences that another town also has ${rep.medianShareOfTownSeenInAnotherTown} (p90 ${rep.p90ShareSeenElsewhere}) · median share in ≥10%-sentences ${rep.medianShareOfTownInTenPercentSentences}`, '', '| towns | rate | sentence (names masked @, numbers #) |', '|---|---|---|');
 for (const t of rep.top.slice(0, 30)) L.push(`| ${t.towns} | ${t.rate} | ${cell(t.sentence)} |`);
+if (prose) {
+  const pct = (x) => `${Math.round(x * 1000) / 10}%`;
+  L.push('', '## Repetition, prose only (the audit\'s definition)', '', `${prose.definition}.`, '');
+  if (prose.story) L.push(`**the audit's figure: a second settlement repeats ${pct(prose.story.all)} of its story sentences word for word** (same tier ${pct(prose.story.sameTier)}; worst same-tier pair ${pct(prose.story.maxSameTier)}, ${(prose.story.maxPair || []).join(' → ')}), with the tabs' own copy set aside by source (${(prose.chromeSkeletons || []).length} skeletons: ${(prose.chromeSkeletons || []).map((c) => `"${cell(c.skeleton).slice(0, 50)}"`).join('; ')}).`, '');
+  L.push(`towns ${prose.towns} · median story sentences per town ${prose.medianStorySentencesPerTown} · with the tabs' copy: ${pct(prose.exact.all)} (same tier ${pct(prose.exact.sameTier)}; worst same-tier pair ${pct(prose.exact.maxSameTier)}, ${(prose.exact.maxPair || []).join(' → ')}) · plot hooks ${pct(prose.hooks.all)} (same tier ${pct(prose.hooks.sameTier)}; worst ${pct(prose.hooks.maxSameTier)}) · names masked: ${pct(prose.skeleton.all)} (same tier ${pct(prose.skeleton.sameTier)})`);
+  const byT = (prose.story ?? prose.exact).byTier;
+  L.push(`same-tier, by tier: ${TIERS.map((t) => `${t} ${byT[t] != null ? pct(byT[t]) : '·'}`).join(' · ')}`);
+  L.push('', `### The ${prose.top.length} skeletons shared by ≥ 10% of towns (of ${prose.skeletonsInTenPercent}), with their source pool`, '', '| towns | rate | tab | skeleton (names @, numbers #) | source (`path :: symbol`) |', '|---|---|---|---|---|');
+  for (const t of prose.top) L.push(`| ${t.towns} | ${t.rate} | ${t.tab} | ${cell(t.skeleton)} | ${t.source ? `\`${t.source.file} :: ${t.source.symbol}\`${t.source.alsoIn ? ` (+${t.source.alsoIn})` : ''}${t.chrome ? ' — tab copy' : ''}` : 'composed (no literal run found)'} |`);
+}
 const key = fields.filter((f) => f.path.startsWith('chain.') && f.kind === 'numeric');
 L.push('', '## Key numeric facts by tier (median [p10–p90], min–max)', '', `| fact | ${TIERS.join(' | ')} |`, `|---|${TIERS.map(() => '---').join('|')}|`);
 for (const f of key) L.push(`| ${f.path.replace('chain.', '')} | ${TIERS.map((t) => { const b = f.byTier[t]; return b && b.median != null ? `${b.median} [${b.p10}–${b.p90}] ${b.min}–${b.max}` : '·'; }).join(' | ')} |`);

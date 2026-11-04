@@ -11,6 +11,8 @@ import { KIND_OF, OWNER_BANDS, CHAIR_READINGS } from './checks.mjs';
 import { CHAINS } from './chains.mjs';
 import { dependence } from './dependence-measures.mjs';
 import { secondPass } from './dependence.mjs';
+import { pairwiseRepeat, sourcePoolOf } from './prose.mjs';
+import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town'];
@@ -41,6 +43,7 @@ export function aggregate(out, meta) {
   const fBuf = []; const sBuf = [];
   const flush = () => { if (fBuf.length) appendFileSync(join(out, 'findings.jsonl'), fBuf.splice(0).join('')); if (sBuf.length) appendFileSync(join(out, 'settlements.jsonl'), sBuf.splice(0).join('')); };
   const sentenceTowns = new Map(); const sentenceText = {};
+  const storyText = {}; const storyRows = [];
   const fieldVals = new Map(); // path → array per row index (sparse)
   const cats = new Map(); // path → tier → value → count
   const classes = new Map();
@@ -59,6 +62,8 @@ export function aggregate(out, meta) {
     sBuf.push(`${JSON.stringify({ i: row.i, seed: row.seed, tier: row.tier, population: row.population, stressCell: row.stressCell, matrix: row.matrix, hashes: row.hashes, rendered: row.rendered, replay: row.replay, error: row.error ?? null, findingCount: (row.findings || []).length, checks })}\n`);
     for (const h of row.sentences || []) sentenceTowns.set(h, (sentenceTowns.get(h) || 0) + 1);
     Object.assign(sentenceText, row.texts || {});
+    Object.assign(storyText, row.storyTexts || {});
+    if (row.rendered && row.story) { const items = row.story.items || []; storyRows.push({ seed: row.seed, tier: row.tier, items, exact: items.map((x) => x[0]), skel: [...new Set(items.map((x) => x[1]))], hooks: row.story.hooks || [] }); }
     const scalars = { ...(row.features?.scalars || {}), ...(row.chains || {}) };
     for (const [p, v] of Object.entries(scalars)) { if (v === null || v === undefined) continue; let a = fieldVals.get(p); if (!a) { a = []; fieldVals.set(p, a); } a[k] = v; }
     for (const [p, vs] of Object.entries(row.features?.cats || {})) { const byT = cats.get(p) ?? {}; const t = (byT[row.tier] ??= {}); for (const [v, n] of Object.entries(vs)) t[v] = (t[v] || 0) + n; cats.set(p, byT); }
@@ -164,6 +169,30 @@ export function aggregate(out, meta) {
   };
   writeFileSync(join(out, 'aggregates', 'repetition.json'), `${JSON.stringify(repetition, null, 1)}\n`);
 
+  // ── repetition, prose only (prose.mjs: the surface filter and the audit's pairwise figure)
+  const pw = (key) => { const r = pairwiseRepeat(storyRows.map((x) => ({ seed: x.seed, tier: x.tier, sentences: x[key] || [] }))); return { all: r3(r.all), sameTier: r3(r.sameTier), maxSameTier: r3(r.maxSameTier), maxPair: r.maxPair, byTier: Object.fromEntries(Object.entries(r.byTier).map(([t, v]) => [t, r3(v)])), towns: r.towns }; };
+  const skelTowns = new Map(); for (const x of storyRows) for (const h of x.skel || []) skelTowns.set(h, (skelTowns.get(h) || 0) + 1);
+  const storyTowns = storyRows.length;
+  const sharedSkel = [...skelTowns].filter(([, n]) => n >= Math.max(3, storyTowns * 0.1)).sort((a, b) => b[1] - a[1]);
+  const perTownStory = storyRows.map((x) => { const n = (x.skel || []).length; return { tier: x.tier, n, shared: n ? (x.skel.filter((h) => (skelTowns.get(h) || 0) >= Math.max(3, storyTowns * 0.1)).length / n) : 0 }; });
+  const medianOf = (xs) => r3(q(xs.slice().sort((a, b) => a - b), 0.5));
+  // The tabs' own copy: a widely shared skeleton whose words live in a tab component's JSX
+  // (src/components/), not in a pool or a generator. Set aside by its SOURCE, then re-measured.
+  const sources = new Map(sharedSkel.map(([h]) => [h, storyText[h] ? sourcePoolOf(storyText[h].s, REPO_ROOT) : null]));
+  const chrome = new Set(sharedSkel.filter(([h]) => sources.get(h)?.file?.startsWith('src/components/')).map(([h]) => h));
+  for (const x of storyRows) x.story = x.items.filter(([, h]) => !chrome.has(h)).map(([e]) => e);
+  const prose = {
+    chromeSkeletons: [...chrome].map((h) => ({ skeleton: storyText[h]?.s ?? '', towns: skelTowns.get(h), source: sources.get(h) })),
+    definition: 'story sentences: <p> at body size (≥ 12px or unset) on the 20 screen tabs and the Tonight sheet; complete sentences of ≥ 6 words; word for word after normalizeRenderedSentence (prose.mjs)',
+    towns: storyTowns,
+    medianStorySentencesPerTown: medianOf(storyRows.map((x) => (x.exact || []).length)),
+    exact: pw('exact'), story: pw('story'), skeleton: pw('skel'), hooks: pw('hooks'),
+    distinctSkeletons: skelTowns.size, skeletonsInTenPercent: sharedSkel.length,
+    medianShareOfTownInTenPercentSkeletons: medianOf(perTownStory.map((x) => x.shared)),
+    top: sharedSkel.slice(0, 40).map(([h, n]) => ({ towns: n, rate: r3(n / storyTowns), tab: storyText[h]?.tab ?? '', skeleton: storyText[h]?.s ?? '', chrome: chrome.has(h), source: sources.get(h) ?? null })),
+  };
+  writeFileSync(join(out, 'aggregates', 'repetition-prose.json'), `${JSON.stringify(prose, null, 1)}\n`);
+
   // ── STOP / CLIMB (the chair's stop rule)
   const reasons = [];
   for (const c of classRows) {
@@ -174,7 +203,7 @@ export function aggregate(out, meta) {
     else if (c.kind === 0 && c.rate > 0.01) reasons.push(`wording: ${c.check} at ${c.rate}`);
   }
   const verdict = reasons.length ? 'STOP' : 'CLIMB';
-  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
+  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
   writeFileSync(join(out, 'run.json'), `${JSON.stringify(summary, null, 1)}\n`);
   return summary;
 }

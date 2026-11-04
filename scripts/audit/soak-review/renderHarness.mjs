@@ -15,9 +15,13 @@
  * imported NORMALLY (the reader corpus's own ⚠: two React copies break hooks).
  *
  * A surface that throws is recorded as `{ error }`, never dropped: a render error is a finding.
+ * Each screen surface also yields its STORY blocks (`prose.mjs :: proseOfHtml`, the surface
+ * filter), for the prose-only repetition instrument.
  */
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { proseOfHtml } from './prose.mjs';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 export const REPO_ROOT = resolve(HERE, '../../..');
@@ -113,7 +117,7 @@ function pdfLeaves(node, out, depth = 0) {
 
 /**
  * Every rendered surface of one settlement.
- * @returns {{ tabs: Record<string,string>, tonight: string, tonightSheet: any, pdf: string, foundry: string, errors: Record<string,string> }}
+ * @returns {{ tabs: Record<string,string>, prose: Record<string,string[]>, tonight: string, tonightSheet: any, pdf: string, foundry: string, errors: Record<string,string> }}
  */
 export function renderSurfaces(h, settlement) {
   const { React, RDS, m } = h;
@@ -144,14 +148,15 @@ export function renderSurfaces(h, settlement) {
     dm_compass: { settlement: s },
     substrate: { settlement: s },
   };
-  const tabs = {};
+  const tabs = {}; const prose = {};
   for (const id of TAB_IDS) {
-    try { tabs[id] = htmlToText(RDS.renderToStaticMarkup(el(m[id], props[id]))); } catch (e) { errors[`tab:${id}`] = String(e?.message ?? e).slice(0, 300); tabs[id] = ''; }
+    try { const html = RDS.renderToStaticMarkup(el(m[id], props[id])); tabs[id] = htmlToText(html); prose[id] = proseOfHtml(html); } catch (e) { errors[`tab:${id}`] = String(e?.message ?? e).slice(0, 300); tabs[id] = ''; prose[id] = []; }
   }
   let tonight = ''; let tonightSheet = null;
   try {
     tonightSheet = m.tonightModel.composeTonightSheet(s);
-    tonight = htmlToText(RDS.renderToStaticMarkup(React.createElement(m.tonight.default, { sheet: tonightSheet, palette: {} })));
+    const html = RDS.renderToStaticMarkup(React.createElement(m.tonight.default, { sheet: tonightSheet, palette: {} }));
+    tonight = htmlToText(html); prose.tonight = proseOfHtml(html);
   } catch (e) { errors.tonight = String(e?.message ?? e).slice(0, 300); }
   let pdf = ''; let vm = null;
   try {
@@ -164,5 +169,5 @@ export function renderSurfaces(h, settlement) {
     const { pages } = m.foundry.buildFoundryModuleFiles({ settlement: s, vm: vm ?? m.vm.buildViewModel({ settlement: s }), variant: 'canon_dossier', faithUnlocked: true });
     foundry = pages.map((p) => `# ${p.name}\n${String(p.markdown ?? p.text?.markdown ?? p.text?.content ?? '').trim()}`).join('\n');
   } catch (e) { errors.foundry = String(e?.message ?? e).slice(0, 300); }
-  return { tabs, tonight, tonightSheet, pdf, foundry, errors };
+  return { tabs, prose, tonight, tonightSheet, pdf, foundry, errors };
 }
