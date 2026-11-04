@@ -32,7 +32,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
-import { CRISIS_ROLE_LABEL, effectiveCastOf } from '../crisis/crisisCast.js';
+import { CRISIS_ROLE_LABEL, castHash, effectiveCastOf } from '../crisis/crisisCast.js';
 
 /**
  * THE ONE COPY CONSTANT for the sheet, on every surface that prints it.
@@ -87,6 +87,19 @@ export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<
     'keep the defence standing long enough for someone else to end this.',
   ]),
 }));
+
+/**
+ * The want a cast person voices: the role's own pool, one line by `castHash` over the person, the
+ * crisis and the role (no draw). A role with no pool (never voiced today) falls back to the
+ * person's own goal.
+ * @param {string} role @param {string} personId @param {string} crisis @param {string} ownWant
+ * @returns {string}
+ */
+export function castWantOf(role, personId, crisis, ownWant) {
+  const pool = /** @type {Record<string, ReadonlyArray<string>>} */ (CAST_WANTS)[role];
+  if (!pool || pool.length === 0) return ownWant;
+  return pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
+}
 
 /** How many hooks the sheet carries. */
 const HOOK_COUNT = 3;
@@ -197,14 +210,14 @@ const VOICE_SLOTS = Object.freeze(/** @type {import('../crisis/crisisCast.js').C
  * Every active crisis's cast as the page shows it (the DM's word where the DM spoke), worst
  * first: the cast's own casting order, which is the engine's severity ranking.
  * @param {TonightSource} source
- * @returns {Array<{ label: string, cast: import('../crisis/crisisCast.js').CrisisCast }>}
+ * @returns {Array<{ label: string, kind: string, cast: import('../crisis/crisisCast.js').CrisisCast }>}
  */
 function castsOf(source) {
   return stressesOf(source)
     .map((s, at) => ({ s, at, cast: effectiveCastOf(/** @type {Parameters<typeof effectiveCastOf>[0]} */ (source), s).cast }))
     .filter((x) => !!x.cast)
     .sort((a, b) => ((a.s.cast?.rank || 0) - (b.s.cast?.rank || 0)) || (a.at - b.at))
-    .map((x) => ({ label: clean(x.s.label) || clean(x.s.type), cast: /** @type {import('../crisis/crisisCast.js').CrisisCast} */ (x.cast) }));
+    .map((x) => ({ label: clean(x.s.label) || clean(x.s.type), kind: clean(x.s.type), cast: /** @type {import('../crisis/crisisCast.js').CrisisCast} */ (x.cast) }));
 }
 
 /**
@@ -302,11 +315,13 @@ function peopleOf(source) {
   const casts = castsOf(source);
   for (const slot of VOICE_SLOTS) {
     let filled = false;
-    for (const { cast } of casts) {
+    for (const { cast, kind } of casts) {
       for (const role of slot) {
         const row = cast.roles.find((r) => r.role === role && r.kind === 'npc');
         const hit = row ? npcs.find(({ npc }) => (clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) === row.id) : undefined;
-        if (hit && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', wantOf(hit.npc), CRISIS_ROLE_LABEL[role]); filled = true; break; }
+        // RUNG2-F13: the cast person wants what the ROLE wants (CAST_WANTS), never the want of
+        // the people answering the crisis (soak1k-1805's instigator "identify the infiltrator").
+        if (hit && row && !out.some((p) => p.name === clean(hit.npc.name))) { add(hit, 'cast', castWantOf(role, row.id, kind, wantOf(hit.npc)), CRISIS_ROLE_LABEL[role]); filled = true; break; }
       }
       if (filled) break;
     }
@@ -317,8 +332,16 @@ function peopleOf(source) {
   if (seat) add(seat, 'seat', wantOf(seat.npc));
 
   const patterns = crisisSecretPatterns(source);
+  // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
+  // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
+  // already voiced from the cast (soak1k-3005): their line is the role's want, never overwritten.
+  const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
   const keeper = patterns.length
-    ? npcs.find(({ npc }) => { const s = secretOf(npc); return !!s && patterns.some((re) => re.test(s)); })
+    ? npcs.find(({ npc }) => {
+      const s = secretOf(npc);
+      const castVoiced = out.some((p) => p.why === 'cast' && p.name === clean(npc.name));
+      return !!s && !castVoiced && !targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name)) && patterns.some((re) => re.test(s));
+    })
     : undefined;
   if (keeper) add(keeper, 'secret', sentence(secretOf(keeper.npc)));
 

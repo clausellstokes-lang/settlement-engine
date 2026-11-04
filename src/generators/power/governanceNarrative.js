@@ -533,7 +533,7 @@ const buildBetrayalNarrative = ({
 
 const buildInsurgencyNarrative = (
   institutionFlags,
-  governingFactionName,
+  _governingFactionName, // RUNG2-F13: the vignette names no house (kept for the call's shape)
 ) => {
   const insurgencyOutmusclesAuthority =
     (institutionFlags.criminalEffective || 0) >
@@ -546,7 +546,10 @@ const buildInsurgencyNarrative = (
   return (
     'The challenge to the governing faction is institutional, not popular. ' +
     'Key officials are slow-walking orders. Revenue is being collected but held rather than forwarded. ' +
-    `${governingFactionName} is conducting meetings with people who should not be meeting privately. ` +
+    // RUNG2-F13 (soak1k-3000): this named the GOVERNING house as the one meeting against the
+    // governing house. The plotter is the crisis cast's instigator (the Crisis tab names them);
+    // the vignette names no house.
+    'Meetings are being held between people who should not be meeting privately. ' +
     'The governing faction has noticed and is considering whether to act before the coalition is complete.'
   );
 };
