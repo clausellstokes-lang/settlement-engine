@@ -46,7 +46,7 @@ import { culturalNotesFor } from '../../domain/cultureProfiles.js';
 import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
-import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js';
+import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js'; import { fishTradeTwinned } from '../../data/fishTradeTwinLines.js'; // F11: one line, so no cited line moves
 import {
   assertPowerEconomyFreshness,
   reconcilePowerStructure,
@@ -128,7 +128,7 @@ registerStep('assembleSettlement', {
     name: settlementName,
     tier,
     population,
-    institutions,
+    institutions: fishTradeTwinned(institutions, economicState), // F11: a fish trade with no fish of its own or bought in is the cart's (data/fishTradeTwinLines.js), draw-free
     structuralViolations: structural?.violations || [],
     structuralSuggestions: structural?.suggestions || [],
     neighborRelationship: neighbourProfile || (rawNeighbour ? {
