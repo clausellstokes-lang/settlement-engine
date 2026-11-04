@@ -95,7 +95,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
-import { deriveMagicReliance } from '../../magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
@@ -1645,16 +1645,32 @@ function reliesOnMagic(settlement) {
 }
 
 /**
- * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent.
- * @param {unknown} magicDependency @param {boolean} namedChain @returns {string|null}
+ * Is there no magic here at all: the place's own dial reads absent (the Magic tab's envelope
+ * prints "Availability absent") AND the one reliance reading counts nobody practising? Then
+ * "not relied on" is the wrong state: there is nothing to rely on (lane RUNG1B-F9 unit 2,
+ * 2026-11-04; soak1k-13 Amarthal read "There is magic at Amarthal" under "Availability absent").
+ * A practitioner on the rolls under a zero dial keeps the not-relied-on state, which is true.
+ * @param {object} settlement @returns {boolean}
  */
-export function magicDependencyPoolKey(magicDependency, namedChain) {
+function noMagicHere(settlement) {
+  const source = /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement);
+  return magicDialAbsent(source) && deriveMagicReliance(source).reading === 'none';
+}
+
+/**
+ * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent. "Not relied
+ * on" and "absent" are two states: with no magic here the false reading takes its own pool.
+ * @param {unknown} magicDependency @param {boolean} namedChain @param {boolean} [magicAbsent]
+ * @returns {string|null}
+ */
+export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent = false) {
   if (magicDependency === true) {
     return namedChain
       ? 'magicDependency true, with a NAMED dependent chain'
       : 'magicDependency true';
   }
-  return magicDependency === false ? 'magicDependency false' : null;
+  if (magicDependency !== false) return null;
+  return magicAbsent ? 'magicDependency false, availability absent' : 'magicDependency false';
 }
 
 /**
@@ -1699,7 +1715,7 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
   // relied-upon or integral reads "depends on magic", anything else does not, so this sentence
   // and the Magic tab's reading cannot disagree.
   const poolKey = settlement
-    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains))
+    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains), noMagicHere(settlement))
     : null;
 
   return Object.freeze({

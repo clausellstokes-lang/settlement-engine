@@ -3,7 +3,7 @@ import { FS, swatch, MUTED } from '../../theme.js';
 import { serif, Section } from '../Primitives';
 import Button from '../../primitives/Button.jsx';
 
-import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
+import {buildThreatAssessment, disasterReadinessScore} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
 import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
 import EntityLink from '../../primitives/EntityLink.jsx';
@@ -177,7 +177,6 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   const scores = d.scores || {};
   const readiness = d.readiness || {label:'Unknown',color:'#9c8068',background:'#faf8f4',border:'#e0d0b0'};
   const inst = d.institutions || {};
-  const f = r.economicState?.compound?.inst || {};
   const sp = r.economicState?.safetyProfile || {};
   // ⭐ THE DESK'S OPTION BAG, SPELLED ONCE (ODQ §934.22 addendum). This tab reads eight
   // defense blocks and every one of them was spelling the same three-line literal, so a
@@ -265,12 +264,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
 
   // Threat assessment with expandable rows
   const threats = buildThreatAssessment(r);
+  // F9 unit 1: Disasters & Famine takes the row's one score, held to Weak under an active
+  // famine (threatAssessment.js :: disasterReadinessScore, which the PDF's rows read too).
   const threatScores = {
     'Beasts & Monsters': scores.monster||0,
     'Invasion & War': scores.military||0,
     'Internal Security': scores.internal||0,
     'Economic Survival': scores.economic||0,
-    'Disasters & Famine': scores.disaster ?? r.economicState?.foodSecurity?.resilienceScore ?? Math.round(((scores.economic||0)*0.4+(f.hasGranary?60:20)+(f.hasHospital?70:f.hasChurch?40:10))/2),
+    'Disasters & Famine': disasterReadinessScore(r),
   };
   // Funding attribution per readiness row (economicGates consumer) — an
   // underfunded gate explains a lower bar instead of leaving it silent.

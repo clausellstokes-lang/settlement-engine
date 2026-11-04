@@ -26,7 +26,7 @@
 import { cleanNum } from './placeholders.js';
 import { avgScore } from './defenseScoreBands.js';
 import { deriveMagicProfile } from '../magicProfile.js';
-import { deriveMagicReliance, magicWorksAt } from '../magicReliance.js';
+import { deriveMagicReliance, magicDialAbsent, magicWorksAt } from '../magicReliance.js';
 import { formatCount } from '../formatNumber.js';
 // The export-posture derivation lives in its own dependency-free leaf so the
 // EAGER deriveSystemState.js can reach it without dragging this whole display
@@ -616,8 +616,16 @@ export function isMagicRowKey(key) {
  */
 export function magicRowsGated(settlement, rows, keyOf = (row) => /** @type {{ key?: unknown }} */ (row).key) {
   const list = Array.isArray(rows) ? [...rows] : [];
-  if (magicWorksAt({ settlement })) return list;
-  return list.filter((row) => !isMagicRowKey(keyOf(row)));
+  if (!magicWorksAt({ settlement })) return list.filter((row) => !isMagicRowKey(keyOf(row)));
+  // ⛔ NOTHING TO GRADE WHERE THE DIAL READS ABSENT (lane RUNG1B-F9 unit 2b, 2026-11-04;
+  // soak1k-13 Amarthal: "Magical Capability Critical" beside "Reliance on magic None" and an
+  // envelope reading "Availability absent", 20 of 20 such pages in the 60). Where the place's
+  // own dial reads absent (`magicReliance.js :: magicDialAbsent`, the Magic tab's envelope
+  // predicate) the GRADE rows go; the reliance row stays, because "None" is the true reading.
+  if (magicDialAbsent(/** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (settlement)))) {
+    return list.filter((row) => !isMagicRowKey(keyOf(row)) || keyOf(row) === 'magicReliance');
+  }
+  return list;
 }
 
 /**

@@ -3208,6 +3208,12 @@ not by any event. The named causes of a hypothetical loss must stay generic —
 conflict, sickness, political disruption — because the state carries no
 specific threat to the practitioners. Twinned with the OverviewTab badge per
 **R-W2-C**: one pool, two draws.
+**THE ABSENT STATE (lane RUNG1B-F9 unit 2, 2026-11-04):** "not relied on" and "absent" are
+two states. Where the place's own dial reads absent (`magicReliance.js :: magicDialAbsent`, the
+predicate behind the Magic tab's "Availability absent") and nobody practises, the false reading
+takes the `availability absent` pool, which says no one works magic here; the `magicDependency
+false` variants presume magic and practitioners, and render only where magic is present and
+relied on by nothing.
 **PDF PARITY:** parity (`viewModel.js` viability slice).
 
 **`magicDependency` true**
@@ -3225,6 +3231,11 @@ specific threat to the practitioners. Twinned with the OverviewTab badge per
 1. `[ledger]` Nothing structural at {settlement} depends on arcane work. What the town makes it makes with hands and ground, and would go on making without a practitioner in it.
 2. `[counterforce]` There is magic at {settlement} and the town does not rest on it. Losing every practitioner here would be a loss and not a collapse.
 3. `[street]` The town would go on if the arcane went away, more slowly and less comfortably and go on.
+
+**`magicDependency` false, availability absent**
+1. `[ledger]` No one works magic at {settlement}, and nothing in the town depends on it.
+2. `[street]` Nobody at {settlement} casts, brews or wards for a living, and nothing in the town waits on anyone who does.
+3. `[visitor]` A stranger who comes to {settlement} looking for magic finds none, and finds nothing that misses it.
 
 ---
 

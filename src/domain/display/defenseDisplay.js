@@ -11,7 +11,7 @@
  * as variables.
  */
 
-import { buildThreatAssessment, healerSubject } from './threatAssessment.js';
+import { buildThreatAssessment, disasterReadinessScore, healerSubject } from './threatAssessment.js';
 import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
 import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
@@ -84,7 +84,7 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @typedef {Object} DefenseDisplaySettlement
  * @property {Array<{ name?: string }>} [institutions]
  * @property {{ scores?: Record<string, number>, economicGates?: Record<string, number>, institutions?: Record<string, ForceEntry[]> }} [defenseProfile]
- * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null }, safetyProfile?: { guardEffectivenessDesc?: unknown } }} [economicState]
+ * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null }, safetyProfile?: { guardEffectivenessDesc?: unknown, criminalInstitutions?: unknown[] }, activeChains?: Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null> }} [economicState]
  * @property {{ tradeRouteAccess?: string }} [config]
  * @property {Array<{ reason?: unknown, severity?: unknown }>} [structuralViolations]
  * @property {{ factions?: Array<{ category?: unknown } | null | undefined> }} [powerStructure] the roster `deriveCriminalStructure` reads for a criminal faction
@@ -209,11 +209,34 @@ export function deriveCriminalStructure(settlement) {
         : null;
   // (Lane RUNG1B-F4 unit 3: both facts are read from the crime signal's one home, `crimeSignal.js`.)
   const signal = crimeSignalOf({ seats: r.powerStructure?.factions, estate: r.institutions });
+  // ⛔ NOR BESIDE ITS OWN LIST (lane RUNG1B-F9 unit 3, 2026-11-04; A-06 in reverse: soak1k-28
+  // Innissike listed "Active criminal operations: Red Light District" and the Economics tab's
+  // "Slave trade · Operational", then printed "No criminal infrastructure has been identified").
+  // The block's operations list is the safety profile's `criminalInstitutions` (a label table the
+  // one detector does not share), and a criminal supply chain that runs is routes and territory.
+  // Either makes the null answer SEMI-ORGANIZED, the same reading a criminal house gets above.
+  const listed = (r.economicState?.safetyProfile?.criminalInstitutions || []).length > 0
+    || runningCriminalChains(r).length > 0;
   const key = ladder
     ?? (signal.factions.length ? 'organized'
-      : signal.houses.length ? 'semi-organized'
+      : signal.houses.length || listed ? 'semi-organized'
         : null);
   return key ? CRIM_STRUCTURE_DATA[key] : null;
+}
+
+/** The supply-chain statuses that mean a chain runs (`supplyChainStatus`, less vulnerable/impaired). */
+const RUNNING_CHAIN_STATUS = Object.freeze(['operational', 'running', 'entrepot']);
+
+/**
+ * The criminal supply chains that run: the Economics tab's "Criminal supply chains" chips
+ * (`needKey === 'criminal_economy'`) whose status is a working one.
+ * @param {DefenseDisplaySettlement | null | undefined} settlement
+ * @returns {Array<{ needKey?: unknown, status?: unknown, chainId?: unknown } | null>}
+ */
+export function runningCriminalChains(settlement) {
+  const chains = settlement?.economicState?.activeChains;
+  return (Array.isArray(chains) ? chains : [])
+    .filter((c) => c?.needKey === 'criminal_economy' && RUNNING_CHAIN_STATUS.includes(String(c?.status ?? '')));
 }
 
 /**
@@ -418,17 +441,14 @@ export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
   const scores = r.defenseProfile?.scores || {};
   const gates = r.defenseProfile?.economicGates || {};
-  const f = r.economicState?.compound?.inst || {};
   /** @type {Record<string, number>} */
   const scoreFor = {
     'Beasts & Monsters': scores.monster || 0,
     'Invasion & War': scores.military || 0,
     'Internal Security': scores.internal || 0,
     'Economic Survival': scores.economic || 0,
-    'Disasters & Famine':
-      scores.disaster ??
-      r.economicState?.foodSecurity?.resilienceScore ??
-      Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
+    // F9 unit 1: the row's one score, held to Weak under an active famine (threatAssessment.js).
+    'Disasters & Famine': disasterReadinessScore(r),
   };
   const upkept = namedForUpkeep(defenseFactsOf(r).defenceNames);
   return buildThreatAssessment(r).map((row) => {
