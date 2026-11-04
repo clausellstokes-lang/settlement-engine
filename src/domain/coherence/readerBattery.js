@@ -25,6 +25,7 @@
 
 import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
+import { hasMarketInstitution } from '../../generators/economy/viability.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 
@@ -400,6 +401,28 @@ export function possessiveSlipFindings(_s, surfaces) {
   return out;
 }
 
+// ───────────────────────── 10. daily-life-placeholder ─────────────────────────
+
+const PLACEHOLDER = 'dawn, the market, the tavern, the watch';
+const WATCH_HOUSE = /watch|guard|garrison/i;
+
+/**
+ * The Daily Life placeholder line names a market and a watch the Institutions tab lacks:
+ * `[no-market]` (no market by the engine's predicate, `viability.js :: hasMarketInstitution` —
+ * a Periodic market is a market, the chair's ruling on soak1k-313) and `[no-watch]` (no watch,
+ * guard or garrison house). One finding per sub-case.
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function dailyLifePlaceholderFindings(s, surfaces) {
+  const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));
+  if (!hit) return [];
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  if (!hasMarketInstitution(s?.institutions)) out.push({ surface: 'daily_life', quote: hit, detail: '[no-market] the Institutions tab holds no market' });
+  if (!houseNames(s).some((h) => WATCH_HOUSE.test(h))) out.push({ surface: 'daily_life', quote: hit, detail: '[no-watch] the Institutions tab holds no watch, guard or garrison' });
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -412,6 +435,7 @@ const RUNS = Object.freeze({
   'tonight-wants': tonightWantsFindings,
   'rule-text': ruleTextFindings,
   'possessive-slip': possessiveSlipFindings,
+  'daily-life-placeholder': dailyLifePlaceholderFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

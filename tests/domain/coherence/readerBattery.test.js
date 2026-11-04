@@ -173,3 +173,29 @@ describe('reader:possessive-slip', () => {
     expect(R.possessiveSlipFindings(rec(), { power: "Guildmaster of the Tailors' Guild · the Tailor's shop" })).toEqual([]);
   });
 });
+
+// ── 10. daily-life-placeholder
+describe('reader:daily-life-placeholder', () => {
+  const daily_life = 'Food\nStrained\nOrdinary life here in prose: dawn, the market, the tavern, the watch.';
+  test('a market and a watch the Institutions tab lacks: two sub-cases', () => {
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Burial ground' }] }), { daily_life }).map((r) => r.detail.split(']')[0])).toEqual(['[no-market', '[no-watch']);
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Periodic market' }] }), { daily_life }).map((r) => r.detail.split(']')[0])).toEqual(['[no-watch']);
+  });
+  test('negative control: a market and a watch on the roster, and a Daily Life tab without the line', () => {
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Market square' }, { name: 'Town watch' }] }), { daily_life })).toEqual([]);
+    expect(R.dailyLifePlaceholderFindings(rec(), { daily_life: 'Food\nSecure' })).toEqual([]);
+  });
+});
+
+// ── the battery
+describe('readerBattery', () => {
+  test('runs the ten checks in order, in the battery shape, and a throwing check is a finding', () => {
+    expect(R.READER_BATTERY_CHECKS).toHaveLength(10);
+    const rows = R.readerBattery(rec({ tier: 'hamlet' }), { tonight: 'Wants to The supplies.', power: "Tailor's'" });
+    expect(rows.map((f) => f.check)).toEqual(['tonight-wants', 'possessive-slip']);
+    for (const f of rows) expect(Object.keys(f).sort()).toEqual(['check', 'detail', 'quote', 'surface']);
+    expect(R.readerBattery(null, {})).toEqual([]);
+    const thrown = R.readerBattery(rec({ history: { get currentTensions() { throw new Error('boom'); } } }), { history: 'x' }, { only: ['tension-memory'] });
+    expect(thrown).toEqual([{ check: 'tension-memory', surface: 'record', quote: '', detail: 'instrument threw: boom' }]);
+  });
+});
