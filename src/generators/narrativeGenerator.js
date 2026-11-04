@@ -789,7 +789,9 @@ export const generatePressureSentence = settlement => {
     const raw = PRESSURE_SENTENCES[stressType];
     const templates = typeof raw === 'function' ? raw(detail) : raw;
     if (Array.isArray(templates) && templates.length) {
-      const template = pickRandom2(templates);
+      // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
+      const licensed = templates.filter((t) => typeof t !== 'string' || defenseWordsFindings(settlement, t).length === 0);
+      const template = pickRandom2(licensed.length ? licensed : templates);
       return typeof template === 'function' ? template(detail) : template;
     }
   }

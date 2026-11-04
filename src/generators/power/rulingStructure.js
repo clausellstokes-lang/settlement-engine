@@ -66,13 +66,13 @@ export const renormalizeFactionPower = (factions) => {
 // Math.round(NaN) = NaN corrupts every share, the sort, and the standing
 // annotation — it degrades to 0 shares instead. Byte-identical on the normal
 // path (totalPower > 0). Exported for the focused degenerate-roster test.
-export const normalizeAndAnnotateFactions = (factions) => {
+export const normalizeAndAnnotateFactions = (factions, force) => {
   const totalPower = factions.reduce((sum, faction) => sum + (faction.power || 0), 0);
   factions.forEach((faction) => {
     faction.power = totalPower > 0 ? Math.round(((faction.power || 0) / totalPower) * 100) : 0;
   });
   factions.sort((a, b) => (a.isGoverning ? -1 : b.isGoverning ? 1 : b.power - a.power));
-  annotateFactionStanding(factions);
+  annotateFactionStanding(factions, force);
   return factions;
 };
 
@@ -694,7 +694,7 @@ export const generatePowerStructure = (
     stressTypes = (config == null ? void 0 : config.stressTypes) || (stressType ? [stressType] : []),
     hasStress = (s) => stressTypes.includes(s);
   applyStressEventFactions(factions, hasStress, governingFaction, hasNobleInst, config, institutions);
-  normalizeAndAnnotateFactions(factions);
+  normalizeAndAnnotateFactions(factions, forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions }))); // F1: the standing lines name the force that stands
   // Tag each faction with a category for power-economy correlation
   factions.forEach((f) => {
     if (!f.category) f.category = inferFactionCategory(f.faction || '');

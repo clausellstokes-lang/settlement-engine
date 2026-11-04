@@ -12,6 +12,9 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { defenseFactsOf, forceWordsOf } from '../../src/domain/defense/defenseFacts.js';
 import { defenseWordsFindings } from '../../src/domain/coherence/defenseWordsFindings.js';
+import { generatePressureSentence } from '../../src/generators/narrativeGenerator.js';
+import { clearActiveRng, setActiveRng } from '../../src/kernel/rngContext.js';
+import { createPRNG } from '../../src/kernel/prng.js';
 
 /** @param {unknown} node @param {string[]} out @returns {string[]} */
 function strings(node, out = []) {
@@ -44,6 +47,7 @@ const WRITERS = [
   ['institutionalCatalog.js :: the charter hall desc "when the garrison falls short" (soak1k-205)', 205, /garrison falls short|garrison cannot/],
   ['factionDynamics.js :: "Merchants fund churches, endow hospitals" with no hospital (soak1k-88)', 88, /endow hospitals/],
   ['rulingStructure.js :: "Land grants, hospital networks" with no hospital (soak1k-4)', 4, /hospital networks/],
+  ['factionStanding.js :: "The garrison handles bodies" with a militia only (soak1k-20)', 20, /garrison handles bodies|garrison can arrest|garrison outweighs/],
 ];
 
 describe('every claim writer reads the place\'s defence record', () => {
@@ -54,6 +58,20 @@ describe('every claim writer reads the place\'s defence record', () => {
       expect(claims(settlement, writer)).toEqual([]);
     });
   }
+});
+
+describe('the siege pressure line reads the walls (soak1k-348, a besieged place with no walls)', () => {
+  beforeAll(async () => { await ensureLaws(); });
+  it('narrativeText.js :: PRESSURE_SENTENCES.under_siege names no walls the record lacks', () => {
+    const { settlement } = birth(348);
+    expect(defenseFactsOf(settlement).hasWalls).toBe(false);
+    const lines = [];
+    for (let k = 0; k < 24; k++) {
+      const prev = setActiveRng(createPRNG(`f1-pressure-${k}`));
+      try { lines.push(String(generatePressureSentence(settlement) ?? '')); } finally { clearActiveRng(prev); }
+    }
+    expect(defenseWordsFindings(settlement, lines)).toEqual([]);
+  });
 });
 
 describe('the force words follow the standing force', () => {

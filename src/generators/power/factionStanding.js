@@ -6,7 +6,7 @@
 
 // annotateFactionStanding — enrich faction descriptions with their position in
 // the (already normalised and sorted) power ranking (mutates in place).
-export const annotateFactionStanding = (factions) => {
+export const annotateFactionStanding = (factions, force = { body: 'garrison' }) => { // F1: `force` is `defenseFacts.js :: forceWordsOf`, the garrison's words by default
       var factionNames = factions.map(function (f) {
           return f.faction;
         }),
@@ -119,10 +119,10 @@ export const annotateFactionStanding = (factions) => {
             if (guardRival) {
               var thievesGuardNote =
                 guardRival.power > power + 10
-                  ? 'The garrison outweighs them institutionally. They survive by corrupting the lower ranks and making enforcement selectively unprofitable.'
+                  ? `The ${force.body} outweighs them institutionally. They survive by corrupting the lower ranks and making enforcement selectively unprofitable.`
                   : guardRival.power < power - 10
                     ? 'They currently outflank the military in real leverage; there are officers on payroll and commanders who know better than to ask questions.'
-                    : 'Running roughly even with the military in actual influence: the garrison can arrest individuals, the guild can make the investigation expensive.';
+                    : `Running roughly even with the military in actual influence: the ${force.body} can arrest individuals, the guild can make the investigation expensive.`;
               standing = standing ? standing + ' ' + thievesGuardNote : thievesGuardNote;
             }
           }
@@ -245,7 +245,7 @@ export const annotateFactionStanding = (factions) => {
           });
           if (religiousRivalForGuard && Math.abs(religiousRivalForGuard.power - power) < 10) {
             var guardReligiousNote =
-              'They and the religious authorities operate parallel systems of social control. The garrison handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.';
+              `They and the religious authorities operate parallel systems of social control. The ${force.body} handles bodies, the clergy handles minds, and both would prefer the other operated at lower volume.`;
             standing = standing ? standing + ' ' + guardReligiousNote : guardReligiousNote;
           }
         }
