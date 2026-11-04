@@ -362,6 +362,26 @@ export function tonightWantsFindings(_s, surfaces) {
   return hits.length ? [{ surface: 'tonight', quote: hits[0], detail: `${hits.length} lines; starts "${str(hits[0].match(/\bWants to ([A-Z][\w'’]*)/)?.[1])}"` }] : [];
 }
 
+// ──────────────────────────── 8. rule-text ────────────────────────────
+
+const RULE_TEXT = /viable above [0-9,]+ souls|population of [0-9,]+ or more|[0-9,]+-[0-9,]+ population for|cities only|if technology exists|where the magic allows them/;
+
+/**
+ * A catalogue threshold note on a DM surface ("viable above 2,000 souls", "a population of
+ * 5,000 or more", "2,000-5,000 population for chapter", "cities only", "if technology exists",
+ * "where the magic allows them"). One finding per surface.
+ * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function ruleTextFindings(_s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  for (const [surface, text] of Object.entries(surfaces)) {
+    const hit = linesOf(text).find((x) => RULE_TEXT.test(x));
+    if (hit) out.push({ surface, quote: hit, detail: str(hit.match(RULE_TEXT)?.[0]) });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -372,6 +392,7 @@ const RUNS = Object.freeze({
   'hook-pools': hookPoolsFindings,
   'traditions-water': traditionsWaterFindings,
   'tonight-wants': tonightWantsFindings,
+  'rule-text': ruleTextFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

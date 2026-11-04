@@ -148,3 +148,18 @@ describe('reader:tonight-wants', () => {
     expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to extend the institution\'s civic role.' })).toEqual([]);
   });
 });
+
+// ── 8. rule-text
+describe('reader:rule-text', () => {
+  test('catalogue threshold notes on a DM surface, one per surface', () => {
+    const rows = R.ruleTextFindings(rec(), {
+      institutions: 'Golem workforce: Constructed servants, where the magic allows them.',
+      foundry: "Mages' guild: Organization of magic users. 2,000-5,000 population for chapter.",
+      pdf: 'Artificer: Magic items made to order. It wants a population of 5,000 or more, as a rule.',
+    });
+    expect(rows.map((r) => `${r.surface}: ${r.detail}`)).toEqual(['institutions: where the magic allows them', 'foundry: 2,000-5,000 population for', 'pdf: population of 5,000 or more']);
+  });
+  test('negative control: a population figure that is no rule', () => {
+    expect(R.ruleTextFindings(rec(), { overview: 'Al-karez town · 1,327 pop. · port', viability: 'A city of 9,541 souls.' })).toEqual([]);
+  });
+});
