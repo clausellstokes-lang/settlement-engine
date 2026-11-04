@@ -921,7 +921,11 @@ export const INSTITUTION_SERVICES = {
   "Dragon resident": {
     "Draconic consultation": { on: false, p: 0.4, desc: "If the dragon is cooperative, its knowledge of history and magic is unmatched." },
     "Treasure appraisal": { on: false, p: 0.3, desc: "Dragons know the value of everything. They will insist on telling you." },
-    "Aerial deterrence": { on: true, p: 0.8, desc: "No raiding force approaches a settlement with a visible dragon. Powerful deterrent." }
+    // A-04 (soak 1000 row 19): the dragon line is printed only where magic works. `magical`
+    // is the world law's explicit magic metadata (generationContext.js ::
+    // carriesExplicitMagicMetadata), so `allowsService` drops the row in a magic-off world;
+    // the pool's non-magical sibling ("Treasure appraisal") is off by default, so no line.
+    "Aerial deterrence": { on: true, p: 0.8, magical: true, desc: "No raiding force approaches a settlement with a visible dragon. Powerful deterrent." }
   },
   "Dream parlors (high magic)": {
     "Dream walking": { on: true,  p: 1.0, desc: "Guided experience in manufactured dream environments. Recreation or therapy." },
