@@ -11,7 +11,7 @@
  * as variables.
  */
 
-import { buildThreatAssessment, healerSubject } from './threatAssessment.js';
+import { buildThreatAssessment, disasterReadinessScore, healerSubject } from './threatAssessment.js';
 import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
 import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
@@ -418,17 +418,14 @@ export function deriveDefenseReadiness(settlement) {
   const r = settlement || {};
   const scores = r.defenseProfile?.scores || {};
   const gates = r.defenseProfile?.economicGates || {};
-  const f = r.economicState?.compound?.inst || {};
   /** @type {Record<string, number>} */
   const scoreFor = {
     'Beasts & Monsters': scores.monster || 0,
     'Invasion & War': scores.military || 0,
     'Internal Security': scores.internal || 0,
     'Economic Survival': scores.economic || 0,
-    'Disasters & Famine':
-      scores.disaster ??
-      r.economicState?.foodSecurity?.resilienceScore ??
-      Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
+    // F9 unit 1: the row's one score, held to Weak under an active famine (threatAssessment.js).
+    'Disasters & Famine': disasterReadinessScore(r),
   };
   const upkept = namedForUpkeep(defenseFactsOf(r).defenceNames);
   return buildThreatAssessment(r).map((row) => {

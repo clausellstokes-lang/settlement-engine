@@ -234,10 +234,11 @@ const CHART_CENSUS = Object.freeze([
     // The bar's `sc` and the badge's band are the SAME lookup into the same score map, so
     // the resolved field sets are identical rather than merely overlapping — every term of
     // `threatScores` reaches both. Declared in full: an edit to that map is exactly the
-    // event that should force this pair to be re-read.
+    // event that should force this pair to be re-read. Re-read 2026-11-04 (lane RUNG1B-F9
+    // unit 1): Disasters & Famine's term is now one call, `disasterReadinessScore(r)`, so its
+    // fields arrive as `r`; the bar and the badge still read the one `sc`.
     verdict: 'one-source',
-    sharedOn: ['disaster', 'economic', 'hasChurch', 'hasGranary', 'hasHospital', 'internal',
-      'label', 'military', 'monster', 'resilienceScore'],
+    sharedOn: ['economic', 'internal', 'label', 'military', 'monster', 'r'],
   },
   {
     id: 'defense-capability-row',
