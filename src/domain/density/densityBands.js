@@ -217,6 +217,17 @@ export const DOUBLED_NICHE_SHARE = 0.55;
  *
  * `vacancyTilt` is §810.2's "a poor or shrinking place runs understaffed; a
  * prosperous one fills its benches" — a multiplier on the vacancy weights.
+ *
+ * `population` (X-46 car 4, 2026-11-04, `docs/DESIGN_X46_SCALE_TRAIN.md` §5) is the
+ * settlement's place inside its tier's POPULATION band (`constants.POPULATION_RANGES`),
+ * read the same way: the bottom of the band tilts by −0.75 of the band's width, the top by
+ * +0.75, the middle not at all. It is the term that makes the roster follow the people —
+ * a 100-person hamlet rolls near the top of its band and a 75-person village near the
+ * bottom of its own, and because the owner's bands touch, the two agree within one person.
+ * MEASURED (400 rolls a point, unremarkable particulars): 0.75 is the smallest of the
+ * candidates tried (0.4 · 0.5 · 0.6 · 0.75 · 1.0) that holds every overlap point inside
+ * one person — 0.6 misses at 15,000 by 1.42 — while 1.0 would leave no variance at all at
+ * a band's ends. A draft, like every value in this file.
  */
 export const PARTICULAR_TILTS = Object.freeze({
   prosperity:   0.20,
@@ -224,6 +235,7 @@ export const PARTICULAR_TILTS = Object.freeze({
   war:         -0.15,
   corruption:  -0.08,
   vacancyTilt:  0.45,
+  population:   0.75,
 });
 
 /**

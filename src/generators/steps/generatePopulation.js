@@ -42,6 +42,8 @@ function drawPopulation(ctx, rng, pins) {
     // after that, in assembleSettlement.
     const densityMassTarget = rollNamedMass({
       tier,
+      // X-46 car 4: the population tilt (read only under Register VII; no draw).
+      population: ctx.population,
       config: effectiveConfig,
       stress: ctx.stress,
       powerStructure,
@@ -99,7 +101,7 @@ function derivePopulation(ctx, rng, pins, npcs) {
 
 registerStep('generatePopulation', {
   deps: ['coherenceRepairPass', 'powerEconomyReconcilePass'],
-  reads: ['culture', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['culture', 'economicState', 'effectiveConfig', 'generationContext', 'institutions', 'population', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   readsVersion: { economicState: 'reconciled' },
   provides: ['npcs', 'relationships'],
   phase: 'population',

@@ -266,6 +266,8 @@ registerStep('assembleSettlement', {
   // marker gets its powerStructure back by reference, with no draw taken.
   const resized = resizePoliticalRoster({
     tier,
+    // X-46 car 4: the population tilt (read only under Register VII; no draw).
+    population,
     config: settlement.config,
     stress: settlement.stress,
     powerStructure: settlement.powerStructure,

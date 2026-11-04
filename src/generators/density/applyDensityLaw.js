@@ -186,6 +186,11 @@ function planFor(input, mode = {}) {
       config, stress: input.stress, economicState: input.economicState || {},
     }),
     floorLift: rollFloorLift(lawRng.fork('floor-lift'), config, input.stress),
+    // X-46 car 4: the settlement's population, read by the sizing stage's population tilt.
+    // Not a draw — every seam passes it, so the three plans agree on the same tilt.
+    population: Number.isFinite(Number(input.population)) && input.population != null
+      ? Number(input.population)
+      : null,
     seatAll: mode.seatAll,
     massOverride: mode.massOverride ?? null,
   });
@@ -197,6 +202,7 @@ function planFor(input, mode = {}) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   rng: {random: () => number, fork: (l: string) => any},
@@ -223,6 +229,7 @@ export function rollNamedMass(input) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   massOverride?: number|null,
@@ -307,6 +314,7 @@ function resizeSeats(powerStructure, plan, rng) {
  *
  * @param {{
  *   tier?: string, config?: Record<string, unknown>, stress?: unknown,
+ *   population?: number|null,
  *   powerStructure?: {factions?: Array<Record<string, unknown>>}|null,
  *   economicState?: Record<string, unknown>|null,
  *   npcs?: Array<Record<string, unknown>>,

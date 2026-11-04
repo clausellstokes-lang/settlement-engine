@@ -875,6 +875,9 @@ export const enrichNpcCoherence = (settlement) => {
   const dispersed = densityRng
     ? disperseNamedRoster({
       tier: settlement.tier,
+      // X-46 car 4: the population tilt. This seam runs in re-derivation mode, so the tilt
+      // reaches only results it overrides; passed so all three seams roll one plan.
+      population: settlement.population,
       config: settlement.config || {},
       stress: settlement.stress,
       powerStructure: settlement.powerStructure,
