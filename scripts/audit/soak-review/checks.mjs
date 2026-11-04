@@ -89,7 +89,14 @@ export function seaWordSentence(sentences, s) {
   // (src/generators/steps/cascadePass.js) admits aerial docks and a harbour master's office
   // regardless of route; their words are not sea words there.
   const airship = (s?.institutions || []).some((i) => /airship/i.test(String(i?.name || '')));
+  // Round 4 (final), 1: a description that says in its own words that inland its fish is dried
+  // or salted is designed inland text; every sentence of it is licensed.
+  const inlandText = new Set((s?.institutions || [])
+    .map((i) => String(i?.desc || ''))
+    .filter((desc) => /\binland\b[^.]*\b(?:dried|salted)\b/i.test(desc))
+    .flatMap((desc) => sentencesOf(desc)));
   return sentences.find((x) => {
+    if (inlandText.has(x)) return false;
     let text = x.replace(INLAND_FISH, '').replace(ROUTE_DISJUNCTION, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
     if (airship) text = text.replace(AIRSHIP_PORT, '');
