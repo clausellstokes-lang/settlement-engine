@@ -145,6 +145,22 @@
         "DEFICIT_FRACTION_FROM"
       ],
       "note": "the general desk's food-deficit cut, one module-private scalar indexed by roster. It is the only row in this register whose value MIRRORS a second, unregistered literal in the producer — see the row's own note."
+    },
+    {
+      "kind": "tables",
+      "file": "src/data/foodImportRates.js",
+      "exports": [
+        "SIEGE_PRODUCTION_KEPT"
+      ],
+      "note": "T1 (the soak 1000 dry run §4, adopted by the chair 2026-11-04, fe56bddd): the share of the harvest a besieged place keeps; one home read by foodGenerator, foodBalance and defenseFacts."
+    },
+    {
+      "kind": "tables",
+      "file": "src/data/institutionBudget.js",
+      "exports": [
+        "INSTITUTION_BUDGET_ANCHORS"
+      ],
+      "note": "X-46 car 3 (d224a5a0): the seven [population, houses] anchors of the institution budget curve, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3)."
     }
   ],
   "moduleSide": [
@@ -2441,6 +2457,53 @@
       },
       "band": null,
       "note": "Lane CRISIS (2026-11-03, docs/DESIGN_CRISIS_TAB.md): the five occasional-role rates of the crisis cast (exploiter, scapegoat, waverer, profiteer, collaborator; the share of a nature's crises that carry the role, chosen by a hash of seed and crisis id, never a draw) and the per-town caps (one each, one temporary person). The rates are the design's proposal, the owner's dials, open for the owner's veto. DRAFT, registered in the minting commit; nothing here is signed or proposed."
+    },
+    "src/data/constants.js#METROPOLIS_ROLL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "bodyMin": "people",
+        "bodyMax": "people",
+        "tailMax": "people",
+        "thinning": "multiplier",
+        "tailShare": "share"
+      },
+      "band": null,
+      "note": "X-46 car 1b (270c3ed7, the owner’s metropolis curve): flat to bodyMax, thinning exponentially to tailMax; tailShare of metropolis rolls land in the tail. Declared at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/data/foodImportRates.js#SIEGE_PRODUCTION_KEPT": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "value": "share"
+      },
+      "band": null,
+      "note": "T1 0.6 -> 0.3 (fe56bddd; the soak 1000 dry run §4, adopted by the chair under the owner’s word of 2026-11-04, a veto point). Declared at the rung-1 landing (LANDING-1 door 3)."
+    },
+    "src/data/institutionBudget.js#INSTITUTION_BUDGET_ANCHORS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "0.0": "people",
+        "0.1": "count",
+        "1.0": "people",
+        "1.1": "count",
+        "2.0": "people",
+        "2.1": "count",
+        "3.0": "people",
+        "3.1": "count",
+        "4.0": "people",
+        "4.1": "count",
+        "5.0": "people",
+        "5.1": "count",
+        "6.0": "people",
+        "6.1": "count"
+      },
+      "band": null,
+      "note": "X-46 car 3 (d224a5a0): seven [population, expected houses] anchors, log-linear between them; the metropolis anchor 120 -> 93 by the chair’s ruling of 2026-11-04 (rung-1 pins unit 3). Its module header already called it registered; declared here at the rung-1 landing (LANDING-1 door 3)."
     }
   },
   "roles": {
