@@ -360,10 +360,15 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
           'Local food security is maintained but surplus flour cannot be exported: ' +
           'the mill toll captures any excess. Loss of mill access would break this chain.'
         : null;
+      // An output a chain ties to one processor (`outputsRequiringProcessor`) is printed only
+      // where that processor matched: the arena's spectacles need the arena (A-05).
+      const heldOnly = chain.outputsRequiringProcessor || null;
       const outputs = (
         chain.outputsByResource?.[resourceInputKey]
         || chain.outputs
-      );
+      ).filter((output) => !heldOnly || Object.entries(heldOnly).every(([processor, tied]) => (
+        !tied.includes(output) || matchedInsts.includes(processor)
+      )));
       const label = (
         chain.labelsByResource?.[resourceInputKey]
         || chain.label
