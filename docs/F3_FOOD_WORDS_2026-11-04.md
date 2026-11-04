@@ -67,3 +67,12 @@ The pool is gated on the record: `domain/foodSurplus.js :: recordAllowsStarving`
 famine; no record = legacy) and `secretsHeldByFoodRecord`, read by `generateCrimeLevel` (one draw
 either way); the food-words instrument reads the same rule and words (`CLAIMS_STARVING`). Red-first:
 tests/generators/hookSecretStarving.test.js (two starving secrets on soak1k-857 at the base).
+
+## 5. The count at the tip (`artifacts/f3-tip`, unit 4 applied)
+
+coh:food-words **3 → 2** (`soak1k-20`, `soak1k-890` remain: the two STOPs above). Every other
+finding class holds its count and its seed set, except `info:battery-would-not-vouch` **808 → 807**
+(`soak1k-219`, a besieged town whose record battery failed on food-words for the same siege secret;
+the informational tally, outside the stop rule). Records moved: 5 of 1,000 (soak1k-71, -219, -532,
+-605, -857), all with under_siege. Golden master: 0 of 525 rows moved against the base (the
+manifest is already red at the base, 525 rows; rosterFinalUnderHeldRoster 41; neither re-recorded).
