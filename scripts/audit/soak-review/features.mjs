@@ -19,6 +19,7 @@ import { faithReadingOf, faithHasChurchEvidence } from '../../../src/domain/doss
 import { deriveMagicReliance } from '../../../src/domain/magicReliance.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
 import { activeCrisisTypes } from '../../../src/domain/facts/crisisKind.js';
+import { magicOf } from '../../../src/domain/facts/magic.js';
 
 const SKIP_KEYS = new Set(['simulationTrace', '_config', 'userCanon', 'aiOverlays', 'id', '_seed', 'economyInputFingerprint', 'colour', 'color', 'bg', 'catalogId', 'sourcePath']);
 const ID_KEY = /^(?:[0-9a-f]{8,}|.*\d{3,}.*|npc_\d+|inst_\d+|s_[0-9a-f]+)$/i;
@@ -95,7 +96,7 @@ export function chainFacts(s, ctx) {
     'chain.culture': s.config?.culture ?? s.culturalIdentity?.key,
     'chain.terrain': s.config?.terrainType,
     'chain.route': s.config?.tradeRouteAccess,
-    'chain.magicScenario': `${s.config?.magicExists ? 'on' : 'off'}/${s.config?.priorityMagic ?? ''}`,
+    'chain.magicScenario': `${magicOf(s).functions ? 'on' : 'off'}/${s.config?.priorityMagic ?? ''}`, // CENSUS-1 fact 7: a missing magicExists is ON
     'chain.contentProfile': s.config?.contentProfile,
     'chain.monsterThreat': s.config?.monsterThreat,
     'chain.stressCell': ctx.stressCell,
