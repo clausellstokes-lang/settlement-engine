@@ -31,6 +31,7 @@ import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import { storesMonthsOf } from '../facts/storesMonths.js';
+import { INSTITUTION_KIND_PATTERNS } from '../facts/institutions.js';
 
 /**
  * @typedef {object} DefenseFacts
@@ -58,8 +59,10 @@ const nameOf = (inst) => String(nativeSemanticName(inst) || '');
 /** @param {ReadonlyArray<string>} names @param {RegExp} re @returns {string|null} */
 const firstMatching = (names, re) => names.find((n) => re.test(n)) ?? null;
 
-const HOSPITAL_RE = /\bhospital/i;
-const HEALER_RE = /\bhealer\b|\binfirmar|\bmonaster|\bfriary\b/i;
+// The institution-presence home's patterns (CENSUS-1 wave 0, fact 11): one table. A healer here
+// is the healer OR monastery union this reader always meant.
+const HOSPITAL_RE = INSTITUTION_KIND_PATTERNS.hospital;
+const HEALER_RE = new RegExp(`${INSTITUTION_KIND_PATTERNS.healer.source}|${INSTITUTION_KIND_PATTERNS.monastery.source}`, 'i');
 const TIMBER_ENCLOSURE_RE = /palisade|earthwork/i;
 // The town free company is a hired company the bucket vocabulary does not spell
 // (`DEFENSE_BUCKET_KEYWORDS.mercenary`; F1, 2026-11-04). The bucket table is persisted
