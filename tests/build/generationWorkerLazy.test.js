@@ -313,7 +313,15 @@ const SENTINEL = 'settlementforge:generation:worker-v1';
 //       hasMarketInstitution, so viability.js +306 and rulingStructure.js -91.
 //   Nothing moves after the DOORS compose (60ae4c909 and the lane tip 80d485c7e: 1,491,801, generation.worker-BV-oj6mh.js).
 // The ceiling is recorded AT the measured figure, never above it. MONOTONE-DOWN from here.
-export const WORKER_BUNDLE_CEILING_BYTES = 1491801;
+// 1,491,801 -> 1,491,837 (2026-11-04, the landing of PR #72, door 12 taken again by the chair, ODQ §934.104): A RISE OF
+// 36 B, VETOABLE BY THE OWNER. The one mover is REGISTERS-7 F5 (fff75ce35): factionRoles.js :: ensureFactionStructuralNpcs
+// now skips a seat whose ref is in the DM layer's `dm:` namespace (a DM-added faction is the DM's row; the appender had
+// been seating two placeholder office-holders for it). The namespace is spelled as a literal because importing
+// dmLayer.js :: DM_ID_NS pulls the editor module into the first-paint closure (whose raw budget has no margin); the
+// shared leaf module for DM_ID_NS is filed for the next window. MEASURED by a fresh `vite build` at the composed tip
+// abf9338af (generation.worker-DRWBjLQU.js, 1,491,837 B) against a git archive of the lane's previous commit 2e95daeb8.
+// MONOTONE-DOWN from here.
+export const WORKER_BUNDLE_CEILING_BYTES = 1491837;
 
 const source = (path) => readFileSync(join(ROOT, path), 'utf8');
 
