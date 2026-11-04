@@ -135,12 +135,18 @@ The order, every time it is turned on:
    this is NOT BUILT YET (ENGINE-3 handed it back); until it lands, watch the function's
    invocations and errors in the Supabase dashboard (Edge Functions → engine-generate → Logs).
 
-**What stops working with the flag on, by design:** the paths that still need a LOCAL
-engine refuse with the typed `engine_local_absent` instead of generating, because the
-engine service serves only a fresh generation today: section regeneration (NPCs, history),
-the DM re-derivation, the surveyor's construction preview, the content-binding sample, the
-instant-world composer and the custom-content preview. Try them on a Preview deployment
-with the flag on before flipping Production.
+**What the engine service serves with the flag on:** a fresh generation, the DM
+re-derivation and the surveyor's settlement preview (`engine-generate`'s `derive` op), and
+section regeneration of NPCs and history (its `regenSection` op). **What still does not, by
+design, and what each says instead of crashing** (`src/lib/engineAbsentPaths.js`): the
+surveyor's REALM preview says "Realm previews are not available in this build. Settlement
+previews still are."; and three paths are launch-gated — the campaign content-binding review,
+instant world (the realm builder and a shared world's page) and the custom-content sample.
+For a non-staff account each shows the "Available at launch" teaser on its control (a shared
+world's page shows the teaser's words), and for a staff account one plain sentence ("Content
+change reviews are not available in this build." · "Instant worlds are not available in this
+build." · "Custom content samples are not available in this build."). Try them on a Preview
+deployment with the flag on before flipping Production.
 
 **Rollback:** set `VITE_ENGINE_REMOTE` to anything but `true` (or delete it) → **Redeploy**.
 The local engine is back in the next build; saved towns are unaffected either way.
