@@ -3,7 +3,7 @@
  * see that file). It fails loudly when the function it rewrites is no longer where it expects,
  * so a refactor can never turn a forced calibration into a silent unforced one.
  */
-const NEEDLE = 'export function densityFactor(tier, population) {';
+const NEEDLE = 'export function densityFactor(tier, population, exempt = 0) {';
 
 export async function load(url, context, nextLoad) {
   const result = await nextLoad(url, context);

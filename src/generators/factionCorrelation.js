@@ -102,7 +102,7 @@ export function deriveFactionBoosts(factions, tier) {
  */
 export function applyFactionInstitutionBoosts(
   boosts, existingInstitutions, tier, config,
-  institutionToggles = {}, categoryToggles = {}, population = null,
+  institutionToggles = {}, categoryToggles = {}, population = null, density = null,
 ) {
   const cap      = TIER_BOOST_CAPS[tier] || 0;
   if (cap === 0 || boosts.length === 0) return [];
@@ -144,8 +144,9 @@ export function applyFactionInstitutionBoosts(
   const additions   = [];
   // THE INSTITUTION BUDGET (X-46 car 3): the same density factor assembleInstitutions applies,
   // read once before the first draw. 1 with no population. The candidates' ORDER (by authored
-  // baseChance) is untouched: one factor scales every candidate alike.
-  const density = densityFactor(tier, population);
+  // baseChance) is untouched: one factor scales every candidate alike. The pipeline hands the
+  // settlement's own factor in (`settlementDensity`, RUNG1B-F6); a headless call reads the bare curve.
+  const factor = typeof density === 'number' ? density : densityFactor(tier, population);
 
   // Only the single most dominant faction gets a signature institution
   const primaryBoost = boosts[0];
@@ -208,7 +209,7 @@ export function applyFactionInstitutionBoosts(
         // a dampened nudge on the institution's REAL catalog rarity, run
         // through the same config-aware getBaseChance the assemble path uses.
         const multiplier = boost.strength === 'strong' ? 1.3 : 1.1;
-        const d = isDensityExempt(tier, name) ? 1 : density;
+        const d = isDensityExempt(tier, name) ? 1 : factor;
         const authored = def.baseChance || 0;
         const boostedChance = getBaseChance(
           (d === 1 ? authored : scaleChance(authored, d)) * multiplier,

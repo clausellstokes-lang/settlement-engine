@@ -20,6 +20,7 @@
 
 import { registerStep } from '../pipeline.js';
 import { deriveFactionBoosts, applyFactionInstitutionBoosts } from '../factionCorrelation.js';
+import { settlementDensity } from './assembleInstitutions.js';
 import { cullPlanarWithoutCircle } from '../isolationGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
 import { collapseUpgradeChains } from './assembleInstitutions.js';
@@ -39,7 +40,7 @@ function instId(name) {
 // (CI run 35826251599: 20 of 22).
 registerStep('factionCorrelationPass', {
   deps: ['neighbourFactions', 'generateEconomy', 'buildGenerationContext'],
-  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'institutionToggles', 'institutions', 'population', 'powerStructure', 'tier'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
+  reads: ['categoryToggles', 'effectiveConfig', 'generationContext', 'goodsToggles', 'institutionToggles', 'institutions', 'nearbyResources', 'neighbourProfile', 'population', 'powerStructure', 'tier', 'tradeRoute'], // ctx keys this step consumes that another step produces (A+ generators.3 data-flow contract)
   provides: [],
   mutates: ['institutions'],                 // re-correlates roster vs factions in place (A+ P1.7)
   scratch: ['_rosterChangedAfterEconomy'],   // internal flag for downstream steps
@@ -63,6 +64,8 @@ registerStep('factionCorrelationPass', {
       factionBoosts, institutions, tier, effectiveConfig,
       institutionToggles, categoryToggles,
       typeof population === 'number' ? population : null,
+      // THE ONE DENSITY FACTOR (RUNG1B-F6): the settlement's own, read as assembleInstitutions reads it.
+      settlementDensity(ctx),
     );
     // Faction pressure may raise an eligible institution's odds; it cannot
     // manufacture a function the world's resolved laws prohibit.
