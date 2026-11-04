@@ -18,7 +18,7 @@ import {
 } from '../../data/institutionalCatalog.js';
 import { densityFactor, isDensityExempt, scaleChance } from '../../data/institutionBudget.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
-import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js';
+import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
@@ -1001,7 +1001,7 @@ registerStep('assembleInstitutions', {
       const pool = [inst.desc, ...variants];
       const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
       const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
-      inst.desc = speakTierNoun(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), tierNounFor(tier));
+      inst.desc = speakTierNoun(defenceTwinLine(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), defenseFactsOf({ institutions })), tierNounFor(tier)); // F10: a desc that names walls the roster lacks takes its twin (data/defenceTwinLines.js), draw-free
     }
   }
 
