@@ -17,6 +17,7 @@ import { INSTITUTION_DESC_VARIANTS } from '../../../../src/data/institutionDescV
 import { RESOURCE_CHAINS } from '../../../../src/data/resourceChains.js';
 import { institutionalCatalog } from '../../../../src/data/institutionalCatalog.js';
 import { CULTURE_PROFILES } from '../../../../src/data/cultureProfiles.js';
+import { generateSpatialLayout } from '../../../../src/generators/spatialGenerator.js';
 
 /** The self-reference planted beside a kept line: it must still be found. */
 const SELF = ' Plainly this is a town that bargains.';
@@ -66,5 +67,16 @@ describe('ruling 3 — the steppe built-form line\'s "river town" names the cult
     // anchored: invented wording (a corpus sentence quoted here would be a literal state-prose anchor)
     expect(speakTierNoun('A river town keeps its own counsel.', 'thorp')).toBe('A river thorp keeps its own counsel.');
     expect(tierNounFindings({ tier: 'thorp' }, 'A river town keeps its own counsel.')).toHaveLength(1);
+  });
+});
+
+describe('ruling 4 — "lower town" is a district of a city, kept for city and metropolis ONLY', () => {
+  const line = generateSpatialLayout('city', [], 'road', 'mountain').layout;
+  it('the mountain city layout names it', () => expect(line).toContain('lower town'));
+  it.each(['city', 'metropolis'])('is kept on a %s', (tier) => expectKept(line, tier));
+  it.each(['thorp', 'hamlet', 'village'])('still counts on a %s: the licence reads the tier', (tier) => {
+    // anchored: invented wording; a smaller place has no lower town of its own
+    expect(tierNounFindings({ tier }, 'The mill stands in the lower town.')).toHaveLength(1);
+    expect(tierNounFindings({ tier }, line)).toHaveLength(1);
   });
 });
