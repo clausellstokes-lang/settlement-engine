@@ -12,7 +12,7 @@
  */
 
 import { buildThreatAssessment, disasterReadinessScore, healerSubject } from './threatAssessment.js';
-import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
+import { HELD_STORES_WORDS, defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
 import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
@@ -566,10 +566,14 @@ export function foodEnduranceLine(settlement) {
   let door;
   /** @type {string} */
   let after;
+  // The rung-2 window (F13 FAMINE-STORES): where an active famine holds the granary shut
+  // (`storesHeld`), the line says so in the stores words' one home and never says the held
+  // granary simply carries the place.
+  const held = end.storesHeld ? `, but ${HELD_STORES_WORDS} it` : '';
   if (end.fullRationMonths === null) {
     before = `${lead}, but what the ${noun} still grows feeds it at full rations; `;
     door = end.hasGranary ? 'the granary' : 'its household stores';
-    after = end.hasGranary ? ' stands in reserve.' : ' stand in reserve.';
+    after = end.hasGranary ? ` stands in reserve${held}.` : ' stand in reserve.';
   } else {
     const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
     const half = end.halfRationMonths === null
@@ -577,7 +581,8 @@ export function foodEnduranceLine(settlement) {
       : `, ${monthsInWords(end.halfRationMonths)} on half`;
     before = `${lead}; ${stretched}`;
     door = end.hasGranary ? 'the granary' : 'household stores';
-    after = ` ${end.hasGranary ? 'carries' : 'carry'} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}.`;
+    const carries = end.storesHeld ? 'would carry' : end.hasGranary ? 'carries' : 'carry';
+    after = ` ${carries} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}${held}.`;
   }
   return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }

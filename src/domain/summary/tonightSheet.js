@@ -28,7 +28,7 @@
 
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { rulingChainOf } from '../dossier/powerStrata.js';
-import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { HELD_STORES_WORDS, defenseFactsOf } from '../defense/defenseFacts.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../../data/stressInstitutionEffects.js';
@@ -379,7 +379,7 @@ export function foodStoresWords(record) {
   const span = months < 1 ? 'a few weeks' : whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
   // RUNG2-F13: under an active famine a granary still holding six months or more is HELD — the
   // record says so (foodRecord.storesHeld), and so does the line.
-  if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that the hall will not open.`;
+  if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that ${HELD_STORES_WORDS}.`;
   if (record.hasGranary === true) return `Stores: a granary, ${span} of grain.`;
   return months < 1 ? 'No granary; a few weeks in the larder.' : `No granary; ${span} in household stores.`;
 }
