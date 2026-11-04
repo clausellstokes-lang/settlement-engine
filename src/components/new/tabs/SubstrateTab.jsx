@@ -25,6 +25,7 @@ import { humanizeToken } from '../../../domain/display/humanizeEngineTokens.js';
 import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 import { FS, INK, MUTED, BODY, BORDER, CARD, CARD_HDR, GREEN, AMBER, RED, sans, SP, swatch } from '../../theme.js';
 import useIsMobile from '../../../hooks/useIsMobile.js';
+import { offersFoodSurplus } from '../../../domain/foodSurplus.js';
 import NameColumns from '../../primitives/NameColumns.jsx';
 import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 
@@ -109,7 +110,11 @@ export default function SubstrateTab({ settlement }) {
       .map(([key, v]) => ({
         key,
         label: VAR_LABEL[key] || humanizeToken(key) || 'Recorded condition',
-        band: v.band,
+        // FOOD-EXPORTS residue (the chair's ruling, 2026-11-04): the shared band ladder's top rung
+        // reads "Food · Surplus", a claim on the food record. Food is graded Surplus only where
+        // the record holds one (domain/foodSurplus.js :: offersFoodSurplus); otherwise Adequate.
+        band: key === 'food_security' && v.band === 'surplus'
+          && !offersFoodSurplus(settlement?.economicState?.foodSecurity?.foodRecord) ? 'adequate' : v.band,
         score: typeof v.score === 'number' ? v.score : (model.scores?.[key] ?? null),
       }))
       // Pressures first: worst band, then worst polarity-oriented score, then

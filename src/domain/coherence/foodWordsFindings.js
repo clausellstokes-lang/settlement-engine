@@ -21,6 +21,13 @@ import { sourcesNamedIn } from '../foodways.js';
 
 /** Food-surplus wording: the place is said to grow more than it eats. */
 const SURPLUS_WORDS = /\b(?:farm|grain|food|agricultural|harvest) surplus\b|\bSubsistence with (?:minor )?surplus\b|\bruns a reliable surplus\b/i;
+/**
+ * A requirement clause ("Requires grain surplus.", the Maltster's description): it says what an
+ * institution NEEDS, not that the place holds it, so its surplus words are no claim — licensed
+ * as R7 licenses a "Needs X" row (FOOD-EXPORTS residue, the chair's ruling 2026-11-04). The
+ * clause runs to the next sentence or clause break; what follows is still read.
+ */
+const REQUIREMENT_CLAUSE = /\bRequires\b[^.;:·]*/gi;
 /** Starvation wording. */
 const STARVING_WORDS = /\bstarving\b/i;
 /** A count of days of food or reserves. */
@@ -64,7 +71,7 @@ export function foodWordsFindings(settlement, renderedText) {
   const storeDays = Math.round(record.storageMonths * 30);
   const hungry = record.band === 'deficit' || record.band === 'famine';
   for (const sentence of sentences) {
-    if (!record.growsMoreThanEats && SURPLUS_WORDS.test(sentence)) {
+    if (!record.growsMoreThanEats && SURPLUS_WORDS.test(sentence.replace(REQUIREMENT_CLAUSE, ''))) {
       findings.push({ code: 'surplus_without_surplus', sentence, detail: 'The place grows less than it eats.' });
     }
     if (!hungry && STARVING_WORDS.test(sentence)) {
