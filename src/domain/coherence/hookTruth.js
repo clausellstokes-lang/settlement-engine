@@ -98,7 +98,8 @@ const VILLAGER_TIERS = new Set(['thorp', 'hamlet', 'village']);
  * @property {boolean} hasSoldiers a garrison or a hired company exists: what "soldiers" needs
  * @property {boolean} hasGarrison a standing garrison exists
  * @property {boolean} hasWalls settlement fortification exists
- * @property {boolean} hasWatch a watch or militia exists
+ * @property {boolean} hasWatch a watch exists (CENSUS-1 fact 3: watch and militia are two atoms)
+ * @property {boolean} hasMilitia a militia exists
  * @property {boolean} hasHospital a real hospital exists
  * @property {boolean} defenseKnown does the record carry a defence roster at all?
  * @property {boolean} magicFunctions does magic function in this world?
@@ -178,7 +179,10 @@ export function settlementHookFacts(settlement) {
     // record stops storing a hook the check then convicts (11 of the 1,000 soak settlements).
     hasSoldiers: defense.hasGarrison || defense.hasMercenary,
     hasWalls: defense.hasWalls,
-    hasWatch: defense.hasWatch || defense.hasMilitia,
+    // CENSUS-1 wave 0, fact 3: "watch or militia" is two atoms (`domain/facts/defence.js`); the
+    // watch word's licence below still takes either.
+    hasWatch: defense.hasWatch,
+    hasMilitia: defense.hasMilitia,
     hasHospital: defense.hasHospital,
     defenseKnown,
     // ⚠ PASSED AS THE WRAPPED ITEM (`{ settlement }`), WHICH IS THE SHAPE `magicWorksAt`'s
@@ -277,7 +281,7 @@ export function hookTruthViolations(text, facts) {
   if (facts.defenseKnown && WORDS.walls.test(line) && !facts.hasWalls) {
     add('walls_without_walls', 'no fortification on the defence roster');
   }
-  if (facts.defenseKnown && WORDS.watch.test(line) && !facts.hasWatch) {
+  if (facts.defenseKnown && WORDS.watch.test(line) && !facts.hasWatch && !facts.hasMilitia) {
     add('watch_without_a_watch', 'no watch or militia on the defence roster');
   }
   if (WORDS.hospital.test(line) && !facts.hasHospital) {

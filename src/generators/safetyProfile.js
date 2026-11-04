@@ -12,6 +12,7 @@ import {
 } from '../domain/institutionClassify.js';
 import { institutionCategoryFlags } from './roleCategory.js';
 import { crimeSignalOf } from '../domain/crimeSignal.js';
+import { defenceOf } from '../domain/facts/defence.js';
 
 /**
  * The pool's own "desperation theft" line, held once because two entries print it: the famine
@@ -45,7 +46,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const pri     = getPriorities(config);
   const flags   = getInstFlags(config, institutions);
   const stress  = getStressFlags(config, institutions);
-  const inst    = flags.inst;
+  // CENSUS-1 wave 0, fact 3: the defence atoms are the live roster's (`domain/facts/defence.js`),
+  // never the raw roster's substring flags; the other presence flags are still priorityHelpers'.
+  const defence = defenceOf({ institutions });
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate };
   const threat  = config.monsterThreat || 'frontier';
   const watchLabel =
     tier === 'town'
