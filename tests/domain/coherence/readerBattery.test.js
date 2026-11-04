@@ -106,3 +106,20 @@ describe('reader:tension-memory', () => {
     expect(R.tensionMemoryFindings(s(26), { history: page(26, 'Living memory') })).toEqual([]);
   });
 });
+
+// ── 5. hook-pools
+describe('reader:hook-pools', () => {
+  const plot = 'NPCs\nSatish Balan\nOne of their people is talking to the guard. They don\'t know which one yet. They\'re watching.\nHistory\nA guard captain is on the payroll of the criminal network';
+  test('a guard in the hooks where the roster has no enforcement body', () => {
+    const rows = R.hookPoolsFindings(rec({ config: { terrainType: 'hills', tradeRouteAccess: 'port' }, institutions: [{ name: 'Bandit affiliate' }], npcs: [{ role: 'Elder' }] }), { plot_hooks: plot });
+    expect(rows.map((r) => r.detail)).toEqual(['[guard] "guard" with no enforcement body']);
+  });
+  test('ships in the hooks of a place with no water', () => {
+    const rows = R.hookPoolsFindings(rec({ institutions: [{ name: 'Town watch' }] }), { plot_hooks: 'Economics\nIf the siege holds, the shipbuilding trades stall within the month.' });
+    expect(rows.map((r) => r.detail)).toEqual(['[sea] "shipbuilding" at terrain plains, route road']);
+  });
+  test('negative control: a watch on the roster, water on the route, and "watching" is no watch', () => {
+    expect(R.hookPoolsFindings(rec({ config: { terrainType: 'hills', tradeRouteAccess: 'port' }, institutions: [{ name: 'Village watch' }] }), { plot_hooks: `${plot}\nThe docks are quiet.` })).toEqual([]);
+    expect(R.hookPoolsFindings(rec(), { plot_hooks: 'NPCs\nThey\'re watching the well.' })).toEqual([]);
+  });
+});

@@ -299,6 +299,38 @@ export function tensionMemoryFindings(s, surfaces) {
   return out;
 }
 
+// ──────────────────────────── 5. hook-pools ────────────────────────────
+
+const GUARD_WORDS = /\b(?:guard captain|guards?|garrison|the watch|watch ?(?:captain|commander|house)|watchm[ae]n|city watch|town watch|soldiers?|sentries|sentry)\b/i;
+const ENFORCEMENT_HOUSE = /watch|guard|garrison|barracks|militia|levy|citadel|mercenar|free company|hired blades|warden/i;
+const ENFORCEMENT_ROLE = /Guard|Watch|Garrison|Commander|Soldier|Warden|Mercenary|Knight|Master of Arms|Quartermaster|Captain/;
+const SEA_HOOK_WORDS = /\b(?:harbou?rs?|ships?|shipbuilding|shipwrights?|shipyards?|shipping|docks?|dockside|dock-side|wharf|wharves|quays?|fleet|sailors?|boats?|seafar\w*|the sea)\b/i;
+
+/**
+ * The Plot Hooks tab names an enforcement body the roster lacks (`[guard]`: no watch, guard,
+ * garrison, militia or company among the houses, and no guard-like role among the people), or
+ * speaks of ships and docks in a place with no navigable water (`[sea]`). The chair's brief names
+ * the tension, outlook and history sections; the tab's NPC section carries the same pools
+ * ("talking to the guard"), so the whole tab is read.
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function hookPoolsFindings(s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const lines = linesOf(surfaces.plot_hooks);
+  const enforcement = houseNames(s).some((h) => ENFORCEMENT_HOUSE.test(h))
+    || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {any} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
+  if (!enforcement) {
+    const hit = lines.find((x) => GUARD_WORDS.test(x));
+    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.match(GUARD_WORDS)?.[0])}" with no enforcement body` });
+  }
+  if (!hasNavigableWater(s)) {
+    const hit = lines.find((x) => SEA_HOOK_WORDS.test(x));
+    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[sea] "${str(hit.match(SEA_HOOK_WORDS)?.[0])}" at terrain ${terrainOf(s)}, route ${routeOf(s)}` });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -306,6 +338,7 @@ const RUNS = Object.freeze({
   'scale-lists': scaleListsFindings,
   'relation-types': relationTypesFindings,
   'tension-memory': tensionMemoryFindings,
+  'hook-pools': hookPoolsFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */
