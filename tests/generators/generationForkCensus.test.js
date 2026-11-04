@@ -357,7 +357,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
 
-  it('A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces', () => {
+  it('A3e — the classification re-executed: the declared corpus is 63 rows, 13 steps draw, and every stepDraws and keyMoves reproduces', () => {
     const corpus = censusCorpus();
     const grid = [];
     const pairsSeen = new Set();
@@ -378,7 +378,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'the measured pair set is the registry"s, not a literal').toBe(GENERATION_TIER1.length);
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -434,7 +434,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
       + `[A4] varies rows: ${variesRows.join(', ')}\n`);
 
     failOnDifference(differences, emitTier1Literal(fresh.rows));
-    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(6);
+    expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(7);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
     expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(17); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
