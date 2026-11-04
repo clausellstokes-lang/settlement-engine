@@ -382,6 +382,24 @@ export function ruleTextFindings(_s, surfaces) {
   return out;
 }
 
+// ──────────────────────────── 9. possessive-slip ────────────────────────────
+
+const DOUBLED_POSSESSIVE = /\b[A-Za-z][\w-]*['’]s['’](?![a-z])/;
+
+/**
+ * A title with a doubled possessive ("Guildmaster of Tailor's'"). One finding per surface.
+ * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function possessiveSlipFindings(_s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  for (const [surface, text] of Object.entries(surfaces)) {
+    const hit = linesOf(text).find((x) => DOUBLED_POSSESSIVE.test(x));
+    if (hit) out.push({ surface, quote: hit, detail: str(hit.match(DOUBLED_POSSESSIVE)?.[0]) });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -393,6 +411,7 @@ const RUNS = Object.freeze({
   'traditions-water': traditionsWaterFindings,
   'tonight-wants': tonightWantsFindings,
   'rule-text': ruleTextFindings,
+  'possessive-slip': possessiveSlipFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

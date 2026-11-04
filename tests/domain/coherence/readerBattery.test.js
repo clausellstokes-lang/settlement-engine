@@ -163,3 +163,13 @@ describe('reader:rule-text', () => {
     expect(R.ruleTextFindings(rec(), { overview: 'Al-karez town · 1,327 pop. · port', viability: 'A city of 9,541 souls.' })).toEqual([]);
   });
 });
+
+// ── 9. possessive-slip
+describe('reader:possessive-slip', () => {
+  test('a doubled possessive in a title', () => {
+    expect(R.possessiveSlipFindings(rec(), { power: "Nóinín O'Neill Guildmaster of Tailor's' ●" })).toEqual([{ surface: 'power', quote: "Nóinín O'Neill Guildmaster of Tailor's' ●", detail: "Tailor's'" }]);
+  });
+  test("negative control: a plain possessive and a plural possessive", () => {
+    expect(R.possessiveSlipFindings(rec(), { power: "Guildmaster of the Tailors' Guild · the Tailor's shop" })).toEqual([]);
+  });
+});
