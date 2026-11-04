@@ -40,3 +40,46 @@ Causes, in code:
   in the coherence tail AFTER the trim, on the final roster and estate. The history tension is
   drawn at generateNarratives, on the pre-trim roster (a trim only removes a criminal faction,
   never adds one, so "no signal before the trim" implies "no signal after").
+
+## 2. The count at the tip (unit 5)
+
+`node scripts/audit/soak-review.mjs --count 1000 --workers 4 --out artifacts/f4-tip`, at the lane tip
+(units 2, 3, 3b, 4, 4b): **A-06 16 → 0.** 1,000 of 1,000 born, 0 errors.
+
+| unit | writer | A-06 seeds cured | records moved (1,000 births) | golden rows moved (of 525) |
+|---|---|---|---|---|
+| 2 | `applyDensityLaw.js :: pruneToRoster` (rows naming a trimmed seat) | 0 | 782 (exactly the places with such a row; 54 no-trim controls identical) | 0 |
+| 3 | `mergeNPCLists` affiliation, secret, goal read `crimeSignal.js` | 531 579 | 309 (exactly the no-signal NPC-writer places) | 99 |
+| 3b | history fill sets `crime_wave` aside without the signal | 134 830 842 | 8 | 1 (also among unit 3's 99) |
+| 4 | `safetyProfile.js :: settleCrimeLinesToSignal` survival line, at assembly | 248 393 | 4 | 0 |
+| 4b | the same, debt-evasion line | 42 62 129 276 325 373 565 630 930 | 38 | 0 |
+
+Soak records moved base → tip: 873. Golden master base → tip: 99 rows (list:
+`artifacts/f4-golden-rows-moved.txt`, not committed); NOT re-recorded. One row,
+`town|germanic|mountain|random_trade|civilized|gm-seed-a`, carries TWO causes (units 3 and 3b).
+
+Other classes that moved (both down on net; every place but one through unit 2's pruned narratives):
+- `coh:defense-words` 534 → 518: 16 places, every one moved by unit 2 (e.g. soak1k-244's pruned
+  Merchant-Guilds/Religious row "Merchants fund churches, endow hospitals ..." on a roster without
+  either; read as "hospital without a hospital").
+- `info:battery-would-not-vouch` 808 → 803: 6 gone (unit 2), 1 new — soak1k-830, whose crime wave
+  (unit 3b) was redrawn as a tension carrying "The merchant quarter and the labourers' quarter remain
+  walled apart", which the battery reads as walls without walls (F1 DEFENCE-WORDS' instrument area).
+Every other class unchanged.
+
+Owed by this lane, not recorded by it:
+- `tests/lint/heldKeyWriterCensus.walker.test.js` A3: DISCOVERY_EXEMPT row
+  `{ symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside
+  economicState from the final crime signal; economicState is not a held key.' }` (unit 4).
+- `tests/fixtures/generator-golden-master.json`: 99 rows (units 3 and 3b).
+- `tests/fixtures/x46-npc-band-dark-digests.json` (`tests/generators/x46NpcBand.test.js`, "sixty seeds
+  (ten a tier) generate byte-identically to the dark digests"): 19 of 60 seeds moved by the lane's
+  composed units (v2 worlds, so units 2 and 3 can both reach them; per-unit split NOT measured).
+
+Governing suites at the tip (109 files naming a changed writer): every title red at the base
+f9ce225c5 is red here; new reds are exactly the two rows above (census A3, the X-46 dark digests).
+
+Residue (record only, no screen hit at the tip): 6 places keep the generic "Thieves' Guild"
+`secondaryAffiliation` where only a criminal HOUSE exists; `powerStructure.criminalCaptureState`
+survives the trim of the criminal faction it describes; the signal counts a RUINED criminal house
+(as `deriveCriminalStructure` did before this lane).
