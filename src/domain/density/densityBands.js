@@ -57,9 +57,12 @@
  *
  * ⛔ A LANE MAY NOT FLIP EITHER WORD. Both are the owner's, by nature (tuning signature).
  */
+// 2026-11-04: lit by the chair under the owner's word of 2026-11-04 ('I leave it all to your judgment';
+// ODQ §934.104); the named roster and the faction seats follow the population (X-46 car 4). The flip is
+// the owner's by delegation, not a lane's: the words above still bind every lane.
 export const REGISTER_VII_SIGNATURE = Object.freeze({
-  signed: false,
-  live: false,
+  signed: true,
+  live: true,
 });
 
 /** Tier order, smallest first. The one canonical spelling for this module family. */

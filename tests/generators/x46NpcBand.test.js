@@ -156,10 +156,13 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
 
-  it('the signature is unflipped and the create boundary still mints nothing', () => {
-    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: false, live: false });
-    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(1);
-    expect(newSettlementDensityLaw()).toEqual({});
+  // RE-KEYED 2026-11-04 (was: "the signature is unflipped and the create boundary still mints nothing"):
+  // the chair lit Register VII under the owner's word of 2026-11-04 (ODQ §934.104), so the create
+  // boundary now mints the v2 marker. The dark seam below is still forced and still byte-identical.
+  it('the signature is lit and the create boundary mints the v2 marker', () => {
+    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: true, live: true });
+    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(REGISTER_VII_DENSITY_LAW_VERSION);
+    expect(newSettlementDensityLaw()).toEqual({ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION });
   });
 
   it('sixty seeds (ten a tier) generate byte-identically to 8cc245db0', () => {

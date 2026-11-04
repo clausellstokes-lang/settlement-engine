@@ -223,12 +223,14 @@ describe('§810 R5 — the version gate (THE PROMISE)', () => {
       .toBe(NEW_SETTLEMENT_DENSITY_LAW_VERSION);
   });
 
-  it('⭐⭐ THE SIGNATURE IS THE DIAL\'S ONLY SOURCE, and it is unsigned and dark today', () => {
+  it('⭐⭐ THE SIGNATURE IS THE DIAL\'S ONLY SOURCE, and it is signed and lit (2026-11-04)', () => {
     // Car D4's whole point: the owner's tuning act is one file's diff. The dial is a
     // DERIVATION of this record, so there is no second place to remember and no way for
-    // the two to disagree.
-    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: false, live: false });
-    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(DEFAULT_DENSITY_LAW_VERSION);
+    // the two to disagree. RE-KEYED 2026-11-04 (was: "unsigned and dark today"): the chair lit
+    // Register VII under the owner's word of 2026-11-04 ("I leave it all to your judgment";
+    // ODQ §934.104), so new worlds mint under v2.
+    expect(REGISTER_VII_SIGNATURE).toEqual({ signed: true, live: true });
+    expect(NEW_SETTLEMENT_DENSITY_LAW_VERSION).toBe(REGISTER_VII_DENSITY_LAW_VERSION);
   });
 
   it('⛔ `live` CANNOT LIGHT THE LAW WHILE `signed` IS FALSE — §810 R5 made structural', () => {
