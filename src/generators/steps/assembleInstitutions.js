@@ -41,6 +41,8 @@ import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleR
 import { institutionToggleFor } from '../institutionToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
 import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+/** A description that says a settlement builds, sells or supplies ships (A-11). */
+const SHIP_WORD = /\bships?\b/i;
 
 // Compatibility export: callers historically imported the table from this
 // step module. The single writer now lives in the side-effect-free data leaf.
@@ -860,7 +862,12 @@ registerStep('assembleInstitutions', {
     if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
     const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
     if (variants && variants.length) {
-      inst.desc = pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`);
+      // A-11 (soak 1000 row 7, chair ruling 4b): where the world law's water fact is 'none',
+      // a variant that speaks of ships yields to its pool's ship-free variants; a pool with
+      // none keeps every variant (no sentence is authored here). Still draw-free.
+      const pool = [inst.desc, ...variants];
+      const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
+      inst.desc = pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`);
     }
   }
 

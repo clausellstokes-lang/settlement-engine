@@ -407,7 +407,8 @@ export const INSTITUTION_SERVICES = {
     "Mead (small batch)": { on: false, p: 0.5, desc: "Honey wine brewed in small batches." }
   },
   "Fishmonger": {
-    "Fresh fish": { on: true, p: 1.0, desc: "Today's catch. Buy early." },
+    // A-11: inland the morning catch is this pool's own "Salted fish" (the catalog's "Inland: dried or salted").
+    "Fresh fish": { on: true, p: 1.0, inlandAlternative: "Salted fish", desc: "Today's catch. Buy early." },
     "Salted fish": { on: true, p: 0.9, desc: "Salt-cured fish. Weeks of shelf life." },
     "Smoked fish": { on: false, p: 0.6, desc: "Cold-smoked. Longest shelf life, richest flavour." }
   },
