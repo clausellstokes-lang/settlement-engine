@@ -31,7 +31,7 @@
  */
 import { useEffect, useId, useRef, useState } from 'react';
 import {
-  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans, launchSkin,
+  BORDER, CARD, CARD_HDR, FS, GOLD, GOLD_DEEP, MUTED, SP, sans, launchSkin, swatch,
 } from '../theme.js';
 
 export default function MobileTabStrip({
@@ -152,6 +152,9 @@ export default function MobileTabStrip({
         {tabs.map(({ id, label, tone }) => {
           const active = value === id;
           const launch = tone === 'launch';
+          // THE CRISIS MARK (docs/DESIGN_CRISIS_TAB.md): black ground, red bold text, idle and lit
+          // (the values of tabPalette.js :: TAB_CRISIS_MARK).
+          const crisis = tone === 'crisis';
           return (
             <button
               type="button"
@@ -173,13 +176,13 @@ export default function MobileTabStrip({
                 minHeight: 44,
                 flexShrink: 0,
                 border: 'none',
-                borderBottom: `2px solid ${active ? (launch ? launchSkin.rule : GOLD) : 'transparent'}`,
+                borderBottom: `2px solid ${active ? (launch ? launchSkin.rule : crisis ? swatch['#C04040'] : GOLD) : 'transparent'}`,
                 marginBottom: -1,
-                background: launch ? launchSkin.ground : active ? CARD : 'transparent',
-                color: launch ? launchSkin.ink : active ? GOLD_DEEP : MUTED,
+                background: launch ? launchSkin.ground : crisis ? swatch['#1B1408'] : active ? CARD : 'transparent',
+                color: launch ? launchSkin.ink : crisis ? swatch['#C04040'] : active ? GOLD_DEEP : MUTED,
                 fontFamily: sans,
                 fontSize: FS.sm,
-                fontWeight: active ? 800 : 600,
+                fontWeight: active || crisis ? 800 : 600,
                 whiteSpace: 'nowrap',
                 cursor: 'pointer',
                 WebkitTapHighlightColor: 'transparent',

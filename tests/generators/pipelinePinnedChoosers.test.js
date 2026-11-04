@@ -110,8 +110,10 @@ const WATCHED = [
 ];
 /** The keys measured TOTAL under `assembleInstitutions`'s record-built pin: §0.S measured three. 2026-10-01, the urban
  *  band (ODQ §934.86): `isolationSupport` joined them (measured by A5 over the 63-row corpus; the census agrees,
- *  isolationPass|isolationSupport producedOnRecordClass 'varies' -> 'same'), so the set is four. */
-const ASSEMBLE_TOTAL = ['isolationSupport', 'stress', 'name', 'population'];
+ *  isolationPass|isolationSupport producedOnRecordClass 'varies' -> 'same'), so the set is four. 2026-11-03, the
+ *  crisis cast (lane CRISIS, docs/DESIGN_CRISIS_TAB.md): `stress` leaves the set. Each stress entry now carries its
+ *  cast, derived from the roster and the faction set, and neither survives this pin totally; the set is three. */
+const ASSEMBLE_TOTAL = ['isolationSupport', 'name', 'population'];
 
 const text = (value) => JSON.stringify(value);
 const probeRow = () => censusCorpus().find(
@@ -461,7 +463,7 @@ describe('EM-B2a3 — the institution and power choosers consult the pin seam', 
 
   it('A7 — the file list is two, and the three power helpers are untouched', () => {
     const roster = getStepMeta();
-    expect(roster).toHaveLength(22);
+    expect(roster).toHaveLength(23); // 22 -> 23: resolveCrisisCast (lane CRISIS, 2026-11-03)
     const helpers = {
       relationshipArchetypes: { computeRelTension },
       stressFactions: { applyStressEventFactions },

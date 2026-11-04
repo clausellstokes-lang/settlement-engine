@@ -59,7 +59,7 @@ import { pinsFrom } from '../../src/domain/edit/dmLayer.js';
 import { GENERATION_TIER1 } from '../../src/domain/generation/generationForkRegistry.js';
 
 /** The live roster length, the anti-vacuity floor every set equality here rests on. */
-const REGISTERED_STEPS = 22;
+const REGISTERED_STEPS = 23; // lane CRISIS (2026-11-03): resolveCrisisCast joins (22 -> 23)
 
 /** The register's `provides` rows — the only half of Tier 1 a chooser can be read from. */
 const PROVIDES_ROWS = GENERATION_TIER1.filter((row) => row.via === 'provides');

@@ -22,6 +22,8 @@ export const EconomicsTab = lazy(() => import('../new/tabs/EconomicsTab'));
 export const ServicesTab = lazy(() => import('../new/tabs/ServicesTab'));
 // T1-14 (2026-10-30): the roster house by house, each with its own service rows.
 export const InstitutionsTab = lazy(() => import('../new/tabs/InstitutionsTab.jsx'));
+// The crisis record's one page (docs/DESIGN_CRISIS_TAB.md), registered only in a crisis.
+export const CrisisTab = lazy(() => import('../new/tabs/CrisisTab.jsx'));
 export const PowerTab = lazy(() => import('../new/tabs/PowerTab'));
 // Phase 4 W-F6 — the FAITH surface (patron / pantheon ranks / piety arc /
 // legitimacy / cause chains), tier-gated inside. It now renders inside the

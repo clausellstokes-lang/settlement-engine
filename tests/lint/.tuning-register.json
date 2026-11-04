@@ -2422,6 +2422,25 @@
       },
       "band": null,
       "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34; named *_TUNING because the inventory measures a table by that suffix, TABLE_DEF_RE). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
+    },
+    "src/domain/crisis/crisisCast.js#CRISIS_CAST_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "rates.exploiter": "share",
+        "rates.scapegoat": "share",
+        "rates.waverer": "share",
+        "rates.profiteer": "share",
+        "rates.collaborator": "share",
+        "townCaps.exploiter": "count",
+        "townCaps.scapegoat": "count",
+        "townCaps.profiteer": "count",
+        "townCaps.collaborator": "count",
+        "townCaps.temporary": "count"
+      },
+      "band": null,
+      "note": "Lane CRISIS (2026-11-03, docs/DESIGN_CRISIS_TAB.md): the five occasional-role rates of the crisis cast (exploiter, scapegoat, waverer, profiteer, collaborator; the share of a nature's crises that carry the role, chosen by a hash of seed and crisis id, never a draw) and the per-town caps (one each, one temporary person). The rates are the design's proposal, the owner's dials, open for the owner's veto. DRAFT, registered in the minting commit; nothing here is signed or proposed."
     }
   },
   "roles": {

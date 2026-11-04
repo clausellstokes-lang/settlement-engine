@@ -435,7 +435,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(variesRows.length, 'the varies rows of the FINAL comparand').toBe(6);
     // 2026-10-01, the urban band (ODQ §934.86): 18 -> 16 (measured). The institution rebuild moved the producedOnRecord
     // classes of isolationSupport (varies -> same) and generationRepairs (absent -> varies); the six varies rows stay six.
-    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(16);
+    expect(disagreeing.length, 'the rows where the two comparands disagree').toBe(17); // lane CRISIS (2026-11-03): resolveCrisisCast joins: assembleSettlement|stress's produced value differs from the record where a crisis is cast (16 -> 17)
     expect(nonUnanimous.length, 'exactly one row lands in two places, and it is already varies').toBe(1);
     // ⛔ THERE IS NO producedPath, AND THAT IS A MEASUREMENT. If this ever becomes non-zero a
     // second path field is owed and the register is telling half a truth about WHERE.

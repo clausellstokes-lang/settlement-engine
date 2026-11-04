@@ -170,6 +170,12 @@ export const STEP_METADATA = Object.freeze({
   assembleSettlement: {
     summary: () => null,
   },
+  resolveCrisisCast: {
+    summary: (ctx) => {
+      const n = ctx.crisisCast ? Object.keys(ctx.crisisCast).length : 0;
+      return n ? `${n} ${n === 1 ? 'crisis' : 'crises'} cast` : null;
+    },
+  },
 });
 
 
@@ -207,6 +213,7 @@ export const STEP_PRESENTATION = Object.freeze({
   corruptionPass: { label: 'Seed corruption', description: 'Where a criminal institution exists, roll which flawed NPCs were already corrupted at generation.' },
   generateNarratives: { label: 'Compose narratives', description: 'Write the prose layer: history, defense, daily-life, and per-faction asides.' },
   assembleSettlement: { label: 'Assemble dossier', description: 'Bundle every layer into the final settlement object the dossier renders from.' },
+  resolveCrisisCast: { label: 'Cast the crisis', description: 'Name who each active crisis touches, from the people, houses and institutions already in the dossier.' },
 });
 
 /**

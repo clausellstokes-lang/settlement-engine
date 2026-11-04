@@ -237,7 +237,9 @@ const resolveNameCulture = culture => {
   return NAMING_DATA[culture] ? culture : 'germanic';
 };
 
-const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town') => {
+// Exported for one more caller: the crisis cast step's temporary person
+// (src/generators/steps/resolveCrisisCast.js), named the way every roster NPC is.
+export const pickFirst = (culture = 'germanic', gender = 'male', withSurname = true, tier = 'town') => {
   const firstCulture = resolveNameCulture(culture);
   const surnameCulture = culture === 'mixed' ? resolveNameCulture(culture) : firstCulture;
   const data = NAMING_DATA[firstCulture] || NAMING_DATA.germanic;

@@ -66,6 +66,12 @@ const freezeRow = (/** @type {GenerationTier1Row} */ row) => Object.freeze(Objec
 // RE-MEASURED AT X-46 THE HISTORICAL SCALE, car 1 (ODQ §934.104, 2026-11-03): the owner's population bands move
 // the corpus's populations, so eighteen measured counts across eight rows move (no row added or removed, no key
 // set changed); applied by row identity from the census arm's printed disagreements.
+// THE CRISIS CAST (lane CRISIS, 2026-11-03, docs/DESIGN_CRISIS_TAB.md): two rows join, pasted from the arm's
+// printed literal: resolveCrisisCast provides the transient `crisisCast` (it lands on each stress entry, at no
+// one record path) and mutates `settlement` (the cast and, rarely, one temporary person). No other row moved
+// by this lane but assembleSettlement|stress, whose PRODUCED value now differs from the record in the 54 rows that
+// carry a crisis (the cast lands after it): producedOnRecord same 63 -> 9, transformed 0 -> 54, 'same' -> 'varies'.
+// 72 -> 74 pairs.
 /**
  * ⛔ TWO COMPARANDS, BECAUSE THEY ARE DIFFERENT CLAIMS (design §22; chair ruling Q-6).
  * `onRecord` answers whether the key's FINAL value lands on the record. `producedOnRecord`
@@ -153,7 +159,9 @@ export const GENERATION_TIER1 = Object.freeze(/** @type {GenerationTier1Row[]} *
   { step: 'generateNarratives', key: 'history', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.history' },
   { step: 'assembleSettlement', key: 'settlement', via: 'provides', stepDraws: 63, keyMoves: 63, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
   { step: 'assembleSettlement', key: 'powerStructure', via: 'mutates', stepDraws: 63, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 0, transformed: 63 }, onRecordClass: 'transformed', producedOnRecord: { absent: 0, same: 0, transformed: 63 }, producedOnRecordClass: 'transformed', recordPath: 'record.powerStructure' },
-  { step: 'assembleSettlement', key: 'stress', via: 'mutates', stepDraws: 63, keyMoves: 54, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record.stress' },
+  { step: 'assembleSettlement', key: 'stress', via: 'mutates', stepDraws: 63, keyMoves: 54, rows: 63, class: 'drawn', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 9, transformed: 54 }, producedOnRecordClass: 'varies', recordPath: 'record.stress' },
+  { step: 'resolveCrisisCast', key: 'crisisCast', via: 'provides', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 63, same: 0, transformed: 0 }, onRecordClass: 'absent', producedOnRecord: { absent: 63, same: 0, transformed: 0 }, producedOnRecordClass: 'absent', recordPath: null },
+  { step: 'resolveCrisisCast', key: 'settlement', via: 'mutates', stepDraws: 0, keyMoves: 0, rows: 63, class: 'pure', onRecord: { absent: 0, same: 63, transformed: 0 }, onRecordClass: 'same', producedOnRecord: { absent: 0, same: 63, transformed: 0 }, producedOnRecordClass: 'same', recordPath: 'record' },
 ]).map(freezeRow));
 
 /**

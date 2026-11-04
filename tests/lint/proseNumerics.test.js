@@ -519,6 +519,9 @@ const BASELINE_PATH = join(ROOT, 'tests/lint/.prose-numerics-baseline.json');
 // AT THE MERGE OF T3 AND T2 (the chair, 2026-10-30): both lanes' cures are summed from the
 // 218 base — T3 total -6 / float -3 / percent -3, T2 total -5 / float -4 / percent -1 — so the
 // ceilings are 207 / 140 / 50; the live scan at the merged tree is the receipt.
+// CRISIS-2 unit 4 (2026-11-03, docs/DESIGN_CRISIS_TAB.md): OutputContainer.jsx 985 -> 994, a pure line
+// move (the Crisis tab's registration lines above it). Path, category and snippet byte-identical; the
+// TableView.jsx row this walker also reds on at this tip is not this lane's.
 // BUILD-W2-BLOCKLAW U1 (wave 2, X-17): OutputContainer.jsx 969 -> 973, a pure line move (the
 // tab-order comment lines above TAB_GROUPS). Path, category and snippet byte-identical.
 // BUILD-W2-BLOCKLAW U4 (wave 2, the block law X-16; MOVE ONLY): twenty-two pure line moves and

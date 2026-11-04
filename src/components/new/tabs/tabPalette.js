@@ -46,3 +46,16 @@ export const TAB_CATEGORY_COLORS = Object.freeze({
 
 /** Default category color for an unmapped category. */
 export const TAB_CATEGORY_DEFAULT = swatch['#6B5340'];
+
+// ── THE CRISIS MARK (docs/DESIGN_CRISIS_TAB.md; the owner, 2026-11-03: "black background with red
+// bold coloring (the tab) similar to criminal institutions and services") ────────────────────────
+// The criminal look, named once for the Crisis tab and its two strips: the near-black ground and
+// the red ink the criminal service cards wear, through registered swatch values only (no new raw
+// hex). The strips paint a tab carrying `tone: CRISIS_TONE` with it, idle and lit alike.
+export const CRISIS_TONE = 'crisis';
+export const TAB_CRISIS_MARK = Object.freeze({
+  ground: swatch['#1B1408'], // the ink-black ground
+  ink:    swatch['#C04040'], // the red, worn bold
+  muted:  swatch['#8A5050'], // the criminal card's muted red (serviceComponents.jsx)
+  rule:   swatch['#3A1A1A'], // the criminal accent (tabConstants.js :: Ts.criminal)
+});
