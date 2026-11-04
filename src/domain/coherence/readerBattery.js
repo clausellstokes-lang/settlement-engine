@@ -264,12 +264,48 @@ export function relationTypesFindings(_s, surfaces) {
   return out;
 }
 
+// ──────────────────────────── 4. tension-memory ────────────────────────────
+
+/** @param {string} x */
+const escapeRe = (x) => x.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+
+const OLD_BANDS = /^(?:Ancient|Deep history)$/;
+const LIVING = /\b(?:former\b|those who (?:suffered|remember|lost|fought|survived)|survivors?\b|veterans?\b|old loyalists|victims?\b|beneficiaries who kept|(?:collaborators|resisters) (?:and \w+ )?continued)/i;
+
+/**
+ * A Current Tension whose source event (the history event of its template, `templateType`)
+ * sits in the Ancient or Deep-history band ON THE PAGE, worded with living participants
+ * ("Former collaborators", "Those who suffered under the regime"). A tension with no source
+ * event is not judged.
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function tensionMemoryFindings(s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const page = str(surfaces.history);
+  const tensions = Array.isArray(s?.history?.currentTensions) ? s.history.currentTensions : [];
+  const events = Array.isArray(s?.history?.historicalEvents) ? s.history.historicalEvents : [];
+  for (const t of tensions) {
+    const desc = str(t?.description);
+    if (!desc || !page.includes(desc)) continue;
+    const source = events.find((/** @type {any} */ e) => e?.templateType === t?.type);
+    if (!source) continue;
+    const band = page.match(new RegExp(`${escapeRe(str(source.description))}\\n${Number(source.yearsAgo)}y ago\\n([^\\n]+)`));
+    if (!band || !OLD_BANDS.test(band[1].trim())) continue;
+    const wording = [desc, ...(Array.isArray(t?.factions) ? t.factions.map(str) : [])].join(' · ');
+    const living = wording.match(LIVING);
+    if (living) out.push({ surface: 'history', quote: wording.slice(0, 300), detail: `[${band[1].trim() === 'Ancient' ? 'ancient' : 'deep-history'}] ${str(source.name)}, ${source.yearsAgo}y ago; "${living[0]}"` });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
   'validation-on-page': validationOnPageFindings,
   'scale-lists': scaleListsFindings,
   'relation-types': relationTypesFindings,
+  'tension-memory': tensionMemoryFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

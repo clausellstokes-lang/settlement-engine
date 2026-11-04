@@ -88,3 +88,21 @@ describe('reader:relation-types', () => {
     expect(R.classOfRole('Unheard-of Role')).toBe('other');
   });
 });
+
+// ── 4. tension-memory
+describe('reader:tension-memory', () => {
+  const desc = 'A previous occupation ended, but collaborators and resisters continued to live side by side, their history unresolved';
+  const s = (yearsAgo) => rec({ history: {
+    currentTensions: [{ type: 'occupation_legacy', description: desc, factions: ['Former collaborators', 'Former resistance'] }],
+    historicalEvents: [{ yearsAgo, name: 'The Occupation', description: desc, templateType: 'occupation_legacy' }],
+  } });
+  const page = (yearsAgo, band) => `Current Tensions (1) ▲\nOccupation Legacy major\n${desc}\nFormer collaborators Former resistance\nMajor Historical Events (1) ▲\nThe Occupation Exile & Return major\n${desc}\n${yearsAgo}y ago\n${band}\n▼`;
+  test('a living grievance from an event in Deep history', () => {
+    const rows = R.tensionMemoryFindings(s(299), { history: page(299, 'Deep history') });
+    expect(rows).toHaveLength(1);
+    expect(rows[0].detail).toMatch(/^\[deep-history\] The Occupation, 299y ago/);
+  });
+  test('negative control: the same tension from an event in living memory', () => {
+    expect(R.tensionMemoryFindings(s(26), { history: page(26, 'Living memory') })).toEqual([]);
+  });
+});
