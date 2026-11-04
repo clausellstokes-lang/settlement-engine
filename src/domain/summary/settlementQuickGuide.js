@@ -548,7 +548,7 @@ function scopePhrase(cultureKey, settlement) {
  * no fallback). A record with no config is legacy and unread: the phrase stands as it always did.
  * @type {ReadonlySet<string>}
  */
-const WATERSIDE_SCOPES = new Set(['greek']);
+const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the hall and the water", slavic "between river and forest" (chair ruling 5)
 
 /** @param {SettlementQuickGuideSource} settlement */
 function isLandlocked(settlement) {
