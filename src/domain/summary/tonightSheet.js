@@ -55,6 +55,39 @@ export const TONIGHT_COPY = Object.freeze({
   close: 'Close Tonight',
 });
 
+/**
+ * WHAT A CAST ROLE WANTS (lane RUNG2-F13, 2026-11-04; the chair's ruling on rung 2 §3c): a person
+ * voiced from the crisis cast wants what the ROLE wants, read after "Wants to". An instigator's
+ * want fits an instigator, never the want of the people answering the crisis ("identify the
+ * infiltrator", soak1k-1805); the seat-holder's want stays the seat's (the NPC's own goal). One
+ * line per person, chosen by `castHash` over the person, the crisis and the role: no draw.
+ */
+export const CAST_WANTS = Object.freeze(/** @type {Record<string, ReadonlyArray<string>>} */ ({
+  instigator: Object.freeze([
+    'keep the pressure on until the seat gives way, and keep their own hand out of sight.',
+    "turn this crisis into the settlement's next arrangement, with themselves at the head of it.",
+    'be the one still standing when the present order runs out of answers.',
+  ]),
+  brunt: Object.freeze([
+    'get their own people through this with what little they have left.',
+    'be heard by someone with power before the crisis takes the rest.',
+    'hold on until the worst has passed, and remember who helped.',
+  ]),
+  lever: Object.freeze([
+    'decide who gets what the crisis has made scarce, and be thanked rather than blamed for it.',
+    'keep the office the crisis turns on working, whatever it costs them.',
+    'hold the one thing everyone now needs without being crushed between those who want it.',
+  ]),
+  exploiter: Object.freeze([
+    'sell what the crisis has made scarce for as long as the crisis lasts.',
+    'come out of this richer than they went in, without anyone tracing how.',
+  ]),
+  defender: Object.freeze([
+    'hold the line until the crisis breaks, with fewer hands than the line needs.',
+    'keep the defence standing long enough for someone else to end this.',
+  ]),
+}));
+
 /** How many hooks the sheet carries. */
 const HOOK_COUNT = 3;
 

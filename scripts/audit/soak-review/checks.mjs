@@ -53,6 +53,9 @@ export const KIND_OF = Object.freeze({
   // F9 (2026-11-04): crime denied beside a listed operation, A-06 in reverse; A-06's own kind
   // (unlisted, so 0, the stop rule's wording kind) — stated, not defaulted.
   'coh:crime-denied-and-listed': 0,
+  // Kind 10, crisis (lane RUNG2-F13, 2026-11-04; the chair's CONTRADICTION kinds of rung 2 §3c, shared
+  // with lane F12's calm-prose check): a crisis fact the page contradicts. Inside the stop rule.
+  'coh:famine-stores': 10, 'coh:migration-direction': 10, 'coh:crisis-cast-sense': 10,
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
   // Kind 9, reader (lane READER-INSTRUMENTS, 2026-11-04): outside the stop rule until the READER WINDOW lands.
   ...Object.fromEntries(READER_BATTERY_CHECKS.map((c) => [`reader:${c}`, 9])),
