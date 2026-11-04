@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — SELF-VOUCH, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-08-self-vouch.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 0be13b5cb): the eighth formal judgment, record_coherence_battery, over the stored record, and DS-GEN-11's zero pool vouches only when it passed. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S8 (the tree of 0be13b5cb with the door paths carried from
+ *   the branch, the previous record's writes committed). 75d4ba2c.. -> 54d3a39a..
+ *
  * 2026-11-04 — FOOD-EXPORTS (WITH FOOD-4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-07-food-exports.json; the cloud chair signs under the owner's delegation, vetoable).
  *   139 OF 525 ROWS MOVED (thorp 12, hamlet 12, village 12, town 31, city 36, metropolis 36); the key set is identical. THE CAUSE, ONE (first-parent
