@@ -24,6 +24,7 @@ import { chromeFontSize, proseFontSize } from '../../../design/proseScale.js';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { safetyBandOf } from '../../../domain/display/labelBands.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
+import { deriveMagicRelianceView, magicRowsGated } from '../../../domain/display/dossierViewModel.js';
 
 import {NarrativeNote} from '../NarrativeNote';
 import SteadingsSection from './SteadingsSection.jsx';
@@ -35,6 +36,7 @@ import Button from '../../primitives/Button.jsx';
 import ProseBlock from '../ProseBlock.jsx';
 // The two glance facts the removed DM Summary tab alone carried (X-5 / T1-1).
 import { cultureScopeLine, governsLine } from '../../../domain/summary/settlementQuickGuide.js';
+import { TONIGHT_COPY } from '../../../domain/summary/tonightSheet.js'; // the trigger opens the one Tonight sheet (TRIM-2 request 4)
 import { edged } from '../../../design/edgedBox.js';
 import { SECTION_HELP } from '../../../copy/sectionHelp.js';
 import { FLUSH, FLUSH_STACK } from '../../../design/flush.js';
@@ -70,6 +72,25 @@ import { FLUSH, FLUSH_STACK } from '../../../design/flush.js';
  * which is what it reads. This row keeps its name and its own grade.
  * @param {{ label: string, score: number }} props
  */
+/**
+ * The Systems Health bars, keyed by the `defenseProfile.scores` field each one bands. A list,
+ * so the magic gate (`magicRowsGated`) reads every row; the magic row's key names magic.
+ * @type {ReadonlyArray<{ key: string, label: string }>}
+ */
+const SYSTEMS_HEALTH_ROWS = Object.freeze([
+  { key: 'monster', label: 'Monster Defense' },
+  { key: 'economic', label: 'Economic Resilience' },
+  // ⛔ THIS ROW IS THE WORLD'S MAGIC AS THE ENGINE SCORES IT, AND THAT IS A DIFFERENT FACT
+  // FROM THE DEFENSE TAB'S ARCANE SUPPORT ROW. `scores.magical` is driven by the world magic
+  // slider over a wide presence read, so a town with no arcane institution can still score 49;
+  // the Defense row asks the narrow question "is there a wizard, mage, alchemist or arcane
+  // academy here" and answers None. For one landing the two rows shared the name `Magical
+  // Capability` and this one borrowed the other's WORD, which put "None" in amber beside a
+  // half-full bar on 27 of 144 large settlements. Two facts now carry two names, and this row
+  // grades its own bar like every sibling above it.
+  { key: 'magical', label: 'Magical Capability' },
+]);
+
 function ScoreRow({ label, score }) {
   const mobile = useIsMobile();
   const n = Math.min(100, Math.max(0, score || 0));
@@ -87,10 +108,10 @@ function ScoreRow({ label, score }) {
   );
 }
 
-function StatusTag({ label, value, _color, accent }) {
+function StatusTag({ label, value, _color, accent, testId }) {
   const mobile = useIsMobile();
   return (
-    <div style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
+    <div data-testid={testId} style={{ flex: '1 1 130px', background: accent ? `${accent}0d` : '#faf8f4', ...edged(`1px solid ${accent ? `${accent}35` : '#e0d0b0'}`, `3px solid ${accent || '#c8b89a'}`), padding: '7px 10px', minWidth: 0 }}>
       <div style={{ fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 700, color: accent || '#6b5340', marginBottom: 3 }}>{label}</div>
       {/* RUNG 3 CASES ITS OWN VALUE (ODQ §934.22 item 4). The ladder descended the rung-3
         * PILL and left the frozen VOCABULARIES in the case their producers declare them —
@@ -155,6 +176,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   const eco = r.economicState || {};
   const dp = r.defenseProfile || {};
   const scores = dp.scores || {};
+  const magicReliance = deriveMagicRelianceView(r);
   const via = r.economicViability || {};
   const sp = eco.safetyProfile || {};
   const hist = r.history || {};
@@ -220,7 +242,15 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
   // THE PRESSURE SENTENCE has one home per page: under a crisis it is the card's last line
   // (who controls the response, T1-3); with no crisis it stands alone in the dark box (T1-7),
   // and it yields when it is the notable connection's phrasing word for word (O-10).
-  const pressureLine = r?.pressureSentence && r.pressureSentence !== r?.prominentRelationship?.phrasing
+  // X-50 (BOILERPLATE ONCE): it also yields when it tells the same pair's story as the
+  // phrasing — the two share a sentence word for word under different openings — so the
+  // notable connection, which names the bond, keeps the fact's words.
+  const sentenceSet = (text) => new Set(String(text || '').split(/(?<=[.!?])\s+/)
+    .map(x => x.trim().replace(/[.!?]+$/, '')).filter(x => x.split(/\s+/).length >= 4));
+  const phrasingSentences = sentenceSet(r?.prominentRelationship?.phrasing);
+  const pressureShared = [...sentenceSet(r?.pressureSentence)].some(x => phrasingSentences.has(x));
+  const pressureLine = r?.pressureSentence && !pressureShared
+    && r.pressureSentence !== r?.prominentRelationship?.phrasing
     ? r.pressureSentence : null;
 
   // THE GENERAL DESK, read ONCE per render THROUGH ITS ONE CALLER. The reader holds the
@@ -286,7 +316,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         </div>
         {/* The Table View trigger, moved here from the removed DM Summary tab (X-5): the
             composer it opens stays, so a route to it must too. Router-gated on the flag. */}
-        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>Open in Table View</Button></div>}
+        {typeof onOpenTableView==='function'&&<div style={{marginTop:6}}><Button variant="ghost" size="sm" onClick={onOpenTableView} style={{padding:'2px 6px'}}>{TONIGHT_COPY.open}</Button></div>}
       </div>
       {/* THE ROUTING LINE (X-18) IS CUT (the owner, 2026-11-01, X-38): "sentences that are
           meta descriptive such as 'summary holds the glance…' … remove them. We're going to do
@@ -355,16 +385,17 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
           <StatusTag label="Safety" value={safetyBandOf(sp.safetyLabel) ?? sp.safetyLabel} accent={safetySeverityOf(sp.safetyLabel).color}/>
           <StatusTag label="Viability" value={via.viable===false?'Not Viable':via.viable===true?'Viable':EMPTY_VALUE} accent={via.viable===false?'#8b1a1a':via.viable===true?'#1a5a28':undefined}/>
           <StatusTag label="Defense" value={dp.readiness?.label} accent={dp.readiness?.color}/>
+          {/* RELIANCE ON MAGIC — THE ONE READING (lane MAGIC, chair ruling 2, 2026-11-03). A
+              "Magic Dependency" badge used to print here on `defenseProfile.magicDependency`, a
+              flag the defence generator sets only during a siege, famine or plague, so a city of
+              mages read no reliance while its Magic tab read "integral". This tag prints the view
+              model's one reading, in the word the Magic tab and Foundations print, and the shared
+              magic gate removes it where magic does not work. */}
+          {magicRowsGated(r, [{ key: 'magicReliance' }]).map(({ key }) => (
+            <StatusTag key={key} testId="overview-magic-reliance" label="Reliance on magic" value={magicReliance.word} accent={swatch.magic}/>
+          ))}
         </div>
 
-        {/* Magic dependency badge */}
-        {dp.magicDependency&&<div style={{display:'flex',alignItems:'center',gap:6,
-          background:swatch['#F8F0FF'],border:'1px solid #c0a0e0',
-          padding:'5px 10px',marginTop:6}}>
-          <span style={{fontSize:FS.sm,color:swatch.magic}}>✦</span>
-          <span style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.magic}}>Magic Dependency</span>
-          <span style={{fontSize:proseFontSize(FS.xxs,mobile),color:swatch['#7A4AAA'],flex:1}}>Resilience relies on magical infrastructure.</span>
-        </div>}
 
         {/* Score bars — 2-col grid */}
         <div style={{display:'grid',gridTemplateColumns:mobile?'1fr':'1fr 1fr',gap:'0 24px'}}>
@@ -376,18 +407,11 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
               Magical Capability (r=0.63 against Magical stability) and Food Security
               (r=-0.03) read different facts, so they stay. The four status tags above are
               the page's glance. */}
-          <ScoreRow label="Monster Defense" score={scores.monster}/>
-          <ScoreRow label="Economic Resilience" score={scores.economic}/>
-          {/* ⛔ THIS ROW IS THE WORLD'S MAGIC AS THE ENGINE SCORES IT, AND THAT IS A
-              DIFFERENT FACT FROM THE DEFENSE TAB'S ARCANE SUPPORT ROW. `scores.magical`
-              is driven by the world magic slider over a wide presence read, so a town with
-              no arcane institution can still score 49; the Defense row asks the narrow
-              question "is there a wizard, mage, alchemist or arcane academy here" and
-              answers None. For one landing the two rows shared the name `Magical
-              Capability` and this one borrowed the other's WORD, which put "None" in amber
-              beside a half-full bar on 27 of 144 large settlements. Two facts now carry two
-              names, and this row grades its own bar like every sibling above it. */}
-          <ScoreRow label="Magical Capability" score={scores.magical}/>
+          {/* ONE PREDICATE, ASKED ONCE (lane MAGIC, chair ruling 1): the bars are a LIST handed
+              to the shared magic gate, so the magic row steps aside where magic does not work,
+              as the generator's readiness average already does, and a row added here is asked
+              too. */}
+          {magicRowsGated(r, SYSTEMS_HEALTH_ROWS).map(({ key, label }) => <ScoreRow key={key} label={label} score={scores[key]}/>)}
           {/* Owner order (2026-07-22): the Enforcement Ratio (a raw safetyRatio
               float) is replaced by Food Security — a typed band from the food
               generator (economicState.foodSecurity.label / .color), the same

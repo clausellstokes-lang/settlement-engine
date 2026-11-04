@@ -19,6 +19,7 @@ import LivingWorldSignalRow from './LivingWorldSignalRow.jsx';
 import HealthPip from './HealthPip.jsx';
 import Button from '../primitives/Button.jsx';
 import AvailableAtLaunchPill from '../primitives/AvailableAtLaunchPill.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import { emblem } from '../../design/organic/ornament/compose.js';
@@ -484,18 +485,22 @@ export function SettlementCard({ s, allModifiers, onView, deleteId, setDeleteId,
               </Button>
               {/* AUDIT-2.2 — read-only extraction, always available on a frozen
                   save even without an active plan. Subordinate to the gold
-                  Reactivate: a quiet outline that never resumes the simulation. */}
-              <Button
-                variant="info"
-                size="sm"
-                onClick={handleExportFrozen}
-                disabled={exportBusy}
-                busy={exportBusy}
-                icon={<FileText size={12}/>}
-                title="Export this settlement as a PDF, yours to keep even while frozen"
-              >
-                {exportBusy ? 'Exporting…' : 'Export PDF'}
-              </Button>
+                  Reactivate: a quiet outline that never resumes the simulation.
+                  Before launch it is the launch teaser for every non-staff account
+                  (X-53, LaunchGatedExport). */}
+              <LaunchGatedExport>
+                <Button
+                  variant="info"
+                  size="sm"
+                  onClick={handleExportFrozen}
+                  disabled={exportBusy}
+                  busy={exportBusy}
+                  icon={<FileText size={12}/>}
+                  title="Export this settlement as a PDF, yours to keep even while frozen"
+                >
+                  {exportBusy ? 'Exporting…' : 'Export PDF'}
+                </Button>
+              </LaunchGatedExport>
             </>
           ) : (
             <>

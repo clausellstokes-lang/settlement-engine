@@ -701,3 +701,16 @@ describe('final coherence receipt coverage', () => {
     });
   });
 });
+
+describe('the world law reads its role vocabulary from the one magic leaf (WIRING-1 item 6)', () => {
+  it('MAGIC_ROLE_PATTERN lives in domain/magicAssertionText.js, verbatim, and generationContext declares no copy', async () => {
+    const { MAGIC_ROLE_PATTERN } = await import('../../src/domain/magicAssertionText.js');
+    expect(MAGIC_ROLE_PATTERN.source)
+      .toBe(String.raw`\b(?:archmag(?:e|ister)|artificer|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b`);
+    expect(MAGIC_ROLE_PATTERN.flags).toBe('i');
+    const fs = await import('node:fs');
+    const src = fs.readFileSync(new URL('../../src/generators/generationContext.js', import.meta.url), 'utf8');
+    expect(src, 'the context reads the pattern by its import').toMatch(/MAGIC_ROLE_PATTERN,/);
+    expect(src).not.toMatch(/const MAGIC_ROLE_PATTERN\s*=/); // anchored: the line above proves the source was read and names the pattern
+  });
+});

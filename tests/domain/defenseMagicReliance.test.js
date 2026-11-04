@@ -1,0 +1,74 @@
+/**
+ * Lane DEFENSE-2 (2026-11-03): the Defense tab and the defence record read the ONE magic reliance
+ * reading and the ONE practitioner census (lane MAGIC's `src/domain/magicReliance.js`).
+ *
+ * Before: the Arcane Support row asked a roster regex (`compound.inst.hasMagicInst`), so a village
+ * whose Magic tab read "integral" with a practising house printed "No arcane practitioners on the
+ * rolls"; the row printed in worlds where magic does not work; and the DS-DEF-9 reliance sentence
+ * keyed on `defenseProfile.magicDependency`, a flag the generator raised only in a siege, famine or
+ * plague. (The stored flag itself: tests/domain/defenseMagicDependencyRecord.test.js.)
+ *
+ * The seeds are born the way the app births a place: `birthConfig({ ...DEFAULT_CONFIG, ... })`
+ * after `loadGenerationLawPayloads()`.
+ */
+import { beforeAll, describe, expect, it } from 'vitest';
+
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveMagicReliance, magicPractitioners } from '../../src/domain/magicReliance.js';
+import { deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
+import { defenseMagicDependencyProse } from '../../src/domain/display/stateProse/defenseStateProse.js';
+import { expectAbsentWithAnchor } from '../helpers/anchoredNegatives.js';
+
+/** @param {string} tier @param {string} seed @param {object} [over] */
+const born = (tier, seed, over = {}) =>
+  generateSettlementPipeline(birthConfig({ ...DEFAULT_CONFIG, settType: tier, ...over }), null, { seed });
+
+/** @param {any} s */
+const arcaneRow = (s) => deriveSupportingCapabilities(s).find((c) => c.label === 'Arcane Support');
+
+/** @param {any} s */
+const reliesOnMagic = (s) => ['relied-upon', 'integral'].includes(deriveMagicReliance(s).reading);
+
+beforeAll(async () => {
+  await loadGenerationLawPayloads();
+});
+
+describe('the Arcane Support row reads the practitioner census', () => {
+  it('a village that practises (seed d2-magic-village-66-0) is Present, and its practitioner is named', () => {
+    const s = born('village', 'd2-magic-village-66-0', { magicExists: true, priorityMagic: 66 });
+    const practitioners = magicPractitioners(s);
+    expect(practitioners.length, 'the census finds a practitioner here').toBeGreaterThan(0);
+    const row = arcaneRow(s);
+    expect(row?.status, 'Arcane Support status').toBe('Present');
+    expect(row?.note, 'the note names the first practitioner').toContain(practitioners[0]);
+  });
+
+  it('a practising person counts: a Hedge Witch on the rolls of a village with no arcane house', () => {
+    const s = born('village', 'd2-magic-village-30-2', { magicExists: true, priorityMagic: 30 });
+    expect(magicPractitioners(s), 'no practitioner before the witch is added').toEqual([]);
+    expect(arcaneRow(s)?.note, 'the no-practitioner note before').toMatch(/^No arcane practitioners on the rolls/);
+    const npcs = [...(s.npcs || []), { name: 'Wenna Holt', role: 'Hedge Witch', status: 'active' }];
+    const row = arcaneRow({ ...s, npcs });
+    expect(row?.status, 'status with the witch on the rolls').toBe('Present');
+    expect(row?.note, 'the note names her').toContain('Wenna Holt');
+  });
+
+  it('where magic does not work there is no Arcane Support row at all', () => {
+    const s = born('town', 'd2-nomagic-town-0', { magicExists: false, priorityMagic: 0 });
+    expectAbsentWithAnchor(deriveSupportingCapabilities(s).map((c) => c.label), 'Arcane Support', 'Medical Readiness', 'the capability rows');
+  });
+});
+
+describe('the DS-DEF-9 reliance sentence keys on the reliance reading', () => {
+  it('a town that relies on magic (seed d2-magic-town-30-0) reads the same whatever the stored flag says', () => {
+    const s = born('town', 'd2-magic-town-30-0', { magicExists: true, priorityMagic: 30 });
+    expect(reliesOnMagic(s), 'the reading relies on magic').toBe(true);
+    const opts = { seed: 'd2', audience: 'dm', tierNoun: 'town' };
+    const withFlag = (flag) => defenseMagicDependencyProse(
+      { ...s, defenseProfile: { ...s.defenseProfile, magicDependency: flag } }, opts);
+    expect(withFlag(false), 'flag false reads as flag true').toEqual(withFlag(true));
+    expect(withFlag(true).arcaneReliance, 'and the sentence is drawn').not.toBe(null);
+  });
+});

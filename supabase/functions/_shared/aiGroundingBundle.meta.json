@@ -1,7 +1,7 @@
 {
-  "generatedAt": "2026-11-02T04:15:47.926Z",
+  "generatedAt": "2026-11-04T10:39:54.067Z",
   "entry": "src/domain/aiGrounding.js",
-  "sourceHash": "a5d6564397997c4c",
+  "sourceHash": "55e322ae29007e83",
   "inputs": [
     "src/data/constants.js",
     "src/data/entityTags.js",
@@ -12,6 +12,7 @@
     "src/domain/activeConditions.js",
     "src/domain/aiGrounding.js",
     "src/domain/arcaneIdentity.js",
+    "src/domain/arcaneInstitutionIdentity.js",
     "src/domain/arcaneInstitutionVocabulary.js",
     "src/domain/canonStatus.js",
     "src/domain/canonicalAccessors.js",
@@ -44,6 +45,7 @@
     "src/domain/magicAssertionText.js",
     "src/domain/magicLedger.js",
     "src/domain/magicProfile.js",
+    "src/domain/magicReliance.js",
     "src/domain/npcProfile.js",
     "src/domain/prosperityRank.js",
     "src/domain/regionalGraph.js",
@@ -62,6 +64,7 @@
     "src/domain/worldPulse/faithChannelBindings.js",
     "src/domain/worldPulse/heraldDeeds.js",
     "src/domain/worldPulse/intervalWeeks.js",
+    "src/domain/worldPulse/magicWorksAt.js",
     "src/domain/worldPulse/pulseHelpers.js",
     "src/domain/worldPulse/relationshipCompatibility.js",
     "src/domain/worldPulse/relationshipEvolution.js",

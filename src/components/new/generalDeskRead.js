@@ -37,6 +37,7 @@
 import { generalStateProse, GENERAL_STATE_PROSE_SILENT } from '../../domain/display/stateProse/generalStateProse.js';
 import { drawnAtMount } from '../../domain/display/stateProse/dossierMounts.js';
 import { resolvePrimaryStress } from '../../generators/stressPriority.js';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
 
 /**
  * The general desk's OVERVIEW positions. Bound once each: the registry's reachability arm
@@ -159,7 +160,7 @@ export function siteClause(sentence) {
  * THE READ. One desk call per render, gated, with every position's lines drawn.
  *
  * @param {object|null|undefined} settlement the record the tab already holds
- * @param {{tierNoun?: string|null, publicDossier?: boolean, playerView?: boolean,
+ * @param {{tierNoun?: string|null, tier?: unknown, publicDossier?: boolean, playerView?: boolean,
  *   stresses?: ReadonlyArray<{type?: unknown}|null>,
  *   hookCategories?: ReadonlyArray<unknown>|null,
  *   clockIds?: ReadonlyArray<unknown>|null,
@@ -273,8 +274,9 @@ export function generalDeskLines(settlement, options = {}) {
     {
       seed: String(r?._seed ?? r?.id ?? ''),
       audience: options.playerView ? 'player' : 'dm',
-      // FORWARDED, NEVER DERIVED — the sibling economy reader's note carries the reason.
-      tierNoun: options.tierNoun ?? null,
+      // FORWARDED, NEVER DERIVED — the sibling economy reader's note carries the reason, and
+      // why a screen forwards `tier` rather than a resolved noun (SIZE lane, 2026-11-03).
+      tierNoun: options.tierNoun ?? tierNounFor(options.tier),
     },
   );
 

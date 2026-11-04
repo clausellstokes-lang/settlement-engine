@@ -254,8 +254,10 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
     s.npcs = [{ id: 'n1', name: 'Old Mayor', role: 'Mayor (deposed)', factionAffiliation: 'Merchant Guild' }];
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
     const absence = screen.getByTestId('ruling-chain-absence');
-    expect(absence.textContent).toMatch(/The seat stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\./);
-    expect(screen.getByTestId('ruling-chain').textContent).toMatch(/the seat itself stands vacant/);
+    // The row's label is "The seat", so the line opens on the verb (lane RULERS: it read "The seat The seat stands empty").
+    expect(absence.textContent).toMatch(/^Stands empty; 2 claimants circle: Claimant Bloc A, Claimant Bloc B\./);
+    // The vacancy is said once, by the seat row (lane RULERS, chair ruling b): no faction-row clause.
+    expect(screen.getByTestId('ruling-chain').textContent.match(/stands (empty|vacant)/gi)).toHaveLength(1);
     expect(screen.queryByTestId('ruling-chain-npc')).toBeNull();
   });
 
@@ -299,7 +301,13 @@ describe('PowerTab — the §815 ruling chain ("Who runs this place?")', () => {
  * describe watches are drawn from generated state. Each absence is anchored on the same render.
  */
 describe('UX consolidation — Power (T2-17..T2-19)', () => {
-  const town = generateSettlementPipeline({ settType: 'town', tradeRouteAccess: 'road' }, null, { seed: 'power-u5-c', customContent: {} });
+  // Seed re-pointed power-u5-c → power-u5-t (TIPFIX, 2026-11-03): FOOD-2's base numbers
+  // (a7f13fef, foodBalance.js :: grownShareOf / hinterlandShareOf) moved power-u5-c's faction
+  // powers so its underworld no longer reaches equilibrium (Thieves' Guild 6 vs Guild Council 15:
+  // adversarial). power-u5-t is the first power-u5-<a..z> town that keeps every premise below
+  // (equilibrium capture, the faction IS the power, conflicts and tensions present) with the same
+  // desk arms drawing as power-u5-c drew before (no capture reading; lens, hold, title, blocs).
+  const town = generateSettlementPipeline({ settType: 'town', tradeRouteAccess: 'road' }, null, { seed: 'power-u5-t', customContent: {} });
   const desk = (playerView = false) => powerStateProse(town, {
     ...(coupContenders(town) ? { contenders: coupContenders(town), riskLabel: coupRiskLabel(coupContenders(town)) } : {}),
     structuralLens: structuralLensOf(town),

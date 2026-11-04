@@ -95,6 +95,7 @@
 import { MONSTER_THREAT_TIERS, normalizeMonsterThreat } from '../../../data/monsterThreat.js';
 import { standingDefenseForces } from '../../institutions/defenseInstitutionBuckets.js';
 import { magicWorksAt } from '../../worldPulse/magicWorksAt.js';
+import { deriveMagicReliance } from '../../magicReliance.js';
 import { SMALL_TIERS, TOWN_PLUS_TIERS } from '../../../data/constants.js';
 import { scoreBand } from '../defenseScoreBands.js';
 import { DEFENSE_STRESS_STATUS } from '../defenseDisplay.js';
@@ -616,9 +617,12 @@ export function defenseThreatProse(settlement, options = {}) {
       civicFlag(compound.hasCourtSystem), civicFlag(compound.hasPrison),
     )),
     economic: rung(economicRowPoolKey(dp.scores?.economic)),
-    disaster: rung(disasterRowPoolKey(
-      civicFlag(compound.hasGranary), civicFlag(compound.hasHospital), civicFlag(compound.hasChurch),
-    )),
+    // ⛔ SILENT BY THE OWNER'S WORD (2026-11-03, verbatim: "Do add storehouse months the economy
+    // tab."), the chair's ruling amending lane DEFENSE's brief: the Defense tab prints NO
+    // stored-food or granary sentence; stored food is the Economy tab's, once, in months. Every
+    // variant of this row's five pools speaks of the granary or the stores, so the lens is not
+    // drawn on any Defense surface. The key function and its pools stand, unread here.
+    disaster: null,
   });
 }
 
@@ -1522,10 +1526,10 @@ export function defenseSupportingProse(settlement, options = {}) {
     : null);
 
   return Object.freeze({
-    logistics: rung(supplyLogisticsPoolKey(
-      civicFlag(compound.hasGranary), civicFlag(compound.hasPort),
-      settlement?.config?.tradeRouteAccess,
-    )),
+    // ⛔ SILENT BY THE OWNER'S WORD (2026-11-03): stored food leaves the Defense tab entirely and
+    // is printed once, in months, on the Economy tab. The logistics lens IS the granary read, so
+    // it is not drawn here; `supplyLogisticsPoolKey` and its pools stand, unread by this desk.
+    logistics: null,
     naval: rung(navalDefensePoolKey(
       civicFlag(compound.hasNavy), civicFlag(compound.hasPort),
       stockpile ? stockpile.blockaded === true : false,
@@ -1543,6 +1547,8 @@ export function defenseSupportingProse(settlement, options = {}) {
  * gives the paragraph the town's own voice beside the generator's.
  *
  * ── ⭐ REACHABILITY, MEASURED OVER GENERATED WORLDS RATHER THAN ASSUMED ─────────────
+ * ⚠ SUPERSEDED 2026-11-03 (lane DEFENSE-2): the stored flag is now the one magic reliance
+ * reading, and this desk keys on that reading; the census below describes the earlier producer.
  * `defenseProfile.magicDependency` is written by `defenseGenerator.js :: computeDefenseScores` as
  * `magicOn && ((under_siege && (arcane||druid||divine)) || (famine && (druid||divine)) ||
  * (plague_onset && (divine||alchemy)) || (arcaneGuild && (under_siege||famine)))`, and the
@@ -1616,6 +1622,18 @@ export function hasNamedMagicChain(activeChains) {
 }
 
 /**
+ * Does this place rely on magic? The one reading (`magicReliance.js :: deriveMagicReliance`) at
+ * relied-upon or integral; the same answer the defence generator stores as `magicDependency`.
+ * @param {object} settlement @returns {boolean}
+ */
+function reliesOnMagic(settlement) {
+  const { reading } = deriveMagicReliance(
+    /** @type {import('../../magicReliance.js').MagicRelianceSource} */ (settlement),
+  );
+  return reading === 'relied-upon' || reading === 'integral';
+}
+
+/**
  * DS-DEF-9's pool key. Total over the producer's boolean; silent when it is absent.
  * @param {unknown} magicDependency @param {boolean} namedChain @returns {string|null}
  */
@@ -1666,9 +1684,12 @@ export function defenseMagicDependencyProse(settlement, options = {}) {
     settlement: properFill(text(settlement?.name)),
     good: namedMagicChainGood(chains),
   };
-  const poolKey = magicDependencyPoolKey(
-    settlement?.defenseProfile?.magicDependency, hasNamedMagicChain(chains),
-  );
+  // ⛔ THE KEY IS THE ONE RELIANCE READING (lane DEFENSE-2, 2026-11-03, lane MAGIC's request):
+  // relied-upon or integral reads "depends on magic", anything else does not, so this sentence
+  // and the Magic tab's reading cannot disagree.
+  const poolKey = settlement
+    ? magicDependencyPoolKey(reliesOnMagic(settlement), hasNamedMagicChain(chains))
+    : null;
 
   return Object.freeze({
     arcaneReliance: poolKey

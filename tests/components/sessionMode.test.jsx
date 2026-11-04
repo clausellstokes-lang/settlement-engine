@@ -67,8 +67,18 @@ describe('SessionMode — run-of-play composition', () => {
     );
     expect(container.textContent).toContain('The granaries are watched day and night.');
     expect(container.textContent).toContain('Serah Voss');
-    expect(container.textContent).toContain('taps her scabbard when lying');
+    expect(container.textContent).toContain('iron-spined');
     expect(container.textContent).toContain('A midnight muster nobody ordered');
+  });
+
+  it('X-48: no NPC nervous habit prints on the session screen; the temperament stands in its place', () => {
+    const { container } = render(
+      <SessionMode settlement={settlementFixture()} saveId="11" onClose={() => {}} />,
+    );
+    const text = container.textContent;
+    // the card rendered: the name and the temperament are on the page
+    expect(text.includes('Serah Voss') && text.includes('iron-spined')).toBe(true);
+    expect(text.includes('taps her scabbard when lying'), 'the tell printed').toBe(false);
   });
 
   it('shows the four-dimension state bands when the store carries systemState', () => {
@@ -157,6 +167,22 @@ describe('SessionMode — the constitutional faith seam', () => {
     );
     expect(container.querySelector('#sf-session-faith')).toBeNull();
     expect(screen.queryByRole('button', { name: 'Faith' })).toBeNull();
+  });
+
+  it('PREMIUM + deity-free + a church: the Faith section stays and says the church, not faithless', () => {
+    useStore.__set({ auth: { tier: 'premium' } });
+    const { container } = render(
+      <SessionMode
+        settlement={settlementFixture({ config: {}, institutions: [{ name: 'Parish church', category: 'Religious' }] })}
+        saveId="11"
+        onClose={() => {}}
+      />,
+    );
+    const section = container.querySelector('#sf-session-faith');
+    expect(section).not.toBeNull();
+    expect(screen.getByRole('button', { name: 'Faith' })).toBeTruthy();
+    expect(section.textContent).toMatch(/church/i);
+    expect(section.textContent).not.toContain('quiet observances'); // anchored: the line above reads the church in this same section
   });
 
   it('FREE viewer: deity-event narration is dropped from the recent-events tail', () => {

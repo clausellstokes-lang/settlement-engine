@@ -562,7 +562,7 @@ const requireDistRead = process.env.VERIFY_DIST === '1';
 // terms with their costs): **"do what you recommend"** — and the recommendation on the table
 // was this raise. Ledger §880.8; the seam is RECORDED AS PRICED AND NOT TAKEN, its prototype
 // kept out of the tree. Monotone-down and owner-signed discipline unchanged.
-const CLOSURE_BUDGET_BYTES = 1_048_068; // 2026-11-02: re-recorded at the measured figure, the chair's ruling, vetoable by the owner (note at file end)
+const CLOSURE_BUDGET_BYTES = 1_037_485; // 2026-11-04: banked DOWN to the measured final-tip closure, REGISTERS door 13 (note at file end)
 // Transfer budgets measure each fetched chunk independently, matching CDN
 // compression rather than compressing an artificial concatenation. Recorded
 // 2026-07-24 from the seven-file closure: raw 1,034,954; gzip 321,341;
@@ -592,8 +592,8 @@ const CLOSURE_BUDGET_BYTES = 1_048_068; // 2026-11-02: re-recorded at the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 337_000;
-const CLOSURE_BROTLI_BUDGET_BYTES = 283_000;
+const CLOSURE_GZIP_BUDGET_BYTES = 336_286; // 2026-11-04: measured 331,316 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
+const CLOSURE_BROTLI_BUDGET_BYTES = 282_346; // 2026-11-04: measured 278,173 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1766,9 +1766,9 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 // ratification histories above each constant are the record of what that costs.
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
-    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_048_068);
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(337_000);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(283_000);
+    expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_037_485);
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
@@ -1864,3 +1864,20 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 // BACK FIRST: the eight flat LAUNCH_* aliases no app module read left the legacy object and the theme shim, -344 B
 // (tokens.js -224, theme.js -120), measured 1,048,068 B; launchSkin, the Button's skin branch and every colour key
 // are untouched. The budget is re-recorded at that measured figure and never above it. Monotone-down from here.
+// ── (2026-11-04, THE COHERENCE WINDOW'S COMPOSED TIP, REGISTERS-5 door 13) ALL THREE BUDGETS BANKED DOWN TO THE MEASURED
+//    CLOSURE (for the three constants above and their ARCH car 2 pin) ──
+// FIRSTPAINT's cure (1ff1a1c4b, src/store/aiSlice.js :: captureAiPolished: the research capture goes through import()) took
+// the closure from 1,073,142 to 1,030,313. The DOORS compose 8cd65978e then added +7,172 (engine-core +7,223, index -51).
+// Nothing moves after it. A fresh `vite build` at the lane tip, measured with this file's own closure walk and compression
+// settings across the same eight chunks, reads raw 1,037,485, gzip 331,316 and Brotli 278,173. The chair's ruling
+// (briefs/REGISTERS.md item 13: "record the three budgets DOWN to the figures measured at the final tip") banks all three
+// AT those figures: 1,048,068 -> 1,037,485 (-10,583), 337,000 -> 331,316 (-5,684), 283,000 -> 278,173 (-4,827).
+// ⚠ The 2026-09-01 note above REFUSED this same lowering for gzip and Brotli, because their ~1.5 % margin absorbs a zlib-version
+// bump. At zero margin a toolchain upgrade that shifts the compressed bytes reds this pair with no payload change. That cost
+// is named here for the chair, who ruled the lowering and holds its veto. Monotone-down from here; raises stay owner-signed.
+// ── (2026-11-04, REGISTERS-6 ruling E2) THE gzip AND Brotli MARGIN RESTORED, BY THE 2026-09-01 NOTE'S OWN RULE ──
+// The chair ruled on the ⚠ above: the register's own rule governs, as with prose-numerics. The 2026-09-01 note refuses a
+// zero margin on the compressed pair because ~1.5 % absorbs a zlib-version bump; it objects to nothing on the raw arm. So the
+// two compressed budgets are the measured closure x 1.015, rounded up to the byte: gzip 331,316 -> 336,286, Brotli
+// 278,173 -> 282,346. Both stay BELOW the 2026-09-01 figures (337,000 / 283,000), so nothing is raised against an
+// owner-signed ceiling. The raw budget stays at the measured 1,037,485. The ARCH car 2 pin moves with them.

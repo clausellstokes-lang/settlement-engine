@@ -146,9 +146,11 @@ export function defenseSlice(active) {
   // institutions (the source the web Defense tab uses), each carrying an
   // enforcement note; criminalStructure classifies the overall organization.
   const criminalCapture = s?.powerStructure?.criminalCaptureState || sp?.criminalCapture || null;
-  const criminalOps = (sp?.criminalInstitutions || []).map((name) => ({
+  // X-50 (BOILERPLATE ONCE): two operations that fall to the same note (the catch-all, or two
+  // names one rule matches) carry it on the first only, as the screen Defense tab prints it.
+  const criminalOps = (sp?.criminalInstitutions || []).map((name, i, all) => ({
     name,
-    note: criminalOpNote(name),
+    note: all.slice(0, i).some((prev) => criminalOpNote(prev) === criminalOpNote(name)) ? null : criminalOpNote(name),
   }));
   const criminalStructure = deriveCriminalStructure(s);
   const criminalFaction = (s?.powerStructure?.factions || s?.factions || []).find(f => (f?.category || '').toLowerCase() === 'criminal') || null;

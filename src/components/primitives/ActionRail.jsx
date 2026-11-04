@@ -19,9 +19,10 @@
  */
 
 import { useState } from 'react';
-import { FS, swatch, GOLD_DEEP, INK, CARD, BORDER, PARCH } from '../theme.js';
+import { FS, swatch, GOLD_DEEP, INK, CARD, BORDER, PARCH, launchSkin } from '../theme.js';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 import Card from './Card.jsx';
+import LaunchGatedExport from './LaunchGatedExport.jsx';
 import { useIconsOn } from './IconsContext.js';
 import useIsMobile from '../../hooks/useIsMobile.js';
 import { chromeFontSize } from '../../design/proseScale.js';
@@ -38,6 +39,7 @@ const VISIBLE_CAP = 5;
  * @property {React.ComponentType<{size?:number}>=} Icon
  * @property {boolean=} disabled
  * @property {string=}  disabledReason     accessible explanation
+ * @property {boolean=} exportGate         an export: LaunchGatedExport decides whether it is the launch teaser (X-53)
  * @property {() => void} onClick
  */
 
@@ -68,7 +70,9 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
   return (
     <Card kicker={title} compact>
       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-        {visible.map(it => <ActionRow key={it.id} item={it} />)}
+        {visible.map(it => (it.exportGate
+          ? <LaunchGatedExport key={it.id} block><ActionRow item={it} /></LaunchGatedExport>
+          : <ActionRow key={it.id} item={it} />))}
         {overflow > 0 && (
           <button
             type="button"
@@ -92,18 +96,29 @@ export default function ActionRail({ title = 'Next best action', items = [] }) {
   );
 }
 
-function ActionRow({ item }) {
+/**
+ * @param {{ item: ActionRailItem, launch?: boolean, 'aria-describedby'?: string }} props
+ *   launch / aria-describedby / the rest: from LaunchGatedExport when the row is the launch teaser
+ */
+function ActionRow({ item, launch = false, 'aria-describedby': gateDescribedBy, ...gateProps }) {
   const mobile = useIsMobile();
   const Icon = item.Icon;
   const iconsOn = useIconsOn();
-  const tone = item.primary ? primaryTone : secondaryTone;
+  // The launch teaser (X-53) wears the launch skin: the glossed purple ground, its edge, and
+  // the label in the shimmering gold letters.
+  const tone = launch
+    ? { bg: launchSkin.ground, fg: launchSkin.ink, border: launchSkin.border }
+    : item.primary ? primaryTone : secondaryTone;
+  const describedBy = [item.hint ? `${item.id}-hint` : null, gateDescribedBy].filter(Boolean).join(' ') || undefined;
   return (
     <button
       type="button"
       onClick={item.onClick}
       disabled={item.disabled}
       aria-label={item.label}
-      aria-describedby={item.hint ? `${item.id}-hint` : undefined}
+      aria-describedby={describedBy}
+      data-skin={launch ? 'launch' : undefined}
+      {...gateProps}
       title={item.disabled && item.disabledReason ? item.disabledReason : item.label}
       style={{
         // S2r-c materials: rule-framed, not rounded — the deep-craft flat idiom
@@ -129,7 +144,7 @@ function ActionRow({ item }) {
       )}
       <span style={{ flex: 1, minWidth: 0 }}>
         <span style={{ display: 'flex', alignItems: 'baseline', gap: 6, flexWrap: 'wrap' }}>
-          <span>{item.label}</span>
+          <span style={launch ? launchSkin.shimmer : undefined}>{item.label}</span>
           {item.tag && (
             <span
               style={{

@@ -4,9 +4,9 @@ exports[`pdf.6 — golden snapshot of the SHARED_FIELDS canon values > canon val
 {
   "defense.readinessLabel": "Well-Defended",
   "defense.scoreAvg": 66,
-  "food.deficit (lb/day)": 97,
-  "food.deficitPct (residual deficit ÷ daily need)": 1,
-  "food.surplus (lb/day)": 0,
+  "food.deficit (lb/day)": 0,
+  "food.deficitPct (residual deficit ÷ daily need)": 0,
+  "food.surplus (lb/day)": 547,
   "headcounts.factions": 6,
   "headcounts.institutions": 58,
   "headcounts.npcs": 10,

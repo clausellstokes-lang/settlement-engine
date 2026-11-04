@@ -9,7 +9,7 @@ import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
-import { PowerStrata } from './power/PowerStrata.jsx';
+import { PowerStrata } from './power/PowerStrata.jsx'; import { FRACTURE_PANEL_LINE } from '../../../domain/dossier/powerStrata.js'; // X-50: one line, so no cited line moves
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { governingFactionOf } from '../../../domain/rulingPower.js';
@@ -129,12 +129,12 @@ function RulingChainBlock({ settlement }) {
         </ChainRow>
       )}
       {/* T2-17 (R2): the faction row restated the power's own name on 1000/1000 towns; it renders only when
-          the seat stands vacant or another faction holds it (vacant first: factionNamePrecedenceScan). */}
-      {chain.faction && (chain.faction.vacant || chain.faction.name !== chain.power?.name) && (
+          another faction holds the seat. A vacancy is said ONCE, by the seat row's "Stands empty" (lane RULERS,
+          chair ruling b, X-50: every fact said once); its ", but the seat itself stands vacant" clause is gone. */}
+      {chain.faction && chain.faction.name !== chain.power?.name && (
         <ChainRow label="The faction">
           <strong>{chain.faction.name}</strong>
-          {` holds the governing seat`}
-          {chain.faction.vacant && <span style={{color:swatch['#8B1A1A'],fontWeight:700}}>{', but the seat itself stands vacant'}</span>}.
+          {` holds the governing seat`}.
         </ChainRow>
       )}
       {chain.npc && (
@@ -338,7 +338,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               })()}
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
-                  <strong>Governance fractured.</strong> Real decisions are being made informally.
+                  <strong>Governance fractured.</strong> {FRACTURE_PANEL_LINE}
                 </div>
               )}
             </div>
@@ -416,7 +416,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         setExpandedFaction={setExpandedFaction}
         focusIndex={focusIndex}
         focusedRowRef={focusedRowRef}
-        showCoupChip={!coupRiskSpoken}
+        showCoupChip={!coupRiskSpoken} shownOnTab={leg?.governanceFractured ? [FRACTURE_PANEL_LINE] : []}
       />
 
       {/* ── RULING STRUCTURE (DS-POW-5) ──────────────────────────────────────

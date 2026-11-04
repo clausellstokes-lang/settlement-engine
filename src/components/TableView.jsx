@@ -3,13 +3,10 @@
  *
  * A ~380px single-column takeover for running a settlement live during a
  * session. Where the dossier is the wide read-at-home surface, this is the
- * glance-at-your-phone surface: the name, the one-line tension, the people
- * you'll voice tonight, the hook you'll drop, the twist you're holding, and
- * the one thing NOT to mention.
- *
- * Content reuses the same compact guide as Summary, Session Mode, and PDF for
- * identity, defining truths, and pressure. The richer table-entry composer
- * remains underneath for twists and red flags that are valuable during play.
+ * glance-at-your-phone surface, and its body is THE ONE TONIGHT SHEET (X-51):
+ * the active crisis, the people to voice, the two facts the players test first,
+ * and the hooks (components/TonightSheet.jsx over composeTonightSheet). The old
+ * Quick Guide and "Tonight at the table" no longer print here.
  *
  * Presentational + a close affordance:
  *   props.settlement — the settlement to run (raw or AI-refined; caller picks)
@@ -21,20 +18,19 @@
  * unconditionally when present.
  */
 
-import { literaryTitle, tokenCase } from './new/labelLadder.js';
 import { useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
-import { tonightAtTheTable, prosperityLabel, TABLE_KIND_LABEL } from '../domain/summary/tonightAtTheTable.js';
-import { composeSettlementQuickGuide } from '../domain/summary/settlementQuickGuide.js';
+import { prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
+import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import TonightSheet from './TonightSheet.jsx';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
-import IconButton from './primitives/IconButton.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import useIsMobile from '../hooks/useIsMobile.js';
-import { chromeFontSize, proseFontSize } from '../design/proseScale.js';;
+import { chromeFontSize } from '../design/proseScale.js';
 
 // THE LANTERN TABLE (C14) — the desk by night (reference plate 04): a warm umber
 // ground, cream ink, the four cheat-sheet kinds lit as lamp tones. The header
@@ -56,12 +52,12 @@ const FIELD_RULE = FIELD_INK.hairline; // #5A4E38 — the feint rule tone on the
 const serif = '"Crimson Text", Georgia, serif';
 const sans = '"Nunito", system-ui, sans-serif';
 
-// The four lamp-tone kind accents (moss/gold/slate/ember), legible on UMBER_CARD.
-const KIND_ACCENT = LAMP_ACCENTS;
-// DISPLAY words only — the model tokens are untouched. The map moved to the domain module
-// that owns the kind union (ODQ §934.22 item 4) because SessionMode rendered the raw token
-// beside this one's word; its docblock carries the reasons the words are what they are.
-const KIND_LABEL = TABLE_KIND_LABEL;
+// The lantern table's palette for the one Tonight sheet: cream ink on the umber desk, the
+// lamp tones for the crisis (ember) and the section eyebrows (gold).
+const NIGHT_PALETTE = Object.freeze({
+  ink: CREAM, body: CREAM_BODY, faint: CREAM_FAINT, rule: FIELD_RULE, card: UMBER_CARD,
+  alarm: LAMP_ACCENTS.RED, accent: LAMP_ACCENTS.HOOK,
+});
 
 export default function TableView({ settlement, onClose }) {
   // Shared modal focus management (M12): focus-in on open, Tab/Shift+Tab cycling
@@ -69,12 +65,10 @@ export default function TableView({ settlement, onClose }) {
   // Replaces the hand-rolled Escape-only listener — a full-screen aria-modal
   // dialog with no trap leaked keyboard focus to the obscured app behind it.
   const dialogRef = useDialogFocusTrap(true, onClose);
-  // THE PHONE PROSE FLOOR — this is the glance-at-your-phone surface, so its
-  // READING text takes the floor below the breakpoint: the identity sentence,
-  // the defining truths, the empty state and the card bodies. The name, the
-  // identity strip, the truth labels, the stressor chips and the kind tags keep
-  // their own steps — they are glanced at, and they are what makes the prose
-  // findable. On a desktop the 380px column is unchanged.
+  // THE PHONE PROSE FLOOR — this is the glance-at-your-phone surface; the Tonight
+  // sheet's reading text takes the floor below the breakpoint (TonightSheet.jsx),
+  // and the header strip keeps its own glance steps. On a desktop the 380px
+  // column is unchanged.
   const mobile = useIsMobile();
 
   // FIELD MODE wake lock (Organic Craft law §7 — the cook-mode pattern): while
@@ -103,13 +97,7 @@ export default function TableView({ settlement, onClose }) {
     };
   }, []);
 
-  const guide = useMemo(
-    () => composeSettlementQuickGuide(settlement),
-    [settlement],
-  );
-  const entries = useMemo(() => tonightAtTheTable(settlement), [settlement]);
-  const stressors = Array.isArray(settlement?.stressors) ? settlement.stressors : [];
-  const pressure = guide.immediatePressure.text;
+  const sheet = useMemo(() => composeTonightSheet(settlement), [settlement]);
   // components-dossier-library-3: prosperity is a STRING label, not a { tier }
   // object — the tolerant read is the SummaryTabV2 sibling.
   const prosperity = prosperityLabel(settlement?.economicState?.prosperity);
@@ -132,7 +120,7 @@ export default function TableView({ settlement, onClose }) {
         ref={dialogRef}
         role="dialog"
         aria-modal="true"
-        aria-label={`Table view: ${settlement?.name || 'settlement'}`}
+        aria-label={`${TONIGHT_COPY.title}: ${settlement?.name || 'settlement'}`}
         tabIndex={-1}
         style={{
           width: '100%', maxWidth: 380,
@@ -171,13 +159,8 @@ export default function TableView({ settlement, onClose }) {
             </div>
           </div>
           <div style={{ flexShrink: 0 }}>
-            <IconButton
-              Icon={X}
-              label="Close table view"
-              onClick={onClose}
-              tone="ghost"
-              size="lg"
-            />
+            {/* THE HOUSE DOOR (ODQ §934.31): the one close primitive, named "Close Tonight" as before. */}
+            <DialogClose onClose={onClose} subject={TONIGHT_COPY.title} />
           </div>
         </header>
 
@@ -188,137 +171,18 @@ export default function TableView({ settlement, onClose }) {
           padding: '14px 16px',
           display: 'flex', flexDirection: 'column', gap: 14,
         }}>
-          {/* Canonical first glance — the same facts lead every compact surface. */}
-          <div>
-            <div style={{
-              fontFamily: serif, fontSize: proseFontSize(FS.md, mobile),
-              color: CREAM, lineHeight: 1.5,
-            }}>
-              {guide.identitySentence}
-            </div>
-            <div style={{
-              display: 'flex', flexDirection: 'column',
-              gap: 5, marginTop: 8,
-            }}>
-              {guide.definingTruths.map((truth) => (
-                <div key={truth.id} style={{
-                  paddingLeft: 8,
-                  borderLeft: `2px solid ${FIELD_RULE}`,
-                }}>
-                  <span style={{
-                    ...literaryTitle(FS.xs),
-                    color: CREAM_FAINT, marginRight: 5,
-                  }}>
-                    {tokenCase(truth.label)}
-                  </span>
-                  <span style={{
-                    fontSize: proseFontSize(FS.xs, mobile), color: CREAM_BODY, lineHeight: 1.45,
-                  }}>
-                    {truth.text}
-                  </span>
-                </div>
-              ))}
-            </div>
-            {/* ECONOMY FRESHNESS (Wave R-4) — this surface makes TWO economy
-                claims from the generation-time read-model: the identity strip's
-                prosperity label, and the "How it lives" defining truth
-                (composeMaterialTruth's prosperity / food security / exports
-                fold). Neither is re-derived when an event lands, so the shared
-                note qualifies them here. CREAM_FAINT, not the parchment MUTED:
-                this is the lantern-table dark ramp. Conditional, so an
-                un-shifted settlement renders byte-identically. */}
-            <EconomyFreshnessNote
-              settlement={settlement}
-              variant="tallies"
-              margin="10px 0 0"
-              color={CREAM_FAINT}
-            />
-          </div>
-
-          {/* Tension line */}
-          {pressure && (
-            <div style={{
-              padding: '10px 12px',
-              background: UMBER_CARD,
-              border: `1px solid ${FIELD_RULE}`,
-              borderLeft: `3px solid ${LAMP_ACCENTS.HOOK}`,
-              fontFamily: serif, fontSize: FS.lg, fontStyle: 'italic',
-              color: CREAM, lineHeight: 1.5,
-            }}>
-              {pressure}
-            </div>
-          )}
-
-          {/* Stressor chips */}
-          {stressors.length > 0 && (
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
-              {stressors.map((s, i) => (
-                <span key={i} style={{
-                  fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
-                  color: LAMP_ACCENTS.RED, background: 'transparent',
-                  border: `1px solid ${LAMP_ACCENTS.RED}`,
-                  padding: '3px 8px',
-                }}>
-                  {s.label || s.type}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Tonight at the table */}
-          <div>
-            <div style={{
-              fontSize: chromeFontSize(FS.micro, mobile), fontWeight: 800,
-              letterSpacing: '0.14em', textTransform: 'uppercase',
-              color: LAMP_ACCENTS.HOOK, marginBottom: 8,
-            }}>
-              Tonight at the table
-            </div>
-
-            {entries.length === 0 ? (
-              <div style={{
-                fontSize: proseFontSize(FS.sm, mobile), color: CREAM_FAINT, fontStyle: 'italic', lineHeight: 1.5,
-              }}>
-                No table-night entries derived yet. Generate a richer settlement
-                or run the narrative layer.
-              </div>
-            ) : (
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-                {entries.map((row, i) => {
-                  const accent = KIND_ACCENT[row.kind] || CREAM_FAINT;
-                  return (
-                    <div key={i} style={{
-                      padding: '10px 12px',
-                      background: UMBER_CARD,
-                      border: `1px solid ${FIELD_RULE}`,
-                      borderLeft: `4px solid ${accent}`,
-                    }}>
-                      <div style={{
-                        display: 'flex', justifyContent: 'space-between',
-                        alignItems: 'baseline', gap: 8, marginBottom: 3,
-                      }}>
-                        <span style={{
-                          fontFamily: serif, fontWeight: 700, fontSize: FS.md,
-                          color: CREAM, minWidth: 0,
-                        }}>
-                          {row.title}
-                        </span>
-                        <span style={{
-                          fontSize: chromeFontSize(FS.nano, mobile), fontWeight: 800,
-                          color: accent, letterSpacing: '0.08em', flexShrink: 0,
-                        }}>
-                          {KIND_LABEL[row.kind] || row.kind}
-                        </span>
-                      </div>
-                      <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: CREAM_BODY, lineHeight: 1.5 }}>
-                        {row.body}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+          <TonightSheet sheet={sheet} palette={NIGHT_PALETTE} />
+          {/* ECONOMY FRESHNESS (Wave R-4) — the header's prosperity label and the sheet's food
+              fact are generation-time reads of the economy; neither is re-derived when an event
+              lands, so the shared note qualifies them here. CREAM_FAINT, not the parchment MUTED:
+              this is the lantern-table dark ramp. Conditional, so an un-shifted settlement renders
+              byte-identically. */}
+          <EconomyFreshnessNote
+            settlement={settlement}
+            variant="tallies"
+            margin="0"
+            color={CREAM_FAINT}
+          />
 
           <div style={{
             marginTop: 'auto', paddingTop: 6,

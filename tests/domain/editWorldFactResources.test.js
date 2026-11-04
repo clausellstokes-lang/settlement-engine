@@ -112,16 +112,16 @@ const FIXED = Object.freeze([0, 21, 42]);
  */
 const PRE_CHANGE = Object.freeze({
   0: Object.freeze({
-    derived: '2d6f74d83e2d11ac28f968b26add256bd6d7cb6ad30a58742c120867672e92c1',
-    replay: '051a74a765060065d71e81652a87cb6ce60f7bd7a873d96b07b3d1a659c5d204',
+    derived: '40def4c8423c97a47c1faf94670d6e25ca4b106a2973da69545ecf42aa65aa8d',
+    replay: 'fddc250403f880ad57ea6b30675e45458ec22cef8af93b69d293aa57d6de9d59',
   }),
   21: Object.freeze({
-    derived: '67a3cc18596429f43bf1d98abfae28d6900b1a527b65d70d08015545b0ae9529',
-    replay: '40919b8e2db83f61ec7d313aedac39e1298856113e39339c830f663842d08d25',
+    derived: 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51',
+    replay: '8c3c4148f1646dd7276d3abfcd699fb50c3c91d7fb9ed95a128c319a014f6c4c',
   }),
   42: Object.freeze({
-    derived: 'c34b6b57a40ea89a6ecae273136f26b6ca85916fc84a17fc6e8c852246a60f27',
-    replay: '8e15ee00bd22dddc53acb02f8146759e5646218e93ca5b491753dbb068914556',
+    derived: 'ec40b473b0753c6f7ded3d3c94d516f65aa93ba737b7467c53d15a8d40b0fe36',
+    replay: '333b3b850a0144e3074f9c9650fe8c6864497944329ee208ba78b958ab385117',
   }),
 });
 // ── RE-CAPTURED 2026-10-01, the urban band (ODQ §934.86), BY THE SAME PLANT AND NEVER FROM THE LIVE STEP ALONE ─────
@@ -180,6 +180,14 @@ describe('EM-B2b2 — the DM\'s nearby-resources word survives resolveResources'
 // at the lane's committed tip (the detached worktree wt-G3-plant, never this checkout, restored afterwards), and the planted
 // step and the live step produced the SAME six digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's
 // `derived` is the re-recorded golden's control row (the GS-1 golden re-record).
+// ── RE-CAPTURED 2026-11-04, the coherence and scale window (ODQ §934.104), BY THE SAME PLANT (REGISTERS seat, the chair's
+// ruling 4) ──────────────────────────────────────────────────────────────────────────────────────────────────────────────
+// All three rows moved (six digests) from FOOD-1 (the food base numbers) onward, traced by stage in DOORS-4; the window's
+// later shifts (FOOD-2/3, SIZE, DEFENSE-2) moved them again under their signed records. Re-captured as above: the
+// pre-EM-B2b2 step (fetched raw at dde845c15^, sha256 62e16d59...) planted over a COPY of this tree at the composed tip
+// 8cd65978e (a scratchpad copy, never this checkout), and the planted step and the live step produced the SAME six
+// digests, so EM-B2b2 still moves no byte of the no-edit path. Row 21's `derived` is the re-recorded golden's control row
+// (b1b9502a, generationForkCensus GOLDEN_CONTROL_HASH after DOORS record 9).
 
     const layer = layerOf([[ROOT_KEY, [...DM_ROSTER]]]);
 

@@ -49,11 +49,12 @@ export function readinessBandOf(readiness) {
   return READINESS_BANDS[READINESS_BANDS.length - 1];
 }
 
-/** FOOD SECURITY — THE LABEL LADDER. OPEN below (> cut), famine first, surplus last.
- *  ⚠ TWO LADDERS ON PURPOSE TODAY: the FLAG table below cuts the same number differently
- *  (deficit at 20, not 15), so deficitPct in (15, 20] labels Import-Dependent beside
- *  isPressured. The owner has been asked whether to unify them (ODQ §934.57's family).
- *  ⛔ NOTHING HERE RECONCILES THEM — folding them would move the golden. */
+/** FOOD SECURITY — THE ONE LADDER. OPEN below (> cut), famine first, surplus last.
+ *  ONE SET OF CUT-OFFS (FOOD-1, chair ruling 1, 2026-11-03, by the owner's delegation of
+ *  2026-11-03; it answers ODQ §934.57's family): the label, the flags below, the prosperity
+ *  modifier (foodGenerator.js :: foodProsperityModOf), the viability verdicts and the economy
+ *  situation sentence all cut the gap HERE. The flag ladder's private 20 is retired: a gap the
+ *  band calls Import-Dependent is a deficit, never "pressured" beside it. */
 export const FOOD_SECURITY_CUTS = Object.freeze({ deficit: 40, importDependent: 15, pressured: 5, surplus: 40 });
 export const FOOD_SECURITY_BANDS = Object.freeze({
   famine:          { label: 'Deficit — Active Famine', color: '#8b1a1a', bg: '#fdf4f4' },
@@ -63,21 +64,28 @@ export const FOOD_SECURITY_BANDS = Object.freeze({
   surplus:         { label: 'Surplus',                 color: '#1a5a28', bg: '#f0faf4' },
   secure:          { label: 'Secure',                  color: '#2a6a38', bg: '#f4fbf6' },
 });
+/**
+ * The band's KEY — the food record carries it (foodBalance.js :: deriveFoodRecord).
+ * @param {boolean} stressFamine @param {number} deficitPct @param {number} surplusPct
+ * @returns {keyof typeof FOOD_SECURITY_BANDS}
+ */
+export function foodSecurityBandKeyOf(stressFamine, deficitPct, surplusPct) {
+  if (stressFamine) return 'famine';
+  if (deficitPct > FOOD_SECURITY_CUTS.deficit) return 'deficit';
+  if (deficitPct > FOOD_SECURITY_CUTS.importDependent) return 'importDependent';
+  if (deficitPct > FOOD_SECURITY_CUTS.pressured) return 'pressured';
+  if (surplusPct > FOOD_SECURITY_CUTS.surplus) return 'surplus';
+  return 'secure';
+}
 /** @param {boolean} stressFamine @param {number} deficitPct @param {number} surplusPct */
 export function foodSecurityBandOf(stressFamine, deficitPct, surplusPct) {
-  if (stressFamine) return FOOD_SECURITY_BANDS.famine;
-  if (deficitPct > FOOD_SECURITY_CUTS.deficit) return FOOD_SECURITY_BANDS.deficit;
-  if (deficitPct > FOOD_SECURITY_CUTS.importDependent) return FOOD_SECURITY_BANDS.importDependent;
-  if (deficitPct > FOOD_SECURITY_CUTS.pressured) return FOOD_SECURITY_BANDS.pressured;
-  if (surplusPct > FOOD_SECURITY_CUTS.surplus) return FOOD_SECURITY_BANDS.surplus;
-  return FOOD_SECURITY_BANDS.secure;
+  return FOOD_SECURITY_BANDS[foodSecurityBandKeyOf(stressFamine, deficitPct, surplusPct)];
 }
 
-/** FOOD SECURITY — THE FLAG LADDER, the SECOND ladder over the same three numbers.
- *  Its `pressured` and `surplus` cuts ARE the label ladder's (referenced, never re-spelled);
- *  its `deficit` cut is its own 20. See the note above: two ladders on purpose today. */
+/** FOOD SECURITY — THE FLAGS, cut at the label ladder's own points (referenced, never
+ *  re-spelled). `deficit` is the Import-Dependent cut: over it the band reads a deficit. */
 export const FOOD_FLAG_CUTS = Object.freeze({
-  deficit: 20, pressured: FOOD_SECURITY_CUTS.pressured, surplus: FOOD_SECURITY_CUTS.surplus,
+  deficit: FOOD_SECURITY_CUTS.importDependent, pressured: FOOD_SECURITY_CUTS.pressured, surplus: FOOD_SECURITY_CUTS.surplus,
 });
 /** Key order is the record's own and is golden-bearing. @returns {{isDeficit:boolean, isPressured:boolean, isSecure:boolean, isSurplus:boolean}} */
 export function foodSecurityFlagsOf(stressFamine, deficitPct, surplusPct) {

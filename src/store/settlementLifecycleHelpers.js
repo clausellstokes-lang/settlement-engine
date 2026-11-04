@@ -180,12 +180,14 @@ export function rippleEventThroughWorld({ afterState, campaign, event, beforeEnv
 
 /**
  * W-F6 THE PREMIUM GATE — the store-side half of the latent-pantheon activation
- * seam (owner 2026-07-10; PHASE4_FAITH_DELTA). The generation pipeline bakes a
- * starting pantheon LATENTLY into every seed (config.latentPantheon), identical
- * for all tiers — tier never touches generation. This is where the key turns:
+ * seam (owner 2026-07-10; PHASE4_FAITH_DELTA). Generation creates NO gods: since
+ * 2026-07-28 (5f8dc7830, the T4 ONE-REGEN batch) a deity is custom content only,
+ * the DM's to add, and generation builds churches, not a pantheon. Only saves
+ * written before that batch still carry a latent pantheon (config.latentPantheon);
+ * tier never touches generation. This is where the key turns for those saves:
  * a PREMIUM (or elevated) account activates on generation-complete / save-open,
  * copying the latent patron + cults into the LIVE embeds via the pure, rng-free,
- * idempotent activateLatentPantheon. FREE / ANON never activate — the latent
+ * idempotent activateLatentPantheon (a no-op when no latent record exists). FREE / ANON never activate — the latent
  * record stays private (stripped from every public projection, publicSafe.js /
  * migration 128) and the engine stays the certified inert ground state (the
  * neutrality theorem). Defensive: any auth-read failure ⇒ no activation.

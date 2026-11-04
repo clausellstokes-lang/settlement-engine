@@ -1,7 +1,7 @@
 /**
  * domain/magicAssertionText.js — THE ONE READING OF "does this text claim magic works?".
  *
- * These three constants were born inside `generators/generationContext.js`, where the
+ * These constants were born inside `generators/generationContext.js`, where the
  * generation world law uses them to decide whether a generated line asserts functional
  * magic. MG-3h needed the identical reading one layer down — the arcane-identity detector's
  * name fallback must strip the SAME negations before it tests the SAME assertion vocabulary,
@@ -100,6 +100,19 @@ export const MAGIC_ASSERTION_PATTERN =
  * while "no ward stops the wizard" still retains its affirmative wizard claim.
  * The final certification receipt uses this same predicate as the producers.
  */
+/**
+ * THE WORLD LAW'S ROLE VOCABULARY: a generated NPC whose role or title matches this is an
+ * arcane practitioner, and a magic-free world does not generate one
+ * (generators/generationContext.js :: allowsRole). Lifted here verbatim from
+ * generationContext.js (WIRING-1 item 6, chair ruling 6: lift only) so one leaf holds both
+ * magic readings. It is NOT the practitioner census's reading (magicReliance :: isPractisingNpc
+ * reads textAssertsFunctionalMagic); the two disagree on a few roles, an open catalogue question.
+ * `druid` left this list 2026-09-30 with MAGIC_ASSERTION_PATTERN's (J24, TE-CH-6): a druid is a
+ * faith role, and a magic-free world still has them.
+ */
+export const MAGIC_ROLE_PATTERN =
+  /\b(?:archmag(?:e|ister)|artificer|enchanter|hedge witch|mage|magister|sorcerer|warlock|witch|wizard)\b/i;
+
 export const NEGATED_MAGIC_PATTERNS = Object.freeze([
   /\bnon[- ]magical\b/gi,
   /\bno\s+(?:actual\s+|real\s+|functional\s+)?magic(?:al)?(?:\s+(?:ability|compound|effect|ingredient|power|properties|quality|value)s?)?(?:\s+(?:in|to|within)\s+(?:it|them|this|the\s+[a-z'-]+))?\b/gi,

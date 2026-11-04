@@ -23,6 +23,7 @@ import { statusCase, tokenCase } from '../../domain/display/labelCase.js';
 import { cap, smart, label } from '../lib/format.js';
 import { StateProse } from '../primitives/StateProse.jsx';
 import { scoreBand } from '../../domain/display/defenseScoreBands.js';
+import { foodEnduranceLine } from '../../domain/display/defenseDisplay.js';
 // ⛔ A SECOND `statusCase` import (from `components/new/labelLadder.js`) sat on THIS line: a duplicate of line 23, and `src/pdf` may not reach into `src/components`. Removed; the line is kept so the prose-numerics ratchet's frozen path:line identities below do not shift.
 
 // Armed-forces groups in render order, mirroring the web Defense tab.
@@ -36,6 +37,7 @@ const FORCE_GROUPS = [
 
 export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
   const d = vm.defense;
+  const foodEndurance = foodEnduranceLine(settlement);
 
   // Criminal capture prints in Power Structure since the UX consolidation (T2-20 parity).
 
@@ -144,6 +146,13 @@ export function DefenseSecurity({ settlement, narrativeMode, vm, stateProse }) {
           </Text>
         </View>
       ))}
+
+      {/* ── Food endurance (X-52, lane DEFENSE-3): the screen's line, from the same leaf ── */}
+      {foodEndurance && (
+        <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, lineHeight: 1.4, marginBottom: 4 }}>
+          <Text style={{ ...type.body_em, color: palette.ink }}>{foodEndurance.label}:</Text> {foodEndurance.sentence}
+        </Text>
+      )}
 
       {/* ── Armed forces & fortifications ────────────────────────── */}
       <View style={{ marginTop: space.sm }}>

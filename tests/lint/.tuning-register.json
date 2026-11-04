@@ -2572,6 +2572,11 @@
         "sites": 1,
         "introducedAt": "754856b125828dc555359d6df0e0632be9636a09",
         "cause": "T13 Car P-prime replaced a bare computed population bonus with the named constant POPULATION_SATURATION, so this file's +1 unregistered-named is the counterpart of its own -1 bare-decimal win in the same commit. The register is scoring the act it exists to encourage; the name earns its register row when the owner signs the estate, not by a landing."
+      },
+      "src/domain/summary/tonightSheet.js": {
+        "sites": 1,
+        "introducedAt": "7d327ca733c55e0158b1bd4061cabfa14dad5366",
+        "cause": "X-51 (ODQ §934.104): the one Tonight sheet names how many hooks it carries (HOOK_COUNT) instead of a bare 3; the register scores the act it exists to encourage, as the T13 Car P′ row did; the name earns its register row when the owner signs the estate"
       }
     },
     "bareDecimals": {

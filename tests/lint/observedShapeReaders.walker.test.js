@@ -632,10 +632,21 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
     // frozen figures exactly, and at the tip the AO-0 worlds re-deal their year (eleven news homes out, four in, named at
     // news-voice-contract.mjs; root 2's pulse logs no regional event, named at prose-family-contract.mjs). Cross-recorded in
     // news-voice, news-headline and prose-family in the same act.
+    // 2026-11-03 (lane OSR-RUNG under the chair's ruling (i), ODQ §934.104): 1557/79/79 → 1541/77/77; final 264 and
+    // unique 265 HOLD. ATTRIBUTED by OSR-TRIAGE's per-compose-point corpus build: 1557/79 through 035fbaa80, 1510/80 at
+    // FOOD-1 b2aa5f5fa alone, 1541/77 at dd3158aab (FOOD-1 + FOOD-2 a7f13fef4) and at every point after — the food cut-offs
+    // and base numbers made the sample worlds self-feeding, so the year's pulse logs two fewer regional events. Re-measured
+    // by OSR-RUNG AFTER the schema-26 rung (its famine pass enters `roots`, never the pulse, so the scalar stream is
+    // byte-equal before and after it). ⚠ NOT cross-recorded here: the three news-family walkers are red on FOOD's whole
+    // re-deal of the AO-0 year (news-voice homes 44 → 45, prose-family identities 61 → 58, digests), a reference re-record
+    // the ruling did not cover; it is reported to the chair, not done piecemeal.
+    // 2026-11-04 (REGISTERS-4, the chair's ruling C5, cross-recorded in news-voice, news-headline and prose-family in the
+    // same act): final 264 → 260, accumulated 1541 → 1521, unique 265 → 261; regional 77/77 HOLD. By stage: FOOD-1 (T1)
+    // 257/1510/258/80, FOOD-2 (T2) 264/1541/265/77, SIZE-3 (S5, the guild market) 260/1521/261/77; nothing after S5 moves.
     expect(scalarCorpus.scalarMeta).toEqual({
       canonEventLogEntries: 1,
-      wizardNewsFinalEntries: 264,
-      wizardNewsAccumulatedEntries: 1557,
+      wizardNewsFinalEntries: 260,
+      wizardNewsAccumulatedEntries: 1521,
       // FP BATCH 4 (2026-09-24, the FP chair): wizardNewsFinalEntries 240 → 272 and wizardNewsAccumulatedEntries 1567 → 1604 —
       // the Herald lens U2 (32315e384, FP-31): the feed keeps its newest 52 weeks whole under the 240 cap, so the corpus's
       // twelve monthly pulses retire one entry instead of thirty-three; unique 273 HOLDS. Attributed by equality with the U2
@@ -645,7 +656,7 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // (a peacetime suit retires when a war opens against its court; its feed reconcile mints the one id). Accumulated 1567
       // and final 240 DO NOT MOVE. Cross-recorded in the same act: news-voice (introductions 273), prose-family
       // (scalarRows 25549, pulseHistory 1055/5097), the OSR register --write at 98e0d8664 (exact, 1970 findings).
-      wizardNewsUnique: 265,
+      wizardNewsUnique: 261,
       pulseHistory: 12,
       // TE36 (ODQ §271): 109 → 73, one cause — the regional event log carries the pulse's
       // selected outcomes, and the retired bare-decline family was 36 of them. That mint's
@@ -653,8 +664,8 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // OPPOSITE directions, and 73 → 74 here is the state lane picking up exactly what the
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
-      regionalEventLog: 79,
-      regionalEventLogUnique: 79,
+      regionalEventLog: 77,
+      regionalEventLogUnique: 77,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
@@ -1347,8 +1358,11 @@ describe('reader-with-no-writer ratchet: the live scan', () => {
       // carried an observed `source` while every config ran unstressed.
       // ⭐ `militia` JOINS AT THE SCHEMA-24 RUNG (2026-10-01, the urban band's corpus re-deal, ODQ §934.86):
       // the re-dealt year observes a militia reading that carries its `source`.
+      // ⭐ `leadingSources` JOINS AT THE SCHEMA-26 RUNG (2026-11-03, lane OSR-RUNG, the chair's ruling (i)): its writer is
+      // worldPulse/stressors.js and has existed since 7c51ffec8; the corpus first reaches it under FOOD-1 b2aa5f5fa, whose
+      // self-feeding worlds reach a recovery that names its sources. A corpus movement, not a new writer.
       'causes', 'changes', 'charter', 'evidence', 'garrison', 'incomeSources',
-      'institutions', 'magicDef', 'mercenary', 'militia', 'site', 'stress', 'stressors',
+      'institutions', 'leadingSources', 'magicDef', 'mercenary', 'militia', 'site', 'stress', 'stressors',
       'walls', 'watch',
     ]);
 

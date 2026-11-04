@@ -29,6 +29,7 @@ import { dirname, join } from 'node:path';
 import { DefenseTab, THREAT_ROW_KEY } from '../../src/components/new/tabs/DefenseTab.jsx';
 import { ViabilityTab } from '../../src/components/new/tabs/ViabilityTab.jsx';
 import MagicTab from '../../src/components/new/tabs/MagicTab.jsx';
+import { magicRelianceDeskSettlement } from '../../src/domain/display/dossierViewModel.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import {
   defenseMagicDependencyProse, defenseSupportingProse, defenseThreatProse,
@@ -36,7 +37,7 @@ import {
 import { deriveArmedForces, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { buildThreatAssessment } from '../../src/domain/display/threatAssessment.js';
 import { tierNounFor } from '../../src/domain/display/stateProse/weaveBlock.js';
-import { expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
+import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { buildPrintProse } from '../../src/domain/display/stateProse/printProse.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { toPublicSafe } from '../../src/domain/display/publicSafe.js';
@@ -84,16 +85,20 @@ beforeAll(() => {
 afterEach(() => { cleanup(); });
 
 describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a literal', () => {
-  test('the tab renders the EXACT logistics sentence the desk produced for this town', () => {
-    const expected = defenseSupportingProse(port, opts(port)).logistics.sentence;
+  test('the tab renders the EXACT naval sentence the desk produced, and no stored-food row or lens', () => {
+    // ⛔ The logistics lens and the Logistics & Supply row LEFT the Defense tab by the owner's
+    // word (2026-11-03, verbatim: "Do add storehouse months the economy tab."): stored food is
+    // the Economy tab's, printed once in months (lane DEFENSE). The naval lens carries this arm.
+    const expected = defenseSupportingProse(port, opts(port)).naval.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
+    expect(defenseSupportingProse(port, opts(port)).logistics).toBeNull();
     const { container } = render(e(DefenseTab, { settlement: port, narrativeNote: null }));
     openSection(container, 'Supporting Capabilities');
     expect(container.textContent).toContain(expected);
-    // The producer's own capability rows are UNTOUCHED beside it — the sentence is
-    // additive, and a car that had replaced the rows would be caught here.
+    // The producer's own capability rows are UNTOUCHED beside it, less the stored-food row.
     const caps = deriveSupportingCapabilities(port);
-    expect(container.textContent).toContain(caps.find((c) => c.label === 'Logistics & Supply').note);
+    expectAbsentWithAnchor(caps.map((c) => c.label), 'Logistics & Supply', 'Naval Defense', 'the producer rows less the stored-food row');
+    expect(container.textContent).toContain(caps.find((c) => c.label === 'Naval Defense').note);
     expect(container.textContent).toContain('Legal Infrastructure');
     // UX consolidation (T2-23): Economic Backing left the rows; Economic Survival owns it.
     expect(container.textContent).not.toContain('Economic Backing'); // anchored: toContain('Legal Infrastructure') on this render
@@ -115,9 +120,9 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     // ONE anchored act: present on the coastal town, absent on the inland one. A bare
     // exclusion would pass against a tab that had stopped rendering the block entirely.
     expectPresentThenAbsent(wetText, dryText, navalLine, 'the naval lens on a landlocked city');
-    // …and the inland town still draws its OWN logistics sentence, so the absence above is
+    // …and the inland town still renders its OWN capability rows, so the absence above is
     // the lens discriminating rather than the whole position having gone dark.
-    expect(dryText).toContain(defenseSupportingProse(inland, opts(inland)).logistics.sentence);
+    expect(dryText).toContain('Medical Readiness');
   });
 
   test('THE PUBLIC GATE: the same town on a public dossier draws NEITHER sentence', () => {
@@ -130,12 +135,11 @@ describe('DS-DEF-6 at defense.supportingCapabilities — a real draw, not a lite
     const pub = render(e(DefenseTab, { settlement: port, narrativeNote: null, publicDossier: true }));
     openSection(pub.container, 'Supporting Capabilities');
     const pubText = pub.container.textContent;
-    expectPresentThenAbsent(privText, pubText, drawn.logistics.sentence, 'public gate: the DS-DEF-6 logistics sentence');
     expectPresentThenAbsent(privText, pubText, drawn.naval.sentence, 'public gate: the DS-DEF-6 naval sentence');
     // The gate removes ONLY the corpus prose — the producer's rows and notes still render
     // for the anonymous viewer, which is what makes it a gate and not a blank.
     const caps = deriveSupportingCapabilities(port);
-    expect(pubText).toContain(caps.find((c) => c.label === 'Logistics & Supply').note);
+    expect(pubText).toContain(caps.find((c) => c.label === 'Naval Defense').note);
     expect(pubText).toContain('Naval Defense');
   });
 });
@@ -144,8 +148,11 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
   // ⭐ UX CONSOLIDATION 2026-10-30 (RULINGS-T2 T2-15): the dependence block MOVED to the Magic
   // tab as the Roles section's framing. These arms follow it there; the registry row keeps its
   // id. The Outlook page is asserted to carry none of it.
+  // Lane MAGIC (chair ruling 2, 2026-11-03): the Magic tab hands the desk the settlement with
+  // its dependency flag READ FROM the one reliance reading (`magicRelianceDeskSettlement`), not
+  // the siege/famine/plague flag, so every arm below asks the desk through that same view.
   test('the magic tab renders the EXACT dependency sentence the desk produced; Outlook does not', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
+    const expected = defenseMagicDependencyProse(magicRelianceDeskSettlement(port), opts(port)).arcaneReliance.sentence;
     expect(typeof expected, 'the desk drew nothing, so the DOM assertion would be vacuous').toBe('string');
     const { container } = render(e(MagicTab, { settlement: port }));
     expect(container.textContent).toContain(expected);
@@ -161,10 +168,13 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
     // The tab's own magic-dependency warning box renders only when the flag is TRUE, which
     // is why the corpus line sits outside it. A line that could only appear inside the box
     // would leave a third of an authored block permanently unreachable.
-    expect(port.defenseProfile.magicDependency).toBe(false);
-    const drawn = defenseMagicDependencyProse(port, opts(port));
+    // A settlement whose magic nothing depends on: the port with its supply chains set aside,
+    // so the one reliance reading is not relied-upon and the desk reads the FALSE pool.
+    const unrelied = { ...port, economicState: { ...port.economicState, activeChains: [] } };
+    expect(magicRelianceDeskSettlement(unrelied).defenseProfile.magicDependency).toBe(false);
+    const drawn = defenseMagicDependencyProse(magicRelianceDeskSettlement(unrelied), opts(unrelied));
     expect(drawn.arcaneReliance.provenance.poolKey).toBe('magicDependency false');
-    const { container } = render(e(MagicTab, { settlement: port }));
+    const { container } = render(e(MagicTab, { settlement: unrelied }));
     const text = container.textContent;
     expect(text).toContain(drawn.arcaneReliance.sentence);
     // The frozen record's static explanation is correctly absent (the flag is false), and the
@@ -174,7 +184,7 @@ describe('DS-DEF-9 at viability.magicDependency — the registry\'s first cross-
   });
 
   test('THE PUBLIC GATE: the magic tab stays silent for an anonymous viewer', () => {
-    const expected = defenseMagicDependencyProse(port, opts(port)).arcaneReliance.sentence;
+    const expected = defenseMagicDependencyProse(magicRelianceDeskSettlement(port), opts(port)).arcaneReliance.sentence;
     const priv = render(e(MagicTab, { settlement: port, publicDossier: false }));
     const privText = priv.container.textContent;
     cleanup();
@@ -363,16 +373,18 @@ describe('T2-24 — magic does not function: no arcane provision, no magic-depen
     return null;
   };
 
-  test('the Arcane Support row reads None in a dead-magic world, even with an alchemist on the roll', () => {
+  // Lane DEFENSE-2 (2026-11-03, lane MAGIC's request): where magic does not work the Arcane
+  // Support row is not drawn at all, as every other magic row is gated (it used to read "None"
+  // with "Magic does not function in this world.").
+  test('no Arcane Support row in a dead-magic world, even with an alchemist on the roll', () => {
     const s = deadMagicTown();
     expect(s, 'fixture premise: a dead-magic city whose roster matches the arcane regex').toBeTruthy();
-    const cap = deriveSupportingCapabilities(s).find((c) => c.label === 'Arcane Support');
-    expect(cap.status).toBe('None');
-    expect(cap.score).toBeNull();
+    expectAbsentWithAnchor(deriveSupportingCapabilities(s).map((c) => c.label), 'Arcane Support', 'Medical Readiness', 'the capability rows');
     const { container } = render(e(DefenseTab, { settlement: s, narrativeNote: null }));
     openSection(container, 'Supporting Capabilities');
-    expect(container.textContent).toContain('Arcane Support');
-    expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Arcane Support') on this render
+    expect(container.textContent).toContain('Medical Readiness');
+    expect(container.textContent).not.toContain('Arcane Support'); // anchored: toContain('Medical Readiness') on this render
+    expect(container.textContent).not.toContain('Detection, wards, counterspell'); // anchored: toContain('Medical Readiness') on this render
   });
 
   test('DS-DEF-9 is silent in a dead-magic world, and the Magic page draws no dependence block', () => {

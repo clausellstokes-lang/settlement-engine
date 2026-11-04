@@ -356,7 +356,9 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     // themselves change, in 6 only an ordinal), among them the two power-card hamlets that EXHAUSTED the ladder before
     // the cure, and in every trial that cites a conflict the citations name exactly the merged record's own explained
     // conflicts.
-    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(18);
+    // 2026-11-04, the window-end pin re-key (REGISTERS seat): 18 -> 17, FOOD-2 (the food base numbers), traced at stage
+    // T2 in DOORS-4; the town's own conflicts moved with the food world, the law above is unchanged.
+    expect(all.filter((trial) => trial.conflictsRestated).length, 'trials whose conflict citations the post-pass rebuilt').toBe(17);
     const foreign = all.filter((trial) => trial.citesOwn === false).map((trial) => `${trial.label} ${trial.key}`);
     // anchored: the line above proves the restatement fires on twelve live trials, so silence here is a cure.
     expect(foreign, `the receipt cites a conflict list that is not the merged record's own:\n${foreign.join('\n')}`).toEqual([]);
@@ -394,7 +396,12 @@ describe('EM-R8 — the escalation ladder never overwrites a HELD key, and the r
     expect(ATOMIC_COLLECTIONS.includes(EVIDENCE_PATH), 'ATOMIC_COLLECTIONS governs THE MERGE for this path').toBe(true);
     expect(CLASS_EXCEPTIONS[EVIDENCE_PATH], 'and the CLASS_EXCEPTIONS row governs THE POST-PASS').toBe('MIRROR');
 
-    const row = sample63().find((candidate) => keyOf(candidate) === 'village|germanic|hills|road|civilized|golden-master-v3');
+    // 2026-11-04, the window-end pin re-key (REGISTERS seat, the chair's ruling 3): the trial row was
+    // village|germanic|hills|road|civilized|golden-master-v3 until SIZE-3, after which halving its faction[1] no longer
+    // re-takes the evidence array (atomicTaken held only economicState.primaryImports). Searched over all 63 rows with
+    // faction[1] halved: town|germanic|plains|road|civilized|gm-seed-c is the ONE row whose merge still takes the
+    // evidence whole from R1 with R1's row differing from the record's, so the arm keeps its subject.
+    const row = sample63().find((candidate) => keyOf(candidate) === 'town|germanic|plains|road|civilized|gm-seed-c');
     const { _seed: seed, ...config } = row;
     const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
     const R0 = rederive(base, config, EMPTY, ENGINE, DECLARATIONS).record;

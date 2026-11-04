@@ -12,7 +12,7 @@
  *     duplication of an entity across the powers set.
  *   - WEB: relationships group by their finite typed kind, from REAL pipeline
  *     data, deterministically (same seed ⇒ byte-identical render).
- *   - LINK: a power's roster row carries a keyboard-operable "holds power" marker
+ *   - LINK: a power's roster row carries a keyboard-operable marker ("Holds power" for the ruler, "Contests the seat" for a contender)
  *     whose target power card exists in the DOM (the in-tab anchor).
  *   - FLUSH: within a stratum the cards are born flush — one framing border, a
  *     single 1px seam between cards, none on the last.
@@ -153,8 +153,11 @@ describe('powerStrata — the holds-power marker links to the power card (in-tab
     const s = craftedSettlement();
     render(<PowerTab powerStructure={s.powerStructure} settlement={s} narrativeNote={null} />);
 
-    // Merchant Guilds is a contender → its roster row carries a holds-power marker.
-    const marker = screen.getByRole('button', { name: /Merchant Guilds holds power/i });
+    // Merchant Guilds is a contender → its roster row carries the marker, and a contender's
+    // marker reads "Contests the seat": "Holds power" is the ruler's word alone (lane RULERS).
+    const marker = screen.getByRole('button', { name: /Merchant Guilds contests the seat/i });
+    expect(marker.textContent).toBe('Contests the seat');
+    expect(screen.getByRole('button', { name: /Town Council holds power/i }).textContent).toBe('↑ Holds power');
     expect(marker.tagName).toBe('BUTTON');
     // Its target power card exists in the DOM (the anchor the marker scrolls to).
     const anchorId = `power-card-${factionIdFromName('Merchant Guilds')}`;
@@ -163,7 +166,7 @@ describe('powerStrata — the holds-power marker links to the power card (in-tab
     expect(() => fireEvent.keyDown(marker, { key: 'Enter' })).not.toThrow();
 
     // The criminal faction is roster-only → NO holds-power marker.
-    expect(screen.queryByRole('button', { name: /Thieves Guild holds power/i })).toBeNull();
+    expect(screen.queryByRole('button', { name: /Thieves Guild (holds power|contests the seat)/i })).toBeNull(); // anchored: the Merchant Guilds marker is found on this render
   });
 });
 

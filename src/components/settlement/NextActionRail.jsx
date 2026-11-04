@@ -249,12 +249,16 @@ function computeItems({
     });
   }
   if (handlers.onExport) {
+    // exportGate (X-53): before launch the rung is the launch teaser for every non-staff
+    // account (ActionRail wraps it in LaunchGatedExport). A rung that is a PURCHASE keeps the
+    // purchase lock below (the owner's 2026-09-16 rule), which the teaser does not replace.
     const exportItem = {
       id: 'export', Icon: FileText,
       label: t('export.primaryCta'),
       onClick: handlers.onExport,
+      exportGate: true,
     };
-    items.push(exportIsPurchase && !purchasesAreOpen ? lockForLaunch(exportItem) : exportItem);
+    items.push(exportIsPurchase && !purchasesAreOpen ? lockForLaunch({ ...exportItem, exportGate: false }) : exportItem);
   }
   // Export Image — WITHHELD (the owner, 2026-09-19): the share card belongs to the map it
   // was drawn for, and that map is still being made. The handler plumbing stays so the

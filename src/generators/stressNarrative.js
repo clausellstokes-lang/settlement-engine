@@ -137,14 +137,18 @@ const RENDERERS = {
     (name || "the settlement") +
     " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
 
+  // wartime: the profit text names no garrison (lane DEFENSE-2, 2026-11-03). It is rendered from
+  // the stress type and the place's name alone, with no roster in reach, so it says only what
+  // is true of every place at war; "The garrison is reinforced and well-supplied" was printed on
+  // places with no garrison.
   // wartime: the only summary that draws from rng. rollStressSummary made the draw
   // (`rng() < 0.45` → roll.profit) at the pipeline's draw point; this pure render
-  // just branches on that pre-rolled token — byte-identical to the old inline text.
+  // just branches on that pre-rolled token (the draw is unchanged; the profit text is not).
   wartime: (name, roll) => {
     const s = name || "the settlement";
     return roll?.profit
       ? s +
-          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. The garrison is reinforced and well-supplied. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
+          " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
       : s +
           " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
   },

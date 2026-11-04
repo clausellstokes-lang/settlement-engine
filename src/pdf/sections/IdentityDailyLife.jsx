@@ -214,7 +214,7 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
               {culture.scope}
             </Text>
           )}
-          <CultureRows culture={culture} />
+          <CultureRows culture={culture} foodwaysLine={foodwaysLineOf(settlement)} />
         </View>
       )}
 
@@ -296,12 +296,22 @@ export function IdentityDailyLife({ settlement, narrativeMode, vm, stateProse })
 
 // ── Sub-components ─────────────────────────────────────────────
 
-function CultureRows({ culture }) {
+/**
+ * The foodways sentence has ONE home: the food record's line, composed from the sources the
+ * place really has (economicState.foodSecurity.foodRecord.foodwaysLine, FOOD-3). The culture's
+ * authored line is printed only for a save older than that record (lane WIRING-2, FOOD R-print).
+ */
+function foodwaysLineOf(settlement) {
+  const line = settlement?.economicState?.foodSecurity?.foodRecord?.foodwaysLine;
+  return typeof line === 'string' && line.trim() ? line.trim() : null;
+}
+
+function CultureRows({ culture, foodwaysLine }) {
   const rows = [
     ['Built form', culture.builtForm],
     ['Civic pattern', culture.civicPattern],
     ['Exchange', culture.exchangePattern],
-    ['Foodways', culture.foodways],
+    ['Foodways', foodwaysLine || culture.foodways],
     ['Sacred life', culture.sacredLife],
     ['Defense', culture.defensePattern],
     ['Social texture', culture.socialTexture],

@@ -315,7 +315,12 @@ function screenProse(s, faithUnlocked = false) {
       ? Object.keys(FALL_SENTENCE).find((c) => FALL_SENTENCE[c] === fm.patronFallSentence)
       : undefined,
   }, o), fm);
-  set('faith.teaser', screenParagraph(s, 'faith.teaser', [fa.faithTeaser]));
+  // LANE FAITH (2026-11-03): on a patron-less town the faith LINE opens the position
+  // (FaithTab -> FaithTeaserLines `lead`), woven with whatever lens the trim leaves.
+  set('faith.teaser', fm.hasEmbed
+    ? screenParagraph(s, 'faith.teaser', [fa.faithTeaser])
+    : screenWeave(s, [fm.line.join(' '), ...[fa.faithTeaser].map((rung) => drawnAtMount('faith.teaser', rung))
+      .filter((drawn) => drawn && !deferredCell(drawn)).map((drawn) => drawn.sentence).filter(Boolean)]));
   if (faithUnlocked) {
     set('faith.patronSeat', screenParagraph(s, 'faith.patronSeat', [
       fa.patronRank, fa.patronCults, fa.devotion, fa.pietyArc,

@@ -297,8 +297,14 @@ describe('HomeLanding — scrollable landing', () => {
 
     // POSITIVE, FIRST: every event the run produced is on the card, with the week
     // it happened in and the sentence the engine wrote for it.
+    // 2026-11-04 (REGISTERS-6 ruling E3): two events may share a week label. The coherence window's world
+    // moved the fixture's year (FOOD-2 re-timed lf-033's advance: Nuada Walsh's deed AND the broken routes both in
+    // Week 8), so a unique-label lookup threw "Found multiple elements". The card must print each week
+    // label exactly as many times as the fixture carries events in that week.
     for (const entry of entries) {
-      expect(within(card).getByText(entry.week), `missing week label: ${entry.week}`).toBeTruthy();
+      const sameWeek = entries.filter((e) => e.week === entry.week).length;
+      expect(within(card).getAllByText(entry.week), `week label ${entry.week} is not printed once per event in that week`)
+        .toHaveLength(sameWeek);
       expect(card.textContent, `missing event headline: ${entry.headline}`).toContain(entry.headline);
       expect(card.textContent, `missing event text: ${entry.text}`).toContain(entry.text);
     }

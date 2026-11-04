@@ -53,7 +53,7 @@ import { parse } from 'espree';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { SAFETY_BANDS, STABILITY_BANDS } from '../../src/domain/display/labelBands.js';
 import { FOOD_SECURITY_BANDS, READINESS_BANDS } from '../../src/data/bandLadders.js';
-import { TABLE_KIND_LABEL } from '../../src/domain/summary/tonightAtTheTable.js';
+import { TONIGHT_COPY } from '../../src/domain/summary/tonightSheet.js';
 import { tokenCase, statusCase, nameOrTokenCase } from '../../src/components/new/labelLadder.js';
 import { PowerTab } from '../../src/components/new/tabs/PowerTab.jsx';
 import { DefenseTab } from '../../src/components/new/tabs/DefenseTab.jsx';
@@ -284,23 +284,22 @@ describe('the dossier speaks a status, it does not Title-Case one', () => {
 });
 
 describe('a badge\'s capitals belong to its style, never to its word', () => {
-  test("the Tonight card's kind badge carries the display word and an uppercase transform", () => {
-    // THE DEFECT (§934.22 item 4): this badge rendered the raw model token 'HOOK' with
-    // `textTransform` unset, so the cheat sheet said 'Hook' and the session card shouted the
-    // same entry's kind. Literal capitals in a string cannot be re-cased by anything
-    // downstream, which is the whole reason rung 1 puts them in the stylesheet.
+  test("the Tonight sheet's eyebrows carry the display word and an uppercase transform", () => {
+    // THE DEFECT (§934.22 item 4): a badge rendered the raw model token 'HOOK' with
+    // `textTransform` unset. The kind badges left with the old cheat sheet (X-51); the rule
+    // holds on the one Tonight sheet's section eyebrows: the word is TONIGHT_COPY's, the
+    // capitals are the style's.
     const settlement = settlements.get('city');
     const { container } = render(<SessionMode settlement={settlement} onClose={() => {}} />);
-    const badges = [...container.querySelectorAll('#sf-session-tonight span')]
-      .filter((el) => Object.values(TABLE_KIND_LABEL).includes((el.textContent || '').trim()));
-    // anchored: the card must have rendered badges at all, or "no offenders" means nothing.
-    expect(badges.length, 'the Tonight section rendered no kind badge').toBeGreaterThan(0);
-    for (const el of badges) {
+    const words = [TONIGHT_COPY.crisis, TONIGHT_COPY.urgent, TONIGHT_COPY.people, TONIGHT_COPY.facts, TONIGHT_COPY.hooks];
+    const eyebrows = [...container.querySelectorAll('#sf-session-tonight [data-tonight-sheet] div')]
+      .filter((el) => el.children.length === 0 && words.includes((el.textContent || '').trim()));
+    // anchored: the sheet must have rendered eyebrows at all, or "no offenders" means nothing.
+    expect(eyebrows.length, 'the Tonight sheet rendered no eyebrow').toBeGreaterThan(2);
+    for (const el of eyebrows) {
       const text = (el.textContent || '').trim();
-      expect(Object.values(TABLE_KIND_LABEL), `"${text}" is not one of the display words`).toContain(text);
       expect(el.style.textTransform, `"${text}" gets its case from the string, not the style`).toBe('uppercase');
-      // The raw token never reaches the page except where the token IS the display word.
-      if (!/^[A-Z]+$/.test(text)) expect(text).not.toBe(text.toUpperCase());
+      expect(text === text.toUpperCase(), `"${text}" is written in capitals`).toBe(false);
     }
     cleanup();
   }, 60000);

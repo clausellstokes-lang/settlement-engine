@@ -21,3 +21,13 @@ export const FOOD_IMPORT_RATES = Object.freeze({
   minorRoutes: 0.08,
   minorRoutesVillage: 0.05,
 });
+
+/**
+ * The share of its harvest a besieged place still brings in: the fields under the walls, with
+ * the outlying farmland abandoned or razed. ONE dial, read by both food writers
+ * (`generators/foodGenerator.js :: generateFoodSecurity` and
+ * `generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis`) and by the Defense tab's
+ * Food endurance reading (`domain/defense/defenseFacts.js :: foodEnduranceOf`), so the siege
+ * arithmetic cannot drift between the record and the line that reads it (X-52, ODQ §934.104).
+ */
+export const SIEGE_PRODUCTION_KEPT = 0.6;

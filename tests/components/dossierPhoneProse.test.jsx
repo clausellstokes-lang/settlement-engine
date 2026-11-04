@@ -138,13 +138,14 @@ describe('the NPC card', () => {
   });
 });
 
-describe('the table-night cards', () => {
+describe('the Tonight sheet cards (X-51)', () => {
   const SETTLEMENT = {
     name: 'Hollowmere',
     tier: 'village',
     population: 320,
     pressureSentence: 'The reeve runs a quiet skim and the harvest is failing.',
     npcs: [{ name: 'Maren', role: 'Reeve', power: 9, secret: { what: 'skims the tithe' } }],
+    conflicts: [{ parties: ['The Salt Debt'], intensity: 'high', plotHooks: ['A caravan master calls in a favor.'] }],
   };
 
   async function renderTableView() {
@@ -153,39 +154,15 @@ describe('the table-night cards', () => {
     return render(<TableView settlement={SETTLEMENT} onClose={() => {}} />);
   }
 
-  it('reads a card body at the floor on a phone and at its own step on a desktop', async () => {
+  it('reads a hook body at the floor on a phone and at its own step on a desktop', async () => {
     installMatchMedia(true);
     const phone = await renderTableView();
-    expect(px(screen.getByText(/skims the tithe/).closest('div')))
+    expect(px(screen.getByText(/calls in a favor/).closest('div')))
       .toBeGreaterThanOrEqual(PHONE_PROSE_FLOOR);
     phone.unmount();
 
     installMatchMedia(false);
     await renderTableView();
-    expect(px(screen.getByText(/skims the tithe/).closest('div'))).toBe(12);
-  });
-});
-
-describe('the Summary quick guide', () => {
-  const SETTLEMENT = {
-    id: 'settlement.guide',
-    name: 'Eldey',
-    tier: 'village',
-    population: 610,
-  };
-
-  async function renderSummary() {
-    vi.resetModules();
-    const SummaryTabV2 = (await import('../../src/components/new/SummaryTabV2.jsx')).default;
-    return render(<SummaryTabV2 settlement={SETTLEMENT} />);
-  }
-
-  it('reads every defining truth at the floor on a phone', async () => {
-    installMatchMedia(true);
-    const { container } = await renderSummary();
-    const truths = [...container.querySelectorAll('div')]
-      .filter((d) => d.style.lineHeight === '1.5' && d.style.fontSize);
-    expect(truths.length, 'the quick guide should render its defining truths').toBeGreaterThan(0);
-    for (const truth of truths) expect(px(truth)).toBeGreaterThanOrEqual(PHONE_PROSE_FLOOR);
+    expect(px(screen.getByText(/calls in a favor/).closest('div'))).toBe(12);
   });
 });

@@ -6,6 +6,7 @@
 import {SUPPLY_CHAIN_NEEDS} from '../data/goods/chains.js';
 import {RESOURCE_TO_CHAINS} from '../data/goods/chains.js';
 import {applyMagicSubstitution} from './chainMagicSubstitution.js';
+import { chainNeedsMagic } from '../domain/magicReliance.js';
 import {RESOURCE_DATA} from '../data/goods/identity.js';
 import {customDeps} from '../lib/dependencyEngine.js';
 // FP-G10: load (register) the prebuilt resource-chains catalog so
@@ -252,12 +253,11 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       const minTierIdx = TIER_ORDER.indexOf(chain.minTier || 'thorp');
       if (tierIdx < minTierIdx) return;
 
-      // No-magic gate: suppress arcane chains entirely at magic=0
-      const ARCANE_CHAIN_IDS = ['alchemy','spellcasting','magical_goods','planar'];
-      const isArcaneChain = ARCANE_CHAIN_IDS.includes(chain.id) ||
-        (chain.label || '').toLowerCase().includes('arcane') ||
-        (chain.label || '').toLowerCase().includes('magic') ||
-        (chain.label || '').toLowerCase().includes('spell');
+      // No-magic gate: suppress arcane chains entirely at magic=0. The predicate is the ONE
+      // magic-dependence reading (domain/magicReliance.js :: chainNeedsMagic, lifted verbatim
+      // from here by lane MAGIC, 2026-11-03), so the dossier's dependent census and this gate
+      // can never disagree about which chains need magic.
+      const isArcaneChain = chainNeedsMagic(chain);
       if (isArcaneChain && magicPriority === 0) return;
 
       // Check resource availability

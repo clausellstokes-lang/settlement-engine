@@ -9,13 +9,14 @@
  * domain/display/economyFreshness.js and the paragraph into
  * components/new/EconomyFreshnessNote.jsx, then wired the three uncovered LIVE
  * surfaces the R-3 verification measured: SummaryTabV2 (the default summary
- * tab), TableView, and SessionMode. All six are pinned here.
+ * tab), TableView, and SessionMode. SummaryTabV2 left the dossier with X-5 and
+ * was retired as dead code (lane WIRING-2, 2026-11-03), so five are pinned here.
  *
  * Pins:
  *   • Each covered surface shows its one-string freshness note (byte-pinned —
  *     the copy is the vetoable unit) when the settlement's reconciliationLog
  *     carries an economy-touching event since the last survey.
- *   • The five "tallies" surfaces render the IDENTICAL sentence bytes and the
+ *   • The four "tallies" surfaces render the IDENTICAL sentence bytes and the
  *     services catalog renders the one catalog wording: the pair is one
  *     vetoable copy decision, not six.
  *   • No surface shows the note on a fresh settlement (no trail) or when a
@@ -57,7 +58,6 @@ vi.mock('../../src/components/settlement/FaithSection.jsx', () => ({
 import { EconomicsTab } from '../../src/components/new/tabs/EconomicsTab.jsx';
 import { ServicesTab } from '../../src/components/new/tabs/ServicesTab.jsx';
 import SummaryTab from '../../src/components/new/SummaryTab.jsx';
-import SummaryTabV2 from '../../src/components/new/SummaryTabV2.jsx';
 import TableView from '../../src/components/TableView.jsx';
 import SessionMode from '../../src/components/session/SessionMode.jsx';
 import { ECONOMY_FRESHNESS_SENTENCES } from '../../src/domain/display/economyFreshness.js';
@@ -188,32 +188,6 @@ describe('SummaryTab freshness note', () => {
 // generation-time economicState fold EconomicsTab tallies — and each ships
 // flag-TRUE (summaryMagazineV2 / tableView / sessionMode in lib/flagRegistry.js).
 
-describe('SummaryTabV2 freshness note (the DEFAULT summary tab)', () => {
-  it('shows the note when an economy event postdates the last survey', () => {
-    render(<SummaryTabV2 settlement={makeSettlement(STALE_TRAIL)} />);
-    expect(screen.getByText(ECON_NOTE)).toBeTruthy();
-  });
-
-  it('hides the note on a fresh settlement and after a rebuild boundary', () => {
-    const { unmount } = render(<SummaryTabV2 settlement={makeSettlement(null)} />);
-    expect(screen.queryByText(ECON_NOTE)).toBeNull();
-    unmount();
-    render(<SummaryTabV2 settlement={makeSettlement(REBUILT_TRAIL)} />);
-    expect(screen.queryByText(ECON_NOTE)).toBeNull();
-  });
-
-  it('renders byte-identically for a fresh and a rebuilt settlement', () => {
-    const fresh = render(<SummaryTabV2 settlement={makeSettlement(null)} />);
-    const freshHtml = fresh.container.innerHTML;
-    fresh.unmount();
-    const rebuilt = render(<SummaryTabV2 settlement={makeSettlement(REBUILT_TRAIL)} />);
-    expect(rebuilt.container.innerHTML).toBe(freshHtml);
-    rebuilt.unmount();
-    const stale = render(<SummaryTabV2 settlement={makeSettlement(STALE_TRAIL)} />);
-    expect(stale.container.innerHTML).not.toBe(freshHtml);
-  });
-});
-
 describe('TableView freshness note (LIVE: flagRegistry ships tableView true)', () => {
   const noop = () => {};
 
@@ -270,18 +244,17 @@ describe('SessionMode freshness note (the wired JUDGMENT, vetoable)', () => {
   });
 });
 
-// ── ONE copy decision across six surfaces ────────────────────────────────────
+// ── ONE copy decision across five surfaces ───────────────────────────────────
 // The R-4 point of the shared leaf: re-word the sentence once and every surface
 // moves together. If anyone re-introduces a hand-copy that drifts, this reds.
 describe('the sentence is ONE vetoable copy unit across every covered surface', () => {
   const noop = () => {};
 
-  it('all five tally surfaces render the identical sentence bytes', () => {
+  it('all four tally surfaces render the identical sentence bytes', () => {
     const texts = [];
     for (const node of [
       <EconomicsTab key="e" settlement={makeSettlement(STALE_TRAIL)} narrativeNote={null} />,
       <SummaryTab key="s" settlement={makeSettlement(STALE_TRAIL)} />,
-      <SummaryTabV2 key="v" settlement={makeSettlement(STALE_TRAIL)} />,
       <TableView key="t" settlement={makeSettlement(STALE_TRAIL)} onClose={noop} />,
       <SessionMode key="m" settlement={makeSettlement(STALE_TRAIL)} onClose={noop} />,
     ]) {

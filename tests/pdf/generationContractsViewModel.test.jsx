@@ -133,6 +133,26 @@ describe('owner PDF generation-contract projection', () => {
     expect(text).toContain('7/7 formal judgments supported');
   });
 
+  it('prints the food record\'s foodways line, not the culture\'s, where the record carries one', () => {
+    const fed = {
+      ...settlement,
+      culturalIdentity: { ...culturalIdentity, foodways: 'Fish from the local waters anchor the table.' },
+      economicState: { foodSecurity: { foodRecord: { foodwaysLine: 'Most meals start from bread from the home fields.' } } },
+    };
+    const text = collectText(
+      IdentityDailyLife({ settlement: fed, narrativeMode: false, vm: buildViewModel({ settlement: fed }) }),
+    ).join(' | ');
+    expect(text).toContain('Most meals start from bread from the home fields.');
+    // anchored: the culture's line is what the chapter printed before the record carried one.
+    expect(text).not.toContain('Fish from the local waters anchor the table.');
+  });
+
+  it('falls back to the culture\'s foodways line on a save older than the food record', () => {
+    const vm = buildViewModel({ settlement });
+    const text = collectText(IdentityDailyLife({ settlement, narrativeMode: false, vm })).join(' | ');
+    expect(text).toContain('Bread, pulses, and garden produce anchor the table.');
+  });
+
   it('keeps legacy v1 receipts readable when judgments were not recorded', () => {
     const legacySettlement = {
       ...settlement,

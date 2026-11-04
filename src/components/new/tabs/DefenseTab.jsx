@@ -5,7 +5,8 @@ import Button from '../../primitives/Button.jsx';
 
 import {buildThreatAssessment} from '../../../domain/display/threatAssessment.js';
 import {NarrativeNote} from '../NarrativeNote';
-import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS } from '../../../domain/display/defenseDisplay.js';
+import { arcaneDefenseOf, criminalOpNote, deriveCriminalStructure, deriveDefenseReadiness, deriveSupportingCapabilities, deriveGuardAssessment, deriveDefenseVulnerabilities, DEFENSE_STRESS_STATUS, FOOD_STORES_DOOR, foodEnduranceLine } from '../../../domain/display/defenseDisplay.js';
+import EntityLink from '../../primitives/EntityLink.jsx';
 import { safetySeverityOf } from '../../../domain/display/safetySeverity.js';
 import { scoreBand, scoreColor } from '../../../domain/display/defenseScoreBands.js';
 import { statusCase } from '../labelLadder.js';
@@ -323,6 +324,8 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
   // economic-capacity read per page, R2); the row with prose under its bar stays.
   const caps = deriveSupportingCapabilities(r).filter((cap) => cap.label !== 'Economic Backing');
   const guardAssessment = deriveGuardAssessment(r);
+  // X-52 FOOD ENDURANCE (lane DEFENSE-3): the one food record read for a siege, one sentence.
+  const foodEndurance = foodEnduranceLine(r);
   const defViolations = deriveDefenseVulnerabilities(r);
 
   // Force card component
@@ -430,6 +433,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
         </div>
       </div>
 
+      {/* ── FOOD ENDURANCE (X-52, lane DEFENSE-3; the owner, 2026-11-03: "call it food endurance
+          rather than siege endurance") — what the one food record's stores mean under siege,
+          read by `foodEnduranceLine`, the leaf the PDF's defence chapter prints too. The months
+          in store stay the Economy tab's row: the stores words are the door to it. */}
+      {foodEndurance&&<p data-testid="defense-food-endurance" style={{...FLUSH_RULED,fontSize:proseFontSize(FS.sm, isMobile),color:swatch.inkMag2,lineHeight:1.55}}>
+        <strong style={{color:swatch.inkMag}}>{foodEndurance.label}:</strong> {foodEndurance.before}<EntityLink id={FOOD_STORES_DOOR.id} type={FOOD_STORES_DOOR.type} fallback={foodEndurance.door} verbatim />{foodEndurance.after}
+      </p>}
+
       {/* ── CRIMINAL ARCHITECTURE & PUBLIC ORDER ─────────────────────────── */}
       <Section title="Criminal Architecture & Public Order" collapsible
         defaultOpen={orderElevated||crimStructure==='organized'}>
@@ -471,11 +482,14 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active criminal operations</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
               {crimInsts.map((name,i)=>{
-                const note = criminalOpNote(name);
+                // X-50 (BOILERPLATE ONCE): two operations that fall to the same note (the
+                // catch-all, or two names one rule matches) print it on the first row only.
+                const note = crimInsts.slice(0, i).some(prev => criminalOpNote(prev) === criminalOpNote(name))
+                  ? null : criminalOpNote(name);
                 return (
                   <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',borderLeft:'3px solid #8b1a1a',padding:'8px 12px'}}>
-                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:3}}>{name}</div>
-                    <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>
+                    <div style={{fontSize:FS.sm,fontWeight:700,color:swatch.danger,marginBottom:note?3:0}}>{name}</div>
+                    {note&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch['#5A3A2A'],lineHeight:1.4}}>{note}</div>}
                   </div>
                 );
               })}

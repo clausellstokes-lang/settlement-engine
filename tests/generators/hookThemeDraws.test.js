@@ -275,6 +275,10 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     //   5c8a8c741  611 / 50   (the service-catalogue car: no movement)
     //   cd6ec1c49  613 / 52   [hamlet 61 · village 74 · town 104 · city 165 · metropolis 209]
     //   0e68bee62  613 / 52   (and every sha after it, to the tip)
+    //   2f9f4a295  613 / 52   [hamlet 67 · village 74 · town 105 · city 160 · metropolis 207]  PR #72's merge-base
+    //   a7f13fef4  613 / 52   [hamlet 67 · village 74 · town 103 · city 162 · metropolis 207]  FOOD-2, composed dd3158aab
+    //   43f9c0dcc  608 / 47   [hamlet 62 · village 74 · town 103 · city 162 · metropolis 207]  SIZE-3, composed 8cd65978e
+    //   8fab1dc34  608 / 47   [hamlet 62 · village 74 · town 103 · city 162 · metropolis 207]  the lane tip (REGISTERS-7 F3)
     //
     // THE MOVER IS `cd6ec1c49` — "A generalist role no longer joins any faction the
     // settlement happens to have", a SIGNED act under docs/shift-records/
@@ -297,8 +301,18 @@ describe('HK-3 draws — the corpus, through the real pipeline', () => {
     // rather than argued: every NPC that differs is a structural placeholder (no plotHooks). town-6's Landed Gentry
     // Lord Mayor seat is now filled (-1); town-8's Thieves' Guild Kingpin and Lieutenant seats are now honestly
     // unled (+2). No hook-bearing NPC lost its hooks (17 same-id records only re-dealt role or faction).
-    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(613);
-    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(52);
+    // RE-BASED 2026-11-04 (REGISTERS-7 F3, door 9): 613 -> 608 NPCs and 52 -> 47 hookless, the movers LISTED by
+    // identity against a full first-parent sweep of PR #72's window (each sha in its own git archive, the corpus
+    // built by this file's own genAt). Two steps, and every NPC that differs is an unnamed, hookless seat placeholder:
+    //  - a7f13fef4 (FOOD-2, the food base numbers; composed dd3158aab): town-8's Kingpin and Lieutenant placeholders
+    //    go (-2) and city-10 gains the same two (+2). Net 0; the tiers read town 105 -> 103, city 160 -> 162.
+    //  - 43f9c0dcc (SIZE-3, the small-place guild check requires a real market; composed 8cd65978e): hamlet-7's
+    //    Guildmaster and Senior Trader go with the guild a market-less hamlet no longer seats, and hamlet-6's and
+    //    hamlet-11's Lord Mayor and hamlet-9's Watch Captain placeholders go as well (-5, all hamlet).
+    // No hook-bearing NPC lost a hook: zero same-id records re-dealt, total 861 and duplicates 26 unchanged. The
+    // hookless figure fell with the denominator, so 47 of 608 is the same defect at a lower count.
+    expect(npcTotal, 'the NPC denominator must be a real corpus').toBe(608);
+    expect(hookless, 'hookless NPCs grew — a hook-bearing record is being dropped downstream').toBe(47);
   });
 
   test('pin:same-seed-survivors — the same seed draws the same hooks, forever', () => {

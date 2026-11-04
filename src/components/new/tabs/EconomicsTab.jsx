@@ -27,6 +27,7 @@ import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
+import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
 
 // M6d FLOW-DERIVED ECONOMICS — the live trade-flow band → colour. Qualitative only
 // (the M6a commodityBand vocabulary); never a numeric price.
@@ -156,6 +157,10 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
           // missing houses, upstream imports, the upstream note) — one derivation, shared
           // with the Compendium's ChainRow.
           const facts = chainFlowFacts(chain, instNames);
+          // X-50 (BOILERPLATE ONCE): generation gives every chain of a settlement the same impact
+          // sentence, so it prints on the first card that carries it; each card keeps its need.
+          const impact = chain.dependency?.impact || '';
+          const impactShown = !!impact && filtered.slice(0, i).some(prev => prev?.dependency?.impact === impact);
 
           return (
             <div key={i} style={{
@@ -204,7 +209,7 @@ function EconomicFlowsSection({ chains, institutionalServices = [], incomeSource
               {/* Impairment detail */}
               {chain.dependency && (
                 <div style={{fontSize:proseFontSize(FS.xs, mobile),color:st.color,background:`${st.color}08`,padding:'4px 8px',marginTop:4,lineHeight:1.4}}>
-                  <strong>Needs {chain.dependency.resource}</strong> - {chain.dependency.impact}
+                  <strong>Needs {chain.dependency.resource}</strong>{impact && !impactShown && <> - {impact}</>}
                   {chain.dependency.affectedServices.length > 0 && <span style={{color:MUTED}}> · affects: {chain.dependency.affectedServices.slice(0, 3).join(', ')}</span>}
                 </div>
               )}
@@ -286,6 +291,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // null ⇒ NO live-flow section ⇒ the generation baseline below renders byte-identically.
   const campaigns = useStore(st => st.campaigns);
   const eco = economicState || s?.economicState;
+  const storesLine = eco?.foodSecurity?.foodRecord ? foodStoresWords(eco.foodSecurity.foodRecord) : '';
   const flowDrift = useMemo(() => {
     const sid = saveId != null ? String(saveId) : (s?.id != null ? String(s.id) : null);
     if (!sid || !Array.isArray(campaigns)) return null;
@@ -310,7 +316,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // DS-GEN-18 (`economics.craftReason`) — the general desk's ONE caller with that reader's own
   // gate, memoised (ARCH §4.1, X-F9) ABOVE the early return (rules-of-hooks). FOUR LINES, as
   // many as the block it replaced: this file's thirteen prose-numerics rows are keyed on LINE.
-  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView }).economics.craftReasonLine, [s, publicDossier, playerView]);
+  const craftReasonLine = useMemo(() => generalDeskLines(s, { publicDossier, playerView, tier: s?.tier }).economics.craftReasonLine, [s, publicDossier, playerView]);
   if (!eco) return <Empty message="No economic data available."/>;
 
   const prosColor = PROSPERITY_COLORS[eco.prosperity] || '#a0762a';
@@ -370,7 +376,7 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
   // economyDeskRead.js now — four tabs draw this desk and the walker's ARM 2 admits exactly
   // one file that calls it, so the call cannot live in a tab any more. Datum is untouched:
   // situationDesc, the tiles and their sub-lines never read the desk.
-  const deskProse = economyDeskRead(s, { publicDossier, playerView, foodBalance: fbal, granaryOutlook: granary, flowDrift });
+  const deskProse = economyDeskRead(s, { publicDossier, playerView, tier: s?.tier, foodBalance: fbal, granaryOutlook: granary, flowDrift });
   const drawnFoodLine = drawnAtMount('economics.foodSecurity', deskProse.foodSecurityRung);
   // The food GLANCE position (DS-ECO-2), read at the Food Security section since the Food
   // tile was cut (T2-1); see EconomicsGlance.jsx for why the read stays.
@@ -557,6 +563,10 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
           }
         </div>
         {drawnFoodGlance?.sentence&&<p style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,lineHeight:1.5,margin:'8px 0 0',fontStyle:'italic'}}>{drawnFoodGlance.sentence}</p>}
+        {/* ── THE STORES, ONE HOME (FOOD-1, chair addendum 2; the owner 2026-11-03: "Do add storehouse
+            months the economy tab.") — the food record's months in store (economicState.foodSecurity.
+            foodRecord.storageMonths) and whether a granary stands, printed once; the id is the Food endurance door (FOOD_STORES_DOOR). */}
+        {storesLine&&<div id="dossier-stores-economy-food-stores" data-testid="economics-food-stores" style={{fontSize:proseFontSize(FS.sm, mobile),color:swatch.inkMag2,marginTop:8}}>{storesLine}</div>}
       </Section>}
 
       {/* ── DS-ECO-9 at economics.foodSecurity — the town's own account of how it eats ──

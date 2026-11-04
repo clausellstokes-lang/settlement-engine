@@ -51,7 +51,7 @@ export default function SteadingsSection({ settlement, publicDossier = false, pl
   // props and two scalars read off the settlement.
   const desk = useMemo(
     () => generalDeskLines(settlement, {
-      publicDossier, playerView, steadings, lifecycleStatus: grade, ancientRuin: ancient,
+      publicDossier, playerView, tier: settlement?.tier, steadings, lifecycleStatus: grade, ancientRuin: ancient,
     }).steadings,
     [settlement, publicDossier, playerView, steadings, grade, ancient],
   );

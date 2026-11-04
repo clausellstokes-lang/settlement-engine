@@ -19,6 +19,7 @@ import { flag } from '../../lib/flags.js';
 import { useStore } from '../../store/index.js';
 import { resolveFaithUnlocked } from '../settlementDetail/resolveExportSeam.js';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import IconButton from '../primitives/IconButton.jsx';
 import DeleteConfirmation from '../DeleteConfirmation';
 import useIsMobile from '../../hooks/useIsMobile.js';
@@ -38,21 +39,24 @@ const HIDDEN_TH = { padding:0, border:0, height:0, lineHeight:0 };
 /** One row in the "Books and export" disclosure — a label over a one-line
  *  description, so each export door's purpose reads on the surface instead of in
  *  a code comment. A ghost menuitem Button (native focus + keyboard). */
-function ExportItem({ Icon, label, desc, disabled, onClick }) {
+function ExportItem({ Icon, label, desc, disabled, onClick, launch = false, ...rest }) {
   const mobile = useIsMobile();
+  // `launch` (LaunchGatedExport, X-53): the row wears the launch skin, so its words take the
+  // button's gold letters (no colour of their own) and the icon its launch ink.
   return (
     <Button
-      variant="ghost"
+      variant={launch ? 'launch' : 'ghost'}
       fullWidth
       role="menuitem"
       disabled={disabled}
-      icon={<Icon size={13} color={GOLD} />}
+      icon={<Icon size={13} color={launch ? undefined : GOLD} />}
       onClick={onClick}
       style={{ justifyContent:'flex-start', textAlign:'left', padding:'6px 8px', gap:6 }}
+      {...rest}
     >
       <span style={{ display:'flex', flexDirection:'column', minWidth:0 }}>
-        <span style={{ fontSize:FS.sm, color:INK, fontWeight:600 }}>{label}</span>
-        <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:MUTED, fontWeight:400 }}>{desc}</span>
+        <span style={{ fontSize:FS.sm, color:launch ? undefined : INK, fontWeight:600 }}>{label}</span>
+        <span style={{ fontSize:chromeFontSize(FS.xxs, mobile), color:launch ? undefined : MUTED, fontWeight:400 }}>{desc}</span>
       </span>
     </Button>
   );
@@ -205,8 +209,11 @@ export function CampaignFolder({
   const exportMenuRef = useRef(null);
   useEffect(() => {
     if (!exportOpen) return;
-    const onDoc = (e) => { if (exportMenuRef.current && !exportMenuRef.current.contains(e.target)) setExportOpen(false); };
-    const onKey = (e) => { if (e.key === 'Escape') setExportOpen(false); };
+    // A press or Escape inside the launch dialog (portalled to <body>, X-53) belongs to the
+    // dialog, which closes itself; the menu stays open beneath it.
+    const inLaunchDialog = (e) => typeof e.target?.closest === 'function' && e.target.closest('[data-launch-dialog]') != null;
+    const onDoc = (e) => { if (exportMenuRef.current && !exportMenuRef.current.contains(e.target) && !inLaunchDialog(e)) setExportOpen(false); };
+    const onKey = (e) => { if (e.key === 'Escape' && !inLaunchDialog(e)) setExportOpen(false); };
     document.addEventListener('mousedown', onDoc);
     document.addEventListener('keydown', onKey);
     return () => { document.removeEventListener('mousedown', onDoc); document.removeEventListener('keydown', onKey); };
@@ -354,24 +361,32 @@ export function CampaignFolder({
               </Button>
               {exportOpen && (
                 <div role="menu" style={{ position:'absolute', right:0, top:'100%', marginTop:4, zIndex:20, background:CARD, border:`1px solid ${BORDER}`, minWidth:240, padding:4, display:'flex', flexDirection:'column', gap:1, textAlign:'left' }}>
-                  <ExportItem
-                    Icon={BookOpen}
-                    label={wbBusy ? 'Binding…' : 'World Book'}
-                    desc="the full record, for your eyes"
-                    disabled={settlements.length === 0 || wbBusy}
-                    onClick={(e) => { setExportOpen(false); handleWorldBook('dm')(e); }} />
-                  <ExportItem
-                    Icon={BookOpen}
-                    label="Player Book"
-                    desc="safe to hand across the table"
-                    disabled={settlements.length === 0 || wbBusy}
-                    onClick={(e) => { setExportOpen(false); handleWorldBook('player')(e); }} />
-                  <ExportItem
-                    Icon={FileText}
-                    label={pdfBusy ? 'Exporting…' : 'Campaign PDF'}
-                    desc="a printable dossier"
-                    disabled={settlements.length === 0 || pdfBusy}
-                    onClick={(e) => { setExportOpen(false); handleExportPdf(e); }} />
+                  {/* The three exports are the launch teaser for every non-staff account
+                      before launch (X-53); Import stays live. */}
+                  <LaunchGatedExport block>
+                    <ExportItem
+                      Icon={BookOpen}
+                      label={wbBusy ? 'Binding…' : 'World Book'}
+                      desc="the full record, for your eyes"
+                      disabled={settlements.length === 0 || wbBusy}
+                      onClick={(e) => { setExportOpen(false); handleWorldBook('dm')(e); }} />
+                  </LaunchGatedExport>
+                  <LaunchGatedExport block>
+                    <ExportItem
+                      Icon={BookOpen}
+                      label="Player Book"
+                      desc="safe to hand across the table"
+                      disabled={settlements.length === 0 || wbBusy}
+                      onClick={(e) => { setExportOpen(false); handleWorldBook('player')(e); }} />
+                  </LaunchGatedExport>
+                  <LaunchGatedExport block>
+                    <ExportItem
+                      Icon={FileText}
+                      label={pdfBusy ? 'Exporting…' : 'Campaign PDF'}
+                      desc="a printable dossier"
+                      disabled={settlements.length === 0 || pdfBusy}
+                      onClick={(e) => { setExportOpen(false); handleExportPdf(e); }} />
+                  </LaunchGatedExport>
                   <ExportItem
                     Icon={ScrollText}
                     label="Import"

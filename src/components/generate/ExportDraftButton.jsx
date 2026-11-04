@@ -26,6 +26,7 @@ import { useState, lazy, Suspense } from 'react';
 import { useStore } from '../../store/index.js';
 import { t } from '../../copy/index.js';
 import Button from '../primitives/Button.jsx';
+import LaunchGatedExport from '../primitives/LaunchGatedExport.jsx';
 import { sans, FS, SP, swatch } from '../theme.js';
 import { track, EVENTS } from '../../lib/analytics.js';
 
@@ -86,14 +87,17 @@ export default function ExportDraftButton() {
 
   return (
     <div style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: SP.xs }}>
-      <Button
-        variant="secondary"
-        size="lg"
-        onClick={() => { setError(null); setOpen(true); }}
-        title="Export this draft as a PDF without saving it"
-      >
-        Export PDF
-      </Button>
+      {/* Before launch, the launch teaser for every non-staff account (X-53). */}
+      <LaunchGatedExport>
+        <Button
+          variant="secondary"
+          size="lg"
+          onClick={() => { setError(null); setOpen(true); }}
+          title="Export this draft as a PDF without saving it"
+        >
+          Export PDF
+        </Button>
+      </LaunchGatedExport>
       {error && (
         // role=alert (SB5): the export failure appears after the user acts, so
         // it must interrupt assistive tech (WCAG 4.1.3).

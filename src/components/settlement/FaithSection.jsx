@@ -284,8 +284,18 @@ function ActiveFaith({ model }) {
   );
 }
 
-/** The generic true-neutral line + a quiet upgrade prompt (TEASER mode). Names NO deity. */
-function FaithTeaser({ publicDossier }) {
+/**
+ * THE FAITH LINE + a quiet upgrade prompt (TEASER mode). Names NO deity.
+ *
+ * LANE FAITH (2026-11-03): the line is the model's `line` (faithPanelModel, from the ONE FAITH
+ * READING), so it describes the church that exists (the church beside a church, the walk to
+ * the neighbour's church where there is only access, the quiet observances where there is
+ * nothing) rather than a fixed sentence that denied the church on every generated settlement.
+ * The upsell stands apart from it, below a rule: selling copy never reads as a fact about
+ * the place.
+ * @param {{ lines: ReadonlyArray<string>, publicDossier?: boolean }} props
+ */
+function FaithTeaser({ lines, publicDossier }) {
   // THE PHONE PROSE FLOOR — the true-neutral line and the upgrade prompt, the
   // two passages this teaser exists to carry.
   const mobile = useIsMobile();
@@ -313,11 +323,11 @@ function FaithTeaser({ publicDossier }) {
         <Sparkles size={15} color={MUTED} />
         <span style={{ color: INK, fontFamily: sans, fontSize: FS.sm, fontWeight: 900 }}>Faith</span>
       </div>
-      <div style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
-        The people keep their own quiet observances. No single creed holds sway, and the shrines answer to no named god.
+      <div data-testid="faith-line" style={{ color: BODY, fontFamily: sans, fontSize: proseFontSize(FS.xs, mobile), lineHeight: 1.5 }}>
+        {lines.join(' ')}
       </div>
       {!publicDossier && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+        <div data-testid="faith-upsell" style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', borderTop: `1px solid ${BORDER}`, paddingTop: 8, marginTop: 4 }}>
           <span style={{ color: MUTED, fontFamily: sans, fontSize: proseFontSize(FS.xxs, mobile), lineHeight: 1.45 }}>
             Awaken a living pantheon (a patron god, rival cults, and the rising and ebbing of devotion) with a premium campaign.
           </span>
@@ -351,6 +361,6 @@ export default function FaithSection({ settlement, publicDossier = false }) {
   if (model.hasEmbed) return <ActiveFaith model={model} />;
   // HIDDEN — premium/elevated, deity-free (faith:'none'): render nothing.
   if (isPremium) return null;
-  // TEASER — free/anon, no embeds: the generic true-neutral line (names NO deity).
-  return <FaithTeaser publicDossier={publicDossier} />;
+  // TEASER — free/anon, no embeds: the faith line (names NO deity) and the upsell apart.
+  return <FaithTeaser lines={model.line || []} publicDossier={publicDossier} />;
 }

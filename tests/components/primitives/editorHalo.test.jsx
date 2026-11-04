@@ -180,7 +180,11 @@ describe('the editor halo is an optional prop on two shared primitives', () => {
 
   it('A6 the halo pin holds in both directions and the dialog door is unmoved in both branches', () => {
     expect(filesNaming('editorHalo')).toEqual([SHEET_REL, POPUP_REL, DIALOG_REL].sort());
-    expect(filesNaming('EDITOR_GROUND')).toEqual([SHEET_REL, POPUP_REL, 'src/components/theme.js'].sort());
+    // 2026-11-04 (REGISTERS seat, lane hygiene at the composed tip): + AvailableAtLaunchDialog.jsx, the launch teaser
+    // whose plate takes the house's darkest warm ground (EXPORT-GATE, X-53 unit 2a, 3fd42c53f); measured, re-keyed by name.
+    expect(filesNaming('EDITOR_GROUND')).toEqual(
+      [SHEET_REL, POPUP_REL, 'src/components/theme.js', 'src/components/primitives/AvailableAtLaunchDialog.jsx'].sort(),
+    );
     expect(filesNaming('houseBloom')).toEqual(
       ['src/components/nav/ArrowControl.jsx', 'src/components/theme.js', SHEET_REL, POPUP_REL].sort(),
     );

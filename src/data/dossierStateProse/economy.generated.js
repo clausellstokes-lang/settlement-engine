@@ -1926,7 +1926,7 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMFORTABLE": [
         {
           "angle": "ledger",
-          "text": "{settlement} runs a reliable surplus. The margin is not large and it is dependable, and there are reserves behind it.",
+          "text": "{settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
           "slots": [
             "settlement"
           ],

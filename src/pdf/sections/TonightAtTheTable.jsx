@@ -1,227 +1,106 @@
 /**
- * TonightAtTheTable — chapter 02. The single page a DM can pull up at the
- * table when running this settlement on the fly.
+ * TonightAtTheTable — chapter 02, "Tonight": THE ONE TONIGHT SHEET in print (X-51, the owner
+ * 2026-11-03: "There should be one consolidated dub it tonight sheet").
  *
- * Uses the shared 1 / 3 / 1 / 3 / 1 quick guide: one identity sentence, three
- * defining truths, one pressure, three faces, and one entry point. The deeper
- * hook and crisis chapters remain available elsewhere in the dossier; this page
- * is deliberately the five-minute brief instead of another exhaustive index.
+ * The same sheet the Table View and Session Mode render (domain/summary/tonightSheet.js ::
+ * composeTonightSheet): the active crisis in one line, the people to voice, the two facts the
+ * players test first (the food band and stores from economicState.foodSecurity.foodRecord, and
+ * the defence facts), and the hooks. The old quick guide's identity sentence and three truths
+ * live on the Overview chapter; they are not printed twice.
  *
  * Editable fields:
- *   - tonight.npc.<i>.note
  *   - tonight.scratch
  */
 import { View, Text } from '@react-pdf/renderer';
 import { PageChrome } from '../primitives/PageChrome.jsx';
-import { ChapterBand, GoldRule, HairRule, Tag } from '../primitives/Dense.jsx';
-import { Pill } from '../primitives/Pill.jsx';
+import { ChapterBand, GoldRule, HairRule } from '../primitives/Dense.jsx';
 import { NotesField } from '../primitives/Editable.jsx';
 import { type, palette, space, pt } from '../theme.js';
-import { humanize } from '../lib/format.js';
-import { composeSettlementQuickGuide } from '../../domain/summary/settlementQuickGuide.js';
-import { tokenCase } from '../../domain/display/labelCase.js';
+import { composeTonightSheet, TONIGHT_COPY } from '../../domain/summary/tonightSheet.js';
 
-export function TonightAtTheTable({ settlement, narrativeMode, vm }) {
-  const guide = composeSettlementQuickGuide(settlement);
-  const npcs = (vm?.npcs?.sorted || []).slice(0, 3);
-  const hasEntryPoint = !guide.entryPoint.text.startsWith('No immediate entry point');
+/** @param {{ children: string, color: string }} props */
+function Eyebrow({ children, color }) {
+  return (
+    <Text style={{ ...type.label, color, fontSize: pt['9'], marginBottom: 4, textTransform: 'uppercase' }}>
+      {children}
+    </Text>
+  );
+}
+
+export function TonightAtTheTable({ settlement, narrativeMode }) {
+  const sheet = composeTonightSheet(settlement);
+  const why = { seat: TONIGHT_COPY.seat, secret: TONIGHT_COPY.secret, cleric: TONIGHT_COPY.cleric };
 
   return (
     <PageChrome settlement={settlement} narrativeMode={narrativeMode}>
       <ChapterBand
         eyebrow="02"
-        title="Tonight at the Table"
+        title={TONIGHT_COPY.title}
         accent={narrativeMode ? palette.ai : palette.gold}
-        sub="Quick-grab session prep"
       />
 
-      {/* The chapter headline "One place, three truths, one pressure, three faces, one way
-          into play." is CUT (chair ruling, RULINGS-T1 DM SUMMARY; R6): it re-announced the
-          five blocks below it. The chapter stays. */}
-
-      {/* ── Identity and three defining truths ───────────────── */}
-      <View style={{ marginBottom: space.sm }}>
-        <Text style={{
-          ...type.body_em,
-          color: palette.ink,
-          fontSize: pt['10.5'],
-          lineHeight: 1.35,
-          marginBottom: 5,
-        }}>
-          {guide.identitySentence}
-        </Text>
-        {guide.definingTruths.map((truth) => (
-          <View
-            key={truth.id}
-            style={{
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              marginBottom: 3,
-              paddingLeft: 6,
-              borderLeft: `1.5pt solid ${palette.border}`,
-            }}
-            wrap={false}
-          >
-            <Text style={{
-              ...type.label_plain,
-              color: palette.muted,
-              fontSize: pt['7.5'],
-              width: 76,
-              marginRight: 5,
-              paddingTop: 1,
-            }}>
-              {tokenCase(truth.label)}
-            </Text>
-            <Text style={{
-              ...type.body,
-              color: palette.second,
-              fontSize: pt['8.5'],
-              lineHeight: 1.3,
-              flex: 1,
-            }}>
-              {truth.text}
-            </Text>
-          </View>
-        ))}
-      </View>
-
-      <View style={{
-        marginBottom: space.sm,
-        padding: 6,
-        backgroundColor: palette.badBg,
-        borderLeft: `2pt solid ${palette.bad}`,
-      }} wrap={false}>
-        <Text style={{
-          ...type.label,
-          color: palette.bad,
-          fontSize: pt['7.5'],
-          marginBottom: 2,
-        }}>
-          WHAT IS URGENT
-        </Text>
-        <Text style={{
-          ...type.italic,
-          color: palette.ink,
-          fontSize: pt['9'],
-          lineHeight: 1.35,
-        }}>
-          {guide.immediatePressure.text}
-        </Text>
-      </View>
-
-      {/* ── One entry point ────────────────────────────────────── */}
-      <View style={{ marginBottom: space.sm }}>
-        <Text style={{ ...type.label, color: palette.gold, fontSize: pt['9'], marginBottom: 4 }}>
-          START HERE
-        </Text>
-        {!hasEntryPoint && (
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
-            {guide.entryPoint.text}
+      {sheet.opening ? (
+        <View style={{
+          marginBottom: space.sm,
+          padding: 6,
+          backgroundColor: palette.badBg,
+          borderLeft: `2pt solid ${palette.bad}`,
+        }} wrap={false}>
+          <Eyebrow color={palette.bad}>{sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}</Eyebrow>
+          <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'], lineHeight: 1.35 }}>
+            {sheet.opening}
           </Text>
-        )}
-        {hasEntryPoint && (
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'flex-start',
-              paddingLeft: 8,
-              borderLeft: `2pt solid ${palette.gold}`,
-              paddingTop: 2,
-              paddingBottom: 2,
-            }}
-            wrap={false}
-          >
-            <Text
-              style={{
-                fontFamily: 'Lora',
-                fontWeight: 700,
-                color: palette.gold,
-                fontSize: pt['14'],
-                width: 18,
-                paddingTop: 1,
-              }}
-            >
-              1
-            </Text>
-            <View style={{ flex: 1 }}>
-              <Text style={{
-                ...type.body,
-                fontSize: pt['10.5'],
-                color: palette.ink,
-                lineHeight: 1.35,
-              }}>
-                {guide.entryPoint.text}
+        </View>
+      ) : null}
+
+      {sheet.people.length > 0 ? (
+        <View style={{ marginBottom: space.sm }}>
+          <Eyebrow color={palette.cool}>{TONIGHT_COPY.people}</Eyebrow>
+          {sheet.people.map((p) => (
+            <View key={p.name} style={{ marginBottom: 5, paddingLeft: 6, borderLeft: `1.5pt solid ${palette.border}` }} wrap={false}>
+              <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'] }}>{p.name}</Text>
+              <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['8.5'] }}>
+                {[p.role, why[p.why]].filter(Boolean).join(' · ')}
               </Text>
-              <View style={{ flexDirection: 'row', marginTop: 2 }}>
-                <Tag tone="gold">{humanize(guide.entryPoint.label)}</Tag>
-              </View>
+              {p.line ? (
+                <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>
+                  {p.why === 'secret' ? p.line : `${TONIGHT_COPY.wants} ${p.line}`}
+                </Text>
+              ) : null}
             </View>
-          </View>
-        )}
-      </View>
+          ))}
+        </View>
+      ) : null}
 
       <HairRule />
 
-      {/* ── NPCs ──────────────────────────────────────────────── */}
-      <View style={{ marginBottom: space.sm }}>
-        <Text style={{ ...type.label, color: palette.cool, fontSize: pt['9'], marginBottom: 4 }}>
-          THREE FACES TO REMEMBER
-        </Text>
-        {npcs.length === 0 && (
-          <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
-            No NPCs detailed for this settlement.
-          </Text>
-        )}
-        {npcs.map((npc, i) => (
-          <View
-            key={`tn-${i}`}
-            style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 5 }}
-            wrap={false}
-          >
-            <View
-              style={{
-                width: 22, height: 22,
-                backgroundColor: palette.coolBg,
-                borderRadius: 11,
-                alignItems: 'center', justifyContent: 'center',
-                marginRight: 6, marginTop: 1,
-              }}
-            >
-              <Text style={{ ...type.label_em, color: palette.cool, fontSize: pt['9'] }}>
-                {(npc.name || '?').slice(0, 2).toUpperCase()}
+      {sheet.facts.length > 0 ? (
+        <View style={{ marginBottom: space.sm }}>
+          <Eyebrow color={palette.gold}>{TONIGHT_COPY.facts}</Eyebrow>
+          {sheet.facts.map((f) => (
+            <View key={f.id} style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 3 }} wrap={false}>
+              <Text style={{ ...type.label_plain, color: palette.muted, fontSize: pt['8.5'], width: 56, marginRight: 5 }}>
+                {f.label}
+              </Text>
+              <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3, flex: 1 }}>
+                {f.text}
               </Text>
             </View>
-            <View style={{ flex: 1 }}>
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['10.5'], marginRight: 6 }}>
-                  {npc.name}
-                </Text>
-                {npc.title && (
-                  <Text style={{ ...type.italic, color: palette.muted, fontSize: pt['9'] }}>
-                    {npc.title}
-                  </Text>
-                )}
-                <View style={{ flex: 1 }} />
-                <Pill tone="cool">PWR {npc.power || 0}</Pill>
-              </View>
-              {/* What they want this session — extractable prose */}
-              <View style={{ flexDirection: 'row', marginTop: 1, alignItems: 'flex-start' }}>
-                <Text style={{ ...type.label, color: palette.cool, fontSize: pt['7'], marginRight: 4, paddingTop: 2 }}>
-                  WANTS:
-                </Text>
-                <Text style={{ ...type.body, fontSize: pt['9'], color: palette.second, flex: 1 }}>
-                  {npc.motivation || npc.blurb || 'leverage tonight\u2019s table'}
-                </Text>
-              </View>
-              {npc.factionLabel && (
-                <Text style={{ ...type.caption, color: palette.cool, fontSize: pt['7.5'], marginTop: 1 }}>
-                  {npc.factionLabel}
-                </Text>
-              )}
+          ))}
+        </View>
+      ) : null}
+
+      {sheet.hooks.length > 0 ? (
+        <View style={{ marginBottom: space.sm }}>
+          <Eyebrow color={palette.gold}>{TONIGHT_COPY.hooks}</Eyebrow>
+          {sheet.hooks.map((h) => (
+            <View key={h.text} style={{ marginBottom: 4, paddingLeft: 8, borderLeft: `2pt solid ${palette.gold}` }} wrap={false}>
+              {h.source ? <Text style={{ ...type.body_em, color: palette.ink, fontSize: pt['9'] }}>{h.source}</Text> : null}
+              <Text style={{ ...type.body, color: palette.second, fontSize: pt['9'], lineHeight: 1.3 }}>{h.text}</Text>
             </View>
-          </View>
-        ))}
-      </View>
+          ))}
+        </View>
+      ) : null}
 
       <GoldRule />
 

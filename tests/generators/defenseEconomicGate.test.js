@@ -235,7 +235,7 @@ describe('the gates have a consumer: readiness rows carry funding notes', () => 
 
   test('an underfunded gate annotates its row; fully funded rows stay silent', () => {
     const poorRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 10, institutions: FUNDED_DEFENSES }));
-    expect(poorRows.find(r => r.label === 'Invasion & War').fundingNote).toMatch(/garrison pay at \d+%/);
+    expect(poorRows.find(r => r.label === 'Invasion & War').fundingNote).toMatch(/defence upkeep for .+ at \d+%/);
     expect(poorRows.find(r => r.label === 'Internal Security').fundingNote).toMatch(/watch and court funding at \d+%/);
     const richRows = deriveDefenseReadiness(withProfile({ priorityEconomy: 80, institutions: FUNDED_DEFENSES }));
     expect(richRows.every(r => r.fundingNote === null)).toBe(true);

@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (46)    docs/review-r2/**, docs/shift-records/**
+ *   tree (56)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-11-04, the composed tip of the coherence window, 46 -> 56: the DOORS lane's ten signed records of
+ *                2026-11-03 for FOOD-1/2/3, FOOD-print, SIZE-2/3, DEFENSE-2 x3 and X-49; GROWTHS that hid nothing.)
  *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
  *                GROWTHS that hid nothing, each a signature with no path:line citation of its own.)
  *                (2026-10-30, the dossier consolidation, 40 -> 44: BUILD-S's service-category-fidelity record and
@@ -127,12 +129,15 @@
  *                pinning composite-r4 @ 69b7a8d3 whose citations address a town-map
  *                surface deleted at 43c3ac3805. It hid nothing — the excluded
  *                past-EOF count stayed 377 and ARM 2 was 0 on both sides.)
- *   dated (8)    an ISO date in the filename (2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
+ *   dated (9)    an ISO date in the filename (2026-10-30: docs/UX_CONSOLIDATION_2026-10-30.md joined, 5 -> 6): the three COMPREHENSIVE_REVIEWs,
  *                HANDOFF_2026-08-01_PAUSE, SIM-SEALS-SURVEY-2026-09-19,
  *                GENERATION_COHERENCE_AUDIT_2026-11-02 and GENERATION_ROOT_CAUSES_2026-11-02
  *                (both joined 2026-11-02, 6 -> 8 as measured at the merge over master,
  *                born into the roster at the owner's word to save the audit and its
  *                root-cause trace; their citations address c0ef42c13; a GROWTH that hid nothing)
+ *                and SOAK_1000_2026-11-03 (joined 2026-11-03, 8 -> 9, born into the roster
+ *                as the SOAK-1000 dry-run report; its citations address 1169b3cd5; a GROWTH
+ *                that hid nothing)
  *   sha-pin (1)  a header that pins the tree it describes (`**Snapshot base:**`):
  *                SETTLEMENT_CAPABILITY_ATLAS
  * The BLOCKQUOTE is required, not decoration: docs/README.md discusses the word

@@ -45,12 +45,15 @@ const record = (/** @type {Record<string, unknown>} */ over = {}) => ({
 });
 
 const deadMagic = { name: 'Kelby', config: { magicExists: false, magicLevel: 'none' }, institutions: [], factions: [] };
+// Lane MAGIC (chair ruling 2, 2026-11-03): 'integral' needs a practitioner AND a dependent on
+// the record, never the band alone, so the top-band fixture carries the magic chains its practitioners run.
 /** A living-magic realm whose ARCANE faction power decides the military role band. */
 const magicRealm = (/** @type {number} */ arcanePower) => ({
   name: 'Kelby',
   config: { magicExists: true, magicLevel: 'high' },
   institutions: [{ name: "Wizard's tower" }, { name: 'Arcane academy' }],
   factions: [{ name: "Mages' Guild", power: arcanePower }],
+  economicState: { activeChains: [{ chainId: 'spellcasting', label: 'Spellcasting Services' }, { chainId: 'magical_goods', label: 'Magical Items & Enchanting' }] },
 });
 
 const sumOf = (/** @type {Record<string, number>} */ c) => Object.values(c).reduce((a, b) => a + b, 0);

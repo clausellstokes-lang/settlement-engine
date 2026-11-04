@@ -11,10 +11,13 @@
  * as variables.
  */
 
-import { buildThreatAssessment } from './threatAssessment.js';
+import { buildThreatAssessment, healerSubject } from './threatAssessment.js';
+import { defenseFactsOf, foodEnduranceOf } from '../defense/defenseFacts.js';
+import { numberWord } from './numberWords.js';
 import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
+import { magicPractitioners } from '../magicReliance.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -208,10 +211,7 @@ export function deriveSupportingCapabilities(settlement) {
   const r = settlement || {};
   const d = r.defenseProfile || {};
   const scores = d.scores || {};
-  const inst = d.institutions || {};
   const f = r.economicState?.compound?.inst || {};
-  const tradeAccess = r.config?.tradeRouteAccess || 'road';
-  const magicDef = inst.magicDef || [];
   const econScore = Math.round(scores.economic || 0);
   // ⛔ T2-24 (UX consolidation 2026-10-30, red-first): IN A WORLD WHERE MAGIC DOES NOT
   // FUNCTION THERE IS NO ARCANE PROVISION TO HAVE. `hasMagicInst` is a roster regex, and an
@@ -219,7 +219,22 @@ export function deriveSupportingCapabilities(settlement) {
   // "Arcane Support: Present ... Detection, wards, counterspell." beside a Magic tab saying
   // magic does not function. The dial is asked of the estate's one accessor (wrapped as
   // `{ settlement }`, the call shape every caller uses; see defenseStateProse.js).
-  const arcane = !!f.hasMagicInst && magicWorksAt({ settlement: r }) !== false;
+  //
+  // ⛔ ONE PRACTITIONER CENSUS (lane DEFENSE-2, 2026-11-03, lane MAGIC's request). Presence is
+  // `magicReliance.js :: magicPractitioners`, the census the Magic tab's reading counts: houses the
+  // catalogue says practise, and people whose role says they practise (a Hedge Witch counts). The
+  // roster regex `hasMagicInst` printed "No arcane practitioners on the rolls" in a village the
+  // Magic tab read as integral. The row itself is dropped where magic does not work, by the same
+  // predicate the dossier's gate (`dossierViewModel.js :: magicRowsGated`) asks, `magicWorksAt`.
+  // The gate is not imported: dossierViewModel's closure would add ~826 KB to the Defense desk's,
+  // past ARCH §5.3's refusal precedent; lifting the gate into a light leaf is a request.
+  const practitioners = magicPractitioners(
+    /** @type {import('../magicReliance.js').MagicRelianceSource} */ (/** @type {unknown} */ (r)),
+  );
+  const arcane = practitioners.length > 0;
+  // The one set of defence facts (lane DEFENSE): a hospital only where one stands, and a
+  // healer named as a healer.
+  const facts = defenseFactsOf(r);
 
   const caps = [
     {
@@ -257,15 +272,15 @@ export function deriveSupportingCapabilities(settlement) {
       // ⛔⛔ THE LABEL IS THE QUESTION THIS ROW ASKS, AND IT IS NOT THE OVERVIEW'S QUESTION
       // (review 10, 2026-09-18). It was called `Magical Capability`, which is also the name
       // of the Overview's Systems Health row — and the two read different facts. THIS row
-      // is a NARROW presence read: `compound.inst.hasMagicInst` is
-      // `wizard|mage|alchemist|enchant|arcane|academy of magic|scroll scribe|spellcasting|
-      // hedge wizard` and nothing else. The Overview's row bands `scores.magical`, which
+      // is a NARROW presence read: is anyone practising? (Since lane DEFENSE-2 it asks the
+      // practitioner census, `magicReliance.js :: magicPractitioners`; it used to ask the roster
+      // regex `compound.inst.hasMagicInst`.) The Overview's row bands `scores.magical`, which
       // `defenseGenerator` drives from the WORLD MAGIC SLIDER over a much wider presence
       // (healer, monastery, cathedral, druid, divine, healing all count), so a town with no
       // arcane institution at all can score 49 there. One name over two facts produced the
       // defect the review measured: "None" printed in amber beside a half-full bar on 27 of
       // 144 large settlements. Two facts, two names — this one is ARCANE SUPPORT, which is
-      // the only thing `hasMagicInst` can answer, and the Overview keeps the other name.
+      // the only thing a presence read can answer, and the Overview keeps the other name.
       //
       // ⛔ AND THE STATUS SAYS SOMETHING THE LABEL DOES NOT (the owner's fold of lane 6's
       // capability row). After the rename the row printed "Arcane Support · Arcane support ·
@@ -290,10 +305,8 @@ export function deriveSupportingCapabilities(settlement) {
       // `hasMagicInst === false` while being anything but conventional. The note now says
       // what is missing (arcane practitioners) and what follows from that specifically.
       note: arcane
-        ? `${magicDef.slice(0, 2).map((m) => m.name).join(', ')}. Detection, wards, counterspell.`
-        : magicWorksAt({ settlement: r }) === false
-          ? 'Magic does not function in this world.'
-          : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
+        ? `${practitioners.slice(0, 2).join(', ')}. Detection, wards, counterspell.`
+        : 'No arcane practitioners on the rolls. Wards, detection and counterspell are beyond this settlement.',
     },
     {
       label: 'Legal Infrastructure',
@@ -303,16 +316,17 @@ export function deriveSupportingCapabilities(settlement) {
     },
     {
       label: 'Medical Readiness',
-      status: f.hasHospital ? 'Hospital present' : f.hasChurch ? 'Clergy care' : 'None',
-      color: f.hasHospital ? '#1a5a28' : f.hasChurch ? '#7a5010' : '#8b1a1a', score: null,
-      note: f.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.' : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
+      status: facts.hasHospital ? 'Hospital present'
+        : facts.hasHealer ? (healerSubject(facts.healerName) === 'A healer' ? 'Healer' : 'Infirmary')
+          : f.hasChurch ? 'Clergy care' : 'None',
+      color: facts.hasHospital ? '#1a5a28' : (facts.hasHealer || f.hasChurch) ? '#7a5010' : '#8b1a1a', score: null,
+      note: facts.hasHospital ? 'Casualty treatment, outbreak containment, recovery capacity.'
+        : facts.hasHealer ? `${facts.healerName}. Wounds and fevers treated one at a time; no beds to contain an outbreak.`
+          : f.hasChurch ? 'Clerical care. Basic wound and disease management.' : 'No dedicated healers. Plague burns unchecked.',
     },
-    {
-      label: 'Logistics & Supply',
-      status: f.hasGranary ? 'Granary present' : 'No reserves',
-      color: f.hasGranary ? '#1a5a28' : '#8b1a1a', score: null,
-      note: f.hasGranary ? (f.hasPort ? 'Granary + sea access. Historically the hardest siege posture to break.' : tradeAccess === 'isolated' ? 'Granary in isolation. Endurance depends entirely on stored reserves.' : 'Granary with road supply. Cut the roads, cut the supply.') : (tradeAccess === 'port' ? 'No reserves, but sea supply continues while port is open.' : 'No food buffer. Any supply disruption becomes a survival crisis within days.'),
-    },
+    // ⛔ THE LOGISTICS & SUPPLY ROW IS GONE FROM THE DEFENSE SURFACES (the owner's word,
+    // 2026-11-03: "Do add storehouse months the economy tab."). It was the granary read; stored
+    // food is printed once, in months, on the Economy tab, and no Defense surface prints it.
   ];
   if (f.hasNavy || f.hasPort) {
     // experience-product-fit-5: the STANDING naval reality, not just the static
@@ -338,15 +352,32 @@ export function deriveSupportingCapabilities(settlement) {
           : 'Port facility but no naval force. Sea approaches are accessible to any vessel.',
     });
   }
-  return caps;
+  // The Arcane Support row is the list's one magic row.
+  return magicWorksAt({ settlement: r }) === false ? caps.filter((c) => c.label !== 'Arcane Support') : caps;
+}
+
+/**
+ * "the palisade", "the citizen militia and the adventurers' charter hall" — the roster names of
+ * what the defence purse pays for, in running prose.
+ * @param {ReadonlyArray<string>} names
+ * @returns {string}
+ */
+function namedForUpkeep(names) {
+  const items = names.map((n) => `the ${n.charAt(0).toLowerCase()}${n.slice(1)}`);
+  if (items.length <= 1) return items[0] || '';
+  return `${items.slice(0, -1).join(', ')} and ${items[items.length - 1]}`;
 }
 
 // Which defenseProfile.economicGates key funds each readiness row, and what
-// the underfunded expense is called in the funding note.
+// the underfunded expense is called in the funding note. ⚠ THE MILITARY GATE IS RECORDED
+// FOR ANY DEFENCE AT ALL (walls, militia, watch, hired swords, a charter hall —
+// `defenseGenerator.js :: computeDefenseScores`, `hasAnyDefense`), so its expense is
+// "defence upkeep", and `deriveDefenseReadiness` names the things upkept from the roster;
+// "garrison pay" for a palisade was the contradiction this replaced (lane DEFENSE).
 /** @type {Readonly<Record<string, [string, string]>>} */
 const READINESS_GATE_FOR = Object.freeze({
   'Beasts & Monsters': ['monster', 'patrol provisioning'],
-  'Invasion & War': ['military', 'garrison pay'],
+  'Invasion & War': ['military', 'defence upkeep'],
   'Internal Security': ['internal', 'watch and court funding'],
   'Economic Survival': ['economic', 'crisis logistics'],
   'Disasters & Famine': ['disaster', 'relief funding'],
@@ -358,8 +389,8 @@ const READINESS_GATE_FOR = Object.freeze({
  * generator's buildThreatAssessment (the assessment prose) with the readiness
  * score + STRONG/ADEQUATE/WEAK/CRITICAL badge, exactly as the web Defense tab.
  * When the row's economic-upkeep gate (defenseProfile.economicGates) sits
- * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded —
- * garrison pay at 60%") instead of leaving a silently lower bar.
+ * below ×1.0, fundingNote attributes the shortfall ("Upkeep underfunded: defence
+ * upkeep for the palisade at 60%") instead of leaving a silently lower bar.
  * Returns [{ label, score, status, statusColor, barColor, assess, fundingNote }].
  *
  * @param {DefenseDisplaySettlement | null | undefined} settlement
@@ -381,9 +412,11 @@ export function deriveDefenseReadiness(settlement) {
       r.economicState?.foodSecurity?.resilienceScore ??
       Math.round((((scores.economic || 0) * 0.4) + (f.hasGranary ? 60 : 20) + (f.hasHospital ? 70 : f.hasChurch ? 40 : 10)) / 2),
   };
+  const upkept = namedForUpkeep(defenseFactsOf(r).defenceNames);
   return buildThreatAssessment(r).map((row) => {
     const score = scoreFor[row.label] ?? 0;
-    const [gateKey, expense] = READINESS_GATE_FOR[row.label] || [];
+    const [gateKey, baseExpense] = READINESS_GATE_FOR[row.label] || [];
+    const expense = gateKey === 'military' && upkept ? `${baseExpense} for ${upkept}` : baseExpense;
     const gate = gateKey ? gates[gateKey] : undefined;
     const fundingNote = Number.isFinite(gate) && /** @type {number} */ (gate) < 1
       ? `Upkeep underfunded: ${expense} at ${Math.round(/** @type {number} */ (gate) * 100)}%`
@@ -436,4 +469,77 @@ export function deriveArmedForces(settlement) {
     charter: inst.charter || [],
     arcane: arcaneDefenseOf(settlement),
   };
+}
+
+// ── FOOD ENDURANCE, THE LINE (lane DEFENSE-3, X-52, 2026-11-03) ─────────────────────────
+// The owner: "call it food endurance rather than siege endurance". ONE sentence, read by the
+// Defense tab and by the PDF's defence chapter alike, from `defenseFacts.js :: foodEnduranceOf`
+// (which reads the one food record). The figures are said in words; no digit is minted.
+
+/** The line's label, one spelling for both readers. */
+export const FOOD_ENDURANCE_LABEL = 'Food endurance';
+
+/**
+ * The door from the line to the Economy tab's stores row, where the months in store are
+ * printed once. `anchor` is `entityLinks.js :: entityAnchor('stores', { id })`, spelled as a
+ * literal so this display leaf takes no import for it (the test holds the two equal); the
+ * Economy tab's stores row carries it as its element id.
+ */
+export const FOOD_STORES_DOOR = Object.freeze({
+  id: 'economy.food-stores',
+  type: 'stores',
+  anchor: 'dossier-stores-economy-food-stores',
+});
+
+const TIER_NOUNS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
+
+/** A length of time in plain words, never a decimal. Under seven weeks it is said in weeks.
+ * @param {number} months @returns {string} */
+function monthsInWords(months) {
+  const weeks = Math.round((months * 52) / 12);
+  if (weeks <= 3) return 'a few weeks';
+  if (weeks <= 6) return 'about a month';
+  const whole = Math.round(months);
+  if (whole < 12) return `about ${numberWord(whole)} months`;
+  if (whole === 12) return 'about a year';
+  return whole < 24 ? 'more than a year' : 'more than two years';
+}
+
+/**
+ * THE FOOD ENDURANCE LINE: what the stores mean under siege, in words. `door` is the words
+ * that name the stores (the granary, or household stores where none stands); the tab makes
+ * them the door to the Economy tab's stores row, the PDF prints `sentence` whole.
+ *
+ * @param {{ tier?: unknown, economicState?: unknown } | null | undefined} settlement
+ * @returns {{ label: string, before: string, door: string, after: string, sentence: string } | null}
+ */
+export function foodEnduranceLine(settlement) {
+  const end = foodEnduranceOf(settlement);
+  if (!end) return null;
+  const tier = typeof settlement?.tier === 'string' ? settlement.tier : '';
+  const noun = TIER_NOUNS.includes(tier) ? tier : 'place';
+  const opening = end.besieged ? 'the siege has taken the outlying fields' : 'under siege the outlying fields are lost';
+  const lead = end.hasGranary
+    ? `${opening.charAt(0).toUpperCase()}${opening.slice(1)}`
+    : `No granary: ${opening}`;
+  /** @type {string} */
+  let before;
+  /** @type {string} */
+  let door;
+  /** @type {string} */
+  let after;
+  if (end.fullRationMonths === null) {
+    before = `${lead}, but what the ${noun} still grows feeds it at full rations; `;
+    door = end.hasGranary ? 'the granary' : 'its household stores';
+    after = end.hasGranary ? ' stands in reserve.' : ' stand in reserve.';
+  } else {
+    const stretched = end.keptShare > 0 ? 'with what is still harvested, ' : '';
+    const half = end.halfRationMonths === null
+      ? '; on half rations the harvest alone is enough'
+      : `, ${monthsInWords(end.halfRationMonths)} on half`;
+    before = `${lead}; ${stretched}`;
+    door = end.hasGranary ? 'the granary' : 'household stores';
+    after = ` ${end.hasGranary ? 'carries' : 'carry'} the ${noun} for ${monthsInWords(end.fullRationMonths)} at full rations${half}.`;
+  }
+  return { label: FOOD_ENDURANCE_LABEL, before, door, after, sentence: `${before}${door}${after}` };
 }

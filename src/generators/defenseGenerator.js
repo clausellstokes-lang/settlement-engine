@@ -18,6 +18,7 @@ import { hasTradeRouteConnection } from '../domain/tradeRouteSemantics.js';
 import { partitionDefenseInstitutions } from '../domain/institutions/defenseInstitutionBuckets.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { readinessBandOf } from '../data/bandLadders.js';
+import { deriveMagicReliance } from '../domain/magicReliance.js';
 
 // ─── getDefenseInstitutions ───────────────────────────────────────────────────
 /**
@@ -71,11 +72,12 @@ const getDefenseInstitutions = (institutions) =>
  * @param {Object} config        - Settlement config
  * @param {string} tier          - Settlement tier
  * @param {Array}  stressTypes   - Active stress type strings
+ * @param {boolean} [reliesOnMagic] - The one magic reliance reading (relied-upon or integral)
  * @returns {{ military, monster, internal, economic, magical, magicDependency, traditions, economicGates }}
  */
 const computeDefenseScores = (
   inst, milEffective, crimEffective, econOutput, magInfluence, relInfluence,
-  priorities, threat, config, tier, stressTypes = [],
+  priorities, threat, config, tier, stressTypes = [], reliesOnMagic = false,
 ) => {
   const hasStress = (type) => stressTypes.includes(type);
   const route     = config.tradeRouteAccess || 'road';
@@ -451,16 +453,14 @@ const computeDefenseScores = (
   }
 
   // ── Magic dependency flag ───────────────────────────────────────────────────
-  // Computed but returned separately — indicates vulnerability if magic lost
-  // Magic dependency: fires when magic is actively compensating for vulnerabilities
-  // Either under stress with magic filling gaps, OR when multiple traditions present
-  // in a settlement that has supply chain or resource deficits
-  const magicDependency = magicOn && (
-    (hasStress('under_siege') && (hasArcane || hasDruid || hasDivine)) ||
-    (hasStress('famine')      && (hasDruid  || hasDivine)) ||
-    (hasStress('plague_onset')&& (hasDivine || hasAlchemy)) ||
-    (hasArcaneGuild && (hasStress('under_siege') || hasStress('famine')))
-  );
+  // ⛔ THE ONE RELIANCE READING (lane DEFENSE-2, 2026-11-03, lane MAGIC's request 2): the flag is
+  // `magicReliance.js :: deriveMagicReliance` at relied-upon or integral, read by
+  // generateDefenseProfile over the assembled settlement and handed in as `reliesOnMagic`.
+  // This function sees flags and dials, not the NPCs or the supply chains the reading counts, so it
+  // does not answer the question itself. It used to raise the flag only during a siege, famine or
+  // plague. A caller passing no `reliesOnMagic` (capacityModel, the display readers) reads false,
+  // and none of them reads this field from the scores it asks for.
+  const magicDependency = reliesOnMagic === true;
 
   return /** @type {any} */ ({
     military, monster, internal, economic, magical,
@@ -543,6 +543,7 @@ export function generateDefenseProfile(settlement) {
   const instFlags    = getInstFlags(config, institutions);
 
   const foodSecurity = settlement.economicState?.foodSecurity || null;
+  const { reading: magicReading } = deriveMagicReliance(settlement);
   const scores = computeDefenseScores(
     instFlags.inst,
     Math.round(instFlags.militaryEffective),
@@ -555,6 +556,7 @@ export function generateDefenseProfile(settlement) {
     { ...config, _institutions: institutions, _foodSecurity: foodSecurity },
     settlement.tier || 'town',
     stressTypes,
+    magicReading === 'relied-upon' || magicReading === 'integral',
   );
 
   // ── Supply chain linkage (Item 24) ────────────────────────────────────────

@@ -45,6 +45,7 @@ import { deriveDefensePosture } from '../../src/domain/display/dossierViewModel.
 import { DM_FIELD_FRAMED_BY_BLOCK, isDmEditableProsePath } from '../../src/domain/display/stateProse/dmFieldProjection.js';
 import { DEFENSE_STRESS_STATUS, deriveCriminalStructure, deriveGuardAssessment, deriveSupportingCapabilities } from '../../src/domain/display/defenseDisplay.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { deriveMagicReliance } from '../../src/domain/magicReliance.js';
 import { codeOnly } from '../helpers/codeOnlySource.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { SMALL_TIERS, TIER_ORDER, TOWN_PLUS_TIERS } from '../../src/data/constants.js';
@@ -553,8 +554,14 @@ describe('DS-DEF-2 — ALIVENESS over every combination the generator can build'
         }
       }
     }
-    expect(reached.size, `unreached: ${Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))}`)
-      .toBe(Object.keys(DEF2_POOLS).length);
+    // ⛔ THE FIVE DISASTERS & FAMINE POOLS ARE SILENT BY THE OWNER'S WORD (2026-11-03,
+    // verbatim: "Do add storehouse months the economy tab."): every one of them speaks of the
+    // granary or the stores, and the Defense tab prints no stored food (lane DEFENSE). The
+    // other twenty-one still all speak; the silent five are named, not merely counted.
+    const silent = Object.keys(DEF2_POOLS).filter((k) => k.startsWith('Disasters & Famine: '));
+    expect(silent).toHaveLength(5);
+    expect(Object.keys(DEF2_POOLS).filter((k) => !reached.has(k))).toEqual(silent);
+    expect(reached.size).toBe(Object.keys(DEF2_POOLS).length - silent.length);
     expect(Object.keys(DEF2_POOLS)).toHaveLength(26);
   });
 
@@ -1421,6 +1428,10 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
     // describing another. The producer's own asymmetry (institution `hasPort` on the granary
     // side, config `=== 'port'` on the other) is what makes this worth executing rather
     // than reasoning about.
+    // ⛔ THE LOGISTICS HALF OF THE MIRROR IS RETIRED WITH ITS ROW (the owner's word,
+    // 2026-11-03: "Do add storehouse months the economy tab."): the producer prints no
+    // Logistics & Supply row on a Defense surface and the desk draws no logistics lens, so
+    // both halves are pinned ABSENT here, and the naval half still mirrors.
     const seenLogistics = new Set();
     for (const { label, settlement } of WORLDS) {
       const caps = deriveSupportingCapabilities(settlement);
@@ -1429,17 +1440,9 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
         inst.hasGranary === true, inst.hasPort === true, settlement.config?.tradeRouteAccess,
       );
       seenLogistics.add(key);
-      const note = caps.find((c) => c.label === 'Logistics & Supply')?.note || '';
-      // The corpus suffix and the producer's note are two spellings of one branch; the
-      // branch identity is what is asserted, via the producer's own status + note pairing.
-      const granaryNote = /^Granary/.test(note);
-      expect(granaryNote, `${label}: producer note ${JSON.stringify(note)} vs key ${key}`)
-        .toBe(key.includes(': Granary'));
-      if (key === 'Logistics & Supply: Granary + port') expect(note).toContain('sea access');
-      if (key === 'Logistics & Supply: Granary in isolation') expect(note).toContain('isolation');
-      if (key === 'Logistics & Supply: Granary with road supply') expect(note).toContain('road supply');
-      if (key === 'Logistics & Supply: No reserves, port open') expect(note).toContain('sea supply');
-      if (key === 'Logistics & Supply: No reserves, landlocked') expect(note).toContain('No food buffer');
+      expectAbsentWithAnchor(caps.map((c) => c.label), 'Logistics & Supply', 'Medical Readiness', `${label}: no Logistics & Supply row`);
+      expect(caps.map((c) => c.label), `${label}: the Medical Readiness row still renders`).toContain('Medical Readiness');
+      expect(defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' }).logistics, `${label}: no logistics lens`).toBeNull();
       // The naval row exists exactly when the desk has a naval key, both ways.
       const navalRow = caps.find((c) => c.label === 'Naval Defense') || null;
       const navalKey = navalDefensePoolKey(inst.hasNavy === true, inst.hasPort === true, false);
@@ -1454,12 +1457,8 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
   it('the desk RENDERS on every generated world, and the sentence carries no slot marker', () => {
     for (const { label, settlement } of WORLDS) {
       const drawn = defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' });
-      expect(drawn.logistics, `${label} drew no logistics rung`).toBeTruthy();
-      expect(typeof drawn.logistics.sentence, `${label} logistics sentence`).toBe('string');
-      expect(drawn.logistics.sentence.length, `${label} drew an empty line`).toBeGreaterThan(40);
-      // anchored: the length arm on the line above proves the subject is a real rendered
-      expect(drawn.logistics.sentence).not.toContain('{'); // sentence and not an empty string
-      expect(drawn.logistics.provenance.blockId).toBe('DS-DEF-6');
+      // The logistics lens is silent by the owner's word (2026-11-03); see the mirror above.
+      expect(drawn.logistics, `${label} drew a logistics rung`).toBeNull();
       if (drawn.naval) {
         expect(drawn.naval.sentence.length, `${label} drew an empty naval line`).toBeGreaterThan(40);
         // anchored: the length arm on the line above proves the subject is a real sentence
@@ -1709,11 +1708,15 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       expect(drawn.arcaneReliance.sentence).not.toContain('{'); // sentence and not an empty string
       expect(drawn.arcaneReliance.provenance.blockId).toBe('DS-DEF-9');
     }
-    // And the TRUE flag is reachable — gated entirely by stress incidence, not by magic.
-    // A magic-forced sweep is what makes the state appear; the sweep is small on purpose
-    // (the claim is reachability, and the wide census is recorded in the desk docblock).
+    // And the TRUE flag is reachable. Since lane DEFENSE-2 (2026-11-03) the stored flag IS the one
+    // magic reliance reading (relied-upon or integral), no longer a siege/famine/plague gate, so a
+    // magic-forced sweep reaches it often; the sweep stays small on purpose (the claim is
+    // reachability). ⚠ ONE KNOWN SILENCE, anchored to its cause: every desk's `properFill` refuses
+    // a name that opens on an accented capital (mx-14 is "Ássund"), and every DS-DEF-9 variant needs
+    // {settlement}, so the rung composes no sentence there. Any other silence still reds.
     let trueSeen = 0;
     let namedSeen = 0;
+    let silentByName = 0;
     for (let i = 0; i < 40; i++) {
       const s = generateSettlementPipeline({
         settType: ['village', 'town', 'city', 'metropolis'][i % 4],
@@ -1723,13 +1726,20 @@ describe('DS-DEF-9 — magic dependency, and the slot filled from the right ROLE
       }, null, { seed: `mx-${i}`, customContent: {} });
       if (s.defenseProfile?.magicDependency !== true) continue;
       trueSeen++;
+      expect(['relied-upon', 'integral'], `mx-${i} the flag is the reading`).toContain(deriveMagicReliance(s).reading);
       const drawn = defenseMagicDependencyProse(s, { seed: `mx-${i}`, audience: 'dm' });
+      if (drawn.arcaneReliance?.sentence == null) {
+        expect(/^[A-Z]/.test(s.name), `mx-${i} is silent only because its name "${s.name}" fails the proper shape`).toBe(false);
+        silentByName++;
+        continue;
+      }
       expect(drawn.arcaneReliance.provenance.poolKey).not.toBe('magicDependency false');
       if (drawn.arcaneReliance.provenance.poolKey.includes('NAMED')) namedSeen++;
     }
     expect(trueSeen, 'no magic-dependent world was generated, so the arm proves nothing')
       .toBeGreaterThan(0);
     expect(namedSeen).toBeGreaterThan(0);
+    expect(silentByName, 'the name-shape silence stays the exception').toBeLessThan(trueSeen);
   });
 
   it('DS-DEF-9 speaks at exactly ONE position, on `viability`, and has left the dark list', () => {
