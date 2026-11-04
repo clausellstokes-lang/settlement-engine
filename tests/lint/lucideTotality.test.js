@@ -229,7 +229,8 @@ const FROZEN_DIRECT_IMPORTERS = Object.freeze([
   'src/components/ShareToGallery.jsx',
   'src/components/SingleDossierSuccessPage.jsx',
   'src/components/StaleNarrativeModal.jsx',
-  'src/components/TableView.jsx',
+  // src/components/TableView.jsx LEFT (2026-11-04, REGISTERS-4 door 8): the Tonight dialog closes through the house's
+  // DialogClose (lane hygiene A1, 27dd2937a), so its lucide `X` import is gone; the instrument's CLEARED, banked.
   'src/components/UndoHistoryPanel.jsx',
   'src/components/new/npcComponents.jsx',
   'src/components/new/tabs/NPCsTab.jsx',

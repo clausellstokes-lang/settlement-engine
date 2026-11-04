@@ -130,6 +130,9 @@ MUTATED_FILES=(
   src/domain/display/publicSafe.js
   src/components/instant/InstantWorldEntry.jsx
   src/domain/worldPulse/factionDensityKernel.js
+  src/generators/foodGenerator.js
+  src/generators/economy/foodBalance.js
+  src/generators/economy/viability.js
 )
 if [ "${MUTATION_SWEEP_ALLOW_DIRTY:-}" != "1" ]; then
   dirty="$(git status --porcelain -- "${MUTATED_FILES[@]}" 2>/dev/null)"
@@ -1627,6 +1630,29 @@ check_caught_planted "citations/past-EOF address planted in live code" \
 #      figure, no dash, no meta word, at most two sentences); the copy test must red.
 perl -0pi -e "s/read side by side/read — side by side/" src/copy/sectionHelp.js
 check_caught "copy/section-help pill copy law" src/copy/sectionHelp.js "npx vitest run tests/copy/sectionHelp.test.js"
+
+# 115. THE STAND-IN IS NOT A MILL (FOOD-2, the food base numbers). The grain-processor read is
+#      swapped for a bare name match, so "Access to external mill" counts as a mill and lengthens
+#      the stores by a quarter; tests/generators/foodBaseNumbers.test.js must red.
+perl -0pi -e "s/const hasMill           = hasImportProcessor\(institutions \|\| \[\], 'grain', \{\}\);/const hasMill           = hasInst('mill');/" src/generators/foodGenerator.js
+check_caught "food/the stand-in mill extends no stores" src/generators/foodGenerator.js "npx vitest run tests/generators/foodBaseNumbers.test.js --no-file-parallelism"
+
+# 116. PRESERVED SOURCES LENGTHEN THE STORES BY A QUARTER EACH (FOOD-3, food diversity). The
+#      quarter becomes a half; tests/generators/foodDiversity.test.js must red.
+perl -0pi -e "s/Math\.min\(3, preservedSources\) \/ 4\)/Math.min(3, preservedSources) \/ 2)/" src/generators/foodGenerator.js
+check_caught "food/preserved sources lengthen the stores by a quarter month each" src/generators/foodGenerator.js "npx vitest run tests/generators/foodDiversity.test.js --no-file-parallelism"
+
+# 117. SURPLUS ONLY WHEN A PLACE GROWS MORE THAN IT EATS (FOOD-1, the food record). The record's
+#      one surplus condition is loosened by two percent, so a metropolis one percent short is
+#      called a surplus; tests/generators/foodRecord.test.js must red.
+perl -0pi -e "s/growsMoreThanEats: need > 0 && input\.dailyProduction > need,/growsMoreThanEats: need > 0 \&\& input.dailyProduction > need * 0.98,/" src/generators/economy/foodBalance.js
+check_caught "food/the record's surplus condition is grows-more-than-eats" src/generators/economy/foodBalance.js "npx vitest run tests/generators/foodRecord.test.js --no-file-parallelism"
+
+# 118. THE CATALOGUE DECIDES WHAT IS A MARKET (SIZE-3, the small-place market). Any tagged
+#      institution passes the market check, so "Subsistence farming" seats a market;
+#      tests/generators/smallPlaceMarket.test.js must red.
+perl -0pi -e "s/return tags\.includes\('market'\) \|\| \(tags\.includes/return tags.length > 0 || tags.includes('market') || (tags.includes/" src/generators/economy/viability.js
+check_caught "size/the catalogue decides what is a market" src/generators/economy/viability.js "npx vitest run tests/generators/smallPlaceMarket.test.js --no-file-parallelism"
 
 echo ""
 echo "── Mutation sweep results ──────────────────────────────"

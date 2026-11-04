@@ -205,8 +205,13 @@ describe('THE SHORTHAND/LONGHAND CLASS — a varying shorthand never sits beside
     // NOT A RELAXATION. The Summary group's consolidation cut blocks that carried a border/borderLeft pair (the
     // Overview's Geography, Institutions and desk-line boxes; the DM Summary tab's mount), so the measured
     // co-occurrences fell to 197 with the shape and the parser unchanged. The floor follows the ruled cuts once.
+    // 195 -> 190 (2026-11-04, REGISTERS-4 door 8; the measured figure at the composed tip): SURFACES REMOVED BY RULING
+    // again, NOT A RELAXATION. Bisected over the integration branch's first-parent chain: >= 195 at a08b4ddfd, 193 at the
+    // TRIM-2 compose 71541a9e6 (X-51, one Tonight sheet: TableView's quick-guide and session blocks cut), 190 at the
+    // WIRING-2 compose 420d93004, which carries TRIM-2 R5 (1f37f1d21, the dead SummaryTabV2 retired, its styled blocks
+    // with it). The shape and the parser are unchanged.
     expect(SCAN.pairs, 'the walk found almost no shorthand/longhand pairs — the shape it looks for changed')
-      .toBeGreaterThanOrEqual(195);
+      .toBeGreaterThanOrEqual(190);
   });
 
   test('no file outside the owed register writes a varying shorthand beside a longhand', () => {

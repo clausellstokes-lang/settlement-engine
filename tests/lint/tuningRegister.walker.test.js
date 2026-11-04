@@ -88,7 +88,10 @@ const CEILINGS = Object.freeze({
   // RAISED 0 -> 2 for the two DECLARED_GROWTH rows this landing's cure 1/2 added, both citing
   // T13 Car P′ 754856b12. This ceiling counts ATTRIBUTED rows, so it rises only when growth is
   // cited to a real commit with a cause — an unattributed row cannot reach it.
-  DECLARED_GROWTH_CEILING: 2,
+  // RAISED 2 -> 3 (2026-11-04, REGISTERS-4 door 10) BY THE CHAIR'S RULING, ODQ §934.104 (the ceiling is the chair's act,
+  // attributed): the third DECLARED_GROWTH row, src/domain/summary/tonightSheet.js, cites TRIM-2's X-51 (7d327ca73), the
+  // one Tonight sheet's HOOK_COUNT = 3 named instead of a bare 3. Still ATTRIBUTED rows only.
+  DECLARED_GROWTH_CEILING: 3,
 });
 
 const register = loadTuningRegister(ROOT);

@@ -286,9 +286,20 @@ describe('MG-4.1 — the mundane realm, measured across every member', () => {
  * MEASURED (seed 'mg4-acceptance', small/realistic_regional/highIsland). ALL FIVE AXES the
  * envelope compares, mundane vs magical, machine-checked by the last pin in MG-4.2 against
  * this very line — see THE RECORD IS CHECKED below:
- *   RECORDED-CENSUS: members 5 vs 5 · institutions 147 vs 145 · factions 26 vs 28 · services 215 vs 213 · historyEvents 21 vs 22
- * Ratios: members 1.000 · institutions 1.014 · factions 0.929 · services 1.009 ·
+ *   RECORDED-CENSUS: members 5 vs 5 · institutions 147 vs 145 · factions 25 vs 26 · services 215 vs 213 · historyEvents 21 vs 22
+ * Ratios: members 1.000 · institutions 1.014 · factions 0.962 · services 1.009 ·
  * historyEvents 0.955 — the mundane realm is at or above parity on three of five axes.
+ * ⚠️ RE-RECORDED 2026-11-04 BY SIZE-3 (the small-place guild check requires a real market; lane
+ * DOORS, composed in 8cd65978e; REGISTERS-7 F4), ONE SAME-SEED SHIFT, AND BOTH TWINS MOVE:
+ * factions 26 vs 28 → 25 vs 26 (ratio 0.929 → 0.962); every other axis holds. Copied from this pin's
+ * own measured line, never hand-composed. Bisected on the harness over PR #72's first-parent window:
+ * 4edc4917f green, 8cd65978e the first red; inside lane/doors-2026-11-03, aa76f96ce green and
+ * 43f9c0dcc the first red. That commit seats a thorp's, hamlet's or village's merchant faction only
+ * over a real market (generatePowerStructure reading hasMarketInstitution), so the realm's smallest
+ * members stop seating a guild that farming alone used to admit: one in the mundane twin, two in
+ * the magical. Fewer factions, not less magic: the arcane census over the mundane realm (MG-4.1)
+ * is still EMPTY. The ratio improves and every axis stays inside PENDING_BANDS, so no band is
+ * asked to move. Both places moved in ONE act.
  * ⚠️ RE-RECORDED 2026-10-30 BY THE SERVICE RE-MAP (RS-1..RS-13, ODQ §934.101; cure lane T12), ONE
  * DECLARED SAME-SEED SHIFT, MUNDANE TWIN ONLY: services 214 vs 213 → 215 vs 213 (ratio 1.005 → 1.009);
  * every other axis holds. Copied from this pin's own measured line, never hand-composed. Bisected on

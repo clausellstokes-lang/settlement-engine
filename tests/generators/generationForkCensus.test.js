@@ -172,7 +172,9 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // on the probe row (measured). The tie prose left the pair-hash door: its 19 ties' 38 desc/tension picks now render
 // at a drawn index, and the draw opens one fnv offset per archetype present (9 here) through the external channel.
 const PICK_VARIANT_CALLS = 69;
-const FNV_EXTERNAL_CALLS = 15;
+// 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16 external fnv1a32 calls on the probe row (measured;
+// FOOD-3, food diversity, traced at stage T3 in DOORS-4).
+const FNV_EXTERNAL_CALLS = 16;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -355,7 +357,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
 
-  it('A3e — the classification re-executed: the declared corpus is 63 rows, 13 steps draw, and every stepDraws and keyMoves reproduces', () => {
+  it('A3e — the classification re-executed: the declared corpus is 63 rows, 12 steps draw, and every stepDraws and keyMoves reproduces', () => {
     const corpus = censusCorpus();
     const grid = [];
     const pairsSeen = new Set();
@@ -376,7 +378,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(fresh.rows.length, 'the measured pair set is the registry"s, not a literal').toBe(GENERATION_TIER1.length);
     expect(fresh.rows.length, 'anti-vacuity: the pair set is real before any equality is claimed').toBeGreaterThan(70);
     expect(fresh.steps.length, 'every registered step was perturbed').toBe(getStepOrder().length);
-    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(13);
+    expect(fresh.drawingSteps.length, 'steps that draw at all').toBe(12);
     process.stdout.write(`\n[A3e] corpus=${fresh.corpusRows} pairs=${fresh.rows.length}`
       + ` wall=${fresh.wallMs}ms drawingSteps=${fresh.drawingSteps.length}\n`);
 
@@ -479,7 +481,7 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     expect(repeated.map(([seed]) => seed), 'exactly one seed is minted more than once').toEqual([REPEATED_SEED]);
   }, 120_000);
 
-  it('A6 — the hash channel: 69 distinct pickVariant seeds, fifteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
+  it('A6 — the hash channel: 69 distinct pickVariant seeds, sixteen external fnv1a32 calls, and two censuses disjoint by construction', () => {
     const seen = censusRun(CENSUS_ROW);
     const realChoices = seen.picks.filter((pick) => pick.poolLen > 1 && pick.seed && pick.seed !== ' undefined');
     const pickSeeds = new Set(seen.picks.map((pick) => pick.seed));

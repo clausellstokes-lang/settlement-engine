@@ -84,6 +84,7 @@ describe('the surplus words read the food record (FOOD R-economicState)', () => 
     const config = { settType: 'hamlet', culture: 'germanic', terrainOverride: 'mountain', tradeRouteAccess: 'road', monsterThreat: 'civilized' };
     const s = generateSettlementPipeline(config, null, { seed: 'golden-master-v3', customContent: {} });
     expect(s.economicState.foodSecurity.foodRecord.growsMoreThanEats).toBe(false);
-    expect(s.economicState.economicComplexity).not.toMatch(/surplus/i);
+    expect(s.economicState.economicComplexity, 'the surplus words are a live label on this record').toMatch(/[A-Za-z]/);
+    expect(s.economicState.economicComplexity).not.toMatch(/surplus/i); // anchored: the line above proves the label is live on this record
   });
 });
