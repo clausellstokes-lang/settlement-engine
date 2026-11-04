@@ -655,6 +655,38 @@ describe('⭐ THE PATRON-LESS TOWN — what the deity-free review corpus renders
     expect(faithPanelModel(church).reading.hasChurch).toBe(true);
   });
 
+  test('LANE FAITH-POOLS: DS-FTH-2 speaks only the facts the one faith reading gives', () => {
+    // A church town: the houses, the senior cleric and the religious faction are the
+    // reading's, and every variant the desk can draw states one of them, or the dial.
+    const church = { id: 'kirkby', name: 'Kirkby', tier: 'village', config: { priorityReligion: 50 },
+      institutions: [{ name: 'Parish church', category: 'Religious' }],
+      npcs: [{ name: 'Aldous Wren', role: 'Village Priest' }],
+      powerStructure: { factions: [{ faction: 'Parish Council', category: 'religious', power: 20 }] } };
+    const reading = faithPanelModel(church).reading;
+    expect(reading).toMatchObject({ hasChurch: true, churchWords: 'a parish church',
+      seniorCleric: { role: 'Village Priest' }, religiousFaction: { name: 'Parish Council' } });
+    const allowed = [
+      'In Kirkby the faith is kept at a parish church.',
+      'The senior cleric in Kirkby holds the rank of Village Priest.',
+      "Among the factions of Kirkby, the faith's party is the Parish Council.",
+      'Folk in Kirkby keep their observances through the year.',
+    ];
+    const drawn = new Set();
+    for (const seed of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']) {
+      const desk = warFaithStateProse(church, { faith: faithPanelModel(church), hasPatron: false },
+        { seed, audience: 'player' });
+      drawn.add(desk.faithTeaser.sentence);
+    }
+    for (const line of drawn) expect(allowed).toContain(line);
+    expect(drawn.size, 'one seed family draws more than one variant').toBeGreaterThan(1);
+    // The quietest town: no church, no cleric, no faction. Only the dial's variant is live.
+    const quiet = patronLessTown();
+    const desk = warFaithStateProse(quiet.settlement, { faith: quiet.model, hasPatron: false },
+      { seed: 'greyford', audience: 'player' });
+    expect(desk.faithTeaser.sentence).toMatch(/keep their observances/);
+    expect(desk.faithTeaser.sentence).not.toMatch(/church|cleric|faction|faith/i);
+  });
+
   test('a town WITH a patron draws no teaser — the page cannot say both', () => {
     const { settlement, model } = faithTown();
     expect(warFaithStateProse(settlement, { faith: model, hasPatron: true }, DM).faithTeaser).toBeNull();
@@ -700,11 +732,17 @@ describe('the audience, the rung depth, and the promise', () => {
   });
 
   test('the desk declares its slot shapes and owns no fill table', () => {
-    expect(Object.keys(SLOT_FILL_SHAPES).sort())
-      .toEqual(['counterpart', 'creed', 'rival_creed', 'settlement', 'term']);
-    for (const shape of Object.values(SLOT_FILL_SHAPES)) expect(shape).toBe('proper');
-    // Every fill this desk supplies is a NAME a producer already carries, never a word the
-    // desk chose — so there is no literal table to hold to a shape.
+    expect(Object.keys(SLOT_FILL_SHAPES).sort()).toEqual([
+      'cleric', 'counterpart', 'creed', 'faction', 'houses', 'observance', 'rival_creed',
+      'settlement', 'term',
+    ]);
+    // DS-FTH-2's two phrases (lane FAITH-POOLS) are the faith reading's own words; every
+    // other fill is a NAME.
+    for (const [slot, shape] of Object.entries(SLOT_FILL_SHAPES)) {
+      expect(shape, slot).toBe(slot === 'houses' || slot === 'observance' ? 'phrase' : 'proper');
+    }
+    // Every fill this desk supplies is a NAME or a phrase a producer already carries, never a
+    // word the desk chose — so there is no literal table to hold to a shape.
     expect(SLOT_FILL_TABLES).toEqual({});
   });
 

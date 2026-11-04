@@ -304,6 +304,22 @@ function observanceOf(dial) {
   return 'Devotion runs through every part of life here, and few miss a rite.';
 }
 
+/**
+ * The religion dial as a phrase for DS-FTH-2's `{observance}` slot (lane FAITH-POOLS,
+ * 2026-11-04): how often the people keep their observances, on `observanceOf`'s five bands.
+ * The reading's own words, so the desk carries no fill table of its own. Lowercase, no
+ * stop, no digit (§0c `phrase`).
+ * @param {number} dial
+ * @returns {string}
+ */
+export function observancePhraseOf(dial) {
+  if (dial <= 15) return 'seldom, beyond weddings and burials';
+  if (dial <= 40) return 'on the great feast days';
+  if (dial <= 60) return 'through the year';
+  if (dial <= 85) return 'week by week';
+  return 'in every part of life';
+}
+
 /** @param {number} dial @returns {string} the quiet line, banded by the dial */
 function quietOf(dial) {
   if (dial <= 25) return 'The people keep their own quiet observances, seldom and lightly. No single creed holds sway, and the shrines answer to no named god.';
