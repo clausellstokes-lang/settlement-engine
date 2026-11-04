@@ -39,6 +39,7 @@ import {
   institutionRenameChanges,
   listOf,
   resolveSites,
+  sitesOf,
 } from '../../src/domain/institutionRename.js';
 
 const NEW_NAME = 'The Amber Concord Hall';
@@ -52,10 +53,14 @@ function reloaded(settlement) {
   return JSON.parse(JSON.stringify(settlement));
 }
 
+/** A declared cascade row by its path, so a row's `where` filter is read as the module reads it (RUNG1B-F7). */
+const ROW_BY_PATH = new Map(INSTITUTION_RENAME_SURFACES.map((row) => [row.path, row]));
+
 /** Resolve a DECLARED path against the data generically, returning every string leaf. */
 function valuesAt(root, path) {
   const out = [];
-  for (const site of resolveSites(root, path)) {
+  const row = ROW_BY_PATH.get(path);
+  for (const site of row ? sitesOf(root, row) : resolveSites(root, path)) {
     const held = site.owner[site.key];
     if (site.isList) { for (const item of listOf(held) || []) if (typeof item === 'string') out.push(item); }
     else if (typeof held === 'string') out.push(held);
@@ -244,7 +249,8 @@ describe('institution rename: the declared cascade over real pipeline saves', ()
     expect(labelRows.map((row) => row.rewrite).sort(), 'every label row declares a form from that key set').toEqual(['lower', 'verbatim']);
     expect(exactRows.filter((row) => Object.hasOwn(row, 'rewrite')).map((row) => row.path),
       'an exact row carries no rewrite field: the match kind forbids the question').toEqual([]);
-    expect(exactRows.length, 'the exact rows are the 34 the packet declares').toBe(34);
+    // 34 the packet declared, plus the crisis cast's twelve (RUNG1B-F7: lever, house-kind id and name, at four homes).
+    expect(exactRows.length, 'the exact rows are the 46 the packet and RUNG1B-F7 declare').toBe(46);
 
     // (vi)(d) BOTH MEMBERS OBSERVED FIRING through the cascade, never asserted from the declaration.
     const fired = new Set();

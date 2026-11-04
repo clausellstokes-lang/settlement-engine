@@ -23,11 +23,18 @@ import {
   applyFactionRenameToSettlement,
   applyNpcRenameToSettlement,
 } from '../../src/domain/factionRename.js';
+import {
+  INSTITUTION_RENAME_SURFACES,
+  NON_CASCADED_SURFACES as INSTITUTION_NON_CASCADED,
+  applyInstitutionRenameToSettlement,
+} from '../../src/domain/institutionRename.js';
+import { applyInstitutionRemovalToSettlement } from '../../src/domain/institutionRemoval.js';
 
 /** The first 48 soak records: every stress cell of the corpus's opening rotation, both container shapes. */
 const SAMPLE = 48;
 const NEW_FACTION = 'The Amber Concord';
 const NEW_PERSON = 'Ysolde Amberlane';
+const NEW_HOUSE = 'The Amber Concord Hall';
 
 const reloaded = (value) => JSON.parse(JSON.stringify(value));
 const escape = (name) => name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -176,6 +183,92 @@ describe('the crisis cast follows a PERSON rename', () => {
   });
 });
 
+describe('the crisis cast follows a HOUSE rename', () => {
+  test('renaming every house a crisis turns on leaves no stale name outside the declared exemptions', () => {
+    const exempt = new Set(INSTITUTION_NON_CASCADED.map((row) => row.path));
+    const failures = [];
+    let renamed = 0;
+    let leversMoved = 0;
+    for (const { index, save } of crises) {
+      const factions = new Set(rosterFactions(save));
+      const cast = castsOf(save);
+      const houses = new Set(cast.flatMap((c) => [
+        ...(c.levers || []).map((lever) => lever.institution),
+        ...(c.roles || []).filter((row) => row.kind === 'institution').map((row) => row.name),
+      ]));
+      for (const name of houses) {
+        // A house named like a faction is the governing-body collision the mirror rows govern.
+        if (factions.has(name)) continue;
+        const record = reloaded(save);
+        const before = castsOf(record).flatMap((c) => c.levers || []).filter((lever) => lever.institution === name).length;
+        applyInstitutionRenameToSettlement(record, name, NEW_HOUSE);
+        renamed += 1;
+        const stale = [...new Set(stringsOf(record).filter(([path, value]) => !exempt.has(path) && value.trim() === name).map(([path]) => path))];
+        if (stale.length) failures.push(`soak1k-${index} "${name}": ${stale.join(', ')}`);
+        const after = castsOf(record).flatMap((c) => c.levers || []).filter((lever) => lever.institution === NEW_HOUSE).length;
+        if (after !== before) failures.push(`soak1k-${index} "${name}": ${before} levers before, ${after} under the new name`);
+        leversMoved += after;
+      }
+    }
+    expect(renamed, 'anti-vacuity: no cast house was renamed').toBeGreaterThanOrEqual(30);
+    expect(leversMoved, 'anti-vacuity: no lever moved').toBeGreaterThan(0);
+    expect(failures, `a house rename left the old name on the record:\n${failures.join('\n')}`).toEqual([]);
+  });
+
+  test('a house rename and a house removal move the house row only, never a faction or person sharing its name', () => {
+    const SHARED = 'Democratic assembly';
+    const record = () => ({
+      institutions: [{ name: SHARED }],
+      stress: {
+        type: 'politically_fractured',
+        cast: {
+          roles: [
+            { role: 'instigator', kind: 'faction', id: SHARED, name: SHARED, reason: 'r', temporary: false },
+            { role: 'lever', kind: 'institution', id: SHARED, name: SHARED, reason: 'r', temporary: false },
+            { role: 'target', kind: 'npc', id: 'npc.1', name: SHARED, reason: 'r', temporary: false },
+          ],
+          stakes: [{ factionId: SHARED, stake: 'gains', reason: 'r' }],
+          levers: [{ institution: SHARED, holderId: 'npc.1', holderName: 'Odo Wick' }],
+        },
+      },
+    });
+    const renamed = record();
+    const result = applyInstitutionRenameToSettlement(renamed, SHARED, NEW_HOUSE);
+    expect(result.touched.filter((path) => path.startsWith('stress')).sort())
+      .toEqual(['stress.cast.levers[].institution', 'stress.cast.roles[].id', 'stress.cast.roles[].name']);
+    expect(renamed.stress.cast.roles.map((row) => `${row.kind}:${row.id}:${row.name}`))
+      .toEqual([`faction:${SHARED}:${SHARED}`, `institution:${NEW_HOUSE}:${NEW_HOUSE}`, `npc:npc.1:${SHARED}`]);
+    expect(renamed.stress.cast.stakes[0].factionId).toBe(SHARED);
+    expect(renamed.stress.cast.levers[0].institution).toBe(NEW_HOUSE);
+
+    const removed = record();
+    applyInstitutionRemovalToSettlement(removed, SHARED);
+    expect(removed.stress.cast.roles.map((row) => row.kind)).toEqual(['faction', 'npc']);
+    expect(removed.stress.cast.levers).toEqual([]);
+    expect(removed.stress.cast.stakes[0].factionId).toBe(SHARED);
+  });
+
+  test('the criminal service label is NOT a handle: where it names a house, its own institution is a different house', () => {
+    const houseRows = new Set(INSTITUTION_RENAME_SURFACES.map((row) => row.path));
+    expect(houseRows.has('availableServices.criminal[].institution'), 'the entry handle is cascaded').toBe(true);
+    expect(houseRows.has('availableServices.criminal[].name'), 'the label is ruled out, not cascaded').toBe(false);
+    let named = 0;
+    const sameHouse = [];
+    for (let index = 0; index < SAMPLE; index += 1) {
+      const save = crises.find((c) => c.index === index)?.save;
+      if (!save) continue;
+      const houses = rosterHouses(save);
+      for (const entry of save.availableServices?.criminal || []) {
+        if (!houses.has(String(entry?.name || '').trim())) continue;
+        named += 1;
+        if (entry.name === entry.institution) sameHouse.push(`soak1k-${index}: ${entry.name}`);
+      }
+    }
+    expect(named, 'anti-vacuity: no criminal service in the sample names a roster house').toBeGreaterThan(0);
+    expect(sameHouse, 'a criminal service names its OWN house, so the label ruling is refuted: cascade the row').toEqual([]);
+  });
+});
+
 describe('the control', () => {
   test('a no-op rename, and a rename of a name the record never carries, leave every crisis record byte-identical', () => {
     const moved = [];
@@ -186,6 +279,8 @@ describe('the control', () => {
         ['faction no-op', (r) => applyFactionRenameToSettlement(r, name, name)],
         ['faction absent', (r) => applyFactionRenameToSettlement(r, 'Nobody Of That Name', NEW_FACTION)],
         ['person absent', (r) => applyNpcRenameToSettlement(r, 'Nobody Of That Name', NEW_PERSON)],
+        ['house no-op', (r) => applyInstitutionRenameToSettlement(r, [...rosterHouses(save)][0] || 'x', [...rosterHouses(save)][0] || 'x')],
+        ['house absent', (r) => applyInstitutionRenameToSettlement(r, 'Nobody Of That Name', NEW_HOUSE)],
       ]) {
         const record = reloaded(save);
         const result = apply(record);
