@@ -1430,7 +1430,7 @@ export const generateNPCs = (
       waterRoute ||
       institutions.some(
         i =>
-          /port|harbou?r/.test(nativeSemanticName(i).toLowerCase()),
+          /\b(?:port|harbou?r)\b/.test(nativeSemanticName(i).toLowerCase()), // F5 unit 6: word-bounded — the substring read "Teleportation circle" as a port
       );
     CRAFTS_ROLES
       .filter(role => worldLaw.allowsRole(role))

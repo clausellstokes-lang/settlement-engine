@@ -34,9 +34,9 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
         const hasWaterInst = nativeInstitutions.some(
           (i) =>
             i.tags?.includes('port') ||
-            (i.name || '').toLowerCase().includes('port') ||
-            (i.name || '').toLowerCase().includes('harbour') ||
-            (i.name || '').toLowerCase().includes('harbor') ||
+            /\bport\b/.test((i.name || '').toLowerCase()) || // F5 unit 6: word-bounded; the substring read "Teleportation circle" as a port
+            /\bharbour\b/.test((i.name || '').toLowerCase()) ||
+            /\bharbor\b/.test((i.name || '').toLowerCase()) ||
             ((i.name || '').toLowerCase().includes('dock') && waterRoute)
         );
         if (!waterRoute && !hasWaterInst) return;
