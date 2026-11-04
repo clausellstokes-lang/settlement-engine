@@ -16,13 +16,14 @@
  * C): a budget cannot sit below the catalogue's required baseline — every band's minimum exceeds
  * its tier's required non-fabric houses by at least one; the chair's 3 / 4 / 8 / 16 / 36 / 76 /
  * 120, with the 30-person anchor raised by the least whole house (4 → 5) because the 20-person
- * hamlet read 3.77 against its R of 3.
+ * hamlet read 3.77 against its R of 3. The 60,000 anchor is the catalogue's measured ceiling, 93
+ * (the chair's ruling of 2026-11-04, rung-1 pins: 120 was unreachable as authored).
  *
  * ⛔ THE SEVEN NUMBERS ARE THE OWNER'S VETO POINT (§8 item 2). A lane that measures a band end
  * outside the budget reports the figure; it does not move an anchor.
  */
 
-import { institutionalCatalog, institutionRowGuards, isFabricRow } from './institutionalCatalog.js';
+import { institutionalCatalog, institutionRowGuards, isFabricRow, isRareRow } from './institutionalCatalog.js';
 import { POPULATION_RANGES } from './constants.js';
 
 /**
@@ -37,7 +38,12 @@ export const INSTITUTION_BUDGET_ANCHORS = Object.freeze([
   [400, 16],
   [2500, 36],
   [15000, 76],
-  [60000, 120],
+  // 120 → 93 (the chair's ruling, 2026-11-04, rung-1 pins unit 3): 120 was unreachable as
+  // authored. Measured at d207c81/751c05c (X46-3 report §9): the metropolis catalogue saturates at
+  // realised(4) = 77.92 optional houses + R 15 = 92.92, so 93 is the catalogue's ceiling (its target
+  // 78 sits 0.08 above realised(4): d reads 4 at 60,000 either way). The metropolis roll runs past
+  // 100,000 (x46-1b's tail); beyond 60,000 the curve is flat at this ceiling by design.
+  [60000, 93],
 ]);
 for (const anchor of INSTITUTION_BUDGET_ANCHORS) Object.freeze(anchor);
 
@@ -77,7 +83,7 @@ export function expectedHousesAt(population) {
 // non-fabric rows whose stated population floor the midpoint reaches) is still read at load as
 // `catalogueE`, and the table records the sum it was calibrated beside, so a catalogue change
 // that moves the sum reds tests/generators/institutionBudgetDensity.test.js.
-// Every non-required, non-fabric row's chance is multiplied by d (the product clamped to [0, 1]
+// Every non-required, non-fabric, non-route-required, non-rare row's chance (`isDensityExempt`) is multiplied by d (the product clamped to [0, 1]
 // per row: `scaleChance`) in assembleInstitutions, the cascade and the faction pass. d is a pure
 // function of (tier, population), computed once before the first draw, and it never adds or
 // removes a draw; outcome gates later in the roll and the cascade's count move on some seeds
@@ -170,6 +176,32 @@ export function densityFactor(tier, population) {
     if (target <= r1) return d0 + ((d1 - d0) * (target - r0)) / (r1 - r0);
   }
   return points[points.length - 1][0];
+}
+
+/**
+ * THE ROUTE-REQUIRED EXEMPTION (the chair's ruling, 2026-11-04, rung-1 pins unit 2): a row the
+ * catalogue marks `tradeRouteRequired` or `terrainRequired` is the place's definition where its
+ * route or terrain admits it — the docks and the harbour master of a port, the ferry of a river
+ * crossing, the woodcutters of a forest — and the density factor never scales it, as it never
+ * scales a required or a fabric row: it rolls at its authored chance (d ≡ 1) at every population.
+ * Measured before the ruling: a port-route city's harbour master starved at the factor while d ≡ 1
+ * seated it (tests/joins/subsumption.test.js, "port-route city keeps its docks alongside the
+ * harbour master"). A row that only names `terrainAccess` is not marked and is scaled.
+ * THE AUTHORED RARITY (the chair's addendum, 2026-11-04): a row the catalogue marks `rare`
+ * (`isRareRow`; the metropolis Dragon resident) is exempt the same way — its chance is a rarity,
+ * and at d up to 4 the 0.06 dragon sat in 34 of 80 high-magic metropolises.
+ * @param {string} tier @param {string} name
+ * @returns {boolean} true when the factor does not apply to the row (fabric, route-required or rare)
+ */
+export function isDensityExempt(tier, name) {
+  if (isFabricRow(tier, name) || isRareRow(tier, name)) return true;
+  const block = institutionalCatalog[tier];
+  if (!block) return false;
+  for (const group of Object.values(block)) {
+    const row = group[name];
+    if (row) return !!(row.tradeRouteRequired?.length || row.terrainRequired?.length);
+  }
+  return false;
 }
 
 /**

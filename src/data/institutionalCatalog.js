@@ -44,6 +44,11 @@
 // chair's ruling, 2026-11-04): no power behind it (X-45 weight 0), no service, no seat. It is a registry key like the guards
 // (read through `isFabricRow` / `isFabricInstitution`, never riding onto a row or a save). A
 // fabric row rolls and prints exactly as before; it is not counted in the institution budget.
+//
+// THE AUTHORED RARITY (the chair's addendum to the rung-1 pins, 2026-11-04): `rare: true` marks a
+// row whose chance the catalogue authored as a rarity ("a resident dragon stays occasional"), so
+// the institution budget's density factor never scales it (institutionBudget.js ::
+// isDensityExempt). Registry-only like the fabric (read through `isRareRow`); never on a row.
 
 import { slugify as kernelSlugify } from '../kernel/slugify.js';
 
@@ -63,8 +68,8 @@ const ROW_KEYS = Object.freeze([
 ]);
 /** The keys a tier entry may declare that stay in the registry and never ride onto a row. */
 const GUARD_KEYS = Object.freeze(['minPopulation', 'requiresAny']);
-/** The registry-only marks a tier entry may declare (the fabric, X-46 car 3); never on a row. */
-const MARK_KEYS = Object.freeze(['fabric']);
+/** The registry-only marks a tier entry may declare (the fabric and the rarity, X-46 car 3); never on a row. */
+const MARK_KEYS = Object.freeze(['fabric', 'rare']);
 const ENTRY_KEYS = new Set(['name', ...ROW_KEYS, ...GUARD_KEYS, ...MARK_KEYS]);
 
 /**
@@ -1622,7 +1627,9 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         // ruling 2, 2026-11-04). Licensed as the shelf's other explicitly magical rows are.
         // 2026-11-04 (chair ruling, round 3, 2): the licence joined the exotic scaler (×1.8 at
         // priorityMagic ≥ 66), so the row's draw is 0.1 / 1.8 ≈ 0.06 — a resident dragon stays occasional.
-        metropolis: { baseChance: 0.06, desc: 'Ancient wyrm living in city.', tags: [], magicLicense: 'high', priorityCategory: 'exotic' },
+        // `rare` (the chair's addendum to the rung-1 pins, 2026-11-04): the 0.06 is an authored
+        // rarity, so the density factor never scales it (34 of 80 drew it at d up to 4 on the window).
+        metropolis: { baseChance: 0.06, rare: true, desc: 'Ancient wyrm living in city.', tags: [], magicLicense: 'high', priorityCategory: 'exotic' },
       },
     },
     {
@@ -1666,7 +1673,7 @@ const clonePlain = (value) => (value && typeof value === 'object' ? JSON.parse(J
  * One family's entry at one tier, as the catalog row every reader takes. Throws on an unknown
  * key so a typo'd field can never ride silently into generation.
  * @param {InstitutionFamily} fam @param {string} tier
- * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean }}
+ * @returns {{ name: string, row: Record<string, unknown>, guards: { minPopulation?: number, requiresAny?: string[] } | null, fabric: boolean, rare: boolean }}
  */
 function deriveRow(fam, tier) {
   const merged = { ...(fam.shared || {}), ...fam.at[tier] };
@@ -1685,7 +1692,7 @@ function deriveRow(fam, tier) {
   for (const key of GUARD_KEYS) {
     if (merged[key] !== undefined) guards = { ...(guards || {}), [key]: clonePlain(merged[key]) };
   }
-  return { name, row, guards, fabric: merged.fabric === true };
+  return { name, row, guards, fabric: merged.fabric === true, rare: merged.rare === true };
 }
 
 /**
@@ -1702,6 +1709,8 @@ const guardKey = (tier, name) => `${tier}\u0000${name}`;
 const FABRIC_ROWS = new Set();
 /** @type {Set<string>} */
 const FABRIC_NAMES = new Set();
+/** THE AUTHORED RARITY, by (tier, name). Registry-only, like the fabric. @type {Set<string>} */
+const RARE_ROWS = new Set();
 
 /** @returns {Record<string, Record<string, Record<string, Record<string, any>>>>} */
 function buildCatalog() {
@@ -1713,9 +1722,10 @@ function buildCatalog() {
     for (const shelf of SHELF_ORDER) {
       for (const fam of INSTITUTION_FAMILIES) {
         if (fam.shelf !== shelf || !fam.at[tier]) continue;
-        const { name, row, guards, fabric } = deriveRow(fam, tier);
+        const { name, row, guards, fabric, rare } = deriveRow(fam, tier);
         if (guards) GUARDS_BY_ROW.set(guardKey(tier, name), Object.freeze(guards));
         if (fabric) { FABRIC_ROWS.add(guardKey(tier, name)); FABRIC_NAMES.add(name); }
+        if (rare) RARE_ROWS.add(guardKey(tier, name));
         if (!block[shelf]) block[shelf] = {};
         for (const other of Object.values(block)) {
           if (other[name]) throw new Error(`institutionalCatalog: "${name}" listed twice at ${tier}`);
@@ -1821,6 +1831,24 @@ export function fabricRows() {
   return INSTITUTION_TIERS.flatMap(tier => Object.values(institutionalCatalog[tier])
     .flatMap(group => Object.keys(group))
     .filter(name => FABRIC_ROWS.has(guardKey(tier, name)))
+    .map(name => Object.freeze({ tier, name })));
+}
+
+/**
+ * Does the catalogue author this row's chance as a RARITY at this tier (`rare: true`)? The density
+ * factor never scales such a row (the chair's addendum, 2026-11-04).
+ * @param {string} tier @param {string} name
+ * @returns {boolean}
+ */
+export function isRareRow(tier, name) {
+  return RARE_ROWS.has(guardKey(tier, name));
+}
+
+/** Every rare row, `{ tier, name }`, in tier then draw order (for the walker and the report). */
+export function rareRows() {
+  return INSTITUTION_TIERS.flatMap(tier => Object.values(institutionalCatalog[tier])
+    .flatMap(group => Object.keys(group))
+    .filter(name => RARE_ROWS.has(guardKey(tier, name)))
     .map(name => Object.freeze({ tier, name })));
 }
 

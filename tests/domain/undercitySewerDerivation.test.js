@@ -171,7 +171,12 @@ describe('MF-UC1 — the undercity sanitation ladder and its wells', () => {
   });
 
   it('G-43, the rebuild arm: a dated calamity in the immutable record raises the rung and drains appear in the rebuilt quarter — and the cause reads THAT a calamity happened, never WHICH KIND, because the engine never asserts a disaster kind', () => {
-    const town = withoutSanitation(world('town', 'plains', 'uc1-rebuild'));
+    // Re-seeded `uc1-rebuild` to `uc1-rebuild-2` on 2026-11-04 (rung-1 pins, unit 2; X-46 car 3, the
+    // institution budget): the density factor follows the population, and the old seed's 482-person
+    // town now draws too few civic houses for a saturated calamity (weight 0.15) to lift it off
+    // cesspits. The premise — a cesspit town a dated calamity raises — is carried by uc1-rebuild-2
+    // (1,726 people), the first of its family (-0..-79) that does; 9 of the 80 do.
+    const town = withoutSanitation(world('town', 'plains', 'uc1-rebuild-2'));
     expect(deriveSewerLadder(town).rung).toBe('cesspits');
     expect(deriveSewerLadder(town).perQuarterCoverage.civic).toBe(false);
 

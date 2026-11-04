@@ -36,7 +36,9 @@ const labelsIn = (root) => [...(root?.querySelectorAll('[data-testid="institutio
 describe('X-46 car 3 — the fabric of the place, its own group at the foot of the Institutions tab', () => {
   it('the village seed carries fabric rows and houses (the premise of the render below)', () => {
     expect(village.tier).toBe('village');
-    expect(village.institutions.filter(isFabricInstitution).map((i) => i.name).sort()).toEqual(['Dwellings (80-180)', 'Multiple water sources']);
+    // Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): x46-2 renamed the village Dwellings row
+    // "Dwellings (80-180)" → "Dwellings (15-100)" (4ecd7f3, the owner's household column); same row.
+    expect(village.institutions.filter(isFabricInstitution).map((i) => i.name).sort()).toEqual(['Dwellings (15-100)', 'Multiple water sources']);
     expect(village.institutions.filter((i) => !isFabricInstitution(i)).length).toBeGreaterThan(4);
   });
 

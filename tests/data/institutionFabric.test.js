@@ -15,13 +15,17 @@ import { backingRowFor } from '../../src/data/institutionBacking.js';
 // farming and burial rows stay houses (they back powers at weight 1 and carry services), and so
 // do the weight-0 rows a DM would visit (the hedge wizard, the musician, the performers, the
 // fortune tellers, the dragon).
+// Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): x46-2 renamed the Dwellings and Housing
+// rows to the owner's household column (4ecd7f3: "Dwellings (4-16)" → "(1-8)", "(17-80)" → "(5-25)",
+// "(80-180)" → "(15-100)"; 175320e: "Housing (180-1000 structures)" → "(75-650 households)", the
+// city and metropolis likewise). Same fourteen rows, same tiers; only their names moved.
 const FABRIC = [
-  ['thorp', 'Access to external mill'], ['thorp', 'Access to parish church'], ['thorp', 'Dwellings (4-16)'], ['thorp', 'Water source'],
-  ['hamlet', 'Access to external mill'], ['hamlet', 'Access to parish church'], ['hamlet', 'Dwellings (17-80)'], ['hamlet', 'Water source'],
-  ['village', 'Dwellings (80-180)'], ['village', 'Multiple water sources'],
-  ['town', 'Housing (180-1000 structures)'], ['town', 'Multiple water sources'],
-  ['city', 'Housing (1000-5000 structures)'],
-  ['metropolis', 'Housing (5000+ structures)'],
+  ['thorp', 'Access to external mill'], ['thorp', 'Access to parish church'], ['thorp', 'Dwellings (1-8)'], ['thorp', 'Water source'],
+  ['hamlet', 'Access to external mill'], ['hamlet', 'Access to parish church'], ['hamlet', 'Dwellings (5-25)'], ['hamlet', 'Water source'],
+  ['village', 'Dwellings (15-100)'], ['village', 'Multiple water sources'],
+  ['town', 'Housing (75-650 households)'], ['town', 'Multiple water sources'],
+  ['city', 'Housing (500-4000 households)'],
+  ['metropolis', 'Housing (3500+ households)'],
 ];
 
 describe('X-46 car 3 — the fabric', () => {
