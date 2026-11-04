@@ -36,6 +36,7 @@ import { hasMarketInstitution } from '../../../src/generators/economy/viability.
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
+import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -88,7 +89,6 @@ const SENTENCE_SPLIT = /(?<=[.!?])\s+(?=[A-Z"“‘'(])|\n+/;
 /** @param {string} text */
 export const sentencesOf = (text) => String(text || '').split(SENTENCE_SPLIT).map((x) => x.trim()).filter(Boolean);
 
-const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
 /**
@@ -216,7 +216,7 @@ export function guildPowerSmall(s) {
 function hasWater(s, config) {
   const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
   const route = String(s?.config?.tradeRouteAccess ?? config?.tradeRouteAccess ?? '');
-  return WATER_TERRAINS.test(terrain) || route === 'port' || route === 'river';
+  return waterAccessKind(terrain.toLowerCase(), route || null) !== 'none'; // the water home's rule (CENSUS-1 fact 4)
 }
 
 /**

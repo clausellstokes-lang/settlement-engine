@@ -28,6 +28,7 @@ import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
 import { hasMarketInstitution } from '../../generators/economy/viability.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
+import { waterOf } from '../facts/water.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
 
@@ -46,10 +47,9 @@ export function routeOf(s) {
   return str(s?.config?.tradeRouteAccess ?? s?.tradeRouteAccess);
 }
 
-/** Navigable water by terrain or route (the soak's own `hasWater` reading, checks.mjs). */
-const WATER_TERRAIN_WIDE = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
-/** @param {any} s */
-export const hasNavigableWater = (s) => WATER_TERRAIN_WIDE.test(terrainOf(s)) || routeOf(s) === 'port' || routeOf(s) === 'river';
+/** Navigable water: the water home (`facts/water.js`, CENSUS-1 fact 4), not a regex of its own.
+ * @param {any} s */
+export const hasNavigableWater = (s) => waterOf(s).navigable;
 
 // ───────────────────────── 1. validation-on-page ─────────────────────────
 
@@ -408,10 +408,7 @@ export function hookPoolsFindings(s, surfaces) {
 
 // ──────────────────────────── 6. traditions-water ────────────────────────────
 
-/** Water by terrain, the chair's reading: coastal, riverside or lake. */
-const WATER_TERRAIN = /coast|river|lake/i;
 const WATER_TRADITION = /\b(?:Tide|Landfall|Landing|Sea|Harbou?r|Fleet)\b/;
-const NO_WATER_ROUTE = /^(?!port$|river$)/;
 
 /**
  * A Traditions-tab tradition keyed on Tide, Landfall, Landing, Sea, Harbour or Fleet in a place
@@ -420,7 +417,7 @@ const NO_WATER_ROUTE = /^(?!port$|river$)/;
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function traditionsWaterFindings(s, surfaces) {
-  if (!NO_WATER_ROUTE.test(routeOf(s)) || WATER_TERRAIN.test(terrainOf(s))) return [];
+  if (waterOf(s).navigable) return []; // the water home (CENSUS-1 fact 4)
   const hit = linesOf(surfaces.traditions).find((x) => WATER_TRADITION.test(x));
   return hit ? [{ surface: 'traditions', quote: hit, detail: `terrain ${terrainOf(s)}, route ${routeOf(s) || 'none'}` }] : [];
 }

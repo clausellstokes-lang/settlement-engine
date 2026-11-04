@@ -30,7 +30,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; // F11: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; // F11 / CENSUS-1: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -1436,7 +1436,7 @@ export const generateNPCs = (
     // Inject crafts-specific roles when a crafts OR economy faction exists (Craft Guilds have category=economy)
     const existingRoles = new Set(candidates.map(c => c.role));
     const hasGuild = institutions.some(isCommerceGuild);
-    const waterRoute = ['port', 'river', 'coastal'].includes(config?.tradeRouteAccess);
+    const waterRoute = typeof config?.tradeRouteAccess === 'string' && waterAccessKind('', config.tradeRouteAccess) !== 'none'; // CENSUS-1 fact 4: the water home's rule ('coastal' is a terrain, never a route)
     const hasPort =
       waterRoute ||
       institutions.some(

@@ -30,6 +30,7 @@
 import { createPRNG } from '../../kernel/prng.js';
 import { slugify } from '../../kernel/slugify.js';
 import { resolveTerrain } from '../resolveTerrain.js';
+import { waterAccessKind } from '../tradeRouteSemantics.js';
 import { evil01, chaos01 } from '../worldPulse/deityAxes.js';
 import { seasonForTick } from '../worldPulse/worldState.js';
 import { popToTier, TIER_ORDER } from '../../data/constants.js';
@@ -192,6 +193,8 @@ const MARKET_ECON = Object.freeze(['crossroads', 'port', 'road']);
  * @param {TraditionElement} el @param {TraditionIdentity} id @returns {number}
  */
 function elementWeight(el, id) {
+  // CENSUS-1 wave 0, fact 4: as in `foundingElementWeight`, no first landing without water.
+  if (el.id === 'first-landing' && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.foundingFit ? 0.25 : 1; // origin elements rarely recur as additions
   if (id.terrain && el.terrains.includes(id.terrain)) w += 3;
   if (id.econ && el.econ.includes(id.econ)) w += 2;
@@ -206,10 +209,12 @@ function elementWeight(el, id) {
 function foundingElementWeight(el, id) {
   // The singular origin leans hardest on `founding`; a coastal/river settlement's
   // origin is its first landing, a crossroads market town's its charter.
+  // CENSUS-1 wave 0, fact 4: a first landing needs water to land from — the water home
+  // (`tradeRouteSemantics.js :: waterAccessKind`: coast, river or port), else the element
+  // weighs 0 (it was 1.5 inland, the cause of reader:traditions-water).
+  if (el.id === 'first-landing' && waterAccessKind(id.terrain, id.econ) === 'none') return 0;
   let w = el.id === 'founding' ? 3 : el.id === 'first-landing' ? 1.5 : 1;
-  const coastalish = id.terrain === 'coastal' || id.terrain === 'riverside';
-  const waterEcon = id.econ === 'port' || id.econ === 'river';
-  if (el.id === 'first-landing' && (coastalish || waterEcon)) w += 3;
+  if (el.id === 'first-landing') w += 3;
   if (el.id === 'charter' && id.econ === 'crossroads') w += 1.5;
   return w;
 }
