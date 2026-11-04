@@ -9,8 +9,8 @@
  * never a render), and the zero pool is chosen only when that judgment passed.
  *
  * soak1k-40 (a city: surplus exports on a place that grows less than it eats, a hospital
- * hook with no hospital, "town" for a city) printed the line before this lane; soak1k-33
- * (a town the battery finds clean) prints it still.
+ * hook with no hospital, "town" for a city) printed the line before this lane; soak1k-278
+ * (a village clean on every soak check, kind 7 included) prints it still.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -42,14 +42,14 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
 
-  it('soak1k-33: a record the battery finds clean still prints the line', () => {
-    const { settlement } = birth(33);
+  it('soak1k-278: a record the battery finds clean still prints the line', () => {
+    const { settlement } = birth(278);
     expect(battery(settlement)).toMatchObject({ status: 'pass', findings: [] });
     expect(verdict(settlement)).toMatch(/contradicts anything else in it/);
   });
 
   it('a receipt without the judgment (a save older than it) is not vouched for', () => {
-    const { settlement } = birth(33);
+    const { settlement } = birth(278);
     const older = {
       ...settlement,
       generationCoherenceReceipt: {
