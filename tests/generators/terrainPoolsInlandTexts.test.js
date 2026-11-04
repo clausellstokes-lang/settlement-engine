@@ -11,8 +11,8 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 describe('inland texts on their seeds', () => {
   beforeAll(async () => { await ensureLaws(); });
-  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland village with a Fish market): was 176, 104.
-  it.each([32, 50])('soak1k-%i: the village Fish market sells salted fish, not the day\'s catch', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland village with a Fish market): was 176, 104. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
+  it.each([116, 152])('soak1k-%i: the village Fish market sells salted fish, not the day\'s catch', (i) => {
     const s = birth(i).settlement;
     const market = s.institutions.find((x) => x.name === 'Fish market');
     expect(market.desc).toBe(INLAND_DESCRIPTIONS['village|Economy|Fish market']);
