@@ -764,22 +764,23 @@ export function triageAllocation({ claimants, budget01, lawfulness01 = 0.5, cons
  */
 export function generosityReceipt({ verdict, giverId, receiverId, giverName, receiverName, terms, strategicOverride, leverageIntent }) {
   const g = giverName || giverId || 'the giver';
+  const gLead = giverName || giverId || 'The giver';
   const r = receiverName || receiverId || 'the receiver';
   if (verdict === VERDICTS.REFUSE) {
     // Name the dominant withhold term.
     if (terms.commitment >= terms.margin && terms.commitment >= terms.route && terms.commitment > 0.2) {
-      return `${g}'s granaries stayed shut: the army at the front eats first.`;
+      return `${gLead}'s granaries stayed shut: the army at the front eats first.`;
     }
     if (terms.route >= terms.margin && terms.route > 0.2) {
-      return `${g} held the grain back. The road to ${r} is cut, and seized bushels feed the enemy.`;
+      return `${gLead} held the grain back. The road to ${r} is cut, and seized bushels feed the enemy.`;
     }
     if (terms.dependency > 0.3) {
-      return `${g}'s patience thins: ${r} asks again, and a repeated dole is a governance problem, not a harvest one.`;
+      return `${gLead}'s patience thins: ${r} asks again, and a repeated dole is a governance problem, not a harvest one.`;
     }
-    return `${g} kept the granaries shut. The reserve sits a razor above its own hunger line.`;
+    return `${gLead} kept the granaries shut. The reserve sits a razor above its own hunger line.`;
   }
   if (verdict === VERDICTS.GIVE_AS_CREDIT) {
-    return `${g} advanced grain to ${r}. As a loan, not a gift: the ledger of the debt begins.`;
+    return `${gLead} advanced grain to ${r}. As a loan, not a gift: the ledger of the debt begins.`;
   }
   // A gift (full or partial).
   const reasons = [];

@@ -80,7 +80,7 @@ function foundInstitution(settlement, spec, tick) {
   ].slice(-24);
   return {
     settlement: { ...settlement, institutions: [...(settlement?.institutions || []), built], institutionHistory: history },
-    receipt: `${settlement?.name || 'the crossroads'} founds a ${spec.name.toLowerCase()}: sustained pass-through trade has grown an entrepôt.`,
+    receipt: `${settlement?.name || 'The crossroads'} founds a ${spec.name.toLowerCase()}: sustained pass-through trade has grown an entrepôt.`,
   };
 }
 
