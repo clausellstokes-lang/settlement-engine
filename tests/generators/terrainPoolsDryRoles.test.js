@@ -39,16 +39,19 @@ describe('the soak seeds that printed ships or a fisherman inland', () => {
   it.each([156, 180, 300])('soak1k-%i: the timber chain ends before ships', (i) => {
     expect(text(birth(i).settlement)).not.toMatch(/"ships"/);
   });
-  it.each([113, 341])('soak1k-%i: no institution description speaks of ships', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place whose description pool speaks of ships): was 341; 113 still carries it.
+  it.each([113, 4])('soak1k-%i: no institution description speaks of ships', (i) => {
     const s = birth(i).settlement;
     const shipDescs = s.institutions.filter((x) => /\bships?\b/i.test(x.desc || '') && !/Auction house/.test(x.name));
     expect(shipDescs.map((x) => x.name)).toEqual([]);
   });
-  it.each([108, 192, 85])('soak1k-%i: no fisherman', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland thorp): was 192. 85 still carries it; 108 passes and is left as it was, but it now has water (its premise is the chair's to re-point).
+  it.each([108, 12, 85])('soak1k-%i: no fisherman', (i) => {
     expect(birth(i).settlement.npcs.map((n) => n.role)).not.toContain('Fisherman');
   });
   // Chair ruling, round 3, 3b: a row the cascade adds after the variant pick takes its ship-free text.
-  it.each([573, 171])('soak1k-%i: the cascade-added Ropemaker speaks of no ships', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a cascade-added Ropemaker): was 573, 171.
+  it.each([9, 15])('soak1k-%i: the cascade-added Ropemaker speaks of no ships', (i) => {
     const s = birth(i).settlement;
     const rope = s.institutions.find((x) => x.name === 'Ropemaker');
     expect(rope?.source).toBe('cascade');

@@ -41,9 +41,10 @@ const textLines = (root) => {
 };
 
 describe('a place short of food sells no food surplus', () => {
-  it('soak1k-376 (a city growing 38% of its need): the Economics tab says no surplus', async () => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a city short of food with its grain chain on the tab): was soak1k-376.
+  it('soak1k-28 (a city short of food): the Economics tab says no surplus', async () => {
     await ensureLaws();
-    const { settlement: s } = birth(376);
+    const { settlement: s } = birth(28);
     const record = s.economicState.foodSecurity.foodRecord;
     expect(record.growsMoreThanEats).toBe(false);
     const { container } = render(<EconomicsTab settlement={s} economicState={s.economicState} narrativeNote={null} />);

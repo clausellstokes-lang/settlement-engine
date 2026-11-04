@@ -10,8 +10,9 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 describe('the harbour line in an airship city with no water', () => {
   beforeAll(async () => { await ensureLaws(); });
-  it('soak1k-869: an airship city with no water claims no harbour on the Defense desk', () => {
-    const s = birth(869).settlement;
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (airship docking and no water): was soak1k-869.
+  it('soak1k-11: an airship city with no water claims no harbour on the Defense desk', () => {
+    const s = birth(11).settlement;
     expect(s.institutions.some((x) => /Airship/.test(x.name))).toBe(true);
     expect(JSON.stringify(defenseSupportingProse(s, { seed: s._seed }))).not.toMatch(/harbou?r/i);
   });

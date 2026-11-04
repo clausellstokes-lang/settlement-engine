@@ -10,7 +10,8 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 
 describe('inland cities with aerial docks or salt works', () => {
   beforeAll(async () => { await ensureLaws(); });
-  it.each([83, 305, 169, 853])('soak1k-%i lands no catch', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with airship docking or salt works): was 83, 169, 853. 305 passes and is left as it was, but it is inland with neither docking nor salt works (its premise is the chair's to re-point).
+  it.each([1, 305, 11, 109])('soak1k-%i lands no catch', (i) => {
     const { settlement: s } = birth(i);
     expect(waterAccessKind(s.config.terrainType, s.config.tradeRouteAccess)).toBe('none');
     const sources = (s.economicState?.incomeSources || []).map((x) => (typeof x === 'string' ? x : x?.source));

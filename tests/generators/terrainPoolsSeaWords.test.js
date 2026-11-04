@@ -79,13 +79,15 @@ describe('the soak seeds that printed a catch inland', () => {
     expect(sources.join(' | ')).not.toMatch(/\bFish\b/);
   });
 
-  it.each([90, 7])('soak1k-%i dries no fish on racks at the gate', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a fish institution): was 7. 90 passes and is left as it was, but it carries no fish institution (its premise is the chair's to re-point).
+  it.each([90, 4])('soak1k-%i dries no fish on racks at the gate', (i) => {
     const { settlement: s } = birth(i);
     expect(inland(s)).toBe(true);
     expect(String(s.arrivalScene || '')).not.toMatch(/Racks of drying fish/);
   });
 
-  it.each([93, 35])('soak1k-%i sells no morning catch', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (an inland place with a Fish market): was 93; 35 still carries it.
+  it.each([4, 35])('soak1k-%i sells no morning catch', (i) => {
     const { settlement: s } = birth(i);
     expect(inland(s)).toBe(true);
     const all = Object.values(s.availableServices || {}).flat().map((x) => x?.name);

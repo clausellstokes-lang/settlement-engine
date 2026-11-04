@@ -48,9 +48,10 @@ describe('the food-surplus residue', () => {
     expect(surplusCodes(short, 'Requires grain surplus; the valley sells its grain surplus')).toHaveLength(1);
   });
 
-  it('soak1k-65 (band secure, grows less than it eats): the Foundations Food row is not graded Surplus', async () => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (band secure, grows less than it eats): was soak1k-65.
+  it('soak1k-5 (band secure, grows less than it eats): the Foundations Food row is not graded Surplus', async () => {
     await ensureLaws();
-    const { settlement: s } = birth(65);
+    const { settlement: s } = birth(5);
     expect(s.economicState.foodSecurity.foodRecord.growsMoreThanEats).toBe(false);
     const { container } = render(<SubstrateTab settlement={s} />);
     const text = textLines(container);

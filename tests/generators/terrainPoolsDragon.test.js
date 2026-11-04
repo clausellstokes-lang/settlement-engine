@@ -33,7 +33,8 @@ describe('a magic-off metropolis with a dragon resident (hand-built)', () => {
 
 describe('the soak seeds that printed the dragon line with magic off', () => {
   beforeAll(async () => { await ensureLaws(); });
-  it.each([65, 89])('soak1k-%i offers no aerial deterrence', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a magic-off metropolis; the dragon itself no longer arises with magic off, the licence cure): was 65, 89.
+  it.each([41, 47])('soak1k-%i offers no aerial deterrence', (i) => {
     const { settlement: s } = birth(i);
     expect(s.config.magicExists).toBe(false);
     const all = Object.values(s.availableServices || {}).flat().map((x) => x?.name);

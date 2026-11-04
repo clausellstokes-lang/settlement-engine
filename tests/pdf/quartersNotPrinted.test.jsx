@@ -96,9 +96,12 @@ describe('X-47: no quarter name in any text export before the plat', () => {
   });
 
   test('the walk read real exports, and the view model still carries the quarters for the plat', () => {
-    const zero = ROWS.find((r) => r.seed === 'soak1k-0');
-    // anchored: the dry run's named quarter is on the record, so its absence above is not vacuous.
-    expect(zero.names).toContain("Woodcutters' Ground");
+    // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so soak1k-0 (now
+    // a thorp with no quarters) no longer carries the dry run's named quarter; re-anchored on the first seed of
+    // the new corpus that carries one (soak1k-1, "Religious Quarter"). Was: soak1k-0, "Woodcutters' Ground".
+    const zero = ROWS.find((r) => r.seed === 'soak1k-1');
+    // anchored: a named quarter is on the record, so its absence above is not vacuous.
+    expect(zero.names).toContain('Religious Quarter');
     for (const { seed, s, vm, chapter15, pdf, journal, names } of ROWS) {
       expect(chapter15.includes(s.name), `${seed}: chapter 15 carries the settlement's name`).toBe(true);
       expect(pdf.includes('Identity & Daily Life') && pdf.includes('Overview'), `${seed}: the PDF carries chapters 01 and 15`).toBe(true);
