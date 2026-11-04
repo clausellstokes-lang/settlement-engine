@@ -481,10 +481,20 @@ is a measurement of the world and not of an empty generator.
 
 **THE TWIN-WORLD ENVELOPE (MG-LAW-3) HOLDS, AND HOLDS WELL.** All five compared axes,
 mundane vs magical: members 5 vs 5 (1.000), institutions 147 vs 145 (1.014), factions
-26 vs 28 (0.929), services 215 vs 213 (1.009), history events 21 vs 22 (0.955). A mundane
+25 vs 26 (0.962), services 215 vs 213 (1.009), history events 21 vs 22 (0.955). A mundane
 realm is not a thinner realm — it is at or above parity on three of the five axes and inside
 the provisional bands on the other two, and suppression rides the substitution arms exactly
 as the law requires.
+
+⚠️ **RE-RECORDED 2026-11-04 BY SIZE-3 (the small-place guild check requires a real market), ONE
+SAME-SEED SHIFT, AND BOTH TWINS MOVE.** factions `26 vs 28` → `25 vs 26` (0.929 → 0.962); every
+other axis holds. The harness bisects it over PR #72's first-parent window to 8cd65978e (the
+compose of lane/doors-2026-11-03), and inside that lane to 43f9c0dcc: a thorp, hamlet or village
+seats its merchant faction only over a real market, so the realm's smallest members stop seating
+a guild that farming alone used to admit (one in the mundane twin, two in the magical). The
+arcane census over the mundane realm is still EMPTY; the ratio improves and stays inside
+PENDING_BANDS, so no band is asked to move. Copied from the MG-4.2 pin's own measured line by
+REGISTERS-7 (F4). This block and the test header were moved in ONE act.
 
 ⚠️ **RE-RECORDED 2026-10-30 BY THE SERVICE RE-MAP (RS-1..RS-13, ODQ §934.101), ONE DECLARED
 SAME-SEED SHIFT, MUNDANE TWIN ONLY.** services `214 vs 213` → `215 vs 213` (1.005 → 1.009); every
