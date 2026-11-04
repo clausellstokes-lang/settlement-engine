@@ -20,6 +20,7 @@ const dep = J('aggregates/dependence-strong.json');
 const rep = J('aggregates/repetition.json');
 const fields = J('aggregates/fields.json');
 let res = null; try { res = J('aggregates/dependence-residual.json'); } catch { /* a run older than the second pass */ }
+let bands = null; try { bands = J('aggregates/field-bands.json'); } catch { /* a run older than the band readings */ }
 let prose = null; try { prose = J('aggregates/repetition-prose.json'); } catch { /* a run older than the prose instrument */ }
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const cell = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').slice(0, 160);
@@ -57,6 +58,12 @@ if (prose) {
   L.push(`same-tier, by tier: ${TIERS.map((t) => `${t} ${byT[t] != null ? pct(byT[t]) : '·'}`).join(' · ')}`);
   L.push('', `### The ${prose.top.length} skeletons shared by ≥ 10% of towns (of ${prose.skeletonsInTenPercent}), with their source pool`, '', '| towns | rate | tab | skeleton (names @, numbers #) | source (`path :: symbol`) |', '|---|---|---|---|---|');
   for (const t of prose.top) L.push(`| ${t.towns} | ${t.rate} | ${t.tab} | ${cell(t.skeleton)} | ${t.source ? `\`${t.source.file} :: ${t.source.symbol}\`${t.source.alsoIn ? ` (+${t.source.alsoIn})` : ''}${t.chrome ? ' — tab copy' : ''}` : 'composed (no literal run found)'} |`);
+}
+if (bands) {
+  const band = (b) => (b ? `${b[0]}–${b[1] === null || b[1] === Infinity ? '∞' : b[1]}` : '');
+  L.push('', '## The owner\'s bands, field by field (median [p10–p90] · band · share of settlements outside)', '', `| field | band | ${TIERS.join(' | ')} |`, `|---|---|${TIERS.map(() => '---').join('|')}|`);
+  for (const r of bands.rows) L.push(`| ${r.path} | ${r.band} | ${TIERS.map((t) => { const b = r.byTier[t]; return b ? `${b.medianInside ? '' : '**'}${b.median}${b.medianInside ? '' : '**'} [${b.p10}–${b.p90}] · ${band(b.band)} · ${Math.round(b.outsideShare * 100)}% out` : '·'; }).join(' | ')} |`);
+  L.push('', `**Medians outside their band (${bands.outside.length}):** ${bands.outside.map((x) => `${x.path} ${x.tier} ${x.median} (${x.low}–${x.high === null ? '∞' : x.high}, ${Math.round(x.outsideShare * 100)}% out)`).join(' · ') || 'none'}.`, '', 'Bands: population is the owner\'s table; institutions and named NPCs are the ledger\'s budgets (docs/DESIGN_X46_SCALE_TRAIN.md §1; the institution budget excludes the fabric rows, which the record counts today). Every other field below is reported unbanded.');
 }
 const key = fields.filter((f) => f.path.startsWith('chain.') && f.kind === 'numeric');
 L.push('', '## Key numeric facts by tier (median [p10–p90], min–max)', '', `| fact | ${TIERS.join(' | ')} |`, `|---|${TIERS.map(() => '---').join('|')}|`);

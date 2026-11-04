@@ -12,6 +12,7 @@ import { CHAINS } from './chains.mjs';
 import { dependence } from './dependence-measures.mjs';
 import { secondPass } from './dependence.mjs';
 import { pairwiseRepeat, sourcePoolOf } from './prose.mjs';
+import { bandReadings } from './bands.mjs';
 import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
@@ -117,6 +118,12 @@ export function aggregate(out, meta) {
   });
   writeFileSync(join(out, 'aggregates', 'chains.json'), `${JSON.stringify(chainRows, null, 1)}\n`);
 
+  // ── every field by tier with the owner's bands marked where they exist (bands.mjs)
+  const banded = bandReadings(fields, col, tierOf);
+  for (const r of banded.rows) { const f = fields.find((x) => x.path === r.path); if (f) f.band = { name: r.band, source: r.source, byTier: Object.fromEntries(Object.entries(r.byTier).map(([t, b]) => [t, { band: b.band, medianInside: b.medianInside, outsideShare: b.outsideShare }])) }; }
+  writeFileSync(join(out, 'aggregates', 'fields.json'), `${JSON.stringify(fields)}\n`);
+  writeFileSync(join(out, 'aggregates', 'field-bands.json'), `${JSON.stringify(banded, null, 1)}\n`);
+
   // ── the dependence scan over all pairs of reasonable cardinality
   const cand = [];
   for (const f of fields) {
@@ -203,7 +210,7 @@ export function aggregate(out, meta) {
     else if (c.kind === 0 && c.rate > 0.01) reasons.push(`wording: ${c.check} at ${c.rate}`);
   }
   const verdict = reasons.length ? 'STOP' : 'CLIMB';
-  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
+  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
   writeFileSync(join(out, 'run.json'), `${JSON.stringify(summary, null, 1)}\n`);
   return summary;
 }
