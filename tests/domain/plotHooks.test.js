@@ -8,6 +8,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { collectPlotHooks, groupPlotHooksBySourcePage, plotHookSourcePage } from '../../src/domain/dossier/plotHooks.js';
+import { hookTruthFindings } from '../../src/domain/coherence/hookTruthFindings.js';
 
 describe('collectPlotHooks canonical input shapes', () => {
   test('keeps normalized {text} hooks and drops alias-only objects', () => {
@@ -119,5 +120,48 @@ describe('the source page of a hook (chair ruling X-2: Plot Hooks groups its car
     expect(groups.map((g) => g.page.label)).toEqual(['NPCs', 'History', 'Defense']);
     expect(groups[0].hooks.map((h) => h.text)).toEqual(['n1', 'n2']);
     expect(groupPlotHooksBySourcePage([])).toEqual([]);
+  });
+});
+
+// THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3): a crisis entry's stored
+// hooks are collected ahead of the place's own, and the record's truth check reads them.
+describe('collectPlotHooks: a crisis\'s cast hooks come first', () => {
+  const cast = { nature: 'natural', rank: 1, roles: [{ role: 'brunt', kind: 'npc', id: 'n1', name: 'Mara Vell', reason: 'the hunger falls first on its people', temporary: false }], absent: [], stakes: [], levers: [] };
+  const npcs = [
+    { id: 'n1', name: 'Mara Vell', role: 'Miller', power: 10, influence: 'high', plotHooks: ['Mara keeps a second ledger.'] },
+    { id: 'n2', name: 'Oswin Hale', role: 'Mayor', power: 4, plotHooks: ['Oswin owes a debt he cannot name.'] },
+  ];
+  const crisisTown = () => ({
+    name: 'Vellbrook', tier: 'town', npcs,
+    stress: [{
+      type: 'famine', label: 'Famine', cast,
+      plotHooks: [{ text: 'In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.', bound: 'cast', link: { kind: 'npc', id: 'n1', label: 'Mara Vell' } }],
+    }],
+  });
+
+  test('a hand-built town with one crisis and a cast: the hook list leads with the hook naming the holder', () => {
+    const hooks = collectPlotHooks(crisisTown());
+    expect(hooks[0]).toMatchObject({
+      text: 'In the famine, the brunt falls on Mara Vell: the hunger falls first on its people.',
+      source: 'Famine', category: 'tension', priority: 10, crisis: 'famine',
+      links: [{ kind: 'npc', id: 'n1', label: 'Mara Vell' }],
+    });
+    // the place's own hooks follow, in the order they always had, the count above them a floor
+    expect(hooks.slice(1).map((h) => h.text)).toEqual(['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.']);
+  });
+
+  test('a single (non-list) crisis entry is read too, and a calm place\'s list is exactly its own hooks', () => {
+    const single = { ...crisisTown(), stress: crisisTown().stress[0] };
+    expect(collectPlotHooks(single)[0].crisis).toBe('famine');
+    const calm = { ...crisisTown(), stress: null };
+    expect(collectPlotHooks(calm).map((h) => h.text)).toEqual(['Mara keeps a second ledger.', 'Oswin owes a debt he cannot name.']);
+    expect(collectPlotHooks(calm).some((h) => 'crisis' in h)).toBe(false);
+  });
+
+  test('the record\'s truth check reads a crisis hook (a false one is a finding; the page refuses it)', () => {
+    const town = { ...crisisTown(), economicState: { foodSecurity: { label: 'Secure' } } };
+    town.stress = [{ ...town.stress[0], plotHooks: ['The settlement is starving and its people turn to banditry.'] }];
+    expect(hookTruthFindings(town).map((f) => f.code)).toEqual(['famine_words_on_a_fed_place']);
+    expect(collectPlotHooks(town).some((h) => h.crisis)).toBe(false);
   });
 });

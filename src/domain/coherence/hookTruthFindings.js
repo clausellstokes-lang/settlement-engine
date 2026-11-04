@@ -71,6 +71,11 @@ function storedHookTexts(settlement) {
   events.forEach((event) => takeAll(/** @type {{ plotHooks?: unknown }} */ (event)?.plotHooks));
   takeAll(record.economicViability?.plotHooks);
   takeAll(record.economicState?.safetyProfile?.plotHooks);
+  // The hooks each active crisis stores (src/domain/crisis/crisisHooks.js, written by the cast
+  // step): one entry or a list.
+  /** @type {unknown[]} */
+  const crises = Array.isArray(record.stress) ? record.stress : record.stress && typeof record.stress === 'object' ? [record.stress] : [];
+  crises.forEach((entry) => takeAll(/** @type {{ plotHooks?: unknown }} */ (entry)?.plotHooks));
   return out;
 }
 

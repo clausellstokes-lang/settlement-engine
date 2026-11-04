@@ -121,6 +121,7 @@ export function groupPlotHooksBySourcePage(hooks) {
  * @property {number} priority
  * @property {boolean} [accent]
  * @property {Array<{ kind: string, label: unknown, id: unknown }>} [links]
+ * @property {string} [crisis] the crisis kind a crisis hook belongs to (absent on every other hook)
  */
 
 // Hook-prefix cleanup is the shared display chokepoint (src/lib/proseSeams.js);
@@ -339,7 +340,21 @@ function speakHooks(collected, facts, settlement) {
  * @property {{ plotHooks?: PlotHookRaw[] }} [economicViability]
  * @property {{ safetyProfile?: { plotHooks?: PlotHookRaw[] } }} [economicState]
  * @property {unknown[]} [traditions]  THE TRADITIONS mirror (T-5) — outcome/relation hooks
+ * @property {unknown} [stress]  the crisis container: one entry or a list, each may store `plotHooks`
  */
+
+/**
+ * The crisis container as a list of entries (one entry, a list, or nothing).
+ * @param {unknown} stress
+ * @returns {Array<{ type?: unknown, label?: unknown, plotHooks?: unknown }>}
+ */
+function crisisEntriesOf(stress) {
+  const list = Array.isArray(stress) ? stress : stress && typeof stress === 'object' ? [stress] : [];
+  return list.filter((e) => !!e && typeof e === 'object');
+}
+
+/** The link kinds a hook card can carry. */
+const CRISIS_LINK_KINDS = new Set(['npc', 'faction']);
 
 /**
  * @param {PlotHookSettlement} [settlement]
@@ -354,6 +369,30 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const hooks = [];
   const facts = settlementHookFacts(settlement);
   const drawConflictHook = createConflictHookDraw();
+
+  // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
+  // Each active crisis stores the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::
+  // crisisHooksOf`, written by the cast step): one naming a line role's holder, one naming the
+  // lever and the faction that loses. They are collected ahead of every other source and marked
+  // `crisis`, and the sort below keeps them first, so the place's own hooks are the floor of the
+  // count and not the whole. A calm place has no entry, so nothing here runs for it.
+  crisisEntriesOf(settlement.stress).forEach((entry) => {
+    const kind = typeof entry.type === 'string' ? entry.type : '';
+    const label = typeof entry.label === 'string' && entry.label ? entry.label : 'Crisis';
+    (Array.isArray(entry.plotHooks) ? entry.plotHooks : []).forEach((hook) => {
+      const link = /** @type {{ link?: { kind?: unknown, id?: unknown, label?: unknown } | null }} */ (hook && typeof hook === 'object' ? hook : {}).link;
+      push(hooks, {
+        text: plotHookText(hook),
+        source: label,
+        role: '',
+        category: 'tension',
+        priority: 10,
+        accent: true,
+        crisis: kind || 'crisis',
+        links: link && CRISIS_LINK_KINDS.has(String(link.kind)) ? [{ kind: String(link.kind), label: link.label, id: link.id }] : [],
+      });
+    });
+  });
 
   (settlement.npcs || []).forEach((npc) => {
     (npc.plotHooks || []).forEach((hook) => push(hooks, {
@@ -467,8 +506,11 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   const spoken = speakHooks(hooks, facts, settlement);
 
   // Sort by priority (then category, for a stable tiebreak), THEN dedupe so the
-  // kept instance of any repeated hook is always the highest-priority one.
-  const sorted = spoken.sort((a, b) => b.priority - a.priority || compareCodepoint(a.category, b.category));
+  // kept instance of any repeated hook is always the highest-priority one. A crisis hook
+  // leads every other (the first key); between two hooks that are not crisis hooks the first
+  // key is 0, so a calm place's order is the order it always had.
+  const sorted = spoken.sort((a, b) => (Number(Boolean(b.crisis)) - Number(Boolean(a.crisis)))
+    || b.priority - a.priority || compareCodepoint(a.category, b.category));
   const deduped = dedupeHooks(sorted);
 
   // ── HK-2 SEAM (dark by default) ────────────────────────────────────────────
