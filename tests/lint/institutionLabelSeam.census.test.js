@@ -366,8 +366,10 @@ describe('the institution label seam — the WORD does not reach a reader', () =
     for (const file of [
       'src/components/new/SummaryTab.jsx',            // the same landmarks, compactly
       'src/pdf/sections/Overview.jsx',                // the document's QUARTERS block
-      'src/pdf/sections/IdentityDailyLife.jsx',       // the fillable LANDMARKS field
-      'src/foundry/journalPages.js',                  // the VTT journal's quarters + institutions
+      // IdentityDailyLife.jsx left this list with X-47 (2026-11-04): its fillable LANDMARKS field
+      // went with the QUARTERS block (no districts before the plat), so it threads nothing;
+      // the WORD census above still reads it.
+      'src/foundry/journalPages.js',                  // the VTT journal's institutions
     ]) {
       const source = readFileSync(join(ROOT, file), 'utf8');
       expect(source.length, `${file} is readable`).toBeGreaterThan(0);

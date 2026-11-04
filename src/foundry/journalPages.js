@@ -218,8 +218,7 @@ function identityPage(vm) {
     kv('Trade access', id.tradeAccess ? humanize(id.tradeAccess) : null),
     kv('Governing faction', id.anchor.governingName),
     kv('Cultural notes', id.anchor.culturalNotes),
-    id.quarters.length ? md('', '## Quarters', id.quarters.map(q =>
-      `- **${esc(q.name)}**${q.description ? `: ${esc(q.description)}` : ''}${(q.landmarks || []).length ? ` Landmarks: ${q.landmarks.map(lm => esc(institutionDisplayName(lm))).join(', ')}.` : ''}`)) : null,
+    // ⛔ No '## Quarters' section before the plat (X-47); the view model keeps `id.quarters`.
   ) || null;
 }
 
