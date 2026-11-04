@@ -139,6 +139,12 @@ const ROSTER = Object.freeze([
   // pin bag can never carry them (see A2) and both re-derive on every run.
   { symbol: 'generateFactions', file: 'src/generators/power/factionGrouping.js', cls: 'producer', stream: SHARED, via: ASSEMBLY_STEP },
   { symbol: 'generateConflicts', file: 'src/generators/power/conflicts.js', cls: 'producer', stream: NAMED_CHILD, via: ASSEMBLY_STEP },
+  // ⭐ 13 -> 14 (lane RUNG1-TRUTH unit A, 2026-11-04): `storeTrueHooksOnly` drops a stored hook its
+  // own record contradicts, so it WRITES `plotHooks` inside `npcs` and `conflicts` (copy-on-write,
+  // no draw). A MUTATOR: it changes no row's identity and adds none. The NPC half is gated in the
+  // assembly body on `chooseOrPin(pins, 'npcs', …)`, the structural appender's own gate, so a held
+  // roster is never re-written; the conflicts are re-derived on every run and never held.
+  { symbol: 'storeTrueHooksOnly', file: 'src/domain/coherence/hookTruthRecord.js', cls: 'mutator', stream: SHARED, via: ASSEMBLY_STEP },
 ]);
 
 /**
@@ -490,7 +496,7 @@ describe('EM-R1 — the writer census of every held key', () => {
       if (!cache.has(row.file)) cache.set(row.file, declaredSymbols(rawSource(row.file)));
       if (cache.get(row.file).get(row.symbol) !== 1) unresolved.push(`${row.file} :: ${row.symbol}`);
     }
-    expect(ROSTER).toHaveLength(13); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts
+    expect(ROSTER).toHaveLength(14); // 11 -> 13 at the GS-2 merge (lane G2): generateFactions, generateConflicts; 13 -> 14: storeTrueHooksOnly (lane RUNG1-TRUTH unit A)
     expect(unresolved, 'a roster row names a symbol its file no longer declares exactly once').toEqual([]);
 
     // (b) DISCOVERY, both directions, over the assembly step's OWN body.
@@ -573,7 +579,7 @@ describe('EM-R1 — the writer census of every held key', () => {
     const shared = ROSTER.filter((row) => row.stream === SHARED).map((row) => row.symbol).sort();
     expect(shared).toEqual([
       'ensureFactionStructuralNpcs', 'generateCoherence', 'generateFactions', 'generateSettlementName',
-      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster',
+      'reconcilePowerStructure', 'relinkFactionMembers', 'resizePoliticalRoster', 'storeTrueHooksOnly',
     ]);
     // ⛔ generateSettlementName is the row this rule exists for: the mint draws on the assembly
     // step's own shared stream, so a held name is CONSUMED AND DISCARDED, never skipped.

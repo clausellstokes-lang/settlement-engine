@@ -45,6 +45,7 @@ import { culturalNotesFor } from '../../domain/cultureProfiles.js';
 import {
   buildGenerationCoherenceReceipt,
 } from '../generationCoherence.js';
+import { storeTrueHooksOnly } from '../../domain/coherence/hookTruthRecord.js';
 import {
   assertPowerEconomyFreshness,
   reconcilePowerStructure,
@@ -329,6 +330,21 @@ registerStep('assembleSettlement', {
   if (settlement.powerStructure) {
     settlement.powerStructure = { ...settlement.powerStructure, conflicts: settlement.conflicts };
   }
+
+  // ── A HOOK FALSE ON ITS OWN RECORD IS NOT STORED (lane RUNG1-TRUTH unit A, 2026-11-04;
+  // docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 11). Every hook writer has drawn by now and the
+  // facts a hook can lie about are final (the food band, the defence roster above, the tier,
+  // the world law), so the record-level check runs here, before the receipt reads the record,
+  // and a contradicted hook is dropped: the list keeps its next candidate, or none. It draws
+  // nothing and copies only the containers it changes, so a record whose hooks are all true is
+  // byte-identical to before.
+  // (`storeTrueHooksOnly` carries a filtered conflict list onto `powerStructure.conflicts`
+  // too, so the dual-written addresses stay one list.) A HELD ROSTER IS NOT RE-WRITTEN: under a
+  // held `npcs` pin the NPCs' hooks are the held record's, gated on the same key and primitive
+  // as the structural appender above (the conflicts are re-derived on every run, never held).
+  Object.assign(settlement, storeTrueHooksOnly(settlement, {
+    npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
+  }));
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the

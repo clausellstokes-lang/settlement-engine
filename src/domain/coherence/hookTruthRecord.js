@@ -79,3 +79,139 @@ export function hookTruthFindings(settlement) {
   const facts = settlementHookFacts(settlement);
   return storedHookTexts(settlement).flatMap((text) => hookTruthViolations(text, facts));
 }
+
+/**
+ * The text of one stored hook entry, in the shapes `storedHookTexts` reads.
+ * @param {unknown} hook
+ * @returns {string}
+ */
+function hookTextOf(hook) {
+  if (typeof hook === 'string') return hook;
+  const entry = /** @type {{ hook?: unknown, text?: unknown }} */ (hook);
+  return typeof entry?.hook === 'string' ? entry.hook
+    : typeof entry?.text === 'string' ? entry.text : '';
+}
+
+/**
+ * The containers `withoutFalseHooks` may copy, as the assembled record carries them.
+ * @typedef {Object} StoredHookRecord
+ * @property {unknown} [npcs]
+ * @property {unknown} [conflicts]
+ * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
+ * @property {{ plotHooks?: unknown }} [economicViability]
+ * @property {{ safetyProfile?: { plotHooks?: unknown } }} [economicState]
+ * @property {{ conflicts?: unknown }} [powerStructure]
+ */
+
+/**
+ * @typedef {Object} TrueHooksPatch
+ * @property {number} dropped how many stored hooks the record contradicted
+ * @property {Record<string, unknown>} patch the containers that changed, keyed by their
+ *   top-level record key (`npcs`, `conflicts`, `history`, `economicViability`,
+ *   `economicState`); empty when nothing was dropped
+ */
+
+/**
+ * THE GENERATION-SIDE CURE (lane RUNG1-TRUTH unit A, 2026-11-04; docs/SOAK_1000_RUNG1_2026-11-04.md
+ * §2 row 11): a hook FALSE ON ITS OWN RECORD IS NOT STORED.
+ *
+ * `hookTruthFindings` above reports the debt; this drops it, with the same walk and the same
+ * classifier, so the two can never disagree about which hook is false. The page already
+ * refused every one of these (`hook-truth-page` 0 of 1,000); the record still stored 216
+ * places' worth ("The settlement is starving…" on fed places, "paying their soldiers" with no
+ * armed force, a blockade's "21 days of reserves" over 6.5 months in store).
+ *
+ * THE DRAW-ORDER PROMISE: this runs AFTER every draw (the assembly step calls it once the
+ * roster, the defence profile and the conflicts are final) and it draws nothing itself. A
+ * dropped hook leaves the list's next candidate in its place, or none; it never writes a new
+ * sentence and never asks a pool for another. A record whose hooks are all true comes back
+ * with no patch at all, so a calm place is byte-identical to what it was.
+ *
+ * COPY-ON-WRITE: a container is copied only where a hook leaves it, so no ctx-shared object
+ * is mutated in place. The crisis hooks are derived from the cast (`crisisHooksOf`), never
+ * stored, and are the page's business; they are not read here.
+ *
+ * A HELD ROSTER IS NOT RE-WRITTEN: under a held `npcs` pin (`options.npcsHeld`) the NPCs'
+ * hooks are the held record's and are left as they are; the page's own truth gate still
+ * refuses a false one there. The other containers are re-derived on every run.
+ *
+ * @param {unknown} settlement the assembled record
+ * @param {{ npcsHeld?: boolean }} [options]
+ * @returns {TrueHooksPatch}
+ */
+export function withoutFalseHooks(settlement, options = {}) {
+  const record = /** @type {StoredHookRecord} */ (
+    settlement && typeof settlement === 'object' ? settlement : {}
+  );
+  const facts = settlementHookFacts(settlement);
+  let dropped = 0;
+  /** @type {(list: unknown) => unknown} the list itself when every hook is true */
+  const keep = (list) => {
+    if (!Array.isArray(list)) return list;
+    const kept = list.filter((hook) => hookTruthViolations(hookTextOf(hook), facts).length === 0);
+    if (kept.length === list.length) return list;
+    dropped += list.length - kept.length;
+    return kept;
+  };
+  /** @type {(rows: unknown) => unknown} each row's `plotHooks`, copying only a changed row */
+  const keepRows = (rows) => {
+    if (!Array.isArray(rows)) return rows;
+    let changed = false;
+    const next = rows.map((/** @type {unknown} */ row) => {
+      const entry = /** @type {{ plotHooks?: unknown }} */ (row);
+      if (!row || typeof row !== 'object' || !Array.isArray(entry.plotHooks)) return row;
+      const kept = keep(entry.plotHooks);
+      if (kept === entry.plotHooks) return row;
+      changed = true;
+      return { ...entry, plotHooks: kept };
+    });
+    return changed ? next : rows;
+  };
+  /** @type {Record<string, unknown>} */
+  const patch = {};
+
+  const npcs = options.npcsHeld ? record.npcs : keepRows(record.npcs);
+  if (npcs !== record.npcs) patch.npcs = npcs;
+  const conflicts = keepRows(record.conflicts);
+  if (conflicts !== record.conflicts) patch.conflicts = conflicts;
+  if (record.history && typeof record.history === 'object') {
+    const tensions = keepRows(record.history.currentTensions);
+    const events = keepRows(record.history.historicalEvents);
+    if (tensions !== record.history.currentTensions || events !== record.history.historicalEvents) {
+      patch.history = { ...record.history, currentTensions: tensions, historicalEvents: events };
+    }
+  }
+  if (record.economicViability && typeof record.economicViability === 'object') {
+    const hooks = keep(record.economicViability.plotHooks);
+    if (hooks !== record.economicViability.plotHooks) patch.economicViability = { ...record.economicViability, plotHooks: hooks };
+  }
+  const safety = record.economicState?.safetyProfile;
+  if (safety && typeof safety === 'object') {
+    const hooks = keep(safety.plotHooks);
+    if (hooks !== safety.plotHooks) {
+      patch.economicState = { ...record.economicState, safetyProfile: { ...safety, plotHooks: hooks } };
+    }
+  }
+  return { dropped, patch };
+}
+
+/**
+ * `withoutFalseHooks` applied: the record with its false stored hooks gone, or the SAME
+ * record (by reference) when every hook is true. The conflicts are dual-written on
+ * `powerStructure.conflicts` by the assembly step, so a filtered conflict list is carried
+ * there too and the two addresses stay one list.
+ * @template {object} T
+ * @param {T} settlement
+ * @param {{ npcsHeld?: boolean }} [options] see `withoutFalseHooks`
+ * @returns {T}
+ */
+export function storeTrueHooksOnly(settlement, options = {}) {
+  const { dropped, patch } = withoutFalseHooks(settlement, options);
+  if (dropped === 0) return settlement;
+  const before = /** @type {StoredHookRecord} */ (settlement);
+  const next = /** @type {StoredHookRecord} */ ({ ...before, ...patch });
+  if (patch.conflicts && next.powerStructure && next.powerStructure.conflicts === before.conflicts) {
+    next.powerStructure = { ...next.powerStructure, conflicts: patch.conflicts };
+  }
+  return /** @type {T} */ (/** @type {unknown} */ (next));
+}
