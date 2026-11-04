@@ -148,10 +148,15 @@ describe('X-46 car 4 (ii) — the population tilt moves the centre and never the
 });
 
 describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this test only), the roster follows the people', () => {
-  // ⛔ THE DARK ARM. The digests were recorded at 8cc245db0 (the coherence window's tip plus
+  // ⛔ THE DARK ARM. The digests were first recorded at 8cc245db0 (the coherence window's tip plus
   // car 1's bands, BEFORE this car) by this file's own recipe: `rawBitFormOf` of the whole
-  // generated settlement, default config, the signature unflipped. Any byte this car moved on
+  // generated settlement, default config, no density marker (the dark v1 seam). Any byte moved on
   // a v1 world reds here, seed by seed.
+  // RE-KEYED 2026-11-04 (chair's ruling P4(i)): the premise "byte-identical to 8cc245db0" died at the
+  // compose of the window branch, where thirteen other lanes and the two food dials changed generation
+  // (all sixty moved). The sixty digests were re-captured by the same recipe at the composed tip
+  // (lane/window-rung1-2026-11-04 after 945fbaf4, each born twice and equal), so the arm now guards
+  // the DARK PATH against future drift, which is its purpose.
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));
@@ -165,7 +170,7 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
     expect(newSettlementDensityLaw()).toEqual({ [DENSITY_LAW_CONFIG_KEY]: REGISTER_VII_DENSITY_LAW_VERSION });
   });
 
-  it('sixty seeds (ten a tier) generate byte-identically to 8cc245db0', () => {
+  it('sixty seeds (ten a tier) generate byte-identically to the dark digests captured at the window tip (2026-11-04)', () => {
     const seeds = Object.keys(DARK);
     expect(seeds).toHaveLength(60);
     /** @type {string[]} */ const moved = [];
@@ -192,7 +197,11 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
           { settType: tier, tier, ...LIT }, null,
           { seed: `x46-npc-${tier}-${String(i).padStart(3, '0')}`, customContent: {} },
         );
-        return { population: s.population, named: s.npcs.length, s };
+        // 2026-11-04 (chair's ruling P4(ii)): the band counts the ROLLED roster, so the crisis car's
+        // TEMPORARY person (CRISIS-1: a required crisis role with no holder, `temporary: true`) is not
+        // counted. Composed on the window branch, x46-npc-thorp-005 carried one (a Healer, the third
+        // person against the thorp band's 2).
+        return { population: s.population, named: s.npcs.filter((n) => n.temporary !== true).length, s };
       }));
     }
     return /** @type {Array<{population: number, named: number, s: any}>} */ (litWorlds.get(tier));
