@@ -1440,7 +1440,7 @@ describe('DS-DEF-6 — the two lenses that may speak, bound to their producer', 
         inst.hasGranary === true, inst.hasPort === true, settlement.config?.tradeRouteAccess,
       );
       seenLogistics.add(key);
-      expect(caps.map((c) => c.label), `${label}: no Logistics & Supply row`).not.toContain('Logistics & Supply');
+      expectAbsentWithAnchor(caps.map((c) => c.label), 'Logistics & Supply', 'Medical Readiness', `${label}: no Logistics & Supply row`);
       expect(caps.map((c) => c.label), `${label}: the Medical Readiness row still renders`).toContain('Medical Readiness');
       expect(defenseSupportingProse(settlement, { seed: 'def6', audience: 'dm' }).logistics, `${label}: no logistics lens`).toBeNull();
       // The naval row exists exactly when the desk has a naval key, both ways.

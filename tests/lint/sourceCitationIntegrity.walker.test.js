@@ -47,7 +47,9 @@
  * past-EOF citations this gate deliberately does not see. FOUR rules select them,
  * each checkable, and the full roster is committed in the baseline's
  * `archivalExclusionAtFreeze.files`:
- *   tree (46)    docs/review-r2/**, docs/shift-records/**
+ *   tree (56)    docs/review-r2/**, docs/shift-records/**
+ *                (2026-11-04, the composed tip of the coherence window, 46 -> 56: the DOORS lane's ten signed records of
+ *                2026-11-03 for FOOD-1/2/3, FOOD-print, SIZE-2/3, DEFENSE-2 x3 and X-49; GROWTHS that hid nothing.)
  *                (2026-10-31, the generator seams, 44 -> 46: G2's one-faction-set and G3's tension-variety records;
  *                GROWTHS that hid nothing, each a signature with no path:line citation of its own.)
  *                (2026-10-30, the dossier consolidation, 40 -> 44: BUILD-S's service-category-fidelity record and

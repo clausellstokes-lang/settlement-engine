@@ -45,14 +45,23 @@ export const FOUNDING_SEEDS = Object.freeze([
   // and the synopsis's mining, harvest and guild-master claims. Two specifics are re-verified to
   // that world: the siege is seven years past (was twelve), and a merchant council governs (was a
   // mayor).
+  // RE-CHOSEN 2026-11-04 (REGISTERS-6, the chair's ruling E1; vetoable by the owner): FOOD-1/2 re-dealt the
+  // forged world, and besi-872 now reads 'Contested'. The hunt kept the probe's three receipts and added the
+  // opening sentence's facts (Mining among the strengths, a food-short record, a merchant or council governor)
+  // and the guild master formalising (the brewing coup). It walked crown-3000..8826 and besi-3000..5014. The
+  // first seeds passing everything: crown-8826 and besi-5014. The first passing all but the coup: crown-7163
+  // and besi-4212, where only the mayor's exit goal met receipt 3. crown-8826 forges the whole story (the mining
+  // chain live, Active Famine, a merchant oligarchy, the guild master formalising), so only the two incidental
+  // specifics follow its world: the siege is ten years past (was seven), and a merchant oligarchy governs
+  // (was a merchant council).
   Object.freeze({
     id: 'the-contested-crown',
     title: 'The Crown That Will Not Hold',
-    seed: 'besi-872',
+    seed: 'crown-8826',
     archetype: 'besieged_holdout',
     settType: 'town',
     synopsis:
-      'A mining town raised on rich ore and poor harvests, seven years past a siege that broke more than its walls. Its merchant council holds a title the streets no longer honour; a guild master has begun, quietly, to write the authority the collapse handed the commercial wards into permanent ink. The coup here is not a rumour. It is a matter of paperwork.',
+      'A mining town raised on rich ore and poor harvests, ten years past a siege that broke more than its walls. Its merchant oligarchy holds a title the streets no longer honour; a guild master has begun, quietly, to write the authority the collapse handed the commercial wards into permanent ink. The coup here is not a rumour. It is a matter of paperwork.',
     firstDecade:
       'Opens in a legitimacy crisis: fractured governance, a catastrophic siege in living memory, and a guild master formalising the power a failing crown can no longer reclaim.',
     receipts: Object.freeze([

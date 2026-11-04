@@ -97,7 +97,7 @@ describe('map PNG and content-pack export, NON-STAFF, before launch', () => {
       account(false);
       const { control, label, fired } = mount();
       expect(control.textContent).toContain(label);
-      expect(control.textContent).not.toContain(PILL);
+      expect(control.textContent).not.toContain(PILL); // anchored: the line above reads the control's own label in this same text
       expect(control.disabled).toBe(false);
       expect(control.getAttribute('data-skin')).toBe('launch');
       expect(description(control)).toContain(PILL);
@@ -119,7 +119,7 @@ describe('map PNG and content-pack export, STAFF, before launch: they work', () 
       account(true);
       const { control, fired } = mount();
       expect(control.getAttribute('data-skin')).not.toBe('launch');
-      expect(description(control)).not.toContain(PILL);
+      expect(description(control)).not.toContain(PILL); // anchored: the gated arm above reads PILL through this same description() on these mounts
       fireEvent.click(control);
       expect(screen.queryByRole('dialog', { name: PILL })).toBeNull();
       expect(fired()).toBe(1);

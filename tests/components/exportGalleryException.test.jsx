@@ -59,7 +59,7 @@ describe('the gallery export, NON-STAFF, before launch', () => {
     expect(control.getAttribute('data-skin')).toBeNull();
     expect(control.getAttribute('aria-describedby')).toBeNull();
     expect(control.closest('[data-launch-gate]')).toBeNull();
-    expect(control.textContent).not.toContain('Available at launch');
+    expect(control.textContent).not.toContain('Available at launch'); // anchored: getByRole found this control by its live name above
     fireEvent.click(control);
     await act(async () => {});
     expect(screen.queryByRole('dialog', { name: 'Available at launch' })).toBeNull();

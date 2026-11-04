@@ -15,6 +15,7 @@ import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
 import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 import { deriveMagicReliance } from '../../src/domain/magicReliance.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 /** @param {string} tier @param {string} seed @param {object} [over] */
 const born = (tier, seed, over = {}) =>
@@ -51,8 +52,9 @@ describe('the generated defence record carries the reliance reading', () => {
   });
 
   it('the scores mirror the profile (V-DEFENSE-MAGICDEP)', () => {
-    for (const { seed, s } of corpus) {
+    const failures = collectSeedFailures(corpus, ({ seed, s }) => {
       expect(s.defenseProfile.scores.magicDependency, `${seed} scores mirror`).toBe(s.defenseProfile.magicDependency);
-    }
+    });
+    expectNoSeedFailures(failures, 'the scores mirror the profile on every seed');
   });
 });

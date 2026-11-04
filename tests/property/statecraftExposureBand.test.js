@@ -13,12 +13,18 @@
  *   THE SEEDED RUN — the reader corpus's four-court realm (dramatic_campaign, fp-read-2, the WF-0
  *     two-faith seating, the statecraft head forced on for this realm only), twenty yearly
  *     advances. It pins the chain the band exists for: the scandals stay inside the measured band
- *     and the war mobilizations stay at the head-dark twin's figure (100 measured; 70 at 0.06).
+ *     and the war mobilizations stay at the head-dark twin's figure (100 measured; 70 at 0.06;
+ *     re-measured 2026-11-04: twin 81, live 82, 0.06 82, see the seeded run's note).
  *
  * Every bound is `expect.soft`, so a red names every arm that moved rather than the first.
  *
- * THE MUTANT, EXECUTED: with 0.06 planted back, both arms red (the headless total and every
- * seed's lifetime; the seeded run's scandals 46 and mobilizations 70). Re-measure with the lane's
+ * THE MUTANT, EXECUTED: with 0.06 planted back, both arms red at landing (the headless total and
+ * every seed's lifetime; the seeded run's scandals 46 and mobilizations 70). RE-EXECUTED 2026-11-04
+ * at the composed tip (REGISTERS-4's mutant run, amended by the chair's ruling D5): the mutant is
+ * caught by THE HEADLESS PACE (falls 140 against the ceiling 40; every seed's mean life 13.5 to 18.3
+ * weeks against the floor 52) and by the seeded run's SCANDAL CEILING (40 against 38). The
+ * mobilization arm no longer separates it (82 at 0.06, 82 live): that arm pins the head-dark twin
+ * (81, floor 71), not the dial. Re-measure with the lane's
  * probe (`.lane-scratch/probe/twin-band.mjs`, copied into the FP kit's evidence folder) whenever an
  * unrelated landing moves the realm's world; the figures here are measurements, not targets.
  */
@@ -95,8 +101,14 @@ describe('STATECRAFT-BAND U1 — the seeded run: the chain at the band', () => {
     const mobilizations = kinds.war_mobilization || 0;
     // Measured (fp-read-2, this realm): EXPOSE_BASE 0.005 / 0.01 / 0.02 / 0.03 / 0.06 gave
     // scandals 23 / 28 / 35 / 42 / 46 and mobilizations 99 / 99 / 99 / 70 / 70; the head-dark twin 100.
+    // RE-MEASURED 2026-11-04 (REGISTERS-4, the chair's ruling C3), not predicted: FOOD-1 moved the realm's
+    // mobilizations to 62 (T1) and FOOD-2 to 82 (from T2). At the composed tip the probe
+    // (scratchpad/regs4/twin-band.mjs, this test's seeded-run code) measures 0.01 → scandals 21,
+    // mobilizations 82; head dark (infoStatecraftEnabled: false) → mobilizations 81; 0.06 → scandals 40,
+    // mobilizations 82. The live figure still sits at the dark twin, so the floor is re-keyed as twin − 10
+    // (was 90 = 100 − 10); the scandal band holds (21 inside 20–38) and still reds the mutant (40).
     expect.soft(scandals, 'spy scandals in twenty years').toBeGreaterThanOrEqual(20);
     expect.soft(scandals).toBeLessThanOrEqual(38);
-    expect.soft(mobilizations, 'war mobilizations in twenty years (the dark twin: 100)').toBeGreaterThanOrEqual(90);
+    expect.soft(mobilizations, 'war mobilizations in twenty years (the dark twin: 81)').toBeGreaterThanOrEqual(71);
   }, 480_000);
 });

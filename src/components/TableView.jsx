@@ -19,7 +19,6 @@
  */
 
 import { useEffect, useMemo } from 'react';
-import { X } from 'lucide-react';
 import { FS, swatch } from './theme.js';
 import { formatCount } from '../domain/formatNumber.js';
 import { prosperityLabel } from '../domain/summary/tonightAtTheTable.js';
@@ -28,7 +27,7 @@ import TonightSheet from './TonightSheet.jsx';
 import EconomyFreshnessNote from './new/EconomyFreshnessNote.jsx';
 import { FIELD_INK } from '../design/organic/ink.js';
 import { LAMP_ACCENTS } from '../design/organic/lampTones.js';
-import IconButton from './primitives/IconButton.jsx';
+import DialogClose from './primitives/DialogClose.jsx';
 import { useDialogFocusTrap } from './primitives/useDialogFocusTrap.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize } from '../design/proseScale.js';
@@ -160,13 +159,8 @@ export default function TableView({ settlement, onClose }) {
             </div>
           </div>
           <div style={{ flexShrink: 0 }}>
-            <IconButton
-              Icon={X}
-              label={TONIGHT_COPY.close}
-              onClick={onClose}
-              tone="ghost"
-              size="lg"
-            />
+            {/* THE HOUSE DOOR (ODQ §934.31): the one close primitive, named "Close Tonight" as before. */}
+            <DialogClose onClose={onClose} subject={TONIGHT_COPY.title} />
           </div>
         </header>
 
