@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "62d2a23ca8bceae6dd94ccebe08a43aaf6398d21",
-  "measuredBy": "ENGINE-3 (Opus 5.5)",
+  "measuredAtSha": "04b744041783d28954ae28976b676cb4d17d1ead",
+  "measuredBy": "ENGINE-4",
   "date": "2026-11-04",
-  "note": "two new test files: tests/build/engineAbsentWhenRemote.test.js, tests/lib/localEngineCallers.test.js; one new title in tests/components/refusalNotice.test.jsx (the engine service protection step, its callers, the retired-version refusal)",
-  "files": 2852,
+  "note": "ENGINE-4 unit 1: two new test files (tests/lib/engineRemoteRederive.test.js, tests/lib/engineRemoteSurveyorPreview.test.js)",
+  "files": 2854,
   "parked": 367,
-  "credited": 2485,
-  "titles": 27346,
-  "suiteTitles": 7237
+  "credited": 2487,
+  "titles": 27353,
+  "suiteTitles": 7241
 }
