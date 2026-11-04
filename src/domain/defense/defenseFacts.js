@@ -226,9 +226,20 @@ export function defenceRoleGate(settlement) {
 // this file reads it and spells no copy, so the record and this reading cannot drift.
 
 /**
+ * The stores words' one home for a HELD granary (the rung-2 window, the chair's ruling on F13
+ * FAMINE-STORES): under an active famine a granary still holding six months or more is held
+ * shut (`foodBalance.js :: deriveFoodRecord`, `foodRecord.storesHeld`). The Economy row
+ * (`tonightSheet.js :: foodStoresWords`, "Stores: a granary of N months that the hall will not
+ * open.") and the Food endurance line (`defenseDisplay.js :: foodEnduranceLine`) speak this
+ * one clause.
+ */
+export const HELD_STORES_WORDS = 'the hall will not open';
+
+/**
  * @typedef {object} FoodEndurance
  * @property {number} storedMonths the record's months in store (`foodRecord.storageMonths`)
  * @property {boolean} hasGranary a real granary stands (`foodRecord.hasGranary`)
+ * @property {boolean} storesHeld an active famine holds the granary shut (`foodRecord.storesHeld`)
  * @property {boolean} besieged the record was written under a siege, so its harvest is already the siege harvest
  * @property {number} keptShare the share of the daily need the place still grows once besieged
  * @property {number|null} fullRationMonths months the stores last at full rations, or null when what is still grown feeds the place
@@ -247,7 +258,7 @@ export function defenceRoleGate(settlement) {
  * @returns {Readonly<FoodEndurance> | null} null when the place carries no food record with months in store
  */
 export function foodEnduranceOf(settlement) {
-  const foodSecurity = /** @type {{ hasSiege?: unknown, foodRecord?: { storageMonths?: unknown, hasGranary?: unknown, grownPct?: unknown } } | null | undefined} */ (
+  const foodSecurity = /** @type {{ hasSiege?: unknown, foodRecord?: { storageMonths?: unknown, hasGranary?: unknown, grownPct?: unknown, storesHeld?: unknown } } | null | undefined} */ (
     /** @type {{ foodSecurity?: unknown } | null | undefined} */ (settlement?.economicState)?.foodSecurity
   );
   const record = foodSecurity?.foodRecord;
@@ -261,6 +272,7 @@ export function foodEnduranceOf(settlement) {
   return Object.freeze({
     storedMonths: stored,
     hasGranary: record?.hasGranary === true,
+    storesHeld: record?.hasGranary === true && record?.storesHeld === true,
     besieged,
     keptShare,
     fullRationMonths: keptShare < 1 ? stored / (1 - keptShare) : null,

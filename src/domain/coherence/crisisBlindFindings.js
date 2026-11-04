@@ -28,7 +28,7 @@
  * Pure: no randomness, no clock.
  */
 
-import { activeCrisisTypes, familyTypesActive } from '../crisis/crisisFacts.js';
+import { activeCrisisTypes, familyActiveIn } from '../crisis/crisisFacts.js';
 
 /**
  * @typedef {object} CrisisBlindFinding
@@ -64,7 +64,7 @@ const CLAIMS = Object.freeze([
   { claim: 'no present need for its works', re: /\bstands ahead of any present need\b/, family: 'threat' },
   { claim: 'its works asked little of', re: /\bnow that it asks little of it\b/, family: 'threat' },
   { claim: 'nothing has arrived by sea', re: /\bnothing has yet arrived that made the second half matter\b/, family: 'threat' },
-  // hunger: famine, under siege
+  // hunger: famine, under siege; any crisis on a deficit food band (crisisFacts.js :: familyActiveIn)
   { claim: 'feeds itself with a margin', re: /\bfeeds itself with a small margin\b/, family: 'hunger' },
   { claim: 'food is not a subject', re: /\bIt is not a subject anyone raises unprompted\b/, family: 'hunger' },
   { claim: 'fed, comfortably', re: /\bfed and only just comfortably\b/, family: 'hunger' },
@@ -110,7 +110,7 @@ export function crisisBlindFindings(settlement, surfaces) {
   const active = {};
   for (const { family } of CLAIMS) {
     if (active[family]) continue;
-    active[family] = family === 'migration' ? types.filter((t) => MIGRATION_TYPES.includes(t)) : familyTypesActive(family, types);
+    active[family] = family === 'migration' ? types.filter((t) => MIGRATION_TYPES.includes(t)) : familyActiveIn(settlement, family, types);
   }
   /** @type {CrisisBlindFinding[]} */
   const findings = [];

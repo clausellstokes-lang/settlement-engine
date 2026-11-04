@@ -33,7 +33,7 @@
 // module keeps its importers' names as re-exports and its one desk adapter below.
 import { crisisDimensionsOf } from '../facts/crisisKind.js';
 
-export { CRISIS_FAMILIES, activeCrisisTypes, familyTypesActive, crisisDimensionsOf } from '../facts/crisisKind.js';
+export { CRISIS_FAMILIES, activeCrisisTypes, familyTypesActive, familyActiveIn, crisisDimensionsOf } from '../facts/crisisKind.js';
 
 /**
  * A desk's options with every crisis dimension answered for this place. Every other dimension
