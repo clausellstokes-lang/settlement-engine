@@ -23,6 +23,7 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import { REFUSAL_REASONS, REFUSAL_REASON_IDS, refusalOf } from '../../src/lib/refusalReasons.js';
 import { GENERATION_INTENT_SAMPLE_FORK } from '../../src/lib/generationIntent.js';
+import { t } from '../../src/copy/index.js';
 import RefusalNotice, { refusalCopy } from '../../src/components/primitives/RefusalNotice.jsx';
 import {
   DEFAULT_DAILY_REROLL_CAP, anonAtCap, getAnonFullCount, getAnonRerollCount,
@@ -215,6 +216,24 @@ describe('the lane records a reason for every gate it closes', () => {
     expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.STALE_BUILD);
     render(<RefusalNotice refusal={store.state.lastRefusal} />);
     expect(screen.getByRole('alert').textContent).toMatch(/reload/i);
+  });
+
+  test('ENGINE VERSION RETIRED: the service\'s typed refusal says one plain sentence, not the generic failure', async () => {
+    // ENGINE-3 unit 3: the remote transport rejects with `engine_version_retired`
+    // (lib/engineRemote.js :: ENGINE_VERSION_RETIRED_CODE) when the service no longer serves
+    // the engine this page pinned. "Try once more" is false advice there; reloading is the cure.
+    const { ENGINE_VERSION_RETIRED_CODE } = await import('../../src/lib/engineRemote.js');
+    engine.run = vi.fn(async () => {
+      throw Object.assign(new Error('engine version retired'), { code: ENGINE_VERSION_RETIRED_CODE });
+    });
+    const store = makeStore({ tier: 'free', maxTier: 'capital' });
+    await runLane(store);
+    expect(store.state.lastRefusal.reason).toBe(REFUSAL_REASONS.ENGINE_VERSION_RETIRED);
+    render(<RefusalNotice refusal={store.state.lastRefusal} />);
+    const said = screen.getByRole('alert').textContent;
+    expect(said).toContain('The generator on the server has moved on from this page; reload to continue.');
+    // anchored: `said` is proven above to carry the retired sentence; the generic one must not ride with it.
+    expect(said).not.toContain(t('errors.forgeStart'));
   });
 
   test('a fresh attempt clears the previous reason', async () => {

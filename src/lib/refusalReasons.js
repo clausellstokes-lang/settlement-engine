@@ -65,6 +65,14 @@ export const REFUSAL_REASONS = Object.freeze({
   /** The throw was a chunk of a previous build — this tab outlived a deploy. */
   STALE_BUILD: 'staleBuild',
   /**
+   * The engine service no longer serves the engine this page pinned (the remote transport's
+   * typed `engine_version_retired`, lib/engineRemote.js; docs/DESIGN_ENGINE_SERVICE.md "The
+   * contract": "never a silently different town"). The server-side twin of STALE_BUILD, and it
+   * needs its own sentence for the same reason: "try once more" is false advice, only a reload
+   * cures it.
+   */
+  ENGINE_VERSION_RETIRED: 'engineVersionRetired',
+  /**
    * A STAFF-ONLY destination reached by an account that is not staff (ODQ
    * §934.28). Not a paid gate and not an upgrade path — no tier buys it, so its
    * sentence offers no door; it simply says the page is not this account's.

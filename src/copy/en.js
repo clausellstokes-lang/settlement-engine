@@ -466,6 +466,12 @@ export const en = Object.freeze({
       rubric:  'Generation failed',
       bodyRef: 'errors.forgeUpdated',
     },
+    // The engine service answered `engine_version_retired`: this page pinned an engine the
+    // server no longer serves. One plain sentence, and the cure is the only door (ENGINE-3).
+    engineVersionRetired: {
+      rubric: 'Generation failed',
+      body:   'The generator on the server has moved on from this page; reload to continue.',
+    },
     // No door and no price: the admin panel is not sold, so this sentence must
     // not read as an upgrade prompt. It says whose page it is and stops.
     staffOnly: {
