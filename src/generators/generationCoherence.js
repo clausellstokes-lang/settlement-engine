@@ -25,6 +25,7 @@ import {
   isAuthoredGenerationEntity,
 } from '../domain/generationOwnership.js';
 import { createGenerationWorldLaw } from './generationContext.js';
+import { recordBatteryJudgment } from './recordBatteryFindings.js';
 import {
   buildGenerationReceiptExtension,
 } from './generationReceiptJudgments.js';
@@ -539,7 +540,8 @@ export function buildGenerationCoherenceReceipt(settlement, context = {}) {
     cultureProfile: settlement?.culturalIdentity?.key || settlement?.config?.culture || null,
     contentProfile: contentProfile.id,
     checks,
-    judgments,
+    // The eighth judgment (lane SELF-VOUCH): the coherence battery over the stored record.
+    judgments: Object.freeze([...judgments, recordBatteryJudgment(settlement)]),
     repairs,
     authoredTensions: Object.freeze(authoredTensions),
   });

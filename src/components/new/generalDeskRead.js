@@ -157,6 +157,18 @@ export function siteClause(sentence) {
 }
 
 /**
+ * The generation receipt's `record_coherence_battery` verdict.
+ * @param {any} r @returns {boolean|undefined}
+ */
+function recordCleanOf(r) {
+  const judgments = r?.generationCoherenceReceipt?.judgments;
+  const verdict = Array.isArray(judgments)
+    ? judgments.find((j) => j?.id === 'record_coherence_battery')?.status
+    : undefined;
+  return verdict === 'pass' ? true : verdict === 'needs_review' ? false : undefined;
+}
+
+/**
  * THE READ. One desk call per render, gated, with every position's lines drawn.
  *
  * @param {object|null|undefined} settlement the record the tab already holds
@@ -228,6 +240,9 @@ export function generalDeskLines(settlement, options = {}) {
       // DS-GEN-11's contradiction count. ⚠ `.metrics.` IS LOAD-BEARING: the corpus title
       // abbreviates the path and the abbreviated one is `undefined` on every settlement.
       criticalIssueCount: via.metrics?.criticalIssueCount,
+      // The receipt's battery judgment (lane SELF-VOUCH): true when it passed, false when it
+      // found a contradiction, undefined on a record older than the judgment.
+      recordClean: recordCleanOf(r),
       hookCategories: options.hookCategories,
       clockIds: options.clockIds,
       governingName: r.powerStructure?.governingName,

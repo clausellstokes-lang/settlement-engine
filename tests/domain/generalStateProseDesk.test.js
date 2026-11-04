@@ -1263,13 +1263,19 @@ describe('the viability verdict and the hook framing', () => {
     );
     // The contradiction count: two pools, and a non-number is NOT a zero.
     expect(criticalIssuePoolKey(2)).toBe('criticalIssueCount: critical contradictions on the record');
-    expect(criticalIssuePoolKey(0)).toBe('criticalIssueCount zero');
+    expect(criticalIssuePoolKey(2, true)).toBe('criticalIssueCount: critical contradictions on the record');
+    // The zero pool vouches for the record, so it needs the receipt's battery judgment
+    // (lane SELF-VOUCH): passed → zero; contradicted → the contradiction pool; unasked → nothing.
+    expect(criticalIssuePoolKey(0, true)).toBe('criticalIssueCount zero');
+    expect(criticalIssuePoolKey(0, false)).toBe('criticalIssueCount: critical contradictions on the record');
+    expect(criticalIssuePoolKey(0), 'a record the battery never read vouched for').toBeNull();
     expect(criticalIssuePoolKey(undefined), 'an unmeasured record read as zero').toBeNull();
+    expect(criticalIssuePoolKey(undefined, true), 'an unmeasured record read as zero').toBeNull();
     expect(criticalIssuePoolKey('2')).toBeNull();
     // TOTAL the other way: the six pools are claimed by these three lenses and no other.
     expect([...new Set([
       viabilityVerdictPoolKey(true), viabilityVerdictPoolKey(false), viabilityVerdictPoolKey(undefined),
-      criticalIssuePoolKey(1), criticalIssuePoolKey(0), 'THE FIRST-SURVEY QUALIFICATION',
+      criticalIssuePoolKey(1), criticalIssuePoolKey(0, true), 'THE FIRST-SURVEY QUALIFICATION',
     ])].sort()).toEqual(poolsOf('DS-GEN-11').sort());
   });
 
