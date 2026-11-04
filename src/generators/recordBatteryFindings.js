@@ -54,11 +54,37 @@ export function recordTextSurfaces(settlement) {
   return { all: [...rest, ...town].join('\n'), town: [...town].join('\n') };
 }
 
+/** A placeholder faction name ("Claimant Bloc A", "Rival Faction B", "Unknown Faction"), the soak's A-10 reading. */
+const PLACEHOLDER_FACTION = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction/;
+/** A role standing where a name should be ("The Guildmaster"), the soak's A-10 reading. */
+const ROLE_ONLY_NAME = /^The [A-Z]/;
+
+/**
+ * KIND 7, THE UNNAMED (the chair's ruling I5, 2026-11-04, withdrawing the earlier exclusion): a
+ * placeholder faction or a role-only person is a contradiction the page must not vouch against.
+ * At most one finding of each, in the battery's entry shape.
+ * @param {any} settlement
+ * @returns {Array<{ check: string, quote: string, detail: string }>}
+ */
+function unnamedFindings(settlement) {
+  const out = [];
+  const person = (Array.isArray(settlement.npcs) ? settlement.npcs : [])
+    .find(npc => ROLE_ONLY_NAME.test(String(npc?.name || '')));
+  if (person) out.push({ check: 'unnamed', quote: String(person.name), detail: `a role-only person (${String(person.role || '')})` });
+  const factions = [
+    ...(Array.isArray(settlement.factions) ? settlement.factions : []),
+    ...(Array.isArray(settlement.powerStructure?.factions) ? settlement.powerStructure.factions : []),
+  ].map(f => String(f?.name ?? f?.faction ?? ''));
+  const placeholder = factions.find(name => PLACEHOLDER_FACTION.test(name));
+  if (placeholder) out.push({ check: 'unnamed', quote: placeholder, detail: 'a placeholder faction' });
+  return out;
+}
+
 /**
  * The coherence battery's narrow entry (domain/coherence/recordBattery.js) over the record alone: its
  * record-level instruments and its word instruments read against the strings the record
- * stores — never a render. Every battery check is one of the root-cause kinds 1–5 and 8,
- * so every finding is a contradiction; the check label is the battery's own.
+ * stores — never a render. Every battery check is one of the root-cause kinds 1–5 and 8, and
+ * `unnamed` is kind 7 (I5), so every finding is a contradiction; the check label is the battery's own.
  */
 export function recordBatteryFindings(settlement) {
   if (settlement == null || typeof settlement !== 'object') return [];
@@ -68,6 +94,7 @@ export function recordBatteryFindings(settlement) {
       only: RECORD_BATTERY_CHECKS.filter(check => check !== 'tier-noun'),
     }),
     ...recordBattery(settlement, { record: text.town }, { only: ['tier-noun'] }),
+    ...unnamedFindings(settlement),
   ].map(entry => {
     const quote = String(entry.quote || '').replace(/\s+/g, ' ').trim();
     return Object.freeze({
