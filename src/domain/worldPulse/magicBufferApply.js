@@ -63,6 +63,7 @@ import {
   MAGIC_BUFFER_TUNING, affordableRelief, recoverCharge01, repairAcceleration01,
   bufferReceiptLine, bufferShortfallLine,
 } from './magicBufferModel.js';
+import { withStoresMonths } from '../facts/storesMonths.js';
 
 /**
  * The conditional sub-ledger key under worldState.spatialLedgers. Named with the
@@ -354,7 +355,7 @@ export function drawBufferStores(settlement, monthsDrawn) {
     ...settlement,
     economicState: {
       ...economicState,
-      foodSecurity: { ...foodSecurity, storageMonths: next },
+      foodSecurity: withStoresMonths(foodSecurity, next),
     },
   });
 }

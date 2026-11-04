@@ -30,6 +30,7 @@ import { nativeSemanticName } from '../content/customContentSemanticAuthority.js
 import { standingDefenseForces } from '../institutions/defenseInstitutionBuckets.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
+import { storesMonthsOf } from '../facts/storesMonths.js';
 
 /**
  * @typedef {object} DefenseFacts
@@ -97,10 +98,8 @@ export function defenseFactsOf(settlement) {
   ])];
 
   const healerName = firstMatching(roster, HEALER_RE);
-  const economicState = /** @type {{ foodSecurity?: { storageMonths?: unknown } } | null | undefined} */ (
-    settlement?.economicState
-  );
-  const months = economicState?.foodSecurity?.storageMonths;
+  // The stores-months home (CENSUS-1 wave 0, fact 2): one number, the same one foodEnduranceOf reads.
+  const months = storesMonthsOf(settlement);
 
   return Object.freeze({
     hasWalls,
@@ -118,7 +117,7 @@ export function defenseFactsOf(settlement) {
     hasHospital: roster.some((n) => HOSPITAL_RE.test(n)),
     hasHealer: healerName !== null,
     healerName,
-    storedFoodMonths: typeof months === 'number' && Number.isFinite(months) ? months : null,
+    storedFoodMonths: months,
   });
 }
 
@@ -262,7 +261,8 @@ export function foodEnduranceOf(settlement) {
     /** @type {{ foodSecurity?: unknown } | null | undefined} */ (settlement?.economicState)?.foodSecurity
   );
   const record = foodSecurity?.foodRecord;
-  const stored = record?.storageMonths;
+  // The stores-months home: the live figure, never the food record's birth copy alone.
+  const stored = record ? storesMonthsOf(settlement) : null;
   if (typeof stored !== 'number' || !Number.isFinite(stored) || stored <= 0) return null;
   const grown = typeof record?.grownPct === 'number' && Number.isFinite(record.grownPct) ? Math.max(0, record.grownPct) : 0;
   const besieged = foodSecurity?.hasSiege === true;

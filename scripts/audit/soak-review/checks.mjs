@@ -35,6 +35,7 @@ import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstit
 import { hasMarketInstitution } from '../../../src/generators/economy/viability.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
+import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -276,7 +277,7 @@ export function reviewSettlement(s, config, r) {
   const STORE = /\b(?:Stores: a granary, [^.]+ of grain|Stores: a granary of [^.]+ that the hall will not open|No granary; [^.]+ in (?:household stores|the larder))\./g;
   const storeHits = Object.entries(r.tabs).flatMap(([tab, text]) => (text.match(STORE) || []).map((q) => [tab, q]));
   const record = s.economicState?.foodSecurity?.foodRecord;
-  const stored = Number(record?.storageMonths);
+  const stored = record ? Number(storesMonthsOf(s)) : NaN;
   const ecoHits = storeHits.filter(([tab]) => tab === 'economics');
   if (Number.isFinite(stored) && stored > 0 && ecoHits.length !== 1) add('X-49:stores-not-once', 'economics', ecoHits.map((h) => h[1]).join(' | '), `${ecoHits.length} stores rows on the Economy tab; record holds ${stored} months`);
   for (const [tab, q] of storeHits.filter(([tab]) => tab !== 'economics')) add('X-49:stores-not-once', tab, q, 'the stores figure off its home tab');

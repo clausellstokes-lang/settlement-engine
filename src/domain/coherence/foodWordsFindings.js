@@ -12,6 +12,7 @@
 
 import { SOURCE_WORDS, sourcesNamedIn } from '../foodways.js'; import { FISH_TRADE_TWIN_LINES } from '../../data/fishTradeTwinLines.js'; // F11: one line
 import { CLAIMS_STARVING, recordAllowsStarving } from '../foodSurplus.js';
+import { storesMonthsOf } from '../facts/storesMonths.js';
 
 /**
  * @typedef {Object} FoodWordsFinding
@@ -125,7 +126,7 @@ function recordOf(settlement) {
   if (!r || typeof r !== 'object') return null;
   return {
     band: typeof r.band === 'string' ? r.band : '',
-    storageMonths: typeof r.storageMonths === 'number' && Number.isFinite(r.storageMonths) ? r.storageMonths : 0,
+    storageMonths: storesMonthsOf(s) ?? 0,
     growsMoreThanEats: r.growsMoreThanEats === true,
     // FOOD-3: a record older than the sources list cannot be held to named sources.
     foodSources: Array.isArray(r.foodSources) ? r.foodSources.map(String) : null,
