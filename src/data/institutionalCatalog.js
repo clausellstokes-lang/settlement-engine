@@ -1089,16 +1089,16 @@ export const INSTITUTION_FAMILIES = Object.freeze([
 
   // ══════════════════════ INFRASTRUCTURE ══════════════════════
   ...shelf('Infrastructure', [
-    // Every metropolis read 'Housing (1000-5000 structures)' (inherited from city) until 2026-09-30.
+    // Every metropolis read the city's housing row (inherited from city) until 2026-09-30.
     {
       shared: { required: true, tags: ['essential', 'housing'], priorityCategory: 'infrastructure' },
       at: {
         thorp: { name: 'Dwellings (1-8)', desc: 'Wattle-and-daub or timber. 1-2 rooms per household.' },
         hamlet: { name: 'Dwellings (5-25)', desc: 'Timber-frame with thatched roofs.' },
         village: { name: 'Dwellings (15-100)', desc: 'Timber construction with stone foundations.' },
-        town: { name: 'Housing (180-1000 structures)', desc: 'Multi-story timber and stone buildings.' },
-        city: { name: 'Housing (1000-5000 structures)', desc: 'Multi-story buildings. Tenements for poor.' },
-        metropolis: { name: 'Housing (5000+ structures)', desc: 'Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.' },
+        town: { name: 'Housing (75-650 households)', desc: 'Multi-story timber and stone buildings.' },
+        city: { name: 'Housing (500-4000 households)', desc: 'Multi-story buildings. Tenements for poor.' },
+        metropolis: { name: 'Housing (3500+ households)', desc: 'Dense multi-story blocks, tenement courts, and suburbs spilling past the walls.' },
       },
     },
     {

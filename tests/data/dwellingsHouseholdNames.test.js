@@ -10,7 +10,10 @@ import { describe, expect, it } from 'vitest';
 import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '../..');
-const OLD_NAMES = ['Dwellings (4-16)', 'Dwellings (17-80)', 'Dwellings (80-180)'];
+const OLD_NAMES = [
+  'Dwellings (4-16)', 'Dwellings (17-80)', 'Dwellings (80-180)',
+  'Housing (180-1000 structures)', 'Housing (1000-5000 structures)', 'Housing (5000+ structures)',
+];
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir).sort()) {
@@ -21,11 +24,18 @@ function walk(dir, out = []) {
   return out;
 }
 
-describe('X-46 3c: the Dwellings rows name the owner\'s household bands', () => {
+describe('X-46 3c: the Dwellings and Housing rows name the owner\'s household bands', () => {
   it.each([
     ['thorp', 'Dwellings (1-8)'],
     ['hamlet', 'Dwellings (5-25)'],
     ['village', 'Dwellings (15-100)'],
+    // The chair's extension of 3c (X46-2 hand-back): the urban Housing rows follow the same
+    // household column (town 75–650, city 500–4,000, metropolis 3,500+). Each keeps its own
+    // grammar — a range with a noun, which townCartography's COUNT_RANGE does not parse — so
+    // the noun is now the true one (households, not structures) and the drawn count is unchanged.
+    ['town', 'Housing (75-650 households)'],
+    ['city', 'Housing (500-4000 households)'],
+    ['metropolis', 'Housing (3500+ households)'],
   ])('%s carries %s as its required dwellings row', (tier, name) => {
     const row = institutionalCatalog[tier].Infrastructure?.[name];
     expect(row, `${tier} has no "${name}" row`).toBeDefined();

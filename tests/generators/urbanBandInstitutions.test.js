@@ -133,8 +133,8 @@ describe('G3 — the cumulative laws at generation', () => {
     for (const s of metros) {
       const n = names(s);
       expect(n.has('Parish churches (10-30)') && n.has('Parish churches (50-100+)'), `${s.name}: both parish scales`).toBe(false);
-      expect(n.has('Housing (1000-5000 structures)'), `${s.name}: city housing`).toBe(false);
-      expect(n.has('Housing (5000+ structures)'), `${s.name}: metropolis housing`).toBe(true);
+      expect(n.has('Housing (500-4000 households)'), `${s.name}: city housing`).toBe(false);
+      expect(n.has('Housing (3500+ households)'), `${s.name}: metropolis housing`).toBe(true);
       expect(n.has('Massive walls and fortifications'), `${s.name}: metropolis walls`).toBe(true);
     }
   });
