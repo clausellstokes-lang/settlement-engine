@@ -155,7 +155,7 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // RE-KEYED 2026-11-04 (chair's ruling P4(i)): the premise "byte-identical to 8cc245db0" died at the
   // compose of the window branch, where thirteen other lanes and the two food dials changed generation
   // (all sixty moved). The sixty digests were re-captured by the same recipe at the composed tip
-  // (lane/window-rung1-2026-11-04 after 945fbaf4, each born twice and equal), so the arm now guards
+  // (lane/window-rung1-2026-11-04, re-captured again after x46-1b and x46-3 composed at fb0341b9; each born twice and equal), so the arm now guards
   // the DARK PATH against future drift, which is its purpose.
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
