@@ -12,7 +12,8 @@
  *
  * Read by: `display/defenseDisplay.js :: deriveCriminalStructure` (the structure branch),
  * `generators/npcGenerator.js :: mergeNPCLists` (affiliations, secrets, goals),
- * `generators/historyGenerator.js` (the crime-wave tension).
+ * `generators/historyGenerator.js` (the crime-wave tension), and the safety profile's crime
+ * lines at assembly (`generators/safetyProfile.js :: settleCrimeLinesToSignal`).
  */
 
 import { isCriminalInstitution } from './corruption.js';
