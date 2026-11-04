@@ -51,6 +51,8 @@ const FORMAL_JUDGMENT_IDS = [
   'dramatic_tension',
   'diversity_and_repetition',
   'confidence_and_provenance',
+  // The eighth (lane SELF-VOUCH, 2026-11-04): the coherence battery over the stored record.
+  'record_coherence_battery',
 ];
 
 const generationCoherenceReceipt = {
@@ -111,8 +113,8 @@ describe('owner PDF generation-contract projection', () => {
       contentProfile: 'grounded',
       passedChecks: 1,
       totalChecks: 1,
-      supportedJudgments: 7,
-      totalJudgments: 7,
+      supportedJudgments: 8,
+      totalJudgments: 8,
       reviewJudgments: 0,
       findingCount: 0,
     });
@@ -130,7 +132,7 @@ describe('owner PDF generation-contract projection', () => {
     expect(text).toContain('Arcaded market fronts define the square.');
     expect(text).toContain('GENERATION COHERENCE');
     expect(text).toContain('1/1 checks passed');
-    expect(text).toContain('7/7 formal judgments supported');
+    expect(text).toContain('8/8 formal judgments supported');
   });
 
   it('prints the food record\'s foodways line, not the culture\'s, where the record carries one', () => {
