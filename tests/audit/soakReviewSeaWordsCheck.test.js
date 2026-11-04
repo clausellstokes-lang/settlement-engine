@@ -92,3 +92,25 @@ describe('I6 — the cooper\'s reference line is licensed (the chair, 2026-11-04
     expect(seaWordSentence(['Ships unload in the harbour at dawn.'], {})).toBe('Ships unload in the harbour at dawn.');
   });
 });
+
+describe('F5 unit 1 — A-11 reads prose, not ledgers of lacks', () => {
+  it('an A-05 "lacks access" ledger line is no sea claim (soak1k-992)', () => {
+    expect(seaWordSentence(['Fish: Fishmonger exists but lacks access to fish'], {})).toBeUndefined();
+  });
+  it('a lacks-access line still reads the house it names: a Shipwright inland is flagged', () => {
+    const line = 'Timber: Shipwright exists but lacks access to timber';
+    expect(seaWordSentence([line], {})).toBe(line);
+  });
+  it('the needs ledger row\'s own need and its "covers" list are no sea claim (soak1k-353, the token "harbour" in "Trade access + harbour")', () => {
+    const row = 'Needs Stone + iron No trade access: running on existing stockpiles only. · covers Stone + iron, Metal ore + fuel, Timber, Trade access + harbour';
+    expect(seaWordSentence([row], {})).toBeUndefined();
+  });
+  it('the "covers" list after an impact split into two sentences is still the ledger (soak1k-605)', () => {
+    const tail = 'Operating at minimal capacity or shut down. · covers Stone + iron + grain, Iron + grain, Timber, Trade access + harbour';
+    expect(seaWordSentence([tail], {})).toBeUndefined();
+  });
+  it('a needs row whose impact sentence claims a harbour is still flagged', () => {
+    const row = 'Needs Stone + iron Ships idle at the quay until the stone comes. · covers Stone + iron, Timber';
+    expect(seaWordSentence([row], {})).toBe(row);
+  });
+});

@@ -81,6 +81,37 @@ const COOPER_BARRELS = /\bbarrels? for [^.]*\bfish\b/gi;
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
 // Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?)\b/gi;
+/** F5 (2026-11-04): an A-05 gap line, "<chain>: <house> exists but lacks access to <good>". */
+const LACKS_ACCESS_LINE = /^[^:\n]{1,60}: (.+?) exists but lacks access to .+$/;
+
+/**
+ * A-11 reads prose, not ledgers of LACKS (lane F5, 2026-11-04, on rung 1B's soak1k-992 and
+ * soak1k-353). A ledger line that names what the place LACKS is no claim that it has it:
+ *  - an A-05 gap line keeps only the house it says exists (a Shipwright there is still read);
+ *    its chain label and the good it lacks are removed;
+ *  - a Services needs row, "Needs <need> <impact> · covers <need>, …" (`serviceComponents.jsx ::
+ *    ServiceItem`, the X-50 impact plan in `ServicesTab.jsx`), names severed needs: the
+ *    "covers" list (on whichever sentence carries it) and the row's own need (one of that list)
+ *    are removed; the impact sentence between them is prose and is still read. A bare
+ *    "Needs <need>" line is a need alone.
+ * @param {string} x one screen sentence
+ * @returns {string}
+ */
+export function withoutLackLedger(x) {
+  const gap = x.match(LACKS_ACCESS_LINE);
+  if (gap) return gap[1];
+  // The "covers" list ends the row; it is stripped wherever the sentence split put it (an impact
+  // of two sentences leaves it on the second, soak1k-605).
+  const covers = x.match(/\s·\scovers\s(.+)$/);
+  let body = covers ? x.slice(0, x.length - covers[0].length) : x;
+  if (!body.startsWith('Needs ')) return body;
+  body = body.slice('Needs '.length);
+  if (covers) {
+    const own = covers[1].split(', ').filter((need) => body.startsWith(need)).sort((a, b) => b.length - a.length)[0];
+    return own ? body.slice(own.length) : body;
+  }
+  return /[.!?]/.test(body) ? body : '';
+}
 
 /**
  * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland
@@ -103,7 +134,7 @@ export function seaWordSentence(sentences, s) {
     .flatMap((desc) => sentencesOf(desc)));
   return sentences.find((x) => {
     if (inlandText.has(x)) return false;
-    let text = x.replace(INLAND_FISH, '').replace(COOPER_BARRELS, '').replace(ROUTE_DISJUNCTION, '');
+    let text = withoutLackLedger(x).replace(INLAND_FISH, '').replace(COOPER_BARRELS, '').replace(ROUTE_DISJUNCTION, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
     if (airship) text = text.replace(AIRSHIP_PORT, '');
     return SEA_WORDS.test(text);
