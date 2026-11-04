@@ -113,11 +113,11 @@ export const generatePowerStructure = (
     militaryPower = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
     religiousPower = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
     criminalPower =
-      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58)
+      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58) && (!['thorp', 'hamlet', 'village'].includes(tier) || hasMarketInstitution(nativeInstitutions)) // R6: a small place's guild power needs a market
         ? Math.round(12 * priorityToMultiplier(instFlags.criminalEffective))
         : 0,
     craftPower =
-      tier !== 'thorp' && tier !== 'hamlet'
+      tier !== 'thorp' && tier !== 'hamlet' && (tier !== 'village' || hasMarketInstitution(nativeInstitutions)) // R6: as the Thieves' Guild above
         ? Math.round(17 * priorityToMultiplier(instFlags.economyOutput * 0.75 + 10))
         : 0,
     arcanePower =
