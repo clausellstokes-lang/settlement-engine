@@ -93,7 +93,11 @@ describe('X-46 car 3 — the route-required rows are exempt from the density fac
     // anchored: the two arms do part where a marked row is in reach (the port city above)
     const port = { settType: 'city', culture: 'mediterranean', terrain: 'coastal', tradeRouteAccess: 'port' };
     const names = (s) => s.institutions.map((x) => x.name);
-    expect(names(withExemption(port, 'joins-subsumption-0'))).toContain("Harbour master's office");
-    expect(names(withoutExemption(port, 'joins-subsumption-0'))).not.toContain("Harbour master's office");
+    // Re-keyed 2026-11-04 (window branch, composing RUNG1B-F6; the DOORS rule): F6's net target set X = 0 on the
+    // without-exemption arm, so d rose 0.3349 -> 0.3645 and the Harbour master's office draws on joins-subsumption-0
+    // even without the exemption. Re-seeded on the premise (a port city whose harbour master drops without the
+    // exemption under the new d): joins-subsumption-9, the only seed of joins-subsumption-0..39 that carries it.
+    expect(names(withExemption(port, 'joins-subsumption-9'))).toContain("Harbour master's office");
+    expect(names(withoutExemption(port, 'joins-subsumption-9'))).not.toContain("Harbour master's office");
   }, 240_000);
 });
