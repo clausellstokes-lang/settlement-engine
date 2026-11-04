@@ -219,6 +219,32 @@ export function applyUserEdit(entity, path, newValue, options = {}) {
 }
 
 /**
+ * RE-KEY one edit in place, for a rename that moved the record the edit NAMES (RUNG1B-F8).
+ *
+ * Not the DM editing: `editedAt` and `originalValue` are kept, and the value moves only
+ * where `rewrite` says it does. Both homes of the edit move together, the record's `value`
+ * and the entity field `applyUserEdit` mirrors it to, so the reader of either sees the
+ * DM's word under the new name. The rename modules call this rather than writing an edit
+ * record themselves: the edit record has one writer, this module.
+ *
+ * @param {EditableEntity | null | undefined} entity
+ * @param {string} path
+ * @param {(value: unknown) => unknown} rewrite the new value, or the SAME value when nothing moves
+ * @returns {boolean} whether anything moved
+ */
+export function rekeyUserEdit(entity, path, rewrite) {
+  if (!entity || typeof entity !== 'object' || !entity._userEdits || typeof entity._userEdits !== 'object') return false;
+  if (!(path in entity._userEdits)) return false;
+  const record = entity._userEdits[path];
+  if (!record || typeof record !== 'object') return false;
+  const next = rewrite(record.value);
+  if (next === record.value) return false;
+  record.value = next;
+  setAtPath(entity, path, next);
+  return true;
+}
+
+/**
  * Revert a user edit at `path` to its original value. Removes the
  * `_userEdits` record. If no edits remain on the entity, clears
  * `_userEdits` and `_authored` so canonStatus reverts to inferring

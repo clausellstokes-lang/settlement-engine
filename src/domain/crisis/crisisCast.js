@@ -32,6 +32,7 @@ import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
 
@@ -945,8 +946,9 @@ export function deriveCrisisCast(settlement, entries, seed, options = {}) {
  * string, so every reader of an edit record still reads a string), and it lives beside the
  * engine's `cast`, never over it, so "As the engine has it" reverts to the derived record.
  */
-export const CAST_EDIT_PATH = 'castRoles';
-export const CAST_EDIT_SEPARATOR = ' · ';
+// RUNG1B-F8: the line's grammar lives in the leaf the rename modules re-key it through
+// (domain/userEditLines.js), so a renamed faction or house keeps the DM's part.
+export { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR };
 
 /**
  * @param {Array<{ role: string, kind: string, id: string }>} rows

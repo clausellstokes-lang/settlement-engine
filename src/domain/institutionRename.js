@@ -32,7 +32,7 @@
  */
 
 import { deepClone } from './clone.js';
-import { CRISIS_CAST_HOMES, DEFENSE_CATEGORIES, NPC_HOMES as INSTITUTION_HOMES } from './factionRename.js';
+import { CRISIS_CAST_HOMES, DEFENSE_CATEGORIES, NPC_HOMES as INSTITUTION_HOMES, rekeyCastEditsOfKind } from './factionRename.js';
 
 /**
  * A stored record as this module sees one. Deliberately `unknown`-valued rather
@@ -374,6 +374,10 @@ export function applyInstitutionRenameToSettlement(settlement, oldName, newName)
     }
     if (moved && !touched.includes(row.path)) touched.push(row.path);
   }
+  // RUNG1B-F8: the DM's cast edit names a house by its name (`institution:` parts). It is a
+  // DM edit, not a generated path, so it is walked by the edit layer's re-key rather than
+  // declared as a row (factionRename.js :: rekeyCastEditsOfKind says why).
+  for (const path of rekeyCastEditsOfKind(settlement, 'institution', oldName, newName)) if (!touched.includes(path)) touched.push(path);
   return { changed: touched.length > 0, touched };
 }
 

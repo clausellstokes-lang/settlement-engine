@@ -95,6 +95,8 @@
 import { substituteWholeWord } from '../lib/narrativeMutations.js';
 import { deepClone } from './clone.js';
 import { nameOf } from './rulingPower.js';
+import { rekeyUserEdit, walkUserEdits } from './userEdits.js';
+import { BACKS_PATH, CAST_EDIT_PATH, rekeyBacksLine, rekeyCastLine } from './userEditLines.js';
 
 /**
  * A stored record as this module sees one: an object whose keys resolve to
@@ -492,18 +494,62 @@ function listOf(value) {
  * @returns {Array<[string, StoredRecord]>}
  */
 function castsOf(settlement) {
+  return crisisEntriesOf(settlement)
+    .filter(([, entry]) => isRecord(entry.cast))
+    .map(([home, entry]) => /** @type {[string, StoredRecord]} */ ([`${home}.cast`, entry.cast]));
+}
+
+/**
+ * Every crisis entry the settlement stores, each with its home (`stress`, `stress[]`,
+ * `stressors`, `stressors[]`): the entry object for one crisis, each entry of the array
+ * for several.
+ *
+ * @param {StoredRecord} settlement
+ * @returns {Array<[string, StoredRecord]>}
+ */
+function crisisEntriesOf(settlement) {
   /** @type {Array<[string, StoredRecord]>} */
   const out = [];
   for (const key of CRISIS_CONTAINERS) {
     const container = settlement[key];
     const entries = listOf(container);
     if (entries) {
-      for (const entry of entries) if (isRecord(entry) && isRecord(entry.cast)) out.push([`${key}[].cast`, entry.cast]);
-    } else if (isRecord(container) && isRecord(container.cast)) {
-      out.push([`${key}.cast`, container.cast]);
+      for (const entry of entries) if (isRecord(entry)) out.push([`${key}[]`, entry]);
+    } else if (isRecord(container)) {
+      out.push([key, container]);
     }
   }
   return out;
+}
+
+/**
+ * THE DM'S CAST EDIT FOLLOWS THE RENAME (RUNG1B-F8). The Crisis tab's edit
+ * (`<entry>._userEdits.castRoles`, one line of `role=kind:id` parts) names a faction
+ * or a house by its display name, the only identity the record gives either, and
+ * the cast reader drops a part whose name the roster no longer answers to. So every
+ * `<kind>:<oldName>` part is re-keyed, at every crisis entry of both containers, through
+ * the edit layer's own writer (`rekeyUserEdit`: the DM's `editedAt` is kept, both homes
+ * of the edit move). Kind-scoped, exactly as the cast rows are (`castRowsOfKind`).
+ *
+ * NOT A LEDGER ROW. FACTION_RENAME_SURFACES and its institution twin declare the paths a
+ * GENERATED record carries a name at, and their walkers read generated records, which
+ * never carry a DM edit. The surface is reported in `touched` as
+ * `<home>._userEdits.castRoles`, so a receipt never understates what a rename moved.
+ *
+ * @param {StoredRecord} settlement
+ * @param {'faction' | 'institution'} kind
+ * @param {string} oldName
+ * @param {string} newName
+ * @returns {string[]} the homes whose edit moved, as touched-surface paths
+ */
+export function rekeyCastEditsOfKind(settlement, kind, oldName, newName) {
+  /** @type {string[]} */
+  const moved = [];
+  for (const [home, entry] of crisisEntriesOf(settlement)) {
+    const path = `${home}._userEdits.${CAST_EDIT_PATH}`;
+    if (rekeyUserEdit(entry, CAST_EDIT_PATH, (value) => rekeyCastLine(value, kind, oldName, newName)) && !moved.includes(path)) moved.push(path);
+  }
+  return moved;
 }
 
 /**
@@ -945,6 +991,18 @@ export function applyFactionRenameToSettlement(settlement, oldName, newName) {
       mark(`${home}.roles[].id`, rewriteKey(row, 'id', oldName, newName));
       mark(`${home}.roles[].name`, rewriteKey(row, 'name', oldName, newName));
     }
+  }
+
+  // 16. The DM's cast edit (RUNG1B-F8): its faction parts follow the faction.
+  for (const path of rekeyCastEditsOfKind(settlement, 'faction', oldName, newName)) mark(path, true);
+
+  // 17. The DM's backing edit (RUNG1B-F8): a house the DM put behind this power still
+  // stands behind it. Read through the settlement-level walk of the edit records (the one
+  // read of `_userEdits` the observed-shape register banks), written through the edit
+  // layer's re-key. A DM edit, not a generated path, so not a ledger row (step 16 says why).
+  for (const edit of walkUserEdits(/** @type {import('./userEdits.js').EditableEntity} */ (settlement))) {
+    if (edit.kind !== 'institution' || edit.path !== BACKS_PATH) continue;
+    mark(`institutions[]._userEdits.${BACKS_PATH}`, rekeyUserEdit(edit.entity, BACKS_PATH, (value) => rekeyBacksLine(value, oldName, newName)));
   }
 
   return { changed: touched.length > 0, touched };
