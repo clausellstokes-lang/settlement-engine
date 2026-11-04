@@ -33,11 +33,14 @@ let _enginePromise = null;
  */
 function loadEngine() {
   if (_enginePromise) return _enginePromise;
-  _enginePromise = Promise.all([
-    import('../generators/generateSettlementPipeline.js'),
-    import('../generators/pipeline.js'),
+  // Both engine modules through the local engine seam's pipeline door (lib/localPipeline.js),
+  // which a VITE_ENGINE_REMOTE build leaves out (ENGINE-3 unit 2): there a re-derivation
+  // refuses with the typed `engine_local_absent` instead of carrying the generator.
+  _enginePromise = import('../lib/localPipeline.js').then((seam) => Promise.all([
+    seam.loadLocalPipeline(),
+    seam.loadPipelineRegistry(),
     import('../domain/density/densityCreateBoundary.js'),
-  ]).then(async ([pipe, runner, boundary]) => {
+  ])).then(async ([pipe, runner, boundary]) => {
     // ⛔ THE GENERATION LAWS' LAZY PAYLOADS ARE ARMED BEFORE ANY RUN, on the same async edge as
     // the engine's own import and exactly as the other reachers arm them. A world whose config
     // carries a law with a lazy payload is not DEGRADED when that payload was never loaded: it

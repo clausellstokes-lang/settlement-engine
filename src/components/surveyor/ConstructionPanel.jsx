@@ -93,7 +93,9 @@ export default function ConstructionPanel({ initialPrompt = '', initialScope }) 
         const deviations = cmp.compareRealmToConstraints(settlements, constraints);
         setGenerated({ deviations, count: Array.isArray(settlements) ? settlements.length : 0, kind: 'realm' });
       } else {
-        const { generateSettlementPipeline } = await import('../../generators/generateSettlementPipeline.js');
+        // Through the local engine seam's pipeline door (ENGINE-3 unit 2), left out of a VITE_ENGINE_REMOTE build.
+        const { loadLocalPipeline } = await import('../../lib/localPipeline.js');
+        const { generateSettlementPipeline } = await loadLocalPipeline();
         const dossier = generateSettlementPipeline(config, null, { seed });
         const deviations = cmp.compareResultToConstraints(dossier, constraints);
         setGenerated({ deviations, dossier, config, kind: 'settlement' });

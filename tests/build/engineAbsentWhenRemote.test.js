@@ -30,6 +30,12 @@ const REQUIRE_REMOTE_DIST = process.env.VERIFY_ENGINE_REMOTE_DIST === '1';
 
 /** The generation core's own refusal text — present in the core, nowhere else. */
 const CORE_NEEDLE = 'Unknown generation op';
+/** The pipeline step registry's own refusals (src/generators/pipeline.js). */
+const REGISTRY_NEEDLES = Object.freeze([
+  'Circular dependency in pipeline at step',
+  'Unknown pipeline step',
+  'Pipeline pins: options.pins must be a plain object',
+]);
 
 const source = (rel) => readFileSync(join(ROOT, rel), 'utf8');
 /** @param {string} code */
@@ -53,12 +59,13 @@ async function resolveWith(on, spec, importerRel) {
 }
 
 describe('the protection step — the mechanism', () => {
-  it('a flagged build resolves the seam and the pipeline entry to the absent twin, and nothing else', async () => {
+  it('a flagged build resolves the seam\'s two doors and the pipeline entry to the absent twin, and nothing else', async () => {
     expect(await resolveWith(true, './localEngine.js', 'src/lib/generationClient.js')).toBe(ABSENT);
     expect(await resolveWith(true, '../lib/localEngine.js', 'src/store/settlementGenerateAction.js')).toBe(ABSENT);
+    expect(await resolveWith(true, '../lib/localPipeline.js', 'src/store/settlementRederiveAction.js')).toBe(ABSENT);
     expect(await resolveWith(true, '../generators/generateSettlementPipeline.js', 'src/store/settlementSlice.js')).toBe(ABSENT);
     expect(await resolveWith(true, '../generators/generateSettlementPipeline.js', 'src/workers/customContentPreview.worker.js')).toBe(ABSENT);
-    // anchored: the four positive resolutions above prove the plugin acts on a flagged build, so these nulls are the plugin declining, not a plugin that never runs.
+    // anchored: the five positive resolutions above prove the plugin acts on a flagged build, so these nulls are the plugin declining, not a plugin that never runs.
     expect(await resolveWith(true, './generationProtocol.js', 'src/lib/generationClient.js')).toBeNull();
     expect(await resolveWith(true, '../domain/worldPulse/applyWorldPulse.js', 'src/store/campaignWorldPulseSlice.js')).toBeNull();
   });
@@ -66,6 +73,7 @@ describe('the protection step — the mechanism', () => {
   it('an unflagged build resolves nothing (the build is the build it was)', async () => {
     // anchored: the arm above proves these exact specifiers ARE redirected when the flag is on.
     expect(await resolveWith(false, './localEngine.js', 'src/lib/generationClient.js')).toBeNull();
+    expect(await resolveWith(false, '../lib/localPipeline.js', 'src/store/settlementRederiveAction.js')).toBeNull();
     expect(await resolveWith(false, '../generators/generateSettlementPipeline.js', 'src/store/settlementSlice.js')).toBeNull();
   });
 
@@ -86,11 +94,15 @@ describe('the protection step — the mechanism', () => {
     }
   });
 
-  it('the absent twin carries the seam\'s and the pipeline entry\'s whole export surface, and imports nothing', () => {
+  it('the absent twin carries the seam\'s two doors\' and the pipeline entry\'s whole export surface, and imports nothing', () => {
     const twin = source('src/lib/localEngine.absent.js');
     const twinNames = new Set(exportNames(twin));
-    const owed = [...exportNames(source('src/lib/localEngine.js')), ...exportNames(source('src/generators/generateSettlementPipeline.js'))];
-    expect(owed.length).toBeGreaterThanOrEqual(9); // both surfaces were read
+    const owed = [
+      ...exportNames(source('src/lib/localEngine.js')),
+      ...exportNames(source('src/lib/localPipeline.js')),
+      ...exportNames(source('src/generators/generateSettlementPipeline.js')),
+    ];
+    expect(owed.length).toBeGreaterThanOrEqual(10); // all three surfaces were read
     expect(owed.filter((name) => !twinNames.has(name))).toEqual([]);
     expect(twin).toContain("ENGINE_LOCAL_ABSENT_CODE = 'engine_local_absent'");
     // anchored: the file was read (the export surface above is non-empty); it must reach nothing.
@@ -142,6 +154,14 @@ describe('the protection step — the flagged dist', () => {
     it('no chunk carries the generation core', () => {
       // anchored: the first arm proves `carriers` reads real chunks (it finds the twin's code).
       expect(carriers(CORE_NEEDLE)).toEqual([]);
+    });
+
+    it('no chunk carries the pipeline\'s step registry (unit 2: the re-derivation reaches it through the seam)', () => {
+      // anchored: the first arm proves `carriers` reads real chunks; the three needles are the
+      // registry's own refusals in src/generators/pipeline.js, carried by the engine chunk, the
+      // generation worker and the preview worker in an unflagged build.
+      expect(Object.fromEntries(REGISTRY_NEEDLES.map((needle) => [needle, carriers(needle)])))
+        .toEqual(Object.fromEntries(REGISTRY_NEEDLES.map((needle) => [needle, []])));
     });
   });
 });

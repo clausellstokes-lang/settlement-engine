@@ -75,9 +75,9 @@ export async function previewCampaignContentBindingMigrationSession({
     }
     targetBinding = accountTarget.binding;
   }
-  const { generateSettlementPipeline } = await import(
-    '../generators/generateSettlementPipeline.js'
-  );
+  // Through the local engine seam's pipeline door (ENGINE-3 unit 2), left out of a VITE_ENGINE_REMOTE build.
+  const { loadLocalPipeline } = await import('../lib/localPipeline.js');
+  const { generateSettlementPipeline } = await loadLocalPipeline();
   // THE CREATE BOUNDARY'S ASYNC EDGE. This session is a PREVIEW and mints no
   // law, but the sample is forged from an EXISTING world's config, so it carries
   // whatever law that world was born under — and the pipeline throws rather than

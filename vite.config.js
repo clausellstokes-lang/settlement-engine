@@ -27,6 +27,7 @@ const SRC = resolve(ROOT, 'src');
 const LOCAL_ENGINE_ABSENT = resolve(SRC, 'lib/localEngine.absent.js');
 const LOCAL_ENGINE_IDS = new Set([
   resolve(SRC, 'lib/localEngine.js'),
+  resolve(SRC, 'lib/localPipeline.js'),
   resolve(SRC, 'generators/generateSettlementPipeline.js'),
 ]);
 
@@ -60,7 +61,7 @@ export function engineAbsentWhenRemote(on) {
     name: 'engine-absent-when-remote',
     enforce: 'pre',
     async resolveId(source, importer, options) {
-      if (!on || !/(?:^|\/)(?:localEngine|generateSettlementPipeline)(?:\.js)?$/.test(source)) return null;
+      if (!on || !/(?:^|\/)(?:localEngine|localPipeline|generateSettlementPipeline)(?:\.js)?$/.test(source)) return null;
       const resolved = await this.resolve(source, importer, { ...options, skipSelf: true });
       return resolved && LOCAL_ENGINE_IDS.has(resolved.id.split('?')[0]) ? LOCAL_ENGINE_ABSENT : null;
     },

@@ -2,7 +2,8 @@
  * localEngine.absent.js — the local engine's twin in a build made with
  * VITE_ENGINE_REMOTE='true' (`vite.config.js :: engineAbsentWhenRemote`).
  *
- * The flagged build resolves BOTH `src/lib/localEngine.js` (the seam) and
+ * The flagged build resolves `src/lib/localEngine.js` and `src/lib/localPipeline.js` (the
+ * seam's two doors) and
  * `src/generators/generateSettlementPipeline.js` (the backstop for the importers that
  * reach the pipeline entry without the seam: the slice's regeneration bag, the instant
  * world composer and the custom-content preview worker) to THIS module, so it carries
