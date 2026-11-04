@@ -62,12 +62,13 @@ const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
 /**
- * Fish the catalog designs for an inland place (chair ruling 4a/4c, 2026-11-04): the salted,
- * dried, smoked or pickled trade, and — where the record itself imports fish
+ * Fish the catalog designs for an inland place (chair ruling 4a/4c, 2026-11-04; round 3, 3a/3c):
+ * the salted, salt-cured, dried, smoked or pickled trade, the Fish market's own name (the
+ * catalogue designs it inland: "the week's salted barrels"), and — where the record itself imports fish
  * (`resourceAnalysis.imports.critical`) — the bare "Fish" item of a goods list. Licensed text is
  * removed before the sea words are read.
  */
-const INLAND_FISH = /\b(?:preserved|salted|salt|dried|smoked|pickled)[ -]fish\b/gi;
+const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b/gi;
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage)\b/gi;
 

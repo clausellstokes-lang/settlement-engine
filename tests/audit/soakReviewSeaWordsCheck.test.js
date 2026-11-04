@@ -45,3 +45,15 @@ describe('soak1k-83, airship docks in a desert on a mountain pass', () => {
     expect(seaWordSentence(['Via: docks/port facilities', ...aerial], s)).toBeUndefined();
   });
 });
+
+describe('A-11, the designed inland fish trade (chair ruling, round 3, 3a and 3c)', () => {
+  it('the Fish market\'s own name inland: 0 findings', () => {
+    expect(seaWordSentence(['Fish market'], {})).toBeUndefined();
+  });
+  it('salt-cured fish inland: 0 findings', () => {
+    expect(seaWordSentence(['Salt-cured fish.'], {})).toBeUndefined();
+  });
+  it('a fresh catch still counts', () => {
+    expect(seaWordSentence(['Fish sold daily from the morning catch.'], {})).toBe('Fish sold daily from the morning catch.');
+  });
+});
