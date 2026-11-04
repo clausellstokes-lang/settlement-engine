@@ -1019,7 +1019,10 @@ function shiftTier(s, event) {
   // in-band population unchanged.
   const band = /** @type {Record<string, { min: number, max: number }>} */ (POPULATION_RANGES)[toTier];
   const curPop = Number(s.population) || 0;
-  const population = band ? Math.min(band.max, Math.max(band.min, curPop)) : curPop;
+  // The top tier's band is open (X-46 car 1b: "it should not have a cap"): its `max` is the
+  // body of the metropolis roll, never a ceiling a promotion may clamp a city down to.
+  const ceiling = toTier === TIER_ORDER[TIER_ORDER.length - 1] ? Infinity : band?.max;
+  const population = band ? Math.min(ceiling, Math.max(band.min, curPop)) : curPop;
   // Reuse the organic apply path (institution surgery + history + tier write). Pass
   // tier: fromTier explicitly so its stale-guard (currentTier === fromTier) passes.
   const outcome = { id: `dm_shift_tier:${String(s.id || 'settlement')}:${fromTier}>${toTier}`, tierChange: { fromTier, toTier, direction } };

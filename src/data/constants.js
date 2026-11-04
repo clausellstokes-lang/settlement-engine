@@ -8,7 +8,10 @@ export const SMALL_TIERS = ['thorp', 'hamlet', 'village'];
 // the owner's historical table, and adjacent bands OVERLAP BY DESIGN (a large hamlet and a small
 // village are the same size). A generated settlement's population is rolled uniformly inside
 // the band of the tier the DM chose (resolveConfig), and that tier always wins. The metropolis
-// band is open ("15,000+") in the owner's words; the roll stops at 60,000.
+// band is open ("15,000+") in the owner's words, and the roll has no ceiling (the owner,
+// 2026-11-04: "wait, we have a cap on metropolis? it should not have a cap."): the metropolis
+// row's `max` is the BODY of the roll, never a ceiling; the tail is open (METROPOLIS_ROLL_TUNING
+// below). Every reader prints the metropolis as "15,000+".
 //   thorp       5–30      "A few farmsteads clustered together"
 //   hamlet      20–100    "Small rural settlement; little or no dedicated infrastructure"
 //   village     75–400    "Established agricultural community, often with a church/mill/inn"
@@ -21,7 +24,52 @@ export const POPULATION_RANGES = {
   village:    { min: 75,    max: 400 },
   town:       { min: 300,   max: 2500 },
   city:       { min: 2000,  max: 15000 },
-  metropolis: { min: 15000, max: 60000 },
+  metropolis: { min: 15000, max: 60000 }, // the body of the roll; the tail is open
+};
+
+// X-46 car 1b, THE TAILED ROLL (the owner, 2026-11-04: "it should not have a cap"). A rolled
+// metropolis is a two-piece LOG-UNIFORM draw: with probability `tailShare` the tail
+// [bodyMax, tailMax], otherwise the body [bodyMin, bodyMax]. `tailMax` is the historical extreme
+// (Rome, Baghdad, Constantinople at their height, about a million souls), the edge a draw needs,
+// not a cap on the record: a DM's custom population is never clamped (resolveConfig passes it
+// through; popToTier stamps anything >= 15,000 a metropolis). Registered tuning (the inventory's
+// `_TUNING` glob); the values are the chair's, for the owner's veto.
+export const METROPOLIS_ROLL_TUNING = Object.freeze({
+  tailShare: 0.2,
+  bodyMin: 15000,
+  bodyMax: 60000,
+  tailMax: 1000000,
+});
+
+/**
+ * The metropolis population roll: ONE kernel draw, exactly as the uniform roll it replaces, so
+ * every later step of a seed sees the same draw count. u < tailShare opens the tail (u rescaled
+ * across it); otherwise the body. Log-uniform inside the chosen piece, rounded and held to its
+ * edges.
+ * @param {{ random: () => number }} rng
+ * @returns {number}
+ */
+export const rollMetropolisPopulation = (rng) => {
+  const { tailShare, bodyMin, bodyMax, tailMax } = METROPOLIS_ROLL_TUNING;
+  const u = rng.random();
+  const inTail = u < tailShare;
+  const [lo, hi] = inTail ? [bodyMax, tailMax] : [bodyMin, bodyMax];
+  const v = inTail ? u / tailShare : (u - tailShare) / (1 - tailShare);
+  const pop = Math.round(Math.exp(Math.log(lo) + v * (Math.log(hi) - Math.log(lo))));
+  return Math.min(hi, Math.max(lo, pop));
+};
+
+/**
+ * Where a population sits inside the metropolis band, read on a LOG scale over
+ * [bodyMin, tailMax]: 15,000 -> 0, 1,000,000 -> 1, clamped. For car 4's population tilt (the
+ * linear position over [min, max] would pin every tail city at the top of the band).
+ * @param {number} pop
+ * @returns {number}
+ */
+export const metropolisBandPosition = (pop) => {
+  const { bodyMin, tailMax } = METROPOLIS_ROLL_TUNING;
+  const x = (Math.log(Math.max(pop, bodyMin)) - Math.log(bodyMin)) / (Math.log(tailMax) - Math.log(bodyMin));
+  return Number.isFinite(x) ? Math.min(1, Math.max(0, x)) : 0;
 };
 
 // THE STAMP (X-46 car 1): the one population → tier law, for a 'custom' population and every

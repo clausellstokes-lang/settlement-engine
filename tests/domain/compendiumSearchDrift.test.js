@@ -27,7 +27,10 @@ describe('compendium search — no retired vocabulary drift (Wave H)', () => {
     for (const t of CD.tiers) {
       const e = tierEntries.find((x) => x.term === t.label);
       expect(e, `tier "${t.label}" indexed`).toBeTruthy();
-      expect(e.keywords.includes(`${t.min}-${t.max}`), `tier "${t.label}" keyword missing ${t.min}-${t.max}`).toBe(true);
+      // The metropolis is open (X-46 car 1b, the owner 2026-11-04: "it should not have a cap"):
+      // its keyword is `${min}+`, and its `max` (the roll's body) never reads as a ceiling.
+      const band = t.id === 'metropolis' ? `${t.min}+` : `${t.min}-${t.max}`;
+      expect(e.keywords.includes(band), `tier "${t.label}" keyword missing ${band}`).toBe(true);
     }
     const allKw = COMPENDIUM_INDEX.map((e) => e.keywords || '').join(' ');
     for (const stale of ['20-80', '900-4000', '4000-25000']) {

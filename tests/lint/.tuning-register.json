@@ -2422,6 +2422,19 @@
       },
       "band": null,
       "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34; named *_TUNING because the inventory measures a table by that suffix, TABLE_DEF_RE). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
+    },
+    "src/data/constants.js#METROPOLIS_ROLL_TUNING": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "tailShare": "probability",
+        "bodyMin": "people",
+        "bodyMax": "people",
+        "tailMax": "people"
+      },
+      "band": null,
+      "note": "X-46 car 1b (the owner, 2026-11-04: 'it should not have a cap'): the metropolis roll, two-piece log-uniform, tail past the body at tailShare. The chair's values, for the owner's veto."
     }
   },
   "roles": {

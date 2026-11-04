@@ -61,7 +61,8 @@ export function TiersTab({ _search='' }) {
     </p>
     {CD.tiers.map((t)=>{
       const meta = TIER_META[t.id] || { color:GOLD, desc:'' };
-      const pop = `${formatCount(t.min)}–${formatCount(t.max)}`;
+      // The top tier is open ("15,000+", X-46 car 1b): its `max` is the roll's body, never a ceiling.
+      const pop = t.id === 'metropolis' ? `${formatCount(t.min)}+` : `${formatCount(t.min)}–${formatCount(t.max)}`;
       return (
       <div key={t.id} style={{ display:'flex', gap:10, padding:'8px 0', borderBottom:`1px solid ${BOR}`, alignItems:'flex-start' }}>
         <div style={{ minWidth:96, flexShrink:0 }}><div style={{fontSize:FS.md,fontWeight:700,color:meta.color}}>{t.label}</div><div style={{fontSize:chromeFontSize(FS.xxs, mobile),color:MUT}}>{pop} pop.</div></div>
