@@ -22,7 +22,7 @@ import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defe
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
-import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
+import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; // CENSUS-4 R9: one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
@@ -282,7 +282,7 @@ const filterByGuild = (
   const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
-  const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
+  const guildName = guildTitleName(guild.name); // CENSUS-4 R9: a singular possessive no longer doubles
   const npc = generateSingleNPC(
     'Guild Master',
     culture,
