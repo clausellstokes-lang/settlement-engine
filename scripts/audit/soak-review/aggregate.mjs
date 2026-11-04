@@ -7,7 +7,7 @@
 import { readFileSync, readdirSync, writeFileSync, appendFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { KIND_OF, OWNER_BANDS, CHAIR_READINGS } from './checks.mjs';
+import { KIND_OF, OWNER_BANDS, CHAIR_READINGS, READER_KIND, isReaderCheck } from './checks.mjs';
 import { CHAINS } from './chains.mjs';
 import { dependence } from './dependence-measures.mjs';
 import { secondPass } from './dependence.mjs';
@@ -16,7 +16,7 @@ import { bandReadings } from './bands.mjs';
 import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
-const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town'];
+const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town', 'reader'];
 
 function* shardLines(out) {
   const dir = join(out, 'shards');
@@ -49,18 +49,42 @@ export function aggregate(out, meta) {
   const cats = new Map(); // path → tier → value → count
   const classes = new Map();
   let errors = 0;
+  // ── the READER battery's observations, apart (kind 9; lane READER-INSTRUMENTS, 2026-11-04)
+  const reader = new Map(); const readerTierPool = {}; const exportsByTier = {}; const dailyLineByTier = {}; const a05Seeds = new Set();
+  const readerFinding = (row, f) => {
+    const c = reader.get(f.check) ?? { check: f.check, occurrences: 0, seeds: new Set(), byTier: {}, surfaces: {}, sub: {}, cases: [] };
+    reader.set(f.check, c);
+    // Every leading [tag] is a sub-case ("[no-market][no-watch] …" counts in both). A [~tag] is a
+    // COLUMN only (the chair's rulings Q1, Q3): a finding whose every tag is one counts in its
+    // column and never in the class's line.
+    const tags = [...(String(f.detail || '').match(/^(?:\[~?[a-z0-9-]+\])+/)?.[0] ?? '').matchAll(/\[(~?[a-z0-9-]+)\]/g)].map((m) => m[1]);
+    for (const tag of tags) { const t = (c.sub[tag] ??= { seeds: new Set(), byTier: {} }); if (!t.seeds.has(row.seed)) { t.seeds.add(row.seed); t.byTier[row.tier] = (t.byTier[row.tier] || 0) + 1; } }
+    if (tags.length && tags.every((x) => x.startsWith('~'))) return;
+    c.occurrences += 1; c.surfaces[f.surface] = (c.surfaces[f.surface] || 0) + 1;
+    if (!c.seeds.has(row.seed)) { c.seeds.add(row.seed); c.byTier[row.tier] = (c.byTier[row.tier] || 0) + 1; if (c.cases.length < 3) c.cases.push({ seed: row.seed, tier: row.tier, surface: f.surface, quote: f.quote, detail: f.detail }); }
+  };
+  const readerPool = (row) => {
+    readerTierPool[row.tier] = (readerTierPool[row.tier] || 0) + 1;
+    if ((row.findings || []).some((f) => f.check === 'A-05:lacks-access-lines')) a05Seeds.add(row.seed);
+    const n = row.reader?.exports; if (Number.isFinite(n)) (exportsByTier[row.tier] ??= []).push(n);
+    if (row.reader?.dailyLifeLine) dailyLineByTier[row.tier] = (dailyLineByTier[row.tier] || 0) + 1;
+  };
   for (const row of shardLines(out)) {
     const k = rows.length;
     if (row.error) errors += 1;
     for (const f of row.findings || []) {
       fBuf.push(`${JSON.stringify({ seed: row.seed, ...f })}\n`);
+      // Kind 9 (reader) is counted apart: never a finding class, never read by the stop rule.
+      if (isReaderCheck(f.check)) { readerFinding(row, f); continue; }
       const c = classes.get(f.check) ?? { check: f.check, kind: KIND_OF[f.check] ?? (f.check.startsWith('cert:') || f.check.startsWith('render:') ? -1 : 0), occurrences: 0, seeds: new Set(), byTier: {}, surfaces: {}, cases: [] };
       c.occurrences += 1; c.surfaces[f.surface] = (c.surfaces[f.surface] || 0) + 1;
       if (!c.seeds.has(row.seed)) { c.seeds.add(row.seed); c.byTier[row.tier] = (c.byTier[row.tier] || 0) + 1; if (c.cases.length < 3) c.cases.push({ seed: row.seed, tier: row.tier, surface: f.surface, quote: f.quote, detail: f.detail }); }
       classes.set(f.check, c);
     }
     const checks = {}; for (const f of row.findings || []) checks[f.check] = (checks[f.check] || 0) + 1;
-    sBuf.push(`${JSON.stringify({ i: row.i, seed: row.seed, tier: row.tier, population: row.population, stressCell: row.stressCell, matrix: row.matrix, hashes: row.hashes, rendered: row.rendered, replay: row.replay, error: row.error ?? null, findingCount: (row.findings || []).length, checks })}\n`);
+    const readerCount = (row.findings || []).filter((f) => isReaderCheck(f.check)).length;
+    sBuf.push(`${JSON.stringify({ i: row.i, seed: row.seed, tier: row.tier, population: row.population, stressCell: row.stressCell, matrix: row.matrix, hashes: row.hashes, rendered: row.rendered, replay: row.replay, error: row.error ?? null, findingCount: (row.findings || []).length - readerCount, readerCount, checks })}\n`);
+    if (row.rendered) readerPool(row);
     for (const h of row.sentences || []) sentenceTowns.set(h, (sentenceTowns.get(h) || 0) + 1);
     Object.assign(sentenceText, row.texts || {});
     Object.assign(storyText, row.storyTexts || {});
@@ -82,6 +106,20 @@ export function aggregate(out, meta) {
     return { check: c.check, kind: c.kind, kindName: c.kind >= 0 ? KIND_NAMES[c.kind] : c.kind === -2 ? 'informational' : 'certification', settlements: c.seeds.size, pool, rate: r3(rate), occurrences: c.occurrences, reach: Object.keys(c.surfaces).length, score: r3(rate * Object.keys(c.surfaces).length), byTier: c.byTier, surfaces: c.surfaces, cases: c.cases };
   }).sort((a, b) => b.score - a.score || b.rate - a.rate);
   writeFileSync(join(out, 'aggregates', 'finding-classes.json'), `${JSON.stringify(classRows, null, 1)}\n`);
+
+  // ── the READER table: class · settlements/N · rate · byTier · sub-cases · three cases; the
+  // Exports count by tier as a distribution; A-05's overlap with the Gaps sub-case.
+  const readerN = Object.values(readerTierPool).reduce((a, b) => a + b, 0);
+  const readerRows = [...reader.values()].map((c) => ({
+    check: c.check, kind: READER_KIND, kindName: KIND_NAMES[READER_KIND], settlements: c.seeds.size, pool: readerN, rate: r3(c.seeds.size / Math.max(1, readerN)),
+    occurrences: c.occurrences, byTier: c.byTier, surfaces: c.surfaces,
+    subCases: Object.fromEntries(Object.entries(c.sub).map(([k, v]) => [k, { settlements: v.seeds.size, byTier: v.byTier }])),
+    ...(c.sub.gaps ? { a05Overlap: { gapsAndA05: [...c.sub.gaps.seeds].filter((x) => a05Seeds.has(x)).length, a05Only: [...a05Seeds].filter((x) => !c.sub.gaps.seeds.has(x)).length, gapsOnly: [...c.sub.gaps.seeds].filter((x) => !a05Seeds.has(x)).length, withoutGaps: [...c.seeds].filter((x) => !c.sub.gaps.seeds.has(x)).length } } : {}),
+    cases: c.cases,
+  })).sort((a, b) => b.rate - a.rate || a.check.localeCompare(b.check));
+  const dist = (xs) => { const v = xs.slice().sort((a, b) => a - b); const hist = {}; for (const x of v) hist[x] = (hist[x] || 0) + 1; return { n: v.length, min: v[0] ?? null, p10: q(v, 0.1), median: q(v, 0.5), p90: q(v, 0.9), max: v[v.length - 1] ?? null, histogram: hist }; };
+  const readerOut = { title: 'Reader observations (outside the stop rule until the READER WINDOW lands)', rendered: readerN, tierPool: readerTierPool, classes: readerRows, distributions: { exportsLineItems: Object.fromEntries(TIERS.filter((t) => exportsByTier[t]).map((t) => [t, dist(exportsByTier[t])])), dailyLifeLinePages: { settlements: Object.values(dailyLineByTier).reduce((a, b) => a + b, 0), byTier: dailyLineByTier } } };
+  writeFileSync(join(out, 'aggregates', 'reader-observations.json'), `${JSON.stringify(readerOut, null, 1)}\n`);
 
   // ── every field alone, by tier
   const fields = [];
@@ -210,7 +248,7 @@ export function aggregate(out, meta) {
     else if (c.kind === 0 && c.rate > 0.01) reasons.push(`wording: ${c.check} at ${c.rate}`);
   }
   const verdict = reasons.length ? 'STOP' : 'CLIMB';
-  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
+  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS, reader: { classes: readerRows.length, findings: readerRows.reduce((a, c) => a + c.occurrences, 0), note: 'kind 9, outside the stop rule' } };
   writeFileSync(join(out, 'run.json'), `${JSON.stringify(summary, null, 1)}\n`);
   return summary;
 }

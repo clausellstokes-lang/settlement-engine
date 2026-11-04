@@ -22,6 +22,7 @@ const fields = J('aggregates/fields.json');
 let res = null; try { res = J('aggregates/dependence-residual.json'); } catch { /* a run older than the second pass */ }
 let bands = null; try { bands = J('aggregates/field-bands.json'); } catch { /* a run older than the band readings */ }
 let prose = null; try { prose = J('aggregates/repetition-prose.json'); } catch { /* a run older than the prose instrument */ }
+let reader = null; try { reader = J('aggregates/reader-observations.json'); } catch { /* a run older than the READER battery */ }
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const cell = (s) => String(s ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').slice(0, 160);
 const L = [];
@@ -31,6 +32,16 @@ L.push('## Finding classes (ranked by rate × reach)', '', '| check | kind | set
 for (const c of classes) L.push(`| ${c.check} | ${c.kindName} | ${c.settlements}/${c.pool} | ${c.rate} | ${c.occurrences} | ${cell(Object.entries(c.surfaces).map(([k, v]) => `${k} ${v}`).join(', '))} | ${cell(TIERS.map((t) => c.byTier[t] ?? 0).join(' / '))} |`);
 L.push('', '### Three cases per class', '');
 for (const c of classes) { L.push(`**${c.check}**`); for (const x of c.cases) L.push(`- \`${x.seed}\` (${x.tier}, ${x.surface}): "${cell(x.quote)}" — ${cell(x.detail)}`); L.push(''); }
+if (reader) {
+  // Kind 9, apart from the classes above: it changes no class, no stop-rule reason and no chair reading.
+  L.push(`## ${reader.title}`, '', `Rendered settlements ${reader.rendered} (by tier ${TIERS.map((t) => `${t} ${reader.tierPool[t] ?? 0}`).join(' · ')}). Sub-cases count settlements.`, '', '| class | settlements | rate | by tier (thorp…metropolis) | sub-cases | first three seeds |', '|---|---|---|---|---|---|');
+  for (const c of reader.classes) L.push(`| ${c.check} | ${c.settlements}/${c.pool} | ${c.rate} | ${TIERS.map((t) => c.byTier[t] ?? 0).join(' / ')} | ${cell(Object.entries(c.subCases).map(([k, v]) => `${k} ${v.settlements}`).join(', ') || '·')}${c.a05Overlap ? ` · A-05 overlap ${c.a05Overlap.gapsAndA05} (A-05 only ${c.a05Overlap.a05Only}, without gaps ${c.a05Overlap.withoutGaps})` : ''} | ${c.cases.map((x) => `\`${x.seed}\` "${cell(x.quote).slice(0, 70)}"`).join('; ')} |`);
+  const dl = reader.classes.find((c) => c.check === 'reader:daily-life-placeholder');
+  const dlPages = reader.distributions?.dailyLifeLinePages;
+  L.push('', '**reader:daily-life-placeholder, by sub-case (the chair\'s ruling: the line once, where it names what the place lacks):**', '', '| settlements | no market | no watch | pages carrying the line at all (a distribution) |', '|---|---|---|---|', `| ${dl?.settlements ?? 0}/${reader.rendered} | ${dl?.subCases?.['no-market']?.settlements ?? 0} | ${dl?.subCases?.['no-watch']?.settlements ?? 0} | ${dlPages ? `${dlPages.settlements}/${reader.rendered} (${TIERS.map((t) => dlPages.byTier[t] ?? 0).join(' / ')})` : '·'} |`);
+  const ex = reader.distributions?.exportsLineItems ?? {};
+  L.push('', '**The Exports line, items per settlement (a distribution, not a finding):** ' + TIERS.filter((t) => ex[t]).map((t) => `${t} median ${ex[t].median} [${ex[t].p10}–${ex[t].p90}] ${ex[t].min}–${ex[t].max}`).join(' · '), '');
+}
 L.push('## The engine\'s chains', '', '| id | from → to | rule | expect | n | measure | value | within tier (thorp…metropolis) | verdict |', '|---|---|---|---|---|---|---|---|---|');
 for (const c of chains) L.push(`| ${c.id} | ${c.from.replace('chain.', '')} → ${c.to.replace('chain.', '')} | ${cell(c.rule)} | ${c.expect} | ${c.n} | ${c.measure} | ${c.value} | ${TIERS.map((t) => c.within?.[t] ?? '·').join(' / ')} | ${c.verdict} |`);
 L.push('', `## Dependence scan: ${dep.candidates} fields, ${dep.strongPairs} cross-family pairs at |v| ≥ 0.5 (top 60)`, '', '| a | b | measure | value | seeds |', '|---|---|---|---|---|');
