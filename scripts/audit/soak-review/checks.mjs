@@ -62,6 +62,31 @@ const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
 /**
+ * Fish the catalog designs for an inland place (chair ruling 4a/4c, 2026-11-04): the salted,
+ * dried, smoked or pickled trade, and — where the record itself imports fish
+ * (`resourceAnalysis.imports.critical`) — the bare "Fish" item of a goods list. Licensed text is
+ * removed before the sea words are read.
+ */
+const INLAND_FISH = /\b(?:preserved|salted|salt|dried|smoked|pickled)[ -]fish\b/gi;
+const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
+
+/**
+ * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland
+ * fish trade is licensed.
+ * @param {string[]} sentences
+ * @param {any} s the record
+ * @returns {string|undefined}
+ */
+export function seaWordSentence(sentences, s) {
+  const importsFish = (s?.resourceAnalysis?.imports?.critical || []).map((x) => String(x).toLowerCase()).includes('fish');
+  return sentences.find((x) => {
+    let text = x.replace(INLAND_FISH, '');
+    if (importsFish) text = text.replace(LISTED_FISH, '');
+    return SEA_WORDS.test(text);
+  });
+}
+
+/**
  * A-05's sentence: a spectacle held HERE (chair ruling 1, 2026-11-04) — gladiatorial combat,
  * games or fights. A Gladiatorial school's own rows ("Gladiator hire", "Gladiator training")
  * feed the regional arena circuit and are not counted.
@@ -209,7 +234,7 @@ export function reviewSettlement(s, config, r) {
 
   // ── A-11: sea words where there is no water
   if (!hasWater(s, config)) {
-    const sea = sentencesOf(screenText).find((x) => SEA_WORDS.test(x));
+    const sea = seaWordSentence(sentencesOf(screenText), s);
     if (sea) add('A-11:sea-words-landlocked', 'screen', sea);
   }
 
