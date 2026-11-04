@@ -63,4 +63,19 @@ describe('the crisis-kind home (CENSUS-1 fact 1)', () => {
     record.stress = [];
     expect(facts.crisis.active).toBe(false);
   });
+
+  it('factsOf names all fourteen homes, each read live', async () => {
+    const { factsOf } = await import('../../../src/domain/facts/factsOf.js');
+    const record = {
+      tier: 'town', population: 900, config: { terrainType: 'coastal', tradeRouteAccess: 'port', priorityMagic: 30 },
+      institutions: [{ name: 'Town walls' }, { name: 'Weekly market' }, { name: 'Grain mill' }],
+      npcs: [{ name: 'Ada' }, { name: 'Bo' }], powerStructure: { government: 'Town Council' },
+      stress: [{ type: 'mass_migration', direction: 'exodus' }],
+      economicState: { foodSecurity: { storageMonths: 3, foodRecord: { storageMonths: 3, band: 'deficit' } } },
+    };
+    const f = factsOf(record);
+    expect([f.storesMonths, f.defence.walls, f.water.kind, f.market, f.famine.starvingAllowed, f.magic.functions,
+      f.rulerKind, f.migration.direction, f.warState, f.hasInstitution('mill'), f.populationBand, f.terrain, f.hasOtherNpc(0)])
+      .toEqual([3, true, 'maritime', true, true, true, 'council', 'exodus', 'peace', true, 'middling', 'coastal', true]);
+  });
 });
