@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // SIZE-3 and R6: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf, GARRISON_WORDS } from '../../domain/defense/defenseFacts.js'; // SIZE-3, R6 and F1: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -589,7 +589,7 @@ export const generatePowerStructure = (
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
-            ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.'
+            (forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })) === GARRISON_WORDS ? ' Operationally distinct from the command council: these are the soldiers and watchmen, not the officers who govern.' : ` Operationally distinct from the command council: these are the ${forceWordsOf(defenseFactsOf({ institutions: nativeInstitutions })).members}, not the officers who govern.`)
           : militaryDesc,
       militaryCap = governingFaction && governingFaction.includes('Merchant oligarchy') ? Math.round(merchantPower * 0.85) : 9999;
     factions.push({
@@ -625,7 +625,7 @@ export const generatePowerStructure = (
                 : "Church holds substantial temporal power; tithes fund civic works and the clergy's opinion on appointments carries decisive weight."
               : religiousPower > 17
                 ? ['city', 'metropolis'].includes(tier)
-                  ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.'
+                  ? (defenseFactsOf({ institutions: nativeInstitutions }).hasHospital ? 'Major church institutions hold structural influence. Land grants, hospital networks, and moral authority give them leverage across multiple civic domains.' : 'Major church institutions hold structural influence. Land grants, charity, and moral authority give them leverage across multiple civic domains.')
                   : ['hamlet', 'village'].includes(tier)
                     ? 'The village priest is the most educated person for miles; moral authority and practical influence are inseparable at this scale.'
                     : 'Church institutions are well-embedded in civic life; their opinion on appointments, taxation, and law is sought and usually influential.'

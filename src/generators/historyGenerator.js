@@ -700,7 +700,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     resourceEvents.push({
       name: 'The Great Construction',
       description:
-        "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force.",
+        defenseFactsOf({ institutions: context?._institutions || [] }).hasWalls ? "A period of ambitious stone construction transformed the settlement's character. Walls, civic buildings, or a cathedral raised from local quarry stone. The quarry workers became a political force." : "A period of ambitious stone construction transformed the settlement's character. Civic buildings or a cathedral raised from local quarry stone. The quarry workers became a political force.", // F1: walls only where they stand
       lastingEffects: [
         "Quarrymen's guild retains unusual civic influence",
         "Architectural legacy of the construction period defines the settlement's visual character",

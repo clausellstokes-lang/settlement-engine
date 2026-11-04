@@ -1344,7 +1344,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: "Adventurers' charter hall", desc: 'Competing organizations.', tags: ['military', 'adventuring'], priorityCategory: 'military' },
       at: {
-        hamlet: { baseChance: 0.12, desc: "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense when the garrison cannot. Common on dangerous frontiers.", magicLicense: 'none' },
+        hamlet: { baseChance: 0.12, desc: "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense where no garrison stands. Common on dangerous frontiers.", magicLicense: 'none' },
         village: { baseChance: 0.2, desc: 'A licensed charter hall providing bounties, monster-hunting coordination, and emergency armed response for the surrounding territory. More common in frontier regions.', magicLicense: 'none' },
         town: { baseChance: 0.3, desc: 'A chartered hall serving as the primary adventuring hub for the region. Posts contracts, grades monster threats, maintains gear, and coordinates large-scale operations that militia cannot handle.' },
         city: { name: "Multiple adventurers' guilds", baseChance: 0.7, tags: [], priorityCategory: 'adventuring' },

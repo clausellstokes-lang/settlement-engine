@@ -129,10 +129,13 @@ const bothNamedTensions = (archetype) => {
  * returned `proseVariant` is stored on the tie because the line now depends on the rest of the
  * town, so a re-render under new names
  * (generateSettlementPipeline.js :: refreshRelationshipProjections) reuses it instead of re-hashing.
+ * F1 (rung 1B): `force` is the place's force words (`defenseFacts.js :: forceWordsOf`), so a tie line
+ * names the watch or the militia where no garrison stands; omitted, the lines keep the garrison's words.
+ * @param {Readonly<{ body: string, members: string, member: string }>} [force]
  * @returns {(archetype: any, npc: {name?: string}, partner: {name?: string}) =>
  *   {archetypeKey: string | undefined, proseVariant: number, description: string, tension: string}}
  */
-export const createTieProseDraw = () => {
+export const createTieProseDraw = (force) => {
   /** @type {Map<unknown, {base: number, used: number}>} */
   const draws = new Map();
   return (archetype, npc, partner) => {
@@ -151,8 +154,8 @@ export const createTieProseDraw = () => {
     return {
       archetypeKey,
       proseVariant,
-      description: archetype.desc(npc, partner, proseVariant),
-      tension: archetype.tension(npc, partner, proseVariant),
+      description: archetype.desc(npc, partner, proseVariant, force),
+      tension: archetype.tension(npc, partner, proseVariant, force),
     };
   };
 };

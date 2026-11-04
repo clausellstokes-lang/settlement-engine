@@ -1330,8 +1330,9 @@ export const NPC_PRESENTATION_MODES = {
 // way, and the archetype OBJECTS are unchanged (consumers compare them with === and
 // Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
 // Index 0 of every pool is the pre-existing canonical closure, verbatim.
-const pairProse = (salt, variants) => Object.assign((r, s, variant) => (isTieIndex(variant) ? variants[variant % variants.length]
-  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s), { size: variants.length });
+const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => (isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
 
@@ -1441,8 +1442,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} has asked ${r.name} to lose a piece of evidence that three other officers have already seen.`,
       (r, s) =>
         `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`,
-      (r, s) =>
-        `An auditor from the garrison is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`,
+      (r, s, f) =>
+        `An auditor from the ${f.body} is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`,
     ]),
     type: 'ally',
   },
@@ -1492,8 +1493,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s company guards ${r.name}'s warehouses and wagons for a fixed fee each season. ${r.name} pays on time and asks for nothing in writing.`,
       (r, s) =>
         `${r.name} is ${s.name}'s largest client and ${s.name} is ${r.name}'s only protection. Each would be badly hurt by losing the other.`,
-      (r, s) =>
-        `${s.name}'s soldiers wear ${r.name}'s colours on the road and take ${r.name}'s orders without question. No magistrate has a say over them.`,
+      (r, s, f) =>
+        `${s.name}'s ${f.members} wear ${r.name}'s colours on the road and take ${r.name}'s orders without question. No magistrate has a say over them.`,
       (r, s) =>
         `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`,
       (r, s) =>
@@ -1520,14 +1521,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
     desc: pairProse('d', [
       (r, s) =>
         `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
-      (r, s) =>
-        `Between ${r.name}'s pulpit and ${s.name}'s garrison, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
+      (r, s, f) =>
+        `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
       (r, s) =>
         `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
-      (r, s) =>
-        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the garrison's swords.`,
-      (r, s) =>
-        `${s.name}'s soldiers take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
+      (r, s, f) =>
+        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`,
+      (r, s, f) =>
+        `${s.name}'s ${f.members} take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
       (r, s) =>
         `${r.name} names the settlement's enemies from the pulpit, and ${s.name} rides against them within the week.`,
       (r, s) =>
@@ -1539,14 +1540,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
       (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.',
       (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
-      (r, s) =>
-        `${r.name} has declared a holy day on which no soldier may bear arms. ${s.name} has a patrol scheduled for it.`,
+      (r, s, f) =>
+        `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`,
       (r, s) =>
         `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`,
       (r, s) =>
         `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`,
-      (r, s) =>
-        `A soldier under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
+      (r, s, f) =>
+        `A ${f.member} under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
       (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`,
     ]),
     type: 'ally',
@@ -1668,8 +1669,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`,
       (r, s) =>
         `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`,
-      (r, s) =>
-        `${r.name} controls the garrison's pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
+      (r, s, f) =>
+        `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
       (r, s) =>
         `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`,
       (r, s) =>
@@ -1683,16 +1684,16 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
       (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
-      (r, s) =>
-        `${r.name} has cut the garrison's pay to fund the market repairs. ${s.name} has told the soldiers who signed the order.`,
+      (r, s, f) =>
+        `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`,
       (r, s) =>
         `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`,
       (r, s) =>
         `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`,
       (r, s) =>
         `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`,
-      (r, s) =>
-        `${s.name} has begun collecting a road toll for the garrison. ${r.name} calls it theft from the treasury.`,
+      (r, s, f) =>
+        `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`,
     ]),
     type: 'political',
   },

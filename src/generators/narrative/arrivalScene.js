@@ -40,7 +40,7 @@ import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
-import { liveInstitutions } from '../../domain/institutions/institutionRoster.js';
+import { liveInstitutions } from '../../domain/institutions/institutionRoster.js'; import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
@@ -218,7 +218,7 @@ export function composeArrivalScene(settlement) {
   // A stress vignette names only structures the settlement holds; the structure-free vignettes every stress
   // carries are the floor (pinned by the arrival test), so the filter never empties the pool.
   const vignettes = underStress
-    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0)
+    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0 && defenseWordsFindings({ institutions }, line(name)).length === 0) // F1: and no force the record lacks
     : [];
   const hookTemplate = underStress
     ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])

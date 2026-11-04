@@ -31,7 +31,7 @@ import { lockedNpcIdSet } from '../domain/locksPreservation.js';
 import { carryCampaignEvents, restoreAuthoredHistory } from '../domain/historyPreservation.js';
 // Already in this chunk via npcGenerator; the reroll tail re-derives relationship
 // prose from the same archetype table the generator used.
-import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js';
+import { STRESS_ECONOMIC_EFFECTS } from '../data/npcData.js'; import { defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; // F1: one line
 import {
   resolveConfigWithUserContentTunables,
 } from '../domain/content/userContentTunables.js';
@@ -223,9 +223,11 @@ export function generateSettlementPipeline(config = {}, importedNeighbour = null
  *
  * @param {Array<Record<string, unknown>>} relationships
  * @param {Array<{id?: string, name?: string, role?: string}>} npcs
+ * @param {unknown} [institutions] the place's roster, for the tie lines' force words (F1)
  * @returns {Array<Record<string, unknown>>}
  */
-function refreshRelationshipProjections(relationships, npcs) {
+function refreshRelationshipProjections(relationships, npcs, institutions) {
+  const force = forceWordsOf(defenseFactsOf({ institutions: Array.isArray(institutions) ? institutions : [] }));
   if (!Array.isArray(relationships)) return relationships;
   const byId = new Map(npcs.map(npc => [npc?.id, npc]));
   return relationships.map(rel => {
@@ -245,8 +247,8 @@ function refreshRelationshipProjections(relationships, npcs) {
     const archetype = STRESS_ECONOMIC_EFFECTS[/** @type {string} */ (rel?.archetypeKey)];
     if (archetype && first && second) {
       const variant = /** @type {number | undefined} */ (rel?.proseVariant);
-      next.description = archetype.desc(first, second, variant);
-      next.tension = archetype.tension(first, second, variant);
+      next.description = archetype.desc(first, second, variant, force);
+      next.tension = archetype.tension(first, second, variant, force);
     }
     return next;
   });
@@ -443,7 +445,7 @@ export function carryLockedRosterThroughGenerate(previousSettlement, freshSettle
   const next = {
     ...freshSettlement,
     npcs: roster,
-    relationships: refreshRelationshipProjections(freshSettlement.relationships, roster),
+    relationships: refreshRelationshipProjections(freshSettlement.relationships, roster, freshSettlement.institutions),
     factions: relinkFactionMembers(freshSettlement.factions, roster),
   };
 
@@ -572,7 +574,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // the roster carries (the one-source property relinkFactionMembers used to repair), and a
     // displaced stranger can never sit in a group: a preserved character inherits its slot.
     const finalRelationships = preserved.length
-      ? refreshRelationshipProjections(relationships, roster)
+      ? refreshRelationshipProjections(relationships, roster, settlement.institutions)
       : relationships;
     const factions = generateFactions(roster, settlement.powerStructure?.factions);
     const conflicts = generateConflicts(factions, finalRelationships, config, settlement.institutions || []);
