@@ -97,3 +97,34 @@ New with U3 (9 titles), each a roster that is smaller by design:
 
 1. The Institutions tab's list of houses is NOT changed. The design's "Overview's fabric line" does not exist at this tip (the Overview's Institutions collapsible was cut, T1-15); the fabric rows print today on the Institutions tab (`InstitutionsTab.jsx :: institutionsWithServices`) and in the PDF's Institutions chapter (Infrastructure and Religious blocks). Removing them from the tab with no other screen surface would stop them printing on screen. The PDF is untouched.
 2. No anchor moved, though band ends fall outside the budget (§4).
+
+## 8. Addendum — the chair's rulings on the hand-back (2026-11-04), and what they measured
+
+| unit | commit | ruling | receipt |
+|---|---|---|---|
+| U5 | `b16a503` | 1: E calibrated to what is drawn | red-first 2 failed; density 5/5; promise 1/1 |
+| U6 | `a76fb96` | 3: the fabric's own group on the Institutions tab | red-first 1 failed on a rendered village seed; 3/3 |
+| U7 | `5e693bd` | 6: the (b) tests re-keyed | five files 1 failed (the (c) STOP) / 79 passed |
+
+**Ruling 1 — E calibrated.** `INSTITUTION_BUDGET_REALISED`: the mean non-fabric house count at each band's geometric midpoint at d ≡ 1 (cascade and correlation included), minus R, 200 seeds per tier, measured at `d0a3202` by `--calibrate 200`: thorp 3.29 (catalogue sum 5.35) · hamlet 9.775 (9.05) · village 26.045 (21.29) · town 46.24 (38.81) · city 51.67 (51.05) · metropolis 58.65 (59.27). The seven anchors are unmoved. After calibration:
+
+| tier | ρ, 1,000 corpus (120 matrix) | median, p10–p90 (1,000) | band min p10–p90 | band max p10–p90 | budget |
+|---|---|---|---|---|---|
+| thorp | −0.03 (0.31) | 3, 3–5 | 3–5 ✗ | 3–5 ✗ | 1–3 |
+| hamlet | 0.48 (0.45) | 5, 4–7 | 4–6 ✓ | 4–9.1 ✗ | 2–6 |
+| village | 0.68 (0.91) | 12, 7.6–17 | 6–8 ✓ | 11.9–22 ✗ | 5–14 |
+| town | 0.76 (0.77) | 31, 20–45 | 12–16 ✓ | 32.8–47.1 ✗ (median 40.5) | 12–35 |
+| city | 0.61 (0.84) | 64, 47–77 | 30.9–47.1 ✓ | 58.9–80.1 ✗ | 30–75 |
+| metropolis | 0.28 (0.58) | 84, 72–94.5 | 64.9–87 ✗ | 79.9–101.1 ✓ | 70+ |
+
+Overlap (40 a side): 0.4% at 100 · 6.1% at 400 · 3.1% at 2,500 · 5.1% at 15,000 — all four inside 10%. The band tops stay above the budget; per the ruling the lane stops there and the anchors are the owner's.
+
+**Ruling 2.** The thorp's required non-fabric houses: 3 — Subsistence farming, Access to external mill, Burial ground. At 60,000 people (d 1.790), 39 of the metropolis's 128 optional non-fabric rows reach a chance of 1.0 (authored chance × d, before the multipliers); 9 of the city's do at 15,000.
+
+**Ruling 3.** No Overview line. The Institutions tab lists houses only in its stack and, below it, the fabric under "The fabric of the place" with no Backs line (`tests/components/institutionsFabricGroup.test.jsx`). The tab has no count line. The name-list census needs a ruling for the new list site `InstitutionsTab.jsx :: fabric` (a register door, left for the landing).
+
+**Ruling 5, in its words.** The factor never adds or removes a draw; outcome gates later in the roll (Gates (if walled) needing Town walls) and the cascade's count move on some seeds because the gated rolls changed.
+
+**Ruling 6 — the nine.** (a) left for the landing: `generationForkCensus` A4; `pipelinePinnedMode` ×2 (the NPC step's frozen draw counts 306 and 67). (b) re-keyed in U7: `distribution` enforcement (Town watch's `law_enforcement` tag read beside the group); `terrainOverrideResolution` Caravanserai (`k4` → `k0`); `powerConfig` (`-2` → `-0`); `coherenceRepairPass` (`-39` → `-28`, new subjects); `pinnedNpcRegenRemap` (`-1` → `-0`). (c) **STOP**: `terrainOverrideResolution` "Shepherd collective is admitted on plains and hills" — the row is thorp-only and d is 0 across the thorp band, so it can never roll; the same holds for all 13 optional non-fabric thorp rows (the four governance rows Informal elder consensus, Head-of-household consensus, Lord's reeve and Household elder; Palisade; Household levy; Wayside shrine; Communal root cellar; Fishing community; Shepherd collective; Woodcutter's camp; Local fence; Outlaw shelter), and d is 0 for a hamlet under 45 people (31 rows) and a village under 101 (64 rows). It contradicts §7's "catalogue rows dead under the bands: 0".
+
+**The registers the lane's last units also move** (`tests/lint`, compared file by file with `8cc245db0`): the name-list census TOTALITY (U6); `writerReach` (a dark-register row's key, "supersessionReason on proposals", falls below MIN_ROWS in the corpus); `recordRegisterTotality` A3/A4; `proseFamilyContract` A1–A3, A5, A6; `institutionTable` "the ruin filter is measured doing work" (20 against 23); the tuning inventory (two tables measured, not in the inventory). All are the landing's doors; none was touched.
