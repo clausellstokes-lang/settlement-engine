@@ -180,24 +180,29 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
 
 // ── THE DIMENSION MEASUREMENT THAT LICENSES THE MOUNT ROWS ───────────────────────────
 
-describe('NO STATE DIMENSION anywhere in the leaf', () => {
-  test('every one of the 138 pools is dimension-free, so no mount row owes a declaration', () => {
-    const partitioned = [];
+describe('ONE STATE DIMENSION in the leaf: walls (F10 WALLS-WORD, 2026-11-04)', () => {
+  test('only the wall-variant pools partition, only by walls, and only their mount rows declare it', () => {
+    // Until F10 every one of the 138 pools was dimension-free. F10 marked the variants that
+    // print the place's own walls (`walls`) and gave each a wall-free twin (`no walls`); the
+    // desk answers the dimension at its entry from `defenseFacts.js :: wallsAnswered`.
+    const partitioned = {};
     for (const id of Object.keys(WAR_FAITH)) {
       for (const [key, pool] of Object.entries(BLOCK(id).pools)) {
-        if (poolDimensions(pool).length > 0) partitioned.push(`${id} :: ${key}`);
+        const dims = poolDimensions(pool);
+        if (dims.length > 0) partitioned[`${id} :: ${key}`] = dims;
       }
     }
-    expect(partitioned).toEqual([]);
-    // The only mark the leaf uses at all is the AUDIENCE mark, which is law 2 and not a
-    // dimension. Stated as a measurement so a corpus that grows a dimension word reds here
-    // AND at the walker's honesty arm rather than only at the second one.
+    expect(Object.values(partitioned).every((dims) => dims.join() === 'walls')).toBe(true);
+    expect([...new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]))].sort())
+      .toEqual(['DS-FTH-1', 'DS-WAR-1', 'DS-WAR-2']);
+    // Beside the AUDIENCE mark (law 2, not a dimension) the leaf spells only the walls pair.
     const marks = new Set(Object.keys(WAR_FAITH).flatMap((id) => Object.values(BLOCK(id).pools)
       .flat().flatMap((v) => v.marks || [])));
-    expect([...marks]).toEqual(['dm-only']);
+    expect([...marks].sort()).toEqual(['dm-only', 'no walls', 'walls']);
+    const owing = new Set(Object.keys(partitioned).map((k) => k.split(' :: ')[0]));
     for (const row of DOSSIER_MOUNTS.filter((r) => r.desk === 'warFaith')) {
-      expect(row.dimensions, `${row.mount} declares a dimension the leaf does not carry`)
-        .toBeUndefined();
+      expect(row.dimensions, `${row.mount} declares a dimension its block does not carry`)
+        .toEqual(owing.has(row.blockId) ? ['walls'] : undefined);
     }
   });
 });

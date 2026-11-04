@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // SIZE-3, R6 and F1: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; // SIZE-3, R6, F1 and F10: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -352,7 +352,7 @@ export const generatePowerStructure = (
         topPriority <= 65 &&
         (informalModifier =
           {
-            military: 'garrison-backed',
+            military: defenceTwinLine('garrison-backed', defenseFactsOf({ institutions: nativeInstitutions })), // F10: data/defenceTwinLines.js
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',

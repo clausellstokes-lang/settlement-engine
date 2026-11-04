@@ -128,7 +128,8 @@ const BLOCK_POOLS = Object.freeze({
  * so the arm below can hold every OTHER block to `[]` and this one to its dimension, rather
  * than exempting it — an exemption is how a block quietly grows a dimension nobody answers.
  */
-const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor' });
+// F10 WALLS-WORD (2026-11-04): DS-GEN-3 and DS-HK-1 carry wall variants and their twins.
+const DIMENSIONED = Object.freeze({ 'DS-GEN-6': 'deficit', 'DS-GEN-9': 'anchor', 'DS-GEN-3': 'walls', 'DS-HK-1': 'walls' });
 
 /** @param {string} id @returns {string[]} */
 const poolsOf = (id) => Object.keys(DOSSIER_STATE_PROSE_GENERAL[id].pools);

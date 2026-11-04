@@ -122,6 +122,37 @@ export function defenseFactsOf(settlement) {
   });
 }
 
+// ── THE WALLS ANSWER FOR THE DOSSIER'S STATE PROSE (F10 WALLS-WORD, rung 1C, 2026-11-04) ──
+// The state-prose kernel's `walls` dimension (`stateProseKernel.js :: STATE_MARK_DIMENSIONS`)
+// is answered HERE and nowhere else: a variant marked `walls` speaks only where an enclosure
+// stands, its twin marked `no walls` only where none does. The two words are the kernel's;
+// this module does not import the kernel (a display leaf), so they are spelled once below and
+// `tests/domain/wallsWordDossierProse.test.js` holds them equal to the kernel's.
+
+/**
+ * The kernel's `walls` dimension word for this place. Typed `object` because every desk holds
+ * its own narrow view of the settlement; the reader takes the roster from whichever it is.
+ * @param {object | null | undefined} settlement
+ * @returns {'walls'|'no walls'}
+ */
+export function wallsDimensionOf(settlement) {
+  const record = /** @type {{ institutions?: unknown } | null | undefined} */ (settlement);
+  return defenseFactsOf(record).hasWalls ? 'walls' : 'no walls';
+}
+
+/**
+ * A desk's options with the `walls` dimension answered for this place. Every other dimension
+ * the caller already answered is kept.
+ * @template {object} T
+ * @param {object | null | undefined} settlement
+ * @param {T} options
+ * @returns {T & { dimensions: Record<string, string> }}
+ */
+export function wallsAnswered(settlement, options) {
+  const given = /** @type {{ dimensions?: Record<string, string> } | null | undefined} */ (options)?.dimensions;
+  return Object.assign({}, options, { dimensions: { ...(given || {}), walls: wallsDimensionOf(settlement) } });
+}
+
 // ── THE DEFENCE ROLES (R6, soak 1000 rung 1, 2026-11-04) ─────────────────────────────────
 // A role that commands a force is held only where the force stands on the place's own record,
 // never by the tier alone: the NPC generator's mandated "Guard Captain" of every village, town

@@ -32,6 +32,8 @@ import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { defenseFactsOf } from '../defense/defenseFacts.js';
+import { defenceTwinLine } from '../../data/defenceTwinLines.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
@@ -136,7 +138,7 @@ const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array
   external: ['profiteer', 'collaborator'],
 }));
 
-/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences. */
+/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its defence-free twin (`data/defenceTwinLines.js`, F10). */
 export const CAST_REASONS = Object.freeze({
   bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
     food_security: 'the hunger falls first on its people',
@@ -501,6 +503,8 @@ export function bruntCandidates(s, kind, stakes) {
   const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
+  // F10 unit 4: a reason that names walls the place lacks takes its twin (data/defenceTwinLines.js).
+  const defence = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s));
   for (const sys of catalogFor(kind).affectedSystems) {
     const base = SYSTEM_BASE[sys];
     if (!base) continue;
@@ -508,9 +512,9 @@ export function bruntCandidates(s, kind, stakes) {
     for (const f of hit) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast));
+      for (const n of touching) out.push(npcRow(n, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
       for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
-      out.push(factionRow(f, 'brunt', CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast));
+      out.push(factionRow(f, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
     }
     if (out.length) break;
   }
@@ -693,7 +697,8 @@ export function defenderCandidates(s) {
     for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'defender', CAST_REASONS.defenderMilitary));
   }
   for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
-    out.push(npcRow(n, 'defender', CAST_REASONS.defenderOffice));
+    // F10 unit 4: "holds the garrison's office" only where a garrison stands (data/defenceTwinLines.js).
+    out.push(npcRow(n, 'defender', defenceTwinLine(CAST_REASONS.defenderOffice, defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s)))));
   }
   // The house fallback credits a house with the town's defence, so it reads the STANDING roster
   // only (`liveInstitutions`): a closed garrison defends nothing.
