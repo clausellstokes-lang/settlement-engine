@@ -485,11 +485,11 @@
       "suite": "tests/property/npcLedgerDormancyGolden.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "ca58422d8f46a8504aaa0d8a4315a2b4141e20596f48ac1a93f572fb9f6fe1e8",
+      "sha256": "ebcb187d9b80ee91c3257033c0f22a004fffe009b6dfeeb6a53f3ffc6c29f587",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
-      "ownerRow": "§901",
+      "ownerRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
       "note": "FROZEN AT THE GENESIS 2026-09-16 at the bytes committed at d22ceff01 (the owner's signature 'sign the golden'; record docs/shift-records/2026-09-16-genesis-freeze-generator-golden-master.json); measured, not moved: sha256 = bytes of `path`, rows = the manifest's key count where it is JSON."
     },
     {
