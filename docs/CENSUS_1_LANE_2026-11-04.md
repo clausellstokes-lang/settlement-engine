@@ -46,8 +46,8 @@ Each of these is a correct cure by the design's meaning, but it moves births, an
 5. **`foodBalance.hasImportProcessor`** (fact 11) asks a different question (which building processes an import) on the raw roster at a generation step. Moving it to the live roster is a birth question.
 6. **The ~10 government pattern sites** (fact 8) classify other properties (lawful / anarchic, martial / pacifist, theocracy; `factionDynamics.govIsTheocratic` reads the faction name). None of them asks the ruler kind, so none was retired.
 7. **The Economy stores row** (`tonightSheet.foodStoresWords`, fact 2) still takes the food record's months. With the one writer the two homes agree on every save written from now on. A save written before this lane, after a tick, still shows its birth figure there.
-9. **`arrivalScene.holdsMarket` and DS-GEN-13's `marketPoolKey`** (fact 5). Chair ruling T1-12 pins the two EQUAL (`tests/generators/arrivalScene.test.js`), both on a name regex under which "Shambles" and "Annual fair" are markets. Retiring one side alone reds the ruled equality. Retiring both moves DS-GEN-13 pages. On born rosters both agree with the home (2,000 of 2,000), so the only difference is authored or legacy names.
 8. **The hunger family's "any food-record deficit" member** (ruling 2). It arrived on the window branch (`d175715`, `familyActiveIn`) and now lives in the home unchanged.
+9. **`arrivalScene.holdsMarket` and DS-GEN-13's `marketPoolKey`** (fact 5). Chair ruling T1-12 pins the two EQUAL (`tests/generators/arrivalScene.test.js`), both on a name regex under which "Shambles" and "Annual fair" are markets. Retiring one side alone reds the ruled equality. Retiring both moves DS-GEN-13 pages. On born rosters both agree with the home (2,000 of 2,000), so the only difference is authored or legacy names.
 
 ## Measurements (window tip `6a9fb3c` vs lane tip, clean worktrees, `soak-review.mjs --workers 4`)
 
