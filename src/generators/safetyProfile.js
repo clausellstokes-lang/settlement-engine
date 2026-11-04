@@ -10,6 +10,15 @@ import {
   institutionMatchesNativeName,
   institutionMatchesRegex,
 } from '../domain/institutionClassify.js';
+import { institutionCategoryFlags } from './roleCategory.js';
+
+/**
+ * The pool's own "desperation theft" line, held once because two entries print it: the famine
+ * and siege crime type below, and (lane RUNG1-TRUTH unit C) the survival-crime entry where the
+ * record carries a criminal network.
+ */
+const DESPERATION_THEFT_DESC =
+  'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.';
 
 // ─── generateSafetyProfile ────────────────────────────────────────────────────
 
@@ -443,10 +452,19 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   // Survival crime: requires either a criminal institution OR a settlement large enough
   // that community self-regulation breaks down. Clean thorps/hamlets don't have fences
   // or hired muscle networks — desperate people steal from neighbors quietly, not organizationally.
+  //
+  // ⛔ "NO CRIMINAL INFRASTRUCTURE" IS FALSE BESIDE A NETWORK (lane RUNG1-TRUTH unit C, 2026-11-04;
+  // docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 16, A-06; the chair's ruling C). Where the roster
+  // carries a criminal-category institution (the Institutions tab's own mark,
+  // `institutionCategoryFlags`), the entry prints the pool's existing desperation-theft line
+  // instead. The TYPE is kept, so the services menu that reads it (the fence by word of mouth)
+  // is unchanged; nothing here draws.
   if (flags.criminalEffective >= 48 && pri.economy < 35 && !_isSmallCommunity) {
     crimeTypes.push({
       type: 'Survival crime',
-      desc: 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.',
+      desc: institutionCategoryFlags(institutions).hasCriminal
+        ? DESPERATION_THEFT_DESC
+        : 'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.',
     });
   }
   if (flags.criminalEffective >= 45 && pri.magic >= 48 &&
@@ -520,8 +538,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   };
 
   if (hasStress('famine') || hasStress('under_siege')) {
-    addCrimeIfMissing('desperation theft',
-      'Hunger-driven theft of food, livestock, and stored goods. Enforcement struggles to distinguish survival crime from organised theft.');
+    // The survival entry may already print this line (unit C above): printed once, never twice.
+    if (!crimeTypes.some((c) => c.desc === DESPERATION_THEFT_DESC)) {
+      addCrimeIfMissing('desperation theft', DESPERATION_THEFT_DESC);
+    }
     addCrimeIfMissing('black market food',
       'Controlled goods (grain, salt, preserved meat) changing hands at extortionate prices through unofficial channels.');
   }
