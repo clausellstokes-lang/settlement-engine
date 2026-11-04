@@ -145,6 +145,14 @@
         "DEFICIT_FRACTION_FROM"
       ],
       "note": "the general desk's food-deficit cut, one module-private scalar indexed by roster. It is the only row in this register whose value MIRRORS a second, unregistered literal in the producer — see the row's own note."
+    },
+    {
+      "kind": "tables",
+      "file": "src/data/institutionBudget.js",
+      "exports": [
+        "INSTITUTION_BUDGET_ANCHORS"
+      ],
+      "note": "X-46 car 3 (docs/DESIGN_X46_SCALE_TRAIN.md §4): the institution budget's seven [population, expected houses] anchors, log-linear between them. Not a *_TUNING name, so indexed here by roster. The seven numbers are the owner's veto point (§8 item 2). Declared draft; the measured inventory row is taken at the train's landing refreeze."
     }
   ],
   "moduleSide": [
@@ -2422,6 +2430,29 @@
       },
       "band": null,
       "note": "FP-31 / FP-34 THE FEED'S RETENTION WINDOW (cure unit FP-HERALD-LENS U2, 32315e384; the chair's rulings of 2026-09-24 under the owner's word 'Again, I leave all judgment to you'): the news feed keeps every entry of its newest windowWeeks whole and applies the 240 cap with its major-arc rescue only beyond them, so a year advance's news survives until the DM is shown it. PROPOSED = 52 = INTERVAL_WEEKS.one_year (pinned equal by tests/domain/wizardNewsYearWindow.test.js; kept as its own table so intervalWeeks.js stays out of the first-paint set — FP-34; named *_TUNING because the inventory measures a table by that suffix, TABLE_DEF_RE). MEASURED on read 2's seed: year one minted 434 entries, the bare cap kept 240, the window keeps 433; the persisted feed grows 197 KB → 348 KB after that year (gzip 20 → 37 KB), 263 KB after year two, 248 KB after year three — the owner's decision point FPQ-59 records the growth. DRAFT, registered by the chair at the pick; the owner signs it at the tuning sitting."
+    },
+    "src/data/institutionBudget.js#INSTITUTION_BUDGET_ANCHORS": {
+      "role": null,
+      "status": "draft",
+      "signedAt": null,
+      "unit": {
+        "0.0": "people",
+        "0.1": "count",
+        "1.0": "people",
+        "1.1": "count",
+        "2.0": "people",
+        "2.1": "count",
+        "3.0": "people",
+        "3.1": "count",
+        "4.0": "people",
+        "4.1": "count",
+        "5.0": "people",
+        "5.1": "count",
+        "6.0": "people",
+        "6.1": "count"
+      },
+      "band": null,
+      "note": "X-46 car 3: [population (people), expected houses (count)] pairs."
     }
   },
   "roles": {
