@@ -22,6 +22,7 @@
 import { inspectSettlement } from '../generation-certification-soak.mjs';
 import { normalizeRenderedSentence } from '../phrase-repetition.mjs';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
+import { isDefenceClaim } from './defenceReach.mjs';
 import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
 import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
 
@@ -168,7 +169,9 @@ export function reviewSettlement(s, config, r) {
   const allText = Object.values(surfaces).join('\n');
 
   // ── coh: the seven instruments, every surface
-  for (const f of coherenceBattery(s, surfaces)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
+  // F1 unit 4: the defence-words check counts defence CLAIMS; a soldier who is one person, a walled
+  // plot, a trade's customers or a hedged hospital is reach, licensed by rule (`defenceReach.mjs`).
+  for (const f of coherenceBattery(s, surfaces)) if (isDefenceClaim(f)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
 
   // ── X-47: no district or tavern names on any text surface
   const quarters = (s.spatialLayout?.quarters || []).flatMap((q) => [q?.name]).filter((n) => typeof n === 'string' && n.length > 3);
