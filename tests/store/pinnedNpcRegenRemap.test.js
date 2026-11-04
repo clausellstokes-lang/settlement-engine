@@ -99,7 +99,10 @@ describe('REGEN — a pin follows its subject through the roster reroll', () => 
     // would make the non-vacuity guard below fail exactly as designed, because with the
     // keeper standing still every later assertion would also hold with the remap
     // deleted. Re-pinned to a seed that still MOVES the keeper (6 of the first 21 do).
-    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-1', customContent: {} }));
+    // Re-pinned `-1` to `-0` on 2026-11-04 (X-46 car 3, the institution budget; the chair's ruling
+    // 6(b)): the density factor reshaped this town's roster, and `-1` now leaves the keeper in its
+    // slot (the guard below fails as designed); `-0` moves it again.
+    const town = reloaded(generateSettlementPipeline(CFG, null, { seed: 'pins-store-regen-0', customContent: {} }));
     town.npcs[2]._authored = true;
     const target = town.npcs[2];
     store.setState({
