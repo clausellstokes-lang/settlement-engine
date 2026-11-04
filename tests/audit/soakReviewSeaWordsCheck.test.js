@@ -66,3 +66,9 @@ describe('A-11, a route disjunction is no harbour (chair ruling, round 4, 2)', (
     expect(seaWordSentence(['Duties are taken at the harbour.'], {})).toBe('Duties are taken at the harbour.');
   });
 });
+
+describe('A-11, the Fishmonger\'s name inland (chair ruling, round 4, 3)', () => {
+  it('"Fishmonger" inland: 0 findings', () => {
+    expect(seaWordSentence(['Fishmonger'], {})).toBeUndefined();
+  });
+});

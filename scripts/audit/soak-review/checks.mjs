@@ -63,12 +63,13 @@ const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|s
 
 /**
  * Fish the catalog designs for an inland place (chair ruling 4a/4c, 2026-11-04; round 3, 3a/3c):
- * the salted, salt-cured, dried, smoked or pickled trade, the Fish market's own name (the
- * catalogue designs it inland: "the week's salted barrels"), and — where the record itself imports fish
+ * the salted, salt-cured, dried, smoked or pickled trade, the Fish market's and the Fishmonger's
+ * own names (the catalogue designs both inland: "the week's salted barrels"; "inland, dried or
+ * salted"), and — where the record itself imports fish
  * (`resourceAnalysis.imports.critical`) — the bare "Fish" item of a goods list. Licensed text is
  * removed before the sea words are read.
  */
-const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b/gi;
+const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b|\bfishmonger\b/gi;
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
 /** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
 const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
