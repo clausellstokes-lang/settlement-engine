@@ -17,7 +17,7 @@ import { random as _rng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
 import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
-import { resolveGenerationWorldLaw } from './generationContext.js';
+import { resolveGenerationWorldLaw } from './generationContext.js'; import { defenseFactsOf } from '../domain/defense/defenseFacts.js'; // R6: one line, so no cited line moves
 import {
   STRESS_TO_TENSION,
   TIMELINE_CATEGORY_TYPES,
@@ -333,6 +333,11 @@ const buildHistoricalEvent = (
   const relFaction =
     factions.find(f => f.faction?.toLowerCase().includes('religious') || f.faction?.toLowerCase().includes('church'))
       ?.faction || null;
+  // R6 (soak 1000 rung 1, kind 4): with no military faction, the enforcing party is the force
+  // the place's record holds, in safetyProfile.js's own words (its `lawRef`), never a garrison
+  // the place lacks.
+  const facts = defenseFactsOf({ institutions });
+  const forceParty = facts.hasGarrison ? 'The garrison' : facts.hasWatch ? 'The watch' : facts.hasMilitia ? 'The militia' : 'Local enforcement';
 
   // Stress → tension type mapping (hoisted to module scope + exported so the
   // stress-registration walker can assert every target resolves to a real
@@ -463,7 +468,7 @@ const buildHistoricalEvent = (
       .replace(/Wealthy merchants/g, merchantRef)
       .replace(/Legitimate heir/g, govFaction)
       .replace(/Corrupt officials/g, govFaction)
-      .replace(/Official guards/g, milFaction || 'The garrison')
+      .replace(/Official guards/g, milFaction || forceParty)
       .replace(/Criminal organisations/g, crimeFaction || 'the criminal network')
       .replace(/Orthodox believers/g, relFaction || 'the orthodox clergy')
       .replace(/Power behind throne/g, altFaction !== govFaction ? altFaction : merchantRef);

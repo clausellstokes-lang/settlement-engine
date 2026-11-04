@@ -247,9 +247,12 @@ export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
  * @param {Object} instFlags    - from getInstFlags
  * @param {Object} publicLeg   - from computePublicLegitimacy
  * @param {Array}  stressTypes
+ * @param {{ hasGarrison?: boolean, hasMercenary?: boolean } | null} [defenseFacts]
+ *   the place's standing forces (`domain/defense/defenseFacts.js :: defenseFactsOf`); null keeps
+ *   the line unconditional for a caller that holds no roster
  * @returns {Array} relationship objects
  */
-export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = []) {
+export function computeFactionRelationships(factions, tier, instFlags, publicLeg, stressTypes = [], defenseFacts = null) {
   const rels = [];
   const stressed = t => stressTypes.includes(t);
 
@@ -292,7 +295,10 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
 
     if (ratio <= 0.5) {
       type = 'subordinate';
-      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}. Command authority is unambiguous: soldiers enforce rather than govern.`;
+      // R6 (soak 1000 rung 1, kind 4): the soldiers sentence needs soldiers on the record, a
+      // garrison or a hired company (the defence-words check's own reading of the word).
+      const soldiersStand = !defenseFacts || defenseFacts.hasGarrison || defenseFacts.hasMercenary;
+      narrative = `${mil.faction} operates as the executive arm of ${gov.faction}.${soldiersStand ? ' Command authority is unambiguous: soldiers enforce rather than govern.' : ''}`;
     } else if (ratio <= 0.85) {
       type = 'symbiotic';
       narrative = `${gov.faction} commands, ${mil.faction} executes. A functional partnership: each depends on the other remaining effective.`;

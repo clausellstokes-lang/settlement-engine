@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; // SIZE-3: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // SIZE-3 and R6: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -113,11 +113,11 @@ export const generatePowerStructure = (
     militaryPower = Math.round(23 * priorityToMultiplier(instFlags.militaryEffective)),
     religiousPower = Math.round(22 * priorityToMultiplier(instFlags.religionInfluence)),
     criminalPower =
-      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58)
+      instFlags.criminalEffective > 42 && (tier === 'city' || tier === 'metropolis' || instFlags.criminalEffective > 58) && (!['thorp', 'hamlet', 'village'].includes(tier) || hasMarketInstitution(nativeInstitutions)) // R6: a small place's guild power needs a market
         ? Math.round(12 * priorityToMultiplier(instFlags.criminalEffective))
         : 0,
     craftPower =
-      tier !== 'thorp' && tier !== 'hamlet'
+      tier !== 'thorp' && tier !== 'hamlet' && (tier !== 'village' || hasMarketInstitution(nativeInstitutions)) // R6: as the Thieves' Guild above
         ? Math.round(17 * priorityToMultiplier(instFlags.economyOutput * 0.75 + 10))
         : 0,
     arcanePower =
@@ -775,7 +775,7 @@ export const generatePowerStructure = (
       safetyRatio,
     },
     publicLegitimacy,
-    stressTypesArr
+    stressTypesArr, defenseFactsOf({ institutions: nativeInstitutions }), // R6: the soldiers line reads the place's forces
   );
 
   return {

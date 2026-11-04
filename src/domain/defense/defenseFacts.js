@@ -113,6 +113,33 @@ export function defenseFactsOf(settlement) {
   });
 }
 
+// ── THE DEFENCE ROLES (R6, soak 1000 rung 1, 2026-11-04) ─────────────────────────────────
+// A role that commands a force is held only where the force stands on the place's own record,
+// never by the tier alone: the NPC generator's mandated "Guard Captain" of every village, town
+// and city (npcGenerator.js :: generateNPCs, TIER_MANDATORY_ROLES) read the tier. The reading is
+// the defence-words check's own (`coherence/defenseWordsFindings.js`, its Guard Captain term).
+
+/** @type {Readonly<Record<string, (f: DefenseFacts) => boolean>>} */
+const ROLE_NEEDS = Object.freeze({
+  'Guard Captain': (f) => f.hasGarrison || f.hasWatch || f.hasMilitia,
+});
+
+/**
+ * A filter for roles (a role string, or a candidate row carrying `role`): false for a defence
+ * role whose force the place does not hold, true for every other role.
+ *
+ * @param {{ institutions?: unknown } | null | undefined} settlement
+ * @returns {(row: string | { role?: unknown }) => boolean}
+ */
+export function defenceRoleGate(settlement) {
+  const facts = defenseFactsOf(settlement);
+  return (row) => {
+    const role = typeof row === 'string' ? row : String(row?.role ?? '');
+    const needs = Object.hasOwn(ROLE_NEEDS, role) ? ROLE_NEEDS[role] : null;
+    return !needs || needs(facts);
+  };
+}
+
 // ── FOOD ENDURANCE (lane DEFENSE-3, X-52, 2026-11-03) ───────────────────────────────────
 // The owner: "i think stored food should have a version or reference in defense because that
 // is a major compoenent of a siege warfare", then "call it food endurance rather than siege

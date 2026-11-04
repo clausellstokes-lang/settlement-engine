@@ -18,7 +18,7 @@ import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { legacyMassRange } from '../domain/density/densityLaw.js';
+import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; // R6: one line, so no cited line moves
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
@@ -1398,8 +1398,10 @@ export const generateNPCs = (
   // arm (HK-LAW-6), so routing these two draws through it is roll-for-roll
   // neutral — measured 0 of 32 seeds shifting their total roll count.
   const hookRegistry = { titles: new Set(), themes: new Set(), tells: new Set(), speech: new Set() };
+  // R6 (soak 1000 rung 1, kind 4): a Guard Captain captains a standing force on the place's own
+  // record, not the tier's (domain/defense/defenseFacts.js :: defenceRoleGate).
   const candidates = getUpgradeOpportunities(institutions, tier, weights)
-    .filter(worldLaw.allowsRole);
+    .filter(worldLaw.allowsRole).filter(defenceRoleGate({ institutions }));
 
   // ── Inject faction-gated NPC roles ────────────────────────────────────────
   // Noble and crafts roles only appear when those faction types exist in the
@@ -1482,7 +1484,7 @@ export const generateNPCs = (
   const tierRoleSet = new Set(tierRolesU);
   const stressContribution = stressRoles.filter(r => !tierRoleSet.has(r));
   const mandatoryRoles = [...tierRolesU, ...stressContribution]
-    .filter(worldLaw.allowsRole);
+    .filter(worldLaw.allowsRole).filter(defenceRoleGate({ institutions })); // R6, as the pool above
 
   // Build config context for NPC generation
   const npcConfig = {
