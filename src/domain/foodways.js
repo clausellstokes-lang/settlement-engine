@@ -37,7 +37,8 @@ const FRAMES = Object.freeze({
 /** Words that claim a source, for reading the culture's own sentence (and the dossier text). */
 export const SOURCE_WORDS = Object.freeze({
   grain: /\b(?:grain|grains|breads?|barley|rye|wheat|millet|rice|porridge|pottage)\b/i,
-  livestock: /\b(?:meat|milk|dairy|cheese|herds?|livestock|mutton|beef|pork)\b/i,
+  // "Game meat" is the hunt's, not the herds' (F3 FOOD-WORDS unit 2a): its meat names no livestock.
+  livestock: /\b(?:(?<!\bgame )meat|milk|dairy|cheese|herds?|livestock|mutton|beef|pork)\b/i,
   fish: /\b(?:fish|fishing|seafood|catch|shellfish)\b/i,
   mill: /\bmill(?:'s)?\b/i,
   game: /\b(?:game|venison|hunters?(?:')?)\b/i,

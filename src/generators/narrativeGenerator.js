@@ -170,6 +170,8 @@ const genSettSummary = settlement => {
     stressType: primaryStress,
     stressTypes: stresses,
     commodity,
+    // F3 FOOD-WORDS: the food record, so a stress secret's food claim reads the one home.
+    foodRecord: economicState?.foodSecurity?.foodRecord ?? null,
     prosperity: economicState.prosperity || 'Moderate',
     stability: powerStructure.stability || 'Stable',
     govFaction,

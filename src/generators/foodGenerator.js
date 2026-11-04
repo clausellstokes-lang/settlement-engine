@@ -33,6 +33,7 @@ import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
+  waterAccessKind,
 } from '../domain/tradeRouteSemantics.js';
 
 // ── THE BASE NUMBERS (FOOD-2, chair ruling 2, 2026-11-03; fix shape E) ──────────────
@@ -131,6 +132,11 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasCityGranary    = hasInst('city granari');
   const hasStateGranary   = hasInst('state granary');
   const hasFishing        = hasInst('fish', 'fishing') || hasRes('fishing_grounds', 'river_fish');
+  // F3 FOOD-WORDS unit 3 (the chair's ruling, 2026-11-04): a fishing row on water IS the catch —
+  // a Fisher's landing, a fishery or a fish market where the water fact is not 'none' feeds the
+  // place even when the terrain rolled no fishing-grounds resource. A Fishmonger is a trader.
+  const fishRowOnWater    = hasInst('fisher', 'fishery', 'fishing', 'fish market') && waterAccessKind(terrain, route) !== 'none';
+  const fishSource        = hasFishing && (hasRes('fishing_grounds', 'river_fish') || fishRowOnWater);
   const hasPastoral       = hasInst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz');
   const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
   const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
@@ -146,7 +152,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const foodSources = /** @type {Array<'grain'|'livestock'|'fish'|'mill'|'game'>} */ ([
     ['grain', (hasSubsistence || hasFarmland) && hasRes('grain_fields', 'fertile_floodplain')],
     ['livestock', hasPastoral && hasRes('grazing_land')],
-    ['fish', hasFishing && hasRes('fishing_grounds', 'river_fish')],
+    ['fish', fishSource],
     ['mill', hasMill && hasRes('river_mills')],
     ['game', hasRes('hunting_grounds') && (hasHunting || ['thorp', 'hamlet', 'village'].includes(tier))],
   ].filter(([, fired]) => fired).map(([name]) => name));
@@ -234,7 +240,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   if ((hasSubsistence || hasFarmland) && hasRes('grain_fields','fertile_floodplain')) agriMod += 0.25;
   if (hasFarmland && hasRes('fertile_floodplain'))  agriMod += 0.10;
   if (hasPastoral  && hasRes('grazing_land'))        agriMod += 0.10;
-  if (hasFishing   && hasRes('fishing_grounds','river_fish')) agriMod += 0.09;
+  if (fishSource)                                    agriMod += 0.09;
   if (hasMill      && hasRes('river_mills'))         agriMod += 0.08;
   agriMod = Math.min(agriMod, 0.5);
 

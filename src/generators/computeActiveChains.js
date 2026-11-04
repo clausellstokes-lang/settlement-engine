@@ -19,6 +19,7 @@ import {customDeps} from '../lib/dependencyEngine.js';
 import '../lib/prebuiltResourceChains.js';
 import { compareCodepoint } from '../domain/deterministicSort.js';
 import { goodsHeldByFoodRecord } from './economy/foodBalance.js';
+import { ownFoodGoodsHeldByFoodRecord } from '../domain/foodSurplus.js';
 import {institutionalCatalog, catalogIdForName} from '../data/institutionalCatalog.js';
 import {
   isMaterializedCustomContent,
@@ -756,7 +757,8 @@ export function deriveExportsFromChains(
     const gatesForResource = RESOURCE_GOOD_INST_GATES[rk] || {};
     // FOOD-EXPORTS: the land's food goods are offered as a surplus only when the food
     // record says the place grows more than it eats (foodBalance.js :: offersFoodSurplus).
-    goodsHeldByFoodRecord(rd.tradeGoods, foodRecord).forEach(g => {
+    // F3 unit 2b: its own-food processed goods (cheese, dried fruit, dairy) only on a surplus too.
+    ownFoodGoodsHeldByFoodRecord(goodsHeldByFoodRecord(rd.tradeGoods, foodRecord), rk, foodRecord).forEach(g => {
       const requiredInst = gatesForResource[g];
       if (requiredInst && !_hasInstForGate(requiredInst)) return; // institution not present
       exports.add(g);
@@ -768,7 +770,7 @@ export function deriveExportsFromChains(
   // Also gate byproduct outputs that require a specific additional institution.
   activeChains
     .filter(ch => ch.exportable && ch.status !== 'impaired' && !chainIsDepleted(ch))
-    .forEach(chain => goodsHeldByFoodRecord(chain.outputs, foodRecord).slice(0, 2).forEach(o => {
+    .forEach(chain => ownFoodGoodsHeldByFoodRecord(goodsHeldByFoodRecord(chain.outputs, foodRecord), chain.chainId, foodRecord).slice(0, 2).forEach(o => {
       const requiredInst = CHAIN_OUTPUT_INST_GATES[o];
       if (requiredInst) {
         const kws = Array.isArray(requiredInst) ? requiredInst : [requiredInst];
