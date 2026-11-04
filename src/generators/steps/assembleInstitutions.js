@@ -14,7 +14,9 @@ import {
   institutionalCatalog,
   catalogIdForName,
   institutionRowGuardsPass,
+  isFabricRow,
 } from '../../data/institutionalCatalog.js';
+import { densityFactor, scaleChance } from '../../data/institutionBudget.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js';
 import { pickVariant } from '../../kernel/proseHash.js';
@@ -299,11 +301,19 @@ registerStep('assembleInstitutions', {
   const instModifiers = (TERRAIN_DATA[terrainType] || {}).institutionModifiers || [];
   const population = typeof ctx.population === 'number' ? ctx.population : null;
 
+  // THE INSTITUTION BUDGET (X-46 car 3, docs/DESIGN_X46_SCALE_TRAIN.md §4): the count follows
+  // the population, the tier chooses the kinds. ONE density factor, computed here from the
+  // population before the first draw, multiplies every non-required, non-fabric row's authored
+  // chance; the guards, exclusive groups, resource multipliers, toggles and priority modifiers
+  // apply exactly as before, after it. It never adds, removes or re-orders a draw (THE PROMISE).
+  const density = densityFactor(tier, population);
+  const densityFor = (name) => (isFabricRow(tier, name) ? 1 : density);
+
   /**
    * Can this non-required catalog row roll here, and at what chance? Every gate the roll has
    * always applied, in its order, plus the registry's row guards (a stated population floor,
    * a named prerequisite). A row that cannot roll consumes no draw.
-   * @returns {{ baseChance: number, resourceMult: number, p: number } | null}
+   * @returns {{ baseChance: number, resourceMult: number, p: number, drawn: boolean } | null}
    */
   const rollFor = (category, name, inst) => {
     if (inst.minTier && tierIndex < TIER_ORDER.indexOf(inst.minTier)) return null;
@@ -326,8 +336,10 @@ registerStep('assembleInstitutions', {
       population,
       presentNames: new Set(institutions.map(i => i.name)),
     })) return null;
+    const neighbour = neighbourProfile || importedNeighbor;
+    const d = densityFor(name);
     const baseChance = getBaseChance(
-      inst.baseChance, category, name, effectiveConfig, neighbourProfile || importedNeighbor, goodsToggles
+      d === 1 ? inst.baseChance : scaleChance(inst.baseChance, d), category, name, effectiveConfig, neighbour, goodsToggles
     );
     const resourceMult = getResourceMultiplier(
       inst.tags || [],
@@ -336,7 +348,12 @@ registerStep('assembleInstitutions', {
       instModifiers,
       tier,
     );
-    return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult) };
+    // `drawn`: whether the row takes a draw, read at the AUTHORED chance — so a density of zero
+    // lowers a chance to nothing but never removes the draw an exclusive group would have taken.
+    const drawn = d === 1
+      ? baseChance * resourceMult > 0
+      : getBaseChance(inst.baseChance, category, name, effectiveConfig, neighbour, goodsToggles) * resourceMult > 0;
+    return { baseChance, resourceMult, p: Math.min(1, baseChance * resourceMult), drawn };
   };
 
   // THE WEIGHTED EXCLUSIVE GROUP (2026-09-30). A group used to go to whichever member the
@@ -453,14 +470,16 @@ registerStep('assembleInstitutions', {
                 && worldLaw.allowsInstitution({ category: member.category, name: member.name, ...member.inst });
             })
             .map(member => ({ ...member, roll: rollFor(member.category, member.name, member.inst) }))
-            .filter(member => member.roll && member.roll.p > 0);
+            .filter(member => member.roll && member.roll.drawn);
           if (candidates.length === 0) return;
           const weightTotal = candidates.reduce((sum, member) => sum + member.roll.p, 0);
           const fillChance = 1 - candidates.reduce((none, member) => none * (1 - member.roll.p), 1);
           const draw = rng.random();
           if (draw >= fillChance) return;
           let remaining = (draw / fillChance) * weightTotal;
-          let winner = candidates[candidates.length - 1];
+          // The rounding fallback is the last member that can hold the seat (every member, at the
+          // authored chances; a density of zero can leave a member drawn at no chance).
+          let winner = candidates.filter(member => member.roll.p > 0).pop() || candidates[candidates.length - 1];
           for (const member of candidates) {
             remaining -= member.roll.p;
             if (remaining < 0) { winner = member; break; }
