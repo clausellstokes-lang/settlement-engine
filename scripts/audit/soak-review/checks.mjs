@@ -69,6 +69,7 @@ const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|s
  */
 const INLAND_FISH = /\b(?:preserved|salted|salt|dried|smoked|pickled)[ -]fish\b/gi;
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
+const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage)\b/gi;
 
 /**
  * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland
@@ -79,9 +80,14 @@ const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
  */
 export function seaWordSentence(sentences, s) {
   const importsFish = (s?.resourceAnalysis?.imports?.critical || []).map((x) => String(x).toLowerCase()).includes('fish');
+  // Chair ruling (round 3, 1): where the record holds airship docking, the cascade's override
+  // (src/generators/steps/cascadePass.js) admits aerial docks and a harbour master's office
+  // regardless of route; their words are not sea words there.
+  const airship = (s?.institutions || []).some((i) => /airship/i.test(String(i?.name || '')));
   return sentences.find((x) => {
     let text = x.replace(INLAND_FISH, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
+    if (airship) text = text.replace(AIRSHIP_PORT, '');
     return SEA_WORDS.test(text);
   });
 }

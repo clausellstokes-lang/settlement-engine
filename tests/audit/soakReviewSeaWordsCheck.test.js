@@ -23,3 +23,25 @@ describe('A-11 sea words, the instrument', () => {
     }
   });
 });
+
+describe('A-11 and the airship override (chair ruling, round 3, 1)', () => {
+  const AIRSHIP = { institutions: [{ name: 'Airship docking (high magic)' }, { name: 'Docks/port facilities' }] };
+  it('airship docks inland are not sea words', () => {
+    const lines = sentencesOf("Via: docks/port facilities\nDocks/port facilities\nHarbour master's office\nRegulates port and airship traffic, assigns berths, collects anchorage fees.");
+    expect(seaWordSentence(lines, AIRSHIP)).toBeUndefined();
+  });
+  it('a plain inland town with a stray "docks" word: 1 finding', () => {
+    expect(seaWordSentence(['Via: docks/port facilities'], { institutions: [{ name: 'Town hall' }] })).toBe('Via: docks/port facilities');
+  });
+});
+
+describe('soak1k-83, airship docks in a desert on a mountain pass', () => {
+  it('gives no sea-word finding from its docks', async () => {
+    const { birth, ensureLaws } = await import('../../scripts/audit/soak-review/corpus.mjs');
+    await ensureLaws();
+    const s = birth(83).settlement;
+    const aerial = s.institutions.filter((i) => /Docks|Harbour master|Airship/.test(i.name)).flatMap((i) => [i.name, i.desc || '']);
+    expect(aerial.length).toBeGreaterThan(2);
+    expect(seaWordSentence(['Via: docks/port facilities', ...aerial], s)).toBeUndefined();
+  });
+});
