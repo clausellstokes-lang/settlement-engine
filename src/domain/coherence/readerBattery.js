@@ -100,7 +100,8 @@ export function validationOnPageFindings(s, surfaces) {
 /** @param {any} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
 const houseNames = (s) => (Array.isArray(s?.institutions) ? s.institutions : []).map((/** @type {unknown} */ i) => nativeSemanticName(i)).filter(Boolean);
 
-const LUXURY = /\b(?:luxury goods|fine textiles|camel herds|spices|silk|exotic goods|gems|gemstones)\b/i;
+// The chair's list, with Q2 (2026-11-04): quality textiles, fine cloth and dyed cloth are luxury-class too.
+const LUXURY = /\b(?:luxury goods|fine textiles|quality textiles|fine cloth|dyed cloth|camel herds|spices|silk|exotic goods|gems|gemstones)\b/i;
 
 /**
  * An Economic strength that names a resource trade, mapped to the houses that carry it. Every
@@ -132,7 +133,9 @@ export const STRENGTH_HOUSES = Object.freeze({
 
 /**
  * (a) a thorp or hamlet whose Imports list holds luxury-class goods (`[luxury-imports]`);
- * (b) an Economic strength naming a resource trade with no house behind it (`[strength-no-house]`).
+ * (b) an Economic strength naming a resource trade with no house behind it (`[~strength-no-house]`):
+ * informational, a COLUMN only (the chair's ruling Q3: the list is the terrain's fixed potential,
+ * which R2 relabels "what the land offers"), never folded into (a)'s line.
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function scaleListsFindings(s, surfaces) {
@@ -152,7 +155,7 @@ export function scaleListsFindings(s, surfaces) {
     const strengths = str(res[at + 1]).split('✓').map((x) => x.trim()).filter(Boolean);
     const houses = houseNames(s);
     const bare = strengths.filter((x) => STRENGTH_HOUSES[x] && !houses.some((h) => STRENGTH_HOUSES[x].test(h)));
-    if (bare.length) out.push({ surface: 'resources', quote: res[at + 1], detail: `[strength-no-house] ${bare.join(', ')}` });
+    if (bare.length) out.push({ surface: 'resources', quote: res[at + 1], detail: `[~strength-no-house] ${bare.join(', ')}` });
   }
   return out;
 }
@@ -249,25 +252,81 @@ export function shareTradeOrOffice(a, b) {
 
 const PRESUMING_KINDS = /** @type {const} */ (['Mentor and Successor', 'Professional Rivalry', 'Jurisdictional Tension']);
 
+/** The seat's holder: the tier's head role (`npcGenerator.js :: TIER_MANDATORY_ROLES`: Elder, Mayor, Governor) and the Lord Mayor. */
+const SEAT_ROLE = /^(?:Elder|Mayor|Lord Mayor|Governor)$/;
+/** Classes that share (the chair's ruling Q1): the same class, or noble with office. */
+const classesShare = (/** @type {string} */ ca, /** @type {string} */ cb) => ca === cb || (ca === 'noble' && cb === 'office') || (ca === 'office' && cb === 'noble');
+
 /**
- * A relationship whose kind presumes a shared trade or office between two roles that share
- * none: Mentor and Successor or Professional Rivalry across two trades / offices, Jurisdictional
- * Tension where neither role holds an office. Reads the Relationships tab's two-line rows
- * ("<A> <kind> <B>" over "<role A> · <strength> · <role B>"). Sub-case = the kind.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * The factions that hold or contest the seat, which count as ONE office (the chair's ruling Q1):
+ * the governing faction and every faction whose `contestsNiche` names it.
+ * @param {any} s @returns {Set<string>}
  */
-export function relationTypesFindings(_s, surfaces) {
+function seatFactions(s) {
+  const ps = s?.powerStructure ?? {};
+  const factions = Array.isArray(ps.factions) ? ps.factions : [];
+  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {any} */ f) => f?.isGoverning).map((/** @type {any} */ f) => str(f.faction ?? f.name))].filter(Boolean));
+  for (const f of factions) if (governing.has(str(f?.contestsNiche))) governing.add(str(f.faction ?? f.name));
+  return governing;
+}
+
+/**
+ * THE EXEMPTED RULE (the chair's ruling Q1, 2026-11-04, verbatim): "two roles share a class when
+ * they are in the same class of your map, OR when both are members of the same faction (the
+ * faction that holds or contests the seat counts as one office), OR when one holds the seat and
+ * the other sits in the body that holds it. Clergy↔clergy, arcane↔arcane, military↔military,
+ * criminal↔criminal, merchant↔merchant, noble↔office share. Professional Rivalry needs a shared
+ * trade or a shared market (two merchants, two craft masters), else fires. Jurisdictional Tension
+ * needs two office-holders (any two offices), else fires."
+ * Read here: the faction and seat exemptions apply to Mentor and Successor; Professional Rivalry
+ * needs two merchants or two trade roles; `other` roles stay unjudged for both.
+ * @param {string} kind @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b @param {Set<string>} seat
+ * @returns {{ fires: boolean|null, why: string }} null = not judged
+ */
+export function exemptedVerdict(kind, a, b, seat) {
+  const ca = classOfRole(a.role); const cb = classOfRole(b.role);
+  if (kind === 'Jurisdictional Tension') return { fires: !(holdsOffice(a.role) && holdsOffice(b.role)), why: 'two office-holders' };
+  if (ca === 'other' || cb === 'other') return { fires: null, why: '' };
+  if (kind === 'Professional Rivalry') return { fires: !((ca === 'merchant' && cb === 'merchant') || (ca === 'trade' && cb === 'trade')), why: ca === 'merchant' ? 'a shared market' : 'a shared trade' };
+  if (classesShare(ca, cb)) return { fires: false, why: 'same class' };
+  const fa = str(a.npc?.factionAffiliation); const fb = str(b.npc?.factionAffiliation);
+  if (fa && fa === fb) return { fires: false, why: 'same faction' };
+  if (fa && fb && seat.has(fa) && seat.has(fb)) return { fires: false, why: 'the seat\'s factions, one office' };
+  if ((SEAT_ROLE.test(a.role) && seat.has(fb)) || (SEAT_ROLE.test(b.role) && seat.has(fa))) return { fires: false, why: 'seat and its body' };
+  return { fires: true, why: '' };
+}
+
+/**
+ * A relationship whose kind presumes a shared trade or office between two roles that share none.
+ * Reads the Relationships tab's two-line rows ("<A> <kind> <B>" over "<role A> · <strength> ·
+ * <role B>") and the record's people by name (their factions) and seat.
+ * - The LINE is the exempted rule (`exemptedVerdict`); its sub-case is the kind.
+ * - `[~strict]`, a column only, is the first reading (`shareTradeOrOffice`; Jurisdictional
+ *   Tension where NEITHER role holds an office). A row strict alone flags is a column-only
+ *   finding, and its detail says which exemption spared it.
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function relationTypesFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.relationships);
+  const people = new Map((Array.isArray(s?.npcs) ? s.npcs : []).map((/** @type {any} */ n) => [str(n?.name), n]));
+  const seat = seatFactions(s);
   for (let i = 0; i + 1 < lines.length; i += 1) {
     const kind = PRESUMING_KINDS.find((k) => lines[i].includes(` ${k} `));
     if (!kind) continue;
     const parts = lines[i + 1].split(' · ');
     if (parts.length !== 3) continue;
-    const [a, , b] = parts;
-    const wrong = kind === 'Jurisdictional Tension' ? (!holdsOffice(a) && !holdsOffice(b)) : shareTradeOrOffice(a, b) === false;
-    if (wrong) out.push({ surface: 'relationships', quote: `${a} · ${kind} · ${b}`, detail: `[${kind.toLowerCase().replace(/ /g, '-')}] ${classOfRole(a)} / ${classOfRole(b)}` });
+    const [ra, , rb] = parts;
+    const at = lines[i].indexOf(` ${kind} `);
+    const a = { role: ra, npc: people.get(lines[i].slice(0, at)) };
+    const b = { role: rb, npc: people.get(lines[i].slice(at + kind.length + 2)) };
+    const strict = kind === 'Jurisdictional Tension' ? (!holdsOffice(ra) && !holdsOffice(rb)) : shareTradeOrOffice(ra, rb) === false;
+    const exempted = exemptedVerdict(kind, a, b, seat);
+    const classes = `${classOfRole(ra)} / ${classOfRole(rb)}`;
+    const quote = `${ra} · ${kind} · ${rb}`;
+    if (exempted.fires) out.push({ surface: 'relationships', quote, detail: `[${kind.toLowerCase().replace(/ /g, '-')}]${strict ? '[~strict]' : ''} ${classes}` });
+    else if (strict) out.push({ surface: 'relationships', quote, detail: `[~strict] ${classes} (exempted: ${exempted.why || 'not judged'})` });
   }
   return out;
 }

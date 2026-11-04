@@ -53,12 +53,15 @@ export function aggregate(out, meta) {
   const reader = new Map(); const readerTierPool = {}; const exportsByTier = {}; const dailyLineByTier = {}; const a05Seeds = new Set();
   const readerFinding = (row, f) => {
     const c = reader.get(f.check) ?? { check: f.check, occurrences: 0, seeds: new Set(), byTier: {}, surfaces: {}, sub: {}, cases: [] };
-    c.occurrences += 1; c.surfaces[f.surface] = (c.surfaces[f.surface] || 0) + 1;
-    // Every leading [tag] is a sub-case ("[no-market][no-watch] …" counts in both).
-    const tags = [...(String(f.detail || '').match(/^(?:\[[a-z0-9-]+\])+/)?.[0] ?? '').matchAll(/\[([a-z0-9-]+)\]/g)].map((m) => m[1]);
-    for (const tag of tags) { const t = (c.sub[tag] ??= { seeds: new Set(), byTier: {} }); if (!t.seeds.has(row.seed)) { t.seeds.add(row.seed); t.byTier[row.tier] = (t.byTier[row.tier] || 0) + 1; } }
-    if (!c.seeds.has(row.seed)) { c.seeds.add(row.seed); c.byTier[row.tier] = (c.byTier[row.tier] || 0) + 1; if (c.cases.length < 3) c.cases.push({ seed: row.seed, tier: row.tier, surface: f.surface, quote: f.quote, detail: f.detail }); }
     reader.set(f.check, c);
+    // Every leading [tag] is a sub-case ("[no-market][no-watch] …" counts in both). A [~tag] is a
+    // COLUMN only (the chair's rulings Q1, Q3): a finding whose every tag is one counts in its
+    // column and never in the class's line.
+    const tags = [...(String(f.detail || '').match(/^(?:\[~?[a-z0-9-]+\])+/)?.[0] ?? '').matchAll(/\[(~?[a-z0-9-]+)\]/g)].map((m) => m[1]);
+    for (const tag of tags) { const t = (c.sub[tag] ??= { seeds: new Set(), byTier: {} }); if (!t.seeds.has(row.seed)) { t.seeds.add(row.seed); t.byTier[row.tier] = (t.byTier[row.tier] || 0) + 1; } }
+    if (tags.length && tags.every((x) => x.startsWith('~'))) return;
+    c.occurrences += 1; c.surfaces[f.surface] = (c.surfaces[f.surface] || 0) + 1;
+    if (!c.seeds.has(row.seed)) { c.seeds.add(row.seed); c.byTier[row.tier] = (c.byTier[row.tier] || 0) + 1; if (c.cases.length < 3) c.cases.push({ seed: row.seed, tier: row.tier, surface: f.surface, quote: f.quote, detail: f.detail }); }
   };
   const readerPool = (row) => {
     readerTierPool[row.tier] = (readerTierPool[row.tier] || 0) + 1;

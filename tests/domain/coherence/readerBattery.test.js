@@ -45,10 +45,14 @@ describe('reader:scale-lists', () => {
     expect(R.scaleListsFindings(rec({ tier: 'city' }), { economics })).toEqual([]);
     expect(R.scaleListsFindings(rec({ tier: 'hamlet' }), { economics: 'Imports\nSalt Iron tools' })).toEqual([]);
   });
-  test('(b) a resource-trade strength with no house behind it; a house behind it is silent', () => {
+  test('(a) Quality textiles, fine cloth and dyed cloth are luxury-class in a thorp (the chair\'s ruling Q2)', () => {
+    expect(R.scaleListsFindings(rec({ tier: 'thorp' }), { economics: 'Imports\nCharcoal and fuel Grain Quality textiles Salt' })[0].detail).toBe('[luxury-imports] thorp: quality textiles');
+    expect(R.scaleListsFindings(rec({ tier: 'hamlet' }), { economics: 'Imports\nFine cloth Dyed cloth and quality textiles' })[0].detail).toBe('[luxury-imports] hamlet: fine cloth, dyed cloth, quality textiles');
+  });
+  test('(b) a resource-trade strength with no house behind it, a column only (the chair\'s ruling Q3); a house behind it is silent', () => {
     const resources = 'Terrain\nMountains\nEconomic strengths\n✓ Gemcutting ✓ Metalworking ✓ Mining ✓ Stoneworking\nResource Exploitation ▲';
     const rows = R.scaleListsFindings(rec({ institutions: [{ name: 'Blacksmiths (3-10)' }, { name: 'Stone quarry' }] }), { resources });
-    expect(rows.map((r) => r.detail)).toEqual(['[strength-no-house] Gemcutting, Mining']);
+    expect(rows.map((r) => r.detail)).toEqual(['[~strength-no-house] Gemcutting, Mining']);
     expect(R.scaleListsFindings(rec({ institutions: [{ name: 'Mine' }, { name: 'Jeweller' }, { name: 'Blacksmith' }, { name: 'Stone quarry' }] }), { resources })).toEqual([]);
   });
   test('(b) every house pattern names a house the catalogue holds', () => {
@@ -67,20 +71,46 @@ describe('reader:scale-lists', () => {
 describe('reader:relation-types', () => {
   const page = (kind, a, b) => `NPC Relationships (2) ▲\nAoife Brennan ${kind} Brigid Ward\n${a} · stable · ${b}\n▼`;
   test('Mentor and Successor across two trades, and across arcane and clergy', () => {
-    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Armourer', 'Gravedigger') })[0].detail).toBe('[mentor-and-successor] military / trade');
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Armourer', 'Gravedigger') })[0].detail).toBe('[mentor-and-successor][~strict] military / trade');
     expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Artificer', 'High Priest') })).toHaveLength(1);
-    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Miller', 'Blacksmith') })).toHaveLength(1);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Miller', 'Blacksmith') }).map((f) => f.detail)).toEqual(['[~strict] trade / trade (exempted: same class)']);
   });
   test('Professional Rivalry across a trade and a seat; Jurisdictional Tension where neither holds an office', () => {
-    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Gravedigger', 'Baron/Baroness') })[0].detail).toBe('[professional-rivalry] trade / noble');
-    expect(R.relationTypesFindings(rec(), { relationships: page('Jurisdictional Tension', 'Smuggler', 'Miller') })[0].detail).toBe('[jurisdictional-tension] criminal / trade');
+    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Gravedigger', 'Baron/Baroness') })[0].detail).toBe('[professional-rivalry][~strict] trade / noble');
+    expect(R.relationTypesFindings(rec(), { relationships: page('Jurisdictional Tension', 'Smuggler', 'Miller') })[0].detail).toBe('[jurisdictional-tension][~strict] criminal / trade');
   });
   test('negative control: a shared trade or office, an office on one side, and the kinds that presume nothing', () => {
     expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Blacksmith', 'Master Blacksmith') })).toEqual([]);
-    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Mayor', 'Council Member') })).toEqual([]);
+    expect(R.relationTypesFindings(rec(), { relationships: page('Professional Rivalry', 'Blacksmith', 'Master Blacksmith') })).toEqual([]);
     expect(R.relationTypesFindings(rec(), { relationships: page('Jurisdictional Tension', 'Garrison Commander', 'Reeve') })).toEqual([]);
     expect(R.relationTypesFindings(rec(), { relationships: page('Outstanding Debt', 'Armourer', 'Gravedigger') })).toEqual([]);
     expect(R.relationTypesFindings(rec(), { relationships: page('Mentor and Successor', 'Sage/Scholar', 'Mayor') })).toEqual([]);
+  });
+  // The chair's ruling Q1 (2026-11-04): the exempted rule is the line, the strict one a column.
+  const roster = (spec) => rec({
+    npcs: spec.map(([name, role, factionAffiliation]) => ({ name, role, factionAffiliation })),
+    powerStructure: { governingName: 'Guild Council', factions: [{ faction: 'Guild Council', isGoverning: true }, { faction: 'Merchant Rivals', contestsNiche: 'Guild Council' }, { faction: 'Military/Guard' }] },
+  });
+  const row = (a, kind, b, ra, rb) => `${a} ${kind} ${b}\n${ra} · stable · ${rb}\n▼`;
+  test('exempted: a Guild Master mentoring the Mayor of a guild-council town is silent; strict keeps a column', () => {
+    const s = roster([['Aoife Brennan', 'Guild Master', 'Guild Council'], ['Brigid Ward', 'Mayor', 'Guild Council']]);
+    expect(R.relationTypesFindings(s, { relationships: row('Aoife Brennan', 'Mentor and Successor', 'Brigid Ward', 'Guild Master', 'Mayor') }).map((f) => f.detail)).toEqual(['[~strict] merchant / office (exempted: same faction)']);
+  });
+  test('exempted: the seat holder and a member of the body that holds the seat, a contesting faction as one office', () => {
+    const s = roster([['Aoife Brennan', 'Master Weaver', 'Merchant Rivals'], ['Brigid Ward', 'Mayor', 'Guild Council']]);
+    expect(R.relationTypesFindings(s, { relationships: row('Aoife Brennan', 'Mentor and Successor', 'Brigid Ward', 'Master Weaver', 'Mayor') }).map((f) => f.detail)).toEqual(["[~strict] trade / office (exempted: the seat's factions, one office)"]);
+    const unaffiliated = roster([['Aoife Brennan', 'Master Weaver', 'Guild Council'], ['Brigid Ward', 'Mayor', '']]);
+    expect(R.relationTypesFindings(unaffiliated, { relationships: row('Aoife Brennan', 'Mentor and Successor', 'Brigid Ward', 'Master Weaver', 'Mayor') }).map((f) => f.detail)).toEqual(['[~strict] trade / office (exempted: seat and its body)']);
+  });
+  test('exempted still fires: a Gravedigger mentoring a Baron, and a Professional Rivalry with no shared trade or market', () => {
+    const s = roster([['Aoife Brennan', 'Gravedigger', 'Guild Council'], ['Brigid Ward', 'Baron/Baroness', 'Military/Guard']]);
+    expect(R.relationTypesFindings(s, { relationships: row('Aoife Brennan', 'Mentor and Successor', 'Brigid Ward', 'Gravedigger', 'Baron/Baroness') }).map((f) => f.detail)).toEqual(['[mentor-and-successor][~strict] trade / noble']);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Mayor', 'Council Member') }).map((f) => f.detail)).toEqual(['[professional-rivalry] office / office']);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Professional Rivalry', 'C D', 'Wealthiest Merchant', 'Guild Master') })).toEqual([]);
+  });
+  test('exempted Jurisdictional Tension needs two office-holders; strict fires only where neither holds one', () => {
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Jurisdictional Tension', 'C D', 'Garrison Commander', 'Miller') }).map((f) => f.detail)).toEqual(['[jurisdictional-tension] military / trade']);
+    expect(R.relationTypesFindings(roster([]), { relationships: row('A B', 'Jurisdictional Tension', 'C D', 'Garrison Commander', 'Reeve') })).toEqual([]);
   });
   test('the role map classes every role the generator draws', () => {
     expect(R.classOfRole('Guild Master')).toBe('merchant');
