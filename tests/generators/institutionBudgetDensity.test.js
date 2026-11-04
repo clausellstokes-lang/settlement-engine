@@ -64,8 +64,12 @@ function xMaxAuthored(tier) {
   }
   return best;
 }
-/** Read 2026-11-04 (thorp and village at river/forest; town and up at river/desert). */
-const X_MAX_AUTHORED = Object.freeze({ thorp: 1.27, hamlet: 1, village: 1.89, town: 2.05, city: 2.17, metropolis: 2.23 });
+/** Read 2026-11-04 (thorp and village at river/forest; town and up at river/desert).
+ *  Re-keyed by identity 2026-11-04 at the rung-1 landing (LANDING-2): F6 read 1.89 / 2.05 / 2.17 / 2.23 at its
+ *  own lane tip; composed onto the window branch (6d84aa834) the same function reads 2.04 / 2.13 / 2.57 / 2.73,
+ *  because the window carries exempt rows F6's base did not. Measured at 6d84aa834 and at the landed tip
+ *  alike; no draw moved (the constant is the test's reading of the catalogue, not a dial). */
+const X_MAX_AUTHORED = Object.freeze({ thorp: 1.27, hamlet: 1, village: 2.04, town: 2.13, city: 2.57, metropolis: 2.73 });
 
 // Re-keyed by identity 2026-11-04 (rung-1 pins, unit 1): the realised table was calibrated at
 // x46-3's own base, metropolis catalogue sum 59.27. Composed onto the window branch, one authored
@@ -73,7 +77,10 @@ const X_MAX_AUTHORED = Object.freeze({ thorp: 1.27, hamlet: 1, village: 1.89, to
 // scaler, chair ruling round 3 item 2), so the composed catalogue reads 59.23. Each move is named
 // here by row and pinned at its current value; the table's recorded sum is checked against the
 // catalogue PLUS the named moves, so any OTHER change still reds and still calls for --calibrate.
+// Re-keyed by identity 2026-11-04 (the rung-1 landing, LANDING-2): RUNG1B-F1 (5e9ffb220) added the
+// 'Village watch' row at village 0.2 after the calibration (absent before, so 0 -> 0.2), named the same way.
 const CATALOGUE_MOVES_SINCE_CALIBRATION = Object.freeze({
+  village: [['Village watch', 0, 0.2]],
   metropolis: [['Dragon resident', 0.1, 0.06]],
 });
 
@@ -188,7 +195,8 @@ describe('X-46 car 3 — the density factor', () => {
       for (let P = min; P <= Math.min(max, 20000); P += 1) if (densityFactor(tier, P, X_MAX_AUTHORED[tier]) === 0) ps.push(P);
       zero[tier] = ps.length ? [ps[0], ps[ps.length - 1], ps.length] : null;
     }
-    expect(zero).toEqual({ thorp: [5, 6, 2], hamlet: null, village: [75, 95, 21], town: null, city: null, metropolis: null });
+    // Re-keyed 2026-11-04 (LANDING-2) with X_MAX_AUTHORED above: village [75, 95, 21] -> [75, 100, 26] at X 2.04.
+    expect(zero).toEqual({ thorp: [5, 6, 2], hamlet: null, village: [75, 100, 26], town: null, city: null, metropolis: null });
   });
 
   it('is 1 where no population is known; scaleChance clamps the product to [0, 1]', () => {
