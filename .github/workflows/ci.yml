@@ -26,8 +26,14 @@ on:
   # CAUTION, second: this is the TRIGGER only. The "Fetch the ledger branch" step in
   # check-tests and coverage-floors still fetches that ref from origin, because two
   # suites read the ledger by ref, and it is deliberately untouched here.
+  #
+  # 2026-11-04 (CI-TRIGGERS, the rung-1 landing, LANDING-1 item 12): the push trigger is NARROWED to
+  # `master` and the `claude/**` branches. `lane/**` branches are TRANSPORT (operating standard rule 24a):
+  # their gate runs in the seats' containers before the push, and again here when the chair's PR opens,
+  # because `pull_request` below is unchanged. The ledger exclusion above is kept by construction: the
+  # ledger branch matches neither pattern. F35's purpose holds for every branch that becomes a PR.
   push:
-    branches: ['**', '!review-fixes-2026-07-08']
+    branches: [master, 'claude/**']
   pull_request:
     branches: [master, main]
   # Manual trigger + weekly cron drive the opt-in mutation-sweep job below (it is
