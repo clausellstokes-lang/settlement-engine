@@ -3,8 +3,8 @@
 // Dominant factions get extra institution chances in their category,
 // constrained by tier caps so small settlements don't over-inflate.
 
-import { institutionalCatalog, institutionRowGuardsPass, isFabricRow } from '../data/institutionalCatalog.js';
-import { densityFactor, scaleChance } from '../data/institutionBudget.js';
+import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
+import { densityFactor, isDensityExempt, scaleChance } from '../data/institutionBudget.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
@@ -208,7 +208,7 @@ export function applyFactionInstitutionBoosts(
         // a dampened nudge on the institution's REAL catalog rarity, run
         // through the same config-aware getBaseChance the assemble path uses.
         const multiplier = boost.strength === 'strong' ? 1.3 : 1.1;
-        const d = isFabricRow(tier, name) ? 1 : density;
+        const d = isDensityExempt(tier, name) ? 1 : density;
         const authored = def.baseChance || 0;
         const boostedChance = getBaseChance(
           (d === 1 ? authored : scaleChance(authored, d)) * multiplier,

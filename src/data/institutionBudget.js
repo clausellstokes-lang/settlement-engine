@@ -77,7 +77,7 @@ export function expectedHousesAt(population) {
 // non-fabric rows whose stated population floor the midpoint reaches) is still read at load as
 // `catalogueE`, and the table records the sum it was calibrated beside, so a catalogue change
 // that moves the sum reds tests/generators/institutionBudgetDensity.test.js.
-// Every non-required, non-fabric row's chance is multiplied by d (the product clamped to [0, 1]
+// Every non-required, non-fabric, non-route-required row's chance (`isDensityExempt`) is multiplied by d (the product clamped to [0, 1]
 // per row: `scaleChance`) in assembleInstitutions, the cascade and the faction pass. d is a pure
 // function of (tier, population), computed once before the first draw, and it never adds or
 // removes a draw; outcome gates later in the roll and the cascade's count move on some seeds
@@ -170,6 +170,29 @@ export function densityFactor(tier, population) {
     if (target <= r1) return d0 + ((d1 - d0) * (target - r0)) / (r1 - r0);
   }
   return points[points.length - 1][0];
+}
+
+/**
+ * THE ROUTE-REQUIRED EXEMPTION (the chair's ruling, 2026-11-04, rung-1 pins unit 2): a row the
+ * catalogue marks `tradeRouteRequired` or `terrainRequired` is the place's definition where its
+ * route or terrain admits it — the docks and the harbour master of a port, the ferry of a river
+ * crossing, the woodcutters of a forest — and the density factor never scales it, as it never
+ * scales a required or a fabric row: it rolls at its authored chance (d ≡ 1) at every population.
+ * Measured before the ruling: a port-route city's harbour master starved at the factor while d ≡ 1
+ * seated it (tests/joins/subsumption.test.js, "port-route city keeps its docks alongside the
+ * harbour master"). A row that only names `terrainAccess` is not marked and is scaled.
+ * @param {string} tier @param {string} name
+ * @returns {boolean} true when the factor does not apply to the row (fabric or route-required)
+ */
+export function isDensityExempt(tier, name) {
+  if (isFabricRow(tier, name)) return true;
+  const block = institutionalCatalog[tier];
+  if (!block) return false;
+  for (const group of Object.values(block)) {
+    const row = group[name];
+    if (row) return !!(row.tradeRouteRequired?.length || row.terrainRequired?.length);
+  }
+  return false;
 }
 
 /**

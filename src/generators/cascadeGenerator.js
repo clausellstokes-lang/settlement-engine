@@ -3,8 +3,8 @@
 // Shared cascade helpers for the settlement generation pipeline.
 
 import { random as _rng } from '../kernel/rngContext.js';
-import { institutionalCatalog, institutionRowGuardsPass, isFabricRow } from '../data/institutionalCatalog.js';
-import { densityFactor, scaleChance } from '../data/institutionBudget.js';
+import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
+import { densityFactor, isDensityExempt, scaleChance } from '../data/institutionBudget.js';
 import { institutionToggleFor } from './institutionToggleReader.js';
 import { SUPPLY_CHAIN_NEEDS } from '../data/goods/chains.js';
 import {
@@ -195,7 +195,7 @@ function applyCascadeInstitutions(institutions, tier, opts = {}) {
 
         // Catalog probability field is `baseChance` — institutionalCatalog
         // defines no `p` field, so any other read silently yields 0.
-        const d            = isFabricRow(t, name) ? 1 : density;
+        const d            = isDensityExempt(t, name) ? 1 : density;
         const baseChance   = d === 1 ? (data.baseChance || 0) : scaleChance(data.baseChance || 0, d);
         // Cap: cascade gives a second chance but can't guarantee appearances
         // Lower cap means cascades supplement rather than dominate generation

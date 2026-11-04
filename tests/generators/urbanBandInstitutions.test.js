@@ -336,8 +336,23 @@ describe('G6 — a druid is a priest where magic does not work (J30)', () => {
     expect([...druidSet].sort(), 'the druid set is derived from the registry').toEqual(['Druid Circle', 'Elder Grove Council']);
     const wrong = [];
     let lodges = 0;
+    // Re-seeded 2026-11-04 (rung-1 pins, unit 2; X-46 car 3, the institution budget): the lodge is a
+    // town-only 0.2 row, and the density factor scales it with the town's population, so g6World's
+    // fifteen towns a kind (seeds -0..-4) seat 1 lodge where they seated more than 5. The premise —
+    // lodges seated in magic-free towns — is carried by the first nine town seeds of the same
+    // family (same config) that seat one on the composed base; g6World stays the druid arms' corpus.
+    const LODGE_TOWNS = [
+      ['noMagic', 'celtic', 1], ['noMagic', 'celtic', 8], ['noMagic', 'celtic', 17], ['noMagic', 'norse', 7], ['noMagic', 'norse', 18],
+      ['deadDial', 'celtic', 5], ['deadDial', 'celtic', 15], ['deadDial', 'germanic', 17], ['deadDial', 'norse', 15],
+    ];
+    const lodgeTown = ([kind, culture, i]) => generateSettlementPipeline(
+      { settType: 'town', culture, terrainOverride: 'forest', tradeRouteAccess: i % 2 ? 'isolated' : 'road',
+        priorityReligion: 90, ...G6_WORLDS[kind] },
+      null,
+      { seed: `urban-band-druid-${kind}-town-${culture}-${i}`, customContent: {} },
+    );
     for (const kind of ['noMagic', 'deadDial']) {
-      for (const s of g6World(kind)) {
+      for (const s of LODGE_TOWNS.filter(([k]) => k === kind).map(lodgeTown)) {
         for (const r of (s.institutions || []).filter(x => x.name === "Warden's Lodge")) {
           lodges++;
           const authored = institutionalCatalog[s.tier]?.Defense?.[r.name]?.priorityCategory;
@@ -360,8 +375,13 @@ describe("G7 — Warden's Lodge defends in every world, and divine defence needs
   it("a seated Warden's Lodge raises monster defence in magic-free worlds", () => {
     let lodges = 0;
     const flat = [];
+    // Re-seeded 2026-11-04 (rung-1 pins, unit 2; X-46 car 3, the institution budget): the density
+    // factor scales the town-only 0.2 lodge with population, and seeds -0..-19 a kind seat 5 lodges
+    // (the guard wants more than 5). The premise is carried by the first eight seeds a kind of the
+    // same family that seat a lodge on the composed base (17 of -0..-59 do).
+    const LODGE_SEEDS = { noMagic: [25, 29, 30, 39, 40, 48, 50, 56], deadDial: [1, 4, 10, 14, 18, 21, 37, 44] };
     for (const kind of ['noMagic', 'deadDial']) {
-      for (let i = 0; i < 20; i++) {
+      for (const i of LODGE_SEEDS[kind]) {
         const s = generateSettlementPipeline(
           { settType: 'town', culture: 'celtic', terrainOverride: 'forest', tradeRouteAccess: 'road', priorityReligion: 90, ...G6_WORLDS[kind] },
           null, { seed: `urban-band-wardens-${kind}-${i}`, customContent: {} },

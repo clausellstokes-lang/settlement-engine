@@ -14,9 +14,8 @@ import {
   institutionalCatalog,
   catalogIdForName,
   institutionRowGuardsPass,
-  isFabricRow,
 } from '../../data/institutionalCatalog.js';
-import { densityFactor, scaleChance } from '../../data/institutionBudget.js';
+import { densityFactor, isDensityExempt, scaleChance } from '../../data/institutionBudget.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
 import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js';
 import { pickVariant } from '../../kernel/proseHash.js';
@@ -306,8 +305,10 @@ registerStep('assembleInstitutions', {
   // population before the first draw, multiplies every non-required, non-fabric row's authored
   // chance; the guards, exclusive groups, resource multipliers, toggles and priority modifiers
   // apply exactly as before, after it. It never adds, removes or re-orders a draw (THE PROMISE).
+  // The route-required rows (a trade route's or a terrain's own houses: the docks, the harbour
+  // master) are exempt like the fabric (`isDensityExempt`; the chair's ruling, 2026-11-04).
   const density = densityFactor(tier, population);
-  const densityFor = (name) => (isFabricRow(tier, name) ? 1 : density);
+  const densityFor = (name) => (isDensityExempt(tier, name) ? 1 : density);
 
   /**
    * Can this non-required catalog row roll here, and at what chance? Every gate the roll has
