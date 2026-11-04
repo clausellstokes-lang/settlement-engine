@@ -320,6 +320,26 @@ function resizeSeats(powerStructure, plan, rng) {
  * written. An already-conserved roster (any world born after this cure) is left untouched.
  * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
  */
+/**
+ * EVERY PATH CONSERVES (rung 1 N1 follow-up, the chair's ruling of 2026-11-04). Under a HELD
+ * roster `generateCoherence` skips `enrichNpcCoherence` (EM-R2), so the dispersal — and the
+ * `conservePower` inside it — never runs, and a v2 world regenerated with held NPCs reached
+ * the receipt with its resized roster off 100 (12 of 12 held regenerations of soak seeds).
+ * Assembly calls this once the coherence tail has finished with the roster, whichever path
+ * that tail took. Returns the input BY REFERENCE for a v1 world and for a roster already at
+ * 100; otherwise a new powerStructure whose seats are copies, renormalised. No draw.
+ *
+ * @param {{config?: Record<string, unknown>,
+ *          powerStructure?: {factions?: Array<Record<string, unknown>>}|null}} input
+ */
+export function conserveSeatPower(input) {
+  const powerStructure = input.powerStructure;
+  if (!rollsRegisterVii(input.config || {}) || !powerStructure) return powerStructure;
+  const copy = { ...powerStructure };
+  conservePower(copy);
+  return copy.factions === powerStructure.factions ? powerStructure : copy;
+}
+
 function conservePower(powerStructure) {
   const factions = powerStructure?.factions;
   if (!Array.isArray(factions) || !factions.length) return;
