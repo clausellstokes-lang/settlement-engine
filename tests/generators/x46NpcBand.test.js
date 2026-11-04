@@ -157,10 +157,6 @@ describe('X-46 car 4 (iii) — dark, the world is byte-identical; lit (in this t
   // (all sixty moved). The sixty digests were re-captured by the same recipe at the composed tip
   // (lane/window-rung1-2026-11-04 after 945fbaf4, each born twice and equal), so the arm now guards
   // the DARK PATH against future drift, which is its purpose.
-  // RE-CAPTURED 2026-11-04 (rung-1 pins, unit 5): stale again after x46-3 moved generation (the
-  // institution budget composed at 90dc22f1) and this lane's two generation moves on top of it (the
-  // route-required exemption, the 60,000 anchor 120 → 93). All sixty moved; re-captured by the same
-  // recipe at lane/rung1-pins-2026-11-04 after d6ffa1b, each seed born twice and equal.
   const DARK = /** @type {Record<string, string>} */ (JSON.parse(readFileSync(
     fileURLToPath(new URL('../fixtures/x46-npc-band-dark-digests.json', import.meta.url)), 'utf8',
   )));

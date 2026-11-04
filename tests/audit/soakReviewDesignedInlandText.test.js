@@ -10,8 +10,8 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 describe('designed inland text, on its seeds', () => {
   beforeAll(async () => { await ensureLaws(); });
 
-  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a Fishmonger with the designed inland text): was 968, 266. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it.each([560, 668])('soak1k-%i: the Fishmonger\'s designed inland text gives 0 findings', (i) => {
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a Fishmonger with the designed inland text): was 968, 266.
+  it.each([62, 218])('soak1k-%i: the Fishmonger\'s designed inland text gives 0 findings', (i) => {
     const s = birth(i).settlement;
     const monger = s.institutions.find((x) => x.name === 'Fishmonger');
     expect(monger?.desc).toMatch(/inland/i);

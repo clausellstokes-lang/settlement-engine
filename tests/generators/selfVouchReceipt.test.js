@@ -30,9 +30,9 @@ function verdict(settlement) {
 describe('the self-vouch line follows the receipt\'s battery judgment', () => {
   beforeAll(async () => { await ensureLaws(); });
 
-  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (no critical issue, and the battery finds food-words, defense-words and tier-noun): was soak1k-40. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it('soak1k-178: the battery finds the contradictions and the page does not vouch', () => {
-    const { settlement } = birth(178);
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (no critical issue, and the battery finds food-words, defense-words and tier-noun): was soak1k-40.
+  it('soak1k-16: the battery finds the contradictions and the page does not vouch', () => {
+    const { settlement } = birth(16);
     expect(settlement.economicViability.metrics.criticalIssueCount).toBe(0);
     const judgment = battery(settlement);
     expect(judgment.status).toBe('needs_review');
@@ -43,16 +43,16 @@ describe('the self-vouch line follows the receipt\'s battery judgment', () => {
     expect(verdict(settlement)).toMatch(/cannot all be true/);
   });
 
-  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a record the battery finds clean that prints this line): was soak1k-278. Re-picked 2026-11-04 after x46-1b and x46-3 composed (the budget moved the corpus again).
-  it('soak1k-6: a record the battery finds clean still prints the line', () => {
-    const { settlement } = birth(6);
+  // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (a record the battery finds clean that prints this line): was soak1k-278.
+  it('soak1k-1: a record the battery finds clean still prints the line', () => {
+    const { settlement } = birth(1);
     expect(battery(settlement)).toMatchObject({ status: 'pass', findings: [] });
     expect(verdict(settlement)).toMatch(/contradicts anything else in it/);
   });
 
   // 2026-11-04 (chair's ruling P1): SOAK-3 re-dealt the corpus (the de-aliased cellFor), so the old seed no longer carries this case's premise; re-pointed to the first seed of the new corpus that does (the clean record above): was soak1k-278.
   it('a receipt without the judgment (a save older than it) is not vouched for', () => {
-    const { settlement } = birth(6);
+    const { settlement } = birth(1);
     const older = {
       ...settlement,
       generationCoherenceReceipt: {
