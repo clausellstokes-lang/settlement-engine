@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-04, X-46 car 2 (lane x46-2-thresholds) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE THIRTY-THIRD MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json. THE MOVER, FOUND: first-parent step d4bf6431c of the rung-1
+ * landing and nothing else (X-46 car 2 (lane x46-2-thresholds): the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner's household column, Money changers' floor 3,000 -> 2,000). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S2 (the tree of d4bf6431c with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `cab21525…` -> `48e1248a…`.
+ *
  * ── 2026-11-04, X-46 car 1 (lane x46-train, U1–U4) (RUNG 1 OF THE SOAK LADDER) ──
  * THE THIRTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -559,7 +569,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'cab21525c0d689130a4d1d56a3c2638eb7e9d25141b252da7a5e370dec9f42fc';
+const PRE_COUPLING_CORPUS_SHA = '48e1248afef6c0e00d40775a095d6d0f3ae901fe8c9de4026fa7cc167e17843b';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
