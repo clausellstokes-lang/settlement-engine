@@ -123,3 +123,16 @@ describe('reader:hook-pools', () => {
     expect(R.hookPoolsFindings(rec(), { plot_hooks: 'NPCs\nThey\'re watching the well.' })).toEqual([]);
   });
 });
+
+// ── 6. traditions-water
+describe('reader:traditions-water', () => {
+  const traditions = 'The founding traditions of Innissike.\n⚓\nThe Landfall Procession\nFirst Landing\nKept in Seedtime, the tenth week.\n∿\nThe Tide Fair\nTide';
+  test('a Landfall and a Tide Fair on a plains road', () => {
+    expect(R.traditionsWaterFindings(rec(), { traditions })).toEqual([{ surface: 'traditions', quote: 'The Landfall Procession', detail: 'terrain plains, route road' }]);
+  });
+  test('negative control: the same traditions by a river, and land traditions on the road', () => {
+    expect(R.traditionsWaterFindings(rec({ config: { terrainType: 'riverside', tradeRouteAccess: 'road' } }), { traditions })).toEqual([]);
+    expect(R.traditionsWaterFindings(rec({ config: { terrainType: 'plains', tradeRouteAccess: 'port' } }), { traditions })).toEqual([]);
+    expect(R.traditionsWaterFindings(rec(), { traditions: 'The Great Vigil\nMarket\nThe Long Sun Contest\nLong Sun' })).toEqual([]);
+  });
+});

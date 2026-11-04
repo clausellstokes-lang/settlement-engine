@@ -331,6 +331,25 @@ export function hookPoolsFindings(s, surfaces) {
   return out;
 }
 
+// ──────────────────────────── 6. traditions-water ────────────────────────────
+
+/** Water by terrain, the chair's reading: coastal, riverside or lake. */
+const WATER_TERRAIN = /coast|river|lake/i;
+const WATER_TRADITION = /\b(?:Tide|Landfall|Landing|Sea|Harbou?r|Fleet)\b/;
+const NO_WATER_ROUTE = /^(?!port$|river$)/;
+
+/**
+ * A Traditions-tab tradition keyed on Tide, Landfall, Landing, Sea, Harbour or Fleet in a place
+ * without water access: route road / overland / isolated / none and terrain not coastal,
+ * riverside or lake.
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function traditionsWaterFindings(s, surfaces) {
+  if (!NO_WATER_ROUTE.test(routeOf(s)) || WATER_TERRAIN.test(terrainOf(s))) return [];
+  const hit = linesOf(surfaces.traditions).find((x) => WATER_TRADITION.test(x));
+  return hit ? [{ surface: 'traditions', quote: hit, detail: `terrain ${terrainOf(s)}, route ${routeOf(s) || 'none'}` }] : [];
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -339,6 +358,7 @@ const RUNS = Object.freeze({
   'relation-types': relationTypesFindings,
   'tension-memory': tensionMemoryFindings,
   'hook-pools': hookPoolsFindings,
+  'traditions-water': traditionsWaterFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */
