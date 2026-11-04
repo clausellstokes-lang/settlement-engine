@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate } from '../domain/defense/defenseFacts.js'; // R6: one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js';
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; // F5: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -114,7 +114,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = generateNPCGoal(role, category, config);
+  const goal = ((g) => (g && typeof g === 'object' ? { ...g, short: inlandHookLine(g.short, worldLaw.portKind), long: inlandHookLine(g.long, worldLaw.portKind) } : inlandHookLine(g, worldLaw.portKind)))(generateNPCGoal(role, category, config)); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js), draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -122,8 +122,8 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = generatePlotHook(category, config, hookRegistry);
-  const title2 = _rng() > 0.5 ? generatePlotHook(category, config, hookRegistry) : null;
+  const title1 = inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind);
+  const title2 = _rng() > 0.5 ? inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCPowerLevel(role);
   return {
