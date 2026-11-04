@@ -4,7 +4,7 @@ import { SEASONS_TUNING } from './seasons.js';
 // WAVE P4 (THE WORLD'S HAND, docs/DESIGN_DEMOGRAPHIC_ENGINE.md law 5 and §7): the
 // demographic incidence coupling. This is THE ONE SEAM stressor incidence has, and the
 // coupling is added HERE rather than through the causal derivers because §0b measured
-// two traps on that route: the population contributors are STEPS at pop >= 5000 (so the
+// two traps on that route: the population contributors are STEPS at TIER_STAMP_CUTS.city (so the
 // whole runaway range collapses into one bucket) and the disease consumer reads housing
 // pressure through a HARD GATE at 45 (so a smooth term routed through it arrives as a
 // step anyway). The lift below is continuous and lands beside that gate, never through

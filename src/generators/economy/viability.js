@@ -663,11 +663,11 @@ export function hasMarketInstitution(institutions) {
 
 /**
  * IS THIS A CITY-SCALE PLACE? The two structural cuts below ("no trade infrastructure",
- * "insufficient craft industries") used to read a fixed `population > 5000`, which is today's
- * town/city band edge spelled as a literal. They read the TIER now, so when the scale program
- * moves the bands the cuts move with them. A place with no known tier falls back to its
- * population's tier (`popToTier`), and a place with neither is not city-scale. At today's
- * bands the two readings agree everywhere (tests/generators/smallPlaceMarket.test.js). The
+ * "insufficient craft industries") used to read a fixed 5,000-person cut, the old bands'
+ * town/city edge spelled as a literal. They read the TIER now, so when the scale program
+ * moves the bands the cuts move with them (X-46 moved them; the stamp's city cut is 2,250). A
+ * place with no known tier falls back to its population's tier (`popToTier`), and a place with
+ * neither is not city-scale. At that ruling's bands the readings agreed (tests/generators/smallPlaceMarket.test.js). The
  * assembler passes the settlement's OWN tier, never its 'village' default.
  *
  * ⚠ THESE HELPERS SIT AT THE END OF THE FILE ON PURPOSE: the prose wiring census's holder
