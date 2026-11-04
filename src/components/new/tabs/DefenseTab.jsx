@@ -142,6 +142,22 @@ export const THREAT_ROW_KEY = Object.freeze({
  */
 export const STATUS_IS_THE_GRADE = Object.freeze(['Economic Backing']);
 
+/**
+ * X-50: `text` without the sentences `printed` already carries verbatim — only a boilerplate
+ * sentence (eight words or more, the soak battery's floor) is dropped, so a short shared phrase
+ * stays where it is. `text` comes back unchanged when nothing repeats.
+ * @param {unknown} text @param {unknown} printed
+ * @returns {string}
+ */
+export function sentencesNotIn(text, printed) {
+  const t = typeof text === 'string' ? text : '';
+  const p = typeof printed === 'string' ? printed : '';
+  if (!t || !p) return t;
+  const sentences = t.split(/(?<=[.!?])\s+/);
+  const kept = sentences.filter((x) => !(x.trim().split(/\s+/).length >= 8 && p.includes(x.trim())));
+  return kept.length === sentences.length ? t : kept.join(' ');
+}
+
 export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false, playerView = false}) {
   const [expandedThreat, setExpandedThreat] = useState(null);
   const [showForces, setShowForces] = useState(true);
@@ -506,12 +522,19 @@ export function DefenseTab({ settlement:r, narrativeNote, publicDossier = false,
           {crimeTypes.length>0&&<div>
             <div style={{fontSize:chromeFontSize(FS.xxs, isMobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Active crime patterns</div>
             <div style={{display:'flex',flexDirection:'column',gap:5}}>
-              {crimeTypes.map((ct,i)=>(
+              {crimeTypes.map((ct,i)=>{
+                // X-50 (BOILERPLATE ONCE; the soak dry run's R2): a pattern whose description
+                // repeats a sentence the public-order paragraph above already printed (a slave
+                // revolt's "Active armed conflict between revolt participants …") keeps its name
+                // and the rest of its description; the sentence is said once, up there.
+                const desc = sentencesNotIn(ct.desc, sp.safetyDesc);
+                return (
                 <div key={i} style={{background:swatch['#FAF8F4'],border:'1px solid #e0d0b0',padding:'7px 10px'}}>
-                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:2}}>{ct.type}</div>
-                  <div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(ct.desc, 200)}</div>
+                  <div style={{fontSize:chromeFontSize(FS.xs, isMobile),fontWeight:700,color:swatch.inkMag2,marginBottom:desc?2:0}}>{ct.type}</div>
+                  {desc&&<div style={{fontSize: proseFontSize(FS['11.5'], isMobile),color:swatch.inkMag3,lineHeight:1.4}}>{truncateAtWord(desc, 200)}</div>}
                 </div>
-              ))}
+                );
+              })}
             </div>
           </div>}
 
