@@ -16,6 +16,7 @@ import {
   institutionRowGuardsPass,
 } from '../../data/institutionalCatalog.js';
 import { INSTITUTION_DESC_VARIANTS } from '../../data/institutionDescVariants.js';
+import { INLAND_DESCRIPTIONS } from '../../data/inlandDescriptions.js';
 import { pickVariant } from '../../kernel/proseHash.js';
 import { TERRAIN_DATA } from '../../data/geographyData.js';
 import { RESOURCE_DATA } from '../../data/goods/identity.js';
@@ -41,8 +42,8 @@ import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleR
 import { institutionToggleFor } from '../institutionToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
 import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
-/** A description that says a settlement builds, sells or supplies ships (A-11). */
-const SHIP_WORD = /\bships?\b/i;
+/** A description that says a settlement builds, sells or supplies ships, or sells the day's catch (A-11). */
+const SHIP_WORD = /\bships?\b|\bday's catch\b|\bfish (?:doesn't|does not|will not) wait\b|\bkeeps no better than a day\b/i;
 
 /**
  * A row's ship-free description where the water fact is 'none' (chair ruling, round 3, 3b): the
@@ -59,7 +60,8 @@ export function shipFreeDesc(inst, tier, seed) {
   if (!desc || !SHIP_WORD.test(desc)) return desc;
   const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`] || [];
   const dry = [desc, ...variants].filter((text) => !SHIP_WORD.test(text));
-  return dry.length ? pickVariant(dry, `${seed}:${inst.name}`) : desc;
+  if (dry.length) return pickVariant(dry, `${seed}:${inst.name}`);
+  return INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`] || desc;
 }
 
 // Compatibility export: callers historically imported the table from this
@@ -885,7 +887,8 @@ registerStep('assembleInstitutions', {
       // none keeps every variant (no sentence is authored here). Still draw-free.
       const pool = [inst.desc, ...variants];
       const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
-      inst.desc = speakTierNoun(pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), tierNounFor(tier));
+      const inland = dry.length ? null : INLAND_DESCRIPTIONS[`${tier}|${inst.category}|${inst.name}`];
+      inst.desc = speakTierNoun(inland || pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), tierNounFor(tier));
     }
   }
 

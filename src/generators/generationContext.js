@@ -307,12 +307,12 @@ export function createGenerationWorldLaw(config = {}, resolved = {}) {
       && isGeneratorOwnedEntity(entity)
       && textAssertsMaritimeCapability(roleText)
     ) return false;
-    // A-11 (soak 1000 row 7, chair ruling 4b): a fisher only where there is water to fish;
+    // A-11 (soak 1000 row 7, chair ruling 4b): a fisher, a ship captain or a sailor only where there is water;
     // a river counts (`portKind` 'river'), so only 'none' refuses.
     if (
       portKind === 'none'
       && isGeneratorOwnedEntity(entity)
-      && /\bfisher(?:man|men|woman|folk)?\b/i.test(roleText)
+      && /\bfisher(?:man|men|woman|folk)?\b|\bship(?:'s)? captain\b|\bsailors?\b/i.test(roleText)
     ) return false;
     if (magicEnabled) return true;
     if (carriesExplicitMagicMetadata(entity, entity.category)) return false;

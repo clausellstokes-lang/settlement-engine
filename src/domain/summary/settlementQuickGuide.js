@@ -536,7 +536,9 @@ const SCOPE_PHRASE = Object.freeze({
  */
 function scopePhrase(cultureKey, settlement) {
   if (!Object.hasOwn(SCOPE_PHRASE, cultureKey)) return '';
-  if (WATERSIDE_SCOPES.has(cultureKey) && isLandlocked(settlement)) return '';
+  if (WATERSIDE_SCOPES.has(cultureKey) && isLandlocked(settlement)) {
+    return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? INLAND_SCOPE_PHRASE[cultureKey] : '';
+  }
   return SCOPE_PHRASE[cultureKey];
 }
 
@@ -549,6 +551,15 @@ function scopePhrase(cultureKey, settlement) {
  * no fallback). A record with no config is legacy and unread: the phrase stands as it always did.
  * @type {ReadonlySet<string>}
  */
+/**
+ * A waterside scope's landlocked form, where one is authored (2026-11-04, under the owner's
+ * delegation): the Greek phrase without its harbour. A culture with none takes the plain sentence.
+ * @type {Readonly<Record<string, string>>}
+ */
+const INLAND_SCOPE_PHRASE = Object.freeze({
+  greek: 'built around the agora, on hillside ground and civic association',
+});
+
 const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the hall and the water", slavic "between river and forest" (chair ruling 5)
 
 /** @param {SettlementQuickGuideSource} settlement */

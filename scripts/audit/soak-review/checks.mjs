@@ -23,6 +23,7 @@ import { inspectSettlement } from '../generation-certification-soak.mjs';
 import { normalizeRenderedSentence } from '../phrase-repetition.mjs';
 import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery.js';
 import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
+import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -113,6 +114,17 @@ export function seaWordSentence(sentences, s) {
  */
 export function arenaSpectacleSentence(sentences) {
   return sentences.find((x) => /\bgladiatorial (?:combat|games|fights?)\b/i.test(x));
+}
+
+/**
+ * A-04's alchemist (2026-11-04, under the owner's delegation): one the catalogue licenses 'none'
+ * (a chemical trade the dead-magic world keeps, MF-CH2B) is no contradiction; only an alchemist
+ * whose licence needs magic, or an unlicensed one, counts.
+ * @param {any[]|undefined} institutions
+ */
+export function magicAlchemist(institutions) {
+  return (institutions || []).find((i) => /alchem/i.test(i?.name || '')
+    && institutionCatalogMagicLicence(i.name) !== 'none');
 }
 
 /** Does the place have water a boat or a net could use? */
@@ -215,7 +227,7 @@ export function reviewSettlement(s, config, r) {
   if (!magicOn) {
     const dragon = sentencesOf(screenText).find((x) => /\bdragons?\b/i.test(x));
     if (dragon) add('A-04:dragon-magic-off', 'screen', dragon);
-    const alch = (s.institutions || []).find((i) => /alchem/i.test(i?.name || ''));
+    const alch = magicAlchemist(s.institutions);
     if (alch) add('A-04:alchemist-magic-off', 'record', alch.name);
   }
 
