@@ -10,7 +10,7 @@
  * the cobbler's guild "shoe the town" in 91 places, the chandler "The town depends on it for
  * lighting" in 76, the tanners "where a town can manage it" in 38, all cities and
  * metropolises) and the Gate Tolls income line "collected at the town gates" (economicState,
- * 28 cities; its arm lands with the toll unit's own commit).
+ * 28 cities).
  *
  * THE CURE'S SHAPE: the drawn string passes through the dossier kernel's `speakTierNoun` with
  * the settlement's tier noun where it is drawn — the SIZE ruling 2 precedent
@@ -38,12 +38,16 @@ const ROUTED = [
   /The \p{L}+ depends on it for lighting/u,
   /downstream of the rest where a \p{L}+ can manage it/u,
 ];
+const TOLLS = /Entry and exit tolls collected at the \p{L}+ gates/u;
+const TOWN_TOLLS = 'Entry and exit tolls collected at the town gates from merchants and travellers.';
 
 /** @type {Record<string, any[]>} */
 const BY_TIER = { city: [], metropolis: [], thorp: [], town: [] };
 
 /** Every drawn institution desc a reader sees. */
 const drawn = (s) => s.institutions.filter((i) => typeof i.desc === 'string').map((i) => ({ where: i.name, text: i.desc }));
+/** Every income line a reader sees (the Economics tab, the PDF). */
+const income = (s) => (s.economicState?.incomeSources || []).map((x) => ({ where: x.source, text: x.desc || '' }));
 
 beforeAll(async () => {
   await loadGenerationLawPayloads();
@@ -67,6 +71,8 @@ describe('the place\'s own noun in drawn institution text', () => {
     const routed = large.flatMap(drawn).filter(({ text }) => ROUTED.some((rx) => rx.test(text)));
     // Non-vacuity, true before and after the cure: the probe at 39038801 read 10 such lines here.
     expect(routed.length).toBeGreaterThanOrEqual(5);
+    // The probe read 8 Gate Tolls lines over these 8 road cities.
+    expect(BY_TIER.city.flatMap(income).filter(({ text }) => TOLLS.test(text)).length).toBeGreaterThanOrEqual(4);
   });
 
   test('no city, metropolis or thorp calls itself a town in a drawn institution desc (the customs collocation named)', () => {
@@ -80,6 +86,24 @@ describe('the place\'s own noun in drawn institution text', () => {
       }
     }
     expect(offenders).toEqual([]);
+  });
+
+  test('no city, metropolis or thorp calls itself a town in an income line', () => {
+    const offenders = [];
+    for (const tier of ['city', 'metropolis', 'thorp']) {
+      for (const s of BY_TIER[tier]) {
+        for (const { where, text } of income(s)) {
+          for (const f of tierNounFindings(s, text)) offenders.push(`${tier} ${s.name} / ${where}: …${f.context}…`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  test('a town\'s Gate Tolls line is the pool\'s own, byte for byte', () => {
+    const lines = BY_TIER.town.flatMap(income).filter(({ where }) => where === 'Gate Tolls');
+    expect(lines.length).toBeGreaterThan(0);
+    expect(lines.filter(({ text }) => text !== TOWN_TOLLS)).toEqual([]);
   });
 
   test('a town is identity: every drawn institution desc is a pool member verbatim', () => {

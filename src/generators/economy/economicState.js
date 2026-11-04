@@ -192,7 +192,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Gate Tolls',
       percentage: 10,
-      desc: 'Entry and exit tolls collected at the town gates from merchants and travellers.',
+      desc: speakTierNoun('Entry and exit tolls collected at the town gates from merchants and travellers.', tierNounFor(tier)),
     });
   }
 
@@ -895,3 +895,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
       ),
     };
 };
+import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
