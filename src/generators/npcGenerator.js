@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; // F5: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g) => (g && typeof g === 'object' ? { ...g, short: inlandHookLine(g.short, worldLaw.portKind), long: inlandHookLine(g.long, worldLaw.portKind) } : inlandHookLine(g, worldLaw.portKind)))(generateNPCGoal(role, category, config)); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js), draw-free
+  const goal = ((g, d) => (g && typeof g === 'object' ? { ...g, short: defenceTwinLine(inlandHookLine(g.short, worldLaw.portKind), d), long: defenceTwinLine(inlandHookLine(g.long, worldLaw.portKind), d) } : defenceTwinLine(inlandHookLine(g, worldLaw.portKind), d)))(generateNPCGoal(role, category, config), defenseFactsOf({ institutions })); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js); F10: a defence line its defence-free twin where the roster lacks the thing (data/defenceTwinLines.js); both draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -1232,8 +1232,8 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
                 ? stressOverrides.merchant
                 : null;
         if (override) {
-          enriched.goal = { short: override.short, long: enriched.goal.long || override.short };
-          if (override.note) enriched.stressNote = override.note;
+          const defence = defenseFactsOf({ institutions }); enriched.goal = { short: defenceTwinLine(override.short, defence), long: enriched.goal.long || defenceTwinLine(override.short, defence) }; // F10: data/defenceTwinLines.js, draw-free
+          if (override.note) enriched.stressNote = defenceTwinLine(override.note, defence);
         }
       }
     }
