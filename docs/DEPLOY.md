@@ -102,6 +102,55 @@ generation in the browser. Open, a generation the service cannot make (an import
 neighbour, reviewed homebrew, content tunables) is REFUSED with a typed error, never
 made locally instead; leave it off until `engine-generate` is deployed and proven.
 
+### Turning the engine service on
+
+The owner's steps (docs/DESIGN_ENGINE_SERVICE.md "What the owner does"), once:
+
+1. **Supabase:** confirm edge functions are enabled on the project, and read the plan's
+   invocation allowance before launch (the plan page is the authority).
+2. **GitHub:** the Supabase access token as a repository secret for the deploy job, so the
+   functions ship from CI at a green commit rather than by hand.
+3. **Vercel:** `VITE_ENGINE_REMOTE` — off until the service is proven, `true` at launch.
+4. **The dials:** the rate limits in `supabase/functions/engine-generate/index.ts ::
+   ENGINE_GENERATE_RATE_LIMITS` (6 a minute, 200 a day per account or IP; staff unlimited),
+   and the veto on any rule in the design.
+
+The order, every time it is turned on:
+
+1. **Deploy the functions from a green commit:** `engine-generate` and `engine-version`
+   (see "Edge function — manual" below; clean tree, pushed, CI-green commit only).
+2. **Verify `engine-version`:** `GET <VITE_SUPABASE_URL>/functions/v1/engine-version` answers
+   `{ engineVersion, builtFromCommit, deployedAt }`; `engineVersion` must equal
+   `supabase/functions/_shared/engineBundle.meta.json :: engineVersion` at the commit Vercel
+   will build (same engine on both sides; otherwise a pinned caller is answered 409
+   `engine_version_retired`). `builtFromCommit` is the commit the bundle was BUILT from, not
+   necessarily the one deployed; `deployedAt` is the bundle's build stamp.
+3. **Set `VITE_ENGINE_REMOTE=true`** in Vercel → Project → Settings → Environment Variables
+   (Production).
+4. **Redeploy** (the value is baked in at build time). A build with the flag on also LEAVES
+   THE GENERATOR OUT of the client (`vite.config.js :: engineAbsentWhenRemote`;
+   `tests/build/engineAbsentWhenRemote.test.js`): no generation worker, no pipeline, no step
+   registry in `dist/`.
+5. **Watch:** generations today and this month by outcome. The admin analytics line for
+   this is NOT BUILT YET (ENGINE-3 handed it back); until it lands, watch the function's
+   invocations and errors in the Supabase dashboard (Edge Functions → engine-generate → Logs).
+
+**What stops working with the flag on, by design:** the paths that still need a LOCAL
+engine refuse with the typed `engine_local_absent` instead of generating, because the
+engine service serves only a fresh generation today: section regeneration (NPCs, history),
+the DM re-derivation, the surveyor's construction preview, the content-binding sample, the
+instant-world composer and the custom-content preview. Try them on a Preview deployment
+with the flag on before flipping Production.
+
+**Rollback:** set `VITE_ENGINE_REMOTE` to anything but `true` (or delete it) → **Redeploy**.
+The local engine is back in the next build; saved towns are unaffected either way.
+
+**What stays in the browser regardless of the flag:** the world pulse
+(`src/domain/worldPulse/`, the advance interval) runs client-side for this program (the
+chair's ruling, 2026-11-04: campaign-scoped, saves larger than the request cap), and the
+display prose pools and the dossier readers remain in the client — the known exposure the
+design records for a later server-rendering step.
+
 Set these in Vercel's dashboard → Project → Settings → Environment
 Variables. Redeploy after changing them so the new values bake into the
 client bundle.
