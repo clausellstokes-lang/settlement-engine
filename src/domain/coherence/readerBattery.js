@@ -158,13 +158,20 @@ export function scaleListsFindings(s, surfaces) {
 }
 
 /**
- * The Exports line's item count (the Economy tab paints one pill per `primaryExports` entry) —
- * a DISTRIBUTION by tier, not a finding (check 2c).
- * @param {any} s @returns {{ exports: number }}
+ * The READER battery's distributions, by tier, never findings:
+ *  - `exports`: the Exports line's item count (the Economy tab paints one pill per
+ *    `primaryExports` entry; check 2c);
+ *  - `dailyLifeLine`: 1 where the Daily Life tab carries the placeholder line at all (check 10,
+ *    the chair's ruling 2026-11-04), else 0.
+ * @param {any} s @param {Readonly<Record<string,string>>|null} [surfaces]
+ * @returns {{ exports: number, dailyLifeLine: number }}
  */
-export function readerDistributions(s) {
+export function readerDistributions(s, surfaces = null) {
   const exports = s?.economicState?.primaryExports;
-  return { exports: Array.isArray(exports) ? exports.length : 0 };
+  return {
+    exports: Array.isArray(exports) ? exports.length : 0,
+    dailyLifeLine: str(surfaces?.daily_life).includes(PLACEHOLDER) ? 1 : 0,
+  };
 }
 
 // ──────────────────────────── 3. relation-types ────────────────────────────
@@ -407,20 +414,23 @@ const PLACEHOLDER = 'dawn, the market, the tavern, the watch';
 const WATCH_HOUSE = /watch|guard|garrison/i;
 
 /**
- * The Daily Life placeholder line names a market and a watch the Institutions tab lacks:
- * `[no-market]` (no market by the engine's predicate, `viability.js :: hasMarketInstitution` —
- * a Periodic market is a market, the chair's ruling on soak1k-313) and `[no-watch]` (no watch,
- * guard or garrison house). One finding per sub-case.
+ * The Daily Life placeholder line where it names what the place lacks — ONCE per settlement
+ * (the chair's ruling, 2026-11-04): it counts when the line renders AND at least one sub-case
+ * holds, and the detail names which: `[no-market]` (no market by the engine's predicate,
+ * `viability.js :: hasMarketInstitution`; a Periodic market is a market, the chair's ruling on
+ * soak1k-313), `[no-watch]` (no watch, guard or garrison house), or both. How many pages carry
+ * the line at all is a distribution (`readerDistributions :: dailyLifeLine`), not a finding.
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function dailyLifePlaceholderFindings(s, surfaces) {
   const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));
   if (!hit) return [];
-  /** @type {Array<{surface:string,quote:string,detail:string}>} */
-  const out = [];
-  if (!hasMarketInstitution(s?.institutions)) out.push({ surface: 'daily_life', quote: hit, detail: '[no-market] the Institutions tab holds no market' });
-  if (!houseNames(s).some((h) => WATCH_HOUSE.test(h))) out.push({ surface: 'daily_life', quote: hit, detail: '[no-watch] the Institutions tab holds no watch, guard or garrison' });
-  return out;
+  const lacks = [
+    ...(!hasMarketInstitution(s?.institutions) ? ['no-market'] : []),
+    ...(!houseNames(s).some((h) => WATCH_HOUSE.test(h)) ? ['no-watch'] : []),
+  ];
+  if (!lacks.length) return [];
+  return [{ surface: 'daily_life', quote: hit, detail: `${lacks.map((x) => `[${x}]`).join('')} ${lacks.map((x) => x.replace('-', ' ')).join(', ')}` }];
 }
 
 // ───────────────────────────── the battery ─────────────────────────────

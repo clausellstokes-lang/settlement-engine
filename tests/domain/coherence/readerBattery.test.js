@@ -56,8 +56,10 @@ describe('reader:scale-lists', () => {
     for (const [strength, re] of Object.entries(R.STRENGTH_HOUSES)) expect(names.some((n) => re.test(n)), strength).toBe(true);
   });
   test('(c) the Exports count is a distribution, not a finding', () => {
-    expect(R.readerDistributions({ economicState: { primaryExports: ['Raw wool', 'Live sheep'] } })).toEqual({ exports: 2 });
-    expect(R.readerDistributions({})).toEqual({ exports: 0 });
+    expect(R.readerDistributions({ economicState: { primaryExports: ['Raw wool', 'Live sheep'] } })).toEqual({ exports: 2, dailyLifeLine: 0 });
+    expect(R.readerDistributions({})).toEqual({ exports: 0, dailyLifeLine: 0 });
+    // check 10's distribution: the pages carrying the Daily Life line at all (the chair's ruling)
+    expect(R.readerDistributions({}, { daily_life: 'Ordinary life here in prose: dawn, the market, the tavern, the watch.' })).toEqual({ exports: 0, dailyLifeLine: 1 });
   });
 });
 
@@ -177,9 +179,11 @@ describe('reader:possessive-slip', () => {
 // ── 10. daily-life-placeholder
 describe('reader:daily-life-placeholder', () => {
   const daily_life = 'Food\nStrained\nOrdinary life here in prose: dawn, the market, the tavern, the watch.';
-  test('a market and a watch the Institutions tab lacks: two sub-cases', () => {
-    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Burial ground' }] }), { daily_life }).map((r) => r.detail.split(']')[0])).toEqual(['[no-market', '[no-watch']);
-    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Periodic market' }] }), { daily_life }).map((r) => r.detail.split(']')[0])).toEqual(['[no-watch']);
+  test('the line, once, where it names a market or a watch the Institutions tab lacks', () => {
+    // The chair's ruling (2026-11-04): the LINE once per settlement; the detail names the sub-case(s).
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Burial ground' }] }), { daily_life }).map((r) => r.detail)).toEqual(['[no-market][no-watch] no market, no watch']);
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Periodic market' }] }), { daily_life }).map((r) => r.detail)).toEqual(['[no-watch] no watch']);
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Town watch' }] }), { daily_life }).map((r) => r.detail)).toEqual(['[no-market] no market']);
   });
   test('negative control: a market and a watch on the roster, and a Daily Life tab without the line', () => {
     expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Market square' }, { name: 'Town watch' }] }), { daily_life })).toEqual([]);

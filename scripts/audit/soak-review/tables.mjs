@@ -36,6 +36,9 @@ if (reader) {
   // Kind 9, apart from the classes above: it changes no class, no stop-rule reason and no chair reading.
   L.push(`## ${reader.title}`, '', `Rendered settlements ${reader.rendered} (by tier ${TIERS.map((t) => `${t} ${reader.tierPool[t] ?? 0}`).join(' · ')}). Sub-cases count settlements.`, '', '| class | settlements | rate | by tier (thorp…metropolis) | sub-cases | first three seeds |', '|---|---|---|---|---|---|');
   for (const c of reader.classes) L.push(`| ${c.check} | ${c.settlements}/${c.pool} | ${c.rate} | ${TIERS.map((t) => c.byTier[t] ?? 0).join(' / ')} | ${cell(Object.entries(c.subCases).map(([k, v]) => `${k} ${v.settlements}`).join(', ') || '·')}${c.a05Overlap ? ` · A-05 overlap ${c.a05Overlap.gapsAndA05} (A-05 only ${c.a05Overlap.a05Only}, without gaps ${c.a05Overlap.withoutGaps})` : ''} | ${c.cases.map((x) => `\`${x.seed}\` "${cell(x.quote).slice(0, 70)}"`).join('; ')} |`);
+  const dl = reader.classes.find((c) => c.check === 'reader:daily-life-placeholder');
+  const dlPages = reader.distributions?.dailyLifeLinePages;
+  L.push('', '**reader:daily-life-placeholder, by sub-case (the chair\'s ruling: the line once, where it names what the place lacks):**', '', '| settlements | no market | no watch | pages carrying the line at all (a distribution) |', '|---|---|---|---|', `| ${dl?.settlements ?? 0}/${reader.rendered} | ${dl?.subCases?.['no-market']?.settlements ?? 0} | ${dl?.subCases?.['no-watch']?.settlements ?? 0} | ${dlPages ? `${dlPages.settlements}/${reader.rendered} (${TIERS.map((t) => dlPages.byTier[t] ?? 0).join(' / ')})` : '·'} |`);
   const ex = reader.distributions?.exportsLineItems ?? {};
   L.push('', '**The Exports line, items per settlement (a distribution, not a finding):** ' + TIERS.filter((t) => ex[t]).map((t) => `${t} median ${ex[t].median} [${ex[t].p10}–${ex[t].p90}] ${ex[t].min}–${ex[t].max}`).join(' · '), '');
 }

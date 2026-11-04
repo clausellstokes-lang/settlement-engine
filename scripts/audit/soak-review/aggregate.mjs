@@ -50,12 +50,13 @@ export function aggregate(out, meta) {
   const classes = new Map();
   let errors = 0;
   // ── the READER battery's observations, apart (kind 9; lane READER-INSTRUMENTS, 2026-11-04)
-  const reader = new Map(); const readerTierPool = {}; const exportsByTier = {}; const a05Seeds = new Set();
+  const reader = new Map(); const readerTierPool = {}; const exportsByTier = {}; const dailyLineByTier = {}; const a05Seeds = new Set();
   const readerFinding = (row, f) => {
     const c = reader.get(f.check) ?? { check: f.check, occurrences: 0, seeds: new Set(), byTier: {}, surfaces: {}, sub: {}, cases: [] };
     c.occurrences += 1; c.surfaces[f.surface] = (c.surfaces[f.surface] || 0) + 1;
-    const tag = String(f.detail || '').match(/^\[([a-z0-9-]+)\]/)?.[1];
-    if (tag) { const t = (c.sub[tag] ??= { seeds: new Set(), byTier: {} }); if (!t.seeds.has(row.seed)) { t.seeds.add(row.seed); t.byTier[row.tier] = (t.byTier[row.tier] || 0) + 1; } }
+    // Every leading [tag] is a sub-case ("[no-market][no-watch] …" counts in both).
+    const tags = [...(String(f.detail || '').match(/^(?:\[[a-z0-9-]+\])+/)?.[0] ?? '').matchAll(/\[([a-z0-9-]+)\]/g)].map((m) => m[1]);
+    for (const tag of tags) { const t = (c.sub[tag] ??= { seeds: new Set(), byTier: {} }); if (!t.seeds.has(row.seed)) { t.seeds.add(row.seed); t.byTier[row.tier] = (t.byTier[row.tier] || 0) + 1; } }
     if (!c.seeds.has(row.seed)) { c.seeds.add(row.seed); c.byTier[row.tier] = (c.byTier[row.tier] || 0) + 1; if (c.cases.length < 3) c.cases.push({ seed: row.seed, tier: row.tier, surface: f.surface, quote: f.quote, detail: f.detail }); }
     reader.set(f.check, c);
   };
@@ -63,6 +64,7 @@ export function aggregate(out, meta) {
     readerTierPool[row.tier] = (readerTierPool[row.tier] || 0) + 1;
     if ((row.findings || []).some((f) => f.check === 'A-05:lacks-access-lines')) a05Seeds.add(row.seed);
     const n = row.reader?.exports; if (Number.isFinite(n)) (exportsByTier[row.tier] ??= []).push(n);
+    if (row.reader?.dailyLifeLine) dailyLineByTier[row.tier] = (dailyLineByTier[row.tier] || 0) + 1;
   };
   for (const row of shardLines(out)) {
     const k = rows.length;
@@ -113,7 +115,7 @@ export function aggregate(out, meta) {
     cases: c.cases,
   })).sort((a, b) => b.rate - a.rate || a.check.localeCompare(b.check));
   const dist = (xs) => { const v = xs.slice().sort((a, b) => a - b); const hist = {}; for (const x of v) hist[x] = (hist[x] || 0) + 1; return { n: v.length, min: v[0] ?? null, p10: q(v, 0.1), median: q(v, 0.5), p90: q(v, 0.9), max: v[v.length - 1] ?? null, histogram: hist }; };
-  const readerOut = { title: 'Reader observations (outside the stop rule until the READER WINDOW lands)', rendered: readerN, tierPool: readerTierPool, classes: readerRows, distributions: { exportsLineItems: Object.fromEntries(TIERS.filter((t) => exportsByTier[t]).map((t) => [t, dist(exportsByTier[t])])) } };
+  const readerOut = { title: 'Reader observations (outside the stop rule until the READER WINDOW lands)', rendered: readerN, tierPool: readerTierPool, classes: readerRows, distributions: { exportsLineItems: Object.fromEntries(TIERS.filter((t) => exportsByTier[t]).map((t) => [t, dist(exportsByTier[t])])), dailyLifeLinePages: { settlements: Object.values(dailyLineByTier).reduce((a, b) => a + b, 0), byTier: dailyLineByTier } } };
   writeFileSync(join(out, 'aggregates', 'reader-observations.json'), `${JSON.stringify(readerOut, null, 1)}\n`);
 
   // ── every field alone, by tier

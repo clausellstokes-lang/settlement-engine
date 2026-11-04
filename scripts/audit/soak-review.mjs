@@ -125,8 +125,8 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         // I4's houses ÷ anchor (bands.mjs): kept off `chains` and `features` so the field walk
         // and the dependence scan read exactly what they read before.
         houses: housesReading(s),
-        // The READER battery's distributions (check 2c: the Exports line's item count), apart.
-        reader: readerDistributions(s),
+        // The READER battery's distributions (2c: the Exports count; 10: the Daily Life line at all), apart.
+        reader: readerDistributions(s, r ? r.tabs : null),
       };
       if (isSampled(i, count) && r) {
         const body = [
