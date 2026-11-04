@@ -24,6 +24,12 @@ const DESPERATION_THEFT_DESC =
  *  `settleCrimeLinesToSignal` below). */
 const SURVIVAL_NO_NETWORK_DESC =
   'Theft driven by economic desperation rather than organization. No criminal infrastructure: just too many people with too little, doing what they must to survive.';
+/** The indebted stress's debt-evasion line, and the same line without the network it names
+ *  (lane RUNG1B-F4 unit 4b: the clause is dropped, no word is added). */
+const DEBT_EVASION_DESC =
+  'Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.';
+const DEBT_EVASION_NO_NETWORK_DESC =
+  'Residents fleeing creditor obligations or transferring assets fraudulently to avoid collection.';
 
 // ─── generateSafetyProfile ────────────────────────────────────────────────────
 
@@ -563,8 +569,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       'Price gouging on medicines, protective herbs, and burial services. Often conducted by otherwise respectable merchants.');
   }
   if (hasStress('indebted')) {
-    addCrimeIfMissing('debt evasion',
-      'Residents fleeing creditor obligations, transferring assets fraudulently, or using criminal networks to avoid collection.');
+    addCrimeIfMissing('debt evasion', DEBT_EVASION_DESC);
   }
   if (hasStress('insurgency')) {
     const insurgentDriven = (flags.criminalEffective || 0) > (flags.militaryEffective || 0);
@@ -727,11 +732,13 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
  * economy step, BEFORE the power roster exists, and the density law trims that roster only at
  * assembly, so two of its crime lines could not read whether organised crime exists here: the
  * survival-crime line printed "No criminal infrastructure" beside a roster Thieves' Guild (4
- * places). Assembly calls this once, after the trim, and the line takes its text from the crime
- * signal's one home (`domain/crimeSignal.js :: crimeSignalOf`):
+ * places), and the indebted stress's debt-evasion line named "criminal networks" where none
+ * existed (38 places; nine of A-06's 16). Assembly calls this once, after the trim, and each line
+ * takes its text from the crime signal's one home (`domain/crimeSignal.js :: crimeSignalOf`):
  *   - survival crime: the pool's desperation-theft line beside a network, the clause without one
  *     (unit C's rule, now on the final record); the famine/siege desperation-theft entry is then
- *     printed once, never twice, as at the economy step.
+ *     printed once, never twice, as at the economy step;
+ *   - debt evasion: the same line without its "criminal networks" clause where none exists.
  * Every entry's TYPE is kept (the services menu reads types). No draw. Returns the input
  * `economicState` BY REFERENCE when no line changes, else a copy with a copied crime list.
  *
@@ -745,7 +752,8 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   const crimes = safetyProfile?.crimeTypes;
   if (!Array.isArray(crimes) || !crimes.length) return economicState;
   const present = crimeSignalOf(lists).present;
-  const lineFor = { 'Survival crime': present ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC };
+  const lineFor = { 'Survival crime': present ? DESPERATION_THEFT_DESC : SURVIVAL_NO_NETWORK_DESC,
+    'debt evasion': present ? DEBT_EVASION_DESC : DEBT_EVASION_NO_NETWORK_DESC };
   let settled = crimes.map((entry) => {
     const desc = lineFor[/** @type {keyof typeof lineFor} */ (String(entry?.type))];
     return desc !== undefined && entry.desc !== desc ? { ...entry, desc } : entry;

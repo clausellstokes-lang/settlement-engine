@@ -287,7 +287,7 @@ registerStep('assembleSettlement', {
   // ── THE CRIME LINES READ THE FINAL CRIME SIGNAL (lane RUNG1B-F4 unit 4, 2026-11-04). The safety
   // profile was written at the economy step, before the power roster existed; this is the first
   // point where the FINAL roster (after the trim above) and the estate both exist, so its
-  // survival-crime line takes its text from the crime signal here
+  // survival-crime and debt-evasion lines take their text from the crime signal here
   // (`safetyProfile.js :: settleCrimeLinesToSignal`). No step is re-ordered; no draw; the
   // economicState is copied only when a line changes (the power fingerprint reads the safety
   // LABEL, which this never touches).
