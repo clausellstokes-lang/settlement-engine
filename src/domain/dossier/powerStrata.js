@@ -403,6 +403,27 @@ export function outrankingRivalOf(settlement) {
 }
 
 /**
+ * The sentence the Power tab's legitimacy panel prints after "Governance fractured." when
+ * governance is fractured (PowerTab.jsx). The generator's crisis note on the governing
+ * faction carries the same words (factionDynamics.js :: applyLegitimacyMultipliers).
+ */
+export const FRACTURE_PANEL_LINE = 'Real decisions are being made informally.';
+
+/**
+ * X-50 (BOILERPLATE ONCE): a note with every sentence the tab already prints elsewhere
+ * dropped, so a sentence has one home per tab. Only whole sentences, matched verbatim.
+ * @param {string} note
+ * @param {ReadonlyArray<string>} shown sentences the tab prints in another block
+ * @returns {string}
+ */
+export function withoutShownSentences(note, shown) {
+  if (!note || !shown.length) return note;
+  return note.split(/(?<=[.!?])\s+/)
+    .filter((sentence) => !shown.includes(sentence.trim()))
+    .join(' ').trim();
+}
+
+/**
  * A faction's crisis note as the dossier prints it. The "appears to govern" claim
  * stays only on the governing faction and only when a rival outranks it, and then
  * it names that rival; otherwise the sentence is dropped and the rest of the note

@@ -9,7 +9,7 @@ import { FACTION_COLORS } from '../tabConstants';
 import { useStore } from '../../../store/index.js';
 import { factionIdFromName } from '../../../lib/entities.js';
 import { hasLadder, ladderRungsOf, ladderInstabilityOf, ladderFactionKeyOf } from '../../../domain/townMap/ladderRead.js';
-import { PowerStrata } from './power/PowerStrata.jsx';
+import { PowerStrata } from './power/PowerStrata.jsx'; import { FRACTURE_PANEL_LINE } from '../../../domain/dossier/powerStrata.js'; // X-50: one line, so no cited line moves
 import { rulingChainOf } from '../../../domain/dossier/powerStrata.js';
 import { coupContenders, coupRiskLabel } from '../../../domain/rulingPowerCoup.js';
 import { governingFactionOf } from '../../../domain/rulingPower.js';
@@ -338,7 +338,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
               })()}
               {leg.governanceFractured && (
                 <div style={{marginTop:8,background:swatch['#FAF8F4'],border:'1px solid #e8c0c0',borderLeft:'3px solid #8b1a1a',padding:'6px 10px',fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#5A1A1A'],lineHeight:1.4}}>
-                  <strong>Governance fractured.</strong> Real decisions are being made informally.
+                  <strong>Governance fractured.</strong> {FRACTURE_PANEL_LINE}
                 </div>
               )}
             </div>
@@ -416,7 +416,7 @@ export function PowerTab({ powerStructure:r, settlement:s, narrativeNote, public
         setExpandedFaction={setExpandedFaction}
         focusIndex={focusIndex}
         focusedRowRef={focusedRowRef}
-        showCoupChip={!coupRiskSpoken}
+        showCoupChip={!coupRiskSpoken} shownOnTab={leg?.governanceFractured ? [FRACTURE_PANEL_LINE] : []}
       />
 
       {/* ── RULING STRUCTURE (DS-POW-5) ──────────────────────────────────────
