@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — X-46 CAR 1 (LANE X46-TRAIN, U1–U4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 1264a8152): the owner's historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner's word). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S1 (the tree of 1264a8152 with the door paths carried from
+ *   the branch, the previous record's writes committed). 4c42885b.. -> f5f0edbc..
+ *
  * 2026-11-03 — DEFENSE-2: THE DEFENCE GENERATOR'S MAGIC DEPENDENCY DERIVES FROM THE RELIANCE READING, THROUGH THE SIGNED
  *   DOOR (ODQ §934.104, THE COHERENCE AND SCALE WINDOW; record docs/shift-records/2026-11-03-defense-magic-dependency.json;
  *   the cloud chair signs under the owner's delegation, vetoable). 256 OF 525 ROWS MOVED (village 12, town 76, city 84,

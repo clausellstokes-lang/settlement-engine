@@ -1,0 +1,118 @@
+{
+  "_doc": "X-46 CAR 1 (LANE X46-TRAIN, U1–U4), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 1 (lane x46-train, U1–U4): the owner's historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner's word). THE MOVER, NAMED: first-parent step 1264a8152 of lane/landing-rung1-2026-11-04 (\"compose: lane/x46-train-2026-11-04 onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/DESIGN_X46_SCALE_TRAIN.md line 7 (the owner, 2026-11-02, quoted from docs/UX_CONSOLIDATION_2026-10-30.md, the X-46 addendum: the historical-scale commission). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S1 is the tree of 1264a8152 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from 1264a8152 by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at 1264a8152, S0 -> S1): generator-golden-master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), the key set identical; corruption-web-dormancy-golden 2 of 3 rows; demographics-lifecycle-golden 4 of 4 rows; information-statecraft-dormancy-golden 2 of 3 rows; intel-trade-dormancy-golden 2 of 3 rows; intervention-dormancy-golden 2 of 3 rows; momentum-dormancy-golden 3 of 3 rows; npc-credibility-dormancy-golden 2 of 3 rows; npc-ledger-dormancy-golden 1 of 2 rows; peace-causal-dormancy-golden 3 of 3 rows; settlement-politics-dormancy-golden 2 of 3 rows; supply-web-warfare-dormancy-golden 3 of 3 rows; herald-knowledge-desk-golden 91 of 462 rows, 39 added and 50 removed; cartography-calibration-corpus 131 of 504 rows; dossier-prose-manifest 376 of 1050 rows; espionage-dormancy-fence 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60), 360/360 distinct, 00440713.. -> cab21525..; pdf-golden-view-model-snapshot, its one snapshot; preset-lighting-witness 7 of 8 witnessed rows. A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "I think we have over blown how large the floor and ceiling is for a Thorpe all the way to a city… historically it should be 50 to 300 residents, grouped into roughly 30 to 90 households. And that scale from our Thorpe to hamlets and town to city. Can you correct that in both the number of institutions and population in our generation pipeline?",
+  "ownerDate": "2026-11-02",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 1 (lane x46-train, U1–U4): the owner's historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner's word)",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 1264a8152",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "corruption-web-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "demographics-lifecycle-golden",
+      "action": "re-record",
+      "predictedRows": 4,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "information-statecraft-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "intel-trade-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "intervention-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "momentum-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "npc-credibility-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "npc-ledger-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "peace-causal-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "settlement-politics-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "supply-web-warfare-dormancy-golden",
+      "action": "re-record",
+      "predictedRows": 3,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 462,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "preset-lighting-witness",
+      "action": "re-record",
+      "predictedRows": 15,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
