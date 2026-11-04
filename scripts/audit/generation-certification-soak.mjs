@@ -46,6 +46,7 @@ const FORMAL_JUDGMENT_IDS = Object.freeze([
   'dramatic_tension',
   'diversity_and_repetition',
   'confidence_and_provenance',
+  'record_coherence_battery',
 ]);
 
 const TERRAIN_VALUES = Object.freeze(
