@@ -347,13 +347,16 @@ function wantsOnce(people) {
 /**
  * The stores in plain words, from the one food record: the months in store and the granary.
  * The same words as the Economics tab's stores row.
- * @param {{ storageMonths?: unknown, hasGranary?: unknown }} record @returns {string}
+ * @param {{ storageMonths?: unknown, hasGranary?: unknown, storesHeld?: unknown }} record @returns {string}
  */
 export function foodStoresWords(record) {
   const months = Number(record?.storageMonths);
   if (!Number.isFinite(months) || months <= 0) return '';
   const whole = Math.round(months);
   const span = months < 1 ? 'a few weeks' : whole <= 1 ? 'about a month' : `${numberWord(whole)} months`;
+  // RUNG2-F13: under an active famine a granary still holding six months or more is HELD — the
+  // record says so (foodRecord.storesHeld), and so does the line.
+  if (record.hasGranary === true && record.storesHeld === true) return `Stores: a granary of ${span} that the hall will not open.`;
   if (record.hasGranary === true) return `Stores: a granary, ${span} of grain.`;
   return months < 1 ? 'No granary; a few weeks in the larder.' : `No granary; ${span} in household stores.`;
 }

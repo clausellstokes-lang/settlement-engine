@@ -267,7 +267,8 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── X-49: the stores figure printed once, on the Economy tab
-  const STORE = /\b(?:Stores: a granary, [^.]+ of grain|No granary; [^.]+ in (?:household stores|the larder))\./g;
+  // RUNG2-F13: the held famine granary is the same stores row ("Stores: a granary of N months that the hall will not open.").
+  const STORE = /\b(?:Stores: a granary, [^.]+ of grain|Stores: a granary of [^.]+ that the hall will not open|No granary; [^.]+ in (?:household stores|the larder))\./g;
   const storeHits = Object.entries(r.tabs).flatMap(([tab, text]) => (text.match(STORE) || []).map((q) => [tab, q]));
   const record = s.economicState?.foodSecurity?.foodRecord;
   const stored = Number(record?.storageMonths);

@@ -46,6 +46,12 @@ import {
 // The shares themselves live beside the record: foodBalance.js :: grownShareOf, hinterlandShareOf.
 const PER_CAPITA_NEED   = 2;   // lbs/day per person
 
+// The famine's months of drawing on the stores ("its second failed harvest season": a year since
+// the first failure) and the ration floor its burn stops at (the world pulse's rationFloorPct).
+// Lane RUNG2-F13; see THE STORES A FAMINE LEAVES below.
+export const FAMINE_MONTHS_RUN = 12;
+export const FAMINE_RATION_FLOOR_PCT = 5;
+
 // Registered custom food effects are deliberately small and bounded. These
 // constants live beside the canonical food writer so generation, prosperity,
 // viability, and world-pulse stockpiles can never apply different versions of
@@ -193,7 +199,8 @@ export function generateFoodSecurity(tier, institutions, config) {
                     // thorp/hamlet value.
                     : (['thorp','hamlet','village'].includes(tier) ? 1.5 : 1.0);
   // Mill extends storage — flour lasts longer than grain
-  const storageMonths = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
+  // What the granary holds in a good year; an ACTIVE famine has been drawing on it (below).
+  const storageMonthsFull = Math.round(((hasMill ? baseStorage * 1.25 : baseStorage) + Math.min(3, preservedSources) / 4) * 10) / 10;
 
   // ── Import dependency ─────────────────────────────────────────────────────
   // How much of caloric needs can the settlement import, and does it need to?
@@ -377,6 +384,19 @@ export function generateFoodSecurity(tier, institutions, config) {
   const deficit       = Math.max(0, rawDeficit - importCoverage - magicOffset);
   const deficitPct    = dailyNeed > 0 ? deficit / dailyNeed * 100 : 0;
   const surplusPct    = dailyNeed > 0 ? Math.max(0, rawSurplus / dailyNeed * 100) : 0;
+
+  // ── THE STORES A FAMINE LEAVES (lane RUNG2-F13, 2026-11-04; the chair's ruling on rung 2 §3c,
+  // soak1k-3605: "Food Deficit — Active Famine. Stores: a granary, 15 months of grain.") ──────
+  // A famine reads the stores. The famine's own record says how long it has run: "its second
+  // failed harvest season" (stressNarrative.js :: famine), so the stores have been drawn on since
+  // the first failure, FAMINE_MONTHS_RUN months, at the world pulse's own month-burn: the gap
+  // above the ration floor (worldPulse/foodStockpile.js :: STOCKPILE_TUNING.rationFloorPct, the
+  // same number, pinned by tests/domain/crisisFactFindings.test.js). What is printed is what is
+  // in hand. Zero draws; the full granary (storageMonthsFull) is untouched outside a famine.
+  const famineBurnMonths = stressFamine
+    ? FAMINE_MONTHS_RUN * Math.max(0, deficitPct - FAMINE_RATION_FLOOR_PCT) / 100
+    : 0;
+  const storageMonths = Math.round(Math.max(0, storageMonthsFull - famineBurnMonths) * 10) / 10;
 
   // Normalized food ratio — 1.0 = exactly adequate
   const localRatio    = dailyProduction / Math.max(1, dailyNeed);

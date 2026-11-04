@@ -16,6 +16,8 @@ import {
 } from '../../src/domain/coherence/crisisFactFindings.js';
 import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { migrationDirectionOf } from '../../src/domain/crisis/migrationDirection.js';
+import { FAMINE_RATION_FLOOR_PCT } from '../../src/generators/foodGenerator.js';
+import { STOCKPILE_TUNING } from '../../src/domain/worldPulse/foodStockpile.js';
 
 /** Every string the record stores, one per line (the prose the generators wrote). @param {unknown} v @returns {string} */
 function recordText(v) {
@@ -57,6 +59,16 @@ describe('the three checks, planted', () => {
     const s = { powerStructure: { factions: [{ faction: 'Elder Council', isGoverning: true, power: 50 }] } };
     const text = 'Elder Council is conducting meetings with people who should not be meeting privately. The governing faction has noticed.';
     expect(crisisCastSenseFindings(s, { power: text }).map((f) => f.detail)).toEqual(['plotter_governs: the governing house meets against the governing house']);
+  });
+});
+
+describe('the famine month-burn', () => {
+  it('stops at the world pulse\'s own ration floor (one number, two homes pinned equal)', () => {
+    expect(FAMINE_RATION_FLOOR_PCT).toBe(STOCKPILE_TUNING.rationFloorPct);
+  });
+  it('a held famine granary says so in the one stores writer; a famine of few months prints what is in hand', () => {
+    expect(foodStoresWords({ storageMonths: 12.1, hasGranary: true, storesHeld: true })).toBe('Stores: a granary of twelve months that the hall will not open.');
+    expect(foodStoresWords({ storageMonths: 2.4, hasGranary: true, storesHeld: false })).toBe('Stores: a granary, two months of grain.');
   });
 });
 
