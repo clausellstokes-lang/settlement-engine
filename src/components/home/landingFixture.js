@@ -73,24 +73,24 @@ export const fixture = {
   },
   "town": {
     "name": "Cnocby",
-    "population": 412,
+    "population": 82,
     "tier": "village",
     "eyebrow": "road village · mountain",
     "prose": "The first person you meet on the road into Cnocby wants to know your business, and the second already knows it. Earth-banked enclosures and older rounded foundations remain visible between newer halls.",
-    "pressure": "Inghean MacCarthy and Odhrán MacCarthy are connected by something neither discusses openly: A third party has learned what the original favour was. The debt just changed hands.",
+    "pressure": "Hector Gallagher and Inghean MacCarthy are connected by something neither discusses openly: Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report. Inghean MacCarthy has not reported it.",
     "hooks": [
       {
         "kind": "NPC",
         "tone": "success",
         "tag": "derived · npcs",
         "lead": "Odhrán MacCarthy, mayor",
-        "rest": " · goal: use current stability to address structural vulnerabilities before conditions change."
+        "rest": " · goal: demonstrate governance value through means that do not depend on economic conditions the settlement currently lacks."
       },
       {
         "kind": "Hook",
         "tone": "warning",
         "tag": "derived · factions",
-        "text": "A neutral figure is being pressured by both Elder Council and Craft Guilds to take a side before the next council session."
+        "text": "A neutral figure is being pressured by both Elder Council and Religious Authorities to take a side before the next council session."
       }
     ],
     "hooksMore": 7
@@ -99,7 +99,7 @@ export const fixture = {
     "receipts": [
       {
         "label": "conflict",
-        "text": "Elder Council × Craft Guilds · military conscription of guild apprentices · stakes: labor control"
+        "text": "Elder Council × Religious Authorities · military conscription of guild apprentices · stakes: labor control"
       },
       {
         "label": "route",
@@ -111,71 +111,71 @@ export const fixture = {
       },
       {
         "label": "institution",
-        "text": "travelers_inn · selected (Base chance 59% lifted by ×1.01 from nearby resources + terrain.)"
+        "text": "blacksmith · selected (Base chance 4% lifted by ×2.50 from nearby resources + terrain.)"
       }
     ],
-    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands that raised the travelers’ inn are being cleared faster than they grow back. The Elder Council wants the guilds’ apprentices for soldiers and the Craft Guilds mean to keep them, and a neutral name is being pressed to choose a side before the council next sits. The mayor still means to mend the structure while the weather holds. He and Inghean MacCarthy are bound by an old favour neither will name, and a third party has just learned what it was. The debt has changed hands."
+    "narrated": "The road made Cnocby by a coin’s width, three chances of it against two of nothing, and the mountain stands are being cleared faster than they grow back. The Elder Council and the Religious Authorities are at odds over conscripting the guilds’ apprentices, and a neutral name is being pressed to choose a side before the council next sits. The mayor, Odhrán MacCarthy, means to prove the office is worth having by means that do not wait on money the town does not have. Hector Gallagher has made a mistake that Inghean MacCarthy is bound to report, and Inghean MacCarthy has not reported it."
   },
   "realm": {
     "whyTrace": [
       {
         "axis": "Trade connectivity",
         "from": "adequate",
-        "to": "collapsed",
+        "to": "critical",
         "tone": "danger",
-        "reason": "Criminal pressure disrupts trade flows. Wartime pressure disrupts trade flows."
+        "reason": "Wartime pressure disrupts trade flows. Trade route strain disrupts trade flows."
       },
       {
         "axis": "Religious authority",
-        "from": "strained",
-        "to": "adequate",
+        "from": "adequate",
+        "to": "surplus",
         "tone": "success",
-        "reason": "Vael (major) anchors religious authority (piety ×1.37)."
+        "reason": "Vael (major) anchors religious authority (piety ×1.40). Religious Authorities carries power 30."
       },
       {
-        "axis": "Social trust",
+        "axis": "Faction power",
         "from": "adequate",
         "to": "strained",
         "tone": "warning",
-        "reason": "Criminal pressure erodes communal trust. Public legitimacy 28 colors trust."
+        "reason": "Legitimacy challenge destabilizes the faction system. Top faction holds 67% of power."
       }
     ],
     "advance": [
       {
-        "week": "Week 1",
+        "week": "Week 3",
         "season": "the spring of year 1",
-        "headline": "Cnocby turns to the faith of Vael",
-        "text": "After a long contest of devotion, Vael has become the patron creed of Cnocby."
-      },
-      {
-        "week": "Week 2",
-        "season": "the spring of year 1",
-        "headline": "Cnocby goes onto a war footing",
-        "text": "Cnocby is mustering its levies and doubling its watch."
+        "headline": "Cnocby's rulers face an open challenge",
+        "text": "Cnocby's people are openly questioning who should rule them."
       },
       {
         "week": "Week 4",
         "season": "the spring of year 1",
-        "headline": "Religious conversion fracture has passed",
-        "text": "Religious conversion fracture is over, but it leaves sectarian memory, temple debt, ritual disputes. It will be remembered for a while yet."
+        "headline": "Monster or raider pressure deepens",
+        "text": "Monster or raider pressure has not broken, and the forces feeding it are still gathering."
       },
       {
         "week": "Week 8",
         "season": "the spring of year 1",
-        "headline": "Nuada Walsh shields their people",
-        "text": "Nuada Walsh is out to protect their followers."
+        "headline": "Inghean MacCarthy pushes through reforms",
+        "text": "Inghean MacCarthy is out to come through the crisis."
       },
       {
         "week": "Week 8",
+        "season": "the spring of year 1",
+        "headline": "Monster or raider pressure has passed",
+        "text": "Monster or raider pressure is over, but it leaves abandoned roads, militia burden, fearful hamlets. It will be remembered for a while yet."
+      },
+      {
+        "week": "Week 9",
+        "season": "the spring of year 1",
+        "headline": "Elder Council captures an institution",
+        "text": "Elder Council sees an opening to press council rule interests."
+      },
+      {
+        "week": "Week 12",
         "season": "the spring of year 1",
         "headline": "Cnocby's trade routes break down",
         "text": "Caravans are passing Cnocby by, and its market stalls stand half empty."
-      },
-      {
-        "week": "Week 10",
-        "season": "the spring of year 1",
-        "headline": "Crime takes hold of Cnocby",
-        "text": "Thieves and racketeers are working Cnocby's streets in the open."
       }
     ],
     "chronicle": [
@@ -194,8 +194,8 @@ export const fixture = {
       {
         "kind": "trade",
         "tone": "economic",
-        "week": "Week 2",
-        "text": "Caravans are passing Penshaw by, and its market stalls stand half empty."
+        "week": "Week 6",
+        "text": "Trade pressure disrupts routes and introduces resentment or leverage."
       }
     ],
     "relationships": [
