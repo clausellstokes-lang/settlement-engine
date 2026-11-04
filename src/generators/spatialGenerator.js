@@ -2,6 +2,7 @@
  * spatialGenerator.js
  * Settlement spatial layout and district generation.
  */
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
 import { createGenerationWorldLaw } from './generationContext.js';
 
 // ─── generateSpatialLayout ────────────────────────────────────────────────────
@@ -18,6 +19,7 @@ import { createGenerationWorldLaw } from './generationContext.js';
 export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainType = 'plains') => {
   const worldLaw = createGenerationWorldLaw({}, { tradeRoute, terrainType });
   const instNames = institutions.map(i => i.name);
+  const defence = defenseFactsOf({ institutions });
   const has = (keyword) => instNames.some(n => n.includes(keyword));
   /**
    * Roster test for the sacred-house derivation below, in either spelling the catalogue
@@ -258,6 +260,20 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
       return cityLayouts[terrainType] || 'Walled core with some suburban growth';
     })(),
     town:        (() => {
+      // F1 (rung 1B): a town's layout names walls only where walls stand on its record, and a
+      // garrison only where one stands (`defenseFactsOf`). The unwalled lines are VETOABLE.
+      if (!defence.hasWalls) {
+        const openTownLayouts = {
+          coastal:   'Port town climbing from the harbour, warehouses and chandlers at the waterfront',
+          riverside: 'Town straddling the river, a bridge at its commercial heart',
+          plains:    'Compact core, outlying farms and a weekly market field at the edge of town',
+          forest:    'Close-built market town, timber yards and sawpits on the north road',
+          hills:     'Hill town of stone houses climbing above the market quarter',
+          desert:    'Trading town around a great well, caravanserai on the south road',
+          mountain:  'Pass town strung along the valley floor',
+        };
+        return openTownLayouts[terrainType] || 'Compact core, some outlying farms';
+      }
       const townLayouts = {
         coastal:   'Walled port town climbing from the harbour, warehouses and chandlers at the waterfront',
         riverside: 'Walled town straddling the river, a fortified bridge at its commercial heart',
@@ -269,7 +285,9 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         // word the tier can honestly carry).
         hills:     'Stone-walled hill town, the keep visible above the market quarter',
         desert:    'Walled trading town around a great well, caravanserai outside the south gate',
-        mountain:  'Fortified pass town, walls cutting across the valley floor, garrison above',
+        mountain:  defence.hasGarrison
+          ? 'Fortified pass town, walls cutting across the valley floor, garrison above'
+          : 'Fortified pass town, walls cutting across the valley floor',
       };
       return townLayouts[terrainType] || 'Compact within walls, some outlying farms';
     })(),
@@ -289,8 +307,13 @@ export const generateSpatialLayout = (tier, institutions, tradeRoute, terrainTyp
         plains:    sacredBare
           ? `Clustered around ${sacredBare} and green, fields radiating out in open strips`
           : 'Clustered around the green, fields radiating out in open strips',
-        hills:     'Stone-walled village on a south-facing slope, paths converging at the market cross',
-        desert:    `Compact walled settlement around a central well${desertSacred}`,
+        // F1: the walled lines stand only where walls do; the open lines are VETOABLE.
+        hills:     defence.hasWalls
+          ? 'Stone-walled village on a south-facing slope, paths converging at the market cross'
+          : 'Stone-built village on a south-facing slope, paths converging at the market cross',
+        desert:    defence.hasWalls
+          ? `Compact walled settlement around a central well${desertSacred}`
+          : `Compact settlement around a central well${desertSacred}`,
         mountain:  sacredHouse
           ? `Close-built stone houses below the ${sacredHouse}, a single defended gate`
           : waysideShrine

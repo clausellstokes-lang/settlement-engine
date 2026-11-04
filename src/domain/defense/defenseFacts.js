@@ -40,6 +40,8 @@ import { SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
  * @property {boolean} hasWatch a town or city watch stands
  * @property {boolean} hasMilitia a citizen militia stands
  * @property {boolean} hasMercenary a mercenary company or free company stands
+ * @property {boolean} hasGate the place keeps a gate: stone walls (which carry their gates) or a gate row of its own
+ * @property {boolean} hasCommander a garrison stands, so someone commands one (the Garrison Commander's licence)
  * @property {boolean} hasCharter an adventurers' charter hall or guild stands
  * @property {string|null} forceName the roster name of the force that holds the place (garrison, then watch, militia, hired company, charter hall), or null
  * @property {ReadonlyArray<string>} defenceNames the roster names of every standing defence the defence purse pays for (enclosures and forces)
@@ -58,6 +60,11 @@ const firstMatching = (names, re) => names.find((n) => re.test(n)) ?? null;
 const HOSPITAL_RE = /\bhospital/i;
 const HEALER_RE = /\bhealer\b|\binfirmar|\bmonaster|\bfriary\b/i;
 const TIMBER_ENCLOSURE_RE = /palisade|earthwork/i;
+// The town free company is a hired company the bucket vocabulary does not spell
+// (`DEFENSE_BUCKET_KEYWORDS.mercenary`; F1, 2026-11-04). The bucket table is persisted
+// generator output, so the reader counts the row here and the table stays byte-identical.
+const FREE_COMPANY_RE = /\bfree company\b/i;
+const GATE_RE = /\bgates?\b/i;
 
 /**
  * THE ONE ANSWER to "what defends this place, who tends its sick, how long can it eat".
@@ -102,7 +109,9 @@ export function defenseFactsOf(settlement) {
     hasGarrison: forces.garrison.present,
     hasWatch: forces.watch.present,
     hasMilitia: forces.militia.present,
-    hasMercenary: forces.mercenary.present,
+    hasMercenary: forces.mercenary.present || roster.some((n) => FREE_COMPANY_RE.test(n)),
+    hasGate: wallKind === 'stone' || roster.some((n) => GATE_RE.test(n)),
+    hasCommander: forces.garrison.present,
     hasCharter: forces.charter.present,
     forceName,
     defenceNames: Object.freeze(defenceNames),
@@ -122,7 +131,41 @@ export function defenseFactsOf(settlement) {
 /** @type {Readonly<Record<string, (f: DefenseFacts) => boolean>>} */
 const ROLE_NEEDS = Object.freeze({
   'Guard Captain': (f) => f.hasGarrison || f.hasWatch || f.hasMilitia,
+  // F1 (rung 1B): a Garrison Commander commands a garrison; the stress rows and the pool seated
+  // one over a town watch (28 settlements at rung 1, 32 at rung 1B).
+  'Garrison Commander': (f) => f.hasCommander,
 });
+
+/**
+ * @typedef {object} ForceWords
+ * @property {string} body the force as a body, bare: `garrison`, `hired company`, `watch`, `militia`, or `guard` where none stands
+ * @property {string} members its people: `soldiers`, `watchmen`, `militia`, or `guards`
+ * @property {string} member one of them: `soldier`, `watchman`, `militiaman`, or `guard`
+ */
+
+/** @type {Readonly<ForceWords>} */
+export const GARRISON_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
+const MERCENARY_WORDS = Object.freeze({ body: 'hired company', members: 'soldiers', member: 'soldier' });
+const WATCH_WORDS = Object.freeze({ body: 'watch', members: 'watchmen', member: 'watchman' });
+const MILITIA_WORDS = Object.freeze({ body: 'militia', members: 'militia', member: 'militiaman' });
+const GUARD_WORDS = Object.freeze({ body: 'guard', members: 'guards', member: 'guard' });
+
+/**
+ * THE WORDS FOR THE FORCE THAT STANDS (F1, 2026-11-04): a sentence that names the place's
+ * armed body takes its noun here, so "a road toll for the garrison" reads "for the watch" in a
+ * town that keeps a watch and no garrison. A garrison keeps its own words, so a garrisoned place's
+ * prose is unchanged to the byte; a hired company keeps the soldiers but is not called a garrison.
+ *
+ * @param {Pick<DefenseFacts, 'hasGarrison'|'hasWatch'|'hasMilitia'|'hasMercenary'> | null | undefined} facts
+ * @returns {Readonly<ForceWords>}
+ */
+export function forceWordsOf(facts) {
+  if (!facts || facts.hasGarrison) return GARRISON_WORDS;
+  if (facts.hasMercenary) return MERCENARY_WORDS;
+  if (facts.hasWatch) return WATCH_WORDS;
+  if (facts.hasMilitia) return MILITIA_WORDS;
+  return GUARD_WORDS;
+}
 
 /**
  * A filter for roles (a role string, or a candidate row carrying `role`): false for a defence

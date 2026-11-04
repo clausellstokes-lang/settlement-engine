@@ -239,8 +239,8 @@ const PAIRS = [
     "Comes by on occasion. The smallest magic and no higher.",
   ],
   [
-    "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence the garrison cannot manage. You find them along dangerous frontiers.",
-    "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and when the garrison falls short it musters the defence. A frontier fixture where the country is dangerous.",
+    "A plain hall held under a regional adventurers' charter. It posts bounties, houses monster hunters, and takes up the local defence no garrison is here to keep. You find them along dangerous frontiers.",
+    "Chartered by the region's adventuring order and little more than a rough hall for it. Bounties go up on its board, monster hunters bed down inside, and with no garrison to call on it musters the defence. A frontier fixture where the country is dangerous.",
   ],
   [
     "Stolen property passes through the hamlet without fuss. You would know the go-between by sight, never by name.",

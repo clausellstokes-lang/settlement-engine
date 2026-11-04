@@ -21,7 +21,7 @@ import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
 import { hasLocalAgriculturalSupply } from './localSupplyEvidence.js';
-import { generateFoodSecurity } from '../foodGenerator.js';
+import { generateFoodSecurity } from '../foodGenerator.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, the file sits at its line cap
 import { goodsHeldByFoodRecord } from './foodBalance.js';
 
 
@@ -170,7 +170,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeBuild.push({
       source: 'Property Rents',
       percentage: propertyRentPct,
-      desc: 'Ground rents on civic-owned buildings, stalls, and residential plots within the walls.',
+      desc: `Ground rents on civic-owned buildings, stalls, and residential plots ${defenseFactsOf({ institutions }).hasWalls ? 'within the walls' : `in the ${tier}`}.`, // F1: walls only where they stand
     });
   }
   // ── Court fees & fines ──

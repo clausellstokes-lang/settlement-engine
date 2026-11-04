@@ -23,6 +23,7 @@
  *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
+import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js';
 import {
   clearActiveRng,
   getActiveRng,
@@ -192,6 +193,20 @@ const genSettSummary = settlement => {
  * Build the full founding + arrival context object.
  * Used by historyGenerator (genArrivalDetail import) and internally.
  */
+/**
+ * The founding stress notes the place's defence record licenses (F1, rung 1B): a note that names
+ * walls, a garrison or soldiers the record lacks is not drawn; the pool's other notes stand, and a
+ * caller with no roster keeps the whole pool.
+ * @param {ReadonlyArray<string> | undefined} notes
+ * @param {unknown} institutions
+ * @returns {ReadonlyArray<string> | undefined}
+ */
+const licensedNotes = (notes, institutions) => {
+  if (!Array.isArray(notes) || !Array.isArray(institutions)) return notes;
+  const kept = notes.filter((note) => defenseWordsFindings({ institutions }, note).length === 0);
+  return kept.length ? kept : notes;
+};
+
 export const genArrivalDetail = (
   config,
   economicContext = null,
@@ -398,7 +413,7 @@ export const genArrivalDetail = (
     overcoming: pick(OVERCOMING_BY_PROSPERITY[prosperity] || OVERCOMING_BY_PROSPERITY.Moderate),
     stressNote: primaryStress
       ? pickVariant(
-        STRESS_NOTES[primaryStress],
+        licensedNotes(STRESS_NOTES[primaryStress], economicContext?._institutions), // F1: walls only where they stand
         config?._seed ? `${config._seed}::stressNote::${primaryStress}` : null,
       ) ?? null
       : null,
@@ -774,7 +789,9 @@ export const generatePressureSentence = settlement => {
     const raw = PRESSURE_SENTENCES[stressType];
     const templates = typeof raw === 'function' ? raw(detail) : raw;
     if (Array.isArray(templates) && templates.length) {
-      const template = pickRandom2(templates);
+      // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
+      const licensed = templates.filter((t) => typeof t !== 'string' || defenseWordsFindings(settlement, t).length === 0);
+      const template = pickRandom2(licensed.length ? licensed : templates);
       return typeof template === 'function' ? template(detail) : template;
     }
   }

@@ -906,6 +906,10 @@ export const SUPPLY_CHAIN_NEEDS = {
         id: 'garrison',
         upstreamChains: ['food_processing'],
         label: 'Standing Garrison',
+        // F1 (rung 1B): the label names a garrison; where only a watch stands it names the watch
+        // (`computeActiveChains.js :: chainLabelFor`, reading `defenseFactsOf`). VETOABLE wording.
+        labelNeeds: 'hasGarrison',
+        labelOtherwise: 'Standing Watch',
         resource: null,
         rawInputs: [QUALITY_TOOLS_AND_WEAPONS, ADVANCED_WEAPONS_AND_ARMOR],
         // Was ['Garrison', 'Barracks (town)', 'City guard district'] at minTier
@@ -1008,6 +1012,9 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'hospital',
         label: 'Hospital & Surgery',
+        // F1: an almshouse or a foundling home runs the chain without a hospital. VETOABLE wording.
+        labelNeeds: 'hasHospital',
+        labelOtherwise: 'Almshouse Care',
         resource: null,
         rawInputs: [],
         // The dedicated medical institutions must run this chain (catalog names:

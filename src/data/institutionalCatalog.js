@@ -1223,6 +1223,15 @@ export const INSTITUTION_FAMILIES = Object.freeze([
         metropolis: { name: 'Professional city watch', required: true, tags: ['law_enforcement', 'defense'] },
       },
     },
+    // F1 (rung 1B, 2026-11-04): the village may raise a watch. Rolled, never required, weighted by
+    // the military slider like every defence row (`institutionProbability.js :: getBaseChance`, the
+    // `watch` name). Name and text VETOABLE (the owner's content class).
+    {
+      shared: { name: 'Village watch', desc: 'Householders who take turns walking the lanes after dark, keep a lantern at the crossroads, and raise the alarm. Unpaid; the headman keeps the rota.', tags: ['law_enforcement', 'defense'], priorityCategory: 'military' },
+      at: {
+        village: { baseChance: 0.2 },
+      },
+    },
     {
       shared: { tags: ['military', 'defense'], priorityCategory: 'military' },
       at: {
@@ -1347,7 +1356,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: "Adventurers' charter hall", desc: 'Competing organizations.', tags: ['military', 'adventuring'], priorityCategory: 'military' },
       at: {
-        hamlet: { baseChance: 0.12, desc: "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense when the garrison cannot. Common on dangerous frontiers.", magicLicense: 'none' },
+        hamlet: { baseChance: 0.12, desc: "A rough hall operating under a regional adventurers' charter. Posts bounties, shelters monster hunters, and coordinates local defense where no garrison stands. Common on dangerous frontiers.", magicLicense: 'none' },
         village: { baseChance: 0.2, desc: 'A licensed charter hall providing bounties, monster-hunting coordination, and emergency armed response for the surrounding territory. More common in frontier regions.', magicLicense: 'none' },
         town: { baseChance: 0.3, desc: 'A chartered hall serving as the primary adventuring hub for the region. Posts contracts, grades monster threats, maintains gear, and coordinates large-scale operations that militia cannot handle.' },
         city: { name: "Multiple adventurers' guilds", baseChance: 0.7, tags: [], priorityCategory: 'adventuring' },

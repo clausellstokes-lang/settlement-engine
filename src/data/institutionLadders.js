@@ -47,6 +47,7 @@ const AUTHORED_UPGRADE_CHAINS = Object.freeze([
   ["Citizen militia", "Town watch"],
   ["Citizen militia", PROFESSIONAL_CITY_WATCH],
   ["Town watch", PROFESSIONAL_CITY_WATCH],
+  ["Village watch", "Town watch"], // F1: the village rung grows into the town's
   ["Palisade or earthworks", "Town walls"],
   ["Town walls", "City walls and gates"],
   ["Barracks", "Garrison"],

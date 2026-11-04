@@ -94,6 +94,7 @@ export const DEFENSE_BUCKET_KEYWORDS = Object.freeze({
   ]),
   watch: Object.freeze([
     'town watch', 'city watch', 'professional city watch',
+    'village watch', // F1: the village rung (institutionalCatalog.js, the Village watch row)
   ]),
   mercenary: Object.freeze([
     'mercenary company', 'mercenary quarter', 'hired muscle',

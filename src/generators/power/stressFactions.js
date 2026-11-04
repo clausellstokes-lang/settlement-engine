@@ -4,7 +4,7 @@
  * existing factions and injecting the crisis-specific ones.
  */
 import { random as _rng } from '../../kernel/rngContext.js';
-import { getInstFlags } from '../helpers.js';
+import { getInstFlags } from '../helpers.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
 import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
 
 /** A roster name compared loosely: case and a leading article set aside. */
@@ -47,7 +47,7 @@ const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
 
 // applyStressEventFactions — apply every active stress type's power reweighting
 // and faction injection to `factions` (mutates in place).
-export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => {
+export const applyStressEventFactions = (factions, ke, P, S, config, institutions) => { const force = forceWordsOf(defenseFactsOf({ institutions: institutions || [] })), soldiersStand = force.members === 'soldiers'; // F1 (rung 1B): the force words read the record
   (ke('under_siege') &&
     (factions.forEach((N) => {
       ((N.faction.toLowerCase().includes('military') || N.faction.toLowerCase().includes('guard')) &&
@@ -81,7 +81,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.push({
         faction: 'Occupation Authority',
         power: 20,
-        desc: 'External administrative body; all significant decisions require approval or reversal. Locally hated. Their actual power depends on how many soldiers they have here, which varies.',
+        desc: 'External administrative body; all significant decisions require approval or reversal. Locally hated. ' + (soldiersStand ? 'Their actual power depends on how many soldiers they have here, which varies.' : 'Their actual power depends on how much force they can bring here, which varies.'),
       }),
       factions.push({
         faction: 'Resistance Network',
@@ -308,7 +308,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
               ((he.power = Math.round(he.power * 1.2)),
               (he.desc =
                 (he.desc || '') +
-                " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before.")));
+                (soldiersStand ? " The pastoral burden of wartime (soldiers praying before departure, families grieving) has made the institution indispensable in a way it wasn't before." : " The pastoral burden of wartime (the called-up praying before departure, families grieving) has made the institution indispensable in a way it wasn't before."))));
         }),
           // Siege pushes its own 'War Council' first (see the under_siege block);
           // siege AND wartime together minted TWO War Councils in one roster.
@@ -401,7 +401,7 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
                 ((N.power = Math.round(N.power * 1.5)),
                 (N.desc =
                   (N.desc || '') +
-                  ' Fully deployed for containment. Soldiers are being asked to do things that will complicate their relationship with the civilian population.')),
+                  ` Fully deployed for containment. ${force.members[0].toUpperCase()}${force.members.slice(1)} are being asked to do things that will complicate their relationship with the civilian population.`)),
               (N.faction.toLowerCase().includes('merchant') || N.faction.toLowerCase().includes('guild')) &&
                 ((N.power = Math.round(N.power * 0.85)),
                 (N.desc =

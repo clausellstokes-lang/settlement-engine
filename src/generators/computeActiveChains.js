@@ -26,6 +26,22 @@ import {
 } from '../domain/content/customContentSemanticAuthority.js';
 import { druidicFaithRole } from '../domain/arcaneInstitutionIdentity.js';
 import { resourceKeyForLabel } from '../domain/resourceSemantics.js';
+import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
+
+/**
+ * A chain's printed label (F1, rung 1B): a row that names a house the place may lack declares
+ * `labelNeeds` (a `defenseFactsOf` flag) and `labelOtherwise`, and takes the second where the
+ * record denies the first, so "Standing Garrison" never stands over a town watch alone.
+ * @param {{ label?: string, labelsByResource?: Record<string, string>, labelNeeds?: string, labelOtherwise?: string }} chain
+ * @param {string | null | undefined} resourceInputKey
+ * @param {() => Readonly<Record<string, unknown>>} facts
+ * @returns {string | undefined}
+ */
+function chainLabelFor(chain, resourceInputKey, facts) {
+  const label = (resourceInputKey && chain.labelsByResource?.[resourceInputKey]) || chain.label;
+  if (chain.labelNeeds && chain.labelOtherwise && facts()[chain.labelNeeds] !== true) return chain.labelOtherwise;
+  return label;
+}
 
 // ── Id-first processor matching (Cohesion Wave 8 — structural prevention) ────
 // chain.processingInstitutions patterns are static data written for the fuzzy
@@ -179,6 +195,9 @@ const _INCOME_TO_CHAINS = {
 
 export function computeActiveChains(institutions = [], resources = [], tier = 'village', tradeRoute = 'road', tradeDependencies = [], depletedResources = [], magicPriority = 50) {
   const insts = institutions.filter(Boolean);
+  /** @type {Readonly<Record<string, unknown>> | null} */
+  let facts = null;
+  const factsOnce = () => (facts ??= defenseFactsOf({ institutions: insts }));
 
   // Helper: does this settlement have an institution matching any of the names?
   // Id-first for stamped institutions (rename-proof), substring fallback otherwise.
@@ -370,10 +389,7 @@ export function computeActiveChains(institutions = [], resources = [], tier = 'v
       ).filter((output) => !heldOnly || Object.entries(heldOnly).every(([processor, tied]) => (
         !tied.includes(output) || matchedInsts.includes(processor)
       )));
-      const label = (
-        chain.labelsByResource?.[resourceInputKey]
-        || chain.label
-      );
+      const label = chainLabelFor(chain, resourceInputKey, factsOnce);
 
       activeChains.push({
         needKey,

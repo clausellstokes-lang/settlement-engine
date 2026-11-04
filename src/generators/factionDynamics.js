@@ -247,7 +247,7 @@ export function computeCriminalCaptureState(factions, safetyRatio, _instFlags) {
  * @param {Object} instFlags    - from getInstFlags
  * @param {Object} publicLeg   - from computePublicLegitimacy
  * @param {Array}  stressTypes
- * @param {{ hasGarrison?: boolean, hasMercenary?: boolean } | null} [defenseFacts]
+ * @param {{ hasGarrison?: boolean, hasMercenary?: boolean, hasHospital?: boolean } | null} [defenseFacts]
  *   the place's standing forces (`domain/defense/defenseFacts.js :: defenseFactsOf`); null keeps
  *   the line unconditional for a caller that holds no roster
  * @returns {Array} relationship objects
@@ -454,7 +454,7 @@ export function computeFactionRelationships(factions, tier, instFlags, publicLeg
       narrative = `${merc.faction} and ${rel.faction} compete for the same population's loyalty and resources. Church tithes and merchant contracts both claim priority on household income. Church land exemptions and usury restrictions shape commercial strategy in ways merchants resent.`;
     } else if (merP > relP * 1.5) {
       type = 'competitive';
-      narrative = `${merc.faction}'s capital has outpaced ${rel.faction}'s institutional influence. Merchants fund churches, endow hospitals, and purchase indulgences, but on their terms.`;
+      narrative = `${merc.faction}'s capital has outpaced ${rel.faction}'s institutional influence. Merchants fund churches, ${!defenseFacts || defenseFacts.hasHospital ? 'endow hospitals' : 'endow charities'}, and purchase indulgences, but on their terms.`; // F1: a hospital only where one stands
     } else {
       type = 'dependent';
       narrative = `${rel.faction} and ${merc.faction} sustain each other: church institutions provide charity that keeps social stability, merchants provide endowments that fund them. Neither is comfortable with the other's power.`;
