@@ -31,7 +31,7 @@ import { pickRandom2, random01 } from '../helpers.js';
 import { collapseArticleSeams } from '../narrativeProse.js';
 import { POLITICAL_FLAVOR } from '../narrativeText.js';
 import { generateSiegeCapability } from './siegeCapability.js';
-import { deriveLegacyAnnotations } from '../legacyGenerator.js';
+import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { defenceTwinSentences } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F11: one line, so no cited line moves
 
 // ─── buildStressProfile ───────────────────────────────────────────────────────
 /**
@@ -41,7 +41,7 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js';
  * Draws from the active RNG, so callers that need a stable draw budget wrap it
  * in their own substream (generateCoherence does).
  */
-export const buildStressProfile = (events, _tier, _config) => {
+export const buildStressProfile = (events, _tier, _config, defence) => defenceTwinSentences(stressProfileDrawn(events), defence); const stressProfileDrawn = (events) => { // F11: a wall line the place cannot speak takes its twin (data/defenceTwinLines.js), after the draw
   if (!events || events.length === 0) return 'recently established and still finding its character';
 
   const disasters = events.filter(e => e.type === 'disaster').length;
@@ -128,7 +128,7 @@ export const enrichHistoryCoherence = (history, settlement) => ({
   historicalCharacter: buildStressProfile(
     history.historicalEvents || [],
     settlement.tier,
-    settlement.config,
+    settlement.config, defenseFactsOf(settlement), // F11
   ),
   siegeNarrative: historySiegeNarrative(history),
   legacyAnnotations: deriveLegacyAnnotations(history, settlement),

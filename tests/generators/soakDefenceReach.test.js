@@ -53,3 +53,48 @@ describe('defence reach, by rule', () => {
     expect(isDefenceClaim({ check: 'defense-words', quote: 'A walled plot gated against livestock.', detail: 'walls without walls, a palisade or earthworks' })).toBe(false);
   });
 });
+
+/**
+ * F11 unit 2, ENCLOSURE-WALLS (docs/SOAK_10000_RUNG2_2026-11-04.md §2 kind 4; the chair's ruling of
+ * 2026-11-04: a building's own walls are NOT a fortification). Rung 2's 43 enclosure findings are
+ * silent; a perimeter claim still fires. "its walls" is the building's only in the building's own
+ * description: the same words of the settlement ("armed men on its walls") stay a claim.
+ */
+describe('F11 · a building\'s own walls are not a fortification', () => {
+  const WALLS = 'walls without walls, a palisade or earthworks';
+  const CARAVANSERAI = 'Behind its walls, merchants shelter their animals and cargo overnight in security.';
+  const FOUNDLING = 'Takes in abandoned infants and small children and keeps them in basic care until they are apprenticed, placed with families, or raised on within its walls.';
+  const TIDEMARK = 'A tidemark from the flood still stains the lower walls of the oldest houses.';
+  /** @param {string} desc */
+  const rosterWith = (desc) => ({ institutions: [{ name: 'X', desc: `${desc} The church usually runs it.` }] });
+  /** @param {string} quote @param {any} [s] */
+  const claims = (quote, s) => isDefenceClaim({ check: 'defense-words', quote, detail: WALLS }, s);
+
+  it('the three enclosure lines of rung 2 are silent', () => {
+    expect(claims(CARAVANSERAI, rosterWith(CARAVANSERAI))).toBe(false);
+    expect(claims(FOUNDLING, rosterWith(FOUNDLING))).toBe(false);
+    expect(claims(TIDEMARK)).toBe(false);
+  });
+  it('the Foundry journal\'s labelled, escaped row of the same description is silent too', () => {
+    expect(claims(`- **Caravanserai**: ${CARAVANSERAI}`, rosterWith(CARAVANSERAI))).toBe(false);
+    expect(claims(`- **Foundling home**: ${FOUNDLING}`, rosterWith(FOUNDLING))).toBe(false);
+    expect(claims(`- **Caravanserai**: ${CARAVANSERAI}`)).toBe(true);
+  });
+  it('a building named with "of the" or a possessive keeps its walls', () => {
+    expect(isDefenceReach('walls', 'Refuge inside the walls of the great temple')).toBe(true);
+    expect(isDefenceReach('walls', "The hall's walls sweat in the wet season.")).toBe(true);
+  });
+  it('the reserve line and the siege pool line still fire', () => {
+    expect(claims('The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.')).toBe(true);
+    expect(claims('the walls have settled the argument')).toBe(true);
+  });
+  it('a perimeter claim still fires: the walls, walled, the town\'s walls, outside the walls, its walls of the settlement', () => {
+    for (const quote of [
+      'Outside the walls, the camps grow by the week.',
+      'A walled town on the river.',
+      "The town's walls are older than its charter.",
+      'Ashby can put a real body of armed men on its walls.',
+    ]) expect(claims(quote, rosterWith(CARAVANSERAI))).toBe(true);
+    expect(claims(CARAVANSERAI)).toBe(true); // not on the roster: "its" is not known to be the building's
+  });
+});

@@ -52,6 +52,11 @@ export const DEFENCE_TWIN_LINES = Object.freeze({
   // power/governanceNarrative.js — the merchant-army baseline conflict.
   "A guild's private soldiers arrested a rival's factor. The public watch is refusing to intervene in what they call a 'merchant matter'.":
     Object.freeze({ needs: 'soldiers', twin: "A guild's hired guards arrested a rival's factor. The public watch is refusing to intervene in what they call a 'merchant matter'." }),
+  // narrativeText.js :: POLITICAL_FLAVOR.disaster_heavy — the reserve line's first sentence (F11,
+  // rung 2B: soak1k-6879 printed it in a place with no walls); keyed by SENTENCE because the line
+  // goes on to name a drawn event, read through `defenceTwinSentences`.
+  'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.':
+    Object.freeze({ needs: 'walls', twin: 'The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.' }),
 });
 
 /**
@@ -78,4 +83,20 @@ export function defenceTwinLine(line, facts) {
   const entry = DEFENCE_TWIN_LINES[line];
   if (entry === undefined || holds(entry.needs, facts)) return line;
   return /** @type {T} */ (/** @type {unknown} */ (entry.twin));
+}
+
+/**
+ * A drawn passage as this place can speak it, sentence by sentence: each sentence that is a key of
+ * the table takes its twin where the place lacks what it names (`defenceTwinLine`), and every other
+ * sentence and the spacing between them are kept. For a line whose drawn tail (an event's name)
+ * keeps the whole from being a key. A non-string and an unknown record are handed back untouched.
+ * @template T
+ * @param {T} text
+ * @param {DefenceTwinFacts | null | undefined} facts the place's `defenseFactsOf` answer
+ * @returns {T}
+ */
+export function defenceTwinSentences(text, facts) {
+  if (typeof text !== 'string' || !facts) return text;
+  const twinned = text.split(/(?<=[.!?])(\s+)/).map((part) => defenceTwinLine(part, facts)).join('');
+  return /** @type {T} */ (/** @type {unknown} */ (twinned));
 }

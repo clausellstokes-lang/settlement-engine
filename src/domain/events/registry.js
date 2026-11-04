@@ -700,7 +700,7 @@ export const EVENT_REGISTRY = /** @type {Record<string, EventSpec>} */ ({
       if (!snap || !(event.payload?.deityRef ?? event.targetId)) {
         return 'The settlement turns away from its patron god. No deity now holds primacy.';
       }
-      const name = snap.name || 'a new god';
+      const name = snap.name || 'A new god';
       return `${name} is proclaimed the settlement's patron deity.`;
     },
   },

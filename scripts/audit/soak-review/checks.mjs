@@ -241,7 +241,7 @@ export function reviewSettlement(s, config, r) {
   // ── coh: the seven instruments, every surface
   // F1 unit 4: the defence-words check counts defence CLAIMS; a soldier who is one person, a walled
   // plot, a trade's customers or a hedged hospital is reach, licensed by rule (`defenceReach.mjs`).
-  for (const f of coherenceBattery(s, surfaces)) if (isDefenceClaim(f)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
+  for (const f of coherenceBattery(s, surfaces)) if (isDefenceClaim(f, s)) add(`coh:${f.check}`, f.surface, f.quote, f.detail);
 
   // ── X-47: no district or tavern names on any text surface
   const quarters = (s.spatialLayout?.quarters || []).flatMap((q) => [q?.name]).filter((n) => typeof n === 'string' && n.length > 3);

@@ -30,7 +30,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js';
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; // F11: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -741,8 +741,8 @@ const generateFactionGoal = (npcA, npcB, stressFlags) => {
 
 // pickFactionName
 // random01
-const random01 = r => _rng() < r,
-  replaceTokens = (r, s) => r.replace(/\{(\w+)\}/g, (o, d) => s[d] || o);
+const random01 = r => _rng() < r;
+// replaceTokens retired by F11: generateCrimeLevel fills its slots with narrativeProse.js :: fillSentenceSlots
 
 // generateCrimeLevel
 // NPC_PRESENTATION_MODES
@@ -780,8 +780,8 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
     const effect = pickRandom2(stressEffects);
     const otherNpc = allNpcs.filter((_, idx) => idx !== npcIndex)[0];
     return {
-      what: replaceTokens(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name || 'someone' }),
-      stakes: replaceTokens(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name || 'someone' }),
+      what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
+      stakes: fillSentenceSlots(effect.stakes, { faction: govFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }),
     };
   }
 

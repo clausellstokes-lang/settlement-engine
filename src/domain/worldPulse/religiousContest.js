@@ -1007,7 +1007,7 @@ export function advanceReligionStates({ snapshot, worldState = null, tick = 0, n
       // severity scales with the target's piety (0.5 exactly when no record). The
       // amplifier tag (localMult/realmMult) rides the receipt for legibility.
       const amplifiers = amplifierTag(settlement);
-      const reasons = [`${newPatron?.name || 'a rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`];
+      const reasons = [`${newPatron?.name || 'A rising faith'} overtook the former patron to become ${nameFor(cid)}'s patron creed.`];
       if (amplifiers && pietyMult !== 1) reasons.push('Deep local devotion sharpened the upheaval beyond what the numbers alone would.');
       if (newPatron) outcomes.push(conversionOutcome({
         cause: occupations?.[cid]?.occupierId ? 'occupation' : 'contest',
