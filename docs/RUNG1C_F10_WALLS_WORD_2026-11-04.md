@@ -136,3 +136,86 @@ Generated from the six state leaves at the cure (`src/data/dossierStateProse/*.g
 | v2 "The {defwork} stands ahead of any present need; walls are easier to keep than to raise,…" | DS-DEF-11 | `WALLED-QUIET` | no: the pool key reads the enclosure | already gated |
 | v1 "{settlement} is too small to wall and knows it; the town's safety is its neighbours, it…" | DS-DEF-11 | `UNWALLED-SMALL` | no: the pool key reads the enclosure | already gated |
 | v2 "No wall marks where {settlement} ends; at this size the country and the town simply agr…" | DS-DEF-11 | `UNWALLED-SMALL` | no: the pool key reads the enclosure | already gated |
+
+## 3. The cure (unit 2, `4a49ae5b`)
+
+**One gate.** The state-prose kernel's fail-closed mark channel (`stateProseKernel.js :: STATE_MARK_DIMENSIONS`, law 5) gains a `walls` fact dimension, `walls` / `no walls`. It is answered at all 17 desk entries by the F1 reader: `defense/defenseFacts.js :: wallsAnswered(settlement, options)`, which reads `defenseFactsOf(settlement).hasWalls`. A pool that names walls is unreadable to a caller that has not answered the dimension, so a new desk entry cannot leak a wall line silently. The general desk's two `dimensions` overrides (DS-GEN-6, DS-GEN-9) now keep the answer.
+
+**The twins.** Each of the 40 variants in §2 carries `walls`; its twin, appended to the same pool in the same angle (`[angle · no walls]`, the next row number, so no vid moves), says the same thing without the walls. Examples: "the siege has settled the argument"; "being decided outside the hall rather than inside it"; "what threatens it comes from the country around it rather than from within"; "The halls, the houses and the roads". The twins add no defence term (no garrison, soldiers or hospital). One public wall-neutral line was added to DS-WAR-1 `feasibility require_betrayal` (v6). Without it the split would have left each wall value single-voiced for the player, and the thin-state ratchet would have risen from 14 to 16.
+
+**Walled places are unmoved.** For a walled place the eligible set is unchanged: the `walls` variants plus every unmarked one. So the index-stable draw is unchanged. The exception is the require_betrayal pool, which gained the neutral line. The test proves it on the three births given a palisade: they print their base lines, byte for byte.
+
+**The red-first** (`tests/domain/wallsWordDossierProse.test.js`). At `64aeda874` three of its four tests failed by title, and the sweep named 39 ungated mounted variants. After the cure all four pass. Births 24, 92 and 336 now print DS-POW-2 v5, v5 and v6 (the twins) where they printed v4, v1 and v4. The sweep also holds the rule going forward: a mounted variant that names walls must carry the mark or sit in a pool whose key reads the enclosure.
+
+**The projection.** `npm run gen:dossier-prose` refuses at this base: the wiring census is stale against three desk files at `64aeda874` itself (`generalStateProse.js`, `defenseStateProse.js`, `warFaithStateProse.js`, from the self-vouch compose). Re-taking it (`wiring-census.mjs --dry`) would move 106 rows, mixing this lane's cause with the base's. So the leaves were projected by a scratch copy of the projector with only `assertCensusCurrent` bypassed, and the copy was deleted. Only the six state leaves moved (2,266 → 2,307 variants). The causal, connectives, norms and relations leaves are byte-identical. The census re-take and `--check` belong to the landing seat.
+
+## 4. The count
+
+| | base `64aeda874` | tip `4a49ae5b` |
+|---|---|---|
+| `coh:defense-words`, 60 | 4 (thorp 1, town 3) | **2** (town 2: `soak1k-45` crisisCast, `soak1k-15` civic office) |
+| `coh:defense-words`, 1,000 | 57 (thorp 8, hamlet 8, village 18, town 23) | **35** (hamlet 3, village 15, town 17) |
+| `A-12:self-vouch-false`, 1,000 | 2 | **0** |
+| every other class, 1,000 | | unchanged |
+
+Run times: 1,000 at the tip took 199 s, 0 errors. **No pool-family seed remains.** On A-12, both of its cases (`soak1k-171` Ravenko, `soak1k-313` Achilopolis) had exactly one contradiction finding, and it was DS-ECO-8's "The halls, the walls and the roads…" in a place with no walls. The twin clears both. So 1C's PLAUSIBLE reading of `soak1k-313` as an A-12 instrument reach is refuted, and `soak1k-171` is answered: the battery passes a record that holds no contradiction, and the soak contradicted a dossier sentence the battery does not read.
+
+**The 35 that remain, every seed and sentence.** None is a dossier-pool line. All are the generation-time writers of §1.
+
+- `soak1k-380` (village): In the war, the defence is led by Ciarán Walsh of Household Council: holds the garrison's office. // Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Protect their own through a war tha
+- `soak1k-416` (village): In the war, the defence is led by Cairbre Tobin of Elder Council: holds the garrison's office.
+- `soak1k-452` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-476` (village): In the raids, the brunt falls on Étaín MacCarthy of Military/Guard: its people stand on the walls.
+- `soak1k-620` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-848` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-872` (village): holds the garrison's office.
+- `soak1k-45` (town): In the raids, the brunt falls on Umesh Kaur of Military/Guard: its people stand on the walls.
+- `soak1k-165` (town): Move people beneath the walls unseen.
+- `soak1k-213` (town): Wants to keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes. // Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Rebuild guard morale after years of // Kyr Lekapenos** (Guard Captain · defends): Wants to keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frighten
+- `soak1k-321` (town): A guild's private soldiers arrested a rival's factor.
+- `soak1k-397` (hamlet): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-441` (town): Walls, wells, roads, and the watch // In the raids, the brunt falls on Antonius Aquila of Monster Hunters / Adventurers: its people stand on the walls.
+- `soak1k-597` (town): Walls, wells, roads, and the watch
+- `soak1k-801` (town): Walls, wells, roads, and the watch
+- `soak1k-86` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-98` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-134` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-650` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-686` (village): Waystation**: An overnight stop behind walls, offering stabling, a well, and basic supplies to caravans and long-haul travellers.
+- `soak1k-782` (village): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-806` (village): Identify the person inside the walls who is communicating with the besiegers — End this siege in a way the settlement can recover from
+- `soak1k-962` (village): Identify the person inside the walls who is communicating with the besiegers — End this siege in a way the settlement can recover from
+- `soak1k-15` (town): Walls, wells, roads, and the watch
+- `soak1k-315` (town): Walls, wells, roads, and the watch
+- `soak1k-339` (town): The power Military Council (minor) garrison-backed
+- `soak1k-375` (town): Wants to keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes. // Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Rebuild guard morale after years of // Valdis Ketilsson** (Guard Captain · defends): Wants to keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frigh
+- `soak1k-403` (hamlet): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-543` (town): Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Protect their own through a war tha
+- `soak1k-579` (town): Identify the person inside the walls who is communicating with the besiegers — End this siege in a way the settlement can recover from
+- `soak1k-615` (town): Move people beneath the walls unseen.
+- `soak1k-739` (hamlet): Someone is paying their soldiers more than their salary. // The soldiers aren't saying who.
+- `soak1k-807` (town): Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Build something that doesn't need t // Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes — Achieve enough distinction to be re
+- `soak1k-819` (town): Walls, wells, roads, and the watch
+- `soak1k-831` (town): Move people beneath the walls unseen.
+
+## 5. Reds this lane causes (none re-recorded here)
+
+Attribution is by test title, against the same 55 governing files on a pristine copy of the base (`git archive 64aeda874`). The base carries 29 red tests in those files; the tip carries 43; 14 titles are this lane's, all from one cause (41 added lines, one dimension):
+- **Registers:** the prose-shift register (`dossierStateProseProjection.contract` "recomputes every pin from the leaves", "MUTANT: a mechanism that moves without its row"); the prose byte ratchet (`proseCorpusBytes` RAW exact, GZIP band; bytes owed); `proseEntryContradiction` ×3 (its line-keyed anchors shifted by the inserted rows, and its loader counts 2030 → 2065, 2734 → 2774, trailing-coordinate 328 → 336); `proseWiringCensus` "the VARIANT column closes" (the census re-take).
+- **Corpus totals and shrink-only readings:** `composeStateProse` 2266 → 2307; `warFaithStateProseDesk` 418 → 429; `proseComposed` ×3 (corpus 2307, the A0b field reading 1282 → 1306, the A13 citation habit 7 → 8, which the twins inherit from their originals); `proseWaveGate` units 383 → 385.
+- **Masked under base-red titles (PLAUSIBLE additive):** `dossierProseManifest` "THE DRIFT ARM" (the composed prose of unwalled towns moves to the twins). `proseDrawnAnchors` was red at the base on `warFaithStateProseDesk.test.js` and is not added to: this lane's test computes its anchors with `variantByVid`.
+- **Moved here with the mechanism (pins whose premise this lane changes):** the mark vocabulary (7 → 9, kernel and contract), the dimensioned block list (3 → 19), the undimensioned-pool floor (762 → 730), the DS-GEN-3 and DS-HK-1 dimensions, the warFaith leaf's dimension arm, and the 17 mount rows' `dimensions: ['walls']` declarations.
+- **Goldens:** none. The row hash (sha256 of the generated settlement) of `soak1k-24`, `-92` and `-336` is identical before and after (`b51d754bd3e4690d`, `4d8b32dbc34cfb70`, `ad63cb573011e93e`). The prose is render-time.
+- **Types:** `tsc --noEmit` reports the base's 167 errors, the same set; none is in a touched file. eslint: 0 errors.
+
+## 6. VETOABLE content and open questions
+
+- The 41 new lines (§2's "twin vN" and DS-WAR-1 v6): their wording is the owner's class.
+- **The 34-writer residue** (§1, §4) is generation-time: `npcData.js` hooks, `institutionServices.js`, `crisisCast.js`, `npcGenerator.js`, a waystation desc and a guild line. Curing it moves generated towns, so goldens, one cause per signed shift. It is F1's intake and needs a lane of its own.
+- **Gates** (18 variants) and **unmounted blocks** (29 variants) are left. "Gate" is not the check's term, and `hasGate` is its own fact. An unmounted block owes the same marks the day it is lit.
+- **The census.** The wiring census was already stale at the base. The landing seat re-takes it once, over every composed lane.
+- **Sibling lanes.** F9 edits the DS-DEF magic and crime blocks of the same pool doc. This lane touched DS-DEF only at DS-DEF-6's two `[counterforce]` rows. The six generated leaves conflict by construction: the landing re-projects them after the merge.
+
+## 7. CONFIRMED vs PLAUSIBLE
+
+**CONFIRMED:** the base and tip counts (60 and 1,000, read from `artifacts/f10-base*` and `artifacts/f10-tip*`); the red-first, red before and green after by its titles; the walled control byte-identical; the three row hashes; the base-attributed reds; the type and lint readings; the A-12 cause. **PLAUSIBLE:** pool-level reachability inside mounted blocks; the residue's writer names (sorted by quote); the drift manifest's additive move.
