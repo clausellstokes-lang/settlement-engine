@@ -8,7 +8,7 @@
  * rng, no clock; the same record gives the same findings. Measured cost on 120 generations:
  * 8.9–9.3% of generation time (the chair's line is 10%).
  */
-import { BATTERY_CHECKS, coherenceBattery } from '../domain/coherence/coherenceBattery.js';
+import { RECORD_BATTERY_CHECKS, recordBattery } from '../domain/coherence/recordBattery.js';
 
 /** Keys whose strings are not the dossier's own words: the request, the receipt, the trace. */
 const RECORD_TEXT_SKIPPED_KEYS = new Set([
@@ -17,13 +17,9 @@ const RECORD_TEXT_SKIPPED_KEYS = new Set([
   'simulationTrace',
 ]);
 const BATTERY_QUOTE_MAX = 160;
-/**
- * The battery's checks the receipt runs: all of them but `hook-truth-page`, which renders the
- * hooks the way the page reads them and so is a page check, not a record check.
- */
-export const RECORD_BATTERY_CHECKS = Object.freeze(
-  BATTERY_CHECKS.filter(check => check !== 'hook-truth-page'),
-);
+// The receipt runs recordBattery.js's checks: every battery check but hook-truth-page,
+// which reads the page's hook collector, not the record.
+export { RECORD_BATTERY_CHECKS };
 
 /**
  * The record's own words, as the battery's surfaces: every stored string that holds a space
@@ -59,7 +55,7 @@ export function recordTextSurfaces(settlement) {
 }
 
 /**
- * The coherence battery (domain/coherence/coherenceBattery.js) over the record alone: its
+ * The coherence battery's narrow entry (domain/coherence/recordBattery.js) over the record alone: its
  * record-level instruments and its word instruments read against the strings the record
  * stores — never a render. Every battery check is one of the root-cause kinds 1–5 and 8,
  * so every finding is a contradiction; the check label is the battery's own.
@@ -68,10 +64,10 @@ export function recordBatteryFindings(settlement) {
   if (settlement == null || typeof settlement !== 'object') return [];
   const text = recordTextSurfaces(settlement);
   return [
-    ...coherenceBattery(settlement, { record: text.all }, {
+    ...recordBattery(settlement, { record: text.all }, {
       only: RECORD_BATTERY_CHECKS.filter(check => check !== 'tier-noun'),
     }),
-    ...coherenceBattery(settlement, { record: text.town }, { only: ['tier-noun'] }),
+    ...recordBattery(settlement, { record: text.town }, { only: ['tier-noun'] }),
   ].map(entry => {
     const quote = String(entry.quote || '').replace(/\s+/g, ' ').trim();
     return Object.freeze({
