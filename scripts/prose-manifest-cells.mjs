@@ -117,6 +117,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' the food record does not show; 232 of the 1,050 rows move, none added or removed.'
     + ' 2026-11-04 (X-46 car 1, docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 1264a8152 because the owner\'s historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner\'s word); 376 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (X-46 car 2, docs/shift-records/2026-11-04-rung1-02-x46-car-2-thresholds.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of d4bf6431c because the thresholds — seventeen bare population comparisons re-based through TIER_STAMP_CUTS, the Dwellings and Housing rows on the owner\'s household column, Money changers\' floor 3,000 -> 2,000; 8 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
