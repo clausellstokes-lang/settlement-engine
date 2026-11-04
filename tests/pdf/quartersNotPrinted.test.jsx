@@ -20,6 +20,7 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { normalizeSettlement } from '../../src/domain/normalizeSettlement.js';
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
+import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 
 const INDICES = Array.from({ length: 12 }, (_, i) => i);
@@ -52,11 +53,15 @@ beforeAll(async () => {
     const vm = buildViewModel({ settlement: s, phase: 'canon' });
     const chapter15 = pdfLeaves(React.createElement(IdentityDailyLife, { settlement: s, narrativeMode: false, vm, stateProse: null }), [])
       .join('').replace(/[ \t]+/g, ' ');
+    // The WHOLE canon dossier, every chapter (the Overview's own QUARTERS block among them),
+    // with the battery's props (renderHarness.mjs :: renderSurfaces).
+    const pdf = pdfLeaves(React.createElement(SettlementPDF, { settlement: s, phase: 'canon', variant: 'canon_dossier', faithUnlocked: true, isFounder: true, isAnonymous: true }), [])
+      .join('').replace(/[ \t]+/g, ' ');
     const journal = buildJournalPages(vm, { variant: 'canon_dossier', faithUnlocked: true, settlement: s })
       .map((p) => `# ${p.name}\n${p.markdown}`).join('\n');
     // The battery's own reading (scripts/audit/soak-review/checks.mjs, X-47:district-name).
     const names = (s.spatialLayout?.quarters || []).map((q) => q?.name).filter((n) => typeof n === 'string' && n.length > 3);
-    ROWS.push({ seed, s, vm, chapter15, journal, names });
+    ROWS.push({ seed, s, vm, chapter15, pdf, journal, names });
   }
 }, 600000);
 
@@ -85,12 +90,21 @@ describe('X-47: no quarter name in any text export before the plat', () => {
     expect(offenders, `printed quarter names:\n${offenders.slice(0, 20).join('\n')}`).toEqual([]);
   });
 
+  test('the whole canon-dossier PDF prints no quarter name (chapter 01 Overview included), over soak1k-0 … soak1k-11', () => {
+    const offenders = printed('pdf');
+    expect(offenders, `printed quarter names:\n${offenders.slice(0, 20).join('\n')}`).toEqual([]);
+  });
+
   test('the walk read real exports, and the view model still carries the quarters for the plat', () => {
     const zero = ROWS.find((r) => r.seed === 'soak1k-0');
     // anchored: the dry run's named quarter is on the record, so its absence above is not vacuous.
     expect(zero.names).toContain("Woodcutters' Ground");
-    for (const { seed, s, vm, chapter15, journal, names } of ROWS) {
+    for (const { seed, s, vm, chapter15, pdf, journal, names } of ROWS) {
       expect(chapter15.includes(s.name), `${seed}: chapter 15 carries the settlement's name`).toBe(true);
+      expect(pdf.includes('Identity & Daily Life') && pdf.includes('Overview'), `${seed}: the PDF carries chapters 01 and 15`).toBe(true);
+      expect(vm.overview.quarters.map((q) => q.name), `${seed}: vm.overview.quarters`).toEqual(
+        (s.spatialLayout?.quarters || []).map((q) => q.name),
+      );
       expect(journal.includes('# Identity & Daily Life'), `${seed}: the journal carries the identity page`).toBe(true);
       // No data removed: the view model keeps every quarter (the plat reads it).
       expect(vm.identity.quarters.map((q) => q.name), `${seed}: vm.identity.quarters`).toEqual(
