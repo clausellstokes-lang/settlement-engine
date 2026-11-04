@@ -35,6 +35,7 @@ import {
   SEASONAL_ROUTE_FOOD_IMPORT_RATE,
   waterAccessKind,
 } from '../domain/tradeRouteSemantics.js';
+import { hasMarketInstitution } from '../domain/facts/market.js';
 
 // ── THE BASE NUMBERS (FOOD-2, chair ruling 2, 2026-11-03; fix shape E) ──────────────
 // Per capita and per tier, so the arithmetic holds under any headcount scale. Every place
@@ -172,7 +173,7 @@ export function generateFoodSecurity(tier, institutions, config) {
   const hasPastoral       = hasInst('pastoral', 'grazing', 'livestock', 'shepherd', 'common graz');
   const hasHunting        = hasInst('hunting', 'managed forest', 'woodcutter');
   const hasOrchard        = hasInst('orchard', 'kitchen garden', 'herb garden');
-  const hasMarket         = hasInst('market', 'marketplace', 'daily market', 'district market');
+  const hasMarket         = hasMarketInstitution(institutions); // CENSUS-1 fact 5: the market home (a black market is not one)
   const _hasBakery         = hasInst('baker', 'bakery');
   const hasDruid          = hasInst('druid', 'grove', 'elder grove', 'sacred grove'); // J33: Warden's Lodge is defence, not druid (the owner, 2026-10-01)
   const hasDivine         = hasInst('cathedral', 'monastery', 'great cathedral', 'parish church');

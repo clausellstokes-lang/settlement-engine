@@ -32,7 +32,7 @@ import { coherenceBattery } from '../../../src/domain/coherence/coherenceBattery
 import { isDefenceClaim } from './defenceReach.mjs';
 import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
 import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
-import { hasMarketInstitution } from '../../../src/generators/economy/viability.js';
+import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';

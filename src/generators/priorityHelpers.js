@@ -4,7 +4,7 @@
  * Extracted from helpers.js to keep it focused.
  */
 
-import {clamp} from './helpers.js';
+import {clamp} from './helpers.js'; import { hasMarketInstitution } from '../domain/facts/market.js';
 import {
   isMaterializedCustomContent,
   nativeSemanticNames,
@@ -57,7 +57,7 @@ const getInstitutionNames = (institutions = []) => {
     hasGates:         hasAny(names, ['gates','town walls','city walls','massive walls','palisade']),
     hasPrison:        hasAny(names, ['prison','stocks','large prison','massive prison']),
     hasCourtSystem:   hasAny(names, ['courthouse','court buildings','democratic assembly','city hall','town hall']),
-    hasMarket:        hasAny(names, ['market','bazaar','fair','trade center','exchange']),
+    hasMarket:        hasMarketInstitution(institutions), // CENSUS-1 fact 5: the market home ('black market' and 'stock exchange' are not markets)
     hasGuild:         hasAny(names, ['guild','guild consortium','guild governance']),
     hasMerchantGuild: hasAny(names, ['merchant guild','merchant oligarchy']),
     hasBank:          hasAny(names, ['bank','money changer','counting','stock exchange']),

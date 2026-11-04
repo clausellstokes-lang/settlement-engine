@@ -25,7 +25,7 @@
 
 import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
-import { hasMarketInstitution } from '../../generators/economy/viability.js';
+import { hasMarketInstitution } from '../facts/market.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 import { waterOf } from '../facts/water.js';
