@@ -208,7 +208,7 @@ export function deriveCriminalStructure(settlement) {
       : hasDiffuse ? 'diffuse'
         : null;
   // (Lane RUNG1B-F4 unit 3: both facts are read from the crime signal's one home, `crimeSignal.js`.)
-  const signal = crimeSignalOf(r);
+  const signal = crimeSignalOf({ seats: r.powerStructure?.factions, estate: r.institutions });
   const key = ladder
     ?? (signal.factions.length ? 'organized'
       : signal.houses.length ? 'semi-organized'

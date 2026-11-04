@@ -25,15 +25,17 @@ import { isCriminalInstitution } from './corruption.js';
  */
 
 /**
+ * The caller hands over the two lists it already holds (the roster's seats, the estate), so this
+ * module reads no settlement shape of its own.
  * @param {{
- *   powerStructure?: { factions?: ReadonlyArray<{ category?: unknown, faction?: unknown, name?: unknown } | null | undefined> } | null,
- *   institutions?: ReadonlyArray<unknown> | null,
- * } | null | undefined} record
+ *   seats?: ReadonlyArray<{ category?: unknown, faction?: unknown, name?: unknown } | null | undefined> | null,
+ *   estate?: ReadonlyArray<unknown> | null,
+ * } | null | undefined} lists
  * @returns {CrimeSignal}
  */
-export function crimeSignalOf(record) {
-  const seats = Array.isArray(record?.powerStructure?.factions) ? record.powerStructure.factions : [];
-  const estate = Array.isArray(record?.institutions) ? record.institutions : [];
+export function crimeSignalOf(lists) {
+  const seats = Array.isArray(lists?.seats) ? lists.seats : [];
+  const estate = Array.isArray(lists?.estate) ? lists.estate : [];
   const factions = seats
     .filter((seat) => seat?.category === 'criminal')
     .map((seat) => String(seat?.faction ?? seat?.name ?? ''));

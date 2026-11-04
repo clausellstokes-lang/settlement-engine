@@ -879,7 +879,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
   // criminal faction and no criminal house, no NPC is filed under a "criminal network" or a
   // "Thieves' Guild" (471 and 17 NPCs in 1,000 soak places), and a secret or goal naming a
   // thieves' guild takes the pool's own "a powerful outside interest". No draw.
-  const noCrime = !crimeFaction && !crimeSignalOf({ powerStructure: { factions }, institutions }).present;
+  const noCrime = !crimeFaction && !crimeSignalOf({ seats: factions, estate: institutions }).present;
   const milFaction = factions.find(
     f =>
       f.category === 'military' ||

@@ -18,7 +18,7 @@ describe('the crime-wave tension reads the crime signal', () => {
   for (const i of [134, 830]) {
     it(`soak1k-${i}: a place with no criminal faction or house tells no crime wave`, () => {
       const { settlement } = birth(i);
-      expect(crimeSignalOf(settlement).present).toBe(false);
+      expect(crimeSignalOf({ seats: settlement.powerStructure.factions, estate: settlement.institutions }).present).toBe(false);
       const tensions = settlement.history?.currentTensions || [];
       expect(tensions.filter((t) => /criminal network/i.test(JSON.stringify(t))).map((t) => t.name)).toEqual([]);
       expect(tensions.length).toBeGreaterThan(0);

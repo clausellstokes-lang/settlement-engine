@@ -464,7 +464,7 @@ const buildHistoricalEvent = (
     // template is set aside and the loop draws again, so only those places' streams move. The
     // roster here is the pre-trim one; the density law's trim only removes a criminal faction,
     // never adds one, so "none here" is "none on the final record".
-    if (candidate.type === 'crime_wave' && !crimeSignalOf({ powerStructure: { factions }, institutions }).present) continue;
+    if (candidate.type === 'crime_wave' && !crimeSignalOf({ seats: factions, estate: institutions }).present) continue;
     selected.push({ ...candidate });
     usedTypes.add(candidate.type);
   }
