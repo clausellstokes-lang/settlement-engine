@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js';
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -743,7 +743,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = deriveBaselineConflict({
+  let recentConflict = defenceTwinLine(deriveBaselineConflict({ // F10: a soldiers line its twin where no garrison or hired company stands (data/defenceTwinLines.js)
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -752,7 +752,7 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  });
+  }), defenseFactsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }));
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
