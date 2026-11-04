@@ -69,7 +69,7 @@ export function aggregate(out, meta) {
     for (const [p, v] of Object.entries(scalars)) { if (v === null || v === undefined) continue; let a = fieldVals.get(p); if (!a) { a = []; fieldVals.set(p, a); } a[k] = v; }
     for (const [p, vs] of Object.entries(row.features?.cats || {})) { const byT = cats.get(p) ?? {}; const t = (byT[row.tier] ??= {}); for (const [v, n] of Object.entries(vs)) t[v] = (t[v] || 0) + n; cats.set(p, byT); }
     if (fBuf.length > 5000) flush();
-    rows.push({ i: row.i, seed: row.seed, tier: row.tier, sentences: row.sentences?.length ?? 0, rendered: row.rendered, sentenceHashes: row.sentences || [] });
+    rows.push({ i: row.i, seed: row.seed, tier: row.tier, sentences: row.sentences?.length ?? 0, rendered: row.rendered, sentenceHashes: row.sentences || [], houses: row.houses });
   }
   flush();
   const N = rows.length;
@@ -119,7 +119,7 @@ export function aggregate(out, meta) {
   writeFileSync(join(out, 'aggregates', 'chains.json'), `${JSON.stringify(chainRows, null, 1)}\n`);
 
   // ── every field by tier with the owner's bands marked where they exist (bands.mjs)
-  const banded = bandReadings(fields, col, tierOf);
+  const banded = bandReadings(fields, col, tierOf, rows.map((r) => r.houses));
   for (const r of banded.rows) { const f = fields.find((x) => x.path === r.path); if (f) f.band = { name: r.band, source: r.source, byTier: Object.fromEntries(Object.entries(r.byTier).map(([t, b]) => [t, { band: b.band, medianInside: b.medianInside, outsideShare: b.outsideShare }])) }; }
   writeFileSync(join(out, 'aggregates', 'fields.json'), `${JSON.stringify(fields)}\n`);
   writeFileSync(join(out, 'aggregates', 'field-bands.json'), `${JSON.stringify(banded, null, 1)}\n`);

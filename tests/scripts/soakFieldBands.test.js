@@ -11,10 +11,12 @@ import { describe, expect, it } from 'vitest';
 import { FIELD_BANDS, bandReadings } from '../../scripts/audit/soak-review/bands.mjs';
 
 describe('soak field bands', () => {
-  it('the owner\'s three tables are the bands, on both the walked and the chain paths', () => {
+  it('the owner\'s population table and the named-NPC budget are the field bands, on both the walked and the chain paths', () => {
     expect(FIELD_BANDS.population.bands.thorp).toEqual([5, 30]);
     expect(FIELD_BANDS.population.bands.metropolis).toEqual([15000, Infinity]);
-    expect(FIELD_BANDS.institutions.bands.village).toEqual([5, 14]);
+    // F5 unit 2 (2026-11-04): the institutions count band (1–3 / 2–6 / 5–14 …) was the superseded
+    // proposal; ruling I4's houses ÷ anchor reading replaced it (tests/audit/soakReviewHousesBand.test.js).
+    expect(FIELD_BANDS.institutions).toBeUndefined();
     expect(FIELD_BANDS.npcs.bands.city).toEqual([12, 18]);
     expect(FIELD_BANDS.population.paths).toEqual(['population', 'chain.population']);
   });
