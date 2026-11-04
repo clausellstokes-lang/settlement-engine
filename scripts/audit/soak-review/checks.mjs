@@ -70,6 +70,8 @@ const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|s
  */
 const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b/gi;
 const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
+/** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
+const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
 const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage)\b/gi;
 
 /**
@@ -86,7 +88,7 @@ export function seaWordSentence(sentences, s) {
   // regardless of route; their words are not sea words there.
   const airship = (s?.institutions || []).some((i) => /airship/i.test(String(i?.name || '')));
   return sentences.find((x) => {
-    let text = x.replace(INLAND_FISH, '');
+    let text = x.replace(INLAND_FISH, '').replace(ROUTE_DISJUNCTION, '');
     if (importsFish) text = text.replace(LISTED_FISH, '');
     if (airship) text = text.replace(AIRSHIP_PORT, '');
     return SEA_WORDS.test(text);

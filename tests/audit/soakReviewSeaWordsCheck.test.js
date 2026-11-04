@@ -57,3 +57,12 @@ describe('A-11, the designed inland fish trade (chair ruling, round 3, 3a and 3c
     expect(seaWordSentence(['Fish sold daily from the morning catch.'], {})).toBe('Fish sold daily from the morning catch.');
   });
 });
+
+describe('A-11, a route disjunction is no harbour (chair ruling, round 4, 2)', () => {
+  it('the Customs house\'s "by road or harbour" inland: 0 findings', () => {
+    expect(seaWordSentence(['Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.'], {})).toBeUndefined();
+  });
+  it('a harbour claimed outright still counts', () => {
+    expect(seaWordSentence(['Duties are taken at the harbour.'], {})).toBe('Duties are taken at the harbour.');
+  });
+});
