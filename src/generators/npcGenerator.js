@@ -12,7 +12,7 @@ import {
   roleTakesMerchantStress,
 } from './roleCategory.js';
 import { nativeSemanticName, nativeSemanticNames } from '../domain/content/customContentSemanticAuthority.js';
-import { getUpgradeOpportunities } from './economicGenerator.js';
+import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
@@ -1490,9 +1490,16 @@ export const generateNPCs = (
     _prosperity: settlement.economicState?.prosperity || null,
   };
 
+  // THE SEAT IS MANDATED (soak 1000 row 20, soak1k-694; the seat read is
+  // domain/dossier/seatHolder.js :: TIER_HEAD, a mirror of this table's first roles). The
+  // candidate pool offers a 'government' role only where a government-shelf institution
+  // stands, and since the 2026-09-30 reshelving the City hall is on infrastructure, so a city
+  // with no government row minted no Mayor and its council sat unseated. The tier's head is
+  // minted from its own row (mandatedRoleCandidate) when the pool dropped it; every other
+  // settlement's pool already holds it, so no other draw moves.
   // Generate mandatory role NPCs first
   mandatoryRoles.forEach(role => {
-    const candidate = candidates.find(c => c.role === role);
+    const candidate = candidates.find(c => c.role === role) || (role === tierRolesU[0] ? mandatedRoleCandidate(role) : undefined);
     if (candidate && npcs.length < targetCount) {
       npcs.push(generateSingleNPC(
         candidate.role,

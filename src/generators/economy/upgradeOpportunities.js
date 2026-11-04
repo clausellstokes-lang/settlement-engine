@@ -60,3 +60,21 @@ export const getUpgradeOpportunities = (institutions, tier, config = {}) => {
   });
   return result.sort((a, b) => b.effectivePriority - a.effectivePriority);
 };
+
+/**
+ * A mandated role's own row, outside the pool's institution filters (soak 1000 row 20). The
+ * generator mints its tier's head of government first (npcGenerator.js ::
+ * TIER_MANDATORY_ROLES); `getUpgradeOpportunities` offers a 'government' role only where a
+ * government-shelf institution stands, so a city whose City hall sits on infrastructure and
+ * that holds no government row dropped its Mayor and seated nobody. The caller asks for this
+ * row only when the pool dropped the head.
+ * @param {string} role
+ * @returns {Record<string, unknown> & { role: string, category: string } | undefined}
+ */
+export const mandatedRoleCandidate = (role) => {
+  for (const [category, roles] of Object.entries(POWER_ROLES_BY_CATEGORY)) {
+    const row = roles.find((r) => r.role === role);
+    if (row) return { ...row, category: row.category || category };
+  }
+  return undefined;
+};
