@@ -346,7 +346,7 @@ guard against by discipline:
   exactly why you must only deploy from a commit that job passed.
   (`npm run check:full` = `check` + `check:edge-behavior` mirrors everything CI runs.)
 
-There are 32 functions total — deploy all of them on a first cutover.
+There are 34 functions total — deploy all of them on a first cutover.
 
 ## Edge function — manual
 
@@ -391,6 +391,8 @@ npx supabase@2.122.0 functions deploy account-deletion-worker --no-verify-jwt # 
 npx supabase@2.122.0 functions deploy payment-refund-worker --no-verify-jwt   # five-minute durable Stripe refund recovery, x-cron-secret
 npx supabase@2.122.0 functions deploy operator-message-worker --no-verify-jwt # disabled-by-default leased broadcast courier, x-cron-secret
 npx supabase@2.122.0 functions deploy unsubscribe --no-verify-jwt             # public GET-confirm / POST opt-out token boundary
+npx supabase@2.122.0 functions deploy engine-generate --no-verify-jwt         # the engine service: optional Bearer JWT resolved in-handler, anonymous metered per IP
+npx supabase@2.122.0 functions deploy engine-version --no-verify-jwt          # public read of the engine bundle's version stamp (no user data)
 # verify_jwt = true (require an authenticated user — no flag):
 npx supabase@2.122.0 functions deploy create-checkout
 npx supabase@2.122.0 functions deploy verify-checkout-session                 # account-bound checkout verification
@@ -410,9 +412,9 @@ npx supabase@2.122.0 functions deploy account-actions
 npx supabase@2.122.0 functions deploy admin-actions
 ```
 
-There are **32 deployable functions** (every `supabase/functions/*` dir except
-`_shared`) — deploy all of them on a first cutover. The sixteen `verify_jwt = false`
-and seventeen `verify_jwt = true` postures above are pinned in `config.toml`, the
+There are **34 deployable functions** (every `supabase/functions/*` dir except
+`_shared`) — deploy all of them on a first cutover. The eighteen `verify_jwt = false`
+and sixteen `verify_jwt = true` postures above are pinned in `config.toml`, the
 single source of truth `deploy.sh` parses. The freshness pin
 (`tests/docs/deployRunbookFreshness.test.js`) fails the gate if any function dir
 stops being named here. <!-- @enforced-by tests/docs/deployRunbookFreshness.test.js -->
