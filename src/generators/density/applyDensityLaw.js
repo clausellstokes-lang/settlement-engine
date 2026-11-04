@@ -65,6 +65,7 @@ import { rollDensityPlan } from './densityRoll.js';
 // policy (⇒ 0) is unreachable here: a strictly safer floor, never a behaviour change.
 import { clamp01 } from '../../kernel/math.js';
 import { prosperityRank01 } from '../../domain/prosperityRank.js';
+import { renormalizeFactionPower } from '../power/rulingStructure.js';
 
 /** The stressor family that may lift the seat floor (§810.3 R13 / §810.5). ONE
  *  closed vocabulary serves birth and play; `succession_void` already exists in
@@ -293,8 +294,38 @@ function resizeSeats(powerStructure, plan, rng) {
       power: Math.max(1, Math.round(num(host.power, 1) * DOUBLED_NICHE_SHARE)),
     });
   }
+  // The trim drops the unseated powers' shares and the mint adds each rival's, so this
+  // roster does NOT total 100; `conservePower` restores it after the dispersal (below).
   const factions = [...kept, ...minted];
   return { ...(powerStructure || {}), factions };
+}
+
+/**
+ * ⛔ THE ROSTER'S POWER IS CONSERVED AT 100 — AFTER THE DISPERSAL (rung 1 N1, 2026-11-04).
+ *
+ * `resizeSeats` trims the unseated powers' shares and mints each doubled niche's rival on
+ * top, so the v2 roster reached the receipt totalling 20..102 and `conservationFindings`
+ * ("Faction power is not conserved at 100%") failed 940 of 1,000 v2 settlements. The house
+ * largest-remainder renormaliser (`power/rulingStructure.js :: renormalizeFactionPower`)
+ * rescales to integer points totalling exactly 100: proportional, so no strict order
+ * inverts, and no seat is added, dropped or moved.
+ *
+ * ⚠ WHY HERE AND NOT IN `resizeSeats`, MEASURED: renormalising at the resize hands the
+ * dispersal rounded weights, and on soak seeds 0..119 that moved affiliations and rungs in
+ * 13 of 120 births (`soak1k-23`'s Revolt Leadership changed head). After the dispersal the
+ * plan reads exactly the powers it read before this cure, so the rungs and seats do not move.
+ *
+ * Written onto the roster the seam was handed, because the seam's caller keeps only the
+ * npcs — as a NEW array of copied seats, so no seat object another holder shares is
+ * written. An already-conserved roster (any world born after this cure) is left untouched.
+ * @param {{factions?: Array<Record<string, unknown>>}|null|undefined} powerStructure
+ */
+function conservePower(powerStructure) {
+  const factions = powerStructure?.factions;
+  if (!Array.isArray(factions) || !factions.length) return;
+  const sum = factions.reduce((acc, seat) => acc + num(seat.power, 0), 0);
+  if (sum === 100 && factions.every(seat => Number.isInteger(seat.power))) return;
+  powerStructure.factions = renormalizeFactionPower(factions.map(seat => ({ ...seat })));
 }
 
 /**
@@ -330,13 +361,18 @@ export function disperseNamedRoster(input) {
   const tier = tierKey(input.tier);
   const powers = densityPowersFrom(input.powerStructure);
   if (!powers.length) return { npcs, plan: null, refused: 'no_power_seats' };
-  if (npcs.length < powers.length) return { npcs, plan: null, refused: 'mass_below_faction_count' };
+  if (npcs.length < powers.length) {
+    conservePower(input.powerStructure);
+    return { npcs, plan: null, refused: 'mass_below_faction_count' };
+  }
 
   const plan = planFor(
     { ...input, tier, config },
     { seatAll: true, massOverride: npcs.length },
   );
-  return { npcs: assignRoster(npcs, plan), plan, refused: null };
+  const seated = assignRoster(npcs, plan);
+  conservePower(input.powerStructure);
+  return { npcs: seated, plan, refused: null };
 }
 
 /**
