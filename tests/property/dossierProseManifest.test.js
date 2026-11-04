@@ -163,10 +163,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // docs/shift-records/2026-11-03-x49-stores-off-defense.json): the stored-food figure has one home, the Economy
     // tab, so every row loses the Defense tab's two food-stores cells (DS-DEF-2's Disasters & Famine reserves line,
     // DS-DEF-6's Logistics & Supply stores line: 2,100 removed; 150 DS-DEF-6 cells changed). Towns unmoved at 516/3/3/3.
+    // 68,660 -> 68,874 (386/380/372 -> 384/378/372) at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 68_660, towns: 516 },
-      'gm-seed-a': { cells: 386, towns: 3 },
-      'gm-seed-b': { cells: 380, towns: 3 },
+      'golden-master-v3': { cells: 68_874, towns: 516 },
+      'gm-seed-a': { cells: 384, towns: 3 },
+      'gm-seed-b': { cells: 378, towns: 3 },
       'gm-seed-c': { cells: 372, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
@@ -494,7 +496,9 @@ describe('the two controls no one-audience manifest can see', () => {
     // CAPACITY-train car is WITHDRAWN. The tally is a driven arm below, not a sentence.
     // 309 -> 296 at the urban band's re-record (2026-09-30, ODQ §934.86): the moved worlds draw
     // from mixed pools at 13 fewer positions.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(296);
+    // 296 -> 308 at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the moved worlds draw
+    // from mixed pools at 12 more positions.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(308);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
       'over this many of the twelve mixed pools').toBe(1);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
