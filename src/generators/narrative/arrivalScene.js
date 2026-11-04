@@ -40,7 +40,7 @@ import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
-import { hasMarketInstitution } from '../../domain/facts/market.js'; import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1 / CENSUS-1: one line
+import { liveInstitutions } from '../../domain/institutions/institutionRoster.js'; import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
@@ -75,13 +75,15 @@ const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
 const CATCH_RACK_WORD = /\bracks of drying fish\b/i;
 
 /**
- * Whether the live roster carries a market: the market home (CENSUS-1 wave 0, fact 5), no longer a
- * name regex of its own (it agreed with the home on all of soak1k-0..1999).
+ * Whether the live roster carries a market-class institution, by DS-GEN-13's rule.
+ * ⚠ NOT the market home (CENSUS-1 fact 5): chair ruling T1-12 pins this predicate EQUAL to
+ * DS-GEN-13's `marketPoolKey` (tests/generators/arrivalScene.test.js); homing the pair is the
+ * chair's (it moves DS-GEN-13 pages), named in docs/CENSUS_1_LANE_2026-11-04.md.
  * @param {unknown} institutions
  * @returns {boolean}
  */
 export function holdsMarket(institutions) {
-  return hasMarketInstitution(Array.isArray(institutions) ? institutions : []);
+  return liveInstitutions({ institutions }).some((row) => MARKET_INSTITUTION_NAME.test(String(row?.name ?? '')));
 }
 
 /** Severities that leave a visible trace; a minor event does not mark a settlement. */
