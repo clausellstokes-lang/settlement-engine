@@ -24,13 +24,13 @@
     "The derivation history — every prior row, its cause, and the census laws — stays in the walker",
     "beside the assertions, deliberately. Only the live tuple moved."
   ],
-  "measuredAtSha": "ceb95b19784991afd5f10fb67e9cb7246aa25712",
-  "measuredBy": "LANDING-1 seat (Opus 5.5)",
+  "measuredAtSha": "884ad193197e3f20de69d56b9fee2777a01a28d5",
+  "measuredBy": "LANDING-2 seat (Opus 5.5)",
   "date": "2026-11-04",
-  "note": "the rung-1 landing (lane/landing-rung1-2026-11-04): the window branch merged with the integration tip e142b4590; new test files of the rung-1 window lanes (F1-F10, READER-INSTRUMENTS, the x46 cars, CRISIS) and the merged integration side, re-measured at the landed tip",
-  "files": 2937,
+  "note": "GALLERY-FREE: the owner's word of 2026-11-04, one pin test (tests/components/galleryPostingFree.test.jsx) folded into the rung-1 landing",
+  "files": 2938,
   "parked": 383,
-  "credited": 2554,
-  "titles": 27710,
-  "suiteTitles": 7363
+  "credited": 2555,
+  "titles": 27715,
+  "suiteTitles": 7365
 }
