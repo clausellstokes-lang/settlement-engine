@@ -133,6 +133,11 @@ const stride = (rows, n) => rows.filter((_, index) => index % n === 0);
  * reads the culture to choose the arrival scene's PEOPLE beat and its built detail, the reads that lived in
  * narrativeGenerator.js's retired tier template before it (narrativeGenerator.js still reads culture elsewhere).
  * A culture change re-composes the arrival paragraph, which is prose and moves no fact.
+ *
+ * 2026-11-04, lane CRISIS (CRISIS-1, composed on the window branch): TWENTY-FOUR.
+ * `src/generators/steps/resolveCrisisCast.js` reads the culture to name the crisis car's rare
+ * TEMPORARY person (`pickFirst(config.culture, …)`) when a required crisis role has no holder. A culture
+ * change re-names that one person; CRISIS-1 omitted the row and the chair's ruling of 2026-11-04 adds it.
  */
 const CULTURE_READERS = Object.freeze([
   'src/generators/aiLayer.js',
@@ -157,6 +162,7 @@ const CULTURE_READERS = Object.freeze([
   'src/generators/steps/economyReconcilePass.js',
   'src/generators/steps/generatePopulation.js',
   'src/generators/steps/resolveConfig.js',
+  'src/generators/steps/resolveCrisisCast.js',
   'src/generators/steps/stepMetadata.js',
 ]);
 
