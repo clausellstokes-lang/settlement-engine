@@ -23,6 +23,7 @@
  * Pure.
  */
 
+import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
@@ -91,10 +92,83 @@ export function validationOnPageFindings(s, surfaces) {
   return out;
 }
 
+// ──────────────────────────── 2. scale-lists ────────────────────────────
+
+/** @param {any} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
+const houseNames = (s) => (Array.isArray(s?.institutions) ? s.institutions : []).map((/** @type {unknown} */ i) => nativeSemanticName(i)).filter(Boolean);
+
+const LUXURY = /\b(?:luxury goods|fine textiles|camel herds|spices|silk|exotic goods|gems|gemstones)\b/i;
+
+/**
+ * An Economic strength that names a resource trade, mapped to the houses that carry it. Every
+ * pattern is held against `institutionalCatalog.js`'s own names (the unit test walks it).
+ * Strengths that name no single house (Agriculture, Grain production, Livestock, Hunting, the
+ * trade hubs, Maritime and River trade, Exotic goods) are not resource trades and are not read.
+ */
+/** @type {Readonly<Record<string, RegExp>>} */
+export const STRENGTH_HOUSES = Object.freeze({
+  'Mining': /^Mine\b/,
+  'Stone quarrying': /^Stone quarry$/,
+  'Stoneworking': /^Stone quarry$/,
+  'Metalworking': /smith|^Smelter$|^Specialized metalworkers$/i,
+  'Gemcutting': /^Jeweller$|^Luxury goods quarter$/,
+  'Glass and gems': /^Glass(?:makers|blower)$|^Jeweller$/,
+  'Fishing industry': /^Fishing community$|^Fishmonger$|^Fish market$|Fisher/,
+  'Shipbuilding': /^Shipyard$|^River boatyard$/,
+  'Salt production': /^Salt works$/,
+  'Salt trade': /^Salt works$/,
+  'Milling': /^Mills? \(|^Mill$/,
+  'Brewing': /^Brewery$|^Brewer$|^Maltster$/,
+  'Timber trade': /^Sawmill|^Carpenters? |^Carpenter$|^Charcoal burner$/,
+  'Woodcraft': /^Carpenters? |^Carpenter$|^Woodcarver$|^Cooper$|^Bowyer/,
+  'Fur trade': /^Tann(?:er|ery|ers)/,
+  'Wool production': /^Shepherd|^Weavers|^Fuller$|^Dyer$/,
+  'Wool and textiles': /^Shepherd|^Weavers|^Fuller$|^Dyer$|^Tailor$/,
+  'Sheep herding': /^Shepherd|^Common grazing land$/,
+});
+
+/**
+ * (a) a thorp or hamlet whose Imports list holds luxury-class goods (`[luxury-imports]`);
+ * (b) an Economic strength naming a resource trade with no house behind it (`[strength-no-house]`).
+ * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function scaleListsFindings(s, surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const tier = str(s?.tier);
+  if (tier === 'thorp' || tier === 'hamlet') {
+    const eco = linesOf(surfaces.economics);
+    const at = eco.indexOf('Imports');
+    const imports = at >= 0 ? str(eco[at + 1]) : '';
+    const lux = imports.match(new RegExp(LUXURY.source, 'gi'));
+    if (lux) out.push({ surface: 'economics', quote: imports, detail: `[luxury-imports] ${tier}: ${[...new Set(lux.map((x) => x.toLowerCase()))].join(', ')}` });
+  }
+  const res = linesOf(surfaces.resources);
+  const at = res.indexOf('Economic strengths');
+  if (at >= 0) {
+    const strengths = str(res[at + 1]).split('✓').map((x) => x.trim()).filter(Boolean);
+    const houses = houseNames(s);
+    const bare = strengths.filter((x) => STRENGTH_HOUSES[x] && !houses.some((h) => STRENGTH_HOUSES[x].test(h)));
+    if (bare.length) out.push({ surface: 'resources', quote: res[at + 1], detail: `[strength-no-house] ${bare.join(', ')}` });
+  }
+  return out;
+}
+
+/**
+ * The Exports line's item count (the Economy tab paints one pill per `primaryExports` entry) —
+ * a DISTRIBUTION by tier, not a finding (check 2c).
+ * @param {any} s @returns {{ exports: number }}
+ */
+export function readerDistributions(s) {
+  const exports = s?.economicState?.primaryExports;
+  return { exports: Array.isArray(exports) ? exports.length : 0 };
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
   'validation-on-page': validationOnPageFindings,
+  'scale-lists': scaleListsFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

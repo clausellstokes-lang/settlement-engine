@@ -7,6 +7,7 @@
  */
 import { describe, expect, test } from 'vitest';
 
+import { institutionalCatalog } from '../../../src/data/institutionalCatalog.js';
 import * as R from '../../../src/domain/coherence/readerBattery.js';
 
 /** @param {Record<string, unknown>} over */
@@ -29,5 +30,33 @@ describe('reader:validation-on-page', () => {
   test('negative control: a viable page with no validator line is silent', () => {
     expect(R.validationOnPageFindings(rec(), { overview: 'The place\nThe water was here before the town.', viability: '✓ Viable\nCritical Issues (1) ▲' })).toEqual([]);
     expect(R.validationOnPageFindings(rec(), { viability: '1 critical issue prevents settlement survival.\nCritical Issues (1) ▲' })).toEqual([]);
+  });
+});
+
+// ── 2. scale-lists
+describe('reader:scale-lists', () => {
+  const economics = 'Trade Profile ▲\nExports\nNo significant exports.\nImports\nIncense and votive candles Camel herds Fine textiles Luxury goods Spices\nTerrain cannot produce';
+  test('(a) a hamlet importing luxury-class goods', () => {
+    const rows = R.scaleListsFindings(rec({ tier: 'hamlet' }), { economics });
+    expect(rows).toHaveLength(1);
+    expect(rows[0].detail).toBe('[luxury-imports] hamlet: camel herds, fine textiles, luxury goods, spices');
+  });
+  test('(a) negative control: the same list in a city, and a hamlet importing salt', () => {
+    expect(R.scaleListsFindings(rec({ tier: 'city' }), { economics })).toEqual([]);
+    expect(R.scaleListsFindings(rec({ tier: 'hamlet' }), { economics: 'Imports\nSalt Iron tools' })).toEqual([]);
+  });
+  test('(b) a resource-trade strength with no house behind it; a house behind it is silent', () => {
+    const resources = 'Terrain\nMountains\nEconomic strengths\n✓ Gemcutting ✓ Metalworking ✓ Mining ✓ Stoneworking\nResource Exploitation ▲';
+    const rows = R.scaleListsFindings(rec({ institutions: [{ name: 'Blacksmiths (3-10)' }, { name: 'Stone quarry' }] }), { resources });
+    expect(rows.map((r) => r.detail)).toEqual(['[strength-no-house] Gemcutting, Mining']);
+    expect(R.scaleListsFindings(rec({ institutions: [{ name: 'Mine' }, { name: 'Jeweller' }, { name: 'Blacksmith' }, { name: 'Stone quarry' }] }), { resources })).toEqual([]);
+  });
+  test('(b) every house pattern names a house the catalogue holds', () => {
+    const names = Object.values(institutionalCatalog).flatMap((shelves) => Object.values(shelves).flatMap((rows) => Object.keys(rows)));
+    for (const [strength, re] of Object.entries(R.STRENGTH_HOUSES)) expect(names.some((n) => re.test(n)), strength).toBe(true);
+  });
+  test('(c) the Exports count is a distribution, not a finding', () => {
+    expect(R.readerDistributions({ economicState: { primaryExports: ['Raw wool', 'Live sheep'] } })).toEqual({ exports: 2 });
+    expect(R.readerDistributions({})).toEqual({ exports: 0 });
   });
 });
