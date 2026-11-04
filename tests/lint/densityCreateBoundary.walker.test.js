@@ -942,8 +942,14 @@ describe('generation-law register (which LAW a birth mints)', () => {
     // can never tell them apart. These three facts are what actually keep a
     // regeneration from stamping a law onto a world that already exists, and
     // until now all three were prose in a header rather than assertions.
-    const rel = 'src/store/settlementSlice.js';
+    // ⭐ THE ADDRESS FOLLOWS THE CODE (ENGINE-5 unit 1): `regenSection`'s body was lifted out of
+    // the slice into `settlementRegenAction.js` (the lazy action idiom the birth action already
+    // took), so the re-derivation half is read THERE; the slice itself is still held to zero mints
+    // below, as is the lifted body.
+    const SLICE = 'src/store/settlementSlice.js';
+    const rel = 'src/store/settlementRegenAction.js';
     const code = stripCommentsAndStrings(readFileSync(join(process.cwd(), rel), 'utf-8'));
+    const sliceCode = stripCommentsAndStrings(readFileSync(join(process.cwd(), SLICE), 'utf-8'));
     expect(
       /settlement\.config \|\| config/.test(code),
       `${rel}'s re-derivation must read the settlement's own config FIRST — that is `
@@ -990,5 +996,15 @@ describe('generation-law register (which LAW a birth mints)', () => {
       + `regenSection, so a mint here is a regeneration stamping a law onto a world that `
       + `already exists`,
     ).toBe(0);
+    expect(
+      (sliceCode.match(/\bbirthConfig\(/g) || []).length,
+      `${SLICE} mints a birth law; the birth action lives in ${MINT_HOME} and the slice only `
+      + `delegates its two engine actions, so a mint here is a law minted outside both lanes`,
+    ).toBe(0);
+    expect(
+      /\bregenSection:\s*\(section\)\s*=>\s*\n?\s*loadRegenLane\(\)\.then\(lane => lane\.regenSectionAction\(set, get, section\)\)/.test(sliceCode),
+      `${SLICE}'s regenSection must delegate to ${rel}, or the re-derivation half read above `
+      + `is not the one the store runs`,
+    ).toBe(true);
   });
 });

@@ -298,3 +298,42 @@ export async function fetchRemoteStepMeta(opts = {}) {
   }
   return reply.stepMeta;
 }
+
+/** The two sections the `regenSection` op regenerates. @type {ReadonlyArray<string>} */
+export const REMOTE_REGEN_SECTIONS = Object.freeze(['npcs', 'history']);
+
+/**
+ * THE `regenSection` OP (ENGINE-5 unit 1): a section regeneration's pass, served by
+ * engine-generate from the engine bundle — `regenNPCsPipeline(settlement, config, { locks })` for
+ * 'npcs', `regenHistoryPipeline(settlement, config)` for 'history', the very calls
+ * `src/store/settlementRegenAction.js` makes locally — and its return value answered verbatim
+ * (the parts, `_regenSeed`, and the out-of-band `_preservation` report when the pass made one).
+ * The request carries the whole settlement, so it rides the 1 MiB cap `derive` rides. `seed`
+ * replays a prior reroll exactly as the pass's own `options.seed` does; omitted, the service
+ * mints one as the pass does locally.
+ *
+ * @param {{ section: unknown, settlement: unknown, config: unknown, locks?: unknown, seed?: unknown }} call
+ * @param {RemoteOptions} [opts]
+ * @returns {Promise<Record<string, unknown>>} the pass's return value
+ */
+export async function runRemoteRegenSection({ section, settlement, config, locks, seed }, opts = {}) {
+  if (typeof section !== 'string' || !REMOTE_REGEN_SECTIONS.includes(section)) {
+    throw engineRemoteError('engine_remote_unsupported',
+      'The engine service regenerates only the npcs and history sections; this section was not regenerated.',
+      { inputs: ['section'] });
+  }
+  const pin = opts.engineVersion ?? null;
+  const reply = await postEngine(
+    {
+      op: 'regenSection', section, settlement, config,
+      ...(locks == null ? {} : { locks }),
+      ...(seed === undefined ? {} : { seed }),
+      ...(pin ? { engineVersion: pin } : {}),
+    },
+    { ...opts, url: opts.url !== undefined ? opts.url : engineFunctionUrl('engine-generate') },
+  );
+  if (!reply.parts || typeof reply.parts !== 'object' || Array.isArray(reply.parts)) {
+    throw engineRemoteError('engine_reply_invalid', 'The engine service answered without the regenerated section.');
+  }
+  return /** @type {Record<string, unknown>} */ (reply.parts);
+}

@@ -19,13 +19,10 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 /**
  * Modules under src/store, src/components and src/lib that still name a local-engine module
  * directly, each with the reason it does. The flagged build's backstop (the pipeline entry
- * resolves to the absent twin too) covers both, which the dist arm of
+ * resolves to the absent twin too) covers it, which the dist arm of
  * tests/build/engineAbsentWhenRemote.test.js proves.
  */
 const DIRECT_REACHERS = Object.freeze({
-  // EAGER (in the first-paint closure): its regeneration bag's dynamic import is left as it is
-  // so the first-paint closure stays byte-equal with the flag off.
-  'src/store/settlementSlice.js': ['../generators/generateSettlementPipeline.js'],
   // SYNCHRONOUS by design (an injectable `engine` defaulting to a static import); its callers
   // already reach it lazily.
   'src/lib/instantWorld/composeInstantWorld.js': ['../../generators/generateSettlementPipeline.js'],
@@ -68,7 +65,8 @@ describe('the local engine is reached through its one seam', () => {
   });
 
   it('the re-pointed callers reach the pipeline door by dynamic import() only (no static edge to split it out)', () => {
-    const callers = ['src/store/settlementRederiveAction.js', 'src/components/surveyor/ConstructionPanel.jsx', 'src/store/campaignContentBindingSession.js'];
+    // settlementRegenAction.js: the slice's regeneration bag, lifted with regenSection (ENGINE-5 unit 1).
+    const callers = ['src/store/settlementRederiveAction.js', 'src/components/surveyor/ConstructionPanel.jsx', 'src/store/campaignContentBindingSession.js', 'src/store/settlementRegenAction.js'];
     for (const rel of callers) {
       const code = stripComments(readFileSync(join(ROOT, rel), 'utf8'));
       expect(code, rel).toMatch(/import\((['"])(?:\.\.\/)+lib\/localPipeline\.js\1\)/);

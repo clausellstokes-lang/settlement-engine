@@ -40,6 +40,12 @@
  *                                   layer's re-derivation builds its pins bag from;
  *                                   engine-generate's `stepMeta` op answers it
  *                                   (ENGINE-4 unit 1).
+ *   - regenNPCsPipeline /         — the two section-regeneration passes
+ *     regenHistoryPipeline          (`src/generators/generateSettlementPipeline.js`)
+ *                                   that `src/store/settlementRegenAction.js` calls
+ *                                   locally; engine-generate's `regenSection` op runs
+ *                                   them for a build that carries no engine
+ *                                   (ENGINE-5 unit 1).
  *
  * ⚠ RESERVED SLOT — THE ADVANCE ENTRY (not implemented). The engine service's
  * second operation, advancing an existing settlement through time, will be
@@ -49,7 +55,11 @@
  * that imports it fails `deno check` instead of shipping a stub.
  */
 
-export { generateSettlementPipeline } from '../generators/generateSettlementPipeline.js';
+export {
+  generateSettlementPipeline,
+  regenHistoryPipeline,
+  regenNPCsPipeline,
+} from '../generators/generateSettlementPipeline.js';
 export { birthConfig, loadGenerationLawPayloads } from '../domain/density/densityCreateBoundary.js';
 export { runGenerationRequest } from '../workers/generationRequest.js';
 export { getStepMeta } from '../generators/pipeline.js';

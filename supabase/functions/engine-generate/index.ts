@@ -5,6 +5,17 @@
  *   POST { op: 'derive', seed, config, pins?, engineVersion? }
  *                                          →  200 { settlement, engineVersion, generatedAt }
  *   POST { op: 'stepMeta', engineVersion? } →  200 { stepMeta, engineVersion }
+ *   POST { op: 'regenSection', section, settlement, config, locks?, seed?, engineVersion? }
+ *                                          →  200 { parts, engineVersion, generatedAt }
+ *
+ * THE SECTION REGENERATION OP (ENGINE-5 unit 1). `regenSection` runs the client's own pass
+ * VERBATIM from the bundle — `regenNPCsPipeline(settlement, config, { locks?, seed? })` for
+ * 'npcs', `regenHistoryPipeline(settlement, config, { seed? })` for 'history', the calls
+ * `src/store/settlementRegenAction.js` makes with a local engine — and answers the pass's
+ * return value as `parts` (the section, `_regenSeed`, and `_preservation` when the pass made
+ * one; the client destructures it off as it does locally). No `birthConfig`: a regeneration
+ * re-rolls one section of an EXISTING world. The body carries the whole settlement, so it is
+ * held to the 1 MiB cap `derive` is. `seed` is optional (the pass mints one when absent).
  *
  * THE TWO NON-BIRTH OPS (ENGINE-4 unit 1, the flag-on gaps). `derive` is the client's own
  * main-thread call `generateSettlementPipeline(config, null, { seed, pins? })` VERBATIM: no
@@ -61,6 +72,8 @@ import {
   generateSettlementPipeline,
   getStepMeta,
   loadGenerationLawPayloads,
+  regenHistoryPipeline,
+  regenNPCsPipeline,
   runGenerationRequest,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
@@ -81,9 +94,15 @@ export const ENGINE_VERSION: string = engineMeta.engineVersion;
 
 const FN = 'engine-generate';
 const MAX_BODY_BYTES = 32 * 1024;
-/** `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB). */
+/**
+ * `derive` carries a pins bag cut from a whole settlement record (a city's record is ~250 KB);
+ * `regenSection` carries the record itself. Both are held to this cap.
+ */
 const MAX_DERIVE_BODY_BYTES = 1024 * 1024;
-const OPS: ReadonlyArray<string> = Object.freeze(['generate', 'derive', 'stepMeta']);
+const OPS: ReadonlyArray<string> = Object.freeze(['generate', 'derive', 'stepMeta', 'regenSection']);
+/** The ops a whole settlement record may ride (the 1 MiB cap). */
+const RECORD_OPS: ReadonlyArray<string> = Object.freeze(['derive', 'regenSection']);
+const REGEN_SECTIONS: ReadonlyArray<string> = Object.freeze(['npcs', 'history']);
 const MAX_SEED_CHARS = 256;
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL') || '';
@@ -181,15 +200,26 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
   if (!isPlainObject(body)) return json({ error: 'invalid_body' }, 400, cors);
   const op = body.op === undefined ? 'generate' : body.op;
   if (typeof op !== 'string' || !OPS.includes(op)) return json({ error: 'invalid_op', ops: OPS }, 400, cors);
-  if (op !== 'derive' && rawBytes > MAX_BODY_BYTES) {
+  if (!RECORD_OPS.includes(op) && rawBytes > MAX_BODY_BYTES) {
     return json({ error: 'payload_too_large', maxBytes: MAX_BODY_BYTES }, 413, cors);
   }
-  const { seed, config, engineVersion, pins } = body;
+  const { seed, config, engineVersion, pins, section, settlement, locks } = body;
   if (op !== 'stepMeta') {
-    if (typeof seed !== 'string' || seed.length === 0 || seed.length > MAX_SEED_CHARS) {
+    // A regeneration's seed is optional (the pass mints one); every other op's is required.
+    const seedOptional = op === 'regenSection' && seed === undefined;
+    if (!seedOptional && (typeof seed !== 'string' || seed.length === 0 || seed.length > MAX_SEED_CHARS)) {
       return json({ error: 'invalid_seed', maxChars: MAX_SEED_CHARS }, 400, cors);
     }
     if (!isPlainObject(config)) return json({ error: 'invalid_config' }, 400, cors);
+  }
+  if (op === 'regenSection') {
+    if (typeof section !== 'string' || !REGEN_SECTIONS.includes(section)) {
+      return json({ error: 'invalid_section', sections: REGEN_SECTIONS }, 400, cors);
+    }
+    if (!isPlainObject(settlement)) return json({ error: 'invalid_settlement' }, 400, cors);
+    if (locks !== undefined && locks !== null && !isPlainObject(locks)) {
+      return json({ error: 'invalid_locks' }, 400, cors);
+    }
   }
   if (op === 'derive' && pins !== undefined && !isPlainObject(pins)) {
     return json({ error: 'invalid_pins' }, 400, cors);
@@ -247,6 +277,23 @@ export async function handleEngineGenerate(req: Request, deps: Deps = {}): Promi
       return json({ settlement, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
     } catch (e) {
       logError(FN, userId, e, { stage: 'derive', engineVersion: ENGINE_VERSION });
+      return json({ error: 'generation_failed' }, 422, cors);
+    }
+  }
+
+  // ── Section regeneration: the client's own pass, verbatim ─────────────────────────────
+  if (op === 'regenSection') {
+    try {
+      await loadGenerationLawPayloads();
+      const seeded = seed === undefined ? {} : { seed };
+      const parts = section === 'npcs'
+        ? regenNPCsPipeline(settlement as Record<string, unknown>, config as Record<string, unknown>,
+          { ...(locks === undefined ? {} : { locks }), ...seeded })
+        : regenHistoryPipeline(settlement as Record<string, unknown>, config as Record<string, unknown>, seeded);
+      const generatedAt = (deps.now ?? (() => new Date()))().toISOString();
+      return json({ parts, engineVersion: ENGINE_VERSION, generatedAt }, 200, cors);
+    } catch (e) {
+      logError(FN, userId, e, { stage: 'regenSection', engineVersion: ENGINE_VERSION });
       return json({ error: 'generation_failed' }, 422, cors);
     }
   }

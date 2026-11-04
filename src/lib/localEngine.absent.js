@@ -5,8 +5,9 @@
  * The flagged build resolves `src/lib/localEngine.js` and `src/lib/localPipeline.js` (the
  * seam's two doors) and
  * `src/generators/generateSettlementPipeline.js` (the backstop for the importers that
- * reach the pipeline entry without the seam: the slice's regeneration bag, the instant
- * world composer and the custom-content preview worker) to THIS module, so it carries
+ * reach the pipeline entry without the seam: the instant world composer and the
+ * custom-content preview worker; the slice's regeneration bag went through the seam when
+ * `regenSection` was lifted, ENGINE-5 unit 1) to THIS module, so it carries
  * both export surfaces. Nothing here imports anything: that is the whole point.
  *
  * Every entry refuses with the typed code `engine_local_absent`. Generation itself does

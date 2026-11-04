@@ -22,6 +22,8 @@ import {
   generateSettlementPipeline,
   getStepMeta,
   loadGenerationLawPayloads,
+  regenHistoryPipeline,
+  regenNPCsPipeline,
 } from '../_shared/engineBundle.js';
 import engineMeta from '../_shared/engineBundle.meta.json' with { type: 'json' };
 import cases from '../../../tests/fixtures/engine-generate-cases.json' with { type: 'json' };
@@ -308,4 +310,61 @@ scopedEnv.test('STEPMETA: the registry rows, with no identity, no rate guard and
   assertEquals(admin.made(), 0);
   const pinned = await handleEngineGenerate(post({ op: 'stepMeta', engineVersion: 'old0000000000000' }), { adminClient: admin.adminClient });
   assertEquals(pinned.status, 409);
+});
+
+scopedEnv.test('REGEN: three seeds — each section\'s parts are the bundle\'s own pass over the body, verbatim, metered (ENGINE-5 unit 1)', async () => {
+  await loadGenerationLawPayloads();
+  for (const seed of cases.seeds) {
+    const config = birthConfig(cases.config);
+    const settlement = JSON.parse(JSON.stringify(generateSettlementPipeline(config, null, { seed })));
+    const replay = `${seed}-regen`;
+    for (const section of ['npcs', 'history']) {
+      const admin = makeAdmin();
+      const body = { op: 'regenSection', section, settlement, config: settlement.config, seed: replay, ...(section === 'npcs' ? { locks: {} } : {}) };
+      const res = await handleEngineGenerate(post(body), { adminClient: admin.adminClient });
+      assertEquals(res.status, 200);
+      const reply = await res.json();
+      assertEquals(reply.engineVersion, ENGINE_VERSION);
+      assert(!Number.isNaN(Date.parse(reply.generatedAt)));
+      const wire = JSON.parse(JSON.stringify(body));
+      const expected = section === 'npcs'
+        ? regenNPCsPipeline(wire.settlement, wire.config, { locks: {}, seed: replay })
+        : regenHistoryPipeline(wire.settlement, wire.config, { seed: replay });
+      assertEquals(await sha256(JSON.stringify(reply.parts)), await sha256(JSON.stringify(expected)), `${section} ${seed}`);
+      assertEquals(reply.parts._regenSeed, replay);
+      assertEquals(admin.rpcCalls.length, 2, 'regenSection is metered by the same two windows as generate');
+    }
+  }
+});
+
+scopedEnv.test('REGEN: no seed — the pass mints one and reports it; a record over 32 KB rides the 1 MiB cap', async () => {
+  await loadGenerationLawPayloads();
+  const config = birthConfig(cases.config);
+  const settlement = JSON.parse(JSON.stringify(generateSettlementPipeline(config, null, { seed: cases.seeds[0] })));
+  assert(new TextEncoder().encode(JSON.stringify(settlement)).length > 32 * 1024, 'the record is over the generate cap');
+  const res = await handleEngineGenerate(post({ op: 'regenSection', section: 'history', settlement, config: settlement.config }), { adminClient: makeAdmin().adminClient });
+  assertEquals(res.status, 200);
+  const reply = await res.json();
+  assert(typeof reply.parts._regenSeed === 'string' && reply.parts._regenSeed.length > 0, 'a minted seed');
+  assert(reply.parts.history && typeof reply.parts.history === 'object');
+  const huge = await handleEngineGenerate(post({ op: 'regenSection', section: 'npcs', settlement: { pad: 'x'.repeat(1024 * 1024) }, config: {} }), { adminClient: makeAdmin().adminClient });
+  assertEquals(huge.status, 413);
+});
+
+scopedEnv.test('REGEN: a bad section, settlement, locks or seed is refused 400 with no client', async () => {
+  const admin = makeAdmin();
+  const cases400: Array<[Record<string, unknown>, string]> = [
+    [{ op: 'regenSection', section: 'economy', settlement: {}, config: {} }, 'invalid_section'],
+    [{ op: 'regenSection', settlement: {}, config: {} }, 'invalid_section'],
+    [{ op: 'regenSection', section: 'npcs', settlement: [1], config: {} }, 'invalid_settlement'],
+    [{ op: 'regenSection', section: 'npcs', settlement: {}, config: {}, locks: [1] }, 'invalid_locks'],
+    [{ op: 'regenSection', section: 'npcs', settlement: {}, config: {}, seed: '' }, 'invalid_seed'],
+    [{ op: 'regenSection', section: 'npcs', settlement: {} }, 'invalid_config'],
+  ];
+  for (const [body, error] of cases400) {
+    const res = await handleEngineGenerate(post(body), { adminClient: admin.adminClient });
+    assertEquals(res.status, 400, JSON.stringify(body));
+    assertEquals((await res.json()).error, error);
+  }
+  assertEquals(admin.made(), 0, 'shape refusals reach no client');
 });

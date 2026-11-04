@@ -12,51 +12,37 @@
 // imports shifts that load to first-generate, shaving the cold-start
 // payload by ~25 %. Subsequent generations are cached.
 //
-// `loadEngine()` resolves once and memoizes — every action calls
-// `await loadEngine()` to get the module bag. Actions that previously
-// were synchronous become async; that's safe because the ones that use this
-// bag set Zustand state via the `set` callback rather than returning a value
-// (generateSettlement DOES return the settlement, and every caller awaits it).
-// React components that fire-and-forget still work — they just see the
-// resulting state update one macrotask later.
+// The actions that reach the engine (generateSettlement, regenSection) each
+// delegate to their own lazily imported lane module below; both were async
+// already, so React components that fire-and-forget still work — they just see
+// the resulting state update one macrotask later.
 //
 // ⭐ THE GENERATION LANE NO LONGER LIVES HERE. `generateSettlement` delegates
 // to `settlementGenerateAction.js` through a dynamic import (the action KEY
 // stays on the literal below), and that lane reaches the pipeline through the
 // generation core — in a Web Worker when the door is open, in-thread on the
-// same core when it is not. So this bag has shrunk to the two regeneration
-// entries `regenSection` still needs, and the seed mint moved with the lane.
+// same core when it is not. The seed mint moved with the lane.
+//
+// ⭐ NOR DOES SECTION REGENERATION (ENGINE-5 unit 1). `regenSection` delegates to
+// `settlementRegenAction.js` by the same idiom, so the regeneration bag that used
+// to live here (a dynamic import of the pipeline entry) left with it, and with it
+// the engine service's await for a build that carries no engine.
 //
 // `createPRNG` was previously imported here but is only used by the
 // store test (which imports it directly). Removed from this chunk.
-/**
- * The regeneration-time module bag.
- * @type {?{
- *   regenNPCsPipeline:Function,
- *   regenHistoryPipeline:Function,
- * }}
- */
-let _engineModule = null;
-/** @type {?Promise<NonNullable<typeof _engineModule>>} */
-let _enginePromise = null;
-function loadEngine() {
-  if (_engineModule) return Promise.resolve(_engineModule);
-  if (_enginePromise) return _enginePromise;
-  _enginePromise = import('../generators/generateSettlementPipeline.js').then((pipe) => {
-    _engineModule = {
-      regenNPCsPipeline:          pipe.regenNPCsPipeline,
-      regenHistoryPipeline:       pipe.regenHistoryPipeline,
-    };
-    return _engineModule;
-  });
-  return _enginePromise;
-}
 
 /** @type {?Promise<typeof import('./settlementGenerateAction.js')>} */
 let _generateLanePromise = null;
-/** The generation lane's own lazy chunk, memoized like the engine bag above. */
+/** The generation lane's own lazy chunk, memoized. */
 function loadGenerateLane() {
   return (_generateLanePromise ||= import('./settlementGenerateAction.js'));
+}
+
+/** @type {?Promise<typeof import('./settlementRegenAction.js')>} */
+let _regenLanePromise = null;
+/** Section regeneration's own lazy chunk, memoized like the generation lane's. */
+function loadRegenLane() {
+  return (_regenLanePromise ||= import('./settlementRegenAction.js'));
 }
 
 import { deriveSystemState } from '../domain/state/deriveSystemState.js';
@@ -102,7 +88,7 @@ import {
   _resolveEntity, pickleCampaignState,
   stripImpairmentsForEvent, computePendingSuccession,
   uncanonizeTombstoneKey, destroySettlementConfirmRefusal, unknownSavedSettlementPatchKeys,
-  sectionLocked, foldRegeneratedRoster, planTimelineUndo, bindActiveSaveId, claimSettlementForAccount } from './settlementSliceHelpers.js';
+  planTimelineUndo, bindActiveSaveId, claimSettlementForAccount } from './settlementSliceHelpers.js';
 // Track K §C1 — the ActionResult envelope. The five canon-path actions below
 // (applyEvent / undoLastEvent / recordSnapshot / revertToSnapshot /
 // destroySavedSettlement) return this SUPERSET shape. See src/store/actionResult.js
@@ -448,140 +434,11 @@ export const createSettlementSlice = (set, get) => ({
     }),
 
   // ── Section regeneration (NPCs, history) ───────────────────────────────────
-  // Async — same reason as generateSettlement (lazy engine load).
-  // Tier 5.1: every regenerate computes a structured delta against
-  // the prior settlement so the UI's RegenerationDeltaCard can show
-  // what changed. The delta is lazy-imported to keep its transitive
-  // domain modules out of the cold-start chunk.
-  regenSection: async (section) => {
-    const state = get();
-    const { settlement, config, locks } = state;
-    if (!settlement) return;
-    // LOCKS ENGINE Phase A — a whole-section lock was the user's standing "do not
-    // reroll this", and this was the typed refusal behind the disabled button.
-    // ⛔ DORMANT since owner order 2026-09-17 ("remove the other padlocks"): the
-    // controls and the store's `setLock` writer are retired, and `sectionLocked`
-    // reads the honoured view (domain/locksPreservation.js normalizeLocks), which
-    // reads no lock, so a `section_locked` refusal cannot fire. The call stays as the
-    // one seat a veto re-arms. Refusal-only envelope, the updateSavedSettlement shape.
-    if (sectionLocked(locks, section)) return makeActionResult('regenSection', { ok: false, before: { reason: 'section_locked', section } });
-    // state-lifecycle-4: CANON identity lock — canon freezes the roster's identity
-    // (renameNPC/renameFaction already guard on this). A reroll of the whole NPC set
-    // or history on a canon settlement would silently invalidate campaign canon with
-    // no event-log entry, so block it here (matching the rename locks); canon changes
-    // must route through the event system. Draft rerolls proceed.
-    if (get().phase === 'canon') return;
-
-    // P103 / X-2 — Track session regen-burst. When the user crosses 5
-    // regens in a single session, fire regen_burst (worldbuilder hint
-    // for locks/drift/chronicle). Counter lives in-memory only since
-    // it's a session-scoped behavior signal.
-    set(s => { s.sessionRegenCount = (s.sessionRegenCount || 0) + 1; });
-    if ((state.sessionRegenCount || 0) + 1 === 5) {
-      import('../lib/pricingMoments.js').then(({ triggerPricingMoment }) => {
-        triggerPricingMoment('regen_burst', (content) => {
-          get().setActivePricingMoment(content);
-        }, { tier: state.auth?.tier });
-      }).catch(() => { /* never block a regen */ });
-    }
-    const cfg = settlement.config || config;
-    const eng = await loadEngine();
-
-    // Analytics — fire-and-forget. A section regen re-rolls one subsystem
-    // under the existing config (so config is, by construction, unchanged).
-    import('../lib/analytics.js').then(({ track, EVENTS }) => {
-      track(EVENTS.REGENERATION_TRIGGERED, { regen_mode: section, config_changed: false });
-    }).catch(() => {});
-
-    // Capture the pre-regen snapshot before mutation so the delta
-    // composer has a clean `before` reference.
-    const before = cloneJson(settlement);
-
-    if (section === 'npcs') {
-      // `_preservation` is the pipeline's report, carried OUT OF BAND of the parts
-      // (it must never land in the settlement blob) and destructured off here. A
-      // locked keeper INHERITS the id of the slot it took over, so EVERY npc-id-keyed
-      // map has to be rewritten in the same step that folds the roster in —
-      // otherwise each one silently follows the stranger who got the old id on the
-      // next reroll. foldRegeneratedRoster owns all the writes (roster, `locks`, the
-      // save row's `aiData.pinnedNpcs`, and the owning campaign's
-      // `worldState.npcStates` + npcLedger originRefs) so they can never disagree.
-      const { _preservation, ...parts } = eng.regenNPCsPipeline(settlement, cfg, { locks });
-      await foldRegeneratedRoster(get, set, parts, _preservation);
-    } else if (section === 'history') {
-      // This branch still assigns the whole history object, but the pipeline now
-      // carries the parts a reroll has no business discarding, so the assignment
-      // is no longer lossy in the ways recorded here before:
-      //   • the campaignEra entries worldPulse appended are carried by
-      //     campaignEventId (domain/historyPreservation.js),
-      //   • the coherence tail assembly runs now runs here too, so
-      //     siegeNarrative / legacyAnnotations are minted and
-      //     historicalCharacter is real prose rather than the generator's stub
-      //     (generators/narrative/historyCoherence.js), and
-      //   • authored settlement-root `history.*` paths are re-applied, so the
-      //     "Edited" badge no longer sits over regenerated text.
-      // All three live in the pipeline rather than here: this file is size-
-      // baselined at tolerance-0, and the pipeline already holds the settlement
-      // it needs to read the previous history from.
-      //
-      // DELIBERATELY DEFERRED — documented, not a bug to re-find. Authored
-      // ENTRIES inside historicalEvents[] / currentTensions[] still reroll away.
-      // The NPC fix does not transfer to them: they carry no id and no
-      // provenance marker, so there is nothing to preserve them BY
-      // (regenerationMode's `history_beat` rule covers the seven DERIVED
-      // summaries in explanation.js, not these arrays, and lookupTagForEntity
-      // has no branch for them, so it tags every one 'generated'/'draft' and
-      // both canon-aware modes preserve nothing). Curing that needs an identity
-      // scheme minted for the purpose — an owner decision, not oversight.
-      //
-      // THE SEED FOLD [generators-pipeline-5, closed 2026-07-30]. The pipeline now
-      // returns settlement-ROOT parts, exactly like the npcs branch above, so the
-      // seed it minted lands at the settlement root and a persisted history reroll
-      // is replayable (`regenHistoryPipeline(settlement, cfg, { seed: _regenSeed })`).
-      // Root, never `history._regenSeed`: the DM-share gallery strip is a top-level
-      // KEY list (migration 121 + publicSafe.js), so only the root spelling is
-      // covered, and the history blob stays shape-identical to a generated one.
-      const { history, _regenSeed } = eng.regenHistoryPipeline(settlement, cfg);
-      set(s => { s.settlement.history = history; s.settlement._regenSeed = _regenSeed; });
-    }
-
-    // Compute the delta against the post-regen settlement.
-    try {
-      const { deriveRegenerationDelta } = await import('../domain/regenerationDelta.js');
-      const after = get().settlement;
-      const delta = deriveRegenerationDelta(before, after);
-      set(s => { s.lastRegenerationDelta = delta; });
-    } catch (e) {
-      // Delta is a defensive surface — never block the regenerate
-      // on a delta-derivation failure.
-      console.warn('[settlementSlice] regenerationDelta failed', e);
-    }
-
-    // state-lifecycle-4: when a SAVE is hydrated into the live editor (activeSaveId
-    // set — SettlementDetail hydrates on open, then the Create page offers reroll),
-    // a section reroll mutated only memory and GHOSTED on reload. Persist it via the
-    // applyEvent pattern: stamp editedAt, update the in-memory save entry, and durably
-    // write the settlement + a re-derived campaignState. (Draft-only: the canon guard
-    // above already returned, so this never persists a canon reroll.)
-    const activeSaveId = get().activeSaveId;
-    if (activeSaveId) {
-      const now = new Date().toISOString();
-      set(s => { s.editedAt = now; });
-      const afterState = get();
-      const savePartial = {
-        settlement: cloneJson(afterState.settlement),
-        campaignState: pickleCampaignState(afterState),
-        timestamp: now,
-      };
-      if (typeof afterState.updateSavedSettlement === 'function') {
-        afterState.updateSavedSettlement(activeSaveId, savePartial);
-      }
-      persistSaveUpdate(activeSaveId, {
-        settlement: savePartial.settlement,
-        campaignState: savePartial.campaignState,
-      });
-    }
-  },
+  // The body lives in settlementRegenAction.js (ENGINE-5 unit 1), reached by a
+  // dynamic import so the eager first-paint closure does not carry it; the KEY
+  // stays here so the operation registry's walker still sees the action.
+  regenSection: (section) =>
+    loadRegenLane().then(lane => lane.regenSectionAction(set, get, section)),
 
   // Tier 5.1: dismiss the most recent delta summary card.
   clearLastRegenerationDelta: () =>
