@@ -227,6 +227,7 @@ export const INSTITUTION_SERVICE_KEYS = Object.freeze([
   "Traveling hedge wizard",
   "Undead labor",
   "Village musician",
+  "Village watch",
   "Village reeve",
   "Village scribe",
   "Weavers/Textile workers",

@@ -1374,6 +1374,10 @@ export const INSTITUTION_SERVICES = {
     "Music and entertainment": { on: true,  p: 1.0, desc: "Songs, dances, and music for celebrations and gatherings." },
     "Music lessons": { on: false, p: 0.3, desc: "Basic instruction for interested students." }
   },
+  "Village watch": {
+    "Night watch": { on: true,  p: 1.0, desc: "Walk the lanes after dark and raise the alarm at trouble." },
+    "Hue and cry": { on: false, p: 0.6, desc: "Turn the village out after a thief or a stray beast." }
+  },
   "Village reeve": {
     "Administrative oversight": { on: true,  p: 1.0, desc: "Manage village affairs on behalf of the lord. Allocate strips and common access." },
     [DISPUTE_RESOLUTION]: { on: true, p: 0.8, desc: "Settle minor disputes before they require higher authority." },
