@@ -2158,7 +2158,7 @@
     },
     {
       "id": "town|Economy|Money changers#0",
-      "text": "Foreign coin exchanged. The first stirrings of banking, past 3,000 people.",
+      "text": "Foreign coin exchanged. The first stirrings of banking.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2166,7 +2166,7 @@
     },
     {
       "id": "town|Economy|Money changers#1",
-      "text": "They change coin from abroad. Banking in its infancy, and only above 3,000 population.",
+      "text": "They change coin from abroad. Banking in its infancy.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2374,7 +2374,7 @@
     },
     {
       "id": "town|Economy|Harbour master's office#0",
-      "text": "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law. Navigable-water cities only.",
+      "text": "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -2382,7 +2382,7 @@
     },
     {
       "id": "town|Economy|Harbour master's office#1",
-      "text": "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced. Found only in port cities.",
+      "text": "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.",
       "needs": [
         "coast"
       ],
@@ -2876,7 +2876,7 @@
     },
     {
       "id": "town|Crafts|Printing house#1",
-      "text": "Printed books and broadsheets, only if the craft exists at all.",
+      "text": "Printed books and broadsheets, struck off by the sheet.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3366,7 +3366,7 @@
     },
     {
       "id": "town|Magic|Wizard's tower#0",
-      "text": "One wizard's home. It holds only past 1,000 people.",
+      "text": "One wizard's home.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3374,7 +3374,7 @@
     },
     {
       "id": "town|Magic|Wizard's tower#1",
-      "text": "A single wizard's residence, viable once the town passes 1,000.",
+      "text": "A single wizard's residence.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3382,7 +3382,7 @@
     },
     {
       "id": "town|Magic|Mages' guild#0",
-      "text": "A body of spellcasters organised together. A chapter needs 2,000 to 5,000 people.",
+      "text": "A body of spellcasters organised together.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3390,7 +3390,7 @@
     },
     {
       "id": "town|Magic|Mages' guild#1",
-      "text": "An association of magic-workers. Sustaining a chapter takes 2,000-5,000 population.",
+      "text": "An association of magic-workers.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3757,7 +3757,7 @@
     },
     {
       "id": "city|Economy|Banking houses#0",
-      "text": "Loans, coin exchange, and letters of credit. The beginnings of banking, viable above 5,000 souls.",
+      "text": "Loans, coin exchange, and letters of credit. The beginnings of banking.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -3765,7 +3765,7 @@
     },
     {
       "id": "city|Economy|Banking houses#1",
-      "text": "Lending, currency exchange, and credit by letter. Rudimentary banking, and only past 5,000 population.",
+      "text": "Lending, currency exchange, and credit by letter. Rudimentary banking.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4280,7 +4280,7 @@
     },
     {
       "id": "city|Religious|Cathedral (10,000+ only)#0",
-      "text": "The bishop's seat. It wants at least 10,000 people to sustain it, and its presence marks a city as a major one.",
+      "text": "The bishop's seat, and its presence marks a city as a major one.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4288,7 +4288,7 @@
     },
     {
       "id": "city|Religious|Cathedral (10,000+ only)#1",
-      "text": "Seat of a bishop, and the mark of a first-rank city. Nothing under 10,000 population carries one.",
+      "text": "Seat of a bishop, and the mark of a first-rank city.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4620,7 +4620,7 @@
     },
     {
       "id": "city|Magic|Enchanter's shop#0",
-      "text": "Magic items made to order. It wants a population of 5,000 or more, as a rule.",
+      "text": "Magic items made to order.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4628,7 +4628,7 @@
     },
     {
       "id": "city|Magic|Enchanter's shop#1",
-      "text": "Where magic items are crafted. Typically past 5,000 people.",
+      "text": "Where magic items are crafted.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4732,7 +4732,7 @@
     },
     {
       "id": "city|Criminal|Thieves' guild chapter#0",
-      "text": "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.",
+      "text": "A chapter of organised crime. Thirty to a hundred members.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4740,7 +4740,7 @@
     },
     {
       "id": "city|Criminal|Thieves' guild chapter#1",
-      "text": "An arm of the wider criminal order, 30 to 100 strong. It needs a city of 10,000 or more to survive.",
+      "text": "An arm of the wider criminal order, 30 to 100 strong.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4846,7 +4846,7 @@
     },
     {
       "id": "city|Criminal|Human trafficking network#0",
-      "text": "A wholly hidden operation that moves persons across borders outside any legal channel. It arises only where no lawful slave market stands. It runs its own logistics, its own safe houses, and its own bought border officials.",
+      "text": "A wholly hidden operation that moves persons across borders outside any legal channel. It runs its own logistics, its own safe houses, and its own bought border officials.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4854,7 +4854,7 @@
     },
     {
       "id": "city|Criminal|Human trafficking network#1",
-      "text": "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. It appears only where no legal slave market exists to absorb the traffic. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
+      "text": "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4862,7 +4862,7 @@
     },
     {
       "id": "city|Entertainment|Bardic college#0",
-      "text": "Music taught in the formal way, with an amphitheatre and dormitories. Even a small campus wants 10,000 or more people.",
+      "text": "Music taught in the formal way, with an amphitheatre and dormitories.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4870,7 +4870,7 @@
     },
     {
       "id": "city|Entertainment|Bardic college#1",
-      "text": "A formal schooling in music: amphitheatre, dormitories, and all. Nothing under 10,000 sustains even a small campus.",
+      "text": "A formal schooling in music: amphitheatre, dormitories, and all.",
       "needs": [],
       "excludes": [],
       "crisis": [],
@@ -4926,7 +4926,7 @@
     },
     {
       "id": "city|Exotic|Golem workforce#0",
-      "text": "Constructed servants, where the magic allows them.",
+      "text": "Constructed servants, put to the heavy work.",
       "needs": [],
       "excludes": [],
       "crisis": [],
