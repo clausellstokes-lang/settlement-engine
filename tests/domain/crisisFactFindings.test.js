@@ -16,7 +16,7 @@ import {
 } from '../../src/domain/coherence/crisisFactFindings.js';
 import { foodStoresWords } from '../../src/domain/summary/tonightSheet.js';
 import { migrationDirectionOf } from '../../src/domain/crisis/migrationDirection.js';
-import { FAMINE_RATION_FLOOR_PCT } from '../../src/generators/foodGenerator.js';
+import { FAMINE_DRAWDOWN, famineStoresLeft } from '../../src/generators/foodGenerator.js';
 import { STOCKPILE_TUNING } from '../../src/domain/worldPulse/foodStockpile.js';
 
 /** Every string the record stores, one per line (the prose the generators wrote). @param {unknown} v @returns {string} */
@@ -63,8 +63,15 @@ describe('the three checks, planted', () => {
 });
 
 describe('the famine month-burn', () => {
-  it('stops at the world pulse\'s own ration floor (one number, two homes pinned equal)', () => {
-    expect(FAMINE_RATION_FLOOR_PCT).toBe(STOCKPILE_TUNING.rationFloorPct);
+  it('is the world pulse\'s own drawdown rule (each number, two homes pinned equal)', () => {
+    for (const k of /** @type {const} */ (['rationFloorPct', 'maxReleaseFraction', 'reserveTitheDeficitCap', 'reserveTitheFloorMonths'])) {
+      expect(FAMINE_DRAWDOWN[k]).toBe(STOCKPILE_TUNING[k]);
+    }
+  });
+  it('draws a granary down and never empties it; a gap under the floor draws nothing', () => {
+    expect(famineStoresLeft(2, 40, 12)).toBeGreaterThan(0);
+    expect(famineStoresLeft(2, 40, 12)).toBeLessThan(2);
+    expect(famineStoresLeft(15.3, 4, 12)).toBe(15.3);
   });
   it('a held famine granary says so in the one stores writer; a famine of few months prints what is in hand', () => {
     expect(foodStoresWords({ storageMonths: 12.1, hasGranary: true, storesHeld: true })).toBe('Stores: a granary of twelve months that the hall will not open.');

@@ -47,10 +47,36 @@ import {
 const PER_CAPITA_NEED   = 2;   // lbs/day per person
 
 // The famine's months of drawing on the stores ("its second failed harvest season": a year since
-// the first failure) and the ration floor its burn stops at (the world pulse's rationFloorPct).
+// the first failure) and the world pulse's own drawdown rule it is drawn by, month by month
+// (domain/worldPulse/foodStockpile.js :: STOCKPILE_TUNING: rationFloorPct, maxReleaseFraction,
+// reserveTitheDeficitCap, reserveTitheFloorMonths — each pinned equal by
+// tests/domain/crisisFactFindings.test.js; kept here so the generation bundle loads no pulse graph).
 // Lane RUNG2-F13; see THE STORES A FAMINE LEAVES below.
 export const FAMINE_MONTHS_RUN = 12;
-export const FAMINE_RATION_FLOOR_PCT = 5;
+export const FAMINE_DRAWDOWN = Object.freeze({
+  rationFloorPct: 5,
+  maxReleaseFraction: 0.5,
+  reserveTitheDeficitCap: 25,
+  reserveTitheFloorMonths: 1,
+});
+
+/**
+ * The stores a famine leaves after `months` of the pulse's monthly drawdown: each month releases
+ * the gap above the ration floor, at most half of what may be released (a mild gap spares the
+ * one-month reserve), so a granary is drawn down and never emptied at a stroke.
+ * @param {number} stored months in store before the famine @param {number} gapPct the famine's gap, %
+ * @param {number} months @returns {number}
+ */
+export function famineStoresLeft(stored, gapPct, months) {
+  const D = FAMINE_DRAWDOWN;
+  let st = Math.max(0, stored);
+  if (!(gapPct > D.rationFloorPct)) return st;
+  for (let m = 0; m < months; m += 1) {
+    const releasable = gapPct < D.reserveTitheDeficitCap ? Math.max(0, st - D.reserveTitheFloorMonths) : st;
+    st -= Math.min((gapPct - D.rationFloorPct) / 100, releasable * D.maxReleaseFraction);
+  }
+  return st;
+}
 
 // Registered custom food effects are deliberately small and bounded. These
 // constants live beside the canonical food writer so generation, prosperity,
@@ -389,14 +415,12 @@ export function generateFoodSecurity(tier, institutions, config) {
   // soak1k-3605: "Food Deficit — Active Famine. Stores: a granary, 15 months of grain.") ──────
   // A famine reads the stores. The famine's own record says how long it has run: "its second
   // failed harvest season" (stressNarrative.js :: famine), so the stores have been drawn on since
-  // the first failure, FAMINE_MONTHS_RUN months, at the world pulse's own month-burn: the gap
-  // above the ration floor (worldPulse/foodStockpile.js :: STOCKPILE_TUNING.rationFloorPct, the
-  // same number, pinned by tests/domain/crisisFactFindings.test.js). What is printed is what is
-  // in hand. Zero draws; the full granary (storageMonthsFull) is untouched outside a famine.
-  const famineBurnMonths = stressFamine
-    ? FAMINE_MONTHS_RUN * Math.max(0, deficitPct - FAMINE_RATION_FLOOR_PCT) / 100
-    : 0;
-  const storageMonths = Math.round(Math.max(0, storageMonthsFull - famineBurnMonths) * 10) / 10;
+  // the first failure, FAMINE_MONTHS_RUN months, by the world pulse's own monthly drawdown
+  // (famineStoresLeft). What is printed is what is in hand. Zero draws; outside a famine the full
+  // granary (storageMonthsFull) is untouched.
+  const storageMonths = stressFamine
+    ? Math.max(0.1, Math.round(famineStoresLeft(storageMonthsFull, deficitPct, FAMINE_MONTHS_RUN) * 10) / 10)
+    : storageMonthsFull;
 
   // Normalized food ratio — 1.0 = exactly adequate
   const localRatio    = dailyProduction / Math.max(1, dailyNeed);
