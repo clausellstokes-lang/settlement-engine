@@ -130,7 +130,11 @@ function cell(tier, P, n, tag) {
   try {
     for (let k = 0; k < n; k += 1) {
       const matrixCell = configForIndex(k * TIER_ORDER.length + TIER_ORDER.indexOf(tier));
-      const config = birthConfig({ ...DEFAULT_CONFIG, ...matrixCell, settType: tier });
+      // The metropolis roll (X-46 car 1b, `rollMetropolisPopulation`) no longer reads POPULATION_RANGES,
+      // so a metropolis is forced through the app's own custom-population path (window branch, 2026-11-04).
+      const config = tier === 'metropolis'
+        ? birthConfig({ ...DEFAULT_CONFIG, ...matrixCell, settType: 'custom', population: P })
+        : birthConfig({ ...DEFAULT_CONFIG, ...matrixCell, settType: tier });
       const s = generateSettlementPipeline(config, null, { seed: `x46b-${tag}-${tier}-${P}-${k}` });
       if (s.population !== P || s.tier !== tier) throw new Error(`forced cell missed: ${tier} ${P} → ${s.tier} ${s.population}`);
       out.push(read(s).houses);

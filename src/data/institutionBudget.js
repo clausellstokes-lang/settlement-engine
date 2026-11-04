@@ -102,12 +102,12 @@ export function expectedHousesAt(population) {
  * @type {Readonly<Record<string, Readonly<{ midpoint: number, seeds: number, catalogueE: number, points: ReadonlyArray<readonly [number, number]> }>>>}
  */
 export const INSTITUTION_BUDGET_REALISED = Object.freeze({
-  thorp:      { midpoint: 12, seeds: 200, catalogueE: 5.35, points: [[0, 0.66], [0.25, 1.635], [0.5, 2.34], [1, 3.29], [1.5, 3.865], [2, 4.335], [3, 4.95], [4, 5.305]] },
-  hamlet:     { midpoint: 45, seeds: 200, catalogueE: 9.05, points: [[0, 0.66], [0.25, 3.345], [0.5, 5.99], [1, 9.775], [1.5, 12.41], [2, 14.135], [3, 15.915], [4, 17.105]] },
-  village:    { midpoint: 173, seeds: 200, catalogueE: 21.29, points: [[0, 0.68], [0.25, 8.195], [0.5, 15.665], [1, 26.045], [1.5, 32.995], [2, 37.25], [3, 42.28], [4, 44.825]] },
-  town:       { midpoint: 866, seeds: 200, catalogueE: 38.81, points: [[0, 0.75], [0.25, 15.555], [0.5, 28.765], [1, 46.24], [1.5, 56.565], [2, 63.1], [3, 68.87], [4, 71.335]] },
-  city:       { midpoint: 5477, seeds: 200, catalogueE: 51.05, points: [[0, 0.08], [0.25, 19.03], [0.5, 33.33], [1, 51.67], [1.5, 61.02], [2, 66.495], [3, 69.905], [4, 70.685]] },
-  metropolis: { midpoint: 30000, seeds: 200, catalogueE: 59.27, points: [[0, 0.09], [0.25, 22.81], [0.5, 39.4], [1, 58.65], [1.5, 69], [2, 74.08], [3, 77.155], [4, 77.92]] },
+  thorp:      { midpoint: 12, seeds: 200, catalogueE: 5.35, points: [[0, 1.23], [0.25, 2.02], [0.5, 2.525], [1, 3.29], [1.5, 3.83], [2, 4.285], [3, 4.89], [4, 5.245]] },
+  hamlet:     { midpoint: 45, seeds: 200, catalogueE: 9.05, points: [[0, 1.195], [0.25, 3.695], [0.5, 6.16], [1, 9.775], [1.5, 12.345], [2, 14.05], [3, 15.83], [4, 17.005]] },
+  village:    { midpoint: 173, seeds: 200, catalogueE: 21.29, points: [[0, 1.985], [0.25, 9.12], [0.5, 16.21], [1, 26.045], [1.5, 32.775], [2, 36.96], [3, 41.9], [4, 44.355]] },
+  town:       { midpoint: 866, seeds: 200, catalogueE: 38.81, points: [[0, 2.12], [0.25, 16.515], [0.5, 29.345], [1, 46.24], [1.5, 56.33], [2, 62.765], [3, 68.45], [4, 70.86]] },
+  city:       { midpoint: 5477, seeds: 200, catalogueE: 51.05, points: [[0, 1.12], [0.25, 19.7], [0.5, 33.765], [1, 51.67], [1.5, 60.725], [2, 66.05], [3, 69.42], [4, 70.15]] },
+  metropolis: { midpoint: 27386, seeds: 200, catalogueE: 59.27, points: [[0, 1.37], [0.25, 23.43], [0.5, 39.77], [1, 58.96], [1.5, 68.75], [2, 73.41], [3, 76.45], [4, 77.15]] },
 });
 for (const row of Object.values(INSTITUTION_BUDGET_REALISED)) {
   for (const point of row.points) Object.freeze(point);
