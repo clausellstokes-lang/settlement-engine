@@ -18,6 +18,7 @@ import { scoreBand, scoreColor, SCORE_BAND_CUTS } from './defenseScoreBands.js';
 import { STRESS_TYPE_MAP } from '../../data/stressTypes.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 import { magicPractitioners } from '../magicReliance.js';
+import { isCriminalInstitution } from '../corruption.js';
 
 // The active-military-status POSTURE per stress type. This DISPLAY text lives in
 // this lazy display module — NOT in data/stressTypes.js, which sits in the eager
@@ -86,6 +87,7 @@ export const DEFENSE_STRESS_STATUS = Object.freeze(
  * @property {{ compound?: { inst?: Record<string, boolean> }, foodSecurity?: { resilienceScore?: number, stockpile?: { blockaded?: unknown, blockadeBypass?: string | null } | null }, safetyProfile?: { guardEffectivenessDesc?: unknown } }} [economicState]
  * @property {{ tradeRouteAccess?: string }} [config]
  * @property {Array<{ reason?: unknown, severity?: unknown }>} [structuralViolations]
+ * @property {{ factions?: Array<{ category?: unknown } | null | undefined> }} [powerStructure] the roster `deriveCriminalStructure` reads for a criminal faction
  */
 
 const DEFENSE_VULNERABILITY_RE = /fort|milit|wall|garrison|defense|guard|structural|survival/i;
@@ -191,10 +193,25 @@ export function deriveCriminalStructure(settlement) {
   const hasSyndicate = names.some((n) => n.includes('multiple criminal') || n.includes('underground city') || n.includes('front business'));
   const hasSemiOrg = names.some((n) => n.includes('smuggling') || n.includes('black market') || n.includes('gambling'));
   const hasDiffuse = names.some((n) => n.includes('fence') || n.includes('bandit') || n.includes('outlaw'));
-  const key = hasGuild || hasSyndicate ? 'organized'
+  // ⛔ "NOTHING ORGANIZED" IS A FINDING, SO IT IS NEVER READ BESIDE A NETWORK (lane RUNG1-TRUTH unit
+  // E2, 2026-11-04; docs/SOAK_1000_RUNG1_2026-11-04.md §2 row 16, A-06; the chair's ruling 2). The
+  // name ladder above knows neither "Street gang" nor "Underground network" and never reads the
+  // power roster, so a town with a street gang (soak1k-759) and a place whose Thieves' Guild holds
+  // power with no premises (soak1k-393) both read null, and DS-DEF-4 printed "No criminal
+  // infrastructure has been identified". Where the ladder finds nothing, the roster's criminal
+  // faction makes the structure ORGANIZED (a guild is a hierarchy, the pool's own reading of one),
+  // and a house the estate's ONE criminal detector names (`corruption.js :: isCriminalInstitution`)
+  // makes it SEMI-ORGANIZED (routes and territories, no single authority). Only the null answer
+  // moves; no pool text changes.
+  const ladder = hasGuild || hasSyndicate ? 'organized'
     : hasSemiOrg ? 'semi-organized'
       : hasDiffuse ? 'diffuse'
         : null;
+  const rosterFactions = Array.isArray(r.powerStructure?.factions) ? r.powerStructure.factions : [];
+  const key = ladder
+    ?? (rosterFactions.some((f) => f?.category === 'criminal') ? 'organized'
+      : (r.institutions || []).some((i) => isCriminalInstitution(/** @type {Parameters<typeof isCriminalInstitution>[0]} */ (i))) ? 'semi-organized'
+        : null);
   return key ? CRIM_STRUCTURE_DATA[key] : null;
 }
 

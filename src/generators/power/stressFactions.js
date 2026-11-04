@@ -38,10 +38,11 @@ const firstUnusedPoolName = (factions, category) => {
  * @param {string} category
  * @param {number} power
  * @param {string} desc
+ * @param {Record<string, unknown>} [extra] further fields the faction carries (the infiltrator's `hidden`)
  */
-const pushPoolNamed = (factions, category, power, desc) => {
+const pushPoolNamed = (factions, category, power, desc, extra = {}) => {
   const faction = firstUnusedPoolName(factions, category);
-  if (faction !== null) factions.push({ faction, power, desc, category });
+  if (faction !== null) factions.push({ faction, power, desc, category, ...extra });
 };
 
 // applyStressEventFactions — apply every active stress type's power reweighting
@@ -137,12 +138,14 @@ export const applyStressEventFactions = (factions, ke, P, S, config, institution
       factions.forEach((N) => {
         N.isGoverning && (N.power = Math.round(N.power * 0.7));
       })),
+    // THE INFILTRATOR (lane RUNG1-TRUTH unit E1; the chair's ruling 1, 2026-11-04): hidden IN
+    // THE FICTION ("Its presence is not known to the settlement"), never from the DM, whose page
+    // the record is. It takes a real name like every stress faction, from the `other` pool: the
+    // stress is political and "strategic, not extractive", so neither the merchant nor the noble
+    // pool's framing fits, and `other` is the category the old placeholder inferred.
+    // `hidden: true` carries the fiction's fact; the description is unchanged.
     ke('infiltrated') &&
-      factions.push({
-        faction: 'Unknown Faction (hidden)',
-        power: 15,
-        desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.',
-      }),
+      pushPoolNamed(factions, 'other', 15, 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.', { hidden: true }),
     ke('succession_void') &&
       (factions.forEach((N) => {
         (N.isGoverning && ((N.power = Math.round(N.power * 0.5)), (N.modifiers = [...(N.modifiers || []), 'vacant'])),
