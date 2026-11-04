@@ -41,6 +41,7 @@ import { FOOD_SECURITY_BANDS } from '../../data/bandLadders.js';
 import { defenseFactsOf } from '../defense/defenseFacts.js';
 import { speakTierNoun } from '../display/stateProse/tierVoice.js';
 import { foodLedger } from '../foodLedger.js';
+import { famineOf } from '../facts/famine.js';
 import { tierNounFor } from '../display/stateProse/weaveBlock.js';
 import { magicWorksAt } from '../worldPulse/magicWorksAt.js';
 
@@ -145,8 +146,9 @@ export function settlementHookFacts(settlement) {
   // A FAMINE SENTENCE NEEDS BOTH HALVES: the band says the food has failed, and the
   // granaries agree. An unknown band licenses the sentence rather than refusing it,
   // because this classifier may only speak where the record contradicts the hook.
+  // CENSUS-1 wave 0, fact 6: the band half is the famine home's one rule (`facts/famine.js`).
   const famineLicensed = !foodKnown
-    || (CRISIS_BANDS.has(foodBand)
+    || (famineOf(settlement).starvingAllowed
       // "AND THE STORED MONTHS ARE LOW" (the chair's ruling 1), spoken in the engine's own
       // rungs rather than in a new tunable: `src/generators/foodGenerator.js` calls two
       // months the bottom rung it will still name ("seasonal buffer only"), and

@@ -36,6 +36,7 @@ import { hasMarketInstitution } from '../../../src/domain/facts/market.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
 import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 import { storesMonthsOf } from '../../../src/domain/facts/storesMonths.js';
+import { famineOf } from '../../../src/domain/facts/famine.js';
 import { waterAccessKind } from '../../../src/domain/tradeRouteSemantics.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
@@ -307,7 +308,7 @@ export function reviewSettlement(s, config, r) {
   if (endurance > 0 && record?.hasGranary === false && /the granary\b/.test(r.tabs.defense.split('Food endurance')[1]?.slice(0, 300) || '')) add('X-52:endurance-disagrees', 'defense', r.tabs.defense.split('Food endurance')[1].slice(0, 200), 'names a granary the record does not hold');
 
   // ── A-01: "starving" in the record's hooks where the food record is fed
-  if (record && record.band !== 'famine' && (record.gapPct ?? 0) < 20) {
+  if (record && !famineOf(s).starvingAllowed) { // CENSUS-1 fact 6: the famine home's one rule
     const starving = sentencesOf(screenText).find((x) => /\bstarving\b/i.test(x));
     if (starving) add('A-01:starving-fed', 'screen', starving, `band ${record.band}, gap ${record.gapPct}%`);
   }
