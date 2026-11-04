@@ -111,6 +111,7 @@ export function createPowerGenerationIntent({
   neighbourRelationship,
   config,
   institutions,
+  stressEntries = null,
 }) {
   if (!stepRng || typeof stepRng.fork !== 'function') {
     throw new TypeError(
@@ -124,8 +125,27 @@ export function createPowerGenerationIntent({
     neighbourRelationship: neighbourRelationship || null,
     config: config || {},
     institutions: institutions || [],
+    // CENSUS-1b unit B (the chair's ruling; F13's census debt): the power step is handed the
+    // stress ENTRIES, not only `config.stressTypes`, so the migration direction is the entry's
+    // (`crisis/migrationDirection.js`). The kind and the direction are what the step reads; a held
+    // intent written before this field reads `null` and falls back to the config's kinds.
+    stressEntries: stressEntriesOf(stressEntries),
   });
   return deepFreeze(snapshot);
+}
+
+/**
+ * The stress container as the power step reads it: one `{ type, direction? }` per entry, or
+ * `null` when the caller handed none (a legacy caller; the config's kinds then govern).
+ * @param {unknown} stress the pipeline's `stress` (an entry, an array of entries, or nothing)
+ * @returns {Array<{ type: string, direction?: string }> | null}
+ */
+function stressEntriesOf(stress) {
+  if (stress == null) return null;
+  const list = Array.isArray(stress) ? stress : [stress];
+  return list
+    .filter((e) => e && typeof e === 'object' && typeof e.type === 'string')
+    .map((e) => ({ type: e.type, ...(typeof e.direction === 'string' ? { direction: e.direction } : {}) }));
 }
 
 function assertIntent(intent) {
@@ -155,7 +175,10 @@ export function projectPowerGenerationIntent(
       intent.neighbourRelationship,
       intent.config,
       intent.institutions,
-      defenseLabel ? { defenseLabel } : {},
+      {
+        ...(defenseLabel ? { defenseLabel } : {}),
+        ...(Array.isArray(intent.stressEntries) ? { stressEntries: intent.stressEntries } : {}),
+      },
     );
     powerStructure.powerProjectionVersion = POWER_PROJECTION_VERSION;
     powerStructure.economyInputFingerprint = fingerprintPowerEconomyInput(

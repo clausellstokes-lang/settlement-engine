@@ -592,7 +592,7 @@ const buildReligiousConversionNarrative = (governingFactionName) => {
   );
 };
 
-const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
+const buildMigrationNarrative = (institutionFlags, governingFactionName, migrationEntry = null) => {
   if ((institutionFlags.economyOutput || 50) >= 50) {
     return (
       'The settlement is receiving more people than its infrastructure was built for. ' +
@@ -604,7 +604,8 @@ const buildMigrationNarrative = (institutionFlags, governingFactionName) => {
   // RUNG2-F13 (soak1k-0, soak1k-4204): the weak-economy arm told a DEPARTURE under an influx. It
   // reads the one direction now (domain/crisis/migrationDirection.js); the power step holds the
   // kind, not the entry, and the entry is born from the same catalog fact. No draw either way.
-  if (migrationDirectionOf(null) === 'exodus') {
+  // CENSUS-1b unit B: the power step now receives the stress ENTRIES, so the direction is the entry's.
+  if (migrationDirectionOf(migrationEntry) === 'exodus') {
     return 'Three families left this week. Two more last week. The departure is quiet and orderly, which makes it worse. The people leaving have thought it through. What remains is those who cannot leave, those who choose to stay, and institutions running on fewer people than they were designed for.';
   }
   return (
@@ -626,6 +627,7 @@ const buildSlaveRevoltNarrative = (institutionNames) => {
 };
 
 const buildStressNarratives = ({
+  migrationEntry = null,
   baselineConflict,
   institutionFlags,
   institutionNames,
@@ -695,6 +697,7 @@ const buildStressNarratives = ({
     mass_migration: buildMigrationNarrative(
       institutionFlags,
       governingFactionName,
+      migrationEntry,
     ),
     slave_revolt: buildSlaveRevoltNarrative(institutionNames),
   };
@@ -720,6 +723,7 @@ export const buildGovernanceLabels = ({
   governingFaction: configuredGoverningFaction,
   hasNobleInstitution,
   stressTypes,
+  stressEntries = [],
   fallbackStressType,
   worldLaw = null, // absent, it resolves from config exactly as generatePowerStructure builds its own
 }) => {
@@ -775,6 +779,7 @@ export const buildGovernanceLabels = ({
     tier,
   );
   const stressNarratives = buildStressNarratives({
+    migrationEntry: (stressEntries || []).find((e) => e?.type === 'mass_migration') ?? null,
     baselineConflict: recentConflict,
     institutionFlags,
     institutionNames,
