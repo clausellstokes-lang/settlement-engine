@@ -114,7 +114,10 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + ' tab reads it and the one practitioner census; 512 of the 1,050 rows move, none added or removed.'
     + ' 2026-11-03 (FOOD-print, docs/shift-records/2026-11-03-food-print-comfortable-pool.json, ODQ §934.104, THE'
     + ' COHERENCE AND SCALE WINDOW): re-recorded because the comfortable-prosperity pool stops claiming a food surplus'
-    + ' the food record does not show; 232 of the 1,050 rows move, none added or removed.',
+    + ' the food record does not show; 232 of the 1,050 rows move, none added or removed.'
+    + ' 2026-11-04 (X-46 car 1, docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 1264a8152 because the owner\'s historical population bands and the one disjoint tier stamp; no household count (U4 removed it by the owner\'s word); 376 of the 1,050 rows move, '
+    + '0 added, 0 removed.',
 });
 
 /** This surface's identity in tests/fixtures/.golden-freeze-register.json. */
