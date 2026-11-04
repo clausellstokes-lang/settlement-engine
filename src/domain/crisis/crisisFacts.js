@@ -33,7 +33,8 @@ export const CRISIS_FAMILIES = Object.freeze({
   // an armed threat at or inside the place: the calm it denies is "nothing presses", "never
   // needed to think about what is outside it", the relaxed perimeter
   threat: Object.freeze({ on: 'threat', off: 'no threat', types: Object.freeze(['under_siege', 'occupied', 'monster_pressure']) }),
-  // the food has failed or is cut off: "the town eats", "fed and only just comfortably"
+  // the food has failed or is cut off: "the town eats", "fed and only just comfortably"; and, beyond
+  // these kinds, any crisis while the food record reads a deficit (`familyActiveIn`)
   hunger: Object.freeze({ on: 'hunger', off: 'no hunger', types: Object.freeze(['famine', 'under_siege']) }),
   // the seat is open or nobody holds authority: "the succession question is not a live one"
   succession: Object.freeze({ on: 'succession open', off: 'succession settled', types: Object.freeze(['succession_void', 'politically_fractured']) }),
@@ -73,6 +74,32 @@ export function familyTypesActive(family, types) {
 }
 
 /**
+ * The food record's bands that read a deficit (`data/bandLadders.js :: FOOD_SECURITY_BANDS`:
+ * 'Deficit — Active Famine', 'Deficit'). The rung-2 window's ruling: HUNGER reads the food
+ * record's deficit band, not the crisis kind alone, so a place under ANY active crisis whose
+ * record stands on one of these is hungry (a wartime place with a food deficit), and the
+ * same crisis with the record secure is not (soak1k-5: wartime, 15 months in store).
+ */
+const HUNGER_BANDS = Object.freeze(['famine', 'deficit']);
+
+/**
+ * The active types under which a family holds for THIS place: the family's own kinds, and for
+ * hunger every active crisis when the food record reads a deficit. A crisis-free place holds
+ * no family.
+ * @param {object | null | undefined} settlement
+ * @param {string} family a key of CRISIS_FAMILIES
+ * @param {ReadonlyArray<string>} [types] the active crisis types (read from the record when absent)
+ * @returns {string[]}
+ */
+export function familyActiveIn(settlement, family, types = activeCrisisTypes(settlement)) {
+  const own = familyTypesActive(family, types);
+  if (family !== 'hunger' || own.length > 0 || types.length === 0) return own;
+  const band = /** @type {{ economicState?: { foodSecurity?: { foodRecord?: { band?: unknown } } } } | null | undefined} */ (settlement)
+    ?.economicState?.foodSecurity?.foodRecord?.band;
+  return typeof band === 'string' && HUNGER_BANDS.includes(band) ? [...types] : [];
+}
+
+/**
  * The kernel's crisis dimension words for this place, one per family.
  * @param {object | null | undefined} settlement
  * @returns {Record<string, string>}
@@ -81,7 +108,7 @@ export function crisisDimensionsOf(settlement) {
   const types = activeCrisisTypes(settlement);
   /** @type {Record<string, string>} */
   const out = {};
-  for (const [family, def] of Object.entries(CRISIS_FAMILIES)) out[family] = familyTypesActive(family, types).length ? def.on : def.off;
+  for (const [family, def] of Object.entries(CRISIS_FAMILIES)) out[family] = familyActiveIn(settlement, family, types).length ? def.on : def.off;
   return out;
 }
 
