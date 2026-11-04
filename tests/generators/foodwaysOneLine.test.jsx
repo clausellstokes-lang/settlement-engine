@@ -28,6 +28,7 @@ import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx'
 import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 afterEach(cleanup);
 
@@ -53,7 +54,8 @@ describe('the foodways line: one writer on the record, the same line on every su
   it('12 seeds, two per tier: the Economy tab, the PDF chapter and the journal print the record\'s line once each', () => {
     const wrong = [];
     const lines = new Set();
-    for (const { tier, seed } of SEEDS) {
+    // Collected, so every seed runs and the failure count is the true count (seedLoopTotality).
+    const failures = collectSeedFailures(SEEDS, ({ tier, seed }) => {
       const s = generateSettlementPipeline({ settType: tier }, null, { seed, customContent: {} });
       const line = s.economicState.foodSecurity.foodRecord.foodwaysLine;
       expect(typeof line === 'string' && line.length > 10, `${seed}: the record carries a line`).toBe(true);
@@ -78,7 +80,8 @@ describe('the foodways line: one writer on the record, the same line on every su
           if (text.includes(cultureLine)) wrong.push(`${seed} / ${surface}: printed the culture's line`);
         }
       }
-    }
+    });
+    expectNoSeedFailures(failures, 'every seed\'s record carries its foodways line');
     expect(wrong).toEqual([]);
     // Measured 6 distinct lines over these 12 seeds (default configs share culture and terrain).
     expect(lines.size, 'the line is the place\'s own, not one sentence for all').toBeGreaterThanOrEqual(5);

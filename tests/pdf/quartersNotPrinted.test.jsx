@@ -22,6 +22,7 @@ import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 import { IdentityDailyLife } from '../../src/pdf/sections/IdentityDailyLife.jsx';
 import { SettlementPDF } from '../../src/pdf/SettlementPDF.jsx';
 import { buildJournalPages } from '../../src/foundry/journalPages.js';
+import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 
 const INDICES = Array.from({ length: 12 }, (_, i) => i);
 
@@ -102,7 +103,8 @@ describe('X-47: no quarter name in any text export before the plat', () => {
     const zero = ROWS.find((r) => r.seed === 'soak1k-1');
     // anchored: a named quarter is on the record, so its absence above is not vacuous.
     expect(zero.names).toContain('Religious Quarter');
-    for (const { seed, s, vm, chapter15, pdf, journal, names } of ROWS) {
+    // Collected, so every row runs and the failure count is the true count (seedLoopTotality).
+    const failures = collectSeedFailures(ROWS, ({ seed, s, vm, chapter15, pdf, journal, names }) => {
       expect(chapter15.includes(s.name), `${seed}: chapter 15 carries the settlement's name`).toBe(true);
       expect(pdf.includes('Identity & Daily Life') && pdf.includes('Overview'), `${seed}: the PDF carries chapters 01 and 15`).toBe(true);
       expect(vm.overview.quarters.map((q) => q.name), `${seed}: vm.overview.quarters`).toEqual(
@@ -114,6 +116,7 @@ describe('X-47: no quarter name in any text export before the plat', () => {
         (s.spatialLayout?.quarters || []).map((q) => q.name),
       );
       expect(vm.identity.quarters.length >= names.length, `${seed}: quarters kept`).toBe(true);
-    }
+    });
+    expectNoSeedFailures(failures, 'every row reads real exports and keeps its quarters for the plat');
   });
 });
