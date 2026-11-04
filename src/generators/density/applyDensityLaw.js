@@ -297,7 +297,42 @@ function resizeSeats(powerStructure, plan, rng) {
   // The trim drops the unseated powers' shares and the mint adds each rival's, so this
   // roster does NOT total 100; `conservePower` restores it after the dispersal (below).
   const factions = [...kept, ...minted];
-  return { ...(powerStructure || {}), factions };
+  const keptNames = new Set(factions.flatMap(seatNamesOf));
+  const removed = new Set(seats.filter(seat => !keep.has(seatKey(seat)))
+    .flatMap(seatNamesOf).filter(name => !keptNames.has(name)));
+  return pruneToRoster({ ...(powerStructure || {}), factions }, removed);
+}
+
+/** Every name a seat is joined on: its key, its `faction`, its `name`.
+ *  @param {Record<string, unknown>} seat @returns {string[]} */
+function seatNamesOf(seat) {
+  return [seatKey(seat), seat?.faction, seat?.name]
+    .filter((/** @type {unknown} */ n) => typeof n === 'string' && n !== '')
+    .map(String);
+}
+
+/**
+ * ⛔ A RELATIONSHIP DOES NOT OUTLIVE A TRIM (lane RUNG1B-F4 unit 2, 2026-11-04;
+ * docs/F4_CRIME_SIGNAL_2026-11-04.md §1, cause i). `power/rulingStructure.js` writes
+ * `factionRelationships` for the whole pre-trim roster, and the resize above used to return
+ * every row with the trimmed roster: 782 of 1,000 soak places kept a row (its narrative and its
+ * dmNote) for a faction the law had removed, 69 for a removed criminal faction (soak1k-4:
+ * "Ask: which specific officials have arrangements with Thieves' Guild?" with no guild). The
+ * rows naming a REMOVED seat go with it here, at the trim, in one place. A row naming any other
+ * faction — a DM's own off the roster included — is kept; nothing draws; a structure with
+ * nothing removed (or no row naming it) is returned by reference.
+ *
+ * @template {{factionRelationships?: unknown}} T
+ * @param {T} powerStructure the resized structure
+ * @param {Set<string>} removed the names of the seats the trim removed
+ * @returns {T}
+ */
+export function pruneToRoster(powerStructure, removed) {
+  const rows = powerStructure?.factionRelationships;
+  if (!removed.size || !Array.isArray(rows)) return powerStructure;
+  const kept = rows.filter(row => !(Array.isArray(row?.pair)
+    && row.pair.some((/** @type {unknown} */ name) => removed.has(String(name)))));
+  return kept.length === rows.length ? powerStructure : { ...powerStructure, factionRelationships: kept };
 }
 
 /**
