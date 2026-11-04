@@ -47,6 +47,7 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 import { nameOf } from '../../src/domain/rulingPower.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import {
+  DEFENSE_CATEGORIES,
   FACTION_RENAME_SURFACES,
   NON_CASCADED_SURFACES,
   applyFactionRenameToPartner,
@@ -160,6 +161,22 @@ function walkFactionNamePaths(root, name) {
 }
 
 const DECLARED_PATHS = new Set(FACTION_RENAME_SURFACES.map(s => s.path));
+
+/**
+ * A crisis cast holding `name` at every faction surface it carries (RUNG1B-F7): a stake
+ * and a faction-kind row. The house and person rows beside it share nothing with it.
+ */
+function castFixture(name) {
+  return {
+    nature: 'social',
+    roles: [
+      { role: 'instigator', kind: 'faction', id: name, name, reason: 'the faction with the most to gain', temporary: false },
+      { role: 'target', kind: 'npc', id: 'npc.9', name: 'Odo Wick', reason: 'the seat', temporary: false },
+    ],
+    stakes: [{ factionId: name, stake: 'gains', reason: 'gains while the seat weakens' }],
+    levers: [{ institution: 'Customs House', holderId: null, holderName: null }],
+  };
+}
 const NON_CASCADED_PATHS = new Set(NON_CASCADED_SURFACES.map(s => s.path));
 
 /** Roster names that whole-word contain, or are contained by, another roster name. */
@@ -293,7 +310,8 @@ describe('faction rename — the declared surface set', () => {
       name: 'Bramblewatch',
       pressureSentence: `The ${OLD} has the quays by the throat and everyone knows it.`,
       powerStructure: {
-        factions: [{ faction: OLD, name: OLD, desc: `The ${OLD} keeps the quays.`, isGoverning: true }],
+        // The second record is a doubled-niche rival naming the niche it contests (RUNG1B-F7).
+        factions: [{ faction: OLD, name: OLD, desc: `The ${OLD} keeps the quays.`, isGoverning: true }, { faction: 'Quay Wardens', contestsNiche: OLD }],
         governingName: OLD,
         government: OLD,
         recentConflict: `The ${OLD} broke the grain cartel.`,
@@ -324,22 +342,35 @@ describe('faction rename — the declared surface set', () => {
       interSettlementRelationships: [
         { partnerSettlement: 'Elsewhere', factionName: OLD, partnerFactionName: OLD },
       ],
+      // RUNG1B-F7: the defence profile's institution copies, every bucket.
+      defenseProfile: { institutions: Object.fromEntries(DEFENSE_CATEGORIES.map(c => [c, [{ name: `Harbour ${c}`, factionSource: OLD }]])) },
+      coherenceNotes: [{ severity: 'contradiction', note: `${OLD} holds 40% of power in this transit hub.` }],
+      // RUNG1B-F7: the crisis cast. A single crisis is an entry OBJECT, several an ARRAY;
+      // this fixture holds the object at `stress` and the array at `stressors`, and the
+      // mirror below holds the other two homes, so every declared home is exercised.
+      stress: { type: 'insurgency', cast: castFixture(OLD) },
+      stressors: [{ type: 'insurgency', cast: castFixture(OLD) }],
     };
+    const mirror = { stress: [{ type: 'insurgency', cast: castFixture(OLD) }], stressors: { type: 'insurgency', cast: castFixture(OLD) } };
+    const fixtures = [settlement, mirror];
+    const anyHits = (surface, name) => fixtures.some(f => hitsFor(surface, f, name) > 0);
     // Anti-vacuity: prove the fixture really holds every surface BEFORE renaming.
     const unheld = FACTION_RENAME_SURFACES
-      .filter(surface => hitsFor(surface, settlement, OLD) === 0)
+      .filter(surface => !anyHits(surface, OLD))
       .map(surface => surface.path);
     expect(unheld, `totality fixture does not exercise: ${unheld.join(', ')}`).toEqual([]);
 
     const result = applyFactionRenameToSettlement(settlement, OLD, NEW_NAME);
+    const mirrorResult = applyFactionRenameToSettlement(mirror, OLD, NEW_NAME);
     expect(result.changed).toBe(true);
-    expect([...result.touched].sort()).toEqual([...FACTION_RENAME_SURFACES.map(s => s.path)].sort());
+    expect(mirrorResult.changed).toBe(true);
+    expect([...new Set([...result.touched, ...mirrorResult.touched])].sort()).toEqual([...FACTION_RENAME_SURFACES.map(s => s.path)].sort());
     const stale = FACTION_RENAME_SURFACES
-      .filter(surface => hitsFor(surface, settlement, OLD) > 0)
+      .filter(surface => anyHits(surface, OLD))
       .map(surface => surface.path);
     expect(stale, `surfaces STILL holding the old name: ${stale.join(', ')}`).toEqual([]);
     const lost = FACTION_RENAME_SURFACES
-      .filter(surface => hitsFor(surface, settlement, NEW_NAME) === 0)
+      .filter(surface => !anyHits(surface, NEW_NAME))
       .map(surface => surface.path);
     expect(lost, `surfaces that did not gain the new name: ${lost.join(', ')}`).toEqual([]);
 
