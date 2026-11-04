@@ -1,0 +1,101 @@
+/**
+ * tests/generators/tierNounPoolDraws.test.js — A CITY'S INSTITUTIONS AND ITS TOLLS ARE NOT
+ * WRITTEN AS A TOWN'S (lane TIER-NOUN-POOLS, 2026-11-04; SOAK_1000_2026-11-03 §2 row 4, §4b R3).
+ *
+ * THE DEFECT, MEASURED BEFORE THE CURE. Over the 1,000-settlement soak at 39038801
+ * (`coh:tier-noun`), 287 places that are not towns printed "town" about themselves. The
+ * history, arrival and self-vouch pools the brief named print 0 of them at this tip: SIZE
+ * ruling 2 already speaks that text. What remains comes from text written at generation that
+ * nothing speaks: three institution description variants (`institutionDescVariants.js`:
+ * the cobbler's guild "shoe the town" in 91 places, the chandler "The town depends on it for
+ * lighting" in 76, the tanners "where a town can manage it" in 38, all cities and
+ * metropolises) and the Gate Tolls income line "collected at the town gates" (economicState,
+ * 28 cities; its arm lands with the toll unit's own commit).
+ *
+ * THE CURE'S SHAPE: the drawn string passes through the dossier kernel's `speakTierNoun` with
+ * the settlement's tier noun where it is drawn — the SIZE ruling 2 precedent
+ * (`historyGenerator.js :: speakRecord`). No pool byte moves, no sentence is added, a town is
+ * identity, and nothing draws.
+ *
+ * ONE NAMED RESIDUE, NOT AN EXCLUSION: the customs-house variant "collected by officials of
+ * crown or town" (crown or town = royal or municipal, the canonical's own words) has no
+ * determiner for the kernel to move. It is left for the chair's ruling (a kept collocation, or
+ * the owner's copy), so the arm below pins it BY TEXT: any other finding is an offender.
+ */
+import { beforeAll, describe, expect, test } from 'vitest';
+import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
+import { birthConfig, loadGenerationLawPayloads } from '../../src/domain/density/densityCreateBoundary.js';
+import { DEFAULT_CONFIG } from '../../src/store/configSlice.js';
+import { tierNounFindings } from '../../src/domain/coherence/tierNounFindings.js';
+import { institutionalCatalog } from '../../src/data/institutionalCatalog.js';
+import { INSTITUTION_DESC_VARIANTS } from '../../src/data/institutionDescVariants.js';
+
+const PER_TIER = 8;
+const RESIDUE = 'Levies charged on all trade in and out by road or harbour, collected by officials of crown or town.';
+/** The routed sentences, in either noun: the arms read them before and after the cure. */
+const ROUTED = [
+  /Organised cobblers who shoe the \p{L}+ in boots/u,
+  /The \p{L}+ depends on it for lighting/u,
+  /downstream of the rest where a \p{L}+ can manage it/u,
+];
+
+/** @type {Record<string, any[]>} */
+const BY_TIER = { city: [], metropolis: [], thorp: [], town: [] };
+
+/** Every drawn institution desc a reader sees. */
+const drawn = (s) => s.institutions.filter((i) => typeof i.desc === 'string').map((i) => ({ where: i.name, text: i.desc }));
+
+beforeAll(async () => {
+  await loadGenerationLawPayloads();
+  for (const tier of Object.keys(BY_TIER)) {
+    for (let i = 0; i < PER_TIER; i += 1) {
+      BY_TIER[tier].push(generateSettlementPipeline(
+        birthConfig({ ...DEFAULT_CONFIG, settType: tier, tradeRouteAccess: 'road' }), null,
+        { seed: `tier-noun-pools-${tier}-${i}`, customContent: {} },
+      ));
+    }
+  }
+}, 120_000);
+
+describe('the place\'s own noun in drawn institution text', () => {
+  test('the arms read the population they claim, and the routed sentences are actually drawn', () => {
+    for (const [tier, list] of Object.entries(BY_TIER)) {
+      expect(list).toHaveLength(PER_TIER);
+      expect(list.every((s) => s.tier === tier)).toBe(true);
+    }
+    const large = [...BY_TIER.city, ...BY_TIER.metropolis];
+    const routed = large.flatMap(drawn).filter(({ text }) => ROUTED.some((rx) => rx.test(text)));
+    // Non-vacuity, true before and after the cure: the probe at 39038801 read 10 such lines here.
+    expect(routed.length).toBeGreaterThanOrEqual(5);
+  });
+
+  test('no city, metropolis or thorp calls itself a town in a drawn institution desc (the customs collocation named)', () => {
+    const offenders = [];
+    for (const tier of ['city', 'metropolis', 'thorp']) {
+      for (const s of BY_TIER[tier]) {
+        for (const { where, text } of drawn(s)) {
+          if (text === RESIDUE) continue;
+          for (const f of tierNounFindings(s, text)) offenders.push(`${tier} ${s.name} / ${where}: …${f.context}…`);
+        }
+      }
+    }
+    expect(offenders).toEqual([]);
+  });
+
+  test('a town is identity: every drawn institution desc is a pool member verbatim', () => {
+    let read = 0;
+    const moved = [];
+    for (const s of BY_TIER.town) {
+      for (const inst of s.institutions) {
+        if (typeof inst.desc !== 'string' || inst.isCustom) continue;
+        const canonical = institutionalCatalog.town?.[inst.category]?.[inst.name]?.desc;
+        if (typeof canonical !== 'string') continue;
+        read += 1;
+        const pool = [canonical, ...(INSTITUTION_DESC_VARIANTS[`town|${inst.category}|${inst.name}`] || [])];
+        if (!pool.includes(inst.desc)) moved.push(`${s.name} / ${inst.name}: ${inst.desc}`);
+      }
+    }
+    expect(read).toBeGreaterThan(100);
+    expect(moved).toEqual([]);
+  });
+});

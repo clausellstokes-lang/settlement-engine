@@ -860,7 +860,7 @@ registerStep('assembleInstitutions', {
     if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
     const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
     if (variants && variants.length) {
-      inst.desc = pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`);
+      inst.desc = speakTierNoun(pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`), tierNounFor(tier));
     }
   }
 
@@ -870,3 +870,15 @@ registerStep('assembleInstitutions', {
   // roster that no longer exists.
   return { institutions, catalogForTier, generationRepairs };
 });
+
+// ─── The drawn description speaks the place's own noun (lane TIER-NOUN-POOLS, 2026-11-04) ────
+// ⚠ AT THE END OF THE FILE ON PURPOSE (imports hoist): the fork census keys the variant draw
+// above by LINE (`generationForkCensus.test.js`, site `assembleInstitutions.js:863`), so nothing
+// is inserted above it. The variants were written with 'town' for the tiers that reuse a town's
+// pair, so a city's chandler read "The town depends on it for lighting" (SOAK_1000_2026-11-03
+// §2 row 4: 205 of 1,000 places, every one a city or metropolis). The drawn string passes
+// through the dossier kernel's own `speakTierNoun`, as SIZE ruling 2 does for the history record
+// (`historyGenerator.js :: speakRecord`): a town is identity, a kept comparison stays, nothing
+// draws, and no pool byte moves. @enforced-by tests/generators/tierNounPoolDraws.test.js
+import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
+import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
