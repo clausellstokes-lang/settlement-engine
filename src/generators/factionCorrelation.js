@@ -3,7 +3,8 @@
 // Dominant factions get extra institution chances in their category,
 // constrained by tier caps so small settlements don't over-inflate.
 
-import { institutionalCatalog, institutionRowGuardsPass } from '../data/institutionalCatalog.js';
+import { institutionalCatalog, institutionRowGuardsPass, isFabricRow } from '../data/institutionalCatalog.js';
+import { densityFactor, scaleChance } from '../data/institutionBudget.js';
 import { getBaseChance } from './institutionProbability.js';
 import { chance } from './helpers.js';
 import { ARCANE_INST_TAGS, ARCANE_INST_KW } from '../domain/magicFilter.js';
@@ -141,6 +142,10 @@ export function applyFactionInstitutionBoosts(
 
   const tierCatalog = institutionalCatalog[tier] || {};
   const additions   = [];
+  // THE INSTITUTION BUDGET (X-46 car 3): the same density factor assembleInstitutions applies,
+  // read once before the first draw. 1 with no population. The candidates' ORDER (by authored
+  // baseChance) is untouched: one factor scales every candidate alike.
+  const density = densityFactor(tier, population);
 
   // Only the single most dominant faction gets a signature institution
   const primaryBoost = boosts[0];
@@ -203,8 +208,10 @@ export function applyFactionInstitutionBoosts(
         // a dampened nudge on the institution's REAL catalog rarity, run
         // through the same config-aware getBaseChance the assemble path uses.
         const multiplier = boost.strength === 'strong' ? 1.3 : 1.1;
+        const d = isFabricRow(tier, name) ? 1 : density;
+        const authored = def.baseChance || 0;
         const boostedChance = getBaseChance(
-          (def.baseChance || 0) * multiplier,
+          (d === 1 ? authored : scaleChance(authored, d)) * multiplier,
           catalogCat, name, config, null, {}
         );
 
