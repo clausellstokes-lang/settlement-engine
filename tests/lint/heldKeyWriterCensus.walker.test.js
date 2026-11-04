@@ -194,6 +194,8 @@ const DISCOVERY_EXEMPT = Object.freeze([
   { symbol: 'culturalNotesFor', reason: 'a pure lookup over the culture profile table; it writes nothing at all.' },
   { symbol: 'buildGenerationCoherenceReceipt', reason: 'builds `generationCoherenceReceipt`, classed RECEIPT, not HELD.' },
   { symbol: 'refreshPowerGenerationTraces', reason: 're-stamps the power traces in `simulationTrace`, the sanctioned cross-cutting ledger, never `powerStructure` itself.' },
+  // RUNG1B-F4 unit 4 (9fd39cf6d), added at the window compose, 2026-11-04.
+  { symbol: 'settleCrimeLinesToSignal', reason: 'rewrites the safety profile crime-line descs inside economicState from the final crime signal; economicState is not a held key.' },
 ]);
 
 /** The held denominator, DERIVED from its producers and never re-typed. */

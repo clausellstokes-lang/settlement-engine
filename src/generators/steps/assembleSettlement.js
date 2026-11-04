@@ -18,6 +18,7 @@ import { generateFactions, generateConflicts } from '../powerGenerator.js';
 import { renderStressSummary } from '../stressNarrative.js';
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
+import { settleCrimeLinesToSignal } from '../safetyProfile.js';
 // Faction-to-NPC coupling: synthesizes structural NPCs (high priestess,
 // watch captain, etc.) for any faction archetype that lacks them. Runs
 // at assembly so existing pipeline NPCs are deduplicated against.
@@ -282,6 +283,19 @@ registerStep('assembleSettlement', {
   if (resized.powerStructure !== settlement.powerStructure) {
     settlement.powerStructure = resized.powerStructure;
   }
+
+  // ── THE CRIME LINES READ THE FINAL CRIME SIGNAL (lane RUNG1B-F4 unit 4, 2026-11-04). The safety
+  // profile was written at the economy step, before the power roster existed; this is the first
+  // point where the FINAL roster (after the trim above) and the estate both exist, so its
+  // survival-crime and debt-evasion lines take their text from the crime signal here
+  // (`safetyProfile.js :: settleCrimeLinesToSignal`). No step is re-ordered; no draw; the
+  // economicState is copied only when a line changes (the power fingerprint reads the safety
+  // LABEL, which this never touches).
+  const settledEconomy = settleCrimeLinesToSignal(
+    settlement.economicState,
+    { seats: settlement.powerStructure?.factions, estate: settlement.institutions },
+  );
+  if (settledEconomy !== settlement.economicState) settlement.economicState = settledEconomy;
 
   // Coherence mutates canonical NPC/faction mechanics. Give it a dedicated
   // stream so variable draw counts in pressure/arrival/defense presentation
