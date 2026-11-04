@@ -29,67 +29,71 @@ import { generateSettlementPipeline } from '../../src/generators/generateSettlem
 // window with x46-1b composed, x46-3 not yet), whose generation the sibling lanes moved (x46-2's
 // renames, the dragon licence, the tailed metropolis roll). Re-read at 79c4423 by this file's own
 // loop with no budget module present; the composed tip at d ≡ 1 matches all sixty.
+// RE-KEYED again 2026-11-04 (window branch, the chair's I7 (2)): RUNG1-TRUTH's generator changes (the derived
+// hooks, the crisis tier noun, the criminal structure, the named stress factions) moved the sixty, which no longer
+// have a pre-budget tip to read on the window branch; re-captured by this file's own loop at the composed tip
+// (6ca454d2) with the factor forced to 1.0, twice and equal. The arm now guards the d = 1 path against drift.
 const BEFORE = Object.freeze([
   'e6ac9242fde826c5', // 0
-  'd57c30a0385ee1ff', // 1
-  'a7411978c4fe7e44', // 2
-  'ba2b42371aa50a62', // 3
-  'fc879223e88b0d8f', // 4
-  '241ef10b46b8d545', // 5
-  'fd2e0353f8616995', // 6
-  '27a1d22ea2af15ac', // 7
-  'a2114b170b45fa5a', // 8
-  '4f1a2ee9a805e61e', // 9
-  '8364bef6f9f0adba', // 10
-  'a58802dc2a26d4d3', // 11
-  '76ea343961c6cf73', // 12
-  '1b58933eabb3d698', // 13
-  'd4e55d3d1159ab83', // 14
-  'ada0412f8d624c60', // 15
-  '812ef446dbd88864', // 16
-  'c02f0a5e73eb3e63', // 17
-  '58f1faeeecc66eab', // 18
+  '4cc933d2394ecca7', // 1
+  'a44f27db016758c7', // 2
+  '5a8ad024e30e2c53', // 3
+  '906d7f344923302e', // 4
+  '60b4a45904c8a2bd', // 5
+  '1136b8cdccb81ff0', // 6
+  '6d736feb0d3fe768', // 7
+  '3a6f3754c0c975fa', // 8
+  'ef17d8af3b9053a4', // 9
+  '77b3e0d288a81151', // 10
+  '5d94262ff4cf8f0f', // 11
+  'ffc8548a3980a603', // 12
+  '0a971fec05bd117e', // 13
+  '578292f9048be8f5', // 14
+  'cbb20093292f4f8a', // 15
+  '7698b0cce83cb5f0', // 16
+  'ea54c033047a340d', // 17
+  'a7b71385dd8f0eab', // 18
   'bf3fca3dd85eca7e', // 19
-  '7fdd297290f11021', // 20
-  '33fc6a2099647f33', // 21
+  'faa1fa04f3c8b86f', // 20
+  '50ff6118d772e53f', // 21
   'cff811402b96b2d0', // 22
-  '667fbdee2fba123d', // 23
-  '01a09a91303fea82', // 24
-  '0a9fd5fa6ba01d3b', // 25
-  '586aaa34a586dcae', // 26
-  '39352e37eac7e550', // 27
-  '1da4fb926165b25c', // 28
-  '89e03d1a1de61c07', // 29
-  'db017088c2d114e7', // 30
+  '7266162ca8d9b3e3', // 23
+  '2717027b5f766c00', // 24
+  '83fda962420a9e5b', // 25
+  'e9fbb104f62a6f23', // 26
+  '8e193e736ca3a18a', // 27
+  '22869ae4b83c0659', // 28
+  '3e63fb405fa0443f', // 29
+  '11c3995c9afbc451', // 30
   '4d6390abb38f412d', // 31
-  '83d6fa86a665ed2a', // 32
-  'aeeb2b7a8b95302e', // 33
-  '68a285cc29628922', // 34
-  '3c559247a89eea52', // 35
-  '43cd75d9fde0aced', // 36
-  '884fc212491b7c7a', // 37
-  'bbdfac55a4ab265c', // 38
-  '572174ee260bdd21', // 39
-  '6be2d2de1315eeb0', // 40
-  '202e4d5a12c196d5', // 41
-  '1a181e51a5e6bde6', // 42
-  '958cb056f7b3bc72', // 43
-  '8d028ed452a894b1', // 44
-  '568414947c925d12', // 45
-  '2fae796b112017b3', // 46
-  '6304afeffbcf507c', // 47
-  '67f9f1481e45bd53', // 48
+  '95663c72cc86ef42', // 32
+  '54655b4e4dbed139', // 33
+  '96677a1b5af97691', // 34
+  '6bf30b109fdb2b7d', // 35
+  'cd66315865af5c77', // 36
+  'b29b49529d5f37f4', // 37
+  '989f06f13fc5f4eb', // 38
+  '66ea47b5fff75da5', // 39
+  '978515b6d1645e37', // 40
+  'e0d9531de272b546', // 41
+  'ebafb5147efb69a6', // 42
+  '81c13d55708e5489', // 43
+  '3e36e4745caf5098', // 44
+  '3dde1b6eb32ca848', // 45
+  '282057523eef7d20', // 46
+  '8c25d21e046b011d', // 47
+  '2c65f91c9c2053b7', // 48
   'f6bb99cf38e7e2ab', // 49
-  '83684aafce9b2921', // 50
-  '868527fb74f63668', // 51
-  'fd6c3ee6c24d3c8a', // 52
-  'f6338676f90a900c', // 53
-  '81817035c2c632de', // 54
-  'ce6776f5579d5223', // 55
-  '135dd9a9b4373ef2', // 56
-  'cda061cf9f1bea92', // 57
-  '34437d92b079f680', // 58
-  '3c8718026e709b5b', // 59
+  'e66d6dae5dac47c2', // 50
+  'f58cc8c699197f05', // 51
+  'ba7ece8c98554eb4', // 52
+  'e3d69adfdb03196c', // 53
+  'ae74723f029d3600', // 54
+  'b17a87a1ca19d331', // 55
+  '83a757e8240291f7', // 56
+  '9d8c2d45ee5c9e20', // 57
+  'ca58fc1fb2c3708c', // 58
+  '287863703f30da17', // 59
 ]);
 
 const hashOf = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex').slice(0, 16);
