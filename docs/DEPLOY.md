@@ -136,7 +136,9 @@ The order, every time it is turned on:
    `engine_generate` rows engine-generate writes to `analytics_events` through
    `report_engine_generations` (migration 204, which must be applied for the line to load;
    until then it says so). The function's own invocations and errors stay in the Supabase
-   dashboard (Edge Functions → engine-generate → Logs).
+   dashboard (Edge Functions → engine-generate → Logs). Rotating the service-role key
+   re-buckets every caller (`caller_hash` is an HMAC under that key), so per-caller counts
+   restart from zero on rotation: harmless by design, expect it.
 
 **What the engine service serves with the flag on:** a fresh generation, the DM
 re-derivation and the surveyor's settlement preview (`engine-generate`'s `derive` op), and

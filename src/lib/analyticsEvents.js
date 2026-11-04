@@ -67,8 +67,12 @@ export { EDIT_KINDS };
  *  undo 107's enumeration-hardening). The CONVERSION half emits nothing: the
  *  referral tables are the money-grade record and the admin read layer
  *  aggregates them (report_referral_funnel, migration 199). No analytics write
- *  ever touches the money path. */
-export const EVENTS_REV = 13;
+ *  ever touches the money path.
+ *  rev 14: ENGINE-SERVICE — engine_generate, ONE server-side event emitted by the
+ *  engine-generate edge function (op, engine_version, caller 'account'|'ip',
+ *  caller_hash = 16 hex of a keyed HMAC, staff); the client emits nothing; no IP is
+ *  ever stored (the table's contract). */
+export const EVENTS_REV = 14;
 
 export const EVENTS = Object.freeze({
   // ── Minimum 4-event funnel ─────────────────────────────────────────────
@@ -325,7 +329,7 @@ export const EVENTS = Object.freeze({
   //    account id or the IP, 16 hex — the IP itself is never stored), staff }.
   //    No actor_id (that column is the pseudonymous actor spine, not an account).
   //    The admin dashboard line reads it through report_engine_generations
-  //    (migration 204). Additive: the contract's shape is unchanged.
+  //    (migration 204). A new name, so the contract revision moved (rev 14).
   ENGINE_GENERATE:                'engine_generate',
 });
 

@@ -261,8 +261,8 @@ describe('WEB-3 — the referral loop emit wiring', () => {
     expect(emitted).toEqual([]);
   });
 
-  test('A5: the contract revision is 13, both events are essential, and the dictionary carries both rows', () => {
-    expect(EVENTS_REV).toBe(13);
+  test('A5: the contract revision is 14 (rev 13 added these two; rev 14 engine_generate), both events are essential, and the dictionary carries both rows', () => {
+    expect(EVENTS_REV).toBe(14);
     expect(EVENTS.REFERRAL_INTENT_RECORDED).toBe('referral_intent_recorded');
     expect(EVENTS.REDEEM_CODE_CHECKED).toBe('redeem_code_checked');
     expect(EVENT_CLASS.REFERRAL_INTENT_RECORDED).toBe('essential');
@@ -270,7 +270,7 @@ describe('WEB-3 — the referral loop emit wiring', () => {
     // The dictionary is GENERATED, so the pin is on the generated ROW rather than
     // on prose that would name the event either way (the doc-agreement vacuity).
     const dict = read('docs/analytics-event-dictionary.md');
-    expect(dict).toContain('- **EVENTS_REV:** 13');
+    expect(dict).toContain('- **EVENTS_REV:** 14');
     expect(dict).toContain('| `REFERRAL_INTENT_RECORDED` | `referral_intent_recorded` | essential |');
     expect(dict).toContain('| `REDEEM_CODE_CHECKED` | `redeem_code_checked` | essential |');
   });
