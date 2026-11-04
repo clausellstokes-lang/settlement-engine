@@ -179,8 +179,8 @@ function unitRowOf(unit, texts) {
 
 describe('GUARD THE GUARD — the inputs this file judges are the real ones', () => {
   it('the corpus, the census and the relation leaf are the shipped ones, not empty stubs', () => {
-    expect(corpus.length, 'the shipped state corpus').toBe(2266);
-    expect(census.rows.length, 'the committed wiring census').toBe(708);
+    expect(corpus.length, 'the shipped state corpus').toBe(2310);
+    expect(census.rows.length, 'the committed wiring census').toBe(709);
     expect(Object.keys(DOSSIER_RELATIONS).length, 'the committed relation leaf').toBe(165);
     // Every arm this module owns is exercised below; a roster that quietly shrank would make
     // a whole describe disappear with nothing red.

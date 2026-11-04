@@ -160,7 +160,7 @@ describe('the warFaith corpus join is populated, or every claim below is free', 
     ]);
     const pools = ids.flatMap((id) => Object.values(BLOCK(id).pools));
     expect(pools).toHaveLength(138);
-    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(418);
+    expect(pools.reduce((n, pool) => n + pool.length, 0)).toBe(430);
   });
 
   test('the producer-minted fixtures really carry the producer shapes', () => {

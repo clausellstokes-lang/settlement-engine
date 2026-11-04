@@ -3,7 +3,7 @@
 // wiring census's RATE corpus and FROZEN at the pool's birth car (P-F4).
 // A BIT AND NOT A RATE, deliberately: a rate re-measured by an unrelated car would re-order
 // installed worlds without anyone intending it. The measured rate stays a REPORT in the census.
-// MEASURED: 271 of 708 pools fired on the RATE corpus (768 towns,
+// MEASURED: 271 of 709 pools fired on the RATE corpus (768 towns,
 // 192 cells, 4 seeds); 72 of them read 1 at the departure line of
 // 1000 basis points.
 // A POOL WITH NO ROW IS ABSENT, NOT ZERO, and the composer reads an absent row as "not a

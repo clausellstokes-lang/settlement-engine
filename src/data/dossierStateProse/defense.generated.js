@@ -4393,7 +4393,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "readsCount": 2,
+        "readsCount": 1,
         "attach": []
       },
       "magicDependency false, availability absent": {
@@ -4409,6 +4409,7 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
+        "readsCount": 1,
         "attach": []
       }
     }

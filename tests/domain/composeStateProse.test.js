@@ -149,8 +149,8 @@ describe('the composer — the corpus loads, and the merge is legal', () => {
   it('every block lives in exactly one leaf, and the sweep found the whole corpus', () => {
     expect(BLOCK_COLLISIONS, 'a block id emitted by two leaves').toEqual([]);
     expect(Object.keys(CORPUS).length, 'blocks').toBe(68);
-    expect(SHIPPED_POOLS.length, 'pools').toBe(708);
-    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2266);
+    expect(SHIPPED_POOLS.length, 'pools').toBe(709);
+    expect(SHIPPED_POOLS.reduce((n, row) => n + row.pool.length, 0), 'variants').toBe(2310);
   });
 });
 
@@ -196,7 +196,7 @@ describe('⭐ THE SEAM COMPOSES TO THE KERNEL — an empty candidate list moves 
     expect(drift.slice(0, 10), 'a pool where the composer and the kernel disagree').toEqual([]);
     expect(drift.length).toBe(0);
     // ANTI-VACUITY: an equality over an empty sweep is free.
-    expect(checks).toBe(708 * 2 * SWEEP_SEEDS.length);
+    expect(checks).toBe(709 * 2 * SWEEP_SEEDS.length);
     expect(composed, 'and most of the sweep really did compose a unit').toBeGreaterThan(6000);
   });
 
@@ -339,7 +339,7 @@ describe('⭐ THE BASE-SIDE SYNTHESIS — every recorded cell, against the compo
       }
     }
     expect(drift.slice(0, 5), 'a pool where an unseeded read is not the canonical one').toEqual([]);
-    expect(pools).toBe(708);
+    expect(pools).toBe(709);
   });
 });
 
