@@ -19,10 +19,15 @@
  *   grade-vs-food            gradeVsFoodFindings          once, surface 'defense' (Overview × Defense)
  *   magic-absent-prose       magicAbsentProseFindings     once, surface 'magic'
  *   crime-denied-and-listed  crimeDeniedAndListedFindings once, surface 'defense' (Defense × Economics)
+ *   crisis-blind-prose       crisisBlindFindings          per surface, read once over every surface
  *
  * The last three (lane RUNG1B-F9, readerContradictionFindings.js) read two rendered tabs side by
  * side, so like `hook-truth-page` they are the page battery's alone: the record battery the
  * generation receipt runs never sees them, and no receipt moves.
+ *
+ * `crisis-blind-prose` (lane F12, rung 2, crisisBlindFindings.js) is a page check too: a calm
+ * sentence printed under an active crisis it denies. It reads every surface at once and
+ * reports each finding on its own surface.
  *
  * UNSTORED: nothing is written into the record and nothing is read from a clock or a seed,
  * so no golden moves and the same inputs give the same findings. An instrument that throws
@@ -36,6 +41,7 @@ import { collect, recordBattery, str } from './recordBattery.js';
 import {
   crimeDeniedAndListedFindings, gradeVsFoodFindings, magicAbsentProseFindings,
 } from './readerContradictionFindings.js';
+import { crisisBlindFindings } from './crisisBlindFindings.js';
 
 /**
  * @typedef {object} BatteryFinding
@@ -49,7 +55,7 @@ import {
 export const BATTERY_CHECKS = Object.freeze([
   'defense-words', 'faith-denial', 'food-words', 'hook-truth-record', 'hook-truth-page',
   'magic-words', 'seat-holder', 'tier-noun',
-  'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed',
+  'grade-vs-food', 'magic-absent-prose', 'crime-denied-and-listed', 'crisis-blind-prose',
 ]);
 
 /** The page checks that read two rendered tabs together: check → [surface, instrument]. */
@@ -58,7 +64,7 @@ const READER_CHECKS = Object.freeze(/** @type {const} */ ([
   ['magic-absent-prose', 'magic', magicAbsentProseFindings],
   ['crime-denied-and-listed', 'defense', crimeDeniedAndListedFindings],
 ]));
-const PAGE_ONLY = new Set(['hook-truth-page', ...READER_CHECKS.map(([check]) => check)]);
+const PAGE_ONLY = new Set(['hook-truth-page', 'crisis-blind-prose', ...READER_CHECKS.map(([check]) => check)]);
 
 /**
  * Every coherence finding for one settlement and its rendered surfaces: recordBattery.js's
@@ -87,6 +93,17 @@ export function coherenceBattery(settlement, surfaces, options = {}) {
   const reader = [];
   for (const [check, surface, instrument] of READER_CHECKS) {
     if (runs(check)) collect(check, surface, () => instrument(surfaces ?? {}), (f) => ({ quote: str(f.quote), detail: str(f.detail) }), reader);
+  }
+  if (runs('crisis-blind-prose')) {
+    // Each finding is reported on the surface its sentence is on; a throw is a finding of its
+    // own, on 'page', as `collect` reports one.
+    try {
+      for (const f of crisisBlindFindings(/** @type {object} */ (settlement), surfaces ?? {})) {
+        reader.push({ check: 'crisis-blind-prose', surface: f.surface, quote: f.sentence.trim(), detail: `${f.claim} under ${f.crises.join(', ')}` });
+      }
+    } catch (error) {
+      reader.push({ check: 'crisis-blind-prose', surface: 'page', quote: '', detail: `instrument threw: ${str(error instanceof Error ? error.message : error)}` });
+    }
   }
   const at = out.filter((f) => f.check === 'hook-truth-record').length;
   return [...out.slice(0, at), ...page, ...out.slice(at), ...reader];

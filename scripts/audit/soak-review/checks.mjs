@@ -23,6 +23,8 @@
  * (docs/GENERATION_ROOT_CAUSES_2026-11-02.md, appendix: 1 food, 2 faith, 3 magic, 4 defence,
  * 5 rulers, 6 repetition, 7 unnamed, 8 small places as towns) or to none (`KIND_OF`), which the
  * stop rule reads. Kind 9 (reader) is the READER battery's, which the stop rule does not read.
+ * Kind 10 (crisis; lane F12, rung 2, 2026-11-04) is a contradiction the stop rule reads: a calm
+ * sentence printed under an active crisis it denies (`coh:crisis-blind-prose`).
  */
 import { inspectSettlement } from '../generation-certification-soak.mjs';
 import { normalizeRenderedSentence } from '../phrase-repetition.mjs';
@@ -56,6 +58,8 @@ export const KIND_OF = Object.freeze({
   'coh:tier-noun': 8, 'A-14:guild-power-small': 8, 'A-14:lord-mayor-small': 8,
   // Kind 9, reader (lane READER-INSTRUMENTS, 2026-11-04): outside the stop rule until the READER WINDOW lands.
   ...Object.fromEntries(READER_BATTERY_CHECKS.map((c) => [`reader:${c}`, 9])),
+  // Kind 10, crisis (lane F12, rung 2, 2026-11-04): a calm line under the crisis it denies; a contradiction, read by the stop rule.
+  'coh:crisis-blind-prose': 10,
 });
 
 /** Kind 9: the READER battery's plausibility observations (aggregate.mjs counts them apart). */
