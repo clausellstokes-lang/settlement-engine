@@ -9,8 +9,9 @@
  * the role's category, with no draw, and keeps the category its placeholder inferred (claimants
  * noble, the rival other) so the power-economy correlation reads it as before.
  *
- * The infiltration's "Unknown Faction (hidden)" is NOT renamed here: its hiddenness has no field
- * and no player-view redaction exists, so a real name would print to players (lane STOP).
+ * The infiltration's "Unknown Faction (hidden)" takes the `other` pool's first unused name too
+ * (unit E1, the chair's ruling 1): hidden in the fiction, carried as `hidden: true`, never from
+ * the DM.
  */
 import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
@@ -18,7 +19,7 @@ import { FACTION_DESCRIPTORS } from '../../src/data/powerData.js';
 import { applyStressEventFactions } from '../../src/generators/power/stressFactions.js';
 import { applyFactionRenameToSettlement } from '../../src/domain/factionRename.js';
 
-const PLACEHOLDER = /\b(?:Bloc|Faction) [A-Z]\b/;
+const PLACEHOLDER = /\b(?:Bloc|Faction) [A-Z]\b|Unknown Faction/;
 const names = (s) => (s.powerStructure?.factions || []).map((f) => f.faction);
 
 function inject(stress, roster, governing = 'Council of Elders') {
@@ -49,11 +50,30 @@ describe('stress factions take the role pool\'s first unused name', () => {
     expect(added).toEqual(['Noble Claimant (Senior Line)', 'Noble Claimant (Reform Faction)']);
   });
 
+  it('the infiltrator takes the other pool\'s first unused name and keeps hidden: true', () => {
+    const added = inject('infiltrated', ['Craft Guilds']).slice(1);
+    expect(added).toEqual([expect.objectContaining({
+      faction: FACTION_DESCRIPTORS.other[0], category: 'other', power: 15, hidden: true,
+      desc: 'An external interest with embedded assets in at least two factions. Its presence is not known to the settlement.',
+    })]);
+  });
+
   describe('on the corpus', () => {
     beforeAll(async () => { await ensureLaws(); });
 
-    it('soak1k-8 (Claimant Bloc A) and soak1k-304 (Rival Faction B) print no placeholder', () => {
-      for (const i of [8, 304]) {
+    it('soak1k-508: the infiltrator reaches the record named, with hidden: true', () => {
+      const { settlement } = birth(508);
+      const hidden = (settlement.powerStructure?.factions || []).filter((f) => f.hidden === true);
+      // The density law's seat split (applyDensityLaw.js) already cloned the infiltrator at this
+      // base ("The Common Interest", with the same description); the clone carries its parent's
+      // `hidden` too, so every hidden faction here is named and the first is the pool's.
+      expect(hidden.length).toBeGreaterThanOrEqual(1);
+      expect(hidden[0].faction).toBe(FACTION_DESCRIPTORS.other[0]);
+      expect(hidden.filter((f) => PLACEHOLDER.test(f.faction))).toEqual([]);
+    });
+
+    it('soak1k-8 (Claimant Bloc A), soak1k-304 (Rival Faction B) and soak1k-508 (the infiltrator) print no placeholder', () => {
+      for (const i of [8, 304, 508]) {
         const { settlement } = birth(i);
         expect(names(settlement).filter((n) => PLACEHOLDER.test(n))).toEqual([]);
         expect((settlement.factions || []).map((f) => f.name).filter((n) => PLACEHOLDER.test(String(n)))).toEqual([]);
