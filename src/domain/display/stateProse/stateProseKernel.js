@@ -65,6 +65,7 @@
  *
  * @enforced-by tests/domain/stateProseKernel.test.js
  */
+import { STATE_MARK_DIMENSIONS } from '../../facts/factVocabulary.js';
 
 /**
  * One authored sentence, as the corpus projection emits it.
@@ -220,17 +221,10 @@ export function variantIsAudible(variant, audience) {
  * @enforced-by tests/domain/crisisBlindDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-export const STATE_MARK_DIMENSIONS = Object.freeze({
-  severity: Object.freeze(['minor', 'major', 'catastrophic']),
-  deficit: Object.freeze(['deficit', 'no deficit']),
-  anchor: Object.freeze(['anchored', 'not anchored']),
-  walls: Object.freeze(['walls', 'no walls']),
-  threat: Object.freeze(['threat', 'no threat']),
-  hunger: Object.freeze(['hunger', 'no hunger']),
-  succession: Object.freeze(['succession open', 'succession settled']),
-  unrest: Object.freeze(['unrest', 'no unrest']),
-  crisis: Object.freeze(['crisis', 'no crisis']),
-});
+// ⭐ CENSUS-1b WAVE 1: THE WORDS MOVED TO THE ONE VOCABULARY (`domain/facts/factVocabulary.js`),
+// which is import-free like this file; this constant is a re-export of its MARK HALF, so the
+// contract test that refuses an unknown mark word refuses an unknown atom.
+export { STATE_MARK_DIMENSIONS };
 
 /**
  * mark word → the one dimension it belongs to. Derived, so the vocabulary is written

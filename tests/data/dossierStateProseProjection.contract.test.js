@@ -59,6 +59,7 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -783,7 +784,12 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       .flatMap((variant) => variant.marks || []));
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
 
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    // CENSUS-1b wave 1: the mark vocabulary is the fact vocabulary's mark half, and a fact ATOM
+    // the projector routes into `marks` (`X` / `no X`, `crisis: …`) is classified too — but only
+    // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
+    // unclassified exactly as an unknown mark word is.
+    const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must

@@ -25,7 +25,7 @@ import { migrationOf } from './migration.js';
 import { warStateOf } from './warState.js';
 import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
-import { terrainClassOf } from './terrain.js';
+import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 
 /**
@@ -62,6 +62,10 @@ export function factsOf(record, options = {}) {
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */
     get terrain() { return terrainClassOf(record); },
+    /** fact 13: the trade-route kind (the terrain home's second reader) */
+    get route() { return tradeRouteOf(record); },
+    /** the tier (a field; the vocabulary's `tier` band) */
+    get tier() { return typeof record?.tier === 'string' ? record.tier : undefined; },
     /** fact 14: a second, named NPC beside this one */
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
   });
