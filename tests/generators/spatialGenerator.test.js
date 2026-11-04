@@ -106,23 +106,30 @@ describe('layout templates never print an authoring alternation (ODQ §767.3(e))
   // can never promise a building the dossier lacks — and never hedges.
 
   it('a desert village with a church-family institution says "its church"', () => {
-    const layout = generateSpatialLayout('village', inst('Parish church', 'Market square'), 'road', 'desert');
+    const layout = generateSpatialLayout('village', inst('Parish church', 'Market square', 'Palisade or earthworks'), 'road', 'desert');
     expect(layout.layout).toBe('Compact walled settlement around a central well and its church');
   });
 
   it('a desert village with only a shrine says "a wayside shrine"', () => {
-    const layout = generateSpatialLayout('village', inst('Wayside shrine', 'Market square'), 'road', 'desert');
+    const layout = generateSpatialLayout('village', inst('Wayside shrine', 'Market square', 'Palisade or earthworks'), 'road', 'desert');
     expect(layout.layout).toBe('Compact walled settlement around a central well and a wayside shrine');
   });
 
   it('a desert village with no sacred roster drops the clause instead of inventing one', () => {
-    const layout = generateSpatialLayout('village', inst('Market square'), 'road', 'desert');
+    const layout = generateSpatialLayout('village', inst('Market square', 'Palisade or earthworks'), 'road', 'desert');
     expect(layout.layout).toBe('Compact walled settlement around a central well');
   });
 
   it('the hills town commits to the keep — the castle-or-keep hedge is gone', () => {
-    const layout = generateSpatialLayout('town', inst('Market square'), 'road', 'hills');
+    const layout = generateSpatialLayout('town', inst('Market square', 'Town walls'), 'road', 'hills');
     expect(layout.layout).toBe('Stone-walled hill town, the keep visible above the market quarter');
+  });
+
+  // F1 (rung 1B): the walled lines stand only where walls do (`defenseFactsOf`); a roster with no
+  // enclosure keeps the same sacred clause on the open line.
+  it('a desert village with no walls keeps its church on the open line', () => {
+    const layout = generateSpatialLayout('village', inst('Parish church', 'Market square'), 'road', 'desert');
+    expect(layout.layout).toBe('Compact settlement around a central well and its church');
   });
 
   it('no tier×terrain layout row carries an either/or building hedge', () => {
