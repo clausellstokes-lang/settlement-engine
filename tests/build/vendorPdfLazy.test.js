@@ -592,8 +592,8 @@ const CLOSURE_BUDGET_BYTES = 1_037_485; // 2026-11-04: banked DOWN to the measur
 //     it spends ~11.3 kB / ~9.5 kB of headroom no measurement asks for.
 // Leaving both untouched is the only one of the three that neither spends owner headroom
 // nor weakens the instrument. Monotone-down unchanged; raises stay owner-signed.
-const CLOSURE_GZIP_BUDGET_BYTES = 331_316; // 2026-11-04: banked DOWN to measured, REGISTERS door 13 (note at file end)
-const CLOSURE_BROTLI_BUDGET_BYTES = 278_173; // 2026-11-04: banked DOWN to measured, REGISTERS door 13 (note at file end)
+const CLOSURE_GZIP_BUDGET_BYTES = 336_286; // 2026-11-04: measured 331,316 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
+const CLOSURE_BROTLI_BUDGET_BYTES = 282_346; // 2026-11-04: measured 278,173 x 1.015, the ~1.5 % zlib margin restored, REGISTERS-6 ruling E2 (note at file end)
 
 // Parse the top-level *static* module edges out of a built chunk. Static
 // edges use the `from` keyword — `import{..}from"./x.js"` and re-exports
@@ -1767,8 +1767,8 @@ describe.runIf(distExists)('ARCH car 2 — the corpus rides data-lazy, and that 
 describe('ARCH car 2 — the three first-paint budgets stay where the owner signed them', () => {
   it('the raw, gzip and Brotli closure budgets are unmoved', () => {
     expect(CLOSURE_BUDGET_BYTES, 'the raw first-paint budget moved').toBe(1_037_485);
-    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(331_316);
-    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(278_173);
+    expect(CLOSURE_GZIP_BUDGET_BYTES, 'the gzip transfer budget moved').toBe(336_286);
+    expect(CLOSURE_BROTLI_BUDGET_BYTES, 'the Brotli transfer budget moved').toBe(282_346);
 
     // ⭐ THE SETTLEMENT-EDITOR TRAIN'S SUMMED FIRST-PAINT PRICE, recorded by the member that
     // holds this file's row. The three budgets above are unmoved because the train's MEMBERSHIP
@@ -1875,3 +1875,9 @@ describe('ARCH car 2 — the three first-paint budgets stay where the owner sign
 // ⚠ The 2026-09-01 note above REFUSED this same lowering for gzip and Brotli, because their ~1.5 % margin absorbs a zlib-version
 // bump. At zero margin a toolchain upgrade that shifts the compressed bytes reds this pair with no payload change. That cost
 // is named here for the chair, who ruled the lowering and holds its veto. Monotone-down from here; raises stay owner-signed.
+// ── (2026-11-04, REGISTERS-6 ruling E2) THE gzip AND Brotli MARGIN RESTORED, BY THE 2026-09-01 NOTE'S OWN RULE ──
+// The chair ruled on the ⚠ above: the register's own rule governs, as with prose-numerics. The 2026-09-01 note refuses a
+// zero margin on the compressed pair because ~1.5 % absorbs a zlib-version bump; it objects to nothing on the raw arm. So the
+// two compressed budgets are the measured closure x 1.015, rounded up to the byte: gzip 331,316 -> 336,286, Brotli
+// 278,173 -> 282,346. Both stay BELOW the 2026-09-01 figures (337,000 / 283,000), so nothing is raised against an
+// owner-signed ceiling. The raw budget stays at the measured 1,037,485. The ARCH car 2 pin moves with them.
