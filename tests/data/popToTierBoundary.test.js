@@ -18,7 +18,7 @@ const OWNER_TABLE = {
   village:    { min: 75,    max: 400 },
   town:       { min: 300,   max: 2500 },
   city:       { min: 2000,  max: 15000 },
-  metropolis: { min: 15000, max: 60000 },
+  metropolis: { min: 15000, max: 50000 }, // the roll's body; it thins past it to 1,000,000 (car 1b, 2026-11-04)
 };
 
 describe('the roll bands are the owner\'s table; the stamp cuts each overlap once', () => {

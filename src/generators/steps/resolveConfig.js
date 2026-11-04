@@ -95,7 +95,7 @@ registerStep('resolveConfig', {
 
   // Population
   const popRange = POPULATION_RANGES[tier];
-  // The metropolis roll has no ceiling (X-46 car 1b): one draw, tailed past the band's body.
+  // The metropolis roll thins past its body to 1,000,000 (X-46 car 1b): one draw, as before.
   const population = config.settType === 'custom'
     ? config.population
     : tier === 'metropolis'

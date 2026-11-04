@@ -2428,13 +2428,13 @@
       "status": "draft",
       "signedAt": null,
       "unit": {
-        "tailShare": "probability",
         "bodyMin": "people",
         "bodyMax": "people",
-        "tailMax": "people"
+        "tailMax": "people",
+        "thinning": "multiplier"
       },
       "band": null,
-      "note": "X-46 car 1b (the owner, 2026-11-04: 'it should not have a cap'): the metropolis roll, two-piece log-uniform, tail past the body at tailShare. The chair's values, for the owner's veto."
+      "note": "X-46 car 1b (the owner, 2026-11-04: thinning from 50,000, harder at 100,000+ and 200,000+, 'just make it exponential in a way hitting those three benchmarks'; the owner chose this curve): uniform body 15,000-50,000, then density exp(-thinning * D^2), D = doublings past 50,000, to 1,000,000. Continuous at 50,000; the tail share is derived. For the owner's veto."
     }
   },
   "roles": {

@@ -61,7 +61,7 @@ export const COMPENDIUM_DATA = Object.freeze({
     {"id":"village","label":"Village","min":75,"max":400},
     {"id":"town","label":"Town","min":300,"max":2500},
     {"id":"city","label":"City","min":2000,"max":15000},
-    {"id":"metropolis","label":"Metropolis","min":15000,"max":60000}
+    {"id":"metropolis","label":"Metropolis","min":15000,"max":50000}
   ],
   "prosperity": {
     "tiers": ["Subsistence","Struggling","Poor","Moderate","Comfortable","Prosperous","Wealthy"],

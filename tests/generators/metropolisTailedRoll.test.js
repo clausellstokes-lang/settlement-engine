@@ -1,56 +1,77 @@
 /**
- * tests/generators/metropolisTailedRoll.test.js — X-46 car 1b, THE TAILED ROLL (the owner,
- * 2026-11-04: "wait, we have a cap on metropolis? it should not have a cap.").
+ * tests/generators/metropolisTailedRoll.test.js — X-46 car 1b, THE THINNING TAIL (the owner,
+ * 2026-11-04: "it should not have a cap"; "bring it back to 1 million, but make it so that
+ * anything above ... gets increasingly rarer"; "start that thinning out at 50,000"; "it thins out
+ * even harder starting at 100,000+ then again at 200,000+"; "just make it exponential in a way
+ * hitting those three benchmarks"; the owner chose the smooth curve, thinning 0.5).
  *
- * The metropolis random population has no ceiling. It is a two-piece log-uniform draw from ONE
- * registered table (src/data/constants.js :: METROPOLIS_ROLL_TUNING): with probability tailShare
- * the tail [60,000, 1,000,000], otherwise the body [15,000, 60,000]. The draw is ONE kernel draw,
- * exactly as the uniform roll was, so no later step of any seed sees a different draw count; and
- * no other tier's roll moves (the sixty non-metropolis seeds below are pinned byte-identical to
- * the uniform roll they had before this car, which this file recomputes from the same kernel).
+ * Uniform over the body [15,000, 50,000]; past it the density per person is exp(-0.5 * D²),
+ * D = doublings past 50,000, to 1,000,000. ONE kernel draw, as the uniform roll was, so no later
+ * step of any seed sees a different draw count; no other tier's roll moves (sixty
+ * non-metropolis seeds; the full-record hashes were compared base vs tip in the seat's probe).
  */
 import { describe, expect, test } from 'vitest';
 
-import { POPULATION_RANGES, METROPOLIS_ROLL_TUNING, rollMetropolisPopulation } from '../../src/data/constants.js';
+import { POPULATION_RANGES, METROPOLIS_ROLL_TUNING, METROPOLIS_ROLL_SHAPE, rollMetropolisPopulation } from '../../src/data/constants.js';
 import { generateSettlementPipeline } from '../../src/generators/generateSettlementPipeline.js';
 
 const generate = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
 const quantile = (sorted, q) => sorted[Math.min(sorted.length - 1, Math.floor(q * sorted.length))];
+const at = (u) => rollMetropolisPopulation({ random: () => u });
+/** The exact share above x, over a fine uniform sweep of the one draw. */
+const shareAbove = (() => {
+  const N = 400000;
+  const pops = [];
+  for (let i = 0; i < N; i++) pops.push(at((i + 0.5) / N));
+  return (x) => pops.filter(p => p > x).length / N;
+})();
 
-describe('the metropolis roll has no ceiling', () => {
-  test('400 metropolis seeds: p90 above 60,000, max above 150,000, median inside the body, nothing below 15,000', () => {
+describe('the metropolis roll thins past 50,000 to 1,000,000, harder at every doubling', () => {
+  test('400 metropolis seeds: p90 above 60,000, max above 150,000 and never past 1,000,000, nothing below 15,000', () => {
     const pops = [];
     for (let i = 0; i < 400; i++) pops.push(generate({ settType: 'metropolis' }, `x46-1b-metro-${i}`).population);
     pops.sort((a, b) => a - b);
-    const median = quantile(pops, 0.5);
     expect(quantile(pops, 0.9)).toBeGreaterThan(60000);
     expect(pops[pops.length - 1]).toBeGreaterThan(150000);
-    expect(median).toBeGreaterThanOrEqual(15000);
-    expect(median).toBeLessThanOrEqual(60000);
+    expect(pops[pops.length - 1]).toBeLessThanOrEqual(1000000);
     expect(pops[0]).toBeGreaterThanOrEqual(15000);
     expect(pops.every(Number.isInteger)).toBe(true);
   }, 180000);
 
-  test('the table is the one home: body 15,000-60,000, tail to 1,000,000 at a share of 0.2; the band reads the body', () => {
-    expect(METROPOLIS_ROLL_TUNING).toEqual({ tailShare: 0.2, bodyMin: 15000, bodyMax: 60000, tailMax: 1000000 });
-    expect(POPULATION_RANGES.metropolis).toEqual({ min: METROPOLIS_ROLL_TUNING.bodyMin, max: METROPOLIS_ROLL_TUNING.bodyMax });
+  test('the table is the one home, and the band reads its body', () => {
+    expect(METROPOLIS_ROLL_TUNING).toEqual({ bodyMin: 15000, bodyMax: 50000, tailMax: 1000000, thinning: 0.5 });
+    expect(POPULATION_RANGES.metropolis).toEqual({ min: 15000, max: 50000 });
   });
 
-  test('the roll is one draw and lands at the edges it promises', () => {
+  test('the measured shares the owner chose: >50k 70%, >100k 35%, >200k 8.9%, >500k 0.39%, >900k about 1 in 10,000', () => {
+    expect(METROPOLIS_ROLL_SHAPE.tailShare).toBeCloseTo(0.705, 3);
+    expect(shareAbove(50000)).toBeCloseTo(0.705, 2);
+    expect(shareAbove(100000)).toBeCloseTo(0.354, 2);
+    expect(shareAbove(200000)).toBeCloseTo(0.089, 2);
+    expect(shareAbove(500000)).toBeCloseTo(0.0039, 3);
+    expect(shareAbove(900000)).toBeGreaterThan(0);
+    expect(shareAbove(900000)).toBeLessThan(0.0005);
+  });
+
+  test('one draw; the edges; each doubling past 50,000 thins harder than the last', () => {
     let draws = 0;
-    const counted = { random: () => { draws += 1; return 0.5; } };
-    rollMetropolisPopulation(counted);
+    rollMetropolisPopulation({ random: () => { draws += 1; return 0.5; } });
     expect(draws).toBe(1);
-    expect(rollMetropolisPopulation({ random: () => 0 })).toBe(60000); // u = 0 opens the tail at its floor
-    expect(rollMetropolisPopulation({ random: () => 0.2 })).toBe(15000); // the body's floor
-    expect(rollMetropolisPopulation({ random: () => 0.999999999 })).toBeLessThanOrEqual(60000);
-    expect(rollMetropolisPopulation({ random: () => 0.199999999 })).toBeLessThanOrEqual(1000000);
-    expect(rollMetropolisPopulation({ random: () => 0.199999999 })).toBeGreaterThan(900000);
+    expect(at(0)).toBe(50000);
+    expect(at(METROPOLIS_ROLL_SHAPE.tailShare - 1e-12)).toBe(1000000);
+    expect(at(METROPOLIS_ROLL_SHAPE.tailShare)).toBe(15000);
+    expect(at(0.999999999)).toBe(50000);
+    // mass per doubling band: 50-100k, 100-200k, 200-400k, 400-800k; each ratio smaller than the last
+    const band = (lo, hi) => shareAbove(lo) - shareAbove(hi);
+    const m = [band(50000, 100000), band(100000, 200000), band(200000, 400000), band(400000, 800000)];
+    const ratios = [m[1] / m[0], m[2] / m[1], m[3] / m[2]];
+    expect(ratios[1]).toBeLessThan(ratios[0]);
+    expect(ratios[2]).toBeLessThan(ratios[1]);
   });
 });
 
 describe('no other tier moves', () => {
-  test('60 non-metropolis seeds: the population is the uniform roll of the same kernel draw, unchanged', () => {
+  test('60 non-metropolis seeds: tier as chosen, population inside the band', () => {
     const tiers = ['thorp', 'hamlet', 'village', 'town', 'city'];
     const moved = [];
     for (let i = 0; i < 60; i++) {

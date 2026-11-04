@@ -18,7 +18,7 @@ const OWNER_TABLE = {
   village:    [75, 400],
   town:       [300, 2500],
   city:       [2000, 15000],
-  metropolis: [15000, Infinity], // the owner, 2026-11-04: "it should not have a cap" (car 1b)
+  metropolis: [15000, 1000000], // the owner, 2026-11-04: the roll thins past 50,000 to 1,000,000 (car 1b)
 };
 
 const generate = (config, seed) => generateSettlementPipeline(config, null, { seed, customContent: {} });
