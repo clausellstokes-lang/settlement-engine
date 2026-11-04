@@ -219,3 +219,39 @@ Attribution is by test title, against the same 55 governing files on a pristine 
 ## 7. CONFIRMED vs PLAUSIBLE
 
 **CONFIRMED:** the base and tip counts (60 and 1,000, read from `artifacts/f10-base*` and `artifacts/f10-tip*`); the red-first, red before and green after by its titles; the walled control byte-identical; the three row hashes; the base-attributed reds; the type and lint readings; the A-12 cause. **PLAUSIBLE:** pool-level reachability inside mounted blocks; the residue's writer names (sorted by quote); the drift manifest's additive move.
+
+## 8. Unit 4: the 34 generation-time writers (the chair's ruling 5, 2026-11-04)
+
+The chair lifted "goldens moving" for this unit under the house rule: the lane may change generation output, lists every golden row it moves, and re-records nothing.
+
+**Two mechanisms, both reading `defenseFactsOf`.**
+- **The hook-truth gate** (`coherence/hookTruth.js`, `hookTruthRecord.js :: storeTrueHooksOnly`). The gate now licenses "soldiers" by a garrison or hired company and "garrison" by a garrison alone, the defence-words check's own `TERMS`. Before, a militia counted for both. The gate also walks the copy of each NPC that a faction roster keeps (`factions[].members[].plotHooks`). `soak1k-452` had kept the dropped hook there after the NPC itself lost it.
+- **One draw-free twin table** (`src/data/defenceTwinLines.js :: defenceTwinLine`), F5's inland-twin rule aimed at defence. It is keyed by the line's own text and taken after the draw. Each entry needs `walls`, `garrison` or `soldiers`, read the way the check reads them. The writers are edited in place on existing lines, so no line-keyed citation moves.
+
+| cause | commit | writer → twin | soak seeds | golden rows moved (of 525) |
+|---|---|---|---|---|
+| A | `1652d3cb` | the "paying their soldiers" hook dropped by the gate | 11 | 0 |
+| B | `1f1edc38` | public works "Walls, wells, roads, and the watch" → "Wells, roads and the common ground"; "Move people beneath the walls unseen." → "Move people in and out unseen." | 6 + 3 | **34** (all town rows: a town council's public works with no enclosure; the desc string only) |
+| C | `51cf0b05` | siege goal "inside the walls" → "inside the settlement"; wartime "conscription pulls away experienced soldiers" (and its note) → "the call-up pulls away experienced hands" | 3 + 5 | 0 |
+| D | `bdd576ef` | cast reasons "its people stand on the walls" → "its people stand guard"; "holds the garrison's office" → "holds the office of the guard" | 3 + 3 | 0 |
+| E | `c8bc1063` | waystation "An overnight stop behind walls" → "inside a fenced yard" | 1 | 0 |
+| F | `03264055` | "garrison-backed" → "arms-backed"; "A guild's private soldiers" → "A guild's hired guards" | 1 + 1 | 0 |
+
+Golden rows were measured as the suite hashes them (whole-record sha256 over `goldenMasterCorpus.js :: goldenCorpus`) after each commit. Units 1 to 3 moved 0 rows (the base copy against `5877a2d3`).
+
+**Red first** (`tests/generators/defenceTwinLines.test.js`, at `5877a2d3`). All three seed titles were red: `soak1k-452` (the hook), `soak1k-15` (public works) and `soak1k-213` (conscription). After the unit, 5 of 5 tests pass, including the table's laws: every keyed line is a defence-words finding on a bare place and its twin is not; a place that holds the thing keeps the line to the byte.
+
+**The count.**
+
+| | before unit 4 (`5877a2d3`) | after (`03264055`) |
+|---|---|---|
+| `coh:defense-words`, 60 | 2 | **0** |
+| `coh:defense-words`, 1,000 | 35 | **0** |
+| `info:battery-would-not-vouch` (informational), 1,000 | 713 | 691 |
+| every other class, 1,000 | | unchanged; the line reads CLIMB |
+
+The 1,000 run was `artifacts/f10-u4-1k`: 185 s, 0 errors, 1,000 of 1,000 rendered.
+
+**Reds.** 152 governing files (every test naming a changed module) were run at the tip and on the pristine base copy. The tip carries 7 red titles the base does not. All 7 are unit 2's declared prose registers (`proseComposed` ×3, `proseEntryContradiction` ×3, `proseWiringCensus` ×1). **Unit 4 adds none.** PLAUSIBLE: a unit-4 movement may sit under a title already red at the base. The candidates are the generation-fork census control hash, the DM-layer golden isolation (525), the espionage driven corpus and `pipelinePinnedMode`; each was red at the base, and the landing seat reads them per cause.
+
+**VETOABLE:** the ten twins in `defenceTwinLines.js`; "arms-backed" and "holds the office of the guard" are the least natural of them.
