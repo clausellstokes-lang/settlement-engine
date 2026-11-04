@@ -442,6 +442,21 @@ describe('bounded final economy -> power reconciliation', () => {
   });
 });
 
+/**
+ * THE COINCIDENCE PROOF for A1's control (the chair's ruling C1, REGISTERS-4, 2026-11-04): a row whose control
+ * lands on the held share is run ONCE MORE with a second held share (`want + 1`, or `want - 1` when `want + 1` is
+ * the faction's original share). A counterforce that truly preserves the share follows it to the second figure; a
+ * re-rolled roster that hit the first figure by chance does not. The census corpus is unchanged.
+ */
+function controlFollows(changed, held, name, want, record) {
+  const original = factionNamed(record.powerStructure, name)?.power;
+  const want2 = want + 1 === original ? want - 1 : want + 1;
+  const held2 = structuredClone(held);
+  factionNamed(held2, name).power = want2;
+  const control2 = withoutThePinChannel(changed, held2);
+  return factionNamed(control2.powerStructure, name)?.power === want2;
+}
+
 describe('EM-R3 — the power structure is final under a held pin', () => {
   test('A1 — the replay does not run under a held structure: the DM roster survives a changed world', () => {
     const rows = nonDesertCorpus();
@@ -474,7 +489,9 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
         const control = withoutThePinChannel(changed, held);
         if (text(control.powerStructure) !== before) controlOverwritten.push(row._seed);
         const got = factionNamed(control.powerStructure, name);
-        if (got && got.power === want) controlKept.push(row._seed);
+        if (got && got.power === want && controlFollows(changed, held, name, want, baselineFor(row))) {
+          controlKept.push(row._seed);
+        }
       } catch (error) {
         controlThrew.push(`${row._seed}: ${error.message}`);
       }
@@ -495,6 +512,10 @@ describe('EM-R3 — the power structure is final under a held pin', () => {
     // 2026-11-04, the window-end pin re-key (REGISTERS seat): 47 -> 46 overwritten and 10 -> 11 refused, SIZE-3 (the
     // guild market), traced by stage in DOORS-4 and re-measured: village|forest|golden-master-v3 moved from the first
     // column to the second; the 57 rows still all land in one of the two.
+    // 2026-11-04, the chair's ruling C1 (REGISTERS-4): from FOOD-2 the control landed on the held share in ONE row,
+    // town|germanic|mountain|random_trade|civilized|gm-seed-c — Landed Gentry 22 halved to 11, and the desert replay
+    // re-rolls the roster and lands that faction on its own 11. A COINCIDENCE, proved by `controlFollows`: held at 12
+    // instead, the control still lands on 11, so the row leaves `controlKept`. The census corpus is unchanged.
     expect(controlOverwritten).toHaveLength(46);
     expect(controlThrew).toHaveLength(11);
     expect(controlKept, 'the counterforce kept the share, so this arm proves nothing').toEqual([]);
