@@ -21,21 +21,23 @@ describe('the metropolis band reads open on every surface', () => {
     const text = container.textContent || '';
     expect(text).toContain('15,000+ pop.');
     expect(text).not.toContain('60,000');
+    expect(text).not.toContain('50,000');
   });
 
   test('the compendium search keywords carry 15000+ for the metropolis, not a ceiling', () => {
     const row = COMPENDIUM_INDEX.find(e => e.id === 'tier-metropolis');
     expect(row?.keywords).toContain('15000+');
     expect(row?.keywords).not.toContain('60000');
+    expect(row?.keywords).not.toContain('50000');
   });
 });
 
 describe('the forced promotion into the top tier is unclamped', () => {
-  test('a city of 80,000 promoted keeps its 80,000; a city of 9,000 rises to the floor 15,000', () => {
-    const big = shiftTier({ id: 's1', tier: 'city', population: 80000, institutions: [] }, { payload: { direction: 'promotion' } });
+  test('a city of 250,000 promoted keeps its 250,000; a city of 9,000 rises to the floor 15,000', () => {
+    const big = shiftTier({ id: 's1', tier: 'city', population: 250000, institutions: [] }, { payload: { direction: 'promotion' } });
     const small = shiftTier({ id: 's2', tier: 'city', population: 9000, institutions: [] }, { payload: { direction: 'promotion' } });
     const read = (r) => r?.settlement?.population ?? r?.population;
-    expect(read(big)).toBe(80000);
+    expect(read(big)).toBe(250000);
     expect(read(small)).toBe(15000);
   });
 });

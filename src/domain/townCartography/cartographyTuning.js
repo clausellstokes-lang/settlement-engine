@@ -401,11 +401,12 @@ export const TOWN_CARTOGRAPHY_TUNING = Object.freeze({
     // drag a foreign payload into the bounded compiler closure (CR-TC3B-BYTES), so
     // the mirror is guarded by C2's producer-equality assertion rather than by an
     // import edge. Drift reds a test; it never silently re-bands a town. Re-banded to the
-    // owner's historical table at X-46 car 1 (ODQ §934.104, 2026-11-03).
+    // owner's historical table at X-46 car 1 (ODQ §934.104, 2026-11-03); the metropolis
+    // roll's body edge 50,000 at car 1b (the owner's compromise, 2026-11-04).
     POPULATION_SPAN: Object.freeze({
       thorp: Object.freeze([5, 30]), hamlet: Object.freeze([20, 100]),
       village: Object.freeze([75, 400]), town: Object.freeze([300, 2500]),
-      city: Object.freeze([2000, 15000]), metropolis: Object.freeze([15000, 60000]),
+      city: Object.freeze([2000, 15000]), metropolis: Object.freeze([15000, 50000]),
     }),
   }),
   // The per-parcel occupancy BAND for instances and dwellings — a density dial, not
