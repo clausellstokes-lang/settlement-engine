@@ -33,3 +33,21 @@ The exempt rows are route- or terrain-required (and the metropolis Dragon, rare)
 **The finding the ruling does not name:** at the bottom four tiers about a third to a half of realised(0) is not exempt rows but coherence repairs (the defence plan's Palisade / levy / militia / walls) and toggle-forced rows. Neither is a scaled draw. Under the ruling's scalable definition (realised(0) = 0 by construction) they fall outside both X and realised_scalable. Unit 4 measures what that costs.
 
 Measured by `scripts/audit/institution-budget-floor-measure.mjs` (run line in its header).
+
+## Unit 2 — the ruling in code (`bf3d1258`)
+
+- **X per settlement.** `src/generators/steps/assembleInstitutions.js :: exemptHouseExpectation` adds up, over the tier's non-required, non-fabric, density-exempt rows, the chance the draw itself would give each one. It applies the main roll's world-law, category and toggle gates, then `rowRoll` at d = 1: the route, terrain, resource and row-guard gates, `getBaseChance` (sliders, neighbour, goods) and the resource multiplier. A toggle-forced exempt row counts 1. It is an expectation: no draw is taken and nothing is tabled. `rowRoll` is the step's former `rollFor` body lifted out unchanged, so the expectation and the draw read one function.
+- **One d, three passes.** `settlementDensity(ctx)` returns `densityFactor(tier, P, X)`. assembleInstitutions, `cascadePass` (it passes `density` to `applyCascadeInstitutions`) and `factionCorrelationPass` (the new last argument of `applyFactionInstitutionBoosts`) all read it. A headless call keeps the bare curve (X = 0). The two passes now declare the context keys X reads.
+- **The target.** `densityFactor(tier, P, exempt)` is the inverse of realised_scalable at expectedHousesAt(P) − R − X, clamped at 0 and 4. d = 0 exactly where the target is 0 or less. The seven anchors are untouched.
+- **The table.** It is re-measured over the scalable rows at the same eight d, with the same cells, seeds and script as U10. realised(0) = 0 in every tier. realised(1), before → after: thorp 3.29 → 2.355, hamlet 9.775 → 8.77, village 26.045 → 24.29, town 46.24 → 44.62, city 51.67 → 49.975, metropolis 58.96 → 57.04. The full output is in `docs/RUNG1B_F6_BUDGET_FLOOR_2026-11-04.calibration.json`.
+- **The density test, re-keyed red-first.** At the base it fails on `realised_scalable(0)` (`[0, 1.23]`) and on the pin; it is green at `bf3d1258` (9 of 9). The d = 0 populations at the largest authored X are pinned:
+  - thorp 5–6 (X 1.27, river/forest);
+  - village 75–95 (X 1.89);
+  - none in hamlet, town, city or metropolis;
+  - none anywhere at X = 0.
+- **What changed in the d = 0 band.** At the base the band bottoms read d = 0 for every settlement (thorp 5–6, village 75–99). Now d = 0 there only where the settlement's own exempt rows fill the room.
+
+## Unit 3 — the promise and the measuring script
+
+- **The promise.** `tests/generators/institutionBudgetPromise.test.js` holds 60 of 60 at the tip against its existing digests, with the factor forced to 1.0. The new code reaches the draw only through `densityFactor`, which the promise mocks to 1. No digest moved, so nothing was re-captured, and the red-first step had no red to start from.
+- **The measuring script.** `scripts/audit/institution-budget-measure.mjs --calibrate` now measures realised(d) over the scalable rows: drawn at a scaled chance (source `generated`, `cascade` or `faction_boost`), and not required, fabric or density-exempt.
