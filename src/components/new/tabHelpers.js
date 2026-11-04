@@ -1,5 +1,7 @@
 // Shared utility functions for all tab components
 
+import { crisisOf } from '../../domain/facts/crisisKind.js';
+
 // Builds sets of impaired/degraded/vulnerable services from trade dependencies
 export function computeChainSets(settlement) {
   const tradeDeps  = new Set();
@@ -17,8 +19,8 @@ export function computeChainSets(settlement) {
 
   const deps = settlement.economicState?.tradeDependencies || [];
   const route = settlement.config?.tradeRouteAccess || 'road';
-  const stresses = (Array.isArray(settlement.stress) ? settlement.stress : settlement.stress ? [settlement.stress] : []).filter(Boolean);
-  const hasSiege = stresses.some(s => s?.type === 'under_siege');
+  // Siege, once: the crisis-kind home (CENSUS-1 wave 0, fact 1).
+  const hasSiege = crisisOf(settlement).has('under_siege');
   const isIsolated = route === 'isolated';
 
   // The generator marks a dependency met THROUGH magical trade infrastructure with a

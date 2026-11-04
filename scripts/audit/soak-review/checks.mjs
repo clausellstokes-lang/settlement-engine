@@ -34,6 +34,7 @@ import { magicWorksAt } from '../../../src/domain/worldPulse/magicWorksAt.js';
 import { institutionCatalogMagicLicence } from '../../../src/domain/arcaneInstitutionIdentity.js';
 import { hasMarketInstitution } from '../../../src/generators/economy/viability.js';
 import { READER_BATTERY_CHECKS, readerBattery } from '../../../src/domain/coherence/readerBattery.js';
+import { crisisEntries } from '../../../src/domain/facts/crisisKind.js';
 
 /** The owner's bands (X-46, docs/UX_CONSOLIDATION_2026-10-30.md; car 1 is parked, not on this tip). */
 export const OWNER_BANDS = Object.freeze({
@@ -292,7 +293,7 @@ export function reviewSettlement(s, config, r) {
   }
 
   // ── X-51: one Tonight sheet whose first line names the crisis
-  const stressTypes = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).map((x) => x?.label).filter(Boolean);
+  const stressTypes = crisisEntries(s).map((x) => x?.label).filter(Boolean);
   // The sheet's own opening line (`composeTonightSheet(...).opening`), which the page prints first
   // under its eyebrow; the eyebrow label itself ("Active crisis", "What is urgent") is not the line.
   const firstLine = String(r.tonightSheet?.opening ?? '').trim();

@@ -18,6 +18,7 @@ import { defenseFactsOf, foodEnduranceOf } from '../../../src/domain/defense/def
 import { faithReadingOf, faithHasChurchEvidence } from '../../../src/domain/dossier/faithReading.js';
 import { deriveMagicReliance } from '../../../src/domain/magicReliance.js';
 import { collectPlotHooks } from '../../../src/domain/dossier/plotHooks.js';
+import { activeCrisisTypes } from '../../../src/domain/facts/crisisKind.js';
 
 const SKIP_KEYS = new Set(['simulationTrace', '_config', 'userCanon', 'aiOverlays', 'id', '_seed', 'economyInputFingerprint', 'colour', 'color', 'bg', 'catalogId', 'sourcePath']);
 const ID_KEY = /^(?:[0-9a-f]{8,}|.*\d{3,}.*|npc_\d+|inst_\d+|s_[0-9a-f]+)$/i;
@@ -80,7 +81,7 @@ export function chainFacts(s, ctx) {
   const faith = safe(() => faithReadingOf(s), null);
   const magic = safe(() => deriveMagicReliance(s), {}) || {};
   const hooks = safe(() => collectPlotHooks(s), []) || [];
-  const stress = (Array.isArray(s.stress) ? s.stress : s.stress ? [s.stress] : []).map((x) => x?.type).filter(Boolean);
+  const stress = activeCrisisTypes(s);
   const factions = s.powerStructure?.factions || [];
   const governing = factions.find((f) => f?.isGoverning) ?? factions[0];
   const findings = ctx.findings || [];

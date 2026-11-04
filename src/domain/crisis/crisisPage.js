@@ -18,6 +18,7 @@
  */
 
 import { crisisHookFor } from './crisisHooks.js';
+import { crisisContainer } from '../facts/crisisKind.js';
 import { CRISIS_ROLE_LABEL, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
@@ -116,10 +117,10 @@ const str = (v) => (typeof v === 'string' ? v.replace(/\s+/g, ' ').trim() : '');
  * @returns {Array<{ entry: PageEntry, index: number }>}
  */
 export function crisisEntriesOf(settlement) {
-  const raw = settlement?.stress;
-  const list = Array.isArray(raw) ? raw : (raw && typeof raw === 'object' ? [raw] : []);
-  return list
-    .map((entry, index) => ({ entry, index }))
+  // The crisis-kind home's carrier order (`stressors` → `stress` → `stresses`): one object at
+  // birth and under every writer, so the index is the same edit address in either home.
+  return crisisContainer(settlement)
+    .map((entry, index) => ({ entry: /** @type {PageEntry} */ (entry), index }))
     .filter(({ entry }) => !!entry && typeof entry === 'object' && !!(str(entry.type) || str(entry.label)));
 }
 
