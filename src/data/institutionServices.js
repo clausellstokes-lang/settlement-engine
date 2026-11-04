@@ -942,7 +942,9 @@ export const INSTITUTION_SERVICES = {
     "Recruitment screening": { on: false, p: 0.3, desc: "Talent scouts watch the pits for capable fighters." }
   },
   "Fish market": {
-    "Fresh fish retail": { on: true,  p: 1.0, desc: "Fish sold daily from the morning catch. Selection varies by season." },
+    // A-11 (soak 1000 row 7): a morning catch only where there is water; inland the row is
+    // this pool's own "Preserved fish" (the salted barrels the Fish market's catalog text names).
+    "Fresh fish retail": { on: true,  p: 1.0, inlandAlternative: "Preserved fish", desc: "Fish sold daily from the morning catch. Selection varies by season." },
     "Wholesale trade": { on: true, p: 0.8, desc: "Bulk purchase by taverns, institutions, and inland traders." },
     "Preserved fish": { on: false, p: 0.6, desc: "Smoked, dried, and salt-preserved fish for storage and inland trade." }
   },

@@ -477,7 +477,7 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('fish') || exp.includes('herring');
         })) &&
       !hasIncomeSource('fish') &&
-      !hasIncomeSource('maritime')
+      !hasIncomeSource('maritime') && generationWorldLaw.portKind !== 'none' // A-11: a catch lands only from water
     ) {
       incomeBuild.push({
         source: generationWorldLaw.supportsMaritime()

@@ -189,11 +189,23 @@ export const getServicesForInstitution = (
         force = typeof toggle == 'object' ? (toggle.force ?? false) : false;
       if (!allow && !force) return;
       const rollThreshold = def.p * tierChance;
+      // A-11 (soak 1000 row 7): a row that speaks of a catch names its pool's inland
+      // alternative; where the world law's water fact is 'none' that row is offered in its
+      // place, under the same toggle and the same roll (no draw moves).
+      const inland = overrides._waterAccess === 'none'
+        && typeof def.inlandAlternative === 'string'
+        && serviceDefs[def.inlandAlternative]
+        ? def.inlandAlternative
+        : null;
+      const [rowName, rowDef] = inland
+        ? [inland, { ...serviceDefs[inland], p: def.p }]
+        : [svcName, def];
       (force || def.p >= 1 || _rng() < rollThreshold) &&
         (!def.requiredTradeRoute || (overrides._tradeRoute || '').includes(def.requiredTradeRoute)) &&
+        !results.some((row) => row.name === rowName) &&
         results.push({
-          name: svcName,
-          ...def,
+          name: rowName,
+          ...rowDef,
           institution: instName,
           svcKey: resolvedKey,
           forced: force,
