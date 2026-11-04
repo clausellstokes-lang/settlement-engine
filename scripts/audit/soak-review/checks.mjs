@@ -61,6 +61,17 @@ export const sentencesOf = (text) => String(text || '').split(SENTENCE_SPLIT).ma
 const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
+/**
+ * A-05's sentence: a spectacle held HERE (chair ruling 1, 2026-11-04) — gladiatorial combat,
+ * games or fights. A Gladiatorial school's own rows ("Gladiator hire", "Gladiator training")
+ * feed the regional arena circuit and are not counted.
+ * @param {string[]} sentences
+ * @returns {string|undefined}
+ */
+export function arenaSpectacleSentence(sentences) {
+  return sentences.find((x) => /\bgladiatorial (?:combat|games|fights?)\b/i.test(x));
+}
+
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
   const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
@@ -169,7 +180,7 @@ export function reviewSettlement(s, config, r) {
   const instNames = (s.institutions || []).map((i) => String(i?.name || '').toLowerCase()).join(' | ');
   const hosp = sentencesOf(screenText).find((x) => /\bHospital present\b/i.test(x));
   if (hosp && !/hospital/.test(instNames)) add('A-05:hospital-absent', 'screen', hosp);
-  const arena = sentencesOf(screenText).find((x) => /gladiator/i.test(x));
+  const arena = arenaSpectacleSentence(sentencesOf(screenText));
   if (arena && !/arena|amphithea|colosse|fighting pit/.test(instNames)) add('A-05:arena-absent', 'screen', arena);
   const lacks = (screenText.match(/exists but lacks access to/g) || []).length;
   if (lacks) add('A-05:lacks-access-lines', 'screen', '', `${lacks} lines`);
