@@ -44,6 +44,14 @@ function storedHookTexts(settlement) {
   /** @type {unknown[]} */
   const npcs = Array.isArray(record.npcs) ? record.npcs : [];
   npcs.forEach((npc) => takeAll(/** @type {{ plotHooks?: unknown }} */ (npc)?.plotHooks));
+  // The faction rosters carry a COPY of each member NPC, hooks included (F10 unit 4, rung 1C:
+  // `soak1k-452` stored the dropped soldiers hook on `factions[2].members[1]` after the NPC lost it).
+  /** @type {unknown[]} */
+  const factions = Array.isArray(record.factions) ? record.factions : [];
+  factions.forEach((faction) => {
+    const members = /** @type {{ members?: unknown }} */ (faction)?.members;
+    if (Array.isArray(members)) members.forEach((m) => takeAll(/** @type {{ plotHooks?: unknown }} */ (m)?.plotHooks));
+  });
   /** @type {unknown[]} */
   const conflicts = Array.isArray(record.conflicts) ? record.conflicts : [];
   conflicts.forEach((conflict) => takeAll(/** @type {{ plotHooks?: unknown }} */ (conflict)?.plotHooks));
@@ -96,6 +104,7 @@ function hookTextOf(hook) {
  * The containers `withoutFalseHooks` may copy, as the assembled record carries them.
  * @typedef {Object} StoredHookRecord
  * @property {unknown} [npcs]
+ * @property {unknown} [factions] the faction rosters, each `members[]` a copy of its NPCs (F10 unit 4)
  * @property {unknown} [conflicts]
  * @property {{ currentTensions?: unknown, historicalEvents?: unknown }} [history]
  * @property {{ plotHooks?: unknown }} [economicViability]
@@ -172,6 +181,20 @@ export function withoutFalseHooks(settlement, options = {}) {
 
   const npcs = options.npcsHeld ? record.npcs : keepRows(record.npcs);
   if (npcs !== record.npcs) patch.npcs = npcs;
+  // The faction rosters' member copies, under the same hold (F10 unit 4): a copy keeps no hook
+  // its NPC lost, so the Power tab and the exports cannot print what the roster dropped.
+  if (!options.npcsHeld && Array.isArray(record.factions)) {
+    let changed = false;
+    const factions = record.factions.map((/** @type {unknown} */ faction) => {
+      const entry = /** @type {{ members?: unknown }} */ (faction);
+      if (!faction || typeof faction !== 'object' || !Array.isArray(entry.members)) return faction;
+      const members = keepRows(entry.members);
+      if (members === entry.members) return faction;
+      changed = true;
+      return { ...entry, members };
+    });
+    if (changed) patch.factions = factions;
+  }
   const conflicts = keepRows(record.conflicts);
   if (conflicts !== record.conflicts) patch.conflicts = conflicts;
   if (record.history && typeof record.history === 'object') {
