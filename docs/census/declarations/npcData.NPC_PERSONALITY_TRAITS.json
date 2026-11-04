@@ -1,0 +1,856 @@
+{
+  "pool": {
+    "id": "npcData.NPC_PERSONALITY_TRAITS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:316-318 pickFromArray",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 105,
+    "declaring": 0,
+    "note": "Single-word traits; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "positive#0",
+      "text": "honest",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#1",
+      "text": "brave",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#2",
+      "text": "compassionate",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#3",
+      "text": "wise",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#4",
+      "text": "loyal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#5",
+      "text": "generous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#6",
+      "text": "patient",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#7",
+      "text": "humble",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#8",
+      "text": "diligent",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#9",
+      "text": "fair-minded",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#10",
+      "text": "optimistic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#11",
+      "text": "charismatic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#12",
+      "text": "clever",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#13",
+      "text": "principled",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#14",
+      "text": "protective",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#15",
+      "text": "diplomatic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#16",
+      "text": "resourceful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#17",
+      "text": "scholarly",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#18",
+      "text": "pious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#19",
+      "text": "merciful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#20",
+      "text": "tenacious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#21",
+      "text": "methodical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#22",
+      "text": "intuitive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#23",
+      "text": "perceptive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#24",
+      "text": "steadfast",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#25",
+      "text": "magnanimous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#26",
+      "text": "incorruptible",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#27",
+      "text": "warm-hearted",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#28",
+      "text": "level-headed",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#29",
+      "text": "forthright",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#30",
+      "text": "prudent",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#31",
+      "text": "candid",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#32",
+      "text": "gracious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#33",
+      "text": "stalwart",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#34",
+      "text": "discerning",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#35",
+      "text": "equitable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#36",
+      "text": "temperate",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#37",
+      "text": "courteous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#38",
+      "text": "dependable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#39",
+      "text": "astute",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#40",
+      "text": "conscientious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#41",
+      "text": "good-humoured",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#42",
+      "text": "unflappable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#43",
+      "text": "plain-dealing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "positive#44",
+      "text": "hospitable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#0",
+      "text": "greedy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#1",
+      "text": "arrogant",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#2",
+      "text": "cruel",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#3",
+      "text": "cowardly",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#4",
+      "text": "deceitful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#5",
+      "text": "wrathful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#6",
+      "text": "lazy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#7",
+      "text": "envious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#8",
+      "text": "suspicious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#9",
+      "text": "stubborn",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#10",
+      "text": "vain",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#11",
+      "text": "ruthless",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#12",
+      "text": "manipulative",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#13",
+      "text": "vengeful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#14",
+      "text": "corrupt",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#15",
+      "text": "paranoid",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#16",
+      "text": "callous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#17",
+      "text": "hypocritical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#18",
+      "text": "petty",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#19",
+      "text": "domineering",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#20",
+      "text": "reckless",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#21",
+      "text": "bitter",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#22",
+      "text": "vindictive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#23",
+      "text": "self-serving",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#24",
+      "text": "dismissive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#25",
+      "text": "volatile",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#26",
+      "text": "overbearing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#27",
+      "text": "mendacious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#28",
+      "text": "cold-blooded",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "negative#29",
+      "text": "imperious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#0",
+      "text": "pragmatic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#1",
+      "text": "ambitious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#2",
+      "text": "calculating",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#3",
+      "text": "secretive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#4",
+      "text": "eccentric",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#5",
+      "text": "melancholic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#6",
+      "text": "stoic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#7",
+      "text": "cynical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#8",
+      "text": "cautious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#9",
+      "text": "proud",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#10",
+      "text": "reserved",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#11",
+      "text": "methodical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#12",
+      "text": "traditionalist",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#13",
+      "text": "iconoclast",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#14",
+      "text": "opportunistic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#15",
+      "text": "perfectionist",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#16",
+      "text": "fatalistic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#17",
+      "text": "idealistic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#18",
+      "text": "zealous",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#19",
+      "text": "hedonistic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#20",
+      "text": "detached",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#21",
+      "text": "mercurial",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#22",
+      "text": "inscrutable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#23",
+      "text": "superstitious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#24",
+      "text": "brooding",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#25",
+      "text": "theatrical",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#26",
+      "text": "nostalgic",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#27",
+      "text": "contrarian",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#28",
+      "text": "restless",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "neutral#29",
+      "text": "obsessive",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}
