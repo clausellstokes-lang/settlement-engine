@@ -350,6 +350,18 @@ export function traditionsWaterFindings(s, surfaces) {
   return hit ? [{ surface: 'traditions', quote: hit, detail: `terrain ${terrainOf(s)}, route ${routeOf(s) || 'none'}` }] : [];
 }
 
+// ──────────────────────────── 7. tonight-wants ────────────────────────────
+
+/**
+ * On the Tonight sheet, "Wants to" followed by a capitalised word — a sentence, not a want
+ * ("Wants to Was approached…", "Wants to The supplies…"). A want's verb is lower-case.
+ * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ */
+export function tonightWantsFindings(_s, surfaces) {
+  const hits = linesOf(surfaces.tonight).filter((x) => /\bWants to [A-Z]/.test(x));
+  return hits.length ? [{ surface: 'tonight', quote: hits[0], detail: `${hits.length} lines; starts "${str(hits[0].match(/\bWants to ([A-Z][\w'’]*)/)?.[1])}"` }] : [];
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -359,6 +371,7 @@ const RUNS = Object.freeze({
   'tension-memory': tensionMemoryFindings,
   'hook-pools': hookPoolsFindings,
   'traditions-water': traditionsWaterFindings,
+  'tonight-wants': tonightWantsFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

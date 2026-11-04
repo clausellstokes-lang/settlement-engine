@@ -136,3 +136,15 @@ describe('reader:traditions-water', () => {
     expect(R.traditionsWaterFindings(rec(), { traditions: 'The Great Vigil\nMarket\nThe Long Sun Contest\nLong Sun' })).toEqual([]);
   });
 });
+
+// ── 7. tonight-wants
+describe('reader:tonight-wants', () => {
+  test('"Wants to" followed by a sentence', () => {
+    const rows = R.tonightWantsFindings(rec(), { tonight: 'People to voice\nLalita Acharya\nElder · Holds the seat\nWants to Was approached before the betrayal and said no.' });
+    expect(rows).toHaveLength(1);
+    expect(rows[0].detail).toBe('1 lines; starts "Was"');
+  });
+  test('negative control: a want with its verb', () => {
+    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to extend the institution\'s civic role.' })).toEqual([]);
+  });
+});
