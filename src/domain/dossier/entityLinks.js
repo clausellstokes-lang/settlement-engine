@@ -519,11 +519,11 @@ export function buildDossierEntityIndex(settlement = {}) {
   // THE STORES ROW (X-52, lane DEFENSE-3) — the Economy tab's one home for the months in store,
   // a link TARGET for the Defense tab's Food endurance line (defenseDisplay.js ::
   // FOOD_STORES_DOOR). Indexed only where the food record exists, as the row only renders then.
-  /** @type {Record<string, any>[]} */
-  const stores = [];
-  if (/** @type {any} */ (settlement).economicState?.foodSecurity?.foodRecord) {
-    stores.push(decorateEntry('stores', { ...entityLink('stores', { id: 'economy.food-stores', name: 'Stores' }) }, { name: 'Stores' }));
-  }
+  /** @typedef {{ economicState?: { foodSecurity?: { foodRecord?: unknown } | null } | null }} FoodRecordHolder */
+  const foodHolder = /** @type {FoodRecordHolder} */ (settlement);
+  const stores = foodHolder.economicState?.foodSecurity?.foodRecord
+    ? [decorateEntry('stores', { ...entityLink('stores', { id: 'economy.food-stores', name: 'Stores' }) }, { name: 'Stores' })]
+    : [];
 
   // The settlement itself is addressable (overview tab).
   /** @type {Record<string, any>[]} */
