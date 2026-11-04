@@ -45,6 +45,39 @@ const NEEDS_CLAUSE = /^Needs\b.*?(?=\s+[·–-]\s+|$)/i;
 /** A claim that no food is stored. */
 const NO_RESERVES = /\bNo food reserves\b|\bholds no food\b|\bNo reserves\b/i;
 
+/** A goods row's own label ("- **Exports:**", "Exports:"), stripped before the goods are read. */
+const GOODS_LABEL = /^[-*\s]*(?:\*\*)?(?:Primary )?Exports:?(?:\*\*)?\s*/i;
+
+/**
+ * THE EXPORT LIST IS GOODS, NOT A SENTENCE (F3 FOOD-WORDS unit 2a, the chair's ruling
+ * 2026-11-04). A line made only of the record's own export goods (economicState.primaryExports,
+ * run together on the Economics tab, comma-joined on the Foundry row) names what the place
+ * sells, not what its table holds; "Meals and drink" beside "Game meat" is no foodways claim
+ * (soak1k-20). Read from the record, so a sentence with one word that is not a good is read.
+ * @param {string} sentence
+ * @param {string[]} goods  longest first
+ */
+function isGoodsList(sentence, goods) {
+  if (!goods.length) return false;
+  let rest = sentence.replace(GOODS_LABEL, '');
+  let named = 0;
+  for (const good of goods) {
+    if (!rest.includes(good)) continue;
+    named += 1;
+    rest = rest.split(good).join(' ');
+  }
+  return named > 0 && rest.replace(/[\s,;·|.]+/g, '') === '';
+}
+
+/** @param {unknown} settlement @returns {string[]} the export goods, longest first */
+function exportGoodsOf(settlement) {
+  const s = /** @type {{ economicState?: { primaryExports?: unknown } | null } | null | undefined} */ (settlement);
+  const list = s?.economicState?.primaryExports;
+  return Array.isArray(list)
+    ? list.filter((g) => typeof g === 'string' && g.trim()).map(String).sort((a, z) => z.length - a.length)
+    : [];
+}
+
 /**
  * @param {unknown} settlement
  * @returns {{ band: string, storageMonths: number, growsMoreThanEats: boolean, foodSources: string[] | null } | null}
@@ -78,7 +111,9 @@ export function foodWordsFindings(settlement, renderedText) {
   const sentences = String(renderedText || '').split(/(?<=[.?])\s+|\n+/).map((x) => x.trim()).filter(Boolean);
   const storeDays = Math.round(record.storageMonths * 30);
   const hungry = recordAllowsStarving(record);
+  const goods = exportGoodsOf(settlement);
   for (const sentence of sentences) {
+    if (isGoodsList(sentence, goods)) continue;
     if (!record.growsMoreThanEats && SURPLUS_WORDS.test(sentence.replace(REQUIREMENT_CLAUSE, ''))) {
       findings.push({ code: 'surplus_without_surplus', sentence, detail: 'The place grows less than it eats.' });
     }
