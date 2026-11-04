@@ -128,3 +128,33 @@ Overlap (40 a side): 0.4% at 100 · 6.1% at 400 · 3.1% at 2,500 · 5.1% at 15,0
 **Ruling 6 — the nine.** (a) left for the landing: `generationForkCensus` A4; `pipelinePinnedMode` ×2 (the NPC step's frozen draw counts 306 and 67). (b) re-keyed in U7: `distribution` enforcement (Town watch's `law_enforcement` tag read beside the group); `terrainOverrideResolution` Caravanserai (`k4` → `k0`); `powerConfig` (`-2` → `-0`); `coherenceRepairPass` (`-39` → `-28`, new subjects); `pinnedNpcRegenRemap` (`-1` → `-0`). (c) **STOP**: `terrainOverrideResolution` "Shepherd collective is admitted on plains and hills" — the row is thorp-only and d is 0 across the thorp band, so it can never roll; the same holds for all 13 optional non-fabric thorp rows (the four governance rows Informal elder consensus, Head-of-household consensus, Lord's reeve and Household elder; Palisade; Household levy; Wayside shrine; Communal root cellar; Fishing community; Shepherd collective; Woodcutter's camp; Local fence; Outlaw shelter), and d is 0 for a hamlet under 45 people (31 rows) and a village under 101 (64 rows). It contradicts §7's "catalogue rows dead under the bands: 0".
 
 **The registers the lane's last units also move** (`tests/lint`, compared file by file with `8cc245db0`): the name-list census TOTALITY (U6); `writerReach` (a dark-register row's key, "supersessionReason on proposals", falls below MIN_ROWS in the corpus); `recordRegisterTotality` A3/A4; `proseFamilyContract` A1–A3, A5, A6; `institutionTable` "the ruin filter is measured doing work" (20 against 23); the tuning inventory (two tables measured, not in the inventory). All are the landing's doors; none was touched.
+
+## 9. Addendum — the bottom and top ends (the chair's rulings of 2026-11-04, second sitting)
+
+| unit | commit | ruling | receipt |
+|---|---|---|---|
+| U9 | `d207c81` | the strict fabric rule (option C); anchors above the required baseline | red-first 9 failed (incl. the (c) Shepherd test and the new dead-row census); 101/101 |
+| U10 | `751c05c` | realised(d) measured at eight d, its inverse, clamped at 0 and 4 | red-first 2 failed; the literal 0.25 clamp failed the step test and the 400 overlap (STOP, ruled); 102/102 |
+
+**The fabric (14 rows)**: §2's twelve plus Access to external mill (thorp, hamlet). The rule — no power behind it (X-45 weight 0), no service, no seat — catches nothing else: the farming and burial rows back powers at weight 1 and carry services; the weight-0 hedge wizard, musician, performers, fortune tellers and dragon are houses a DM would visit. **R_tier before → after**: thorp 3 → 2 · hamlet 4 → 3 · village 6 · town 11 · city 15 · metropolis 15.
+
+**The anchors — the owner's veto point, the reason: a budget cannot sit below the catalogue's required baseline**: 5 → 3, 30 → 5, 100 → 8, 400 → 16, 2,500 → 36, 15,000 → 76, 60,000 → 120 (the chair's 3 / 4 / 8 / 16 / 36 / 76 / 120, the 30-person anchor raised 4 → 5 because the 20-person hamlet read 3.77 against R 3).
+
+**The dead-row census** (`tests/generators/institutionBudgetReach.test.js`, ten log steps per band, 5 to 60,000): d > 0 at every step; every optional non-fabric row reachable — the 13 thorp rows, the 31 hamlet rows, the 64 village rows — except town Money changers, dead by its own 3,000 floor (car 2's, §3a).
+
+**The realised curve** (200 seeds per point; concave): see U10's commit body for the 48 figures. **The ceiling**: the metropolis alone — at 60,000 the target is 105 optional houses against realised(4) 77.92, so d clamps at 4 and the 120 anchor is unreachable by the authored catalogue (~93 houses).
+
+**Re-measured** (both sets kept: "origin" assumed realised(0) = 0; "measured" is the ruled cure):
+
+| tier | ρ 1,000 (origin / measured) | band-end medians, measured (anchor) | band min p10–p90 | band max p10–p90 | budget 1–3 / … |
+|---|---|---|---|---|---|
+| thorp | 0.27 / 0.29 | 3 (3) · 5 (5) | 2–5 | 3–7 | 1–3 |
+| hamlet | 0.38 / 0.42 | 4.5 (4.55) · 7 (8) | 3–7 | 4–10.1 | 2–6 |
+| village | 0.57 / 0.62 | 7 (7.28) · 16.5 (16) | 6–9 ✓ | 11.9–22.1 | 5–14 |
+| town | 0.72 / 0.73 | 14.5 (14.34) · 36 (36) | 13–16.1 ✓ | 29.9–44 | 12–35 |
+| city | 0.77 / 0.77 | 32 (33.6) · 76 (76) | 26–40.1 | 66.8–86.2 | 30–75 |
+| metropolis | 0.03 / 0.15 | 77 (76) · 92.5 (120, ceiling) | 66.7–87.1 | 84.9–105.1 ✓ | 70+ |
+
+Overlap (measured): 5.6% at 100 · 3.6% at 400 · 0.8% at 2,500 · 0.2% at 15,000 (origin: 9.9 / 0.4 / 0.8 / 0.2%). The medians now sit on the anchors within a house except the metropolis ceiling; the p10–p90 spread around them is the catalogue's per-seed variance, and the old budget ranges (1–3 / 2–6 / …) sit below the new anchors at the bottom of every band by the ruling's own design.
+
+**Reds, re-read at `751c05c`** against `8cc245db0` over the 94 test files naming the catalogue, the assembly or the budget: 11 titles new. Three are the ruled (a) items (generationForkCensus A4, pipelinePinnedMode ×2). Eight are new since U3's classification and are NOT yet classified by execution (PLAUSIBLY seed or corpus fixtures the calibration moved, i.e. (b)): informationBrokerageGeneration ×3 ("Listening post never generated in the metropolis corpus"; "Rookery never generated on an isolated town"); urbanBandInstitutions "Warden's Lodge stays defence" (1 lodge seated against "> 5"); joins/ports "river-route city with a barge company does not read as a port"; joins/subsumption "port-route city keeps its docks alongside the harbour master" (Harbour master's office absent from the seed's city); institutionRename A1 (the name-bearing path denominator); undercitySewerDerivation G-43 (the rebuild arm's corpus). One baseline title is cured (undercity "the owner's own example: a FLAT DRY town").
