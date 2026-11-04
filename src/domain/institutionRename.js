@@ -175,6 +175,8 @@ export const NON_CASCADED_SURFACES = Object.freeze([
     why: 'design §22.3 item 1 classes the generation receipt BY PATH as HISTORY, and lived history is immutable' },
   { path: 'availableServices.equipment[].name', kind: 'label', readable: false,
     why: 'the service label, not a handle: where it names a roster house it names a DIFFERENT house from the entry own institution field, which is the real handle (the Weekly market service a Market square provides, beside a Weekly market house). The row followed that service from legal to equipment when the service re-map filed it under Goods and Crafts (RS-1, ODQ §934.101); legal[].name holds no roster name since' },
+  { path: 'availableServices.criminal[].name', kind: 'label', readable: false,
+    why: 'the service label, not a handle, on the equipment row precedent: where it names a roster house it names a DIFFERENT house from the entry own institution field (the Black market bazaar service the Underground city provides, beside a Black market bazaar house: 12 of 12 such entries over the golden corpus, measured 2026-11-04). Surfaced by X-46 car 3 (the institution budget moved the corpus); declared on the chair ruling of 2026-11-04' },
   { path: 'resourceAnalysis.resourceConditions[].label', kind: 'label', readable: false,
     why: 'a fixed condition word: the same literal appears both matching and non-matching a roster name' },
   { path: 'economicState.activeChains[].resource', kind: 'label', readable: false,
