@@ -32,7 +32,7 @@ chair should rule on one of two options:
 - **(b) More hooks per crisis.** One hook per cast row would add about five per crisis, which
   still gives η of about 0.2. That count of hooks is a content decision, not a repair.
 
-The lane recommends (a).
+The lane recommended (a). **The chair ruled (a), 2026-11-04** (the owner may veto): C4c is read within tier, and both figures are recorded. No more hooks per crisis.
 
 ## 2. Units
 
@@ -41,7 +41,8 @@ The lane recommends (a).
 | 1 | `88663a24` | `src/domain/crisis/crisisHooks.js`: `crisisHooksOf`, `slotCrisisHook` (pure; no rng) |
 | 2 | `6ade1585` | the collector reads crisis hooks first; the record check reads them (stored shape, superseded by unit 3) |
 | 3 | `4ad86802` | the hooks are derived from the cast where they are read (through `effectiveCastOf`); the cast step fills the `{holder}` slot |
-| 4 | this commit | this report and its evidence |
+| 4 | `19890373` | this report and its evidence |
+| 5 | the ruling-4 commit | the `{holder}` fill moves to read time (below) |
 
 **Unit 3 replaced unit 2's stored list, and the measurement is why.** With the hooks stored on the
 entry, four suites moved:
@@ -56,6 +57,19 @@ entry, four suites moved:
 With the hooks derived, all four of those suites read exactly as they do at `c2747eab`. The
 "own keyed fork" in rule 4 is met by something stronger: nothing draws at all. Each choice is the
 first fit in the cast's own order.
+
+**Unit 5: the chair's ruling 4.** The `crisisHook` slot is filled where the hook is read, never
+stored filled. The entry keeps the catalog's sentence as its template. `crisisHookFor(settlement,
+entry)` fills it from `effectiveCastOf`, so a DM's cast edit renames the holder everywhere it is
+printed:
+
+- the Crisis page (the tab, the print chapter and the journal);
+- the print view model's three crisis sites;
+- the Overview and Summary tabs;
+- the quick guide's fallback.
+
+`resolveCrisisCast.js` is back to the base's code. Its red-first applies a DM cast edit and asserts
+the printed hook names the new holder; at `19890373` it read the engine's holder.
 
 ## 3. Figures (CONFIRMED: executed; receipts in `summary.json`)
 
@@ -118,15 +132,17 @@ They filled 30 times on the 120 seeds.
 
 Every red below is already red at `c2747eab`. This lane moves the CONTENT of only those named.
 
-- **`tests/property/espionageDormancyFence.test.js`.** The driven-corpus hash moves beyond the
-  crisis car's. By plant-and-restore, the `crisisHook` slot alone moves it: with the slot off, the
-  fence reads the base's `1305be4a…`.
+- **`tests/property/espionageDormancyFence.test.js`.** After unit 5 it reads exactly as at base.
+  The stored slot was the only thing that moved it, and nothing is stored filled now.
+- **`tests/lint/sourceCitationIntegrity.walker.test.js`.** Green at base. This report is a dated
+  archival document, so the archival roster moves from 8 to 9 "dated" documents; the landing
+  re-measures it.
 - **`tests/lint/sovereigntyLightingContract.walker.test.js`.** Green at base; 2854 → 2855 files
   (the new `tests/domain/crisisHooks.test.js`). The remaining figures need re-measuring at the
   composed tip.
 - **Generator goldens and structural fingerprints** (`generatorGoldenMaster` and the dormancy
-  goldens). The same failing rows as the base: only crisis-carrying rows move, through
-  `crisisHook` and `hook_count`. No calm row moves.
+  goldens). The same failing rows as the base. After unit 5 the stored record is the base's; only
+  read-time counts (`hook_count`) differ, and only in crisis rows. No calm row moves.
 - **No change from base.** The Tonight sheet and the hook goldens stayed green in the governing
   run. Its top three hooks now lead with the crisis hooks in crisis towns, by design.
 - **No manifest change.** No catalog sentence changed: `src/data/stressTypes.js` is untouched.
@@ -149,5 +165,7 @@ PLAUSIBLE:
 
 - the lighting census's other four figures;
 - the cause of the city and metropolis deficit;
-- that the slotted `crisisHook` is stale after a DM's cast edit. The slot is stored and the edit
-  is not re-slotted; the plot hooks themselves follow the edit.
+- `writerReach.walker`: the same 11 reds as base, but its first-reported name differs
+  ("capacity" against "deficit"), which reads as iteration order.
+
+The stale-slot item listed here before unit 5 is cured and CONFIRMED by its red-first.

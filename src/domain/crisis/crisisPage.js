@@ -17,6 +17,7 @@
  * Pure; lazy-only (its readers are the Crisis tab, the print chapter, the journal).
  */
 
+import { crisisHookFor } from './crisisHooks.js';
 import { CRISIS_ROLE_LABEL, effectiveCastOf } from './crisisCast.js';
 import { composeTonightSheet } from '../summary/tonightSheet.js';
 import { entityIdFor } from '../dossier/entityLinks.js';
@@ -182,7 +183,7 @@ export function composeCrisisPage(settlement) {
       nature,
       line: eventLine(label, nature, entry),
       summary: str(entry.summary),
-      hook: str(entry.crisisHook),
+      hook: crisisHookFor(s, entry),
       cast: (cast?.roles || []).map((r) => ({
         role: r.role,
         roleLabel: CRISIS_ROLE_LABEL[r.role] || r.role,

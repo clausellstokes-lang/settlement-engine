@@ -32,7 +32,7 @@
  */
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
-import { requiredRolesOf } from './crisisCast.js';
+import { effectiveCastOf, requiredRolesOf } from './crisisCast.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -250,4 +250,19 @@ export function slotCrisisHook(kind, text, cast) {
     line = line.replace(slot.phrase, () => filled);
   }
   return line;
+}
+
+/**
+ * THE CRISIS HOOK AS A READER SHOWS IT (the chair's ruling 4, 2026-11-04): the entry's stored
+ * sentence is the TEMPLATE — the catalog's own words, never stored filled — and every surface that
+ * prints it fills the `{holder}` slot here, from the cast the page shows (`effectiveCastOf`: the
+ * DM's word where the DM spoke), so a cast edit renames the holder everywhere at once.
+ * @param {unknown} settlement
+ * @param {{ type?: unknown, crisisHook?: unknown, cast?: CrisisCast | null, _userEdits?: Record<string, { value?: unknown }> } | null | undefined} entry
+ * @returns {string}
+ */
+export function crisisHookFor(settlement, entry) {
+  if (!entry || typeof entry !== 'object') return '';
+  const { cast } = effectiveCastOf(/** @type {never} */ (settlement && typeof settlement === 'object' ? settlement : {}), /** @type {never} */ (entry));
+  return slotCrisisHook(str(entry.type), entry.crisisHook, cast);
 }

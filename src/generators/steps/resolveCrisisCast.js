@@ -17,17 +17,15 @@
  *
  * `crisisResolve` (src/domain/crisisLifecycle.js) removes a resolved crisis's temporary person.
  *
- * THE CRISIS HOOK'S NAME SLOT (the HOOKS-UNDER-STRESS lane; CRISIS-2's open note). Once the town
- * is cast, each entry's catalog `crisisHook` gains the holder's name where the sentence names a
- * role a PERSON in the cast holds (`src/domain/crisis/crisisHooks.js :: slotCrisisHook`). It takes
- * no draw: the first fit in the cast's own order, so this step's stream, and every other, is
- * unmoved. The plot hooks a crisis adds are NOT stored: the collector reads them off the cast.
+ * THE CRISIS HOOKS ARE NOT WRITTEN HERE (the HOOKS-UNDER-STRESS lane; the chair's ruling 4): the
+ * plot hooks a crisis adds and the `{holder}` name in its `crisisHook` are both read off the cast
+ * where they are shown (`src/domain/crisis/crisisHooks.js :: crisisHooksOf`, `crisisHookFor`), so
+ * the entry keeps the catalog's sentence as its template and a DM's cast edit is never stale.
  */
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { STRESS_SEVERITY_WEIGHT } from '../stressGenerator.js';
 import { pickFirst } from '../npcGenerator.js';
 import { deriveCrisisCast, castHash } from '../../domain/crisis/crisisCast.js';
-import { slotCrisisHook } from '../../domain/crisis/crisisHooks.js';
 
 /** The role a temporary person carries on the roster, by the kind of lever it holds. */
 const TEMPORARY_ROLE = Object.freeze(/** @type {Record<string, string>} */ ({
@@ -112,16 +110,6 @@ registerStep('resolveCrisisCast', {
     npcs.push(person);
   }
   if (minted.length && !Array.isArray(settlement.npcs)) settlement.npcs = npcs;
-  // The crisis hook names the cast's holder where its sentence names the role.
-  /** @param {Record<string, unknown>} entry */
-  const slotHook = (entry) => {
-    const cast = casts.get(String(entry.type));
-    if (!cast) return;
-    const slotted = slotCrisisHook(String(entry.type), entry.crisisHook, cast);
-    if (slotted && slotted !== entry.crisisHook) entry.crisisHook = slotted;
-  };
-  entries.forEach(slotHook);
-  if (settlement.stressors !== settlement.stress) entriesOf(settlement.stressors).forEach(slotHook);
   void rng;
   return { crisisCast };
 });

@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { crisisHookFor } from '../../../domain/crisis/crisisHooks.js';
 import { stressorsStateProse } from '../../../domain/display/stateProse/stressorsStateProse.js';
 // THE GENERAL DESK IS REACHED THROUGH ITS ONE CALLER, never imported here: its blocks live
 // on seven tabs and the registry's ARM 2 admits exactly one call site per desk. The reader
@@ -366,7 +367,7 @@ export function OverviewTab({ settlement:r, narrativeNote, onNavigateTab, onOpen
         {!crisisDoor&&stresses.map((v,i)=>(
           <div key={i} style={{border:`2px solid ${v.colour}`,padding:'10px 14px',...FLUSH}}>
             <p style={{fontSize: proseFontSize(FS['12.5'],mobile),color:swatch.inkMag,lineHeight:1.5,margin:'0 0 4px'}}>{v.summary}</p>
-            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{v.crisisHook}</p>
+            <p style={{fontSize:proseFontSize(FS.xs,mobile),color:swatch['#3A2A10'],fontStyle:'italic',margin:0}}><span style={{fontWeight:700,fontStyle:'normal',color:v.colour}}>Hook: </span>{crisisHookFor(r,v)}</p>
           </div>
         ))}
         {(conditionCardLine||pressureLine)&&<div style={{padding:'0 14px 8px',...FLUSH}}>

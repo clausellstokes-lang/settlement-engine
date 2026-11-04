@@ -11,7 +11,11 @@ import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
 import { collectPlotHooks } from '../../src/domain/dossier/plotHooks.js';
 import { hookTruthViolations, settlementHookFacts } from '../../src/domain/coherence/hookTruth.js';
-import { crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { crisisHookFor, crisisHooksOf } from '../../src/domain/crisis/crisisHooks.js';
+import { applyUserEdit } from '../../src/domain/userEdits.js';
+import { CAST_EDIT_PATH, formatCastRoles } from '../../src/domain/crisis/crisisCast.js';
+import { composeCrisisPage } from '../../src/domain/crisis/crisisPage.js';
+import { buildViewModel } from '../../src/pdf/lib/viewModel.js';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KINDS = Object.keys(STRESS_TYPE_MAP);
@@ -111,14 +115,29 @@ describe('a generated crisis adds the hooks its cast derives', () => {
     expect(bound / crises).toBeGreaterThan(0.9);
   }, 240000);
 
-  it('the crisis hook names its holder where the sentence names a role the cast holds, and is the catalog\'s sentence otherwise', () => {
-    const plague = entriesOf(gen('slot-plague_onset-0', 'town', ['plague_onset']))[0];
+  it('the crisis hook is stored as the catalog\'s sentence (its template) and filled with the holder where it is read', () => {
+    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    const plague = entriesOf(s)[0];
     const lever = plague.cast.roles.find((r) => r.role === 'lever');
     expect(lever.kind).toBe('npc');
-    expect(plague.crisisHook).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook
+    expect(plague.crisisHook).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook);
+    expect(crisisHookFor(s, plague)).toBe(STRESS_TYPE_MAP.plague_onset.crisisHook
       .replace('The healer who identified the outbreak first', `${lever.name}, the healer who identified the outbreak first,`));
-    const migration = entriesOf(gen('slot-migration-0', 'town', ['mass_migration']))[0];
-    expect(migration.crisisHook).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
+    const m = gen('slot-migration-0', 'town', ['mass_migration']);
+    expect(crisisHookFor(m, entriesOf(m)[0])).toBe(STRESS_TYPE_MAP.mass_migration.crisisHook);
+  });
+
+  it('a DM\'s cast edit renames the holder in the printed crisis hook: the Crisis page (tab, print chapter, journal) and the print view model', () => {
+    const s = gen('slot-plague_onset-0', 'town', ['plague_onset']);
+    const entry = entriesOf(s)[0];
+    const engine = entry.cast.roles.find((r) => r.role === 'lever');
+    const other = s.npcs.find((n) => !n.temporary && n.name && n.name !== engine.name);
+    applyUserEdit(entry, CAST_EDIT_PATH, formatCastRoles([{ role: 'lever', kind: 'npc', id: other.id || other.name }]), { editedAt: '2026-11-04T00:00:00Z' });
+    const named = `${other.name}, the healer who identified the outbreak first,`;
+    expect(composeCrisisPage(s)[0].hook).toContain(named);
+    const vm = JSON.stringify(buildViewModel({ settlement: s }));
+    expect(vm).toContain(named);
+    expect(vm.includes(`${engine.name}, the healer who identified`)).toBe(false); // anchored: the edited name is asserted present on the line above
   });
 
   it('a calm place stores no crisis hook and collects none', () => {
