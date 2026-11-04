@@ -169,11 +169,13 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 68,874 -> 68,904 (386/378/372 -> 384/376/372) at TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-06-terrain-pools-1.json).
     // Towns unmoved at 516/3/3/3.
+    // 68,904 -> 67,944 (384/376/372 -> 378/370/366) at SELF-VOUCH (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-08-self-vouch.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 68_904, towns: 516 },
-      'gm-seed-a': { cells: 384, towns: 3 },
-      'gm-seed-b': { cells: 376, towns: 3 },
-      'gm-seed-c': { cells: 372, towns: 3 },
+      'golden-master-v3': { cells: 67_944, towns: 516 },
+      'gm-seed-a': { cells: 378, towns: 3 },
+      'gm-seed-b': { cells: 370, towns: 3 },
+      'gm-seed-c': { cells: 366, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
