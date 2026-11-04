@@ -465,8 +465,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // so 762 are swept here. A sweep that stopped finding pools would satisfy the list above
     // by being empty, which is the failure mode this pair of floors exists to refuse.
     // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
-    expect(poolsChecked).toBeGreaterThanOrEqual(730);
-    expect(draws).toBeGreaterThanOrEqual(730 * 2 * SWEEP_SEEDS.length);
+    // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
+    expect(poolsChecked).toBeGreaterThanOrEqual(716);
+    expect(draws).toBeGreaterThanOrEqual(716 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {
@@ -481,7 +482,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     expect(causal.length).toBeGreaterThanOrEqual(78);
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
     // F10 WALLS-WORD (2026-11-04) added the `walls` fact dimension; no causal arm spells either word.
-    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored', 'walls', 'no walls']);
+    // F12 CRISIS-BLIND (2026-11-04) added the five crisis fact dimensions; no causal arm spells any of their words.
+    expect(vocabulary).toEqual(['minor', 'major', 'catastrophic', 'deficit', 'no deficit', 'anchored', 'not anchored', 'walls', 'no walls',
+      'threat', 'no threat', 'hunger', 'no hunger', 'succession open', 'succession settled', 'unrest', 'no unrest', 'crisis', 'no crisis']);
   });
 });
 

@@ -208,8 +208,16 @@ export function variantIsAudible(variant, audience) {
  * pool that names walls is unreadable to a caller who has not asked whether walls stand —
  * the same fail-closed law, aimed at the defence-words class.
  *
+ * ⭐ THE FIVE CRISIS DIMENSIONS ARE FACT DIMENSIONS TOO (F12 CRISIS-BLIND PROSE, rung 2,
+ * 2026-11-04). A variant that asserts a calm an active crisis denies ("Nothing presses the
+ * town", "the succession question is not a live one") carries the family's `no …` word; a
+ * crisis-safe variant carries the crisis word. Every desk answers all five at its entry from
+ * the one crisis reader (`crisis/crisisFacts.js :: crisisAnswered`, the stress record): a
+ * calm line is unreadable to a caller that has not asked which crises are on.
+ *
  * @enforced-by tests/data/dossierStateProseProjection.contract.test.js
  * @enforced-by tests/domain/wallsWordDossierProse.test.js
+ * @enforced-by tests/domain/crisisBlindDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const STATE_MARK_DIMENSIONS = Object.freeze({
@@ -217,6 +225,11 @@ export const STATE_MARK_DIMENSIONS = Object.freeze({
   deficit: Object.freeze(['deficit', 'no deficit']),
   anchor: Object.freeze(['anchored', 'not anchored']),
   walls: Object.freeze(['walls', 'no walls']),
+  threat: Object.freeze(['threat', 'no threat']),
+  hunger: Object.freeze(['hunger', 'no hunger']),
+  succession: Object.freeze(['succession open', 'succession settled']),
+  unrest: Object.freeze(['unrest', 'no unrest']),
+  crisis: Object.freeze(['crisis', 'no crisis']),
 });
 
 /**
