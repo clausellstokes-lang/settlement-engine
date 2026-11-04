@@ -9,6 +9,11 @@ import { join } from 'node:path';
 
 import { KIND_OF, OWNER_BANDS, CHAIR_READINGS } from './checks.mjs';
 import { CHAINS } from './chains.mjs';
+import { dependence } from './dependence-measures.mjs';
+import { secondPass } from './dependence.mjs';
+import { pairwiseRepeat, sourcePoolOf } from './prose.mjs';
+import { bandReadings } from './bands.mjs';
+import { REPO_ROOT } from './renderHarness.mjs';
 
 const TIERS = ['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis'];
 const KIND_NAMES = ['none', 'food', 'faith', 'magic', 'defence', 'rulers', 'repetition', 'unnamed', 'small-as-town'];
@@ -30,47 +35,7 @@ function* shardLines(out) {
 const q = (sorted, p) => (sorted.length ? sorted[Math.min(sorted.length - 1, Math.max(0, Math.round(p * (sorted.length - 1))))] : null);
 const r3 = (x) => (x == null || !Number.isFinite(x) ? x : Math.round(x * 1000) / 1000);
 
-// ── dependence measures
-function ranks(xs) {
-  const idx = xs.map((x, k) => [x, k]).sort((a, b) => a[0] - b[0]);
-  const r = new Array(xs.length);
-  for (let a = 0; a < idx.length;) { let b = a; while (b + 1 < idx.length && idx[b + 1][0] === idx[a][0]) b += 1; const avg = (a + b) / 2; for (let k = a; k <= b; k += 1) r[idx[k][1]] = avg; a = b + 1; }
-  return r;
-}
-function pearson(x, y) {
-  const n = x.length; let mx = 0; let my = 0; for (let k = 0; k < n; k += 1) { mx += x[k]; my += y[k]; } mx /= n; my /= n;
-  let sxy = 0; let sxx = 0; let syy = 0; for (let k = 0; k < n; k += 1) { const a = x[k] - mx; const b = y[k] - my; sxy += a * b; sxx += a * a; syy += b * b; }
-  return sxx && syy ? sxy / Math.sqrt(sxx * syy) : 0;
-}
-export const spearman = (x, y) => pearson(ranks(x), ranks(y));
-/** Bias-corrected Cramér's V (Bergsma 2013). */
-export function cramersV(a, b) {
-  const n = a.length; const ta = new Map(); const tb = new Map(); const tab = new Map();
-  for (let k = 0; k < n; k += 1) { ta.set(a[k], (ta.get(a[k]) || 0) + 1); tb.set(b[k], (tb.get(b[k]) || 0) + 1); const key = `${a[k]}\u0000${b[k]}`; tab.set(key, (tab.get(key) || 0) + 1); }
-  const r = ta.size; const c = tb.size; if (r < 2 || c < 2) return 0;
-  let chi = 0;
-  for (const [va, na] of ta) for (const [vb, nb] of tb) { const e = (na * nb) / n; const o = tab.get(`${va}\u0000${vb}`) || 0; chi += ((o - e) ** 2) / e; }
-  const phi2 = chi / n; const phi2c = Math.max(0, phi2 - ((r - 1) * (c - 1)) / (n - 1));
-  const rc = r - ((r - 1) ** 2) / (n - 1); const cc = c - ((c - 1) ** 2) / (n - 1);
-  const d = Math.min(rc - 1, cc - 1); return d > 0 ? Math.sqrt(phi2c / d) : 0;
-}
-/** Correlation ratio η of a numeric on a categorical (for a binary, |point-biserial|), on ranks. */
-export function eta(cat, num) {
-  const r = ranks(num); const n = r.length; const m = r.reduce((s, x) => s + x, 0) / n; const g = new Map();
-  for (let k = 0; k < n; k += 1) { const e = g.get(cat[k]) || [0, 0]; e[0] += r[k]; e[1] += 1; g.set(cat[k], e); }
-  if (g.size < 2) return 0;
-  let between = 0; for (const [s, c] of g.values()) between += c * ((s / c - m) ** 2);
-  let total = 0; for (const x of r) total += (x - m) ** 2;
-  return total ? Math.sqrt(between / total) : 0;
-}
-
-/** One relationship between two columns, by their kinds. */
-export function dependence(x, y) {
-  const nx = x.every((v) => typeof v === 'number'); const ny = y.every((v) => typeof v === 'number');
-  if (nx && ny) return { measure: 'spearman', value: spearman(x, y) };
-  if (!nx && !ny) return { measure: 'cramersV', value: cramersV(x.map(String), y.map(String)) };
-  return nx ? { measure: 'eta', value: eta(y.map(String), x) } : { measure: 'eta', value: eta(x.map(String), y) };
-}
+export { spearman, cramersV, eta, dependence } from './dependence-measures.mjs';
 
 export function aggregate(out, meta) {
   const rows = [];
@@ -79,6 +44,7 @@ export function aggregate(out, meta) {
   const fBuf = []; const sBuf = [];
   const flush = () => { if (fBuf.length) appendFileSync(join(out, 'findings.jsonl'), fBuf.splice(0).join('')); if (sBuf.length) appendFileSync(join(out, 'settlements.jsonl'), sBuf.splice(0).join('')); };
   const sentenceTowns = new Map(); const sentenceText = {};
+  const storyText = {}; const storyRows = [];
   const fieldVals = new Map(); // path → array per row index (sparse)
   const cats = new Map(); // path → tier → value → count
   const classes = new Map();
@@ -97,6 +63,8 @@ export function aggregate(out, meta) {
     sBuf.push(`${JSON.stringify({ i: row.i, seed: row.seed, tier: row.tier, population: row.population, stressCell: row.stressCell, matrix: row.matrix, hashes: row.hashes, rendered: row.rendered, replay: row.replay, error: row.error ?? null, findingCount: (row.findings || []).length, checks })}\n`);
     for (const h of row.sentences || []) sentenceTowns.set(h, (sentenceTowns.get(h) || 0) + 1);
     Object.assign(sentenceText, row.texts || {});
+    Object.assign(storyText, row.storyTexts || {});
+    if (row.rendered && row.story) { const items = row.story.items || []; storyRows.push({ seed: row.seed, tier: row.tier, items, exact: items.map((x) => x[0]), skel: [...new Set(items.map((x) => x[1]))], hooks: row.story.hooks || [] }); }
     const scalars = { ...(row.features?.scalars || {}), ...(row.chains || {}) };
     for (const [p, v] of Object.entries(scalars)) { if (v === null || v === undefined) continue; let a = fieldVals.get(p); if (!a) { a = []; fieldVals.set(p, a); } a[k] = v; }
     for (const [p, vs] of Object.entries(row.features?.cats || {})) { const byT = cats.get(p) ?? {}; const t = (byT[row.tier] ??= {}); for (const [v, n] of Object.entries(vs)) t[v] = (t[v] || 0) + n; cats.set(p, byT); }
@@ -150,6 +118,12 @@ export function aggregate(out, meta) {
   });
   writeFileSync(join(out, 'aggregates', 'chains.json'), `${JSON.stringify(chainRows, null, 1)}\n`);
 
+  // ── every field by tier with the owner's bands marked where they exist (bands.mjs)
+  const banded = bandReadings(fields, col, tierOf);
+  for (const r of banded.rows) { const f = fields.find((x) => x.path === r.path); if (f) f.band = { name: r.band, source: r.source, byTier: Object.fromEntries(Object.entries(r.byTier).map(([t, b]) => [t, { band: b.band, medianInside: b.medianInside, outsideShare: b.outsideShare }])) }; }
+  writeFileSync(join(out, 'aggregates', 'fields.json'), `${JSON.stringify(fields)}\n`);
+  writeFileSync(join(out, 'aggregates', 'field-bands.json'), `${JSON.stringify(banded, null, 1)}\n`);
+
   // ── the dependence scan over all pairs of reasonable cardinality
   const cand = [];
   for (const f of fields) {
@@ -162,6 +136,7 @@ export function aggregate(out, meta) {
   const family = (p) => p.replace(/^chain\./, 'chain:').split(/[.[:]/).slice(0, 2).join('.');
   const cols = cand.map((p) => { const a = col(p); return a; });
   const pairs = [];
+  const rawPairs = new Map();
   for (let u = 0; u < cand.length; u += 1) {
     for (let v = u + 1; v < cand.length; v += 1) {
       if (family(cand[u]) === family(cand[v])) continue;
@@ -169,11 +144,21 @@ export function aggregate(out, meta) {
       for (let k = 0; k < N; k += 1) if (A[k] !== undefined && B[k] !== undefined) keep.push(k);
       if (keep.length < N * 0.5) continue;
       const d = dependence(keep.map((k) => A[k]), keep.map((k) => B[k]));
+      rawPairs.set(`${cand[u]}\u0000${cand[v]}`, d.value);
       if (Math.abs(d.value) >= 0.5) pairs.push({ a: cand[u], b: cand[v], measure: d.measure, value: r3(d.value), n: keep.length, seeds: keep.slice(0, 3).map((k) => rows[k].seed) });
     }
   }
   pairs.sort((x, y) => Math.abs(y.value) - Math.abs(x.value));
   writeFileSync(join(out, 'aggregates', 'dependence-strong.json'), `${JSON.stringify({ candidates: cand.length, strongPairs: pairs.length, pairs: pairs.slice(0, 2000) })}\n`);
+
+  // ── the second pass: within tier, copies apart, the chains on the residual (dependence.mjs)
+  const second = secondPass({ cand, col, tierOf, seeds: rows.map((r) => r.seed), chains: CHAINS, rawPairs });
+  writeFileSync(join(out, 'aggregates', 'dependence-residual.json'), `${JSON.stringify({
+    candidates: cand.length, residualPairs: second.residualPairs.length, copies: second.copies.length,
+    surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length,
+    surprisesAList: second.surprisesA.slice(0, 5000), surprisesBList: second.surprisesB,
+    chainsResidual: second.chainsResidual, copiesList: second.copies.slice(0, 2000),
+  })}\n`);
 
   // ── repetition across the corpus
   const rendered = rows.filter((r) => r.rendered);
@@ -191,6 +176,30 @@ export function aggregate(out, meta) {
   };
   writeFileSync(join(out, 'aggregates', 'repetition.json'), `${JSON.stringify(repetition, null, 1)}\n`);
 
+  // ── repetition, prose only (prose.mjs: the surface filter and the audit's pairwise figure)
+  const pw = (key) => { const r = pairwiseRepeat(storyRows.map((x) => ({ seed: x.seed, tier: x.tier, sentences: x[key] || [] }))); return { all: r3(r.all), sameTier: r3(r.sameTier), maxSameTier: r3(r.maxSameTier), maxPair: r.maxPair, byTier: Object.fromEntries(Object.entries(r.byTier).map(([t, v]) => [t, r3(v)])), towns: r.towns }; };
+  const skelTowns = new Map(); for (const x of storyRows) for (const h of x.skel || []) skelTowns.set(h, (skelTowns.get(h) || 0) + 1);
+  const storyTowns = storyRows.length;
+  const sharedSkel = [...skelTowns].filter(([, n]) => n >= Math.max(3, storyTowns * 0.1)).sort((a, b) => b[1] - a[1]);
+  const perTownStory = storyRows.map((x) => { const n = (x.skel || []).length; return { tier: x.tier, n, shared: n ? (x.skel.filter((h) => (skelTowns.get(h) || 0) >= Math.max(3, storyTowns * 0.1)).length / n) : 0 }; });
+  const medianOf = (xs) => r3(q(xs.slice().sort((a, b) => a - b), 0.5));
+  // The tabs' own copy: a widely shared skeleton whose words live in a tab component's JSX
+  // (src/components/), not in a pool or a generator. Set aside by its SOURCE, then re-measured.
+  const sources = new Map(sharedSkel.map(([h]) => [h, storyText[h] ? sourcePoolOf(storyText[h].s, REPO_ROOT) : null]));
+  const chrome = new Set(sharedSkel.filter(([h]) => sources.get(h)?.file?.startsWith('src/components/')).map(([h]) => h));
+  for (const x of storyRows) x.story = x.items.filter(([, h]) => !chrome.has(h)).map(([e]) => e);
+  const prose = {
+    chromeSkeletons: [...chrome].map((h) => ({ skeleton: storyText[h]?.s ?? '', towns: skelTowns.get(h), source: sources.get(h) })),
+    definition: 'story sentences: <p> at body size (≥ 12px or unset) on the 20 screen tabs and the Tonight sheet; complete sentences of ≥ 6 words; word for word after normalizeRenderedSentence (prose.mjs)',
+    towns: storyTowns,
+    medianStorySentencesPerTown: medianOf(storyRows.map((x) => (x.exact || []).length)),
+    exact: pw('exact'), story: pw('story'), skeleton: pw('skel'), hooks: pw('hooks'),
+    distinctSkeletons: skelTowns.size, skeletonsInTenPercent: sharedSkel.length,
+    medianShareOfTownInTenPercentSkeletons: medianOf(perTownStory.map((x) => x.shared)),
+    top: sharedSkel.slice(0, 40).map(([h, n]) => ({ towns: n, rate: r3(n / storyTowns), tab: storyText[h]?.tab ?? '', skeleton: storyText[h]?.s ?? '', chrome: chrome.has(h), source: sources.get(h) ?? null })),
+  };
+  writeFileSync(join(out, 'aggregates', 'repetition-prose.json'), `${JSON.stringify(prose, null, 1)}\n`);
+
   // ── STOP / CLIMB (the chair's stop rule)
   const reasons = [];
   for (const c of classRows) {
@@ -201,7 +210,7 @@ export function aggregate(out, meta) {
     else if (c.kind === 0 && c.rate > 0.01) reasons.push(`wording: ${c.check} at ${c.rate}`);
   }
   const verdict = reasons.length ? 'STOP' : 'CLIMB';
-  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
+  const summary = { ...meta, settlements: N, rendered: towns, errors, findings: classRows.reduce((s, c) => s + c.occurrences, 0), classes: classRows.length, fieldsWalked: fieldVals.size, fieldsReported: fields.length, fieldsExcluded: excluded, dependenceCandidates: cand.length, strongCrossFamilyPairs: pairs.length, mediansOutsideBands: banded.outside.map((x) => `${x.path} ${x.tier} ${x.median} (band ${x.low}–${x.high})`), proseRepetition: { storyPairwise: prose.story.all, storySameTier: prose.story.sameTier, exactPairwise: prose.exact.all, exactSameTier: prose.exact.sameTier, hooksPairwise: prose.hooks.all, skeletonsInTenPercent: prose.skeletonsInTenPercent }, residual: { pairs: second.residualPairs.length, copies: second.copies.length, surprisesA: second.surprisesA.length, surprisesB: second.surprisesB.length }, verdict, reasons, chairReadings: CHAIR_READINGS, bands: OWNER_BANDS };
   writeFileSync(join(out, 'run.json'), `${JSON.stringify(summary, null, 1)}\n`);
   return summary;
 }
