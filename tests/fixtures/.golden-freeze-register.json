@@ -824,7 +824,7 @@
       "suite": "tests/property/dossierProseManifest.test.js",
       "recordEnv": null,
       "proofForm": null,
-      "sha256": "d4886145d0dcedb386be34fdb8bb0f48033a08a7f8f88e5e8fba2d4a14858bd9",
+      "sha256": "961cd01dff80733c112c23975135fd07e91c8c04aef30514c0c1e291b6aab820",
       "rows": 2,
       "seedSet": null,
       "distinctFloor": null,
