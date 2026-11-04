@@ -124,6 +124,7 @@ function availableServiceIdentityKey(service) {
  *     magicFunctions:()=>boolean,
  *     allowsInstitution:(institution:unknown)=>boolean,
  *     allowsService:(service:unknown,provider?:unknown,category?:string)=>boolean,
+ *     portKind?:'maritime'|'river'|'none',
  *   },
  * }} input
  * @returns {{criminalEffective:number,seen:Set<string>}}
@@ -144,6 +145,8 @@ export function materializeInstitutionServiceRolls(input) {
   const ambiguousDefinitionKeys = new Set();
   const mergedOpts = Object.assign({}, opts, {
     _tradeRoute: config._tradeRoute || '',
+    // A-11: the world law's water fact, for a row that names its inland alternative.
+    _waterAccess: worldLaw.portKind || '',
   });
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);

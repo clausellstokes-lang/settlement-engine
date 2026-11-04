@@ -41,6 +41,26 @@ import { isCategoryEnabled as sharedIsCategoryEnabled } from '../categoryToggleR
 import { institutionToggleFor } from '../institutionToggleReader.js';
 import { threatDefensePlan } from '../threatDefensePolicy.js';
 import { UPGRADE_CHAINS } from '../../data/institutionLadders.js';
+/** A description that says a settlement builds, sells or supplies ships (A-11). */
+const SHIP_WORD = /\bships?\b/i;
+
+/**
+ * A row's ship-free description where the water fact is 'none' (chair ruling, round 3, 3b): the
+ * catalog text and its authored variants (`${tier}|${category}|${name}`), ship-free ones only,
+ * picked draw-free by the same hash; a pool with none keeps the row's text. For rows added
+ * after the variant pick (the cascade), which never met the pool.
+ * @param {{ desc?: unknown, category?: unknown, name?: unknown }} inst
+ * @param {string} tier
+ * @param {unknown} seed
+ * @returns {string|undefined}
+ */
+export function shipFreeDesc(inst, tier, seed) {
+  const desc = typeof inst?.desc === 'string' ? inst.desc : undefined;
+  if (!desc || !SHIP_WORD.test(desc)) return desc;
+  const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`] || [];
+  const dry = [desc, ...variants].filter((text) => !SHIP_WORD.test(text));
+  return dry.length ? pickVariant(dry, `${seed}:${inst.name}`) : desc;
+}
 
 // Compatibility export: callers historically imported the table from this
 // step module. The single writer now lives in the side-effect-free data leaf.
@@ -860,7 +880,12 @@ registerStep('assembleInstitutions', {
     if (inst.isCustom || inst.source === 'custom' || !inst.desc) continue;
     const variants = INSTITUTION_DESC_VARIANTS[`${tier}|${inst.category}|${inst.name}`];
     if (variants && variants.length) {
-      inst.desc = speakTierNoun(pickVariant([inst.desc, ...variants], `${ctx._seed}:${inst.name}`), tierNounFor(tier));
+      // A-11 (soak 1000 row 7, chair ruling 4b): where the world law's water fact is 'none',
+      // a variant that speaks of ships yields to its pool's ship-free variants; a pool with
+      // none keeps every variant (no sentence is authored here). Still draw-free.
+      const pool = [inst.desc, ...variants];
+      const dry = worldLaw.portKind === 'none' ? pool.filter((desc) => !SHIP_WORD.test(desc)) : pool;
+      inst.desc = speakTierNoun(pickVariant(dry.length ? dry : pool, `${ctx._seed}:${inst.name}`), tierNounFor(tier));
     }
   }
 

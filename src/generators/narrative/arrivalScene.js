@@ -71,6 +71,8 @@ export const ROUTE_TO_SCENE = Object.freeze({
 export const MARKET_INSTITUTION_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
 /** The words a SIGHT line uses to say there is a market. */
 const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
+/** The words a line uses to say a catch is being dried on racks (A-11): the place has water. */
+const CATCH_RACK_WORD = /\bracks of drying fish\b/i;
 
 /**
  * Whether the live roster carries a market-class institution, by DS-GEN-13's rule.
@@ -232,7 +234,12 @@ export function composeArrivalScene(settlement) {
   // that drew such a line over a market-less roster redraws from its own pool's other lines. The redraw happens ONLY
   // on that contradiction, so no other settlement's draw moves.
   const marketHeld = holdsMarket(institutions);
-  const speaks = (/** @type {string} */ line) => marketHeld || !MARKET_WORD.test(line);
+  // A-11 (soak 1000 row 7): the drying racks of a catch only where the world law's water fact
+  // (`portKind`, from `config.terrainType` / `config.tradeRouteAccess`) gives a catch; inland the
+  // beat redraws from its own pool's other lines, by the same one-redraw rule as the market.
+  const waterHeld = resolveGenerationWorldLaw(null, config)?.portKind !== 'none';
+  const speaks = (/** @type {string} */ line) => (marketHeld || !MARKET_WORD.test(line))
+    && (waterHeld || !CATCH_RACK_WORD.test(line));
   /**
    * One beat's line from a pool of name-templates, redrawn once from the lines that agree where the first draw
    * names a market the roster lacks; null when no line of the pool agrees.

@@ -10,7 +10,7 @@
 import { registerStep } from '../pipeline.js';
 import { applyCascadeInstitutions } from '../cascadeGenerator.js';
 import { applySubsumption } from './subsumptionPass.js';
-import { collapseUpgradeChains } from './assembleInstitutions.js';
+import { collapseUpgradeChains, shipFreeDesc } from './assembleInstitutions.js';
 import { recordTrace } from '../../domain/trace.js';
 import {
   nativeSemanticName,
@@ -48,6 +48,8 @@ registerStep('cascadePass', {
     population: typeof population === 'number' ? population : null,
   });
   if (cascadeAdditions.length > 0) {
+    // A-11 (chair ruling, round 3, 3b): an added row takes its ship-free text inland.
+    if (worldLaw.portKind === 'none') for (const add of cascadeAdditions) add.desc = shipFreeDesc(add, tier, ctx._seed);
     institutions.push(...cascadeAdditions);
 
     // Tier 2.1 — emit a trace per cascade addition. Cascade additions

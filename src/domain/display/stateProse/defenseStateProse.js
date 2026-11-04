@@ -106,6 +106,7 @@ import {
 import { composeStateProse } from './composeStateProse.js';
 import { defenseStateProseCandidates } from './defenseStateProseCandidates.js';
 import { legibilityRung } from './legibilityRung.js';
+import { waterAccessKind } from '../../tradeRouteSemantics.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -1492,6 +1493,13 @@ export function navalDefensePoolKey(navy, port, blockaded) {
   return navy ? 'Naval Defense: Naval force' : 'Naval Defense: Port only';
 }
 
+/** @param {any} settlement @returns {boolean} the record's own config says there is no water */
+const dryRecord = (settlement) => {
+  const config = settlement?.config;
+  if (!config || typeof config !== 'object') return false;
+  return waterAccessKind(config.terrainType, config.tradeRouteAccess) === 'none';
+};
+
 /**
  * THE SUPPORTING-CAPABILITIES DESK — DS-DEF-6's two speaking lenses at ONE position.
  *
@@ -1504,7 +1512,7 @@ export function navalDefensePoolKey(navy, port, blockaded) {
  * liveness drops that one variant and the pool speaks through the two that never named it.
  * Refusing a fill is the designed behaviour — the `{defwork}` precedent, one block over.
  *
- * @param {{name?: string, config?: {tradeRouteAccess?: unknown}|null,
+ * @param {{name?: string, config?: {tradeRouteAccess?: unknown, terrainType?: unknown}|null,
  *   economicState?: {compound?: {inst?: Record<string, unknown>}|null,
  *   foodSecurity?: {stockpile?: {blockaded?: unknown}|null}|null}|null}|null|undefined} settlement
  * @param {{seed?: string, audience?: string, tierNoun?: string|null}} [options]
@@ -1530,8 +1538,11 @@ export function defenseSupportingProse(settlement, options = {}) {
     // is printed once, in months, on the Economy tab. The logistics lens IS the granary read, so
     // it is not drawn here; `supplyLogisticsPoolKey` and its pools stand, unread by this desk.
     logistics: null,
+    // A-11 (chair ruling, round 4, 2): a harbour only where the water fact gives one. The airship
+    // override seats aerial docks in a dry city, which set `hasPort`; the port flag now also needs
+    // `waterAccessKind` not 'none' (a record with no config reads as before).
     naval: rung(navalDefensePoolKey(
-      civicFlag(compound.hasNavy), civicFlag(compound.hasPort),
+      civicFlag(compound.hasNavy), civicFlag(compound.hasPort) && !dryRecord(settlement),
       stockpile ? stockpile.blockaded === true : false,
     )),
   });

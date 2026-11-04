@@ -14,9 +14,8 @@ import { nativeSemanticName } from '../../domain/content/customContentSemanticAu
 import { resolveNativeEconomicInputs } from './nativeEconomicInputs.js';
 import { applyFinishedGoodsDemandWithOwnership, applySubsistenceTradeBoundary,
   deriveEarlyTradeOwnership, normalizeFinalTradeLists, restoreStageFiveTrade } from './customTradeEndpointIntegration.js';
-import {
-  resolveGenerationContentProfile,
-} from '../../domain/generationContentProfile.js';
+import { resolveGenerationContentProfile } from '../../domain/generationContentProfile.js';
+import { hasWaterAccessInstitution } from '../../domain/spatial/seaLanes.js';
 import { resourceShortageImport } from '../../domain/resourceSemantics.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { applyNeighbourEconomicBias } from './neighbourEconomicBias.js';
@@ -477,7 +476,8 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
           return exp.includes('fish') || exp.includes('herring');
         })) &&
       !hasIncomeSource('fish') &&
-      !hasIncomeSource('maritime')
+      // A-11: a catch lands only from water — the world law's, or a fishing landing on the roster (not aerial docks, not inland salt).
+      !hasIncomeSource('maritime') && (generationWorldLaw.portKind !== 'none' || hasWaterAccessInstitution((institutions || []).filter((i) => /\bfish/i.test(nativeSemanticName(i) || ''))))
     ) {
       incomeBuild.push({
         source: generationWorldLaw.supportsMaritime()

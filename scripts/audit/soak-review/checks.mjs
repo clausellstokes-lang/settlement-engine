@@ -61,6 +61,60 @@ export const sentencesOf = (text) => String(text || '').split(SENTENCE_SPLIT).ma
 const WATER_TERRAINS = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
 const SEA_WORDS = /\b(?:harbou?r|fish(?:ing|ermen|erman|monger)?s?|fish market|ship(?:s|wright|yard|ping)?|docks?|wharf|wharves|quays?|fleet|sailors?|boats?)\b/i;
 
+/**
+ * Fish the catalog designs for an inland place (chair ruling 4a/4c, 2026-11-04; round 3, 3a/3c):
+ * the salted, salt-cured, dried, smoked or pickled trade, the Fish market's and the Fishmonger's
+ * own names (the catalogue designs both inland: "the week's salted barrels"; "inland, dried or
+ * salted"), and — where the record itself imports fish
+ * (`resourceAnalysis.imports.critical`) — the bare "Fish" item of a goods list. Licensed text is
+ * removed before the sea words are read.
+ */
+const INLAND_FISH = /\b(?:preserved|salted|salt-cured|salt|dried|smoked|pickled)[ -]fish\b|\bfish market\b|\bfishmonger\b/gi;
+const LISTED_FISH = /\bFish\b(?= [A-Z]|$)/g;
+/** A disjunction naming the harbour as one route among others is no claim of one (round 4, 2). */
+const ROUTE_DISJUNCTION = /\b(?:by )?(?:road|land|river) or (?:by )?(?:harbou?r|sea|port)\b/gi;
+// Round 4, 4: the airship docks' own service texts ("between ship and shore", "harbour approaches").
+const AIRSHIP_PORT = /\b(?:docks?(?:\/port facilities)?|port facilities|harbou?r master(?:'s|’s)?(?: office)?|berths?|anchorage|(?:between )?ship and shore|harbou?r approach(?:es)?)\b/gi;
+
+/**
+ * A-11's sentence: the first screen sentence that speaks of sea or catch, after the inland
+ * fish trade is licensed.
+ * @param {string[]} sentences
+ * @param {any} s the record
+ * @returns {string|undefined}
+ */
+export function seaWordSentence(sentences, s) {
+  const importsFish = (s?.resourceAnalysis?.imports?.critical || []).map((x) => String(x).toLowerCase()).includes('fish');
+  // Chair ruling (round 3, 1): where the record holds airship docking, the cascade's override
+  // (src/generators/steps/cascadePass.js) admits aerial docks and a harbour master's office
+  // regardless of route; their words are not sea words there.
+  const airship = (s?.institutions || []).some((i) => /airship/i.test(String(i?.name || '')));
+  // Round 4 (final), 1: a description that says in its own words that inland its fish is dried
+  // or salted is designed inland text; every sentence of it is licensed.
+  const inlandText = new Set((s?.institutions || [])
+    .map((i) => String(i?.desc || ''))
+    .filter((desc) => /\binland\b[^.]*\b(?:dried|salted)\b/i.test(desc))
+    .flatMap((desc) => sentencesOf(desc)));
+  return sentences.find((x) => {
+    if (inlandText.has(x)) return false;
+    let text = x.replace(INLAND_FISH, '').replace(ROUTE_DISJUNCTION, '');
+    if (importsFish) text = text.replace(LISTED_FISH, '');
+    if (airship) text = text.replace(AIRSHIP_PORT, '');
+    return SEA_WORDS.test(text);
+  });
+}
+
+/**
+ * A-05's sentence: a spectacle held HERE (chair ruling 1, 2026-11-04) — gladiatorial combat,
+ * games or fights. A Gladiatorial school's own rows ("Gladiator hire", "Gladiator training")
+ * feed the regional arena circuit and are not counted.
+ * @param {string[]} sentences
+ * @returns {string|undefined}
+ */
+export function arenaSpectacleSentence(sentences) {
+  return sentences.find((x) => /\bgladiatorial (?:combat|games|fights?)\b/i.test(x));
+}
+
 /** Does the place have water a boat or a net could use? */
 function hasWater(s, config) {
   const terrain = String(s?.config?.terrainType ?? s?.terrain ?? config?.terrainOverride ?? s?.resourceAnalysis?.terrain ?? '');
@@ -169,7 +223,7 @@ export function reviewSettlement(s, config, r) {
   const instNames = (s.institutions || []).map((i) => String(i?.name || '').toLowerCase()).join(' | ');
   const hosp = sentencesOf(screenText).find((x) => /\bHospital present\b/i.test(x));
   if (hosp && !/hospital/.test(instNames)) add('A-05:hospital-absent', 'screen', hosp);
-  const arena = sentencesOf(screenText).find((x) => /gladiator/i.test(x));
+  const arena = arenaSpectacleSentence(sentencesOf(screenText));
   if (arena && !/arena|amphithea|colosse|fighting pit/.test(instNames)) add('A-05:arena-absent', 'screen', arena);
   const lacks = (screenText.match(/exists but lacks access to/g) || []).length;
   if (lacks) add('A-05:lacks-access-lines', 'screen', '', `${lacks} lines`);
@@ -198,7 +252,7 @@ export function reviewSettlement(s, config, r) {
 
   // ── A-11: sea words where there is no water
   if (!hasWater(s, config)) {
-    const sea = sentencesOf(screenText).find((x) => SEA_WORDS.test(x));
+    const sea = seaWordSentence(sentencesOf(screenText), s);
     if (sea) add('A-11:sea-words-landlocked', 'screen', sea);
   }
 

@@ -220,7 +220,7 @@ export const getBaseChance = (
   // P3 (MF-CH2B): the exotic scaler. Same seam as P1 — the licence decides for a catalog
   // row, the shelf is the non-catalog fallback. The old name-exemption list for the two
   // "geographical, not magical" exotics is gone with the shelf test it existed to patch:
-  // `Dragon resident` declares `magicLicense: 'none'` and needs no exemption, and its
+  // `Dragon resident` declares its licence (`high` since 2026-11-04) and needs no exemption, and its
   // other member `'underground city'` was INERT — no catalog row of that name sits on a
   // Magic or Exotic shelf, so the test it exempted from never fired.
   const isMagicOrExoticCategory = declaredLicence !== null ? licensedForMagic

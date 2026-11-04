@@ -1357,6 +1357,12 @@ export const SUPPLY_CHAIN_NEEDS = {
         processingInstitutions: ['Arena', 'Gambling den', 'Gambling halls', 'Gambling district'],
         intermediateGoods: [],
         outputs: ['Games of chance', 'Gladiatorial combat', 'Monster exhibitions', 'Public games'],
+        // A-05 (soak 1000 row 13): the arena's own rows (INSTITUTION_SERVICES['Arena'] /
+        // ['Colosseum/arena']) are printed only where the Arena processor is held; a gambling
+        // den alone printed "Gladiatorial combat" in 188 towns and larger.
+        outputsRequiringProcessor: {
+          Arena: ['Gladiatorial combat', 'Monster exhibitions', 'Public games'],
+        },
         services: ['entertainment'],
         exportable: false,
         entrepot: false,

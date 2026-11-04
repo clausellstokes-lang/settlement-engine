@@ -221,8 +221,11 @@ describe('LAW — the institution catalog\'s authored tag', () => {
     // 'Great library' is filed under the Magic bucket and authored `tags: ['education']`.
     expect(institutionCatalogArcaneTag('Great library')).toBe(ARCANE_IDENTITY.MUNDANE);
     expect(isArcaneInstitution('Great library')).toBe(false);
-    // …and the estate already agreed about this one elsewhere: NON_MAGIC_EXOTICS.
-    expect(isArcaneInstitution('Dragon resident')).toBe(false);
+    // 2026-11-04, X-04 the dragon re-licensed (chair ruling 2: "a dragon is a creature of magic
+    // in this world"): its tags are still mundane, but its declared licence ('high') now outranks
+    // them, as the divine healer's does — so the dragon IS arcane by the licence, not the tag.
+    expect(institutionCatalogArcaneTag('Dragon resident')).toBe(ARCANE_IDENTITY.MUNDANE);
+    expect(isArcaneInstitution('Dragon resident')).toBe(true);
   });
 
   it('the tag reading matches the authored tags for every catalogued institution', () => {

@@ -17,6 +17,7 @@ import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
+import { waterAccessKind } from '../tradeRouteSemantics.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -173,7 +174,7 @@ function composeIdentity(settlement) {
   const article = articleFor(descriptors);
 
   // X-43: the seat of government by its real name, here as on the Overview strip.
-  const phrase = seatIntoPhrase(scopePhrase(cultureKey), settlement);
+  const phrase = seatIntoPhrase(scopePhrase(cultureKey, settlement), settlement);
   if (phrase) {
     return sentence(`${name} is ${article} ${descriptors}${populationPhrase}, ${phrase}`);
   }
@@ -195,7 +196,7 @@ function composeIdentity(settlement) {
  */
 export function cultureScopeLine(settlement) {
   const source = settlement && typeof settlement === 'object' ? settlement : {};
-  const phrase = seatIntoPhrase(scopePhrase(cleanText(source.culturalIdentity?.key)), source);
+  const phrase = seatIntoPhrase(scopePhrase(cleanText(source.culturalIdentity?.key), source), source);
   if (!phrase) return '';
   // `culturalIdentity` only: a second `culture` read would join the writerReach culture class.
   const label = cleanText(source.culturalIdentity?.label);
@@ -530,10 +531,31 @@ const SCOPE_PHRASE = Object.freeze({
  * the function itself would be printed into the reader's first sentence.
  *
  * @param {string} cultureKey
+ * @param {SettlementQuickGuideSource} settlement
  * @returns {string}
  */
-function scopePhrase(cultureKey) {
-  return Object.hasOwn(SCOPE_PHRASE, cultureKey) ? SCOPE_PHRASE[cultureKey] : '';
+function scopePhrase(cultureKey, settlement) {
+  if (!Object.hasOwn(SCOPE_PHRASE, cultureKey)) return '';
+  if (WATERSIDE_SCOPES.has(cultureKey) && isLandlocked(settlement)) return '';
+  return SCOPE_PHRASE[cultureKey];
+}
+
+/**
+ * THE SCOPE PHRASES THAT CLAIM A HARBOUR (soak 1000 row 7, A-11: "Greek-inspired, built around
+ * the agora and the harbour" in 43 landlocked settlements). Such a phrase is printed only where
+ * the record's own water fact (`waterAccessKind` over `config.terrainType` and
+ * `config.tradeRouteAccess`, the world law's rule) says the place has water. Its pool holds no
+ * landlocked alternative, so inland the identity sentence takes the plain form (chair ruling T1:
+ * no fallback). A record with no config is legacy and unread: the phrase stands as it always did.
+ * @type {ReadonlySet<string>}
+ */
+const WATERSIDE_SCOPES = new Set(['greek', 'norse', 'slavic']); // norse "the hall and the water", slavic "between river and forest" (chair ruling 5)
+
+/** @param {SettlementQuickGuideSource} settlement */
+function isLandlocked(settlement) {
+  const config = /** @type {any} */ (settlement)?.config;
+  if (!config || typeof config !== 'object') return false;
+  return waterAccessKind(config.terrainType, config.tradeRouteAccess) === 'none';
 }
 
 /**
