@@ -440,3 +440,70 @@ Nothing of this lane remains but the compose and the atoms above: unit 8's bare 
 1. **`MILITARY_MODIFIER_SIBLINGS` 'garrison-backed'** resolves at the same power step, against the same unsettled garrison (9 of 2,121). It has a twin, so it is not one of the "three twin-less sets" of answer 2. By R-AN it should still be reworded to its twin's wording ("arms-backed"), but the set sits on 1c's `defenceTwinLines.test.js` pins. Reword it here, or is it 1c/1h's?
 2. **`clergy` = priest ∨ sacredHouse** is wanted by two lines (DEVOTION lukewarm v3, ARC rising v3), each declaring `priest` meanwhile. Define it in wave 2 (R-U's demand rule is met)?
 3. **The 250 kept-refused `OUTLOOK_HOOK_SIBLINGS` findings** (`tier: <= village`, `food: ≤ deficit`) make the 1,000 read STOP. Which lane owns their twins or rewords, the food lane or 1h?
+
+# CENSUS-5e — 'garrison-backed' reworded, the two `clergy` lines, unit 8 still waiting (lane record, 2026-11-05)
+
+> A build seat's record for the chair. Same branch, base CENSUS-5d's tip `3aef91c28`. Merged: `origin/lane/census-1b-2026-11-04` at `f1d76057e` (1h: R-AT, R-AU, `clergy` `712ac7694`; a fast-forward), then at `5978662` (1i units 1–3: R-AW, the walker's second half, R-AX refined) as `d5cdedf`. Every merge re-took the wiring census through its door and kept `gen:dossier-prose --check` green. A transport push after every unit; no pull request. **Not landed on 1i's lane at this tip (fetched before each unit and at the record): unit 8 (bare "some crisis").**
+
+## The units
+
+| unit | commit | what |
+|---|---|---|
+| merge | `f1d7605` (ff) | 1h's tip: `clergy`, R-AU, R-AT |
+| 2 (answer 1) | `def7feb` | R-AN / R-U: `MILITARY_MODIFIER_SIBLINGS` dissolves; the town military modifier prints `arms-backed` |
+| 3 (answer 2) | `ba4ea14` | R-AE: DS-FTH-1 DEVOTION lukewarm v3 and ARC rising v3 declare `clergy` (were `priest`) |
+| merge | `d5cdedf` | 1i units 1–3; one conflict (the `rulingStructure.js` import line), resolved without the dissolved set; the walker's channel row for it leaves (`scripts/lib/table-pools.mjs`) |
+| 4 | — | unit 8 not landed: the two "some crisis" lines stay waiting |
+| doc | (this commit) | this record |
+
+## Unit 2 — 'garrison-backed' (the chair's answer 1; R-AN, R-U)
+
+The town's informal military modifier (a town with no governance-named house, military priority 55–65) resolved `garrison-backed` / twin `arms-backed` at the power step against `garrison`, which differs from the final record on 9 of 2,121 steps: not settled there. The set dissolves and the site prints the twin's wording, which presumes nothing about the garrison. No new line. **Pins re-keyed by this cause:** `defenceTwinLines.test.js` (the set leaves `DEFENCE_SIBLINGS`, 11 → 10 keyed lines); at the 1i merge, `DECLARATION_CHANNELS` loses the set's row (the walker holds that list equal to the `*_SIBLINGS` exports). **Moved:** golden 0 of 525 (no configuration reaches the branch); soak records 0 of 1,000 (the branch was reached 21 times, every one in a town with no garrison, which already printed `arms-backed`); the power ledger's drawn count 1,787 → 1,766 (those 21 resolutions are no longer draws). Red-first: `census5eArmsBacked.test.js` 2/2.
+
+## Unit 3 — the two `clergy` lines (the chair's answer 2; R-AE)
+
+| line | was | now |
+|---|---|---|
+| DS-FTH-1 DEVOTION lukewarm v3 "the clergy preach to the same few households" | `priest` | `clergy` |
+| DS-FTH-1 ARC rising v3 "What the clergy record is larger …" | `priest` | `clergy` |
+
+Each line is now admitted where a sacred house stands without a named cleric (refused before), and refused only where both are answered false. Each pool keeps ≥ 2 lines under that refusal, so no twin. **Pin re-keyed by this cause:** `census5dWaitingLines.test.js`'s two rows (mark `clergy`; the refusing record lacks both). **Moved:** golden 0 (display); soak records 0; sampled pages 0 of 60 and 0 of 1,000 (the gain is display-time and fell outside the sampled pages). Wiring census: `lineDeclares` priest 1 → clergy 1 on the two pools. Red-first: `census5eClergyLines.test.js` 2/2.
+
+## The 60 and the 1,000 (R-B: before = 1i's tip `5978662`, i.e. the merged base without this seat's units; after = `d5cdedf`)
+
+| run | settlements · findings · errors · verdict | `coh:*` (incl. `crisis-blind-prose`, `defence-words`, `faith-denial`, `crisis`) | `cert:*` incl. `false-presumption` | other classes | records · sampled pages moved |
+|---|---|---|---|---|---|
+| 60 | 60 · 101 → 101 · 0 · CLIMB → CLIMB | 0 → 0 | 0 → 0 | identical | 0 · 0 |
+| 1,000 | 1,000 · 1,662 → 1,662 · 0 · CLIMB → CLIMB | 0 → 0 | 0 → 0 | identical | 0 · 0 |
+
+Certification holds at 1,000 / 1,000. **`declared-share` (the 1,000):** power 1,787 / 1,787 → 1,766 / 1,766 (1.000; unit 2's 21 dissolved resolutions) · defense 1,494 / 1,494 · tab:threats 89 / 89 · pdf:threats 356 / 356 · tab:dossier 49,970 / 213,123 (0.234), unchanged (DS-FTH / DS-WAR draw through the dossier kernel; a `priest` → `clergy` swap keeps one atom per line). **The undeclared register for the four families (from the census):** DS-DEF 1, DS-POW 2, DS-FTH 1, DS-WAR 0 = **4 lines**, unchanged, every one waiting below.
+
+## Rows moved, by cause (never re-recorded)
+
+- **Golden:** 0 of 525 (units 2 and 3, measured on the corpus before and after each).
+- **Soak records:** 0 of 1,000; 0 of 60.
+- **Generated leaves:** `warFaith` (unit 3), through `gen:dossier-prose` only, `--check` green.
+- **Wiring census:** the two faith pools' `lineDeclares` (unit 3); nothing else after the merge.
+- **Registers:** untouched by this seat (the undeclared count is unchanged; no flag set or dropped). `declarationRegisters.test.js` is red at the base for the compose's re-pin (R-T), not by this seat.
+- **Test pins:** `defenceTwinLines.test.js` 11 → 10; `census5dWaitingLines.test.js` two rows; `DECLARATION_CHANNELS` one row (the walker list).
+- **Governing suites:** unit 3, the 29 files that read the faith leaf: the base's 55 reds title for title, none new. Unit 2 and the merge: the power and walker suites green except the base's `power/` ceiling (821 / 813, unchanged; unit 2 is a one-for-one line edit).
+- **Typecheck / lint:** `typecheck:ratchet` green; `typecheck:domain:strict` red at base and tip with the same two untouched files (`crisisFactFindings.js` +4, `composeStateProse.js` +2); eslint clean on every touched file.
+
+## Waiting (the line is left as it is)
+
+| line | presumes | waiting on |
+|---|---|---|
+| DS-FTH-1 SINK arc rising v1 · DS-DEF-2 Economic Survival STRONG v3 (2 lines) | some crisis (`needs: crisis`, bare, R-I) | CENSUS-1i unit 8, not on `origin/lane/census-1b-2026-11-04` at `5978662` |
+| DS-POW-7 receipt deferred v2 / v3 (2 lines) | the deferral's reason (the cap; an outbid) | "needs a home" |
+| `rulingStructure` "fund the council" · "council access" (2 lines) | a council body | "waiting on council" (R-AE) |
+| `governanceNarrative` the priest baseline lines · `BASELINE_CONFLICT_SIBLINGS` militia captain | priest / militia | "waiting on order" (R-Q), unchanged |
+| cult count ("several"), a cult's own shrine | — | "needs a home" (CULTS, STANDING) |
+
+## Where CENSUS-5f starts
+
+Only unit 8's two lines remain for a seat of this lane: once CENSUS-1i lands unit 8, DS-FTH-1 SINK arc rising v1 and DS-DEF-2 Economic Survival STRONG v3 each take `needs: crisis` in the annex, then `gen:dossier-prose` (a few-minute seat, or the compose's). Everything else is the compose's (the register pins, R-T) or waits on a home.
+
+## Open questions for the chair
+
+1. Four more DS-FTH lines speak of "the clergy" (e.g. "which the clergy find easier to forgive than to fix"; "the clergy have started asking"). CENSUS-5d read them as colour, so they are not this seat's to re-read (R-R). Should they declare `clergy` now that it exists (R-AD: a DM reads "the clergy" as a fact)?
+2. If unit 8 lands after this lane closes, may the compose apply the two `needs: crisis` declarations instead of a CENSUS-5f seat?
