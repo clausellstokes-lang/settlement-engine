@@ -1,0 +1,256 @@
+{
+  "pool": {
+    "id": "npcData.SPEECH_PATTERNS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:324 → hookVariety.js:93 drawUnique",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 30,
+    "declaring": 0,
+    "note": "Speech patterns; every line is colour (#23 'the local traders know the tell' presumes ordinary trade, not a market)."
+  },
+  "rows": [
+    {
+      "id": "#0",
+      "text": "Speaks in short, clipped sentences: every word intentional",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#1",
+      "text": "Verbose and elaborate; takes three sentences where one would do",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#2",
+      "text": "Peppers speech with trade or craft jargon even in unrelated contexts",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#3",
+      "text": "Speaks softly, forcing others to lean in",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#4",
+      "text": "Asks rhetorical questions to make points rather than stating them",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#5",
+      "text": "Uses the formal royal 'we' (old habit from a previous station)",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#6",
+      "text": "Pauses mid-sentence to choose words with visible care",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#7",
+      "text": "Deflects personal questions with philosophical tangents",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#8",
+      "text": "Speaks as if dictating a letter, formal even in crisis",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#9",
+      "text": "Tells anecdotes that never quite reach the point",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#10",
+      "text": "Uses understatement and dry humour as a defence mechanism",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#11",
+      "text": "Defaults to numbers and specifics: 'three days', never 'some days'",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#12",
+      "text": "Refers to past events as though they're common knowledge",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#13",
+      "text": "Uses softening phrases that make every statement sound like a question",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#14",
+      "text": "Swears colourfully but apologises immediately after",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#15",
+      "text": "Speaks in analogies and metaphors, even when clarity would serve better",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#16",
+      "text": "Drops to a near-whisper when saying something important",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#17",
+      "text": "Repeats key words for emphasis: 'The contract. The contract is clear'",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#18",
+      "text": "Addresses strangers formally and familiars by diminutives",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#19",
+      "text": "Uses long pauses as punctuation, sits comfortably in silence",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#20",
+      "text": "Never interrupts, waits out even the longest speaker, then answers the first point only",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#21",
+      "text": "Answers questions with inventories: 'Three reasons. First.'",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#22",
+      "text": "Trails off mid-sentence when approaching something they regret knowing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#23",
+      "text": "Speaks quickly when lying, slowly when bargaining. The local traders know the tell",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#24",
+      "text": "Quotes their own past pronouncements as though citing law",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#25",
+      "text": "Talks to everyone in the room except the person the answer is for",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#26",
+      "text": "Prefaces bad news with elaborate courtesy, good news with none",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#27",
+      "text": "Wields professional titles with surgical precision. Rank omitted is rank denied",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#28",
+      "text": "Says 'as you know' before telling people things they do not know",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#29",
+      "text": "Ends disagreements by restating the other position, slightly wrong",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

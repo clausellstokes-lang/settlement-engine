@@ -19,10 +19,10 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
-import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
+import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
@@ -30,7 +30,7 @@ import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/n
 import { computeRelTension, createTieProseDraw } from './powerGenerator.js';
 import { pickRandom2 } from './helpers.js';
 import { STRESS_INSTITUTION_EFFECTS } from '../data/stressInstitutionEffects.js';
-import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; // F11 / CENSUS-1: one line, so no cited line moves
+import { secretsHeldByFoodRecord } from '../domain/foodSurplus.js'; import { fillSentenceSlots } from './narrativeProse.js'; import { waterAccessKind } from '../domain/tradeRouteSemantics.js'; import { otherNpcOf } from '../domain/facts/otherNpc.js'; import { bareLine } from '../domain/facts/bareLine.js'; // F11 / CENSUS-1 / CENSUS-4b: one line, so no cited line moves
 import {
   MANNERISMS,
   SPEECH_PATTERNS,
@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier }, worldLaw)), birthFactsOf({ institutions, config, tier }, worldLaw)); // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier }, worldLaw))), birthFactsOf({ institutions, config, tier }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -282,7 +282,7 @@ const filterByGuild = (
   const guildInsts = institutions.filter(isCommerceGuild);
   if (!guildInsts.length) return null;
   const guild = pick(guildInsts);
-  const guildName = guild.name.replace(/\s*\(.*?\)/, '').replace(/s'?\s*guild$/i, "s'");
+  const guildName = guildTitleName(guild.name); // CENSUS-4 R9: a singular possessive no longer doubles
   const npc = generateSingleNPC(
     'Guild Master',
     culture,
@@ -472,7 +472,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
     ],
     monster_pressure: [
       {
-        short: 'Organise a response to the attacks without the garrison they were supposed to have',
+        excludes: ['garrison'], short: 'Organise a response to the attacks without the garrison they were supposed to have', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
         long: 'Make this settlement safe enough that people stop leaving',
         driven_by: 'protection',
       },
@@ -535,17 +535,17 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
     ],
     mass_migration: [
       {
-        short: 'Absorb the new arrivals into the labour market before resentment turns to violence',
+        needs: ['migration: influx'], short: 'Absorb the new arrivals into the labour market before resentment turns to violence', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
         long: 'Make the changed settlement work rather than merely survive the change',
         driven_by: 'protection',
       },
       {
-        short: `Corner the ${commodity || 'grain'} and housing the newcomers cannot do without`,
+        needs: ['migration: influx'], short: `Corner the ${commodity || 'grain'} and housing the newcomers cannot do without`, // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
         long: 'Turn the churn of people into a lasting private advantage',
         driven_by: 'wealth',
       },
       {
-        short: 'Decide who is admitted and who is turned away, and be owed for each choice',
+        needs: ['migration: influx'], short: 'Decide who is admitted and who is turned away, and be owed for each choice', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcGenerator.STRESS_GOALS.json)
         long: 'Become the person every arrival and every old family must go through',
         driven_by: 'political',
       },
@@ -777,7 +777,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
-    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } }), ctx: { npc: npcIndex }, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness, as before (§2.2)
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection
     if (effect) return {
       what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
@@ -1167,7 +1167,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
             note: 'Every public appearance is a performance of control. The private meetings are about whether there is still enough control to perform.',
           },
           mil: {
-            short:
+            needs: ['watch'], short:
               'Determine which members of the watch are loyal to the institution and which are loyal to whoever is paying them',
             note: 'An insurgency that has lasted this long has had time to make investments in the security apparatus.',
           },
@@ -1178,7 +1178,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
         },
         mass_migration: {
           gov: {
-            short:
+            needs: ['migration: influx'], short:
               'Manage the influx without the old residents concluding the governing authority has chosen the newcomers over them',
             note: 'The governing faction is caught between two constituencies that want incompatible things, and both know it.',
           },
@@ -1214,7 +1214,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
             note: 'The orders are to restore order. The orders do not specify what order is supposed to look like when this is over.',
           },
           merchant: {
-            short:
+            needs: ['market'], short:
               'Recover the economic loss from the market suspension, or redirect capital away from a labour system that may not survive this in its current form',
           },
         },
@@ -1222,7 +1222,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 
       const stressOverrides = STRESS_GOAL_OVERRIDES[stressType];
       if (stressOverrides) {
-        const override = isGov
+        const looked = isGov
           ? stressOverrides.gov
           : isMil
             ? stressOverrides.mil
@@ -1230,7 +1230,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
               ? stressOverrides.rel
               : isMerchant
                 ? stressOverrides.merchant
-                : null;
+                : null; const override = looked ? resolveDeclared(looked, { facts: () => birthFactsOf({ institutions, config, tier, stress: (config?.stressTypes?.length ? config.stressTypes : [stressType]).map((/** @type {unknown} */ type) => ({ type })) }), poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${stressType}`, surface: 'npcs' }).line : null; // CENSUS-1e unit 2 (T): resolved against CENSUS-4b's declarations and the birth's facts (roster, tier, stresses); a refused override is not applied — the NPC keeps its goal (no twin owed). Draw-free.
         if (override) {
           const facts = factsOf({ institutions }); const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); enriched.goal = { short: spoken(override.short), long: enriched.goal.long || spoken(override.short) }; // F10, CENSUS-1c: NPC_GOAL_SIBLINGS below, draw-free
           if (override.note) enriched.stressNote = spoken(override.note);
@@ -1630,7 +1630,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
       if (seen.has(pairKey)) continue;
       if (_rng() >= score && count > 0) continue;
 
-      const archetype = computeRelTension(npc, partner, stressFlags, instFlags);
+      const archetype = tieArchetype(computeRelTension(npc, partner, stressFlags, instFlags), npc, partner); // CENSUS-4 R3: the tie rule, resolved after the roll
       const strength = pick(RELATIONSHIP_STRENGTHS[archetype.type] || RELATIONSHIP_STRENGTHS.respect);
 
       // The archetype key (for UI rendering) and the tie's prose, drawn without replacement.

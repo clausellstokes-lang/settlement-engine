@@ -1,0 +1,609 @@
+{
+  "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER",
+  "source": "src/data/tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Tier-keyed export table (tradeGoods.js :: getGoodsModifiers): the tier key guarantees the tier; requiredInstitution is an existing engine gate (substring match on native names). Rows declare the producer atom; luxury-class rows also carry the village band (redundant at city/metropolis, kept for the walker).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::thorp.Eggs",
+      "text": "Eggs: Fresh eggs from household chickens",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: poultry"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::thorp.Small game",
+      "text": "Small game: Rabbits, fowl from local hunting",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::thorp.Foraged goods",
+      "text": "Foraged goods: Mushrooms, berries, herbs",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: forager"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Grain surplus",
+      "text": "Grain surplus: Wheat, barley, oats beyond subsistence needs",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Raw wool",
+      "text": "Raw wool: Unprocessed wool from sheep",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Dairy products",
+      "text": "Dairy products: Cheese, butter, milk",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Livestock",
+      "text": "Livestock: Cattle, sheep, pigs for sale",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Honey and beeswax",
+      "text": "Honey and beeswax: Local beekeeping products",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: beekeeper"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Game meat",
+      "text": "Game meat: Venison, boar, rabbit from local hunters",
+      "needs": [
+        "game"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution Hunter's lodge"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Charcoal",
+      "text": "Charcoal: Kiln-fired fuel for smithing and heating",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: charcoal burner"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Malted barley",
+      "text": "Malted barley: Sprouted barley for brewing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: maltster"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Peat fuel",
+      "text": "Peat fuel: Dried peat blocks for domestic fuel",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: peat cutter"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Fresh fish",
+      "text": "Fresh fish: Catch of the day from local waters",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution Fisher's landing (not a docks kind)"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Agricultural surplus",
+      "text": "Agricultural surplus: Grain, wheat, barley in quantity",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Raw wool and hides",
+      "text": "Raw wool and hides: Bulk unprocessed animal products",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Livestock",
+      "text": "Livestock: Cattle, sheep, pigs in regular supply",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Eggs and dairy",
+      "text": "Eggs and dairy: Regular production for market",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Honey and beeswax",
+      "text": "Honey and beeswax: Established beekeeping",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: beekeeper"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Milled flour",
+      "text": "Milled flour: Ground grain for bread-making",
+      "needs": [
+        "institution: mill"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution \"Mill\" matches INSTITUTION_KIND_PATTERNS.mill (the engine substring check also admits \"Access to external mill\")"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Basic metalwork",
+      "text": "Basic metalwork: Horseshoes, nails, simple tools",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution \"Blacksmith\" matches smith"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Ale (barrel)",
+      "text": "Ale (barrel): Barrel ale from the village brewer",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: brewer"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Tanned leather",
+      "text": "Tanned leather: Oak-bark processed hides",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: tannery"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Milled timber",
+      "text": "Milled timber: Planks and beams to dimension",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: sawmill; Sawmill is deliberately not a mill kind"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Pottery and ceramics",
+      "text": "Pottery and ceramics: Domestic pottery from local clay",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: potter"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Salted fish",
+      "text": "Salted fish: Salt-cured fish for travel and winter",
+      "needs": [
+        "fish"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution Fishmonger (a trader, not a source): the fish presumption is the record's"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Fresh milk and dairy",
+      "text": "Fresh milk and dairy: Milk, butter, soft cheese from cattle",
+      "needs": [
+        "livestock"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Enslaved persons",
+      "text": "Enslaved persons: Captives trafficked on through slave markets and holding networks.",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: slave market; on:false (inert); also a town IMPORT (bothLists)"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Guild-manufactured goods",
+      "text": "Guild-manufactured goods: Cloth, leather goods, metalwork",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Processed textiles",
+      "text": "Processed textiles: Woven cloth, finished fabrics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: weavers"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Quality tools and weapons",
+      "text": "Quality tools and weapons: Well-crafted implements and basic arms",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution \"Blacksmiths (3-10)\" matches smith"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Baked goods",
+      "text": "Baked goods: Bread, pastries for market",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: bakers"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Preserved foods",
+      "text": "Preserved foods: Salted meats, pickled vegetables",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: salt works / smokehouse"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Barrels and containers",
+      "text": "Barrels and containers: Wooden casks for storage/transport",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Leather goods",
+      "text": "Leather goods: Tanned hides, leather products",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: tanners"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Pottery and ceramics",
+      "text": "Pottery and ceramics: Household vessels and tiles",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Rope and cordage",
+      "text": "Rope and cordage: Essential for shipping and construction",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Ale (wholesale)",
+      "text": "Ale (wholesale): Commercial ale in barrel from the town brewery",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: brewery"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Refined iron ingots",
+      "text": "Refined iron ingots: Smelted iron ready for the smith",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: smelter"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Quality boots and shoes",
+      "text": "Quality boots and shoes: Guild-certified footwear",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Finished garments",
+      "text": "Finished garments: Ready-made and bespoke clothing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Glassware",
+      "text": "Glassware: Bottles, flasks, and window glass",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: glassblower"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Candles and soap",
+      "text": "Candles and soap: Tallow and beeswax candles, lye soap",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: chandler"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Luxury manufactured goods",
+      "text": "Luxury manufactured goods: High-quality crafted items",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Fine metalwork and jewelry",
+      "text": "Fine metalwork and jewelry: Precious metal goods, gemstone work",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: specialized metalworkers; jewellery: not in the chair's class list"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Legal services",
+      "text": "Legal services: Contracts, court access, legal expertise",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: courthouse; a service row in a goods table (services lane overlap)"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Financial services",
+      "text": "Financial services: Letters of credit, money changing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Specialized guild crafts",
+      "text": "Specialized guild crafts: 50+ specializations available",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Books and manuscripts",
+      "text": "Books and manuscripts: Hand-copied texts, illuminated works",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Advanced weapons and armor",
+      "text": "Advanced weapons and armor: Professional military equipment",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Fine textiles",
+      "text": "Fine textiles: Silk, velvet, high-quality woolens",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Dyed cloth",
+      "text": "Dyed cloth: Colored fabrics, specialty dyes",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Glassware",
+      "text": "Glassware: Windows, vessels, decorative glass",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: glassmakers"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.International banking services",
+      "text": "International banking services: Letters of credit, international finance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "capital"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Extreme luxury goods",
+      "text": "Extreme luxury goods: Rare items, masterwork crafts",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.High art and culture",
+      "text": "High art and culture: Theater, music, commissioned art",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "service"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Educational services",
+      "text": "Educational services: University degrees, advanced training",
+      "needs": [
+        "institution: school",
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "requiredInstitution \"Academy of magic\" matches school"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Political influence",
+      "text": "Political influence: Access to power, legal frameworks",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "not a good (power/access); left to the chair, not flagged as income"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Rare spices and dyes",
+      "text": "Rare spices and dyes: Imported exotic materials",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": ""
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Master-crafted weapons",
+      "text": "Master-crafted weapons: Legendary quality arms and armor",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: specialized metalworkers"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Architectural services",
+      "text": "Architectural services: Cathedral design, fortress planning",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: guild"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Printing services",
+      "text": "Printing services: Mass-produced texts (if technology exists)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: printing technology; \"if technology exists\": unhomed: printing technology"
+    }
+  ]
+}

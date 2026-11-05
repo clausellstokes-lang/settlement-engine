@@ -451,6 +451,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     let draws = 0;
     for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
       if (poolDimensions(pool).length > 0) continue;
+      // CENSUS-3b unit 2 skipped a pool whose variants declare FACT atoms (fail-closed without
+      // `facts`); the CENSUS-1e merge keeps it in the sweep instead, read against R-N's one calm
+      // double below (CENSUS-5's), so the sweep stays as wide as each side had it.
       poolsChecked += 1;
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
@@ -481,10 +484,12 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // by being empty, which is the failure mode this pair of floors exists to refuse.
     // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
     // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
+    // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 established and DS-ECO-12 one-source take `no hunger`
+    // (a crisis dimension) and DS-ECO-8 COMFORTABLE declares `no crisis: indebted` (a fact atom), so 713.
     // CENSUS-5b unit 1 (2026-11-05): DS-DEF-1 `readiness WEAK` partitions by `walls` (v2, the
-    // perimeter line, declares it; R-O), so 715.
-    expect(poolsChecked).toBeGreaterThanOrEqual(715);
-    expect(draws).toBeGreaterThanOrEqual(715 * 2 * SWEEP_SEEDS.length);
+    // perimeter line, declares it; R-O), so 712 (the CENSUS-1e merge composes the two).
+    expect(poolsChecked).toBeGreaterThanOrEqual(712);
+    expect(draws).toBeGreaterThanOrEqual(712 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {

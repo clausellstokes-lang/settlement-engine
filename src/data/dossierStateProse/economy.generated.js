@@ -1968,6 +1968,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMFORTABLE": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: indebted"
+          ],
           "text": "{settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.",
           "slots": [
             "settlement"
@@ -2963,6 +2966,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "POSTURE: established": [
         {
           "angle": "ledger",
+          "marks": [
+            "no hunger"
+          ],
           "text": "{settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.",
           "slots": [
             "settlement"
@@ -3993,6 +3999,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no hunger"
+          ],
           "text": "{settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.",
           "slots": [
             "settlement"

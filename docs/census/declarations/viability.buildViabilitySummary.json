@@ -1,0 +1,71 @@
+{
+  "id": "viability.buildViabilitySummary",
+  "source": "src/generators/economy/viability.js :: buildViabilitySummary",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "The headline sentence. The last arm asserts self-sufficiency and prints under any crisis that files no critical issue/dependency (e.g. plague, occupation, succession).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "viability.buildViabilitySummary::not_viable",
+      "text": "✗ NOT VIABLE: ${n} critical issue(s) prevent(s) settlement survival.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.buildViabilitySummary::implausible",
+      "text": " IMPLAUSIBLE: ${n} historical inconsistencies break believability.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Leading space where an icon was (glyph lost)."
+    },
+    {
+      "id": "viability.buildViabilitySummary::viable.dependencies",
+      "text": "✓ VIABLE: Settlement can survive but has ${n} operational dependenc(y|ies) that require ac",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Also prints \"${plotHooks.length} plot hooks available\" (hook count, not hook text)."
+    },
+    {
+      "id": "viability.buildViabilitySummary::viable.strain",
+      "text": "△ VIABLE WITH PROVISIONING STRAIN: ${pct}% of daily food need remains uncovered.",
+      "needs": [
+        "food: ≤ deficit"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.buildViabilitySummary::viable.support",
+      "text": "✓ VIABLE WITH PROVISIONING SUPPORT: imports, reserves, or extraordinary supply cover ${pct",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.buildViabilitySummary::viable.self_sufficient",
+      "text": "✓ VIABLE: Settlement is economically self-sufficient and historically plausible.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Calm/plenty assertion."
+    }
+  ]
+}

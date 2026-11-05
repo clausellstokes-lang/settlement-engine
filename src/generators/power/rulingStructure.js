@@ -98,6 +98,13 @@ export const generatePowerStructure = (
   // route slot, and a non-coastal seaport with a hostile neighbour silently
   // loses its maritime standing (verified: merchant prose falls back from
   // "International merchant houses controlling port licences" to the generic).
+  // CENSUS-1e unit 2 (Appendix B item 23, inline T): a base-roster description CENSUS-5b declared in
+  // FACTION_DESC_SIBLINGS (below) resolves where it prints, against the native roster's facts — the
+  // original where the record holds its atom, else its twin (a set with no twin keeps the original).
+  // ⚠ R-Q: the `militia` atom is NOT settled at this step — a militia can join the roster after the
+  // power step (the 1,000 at 1c00ed2: the twin's `no militia` false on the final record in 8 births,
+  // cert:false-presumption) — so the two militia sets wait on order and are not resolved here.
+  const said = (/** @type {string} */ line) => resolveSibling(line, FACTION_DESC_SIBLINGS_SETTLED, { facts: () => factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:FACTION_DESC_SIBLINGS', surface: 'power', drawKind: 'T' });
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
       institution => !isMaterializedCustomContent(institution),
@@ -390,7 +397,7 @@ export const generatePowerStructure = (
       'Guild Authority':
         "The guilds have formalised their political control; the city's elected bodies are largely ceremonial.",
       'Military Council':
-        'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.',
+        said('Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.'),
       'Church Council':
         'Religious authorities hold formal civic influence; canonical law and civil ordinance are intertwined.',
       'Merchant Council':
@@ -493,7 +500,7 @@ export const generatePowerStructure = (
                   : 'Established merchant community; fund civic works and expect council access in return.'
               : merchantAdjPower >= 10
                 ? 'Merchants with local reach; a consistent civic presence without yet being the dominant commercial voice.'
-                : 'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.',
+                : said('A small trader community present at market days; politically active in minor disputes, limited in broader leverage.'),
       merchantLabel =
         (economicState == null ? void 0 : economicState.prosperity) === 'Wealthy' ||
         (economicState == null ? void 0 : economicState.prosperity) === 'Thriving'
@@ -568,7 +575,7 @@ export const generatePowerStructure = (
     });
   }
   if (militaryPower > 5 && (tier !== 'thorp' || priorities.military > 60)) {
-    const militaryDesc =
+    const militaryDesc = said(
         priorityToCategory(priorities.military) === 'very_high'
           ? militaryPower > 25
             ? ['city', 'metropolis'].includes(tier)
@@ -585,7 +592,7 @@ export const generatePowerStructure = (
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
                 : militaryPower > 18
                   ? 'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.'
-                  : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.',
+                  : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.'),
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +
@@ -832,8 +839,8 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): the base
  * roster's descriptions that presume a force or a market their branch does not guarantee (the
  * Military/Guard entry is keyed by the military PRIORITY and the tier, not by the roster). Keyed by
- * the printed text; NO CONSUMER READS THIS TABLE YET (the inline T branches are CENSUS-1d's to
- * route), so it moves no birth. Measured on the 1,000, printed / false by the record: "Town watch
+ * the printed text; each printing branch resolves through `said` → `resolveSibling` (CENSUS-1e
+ * unit 2). Measured on the 1,000, printed / false by the record: "Town watch
  * and militia" 48 / 0 on `watch` (it would be 48 / 48 on `militia`: the line's town holds a watch,
  * and "militia" reads as the watch's own levy, so it declares the watch alone), the city garrison
  * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0, the part-time militia 7 / 1, the armed
@@ -860,3 +867,7 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
     "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.", ['militia'],
     "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."),
 });
+/** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
+const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
+  .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
+

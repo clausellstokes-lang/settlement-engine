@@ -156,3 +156,87 @@ Golden: 0 of 525 at every commit. Pages: 0 of 60 at every commit; 0 of 1,000 for
 - Row 103 is wired at its site with a local declared `pickLine`, never in the shared `proseSelection.js :: pickLine`. Wiring the shared one would have pulled every world-pulse pool into the ledger ahead of ruling 7's second wave.
 - The registers read the six leaves directly, not the wiring census. The census columns are a door re-take that moves its pins, so they are left to the next seat (3c).
 - The retake spelling is `RETAKE_DECLARATION_REGISTERS`, not `UPDATE_…`: goldenFreeze's roster claims every `UPDATE_*` env as a golden instrument.
+
+### Addendum — the chair's R-A ruling of 2026-11-05 02:30 (read after the boundary report; acted on)
+
+The ruling reordered unit 2: merge CENSUS-4b's tip and wire the registry goal lookup. It reached this seat after its 1,000 had run; it was acted on at once.
+- `a3a383ae5` — merge of `origin/lane/census-4-2026-11-04` at `11baceee4`; `gen:dossier-prose --check` green.
+- `e267287e7` — `npcStructure.js :: enrichNPCsWithStructure` resolves its registry entry through `resolveDeclared` (tagged; NPC_STRUCTURE.<key>). A refused CALM_ONLY entry is not applied, and the NPC keeps its role goal. **Moves, one cause, against the merge:** golden **409/525** (every golden row carries an active crisis: 120 of 120 checked), soak records 19/60, pages 18/60. Counted, never re-recorded. **The 60:** `coh:crisis-blind-prose` 22 → **7** settlements; the three goal claims fall to 0 (current stability 11 → 0, competent administration 1 → 0, stable institutional competition 4 → 0). What remains is "nobody stops a stranger" 5 (2b) and "food secure" 2 (2c). `cert:false-presumption` 0 → 0. Re-keyed by cause: `regenNpcEnrichment`'s anchor now reads a calm city.
+- `40e26d249` — the undeclared register re-taken after the merge: 2,201 → 2,198 lines (DS-ECO-8, -10, -12).
+- The 1,000 was NOT re-run after this site. The chair's figure (713 of 791 births on the three claims) is the expectation; the compose's 1,000 is the measurement.
+
+## CENSUS-1e (the fourth seat, 2026-11-05)
+
+> Continues this branch from CENSUS-1d's `7dc90a6f7`. Transport push only; no pull request; no send_message. Merged: `origin/lane/census-4-2026-11-04` at `99fbe26` (`950b750`) and `31d850d` (`ff3eaa7`); this branch's own origin after CENSUS-1d's late R-A push (`5f56ce5`); `origin/lane/census-5-2026-11-04` at `9eeda1d` (`ceb83b9`; the wiring census conflict taken from census-5, then re-taken through `scripts/wiring-census.mjs` and `gen:dossier-prose`, both `--check`s green, R-D). **Where this seat stopped (the boundary rule, context budget):** unit 1 done (landed twice, see below); unit 2's DECLARED T sites done; units 3–6 not reached except the two verifications below. **CENSUS-1f starts at** the item list under "Where CENSUS-1f starts".
+
+Byte method: a scratch hasher (525 golden records, soak1k-0..59 records, their rendered pages: 20 tabs, Tonight, PDF, Foundry; sha-256), the base re-hashed twice for determinism (0 / 0 / 0). Each moved record is proven ONE-CAUSE by a second scratch script that generates both trees in one process and checks every changed string (the registry: every moved NPC's base entry was a `no crisis` entry and the final record holds a crisis; the sibling sets: every change is an original replaced by its declared twin and the final record refuses the original's atom). Red-firsts by plant-and-restore of the parent file.
+
+| unit | commit | what | golden / soak records / pages moved (one cause each) |
+|---|---|---|---|
+| 1 | `b8fdcd3`, then `5f56ce5` | the registry goal lookup (`npcStructure.js :: enrichNPCsWithStructure`) through `resolveDeclared(…, { tagged: true })`. **CENSUS-1d pushed the same unit (`e267287`) after this seat's base**; the merge takes 1d's implementation and keeps from `b8fdcd3` only the `string \| { text }` tolerance (`lineText` on goal / position / constraint) and the no-tags and ledger arms (`npcStructureGoalLookup.test.js`) | **409 / 525 · 19 / 60 · 18 / 60** (pdf 18, foundry 18, substrate 12, tonight 10). 428 of 428 one cause: 302 a `stable` key, 125 the `other` fill alias of the stable pair, 1 an unknown category (`noble`) falling back to `other__stable__dominant`. Paths: `npcs[].goal.short / structuralPosition / activeConstraint / settlementCondition / structuralRank` and the `factions[].members[]` mirror |
+| test | `3a3cabc` | the census-5 merge stacked CENSUS-3b's skip (fact-declaring pools leave the kernel byte-identity sweep) on CENSUS-5's calm double; the sweep fell to 675 under the composed floor 712. R-N's one calm double kept, the skip dropped | — |
+| 2 · safety | `e3e43a2` | `SAFETY_LINE_SIBLINGS` (5b, 10 sets) at their ten printing branches (`said` → `resolveSibling`, the live roster) | **0 / 525 · 9 / 60 · 9 / 60** (tab:defense). 9 of 9: displacement watch 3, succession 2, migration 2, revolt 2, insurgent 2 |
+| 2 · ruling | `1c00ed2`, cured `f2367a4` | `FACTION_DESC_SIBLINGS` (5b, 7 sets) at three branches (the native roster). `1c00ed2` moved 168 / 525 · 1 / 60 · 1 / 60 (169 of 169 one cause: the patrol line → its twin), **but the 1,000 read `cert:false-presumption` 24 in 8 births**: a militia joins the roster AFTER the power step, so the twin's `no militia` was false on the final record. **R-Q cure `f2367a4`:** the two `militia` sets wait on order (`FACTION_DESC_SIBLINGS_SETTLED`); the five settled sets (no twins) still resolve and are noted | net **0 / 0 / 0** against B; cert 24 → **0** |
+| 2 · threats | `d654216` | `THREAT_TEXT_SIBLINGS` (5b): the siege description (T, twin) and the civil-unrest victims (A, "the watch" filtered); no settlement handed keeps the template | 0 / 0 / 0 |
+| 2 · overrides | `f739d37` + `3717fa4` | `STRESS_GOAL_OVERRIDES` (4b's `watch` / `migration: influx` / `market`) through `resolveDeclared`, answered by `birthFactsOf` with the keyed stresses; a refused override is not applied. (`f739d37` was committed with eslint red, max-lines; `3717fa4` cures it, byte-identical) | 0 / 0 / 0 |
+| 2 · daily life | `077cf9b` | `DEFENSE_CONTEXT` through `resolveDeclared` (undeclared cells: drawn as before, noted) | 0 / 0 / 0 |
+
+**Not wired, recorded.** `rulingPower.js :: RULING_POWER_SIBLINGS` — `factsOf`'s import graph reaches `rulingPower.js` (an import cycle), and both sets carry no twin, so wiring would add ledger notes only, at a transfer of power in play that the soak never reaches; the door is an `opts.facts` on `transferRulingPower` or a lazy import (the chair's call). The inline T branches of `stressFactions`, `economicState`, `spatialGenerator`, `governanceNarrative` (beyond 1c's `BASELINE_CONFLICT_SIBLINGS`) and `crisisHooks`' other pools carry **no declaration** at this tip (5b lists `stressFactions` as pure colour pending R-R): wiring them is plumbing only, left for when a lane declares them. `DEFENSE_CONTEXT`'s five cells are undeclared; 'Fortress' and 'Well-Defended' name walls and a garrison by the readiness label alone — their declarations and twins (R-G) are the table owner's (CENSUS-4).
+
+**Verified, left.** Row 96 (`hookEscalation.js`): CENSUS-2c wired it (`resolveDeclared`, kind A) on `origin/lane/census-2-2026-11-04`; not merged here. **Row 91 is a misclassification:** `dossier/plotHooks.js :: ECHO_PREFIXES` is the hook family-key normaliser (prefixes STRIPPED before de-duplication), never printed — filtering it would break the de-duplication. The printed echo prefixes are `historyGenerator.js`'s `ECHO_PREFIXES`, an R draw (`_rng()`-indexed), which belongs to unit 4's generic pick callers. Row 107 is dead (R-S): not wired.
+
+**The named-but-refused list reads EMPTY** at this tip: 47 dimensions, none with `reader: null` (CENSUS-3b's getters reached here through census-4's merge).
+
+### The 60 and the 1,000 (R-B: BEFORE = B, the merged base `3a3cabc`; AFTER = the tip `f2367a4`; and PRE = `950b750`, before the registry lookup)
+
+| | PRE `950b750` | BEFORE B `3a3cabc` | AFTER `f2367a4` |
+|---|---|---|---|
+| the 60: verdict · findings | STOP · 167 | CLIMB · 104 | CLIMB · 104 |
+| the 60: `coh:crisis-blind-prose` (settlements / occurrences) | 22 / 65 | 2 / 2 | 2 / 2 |
+| the 60: goal claims (current stability · stable institutional competition · competent administration) | 11 · 4 · 1 | 0 · 0 · 0 | 0 · 0 · 0 |
+| the 1,000: verdict | STOP (crisis-blind in 231; A-12 0.018) | STOP (crisis-blind in 35) | STOP (crisis-blind in 35) — the base's, R-B |
+| the 1,000: settlements · findings · errors | 1,000 · 2,485 · 0 | 1,000 · 1,714 · 0 | 1,000 · 1,714 · 0 |
+| the 1,000: `coh:crisis-blind-prose` occurrences, by claim | 791: current stability 538, competent administration 93, stable institutional competition 82, nobody stops a stranger 43, food secure 32, pilgrims 3 | 35: food secure 32 (2c's), pilgrims 3 (unit 4's arrival scene) | 35, identical |
+| `A-12:self-vouch-false` | 18 | 3 | 3 |
+| every `reader:*` class | validation 2,547 · daily-life 495 · faction-role-fit 521 · hook-pools 111 · tension-memory 60 | identical | identical |
+| `cert:false-presumption` | 0 | 0 | **0** (24 at `077cf9b`, cured by `f2367a4`) |
+
+PRE → B: the three goal claims (713 occurrences) fall with the registry lookup (`e267287` = this seat's unit 1; the 60 at `b8fdcd3` alone shows the same fall, so the attribution is CONFIRMED on the 60 and inferred on the 1,000 from the claims' identity); "nobody stops a stranger" (43) falls with CENSUS-5's merged declarations; A-12 18 → 3 with the merges. B → AFTER: every class identical; no contradiction class rose.
+
+**`declared-share`, the 1,000 (B → AFTER):** defense **0 → 1,494 / 1,494** (new: the safety sibling sets) · power 462 / 462 → **2,457 / 2,457** · npcs 2,361 / 41,732 → **2,567 / 42,934** · tab:threats **89 / 89**, pdf:threats **356 / 356** (new) · tab:daily_life **0 / 815** (new: undeclared cells, now counted) · unchanged: tab:dossier 4,967 / 213,593 · tab:economics 1,421 / 27,595 · foundry:economics 710 / 12,940 · crisis 302 / 302 · services 115 / 115 · the crisis and plot-hook render surfaces 0 / n (no declarations yet).
+
+### Rows moved, by cause (never re-recorded)
+
+Against B: golden **0 / 525**; soak records **9 / 60** and pages **9 / 60** (tab:defense), all safetyProfile's twins (`e3e43a2`), 9 of 9 one cause. Unit 1's 409 / 525 · 19 / 60 · 18 / 60 are CENSUS-1d's `e267287` moves (the same unit), counted in its addendum and above. Wiring census: re-taken through the door at the census-5 merge (709 pools / 2,324 variants; both `--check`s green). Tests re-keyed by cause: `stateProseKernel.test.js` (the composed sweep floor, `3a3cabc`); `factionDescSiblings.test.js` (R-Q, `f2367a4`). **The declaration registers are not re-pinned here** (R-T): census-5's merged declarations lower `undeclaredLines.register.json` and its `{crisis-scoped}` pools are unpinned — the compose re-takes them.
+
+**Tests.** Each unit's red-first and its neighbours were run through the mutex, green (listed per commit). The governing suites (126 files naming a changed module) were run at the tip and **cut at 17 files** (too slow at one worker for this seat's budget). The 16 red files among them read **59 failing titles, every one red at B too, title for title** (B re-run on the same 16 files: 48 + 11). **The other 109 files were not run here**: GitHub's run on the pushed tip (rule 24a) or the compose reads them.
+
+### Waiting lists
+
+- **waiting on order (R-Q):** `FACTION_DESC_SIBLINGS`' two militia sets (the part-time militia, the armed patrol) — the militia joins the roster after the power step.
+- **waiting on a door:** `RULING_POWER_SIBLINGS` (the import cycle above).
+- **waiting on declarations (the table owner's, R-G):** `DEFENSE_CONTEXT`'s five cells (CENSUS-4); the inline T branches of `stressFactions` (5b: pure colour pending, R-R), `economicState`, `spatialGenerator`, `crisisHooks`' other pools.
+
+### Judgments (vetoable)
+
+- Unit 1 landed twice. This seat's version was dropped in favour of 1d's at merge (already on origin, where the siblings merge from); only the `lineText` tolerance and two test arms were kept.
+- A refused stress override, like a refused registry entry, is not applied (the NPC keeps its goal); no twin.
+- The threat victims list is read as kind A (filtered); with no settlement handed, the template prints unchanged (resolveSibling's unanswered rule, not fail-closed), so callers that pass no settlement see no change.
+- `DEFENSE_CONTEXT` was wired although no cell declares, so a later declaration needs no second visit to the site.
+- Row 91 is not wired (not printed; above).
+
+### Where CENSUS-1f starts
+
+1. **Unit 4, the generator sites with roll proofs:** the generic `pick` / `drawUnique` callers (rows 1–2, including `historyGenerator.js`'s printed `ECHO_PREFIXES`), the arrival scene's ⚠ redraw-once (merge census-2 first: 2b's `textOf` at the arrival consumer; "pilgrims queue patiently", 3 on the 1,000, waits on it), `narrativeGenerator`'s three draws, POLITICAL_FLAVOR's cascade, the ⚠ per-relationship rumour roll, the ⚠ trapping shuffle, the ⚠ faction-name retry (5b's `FACTION_NAME_SIBLINGS`, 17 names, no twin), the service roll (check 4c's `cd17614` first: sites 18 and 15).
+2. **Unit 3's display rows:** 92 (ALIGNED_BASIS), 93 (crisisCast tables outside the sibling sets; the declarations are on census-2), 95 (`settlementQuickGuide.js`), 104–106, 108–109.
+3. **Unit 3c:** the wiring census's four declared columns and `tablePools`. ⚠ The ordering: `gen:dossier-prose` projects the leaves FROM the census, so the census's declared columns must read the annex (or the projector's own parse), not the generated leaves, or the columns are born one projection stale.
+4. **Unit 8 (wave 2, R-O).**
+5. `RULING_POWER_SIBLINGS`' door; the militia sets' order question (both for the chair).
+
+### Addendum — the chair's five items (message of 2026-11-05 ~04:50, under R-A), received at this seat's boundary: listed for CENSUS-1f
+
+1. **R-Y:** give the vid-less kernel families (DOSSIER_CAUSAL_PROSE, the decree family, the connectives) vids (ids, not draws; byte-identity 0), so CENSUS-2e can declare them.
+2. **R-AE:** one composite `sacredHouse` (temple ∨ monastery ∨ friary ∨ shrine, as the roster names them; `temple` stays narrow); home a `council` presence by delegation to the power structure's bodies reader if one exists, else record that none does ("Fund the council" waits on it).
+3. The projector hardcodes `marks: []` on canonical v0 rows: give the v0 rows a real tag slot (CENSUS-3d's seven rows).
+4. **R-Z** into `docs/census/VOCABULARY_RULINGS_2026-11-04.md` as a dated sentence: a draw site is handed the ONE field measured settled before the draw (`birthFactsOf`), never the whole container. (This seat's R-Q cure, `f2367a4`, is the same class: the native roster at the power step is not the final roster.)
+5. **Sites 19, 18, 15 have NOT landed** at `2c5915c`. Site 19 (`relationshipArchetypes.js :: createTieProseDraw`) is not routed through `drawDeclared`. Sites 18 (`assembleInstitutions.js`'s `pickVariant` of the descriptions) and 15 (the per-definition service roll) carry only CENSUS-1c's `resolveSibling` walls siblings. CENSUS-4c's declarations (`cd17614`) are carried but not enforced at those draws. They are unit 4's, for CENSUS-1f, and CENSUS-4e waits on them.

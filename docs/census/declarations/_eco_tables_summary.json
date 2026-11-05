@@ -1,0 +1,556 @@
+{
+  "tables": [
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS",
+      "drawKind": "T",
+      "rows": 65,
+      "rowsDeclaring": 2
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND",
+      "drawKind": "T",
+      "rows": 17,
+      "rowsDeclaring": 16
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA",
+      "drawKind": "T",
+      "rows": 127,
+      "rowsDeclaring": 91
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES",
+      "drawKind": "T",
+      "rows": 21,
+      "rowsDeclaring": 9
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS",
+      "drawKind": "T",
+      "rows": 607,
+      "rowsDeclaring": 239
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER",
+      "drawKind": "T",
+      "rows": 61,
+      "rowsDeclaring": 22
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER",
+      "drawKind": "T",
+      "rows": 31,
+      "rowsDeclaring": 5
+    },
+    {
+      "id": "tradeGoodsData.COMMODITY_CATEGORY_MAP",
+      "drawKind": "A",
+      "rows": 33,
+      "rowsDeclaring": 0
+    }
+  ],
+  "rows": 962,
+  "rowsDeclaring": 384,
+  "colourTables": [],
+  "colourRows": 51,
+  "luxuryClass": [
+    "Camel Herds",
+    "Cut gemstones",
+    "Dyed cloth",
+    "Exotic imports",
+    "Extreme luxury goods",
+    "Fine textiles",
+    "Fine wool cloth",
+    "Gem Mining & Lapidary",
+    "Gem appraisal",
+    "Gemstones",
+    "Highest luxury goods",
+    "Luxury Goods",
+    "Luxury goods",
+    "Luxury imports",
+    "Luxury manufactured goods",
+    "Luxury materials",
+    "Luxury textiles",
+    "Luxury textiles and exotic goods",
+    "Metal ore + gems",
+    "Rare materials",
+    "Rare spices and dyes",
+    "Rare spices and exotic dyes",
+    "Raw gemstones",
+    "Silk & Luxury Textiles",
+    "Silk, fine dyes, and imported cloth",
+    "Silk, fine dyes, exotic textiles, and finished luxury garments",
+    "Spices & Dyes",
+    "Spices and exotic dyes"
+  ],
+  "luxuryClassNotes": "Exact labels found in these tables. Band \"tier: >= village\" declared on IMPORT rows (binding) and also on luxury export/output rows (the trade-good ruling: \"its TIER BAND where it is luxury-class\") — chair may strike the export side. \"Camel Herds\" is a RESOURCE label (resource row, desc only), so it carries no band. Not included: \"Quality cloth\" (hamlet import, \"Better textiles\" — the band would make its own hamlet row undrawable), \"Fine metalwork and jewelry\"/\"Jewellery\" (not named by the chair), \"Luxury dairy products\" (dairy), furs/amber (COMMODITY_CATEGORY_MAP \"luxury\" classifier only). \"Quality textiles\" (the chair's spelling) does not occur in these tables (it is in geographyData.js).",
+  "bothLists": [
+    {
+      "good": "Enslaved persons",
+      "tier": "town",
+      "export": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::town.Enslaved persons",
+      "import": "tradeGoodsData.IMPORT_GOODS_BY_TIER",
+      "note": "exact name on both lists in the same tier; the export wins where the record produces it"
+    },
+    {
+      "good": "Fine textiles",
+      "tier": "city",
+      "export": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].outputs[3] / tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Fine textiles",
+      "import": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles] (rawInputs + outputs; entrepotNote \"not produced locally at any tier\")",
+      "note": "an entrepot (imported) good listed as a chain OUTPUT beside the locally produced Fine textiles"
+    },
+    {
+      "good": "Luxury manufactured goods",
+      "tier": "city",
+      "export": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Luxury manufactured goods / supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[luxury_goods].outputs[0]",
+      "import": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[silk_luxury_textiles].outputs[1]",
+      "note": "produced by the luxury_goods chain and also output by the import-only silk chain"
+    },
+    {
+      "good": "Rare spices and dyes",
+      "tier": "metropolis",
+      "export": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.Rare spices and dyes (desc \"Imported exotic materials\")",
+      "import": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[spices_dyes] (\"Produced in distant lands\") / tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis \"Spices and exotic dyes\"",
+      "note": "an export row whose own desc says it is imported"
+    },
+    {
+      "good": "Quality tools and weapons / Quality weapons and armour",
+      "tier": "hamlet+",
+      "export": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.exportBonus",
+      "import": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.importLabels[1]",
+      "note": "same category both sides; the generator nets supply vs demand so only one fires per record (near-duplicate, not exact)"
+    }
+  ],
+  "categoryErrors": [
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Wizard's tower",
+      "text": "Magical ley lines: arcane energy for sustained magical research",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mages' guild",
+      "text": "Magical ley lines: arcane energy for guild operations",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mages' district",
+      "text": "Magical ley lines: arcane energy for district-scale magical operations",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Academy of magic",
+      "text": "Magical ley lines: arcane energy for magical academy",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Teleportation circle",
+      "text": "Magical ley lines: stable ley line for permanent teleportation circle",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Planar embassy",
+      "text": "Magical ley lines: planar resonance for extraplanar contact",
+      "proposedHome": "RESOURCE site (magical_node), not an import"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Caravan masters' exchange",
+      "text": "Capital + trade access: precious metals and trade access for exchange operations",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Periodic market",
+      "text": "Trade access + grain: crossroads position and grain as primary traded commodity",
+      "proposedHome": "INCOME (trade access part; grain stays a dependency)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Weekly market",
+      "text": "Trade access + grain: trade access and grain for regular market",
+      "proposedHome": "INCOME (trade access part; grain stays a dependency)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Market square",
+      "text": "Trade access: trade access for permanent market",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Multiple market squares",
+      "text": "Trade access + commodities: trade access and commodities for city markets",
+      "proposedHome": "INCOME (trade access part)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Daily markets",
+      "text": "Trade access + grain: trade access and grain for daily market operations",
+      "proposedHome": "INCOME (trade access part; grain stays a dependency)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::District markets (5-10)",
+      "text": "Trade access + commodities: trade access and commodities for district markets",
+      "proposedHome": "INCOME (trade access part)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::International trade center",
+      "text": "Trade access + harbour: crossroads or harbour for international trade",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::deep_harbour.tradeGoods[1]",
+      "text": "Maritime trade access",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.tradeGoods[0]",
+      "text": "Transit trade",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::crossroads_position.tradeGoods[1]",
+      "text": "Toll revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::precious_metals.tradeGoods[1]",
+      "text": "Coin minting",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::hot_springs.tradeGoods[1]",
+      "text": "Pilgrim hospitality",
+      "proposedHome": "INCOME (pilgrim spending; supplyChainData pilgrimage note already calls it non-trade income)"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::defended_pass.tradeGoods[0]",
+      "text": "Toll revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::defended_pass.tradeGoods[1]",
+      "text": "Pass transit trade",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::oasis_water.tradeGoods[0]",
+      "text": "Water rights",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::holySite.effects.resources[1]",
+      "text": "pilgrim donations",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein.effects.resources[0]",
+      "text": "abundant ore",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein.effects.economicBoost",
+      "text": "Major mining boom",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::strategicPass.effects.economicBoost",
+      "text": "Toll and customs revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputs[1]",
+      "text": "Coin minting",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[precious_metals_mining].outputsByResource.precious_metals[1]",
+      "text": "Coin minting",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[0]",
+      "text": "Harbour capacity",
+      "proposedHome": "infrastructure fact (docks/water), not a good"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[1]",
+      "text": "Dockside access",
+      "proposedHome": "infrastructure fact (docks/water), not a good"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].intermediateGoods[0]",
+      "text": "Harbour fees",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[0]",
+      "text": "Maritime trade revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].rawInputs[1]",
+      "text": "Water power",
+      "proposedHome": "RESOURCE site (river_mills), not a good"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].intermediateGoods[0]",
+      "text": "Financial services",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].intermediateGoods[1]",
+      "text": "International banking services",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].outputs[0]",
+      "text": "Financial services",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[transit_finance].outputs[1]",
+      "text": "International banking services",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].rawInputs[0]",
+      "text": "Transit trade",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[warehouse_logistics].rawInputs[1]",
+      "text": "Toll revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].rawInputs[0]",
+      "text": "Trade traffic",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].rawInputs[1]",
+      "text": "Toll revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].intermediateGoods[0]",
+      "text": "Toll revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].intermediateGoods[1]",
+      "text": "Transit fees",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[0]",
+      "text": "Toll income",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[1]",
+      "text": "Market taxes",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[crossroads_trade].outputs[2]",
+      "text": "Transit trade profit",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan].outputs[2]",
+      "text": "Overland freight revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].intermediateGoods[0]",
+      "text": "Pass fees",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].intermediateGoods[1]",
+      "text": "Military revenue",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[0]",
+      "text": "Toll income",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[1]",
+      "text": "Strategic control",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[mountain_pass_trade].outputs[2]",
+      "text": "Trade access fees",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].rawInputs[1]",
+      "text": "Pilgrim donations",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].rawInputs[1]",
+      "text": "Pilgrim donations",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::city.Financial services",
+      "text": "Financial services: Letters of credit, money changing",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::metropolis.International banking services",
+      "text": "International banking services: Letters of credit, international finance",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::town.fromCityOrMetropolis[2]",
+      "text": "Banking services: Letters of credit",
+      "proposedHome": "INCOME"
+    },
+    {
+      "id": "tradeGoodsData.IMPORT_GOODS_BY_TIER::city.fromMetropolis[0]",
+      "text": "International banking: Global connections",
+      "proposedHome": "INCOME"
+    }
+  ],
+  "cultureKeyedChains": [
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[camel_caravan]",
+      "animal": "camel",
+      "resource": "camel_herds (RESOURCE_DATA terrain \"desert\"; geographyData desert.allowedResources)",
+      "declared": [
+        "terrain: desert"
+      ],
+      "cultureCandidates": [
+        "arabic",
+        "steppe"
+      ],
+      "note": "culture keys from cultureProfiles.js CULTURE_PROFILE_KEYS (germanic, latin, celtic, arabic, norse, slavic, east_asian, mesoamerican, south_asian, steppe, greek); culture NOT declared: resolveSettlementCulture is not terrain-keyed, so \"culture: arabic, steppe\" would refuse a germanic desert caravan — chair to rule"
+    },
+    {
+      "id": "resourceData.RESOURCE_DATA::camel_herds.*",
+      "animal": "camel",
+      "declared": [
+        "terrain: desert"
+      ],
+      "cultureCandidates": [
+        "arabic",
+        "steppe"
+      ]
+    },
+    {
+      "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock] / chains[animal_husbandry]",
+      "animal": "camel (substitute only)",
+      "declared": [],
+      "note": "Camel Herds is a resourceSubstitute; the chain itself is not camel-keyed"
+    },
+    {
+      "note": "no yak, llama or reindeer input appears in any of these tables"
+    }
+  ],
+  "atomHistogram": {
+    "tier: >= village": 58,
+    "terrain: desert": 39,
+    "tier: >= hamlet": 34,
+    "tier: >= town": 30,
+    "magic": 28,
+    "food-source: livestock": 26,
+    "terrain: mountain": 24,
+    "water: river": 22,
+    "water: coast": 20,
+    "food-source: fish": 17,
+    "crime": 15,
+    "food-source: grain": 14,
+    "institution: mine": 14,
+    "food-source: game": 11,
+    "institution: quarry": 11,
+    "institution: smith": 9,
+    "water: navigable": 9,
+    "institution: mill": 8,
+    "route: isolated": 4,
+    "route: crossroads": 4,
+    "hospital": 4,
+    "magic: >= low": 3,
+    "tier: >= city": 3,
+    "institution: tavern": 3,
+    "route: mountain_pass": 3,
+    "institution: school": 3,
+    "institution: docks": 2,
+    "route: river": 2,
+    "terrain: forest": 2,
+    "garrison": 2,
+    "institution: temple, monastery": 2,
+    "terrain: coastal, desert": 1,
+    "route: port": 1,
+    "route: isolated, port": 1,
+    "route: isolated, port, river": 1,
+    "route: port, river": 1,
+    "watch": 1,
+    "tier: >= metropolis": 1,
+    "institution: monastery": 1
+  },
+  "unhomed": {
+    "specialized metalworkers": 18,
+    "sawmill": 14,
+    "tanner": 13,
+    "guild": 13,
+    "caravan / warehouse": 12,
+    "charcoal burner": 10,
+    "glassblower": 9,
+    "beekeeper / chandler": 9,
+    "potter / brickmaker": 9,
+    "scriptorium / library / ruins": 9,
+    "slave market": 8,
+    "peat cutter": 7,
+    "stable / beast trainer": 7,
+    "salt works / smokehouse": 6,
+    "smelter": 6,
+    "weaver / tailor": 6,
+    "bowyer / fletcher": 6,
+    "coal pit / charcoal burner": 5,
+    "brewer / maltster": 5,
+    "apothecary / alchemist": 5,
+    "courthouse": 5,
+    "thatcher": 4,
+    "fuller": 3,
+    "beekeeper": 3,
+    "jeweller / lapidary": 3,
+    "forager / herbalist": 3,
+    "dyer": 3,
+    "arena": 3,
+    "alchemist / apothecary": 2,
+    "salt works": 2,
+    "brickmaker": 2,
+    "potter": 2,
+    "grove (resource itself)": 2,
+    "ruins (resource itself)": 2,
+    "marsh terrain": 2,
+    "wildfowler": 2,
+    "baker": 2,
+    "cooper": 2,
+    "herbalist / forager": 1,
+    "druid": 1,
+    "mint": 1,
+    "jeweller": 1,
+    "springs (resource itself)": 1,
+    "poultry": 1,
+    "forager": 1,
+    "maltster": 1,
+    "brewer": 1,
+    "tannery": 1,
+    "weavers": 1,
+    "bakers": 1,
+    "tanners": 1,
+    "brewery": 1,
+    "chandler": 1,
+    "glassmakers": 1,
+    "printing technology": 1
+  },
+  "atomsWithoutReader": "none: every atom used is in _vocabulary.json and was checked (institution kinds against INSTITUTION_KIND_PATTERNS). Off-factsOf atoms used: tier, route, food-source, crime. Disjunction form used (\"institution: temple, monastery\", \"route: isolated, port\", \"terrain: coastal, desert\") per DESIGN §3.2.",
+  "readerHazards": [
+    "INSTITUTION_KIND_PATTERNS.mill matches the catalogue name \"Access to external mill\" (/\\bmill\\b/): hasInstitution(r, \"mill\") is true for a place with only mill ACCESS (the same false match computeActiveChains freezes).",
+    "INSTITUTION_KIND_PATTERNS.tavern misses the catalogue spelling \"Ale house\" (it matches \"Alehouse\" only).",
+    "Producer catalogue names with NO kind: Specialized metalworkers, Smelter, Sawmill (deliberately not a mill), Fisher's landing / Fishmonger (fish goes to food-source), Shipyard, Tannery/Tanners, Weavers, Potter, Brewer/Brewery, Glassblower, Craft guilds, Charcoal burner, Peat cutter, Beekeeper, Chandler, Apothecary/Alchemist.",
+    "The Resources tab \"Economic strengths\" is fed by geographyData.js <terrain>.economicStrengths (resourceGenerator.js:500), not by RESOURCE_DATA."
+  ]
+}

@@ -13,6 +13,8 @@ import {
 import { institutionCategoryFlags } from './roleCategory.js';
 import { crimeSignalOf } from '../domain/crimeSignal.js';
 import { defenceOf } from '../domain/facts/defence.js';
+import { factsOf } from '../domain/facts/factsOf.js';
+import { resolveSibling } from '../domain/facts/drawDeclared.js';
 
 /**
  * The pool's own "desperation theft" line, held once because two entries print it: the famine
@@ -52,6 +54,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   // militia patrols nothing; a household levy is a militia). It moves births, counted by cause.
   const defence = defenceOf({ institutions });
   const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia };
+  // CENSUS-1e unit 2 (Appendix B item 23, the inline T branches): each line CENSUS-5b declared in
+  // SAFETY_LINE_SIBLINGS (below) resolves at the branch that prints it, against the live roster's
+  // facts — the original where the record holds its atom, else its twin. Draw-free.
+  const said = (/** @type {string} */ line) => resolveSibling(line, SAFETY_LINE_SIBLINGS, { facts: () => factsOf({ institutions }), poolId: 'safetyProfile:SAFETY_LINE_SIBLINGS', surface: 'defense', drawKind: 'T' });
   const threat  = config.monsterThreat || 'frontier';
   const watchLabel =
     tier === 'town'
@@ -206,7 +212,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Tense' : safetyRatio >= 1 ? 'Strained' : 'Volatile';
       safetyStrains.push({ strain: strainLabel, condition: 'Succession Crisis' });
       safetyDescs.push(
-        "Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap."
+        said("Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.")
       );
     }
     if (hasStress('recently_betrayed')) {
@@ -235,8 +241,8 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
       const strainLabel = safetyRatio >= 2 ? 'Strained' : 'Tense';
       safetyStrains.push({ strain: strainLabel, condition: 'Mass Migration' });
       safetyDescs.push(
-        "The settlement is absorbing more people than its infrastructure was built for. " +
-        "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces."
+        said("The settlement is absorbing more people than its infrastructure was built for. " +
+        "Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.")
       );
     }
     if (hasStress('religious_conversion')) {
@@ -495,7 +501,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   if (inst.hasSmuggling) {
     const routeType = inst.hasPort ? 'port-based' : 'overland';
     const gateNote  = inst.hasGates
-      ? " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."
+      ? said(" The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.")
       : ' The lack of controlled entry points makes movement relatively easy; no gates to bribe and no checkpoints to avoid.';
     const prosecuteNote = inst.hasPrison && inst.hasCourtSystem
       ? ' Arrests do happen. Prosecution is real, which is why the network is careful.'
@@ -508,7 +514,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     });
   }
   if (inst.hasGangInfra && crimeTypes.length === 0) {
-    const garRef  = inst.hasGarrison ? ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.'
+    const garRef  = inst.hasGarrison ? said(' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.')
                   : inst.hasWatch    ? ' The watch responds to the worst incidents but cannot contest territorial control.'
                   : inst.hasMilitia  ? ' The militia is composed of locals who know the gangs personally. Enforcement is complicated.'
                   :                    ' With no formal guard, the gangs operate without meaningful opposition.';
@@ -531,7 +537,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     // (already reflected in communityOrderBonus above)
   } else if (crimeTypes.length === 0 && (isDangerous || flags.criminalEffective >= 45)) {
     if (flags.criminalEffective < 35 || effectiveSafety < 0.6) {
-      const lawRef  = inst.hasMilitaryInst ? 'The watch is too thinly spread to maintain order.' : 'There is no meaningful law enforcement.';
+      const lawRef  = inst.hasMilitaryInst ? said('The watch is too thinly spread to maintain order.') : 'There is no meaningful law enforcement.';
       const charNote = inst.hasCharterHall ? ' The charter hall handles external threats but is not equipped for civil enforcement.' : '';
       const courtNote = inst.hasCourtSystem ? '' : ' Without a court, there is no formal mechanism for resolving disputes peacefully.';
       crimeTypes.push({
@@ -581,7 +587,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     const insurgentDriven = (flags.criminalEffective || 0) > (flags.militaryEffective || 0);
     addCrimeIfMissing('political violence',
       insurgentDriven
-        ? 'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.'
+        ? said('Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.')
         : 'Targeted intimidation and occasional violence against officials loyal to the current authority. Professionally executed.');
     addCrimeIfMissing('loyalty testing',
       'Both the governing faction and the insurgency pressure individuals to declare allegiance. Refusal is dangerous. False declarations are common.');
@@ -590,7 +596,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
   if (hasStress('slave_revolt')) {
     addCrimeIfMissing('revolt violence',
-      'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.');
+      said('Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.'));
     addCrimeIfMissing('escape networks',
       'Organised infrastructure helping enslaved persons escape. Safe houses, forged papers, passage out of the settlement. The same network that was small and cautious is now large and urgent.');
     addCrimeIfMissing('informant pressure',
@@ -618,7 +624,7 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   }
   if (hasStress('mass_migration')) {
     addCrimeIfMissing('displacement crime',
-      'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.');
+      said('Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.'));
     addCrimeIfMissing('cultural friction',
       'Violent incidents between established residents and newcomers. Usually starts with an economic dispute and escalates.');
     addCrimeIfMissing('black market passage',
@@ -711,10 +717,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
     plotHooks.push("The smuggling network is moving something unusual this week, not the normal contraband. Someone wants to know what it is before it arrives.");
   }
   if (stress.crusaderSynthesis) {
-    plotHooks.push("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.");
+    plotHooks.push(said("The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological."));
   }
   if (stress.merchantArmy) {
-    plotHooks.push("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.");
+    plotHooks.push(said("The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way."));
   }
 
   return {
@@ -785,10 +791,9 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * the chair's ruling R-C). The safety profile's inline T branches print lines that presume a fact
  * their branch does not guarantee: the watch named under a stress any place can carry, the walls
  * named beside a garrison or a gate (a gate row stands without walls). The originals stay where
- * they are spelled above; each is declared here, keyed by its printed text, with its twin. NO
- * CONSUMER READS THIS TABLE YET — the safety profile's branches are CENSUS-1d's to route through
- * `resolveSibling` (R-C: a lane never wires a draw site that is not its own) — so it moves no
- * birth. Measured on the 1,000 (soak1k-0..999) before the change, printed / false by the record:
+ * they are spelled above; each is declared here, keyed by its printed text, with its twin. Each
+ * printing branch resolves through `said` → `resolveSibling` (CENSUS-1e unit 2), so a twin prints
+ * where the record refuses its original's atom. Measured on the 1,000 (soak1k-0..999) before the change, printed / false by the record:
  * the succession watch 61 / 30, the migration watch 63 / 28, the revolt watch 61 / 25, the
  * insurgent watch 43 / 22, the displacement watch 71 / 32, the garrison's walls 52 / 3, the
  * smuggler's walls 229 / 0, the thin watch 2 / 1, the merchant army's watch 32 / 0, the garrison
