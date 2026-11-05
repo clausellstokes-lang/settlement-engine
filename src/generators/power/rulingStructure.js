@@ -818,3 +818,45 @@ export const MILITARY_MODIFIER_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'arms-backed', twinOf: 'garrison-backed', excludes: Object.freeze(['garrison']) }),
   ]),
 });
+
+/**
+ * One declared sibling set: the original `needs` its atoms; its twin (when the slot needs one)
+ * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ */
+const declaredSet = (text, needs, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(needs) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+]);
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): the base
+ * roster's descriptions that presume a force or a market their branch does not guarantee (the
+ * Military/Guard entry is keyed by the military PRIORITY and the tier, not by the roster). Keyed by
+ * the printed text; NO CONSUMER READS THIS TABLE YET (the inline T branches are CENSUS-1d's to
+ * route), so it moves no birth. Measured on the 1,000, printed / false by the record: "Town watch
+ * and militia" 48 / 0 on `watch` (it would be 48 / 48 on `militia`: the line's town holds a watch,
+ * and "militia" reads as the watch's own levy, so it declares the watch alone), the city garrison
+ * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0, the part-time militia 7 / 1, the armed
+ * patrol 34 / 13. The two twins are the chair's ruling (R-G), recorded in the lane doc. The
+ * crossroads and established-merchant lines ("fund the council", "council access", 23 / 10 and
+ * 40 / 13 by `ruler: council`) are NOT declared: a High Theocratic Council reads `ruler: priest`,
+ * so the atom would refuse a true line; they wait for a council-presence atom (the lane doc).
+ */
+export const FACTION_DESC_SIBLINGS = Object.freeze({
+  'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.': declaredSet(
+    'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.', ['garrison']),
+  'Town watch and militia; enforce ordinances, manage disorder, and report to the council.': declaredSet(
+    'Town watch and militia; enforce ordinances, manage disorder, and report to the council.', ['watch']),
+  'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.': declaredSet(
+    'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.', ['garrison', 'watch']),
+  'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
+    'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.', ['garrison', 'watch']),
+  'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.': declaredSet(
+    'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.', ['market']),
+  'Part-time militia with limited organisation; authority is moral rather than institutional.': declaredSet(
+    'Part-time militia with limited organisation; authority is moral rather than institutional.', ['militia'],
+    'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'),
+  "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.": declaredSet(
+    "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.", ['militia'],
+    "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."),
+});
