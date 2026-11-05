@@ -16,6 +16,7 @@
  *   garrison — a standing garrison (soldiers and a commander)
  *   hospital — a hospital. A healer, a monastery or a friary is not one (`healer` is its own).
  *   mercenary — a hired company (for the composite `guardPresence`, `factsOf.js`)
+ *   commander — a garrison stands, so someone commands one (`hasCommander`; CENSUS-1c, R-E)
  *
  * Pure: no randomness, no clock.
  */
@@ -25,7 +26,7 @@ import { defenseFactsOf } from '../defense/defenseFacts.js';
  * @typedef {object} DefenceFacts
  * @property {boolean} walls @property {'stone'|'palisade'|null} wallKind @property {boolean} palisade
  * @property {boolean} gate @property {boolean} watch @property {boolean} militia
- * @property {boolean} garrison @property {boolean} hospital @property {boolean} healer @property {boolean} mercenary
+ * @property {boolean} garrison @property {boolean} hospital @property {boolean} healer @property {boolean} mercenary @property {boolean} commander
  */
 
 /**
@@ -46,5 +47,6 @@ export function defenceOf(record) {
     hospital: d.hasHospital,
     healer: d.hasHealer,
     mercenary: d.hasMercenary,
+    commander: d.hasCommander,
   });
 }

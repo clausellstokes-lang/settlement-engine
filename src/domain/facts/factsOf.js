@@ -27,6 +27,7 @@ import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
+import { faithReadingOf } from '../dossier/faithReading.js';
 
 /**
  * @param {any} record a settlement record
@@ -44,6 +45,12 @@ export function factsOf(record, options = {}) {
     get defence() { return defenceOf(record); },
     /** the ONE composite (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company */
     get guardPresence() { const d = defenceOf(record); return d.watch || d.garrison || d.militia || d.mercenary; },
+    /** the rulings §2 (CENSUS-1c, R-E): soldiers = a garrison or a hired company (`forceWordsOf`'s `soldiers`) */
+    get soldiers() { const d = defenceOf(record); return d.garrison || d.mercenary; },
+    /** the rulings §2 (CENSUS-1c, R-E): someone commands a garrison (`defenseFactsOf.hasCommander`) */
+    get commander() { return defenceOf(record).commander; },
+    /** the rulings §2 (CENSUS-1c, R-E): the ONE faith reading (`dossier/faithReading.js :: faithReadingOf`) */
+    get faith() { return faithReadingOf(record); },
     /** fact 4: water a boat or a net could use */
     get water() { return waterOf(record); },
     /** fact 5: a live market */
