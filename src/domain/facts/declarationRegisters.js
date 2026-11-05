@@ -24,7 +24,7 @@
  *
  * @enforced-by tests/domain/facts/declarationRegisters.test.js
  */
-import { STATE_MARK_DIMENSIONS, declarationOfTags, declares } from './factVocabulary.js';
+import { COLOUR_MARK, STATE_MARK_DIMENSIONS, declarationOfTags, declares } from './factVocabulary.js';
 
 /** The kernel mark dimensions that are FACT dimensions (R-O): `walls` and F12's five families. */
 export const FACT_MARK_DIMENSIONS = Object.freeze(['walls', 'threat', 'hunger', 'succession', 'unrest', 'crisis']);
@@ -47,11 +47,35 @@ export function variantDeclares(variant) {
 }
 
 /**
+ * The marks beside a `colour` mark that DECLARE (R-AO: a colour line declares nothing else) — a
+ * fact atom or a fact mark word. Empty for a line that carries no `colour`, or carries it beside
+ * only the audience mark and the kernel's state words.
+ * @param {ReadonlyArray<string>} marks
+ * @returns {string[]}
+ */
+export function colourConflicts(marks) {
+  const list = Array.isArray(marks) ? marks : [];
+  if (!list.includes(COLOUR_MARK)) return [];
+  return list.filter((m) => m !== COLOUR_MARK && variantDeclares({ marks: [m] }));
+}
+
+/**
+ * Is one state-prose variant marked colour by its own marks (R-AO)? Read; presumes nothing.
+ * @param {{ marks?: ReadonlyArray<string> } | null | undefined} variant
+ */
+export function variantColour(variant) {
+  return Array.isArray(variant?.marks) && variant.marks.includes(COLOUR_MARK);
+}
+
+/**
  * @typedef {object} PoolCount
  * @property {number} lines the pool's variants
  * @property {number} declaring the variants that declare (their own marks)
+ * @property {number} colourLines the variants marked `colour` by their own marks (R-AO): read,
+ *   presuming nothing — counted as declared by the register, never by `declaring`
  * @property {number} undeclared the register's count: 0 for a `{colour}` pool or a pool whose
- *   brace group declares for every line (atoms or `{crisis-scoped}`), else lines − declaring
+ *   brace group declares for every line (atoms or `{crisis-scoped}`), else
+ *   lines − declaring − colourLines
  * @property {boolean} crisisScoped @property {boolean} colour
  */
 
@@ -70,11 +94,13 @@ export function statePoolCounts(leaves) {
         const meta = (block.poolMeta || {})[poolKey] || {};
         const list = Array.isArray(variants) ? variants : [];
         const declaring = list.filter(variantDeclares).length;
+        const colourLines = list.filter((v) => variantColour(v) && !variantDeclares(v)).length;
         const crisisScoped = meta.crisisScoped === true;
         const colour = meta.colour === true;
         const poolSpeaks = crisisScoped || (Array.isArray(meta.declares) && meta.declares.length > 0);
         out[`${blockId}::${poolKey}`] = {
-          lines: list.length, declaring, undeclared: colour || poolSpeaks ? 0 : list.length - declaring, crisisScoped, colour,
+          lines: list.length, declaring, colourLines,
+          undeclared: colour || poolSpeaks ? 0 : list.length - declaring - colourLines, crisisScoped, colour,
         };
       }
     }

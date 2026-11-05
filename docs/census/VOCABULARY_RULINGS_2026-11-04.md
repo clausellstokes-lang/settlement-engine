@@ -53,3 +53,7 @@ DS-GEN opts in 35 of 140 pools (history, fabric and morphology pools assert no c
 ## 9. A draw site's facts (added 2026-11-05 06:18 UTC by CENSUS-1f, the chair's R-Z of 2026-11-05 04:5x)
 
 A draw site inside the pipeline is handed only the ONE field measured as settled before its draw (through `factsOf.js :: birthFactsOf`, R-V), never the whole container that holds it: handing the goal draw the whole power structure carried a guild faction the density law can empty later (CENSUS-4d, three births failed the self-check), and handing the ruling step's sibling sets the native roster carried a militia that joins after the power step (CENSUS-1e's R-Q cure, `f2367a4`); the birth self-check (`cert:false-presumption`) stays the guard.
+
+## 10. The per-line colour mark (added 2026-11-05 07:10 UTC by CENSUS-1g, the chair's R-AO of 2026-11-05 06:2x)
+
+A mixed pool's line that was read and presumes nothing is marked `colour` — in the annex tag slot (`[angle · colour]`; `[colour]` in a canonical row's slot) or on a table row (`{ text, colour: true }`); the projector and the undeclared register count it as declared ("read; presumes nothing"), the draw, the kernel and the ledger read it as silence (it is no atom, so it moves no birth), `colour` beside an atom is an error, and an unread line is never marked.

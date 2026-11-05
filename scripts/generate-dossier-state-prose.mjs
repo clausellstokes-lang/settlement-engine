@@ -46,7 +46,8 @@ import {
 // `src/domain/prose/` import there; `kinSpines`'s docblock carries the measurement). A script
 // is outside `src/`, so the island fence — which scans `src/` alone — is untouched.
 import { contentWords } from '../src/domain/prose/composedWalker.js';
-import { assertDeclarable, POOL_RULINGS, STATE_MARK_DIMENSIONS } from '../src/domain/facts/factVocabulary.js';
+import { assertDeclarable, COLOUR_MARK, POOL_RULINGS, STATE_MARK_DIMENSIONS } from '../src/domain/facts/factVocabulary.js';
+import { colourConflicts } from '../src/domain/facts/declarationRegisters.js';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -288,11 +289,24 @@ const MARK_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
  * @param {string} where
  */
 function assertStateMarks(marks, where) {
+  assertColourAlone(marks, where);
   for (const m of marks) {
-    if (m === 'dm-only' || MARK_WORDS.has(m)) continue;
+    if (m === 'dm-only' || m === COLOUR_MARK || MARK_WORDS.has(m)) continue;
     try { assertDeclarable(m.replace(/^no\s+/i, '')); } catch (e) {
       throw new Error(`${where}: the tag slot carries '${m}', which is no mark word and no declarable atom — ${e.message}`, { cause: e });
     }
+  }
+}
+/**
+ * R-AO: a `colour` mark ("read; presumes nothing") stands alone — beside the audience mark and the
+ * kernel's state words at most, never beside an atom or a fact mark word.
+ * @param {ReadonlyArray<string>} marks
+ * @param {string} where
+ */
+function assertColourAlone(marks, where) {
+  const beside = colourConflicts(marks);
+  if (beside.length) {
+    throw new Error(`${where}: the tag slot carries \`colour\` beside ${beside.map((m) => `'${m}'`).join(', ')} — a colour line declares nothing else (R-AO)`);
   }
 }
 /** A trailing italic authoring note. */
@@ -601,6 +615,7 @@ function parseAnnex(src, headerRe, label, options = {}) {
       if (slot.some((p) => GRAMMAR_TAG_RE.test(p))) {
         throw new Error(`${label} ${block.id}: a canonical row's tag slot carries a \`grammar:\` tag (line ${i + 1}); the canonical row realises the engine's own order`);
       }
+      assertColourAlone(slot, `${label} ${block.id} :: ${pool.key} #0`);
       pool.variants.push({
         index: 0, angle: 'canonical', marks: slot, grammar: null, wordings: [], text: cleanText(canonical[3]),
       });

@@ -171,7 +171,7 @@ const RENDERERS = {
     const o = name ? name.length % 3 : 0;
     const variants = RELIGIOUS_CONVERSION_VARIANTS(s);
     if (!facts) return variants[o].text;
-    return drawDeclared(variants, { draw: (p) => p[o], facts, key: 'stressNarrative:religious_conversion', poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H' }).text ?? variants[o].text;
+    return drawDeclared(variants, { draw: (p) => p[o], facts, key: 'stressNarrative:religious_conversion', poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H', keepRefused: true }).text ?? variants[o].text; // R-AM: a kept beat is noted
   },
 
   // slave_revolt: presumes only what the key guarantees, enslaved people and their revolt (R-U; the
