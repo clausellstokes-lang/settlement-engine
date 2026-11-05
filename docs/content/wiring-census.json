@@ -124,7 +124,7 @@
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
     "declaredColumnRows": 709,
-    "tablePools": 48
+    "tablePools": 50
   },
   "rows": [
     {
@@ -43557,6 +43557,32 @@
       "drawKind": "T",
       "drawSite": "faithPanelModel.js (axis-keyed)",
       "lines": 4,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false,
+      "colour": true
+    },
+    {
+      "id": "warRemembrance.WAR_ENDING_TELLINGS",
+      "module": "src/domain/display/warRemembrance.js",
+      "name": "WAR_ENDING_TELLINGS",
+      "drawKind": "T",
+      "drawSite": "warRemembrance.js (ending-keyed by the record's classifier)",
+      "lines": 11,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false,
+      "colour": true
+    },
+    {
+      "id": "deityEffects.DEITY_AXIS_EFFECTS",
+      "module": "src/domain/display/deityEffects.js",
+      "name": "DEITY_AXIS_EFFECTS",
+      "drawKind": "T",
+      "drawSite": "deityEffects.js (axis-keyed)",
+      "lines": 13,
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
