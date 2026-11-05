@@ -31,6 +31,8 @@
 import { declarationOf, declarationAdmits, declarationOfTags, declares, atomsOf } from './factVocabulary.js';
 import { activePresumptionLedger, notePresumption } from './presumptionLedger.js';
 import { hashKey } from '../display/stateProse/stateProseKernel.js';
+import { fnv1a32 } from '../../kernel/proseHash.js';
+import { UNTYPED } from '../hookThemes.js';
 
 /**
  * The text a pool line prints: a bare string is itself; a declared line is `{ text, … }`.
@@ -74,11 +76,57 @@ function poolDeclares(pool, tagged) {
  * @property {ReadonlyArray<string>} [poolDeclares] the pool's own atoms
  * @property {(line: any) => any} [twin] the site's twin resolver (a text-keyed lookup)
  * @property {Record<string, unknown>} [ctx] the per-line context a context atom needs (`npc`)
+ * @property {DrawRegistry} [registry] the site's no-repeat registry when it draws through
+ *   `hookVariety.js :: drawUnique` (R-AJ, CENSUS-1g unit 3): a refused line resolves FIRST to a
+ *   fresh admitted template (`freshAdmitted`), before the twin and the argmax
  * @property {boolean} [keepRefused] the site KEEPS its drawn line when nothing is admitted (a slot
  *   that is never emptied: site 18's descriptions, the conversion beat): the result then carries
  *   the refused drawn line with `resolvedBy: 'kept'`, and the ledger notes it with its atoms so the
  *   birth self-check judges it (R-AM, CENSUS-1g unit 2)
  */
+
+/**
+ * @typedef {object} DrawRegistry the settlement-scoped registries `drawUnique` reads (HK-3)
+ * @property {Set<string> | undefined} used the family registry (the template's key)
+ * @property {(x: any) => string} keyFn a template's family key
+ * @property {Set<string>} [themes] the theme registry
+ * @property {(x: any) => string} [themeOfFn] a template's theme (`UNTYPED` blocks nothing)
+ */
+
+/**
+ * THE REGISTRY-AWARE RESOLUTION (CENSUS-3e's `freshAdmittedTwin`, lifted here by R-AJ, CENSUS-1g
+ * unit 3). When a line drawn through `drawUnique` is refused, the argmax keyed by the pool alone
+ * ignores the settlement's registries: two refused draws resolve to the same template and a hook
+ * is lost as a duplicate (HK-3's `pin:no-hook-is-lost`). This picks, among the admitted templates
+ * whose family is still unused (preferring an unspoken theme, `drawUnique`'s tiers), the one with
+ * the highest FNV-1a hash of `key::drawn::candidate`, and registers it. It consumes NO roll. With
+ * no family registry, or nothing fresh, it answers `undefined` and the resolution goes on.
+ * @param {ReadonlyArray<any>} list @param {any} drawn @param {DrawRegistry} reg
+ * @param {(x: any) => boolean} admits @param {string} key
+ * @returns {any}
+ */
+function freshAdmitted(list, drawn, reg, admits, key) {
+  const used = reg.used;
+  if (!(used instanceof Set)) return undefined;
+  const fresh = list.filter((x) => x !== drawn && !isTwin(x) && !used.has(reg.keyFn(x)) && admits(x));
+  if (fresh.length === 0) return undefined;
+  const themeOf = reg.themes instanceof Set && typeof reg.themeOfFn === 'function' ? reg.themeOfFn : null;
+  const blocking = (/** @type {any} */ x) => {
+    const t = themeOf ? themeOf(x) : null;
+    return typeof t === 'string' && t !== '' && t !== UNTYPED ? t : null;
+  };
+  const unspoken = themeOf ? fresh.filter((x) => { const t = blocking(x); return t === null || !reg.themes?.has(t); }) : [];
+  const candidates = unspoken.length > 0 ? unspoken : fresh;
+  const own = reg.keyFn(drawn);
+  let best = candidates[0]; let bestKey = -1;
+  for (const x of candidates) {
+    const k = fnv1a32(`${key}::${own}::${reg.keyFn(x)}`);
+    if (k > bestKey) { best = x; bestKey = k; }
+  }
+  used.add(reg.keyFn(best));
+  if (themeOf) { const t = blocking(best); if (t !== null) reg.themes?.add(t); }
+  return best;
+}
 
 /**
  * @param {ReadonlyArray<any>} pool
@@ -114,11 +162,15 @@ export function drawDeclared(pool, options) {
     note(options, drawn, list, atomsOf(declarationOf(drawn, { tagged })), 'drawn');
     return { line: drawn, text: lineText(drawn), refused: null, resolvedBy: 'drawn' };
   }
-  // 1. its twin
+  // 1. a fresh admitted template (a registry site), else its twin
   const own = lineText(drawn);
-  const twin = typeof options.twin === 'function'
-    ? options.twin(drawn)
-    : list.find((l) => isTwin(l) && /** @type {{twinOf: string}} */ (l).twinOf === own);
+  const fresh = options.registry
+    ? freshAdmitted(list, drawn, options.registry, (l) => admit(l).admitted, options.key || options.poolId || '')
+    : undefined;
+  const twin = fresh !== undefined ? fresh
+    : typeof options.twin === 'function'
+      ? options.twin(drawn)
+      : list.find((l) => isTwin(l) && /** @type {{twinOf: string}} */ (l).twinOf === own);
   if (twin != null && twin !== drawn && admit(twin).admitted) {
     note(options, twin, list, atomsOf(declarationOf(twin, { tagged })), 'twin');
     return { line: twin, text: lineText(twin), refused: verdict.refused, resolvedBy: 'twin' };
