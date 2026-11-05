@@ -56,7 +56,7 @@ describe('every dimension is answered by one home, or cannot be declared', () =>
     expect(V.parseAtom('tier: ≥ village-ish')).toBeNull();
     expect(V.parseAtom('crisis: drought')).toBeNull();
     expect(() => V.assertDeclarable('moat')).toThrow(/not an atom/);
-    expect(() => V.assertDeclarable('soldiers')).toThrow(/no reader yet/);
+    expect(() => V.assertDeclarable('organised crime')).toThrow(/no reader yet/);
     expect(() => V.assertDeclarable('grain')).toThrow(/no reader yet/);
     expect(V.assertDeclarable('walls').dimension).toBe('walls');
     expect(V.assertDeclarable('institution: mill').key).toBe('mill');

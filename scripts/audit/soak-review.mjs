@@ -88,7 +88,10 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
       const rendered = isRendered(i, renderedSubset) || isSampled(i, count);
       const r = rendered ? H.renderSurfaces(harness, s) : null;
       const findings = reviewSettlement(s, b.config, r);
-      for (const p of presumptionFindings(s, born.ledger)) {
+      // CENSUS-1c unit 4: the render's draws (noted in the harness graph's own ledger) are
+      // re-asserted against the same final record and counted in declared-share.
+      const renderLedger = r && Array.isArray(r.ledger) ? r.ledger : [];
+      for (const p of [...presumptionFindings(s, born.ledger), ...presumptionFindings(s, renderLedger)]) {
         findings.push({ check: 'cert:false-presumption', surface: 'record', quote: p.atom, detail: `${p.pool} #${p.lineId}: '${p.atom}' reads ${p.answer} on the final record` });
       }
       if (replay === false) findings.push({ check: 'cert:replay_mismatch', surface: 'record', quote: '', detail: 'same seed, different bytes' });
@@ -136,7 +139,7 @@ async function runWorker({ indices, out, w, renderedSubset, count }) {
         houses: housesReading(s),
         // The READER battery's distributions (2c: the Exports count; 10: the Daily Life line at all), apart.
         reader: readerDistributions(s, r ? r.tabs : null),
-        presumptions: { share: declaredShare(born.ledger) },
+        presumptions: { share: declaredShare([...born.ledger, ...renderLedger]) },
       };
       if (isSampled(i, count) && r) {
         const body = [

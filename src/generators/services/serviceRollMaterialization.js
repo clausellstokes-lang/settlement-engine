@@ -22,8 +22,8 @@ import {
   isMaterializedCustomContent,
   nativeSemanticName,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { defenseFactsOf } from '../../domain/defense/defenseFacts.js';
-import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { SERVICE_DESC_SIBLINGS } from '../../data/institutionServices.js';
 
 const CRIMINAL_INSTITUTION_KEYWORDS = Object.freeze([
   'thieves',
@@ -65,14 +65,14 @@ function isCriminalProvider(institution) {
  *
  * @param {Record<string, unknown>} service
  * @param {string} institutionName
- * @param {import('../../data/defenceTwinLines.js').DefenceTwinFacts} [defence] the place's
- *   defence facts: a desc that names walls the place lacks takes its twin (F10 unit 4)
+ * @param {ReturnType<typeof factsOf>} [defence] the place's facts: a desc that names walls the
+ *   place lacks resolves to its declared sibling (`SERVICE_DESC_SIBLINGS`; F10 unit 4, CENSUS-1c)
  */
 function projectAvailableService(service, institutionName, defence) {
   /** @type {Record<string, unknown>} */
   const projected = {
     name: service.name,
-    desc: defenceTwinLine(service.desc, defence),
+    desc: resolveSibling(service.desc, SERVICE_DESC_SIBLINGS, { facts: defence ?? null, poolId: 'institutionServices:SERVICE_DESC_SIBLINGS', surface: 'services', drawKind: 'T' }),
     institution: institutionName,
     ...projectCustomDefinitionIdentity(service),
   };
@@ -155,7 +155,7 @@ export function materializeInstitutionServiceRolls(input) {
   const filteredInstitutions =
     institutions.filter(worldLaw.allowsInstitution);
   // F10 unit 4: the roster's defence facts, read once, for the descs that name walls. Draw-free.
-  const defence = defenseFactsOf({ institutions });
+  const defence = factsOf({ institutions });
 
   for (const institution of filteredInstitutions) {
     const services = getServicesForInstitution(

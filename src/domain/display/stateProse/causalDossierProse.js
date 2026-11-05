@@ -37,7 +37,7 @@
  * @enforced-by tests/domain/causalDossierProse.test.js
  */
 import { DOSSIER_CAUSAL_PROSE } from '../../../data/dossierCausalProse.generated.js';
-import { AUDIENCE_DM, AUDIENCE_PLAYER, eligibleVariants, drawVariant, fillSlots, SOLE_POOL } from './stateProseKernel.js';
+import { AUDIENCE_DM, AUDIENCE_PLAYER, eligibleVariants, drawVariant, fillSlots, noteDrawnVariant, SOLE_POOL } from './stateProseKernel.js';
 
 /**
  * The eight dossier sections a causal family can land in (§0e). A family declares a
@@ -115,6 +115,7 @@ export function readCausalDossierLine(join, options = {}) {
   // not draw the same index and read as a copied sentence.
   const variant = drawVariant(eligible, join.familyId, join.arm, options.seed || '');
   if (!variant) return null;
+  noteDrawnVariant(variant, { blockId: join.familyId, poolKey: join.arm, surface: 'causal' }); // CENSUS-1c: the kernel family notes every draw
   const text = fillSlots(variant.text, slots);
   if (text === null) return null;
   return Object.freeze({

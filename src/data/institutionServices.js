@@ -1720,3 +1720,24 @@ export const INSTITUTION_SERVICES = {
   }
 
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the walls-free twins of two service descriptions (F10 unit 4). Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const SERVICE_DESC_SIBLINGS = Object.freeze({
+  // the town council's public works; the underground network's passage.
+  'Walls, wells, roads, and the watch': Object.freeze([
+    Object.freeze({ text: 'Walls, wells, roads, and the watch', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'Wells, roads and the common ground', twinOf: 'Walls, wells, roads, and the watch', excludes: Object.freeze(['walls']) }),
+  ]),
+  'Move people beneath the walls unseen.': Object.freeze([
+    Object.freeze({ text: 'Move people beneath the walls unseen.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'Move people in and out unseen.', twinOf: 'Move people beneath the walls unseen.', excludes: Object.freeze(['walls']) }),
+  ]),
+});

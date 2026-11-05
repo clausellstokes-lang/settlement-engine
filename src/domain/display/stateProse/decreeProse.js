@@ -92,7 +92,7 @@ import {
   DECREE_EVENT_POOLS, DECREE_FOLLOWS_FROM_POOL, DECREE_FORM_POOLS, DECREE_HAND_POOLS,
   DECREE_LINE_CAUSES, DECREE_OVERRIDE_POOLS, DECREE_PARTY_DEED_POOLS, DECREE_STANDING_POOLS,
 } from './decreeProsePools.js';
-import { drawVariant, eligibleVariants, fillSlots, speakTierNoun, stableVid } from './stateProseKernel.js';
+import { drawVariant, eligibleVariants, fillSlots, noteDrawnVariant, speakTierNoun, stableVid } from './stateProseKernel.js';
 
 /** @typedef {import('./decreeProsePools.js').DecreeProseVariant} DecreeProseVariant */
 /** @typedef {import('./decreeProsePools.js').DecreeProseBlock} DecreeProseBlock */
@@ -236,6 +236,7 @@ function drawPart(pool, part, blockId, poolKey, cause, seed, audience, slots) {
   const eligible = eligibleVariants(spoken, { slots, audience });
   const variant = drawVariant(eligible, blockId, poolKey, seed);
   if (!variant) return null;
+  noteDrawnVariant(variant, { blockId, poolKey, surface: 'decree' }); // CENSUS-1c: the kernel family notes every draw
   const text = fillSlots(variant.text, slots);
   if (text === null) return null;
   return Object.freeze({
