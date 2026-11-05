@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F4 CRIME-SIGNAL (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-25-f4-crime-signal.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   99 OF 525 ROWS MOVED (hamlet 12, village 72, town 15; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step ba9fde402): a relationship does not outlive the trim, affiliations, secrets and goals read the crime signal, no crime-wave tension without crime, and the survival and debt-evasion lines read the final crime signal. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S25 (the tree of ba9fde402 with the door paths carried from
+ *   the branch, the previous record's writes committed). e1a30c59.. -> 2e6482a4..
+ *
  * 2026-11-04 — F3 FOOD-WORDS (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-24-f3-food-words.json; the cloud chair signs under the owner's delegation, vetoable).
  *   136 OF 525 ROWS MOVED (thorp 19, hamlet 12, village 24, town 30, city 24, metropolis 27); the key set is identical. THE CAUSE, ONE (first-parent
