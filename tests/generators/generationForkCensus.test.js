@@ -144,7 +144,13 @@ const GOLDEN_CONTROL_KEY = 'town|germanic|plains|road|civilized|golden-master-v3
 // 2026-11-03, DEFENSE-2 magic dependency (ODQ §934.104), through the signed door
 // (docs/shift-records/2026-11-03-defense-magic-dependency.json): c957dd78... -> b1b9502a..., this town's defence
 // record storing the one magic reliance reading.
-const GOLDEN_CONTROL_HASH = 'b1b9502a37d001f01ea75bbb3bfa22c2a8ae70ba98c27d4067a6198aebef9f51';
+// 2026-11-04/05, the rung-1 landing (ODQ §934.105), the row moved with fourteen signed records, traced by reading the
+// committed manifest at each record commit (LANDING-6): b1b9502a... -> 2c1412ef X-46 car 1 (960e145e6) -> ea0f0c91 car 2
+// (0710eba4f) -> a0273c9a CRISIS (3d846d379) -> a569067a TERRAIN-POOLS (cd6df0c1e) -> a6dffdf7 SELF-VOUCH (0a5e5494f) ->
+// dc73b260 car 3 (70fac9ff0) -> ddde4e81 SELF-VOUCH I5 (70e58b6df) -> 498c9bda PLACE-NOT-TIER (dd65cb629) -> 40f855d3
+// TRUTH unit D (dfe79d34e) -> eab06b85 car 3 I7 (c099f0a4d) -> 84f03e52 F5 (efae972d4) -> c8942082 F6 (90218b271) ->
+// 57b4e0e1 F1 (81f690f78) -> 0dfd25bc F10 (fb06483e0); record 28 (the V-SUMMARY-HOOKS cure) does not move it.
+const GOLDEN_CONTROL_HASH = '0dfd25bc67d146684b685d585b162936ea90ca3144d960deac86985ac97679c0';
 /** EM-P0's own pinned-mode row and its chooser keys, re-measured here under the mocks. */
 const PIN_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -171,7 +177,12 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 // 2026-10-31, tension variety (GS-1, ODQ §934.101): 107 -> 69 pickVariant calls and 6 -> 15 external fnv1a32 calls
 // on the probe row (measured). The tie prose left the pair-hash door: its 19 ties' 38 desc/tension picks now render
 // at a drawn index, and the draw opens one fnv offset per archetype present (9 here) through the external channel.
-const PICK_VARIANT_CALLS = 69;
+// 2026-11-05 (LANDING-6, bisected by first-parent stage with this arm alone): 69 -> 31 X-46 car 3 (90dc22f18, the
+// institution budget: houses only, so the probe town's institution-description picks go 59 -> 21) -> 32 PINS (37b1e746d)
+// -> 31 car 3 I7 (6ca454d2b). NO VARIANT FAMILY IS LOST: the probe row's seeds, read at 79c442330 and at the tip, carry
+// the same five families (institution description, settlement origin, stress note, five history events, three history
+// anchors); only the institution family's population moved.
+const PICK_VARIANT_CALLS = 31;
 // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16 external fnv1a32 calls on the probe row (measured;
 // FOOD-3, food diversity, traced at stage T3 in DOORS-4).
 const FNV_EXTERNAL_CALLS = 16;
