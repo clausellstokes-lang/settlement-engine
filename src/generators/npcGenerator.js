@@ -1587,7 +1587,13 @@ export const generateNPCs = (
 };
 
 // generateRelationships
-export const generateRelationships = (npcs, config = {}, institutions = []) => {
+/**
+ * @param {any[]} npcs @param {any} [config] @param {any[]} [institutions]
+ * @param {{ government?: unknown, tier?: unknown } | null} [settled] CENSUS-1f (site 19, R-V / R-Z): the
+ *   ONE field the tie draw's declarations need beyond the roster — the government (the ruler kind,
+ *   measured settled at this draw) — and the tier; absent, a declared tie index is refused (fail-closed)
+ */
+export const generateRelationships = (npcs, config = {}, institutions = [], settled = null) => {
   // Relationship type definitions (for the strength labels)
   const RELATIONSHIP_STRENGTHS = {
     ally: ['weak', 'moderate', 'strong'],
@@ -1610,7 +1616,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
   const seen = new Set();
   // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
   // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
-  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions }))); // F1: the place's force words
+  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions })), settled ? () => birthFactsOf({ institutions, config, tier: settled.tier, powerStructure: { government: settled.government } }) : null); // F1: the place's force words; CENSUS-1f: the roster and the government only (R-Z)
 
   npcs.forEach(npc => {
     const maxRelationships = randInt(2, 3);
