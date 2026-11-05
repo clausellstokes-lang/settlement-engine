@@ -132,6 +132,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (T1/T2, docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of fe56bddd4 because the siege keeps 0.3 of the harvest; a village stores as a hamlet does; 70 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (X-46 car 3 (lane x46-3-budget), docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 90dc22f18 because the institution budget follows the population: seven anchors read log-linearly and one density factor per settlement; 960 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
