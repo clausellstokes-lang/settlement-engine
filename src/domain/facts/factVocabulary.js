@@ -72,31 +72,47 @@ export const STATE_MARK_DIMENSIONS = Object.freeze({
 });
 
 /**
- * The mark dimensions that are PRESENCE atoms of this vocabulary: a variant marked with the
- * dimension's first word `needs` the atom, one marked with its second word `excludes` it. Wave 1
- * routes `walls` alone through the one channel (the ledger, the self-check, the census); the five
- * crisis families keep the kernel's own two-word answer (`crisisAnswered`) until wave 2 opts the
- * pools into the crisis dimension, and the three demoted state keys are a desk's own reading,
- * not facts.
+ * The kernel's FACT mark dimensions, each onto this vocabulary's dimensions (wave 1: `walls`;
+ * wave 2, CENSUS-1i unit 8, R-O: F12's five crisis families). A variant marked with the
+ * dimension's first word declares the atom on its `needs` side (a family: the crisis dimension's
+ * GROUP value, `crisis: threat`; the bare `crisis` family: "a crisis is active"), one marked with
+ * its second word on its `excludes` side (`no walls`, `no crisis: threat`, `no crisis`). The
+ * kernel's eligibility still reads the caller's answered dimension (law 5: `wallsAnswered`,
+ * `crisisAnswered`) — this mapping is what the ledger notes and the birth self-check re-asserts
+ * against the final record, through the same reader every declared line uses (`familyActiveIn`
+ * via `factsOf(record).crisis`). The three demoted state keys are a desk's own reading, not facts.
  * @type {Readonly<Record<string, string>>}
  */
-export const MARK_DIMENSION_ATOM = Object.freeze({ walls: 'walls' });
+export const MARK_DIMENSION_ATOM = Object.freeze({
+  walls: 'walls',
+  threat: 'crisis: threat',
+  hunger: 'crisis: hunger',
+  succession: 'crisis: succession',
+  unrest: 'crisis: unrest',
+  crisis: 'crisis',
+});
 
 /**
  * The declaration a kernel variant's marks carry, in this vocabulary (`walls` → needs walls,
- * `no walls` → excludes walls). Marks of other dimensions declare nothing here.
+ * `no walls` → excludes walls; `threat` → crisis: threat, `no threat` → excludes crisis: threat;
+ * `crisis` → needs crisis, `no crisis` → excludes crisis). The demoted state keys declare nothing.
+ * A family's positive mark is a crisis GROUP value; no shipped variant carries two (the vocabulary
+ * test holds that), so the dimension's disjunction never widens a variant's two-dimension law 5.
  * @param {ReadonlyArray<unknown> | null | undefined} marks
  * @returns {Readonly<Declaration>}
  */
 export function declarationOfMarks(marks) {
-  /** @type {string[]} */ const needs = []; /** @type {string[]} */ const excludes = [];
+  /** @type {string[]} */ const needs = []; /** @type {string[]} */ const excludes = []; /** @type {string[]} */ const crisis = [];
   for (const [dimension, atom] of Object.entries(MARK_DIMENSION_ATOM)) {
     const [on, off] = STATE_MARK_DIMENSIONS[dimension];
-    if ((marks || []).includes(on)) needs.push(atom);
+    if ((marks || []).includes(on)) {
+      if (atom.startsWith('crisis: ')) crisis.push(atom.slice('crisis: '.length));
+      else needs.push(atom);
+    }
     if ((marks || []).includes(off)) excludes.push(atom);
   }
-  return needs.length || excludes.length
-    ? Object.freeze({ needs: Object.freeze(needs), excludes: Object.freeze(excludes), crisis: Object.freeze([]) })
+  return needs.length || excludes.length || crisis.length
+    ? Object.freeze({ needs: Object.freeze(needs), excludes: Object.freeze(excludes), crisis: Object.freeze(crisis) })
     : EMPTY_DECLARATION;
 }
 

@@ -129,10 +129,14 @@ describe('the three polarities, stated once', () => {
     expect(V.atomHolds('port', factsOf({ config: { tradeRouteAccess: 'port' } }))).toBe(true);
     expect(V.parseAtom('lake')).toBeNull();
   });
-  it('the tag slot: X needs, no X excludes, non-atoms skipped; the kernel marks declare walls only', () => {
+  it('the tag slot: X needs, no X excludes, non-atoms skipped; the kernel marks declare walls and the five crisis families (CENSUS-1i unit 8)', () => {
     expect(V.declarationOfTags(['visitor', 'walls', 'no market', 'crisis: threat', 'dm-only']))
       .toEqual({ needs: ['walls'], excludes: ['market'], crisis: ['threat'] });
-    expect(V.declarationOfMarks(['no walls', 'no threat'])).toEqual({ needs: [], excludes: ['walls'], crisis: [] });
+    // re-keyed by CENSUS-1i unit 8 (R-O): `no threat` now declares its family's exclusion (wave 1: walls only)
+    expect(V.declarationOfMarks(['no walls', 'no threat'])).toEqual({ needs: [], excludes: ['walls', 'crisis: threat'], crisis: [] });
+    expect(V.declarationOfMarks(['succession settled', 'unrest'])).toEqual({ needs: [], excludes: ['crisis: succession'], crisis: ['unrest'] });
+    expect(V.declarationOfMarks(['crisis'])).toEqual({ needs: ['crisis'], excludes: [], crisis: [] });
+    expect(V.declarationOfMarks(['no crisis', 'major', 'deficit', 'anchored'])).toEqual({ needs: [], excludes: ['crisis'], crisis: [] });
     expect(V.atomsOf(V.declarationOfTags(['walls', 'no market', 'crisis: threat']))).toEqual(['walls', 'no market', 'crisis: threat']);
   });
 });

@@ -342,20 +342,22 @@ export function eligibleVariants(pool, options = {}) {
 
 /**
  * Note a drawn variant in the open presumption ledger (CENSUS-1b wave 1, item 4): its atoms are
- * the kernel's `walls` / `no walls` (the fact dimension wave 1 routes through the one channel)
- * and any fact atoms its marks declare. A no-op when no ledger is open.
+ * the kernel's fact marks onto the vocabulary's dimensions (`walls` / `no walls`, and since wave 2
+ * — CENSUS-1i unit 8, R-O — F12's five crisis families: `crisis: threat`, `no crisis: hunger`,
+ * `crisis`, …; `factVocabulary.js :: declarationOfMarks`) and any fact atoms its marks declare.
+ * A no-op when no ledger is open.
  * @param {StateProseVariant|null|undefined} variant
  * @param {{ blockId: string, poolKey: string, surface?: string, crisisScoped?: boolean,
  *   poolDeclares?: ReadonlyArray<string> }} where
  */
 export function noteDrawnVariant(variant, where) {
   if (!variant || activePresumptionLedger() === null) return;
-  const walls = declarationOfMarks(variant.marks);
+  const marked = declarationOfMarks(variant.marks);
   const facts = variantFactDeclaration(variant);
   notePresumption({
     pool: `${where.blockId}::${where.poolKey}`,
     lineId: typeof variant.vid === 'number' ? variant.vid : variant.text,
-    atoms: [...atomsOf(walls), ...atomsOf(facts)],
+    atoms: [...atomsOf(marked), ...atomsOf(facts)],
     surface: where.surface || 'dossier',
     drawKind: 'K',
     resolvedBy: 'drawn',
