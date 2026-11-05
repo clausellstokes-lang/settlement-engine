@@ -227,7 +227,7 @@ describe('the beats are anchored: drawn where the fact is, never where it is not
 
 describe('the hook names only structures the settlement holds (the Voice Program wave 4)', () => {
   const STRESSES = Object.keys(STRESS_TYPE_MAP);
-  const vignettesOf = (type) => STRESS_DESCS[type].map((line) => line(NAME));
+  const vignettesOf = (type) => STRESS_DESCS[type].map((line) => textOf(line)(NAME));
 
   it('every registered stress carries at least two structure-free vignettes, the floor the filter stands on', () => {
     expect(STRESSES.length, 'anti-vacuity').toBeGreaterThan(10);
@@ -337,7 +337,7 @@ describe('the scene on real settlements', () => {
       // A stressed row's hook names no structure the settlement lacks (wave 4).
       const names = nativeSemanticNames(s.institutions).map((n) => n.toLowerCase())
         .filter((n) => !/^(?:access to|traveling|travelling) /.test(n));
-      const vignette = Object.values(STRESS_DESCS).flat().map((line) => line(s.name)).find((line) => s.arrivalScene.startsWith(line));
+      const vignette = Object.values(STRESS_DESCS).flat().map((line) => textOf(line)(s.name)).find((line) => s.arrivalScene.startsWith(line));
       if (vignette) expect(unheldClaims(vignette, names), `${i}: ${vignette}`).toEqual([]);
       for (const retired of ['magelight lamp post', 'A proper village', 'A market town of substance', "region's great urban centre"]) {
         // anchored: the length assertion above proves the scene rendered
@@ -422,7 +422,7 @@ describe('MASS MIGRATION NAMES ONE DIRECTION (chair ruling 2, 2026-10-30; ODQ §
 
   it('no arrival vignette and no pressure line, on either economy arm, tells a departure', async () => {
     const { PRESSURE_SENTENCES } = await import('../../src/generators/narrativeText.js');
-    const vignettes = STRESS_DESCS.mass_migration.map((line) => line(NAME));
+    const vignettes = STRESS_DESCS.mass_migration.map((line) => textOf(line)(NAME));
     const pressure = [
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 80 } }),
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 20 } }),

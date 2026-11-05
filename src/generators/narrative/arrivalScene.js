@@ -225,10 +225,10 @@ export function composeArrivalScene(settlement) {
   // A stress vignette names only structures the settlement holds; the structure-free vignettes every stress
   // carries are the floor (pinned by the arrival test), so the filter never empties the pool.
   const vignettes = underStress
-    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0 && defenseWordsFindings({ institutions }, line(name)).length === 0) // F1: and no force the record lacks
+    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(textOf(line)(name), names).length === 0 && defenseWordsFindings({ institutions }, textOf(line)(name)).length === 0) // F1: and no force the record lacks; R-C: a declared row gives back its template (CENSUS-2d)
     : [];
   const hookTemplate = underStress
-    ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])
+    ? textOf(pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress]))
     : textOf(pickRandom(ARRIVAL_SCENES[sceneKey])); // R-C: a declared row gives back its text (CENSUS-1c enforces)
   // SIZE ruling 2 (ODQ §934.104): the vignettes and route scenes were written with 'town' for a place of any size,
   // so the drawn hook speaks the settlement's own tier noun through the dossier kernel's helper, with its kept
