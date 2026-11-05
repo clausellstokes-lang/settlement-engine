@@ -524,9 +524,9 @@ export function bruntCandidates(s, kind, stakes) {
     for (const f of hit) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, CAST_REASON_SIBLINGS, defence)));
+      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
       for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
-      out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, CAST_REASON_SIBLINGS, defence)));
+      out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, BRUNT_SIBLINGS, defence)));
     }
     if (out.length) break;
   }
@@ -1049,6 +1049,30 @@ export const CAST_REASON_SIBLINGS = Object.freeze({
     Object.freeze({ text: 'holds the office of the guard', twinOf: 'holds the garrison\'s office', excludes: Object.freeze(['garrison']) }),
   ]),
 });
+
+/**
+ * THE BRUNT REASONS' CRISIS DECLARATIONS (CENSUS-2d unit 3), apart from the defence sets above
+ * (`DEFENCE_SIBLINGS` reads those as defence-word lines). Resolved with them at the brunt draw.
+ */
+export const CAST_CRISIS_SIBLINGS = Object.freeze({
+  // CENSUS-2d unit 3 (Phase A's ledger CRISIS_CAST_REASONS.json; the brunt site is wired, so these
+  // are enforced): food_security is reached under a famine OR a mass migration, and "the hunger" is
+  // true only with the hunger family on (a fed influx is fed: CENSUS-1c unit 7); housing_pressure
+  // under a migration OR monster pressure, and "the newcomers" only under an influx. Each twin is
+  // the chair's ruling (R-G), recorded with its share in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d".
+  // healing_capacity is reached under plague_onset alone: its key, never re-declared (R-B1).
+  'the hunger falls first on its people': Object.freeze([
+    Object.freeze({ text: 'the hunger falls first on its people', crisis: Object.freeze(['hunger']) }),
+    Object.freeze({ text: 'the strain falls first on its people', twinOf: 'the hunger falls first on its people', excludes: Object.freeze(['crisis: hunger']) }),
+  ]),
+  'its people take in the newcomers': Object.freeze([
+    Object.freeze({ text: 'its people take in the newcomers', needs: Object.freeze(['migration: influx']) }),
+    Object.freeze({ text: 'its houses are where the crisis is felt first', twinOf: 'its people take in the newcomers', excludes: Object.freeze(['migration: influx']) }),
+  ]),
+});
+
+/** The brunt draw's sibling sets: the defence sets and the crisis ones. */
+const BRUNT_SIBLINGS = Object.freeze({ ...CAST_REASON_SIBLINGS, ...CAST_CRISIS_SIBLINGS });
 
 /**
  * The resolution options for a cast reason: the record's facts (the defence home), the ledger's

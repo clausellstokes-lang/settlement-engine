@@ -35,6 +35,7 @@
  * @enforced-by tests/generators/arrivalScene.test.js
  */
 import { pickRandom } from '../helpers.js';
+import { textOf } from '../../domain/facts/textOf.js';
 import { resolvePrimaryStress } from '../stressPriority.js';
 import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
@@ -171,7 +172,7 @@ export function chooseSense(names, tradeWords, magicReal) {
  * The CLOSING key: a printed danger first, then a memory, then poverty or plenty. Player-visible facts only.
  * @param {any} settlement
  * @param {boolean} magicReal
- * @returns {{ pool: ReadonlyArray<(n: string) => string> } | null}
+ * @returns {{ pool: ReadonlyArray<import('../../data/arrivalProse.js').ArrivalLine> } | null}
  */
 export function chooseClosing(settlement, magicReal) {
   const safety = lower(settlement.economicState?.safetyProfile?.safetyLabel);
@@ -224,11 +225,11 @@ export function composeArrivalScene(settlement) {
   // A stress vignette names only structures the settlement holds; the structure-free vignettes every stress
   // carries are the floor (pinned by the arrival test), so the filter never empties the pool.
   const vignettes = underStress
-    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(line(name), names).length === 0 && defenseWordsFindings({ institutions }, line(name)).length === 0) // F1: and no force the record lacks
+    ? STRESS_DESCS[primaryStress].filter((line) => unheldClaims(textOf(line)(name), names).length === 0 && defenseWordsFindings({ institutions }, textOf(line)(name)).length === 0) // F1: and no force the record lacks; R-C: a declared row gives back its template (CENSUS-2d)
     : [];
   const hookTemplate = underStress
-    ? pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress])
-    : pickRandom(ARRIVAL_SCENES[sceneKey]);
+    ? textOf(pickRandom(vignettes.length ? vignettes : STRESS_DESCS[primaryStress]))
+    : textOf(pickRandom(ARRIVAL_SCENES[sceneKey])); // R-C: a declared row gives back its text (CENSUS-1c enforces)
   // SIZE ruling 2 (ODQ §934.104): the vignettes and route scenes were written with 'town' for a place of any size,
   // so the drawn hook speaks the settlement's own tier noun through the dossier kernel's helper, with its kept
   // phrases ("at the edge of town"). Identity for a town; it draws nothing, so no later pick moves.
@@ -249,13 +250,15 @@ export function composeArrivalScene(settlement) {
   /**
    * One beat's line from a pool of name-templates, redrawn once from the lines that agree where the first draw
    * names a market the roster lacks; null when no line of the pool agrees.
-   * @param {ReadonlyArray<(n: string) => string>} pool
+   * A row may carry its declaration (`{ text, needs?, excludes?, crisis? }`, R-C): read through `textOf`, byte-identical;
+   * CENSUS-1c's wiring enforces it.
+   * @param {ReadonlyArray<import('../../data/arrivalProse.js').ArrivalLine>} pool
    */
   const agreeingLine = (pool) => {
-    const first = pickRandom(pool)(name);
+    const first = textOf(pickRandom(pool))(name);
     if (speaks(first)) return first;
-    const clean = pool.filter((line) => speaks(line(name)));
-    return clean.length ? pickRandom(clean)(name) : null;
+    const clean = pool.filter((line) => speaks(textOf(line)(name)));
+    return clean.length ? textOf(pickRandom(clean))(name) : null;
   };
   // SIGHT: a landmark the native institutions imply, else the culture's built detail.
   let sight = null;
@@ -268,10 +271,10 @@ export function composeArrivalScene(settlement) {
         : '';
       const profile = CULTURE_PROFILES[resolveCultureProfileKey(config.culture || 'germanic')];
       let detail = materialized
-        || (profile?.architecturalDetails?.length ? pickRandom(profile.architecturalDetails) : '');
+        || (profile?.architecturalDetails?.length ? textOf(pickRandom(profile.architecturalDetails)) : ''); // R-C (CENSUS-2d)
       if (detail && !speaks(detail)) {
-        const clean = (profile?.architecturalDetails || []).filter(speaks);
-        detail = clean.length ? pickRandom(clean) : '';
+        const clean = (profile?.architecturalDetails || []).filter((d) => speaks(textOf(d)));
+        detail = clean.length ? textOf(pickRandom(clean)) : '';
       }
       if (detail) sight = `${sentenceCase(detail)}.`;
     }
@@ -293,7 +296,7 @@ export function composeArrivalScene(settlement) {
 
   // CLOSING: one more visible truth, none under a vignette.
   const closing = underStress ? null : chooseClosing(settlement, magicReal);
-  const closingLine = closing ? pickRandom(closing.pool)(name) : null;
+  const closingLine = closing ? textOf(pickRandom(closing.pool))(name) : null;
 
   return [hook, sight, senseLine, peopleLine, closingLine].filter(Boolean).join(' ');
 }

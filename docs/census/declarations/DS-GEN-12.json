@@ -1,0 +1,230 @@
+{
+  "poolId": "DS-GEN-12",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "groundPoolKey(config.terrainType) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "WATER-EDGE",
+      "keyGuarantees": [
+        "terrain coastal or riverside: the town stands at water (coast or river); the disjunction is not one atom so it stays prose"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the site's disposition, guaranteed by the key, asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The water is the first thing a stranger understands about {settlement}; everything the town does for a living happens within reach of it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} keeps its working life at the water and its sleeping life behind it, and the books are written at the working end.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "In {settlement} the way to anywhere important runs along the water or down to it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The water was here before the town, and {settlement} has arranged itself around that seniority ever since.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "HIGH-GROUND",
+      "keyGuarantees": [
+        "terrain mountain or hills"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the site's disposition asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} sits where the ground made standing possible rather than easy, and the town's shape is the ground's ruling on the matter.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nothing in {settlement} is level for long; the town takes the slope as a condition of living here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "What {settlement} spends on carrying things up, it recovers in what the high ground spares it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "WOODLAND",
+      "keyGuarantees": [
+        "terrain forest"
+      ],
+      "poolNeeds": [
+        "terrain: forest"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the site's disposition asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is a clearing that learned to stay open; the wood stands close enough to be a neighbour and near enough to be a livelihood.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The town's edge against the trees has been argued over for as long as anyone has kept the argument.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "In {settlement} the wood is where things come from, and the town is where they are made into something.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "OPEN-GROUND",
+      "keyGuarantees": [
+        "terrain plains"
+      ],
+      "poolNeeds": [
+        "terrain: plains"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped; line 3 presumes farmed fields, which has no reader (food sources).",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} sits in country that offers no argument against it, so the town's shape is its own habit rather than the land's instruction.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nothing hems {settlement} in; where the town stops, it stops by custom, not necessity.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The fields begin where {settlement} loses interest, and not before.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "food sources (fields)"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "DRY-GROUND",
+      "keyGuarantees": [
+        "terrain desert"
+      ],
+      "poolNeeds": [
+        "terrain: desert"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: the site's disposition asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is arranged around what little the ground concedes; the town's shape is the shape of its water.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Everything green in {settlement} is deliberate, and the deliberateness says more about the place than any wall could.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The dry country keeps the town honest: {settlement} holds exactly the ground it can water and not a yard more.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

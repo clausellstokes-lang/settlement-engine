@@ -265,6 +265,9 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
       if (yearsAgo > 30 && hook) {
+        // {colour} (CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER.json): each prefix frames a past
+        // discovery (old records, a document, an archivist's notes from that period); none asserts what the
+        // place holds now, so none is a roster claim.
         const ECHO_PREFIXES = [
           'Old records suggest ',
           'A recently surfaced document implies ',
