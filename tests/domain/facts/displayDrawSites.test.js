@@ -17,6 +17,8 @@ import { traditionHook, traditionBeatProse } from '../../../src/domain/tradition
 import { createConflictHookDraw, foodGapHookLine } from '../../../src/domain/dossier/hookLines.js';
 import { composeFoodwaysLine } from '../../../src/domain/foodways.js';
 import { settlementRumors, whatPhrase } from '../../../src/domain/display/settlementRumors.js';
+import { conjunctionContent } from '../../../src/domain/display/causeConjunctionContent.js';
+import { causeLifecyclePhrase } from '../../../src/domain/display/causeLifecycleVocabulary.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -71,5 +73,18 @@ describe('Appendix B rows 97–100 — the rumour subject pools and headline fra
     const told = withPresumptionLedger(() => settlementRumors({ worldState: world, settlementId: 'a' }));
     expect(told.result.map((r) => r.headline)).toEqual(settlementRumors({ worldState: world, settlementId: 'a' }).map((r) => r.headline));
     expect(told.ledger.map((e) => e.pool)).toEqual(['WHAT_PHRASE_POOLS.flow_migration', 'HEADLINE_FRAMES.firsthand']);
+  });
+});
+
+describe('Appendix B rows 101–102 — the cause-conjunction ladder and its lifecycle floor (kind H)', () => {
+  it('a ladder rung and the floor note their draws, the lines unchanged', () => {
+    const key = { role: 'military', situation: 'compromised-covert', causeClass: 'debt', lifecycleStage: 'attributed' };
+    const out = withPresumptionLedger(() => conjunctionContent(key, 'npc-7'));
+    expect(out.result).toEqual(conjunctionContent(key, 'npc-7'));
+    expect(out.ledger.length).toBe(1);
+    expect(out.ledger[0].pool.startsWith(out.result.tier === 'floor' ? 'CAUSE_LIFECYCLE.' : `CAUSE_CONJUNCTION.${out.result.tier}.`)).toBe(true);
+    const floor = withPresumptionLedger(() => causeLifecyclePhrase({ stage: 'reformed', causeClass: 'debt', role: 'civic' }));
+    expect(floor.result).toBe(causeLifecyclePhrase({ stage: 'reformed', causeClass: 'debt', role: 'civic' }));
+    expect(floor.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['CAUSE_LIFECYCLE.reformed', 'H', 'npcs']]);
   });
 });
