@@ -616,3 +616,68 @@ beside-columns, the R-AO marks after the re-read; (c) re-measure `[guard]` when 
 `FACTION_LABEL_SIBLINGS` (expected 5 → 0, 12 births' labels change). Sites for the mechanism lane:
 `rulingStructure.js :: generatePowerStructure` (the label, after the roster settles), `npcGenerator.js ::
 generateNPCAppearance` (R), `factionLeaderSecret.js :: generateFactionLeaderSecret`'s pick (R, after the re-read).
+
+## CENSUS-4g (2026-11-05)
+
+**Merges.** census-1b at `0c445be` (merge `8c55289`: 1h units 6, 7 and R-AT; census-5d) — one conflict,
+`rulingStructure.js`'s single import line, both sides kept (4f's `textOf` + `MILITARY_GUARD_LABEL`; 5c's
+`powerSiblings` re-export); and at `712ac76` (merge `2b0efef`, clean: 1h's R-AU `d035cf8` and `clergy` `712ac76`;
+census-3h). At each: `gen:dossier-prose --check` green; `wiring-census --dry` stale by exactly 4f unit 6's known
+`tablePools` row (+72 bytes, 0 rows, no stamp — the compose's re-take, R-T, the chair's answer 4). The local ref was
+stale with HEAD detached for the fifth seat running (here at `ec45a02`, the pushed tip); re-pointed before the first
+push. `npm ci` (lockfile untouched).
+
+| unit | commit | what | golden (525) | soak (60 / 1,000) |
+|---|---|---|---|---|
+| 1 | `8c55289` | the merge; census through its door; the 60 as the merged base | — | — |
+| 2 | `6e9cbc6` | R-AX: the criminal secrets keyed by the holder's role, **carried**; the mismatch measured | 0 | 0 / 0 |
+| 3 | (listed) | NPC_WANTS "a dockhand's oilskins…": the site listed for the mechanism lane, re-measured | — | — |
+
+**Unit 2 — R-AX (the chair's answer 3).** `src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER` holds the rows by
+the holder's role class (`domain/roles/roleClass.js :: classOfRole`, the fact's own reader, R-AP): `clergy` — religious
+#0 "Lost their faith completely but maintains the role", #1 "covering for a colleague's heretical activities", #3
+"falsifying miracle reports", #4 "their religious order was founded on a historical lie", #5 the relic "officially
+declared destroyed" that it fell to them to destroy; `military` — military #0 "Gave an order during a battle", #3
+"selling patrol routes and schedules", #4 "skimming from military supply budgets", #5 "ordered to commit an atrocity
+… risen in the organisation"; `any` — every other row (religious #2, the visions; military #1, captured and
+released; #2, the victory won by treachery). Religious #5 and military #0 are keyed by R-AD's rule (where the reading
+cannot decide, it declares); military #3 is keyed military (the holder's access), which retires the disjunction
+(watch ∨ militia ∨ garrison) the phase-A ledger left undeclared. The ledger's six `institution: temple` declarations
+are withdrawn (`npcData.NPC_CRIMINAL_SECRETS.json`: declaring 9 → 3; `holderKey` recorded): a temple on the roster is
+not a cleric holding the secret. No atom enters the vocabulary.
+- **Carried, not keyed.** `factionLeaderSecret.js` still reads the flat `NPC_CRIMINAL_SECRETS`, now rebuilt in its
+  historic order by `CRIMINAL_SECRET_LEGACY_ORDER` (its sha-256 pinned to `8c55289`'s). The mechanism lane keys the
+  draw on `criminalSecretsForHolder(type, classOfRole(role))` — the role must be handed to
+  `generateFactionLeaderSecret` from `npcGenerator.js :: generateSingleNPC` (it holds `role`). That view keeps the
+  historic order and drops only rows keyed to another role, so a clergy holder's religious pool and a soldier's
+  military pool are the flat pools themselves: only a mismatched holder's draw moves, and the pick count is
+  unchanged (one `pickFromArray`, or the personal fallback's one).
+- **Byte identity:** 525 golden + 60 soak records hashed `8c55289` vs the unit: 0 of 585 differ.
+- **The mismatch, measured on the 1,000** (a scratch instrumented copy of `8c55289`; the data is identical):
+
+| figure | draws | births |
+|---|---|---|
+| faction-leader secret draws | 9,550 | 1,000 |
+| of type religious or military | 2,070 | — |
+| **to a holder of another role class — the births that move once keyed** | **1,711** | **665** |
+| … whose drawn row is keyed to another role (false today: clergy 955, military 474) | 1,429 | 620 |
+| … that find the role-free pool empty after `allowsSecret` (the visions line) and fall to the personal pool | 775 | — |
+| printed on the final record: keyed secrets / mismatching their holder | 740 / **600** | — / 393 |
+
+  By line on the final record (false prints): miracle reports 90 · heretical colleague 86 · religious order 86 · lost
+  faith 75 · relic 74 · patrol routes 53 · supply budgets 52 · atrocity 45 · order in battle 39. The 775 empty-pool
+  draws are the mechanism lane's to read: a non-clergy holder whose type roll lands on `religious` in a world without
+  magic now draws a personal secret (the type roll's weights read the roster, not the holder; R-AX keys the pool,
+  not the roll). One reader edge, not bent (R-X): `Temple Guard Commander` is `clergy` by `classOfRole`, so a
+  soldierly secret drawn by one is counted as a mismatch.
+- Red-first: `tests/data/criminalSecretsByHolder.test.js` 3/4 red on `8c55289`, 4/4 green. Governing suites (the 22
+  files importing `npcData`): the base's 6 reds title for title (generationForkCensus ×4, hookThemeDraws,
+  narrativeQualityCorpus).
+
+**Unit 3 — NPC_WANTS's site, listed.** Its declarations stand (4f unit 6, carried through `textOf`); the draw
+`npcGenerator.js :: generateNPCAppearance` (R, `clothes: textOf(pickFromArray(NPC_WANTS[r] || NPC_WANTS.other))`) is
+**listed for the mechanism lane** to route through `drawDeclared` (R-C). Re-measured on the merged tip `2b0efef` (the
+final record's `physical.clothes` against `factsOf(settlement)`): "a dockhand's oilskins over hands too clean for the
+work" (`docks`) false in **58 of 96 prints, 48 births** (4f's "48 of 81" counted births against prints); "vestments a
+size too grand for the shrine they serve" (`sacredHouse`) 17 / 168 (17 births); "guild colours worn with pride"
+(`guild`) 2 / 166 (2 births). Nothing else here.
