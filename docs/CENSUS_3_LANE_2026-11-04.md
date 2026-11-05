@@ -6,6 +6,8 @@
 >
 > **CENSUS-3c (2026-11-05): unit 4 (DS-ECO, DS-SUP, DS-POP) and the revenues (R-P 2) landed; unit 6 is NOT started — CENSUS-3d starts there. See "CENSUS-3c" at the end.**
 >
+> **CENSUS-3d (2026-11-05): unit 6 landed as 6a (the history hooks) and 6b (the outlook hooks, carried); answers 2 and 3 resolved with no code (the projector has no v0 slot; the roster's taxonomy has no court or bank kind). See "CENSUS-3d" at the end.**
+>
 > **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
@@ -300,3 +302,112 @@ Runs: `soak-review.mjs --count 1000 --workers 4`, written to `artifacts/census3c
      - `plotHooks.js :: ECHO_PREFIXES` (A).
    - **The order.** Declare the ledger's rows (`docs/census/declarations/hooks.*.json`): 24 history rows, 1 conflict row, 14 loyalty rows, 7 outlook rows and 6 safety rows carry atoms. Where a consumer is unwired, add a `textOf` tolerance (R-C) and do not wire it. 3b's two owed twins (timber without "and shipbuilding", `excludes: navigable`; and the guard-free `crime_wave` hook) need a T branch to resolve at, so they follow 1d's wiring of those sites. `reader:hook-pools` reads sea 66 and guard 46 on the 1,000. `GUARD_IDIOM` already narrows "the old guard".
 2. **The canonical rows.** Seven `*(canonical)*` v0 rows have no tag slot. Two presume `market` (DS-ECO-3 SHORTAGE / SURPLUS × trade-dependent) and are listed for the undeclared register.
+
+## CENSUS-3d (2026-11-05)
+
+Base: CENSUS-3c's tip `7112c939b`. Merged: `origin/lane/census-1b-2026-11-04` at `1c00ed2` (CENSUS-1e units 1–2) as `ef4866d`. The merge conflicted in `factVocabulary.js`, `factsOf.js`, three "named but refused" pins, the wiring census and the undeclared register. It was resolved as a union: this lane's `dim()` spelling, 1e's `guild` property and import block, and the pins kept at `[]` with 4b's `guild` asserted. The wiring census was re-taken through `scripts/wiring-census.mjs`, and `gen:dossier-prose --check` is green. The declaration registers were re-taken with `RETAKE_DECLARATION_REGISTERS=1` and equal this lane's side byte for byte.
+
+### Answers 2 and 3 (no code)
+
+- **Answer 2: the seven canonical v0 rows are waiting on the projector (CENSUS-1e).** `generate-dossier-state-prose.mjs` projects a `0. *(canonical)*` row with `marks: []` hard-coded. A tag written on it lands in the TEXT: a trial `` `[market]` `` on DS-ECO-3 SHORTAGE made `economy.generated.js` stale with the backticks inside the sentence. So the annex is unchanged. The declarations the rows want, for when the projector reads a v0 tag slot:
+
+  | row | wants |
+  |---|---|
+  | DS-ECO-3 SHORTAGE × trade-dependent, "The roads have gone quiet. Little reaches the markets…" | `market` |
+  | DS-ECO-3 SURPLUS × trade-dependent, "…the markets are well-fed." | `market` |
+  | DS-ECO-6 significant off-book, "…paying duties and guild fees." | `guild` (4b's composite) |
+  | DS-ECO-3 ADEQUATE, "Caravans keep to their rounds." | nothing: its pool is `{crisis-scoped}`, so its silence already reads calm |
+  | DS-ECO-6 minor shadow; DS-ECO-7 TALLIES and CATALOG (frozen) | nothing beyond the key |
+
+- **Answer 3: court and bank revenues stay off the page, under "needs a home".** The catalogue carries Courthouse, Banking houses, Banking district, Mint and Mint (official), but the roster's KIND taxonomy (`facts/institutions.js :: INSTITUTION_KIND_PATTERNS`, hence `institution: <key>`) has no `court`, `bank` or `mint` kind. So Legal services, Advanced legal expertise, Banking services, International banking and Coin minting have no keyed presence to read. As the chair ruled, the taxonomy is the gap. Adding those kinds is the mechanism lane's (open question 1).
+
+### Unit 6 · the hook tables
+
+| unit | commit | table | consumer (R-C) | rows declared | births moved |
+|---|---|---|---|---|---|
+| 6a | `cf937ca76` | `historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks` | **current tensions** (kind A, the table owner's): `historyGenerator.js :: buildHistoricalEvent` filters each tension's whole list through `filterDeclared` against the birth's facts (`factsOf` over the roster, config, tier and power structure) and stores text. **Timeline** (kind R, Appendix B item 12, the mechanism lane's): `generateEventNarrative` reads `lineText(row)`, byte-identical | 12 (below) | soak1k-0..59: 16 of 60. Golden: 60 of 525. 1,000: 214. Every move is inside `history.currentTensions[].plotHooks`, a refused row removed; every other section is byte-identical (sha per section) |
+| 6b | `7929c7a0e` | `foodBalance.js :: deriveSupplyRiskAnalysis` (the outlook hooks) | inline T branches (Appendix B item 23, the mechanism lane's). `OUTLOOK_HOOK_SIBLINGS` is CARRIED beside them, keyed by the printed text; nothing reads it yet | 3 sets, 2 twins | 0 (records byte-identical on the 60 and the 525) |
+
+**The twelve history rows:**
+- succession_crisis ×2: `no ruler: council`;
+- economic_disparity: `tier: >= town`;
+- guild_conflict, resource_scarcity, market_crash: `market`;
+- crime_wave: `guardPresence`;
+- great_flood ×2: `navigable`;
+- heresy_trial and pilgrimage_surge ×2: `institution: temple`.
+
+They were measured on soak1k-0..199 before the change (printed / false): 38/15 and 45/22, 14/9, 21/1, 65/28, 1/0, 42/4, 6/4 and 7/3, 6/2, 4/1 and 4/2.
+
+**The outlook sets** (printed / false):
+- timber: `navigable` (33/16). The twin is CENSUS-3b's owed one, without "and shipbuilding".
+- iron: `institution: smith` (38/3). The twin names no smith.
+- starving: `food: ≤ deficit` and `tier: <= village` (8/0). No twin: under `resolveSibling` a refused original keeps its text, so this set serves the self-check only.
+
+### The chair's rulings recorded at this seat (vetoable)
+
+1. **The history migration rows are not declared.** The rows are population_friction ×3 and demographic_pressure ×3. The newcomers belong to the past event (its key), and a live crisis atom would refuse 13 of 14 true hooks. A content question remains: demographic_pressure carries both directions (influx on #0/#2, exodus on #1). That is the template's question, not a declaration (open question 3).
+2. **Not re-declared, because each restates its key (R-B1):**
+   - the magic rows, which the world law's event gate guarantees;
+   - the dam (route river);
+   - the blockade (route port, coastal);
+   - the bandits (route road).
+
+   The ledger's `river` on the dam was a wrong presumption (R-W): the water home folds a coastal river route into `maritime`, so it refused 3 of 16 true hooks (soak1k-22, -47, -137).
+3. **The merchant-guild monopoly is waiting on order (R-Q).** It presumes `guild`, and `guildOf`'s power half is drawn after the economy step. The ledger's `food: ≤ deficit` on it was a wrong presumption: it refused 63 of 82, because the branch keys on the raw import gap, not the band. It is left undeclared.
+4. **The safety hooks are guaranteed by their branches, as measured.** These are stateCrime, crimeIsGovt, arcaneBlackMarket and hasSmuggling (`organised crime`, `magic`), at 0 false of 63 printed on soak1k-0..199. They are not declared. The merchant army and the garrison chaplain are already CENSUS-5b's (`SAFETY_LINE_SIBLINGS`), and 1e resolves them.
+5. **`ECHO_PREFIXES` is `{colour}`.** This covers both copies: `dossier/plotHooks.js` (A) and `historyGenerator.js` (the R roll beside the hook draw). The five connective prefixes presume nothing. No data-table brace exists yet (the undeclared register covers the state corpus only), so the ruling is recorded here and in the ledger's `colour: true`.
+6. **No guard-free `crime_wave` twin (3b's owed twin is withdrawn).** In a tension the refused row simply leaves the list and the other two hooks stand. In the timeline, when it is wired, `drawDeclared`'s argmax over the event's own rows fills the slot. R-G gives a twin only where the slot would otherwise empty.
+7. **Two twins are authored, in the house voice. Their golden-moving share is counted at wiring, and is exactly the births whose record refuses the original (a T site has no draw, so there is no 1/(n+1)):**
+   - "Something is killing the forest the timber comes from, and the settlement's building trades stall without it. Find another supplier, or find out what is in those woods?"
+   - "War breaks out. Metal suppliers prioritize military contracts, and the iron for tools and repairs stops arriving. Economy suffers, population discontent grows."
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `ef4866d`, AFTER = `7929c7a0e`)
+
+The runs are `soak-review.mjs --workers 4`, written to `artifacts/census3d-base` and `census3d-after60` (60), and to `census3d-before` and `census3d-after` (1,000).
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:hook-pools` | 9 → 6 | 108 / 111 → **96 / 99** |
+| · `[guard]` history crime_wave guard captain (this lane's) | 3 → 0 | 12 → **0** |
+| · `[sea]` timber "shipbuilding" (this lane's; carried) | 3 → 3 | 66 → 66: enforced when the mechanism lane routes the outlook branch |
+| · `[guard]` NPC loyalty (CENSUS-4's table: government #5, military #0, criminal #0 / #6) | 3 → 3 | 29 → 29 |
+| · `[guard]` conflict labels "Military/Guard" ×3, the revolt line ×1 (not this lane's) | 0 | 4 → 4 |
+| `reader:scale-lists`, `reader:traditions-water` | 0 → 0 | 0 → 0 |
+| `coh:crisis-blind-prose` | 2 → 2 | 35 / 35 → 35 / 35 (none of this lane's claims) |
+| `coh:food-words` and every other `coh:*` | 0 | 0 → 0 |
+| `A-12:self-vouch-false` | 0 → 0 | 3 → 3 (the base's) |
+| `cert:false-presumption` | 0 → 0 | 8 / 24 → 8 / 24, **all `rulingStructure:FACTION_DESC_SIBLINGS` `no militia`** (the base's, CENSUS-1e / 5b); 0 on this lane's pools; certification otherwise 1000/1000 |
+| findings · verdict | 104 → 104 · CLIMB | 1,738 → 1,738 · STOP (the base's STOP classes at the same counts; hook-pools −12, with occurrences re-binned) |
+
+**`declared-share`:** `history` 1/1 → **670 / 5,178 (0.129)**, the tension lists' notes. Every other surface is unchanged (tab:dossier 12,417 / 213,593; tab:economics 1,851 / 28,025).
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Golden records (unit 6a, the one cause: a tension's refused hook row removed):**
+  - 525 configurations: 60 move;
+  - soak1k-0..59: 16;
+  - soak 1,000: 214.
+
+  The manifest is 525/525 stale at the base already (its own red, R-B), so the count is this seat's sha per section, before and after.
+- **Unit 6b:** 0.
+- **The merge:** the wiring census (`dossierMounts.js` stamp, `producerIndexFiles`) was re-taken through its door; the registers were re-taken and equal this lane's side.
+- **Pins:** the three "named but refused" pins keep `[]` (the conflict comments were unified), and `factVocabulary.test.js` gains 4b's `guild`.
+- **The base's own reds (not this lane's, identical at `ef4866d`):**
+  - the governing suites: dossierContent, proseComposed ×4, proseEntryContradiction ×5, generatorGoldenMaster, generalDeskTabFlow, powerSeatRender ×4, recordInvariants, worldFactRederive ×2, customFoodImpact, foodModelSingleWriter ×2, proseWiringCensus ×14, economicsTabFlow;
+  - `typecheck:domain:strict` (crisisFactFindings +4, composeStateProse +2).
+
+### Where CENSUS-3e starts
+
+1. **This lane's tables wait on the mechanism lane (CENSUS-1e or its successor):**
+   - the timeline hook roll (`historyGenerator.js :: generateEventNarrative`, Appendix B item 12) through `drawDeclared`. Its draw-count care: `splice` at the roll, the ECHO prefix roll keyed on the drawn row's tense, and a resolved row not re-drawn (a draft that shortened the loop moved two births outside the hooks and was withdrawn);
+   - the outlook branches through `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)`, which takes `[sea]` 66 → 0;
+   - the canonical v0 tag slot (the seven rows above).
+2. **CENSUS-4's table:** the NPC loyalty guard rows (29 on the 1,000) are declared in `docs/census/declarations/hooks.NPC_FACTION_LOYALTY.json` and not applied.
+3. Nothing else of unit 6 remains on this lane.
+
+### Open questions for the chair
+
+1. Should `court`, `bank` and `mint` join `INSTITUTION_KIND_PATTERNS`? They would be the mechanism lane's, with byte-identity 0 until a line declares them, and would bring back Legal services, Banking services and Coin minting under answer 3.
+2. The guild-monopoly hook wants `guild`, but the power half is settled after the economy step. Should R-V's measurement (birth-time `guildOf` against the final record) be taken, or the line reworded to presume only imports?
+3. demographic_pressure prints influx and exodus hooks from one template. Should the template be split by direction (content, golden-moving)?
+4. The NPC loyalty guard rows: does CENSUS-4 apply them (they are 29 of the 33 remaining `[guard]`)?
