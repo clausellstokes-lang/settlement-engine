@@ -159,6 +159,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (F1 DEFENCE-WORDS, first step (units 1–5), docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 5e9ffb220 because every defence claim writer reads defenseFactsOf and a hired company is not called a garrison; 34 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (F3 FOOD-WORDS (units 1–5), docs/shift-records/2026-11-04-rung1-24-f3-food-words.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of db8ce5da8 because a processed food good is an export only on a surplus and a fishing row on water is a fish source; 2 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
