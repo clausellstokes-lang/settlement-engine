@@ -266,6 +266,15 @@ export const FACT_DIMENSIONS = Object.freeze({
   // `priest` = a senior cleric stands among the named people (`faithReadingOf(record).seniorCleric`;
   // the rulings §2, CENSUS-1c).
   priest: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined) }),
+  // R-AE (CENSUS-1h, the chair's 08:3x item on CENSUS-5d): ONE composite `clergy` = a named senior
+  // cleric (`priest`) ∨ a sacred house (`sacredHouse`), defined once because two DS-FTH lines need
+  // it (CENSUS-5e declares them). True if either holds; false only when both are answered false.
+  clergy: dim({ shape: 'presence', home: 'faith', reader: (f) => {
+    const cleric = f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined;
+    const house = bool(f.sacredHouse);
+    if (cleric === true || house === true) return true;
+    return cleric === false && house === false ? false : undefined;
+  } }),
   // CENSUS-3b unit 1 (ruling R-E): the delegated getters. Organised crime = a structure at
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
   'organised crime': dim({ shape: 'presence', home: 'crime',
