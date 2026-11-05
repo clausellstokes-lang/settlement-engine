@@ -339,3 +339,104 @@ No new site landed on 1b after the merge. On this tree 1e enforces `SAFETY_LINE_
 1. **A refused original with no twin is silent to the self-check.** `resolveSibling` keeps the original and `note()` never ledgers a null resolution, so `cert:false-presumption` cannot see a kept-false line. Should 1f ledger it (as `resolvedBy: 'none'` with the original's atoms), so the cert reads every printed T line?
 2. **The `garrison` sets at the faction-description draw:** garrison is not settled there (9 differences). Three twin-less sets still declare it, and they are true on the final record today (0 kept-false on 300 births). Reword under R-U as the militia sets were, or leave them while they are measured true?
 3. **Pool-level `{colour}` for a mixed pool:** a pool with one declared line and two colour lines keeps those two in the register. Does that stay the rule (my reading), or may such a pool carry `{colour}` beside its declarations?
+
+# CENSUS-5d — the garrison sets reworded, the four families read line by line, the waiting lines, the colour tables enrolled (lane record, 2026-11-05)
+
+> A build seat's record for the chair. Same branch, base CENSUS-5c's tip `eda74442a`. Merged: `origin/lane/census-1b-2026-11-04` at `4818948` (1f) as `ebd84ce` (the merged base: BEFORE for the 1,000); at `99b0036` (1f docs) as `da93361`; at `28c6d2a` (1g units 1–2: R-AO's `colour` spelling, R-AM's ledgering) as `aa83044`; at `e8b0072` (1g units 2b–5: unit 3c `tablePools`, R-AL, R-AJ) as `7f1d2d1`. Every merge re-took the wiring census through its door (R-D) and kept `gen:dossier-prose --check` green. A transport push after every unit; no pull request. Not landed on 1g's lane at this tip: unit 8 (bare "some crisis") and a `council` home ("no bodies reader", 1f `fc45cc1`).
+
+## The units
+
+| unit | commit | what |
+|---|---|---|
+| merge | `ebd84ce` | 1f at `4818948` (`sacredHouse`, the v0 tag slot) |
+| 1 (answer 2) | `1b74763` | R-AN / R-U: the three twin-less `FACTION_DESC_SIBLINGS` garrison sets reworded |
+| 3a | `d5b8044` | the waiting faith lines declare as their atoms land (`sacredHouse`, `priest`, `institution: tavern`); CULTS v3 reworded |
+| merge | `aa83044` | 1g units 1–2 (R-AO, R-AM) |
+| 2a (answer 3) | `c24d711` | R-AO: DS-FTH / DS-WAR read line by line (60 lines `colour`, 5 declared, 1 reword) |
+| 2b | `f260dba` + fix `152a4a0` | R-R / R-AO: DS-DEF / DS-POW read line by line (137 pools `{colour}`, 92 lines `colour`, 33 declared, 2 rewords) |
+| merge | `7f1d2d1` | 1g units 2b–5 (one conflict, the Military Council line, resolved to this lane's wording) |
+| 3b | `2a8fdd2` | 5c's off-census colour list into `tablePools` (the two one-export tables 1g left) |
+| doc | (this commit) | this record |
+
+## Unit 1 — the garrison sets (the chair's answer 2; R-AN, R-U)
+
+Garrison differs between the faction-description draw and the final record on 9 of 2,121 steps (5c's probe), so it is not settled there. Watch differs on 0, so it is settled (R-V). Each line now presumes only its branch plus the settled watch. **No new line; every set keeps the original slot.**
+
+| was | now | declares |
+|---|---|---|
+| "Military commanders and garrison officers hold decisive political weight; …" | "Military commanders and their officers hold …" | nothing (leaves the table) |
+| "Well-funded garrison and city watch; …" | "Well-funded city watch; …" | `watch` |
+| "Garrison and city watch; law enforcement and external defence, …" | "City watch; law enforcement and external defence, …" | `watch` |
+
+**Moved, one cause:** golden **168 of 525** (city 84, metropolis 84), zero residue once the three strings are replaced (measured at unit 1, and again at the tip against `ebd84ce`: the same 168, zero residue); never re-recorded. **A finding:** the Military Council `said()` sat in an eagerly built object literal, so it was ledgered on every power step, printed or not. The power ledger's drawn count falls 147 → 72 on the 60 and 2,531 → 1,424 on the 1,000. 1g found the same thing independently (`1261515`, R-AM: 1,884 phantom kept-refused findings), and the merge took this lane's wording.
+
+## Unit 3a — the waiting faith lines (their atoms landed)
+
+| line | declares |
+|---|---|
+| DS-FTH-3 STANDING cult v2 "Its shrine is real" · NICHE slots open v1 "Shrines stand unclaimed" · DS-FTH-1 CULTS v1 "keep their own shrines" | `sacredHouse` (R-AE, 1f) |
+| DS-FTH-1 DEVOTION lukewarm v3 · ARC rising v3 ("the clergy") | `priest` |
+| DS-FTH-3 PILGRIM SEASON thin v1 "the town's inns" | `institution: tavern` |
+| DS-FTH-1 CULTS v3 "Several lesser rites … its own quarter of the town" | reworded (R-U): "What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}." |
+
+"The clergy" is satisfied by a named senior cleric OR a sacred house. On the golden corpus 60 births hold the cleric without a house and 36 the house without a cleric. That is a disjunction no line may declare (R-U), so each line declares the likelier fact. **`clergy` = priest ∨ sacredHouse is a wave-2 composite candidate (2 lines want it).** No twin is needed: each pool keeps ≥ 2 lines under the contradicting fact. `calmFactsDouble.js` gains `sacredHouse: true` (R-N's one double).
+
+## Unit 2 — the per-line colour marks and the pool braces (the chair's answer 3; R-AO, R-R)
+
+**The rule applied (the chair's ruling under the delegation, vetoable):** this seat READ every undeclared line of DS-DEF, DS-POW, DS-FTH and DS-WAR (625 lines). A line that presumes nothing beyond its pool key takes `colour`, and a keyed pool does not re-declare its key (R-B1), so the wall in a "walls present" pool is colour. A pool whose every line is colour takes the pool-level `{colour}` (R-R). A mixed pool's colour lines take the per-line mark (R-AO). A line that presumes a fact its key does not guarantee declares it; where it cannot be decided, it declares (R-AD). No unread line is marked.
+
+| family | undeclared before → after | pools `{colour}` | lines `colour` | declared by the reading | reworded | left (waiting) |
+|---|---|---|---|---|---|---|
+| DS-DEF | 316 → **1** | 76 | 61 | 29 (watch 10, walls 10, gate 7, garrison 2, magic 2; two lines carry two atoms) | 1: Court + Prison v3 "on the same square" | Economic Survival STRONG v3 "Trouble … has not turned into a collapse" (some crisis: unit 8) |
+| DS-POW | 243 → **2** | 61 | 31 | 3: FOOD adverse v1 `institution: granary` ("the granary door"), v2 `crisis: hunger` ("Hunger at"), criminal revenue v3 `market` (R-AD) | 1: Endorsed v4 "the watch is not the reason" → "enforcement is not the reason" | receipt deferred v2 (the alignment cap), v3 (an outbid): the deferral's reason has no home |
+| DS-WAR | 34 → **0** | — | 34 | 4: live front v3, phantom front v1, siege_lifted v2 `walls`; blockade v3 ("points at the water") `navigable` | 1: blockade v1 "the roads or the harbour" → "the routes" | — |
+| DS-FTH | 32 → **1** | — | 26 | 1: PANTHEON Major v2 ("the lawfulness of magic") `magic` | — | SINK arc rising v1 "Crisis has a way of ending indifference" (unit 8) |
+
+(Unit 2a's commit text says "60 lines colour"; the per-family split above is the leaves' own count.) **Endorsed v4 is reworded rather than declared:** it is the pool's one `{settlement}`-only line, the anchored-liveness floor when a `{seat}` fill is refused (`powerStateProseDesk.test.js`). Declaring `watch` muted the banner in a watch-less town (red at `f260dba`, green after `152a4a0`). Unit 2b's commit text says "34 declared / watch 13, gate 6"; the true count after the fix is 33 (watch 11, walls 10, gate 7, garrison 2, magic 2, granary 1, hunger 1, market 1). **No twin anywhere:** every declaring pool keeps a line under the contradicting fact. **The undeclared register (its own reader): 1,126 → 499 lines, 399 → 179 pools** on this lane's units (from 1,126 at the merged base `da93361`). These four families now hold 4 undeclared lines in all. Not re-pinned (R-T): the compose re-takes it.
+
+## Unit 3b — `tablePools` (unit 3c landed: 1g `1425ac7`)
+
+1g enrolled the one-export tables of 5c's `{colour}` list (ALIGNED_BASIS, DEFENSE_PREFERENCES, the three faith-panel tables). This unit enrols the two it left, with the census's own `colour` ruling: `warRemembrance.WAR_ENDING_TELLINGS` (11 lines, `{victor}` its only slot) and `deityEffects.DEITY_AXIS_EFFECTS` (13 `effect` lines, through a `lines` accessor). `stressFactions` (inline T branches) and `STRESS_RUMORS` (2e's) are not a single export, so they stay listed only.
+
+## The 60 and the 1,000 (R-B: before = the merged base `ebd84ce`; after = the tip `2a8fdd2`)
+
+| run | settlements · findings · errors · verdict | `coh:*` (incl. `crisis-blind-prose`, `defence-words`, `faith-denial`, `crisis`) | `cert:false-presumption` | `reader:*` | records moved |
+|---|---|---|---|---|---|
+| 60 | 60 · 101 → 119 · 0 → 0 · CLIMB → STOP | 0 → 0 | 0 → **18**, all `foodBalance:OUTLOOK_HOOK_SIBLINGS` | identical | 9 (city / metropolis: unit 1) |
+| 1,000 | 1,000 · 1,662 → 1,912 · 0 → 0 · CLIMB → STOP | 0 → 0 | 0 → **250** (161 births), all `foodBalance:OUTLOOK_HOOK_SIBLINGS` | identical except `tension-memory` 60 → 61 | 144 (135 city/metropolis: unit 1; 9 lower-tier, consistent with 1g's R-AL history change, merged; inferred from tier, not traced) |
+
+**The STOP is not this lane's.** Every one of the 250 `cert:false-presumption` findings is R-AM's instrument finally seeing a kept-refused original in `OUTLOOK_HOOK_SIBLINGS` (the food lane's / 1f unit 3c's sets: `tier: <= village`, `food: ≤ deficit`). By R-AM that is a rise by cause and not a STOP, and the owning lane twins or rewords. **On this lane's pools, `cert:false-presumption` is 0** (FACTION_DESC, MILITARY_MODIFIER, the baseline conflicts, the safety and threat sets, and every DS-DEF/POW/FTH/WAR declaration). Certification holds at 1,000 / 1,000 (no `cert:*` other than that class).
+
+**`declared-share` (the 1,000):** power 1,424 / 1,424 (1.000; was 2,531 / 2,531, and the drop is unit 1's eager-ledger finding) · defense 1,494 / 1,494 · tab:threats 89 / 89 · tab:dossier 49,082 → 49,654 of 213,133 (0.230 → 0.233). A `colour` mark is silence to the ledger by design (R-AO), so the share moves only with the 38 new atom declarations. Per family, the register is the reading: DS-DEF 1, DS-POW 2, DS-FTH 1, DS-WAR 0 undeclared lines. **Pages (the 60's samples):** unit 2b moved 20 pages / 22 lines, every one a declared line refused where the record holds no watch, gate or wall (e.g. the compound override's "the watch is arranged around that" in watch-less thorps). Units 2a, 3a and 3b moved 0 sampled pages.
+
+## Rows moved, by cause (never re-recorded)
+
+- **Golden:** 168 of 525 (city 84, metropolis 84), one cause (unit 1), zero residue. Every other unit is display, data or scripts: 0.
+- **Soak records:** 144 of 1,000 against the merged base; about 135 by unit 1 (see the table).
+- **Generated leaves:** `warFaith` (3a, 2a), `defense` and `power` (2b and its fix), through `gen:dossier-prose` only, `--check` green. 2b's leaves differ from HEAD in exactly 137 `poolMeta.colour`, 126 marks and one text.
+- **Wiring census:** re-taken through its door at every unit and merge; `tablePools` +2 rows (3b).
+- **Registers:** undeclared 1,126 → 499 lines (this lane's units); the crisis-scoped register is untouched (no flag set or dropped). The compose re-pins both (R-T).
+- **Test pins:** `calmFactsDouble.js` + `sacredHouse: true`. No other pin re-keyed.
+- **Governing suites, title for title against each unit's base:** unit 1, 35 files, the base's 37 reds; 3a, 79 files, the base's 94; 2b (after the fix), 75 files, the base's 92. No new red.
+- **Typecheck / lint:** `typecheck:ratchet` green; `typecheck:domain:strict` red at base and tip with the same two untouched files (`crisisFactFindings.js` +4, `composeStateProse.js` +2); eslint clean on every touched file. The `power/` ceiling is unchanged (one-for-one string edits).
+
+## Waiting (the line is left as it is)
+
+| line | presumes | waiting on |
+|---|---|---|
+| DS-FTH-1 SINK arc rising v1 · DS-DEF-2 Economic Survival STRONG v3 | some crisis | unit 8 (R-O), not on 1g's lane at `e8b0072` |
+| DS-POW-7 receipt deferred v2 / v3 | the deferral's reason (the cap; an outbid) | "needs a home" (2 lines) |
+| `rulingStructure` "fund the council" · "council access" | a council body | "waiting on council": 1f recorded no bodies reader |
+| `governanceNarrative` the priest baseline lines · `BASELINE_CONFLICT_SIBLINGS` militia captain | priest / militia | "waiting on order" (R-Q), unchanged |
+| DS-FTH-1 "the clergy" (2 lines, declared `priest`) | priest ∨ sacredHouse | the `clergy` composite (wave 2) |
+| cult count ("several"), a cult's own shrine | — | "needs a home" (CULTS, STANDING) |
+
+## Where CENSUS-5e starts
+
+Nothing of this lane remains but the compose and the atoms above: unit 8's bare crisis (2 lines), a council home, the deferral reason. The register pins are the compose's (R-T).
+
+## Open questions for the chair
+
+1. **`MILITARY_MODIFIER_SIBLINGS` 'garrison-backed'** resolves at the same power step, against the same unsettled garrison (9 of 2,121). It has a twin, so it is not one of the "three twin-less sets" of answer 2. By R-AN it should still be reworded to its twin's wording ("arms-backed"), but the set sits on 1c's `defenceTwinLines.test.js` pins. Reword it here, or is it 1c/1h's?
+2. **`clergy` = priest ∨ sacredHouse** is wanted by two lines (DEVOTION lukewarm v3, ARC rising v3), each declaring `priest` meanwhile. Define it in wave 2 (R-U's demand rule is met)?
+3. **The 250 kept-refused `OUTLOOK_HOOK_SIBLINGS` findings** (`tier: <= village`, `food: ≤ deficit`) make the 1,000 read STOP. Which lane owns their twins or rewords, the food lane or 1h?
