@@ -871,6 +871,10 @@ export const SUPPLY_CHAIN_NEEDS = {
       {
         id: 'camel_caravan',
         label: 'Camel Caravan Trade',
+        // CENSUS-3b unit 3 (the vocabulary rulings §7; the lane's ruling 2): a camel chain presumes
+        // the desert, and no culture (culture resolution ignores terrain). Held by the resource gate
+        // (camel_herds is a desert resource) and by tests/domain/display/tradeListDisplay.test.js.
+        needs: ['terrain: desert'],
         resource: 'Camel Herds',
         rawInputs: ['Camel transport capacity', 'Desert routes'],
         processingInstitutions: [PACK_ANIMAL_TRADER, "Caravaneer's post", CARAVAN_MASTERS_EXCHANGE],

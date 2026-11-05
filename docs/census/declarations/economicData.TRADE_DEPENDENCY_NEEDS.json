@@ -1,0 +1,604 @@
+{
+  "id": "economicData.TRADE_DEPENDENCY_NEEDS",
+  "source": "src/data/economicData.js :: TRADE_DEPENDENCY_NEEDS",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Keyed by exact institution name: the key guarantees the consuming institution (pool-level, not on rows). The engine already gates each row on the ABSENCE of need.resources (hasResource) and of local agricultural supply, and isolates/siege-rewrites only the severity/impact text (not these rows). Imports declare tier band + terrain only (chair ruling), so most rows are silent. svcs[] are service names (services lane) and are not declared here.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Access to external mill",
+      "text": "Grain: grain for milling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "HAZARD: this catalogue name matches INSTITUTION_KIND_PATTERNS.mill (/\\bmill\\b/) — hasInstitution(r,\"mill\") answers true for a place that only has ACCESS to a mill (computeActiveChains already freezes the same false match)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mill",
+      "text": "Grain: grain for milling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mills (2-5)",
+      "text": "Grain + water power: grain and mill sites for water-powered milling",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"water power\" half is a site (river_mills), not a good; grain half stands"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Town granary",
+      "text": "Grain: grain reserves for storage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::City granaries",
+      "text": "Grain: grain reserves at scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::State granary complex",
+      "text": "Grain: grain at metropolitan scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Subsistence farming",
+      "text": "Farmland: arable land for subsistence crops",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Common grazing land",
+      "text": "Grazing land: pasture for common livestock",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Bakers (5-15)",
+      "text": "Grain: grain for baking",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Alehouse",
+      "text": "Grain: grain for brewing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Ale house",
+      "text": "Grain: grain for brewing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "catalogue spelling \"Ale house\" does NOT match INSTITUTION_KIND_PATTERNS.tavern (/\\balehouse/ needs no space); \"Alehouse\" does"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Taverns (5-20)",
+      "text": "Grain: grain for brewing and baking",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Inns and taverns (district)",
+      "text": "Grain: grain for district-scale hospitality",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Resident smith (part-time)",
+      "text": "Iron + fuel: iron ore and charcoal for smithing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Blacksmiths (3-10)",
+      "text": "Iron + fuel: iron ore and fuel for forging at scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Specialized metalworkers",
+      "text": "Metal ore + fuel: iron and precious metals for specialist work",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Craft guilds (100-150+)",
+      "text": "Metal ore + gems: metal and gemstones for specialist production",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "gems: luxury-class import; metropolis-catalog key"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Citizen militia",
+      "text": "Iron: iron for weapons and basic armour",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Town watch",
+      "text": "Iron: iron for weapons and equipment",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Professional city watch",
+      "text": "Iron + fuel: iron for equipment, fuel for maintenance forges",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Barracks",
+      "text": "Iron + grain + fuel: iron for armaments, grain for soldiers, fuel for forges",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Garrison",
+      "text": "Iron + grain + fuel: iron, grain, and fuel for garrison operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Multiple garrisons",
+      "text": "Iron + grain + fuel: iron, grain, and fuel for multiple garrisons",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Free company hall",
+      "text": "Iron + grain: iron for armaments and grain for provisioning",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mercenary quarter",
+      "text": "Iron + grain: iron and grain for mercenary provisioning",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Town walls",
+      "text": "Stone: quarried stone for wall construction and repair",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::City walls and gates",
+      "text": "Stone: stone for city wall maintenance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Massive walls and fortifications",
+      "text": "Stone + iron: stone and iron for metropolitan fortifications",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Citadel",
+      "text": "Stone + iron + grain: stone, iron, and grain for citadel operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Cathedral (10,000+ only)",
+      "text": "Stone: quarried stone for cathedral maintenance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Great cathedral",
+      "text": "Stone: stone for metropolitan cathedral maintenance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Carpenter (part-time)",
+      "text": "Timber: raw timber for carpentry",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Carpenters (5-15)",
+      "text": "Timber: raw timber for carpentry at scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Docks/port facilities",
+      "text": "Timber: timber for dock construction and maintenance",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Shipyard",
+      "text": "Timber + iron: timber and iron for ship construction",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Printing house",
+      "text": "Timber/rags (paper): wood pulp and rags for paper production",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Great library",
+      "text": "Paper + knowledge sources: paper for ongoing collection and ancient texts",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"knowledge sources\" (ancient_ruins) is a site, not a good; paper half stands"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Sage's quarter",
+      "text": "Paper materials: paper for scribal and research work",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Butchers (3-8)",
+      "text": "Livestock / game: live animals for slaughter",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Weavers/Textile workers",
+      "text": "Wool / flax: raw wool from livestock or flax from fields",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Luxury goods quarter",
+      "text": "Luxury materials: fine wool, metals, gems for luxury production",
+      "needs": [
+        "tier: >= village"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "luxury-class import (fine wool, metals, gems); key institution is city-catalog so the band is already met"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Alchemist shop",
+      "text": "Medicinal herbs: foraged herbs and botanical ingredients",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Alchemist quarter",
+      "text": "Herbs + metals: herbs and metals for alchemical production at scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Small hospital",
+      "text": "Medicinal herbs: herbs for medicines and treatments",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Major hospital",
+      "text": "Medicinal herbs + supplies: herbs and materials for hospital operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Hospital network",
+      "text": "Medicinal herbs + supplies: herbs and materials for city-wide hospital network",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Healer (divine, 1st level)",
+      "text": "Medicinal herbs: herbs to supplement divine healing",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Wizard's tower",
+      "text": "Magical ley lines: arcane energy for sustained magical research",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Magical ley lines\" is a site, not a tradeable good (the ore-vein class)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mages' guild",
+      "text": "Magical ley lines: arcane energy for guild operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "ley lines: a site, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Mages' district",
+      "text": "Magical ley lines: arcane energy for district-scale magical operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "ley lines: a site, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Academy of magic",
+      "text": "Magical ley lines: arcane energy for magical academy",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "ley lines: a site, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Teleportation circle",
+      "text": "Magical ley lines: stable ley line for permanent teleportation circle",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "ley lines: a site, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Planar embassy",
+      "text": "Magical ley lines: planar resonance for extraplanar contact",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "ley lines: a site, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Banking houses",
+      "text": "Precious metals: gold and silver for banking reserves",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Banking district",
+      "text": "Precious metals: gold and silver for banking reserves at scale",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Caravan masters' exchange",
+      "text": "Capital + trade access: precious metals and trade access for exchange operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "label \"Capital + trade access\": capital and trade access are not trade goods (crossroads_position is a route fact)"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Money changers",
+      "text": "Precious metals: gold and silver for currency exchange",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Periodic market",
+      "text": "Trade access + grain: crossroads position and grain as primary traded commodity",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access\" half is transit/route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Weekly market",
+      "text": "Trade access + grain: trade access and grain for regular market",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access\" half is transit/route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Market square",
+      "text": "Trade access: trade access for permanent market",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "label \"Trade access\" alone: route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Multiple market squares",
+      "text": "Trade access + commodities: trade access and commodities for city markets",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access\" half is route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Daily markets",
+      "text": "Trade access + grain: trade access and grain for daily market operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access\" half is route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::District markets (5-10)",
+      "text": "Trade access + commodities: trade access and commodities for district markets",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access\" half is route access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::International trade center",
+      "text": "Trade access + harbour: crossroads or harbour for international trade",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "\"Trade access + harbour\": route/harbour access, not a good"
+    },
+    {
+      "id": "economicData.TRADE_DEPENDENCY_NEEDS::Harbour master's office",
+      "text": "Fishing + timber: fishing grounds and timber for port operations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": ""
+    }
+  ]
+}

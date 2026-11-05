@@ -91,13 +91,14 @@ const CLAIMS = Object.freeze([
   // (`docs/SOAK_10000_RUNG2C_2026-11-04.md` §3c) found outside the thirty claims above, nine
   // phrases. The instrument only: the goals (npcStructure.js, the registry's R11 / CENSUS-4)
   // and the desk lines keep their words; the cure is their declarations, not this table.
-  // A ruler's want of "current stability" (×4 in the city tier: a fracture, a debt).
-  { claim: 'current stability', re: /\b[Uu]se current stability to address structural vulnerabilities\b/, family: 'crisis' },
+  // A ruler's want of "current stability" (×4 in the city tier: a fracture, a debt). CENSUS-4b: the
+  // three goal rows re-anchored to R11's rewritten wording (efb84c0), the claims unchanged.
+  { claim: 'current stability', re: /\b[Ff]ix the weakness in the seat that nobody wants to talk about\b/, family: 'crisis' },
   // A ruler's want that takes the order as settled, under an open succession or an uprising.
-  { claim: 'competent administration', re: /\bcompetent administration of current responsibilities\b/, family: 'succession' },
-  { claim: 'competent administration', re: /\bcompetent administration of current responsibilities\b/, family: 'unrest' },
-  { claim: 'stable institutional competition', re: /\bstable institutional competition\b/, family: 'succession' },
-  { claim: 'stable institutional competition', re: /\bstable institutional competition\b/, family: 'unrest' },
+  { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'succession' },
+  { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'unrest' },
+  { claim: 'stable institutional competition', re: /\b[Kk]eep the family's name honoured at every feast while the new offices take its old work\b/, family: 'succession' },
+  { claim: 'stable institutional competition', re: /\b[Kk]eep the family's name honoured at every feast while the new offices take its old work\b/, family: 'unrest' },
   // The food band's own word, under a siege or a famine (and any crisis on a deficit band). The
   // `migration` row is RETIRED (CENSUS-2c, the chair's R-P 1): the food record counts an influx
   // (×1.15 consumption, CENSUS-1c unit 7), so "Food Secure" under a fed influx is TRUE; an influx

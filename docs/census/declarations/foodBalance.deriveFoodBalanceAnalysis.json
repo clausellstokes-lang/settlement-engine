@@ -1,0 +1,542 @@
+{
+  "id": "foodBalance.deriveFoodBalanceAnalysis",
+  "source": "src/generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis (issues/warnings lines, suggestedFixes, channel labels, magic notes)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Analysis lines + suggestedFixes (key suffix ::fix.N). plotHooks are NOT annotated (hook seat). The deficit branches read the canonical food record (deficitPercent vs FOOD_SECURITY_CUTS) — close to the food-band reader, declared. \"grain\" is spoken as the staple in every dependency line: unhomed: staple = grain (a fish/herd place is told of grain). Crisis-scoped: \"Agricultural Surplus\", \"manageable\", \"becomes a famine\"/\"famine risk\" carry calm-type claims. Stress notes: foodBalance.deriveFoodBalanceAnalysis.stressNotes.json.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.title",
+      "text": "Uncovered Local Food Deficit",
+      "needs": [
+        "food: ≤ deficit"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "deficitPercent > cut.deficit AND disconnected route (effectiveRoute; siege forces isolated)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.desc",
+      "text": "Settlement cannot cover ~${deficit} lbs of food per day (${pct}% of needs) and has no depe",
+      "needs": [
+        "food: ≤ deficit"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.impact",
+      "text": "The current population cannot survive this provisioning gap without a new support path.",
+      "needs": [
+        "food: ≤ deficit"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.fix.0",
+      "text": "Strengthen the local foodshed or reduce the supported population",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.fix.1",
+      "text": "Establish seasonal access, patronage, or a dependable trade route",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Shared constant ESTABLISH_SEASONAL_ACCESS_PATRONAGE_OR_A_DEPENDABLE_TRADE_ROUTE. Under siege the route is not the cause."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.fix.2",
+      "text": "Add reserves only as a temporary buffer, not a permanent food source",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.title",
+      "text": "Heavy Food Import Dependency",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "route road (effectiveRoute)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.desc",
+      "text": "Settlement requires ~${deficit} lbs of grain/day via road trade (${pct}% of needs). Vulner",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: staple = grain."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.impact",
+      "text": "A trade disruption or bad harvest becomes a famine within weeks.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Counterfactual famine claim; false under an active famine. Narrower: excludes famine."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.fix.0",
+      "text": "Add granary or grain storage for reserves",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch does not check for a granary: suggests one where it stands."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.fix.1",
+      "text": "Establish multiple supply routes",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::heavy.fix.2",
+      "text": "Develop local food production",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.title",
+      "text": "Severe Food Import Dependency",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "connected non-road route."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.desc",
+      "text": "Settlement requires ~${deficit} lbs of grain per day via ${effectiveRoute} trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: staple = grain. Prints the route slug raw (mountain_pass) unlike importChannelLabel."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.impact",
+      "text": "Vulnerable to trade disruption, famine risk.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "\"famine risk\" under an active famine. Narrower: excludes famine."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.fix.0",
+      "text": "Stockpile grain reserves for 3-6 months",
+      "needs": [
+        "stores: < 3"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Presumes stores below three months."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.fix.1",
+      "text": "Diversify trade partners",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::severe.fix.2",
+      "text": "Develop alternative food sources (fish, livestock)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Presumes water for fish (unhomed: fishable water; water: navigable too narrow for lakes) and suggests sources the place may already hold; no combination declared."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.mild.desc",
+      "text": "Settlement cannot cover ~${deficit} lbs of food per day (${pct}% of needs) and has no depe",
+      "needs": [
+        "food: ≤ deficit"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "importDependent cut, disconnected. Title = the shared UNCOVERED_LOCAL_FOOD_DEFICIT."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.mild.impact",
+      "text": "The current population is not viable without another provisioning path.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.mild.fix.0",
+      "text": "Strengthen the local foodshed",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.mild.fix.1",
+      "text": "Establish seasonal access, patronage, or a dependable trade route",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::import_req.title",
+      "text": "Food Import Requirement",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::import_req.desc",
+      "text": "Settlement imports ~${deficit} lbs of grain/day (${pct}% of needs) via ${effectiveRoute}.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: staple = grain."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::import_req.impact",
+      "text": "Creates trade dependency but manageable.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Asserts manageability; prints under famine/plague/occupation."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::import_req.fix.0",
+      "text": "Increase local food production",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::import_req.fix.1",
+      "text": "Maintain strategic grain reserves",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "\"Maintain\" presumes reserves exist (stores atom); not declared."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.title",
+      "text": "Agricultural Surplus",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Branch surplusFinal > 0.5 × need (canonical record). Plenty claim; prints under non-hunger crises and under any crisis the record does not price."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.desc",
+      "text": "Settlement produces ${pct}% more food than needed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.impact",
+      "text": "Export opportunity: could generate significant trade income.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "presumes a trade route (route not isolated) — unchecked."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.fix.0",
+      "text": "Add merchants to export surplus grain",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Surplus may be herds/fish, not grain."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.fix.1",
+      "text": "Add granary for long-term storage",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.fix.2",
+      "text": "Develop food processing industries (brewing, baking)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "unhomed: brewery/bakery."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_granary.title",
+      "text": "No Grain Storage Facility",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch: town+ AND no 'granar'/'grain store'/'grain silo' by name (private; factsOf(r).hasInstitution('granary') should answer)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_granary.desc",
+      "text": "Settlement of ${population} lacks a granary. Cannot buffer harvests or maintain strategic ",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_granary.impact",
+      "text": "Vulnerable to seasonal shortages and siege starvation without grain reserves.",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_granary.fix.0",
+      "text": "Add Town granary, City granaries, or State granary complex",
+      "needs": [],
+      "excludes": [
+        "institution: granary"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_mill.title",
+      "text": "No Milling Facility",
+      "needs": [],
+      "excludes": [
+        "institution: mill"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch: tier town AND no name containing 'mill' (a SAWMILL suppresses it)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_mill.desc",
+      "text": "Settlement of ${population} people processes grain without a mill.",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [
+        "institution: mill"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_mill.impact",
+      "text": "Inefficient food processing, implausible for this population size.",
+      "needs": [],
+      "excludes": [
+        "institution: mill"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::no_mill.fix.0",
+      "text": "Add Mill (water-powered or windmill) or Mills (2-5)",
+      "needs": [],
+      "excludes": [
+        "institution: mill"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "water-powered presumes a river (either/or with windmill; not declared)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::stress.title",
+      "text": "Stress: Food Production Degraded",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "famine",
+        "under_siege",
+        "plague_onset",
+        "occupied",
+        "wartime",
+        "slave_revolt",
+        "mass_migration"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::stress.priorityNote",
+      "text": "Active stress condition is directly reducing food availability.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "famine",
+        "under_siege",
+        "plague_onset",
+        "occupied",
+        "wartime",
+        "slave_revolt",
+        "mass_migration"
+      ],
+      "colour": false,
+      "notes": "mass_migration/occupied raise CONSUMPTION, not reduce availability: wording slip."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::channel.route",
+      "text": "${route} trade",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "importChannelLabel, connected route (de-slugged)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::channel.teleport",
+      "text": "teleportation circle",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::channel.airship.siege",
+      "text": "airship runs (impaired by siege)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::channel.airship",
+      "text": "airship traffic",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: airship dock."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::channel.minor",
+      "text": "minor routes and sanctioned caravans",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Siege forces isolation but sets the minor rate to 0, so this never prints under siege."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::magic_note.druid",
+      "text": "Druidic cultivation provides partial food supplement",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: druid circle / sacred grove."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::magic_note.divine",
+      "text": "Divine provision supplements food shortfall",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "presumes temple OR monastery (cathedral/monastery/parish church/friary); disjunction undeclared. Divine food is credited even where magicExists false? No: magicOn gate applies."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis::magic_note.arcane",
+      "text": "Arcane quickening of growth provides minor food supplement",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

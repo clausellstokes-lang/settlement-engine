@@ -1,0 +1,317 @@
+{
+ "id": "hooks.HOOK_LINE_POOLS",
+ "source": "src/domain/dossier/hookLines.js :: HOOK_LINE_POOLS (conflict · foodGap)",
+ "drawKind": "H",
+ "pool": {
+  "declares": [
+   "conflict: the issue family (key)",
+   "foodGap: food-band: deficit (key: drawn only on a refused famine hook with a real gap)"
+  ],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "createConflictHookDraw (fnv, without replacement per family); foodGapHookLine (fnv). The house voice already claims no building, force or spell; one line names guards.",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.licence#0",
+   "text": "{a} has begun issuing its own papers over {issue}, and {b} is refusing to honour them.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.licence#1",
+   "text": "A clerk who holds the only complete record of {issue} has stopped coming to work, and both {a} and {b} have...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.licence#2",
+   "text": "{b} has offered to drop its claim on {issue} in exchange for something it will not put in writing, and {a} ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.licence#3",
+   "text": "Two sets of papers covering {issue} are in circulation, one sealed by {a} and one by {b}, and nobody outsid...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.licence#4",
+   "text": "{a} has quietly stopped enforcing {issue} against anyone who pays {b} instead, and the arrangement is about...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.jurisdiction#0",
+   "text": "{a} has taken someone into custody over {issue}, and {b} has sent people to take them back.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.jurisdiction#1",
+   "text": "A ruling on {issue} went {a}'s way, and {b} has simply carried on as though it did not.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.jurisdiction#2",
+   "text": "{b} has started keeping its own account of {issue}, and it no longer agrees with {a}'s about what happened.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.jurisdiction#3",
+   "text": "Somebody acting for {a} overstepped badly over {issue}, and {b} is holding the proof back for a better moment.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.jurisdiction#4",
+   "text": "{a} and {b} have both claimed the right to settle {issue}, and the people who must live with the answer are...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.property#0",
+   "text": "{a} has posted guards on what it says is its own, and {b} says {issue} was never {a}'s to hold.",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"has posted guards\": an armed body (the reader:hook-pools [guard] word); a faction's hired men are not homed"
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.property#1",
+   "text": "An inventory of {issue} came up short, and {a} and {b} each say the other took the difference.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.property#2",
+   "text": "{b} has produced an old deed bearing on {issue}; it is good enough for {a} to take seriously and old enough...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.property#3",
+   "text": "Someone has been moving what {issue} covers out of the building at night, and both {a} and {b} assume the o...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.property#4",
+   "text": "{a} has offered to split {issue} rather than argue it, and the offer has split {b} instead.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.revenue#0",
+   "text": "{a} has stopped paying what {b} says it owes on {issue}, and the stoppage is costing a third party money.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.revenue#1",
+   "text": "A clerk's ledger covering {issue} is missing a season, and {a} benefits from its absence more than {b} does.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.revenue#2",
+   "text": "{b} has undercut {a} on {issue} at a price that cannot be honest, and nobody has worked out yet where the d...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.revenue#3",
+   "text": "{a} has begun turning away anyone who deals with {b} over {issue}, and the refusals are starting to bite th...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.revenue#4",
+   "text": "Both {a} and {b} have promised the same share of {issue} to the same outsider, who has now arrived to collect.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.people#0",
+   "text": "{a} has drawn up names under {issue}, and {b} has been quietly telling people how to keep off the list.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.people#1",
+   "text": "A family caught between {a} and {b} over {issue} has asked for someone from outside to speak for them.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.people#2",
+   "text": "{b} has taken on people {a} had already claimed under {issue}, and neither will release them.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.people#3",
+   "text": "Someone has been paid to swear to a version of {issue} that suits {a}, and {b} knows who paid and not yet w...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.people#4",
+   "text": "{a} and {b} have each offered protection over {issue} to the same households, on terms that cannot both be ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.seat#0",
+   "text": "{a} has a candidate for {issue} and {b} has a reason the candidate cannot stand, and the reason is true.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.seat#1",
+   "text": "A vote on {issue} has been postponed three times, each time by whichever of {a} or {b} would have lost it.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.seat#2",
+   "text": "{b} has let it be known it will accept {a}'s answer to {issue} if one of its own people is kept on, and the...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.seat#3",
+   "text": "Two people are already acting as though {issue} is settled in their favour, one backed by {a} and one by {b}.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.seat#4",
+   "text": "Someone with no part in {a} or {b} has been promised {issue} by both of them, and has told neither about th...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#0",
+   "text": "{a} has stopped speaking to {b} about {issue} and started speaking about it to everybody else.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#1",
+   "text": "A go-between who carried messages on {issue} between {a} and {b} has been caught keeping copies.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#2",
+   "text": "{b} is waiting for {a} to overreach on {issue}, and has arranged for it to be witnessed when it happens.",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#3",
+   "text": "An old debt between {a} and {b} has been called in over {issue}, years after both sides had stopped mention...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#4",
+   "text": "Someone has been feeding {a} and {b} the same warning about each other over {issue}, and neither has asked ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::conflict.standing#5",
+   "text": "{a} has offered {b} terms on {issue} that are better than {b} expected, which is why {b} has not accepted t...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#0",
+   "text": "Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price ha...",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"Grain\": grain presumed as the imported staple; the key (a food gap) carries it"
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#1",
+   "text": "Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#2",
+   "text": "A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms ha...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#3",
+   "text": "The last two consignments were short by the same amount, and the measure is being blamed rather than the me...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#4",
+   "text": "Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"Grain\": grain presumed as the imported staple; the key (a food gap) carries it"
+  },
+  {
+   "id": "hooks.HOOK_LINE_POOLS::foodGap#5",
+   "text": "A merchant has offered to cover the whole gap from one source, which would solve this season and hand them ...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

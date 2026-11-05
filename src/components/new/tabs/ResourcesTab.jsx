@@ -151,7 +151,7 @@ export function ResourcesTab({settlement:r, narrativeNote, publicDossier = false
             {!deskWorth&&res.strategicValue&&<div style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.5}}>{res.strategicValue}</div>}
           </div>
           {res.economicStrengths?.length>0&&<div style={{flex:'2 1 200px'}}>
-            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>Economic strengths</div>
+            <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:6}}>What the land offers</div>
             <div style={{display:'flex',flexWrap:'wrap',gap:5}}>
               {[...res.economicStrengths].sort((a,b)=>(a||'').localeCompare(b||'')).map((s,i)=>(
                 <span key={i} style={{fontSize:chromeFontSize(FS.xs, mobile),fontWeight:600,color:swatch.success,background:swatch['#E0F0E4'],border:'1px solid #a8d8b0',padding:'2px 9px'}}>✓ {s}</span>

@@ -1,0 +1,245 @@
+{
+  "id": "DS-ECO-3",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-3::SHORTAGE × trade-dependent",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: tradeFlow shortage × trade-dependent",
+      "lines": [
+        {
+          "id": "DS-ECO-3::SHORTAGE × trade-dependent::v0",
+          "text": "The roads have gone quiet. Little reaches the markets, and what the town depends on is not",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"Little reaches the markets\"; roads: presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × trade-dependent::v1",
+          "text": "The gate returns are thin in both columns. What arrives is short of what the town has cont",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The gate returns\""
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × trade-dependent::v2",
+          "text": "Market days are quiet and short. The stalls that depend on the roads are the ones standing",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"Market days\""
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × trade-dependent::v3",
+          "text": "Traffic into {settlement} has fallen below what the town runs on, and the stores are cover",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-3::SHORTAGE × not trade-dependent",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: tradeFlow shortage × not dependent",
+      "lines": [
+        {
+          "id": "DS-ECO-3::SHORTAGE × not trade-dependent::v1",
+          "text": "Little moves on {settlement}'s roads and the books barely register it. The town buys and s",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "K mark walls: \"beyond its own walls\""
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × not trade-dependent::v2",
+          "text": "The roads are quiet. In a town that lives off its own fields, quiet roads are a matter of ",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"a town that lives off its own fields\""
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × not trade-dependent::v3",
+          "text": "A stranger finds the approaches empty and the market unbothered. The two go together here.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the market unbothered\""
+        },
+        {
+          "id": "DS-ECO-3::SHORTAGE × not trade-dependent::v4",
+          "text": "Little moves on {settlement}'s roads and the books barely register it. The town buys and s",
+          "needs": [],
+          "excludes": [
+            "walls"
+          ],
+          "colour": false,
+          "notes": "K mark no walls (twin of v1)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-3::ADEQUATE",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": true,
+      "colour": false,
+      "notes": "key: tradeFlow adequate. Crisis-scoped: v2 \"Nobody is watching the road\".",
+      "lines": [
+        {
+          "id": "DS-ECO-3::ADEQUATE::v0",
+          "text": "Caravans keep to their rounds. Trade moves at its accustomed pace.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "unhomed: caravans (overland caravan trade)"
+        },
+        {
+          "id": "DS-ECO-3::ADEQUATE::v1",
+          "text": "The traffic through {settlement} matches what the ledgers expect of it. Arrivals and depar",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-3::ADEQUATE::v2",
+          "text": "The carts come when the carts come. Nobody is watching the road for them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "notes": "\"Nobody is watching the road for them\" — false under siege/monster_pressure/wartime"
+        },
+        {
+          "id": "DS-ECO-3::ADEQUATE::v3",
+          "text": "Trade here reads as unremarkable, which on a road is the good reading.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-3::SURPLUS × trade-dependent",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: tradeFlow surplus × trade-dependent",
+      "lines": [
+        {
+          "id": "DS-ECO-3::SURPLUS × trade-dependent::v0",
+          "text": "The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: caravans"
+        },
+        {
+          "id": "DS-ECO-3::SURPLUS × trade-dependent::v1",
+          "text": "More is moving through {settlement} than the town's own trade accounts for. Everything the",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-3::SURPLUS × trade-dependent::v2",
+          "text": "The yard is full most mornings and the market is fat on it. What the town cannot make, the",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The yard is full\""
+        },
+        {
+          "id": "DS-ECO-3::SURPLUS × trade-dependent::v3",
+          "text": "A stranger will wait behind carts to get in. The roads are working harder than the town re",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-3::SURPLUS × not trade-dependent",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: tradeFlow surplus × not dependent",
+      "lines": [
+        {
+          "id": "DS-ECO-3::SURPLUS × not trade-dependent::v1",
+          "text": "Heavy traffic runs through {settlement} without much of it belonging to the town: the road",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-3::SURPLUS × not trade-dependent::v2",
+          "text": "Plenty passes here. Not much of it stops.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-3::SURPLUS × not trade-dependent::v3",
+          "text": "The traffic on these roads outruns the market. What arrives is mostly going somewhere else",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

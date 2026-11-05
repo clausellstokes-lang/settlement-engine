@@ -39,6 +39,7 @@ import {
   hashKey,
   poolDimensions,
   readStateProse,
+  variantFactDeclaration,
   stableVid,
   stateProseSentence,
   variantIsAnchored,
@@ -439,6 +440,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     let draws = 0;
     for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
       if (poolDimensions(pool).length > 0) continue;
+      // CENSUS-3b unit 2: a pool whose variants declare FACT atoms is fail-closed without `facts`
+      // (law 5 generalised); its gate is held by tests/domain/facts/declaredKernel.test.js.
+      if (pool.some((v) => { const d = variantFactDeclaration(v); return d.needs.length || d.excludes.length || d.crisis.length; })) continue;
       poolsChecked += 1;
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
@@ -469,8 +473,10 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // by being empty, which is the failure mode this pair of floors exists to refuse.
     // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
     // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
-    expect(poolsChecked).toBeGreaterThanOrEqual(716);
-    expect(draws).toBeGreaterThanOrEqual(716 * 2 * SWEEP_SEEDS.length);
+    // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 established and DS-ECO-12 one-source take `no hunger`
+    // (a crisis dimension) and DS-ECO-8 COMFORTABLE declares `no crisis: indebted` (a fact atom), so 713.
+    expect(poolsChecked).toBeGreaterThanOrEqual(713);
+    expect(draws).toBeGreaterThanOrEqual(713 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {

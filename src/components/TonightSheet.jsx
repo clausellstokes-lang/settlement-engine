@@ -10,7 +10,7 @@
 import { FS } from './theme.js';
 import useIsMobile from '../hooks/useIsMobile.js';
 import { chromeFontSize, proseFontSize } from '../design/proseScale.js';
-import { TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { TONIGHT_COPY, printsAsWant, secretLeadOf } from '../domain/summary/tonightSheet.js';
 
 const serif = '"Crimson Text", Georgia, serif';
 
@@ -70,7 +70,7 @@ export default function TonightSheet({ sheet, palette }) {
                 </div>
                 {p.line && (
                   <div style={{ fontSize: proseFontSize(FS.sm, mobile), color: palette.body, lineHeight: 1.45 }}>
-                    {p.why === 'secret' ? p.line : p.sameAs
+                    {!printsAsWant(p) ? <>{secretLeadOf(p) && <><span style={{ fontWeight: 800 }}>{secretLeadOf(p)}</span> </>}{p.line}</> : p.sameAs
                       ? <><span style={{ fontWeight: 800 }}>{TONIGHT_COPY.wantsSame}</span> {p.sameAs}.</>
                       : <><span style={{ fontWeight: 800 }}>{TONIGHT_COPY.wants}</span> {p.line}</>}
                   </div>

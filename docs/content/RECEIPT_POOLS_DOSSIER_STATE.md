@@ -1203,7 +1203,7 @@ contradict** it (R-DST-C).
 4. `[visitor · crisis]` {settlement}'s accounts still balance, and that is the one thing about the town the crisis has not yet reached.
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
-1. `[ledger]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
+1. `[ledger · no crisis: indebted]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
 2. `[street]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 
@@ -1457,7 +1457,7 @@ note that carries it on the six wired surfaces.
 3. `[threshold]` The outward trade does not cover the inward. It works while there is something to pay with.
 
 **POSTURE: `established`**
-1. `[ledger]` {settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.
+1. `[ledger · no hunger]` {settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.
 2. `[visitor]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
 3. `[street]` There is always something going out. If one trade is quiet, another is not.
 
@@ -1642,7 +1642,7 @@ shape.
 **INCOME MIX: one source carries the town**
 1. `[ledger]` Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.
 2. `[street]` There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.
-3. `[threshold]` {settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.
+3. `[threshold · no hunger]` {settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.
 
 **INCOME MIX: two or three sources between them**
 1. `[ledger]` {settlement}'s earnings come from a handful of trades in roughly comparable portions, and no one of them could carry the town alone.

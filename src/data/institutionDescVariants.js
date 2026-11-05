@@ -535,8 +535,8 @@ const PAIRS = [
     "Trade in certain goods runs through their hands alone.",
   ],
   [
-    "Foreign coin exchanged. The first stirrings of banking, past 3,000 people.",
-    "They change coin from abroad. Banking in its infancy, and only above 3,000 population.",
+    "Foreign coin exchanged. The first stirrings of banking.",
+    "They change coin from abroad. Banking in its infancy.",
   ],
   [
     "Takes pledges and lends at steep interest, no questions asked. It is the only credit for labourers, journeymen, and whoever the banks refuse.",
@@ -587,8 +587,8 @@ const PAIRS = [
     "Coastal or riverside wharfage, without which no heavy water-borne trade moves.",
   ],
   [
-    "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law. Navigable-water cities only.",
-    "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced. Found only in port cities.",
+    "It orders waterborne traffic, gathers anchorage fees, assigns the berths, and enforces port law.",
+    "Traffic is regulated here, anchorage fees collected, berths handed out, and sea-law enforced.",
   ],
   [
     "Duties are taken here on goods passing through the port or the main roads. Royal or municipal officers run it.",
@@ -708,7 +708,7 @@ const PAIRS = [
   ],
   [
     "Books and broadsheets, where the technology has arrived.",
-    "Printed books and broadsheets, only if the craft exists at all.",
+    "Printed books and broadsheets, struck off by the sheet.",
   ],
   [
     "Sells road maps, regional surveys, and coastal charts, and takes commissions to survey estates or sketch dungeons. An older collection is kept for reference. Adventurers, merchants, and army scouts all stop here.",
@@ -827,12 +827,12 @@ const PAIRS = [
     "Rangers keep this lodge, minding the wilderness about the town, tending its trails, and marking where the beasts migrate. When trouble comes they scout and track for the town.",
   ],
   [
-    "One wizard's home. It holds only past 1,000 people.",
-    "A single wizard's residence, viable once the town passes 1,000.",
+    "One wizard's home.",
+    "A single wizard's residence.",
   ],
   [
-    "A body of spellcasters organised together. A chapter needs 2,000 to 5,000 people.",
-    "An association of magic-workers. Sustaining a chapter takes 2,000-5,000 population.",
+    "A body of spellcasters organised together.",
+    "An association of magic-workers.",
   ],
   [
     "Sells spell scrolls. A minor charm costs a craftsman a month's earnings; a greater working, a merchant's year.",
@@ -923,8 +923,8 @@ const PAIRS = [
     "Politically, a power in their own right.",
   ],
   [
-    "Loans, coin exchange, and letters of credit. The beginnings of banking, viable above 5,000 souls.",
-    "Lending, currency exchange, and credit by letter. Rudimentary banking, and only past 5,000 population.",
+    "Loans, coin exchange, and letters of credit. The beginnings of banking.",
+    "Lending, currency exchange, and credit by letter. Rudimentary banking.",
   ],
   [
     "Several inn districts, given over to merchants, travellers, and those who stay long.",
@@ -1047,8 +1047,8 @@ const PAIRS = [
     "More than one monastery, and no two of the same order.",
   ],
   [
-    "The bishop's seat. It wants at least 10,000 people to sustain it, and its presence marks a city as a major one.",
-    "Seat of a bishop, and the mark of a first-rank city. Nothing under 10,000 population carries one.",
+    "The bishop's seat, and its presence marks a city as a major one.",
+    "Seat of a bishop, and the mark of a first-rank city.",
   ],
   [
     "A large house for the sick poor, of 50 to 100 beds.",
@@ -1131,8 +1131,8 @@ const PAIRS = [
     "The seat of a high-level mage. Several may stand in a single city.",
   ],
   [
-    "Magic items made to order. It wants a population of 5,000 or more, as a rule.",
-    "Where magic items are crafted. Typically past 5,000 people.",
+    "Magic items made to order.",
+    "Where magic items are crafted.",
   ],
   [
     "A permanent teleportation circle. Its use is restricted and its upkeep dear, but any settlement fortunate enough to hold one is transformed by it.",
@@ -1159,8 +1159,8 @@ const PAIRS = [
     "Several gangs at odds, quarrelling over ground.",
   ],
   [
-    "A chapter of organised crime, workable only past 10,000 people. Thirty to a hundred members.",
-    "An arm of the wider criminal order, 30 to 100 strong. It needs a city of 10,000 or more to survive.",
+    "A chapter of organised crime. Thirty to a hundred members.",
+    "An arm of the wider criminal order, 30 to 100 strong.",
   ],
   [
     "Warehouses, taverns, and shops that mask criminal work.",
@@ -1187,12 +1187,12 @@ const PAIRS = [
     "Free persons are taken and passed into slavery through counterfeit provenance documents. With no lawful market to lean on, it moves them through its own apparatus.",
   ],
   [
-    "A wholly hidden operation that moves persons across borders outside any legal channel. It arises only where no lawful slave market stands. It runs its own logistics, its own safe houses, and its own bought border officials.",
-    "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. It appears only where no legal slave market exists to absorb the traffic. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
+    "A wholly hidden operation that moves persons across borders outside any legal channel. It runs its own logistics, its own safe houses, and its own bought border officials.",
+    "An entirely clandestine trade in persons, carried across jurisdictions beyond the reach of law. Separate logistics, safe houses, and corrupted border infrastructure hold it together.",
   ],
   [
-    "Music taught in the formal way, with an amphitheatre and dormitories. Even a small campus wants 10,000 or more people.",
-    "A formal schooling in music: amphitheatre, dormitories, and all. Nothing under 10,000 sustains even a small campus.",
+    "Music taught in the formal way, with an amphitheatre and dormitories.",
+    "A formal schooling in music: amphitheatre, dormitories, and all.",
   ],
   [
     "Houses given wholly to play. Not all of them lawful.",
@@ -1207,7 +1207,7 @@ const PAIRS = [
     "Prostitution on a large and organised scale, held to one quarter.",
   ],
   [
-    "Constructed servants, where the magic allows them.",
+    "Constructed servants, put to the heavy work.",
     "Servants made rather than born, if magic permits it.",
   ],
   [

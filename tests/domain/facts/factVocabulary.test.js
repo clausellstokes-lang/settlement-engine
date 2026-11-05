@@ -56,8 +56,8 @@ describe('every dimension is answered by one home, or cannot be declared', () =>
     expect(V.parseAtom('tier: ≥ village-ish')).toBeNull();
     expect(V.parseAtom('crisis: drought')).toBeNull();
     expect(() => V.assertDeclarable('moat')).toThrow(/not an atom/);
-    expect(() => V.assertDeclarable('organised crime')).toThrow(/no reader yet/);
-    expect(() => V.assertDeclarable('grain')).toThrow(/no reader yet/);
+    // merge of CENSUS-3b into CENSUS-4b: `organised crime` and `grain` (3b), `soldiers` and `priest` (1c) are all homed now
+    for (const homed of ['organised crime', 'grain', 'soldiers', 'priest', 'guild']) expect(V.assertDeclarable(homed).dimension, homed).toBeTruthy();
     expect(V.assertDeclarable('walls').dimension).toBe('walls');
     expect(V.assertDeclarable('institution: mill').key).toBe('mill');
     expect(V.assertDeclarable('tier: >= town')).toMatchObject({ op: '≥', value: 'town' });

@@ -156,3 +156,11 @@ Golden: 0 of 525 at every commit. Pages: 0 of 60 at every commit; 0 of 1,000 for
 - Row 103 is wired at its site with a local declared `pickLine`, never in the shared `proseSelection.js :: pickLine`. Wiring the shared one would have pulled every world-pulse pool into the ledger ahead of ruling 7's second wave.
 - The registers read the six leaves directly, not the wiring census. The census columns are a door re-take that moves its pins, so they are left to the next seat (3c).
 - The retake spelling is `RETAKE_DECLARATION_REGISTERS`, not `UPDATE_…`: goldenFreeze's roster claims every `UPDATE_*` env as a golden instrument.
+
+### Addendum — the chair's R-A ruling of 2026-11-05 02:30 (read after the boundary report; acted on)
+
+The ruling reordered unit 2: merge CENSUS-4b's tip and wire the registry goal lookup. It reached this seat after its 1,000 had run; it was acted on at once.
+- `a3a383ae5` — merge of `origin/lane/census-4-2026-11-04` at `11baceee4`; `gen:dossier-prose --check` green.
+- `e267287e7` — `npcStructure.js :: enrichNPCsWithStructure` resolves its registry entry through `resolveDeclared` (tagged; NPC_STRUCTURE.<key>). A refused CALM_ONLY entry is not applied, and the NPC keeps its role goal. **Moves, one cause, against the merge:** golden **409/525** (every golden row carries an active crisis: 120 of 120 checked), soak records 19/60, pages 18/60. Counted, never re-recorded. **The 60:** `coh:crisis-blind-prose` 22 → **7** settlements; the three goal claims fall to 0 (current stability 11 → 0, competent administration 1 → 0, stable institutional competition 4 → 0). What remains is "nobody stops a stranger" 5 (2b) and "food secure" 2 (2c). `cert:false-presumption` 0 → 0. Re-keyed by cause: `regenNpcEnrichment`'s anchor now reads a calm city.
+- `40e26d249` — the undeclared register re-taken after the merge: 2,201 → 2,198 lines (DS-ECO-8, -10, -12).
+- The 1,000 was NOT re-run after this site. The chair's figure (713 of 791 births on the three claims) is the expectation; the compose's 1,000 is the measurement.

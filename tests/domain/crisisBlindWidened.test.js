@@ -35,6 +35,13 @@ function rulerWant(s, fragment) {
   return `Wants to ${goal.charAt(0).toLowerCase()}${goal.slice(1)}`;
 }
 
+/** The three goals' R11 wording (efb84c0); the claims keep their rung-2D names. */
+const GOAL = {
+  stability: 'Fix the weakness in the seat that nobody wants to talk about',
+  administration: 'Do every task the seat hands them so well',
+  competition: 'Keep the family\'s name honoured at every feast',
+};
+
 const SEEDS = [604, 1804, 2404, 3604, 1205, 2402, 5404, 4803, 1204, 3005, 3000, 5402, 1803];
 /** @type {Record<number, any>} */
 const born = {};
@@ -48,7 +55,7 @@ const readOn = (i, line) => crisisBlindFindings(born[i], { page: line(born[i]) }
 
 describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows', () => {
   it.each([604, 1804, 2404, 3604])('soak1k-%i: the ruler\'s "current stability" want under a fracture or a debt', (i) => {
-    expect(readOn(i, (s) => rulerWant(s, 'current stability'))).toEqual([['current stability', 'crisis']]);
+    expect(readOn(i, (s) => rulerWant(s, GOAL.stability))).toEqual([['current stability', 'crisis']]);
   });
 
   // CENSUS-2c (the chair's R-P 1): the food record counts the influx (×1.15, CENSUS-1c unit 7), so
@@ -74,11 +81,11 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
   });
 
   it('soak1k-3005: the governor\'s "competent administration" want under a succession void and an insurgency', () => {
-    expect(readOn(3005, (s) => rulerWant(s, 'competent administration'))).toEqual([['competent administration', 'succession']]);
+    expect(readOn(3005, (s) => rulerWant(s, GOAL.administration))).toEqual([['competent administration', 'succession']]);
   });
 
   it('soak1k-3000: the elder\'s "stable institutional competition" want under an insurgency', () => {
-    expect(readOn(3000, (s) => rulerWant(s, 'stable institutional competition'))).toEqual([['stable institutional competition', 'unrest']]);
+    expect(readOn(3000, (s) => rulerWant(s, GOAL.competition))).toEqual([['stable institutional competition', 'unrest']]);
   });
 
   it('soak1k-5402: the line that no one export matters, under a famine that took the herds', () => {
@@ -87,6 +94,6 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
 
   it('soak1k-1803 (no crisis, the control): the same want reads nothing', () => {
     expect(born[1803].stress ?? null).toBeFalsy();
-    expect(readOn(1803, (s) => rulerWant(s, 'current stability'))).toEqual([]);
+    expect(readOn(1803, (s) => rulerWant(s, GOAL.stability))).toEqual([]);
   });
 });

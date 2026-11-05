@@ -1,0 +1,96 @@
+{
+  "pool": {
+    "id": "npcData.NPC_BUILDS",
+    "file": "src/data/npcData.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:354 pickFromArray",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 10,
+    "declaring": 0,
+    "note": "Builds; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "#0",
+      "text": "lean and wiry",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#1",
+      "text": "stocky and broad-shouldered",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#2",
+      "text": "tall with a slight stoop",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#3",
+      "text": "average height, unremarkable frame",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#4",
+      "text": "heavyset and solid",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#5",
+      "text": "slight: smaller than expected for the role",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#6",
+      "text": "imposingly tall",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#7",
+      "text": "compact and powerful",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#8",
+      "text": "willowy",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "#9",
+      "text": "barrel-chested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}
