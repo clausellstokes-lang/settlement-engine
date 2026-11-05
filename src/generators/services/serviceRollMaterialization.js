@@ -8,7 +8,7 @@
  * in the public orchestrator because they consume the completed bucket state.
  */
 
-import { random as rng } from '../../kernel/rngContext.js';
+import { random as rng, getActiveRng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js';
 import { classifyService } from './serviceClassifier.js';
 import { getServiceTierInfo } from './serviceAvailability.js';
@@ -77,7 +77,7 @@ export function resolveServiceRow(service, facts) {
   const r = drawDeclared([service], {
     draw: (p) => p[0],
     facts,
-    poolId: `institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`,
+    poolId: `institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, key: `${getActiveRng()?.seed ?? ''}::institutionServices:${String(service.svcKey ?? service.institution ?? '')}.${String(service.name ?? '')}`, // R-AT (CENSUS-1i unit 5)
     surface: 'services',
     drawKind: 'R',
     twin: (line) => {

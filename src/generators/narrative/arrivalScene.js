@@ -34,7 +34,7 @@
  *
  * @enforced-by tests/generators/arrivalScene.test.js
  */
-import { pickRandom } from '../helpers.js';
+import { pickRandom } from '../helpers.js'; import { getActiveRng } from '../../kernel/rngContext.js'; // R-AT (CENSUS-1i unit 5): one line, so no cited line moves
 import { textOf } from '../../domain/facts/textOf.js';
 import { resolvePrimaryStress } from '../stressPriority.js';
 import { sentenceCase } from '../narrativeProse.js';
@@ -227,7 +227,7 @@ function drawAdmitted(pool, { poolId, scoped, facts, speaks = () => true, cleanO
       const clean = p.filter(ok);
       return clean.length ? pickRandom(clean) : null;
     },
-    facts, poolId, surface: 'overview', drawKind: 'R', crisisScoped: scoped,
+    facts, poolId, key: `${getActiveRng()?.seed ?? ''}::${poolId}`, surface: 'overview', drawKind: 'R', crisisScoped: scoped, // R-AT (CENSUS-1i unit 5): the settlement's identity
   }).line;
 }
 

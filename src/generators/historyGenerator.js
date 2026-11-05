@@ -13,7 +13,7 @@ import { resolvePrimaryStress } from './stressPriority.js';
 import { deriveTradeCommodity } from './tradeCommodity.js';
 import { buildCurrentTensionTokens, renderHistoryTemplate } from './historyTemplate.js';
 import { pick, random01, randInt } from './helpers.js';
-import { random as _rng } from '../kernel/rngContext.js';
+import { random as _rng, getActiveRng } from '../kernel/rngContext.js';
 
 import { genArrivalDetail } from './narrativeGenerator.js';
 import { AGE_BY_TIER, HISTORICAL_EVENTS_DATA, EVENT_TYPE_NAMES, historyDescription } from '../data/historyData.js';
@@ -192,11 +192,11 @@ const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed,
   const already = taken.has(drawnRow);
   const r = drawDeclared(domain, {
     draw: () => drawnRow, facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`,
-    surface: 'history', drawKind: 'R', key: `${eventTemplate?.type ?? ''}::${lineText(drawnRow)}`,
+    surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::${lineText(drawnRow)}`, // R-AT (CENSUS-1i unit 5): the settlement's identity leads the key
   });
   if (!already) return r.line;
   const others = domain.slice(1);
-  return others.length ? drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, surface: 'history', drawKind: 'R' }).line : null;
+  return others.length ? drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, key: `${getActiveRng()?.seed ?? ''}::${eventTemplate?.type ?? ''}::taken`, surface: 'history', drawKind: 'R' }).line : null;
 };
 
 // ─── generateEventNarrative ───────────────────────────────────────────────────
@@ -356,7 +356,7 @@ const tensionAdmitted = (tmpl, facts) => {
   if (!decl) return true;
   const line = Object.freeze({ text: tmpl.type, ...decl });
   return drawDeclared([line], {
-    draw: (p) => p[0], facts, poolId: 'historyData:HISTORICAL_EVENTS_DATA.tension', surface: 'history', drawKind: 'R',
+    draw: (p) => p[0], facts, poolId: 'historyData:HISTORICAL_EVENTS_DATA.tension', surface: 'history', drawKind: 'R', key: `${getActiveRng()?.seed ?? ''}::historyData:HISTORICAL_EVENTS_DATA.tension`, // R-AT (CENSUS-1i unit 5)
   }).line !== null;
 };
 /**

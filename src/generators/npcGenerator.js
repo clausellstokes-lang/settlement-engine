@@ -605,12 +605,12 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
 
   // 40% chance to use a stress-specific goal
   const stressGoals = stresses.flatMap(s => STRESS_GOALS[s] || []);
-  if (stressGoals.length > 0 && _rng() < 0.4) return drawDeclared(stressGoals, { draw: pickFromArray, facts, poolId: 'npcGenerator:STRESS_GOALS', surface: 'npcs', drawKind: 'R' }).line; // ⚠ the 0.4 roll stays on the FULL pool's emptiness (§2.2)
+  if (stressGoals.length > 0 && _rng() < 0.4) return drawDeclared(stressGoals, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:STRESS_GOALS`, poolId: 'npcGenerator:STRESS_GOALS', surface: 'npcs', drawKind: 'R' }).line; // ⚠ the 0.4 roll stays on the FULL pool's emptiness (§2.2)
 
   // Use role-specific goal from NPC_FACTION_GOALS
   const roleGoals = NPC_FACTION_GOALS[role];
   if (roleGoals && roleGoals.length > 0) {
-    const goal = drawDeclared(roleGoals, { draw: pickFromArray, facts, poolId: 'npcData:NPC_FACTION_GOALS', surface: 'npcs', drawKind: 'R' }).line;
+    const goal = drawDeclared(roleGoals, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_FACTION_GOALS`, poolId: 'npcData:NPC_FACTION_GOALS', surface: 'npcs', drawKind: 'R' }).line;
     // Substitute commodity/faction tokens
     if (goal && (commodity || topFaction)) {
       const substitute = text =>
@@ -624,7 +624,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
   }
 
   // Fallback to category secrets
-  return drawDeclared(NPC_SECRETS[category] || NPC_SECRETS.other, { draw: pickFromArray, facts, poolId: 'npcData:NPC_SECRETS', surface: 'npcs', drawKind: 'R' }).line;
+  return drawDeclared(NPC_SECRETS[category] || NPC_SECRETS.other, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_SECRETS`, poolId: 'npcData:NPC_SECRETS', surface: 'npcs', drawKind: 'R' }).line;
 };
 
 // drawLoyalty — the ONE spelling of a themed loyalty draw (wave HK-3).
@@ -689,7 +689,7 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts =
 
 // pickTitle
 const pickTitle = (r, facts = null) => {
-  const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
+  const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_PLOT_HOOKS`, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
   return {
     impression: s.impression,
     disposition: s.disposition,
@@ -770,14 +770,14 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
         stakes: 'The intermediary has recently started asking for more money',
       },
-    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R' }).line;
+    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::npcGenerator:CRIME_KNOWLEDGE`, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R' }).line;
   }
 
   // 45% chance: stress-driven institutional secret
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
-    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? (() => factsOf({ npcs: allNpcs, stress: (summary.stressTypes || (stressType ? [stressType] : [])).map((type) => ({ type })), economicState: { foodSecurity: { foodRecord: summary.foodRecord } } })), ctx: { npc: npcIndex }, key: `${getActiveRng()?.seed ?? ''}::stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c + CENSUS-4: ⚠ the 0.45 roll stays on the food-filtered pool's emptiness (§2.2); the whole record's facts when the summary carries them (narrativeGenerator :: enrichNpcCoherence), else the partial record
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection
     if (effect) return {
       what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
