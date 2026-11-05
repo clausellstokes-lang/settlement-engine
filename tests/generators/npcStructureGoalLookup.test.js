@@ -36,7 +36,7 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
       expect(npc.structuralPosition).toBeUndefined();
       expect(npc.activeConstraint).toBeUndefined();
     }
-    const rows = ledger.filter((e) => String(e.pool).startsWith('npcStructure.T'));
+    const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));
     expect(rows.length).toBe(0); // a refused cell with no admitted member notes nothing (drawDeclared's 'none')
   });
 
@@ -46,7 +46,7 @@ describe('npcStructure registry goal lookup (CENSUS-1e unit 1)', () => {
     expect(result[0].structuralPosition).toMatch(/^Holds governing authority in a settlement with functional legitimacy/);
     expect(result[0].settlementCondition).toBe('stable');
     expect(Object.keys(result[0].goal)).toEqual(['short', 'long']);
-    const rows = ledger.filter((e) => String(e.pool).startsWith('npcStructure.T'));
+    const rows = ledger.filter((e) => String(e.pool).startsWith('NPC_STRUCTURE.'));
     expect(rows.length).toBe(2);
     expect(rows[0]).toMatchObject({ surface: 'npcs', drawKind: 'T', resolvedBy: 'drawn', atoms: ['no crisis'] });
   });

@@ -420,8 +420,8 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   const powerFactions   = settlement.powerStructure?.factions || [];
   const condition       = getPrimaryCondition(settlement);
   const TOP_N           = Math.min(5, Math.max(2, Math.floor(npcs.length * 0.45)));
-  /** @type {ReturnType<typeof factsOf> | undefined} */ let held;
-  const facts = () => (held ??= factsOf(settlement)); // read only when an entry declares
+  /** @type {ReturnType<typeof factsOf> | null} */
+  let facts = null;
 
   const scored = npcs.map(n => ({ npc: n, score: npcRelevanceScore(n, powerFactions) }))
                      .sort((a,b) => b.score - a.score);
@@ -432,23 +432,23 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     const cat  = npc.category || 'other';
     const rank = getRank(npc, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
-    const found = T[key] || T[`${cat}__stable__${rank}`] || T[OTHER_STABLE_DOMINANT];
+    const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
+    // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
+    // the registry entry is resolved through `resolveDeclared` against the record's `factsOf`
+    // (CENSUS-4b's `tags`: the stable entries are CALM_ONLY, `no crisis`). A refused entry is
+    // not applied: the NPC keeps its own role goal and carries no structural position that claims
+    // a calm the record denies (4b's measurement: the slot never empties, so no twin is owed).
+    const tmpl = T[looked]
+      ? resolveDeclared(T[looked], { facts: facts ??= factsOf(settlement), tagged: true, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs' }).line
+      : null;
 
-    if (!found) return npc;
-
-    // CENSUS-1e unit 1 (Appendix B item 23, kind T): the entry resolves through the one rule
-    // against its `tags` (CENSUS-4b's CALM_ONLY on the stable entries; R-F 4). A refused entry —
-    // a `stable` reading under an active crisis — leaves the NPC its role goal, as an NPC past
-    // TOP_N keeps it (CENSUS-4b: no twin owed; the slot never empties). Draw-free.
-    const tmpl = resolveDeclared(found, { facts, tagged: true, key, poolId: `npcStructure.T:${key}`, surface: 'npcs', drawKind: 'T' }).line;
     if (!tmpl) return npc;
-    const goal = lineText(tmpl.goal); // a field may become `{ text, … }` (R-C): the record stores the text
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.
     const updatedGoal = npc.goal
-      ? { ...npc.goal, short: goal }
-      : { short: goal, long: goal };
+      ? { ...npc.goal, short: lineText(tmpl.goal) }
+      : { short: lineText(tmpl.goal), long: lineText(tmpl.goal) }; // CENSUS-1e: a field may become `{ text, … }` (R-C); the record stores the text
 
     return {
       ...npc,
