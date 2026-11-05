@@ -156,6 +156,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (F6 BUDGET-FLOOR (units 1–4), docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 6d84aa834 because the institution budget\'s density factor answers anchor − R − X over the scalable rows; 412 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (F1 DEFENCE-WORDS, first step (units 1–5), docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 5e9ffb220 because every defence claim writer reads defenseFactsOf and a hired company is not called a garrison; 34 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
