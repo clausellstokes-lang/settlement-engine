@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — PLACE-NOT-TIER (R6, UNITS 1–2), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   180 OF 525 ROWS MOVED (hamlet 72, village 84, town 24; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 6129c300d): the soldiers line, the Guard Captain and "The garrison" read the place's forces, not the tier; a thorp, hamlet or village seats no guild power without a market. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S15 (the tree of 6129c300d with the door paths carried from
+ *   the branch, the previous record's writes committed). f0c7321d.. -> b7831025..
+ *
  * 2026-11-04 — SELF-VOUCH, I5, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-14-self-vouch-i5-kind-7.json; the cloud chair signs under the owner's delegation, vetoable).
  *   510 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 84, town 102, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
