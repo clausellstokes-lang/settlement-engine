@@ -129,6 +129,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (SELF-VOUCH, docs/shift-records/2026-11-04-rung1-08-self-vouch.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 0be13b5cb because the eighth formal judgment, record_coherence_battery, over the stored record, and DS-GEN-11\'s zero pool vouches only when it passed; 978 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (T1/T2, docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of fe56bddd4 because the siege keeps 0.3 of the harvest; a village stores as a hamlet does; 70 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
