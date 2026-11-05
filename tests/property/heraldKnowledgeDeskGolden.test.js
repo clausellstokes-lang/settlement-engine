@@ -88,7 +88,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 1 more items (462 → 463).
     // 463 → 473 at FOOD-EXPORTS (WITH FOOD-4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-07-food-exports.json): the step re-deals the realm's year and the year-one desk files
     // 10 more items (463 → 473).
-    expect(Object.keys(manifest)).toHaveLength(473);
+    // 473 → 475 at T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json): the step re-deals the realm's year and the year-one desk files
+    // 2 more items (473 → 475).
+    expect(Object.keys(manifest)).toHaveLength(475);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
