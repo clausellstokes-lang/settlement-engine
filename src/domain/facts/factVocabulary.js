@@ -22,7 +22,10 @@
  *             `factsOf(record).crisis`), F12's families as named GROUPS (`threat`, `hunger`,
  *             `succession`, `unrest`; expanded through the crisis-kind home's ONE kind → family
  *             map, `familyActiveIn`), `calm` (no active crisis) and `any` (every condition).
- *             Within the dimension the values are a disjunction (`crisis: under_siege, wartime`).
+ *             Within the dimension the values are a disjunction (`crisis: under_siege, wartime`):
+ *             at least one must be active (R-H, 2026-11-05) — under several active crises a
+ *             line needs ONE of its values on, and its `excludes: crisis: F` refuses it if any
+ *             active crisis is in F.
  *             Silence is neutral EXCEPT in a pool that opted in with `{crisis-scoped}` (the
  *             chair's ruling 4; the grow-only register), where silence reads as `calm`.
  * A line's atoms across dimensions are a CONJUNCTION.
@@ -506,6 +509,15 @@ function compare(a, b, op) {
 /**
  * Does the record admit this crisis declaration? `values` empty = silence: neutral, unless the
  * pool is crisis-scoped (then silence reads `calm`). `undefined` = unanswered.
+ *
+ * THE DISJUNCTION (R-H, the chair's correction of the vocabulary rulings §1, 2026-11-05; CENSUS-2b
+ * caught the contradiction): a line declaring `crisis: [values]` is admitted when AT LEAST ONE
+ * declared kind or family is active — `c.has` answers both, and `hunger` is on by a food-record
+ * deficit too (`crisisKind.js :: familyActiveIn`). `calm` holds only with no crisis active; `any`
+ * everywhere. So `crisis: K` is a presence requirement in every pool (R-I). The calm a line
+ * asserts about one family is its `excludes: crisis: F`, read against EVERY active crisis by
+ * `atomHolds` in `declarationAdmits`, never by this function. The conjunction this replaces
+ * refused a famine line under famine + siege and muted a siege-keyed heading under a famine.
  * @param {ReadonlyArray<string>} values
  * @param {FactsLike|null|undefined} facts
  * @param {{ crisisScoped?: boolean }} [options]
@@ -518,15 +530,7 @@ export function crisisAdmits(values, facts, options = {}) {
   const c = facts?.crisis;
   if (!c || typeof c.has !== 'function') return undefined;
   if (!c.active) return vs.includes('calm');
-  // THE CONJUNCTION (the rulings §1): admissible only if admissible for EVERY active kind — the
-  // kind itself, or a family of it, is declared. `hunger` on by a food deficit covers every kind.
-  const hungerByDeficit = Array.isArray(c.families) && c.families.includes('hunger')
-    && !c.kinds.some((/** @type {string} */ k) => CRISIS_FAMILY_KINDS.hunger.includes(k));
-  const kinds = Array.isArray(c.kinds) && c.kinds.length ? c.kinds : [];
-  if (!kinds.length) return vs.some((v) => v !== 'calm' && c.has(v));
-  return kinds.every((/** @type {string} */ k) => vs.some((v) => v === k
-    || (/** @type {Record<string, ReadonlyArray<string>>} */ (CRISIS_FAMILY_KINDS)[v] || []).includes(k)
-    || (v === 'hunger' && hungerByDeficit)));
+  return vs.some((v) => v !== 'calm' && c.has(v));
 }
 
 /**

@@ -106,7 +106,7 @@ describe('the three polarities, stated once', () => {
     expect(V.declarationAdmits(anyLine, bare).admitted).toBe(true);
     expect(V.declarationAdmits(anyLine, sieged, { crisisScoped: true }).admitted).toBe(true);
   });
-  it('the vocabulary rulings §1: needs crisis, excludes crisis[: family], the conjunction, the aliases', () => {
+  it('the vocabulary rulings §1: needs crisis, excludes crisis[: family], the disjunction (R-H), the aliases', () => {
     const two = factsOf({ tier: 'town', stress: [{ type: 'under_siege' }, { type: 'insurgency' }], institutions: [] });
     const sieged = factsOf({ tier: 'town', stress: [{ type: 'under_siege' }], institutions: [] });
     const d = (o) => V.declarationOf(o);
@@ -116,8 +116,9 @@ describe('the three polarities, stated once', () => {
     expect(V.declarationAdmits(d({ excludes: ['crisis'] }), sieged).admitted).toBe(false);
     expect(V.declarationAdmits(d({ excludes: ['crisis: hunger'] }), sieged).admitted).toBe(false);
     expect(V.declarationAdmits(d({ excludes: ['crisis: succession'] }), sieged).admitted).toBe(true);
-    // the conjunction: admissible for EVERY active kind
-    expect(V.declarationAdmits(d({ crisis: 'siege' }), two).admitted).toBe(false);
+    // the disjunction (R-H, 2026-11-05; the conjunction is retired): ONE declared value active
+    expect(V.declarationAdmits(d({ crisis: 'siege' }), two).admitted).toBe(true);
+    expect(V.declarationAdmits(d({ crisis: 'famine' }), two).admitted).toBe(false);
     expect(V.declarationAdmits(d({ crisis: 'threat, unrest' }), two).admitted).toBe(true);
     expect(V.declarationAdmits(d({ crisis: ['siege'] }), sieged).admitted).toBe(true);
   });

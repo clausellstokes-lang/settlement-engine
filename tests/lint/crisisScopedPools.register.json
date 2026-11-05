@@ -1,0 +1,25 @@
+{
+  "_doc": "THE CRISIS-SCOPED REGISTER (CENSUS-1d unit 3; docs/DESIGN_POOL_CENSUS.md §3.5; the chair's ruling 4). GROW-ONLY: every pool whose brace group carries {crisis-scoped}. Re-taken by `RETAKE_DECLARATION_REGISTERS=1 npx vitest run tests/domain/facts/declarationRegisters.test.js`; a pool LEAVING is a hand edit carrying the chair's note.",
+  "pools": [
+    "DS-DEF-11::UNWALLED-SMALL",
+    "DS-DEF-11::WALLED-QUIET",
+    "DS-DEF-1::readiness CRITICAL",
+    "DS-DEF-1::readiness STRONG",
+    "DS-DEF-1::readiness WEAK",
+    "DS-DEF-2::Beasts & Monsters: frontier, credible deterrence",
+    "DS-DEF-2::Beasts & Monsters: settled, defenses beyond the need",
+    "DS-DEF-2::Beasts & Monsters: settled, nothing organized",
+    "DS-DEF-2::Invasion & War: neither walls nor force",
+    "DS-DEF-3::Safe",
+    "DS-DEF-3::Very Safe",
+    "DS-DEF-6::Logistics & Supply: Granary + port",
+    "DS-DEF-6::Naval Defense: Naval force",
+    "DS-DEF-6::Naval Defense: Port only",
+    "DS-ECO-1::COMBINATION C1: a high rung on a working approach",
+    "DS-ECO-1::COMBINATION C3: the middle rungs",
+    "DS-ECO-3::ADEQUATE",
+    "DS-ECO-8::MODERATE",
+    "DS-ECO-8::POOR",
+    "DS-ECO-8::WEALTHY"
+  ]
+}
