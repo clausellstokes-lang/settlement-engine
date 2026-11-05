@@ -463,7 +463,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Customs house', desc: 'Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.', tags: ['guild', 'law_enforcement'], priorityCategory: 'government' },
+      shared: { name: 'Customs house', desc: 'Levies duties on goods entering and leaving via the port or main roads. Run by royal or municipal officials.', tags: ['law_enforcement'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.35 },
         city: { baseChance: 0.55 },
@@ -511,7 +511,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Auction house', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.", tags: ['market', 'guild'], priorityCategory: 'economy' },
+      shared: { name: 'Auction house', desc: "Formal venue for selling high-value goods: estates, ships, livestock, art, and occasionally persons. Charges buyer's and seller's premiums.", tags: ['market'], priorityCategory: 'economy' },
       at: {
         town: { baseChance: 0.1 },
         city: { baseChance: 0.35 },
@@ -519,7 +519,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Assay office', desc: 'Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees per assay.', tags: ['banking', 'guild'], priorityCategory: 'government' },
+      shared: { name: 'Assay office', desc: 'Tests the purity of precious metals brought to market. Essential infrastructure for banking and minting. Charges fees per assay.', tags: ['banking'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.2, desc: 'Tests the purity of precious metals brought to the town. Essential infrastructure for banking and minting. Charges fees per assay.' },
         city: { baseChance: 0.3 },
@@ -1373,7 +1373,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // Filed on Entertainment until 2026-09-30.
     {
-      shared: { name: 'Hired blades', desc: 'Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems.', tags: ['military', 'guild'], priorityCategory: 'government' },
+      shared: { name: 'Hired blades', desc: 'Individual or small groups of professional fighters available for private contracts: bodyguard work, debt enforcement, or quiet removal of problems.', tags: ['military'], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.25 },
         city: { baseChance: 0.35 },
@@ -1507,7 +1507,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: 'Contract killer', baseChance: 0.25, desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.', tags: ['guild', 'military'], priorityCategory: 'criminal' },
+      shared: { name: 'Contract killer', baseChance: 0.25, desc: 'An individual or small cell operating beneath the assassins guild threshold. Accepts contracts through criminal intermediaries. Less reliable but deniable.', tags: ['military'], priorityCategory: 'criminal' },
       at: {
         city: {},
         metropolis: {},

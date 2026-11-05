@@ -408,14 +408,14 @@ export const NPC_WANTS = {
     'simple robes of their order',
     'ceremonial attire worn at all times',
     'plain devotional dress with one opulent accessory',
-    'vestments a size too grand for the shrine they serve',
+    { text: 'vestments a size too grand for the shrine they serve', needs: ['sacredHouse'] }, // CENSUS-4f: the ledger's declaration, re-read under R-AE (a shrine is a sacred house)
     'threadbare robes patched with fabric from finer ones',
     'a formal habit with a travel-stained hem never cleaned',
     'lay clothes with the collar of the order left visible',
   ],
   economy: [
     'merchant dress: practical but signalling wealth through material',
-    'guild colours worn with pride',
+    { text: 'guild colours worn with pride', needs: ['guild'] }, // CENSUS-4f: the ledger's declaration
     'clothes that once cost a fortune and now show the miles',
     'well-cut but understated trading clothes',
     'sober broadcloth with buttons worth more than the coat',
@@ -428,7 +428,7 @@ export const NPC_WANTS = {
     'fine clothes worn ironically over rougher garments',
     'guard or clergy disguise worn as a habit',
     'whatever is clean (they move frequently)',
-    "a dockhand's oilskins over hands too clean for the work",
+    { text: "a dockhand's oilskins over hands too clean for the work", needs: ['docks'] }, // CENSUS-4f: the ledger's declaration
     'respectable dress exactly average for the street they work',
     'good boots and cheap everything else',
     'a heavy coat worn indoors, contents unexamined',
@@ -780,278 +780,336 @@ export const NPC_FACTION_GOALS = {
   ],
 };
 
-export const NPC_CRIMINAL_SECRETS = {
-  criminal: [
-    {
-      secret: 'Has been embezzling from the organisation they oversee for three years',
-      stakes: 'Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed',
-    },
-    {
-      secret: 'Secretly directs a fencing operation through a trusted intermediary',
-      stakes: 'Criminal liability and the end of any political or social standing',
-    },
-    {
-      secret: 'Ordered what was officially ruled an accident, and sleeps fine about it',
-      stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
-    },
-    {
-      secret: "On the payroll of the thieves' guild as a silent informant",
-      stakes: 'Exposure would cost them their post and likely their safety',
-    },
-    {
-      secret: 'Has been systematically bribing multiple officials for preferential treatment',
-      stakes: 'A cascade of confessions from any single one of the bribed parties',
-    },
-    {
-      secret: "Runs a protection scheme targeting the very merchants they're supposed to serve",
-      stakes: 'Civil and criminal liability; the merchants have been keeping records',
-    },
-    {
-      secret: 'Has been falsifying inspection records for a fee',
-      stakes: 'The next disaster caused by the uninspected goods will be traced back to them',
-    },
-    {
-      secret: 'Their legitimate business is a front for moving contraband',
-      stakes: 'Seizure of everything; the legitimacy is thin and investigators are circling',
-    },
-  ],
-  personal: [
-    {
-      secret: 'Has a second family in another settlement that neither family knows about',
-      stakes: 'Both relationships collapse, along with any claim to moral authority',
-    },
-    {
-      secret: 'Their identity is fabricated. They fled a different life entirely',
-      stakes: 'The person they became would be destroyed; the person they were might be wanted',
-    },
-    {
-      secret: 'Suffering from an illness they expect to kill them within two years',
-      stakes: 'Rivals would move against them immediately if they knew; dependents would panic',
-    },
-    {
-      secret: 'Deeply in debt to a creditor who owns the debt as leverage, not income',
-      stakes: 'The creditor will call it in at the worst possible moment, and has leverage to do so',
-    },
-    {
-      secret: 'Was directly responsible for a death that was ruled an accident',
-      stakes: 'Criminal liability and the complete destruction of their reputation',
-    },
-    {
-      secret: 'Has been funding a forbidden relationship with embezzled money',
-      stakes: 'Both the relationship and the embezzlement would become public simultaneously',
-    },
-    {
-      secret: "Their celebrated achievement was stolen. They took credit for another's work",
-      stakes: "The real author has evidence; they've been sitting on it for years",
-    },
-    {
-      secret: 'Has been slowly poisoning a rival with something that looks like natural illness',
-      stakes: 'A competent healer or investigator would find the evidence almost immediately',
-    },
-  ],
-  political: [
-    {
-      secret: 'Has been feeding strategic intelligence to a rival settlement',
-      stakes: 'Treason charges; execution or exile in most jurisdictions',
-    },
-    {
-      secret: 'Their appointment was secured through forged credentials',
-      stakes: "Discovery ends their career and discredits every decision they've made",
-    },
-    {
-      secret: "Knows the settlement's most important legal document was fraudulently created",
-      stakes: 'Revealing it destabilises everything; not revealing it makes them complicit',
-    },
-    {
-      secret: 'Has been delaying vital information from reaching the decision-makers',
-      stakes: 'When the consequences emerge, the delay will be investigated and traced',
-    },
-    {
-      secret: "Is the illegitimate heir to a title currently held by someone who doesn't know they exist",
-      stakes: 'Could claim it, or could be seen as a threat by those who benefit from the status quo',
-    },
-    {
-      secret: 'Has agreed to hand over authority to an external power in exchange for personal safety',
-      stakes: "Treason. Those they've sold out would not be forgiving",
-    },
-  ],
-  magical: [
-    {
-      secret: "Possesses a magical ability they've hidden for their entire career",
-      stakes: 'In some jurisdictions, concealment is itself a crime; in all of them, it changes everything',
-    },
-    {
-      secret: 'Made a binding pact with an entity they now cannot name without consequence',
-      stakes: 'The pact will come due (soon), and the terms are worse than they appeared at signing',
-    },
-    {
-      secret: 'Has been using magic to alter memories of specific events',
-      stakes: 'The alterations are imperfect; some victims already sense something is wrong',
-    },
-    {
-      secret: 'Knows the location of a sealed magical site that others have been searching for',
-      stakes: 'Everyone who wants it would kill for the information; none of them should have it',
-    },
-    {
-      secret: "Is under a compulsion placed by someone who is now dead, and it's getting harder to resist",
-      stakes: 'The compulsion will eventually force an action that exposes everything',
-    },
-    {
-      secret: 'Has been studying a forbidden school of magic under a false research pretext',
-      stakes: 'The research has progressed to the point where hiding it grows harder each week',
-    },
-  ],
-  religious: [
-    {
-      secret: "Lost their faith completely but maintains the role. It's just a job now",
-      stakes: "Discovery destroys their flock's trust and their own standing; some would call it heresy",
-    },
-    {
-      secret: "Has been covering for a colleague's heretical activities out of personal loyalty",
-      stakes: 'When the colleague is exposed (and they will be), this secret comes with them',
-    },
-    {
-      secret: 'Secretly receives what they believe are genuine divine visions, which terrifies them',
-      stakes: 'Acting on the visions would be seen as madness; ignoring them may be worse',
-    },
-    {
-      secret: 'Has been systematically falsifying miracle reports for decades',
-      stakes: 'A sceptical investigator with the right access could unravel it all in a week',
-    },
-    {
-      secret: 'Knows their religious order was founded on a historical lie',
-      stakes: "The truth would shatter the institution they've dedicated their life to",
-    },
-    {
-      secret:
-        "Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real",
-      stakes: 'Possession is heresy; surrender means explaining how they had it',
-    },
-  ],
-  family: [
-    {
-      secret: 'Has been sending money to a disowned family member in secret for years',
-      stakes: 'The family member knows enough to burn them; the payments are leverage',
-    },
-    {
-      secret: 'Knows their celebrated family history is fabricated, and helped fabricate it',
-      stakes: 'The real history is much worse; discovery would shame all who share the name',
-    },
-    {
-      secret: 'One of their children is not theirs biologically, and they know it',
-      stakes: 'Every inheritance, every decision, made differently if this becomes known',
-    },
-    {
-      secret: 'Owes a life-debt to someone whose interests directly conflict with their current role',
-      stakes: 'The debt will eventually be called in at the worst possible moment',
-    },
-    {
-      secret: "Has been protecting a sibling's crime for years (a serious one)",
-      stakes: 'Discovery makes them an accessory; the sibling has reason to pre-empt exposure',
-    },
-  ],
-  historical: [
-    {
-      secret: 'Was present at (and did nothing to prevent) an atrocity that is now history',
-      stakes: 'Complicity charges; the moral weight has been crushing them for years',
-    },
-    {
-      secret: 'Knows the actual truth behind a founding event that the settlement reveres',
-      stakes: 'The truth would delegitimise current power structures; powerful people prefer the myth',
-    },
-    {
-      secret: 'Survived something everyone believes killed them, under a different name',
-      stakes: 'The original identity, if revealed, carries baggage that would end the current one',
-    },
-    {
-      secret: 'Has been maintaining a cover-up of a past institutional failure that cost lives',
-      stakes: 'Exposure means accountability for something that happened a long time ago, to real people',
-    },
-    {
-      secret: 'Was the informant whose report triggered a purge that destroyed innocent lives',
-      stakes: 'The report was accurate in some ways but deliberately misleading in others',
-    },
-    {
-      secret: 'Possesses an original copy of a document that was officially declared destroyed',
-      stakes: 'The document changes the legitimacy of something very important to very powerful people',
-    },
-    {
-      secret: 'The person who raised them was not their parent, and that parent is someone significant',
-      stakes: "The revelation would disrupt inheritance, property, and several people's sense of identity",
-    },
-  ],
-  military: [
-    {
-      secret: 'Gave an order during a battle that caused friendly casualties. It was covered up as enemy action',
-      stakes: 'The families of the dead believe a lie that this person actively maintains',
-    },
-    {
-      secret: 'Was captured and released under terms they have never disclosed',
-      stakes: "The terms may mean they owe something to an enemy that they haven't paid yet",
-    },
-    {
-      secret: 'Knows that the decisive victory everyone celebrates was won through treachery, not skill',
-      stakes: 'Several people built careers on that victory; they would not appreciate the truth',
-    },
-    {
-      secret: 'Has been selling patrol routes and schedules to someone outside the settlement',
-      stakes: 'People have already died as a result; they are rationalising this as survivable',
-    },
-    {
-      secret: 'Has been skimming from military supply budgets for years through a trusted subordinate',
-      stakes: 'The subordinate now knows enough to destroy them, and is becoming expensive',
-    },
-    {
-      secret:
-        'Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it',
-      stakes: 'The order came from someone senior; exposure implicates both of them',
-    },
-  ],
-  economic_betrayal: [
-    {
-      secret: 'Has been quietly shorting investments they publicly recommend, profiting from collapse',
-      stakes: 'Civil fraud liability and the permanent destruction of a reputation built over decades',
-    },
-    {
-      secret: 'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices',
-      stakes: 'The premium they charge depends entirely on the lie holding',
-    },
-    {
-      secret: 'Has been paying a health official to suppress a finding about their product',
-      stakes: 'People are being harmed; the official is growing nervous; the finding is documented',
-    },
-    {
-      secret: 'Has information about a competitor that would ruin them, obtained through clearly illegal means',
-      stakes: 'Using the information exposes how it was obtained; not using it means watching an advantage expire',
-    },
-    {
-      secret: "Their business partner died of natural causes that weren't entirely natural",
-      stakes: 'An investigation would find ambiguous evidence: enough to ruin, maybe enough to prosecute',
-    },
-  ],
-  identity: [
-    {
-      secret: 'Is a member of a group that faces serious persecution, and passes for something else entirely',
-      stakes: 'Discovery ends everything they have built; some of the people closest to them would turn on them',
-    },
-    {
-      secret: 'Their celebrated origin story is a fabrication they created to escape an intolerable past',
-      stakes: 'The real past includes people who are still alive and who remember',
-    },
-    {
-      secret: 'Has been corresponding with someone they are publicly required to treat as an enemy',
-      stakes: 'The correspondence is genuine and affectionate; it would be read as treason',
-    },
-    {
-      secret: 'Lives a second life under a different name in another part of the settlement or a nearby town',
-      stakes: 'The two lives have begun to approach each other geographically',
-    },
-    {
-      secret: 'Is not who their documents say they are. The real person died years ago and they took the identity',
-      stakes: "The real person's family recently moved to the area",
-    },
-  ],
+// CENSUS-4g (R-AX, the chair's ruling of 2026-11-05 08:3x): THE CRIMINAL SECRETS, KEYED BY THEIR
+// HOLDER'S ROLE. A religious secret that makes its holder a churchman ("maintains the role", "a
+// colleague's heretical activities", "falsifying miracle reports", "their religious order", "a
+// relic … declared destroyed" that was theirs to destroy) sits under `clergy`; a military one that
+// makes its holder a soldier or an officer (an order given in battle, patrol routes to sell, the
+// military supply budget, an atrocity ordered by the organisation they rose in) under `military`;
+// every other secret is role-free (`any`). The key is the holder's role class
+// (`domain/roles/roleClass.js :: classOfRole`), the fact's own reader (R-AP): no settlement atom
+// expresses a holder's role and none is added (no NPC-scoped atom enters the vocabulary).
+//
+// CARRIED, NOT YET KEYED: the draw (`generators/npc/factionLeaderSecret.js`) still reads the flat
+// view `NPC_CRIMINAL_SECRETS` below, rebuilt in its historic order by `CRIMINAL_SECRET_LEGACY_ORDER`,
+// so today's pick is byte-identical. The mechanism lane keys the draw (R-C: never wired here) on
+// `criminalSecretsForHolder(type, holderClass)`, which keeps that order and drops only the rows
+// keyed to another role, so a clergy holder's religious pool and a soldier's military pool are
+// unchanged and only a mismatched holder's draw moves.
+//
+// @enforced-by tests/data/criminalSecretsByHolder.test.js
+export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
+  any: {
+    criminal: [
+      {
+        secret: 'Has been embezzling from the organisation they oversee for three years',
+        stakes: 'Exposure means disgrace, legal prosecution, and enemies who feel personally betrayed',
+      },
+      {
+        secret: 'Secretly directs a fencing operation through a trusted intermediary',
+        stakes: 'Criminal liability and the end of any political or social standing',
+      },
+      {
+        secret: 'Ordered what was officially ruled an accident, and sleeps fine about it',
+        stakes: "Murder charge, loss of everything, and the victim's family who suspects the truth",
+      },
+      {
+        secret: "On the payroll of the thieves' guild as a silent informant",
+        stakes: 'Exposure would cost them their post and likely their safety',
+      },
+      {
+        secret: 'Has been systematically bribing multiple officials for preferential treatment',
+        stakes: 'A cascade of confessions from any single one of the bribed parties',
+      },
+      {
+        secret: "Runs a protection scheme targeting the very merchants they're supposed to serve",
+        stakes: 'Civil and criminal liability; the merchants have been keeping records',
+      },
+      {
+        secret: 'Has been falsifying inspection records for a fee',
+        stakes: 'The next disaster caused by the uninspected goods will be traced back to them',
+      },
+      {
+        secret: 'Their legitimate business is a front for moving contraband',
+        stakes: 'Seizure of everything; the legitimacy is thin and investigators are circling',
+      },
+    ],
+    personal: [
+      {
+        secret: 'Has a second family in another settlement that neither family knows about',
+        stakes: 'Both relationships collapse, along with any claim to moral authority',
+      },
+      {
+        secret: 'Their identity is fabricated. They fled a different life entirely',
+        stakes: 'The person they became would be destroyed; the person they were might be wanted',
+      },
+      {
+        secret: 'Suffering from an illness they expect to kill them within two years',
+        stakes: 'Rivals would move against them immediately if they knew; dependents would panic',
+      },
+      {
+        secret: 'Deeply in debt to a creditor who owns the debt as leverage, not income',
+        stakes: 'The creditor will call it in at the worst possible moment, and has leverage to do so',
+      },
+      {
+        secret: 'Was directly responsible for a death that was ruled an accident',
+        stakes: 'Criminal liability and the complete destruction of their reputation',
+      },
+      {
+        secret: 'Has been funding a forbidden relationship with embezzled money',
+        stakes: 'Both the relationship and the embezzlement would become public simultaneously',
+      },
+      {
+        secret: "Their celebrated achievement was stolen. They took credit for another's work",
+        stakes: "The real author has evidence; they've been sitting on it for years",
+      },
+      {
+        secret: 'Has been slowly poisoning a rival with something that looks like natural illness',
+        stakes: 'A competent healer or investigator would find the evidence almost immediately',
+      },
+    ],
+    political: [
+      {
+        secret: 'Has been feeding strategic intelligence to a rival settlement',
+        stakes: 'Treason charges; execution or exile in most jurisdictions',
+      },
+      {
+        secret: 'Their appointment was secured through forged credentials',
+        stakes: "Discovery ends their career and discredits every decision they've made",
+      },
+      {
+        secret: "Knows the settlement's most important legal document was fraudulently created",
+        stakes: 'Revealing it destabilises everything; not revealing it makes them complicit',
+      },
+      {
+        secret: 'Has been delaying vital information from reaching the decision-makers',
+        stakes: 'When the consequences emerge, the delay will be investigated and traced',
+      },
+      {
+        secret: "Is the illegitimate heir to a title currently held by someone who doesn't know they exist",
+        stakes: 'Could claim it, or could be seen as a threat by those who benefit from the status quo',
+      },
+      {
+        secret: 'Has agreed to hand over authority to an external power in exchange for personal safety',
+        stakes: "Treason. Those they've sold out would not be forgiving",
+      },
+    ],
+    magical: [
+      {
+        secret: "Possesses a magical ability they've hidden for their entire career",
+        stakes: 'In some jurisdictions, concealment is itself a crime; in all of them, it changes everything',
+      },
+      {
+        secret: 'Made a binding pact with an entity they now cannot name without consequence',
+        stakes: 'The pact will come due (soon), and the terms are worse than they appeared at signing',
+      },
+      {
+        secret: 'Has been using magic to alter memories of specific events',
+        stakes: 'The alterations are imperfect; some victims already sense something is wrong',
+      },
+      {
+        secret: 'Knows the location of a sealed magical site that others have been searching for',
+        stakes: 'Everyone who wants it would kill for the information; none of them should have it',
+      },
+      {
+        secret: "Is under a compulsion placed by someone who is now dead, and it's getting harder to resist",
+        stakes: 'The compulsion will eventually force an action that exposes everything',
+      },
+      {
+        secret: 'Has been studying a forbidden school of magic under a false research pretext',
+        stakes: 'The research has progressed to the point where hiding it grows harder each week',
+      },
+    ],
+    religious: [
+      {
+        secret: 'Secretly receives what they believe are genuine divine visions, which terrifies them',
+        stakes: 'Acting on the visions would be seen as madness; ignoring them may be worse',
+      },
+    ],
+    family: [
+      {
+        secret: 'Has been sending money to a disowned family member in secret for years',
+        stakes: 'The family member knows enough to burn them; the payments are leverage',
+      },
+      {
+        secret: 'Knows their celebrated family history is fabricated, and helped fabricate it',
+        stakes: 'The real history is much worse; discovery would shame all who share the name',
+      },
+      {
+        secret: 'One of their children is not theirs biologically, and they know it',
+        stakes: 'Every inheritance, every decision, made differently if this becomes known',
+      },
+      {
+        secret: 'Owes a life-debt to someone whose interests directly conflict with their current role',
+        stakes: 'The debt will eventually be called in at the worst possible moment',
+      },
+      {
+        secret: "Has been protecting a sibling's crime for years (a serious one)",
+        stakes: 'Discovery makes them an accessory; the sibling has reason to pre-empt exposure',
+      },
+    ],
+    historical: [
+      {
+        secret: 'Was present at (and did nothing to prevent) an atrocity that is now history',
+        stakes: 'Complicity charges; the moral weight has been crushing them for years',
+      },
+      {
+        secret: 'Knows the actual truth behind a founding event that the settlement reveres',
+        stakes: 'The truth would delegitimise current power structures; powerful people prefer the myth',
+      },
+      {
+        secret: 'Survived something everyone believes killed them, under a different name',
+        stakes: 'The original identity, if revealed, carries baggage that would end the current one',
+      },
+      {
+        secret: 'Has been maintaining a cover-up of a past institutional failure that cost lives',
+        stakes: 'Exposure means accountability for something that happened a long time ago, to real people',
+      },
+      {
+        secret: 'Was the informant whose report triggered a purge that destroyed innocent lives',
+        stakes: 'The report was accurate in some ways but deliberately misleading in others',
+      },
+      {
+        secret: 'Possesses an original copy of a document that was officially declared destroyed',
+        stakes: 'The document changes the legitimacy of something very important to very powerful people',
+      },
+      {
+        secret: 'The person who raised them was not their parent, and that parent is someone significant',
+        stakes: "The revelation would disrupt inheritance, property, and several people's sense of identity",
+      },
+    ],
+    military: [
+      {
+        secret: 'Was captured and released under terms they have never disclosed',
+        stakes: "The terms may mean they owe something to an enemy that they haven't paid yet",
+      },
+      {
+        secret: 'Knows that the decisive victory everyone celebrates was won through treachery, not skill',
+        stakes: 'Several people built careers on that victory; they would not appreciate the truth',
+      },
+    ],
+    economic_betrayal: [
+      {
+        secret: 'Has been quietly shorting investments they publicly recommend, profiting from collapse',
+        stakes: 'Civil fraud liability and the permanent destruction of a reputation built over decades',
+      },
+      {
+        secret: 'The goods they sell as locally produced are sourced from somewhere with exploitative labour practices',
+        stakes: 'The premium they charge depends entirely on the lie holding',
+      },
+      {
+        secret: 'Has been paying a health official to suppress a finding about their product',
+        stakes: 'People are being harmed; the official is growing nervous; the finding is documented',
+      },
+      {
+        secret: 'Has information about a competitor that would ruin them, obtained through clearly illegal means',
+        stakes: 'Using the information exposes how it was obtained; not using it means watching an advantage expire',
+      },
+      {
+        secret: "Their business partner died of natural causes that weren't entirely natural",
+        stakes: 'An investigation would find ambiguous evidence: enough to ruin, maybe enough to prosecute',
+      },
+    ],
+    identity: [
+      {
+        secret: 'Is a member of a group that faces serious persecution, and passes for something else entirely',
+        stakes: 'Discovery ends everything they have built; some of the people closest to them would turn on them',
+      },
+      {
+        secret: 'Their celebrated origin story is a fabrication they created to escape an intolerable past',
+        stakes: 'The real past includes people who are still alive and who remember',
+      },
+      {
+        secret: 'Has been corresponding with someone they are publicly required to treat as an enemy',
+        stakes: 'The correspondence is genuine and affectionate; it would be read as treason',
+      },
+      {
+        secret: 'Lives a second life under a different name in another part of the settlement or a nearby town',
+        stakes: 'The two lives have begun to approach each other geographically',
+      },
+      {
+        secret: 'Is not who their documents say they are. The real person died years ago and they took the identity',
+        stakes: "The real person's family recently moved to the area",
+      },
+    ],
+  },
+  clergy: {
+    religious: [
+      {
+        secret: "Lost their faith completely but maintains the role. It's just a job now",
+        stakes: "Discovery destroys their flock's trust and their own standing; some would call it heresy",
+      },
+      {
+        secret: "Has been covering for a colleague's heretical activities out of personal loyalty",
+        stakes: 'When the colleague is exposed (and they will be), this secret comes with them',
+      },
+      {
+        secret: 'Has been systematically falsifying miracle reports for decades',
+        stakes: 'A sceptical investigator with the right access could unravel it all in a week',
+      },
+      {
+        secret: 'Knows their religious order was founded on a historical lie',
+        stakes: "The truth would shatter the institution they've dedicated their life to",
+      },
+      {
+        secret:
+          "Possesses a relic that was officially declared destroyed, and kept it because they couldn't face destroying something real",
+        stakes: 'Possession is heresy; surrender means explaining how they had it',
+      },
+    ],
+  },
+  military: {
+    military: [
+      {
+        secret: 'Gave an order during a battle that caused friendly casualties. It was covered up as enemy action',
+        stakes: 'The families of the dead believe a lie that this person actively maintains',
+      },
+      {
+        secret: 'Has been selling patrol routes and schedules to someone outside the settlement',
+        stakes: 'People have already died as a result; they are rationalising this as survivable',
+      },
+      {
+        secret: 'Has been skimming from military supply budgets for years through a trusted subordinate',
+        stakes: 'The subordinate now knows enough to destroy them, and is becoming expensive',
+      },
+      {
+        secret:
+          'Was ordered to commit an atrocity and complied, and has since risen in the organisation that ordered it',
+        stakes: 'The order came from someone senior; exposure implicates both of them',
+      },
+    ],
+  },
 };
+
+/** The historic position of every keyed type's rows: the holder key each slot drew from, in order. */
+export const CRIMINAL_SECRET_LEGACY_ORDER = {
+  religious: ['clergy', 'clergy', 'any', 'clergy', 'clergy', 'clergy'],
+  military: ['military', 'any', 'any', 'military', 'military', 'military'],
+};
+
+/**
+ * One secret type's rows for a holder, in the historic order; a row keyed to another role is left out.
+ * `holderClass` null keeps every row (the flat view the unkeyed draw reads).
+ * @param {string} type @param {string | null} holderClass
+ * @returns {Array<{ secret: string, stakes: string }>}
+ */
+export function criminalSecretsForHolder(type, holderClass) {
+  const order = CRIMINAL_SECRET_LEGACY_ORDER[type];
+  const free = NPC_CRIMINAL_SECRETS_BY_HOLDER.any[type];
+  if (!order) return free ? [...free] : undefined;
+  /** @type {Record<string, number>} */ const at = {};
+  const rows = [];
+  for (const key of order) {
+    const i = at[key] ?? 0; at[key] = i + 1;
+    if (holderClass === null || key === 'any' || key === holderClass) rows.push(NPC_CRIMINAL_SECRETS_BY_HOLDER[key][type][i]);
+  }
+  return rows;
+}
+
+/** The flat view the unkeyed draw reads (byte-identical to the table before R-AX). */
+export const NPC_CRIMINAL_SECRETS = Object.fromEntries(
+  Object.keys(NPC_CRIMINAL_SECRETS_BY_HOLDER.any).map((type) => [type, criminalSecretsForHolder(type, null)]),
+);
 
 export const FACTION_CONFLICT_TYPES = {
   government: ['military', 'economy', 'religious'],

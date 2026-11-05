@@ -176,7 +176,7 @@
       "id": "religious#4",
       "text": "vestments a size too grand for the shrine they serve",
       "needs": [
-        "institution: temple"
+        "sacredHouse"
       ],
       "excludes": [],
       "crisis": [],
@@ -308,7 +308,7 @@
       "id": "criminal#4",
       "text": "a dockhand's oilskins over hands too clean for the work",
       "needs": [
-        "institution: docks"
+        "docks"
       ],
       "excludes": [],
       "crisis": [],

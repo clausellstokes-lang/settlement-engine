@@ -43416,8 +43416,12 @@
       "drawSite": "npcGenerator.js:356 pickFromArray",
       "lines": 56,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 56,
+      "lineDeclares": {
+        "docks": 1,
+        "guild": 1,
+        "sacredHouse": 1
+      },
+      "undeclared": 53,
       "crisisScoped": false
     },
     {
