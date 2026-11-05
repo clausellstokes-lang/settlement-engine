@@ -1533,6 +1533,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "gate"
+          ],
           "text": "Follow {resource} through {settlement} and it does not stop anywhere. It goes into {institution} raw and comes out of the gates as {good}.",
           "slots": [
             "resource",
@@ -3014,6 +3017,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "magic"
+          ],
           "text": "What holds the {chain} up is a working, not a road. Take the working away and the line is what it actually is.",
           "slots": [
             "chain"
@@ -4822,6 +4828,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "institution: tavern"
+          ],
           "text": "A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.",
           "slots": [
             "settlement"

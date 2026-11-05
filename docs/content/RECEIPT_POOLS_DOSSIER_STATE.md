@@ -1068,7 +1068,7 @@ clause is licensed, and a variant that needs a dated depletion is marked
 
 **COMPLETE LINE, output exported**
 1. `[ledger]` The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
-2. `[visitor]` Follow {resource} through {settlement} and it does not stop anywhere. It goes into {institution} raw and comes out of the gates as {good}.
+2. `[visitor · gate]` Follow {resource} through {settlement} and it does not stop anywhere. It goes into {institution} raw and comes out of the gates as {good}.
 3. `[street]` This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.
 
 **A PROCESSING HOUSE MISSING FROM THE ROSTER**
@@ -1358,7 +1358,7 @@ block reads the canonical status and supplies clauses any surface can attach.
 
 **SUBSTITUTED** — *running on a prop, not on its own health*
 1. `[ledger]` The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.
-2. `[threshold]` What holds the {chain} up is a working, not a road. Take the working away and the line is what it actually is.
+2. `[threshold · magic]` What holds the {chain} up is a working, not a road. Take the working away and the line is what it actually is.
 3. `[street]` The {chain} keeps producing and nobody local mistakes that for health.
 
 **COLLAPSING** — *failing under multiple compounding pressures* · **NO PRODUCER (R-DST-H)**
@@ -1732,7 +1732,7 @@ reading of the catalog itself.
 
 **COMPLETE FOR ITS TIER** · **THE GOOD STATE (R-DST-G)**
 1. `[ledger]` {settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.
-2. `[visitor]` A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.
+2. `[visitor · institution: tavern]` A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.
 3. `[street]` The town can answer what a town this size ought to answer, and does not think about it further.
 
 **ONE EXPECTED CATEGORY MISSING**
