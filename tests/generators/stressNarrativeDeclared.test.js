@@ -49,3 +49,21 @@ describe('the instrument: "Food Secure" under a fed influx is true (R-P 1, mirro
     expect(f.map((x) => x.claim)).toEqual(['food secure']);
   });
 });
+
+describe('plague_onset: "Healers are overwhelmed." needs a healer (CENSUS-2c unit 1b; Phase A ledger, R-G twin)', () => {
+  const HEALERS = 'Healers are overwhelmed.';
+  const TEND = 'The sick outnumber those who can tend them.';
+  /** a record with a healer (an infirmary) on its roster, or none */
+  const plagueRecord = (healer) => ({ ...recordOf(['plague_onset'], 'secure'), institutions: healer ? [{ name: 'Infirmary' }] : [{ name: 'Granary' }] });
+  it('a place with no healer prints the twin', () => {
+    const text = renderStressSummary('plague_onset', 'Avel', null, factsOf(plagueRecord(false)));
+    expect(text).not.toContain(HEALERS);
+    expect(text).toBe(`Something is spreading in Avel. It is not yet a plague, but it will be if nothing changes. ${TEND} The origin is disputed. Quarantine measures are being resisted.`);
+  });
+  it('a place with a healer keeps the line', () => {
+    expect(renderStressSummary('plague_onset', 'Avel', null, factsOf(plagueRecord(true)))).toContain(HEALERS);
+  });
+  it('the sibling set: the original needs healer, the twin excludes it', () => {
+    expect(STRESS_SUMMARY_SIBLINGS[HEALERS]).toEqual([{ text: HEALERS, needs: ['healer'] }, { text: TEND, twinOf: HEALERS, excludes: ['healer'] }]);
+  });
+});

@@ -27,6 +27,8 @@ import { resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
 
 /** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
 const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
+/** plague_onset's healer sentence, the key of its declared sibling set. */
+const PLAGUE_HEALERS = 'Healers are overwhelmed.';
 
 /**
  * Roll the rng-derived choices for a stressor summary.
@@ -85,6 +87,12 @@ export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
     Object.freeze({ text: MIGRATION_FOOD, crisis: ['hunger'] }),
     Object.freeze({ text: 'New arrivals come faster than housing and employment can absorb them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
   ]),
+  // plague_onset: "Healers are overwhelmed" needs a healer, an infirmary or a monastic house
+  // (`factsOf(record).defence.healer`); most thorps and hamlets have none (Phase A's ledger).
+  [PLAGUE_HEALERS]: Object.freeze([
+    Object.freeze({ text: PLAGUE_HEALERS, needs: ['healer'] }),
+    Object.freeze({ text: 'The sick outnumber those who can tend them.', twinOf: PLAGUE_HEALERS, excludes: ['healer'] }),
+  ]),
 });
 
 /**
@@ -124,7 +132,7 @@ const RENDERERS = {
     `${name} has been quietly penetrated by an outside interest. Enemy agents, a cult, a merchant intelligence network. The settlement does not know. Key decisions are being subtly shaped.`,
 
   plague_onset: (name) =>
-    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. Healers are overwhelmed. The origin is disputed. Quarantine measures are being resisted.`,
+    `Something is spreading in ${name}. It is not yet a plague, but it will be if nothing changes. ${PLAGUE_HEALERS} The origin is disputed. Quarantine measures are being resisted.`,
 
   succession_void: (name) =>
     `The last strong leader of ${name} died recently. No one has consolidated authority. Power is available to whoever moves first, and several parties are aware of this simultaneously.`,
