@@ -27,6 +27,19 @@ describe('reader:validation-on-page', () => {
     expect(R.validationOnPageFindings(rec(), { viability }).map((r) => r.detail)).toEqual(['[viability-count] states 2, lists Critical Issues (1)']);
     expect(R.validationOnPageFindings(rec(), { viability: '1 critical issue prevents settlement survival.\nStructural Crises (7) ▲' })[0].detail).toBe('[viability-count] states 1, lists Critical Issues (0)');
   });
+  test('gap-vs-record (READER-R1): a gap line whose good the record holds fires, in either voice; a true gap does not', () => {
+    const s = rec({ config: { terrainType: 'coastal', nearbyResources: ['grain_fields', 'hot_springs', 'clay_pits'], nearbyResourcesDepleted: ['clay_pits'] },
+      economicState: { localProduction: ['fish', 'salt'], primaryImports: ['Grain'], primaryExports: ['Grain surplus'], foodSecurity: { foodRecord: { foodSources: ['fish'], normalImportPct: 0 } } } });
+    const resources = 'Gaps & Opportunities ▲\nGrain: Mill exists but lacks access to grain\nNo water from the hot springs reaches the public bathhouse.\nNo clay reaches the potter.\nNo grapes reach the vintner.';
+    const rows = R.validationOnPageFindings(s, { resources });
+    const row = rows.find((r) => r.detail.startsWith('[gap-vs-record]'));
+    expect(row?.detail).toBe('[gap-vs-record] 2 lines'); // the mill (Grain imported) and the bathhouse (hot springs near); clay is depleted, grapes absent
+    expect(row?.quote).toBe('Grain: Mill exists but lacks access to grain');
+    // the staple by ordinary supply answers grain
+    const fed = rec({ economicState: { foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 17 } } } });
+    expect(R.validationOnPageFindings(fed, { resources: 'No grain reaches the external mill.' }).map((r) => r.detail)).toEqual(['[gap-vs-record] 1 lines']);
+    expect(R.validationOnPageFindings(rec(), { resources: 'No clay reaches the potter.' })).toEqual([]);
+  });
   test('negative control: a viable page with no validator line is silent', () => {
     expect(R.validationOnPageFindings(rec(), { overview: 'The place\nThe water was here before the town.', viability: '✓ Viable\nCritical Issues (1) ▲' })).toEqual([]);
     expect(R.validationOnPageFindings(rec(), { viability: '1 critical issue prevents settlement survival.\nCritical Issues (1) ▲' })).toEqual([]);
