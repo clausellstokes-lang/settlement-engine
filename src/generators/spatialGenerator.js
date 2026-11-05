@@ -12,7 +12,8 @@ import { textOf } from '../domain/facts/textOf.js'; // R-C (CENSUS-2d): a declar
  * passes `crisisScoped: true` for these cells, read from here; the register pin is the compose's (R-T).
  * @type {ReadonlyArray<string>}
  */
-export const SPATIAL_QUARTER_CRISIS_SCOPED = Object.freeze(['Market Quarter', 'Religious Quarter']);
+// CENSUS-2f, R-AH: both quarters' cells write `crisis: any` (no calm line), so the inert flag is dropped.
+export const SPATIAL_QUARTER_CRISIS_SCOPED = Object.freeze([]);
 
 // ─── generateSpatialLayout ────────────────────────────────────────────────────
 

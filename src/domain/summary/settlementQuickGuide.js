@@ -705,7 +705,8 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
  * pools, by their sibling key. The T wiring passes `crisisScoped: true` for these; the pin is the compose's (R-T).
  * @type {ReadonlyArray<string>}
  */
-export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([FOOD_SECURITY_CLAUSE.surplus, FOOD_SECURITY_CLAUSE.secure]);
+// CENSUS-2f, R-AH: the surplus and secure clauses write `crisis: any` (no calm line), so the inert flag is dropped.
+export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([]);
 
 /** @param {string} label @returns {string} */
 function foodSecurityClause(label) {

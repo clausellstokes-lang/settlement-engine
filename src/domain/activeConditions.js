@@ -528,12 +528,9 @@ export const CONDITION_ARCHETYPE_SIBLINGS = Object.freeze({
  * these, read from here; the register pin is the compose's (R-T).
  * @type {ReadonlyArray<string>}
  */
-export const CONDITION_ARCHETYPE_CRISIS_SCOPED = Object.freeze([
-  CONDITION_ARCHETYPE_TEMPLATES.siege_lifted.description,
-  CONDITION_ARCHETYPE_TEMPLATES.occupation_lifted.description,
-  CONDITION_ARCHETYPE_TEMPLATES.boom.description,
-  CONDITION_ARCHETYPE_TEMPLATES.flourishing.description,
-]);
+// CENSUS-2f, R-AH: the four sets 2e flagged (siege_lifted, occupation_lifted, boom, flourishing) write
+// `crisis: any` on every line (no calm line), so the inert flag is dropped.
+export const CONDITION_ARCHETYPE_CRISIS_SCOPED = Object.freeze([]);
 
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);
 const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];

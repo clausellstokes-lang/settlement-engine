@@ -296,7 +296,8 @@ function listText(items, fallback) {
  * nothing (R-W). Paragraph [1]'s guards are the ledger's parked `guards` stop, now `guardPresence`
  * (its priests wait on a faith-presence atom: `priest` reads a senior cleric among the named people).
  */
-export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.food', 'localNarrative.order', 'localNarrative.stress', 'localNarrative.paragraphs']);
+// CENSUS-2f, R-AH: food, order and paragraphs write `crisis: any` on every line; only the stress pool holds a calm line.
+export const DAILY_LIFE_LOCAL_CRISIS_SCOPED = Object.freeze(['localNarrative.stress']);
 
 function buildLocalDailyLifeNarrative(ctx) {
   const terrain = humanize(ctx.terrain) || 'mixed terrain';

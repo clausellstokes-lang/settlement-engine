@@ -15,31 +15,43 @@ import { ARRIVAL_SCENES_CRISIS_SCOPED } from '../../../src/data/narrativeData.js
 import { SPATIAL_QUARTER_CRISIS_SCOPED } from '../../../src/generators/spatialGenerator.js';
 import { CONDITION_ARCHETYPE_CRISIS_SCOPED, CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES } from '../../../src/domain/activeConditions.js';
 import { QUICK_GUIDE_CRISIS_SCOPED, QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
+import { DAILY_LIFE_LOCAL_CRISIS_SCOPED } from '../../../src/components/new/tabs/DailyLifeTab.jsx';
 
 const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/declarations/${name}.json`, import.meta.url), 'utf8'));
-/** the ledger's opted pools that no crisis key guarantees (R-B1 drops the keyed ones) */
-const scopedPools = (name) => ledger(name).pools.filter((p) => p.crisisScoped && !(p.poolCrisis && p.poolCrisis.length)).map((p) => p.pool);
+/** a line the scope can bite: it does not write `crisis: any` (a calm or silent line) */
+const holdsCalm = (line) => !(line.crisis === 'any' || (Array.isArray(line.crisis) && line.crisis.includes('any')));
+/**
+ * the ledger's opted pools that no crisis key guarantees (R-B1 drops the keyed ones) AND that hold a
+ * calm line — CENSUS-2f, the chair's R-AH: a pool whose every line writes `crisis: any` has nothing
+ * for the flag to protect, so the flag is dropped there (39 inert pools; DEFENSE_CONTEXT's 5 sit on
+ * dead text, R-AI, and stay in stasis at its site).
+ */
+const scopedPools = (name) => ledger(name).pools
+  .filter((p) => p.crisisScoped && !(p.poolCrisis && p.poolCrisis.length) && p.lines.some(holdsCalm)).map((p) => p.pool);
 
-describe('unit 1 — the crisis-scoped flags stand on the carried tables (R-AF)', () => {
-  it('the arrival tables flag exactly the ledger\'s opted pools', () => {
+describe('unit 1 — the crisis-scoped flags stand only where a calm line is (R-AF, R-AH)', () => {
+  it('the arrival tables flag exactly the ledger\'s opted pools that hold a calm line', () => {
     for (const t of ['ARRIVAL_SENSES', 'ARRIVAL_PEOPLE', 'ARRIVAL_TENSIONS', 'ARRIVAL_MEMORIES']) {
       expect([t, [...ARRIVAL_CRISIS_SCOPED[t]]]).toEqual([t, scopedPools(t)]);
     }
     expect(Object.keys(ARRIVAL_CRISIS_SCOPED).sort()).toEqual(['ARRIVAL_MEMORIES', 'ARRIVAL_PEOPLE', 'ARRIVAL_SENSES', 'ARRIVAL_TENSIONS']);
     expect([...ARRIVAL_SCENES_CRISIS_SCOPED]).toEqual(scopedPools('ARRIVAL_SCENES'));
+    expect([...ARRIVAL_SCENES_CRISIS_SCOPED]).toEqual(['market', 'ordinary']);
   });
-  it('the spatial quarters flag the market and religious quarters', () => {
+  it('the spatial quarters, the condition archetypes and the quick-guide food clauses flag nothing (every line `crisis: any`)', () => {
     expect(SPATIAL_QUARTER_CRISIS_SCOPED.map((q) => `quarters: ${q}`)).toEqual(scopedPools('SPATIAL_TEXT'));
-  });
-  it('the condition archetypes and the quick-guide food clauses flag their sibling sets by key', () => {
     expect(CONDITION_ARCHETYPE_CRISIS_SCOPED.map((k) => Object.keys(CONDITION_ARCHETYPE_TEMPLATES).find((a) => CONDITION_ARCHETYPE_TEMPLATES[a].description === k)))
       .toEqual(scopedPools('CONDITION_ARCHETYPE_TEMPLATES'));
     for (const k of CONDITION_ARCHETYPE_CRISIS_SCOPED) expect(Object.prototype.hasOwnProperty.call(CONDITION_ARCHETYPE_SIBLINGS, k)).toBe(true);
     expect(QUICK_GUIDE_CRISIS_SCOPED.length).toBe(scopedPools('QUICK_GUIDE_CLAUSES').length);
     for (const k of QUICK_GUIDE_CRISIS_SCOPED) expect(Object.prototype.hasOwnProperty.call(QUICK_GUIDE_SIBLINGS, k)).toBe(true);
   });
+  it('the local Daily Life narrative flags its stress pool only (the no-stress sentence is calm)', () => {
+    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(scopedPools('DAILY_LIFE_TAB'));
+    expect([...DAILY_LIFE_LOCAL_CRISIS_SCOPED]).toEqual(['localNarrative.stress']);
+  });
   it('every flag is frozen (a table, not a mutable switch)', () => {
-    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
+    for (const l of [ARRIVAL_SCENES_CRISIS_SCOPED, SPATIAL_QUARTER_CRISIS_SCOPED, CONDITION_ARCHETYPE_CRISIS_SCOPED, QUICK_GUIDE_CRISIS_SCOPED, DAILY_LIFE_LOCAL_CRISIS_SCOPED, ...Object.values(ARRIVAL_CRISIS_SCOPED)]) {
       expect(Object.isFrozen(l)).toBe(true);
     }
   });

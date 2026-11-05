@@ -33,10 +33,12 @@
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
 export const ARRIVAL_CRISIS_SCOPED = Object.freeze({
-  ARRIVAL_SENSES: Object.freeze(['arms.dominant', 'bread.dominant', 'tanners.dominant', 'brewers.dominant', 'cloth.dominant', 'livestock.lines', 'livestock.dominant', 'faith.dominant', 'stone.dominant', 'kilns.dominant', 'horses.dominant', 'market.lines']),
-  ARRIVAL_PEOPLE: Object.freeze(['latin', 'celtic', 'norse', 'slavic', 'steppe', 'greek', 'mixed']),
-  ARRIVAL_TENSIONS: Object.freeze(['prosperous']),
-  ARRIVAL_MEMORIES: Object.freeze(['plague_years', 'external_threat', 'occupation_legacy']),
+  // CENSUS-2f, the chair's R-AH: the 23 pools 2e flagged here hold no calm line (every line writes
+  // `crisis: any`), so the flag protected nothing and is dropped; a pool that gains a calm line is listed again.
+  ARRIVAL_SENSES: Object.freeze([]),
+  ARRIVAL_PEOPLE: Object.freeze([]),
+  ARRIVAL_TENSIONS: Object.freeze([]),
+  ARRIVAL_MEMORIES: Object.freeze([]),
 });
 
 /**
