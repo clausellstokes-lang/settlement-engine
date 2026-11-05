@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { resolveSibling } from '../domain/facts/drawDeclared.js'; import { factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(generateNPCGoal(role, category, config), factsOf({ institutions }, { waterKind: worldLaw.portKind })); // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier }, worldLaw)), birthFactsOf({ institutions, config, tier }, worldLaw)); // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -363,7 +363,7 @@ const generateNPCAppearance = (r = 'other') => ({
 // `{ short, long, driven_by }`, which `generateSingleNPC` assigns to `goal` — and
 // `domain/npc/npcFacets.js` already registered it as the SOURCE of the `goal` facet while
 // calling it by the wrong name. It now carries the name the facet registry always gave it.
-const generateNPCGoal = (role, category = 'other', config = {}) => {
+const generateNPCGoal = (role, category = 'other', config = {}, facts = null) => { // CENSUS-1c unit 2: `facts` answers the declared lines (drawDeclared)
   const stressType = config.stressType || null;
   const commodity = config.tradeCommodity || config._tradeCommodity || null;
   const topFaction = config._dominantFaction || null;
@@ -605,14 +605,14 @@ const generateNPCGoal = (role, category = 'other', config = {}) => {
 
   // 40% chance to use a stress-specific goal
   const stressGoals = stresses.flatMap(s => STRESS_GOALS[s] || []);
-  if (stressGoals.length > 0 && _rng() < 0.4) return pickFromArray(stressGoals);
+  if (stressGoals.length > 0 && _rng() < 0.4) return drawDeclared(stressGoals, { draw: pickFromArray, facts, poolId: 'npcGenerator:STRESS_GOALS', surface: 'npcs', drawKind: 'R' }).line; // ⚠ the 0.4 roll stays on the FULL pool's emptiness (§2.2)
 
   // Use role-specific goal from NPC_FACTION_GOALS
   const roleGoals = NPC_FACTION_GOALS[role];
   if (roleGoals && roleGoals.length > 0) {
-    const goal = pickFromArray(roleGoals);
+    const goal = drawDeclared(roleGoals, { draw: pickFromArray, facts, poolId: 'npcData:NPC_FACTION_GOALS', surface: 'npcs', drawKind: 'R' }).line;
     // Substitute commodity/faction tokens
-    if (commodity || topFaction) {
+    if (goal && (commodity || topFaction)) {
       const substitute = text =>
         text
           .replace(/\{commodity\}/g, commodity || 'key goods')
@@ -624,7 +624,7 @@ const generateNPCGoal = (role, category = 'other', config = {}) => {
   }
 
   // Fallback to category secrets
-  return pickFromArray(NPC_SECRETS[category] || NPC_SECRETS.other);
+  return drawDeclared(NPC_SECRETS[category] || NPC_SECRETS.other, { draw: pickFromArray, facts, poolId: 'npcData:NPC_SECRETS', surface: 'npcs', drawKind: 'R' }).line;
 };
 
 // drawLoyalty — the ONE spelling of a themed loyalty draw (wave HK-3).

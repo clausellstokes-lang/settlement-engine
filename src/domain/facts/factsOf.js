@@ -81,3 +81,19 @@ export function factsOf(record, options = {}) {
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
   });
 }
+
+/**
+ * THE FACTS OF A BIRTH IN PROGRESS (CENSUS-1c unit 2): a draw site inside the pipeline holds a
+ * partial record — the roster, the config, the tier — and the world law. The crisis home reads
+ * `stress` entries (`canonStressors`), so the config's `stressTypes` are handed in that shape; the
+ * water home takes the world law's `portKind` (the same `waterAccessKind` rule). The self-check
+ * (`cert:false-presumption`) re-asserts every declared atom against the FINAL record, so a fact a
+ * later step changes is caught by name.
+ * @param {{ institutions?: unknown, config?: any, tier?: unknown, stress?: unknown }} [partial]
+ * @param {{ portKind?: 'maritime'|'river'|'none' } | null} [worldLaw]
+ */
+export function birthFactsOf(partial = {}, worldLaw = null) {
+  const config = partial.config || {};
+  const stress = partial.stress ?? (Array.isArray(config.stressTypes) ? config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) : []);
+  return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
+}
