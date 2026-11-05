@@ -277,3 +277,88 @@ dossierStateProseProjection.contract 9 · composeStateProse 5 · crisisBlindDoss
 1. wartime's loss wording says "Food prices have doubled." in places whose food record is secure (11 of 22 wartime births on a 300-birth probe); there is no prices atom. Leave it, or declare it `crisis: hunger` (which refuses it in most wartime births and needs a twin)?
 2. slave_revolt's summary names "the slave market's holding facilities"; there is no slave-market atom. List it under "needs a home"?
 3. plague's healer line declares `healer` alone, so a place with a hospital and no healer gets the twin (true, less specific); a disjunction is unsayable. Accept?
+
+## Phase B continued (CENSUS-2d, 2026-11-05)
+
+> **Where this seat stopped: at the boundary rule, clean and pushed.** Merged census-1b three times (`7dc90a6`; `633f72c` with CENSUS-4b and the R-A lookup — `crisisBlindFindings.js` conflict resolved theirs + this lane's retired-row comment; `e3e43a2` and `f2367a4` with CENSUS-1e units 1–2, 4c, 5b). Done: unit 1 (both answers), unit 3 for **14 of the 24 tables** (one ruled dead, one waiting on facts, one with nothing left under R-B1), order item 3 (the guard / soldiers stops on the landed tables), unit 4's twins **where a site is wired**, unit 5 (the 1,000). **CENSUS-2e starts at the 7 tables left** (below).
+
+### Commits
+
+| unit | commit | what | golden / soak-60 records / pages |
+|---|---|---|---|
+| merge + census | `1c0e67a`, `21ef3cd`, `08faf71`, `fb14569` | census-1b; the wiring census re-taken through its door (stamp only, 709 pools / 2,328 variants) | — |
+| 1 | `6f2435f` | wartime's "Food prices have doubled." `crisis: hunger` + twin; slave-revolt summary reworded (R-U) | 0 / 5 (slave revolt 4, wartime-on-fed 2; soak1k-15 both) / 5 |
+| 3 | `69e1b62` | STRESS_DESCS 70 rows (R, textOf; arrival filter `textOf(line)(name)`) | 0 / 0 / 0 |
+| 3 | `3adfeb6`, `7f7454b` | SPATIAL_TEXT 47 cells (inline T, textOf at every lookup); textOf's JSDoc | 0 / 0 / 0 |
+| 3 | `f15d1f2` | CULTURE_PROFILES_DAILY 62 + CULTURE_ARCHITECTURAL_DETAILS 13 (R at `choose`, textOf) | 0 / 0 / 0 |
+| 3 | `8865042` | PRESSURE_SENTENCES 17 (R, textOf; `speakTierLines` keeps a declared row) | 0 / 0 / 0 |
+| 3 | `7376ce0`, `40d22b7` | sibling sets: STRESS_TYPE_SIBLINGS 4, STRESSOR_SPINE_SIBLINGS 2, CONDITION_ARCHETYPE_SIBLINGS 6, QUICK_GUIDE_SIBLINGS 7; THORP miller line; slave-revolt viability note reworded (R-U) + its meta mirror | 0 / 4 (the reword) / 4 |
+| 3 | `5cacc55` | CRISIS_CAST_REASONS: brunt food_security / housing_pressure (enforced: CAST_CRISIS_SIBLINGS at the wired brunt draw) + 2 twins | 0 / 0 / 0 (the 1,000 below) |
+| item 3 | `f132545` | guardPresence 19, soldiers 2 (STRESS_DESCS, CULTURE defensePattern) | 0 / 0 / 0 |
+
+Red-first throughout: `tests/domain/facts/census2dTables.test.js` (the ledger held at its path or text, verbatim, declaration by declaration; every atom declarable; the sibling sets; the crisis-cast behaviour) and `tests/generators/stressNarrativeDeclared.test.js` (unit 1). Byte method: a scratch sha-256 over `goldenCorpus()`'s 525 records and a 60-soak record/page differ, each commit against the commit (or merge) before it.
+
+### The chair's rulings this seat made (recorded, vetoable)
+
+- **R-B1 widened to a cell key.** An atom the cell's own key or branch already guarantees is not written: `terrain: <t>` on terrain-keyed layout cells (65 atoms), `institution: temple` on the sacred-house branches (the branch reads church / monastery / friary / minster; `institution: temple`'s pattern misses monastery and friary, so declaring it would refuse a monastery village's own line), the village `walls` branches, the mountain town's `garrison` branch, the occupied vignettes' soldiers (the occupier's), crisis-cast reasons whose rule branch already tests the crisis, `healing_capacity` (reached under plague only).
+- **Sibling sets for multi-reader T tables.** STRESS_TYPE_MAP (~20 readers), the spine phrases, the condition archetypes and the quick-guide clauses keep their cells as strings and declare beside them, keyed by the original's text (CENSUS-1c's shape, R-P 3). No reader changes; the T wiring resolves through `resolveSibling`.
+- **Culture "military household" lines are not `soldiers`.** Seven defence / civic tradition lines (drawn in resolveConfig before any roster exists) describe a tradition; declaring `soldiers` would mute whole defence slots once wired. Open question 2.
+- **SETT_REASON is dead** (`_getSettReason` has no caller; R-S). **DECREE_PROSE vid 54** (`market`) waits on the decree site's facts: a kernel `marks` atom is enforced at once, and `decreeProse.js :: drawPart` hands no facts, so it would be refused fail-closed in every birth. **LINE_ROLE_CLAUSE** (wired by 1d, site 94): every ledger atom is the keyed role's crisis, nothing left under R-B1.
+
+### The twins written (each the chair's ruling, R-G)
+
+| table | twin | atom | share |
+|---|---|---|---|
+| STRESS_NARRATIVE · wartime (loss) | The army has the carts and the road, and the fields are short of hands. | `no crisis: hunger` | T: refused births only (wartime on a fed record: 2 of 60) |
+| CRISIS_CAST · bruntBase.food_security | the strain falls first on its people | `no crisis: hunger` | T, enforced: refused births only |
+| CRISIS_CAST · bruntBase.housing_pressure | its houses are where the crisis is felt first | `no migration: influx` | T, enforced: refused births only |
+| STRESS_TYPE_MAP · plague_onset.crisisHook | The first person to name the outbreak has gone quiet. Their last message suggested the disease is not natural. Reaching them means crossing a quarantine that is not being enforced consistently. | `no healer` | carried (0 until wired) |
+| STRESS_TYPE_MAP · plague_onset.viabilityNote | Travel is being discouraged. Some supply chains are disrupted. | `no market` | carried |
+| STRESS_TYPE_MAP · religious_conversion.viabilityNote | Tithing income splits or redirects. Properties of the old institution are in legal ambiguity. | temple, `no market` | carried |
+| SPINE · under_siege.fear | the stores running out before any relief arrives | `no walls` | carried |
+| SPINE · politically_fractured.strain | factions that each hold part of the place and will not yield | `no ruler: council` | carried |
+| CONDITION · army_deployed | The settlement's standing army is committed abroad, leaving the home defence thin. | `no garrison` | carried |
+
+R-U rewords (counted): slave_revolt summary → "Whole work gangs have downed tools and will not take them up again."; slave_revolt viabilityNote → "Owners have pulled their work gangs off every task they cannot watch." **Needs a home: `institution: slave market` — 2 lines wanted it.**
+
+Unit 4 otherwise: the R/T/A twins of Phase A's table rows for SPATIAL_TEXT, PRESSURE_SENTENCES (wartime winning), CRISIS_CAST_ABSENCES and DAILY_LIFE_TAB are not written — their sites are not wired (the gate empties nothing yet), and a twin there would be text with no reader. **"pilgrims queue patiently": still unenforced** — CENSUS-1e has not wired the arrival redraw at `f2367a4`; its count is in the 1,000 below.
+
+### `{crisis-scoped}` pools carried but not yet flagged at a site (the wiring must pass `crisisScoped: true`)
+
+SPATIAL_TEXT market / religious quarter descriptions; CONDITION_ARCHETYPE siege_lifted, occupation_lifted, boom, flourishing; QUICK_GUIDE FOOD_SECURITY_CLAUSE (surplus, secure); STRESS_TYPE_MAP and STRESS_DESCS / PRESSURE_SENTENCES / LINE_ROLE_CLAUSE / CRISIS_CAST pools are crisis-keyed and NOT scoped (R-B1).
+
+### The 60 and the 1,000 (R-B: BEFORE = the tip `c8ab81c` with this seat's ten unit commits reverted, i.e. the merged base; AFTER = `c8ab81c`)
+
+| run | records moved | pages moved | every `coh:*` / `reader:*` / `A-*` class | `coh:crisis-blind-prose` | `cert:*` | verdict |
+|---|---|---|---|---|---|---|
+| 60 (seeds 0–59 of the 1,000) | 5 | 5 | identical | 0 → 0 | none | — |
+| 1,000 | **93** (slave revolt in the cell 63, wartime 35, overlapping; 2 `random` cells whose stressors the row does not name) | 5 of the 60 sampled | identical (1,679 findings both; `reader:hook-pools` 111 → 111; `reader:daily-life-placeholder` absent both) | **3 → 3**, all "pilgrims queue patiently" (2b's arrival declaration, waiting on 1e's arrival redraw) | none (`cert:false-presumption` 0 → 0) | STOP → STOP (the base's: crisis-blind in 3) |
+
+**By claim (1,000):** pilgrims queue patiently 3 → 3 (monster pressure, occupied, siege). Food secure 0 → 0. No other claim is present at the merged base (CENSUS-4b/4c/5b cured the goal and DS claims). None rose.
+
+**`declared-share` (1,000, the render ledger):** crisis 466/512 (0.910) → 503/549 (0.916) — the wartime and slave-revolt summaries' declared sentences. Every other surface identical (tab:dossier 0.194, npcs 0.060, plot hooks 0.002, defense / power / services / threats 1.00, tab:daily_life 0/815). The carried tables (textOf / sibling sets) add no ledger notes until their sites are wired, so the share does not see them yet: that is the R-C carry, not a missing declaration.
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** 0 / 525 at every commit (scratch sha-256 over `goldenCorpus()`; the corpus has no slave revolt and no wartime loss on a fed record).
+- **Soak records (1,000):** 93 — the slave-revolt summary and viability-note rewords (R-U), the wartime-loss twin on a fed record (R-U + R-G). The crisis-cast brunt twins print on none of the 60 pages; on the 1,000 their births are inside the 93 or absent (the differ cannot separate them from the two `random` cells).
+- **Wiring census:** 0 rows (stamp re-takes only). **Manifest:** not run. **Registers:** none (the tables are off the six leaves the registers read).
+- **Pins re-keyed by cause:** `crisisCast.test.js` "rule 1" (the record holds the famine it casts); `stressTypesMeta.test.js` follows the reword via the meta mirror; textOf reads in `arrivalScene`, `stressTypeContentWave`, `narrativeArrival`, `defenseRosterLines`, `tierNounKeptRulings`, `dossierContent` (no expectation changed).
+- **Merge defect fixed:** `fb14569` left two `factsOf` imports in `dailyLifeLogic.js` (`c8ab81c`).
+
+### Reds at the merged base, unchanged by this seat
+
+crisisBlindWidened 6 (CENSUS-1d's tip) · declarationRegisters 2 (R-T: the compose re-takes) · generatorGoldenMaster 1 · generationContracts 1 · dossierContent 1 · heldKeyWriterCensus 1 · proseWiringCensus 14 · espionageDormancyFence 1 · ruinFilterRoster 2 · observedShapeReaders 6 · domain:strict +4 crisisFactFindings.js, +2 composeStateProse.js. typecheck:ratchet green.
+
+### Where CENSUS-2e starts
+
+1. **Unit 3, the 7 tables left:** DAILY_LIFE_TAB (24, incl. 2 `guardPresence` stops; a JSX table: LOAD_MSGS, the local narrative), DAILY_LIFE_CONTEXT (15: DEFENSE_CONTEXT is now wired by 1e at `077cf9b` — declare it enforced; TERRAIN_CONTEXT / ROUTE_CONTEXT have no reader in src, R-D2 → dead under R-S unless one has appeared), POLITICAL_FLAVOR (9 + the stable pool's 6 `crisis: any`; template functions under `historyCoherence`'s pickRandom2 cascade, 1e's site: textOf), CHECK_INST_COMPAT_LANDMARKS (6; inline in `structuralValidator.js`, drawn by the arrival scene), DOSSIER_CAUSAL_PROSE (79 + 34 crisis; the causal register has no `vid`, so the kernel reads no atoms from it — needs a ruling on how a vid-less family declares), and the `{colour}` rulings (R-R) for STRESS_RUMORS, TERRAIN_SEASON_TEXTURE, ECHO_PREFIXES_DOSSIER, DOSSIER_CONNECTIVES. The tools: an espree splice by lineId path or by literal text (fuzzy over `${…}`), and the census2dTables arms (`holdsLedger`, `inlineArm`, `siblingArm`) — extend the test file, one arm per table.
+2. **DECREE_PROSE vid 54** once the decree draw hands facts.
+3. **Unit 4** for the carried tables once 1e wires their sites (SPATIAL_TEXT's city/village twins, PRESSURE_SENTENCES' wartime-winning twin, CAST_ABSENCES', DAILY_LIFE_TAB's), and "pilgrims queue patiently" (still 3) when the arrival redraw lands.
+
+### Open questions for the chair
+
+1. A causal-register line has no `vid`: how does a vid-less kernel family declare (a `marks` atom there would collide with arm names like `market`)?
+2. The culture tradition lines that name military households / warrior followings / professional troops: are they roster claims (`soldiers`, muting slots once wired) or tradition colour?
+3. `institution: temple`'s pattern does not match monastery / friary / minster, which the spatial sacred-house derivation treats as sacred houses: should the vocabulary gain a `sacred house` composite (two readers already want it), or should the pattern widen?
+4. The crisis-scoped flags of carried pools (listed above) live only in this doc until their sites are wired: should a lane pin them in `crisisScopedPools.register.json` now (R-T says the compose pins)?
