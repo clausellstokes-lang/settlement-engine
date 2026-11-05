@@ -138,6 +138,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (X-46 car 1b, second step (U4–U5), docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of fb0341b93 because the metropolis roll is flat to 50,000 and thins exponentially to 1,000,000, the rarer variant past 50,000; 96 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (PLACE-NOT-TIER (R6, units 1–2), docs/shift-records/2026-11-04-rung1-15-place-not-tier.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 6129c300d because the soldiers line, the Guard Captain and the garrison read the place\'s forces, and a small place seats no guild power without a market; 48 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
