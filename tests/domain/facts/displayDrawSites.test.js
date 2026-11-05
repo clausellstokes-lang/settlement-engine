@@ -16,6 +16,7 @@ import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedg
 import { traditionHook, traditionBeatProse } from '../../../src/domain/traditions/prose.js';
 import { createConflictHookDraw, foodGapHookLine } from '../../../src/domain/dossier/hookLines.js';
 import { composeFoodwaysLine } from '../../../src/domain/foodways.js';
+import { settlementRumors, whatPhrase } from '../../../src/domain/display/settlementRumors.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -55,5 +56,20 @@ describe('Appendix B row 111 — the foodways frames and source phrases (kind H)
     expect(out.ledger.map((e) => e.pool)).toEqual([
       'FOODWAYS.FRAMES.more', 'FOODWAYS.SOURCE_PHRASES.grain', 'FOODWAYS.SOURCE_PHRASES.livestock', 'FOODWAYS.SOURCE_PHRASES.fish',
     ]);
+  });
+});
+
+describe('Appendix B rows 97–100 — the rumour subject pools and headline frames (kind H)', () => {
+  it('a seeded subject and a headline frame note their draws; seedless reads the canonical, undrawn', () => {
+    const phrase = withPresumptionLedger(() => whatPhrase('flow_migration', 'evt-1'));
+    expect(phrase.result).toBe(whatPhrase('flow_migration', 'evt-1'));
+    expect(phrase.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['WHAT_PHRASE_POOLS.flow_migration', 'H', 'rumors']]);
+    expect(ledgerOf(() => whatPhrase('flow_migration'))).toEqual([]);
+    const world = { tick: 9, spatialLedgers: { rumorLedgers: { a: {
+      'r-1': { eventRef: 'evt-1', arrivalTick: 4, hopCount: 0, completeness01: 1, content: { what: 'flow_migration', whereId: 'b' } },
+    } } } };
+    const told = withPresumptionLedger(() => settlementRumors({ worldState: world, settlementId: 'a' }));
+    expect(told.result.map((r) => r.headline)).toEqual(settlementRumors({ worldState: world, settlementId: 'a' }).map((r) => r.headline));
+    expect(told.ledger.map((e) => e.pool)).toEqual(['WHAT_PHRASE_POOLS.flow_migration', 'HEADLINE_FRAMES.firsthand']);
   });
 });
