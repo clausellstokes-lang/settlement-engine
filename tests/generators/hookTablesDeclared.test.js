@@ -26,7 +26,8 @@ const HISTORY_ROWS = HISTORICAL_EVENTS_DATA.flatMap((e) => (e.plotHooks || []).m
 const textOf = (row) => (typeof row === 'string' ? row : row.text);
 
 describe('the history hooks declare what their event does not guarantee', () => {
-  it('the twelve declaring rows carry their atoms, every atom declarable', () => {
+  // CENSUS-3e (R-AA): demographic_pressure's three hooks declare their migration direction (15 rows).
+  it('the fifteen declaring rows carry their atoms, every atom declarable', () => {
     const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
     expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
       'succession_crisis: no ruler: council',
@@ -41,6 +42,9 @@ describe('the history hooks declare what their event does not guarantee', () => 
       'heresy_trial: institution: temple',
       'pilgrimage_surge: institution: temple',
       'pilgrimage_surge: institution: temple',
+      'demographic_pressure: migration: influx',
+      'demographic_pressure: migration: exodus',
+      'demographic_pressure: migration: influx',
     ]);
     for (const { row } of declaring) for (const a of [...(row.needs || []), ...(row.excludes || [])]) expect(assertDeclarable(a).dimension, a).toBeTruthy();
   });

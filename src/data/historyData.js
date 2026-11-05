@@ -1533,10 +1533,13 @@ export const HISTORICAL_EVENTS_DATA = [
     type: 'demographic_pressure',
     description: 'The population changed faster than the settlement’s institutions could absorb (through arrivals, departures, or both) and the strain reshaped daily life',
     factions: ['Established residents', 'The newly arrived or departing', 'Those profiting from the churn'],
+    // CENSUS-3e (R-AA): one template, two directions, is two lines. The migration direction is
+    // homed (`facts/migration.js`), so each hook declares the direction it presumes, and a tension's
+    // list (kind A) prints only the hooks of the live direction.
     plotHooks: [
-      'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers',
-      'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them',
-      'The newcomers fled something, and that something has followed them here',
+      { text: 'The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers', needs: ['migration: influx'] },
+      { text: 'An old family is quietly buying the properties the departed left behind, before anyone can return to claim them', needs: ['migration: exodus'] },
+      { text: 'The newcomers fled something, and that something has followed them here', needs: ['migration: influx'] },
     ],
     severity: ['minor', 'major'],
   },
