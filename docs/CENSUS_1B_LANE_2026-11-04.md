@@ -390,3 +390,52 @@ Golden **0 / 525** (every unit). Soak records / pages: unit 4 only, **1 / 60** (
 - Re-fetch the rulings doc (now R-A…R-AT, ten blocks) on `origin/lane/census-sop-2026-11-04` before starting.
 
 **Revised order for CENSUS-1h:** 1. unit 7's channel → 2. unit 6's display rows (merge census-5 first) → 3. R-AT → 4. unit 8 → 5. `tablePools`' second half.
+
+## CENSUS-1h (the seventh seat, 2026-11-05)
+
+> Continues this branch from CENSUS-1g's `e8b0072f0`. Transport push only (after every unit); no pull request; no send_message. Merged: `origin/lane/census-5-2026-11-04` at `3aef91c28` (before unit 6) and `origin/lane/census-3-2026-11-04` at `a354498` (before R-AU); both clean; `gen:dossier-prose` and the wiring census re-taken through `scripts/wiring-census.mjs`, both `--check`s green, nothing moved (R-D). ⚠ The checkout was again a DETACHED HEAD with the local branch ref stale; fast-forwarded (origin was an ancestor), no history rewritten. **Where this seat stopped (the boundary rule, context budget):** unit 7, unit 6, R-AT, R-AU and `clergy` done and pushed; R-AW (census-4 not merged), `tablePools`' second half, R-AX and unit 8 not reached. **CENSUS-1i starts at** "Where CENSUS-1i starts".
+
+Byte method: a scratch hasher (`generateSettlementPipeline` over the 525 golden configurations; soak1k-0..59 records and every rendered page — 20 tabs, Tonight, PDF, Foundry — through `renderHarness.mjs`; sha-256) run on a scratch worktree at each unit's parent and on the tree; each moved record attributed by a field-path walk; red-firsts run red in that worktree.
+
+| unit | commit | what | golden / soak records / pages moved (one cause each) |
+|---|---|---|---|
+| 7 | `8c6dcab` | **R-AQ's channel.** The connectives (vid-less, modulus): a declaration list PARALLEL to each phrase list, projected from §7b (a joint may carry `` `Also,` [atoms] ``; an undeclarable atom is a projector error) into `DOSSIER_CONNECTIVE_DECLARATIONS`; `drawConnective` draws over the full list as before, then `stateProseKernel.js :: resolveDeclaredPosition` checks the drawn position (admitted/undeclared → unchanged; refused → hash argmax over admitted positions; none → the joint drops; fail-closed). **The decree family is NOT vid-less** (96 variants carry vids; `drawVariant` takes the argmax), so its kernel marks already are its channel; what it lacked was the record (R-Z): `decreeLineParts` / `decreeChronicleLine` take `options.facts`, and the campaign chronicle hands `factsOf(update.settlement)` (the advanced, final record) | **0 / 0 / 0** (no joint, no decree variant declares yet) |
+| 6 | `18431ae` | **The display rows.** Row 95 (`settlementQuickGuide.js`) wired: a scope or food clause that is a key of `QUICK_GUIDE_SIBLINGS` resolves against the record (`resolveSibling`, the food band's calm clauses crisis-scoped); refused with no twin it DROPS — `resolveSibling` gains `dropRefused` (null; an unanswered record still keeps). The three waterside scopes are self-gated (R-AS amended: `scopePhrase` reads their water itself; chair ruling 5 pins a river keeping the Greek harbour). Rows 92 (`{colour}`), 93's non-sibling tables, 104–106, 108–109 declare nothing: not wired (CENSUS-1e's standing judgment) | **0 / 0 / 7** (tab:overview only: the culture scope line dropped — mesoamerican `market` soak1k-2, -6, -12; south-asian `market` + `institution: temple` -13, -18, -32, -50) |
+| R-AT | `0c445be` | `flavorOf`'s argmax key and `drawLoyalty`'s registry resolution key carry the settlement's identity: the ACTIVE STREAM's seed (`getActiveRng().seed`, e.g. `soak1k-1::assembleSettlement::canonical-coherence::historical-character`), read with no roll. `config._seed` was measured ABSENT at both sites (keys read `::pool`) and not used | **12 / 15 / 62** — refused births only (an admitted draw never reads the key): `history.historicalCharacter` 12 (soak1k-0, -1, -14, -18, -20, -25, -30, -36, -39, -49, -52, -56), `npcs[].plotHooks[]` 5 (-2, -13, -14, -25, -44; two seeds carry both — the R-AT commit message's "6" is corrected here); golden: the `village|*|forest|isolated` row of all 12 cultures |
+| R-AU | `d035cf8` | The outlook site (`foodBalance.js`, OUTLOOK_HOOK_SIBLINGS) resolves with `dropRefused` and filters the dropped slot; `withoutFalseHooks` stays as defence. The only keep-refused cause on the measurement (no other site's kept line is removed later) | **64 / 6 / 0** — pages 0 as ruled; records move in ONE field: `economicViability.summary` counted the kept hook ("1 plot hooks available" over a list that ended empty) and now counts the list it publishes (soak1k-9, -21, -33, -45, -51, -52) |
+| clergy | `712ac76` | R-AE: `clergy` = priest ∨ sacredHouse, defined once in `factVocabulary.js` (true if either; false only when both answered false). CENSUS-5e declares the two DS-FTH lines | 0 / 0 / 0 |
+
+### The 60 and the 1,000 (R-B: BEFORE = a scratch merge of `e8b0072` with census-5 `3aef91c` and census-3 `a354498` — every merge, none of this seat's units; AFTER = the tip `712ac76`)
+
+| | BEFORE | AFTER |
+|---|---|---|
+| the 1,000: verdict · findings · errors | STOP · 1,707 · 0 (`cert:false-presumption` in 45) | **CLIMB** · 1,662 · 0 |
+| `cert:false-presumption` | 45 / 45 (the OUTLOOK starving hook kept on a fed place; census-3g's reword had already cut 250 → 45) | **0** (R-AU) |
+| every other class (`coh:*`, `reader:*`, `A-*`, `info:*`, `cert:*`) | — | identical (no contradiction class rose; certification 1,000/1,000) |
+| the 60 (seeds 0–59 of the same runs) | `cert:false-presumption` 6 | 0; every other class identical |
+
+**`declared-share`, the 1,000 (BEFORE → AFTER, the surfaces that moved):** economics 549 / 1,932 → **504 / 1,887** (R-AU: the kept notes gone) · npcs 5,156 / 42,932 → **5,155 / 42,933** (R-AT) · tab:overview — → **105 / 105** (row 95's notes). Unchanged: every other surface. **The named-but-refused list:** empty. `reader:hook-pools [guard]`: unchanged (R-AW not reached).
+
+### Rows moved, by cause (never re-recorded)
+
+Golden: R-AT 12, R-AU 64 (summary count) — 76 row-moves; units 7, 6, clergy 0. Soak records / pages per the table. Tests re-keyed by cause: `settlementQuickGuide.test.js` (two fixtures now hold the market and temple their declared scope presumes; unit 6). The registers are not re-pinned (R-T). Red at the base and still red (not this lane's): `declarationRegisters.test.js` 2, `declaredMoves.test.js` (monastery arm), `composeStateProse.test.js` 5, `stateProseKernel.test.js` 1, `tierNounSelfReference.test.js` 4, `hookThemeDraws.test.js :: pin:no-hook-is-lost`, `foodModelSingleWriter.test.js` 2, `customFoodImpact.integration.test.js` 1. `typecheck:domain:strict` red only on the base's +4 / +2.
+
+### Judgments (vetoable)
+
+- Unit 7: the decree family keeps its vid channel (R-AQ's premise that it is vid-less was the kernel's reading of an older leaf; the code draws it by argmax). In play the advanced record is final, so the whole reader (`factsOf`) is handed rather than one field (R-Z's concern is a birth-time draw).
+- Unit 6: a refused clause drops (R-AU), so 7 of 60 overview strips lose their culture scope line — a false line removed, not a mute slot to fill at this lane; twins are CENSUS-2's call (R-G/R-L).
+- Unit 6: the waterside scopes are self-gated — census-2's `coast` on the Greek clause contradicts chair ruling 5 (a river keeps the harbour); its `river` on the Slavic clause is a presumption the landlocked reader does not verify (open question 2).
+- R-AT: the stream seed, not `config._seed` (absent at both sites); only the two named sites were re-keyed.
+
+### Waiting lists
+
+- **waiting on order (R-Q):** unchanged. **waiting on council:** unchanged. **waiting on the pulse:** the exodus hooks.
+- **R-AT's audit, for CENSUS-1i:** `drawDeclared` callers with no `key` (the argmax falls back to the pool id): `serviceRollMaterialization.js:77`, `arrivalScene.js:223`, `npcGenerator.js:608/613/627/692/756/780`, `historyGenerator.js:358`; `stressNarrative.js:174` keys on a constant. Each matters only where ≥ 2 admitted rows can tie-break.
+
+### Where CENSUS-1i starts
+
+1. **R-AW:** merge `origin/lane/census-4-2026-11-04` (`ec45a0292` or later), re-take the census through its door; resolve the declared "Military/Guard" label row against the final record at the birth's close, its twin "Military Party" where no enforcement body; `[guard]` 5 → 0 expected.
+2. **`tablePools`' second half** (the chair's answer 4): read sibling sets, declaration maps, a column beside a table, closures' `{short, long}`.
+3. **R-AX:** key the criminal secrets' draw by the holder's role once CENSUS-4g has restructured the rows.
+4. **Unit 8 (R-O):** F12's five crisis-family marks and the `walls` mark onto the vocabulary's dimensions; byte-identity 0, pages included.
+5. R-AT's audit above.
