@@ -70,8 +70,30 @@
  * @see src/domain/worldPulse/warReasonTaxonomy.js — the closed 16-reason authority.
  */
 
-import { pickLine } from '../worldPulse/proseSelection.js';
+import { fnv1a32 } from '../worldPulse/proseSelection.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { WAR_REASON_TYPES } from '../worldPulse/warReasonTaxonomy.js';
+
+/**
+ * `proseSelection.js :: pickLine`'s selection (canonical at zero; else fnv modulus), drawn over
+ * the FULL pool and resolved through `drawDeclared` (CENSUS-1d unit 2, Appendix B row 103, kind
+ * H), noted in the ledger. Wired HERE, not in the shared world-pulse `pickLine` (ruling 7: the
+ * world-pulse pools are the second wave). A war or a road is world furniture with no settlement
+ * record behind it, so no facts are handed: a declared line would be refused; none declares.
+ * @param {ReadonlyArray<string | ((interp: Record<string, unknown>) => string)>} pool
+ * @param {string} seed @param {Record<string, unknown>} interp
+ * @param {string} poolId @param {string} surface
+ * @returns {string}
+ */
+function pickLine(pool, seed, interp, poolId, surface) {
+  if (!Array.isArray(pool) || pool.length === 0) return '';
+  const drawn = drawDeclared(pool, {
+    draw: (p) => p[seed ? fnv1a32(seed) % p.length : 0], key: seed || '', poolId, surface, drawKind: 'H',
+  });
+  if (drawn.line == null) return '';
+  const v = lineText(drawn.line);
+  return typeof v === 'function' ? String(v(interp)) : String(v);
+}
 
 /** @param {unknown} a @param {unknown} b @returns {number} */
 const codepoint = (a, b) => (String(a) < String(b) ? -1 : String(a) > String(b) ? 1 : 0);
@@ -272,8 +294,8 @@ export function deriveWarName({ attackerId, defenderId, reasonType, nameFor = (i
   const attackerName = nameFor(attackerId);
   const defenderName = nameFor(defenderId);
   const name = typed
-    ? pickLine(WAR_NAME_POOLS[typed], key)
-    : pickLine(UNTYPED_WAR_NAME_MOLDS, key, { a: nameFor(low), b: nameFor(high) });
+    ? pickLine(WAR_NAME_POOLS[typed], key, {}, `WAR_NAME_POOLS.${typed}`, 'war')
+    : pickLine(UNTYPED_WAR_NAME_MOLDS, key, { a: nameFor(low), b: nameFor(high) }, 'UNTYPED_WAR_NAME_MOLDS', 'war');
   const clause = typed ? WAR_REASON_CLAUSES[typed] : null;
   const line = clause
     ? `${name}: ${attackerName} against ${defenderName}, over ${clause}.`
@@ -473,8 +495,8 @@ export function deriveRouteName({ row, fromId, nameFor = (id) => String(id) }) {
   const standpoint = fromId == null ? null : String(fromId);
   const far = standpoint === low ? high : (standpoint === high ? low : null);
   const name = far != null
-    ? pickLine(pools.addressed, `${routeId}>${standpoint}`, { dest: nameFor(far) })
-    : pickLine(pools.paired, routeId, { a: nameFor(low), b: nameFor(high) });
+    ? pickLine(pools.addressed, `${routeId}>${standpoint}`, { dest: nameFor(far) }, `ROUTE_NAME_POOLS.${mode}.addressed`, 'map')
+    : pickLine(pools.paired, routeId, { a: nameFor(low), b: nameFor(high) }, `ROUTE_NAME_POOLS.${mode}.paired`, 'map');
   const aName = nameFor(low);
   const bName = nameFor(high);
   const haul = ROUTE_HAUL_CLAUSES[String(r.band)] || null;
