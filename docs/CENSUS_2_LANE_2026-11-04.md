@@ -157,7 +157,7 @@ These are identical at `ee3b9c7`:
 
 | family | commit | pools | lines | lines gaining atoms | `{crisis-scoped}` | `{colour}` | pages moved (60) | records (60) |
 |---|---|---|---|---|---|---|---|---|
-| DS-GEN | `db3ed88` | 140 | 463 | 180 | 33 | 73 | **32**: 29 DS-GEN-13 NO-MARKET (trade "at the gate, at the inn": `gate · institution: tavern` refused), 3 DS-GEN-17 GARRISONED vid 2 ("not only in stone": `walls`) | 0 |
+| DS-GEN | `db3ed88` | 140 | 463 | 160 | 33 | 73 | **32**: 29 DS-GEN-13 NO-MARKET (trade "at the gate, at the inn": `gate · institution: tavern` refused), 3 DS-GEN-17 GARRISONED vid 2 ("not only in stone": `walls`) | 0 |
 | DS-HK | `eb2b16a` | 11 | 45 | 24 | 6 | 4 | 0 (the framing paragraph is cut from the Plot Hooks tab) | 0 |
 | DS-STR | `c37c270` | 49 | 204 | 27 | 1 | 9 | 0 | 0 |
 | DS-CND | `c85d7ec` | 18 | 55 | 12 | 5 | 12 | 0 | 0 |
