@@ -65,6 +65,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.",
           "slots": [
             "complexity"
@@ -73,6 +76,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.",
           "slots": [
             "settlement"
@@ -116,6 +122,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMBINATION C4: a low rung on a working approach": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.",
           "slots": [
             "settlement",
@@ -514,6 +523,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.",
           "slots": [
             "season"
@@ -740,6 +752,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.",
           "slots": [
             "settlement"
@@ -792,6 +807,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "ADEQUATE": [
         {
           "angle": "canonical",
+          "marks": [
+            "colour"
+          ],
           "text": "Caravans keep to their rounds. Trade moves at its accustomed pace.",
           "slots": [],
           "vid": 0
@@ -855,6 +873,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.",
           "slots": [],
           "vid": 3
@@ -863,6 +884,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SURPLUS × not trade-dependent": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.",
           "slots": [
             "settlement"
@@ -871,6 +895,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Plenty passes here. Not much of it stops.",
           "slots": [],
           "vid": 2
@@ -984,6 +1011,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "HIGHLIGHT: dear": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.",
           "slots": [
             "good"
@@ -1028,6 +1058,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "HIGHLIGHT: cheap": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.",
           "slots": [
             "good"
@@ -1036,6 +1069,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the price says so.",
           "slots": [
             "good",
@@ -1056,6 +1092,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "{good} keeps arriving faster than it leaves, and the price has been giving way to it.",
           "slots": [
             "good"
@@ -1077,6 +1116,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The crier has nothing to make a noise about. Prices here are what prices here usually are.",
           "slots": [],
           "vid": 2
@@ -1121,6 +1163,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.",
           "slots": [
             "settlement"
@@ -1129,6 +1174,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.",
           "slots": [],
           "vid": 4
@@ -1529,6 +1577,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMPLETE LINE, output exported": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.",
           "slots": [
             "resource",
@@ -1553,6 +1604,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.",
           "slots": [
             "resource",
@@ -1807,7 +1861,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.",
           "slots": [
@@ -1818,7 +1873,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.",
           "slots": [],
@@ -1827,7 +1883,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.",
           "slots": [
@@ -1859,7 +1916,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.",
           "slots": [
@@ -1870,7 +1928,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "There is a cheaper way to do most things here, and most people know somebody who knows it.",
           "slots": [],
@@ -1890,6 +1949,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TIER: minor shadow activity (≥3)": [
         {
           "angle": "canonical",
+          "marks": [
+            "colour"
+          ],
           "text": "Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.",
           "slots": [],
           "vid": 0
@@ -1897,7 +1959,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.",
           "slots": [
@@ -1908,7 +1971,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "There is some thieving and some selling without a licence. Every town this size has both.",
           "slots": [],
@@ -1992,12 +2056,18 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TALLIES": [
         {
           "angle": "canonical",
+          "marks": [
+            "colour"
+          ],
           "text": ECONOMY_FRESHNESS_SENTENCES.tallies,
           "slots": [],
           "vid": 0
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The counts on this page were taken at the last full survey of {settlement}. Anything recorded since then may not have reached them yet.",
           "slots": [
             "settlement"
@@ -2006,6 +2076,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "These figures describe {settlement} as it was judged at its last survey. Events entered after that judgement may not be counted in them yet.",
           "slots": [
             "settlement"
@@ -2014,6 +2087,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "What follows is the last careful reckoning of {settlement}, and it may not be today's.",
           "slots": [
             "settlement"
@@ -2024,12 +2100,18 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "CATALOG": [
         {
           "angle": "canonical",
+          "marks": [
+            "colour"
+          ],
           "text": ECONOMY_FRESHNESS_SENTENCES.catalog,
           "slots": [],
           "vid": 0
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "This list of what {settlement} offers was drawn at the last survey. A house opened or closed since then may not appear on it yet.",
           "slots": [
             "settlement"
@@ -2038,6 +2120,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "The catalog describes the services {settlement} was judged to hold. Later changes may not be counted in it yet.",
           "slots": [
             "settlement"
@@ -2046,6 +2131,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "What the town could do for a visitor was written down at the last survey, and may have moved since.",
           "slots": [],
           "vid": 3
@@ -2120,6 +2208,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "STRUGGLING": [
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.",
           "slots": [
             "settlement"
@@ -2128,6 +2219,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The books never quite close. What the town needs and what the town has are near enough to argue about and never near enough to settle.",
           "slots": [],
           "vid": 2
@@ -2232,6 +2326,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "People here put things by, and can. That is the difference between this town and a poorer one.",
           "slots": [],
           "vid": 2
@@ -2246,6 +2343,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "PROSPEROUS": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.",
           "slots": [],
           "vid": 1
@@ -2263,6 +2363,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.",
           "slots": [],
           "vid": 3
@@ -2703,6 +2806,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "BLOCKADE BYPASSED": [
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} is cut off and is still being fed. Something is getting past the line, not much of it, and enough to keep the counts from collapsing.",
           "slots": [
             "settlement"
@@ -2712,7 +2818,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "The stores are falling more slowly than a closed road should allow. A way in is still open and it is not on the returns.",
           "slots": [],
@@ -3019,6 +3126,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SUBSTITUTED": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.",
           "slots": [
             "chain"
@@ -3038,6 +3148,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The {chain} keeps producing and nobody local mistakes that for health.",
           "slots": [
             "chain"
@@ -3317,12 +3430,18 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "The yards here are full of goods bound out and no two of them are the same. This is a town that sells.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "There is always something going out. If one trade is quiet, another is not.",
           "slots": [],
           "vid": 3
@@ -3342,6 +3461,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "There is little {good} to be had here, and it costs what little things cost.",
           "slots": [
             "good"
@@ -3350,6 +3472,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger wanting {good} in {settlement} will find it and will pay for the finding.",
           "slots": [
             "good",
@@ -3361,6 +3486,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SCARCITY: adequate": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{good} sits at its accustomed level in the stores, and its price sits with it.",
           "slots": [
             "good"
@@ -3369,6 +3497,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "{good} costs what {good} costs. There is nothing to say about it.",
           "slots": [
             "good"
@@ -3390,6 +3521,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SCARCITY: surplus": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.",
           "slots": [
             "settlement",
@@ -3410,6 +3544,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger stocking {good} does well here. The town has more than it can use.",
           "slots": [
             "good"
@@ -3656,6 +3793,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.",
           "slots": [
             "settlement"
@@ -3698,6 +3838,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Everything in this town is made of what grows around it, and the making is the trade.",
           "slots": [],
           "vid": 3
@@ -3717,6 +3860,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.",
           "slots": [
             "settlement"
@@ -3725,6 +3871,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The work here is uphill in the literal sense, and the town prices its carting accordingly.",
           "slots": [],
           "vid": 3
@@ -4081,6 +4230,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "This is the trade the town is actually built on, and the town has taken it as far as it goes.",
           "slots": [],
           "vid": 3
@@ -4374,6 +4526,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "INCOME MIX: one source carries the town": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.",
           "slots": [
             "settlement"
@@ -4382,6 +4537,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.",
           "slots": [],
           "vid": 2
@@ -4518,6 +4676,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TRADE PROFILE: exports and imports both present": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.",
           "slots": [
             "settlement",
@@ -4527,6 +4688,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "Everybody here knows what leaves and what arrives, because the same carts do both.",
           "slots": [],
           "vid": 2
@@ -4606,6 +4770,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "Much of what a stranger will buy at {settlement} was made within sight of where it is sold.",
           "slots": [
             "settlement"
@@ -4614,6 +4781,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.",
           "slots": [],
           "vid": 3
@@ -4830,6 +5000,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "COMPLETE FOR ITS TIER": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.",
           "slots": [
             "settlement"
@@ -4849,6 +5022,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The town can answer what a town this size ought to answer, and does not think about it further.",
           "slots": [],
           "vid": 3
