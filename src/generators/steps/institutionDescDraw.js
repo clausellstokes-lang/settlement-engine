@@ -50,6 +50,7 @@ export function drawInstitutionDesc(texts, seedKey, facts, poolKey) {
     poolId: `institutionDescVariants:${poolKey}`,
     surface: 'institutions',
     drawKind: 'H',
+    keepRefused: true, // R-AM: the slot is never emptied (CENSUS-1f's site-18 ruling); a kept line is noted
     twin: (line) => {
       const set = /** @type {Record<string, ReadonlyArray<any>>} */ (DESC_VARIANT_SIBLINGS)[lineText(line)];
       return set ? set.find((l) => l && typeof l.twinOf === 'string') ?? null : null;
