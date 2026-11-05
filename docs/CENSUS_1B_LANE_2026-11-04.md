@@ -240,3 +240,82 @@ Against B: golden **0 / 525**; soak records **9 / 60** and pages **9 / 60** (tab
 3. The projector hardcodes `marks: []` on canonical v0 rows: give the v0 rows a real tag slot (CENSUS-3d's seven rows).
 4. **R-Z** into `docs/census/VOCABULARY_RULINGS_2026-11-04.md` as a dated sentence: a draw site is handed the ONE field measured settled before the draw (`birthFactsOf`), never the whole container. (This seat's R-Q cure, `f2367a4`, is the same class: the native roster at the power step is not the final roster.)
 5. **Sites 19, 18, 15 have NOT landed** at `2c5915c`. Site 19 (`relationshipArchetypes.js :: createTieProseDraw`) is not routed through `drawDeclared`. Sites 18 (`assembleInstitutions.js`'s `pickVariant` of the descriptions) and 15 (the per-definition service roll) carry only CENSUS-1c's `resolveSibling` walls siblings. CENSUS-4c's declarations (`cd17614`) are carried but not enforced at those draws. They are unit 4's, for CENSUS-1f, and CENSUS-4e waits on them.
+
+## CENSUS-1f (the fifth seat, 2026-11-05)
+
+> Continues this branch from CENSUS-1e's `6e2cb6d`. Transport push only (after every unit); no pull request; no send_message. Merged: `origin/lane/census-4-2026-11-04` at `f8c92c9` (`fe7bb1d`, first, for `cd17614`'s declarations), `origin/lane/census-2-2026-11-04` at `b63ca6e` (`2b31f33`, before unit 2), `origin/lane/census-3-2026-11-04` at `de8de79` (`3d3c52f`, before unit 3: the wiring census conflict taken from this side, re-taken through `scripts/wiring-census.mjs` and `gen:dossier-prose`, both `--check`s green, R-D). No foreign commit appeared on this branch's origin. ⚠ The checkout was a DETACHED HEAD at `6e2cb6d` with the local branch ref 95 commits stale; the first push was refused, the branch ref was fast-forwarded to HEAD (origin was an ancestor) and pushed — no history rewritten. **Where this seat stopped (the boundary rule, context budget):** units 1, 2, 3 (its declared sites), 5 (b)–(d) done and pushed; 5 (a) refuted by measurement (below); units 4, 3c (the census columns) and 8 not reached. **CENSUS-1g starts at** "Where CENSUS-1g starts".
+
+Byte method: a scratch hasher (525 golden records; soak1k-0..59 records and every rendered page: 20 tabs, Tonight, PDF, Foundry; sha-256), the base hashed twice (0 / 0 / 0). Each moved record was proven ONE-CAUSE by a scratch script over both trees (the merged base in a scratch worktree): the changed paths by field walk, and for every moved line its drawn row's declaration refused by the FINAL record's facts and the printed row admitted (or its declared twin). Red-firsts run red in that worktree.
+
+| unit | commit | site | golden / soak records / pages moved (one cause each, against the commit before) |
+|---|---|---|---|
+| 1a | `d422a8d` | **site 19** the tie draw (`relationshipArchetypes.js :: createTieProseDraw`, H): the drawn index resolves through `drawDeclared` against 4c's in-place rows; one index = the desc AND the tension row, so the index declares their union; argmax keyed on the directed pair. Facts: the roster and the government only (R-Z) | **24 / 5 / 5** (ties: `no ruler: lord` 20+18, `garrison` 4); paths `relationships[].{description, tension, proseVariant}`, `prominentRelationship.*` |
+| 1b | `1e71261` | **site 18** the institution descriptions (`steps/institutionDescDraw.js`, new; H): the fnv pick kept, the drawn text lifted from `DESC_VARIANT_DECLARATIONS` and the walls sibling sets (still the twin resolver) | **145 / 14 / 14** (`tier: ≥ city` 60, `terrain: forest` 48+11, `tier: ≤ hamlet` 24+2, `river` 13+8, `militia` 1, `market` 1); path `institutions[].desc` |
+| 1c | `9eee701` | **site 15** the service roll (`serviceRollMaterialization.js :: resolveServiceRow`, R): resolved AFTER both rolls; refused → its walls twin desc, else not materialized (kind A) | **74 / 20 / 20** (`gate` 47+14, `tier: ≤ village` 27+6, `watch` 3); path `availableServices.{legal, employment}`; 0 added |
+| 2 | `f6ec896` | the arrival scene's ⚠ redraw-once (`arrivalScene.js :: drawAdmitted`): a refused first draw redraws once from the admitted, agreeing lines, on the scene's own substream | **3 / 8 / 8**; path `arrivalScene` ONLY (the roll proof) |
+| 3a | `e35d60b` | the faction names (`applyDensityLaw`'s rival mint R, `stressFactions :: firstUnusedPoolName` T): kept as drawn and NOTED (`drawDeclared.js :: noteDeclared`, new) so the self-check judges them; no twin, never pre-filtered. The powerData comment's "retry loop" no longer exists | 0 / 0 / 0 |
+| 3b | `b26ed12` | row 36, POLITICAL_FLAVOR's cascade (`historyCoherence.js :: flavorOf`, R): every roll kept; the drawn template resolves (`stable` crisis-scoped) | **0 / 15 / 15**; path `history.historicalCharacter` ONLY (own substream) |
+| 3c | `4dfb47b` | item 23, the outlook hooks (`foodBalance.js`, T) through `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)` | **104 / 3 / 3** (`navigable` 102+3, `institution: smith` 19+1); path `economicViability.plotHooks[].hook` |
+| 3d | `cb46c3e` | item 12, the timeline hook roll (`historyGenerator.js :: resolveTimelineHook`, R): rolls and splice kept, the ECHO roll keyed on the drawn row, a resolved row never printed twice | **77 / 10 / 10** (`navigable` 65, `no ruler: council` 12+7, `market`, `temple`, `tier: >= town` 1 each, one cascade in soak1k-32); path `history.historicalEvents[].plotHooks[]` ONLY |
+| 3e | `4370e09` | row 116, `RULING_POWER_SIBLINGS`' door: `opts.facts` on `transferRulingPower`, `resolveSibling` at both lookups | 0 / 0 / 0 |
+| 5b | `fc45cc1` | R-AE: `sacredHouse` = temple ∨ monastery kinds, defined once (`factsOf`, `factVocabulary.js`); `council`: no home (no bodies reader exists) | 0 / 0 / 0 |
+| 5d | `5eef493` | R-Z's dated sentence (`VOCABULARY_RULINGS_2026-11-04.md` §9) | docs |
+| 5c | `4818948` | the projector's canonical v0 rows take ONE tag slot (`0. *(canonical)* \`[atoms]\` text`), every part a mark | 0 (leaves byte-identical) |
+
+**Unit 5 (a), R-Y, NOT done — the ruling's premise is refuted by the kernel.** `stateProseKernel.js :: drawVariant` draws a vid-bearing pool by the ARGMAX of `hashKey(…::v${vid})` and a vid-less pool by the MODULUS (its own comment: the fallback "keeps this car's promise of ZERO moved reads" on the causal register). Assigning vids to `DOSSIER_CAUSAL_PROSE`, the decree family and the connectives therefore MOVES about (n−1)/n of every such pool's draws — not byte-identity 0. And `variantFactDeclaration` refuses vid-less variants on purpose: the causal register's marks are its arm names (JF-CPL-9b's arm is spelled `market`). The cure that keeps byte-identity is a declaration-only channel for those families (a field the projector writes from the annex and `variantFactDeclaration` reads, never a draw key) — a mechanism change for the chair to rule. Until then those families stay CARRIED.
+
+**Unit 3, the plumbing sites, recorded not wired:** the generic `pick` / `drawUnique` callers (rows 1–2: MANNERISMS and SPEECH_PATTERNS carry no declaration), `historyGenerator.js`'s `ECHO_PREFIXES` (`{colour}`, CENSUS-2e), `narrativeGenerator`'s three founding draws (no declaration), the per-relationship rumour roll (STRESS_RUMORS `{colour}`), the trapping shuffle (`traditionCorpus.js`: no declaration). Wiring them adds ledger notes only; left for the day a lane declares one (CENSUS-1e's standing judgment).
+
+### The 60 and the 1,000 (R-B: BEFORE = a scratch merge of `fe7bb1d` with census-2 `b63ca6e` and census-3 `de8de79` — every merge, none of this seat's units; AFTER = the tip `4818948`)
+
+| | BEFORE | AFTER |
+|---|---|---|
+| the 1,000: verdict · findings · errors | **STOP** · 1,664 · 0 | **CLIMB** · 1,662 · 0 |
+| `coh:crisis-blind-prose` (the pilgrims' queue) | 3 / 3 | **0** (unit 2) |
+| `reader:hook-pools` | 71 / 70 | **5 / 5** (units 3c, 3d: the `[sea]` class) |
+| `A-11:sea-words-landlocked` | 0 | **1 ⚠ — RISES** (soak1k-152, below) |
+| `cert:false-presumption` | 0 | **0** |
+| every other class (A-05 977, A-09 8, info:battery 676, reader:faction-role-fit 521/348, relation-types 212/147, tension-memory 60, validation-on-page 2,547/985) | — | identical |
+| the 60 (seeds 0–59 of the same runs) | reader:hook-pools 3 | 0; every other class identical |
+
+**⚠ The one rise (STOP-class, for the chair).** soak1k-152 (an occupied forest village on a mountain pass, no water, whose roster carries a Fish market): the base printed a hook vignette its record refuses; unit 2 redraws it, which shifts that paragraph's later picks on the scene's own substream, and the sense beat now takes the fish key and prints the BARE line "A basket of fish, still flapping, is carried past at a run." (`arrivalProse.js :: ARRIVAL_SENSES` fish.lines[3]). The line declares nothing, while its siblings declare `navigable`. The cure is CENSUS-2's table (declare `navigable` on fish.lines' three bare rows, or the chair's twin); this seat edits no other lane's rows.
+
+**`declared-share`, the 1,000 (BEFORE → AFTER):** institutions 1/1 → **2,168 / 4,215** · services 115/115 → **1,965 / 55,655** · relationships 0 → **2,077 / 21,528** · overview 0 → **1,563 / 3,017** · history 784/5,072 → **1,504 / 10,396** · economics 0/1,383 → **388 / 1,771** · power 2,457/2,457 → **2,531 / 2,531** · unchanged: defense 1,494/1,494, npcs 5,156/42,932, tab:dossier 48,695/213,133, tab:economics 1,851/28,025, crisis 503/549, the crisis / plot-hook render surfaces.
+
+### Rows moved, by cause (never re-recorded)
+
+By unit, against its parent (the table above): golden **427 / 525-row-moves** in total (24 + 145 + 74 + 3 + 104 + 77; a row can move in several units), soak records and pages as listed. Every move is one cause per unit. Tests re-keyed: none (each new arm is its own file). The declaration registers and the census columns are not re-pinned here (R-T): the compose re-takes them.
+
+**Tests.** Each unit's red-first and its neighbours ran through the mutex, green, except titles red at the base too: `tests/domain/facts/` 3 (the two registers — R-T — and `declaredMoves`' monastery arm), `dossierStateProseProjection.contract.test.js` 9 (the same titles at the base). eslint and `typecheck:ratchet` clean on every touched file; `typecheck:domain:strict` red only on the merged lanes' +4 / +2 (`crisisFactFindings.js`, `composeStateProse.js`).
+
+### Waiting lists
+
+- **waiting on order (R-Q):** CENSUS-4c's three town GATE description rows; `FACTION_DESC_SIBLINGS`' militia sets (CENSUS-5c's).
+- **waiting on a channel:** the vid-less kernel families' declarations (R-Y above).
+- **waiting on `council`:** "Fund the council" and its like (no bodies reader).
+- **the named-but-refused list:** EMPTY (48 dimensions, none with `reader: null`).
+
+### Judgments (vetoable)
+
+- Site 18: a description slot is never emptied (nothing admitted → the drawn text stays; the self-check names it); the undeclared catalogue line is always among the admitted, so the branch is not reached on the corpus.
+- Site 15: a refused service with no admitted twin is not materialized (kind A), never replaced by another service.
+- Unit 2: the materialized built detail keeps its clean-only redraw (a first cut skipped it; the T1-12 arms caught it before commit).
+- Unit 3a: a declared name with no twin is noted, not resolved (`noteDeclared`), so a false one surfaces as `cert:false-presumption` rather than silently.
+- Unit 3d: a resolution that lands on a row a later roll draws resolves that roll past it (no duplicate hook), keeping the roll count.
+- Unit 3e: the three in-play callers are not handed `facts` (no twin exists, so nothing could move; a new import edge into a cycling graph).
+
+### Where CENSUS-1g starts
+
+1. **The chair's two calls first:** the R-Y channel (above) and the soak1k-152 rise (CENSUS-2's fish rows).
+2. **Unit 4's display rows:** 92 (ALIGNED_BASIS, `{colour}` unless CENSUS-5c says otherwise — wire anyway), 93 (crisisCast's tables outside the sibling sets; declarations on census-2), 95 (`settlementQuickGuide.js`), 104–106, 108–109; merge census-5 (`8b304b8` or later) first.
+3. **Unit 3c:** the wiring census's four declared columns and `tablePools` through `scripts/wiring-census.mjs`, reading the ANNEX (or the projector's own parse), never the generated leaves.
+4. **Unit 8 (wave 2, R-O):** F12's five crisis-family marks and the `walls` mark onto the vocabulary's dimensions; byte-identity 0, pages included.
+5. The plumbing sites of unit 3 when a lane declares one.
+
+### Addendum — the chair's rulings R-AI, R-AJ, R-AL, R-AM, R-AO (messages queued 05:57 and 06:19, under R-A), read at this seat's boundary (2026-11-05 06:31 UTC)
+
+- **R-AI, measured here.** Nothing in `src` imports `causalDossierProse.js` (0 importers; its only mentions are comments in `stateProseKernel.js` and `economyStateProse.js`), so `DOSSIER_CAUSAL_PROSE` is DEAD (R-S): it gets no vids and is listed as dead. That makes unit 5 (a)'s draw-move finding moot for the causal register. It still holds for the decree family and the connectives (`dossierConnectives.generated.js`): whether those are printed is NOT measured here, and a vid moves the draws of any family that is printed. **For CENSUS-1g:** run their importer census; vid the printed ones only if the moved draws are accepted, else use the declaration-only channel.
+- **R-AJ, for CENSUS-1g:** lift `hookVariety.js :: freshAdmittedTwin` into `drawDeclared` as a registry option for every `drawUnique` site, and retire the loyalty site's copy in the same commit, byte-identical.
+- **R-AL, for CENSUS-1g:** the `demographic_pressure` tension template's row declares `needs: migration` at the history template draw (about 16 of 1,000 births; count them). It is not in the POLITICAL_FLAVOR cascade wired by `b26ed12`; it sits at the tension template draw (`historyGenerator.js :: buildHistoricalEvent`'s selection).
+- **R-AM, for CENSUS-1g:** `resolveSibling` / `drawDeclared` ledger the KEPT refused original when no twin is admitted (today a 'none' resolution is not noted), so `cert:false-presumption` sees those lines. The count will rise by cause, which is not a STOP (R-B). `noteDeclared` (`e35d60b`) is the shape.
+- **R-AO, for CENSUS-1g:** a per-line `colour` spelling (tag slot `colour`; table column `{ text, colour: true }`), treated as declared by the projector and the undeclared register, with one sentence in the vocabulary doc.

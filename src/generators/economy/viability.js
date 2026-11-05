@@ -21,7 +21,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
-import { waterOf } from '../../domain/facts/water.js';
+import { waterOf } from '../../domain/facts/water.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-1f: one line
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -526,7 +526,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   suggestions.push(...(waterAnalysis.suggestions || []));
 
   // Food balance plot hooks
-  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance);
+  const stabilityAnalysis = deriveSupplyRiskAnalysis(population, terrain, insts, cfg, foodAnalysis.foodBalance, () => factsOf({ institutions: insts, config: cfg, tier, economicState })); // CENSUS-1f: the outlook hooks resolve (the fields at hand only, R-Z)
   issues.push(...stabilityAnalysis.issues);
   warnings.push(...stabilityAnalysis.warnings);
   plotHooks.push(...stabilityAnalysis.plotHooks);

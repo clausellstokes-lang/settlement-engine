@@ -14,7 +14,7 @@ import {
 import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
 import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
-import { drawUnique } from './hookVariety.js';
+import { drawUnique, freshAdmittedTwin } from './hookVariety.js'; import { declarationAdmits, declarationOf } from '../domain/facts/factVocabulary.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier }, worldLaw))), birthFactsOf({ institutions, config, tier }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw))), birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -395,7 +395,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'wealth',
       },
       {
-        short: 'Find out where the hoarded reserves are before the council does',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Find out where the hoarded reserves are before the council does', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Come out of this with more than they went in with',
         driven_by: 'wealth',
       },
@@ -429,7 +429,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'wealth',
       },
       {
-        short: 'Identify which members of the council have already made private terms with the creditor',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Identify which members of the council have already made private terms with the creditor', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Repudiate the debt on grounds that would survive legal challenge',
         driven_by: 'political',
       },
@@ -596,7 +596,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'political',
       },
       {
-        short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Stop the killing on both sides, whatever it costs them personally',
         driven_by: 'justice',
       },
@@ -636,7 +636,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
 // can disagree about nothing. drawUnique spends exactly one roll in every arm
 // (HK-LAW-6), so the surrounding stream is unmoved; only WHICH template a given
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
-const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve
+const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), twin: freshAdmittedTwin(pool, { used: reg?.titles, keyFn: (x) => lineText(x), themes: reg?.themes, themeOfFn: (x) => themeOfText(lineText(x)), admits: (x) => declarationAdmits(declarationOf(x), facts).admitted, key: 'npcData:NPC_FACTION_LOYALTY' }), facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).text; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve; CENSUS-3e: stores the TEXT (a declared row is `{ text, needs }`), and a refused row resolves to a FRESH admitted template (hookVariety.js :: freshAdmittedTwin), so no hook is lost
 
 // generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
 // the NPC's `plotHooks` array.
@@ -1501,7 +1501,7 @@ export const generateNPCs = (
   const npcConfig = {
     ...config,
     _tradeCommodity: deriveTradeCommodity(settlement.economicState, { firstWordFallback: true }),
-    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null,
+    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null, _government: settlement.powerStructure?.government ?? null, // CENSUS-4d (R-V): the goal draw reads the ruler kind it already has (birthFactsOf); the government ONLY — a guild faction is not settled at the draw
     _prosperity: settlement.economicState?.prosperity || null,
   };
 
@@ -1587,7 +1587,13 @@ export const generateNPCs = (
 };
 
 // generateRelationships
-export const generateRelationships = (npcs, config = {}, institutions = []) => {
+/**
+ * @param {any[]} npcs @param {any} [config] @param {any[]} [institutions]
+ * @param {{ government?: unknown, tier?: unknown } | null} [settled] CENSUS-1f (site 19, R-V / R-Z): the
+ *   ONE field the tie draw's declarations need beyond the roster — the government (the ruler kind,
+ *   measured settled at this draw) — and the tier; absent, a declared tie index is refused (fail-closed)
+ */
+export const generateRelationships = (npcs, config = {}, institutions = [], settled = null) => {
   // Relationship type definitions (for the strength labels)
   const RELATIONSHIP_STRENGTHS = {
     ally: ['weak', 'moderate', 'strong'],
@@ -1610,7 +1616,7 @@ export const generateRelationships = (npcs, config = {}, institutions = []) => {
   const seen = new Set();
   // GS-1: each tie's description and tension are drawn WITHOUT REPLACEMENT across this town,
   // draw-free; the index rides on the tie as `proseVariant` (see createTieProseDraw).
-  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions }))); // F1: the place's force words
+  const drawTieProse = createTieProseDraw(forceWordsOf(defenseFactsOf({ institutions })), settled ? () => birthFactsOf({ institutions, config, tier: settled.tier, powerStructure: { government: settled.government } }) : null); // F1: the place's force words; CENSUS-1f: the roster and the government only (R-Z)
 
   npcs.forEach(npc => {
     const maxRelationships = randInt(2, 3);

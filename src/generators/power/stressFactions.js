@@ -5,7 +5,7 @@
  */
 import { random as _rng } from '../../kernel/rngContext.js';
 import { getInstFlags } from '../helpers.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; // F1: one line, so no cited line moves
-import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA } from '../../data/powerData.js';
+import { FACTION_DESCRIPTORS, FACTION_DESCRIPTORS_EXTRA, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
 
 /** A roster name compared loosely: case and a leading article set aside. */
 const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\s+/, '');
@@ -28,7 +28,9 @@ const nameKey = (name) => String(name || '').trim().toLowerCase().replace(/^the\
 const firstUnusedPoolName = (factions, category) => {
   const used = new Set(factions.map((f) => nameKey(f.faction)));
   const pool = [...(FACTION_DESCRIPTORS[category] || []), ...(FACTION_DESCRIPTORS_EXTRA[category] || [])];
-  return pool.find((name) => !used.has(nameKey(name))) ?? null;
+  const name = pool.find((n) => !used.has(nameKey(n))) ?? null;
+  noteDeclared(name, FACTION_NAME_SIBLINGS, { poolId: `powerData:FACTION_DESCRIPTORS.${category}`, surface: 'power', drawKind: 'T' }); // CENSUS-1f: declared, carried, never pre-filtered (the self-check judges it)
+  return name;
 };
 
 /**

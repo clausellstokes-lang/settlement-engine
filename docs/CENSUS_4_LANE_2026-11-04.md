@@ -341,3 +341,96 @@ only the merged composeStateProse +2 / crisisFactFindings +4.
 services here). What remains is enforcement, which belongs to CENSUS-1e (sites 19, 18 and 15 and the `npcStructure` lookup):
 merge 1e's tip, re-measure the goal claims and the declared share, and count births by cause as each site lands. No
 further table work is owed here unless the chair rules on questions 1–4.
+
+## CENSUS-4d (2026-11-05)
+
+**Merges.** census-1b at `1c00ed2` (a fast-forward: 1e had already merged 4c's tip; no merge commit; the wiring
+census verified through its door, stamp unchanged); census-1b at `f2367a4` (`a432465`, clean: 1e unit 2's
+STRESS_GOAL_OVERRIDES, threatProfile, DEFENSE_CONTEXT and its FACTION_DESC_SIBLINGS R-Q cure). Each: `wiring-census
+--check` (709 / 2324 / 165) and `gen:dossier-prose --check` green. ⚠ The checkout had HEAD detached and the local
+branch ref stale at `83325f5` again (4c met the same); after an ancestor check the ref was re-pointed and checked
+out before the first push. Sites 19 / 18 / 15 are **not** on 1e's tip at 04:45Z, so step 3 did not run.
+
+| unit | commit | what | golden (525) | soak records (1,000) |
+|---|---|---|---|---|
+| 1 | (the ff merge) | the registry goal lookup arrives; re-measure | — (1e's) | 345 vs 4c's tip, three causes, all merged: the registry goal lookup 234 (`npcs[].goal.short`, `structuralPosition`, `activeConstraint`, `settlementCondition`, `structuralRank` + the member mirror); 1e's `SAFETY_LINE_SIBLINGS` 111 (`economicState.safetyProfile`); `FACTION_DESC_SIBLINGS` 29 (`powerStructure.factions[].desc`, `recentConflict`, `pressureSentence` 3) |
+| 2a | `aa76fb4` | answer 1: the three council goals declare `excludes: ruler: lord, ruler: occupier`; the goal site is handed the ruler kind | 0 | (first cut, withdrawn by 2a fix) |
+| 2a fix | `6c66e38` | the site hands `{ government }` only | 0 | **20** (2a + fix vs base): `npcs[].goal.long` 20 / `.short` 16 + the member mirror |
+| 2b | `fa39513` | answer 2: the catalogue's `guild` tag leaves the village scribe, crier, mint and veterans' lodge | **142** (city 61, metropolis 78, town 3) | **333** |
+| 2c | `1abf16d` | answer 3: the bowyers' "Military supply" → "to the local guard", `needs: guardPresence` | **212** | **346** |
+
+**Unit 1 — the goal claims, re-measured** (the 1,000; 4c's tip → this merged base): "current stability" **119 → 0**,
+"competent administration" **21 → 0**, "stable institutional competition" **33 → 0** (every claim, every crisis
+kind); `coh:crisis-blind-prose` 231 → 35 (left: "food secure under mass_migration" 32 — R-P(1), CENSUS-2c's; "pilgrims
+queue patiently" 3). The 60: 22 → 2. The base also carried `cert:false-presumption` **8** (24 occurrences, all
+`rulingStructure:FACTION_DESC_SIBLINGS #1 'no militia'`, 1e/5b's) and `A-12` 18 → 3; neither this lane's.
+
+**Unit 2a (answer 1, R-V).** `birthFactsOf` takes `powerStructure` and forwards it to `factsOf`; the goal site passes
+`{ government: config._government }` (`npcConfig._government`, beside `_dominantFaction`). ⚠ **The first cut handed
+the whole power structure** and lit `guild.js`'s guild-POWER branch at the draw: a guild faction is NOT settled there
+(the density law can empty it), so Mayor#0's `needs: guild` goal was admitted in soak1k-224, -842, -878 and failed the
+self-check (`cert:false-presumption` 8 → 11). Caught on the unit's own 1,000 before the next unit; the fix hands
+only the measured fact. Lesson for R-V: hand the ONE measured field, never the container. Base: 28 NPCs in 16 births
+printed a council goal under a lord (0 under an occupier); at the fix: 0.
+
+**Unit 2b (answer 2, R-X).** Retagged at the catalogue; `isCommerceGuild` untouched. Of 4c's three births,
+**soak1k-236 and -320 revert** (no guild atom, no Guild Master); **soak1k-452 does not**: it also holds a "Merchant
+Guilds" faction, so the atom holds by the record (4c's "the only guild is the tag" was wrong for 452) — only its
+scribe's Guild Master goes. Soak, by path: `institutions[].tags` 333; the Guild Master's chosen house
+(`filterByGuild`'s one pick over fewer candidates: `npcs[].title` / `.institution` + mirror) 168;
+`simulationTrace[].downstreamEffects` 48; **7 villages lose a false Guild Master** (soak1k-236, -320, -452, -512,
+-668, -752, -866; the slot refills, the roster count holds; the downstream NPC sequence moves). Golden: tags 142,
+Guild Master's house 92, trace 9. The red-first was run on `1c00ed2` (the catalogue is identical at `6c66e38`; the
+commit body names the latter).
+
+**Unit 2c (answer 3, R-W).** Golden 212 / soak 346: `availableServices.equipment[].desc`, and the record battery's
+false `battery.defense-words` "garrison without a garrison" on the old text gone (golden 40, soak 62 receipts; 15
+judgment statuses). The phase-A ledger row follows the table.
+
+**Answer 4 (a palisade is not a gate):** listed, no change; a line that wants a palisade's opening declares
+`palisade` with its own wording.
+
+**The 60 and the 1,000 as a diff (R-B).** BEFORE = the merged base `1c00ed2`; MINE = `1abf16d` (units 2a–2c, no
+second merge); AFTER = the tip `a432465` (+ 1e's `f2367a4`).
+
+| class (settlements) | the 60 before → after | the 1,000 before → mine → after |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same → same (4c's tip: 119 · 21 · 33) |
+| coh:crisis-blind-prose | 2 → 2 | 35 → 35 → 35 |
+| reader:faction-role-fit (accepted) | 18 → 18 | 348 → 348 → 348 |
+| reader:relation-types · rule-text · possessive-slip | 10 · 0 · 0 → same | 147 · 0 · 0 → same → same |
+| **A-12:self-vouch-false** | 0 → 0 | **3 → 4 → 4** (see below) |
+| cert:false-presumption | 0 → 0 | 8 → 8 → **0** (1e's cure, `f2367a4`) |
+| every other class | identical | identical (info:battery-would-not-vouch 691 → 676: the bowyers' false finding) |
+| `declared-share` npcs | 153/2,584 → 180/2,658 | 2,361/41,732 (0.057) → 2,624/41,731 (0.063) → 2,830/42,932 (0.066) |
+| `declared-share` institutions · services | — | 1/1 · 115/115 → same (sites 18 / 15 not wired) |
+
+**⚠ The one rise, A-12 3 → 4, is an unmasking (CONFIRMED on the birth).** soak1k-573: at 2b its receipt did not vouch
+(the bowyers' false `defense-words` finding); at 2c that finding is gone, the receipt vouches, and the page also
+carries "Food Secure." under the migration — the instrument row R-P(1) rules a false reading (the food record counts
+the influx) and assigns to CENSUS-2c to retire. All four A-12 at the tip (284, 573, 648, 988) are that one row; they
+fall to 0 when 2c retires it. Not reverted: the reworded line is the ruling's and true.
+
+**Rows moved, by cause (nothing re-recorded):** golden 2b 142 + 2c 212 (row sets overlap; one cause each); soak
+records 2a 20, 2b 333, 2c 346; no manifest row; wiring census: 0 rows (stamp unchanged at both merges); pins: none
+(the defence-reach fixture quotes the old bowyers sentence as a string and stays).
+
+**Tests.** New: `tests/generators/stressGoalRulerDeclared.test.js` (7), `tests/data/catalogGuildTag.test.js` (7),
+`tests/data/bowyersMilitarySupply.test.js` (2), each red-first. Governing suites: 2b 67 files, the same 13 reds base
+and tip; 2c 59 files, the same 43. At the tip the nine declaration suites of this lane and 1e's goal lookup pass
+(33/33). typecheck:ratchet 167/167; domain:strict only the merged composeStateProse +2 / crisisFactFindings +4.
+
+**Open questions for the chair.**
+1. A-12's four births are R-P(1)'s instrument row (CENSUS-2c): confirm the rise is read as the unmasking, not a STOP.
+2. Two more catalogue rows carry `guild` beside a military tag and are not guilds by their text: Hired blades
+   (`military, guild`) and Contract killer (`guild, military`, criminal — `isCommerceGuild` already refuses the
+   criminal group). Customs house, Auction house, Assay office carry it too ("run by royal or municipal officials").
+   Retag under R-X (the catalogue's owner, this lane), or leave?
+3. R-V's rule, as learned in 2a: should the vocabulary doc say a site is handed the measured FIELD, never the
+   container (a container carries unsettled siblings)?
+
+**Where CENSUS-4e starts.** The tables are declared and answers 1–3 applied. What remains is 1e's enforcement of
+sites 19 (ties), 18 (descriptions) and 15 (services): merge 1e's tip when they land, re-measure the ties,
+descriptions and services (`declared-share` institutions / services from the render ledger; births by cause —
+the bowyers' line will then print only where a guard stands, which is every golden birth that holds the guild), and
+take the 1,000 as a diff against `a432465`. The 3 description rows "waiting on order" (R-Q) stay.

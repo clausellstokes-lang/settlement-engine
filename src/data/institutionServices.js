@@ -799,7 +799,7 @@ export const INSTITUTION_SERVICES = {
     "Custom orders": { on: false, p: 0.4, desc: "Bespoke work for hunters and military officers. Longer wait, higher cost." }
   },
   "Bowyers & fletchers (guild)": {
-    "Military supply": { on: true,  p: 1.0, desc: "Contract supply of bows and arrows to garrison and militia. Volume pricing.", needs: ["garrison","militia"] },
+    "Military supply": { on: true,  p: 1.0, desc: "Contract supply of bows and arrows to the local guard. Volume pricing.", needs: ["guardPresence"] }, // CENSUS-4d (R-W): whichever armed force stands; the old "garrison and militia" held in no birth
     "Quality bows": { on: true, p: 0.9, desc: "Guild-certified bows meeting standardized draw weights and lengths." },
     "Arrow production": { on: true, p: 0.9, desc: "Consistent, high-volume arrow production for military and hunting." },
     "Apprenticeship": { on: false, p: 0.5, desc: "Formal training in bow-making and fletching craft." }

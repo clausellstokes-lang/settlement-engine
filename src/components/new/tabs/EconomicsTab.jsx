@@ -25,7 +25,7 @@ import { drawnAtMount } from '../../../domain/display/stateProse/dossierMounts.j
 import { generalDeskLines } from '../generalDeskRead.js'; // DS-GEN-18 · the general desk's ONE caller
 import Button from '../../primitives/Button.jsx';
 import { institutionDisplayName } from '../../../domain/display/institutionDisplayName.js';
-import { displayTradeList, tradeMarksOnPage } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
+import { displayTradeList, tradeMarksOnPage, revenuesOffTheLists } from '../../../domain/display/tradeListDisplay.js'; // CENSUS-3b unit 3 — the trade lists' one display reader (kind A, filterDeclared)
 import { resourceDisplayName } from '../../../domain/display/resourceDisplayName.js'; // §934.22 item 2 — the native-resource label seam (the Imports pills)
 import { edged } from '../../../design/edgedBox.js';
 import { foodStoresWords } from '../../../domain/summary/tonightSheet.js'; // the stores sentence's ONE writer (TRIM-2 request 3)
@@ -441,6 +441,11 @@ export function EconomicsTab({economicState, settlement, narrativeNote, saveId =
             </div>
             );
           })}
+          {/* CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds the
+              fact behind them; unmeasured, because the record holds no share for them. */}
+          {revenuesOffTheLists(s).length>0&&<div style={{fontSize:proseFontSize(FS.xs, mobile),color:MUTED,lineHeight:1.45}}>
+            Also earned, with no share recorded: {revenuesOffTheLists(s).map((r,i)=><span key={r.text}>{i>0?' ':''}<strong style={{fontWeight:700}}>{r.text}</strong>, {r.desc}</span>)}
+          </div>}
         </div>
       </Section>}
 
