@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1291
+    "producerIndexFiles": 1292
   },
   "totals": {
     "pools": 709,
@@ -43002,10 +43002,18 @@
       "name": "ARRIVAL_MEMORIES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:183-191 chooseClosing (memory key) then :293 one pickRandom (NO agreeingLine fi",
-      "lines": 17,
+      "lines": 39,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 17,
+      "lineDeclares": {
+        "crisis: any": 9,
+        "institution: temple": 1,
+        "market": 1,
+        "navigable": 1,
+        "no crisis: occupied": 2,
+        "no crisis: plague_onset": 1,
+        "no crisis: threat": 2
+      },
+      "undeclared": 27,
       "crisisScoped": false
     },
     {
@@ -43014,10 +43022,21 @@
       "name": "ARRIVAL_PEOPLE",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:288-289 agreeingLine (pickRandom, one redraw on a market/catch contradiction); ",
-      "lines": 43,
+      "lines": 48,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 43,
+      "lineDeclares": {
+        "crisis: any": 28,
+        "market": 2,
+        "navigable": 1,
+        "no crisis: hunger": 3,
+        "no crisis: infiltrated": 1,
+        "no crisis: occupied": 4,
+        "no crisis: plague_onset": 1,
+        "no crisis: recently_betrayed": 1,
+        "no crisis: threat": 1,
+        "no crisis: under_siege": 1
+      },
+      "undeclared": 18,
       "crisisScoped": false
     },
     {
@@ -43026,10 +43045,16 @@
       "name": "ARRIVAL_SCENES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:216-228 (sceneKey from route/terrain/market fragments, then one pickRandom on t",
-      "lines": 11,
+      "lines": 26,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 11,
+      "lineDeclares": {
+        "crisis: any": 7,
+        "institution: mill": 1,
+        "institution: smith": 1,
+        "population: ≥ middling": 1,
+        "walls": 1
+      },
+      "undeclared": 15,
       "crisisScoped": false
     },
     {
@@ -43038,10 +43063,20 @@
       "name": "ARRIVAL_SENSES",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:150-165 chooseSense (pickRandom over keys within one point of best) then :283-2",
-      "lines": 282,
+      "lines": 320,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 282,
+      "lineDeclares": {
+        "crisis: any": 40,
+        "institution: mill": 2,
+        "market": 3,
+        "navigable": 3,
+        "no crisis: hunger": 6,
+        "no crisis: monster_pressure": 1,
+        "no crisis: threat": 4,
+        "no crisis: under_siege": 9,
+        "no crisis: unrest": 1
+      },
+      "undeclared": 275,
       "crisisScoped": false
     },
     {
@@ -43050,10 +43085,14 @@
       "name": "ARRIVAL_TENSIONS",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:173-197 chooseClosing (key) then :293 one pickRandom (NO agreeingLine filter); ",
-      "lines": 10,
+      "lines": 20,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 10,
+      "lineDeclares": {
+        "crisis: any": 4,
+        "no crisis: hunger": 3,
+        "no starving": 3
+      },
+      "undeclared": 16,
       "crisisScoped": false
     },
     {
@@ -43062,16 +43101,17 @@
       "name": "HOOK_LINE_POOLS",
       "drawKind": "H",
       "drawSite": "src/domain/dossier/hookLines.js:190-214 createConflictHookDraw (fnv1a32(`${a}>${b}::${issue}::${family}`) base, then +1 ",
-      "lines": 7,
+      "lines": 42,
       "declares": [],
       "lineDeclares": {
+        "guardPresence": 1,
         "market": 1,
         "no crisis: famine": 1,
         "no crisis: under_siege": 3,
         "no famine": 1,
         "no starving": 1
       },
-      "undeclared": 3,
+      "undeclared": 37,
       "crisisScoped": false
     },
     {
@@ -43080,10 +43120,10 @@
       "name": "LINE_ROLE_CLAUSE",
       "drawKind": "T",
       "drawSite": "src/domain/crisis/crisisHooks.js:184-187 lineRoleHolderOf → LINE_ROLE_CLAUSE[holder.role](holderWords) → castSentence → ",
-      "lines": 0,
+      "lines": 7,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 0,
+      "undeclared": 7,
       "crisisScoped": false
     },
     {
@@ -43092,10 +43132,15 @@
       "name": "POLITICAL_FLAVOR",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/historyCoherence.js:44-84 stressProfileDrawn → pickRandom2(POLITICAL_FLAVOR[pattern])(subset) →",
-      "lines": 11,
+      "lines": 56,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 11,
+      "lineDeclares": {
+        "crisis: any": 5,
+        "institution: granary": 1,
+        "magic": 4,
+        "market": 1
+      },
+      "undeclared": 46,
       "crisisScoped": false
     },
     {
@@ -43104,10 +43149,10 @@
       "name": "PRESSURE_SENTENCES",
       "drawKind": "R",
       "drawSite": "src/generators/narrativeGenerator.js:790-797 generatePressureSentence → filter(defenseWordsFindings) → pickRandom2",
-      "lines": 0,
+      "lines": 15,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 0,
+      "undeclared": 15,
       "crisisScoped": false
     },
     {
@@ -43116,10 +43161,15 @@
       "name": "STRESSOR_SPINE_PHRASES",
       "drawKind": "T",
       "drawSite": "src/domain/simulationSpine.js:374-402 strainPhraseOf / fearPhraseOf → STRESSOR_SPINE_PHRASES[type].strain|fear",
-      "lines": 30,
+      "lines": 32,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 30,
+      "lineDeclares": {
+        "no ruler: council": 1,
+        "no walls": 1,
+        "ruler: council": 1,
+        "walls": 1
+      },
+      "undeclared": 28,
       "crisisScoped": false
     },
     {
@@ -43128,10 +43178,31 @@
       "name": "STRESS_DESCS",
       "drawKind": "R",
       "drawSite": "src/generators/narrative/arrivalScene.js:213-227 (primary stress; filter at :224; one pickRandom at :227 on the ’arrival",
-      "lines": 140,
+      "lines": 103,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 140,
+      "lineDeclares": {
+        "garrison": 1,
+        "gate": 36,
+        "guardPresence": 15,
+        "healer": 2,
+        "institution: granary": 2,
+        "institution: smith": 3,
+        "institution: tavern": 7,
+        "institution: temple": 3,
+        "market": 23,
+        "migration: influx": 6,
+        "militia": 2,
+        "no crisis: hunger": 6,
+        "no crisis: succession": 4,
+        "no crisis: threat": 5,
+        "no crisis: under_siege": 1,
+        "no crisis: unrest": 5,
+        "no war: front": 1,
+        "soldiers": 2,
+        "walls": 12,
+        "watch": 4
+      },
+      "undeclared": 31,
       "crisisScoped": false
     },
     {
@@ -43164,10 +43235,19 @@
       "name": "CAST_REASONS",
       "drawKind": "T",
       "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
-      "lines": 41,
+      "lines": 45,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 41,
+      "lineDeclares": {
+        "crisis: hunger": 1,
+        "garrison": 1,
+        "migration: influx": 1,
+        "no crisis: hunger": 1,
+        "no garrison": 1,
+        "no migration: influx": 1,
+        "no walls": 1,
+        "walls": 1
+      },
+      "undeclared": 37,
       "crisisScoped": false
     },
     {
@@ -43209,10 +43289,26 @@
       "name": "INSTITUTION_DESC_VARIANTS",
       "drawKind": "H",
       "drawSite": "assembleInstitutions.js:65 shipFreeDesc + :1004 kernel/proseHash.js pickVariant over [catalogDesc, ...variants]",
-      "lines": 1036,
+      "lines": 1037,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 1036,
+      "lineDeclares": {
+        "coast": 5,
+        "garrison": 6,
+        "gate": 2,
+        "guild": 25,
+        "market": 11,
+        "militia": 1,
+        "navigable": 2,
+        "no garrison": 2,
+        "no walls": 1,
+        "river": 24,
+        "terrain: forest": 10,
+        "tier: ≤ hamlet": 6,
+        "tier: ≥ city": 15,
+        "walls": 8,
+        "watch": 7
+      },
+      "undeclared": 921,
       "crisisScoped": false
     },
     {
@@ -43221,10 +43317,29 @@
       "name": "INSTITUTION_SERVICES",
       "drawKind": "R",
       "drawSite": "services/institutionServices.js:69/203 one _rng()<p roll per eligible definition (A-printed at serviceRollMaterializatio",
-      "lines": 1039,
+      "lines": 980,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 1039,
+      "lineDeclares": {
+        "coast": 2,
+        "gate": 6,
+        "guardPresence": 1,
+        "guild": 3,
+        "institution: mill": 3,
+        "institution: temple": 1,
+        "magic": 13,
+        "market": 4,
+        "militia": 3,
+        "navigable": 3,
+        "no walls": 2,
+        "organised crime": 1,
+        "river": 2,
+        "terrain: forest": 1,
+        "tier: ≤ village": 2,
+        "tier: ≥ city": 3,
+        "walls": 4,
+        "watch": 6
+      },
+      "undeclared": 927,
       "crisisScoped": false
     },
     {
@@ -43296,10 +43411,10 @@
       "name": "NPC_CRIMINAL_SECRETS",
       "drawKind": "R",
       "drawSite": "factionLeaderSecret.js:89 weighted type roll + :110 pickFromArray(eligiblePool)",
-      "lines": 124,
+      "lines": 62,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 124,
+      "undeclared": 62,
       "crisisScoped": false
     },
     {
@@ -43308,10 +43423,19 @@
       "name": "NPC_FACTION_GOALS",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:613 pickFromArray (keyed by role; reached only if the stress-goal roll at :608 fails)",
-      "lines": 169,
+      "lines": 55,
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 169,
+      "lineDeclares": {
+        "guild": 1,
+        "hospital": 1,
+        "navigable": 1,
+        "no navigable": 1,
+        "temple": 2,
+        "tier: ≥ city": 1,
+        "tier: ≥ town": 1,
+        "walls": 1
+      },
+      "undeclared": 46,
       "crisisScoped": false
     },
     {
@@ -43320,15 +43444,17 @@
       "name": "NPC_FACTION_LOYALTY",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:659/683/687 drawLoyalty → drawUnique (NPC plot-hook titles, keyed by category)",
-      "lines": 80,
+      "lines": 81,
       "declares": [],
       "lineDeclares": {
         "guardPresence": 9,
         "institution: temple": 1,
         "magic": 3,
-        "market": 1
+        "market": 1,
+        "navigable": 1,
+        "no navigable": 1
       },
-      "undeclared": 66,
+      "undeclared": 65,
       "crisisScoped": false
     },
     {
@@ -43402,10 +43528,10 @@
       "name": "NPC_SECRETS",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:627 pickFromArray (goal fallback by category)",
-      "lines": 42,
+      "lines": 14,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 42,
+      "undeclared": 14,
       "crisisScoped": false
     },
     {
@@ -43443,10 +43569,10 @@
       "name": "STRESS_ECONOMIC_EFFECTS",
       "drawKind": "H",
       "drawSite": "relationshipArchetypes.js:138 createTieProseDraw (fnv, without replacement); archetype chosen by relationshipArchetypes.",
-      "lines": 36,
+      "lines": 18,
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 36,
+      "undeclared": 18,
       "crisisScoped": false
     },
     {
@@ -43455,12 +43581,21 @@
       "name": "STRESS_INSTITUTION_EFFECTS",
       "drawKind": "R",
       "drawSite": "npcGenerator.js:778-780 pickRandom2 (keyed by stress kind; secretsHeldByFoodRecord pre-filter; {npc} is the other-NPC sl",
-      "lines": 235,
+      "lines": 96,
       "declares": [],
       "lineDeclares": {
-        "migration: influx": 1
+        "gate": 2,
+        "institution: temple": 1,
+        "market": 1,
+        "migration: exodus": 1,
+        "migration: influx": 5,
+        "no ruler: lord": 6,
+        "no ruler: occupier": 6,
+        "other npc": 20,
+        "starving": 1,
+        "tier: ≥ town": 1
       },
-      "undeclared": 234,
+      "undeclared": 63,
       "crisisScoped": false
     },
     {
@@ -43531,7 +43666,7 @@
       "name": "TRAD_HELD_SUMMARY",
       "drawKind": "H",
       "drawSite": "",
-      "lines": 0,
+      "lines": 4,
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
