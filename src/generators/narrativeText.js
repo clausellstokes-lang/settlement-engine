@@ -297,6 +297,11 @@ export const POLITICAL_FLAVOR = {
           ? `The ${s.name} ended, but the habits of occupation never fully left: the way people speak about authority, the way they watch strangers, the way official records from that period are still treated with suspicion`
           : `Everything before the ${s.name} is referred to as 'the old settlement'. What exists now was built after, by different people, with different assumptions, over different rubble`;
     },
+    // CENSUS-2g unit 4 (R-AS amended, the chair's answer 1): LISTED, not split, not declared. The
+    // branch is chosen by the EVENT'S TYPE, so the monster branch presumes walls + a militia it never
+    // verifies; printed in 0 of 1,000, both facts true on the final record wherever it could print;
+    // waits on a per-branch closure declaration channel (the mechanism lane's wave 2). The other
+    // branch is colour. A split would move 166 of 1,000 births by the modulus (refused).
     (r) => {
       const s = r.find((o) => o.severity === "catastrophic") || r[0];
       return s.type === "monster_incursion"
