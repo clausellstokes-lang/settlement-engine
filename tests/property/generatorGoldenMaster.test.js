@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — X-46 CAR 1B, FIRST STEP (U1–U3), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (metropolis 84; thorp, hamlet, village, town, city 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 79c442330): the metropolis roll has no ceiling, the custom population input has a floor and no ceiling, and the band position is read on a log scale. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S11 (the tree of 79c442330 with the door paths carried from
+ *   the branch, the previous record's writes committed). f0d5b304.. -> 0dec0a6d..
+ *
  * 2026-11-04 — T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json; the cloud chair signs under the owner's delegation, vetoable).
  *   84 OF 525 ROWS MOVED (village 84; thorp, hamlet, town, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent

@@ -1,0 +1,28 @@
+{
+  "_doc": "X-46 CAR 1B, FIRST STEP (U1–U3), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 1b, first step (U1–U3): the metropolis roll has no ceiling, the custom population input has a floor and no ceiling, and the band position is read on a log scale. THE MOVER, NAMED: first-parent step 79c442330 of lane/landing-rung1-2026-11-04 (\"compose: lane/x46-1b-noceiling-2026-11-04 (at 3c77a4bfc) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 566 (NO CEILING ON A METROPOLIS, the owner, 2026-11-04, with the owner's compromise quoted in the same paragraph). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S11 is the tree of 79c442330 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from 79c442330 by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at 79c442330, S10 -> S11): generator-golden-master 84 of 525 rows (metropolis 84; thorp, hamlet, village, town, city 0), the key set identical; cartography-calibration-corpus 77 of 504 rows; espionage-dormancy-fence 60 of 360 rows (metropolis 60; thorp, hamlet, village, town, city 0), 360/360 distinct, 64cff250.. -> fff82c27... A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "wait, we have a cap on metropolis? it should not have a cap · the random roll goes up to 100,000 but a user can log any number past that and everything where appropraite, still scales",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 1b, first step (U1–U3): the metropolis roll has no ceiling, the custom population input has a floor and no ceiling, and the band position is read on a log scale",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 79c442330",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}
