@@ -40,11 +40,12 @@ const capFirst = (s) => (typeof s === "string" && s.length ? s[0].toUpperCase() 
  * SIZE ruling 2 (2026-11-03): speak each line in the settlement's own tier noun ("the thorp no
  * longer has"), through the dossier kernel's own helper, on the pressure detail's tier.
  * Identity for a town or an unknown tier. Mapping the array draws nothing, so no pick moves.
- * @param {{tier?: unknown}} r @param {string[]} lines @returns {string[]}
+ * @param {{tier?: unknown}} r @param {Array<string | { text: string }>} lines @returns {Array<string | { text: string }>}
  */
 const speakTierLines = (r, lines) => {
   const noun = tierNounFor(r && r.tier);
-  return lines.map((line) => speakTierNoun(line, noun));
+  // a declared row (CENSUS-2d, R-C) keeps its declaration and speaks its text
+  return lines.map((line) => (typeof line === 'string' ? speakTierNoun(line, noun) : { ...line, text: speakTierNoun(line.text, noun) }));
 };
 
 // ─── Per-stress pressure sentences (consumed by narrativeGenerator) ──────────
@@ -72,10 +73,10 @@ const speakTierLines = (r, lines) => {
 export const PRESSURE_SENTENCES = {
   under_siege: (r) => [
     `${r.name} is surrounded. Supply lines are cut, morale is fracturing, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} is deciding whether to negotiate terms or hold out for relief that may not be coming.`,
-    `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`,
+    { text: `The siege has entered its second week; ${r.govFaction || "the council"} controls the rationing and the gates, which means they control everything else too, for now.`, needs: ['gate'] },
     `Every ${r.commodity || "resource"} cache in ${r.name} has been inventoried and argued over; the next argument will be about what to give up and what to defend to the end.`,
-    `The walls of ${r.name} have held so far, which is the problem. A quick fall would at least have settled the question of who was to blame, and a slow one leaves ${r.govFaction || "the council"} to answer for every day the relief does not come.`,
-    `${r.name} is learning the arithmetic of a siege: how many mouths, how many days of ${r.commodity || "grain"}, how many of the people on the walls are watching the enemy and how many are watching each other.`,
+    { text: `The walls of ${r.name} have held so far, which is the problem. A quick fall would at least have settled the question of who was to blame, and a slow one leaves ${r.govFaction || "the council"} to answer for every day the relief does not come.`, needs: ['walls'] },
+    { text: `${r.name} is learning the arithmetic of a siege: how many mouths, how many days of ${r.commodity || "grain"}, how many of the people on the walls are watching the enemy and how many are watching each other.`, needs: ['walls'] },
     `Word came into ${r.name} three days ago that the relief column had turned back; ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "the leadership"} has not made it public, and the effort of not making it public is beginning to show.`,
   ],
   famine: (r) => [
@@ -84,7 +85,7 @@ export const PRESSURE_SENTENCES = {
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "Someone"} knows where the hoarded ${r.commodity || "grain"} can be found, and isn't saying, and the reasons for that silence are complicated.`,
     `The bakers of ${r.name} have started cutting the bread with things that are not flour; everyone can taste it, and the fact that nobody complains is the most alarming part.`,
     `${capFirst(r.govFaction) || "The council"} of ${r.name} announced a fair distribution of the ${r.commodity || "grain"} reserves last week; the announcement and the distribution are turning out to be two different things.`,
-    `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`,
+    { text: `Hunger has made ${r.name} quiet. The market still opens, the queues still form, but the haggling has gone out of people. They take what they are given and calculate, silently, how long it will last.`, needs: ['market'] },
   ],
   occupied: (r) => [
     `${r.name} is under occupation; ${r.govFaction || "the administration"} answers to outside authority now, which means every decision made here is made twice: once officially, once actually.`,
@@ -99,7 +100,7 @@ export const PRESSURE_SENTENCES = {
     `Three factions are each waiting for one of the other two to make a mistake. In the meantime, ${r.name} is being administered by inertia.`,
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "The most senior figure"} is the only person all three factions will still speak to, which makes them either the key to resolution or the next target.`,
     `Nothing gets decided in ${r.name} because deciding would require one faction to be seen to win, and none of them can afford to let another be seen to lose. The paralysis is not an accident; it is the only stable arrangement left.`,
-    `${r.name} runs two of everything now (two watches, two courts of a kind, two versions of who is owed what), and the citizens have learned which one to approach for which favour, which is its own kind of government.`,
+    { text: `${r.name} runs two of everything now (two watches, two courts of a kind, two versions of who is owed what), and the citizens have learned which one to approach for which favour, which is its own kind of government.`, needs: ['watch'] },
     `The last thing ${r.topFaction || "the leading faction"} and its rivals agreed on in ${r.name} was that the disagreement should not be allowed to reach the streets; that agreement is the only thing holding, and it is fraying.`,
   ],
   indebted: (r) => [
@@ -127,12 +128,12 @@ export const PRESSURE_SENTENCES = {
     `${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : "One trusted figure"} has become, without anyone deciding it, the person through whom a surprising amount of ${r.name}'s sensitive business now passes, which is either coincidence or the whole design.`,
   ],
   plague_onset: (r) => [
-    `Something is spreading in ${r.name}; the quarantine is partial, the healers are overwhelmed, and the ${r.topNPCRole || "official"} who first identified it has gone quiet in a way that suggests either pressure or something worse.`,
+    { text: `Something is spreading in ${r.name}; the quarantine is partial, the healers are overwhelmed, and the ${r.topNPCRole || "official"} who first identified it has gone quiet in a way that suggests either pressure or something worse.`, needs: ['healer'] },
     "The disease has not yet become a plague, but the window for preventing that outcome is narrowing; every day the quarantine is ignored or negotiated around makes the arithmetic worse.",
     `${capFirst(r.govFaction) || "The council"} is managing disclosure of the outbreak, which means what residents know and what is actually true have started to diverge.`,
     `The sickness in ${r.name} has already sorted the population into those who can afford to leave, those who can afford to isolate, and those who can do neither, and the last group has noticed the sorting.`,
-    `The healers of ${r.name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.`,
-    `A cordon has gone up around one quarter of ${r.name}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way it goes.`,
+    { text: `The healers of ${r.name} have stopped arguing about what the illness is and started arguing about what to do with the bodies, which is the point at which denial stops being an option for anyone.`, needs: ['healer'] },
+    { text: `A cordon has gone up around one quarter of ${r.name}, and the people inside it and the people outside it are already telling different stories about why: stories that will outlast the sickness whichever way it goes.`, needs: ['population: > small'] },
   ],
   succession_void: (r) => {
     const weeksAgo = Math.floor(_rng() * 8) + 2;
@@ -141,7 +142,7 @@ export const PRESSURE_SENTENCES = {
       `Three different people in ${r.name} believe they should be in charge; two of them are wrong; none of them is certain; all of them are acting.`,
       "The power vacuum is obvious to everyone; the question is not who fills it but what they do to fill it and who they owe when they have.",
       `The old authority in ${r.name} left no clear heir and a great many people who benefited from the old arrangement; each of them is now discovering that a claim is only as good as the people willing to enforce it.`,
-      `${r.name} is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.`,
+      { text: `${r.name} is being run, for the moment, by whoever holds the keys, the seals, and the granary: three things that used to be held by one office and are now held by three people who do not trust one another.`, needs: ['institution: granary'] },
       `The succession in ${r.name} will be settled by the ${r.commodity || "trade"} more than by any claim of blood or law: whoever the merchants and the creditors decide to deal with becomes, retroactively, the legitimate successor.`,
     ];
   },
@@ -149,9 +150,9 @@ export const PRESSURE_SENTENCES = {
     `The attacks on ${r.name}'s outlying farmsteads are following a pattern that doesn't fit opportunistic predation; someone or something is directing this, and the evidence is available to anyone who looks carefully.`,
     `The settlement's defences are adequate for normal times; these are not normal times, and ${r.topNPCName ? r.topNPCName + ", the " + r.topNPCRole + "," : r.milForce || "the defenders"} knows it.`,
     "Three farmsteads have been abandoned in the last month; the families who abandoned them know something about what they saw that they haven't reported to the authorities.",
-    `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`,
+    { text: `${r.name} has drawn its edges inward (fields left unworked, a mill standing idle) trading the ${r.commodity || "harvest"} it needs for a perimeter ${r.milForce || "the defenders"} can actually hold.`, needs: ['institution: mill'] },
     `The bounty ${r.govFaction || "the council"} posted for the creature has attracted the wrong sort of help to ${r.name}: hunters who are more dangerous than useful, and who will expect payment whether or not the thing is dead.`,
-    `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`,
+    { text: `Whatever is preying on ${r.name} has learned the settlement's patterns (when the patrols pass, where the walls are thin) which is not something a beast does, and admitting that is the first hard conversation no one wants to open.`, needs: ['walls'] },
   ],
   // Compound-branched pools: the DATA branch (r.compound) selects a variant array,
   // then generatePressureSentence does ONE pickRandom2 over it. Every winning-branch
@@ -177,7 +178,7 @@ export const PRESSURE_SENTENCES = {
     var o;
     return (((o = r.compound) == null ? void 0 : o.economyOutput) || 50) >= 50
       ? [
-          `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`,
+          { text: `${r.name} is absorbing more people than it was built for. The new arrivals and the old residents are not yet one community. They share streets and markets but not language, custom, or trust. ${capFirst(r.govFaction) || "The governing authority"} is managing the rate of change rather than directing it, and the rate of change is not cooperating.`, needs: ['market'] },
           `The ${r.commodity || "trade"} that made ${r.name} worth coming to cannot keep pace with the number who came. Housing is short, rents have doubled, and the newcomers who were welcomed as labour a year ago are being spoken of as a problem this one, though they have done nothing but arrive.`,
           `${r.name} has grown a second town at its edges. Newer, poorer, and not quite governed by the same rules as the first. ${capFirst(r.govFaction) || "The governing authority"} has not decided whether the outer town is part of the settlement or a thing that has happened to it, and the indecision is becoming a policy of its own.`,
         ]
@@ -186,7 +187,7 @@ export const PRESSURE_SENTENCES = {
       // arm tells the same arrival as a town that cannot carry it, never a departure. Three lines for three, so the
       // draw does not move.
       : [
-          `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`,
+          { text: `${r.name} is taking in more people than it can feed. The newcomers came for work the town no longer has, and ${r.govFaction || "the governing authority"} is rationing what there is between families who have lived here for generations and families who arrived last month.`, needs: ['starving'] },
           `Every season brings more households to ${r.name} and no more work. The newcomers camp where they can, and ${r.govFaction || "the governing authority"} is counting heads it has no plan for.`,
           `The road into ${r.name} is busier than the road out, and both are watched. By ${r.govFaction || "the governing authority"}, which can neither turn people away nor keep them fed, and by the old residents, who are keeping a private account of who arrived.`,
         ];
@@ -196,9 +197,9 @@ export const PRESSURE_SENTENCES = {
     return (((o = r.compound) == null ? void 0 : o.militaryEffective) || 50) >= 55 &&
       (((d = r.compound) == null ? void 0 : d.economyOutput) || 50) >= 45
       ? [
-          `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`,
-          `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "export"} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`,
-          `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`,
+          { text: `${r.name} is at war and, for now, on the right side of it. Contracts are flowing, the garrison is reinforced, and the crown is paying. The men who left to fight have not come back, which is a grief that runs beneath the commerce. The question is whether the war ends before the accounts do.`, needs: ['garrison'] },
+          { text: `The war has been good to ${r.name} so far, which is an uncomfortable thing to be. Being on the right side of it means the forges run day and night and the ${r.commodity || "export"} trade has never been dearer, and it means the settlement now needs the war to continue in order to pay for what the war has already cost it.`, needs: ['institution: smith'] },
+          { text: `${r.name} is prospering on the right side of it: full warehouses, a reinforced garrison, coin moving fast. Prosperity built on a war is a wager that the war will end at the right moment, and no one in ${r.name} controls the moment.`, needs: ['garrison'] },
         ]
       : [
           `${r.name} is losing people and resources to a war it did not choose the terms of. Conscription has hollowed out the skilled workforce. ${capFirst(r.govFaction) || "The governing authority"} signed a requisition order last week that it cannot afford and could not refuse. The settlement is loyal. It is also running thin.`,
@@ -214,7 +215,7 @@ export const PRESSURE_SENTENCES = {
   // array), real re-roll variety gained. Index 0 stays the canonical scenario-0 line.
   religious_conversion: (r) => [
     `The new faith in ${r.name} does not yet have a building. It has the congregation. ${capFirst(r.govFaction) || "The authorities"} have not yet decided whether this is a religious matter, a political one, or both, and the delay in deciding is itself a decision that both sides are interpreting.`,
-    `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`,
+    { text: `${r.name}'s religious community has formally split. Both factions hold services, keep records, and claim the legitimate succession. Every legal document that required religious sanction is now in a grey zone that the courts are not equipped to resolve quickly.`, needs: ['institution: temple'] },
     `The conversion order in ${r.name} was formally acknowledged within the week. The compliance was faster than anyone expected. The depth of that compliance is a separate question that no one with authority is asking loudly, because the answer would require a response.`,
     `The new faith has taken the young of ${r.name} first, which the old faith has noticed and cannot answer. You cannot argue a congregation back, and every festival now draws two crowds of visibly different ages to two different squares.`,
     `${capFirst(r.govFaction) || "The authorities"} in ${r.name} backed the winning faith a little too early and a little too visibly, and now find that a matter of belief has become a matter of who owes whom: the worst kind of debt to have taken on.`,

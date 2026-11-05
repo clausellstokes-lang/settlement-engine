@@ -23,6 +23,7 @@
  *  - historySiegeNarrative     — the stored-form siege sentence
  */
 
+import { textOf } from '../domain/facts/textOf.js';
 import { defenseWordsFindings } from '../domain/coherence/defenseWordsFindings.js'; import { factsOf } from '../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line
 import {
   clearActiveRng,
@@ -792,8 +793,9 @@ export const generatePressureSentence = settlement => {
     const templates = typeof raw === 'function' ? raw(detail) : raw;
     if (Array.isArray(templates) && templates.length) {
       // F1: a line that names walls, a garrison or soldiers the record lacks is not drawn.
-      const licensed = templates.filter((t) => typeof t !== 'string' || defenseWordsFindings(settlement, t).length === 0);
-      const template = pickRandom2(licensed.length ? licensed : templates);
+      // R-C (CENSUS-2d): a declared row gives back its text; the pick is over the same arrays.
+      const licensed = templates.filter((t) => typeof textOf(t) !== 'string' || defenseWordsFindings(settlement, textOf(t)).length === 0);
+      const template = textOf(pickRandom2(licensed.length ? licensed : templates));
       return typeof template === 'function' ? template(detail) : template;
     }
   }

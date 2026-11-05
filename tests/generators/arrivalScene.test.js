@@ -426,7 +426,7 @@ describe('MASS MIGRATION NAMES ONE DIRECTION (chair ruling 2, 2026-10-30; ODQ §
     const pressure = [
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 80 } }),
       ...PRESSURE_SENTENCES.mass_migration({ name: NAME, govFaction: 'the council', compound: { economyOutput: 20 } }),
-    ];
+    ].map(textOf);
     expect(vignettes.length).toBe(6);
     expect(pressure.length).toBe(6);
     const failures = collectSeedFailures([...vignettes, ...pressure], (line) => {

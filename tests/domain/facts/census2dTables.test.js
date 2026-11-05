@@ -163,3 +163,23 @@ describe('SPATIAL_TEXT (spatialGenerator.js, inline T cells; carried through tex
     expect(by('Close-built stone houses below the ${sacredHouse}')).toEqual([{ needs: ['gate'], excludes: [], crisis: [] }]);
   });
 });
+
+describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor\'s closure; carried through textOf)', () => {
+  it('every declaring ledger line is declared in place, exactly (a crisis-keyed pool does not re-declare its key, R-B1)', () => {
+    // the ledger writes `${name}`; the closure writes `${r.name}`: compared with each `${…}` folded
+    const fold = (t) => t.replace(/\$\{(?:[^{}]|\{[^{}]*\})*\}/g, '${}');
+    const found = new Map([...declaredLiteralsOf('src/generators/narrativeText.js')].map(([k, v]) => [fold(k), v]));
+    const d = ledger('PRESSURE_SENTENCES');
+    const wrong = [];
+    let declaring = 0;
+    for (const pool of d.pools) for (const line of pool.lines) {
+      const want = expectedDeclaration(pool, line);
+      const have = found.get(fold(line.text));
+      if (!(want.needs.length || want.excludes.length || want.crisis.length)) { if (have) wrong.push(`${line.lineId}: declares, the ledger does not`); continue; }
+      declaring++;
+      if (!have || JSON.stringify(have[0]) !== JSON.stringify(want)) wrong.push(`${line.lineId}: ${JSON.stringify(have)} ≠ ${JSON.stringify(want)}`);
+    }
+    expect(wrong).toEqual([]);
+    expect(declaring).toBe(17);
+  });
+});
