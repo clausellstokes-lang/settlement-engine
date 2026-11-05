@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F3 FOOD-WORDS (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-24-f3-food-words.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   136 OF 525 ROWS MOVED (thorp 19, hamlet 12, village 24, town 30, city 24, metropolis 27); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step db8ce5da8): a secret says people are starving only where the food record goes hungry, an export list is goods ("Game meat" is game), a processed food good from the place's own food is an export only on a surplus, and a fishing row on water is a fish source. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S24 (the tree of db8ce5da8 with the door paths carried from
+ *   the branch, the previous record's writes committed). 156dca6a.. -> e1a30c59..
+ *
  * 2026-11-04 — F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json; the cloud chair signs under the owner's delegation, vetoable).
  *   309 OF 525 ROWS MOVED (thorp 48, hamlet 72, village 72, town 105, city 12; metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent

@@ -342,7 +342,7 @@
       "suite": "tests/property/generatorGoldenMaster.test.js",
       "recordEnv": "UPDATE_GOLDEN",
       "proofForm": null,
-      "sha256": "156dca6ae899daaabc7d6e005d92a6e56e46470bcca025720fa52298a7b2f417",
+      "sha256": "e1a30c5975ddef5eb745b3faab0ef3db5693ebad4b62a992afd29d45d08f865d",
       "rows": 525,
       "seedSet": null,
       "distinctFloor": null,
