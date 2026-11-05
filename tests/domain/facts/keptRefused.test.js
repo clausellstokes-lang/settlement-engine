@@ -65,3 +65,12 @@ describe('the self-check sees a kept-refused line', () => {
     expect(presumptionFindings(record, ledger).map((f) => f.atom)).toEqual(['gate']);
   });
 });
+
+describe('a description resolved where it is CHOSEN, not inside its table (CENSUS-1g unit 2b)', () => {
+  it('soak1k-0 notes no kept FACTION_DESC line (its eager governing table noted a line no birth printed)', async () => {
+    const { birth, ensureLaws } = await import('../../../scripts/audit/soak-review/corpus.mjs');
+    await ensureLaws();
+    const { ledger } = withPresumptionLedger(() => birth(0));
+    expect(ledger.filter((e) => e.pool === 'rulingStructure:FACTION_DESC_SIBLINGS' && e.resolvedBy === 'kept')).toEqual([]);
+  }, 60_000);
+});
