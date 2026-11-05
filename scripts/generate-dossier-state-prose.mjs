@@ -227,8 +227,14 @@ function assertLiveStringsBound(files) {
  * tags fold into the variant's marks; missing the second would publish dm-only prose.
  */
 const VARIANT_RE = /^(\d+)\.\s+`\[([^\]]+)\]`\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
-/** The canonical-at-zero row: `0. *(canonical)* <the live engine string>` */
-const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(.*)$/;
+/**
+ * The canonical-at-zero row: `0. *(canonical)* <the live engine string>`, optionally with ONE tag
+ * slot after the marker — `0. *(canonical)* \`[market · no crisis: hunger]\` <text>` (CENSUS-1f,
+ * the chair's item 3 of 2026-11-05 ~04:50): every part of the slot is a MARK (the angle is fixed,
+ * `canonical`), so a v0 row declares exactly as a numbered row's marks do (vid 0 is a real id). A
+ * row with no slot projects `marks: []`, as before.
+ */
+const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
 /**
  * A pool label. Either a standalone bold line (`**COMBINATION C1 — ...**`) or a bold
  * label carrying an em-dash gloss (`**SUBSISTENCE** — *bare survival, no cushion*`).
@@ -591,8 +597,12 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // A block whose variants carry no label at all has ONE pool (every causal
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
+      const slot = canonical[2] ? canonical[2].split('·').map((p) => p.trim()).filter(Boolean) : [];
+      if (slot.some((p) => GRAMMAR_TAG_RE.test(p))) {
+        throw new Error(`${label} ${block.id}: a canonical row's tag slot carries a \`grammar:\` tag (line ${i + 1}); the canonical row realises the engine's own order`);
+      }
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: slot, grammar: null, wordings: [], text: cleanText(canonical[3]),
       });
       lastIndex = 0;
       continue;
