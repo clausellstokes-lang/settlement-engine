@@ -384,74 +384,74 @@ export const NPC_FEATURES = [
 // shift map, deliberately not renamed — the wiring is correct). Single-pick draw site.
 export const NPC_WANTS = {
   government: [
-    'formal robes of office',
-    'expensive but conservative merchant dress',
-    'a chain of office worn even off-duty',
-    'court attire with discreet personal touches',
-    'robes cut for a taller predecessor, never altered',
-    'official dress one grade above their actual station',
-    'sombre official black with a jewelled clasp nobody asks about',
-    'immaculate formal wear that has clearly never seen weather',
+    { text: 'formal robes of office', colour: true },
+    { text: 'expensive but conservative merchant dress', colour: true },
+    { text: 'a chain of office worn even off-duty', colour: true },
+    { text: 'court attire with discreet personal touches', colour: true },
+    { text: 'robes cut for a taller predecessor, never altered', colour: true },
+    { text: 'official dress one grade above their actual station', colour: true },
+    { text: 'sombre official black with a jewelled clasp nobody asks about', colour: true },
+    { text: 'immaculate formal wear that has clearly never seen weather', colour: true },
   ],
   military: [
-    'functional armour with personal sigils',
-    'guard uniform kept immaculate',
-    "soldier's practical dress with officer's insignia",
-    "battle-worn plate they haven't replaced",
-    'a dress uniform kept for funerals, worn thin at the elbows',
-    'mismatched armour pieces, each from a different campaign',
-    'a field coat carrying the insignia of a disbanded company',
-    'civilian dress worn like a uniform: pressed, squared, joyless',
+    { text: 'functional armour with personal sigils', colour: true },
+    { text: 'guard uniform kept immaculate', colour: true },
+    { text: "soldier's practical dress with officer's insignia", colour: true },
+    { text: "battle-worn plate they haven't replaced", colour: true },
+    { text: 'a dress uniform kept for funerals, worn thin at the elbows', colour: true },
+    { text: 'mismatched armour pieces, each from a different campaign', colour: true },
+    { text: 'a field coat carrying the insignia of a disbanded company', colour: true },
+    { text: 'civilian dress worn like a uniform: pressed, squared, joyless', colour: true },
   ],
   religious: [
-    'religious vestments layered over travelling clothes',
-    'simple robes of their order',
-    'ceremonial attire worn at all times',
-    'plain devotional dress with one opulent accessory',
+    { text: 'religious vestments layered over travelling clothes', colour: true },
+    { text: 'simple robes of their order', colour: true },
+    { text: 'ceremonial attire worn at all times', colour: true },
+    { text: 'plain devotional dress with one opulent accessory', colour: true },
     { text: 'vestments a size too grand for the shrine they serve', needs: ['sacredHouse'] }, // CENSUS-4f: the ledger's declaration, re-read under R-AE (a shrine is a sacred house)
-    'threadbare robes patched with fabric from finer ones',
-    'a formal habit with a travel-stained hem never cleaned',
-    'lay clothes with the collar of the order left visible',
+    { text: 'threadbare robes patched with fabric from finer ones', colour: true },
+    { text: 'a formal habit with a travel-stained hem never cleaned', colour: true },
+    { text: 'lay clothes with the collar of the order left visible', colour: true },
   ],
   economy: [
-    'merchant dress: practical but signalling wealth through material',
+    { text: 'merchant dress: practical but signalling wealth through material', colour: true },
     { text: 'guild colours worn with pride', needs: ['guild'] }, // CENSUS-4f: the ledger's declaration
-    'clothes that once cost a fortune and now show the miles',
-    'well-cut but understated trading clothes',
-    'sober broadcloth with buttons worth more than the coat',
-    'foreign-cut clothes from a market they want to be asked about',
-    "a ledger-keeper's plain dress with ink at the right cuff",
-    "last season's fashion maintained with visible determination",
+    { text: 'clothes that once cost a fortune and now show the miles', colour: true },
+    { text: 'well-cut but understated trading clothes', colour: true },
+    { text: 'sober broadcloth with buttons worth more than the coat', colour: true },
+    { text: 'foreign-cut clothes from a market they want to be asked about', colour: true },
+    { text: "a ledger-keeper's plain dress with ink at the right cuff", colour: true },
+    { text: "last season's fashion maintained with visible determination", colour: true },
   ],
   criminal: [
-    'nondescript working clothes chosen specifically to be forgettable',
-    'fine clothes worn ironically over rougher garments',
-    'guard or clergy disguise worn as a habit',
-    'whatever is clean (they move frequently)',
+    { text: 'nondescript working clothes chosen specifically to be forgettable', colour: true },
+    { text: 'fine clothes worn ironically over rougher garments', colour: true },
+    { text: 'guard or clergy disguise worn as a habit', colour: true },
+    { text: 'whatever is clean (they move frequently)', colour: true },
     { text: "a dockhand's oilskins over hands too clean for the work", needs: ['docks'] }, // CENSUS-4f: the ledger's declaration
-    'respectable dress exactly average for the street they work',
-    'good boots and cheap everything else',
-    'a heavy coat worn indoors, contents unexamined',
+    { text: 'respectable dress exactly average for the street they work', colour: true },
+    { text: 'good boots and cheap everything else', colour: true },
+    { text: 'a heavy coat worn indoors, contents unexamined', colour: true },
   ],
   magic: [
-    'scholarly robes with heavy pockets',
-    "travelling mage's coat covered in small pouches",
-    'deceptively plain clothes that crackle faintly with residual energy',
-    'formal academic dress worn with absent-minded disregard',
-    'robes singed at one cuff and never mended',
-    'practical dress with chalk dust in every seam',
-    "a scholar's gown two institutions out of date",
-    'ordinary clothes with a lining that clinks faintly',
+    { text: 'scholarly robes with heavy pockets', colour: true },
+    { text: "travelling mage's coat covered in small pouches", colour: true },
+    { text: 'deceptively plain clothes that crackle faintly with residual energy', colour: true },
+    { text: 'formal academic dress worn with absent-minded disregard', colour: true },
+    { text: 'robes singed at one cuff and never mended', colour: true },
+    { text: 'practical dress with chalk dust in every seam', colour: true },
+    { text: "a scholar's gown two institutions out of date", colour: true },
+    { text: 'ordinary clothes with a lining that clinks faintly', colour: true },
   ],
   other: [
-    'clothes practical for their work with one personal flourish',
-    'travel-worn but well-maintained gear',
-    "second-hand fine clothes that don't quite fit",
-    "whatever was available (they don't care about dress)",
-    'work clothes patched by someone who loved them',
-    'a good coat inherited from a larger relative',
-    'dress entirely without signal (deliberately so)',
-    'weathered gear maintained past the point of economy',
+    { text: 'clothes practical for their work with one personal flourish', colour: true },
+    { text: 'travel-worn but well-maintained gear', colour: true },
+    { text: "second-hand fine clothes that don't quite fit", colour: true },
+    { text: "whatever was available (they don't care about dress)", colour: true },
+    { text: 'work clothes patched by someone who loved them', colour: true },
+    { text: 'a good coat inherited from a larger relative', colour: true },
+    { text: 'dress entirely without signal (deliberately so)', colour: true },
+    { text: 'weathered gear maintained past the point of economy', colour: true },
   ],
 };
 
@@ -471,6 +471,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Find funding for desperately needed infrastructure repairs',
       long: 'Build a political dynasty (their children will inherit influence, not just money)',
       driven_by: 'power',
+      colour: true,
     },
     {
       short: 'Discredit a council rival before the annual election',
@@ -488,6 +489,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Root out the faction leaking tax figures to rivals',
       long: 'Retire with a fortune and a clean name (in that order)',
       driven_by: 'wealth',
+      colour: true,
     },
   ],
   'Council Member': [
@@ -500,6 +502,7 @@ export const NPC_FACTION_GOALS = {
       short: "Expose a colleague's corruption without implicating themselves",
       long: 'Champion a reform that future councils will still cite by name',
       driven_by: 'reform',
+      colour: true,
     },
   ],
   'Tax Collector': [
@@ -512,6 +515,7 @@ export const NPC_FACTION_GOALS = {
       short: "Find a missing merchant whose taxes haven't been filed in six months",
       long: 'Build enough goodwill that the settlement mourns them when they go',
       driven_by: 'protection',
+      colour: true,
     },
   ],
   'Chief Magistrate': [
@@ -524,6 +528,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Resist pressure from a powerful patron to deliver a specific verdict',
       long: 'Train a successor who will carry on their judicial philosophy',
       driven_by: 'reform',
+      colour: true,
     },
   ],
   'Guard Captain': [
@@ -548,6 +553,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Contain a near-mutiny caused by months of unpaid wages',
       long: 'Obtain a noble title through military distinction (the only path left open)',
       driven_by: 'power',
+      colour: true,
     },
   ],
   'Mercenary Captain': [
@@ -555,11 +561,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Collect a debt from a client who keeps finding reasons to delay payment',
       long: 'Save enough to buy land and retire before this work kills them',
       driven_by: 'wealth',
+      colour: true,
     },
     {
       short: 'Evaluate whether the next contract is worth the risk to their crew',
       long: 'Build a company so well-regarded that princes compete to hire them',
       driven_by: 'power',
+      colour: true,
     },
   ],
   'High Priest': [
@@ -572,6 +580,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Identify who among their junior clergy is accepting bribes from merchants',
       long: 'Found an institution (a hospital, a school) that will outlast them by centuries',
       driven_by: 'reform',
+      colour: true,
     },
   ],
   Priest: [
@@ -579,6 +588,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Mediate a land dispute between two families before it turns violent',
       long: 'Simply keep the community together: feed them, marry them, bury them with dignity',
       driven_by: 'protection',
+      colour: true,
     },
     {
       needs: ['temple'], short: 'Convince their superior in the faith to fund repairs to the temple roof', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
@@ -591,6 +601,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Investigate rumours that a novice has been leaving the grounds at night',
       long: 'Expand the scriptorium into a library open to all who can read',
       driven_by: 'knowledge',
+      colour: true,
     },
     {
       short: 'Negotiate a tithe reduction with the local lord without compromising principle',
@@ -603,11 +614,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Confirm or deny specific heresy accusations against a prominent citizen',
       long: 'Dismantle an actual organised heretical network, not chase rumours',
       driven_by: 'justice',
+      colour: true,
     },
     {
       short: 'Navigate political pressure from both the church hierarchy and the civil authorities',
       long: 'Retire before the work corrupts them entirely',
       driven_by: 'personal',
+      colour: true,
     },
   ],
   'Wealthiest Merchant': [
@@ -615,6 +628,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Corner the market on a specific commodity before a rival does',
       long: 'Fund a trading dynasty that their grandchildren will run',
       driven_by: 'wealth',
+      colour: true,
     },
     {
       short: 'Determine who has been bribing their warehouse staff',
@@ -632,6 +646,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Place a talented apprentice in a role that increases guild influence',
       long: 'Be remembered as the master who expanded the guild into new trades',
       driven_by: 'wealth',
+      colour: true,
     },
   ],
   Moneylender: [
@@ -639,11 +654,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Collect on a large overdue debt from a borrower who has suddenly disappeared',
       long: 'Accumulate enough leverage over enough people to be untouchable',
       driven_by: 'power',
+      colour: true,
     },
     {
       short: 'Identify which of their clients is about to default and act first',
       long: 'Transform the lending business into a proper banking institution: legitimate, respectable',
       driven_by: 'wealth',
+      colour: true,
     },
   ],
   'Master Craftsman': [
@@ -656,6 +673,7 @@ export const NPC_FACTION_GOALS = {
       short: "Acquire a rare material to solve a technical problem they've never cracked",
       long: 'Document every technique they know before the knowledge dies with them',
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
   "Thieves' Guild Master": [
@@ -663,11 +681,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Identify which of their lieutenants is planning to branch out independently',
       long: 'Achieve enough legitimate business to step back from direct criminal exposure',
       driven_by: 'power',
+      colour: true,
     },
     {
       short: 'Negotiate a non-aggression pact with a new criminal faction moving into their territory',
       long: 'Ensure no one ever proves the connection between them and their operations',
       driven_by: 'personal',
+      colour: true,
     },
   ],
   'Crime Lord': [
@@ -675,6 +695,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Suppress a rival operation that has begun cutting into smuggling revenue',
       long: 'Build an empire that survives their death: succession planning for criminals',
       driven_by: 'power',
+      colour: true,
     },
     {
       short: 'Identify the guard captain who is no longer co-operative, and why',
@@ -687,11 +708,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Find a new route after the customs increase made the old one uneconomical',
       long: 'Retire to somewhere no one knows their name with enough to live comfortably',
       driven_by: 'personal',
+      colour: true,
     },
     {
       short: 'Determine whether the recent cargo losses are coincidence or betrayal',
       long: 'Expand into a trade that requires less hiding: spice or cloth, not people',
       driven_by: 'wealth',
+      colour: true,
     },
   ],
   'Tower Wizard': [
@@ -699,11 +722,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Identify the source of unexplained magical disturbances in the northern district',
       long: 'Complete a research project that will earn peer recognition: not power, just acknowledgement',
       driven_by: 'knowledge',
+      colour: true,
     },
     {
       short: 'Find an apprentice worth investing time in before they become too old to train anyone',
       long: 'Solve one genuinely unsolved theoretical question before they die',
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
   'Guild Archmage': [
@@ -711,11 +736,13 @@ export const NPC_FACTION_GOALS = {
       short: "Resolve a dispute between two factions of the mages' guild without taking sides",
       long: 'Establish a magical institution that outlasts their own life and power',
       driven_by: 'power',
+      colour: true,
     },
     {
       short: 'Track down a former student who has been using restricted magic',
       long: 'Complete the great work (whatever that means to them specifically)',
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
   'Hedge Wizard': [
@@ -723,11 +750,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Find reliable income for the next three months (magical services barely pay)',
       long: 'Be taken seriously by the formal magical establishment, just once',
       driven_by: 'personal',
+      colour: true,
     },
     {
       short: 'Identify what is wrong with the crops in the northern fields (it smells magical)',
       long: 'Understand their own unusual ability well enough to pass it on',
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
   Alchemist: [
@@ -735,11 +764,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Source a specific reagent that has been mysteriously unavailable for six weeks',
       long: "Crack the theoretical basis for a transmutation they've been circling for years",
       driven_by: 'knowledge',
+      colour: true,
     },
     {
       short: 'Fulfil a large dangerous commission while minimising the chance of explosion',
       long: "Publish findings that will outlast the potions they've spent their life brewing",
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
   'Tavern Owner': [
@@ -752,6 +783,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Figure out who has been watering down their barrels before it reaches customers',
       long: 'Build a place where everyone (not just the wealthy) can feel welcome',
       driven_by: 'personal',
+      colour: true,
     },
   ],
   'Sage/Scholar': [
@@ -759,11 +791,13 @@ export const NPC_FACTION_GOALS = {
       short: 'Verify a specific historical claim before publishing it (one source contradicts all others)',
       long: "Complete the comprehensive work they've spent thirty years building toward",
       driven_by: 'knowledge',
+      colour: true,
     },
     {
       short: 'Find funding to continue research after their patron cut support without explanation',
       long: 'Mentor someone who will care about truth more than they care about credit',
       driven_by: 'reform',
+      colour: true,
     },
   ],
   Healer: [
@@ -776,6 +810,7 @@ export const NPC_FACTION_GOALS = {
       short: 'Obtain a specific medicinal compound that has been unavailable for months',
       long: "Document everything they know so the knowledge survives if they don't",
       driven_by: 'knowledge',
+      colour: true,
     },
   ],
 };
@@ -1406,143 +1441,143 @@ export const STRESS_ECONOMIC_EFFECTS = {
   econ_crim_blur: {
     label: 'Commercial Complicity',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`,
-      (r, s) =>
-        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`,
-      (r, s) =>
-        `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} maintain a relationship that exists in legal grey territory. ${r.name} provides legitimate cover, ${s.name} ensures market access that official channels wouldn't permit.`, colour: true },
+      { line: (r, s) =>
+        `The books of ${r.name} are clean because ${s.name} keeps certain entries off them; the arrangement benefits both parties and would survive scrutiny by neither.`, colour: true },
+      { line: (r, s) =>
+        `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`, colour: true },
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
       { line: (r, s) =>
         `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`, needs: ["market"] },
-      (r, s) =>
-        `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`,
-      (r, s) =>
-        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`,
-      (r, s) =>
-        `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`,
+      { line: (r, s) =>
+        `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} vouches for ${s.name}'s people at the guild hall. In return, ${s.name}'s people keep ${r.name}'s carts moving on roads where other carts are stopped.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} holds the licence, ${s.name} supplies the goods, and the profit is split in a back room on the first of every month.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.',
-      (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.',
-      (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`,
-      (r, s) =>
-        `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`,
+      { line: (r, s) => 'If either is investigated, the other is implicated. Both know this. Neither mentions it.', colour: true },
+      { line: (r, s) => 'A clerk has begun cross-referencing the ledgers. Neither party has decided what to do about it.', colour: true },
+      { line: (r, s) => `One profitable season more, ${r.name} keeps saying. The seasons keep being profitable.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} wants to move a larger cargo through ${r.name}'s warehouse next month. ${r.name} has not agreed and has not refused.`, colour: true },
       (r, s) =>
         `A customs officer has asked ${r.name} for the names of every supplier. ${s.name}'s name is missing from the list, and the officer has noticed the gap.`,
-      (r, s) =>
-        `${r.name} has started paying off the guild debts that tied the two of them together. ${s.name} reads it as a plan to leave.`,
-      (r, s) =>
-        `${s.name} has been seen at ${r.name}'s counting-house in daylight. That was never part of the arrangement.`,
-      (r, s) => `${r.name}'s eldest has found the second ledger and asked what ${s.name}'s initials mean.`,
+      { line: (r, s) =>
+        `${r.name} has started paying off the guild debts that tied the two of them together. ${s.name} reads it as a plan to leave.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has been seen at ${r.name}'s counting-house in daylight. That was never part of the arrangement.`, colour: true },
+      { line: (r, s) => `${r.name}'s eldest has found the second ledger and asked what ${s.name}'s initials mean.`, colour: true },
     ]),
     type: 'patron_client',
   },
   econ_crim_exploitation: {
     label: 'Protection Arrangement',
     desc: pairProse('d', [
-      (r, s) =>
-        `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`,
-      (r, s) =>
-        `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`,
-      (r, s) =>
-        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`,
-      (r, s) =>
-        `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`,
-      (r, s) =>
-        `${s.name}'s collectors visit ${r.name} on the same day each month and leave with a sealed purse. Nobody in the street watches them go.`,
-      (r, s) =>
-        `${r.name} owes ${s.name} for protection that was never asked for and cannot be cancelled. The debt is renewed in person, at the door.`,
-      (r, s) =>
-        `${s.name} sets the fee, ${r.name} pays it, and the price goes on every customer's bill without a line of its own.`,
-      (r, s) =>
-        `${r.name}'s premises are the only ones on the row that have never been robbed. ${s.name} reminds ${r.name} of this when the fee is due.`,
+      { line: (r, s) =>
+        `${s.name}'s operation charges ${r.name} a "security fee" that is, in practice, a protection racket. ${r.name} pays without complaint because the alternative is worse.`, colour: true },
+      { line: (r, s) =>
+        `Every month ${r.name} pays ${s.name} for protection against dangers that would, on inspection, trace back to ${s.name}. Both sides account for it as a cost of doing business.`, colour: true },
+      { line: (r, s) =>
+        `The "security fee" ${s.name} collects from ${r.name} buys exactly one thing: the absence of ${s.name}. It is paid punctually.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} pays ${s.name} a tenth of every sale. The one season ${r.name} paid late, a storehouse burned.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s collectors visit ${r.name} on the same day each month and leave with a sealed purse. Nobody in the street watches them go.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} owes ${s.name} for protection that was never asked for and cannot be cancelled. The debt is renewed in person, at the door.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} sets the fee, ${r.name} pays it, and the price goes on every customer's bill without a line of its own.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s premises are the only ones on the row that have never been robbed. ${s.name} reminds ${r.name} of this when the fee is due.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`,
-      (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`,
-      (r, s) => `A rival crew has offered ${r.name} a better rate. Accepting would be a declaration of war on ${s.name}.`,
-      (r, s) => `${r.name} has hired two guards of their own. ${s.name} has asked, politely, what they are for.`,
-      (r, s) =>
-        `${s.name} wants a cut of ${r.name}'s new venture before it opens. The fee was never meant to grow with the business.`,
-      (r, s) =>
-        `${r.name} missed this month's payment by three days. ${s.name} has not sent anyone yet, and that is worse.`,
+      { line: (r, s) => `${r.name} is quietly documenting every payment. Someone is being prepared for a fall.`, colour: true },
+      { line: (r, s) => `The fee went up this quarter without explanation. ${r.name}'s patience is a finite ledger.`, colour: true },
+      { line: (r, s) => `A rival crew has offered ${r.name} a better rate. Accepting would be a declaration of war on ${s.name}.`, colour: true },
+      { line: (r, s) => `${r.name} has hired two guards of their own. ${s.name} has asked, politely, what they are for.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} wants a cut of ${r.name}'s new venture before it opens. The fee was never meant to grow with the business.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} missed this month's payment by three days. ${s.name} has not sent anyone yet, and that is worse.`, colour: true },
       (r, s) =>
         `${r.name} has written to the magistrate about ${s.name}'s collectors. The letter sits unsent in ${r.name}'s desk.`,
-      (r, s) =>
-        `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`,
+      { line: (r, s) =>
+        `${s.name}'s collector was found drunk with ${r.name}'s purse still sealed. Someone will have to explain the delay to ${s.name}.`, colour: true },
     ]),
     type: 'debtor_creditor',
   },
   mil_crim_corruption: {
     label: 'Corrupt Arrangement',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`,
-      (r, s) =>
-        `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`,
-      (r, s) =>
-        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`,
-      (r, s) =>
-        `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`,
-      (r, s) =>
-        `${s.name}'s people are never searched on ${r.name}'s watch. The arrangement is three years old and has never been put in writing.`,
+      { line: (r, s) =>
+        `${r.name} receives regular payments from ${s.name}'s organization in exchange for patrol schedules and advance notice of raids. Both maintain professional courtesy in public.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s operation runs on a schedule ${r.name} provides: patrols that turn a street early, raids announced a day in advance. In public the two exchange formal nods.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s clearance record looks respectable because ${s.name} decides which crimes get cleared. The price of the arrangement is itemised and paid on time.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s people are never searched on ${r.name}'s watch. The arrangement is three years old and has never been put in writing.`, colour: true },
       { line: (r, s) =>
         `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`, needs: ["watch"] },
-      (r, s) =>
-        `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`,
-      (r, s) =>
-        `${r.name} commands the patrols and ${s.name} pays for their routes. The streets ${s.name} uses are the quietest in the settlement.`,
+      { line: (r, s) =>
+        `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} commands the patrols and ${s.name} pays for their routes. The streets ${s.name} uses are the quietest in the settlement.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) =>
-        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.',
-      (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`,
-      (r, s) => 'The payments have started arriving late. In this trade, late is a message.',
-      (r, s) =>
-        `${r.name} was promoted last month, and ${s.name} expects the price of silence to stay the same. ${r.name} does not.`,
-      (r, s) =>
-        `One of ${s.name}'s runners was arrested by a patrol ${r.name} did not assign. The runner knows both their names.`,
-      (r, s) =>
-        `${s.name} has asked ${r.name} to lose a piece of evidence that three other officers have already seen.`,
-      (r, s) =>
-        `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`,
-      (r, s, f) =>
-        `An auditor from the ${f.body} is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`,
+      { line: (r, s) =>
+        'A new superior has started asking uncomfortable questions about clearance rates. One of them will have to act before the other does.', colour: true },
+      { line: (r, s) => `An honest sergeant has been transferred into ${r.name}'s command. Both parties consider this a problem.`, colour: true },
+      { line: (r, s) => 'The payments have started arriving late. In this trade, late is a message.', colour: true },
+      { line: (r, s) =>
+        `${r.name} was promoted last month, and ${s.name} expects the price of silence to stay the same. ${r.name} does not.`, colour: true },
+      { line: (r, s) =>
+        `One of ${s.name}'s runners was arrested by a patrol ${r.name} did not assign. The runner knows both their names.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} to lose a piece of evidence that three other officers have already seen.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s quarter-day payment from ${s.name} arrived with a name attached: someone ${s.name} wants arrested.`, colour: true },
+      { line: (r, s, f) =>
+        `An auditor from the ${f.body} is counting ${r.name}'s arrest records against the coin in ${r.name}'s house. ${s.name} is watching the count.`, colour: true },
     ]),
     type: 'ally',
   },
   mil_crim_suppression: {
     label: 'Active Suppression',
     desc: pairProse('d', [
-      (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`,
-      (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
-      (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
-      (r, s) => `${r.name} has closed three of ${s.name}'s houses this year. ${s.name} has opened four.`,
+      { line: (r, s) => `${r.name} has made dismantling ${s.name}'s operation a personal priority. The feeling is mutual.`, colour: true },
+      { line: (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`, colour: true },
+      { line: (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`, colour: true },
+      { line: (r, s) => `${r.name} has closed three of ${s.name}'s houses this year. ${s.name} has opened four.`, colour: true },
       { line: (r, s) =>
         `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`, needs: ["institution: tavern"] },
-      (r, s) =>
-        `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`,
-      (r, s) =>
-        `${r.name} hunts ${s.name}'s operation street by street, and ${s.name} moves it one street ahead. The chase has lasted two winters.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} hunts ${s.name}'s operation street by street, and ${s.name} moves it one street ahead. The chase has lasted two winters.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`,
-      (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`,
-      (r, s) => `Someone in ${r.name}'s command reports to ${s.name}. The file says so; it does not say who.`,
+      { line: (r, s) => `${s.name} has leverage on someone close to ${r.name}. It hasn't been used yet.`, colour: true },
+      { line: (r, s) => `${r.name} is one warrant away from a raid that would end it. The warrant keeps not being signed.`, colour: true },
+      { line: (r, s) => `Someone in ${r.name}'s command reports to ${s.name}. The file says so; it does not say who.`, colour: true },
       (r, s) =>
         `${r.name} has a witness willing to name ${s.name} before a magistrate. ${s.name} knows where the witness lives.`,
-      (r, s) =>
-        `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`,
-      (r, s) =>
-        `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`,
+      { line: (r, s) =>
+        `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`, colour: true },
       { line: (r, s) =>
         `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) =>
-        `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`,
+      { line: (r, s) =>
+        `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`, colour: true },
     ]),
     type: 'enemy',
   },
@@ -1551,138 +1586,138 @@ export const STRESS_ECONOMIC_EFFECTS = {
     desc: pairProse('d', [
       (r, s) =>
         `${s.name}'s company is retained by ${r.name}'s interests on an exclusive basis. The arrangement works well enough that official channels have stopped asking questions.`,
-      (r, s) =>
-        `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`,
-      (r, s) =>
-        `The contract between ${r.name} and ${s.name} is renewed annually with a handshake; what it actually covers has never been written down anywhere.`,
-      (r, s) =>
-        `${s.name}'s company guards ${r.name}'s warehouses and wagons for a fixed fee each season. ${r.name} pays on time and asks for nothing in writing.`,
-      (r, s) =>
-        `${r.name} is ${s.name}'s largest client and ${s.name} is ${r.name}'s only protection. Each would be badly hurt by losing the other.`,
-      (r, s, f) =>
-        `${s.name}'s ${f.members} wear ${r.name}'s colours on the road and take ${r.name}'s orders without question. No magistrate has a say over them.`,
-      (r, s) =>
-        `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`,
-      (r, s) =>
-        `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s company would march.`,
+      { line: (r, s) =>
+        `${r.name} pays ${s.name}'s company well and exclusively, and in return certain cargoes move unescorted and uninspected. The arrangement predates every official who might question it.`, colour: true },
+      { line: (r, s) =>
+        `The contract between ${r.name} and ${s.name} is renewed annually with a handshake; what it actually covers has never been written down anywhere.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s company guards ${r.name}'s warehouses and wagons for a fixed fee each season. ${r.name} pays on time and asks for nothing in writing.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} is ${s.name}'s largest client and ${s.name} is ${r.name}'s only protection. Each would be badly hurt by losing the other.`, colour: true },
+      { line: (r, s, f) =>
+        `${s.name}'s ${f.members} wear ${r.name}'s colours on the road and take ${r.name}'s orders without question. No magistrate has a say over them.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} hired ${s.name}'s company after the last caravan was lost. No caravan has been lost since, and ${s.name}'s fee has doubled.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} answers to ${r.name}'s purse before any other authority. Everyone in the settlement knows which way ${s.name}'s company would march.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) =>
-        `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`,
-      (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`,
-      (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.',
-      (r, s) =>
-        `${r.name} has cut ${s.name}'s fee by a fifth. ${s.name}'s company still guards the wagons, but more slowly.`,
-      (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`,
-      (r, s) =>
-        `A guard from ${s.name}'s company was killed protecting ${r.name}'s cargo. ${s.name} wants compensation the contract does not mention.`,
+      { line: (r, s) =>
+        `The contract is up for renewal. ${s.name} has been approached by a competitor. ${r.name} doesn't know yet.`, colour: true },
+      { line: (r, s) => `${s.name}'s men have started asking what exactly they are guarding. ${r.name} prefers them incurious.`, colour: true },
+      { line: (r, s) => 'The last shipment was short, and each side privately blames the other. The next one will settle the question.', colour: true },
+      { line: (r, s) =>
+        `${r.name} has cut ${s.name}'s fee by a fifth. ${s.name}'s company still guards the wagons, but more slowly.`, colour: true },
+      { line: (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`, colour: true },
+      { line: (r, s) =>
+        `A guard from ${s.name}'s company was killed protecting ${r.name}'s cargo. ${s.name} wants compensation the contract does not mention.`, colour: true },
       { line: (r, s) =>
         `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`, needs: ["watch"], excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`,
+      { line: (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`, colour: true },
     ]),
     type: 'patron_client',
   },
   rel_mil_crusader: {
     label: 'Sacred Commission',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`,
-      (r, s, f) =>
-        `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
-      (r, s) =>
-        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} operate as a unified authority: temporal and spiritual power reinforcing each other. Dissent against one is dissent against both.`, colour: true },
+      { line: (r, s, f) =>
+        `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`, colour: true },
       { line: (r, s, f) =>
         `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
-      (r, s, f) =>
-        `${s.name}'s ${f.members} take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
-      (r, s) =>
-        `${r.name} names the settlement's enemies from the pulpit, and ${s.name} rides against them within the week.`,
-      (r, s) =>
-        `${r.name} and ${s.name} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.`,
-      (r, s) =>
-        `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`,
+      { line: (r, s, f) =>
+        `${s.name}'s ${f.members} take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} names the settlement's enemies from the pulpit, and ${s.name} rides against them within the week.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} hold the settlement between faith and force. The two of them meet after every service to agree the week's orders.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} carries ${r.name}'s banner on every patrol. Crossing ${s.name} is treated as heresy, and heresy is punished by ${s.name}.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.',
-      (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.',
-      (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
-      (r, s, f) =>
-        `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`,
+      { line: (r, s) => 'They disagree on a fundamental question of method that neither will put into writing.', colour: true },
+      { line: (r, s) => 'A penitent has brought a case that pits doctrine against order. It has not been resolved. It will not stay private.', colour: true },
+      { line: (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`, colour: true },
+      { line: (r, s, f) =>
+        `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`, needs: ["institution: temple"] },
-      (r, s) =>
-        `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`,
+      { line: (r, s) =>
+        `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`, colour: true },
       (r, s, f) =>
         `A ${f.member} under ${s.name} stands accused of sacrilege. ${r.name} demands a church trial; ${s.name} wants a court-martial.`,
-      (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`,
+      { line: (r, s) => `${s.name} has started giving orders in the name of the faith without consulting ${r.name}.`, colour: true },
     ]),
     type: 'ally',
   },
   rel_crim_fraud: {
     label: 'Institutional Cover',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`,
-      (r, s) =>
-        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
-      (r, s) =>
-        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`,
+      { line: (r, s) =>
+        `${r.name}'s religious position provides ${s.name}'s operation with legitimacy, meeting spaces, and an excuse for financial flows that would otherwise attract scrutiny.`, colour: true },
+      { line: (r, s) =>
+        `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`, colour: true },
       { line: (r, s) =>
         `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
-      (r, s) =>
-        `${r.name} records ${s.name}'s payments as gifts from a pious donor. The donor has never attended a service.`,
-      (r, s) =>
-        `${s.name} funds ${r.name}'s alms, and ${r.name} vouches for ${s.name}'s good character to anyone who asks. Both are paid in the same coin.`,
-      (r, s) =>
-        `${r.name}'s charity runs the soup kitchen, and ${s.name}'s couriers collect their parcels from the kitchen's back door.`,
-      (r, s) =>
-        `${r.name} hears ${s.name}'s confession each week and keeps ${s.name}'s accounts each month. Neither duty is written down.`,
+      { line: (r, s) =>
+        `${r.name} records ${s.name}'s payments as gifts from a pious donor. The donor has never attended a service.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} funds ${r.name}'s alms, and ${r.name} vouches for ${s.name}'s good character to anyone who asks. Both are paid in the same coin.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s charity runs the soup kitchen, and ${s.name}'s couriers collect their parcels from the kitchen's back door.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} hears ${s.name}'s confession each week and keeps ${s.name}'s accounts each month. Neither duty is written down.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
+      { line: (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`, colour: true },
       { line: (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`, needs: ["institution: temple"] },
-      (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
+      { line: (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`, colour: true },
       { line: (r, s) =>
         `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`, needs: ["institution: temple"] },
-      (r, s) =>
-        `${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.`,
+      { line: (r, s) =>
+        `${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.`, colour: true },
       { line: (r, s) =>
         `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`, needs: ["institution: temple"] },
-      (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`,
-      (r, s) =>
-        `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`,
+      { line: (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`, colour: true },
     ]),
     type: 'ally',
   },
   mag_crim_market: {
     label: 'Arcane Supplier',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`,
-      (r, s) =>
-        `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`,
-      (r, s) =>
-        `${r.name} takes commissions from ${s.name} that no guild register records: small workings, expertly done, each one deniable and none of them innocent.`,
-      (r, s) =>
-        `${r.name} brews what ${s.name} sells: sleeping draughts, truth-tinctures, and inks that vanish after a day.`,
-      (r, s) =>
-        `${s.name} brings ${r.name} the jobs and the payment, and ${r.name} asks no questions about who the work is for.`,
-      (r, s) => `${r.name}'s workshop has a back door, and ${s.name}'s couriers are the only ones who use it.`,
+      { line: (r, s) =>
+        `${r.name} provides ${s.name}'s network with components, identification services, and the occasional forged document that only a skilled practitioner could produce.`, colour: true },
+      { line: (r, s) =>
+        `When ${s.name}'s network needs a seal copied, a face forgotten, or a document aged thirty years, the work arrives through ${r.name} and is never signed.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} takes commissions from ${s.name} that no guild register records: small workings, expertly done, each one deniable and none of them innocent.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} brews what ${s.name} sells: sleeping draughts, truth-tinctures, and inks that vanish after a day.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} brings ${r.name} the jobs and the payment, and ${r.name} asks no questions about who the work is for.`, colour: true },
+      { line: (r, s) => `${r.name}'s workshop has a back door, and ${s.name}'s couriers are the only ones who use it.`, colour: true },
       { line: (r, s) =>
         `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`, needs: ["guild"] },
-      (r, s) =>
-        `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`,
+      { line: (r, s) =>
+        `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) =>
-        `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`,
-      (r, s) => `${s.name} has begun asking for workings of a different order: the kind with witnesses. ${r.name} has not yet said no.`,
-      (r, s) => `Another practitioner has noticed ${r.name}'s signature in the residue. Professional courtesy has limits.`,
-      (r, s) =>
-        `${r.name}'s apprentice has started asking where the night commissions go. ${s.name} has noticed the apprentice.`,
-      (r, s) => `${s.name} owes ${r.name} for three months of work and has offered information instead of coin.`,
-      (r, s) =>
-        `A ward ${r.name} made for ${s.name} failed during a robbery. ${s.name} blames the ward; ${r.name} blames the thief.`,
+      { line: (r, s) =>
+        `The last commission left traces that a determined investigator might find. ${r.name} is reconsidering the relationship.`, colour: true },
+      { line: (r, s) => `${s.name} has begun asking for workings of a different order: the kind with witnesses. ${r.name} has not yet said no.`, colour: true },
+      { line: (r, s) => `Another practitioner has noticed ${r.name}'s signature in the residue. Professional courtesy has limits.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s apprentice has started asking where the night commissions go. ${s.name} has noticed the apprentice.`, colour: true },
+      { line: (r, s) => `${s.name} owes ${r.name} for three months of work and has offered information instead of coin.`, colour: true },
+      { line: (r, s) =>
+        `A ward ${r.name} made for ${s.name} failed during a robbery. ${s.name} blames the ward; ${r.name} blames the thief.`, colour: true },
       { line: (r, s) =>
         `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`, needs: ["guild"] },
       { line: (r, s) =>
@@ -1693,34 +1728,34 @@ export const STRESS_ECONOMIC_EFFECTS = {
   gov_econ_dependence: {
     label: 'Financial Dependence',
     desc: pairProse('d', [
-      (r, s) =>
-        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`,
-      (r, s) =>
-        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`,
-      (r, s) =>
-        `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`,
-      (r, s) =>
-        `${r.name}'s treasury borrowed from ${s.name} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.`,
-      (r, s) =>
-        `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`,
-      (r, s) =>
-        `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`,
+      { line: (r, s) =>
+        `The settlement's civic functions run on credit extended by ${s.name}. ${r.name} cannot take any action that seriously threatens ${s.name}'s interests, and ${s.name} does not let this be forgotten.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} holds the settlement's debts and therefore, in every way that matters, its agenda; ${r.name} governs within the margin ${s.name} allows.`, colour: true },
+      { line: (r, s) =>
+        `Every civic project ${r.name} announces has first been costed, quietly, in ${s.name}'s counting-room. The public believes the order is the other way around.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s treasury borrowed from ${s.name} to cover a bad harvest and has borrowed every year since. The interest is paid before the wages.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`, colour: true },
       { line: (r, s) =>
         `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`,
+      { line: (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
-      (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
+      { line: (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`, colour: true },
+      { line: (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`, colour: true },
       { line: (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) =>
-        `${s.name} is calling in a third of the debt at once. ${r.name} has until the next quarter day to find it.`,
-      (r, s) =>
-        `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`,
+      { line: (r, s) =>
+        `${s.name} is calling in a third of the debt at once. ${r.name} has until the next quarter day to find it.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`, colour: true },
       { line: (r, s) =>
         `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`, needs: ["institution: granary"] },
     ]),
@@ -1729,26 +1764,26 @@ export const STRESS_ECONOMIC_EFFECTS = {
   gov_mil_friction: {
     label: 'Jurisdictional Tension',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`,
-      (r, s) =>
-        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`,
-      (r, s) =>
-        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`,
-      (r, s, f) =>
-        `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
-      (r, s) =>
-        `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} disagree fundamentally about where civil authority ends and military authority begins. The argument has been running for years and occasionally generates paperwork.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} issues orders ${s.name} regards as suggestions, and ${s.name} takes actions ${r.name} regards as insubordination; the settlement runs in the gap between.`, colour: true },
+      { line: (r, s) =>
+        `The line between ${r.name}'s authority and ${s.name}'s has been redrawn four times and honoured never. Each keeps the map that favours them.`, colour: true },
+      { line: (r, s, f) =>
+        `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`, colour: true },
       { line: (r, s) =>
         `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`, needs: ["watch","garrison"], excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) =>
-        `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`,
-      (r, s) =>
-        `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`,
+      { line: (r, s) =>
+        `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} answers ${r.name}'s summons late and leaves early. ${r.name} now issues them in writing so the delays are on record.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
-      (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
+      { line: (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.', colour: true },
+      { line: (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.', colour: true },
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
       { line: (r, s, f) =>
         `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`, needs: ["market"] },
@@ -1758,275 +1793,275 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`, excludes: ["ruler: lord","ruler: occupier"] },
       { line: (r, s) =>
         `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`, needs: ["market"] },
-      (r, s, f) =>
-        `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`,
+      { line: (r, s, f) =>
+        `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`, colour: true },
     ]),
     type: 'political',
   },
   peer_rivalry: {
     label: 'Professional Rivalry',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.`,
-      (r, s) =>
-        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`,
-      (r, s) =>
-        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`,
-      (r, s) =>
-        `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`,
-      (r, s) =>
-        `${r.name} and ${s.name} trained together and have competed ever since. The settlement keeps score, and so do they.`,
-      (r, s) =>
-        `${r.name} wants ${s.name}'s position, and ${s.name} wants ${r.name}'s reputation. They are civil in public and unforgiving in private.`,
-      (r, s) =>
-        `Every client ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.`,
-      (r, s) =>
-        `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} compete for the same resource, position, or reputation. The competition is vigorous but bounded. Neither has crossed the line into genuine enmity. Yet.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} want the same thing and cannot both have it. The contest is conducted with scrupulous courtesy and total commitment.`, colour: true },
+      { line: (r, s) =>
+        `Every advance ${r.name} makes is answered by ${s.name} within the season; the rivalry has become its own institution, with rules neither wrote and both obey.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} bid for the same contracts and sit at the same tables. Each counts the other's wins more carefully than their own.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} trained together and have competed ever since. The settlement keeps score, and so do they.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} wants ${s.name}'s position, and ${s.name} wants ${r.name}'s reputation. They are civil in public and unforgiving in private.`, colour: true },
+      { line: (r, s) =>
+        `Every client ${r.name} wins is one ${s.name} lost, and the reverse. The two keep a polite distance and an exact tally.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are rivals for the same patron's favour. Each has spent the year trying to be first through the patron's door.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.',
-      (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.',
-      (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.',
-      (r, s) => `${r.name} has hired away ${s.name}'s best assistant. ${s.name} has said nothing about it, to anyone.`,
-      (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`,
-      (r, s) =>
-        `${s.name} has been telling clients that ${r.name}'s work is slipping. Two of the clients have repeated it to ${r.name}.`,
+      { line: (r, s) => 'A decision coming in the next season will advantage one significantly. The other knows this.', colour: true },
+      { line: (r, s) => 'A mutual patron has let it be known there is room for only one of them at the next table.', colour: true },
+      { line: (r, s) => 'One of them has recently broken an unwritten rule of the contest. The other is deciding what that permits.', colour: true },
+      { line: (r, s) => `${r.name} has hired away ${s.name}'s best assistant. ${s.name} has said nothing about it, to anyone.`, colour: true },
+      { line: (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has been telling clients that ${r.name}'s work is slipping. Two of the clients have repeated it to ${r.name}.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`,
+      { line: (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`, colour: true },
     ]),
     type: 'rival',
   },
   mentor_legacy: {
     label: 'Mentor and Successor',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`,
-      (r, s) =>
-        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`,
-      (r, s) =>
-        `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`,
-      (r, s) =>
-        `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`,
-      (r, s) =>
-        `${s.name} learned the work at ${r.name}'s side for seven years. Half of ${s.name}'s clients first came through ${r.name}'s door.`,
-      (r, s) => `${r.name} vouched for ${s.name} when nobody else would. ${s.name}'s first post came from that word.`,
-      (r, s) =>
-        `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`,
-      (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`,
+      { line: (r, s) =>
+        `${r.name} shaped ${s.name}'s career in ways that ${s.name} has not fully acknowledged. The debt is real; the gratitude is complicated.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} stands where ${r.name} put them, by a ladder ${r.name} built and ${s.name} has since pulled up. Both remember it differently.`, colour: true },
+      { line: (r, s) =>
+        `What ${s.name} knows, ${r.name} taught (including, inconveniently, how to outmanoeuvre a teacher).`, colour: true },
+      { line: (r, s) =>
+        `${r.name} took ${s.name} in as an apprentice and taught them the trade, the clients, and the names worth knowing.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} learned the work at ${r.name}'s side for seven years. Half of ${s.name}'s clients first came through ${r.name}'s door.`, colour: true },
+      { line: (r, s) => `${r.name} vouched for ${s.name} when nobody else would. ${s.name}'s first post came from that word.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} still uses ${r.name}'s methods and ${r.name}'s ledger format. Everyone who sees ${s.name}'s work recognises the teacher.`, colour: true },
+      { line: (r, s) => `${r.name} named ${s.name} as successor in front of witnesses. The formal handover has not happened.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) =>
-        `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`,
-      (r, s) => `${r.name} has one favour left to call in, and is saving it. ${s.name} knows, and is watching for it.`,
-      (r, s) => `A third party has asked ${r.name}, quietly, whether ${s.name} can be trusted. The answer took too long.`,
-      (r, s) => `${s.name} has taken on a client ${r.name} turned away on principle.`,
-      (r, s) =>
-        `${r.name} has taken a new apprentice, and ${s.name} has heard the apprentice is being taught things ${s.name} never was.`,
-      (r, s) => `${s.name} corrected ${r.name} in public last month, and was right.`,
-      (r, s) =>
-        `${r.name} has asked ${s.name} for a loan. It is the first time a debt between teacher and student has run that way.`,
-      (r, s) => `${s.name} has begun teaching ${r.name}'s methods as ${s.name}'s own.`,
+      { line: (r, s) =>
+        `${s.name} now operates in ways ${r.name} would not approve of. Neither discusses the divergence directly.`, colour: true },
+      { line: (r, s) => `${r.name} has one favour left to call in, and is saving it. ${s.name} knows, and is watching for it.`, colour: true },
+      { line: (r, s) => `A third party has asked ${r.name}, quietly, whether ${s.name} can be trusted. The answer took too long.`, colour: true },
+      { line: (r, s) => `${s.name} has taken on a client ${r.name} turned away on principle.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} has taken a new apprentice, and ${s.name} has heard the apprentice is being taught things ${s.name} never was.`, colour: true },
+      { line: (r, s) => `${s.name} corrected ${r.name} in public last month, and was right.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} has asked ${s.name} for a loan. It is the first time a debt between teacher and student has run that way.`, colour: true },
+      { line: (r, s) => `${s.name} has begun teaching ${r.name}'s methods as ${s.name}'s own.`, colour: true },
     ]),
     type: 'mentor_student',
   },
   mutual_leverage: {
     label: 'Mutual Leverage',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`,
-      (r, s) =>
-        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`,
-      (r, s) =>
-        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`,
-      (r, s) =>
-        `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`,
-      (r, s) =>
-        `${r.name} controls a vote ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.`,
-      (r, s) =>
-        `${r.name} and ${s.name} each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.`,
-      (r, s) =>
-        `${s.name} needs ${r.name}'s seal on certain papers; ${r.name} needs ${s.name}'s silence about certain others. Neither has asked for more than the other could pay.`,
-      (r, s) =>
-        `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} each hold information or resources the other needs. They cooperate efficiently and neither trusts the other at all.`, colour: true },
+      { line: (r, s) =>
+        `What ${r.name} knows would ruin ${s.name}; what ${s.name} holds would finish ${r.name}. On this foundation they have built an excellent working relationship.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} deal with each other like men carrying lit lanterns in a powder store, carefully, and with great mutual politeness.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} trade favours on a strict count. Neither has ever been more than one favour ahead.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} controls a vote ${s.name} needs, and ${s.name} controls a supply ${r.name} needs. Their meetings are short and their bargains hold.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} each have something to trade and nothing to give away. They meet in private, bargain hard, and keep every bargain.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} needs ${r.name}'s seal on certain papers; ${r.name} needs ${s.name}'s silence about certain others. Neither has asked for more than the other could pay.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} sit on opposite sides of most questions and vote together on the few that touch their shared interests.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.",
-      (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.',
-      (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`,
-      (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`,
-      (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`,
-      (r, s) => `The vote ${s.name} needs from ${r.name} comes up next week, and ${r.name} has named a new price.`,
-      (r, s) =>
-        `${r.name}'s secret is about to come out by other means. Once it does, ${s.name} holds nothing over ${r.name}.`,
-      (r, s) => `${s.name} has written down what ${r.name} owes and left a copy with a notary.`,
+      { line: (r, s) => "The balance of leverage has recently shifted. One party has noticed; the other hasn't yet.", colour: true },
+      { line: (r, s) => 'A document each believed only they possessed has surfaced in a third set of hands.', colour: true },
+      { line: (r, s) => `${s.name} has recently secured something that makes ${r.name}'s hold obsolete. The politeness continues, for now.`, colour: true },
+      { line: (r, s) => `${r.name} has asked ${s.name} for a second favour before repaying the first.`, colour: true },
+      { line: (r, s) => `${s.name} has found a new source for what ${r.name} supplies. ${r.name} has not been told.`, colour: true },
+      { line: (r, s) => `The vote ${s.name} needs from ${r.name} comes up next week, and ${r.name} has named a new price.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s secret is about to come out by other means. Once it does, ${s.name} holds nothing over ${r.name}.`, colour: true },
+      { line: (r, s) => `${s.name} has written down what ${r.name} owes and left a copy with a notary.`, colour: true },
     ]),
     type: 'political',
   },
   wary_alliance: {
     label: 'Pragmatic Alliance',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.`,
-      (r, s) =>
-        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
-      (r, s) =>
-        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} work together because the alternative (working against each other) is worse for both. The alliance holds as long as the calculation holds.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`, colour: true },
+      { line: (r, s) =>
+        `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`, colour: true },
       { line: (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`,
-      (r, s) =>
-        `${r.name} brings the votes and ${s.name} brings the money. The alliance is three years old and has won every vote it needed.`,
-      (r, s) =>
-        `${r.name} and ${s.name} signed a pact after their last quarrel cost them both. They keep to its terms exactly.`,
-      (r, s) =>
-        `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`,
+      { line: (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} brings the votes and ${s.name} brings the money. The alliance is three years old and has won every vote it needed.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} signed a pact after their last quarrel cost them both. They keep to its terms exactly.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are allies with separate interests. They meet to coordinate and leave by different doors.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'A third party is actively working to change that calculation.',
-      (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.',
-      (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`,
-      (r, s) => `${s.name} has been dining with ${r.name}'s rivals. ${r.name} heard about it from a servant.`,
-      (r, s) =>
-        `${r.name} wants to bring a third member into the alliance. ${s.name} thinks the newcomer would take ${s.name}'s place.`,
-      (r, s) =>
-        `${s.name} voted against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.`,
-      (r, s) =>
-        `${r.name} and ${s.name} both want the same office, and the alliance cannot survive one of them winning it.`,
-      (r, s) =>
-        `${s.name} has asked ${r.name} to back a candidate ${r.name} distrusts. Refusing would cost the alliance its majority.`,
+      { line: (r, s) => 'A third party is actively working to change that calculation.', colour: true },
+      { line: (r, s) => 'The threat that made the alliance necessary is gone. Neither has said so aloud.', colour: true },
+      { line: (r, s) => `${r.name} has taken a precaution against ${s.name} that ${s.name} was not meant to discover. ${s.name} has discovered it.`, colour: true },
+      { line: (r, s) => `${s.name} has been dining with ${r.name}'s rivals. ${r.name} heard about it from a servant.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} wants to bring a third member into the alliance. ${s.name} thinks the newcomer would take ${s.name}'s place.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} voted against ${r.name} on a small matter last week. ${r.name} is waiting to see whether it was small.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} both want the same office, and the alliance cannot survive one of them winning it.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} to back a candidate ${r.name} distrusts. Refusing would cost the alliance its majority.`, colour: true },
     ]),
     type: 'ally',
   },
   genuine_respect: {
     label: 'Genuine Respect',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`,
-      (r, s) =>
-        `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`,
-      (r, s) =>
-        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`,
-      (r, s) =>
-        `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`,
-      (r, s) =>
-        `${r.name} and ${s.name} have stood on opposite sides of three disputes and praised each other after every one.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have earned each other's regard through demonstrated competence. They don't agree on everything but they trust each other's judgment within their respective domains.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} disagree often and trust completely. Each has watched the other be right at cost, and neither forgets it.`, colour: true },
+      { line: (r, s) =>
+        `There is no arrangement between ${r.name} and ${s.name}, only a long record of kept words; in this settlement that makes them remarkable.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have stood on opposite sides of three disputes and praised each other after every one.`, colour: true },
       { line: (r, s) =>
         `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) =>
-        `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`,
-      (r, s) =>
-        `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} trusts ${s.name}'s word over any written contract. ${s.name} has never given a reason to regret it.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'They are about to be on opposite sides of a significant decision.',
-      (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.',
-      (r, s) => 'The respect is real and the interests are diverging. Both can read a map.',
-      (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`,
-      (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`,
-      (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`,
+      { line: (r, s) => 'They are about to be on opposite sides of a significant decision.', colour: true },
+      { line: (r, s) => 'One of them is being pressured to act against the other, and has not yet mentioned it.', colour: true },
+      { line: (r, s) => 'The respect is real and the interests are diverging. Both can read a map.', colour: true },
+      { line: (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`, colour: true },
+      { line: (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`, colour: true },
+      { line: (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`, colour: true },
       { line: (r, s) =>
         `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) =>
-        `${s.name} has publicly backed a plan that ${r.name} thinks will fail. ${r.name} has said so once, in private.`,
+      { line: (r, s) =>
+        `${s.name} has publicly backed a plan that ${r.name} thinks will fail. ${r.name} has said so once, in private.`, colour: true },
     ]),
     type: 'respect',
   },
   old_debt: {
     label: 'Outstanding Debt',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`,
-      (r, s) =>
-        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`,
-      (r, s) =>
-        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`,
-      (r, s) =>
-        `${s.name} paid ${r.name}'s bail eleven years ago and has never mentioned it. ${r.name} mentions it to no one.`,
-      (r, s) =>
-        `${r.name} owes ${s.name} a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.`,
-      (r, s) =>
-        `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has voted with ${s.name} ever since.`,
-      (r, s) =>
-        `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`,
-      (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`,
+      { line: (r, s) =>
+        `${r.name} owes ${s.name} something significant: a favour, a secret kept, a crisis managed. The debt has never been formally acknowledged. It doesn't need to be.`, colour: true },
+      { line: (r, s) =>
+        `Years ago ${s.name} did for ${r.name} the kind of favour that cannot be repaid, only serviced. ${r.name} has been servicing it ever since.`, colour: true },
+      { line: (r, s) =>
+        `Between ${r.name} and ${s.name} stands an old kindness with the structure of a mortgage. Neither names it; both know the balance to the penny.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} paid ${r.name}'s bail eleven years ago and has never mentioned it. ${r.name} mentions it to no one.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} owes ${s.name} a large sum in coin, borrowed in a bad year and repaid in small amounts ever since.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} kept ${r.name}'s name out of a scandal that ruined two others. ${r.name} has voted with ${s.name} ever since.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} nursed ${r.name} through a winter fever when no one else would come. ${r.name} still owes the debt and still knows it.`, colour: true },
+      { line: (r, s) => `${r.name} borrowed ${s.name}'s good name to win a post. ${s.name} has never asked for it back.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => `${s.name} is about to call it in.`,
-      (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`,
-      (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.',
-      (r, s) =>
-        `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`,
-      (r, s) => `${r.name} has started repaying the debt in coin. ${s.name} wants it repaid in favours.`,
-      (r, s) => `${s.name} has mentioned the debt aloud, at a dinner, in front of ${r.name}'s partners.`,
-      (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`,
-      (r, s) => `${s.name} has fallen on hard times, and the debt ${r.name} owes is now the only asset ${s.name} has.`,
+      { line: (r, s) => `${s.name} is about to call it in.`, colour: true },
+      { line: (r, s) => `${r.name} has begun to act like someone who considers the debt paid. ${s.name} does not.`, colour: true },
+      { line: (r, s) => 'A third party has learned what the original favour was. The debt just changed hands.', colour: true },
+      { line: (r, s) =>
+        `${s.name} has asked ${r.name} for a vote against ${r.name}'s own interests. It is the first payment ${s.name} has asked for.`, colour: true },
+      { line: (r, s) => `${r.name} has started repaying the debt in coin. ${s.name} wants it repaid in favours.`, colour: true },
+      { line: (r, s) => `${s.name} has mentioned the debt aloud, at a dinner, in front of ${r.name}'s partners.`, colour: true },
+      { line: (r, s) => `${r.name} has refused ${s.name} a small favour for the first time in years.`, colour: true },
+      { line: (r, s) => `${s.name} has fallen on hard times, and the debt ${r.name} owes is now the only asset ${s.name} has.`, colour: true },
     ]),
     type: 'debtor_creditor',
   },
   family_complication: {
     label: 'Family Complication',
     desc: pairProse('d', [
-      (r, s) =>
-        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`,
-      (r, s) =>
-        `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`,
-      (r, s) =>
-        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`,
-      (r, s) =>
-        `${r.name} married into ${s.name}'s family. ${s.name} opposed the match and still calls ${r.name} by surname.`,
-      (r, s) =>
-        `${r.name} and ${s.name} are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.`,
-      (r, s) => `${s.name} is ${r.name}'s half-sibling, raised in the same house and left out of the same will.`,
-      (r, s) =>
-        `${r.name} and ${s.name} are in-laws. They are polite at family dinners and avoid each other everywhere else.`,
-      (r, s) =>
-        `${r.name} is godparent to ${s.name}'s eldest child. The tie was made before their careers set them against each other.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are connected by blood or marriage in a way that neither finds professionally convenient. The connection is known; its implications are not discussed.`, colour: true },
+      { line: (r, s) =>
+        `Blood ties ${r.name} to ${s.name} in a way that neither career can afford; they meet at funerals and weddings and pretend the rest of the year does not exist.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} share a family and avoid sharing anything else; every professional dealing between them is conducted as though the relation were a rumour.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} married into ${s.name}'s family. ${s.name} opposed the match and still calls ${r.name} by surname.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are cousins on opposite sides of the settlement's politics. Their grandmother still seats them together.`, colour: true },
+      { line: (r, s) => `${s.name} is ${r.name}'s half-sibling, raised in the same house and left out of the same will.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} are in-laws. They are polite at family dinners and avoid each other everywhere else.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} is godparent to ${s.name}'s eldest child. The tie was made before their careers set them against each other.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.',
-      (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.',
-      (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.',
-      (r, s) => `${r.name}'s child wants to marry into ${s.name}'s household. Neither parent has given an answer.`,
-      (r, s) =>
-        `${s.name} has gone into business against ${r.name}'s partners, and the family expects ${r.name} to keep the peace.`,
-      (r, s) =>
-        `A family property must be sold, and ${r.name} and ${s.name} each want the money for a different purpose.`,
-      (r, s) =>
-        `${r.name}'s rivals have learned that ${s.name} is family, and have started asking ${s.name} questions.`,
-      (r, s) =>
-        `The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.`,
+      { line: (r, s) => 'An inheritance, title, or secret is about to make the connection impossible to ignore.', colour: true },
+      { line: (r, s) => 'A younger relative has begun trading on the connection both of them refuse to use.', colour: true },
+      { line: (r, s) => 'The family has taken a side in a dispute between them. It is the wrong side, in both their opinions.', colour: true },
+      { line: (r, s) => `${r.name}'s child wants to marry into ${s.name}'s household. Neither parent has given an answer.`, colour: true },
+      { line: (r, s) =>
+        `${s.name} has gone into business against ${r.name}'s partners, and the family expects ${r.name} to keep the peace.`, colour: true },
+      { line: (r, s) =>
+        `A family property must be sold, and ${r.name} and ${s.name} each want the money for a different purpose.`, colour: true },
+      { line: (r, s) =>
+        `${r.name}'s rivals have learned that ${s.name} is family, and have started asking ${s.name} questions.`, colour: true },
+      { line: (r, s) =>
+        `The family has asked ${r.name} and ${s.name} to end their quarrel before the next feast. Neither will apologise first.`, colour: true },
     ]),
     type: 'family',
   },
   bitter_history: {
     label: 'Unresolved History',
     desc: pairProse('d', [
-      (r, s) =>
-        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`,
-      (r, s) =>
-        `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`,
-      (r, s) =>
-        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`,
+      { line: (r, s) =>
+        `Something happened between ${r.name} and ${s.name} years ago that neither has forgotten. They function professionally. They do not forgive.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} were something to each other once (partners, friends, perhaps more), and the wreck of it is the one subject on which both are permanently silent.`, colour: true },
+      { line: (r, s) =>
+        `The quarrel between ${r.name} and ${s.name} is old enough that no one else remembers the cause. They remember. They have simply stopped explaining.`, colour: true },
       (r, s) =>
         `${r.name} testified against ${s.name} in a case ten years ago. ${s.name} lost a fortune and has not spoken to ${r.name} since.`,
-      (r, s) =>
-        `${s.name} took the post ${r.name} had been promised. ${r.name} has treated ${s.name} as an enemy from that day.`,
-      (r, s) =>
-        `${r.name} and ${s.name} were partners until one of them emptied the shared account. Each says it was the other.`,
-      (r, s) => `${r.name} blames ${s.name} for a death in ${r.name}'s family. ${s.name} has never denied it.`,
-      (r, s) =>
-        `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`,
+      { line: (r, s) =>
+        `${s.name} took the post ${r.name} had been promised. ${r.name} has treated ${s.name} as an enemy from that day.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} were partners until one of them emptied the shared account. Each says it was the other.`, colour: true },
+      { line: (r, s) => `${r.name} blames ${s.name} for a death in ${r.name}'s family. ${s.name} has never denied it.`, colour: true },
+      { line: (r, s) =>
+        `${r.name} and ${s.name} fought a duel in their youth. Both survived, and the scar is on ${s.name}'s face.`, colour: true },
     ]),
     tension: pairProse('t', [
-      (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.',
-      (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.',
-      (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
+      { line: (r, s) => 'The circumstances that caused the original rupture are repeating. Both of them know it.', colour: true },
+      { line: (r, s) => 'An apology is owed in one direction and expected in the other, and they disagree about which.', colour: true },
+      { line: (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.', colour: true },
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
-      (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`,
+      { line: (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`, colour: true },
       { line: (r, s) =>
         `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`, excludes: ["ruler: lord","ruler: occupier"] },
-      (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`,
-      (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`,
+      { line: (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`, colour: true },
+      { line: (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`, colour: true },
     ]),
     type: 'enemy',
   },

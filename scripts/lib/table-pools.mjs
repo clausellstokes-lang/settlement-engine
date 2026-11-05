@@ -81,6 +81,7 @@ export const DECLARATION_CHANNELS = Object.freeze([
   { module: 'src/data/factionLabelSiblings.js', name: 'FACTION_LABEL_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_DECLARATIONS', kind: 'column' },
+  { module: 'src/data/institutionDescColour.js', name: 'DESC_VARIANT_COLOUR_DECLARATIONS', kind: 'column' }, // CENSUS-4h unit 4: R-AO's colour marks
   { module: 'src/data/institutionServices.js', name: 'SERVICE_DESC_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/npcData.js', name: 'NPC_HOOK_SIBLINGS', kind: 'siblings' },
   { module: 'src/data/powerData.js', name: 'FACTION_NAME_SIBLINGS', kind: 'siblings' },
