@@ -101,6 +101,7 @@ const flavorOf = (pattern, subset, facts) => {
   const r = drawDeclared(pool, {
     draw: (p) => (drawn = pickRandom2(p)), facts, poolId: `POLITICAL_FLAVOR.${pattern}`, surface: 'history', drawKind: 'R',
     crisisScoped: POLITICAL_FLAVOR_CRISIS_SCOPED.includes(pattern), key: `POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name ?? ''}`,
+    keepRefused: true, // R-AM: a kept template is noted
   });
   return r.line ?? drawn;
 };
