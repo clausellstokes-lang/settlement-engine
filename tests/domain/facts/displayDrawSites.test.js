@@ -15,6 +15,7 @@ import { describe, expect, it } from 'vitest';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 import { traditionHook, traditionBeatProse } from '../../../src/domain/traditions/prose.js';
 import { createConflictHookDraw, foodGapHookLine } from '../../../src/domain/dossier/hookLines.js';
+import { composeFoodwaysLine } from '../../../src/domain/foodways.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -43,5 +44,16 @@ describe('Appendix B row 90 — the conflict-hook and food-gap pools (kind H)', 
     const gap = withPresumptionLedger(() => foodGapHookLine({ name: 'Ashford', band: 'deficit' }));
     expect(gap.result).toBe(foodGapHookLine({ name: 'Ashford', band: 'deficit' }));
     expect(gap.ledger.map((e) => [e.pool, e.drawKind])).toEqual([['HOOK_LINE_POOLS.foodGap', 'H']]);
+  });
+});
+
+describe('Appendix B row 111 — the foodways frames and source phrases (kind H)', () => {
+  it('the frame and each slot are noted; the probe walk keeps the slots distinct, as before', () => {
+    const input = { sources: ['grain', 'livestock', 'fish'], cultureLines: [], identity: 'Ashford|town' };
+    const out = withPresumptionLedger(() => composeFoodwaysLine(input));
+    expect(out.result).toBe(composeFoodwaysLine(input));
+    expect(out.ledger.map((e) => e.pool)).toEqual([
+      'FOODWAYS.FRAMES.more', 'FOODWAYS.SOURCE_PHRASES.grain', 'FOODWAYS.SOURCE_PHRASES.livestock', 'FOODWAYS.SOURCE_PHRASES.fish',
+    ]);
   });
 });
