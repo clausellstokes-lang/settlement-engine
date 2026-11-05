@@ -102,6 +102,7 @@ Base: `6276e1205`, then `origin/lane/census-1b-2026-11-04` at `358b0a841` merged
 | 4 | `3aff73f` | **PARKED.** The apply script and the mute scan are committed; the annex is untouched. | — |
 | 5 | `56f6644` | The traditions: three water elements declare `needs`, and the tab filters through `filterDeclared`. | 0 · 0 · traditions 7 |
 | 6 | — | **PARKED, not started.** | — |
+| R-A (the chair's ruling of 2026-11-05 01:13) | (next commit) | The leaked author note. `tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER.metropolis["Printing services"].desc` read "Mass-produced texts (if technology exists)", which presumes a technology level. That has no field and no atom (`magic` is not what it means), so the parenthetical is removed and the row is listed under "needs a field" below. Red-first: `tests/data/tradeGoodsAuthorNotes.test.js`, 1 red → green. | 0 · 0 · 0 (the row's text is printed on none of the 60) |
 
 ### The rename table (`_vocabulary.json` → `factVocabulary.js`)
 
@@ -130,6 +131,11 @@ The table is also kept in `_vocabulary.json :: respelledTo`.
    - food pools take `no hunger`, not `{crisis-scoped}`;
    - Plains v2 drops `grain`;
    - F12's crisis twins in a scoped pool carry `crisis: any`.
+
+### Needs a field (no atom; the undeclared register's row, kept here until the register file exists on this base)
+
+- `tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER.metropolis["Printing services"]` presumes a technology level. The vocabulary has no technology atom.
+- Found by the same test and outside this lane: `institutionServices.js :: INSTITUTION_SERVICES.Mill` "Fulling cloth" "(if water mill)" and "Sawing timber" "(if saw mill)" are CENSUS-4's service table, and `institutionalCatalog.js` "Printing house" "(if technology exists)." is CENSUS-4's catalogue. Neither is cured here.
 
 ### Where the next seat starts
 
