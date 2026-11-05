@@ -29,7 +29,7 @@ import {
   prominentPair, prominentType, prominentProse,
 } from '../pdf/lib/format.js';
 import { gateFaithEvents } from '../domain/display/faithEventFilter.js';
-import { composeTonightSheet, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
+import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '../domain/summary/tonightSheet.js';
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
@@ -140,7 +140,7 @@ function tonightPage(settlement) {
   return md(
     sheet.opening ? md(`## ${sheet.crisis ? TONIGHT_COPY.crisis : TONIGHT_COPY.urgent}`, esc(sheet.opening)) : null,
     sheet.people.length ? md('', `## ${TONIGHT_COPY.people}`, sheet.people.map(p =>
-      `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${p.why === 'secret' ? esc(p.line) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
+      `- **${esc(p.name)}** (${esc([p.role, p.castLabel || why[p.why]].filter(Boolean).join(' · '))})${p.line ? `: ${!printsAsWant(p) ? esc([secretLeadOf(p), p.line].filter(Boolean).join(' ')) : p.sameAs ? `${TONIGHT_COPY.wantsSame} ${esc(p.sameAs)}.` : `${TONIGHT_COPY.wants} ${esc(p.line)}`}` : ''}`)) : null,
     sheet.facts.length ? md('', `## ${TONIGHT_COPY.facts}`, sheet.facts.map(f => `- **${esc(f.label)}**: ${esc(f.text)}`)) : null,
     sheet.hooks.length ? md('', `## ${TONIGHT_COPY.hooks}`, sheet.hooks.map(h =>
       `- ${esc(h.text)}${h.source ? ` *(${esc(h.source)})*` : ''}`)) : null,

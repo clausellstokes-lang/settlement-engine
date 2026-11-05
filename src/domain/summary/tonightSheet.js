@@ -178,6 +178,8 @@ const HOOK_COUNT = 3;
  * @property {'seat'|'secret'|'cleric'|'cast'} why
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
+ * @property {'want'|'secret'|'temperament'} says what `line` is: a want prints after "Wants to"; a
+ *                                  secret or a temperament prints as it stands (`printsAsWant`)
  * @property {string=} sameAs       set when an earlier person on the sheet wants the same: that person's
  *                                  name. The want prints once, on the first; this one reads
  *                                  "Wants the same as {sameAs}." (X-50, F2 REPEAT-ONCE)
@@ -358,17 +360,19 @@ function peopleOf(source) {
     .sort((a, b) => (powerOf(b.npc) - powerOf(a.npc)) || (a.index - b.index));
   /** @type {TonightPerson[]} */
   const out = [];
-  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] */
-  const add = (row, why, line, castLabel) => {
+  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] @param {'want'|'secret'|'temperament'} [says] */
+  const add = (row, why, line, castLabel, says = why === 'secret' ? 'secret' : 'want') => {
     const name = clean(row.npc.name);
     const at = out.findIndex((p) => p.name === name);
     if (at >= 0) {
-      // the seat-holder who also holds the crisis secret is voiced once, with the secret
-      if (why === 'secret') out[at] = { ...out[at], line };
+      // the seat-holder who also holds the crisis secret is voiced once, with the secret — AS a
+      // secret (R11 / R7): it prints under the label "Secret:" (`secretLeadOf`), never after
+      // "Wants to" (the seam "Wants to Has been making personal side payments…", soak1k-22).
+      if (why === 'secret') out[at] = { ...out[at], line, says: 'secret' };
       return;
     }
     if (out.length >= VOICE_SLOTS.length) return; // three people; the fallbacks only where the cast is short
-    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, sourcePath: `npcs[${row.index}]` });
+    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, says, sourcePath: `npcs[${row.index}]` });
   };
 
   // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
@@ -411,6 +415,27 @@ function peopleOf(source) {
 }
 
 /**
+ * Does this person's line print after "Wants to"? Only a want does; a secret (the crisis secret's
+ * keeper, or the seat-holder who keeps it) and a temperament print as they stand. ONE home for
+ * the three renderers (components/TonightSheet.jsx, pdf/sections/TonightAtTheTable.jsx,
+ * foundry/journalPages.js). A hand-built person with no `says` reads by its `why`.
+ * @param {{ why?: string, says?: string }} p @returns {boolean}
+ */
+export function printsAsWant(p) {
+  return p.why !== 'secret' && (p.says === undefined || p.says === 'want');
+}
+
+/**
+ * The label a renderer prints before a secret on a row whose own label is not "Secret" (the
+ * seat-holder who keeps the crisis secret): "Secret:". Empty for every other row. A label from
+ * TONIGHT_COPY, never a string on the record (the sheet's NOTHING-IS-INVENTED rule).
+ * @param {{ why?: string, says?: string }} p @returns {string}
+ */
+export function secretLeadOf(p) {
+  return p.says === 'secret' && p.why !== 'secret' ? `${TONIGHT_COPY.secret}:` : '';
+}
+
+/**
  * ONE WANT, ONE HOME (X-50, F2 REPEAT-ONCE): two people on the sheet can carry the same want
  * (two NPCs given one structural goal, npcStructure.js). The first prints it; a later one names
  * the first instead of repeating the sentence. A secret line is never folded.
@@ -420,7 +445,7 @@ function wantsOnce(people) {
   /** @type {Map<string, string>} */
   const firstBy = new Map();
   return people.map((p) => {
-    if (p.why === 'secret' || !p.line) return p;
+    if (!printsAsWant(p) || !p.line) return p;
     const first = firstBy.get(p.line);
     if (first === undefined) { firstBy.set(p.line, p.name); return p; }
     return { ...p, sameAs: first };
