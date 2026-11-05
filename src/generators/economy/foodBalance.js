@@ -750,7 +750,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
+        // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
+        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
@@ -825,3 +827,36 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
 
   return { issues, warnings, plotHooks: hooks };
 };
+
+/**
+ * One declared sibling set: the original `needs` its atoms; its twin (when the slot needs one)
+ * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ */
+const declaredSet = (text, needs, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(needs) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+]);
+
+/**
+ * THE OUTLOOK HOOKS' DECLARED SIBLINGS, CARRIED (CENSUS-3d unit 6, 2026-11-05;
+ * `docs/DESIGN_POOL_CENSUS.md` §3.1, the chair's ruling R-C). `deriveSupplyRiskAnalysis` prints its
+ * hooks from inline T branches; a branch is the mechanism lane's to route through
+ * `drawDeclared.js :: resolveSibling` (Appendix B item 23), so the declarations stand HERE, keyed
+ * by the printed text, and no consumer reads them yet (byte-identical). A branch's own key is not
+ * re-declared: the dam (route river), the blockade (route port, coastal), the bandits (route road).
+ * Measured on soak1k-0..199 before the change, printed / false by the final record: the timber
+ * 33 / 16 (`navigable`: the reader:hook-pools `[sea]` class, "shipbuilding" on plains and desert
+ * roads), the iron 38 / 3 (`institution: smith`), the starving 8 / 0 (carried for the self-check;
+ * a refused original with no twin keeps its text under `resolveSibling`). The two twins are the
+ * chair's rulings (R-G), recorded in `docs/CENSUS_3_LANE_2026-11-04.md`.
+ */
+export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
+  "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
+    "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
+    "Something is killing the forest the timber comes from, and the settlement's building trades stall without it. Find another supplier, or find out what is in those woods?"),
+  'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.': declaredSet(
+    'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.', ['institution: smith'],
+    'War breaks out. Metal suppliers prioritize military contracts, and the iron for tools and repairs stops arriving. Economy suffers, population discontent grows.'),
+  'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.': declaredSet(
+    'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.', ['food: ≤ deficit', 'tier: <= village']),
+});

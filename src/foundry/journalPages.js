@@ -33,7 +33,7 @@ import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '.
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
-import { displayTradeList } from '../domain/display/tradeListDisplay.js';
+import { displayTradeList, revenuesOffTheLists } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -294,6 +294,8 @@ function economicsPage(vm) {
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,
+    // CENSUS-3c (R-P 2): the revenues that left the trade lists, where the record holds their fact.
+    revenuesOffTheLists(vm.raw).length ? kv('Also earned (no share recorded)', revenuesOffTheLists(vm.raw).map((r) => r.text).join(', ')) : null,
     (e.chains || []).length ? md('', '## Supply chains', e.chains.map(c =>
       `- **${esc(c.name)}** *(${esc(c.status)})*${c.description ? `: ${esc(c.description)}` : ''}`)) : null,
   );

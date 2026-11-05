@@ -221,12 +221,14 @@ describe('the state-prose reader — anchored liveness', () => {
     }
   });
 
+  // CENSUS-3c (R-N): DS-ECO-8's lines declare fact atoms (STRUGGLING v3 `market`), so the kernel
+  // reads the pool against `facts` (fail-closed); the one calm double keeps these the laws' arms.
   for (const rung of PROSPERITY_RUNGS) {
     it(`offers the settlement-naming rung only while the town has a name — ${rung.pool} [${rung.why}]`, () => {
       const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
-      const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM })
+      const named = eligibleVariants(pool, { slots: { settlement: 'Thornwall' }, audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL })
         .map((v) => v.text);
-      const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM }).map((v) => v.text);
+      const unnamed = eligibleVariants(pool, { slots: {}, audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL }).map((v) => v.text);
 
       const slotted = named.find((t) => t.includes('{settlement}'));
       expect(slotted, 'the rung must carry at least one settlement-anchored line').toBeTruthy();
@@ -249,7 +251,7 @@ describe('the state-prose reader — anchored liveness', () => {
       ).toBe(true);
       const line = readStateProse(
         DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM },
+        { slots: { settlement: 'Thornwall' }, seed: 'save-1::eco-8', audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL },
       );
       expect(line?.text).toBeTruthy();
       // anchored: the two assertions above prove the pool can produce a slot token and that the reader returned live prose, so this measures substitution rather than absence-of-everything
@@ -386,7 +388,7 @@ describe('the state-prose reader — THE PROMISE', () => {
   for (const rung of PROSPERITY_RUNGS) {
     it(`draws the same sentence for the same seed and the same state, every time — ${rung.pool} [${rung.why}]`, () => {
       const args = [DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM }];
+        { slots: { settlement: 'Thornwall' }, seed: 'world-7::DS-ECO-8', audience: AUDIENCE_DM, facts: CALM_FACTS_ADMIT_ALL }];
       const first = readStateProse(...args);
       for (let i = 0; i < 20; i++) expect(readStateProse(...args)).toEqual(first);
     });
@@ -394,7 +396,7 @@ describe('the state-prose reader — THE PROMISE', () => {
     it(`reads canonical-at-zero when there is no seed — ${rung.pool} [${rung.why}]`, () => {
       const pool = DOSSIER_STATE_PROSE_ECONOMY[rung.block].pools[rung.pool];
       const seedless = readStateProse(DOSSIER_STATE_PROSE_ECONOMY, rung.block, rung.pool,
-        { slots: { settlement: 'Thornwall' } });
+        { slots: { settlement: 'Thornwall' }, facts: CALM_FACTS_ADMIT_ALL });
       expect(seedless?.text).toBe(pool[0].text.replace('{settlement}', 'Thornwall'));
     });
   }
