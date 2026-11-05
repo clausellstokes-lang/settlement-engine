@@ -1372,7 +1372,10 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     }
     expect(failures).toEqual([]);
     // ANTI-VACUITY: the six rows actually drew, so the zero above is a measurement.
-    expect(measured).toBeGreaterThan(500);
+    // 600 -> 500 at X-46 car 1b's first step (the six rows drew 595; the chair's ruling 3, LANDING-4's addendum, confirmed);
+    // 500 -> 600 on 2026-11-05 at the landed tip (the six rows draw 645: city 214, metropolis 257, town 118, village 26,
+    // hamlet 18, thorp 12). The floor follows the measurement, as ruling 3 orders.
+    expect(measured).toBeGreaterThan(600);
   }, 300_000);
 
   it('CONVICTING CONTROL: the census instrument reds on a block that IS duplicated', () => {
