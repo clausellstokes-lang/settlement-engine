@@ -60,3 +60,31 @@ One home, `src/domain/display/validationOnPage.js`, read by the three tabs and b
 - J3. The count is unified by LISTING the critical stress consequence, not by re-counting the summary: the verdict "Not viable" stands on that issue (famine-only `soak1k-12` would otherwise read "Not viable" over an empty list).
 - J4. The unexploited / partial gap rows are re-voiced too (they were rule-shaped: "Raw resource available but not being processed"), and the generator's duplicate chains (`glass sand` / `glass_sand`, `timber` / `mountain_timber`) print once.
 - J5. The staff panel lives on the Viability tab only (one surface for all four row kinds), open by default for the staff viewer.
+
+## 3. The instrument (unit 3) and the measurement
+
+`readerBattery.js :: validationOnPageFindings` keeps its four sub-cases and gains **`[gap-vs-record]`**: a gap line in either voice (the generator's "X exists but lacks access to Y", the house's "No Y reaches the X.") whose good the record holds (production, imports, exports, non-depleted nearby keys, food sources; grain also by ordinary supply). It is its own simple reader (a word in common), deliberately not the cure's table; it reads "precious stones" as gems.
+
+**The 60:** base 60 of 60 (163 occurrences) → after **0**. The X-50 boilerplate raised by the first cure (a shared priority note under two critical rows, 3 seeds) was cured in `f93bcd2`; the after-60 reads X-50 0.
+
+**The 1,000** — "before" is the base `56b3788` with the unit-3 instrument copied in and no cure (scratch worktree); "after" is `cf7cbb3`. Rendered 1,000 / errors 0 both.
+
+| sub-case | before (thorp/hamlet/village/town/city/metro) | after |
+|---|---|---|
+| **reader:validation-on-page** | **985** (160/162/165/167/165/166) | **0** |
+| gaps | 977 (154/161/165/167/164/166) | 0 |
+| gap-vs-record | 782 (80/80/130/167/159/166) | 0 |
+| viability-count | 173 (32/39/30/23/24/25) | 0 |
+| structural | 117 (29/17/22/20/12/17) | 0 |
+| requires-on-water | 23 (7/6/1/5/1/3) | 0 |
+
+Surfaces before: pdf 1,899 · resources 1,759 · viability 313 · overview 140 occurrences; after: none. Every other reader class is identical before and after (relation-types 647, daily-life-placeholder 495, scale-lists 156, traditions-water 150, rule-text 148, tonight-wants 128, hook-pools 113, possessive-slip 93, tension-memory 60). Finding classes: `coh:crisis-blind-prose` 278 → 278 (the base's own level, unmoved), `A-05:lacks-access-lines` 977 → 0, `info:battery-would-not-vouch` 691 → 691, `A-12` 18 → 18, `A-09` 8 → 8; no `cert:` class either side.
+
+**The first 1,000 after unit 3 (`451689f`) read 9 and raised A-11 1**; the three causes were cured in `cf7cbb3`: the plural ("Mineral salts" answers salt; 8 seeds, soak1k-249/-297/-453/-99/-801/-63/-107/-615), the instrument's "precious stones" (soak1k-316, a true gap), and A-11 reading the house-voice lack under F5's licence (soak1k-992, a desert fishmonger: "No fish reaches the fishmonger.").
+
+## 4. Reds, registers, goldens
+
+- **Record hashes, three births, base vs lane** (`corpus.mjs :: sha(birth(i).settlement)`): soak1k-0 `d615804a8c4592dd`, soak1k-8 `33ff8c56ae106813`, soak1k-24 `b51d754bd3e4690d` — identical. Render-time only: no generator golden, prose manifest or census row moves by a record.
+- **Governing suites** (108 files naming a changed module): 47 failed at the base, the same 47 by title at the tip, none new. Pins rewritten to the ruling (they pinned the cut blocks): `g5FirstSurveyCopy` ×2, `pdfParityFixes` pdf-3, `generalDeskTabFlow` DS-GEN-7, `tabs.smoke` ×2.
+- **Register rows moved inside walkers already red at the base (listed, not refrozen):** `observedShapeReaders.walker` +6 stale rows, all from reads the cure removed — 3 "lawful repair" (`viewModel.js` stressConsequences on economicViability; `viewModelBodySlices.js` structuralGaps on resourceAnalysis and on settlement) and 3 "instrument erosion" classifications of the same removals (`viewModel.js` criticalIssues and structuralSuggestions on economicViability; `viewModelBodySlices.js` priorityNotes on economicViability); `rawColorLiteral` 1,230 → 1,229 (an unbanked shrink, the cut blocks' borders).
+- `typecheck:domain:strict` reds on `crisisFactFindings.js` +4 at the base and here (not this lane's); `typecheck:ratchet` OK 167/167; eslint clean on every touched file.
