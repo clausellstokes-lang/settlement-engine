@@ -533,7 +533,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      needs: ['organised crime'], short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
+      short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: NOT declared — F4's writer (npcGenerator, crimeSignalOf) rewrites the guild to 'a powerful outside interest' where no crime signal stands, so the printed line presumes nothing (tests/generators/npcCrimeSignalWriters.test.js soak1k-531)
       long: 'Die in bed rather than in the street (unusual ambition for the role)',
       driven_by: 'personal',
     },
