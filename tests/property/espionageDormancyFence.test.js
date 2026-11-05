@@ -189,6 +189,17 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-05, THE V-SUMMARY-HOOKS CURE (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FIFTY-SEVENTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-05-rung1-28-summary-hook-count.json. THE MOVER, FOUND: commit c1cf38bbb on the rung-1
+ * landing and nothing else (the viability summary's plot-hook count is re-derived from the hooks that survive the truth
+ * filter, hookTruthRecord.js :: withoutFalseHooks; the defect was TRUTH 7eb0bf0ba's). On THIS corpus 44 of 360 rows move
+ * (village 8, town 13, city 13, metropolis 10; thorp, hamlet 0); 360/360 hashes stay distinct. Written at the branch tip
+ * (the cure is the last step), measured by scripts/audit/refence.mjs before the write against the tip without the cure,
+ * which reproduces this file's previous constant. FENCE 3 (call-path dormancy) re-run green at the write.
+ * `dc33f86a…` -> `3302d755…`.
+ *
  * ── 2026-11-04, F10 WALLS-WORD (units 1–4) (RUNG 1 OF THE SOAK LADDER) ──
  * THE FIFTY-SIXTH MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -799,7 +810,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'dc33f86ae4d5ccf259770b49a3058257ff81011a784b4d9b3599469c5caac2ae';
+const PRE_COUPLING_CORPUS_SHA = '3302d7555d6bb0ead08408da08af3b6d60b05c72f7714c1d4f2d672a154aecd5';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
