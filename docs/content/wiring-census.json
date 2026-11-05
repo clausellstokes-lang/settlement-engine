@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2338,
+    "variants": 2342,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -124,7 +124,7 @@
     "sourceTwoSourceRows": 10,
     "modifierRows": 0,
     "declaredColumnRows": 709,
-    "tablePools": 48
+    "tablePools": 50
   },
   "rows": [
     {
@@ -224,7 +224,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -389,7 +389,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -451,7 +451,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -513,7 +513,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -527,7 +527,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -574,8 +574,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "crisis: under_siege, occupied": 1,
+        "no crisis: under_siege, occupied": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -643,9 +646,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -712,8 +716,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -781,7 +788,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -918,7 +925,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1127,7 +1134,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1195,7 +1202,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1261,7 +1268,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1327,7 +1334,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1395,7 +1402,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1542,9 +1549,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "watch": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1615,7 +1623,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1678,7 +1686,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1741,7 +1749,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1867,7 +1875,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1929,7 +1937,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -1991,7 +1999,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2058,7 +2066,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2125,7 +2133,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2192,7 +2200,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2259,7 +2267,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2326,7 +2334,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2476,8 +2484,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 3,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2525,9 +2536,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "watch": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2575,9 +2587,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "watch": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2624,8 +2637,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "watch": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2673,7 +2689,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2735,9 +2751,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no unrest": 2
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2799,7 +2816,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2861,7 +2878,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2918,8 +2935,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "no organised crime": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -2969,8 +2989,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "organised crime": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3021,7 +3044,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3072,7 +3095,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3123,7 +3146,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3174,7 +3197,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3232,9 +3255,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "gate": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3292,7 +3316,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3370,9 +3394,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3454,7 +3479,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3541,8 +3566,11 @@
         "stateOrgan": true
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "gate": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3622,7 +3650,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3684,7 +3712,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3758,7 +3786,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3826,7 +3854,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3886,9 +3914,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3948,7 +3977,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -3996,10 +4025,12 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no walls": 1,
+        "soldiers": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4047,7 +4078,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4095,7 +4126,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4143,7 +4174,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4191,10 +4222,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4242,7 +4274,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4292,7 +4324,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4342,7 +4374,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4392,7 +4424,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4440,7 +4472,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4490,7 +4522,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4544,7 +4576,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4594,7 +4626,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4699,7 +4731,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4753,9 +4785,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no crisis: hunger": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4806,9 +4839,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no crisis: hunger": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -4858,7 +4892,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5082,8 +5116,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 3,
+        "magic": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5129,9 +5166,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no crisis: threat": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5177,7 +5215,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5223,7 +5261,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5269,7 +5307,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5315,7 +5353,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5361,7 +5399,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5407,7 +5445,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5454,8 +5492,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5502,8 +5543,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5550,8 +5594,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "gate": 1,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5598,8 +5646,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "garrison": 1,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5655,7 +5707,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5727,7 +5779,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5793,7 +5845,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5841,7 +5893,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5903,7 +5955,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -5968,7 +6020,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6029,8 +6081,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "magic": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6092,7 +6147,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6138,7 +6193,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6184,7 +6239,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6230,7 +6285,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6276,7 +6331,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6322,9 +6377,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no crisis: threat": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6370,10 +6426,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no crisis: threat": 1,
         "no crisis: threat, unrest": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6418,8 +6475,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6464,8 +6524,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "walls": 1,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6512,8 +6576,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6558,8 +6625,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "gate": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6604,8 +6674,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "garrison": 1,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6650,8 +6724,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6696,8 +6773,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6742,8 +6822,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "gate": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6788,8 +6871,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6834,8 +6920,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6880,8 +6969,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6926,8 +7018,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -6973,7 +7068,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7019,7 +7114,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7066,8 +7161,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "gate": 2,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7144,7 +7243,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7303,8 +7402,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 2,
+      "lineDeclares": {
+        "colour": 1,
+        "watch": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -7446,7 +7548,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -20856,7 +20958,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -20922,7 +21024,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -20986,7 +21088,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21038,7 +21140,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21090,7 +21192,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21142,7 +21244,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21194,7 +21296,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21257,7 +21359,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21325,7 +21427,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21386,7 +21488,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21453,7 +21555,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -21517,7 +21619,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -25946,8 +26048,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 4,
+      "lineDeclares": {
+        "colour": 4
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26000,7 +26104,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26053,7 +26157,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 5,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26106,7 +26210,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 5,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26159,7 +26263,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26212,7 +26316,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26265,7 +26369,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26318,7 +26422,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26371,7 +26475,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26423,8 +26527,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "crisis: hunger": 1,
+        "institution: granary": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26502,7 +26610,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26569,7 +26677,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26636,7 +26744,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26703,7 +26811,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26769,11 +26877,12 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "gate": 1,
         "no walls": 2,
         "walls": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26839,7 +26948,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26892,7 +27001,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -26958,7 +27067,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27024,7 +27133,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27090,7 +27199,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27167,7 +27276,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27244,7 +27353,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27316,7 +27425,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27393,7 +27502,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27468,7 +27577,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27608,7 +27717,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27676,7 +27785,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27745,7 +27854,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27816,7 +27925,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27882,7 +27991,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -27954,7 +28063,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28009,7 +28118,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28060,7 +28169,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28125,7 +28234,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28177,7 +28286,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28230,7 +28339,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28282,7 +28391,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28332,7 +28441,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28382,7 +28491,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28431,7 +28540,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28480,7 +28589,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28534,7 +28643,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28588,7 +28697,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28637,7 +28746,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28687,7 +28796,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28761,7 +28870,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28836,10 +28945,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -28929,7 +29039,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29019,9 +29129,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "watch": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29088,7 +29199,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29155,7 +29266,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29205,9 +29316,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29257,9 +29369,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29309,7 +29422,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29359,7 +29472,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29411,10 +29524,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "market": 1,
         "watch": 1
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29464,7 +29578,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29523,8 +29637,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "market": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29596,7 +29713,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29649,7 +29766,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29701,7 +29818,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29752,7 +29869,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29803,7 +29920,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29854,7 +29971,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29905,10 +30022,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -29959,7 +30077,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30010,7 +30128,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30063,7 +30181,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30114,7 +30232,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30165,7 +30283,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30218,7 +30336,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30269,7 +30387,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30320,7 +30438,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30371,7 +30489,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30422,7 +30540,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30474,8 +30592,10 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1
+      },
+      "undeclared": 2,
       "crisisScoped": false
     },
     {
@@ -30528,7 +30648,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -30595,7 +30715,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -34767,9 +34887,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 3,
         "gate": 1
       },
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -34866,9 +34987,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "market": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -34959,10 +35081,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -34984,7 +35107,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -35017,8 +35140,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "crisis: under_siege, occupied": 1,
+        "no crisis: under_siege, occupied": 2,
+        "no crisis: under_siege, occupied, wartime": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35074,7 +35201,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35130,7 +35257,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35186,7 +35313,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35264,7 +35391,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35342,7 +35469,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35414,7 +35541,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35492,7 +35619,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35560,7 +35687,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35628,7 +35755,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35709,7 +35836,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35784,7 +35911,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35841,7 +35968,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35898,7 +36025,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -35955,10 +36082,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36015,7 +36143,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36072,10 +36200,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 2,
         "walls": 2
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36132,7 +36261,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36192,7 +36321,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36249,9 +36378,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "institution: granary": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36308,7 +36438,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36365,7 +36495,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36422,7 +36552,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36479,7 +36609,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36536,7 +36666,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36592,7 +36722,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36649,7 +36779,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36706,10 +36836,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no walls": 2,
         "walls": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36765,10 +36896,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "no walls": 2,
         "walls": 2
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36824,10 +36956,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36883,7 +37016,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36939,7 +37072,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -36996,7 +37129,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37053,7 +37186,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37109,7 +37242,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37166,7 +37299,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37223,7 +37356,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37279,7 +37412,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37335,9 +37468,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "gate": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37393,7 +37527,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37449,7 +37583,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37505,7 +37639,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37583,7 +37717,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37665,7 +37799,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37743,7 +37877,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37819,7 +37953,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37939,7 +38073,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -37985,7 +38119,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38031,7 +38165,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38077,7 +38211,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38123,7 +38257,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38168,8 +38302,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "no soldiers": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38215,7 +38352,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38261,7 +38398,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38307,7 +38444,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38353,7 +38490,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38399,7 +38536,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38445,7 +38582,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38491,7 +38628,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38536,8 +38673,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "no crisis: unrest": 2
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38582,8 +38722,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "gate": 1,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38630,8 +38774,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38679,7 +38826,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38727,7 +38874,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38775,7 +38922,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38823,7 +38970,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38871,7 +39018,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38917,7 +39064,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -38963,7 +39110,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39009,7 +39156,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39057,7 +39204,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39104,8 +39251,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "navigable": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39151,7 +39301,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39203,7 +39353,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39251,7 +39401,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39296,8 +39446,12 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 1,
+        "gate": 1,
+        "walls": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39345,7 +39499,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39391,7 +39545,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39437,7 +39591,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39483,7 +39637,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39529,7 +39683,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39578,8 +39732,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "market": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39638,10 +39795,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39700,7 +39858,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39759,10 +39917,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "no walls": 1,
         "walls": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39781,12 +39940,13 @@
       ],
       "slotsNamed": [
         "creed",
-        "rival_creed"
+        "rival_creed",
+        "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -39820,8 +39980,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "sacredHouse": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39877,7 +40040,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39933,9 +40096,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -39991,7 +40155,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40047,9 +40211,11 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
+        "priest": 1,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40105,9 +40271,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40160,8 +40327,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "priest": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40215,9 +40385,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40271,7 +40442,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40342,7 +40513,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40413,7 +40584,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40481,7 +40652,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40561,9 +40732,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40635,9 +40807,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 1,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 1,
       "crisisScoped": false
     },
     {
@@ -40709,7 +40882,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40781,7 +40954,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40851,7 +41024,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40907,7 +41080,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -40975,7 +41148,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41034,7 +41207,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 4,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41091,8 +41264,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "sacredHouse": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41152,9 +41328,10 @@
       },
       "declares": [],
       "lineDeclares": {
+        "colour": 2,
         "temple": 1
       },
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41212,7 +41389,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41269,7 +41446,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41325,8 +41502,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "sacredHouse": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41418,7 +41598,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41440,7 +41620,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -41500,9 +41680,10 @@
       },
       "declares": [],
       "lineDeclares": {
-        "no crisis: religious_conversion": 2
+        "crisis: religious_conversion": 1,
+        "no crisis: religious_conversion": 3
       },
-      "undeclared": 1,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41528,7 +41709,7 @@
         "timeband_span"
       ],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -41562,8 +41743,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "crisis: religious_conversion": 1,
+        "no crisis: religious_conversion": 3
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41619,8 +41803,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "no crisis: religious_conversion": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41677,7 +41864,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41734,7 +41921,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41793,7 +41980,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41850,7 +42037,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41908,7 +42095,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -41965,7 +42152,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42022,7 +42209,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42079,7 +42266,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42135,8 +42322,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "magic": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42198,7 +42388,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42259,7 +42449,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42320,7 +42510,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42378,7 +42568,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42438,7 +42628,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42492,8 +42682,11 @@
         "twoSource": false
       },
       "declares": [],
-      "lineDeclares": {},
-      "undeclared": 3,
+      "lineDeclares": {
+        "colour": 2,
+        "institution: tavern": 1
+      },
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42552,7 +42745,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42600,7 +42793,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42652,7 +42845,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 3,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42700,7 +42893,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     },
     {
@@ -42750,7 +42943,7 @@
       },
       "declares": [],
       "lineDeclares": {},
-      "undeclared": 2,
+      "undeclared": 0,
       "crisisScoped": false
     }
   ],
@@ -43364,6 +43557,32 @@
       "drawKind": "T",
       "drawSite": "faithPanelModel.js (axis-keyed)",
       "lines": 4,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false,
+      "colour": true
+    },
+    {
+      "id": "warRemembrance.WAR_ENDING_TELLINGS",
+      "module": "src/domain/display/warRemembrance.js",
+      "name": "WAR_ENDING_TELLINGS",
+      "drawKind": "T",
+      "drawSite": "warRemembrance.js (ending-keyed by the record's classifier)",
+      "lines": 11,
+      "declares": [],
+      "lineDeclares": {},
+      "undeclared": 0,
+      "crisisScoped": false,
+      "colour": true
+    },
+    {
+      "id": "deityEffects.DEITY_AXIS_EFFECTS",
+      "module": "src/domain/display/deityEffects.js",
+      "name": "DEITY_AXIS_EFFECTS",
+      "drawKind": "T",
+      "drawSite": "deityEffects.js (axis-keyed)",
+      "lines": 13,
       "declares": [],
       "lineDeclares": {},
       "undeclared": 0,
@@ -44054,7 +44273,7 @@
         "DS-DEF-1 :: strategic value HIGH",
         "DS-DEF-1 :: strategic value LOW"
       ],
-      "variants": 6,
+      "variants": 7,
       "grammars": 2,
       "blocks": [
         "DS-DEF-1"
@@ -52291,7 +52510,7 @@
         "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_PRIZE_OF",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57220,7 +57439,7 @@
       "subject": "warExhaustion: rested",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -57914,7 +58133,7 @@
       "subject": "CULTS: cults[] present beneath the patron",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, rival_creed}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {creed, rival_creed, settlement}"
     },
     {
       "tier": "THIN",
@@ -58132,7 +58351,7 @@
       "subject": "NICHE: every niche uncontested",
       "fields": [],
       "readingFunction": "nicheContestPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -58140,7 +58359,7 @@
       "subject": "LEGITIMACY: secure",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, settlement, timeband_span}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {creed, settlement, timeband_span}"
     },
     {
       "tier": "COVERED",

@@ -10,7 +10,8 @@ import { describe, expect, it } from 'vitest';
 import { generatePowerStructure } from '../../src/generators/power/rulingStructure.js';
 import { withPresumptionLedger } from '../../src/domain/facts/presumptionLedger.js';
 
-const PATROL = "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.";
+// CENSUS-5c (the chair's ruling of 05:25): the militia line reworded to presume nothing about the guard (R-U).
+const PATROL = "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical.";
 const TOWN_WATCH = 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.';
 const config = { priorityMilitary: 50, priorityEconomy: 50, tradeRouteAccess: 'road' };
 
@@ -22,7 +23,7 @@ function militaryDesc(tier, institutions) {
 }
 
 describe('rulingStructure FACTION_DESC_SIBLINGS (CENSUS-1e unit 2)', () => {
-  it('(a) R-Q: the militia sets wait on order — the patrol line prints unresolved with or without a militia, unnoted', () => {
+  it('(a) R-Q measured (CENSUS-5c): the patrol line presumes no militia — it prints the same with or without one, unnoted', () => {
     for (const roster of [[{ name: 'Village militia', category: 'Defense' }], [{ name: 'Shrine', category: 'Religious' }]]) {
       const { desc, ledger } = militaryDesc('village', roster);
       expect(desc?.startsWith(PATROL)).toBe(true);

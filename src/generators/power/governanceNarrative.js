@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // F10, CENSUS-1c: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { BASELINE_CONFLICT_SIBLINGS } from '../../data/powerSiblings.js'; export { BASELINE_CONFLICT_SIBLINGS }; // F10, CENSUS-1c, CENSUS-5c (R-AB: the table moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -759,7 +759,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = resolveSibling(deriveBaselineConflict({ // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands (BASELINE_CONFLICT_SIBLINGS below)
+  let recentConflict = resolveSibling(deriveBaselineConflict({ // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands (BASELINE_CONFLICT_SIBLINGS, data/powerSiblings.js)
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -811,41 +811,3 @@ export const buildGovernanceLabels = ({
 
   return { stability, recentConflict };
 };
-
-/**
- * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
- * §3.1): the merchant-army baseline conflict (`deriveBaselineConflict`). The original stays where it is spelled above; the twin stands beside it here with
- * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
- * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
- */
-export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
-  'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.': Object.freeze([
-    Object.freeze({ text: 'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', needs: Object.freeze(['soldiers']) }),
-    Object.freeze({ text: 'A guild\'s hired guards arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', twinOf: 'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', excludes: Object.freeze(['soldiers']) }),
-  ]),
-  // CENSUS-5b unit 2 (2026-11-05): five baseline conflicts that presume a fact their branch does
-  // not guarantee. Each twin is the chair's ruling (R-G; recorded with its share in
-  // docs/CENSUS_5_LANE_2026-11-04.md, "CENSUS-5b"); this site is a T lookup, so a twin moves only
-  // the births whose record refuses the original. The militia captain's branch is reached with NO
-  // military institution, and the two market lines' branches with no market-named house.
-  'The village militia captain is pushing for authority over disputes that the reeve used to handle.': Object.freeze([
-    Object.freeze({ text: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', needs: Object.freeze(['militia']) }),
-    Object.freeze({ text: 'The strongest armed household is pushing for authority over disputes that the reeve used to handle.', twinOf: 'The village militia captain is pushing for authority over disputes that the reeve used to handle.', excludes: Object.freeze(['militia']) }),
-  ]),
-  'The miller and the largest farming household are in dispute over prices and access.': Object.freeze([
-    Object.freeze({ text: 'The miller and the largest farming household are in dispute over prices and access.', needs: Object.freeze(['institution: mill']) }),
-    Object.freeze({ text: 'The largest farming household and the traders who buy from it are in dispute over prices and access.', twinOf: 'The miller and the largest farming household are in dispute over prices and access.', excludes: Object.freeze(['institution: mill']) }),
-  ]),
-  'The household that sells the most at market has been throwing its weight around in community decisions.': Object.freeze([
-    Object.freeze({ text: 'The household that sells the most at market has been throwing its weight around in community decisions.', needs: Object.freeze(['market']) }),
-    Object.freeze({ text: 'The household that sells the most beyond the settlement has been throwing its weight around in community decisions.', twinOf: 'The household that sells the most at market has been throwing its weight around in community decisions.', excludes: Object.freeze(['market']) }),
-  ]),
-  "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.": Object.freeze([
-    Object.freeze({ text: "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.", needs: Object.freeze(['market']) }),
-    Object.freeze({ text: "Two households have been undercutting each other on every sale for months. Last week someone's cart was damaged. No one saw anything.", twinOf: "Two households have been undercutting each other on market day for months. Last week someone's cart was damaged. No one saw anything.", excludes: Object.freeze(['market']) }),
-  ]),
-  'The church wants approval rights over market day activities. The village reeve disagrees.': Object.freeze([
-    Object.freeze({ text: 'The church wants approval rights over market day activities. The village reeve disagrees.', needs: Object.freeze(['market']) }),
-    Object.freeze({ text: 'The church wants approval rights over who may trade and when. The village reeve disagrees.', twinOf: 'The church wants approval rights over market day activities. The village reeve disagrees.', excludes: Object.freeze(['market']) }),
-  ]),
-});

@@ -64,4 +64,7 @@ export const TABLE_POOLS = Object.freeze([
   { id: 'faithPanelModel.CAUSE_SENTENCE', module: 'src/components/settlement/faithPanelModel.js', name: 'CAUSE_SENTENCE', drawKind: 'T', rulings: ['colour'], drawSite: 'faithPanelModel.js (cause-keyed)' },
   { id: 'faithPanelModel.STRUCTURAL_LABEL', module: 'src/components/settlement/faithPanelModel.js', name: 'STRUCTURAL_LABEL', drawKind: 'T', rulings: ['colour'], drawSite: 'faithPanelModel.js (axis-keyed)' },
   { id: 'faithPanelModel.FALL_SENTENCE', module: 'src/components/settlement/faithPanelModel.js', name: 'FALL_SENTENCE', drawKind: 'T', rulings: ['colour'], drawSite: 'faithPanelModel.js (axis-keyed)' },
+  // CENSUS-5d unit 3: the two left of CENSUS-5c's list that are one export (R-R, read by 5c and re-read here).
+  { id: 'warRemembrance.WAR_ENDING_TELLINGS', module: 'src/domain/display/warRemembrance.js', name: 'WAR_ENDING_TELLINGS', drawKind: 'T', rulings: ['colour'], drawSite: 'warRemembrance.js (ending-keyed by the record\'s classifier)' },
+  { id: 'deityEffects.DEITY_AXIS_EFFECTS', module: 'src/domain/display/deityEffects.js', name: 'DEITY_AXIS_EFFECTS', drawKind: 'T', rulings: ['colour'], drawSite: 'deityEffects.js (axis-keyed)', lines: (t) => Object.values(t).flatMap((axis) => Object.values(axis).map((e) => e.effect)) },
 ]);
