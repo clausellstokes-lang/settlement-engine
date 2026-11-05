@@ -83,6 +83,9 @@ function poolDeclares(pool, tagged) {
  *   that is never emptied: site 18's descriptions, the conversion beat): the result then carries
  *   the refused drawn line with `resolvedBy: 'kept'`, and the ledger notes it with its atoms so the
  *   birth self-check judges it (R-AM, CENSUS-1g unit 2)
+ * @property {boolean} [dropRefused] `resolveSibling` only: a refused original with no admitted
+ *   twin answers `null` and the site drops the slot (R-AU, CENSUS-1h); an UNANSWERED record (no
+ *   facts) still keeps the original
  */
 
 /**
@@ -254,7 +257,13 @@ export function resolveSibling(line, siblings, options) {
   const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
   if (!facts) { noteKept(line, siblings[line], options); return line; }
   const r = resolveDeclared(siblings[line], { ...options, facts });
-  if (r.line == null) { noteKept(line, siblings[line], options); return line; }
+  if (r.line == null) {
+    // R-AU (CENSUS-1h): a site with no admitted twin DROPS its refused line (kind A, as site 15
+    // does) — `null`, noted 'none' by `resolveDeclared` — never keeps-and-notes it.
+    if (options.dropRefused === true) return /** @type {T} */ (/** @type {unknown} */ (null));
+    noteKept(line, siblings[line], options);
+    return line;
+  }
   return /** @type {T} */ (lineText(r.line));
 }
 

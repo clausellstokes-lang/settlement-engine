@@ -13,6 +13,8 @@
  */
 
 import { crisisHookFor } from '../crisis/crisisHooks.js';
+import { resolveSibling } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
 import { collectPlotHooks } from '../dossier/plotHooks.js';
 import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
@@ -537,10 +539,36 @@ const SCOPE_PHRASE = Object.freeze({
  */
 function scopePhrase(cultureKey, settlement) {
   if (!Object.hasOwn(SCOPE_PHRASE, cultureKey)) return '';
-  if (WATERSIDE_SCOPES.has(cultureKey) && isLandlocked(settlement)) {
-    return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? INLAND_SCOPE_PHRASE[cultureKey] : '';
+  if (WATERSIDE_SCOPES.has(cultureKey)) {
+    // R-AS (amended): the three waterside scopes read the record's water HERE (chair ruling 5:
+    // inland → the inland phrase; a river keeps the Greek harbour; a record with no config reads as
+    // it always did), and every atom they declare is a water atom — the branch is their gate.
+    if (isLandlocked(settlement)) {
+      return Object.hasOwn(INLAND_SCOPE_PHRASE, cultureKey) ? INLAND_SCOPE_PHRASE[cultureKey] : '';
+    }
+    return SCOPE_PHRASE[cultureKey];
   }
-  return SCOPE_PHRASE[cultureKey];
+  return declaredClause(SCOPE_PHRASE[cultureKey], settlement);
+}
+
+/**
+ * THE T WIRING (CENSUS-1h unit 6, Appendix B row 95): a printed clause that is a key of
+ * `QUICK_GUIDE_SIBLINGS` is resolved against the record it describes; refused with no admitted
+ * twin, the clause DROPS (R-AU, kind A) and the sentence is built without it. The facts are read
+ * only when the clause declares. Display-time: pages move, records do not.
+ * @param {string} clause
+ * @param {SettlementQuickGuideSource} settlement
+ * @returns {string}
+ */
+function declaredClause(clause, settlement) {
+  const resolved = resolveSibling(clause, QUICK_GUIDE_SIBLINGS, {
+    facts: () => factsOf(/** @type {any} */ (settlement)),
+    poolId: 'QUICK_GUIDE_CLAUSES',
+    surface: 'overview',
+    crisisScoped: QUICK_GUIDE_CRISIS_SCOPED.includes(clause),
+    dropRefused: true,
+  });
+  return typeof resolved === 'string' ? resolved : '';
 }
 
 /**
@@ -645,7 +673,8 @@ function composeMaterialTruth(settlement) {
   // unchanged — only the rendering.
   const clauses = [];
   if (prosperity) clauses.push(`the economy is ${prosperity.toLowerCase()}`);
-  if (food) clauses.push(foodSecurityClause(food));
+  const foodClause = food ? foodSecurityClause(food, settlement) : '';
+  if (foodClause) clauses.push(foodClause);
 
   let text = clauses.length ? upperLead(clauses.join('; ')) : '';
   if (topExport) {
@@ -707,10 +736,12 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
  */
 export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([FOOD_SECURITY_CLAUSE.surplus, FOOD_SECURITY_CLAUSE.secure]);
 
-/** @param {string} label @returns {string} */
-function foodSecurityClause(label) {
+/** @param {string} label @param {SettlementQuickGuideSource} settlement @returns {string} */
+function foodSecurityClause(label, settlement) {
   const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');
-  return FOOD_SECURITY_CLAUSE[key] || `the food supply is ${label.toLowerCase()}`;
+  return Object.hasOwn(FOOD_SECURITY_CLAUSE, key)
+    ? declaredClause(FOOD_SECURITY_CLAUSE[key], settlement)
+    : `the food supply is ${label.toLowerCase()}`;
 }
 
 /**
