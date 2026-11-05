@@ -443,9 +443,27 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
   }, ARM_TIMEOUT);
 
   it('A6 the order rule second arm is zero on the layer channel and counted on the config channel', () => {
-    // anchored: the layer channel moves no key order at all, and a regression there is a real defect.
-    expect(byChannel('layer', 'membership').filter((row) => row.orderMoved.length > 0)).toEqual([]);
-    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(52); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
+    // anchored: the layer channel moves no key order except the ONE consequence named below, and any other
+    // order move there is a real defect.
+    // 2026-11-05 (LANDING-6, the chair's ruling 1 on LANDING-5's A6 STOP; re-keyed by identity with its step): two
+    // rows, history.legacyAnnotations on the coastal-port village under E5 and E6, from X-46 car 3 (90dc22f18, the
+    // institution budget). A CONSEQUENCE, not a defect: legacyGenerator.js :: deriveLegacyAnnotations ranks by its
+    // own rule, and a political event scores 70 while legitimacy is under 45 ('contested') but 30 ('drift') at 45 or
+    // over, below the disaster's 40 and the religious event's 35. The rank inputs the history step reads, measured:
+    // at 79c442330 (the stage before car 3) the generation reads legitimacy 39 and the edited re-derivation 42, both
+    // contested, so political leads both and nothing re-ranks; at the tip car 3's faction set (Elected Reeve 32/45,
+    // Religious Authorities 35/19) reads 44 at generation (contested, political first) and 47 under E5 and E6 (stable,
+    // political last), so the layer edit crosses the cut in exactly the direction the new order shows.
+    expect(byChannel('layer', 'membership').filter((row) => row.orderMoved.length > 0).map((row) => [row.key, row.label, row.orderMoved]))
+      .toEqual([
+        ['village|germanic|coastal|port|civilized|golden-master-v3', 'E5', ['history.legacyAnnotations']],
+        ['village|germanic|coastal|port|civilized|golden-master-v3', 'E6', ['history.legacyAnnotations']],
+      ]);
+    // 2026-11-05 (LANDING-6, masked behind the first assertion until ruling 1 re-keyed it; bisected over every first-parent
+    // stage of the landing with this count alone): 52 → 50 X-46 car 1 (1264a8152) → 39 X-46 car 3 (90dc22f18) → 41 PINS
+    // (37b1e746d) → 44 X-46 car 3, I7 (6ca454d2b) → 46 PINS (11467ed57) → 40 F6 BUDGET-FLOOR (6d84aa834), unmoved since and by
+    // record 28's cure (the same 40 rows).
+    expect(byChannel('config').filter((row) => row.orderMoved.length > 0).length, 'a counted diagnostic with a LIVE population, so the branch is not asserted on nothing').toBe(40); // 2026-10-01: 51 → 54, the same re-deal; 2026-11-04 (REGISTERS seat, traced in DOORS-4): 54 → 53 FOOD-2 → 52 SIZE-3
   }, ARM_TIMEOUT);
 
   it('A7 the honesty figures are re-measured and the ride-along has its first population in the chain', () => {
