@@ -3,7 +3,7 @@
  */
 
 import { SEVERITY, tierAtLeast } from '../../data/constants.js';
-import { FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
+import { FOOD_SECURITY_BANDS, FOOD_SECURITY_CUTS, foodSecurityBandKeyOf } from '../../data/bandLadders.js';
 import { FOOD_IMPORT_RATES, SIEGE_PRODUCTION_KEPT } from '../../data/foodImportRates.js';
 import {
   getTradeRouteFeatures,
@@ -837,7 +837,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
   );
 
   const resolved = hooks.map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T' }) })); // CENSUS-1f
-  return { issues, warnings, plotHooks: resolved };
+  return { issues, warnings, plotHooks: resolved.map((h) => (h.hook === MODERATE_GAP_TWIN ? { ...h, ...moderateGapGrade(facts) } : h)) };
 };
 
 /**
@@ -862,6 +862,26 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * ledgered the kept-refused original: 162 of 1,000 false, reworded and twinned below). The three
  * twins are the chair's rulings (R-G), recorded in `docs/CENSUS_3_LANE_2026-11-04.md`.
  */
+const MODERATE_GAP_TWIN = 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.';
+/**
+ * CENSUS-3h (R-AV, the chair's answer 2 of 2026-11-05 08:3x): a twin carries only the severity and
+ * category the record holds. The moderate-gap twin prints only where the food record reads
+ * Import-Dependent or Pressured (its declaration); its category is that band's own label (the one
+ * ladder, never re-spelled) and its severity the band's grade — Import-Dependent `medium`, the
+ * record's own grade for that band's viability hook ("A poor harvest somewhere else…"), Pressured
+ * `low`, the grade under it (the ladder writes no Pressured hook). "critical" stays with the
+ * famine-band original. The band is read through the declaration's own reader (`famine.band`).
+ * @type {Readonly<Record<string, string>>}
+ */
+const MODERATE_GAP_SEVERITY = Object.freeze({ importDependent: 'medium', pressured: 'low' });
+/** @param {object | (() => object) | null} facts @returns {{ category?: string, severity?: string }} */
+function moderateGapGrade(facts) {
+  const f = /** @type {any} */ (typeof facts === 'function' ? facts() : facts);
+  const band = f?.famine?.band;
+  const severity = typeof band === 'string' ? MODERATE_GAP_SEVERITY[band] : undefined;
+  if (severity === undefined) return {};
+  return { category: FOOD_SECURITY_BANDS[/** @type {keyof typeof FOOD_SECURITY_BANDS} */ (band)].label, severity };
+}
 const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
 export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
@@ -878,7 +898,7 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   [STARVING_HOOK]: Object.freeze([
     Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']) }),
     Object.freeze({
-      text: 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.',
+      text: MODERATE_GAP_TWIN,
       twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit']), needs: Object.freeze(['food: ≤ pressured']),
     }),
   ]),
