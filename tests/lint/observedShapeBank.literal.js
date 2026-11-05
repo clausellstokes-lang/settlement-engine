@@ -36,8 +36,8 @@
  * figures live here.
  */
 export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
-  reads: 69,
-  addresses: 45,
+  reads: 76,
+  addresses: 50,
   // Keyed BY THE ROSTER (EXPLAINED_WRITER_EXEMPTIONS). A declaration that banks nothing is
   // written 0/0 rather than omitted — "declared and unexercised" and "retired" are
   // different facts, and the walker refuses a map whose keys are not the roster.
@@ -61,5 +61,9 @@ export const OBSERVED_SHAPE_BANK_LITERAL = Object.freeze({
     // Declared at the same rung. 0/0 -> 2/2: the phantom mint's own shelf predicate and the
     // quota count that excludes a hidden phantom.
     'kind on settlement': Object.freeze({ reads: 2, addresses: 2 }),
+    // ⭐ THE SCHEMA-27 RUNG'S THREE (the crisis cast's temporary person; LANDING-2b, 2026-11-04).
+    'temporary on npcs': Object.freeze({ reads: 3, addresses: 3 }),
+    'temporaryKind on npcs': Object.freeze({ reads: 2, addresses: 1 }),
+    'crisisIds on npcs': Object.freeze({ reads: 2, addresses: 1 }),
   }),
 });

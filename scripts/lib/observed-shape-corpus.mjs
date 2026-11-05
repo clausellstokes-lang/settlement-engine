@@ -872,6 +872,59 @@ export async function buildObservedCorpus({
     }
   }
 
+  // ── Producer 1d: the RUNG-1 WINDOW topology pass (schema 27). TOPOLOGY ONLY. ──
+  //
+  // ⭐ THE SAME LAW AS 1b AND 1c: these settlements enter `roots` and NOT `generated`, so
+  // producer 2's pulse, its saves, its steadings, the scalar stream and all four execution
+  // keys are byte-for-byte untouched.
+  //
+  // WHY IT EXISTS — TWO SHAPES THE WINDOW STOPPED OBSERVING, BOTH MEASURED AT 5dd0f323a
+  // against the schema-26 register frozen at 05897b88d (lane LANDING-2b, the chair's ruling 4
+  // of 2026-11-04):
+  //   · `facets` was observed ONLY as the institution catalog's `{ clandestine, subterranean }`
+  //     map, carried by ONE row — 'Underground network' (institutionalCatalog.js, D6 THE
+  //     UNDERWAYS). The X-46 density factor (car 3 U3 47829c070 and its rung-1 pins) scales
+  //     that row's chance, and at the tip NONE of the 28 corpus settlements rolls it (eight did
+  //     at 05897b88d), so the shape vanished and 29 frozen `… on facets` rows read as GONE
+  //     while every read still stands — the erasure guard's INSTRUMENT EROSION.
+  //   · `issues` fell from 49 rows to 22 (under MIN_ROWS 40): the window's generation lanes
+  //     re-dealt the pulse worlds so that no `pulseResult.settlementUpdates` settlement is short
+  //     any more (24 rows gone from that home), and `institution on issues` (pdf/lib/viewModel.js,
+  //     viewModelBodySlices.js) read as GONE again, as it did before schema 26's producer 1c.
+  // Ten seeds × the four configs, each with famine (the stimulus 1b/1c already use) and the
+  // catalog row FORCED through the shipped `_institutionToggles` `require` door (the
+  // user-authored toggle `resolveConfig.js` reads), bring `facets` back at 40 rows and `issues`
+  // to 78. MEASURED against the frozen register it creates NOTHING new; besides the 31 eroded
+  // rows it brings back, it clears five rows whose writer it now runs — `forbiddenResources on
+  // institutions` (the catalog row carries it), `_institutionToggles on config` ×2 and
+  // `forcedByToggle on institutions` (the toggle door itself) — and nothing else moves.
+  //
+  // ⛔ WHY ROOTS AND NOT A PULSE, AND WHY FORCED. The pulse is the blast radius (1b's law); and
+  // a natural roll over more seeds observes `facets` about once per twenty settlements, so the
+  // shape would need ~800 generations to clear MIN_ROWS. Forcing the one row through the
+  // product's own toggle door costs 40. Widen this pass only with the same before/after row
+  // reconciliation, and never through `generated`.
+  const WINDOW_TOPOLOGY_SEEDS = Object.freeze([
+    ...SEEDS, 'osr-e', 'osr-f', 'osr-g', 'osr-h', 'osr-i', 'osr-j',
+  ]);
+  const WINDOW_TOPOLOGY_FORCED = Object.freeze(['all::Criminal::Underground network']);
+  for (const config of CONFIGS) {
+    for (const seed of WINDOW_TOPOLOGY_SEEDS) {
+      roots.push({
+        name: 'settlement',
+        value: generateSettlementPipeline(
+          {
+            ...config,
+            stressTypes: ['famine'],
+            _institutionToggles: Object.fromEntries(WINDOW_TOPOLOGY_FORCED.map((key) => [key, { require: true }])),
+          },
+          null,
+          { seed, customContent: {} },
+        ),
+      });
+    }
+  }
+
   // ── Producer 2: the campaign world pulse over those REAL saves. ──
   const ids = generated.map((_, i) => `osr${String(i).padStart(3, '0')}`);
   const saves = generated.map((settlement, i) => ({
