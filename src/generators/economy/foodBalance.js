@@ -836,7 +836,12 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     hasExternalSupply,
   );
 
-  const resolved = hooks.map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T' }) })); // CENSUS-1f
+  // R-AU (CENSUS-1h): a refused hook with no admitted twin DROPS here (kind A) — it never kept-and-
+  // noted a line that `hookTruthRecord.js :: withoutFalseHooks` removed later (the starving hook on
+  // a fed place: 250 kept notes in 161 of the 1,000, none printed); that pass stays as defence.
+  const resolved = hooks
+    .map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T', dropRefused: true }) })) // CENSUS-1f
+    .filter((h) => h.hook !== null);
   return { issues, warnings, plotHooks: resolved.map((h) => (h.hook === MODERATE_GAP_TWIN ? { ...h, ...moderateGapGrade(facts) } : h)) };
 };
 
@@ -893,8 +898,8 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   // CENSUS-3g unit 5 (R-AM read; R-U, R-G — the chair's rulings recorded in the lane doc): the
   // original presumes only the famine band ("Villagers" left the text: its `tier` read false on 110
   // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of
-  // 2026-11-03) takes one twin with no famine words; a fed place keeps the refused original, which
-  // the hook-truth pass drops (listed for the mechanism lane).
+  // 2026-11-03) takes one twin with no famine words; a fed place DROPS the refused original at the
+  // site (R-AU, CENSUS-1h; the hook-truth pass stays as defence in depth).
   [STARVING_HOOK]: Object.freeze([
     Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']) }),
     Object.freeze({
