@@ -58,9 +58,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "watch"
+            "colour"
           ],
-          "text": "Crime finds little room at {settlement}, and the watch is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
+          "text": "Crime finds little room at {settlement}, and enforcement is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
           "slots": [
             "settlement"
           ],

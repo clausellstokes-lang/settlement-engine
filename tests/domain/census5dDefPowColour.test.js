@@ -2,9 +2,9 @@
  * CENSUS-5d (2026-11-05), unit 2b — DS-DEF and DS-POW read line by line (R-R / R-AO). A pool whose
  * every line presumes nothing beyond its key is braced `{colour}` at pool level (R-R; a keyed pool
  * does not re-declare its key, R-B1); a mixed pool's presumes-nothing lines take the per-line
- * `colour` mark (R-AO); a line presuming a fact its key does not guarantee declares it (34 lines:
- * the watch, the walls, the gate, the garrison, magic, the granary, the market, hunger). One
- * reword (R-U): DS-DEF-6 Legal Infrastructure Court + Prison v3, "on the same square" (no home).
+ * `colour` mark (R-AO); a line presuming a fact its key does not guarantee declares it (33 lines:
+ * the watch, the walls, the gate, the garrison, magic, the granary, the market, hunger). Two
+ * rewords (R-U): DS-POW-1 Endorsed v4 "the watch is not the reason" (the pool's {settlement}-only floor), DS-DEF-6 Legal Infrastructure Court + Prison v3, "on the same square" (no home).
  * Left unmarked (they presume a fact with no home yet):
  *   DS-DEF-2 Economic Survival STRONG v3 "Trouble … has not turned into a collapse" (some crisis: unit 8)
  *   DS-POW-7 receipt deferred v2 (the alignment cap) and v3 (an outbid): the deferral's reason has no home.
@@ -27,12 +27,15 @@ describe('CENSUS-5d unit 2b · DS-DEF / DS-POW: every read line declares or is c
     ]);
   });
 
-  it('the reading\'s presumptions declare (a sample of the 34)', () => {
+  it('the reading\'s presumptions declare (a sample of the 33)', () => {
     expect(marksOf('DS-DEF-7', 'besiegedBy present', /There is an army at/)).toEqual(expect.arrayContaining(['walls', 'gate']));
     expect(marksOf('DS-DEF-10', 'posture UNDER TRIBUTE (indebted)', /the garrison is met afterwards/)).toContain('garrison');
     expect(marksOf('DS-DEF-6', 'Naval Defense: Under blockade', /a magical channel/)).toContain('magic');
     expect(marksOf('DS-POW-1', 'breakdown dominated by FOOD, adverse', /granary door/)).toContain('institution: granary');
-    expect(marksOf('DS-POW-1', 'Endorsed', /the watch is not the reason/)).toContain('watch');
+    // Endorsed v4 is reworded rather than declared (R-U): it is the pool's one {settlement}-only line, the
+    // anchored-liveness floor under a refused {seat} fill (powerStateProseDesk.test.js), so a watch it named
+    // would mute the banner in a watch-less town: "the watch is not the reason" -> "enforcement is not the reason".
+    expect(marksOf('DS-POW-1', 'Endorsed', /enforcement is not the reason/)).toContain('colour');
   });
 
   it('no line puts the court and the prison on a square the record does not hold', () => {

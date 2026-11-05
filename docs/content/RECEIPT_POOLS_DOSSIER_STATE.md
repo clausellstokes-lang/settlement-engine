@@ -1954,7 +1954,7 @@ common state.
 1. `[street · colour]` The {seat} at {settlement} is obeyed without much thought given to it; a thing is done because the {seat} said so, and the town would find the question of why a strange one.
 2. `[ledger · colour]` {settlement}'s rolls come back filled and its levies come back paid. The {seat} governs at full strength here, and the clerks record almost nothing they have had to chase.
 3. `[visitor · colour]` A stranger at {settlement} learns who rules inside an hour and never once hears it disputed; the {seat}'s writ is the plainest fact in the town.
-4. `[counterforce · watch]` Crime finds little room at {settlement}, and the watch is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.
+4. `[counterforce · colour]` Crime finds little room at {settlement}, and enforcement is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.
 
 **`Approved`** {colour}
 1. `[street]` {settlement} thinks well enough of the {seat}, not warmly, but well enough that what it decides carries in most quarters without an argument first.
