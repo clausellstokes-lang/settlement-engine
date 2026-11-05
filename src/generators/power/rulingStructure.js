@@ -101,7 +101,10 @@ export const generatePowerStructure = (
   // CENSUS-1e unit 2 (Appendix B item 23, inline T): a base-roster description CENSUS-5b declared in
   // FACTION_DESC_SIBLINGS (below) resolves where it prints, against the native roster's facts — the
   // original where the record holds its atom, else its twin (a set with no twin keeps the original).
-  const said = (/** @type {string} */ line) => resolveSibling(line, FACTION_DESC_SIBLINGS, { facts: () => factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:FACTION_DESC_SIBLINGS', surface: 'power', drawKind: 'T' });
+  // ⚠ R-Q: the `militia` atom is NOT settled at this step — a militia can join the roster after the
+  // power step (the 1,000 at 1c00ed2: the twin's `no militia` false on the final record in 8 births,
+  // cert:false-presumption) — so the two militia sets wait on order and are not resolved here.
+  const said = (/** @type {string} */ line) => resolveSibling(line, FACTION_DESC_SIBLINGS_SETTLED, { facts: () => factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:FACTION_DESC_SIBLINGS', surface: 'power', drawKind: 'T' });
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
       institution => !isMaterializedCustomContent(institution),
@@ -864,3 +867,7 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
     "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.", ['militia'],
     "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."),
 });
+/** The sets this step can answer (R-Q): every set whose atoms are settled before the power step. */
+const FACTION_DESC_SIBLINGS_SETTLED = Object.freeze(Object.fromEntries(Object.entries(FACTION_DESC_SIBLINGS)
+  .filter(([, set]) => !set.some((l) => [...(/** @type {any} */ (l).needs || []), ...(/** @type {any} */ (l).excludes || [])].includes('militia')))));
+
