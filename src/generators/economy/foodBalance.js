@@ -738,7 +738,7 @@ export function appendProvisioningAtScaleDeps(
  * CENSUS-1f unit 3 (Appendix B item 23, T): every printed hook resolves through
  * `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)` (below) — the timber line's `navigable` (its twin
  * drops "shipbuilding"), the iron line's `institution: smith` (its twin drops the blacksmiths), the
- * starving line carried for the self-check (no twin: a refused original keeps its text). `facts`
+ * starving line's famine band (its twin, CENSUS-3g, the moderate gap; a fed place keeps the refused original). `facts`
  * is the birth's partial record at the economy step (the roster, the config, the tier, the
  * economic state: `viability.js`); absent, the hooks print unchanged (resolveSibling's rule).
  * @param {any} population @param {any} terrain @param {any} institutions @param {any} config @param {any} foodBalance
@@ -755,7 +755,7 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     if (route === 'isolated' || route === 'none' || route === 'road') {
       hooks.push({
         category: 'Survival Crisis',
-        hook: 'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
+        hook: 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.',
         severity: 'critical',
       });
     } else if (route !== 'isolated') {
@@ -858,10 +858,11 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * re-declared: the dam (route river), the blockade (route port, coastal), the bandits (route road).
  * Measured on soak1k-0..199 before the change, printed / false by the final record: the timber
  * 33 / 16 (`navigable`: the reader:hook-pools `[sea]` class, "shipbuilding" on plains and desert
- * roads), the iron 38 / 3 (`institution: smith`), the starving 8 / 0 (carried for the self-check;
- * a refused original with no twin keeps its text under `resolveSibling`). The two twins are the
- * chair's rulings (R-G), recorded in `docs/CENSUS_3_LANE_2026-11-04.md`.
+ * roads), the iron 38 / 3 (`institution: smith`), the starving 8 / 0 (re-read by CENSUS-3g once R-AM
+ * ledgered the kept-refused original: 162 of 1,000 false, reworded and twinned below). The three
+ * twins are the chair's rulings (R-G), recorded in `docs/CENSUS_3_LANE_2026-11-04.md`.
  */
+const STARVING_HOOK = 'The settlement is starving. Its hungriest are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.';
 export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?": declaredSet(
     "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trades stall without it. Find another supplier, or find out what is in those woods?", ['navigable'],
@@ -869,6 +870,16 @@ export const OUTLOOK_HOOK_SIBLINGS = Object.freeze({
   'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.': declaredSet(
     'War breaks out. Metal suppliers prioritize military contracts. Blacksmiths cannot get iron for tools/repairs. Economy suffers, population discontent grows.', ['institution: smith'],
     'War breaks out. Metal suppliers prioritize military contracts, and the iron for tools and repairs stops arriving. Economy suffers, population discontent grows.'),
-  'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.': declaredSet(
-    'The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at a price the settlement cannot pay in coin.', ['food: ≤ deficit', 'tier: <= village']),
+  // CENSUS-3g unit 5 (R-AM read; R-U, R-G — the chair's rulings recorded in the lane doc): the
+  // original presumes only the famine band ("Villagers" left the text: its `tier` read false on 110
+  // of the 1,000); the moderate gap (Import-Dependent / Pressured, the chair's ruling 1 of
+  // 2026-11-03) takes one twin with no famine words; a fed place keeps the refused original, which
+  // the hook-truth pass drops (listed for the mechanism lane).
+  [STARVING_HOOK]: Object.freeze([
+    Object.freeze({ text: STARVING_HOOK, needs: Object.freeze(['food: ≤ deficit']) }),
+    Object.freeze({
+      text: 'The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin.',
+      twinOf: STARVING_HOOK, excludes: Object.freeze(['food: ≤ deficit']), needs: Object.freeze(['food: ≤ pressured']),
+    }),
+  ]),
 });
