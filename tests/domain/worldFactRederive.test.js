@@ -400,10 +400,14 @@ describe('EM-B2b — world facts by consequence: the route, the refusals and the
     // 4b28e712.. -> 2865af22.. (512 rows).
     // Then FOOD-print (ODQ §934.104; docs/shift-records/2026-11-03-food-print-comfortable-pool.json), lane DOORS: the
     // prose manifest 2865af22.. -> 95ef4439.. (232 rows); the generator master did not move.
+    // Then records 12–26 of the rung-1 landing (ODQ §934.105; docs/shift-records/2026-11-04-rung1-*.json, and
+    // the window's earlier records under the same landing), re-keyed at the landed tip by LANDING-5 under the chair's
+    // ruling 4 with no per-step census: the generator master 4c42885b.. -> e98702fe.. and the prose manifest
+    // 95ef4439.. -> d43a3ae2.. . The stride below still re-derives every row to its committed digest.
     expect(shaOfFile(GOLDEN), 'tests/fixtures/generator-golden-master.json moved')
-      .toBe('4c42885b932c67830ac71fb65cef623311a889718f9a648cdaf40870681aa37c');
+      .toBe('e98702feba1c9aa93fd17ea2a9bf6282d6bdff30b66f616f7245ce56856d1673');
     expect(shaOfFile(PROSE_GOLDEN), 'tests/fixtures/dossier-prose-manifest-golden.json moved')
-      .toBe('95ef44394f228a5878861f775e213345b88884c14c82869e92a731ecf76fc53f');
+      .toBe('d43a3ae263acd4a5606a4e2be1e0aea55859ffd61a424bb7d87fb6fae130dece');
 
     // AND THE REASON THEY CANNOT MOVE: fresh generation passes no layer, so no world fact is ever
     // routed and `config′` is `config` itself. Measured against the committed manifest.
