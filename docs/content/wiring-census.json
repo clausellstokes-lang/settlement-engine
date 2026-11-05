@@ -36485,12 +36485,13 @@
       ],
       "slotsNamed": [
         "creed",
-        "rival_creed"
+        "rival_creed",
+        "settlement"
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
       "variants": 3,
-      "grammars": 2,
+      "grammars": 3,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -53789,7 +53790,7 @@
       "subject": "CULTS: cults[] present beneath the patron",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, rival_creed}"
+      "count": "3 variant(s) · 3 grammar(s) · slots {creed, rival_creed, settlement}"
     },
     {
       "tier": "THIN",

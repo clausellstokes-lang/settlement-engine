@@ -4109,6 +4109,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "CULTS: cults[] present beneath the patron": [
         {
           "angle": "visitor",
+          "marks": [
+            "sacredHouse"
+          ],
           "text": "Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.",
           "slots": [
             "creed"
@@ -4125,8 +4128,10 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
-          "text": "Several lesser rites run alongside the patron's, each with its own days and its own quarter of the town.",
-          "slots": [],
+          "text": "What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}.",
+          "slots": [
+            "settlement"
+          ],
           "vid": 3
         }
       ],
@@ -4217,6 +4222,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "priest"
+          ],
           "text": "{settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.",
           "slots": [
             "settlement"
@@ -4264,6 +4272,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "priest"
+          ],
           "text": "The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.",
           "slots": [],
           "vid": 3
@@ -4999,6 +5010,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "sacredHouse"
+          ],
           "text": "The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.",
           "slots": [
             "settlement"
@@ -5087,6 +5101,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "NICHE: slots open": [
         {
           "angle": "ledger",
+          "marks": [
+            "sacredHouse"
+          ],
           "text": "The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.",
           "slots": [],
           "vid": 1
@@ -5573,6 +5590,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "PILGRIM SEASON: thin": [
         {
           "angle": "visitor",
+          "marks": [
+            "institution: tavern"
+          ],
           "text": "The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.",
           "slots": [],
           "vid": 1

@@ -4614,9 +4614,9 @@ reads what the panel renders. A page draws at most one of each.
 4. `[street · no walls]` Elsewhere {creed} is a curiosity. Here it is the calendar, the oath and the burial rite.
 
 **CULTS: `cults[]` present beneath the patron**
-1. `[visitor]` Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.
+1. `[visitor · sacredHouse]` Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.
 2. `[ledger]` The patron is not the only creed here; {rival_creed} keeps a following that is real without being a rival for the seat.
-3. `[street]` Several lesser rites run alongside the patron's, each with its own days and its own quarter of the town.
+3. `[street]` What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}.
 
 **DEVOTION: `devout`** · plain description; no cause clause without `piety.causes[]` {colour}
 1. `[street]` Devotion here runs deep. The rites are kept by people who would keep them without being asked.
@@ -4636,7 +4636,7 @@ reads what the panel renders. A page draws at most one of each.
 **DEVOTION: `lukewarm`**
 1. `[visitor · temple]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
 2. `[street]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
-3. `[ledger]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
+3. `[ledger · priest]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
 
 **DEVOTION: `secular`**
 1. `[ledger · temple]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
@@ -4646,7 +4646,7 @@ reads what the panel renders. A page draws at most one of each.
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
 1. `[unfolding]` Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.
 2. `[street]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
-3. `[ledger]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
+3. `[ledger · priest]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
 1. `[unfolding]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.
@@ -4793,7 +4793,7 @@ panel does not surface at all.
 
 **STANDING: `cult`**
 1. `[ledger]` {creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.
-2. `[visitor]` The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.
+2. `[visitor · sacredHouse]` The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.
 3. `[threshold]` This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.
 
 **STANDING: `established`**
@@ -4812,7 +4812,7 @@ panel does not surface at all.
 3. `[threshold]` There is no room. Any rite that takes hold here takes hold at another's expense, and the other knows it.
 
 **NICHE: slots open**
-1. `[ledger]` The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.
+1. `[ledger · sacredHouse]` The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.
 2. `[visitor]` {settlement} is under-served by its own gods. The population could sustain more observance than it currently does.
 3. `[threshold]` There is space in the calendar here. Whether anything fills it is a question of who comes down the road.
 
@@ -4909,7 +4909,7 @@ panel does not surface at all.
 3. `[street]` The rite draws a crowd from well outside the district; for a stretch of the year {settlement} is a destination rather than a place.
 
 **PILGRIM SEASON: thin**
-1. `[visitor]` The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.
+1. `[visitor · institution: tavern]` The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.
 2. `[ledger]` Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
 3. `[threshold]` The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
 
