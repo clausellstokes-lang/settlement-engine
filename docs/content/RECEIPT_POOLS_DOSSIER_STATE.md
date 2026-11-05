@@ -816,8 +816,8 @@ the access.
 
 **COMBINATION C2: a high rung on a narrow approach (`isolated` / `mountain_pass`)**
 1. `[visitor · stores: >= 6]` {settlement} is richer than its road suggests. Nothing reaches it easily and the stores are deep and the halls are finished anyway.
-2. `[ledger]` The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.
-3. `[counterforce]` A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.
+2. `[ledger · colour]` The books here are strong on a thin channel: one way in, one way out, and a {complexity} that has learned to earn on it.
+3. `[counterforce · colour]` A narrow way in has not kept {settlement} poor. The approach is the thing that would ordinarily decide a town's condition here, and this town's condition is comfortable regardless of it.
 
 **COMBINATION C3: the middle rungs** {crisis-scoped}
 1. `[street · crisis: any]` {settlement} manages. The {complexity} covers what the town needs and leaves a little over, and the little over is what the year gets argued about.
@@ -825,7 +825,7 @@ the access.
 3. `[visitor · no crisis · market]` There is nothing striking about {settlement}'s condition in either direction: a working {access}, a working market, a town neither building nor selling off.
 
 **COMBINATION C4: a low rung on a working approach**
-1. `[ledger]` {settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.
+1. `[ledger · colour]` {settlement} sits on a working {access} and still counts short. The traffic is real; the share of it that stays here is not.
 2. `[street]` The roads into this town are busy and the town is poor, which is the complaint a visitor will hear first and hear most.
 3. `[visitor · market]` A stranger arriving by the {access} finds more moving through {settlement} than settling in it. The market turns, and the town does not thicken on the turning.
 
@@ -890,7 +890,7 @@ wants a sentence.
 **GRANARY: thin**
 1. `[ledger · institution: granary]` The granary runs thin this {season}. What is left is measured in a stretch of weeks rather than a stretch of seasons, and the measuring is being done.
 2. `[street · institution: granary]` People in {settlement} have begun asking when the granary was last this low, which is the question that comes before the harder ones.
-3. `[unfolding]` The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.
+3. `[unfolding · colour]` The stores are drawing down faster than {season} will replace them, and the gap between the two is the town's whole immediate problem.
 4. `[ledger · no institution: granary]` The stores run thin this {season}. What is left is measured in weeks rather than seasons.
 
 **GRANARY: nearly empty**
@@ -922,10 +922,10 @@ already in register and stand as index 0 of their pools, quoted below.
 **SLOTS.** `{settlement}`
 
 **SHORTAGE × trade-dependent**
-0. *(canonical)* The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
+0. *(canonical)* `[market]` The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
 1. `[ledger · gate]` The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.
 2. `[street · market]` Market days are quiet and short. The stalls that depend on the roads are the ones standing empty.
-3. `[unfolding]` Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
+3. `[unfolding · colour]` Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
 
 **SHORTAGE × not trade-dependent**
 1. `[ledger · walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own walls.
@@ -934,20 +934,20 @@ already in register and stand as index 0 of their pools, quoted below.
 4. `[ledger · no walls]` Little moves on {settlement}'s roads and the books barely register it. The town buys and sells almost nothing beyond its own bounds.
 
 **ADEQUATE** {crisis-scoped}
-0. *(canonical)* Caravans keep to their rounds. Trade moves at its accustomed pace.
+0. *(canonical)* `[colour]` Caravans keep to their rounds. Trade moves at its accustomed pace.
 1. `[ledger · crisis: any]` The traffic through {settlement} matches what the ledgers expect of it. Arrivals and departures come out even, week on week.
 2. `[street]` The carts come when the carts come. Nobody is watching the road for them.
 3. `[visitor · crisis: any]` Trade here reads as unremarkable, which on a road is the good reading.
 
 **SURPLUS × trade-dependent**
-0. *(canonical)* The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
+0. *(canonical)* `[market]` The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
 1. `[ledger · market]` More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
 2. `[street · market]` The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
-3. `[visitor]` A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.
+3. `[visitor · colour]` A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.
 
 **SURPLUS × not trade-dependent**
-1. `[ledger]` Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.
-2. `[street]` Plenty passes here. Not much of it stops.
+1. `[ledger · colour]` Heavy traffic runs through {settlement} without much of it belonging to the town: the roads are busy, the books are local.
+2. `[street · colour]` Plenty passes here. Not much of it stops.
 3. `[visitor · market]` The traffic on these roads outruns the market. What arrives is mostly going somewhere else.
 
 ---
@@ -969,28 +969,28 @@ the market's shape as a whole.
 **SLOTS.** `{settlement}` `{good}`
 
 **HIGHLIGHT: dear**
-1. `[ledger]` {good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.
+1. `[ledger · colour]` {good} is the price everyone here quotes first, and it quotes high. The stores are short of it and the crier's reckoning follows the shortage rather than any rate.
 2. `[street · market]` What this market talks about is the cost of {good}. It is dear, it has been dear, and the crier says so before he says anything else.
 3. `[visitor · market]` A stranger's coin goes furthest on everything in {settlement} except {good}, which is scarce enough that the market prices it out loud.
 4. `[threshold · market]` The market is ordinary but for {good}: stocks of it have fallen far enough to move the crier's coarse reckoning, and nothing else has.
 
 **HIGHLIGHT: cheap**
-1. `[ledger]` {good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.
-2. `[street]` Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the price says so.
+1. `[ledger · colour]` {good} sells for little here. The stores are heavy with it and the reckoning has come down to meet the pile.
+2. `[street · colour]` Anyone selling {good} in {settlement} is selling it badly. There is too much of it and the price says so.
 3. `[visitor · market]` A stranger buying {good} does well in this market. Nothing else is priced kindly.
-4. `[unfolding]` {good} keeps arriving faster than it leaves, and the price has been giving way to it.
+4. `[unfolding · colour]` {good} keeps arriving faster than it leaves, and the price has been giving way to it.
 
 **NO HIGHLIGHT: everything steady**
 1. `[ledger · market]` Nothing in {settlement}'s market is priced out of the ordinary. Every good the town trades sits within its accustomed reckoning.
-2. `[street]` The crier has nothing to make a noise about. Prices here are what prices here usually are.
+2. `[street · colour]` The crier has nothing to make a noise about. Prices here are what prices here usually are.
 3. `[visitor · market]` A stranger will find no bargains and no robberies. The market is level across the board.
 4. `[threshold · market]` No good is scarce enough or heavy enough to move its price, so every stall sits inside its ordinary reckoning, and it would take a real movement in the stores to put any of them outside it.
 
 **MIXED: exports dear, imports cheap**
 1. `[ledger · market]` The two halves of this market disagree. What the town sells is dear and what the town buys is cheap, and both readings come off the same week's stocks.
 2. `[street · market]` Sellers here are doing well and so are buyers, which is not the ordinary shape of a market and is the first thing a trader will remark on.
-3. `[visitor]` A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.
-4. `[unfolding]` The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.
+3. `[visitor · colour]` A trader arriving at {settlement} pays dear for what the town makes and gets little for what he brought.
+4. `[unfolding · colour]` The town's own goods are running short while what it imports keeps piling up, and the crier prices both movements in the same breath.
 
 ---
 
@@ -1067,9 +1067,9 @@ clause is licensed, and a variant that needs a dated depletion is marked
 **SLOTS.** `{settlement}` `{chain}` `{institution}` `{resource}` `{good}` `{timeband_since}`
 
 **COMPLETE LINE, output exported**
-1. `[ledger]` The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
+1. `[ledger · colour]` The line from {resource} to {good} is unbroken: the workings feed {institution}, {institution} finishes the work, and the finished goods leave the town as trade.
 2. `[visitor · gate]` Follow {resource} through {settlement} and it does not stop anywhere. It goes into {institution} raw and comes out of the gates as {good}.
-3. `[street]` This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.
+3. `[street · colour]` This is the trade the town is known for. Every hand in the line between the {resource} and the road is one of {settlement}'s own.
 
 **A PROCESSING HOUSE MISSING FROM THE ROSTER**
 1. `[ledger]` {settlement} has the {resource} and not the {institution}. The line ends where the working should begin, and the raw goods go out raw or not at all.
@@ -1117,21 +1117,21 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 **SLOTS.** `{settlement}` `{faction}` `{institution}` `{good}`
 
 **TIER: a large share off the books (≥30)**
-1. `[ledger · dm-only]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
-2. `[street · dm-only]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
-3. `[visitor · dm-only]` A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.
-4. `[unfolding · dm-only]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
+1. `[ledger · dm-only · colour]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
+2. `[street · dm-only · colour]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
+3. `[visitor · dm-only · colour]` A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.
+4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
-0. *(canonical)* Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
-1. `[ledger · dm-only]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
-2. `[street · dm-only]` There is a cheaper way to do most things here, and most people know somebody who knows it.
+0. *(canonical)* `[guild]` Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
+1. `[ledger · dm-only · colour]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
+2. `[street · dm-only · colour]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
 
 **TIER: minor shadow activity (≥3)**
-0. *(canonical)* Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.
-1. `[ledger · dm-only]` A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
-2. `[street · dm-only]` There is some thieving and some selling without a licence. Every town this size has both.
+0. *(canonical)* `[colour]` Minor shadow activity. Petty theft and small-scale unlicensed trade. An inconvenience, not a structural threat.
+1. `[ledger · dm-only · colour]` A little of {settlement}'s trade goes unrecorded, small enough to annoy the clerks and too small to change what the town is.
+2. `[street · dm-only · colour]` There is some thieving and some selling without a licence. Every town this size has both.
 3. `[counterforce · dm-only · no organised crime]` What passes for a shadow economy here has never grown into one. There is unlicensed trade and nothing organised behind it.
 
 ---
@@ -1154,16 +1154,16 @@ veto the owner takes, not an implementer's swap.
 **SLOTS.** `{settlement}`
 
 **TALLIES**
-0. *(frozen, canonical)* Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
-1. `[ledger]` The counts on this page were taken at the last full survey of {settlement}. Anything recorded since then may not have reached them yet.
-2. `[unfolding]` These figures describe {settlement} as it was judged at its last survey. Events entered after that judgement may not be counted in them yet.
-3. `[visitor]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
+0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in these tallies yet.
+1. `[ledger · colour]` The counts on this page were taken at the last full survey of {settlement}. Anything recorded since then may not have reached them yet.
+2. `[unfolding · colour]` These figures describe {settlement} as it was judged at its last survey. Events entered after that judgement may not be counted in them yet.
+3. `[visitor · colour]` What follows is the last careful reckoning of {settlement}, and it may not be today's.
 
 **CATALOG**
-0. *(frozen, canonical)* Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
-1. `[ledger]` This list of what {settlement} offers was drawn at the last survey. A house opened or closed since then may not appear on it yet.
-2. `[unfolding]` The catalog describes the services {settlement} was judged to hold. Later changes may not be counted in it yet.
-3. `[street]` What the town could do for a visitor was written down at the last survey, and may have moved since.
+0. *(frozen, canonical)* `[colour]` Events recorded after this settlement's last survey may not be fully counted in this catalog yet.
+1. `[ledger · colour]` This list of what {settlement} offers was drawn at the last survey. A house opened or closed since then may not appear on it yet.
+2. `[unfolding · colour]` The catalog describes the services {settlement} was judged to hold. Later changes may not be counted in it yet.
+3. `[street · colour]` What the town could do for a visitor was written down at the last survey, and may have moved since.
 
 ---
 
@@ -1194,8 +1194,8 @@ contradict** it (R-DST-C).
 3. `[ledger]` The accounts run to survival and stop. Nothing is set aside because there is nothing to set aside.
 
 **STRUGGLING** — *chronically short*
-1. `[street]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
-2. `[ledger]` The books never quite close. What the town needs and what the town has are near enough to argue about and never near enough to settle.
+1. `[street · colour]` {settlement} is short more often than not. Some needs are met and some are postponed, and which is which changes month to month.
+2. `[ledger · colour]` The books never quite close. What the town needs and what the town has are near enough to argue about and never near enough to settle.
 3. `[visitor · market]` A stranger sees the shortage in the small things: a repair not made, a stall not restocked, a hall not heated.
 
 **POOR** — *getting by, no surplus* {crisis-scoped}
@@ -1211,13 +1211,13 @@ contradict** it (R-DST-C).
 
 **COMFORTABLE** — *reliable surplus, reserves exist*
 1. `[ledger · no crisis: indebted]` {settlement} closes every year ahead. The margin is not large and it is dependable, and there are reserves behind it.
-2. `[street]` People here put things by, and can. That is the difference between this town and a poorer one.
+2. `[street · colour]` People here put things by, and can. That is the difference between this town and a poorer one.
 3. `[visitor]` The town is plainly past subsistence. The buildings are finished rather than patched, and the stores are more than the season needs.
 
 **PROSPEROUS** — *surplus funds institutions and defenses*
-1. `[ledger]` The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.
+1. `[ledger · colour]` The surplus is large enough to be spent rather than merely held, and the spending shows in what the town keeps up.
 2. `[visitor · walls]` {settlement} is visibly well off. The halls, the walls and the roads are all better than a town this size strictly requires.
-3. `[street]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
+3. `[street · colour]` There is money here and it goes into the town. Nobody argues about whether a thing can be afforded, only about whether it should be done.
 4. `[visitor · no walls]` {settlement} is visibly well off. The halls, the houses and the roads are all better than a town this size strictly requires.
 
 **WEALTHY** — *reserves deep enough to outlast most crises* {crisis-scoped}
@@ -1293,8 +1293,8 @@ sentence in two voices. **No named deaths.**
 4. `[ledger · no walls]` The stores are sealed off from the road. What is already in the town is what the town has, and no count is being added to it.
 
 **BLOCKADE BYPASSED** *(provenance-bearing; the covert variant is `dm-only`)*
-1. `[counterforce]` {settlement} is cut off and is still being fed. Something is getting past the line, not much of it, and enough to keep the counts from collapsing.
-2. `[ledger · dm-only]` The stores are falling more slowly than a closed road should allow. A way in is still open and it is not on the returns.
+1. `[counterforce · colour]` {settlement} is cut off and is still being fed. Something is getting past the line, not much of it, and enough to keep the counts from collapsing.
+2. `[ledger · dm-only · colour]` The stores are falling more slowly than a closed road should allow. A way in is still open and it is not on the returns.
 3. `[street · market]` The town is meant to be shut and the market is not empty. Nobody local will explain that, and everybody local has noticed it.
 
 ---
@@ -1357,9 +1357,9 @@ block reads the canonical status and supplies clauses any surface can attach.
 3. `[visitor · dm-only]` The {chain} looks ordinary from outside {settlement}. Inside it, one name sits on every stage.
 
 **SUBSTITUTED** — *running on a prop, not on its own health*
-1. `[ledger]` The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.
+1. `[ledger · colour]` The {chain} runs on something other than its own supply. The output is real; the line beneath it is not the line that should be there.
 2. `[threshold · magic]` What holds the {chain} up is a working, not a road. Take the working away and the line is what it actually is.
-3. `[street]` The {chain} keeps producing and nobody local mistakes that for health.
+3. `[street · colour]` The {chain} keeps producing and nobody local mistakes that for health.
 
 **COLLAPSING** — *failing under multiple compounding pressures* · **NO PRODUCER (R-DST-H)**
 1. `[ledger]` The {chain} is failing from several directions at once. No single break explains it and none of them are being answered.
@@ -1468,23 +1468,23 @@ note that carries it on the six wired surfaces.
 
 **POSTURE: `established`**
 1. `[ledger · no hunger]` {settlement} sells several things outward and depends on none of them alone. The export column is broad enough to lose a line without losing the trade.
-2. `[visitor]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
-3. `[street]` There is always something going out. If one trade is quiet, another is not.
+2. `[visitor · colour]` The yards here are full of goods bound out and no two of them are the same. This is a town that sells.
+3. `[street · colour]` There is always something going out. If one trade is quiet, another is not.
 
 **SCARCITY: `shortage`**
 1. `[ledger · market]` The stores of {good} are well under what the market keeps, and the reckoning has climbed accordingly.
-2. `[street]` There is little {good} to be had here, and it costs what little things cost.
-3. `[visitor]` A stranger wanting {good} in {settlement} will find it and will pay for the finding.
+2. `[street · colour]` There is little {good} to be had here, and it costs what little things cost.
+3. `[visitor · colour]` A stranger wanting {good} in {settlement} will find it and will pay for the finding.
 
 **SCARCITY: `adequate`**
-1. `[ledger]` {good} sits at its accustomed level in the stores, and its price sits with it.
-2. `[street]` {good} costs what {good} costs. There is nothing to say about it.
+1. `[ledger · colour]` {good} sits at its accustomed level in the stores, and its price sits with it.
+2. `[street · colour]` {good} costs what {good} costs. There is nothing to say about it.
 3. `[visitor · market]` The market holds {good} in the ordinary quantity at the ordinary price.
 
 **SCARCITY: `surplus`**
-1. `[ledger]` {settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.
+1. `[ledger · colour]` {settlement} holds more {good} than it keeps room for, and the reckoning has come down under the weight of it.
 2. `[street · market]` There is {good} everywhere in this market, and it is going cheap because there is {good} everywhere.
-3. `[visitor]` A stranger stocking {good} does well here. The town has more than it can use.
+3. `[visitor · colour]` A stranger stocking {good} does well here. The town has more than it can use.
 
 **THE FRESHNESS CAVEAT: for any surface printing a derived tally**
 1. `[ledger]` The tallies below are the last survey's. They describe what {settlement} was judged to hold and may not carry what has happened since.
@@ -1532,18 +1532,18 @@ A composed page draws one of each grain, never two.
 
 **TERRAIN: `Plains`**
 1. `[ledger · grain]` {settlement} sits on ground that grows things without argument, and the town's whole arrangement follows from that one fact.
-2. `[visitor]` The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.
+2. `[visitor · colour]` The country around {settlement} is open in every direction: good for a plough, good for a cart, and good for anything else that wants to reach the town.
 3. `[street · grain]` There is nothing between this town and the horizon but what the town has planted, and the town knows both halves of that.
 
 **TERRAIN: `Forest`**
 1. `[ledger · game · grain]` The timber and what lives in it are {settlement}'s standing wealth; the fields here are clearings rather than country.
 2. `[visitor · watch]` The trees come nearly to the doorframes at {settlement}, and the town has arranged its light, its roads and its watch around them.
-3. `[street]` Everything in this town is made of what grows around it, and the making is the trade.
+3. `[street · colour]` Everything in this town is made of what grows around it, and the making is the trade.
 
 **TERRAIN: `Hills`**
 1. `[ledger · grain]` {settlement} works ground that rises: small fields, hard carting, and whatever the slopes hold that the flat land does not.
-2. `[visitor]` Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.
-3. `[street]` The work here is uphill in the literal sense, and the town prices its carting accordingly.
+2. `[visitor · colour]` Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are slow and the sightlines are long.
+3. `[street · colour]` The work here is uphill in the literal sense, and the town prices its carting accordingly.
 
 **TERRAIN: `Mountains`**
 1. `[ledger]` What {settlement} lives on comes out of the rock rather than off the ground, and the season is short at both ends.
@@ -1610,7 +1610,7 @@ A composed page draws one of each grain, never two.
 **EXPLOITATION: `fullyExploited`**
 1. `[ledger]` The {resource} in {settlement}'s country is worked all the way through: the ground gives it, {institution} finishes it, and it leaves as {good}.
 2. `[visitor · gate]` Nothing about this line is left on the table at {settlement}. A stranger following it from ground to gate finds every stage of it occupied.
-3. `[street]` This is the trade the town is actually built on, and the town has taken it as far as it goes.
+3. `[street · colour]` This is the trade the town is actually built on, and the town has taken it as far as it goes.
 
 **EXPLOITATION — nothing in any bucket** · **R-DST-K GATED: no exploitation record ⇒ no section ⇒ no sentence.**
 The Resource Exploitation section does not render when all three buckets are
@@ -1650,8 +1650,8 @@ shape.
 **SLOTS.** `{settlement}` `{good}` `{faction}`
 
 **INCOME MIX: one source carries the town**
-1. `[ledger]` Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.
-2. `[street]` There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.
+1. `[ledger · colour]` Well past half of what {settlement} earns comes from a single trade, and the accounts have no second column worth the name.
+2. `[street · colour]` There is one thing this town does for money, and everybody's living is downstream of it whether or not they work in it.
 3. `[threshold · no hunger]` {settlement} rests on one earner. Nothing about that is failing; everything about the town's next hard season depends on it not failing.
 
 **INCOME MIX: two or three sources between them**
@@ -1675,8 +1675,8 @@ shape.
 3. `[visitor · dm-only]` A stranger doing honest business at {settlement} is competing with the town's principal industry and has not been told which one that is.
 
 **TRADE PROFILE: exports and imports both present**
-1. `[ledger]` {settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
-2. `[street]` Everybody here knows what leaves and what arrives, because the same carts do both.
+1. `[ledger · colour]` {settlement} sends {good} out and takes other goods in, and the two columns are the whole of the town's dealings with the world.
+2. `[street · colour]` Everybody here knows what leaves and what arrives, because the same carts do both.
 3. `[visitor · market]` The market at {settlement} carries the town's own goods and other towns' goods on the same stalls, and does not distinguish them for a stranger's benefit.
 
 **TRADE PROFILE: no significant exports**
@@ -1691,8 +1691,8 @@ shape.
 
 **TRADE PROFILE: local production listed**
 1. `[ledger · walls]` A good portion of what {settlement} consumes is made inside its own walls, and never appears in either trade column.
-2. `[visitor]` Much of what a stranger will buy at {settlement} was made within sight of where it is sold.
-3. `[street]` The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.
+2. `[visitor · colour]` Much of what a stranger will buy at {settlement} was made within sight of where it is sold.
+3. `[street · colour]` The town makes its own ordinary things and buys its extraordinary ones, which is the arrangement of most towns and is worth stating plainly.
 4. `[ledger · no walls]` A good portion of what {settlement} consumes is made within its own bounds, and never appears in either trade column.
 
 **TRADE PROFILE: `isEntrepot`, transit goods marked among the exports**
@@ -1731,9 +1731,9 @@ reading of the catalog itself.
 **SLOTS.** `{settlement}` `{institution}`
 
 **COMPLETE FOR ITS TIER** · **THE GOOD STATE (R-DST-G)**
-1. `[ledger]` {settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.
+1. `[ledger · colour]` {settlement} offers everything a place its size is expected to offer, without gaps and without anything remarkable in either direction.
 2. `[visitor · institution: tavern]` A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) finds all three without asking twice.
-3. `[street]` The town can answer what a town this size ought to answer, and does not think about it further.
+3. `[street · colour]` The town can answer what a town this size ought to answer, and does not think about it further.
 
 **ONE EXPECTED CATEGORY MISSING**
 1. `[ledger]` There is one thing a place of {settlement}'s size ought to provide and does not, and the absence is the same one every year.
@@ -4951,8 +4951,8 @@ band over the ring; this block reads the movement that produced it.
 
 **QUANTITY: `a dozen or so`**
 1. `[street · population: small]` A dozen or so have gone. That is a street's worth in a place this size, and the street shows it.
-2. `[ledger]` The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter what the town can do.
-3. `[visitor]` About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.
+2. `[ledger · colour]` The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter what the town can do.
+3. `[visitor · colour]` About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.
 
 **QUANTITY: `dozens`**
 1. `[visitor]` Dozens have left {settlement}. The workshops run with gaps in them, and the gaps are not being filled.
@@ -4961,28 +4961,28 @@ band over the ring; this block reads the movement that produced it.
 
 **QUANTITY: `a hundred or so`**
 1. `[visitor · tier: >= town]` A hundred or so have gone from {settlement}, which is a visible subtraction. Whole quarters are quieter than they were.
-2. `[street]` The loss is a hundred or so people, and it is the sort of loss a town argues about rather than absorbs.
+2. `[street · colour]` The loss is a hundred or so people, and it is the sort of loss a town argues about rather than absorbs.
 3. `[ledger · market]` About a hundred have left. That is enough to change what the market can sell and what the levy can raise.
 
 **QUANTITY: `several hundred`**
-1. `[ledger]` Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.
+1. `[ledger · colour]` Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.
 2. `[visitor · tier: >= town]` The exodus runs to several hundred: a real portion of a district, gone over a stretch of seasons, with the buildings still standing.
-3. `[counterforce]` Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.
+3. `[counterforce · colour]` Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.
 
 **QUANTITY: `many hundreds`**
-1. `[elder]` Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.
-2. `[ledger]` The departure runs to many hundreds. The town carries its old infrastructure on a fraction of its old population.
+1. `[elder · colour]` Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.
+2. `[ledger · colour]` The departure runs to many hundreds. The town carries its old infrastructure on a fraction of its old population.
 3. `[visitor · tier: >= town]` Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.
 
 **QUANTITY: `thousands`**
-1. `[visitor]` Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.
+1. `[visitor · colour]` Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.
 2. `[ledger · walls]` The loss runs into thousands. The town retains its walls, its plan and its name, and very little of its life.
-3. `[elder]` Thousands of people have left. What remains occupies a settlement built for something considerably larger.
+3. `[elder · colour]` Thousands of people have left. What remains occupies a settlement built for something considerably larger.
 
 **HERALD KIND: `hungry_gap`** (the lean season)
 1. `[ledger · grain]` The lean season has cost {settlement} people, not to the road but to the ground, and the burial rolls run longer than the harvest explains.
 2. `[street · grain]` More were buried here in {season} than born, and the shortfall in the fields is why the two counts went apart.
-3. `[counterforce]` The gap between what the town grew and what it needed has been paid in the usual currency; the rolls carry it.
+3. `[counterforce · colour]` The gap between what the town grew and what it needed has been paid in the usual currency; the rolls carry it.
 
 **HERALD KIND: `migration_flight`** · **E-6: never in a page already carrying the rumor line**
 1. `[unfolding]` Families are taking to the road. What they are leaving is not a rumour to them, and the columns out of {settlement} grow longer rather than shorter.
@@ -4995,7 +4995,7 @@ band over the ring; this block reads the movement that produced it.
 3. `[street]` The rolls run in the town's favour. Nothing dramatic; simply more cradles than graves, season after season.
 
 **RECEIPT: births and deaths in balance**
-1. `[ledger]` The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.
+1. `[ledger · colour]` The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.
 2. `[visitor · no migration: influx · no migration: exodus]` Births and burials run level here. The town holds its size out of its own population, without help and without loss.
 3. `[street]` Nothing about the town's counts is moving. It is neither growing nor failing, only continuing.
 
@@ -5006,7 +5006,7 @@ band over the ring; this block reads the movement that produced it.
 
 **CANDIDATE KIND: `growth`**
 1. `[visitor · migration: influx]` The town is taking people in faster than it loses them. The building is happening at the edges, which is where it always happens first.
-2. `[unfolding]` {settlement} is growing. The pressure shows as crowding rather than prosperity so far, which is normal at this stage.
+2. `[unfolding · colour]` {settlement} is growing. The pressure shows as crowding rather than prosperity so far, which is normal at this stage.
 3. `[threshold · migration: influx]` Numbers here are climbing. Whether the town can house what it is attracting is a question it has not answered.
 
 **CANDIDATE KIND: `emigration`** (mass, organized)
@@ -6184,7 +6184,7 @@ compass word, no real-world place, no named analogy.*
 3. `[street]` {settlement} is well approached and thinner than it was, and the two facts sit uncomfortably beside one another.
 
 **`FALLING-NARROW`**
-1. `[ledger]` {settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.
+1. `[ledger · colour]` {settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.
 2. `[elder · population: small]` The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.
 
 ---
