@@ -20,6 +20,7 @@ const recordOf = (types, band) => ({ stress: types.map((type) => ({ type })), ec
 describe('mass_migration: the food line needs hunger (R-P 1)', () => {
   it('a fed influx (the food record counts the influx and stays secure) prints the twin, not the food line', () => {
     const text = renderStressSummary('mass_migration', 'Avel', null, factsOf(recordOf(['mass_migration'], 'secure')));
+    // anchored: the next two assertions pin the twin in the refused line's place and the paragraph's head
     expect(text).not.toContain(FOOD);
     expect(text).toContain(FED);
     expect(text.startsWith('Avel is receiving more people than its infrastructure was built for. ')).toBe(true);
@@ -57,6 +58,7 @@ describe('plague_onset: "Healers are overwhelmed." needs a healer (CENSUS-2c uni
   const plagueRecord = (healer) => ({ ...recordOf(['plague_onset'], 'secure'), institutions: healer ? [{ name: 'Infirmary' }] : [{ name: 'Granary' }] });
   it('a place with no healer prints the twin', () => {
     const text = renderStressSummary('plague_onset', 'Avel', null, factsOf(plagueRecord(false)));
+    // anchored: the next assertion pins the whole paragraph, the twin in the refused line's place
     expect(text).not.toContain(HEALERS);
     expect(text).toBe(`Something is spreading in Avel. It is not yet a plague, but it will be if nothing changes. ${TEND} The origin is disputed. Quarantine measures are being resisted.`);
   });
