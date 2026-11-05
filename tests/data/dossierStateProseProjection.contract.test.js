@@ -60,6 +60,7 @@ import {
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -838,7 +839,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
         for (const value of STATE_MARK_DIMENSIONS[dimension]) {
           for (const others of otherAnswers(dims, dimension)) {
             const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
-              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } });
+              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL });
             if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}${Object.keys(others).length ? ` with ${JSON.stringify(others)}` : ''}`);
           }
         }
@@ -907,7 +908,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
       thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value } },
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
       ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
@@ -920,7 +921,7 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
     const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
-      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } },
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value }, facts: CALM_FACTS_ADMIT_ALL },
     ).length === 0));
     expect(silent).toEqual([]);
   });
