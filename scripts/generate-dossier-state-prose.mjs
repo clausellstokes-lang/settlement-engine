@@ -775,6 +775,19 @@ function emitLeaf(name, data, noteLines) {
     + `export const ${name} = /* #__PURE__ */ Object.freeze(${JSON.stringify(data, null, 2)});\n`;
 }
 
+/**
+ * CENSUS-1h unit 7 (R-AQ): the POSITION-KEYED declarations, parallel to each phrase list
+ * (`[i]` = the tag array of joint i, or null). The draw never reads them: the composer draws by
+ * the modulus over the full list, then `resolveDeclaredPosition` checks the drawn position.
+ * @param {Record<string, Record<string, Array<string[]|null>>>} declarations
+ */
+function connectiveDeclarationsLeaf(declarations) {
+  return '\n// THE POSITION-KEYED DECLARATIONS (CENSUS-1h unit 7, the chair\'s R-AQ): parallel to each list\n'
+    + '// above, [i] = the atoms joint i declares (null = silence). Never a draw key.\n'
+    + '/** @type {Readonly<Record<string, Readonly<Record<string, ReadonlyArray<ReadonlyArray<string>|null>>>>>} */\n'
+    + `export const DOSSIER_CONNECTIVE_DECLARATIONS = /* #__PURE__ */ Object.freeze(${JSON.stringify(declarations, null, 2)});\n`;
+}
+
 const connectivePins = connectives.pins
   .map((r) => `${r.relation}.${r.seat} ${r.pin}${r.owed ? ` (floor ${r.floor}, OWED)` : ''}`)
   .join(' · ');
@@ -796,7 +809,7 @@ emitted.push({
     'engine relation row joins two fields a desk reads (car 0 F1), so `seatOf` answers',
     '`not-consequence` on all 708 pools and the composer cannot reach either list. What the',
     'floors buy is that the day a licence exists the writers are not also inventing the joinery.',
-  ]),
+  ]) + connectiveDeclarationsLeaf(connectives.declarations),
   label: `${connectives.pins.length} (relation, seat) lists, `
     + `${connectives.pins.reduce((n, r) => n + r.pin, 0)} joints, `
     + `${connectives.pins.filter((r) => r.owed).length} OWED against their floors`,

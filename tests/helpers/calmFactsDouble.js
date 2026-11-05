@@ -31,4 +31,9 @@ export const CALM_FACTS_ADMIT_ALL = Object.freeze({
   soldiers: true,
   commander: true,
   faith: Object.freeze({ seniorCleric: Object.freeze({ name: 'X' }) }),
+  // CENSUS-5c (2026-11-05): CENSUS-3b's `crime` getter (R-E); "every presence atom holds" makes
+  // `organised crime` hold, so the band reads its top rung (`factVocabulary.js :: CRIME_WORDS`).
+  crime: 'organized',
+  // CENSUS-5d (2026-11-05): CENSUS-1f's composite `sacredHouse` (R-AE); "every presence atom holds".
+  sacredHouse: true,
 });

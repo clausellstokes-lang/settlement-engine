@@ -28,6 +28,7 @@
  */
 
 import { pickRandom2, random01 } from '../helpers.js';
+import { getActiveRng } from '../../kernel/rngContext.js';
 import { collapseArticleSeams } from '../narrativeProse.js';
 import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_CRISIS_SCOPED, POLITICAL_FLAVOR_SIBLINGS } from '../narrativeText.js';
 import { textOf } from '../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared POLITICAL_FLAVOR row gives back its template; CENSUS-1f's cascade wiring enforces
@@ -93,6 +94,9 @@ export const buildStressProfile = (events, _tier, _config, facts) => resolveSibl
  * ones (no roll). Its closure's own event pick then runs as the drawn one's did, inside this
  * sentence's substream (`narrativeGenerator.js`: 'historical-character'), so nothing outside the
  * sentence moves. Nothing admitted (no facts handed): the drawn template stays.
+ * R-AT (CENSUS-1h): the argmax key carries the settlement's identity — the active substream's own
+ * seed (`getActiveRng().seed`, the settlement seed and the stream's labels), read without a roll —
+ * so refused births spread over the admitted rows; an unrefused birth never reads the key.
  * @param {string} pattern @param {any[]} subset @param {any} facts
  */
 const flavorOf = (pattern, subset, facts) => {
@@ -100,7 +104,7 @@ const flavorOf = (pattern, subset, facts) => {
   let drawn;
   const r = drawDeclared(pool, {
     draw: (p) => (drawn = pickRandom2(p)), facts, poolId: `POLITICAL_FLAVOR.${pattern}`, surface: 'history', drawKind: 'R',
-    crisisScoped: POLITICAL_FLAVOR_CRISIS_SCOPED.includes(pattern), key: `POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name ?? ''}`,
+    crisisScoped: POLITICAL_FLAVOR_CRISIS_SCOPED.includes(pattern), key: `${getActiveRng()?.seed ?? ''}::POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name ?? ''}`,
     keepRefused: true, // R-AM: a kept template is noted
   });
   return r.line ?? drawn;

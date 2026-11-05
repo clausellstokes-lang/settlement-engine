@@ -21,6 +21,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "Endorsed": [
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The {seat} at {settlement} is obeyed without much thought given to it; a thing is done because the {seat} said so, and the town would find the question of why a strange one.",
           "slots": [
             "seat",
@@ -30,6 +33,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "{settlement}'s rolls come back filled and its levies come back paid. The {seat} governs at full strength here, and the clerks record almost nothing they have had to chase.",
           "slots": [
             "settlement",
@@ -39,6 +45,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger at {settlement} learns who rules inside an hour and never once hears it disputed; the {seat}'s writ is the plainest fact in the town.",
           "slots": [
             "settlement",
@@ -48,7 +57,10 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
-          "text": "Crime finds little room at {settlement}, and the watch is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
+          "marks": [
+            "colour"
+          ],
+          "text": "Crime finds little room at {settlement}, and enforcement is not the reason: a town that accepts its rulers leaves an operator very few doors to lean on.",
           "slots": [
             "settlement"
           ],
@@ -343,6 +355,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "breakdown dominated by FOOD, adverse": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "The {seat} at {settlement} is being judged at the granary door, and the granary is not helping it.",
           "slots": [
             "seat",
@@ -352,6 +367,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: hunger"
+          ],
           "text": "Hunger at {settlement} has turned into a question about the {seat} rather than about the harvest; the town has decided that somebody could have arranged this better.",
           "slots": [
             "settlement",
@@ -361,6 +379,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "The {seat}'s standing falls with the food at {settlement} and will not climb back with it. A town remembers being hungry a great deal longer than it remembers being fed.",
           "slots": [
             "seat",
@@ -443,7 +464,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "Tolerated": {
         "role": "spine",
@@ -462,7 +484,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "Contested": {
         "role": "spine",
@@ -481,7 +504,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "Legitimacy Crisis": {
         "role": "spine",
@@ -498,7 +522,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "breakdown dominated by PROSPERITY, favourable": {
         "role": "spine",
@@ -513,7 +538,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "breakdown dominated by PROSPERITY, adverse": {
         "role": "spine",
@@ -528,7 +554,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "breakdown dominated by SAFETY, adverse": {
         "role": "spine",
@@ -543,7 +570,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "breakdown dominated by DEFENSE, adverse": {
         "role": "spine",
@@ -558,7 +586,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "breakdown dominated by FOOD, adverse": {
         "role": "spine",
@@ -591,7 +620,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -746,6 +776,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger cannot get into {settlement} and would not want to; the town is closed around itself and the ordinary business of the place has stopped.",
           "slots": [
             "settlement"
@@ -950,7 +983,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "unstable matched": {
         "role": "spine",
@@ -968,7 +1002,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "critical matched": {
         "role": "spine",
@@ -986,7 +1021,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "siege matched": {
         "role": "spine",
@@ -1024,7 +1060,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "no token matched: unclassified (the plain-description floor)": {
         "role": "spine",
@@ -1039,7 +1076,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "governing faction holds a DOMINANT share": {
         "role": "spine",
@@ -1055,7 +1093,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "governing faction holds a NARROW plurality": {
         "role": "spine",
@@ -1071,7 +1110,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recentConflict present": {
         "role": "spine",
@@ -1087,7 +1127,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -1280,7 +1321,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 4,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "crowded top rung, low instability": {
         "role": "spine",
@@ -1296,7 +1338,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 4,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "high instability (churn at the top)": {
         "role": "spine",
@@ -1314,7 +1357,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "low instability, long-held order": {
         "role": "spine",
@@ -1330,7 +1374,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 4,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "shallow ladder (few rungs recorded)": {
         "role": "spine",
@@ -1346,7 +1391,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -1733,7 +1779,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "riskLabel: Contested": {
         "role": "spine",
@@ -1751,7 +1798,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "riskLabel: Critical. The seat could fall": {
         "role": "spine",
@@ -1767,7 +1815,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "legitimacyHold: public backing hardens the hold": {
         "role": "spine",
@@ -1783,7 +1832,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "legitimacyHold: public opinion neither helps nor hurts": {
         "role": "spine",
@@ -1799,7 +1849,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "legitimacyHold: public rejection is breaking the hold": {
         "role": "spine",
@@ -1815,7 +1866,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "previousGovernments present with a recorded cause": {
         "role": "spine",
@@ -1832,7 +1884,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "previousGovernments empty (no recorded lineage)": {
         "role": "spine",
@@ -1847,7 +1900,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -2242,7 +2296,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "council": {
         "role": "spine",
@@ -2259,7 +2314,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "theocracy": {
         "role": "spine",
@@ -2276,7 +2332,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "merchant_league": {
         "role": "spine",
@@ -2293,7 +2350,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "criminal": {
         "role": "spine",
@@ -2308,7 +2366,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "mixed": {
         "role": "spine",
@@ -2323,7 +2382,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "economicBase: extraction": {
         "role": "spine",
@@ -2338,7 +2398,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "economicBase: agrarian": {
         "role": "spine",
@@ -2353,7 +2414,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "economicBase: trade_hub": {
         "role": "spine",
@@ -2368,7 +2430,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "economicBase: craft": {
         "role": "spine",
@@ -2383,7 +2446,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "economicBase: mixed": {
         "role": "spine",
@@ -2398,7 +2462,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "governing body name: a SLOT, never a baked noun": {
         "role": "spine",
@@ -2413,7 +2478,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -2474,12 +2540,18 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The town has no particular opinion of the hall, which the hall would do well to notice and generally does not.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "Nothing is currently deciding how {settlement} regards the {seat}, which means the first thing that does will decide a great deal at once.",
           "slots": [
             "settlement",
@@ -2539,7 +2611,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both.",
           "slots": [
@@ -2562,7 +2635,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "colour"
           ],
           "text": "What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns.",
           "slots": [
@@ -2661,12 +2735,18 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "The town buys in two places and only mentions one of them.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "colour"
+          ],
           "text": "A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to.",
           "slots": [
             "settlement"
@@ -2677,6 +2757,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role duty evasion": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.",
           "slots": [
             "settlement"
@@ -2696,6 +2779,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "The customs at {settlement} are properly kept and thoroughly bypassed, and the two facts do not contradict each other in the way a stranger expects.",
           "slots": [
             "settlement"
@@ -2756,6 +2842,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role stolen goods market": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "What is taken at {settlement} is moved back into lawful circulation through a clearinghouse, which is the arrangement that makes the taking worth doing at all.",
           "slots": [
             "settlement"
@@ -2812,6 +2901,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "operation role criminal revenue stream (unclassified)": [
         {
           "angle": "ledger",
+          "marks": [
+            "colour"
+          ],
           "text": "There is criminal infrastructure at {settlement} with local weight, territorial or economic, and no clearer description of it than that.",
           "slots": [
             "settlement"
@@ -2820,6 +2912,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "colour"
+          ],
           "text": "There is somebody at {settlement} who does well out of arrangements the town does not enquire into, and the doing-well is the only visible part.",
           "slots": [
             "settlement"
@@ -2828,6 +2923,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "A stranger at {settlement} is told there is money in the town that does not come from the market, and is told no more than that.",
           "slots": [
             "settlement"
@@ -2851,7 +2949,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "neutral baseline (nothing pulling either way)": {
         "role": "spine",
@@ -2885,7 +2984,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 4,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "capture pressure RECOVERING (strong security, prosperity)": {
         "role": "spine",
@@ -2917,7 +3017,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "capture reached a LEADER": {
         "role": "spine",
@@ -2933,7 +3034,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "operation role parallel marketplace": {
         "role": "spine",
@@ -2978,7 +3080,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "operation role money laundering": {
         "role": "spine",
@@ -2993,7 +3096,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "operation role stolen goods market": {
         "role": "spine",
@@ -3023,7 +3127,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "operation role criminal revenue stream (unclassified)": {
         "role": "spine",
@@ -3231,6 +3336,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "colour"
+          ],
           "text": "What holds the hall at {settlement} together is outside it, and will leave when the danger does.",
           "slots": [
             "settlement"
@@ -3239,6 +3347,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "colour"
+          ],
           "text": "Houses at {settlement} that have not agreed on anything in years are agreeing now, and none of them mistakes it for a reconciliation.",
           "slots": [
             "settlement"
@@ -3547,6 +3658,9 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
       "receipt deferred (the alignment exists and has not happened)": [
         {
           "angle": "threshold",
+          "marks": [
+            "colour"
+          ],
           "text": "The alignment is there at {settlement} and the moment has not come; two houses need each other and something keeps them apart, and the keeping-apart is entered every time the question is raised.",
           "slots": [
             "settlement"
@@ -3652,7 +3766,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "consolidation 0: a fully divided court (live layer, no ruling bloc)": {
         "role": "spine",
@@ -3667,7 +3782,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "a RULING bloc, consolidated": {
         "role": "spine",
@@ -3682,7 +3798,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "glue concession (seats and revenue traded)": {
         "role": "spine",
@@ -3697,7 +3814,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "glue patronage (personal loyalty between leaders)": {
         "role": "spine",
@@ -3712,7 +3830,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "glue doctrine (a shared creed)": {
         "role": "spine",
@@ -3727,7 +3846,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "glue threat (a common danger at the walls)": {
         "role": "spine",
@@ -3759,7 +3879,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "end seats": {
         "role": "spine",
@@ -3774,7 +3895,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "end commerce": {
         "role": "spine",
@@ -3789,7 +3911,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "end doctrine": {
         "role": "spine",
@@ -3804,7 +3927,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "end survival": {
         "role": "spine",
@@ -3819,7 +3943,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "end patron": {
         "role": "spine",
@@ -3834,7 +3959,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "receipt formed": {
         "role": "spine",
@@ -3849,7 +3975,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "receipt realigned": {
         "role": "spine",
@@ -3864,7 +3991,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "receipt fractured": {
         "role": "spine",
@@ -3879,7 +4007,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "receipt exposed": {
         "role": "spine",
@@ -3894,7 +4023,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "receipt deferred (the alignment exists and has not happened)": {
         "role": "spine",
@@ -3924,7 +4054,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "an opposition bloc forms COVERT under an autarchy": {
         "role": "spine",
@@ -3940,7 +4071,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   }
