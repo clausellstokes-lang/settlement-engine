@@ -370,6 +370,18 @@
  *   129/215/84/56/50/53 -> 129/215/87/56/50/53 (derived ceilings 207/344/135/90/80/85 -> 207/344/140/90/80/85).
  *   CORPUS_ROWS stays 504; the throw census stays 0.
  *
+ *   2026-11-04 — X-46 CAR 1B, FIRST STEP (U1–U3), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record
+ *   docs/shift-records/2026-11-04-rung1-11-x46-car-1b-1-no-ceiling.json; the chair signs by the owner's delegation,
+ *   vetoable). Written from the staged tree
+ *   S11 (the step's tree with the door paths carried from the branch). The per-tier maximum roster reads
+ *   12/25/42/70/82/86, so CARTOGRAPHY_CALIBRATION does not move.
+ *   Re-keyed by measurement over the recorded corpus (the suite's own definitions): FROZEN.maxInstitutions
+ *   12/25/42/70/82/86 -> 12/25/42/70/82/86; FROZEN.maxBuildings 13/29/48/120/210/272 -> 13/29/48/120/210/269;
+ *   DUPLICATES.permille 129/215/87/56/50/53 -> 129/215/87/56/50/54 (derived ceilings 207/344/140/90/80/85 ->
+ *   207/344/140/90/80/87).
+ *   CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -442,7 +454,7 @@ const FROZEN = Object.freeze({
   village: Object.freeze({ throws: 0, maxInstitutions: 42, maxBuildings: 48 }),
   town: Object.freeze({ throws: 0, maxInstitutions: 70, maxBuildings: 120 }),
   city: Object.freeze({ throws: 0, maxInstitutions: 82, maxBuildings: 210 }),
-  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 272 }),
+  metropolis: Object.freeze({ throws: 0, maxInstitutions: 86, maxBuildings: 269 }),
 });
 
 /**
@@ -492,7 +504,7 @@ const DUPLICATES = Object.freeze({
   village: Object.freeze({ permille: 87 }),
   town: Object.freeze({ permille: 56 }),
   city: Object.freeze({ permille: 50 }),
-  metropolis: Object.freeze({ permille: 53 }),
+  metropolis: Object.freeze({ permille: 54 }),
 });
 
 /**
@@ -1179,7 +1191,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 202/320/143/100/79/93 -> 207/344/135/90/80/87 on 2026-11-04: X-46 CAR 2 (LANE X46-2-THRESHOLDS) (header), the same operator.
     // 207/344/135/90/80/87 -> 207/344/135/90/80/85 on 2026-11-04: TERRAIN-POOLS, FIRST STEP (LANE TERRAIN-POOLS AT ITS FIRST MERGE) (header), the same operator.
     // 207/344/135/90/80/85 -> 207/344/140/90/80/85 on 2026-11-04: T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([207, 344, 140, 90, 80, 85]);
+    // 207/344/140/90/80/85 -> 207/344/140/90/80/87 on 2026-11-04: X-46 CAR 1B, FIRST STEP (U1–U3) (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([207, 344, 140, 90, 80, 87]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
