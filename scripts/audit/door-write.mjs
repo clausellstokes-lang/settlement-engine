@@ -14,7 +14,7 @@
  * name the surface, a dirty tree beyond the fixture/register/record, a prediction miss) and a successful write throws
  * by design. It adds no authority: the record is the authority.
  *
- * THE PDF SNAPSHOT'S BYTES, honestly sourced: run `npx vitest run -u tests/pdf/goldenViewModel.test.js` in a SCRATCH
+ * THE PDF SNAPSHOT'S BYTES, honestly sourced: run `npx vitest run tests/pdf/goldenViewModel.test.js --update` (vitest 4: a leading `-u` swallows the path as its value and runs every file) in a SCRATCH
  * stage, copy the snapshot it writes to a scratch path, restore the stage (`git checkout -- <snap>`), then hand the
  * copy here. The bytes are the matcher's own; the plain run after the write is the proof.
  *

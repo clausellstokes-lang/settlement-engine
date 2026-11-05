@@ -15,6 +15,7 @@
  * a prediction miss writes nothing and this driver stops.
  *
  *   node scripts/audit/landing-act.mjs run        <config.json> [<surface> ...]   # door runs inside the stage
+ *   node scripts/audit/landing-act.mjs figures    <config.json>                   # rows moved per logged act
  *   node scripts/audit/landing-act.mjs transplant <config.json>                   # one branch commit per act
  *
  * config.json: { n, stage, step, stepSubject, label, cause, record, carry, seat, session, receipt, receiptFiles,
@@ -72,7 +73,7 @@ function runAct(s) {
   } else if (s.surface === 'pdf-golden-view-model-snapshot') {
     const snap = row.path;
     const produced = join(cfg.scratch, `pdf-${cfg.n}.snap`);
-    try { sh('npx', ['vitest', 'run', '-u', row.suite], { cwd: stage }); } catch { /* the matcher writes even when red */ }
+    try { sh('npx', ['vitest', 'run', row.suite, '--update'], { cwd: stage }); } catch { /* the matcher writes even when red */ }
     writeFileSync(produced, readFileSync(join(stage, snap), 'utf8'));
     git(stage, 'checkout', '--', snap);
     door = doorRun(stage, 'node', ['scripts/audit/door-write.mjs', '--surface', s.surface, '--from', produced]);
@@ -144,6 +145,11 @@ function transplant() {
       const differs = git(here, 'diff', '--name-only', 'HEAD', stageFinal, '--', d.suite);
       if (differs) { git(here, 'checkout', stageFinal, '--', d.suite); extraFiles.push(d.suite); }
     }
+    if (s.calibration) {
+      // CARTOGRAPHY_CALIBRATION by hand: its block alone, from the stage's final tree (the file's other blocks are the lanes').
+      sh('node', [join(here, 'scripts/audit/carry-calibration.mjs'), cfg.stage, here]);
+      extraFiles.push('src/domain/townCartography/cartographyTuning.js');
+    }
     for (const extra of s.extraPaths ?? []) {
       git(here, 'checkout', stageFinal, '--', extra);
       extraFiles.push(extra);
@@ -180,7 +186,38 @@ function transplant() {
   }
 }
 
-if (mode === 'run') {
+/** Rows moved by each logged act, diffed between the act's stage commit and its parent (the DRY pass's figures). */
+function figures() {
+  const rowsOf = (text) => {
+    let parsed;
+    try { parsed = JSON.parse(text); } catch { return null; }
+    const body = parsed && typeof parsed.rows === 'object' && !Array.isArray(parsed.rows) ? parsed.rows : parsed;
+    return Object.fromEntries(Object.entries(body).filter(([key]) => !key.startsWith('_')));
+  };
+  const out = {};
+  for (const [surface, d] of Object.entries(log)) {
+    const before = rowsOf(git(cfg.stage, 'show', `${d.stageCommit}^:${d.path}`));
+    const after = rowsOf(git(cfg.stage, 'show', `${d.stageCommit}:${d.path}`));
+    if (!before || !after) { out[surface] = { note: 'not a JSON row manifest' }; continue; }
+    const byTier = {};
+    let moved = 0;
+    for (const [key, value] of Object.entries(after)) {
+      if (key in before && JSON.stringify(before[key]) !== JSON.stringify(value)) {
+        moved += 1;
+        const tier = key.split('|')[0];
+        byTier[tier] = (byTier[tier] ?? 0) + 1;
+      }
+    }
+    const added = Object.keys(after).filter((key) => !(key in before)).length;
+    const removed = Object.keys(before).filter((key) => !(key in after)).length;
+    out[surface] = { rows: Object.keys(after).length, moved, added, removed, byTier };
+  }
+  console.log(JSON.stringify(out, null, 1));
+}
+
+if (mode === 'figures') {
+  figures();
+} else if (mode === 'run') {
   for (const s of cfg.surfaces) {
     if (only.length && !only.includes(s.surface)) continue;
     runAct(s);
