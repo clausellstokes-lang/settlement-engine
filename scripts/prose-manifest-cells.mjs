@@ -153,6 +153,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (PINS, second step (units 6–7), docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 11467ed57 because the rows whose own text calls them rare carry the rarity mark; 72 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (F6 BUDGET-FLOOR (units 1–4), docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 6d84aa834 because the institution budget\'s density factor answers anchor − R − X over the scalable rows; 412 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
