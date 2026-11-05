@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F10 WALLS-WORD (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   34 OF 525 ROWS MOVED (town 34; thorp, hamlet, village, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 54daafda3): a line that names walls, soldiers or a garrison takes its twin where the roster lacks the thing — the hook-truth gate reads soldiers as the defence check does, and the service descriptions, the siege and wartime goals, the crisis cast's defence reasons, the waystation description and the power writers' garrison words follow. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S26 (the tree of 54daafda3 with the door paths carried from
+ *   the branch, the previous record's writes committed). 2e6482a4.. -> e98702fe..
+ *
  * 2026-11-04 — F4 CRIME-SIGNAL (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-25-f4-crime-signal.json; the cloud chair signs under the owner's delegation, vetoable).
  *   99 OF 525 ROWS MOVED (hamlet 12, village 72, town 15; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
