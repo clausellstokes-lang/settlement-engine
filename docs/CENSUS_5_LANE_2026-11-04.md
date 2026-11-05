@@ -287,3 +287,55 @@ No new site landed on 1b after the merge. On this tree 1e enforces `SAFETY_LINE_
 - **The `safetyProfile` enforcement, by cause (1e's wiring of 5b's ten carried sets):** on the base 1,000's birth ledgers, a safety line resolves to its twin in **111 births** (289 draws across the generator's passes). That is consistent with the ~137 expected. It is in both BEFORE and AFTER (R-B), so it is not this lane's move.
 - **No slot empties.** A T site cannot mute: a refused line with no twin keeps the original. A probe re-asserted every printed original of this lane's wired tables against `factsOf(final record)` on 300 births. **0 kept-false** in `safetyProfile`, the settled `FACTION_DESC` sets, `MILITARY_MODIFIER` and the baseline conflicts. The one kept-false class was the militia patrol line (4 of 300), which the R-A unit cured. So no twin is owed (R-G, R-L).
 - **A blind spot found (open question 1).** `drawDeclared.js :: resolveSibling` keeps a refused original when its set has no twin. `note()` returns before ledgering a null resolution, so a kept-false original never reaches `cert:false-presumption`. 1e's "24 → 0" came from parking the militia sets; it does not show that the remaining twin-less sets are true. The probe above shows they are, today.
+
+## The 60 and the 1,000 (R-B: before = the merged base `ff4128242`; after = `b3d4fa202`)
+
+| run | settlements · findings · errors · verdict | `coh:crisis-blind-prose` | other contradiction classes | `reader:*` (6 classes) | `cert:*` · `cert:false-presumption` | records moved | sample pages moved |
+|---|---|---|---|---|---|---|---|
+| 60 | 60 · 104 → 104 · 0 → 0 · CLIMB → CLIMB | 2 → 2 | none (`coh:defence-words`, `coh:faith-denial`, `coh:crisis` 0 → 0) | identical | none · **0 → 0** | 3 (soak1k-20, -26, -56) | 3, the same three |
+| 1,000 | 1,000 · 1,714 → 1,714 · 0 → 0 · STOP → STOP | 35 → 35 | none; `A-12:self-vouch-false` 3 → 3 | identical | none (certification 1,000 / 1,000) · **0 → 0** | **41**, exactly the militia set | 2 of 60 sampled (soak1k-290, -674), both the patrol line |
+
+**The STOP is the base's, at the same count.** All 35 crisis-blind findings belong to other lanes: "Food Secure." under a migration (32: the mirror row CENSUS-2c retires; uncovered on this tree, R-AG) and the pilgrims queueing patiently (3: institutions). **On this lane's claims the count is 0, before and after.** For reference, the pre-merge 1,000 (5b's tip `abed36651`, re-run here) read crisis-blind 241 and A-12 14. The merge brought both down; this lane's units did not move them.
+
+**`cert:false-presumption` 0 on both sides of the 1,000.** It re-asserted 5,354 declared kernel draws in `tab:dossier` (5,093 at the base: +261 from unit 3's declarations), 2,457 in power, 1,494 in defense and 445 in threats. Every draw passed against the final record. Caveat: a refused original with no twin is not in that count (unit 4's blind spot).
+
+**`declared-share` (the 1,000):** power 2,457 / 2,457 (1.000) · defense 1,494 / 1,494 (1.000) · tab:threats 89 / 89 · tab:dossier 0.024 → 0.025. **DS-DEF / DS-FTH on the 60** (the scratch probe over the same ledger was not re-run). The undeclared register is a better per-family reading: DS-FTH 141 → 38 undeclared lines (34 pools `{colour}`), DS-WAR 242 → 34, DS-REL 41 → 2, DS-DEF 319 → 316 (unit 3).
+
+## Rows moved, by cause (never re-recorded)
+
+- **Golden records:** 168 of 525 (hamlet 84, village 84), one cause: the R-A militia reword. Zero residue. Units 1–3 move 0 (unit 1 is byte-identical by deep equality; units 2–3 are display only). The base is red on all 525 against the recorded manifest from earlier lanes' unrecorded moves (5b's note).
+- **Soak records:** 41 of 1,000, the R-A unit. 0 from units 1–3.
+- **Pages:** the R-A unit's 41. Unit 3 refuses display-time winners (DS-DEF-4/6, DS-FTH-3), and it moved 0 of the sampled pages on the 60 and the 1,000. The rest of the 1,000's pages are not dumped, so its full page count is not measured.
+- **Wiring census:** re-taken through its door at every unit; the JSON is unchanged (no colour or declaration column yet: 3c).
+- **Generated leaves:** `general`, `warFaith` (unit 2), `defense`, `warFaith` (unit 3), through `npm run gen:dossier-prose` only, `--check` green.
+- **Registers:** the undeclared register falls 2,118 → 1,765 lines, 688 → 575 pools (unit 2: −343; unit 3: −10, DS-DEF −3, DS-WAR −6, DS-FTH −1). `declarationRegisters.test.js` stays red in its two arms (5b's, plus these falls). That is the compose's re-take (R-T, answer 1), and it is not re-pinned here.
+- **Test pins re-keyed by cause:** `calmFactsDouble.js` gains `crime: 'organized'` (C5b-7's rule); `stateProseKernel.test.js`'s calm reference sets aside a variant that excludes a presence atom (unit 3); `factionDescSiblings.test.js` arm (a) reads the reworded patrol line (R-A).
+- **Governing suites, title for title against the merged base:** unit 1, 30 files; unit 2, 26 files, the base's 23 reds; unit 3, 35 files, the base's 31; R-A, 25 files, the base's reds. No new red. The `power/` ceiling falls (851 / 873 → 813 / 817) and is still red by its pre-census overage.
+- **Typecheck:** `typecheck:ratchet` green; `typecheck:domain:strict` red at the base and the tip with the same two files (`crisisFactFindings.js` +4, `composeStateProse.js` +2), neither touched.
+
+## Waiting (the line is left as it is)
+
+| line | presumes | waiting on |
+|---|---|---|
+| DS-FTH-1 SINK rising v1 "Crisis has a way of ending indifference" | some crisis | CENSUS-1d unit 8 (R-O: bare `crisis` is a kernel mount word) |
+| DS-FTH-1 ARC rising v3 / DEVOTION lukewarm v3 "the clergy" | a cleric | the reading of `priest` (a senior cleric) at the faith desk |
+| DS-FTH-3 STANDING cult v2, NICHE slots open v1 (shrines) | a sacred house | `sacredHouse` (R-AE, the mechanism lane) |
+| DS-FTH-3 PILGRIM thin v1 "the town's inns" | tavern | `institution: tavern` read at the faith desk |
+| DS-FTH-1 CULTS v3 "several … its own quarter of the town" | several cults; a town | no atom for cult count; `tier: ≥ town` possible |
+| DS-WAR-5 phantom front v1, live front v3, siege_lifted v2 (walls); blockade stamped v3 ("the water") | walls; water | unmounted block; walls is a kernel dimension with no mount row |
+| `rulingStructure` "fund the council" · "council access" | a council body | "waiting on council" (R-AE) |
+| `governanceNarrative` the priest baseline lines | priest | "waiting on order" (R-Q, answer 4) |
+| the three `FACTION_DESC_SIBLINGS` garrison sets | garrison | measured NOT settled at the draw (9 of 2,121 steps); open question 2 |
+| `BASELINE_CONFLICT_SIBLINGS` militia captain | militia | the same R-Q question at the governance draw (0 prints on the 1,000 at 5b) |
+
+## Where CENSUS-5d starts
+
+1. The chair's answers to the questions below (the twin-less refusal blind spot; the garrison sets).
+2. The waiting rows above, as their atoms land (`sacredHouse`, `council`, unit 8's bare `crisis`).
+3. The off-census `{colour}` list goes into 3c's `tablePools` when it exists. The mixed DS-FTH/WAR pools leave the register as their last presumption is declared.
+
+## Open questions for the chair
+
+1. **A refused original with no twin is silent to the self-check.** `resolveSibling` keeps the original and `note()` never ledgers a null resolution, so `cert:false-presumption` cannot see a kept-false line. Should 1f ledger it (as `resolvedBy: 'none'` with the original's atoms), so the cert reads every printed T line?
+2. **The `garrison` sets at the faction-description draw:** garrison is not settled there (9 differences). Three twin-less sets still declare it, and they are true on the final record today (0 kept-false on 300 births). Reword under R-U as the militia sets were, or leave them while they are measured true?
+3. **Pool-level `{colour}` for a mixed pool:** a pool with one declared line and two colour lines keeps those two in the register. Does that stay the rule (my reading), or may such a pool carry `{colour}` beside its declarations?
