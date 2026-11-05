@@ -362,3 +362,108 @@ crisisBlindWidened 6 (CENSUS-1d's tip) · declarationRegisters 2 (R-T: the compo
 2. The culture tradition lines that name military households / warrior followings / professional troops: are they roster claims (`soldiers`, muting slots once wired) or tradition colour?
 3. `institution: temple`'s pattern does not match monastery / friary / minster, which the spatial sacred-house derivation treats as sacred houses: should the vocabulary gain a `sacred house` composite (two readers already want it), or should the pattern widen?
 4. The crisis-scoped flags of carried pools (listed above) live only in this doc until their sites are wired: should a lane pin them in `crisisScopedPools.register.json` now (R-T says the compose pins)?
+
+## Phase B continued (CENSUS-2e, 2026-11-05)
+
+> **Where this seat stopped: every unit done, clean and pushed** (well inside the boundary rule). Units 1–2 landed; unit 3 had no newly wired site to twin; unit 4 measured (0 / 1,000 records moved, every class identical). 2d's two `random` cells are named (the wartime twin). **CENSUS-2f starts at** the list under "Where CENSUS-2f starts". Merged `origin/lane/census-1b-2026-11-04` at `6e2cb6d` (`761929c`; CENSUS-1e's lane record and addendum, docs only — no site newly wired since 2d). Re-fetched before each unit: unchanged. The wiring census re-taken through its door at the merge and after every unit: 709 pools / 2,328 variants, both `--check`s green, no row moved.
+
+### Commits
+
+| unit | commit | what | golden / soak-60 records / pages |
+|---|---|---|---|
+| merge | `761929c` | census-1b at `6e2cb6d` | — |
+| 1 | `56803fe` | the crisis-scoped flags on the carried tables (answer 4, R-AF): 33 pools | 0 / 0 / 0 |
+| 2 · Daily Life | `f3558f5` | DEFENSE_CONTEXT declared at 1e's wired site (ENFORCED, `crisisScoped: true`); 'Defensible' reworded (R-W); DAILY_LIFE_TAB's loading messages and local narrative carried (textOf); its anchors fallback reworded (R-W) | 0 / 0 / 0 (see the 60) |
+| 2 · POLITICAL_FLAVOR | `a12a4b8` | ten cascade rows declare, carried through `textOf(pickRandom2(…))(events)` | 0 / 0 / 0 |
+| 2 · landmarks | `91c5874` | CHECK_INST_COMPAT_LANDMARKS: six lines declare, carried (`textOf(pickRandom([...]))`) | 0 / 0 / 0 |
+| 2 · colour | `b63ca6e` | the `{colour}` rulings: STRESS_RUMORS, ECHO_PREFIXES, TERRAIN_SEASON_TEXTURE (+ one "needs a field" row: season), DOSSIER_CONNECTIVES | 0 / 0 / 0 |
+
+Red-first throughout: `tests/domain/facts/census2eTables.test.js` (each arm red against the parent file, planted and restored, then green; it imports 2d's `expectedDeclaration` / `declaredLiteralsOf`). Byte method: a scratch sha-256 over `goldenCorpus()`'s 525 records against the merged base `761929c`, per commit that touches a generator (POLITICAL_FLAVOR, the landmarks): **0 / 525** each.
+
+### Unit 1 — the flags (the chair's answer 4, R-AF)
+
+Each carried table that the ledger opted into the crisis dimension (and no crisis key guarantees: R-B1) carries a frozen `<…>_CRISIS_SCOPED` list of the ledger's pool names where the table lives, which the site's wiring reads: `ARRIVAL_CRISIS_SCOPED` (SENSES 12, PEOPLE 7, TENSIONS 1, MEMORIES 3), `ARRIVAL_SCENES_CRISIS_SCOPED` (2), `SPATIAL_QUARTER_CRISIS_SCOPED` (2), `CONDITION_ARCHETYPE_CRISIS_SCOPED` (4), `QUICK_GUIDE_CRISIS_SCOPED` (2) — 33 pools; unit 2 adds `DAILY_LIFE_LOCAL_CRISIS_SCOPED` (4) and `POLITICAL_FLAVOR_CRISIS_SCOPED` (1), and DEFENSE_CONTEXT's five pools are flagged AT the wired site (`crisisScoped: true`). **38 + 5 = 43 opted pools flagged; none pinned** (R-T: the compose pins `crisisScopedPools.register.json`).
+
+A finding for the compose: in 39 of those 43 pools every line already writes `crisis: any`, so the flag changes no admission (the scoping is vacuous, as 2c found for HOOK_LINE_POOLS' foodGap). It bites only where a pool holds a calm (silent) line: ARRIVAL_SCENES `market` (1 calm) and `ordinary` (2), DAILY_LIFE_TAB `localNarrative.stress` (the no-stress sentence) and POLITICAL_FLAVOR `stable` (rows 0, 3, 7, 8) — 4 pools. Those are the pools whose wiring will move births.
+
+### Unit 2 — the seven tables
+
+| table | kind / site | lines read | declaring | state | notes |
+|---|---|---|---|---|---|
+| DAILY_LIFE_CONTEXT · DEFENSE_CONTEXT | T, wired by 1e (`077cf9b`) | 5 | 5 | **enforced** | 'Defensible' presumed a palisade AND a militia: **0 of 50** Defensible births on a 300-birth probe hold both (R-W) → "There are defenses, but nobody would call this a fortress. …" `needs: watch`. No twin: `defenseCtx` prints on no page (R-D2). Measured on the probe: Fortress 11/14 admitted, Well-Defended 22/41, Vulnerable 19/100 (watch), Undefended 33/44 |
+| DAILY_LIFE_CONTEXT · TERRAIN / ROUTE | T | 13 | — | **dead** (R-S) | their ctx fields have no reader in `src` (R-D2 stands) |
+| DAILY_LIFE_CONTEXT · legacy 'mixed' | T | 1 | 0 | colour | |
+| DAILY_LIFE_TAB | R (LOAD_MSGS), T (local narrative) | 36 | 13 (+ the offer line's 16, unit 2 of Phase A) | carried (`textOf`) | LOAD_MSGS: tavern, market. Food / order cells per the ledger; paragraph [1] `guardPresence` (the parked guards stop); paragraph [2]'s settled-authority sentence `no crisis: succession`. The anchors fallback ("the market, shrine, workshop, and watch post") prints only when the place has NO institution in the eight listed categories, so it named what no place reaching it holds (R-W) → "the wells, the lanes, and the common ground" |
+| POLITICAL_FLAVOR | R, `pickRandom2` cascade (CENSUS-1f's unit 4) | 65 | 10 rows | carried (`textOf(pickRandom2(…))(events)`) | disaster_heavy[4] granary (its walls stay with 1c's POLITICAL_FLAVOR_SIBLINGS); stable[1, 2, 4, 5] `crisis: any`, stable[6] market; magical_heavy[1, 2, 4, 6] magic |
+| CHECK_INST_COMPAT_LANDMARKS | R, the arrival scene (1f's redraw) | 16 | 6 | carried (`textOf(pickRandom([...]))`) | walls ×2 (one with `no crisis: under_siege`), gate, navigable ×2, `no crisis: succession` |
+| DOSSIER_CAUSAL_PROSE | K, vid-less (R-Y) | 468 | 113 (in the ledger) | **carried in the Phase A ledger only, NOT in the annex** | see "A deviation from answer 1" |
+| DECREE_PROSE vid 54 | K | 96 | 1 | carried (ledger) | `decreeProse.js :: drawPart` still calls `eligibleVariants` with no facts, so a declared vid 54 would be refused fail-closed in every birth (unchanged from 2d) |
+| STRESS_RUMORS | R | 4 | 0 | `{colour}` | the fixed words presume only the key's two NPCs |
+| ECHO_PREFIXES (printed copy, historyGenerator.js) | R | 5 | 0 | `{colour}` | R-AD: each frames a past discovery; none asserts what the place holds now. plotHooks.js's copy is a match list, never printed |
+| TERRAIN_SEASON_TEXTURE | T | 32 | 0 | `{colour}` + "needs a field" | every cell presumes its season (ruling 8): one hand-kept row in `undeclaredLines.register.json` |
+| DOSSIER_CONNECTIVES | K joint | 12 | 0 | `{colour}` | pure joinery; the ruling is a paragraph in annex §7b (the projector reads no brace on §7b's lists) |
+
+**A deviation from answer 1 (said out loud).** The chair's answer said "declare [DOSSIER_CAUSAL_PROSE] in the annex now, enforced later". This seat did not, for three measured reasons, and left the 113 declarations carried in Phase A's ledger file (`docs/census/declarations/DOSSIER_CAUSAL_PROSE.json`), where they already stand verbatim:
+1. **The causal leaf's byte ceiling is a ruling.** `scripts/.prose-byte-baseline.json :: _causalLeafGround`: "THE CAUSAL LEAF TAKES NO HEADROOM, AND THAT IS A RULING" (ARCH §11; §12 car 13 is OWNER-GATED, "wire or retire"). An atom in the tag slot is projected into `marks` and grows the leaf, so the annex edit breaches an owner-gated ceiling.
+2. **The arms are marks.** `readCausalDossierLine` selects a family's arm by `marks.includes(join.arm)`, and the arm vocabulary holds `market`, `occupied`, `held`, `court`: an atom `market` on a variant of the other arm would be read as that arm (R-Y's own reason).
+3. **The leaf renders nowhere.** `causalDossierProse.js` has no product importer (the same baseline row measures it), so a declaration there would carry nothing a reader sees.
+The vids (R-Y, 1f's item 1) settle reason 2 only; reasons 1 and 3 are the owner's "wire or retire".
+
+**Waiting lists (this seat's).**
+- **waiting on sacredHouse (R-AE):** POLITICAL_FLAVOR religious_heavy[0] ("…the institution persisted") and [2] ("…the local clergy…"): a sacred house of any kind, not a temple. (The spatial lines 2d listed are unchanged: the sacred-house branches of SPATIAL_TEXT.)
+- **waiting on the closure's split (the wiring):** POLITICAL_FLAVOR catastrophic[1]'s monster-incursion branch (walls, militia) — one branch of a closure whose other branch presumes nothing; a row atom would refuse both. (Its militia would also fall under R-Q: the militia joins the roster after the power step.)
+- **waiting on a faith-presence atom:** DAILY_LIFE_TAB paragraph [1]'s "priests" (`priest` reads a senior cleric among the named people, not a class of priests).
+- **dead (R-S):** DAILY_LIFE_CONTEXT TERRAIN_CONTEXT / ROUTE_CONTEXT.
+- **R-Q:** none of this seat's declared lines names a fact settled after its draw (the Daily Life cells read the final record at render; the history cascade and the landmarks draw after the roster, the granary and the walls are settled at institutions and defence; magic is a world law).
+
+### The chair's rulings this seat made (recorded, vetoable)
+
+- **R-E1, the flag lives with the table as a list of the ledger's pool names** (`<TABLE>_CRISIS_SCOPED`), not as a property on an array (a filtered copy would drop it) — the wiring reads `crisisScoped: LIST.includes(poolId)`.
+- **R-E2, a never-true or never-reached presumption is reworded, both directions** (R-W): 'Defensible' (presumed palisade ∧ militia, 0/50) and the anchors fallback (named a market and a watch that no place reaching it has).
+- **R-E3, the colour rulings above** (R-R), and ECHO_PREFIXES under R-AD: historical framing is colour.
+- **R-E4, DOSSIER_CAUSAL_PROSE stays in the ledger** (the deviation above).
+
+### Unit 3 — the twins where a site is wired
+
+`origin/lane/census-1b-2026-11-04` was re-fetched before every unit and stood at `6e2cb6d` throughout: CENSUS-1f has not landed, so **no carried table's site is newly wired** and no twin is written (a twin at an unwired site is text with no reader). DEFENSE_CONTEXT is wired but prints on no page (R-D2), so its refused cells read null and take no twin. The twins still owed when 1f wires their sites (2d's list, unchanged): SPATIAL_TEXT's city / village layouts, PRESSURE_SENTENCES' wartime-winning, CAST_ABSENCES, DAILY_LIFE_TAB's food / order / anchors / paragraph twins (the ledger's `twins`), plus — new from this seat — a crisis-safe line for POLITICAL_FLAVOR `stable` (its four calm rows go mute under any crisis once scoped; R-L) and for ARRIVAL_SCENES `market` / `ordinary` (their calm lines). **"pilgrims queue patiently": 3 on the 1,000, unchanged** (soak1k-317 monster pressure, -741 siege, -815 occupied): 2b's declaration waits on the arrival redraw (1f).
+
+### 2d's two `random` cells — the cause, named
+
+Re-measured by birthing the 51 `random`-cell seeds of the 1,000 in two scratch trees, one process per tree: 2d's BEFORE (`c8ab81c` with its ten unit commits reverted) and 2d's tip `c7d12b3` (positive control: soak1k-15 moves, slave market and doubled prices on the BEFORE side). **Exactly two move: soak1k-141 and soak1k-956. Both rolled `wartime` (the loss wording) on a record with no hunger (food bands `secure` and `pressured`), and the one changed string is `stress[].summary` / `stressors[].summary`: "Food prices have doubled." → "The army has the carts and the road, and the fields are short of hands."** — 2d unit 1's wartime twin (`6f2435f`). Every one of 2d's 93 moved records now has a named cause; nothing is unresolved.
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `761929c`, AFTER = the tip)
+
+| run | records moved | pages moved | every `coh:*` / `reader:*` / `A-*` class | `coh:crisis-blind-prose` | `cert:*` | verdict |
+|---|---|---|---|---|---|---|
+| 60 | 0 / 60 | 0 / 60 | identical (102 findings both) | 0 → 0 | none → none (`cert:false-presumption` 0) | CLIMB → CLIMB |
+| 1,000 | **0 / 1,000** | 0 of the 60 sampled | identical (1,679 findings both; `reader:hook-pools` 111 → 111, none on this lane's pools; `reader:daily-life-placeholder` 0 → 0; `A-12:self-vouch-false` 0 → 0) | **3 → 3**, all "pilgrims queue patiently" (the base's, waiting on 1f) | none → none (`cert:false-presumption` 0 → 0) | STOP → STOP (the base's: crisis-blind in 3) |
+
+**By claim (1,000):** pilgrims queue patiently 3 → 3. No other claim present on either side; none rose.
+
+**`declared-share` (1,000, the render ledger):** **tab:daily_life 0 / 815 → 409 / 409 (1.000)** — DEFENSE_CONTEXT, the one enforced table: 406 readiness cells the record contradicts now resolve to nothing (unnoted; the slot prints on no page) and the 409 that stand are noted with their atoms. crisis 503 / 549 (0.916) unchanged; tab:dossier 0.194, npcs 0.060, defense / power 1.00 unchanged. The carried tables (textOf) add no ledger notes until their sites are wired: the R-C carry, not a missing declaration.
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** 0 / 525 at every generator-touching commit and at the tip (scratch sha-256 over `goldenCorpus()` against `761929c`).
+- **Soak records:** 0 / 60, 0 / 1,000. **Pages:** 0 / 60 (DEFENSE_CONTEXT's text is not printed; the local Daily Life narrative and its loading messages print only in unconfigured mode, which the harness does not render).
+- **Wiring census:** 0 rows (re-taken through its door: 709 pools / 2,328 variants). **Manifest:** not run (no annex variant moved). **Registers:** `undeclaredLines.register.json` +1 hand-kept `needsAField` row (TERRAIN_SEASON_TEXTURE, season); `statePools` and the crisis-scoped register untouched (R-T: the compose re-takes them; none of this seat's tables is on the six leaves).
+- **Pins re-keyed by cause:** `tests/domain/facts/defenseContextWired.test.js` (CENSUS-1e's): the Undefended cell now notes its atoms (`no walls · no garrison · no watch · no gate · crisis: any`).
+- **Rewords counted (R-W):** DEFENSE_CONTEXT 'Defensible' (moves nothing: unprinted); DAILY_LIFE_TAB's anchors fallback (moves the local-mode narrative only where the place has no institution in the eight categories).
+
+### Reds at the merged base, unchanged by this seat (each re-run at `761929c` in a scratch worktree, title for title)
+
+heldKeyWriterCensus 1 · worldGenerationClockSeam 1 · writerReach (file) · corruptionWebDormancyGolden 1 · demographicsLifecycleGolden 1 · intelTradeDormancyGolden 1 · npcLedgerDormancyGolden 1 · tabSentencesOnce 1 · observedShapeReaders 6 · proseNumerics 3 · styleShorthandLonghand 1 · dossierContent 1 · rosterFinalUnderHeldRoster 1 · proseWiringCensus 14 · espionageDormancyFence 1 · generatorGoldenMaster 1 · generalDeskTabFlow (file) · effectReachability.coverage 1 · nameHeldThroughAssembly 1 · tonightSheetOnce 1 · declarationRegisters 2 (R-T) · proseCorpusBytes 2. `typecheck:ratchet` 167 / 167 green; `typecheck:domain:strict` +4 crisisFactFindings.js, +2 composeStateProse.js (the base's; this seat's one strict error in activeConditions.js was cured before its commit). Only the suites naming a changed module were run (listed per commit); the full suite was not.
+
+### Where CENSUS-2f starts
+
+**CENSUS-2's Phase B tables are all read and landed or ruled.** What is left is wiring-dependent:
+1. **Unit 4's twins once CENSUS-1f wires the sites** (the list under unit 3 above), each one commit with its share; then pass the `_CRISIS_SCOPED` flags at those sites (the 4 non-vacuous pools under unit 1 are the ones that move births).
+2. **"pilgrims queue patiently"** reads 0 when 1f's arrival redraw lands (re-measure on the 1,000).
+3. **DOSSIER_CAUSAL_PROSE**: after 1f's vids (R-Y), only if the owner wires the causal register (`_causalLeafGround`); until then its 113 declarations stay in the ledger. **DECREE vid 54** once `drawPart` hands facts.
+4. **The waiting lists above** as their atoms land (sacredHouse: R-AE, 1f's item 2; a faith-presence atom).
+
+### Open questions for the chair
+
+1. Answer 1 said "declare DOSSIER_CAUSAL_PROSE in the annex now"; the causal leaf's byte ceiling is an owner-gated ruling, arms share the marks channel, and the leaf has no product importer — is the ledger the right home until the owner's "wire or retire" (this seat's reading), or should the ceiling move through a declared row?
+2. 39 of the 43 flagged pools are vacuously scoped (every line `crisis: any`): should a lane drop `any` and the flag there (2c's reading for foodGap), or keep both as the ledger wrote them (this seat followed 2d and answer 4)?
+3. DEFENSE_CONTEXT's `defenseCtx` prints on no page although CENSUS-1e wired it: wire it to a page (owner) or rule it dead with TERRAIN / ROUTE_CONTEXT (R-S)?
