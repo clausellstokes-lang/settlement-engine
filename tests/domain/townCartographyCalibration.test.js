@@ -407,6 +407,15 @@
  *   one named red (2.4444 at village, 9 -> 22, against 1.6) until record 27. CORPUS_ROWS stays 504; the throw
  *   census stays 0.
  *
+ *   2026-11-04 — PLACE-NOT-TIER (R6, UNITS 1–2), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK
+ *   LADDER; record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S15 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/14/22/47/92/106, so CARTOGRAPHY_CALIBRATION does not
+ *   move. Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   121/197/46/60/52/54 -> 121/197/45/60/52/54 (derived ceilings 194/316/74/96/84/87 -> 194/316/72/96/84/87).
+ *   W6 stays the one named red (2.4444 at village, 9 -> 22, against 1.6) until record 27. CORPUS_ROWS stays
+ *   504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -526,7 +535,7 @@ const FROZEN = Object.freeze({
 const DUPLICATES = Object.freeze({
   thorp: Object.freeze({ permille: 121 }),
   hamlet: Object.freeze({ permille: 197 }),
-  village: Object.freeze({ permille: 46 }),
+  village: Object.freeze({ permille: 45 }),
   town: Object.freeze({ permille: 60 }),
   city: Object.freeze({ permille: 52 }),
   metropolis: Object.freeze({ permille: 54 }),
@@ -1219,7 +1228,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 207/344/140/90/80/85 -> 207/344/140/90/80/87 on 2026-11-04: X-46 CAR 1B, FIRST STEP (U1–U3) (header), the same operator.
     // 207/344/140/90/80/87 -> 194/316/74/96/84/88 on 2026-11-04: X-46 CAR 3 (LANE X46-3-BUDGET) (header), the same operator.
     // 194/316/74/96/84/88 -> 194/316/74/96/84/87 on 2026-11-04: X-46 CAR 1B, SECOND STEP (U4–U5) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([194, 316, 74, 96, 84, 87]);
+    // 194/316/74/96/84/87 -> 194/316/72/96/84/87 on 2026-11-04: PLACE-NOT-TIER (R6, UNITS 1–2) (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([194, 316, 72, 96, 84, 87]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });

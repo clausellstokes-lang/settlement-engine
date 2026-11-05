@@ -5957,8 +5957,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 12,
-  "cartoRowBytes": 434,
+  "cartoBuildings": 13,
+  "cartoRowBytes": 433,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6045,7 +6045,7 @@
   "cartoRowBytes": 436,
   "cartoInstitutionRefs": 18,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|celtic|plains|road|frontier|cg1-seed-02": {
   "tier": "village",
@@ -6055,11 +6055,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 15,
-  "cartoRowBytes": 432,
+  "cartoBuildings": 13,
+  "cartoRowBytes": 433,
   "cartoInstitutionRefs": 11,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|celtic|riverside|river|civilized|cg1-seed-05": {
   "tier": "village",
@@ -6167,8 +6167,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 12,
-  "cartoRowBytes": 432,
+  "cartoBuildings": 13,
+  "cartoRowBytes": 430,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
   "cartoDupTranslate": 2
@@ -6209,11 +6209,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 14,
-  "cartoRowBytes": 430,
+  "cartoBuildings": 15,
+  "cartoRowBytes": 429,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|germanic|hills|road|civilized|cg1-seed-01": {
   "tier": "village",
@@ -6279,11 +6279,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 15,
-  "cartoRowBytes": 433,
+  "cartoBuildings": 14,
+  "cartoRowBytes": 434,
   "cartoInstitutionRefs": 11,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|greek|desert|road|safe|cg1-seed-04": {
   "tier": "village",
@@ -6479,7 +6479,7 @@
   "cartoRowBytes": 435,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|mediterranean|desert|road|plagued|cg1-seed-11": {
   "tier": "village",
@@ -6507,7 +6507,7 @@
   "cartoRowBytes": 436,
   "cartoInstitutionRefs": 17,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 4
+  "cartoDupTranslate": 2
  },
  "village|mediterranean|hills|road|frontier|cg1-seed-06": {
   "tier": "village",
@@ -6615,8 +6615,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 14,
-  "cartoRowBytes": 432,
+  "cartoBuildings": 13,
+  "cartoRowBytes": 434,
   "cartoInstitutionRefs": 10,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6727,11 +6727,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 12,
-  "cartoRowBytes": 432,
+  "cartoBuildings": 11,
+  "cartoRowBytes": 433,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 2
+  "cartoDupTranslate": 0
  },
  "village|norse|plains|road|safe|cg1-seed-04": {
   "tier": "village",
@@ -6755,11 +6755,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 25,
-  "cartoRowBytes": 437,
+  "cartoBuildings": 24,
+  "cartoRowBytes": 438,
   "cartoInstitutionRefs": 21,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|slavic|coastal|port|plagued|cg1-seed-03": {
   "tier": "village",
@@ -6885,7 +6885,7 @@
   "cartoRowBytes": 434,
   "cartoInstitutionRefs": 11,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 2
  },
  "village|south_asian|forest|isolated|frontier|cg1-seed-10": {
   "tier": "village",
@@ -6909,8 +6909,8 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 12,
-  "cartoRowBytes": 432,
+  "cartoBuildings": 11,
+  "cartoRowBytes": 433,
   "cartoInstitutionRefs": 8,
   "cartoDupExact": 0,
   "cartoDupTranslate": 0
@@ -6937,11 +6937,11 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 23,
+  "cartoBuildings": 22,
   "cartoRowBytes": 436,
   "cartoInstitutionRefs": 19,
   "cartoDupExact": 0,
-  "cartoDupTranslate": 0
+  "cartoDupTranslate": 4
  },
  "village|south_asian|riverside|river|plagued|cg1-seed-11": {
   "tier": "village",
@@ -6979,7 +6979,7 @@
   "dark": "ok",
   "outcome": "ok",
   "reported": [],
-  "cartoBuildings": 13,
+  "cartoBuildings": 12,
   "cartoRowBytes": 430,
   "cartoInstitutionRefs": 9,
   "cartoDupExact": 0,
