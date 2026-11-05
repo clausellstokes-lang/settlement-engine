@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — TRUTH, FIRST STEP (UNITS A–C AND UNIT D'S FIRST COMMIT), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-16-truth-1-units-a-c.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   231 OF 525 ROWS MOVED (thorp 24, hamlet 24, village 36, town 63, city 24, metropolis 60); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step ff4448d2e): a hook false on its own record is not stored; the crisis page speaks the place's own tier noun; "no criminal infrastructure" never prints beside a network; stress factions take the role pool's first unused name. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S16 (the tree of ff4448d2e with the door paths carried from
+ *   the branch, the previous record's writes committed). b7831025.. -> 25d853fd..
+ *
  * 2026-11-04 — PLACE-NOT-TIER (R6, UNITS 1–2), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json; the cloud chair signs under the owner's delegation, vetoable).
  *   180 OF 525 ROWS MOVED (hamlet 72, village 84, town 24; thorp, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent

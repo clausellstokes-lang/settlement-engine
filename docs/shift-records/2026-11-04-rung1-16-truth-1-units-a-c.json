@@ -1,0 +1,22 @@
+{
+  "_doc": "TRUTH, FIRST STEP (UNITS A–C AND UNIT D'S FIRST COMMIT, AT 6DA7D3F64), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: TRUTH, first step (units A–C and unit D's first commit): a hook false on its own record is not stored; the crisis page speaks the place's own tier noun; \"no criminal infrastructure\" never prints beside a network; stress factions take the role pool's first unused name. THE MOVER, NAMED: first-parent step ff4448d2e of lane/landing-rung1-2026-11-04 (\"compose: lane/rung1-truth-2026-11-04 (at 6da7d3f64) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the fix-window lanes' words; the lane's commission is rung 1's rows 4 and 11, A-06 and kind 7). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S16 is the tree of ff4448d2e with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from ff4448d2e by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S15 -> S16): generator-golden-master 231 of 525 rows (thorp 24, hamlet 24, village 36, town 63, city 24, metropolis 60), the key set identical; espionage-dormancy-fence 102 of 360 rows (thorp 13, hamlet 11, village 16, town 22, city 20, metropolis 20), 360/360 distinct, 1362f4ce.. -> 641c300a... The lane's second step (844acaccc, unit D's remainder) is record 18, by the chair's ruling 2 (one record per compose step). A surface that does not move at this stage is not listed. W6 stays the one named red of the calibration suite (the corpus does not move at this stage), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "TRUTH, first step (units A–C and unit D's first commit): a hook false on its own record is not stored; the crisis page speaks the place's own tier noun; \"no criminal infrastructure\" never prints beside a network; stress factions take the role pool's first unused name",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at ff4448d2e",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}
