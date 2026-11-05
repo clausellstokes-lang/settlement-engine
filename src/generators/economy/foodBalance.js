@@ -750,7 +750,9 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     } else if (route !== 'isolated') {
       hooks.push({
         category: 'Trade Monopoly',
-        hook: 'A single merchant guild controls grain imports and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
+        // CENSUS-3e (answer 2, R-V measured): `guild` at this step differs from the final record on
+        // 25 of 1,000 births, so the hook presumes only the imports its branch guarantees.
+        hook: 'A single importer controls the grain coming in and has raised prices 300%. The locals are weighing whether to pay it, find another supplier, or take the grain.',
         severity: 'high',
       });
       if (route === 'river')
