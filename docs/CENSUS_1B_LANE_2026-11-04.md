@@ -98,3 +98,69 @@ Golden 0 of 525 (every unit). Manifest, wiring census (709 pools / 2,323 variant
 - `resolveSibling` keeps the original when NO facts are handed (the retired lookups' rule, for byte identity); `drawDeclared` itself stays fail-closed.
 - Unit 6a extended the ruled mill fault to its class (`Access to parish church` was a `temple`).
 - Unit 6c kept the hook-pools instrument's people half (a guard-like role) — no home for roles exists.
+
+## CENSUS-1d (the third seat, 2026-11-05)
+
+> Continues this branch from CENSUS-1c's tip `d6f8456be`. Transport push only; no pull request; no sibling merged (they merge this tip). **Where this seat stopped (the boundary rule, context budget):** unit 1 (R-H) done; unit 2 is the ten H display rows of Appendix B rows 89–111 plus row 94 (T); unit 3's two registers are done, but not the wiring census's declared columns; unit 8 (wave 2) is not started. **CENSUS-1e starts at unit 2's remaining sites** (below), then the census columns (unit 3c), then unit 8.
+
+Byte method: CENSUS-1b's hasher (rebuilt as a scratch script: the earlier one was never committed): the 525 golden records, soak1k-0..59's records, and their rendered pages (20 tabs, Tonight, PDF, Foundry), sha-256, base `d6f8456be` against every commit. Red-firsts: unit 1 run red at the base; each site by plant-and-restore of its parent file, with the arm in `tests/domain/facts/displayDrawSites.test.js` (one arm per site, holding the ledger entry and the unchanged text).
+
+| unit | commit | what | golden / soak / pages moved |
+|---|---|---|---|
+| 1 (R-H) | `d44fe7437` | `crisisAdmits` is the disjunction: one declared kind or family active (`c.has`; hunger by deficit kept). `excludes: crisis: F` is unchanged (checked per active crisis). `calm` and scoped silence admit only with no crisis active; `any` admits everywhere. Rulings doc §1 corrected (dated, struck through) + R-I's sentence. Red-first `crisisDisjunction.test.js` (a)(b)(c). `factVocabulary.test.js`'s conjunction arm re-keyed by cause. | 0 / 0 / 0 on the 60; **pages 0 of 1,000** (soak1k-0..999, every surface). At this base no pool declares a crisis line that a co-active second crisis refused; the pages R-H moves accrue where 2b's / 5's declarations land |
+| 2 · 89 | `696461066` | `traditions/prose.js :: pickLine`: TRAD_HOOKS.<cond> (answered by `factsOf` from `collectPlotHooks`), TRAD_OUTCOME_PHRASE.<o>, TRAD_HELD/CANCELLED_SUMMARY | 0 / 0 / 0 |
+| 2 · 90 | `a8a9c0dc6` | `hookLines.js`: the conflict walk (HOOK_LINE_POOLS.conflict.<family>; `used` advances as before) and HOOK_LINE_POOLS.foodGap | 0 / 0 / 0 |
+| 2 · 111 | `c456d1b4c` | `foodways.js`: FOODWAYS.FRAMES.<n>, FOODWAYS.SOURCE_PHRASES.<src>. ⚠ The probe walk is content-dependent; it walks the same library comparing texts, so its roll count is unchanged | 0 / 0 / 0 |
+| 2 · 97–100 | `d1a7b38ea` | `settlementRumors.js`: WHAT_PHRASE_POOLS.<kind> (canonical + variants), HEADLINE_FRAMES.<band>. No facts are handed (world news; ruling 7) | 0 / 0 / 0. The harness renders with no world, so the 1,702 rumour pins hold the text |
+| 2 · 101–102 | `b987fc6e2` | `causeConjunctionContent.js`, `causeLifecycleVocabulary.js`: CAUSE_CONJUNCTION.<tier>.<key>, CAUSE_LIFECYCLE.<stage> | 0 / 0 / 0 |
+| 2 · 103 | `c74017519` | `warAndRoadNames.js`: WAR_NAME_POOLS / UNTYPED_WAR_NAME_MOLDS / ROUTE_NAME_POOLS through a local declared `pickLine`. The shared world-pulse `pickLine` is untouched (ruling 7) | 0 / 0 / 0 |
+| 2 · 110 | `fc38e115c` | `marketPrices.js`: MOVEMENTS.<m> (T, `resolveDeclared`), CRIER_FRAMES.<tag> (H) | 0 / 0 / 0 |
+| 2 · 94 | `678a15cbc` | `crisisHooks.js`: LINE_ROLE_CLAUSE.<role> (T; answered by `factsOf`) | 0 / 0 / 0 |
+| 3 | `ca1412563` | `declarationRegisters.js` (one reading of the 709 pools); `tests/lint/undeclaredLines.register.json` (shrink-only: **704 pools / 2,201 undeclared lines; 122 of 2,323 declare**; `needsAField` lists technology ×2, season, climate); `tests/lint/crisisScopedPools.register.json` (grow-only, **empty at this base**); walker `declarationRegisters.test.js`, 8 arms, mutant-proven | 0 / 0 / 0 |
+
+**Every site's draw is noted in the ledger, so PDF, Tonight and Foundry now count** (the 60: `pdf:crisis` 228, `pdf:plot_hooks` 203, `tonight:crisis` 57, `tonight:plot_hooks` 51, `foundry:crisis` 114, `foundry:plot_hooks` 101, `tab:economics` 688, `economics` 79 at birth). None declares yet: these are the share's denominators, waiting for the owning lanes' declarations. Sites with no record in scope (rumours, war and road names, market quotes, the tradition beat, the NPC card's conjunction) hand no facts. A declared line there would be refused fail-closed. Each is named in its commit.
+
+**Pure-colour rulings at pool level are now possible:** a `{colour}` brace on a pool's heading removes its row from the undeclared register by name. That is the chair's ruling to make, pool by pool.
+
+**The compose owes a re-take.** Every declaration on 2b / 3b / 4b / 5 lowers a count in `undeclaredLines.register.json`, and 2b's 45 and 5's 14 `{crisis-scoped}` pools are not yet pinned. The walker reds by name at the compose until `RETAKE_DECLARATION_REGISTERS=1 npx vitest run tests/domain/facts/declarationRegisters.test.js` is run there. That is the design's "re-pinned in the same commit", applied to the composed tip.
+
+### Where CENSUS-1e starts
+
+1. **Unit 2's remaining sites.** Display T/A rows: 91 (ECHO_PREFIXES, A), 92 (ALIGNED_BASIS, T; UI labels, a likely `{colour}`), 93 (crisisCast's CAST_REASONS / ABSENCES / STAKE_REASONS outside the sibling sets), 95 (`settlementQuickGuide.js`, CENSUS-4b edits this file; wire after their merge), 96 (hookEscalation), 104–106 (treaty, remembrance, army bands), 107 (`engagementNarrative.js`, no importer: dead?), 108 (faithPanelModel, A), 109 (deityEffects, A). Then the generator sites 1c listed: the generic `pick` / `drawUnique` callers (rows 1–2), the arrival scene's ⚠ redraw-once, `narrativeGenerator`'s three draws, POLITICAL_FLAVOR's cascade, the ⚠ per-relationship rumour roll, the ⚠ trapping shuffle, the ⚠ faction-name retry, the service roll, and the T branches (`safetyProfile`, `rulingStructure`, `governanceNarrative`, `stressFactions`, `economicState`, `spatialGenerator`, `npcStructure`, `crisisHooks`' others, `dailyLifeLogic :: DEFENSE_CONTEXT`). CENSUS-4b also edits `dailyLifeLogic.js` and `npcStructure.js`.
+2. **Unit 3c:** the wiring census's `declares` / `lineDeclares` / `undeclared` / `crisisScoped` columns and its `tablePools` table, re-taken through `scripts/wiring-census.mjs`. The table half of the undeclared register (the R/H/T pools) needs that manifest.
+3. **Unit 8 (wave 2, R-O):** F12's five crisis-family marks and the `walls` mark become reads of the vocabulary's dimensions; the mount rows' marks go through the census channel. CENSUS-5's DS-DEF-1 WEAK v2 is waiting on this.
+
+### Waiting lists and the named-but-refused list (step 5)
+
+At this tip, `reader: null` covers **organised crime, fish, grain, game, livestock, imports, exports, prosperity**. All are homed by CENSUS-3b (and `guild` by 4b) on their branches, which this lane does not merge, so at the compose the list reads empty. The siblings' waiting lists:
+- CENSUS-5: `soldiers` (homed by 1c, on this base); `crime` (3b); DS-DEF-1 WEAK v2's perimeter → unit 8. Its "mute question" rows are ruled by R-L.
+- CENSUS-4b: famine#1, indebted#1 and slave_revolt#2 goals declare `no ruler: lord / occupier`, but the ruler is decided after the NPC goal draw. Those lines wait on a draw after the power step, which is a pipeline-order question for the chair.
+
+### The 60 and the 1,000 (R-B: BEFORE = `d6f8456be`, AFTER = `ca1412563`)
+
+| | 60 before → after | 1,000 before → after |
+|---|---|---|
+| verdict | STOP → STOP (the base's: `coh:crisis-blind-prose` in 24) | STOP → STOP, the same two reasons (`coh:crisis-blind-prose` in 278; `A-12:self-vouch-false` 0.018). Both are the window's / the compose's (R-B), not this lane's |
+| settlements · findings · errors | 60 · 176 → 176 · 0 → 0 | 1,000 · 2,596 → 2,596 · 0 → 0 |
+| every `coh:*`, `reader:*`, `cert:*` class | 3 of 3 unchanged | 5 of 5 unchanged (`coh:crisis-blind-prose` 278 / 902 → 278 / 902) |
+| `cert:false-presumption` | 0 → 0 | 0 → 0 |
+| `declared-share` (drawn / declared) | new surfaces: pdf:crisis 228, pdf:plot_hooks 203, foundry:crisis 114, foundry:plot_hooks 101, tonight:crisis 57, tonight:plot_hooks 51, tab:crisis 57, tab:plot_hooks 51, tab:economics 688, economics 79, each 0 declared; the base's rows unchanged | new: pdf:crisis 3,952 · pdf:plot_hooks 3,883 · foundry:crisis 1,976 · foundry:plot_hooks 1,899 · tonight:crisis 988 · tonight:plot_hooks 992 · tab:crisis 988 · tab:plot_hooks 992 · tab:economics 10,845 · economics 1,383 (0 declared each). Unchanged: tab:dossier 1,764 / 213,783 · npcs 543 / 39,351 · crisis 301/301 · services 115/115 · power 114/114 |
+
+### Rows moved, by cause (never re-recorded)
+
+Golden: 0 of 525 at every commit. Pages: 0 of 60 at every commit; 0 of 1,000 for R-H. Manifest, wiring census (709 pools / 2,323 variants) and pins: none moved. Test re-keyed by cause: `factVocabulary.test.js`'s conjunction arm (R-H). New registers: `tests/lint/undeclaredLines.register.json`, `tests/lint/crisisScopedPools.register.json`. Base-red and not this lane's (identical at `d6f8456be`): the projection contract 6, dossierProseManifest 3, crisisBlindDossierProse 1, tonightSheetOnce, hookThemeDraws pin:no-hook-is-lost, generalDeskTabFlow, generationContracts 1, generationForkCensus 4, espionageDormancyFence 1, generatorGoldenMaster 1, sovereigntyLightingContract 2, tuningRegister 8, the negative-assertion and seed-loop walkers' pre-existing offenders, and domain-strict on `crisisFactFindings.js` / `composeStateProse.js`.
+
+### Judgments (vetoable)
+
+- R-H's arm (b) is held in BOTH channels: the kernel's pre-filter (`poolDeclares`) and `drawDeclared`.
+- Row 103 is wired at its site with a local declared `pickLine`, never in the shared `proseSelection.js :: pickLine`. Wiring the shared one would have pulled every world-pulse pool into the ledger ahead of ruling 7's second wave.
+- The registers read the six leaves directly, not the wiring census. The census columns are a door re-take that moves its pins, so they are left to the next seat (3c).
+- The retake spelling is `RETAKE_DECLARATION_REGISTERS`, not `UPDATE_…`: goldenFreeze's roster claims every `UPDATE_*` env as a golden instrument.
+
+### Addendum — the chair's R-A ruling of 2026-11-05 02:30 (read after the boundary report; acted on)
+
+The ruling reordered unit 2: merge CENSUS-4b's tip and wire the registry goal lookup. It reached this seat after its 1,000 had run; it was acted on at once.
+- `a3a383ae5` — merge of `origin/lane/census-4-2026-11-04` at `11baceee4`; `gen:dossier-prose --check` green.
+- `e267287e7` — `npcStructure.js :: enrichNPCsWithStructure` resolves its registry entry through `resolveDeclared` (tagged; NPC_STRUCTURE.<key>). A refused CALM_ONLY entry is not applied, and the NPC keeps its role goal. **Moves, one cause, against the merge:** golden **409/525** (every golden row carries an active crisis: 120 of 120 checked), soak records 19/60, pages 18/60. Counted, never re-recorded. **The 60:** `coh:crisis-blind-prose` 22 → **7** settlements; the three goal claims fall to 0 (current stability 11 → 0, competent administration 1 → 0, stable institutional competition 4 → 0). What remains is "nobody stops a stranger" 5 (2b) and "food secure" 2 (2c). `cert:false-presumption` 0 → 0. Re-keyed by cause: `regenNpcEnrichment`'s anchor now reads a calm city.
+- `40e26d249` — the undeclared register re-taken after the merge: 2,201 → 2,198 lines (DS-ECO-8, -10, -12).
+- The 1,000 was NOT re-run after this site. The chair's figure (713 of 791 births on the three claims) is the expectation; the compose's 1,000 is the measurement.

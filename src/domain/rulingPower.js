@@ -687,3 +687,21 @@ export function transferRulingPower(settlement, newPowerName, opts = {}) {
     error: null,
   };
 }
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): a transfer
+ * of power's two table texts that presume beyond their key — a clergy government's "temple
+ * calendar" (a temple), and an election's "Stable: a fresh mandate" (no crisis active: the
+ * stability claim rung 2D convicted beside a crisis). Keyed by the text; NO CONSUMER READS THIS YET
+ * (Appendix B row 116 is CENSUS-1d's T site), so it moves no record. No twin: a transfer of power
+ * happens in play, after birth, so the soak cannot measure the slot (the lane doc's open row).
+ * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }>>>}
+ */
+export const RULING_POWER_SIBLINGS = Object.freeze({
+  'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.': Object.freeze([
+    Object.freeze({ text: 'Clergy govern; doctrine legitimises political authority and the temple calendar shapes civic life.', needs: Object.freeze(['temple']) }),
+  ]),
+  'Stable: a fresh mandate, still finding its footing': Object.freeze([
+    Object.freeze({ text: 'Stable: a fresh mandate, still finding its footing', crisis: Object.freeze(['calm']) }),
+  ]),
+});

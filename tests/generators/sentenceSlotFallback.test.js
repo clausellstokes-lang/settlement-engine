@@ -45,10 +45,18 @@ describe('the audited generation-time fallbacks (unit 1b)', () => {
 
 describe('the one-NPC thorps of rung 2', () => {
   beforeAll(async () => { await ensureLaws(); });
-  it('soak1k-1248: the secret opens on "Someone" and narrative_quality passes', () => {
+  // CENSUS-4b (the chair's answer 3, re-keyed by cause, not re-recorded): in a one-NPC thorp the
+  // `{npc}` secret (it declares `other npc`) is REFUSED by its declaration, and the slot prints what
+  // the gate resolves to — the recently-betrayed pool's admitted line by hash argmax — never a
+  // "Someone" fallback.
+  it('soak1k-1248: the {npc} secret is refused; the slot prints the gate\'s resolution and narrative_quality passes', () => {
     const s = birth(1248).settlement;
     expect(s.npcs).toHaveLength(1);
-    expect(s.npcs[0].secret.stakes).toBe('Someone saw them at a meeting they claimed not to attend. Someone has not yet understood what they saw');
+    expect(s.npcs[0].secret).toEqual({
+      what: 'They were the betrayer, not the person the investigation has been pursuing',
+      stakes: 'The evidence against the other person is circumstantial but strong. Letting it proceed is the easiest thing in the world',
+    });
+    expect(JSON.stringify(s.npcs[0].secret)).not.toMatch(/\bSomeone\b/);
     expect(narrativeQuality(s)?.findings).toEqual([]);
   });
   it('the other eleven seeds clear narrative_quality', () => {

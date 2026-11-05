@@ -1,0 +1,256 @@
+{
+  "pool": {
+    "id": "npcGenerator.RELATIONSHIP_STRENGTHS",
+    "file": "src/generators/npcGenerator.js",
+    "drawKind": "R",
+    "drawSite": "npcGenerator.js:1634 pick (strength labels)",
+    "colour": true,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 30,
+    "declaring": 0,
+    "note": "One-word strength labels keyed by relationship type; every line is colour."
+  },
+  "rows": [
+    {
+      "id": "ally#0",
+      "text": "weak",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "ally#1",
+      "text": "moderate",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "ally#2",
+      "text": "strong",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rival#0",
+      "text": "professional",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rival#1",
+      "text": "personal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "rival#2",
+      "text": "bitter",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "enemy#0",
+      "text": "mild",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "enemy#1",
+      "text": "serious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "enemy#2",
+      "text": "mortal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family#0",
+      "text": "distant",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family#1",
+      "text": "close",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "family#2",
+      "text": "inseparable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "patron_client#0",
+      "text": "nominal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "patron_client#1",
+      "text": "significant",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "patron_client#2",
+      "text": "total dependence",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "lover#0",
+      "text": "casual",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "lover#1",
+      "text": "serious",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "lover#2",
+      "text": "passionate",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_student#0",
+      "text": "formal",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_student#1",
+      "text": "devoted",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "mentor_student#2",
+      "text": "lifelong",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "debtor_creditor#0",
+      "text": "minor",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "debtor_creditor#1",
+      "text": "substantial",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "debtor_creditor#2",
+      "text": "crushing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "political#0",
+      "text": "convenience",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "political#1",
+      "text": "stable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "political#2",
+      "text": "unbreakable",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "respect#0",
+      "text": "grudging",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "respect#1",
+      "text": "genuine",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    },
+    {
+      "id": "respect#2",
+      "text": "deep",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": true
+    }
+  ]
+}

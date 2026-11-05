@@ -188,6 +188,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
+ * @property {boolean} [guild]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -251,6 +252,9 @@ export const FACT_DIMENSIONS = Object.freeze({
   institution: dim({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
     reader: (f, key) => (typeof f.hasInstitution === 'function' && key ? f.hasInstitution(key) : undefined) }),
   // ── presence: the rest of §1 / §3.2, homed or not ──
+  // CENSUS-4b (the chair's answer 4): ONE composite — a live guild-type institution ∨ a guild power
+  // (`facts/guild.js :: guildOf`); a criminal guild is `organised crime`'s, never this.
+  guild: dim({ shape: 'presence', home: 'guild', reader: (f) => bool(f.guild) }),
   famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
   starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
   'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',

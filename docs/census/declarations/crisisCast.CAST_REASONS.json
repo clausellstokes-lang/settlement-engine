@@ -1,0 +1,361 @@
+{
+  "pool": {
+    "id": "crisisCast.CAST_REASONS",
+    "file": "src/domain/crisis/crisisCast.js",
+    "drawKind": "T",
+    "drawSite": "crisisCast.js:461-701 (src/domain/crisis/crisisCast.js)",
+    "colour": false,
+    "crisisScoped": false,
+    "keyDeclares": {},
+    "lines": 41,
+    "declaring": 8,
+    "note": "Reason labels chosen by the cast rules, each rule reading the fact its label states (a military faction, a merchant faction, a corrupt NPC — corrupt is set only in a criminal-institution settlement with corruptTies naming the guild, so 'ties to the underworld' is site-guaranteed). bruntBase.defense_readiness and defenderOffice already resolve through defenceTwinLine (data/defenceTwinLines.js) where walls/garrison are missing; declared anyway since the line itself presumes them. housing_pressure 'take in the newcomers' is reached under monster_pressure (displaced) and mass_migration, so it excludes exodus rather than needing influx. food_security 'the hunger falls first' is reached under famine and mass_migration; it presumes hunger the food record may not hold under mass_migration — undeclared (no hunger-not-starving atom). The *Linked reasons are printed only on a linked pair (crisisCast.js:879-899): collaboratorLinked presumes BOTH famine and occupied (the casting kind) — a conjunction the crisis disjunction cannot hold, so occupied is put in needs as a crisis-kind atom. defenderInstitution 'the town's defence' declares tier: >= town (the cast runs at every tier)."
+  },
+  "rows": [
+    {
+      "id": "bruntBase.food_security",
+      "text": "the hunger falls first on its people",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.labor_capacity",
+      "text": "its hands do the work the crisis takes",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.trade_connectivity",
+      "text": "its trade is cut",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.defense_readiness",
+      "text": "its people stand on the walls",
+      "needs": [
+        "walls"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.public_legitimacy",
+      "text": "its standing is what the crisis spends",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.healing_capacity",
+      "text": "its people tend the sick",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.tax_revenue",
+      "text": "its revenue is what the crisis drains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.housing_pressure",
+      "text": "its people take in the newcomers",
+      "needs": [],
+      "excludes": [
+        "migration: exodus"
+      ],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.social_trust",
+      "text": "its people stop trusting their neighbours",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.faction_stability",
+      "text": "its own ranks begin to split",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.law_order",
+      "text": "its people keep an order that is failing",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntBase.criminal_opportunity",
+      "text": "its streets are where the crime lands",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "bruntLeast",
+      "text": "the least powerful of the house the crisis hits",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "leverRuns",
+      "text": "holds the office the crisis turns on",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "leverInstitution",
+      "text": "the crisis turns on this house, and no one on the roster runs it",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "leverTemporary",
+      "text": "no one on the roster could; here for this crisis",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "instigatorRival",
+      "text": "outranks the seat while it weakens",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "instigatorGains",
+      "text": "its faction gains from the crisis",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "instigatorLinked",
+      "text": "drawn from the house that bore the famine",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "famine"
+      ],
+      "colour": false
+    },
+    {
+      "id": "targetSeat",
+      "text": "holds the seat",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "targetSeatContested",
+      "text": "holds the seat, with legitimacy already contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "targetGoverning",
+      "text": "the governing house",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "targetLinked",
+      "text": "the occupation's resistance turns on its local face",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "occupied"
+      ],
+      "colour": false
+    },
+    {
+      "id": "exploiterCorrupt",
+      "text": "corrupt, with ties to the underworld",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "exploiterTrait",
+      "text": "grasping by nature, in a faction that gains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "exploiterPower",
+      "text": "the most powerful of a faction that gains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "exploiterLinked",
+      "text": "the siege's profiteer, still selling what the siege cut off",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false
+    },
+    {
+      "id": "scapegoatSeat",
+      "text": "holds the seat, blamed while legitimacy is contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "scapegoatLever",
+      "text": "holds the lever, blamed while legitimacy is contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "defenderMilitary",
+      "text": "leads the military",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "defenderOffice",
+      "text": "holds the garrison's office",
+      "needs": [
+        "garrison"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "defenderInstitution",
+      "text": "the town's defence, with no one on the roster leading it",
+      "needs": [
+        "tier: ≥ town"
+      ],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "treaterMerchant",
+      "text": "leads the merchants, the seat being contested",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "treaterSeat",
+      "text": "holds the seat",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "collaboratorCorrupt",
+      "text": "corrupt, with ties to the underworld",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "collaboratorAmbition",
+      "text": "the most ambitious of a faction that gains",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "collaboratorLinked",
+      "text": "the famine's exploiter, first to deal with the occupier",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "famine",
+        "occupied"
+      ],
+      "colour": false
+    },
+    {
+      "id": "waverer",
+      "text": "its faction could go either way",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "face",
+      "text": "leads the occupying power",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "nextInLine",
+      "text": "next in line, the first choice already holding a role that contradicts this one",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    },
+    {
+      "id": "dm",
+      "text": "the DM's word",
+      "needs": [],
+      "excludes": [],
+      "crisis": [],
+      "colour": false
+    }
+  ]
+}

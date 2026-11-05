@@ -27,7 +27,13 @@ import { BASELINE_CONFLICT_SIBLINGS } from '../../src/generators/power/governanc
 // CENSUS-1c unit 1: the text-keyed table `data/defenceTwinLines.js` dissolved into the declared
 // sibling sets beside each original (re-keyed by that cause; every twin to the byte).
 /** @type {Record<string, ReadonlyArray<any>>} */
-const DEFENCE_SIBLINGS = { ...SERVICE_DESC_SIBLINGS, ...DESC_VARIANT_SIBLINGS, ...POLITICAL_FLAVOR_SIBLINGS, ...CAST_REASON_SIBLINGS, ...NPC_GOAL_SIBLINGS, ...MILITARY_MODIFIER_SIBLINGS, ...BASELINE_CONFLICT_SIBLINGS };
+// CENSUS-5b unit 2 (re-keyed by that cause): the baseline-conflict table also declares lines that
+// presume a militia, a mill or a market, so the defence pins read only the sets whose original
+// declares a defence atom (walls, garrison, soldiers) — the twins F10 unit 4 retired.
+const DEFENCE_ATOMS = new Set(['walls', 'garrison', 'soldiers']);
+const defenceSetsOf = (/** @type {Record<string, ReadonlyArray<any>>} */ table) => Object.fromEntries(
+  Object.entries(table).filter(([, set]) => (set[0].needs || []).some((/** @type {string} */ a) => DEFENCE_ATOMS.has(a))));
+const DEFENCE_SIBLINGS = { ...SERVICE_DESC_SIBLINGS, ...DESC_VARIANT_SIBLINGS, ...POLITICAL_FLAVOR_SIBLINGS, ...CAST_REASON_SIBLINGS, ...NPC_GOAL_SIBLINGS, ...MILITARY_MODIFIER_SIBLINGS, ...defenceSetsOf(BASELINE_CONFLICT_SIBLINGS) };
 const twinOf = (/** @type {string} */ line) => DEFENCE_SIBLINGS[line].find((l) => l.twinOf === line).text;
 const OPTS = (/** @type {any} */ facts) => ({ facts, poolId: 'test', drawKind: /** @type {'T'} */ ('T') });
 

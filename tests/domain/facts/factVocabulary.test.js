@@ -62,6 +62,7 @@ describe('every dimension is answered by one home, or cannot be declared', () =>
     expect(V.assertDeclarable('grain').dimension).toBe('grain');
     expect(V.assertDeclarable('soldiers').dimension).toBe('soldiers');
     expect(V.assertDeclarable('organised crime').dimension).toBe('organised crime');
+    expect(V.assertDeclarable('guild').dimension).toBe('guild'); // CENSUS-4b's composite
     expect(V.assertDeclarable('walls').dimension).toBe('walls');
     expect(V.assertDeclarable('institution: mill').key).toBe('mill');
     expect(V.assertDeclarable('tier: >= town')).toMatchObject({ op: '≥', value: 'town' });

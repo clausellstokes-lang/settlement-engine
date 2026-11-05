@@ -378,7 +378,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'defense.armedForces', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-5', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence', dimensions: ['threat'],
+    mount: 'defense.postureHeader', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-1', rung: 'sentence', dimensions: ['threat', 'walls'], // CENSUS-5b unit 1: WEAK v2 declares walls (R-O)
   }),
   Object.freeze({
     mount: 'defense.militaryStatus', tab: 'defense', desk: 'defense', blockId: 'DS-DEF-8', rung: 'sentence',
