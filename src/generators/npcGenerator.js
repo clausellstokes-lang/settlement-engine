@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
@@ -1222,7 +1222,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
 
       const stressOverrides = STRESS_GOAL_OVERRIDES[stressType];
       if (stressOverrides) {
-        const override = isGov
+        const looked = isGov
           ? stressOverrides.gov
           : isMil
             ? stressOverrides.mil
@@ -1231,6 +1231,14 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
               : isMerchant
                 ? stressOverrides.merchant
                 : null;
+        // CENSUS-1e unit 2 (Appendix B item 23, T): the override resolves through the one rule against
+        // CENSUS-4b's declarations (insurgency.mil `watch`, mass_migration.gov `migration: influx`,
+        // slave_revolt.merchant `market`), answered by the birth's facts (the roster, the tier and the
+        // stresses). A refused override is not applied: the NPC keeps its goal (no twin owed). Draw-free.
+        const override = looked ? resolveDeclared(looked, {
+          facts: () => birthFactsOf({ institutions, config, tier, stress: (config?.stressTypes?.length ? config.stressTypes : [stressType]).map((/** @type {unknown} */ type) => ({ type })) }),
+          poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${stressType}`, surface: 'npcs',
+        }).line : null;
         if (override) {
           const facts = factsOf({ institutions }); const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); enriched.goal = { short: spoken(override.short), long: enriched.goal.long || spoken(override.short) }; // F10, CENSUS-1c: NPC_GOAL_SIBLINGS below, draw-free
           if (override.note) enriched.stressNote = spoken(override.note);
