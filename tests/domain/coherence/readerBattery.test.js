@@ -241,3 +241,17 @@ describe('readerBattery', () => {
     expect(thrown).toEqual([{ check: 'tension-memory', surface: 'record', quote: '', detail: 'instrument threw: boom' }]);
   });
 });
+
+// CENSUS-1c unit 6c (the vocabulary rulings §6): the two instruments read factsOf.
+describe('CENSUS-1c · the Daily Life and hook-pools instruments read the fact homes', () => {
+  test('daily-life: a garrison is no watch (the watch regex that counted it goes)', () => {
+    const daily_life = 'Food\nStrained\nOrdinary life here in prose: dawn, the market, the tavern, the watch.';
+    expect(R.dailyLifePlaceholderFindings(rec({ institutions: [{ name: 'Market square' }, { name: 'Garrison' }] }), { daily_life }).map((r) => r.detail)).toEqual(['[no-watch] no watch']);
+  });
+  test("hook-pools: 'the old guard' is an idiom, not a guard", () => {
+    expect(R.hookPoolsFindings(rec({ npcs: [{ role: 'Elder' }] }), { plot_hooks: 'History\nThe old guard of the council resents every new name on the rolls.' })).toEqual([]);
+  });
+  test('hook-pools: the enforcement body is factsOf(record).guardPresence (a hired company counts)', () => {
+    expect(R.hookPoolsFindings(rec({ institutions: [{ name: 'Mercenary company' }], npcs: [{ role: 'Elder' }] }), { plot_hooks: 'NPCs\nOne of them is talking to the guard.' })).toEqual([]);
+  });
+});

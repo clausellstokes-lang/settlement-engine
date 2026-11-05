@@ -1997,3 +1997,25 @@ export const TRAIT_PRESENCE_DISTRIBUTION = Object.freeze({
   temperamentOnly: 0.20,
   neither: 0.10,
 });
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the inland twins of this file's goal and loyalty-hook lines (F5). Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const NPC_HOOK_SIBLINGS = Object.freeze({
+  // NPC_FACTION_GOALS — the Guard Captain's goal.
+  'Find the person responsible for three unsolved dock-side killings': Object.freeze([
+    Object.freeze({ text: 'Find the person responsible for three unsolved dock-side killings', needs: Object.freeze(['navigable']) }),
+    Object.freeze({ text: 'Find the person responsible for three unsolved killings', twinOf: 'Find the person responsible for three unsolved dock-side killings', excludes: Object.freeze(['navigable']) }),
+  ]),
+  // NPC_FACTION_LOYALTY — the economy loyalty hook.
+  'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.': Object.freeze([
+    Object.freeze({ text: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', needs: Object.freeze(['navigable']) }),
+    Object.freeze({ text: 'A valuable cargo was reported lost on the road. The manifest has reappeared in a market two settlements away.', twinOf: 'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.', excludes: Object.freeze(['navigable']) }),
+  ]),
+});

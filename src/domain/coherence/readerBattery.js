@@ -25,7 +25,7 @@
 
 import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
-import { hasMarketInstitution } from '../facts/market.js';
+import { factsOf } from '../facts/factsOf.js'; // CENSUS-1c unit 6c: the market, watch and guard answers
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
 import { waterOf } from '../facts/water.js';
@@ -378,7 +378,11 @@ export function tensionMemoryFindings(s, surfaces) {
 // ──────────────────────────── 5. hook-pools ────────────────────────────
 
 const GUARD_WORDS = /\b(?:guard captain|guards?|garrison|the watch|watch ?(?:captain|commander|house)|watchm[ae]n|city watch|town watch|soldiers?|sentries|sentry)\b/i;
-const ENFORCEMENT_HOUSE = /watch|guard|garrison|barracks|militia|levy|citadel|mercenar|free company|hired blades|warden/i;
+// CENSUS-1c unit 6c (the vocabulary rulings §6): the enforcement HOUSE is the fact home's composite
+// `guardPresence` (watch ∨ garrison ∨ militia ∨ hired company), not this instrument's own regex;
+// the people half (a guard-like role on the roster) stays the instrument's. "The old guard" is an
+// idiom (a faction's veterans), excluded from the guard sense until the hook lines declare.
+const GUARD_IDIOM = /\bthe old guard\b/gi;
 const ENFORCEMENT_ROLE = /Guard|Watch|Garrison|Commander|Soldier|Warden|Mercenary|Knight|Master of Arms|Quartermaster|Captain/;
 const SEA_HOOK_WORDS = /\b(?:harbou?rs?|ships?|shipbuilding|shipwrights?|shipyards?|shipping|docks?|dockside|dock-side|wharf|wharves|quays?|fleet|sailors?|boats?|seafar\w*|the sea)\b/i;
 
@@ -394,13 +398,13 @@ export function hookPoolsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.plot_hooks);
-  const enforcement = houseNames(s).some((h) => ENFORCEMENT_HOUSE.test(h))
+  const enforcement = factsOf(s).guardPresence === true
     || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {any} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
   if (!enforcement) {
-    const hit = lines.find((x) => GUARD_WORDS.test(x));
-    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.match(GUARD_WORDS)?.[0])}" with no enforcement body` });
+    const hit = lines.find((x) => GUARD_WORDS.test(x.replace(GUARD_IDIOM, '')));
+    if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.replace(GUARD_IDIOM, '').match(GUARD_WORDS)?.[0])}" with no enforcement body` });
   }
-  if (!hasNavigableWater(s)) {
+  if (!factsOf(s).water.navigable) {
     const hit = lines.find((x) => SEA_HOOK_WORDS.test(x));
     if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[sea] "${str(hit.match(SEA_HOOK_WORDS)?.[0])}" at terrain ${terrainOf(s)}, route ${routeOf(s)}` });
   }
@@ -476,14 +480,14 @@ export function possessiveSlipFindings(_s, surfaces) {
 // ───────────────────────── 10. daily-life-placeholder ─────────────────────────
 
 const PLACEHOLDER = 'dawn, the market, the tavern, the watch';
-const WATCH_HOUSE = /watch|guard|garrison/i;
 
 /**
  * The Daily Life placeholder line where it names what the place lacks — ONCE per settlement
  * (the chair's ruling, 2026-11-04): it counts when the line renders AND at least one sub-case
  * holds, and the detail names which: `[no-market]` (no market by the engine's predicate,
  * `viability.js :: hasMarketInstitution`; a Periodic market is a market, the chair's ruling on
- * soak1k-313), `[no-watch]` (no watch, guard or garrison house), or both. How many pages carry
+ * soak1k-313), `[no-watch]` (no watch: `factsOf(record).defence.watch`, CENSUS-1c unit 6c — a
+ * garrison is not a watch), or both. How many pages carry
  * the line at all is a distribution (`readerDistributions :: dailyLifeLine`), not a finding.
  * @param {any} s @param {Readonly<Record<string,string>>} surfaces
  */
@@ -491,8 +495,8 @@ export function dailyLifePlaceholderFindings(s, surfaces) {
   const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));
   if (!hit) return [];
   const lacks = [
-    ...(!hasMarketInstitution(s?.institutions) ? ['no-market'] : []),
-    ...(!houseNames(s).some((h) => WATCH_HOUSE.test(h)) ? ['no-watch'] : []),
+    ...(!factsOf(s).market ? ['no-market'] : []),
+    ...(!factsOf(s).defence.watch ? ['no-watch'] : []),
   ];
   if (!lacks.length) return [];
   return [{ surface: 'daily_life', quote: hit, detail: `${lacks.map((x) => `[${x}]`).join('')} ${lacks.map((x) => x.replace('-', ' ')).join(', ')}` }];

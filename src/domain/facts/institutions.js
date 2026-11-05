@@ -10,6 +10,7 @@
  *   healer    a healer or an infirmary
  *   monastery a monastery or a friary
  *   mill · smith · bathhouse · docks · quarry · mine · tavern · school · temple · granary
+ * A row naming ACCESS to a neighbour's facility (`ACCESS_ONLY`) is none of them (CENSUS-1c unit 6).
  * `defense/defenseFacts.js` reads hospital and healer through this table (its `hasHealer` is the
  * healer OR monastery union it always meant, so its answer does not move).
  *
@@ -34,7 +35,7 @@ export const INSTITUTION_KIND_PATTERNS = Object.freeze({
   docks: /\bdocks?\b|\bharbou?r\b|\bwharf|\bquay|\bport\b/i,
   quarry: /\bquarr(?:y|ies)\b/i,
   mine: /\bmines?\b|\bmining\b/i,
-  tavern: /\btavern|\binns?\b|\balehouse/i,
+  tavern: /\btavern|\binns?\b|\bale ?house/i, // CENSUS-1c unit 6: 'Ale house' (the village row) too
   school: /\bschool|\bacademy|\bcollege|\buniversity/i,
   temple: /\btemple|\bchurch|\bcathedral|\bshrine|\bchapel|\babbey/i,
   granary: /\bgranar/i,
@@ -61,5 +62,12 @@ export function liveInstitutionNames(record) {
 export function hasInstitution(record, kind) {
   const re = INSTITUTION_KIND_PATTERNS[kind];
   if (!re) throw new Error(`hasInstitution: unknown institution kind '${kind}'`);
-  return liveInstitutionNames(record).some((n) => re.test(n));
+  return liveInstitutionNames(record).some((n) => !ACCESS_ONLY.test(n) && re.test(n));
 }
+
+/**
+ * A row that names ACCESS to a neighbour's facility ('Access to external mill', 'Access to parish
+ * church') is not that institution standing here (CENSUS-1c unit 6, the vocabulary rulings §6; the
+ * faith home already reads the church row as access-only, `faithReading.js :: faithReadingOf`).
+ */
+export const ACCESS_ONLY = /^access to\b/i;

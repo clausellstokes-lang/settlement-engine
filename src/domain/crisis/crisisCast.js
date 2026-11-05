@@ -32,8 +32,8 @@ import { governingFactionOf } from '../rulingPower.js';
 import { outrankingRivalOf, rulingChainOf } from '../dossier/powerStrata.js';
 import { isOfficeStandIn } from '../dossier/seatHolder.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
-import { defenseFactsOf } from '../defense/defenseFacts.js';
-import { defenceTwinLine } from '../../data/defenceTwinLines.js';
+import { factsOf } from '../facts/factsOf.js';
+import { resolveSibling } from '../facts/drawDeclared.js';
 import { CAST_EDIT_PATH, CAST_EDIT_SEPARATOR } from '../userEditLines.js';
 
 // ── The tuning (the owner's dials; docs/DESIGN_CRISIS_TAB.md "Open for the owner's veto") ──
@@ -138,7 +138,7 @@ const OCCASIONAL_BY_NATURE = Object.freeze(/** @type {Record<CrisisNature, Array
   external: ['profiteer', 'collaborator'],
 }));
 
-/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its defence-free twin (`data/defenceTwinLines.js`, F10). */
+/** The fixed reason vocabulary. Every `reason` on the record is one of these sentences, or its declared defence-free sibling (`CAST_REASON_SIBLINGS`, at the end of this file; F10, CENSUS-1c). */
 export const CAST_REASONS = Object.freeze({
   bruntBase: Object.freeze(/** @type {Record<string, string>} */ ({
     food_security: 'the hunger falls first on its people',
@@ -515,8 +515,8 @@ export function bruntCandidates(s, kind, stakes) {
   const losers = new Set(stakes.filter((k) => k.stake !== 'gains').map((k) => k.factionId));
   /** @type {CastRow[]} */
   const out = [];
-  // F10 unit 4: a reason that names walls the place lacks takes its twin (data/defenceTwinLines.js).
-  const defence = defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s));
+  // F10 unit 4, CENSUS-1c: a reason that names walls the place lacks resolves to its declared sibling (CAST_REASON_SIBLINGS).
+  const defence = castReasonOptions(s);
   for (const sys of catalogFor(kind).affectedSystems) {
     const base = SYSTEM_BASE[sys];
     if (!base) continue;
@@ -524,9 +524,9 @@ export function bruntCandidates(s, kind, stakes) {
     for (const f of hit) {
       const members = membersOf(s, factionName(f)).reverse(); // the least powerful first
       const touching = members.filter((n) => base.role.test(str(n.role)));
-      for (const n of touching) out.push(npcRow(n, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+      for (const n of touching) out.push(npcRow(n, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, CAST_REASON_SIBLINGS, defence)));
       for (const n of members) if (!touching.includes(n)) out.push(npcRow(n, 'brunt', CAST_REASONS.bruntLeast));
-      out.push(factionRow(f, 'brunt', defenceTwinLine(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, defence)));
+      out.push(factionRow(f, 'brunt', resolveSibling(CAST_REASONS.bruntBase[sys] || CAST_REASONS.bruntLeast, CAST_REASON_SIBLINGS, defence)));
     }
     if (out.length) break;
   }
@@ -712,8 +712,8 @@ export function defenderCandidates(s) {
     for (const n of membersOf(s, factionName(f))) out.push(npcRow(n, 'defender', CAST_REASONS.defenderMilitary));
   }
   for (const n of rosterOf(s).filter((x) => /captain|guard|watch|marshal|warden|sergeant|commander/i.test(str(x.role)))) {
-    // F10 unit 4: "holds the garrison's office" only where a garrison stands (data/defenceTwinLines.js).
-    out.push(npcRow(n, 'defender', defenceTwinLine(CAST_REASONS.defenderOffice, defenseFactsOf(/** @type {Parameters<typeof defenseFactsOf>[0]} */ (s)))));
+    // F10 unit 4, CENSUS-1c: "holds the garrison's office" only where a garrison stands (CAST_REASON_SIBLINGS).
+    out.push(npcRow(n, 'defender', resolveSibling(CAST_REASONS.defenderOffice, CAST_REASON_SIBLINGS, castReasonOptions(s))));
   }
   // The house fallback credits a house with the town's defence, so it reads the STANDING roster
   // only (`liveInstitutions`): a closed garrison defends nothing.
@@ -1031,4 +1031,30 @@ export function effectiveCastOf(settlement, entry) {
   /** @type {CrisisCast} */
   const base = engine || { nature: natureOf(''), rank: 0, roles: [], absent: [], stakes: [], levers: [], ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [], links: [] };
   return { cast: { ...base, roles, absent: [] }, edited: true };
+}
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
+ * §3.1): `CAST_REASONS.bruntBase.defense_readiness` and `CAST_REASONS.defenderOffice`. The original stays where it is spelled above; the twin stands beside it here with
+ * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
+ * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
+ */
+export const CAST_REASON_SIBLINGS = Object.freeze({
+  'its people stand on the walls': Object.freeze([
+    Object.freeze({ text: 'its people stand on the walls', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'its people stand guard', twinOf: 'its people stand on the walls', excludes: Object.freeze(['walls']) }),
+  ]),
+  'holds the garrison\'s office': Object.freeze([
+    Object.freeze({ text: 'holds the garrison\'s office', needs: Object.freeze(['garrison']) }),
+    Object.freeze({ text: 'holds the office of the guard', twinOf: 'holds the garrison\'s office', excludes: Object.freeze(['garrison']) }),
+  ]),
+});
+
+/**
+ * The resolution options for a cast reason: the record's facts (the defence home), the ledger's
+ * pool name. Draw-free.
+ * @param {CastSettlement} s
+ */
+function castReasonOptions(s) {
+  return { facts: factsOf(s), poolId: 'crisisCast:CAST_REASON_SIBLINGS', surface: 'crisis', drawKind: /** @type {'T'} */ ('T') };
 }
