@@ -1070,7 +1070,7 @@ export const NPC_FACTION_LOYALTY = {
     "One of their staff has started asking questions about records from seven years ago. They've been reassigned twice already.",
     'A merchant they publicly opposed is now publicly supporting them. No explanation offered.',
     "Their most trusted advisor hasn't been seen in four days. The official story changes each time it's told.",
-    "They know who committed a crime the guard is currently investigating. They're not telling the guard.",
+    { text: "They know who committed a crime the guard is currently investigating. They're not telling the guard.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone has been leaving anonymous notes in their office pointing to a colleague's corruption. The notes are accurate.",
     "They've been meeting privately with someone from outside the settlement whose identity they won't disclose.",
     'A routine appointment they made three weeks ago has been rescheduled four times. Each time they initiated the change.',
@@ -1078,22 +1078,22 @@ export const NPC_FACTION_LOYALTY = {
     'They received a deposition in a civil case that, if acted on, would be correct, and would ruin someone they need.',
   ],
   military: [
-    'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.',
-    'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.',
+    { text: 'Three guards have gone missing in the same district on night patrol. The report filed says they deserted.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, somehow.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "They received orders from above that contradict what they know to be right. They haven't acted on either yet.",
-    'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.',
+    { text: 'A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "They've noticed the same group of faces at multiple locations where incidents occurred. No one else has.",
-    "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
+    { text: "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A spy they turned is now being turned back, and feeding information in both directions.',
-    "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
+    { text: "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A recruit they turned away has since joined a different outfit. The different outfit is now paying them to monitor this one.',
     'They are carrying out orders they believe are wrong. They have not yet decided at what point they stop carrying them out.',
-    "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
+    { text: "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
   ],
   religious: [
     'A parishioner confessed something to them three months ago. The information is dangerous. They cannot act on it.',
     'The holy relic in their keeping is not what everyone believes it is. Only they know this.',
-    "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.",
+    { text: "Someone has been leaving offerings at the shrine that shouldn't be possible. The site has been sealed.", needs: ['institution: temple'] }, // CENSUS-3e: the ledger's declaration
     "A novice has the gift. They know what that means for the novice. They're not sure what to do.",
     'They received a directive from the hierarchy that contradicts their own theology. Compliance is expected.',
     "A healing they performed was successful in a way they cannot explain. It's happened twice now.",
@@ -1107,7 +1107,7 @@ export const NPC_FACTION_LOYALTY = {
     "A shipment they weren't expecting arrived and is now in their warehouse. They don't know who sent it or what to do.",
     "A business rival has offered them a partnership with terms so good it must be a trap. They can't find the trap.",
     'One of their most reliable suppliers has gone dark. The goods are still arriving. Someone else is sending them.',
-    'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.',
+    { text: 'They have evidence of price-fixing across the whole market. Publishing it helps their competition as much as their customers.', needs: ['market'] }, // CENSUS-3e: the ledger's declaration
     "A young trader has been undercutting them in ways that shouldn't be possible on their claimed capital.",
     "Someone is buying up their debts. Quietly. They don't know who, or why, or when they plan to call them in.",
     'A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.',
@@ -1117,23 +1117,23 @@ export const NPC_FACTION_LOYALTY = {
     'A supplier is providing goods of uncertain provenance. The price is too good to ask questions. People have started asking questions.',
   ],
   criminal: [
-    "One of their people is talking to the guard. They don't know which one yet. They're watching.",
+    { text: "One of their people is talking to the guard. They don't know which one yet. They're watching.", needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     'A valuable item came through their network recently. Three different parties have asked about it quietly.',
     "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
     'A job went wrong in a way that suggests information was leaked. They have three suspects.',
     "They're protecting someone from something worse. The someone doesn't know and wouldn't thank them.",
     'A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?',
-    'The guard captain has a file. They know because someone who works for the guard captain also works for them.',
+    { text: 'The guard captain has a file. They know because someone who works for the guard captain also works for them.', needs: ['guardPresence'] }, // CENSUS-3e: the ledger's declaration
     "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
   ],
   magic: [
     "An experiment failed in a way that shouldn't be possible. The results have been sealed. They're still thinking.",
     "A student asked a question three weeks ago that they haven't been able to answer. That's new.",
-    'Something in the settlement is absorbing ambient magical energy. The readings are increasing.',
+    { text: 'Something in the settlement is absorbing ambient magical energy. The readings are increasing.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     "They've been approached by someone who knows things about their research that were never made public.",
     'An old colleague has sent a message asking for a meeting. The colleague was declared dead six years ago.',
-    'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.',
-    'They have two competing theories about what is happening to magic in this region. Both are alarming.',
+    { text: 'The magical ward they placed on the vaults was bypassed. Not broken. Bypassed. That requires inside knowledge.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
+    { text: 'They have two competing theories about what is happening to magic in this region. Both are alarming.', needs: ['magic'] }, // CENSUS-3e: the ledger's declaration
     'Someone has been making inquiries about their past research. Not the published work, the unpublished work.',
   ],
   other: [

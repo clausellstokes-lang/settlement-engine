@@ -58,8 +58,10 @@ describe('rung 2D · the crisis-blind instrument reads the twelve sampled rows',
     expect(readOn(i, (s) => rulerWant(s, GOAL.stability))).toEqual([['current stability', 'crisis']]);
   });
 
-  it('soak1k-1205: "Food Secure." under an influx it cannot feed', () => {
-    expect(readOn(1205, () => 'Food Secure.')).toEqual([['food secure', 'migration']]);
+  // CENSUS-2c (the chair's R-P 1): the food record counts the influx (×1.15, CENSUS-1c unit 7), so
+  // "Food Secure." under a fed influx is TRUE; the instrument's `migration` row is retired.
+  it('soak1k-1205: "Food Secure." under a fed influx reads no finding (R-P 1: the row is retired)', () => {
+    expect(readOn(1205, () => 'Food Secure.')).toEqual([]);
   });
 
   it('soak1k-2402: the one-earner line that says nothing is failing, under famine', () => {

@@ -682,6 +682,31 @@ const FOOD_SECURITY_CLAUSE = Object.freeze({
   secure: 'the food supply is secure',
 });
 
+/**
+ * THE DECLARED CLAUSES (CENSUS-2d unit 3; Phase A's ledger QUICK_GUIDE_CLAUSES.json), in the
+ * dissolved-twin shape keyed by the original's text (R-P 3): SCOPE_PHRASE and FOOD_SECURITY_CLAUSE
+ * stay strings for `scopePhrase` / `foodSecurityClause`; the T wiring (CENSUS-1e, Appendix B row
+ * 95) resolves a printed clause through `resolveSibling`. The food band's calm clauses are the
+ * ledger's `{crisis-scoped}` pool: `crisis: any` with the hunger denial.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, needs?: string[], excludes?: string[], crisis?: string[] }>>>>}
+ */
+export const QUICK_GUIDE_SIBLINGS = Object.freeze({
+  [SCOPE_PHRASE.norse]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.norse, needs: ['navigable'] })]),
+  [SCOPE_PHRASE.slavic]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.slavic, needs: ['river'] })]),
+  [SCOPE_PHRASE.mesoamerican]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.mesoamerican, needs: ['market'] })]),
+  [SCOPE_PHRASE.south_asian]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.south_asian, needs: ['market', 'institution: temple'] })]),
+  [SCOPE_PHRASE.greek]: Object.freeze([Object.freeze({ text: SCOPE_PHRASE.greek, needs: ['coast'] })]),
+  [FOOD_SECURITY_CLAUSE.surplus]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.surplus, excludes: ['crisis: hunger'], crisis: ['any'] })]),
+  [FOOD_SECURITY_CLAUSE.secure]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.secure, excludes: ['crisis: hunger'], crisis: ['any'] })]),
+});
+
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the food band's calm clauses, the ledger's opted
+ * pools, by their sibling key. The T wiring passes `crisisScoped: true` for these; the pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([FOOD_SECURITY_CLAUSE.surplus, FOOD_SECURITY_CLAUSE.secure]);
+
 /** @param {string} label @returns {string} */
 function foodSecurityClause(label) {
   const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');

@@ -23,6 +23,8 @@ import {
   TIMELINE_CATEGORY_TYPES,
 } from './history/historyPolicyData.js';
 import { deriveHistoryRouteContext } from './history/historyRouteContext.js';
+import { drawDeclared, filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
 export {
   STRESS_TO_TENSION,
@@ -178,13 +180,32 @@ const buildHistoryContext = (
 };
 
 
+/**
+ * THE TIMELINE HOOK'S RESOLUTION (CENSUS-1f unit 3). `drawDeclared` over the drawn row and the
+ * template's other rows not yet printed (the rows still in the roll's domain, less those an earlier
+ * resolution printed); the drawn row is returned unless it is refused or already printed.
+ * @param {any} drawnRow @param {any} eventTemplate @param {any[]} remaining @param {Set<unknown>} taken
+ * @param {string[]} printed @param {object | (() => object) | null} facts
+ */
+const resolveTimelineHook = (drawnRow, eventTemplate, remaining, taken, printed, facts) => {
+  const domain = [drawnRow, ...remaining.filter((row) => !taken.has(row) && !printed.includes(lineText(row)))];
+  const already = taken.has(drawnRow);
+  const r = drawDeclared(domain, {
+    draw: () => drawnRow, facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`,
+    surface: 'history', drawKind: 'R', key: `${eventTemplate?.type ?? ''}::${lineText(drawnRow)}`,
+  });
+  if (!already) return r.line;
+  const others = domain.slice(1);
+  return others.length ? drawDeclared(others, { draw: (p) => p[0], facts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${eventTemplate?.type ?? ''}`, surface: 'history', drawKind: 'R' }).line : null;
+};
+
 // ─── generateEventNarrative ───────────────────────────────────────────────────
 /**
  * Render a historical event at a specific point in time, substituting template
  * variables and selecting effects/hooks appropriate to the event severity.
  */
 
-const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null) => {
+const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descSeed = null, hookFacts = null) => {
   // Template variable substitutions (can be overridden by extraTokens)
   const defaultTokens = {
     '{quarter}': pick(['the market quarter', 'the residential district', 'the waterfront', 'the temple district']),
@@ -259,12 +280,27 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
   if (yearsAgo <= 80) {
     const hookCount = severity === 'catastrophic' ? 3 : severity === 'major' && _rng() < 0.5 ? 2 : 1;
     const availableHooks = [...(eventTemplate.plotHooks || [])];
+    /** @type {Set<unknown>} rows already printed by a resolution, never printed twice */
+    const taken = new Set();
     for (let i = 0; i < Math.min(hookCount, availableHooks.length); i++) {
       const idx = randInt(0, availableHooks.length - 1);
-      let hook = availableHooks.splice(idx, 1)[0];
+      // CENSUS-1f unit 3 (Appendix B item 12, R): the roll and its splice are unchanged (the drawn row
+      // leaves the domain, so every later roll's range is as before, and the loop's length too). The
+      // drawn row is then RESOLVED through `drawDeclared` against CENSUS-3d's declarations: refused
+      // (or already printed by an earlier resolution), it gives way to the hash argmax over the
+      // template's admitted, unprinted rows; none → this roll prints nothing. The ECHO roll below is
+      // keyed on the DRAWN row's tense, so the roll count never depends on the resolution.
+      const drawnRow = availableHooks.splice(idx, 1)[0];
+      const resolvedRow = resolveTimelineHook(drawnRow, eventTemplate, availableHooks, taken, selectedHooks, hookFacts);
+      const drawnText = lineText(drawnRow);
+      let hook = resolvedRow == null ? null : lineText(resolvedRow);
+      if (resolvedRow != null && resolvedRow !== drawnRow) taken.add(resolvedRow);
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
-      if (yearsAgo > 30 && hook) {
+      if (yearsAgo > 30 && drawnText) {
+        // {colour} (CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER.json): each prefix frames a past
+        // discovery (old records, a document, an archivist's notes from that period); none asserts what the
+        // place holds now, so none is a roster claim.
         const ECHO_PREFIXES = [
           'Old records suggest ',
           'A recently surfaced document implies ',
@@ -274,14 +310,15 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
         ];
         // Only prefix hooks that read as present-tense (contain present-tense signals)
         const presentTenseSignals = [' is ', ' are ', ' has ', ' have ', ' exists', ' exist', ' being '];
-        const needsReframe = presentTenseSignals.some(sig => hook.toLowerCase().includes(sig));
+        const needsReframe = presentTenseSignals.some(sig => drawnText.toLowerCase().includes(sig));
         if (needsReframe) {
           const prefix = ECHO_PREFIXES[Math.floor(_rng() * ECHO_PREFIXES.length)];
-          // Lowercase the first letter of the hook when adding prefix
-          hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
+          // Lowercase the first letter of the hook when adding prefix (CENSUS-1f: a resolved row that
+          // does not read as present tense keeps its own words; the roll was the drawn row's)
+          if (hook && presentTenseSignals.some(sig => hook.toLowerCase().includes(sig))) hook = prefix + hook.charAt(0).toLowerCase() + hook.slice(1);
         }
       }
-      selectedHooks.push(hook);
+      if (hook) selectedHooks.push(hook);
     }
   }
 
@@ -311,6 +348,7 @@ const buildHistoricalEvent = (
   factions = [],
   context = {},
   worldLaw,
+  hookFacts = null,
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -496,6 +534,10 @@ const buildHistoricalEvent = (
         tensionTokens,
       ),
       factions: (tension.factions || []).map(substituteNames),
+      // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
+      // filtered by the record (a refused row leaves it) and stored as text; a list that declares
+      // nothing is copied unchanged.
+      ...(Array.isArray(tension.plotHooks) ? { plotHooks: filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}),
     }))
     .filter(worldLaw.allowsHistoryEvent);
 };
@@ -515,7 +557,7 @@ const buildHistoricalEvent = (
 // tyranny/wild_magic types deepen the pools so city/metropolis can reach 12/20.
 // Stress → tension-template mapping (hoisted from buildHistoricalEvent so the
 // registration walker can verify every target is a real HISTORICAL_EVENTS_DATA type).
-const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
+const generateRelationshipEvent = (age, tier, config, context, worldLaw, hookFacts = null) => {
   // Number of history events (scaled by age)
   const _ageFraction = age / 100;
   // Scale event count by age — each tier gets appropriate depth
@@ -598,7 +640,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
     // Build context tokens
     const contextTokens = context ? generateTradeNarrative2(cat, context) : {};
 
-    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`);
+    const event = generateEventNarrative(tmpl, yearsAgo, contextTokens, `${config?._seed ?? ''}::histEvent::${i}::${tmpl.type}`, hookFacts);
     event.type = cat;
     // Preserve the stable template id alongside the display category. The final
     // dedup keys on templateType (not category), so two distinct arcs in the same
@@ -647,7 +689,7 @@ const generateRelationshipEvent = (age, tier, config, context, worldLaw) => {
           ))
         : null;
       if (!tmpl) return; // no settlement-appropriate anchor — keep the original event
-      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`);
+      const replacement = generateEventNarrative(tmpl, event.yearsAgo, contextTokens, `${config?._seed ?? ''}::histAnchor::${cat}::${tmpl.type}`, hookFacts);
       if (replacement) {
         replacement.type = cat;
         replacement.templateType = tmpl.type; // thread the anchor's template id for the dedup
@@ -856,9 +898,18 @@ export const generateHistory = (
   const founding = genArrivalDetail(config, context, worldLaw);
   founding.age = age;
 
+  // CENSUS-3d unit 6: the facts a declared history hook is checked against — the birth so far
+  // (roster, config, tier, the power structure), read lazily and once. The birth self-check
+  // (`cert:false-presumption`) re-asserts every declared hook against the FINAL record.
+  let heldHookFacts = null;
+  const hookFacts = () => (heldHookFacts ??= factsOf(
+    { institutions, config, tier, powerStructure, stress: Array.isArray(config?.stressTypes) ? config.stressTypes.map((type) => ({ type })) : [] },
+    worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {},
+  ));
+
   // Historical timeline
   const timeline = age > 0
-    ? generateRelationshipEvent(age, tier, config, context, worldLaw)
+    ? generateRelationshipEvent(age, tier, config, context, worldLaw, hookFacts) // CENSUS-1f: the timeline hooks resolve against the birth so far
     : [];
 
   // Current tensions
@@ -868,7 +919,7 @@ export const generateHistory = (
     tier,
     economicState,
     config,
-    powerStructure?.factions || [], context, worldLaw,
+    powerStructure?.factions || [], context, worldLaw, hookFacts,
   );
 
   // Derive historical character from event pattern

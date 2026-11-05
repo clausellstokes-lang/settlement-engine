@@ -1,0 +1,1649 @@
+{
+ "poolId": "DS-STR-2",
+ "source": "src/data/dossierStateProse/stressors.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+ "drawKind": "K",
+ "drawSite": "stressorsStateProse (worldStressorLifecycle, worldStressorOrigin) → composeStateProse → readStateProse → eligibleVariants → drawVariant (src/domain/display/stateProse/stressorsStateProse.js); COUNTERFORCE and SYNERGY pools are dark (no key function)",
+ "pools": [
+  {
+   "pool": "LIFECYCLE: emerging",
+   "keyGuarantees": "stressorLifecyclePoolKey: a normalized world stressor (worldState.stressors[], play-time only) at lifecycleStage \"emerging\" is the one the caller selected. crisisOf counts a world stressor affecting this place at EVERY stage (no status filter), so a crisis is active whenever the world is passed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: the lines narrate their own stressor deictically and never assert town-wide calm; the key itself is a crisis. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The trouble is new here. It shows in small displacements (a schedule slipping, a price moving) and has not yet been named out loud.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Something has begun. The town is not yet organized around it, and the people worst placed for it have not worked that out.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "This is the early part: legible to anyone paying attention, deniable to anyone who would rather not.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "LIFECYCLE: active",
+   "keyGuarantees": "stressorLifecyclePoolKey: a normalized world stressor (worldState.stressors[], play-time only) at lifecycleStage \"active\" is the one the caller selected. crisisOf counts a world stressor affecting this place at EVERY stage (no status filter), so a crisis is active whenever the world is passed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: the lines narrate their own stressor deictically and never assert town-wide calm; the key itself is a crisis. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The crisis is fully underway and the town is arranged around it. Everything ordinary now happens in its margins.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is the middle of it. The improvisations have become procedures, and nothing in the accounts assumes relief.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is living inside the trouble rather than reacting to it; the shape of ordinary life has already shifted to accommodate it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "LIFECYCLE: peaking",
+   "keyGuarantees": "stressorLifecyclePoolKey: a normalized world stressor (worldState.stressors[], play-time only) at lifecycleStage \"peaking\" is the one the caller selected. crisisOf counts a world stressor affecting this place at EVERY stage (no status filter), so a crisis is active whenever the world is passed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: the lines narrate their own stressor deictically and never assert town-wide calm; the key itself is a crisis. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "It is as bad as it has been. Whatever the town had in reserve is being spent, and there is no obvious second reserve.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is the worst of it. The strain has stopped compounding and started simply holding at a level nothing here was built for.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The pressure is at its height. What is going to survive this part is surviving it; what is not is failing now.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "LIFECYCLE: easing",
+   "keyGuarantees": "stressorLifecyclePoolKey: a normalized world stressor (worldState.stressors[], play-time only) at lifecycleStage \"easing\" is the one the caller selected. crisisOf counts a world stressor affecting this place at EVERY stage (no status filter), so a crisis is active whenever the world is passed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: the lines narrate their own stressor deictically and never assert town-wide calm; the key itself is a crisis. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The worst has passed. The town is not recovered, but it has begun to plan past the trouble rather than around it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Pressure is coming off. The improvisations are being retired one at a time, in the order they were least useful.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "It is receding. What remains is the damage rather than the danger.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "LIFECYCLE: residual",
+   "keyGuarantees": "stressorLifecyclePoolKey: a normalized world stressor (worldState.stressors[], play-time only) at lifecycleStage \"residual\" is the one the caller selected. crisisOf counts a world stressor affecting this place at EVERY stage (no status filter), so a crisis is active whenever the world is passed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: \"the crisis is over\" / \"the trouble has ended\" is about THIS stressor (a residual stressor still counts as active in crisisOf, so `calm` would empty the pool); flagged for the chair. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The crisis is over and the town still moves as though it were not. The habits it forced have outlived the reason for them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "What is left is memory doing the work of pressure. The trouble has ended; its weight has not entirely lifted.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} still carries the mark. The event is finished; the caution it taught is not.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "COUNTERFORCE: floorsMet with a strong score",
+   "keyGuarantees": "counterforceAssessment(stressor, snapshot) reads floorsMet with a strong score. DARK: no key function (needs a world snapshot a dossier tab does not hold).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: about the town's strength against its own stressor, never a calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is meeting this well. Its strengths line up against exactly this kind of trouble, and the trouble is losing ground faster than it would elsewhere.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} has what this crisis requires and has it in the right combination; recovery here is a schedule rather than a hope.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Every leg the town needed, it has. That is rarer than it sounds, and it is why this is ending sooner than it began.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "COUNTERFORCE: floorsMet: false",
+   "keyGuarantees": "counterforceAssessment(stressor, snapshot) reads floorsMet: false. DARK: no key function (needs a world snapshot a dossier tab does not hold).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: about the town's strength against its own stressor, never a calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town is strong in most of what this demands and short in one part, and the short part sets the pace.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} has resources against this and not the full set. The missing leg means its strengths hold rather than push.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The response here is adequate without being decisive. One gap is enough to turn a recovery into an endurance.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "COUNTERFORCE: a named leading source",
+   "keyGuarantees": "counterforceAssessment(stressor, snapshot) reads a leading SOURCE_LABEL in sourceBreakdown[]. DARK: no key function (needs a world snapshot a dossier tab does not hold). Every line needs {reason}, which has no producer: silent even when routed.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: about the town's strength against its own stressor, never a calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "What is carrying {settlement} through this is {reason}. The rest of the town's strengths are following that one.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The recovery here rests on {reason}, which is doing more work than anyone sized it for.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{reason} is why this has not been worse. Take it out and the arithmetic is a different arithmetic.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "COUNTERFORCE: weak or absent",
+   "keyGuarantees": "counterforceAssessment(stressor, snapshot) reads a weak or absent score. DARK: no key function (needs a world snapshot a dossier tab does not hold).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: about the town's strength against its own stressor, never a calm claim. Colour.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The town has little to bring against this. It will end when it ends, and not because of anything {settlement} does.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is no lever here. The strengths that would shorten this crisis are the strengths the town does not have.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is enduring rather than resisting. The trouble decays at its own pace, and the town waits it out.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: famine × disease_outbreak",
+   "keyGuarantees": "synergyAssessment: a famine stressor and a disease_outbreak stressor are BOTH co-located at an active stage (conjunction). DARK: no key function.",
+   "poolNeeds": [
+    "crisis: famine",
+    "crisis: plague_onset"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "famine",
+    "plague_onset"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises (pulse disease_outbreak → plague_onset): opted in; poolNeeds states the conjunction.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Hunger and sickness are compounding here. The ill cannot work the fields, and the fields are why they are ill.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The two troubles feed each other: what the sickness takes from the harvest, the shortfall returns to the sickbeds.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is short of food and short of the health to grow it, and neither shortage lifts before the other.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: famine × siege",
+   "keyGuarantees": "synergyAssessment: famine and siege (→ under_siege) both co-located and active; blocksResolution true. DARK: no key function.",
+   "poolNeeds": [
+    "crisis: famine",
+    "crisis: under_siege"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "famine",
+    "under_siege"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises: opted in; poolNeeds states the conjunction. walls / no walls twins already present.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The hunger cannot lift while the lines hold. Relief exists; it is simply on the wrong side of the walls.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is grain within a short road of here and none of it can reach the town. The shortage ends when the siege does, and not before.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (grain)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "This famine is not a failure of harvest. It is a blockade, and it keeps exactly as long as the blockade keeps.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "famine",
+      "under_siege"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The hunger cannot lift while the lines hold. Relief exists; it is simply on the wrong side of the lines.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "famine",
+      "under_siege"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: occupation × insurgency",
+   "keyGuarantees": "synergyAssessment: occupation (→ occupied) and insurgency both co-located and active. DARK: no key function.",
+   "poolNeeds": [
+    "crisis: occupied",
+    "crisis: insurgency"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "occupied",
+    "insurgency"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises: opted in; poolNeeds states the conjunction.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The resistance is bleeding the garrison. Occupation and revolt feed each other here, and the arrangement costs the occupier more each season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied",
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander (the occupier's garrison: defence.garrison reads the town's own)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is held and it is fighting; the holding is expensive in a way that is shortening it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied",
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The occupation made the resistance and the resistance is unmaking the occupation: an ugly equilibrium, and an expensive one for whoever is paying to hold it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied",
+      "insurgency"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: mass_migration × disease_outbreak",
+   "keyGuarantees": "synergyAssessment: mass_migration and disease_outbreak (→ plague_onset) both co-located and active. DARK: no key function.",
+   "poolNeeds": [
+    "crisis: mass_migration",
+    "crisis: plague_onset"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "mass_migration",
+    "plague_onset"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises: opted in; poolNeeds states the conjunction.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The camps and the contagion are one problem. People packed close enough to shelter each other are packed close enough to infect each other.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Flight from the sickness is spreading the sickness; every column that leaves carries some of it forward.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is absorbing arrivals faster than it can space them, and the illness is taking the difference.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "mass_migration",
+      "plague_onset"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: coup_detat × succession_void",
+   "keyGuarantees": "synergyAssessment: coup_detat and succession_void both co-located and active. DARK: no key function.",
+   "poolNeeds": [
+    "crisis: succession_void"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "succession_void"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises; only succession_void has a record kind, so poolCrisis names it and coup_detat is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "An empty seat invites the knives. The vacancy did not cause the conspiracy, but it removed every reason not to have one.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is no undisputed claim, and there are several people acting as though there might be. The void is doing the plotting's recruiting for it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The unresolved succession keeps the plot alive; a settled claim would have ended it without a fight.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "succession_void"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "SYNERGY: market_shock × indebtedness",
+   "keyGuarantees": "synergyAssessment: market_shock and indebtedness (→ indebted) both co-located and active. DARK: no key function.",
+   "poolNeeds": [
+    "crisis: indebted"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "indebted"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on two crises; only indebtedness folds to a record kind (indebted); market_shock is a stop. \"the market turned\" is the economy, not the market presence atom.",
+   "poolStop": [
+    "pulse type market_shock has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The crash and the debt are one problem now. Creditors are calling in what they are owed precisely because they doubt it is collectable.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} owes coin it could have paid before the market turned; each week the obligation grows against the means.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The panic made the debts unpayable, and the debts are making the panic worse; neither settles in isolation.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "indebted"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: foreign_sponsored",
+   "keyGuarantees": "originContext.variant === \"foreign_sponsored\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type betrayal (→ recently_betrayed), with a hostile neighbour on the books.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "recently_betrayed"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type betrayal → record kind recently_betrayed: opted in with poolCrisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The trouble here has a foreign hand behind it: coin that traces back across a border, and someone local living better than their station explains.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This was paid for elsewhere. {settlement} is the place it happens, not the place it was decided.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The conspiracy is domestic in its faces and foreign in its funding; naming the sponsor aloud would be an act of war.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: abandoned_agent",
+   "keyGuarantees": "originContext.variant === \"abandoned_agent\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type betrayal (→ recently_betrayed), with a remembered operation.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "recently_betrayed"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type betrayal → record kind recently_betrayed: opted in with poolCrisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Whoever set this in motion has stopped paying for it. The work continues out of habit and desperation rather than instruction.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The handler is gone and the asset remains. What was an operation is now a person with dangerous knowledge and no protection.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The arrangement outlived its purpose. Nobody is directing this any more, which makes it less predictable rather than less dangerous.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: internal_conspiracy",
+   "keyGuarantees": "originContext.variant === \"internal_conspiracy\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type betrayal (→ recently_betrayed).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "recently_betrayed"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type betrayal → record kind recently_betrayed: opted in with poolCrisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "No border explains this. The knife came from inside {settlement}, and the loyalty tests spreading through the council say so more clearly than any evidence.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": false,
+     "stop": [
+      "a council body (ruler: council is the ruler KIND, not the presence of a council)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is no foreign sponsor and no recent feud. Whatever is being planned here was planned by people who already had a seat at the table.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The plot is entirely local. That is why it is difficult to find. Nothing about it looks out of place.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "recently_betrayed"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: declared_war",
+   "keyGuarantees": "originContext.variant === \"declared_war\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type siege, wartime or occupation (→ under_siege | wartime | occupied), with a hostile neighbour.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "under_siege",
+    "wartime",
+    "occupied"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on one of three crises (disjunction): opted in with poolCrisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The hostility here is open. {counterpart}'s banners are shown, its intentions stated, and its supply lines are the only part not on display.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": [],
+     "note": "{counterpart} has no fill on this desk: anchored liveness drops this line today"
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is a declared quarrel rather than a shadow one. The town knows exactly who is pressing it and why.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The pressure on {settlement} comes from a named and openly hostile neighbour; there is nothing to uncover, only something to answer.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: unattributed",
+   "keyGuarantees": "originContext.variant === \"unattributed\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type siege, wartime or occupation (→ under_siege | wartime | occupied), no hostile named.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "under_siege",
+    "wartime",
+    "occupied"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on one of three crises (disjunction): opted in with poolCrisis; walls / no walls twins present.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "No banner has been raised. The town knows it is under pressure and does not know from whom.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Whoever is doing this has not troubled to identify themselves, and knew precisely where the walls are weakest.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The attacker is unnamed. Scouts could put a name to it; nobody has yet, and the not-knowing is its own kind of weight.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "Whoever is doing this has not troubled to identify themselves, and knew precisely where the town is weakest.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "under_siege",
+      "wartime",
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: resistance",
+   "keyGuarantees": "originContext.variant === \"resistance\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type insurgency, and only while an occupation stressor affecting this place is not resolved / dormant / residual. Conjunction at stamping: insurgency AND occupied.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "insurgency",
+    "occupied"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on insurgency under a live occupation: opted in. Lines 2 and 3 state the occupation in the present, so they presume it explicitly (it can resolve after the origin is stamped).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier rather than the seat.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "insurgency",
+      "occupied"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander (the occupier's garrison)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: palace_coup",
+   "keyGuarantees": "originContext.variant === \"palace_coup\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator noble, or no mapped archetype).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The conspiracy is a courtly one. Invitations to private dinners are circulating, and the guest list is the plot.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The plotting here happens at the top of the building: seals that do not match the hands that signed them, and no crowd involved at all.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What threatens the seat is not the street. It is the people who already stand nearest it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: barracks_coup",
+   "keyGuarantees": "originContext.variant === \"barracks_coup\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator military).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The garrison is the danger. It drilled at midnight without orders, or with orders nobody will admit to giving.",
+     "needs": [
+      "garrison"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"The garrison is the danger\" is the town's own garrison"
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The soldiers here have stopped being the seat's instrument and started being its rival; officers loyal to the ruler are posted to the walls one by one.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What moves against the government is armed, disciplined, and already inside the walls by right.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The soldiers here have stopped being the seat's instrument and started being its rival; officers loyal to the ruler are posted away one by one.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    },
+    {
+     "lineId": "vid:5",
+     "text": "What moves against the government is armed, disciplined, and already inside the town by right.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "soldiers / commander"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: merchant_cabal",
+   "keyGuarantees": "originContext.variant === \"merchant_cabal\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator merchant).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The money has turned against the seat. Credit has dried up for anyone aligned with the ruling power, and no house will say why.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The plot here is commercial: a warehouse that never opens has started taking deliveries at night, and several ledgers stopped balancing in the same season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What threatens the government is not force but liquidity; the houses that finance {settlement} have decided to finance something else.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: temple_putsch",
+   "keyGuarantees": "originContext.variant === \"temple_putsch\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator religious).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.",
+     "needs": [
+      "institution: temple"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"asked from a pulpit\""
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The challenge to the seat comes from the observances. Sanctuary has been promised to anyone who acts according to conscience, and conscience has been defined helpfully.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Religious authority here has stopped propping the government and started replacing it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "priest / faith presence beyond institution: temple"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: arcane_ascendancy",
+   "keyGuarantees": "originContext.variant === \"arcane_ascendancy\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator arcane).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop. Every line presumes working magic (casters, wards, scrying, workrooms).",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Someone is scrying the seat of power and wants that known. The threat here is arcane, and it is not being hidden.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What challenges the government in {settlement} needs neither a crowd nor a garrison; it needs a workroom, and it has several.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: council_schism",
+   "keyGuarantees": "originContext.variant === \"council_schism\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type coup_detat (leading conspirator government or civic).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type coup_detat, which folds to NO record kind: opted in with poolCrisis [\"crisis\"] (crisisOf keeps the type, so only the any-crisis family sees it); the kind is a stop.",
+   "poolStop": [
+    "pulse type coup_detat has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The government has split against itself. A rump session voted itself emergency powers while the chamber stood half empty.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Two officials claim the same seal, the same office and the same tax. The town pays whichever collector reaches it first.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The seat is contested from within its own institution; there is no rebellion here, only two governments wearing the same name.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: popular_revolt",
+   "keyGuarantees": "originContext.variant === \"popular_revolt\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type rebellion (neither servile nor fiscal).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type rebellion, which folds to NO record kind: opted in with poolCrisis [\"crisis\"]; the kind is a stop.",
+   "poolStop": [
+    "pulse type rebellion has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The streets rose on their own. No faction owns this yet, which is what makes it dangerous to everyone.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"The market square empties\""
+    },
+    {
+     "lineId": "vid:3",
+     "text": "A list of grievances was nailed to the courthouse door and nobody has dared take it down. The rising is genuinely popular, and genuinely leaderless.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "a courthouse (no institution kind)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: servile_uprising",
+   "keyGuarantees": "originContext.variant === \"servile_uprising\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type rebellion (labour strained and legitimacy broken).",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type rebellion, which folds to NO record kind: opted in with poolCrisis [\"crisis\"]; the kind is a stop.",
+   "poolStop": [
+    "pulse type rebellion has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The bound labour of {settlement} has risen against the households that held it. The work songs in the fields changed first, and the overseers did not understand the new words.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "food sources (fields worked / harvest)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "This is the rising of people who were never asked. Manumission papers, real and forged, change hands at night.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What broke here was not a policy but an arrangement. The town's prosperity rested on labour that has stopped consenting to be labour.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "prosperity"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: tax_revolt",
+   "keyGuarantees": "originContext.variant === \"tax_revolt\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type rebellion, while indebtedness or market_shock is active here.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type rebellion, which folds to NO record kind: opted in with poolCrisis [\"crisis\"]; the kind is a stop. The fiscal companion is a disjunction with an unmapped member, so crisis: indebted is NOT guaranteed.",
+   "poolStop": [
+    "pulse type rebellion has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The levies of a drowning treasury finally broke the commons. Collectors travel in pairs, then in fours, and lately not at all.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The revolt here is about coin and only coin. The tally of every levy taken is being read aloud in the taverns.",
+     "needs": [
+      "institution: tavern"
+     ],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "\"read aloud in the taverns\""
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} did not rise against its government. It rose against its bill, which the government has not yet noticed is a different thing.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: arcane_burnout",
+   "keyGuarantees": "originContext.variant === \"arcane_burnout\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type magic_deadzone, while a magical_instability stressor exists.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type magic_deadzone (no record kind): opted in with poolCrisis [\"crisis\"]. Every line says the magic is gone NOW; `excludes: magic` is NOT declared because factsOf .magic reads the record's standing magic, not the deadzone, and would darken the pool in exactly the towns that had magic to lose: recorded as a stop for the chair.",
+   "poolStop": [
+    "pulse type magic_deadzone has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The magic here is gone because it was spent. Where the surge burned hottest, candles gutter and wards lie cold.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The ground is exhausted. What ran wild through {settlement} ran itself out and left the deadness behind.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The mages who fled the instability have not come back; they say the ground itself is finished, and so far nothing contradicts them.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "ORIGIN: leyline_silence",
+   "keyGuarantees": "originContext.variant === \"leyline_silence\" on a world stressor; producer interpretOriginContext (src/domain/worldPulse/stressorDynamics.js) gives this variant only to pulse type magic_deadzone, with no magical_instability stressor.",
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed on pulse type magic_deadzone (no record kind): opted in with poolCrisis [\"crisis\"]. Every line says the magic is gone NOW; `excludes: magic` is NOT declared because factsOf .magic reads the record's standing magic, not the deadzone, and would darken the pool in exactly the towns that had magic to lose: recorded as a stop for the chair.",
+   "poolStop": [
+    "pulse type magic_deadzone has no record kind in GEN_TO_PULSE_TYPE (crisisOf counts it only in the \"crisis\" family)"
+   ],
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The magic simply stopped answering. No omen, no surge, no warning: only the silence, and nobody yet knows why.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Nothing failed here. The arcane substrate went quiet on its own and has stayed quiet, which is worse than a disaster because it cannot be pointed at.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Hedge wizards are leaving {settlement} quietly; the ones who stay have started learning herbcraft.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "crisis"
+     ],
+     "colour": false,
+     "stop": [
+      "magic absent now (the deadzone's effect; factsOf .magic reads the record, not the world stressor)"
+     ]
+    }
+   ]
+  }
+ ]
+}

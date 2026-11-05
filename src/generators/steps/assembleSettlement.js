@@ -15,7 +15,7 @@ import { generateFactions, generateConflicts } from '../powerGenerator.js'; impo
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
 // the name exists.
-import { renderStressSummary } from '../stressNarrative.js';
+import { renderStressSummary } from '../stressNarrative.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // CENSUS-2c: one line, so no cited line moves
 import { generatePressureSentence, generateArrivalScene, generateCoherence } from '../narrativeGenerator.js';
 import { generateDefenseProfile } from '../defenseGenerator.js';
 import { settleCrimeLinesToSignal } from '../safetyProfile.js';
@@ -208,7 +208,7 @@ registerStep('assembleSettlement', {
     for (const e of entries) {
       if (e && typeof e === 'object'
           && Object.prototype.hasOwnProperty.call(e, 'summaryRoll')) {
-        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll);
+        e.summary = renderStressSummary(e.type, settlement.name, e.summaryRoll, factsOf(settlement)); // CENSUS-2c: declared sentences resolve (stressNarrative.js :: STRESS_SUMMARY_SIBLINGS)
         delete e.summaryRoll;
       }
     }

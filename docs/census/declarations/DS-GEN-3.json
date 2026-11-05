@@ -1,0 +1,1997 @@
+{
+ "poolId": "DS-GEN-3",
+ "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+ "drawKind": "K",
+ "drawSite": "generalStateProse → rung(DS-GEN-3, prosperityPoolKey | safetyPoolKey | viabilityPoolKey | readinessPoolKey | systemsHealthScorePoolKey×5 | foodSecurityPoolKey) → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+ "pools": [
+  {
+   "pool": "scores.military: STRONG",
+   "keyGuarantees": [
+    "defenseProfile.scores.military >= 65 (scoreBand STRONG)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: renders under any crisis; vid:3 \"nobody expects the town to lose a straight fight\" is false of a town that has been taken (occupied).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (\"armed men\")"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The muster roll at {settlement} is long and current, and the arms it lists are accounted for.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (\"muster roll\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
+     "needs": [],
+     "excludes": [
+      "crisis: occupied"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} can put a real body of armed men in the field, and the men look like they have done it before.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (\"armed men\")"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "scores.military: ADEQUATE",
+   "keyGuarantees": [
+    "defenseProfile.scores.military in [40, 65) (ADEQUATE)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: capability prose with no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} keeps enough men under arms to be taken seriously and not enough to be feared.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "soldiers (\"men under arms\")"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The muster at {settlement} covers the gates and the walls and does not stretch past them.",
+     "needs": [
+      "walls",
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "soldiers (\"muster\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} would hold against what it expects, and it knows it is not proof against what it does not.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The muster at {settlement} covers the lanes and the approaches and does not stretch past them.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "soldiers (\"muster\")"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "scores.military: WEAK",
+   "keyGuarantees": [
+    "defenseProfile.scores.military in [20, 40) (WEAK)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:3 \"it is right not to\" fight denies a need to fight, which an armed threat or wartime contradicts.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The watch at {settlement} is a watch and not a garrison, and the difference is visible at the gate.",
+     "needs": [
+      "watch",
+      "gate"
+     ],
+     "excludes": [
+      "garrison"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s arms are counted in what the households own rather than in what the hall issues.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} does not think of itself as a place that fights, and it is right not to.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: wartime"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.military: CRITICAL",
+   "keyGuarantees": [
+    "defenseProfile.scores.military < 20 (CRITICAL)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:3 \"nobody has wanted it\" asserts no one has come for the town, false under an armed threat or wartime.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "There is nothing at {settlement} that would stop anybody who meant to come in.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it.",
+     "needs": [
+      "gate"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (\"muster\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What protects {settlement} is that nobody has wanted it, and everyone here understands the arrangement.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: wartime"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.monster: STRONG",
+   "keyGuarantees": [
+    "defenseProfile.scores.monster >= 65 (STRONG)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:3 \"the rules work\" asserts the dark is safe, which active monster_pressure contradicts.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is built for what comes out of the country around it: heavy shutters, close outbuildings, and nothing left standing alone.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "monster threat (\"what comes out of the country\")"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "monster threat (\"the beasts of its own ground\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Children in {settlement} are taught the rules about the dark early, and the rules work.",
+     "needs": [],
+     "excludes": [
+      "crisis: monster_pressure"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.monster: ADEQUATE",
+   "keyGuarantees": [
+    "defenseProfile.scores.monster in [40, 65) (ADEQUATE)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"ordinary dangers\" and vid:3 \"the price of the ground\" call the wild ordinary, which active monster_pressure contradicts.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has taken the ordinary precautions against the country's ordinary dangers and stopped there.",
+     "needs": [],
+     "excludes": [
+      "crisis: monster_pressure"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The bounty book at {settlement} is used and modest: the town answers what troubles it and does not go looking.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} loses stock to the wild in some years and treats that as the price of the ground.",
+     "needs": [],
+     "excludes": [
+      "crisis: monster_pressure"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "livestock (\"loses stock\")"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "scores.monster: WEAK",
+   "keyGuarantees": [
+    "defenseProfile.scores.monster in [20, 40) (WEAK)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} sits closer to unworked country than its defences acknowledge.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Nothing at {settlement} is organised against what lives outside the fields; each household answers for its own fences.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "When something takes stock near {settlement}, the town's response is to talk about it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "livestock (\"takes stock\")"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "scores.monster: CRITICAL",
+   "keyGuarantees": [
+    "defenseProfile.scores.monster < 20 (CRITICAL)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The country around {settlement} is not held at all, and the town's edge is wherever the last house happens to stand.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} has no answer to what lives beyond its fields and nobody whose work it would be.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "People in {settlement} do not go far out after dark, and they do not need to be told why.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.internal: STRONG",
+   "keyGuarantees": [
+    "defenseProfile.scores.internal >= 65 (STRONG)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"very little disorder\" and vid:3 \"everybody knows who settles it\" are denied by unrest, and vid:3 also by an open seat (succession).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Order in {settlement} is kept quietly, which is the expensive kind: a stranger sees very little enforcement and very little disorder.",
+     "needs": [],
+     "excludes": [
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Complaints brought at {settlement} are heard and closed, and the closing is written down.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "A quarrel in {settlement} goes to somebody who will settle it, and everybody knows who that is.",
+     "needs": [],
+     "excludes": [
+      "crisis: unrest",
+      "crisis: succession"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.internal: ADEQUATE",
+   "keyGuarantees": [
+    "defenseProfile.scores.internal in [40, 65) (ADEQUATE)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"orderly on the main streets\" is denied by armed conflict in the streets (unrest).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is orderly on the main streets and less particular about the others.",
+     "needs": [],
+     "excludes": [
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The watch at {settlement} answers what is reported to it and does not seek out what is not.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} handles its own trouble most of the time, and tolerates the rest.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.internal: WEAK",
+   "keyGuarantees": [
+    "defenseProfile.scores.internal in [20, 40) (WEAK)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s complaint book has more entries opened in it than closed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Getting a thing settled in {settlement} depends on who you are, and the town is arranged accordingly.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.internal: CRITICAL",
+   "keyGuarantees": [
+    "defenseProfile.scores.internal < 20 (CRITICAL)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Whatever authority {settlement} has does not reach into its own streets.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Little is reported at {settlement}, because reporting produces no outcome.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "People in {settlement} settle their own matters, and the settling is not always proportionate.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.economic: STRONG",
+   "keyGuarantees": [
+    "defenseProfile.scores.economic >= 65 (STRONG)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: \"steady prices\" and \"a bad year is not a crisis\" are denied by hunger; \"goes on paying its people\" and vid:3 by an active debt crisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} could lose a season's trade and go on paying its people; there is enough behind the market to absorb it.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "crisis: indebted"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "A bad year in {settlement} is a bad year and not a crisis, and the town budgets for one.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger",
+      "crisis: indebted"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.economic: ADEQUATE",
+   "keyGuarantees": [
+    "defenseProfile.scores.economic in [40, 65) (ADEQUATE)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: \"would be felt and survived\" is a hypothetical capability, not a calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has some depth behind it and not a great deal; a season's disruption would be felt and survived.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} carries a modest cushion, visible in what the storehouses hold rather than in what the market shows.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} manages, and managing takes attention.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.economic: WEAK",
+   "keyGuarantees": [
+    "defenseProfile.scores.economic in [20, 40) (WEAK)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} runs close to what it takes in: one interruption would reach the households inside the season.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is nothing spare in {settlement}, and the absence of spare is what a careful eye notices first.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is one bad turn from difficulty and lives with the arithmetic openly.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.economic: CRITICAL",
+   "keyGuarantees": [
+    "defenseProfile.scores.economic < 20 (CRITICAL)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} holds no reserve at all; what comes in is spent before it is counted.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is not poor the way a small place is poor. It is poor the way a place is poor when nothing is holding it up.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Everything in {settlement} depends on the next thing arriving, and everyone here knows which thing.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.magical: STRONG",
+   "keyGuarantees": [
+    "defenseProfile.scores.magical >= 65 (STRONG)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim. Every line presumes the Art functions here.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The Art is worked openly in {settlement} and worked well; what it does here is infrastructure rather than spectacle.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} can call on real practitioners, and the calling is arranged rather than improvised.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "People in {settlement} take the Art for granted the way they take the mill for granted.",
+     "needs": [
+      "magic",
+      "institution: mill"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.magical: ADEQUATE",
+   "keyGuarantees": [
+    "defenseProfile.scores.magical in [40, 65) (ADEQUATE)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim. Every line presumes the Art is available.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has somebody who can do what is usually needed and knows what is beyond them.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The Art at {settlement} is available, occasional, and priced accordingly.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} sends for a practitioner when it must and manages without one otherwise.",
+     "needs": [
+      "magic"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.magical: WEAK",
+   "keyGuarantees": [
+    "defenseProfile.scores.magical in [20, 40) (WEAK)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim; lines are true whether or not the Art functions locally.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Whatever the Art does elsewhere, it does very little in {settlement}.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} keeps no arrangement for the Art; when it is wanted, it is wanted from outside.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The Art is a thing that happens to {settlement} rather than a thing {settlement} does.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "scores.magical: CRITICAL",
+   "keyGuarantees": [
+    "defenseProfile.scores.magical < 20 (CRITICAL)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "Nothing in {settlement} is held up by the Art, and nothing here would know what to do with it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} keeps no practitioner, no arrangement, and no expectation of either.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The Art in {settlement} is a rumour about other places.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "prosperity: Poverty / Impoverished",
+   "keyGuarantees": [
+    "economicState.prosperity in {Subsistence, Impoverished, Destitute} (unreachable at birth: deriveProsperityLabel emits none)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is a poor town and does not disguise it: what is here is here because it could not be sold.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The accounts at {settlement} balance by subtraction. The town is solvent because it does without the things that cost.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Nobody in {settlement} is saving toward anything.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "prosperity: Struggling / Poor",
+   "keyGuarantees": [
+    "economicState.prosperity in {Struggling, Poor, Meager}"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is short of comfortable and knows precisely how short.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s year closes near enough to level that the closing is watched.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The households in {settlement} are careful with each other about money, which is its own kind of courtesy.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "prosperity: Moderate / Modest",
+   "keyGuarantees": [
+    "economicState.prosperity in {Moderate, Modest, Stable}"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"nothing about it is remarkable\" is total calm; vid:3 \"eats well enough\" is denied by hunger.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is neither rich nor poor, and the fact that nothing about it is remarkable is the most accurate thing to say about it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "calm",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s books show a town that pays for itself and does not accumulate.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} eats well enough and does not talk about it.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "prosperity: Comfortable / Prosperous",
+   "keyGuarantees": [
+    "economicState.prosperity in {Comfortable, Prosperous}"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: money claims a crisis does not deny.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has the look of a town where the ordinary year leaves something over.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The surplus at {settlement} is real and gets spent on the town rather than out of it.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "People in {settlement} can afford to argue about things other than money.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "prosperity: Wealthy / Thriving",
+   "keyGuarantees": [
+    "economicState.prosperity in {Wealthy, Thriving, Affluent, Opulent}"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is rich in the way that shows in the paving and the doorframes before it shows in anybody's clothes.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Money moves in {settlement} fast enough that people talk about where it is going rather than whether there is any.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}",
+   "keyGuarantees": [
+    "safetyLabel head word Controlled (occupied crisis, or stateCrime \"Controlled — Authoritarian\") or Quarantined (plague_onset, safetyRatio >= 2); Secure is emitted by nothing"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: the pool renders mostly UNDER a crisis (occupation curfew, plague quarantine) and every line claims ease or safety that those deny.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "A stranger walks {settlement} at any hour and the town's only interest in them is commercial.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: unrest",
+      "crisis: plague_onset"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is a safe place to be, and the safety has a cost that the town has agreed to pay.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat",
+      "crisis: plague_onset"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The watch's returns at {settlement} are short, and short returns here mean quiet streets rather than an idle watch.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [
+      "crisis: unrest"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "Movement in {settlement} is watched and limited, and the quiet in its streets is a kept quiet rather than a natural one.",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied",
+      "plague_onset"
+     ],
+     "why": "Under occupation or plague (the two crises that reach this key) only vid:3 survives, and only where a watch stands; this states the curfew/quarantine/authoritarian order every reachable head word shares, without naming who enforces it."
+    }
+   ]
+  },
+  {
+   "pool": "safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
+   "keyGuarantees": [
+    "safetyLabel head word in {Tense, Strained, Restricted, Unsafe} (siege, famine, plague, secondary stresses, or base crime ratio)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:2 \"not dangerous so much as unrelaxed\" is denied by an armed threat at the town.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is workable and watchful: a stranger is served, and also noticed.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is not dangerous so much as unrelaxed, and the difference matters to the people living in it.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The watch at {settlement} is stretched across more than it can comfortably cover, and the stretching shows in what gets deferred.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}",
+   "keyGuarantees": [
+    "safetyLabel head word in {Dangerous, Desperate}"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is a place to be careful in, and being careful is not sufficient.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "People in {settlement} move in company after dark and do not consider that unusual.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What the watch at {settlement} records is a fraction of what happens, and the fraction is not chosen by the watch.",
+     "needs": [
+      "watch"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "economicViability.viable: true",
+   "keyGuarantees": [
+    "economicViability.viable === true (first-survey verdict)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"what it needs it can get, what it makes it can move\" is denied by hunger (incl. siege); vid:3 \"expects to go on being\" by an armed threat.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is a town that works: what it needs, it can get, and what it makes, it can move.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is no obvious reason {settlement} should not be here, which is a plainer compliment than it sounds.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} expects to go on being {settlement}.",
+     "needs": [],
+     "excludes": [
+      "crisis: threat"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} works on the terms it currently has, and the judgment is about those terms rather than about the town.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "economicViability.viable: false",
+   "keyGuarantees": [
+    "economicViability.viable === false"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "The arithmetic of {settlement} does not close: what the town requires exceeds what its ground and its trade together supply.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} is held here by something other than its own economy, and a visitor with an eye for it will start wondering what.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} goes on, and the going on is not explained by the books.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} does not close its own arithmetic and is standing anyway, which means something outside the books is paying, and the page cannot say what.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Fortress",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Fortress"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: capability prose.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is a hard place to take and looks it from a long way off.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Walls, garrison and stores at {settlement} are all of a piece, which is rarer than any one of them.",
+     "needs": [
+      "walls",
+      "garrison"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "Arms, muster and stores at {settlement} are all of a piece, which is rarer than any one of them.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": null,
+     "colour": false,
+     "stop": [
+      "soldiers (\"muster\")"
+     ]
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Well-Defended",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Well-Defended"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: capability prose.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is defended properly rather than impressively: the works are sound and none of them are for show.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} could hold what it has against most of what it is likely to meet.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Defensible",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Defensible"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: capability prose (vid:2's hypothetical siege is not a calm claim).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has something to fight from, and fighting from it would be work.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement}'s defences are adequate to a raid and would be a question in a siege.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Lightly Defended",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Lightly Defended"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: capability prose.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has walls in the sense that there is a line where the town stops.",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "What {settlement} could hold, it could hold briefly.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} is defended in the sense that there is a line where the town stops.",
+     "needs": [],
+     "excludes": [
+      "walls"
+     ],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Vulnerable",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Vulnerable"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement}'s defences are a gesture, and it is not a gesture anyone is fooled by.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "{settlement} has less between itself and trouble than a town this size ought to.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "defenseProfile.readiness.label: Undefended",
+   "keyGuarantees": [
+    "defenseProfile.readiness.label Undefended"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": false,
+   "ruling": "Not scoped: no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} has no defences at all, and the openness is the first thing about it.",
+     "needs": [],
+     "excludes": [
+      "walls",
+      "garrison"
+     ],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is nothing at {settlement} to hold and nobody to hold it.",
+     "needs": [],
+     "excludes": [
+      "garrison",
+      "militia"
+     ],
+     "crisis": null,
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Secure",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label Secure (live field)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [
+    "deficit"
+   ],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: food Secure can coexist with a siege or famine kind; vid:1-3 assert the town is fed and unworried, which hunger denies.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} feeds itself out of its own ground, and the granary is a convenience rather than a defence.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The market at {settlement} is full and unhurried, and the fullness is local.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Surplus",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label Surplus"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [
+    "deficit"
+   ],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1-3 assert plenty and full carts leaving, which hunger (incl. siege) denies.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} grows more than it eats, and the difference is the town's best argument with everyone around it.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "A thin year in {settlement} is a poorer year and not a hungry one.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "What leaves {settlement} in carts is mostly food, and the carts leave full.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "exports (\"what leaves in carts is mostly food\")"
+     ]
+    },
+    {
+     "lineId": "vid:4",
+     "text": "The surplus here is what {settlement} sells; a season that took it would cost the town its income before it cost the town its dinner.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Pressured",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label Pressured"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [
+    "deficit"
+   ],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:1 \"covers its need\" and vid:3 \"{settlement} eats\" are the hunger family's own calm.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} covers its need and covers it exactly; nothing in the granary is spare.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "The price of bread in {settlement} is watched, which it is not in a comfortable town.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "grain (\"the price of bread\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement} eats, and the eating takes more arranging than it should.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is at the top of this condition rather than the bottom of a worse one, and what separates the two is the margin the granary is currently holding.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Import-Dependent",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label Import-Dependent"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [
+    "deficit"
+   ],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:3/4/5 \"well supplied\", \"well fed\" are denied by hunger (a cut supply line is the siege case).",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} does not grow what it eats. The gap is bought, and the buying is the largest standing commitment the town has.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "imports (\"the gap is bought\")"
+     ]
+    },
+    {
+     "lineId": "vid:2",
+     "text": "What {settlement} eats comes up the road, and everybody here knows which road.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "trade-route kind (\"comes up the road\")"
+     ]
+    },
+    {
+     "lineId": "vid:3",
+     "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the walls.",
+     "needs": [
+      "walls",
+      "market"
+     ],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is well fed and not self-fed, and the distance between those two facts is exactly the length of the supply line.",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:5",
+     "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the town.",
+     "needs": [
+      "market"
+     ],
+     "excludes": [
+      "walls",
+      "crisis: hunger"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Deficit",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label Deficit"
+   ],
+   "poolNeeds": [
+    "deficit"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Scoped: vid:4 \"not yet starving\" is denied by an active famine crisis.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "What {settlement} needs exceeds what it produces and what it can bring in together, and the shortfall is carried by the households.",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "There is less in {settlement} than there are people to eat it, and the arithmetic reaches the poorest quarters first.",
+     "needs": [
+      "population: >= middling"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The granary at {settlement} is open and the queue at it is longer than the stock behind it.",
+     "needs": [
+      "institution: granary"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "{settlement} is short and not yet starving, and what stands between the two is the stores rather than the harvest.",
+     "needs": [],
+     "excludes": [
+      "crisis: famine"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": []
+    }
+   ]
+  },
+  {
+   "pool": "foodSecurity.label: Deficit × Active Famine",
+   "keyGuarantees": [
+    "economicState.foodSecurity.label \"Deficit — Active Famine\" (FOOD_POOL_OF maps the em dash to ×)"
+   ],
+   "poolNeeds": [
+    "deficit",
+    "famine"
+   ],
+   "poolExcludes": [],
+   "poolCrisis": null,
+   "crisisScoped": false,
+   "colour": true,
+   "ruling": "Not scoped: every line presumes the famine the key guarantees; no calm claim.",
+   "lines": [
+    {
+     "lineId": "vid:1",
+     "text": "{settlement} is short of food past the point that stores or purchase can answer, and the rolls are being kept for reasons other than trade.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:2",
+     "text": "Hunger in {settlement} is general, and what people are arranging now is not meals but order.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:3",
+     "text": "The first thing a stranger is asked in {settlement} is whether they have brought anything.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "vid:4",
+     "text": "There is no rung below this one on the ladder {settlement} is on; what changes from here is not the grade but the count.",
+     "needs": [],
+     "excludes": [],
+     "crisis": null,
+     "colour": true,
+     "stop": []
+    }
+   ]
+  }
+ ]
+}

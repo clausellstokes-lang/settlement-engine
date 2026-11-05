@@ -461,8 +461,10 @@ describe('C2 mount registry — the guards can see the defects they guard', () =
 
   test('a mount with no JSX site, and one with two, both red the reachability arm', () => {
     // The synthetic probe the design names: a position declared and never built.
+    // CENSUS-3c: the probe borrows a block that partitions by nothing — DS-ECO-6 (DS-ECO-2 now
+    // partitions by `hunger`, R-K), so only the reachability arm can speak.
     const probe = [...CLEAN, {
-      mount: 'overview.__probe', tab: 'overview', desk: 'economy', blockId: 'DS-ECO-2', rung: MOUNT_RUNGS.GLANCE,
+      mount: 'overview.__probe', tab: 'overview', desk: 'economy', blockId: 'DS-ECO-6', rung: MOUNT_RUNGS.GLANCE,
     }];
     expect(unreachableMounts(probe, WIRED_TREE))
       .toEqual(['overview.__probe: 0 sites under src/components']);

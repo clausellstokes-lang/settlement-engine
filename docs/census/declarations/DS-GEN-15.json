@@ -1,0 +1,186 @@
+{
+  "poolId": "DS-GEN-15",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "UNMOUNTED (dossierMounts.UNMOUNTED_BLOCKS); would draw fabricRead(settlement.urbanFabric) → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "SCARRED-FRESH",
+      "keyGuarantees": [
+        "the urban fabric carries a recent calamity scar"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The {calamity} is still legible in {settlement}, and the town works around the mark the way a hand works around a cut.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Something went wrong here {timeband_since}, and {settlement} has not finished absorbing it; the damage is part of the town's present tense.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} carries the {calamity}'s mark openly, and the repair is happening at the speed of means rather than of wish.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "SCARRED-FADING",
+      "keyGuarantees": [
+        "the urban fabric carries a fading calamity scar"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "The {calamity} has nearly left {settlement}'s fabric; what was a wound is becoming a feature, the way towns digest their disasters.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Only people who knew {settlement} before still see where the {calamity} sat; the town has grown over it the way turf grows over a track.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "REBUILT",
+      "keyGuarantees": [
+        "the urban fabric carries a rebuilt district"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Part of {settlement} reads newer than the rest, all of a piece and all at once, which is how a town writes down that something happened to it and it decided to continue.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A share of {settlement} was made twice, and the second making is plainer, straighter, and still a little foreign to what surrounds it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The rebuilt ground at {settlement} is the town's proof of itself: what fell was answered, and the answer is lived in.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "ENCROACHED",
+      "keyGuarantees": [
+        "the urban fabric records infill / encroachment"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour, not scoped: speaks of the past, asserts no present calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is thickening from the inside: yards give way to rooms, lanes narrow by consent, and each year the town holds a little more life in the same skin.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What was open ground inside {settlement} keeps becoming built ground; nobody ordered it, and the record of it is simply the town itself.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "WORN-PLAIN",
+      "keyGuarantees": [
+        "the urban fabric carries no calamity mark"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 1 says the town has been spared disasters, which any active crisis contradicts; line 2 speaks only of the stones.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s fabric carries no great wound, only wear; the town has been spared the memorable disasters and shows the ordinary kind of age instead.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "calm",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "No calamity has marked {settlement}'s fabric within the mirror's reckoning, and the evenness of the town is that absence made visible.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

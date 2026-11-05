@@ -1,0 +1,485 @@
+{
+  "poolId": "DS-GEN-7",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "coherencePoolKey / structuralViolationsPoolKey / structuralSuggestionsPoolKey → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "power_economic: criminal faction in a transit hub",
+      "keyGuarantees": [
+        "genCoherence note power_economic|economics: a crime-named faction above the power threshold in a transit-trade town (measured unreachable: crime factions top out at power 7)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: no line asserts calm; the transit-trade presumption has no reader (trade-route kind) and is the key's own premise.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} holds {band} of the power in {settlement}, and {settlement} is a place goods pass through; a share of what passes is moving outside the official channels, and the trade figures are therefore a floor rather than a count.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind",
+            "crime structure"
+          ],
+          "kernelMarks": [
+            "dm-only"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What is written down about {settlement}'s trade and what actually moves through it are two different quantities, and the difference has an owner.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crime structure"
+          ],
+          "kernelMarks": [
+            "dm-only"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} handles more goods than its records account for, which is normal for a transit town and unusually pronounced here.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{faction} is strong in {settlement} and the transit trade is clean; whatever the faction takes, it does not take it off the road.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind",
+            "crime structure"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "power_economic: powerful criminal faction in a prosperous settlement",
+      "keyGuarantees": [
+        "genCoherence note power_economic|overview: a powerful crime-named faction in a settlement the record calls prosperous (measured unreachable)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: it can render under a crisis and lines 2-3 assert present wealth, which a hunger or threat crisis contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{faction} holds {band} of the power in {settlement}, and the town's stated prosperity is gross: a meaningful share of it never reaches the tax rolls.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ],
+          "kernelMarks": [
+            "dm-only"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is doing well, and doing well here includes arrangements the hall would rather not itemise.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger",
+            "crisis: threat"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity",
+            "crime structure"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is visibly wealthy and its public accounts are modest, and both of those things are true.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger",
+            "crisis: threat"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{faction} is powerful in a prosperous {settlement} and takes its share in kind rather than in coin; the rolls are accurate and incomplete in different places than a stranger would guess.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ],
+          "kernelMarks": [
+            "dm-only"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "stress_economic: siege against trade income",
+      "keyGuarantees": [
+        "genCoherence note stress_economic|economics: the settlement is under siege while its books show trade income"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "under_siege"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed: the note exists only under a siege, so the pool carries poolCrisis under_siege and its lines inherit it.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is under siege, and the trade income on its books is what the town earned before the gates shut; what it earns now is close to nothing.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s market still keeps its hours and has almost nothing to sell, because nothing has come in since the siege began.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "The trade {settlement} is known for is not happening, and the town's accounts have not caught up with that.",
+          "needs": [],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "What {settlement} was worth in trade is being spent down rather than earned, and the stores are the only figure that matters while the gates hold.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": [
+            "under_siege"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "power_stress: occupation against stated stability",
+      "keyGuarantees": [
+        "genCoherence note power_stress|power: the settlement is occupied while its stability text does not mention occupation"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": [
+        "occupied"
+      ],
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Crisis-keyed on occupation; lines 1-3 deny open disorder (unrest family) and line 4 denies occupier rule.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} is under occupation, and the stability recorded for it describes the surface: the town is quiet because it is held, which is a different fact from the town being settled.",
+          "needs": [],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} is orderly and the order is not the town's own, and everybody here can tell the two apart.",
+          "needs": [],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Nothing in {settlement} is disturbed, and nothing in {settlement} is voluntary.",
+          "needs": [],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} is occupied and its own hall still governs. The occupier collects and does not administer, and legitimacy here has survived the arrangement.",
+          "needs": [],
+          "excludes": [
+            "ruler: occupier"
+          ],
+          "crisis": [
+            "occupied"
+          ],
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "power_economic: temple economy under a secular seat",
+      "keyGuarantees": [
+        "genCoherence note power_economic|power: the church controls most economic activity while a secular faction holds the seat"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: line 4 asserts the seat is uncontested, which a succession-family crisis contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Economic activity in {settlement} runs through the religious houses while formal governance rests with {govFaction}; whoever holds the trade and the tithes holds more practical power than whoever holds the seat.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The seat in {settlement} decides, and the temple is what the deciding has to be arranged around.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} has an official authority and an actual one, and they meet in the market rather than in the hall.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement}'s temple carries the economy and does not reach for the seat, and {govFaction} governs without contesting the arrangement.",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [
+            "crisis: succession"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "historical_economic: the recovery narrative",
+      "keyGuarantees": [
+        "genCoherence note historical_economic|history: a collapse older than eighty years and a boom inside sixty on the event record (measured unreachable by name)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: lines 3-4 assert present comfort and surplus, which a hunger crisis contradicts; the history itself has no reader.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement}'s prosperity was rebuilt and not inherited: the town went down a generation and more ago, and came back inside the memory of people still working.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "history facts",
+            "prosperity"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement}'s books show a hard collapse older than its living memory and a recovery a good deal newer, and the town manages risk like a place that remembers the first.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "history facts"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is comfortable and does not behave comfortably; the caution here is older than the money.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The generation running {settlement} did the rebuilding, and what they decide about surplus is still being decided against the collapse rather than against the present.",
+          "needs": [],
+          "excludes": [
+            "crisis: hunger"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "history facts",
+            "prosperity"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "structuralViolations[]",
+      "keyGuarantees": [
+        "the record carries at least one structural violation"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: every line restates the key (the record disagrees with itself) and asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} carries an institution its structure does not support, and the mismatch is on the record rather than in dispute.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "There is something in {settlement} that a town of this shape should not be able to keep, and keeping it is costing somebody.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement}'s establishment is out of proportion to the town and holds anyway, because it is not the town paying for it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "structuralSuggestions[]",
+      "keyGuarantees": [
+        "the record carries at least one structural suggestion (something missing)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour: every line restates the key and asserts no calm.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What {settlement}'s record shows and what {settlement} would need to work as described do not quite meet, and the gap has a short list of names on it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} functions in a way its own description does not fully account for.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "vid:3",
+          "text": "A careful reader of {settlement} finds one loose end, and it is the kind that a single institution would tie off.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

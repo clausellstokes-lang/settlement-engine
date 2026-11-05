@@ -140,7 +140,8 @@ export function groupPlotHooksBySourcePage(hooks) {
 // Echo prefixes: historyGenerator reframes older present-tense hooks as archival
 // discoveries ("Old records suggest …"). Those are paraphrase VARIANTS of one hook
 // family, so the family key strips them before comparing — otherwise the same beat
-// reads once live and once reframed.
+// reads once live and once reframed. A match list, never printed (CENSUS-1e: row 91); the printed copy
+// in historyGenerator.js is ruled {colour} (CENSUS-2e, R-R).
 const ECHO_PREFIXES = [
   'old records suggest ',
   'a recently surfaced document implies ',

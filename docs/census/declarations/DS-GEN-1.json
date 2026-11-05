@@ -1,0 +1,814 @@
+{
+  "poolId": "DS-GEN-1",
+  "source": "src/data/dossierStateProse/general.generated.js (annex docs/content/RECEIPT_POOLS_DOSSIER_STATE.md)",
+  "drawKind": "K",
+  "drawSite": "DORMANT — no mount (generalStateProse.js:396: severity[] has no per-town producer); when lit: tension type key → composeStateProse → readStateProse → eligibleVariants → drawVariant",
+  "pools": [
+    {
+      "pool": "crime_wave",
+      "keyGuarantees": [
+        "a current tension of type crime_wave (history.currentTensions[].type)",
+        "severity via kernel mark (minor/major/catastrophic)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: a tension renders beside any crisis, and vid:5 asserts the thieving is contained and no crisis, which armed street conflict (unrest) contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Theft in {settlement} has stopped being remarkable, which is its own kind of report; the watch takes the complaint, and the complainant does not expect much of it.",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "A stranger in {settlement} is told twice before nightfall which streets to leave alone, and both people who tell him are careful about who hears them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "The thieving in {settlement} is real and it is also contained: it takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.",
+          "needs": [
+            "population: >= middling"
+          ],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "season (\"in the same seasons\")"
+          ],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "economic_disparity",
+      "keyGuarantees": [
+        "a current tension of type economic_disparity"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 asserts the poorer quarters are supplied and nobody proposes change, contradicted by hunger and by unrest.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Two towns share {settlement}'s walls (one counts its year in surplus and the other in what it did without), and the two do not often eat in the same rooms.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The distance between {settlement}'s best street and its worst is a short walk and a great deal else, and nobody who lives here needs it pointed out.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{faction} holds the greater part of what {settlement} earns, and the rolls show the rest of the town living on the remainder without much room in it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The gap in {settlement} has stopped being a fact people live around and started being a thing they say out loud, which is a different stage of the same condition.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} is unequally off and orderly about it: the poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.",
+          "needs": [
+            "population: >= middling"
+          ],
+          "excludes": [
+            "crisis: hunger",
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "guild_conflict",
+      "keyGuarantees": [
+        "a current tension of type guild_conflict (two trades in dispute)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Not scoped: no line asserts town calm; vid:5 calm is about the trades' own quarrel, which the key owns.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Two trades in {settlement} claim the same work, and every contract written in this town has to say which of them is doing it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{faction} and {faction2} are not fighting in {settlement} so much as refusing each other: a job one takes, the other will not touch, and the town works around the hole.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Ask in {settlement} who does a given piece of work and you get two answers and a warning about the second one.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The quarrel between {settlement}'s trades has reached the point where work goes undone rather than go to the wrong hands, and the town is beginning to pay for the principle.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "The trades in {settlement} disagree loudly and deliver anyway; the shouting is the arrangement, not a threat to it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "infiltration_fear",
+      "keyGuarantees": [
+        "a current tension of type infiltration_fear"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 says the suspicion is only a habit and strangers stay, which an active infiltrated crisis contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} has grown careful about strangers in a way it cannot quite account for, and the carefulness has begun to be about neighbours too.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A newcomer to {settlement} is asked more questions than the business warrants, politely, by more than one person.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere, and the list is longer than anything anyone will say aloud.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major",
+            "dm-only"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "Suspicion in {settlement} has outrun whatever it started from: an accusation costs nothing to make here and a great deal to survive.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} watches its strangers and lets them stay. The suspicion is a habit of the gate, not a policy of the hall.",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [
+            "crisis: infiltrated"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "leadership_vacuum",
+      "keyGuarantees": [
+        "a current tension of type leadership_vacuum (no obvious hand at the top)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 says the town runs well and needs no daily decision, which an armed threat (siege, occupation, monsters) contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Decisions at {settlement} that want one signature take a season to collect it, because there is no longer an obvious hand to take them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "Nobody in {settlement} is certain who to bring a grievance to, so grievances get brought to several people and settled by none of them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} has a hall and a seat in it, and asking who fills the seat produces a pause before it produces an answer.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The absence at the top of {settlement} is no longer being waited out; {faction} has begun behaving as though the question is already answered.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} runs without a clear hand and runs well enough: the clerks know their work, and the work does not require a decision every day.",
+          "needs": [],
+          "excludes": [
+            "crisis: threat"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "magical_controversy",
+      "keyGuarantees": [
+        "a current tension of type magical_controversy"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Not scoped: no calm claim. Every line presumes the Art is practised here (needs magic).",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without anyone expecting it to finish.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "livestock (\"grazing rights\")"
+          ],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the position is not unanimous.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{faction} wants the Art in {settlement} licensed and counted; the rest of the town wants it left alone; neither holds enough of the hall to end the argument.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The quarrel over the Art in {settlement} has moved out of the hall and into the street, and both sides have begun naming individuals rather than practices.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} argues about the Art constantly and licenses it anyway; the argument is how the licence gets its conditions.",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "occupation_legacy",
+      "keyGuarantees": [
+        "a current tension of type occupation_legacy: an occupation happened and ENDED (the type word licenses that past, annex PROVENANCE)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: every line presumes the occupation is over, which an active occupied crisis (or an occupier ruler) contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} kept its own hall through the occupation and has not entirely got its own manners back; there are still things said only indoors.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied",
+            "ruler: occupier"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "The occupiers are gone from {settlement} and their arrangements are not: who holds which licence here was decided by somebody else, and nobody has undone it.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied",
+            "ruler: occupier"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades exempt), and no one now living wrote either rule.",
+          "needs": [
+            "population: >= middling"
+          ],
+          "excludes": [
+            "crisis: occupied",
+            "ruler: occupier"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} is settling accounts left from the occupation, and the settling has begun to reach people who were only doing what they were told.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied",
+            "ruler: occupier"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} was held and released and has chosen not to pursue it; who did what is known here, and is deliberately not spoken.",
+          "needs": [],
+          "excludes": [
+            "crisis: occupied",
+            "ruler: occupier"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "outside_debt",
+      "keyGuarantees": [
+        "a current tension of type outside_debt: an obligation owed outward (the type word licenses it)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 says the debt is carried comfortably and paid on time, which the indebted crisis contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "{settlement} owes outside its walls, and the owing is written into the shape of the year: the quarter's payment leaves before anything else is decided.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} looks poorer than its trade suggests, and the reason is not in the town: the difference leaves for a creditor beyond the walls.",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The debt on {settlement} has stopped being serviceable, and what is argued in the hall now is not how to pay it but what happens when the town stops.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} carries an outside debt comfortably: the payments go out on time, and the creditor has never had a reason to look closely at the town.",
+          "needs": [],
+          "excludes": [
+            "crisis: indebted"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "resource_scarcity",
+      "keyGuarantees": [
+        "a current tension of type resource_scarcity (a shortage, managed)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 says the shortness has not become a quarrel and the queue is respected, which unrest contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "What {settlement} needs and what {settlement} has do not meet, and the gap is managed by ration rather than closed.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "There is not enough of what {settlement} runs on, and the not-enough gets distributed by who asks first and who asks loudest.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "{settlement} is careful with something a town this size should have in plenty, and the care is visible before anyone explains it.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "{settlement} has begun taking from tomorrow to cover today, and the arithmetic of that has an end in it that nobody is discussing.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} is short and orderly about being short: the queue is respected, the ration is honoured, and the shortness has not become a quarrel.",
+          "needs": [],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "succession_crisis",
+      "keyGuarantees": [
+        "a current tension of type succession_crisis (who follows is unsettled)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Scoped: vid:5 says the seat is held firmly and the question is theoretical, which the succession family (succession_void, politically_fractured) contradicts.",
+      "lines": [
+        {
+          "lineId": "vid:1",
+          "text": "Who follows at {settlement} is not written anywhere the clerks can point to, and the clerks have begun to mind.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        },
+        {
+          "lineId": "vid:2",
+          "text": "{settlement} has more than one candidate and no procedure, and the town has quietly sorted itself along the line between them.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:3",
+          "text": "Ask in {settlement} who will hold the seat next and the room reorganises itself before anyone answers.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "major"
+          ]
+        },
+        {
+          "lineId": "vid:4",
+          "text": "The succession at {settlement} has stopped being a question and become a contest; {faction} and {faction2} are both acting as though waiting is the losing move.",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "colour": true,
+          "stop": [],
+          "kernelMarks": [
+            "catastrophic"
+          ]
+        },
+        {
+          "lineId": "vid:5",
+          "text": "{settlement} has no settled succession and has not needed one. The seat is held firmly enough that the question stays theoretical.",
+          "needs": [],
+          "excludes": [
+            "crisis: succession"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [],
+          "kernelMarks": [
+            "minor"
+          ]
+        }
+      ]
+    }
+  ]
+}

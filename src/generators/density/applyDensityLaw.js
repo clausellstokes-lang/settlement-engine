@@ -52,7 +52,7 @@
 
 import { matchFactionArchetype } from '../factionRoles.js';
 import { seatKey } from '../../domain/density/seatKey.js';
-import { FACTION_DESCRIPTORS } from '../../data/powerData.js';
+import { FACTION_DESCRIPTORS, FACTION_NAME_SIBLINGS } from '../../data/powerData.js'; import { noteDeclared } from '../../domain/facts/drawDeclared.js'; // CENSUS-1f: one line
 import {
   DOUBLED_NICHE_SHARE, FLOOR_LIFT_CHANCE, bandsForTier, tierKey,
 } from '../../domain/density/densityBands.js';
@@ -278,6 +278,7 @@ function resizeSeats(powerStructure, plan, rng) {
       .filter(n => !taken.has(String(n).toLowerCase()));
     if (!pool.length) continue;
     const name = pool[Math.floor(rng.random() * pool.length)] || pool[0];
+    noteDeclared(name, FACTION_NAME_SIBLINGS, { poolId: `powerData:FACTION_DESCRIPTORS.${String(host.category || 'other')}`, surface: 'power', drawKind: 'R' }); // CENSUS-1f: declared, carried, never pre-filtered (the self-check judges it)
     taken.add(String(name).toLowerCase());
     minted.push({
       ...host,

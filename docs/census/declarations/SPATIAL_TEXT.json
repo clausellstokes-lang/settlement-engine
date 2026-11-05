@@ -1,0 +1,1801 @@
+{
+  "poolId": "SPATIAL_TEXT",
+  "source": "src/generators/spatialGenerator.js :61-356 quarters desc/landmarks, thorpLayouts, LAYOUT_BY_TIER, TRADE_ACCESS_BY_ROUTE",
+  "drawKind": "T",
+  "drawSite": "src/generators/spatialGenerator.js:19 generateSpatialLayout (quarters :61-224 gated by roster keywords; layout :354 LAYOUT_BY_TIER[tier] by terrainType; tradeAccess :356)",
+  "note": "Quarter \"location\" strings are not drawn prose and are not listed; Market/Religious/Artisan/Government/Mages landmarks are roster names, not authored text.",
+  "pools": [
+    {
+      "pool": "quarters: Market Quarter",
+      "keyGuarantees": [
+        "roster holds a name containing \"Market\" (:64); landmarks are roster names (not authored text)"
+      ],
+      "poolNeeds": [
+        "market"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: \"bustling … crowds\" asserts ordinary trade; a siege, occupation, raid pressure or an outbreak contradicts it. Under those (~8% of births with a market) the pool is empty; not most, so no twin.",
+      "lines": [
+        {
+          "lineId": "quarters.Market Quarter.desc",
+          "text": "Bustling center with merchant stalls, money changers, and crowds",
+          "needs": [],
+          "excludes": [
+            "crisis: threat",
+            "crisis: plague_onset"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Religious Quarter",
+      "keyGuarantees": [
+        "roster holds church / Cathedral / monastery (:76); landmarks are roster names",
+        "church|cathedral → institution: temple; monastery → institution: monastery (one or the other)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": true,
+      "colour": false,
+      "ruling": "Opted in: \"quiet streets\" asserts calm in the street; an insurgency, revolt or wartime levy contradicts it. Key guarantees institution: temple only for church/cathedral; a monastery-only roster matches institution: monastery instead.",
+      "lines": [
+        {
+          "lineId": "quarters.Religious Quarter.desc",
+          "text": "Houses of worship, cloisters, quiet streets with priests and pilgrims",
+          "needs": [],
+          "excludes": [
+            "crisis: unrest"
+          ],
+          "crisis": "any",
+          "colour": false,
+          "stop": [
+            "priest / faith presence"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Roadside Shrine",
+      "keyGuarantees": [
+        "no church/cathedral/monastery; roster holds a shrine (:92)"
+      ],
+      "poolNeeds": [
+        "institution: temple"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Roadside Shrine.desc",
+          "text": "A simple marker or cairn where travellers leave offerings",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Noxious Trades Quarter",
+      "keyGuarantees": [
+        "roster holds Tanner / Butcher / Slaughter (:102)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Noxious Trades Quarter.desc",
+          "text": "Smelly, dirty area with tanneries, butchers, and dyers",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Noxious Trades Quarter.landmarks[0]",
+          "text": "Tannery Row",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Noxious Trades Quarter.landmarks[1]",
+          "text": "Slaughterhouse",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Noxious Trades Quarter.landmarks[2]",
+          "text": "Dyer's Bridge",
+          "needs": [
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [],
+          "note": "a bridge presumes running water; unsure"
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Waterfront District (maritime)",
+      "keyGuarantees": [
+        "a dock-specific roster name AND tradeRoute ∈ port, river AND worldLaw.supportsMaritime() (:118-121)"
+      ],
+      "poolNeeds": [
+        "institution: docks",
+        "coast"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Waterfront District (maritime).desc",
+          "text": "Warehouses, docks, sailors, longshoremen, salt, and fish",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "food sources"
+          ]
+        },
+        {
+          "lineId": "quarters.Waterfront District (maritime).landmarks[0]",
+          "text": "Main Wharf",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Waterfront District (maritime).landmarks[1]",
+          "text": "Warehouse Row",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Waterfront District (maritime).landmarks[2]",
+          "text": "Sailors' Quarter",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Waterfront District (river)",
+      "keyGuarantees": [
+        "a dock-specific roster name AND tradeRoute ∈ port, river AND NOT supportsMaritime (:118-121)"
+      ],
+      "poolNeeds": [
+        "institution: docks",
+        "river"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Waterfront District (river).desc",
+          "text": "Warehouses, wharves, barges, dockworkers, and river traffic",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Waterfront District (river).landmarks[0]",
+          "text": "Barge Wharf",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Waterfront District (river).landmarks[1]",
+          "text": "Warehouse Row",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Waterfront District (river).landmarks[2]",
+          "text": "River Landing",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Alehouse & Common",
+      "keyGuarantees": [
+        "tier hamlet AND roster holds Alehouse / Wayside inn (:134)"
+      ],
+      "poolNeeds": [
+        "institution: tavern",
+        "population: < middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Alehouse & Common.desc",
+          "text": "The alehouse and a scrap of common ground: the social heart of the settlement",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Alehouse & Common.landmarks[0]",
+          "text": "Common well",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Alehouse & Common.landmarks[1]",
+          "text": "Alehouse",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Alehouse & Common.landmarks[2]",
+          "text": "Notice post",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Fishing Landing",
+      "keyGuarantees": [
+        "roster holds \"Fishing community\" / \"fishing\" (:144)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Fishing Landing.desc",
+          "text": "Nets, drying racks, upturned boats, and the perpetual smell of salt and fish",
+          "needs": [
+            "coast"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "food sources"
+          ],
+          "note": "\"salt\" presumes sea water; a river or lake fishing community would not smell of it (unsure)"
+        },
+        {
+          "lineId": "quarters.Fishing Landing.landmarks[0]",
+          "text": "Drying racks",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Fishing Landing.landmarks[1]",
+          "text": "Net mending post",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Fishing Landing.landmarks[2]",
+          "text": "Beaching ground",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Woodcutters' Ground",
+      "keyGuarantees": [
+        "roster holds Woodcutter (:154)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Woodcutters' Ground.desc",
+          "text": "Stacked timber, sawdust paths, and sheds for tools and sleds",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Woodcutters' Ground.landmarks[0]",
+          "text": "Timber stacks",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Woodcutters' Ground.landmarks[1]",
+          "text": "Tool shed",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Woodcutters' Ground.landmarks[2]",
+          "text": "Charcoal pit",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Artisan Quarter",
+      "keyGuarantees": [
+        "roster holds craft, or guild without Merchant (:164); landmarks are roster names"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Artisan Quarter.desc",
+          "text": "Workshops, guild halls, apprentices learning trades",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Government Quarter",
+      "keyGuarantees": [
+        "roster holds Palace / City hall / Courthouse (:176); landmarks are roster names"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Government Quarter.desc",
+          "text": "Official buildings, courts, administrative offices",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Mages' Quarter",
+      "keyGuarantees": [
+        "roster holds Wizard / Mage / Magic (:188); landmarks are roster names"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Mages' Quarter.desc",
+          "text": "Towers, arcane shops, strange lights and sounds at night",
+          "needs": [
+            "magic"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Shadows District",
+      "keyGuarantees": [
+        "roster holds Thieves / criminal / Black market (:201)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Shadows District.desc",
+          "text": "Narrow alleys, hidden markets, criminal activity",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crime structure"
+          ]
+        },
+        {
+          "lineId": "quarters.Shadows District.landmarks[0]",
+          "text": "The Rat's Nest (tavern)",
+          "needs": [
+            "institution: tavern"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Shadows District.landmarks[1]",
+          "text": "Blind Alley",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Shadows District.landmarks[2]",
+          "text": "The Warren (slums)",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Wealthy Residential",
+      "keyGuarantees": [
+        "tier ∈ city, metropolis (:211)"
+      ],
+      "poolNeeds": [
+        "population: > middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Wealthy Residential.desc",
+          "text": "Stone townhouses, private gardens, clean streets",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "prosperity"
+          ]
+        },
+        {
+          "lineId": "quarters.Wealthy Residential.landmarks[0]",
+          "text": "Noble's Row",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "ruler: lord (nobility not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "quarters.Wealthy Residential.landmarks[1]",
+          "text": "Merchant Estates",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Wealthy Residential.landmarks[2]",
+          "text": "Garden District",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "quarters: Common Residential",
+      "keyGuarantees": [
+        "tier ∈ city, metropolis (:211)"
+      ],
+      "poolNeeds": [
+        "population: > middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "A fixed description gated on its institution; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "quarters.Common Residential.desc",
+          "text": "Dense timber tenements, narrow streets, crowded",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Common Residential.landmarks[0]",
+          "text": "Tanners' Lane",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Common Residential.landmarks[1]",
+          "text": "Weavers' Street",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "quarters.Common Residential.landmarks[2]",
+          "text": "Cooper's Close",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.thorp",
+      "keyGuarantees": [
+        "tier thorp (thorpLayouts :228)"
+      ],
+      "poolNeeds": [
+        "population: < middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "thorpLayouts.coastal",
+          "text": "A handful of cottages above the tideline, nets drying on poles",
+          "needs": [
+            "terrain: coastal",
+            "coast"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.riverside",
+          "text": "Dwellings strung along the bank, a small jetty at the ford",
+          "needs": [
+            "terrain: riverside",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.forest",
+          "text": "Woodcutters' clearings ringed by dense tree cover",
+          "needs": [
+            "terrain: forest"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.plains",
+          "text": "An open cluster of farmsteads around a shared well",
+          "needs": [
+            "terrain: plains"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.hills",
+          "text": "Stone-walled holdings climbing a south-facing hillside",
+          "needs": [
+            "terrain: hills"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": [],
+          "note": "field walls, not a perimeter (ruling 3): no walls atom"
+        },
+        {
+          "lineId": "thorpLayouts.desert",
+          "text": "Mud-brick homes clustered around a single shaded well",
+          "needs": [
+            "terrain: desert"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.mountain",
+          "text": "Sheltered below a ridge, paths carved through the rock",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "thorpLayouts.fallback",
+          "text": "Small cluster of homes near water source",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.metropolis",
+      "keyGuarantees": [
+        "tier metropolis (metroLayouts :239)"
+      ],
+      "poolNeeds": [
+        "population: > middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.coastal",
+          "text": "Imperial port city: fortified harbour, merchant districts, grand boulevard from waterfront to palace",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crown / realm"
+          ]
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.riverside",
+          "text": "River delta metropolis: island districts, bridge-markets, the great river-gate controlling all upstream trade",
+          "needs": [
+            "terrain: riverside",
+            "river",
+            "gate",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.plains",
+          "text": "Sprawling imperial capital: walled inner city, vast suburban rings, the palace district above the outer walls",
+          "needs": [
+            "terrain: plains",
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "crown / realm"
+          ]
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.forest",
+          "text": "Metropolis carved from the forest heart: the old city is stone, the outer rings are timber and smoke",
+          "needs": [
+            "terrain: forest"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.hills",
+          "text": "Hill metropolis on seven rises: each commanding a district, each district a city unto itself",
+          "needs": [
+            "terrain: hills"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.desert",
+          "text": "Great desert metropolis of white stone: the citadel above the wells, the souk below, caravansaries ringing the walls",
+          "needs": [
+            "terrain: desert",
+            "walls",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.mountain",
+          "text": "Mountain capital in a high valley: tiered city climbing from the river floor to the fortress crown",
+          "needs": [
+            "terrain: mountain",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.metropolis.fallback",
+          "text": "Dense urban core with sprawling suburbs",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.city",
+      "keyGuarantees": [
+        "tier city (cityLayouts :251); ${sacred} = the roster's church/temple, else \"the high ground\""
+      ],
+      "poolNeeds": [
+        "population: > middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "LAYOUT_BY_TIER.city.coastal",
+          "text": "Walled port city rising from the harbour, suburbs sprawling along the coast road",
+          "needs": [
+            "terrain: coastal",
+            "walls",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.riverside",
+          "text": "Great river city: bridge quarter, merchant districts, ${sacred} hill above the flood line",
+          "needs": [
+            "terrain: riverside",
+            "river",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.plains",
+          "text": "Walled city with sprawling suburbs beyond the gates, outlying wards growing faster than the walls",
+          "needs": [
+            "terrain: plains",
+            "walls",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.forest",
+          "text": "Walled city carved from the forest, timber yards and charcoal depots in the outer rings",
+          "needs": [
+            "terrain: forest",
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.hills",
+          "text": "Hill city: castle district commanding the heights, market quarter below, poor wards at the base",
+          "needs": [
+            "terrain: hills",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "castle (ruler: lord not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.desert",
+          "text": "Walled desert city of pale stone, caravanserai outside the east gate, citadel above the wells",
+          "needs": [
+            "terrain: desert",
+            "walls",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.mountain",
+          "text": "Mountain city of terraced districts, the citadel at the summit, lower town in the valley",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "LAYOUT_BY_TIER.city.fallback",
+          "text": "Walled core with some suburban growth",
+          "needs": [
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "City spreading out from its old core, suburbs along every road",
+          "needs": [],
+          "excludes": [
+            "walls"
+          ],
+          "crisis": null,
+          "why": "Five of the eight city cells name walls and the city branch has no unwalled arm (the town branch has one, :265); a city with no perimeter on record draws a false line in those cells. Share unmeasured."
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.town (unwalled)",
+      "keyGuarantees": [
+        "tier town AND NOT defence.hasWalls (openTownLayouts :266)",
+        "tier town → populationBand middling (when population agrees with the stamp)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [
+        "walls"
+      ],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "openTownLayouts.coastal",
+          "text": "Port town climbing from the harbour, warehouses and chandlers at the waterfront",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.riverside",
+          "text": "Town straddling the river, a bridge at its commercial heart",
+          "needs": [
+            "terrain: riverside",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.plains",
+          "text": "Compact core, outlying farms and a weekly market field at the edge of town",
+          "needs": [
+            "terrain: plains",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.forest",
+          "text": "Close-built market town, timber yards and sawpits on the north road",
+          "needs": [
+            "terrain: forest",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.hills",
+          "text": "Hill town of stone houses climbing above the market quarter",
+          "needs": [
+            "terrain: hills",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.desert",
+          "text": "Trading town around a great well, caravanserai on the south road",
+          "needs": [
+            "terrain: desert"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "openTownLayouts.mountain",
+          "text": "Pass town strung along the valley floor",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "openTownLayouts.fallback",
+          "text": "Compact core, some outlying farms",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.town (walled)",
+      "keyGuarantees": [
+        "tier town AND defence.hasWalls (townLayouts :277)"
+      ],
+      "poolNeeds": [
+        "walls"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "townLayouts.coastal",
+          "text": "Walled port town climbing from the harbour, warehouses and chandlers at the waterfront",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.riverside",
+          "text": "Walled town straddling the river, a fortified bridge at its commercial heart",
+          "needs": [
+            "terrain: riverside",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.plains",
+          "text": "Compact within walls, outlying farms and a weekly market field beyond the gates",
+          "needs": [
+            "terrain: plains",
+            "gate",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.forest",
+          "text": "Tightly walled market town, timber yards and sawpits outside the north gate",
+          "needs": [
+            "terrain: forest",
+            "gate",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.hills",
+          "text": "Stone-walled hill town, the keep visible above the market quarter",
+          "needs": [
+            "terrain: hills",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "keep (ruler: lord not guaranteed)"
+          ]
+        },
+        {
+          "lineId": "townLayouts.desert",
+          "text": "Walled trading town around a great well, caravanserai outside the south gate",
+          "needs": [
+            "terrain: desert",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "townLayouts.mountain.garrison",
+          "text": "Fortified pass town, walls cutting across the valley floor, garrison above",
+          "needs": [
+            "terrain: mountain",
+            "garrison"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.mountain",
+          "text": "Fortified pass town, walls cutting across the valley floor",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "townLayouts.fallback",
+          "text": "Compact within walls, some outlying farms",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.village",
+      "keyGuarantees": [
+        "tier village (villageLayouts :299); ${sacred}/${Sacred} = the roster's church/temple, or \"a wayside shrine\" when only a shrine stands"
+      ],
+      "poolNeeds": [
+        "population: < middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "villageLayouts.coastal.sacred",
+          "text": "${Sacred} and green above the tideline, a harbour lane leading down to the water",
+          "needs": [
+            "terrain: coastal",
+            "coast",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.coastal",
+          "text": "A green above the tideline, a harbour lane leading down to the water",
+          "needs": [
+            "terrain: coastal",
+            "coast"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.riverside",
+          "text": "Village green beside the mill, the river road running through the centre",
+          "needs": [
+            "terrain: riverside",
+            "river",
+            "institution: mill"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.forest.sacred",
+          "text": "A clearing settlement: ${sacred}, green, and dwellings ringed by managed woodland",
+          "needs": [
+            "terrain: forest",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.forest",
+          "text": "A clearing settlement: green and dwellings ringed by managed woodland",
+          "needs": [
+            "terrain: forest"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.plains.sacred",
+          "text": "Clustered around ${sacred} and green, fields radiating out in open strips",
+          "needs": [
+            "terrain: plains",
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.plains",
+          "text": "Clustered around the green, fields radiating out in open strips",
+          "needs": [
+            "terrain: plains"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.hills.walled",
+          "text": "Stone-walled village on a south-facing slope, paths converging at the market cross",
+          "needs": [
+            "terrain: hills",
+            "walls",
+            "market"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.hills",
+          "text": "Stone-built village on a south-facing slope, paths converging at the market cross",
+          "needs": [
+            "terrain: hills",
+            "market"
+          ],
+          "excludes": [
+            "walls"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.desert.walled",
+          "text": "Compact walled settlement around a central well${ and its sacred | and a wayside shrine | }",
+          "needs": [
+            "terrain: desert",
+            "walls"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.desert",
+          "text": "Compact settlement around a central well${ and its sacred | and a wayside shrine | }",
+          "needs": [
+            "terrain: desert"
+          ],
+          "excludes": [
+            "walls"
+          ],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.mountain.sacred",
+          "text": "Close-built stone houses below the ${sacred}, a single defended gate",
+          "needs": [
+            "terrain: mountain",
+            "institution: temple",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.mountain.shrine",
+          "text": "Close-built stone houses below a wayside shrine, a single defended gate",
+          "needs": [
+            "terrain: mountain",
+            "institution: temple",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.mountain",
+          "text": "Close-built stone houses below the ridge, a single defended gate",
+          "needs": [
+            "terrain: mountain",
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.fallback.sacred",
+          "text": "Clustered around ${sacred} and green",
+          "needs": [
+            "institution: temple"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "villageLayouts.fallback",
+          "text": "Clustered around the green",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ],
+      "twins": [
+        {
+          "text": "Close-built stone houses below the ridge, a single path climbing in",
+          "needs": [],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "why": "All three mountain-village cells name \"a single defended gate\"; a village gate needs stone walls or a roster gate, so most mountain villages have no drawable cell."
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER.hamlet",
+      "keyGuarantees": [
+        "tier hamlet (hamletLayouts :327)"
+      ],
+      "poolNeeds": [
+        "population: < middling"
+      ],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup by terrainType; the cell's terrain atom is on the line because the pool key is the tier. Asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "hamletLayouts.coastal",
+          "text": "A straggle of cottages above the tideline, paths worn to the landing",
+          "needs": [
+            "terrain: coastal",
+            "coast"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.riverside",
+          "text": "Farmsteads strung along the bank, a ford crossing at the centre",
+          "needs": [
+            "terrain: riverside",
+            "river"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.forest",
+          "text": "Clearings connected by beaten tracks through the wood",
+          "needs": [
+            "terrain: forest"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.plains",
+          "text": "Scattered farmsteads along a muddy track, a common at the centre",
+          "needs": [
+            "terrain: plains"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.hills",
+          "text": "Holdings spread across a hillside, paths converging at the well",
+          "needs": [
+            "terrain: hills"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.desert",
+          "text": "Compact mud-brick dwellings clustered around a shared water source",
+          "needs": [
+            "terrain: desert"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.mountain",
+          "text": "Stone holdings on sheltered ledges, a single switchback path between",
+          "needs": [
+            "terrain: mountain"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "hamletLayouts.fallback",
+          "text": "Scattered farmsteads along a path",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "LAYOUT_BY_TIER: unknown tier",
+      "keyGuarantees": [
+        "tier outside the table (:354)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Colour fallback.",
+      "lines": [
+        {
+          "lineId": "LAYOUT_BY_TIER.fallback",
+          "text": "Scattered rural settlement",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE.crossroads",
+      "keyGuarantees": [
+        "tradeRoute = crossroads (trade-route kind: no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup on the route; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TRADE_ACCESS_BY_ROUTE.crossroads",
+          "text": "Major crossroads (multiple gates)",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "Major crossroads (several roads meet here)",
+          "needs": [],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "why": "The one line names gates; a gate needs stone walls or a roster gate, which most crossroads places lack."
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE.river",
+      "keyGuarantees": [
+        "tradeRoute = river (trade-route kind: no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup on the route; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TRADE_ACCESS_BY_ROUTE.river",
+          "text": "River access (water gate and docks)",
+          "needs": [
+            "river",
+            "gate",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "River access (a landing on the bank)",
+          "needs": [
+            "river"
+          ],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "why": "The one line needs a gate and docks; most river-route places hold neither."
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE.port",
+      "keyGuarantees": [
+        "tradeRoute = port; branch worldLaw.supportsMaritime() (:342) (trade-route kind: no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup on the route; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "portAccess.maritime",
+          "text": "Coastal port (harbour and shipyards)",
+          "needs": [
+            "coast",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        },
+        {
+          "lineId": "portAccess.inland",
+          "text": "Inland river port (wharves and barge docks)",
+          "needs": [
+            "river",
+            "institution: docks"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE.road",
+      "keyGuarantees": [
+        "tradeRoute = road (trade-route kind: no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup on the route; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TRADE_ACCESS_BY_ROUTE.road",
+          "text": "Single main road (two gates)",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "Single main road",
+          "needs": [],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "why": "The one line names two gates; most road places have no gate on record."
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE.isolated",
+      "keyGuarantees": [
+        "tradeRoute = isolated (trade-route kind: no reader)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "T lookup on the route; asserts no calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TRADE_ACCESS_BY_ROUTE.isolated",
+          "text": "Isolated (one gate, poor road)",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "trade-route kind"
+          ]
+        }
+      ],
+      "twins": [
+        {
+          "text": "Isolated (a poor road in and out)",
+          "needs": [],
+          "excludes": [
+            "gate"
+          ],
+          "crisis": null,
+          "why": "The one line names a gate; an isolated thorp or hamlet almost never has one."
+        }
+      ]
+    },
+    {
+      "pool": "TRADE_ACCESS_BY_ROUTE: unknown route",
+      "keyGuarantees": [
+        "tradeRoute outside the table (:356)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": true,
+      "ruling": "Prints the raw route.",
+      "lines": [
+        {
+          "lineId": "TRADE_ACCESS_BY_ROUTE.fallback",
+          "text": "${tradeRoute}",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}

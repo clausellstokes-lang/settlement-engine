@@ -209,6 +209,24 @@ export function resolveSiblingSentences(text, siblings, options) {
   return /** @type {T} */ (/** @type {unknown} */ (text.split(/(?<=[.!?])(\s+)/).map((part) => resolveSibling(part, siblings, options)).join('')));
 }
 
+/**
+ * A DECLARED LINE KEPT AS DRAWN (CENSUS-1f unit 3): a site whose table declares but carries no twin
+ * and is never pre-filtered (a faction NAME drawn by position: CENSUS-5b's `FACTION_NAME_SIBLINGS`,
+ * "no twin: a twin name is an addition that moves the R stream", R-G) does not resolve — it keeps
+ * its line and NOTES it, with the original row's atoms, so the birth self-check
+ * (`cert:false-presumption`) re-asserts them against the final record. Needs no facts; moves no
+ * birth; a line that is no key is not noted.
+ * @param {unknown} line
+ * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings
+ * @param {Omit<DrawDeclaredOptions, 'draw'|'facts'|'twin'|'key'>} options
+ */
+export function noteDeclared(line, siblings, options) {
+  if (typeof line !== 'string' || !Object.prototype.hasOwnProperty.call(siblings, line)) return;
+  const set = siblings[line];
+  const original = set.find((l) => !isTwin(l) && lineText(l) === line) ?? set[0];
+  note({ ...options, drawKind: options.drawKind || 'R' }, original, set, atomsOf(declarationOf(original)), 'drawn');
+}
+
 /** @param {any} line @param {number} i */
 function lineIdOf(line, i) {
   if (line && typeof line === 'object' && (typeof line.id === 'string' || typeof line.id === 'number')) return line.id;

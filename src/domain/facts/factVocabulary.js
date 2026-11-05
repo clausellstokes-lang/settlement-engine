@@ -188,7 +188,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -249,6 +249,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
+  // R-AE (CENSUS-1f, 2026-11-05): ONE composite, defined once because more than one spatial line
+  // needs it — a sacred house of any kind the roster names (`factsOf.js :: sacredHouse`: temple ∨
+  // monastery); `temple` stays narrow. A line never composes atoms itself.
+  sacredHouse: dim({ shape: 'presence', home: 'sacredHouse', reader: (f) => bool(f.sacredHouse) }),
   institution: dim({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
     reader: (f, key) => (typeof f.hasInstitution === 'function' && key ? f.hasInstitution(key) : undefined) }),
   // ── presence: the rest of §1 / §3.2, homed or not ──
@@ -264,13 +268,13 @@ export const FACT_DIMENSIONS = Object.freeze({
   priest: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined) }),
   // CENSUS-3b unit 1 (ruling R-E): the delegated getters. Organised crime = a structure at
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
-  'organised crime': Object.freeze({ shape: 'presence', home: 'crime',
+  'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
-  ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, Object.freeze({ shape: 'presence', home: 'foodSources',
+  ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
-  imports: Object.freeze({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
-  exports: Object.freeze({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
-  culture: Object.freeze({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
+  imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
+  culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.culture === undefined ? undefined : f.culture === key) }),
   // ── keyed presence: one value of a categorical fact ──
   ruler: dim({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
@@ -289,8 +293,8 @@ export const FACT_DIMENSIONS = Object.freeze({
   'magic level': dim({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
   food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
   stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
-  prosperity: Object.freeze({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
-  crime: Object.freeze({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
+  prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
+  crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
   // ── the crisis dimension (the inverse default) ──
   crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
 });

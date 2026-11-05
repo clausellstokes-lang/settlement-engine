@@ -99,9 +99,11 @@ const CLAIMS = Object.freeze([
   { claim: 'competent administration', re: /\b[Dd]o every task the seat hands them so well that the seat cannot do without them\b/, family: 'unrest' },
   { claim: 'stable institutional competition', re: /\b[Kk]eep the family's name honoured at every feast while the new offices take its old work\b/, family: 'succession' },
   { claim: 'stable institutional competition', re: /\b[Kk]eep the family's name honoured at every feast while the new offices take its old work\b/, family: 'unrest' },
-  // The food band's own word, under a siege or a famine, and under an influx it cannot feed.
+  // The food band's own word, under a siege or a famine (and any crisis on a deficit band). The
+  // `migration` row is RETIRED (CENSUS-2c, the chair's R-P 1): the food record counts an influx
+  // (×1.15 consumption, CENSUS-1c unit 7), so "Food Secure" under a fed influx is TRUE; an influx
+  // the place cannot feed reads the deficit, which the hunger row already catches.
   { claim: 'food secure', re: /^Food Secure\b/, family: 'hunger' },
-  { claim: 'food secure', re: /^Food Secure\b/, family: 'migration' },
   // An economy line that says nothing is failing, or that no one export matters, under hunger.
   { claim: 'nothing is failing', re: /^Nothing about that is failing\b/, family: 'hunger' },
   { claim: 'depends on none alone', re: /\bsells several things outward and depends on none of them alone\b/, family: 'hunger' },
