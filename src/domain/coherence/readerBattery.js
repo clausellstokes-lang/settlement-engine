@@ -31,24 +31,44 @@ import { collect, str } from './recordBattery.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
 
+/**
+ * The record fields the reader battery consults (everything else is read off the rendered text).
+ * Every leaf is `unknown`: the readers coerce with `str` / `Number` or guard with `Array.isArray`.
+ * @typedef {{
+ *   config?: { terrainType?: unknown, terrainOverride?: unknown, tradeRouteAccess?: unknown } | null,
+ *   terrain?: unknown,
+ *   tradeRouteAccess?: unknown,
+ *   resourceAnalysis?: { terrain?: unknown } | null,
+ *   tier?: unknown,
+ *   institutions?: ReadonlyArray<unknown> | null,
+ *   npcs?: unknown,
+ *   economicState?: { primaryExports?: unknown } | null,
+ *   powerStructure?: { governingName?: unknown, factions?: unknown } | null,
+ *   history?: { currentTensions?: unknown, historicalEvents?: unknown } | null,
+ * } | null | undefined} ReaderRecord
+ */
+/** @typedef {{ name?: unknown, role?: unknown, factionAffiliation?: unknown }} ReaderNpc */
+/** @typedef {{ faction?: unknown, name?: unknown, isGoverning?: unknown, contestsNiche?: unknown }} ReaderFaction */
+/** @typedef {{ templateType?: unknown, description?: unknown, yearsAgo?: unknown, name?: unknown }} ReaderEvent */
+
 // ───────────────────────────── shared readers ─────────────────────────────
 
 /** @param {string} text @returns {string[]} */
 const linesOf = (text) => str(text).split('\n').map((x) => x.trim()).filter(Boolean);
 
-/** @param {any} s @returns {string} the terrain the Resources tab names */
+/** @param {ReaderRecord} s @returns {string} the terrain the Resources tab names */
 export function terrainOf(s) {
   return str(s?.config?.terrainType ?? s?.config?.terrainOverride ?? s?.terrain ?? s?.resourceAnalysis?.terrain);
 }
 
-/** @param {any} s @returns {string} */
+/** @param {ReaderRecord} s @returns {string} */
 export function routeOf(s) {
   return str(s?.config?.tradeRouteAccess ?? s?.tradeRouteAccess);
 }
 
 /** Navigable water by terrain or route (the soak's own `hasWater` reading, checks.mjs). */
 const WATER_TERRAIN_WIDE = /coast|river|lake|marsh|swamp|island|delta|fjord|wetland|sea/i;
-/** @param {any} s */
+/** @param {ReaderRecord} s */
 export const hasNavigableWater = (s) => WATER_TERRAIN_WIDE.test(terrainOf(s)) || routeOf(s) === 'port' || routeOf(s) === 'river';
 
 // ───────────────────────── 1. validation-on-page ─────────────────────────
@@ -64,7 +84,7 @@ const LACKS_ACCESS = /\bexists but lacks access to\b/;
  * Sub-cases: `[structural]` (requires / not compatible), `[requires-on-water]` (a "requires
  * <water> access" where the terrain IS that water), `[gaps]` (the lacks-access lines A-05
  * counts), `[viability-count]`.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function validationOnPageFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -97,7 +117,7 @@ export function validationOnPageFindings(s, surfaces) {
 
 // ──────────────────────────── 2. scale-lists ────────────────────────────
 
-/** @param {any} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
+/** @param {ReaderRecord} s @returns {string[]} the Institutions tab's rows, by their catalogue name */
 const houseNames = (s) => (Array.isArray(s?.institutions) ? s.institutions : []).map((/** @type {unknown} */ i) => nativeSemanticName(i)).filter(Boolean);
 
 // The chair's list, with Q2 (2026-11-04): quality textiles, fine cloth and dyed cloth are luxury-class too.
@@ -136,7 +156,7 @@ export const STRENGTH_HOUSES = Object.freeze({
  * (b) an Economic strength naming a resource trade with no house behind it (`[~strength-no-house]`):
  * informational, a COLUMN only (the chair's ruling Q3: the list is the terrain's fixed potential,
  * which R2 relabels "what the land offers"), never folded into (a)'s line.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function scaleListsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -166,7 +186,7 @@ export function scaleListsFindings(s, surfaces) {
  *    `primaryExports` entry; check 2c);
  *  - `dailyLifeLine`: 1 where the Daily Life tab carries the placeholder line at all (check 10,
  *    the chair's ruling 2026-11-04), else 0.
- * @param {any} s @param {Readonly<Record<string,string>>|null} [surfaces]
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>|null} [surfaces]
  * @returns {{ exports: number, dailyLifeLine: number }}
  */
 export function readerDistributions(s, surfaces = null) {
@@ -260,12 +280,12 @@ const classesShare = (/** @type {string} */ ca, /** @type {string} */ cb) => ca 
 /**
  * The factions that hold or contest the seat, which count as ONE office (the chair's ruling Q1):
  * the governing faction and every faction whose `contestsNiche` names it.
- * @param {any} s @returns {Set<string>}
+ * @param {ReaderRecord} s @returns {Set<string>}
  */
 function seatFactions(s) {
   const ps = s?.powerStructure ?? {};
   const factions = Array.isArray(ps.factions) ? ps.factions : [];
-  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {any} */ f) => f?.isGoverning).map((/** @type {any} */ f) => str(f.faction ?? f.name))].filter(Boolean));
+  const governing = new Set([str(ps.governingName), ...factions.filter((/** @type {ReaderFaction} */ f) => f?.isGoverning).map((/** @type {ReaderFaction} */ f) => str(f.faction ?? f.name))].filter(Boolean));
   for (const f of factions) if (governing.has(str(f?.contestsNiche))) governing.add(str(f.faction ?? f.name));
   return governing;
 }
@@ -283,7 +303,7 @@ function seatFactions(s) {
  * one class … same trade, shared market. It FIRES only across unrelated classes" and "the faction
  * and seat exemptions apply to Professional Rivalry too". Jurisdictional Tension stays (two
  * offices). Read here: merchant with trade is a shared market; `other` roles stay unjudged.
- * @param {string} kind @param {{ role: string, npc: any }} a @param {{ role: string, npc: any }} b @param {Set<string>} seat
+ * @param {string} kind @param {{ role: string, npc: ReaderNpc | undefined }} a @param {{ role: string, npc: ReaderNpc | undefined }} b @param {Set<string>} seat
  * @returns {{ fires: boolean|null, why: string }} null = not judged
  */
 export function exemptedVerdict(kind, a, b, seat) {
@@ -312,13 +332,14 @@ export function exemptedVerdict(kind, a, b, seat) {
  * - `[~strict]`, a column only, is the first reading (`shareTradeOrOffice`; Jurisdictional
  *   Tension where NEITHER role holds an office). A row strict alone flags is a column-only
  *   finding, and its detail says which exemption spared it.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function relationTypesFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.relationships);
-  const people = new Map((Array.isArray(s?.npcs) ? s.npcs : []).map((/** @type {any} */ n) => [str(n?.name), n]));
+  /** @type {Map<string, ReaderNpc>} */
+  const people = new Map((Array.isArray(s?.npcs) ? s.npcs : []).map((/** @type {ReaderNpc} */ n) => [str(n?.name), n]));
   const seat = seatFactions(s);
   for (let i = 0; i + 1 < lines.length; i += 1) {
     const kind = PRESUMING_KINDS.find((k) => lines[i].includes(` ${k} `));
@@ -352,7 +373,7 @@ const LIVING = /\b(?:former\b|those who (?:suffered|remember|lost|fought|survive
  * sits in the Ancient or Deep-history band ON THE PAGE, worded with living participants
  * ("Former collaborators", "Those who suffered under the regime"). A tension with no source
  * event is not judged.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tensionMemoryFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -363,7 +384,7 @@ export function tensionMemoryFindings(s, surfaces) {
   for (const t of tensions) {
     const desc = str(t?.description);
     if (!desc || !page.includes(desc)) continue;
-    const source = events.find((/** @type {any} */ e) => e?.templateType === t?.type);
+    const source = events.find((/** @type {ReaderEvent} */ e) => e?.templateType === t?.type);
     if (!source) continue;
     const band = page.match(new RegExp(`${escapeRe(str(source.description))}\\n${Number(source.yearsAgo)}y ago\\n([^\\n]+)`));
     if (!band || !OLD_BANDS.test(band[1].trim())) continue;
@@ -387,14 +408,14 @@ const SEA_HOOK_WORDS = /\b(?:harbou?rs?|ships?|shipbuilding|shipwrights?|shipyar
  * speaks of ships and docks in a place with no navigable water (`[sea]`). The chair's brief names
  * the tension, outlook and history sections; the tab's NPC section carries the same pools
  * ("talking to the guard"), so the whole tab is read.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function hookPoolsFindings(s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
   const out = [];
   const lines = linesOf(surfaces.plot_hooks);
   const enforcement = houseNames(s).some((h) => ENFORCEMENT_HOUSE.test(h))
-    || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {any} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
+    || (Array.isArray(s?.npcs) ? s.npcs : []).some((/** @type {ReaderNpc} */ n) => ENFORCEMENT_ROLE.test(str(n?.role)));
   if (!enforcement) {
     const hit = lines.find((x) => GUARD_WORDS.test(x));
     if (hit) out.push({ surface: 'plot_hooks', quote: hit, detail: `[guard] "${str(hit.match(GUARD_WORDS)?.[0])}" with no enforcement body` });
@@ -417,7 +438,7 @@ const NO_WATER_ROUTE = /^(?!port$|river$)/;
  * A Traditions-tab tradition keyed on Tide, Landfall, Landing, Sea, Harbour or Fleet in a place
  * without water access: route road / overland / isolated / none and terrain not coastal,
  * riverside or lake.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function traditionsWaterFindings(s, surfaces) {
   if (!NO_WATER_ROUTE.test(routeOf(s)) || WATER_TERRAIN.test(terrainOf(s))) return [];
@@ -430,7 +451,7 @@ export function traditionsWaterFindings(s, surfaces) {
 /**
  * On the Tonight sheet, "Wants to" followed by a capitalised word — a sentence, not a want
  * ("Wants to Was approached…", "Wants to The supplies…"). A want's verb is lower-case.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tonightWantsFindings(_s, surfaces) {
   const hits = linesOf(surfaces.tonight).filter((x) => /\bWants to [A-Z]/.test(x));
@@ -445,7 +466,7 @@ const RULE_TEXT = /viable above [0-9,]+ souls|population of [0-9,]+ or more|[0-9
  * A catalogue threshold note on a DM surface ("viable above 2,000 souls", "a population of
  * 5,000 or more", "2,000-5,000 population for chapter", "cities only", "if technology exists",
  * "where the magic allows them"). One finding per surface.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function ruleTextFindings(_s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -463,7 +484,7 @@ const DOUBLED_POSSESSIVE = /\b[A-Za-z][\w-]*['’]s['’](?![a-z])/;
 
 /**
  * A title with a doubled possessive ("Guildmaster of Tailor's'"). One finding per surface.
- * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function possessiveSlipFindings(_s, surfaces) {
   /** @type {Array<{surface:string,quote:string,detail:string}>} */
@@ -487,7 +508,7 @@ const WATCH_HOUSE = /watch|guard|garrison/i;
  * `viability.js :: hasMarketInstitution`; a Periodic market is a market, the chair's ruling on
  * soak1k-313), `[no-watch]` (no watch, guard or garrison house), or both. How many pages carry
  * the line at all is a distribution (`readerDistributions :: dailyLifeLine`), not a finding.
- * @param {any} s @param {Readonly<Record<string,string>>} surfaces
+ * @param {ReaderRecord} s @param {Readonly<Record<string,string>>} surfaces
  */
 export function dailyLifePlaceholderFindings(s, surfaces) {
   const hit = linesOf(surfaces.daily_life).find((x) => x.includes(PLACEHOLDER));

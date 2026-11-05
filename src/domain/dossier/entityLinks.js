@@ -189,11 +189,11 @@ function firstText(...values) {
       continue;
     }
     if (typeof value === 'object') {
-      const hit = /** @type {Record<string, any>} */ (value).short
-        || /** @type {Record<string, any>} */ (value).description
-        || /** @type {Record<string, any>} */ (value).long
-        || /** @type {Record<string, any>} */ (value).text
-        || /** @type {Record<string, any>} */ (value).name;
+      const hit = /** @type {Record<string, unknown>} */ (value).short
+        || /** @type {Record<string, unknown>} */ (value).description
+        || /** @type {Record<string, unknown>} */ (value).long
+        || /** @type {Record<string, unknown>} */ (value).text
+        || /** @type {Record<string, unknown>} */ (value).name;
       if (typeof hit === 'string' && hit.trim()) return hit;
     }
   }
@@ -534,7 +534,7 @@ export function buildDossierEntityIndex(settlement = {}) {
   // record and is not indexed twice. Derived per render; nothing persisted.
   /** @type {Record<string, any>[]} */
   const crises = [];
-  const stressRaw = /** @type {any} */ (settlement).stress;
+  const stressRaw = /** @type {{ stress?: unknown }} */ (settlement).stress;
   for (const entry of Array.isArray(stressRaw) ? stressRaw : (stressRaw && typeof stressRaw === 'object' ? [stressRaw] : [])) {
     const crisisType = entry && typeof entry === 'object' ? String(entry.type || entry.label || '') : '';
     if (!crisisType) continue;

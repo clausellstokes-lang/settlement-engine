@@ -41,8 +41,19 @@ import { SCORE_BAND_CUTS } from './defenseScoreBands.js';
 export const FAMINE_DISASTER_CEILING = SCORE_BAND_CUTS.adequate - 1;
 
 /**
+ * The fields the famine and disaster-readiness readers consult.
+ * @typedef {{
+ *   defenseProfile?: { scores?: { disaster?: number, economic?: number } | null } | null,
+ *   economicState?: {
+ *     foodSecurity?: { foodRecord?: { band?: unknown } | null, resilienceScore?: number } | null,
+ *     compound?: { inst?: { hasGranary?: unknown, hasHospital?: unknown, hasChurch?: unknown } | null } | null,
+ *   } | null,
+ * } | null | undefined} FamineReadinessRecord
+ */
+
+/**
  * Is the place in an active famine, by the one food record? Read, never re-derived.
- * @param {any} r
+ * @param {FamineReadinessRecord} r
  * @returns {boolean}
  */
 export function inActiveFamine(r) {
@@ -53,7 +64,7 @@ export function inActiveFamine(r) {
  * The Disasters & Famine row's ONE readiness score — the stored disaster score (re-judged by
  * the world pulse as the campaign advances), else the food model's resilience score, else the
  * legacy blend — held to the top of Weak under an active famine.
- * @param {any} r
+ * @param {FamineReadinessRecord} r
  * @returns {number}
  */
 export function disasterReadinessScore(r) {
