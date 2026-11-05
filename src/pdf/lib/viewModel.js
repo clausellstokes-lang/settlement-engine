@@ -614,9 +614,10 @@ function viabilitySlice(active) {
         title: iss?.title,
         description: viabilityIssueText(iss, s),
         institution: iss?.institution,
-        priorityNote: iss?.priorityNote,
+        priorityNote: iss?.priorityNote,  // a repeated note is dropped below (X-50)
         suggestedFixes: iss?.suggestedFixes || [],
-      })),
+      }))
+      .map((iss, i, all) => (iss.priorityNote && all.findIndex(o => o.priorityNote === iss.priorityNote) < i ? { ...iss, priorityNote: undefined } : iss)),
     // ONE COUNT, ONE HOME (READER-R1 ruling 2): the list the summary sentence counts.
     criticalIssues:        criticalIssuesOf(v).map(i => ({ ...i, description: viabilityIssueText(i, s) })),
     // pdf-6 (golden): warnings honour the Viability filter — dependency/food/

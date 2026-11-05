@@ -105,6 +105,10 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
   // ONE COUNT, ONE HOME: the record's critical issues, the list `metrics.criticalIssueCount` and
   // the summary sentence count (a critical stress consequence included).
   const criticalIssues = [...criticalIssuesOf(v)].sort((a,b)=>(a.title||'').localeCompare(b.title||''));
+  // Two critical stress rows can share one priority note (a famine beside a migration); the
+  // note prints once, under the first (X-50: boilerplate once).
+  const firstNoteAt = new Map();
+  criticalIssues.forEach((issue, i) => { if (issue.priorityNote && !firstNoteAt.has(issue.priorityNote)) firstNoteAt.set(issue.priorityNote, i); });
   // Strip dependency/resource chain issues — those are in Economics & Resources tabs
   // Viability only shows logic violations, structural conflicts, and by-design
   // contradictions. Route through the ONE shared adjudicator (isViabilityItem)
@@ -196,7 +200,7 @@ export function ViabilityTab({settlement:s, narrativeNote, publicDossier = false
               {issue.title&&<span style={{fontSize:FS.md,fontWeight:700,color:swatch.inkMag}}>{issue.title}</span>}
             </div>
             <p style={{fontSize: proseFontSize(FS['12.5'], mobile),color:swatch.inkMag2,lineHeight:1.55,margin:'0 0 6px'}}>{viabilityIssueText(issue, s)}</p>
-            {issue.priorityNote&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
+            {issue.priorityNote&&firstNoteAt.get(issue.priorityNote)===i&&<p style={{fontSize: proseFontSize(FS['11.5'], mobile),color:swatch['#8B3A1A'],fontStyle:'italic',margin:'0 0 8px',lineHeight:1.4}}>{issue.priorityNote}</p>}
             {issue.suggestedFixes?.length>0&&<div style={{borderTop:'1px solid #e8c0c0',paddingTop:8}}>
               <div style={{fontSize:chromeFontSize(FS.xxs, mobile),fontWeight:700,color:swatch.inkMag3,marginBottom:4}}>Suggested fixes</div>
               {issue.suggestedFixes.map((fix,j)=>(
