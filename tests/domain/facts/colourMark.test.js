@@ -16,7 +16,7 @@ import { colourConflicts, statePoolCounts, undeclaredRows, variantColour, varian
 import { drawDeclared } from '../../../src/domain/facts/drawDeclared.js';
 import { eligibleVariants, variantFactDeclaration } from '../../../src/domain/display/stateProse/stateProseKernel.js';
 
-const SRC = readFileSync(new URL('../../../scripts/generate-dossier-state-prose.mjs', import.meta.url), 'utf8');
+const SRC = readFileSync(new URL('../../../scripts/lib/dossier-annex-parse.mjs', import.meta.url), 'utf8');
 
 describe('the colour mark is no atom (the kernel and the draw read it as silence)', () => {
   it('is spelled `colour` and parses as no atom', () => {
