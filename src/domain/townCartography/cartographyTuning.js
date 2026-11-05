@@ -109,7 +109,7 @@ export const CARTOGRAPHY_HEADROOM_PERMILLE = 1600;
 export const CARTOGRAPHY_CALIBRATION = Object.freeze({
   /** The largest canonical institution roster the pipeline produced, per tier. */
   MAX_INSTITUTIONS: Object.freeze({
-    thorp: 12, hamlet: 25, village: 42, town: 70, city: 82, metropolis: 86,
+    thorp: 11, hamlet: 14, village: 22, town: 47, city: 92, metropolis: 106,
   }),
   /**
    * The largest UTF-8 bytes-per-emitted-row the TC-4 layer produced, over every tier.
