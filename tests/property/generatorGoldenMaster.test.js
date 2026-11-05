@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — TRUTH, SECOND STEP (UNIT D), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-18-truth-2-unit-d.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   480 OF 525 ROWS MOVED (thorp 72, hamlet 72, village 72, town 96, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 844acaccc): the infiltrator takes a real name, hidden in the fiction, and the criminal structure is not null beside a network. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S18 (the tree of 844acaccc with the door paths carried from
+ *   the branch, the previous record's writes committed). a4377df3.. -> 02e881a0..
+ *
  * 2026-11-04 — PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json; the cloud chair signs under the owner's delegation, vetoable).
  *   288 OF 525 ROWS MOVED (thorp 31, hamlet 48, village 48, town 41, city 36, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
