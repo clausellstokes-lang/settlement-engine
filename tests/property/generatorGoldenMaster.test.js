@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   309 OF 525 ROWS MOVED (thorp 48, hamlet 72, village 72, town 105, city 12; metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 5e9ffb220): every defence claim writer reads defenseFactsOf, the standing and siege-pressure lines read the record, a hired company is not called a garrison, and a Village watch row stands below town. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S23 (the tree of 5e9ffb220 with the door paths carried from
+ *   the branch, the previous record's writes committed). d6e9fb42.. -> 156dca6a..
+ *
  * 2026-11-04 — F6 BUDGET-FLOOR (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json; the cloud chair signs under the owner's delegation, vetoable).
  *   513 OF 525 ROWS MOVED (thorp 84, hamlet 72, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
