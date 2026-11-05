@@ -174,3 +174,59 @@ draw is without replacement, so resolve-after must keep the `used` counter), the
 must keep one roll per eligible definition: declare, roll, then drop a refused row at materialization). The next seat
 starts with item 3 on this branch's tip, same method: apply the ledger's column, wire the site, byte-identity on the 60,
 golden paths, the self-check.
+
+## CENSUS-4b (2026-11-05)
+
+**Merges.** R11 `efb84c0` (`7a07a44`, clean); census-1b at `f82fc62` (`bb6fa12`: readerBattery imports; the
+stress-secret site both lanes had wired — 1c's kept, its facts preferring the summary's whole-record facts; a
+duplicate `factsOf` import); census-3 at `7af3c67` (`5409262`, answer 4's crime getter: the vocabulary's three
+conflicts, two "named-but-refused" pins reconciled to `[]`); census-1b at `d6f8456` (docs). Census re-taken through
+its door at each merge; `gen:dossier-prose` and both `--check` green.
+
+| unit | commit | what | golden rows moved (scratch hasher, 525), by cause |
+|---|---|---|---|
+| 1b | `2dfdd0d` | crisisBlindWidened's 7 goal rows and the instrument's three goal regexes re-anchored to R11's wording (answer d) | 0 |
+| 3a | `60d509c` | answer 4: `guild` homed once (`facts/guild.js`: live non-criminal guild on the roster ∨ a guild power); ledger re-spelled | 0 |
+| 2 | `b84dc1d` | Appendix B item 3, the goals (below) | 145: Mayor#0 `guild` 84 · Priest#1 `temple` 60 · Healer#0 `tier: ≥ town` 12 · Tavern Owner#0 `hospital` 1 (paths `npcs[].goal.long`/`.short` + the `factions[].members[]` mirror); every refused atom false on the final record, 157/157 |
+| 2 fix | `3435fd6` | Guard Captain#1 undeclared (F4's writer already makes it crime-free; soak1k-531) | 0 |
+| 3b | `06affd2` | answer 5: the exodus twin pair; answer 3: soak1k-1248's pin re-keyed by cause | 0 (no birth is an exodus) |
+| 3c | `09975f2` | the chair's item 2: Mill services "(if water mill)" / "(if saw mill)" → declarations | 0 records; 0 of 1,000 soak pages print them (`on: false` toggle services) |
+
+**The goals (item 3).** The registry's 16 `stable` entries carry `tags: CALM_ONLY` (`no crisis`; R-F 4) — carried,
+not yet enforced: the T lookup `npcStructure.js :: enrichNPCsWithStructure` is **CENSUS-1d's** (1c stopped before
+it), so the goal claims of `coh:crisis-blind-prose` fall when 1d routes it through `resolveDeclared(…, { tagged:
+true })`. Measured: 56 of 190 enriched NPCs in 13 of 60 births are `stable` under a crisis; with no admissible entry
+they keep their role goal (no twin owed: the slot never empties). STRESS_GOALS (R, wired): monster_pressure#0 `no
+garrison`; mass_migration#0-2 `migration: influx`. STRESS_GOAL_OVERRIDES (T, 1d's): insurgency.mil `watch`,
+mass_migration.gov `migration: influx`, slave_revolt.merchant `market`. NPC_FACTION_GOALS (R, wired): the eight
+above. `domain/facts/bareLine.js` (R-C): a drawn goal is stored without its declaration column.
+**Not declared:** famine#1, indebted#1, slave_revolt#2 (`no ruler: lord / occupier`) — the ruler is decided AFTER
+the NPC goal draw, so the birth facts would admit and the final record could contradict (`cert:false-presumption`);
+waiting on a draw after the power step. Guard Captain#1 (above). The walls / soldiers / navigable goals 1c's
+sibling sets carry.
+
+**Answers.** (1) faction-role-fit: **the 25 accepted** (1,000: 521). The kinds are named in the faction NAMES ("The
+Faithful Assembly", "War Council"), drawn in the power step before the roster: re-kinding without renaming
+contradicts the name; renaming is a new name draw at the ⚠ faction-name retry (a roll change, 1d's site); re-homing
+is already bound by the density law. By tier on the 60: city 8 · metropolis 8 · town 6 · village 2 · thorp 1. (2)
+recorded above (R3). (3) re-keyed. (4) `guild` homed; `organised crime` by 3b's merged getter. (5) THE CHAIR'S
+RULING, the twin: "Diverted the coin meant to keep the departing families here into a private arrangement, and the
+shortfall is being blamed on the families who left" / "More households go every week for want of it. The blame is
+holding, for now" — share 0 at birth (`STRESS_TYPE_MAP.mass_migration.direction` = influx), 1/6 of secret draws
+under a pulse exodus.
+
+**The 1,000, before (`5409262`) → after (`06affd2`):** every class identical — coh:crisis-blind-prose 791 → 791
+(claims: current stability 538, competent administration 93, stable institutional competition 82: the T lookup is
+1d's), reader:faction-role-fit 521 → 521, relation-types 212 → 212 (the `[~strict]` exempt column), A-12 18 → 18;
+`cert:false-presumption` **0 → 0**, no `cert:*` finding; `declared-share` npcs **0.038 → 0.057** (1,481 → 2,260 of
+~39,400), institutions / services 1.0 (render-time only). The 60 at the merged base: crisis-blind 65, faction-role-fit 25.
+
+**Tests.** The generator suite at the tip: 49 reds in 25 files, every one red on the merged base too (pipeline
+pinned-choosers, data-flow contracts, institution budgets, captureBirthScale, …: the merged lanes'); the two tip-only
+reds were cured in-lane (soak1k-531; the twin's count). domain:strict: composeStateProse +2, crisisFactFindings +4
+(merged lanes'). The chair's item 3 (calmFactsDouble): no tip red reads a mute pool, so not merged.
+
+**Where CENSUS-4c starts:** unit 4 — the remaining NPC pools (stakes, impressions, ties incl. the tie rule's texts,
+`createTieProseDraw`'s without-replacement counter), then INSTITUTION_DESC_VARIANTS (H, `assembleInstitutions ::
+pickVariant`) and the rest of INSTITUTION_SERVICES (the per-definition roll) — tags in the tables, the tolerance at
+each consumer, 1d's wiring.
