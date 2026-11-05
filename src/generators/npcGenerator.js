@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: config._powerStructure }, worldLaw))), birthFactsOf({ institutions, config, tier, powerStructure: config._powerStructure }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw))), birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -1501,7 +1501,7 @@ export const generateNPCs = (
   const npcConfig = {
     ...config,
     _tradeCommodity: deriveTradeCommodity(settlement.economicState, { firstWordFallback: true }),
-    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null, _powerStructure: settlement.powerStructure || null, // CENSUS-4d (R-V): the goal draw reads the ruler kind it already has (birthFactsOf)
+    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null, _government: settlement.powerStructure?.government ?? null, // CENSUS-4d (R-V): the goal draw reads the ruler kind it already has (birthFactsOf); the government ONLY — a guild faction is not settled at the draw
     _prosperity: settlement.economicState?.prosperity || null,
   };
 

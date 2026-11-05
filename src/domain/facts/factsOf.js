@@ -110,9 +110,11 @@ export function factsOf(record, options = {}) {
  * water home takes the world law's `portKind` (the same `waterAccessKind` rule). The self-check
  * (`cert:false-presumption`) re-asserts every declared atom against the FINAL record, so a fact a
  * later step changes is caught by name.
- * `powerStructure` (CENSUS-4d, R-V): a site drawn after the power step hands the one it already
- * has, so the ruler kind reads at the draw (measured settled: 0 of 585 births differ between
- * `generatePopulation` and birth, CENSUS-4c); absent, the record carries none, as before.
+ * `powerStructure` (CENSUS-4d, R-V): a site drawn after the power step hands ONLY the parts
+ * measured as settled at its draw — the NPC goal site hands `{ government }`, so the ruler kind
+ * reads (0 of 585 births differ between `generatePopulation` and birth, CENSUS-4c); the factions
+ * are not settled there (the density law can empty a guild faction later), so they are not
+ * handed. Absent, the record carries none, as before.
  * @param {{ institutions?: unknown, config?: any, tier?: unknown, stress?: unknown, powerStructure?: unknown }} [partial]
  * @param {{ portKind?: 'maritime'|'river'|'none' } | null} [worldLaw]
  */

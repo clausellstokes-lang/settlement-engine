@@ -37,3 +37,18 @@ describe('the council goals are refused under a lord or an occupier', () => {
     expect(presumptionFindings(s, ledger.filter((e) => e.pool === POOL))).toEqual([]);
   }, 120000);
 });
+
+// R-V hands the site the ONE fact measured as settled (the ruler kind), not the whole power
+// structure: a guild FACTION (guild.js's power branch) is not settled at the draw — the density
+// law can empty it later — so handing it admitted Mayor#0's guild goal in births whose final
+// record holds no guild (soak1k-224, -842, -878: cert:false-presumption, unit 2a's first cut).
+describe('the goal draw is handed the government only', () => {
+  beforeAll(async () => { await ensureLaws(); });
+  it.each([224, 842, 878])('soak1k-%i: no NPC goal presumes a fact the final record denies', (i) => {
+    const ledger = [];
+    const { result } = withPresumptionLedger(() => birth(i), ledger);
+    const goals = ledger.filter((e) => /^npc(Data|Generator):(NPC_FACTION_GOALS|STRESS_GOALS)$/.test(e.pool));
+    expect(goals.length).toBeGreaterThan(0);
+    expect(presumptionFindings(result.settlement, goals)).toEqual([]);
+  }, 120000);
+});
