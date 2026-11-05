@@ -2,7 +2,9 @@
 
 > A build seat's record for the chair. Branch `lane/census-2-2026-11-04`, cut from `lane/census-1-2026-11-04` at `ee3b9c7660a33ef8c0296630b689da7987d8e5c4`. Transport push only; no pull request.
 >
-> **Where this seat stopped.** Phase A (the ledger) and the Daily Life offer line are committed and pushed. **Phase B is not applied**: `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (checked with `git ls-remote` at every unit), so the vocabulary module, the declaration schema and `drawDeclared` do not exist to apply the ledger into. The window branch `lane/window-rung2-2026-11-04` had nothing new beyond this base (an ancestor; no merge needed). The next seat starts at Phase B, item 1 below.
+> **Where Phase A's seat stopped.** Phase A (the ledger) and the Daily Life offer line were committed and pushed; Phase B waited on CENSUS-1b's vocabulary.
+>
+> **Where Phase B's seat (CENSUS-2b, 2026-11-05) stopped — at the boundary rule, clean and pushed.** Merged CENSUS-1b `358b0a8`, the window `3bc72bc` (the SOP `3b0d87b` was already in). Done: item 1 (the rename table, below), item 2 (all four DS families into the annex), item 3 (the arrival scene's perimeter claim), item 4 for the five ARRIVAL tables, item 5 for the four K-pool twins, item 6 (the 60 and the 1,000). **The next seat starts at item 4's remaining 26 off-census tables** (the list under "Phase B — what is left"), then item 5's R/T/A twins.
 
 ## Phase A — the ledger
 
@@ -122,3 +124,90 @@ These are identical at `ee3b9c7`:
 - `tests/lint/proseNumerics.test.js` (3)
 - `tests/lint/styleShorthandLonghand.walker.test.js`
 - `typecheck:domain`: 167 errors at the base, 167 on the lane.
+
+## Phase B (CENSUS-2b, 2026-11-05)
+
+### Item 1 — the rename table, and R-S1 against `crisisAdmits`
+
+| this ledger writes | the vocabulary (`factVocabulary.js`) | where |
+|---|---|---|
+| `needs: [X]` / `excludes: [X]` | tag slot `X` / `no X`; a table row's `needs` / `excludes` | every line |
+| `excludes: ["crisis: <family or kind>"]` | `no crisis: <…>` (tag) · `excludes: ['crisis: <…>']` (row) | every line |
+| `crisis: "any"` in a scoped pool | `crisis: any` | lines |
+| `crisis: "calm"` in a scoped pool | silence | lines |
+| `crisisScoped: true` (a pool not keyed on a crisis) | `{crisis-scoped}` on the pool label (a compact row: on its key) | pools |
+| `colour: true` | `{colour}` | pools |
+| `poolNeeds` / `poolExcludes` | the brace group (`{market}`, `{no market}`, `{coast}`, `{terrain: forest}`) | pools |
+| `population: >= middling` | `population: ≥ middling` | |
+| pool-level `deficit` / `no deficit` (DS-GEN-3's food rows) | `starving` / `no starving` (`deficit` is the kernel's demoted state word, not an atom; LINES keep the kernel's own `deficit` mark) | |
+| `crisis: ["crisis"]` (needs some crisis) | the kernel mark `crisis` (F12's crisis dimension), plus `crisis: any` in a scoped pool | DS-CND-1's recovery twin |
+| `other-npc` | `other npc` | (no DS line) |
+| `guards` (R-D1's stop) | `guardPresence` now has a home (the rulings §3) — the stop lines are the next seat's to declare | |
+
+**R-S1 is NOT what `crisisAdmits` implements.** R-S1 read `crisis: [values]` as "presumes one of these is on" (a disjunction over the active kinds). `crisisAdmits` implements the rulings' CONJUNCTION: a line is admissible only if, for EVERY active kind, the kind or its family is listed. The rulings say "R-S1 is confirmed"; it is not — the two readings differ whenever a second crisis is active. The vocabulary governs, and this lane followed it. Consequence, ruled below: a pool keyed on a crisis must not re-declare its key.
+
+### The chair's rulings this seat made (vetoable)
+
+- **R-B1, a keyed pool does not re-declare its key.** A pool whose key guarantees a crisis (DS-STR's banners and synergy pools, DS-GEN-7's two) carries no pool-level `crisis:` atom and is not `{crisis-scoped}`: under the conjunction a declared `crisis: under_siege` refuses the UNDER SIEGE banner whenever a famine is also on. Its lines keep their own `no crisis: <family>` denials. **41 of the ledger's 86 opt-ins were keyed and are dropped by this ruling; 45 pools are opted in** (DS-GEN 33, DS-HK 6, DS-STR 1, DS-CND 5).
+- **R-B2, a narrower crisis presumption inside a keyed pool cannot be said.** DS-STR-2 ORIGIN: resistance vid 2 and 3 ("answers a foreign garrison") presume occupation inside a pool keyed insurgency-or-occupation. The tag slot routes every `crisis:` word to the disjunction; there is no tag spelling of "needs: crisis: occupied". Left undeclared (open question 2).
+- **R-B3, brace groups on compact rows.** The projector read a pool brace group on a bold label only; DS-GEN-3/5/6/10's compact rows are pools of their own. The brace now rides a bulleted row's key (`- \`STRONG\` {crisis-scoped} — 1. …`) or follows a bold row's label (`**\`port\`** {coast} — 1. …`), read off before the key is formed (the key is hashed into the draw: byte-identical). **The drop guard had a hole**: it counted compact rows with the same regex the parser used, so a row neither recognised was lost from both counts and the guard passed (DS-GEN-5's 20 lines; caught only because the census fell 709 → 704). The guard now reads the braced form.
+- **R-F 3 applied at the arrival scene**: "Pilgrims … queue patiently for their turn at the holy places" declares `excludes: crisis: threat, crisis: unrest` (the line widens; the ledger row carries the note). "Without being stopped, challenged or counted…" and "…how relaxed the people on it are" are DS-DEF lines (`defense.generated.js`): CENSUS-5's.
+
+### Item 2 — the DS pools (applied; one commit per family)
+
+| family | commit | pools | lines | lines gaining atoms | `{crisis-scoped}` | `{colour}` | pages moved (60) | records (60) |
+|---|---|---|---|---|---|---|---|---|
+| DS-GEN | `db3ed88` | 140 | 463 | 180 | 33 | 73 | **32**: 29 DS-GEN-13 NO-MARKET (trade "at the gate, at the inn": `gate · institution: tavern` refused), 3 DS-GEN-17 GARRISONED vid 2 ("not only in stone": `walls`) | 0 |
+| DS-HK | `eb2b16a` | 11 | 45 | 24 | 6 | 4 | 0 (the framing paragraph is cut from the Plot Hooks tab) | 0 |
+| DS-STR | `c37c270` | 49 | 204 | 27 | 1 | 9 | 0 | 0 |
+| DS-CND | `c85d7ec` | 18 | 55 | 12 | 5 | 12 | 0 | 0 |
+
+Every family: `node scripts/wiring-census.mjs` then `npm run gen:dossier-prose`, both `--check` green, in the same commit; the census rows did not move (709 pools / 2,323 variants) until the twins. The red-first is `tests/domain/facts/census2DeclaredPools.test.js`: the leaves held to the ledger family by family, red after each annex edit and before its projection, plus behaviour rows on the real pools (DS-GEN-13 under a siege; DS-STR-1's "carries no emergency" refused under a siege and drawn in calm; the UNDER SIEGE banner kept under siege + famine).
+
+### Items 3 and 4 — the arrival tables (`077a292`)
+
+`ARRIVAL_SENSES`, `ARRIVAL_PEOPLE`, `ARRIVAL_TENSIONS`, `ARRIVAL_MEMORIES` (`arrivalProse.js`) and `ARRIVAL_SCENES` (`narrativeData.js`): **102 of 240 rows** take the sibling column. Atoms: `crisis: any` 88 (rows of the ledger's scoped pools), `no crisis: <…>` 41 (the commit body's "47" is wrong; 41 is the count read off the tables), market 6, navigable 5, `no starving` 3, institution: mill 3 / temple 1 / smith 1, walls 1, `population: ≥ middling` 1. CENSUS-1c's wiring is on no remote branch (`git ls-remote` at this commit), so under R-C the consumer (`arrivalScene.js`) reads through `src/domain/facts/textOf.js` and the declarations are CARRIED, not enforced: **no birth moves** (0/525 golden records by a scratch sha-256 hasher, 0/60 soak records and pages). The ledger's scoped arrival pools (2 + 7 + 12 + 1 + 3 = 25) need the pool flag when 1c wires the site; the rows already carry `crisis: any` where they are sayable under a crisis.
+
+### Item 5 — the twins written (`70d05b2`; each the chair's ruling, R-G)
+
+| pool | kind | n | twin | atoms | share |
+|---|---|---|---|---|---|
+| DS-GEN-13 :: NO-MARKET | K | 2 | No market or fair stands in {settlement}: what trade the town does is done house to house and on the road. | — | ≈ 1/3 of eligible; on the 60 it fills exactly the 29 slots unit 2 emptied |
+| DS-GEN-3 :: safetyLabel {Secure, Controlled, Quarantined} | K | 3 | Movement in {settlement} is watched and limited, and the quiet in its streets is a kept quiet rather than a natural one. | `crisis: occupied, plague_onset` | ≈ 1/4 |
+| DS-CND-1 :: ARCHETYPE: flourishing | K | 3 | The good stretch {settlement} was having has not ended, but it is being spent now on the trouble in front of it. | `crisis: hunger, threat, unrest, indebted, plague_onset` | ≈ 1/4 |
+| DS-CND-1 :: FAMILY: recovery | K | 3 | {settlement} is recovering from one trouble while it carries another, and the repair goes slower for it. | kernel `crisis` · `crisis: any` | ≈ 1/4 |
+
+The R / T / A twins of Phase A's table are not written: their consumers are draw sites CENSUS-1c wires, and a twin there resolves only after the drawn line is refused.
+
+### Item 6 — the 60 and the 1,000 (BEFORE = the merged base `d530c02`, AFTER = the tip)
+
+| run | records moved | pages moved | every `coh:*` / `reader:*` / `A-*` class | `coh:crisis-blind-prose` | `cert:false-presumption` | `declared-share` | verdict |
+|---|---|---|---|---|---|---|---|
+| 60 | 0 / 60 | 32 (DS-GEN-13 → its twin 29, DS-GEN-17 3) | identical (176 findings) | 24 → 24 | 0 → 0 | `{}` → `{}` | STOP → STOP (the base's: crisis-blind in 24) |
+| 1,000 | 0 / 1,000 | 27 of the 60 rendered (DS-GEN-13 → its twin 25; DS-GEN-17 2) | identical (2,596 findings; `reader:hook-pools` 113 → 113, `reader:daily-life-placeholder` 0 → 0) | 278 → 278 | 0 → 0 | `{}` → `{}` | STOP → STOP (the base's: crisis-blind 278, `A-12:self-vouch-false` 18) |
+
+**By claim, `coh:crisis-blind-prose` at 1,000:** current stability 119 · nobody stops a stranger 43 · nothing is failing 34 · stable institutional competition 33 · food secure 32 · depends on none alone 22 · competent administration 21 · a year closed ahead 3 · pilgrims queue patiently 3 — all identical before → after. **None of these claims lives in this lane's DS pools**: they are NPC goals (CENSUS-4), DS-DEF / DS-ECO / DS-POW lines (CENSUS-5 / CENSUS-3), the food band, and one arrival line (mine, declared, waiting on 1c's enforcement). So the class did not fall here, and that is the expected reading under R-B, not a cure that failed. `declared-share` stays `{}` because the harness records no display-time K notes yet (CENSUS-1b's ⚠: the render runs in another module instance of the ledger) — the gate is live on the page (the 32 pages are its receipt) but the aggregate cannot see it.
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** 0 of 525 records (records 0/60, 0/1,000; the annex and leaves are display, the arrival rows are read byte-identically).
+- **Wiring census:** 4 pool rows' variant counts +1 (the twins; 2,323 → 2,327) and the producer index (textOf.js). No other row.
+- **Manifest (`dossier-prose-manifest-golden.json`):** not run by this lane; the DS-GEN-13 / DS-GEN-17 page moves and the twins are the causes it will show.
+- **Test pins:** none re-keyed outside this lane's own new file; the arrival suites' renderers read through `textOf` (no expectation changed).
+
+### Gates this lane read (not cured here)
+
+`typecheck:ratchet` 167 / 167 green. `typecheck:domain:strict` is RED at the merged base on four CENSUS-1b files this lane does not touch: `crisisFactFindings.js` +4, `composeStateProse.js` +2, `factVocabulary.js` +42, `presumptionCheck.js` +1. `textOf.js` is strict-clean.
+
+### Phase B — what is left (the next seat starts here)
+
+1. **Item 4, the 26 off-census tables** not yet applied: the Overview / Tonight tables (`CONDITION_ARCHETYPE_TEMPLATES`, `CULTURE_ARCHITECTURAL_DETAILS`, `CHECK_INST_COMPAT_LANDMARKS`, `LINE_ROLE_CLAUSE`, `POLITICAL_FLAVOR`, `PRESSURE_SENTENCES`, `QUICK_GUIDE_CLAUSES`, `SETT_REASON`, `SPATIAL_TEXT`, `STRESSOR_SPINE_PHRASES`, `STRESS_DESCS`, `STRESS_NARRATIVE_RENDERERS`, `STRESS_RUMORS`, `STRESS_TYPE_MAP`, `TERRAIN_SEASON_TEXTURE`, `THORP_PRESSURES`, `ECHO_PREFIXES_DOSSIER`), the crisis-hook pools (`HOOK_ESCALATION`, `HOOK_LINE_POOLS`, `CRISIS_CAST_REASONS` with `tags`), Daily Life (`DAILY_LIFE_TAB`, `DAILY_LIFE_CONTEXT`, `CULTURE_PROFILES_DAILY`) and the kernel family (`DECREE_PROSE`, `DOSSIER_CAUSAL_PROSE`, `DOSSIER_CONNECTIVES`). The tool is this lane's: an AST splice per ledger row (`{ text, needs?, excludes?, crisis? }`), then `textOf` at each R/H/T consumer, unless 1c's wiring has landed (then merge it and let it enforce). ⚠ The causal register has no `vid`, so the kernel reads no fact atoms from it (`variantFactDeclaration`): its declarations need 1c's ruling on how a vid-less family is declared. ⚠ `STRESS_DESCS` is read by the arrival consumer's vignette filter with `line(name)` — wrap it only together with that filter.
+2. **Item 5's R / T / A twins** (Phase A's table rows 6–18), after 1c's wiring.
+3. **The 24 `guards` stop lines** now declarable as `guardPresence`.
+
+### Open questions for the chair
+
+1. The rulings §1 say R-S1 is confirmed; `crisisAdmits` implements the conjunction R-S1 rejected. Is the conjunction the intended reading (this lane followed it, and R-B1 is its consequence)?
+2. Should the tag slot gain a spelling for "needs: crisis: K" (a presence reading of one kind), for DS-STR-2's two resistance lines and lines like them?
+3. Should `declared-share` count display-time K draws (the harness's ledger instance), so the aggregate can read the gate this lane turned on?
+
