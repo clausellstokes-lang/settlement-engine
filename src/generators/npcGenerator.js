@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier }, worldLaw))), birthFactsOf({ institutions, config, tier }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: config._powerStructure }, worldLaw))), birthFactsOf({ institutions, config, tier, powerStructure: config._powerStructure }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -395,7 +395,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'wealth',
       },
       {
-        short: 'Find out where the hoarded reserves are before the council does',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Find out where the hoarded reserves are before the council does', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Come out of this with more than they went in with',
         driven_by: 'wealth',
       },
@@ -429,7 +429,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'wealth',
       },
       {
-        short: 'Identify which members of the council have already made private terms with the creditor',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Identify which members of the council have already made private terms with the creditor', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Repudiate the debt on grounds that would survive legal challenge',
         driven_by: 'political',
       },
@@ -596,7 +596,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
         driven_by: 'political',
       },
       {
-        short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer',
+        excludes: ['ruler: lord', 'ruler: occupier'], short: 'Reach the revolt’s leaders with a settlement the council has forbidden them to offer', // CENSUS-4d (the chair's answer 1, R-V): 'the council' is this place's authority
         long: 'Stop the killing on both sides, whatever it costs them personally',
         driven_by: 'justice',
       },
@@ -1501,7 +1501,7 @@ export const generateNPCs = (
   const npcConfig = {
     ...config,
     _tradeCommodity: deriveTradeCommodity(settlement.economicState, { firstWordFallback: true }),
-    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null,
+    _dominantFaction: settlement.powerStructure?.factions?.[0]?.faction || null, _powerStructure: settlement.powerStructure || null, // CENSUS-4d (R-V): the goal draw reads the ruler kind it already has (birthFactsOf)
     _prosperity: settlement.economicState?.prosperity || null,
   };
 
