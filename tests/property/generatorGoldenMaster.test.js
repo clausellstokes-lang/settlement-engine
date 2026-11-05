@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — X-46 CAR 1B, SECOND STEP (U4–U5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (metropolis 84; thorp, hamlet, village, town, city 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fb0341b93): the owner's metropolis curve — flat to 50,000, thinning exponentially to 1,000,000 — and the rarer variant, 30% of random metropolises past 50,000. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S13 (the tree of fb0341b93 with the door paths carried from
+ *   the branch, the previous record's writes committed). b25b0949.. -> ea04a7ca..
+ *
  * 2026-11-04 — X-46 CAR 3 (LANE X46-3-BUDGET), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json; the cloud chair signs under the owner's delegation, vetoable).
  *   525 OF 525 ROWS MOVED (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent

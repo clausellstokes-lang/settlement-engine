@@ -1,0 +1,34 @@
+{
+  "_doc": "X-46 CAR 1B, SECOND STEP (U4–U5), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 1b, second step (U4–U5): the owner's metropolis curve — flat to 50,000, thinning exponentially to 1,000,000 — and the rarer variant, 30% of random metropolises past 50,000. THE MOVER, NAMED: first-parent step fb0341b93 of lane/landing-rung1-2026-11-04 (\"compose: lane/x46-1b-noceiling-2026-11-04 (final tip 7090a83) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 566 (NO CEILING ON A METROPOLIS, the owner, 2026-11-04, with the owner's compromise quoted in the same paragraph; the lane's second step carries that compromise, the roll's body to 50,000 and its thinning tail). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S13 is the tree of fb0341b93 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from fb0341b93 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S12 -> S13): generator-golden-master 84 of 525 rows (metropolis 84; thorp, hamlet, village, town, city 0), the key set identical; cartography-calibration-corpus 46 of 504 rows (metropolis 46); dossier-prose-manifest 96 of 1050 rows (metropolis 96); espionage-dormancy-fence 60 of 360 rows (metropolis 60; thorp, hamlet, village, town, city 0), 360/360 distinct, 0b130673.. -> 2d13cedb... A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION does not move (the per-tier maximum roster still reads 11/14/22/47/92/106). W6 stays the one named red of the calibration suite (2.4444 at village, 9 -> 22, against the declared 1.6), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "wait, we have a cap on metropolis? it should not have a cap · the random roll goes up to 100,000 but a user can log any number past that and everything where appropraite, still scales",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 1b, second step (U4–U5): the owner's metropolis curve — flat to 50,000, thinning exponentially to 1,000,000 — and the rarer variant, 30% of random metropolises past 50,000",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at fb0341b93",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}
