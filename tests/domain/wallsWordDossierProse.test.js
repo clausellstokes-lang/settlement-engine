@@ -26,6 +26,10 @@ import { DOSSIER_STATE_PROSE_ECONOMY } from '../../src/data/dossierStateProse/ec
 import { DOSSIER_STATE_PROSE_STRESSORS } from '../../src/data/dossierStateProse/stressors.generated.js';
 import { DOSSIER_STATE_PROSE_WAR_FAITH } from '../../src/data/dossierStateProse/warFaith.generated.js';
 import { DOSSIER_STATE_PROSE_DEFENSE } from '../../src/data/dossierStateProse/defense.generated.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
+
+/** CENSUS-5: the no-walls read hands facts too (a pool may declare fact atoms): calm, every presence fact held but the perimeter. */
+const NO_WALLS_FACTS = Object.freeze({ ...CALM_FACTS_ADMIT_ALL, defence: Object.freeze({ ...CALM_FACTS_ADMIT_ALL.defence, walls: false, wallKind: null, palisade: false, gate: false }) });
 
 const SIEGE = 'Critical (active siege — survival priority)';
 
@@ -154,7 +158,7 @@ describe('F10 · every mounted variant that names walls is gated', () => {
           }
           if (!pool.some((v) => (v.marks || []).includes('walls'))) continue;
           const slots = Object.fromEntries(pool.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
-          const read = eligibleVariants(pool, { slots, audience: 'dm', dimensions: { walls: 'no walls' } });
+          const read = eligibleVariants(pool, { slots, audience: 'dm', dimensions: { walls: 'no walls' }, facts: NO_WALLS_FACTS });
           if (read.length === 0) mute.push(`${id} :: ${key}`);
           for (const v of read) if (WALL_TERM.test(v.text)) leaky.push(`${id} :: ${key} :: v${v.vid}`);
         }

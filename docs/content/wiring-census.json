@@ -8,7 +8,7 @@
       "src/domain/display/stateProse/defenseStateProse.js": "3754e325a7296cb78c4aceb93fa0d9b8372c9be305f4db7663b4efd256ef1edb",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "2ef29e8e200c8497192ffd01b1d2c96a675675b7038ee6cb6162f9c6194d6bcc"
+      "src/domain/display/stateProse/dossierMounts.js": "488ee20c887e92918fc6da0ef92ec4847874278848d2c3af730a91ed279e33b6"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2323,
+    "variants": 2324,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -25168,8 +25168,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
-      "grammars": 4,
+      "variants": 6,
+      "grammars": 5,
       "predicate": [
         {
           "field": "label (via RISK_POOL_OF in powerStateProse.js)",
@@ -39663,8 +39663,8 @@
         "DS-POW-4 :: riskLabel: Contested",
         "DS-POW-4 :: riskLabel: Critical. The seat could fall"
       ],
-      "variants": 15,
-      "grammars": 14,
+      "variants": 16,
+      "grammars": 15,
       "blocks": [
         "DS-POW-4"
       ]
@@ -51987,7 +51987,7 @@
         "label (via RISK_POOL_OF in powerStateProse.js)"
       ],
       "readingFunction": "RISK_POOL_OF",
-      "count": "5 variant(s) · 4 grammar(s) · slots {faction, seat, settlement}"
+      "count": "6 variant(s) · 5 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",

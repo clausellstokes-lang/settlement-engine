@@ -770,3 +770,59 @@ export function settleCrimeLinesToSignal(economicState, lists) {
   if (settled.length === crimes.length && settled.every((entry, i) => entry === crimes[i])) return economicState;
   return { ...economicState, safetyProfile: { ...safetyProfile, crimeTypes: settled } };
 }
+
+/**
+ * One declared sibling set: the original, `needs` its atoms; its twin (when the slot needs one)
+ * `excludes` them. @param {string} text @param {string[]} needs @param {string} [twin]
+ */
+const declaredSet = (text, needs, twin) => Object.freeze([
+  Object.freeze({ text, needs: Object.freeze(needs) }),
+  ...(twin === undefined ? [] : [Object.freeze({ text: twin, twinOf: text, excludes: Object.freeze(needs) })]),
+]);
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; `docs/DESIGN_POOL_CENSUS.md` §3.1,
+ * the chair's ruling R-C). The safety profile's inline T branches print lines that presume a fact
+ * their branch does not guarantee: the watch named under a stress any place can carry, the walls
+ * named beside a garrison or a gate (a gate row stands without walls). The originals stay where
+ * they are spelled above; each is declared here, keyed by its printed text, with its twin. NO
+ * CONSUMER READS THIS TABLE YET — the safety profile's branches are CENSUS-1d's to route through
+ * `resolveSibling` (R-C: a lane never wires a draw site that is not its own) — so it moves no
+ * birth. Measured on the 1,000 (soak1k-0..999) before the change, printed / false by the record:
+ * the succession watch 61 / 30, the migration watch 63 / 28, the revolt watch 61 / 25, the
+ * insurgent watch 43 / 22, the displacement watch 71 / 32, the garrison's walls 52 / 3, the
+ * smuggler's walls 229 / 0, the thin watch 2 / 1, the merchant army's watch 32 / 0, the garrison
+ * chaplain 12 / 0. Each twin is the chair's ruling (R-G), recorded in the lane doc.
+ */
+export const SAFETY_LINE_SIBLINGS = Object.freeze({
+  'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.': declaredSet(
+    'Authority is contested. The watch is uncertain whose orders to follow. Opportunistic crime is rising in the gap.', ['watch'],
+    'Authority is contested. Whoever keeps order is uncertain whose orders to follow. Opportunistic crime is rising in the gap.'),
+  'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.': declaredSet(
+    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. The watch is overwhelmed by unfamiliar faces.', ['watch'],
+    'The settlement is absorbing more people than its infrastructure was built for. Friction between established residents and newcomers is visible. Whoever keeps order is overwhelmed by unfamiliar faces.'),
+  'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.': declaredSet(
+    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. The watch has abandoned normal patrol patterns.', ['watch'],
+    'Active armed conflict between revolt participants and security forces in contested districts. Civilians are avoiding specific streets. Normal patrol patterns have been abandoned.'),
+  'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.': declaredSet(
+    'Street-level confrontations between insurgent supporters and the watch. Officially categorised as riot and disorder.', ['watch'],
+    'Street-level confrontations between insurgent supporters and those who keep order. Officially categorised as riot and disorder.'),
+  'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.': declaredSet(
+    'Theft and petty fraud by new arrivals with no local ties and no established credit. The watch struggles to distinguish transients from residents.', ['watch'],
+    'Theft and petty fraud by new arrivals with no local ties and no established credit. Those who keep order struggle to distinguish transients from residents.'),
+  ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.': declaredSet(
+    ' The garrison acknowledges the problem but focuses on the walls and gates. Interior policing is under-resourced.', ['walls'],
+    ' The garrison acknowledges the problem but focuses on the approaches. Interior policing is under-resourced.'),
+  " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.": declaredSet(
+    " The settlement's gates and walls are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes.", ['walls'],
+    " The settlement's gates are checkpoints that smugglers work around. Bribing officials, using hidden routes, or moving shipments at shift changes."),
+  'The watch is too thinly spread to maintain order.': declaredSet(
+    'The watch is too thinly spread to maintain order.', ['watch'],
+    'Enforcement is too thinly spread to maintain order.'),
+  "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.": declaredSet(
+    "The merchant guild's private security force just detained someone, with no legal authority to do so. The watch is looking the other way.", ['watch'],
+    "The merchant guild's private security force just detained someone, with no legal authority to do so. No one with the authority to stop it is trying."),
+  "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.": declaredSet(
+    "The garrison chaplain and the commander are the same man. He's authorizing military action for reasons that sound theological.", ['garrison'],
+    "The settlement's chaplain also leads its armed men. He's authorizing military action for reasons that sound theological."),
+});

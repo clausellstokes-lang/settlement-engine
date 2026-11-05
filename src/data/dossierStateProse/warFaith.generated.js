@@ -31,6 +31,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.",
           "slots": [],
           "vid": 2
@@ -55,6 +58,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "statusLabel: Occupied": [
         {
           "angle": "street",
+          "marks": [
+            "market"
+          ],
           "text": "{settlement} is held by {counterpart}. The hall still sits, the market still opens, and neither of them decides anything that {counterpart} has an opinion about.",
           "slots": [
             "settlement",
@@ -1077,6 +1083,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.",
           "slots": [
             "settlement"
@@ -1653,6 +1662,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.",
           "slots": [],
           "vid": 2
@@ -2284,18 +2296,27 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "*": [
         {
           "angle": "street",
+          "marks": [
+            "war: peace"
+          ],
           "text": "This settlement is at peace and keeps no named faith.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "ledger",
+          "marks": [
+            "war: peace"
+          ],
           "text": "Nothing is being fought here and nothing is being kept here; the town's quarrels and its observances are both private matters.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "war: peace"
+          ],
           "text": "A stranger finds neither soldiers nor temples worth remarking on at {settlement}, and finds the town entirely unbothered by the absence of both.",
           "slots": [
             "settlement"
@@ -2304,6 +2325,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
+          "marks": [
+            "war: peace"
+          ],
           "text": "{settlement} has neither a war nor a creed to its name at present, and has been in that condition long enough to have forgotten it is a condition.",
           "slots": [
             "settlement"
@@ -2312,6 +2336,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "war: peace"
+          ],
           "text": "There are quarrels {settlement} could be part of and observances it could keep, and it is part of none and keeps none.",
           "slots": [
             "settlement"
@@ -4033,6 +4060,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "temple"
+          ],
           "text": "{settlement} is faithful in the working sense: the benches are full on the days they should be full.",
           "slots": [
             "settlement"
@@ -4065,6 +4095,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "DEVOTION: lukewarm": [
         {
           "angle": "visitor",
+          "marks": [
+            "temple"
+          ],
           "text": "The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.",
           "slots": [],
           "vid": 1
@@ -4087,6 +4120,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "DEVOTION: secular": [
         {
           "angle": "ledger",
+          "marks": [
+            "temple"
+          ],
           "text": "Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.",
           "slots": [],
           "vid": 1
@@ -4135,6 +4171,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "temple"
+          ],
           "text": "The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.",
           "slots": [],
           "vid": 2
@@ -4253,6 +4292,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "temple"
+          ],
           "text": "People here are leaving the rites without joining anything; the benches thin and nothing fills them.",
           "slots": [],
           "vid": 3
@@ -4267,6 +4309,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "temple"
+          ],
           "text": "The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.",
           "slots": [],
           "vid": 2
@@ -4858,6 +4903,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "temple"
+          ],
           "text": "The creed is established: a real congregation, a real house, and no serious claim on the patron's place.",
           "slots": [],
           "vid": 2
@@ -4971,6 +5019,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: religious_conversion"
+          ],
           "text": "The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.",
           "slots": [
             "settlement"
@@ -4979,6 +5030,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: religious_conversion"
+          ],
           "text": "The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.",
           "slots": [],
           "vid": 3

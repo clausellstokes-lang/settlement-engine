@@ -57,6 +57,7 @@ import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /**
  * The hash pair, re-spelled here so every key this file checks is checked against an
@@ -448,7 +449,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
         const reference = pool.filter(
           (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
         );
-        const cured = eligibleVariants(pool, { slots, audience });
+        // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
+        // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).
+        const cured = eligibleVariants(pool, { slots, audience, facts: CALM_FACTS_ADMIT_ALL });
         if (cured.length !== reference.length || cured.some((v, i) => v !== reference[i])) {
           drift.push(`ELIGIBILITY :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience}`);
         }
@@ -457,7 +460,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
           const was = drawVariant(reference, blockId, poolKey, seed);
           const wasText = was ? fillSlots(was.text, slots) : null;
           const nowText = readStateProse({ [blockId]: { pools: { [poolKey]: pool } } },
-            blockId, poolKey, { slots, seed, audience })?.text ?? null;
+            blockId, poolKey, { slots, seed, audience, facts: CALM_FACTS_ADMIT_ALL })?.text ?? null;
           if (wasText !== nowText) {
             drift.push(`DRAW :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience} :: seed "${seed}"`);
           }
@@ -472,8 +475,10 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
     // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 established and DS-ECO-12 one-source take `no hunger`
     // (a crisis dimension) and DS-ECO-8 COMFORTABLE declares `no crisis: indebted` (a fact atom), so 713.
-    expect(poolsChecked).toBeGreaterThanOrEqual(713);
-    expect(draws).toBeGreaterThanOrEqual(713 * 2 * SWEEP_SEEDS.length);
+    // CENSUS-5b unit 1 (2026-11-05): DS-DEF-1 `readiness WEAK` partitions by `walls` (v2, the
+    // perimeter line, declares it; R-O), so 712 (the CENSUS-1e merge composes the two).
+    expect(poolsChecked).toBeGreaterThanOrEqual(712);
+    expect(draws).toBeGreaterThanOrEqual(712 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {
