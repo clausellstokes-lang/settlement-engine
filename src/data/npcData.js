@@ -790,12 +790,12 @@ export const NPC_FACTION_GOALS = {
 // (`domain/roles/roleClass.js :: classOfRole`), the fact's own reader (R-AP): no settlement atom
 // expresses a holder's role and none is added (no NPC-scoped atom enters the vocabulary).
 //
-// CARRIED, NOT YET KEYED: the draw (`generators/npc/factionLeaderSecret.js`) still reads the flat
-// view `NPC_CRIMINAL_SECRETS` below, rebuilt in its historic order by `CRIMINAL_SECRET_LEGACY_ORDER`,
-// so today's pick is byte-identical. The mechanism lane keys the draw (R-C: never wired here) on
-// `criminalSecretsForHolder(type, holderClass)`, which keeps that order and drops only the rows
-// keyed to another role, so a clergy holder's religious pool and a soldier's military pool are
-// unchanged and only a mismatched holder's draw moves.
+// KEYED (CENSUS-1i unit 3): the draw (`generators/npc/factionLeaderSecret.js`) reads
+// `criminalSecretsForHolder(type, holderClass)` — the historic order with only the rows keyed to
+// another role left out, so a clergy holder's religious pool and a soldier's military pool are
+// unchanged and only a mismatched holder's draw moves — and its type roll re-maps a type the
+// holder's key empties (R-AX refined). The flat view `NPC_CRIMINAL_SECRETS` below is no longer what
+// the draw reads; it stays the table's census export (`tablePools`) and the unkeyed reading.
 //
 // @enforced-by tests/data/criminalSecretsByHolder.test.js
 export const NPC_CRIMINAL_SECRETS_BY_HOLDER = {
