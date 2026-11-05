@@ -183,3 +183,57 @@ describe('PRESSURE_SENTENCES (narrativeText.js, R: the rows inside each stressor
     expect(declaring).toBe(17);
   });
 });
+
+// ── SIBLING SETS (a multi-reader T table keeps its cells as strings; its declarations stand beside
+//    it keyed by the original's text — CENSUS-1c's dissolved-twin shape, accepted by R-P 3) ─────
+import { STRESS_TYPE_MAP, STRESS_TYPE_SIBLINGS } from '../../../src/data/stressTypes.js';
+import { STRESSOR_SPINE_PHRASES, STRESSOR_SPINE_SIBLINGS } from '../../../src/data/stressorSpinePhrases.js';
+import { CONDITION_ARCHETYPE_TEMPLATES, CONDITION_ARCHETYPE_SIBLINGS } from '../../../src/domain/activeConditions.js';
+import { QUICK_GUIDE_SIBLINGS } from '../../../src/domain/summary/settlementQuickGuide.js';
+
+/** cells reworded under R-U since Phase A read them (counted by cause in their commit) */
+const REWORDED = new Set(['STRESS_TYPE_MAP.slave_revolt.viabilityNote']);
+
+/** @param {string} name @param {Record<string, any[]>} siblings @param {object|null} root the live table (null: by text alone) */
+function siblingArm(name, siblings, root) {
+  const d = ledger(name);
+  const wrong = [];
+  let declaring = 0;
+  for (const pool of d.pools) for (const line of pool.lines) {
+    const want = expectedDeclaration(pool, line);
+    if (root) {
+      let node = root; for (const step of parseLineId(line.lineId).slice(1)) node = node?.[step];
+      if (node !== line.text && !REWORDED.has(line.lineId)) wrong.push(`${line.lineId}: the live cell is not the ledger's text`);
+    }
+    const set = Object.prototype.hasOwnProperty.call(siblings, line.text) ? siblings[line.text] : null;
+    if (!(want.needs.length || want.excludes.length || want.crisis.length)) { if (set) wrong.push(`${line.lineId}: declared, the ledger does not`); continue; }
+    declaring++;
+    const have = set ? declarationOf(set[0]) : null;
+    if (!have || JSON.stringify([have.needs, have.excludes, have.crisis]) !== JSON.stringify([want.needs, want.excludes, want.crisis])) wrong.push(`${line.lineId}: ${JSON.stringify(have)} ≠ ${JSON.stringify(want)}`);
+    for (const twin of (set || []).slice(1)) if (twin.twinOf !== line.text) wrong.push(`${line.lineId}: a twin keyed elsewhere`);
+  }
+  return { wrong, declaring, sets: Object.keys(siblings).length };
+}
+
+describe.each([
+  ['STRESS_TYPE_MAP', STRESS_TYPE_SIBLINGS, STRESS_TYPE_MAP, 4],
+  ['STRESSOR_SPINE_PHRASES', STRESSOR_SPINE_SIBLINGS, STRESSOR_SPINE_PHRASES, 2],
+  ['CONDITION_ARCHETYPE_TEMPLATES', CONDITION_ARCHETYPE_SIBLINGS, CONDITION_ARCHETYPE_TEMPLATES, 6],
+  ['QUICK_GUIDE_CLAUSES', QUICK_GUIDE_SIBLINGS, null, 7],
+])('%s: the declared sibling sets stand beside the table', (name, siblings, root, n) => {
+  it('every declaring ledger line has its set, exactly; nothing else is declared', () => {
+    const r = siblingArm(name, siblings, root);
+    expect(r.wrong).toEqual([]);
+    expect([r.declaring, r.sets]).toEqual([n, n]);
+  });
+});
+
+describe('THORP_PRESSURES and the slave-revolt cells (CENSUS-2d)', () => {
+  it('the thorp fallback\'s miller line needs a mill (inline, through textOf)', () => {
+    const found = declaredLiteralsOf('src/generators/narrativeGenerator.js');
+    expect(found.get("The question of who tends the shared fields when the miller's household falls ill has never been properly settled.")).toEqual([{ needs: ['institution: mill'], excludes: [], crisis: [] }]);
+  });
+  it('no slave-revolt cell names a slave market (R-U; "needs a home")', () => {
+    expect(Object.values(STRESS_TYPE_MAP.slave_revolt).filter((v) => typeof v === 'string' && /slave market/i.test(v))).toEqual([]);
+  });
+});

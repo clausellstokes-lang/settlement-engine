@@ -822,12 +822,12 @@ export const generatePressureSentence = settlement => {
       'A dispute over grazing rights and water access has been running for two seasons without resolution.',
       'The harvest was thin this year. Everyone knows it. Nobody is saying it directly.',
       'A family moved away last spring. The reason is not discussed, but it affected the dynamics here.',
-      "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.",
+      { text: "The question of who tends the shared fields when the miller's household falls ill has never been properly settled.", needs: ['institution: mill'] },
       'Two families have been in a quiet feud over a boundary marker for longer than anyone can clearly remember.',
       'The last frost came late and damaged the seedstock. Recovery is possible but the margin is narrow.',
       'A stranger passed through a month ago and asked questions nobody found comfortable.',
     ];
-    return thorpPressures[Math.floor(_rng() * thorpPressures.length)];
+    return textOf(thorpPressures[Math.floor(_rng() * thorpPressures.length)]); // R-C (CENSUS-2d): a declared row gives back its text; CENSUS-1e enforces
   }
 
   return null;
