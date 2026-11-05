@@ -138,10 +138,10 @@ describe('port and cultural arrival vocabulary remain semantically grounded', ()
     // The SIGHT beat sentence-cases the detail, so the comparison ignores case.
     const lowered = scene.toLowerCase();
     expect(
-      CULTURE_PROFILES.east_asian.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
+      CULTURE_PROFILES.east_asian.architecturalDetails.map(textOf).some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(true);
     expect(
-      CULTURE_PROFILES.germanic.architecturalDetails.some(detail => lowered.includes(detail.toLowerCase())),
+      CULTURE_PROFILES.germanic.architecturalDetails.map(textOf).some(detail => lowered.includes(detail.toLowerCase())),
     ).toBe(false);
   });
 

@@ -364,7 +364,7 @@ describe('THE SIGHT AGREES WITH THE MARKET SENTENCE (chair ruling T1-12, 2026-10
     // The SIGHT is the culture's built detail here, so every market-worded detail of the culture is the
     // set it may not print. (The PEOPLE and SENSE beats are outside T1-12 and are reported, not pinned.)
     const { CULTURE_PROFILES } = await import('../../src/data/cultureProfiles.js');
-    const forbidden = [MARKET_SIGHT, ...(CULTURE_PROFILES[resolveCultureProfileKey('germanic')]?.architecturalDetails || [])]
+    const forbidden = [MARKET_SIGHT, ...(CULTURE_PROFILES[resolveCultureProfileKey('germanic')]?.architecturalDetails || []).map(textOf)]
       .filter((d) => WORD.test(d)).map((d) => d.toLowerCase());
     expect(forbidden.length).toBeGreaterThan(0);
     const town = base({ culturalIdentity: { architecturalDetail: MARKET_SIGHT }, institutions: [{ name: 'Smithy', category: 'Crafts' }] });

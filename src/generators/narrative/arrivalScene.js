@@ -271,10 +271,10 @@ export function composeArrivalScene(settlement) {
         : '';
       const profile = CULTURE_PROFILES[resolveCultureProfileKey(config.culture || 'germanic')];
       let detail = materialized
-        || (profile?.architecturalDetails?.length ? pickRandom(profile.architecturalDetails) : '');
+        || (profile?.architecturalDetails?.length ? textOf(pickRandom(profile.architecturalDetails)) : ''); // R-C (CENSUS-2d)
       if (detail && !speaks(detail)) {
-        const clean = (profile?.architecturalDetails || []).filter(speaks);
-        detail = clean.length ? pickRandom(clean) : '';
+        const clean = (profile?.architecturalDetails || []).filter((d) => speaks(textOf(d)));
+        detail = clean.length ? textOf(pickRandom(clean)) : '';
       }
       if (detail) sight = `${sentenceCase(detail)}.`;
     }

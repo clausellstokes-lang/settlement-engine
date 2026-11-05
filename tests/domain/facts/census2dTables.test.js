@@ -16,6 +16,7 @@ import { readFileSync } from 'node:fs';
 import { declarationOf, assertDeclarable } from '../../../src/domain/facts/factVocabulary.js';
 import { textOf } from '../../../src/domain/facts/textOf.js';
 import { STRESS_DESCS } from '../../../src/data/narrativeData.js';
+import { CULTURE_PROFILES } from '../../../src/data/cultureProfiles.js';
 import * as espree from 'espree';
 
 const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/declarations/${name}.json`, import.meta.url), 'utf8'));
@@ -62,6 +63,8 @@ function holdsLedger(name, root, opts = {}) {
 
 const TABLES = [
   ['STRESS_DESCS', STRESS_DESCS],
+  ['CULTURE_PROFILES_DAILY', CULTURE_PROFILES],
+  ['CULTURE_ARCHITECTURAL_DETAILS', CULTURE_PROFILES],
 ];
 
 describe.each(TABLES)('%s carries the ledger\'s declarations', (name, root) => {

@@ -1,4 +1,5 @@
 // dailyLifeLogic.js — Pure settlement-context extraction for DailyLifeTab.
+import { textOf } from '../../domain/facts/textOf.js';
 import { TIER_LABELS } from './design';
 import { computeEffectiveMagicPresence } from '../../generators/priorityHelpers.js';
 import { factsOf } from '../../domain/facts/factsOf.js';
@@ -12,7 +13,7 @@ function legacyCultureContext(culture) {
   if (key === 'mixed') {
     return 'Several local traditions remain visible in ordinary institutions, household obligations, and the built environment.';
   }
-  return CULTURE_PROFILES[key]?.socialTexture?.[0] || null;
+  return textOf(CULTURE_PROFILES[key]?.socialTexture?.[0]) || null; // R-C: a declared row gives back its text (CENSUS-2d)
 }
 
 /**
