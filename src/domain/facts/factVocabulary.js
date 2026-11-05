@@ -188,7 +188,7 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
  * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
- * @property {boolean} [guild]
+ * @property {boolean} [guild] @property {boolean} [sacredHouse]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -249,6 +249,10 @@ export const FACT_DIMENSIONS = Object.freeze({
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
   docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
+  // R-AE (CENSUS-1f, 2026-11-05): ONE composite, defined once because more than one spatial line
+  // needs it — a sacred house of any kind the roster names (`factsOf.js :: sacredHouse`: temple ∨
+  // monastery); `temple` stays narrow. A line never composes atoms itself.
+  sacredHouse: dim({ shape: 'presence', home: 'sacredHouse', reader: (f) => bool(f.sacredHouse) }),
   institution: dim({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
     reader: (f, key) => (typeof f.hasInstitution === 'function' && key ? f.hasInstitution(key) : undefined) }),
   // ── presence: the rest of §1 / §3.2, homed or not ──
@@ -300,6 +304,32 @@ export const CRISIS_VALUES = Object.freeze([...CRISIS_KIND_WORDS, ...CRISIS_GROU
 
 /** The pool-level rulings a heading or table may carry (never a line). */
 export const POOL_RULINGS = Object.freeze(['crisis-scoped', 'colour']);
+
+/**
+ * THE PER-LINE COLOUR MARK (R-AO, CENSUS-1g unit 1). `{colour}` on a pool says every line presumes
+ * nothing; a MIXED pool's read-but-presumes-nothing line says it alone: the annex tag slot carries
+ * `colour` (`[angle · colour]`, or `[colour]` in a canonical row's slot) and a table row carries
+ * `{ text, colour: true }`. It is a no-atom declaration — "read; presumes nothing" — which the
+ * projector and the undeclared register count as declared; the draw, the kernel and the ledger
+ * read it as silence (it is no atom: `parseAtom('colour')` is null), so it moves no birth. A colour
+ * line declares nothing else: `colour` beside an atom is an error.
+ */
+export const COLOUR_MARK = 'colour';
+
+/**
+ * Is this table row marked colour (`{ text, colour: true }`)? Throws on a row that is marked
+ * colour AND declares (or is a twin): a colour line declares nothing else.
+ * @param {unknown} line
+ * @returns {boolean}
+ */
+export function isColourLine(line) {
+  if (!line || typeof line !== 'object' || /** @type {{colour?: unknown}} */ (line).colour !== true) return false;
+  const o = /** @type {Record<string, unknown>} */ (line);
+  if (declares(declarationOf(o)) || typeof o.twinOf === 'string') {
+    throw new Error(`factVocabulary: the row '${String(o.text)}' is marked colour and declares — a colour line declares nothing else (R-AO)`);
+  }
+  return true;
+}
 
 const BAND_OPS = Object.freeze(['≥', '>', '≤', '<', '=']);
 /** @param {string} op @returns {string} */

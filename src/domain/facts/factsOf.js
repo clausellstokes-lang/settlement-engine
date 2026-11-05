@@ -74,6 +74,8 @@ export function factsOf(record, options = {}) {
     get warState() { return warStateOf(record, options); },
     /** fact 11: a live institution of a kind */
     hasInstitution: (/** @type {string} */ kind) => hasInstitution(record, kind),
+    /** R-AE (CENSUS-1f): THE ONE composite sacred house — a temple-kind house (church, cathedral, shrine, chapel, abbey) ∨ a monastery-kind house (monastery, friary), as the roster names them; `temple` stays narrow */
+    get sacredHouse() { return hasInstitution(record, 'temple') || hasInstitution(record, 'monastery'); },
     /** CENSUS-4b (the chair's answer 4): a live non-criminal guild on the roster ∨ a guild power (`guild.js`) */
     get guild() { return guildOf(record); },
     /** fact 12: small / middling / large */

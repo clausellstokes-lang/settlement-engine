@@ -46,7 +46,8 @@ import {
 // `src/domain/prose/` import there; `kinSpines`'s docblock carries the measurement). A script
 // is outside `src/`, so the island fence — which scans `src/` alone — is untouched.
 import { contentWords } from '../src/domain/prose/composedWalker.js';
-import { assertDeclarable, POOL_RULINGS, STATE_MARK_DIMENSIONS } from '../src/domain/facts/factVocabulary.js';
+import { assertDeclarable, COLOUR_MARK, POOL_RULINGS, STATE_MARK_DIMENSIONS } from '../src/domain/facts/factVocabulary.js';
+import { colourConflicts } from '../src/domain/facts/declarationRegisters.js';
 
 const ROOT = path.resolve(path.dirname(url.fileURLToPath(import.meta.url)), '..');
 const checkOnly = process.argv.includes('--check');
@@ -227,8 +228,14 @@ function assertLiveStringsBound(files) {
  * tags fold into the variant's marks; missing the second would publish dm-only prose.
  */
 const VARIANT_RE = /^(\d+)\.\s+`\[([^\]]+)\]`\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
-/** The canonical-at-zero row: `0. *(canonical)* <the live engine string>` */
-const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(.*)$/;
+/**
+ * The canonical-at-zero row: `0. *(canonical)* <the live engine string>`, optionally with ONE tag
+ * slot after the marker — `0. *(canonical)* \`[market · no crisis: hunger]\` <text>` (CENSUS-1f,
+ * the chair's item 3 of 2026-11-05 ~04:50): every part of the slot is a MARK (the angle is fixed,
+ * `canonical`), so a v0 row declares exactly as a numbered row's marks do (vid 0 is a real id). A
+ * row with no slot projects `marks: []`, as before.
+ */
+const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
 /**
  * A pool label. Either a standalone bold line (`**COMBINATION C1 — ...**`) or a bold
  * label carrying an em-dash gloss (`**SUBSISTENCE** — *bare survival, no cushion*`).
@@ -282,11 +289,24 @@ const MARK_WORDS = new Set(Object.values(STATE_MARK_DIMENSIONS).flat());
  * @param {string} where
  */
 function assertStateMarks(marks, where) {
+  assertColourAlone(marks, where);
   for (const m of marks) {
-    if (m === 'dm-only' || MARK_WORDS.has(m)) continue;
+    if (m === 'dm-only' || m === COLOUR_MARK || MARK_WORDS.has(m)) continue;
     try { assertDeclarable(m.replace(/^no\s+/i, '')); } catch (e) {
       throw new Error(`${where}: the tag slot carries '${m}', which is no mark word and no declarable atom — ${e.message}`, { cause: e });
     }
+  }
+}
+/**
+ * R-AO: a `colour` mark ("read; presumes nothing") stands alone — beside the audience mark and the
+ * kernel's state words at most, never beside an atom or a fact mark word.
+ * @param {ReadonlyArray<string>} marks
+ * @param {string} where
+ */
+function assertColourAlone(marks, where) {
+  const beside = colourConflicts(marks);
+  if (beside.length) {
+    throw new Error(`${where}: the tag slot carries \`colour\` beside ${beside.map((m) => `'${m}'`).join(', ')} — a colour line declares nothing else (R-AO)`);
   }
 }
 /** A trailing italic authoring note. */
@@ -591,8 +611,13 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // A block whose variants carry no label at all has ONE pool (every causal
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
+      const slot = canonical[2] ? canonical[2].split('·').map((p) => p.trim()).filter(Boolean) : [];
+      if (slot.some((p) => GRAMMAR_TAG_RE.test(p))) {
+        throw new Error(`${label} ${block.id}: a canonical row's tag slot carries a \`grammar:\` tag (line ${i + 1}); the canonical row realises the engine's own order`);
+      }
+      assertColourAlone(slot, `${label} ${block.id} :: ${pool.key} #0`);
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: slot, grammar: null, wordings: [], text: cleanText(canonical[3]),
       });
       lastIndex = 0;
       continue;
