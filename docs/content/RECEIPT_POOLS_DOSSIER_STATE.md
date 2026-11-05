@@ -3436,19 +3436,19 @@ PEACE, not missing data.
 **`statusLabel: Under siege`** *(draws `DS-DEF-7`'s siege pool; no second authoring)*
 
 **`statusLabel: On campaign`**
-1. `[ledger]` {settlement}'s army is in the field against {counterpart}, and everything the town does at home is done with that absence in it.
+1. `[ledger · colour]` {settlement}'s army is in the field against {counterpart}, and everything the town does at home is done with that absence in it.
 2. `[street · gate]` The town is short of the people who would ordinarily be here, and the shortness is felt at the harvest and the gate before it is felt anywhere else.
-3. `[unfolding]` What {settlement} wins from this campaign it will win somewhere else; what it is spending, it is spending here, continuously and in plain view.
-4. `[visitor]` A stranger finds {settlement} quieter than a town this size should be, and finds the reason is arithmetic rather than mood.
+3. `[unfolding · colour]` What {settlement} wins from this campaign it will win somewhere else; what it is spending, it is spending here, continuously and in plain view.
+4. `[visitor · colour]` A stranger finds {settlement} quieter than a town this size should be, and finds the reason is arithmetic rather than mood.
 
 **`statusLabel: Occupied`**
 1. `[street · market]` {settlement} is held by {counterpart}. The hall still sits, the market still opens, and neither of them decides anything that {counterpart} has an opinion about.
-2. `[ledger]` What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.
-3. `[visitor]` A stranger at {settlement} deals with the town's own people and notices, eventually, whose soldiers are standing where the town's would be.
+2. `[ledger · colour]` What is decided at {settlement} is decided subject to the occupier; the town's institutions run, and run inside a boundary somebody else drew.
+3. `[visitor · colour]` A stranger at {settlement} deals with the town's own people and notices, eventually, whose soldiers are standing where the town's would be.
 
 **`statusLabel: At war` (no front at the walls, no army abroad)**
-1. `[ledger]` {settlement} is at war with {counterpart} and nothing has yet come of it here. No army has marched and none has arrived, and the town is arranged for both.
-2. `[street]` The town is at war in the way a town can be at war without seeing any: prices, absences, and a great many conversations about what might happen.
+1. `[ledger · colour]` {settlement} is at war with {counterpart} and nothing has yet come of it here. No army has marched and none has arrived, and the town is arranged for both.
+2. `[street · colour]` The town is at war in the way a town can be at war without seeing any: prices, absences, and a great many conversations about what might happen.
 3. `[counterforce · walls]` {settlement} is at war with {counterpart} and has not been touched by it; the distance between the two towns is doing the work that walls would otherwise have to.
 4. `[counterforce · no walls]` {settlement} is at war with {counterpart} and has not been touched by it; the distance between the two towns is doing the work that arms would otherwise have to.
 
@@ -3526,8 +3526,8 @@ PEACE, not missing data.
 3. `[street]` The town does not lose sleep over {counterpart}, and the not-losing-sleep is well founded.
 
 **feasibility `harassment`**
-1. `[counterforce]` {counterpart} is too weak to take {settlement} and strong enough to make the approaches unpleasant, which is precisely what it does.
-2. `[ledger]` What {settlement} faces from {counterpart} is raiding rather than war; the town itself is not at risk and the country around it is.
+1. `[counterforce · colour]` {counterpart} is too weak to take {settlement} and strong enough to make the approaches unpleasant, which is precisely what it does.
+2. `[ledger · colour]` What {settlement} faces from {counterpart} is raiding rather than war; the town itself is not at risk and the country around it is.
 3. `[street · walls]` The outlying country around {settlement} is dangerous because of {counterpart} and the town itself is not, and the distinction matters a great deal to the people living outside the walls.
 4. `[street · no walls]` The outlying country around {settlement} is dangerous because of {counterpart} and the town itself is not, and the distinction matters a great deal to the people living out on the farms.
 
@@ -3537,12 +3537,12 @@ PEACE, not missing data.
 3. `[unfolding]` What {settlement} watches is not {counterpart}'s army but {counterpart}'s company, and the company has been growing.
 
 **feasibility `require_betrayal`**
-1. `[counterforce · dm-only]` {settlement} cannot be taken from outside by {counterpart}; it would have to fracture first, and the fracturing is what {counterpart} is actually working on.
+1. `[counterforce · dm-only · colour]` {settlement} cannot be taken from outside by {counterpart}; it would have to fracture first, and the fracturing is what {counterpart} is actually working on.
 2. `[ledger · walls]` The danger to {settlement} from {counterpart} is internal by necessity. The walls are not the way in, and both parties understand which way is.
 3. `[street · dm-only · walls]` {counterpart} has stopped looking at {settlement}'s walls and started looking at its quarrels, and the change of attention is the whole threat.
 4. `[ledger · no walls]` The danger to {settlement} from {counterpart} is internal by necessity. Force is not the way in, and both parties understand which way is.
 5. `[street · dm-only · no walls]` {counterpart} has stopped looking at {settlement}'s defences and started looking at its quarrels, and the change of attention is the whole threat.
-6. `[visitor]` A stranger looking for the way into {settlement} would not find it on the road; what {counterpart} is waiting on is a quarrel inside the town.
+6. `[visitor · colour]` A stranger looking for the way into {settlement} would not find it on the road; what {counterpart} is waiting on is a quarrel inside the town.
 
 **feasibility `require_magic`** {colour}
 1. `[counterforce]` Nothing conventional {counterpart} could bring would take {settlement}; only decisive arcane force would open this town, and that is a different kind of undertaking entirely.
@@ -3582,9 +3582,9 @@ each cell below is authored from the page-owner's side.
 3. `[elder]` The obligation is {timeband_span} old at {settlement} and has never once been missed, which is a kind of achievement nobody here wants credit for.
 
 **`economic` · `strained`**
-1. `[ledger]` The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
+1. `[ledger · colour]` The tribute out of {settlement} is paid and paid grudgingly: the stores complain, the wagons run late, and every season somebody proposes that this be the last one.
 2. `[street · institution: granary]` The granary stands lighter than it should at {settlement}, and the lightness is the bill of the war, still being settled.
-3. `[unfolding]` What {settlement} sends {counterpart} is still going and is going more slowly each season, and the slowing is being noticed at the other end.
+3. `[unfolding · colour]` What {settlement} sends {counterpart} is still going and is going more slowly each season, and the slowing is being noticed at the other end.
 
 **`economic` · `defaulted`** {colour}
 1. `[ledger]` The wagons out of {settlement} have stopped. What was promised to {counterpart} is no longer being sent, and the oath that promised it is broken here.
@@ -3623,21 +3623,21 @@ each cell below is authored from the page-owner's side.
 
 **`territorial` · `honored`**
 1. `[ledger · walls]` {counterpart}'s garrison keeps the walls of {settlement} without incident: resented thoroughly, and unremoved.
-2. `[street]` The soldiers who hold the town are not the town's and there is no trouble about it, which is not the same as there being no feeling about it.
+2. `[street · colour]` The soldiers who hold the town are not the town's and there is no trouble about it, which is not the same as there being no feeling about it.
 3. `[unfolding · walls]` The garrison at {settlement} keeps the walls without incident and has kept them long enough that the absence of incident is beginning to look like the arrangement rather than the truce.
 4. `[ledger · no walls]` {counterpart}'s men keep {settlement} without incident: resented thoroughly, and unremoved.
 5. `[unfolding · no walls]` The occupiers at {settlement} keep the town without incident and have kept it long enough that the absence of incident is beginning to look like the arrangement rather than the truce.
 
 **`territorial` · `strained`**
 1. `[street · walls]` The garrison keeps {settlement}'s walls uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.
-2. `[unfolding]` What was a quiet occupation at {settlement} is becoming a contested one, incident by incident, and no single incident has been large enough to name.
+2. `[unfolding · colour]` What was a quiet occupation at {settlement} is becoming a contested one, incident by incident, and no single incident has been large enough to name.
 3. `[ledger · walls]` The garrison at {settlement} is spending more of its strength on the town than on the walls, and the proportion is moving the wrong way.
 4. `[street · no walls]` The occupiers keep {settlement} uneasily now; the townspeople chafe, stones are thrown, and the throwing has stopped being the work of children.
 5. `[ledger · no walls]` The occupiers at {settlement} are spending more of their strength on the town than on the country around it, and the proportion is moving the wrong way.
 
 **`territorial` · `defaulted`**
-1. `[ledger]` The garrison at {settlement} is besieged inside the very town it holds; the occupation is repudiated and the repudiation is armed.
-2. `[street]` The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.
+1. `[ledger · colour]` The garrison at {settlement} is besieged inside the very town it holds; the occupation is repudiated and the repudiation is armed.
+2. `[street · colour]` The town has turned on the soldiers holding it, and the soldiers are now holding a position rather than a place.
 3. `[unfolding · walls]` What holds {settlement}'s walls is now under attack from inside them, and the occupation has become a siege in reverse.
 4. `[unfolding · no walls]` What holds {settlement} is now under attack from inside it, and the occupation has become a siege in reverse.
 
@@ -3682,9 +3682,9 @@ each cell below is authored from the page-owner's side.
 3. `[street · dm-only]` Somebody at {settlement} is being funded from outside, and the funding is careful enough that nothing can yet be said about it in the hall.
 
 **`sovereignty` · `defaulted`**
-1. `[ledger]` An army has crossed into {settlement}'s internal quarrel; the pledge of non-intervention lies broken, and openly.
+1. `[ledger · colour]` An army has crossed into {settlement}'s internal quarrel; the pledge of non-intervention lies broken, and openly.
 2. `[street · gate]` The town's own dispute is no longer the town's own, and the people who made it somebody else's are visible from the gate.
-3. `[unfolding]` {settlement}'s internal quarrel now has a foreign army in it, and whatever it was about before, it is about that now.
+3. `[unfolding · colour]` {settlement}'s internal quarrel now has a foreign army in it, and whatever it was about before, it is about that now.
 
 **generic floor · `honored`** *(unnamed family)* {colour}
 1. `[ledger]` The term is kept at {settlement} as it was written, and the peace holds along this seam of it.
@@ -3826,8 +3826,8 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **PDF PARITY:** parity throughout (`liveWorld.js` reads the same selectors).
 
 **posture `peace`**
-1. `[ledger]` {settlement} is at peace and is arranged for it. Nothing here is being held back for a war, and nothing is being produced against one.
-2. `[street]` The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.
+1. `[ledger · colour]` {settlement} is at peace and is arranged for it. Nothing here is being held back for a war, and nothing is being produced against one.
+2. `[street · colour]` The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.
 3. `[visitor · no soldiers]` A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.
 
 **posture `alert`** {colour}
@@ -3867,18 +3867,18 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **`settlementWarStatus` null (peace, not missing data)**
 1. `[ledger · no crisis: unrest]` There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.
-2. `[counterforce]` {settlement} has neighbours it disagrees with and no front with any of them; the disagreements have stayed disagreements.
+2. `[counterforce · colour]` {settlement} has neighbours it disagrees with and no front with any of them; the disagreements have stayed disagreements.
 3. `[street · no crisis: unrest]` Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.
 
 **live `war_front` INTO the settlement (a genuine siege)**
-1. `[ledger]` A live front runs into {settlement}. There is an army here, it is arranged against the town, and the town's condition is now a question of stores and time.
+1. `[ledger · colour]` A live front runs into {settlement}. There is an army here, it is arranged against the town, and the town's condition is now a question of stores and time.
 2. `[street · gate]` The gates are shut and there is something outside them, and the something is not a rumour.
-3. `[unfolding]` What decides {settlement} now is being decided outside its walls, and nothing the town does inside them changes the arithmetic much.
+3. `[unfolding · walls]` What decides {settlement} now is being decided outside its walls, and nothing the town does inside them changes the arithmetic much.
 
 **phantom front (hostility with no army behind it)**
-1. `[counterforce]` {settlement} and {counterpart} are hostile and nothing is standing outside the walls; the enmity is real and no force has been committed to it.
-2. `[ledger]` What is between {settlement} and {counterpart} is a relationship rather than a campaign, and the town has taken no siege measures because there is no siege.
-3. `[street]` The town names {counterpart} as its enemy at {settlement} and has never seen a soldier of theirs, and both of those things are true at once.
+1. `[counterforce · walls]` {settlement} and {counterpart} are hostile and nothing is standing outside the walls; the enmity is real and no force has been committed to it.
+2. `[ledger · colour]` What is between {settlement} and {counterpart} is a relationship rather than a campaign, and the town has taken no siege measures because there is no siege.
+3. `[street · colour]` The town names {counterpart} as its enemy at {settlement} and has never seen a soldier of theirs, and both of those things are true at once.
 
 **occupation `contested`** {colour}
 1. `[ledger]` {counterpart} holds {settlement} and has not taken hold of it; the occupation is contested, and the garrison spends its strength on the town rather than through it.
@@ -3926,9 +3926,9 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[street]` The town at {settlement} is fighting the people holding it, in daylight, and has stopped calculating whether it can win.
 
 **blockade stamped (recorded cause)**
-1. `[ledger]` The transport into {settlement} is impaired and the impairment has a name on it: {counterpart}'s blockade, and nothing about the roads or the harbour themselves.
-2. `[unfolding]` What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.
-3. `[street]` The town at {settlement} can name what is stopping its supply, and points at the water when it does.
+1. `[ledger · colour]` The transport into {settlement} is impaired and the impairment has a name on it: {counterpart}'s blockade, and nothing about the routes themselves.
+2. `[unfolding · colour]` What reaches {settlement} reaches it around the blockade, in smaller quantities and at prices the town has not seen before.
+3. `[street · navigable]` The town at {settlement} can name what is stopping its supply, and points at the water when it does.
 
 **blockade LIFTED (the impairment is cleared)** {colour}
 1. `[ledger]` The blockade on {settlement} has ended and what it impaired is running again; the town's supply has resumed, and what it lost while it was closed has not.
@@ -3947,8 +3947,8 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **aftermath `siege_lifted`**
 1. `[street · gate]` The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.
-2. `[ledger]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.
-3. `[unfolding]` {settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.
+2. `[ledger · walls]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.
+3. `[unfolding · colour]` {settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.
 
 **aftermath `occupation_lifted`** {colour}
 1. `[ledger]` {counterpart}'s garrison has left {settlement}. What the occupation arranged remains arranged, and the town is now responsible for arrangements it did not choose.
@@ -3977,9 +3977,9 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[street]` The people {settlement} took in are still here, and the town's generosity has become a standing item that somebody has to fund.
 
 **aftermath `trade_realignment`**
-1. `[ledger]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
+1. `[ledger · colour]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
 2. `[street · market]` The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
-3. `[elder]` {settlement} trades with different towns than it did {timeband_since}, and the change was not chosen by anybody here.
+3. `[elder · colour]` {settlement} trades with different towns than it did {timeband_since}, and the change was not chosen by anybody here.
 
 ---
 
@@ -4598,8 +4598,8 @@ reads what the panel renders. A page draws at most one of each.
 
 **PATRON: `rankAxis: major`**
 1. `[visitor · walls]` {creed} is the patron here, and it is no local creed. The same rite is kept across enough of the realm to carry weight well past {settlement}'s walls.
-2. `[street]` The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.
-3. `[ledger]` {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
+2. `[street · colour]` The observance here is {creed}'s, and it is the observance of the region besides; the calendar kept in this town is the calendar kept along the whole road.
+3. `[ledger · colour]` {settlement} keeps {creed}, a faith holding seats far beyond this one. Its clergy speak with the confidence of people who are not alone.
 4. `[visitor · no walls]` {creed} is the patron here, and it is no local creed. The same rite is kept across enough of the realm to carry weight well past {settlement}'s bounds.
 
 **PATRON: `rankAxis: minor`** {colour}
@@ -4608,15 +4608,15 @@ reads what the panel renders. A page draws at most one of each.
 3. `[visitor]` {settlement} keeps {creed}. Travellers from far enough away will not know the name, which the clergy find easier to forgive than to fix.
 
 **PATRON: `rankAxis: cult`**
-1. `[visitor]` The patron of {settlement} is {creed}, a creed with few other homes. What it lacks in reach it holds in intensity.
-2. `[ledger]` {creed} holds the seat here and almost nowhere else; the town is the faith rather than a part of it.
+1. `[visitor · colour]` The patron of {settlement} is {creed}, a creed with few other homes. What it lacks in reach it holds in intensity.
+2. `[ledger · colour]` {creed} holds the seat here and almost nowhere else; the town is the faith rather than a part of it.
 3. `[street · walls]` Outside these walls {creed} is a curiosity. Inside them it is the calendar, the oath and the burial rite.
 4. `[street · no walls]` Elsewhere {creed} is a curiosity. Here it is the calendar, the oath and the burial rite.
 
 **CULTS: `cults[]` present beneath the patron**
 1. `[visitor · sacredHouse]` Beneath {creed}, smaller observances keep their own shrines: tolerated, attended, and not confused with the town's own rite.
-2. `[ledger]` The patron is not the only creed here; {rival_creed} keeps a following that is real without being a rival for the seat.
-3. `[street]` What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}.
+2. `[ledger · colour]` The patron is not the only creed here; {rival_creed} keeps a following that is real without being a rival for the seat.
+3. `[street · colour]` What else is kept here runs alongside the patron's rite, with its own days and its own corner of {settlement}.
 
 **DEVOTION: `devout`** · plain description; no cause clause without `piety.causes[]` {colour}
 1. `[street]` Devotion here runs deep. The rites are kept by people who would keep them without being asked.
@@ -4624,8 +4624,8 @@ reads what the panel renders. A page draws at most one of each.
 3. `[ledger]` Observance is near-total, and it is not performance; the creed shapes what people do on ordinary days.
 
 **DEVOTION: `faithful`**
-1. `[ledger]` The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.
-2. `[street]` Devotion here is steady and unspectacular. Most households keep the rites, and the ones that do not are known.
+1. `[ledger · colour]` The town keeps its faith properly. Attendance is the rule rather than the exception, and lapsing is noticed.
+2. `[street · colour]` Devotion here is steady and unspectacular. Most households keep the rites, and the ones that do not are known.
 3. `[visitor · temple]` {settlement} is faithful in the working sense: the benches are full on the days they should be full.
 
 **DEVOTION: `observant`** {colour}
@@ -4635,23 +4635,23 @@ reads what the panel renders. A page draws at most one of each.
 
 **DEVOTION: `lukewarm`**
 1. `[visitor · temple]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
-2. `[street]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
+2. `[street · colour]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
 3. `[ledger · priest]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
 
 **DEVOTION: `secular`**
 1. `[ledger · temple]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
-2. `[street]` The town keeps very little of its faith. Nothing forbids the rites and almost nobody attends them, and neither half of that is discussed.
-3. `[threshold]` {settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
+2. `[street · colour]` The town keeps very little of its faith. Nothing forbids the rites and almost nobody attends them, and neither half of that is discussed.
+3. `[threshold · colour]` {settlement} is not a godless town, but it is a distracted one. The creed reaches the ceremonies and not much further.
 
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
-1. `[unfolding]` Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.
-2. `[street]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
+1. `[unfolding · colour]` Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.
+2. `[street · colour]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
 3. `[ledger · priest]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
-1. `[unfolding]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.
+1. `[unfolding · colour]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.
 2. `[street · temple]` The benches empty a little each season, not from any quarrel with the faith, only from the slow discovery that nothing punishes absence.
-3. `[threshold]` Belief here is receding ahead of the ceremonies; the ceremonies are the last part to go, and they have not gone.
+3. `[threshold · colour]` Belief here is receding ahead of the ceremonies; the ceremonies are the last part to go, and they have not gone.
 
 **ARC: `trend: steady`** {colour}
 1. `[ledger]` Devotion holds where it has been. Nothing is pulling it up and nothing is pulling it down.
@@ -4674,14 +4674,14 @@ reads what the panel renders. A page draws at most one of each.
 3. `[street]` Several observances share this town in rough proportion, which the clergy of each describe differently.
 
 **SINK: `unaffiliated` present, arc falling** (the pews draining)
-1. `[ledger]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
-2. `[threshold]` The unaffiliated are the fastest-growing part of {settlement}'s religious life, which is a way of saying its religious life is shrinking.
+1. `[ledger · colour]` A growing share of the town keeps no god at all. The share is not going to a rival rite, it is going out of the rites altogether.
+2. `[threshold · colour]` The unaffiliated are the fastest-growing part of {settlement}'s religious life, which is a way of saying its religious life is shrinking.
 3. `[street · temple]` People here are leaving the rites without joining anything; the benches thin and nothing fills them.
 
 **SINK: `unaffiliated` present, arc rising** (the pews reclaiming)
 1. `[unfolding]` The unaffiliated are drifting back toward the observances. Crisis has a way of ending indifference.
 2. `[ledger · temple]` The godless share of the town is shrinking; whatever emptied the benches has stopped being persuasive.
-3. `[street]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
+3. `[street · colour]` People who kept no rite are keeping one again, and mostly the one their households kept before them.
 
 **MANDATE: contested, or patron security below the floor** {colour}
 1. `[counterforce]` The ruler's claim gets no help from the observances. A divided faith cannot lend authority it does not itself hold.
@@ -4792,14 +4792,14 @@ panel does not surface at all.
 **SLOTS.** `{settlement}` `{creed}` `{rival_creed}` `{institution}` `{season}` `{timeband_span}`
 
 **STANDING: `cult`**
-1. `[ledger]` {creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.
+1. `[ledger · colour]` {creed} is kept here by a few households and no more: a following rather than a congregation, and one the town's other rites do not take seriously.
 2. `[visitor · sacredHouse]` The creed holds a fringe of {settlement}. Its shrine is real, its calendar is observed, and neither is consulted about anything.
-3. `[threshold]` This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.
+3. `[threshold · colour]` This is a small faith in this town. Small enough that whether it grows is a question about a handful of families.
 
 **STANDING: `established`**
-1. `[ledger]` {creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.
+1. `[ledger · colour]` {creed} is properly settled here. Enough of the town keeps it that its days are the town's days, without its holding the seat.
 2. `[visitor · temple]` The creed is established: a real congregation, a real house, and no serious claim on the patron's place.
-3. `[elder]` It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons. *— requires `tenure`*
+3. `[elder · colour]` It is one of the town's faiths rather than one of its curiosities: a distinction of {timeband_span}, not of seasons. *— requires `tenure`*
 
 **STANDING: `ascendant`** {colour}
 1. `[unfolding]` {creed} has risen to the front rank of {settlement}'s faiths. Its share is large enough to make it patron-eligible, and everyone concerned has noticed.
@@ -4813,8 +4813,8 @@ panel does not surface at all.
 
 **NICHE: slots open**
 1. `[ledger · sacredHouse]` The town has room for more faith than it keeps. Shrines stand unclaimed, and an arriving creed would find space rather than resistance.
-2. `[visitor]` {settlement} is under-served by its own gods. The population could sustain more observance than it currently does.
-3. `[threshold]` There is space in the calendar here. Whether anything fills it is a question of who comes down the road.
+2. `[visitor · colour]` {settlement} is under-served by its own gods. The population could sustain more observance than it currently does.
+3. `[threshold · colour]` There is space in the calendar here. Whether anything fills it is a question of who comes down the road.
 
 **NICHE: the patron's niche carries a contestant** (THE SCHISM) {colour}
 1. `[counterforce]` Two creeds occupy the same ground here: the same temper, the same alignment, the same kind of believer. That is not coexistence; it is a schism with a calendar.
@@ -4835,8 +4835,8 @@ panel does not surface at all.
 
 **LEGITIMACY: `established`**
 1. `[ledger · no crisis: religious_conversion]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.
-2. `[threshold]` {creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.
-3. `[street]` The faith's standing is legitimate and ordinary. It is the arrangement people are used to.
+2. `[threshold · colour]` {creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.
+3. `[street · colour]` The faith's standing is legitimate and ordinary. It is the arrangement people are used to.
 
 **LEGITIMACY: `tenuous`** {colour}
 1. `[counterforce]` The patron's right to the seat is thin. It holds the benches and it does not hold the argument, and the town has begun to notice the difference.
@@ -4879,9 +4879,9 @@ panel does not surface at all.
 3. `[street]` It is a real faith with a real spread and no pretensions past its district.
 
 **PANTHEON RANK: `Major`** (four or more seats)
-1. `[ledger]` This is one of the realm's first-rank faiths, kept as patron in enough settlements that its clergy speak to rulers rather than about them.
-2. `[threshold]` {creed}'s reach is realm-wide. What its councils say about the lawfulness of magic is heard where such things are decided.
-3. `[visitor]` The faith is major. That is a count of seats rather than a claim about the god, and the count is what gives its clergy their standing.
+1. `[ledger · colour]` This is one of the realm's first-rank faiths, kept as patron in enough settlements that its clergy speak to rulers rather than about them.
+2. `[threshold · magic]` {creed}'s reach is realm-wide. What its councils say about the lawfulness of magic is heard where such things are decided.
+3. `[visitor · colour]` The faith is major. That is a count of seats rather than a claim about the god, and the count is what gives its clergy their standing.
 
 **TEMPLE WEALTH: rich** {colour}
 1. `[ledger]` {institution} holds a considerable coffer: enough to lend, enough to build, and enough that the question of what it is for gets asked occasionally.
@@ -4910,8 +4910,8 @@ panel does not surface at all.
 
 **PILGRIM SEASON: thin**
 1. `[visitor · institution: tavern]` The road is quiet. The pilgrims come at their season and this is not it, and the town's inns are honest about the difference.
-2. `[ledger]` Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
-3. `[threshold]` The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
+2. `[ledger · colour]` Few travellers keep the rite here now. The calendar has moved past the occasion, and the town has gone back to itself.
+3. `[threshold · colour]` The pilgrim trade is at its low ebb. What remains is the local congregation, which is smaller than the town's provisioning suggests.
 
 **PILGRIM SEASON: suppressed by road danger** · a cause clause licensed by the route-risk record {colour}
 1. `[counterforce]` The pilgrims are not coming. The rite has not changed and the road has. What was a devotional journey is now a risk with a devotional excuse.
