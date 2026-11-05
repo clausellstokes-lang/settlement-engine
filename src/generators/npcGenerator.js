@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; import { textOf } from '../domain/facts/textOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
@@ -114,7 +114,7 @@ const generateSingleNPC = (
     worldLaw,
   });
   const religion = generateReligionType(hookRegistry);
-  const appearance = generateNPCAppearance(category);
+  const appearance = generateNPCAppearance(category, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-1i unit 6: the goal draw's facts (R-V), handed to the wants
   const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(bareLine(generateNPCGoal(role, category, config, birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw))), birthFactsOf({ institutions, config, tier, powerStructure: { government: config._government } }, worldLaw)); // CENSUS-4b: bareLine — a declared goal is stored without its declaration column // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
@@ -349,11 +349,11 @@ export const generateReligionType = (reg) => {
 };
 
 // generateNPCAppearance
-const generateNPCAppearance = (r = 'other') => ({
+const generateNPCAppearance = (r = 'other', facts = null) => ({
   age: pickFromArray(NPC_AGE_DATA[pickFromArray(['young', 'middle', 'mature', 'elder'])]),
   build: pickFromArray(NPC_BUILDS),
   feature: pickFromArray(NPC_FEATURES),
-  clothes: textOf(pickFromArray(NPC_WANTS[r] || NPC_WANTS.other)), // CENSUS-4f (R-C): three wants declare; carried until the site is wired
+  clothes: lineText(drawDeclared(NPC_WANTS[r] || NPC_WANTS.other, { draw: pickFromArray, facts, key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_WANTS`, poolId: 'npcData:NPC_WANTS', surface: 'npcs', drawKind: 'R', keepRefused: true }).line), // CENSUS-1i unit 6: CENSUS-4f's three declaring wants enforced (one roll over the FULL pool, then resolve; R-C)
 });
 
 // generateNPCGoal
