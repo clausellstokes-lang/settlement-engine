@@ -27,11 +27,13 @@ describe('NPC_WANTS declarations (CENSUS-4f unit 6)', () => {
     expect(rows.filter((r) => typeof r === 'object' && r.colour === true && Object.keys(r).length === 2).length).toBe(rows.length - 3);
   });
 
-  it('(b) the draw stores the text: soak1k-9 draws the oilskins and stores a string, not the row', async () => {
+  it('(b) the draw stores the text, and since CENSUS-1i unit 6 resolves a refused want: soak1k-9 (no docks) no longer prints the oilskins', async () => {
+    // re-keyed by CENSUS-1i unit 6 (the site wired through drawDeclared): soak1k-9 drew the oilskins
+    // with no docks on its record; the refused want now resolves to an admitted one, stored as a string.
     await ensureLaws();
     const { settlement } = birth(9);
     const clothes = (settlement.npcs || []).map((n) => n?.physical?.clothes);
-    expect(clothes).toContain("a dockhand's oilskins over hands too clean for the work");
+    expect(clothes).not.toContain("a dockhand's oilskins over hands too clean for the work");
     expect(clothes.every((c) => typeof c === 'string')).toBe(true);
   });
 });
