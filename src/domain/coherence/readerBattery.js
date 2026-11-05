@@ -75,7 +75,8 @@ function recordHoldsGood(s, good) {
   const nearby = (Array.isArray(s?.config?.nearbyResources) ? s.config.nearbyResources : []).filter((/** @type {unknown} */ k) => !depleted.has(k));
   const food = es.foodSecurity?.foodRecord || {};
   const held = [...(es.localProduction || []), ...(es.primaryImports || []), ...(es.primaryExports || []), ...nearby, ...(food.foodSources || [])]
-    .map((/** @type {unknown} */ x) => str(x).toLowerCase().replace(/[_/()\-,.]+/g, ' '));
+    // "precious stones" are gems, not a quarry's stone (soak1k-316 at 1,000).
+    .map((/** @type {unknown} */ x) => str(x).toLowerCase().replace(/\bprecious stones?\b/g, 'gems').replace(/[_/()\-,.]+/g, ' '));
   const words = held.join(' ').split(/\s+/).filter(Boolean).map((w) => w.replace(/s$/, ''));
   const wanted = good.toLowerCase().replace(/[_/()\-,.]+/g, ' ').split(/\s+/).filter((w) => w.length >= 4 && !GAP_FILLER.has(w)).map((w) => w.replace(/s$/, ''));
   if (wanted.some((w) => words.includes(w))) return true;

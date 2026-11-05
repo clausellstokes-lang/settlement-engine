@@ -39,6 +39,10 @@ describe('reader:validation-on-page', () => {
     const fed = rec({ economicState: { foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 17 } } } });
     expect(R.validationOnPageFindings(fed, { resources: 'No grain reaches the external mill.' }).map((r) => r.detail)).toEqual(['[gap-vs-record] 1 lines']);
     expect(R.validationOnPageFindings(rec(), { resources: 'No clay reaches the potter.' })).toEqual([]);
+    // "Precious stones" are gems, not a quarry's stone; "Mineral salts" are salt (soak1k-316, -249 at 1,000)
+    const gems = rec({ economicState: { primaryImports: ['Precious stones and gems'], primaryExports: ['Mineral salts'] } });
+    expect(R.validationOnPageFindings(gems, { resources: 'No stone reaches the stone quarry.' })).toEqual([]);
+    expect(R.validationOnPageFindings(gems, { resources: 'No salt reaches the salt works.' }).map((r) => r.detail)).toEqual(['[gap-vs-record] 1 lines']);
   });
   test('negative control: a viable page with no validator line is silent', () => {
     expect(R.validationOnPageFindings(rec(), { overview: 'The place\nThe water was here before the town.', viability: '✓ Viable\nCritical Issues (1) ▲' })).toEqual([]);

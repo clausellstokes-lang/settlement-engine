@@ -42,6 +42,8 @@ import { resourceDisplayName } from './resourceDisplayName.js';
 const str = (x) => (typeof x === 'string' ? x : x == null ? '' : String(x));
 /** @param {unknown} x @returns {any[]} */
 const arr = (x) => (Array.isArray(x) ? x : []);
+/** @param {string} text a `recordGoods` text @param {string} word the singular word @returns {boolean} the word or its plural ("mineral salts" answers salt) */
+const holds = (text, word) => text.includes(norm(word)) || text.includes(norm(`${word}s`));
 /** @param {string} x */
 const norm = (x) => ` ${x.toLowerCase().replace(/[_/()\-,.]+/g, ' ').replace(/\s+/g, ' ').trim()} `;
 
@@ -104,7 +106,7 @@ function recordGoods(s) {
 function inputAnswered(s, chainKey, inst, goods) {
   const spec = CHAIN_INPUTS[chainKey];
   if (!spec) return true; // a chain this reader cannot name prints nothing (never a rule sentence)
-  if (spec.words.some((w) => goods.includes(norm(w)))) return true;
+  if (spec.words.some((w) => holds(goods, w))) return true;
   const food = s?.economicState?.foodSecurity?.foodRecord;
   if (food && spec.food && arr(food.foodSources).some((x) => spec.food?.includes(x))) return true;
   // The staple comes in by ordinary supply (hinterland carts, trade) when the food record says so.
@@ -159,7 +161,7 @@ export function resourceGapLines(s) {
     const entry = chainFor(str(g.chain));
     const spec = entry ? CHAIN_INPUTS[entry[0]] : null;
     const raw = (spec?.raw || str(resourceDisplayName(str(g.chain)))).toLowerCase();
-    if (spec && spec.words.some((w) => exportsText.includes(norm(w)))) continue; // the economy sells it: someone works it
+    if (spec && spec.words.some((w) => holds(exportsText, w))) continue; // the economy sells it: someone works it
     const missing = arr(g.missing).map((n) => str(institutionDisplayName(n) || n)).filter(Boolean).map((n) => n.charAt(0).toLowerCase() + n.slice(1));
     if (/not being processed/.test(str(g.impact))) {
       push({ chain: null, impact: `No one here works the ${raw} near ${str(s?.name) || 'the place'}.`, severity: str(g.severity) || 'low' });

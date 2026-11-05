@@ -109,6 +109,17 @@ describe('ruling 3 — a gap prints only when the record lacks the input', () =>
   });
 });
 
+test('ruling 3, the plural: "Mineral salts" exported answers the salt works (soak1k-249 / -801 at 1,000)', async () => {
+  const { resourceGapLines } = await import('../../src/domain/display/validationOnPage.js');
+  const s = { name: 'Saltby', config: { terrainType: 'mountain', tradeRouteAccess: 'isolated', nearbyResources: [] },
+    institutions: [{ name: 'Salt works', tags: ['trade'] }],
+    resourceAnalysis: { gaps: [{ chain: 'desert_salt', institution: 'Salt works', impact: 'Salt works exists but lacks access to desert_salt', severity: 'high' }] },
+    economicState: { localProduction: [], primaryImports: [], primaryExports: ['Mineral salts'], foodSecurity: { foodRecord: { foodSources: [], normalImportPct: 0 } } } };
+  expect(resourceGapLines(s)).toEqual([]);
+  s.economicState.primaryExports = [];
+  expect(resourceGapLines(s).map((g) => g.impact)).toEqual(['No salt reaches the salt works.']);
+});
+
 describe('ruling 4 — "no dependable trade route" reads the route', () => {
   test('soak1k-24: a crossroads thorp under siege has a route that is cut', () => {
     const t = text(ViabilityTab, clone(BIRTHS['soak1k-24']));
