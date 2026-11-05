@@ -434,7 +434,11 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // town|germanic|plains|road|civilized|gm-seed-c, E1|E5 and E2|E5 differ ONLY in simulationTrace[92..93], the relationship
     // derivation's narrative ("25 edges" | "23 edges", "Direct=1 … scatter=0" | "Direct=0 …"); every world field is identical
     // in both orders. At the base the seat pairs differed in exactly that kind of trace reason on gm-seed-a's town.
-    expect(tally(chains().pairs)).toEqual({ 'E1|E5': 1, 'E2|E5': 1, 'E5|E1': 1, 'E5|E2': 1 });
+    // 2026-11-05 (LANDING-5, the chair's ruling 4; re-keyed BY IDENTITY with its step, bisected over the landing's
+    // first-parent stages by the chain census): the four non-commuting pairs (trace-only, E1|E5 E2|E5 E5|E1 E5|E2) hold
+    // through 79c442330 and are GONE from X-46 car 3 90dc22f18 (the institution budget): every ordered pair now commutes.
+    // Determinism, undo and the 252/126/1890 denominators hold at every probed stage.
+    expect(tally(chains().pairs)).toEqual({});
     expect(() => mergeConsequence({}, {}, {}, { edit: [] })).toThrow(TypeError);
   }, ARM_TIMEOUT);
 
