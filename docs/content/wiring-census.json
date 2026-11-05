@@ -8,7 +8,7 @@
       "src/domain/display/stateProse/defenseStateProse.js": "3754e325a7296cb78c4aceb93fa0d9b8372c9be305f4db7663b4efd256ef1edb",
       "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
       "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
-      "src/domain/display/stateProse/dossierMounts.js": "2ef29e8e200c8497192ffd01b1d2c96a675675b7038ee6cb6162f9c6194d6bcc"
+      "src/domain/display/stateProse/dossierMounts.js": "3e4ecc624bfca953cc107665b4200c0c35c9414be59368f9f9b7c59d599bef77"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2324,
+    "variants": 2334,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -7245,7 +7245,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [
@@ -7319,7 +7319,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -7394,7 +7394,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 5,
       "grammars": 1,
       "predicate": [
         {
@@ -7473,7 +7473,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -7552,7 +7552,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -7630,7 +7630,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -9383,7 +9383,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -9479,8 +9479,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
-      "grammars": 1,
+      "variants": 4,
+      "grammars": 2,
       "predicate": [],
       "branchReads": [],
       "fieldsRead": [],
@@ -9527,7 +9527,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -39607,7 +39607,7 @@
         "DS-ECO-2 :: GRANARY: thin",
         "DS-ECO-2 :: GRANARY: nearly empty"
       ],
-      "variants": 12,
+      "variants": 17,
       "grammars": 5,
       "blocks": [
         "DS-ECO-2"
@@ -49243,7 +49243,7 @@
       "subject": "FOOD: surplus",
       "fields": [],
       "readingFunction": "foodTilePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49251,7 +49251,7 @@
       "subject": "FOOD: balanced",
       "fields": [],
       "readingFunction": "foodTilePoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49261,7 +49261,7 @@
         "granary.band"
       ],
       "readingFunction": "granaryPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {season, settlement}"
+      "count": "5 variant(s) · 1 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "COVERED",
@@ -49271,7 +49271,7 @@
         "granary.band"
       ],
       "readingFunction": "granaryPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {season, settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -49281,7 +49281,7 @@
         "granary.band"
       ],
       "readingFunction": "granaryPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {season, settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {season, settlement}"
     },
     {
       "tier": "THIN",
@@ -49291,7 +49291,7 @@
         "granary.band"
       ],
       "readingFunction": "granaryPoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {season}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {season}"
     },
     {
       "tier": "THIN",
@@ -49579,7 +49579,7 @@
       "subject": "SURPLUS",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49595,7 +49595,7 @@
       "subject": "PRESSURED",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -49603,7 +49603,7 @@
       "subject": "IMPORT-DEPENDENT",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",

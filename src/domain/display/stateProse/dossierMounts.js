@@ -264,16 +264,16 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'economics.economyTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-8', rung: 'glance', dimensions: ['crisis', 'hunger', 'walls'],
   }),
   Object.freeze({
-    mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+    mount: 'economics.foodTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance', dimensions: ['hunger'],
   }),
   Object.freeze({
-    mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance',
+    mount: 'economics.seasonTile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-2', rung: 'glance', dimensions: ['hunger'],
   }),
   Object.freeze({
     mount: 'economics.foodSecurity', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-9', rung: 'sentence', dimensions: ['hunger', 'walls'],
   }),
   Object.freeze({
-    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['walls'],
+    mount: 'economics.commercialProfile', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-12', rung: 'sentence', dimensions: ['hunger', 'walls'],
   }),
   Object.freeze({
     mount: 'economics.shadowEconomy', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-6', rung: 'sentence',
@@ -452,7 +452,7 @@ export const DOSSIER_MOUNTS = Object.freeze([
     mount: 'viability.magicDependency', tab: 'viability', desk: 'defense', blockId: 'DS-DEF-9', rung: 'sentence',
   }),
   Object.freeze({
-    mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence',
+    mount: 'economics.exportPosture', tab: 'economics', desk: 'economy', blockId: 'DS-ECO-10', rung: 'sentence', dimensions: ['hunger'],
   }),
   Object.freeze({
     mount: 'resources.groundAndWorkings', tab: 'resources', desk: 'economy', blockId: 'DS-ECO-11', rung: 'sentence',
