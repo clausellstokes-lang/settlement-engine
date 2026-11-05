@@ -32,6 +32,7 @@ import {
   causeLifecyclePhrase, conjunctionKeyString, roleNoun, STAGE_BADGE,
 } from './causeLifecycleVocabulary.js';
 import { ROLE_CONTENT } from './causeConjunctionRoleContent.js';
+import { drawDeclared, lineText } from '../facts/drawDeclared.js';
 import { CLASS_CONTENT } from './causeConjunctionClassContent.js';
 
 /** @typedef {{ role?: string, situation?: string, causeClass?: string, lifecycleStage?: string, ageBand?: string }} ConjunctionKeyLike */
@@ -201,9 +202,12 @@ export function conjunctionVariantsFor(key) {
  * W-C5 template floor and keeps its own age-band register.
  * @param {ConjunctionKeyLike|null|undefined} key
  * @param {string|number|null|undefined} seedId  npc/settlement id (variant seed)
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk): answers a
+ *   declared line (CENSUS-1d unit 2, Appendix B rows 101–102: the modulus over the FULL ladder
+ *   rung, resolved through `drawDeclared`); none = a declared line is refused (fail-closed)
  * @returns {{ line: string, tier: 'full'|'role'|'class'|'floor' }}
  */
-export function conjunctionContent(key, seedId) {
+export function conjunctionContent(key, seedId, facts = null) {
   const k = normalizeKey(key);
   const { tier, variants } = conjunctionVariantsFor(k);
   const keyStr = conjunctionKeyString({
@@ -217,11 +221,15 @@ export function conjunctionContent(key, seedId) {
       line: causeLifecyclePhrase({
         stage: k.lifecycleStage, causeClass: k.causeClass, role: k.role,
         ageBand: k.ageBand, variant: h % 3,
-      }),
+      }, facts),
       tier: 'floor',
     };
   }
-  const line = variants[h % variants.length]
+  const drawn = drawDeclared(variants, {
+    draw: (p) => p[h % p.length], facts, key: `${String(seedId ?? '')}::${keyStr}`,
+    poolId: `CAUSE_CONJUNCTION.${tier}.${keyStr}`, surface: 'npcs', drawKind: 'H',
+  });
+  const line = String(lineText(drawn.line) ?? '')
     .replace(/\{role\}/g, roleNoun(k.role));
   return { line, tier };
 }
@@ -234,9 +242,10 @@ export function conjunctionContent(key, seedId) {
  * rung it resolved at. Returns null for an absent/empty stamp.
  * @param {{ stage?: string, causeClass?: string, role?: string, situation?: string, ageBand?: string }|null|undefined} stamp  npc.compromiseLifecycle
  * @param {string|number|null|undefined} seedId  stable npc id (variant seed)
+ * @param {object|null|(() => object|null)} [facts] `factsOf(settlement)` (or a thunk)
  * @returns {{ badge: string|null, tone: string, phrase: string, tier: string, conjunctionKey: object }|null}
  */
-export function describeCompromiseConjunction(stamp, seedId) {
+export function describeCompromiseConjunction(stamp, seedId, facts = null) {
   if (!stamp || !stamp.stage || !stamp.causeClass) return null;
   const badge = STAGE_BADGE[stamp.stage] || STAGE_BADGE.attributed;
   const key = {
@@ -246,7 +255,7 @@ export function describeCompromiseConjunction(stamp, seedId) {
     lifecycleStage: stamp.stage,
     ageBand: stamp.ageBand,
   };
-  const { line, tier } = conjunctionContent(key, seedId);
+  const { line, tier } = conjunctionContent(key, seedId, facts);
   return {
     badge: badge.label,
     tone: badge.tone,
