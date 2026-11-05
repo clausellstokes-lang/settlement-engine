@@ -215,7 +215,7 @@ export const GENERATION_CHANNELS = Object.freeze({
   mints: Object.freeze({ instrument: 'src/kernel/prng.js#createPRNG', direct: 4, rootSeedPrefixed: true }),
   // 2026-10-31, tension variety (GS-1, ODQ §934.101): 6 -> 15, the tie-prose draw's per-archetype offsets (measured).
   // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16, FOOD-3 (food diversity) opens one more offset (measured).
-  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 16 }),
+  hash: Object.freeze({ instrument: 'src/kernel/proseHash.js#pickVariant', fnv1a32External: 15 }),
 });
 
 /**

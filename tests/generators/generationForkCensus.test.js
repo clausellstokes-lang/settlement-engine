@@ -163,7 +163,9 @@ const CHOOSER_KEYS = ['npcs', 'relationships'];
 // figure pipelinePinnedMode's A2 reads as the unpinned total on this row).
 // Then the druid rulings (2026-10-01, ODQ §934.86 addendum 2, J30–J33): 307 -> 310 (measured; pipelinePinnedMode's A2 reads the same 310).
 // Then GS-2 one faction set (2026-10-31, ODQ §934.101): 310 -> 306 (measured; the name picks and the conflict draws left the step).
-const POPULATION_UNPINNED_DRAWS = 306;
+// 2026-11-05 (LANDING-6, bisected by first-parent stage): 306 -> 303 X-46 car 3 (90dc22f18), unmoved to the tip (the
+// same figure pipelinePinnedMode's UNPINNED_STEP_DRAWS reads, re-keyed there by LANDING-5).
+const POPULATION_UNPINNED_DRAWS = 303;
 /** The row both side channels are censused on (the pre-proof's probe row). */
 const CENSUS_ROW = {
   settType: 'town', culture: 'germanic', terrainOverride: 'riverside',
@@ -185,7 +187,9 @@ const REPEATED_VIAS = ['fork', 'direct', 'direct', 'direct'];
 const PICK_VARIANT_CALLS = 31;
 // 2026-11-04, window-end pin re-key (REGISTERS seat): 15 -> 16 external fnv1a32 calls on the probe row (measured;
 // FOOD-3, food diversity, traced at stage T3 in DOORS-4).
-const FNV_EXTERNAL_CALLS = 16;
+// 2026-11-05 (LANDING-6, bisected by first-parent stage): 16 -> 17 X-46 car 1 (1264a8152) -> 15 X-46 car 3 (90dc22f18),
+// unmoved to the tip; the register's fnv1a32External moves with it (generationForkRegistry.js).
+const FNV_EXTERNAL_CALLS = 15;
 /** The fork law A1 pins: the mint wrapper's equivalence rests on this line and nothing else. */
 const FORK_LAW = 'fork: (label) => createPRNG(`${seed}::${label}`),';
 /** §6.4's off-corpus block: a wizard-reachable switch, the keys it moves, and 24 seeds. */
@@ -212,7 +216,7 @@ const OFF_CORPUS_STEP = 'resolveConfig';
  * this packet asserts nothing about their cure.
  */
 const DISPLAY_NAME_KEYED_SITES = [
-  { site: 'src/generators/steps/assembleInstitutions.js:863', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863
+  { site: 'src/generators/steps/assembleInstitutions.js:1004', channel: 'hash', marker: 'inst.name' }, // 2026-10-01, the urban band (ODQ §934.86): a pure line move, 774 -> 863; 2026-11-05 (LANDING-6, read per first-parent step): the same pickVariant line, 863 -> 888 terrain-pools (ac09ea83b) -> 891 its re-merge (fb5edb7f5) -> 910 car 3 (90dc22f18) -> 911 PINS (37b1e746d) -> 1004 F6 (6d84aa834)
   { site: 'src/data/npcData.js:1334', channel: 'hash', marker: '?.name' },
   { site: 'src/domain/townMap/glyphAssign.js:125', channel: 'mint', marker: 'createPRNG(`glyph:${seedId}`)' },
 ];
@@ -363,7 +367,10 @@ describe('EM-P2 — generation census by execution: the instrument, the classifi
     // on this row: total 37, direct 4, via fork 33, foreign 0.
     // GS-2 one faction set (2026-10-31, ODQ §934.101): the assembly step's 'faction-conflicts' child stream is one more
     // mint. Measured on this row: total 38, direct 4, via fork 34, foreign 0; the one mint of slack is spent, not widened.
-    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(38);
+    // 2026-11-05 (LANDING-6, measured with this arm's census at the window's moving stages): 38 at 1264a8152^ -> 39 X-46 car 1
+    // (1264a8152) -> 40 CRISIS (d3e072368; still 40 at ac09ea83b) -> 39 X-46 car 3 (90dc22f18), 39 at PINS, I7, F6, F10 and the
+    // tip. The bound is re-keyed to the tip's figure, never above it.
+    expect(seen.mints.length, 'total mints is row-dependent but bounded').toBeLessThanOrEqual(39);
     expect(viaFork.length, 'STOP-6: mints via the re-implemented fork').toBeGreaterThanOrEqual(31);
     expect(foreign.map((record) => record.seed), 'every minted seed is root-prefixed').toEqual([]);
   }, 120_000);
