@@ -2045,7 +2045,7 @@ causal clause; the stability string alone does not.
 
 **`siege` matched**
 1. `[street · walls]` Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the walls have settled the argument.
-2. `[ledger]` The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and defers the rest.
+2. `[ledger · gate]` The {seat} at {settlement} governs a besieged town, which means it governs rationing, the gates and the watch rota, and defers the rest.
 3. `[visitor]` A stranger cannot get into {settlement} and would not want to; the town is closed around itself and the ordinary business of the place has stopped.
 4. `[unfolding · walls]` {faction}'s hold on {settlement} is being decided outside the walls rather than inside them, and the town knows it.
 5. `[street · no walls]` Everything at {settlement} answers to the siege now. Whatever the hall was arguing about before, the siege has settled the argument.
@@ -2147,11 +2147,12 @@ did not die.
 **PDF PARITY:** parity.
 
 **`riskLabel: Stable` (no challengers)**
-1. `[ledger · succession settled]` Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.
-2. `[street · succession settled]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
+1. `[ledger · succession settled · no crisis: unrest]` Nobody at {settlement} is positioned to take the {seat}. What {faction} holds it holds without a rival on the rolls, and the succession question is not a live one here.
+2. `[street · succession settled · no crisis: unrest]` The question of who might replace the {seat} at {settlement} does not come up, because there is nobody the town would name if it did.
 3. `[counterforce · succession settled · no unrest]` There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.
 4. `[ledger · succession open]` No contender stands at {settlement} to take the {seat}, and the absence settles nothing: who governs is an open question, and nobody is strong enough to close it.
 5. `[street · succession open]` The {seat} at {settlement} has no rival and no secure holder either; the town asks who governs and gets no answer it can act on.
+6. `[ledger · succession settled · unrest]` No rival stands at {settlement} to take the {seat}, and in a season of fighting that is small comfort: what threatens {faction} now is the fighting itself, not a contender for the hall.
 
 **`riskLabel: Holding`**
 1. `[ledger]` {faction} outweighs everyone who wants the {seat} at {settlement}, and the wanting is on the record. The hold is real and it is not comfortable.
@@ -2328,7 +2329,7 @@ own entailment and licenses nothing about who runs it.
 
 **capture pressure RECOVERING (strong security, prosperity)** *(every variant `dm-only`)*
 1. `[unfolding · dm-only]` What the criminal interest held at {settlement} it is losing; a town that pays its people and polices its streets becomes expensive to hold, and this one has become both.
-2. `[counterforce · dm-only]` The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.
+2. `[counterforce · dm-only · watch]` The approach was made at {settlement} and did not take. Prosperity and a working watch did what no investigation did.
 3. `[ledger · dm-only]` What the criminal interest at {settlement} still holds it holds at a rising cost, and the cost is rising faster than what the holding returns.
 
 **capture reached an AGENT of a faction** *(every variant `dm-only`; print-deferred)*
@@ -2342,13 +2343,13 @@ own entailment and licenses nothing about who runs it.
 3. `[street · dm-only]` {faction} at {settlement} has stopped opposing one particular interest and has never explained the change, which the town has noticed without being able to name.
 
 **operation role `parallel marketplace`**
-1. `[ledger]` There is a second market at {settlement} running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom.
+1. `[ledger · market]` There is a second market at {settlement} running alongside the lawful one, selling what the lawful one may not and competing with it directly for the same custom.
 2. `[street]` The town buys in two places and only mentions one of them.
 3. `[visitor]` A stranger at {settlement} finds the thing he was told was unobtainable perfectly obtainable, at a price and in a room he was not directed to.
 
 **operation role `duty evasion`**
 1. `[ledger]` Goods reach {settlement} around the customs rather than through them; the manifests are wrong, the landing points are unofficial, and enough officials are agreeable for it to be routine.
-2. `[street]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
+2. `[street · gate]` A share of what arrives at {settlement} never appears at the gate, and the share is not small.
 3. `[counterforce]` The customs at {settlement} are properly kept and thoroughly bypassed, and the two facts do not contradict each other in the way a stranger expects.
 
 **operation role `unlicensed revenue`**
@@ -2363,8 +2364,8 @@ own entailment and licenses nothing about who runs it.
 
 **operation role `stolen goods market`**
 1. `[ledger]` What is taken at {settlement} is moved back into lawful circulation through a clearinghouse, which is the arrangement that makes the taking worth doing at all.
-2. `[counterforce]` Theft at {settlement} would not be profitable without somewhere to sell, and the somewhere is the part the watch has never reached.
-3. `[street]` Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.
+2. `[counterforce · watch]` Theft at {settlement} would not be profitable without somewhere to sell, and the somewhere is the part the watch has never reached.
+3. `[street · market]` Things taken at {settlement} reappear in the market a season later with nothing wrong about them, and the town has stopped looking closely at the interval.
 
 **operation role `protection + extraction`**
 1. `[ledger]` The criminal interest at {settlement} sells safety from itself and calls it something else, steadily, to the same people, every season.
@@ -5622,7 +5623,7 @@ unchanged.
 **R-DST-W4-e CURE:** the synthesized fallback *"Generated with {X} as neighbour (trade partner)."* names the generator inside the fiction. Every `neutral` and every type-only variant below is a lawful replacement for it, and the replacement is the whole reason this shape is in the corpus.
 **THE TWO CAPTIONS** (*"Links are removed when neighbours are delinked"*, *"Removed when the link is broken"*) are **tool voice about the tool** and are correct where they are — they explain the editor, not the world. They stay, and no world-voice variant is written to compete with them.
 
-**`trade_partner`** — 1. `[ledger]` {settlement} and {counterpart} do steady business, and enough of it that both towns' prices move together. · 2. `[street]` Half of what a {settlement} household owns came up the road from {counterpart}, and nobody thinks of that as foreign. · 3. `[visitor]` {settlement}'s market carries {counterpart}'s goods without marking them out, which is the surest sign of a working partnership.
+**`trade_partner`** — 1. `[ledger]` {settlement} and {counterpart} do steady business, and enough of it that both towns' prices move together. · 2. `[street]` Half of what a {settlement} household owns came up the road from {counterpart}, and nobody thinks of that as foreign. · 3. `[visitor · market]` {settlement}'s market carries {counterpart}'s goods without marking them out, which is the surest sign of a working partnership.
 **`allied`** — 1. `[ledger]` {settlement} and {counterpart} answer for each other, and the answering is understood on both sides without being renegotiated. · 2. `[street]` Trouble for {counterpart} is trouble in {settlement}, and the town would say so out loud. · 3. `[visitor]` A stranger arriving in {settlement} from {counterpart} is treated as arriving from nearby rather than from elsewhere.
 **`patron`** *(arm: {settlement} is the patron)* — 1. `[ledger]` {counterpart} looks to {settlement}, and {settlement}'s decisions are made with that looking taken for granted. · 2. `[street]` {settlement} does not think of {counterpart} as a neighbour so much as a responsibility. · 3. `[visitor]` What {settlement} decides tends to be what {counterpart} does, and neither town finds that worth remarking on.
 **`client`** *(arm: {settlement} is the client)* — 1. `[ledger]` {settlement}'s decisions are made with {counterpart} in the room, whether or not anyone from {counterpart} is present. · 2. `[street]` {settlement} manages its own affairs up to a point, and everyone here knows roughly where the point is. · 3. `[visitor]` Ask in {settlement} who decides a thing and you will be given a name in {counterpart} more often than a name here.
