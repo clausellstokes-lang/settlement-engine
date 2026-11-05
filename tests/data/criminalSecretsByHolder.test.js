@@ -1,9 +1,10 @@
 /**
  * CENSUS-4g (R-AX, the chair's ruling of 2026-11-05 08:3x): the criminal secrets are keyed by their
- * HOLDER's role class, carried until the mechanism lane keys the draw.
+ * HOLDER's role class; the mechanism lane keyed the draw (CENSUS-1i unit 3, `factionLeaderSecret.js`).
  *
- * Pins: (1) the flat view the unkeyed draw reads is byte-identical to the table before R-AX (its
- * sha-256, taken at `8c55289`); (2) the clerical and soldierly rows sit under their role and the
+ * Pins: (1) the flat view (the unkeyed reading and the census export; since CENSUS-1i unit 3 the draw
+ * reads the keyed view instead — the pin re-keyed by that cause, its bytes unchanged) is byte-identical
+ * to the table before R-AX (its sha-256, taken at `8c55289`); (2) the clerical and soldierly rows sit under their role and the
  * rest are role-free; (3) a clergy holder's religious pool and a soldier's military pool are the
  * flat pools themselves (keying moves only a mismatched holder); (4) a row carries only its two
  * printed fields, so the record (`npc.secret = { what, stakes }`) cannot pick up the key.
@@ -22,7 +23,7 @@ const BASE_SHA = '4b3d62d6455f7f1958caf0807b615479d0b3795a002aaebb0ef68f23f7f845
 const secretsOf = (/** @type {Array<{secret: string}>} */ rows) => rows.map((r) => r.secret);
 
 describe('NPC_CRIMINAL_SECRETS keyed by the holder (R-AX)', () => {
-  it('the flat view is byte-identical to the table before the key', () => {
+  it('the flat view (no longer the draw\'s reading: CENSUS-1i unit 3) is byte-identical to the table before the key', () => {
     expect(createHash('sha256').update(JSON.stringify(NPC_CRIMINAL_SECRETS)).digest('hex')).toBe(BASE_SHA);
   });
 

@@ -68,3 +68,44 @@ export const TABLE_POOLS = Object.freeze([
   { id: 'warRemembrance.WAR_ENDING_TELLINGS', module: 'src/domain/display/warRemembrance.js', name: 'WAR_ENDING_TELLINGS', drawKind: 'T', rulings: ['colour'], drawSite: 'warRemembrance.js (ending-keyed by the record\'s classifier)' },
   { id: 'deityEffects.DEITY_AXIS_EFFECTS', module: 'src/domain/display/deityEffects.js', name: 'DEITY_AXIS_EFFECTS', drawKind: 'T', rulings: ['colour'], drawSite: 'deityEffects.js (axis-keyed)', lines: (t) => Object.values(t).flatMap((axis) => Object.values(axis).map((e) => e.effect)) },
 ]);
+
+/**
+ * THE DECLARATION CHANNELS HELD BESIDE A TABLE (CENSUS-1i unit 2, `tablePools`' second half; the
+ * chair's acceptance in block k): every sibling set keyed by its original's text and every
+ * declaration column keyed by a line's text. The walker (`census-declared.mjs :: tablePoolRow`)
+ * reads each enrolled table's lines through all of them — a text is a key of at most one table's
+ * channel, so one list serves every table. The walker test holds this list equal to every
+ * `*_SIBLINGS` / `*_DECLARATIONS` export in `src`, less the ones ruled out by name below.
+ */
+export const DECLARATION_CHANNELS = Object.freeze([
+  { module: 'src/data/factionLabelSiblings.js', name: 'FACTION_LABEL_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/institutionDescVariants.js', name: 'DESC_VARIANT_DECLARATIONS', kind: 'column' },
+  { module: 'src/data/institutionServices.js', name: 'SERVICE_DESC_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/npcData.js', name: 'NPC_HOOK_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/powerData.js', name: 'FACTION_NAME_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/powerSiblings.js', name: 'BASELINE_CONFLICT_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/powerSiblings.js', name: 'MILITARY_MODIFIER_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/powerSiblings.js', name: 'FACTION_DESC_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/stressTypes.js', name: 'STRESS_TYPE_SIBLINGS', kind: 'siblings' },
+  { module: 'src/data/stressorSpinePhrases.js', name: 'STRESSOR_SPINE_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/activeConditions.js', name: 'CONDITION_ARCHETYPE_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/crisis/crisisCast.js', name: 'CAST_REASON_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/crisis/crisisCast.js', name: 'CAST_CRISIS_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/hookEscalation.js', name: 'HOOK_ESCALATION_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/rulingPower.js', name: 'RULING_POWER_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/summary/settlementQuickGuide.js', name: 'QUICK_GUIDE_SIBLINGS', kind: 'siblings' },
+  { module: 'src/domain/threatProfile.js', name: 'THREAT_TEXT_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/economy/foodBalance.js', name: 'OUTLOOK_HOOK_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/narrativeText.js', name: 'POLITICAL_FLAVOR_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/npcGenerator.js', name: 'NPC_GOAL_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/safetyProfile.js', name: 'SAFETY_LINE_SIBLINGS', kind: 'siblings' },
+  { module: 'src/generators/stressNarrative.js', name: 'STRESS_SUMMARY_SIBLINGS', kind: 'siblings' },
+]);
+
+/** The `*_SIBLINGS` / `*_DECLARATIONS` exports that are no text-keyed channel of a table, each with its reason. */
+export const NOT_TABLE_CHANNELS = Object.freeze({
+  DOSSIER_CONNECTIVE_DECLARATIONS: 'a list PARALLEL to each connective list, read by position (CENSUS-1h unit 7); the connectives are state-corpus joints, not an enrolled table',
+  FIELD_DECLARATIONS: 'the edit cards\' field declarations (domain/edit), not prose',
+  TENSION_TEMPLATE_DECLARATIONS: 'keyed by the tension template\'s TYPE beside the selection (CENSUS-1g unit 4); the history templates are not an enrolled table',
+});

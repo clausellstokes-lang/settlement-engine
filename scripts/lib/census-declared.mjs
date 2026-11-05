@@ -73,28 +73,73 @@ export function annexDeclaredColumns(stateSrc) {
   return out;
 }
 
+/** The fields a table ROW prints from, in order (CENSUS-1i unit 2): the first that holds a string — or a closure — is the row's line. */
+const ROW_TEXT_KEYS = Object.freeze(['text', 'short', 'secret', 'line', 'desc']);
+
 /**
- * Every printed line of a table: a string, or a row `{ text }`; arrays and plain objects are walked.
+ * A row object's printed text (a string or a closure), or null when the object is no row.
+ * @param {unknown} node @returns {string|Function|null}
+ */
+export function rowTextOf(node) {
+  if (!node || typeof node !== 'object' || Array.isArray(node)) return null;
+  for (const k of ROW_TEXT_KEYS) {
+    const v = /** @type {Record<string, unknown>} */ (node)[k];
+    if (typeof v === 'string' || typeof v === 'function') return /** @type {string|Function} */ (v);
+  }
+  return null;
+}
+
+/**
+ * Every printed line of a table: a string, a closure, or a ROW — `{ text }`, a goal's `{ short, long }`,
+ * a secret's `{ secret, stakes }`, a service's `{ desc }`, a closure row `{ line }` (CENSUS-1i unit 2:
+ * one line each, declaring by its own fields; before, a row with no `text` was walked into its
+ * strings and its declaration fields were lost). Arrays and other plain objects are walked.
  * @param {unknown} node @param {unknown[]} [acc]
  * @returns {unknown[]}
  */
 export function tableLines(node, acc = []) {
-  if (typeof node === 'string') acc.push(node);
+  if (typeof node === 'string' || typeof node === 'function') acc.push(node);
   else if (Array.isArray(node)) for (const x of node) tableLines(x, acc);
   else if (node && typeof node === 'object') {
-    if (typeof (/** @type {{text?: unknown}} */ (node)).text === 'string') acc.push(node);
+    if (rowTextOf(node) !== null) acc.push(node);
     else for (const x of Object.values(node)) tableLines(x, acc);
   }
   return acc;
 }
 
 /**
+ * The declaration channels held BESIDE a table (CENSUS-1i unit 2): sibling sets keyed by the
+ * original's text (`[{ text, needs }, { text, twinOf, excludes }]`) and declaration columns keyed by
+ * the line's text (`{ needs?, excludes?, crisis? }` or `{ colour: true }`).
+ * @typedef {{ siblings?: Readonly<Record<string, ReadonlyArray<any>>>, column?: Readonly<Record<string, any>> }} BesideChannel
+ */
+
+/**
  * One `tablePools` row.
  * @param {{ id: string, module: string, name: string, drawKind: string, drawSite: string, rulings?: string[], lines?: (t: any) => unknown }} entry
  * @param {unknown} table the live export
+ * @param {ReadonlyArray<BesideChannel>} [channels] every declaration channel held beside a table
  */
-export function tablePoolRow(entry, table) {
-  const lines = tableLines(entry.lines ? entry.lines(table) : table);
+export function tablePoolRow(entry, table, channels = []) {
+  const own = tableLines(entry.lines ? entry.lines(table) : table);
+  /** @type {unknown[]} */ const lines = [];
+  for (const l of own) {
+    const text = typeof l === 'string' ? l : rowTextOf(l);
+    let read = l;
+    if (typeof text === 'string') {
+      for (const c of channels) {
+        const set = c.siblings && Object.prototype.hasOwnProperty.call(c.siblings, text) ? c.siblings[text] : null;
+        if (set) {
+          read = set.find((x) => typeof x?.twinOf !== 'string' && x?.text === text) ?? set[0];
+          for (const twin of set) if (typeof twin?.twinOf === 'string') lines.push(twin);
+          break;
+        }
+        const col = c.column && Object.prototype.hasOwnProperty.call(c.column, text) ? c.column[text] : null;
+        if (col) { read = { text, ...col }; break; }
+      }
+    }
+    lines.push(read);
+  }
   /** @type {Record<string, number>} */ const hist = {};
   let declaring = 0; let colourLines = 0;
   for (const l of lines) {

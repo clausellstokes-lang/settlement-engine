@@ -10,7 +10,7 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { generateFactions, generateConflicts } from '../powerGenerator.js'; import { fitFactionRoster } from '../power/factionRoleFit.js'; // CENSUS-4 R12
+import { generateFactions, generateConflicts } from '../powerGenerator.js'; import { fitFactionRoster } from '../power/factionRoleFit.js'; import { resolveFactionLabelsAtClose } from '../power/factionLabelClose.js'; // CENSUS-4 R12; CENSUS-1i R-AW
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
@@ -367,7 +367,7 @@ registerStep('assembleSettlement', {
   // as the structural appender above (the conflicts are re-derived on every run, never held).
   Object.assign(settlement, storeTrueHooksOnly(settlement, {
     npcsHeld: chooseOrPin(pins, 'npcs', () => UNPINNED) !== UNPINNED,
-  }));
+  })); resolveFactionLabelsAtClose(settlement); // CENSUS-1i R-AW: a label whose fact settles late resolves here, against the final roster (no roll; one line, so no cited line moves)
 
   // A durable, seed-stable receipt over the FINAL player-facing dossier.
   // Repairs happen in their owning passes; this boundary proves that the

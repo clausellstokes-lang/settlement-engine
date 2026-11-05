@@ -121,7 +121,7 @@ const generateSingleNPC = (
   const secret = generateFactionLeaderSecret(
     config,
     institutions,
-    worldLaw,
+    worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
   );
   const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
   const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
