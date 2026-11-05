@@ -23,6 +23,8 @@ import {
   TIMELINE_CATEGORY_TYPES,
 } from './history/historyPolicyData.js';
 import { deriveHistoryRouteContext } from './history/historyRouteContext.js';
+import { filterDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 import { generateSafetyNarrative2, generateTradeNarrative2 } from './history/historyEventStrands.js';
 export {
   STRESS_TO_TENSION,
@@ -261,7 +263,10 @@ const generateEventNarrative = (eventTemplate, yearsAgo, extraTokens = {}, descS
     const availableHooks = [...(eventTemplate.plotHooks || [])];
     for (let i = 0; i < Math.min(hookCount, availableHooks.length); i++) {
       const idx = randInt(0, availableHooks.length - 1);
-      let hook = availableHooks.splice(idx, 1)[0];
+      // CENSUS-3d unit 6 (R-C): a declared row is `{ text, needs }`; this R draw is Appendix B
+      // item 12, the mechanism lane's to route through `drawDeclared`. Until then it reads the
+      // row's TEXT (byte-identical) and stores a string.
+      let hook = lineText(availableHooks.splice(idx, 1)[0]);
       // For older events (last century: 30–80y), reframe present-tense hooks as
       // historical discoveries — things uncovered now, not things actively happening.
       if (yearsAgo > 30 && hook) {
@@ -311,6 +316,7 @@ const buildHistoricalEvent = (
   factions = [],
   context = {},
   worldLaw,
+  hookFacts = null,
 ) => {
   // Resolve active stress type
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
@@ -496,6 +502,10 @@ const buildHistoricalEvent = (
         tensionTokens,
       ),
       factions: (tension.factions || []).map(substituteNames),
+      // CENSUS-3d unit 6: a tension prints its template's whole hook list (kind A), so the list is
+      // filtered by the record (a refused row leaves it) and stored as text; a list that declares
+      // nothing is copied unchanged.
+      ...(Array.isArray(tension.plotHooks) ? { plotHooks: filterDeclared(tension.plotHooks, { facts: hookFacts, poolId: `historyData:HISTORICAL_EVENTS_DATA.plotHooks:${tension.type}`, surface: 'history', drawKind: 'A' }).map(lineText) } : {}),
     }))
     .filter(worldLaw.allowsHistoryEvent);
 };
@@ -856,6 +866,15 @@ export const generateHistory = (
   const founding = genArrivalDetail(config, context, worldLaw);
   founding.age = age;
 
+  // CENSUS-3d unit 6: the facts a declared history hook is checked against — the birth so far
+  // (roster, config, tier, the power structure), read lazily and once. The birth self-check
+  // (`cert:false-presumption`) re-asserts every declared hook against the FINAL record.
+  let heldHookFacts = null;
+  const hookFacts = () => (heldHookFacts ??= factsOf(
+    { institutions, config, tier, powerStructure, stress: Array.isArray(config?.stressTypes) ? config.stressTypes.map((type) => ({ type })) : [] },
+    worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {},
+  ));
+
   // Historical timeline
   const timeline = age > 0
     ? generateRelationshipEvent(age, tier, config, context, worldLaw)
@@ -868,7 +887,7 @@ export const generateHistory = (
     tier,
     economicState,
     config,
-    powerStructure?.factions || [], context, worldLaw,
+    powerStructure?.factions || [], context, worldLaw, hookFacts,
   );
 
   // Derive historical character from event pattern

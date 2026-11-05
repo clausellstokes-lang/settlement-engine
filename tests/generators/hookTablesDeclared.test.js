@@ -1,0 +1,84 @@
+/**
+ * CENSUS-3d (2026-11-05), unit 6 — the hook tables declared (`docs/DESIGN_POOL_CENSUS.md` §3.1:
+ * a line declares the atoms it presumes BEYOND its event's or branch's key).
+ *
+ *   - THE HISTORY HOOKS (`historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks`): the declaring
+ *     rows are `{ text, needs?, excludes? }`. Two consumers (R-C): a CURRENT TENSION prints its
+ *     template's whole list (kind A, the table owner's) and is filtered by the record
+ *     (`historyGenerator.js :: buildHistoricalEvent`); the TIMELINE's hook roll
+ *     (`generateEventNarrative`, Appendix B item 12, the mechanism lane's) reads the row's text,
+ *     byte-identical, until that lane routes it through `drawDeclared`. Measured on
+ *     soak1k-0..199 before the change (printed anywhere on the record / false by the final record): the crime-wave guard captain 42 / 4 (soak1k-13, -32, -42, -54), the
+ *     warehouse held off the market 65 / 28, the succession ruler 38 / 15 and 45 / 22 (a
+ *     council seat), the workers' quarter 14 / 9, the flood's dam and wreck 6 / 4 and 7 / 3,
+ *     the temple vault and the shrine 6 / 2, 4 / 1, 4 / 2.
+ */
+import { beforeAll, describe, expect, it } from 'vitest';
+import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
+import { assertDeclarable, declarationOf, declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
+import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
+
+beforeAll(async () => { await ensureLaws(); });
+
+/** every history hook row, with its event type */
+const HISTORY_ROWS = HISTORICAL_EVENTS_DATA.flatMap((e) => (e.plotHooks || []).map((row) => ({ type: e.type, row })));
+const textOf = (row) => (typeof row === 'string' ? row : row.text);
+
+describe('the history hooks declare what their event does not guarantee', () => {
+  it('the twelve declaring rows carry their atoms, every atom declarable', () => {
+    const declaring = HISTORY_ROWS.filter(({ row }) => typeof row === 'object');
+    expect(declaring.map(({ type, row }) => `${type}: ${[...(row.needs || []), ...(row.excludes || []).map((x) => `no ${x}`)].join(', ')}`)).toEqual([
+      'succession_crisis: no ruler: council',
+      'succession_crisis: no ruler: council',
+      'economic_disparity: tier: >= town',
+      'guild_conflict: market',
+      'resource_scarcity: market',
+      'crime_wave: guardPresence',
+      'market_crash: market',
+      'great_flood: navigable',
+      'great_flood: navigable',
+      'heresy_trial: institution: temple',
+      'pilgrimage_surge: institution: temple',
+      'pilgrimage_surge: institution: temple',
+    ]);
+    for (const { row } of declaring) for (const a of [...(row.needs || []), ...(row.excludes || [])]) expect(assertDeclarable(a).dimension, a).toBeTruthy();
+  });
+
+  // The seeds where the base stored a refused row (the probe above), and two that did not.
+  const SEEDS = [13, 32, 42, 54, 0, 12, 21, 23, 31, 95, 155, 163, 196, 2, 3];
+  it('a current tension stores only the hooks the final record admits, as text; the timeline stores text', () => {
+    // The expectation is the test's own (not read from the data), so it reds on a base that declares nothing.
+    const declared = new Map([
+      ['the ailing ruler wants a final errand', { excludes: ['ruler: council'] }],
+      ['someone is poisoning the ruler slowly', { excludes: ['ruler: council'] }],
+      ['a hidden ledger documenting wage theft', { needs: ['tier: >= town'] }],
+      ['someone is sabotaging both guilds', { needs: ['market'] }],
+      ['a warehouse full of the resource', { needs: ['market'] }],
+      ['a guard captain is on the payroll', { needs: ['guardPresence'] }],
+      ['a ledger names who was warned', { needs: ['market'] }],
+      ['a structure meant to hold back the water', { needs: ['navigable'] }],
+      ['the flood exposed a foundation', { needs: ['navigable'] }],
+      ['a relic seized during the trial', { needs: ['institution: temple'] }],
+      ['the pilgrim trade made one family', { needs: ['institution: temple'] }],
+      ['a rival shrine claims the relic', { needs: ['institution: temple'] }],
+    ].map(([t, d]) => [t, { text: t, ...d }]));
+    const bad = [];
+    for (const i of SEEDS) {
+      const s = birth(i).settlement;
+      const facts = factsOf(s);
+      for (const ev of s.history?.historicalEvents || []) for (const h of ev.plotHooks || []) expect(typeof h, `soak1k-${i}`).toBe('string');
+      for (const ev of s.history?.currentTensions || []) {
+        for (const h of ev.plotHooks || []) {
+          expect(typeof h, `soak1k-${i}`).toBe('string');
+          for (const [text, row] of declared) {
+            if (!h.toLowerCase().includes(text)) continue;
+            const v = declarationAdmits(declarationOf(row), facts);
+            if (!v.admitted) bad.push(`soak1k-${i}: ${textOf(row).slice(0, 40)} — ${v.refused.join(', ')}`);
+          }
+        }
+      }
+    }
+    expect(bad).toEqual([]);
+  }, 120_000);
+});
