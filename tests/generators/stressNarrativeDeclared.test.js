@@ -67,3 +67,22 @@ describe('plague_onset: "Healers are overwhelmed." needs a healer (CENSUS-2c uni
     expect(STRESS_SUMMARY_SIBLINGS[HEALERS]).toEqual([{ text: HEALERS, needs: ['healer'] }, { text: TEND, twinOf: HEALERS, excludes: ['healer'] }]);
   });
 });
+
+describe('religious_conversion: the two variants that presume the old temple need it (CENSUS-2c unit 1c; Phase A ledger)', () => {
+  /** names whose length % 3 picks variant 0, 1 and 2 */
+  const N0 = 'Avelaa'; const N1 = 'Avelaaa'; const N2 = 'Avela';
+  const convRecord = (temple) => ({ ...recordOf(['religious_conversion'], 'secure'), institutions: temple ? [{ name: 'Temple' }] : [{ name: 'Granary' }] });
+  const V2 = (n) => `An outside authority is requiring ${n} to convert.`;
+  it('with no temple, variants 0 and 1 resolve to variant 2 (the one that presumes no building)', () => {
+    for (const n of [N0, N1]) expect(renderStressSummary('religious_conversion', n, null, factsOf(convRecord(false))).startsWith(V2(n))).toBe(true);
+  });
+  it('with a temple, each name keeps its own variant', () => {
+    expect(renderStressSummary('religious_conversion', N0, null, factsOf(convRecord(true))).startsWith(`A new faith is gaining ground in ${N0}.`)).toBe(true);
+    expect(renderStressSummary('religious_conversion', N1, null, factsOf(convRecord(true))).startsWith(`The religious community of ${N1} has fractured.`)).toBe(true);
+    expect(renderStressSummary('religious_conversion', N2, null, factsOf(convRecord(false))).startsWith(V2(N2))).toBe(true);
+  });
+  it('with no facts (the provisional render) the name picks its variant, byte-identical', () => {
+    expect(renderStressSummary('religious_conversion', N0, null).startsWith(`A new faith is gaining ground in ${N0}.`)).toBe(true);
+    expect(renderStressSummary('religious_conversion', '', null).startsWith('A new faith is gaining ground in the settlement.')).toBe(true);
+  });
+});

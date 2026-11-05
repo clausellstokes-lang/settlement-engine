@@ -23,7 +23,7 @@
  * is rng-free, so the token is `null` for them and the draw order is byte-identical
  * to the old inline closures.
  */
-import { resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
+import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
 
 /** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
 const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
@@ -66,7 +66,7 @@ export function rollStressSummary(type, { rng } = {}) {
 export function renderStressSummary(type, name, roll, facts = null) {
   const fn = RENDERERS[type];
   if (!fn) return undefined;
-  const text = fn(name, roll);
+  const text = fn(name, roll, facts);
   return facts ? resolveSiblingSentences(text, STRESS_SUMMARY_SIBLINGS, { facts, poolId: 'stressNarrative:STRESS_SUMMARY_SIBLINGS', surface: 'crisis', drawKind: 'T' }) : text;
 }
 
@@ -152,20 +152,17 @@ const RENDERERS = {
     );
   },
 
-  religious_conversion: (name) => {
+  // religious_conversion: three wordings, picked by the name's length (an H modulus). Variants 0
+  // and 1 presume the old religious house (`institution: temple`; Phase A's ledger): with facts in
+  // hand the pick runs through `drawDeclared` over the FULL list (the modulus unchanged), and a
+  // refused pick resolves to the admitted variant by the kernel's hash — variant 2, the one that
+  // presumes no building. No new wording. With no facts (the provisional render) the pick is kept.
+  religious_conversion: (name, _roll, facts) => {
     const s = name || "the settlement";
     const o = name ? name.length % 3 : 0;
-    return o === 0
-      ? "A new faith is gaining ground in " +
-          s +
-          ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before."
-      : o === 1
-        ? "The religious community of " +
-          s +
-          " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither."
-        : "An outside authority is requiring " +
-          s +
-          " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows.";
+    const variants = RELIGIOUS_CONVERSION_VARIANTS(s);
+    if (!facts) return variants[o].text;
+    return drawDeclared(variants, { draw: (p) => p[o], facts, key: 'stressNarrative:religious_conversion', poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H' }).text ?? variants[o].text;
   },
 
   slave_revolt: (name) =>
@@ -203,3 +200,18 @@ const RENDERERS = {
     );
   },
 };
+
+/**
+ * religious_conversion's three wordings for one place (`s` = the name, or "the settlement"), in
+ * the order the name's length picks them; ids are the old branch numbers. Variants 0 and 1 speak
+ * of the old institution's buildings and its priest, so they declare the temple (CENSUS-2c).
+ * @param {string} s
+ * @returns {ReadonlyArray<{ id: number, text: string, needs?: string[] }>}
+ */
+function RELIGIOUS_CONVERSION_VARIANTS(s) {
+  return [
+    { id: 0, needs: ['institution: temple'], text: "A new faith is gaining ground in " + s + ". The old religious institution still holds its buildings and its records, but it is losing the congregation. The priest gives a service on Sunday to a room that is quietly, consistently, slightly emptier than the week before." },
+    { id: 1, needs: ['institution: temple'], text: "The religious community of " + s + " has fractured. Both factions claim the legitimate succession. Both hold services. Both have a priest who will not acknowledge the other. The congregation has been forced to choose, and some of them have chosen neither." },
+    { id: 2, text: "An outside authority is requiring " + s + " to convert. The governing faction has formally complied. The population's compliance is more varied, more private, and more complicated than the official record shows." },
+  ];
+}
