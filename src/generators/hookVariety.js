@@ -122,45 +122,5 @@ export function drawUnique(pool, used, keyFn = (x) => /** @type {string} */ (x),
   return chosen;
 }
 
-/**
- * THE REGISTRY-AWARE TWIN (CENSUS-3e): a `drawDeclared` `twin` resolver for a pool drawn through
- * `drawUnique`. When the drawn template is refused by the record (its declaration is false), the
- * kernel's fallback is a hash argmax over the admitted members keyed by the POOL alone, which
- * ignores this settlement's registries: two refused draws resolve to the same template, and the
- * NPC's second hook is lost as a duplicate (HK-3's `pin:no-hook-is-lost`). This resolver picks,
- * among the admitted templates whose family is still unused (preferring an unspoken theme, the
- * same tiers as `drawUnique`), the one with the highest hash of `key::drawn::candidate`, and
- * registers it. It consumes NO roll. With nothing fresh it answers `undefined`, and the kernel's
- * argmax decides (the unavoidable repeat, as in `drawUnique`).
- *
- * @template T
- * @param {ReadonlyArray<T>} pool
- * @param {{ used?: Set<string>, keyFn: (x: T) => string, themes?: Set<string>, themeOfFn?: (x: T) => string, admits: (x: T) => boolean, key: string }} o
- * @returns {(drawn: T) => T | undefined}
- */
-export function freshAdmittedTwin(pool, o) {
-  return (drawn) => {
-    if (!(o.used instanceof Set)) return undefined;
-    const fresh = pool.filter((x) => x !== drawn && !o.used.has(o.keyFn(x)) && o.admits(x));
-    if (fresh.length === 0) return undefined;
-    const themed = o.themes instanceof Set && typeof o.themeOfFn === 'function' ? o.themeOfFn : null;
-    const unspoken = themed ? fresh.filter((x) => { const t = blockingTheme(themed, x); return t === null || !o.themes?.has(t); }) : [];
-    const candidates = unspoken.length > 0 ? unspoken : fresh;
-    const own = o.keyFn(drawn);
-    let best = candidates[0]; let bestKey = -1;
-    for (const x of candidates) {
-      const k = fnv1a(`${o.key}::${own}::${o.keyFn(x)}`);
-      if (k > bestKey) { best = x; bestKey = k; }
-    }
-    o.used.add(o.keyFn(best));
-    if (themed) { const t = blockingTheme(themed, best); if (t !== null) o.themes?.add(t); }
-    return best;
-  };
-}
-
-/** @param {string} s @returns {number} a 32-bit FNV-1a hash (pure, no roll) */
-function fnv1a(s) {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
-  return h;
-}
+// THE REGISTRY-AWARE TWIN (CENSUS-3e's `freshAdmittedTwin`) moved to `drawDeclared`'s `registry`
+// option (R-AJ, CENSUS-1g unit 3): one resolver for every site that draws through `drawUnique`.
