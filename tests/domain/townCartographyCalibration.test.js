@@ -491,6 +491,15 @@
  *   W6 stays the one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the
  *   throw census stays 0.
  *
+ *   2026-11-05 — THE HEADROOM RAISED BY ITS OWN CRITERION (the cloud chair's ruling 2 in LANDING-4's addendum, recorded
+ *   under ODQ §934.105, vetoable; BAND 21, ODQ §515). CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300: W6 measured the worst
+ *   single-seed slice at 2.3000 (town, 20 -> 46) at the landed tip of the rung-1 window, the smallest multiple of 100
+ *   permille at or above it is 2300, and W6 is green at it. The corpus does NOT move (no derived cap bound before the
+ *   rise: the drawn maxima 12/19/30/118/216/258 sit under the old building caps 26/42/71/138/264/327), so no signed
+ *   record is owed and none is written; FROZEN, DUPLICATES and the FALSIFIER are readings and do not move. The derived
+ *   ceilings move with the operator: W8's translate ceilings 188/324/76/100/72/85 -> 270/465/109/143/104/122, and the
+ *   live derivation's hypothetical 160 -> 230. CORPUS_ROWS stays 504; the throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -1310,9 +1319,11 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 220/312/60/92/87/87 -> 202/332/71/100/74/85 on 2026-11-04: F6 BUDGET-FLOOR (UNITS 1–4) (header), the same operator.
     // 202/332/71/100/74/85 -> 202/332/74/100/74/85 on 2026-11-04: F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (header), the same operator.
     // 202/332/74/100/74/85 -> 188/324/76/100/72/85 on 2026-11-04: F3 FOOD-WORDS (UNITS 1–5) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([188, 324, 76, 100, 72, 85]);
+    // 188/324/76/100/72/85 -> 270/465/109/143/104/122 on 2026-11-05: CARTOGRAPHY_HEADROOM_PERMILLE 1600 -> 2300 (the chair's
+    // ruling 2, LANDING-4's addendum; header). The readings do not move; the ceilings are the same operator at the new headroom.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([270, 465, 109, 143, 104, 122]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
-    expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
+    expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(230);
   });
 
   /**
