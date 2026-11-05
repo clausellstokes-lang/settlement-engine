@@ -2,7 +2,9 @@
 
 > A build seat's record for the chair. The branch is `lane/census-3-2026-11-04`, cut from `lane/census-1-2026-11-04` at `ee3b9c766`. The window branch (`lane/window-rung2-2026-11-04` at `6a9fb3c`) is already an ancestor, and the chair's procedure branch (`lane/census-sop-2026-11-04`) is merged. Pushes are transport only; there is no pull request.
 >
-> **Where this seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) is not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
+> **Phase B (CENSUS-3b, 2026-11-05): units 1, 2, 3 and 5 landed on this branch; unit 4 (the DS pools) and unit 6 (the hook tables) are PARKED with their tools and findings. See "Phase B" at the end.** The phase-A note below is history.
+>
+> **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
 
@@ -83,3 +85,62 @@ The base is `ee3b9c766`; runs are `soak-review.mjs --workers 4`.
 5. Reader hazards found while annotating:
    - `institution: mill` matches "Access to external mill";
    - `institution: tavern` misses "Ale house".
+
+## Phase B (CENSUS-3b, 2026-11-05)
+
+Base: `6276e1205`, then `origin/lane/census-1b-2026-11-04` at `358b0a841` merged (`4f369fa`), then `origin/lane/window-rung2-2026-11-04` at `3bc72bc0c` (`c3aa387`). `origin/lane/census-sop-2026-11-04` at `3b0d87bc9` was already an ancestor. No generated leaf conflicted at any merge.
+
+**The byte-identity method.** A scratch hasher took sha-256 of the 525 golden configurations' records, of soak1k-0..59's records, and of their rendered surfaces (all tabs, Tonight, the PDF, the Foundry journal), before and after every unit. Red-firsts were run red in a clean worktree of the unit's parent.
+
+### The units
+
+| unit | commit | what | births moved (golden · records 60 · pages 60) |
+|---|---|---|---|
+| 1 | `0fab7c3` | `factsOf` getters by delegation: `foodSources`, `imports`, `exports`, `culture`, `crime`, `prosperity`. The vocabulary names their atoms: fish, grain, game and livestock; imports and exports; `organised crime` (crime ≥ semi-organized); `culture: <key>`; and the `crime` and `prosperity` bands. The "named but refused" list shrinks to `priest` and `soldiers`, both CENSUS-1c's. `route` and `tier` were already getters. The ledger is re-spelled (table below). | 0 · 0 · 0 |
+| 2 | `25f7dda` | The owed DS-ECO claims. DS-ECO-10 established v1 and DS-ECO-12 one-source v3 take `no hunger`. DS-ECO-8 COMFORTABLE v1 takes `no crisis: indebted`. | 0 · 0 · 3 (economics 49, 58; daily_life 22) |
+| 3 | `7af3c67` | The A lists: `tradeListDisplay.js`, `tradeListDeclarations.js`, the kind read model, the camel chain's `terrain: desert`, and "What the land offers". | 0 · 0 · economics 49, resources 60, pdf 60, foundry 38 |
+| 4 | `3aff73f` | **PARKED.** The apply script and the mute scan are committed; the annex is untouched. | — |
+| 5 | `56f6644` | The traditions: three water elements declare `needs`, and the tab filters through `filterDeclared`. | 0 · 0 · traditions 7 |
+| 6 | — | **PARKED, not started.** | — |
+
+### The rename table (`_vocabulary.json` → `factVocabulary.js`)
+
+The table is also kept in `_vocabulary.json :: respelledTo`.
+
+- **Renames:**
+  - `water: coast | river | navigable` → `coast` | `river` | `navigable`;
+  - `food-source: X` → `X`;
+  - `crime` → `organised crime`;
+  - `food-band: deficit` → `food: ≤ deficit`;
+  - `migration: in | out` → `migration: influx | exodus`;
+  - `magic: >= low` → `magic level: ≥ low`.
+- **Disjunctions:**
+  - `watch|garrison|militia` and `garrison|militia` → `guardPresence`. This widens the second (the ruled composite);
+  - the single-valued `route: a|b` and `terrain: a|b` → the complement's `excludes`;
+  - `institution: temple|institution: monastery` cannot be expressed (a many-valued presence), so it is left undeclared.
+- **Not atoms.** Nine pool-level key notes ("act (the key)" and the like) are descriptions, not atoms.
+
+### The chair's rulings recorded at this seat (vetoable)
+
+1. **The luxury class on the page.** It is the 28 ledger labels plus the spellings the page prints for the same goods: Spices, Silk, Gems, Exotic goods, Fine cloth, Quality textiles, Quality textiles and cloth, and `camel_herds`. That list is the instrument's, which is the chair's. Camel herds carries the band here, although the phase-A note left the resource row unbanded.
+2. **The category errors leave the lists at the display.** `NOT_A_GOOD` has 21 labels, including the camel chain's "Overland freight revenue". The record's income table is not rewritten (a generation change, golden-moving). Toll Revenue, Entrepôt Trade and Military Contracts already exist as income rows. The other revenues have no income row: open question 3.
+3. **`economicState.js`'s suffix copy is not deleted.** Its interim list still feeds the stage-5 military and slave dedupe, so it is not wholly dead.
+4. **A DM's authored custom tradition prints as authored.** The water filter holds only generated rows.
+5. **The unit-4 apply rulings** are in `3aff73f`'s message and in `_apply_ds_pools.mjs`:
+   - food pools take `no hunger`, not `{crisis-scoped}`;
+   - Plains v2 drops `grain`;
+   - F12's crisis twins in a scoped pool carry `crisis: any`.
+
+### Where the next seat starts
+
+**Unit 4.**
+1. Run `node docs/census/declarations/_apply_ds_pools.mjs DS-ECO`, then `npm run gen:dossier-prose` and `node scripts/wiring-census.mjs`.
+2. Cure the 12 tests that read a declared pool without `facts`. Pass `facts` (`factsAnswered`), or skip a fact-declaring pool where the test's premise is "undeclared". These are:
+   - `composeStateProse` ×4;
+   - `economyStateProseDesk` ×2 (the STRUGGLING rung);
+   - `stateProseKernel` ×3;
+   - `dossierStateProseProjection.contract` ×2.
+3. Author one crisis-safe twin per `no hunger` food pool, as the chair's ruling with its share. F12's "never mute under a crisis" walker requires it.
+4. Do DS-SUP, then DS-POP: one commit each, mute-scanned (`_mute_scan.mjs` / `_mute_diff.mjs`).
+
+**Unit 6.** The hook tables, the record self-check (`storeTrueHooksOnly`), and the `textOf` tolerance at the tension and outlook pools. Check `origin/lane/census-1b-2026-11-04` for 1c's wiring first. Narrow `GUARD_WORDS` past "the old guard".
