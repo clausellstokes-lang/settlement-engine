@@ -19,6 +19,7 @@ import { composeFoodwaysLine } from '../../../src/domain/foodways.js';
 import { settlementRumors, whatPhrase } from '../../../src/domain/display/settlementRumors.js';
 import { conjunctionContent } from '../../../src/domain/display/causeConjunctionContent.js';
 import { causeLifecyclePhrase } from '../../../src/domain/display/causeLifecycleVocabulary.js';
+import { deriveWarName, deriveRouteName } from '../../../src/domain/display/warAndRoadNames.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -86,5 +87,20 @@ describe('Appendix B rows 101–102 — the cause-conjunction ladder and its lif
     const floor = withPresumptionLedger(() => causeLifecyclePhrase({ stage: 'reformed', causeClass: 'debt', role: 'civic' }));
     expect(floor.result).toBe(causeLifecyclePhrase({ stage: 'reformed', causeClass: 'debt', role: 'civic' }));
     expect(floor.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['CAUSE_LIFECYCLE.reformed', 'H', 'npcs']]);
+  });
+});
+
+describe('Appendix B row 103 — the war and road name pools (kind H)', () => {
+  it('a typed war, an untyped war and a road note their draws, the names unchanged', () => {
+    const typed = withPresumptionLedger(() => deriveWarName({ attackerId: 'a', defenderId: 'b', reasonType: 'succession' }));
+    expect(typed.result).toEqual(deriveWarName({ attackerId: 'a', defenderId: 'b', reasonType: 'succession' }));
+    const untyped = withPresumptionLedger(() => deriveWarName({ attackerId: 'a', defenderId: 'b' }));
+    expect(untyped.ledger.map((e) => [e.pool, e.surface])).toEqual([['UNTYPED_WAR_NAME_MOLDS', 'war']]);
+    expect(typed.ledger.length).toBe(1);
+    expect(typed.ledger[0].pool).toBe(typed.result.reasonType ? `WAR_NAME_POOLS.${typed.result.reasonType}` : 'UNTYPED_WAR_NAME_MOLDS');
+    const row = { routeId: 'route.a.b.land', a: 'a', b: 'b', mode: 'land' };
+    const road = withPresumptionLedger(() => deriveRouteName({ row, fromId: 'a' }));
+    expect(road.result).toEqual(deriveRouteName({ row, fromId: 'a' }));
+    expect(road.ledger.map((e) => e.pool)).toEqual(['ROUTE_NAME_POOLS.land.addressed']);
   });
 });
