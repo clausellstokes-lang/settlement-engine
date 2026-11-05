@@ -80,15 +80,14 @@
         {
           "lineId": "SCOPE_PHRASE.slavic",
           "text": "built in timber compounds on common land, between river and forest",
-          "needs": [
-            "river"
-          ],
+          "needs": [],
           "excludes": [],
           "crisis": null,
           "colour": false,
           "stop": [
             "culture"
-          ]
+          ],
+          "note": "CENSUS-2g unit 7 (R-AY): `river` dropped — scopePhrase self-gates the waterside scopes on the record's water and does not verify a river."
         },
         {
           "lineId": "SCOPE_PHRASE.east_asian",
@@ -145,14 +144,15 @@
           "lineId": "SCOPE_PHRASE.greek",
           "text": "built around the agora and the harbour, on hillside ground and civic association",
           "needs": [
-            "coast"
+            "navigable"
           ],
           "excludes": [],
           "crisis": null,
           "colour": false,
           "stop": [
             "culture"
-          ]
+          ],
+          "note": "CENSUS-2g unit 7 (R-AY): `coast` → `navigable` — a river keeps a harbour (chair ruling 5); the closure reads the water."
         },
         {
           "lineId": "INLAND_SCOPE_PHRASE.greek",
@@ -165,6 +165,24 @@
             "culture"
           ],
           "note": "the landlocked greek form (scopePhrase :539-540)"
+        }
+      ],
+      "twins": [
+        {
+          "text": "built around a civic-ritual plaza, on tribute and the ritual calendar",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "twinOf": "built around a civic-ritual plaza, tribute, and market-and-waterworks",
+          "why": "CENSUS-2g unit 7, the chair's ruling of 09:29: the mesoamerican scope where no market stands (38 of 92 on the 1,000)"
+        },
+        {
+          "text": "built around the tank, in quarters by trade and kin",
+          "needs": [],
+          "excludes": [],
+          "crisis": "any",
+          "twinOf": "built around the tank and the bazaar, in quarters by trade, under temple and guild",
+          "why": "CENSUS-2g unit 7, the chair's ruling of 09:29: the south-asian scope where no market or temple stands (44 of 95 on the 1,000)"
         }
       ]
     },

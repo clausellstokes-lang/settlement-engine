@@ -20,8 +20,11 @@ describe('row 95: the scope clause is read against the record', () => {
   it('a mesoamerican place WITH a market prints its market-and-waterworks scope', () => {
     expect(cultureScopeLine(meso([{ name: 'Market square', category: 'Economy' }]))).toMatch(/market-and-waterworks/);
   });
-  it('a mesoamerican place with NO market drops the clause (no false market printed)', () => {
-    expect(cultureScopeLine(meso([]))).toBe('');
+  // CENSUS-2g unit 7 (the chair's ruling of 09:29): the slot takes a twin that presumes nothing —
+  // re-keyed by cause; the false market is still never printed.
+  it('a mesoamerican place with NO market prints the twin, never the market', () => {
+    expect(cultureScopeLine(meso([]))).toMatch(/on tribute and the ritual calendar/);
+    expect(cultureScopeLine(meso([]))).not.toMatch(/market/);
   });
   it('an undeclared scope prints as before', () => {
     expect(cultureScopeLine({ ...meso([]), culturalIdentity: { key: 'germanic', label: 'Germanic' } }))
