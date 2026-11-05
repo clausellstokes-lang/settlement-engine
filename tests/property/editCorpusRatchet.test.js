@@ -364,8 +364,14 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // composed tip): not idle 268 → 266 at SIZE-3 (the guild market, stage S5); groups judged 98 → 101 (FOOD-1, the food
     // record) → 99 (FOOD-2, the food base numbers) → 130 (FOOD-3, food diversity: the food-security group is judged on
     // more rows as the record grows sources). The law of the arm is unchanged: mixedOutside is still empty.
-    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(266);
-    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(130);
+    // 2026-11-05, the rung-1 landing (ODQ §934.105; LANDING-5 under the chair's ruling 4, READ and BISECTED over the
+    // landing's first-parent stages, this file's census at each; at 1264a8152^ every figure is the frozen one): not idle
+    // 266 -> 268 X-46 car 1 1264a8152 -> 265 car 2 d4bf6431c -> 284 CRISIS d3e072368 -> 286 SELF-VOUCH 0be13b5cb -> 276
+    // car 3 90dc22f18 -> 275 car 1b-2 fb0341b93 -> 276 PLACE-NOT-TIER 6129c300d -> 275 car 3 I7 6ca454d2b -> 277 F6
+    // 6d84aa834; groups judged 130 -> 132 -> 130 (cars 1, 2) -> 132 PINS 37b1e746d -> 133 F6. mixedOutside and
+    // settledLive stay empty at every stage.
+    expect(census().rows.filter((row) => row.takenLive > 0).length, 'the instrument is not idle').toBe(277);
+    expect(census().rows.filter((row) => row.groupsJudged > 0).length, 'declared groups ARE judged').toBe(133);
     // THE POSITIVE CONTROL, CONSTRUCTED: one object holding a leaf taken from R1 beside a leaf kept
     // where the record had settled away from R0 IS a MIXED object, and enclosingGroup classes it.
     const control = mergeTree({ population: { total: 10, note: 'kept' } }, { population: { total: 5, note: 'kept' } }, { population: { total: 5, note: 'moved' } }).receipts;
@@ -393,7 +399,9 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // 48 → 40 rows, V-DEFENSE-INST 31 → 35 and V-EVIDENCE-CONFLICT 22 → 8 (mergeLadderHeldKeys A2 reads the same re-deal).
     // 2026-11-04, the window-end pin re-key (REGISTERS seat, traced by stage in DOORS-4): declared-only {47, 7} → {41, 6}
     // (FOOD-1) → {28, 2} (FOOD-2); the escalation figures below did not move.
-    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 28, E8: 2 });
+    // 2026-11-05 (LANDING-5, by stage as A3): declared-only {28, 2} -> {29, 2} car 1 1264a8152 -> {29, 3} car 3 90dc22f18 ->
+    // {30, 7} PINS 37b1e746d -> {34, 12} car 3 I7 6ca454d2b -> {31, 6} F6 6d84aa834.
+    expect(tally(census().rows.filter((row) => row.declaredOnly.length > 0).map((row) => row.label))).toEqual({ E7: 31, E8: 6 });
     // anchored: the layer channel is clean on all three counts, and a widening reds here.
     expect(layerRows.filter((row) => row.escalations.length > 0)).toEqual([]);
     expect(layerRows.filter((row) => row.live.length > 0)).toEqual([]);
@@ -404,11 +412,15 @@ describe('the edit corpus ratchet: the re-entry seam and the merge over the 63-r
     // from the merged record (mergeConsequence.js :: restateConflictCitations), so the layer channel is clean again and
     // config rows {31, 9} → {26, 9}, steps {140, 36} → {104, 36}, every one still EXHAUSTED; the live residue 40 → 35,
     // V-EVIDENCE-CONFLICT 8 → 0, V-DEFENSE-INST unmoved at 35 (mergeLadderHeldKeys A2 reads the same figures).
-    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
-    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 104, E8: 36 });
-    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 26, E8: 9 });
-    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(35);
-    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 35 });
+    // 2026-11-05 (LANDING-5, by stage as A3; mergeLadderHeldKeys A2 reads the same figures): config rows {26, 9} -> {28, 9}
+    // car 1 -> {28, 8} car 2 -> {14, 2} car 3 90dc22f18 -> {15, 2} car 1b-2 -> {19, 4} PINS -> {22, 4} car 3 I7 -> {18, 3}
+    // F6; steps {104, 36} -> {72, 12} at the same steps; every one still EXHAUSTED; the live residue 35 -> 21, all
+    // V-DEFENSE-INST. The layer channel is clean at every stage.
+    expect(tally(configRows.filter((row) => row.escalations.length > 0).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
+    expect(tally(configRows.flatMap((row) => Array(row.escalations.length).fill(row.label)))).toEqual({ E7: 72, E8: 12 });
+    expect(tally(configRows.filter((row) => row.escalations.some((each) => each.step === 'EXHAUSTED')).map((row) => row.label))).toEqual({ E7: 18, E8: 3 });
+    expect(census().rows.filter((row) => row.live.length > 0).length, 'EM-B2b seam, asserted AT the figure').toBe(21);
+    expect(tally(census().rows.flatMap((row) => row.live))).toEqual({ 'V-DEFENSE-INST': 21 });
   }, ARM_TIMEOUT);
 
   it('A5 a chain is deterministic, undo then re-edit reproduces the town, and the ordered pairs are counted', () => {
