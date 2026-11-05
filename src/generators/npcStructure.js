@@ -12,6 +12,8 @@
  * activeGoal replaces the existing goal.short field on enriched NPCs so
  * the DM sees one coherent goal derived from the current situation.
  */
+import { resolveDeclared } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
@@ -418,6 +420,8 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   const powerFactions   = settlement.powerStructure?.factions || [];
   const condition       = getPrimaryCondition(settlement);
   const TOP_N           = Math.min(5, Math.max(2, Math.floor(npcs.length * 0.45)));
+  /** @type {ReturnType<typeof factsOf> | null} */
+  let facts = null;
 
   const scored = npcs.map(n => ({ npc: n, score: npcRelevanceScore(n, powerFactions) }))
                      .sort((a,b) => b.score - a.score);
@@ -428,7 +432,15 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     const cat  = npc.category || 'other';
     const rank = getRank(npc, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
-    const tmpl = T[key] || T[`${cat}__stable__${rank}`] || T[OTHER_STABLE_DOMINANT];
+    const looked = T[key] ? key : T[`${cat}__stable__${rank}`] ? `${cat}__stable__${rank}` : OTHER_STABLE_DOMINANT;
+    // ⭐ CENSUS-1d unit 2 (the chair's R-A ruling of 2026-11-05 02:30; Appendix B item 3, kind T):
+    // the registry entry is resolved through `resolveDeclared` against the record's `factsOf`
+    // (CENSUS-4b's `tags`: the stable entries are CALM_ONLY, `no crisis`). A refused entry is
+    // not applied: the NPC keeps its own role goal and carries no structural position that claims
+    // a calm the record denies (4b's measurement: the slot never empties, so no twin is owed).
+    const tmpl = T[looked]
+      ? resolveDeclared(T[looked], { facts: facts ??= factsOf(settlement), tagged: true, poolId: `NPC_STRUCTURE.${looked}`, surface: 'npcs' }).line
+      : null;
 
     if (!tmpl) return npc;
 
