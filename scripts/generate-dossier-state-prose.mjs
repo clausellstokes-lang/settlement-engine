@@ -245,6 +245,10 @@ const BOLD_LINE_RE = /^\*\*((?:(?!\*\*).)+)\*\*(\s*(?:[—–·,:(-]\s*.*|\*.*)?
  * nothing). Items are split on `·`; each must be a ruling or a DECLARABLE atom (a home answers it).
  */
 const POOL_BRACES_RE = /^(\*\*.*\*\*.*?)\s*\{([^{}]*)\}\s*$/;
+/** A compact row's key with its trailing brace group (CENSUS-2b); a key's own `{…}` holds backticks. */
+const COMPACT_ROW_BRACES_RE = /^(.*\S)\s+\{([^{}`]*)\}$/;
+/** A bold compact row with its brace group between the label and the em dash (CENSUS-2b). */
+const COMPACT_BOLD_BRACES_RE = /^(\*\*(?:(?!\*\*).)+\*\*)\s*\{([^{}`]*)\}\s*((?:\*\([^*]*\)\*\s*)?—\s+1\.\s+`\[.*)$/;
 
 /**
  * Validate a pool's brace group into its declaration.
@@ -526,10 +530,19 @@ function parseAnnex(src, headerRe, label, options = {}) {
     }
 
     const bulletRow = line.match(COMPACT_BULLET_RE);
-    const boldRow = bulletRow ? null : line.match(COMPACT_BOLD_RE);
+    // CENSUS-2b: a bold compact row carries its brace group after its label (`**\`port\`** {coast} — 1. …`).
+    const boldRowBraced = bulletRow ? null : line.match(COMPACT_BOLD_BRACES_RE);
+    const boldRow = bulletRow ? null : (boldRowBraced ? `${boldRowBraced[1]} ${boldRowBraced[3]}` : line).match(COMPACT_BOLD_RE);
     const compact = bulletRow || boldRow;
     if (compact) {
-      const rowKey = poolKeyOf(compact[1]);
+      // CENSUS-2b: a compact row is its own pool, so its brace group rides the ROW KEY
+      // (`- \`STRONG\` {crisis-scoped} — 1. …`), read off before the key is formed so the key —
+      // hashed into the draw — is byte-identical. A key's own braces (`head word in {\`Secure\`, …}`)
+      // carry backticks and are never a declaration.
+      const rowBraced = compact[1].match(COMPACT_ROW_BRACES_RE);
+      const rowKey = poolKeyOf(rowBraced ? rowBraced[1] : compact[1]);
+      if (rowBraced) lastBraces = poolBraces(rowBraced[2], `${label} ${block.id} :: ${rowKey}`);
+      if (boldRow && boldRowBraced) lastBraces = poolBraces(boldRowBraced[2], `${label} ${block.id} :: ${rowKey}`);
       // A bulleted row NESTS under the bold group heading above it; a row carrying its
       // own bold label IS the pool and takes no prefix (and clears the pending label,
       // so a following bullet cannot inherit a heading that was never a group).
@@ -638,7 +651,8 @@ function assertNothingDropped(src, headerRe, blocks, label, options = {}) {
     // A FACE is not a numbered row, so the numbering guard never sees it and the drop check
     // has to count it separately or a wording set could go missing exactly as a variant could.
     if (FACE_ROW_RE.test(line)) { faceRows += 1; continue; }
-    const compact = line.match(COMPACT_BULLET_RE) || line.match(COMPACT_BOLD_RE);
+    const braced = line.match(COMPACT_BOLD_BRACES_RE);
+    const compact = line.match(COMPACT_BULLET_RE) || (braced ? `${braced[1]} ${braced[3]}` : line).match(COMPACT_BOLD_RE);
     if (compact) tagged += [...compact[2].matchAll(COMPACT_VARIANT_RE)].length;
   }
   const captured = blocks.reduce(

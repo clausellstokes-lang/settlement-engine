@@ -947,7 +947,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "minor"
+            "minor",
+            "watch",
+            "crisis: any"
           ],
           "text": "Theft in {settlement} has stopped being remarkable, which is its own kind of report; the watch takes the complaint, and the complainant does not expect much of it.",
           "slots": [
@@ -958,7 +960,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "major"
+            "major",
+            "watch",
+            "crisis: any"
           ],
           "text": "The watch's book at {settlement} is thick with the same few crimes written many times over, and the names in it are almost never the same twice.",
           "slots": [
@@ -969,7 +973,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "A stranger in {settlement} is told twice before nightfall which streets to leave alone, and both people who tell him are careful about who hears them.",
           "slots": [
@@ -980,7 +985,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "watch",
+            "crisis: any"
           ],
           "text": "Whatever holds {settlement}'s streets after dark, it is not the watch; shopkeepers have begun buying their quiet directly, and the price of it is going up.",
           "slots": [
@@ -991,7 +998,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "population: ≥ middling",
+            "no crisis: unrest",
+            "crisis: any"
           ],
           "text": "The thieving in {settlement} is real and it is also contained: it takes from the same quarters in the same seasons, and the town has decided that is a cost rather than a crisis.",
           "slots": [
@@ -1004,7 +1014,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "minor"
+            "minor",
+            "walls",
+            "crisis: any"
           ],
           "text": "Two towns share {settlement}'s walls (one counts its year in surplus and the other in what it did without), and the two do not often eat in the same rooms.",
           "slots": [
@@ -1015,7 +1027,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "The distance between {settlement}'s best street and its worst is a short walk and a great deal else, and nobody who lives here needs it pointed out.",
           "slots": [
@@ -1026,7 +1039,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "{faction} holds the greater part of what {settlement} earns, and the rolls show the rest of the town living on the remainder without much room in it.",
           "slots": [
@@ -1038,7 +1052,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "The gap in {settlement} has stopped being a fact people live around and started being a thing they say out loud, which is a different stage of the same condition.",
           "slots": [
@@ -1049,7 +1064,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "population: ≥ middling",
+            "no crisis: hunger",
+            "no crisis: unrest",
+            "crisis: any"
           ],
           "text": "{settlement} is unequally off and orderly about it: the poorer quarters are supplied, the arrangement is understood on both sides, and nobody is proposing to change it.",
           "slots": [
@@ -1121,7 +1140,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "minor"
+            "minor",
+            "crisis: any"
           ],
           "text": "{settlement} has grown careful about strangers in a way it cannot quite account for, and the carefulness has begun to be about neighbours too.",
           "slots": [
@@ -1132,7 +1152,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "A newcomer to {settlement} is asked more questions than the business warrants, politely, by more than one person.",
           "slots": [
@@ -1144,7 +1165,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           "angle": "ledger",
           "marks": [
             "major",
-            "dm-only"
+            "dm-only",
+            "crisis: any"
           ],
           "text": "{faction} keeps a list in {settlement} of who is thought to answer elsewhere, and the list is longer than anything anyone will say aloud.",
           "slots": [
@@ -1156,7 +1178,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "Suspicion in {settlement} has outrun whatever it started from: an accusation costs nothing to make here and a great deal to survive.",
           "slots": [
@@ -1167,7 +1190,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "gate",
+            "no crisis: infiltrated",
+            "crisis: any"
           ],
           "text": "{settlement} watches its strangers and lets them stay. The suspicion is a habit of the gate, not a policy of the hall.",
           "slots": [
@@ -1180,7 +1206,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "minor"
+            "minor",
+            "crisis: any"
           ],
           "text": "Decisions at {settlement} that want one signature take a season to collect it, because there is no longer an obvious hand to take them.",
           "slots": [
@@ -1191,7 +1218,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "Nobody in {settlement} is certain who to bring a grievance to, so grievances get brought to several people and settled by none of them.",
           "slots": [
@@ -1202,7 +1230,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "{settlement} has a hall and a seat in it, and asking who fills the seat produces a pause before it produces an answer.",
           "slots": [
@@ -1213,7 +1242,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "The absence at the top of {settlement} is no longer being waited out; {faction} has begun behaving as though the question is already answered.",
           "slots": [
@@ -1225,7 +1255,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: threat",
+            "crisis: any"
           ],
           "text": "{settlement} runs without a clear hand and runs well enough: the clerks know their work, and the work does not require a decision every day.",
           "slots": [
@@ -1238,7 +1270,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "minor"
+            "minor",
+            "magic"
           ],
           "text": "What may be done with the Art in {settlement} gets argued in the same tone as grazing rights: endlessly, and without anyone expecting it to finish.",
           "slots": [
@@ -1249,7 +1282,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "magic"
           ],
           "text": "A practitioner arriving in {settlement} learns quickly that the town has a position on the subject, and that the position is not unanimous.",
           "slots": [
@@ -1260,7 +1294,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "major"
+            "major",
+            "magic"
           ],
           "text": "{faction} wants the Art in {settlement} licensed and counted; the rest of the town wants it left alone; neither holds enough of the hall to end the argument.",
           "slots": [
@@ -1272,7 +1307,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "magic"
           ],
           "text": "The quarrel over the Art in {settlement} has moved out of the hall and into the street, and both sides have begun naming individuals rather than practices.",
           "slots": [
@@ -1283,7 +1319,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "magic"
           ],
           "text": "{settlement} argues about the Art constantly and licenses it anyway; the argument is how the licence gets its conditions.",
           "slots": [
@@ -1296,7 +1333,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: occupied",
+            "no ruler: occupier",
+            "crisis: any"
           ],
           "text": "{settlement} kept its own hall through the occupation and has not entirely got its own manners back; there are still things said only indoors.",
           "slots": [
@@ -1307,7 +1347,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "major"
+            "major",
+            "no crisis: occupied",
+            "no ruler: occupier",
+            "crisis: any"
           ],
           "text": "The occupiers are gone from {settlement} and their arrangements are not: who holds which licence here was decided by somebody else, and nobody has undone it.",
           "slots": [
@@ -1318,7 +1361,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "major"
+            "major",
+            "population: ≥ middling",
+            "no crisis: occupied",
+            "no ruler: occupier",
+            "crisis: any"
           ],
           "text": "{settlement}'s rolls still carry the shape the occupation put on them (the same quarters taxed hardest, the same trades exempt), and no one now living wrote either rule.",
           "slots": [
@@ -1329,7 +1376,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "no crisis: occupied",
+            "no ruler: occupier",
+            "crisis: any"
           ],
           "text": "{settlement} is settling accounts left from the occupation, and the settling has begun to reach people who were only doing what they were told.",
           "slots": [
@@ -1340,7 +1390,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: occupied",
+            "no ruler: occupier",
+            "crisis: any"
           ],
           "text": "{settlement} was held and released and has chosen not to pursue it; who did what is known here, and is deliberately not spoken.",
           "slots": [
@@ -1353,7 +1406,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "minor"
+            "minor",
+            "walls",
+            "crisis: any"
           ],
           "text": "{settlement} owes outside its walls, and the owing is written into the shape of the year: the quarter's payment leaves before anything else is decided.",
           "slots": [
@@ -1364,7 +1419,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "What {settlement} sends away each quarter is more than the town would like to send, and anyone here can tell you roughly what it costs them without being shown a book.",
           "slots": [
@@ -1375,7 +1431,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "walls",
+            "crisis: any"
           ],
           "text": "{settlement} looks poorer than its trade suggests, and the reason is not in the town: the difference leaves for a creditor beyond the walls.",
           "slots": [
@@ -1386,7 +1444,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "The debt on {settlement} has stopped being serviceable, and what is argued in the hall now is not how to pay it but what happens when the town stops.",
           "slots": [
@@ -1397,7 +1456,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: indebted",
+            "crisis: any"
           ],
           "text": "{settlement} carries an outside debt comfortably: the payments go out on time, and the creditor has never had a reason to look closely at the town.",
           "slots": [
@@ -1410,7 +1471,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "minor"
+            "minor",
+            "crisis: any"
           ],
           "text": "What {settlement} needs and what {settlement} has do not meet, and the gap is managed by ration rather than closed.",
           "slots": [
@@ -1421,7 +1483,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "There is not enough of what {settlement} runs on, and the not-enough gets distributed by who asks first and who asks loudest.",
           "slots": [
@@ -1432,7 +1495,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "{settlement} is careful with something a town this size should have in plenty, and the care is visible before anyone explains it.",
           "slots": [
@@ -1443,7 +1507,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "{settlement} has begun taking from tomorrow to cover today, and the arithmetic of that has an end in it that nobody is discussing.",
           "slots": [
@@ -1454,7 +1519,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: unrest",
+            "crisis: any"
           ],
           "text": "{settlement} is short and orderly about being short: the queue is respected, the ration is honoured, and the shortness has not become a quarrel.",
           "slots": [
@@ -1467,7 +1534,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "minor"
+            "minor",
+            "crisis: any"
           ],
           "text": "Who follows at {settlement} is not written anywhere the clerks can point to, and the clerks have begun to mind.",
           "slots": [
@@ -1478,7 +1546,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "{settlement} has more than one candidate and no procedure, and the town has quietly sorted itself along the line between them.",
           "slots": [
@@ -1489,7 +1558,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "major"
+            "major",
+            "crisis: any"
           ],
           "text": "Ask in {settlement} who will hold the seat next and the room reorganises itself before anyone answers.",
           "slots": [
@@ -1500,7 +1570,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "catastrophic"
+            "catastrophic",
+            "crisis: any"
           ],
           "text": "The succession at {settlement} has stopped being a question and become a contest; {faction} and {faction2} are both acting as though waiting is the losing move.",
           "slots": [
@@ -1513,7 +1584,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "minor"
+            "minor",
+            "no crisis: succession",
+            "crisis: any"
           ],
           "text": "{settlement} has no settled succession and has not needed one. The seat is held firmly enough that the question stays theoretical.",
           "slots": [
@@ -1541,7 +1614,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "economic_disparity": {
         "role": "spine",
@@ -1560,7 +1634,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "guild_conflict": {
         "role": "spine",
@@ -1579,7 +1654,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "infiltration_fear": {
         "role": "spine",
@@ -1598,7 +1674,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "leadership_vacuum": {
         "role": "spine",
@@ -1617,7 +1694,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "magical_controversy": {
         "role": "spine",
@@ -1655,7 +1733,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "outside_debt": {
         "role": "spine",
@@ -1674,7 +1753,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "resource_scarcity": {
         "role": "spine",
@@ -1693,7 +1773,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "succession_crisis": {
         "role": "spine",
@@ -1712,7 +1793,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   },
@@ -1917,7 +1999,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "intensity: moderate": {
         "role": "spine",
@@ -1937,7 +2020,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "intensity: high": {
         "role": "spine",
@@ -1957,7 +2041,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -1977,7 +2062,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "crisis: any"
           ],
           "text": "{settlement} can put a real body of armed men on its walls, and the men look like they have done it before.",
           "slots": [
@@ -1987,6 +2073,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The muster roll at {settlement} is long and current, and the arms it lists are accounted for.",
           "slots": [
             "settlement"
@@ -1995,6 +2084,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: occupied",
+            "crisis: any"
+          ],
           "text": "Nobody in {settlement} expects the town to lose a straight fight, and that expectation shapes how it speaks to its neighbours.",
           "slots": [
             "settlement"
@@ -2004,7 +2097,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "crisis: any"
           ],
           "text": "{settlement} can put a real body of armed men in the field, and the men look like they have done it before.",
           "slots": [
@@ -2025,7 +2119,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "walls"
+            "walls",
+            "gate"
           ],
           "text": "The muster at {settlement} covers the gates and the walls and does not stretch past them.",
           "slots": [
@@ -2056,6 +2151,12 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.military: WEAK": [
         {
           "angle": "visitor",
+          "marks": [
+            "watch",
+            "gate",
+            "no garrison",
+            "crisis: any"
+          ],
           "text": "The watch at {settlement} is a watch and not a garrison, and the difference is visible at the gate.",
           "slots": [
             "settlement"
@@ -2064,6 +2165,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s arms are counted in what the households own rather than in what the hall issues.",
           "slots": [
             "settlement"
@@ -2072,6 +2176,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "no crisis: wartime",
+            "crisis: any"
+          ],
           "text": "{settlement} does not think of itself as a place that fights, and it is right not to.",
           "slots": [
             "settlement"
@@ -2082,6 +2191,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.military: CRITICAL": [
         {
           "angle": "visitor",
+          "marks": [
+            "no walls",
+            "crisis: any"
+          ],
           "text": "There is nothing at {settlement} that would stop anybody who meant to come in.",
           "slots": [
             "settlement"
@@ -2090,6 +2203,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "gate",
+            "crisis: any"
+          ],
           "text": "{settlement} keeps no muster worth the name; the gate is shut at night by whoever is nearest to it.",
           "slots": [
             "settlement"
@@ -2098,6 +2215,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "no crisis: wartime",
+            "crisis: any"
+          ],
           "text": "What protects {settlement} is that nobody has wanted it, and everyone here understands the arrangement.",
           "slots": [
             "settlement"
@@ -2108,6 +2230,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.monster: STRONG": [
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} is built for what comes out of the country around it: heavy shutters, close outbuildings, and nothing left standing alone.",
           "slots": [
             "settlement"
@@ -2116,6 +2241,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} keeps a standing answer to the beasts of its own ground: men who know the work, and the tools kept for it.",
           "slots": [
             "settlement"
@@ -2124,6 +2252,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: monster_pressure",
+            "crisis: any"
+          ],
           "text": "Children in {settlement} are taught the rules about the dark early, and the rules work.",
           "slots": [
             "settlement"
@@ -2134,6 +2266,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.monster: ADEQUATE": [
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: monster_pressure",
+            "crisis: any"
+          ],
           "text": "{settlement} has taken the ordinary precautions against the country's ordinary dangers and stopped there.",
           "slots": [
             "settlement"
@@ -2142,6 +2278,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The bounty book at {settlement} is used and modest: the town answers what troubles it and does not go looking.",
           "slots": [
             "settlement"
@@ -2150,6 +2289,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: monster_pressure",
+            "crisis: any"
+          ],
           "text": "{settlement} loses stock to the wild in some years and treats that as the price of the ground.",
           "slots": [
             "settlement"
@@ -2212,6 +2355,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: STRONG": [
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: unrest",
+            "crisis: any"
+          ],
           "text": "Order in {settlement} is kept quietly, which is the expensive kind: a stranger sees very little enforcement and very little disorder.",
           "slots": [
             "settlement"
@@ -2220,6 +2367,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "Complaints brought at {settlement} are heard and closed, and the closing is written down.",
           "slots": [
             "settlement"
@@ -2228,6 +2378,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: unrest",
+            "no crisis: succession",
+            "crisis: any"
+          ],
           "text": "A quarrel in {settlement} goes to somebody who will settle it, and everybody knows who that is.",
           "slots": [
             "settlement"
@@ -2238,6 +2393,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: ADEQUATE": [
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: unrest",
+            "crisis: any"
+          ],
           "text": "{settlement} is orderly on the main streets and less particular about the others.",
           "slots": [
             "settlement"
@@ -2246,6 +2405,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "watch",
+            "crisis: any"
+          ],
           "text": "The watch at {settlement} answers what is reported to it and does not seek out what is not.",
           "slots": [
             "settlement"
@@ -2254,6 +2417,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} handles its own trouble most of the time, and tolerates the rest.",
           "slots": [
             "settlement"
@@ -2264,6 +2430,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.internal: WEAK": [
         {
           "angle": "visitor",
+          "marks": [
+            "watch"
+          ],
           "text": "There is more going on in {settlement} than the watch troubles itself with, and it is not hidden particularly well.",
           "slots": [
             "settlement"
@@ -2316,6 +2485,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.economic: STRONG": [
         {
           "angle": "ledger",
+          "marks": [
+            "market",
+            "no crisis: indebted",
+            "crisis: any"
+          ],
           "text": "{settlement} could lose a season's trade and go on paying its people; there is enough behind the market to absorb it.",
           "slots": [
             "settlement"
@@ -2324,6 +2498,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "Prices in {settlement} are steady in a way that suggests the town is not living on the last thing that sold.",
           "slots": [
             "settlement"
@@ -2332,6 +2510,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: indebted",
+            "crisis: any"
+          ],
           "text": "A bad year in {settlement} is a bad year and not a crisis, and the town budgets for one.",
           "slots": [
             "settlement"
@@ -2350,6 +2533,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "{settlement} carries a modest cushion, visible in what the storehouses hold rather than in what the market shows.",
           "slots": [
             "settlement"
@@ -2420,6 +2606,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.magical: STRONG": [
         {
           "angle": "visitor",
+          "marks": [
+            "magic"
+          ],
           "text": "The Art is worked openly in {settlement} and worked well; what it does here is infrastructure rather than spectacle.",
           "slots": [
             "settlement"
@@ -2428,6 +2617,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "magic"
+          ],
           "text": "{settlement} can call on real practitioners, and the calling is arranged rather than improvised.",
           "slots": [
             "settlement"
@@ -2436,6 +2628,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "magic",
+            "institution: mill"
+          ],
           "text": "People in {settlement} take the Art for granted the way they take the mill for granted.",
           "slots": [
             "settlement"
@@ -2446,6 +2642,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "scores.magical: ADEQUATE": [
         {
           "angle": "visitor",
+          "marks": [
+            "magic"
+          ],
           "text": "{settlement} has somebody who can do what is usually needed and knows what is beyond them.",
           "slots": [
             "settlement"
@@ -2454,6 +2653,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "magic"
+          ],
           "text": "The Art at {settlement} is available, occasional, and priced accordingly.",
           "slots": [
             "settlement"
@@ -2462,6 +2664,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "magic"
+          ],
           "text": "{settlement} sends for a practitioner when it must and manages without one otherwise.",
           "slots": [
             "settlement"
@@ -2584,6 +2789,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s books show a town that pays for itself and does not accumulate.",
           "slots": [
             "settlement"
@@ -2592,6 +2800,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} eats well enough and does not talk about it.",
           "slots": [
             "settlement"
@@ -2654,6 +2866,12 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}": [
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: threat",
+            "no crisis: unrest",
+            "no crisis: plague_onset",
+            "crisis: any"
+          ],
           "text": "A stranger walks {settlement} at any hour and the town's only interest in them is commercial.",
           "slots": [
             "settlement"
@@ -2662,6 +2880,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "no crisis: plague_onset",
+            "crisis: any"
+          ],
           "text": "{settlement} is a safe place to be, and the safety has a cost that the town has agreed to pay.",
           "slots": [
             "settlement"
@@ -2670,6 +2893,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "watch",
+            "no crisis: unrest",
+            "crisis: any"
+          ],
           "text": "The watch's returns at {settlement} are short, and short returns here mean quiet streets rather than an idle watch.",
           "slots": [
             "settlement"
@@ -2680,6 +2908,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}": [
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} is workable and watchful: a stranger is served, and also noticed.",
           "slots": [
             "settlement"
@@ -2688,6 +2919,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "{settlement} is not dangerous so much as unrelaxed, and the difference matters to the people living in it.",
           "slots": [
             "settlement"
@@ -2696,6 +2931,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "watch",
+            "crisis: any"
+          ],
           "text": "The watch at {settlement} is stretched across more than it can comfortably cover, and the stretching shows in what gets deferred.",
           "slots": [
             "settlement"
@@ -2722,6 +2961,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "watch"
+          ],
           "text": "What the watch at {settlement} records is a fraction of what happens, and the fraction is not chosen by the watch.",
           "slots": [
             "settlement"
@@ -2732,6 +2974,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "economicViability.viable: true": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} is a town that works: what it needs, it can get, and what it makes, it can move.",
           "slots": [
             "settlement"
@@ -2740,6 +2986,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "There is no obvious reason {settlement} should not be here, which is a plainer compliment than it sounds.",
           "slots": [
             "settlement"
@@ -2748,6 +2997,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "{settlement} expects to go on being {settlement}.",
           "slots": [
             "settlement"
@@ -2756,6 +3009,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} works on the terms it currently has, and the judgment is about those terms rather than about the town.",
           "slots": [
             "settlement"
@@ -2809,7 +3065,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "walls"
+            "walls",
+            "garrison"
           ],
           "text": "Walls, garrison and stores at {settlement} are all of a piece, which is rarer than any one of them.",
           "slots": [
@@ -2918,6 +3175,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "defenseProfile.readiness.label: Undefended": [
         {
           "angle": "visitor",
+          "marks": [
+            "no walls",
+            "no garrison"
+          ],
           "text": "{settlement} has no defences at all, and the openness is the first thing about it.",
           "slots": [
             "settlement"
@@ -2926,6 +3187,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "no garrison",
+            "no militia"
+          ],
           "text": "There is nothing at {settlement} to hold and nobody to hold it.",
           "slots": [
             "settlement"
@@ -2936,6 +3201,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Secure": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary",
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} feeds itself out of its own ground, and the granary is a convenience rather than a defence.",
           "slots": [
             "settlement"
@@ -2944,6 +3214,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "Nobody in {settlement} thinks about food, which is the most that can be said for a town's food.",
           "slots": [
             "settlement"
@@ -2952,6 +3226,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market",
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "The market at {settlement} is full and unhurried, and the fullness is local.",
           "slots": [
             "settlement"
@@ -2960,6 +3239,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s security is its own harvest, which means it is proof against a closed road and not against a bad year.",
           "slots": [
             "settlement"
@@ -2970,6 +3252,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Surplus": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} grows more than it eats, and the difference is the town's best argument with everyone around it.",
           "slots": [
             "settlement"
@@ -2978,6 +3264,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "A thin year in {settlement} is a poorer year and not a hungry one.",
           "slots": [
             "settlement"
@@ -2986,6 +3276,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "What leaves {settlement} in carts is mostly food, and the carts leave full.",
           "slots": [
             "settlement"
@@ -2994,6 +3288,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The surplus here is what {settlement} sells; a season that took it would cost the town its income before it cost the town its dinner.",
           "slots": [
             "settlement"
@@ -3004,6 +3301,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Pressured": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary",
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} covers its need and covers it exactly; nothing in the granary is spare.",
           "slots": [
             "settlement"
@@ -3012,6 +3314,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The price of bread in {settlement} is watched, which it is not in a comfortable town.",
           "slots": [
             "settlement"
@@ -3020,6 +3325,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} eats, and the eating takes more arranging than it should.",
           "slots": [
             "settlement"
@@ -3028,6 +3337,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "institution: granary",
+            "crisis: any"
+          ],
           "text": "{settlement} is at the top of this condition rather than the bottom of a worse one, and what separates the two is the margin the granary is currently holding.",
           "slots": [
             "settlement"
@@ -3038,6 +3351,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Import-Dependent": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} does not grow what it eats. The gap is bought, and the buying is the largest standing commitment the town has.",
           "slots": [
             "settlement"
@@ -3046,6 +3362,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What {settlement} eats comes up the road, and everybody here knows which road.",
           "slots": [
             "settlement"
@@ -3055,7 +3374,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "market",
+            "no crisis: hunger",
+            "crisis: any"
           ],
           "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the walls.",
           "slots": [
@@ -3065,6 +3387,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} is well fed and not self-fed, and the distance between those two facts is exactly the length of the supply line.",
           "slots": [
             "settlement"
@@ -3074,7 +3400,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "market",
+            "no crisis: hunger",
+            "crisis: any"
           ],
           "text": "{settlement}'s market is well supplied and almost none of it was grown within sight of the town.",
           "slots": [
@@ -3086,6 +3415,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "foodSecurity.label: Deficit": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What {settlement} needs exceeds what it produces and what it can bring in together, and the shortfall is carried by the households.",
           "slots": [
             "settlement"
@@ -3094,6 +3426,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "population: ≥ middling",
+            "crisis: any"
+          ],
           "text": "There is less in {settlement} than there are people to eat it, and the arithmetic reaches the poorest quarters first.",
           "slots": [
             "settlement"
@@ -3102,6 +3438,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "institution: granary",
+            "crisis: any"
+          ],
           "text": "The granary at {settlement} is open and the queue at it is longer than the stock behind it.",
           "slots": [
             "settlement"
@@ -3110,6 +3450,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no crisis: famine",
+            "crisis: any"
+          ],
           "text": "{settlement} is short and not yet starving, and what stands between the two is the stores rather than the harvest.",
           "slots": [
             "settlement"
@@ -3169,7 +3513,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.military: ADEQUATE": {
         "role": "spine",
@@ -3203,7 +3548,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.military: CRITICAL": {
         "role": "spine",
@@ -3219,7 +3565,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.monster: STRONG": {
         "role": "spine",
@@ -3235,7 +3582,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.monster: ADEQUATE": {
         "role": "spine",
@@ -3251,7 +3599,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.monster: WEAK": {
         "role": "spine",
@@ -3283,7 +3632,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "scores.internal: STRONG": {
         "role": "spine",
@@ -3299,7 +3649,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.internal: ADEQUATE": {
         "role": "spine",
@@ -3315,7 +3666,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.internal: WEAK": {
         "role": "spine",
@@ -3347,7 +3699,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "scores.economic: STRONG": {
         "role": "spine",
@@ -3363,7 +3716,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "scores.economic: ADEQUATE": {
         "role": "spine",
@@ -3395,7 +3749,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "scores.economic: CRITICAL": {
         "role": "spine",
@@ -3411,7 +3766,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "scores.magical: STRONG": {
         "role": "spine",
@@ -3459,7 +3815,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "scores.magical: CRITICAL": {
         "role": "spine",
@@ -3475,7 +3832,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "prosperity: Poverty / Impoverished": {
         "role": "spine",
@@ -3491,7 +3849,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "prosperity: Struggling / Poor": {
         "role": "spine",
@@ -3507,7 +3866,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "prosperity: Moderate / Modest": {
         "role": "spine",
@@ -3523,7 +3883,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "prosperity: Comfortable / Prosperous": {
         "role": "spine",
@@ -3539,7 +3900,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "prosperity: Wealthy / Thriving": {
         "role": "spine",
@@ -3555,7 +3917,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}": {
         "role": "spine",
@@ -3571,7 +3934,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}": {
         "role": "spine",
@@ -3587,7 +3951,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "safetyProfile.safetyLabel: head word in {Dangerous, Desperate}": {
         "role": "spine",
@@ -3621,7 +3986,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "economicViability.viable: false": {
         "role": "spine",
@@ -3639,7 +4005,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "defenseProfile.readiness.label: Fortress": {
         "role": "spine",
@@ -3669,7 +4036,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "defenseProfile.readiness.label: Defensible": {
         "role": "spine",
@@ -3683,7 +4051,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "defenseProfile.readiness.label: Lightly Defended": {
         "role": "spine",
@@ -3713,7 +4082,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "defenseProfile.readiness.label: Undefended": {
         "role": "spine",
@@ -3745,7 +4115,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "no starving"
+        ],
+        "crisisScoped": true
       },
       "foodSecurity.label: Surplus": {
         "role": "spine",
@@ -3763,7 +4137,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "no starving"
+        ],
+        "crisisScoped": true
       },
       "foodSecurity.label: Pressured": {
         "role": "spine",
@@ -3781,7 +4159,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "no starving"
+        ],
+        "crisisScoped": true
       },
       "foodSecurity.label: Import-Dependent": {
         "role": "spine",
@@ -3801,7 +4183,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "no starving"
+        ],
+        "crisisScoped": true
       },
       "foodSecurity.label: Deficit": {
         "role": "spine",
@@ -3819,7 +4205,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "starving"
+        ],
+        "crisisScoped": true
       },
       "foodSecurity.label: Deficit × Active Famine": {
         "role": "spine",
@@ -3837,7 +4227,12 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "starving",
+          "famine"
+        ],
+        "colour": true
       }
     }
   },
@@ -3903,6 +4298,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "institution: docks"
+          ],
           "text": "{settlement}'s wharves are the town's real ground; what happens on the land is arranged around what happens at the quay.",
           "slots": [
             "settlement"
@@ -4056,7 +4454,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "coast"
+        ]
       },
       "river": {
         "role": "spine",
@@ -4074,7 +4475,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "river"
+        ]
       },
       "smoke (route isolated / mountain_pass)": {
         "role": "spine",
@@ -4092,7 +4496,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "ordinary (route road and the default)": {
         "role": "spine",
@@ -4110,7 +4515,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -4207,7 +4613,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "deficit"
+            "deficit",
+            "coast"
           ],
           "text": "{settlement} looks seaward for everything, including dinner.",
           "slots": [
@@ -4299,7 +4706,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "deficit"
+            "deficit",
+            "market"
           ],
           "text": "The gap between what {settlement} grows and what {settlement} eats is closed at a price, and the price is visible in the market before anyone explains it.",
           "slots": [
@@ -4516,7 +4924,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "river"
+        ]
       },
       "isolated": {
         "role": "spine",
@@ -4568,7 +4979,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "tier overlay: city": {
         "role": "spine",
@@ -4600,7 +5012,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "tier overlay: other tiers": {
         "role": "spine",
@@ -4616,7 +5029,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -4682,7 +5096,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "crisis: any"
           ],
           "text": "{faction} holds {band} of the power in {settlement}, and the town's stated prosperity is gross: a meaningful share of it never reaches the tax rolls.",
           "slots": [
@@ -4694,6 +5109,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "{settlement} is doing well, and doing well here includes arrangements the hall would rather not itemise.",
           "slots": [
             "settlement"
@@ -4702,6 +5122,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "{settlement} is visibly wealthy and its public accounts are modest, and both of those things are true.",
           "slots": [
             "settlement"
@@ -4711,7 +5136,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "crisis: any"
           ],
           "text": "{faction} is powerful in a prosperous {settlement} and takes its share in kind rather than in coin; the rolls are accurate and incomplete in different places than a stranger would guess.",
           "slots": [
@@ -4724,6 +5150,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "stress_economic: siege against trade income": [
         {
           "angle": "ledger",
+          "marks": [
+            "gate"
+          ],
           "text": "{settlement} is under siege, and the trade income on its books is what the town earned before the gates shut; what it earns now is close to nothing.",
           "slots": [
             "settlement"
@@ -4732,6 +5161,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "market"
+          ],
           "text": "{settlement}'s market still keeps its hours and has almost nothing to sell, because nothing has come in since the siege began.",
           "slots": [
             "settlement"
@@ -4748,6 +5180,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "gate"
+          ],
           "text": "What {settlement} was worth in trade is being spent down rather than earned, and the stores are the only figure that matters while the gates hold.",
           "slots": [
             "settlement"
@@ -4758,6 +5193,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "power_stress: occupation against stated stability": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: unrest"
+          ],
           "text": "{settlement} is under occupation, and the stability recorded for it describes the surface: the town is quiet because it is held, which is a different fact from the town being settled.",
           "slots": [
             "settlement"
@@ -4766,6 +5204,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: unrest"
+          ],
           "text": "{settlement} is orderly and the order is not the town's own, and everybody here can tell the two apart.",
           "slots": [
             "settlement"
@@ -4774,6 +5215,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: unrest"
+          ],
           "text": "Nothing in {settlement} is disturbed, and nothing in {settlement} is voluntary.",
           "slots": [
             "settlement"
@@ -4782,6 +5226,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no ruler: occupier"
+          ],
           "text": "{settlement} is occupied and its own hall still governs. The occupier collects and does not administer, and legitimacy here has survived the arrangement.",
           "slots": [
             "settlement"
@@ -4792,6 +5239,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "power_economic: temple economy under a secular seat": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: temple",
+            "crisis: any"
+          ],
           "text": "Economic activity in {settlement} runs through the religious houses while formal governance rests with {govFaction}; whoever holds the trade and the tithes holds more practical power than whoever holds the seat.",
           "slots": [
             "settlement",
@@ -4801,6 +5252,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "institution: temple",
+            "crisis: any"
+          ],
           "text": "The seat in {settlement} decides, and the temple is what the deciding has to be arranged around.",
           "slots": [
             "settlement"
@@ -4809,6 +5264,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market",
+            "crisis: any"
+          ],
           "text": "{settlement} has an official authority and an actual one, and they meet in the market rather than in the hall.",
           "slots": [
             "settlement"
@@ -4817,6 +5276,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "institution: temple",
+            "no crisis: succession",
+            "crisis: any"
+          ],
           "text": "{settlement}'s temple carries the economy and does not reach for the seat, and {govFaction} governs without contesting the arrangement.",
           "slots": [
             "settlement",
@@ -4828,6 +5292,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "historical_economic: the recovery narrative": [
         {
           "angle": "elder",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s prosperity was rebuilt and not inherited: the town went down a generation and more ago, and came back inside the memory of people still working.",
           "slots": [
             "settlement"
@@ -4836,6 +5303,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s books show a hard collapse older than its living memory and a recovery a good deal newer, and the town manages risk like a place that remembers the first.",
           "slots": [
             "settlement"
@@ -4844,6 +5314,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} is comfortable and does not behave comfortably; the caution here is older than the money.",
           "slots": [
             "settlement"
@@ -4852,6 +5326,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "The generation running {settlement} did the rebuilding, and what they decide about surplus is still being decided against the collapse rather than against the present.",
           "slots": [
             "settlement"
@@ -4947,7 +5425,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "stress_economic: siege against trade income": {
         "role": "spine",
@@ -5001,7 +5480,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "historical_economic: the recovery narrative": {
         "role": "spine",
@@ -5019,7 +5499,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "structuralViolations[]": {
         "role": "spine",
@@ -5035,7 +5516,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "structuralSuggestions[]": {
         "role": "spine",
@@ -5051,7 +5533,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -5338,7 +5821,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "steading row: provenance: 'forced'": {
         "role": "spine",
@@ -5354,7 +5838,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "steading row: charterPending": {
         "role": "spine",
@@ -5370,7 +5855,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -6241,7 +6727,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "not anchored"
+            "not anchored",
+            "market"
           ],
           "text": "{settlement} had its fortunes turned {timeband_since} by {event}, and a stranger would not guess it from the market.",
           "slots": [
@@ -6306,7 +6793,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "not anchored"
+            "not anchored",
+            "institution: temple"
           ],
           "text": "{settlement}'s altars carry a history a stranger will not read without asking.",
           "slots": [
@@ -6624,7 +7112,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "historicalCharacter": {
         "role": "spine",
@@ -6639,7 +7128,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: disaster": {
         "role": "spine",
@@ -6656,7 +7146,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: political": {
         "role": "spine",
@@ -6673,7 +7164,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: economic": {
         "role": "spine",
@@ -6724,7 +7216,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: demographic": {
         "role": "spine",
@@ -6741,7 +7234,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: exile_return": {
         "role": "spine",
@@ -6758,7 +7252,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "event type: occupation_infiltration": {
         "role": "spine",
@@ -6775,7 +7270,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recency framing: Recent": {
         "role": "spine",
@@ -6789,7 +7285,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recency framing: Living memory": {
         "role": "spine",
@@ -6803,7 +7300,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recency framing: Last century": {
         "role": "spine",
@@ -6817,7 +7315,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recency framing: Ancient": {
         "role": "spine",
@@ -6831,7 +7330,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "recency framing: Deep history": {
         "role": "spine",
@@ -6845,7 +7345,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -6900,6 +7401,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "The market at {settlement} and what stands behind it.",
           "slots": [
             "settlement"
@@ -6918,6 +7422,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "walls"
+          ],
           "text": "{settlement}'s walls and what they are actually for.",
           "slots": [
             "settlement"
@@ -7000,7 +7507,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "PRINT-NATIVE CHAPTER OPENERS: economics": {
         "role": "spine",
@@ -7045,7 +7553,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "PRINT-NATIVE CHAPTER OPENERS: power": {
         "role": "spine",
@@ -7060,7 +7569,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -7679,6 +8189,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "viable: true: the arithmetic closes": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement} holds together as a settlement: what it needs it can get, what it makes it can move, and the pieces of it explain each other.",
           "slots": [
             "settlement"
@@ -7687,6 +8201,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "A stranger at {settlement} does not have to be told why the town is where it is; the reason is legible from the road, and nothing about the place argues with it.",
           "slots": [
             "settlement"
@@ -7695,12 +8212,18 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The town works, and works for the reasons a town of this kind usually works.",
           "slots": [],
           "vid": 3
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} carries real difficulties and none of them undermines the case for the place; the town's problems are problems inside a working arrangement.",
           "slots": [
             "settlement"
@@ -7868,7 +8391,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "the MARGINAL arm: neither verdict returned": {
         "role": "spine",
@@ -7886,7 +8410,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "viable: false: the arithmetic does not close": {
         "role": "spine",
@@ -7904,7 +8429,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "criticalIssueCount: critical contradictions on the record": {
         "role": "spine",
@@ -7920,7 +8446,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "criticalIssueCount zero": {
         "role": "spine",
@@ -7936,7 +8463,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "THE FIRST-SURVEY QUALIFICATION": {
         "role": "spine",
@@ -7951,7 +8479,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -8119,7 +8648,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "HIGH-GROUND": {
         "role": "spine",
@@ -8135,7 +8665,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "WOODLAND": {
         "role": "spine",
@@ -8151,7 +8682,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "terrain: forest"
+        ],
+        "colour": true
       },
       "OPEN-GROUND": {
         "role": "spine",
@@ -8167,7 +8702,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "terrain: plains"
+        ]
       },
       "DRY-GROUND": {
         "role": "spine",
@@ -8183,7 +8721,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "terrain: desert"
+        ],
+        "colour": true
       }
     }
   },
@@ -8201,6 +8743,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "MARKET-OPEN": [
         {
           "angle": "street",
+          "marks": [
+            "no crisis: under_siege",
+            "crisis: any"
+          ],
           "text": "Market day is {settlement} at its truest: the roads bring the custom, and the custom is the argument for the stalls.",
           "slots": [
             "settlement"
@@ -8209,6 +8755,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s market lives off through-traffic; the town sells to the road as much as to itself.",
           "slots": [
             "settlement"
@@ -8217,6 +8766,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "A stranger finds {settlement}'s market without directions, because the busiest way through town leads there on its own.",
           "slots": [
             "settlement"
@@ -8225,6 +8777,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The market was where the carts already stopped; the stalls came to the stopping, and {settlement} grew around the habit.",
           "slots": [
             "settlement"
@@ -8261,6 +8816,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "ENTREPOT": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s market handles more than the town could ever use; the difference is the town's living.",
           "slots": [
             "settlement"
@@ -8269,6 +8827,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: under_siege",
+            "crisis: any"
+          ],
           "text": "Half of what changes hands in {settlement} is only pausing here, and the town has built itself around the pause.",
           "slots": [
             "settlement"
@@ -8277,6 +8839,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: under_siege",
+            "crisis: any"
+          ],
           "text": "In {settlement} the {good} on the stalls has usually seen more of the world than the people selling it.",
           "slots": [
             "settlement",
@@ -8288,6 +8854,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "NO-MARKET": [
         {
           "angle": "counterforce",
+          "marks": [
+            "gate",
+            "institution: tavern"
+          ],
           "text": "No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.",
           "slots": [
             "settlement"
@@ -8296,6 +8866,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "gate",
+            "institution: tavern"
+          ],
           "text": "A stranger finds no market square in {settlement}, only trade done at the gate, at the inn and along the road.",
           "slots": [
             "settlement"
@@ -8321,7 +8895,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "market"
+        ],
+        "crisisScoped": true
       },
       "MARKET-NARROW": {
         "role": "spine",
@@ -8337,7 +8915,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "market"
+        ],
+        "colour": true
       },
       "ENTREPOT": {
         "role": "spine",
@@ -8353,7 +8935,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "market"
+        ],
+        "crisisScoped": true
       },
       "NO-MARKET": {
         "role": "spine",
@@ -8367,7 +8953,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "declares": [
+          "no market"
+        ]
       }
     }
   },
@@ -8469,7 +9058,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "FOUNDED-OLD": {
         "role": "spine",
@@ -8485,7 +9075,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "GROWN-UNRECORDED": {
         "role": "spine",
@@ -8499,7 +9090,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -8823,6 +9415,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "No calamity has marked {settlement}'s fabric within the mirror's reckoning, and the evenness of the town is that absence made visible.",
           "slots": [
             "settlement"
@@ -8845,7 +9440,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "SCARRED-FADING": {
         "role": "spine",
@@ -8858,7 +9454,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           1,
           2
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "REBUILT": {
         "role": "spine",
@@ -8873,7 +9470,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "ENCROACHED": {
         "role": "spine",
@@ -8886,7 +9484,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           1,
           2
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "WORN-PLAIN": {
         "role": "spine",
@@ -8899,7 +9498,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           1,
           2
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   },
@@ -9022,6 +9622,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s books record no disaster worth the word, which is itself a fact about the place worth recording.",
           "slots": [
             "settlement"
@@ -9045,7 +9648,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "ANCHORED-OLD": {
         "role": "spine",
@@ -9061,7 +9665,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "LAYERED-ANCHORED": {
         "role": "spine",
@@ -9075,7 +9680,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "RECORDED-UNANCHORED": {
         "role": "spine",
@@ -9089,7 +9695,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "UNMARKED": {
         "role": "spine",
@@ -9103,7 +9710,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   },
@@ -9154,6 +9762,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "walls"
+          ],
           "text": "{settlement} pays for its own defense in wages, not only in stone, and the paying is a standing decision renewed every season.",
           "slots": [
             "settlement"
@@ -9182,6 +9793,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "PROVISIONED": [
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary",
+            "institution: hospital"
+          ],
           "text": "{settlement} keeps stores against the bad season and care for the bad year; the town has met scarcity before and built its answer into the roster.",
           "slots": [
             "settlement"
@@ -9190,6 +9805,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "elder",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "A town does not keep a granary out of optimism; {settlement}'s provision is the polite form of its memory.",
           "slots": [
             "settlement"
@@ -9231,7 +9849,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "GARRISONED": {
         "role": "spine",
@@ -9259,7 +9878,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "PROVISIONED": {
         "role": "spine",
@@ -9287,7 +9907,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   },
@@ -9416,7 +10037,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 5,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "HOME-FED": {
         "role": "spine",
@@ -9432,7 +10054,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 5,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "BOUGHT-IN": {
         "role": "spine",
@@ -9448,7 +10071,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 5,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "UNWORKED": {
         "role": "spine",
@@ -9462,7 +10086,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           2
         ],
         "readsCount": 5,
-        "attach": []
+        "attach": [],
+        "colour": true
       }
     }
   }
