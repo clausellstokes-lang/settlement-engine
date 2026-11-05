@@ -408,14 +408,14 @@ export const NPC_WANTS = {
     'simple robes of their order',
     'ceremonial attire worn at all times',
     'plain devotional dress with one opulent accessory',
-    'vestments a size too grand for the shrine they serve',
+    { text: 'vestments a size too grand for the shrine they serve', needs: ['sacredHouse'] }, // CENSUS-4f: the ledger's declaration, re-read under R-AE (a shrine is a sacred house)
     'threadbare robes patched with fabric from finer ones',
     'a formal habit with a travel-stained hem never cleaned',
     'lay clothes with the collar of the order left visible',
   ],
   economy: [
     'merchant dress: practical but signalling wealth through material',
-    'guild colours worn with pride',
+    { text: 'guild colours worn with pride', needs: ['guild'] }, // CENSUS-4f: the ledger's declaration
     'clothes that once cost a fortune and now show the miles',
     'well-cut but understated trading clothes',
     'sober broadcloth with buttons worth more than the coat',
@@ -428,7 +428,7 @@ export const NPC_WANTS = {
     'fine clothes worn ironically over rougher garments',
     'guard or clergy disguise worn as a habit',
     'whatever is clean (they move frequently)',
-    "a dockhand's oilskins over hands too clean for the work",
+    { text: "a dockhand's oilskins over hands too clean for the work", needs: ['docks'] }, // CENSUS-4f: the ledger's declaration
     'respectable dress exactly average for the street they work',
     'good boots and cheap everything else',
     'a heavy coat worn indoors, contents unexamined',
