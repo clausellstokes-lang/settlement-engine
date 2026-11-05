@@ -13,8 +13,9 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { composeTonightSheet, isVoiceableWant, printsAsWant, voicedLineOf } from '../../src/domain/summary/tonightSheet.js';
 import { composeSettlementQuickGuide } from '../../src/domain/summary/settlementQuickGuide.js';
+import { crisisCastSenseFindings } from '../../src/domain/coherence/crisisFactFindings.js';
 
-const SEEDS = [20, 26, 57];
+const SEEDS = [20, 26, 55, 57];
 /** @type {Record<number, any>} */
 const born = {};
 beforeAll(async () => {
@@ -23,13 +24,21 @@ beforeAll(async () => {
 }, 300_000);
 
 describe('R11 · the Tonight sheet prefers the concrete', () => {
-  it.each(SEEDS)('soak1k-%i: every line printed after "Wants to" is voiceable, and nobody is left blank', (i) => {
+  it.each(SEEDS)('soak1k-%i: every line printed after "Wants to" is voiceable (an empty line prints nothing)', (i) => {
     const sheet = composeTonightSheet(born[i]);
     expect(sheet.people.length).toBeGreaterThan(0);
     for (const p of sheet.people) {
-      if (printsAsWant(p) && !p.sameAs) expect(isVoiceableWant(p.line), `${p.name}: ${p.line}`).toBe(true);
-      expect(p.line, p.name).not.toBe('');
+      if (printsAsWant(p) && !p.sameAs && p.line) expect(isVoiceableWant(p.line), `${p.name}: ${p.line}`).toBe(true);
     }
+  });
+
+  it('soak1k-26: the seat (the revolt\'s target) with an abstract goal, the crisis secret withheld and no temperament on the record is voiced with nothing, never the abstract goal', () => {
+    const seat = composeTonightSheet(born[26]).people.find((p) => p.why === 'seat');
+    expect(seat).toMatchObject({ name: 'Rhiannon Sullivan', says: 'want', line: '' });
+  });
+
+  it.each([26, 55])('soak1k-%i: a crisis target whose own line falls back never voices that crisis\'s secret (F13 target_runs_plot)', (i) => {
+    expect(crisisCastSenseFindings(born[i]).filter((f) => f.detail.startsWith('target_runs_plot'))).toEqual([]);
   });
 
   it.each(SEEDS)('soak1k-%i: the Quick Guide reads the same choice', (i) => {
@@ -53,6 +62,10 @@ describe('R11 · voicedLineOf, the one choice', () => {
   it('then to the temperament', () => {
     expect(voicedLineOf({ goal: { short: abstract }, personality: { dominant: 'Proud and watchful' } }))
       .toEqual({ says: 'temperament', text: 'Proud and watchful' });
+  });
+  it('a withheld secret gives way to the temperament', () => {
+    expect(voicedLineOf({ goal: { short: abstract }, secret: { what: 'Knows who ordered it.' }, personality: { dominant: 'Proud' } }, { withholdSecret: true }))
+      .toEqual({ says: 'temperament', text: 'Proud' });
   });
   it('and to nothing, never to the abstract goal', () => {
     expect(voicedLineOf({ goal: { short: abstract } })).toEqual({ says: 'want', text: '' });

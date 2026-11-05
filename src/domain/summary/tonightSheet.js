@@ -344,13 +344,15 @@ function temperamentOf(npc) {
  * (`isVoiceableWant`); (c) their secret; (d) their temperament. (a), the crisis cast's role want
  * (CAST_WANTS), is the sheet's own and comes first there. `text` is the want lower-led and closed
  * (read after "Wants to"), or the secret / temperament as the record holds it; '' when the record
- * holds none of the three.
- * @param {TonightNpc} npc @returns {{ says: 'want'|'secret'|'temperament', text: string }}
+ * holds none of the three. `withholdSecret` skips (c) for a person who may not voice the secret
+ * they keep (a crisis's TARGET keeping that crisis's own secret, F13's `target_runs_plot`).
+ * @param {TonightNpc} npc @param {{ withholdSecret?: boolean }} [options]
+ * @returns {{ says: 'want'|'secret'|'temperament', text: string }}
  */
-export function voicedLineOf(npc) {
+export function voicedLineOf(npc, options = {}) {
   const goal = clean(typeof npc?.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc?.goal);
   if (goal && isVoiceableWant(goal)) return { says: 'want', text: wantOf(npc) };
-  const secret = npc ? secretOf(npc) : '';
+  const secret = npc && !options.withholdSecret ? secretOf(npc) : '';
   if (secret) return { says: 'secret', text: secret };
   const temper = npc ? temperamentOf(npc) : '';
   if (temper) return { says: 'temperament', text: temper };
@@ -360,10 +362,11 @@ export function voicedLineOf(npc) {
 /**
  * A person's own line on the sheet (the seat-holder, the senior cleric): `voicedLineOf`, the
  * secret and the temperament closed as sentences.
- * @param {TonightNpc} npc @returns {{ says: 'want'|'secret'|'temperament', line: string }}
+ * @param {TonightNpc} npc @param {{ withholdSecret?: boolean }} [options]
+ * @returns {{ says: 'want'|'secret'|'temperament', line: string }}
  */
-function ownLineOf(npc) {
-  const { says, text } = voicedLineOf(npc);
+function ownLineOf(npc, options) {
+  const { says, text } = voicedLineOf(npc, options);
   return { says, line: says === 'want' ? text : sentence(text) };
 }
 
@@ -429,15 +432,20 @@ function peopleOf(source) {
     }
   }
 
-  const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
-  const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
-  if (seat) { const own = ownLineOf(seat.npc); add(seat, 'seat', own.line, undefined, own.says); }
-
   const patterns = crisisSecretPatterns(source);
   // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
   // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
   // already voiced from the cast (soak1k-3005): their line is the role's want, never overwritten.
   const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
+  // R11: the same holds when a target's OWN line falls back to their secret (soak1k-26, -55).
+  /** @param {TonightNpc} npc */
+  const withholdSecret = (npc) => targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name))
+    && patterns.some((re) => re.test(secretOf(npc)));
+
+  const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
+  const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
+  if (seat) { const own = ownLineOf(seat.npc, { withholdSecret: withholdSecret(seat.npc) }); add(seat, 'seat', own.line, undefined, own.says); }
+
   const keeper = patterns.length
     ? npcs.find(({ npc }) => {
       const s = secretOf(npc);
@@ -448,7 +456,7 @@ function peopleOf(source) {
   if (keeper) add(keeper, 'secret', sentence(secretOf(keeper.npc)));
 
   const cleric = npcs.find(({ npc }) => npc.category === 'religious' && !out.some((p) => p.name === clean(npc.name)));
-  if (cleric) { const own = ownLineOf(cleric.npc); add(cleric, 'cleric', own.line, undefined, own.says); }
+  if (cleric) { const own = ownLineOf(cleric.npc, { withholdSecret: withholdSecret(cleric.npc) }); add(cleric, 'cleric', own.line, undefined, own.says); }
   return wantsOnce(out);
 }
 
