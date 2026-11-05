@@ -22,6 +22,15 @@ import { terrainClassOf, tradeRouteOf } from './terrain.js';
  * @returns {Readonly<{ kind: 'maritime'|'river'|'none', navigable: boolean, coast: boolean, river: boolean }>}
  */
 export function waterOf(record) {
-  const kind = waterAccessKind(terrainClassOf(record), tradeRouteOf(record) || null);
+  return waterOfKind(waterAccessKind(terrainClassOf(record), tradeRouteOf(record) || null));
+}
+
+/**
+ * The answers for a kind the world law already computed with the same rule (a birth in progress:
+ * `generationContext.js :: createGenerationWorldLaw`'s `portKind`).
+ * @param {'maritime'|'river'|'none'} kind
+ * @returns {Readonly<{ kind: 'maritime'|'river'|'none', navigable: boolean, coast: boolean, river: boolean }>}
+ */
+export function waterOfKind(kind) {
   return Object.freeze({ kind, navigable: kind !== 'none', coast: kind === 'maritime', river: kind === 'river' });
 }

@@ -122,6 +122,7 @@ export const CRISIS_FAMILY_KINDS = Object.freeze({
 });
 
 /** The short spellings the vocabulary rulings' table writes (`crisis: siege, famine`) → the record's kinds. */
+/** @type {Readonly<Record<string, string>>} */
 export const CRISIS_KIND_ALIASES = Object.freeze({
   siege: 'under_siege', occupation: 'occupied', plague: 'plague_onset', war: 'wartime', migration: 'mass_migration', debt: 'indebted',
 });
@@ -180,9 +181,10 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {any} [crisis] @property {number|null} [storesMonths] @property {any} [defence]
  * @property {any} [water] @property {boolean} [market] @property {any} [famine] @property {any} [magic]
  * @property {string|null} [rulerKind] @property {any} [migration] @property {string} [warState]
- * @property {(kind: string) => boolean} [hasInstitution] @property {string|null} [populationBand]
+ * @property {(kind: string) => boolean|undefined} [hasInstitution] @property {string|null} [populationBand]
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
- * @property {(npc: unknown) => boolean} [hasOtherNpc]
+ * @property {(npc: unknown) => boolean|undefined} [hasOtherNpc]
+ * @property {boolean} [soldiers] @property {boolean} [commander] @property {any} [faith] @property {boolean} [guardPresence]
  * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
  * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
  * @property {string} [prosperity]
@@ -203,74 +205,87 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
 const bool = (v) => (typeof v === 'boolean' ? v : undefined);
 
 /**
+ * One dimension, frozen; the JSDoc parameter types each reader (`FactsLike`, key, ctx).
+ * @param {Dimension} d @returns {Readonly<Dimension>}
+ */
+const dim = (d) => Object.freeze(d);
+
+/**
  * THE VOCABULARY. Atom names are EXACTLY the design's §1 table and §3.2 lists.
  * @type {Readonly<Record<string, Readonly<Dimension>>>}
  */
 export const FACT_DIMENSIONS = Object.freeze({
   // ── presence: defence (fact 3; `facts/defence.js`) ──
-  walls: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.walls) }),
-  palisade: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.palisade) }),
-  gate: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.gate) }),
-  watch: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.watch) }),
-  militia: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.militia) }),
-  garrison: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.garrison) }),
-  hospital: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
-  healer: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.healer) }),
-  soldiers: Object.freeze({ shape: 'presence', home: '', reader: null }),
+  walls: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.walls) }),
+  palisade: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.palisade) }),
+  gate: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.gate) }),
+  watch: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.watch) }),
+  militia: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.militia) }),
+  garrison: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.garrison) }),
+  hospital: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
+  healer: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.healer) }),
+  // the rulings §2's delegated getters CENSUS-1c owns (R-E): `soldiers` = a garrison or a hired
+  // company (the twin table's and `forceWordsOf`'s meaning); `commander` = a garrison stands, so
+  // someone commands it (`hasCommander`); `mercenary` = a hired company.
+  soldiers: dim({ shape: 'presence', home: 'soldiers', reader: (f) => bool(f.soldiers) }),
+  commander: dim({ shape: 'presence', home: 'commander', reader: (f) => bool(f.commander) }),
+  mercenary: dim({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.mercenary) }),
   // THE ONE COMPOSITE (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company,
   // defined once in `factsOf` (`guardPresence`); a line never composes atoms itself.
-  guardPresence: Object.freeze({ shape: 'presence', home: 'guardPresence', reader: (f) => bool(f.guardPresence) }),
+  guardPresence: dim({ shape: 'presence', home: 'guardPresence', reader: (f) => bool(f.guardPresence) }),
   // ── presence: market (fact 5), water (fact 4), magic (fact 7) ──
-  market: Object.freeze({ shape: 'presence', home: 'market', reader: (f) => bool(f.market) }),
-  navigable: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.navigable) }),
-  coast: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.coast) }),
-  river: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.river) }),
+  market: dim({ shape: 'presence', home: 'market', reader: (f) => bool(f.market) }),
+  navigable: dim({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.navigable) }),
+  coast: dim({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.coast) }),
+  river: dim({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.river) }),
   // the rulings §4: the water atoms are the readers' values; `lake` is dropped (no record field
   // carries a lake: the terrain classes have none); `port` is the trade-route reader's.
-  port: Object.freeze({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
-  magic: Object.freeze({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
+  port: dim({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
+  magic: dim({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
-  temple: Object.freeze({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
-  docks: Object.freeze({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
-  institution: Object.freeze({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
+  temple: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
+  docks: dim({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('docks') : undefined) }),
+  institution: dim({ shape: 'presence', home: 'hasInstitution', keys: INSTITUTION_WORDS,
     reader: (f, key) => (typeof f.hasInstitution === 'function' && key ? f.hasInstitution(key) : undefined) }),
   // ── presence: the rest of §1 / §3.2, homed or not ──
-  famine: Object.freeze({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
-  starving: Object.freeze({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
-  'other npc': Object.freeze({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
+  famine: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.famine) }),
+  starving: dim({ shape: 'presence', home: 'famine', reader: (f) => bool(f.famine?.starvingAllowed) }),
+  'other npc': dim({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
     reader: (f, _key, ctx) => (typeof f.hasOtherNpc === 'function' && ctx && 'npc' in ctx ? f.hasOtherNpc(ctx.npc) : undefined) }),
-  priest: Object.freeze({ shape: 'presence', home: '', reader: null }),
+  // `priest` = a senior cleric stands among the named people (`faithReadingOf(record).seniorCleric`;
+  // the rulings §2, CENSUS-1c).
+  priest: dim({ shape: 'presence', home: 'faith', reader: (f) => (f.faith && typeof f.faith === 'object' ? f.faith.seniorCleric != null : undefined) }),
   // CENSUS-3b unit 1 (ruling R-E): the delegated getters. Organised crime = a structure at
   // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
-  'organised crime': Object.freeze({ shape: 'presence', home: 'crime',
+  'organised crime': dim({ shape: 'presence', home: 'crime',
     reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
-  ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, Object.freeze({ shape: 'presence', home: 'foodSources',
+  ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, dim({ shape: 'presence', home: 'foodSources',
     reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
-  imports: Object.freeze({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
-  exports: Object.freeze({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
-  culture: Object.freeze({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
+  imports: dim({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  exports: dim({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
+  culture: dim({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
     reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.culture === undefined ? undefined : f.culture === key) }),
   // ── keyed presence: one value of a categorical fact ──
-  ruler: Object.freeze({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
+  ruler: dim({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
     reader: (f, key) => (f.rulerKind === undefined ? undefined : f.rulerKind === key) }),
-  war: Object.freeze({ shape: 'presence', home: 'warState', keys: WAR_WORDS,
+  war: dim({ shape: 'presence', home: 'warState', keys: WAR_WORDS,
     reader: (f, key) => (typeof f.warState === 'string' ? f.warState === key : undefined) }),
-  migration: Object.freeze({ shape: 'presence', home: 'migration', keys: MIGRATION_WORDS,
+  migration: dim({ shape: 'presence', home: 'migration', keys: MIGRATION_WORDS,
     reader: (f, key) => (f.migration ? f.migration.active === true && f.migration.direction === key : undefined) }),
-  terrain: Object.freeze({ shape: 'presence', home: 'terrain', keys: TERRAIN_WORDS,
+  terrain: dim({ shape: 'presence', home: 'terrain', keys: TERRAIN_WORDS,
     reader: (f, key) => (typeof f.terrain === 'string' ? f.terrain === key : undefined) }),
-  route: Object.freeze({ shape: 'presence', home: 'route', keys: ROUTE_WORDS,
+  route: dim({ shape: 'presence', home: 'route', keys: ROUTE_WORDS,
     reader: (f, key) => (typeof f.route === 'string' ? f.route === key : undefined) }),
   // ── bands: one comparator each ──
-  tier: Object.freeze({ shape: 'band', home: 'tier', order: TIER_WORDS, reader: (f) => f.tier }),
-  population: Object.freeze({ shape: 'band', home: 'populationBand', order: POPULATION_WORDS, reader: (f) => f.populationBand }),
-  'magic level': Object.freeze({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
-  food: Object.freeze({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
-  stores: Object.freeze({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
-  prosperity: Object.freeze({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
-  crime: Object.freeze({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
+  tier: dim({ shape: 'band', home: 'tier', order: TIER_WORDS, reader: (f) => f.tier }),
+  population: dim({ shape: 'band', home: 'populationBand', order: POPULATION_WORDS, reader: (f) => f.populationBand }),
+  'magic level': dim({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
+  food: dim({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
+  stores: dim({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
+  prosperity: dim({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
+  crime: dim({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
   // ── the crisis dimension (the inverse default) ──
-  crisis: Object.freeze({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
+  crisis: dim({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
 });
 
 /** The crisis dimension's legal values. */

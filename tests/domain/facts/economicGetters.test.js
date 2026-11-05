@@ -73,6 +73,6 @@ describe('the vocabulary names the atoms they answer', () => {
   });
   it('the "named but refused" list shrinks by exactly these', () => {
     const refused = Object.entries(V.FACT_DIMENSIONS).filter(([, d]) => d.reader === null).map(([n]) => n).sort();
-    expect(refused).toEqual(['priest', 'soldiers']);
+    expect(refused).toEqual([]); // the merge of CENSUS-3b and CENSUS-1c (lane census-3, 2026-11-05) empties it
   });
 });

@@ -56,8 +56,12 @@ describe('every dimension is answered by one home, or cannot be declared', () =>
     expect(V.parseAtom('tier: ≥ village-ish')).toBeNull();
     expect(V.parseAtom('crisis: drought')).toBeNull();
     expect(() => V.assertDeclarable('moat')).toThrow(/not an atom/);
-    expect(() => V.assertDeclarable('soldiers')).toThrow(/no reader yet/);
-    expect(() => V.assertDeclarable('priest')).toThrow(/no reader yet/); // CENSUS-3b unit 1: grain is answered now (foodSources)
+    // the merge of CENSUS-3b (foodSources, crime, …) and CENSUS-1c (soldiers, commander, priest)
+    // empties the "named but refused" list: every named atom has its one reader now.
+    expect(Object.entries(V.FACT_DIMENSIONS).filter(([, d]) => d.reader === null).map(([n]) => n)).toEqual([]);
+    expect(V.assertDeclarable('grain').dimension).toBe('grain');
+    expect(V.assertDeclarable('soldiers').dimension).toBe('soldiers');
+    expect(V.assertDeclarable('organised crime').dimension).toBe('organised crime');
     expect(V.assertDeclarable('walls').dimension).toBe('walls');
     expect(V.assertDeclarable('institution: mill').key).toBe('mill');
     expect(V.assertDeclarable('tier: >= town')).toMatchObject({ op: '≥', value: 'town' });

@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; // SIZE-3, R6, F1 and F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // SIZE-3, R6, F1, F10 and CENSUS-1c: one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -352,7 +352,7 @@ export const generatePowerStructure = (
         topPriority <= 65 &&
         (informalModifier =
           {
-            military: defenceTwinLine('garrison-backed', defenseFactsOf({ institutions: nativeInstitutions })), // F10: data/defenceTwinLines.js
+            military: resolveSibling('garrison-backed', MILITARY_MODIFIER_SIBLINGS, { facts: factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:MILITARY_MODIFIER_SIBLINGS', surface: 'power', drawKind: 'T' }), // F10, CENSUS-1c: MILITARY_MODIFIER_SIBLINGS below
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
@@ -805,3 +805,16 @@ export const generatePowerStructure = (
     criminalCaptureState,
   };
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
+ * §3.1): a town's informal military modifier. The original stays where it is spelled above; the twin stands beside it here with
+ * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
+ * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
+ */
+export const MILITARY_MODIFIER_SIBLINGS = Object.freeze({
+  'garrison-backed': Object.freeze([
+    Object.freeze({ text: 'garrison-backed', needs: Object.freeze(['garrison']) }),
+    Object.freeze({ text: 'arms-backed', twinOf: 'garrison-backed', excludes: Object.freeze(['garrison']) }),
+  ]),
+});
