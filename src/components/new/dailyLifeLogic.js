@@ -7,6 +7,8 @@ import {
   CULTURE_PROFILES,
   resolveCultureProfileKey,
 } from '../../domain/cultureProfiles.js';
+import { resolveDeclared, lineText } from '../../domain/facts/drawDeclared.js';
+import { factsOf } from '../../domain/facts/factsOf.js';
 
 function legacyCultureContext(culture) {
   const key = resolveCultureProfileKey(culture);
@@ -145,7 +147,9 @@ export function extractSettlementContext(s) {
   const rawMagicScore = _magicPresence.score;
 
   const rawDefenseReadinessLabel = dp.readiness?.label || null;
-  const rawDefenseCtx  = DEFENSE_CONTEXT[rawDefenseReadinessLabel] || null;
+  // CENSUS-1e unit 2 (Appendix B item 23, T): the readiness cell resolves through the one rule
+  // against the settlement's facts (undeclared today: drawn as before, noted in the ledger).
+  const rawDefenseCtx  = lineText(resolveDeclared(DEFENSE_CONTEXT[rawDefenseReadinessLabel] ?? null, { facts: () => factsOf(s), poolId: `dailyLife:DEFENSE_CONTEXT.${rawDefenseReadinessLabel}`, surface: 'daily_life' }).line) || null;
 
   return {
     tier, tierLabel: TIER_LABELS[tier] || tier,
