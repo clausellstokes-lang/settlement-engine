@@ -61,7 +61,7 @@ re-spelled mechanically, never re-judged.
 
 | atom | nearest reader today | status |
 |---|---|---|
-| `institution: guild` | none in `INSTITUTION_KIND_PATTERNS` | **no reader** — needs a kind |
+| ~~`institution: guild`~~ → `guild` | `factsOf(r).guild` (`facts/guild.js`, CENSUS-4b) | **homed** (the chair's answer 4): the 21 lines re-spelled `guild` |
 | `crime` (organised crime present) | `defense/defenseDisplay.js :: deriveCriminalStructure` | **no factsOf home** |
 | `tier: <cmp> <tier>` | the field `record.tier` + `tierAtLeast` | a field, no factsOf getter |
 

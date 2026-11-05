@@ -2702,7 +2702,7 @@
       "id": "town|Crafts|Tanner (established)#0",
       "text": "A full tannery of many vats and a guild-trained workforce, turning out fine leather for shoes, armour, and saddlery.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -2712,7 +2712,7 @@
       "id": "town|Crafts|Tanner (established)#1",
       "text": "Multiple vats, trained hands from the guild. A proper tannery whose leather is good enough for footwear, armour, and saddlery.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -2786,7 +2786,7 @@
       "id": "town|Crafts|Bakers (5-15)#0",
       "text": "The town's bread. Prices fixed by the guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -2796,7 +2796,7 @@
       "id": "town|Crafts|Bakers (5-15)#1",
       "text": "Bread baked for sale, with the guild setting the price.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -2960,7 +2960,7 @@
       "id": "town|Religious|Parish burial grounds#1",
       "text": "Each congregation buries its own, and the sexton keeps the roll that inheritance disputes are settled from. Guilds buy plots together so their members lie among their trade.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -3999,7 +3999,7 @@
       "id": "city|Crafts|Specialized metalworkers#0",
       "text": "Armourers, swordsmiths, and jewellers, each in its own guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4009,7 +4009,7 @@
       "id": "city|Crafts|Specialized metalworkers#1",
       "text": "Swordsmiths, armourers, jewellers. The trades kept to separate guilds.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4035,7 +4035,7 @@
       "id": "city|Crafts|Carpenters (5-15)#0",
       "text": "Guild-organised carpenters, joiners, and furniture makers for building and fitting out.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4045,7 +4045,7 @@
       "id": "city|Crafts|Carpenters (5-15)#1",
       "text": "Builders' carpenters, joiners, and furniture makers, each trade organised under its guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4141,7 +4141,7 @@
       "id": "city|Crafts|Bakers (5-15)#0",
       "text": "Every ward has its bakehouses, with weights and prices set by the guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4151,7 +4151,7 @@
       "id": "city|Crafts|Bakers (5-15)#1",
       "text": "Bakehouses throughout the wards, the loaf's weight and price fixed by guild rule.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4209,7 +4209,7 @@
       "id": "city|Crafts|Alchemist quarter#0",
       "text": "Several alchemical workshops, run under a guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -4219,7 +4219,7 @@
       "id": "city|Crafts|Alchemist quarter#1",
       "text": "A cluster of alchemists' workshops, organised into a guild.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],

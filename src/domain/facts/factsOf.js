@@ -28,6 +28,7 @@ import { populationBandOf } from './populationBand.js';
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
 import { faithReadingOf } from '../dossier/faithReading.js';
+import { guildOf } from './guild.js';
 
 /**
  * @param {any} record a settlement record
@@ -69,6 +70,8 @@ export function factsOf(record, options = {}) {
     get warState() { return warStateOf(record, options); },
     /** fact 11: a live institution of a kind */
     hasInstitution: (/** @type {string} */ kind) => hasInstitution(record, kind),
+    /** CENSUS-4b (the chair's answer 4): a live non-criminal guild on the roster ∨ a guild power (`guild.js`) */
+    get guild() { return guildOf(record); },
     /** fact 12: small / middling / large */
     get populationBand() { return populationBandOf(record); },
     /** fact 13: the terrain class */

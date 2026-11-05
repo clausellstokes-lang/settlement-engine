@@ -11,7 +11,7 @@
         "market"
       ],
       "Guild Hall": [
-        "institution: guild"
+        "guild"
       ],
       "Inn/Tavern": [
         "institution: tavern"
@@ -33,7 +33,7 @@
         "institution: smith"
       ],
       "Craft Guild District": [
-        "institution: guild"
+        "guild"
       ],
       "Wizard Tower": [
         "magic"
@@ -58,15 +58,15 @@
         "navigable"
       ],
       "Thieves Guild": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "Assassins Guild": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "Adventurers Guild": [
-        "institution: guild"
+        "guild"
       ],
       "Magic Item": [
         "magic"
@@ -81,10 +81,10 @@
         "institution: tavern"
       ],
       "Cobbler's Guild": [
-        "institution: guild"
+        "guild"
       ],
       "Tailor's Guild": [
-        "institution: guild"
+        "guild"
       ],
       "Harbour Master's Office": [
         "institution: docks",
@@ -100,10 +100,10 @@
         "institution: tavern"
       ],
       "Merchant guilds (3-8)": [
-        "institution: guild"
+        "guild"
       ],
       "Merchant guilds (15-40)": [
-        "institution: guild"
+        "guild"
       ],
       "Blacksmiths (3-10)": [
         "institution: smith"
@@ -138,7 +138,7 @@
         "market"
       ],
       "Assassins' guild": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "Bandit affiliate": [
@@ -157,13 +157,13 @@
         "organised crime"
       ],
       "Bowyers & fletchers (guild)": [
-        "institution: guild"
+        "guild"
       ],
       "Carriers' guild": [
-        "institution: guild"
+        "guild"
       ],
       "Cartographer's guild": [
-        "institution: guild"
+        "guild"
       ],
       "Cathedral (10,000+ only)": [
         "institution: temple"
@@ -178,13 +178,13 @@
         "organised crime"
       ],
       "Craft guilds (5-15)": [
-        "institution: guild"
+        "guild"
       ],
       "Craft guilds (30-80)": [
-        "institution: guild"
+        "guild"
       ],
       "Craft guilds (100-150+)": [
-        "institution: guild"
+        "guild"
       ],
       "Daily markets": [
         "market"
@@ -205,10 +205,10 @@
         "institution: temple"
       ],
       "Guild consortium": [
-        "institution: guild"
+        "guild"
       ],
       "Guild governance": [
-        "institution: guild"
+        "guild"
       ],
       "Hedge wizard": [
         "magic"
@@ -227,7 +227,7 @@
         "organised crime"
       ],
       "Mages' guild": [
-        "institution: guild",
+        "guild",
         "magic"
       ],
       "Major annual fairs": [
@@ -250,7 +250,7 @@
         "institution: monastery"
       ],
       "Multiple adventurers' guilds": [
-        "institution: guild"
+        "guild"
       ],
       "Multiple criminal factions": [
         "organised crime"
@@ -311,11 +311,11 @@
         "institution: tavern"
       ],
       "Thieves' guild (powerful)": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "Thieves' guild chapter": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "Town watch": [
@@ -577,7 +577,7 @@
       "id": "City administration|Licensing and charters",
       "text": "Grants guild, market, and trade privileges",
       "needs": [
-        "institution: guild",
+        "guild",
         "market"
       ],
       "excludes": [],
@@ -4262,7 +4262,7 @@
       "text": "Issue licences for merchants, markets, guilds, and regulated trades.",
       "needs": [
         "market",
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -7094,7 +7094,7 @@
       "id": "Parish burial grounds|Guild plot",
       "text": "A block of ground held by a trade for its members and their households.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],

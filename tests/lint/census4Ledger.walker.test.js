@@ -11,7 +11,7 @@ const DIR = join(dirname(fileURLToPath(import.meta.url)), '../../docs/census/dec
 const files = readdirSync(DIR).filter((f) => f.endsWith('.json'));
 
 /** The atoms that have no factsOf reader on this tree, by the lines that declare them. Shrink-only. */
-const NO_READER = { 'institution: guild': 21, 'organised crime': 10 };
+const NO_READER = { 'organised crime': 10 }; // CENSUS-4b: `guild` homed (facts/guild.js), its 21 lines re-spelled
 
 describe('the CENSUS-4 declaration ledger', () => {
   it('every row atom is an atom of the vocabulary', () => {

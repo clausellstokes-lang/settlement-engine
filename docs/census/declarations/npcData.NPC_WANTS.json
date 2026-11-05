@@ -218,7 +218,7 @@
       "id": "economy#1",
       "text": "guild colours worn with pride",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],

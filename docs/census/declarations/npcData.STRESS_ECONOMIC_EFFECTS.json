@@ -8,11 +8,11 @@
     "crisisScoped": false,
     "keyDeclares": {
       "econ_crim_blur": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "econ_crim_exploitation": [
-        "institution: guild",
+        "guild",
         "organised crime"
       ],
       "rel_mil_crusader": [
@@ -1072,7 +1072,7 @@
       "id": "mag_crim_market.desc#6",
       "text": "{A} supplies {B}'s network with wards against detection. Each ward is sold at triple the guild price.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -1138,7 +1138,7 @@
       "id": "mag_crim_market.tension#6",
       "text": "The guild has summoned {A} to explain a shortfall in licensed components. {B}'s orders account for the missing stock.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
@@ -1148,7 +1148,7 @@
       "id": "mag_crim_market.tension#7",
       "text": "{A} has been offered a guild post that requires a clean record. {B} has a list of everything {A} has made.",
       "needs": [
-        "institution: guild"
+        "guild"
       ],
       "excludes": [],
       "crisis": [],
