@@ -1,0 +1,22 @@
+{
+  "_doc": "SELF-VOUCH, I5 (THE LANE'S SECOND STEP), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: SELF-VOUCH, I5: the battery judgment counts kind 7 (a placeholder faction or a role-only person), so the self-vouch line prints only on a record clean of kinds 1-5, 7 and 8. THE MOVER, NAMED: first-parent step cdc949867 of lane/landing-rung1-2026-11-04 (\"fix(receipt): the battery judgment counts kind 7, so the page never vouches past the unnamed (I5)\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 562 (THE LADDER IS THE LANDING, the owner, 2026-11-04) and line 592 (THE SOAK LADDER, the owner, 2026-11-03), as §934.104 quotes them (the words record 8, SELF-VOUCH's first step, carries; the chair's ruling I5 of 2026-11-04 is this step's own commission, per LANDING-3's brief, ruling 3). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S14 is the tree of cdc949867 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from cdc949867 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S13 -> S14): generator-golden-master 510 of 525 rows (thorp 72, hamlet 84, village 84, town 102, city 84, metropolis 84), the key set identical; espionage-dormancy-fence 183 of 360 rows (thorp 8, hamlet 32, village 38, town 28, city 48, metropolis 29), 360/360 distinct, 2d13cedb.. -> a126db33... The three first-parent commits between record 13's step and this one (73124db9, 3b01c8dd, b3e3695e) measure 0 golden-master rows (the census at every step, ea04a7ca at each). A surface that does not move at this stage is not listed. W6 stays the one named red of the calibration suite (the corpus does not move at this stage), carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "well before we do the PRs, do the 1,000 again, the 10,000, the 100,000, and the 1 million with fixes where findings are found. PR in between each · after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune",
+  "ownerDate": "2026-11-04",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "SELF-VOUCH, I5: the battery judgment counts kind 7 (a placeholder faction or a role-only person), so the self-vouch line prints only on a record clean of kinds 1-5, 7 and 8",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at cdc949867",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}

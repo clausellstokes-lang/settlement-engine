@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — SELF-VOUCH, I5, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-14-self-vouch-i5-kind-7.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   510 OF 525 ROWS MOVED (thorp 72, hamlet 84, village 84, town 102, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step cdc949867): the battery judgment counts kind 7 (a placeholder faction or a role-only person), so the self-vouch line prints only on a record clean of kinds 1-5, 7 and 8. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S14 (the tree of cdc949867 with the door paths carried from
+ *   the branch, the previous record's writes committed). ea04a7ca.. -> f0c7321d..
+ *
  * 2026-11-04 — X-46 CAR 1B, SECOND STEP (U4–U5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-13-x46-car-1b-2-curve.json; the cloud chair signs under the owner's delegation, vetoable).
  *   84 OF 525 ROWS MOVED (metropolis 84; thorp, hamlet, village, town, city 0); the key set is identical. THE CAUSE, ONE (first-parent
