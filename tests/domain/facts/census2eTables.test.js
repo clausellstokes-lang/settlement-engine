@@ -99,3 +99,43 @@ describe('DAILY_LIFE_TAB — LOAD_MSGS and the local narrative (carried through 
     expect(src).toContain("listText(institutions, 'the wells, the lanes, and the common ground')");
   });
 });
+
+import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_CRISIS_SCOPED } from '../../../src/generators/narrativeText.js';
+import { declarationOf } from '../../../src/domain/facts/factVocabulary.js';
+import { textOf } from '../../../src/domain/facts/textOf.js';
+import { setActiveRng } from '../../../src/kernel/rngContext.js';
+import { createPRNG } from '../../../src/kernel/prng.js';
+
+describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarations (R, carried through textOf)', () => {
+  /** atoms the row does not write, by cause (recorded in the lane doc) */
+  const NOT_WRITTEN = {
+    'POLITICAL_FLAVOR.disaster_heavy[4]': ['walls'], // POLITICAL_FLAVOR_SIBLINGS (CENSUS-1c) resolves the walls after the draw
+    'POLITICAL_FLAVOR.catastrophic[1].monster_incursion': ['walls', 'militia'], // one branch of the closure
+    'POLITICAL_FLAVOR.religious_heavy[0]': ['institution: temple'], // waiting on sacredHouse (R-AE)
+    'POLITICAL_FLAVOR.religious_heavy[2]': ['institution: temple'],
+  };
+  it('every row declares what its ledger lines say (a closure\'s branches share one row)', () => {
+    const want = {};
+    for (const pool of ledger('POLITICAL_FLAVOR').pools) for (const line of pool.lines) {
+      const m = /^POLITICAL_FLAVOR\.(\w+)\[(\d+)\]/.exec(line.lineId);
+      const d = expectedDeclaration(pool, line);
+      const skip = NOT_WRITTEN[line.lineId] || [];
+      d.needs = d.needs.filter((a) => !skip.includes(a));
+      const key = `${m[1]}[${m[2]}]`;
+      want[key] = JSON.stringify(d);
+    }
+    const wrong = Object.entries(want).filter(([k, d]) => {
+      const [, pool, i] = /^(\w+)\[(\d+)\]$/.exec(k);
+      const have = declarationOf(POLITICAL_FLAVOR[pool][Number(i)]);
+      return JSON.stringify({ needs: have.needs, excludes: have.excludes, crisis: have.crisis }) !== d;
+    });
+    expect(wrong).toEqual([]);
+  });
+  it('the stable pool is flagged; every row still renders through textOf', () => {
+    expect([...POLITICAL_FLAVOR_CRISIS_SCOPED]).toEqual(ledger('POLITICAL_FLAVOR').pools.filter((p) => p.crisisScoped).map((p) => p.pool));
+    setActiveRng(createPRNG('census-2e'));
+    const events = [{ name: 'the Long Flood', type: 'disaster', severity: 'catastrophic' }, { name: 'the Salt Charter', type: 'economic' }];
+    for (const rows of Object.values(POLITICAL_FLAVOR)) for (const row of rows) expect(typeof textOf(row)(events)).toBe('string');
+    setActiveRng(null);
+  });
+});

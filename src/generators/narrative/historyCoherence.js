@@ -30,6 +30,7 @@
 import { pickRandom2, random01 } from '../helpers.js';
 import { collapseArticleSeams } from '../narrativeProse.js';
 import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_SIBLINGS } from '../narrativeText.js';
+import { textOf } from '../../domain/facts/textOf.js'; // R-C (CENSUS-2e): a declared POLITICAL_FLAVOR row gives back its template; CENSUS-1f's cascade wiring enforces
 import { generateSiegeCapability } from './siegeCapability.js';
 import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { resolveSiblingSentences } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line, so no cited line moves
 
@@ -52,7 +53,7 @@ export const buildStressProfile = (events, _tier, _config, facts) => resolveSibl
   const catastrophic = events.some(e => e.severity === 'catastrophic');
 
   if (random01(0.15)) {
-    return collapseArticleSeams(pickRandom2(POLITICAL_FLAVOR.stable)(events));
+    return collapseArticleSeams(textOf(pickRandom2(POLITICAL_FLAVOR.stable))(events));
   }
 
   let pattern;
@@ -78,10 +79,10 @@ export const buildStressProfile = (events, _tier, _config, facts) => resolveSibl
 
   const flavors = POLITICAL_FLAVOR[pattern];
   if (!flavors || !subset || subset.length === 0) {
-    return collapseArticleSeams(pickRandom2(POLITICAL_FLAVOR.stable)(events));
+    return collapseArticleSeams(textOf(pickRandom2(POLITICAL_FLAVOR.stable))(events));
   }
 
-  return collapseArticleSeams(pickRandom2(flavors)(subset));
+  return collapseArticleSeams(textOf(pickRandom2(flavors))(subset));
 };
 
 /**

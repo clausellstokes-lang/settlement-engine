@@ -233,6 +233,16 @@ export const PRESSURE_SENTENCES = {
 // POLITICAL_FLAVOR maps history-event-type patterns to arrays of description
 // template functions. Several call pickRandom2(...) at render time to select a
 // representative event from the supplied list.
+// CENSUS-2e unit 2 (ledger docs/census/declarations/POLITICAL_FLAVOR.json): a row that presumes a
+// fact is the declared `{ text: <template>, needs?, crisis? }` (R-C), read through `textOf` by
+// historyCoherence.js until CENSUS-1f wires the cascade through `drawDeclared`. The reserve row's
+// walls stay with POLITICAL_FLAVOR_SIBLINGS below (CENSUS-1c, resolved after the draw), so the row
+// declares only its granaries. NOT declared, recorded in the lane doc: catastrophic[1] (its walls
+// and militia are one BRANCH of the closure, monster incursions only; a row atom would refuse the
+// other branch) and religious_heavy[0] / [2] (their clergy and institution want a sacred house of
+// any kind, not a temple: waiting on sacredHouse, R-AE).
+/** The ledger's `{crisis-scoped}` pools (R-AF): the cascade's wiring passes `crisisScoped: true`. */
+export const POLITICAL_FLAVOR_CRISIS_SCOPED = Object.freeze(['stable']);
 export const POLITICAL_FLAVOR = {
   political_heavy: [
     (r) =>
@@ -257,8 +267,8 @@ export const POLITICAL_FLAVOR = {
       `The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reference point for everything: before it, during it, after it. A generation has grown up for whom it is history rather than memory`,
     (r) =>
       `There is a practicality to the people here that outsiders read as coldness. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} taught them what sentiment costs when the accounting comes due, and the lesson stuck`,
-    (r) =>
-      `The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reason, and no argument about the expense has ever won against that memory`,
+    { text: (r) =>
+      `The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong. The ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} is the reason, and no argument about the expense has ever won against that memory`, needs: ['institution: granary'] },
     (r) =>
       `Ask why a custom here seems excessive and the answer is always the same shape: it did not used to be, until the ${pickRandom2(r.filter((s) => s.type === "disaster"))?.name || "this event"} made it necessary, and now it is simply how things are done`,
   ],
@@ -342,13 +352,13 @@ export const POLITICAL_FLAVOR = {
   stable: [
     (r) =>
       "Unremarkable in its history, which is itself a kind of distinction: no catastrophe, no conquest, no great disruption. It simply continued, which required more work than it looks",
-    (r) =>
-      "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones",
-    (r) =>
-      "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one",
+    { text: (r) =>
+      "An ordinary settlement that has outlasted several less ordinary ones nearby: through no single great decision, but through the accumulated effect of many small adequate ones", crisis: ['any'] },
+    { text: (r) =>
+      "The kind of place that historians overlook and travellers remember fondly: no dramatic history, but a persistent one", crisis: ['any'] },
     (r) =>
       "Stable enough that its tensions are the slow kind: inherited grievances, unresolved inheritances, debts that have been rolled over so many times no one remembers the original amount",
-    (r) =>
+    { text: (r) =>
       r.length >= 3
         ? `A settlement shaped by the accumulated weight of ${r
             .map((s) => s.name)
@@ -356,13 +366,13 @@ export const POLITICAL_FLAVOR = {
             .join(
               ", ",
             )} and ${r[r.length - 1].name}: no single defining moment, but enough of them that the character formed anyway`
-        : "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave",
-    (r) =>
+        : "Shaped by events that left no monuments but changed things nonetheless: the kind of history that only becomes visible in the way people behave", crisis: ['any'] },
+    { text: (r) =>
       r.some((s) => s.type === "economic")
         ? `A settlement that has built its identity around commerce rather than conflict. The ${(r.find((s) => s.type === "economic") || r[0]).name} proved that economic power endures longer than military prestige`
-        : "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative",
-    (r) =>
-      "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.",
+        : "The kind of place where records are well-kept and disputes are resolved through precedent, not because the people are unusually reasonable, but because they have learned the cost of the alternative", crisis: ['any'] },
+    { text: (r) =>
+      "More complex than it appears from the road. Outsiders see a functioning market settlement. Residents know the version that has footnotes.", needs: ['market'], crisis: ['any'] },
     (r) =>
       "A settlement whose great advantage is that nothing has ever forced it to become anything in particular. It has kept its options, its neighbours, and its temper, and it regards all three as achievements, correctly, though few visitors see why",
     (r) =>
@@ -389,18 +399,18 @@ export const POLITICAL_FLAVOR = {
   magical_heavy: [
     (r) =>
       `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why this settlement treats arcane matters with more caution than neighbours do, not superstition, institutional memory`,
-    (r) =>
-      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`,
+    { text: (r) =>
+      `A settlement with an unusual relationship to magic: the ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} made it both more dependent on arcane resources and more wary of them simultaneously`, needs: ['magic'] },
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is still discussed (carefully) by the practitioners who work here. The details are not shared with outsiders, which outsiders find either sinister or sensible depending on their own experience with magic`, needs: ['magic'] },
     (r) =>
       `Ask what the local policy on arcane practice is and you will get a longer answer than the question seems to warrant. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is why`,
-    (r) =>
-      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`,
+    { text: (r) =>
+      `The settlement relies on arcane workings it does not entirely trust. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} proved the two feelings can coexist indefinitely, and here they do, in the same shrug people give the weather`, needs: ['magic'] },
     (r) =>
       `There are places in and around the settlement that people simply do not go, and the reasons have hardened into custom without needing to be spoken. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} is where the custom started`,
-    (r) =>
-      `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`,
+    { text: (r) =>
+      `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`, needs: ['magic'] },
   ],
 };
 
