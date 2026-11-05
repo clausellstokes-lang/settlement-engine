@@ -22,7 +22,7 @@ import {
   nativeSemanticName,
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { FACTION_DESC_SIBLINGS, MILITARY_MODIFIER_SIBLINGS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS, MILITARY_MODIFIER_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c and CENSUS-5c (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { hasMarketInstitution } from '../economy/viability.js'; import { defenseFactsOf, forceWordsOf } from '../../domain/defense/defenseFacts.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; import { FACTION_DESC_SIBLINGS } from '../../data/powerSiblings.js'; export { FACTION_DESC_SIBLINGS }; // SIZE-3, R6, F1, F10, CENSUS-1c and CENSUS-5c (R-AB: the tables moved to data/powerSiblings.js, re-exported): one line, so no cited line moves
 
 // renormalizeFactionPower — rescale every faction's `power` to integer
 // percentage points summing to exactly 100, using largest-remainder rounding
@@ -359,7 +359,7 @@ export const generatePowerStructure = (
         topPriority <= 65 &&
         (informalModifier =
           {
-            military: resolveSibling('garrison-backed', MILITARY_MODIFIER_SIBLINGS, { facts: factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:MILITARY_MODIFIER_SIBLINGS', surface: 'power', drawKind: 'T' }), // F10, CENSUS-1c: MILITARY_MODIFIER_SIBLINGS (data/powerSiblings.js)
+            military: 'arms-backed', // CENSUS-5e unit 2 (R-AN): garrison is not settled at this step, so the modifier presumes none (was garrison-backed, with this as its twin)
             religion: 'church-guided',
             economy: 'commerce-driven',
             criminal: 'corruption-riddled',
