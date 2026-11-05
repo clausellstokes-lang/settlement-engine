@@ -1,0 +1,142 @@
+{
+ "id": "traditions.TRADITION_ELEMENTS",
+ "source": "src/data/traditionCorpus.js :: TRADITION_ELEMENTS",
+ "drawKind": "R",
+ "pool": {
+  "declares": [],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "weighted pick in genesis.js (local forked PRNG); the element names the tradition (The Tide Fair). Phase B: the Traditions tab prints only admissible rows (R6); the weight is not moved.",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRADITION_ELEMENTS::founding",
+   "text": "Founding / the Founding",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::first-landing",
+   "text": "Landfall / the First Landing",
+   "needs": [
+    "navigable"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "Landfall / the First Landing: a landing presumes water a boat could use (CENSUS-1 weighs it 0 without water at genesis; this is the line's declaration)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::charter",
+   "text": "Charter / the Charter",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::hearth",
+   "text": "Hearth / the Hearth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::harvest",
+   "text": "Harvest / the Harvest",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "unhomed: farming (no food-source atom is a factsOf getter; read neutral)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::river",
+   "text": "River / the River",
+   "needs": [
+    "river"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "the River element presumes a river (water: river; a coast-only place has no river)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::stone",
+   "text": "Standing Stone / the Standing Stones",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::the-dead",
+   "text": "Dead / the Dead",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::field",
+   "text": "Furrow / the Fields",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "unhomed: farming"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::forge",
+   "text": "Forge / the Forge",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "presumes a forge only as a motif; institution: smith not declared (a custom named for the forge survives the smithy)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::market",
+   "text": "Market / the Market",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "the Market element: a fair is itself a market day; market not declared (the chair may rule needs: market)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::hunt",
+   "text": "Hunt / the Hunt",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "neutral (game presumed; no factsOf food-source getter)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::long-sun",
+   "text": "Long Sun / the Long Sun",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "neutral; climate has no atom (ruling 8)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::tide",
+   "text": "Tide / the Tide",
+   "needs": [
+    "coast"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "the Tide: a tide presumes a coast (the reader:traditions-water class: The Tide Fair on plains, the Fair of the Tide in mountains — base weight 1 today without coast)"
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::greening",
+   "text": "Greening / the Greening",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ELEMENTS::stars",
+   "text": "Stars / the Stars",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

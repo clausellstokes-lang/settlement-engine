@@ -101,6 +101,68 @@ export function castWantOf(role, personId, crisis, ownWant) {
   return pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
 }
 
+/**
+ * THE VOICEABLE REGISTER (lane R11, the chair's ruling 2026-11-04): ONE home for the shape a want
+ * must have before a DM is handed it after "Wants to". Measured from the registry's goal strings
+ * (npcStructure.js) and the sixty-settlement read (docs/READER_R11_TONIGHT_WANTS_2026-11-04.md):
+ * a voiceable want begins with a verb a person can act on tonight, is at most eighteen words,
+ * and carries none of the management-prose words below. A line that opens on a subject or an
+ * auxiliary ("Was approached…", "The supplies…") is a sentence, not a want.
+ */
+export const WANT_MAX_WORDS = 18;
+/** Lead verbs that name a strategy, not an act (the chair's seven, plus the measured ones). */
+export const ABSTRACT_LEAD_VERBS = Object.freeze([
+  'convert', 'build', 'maintain', 'advance', 'consolidate', 'leverage', 'position',
+  'demonstrate', 'navigate', 'sustain', 'formalize', 'formalise', 'deploy', 'redirect',
+  'stabilise', 'stabilize', 'establish', 'cultivate', 'optimise', 'optimize',
+]);
+/** Words that open a sentence, never a want: subjects, articles, auxiliaries. */
+const NOT_A_VERB = new Set(['is', 'was', 'are', 'were', 'has', 'had', 'have', 'knows', 'knew', 'they', 'their', 'them', 'he', 'she', 'his', 'her', 'it', 'its', 'the', 'a', 'an', 'this', 'that', 'these', 'those', 'nobody', 'someone', 'everyone']);
+/** The abstract register: words a DM cannot say aloud as a person's want (measured; one place). */
+export const ABSTRACT_REGISTER_WORDS = Object.freeze([
+  'governance', 'prerogative', 'prerogatives', 'institutional', 'institution', "institution's", 'institutions',
+  'credibility', 'legitimacy', 'traditional standing', "'s standing", 'standing within', 'standing through', 'context', 'framework', 'relative', 'dominant interest',
+  'contingent', 'civic structures', 'civic role', 'structural', 'vulnerabilities', 'viability', 'viable',
+  'operational', 'apparatus', 'indispensable', 'indispensability', 'alignment', 'accountability',
+  'capacity', 'reconsolidation', 'reconsolidates', 'relevance', 'autonomy', 'neutrality', 'visibility',
+  'infrastructure', 'constraints', 'niche', 'perceived', 'precedents', 'current stability',
+  'conditions change', 'economic conditions', 'political contest', 'political distraction',
+  'the faction\'s position', 'commercial interests', 'commercial standing', 'commercial position',
+  'arcane standing', 'pastoral standing', 'pastoral function', 'welfare capacity', 'responsibilities',
+  'supply situation', 'commercial relationships', 'distribution network', 'parallel distribution',
+  'justification', 'triggering a response', 'consolidate', 'consolidates', 'consolidating',
+]);
+const ABSTRACT_WORD_RE = new RegExp(ABSTRACT_REGISTER_WORDS
+  .map((w) => `${/^\w/.test(w) ? "(?<![\\w'])" : ''}${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`)
+  .join('|'), 'i');
+
+/**
+ * Why a want is not voiceable, or '' when it is. Reads the want as the sheet prints it after
+ * "Wants to" (a leading "to" is dropped). `sentence-not-a-want`: it opens on a capital or on a
+ * subject / auxiliary; `abstract-register`: an abstract lead verb, an abstract word, or more
+ * than eighteen words.
+ * @param {unknown} text @returns {'' | 'sentence-not-a-want' | 'abstract-register'}
+ */
+export function wantRegisterFault(text) {
+  const words = clean(text).replace(/^to\s+/i, '');
+  if (!words) return '';
+  const lead = (words.match(/^[\w'’-]+/) || [''])[0];
+  if (/^[A-Z]/.test(lead) || NOT_A_VERB.has(lead.toLowerCase())) return 'sentence-not-a-want';
+  if (ABSTRACT_LEAD_VERBS.includes(lead.toLowerCase())) return 'abstract-register';
+  if (words.split(/\s+/).length > WANT_MAX_WORDS) return 'abstract-register';
+  if (ABSTRACT_WORD_RE.test(words)) return 'abstract-register';
+  return '';
+}
+
+/**
+ * THE ONE SHAPE RULE: can a DM say this want aloud tonight? (Read on the lower-led want.)
+ * @param {unknown} text @returns {boolean}
+ */
+export function isVoiceableWant(text) {
+  const words = clean(text).replace(/^to\s+/i, '');
+  return !!words && wantRegisterFault(words[0].toLowerCase() + words.slice(1)) === '';
+}
+
 /** How many hooks the sheet carries. */
 const HOOK_COUNT = 3;
 
@@ -118,6 +180,8 @@ const HOOK_COUNT = 3;
  * @property {'seat'|'secret'|'cleric'|'cast'} why
  * @property {string=} castLabel    the cast's role label, for a person drawn from the crisis cast
  * @property {string} line          the record's sentence for this person: the crisis secret, or what they want
+ * @property {'want'|'secret'|'temperament'} says what `line` is: a want prints after "Wants to"; a
+ *                                  secret or a temperament prints as it stands (`printsAsWant`)
  * @property {string=} sameAs       set when an earlier person on the sheet wants the same: that person's
  *                                  name. The want prints once, on the first; this one reads
  *                                  "Wants the same as {sameAs}." (X-50, F2 REPEAT-ONCE)
@@ -267,6 +331,45 @@ function wantOf(npc) {
   return /[.!?]$/.test(lower) ? lower : `${lower}.`;
 }
 
+/** @param {TonightNpc} npc @returns {string} the temperament (X-48: never the nervous habit) */
+function temperamentOf(npc) {
+  const p = /** @type {{ personality?: unknown }} */ (npc).personality;
+  return clean(typeof p === 'object' && p ? /** @type {{ dominant?: unknown }} */ (p).dominant : p);
+}
+
+/**
+ * THE ONE CHOICE of what a person is voiced with (lane R11, the chair's ruling 2026-11-04), read
+ * by the Tonight sheet and the Quick Guide (`settlementQuickGuide.js :: personDetail`): the most
+ * concrete of (b) the person's own goal, only when it passes the voiceable shape rule
+ * (`isVoiceableWant`); (c) their secret; (d) their temperament. (a), the crisis cast's role want
+ * (CAST_WANTS), is the sheet's own and comes first there. `text` is the want lower-led and closed
+ * (read after "Wants to"), or the secret / temperament as the record holds it; '' when the record
+ * holds none of the three. `withholdSecret` skips (c) for a person who may not voice the secret
+ * they keep (a crisis's TARGET keeping that crisis's own secret, F13's `target_runs_plot`).
+ * @param {TonightNpc} npc @param {{ withholdSecret?: boolean }} [options]
+ * @returns {{ says: 'want'|'secret'|'temperament', text: string }}
+ */
+export function voicedLineOf(npc, options = {}) {
+  const goal = clean(typeof npc?.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc?.goal);
+  if (goal && isVoiceableWant(goal)) return { says: 'want', text: wantOf(npc) };
+  const secret = npc && !options.withholdSecret ? secretOf(npc) : '';
+  if (secret) return { says: 'secret', text: secret };
+  const temper = npc ? temperamentOf(npc) : '';
+  if (temper) return { says: 'temperament', text: temper };
+  return { says: 'want', text: '' };
+}
+
+/**
+ * A person's own line on the sheet (the seat-holder, the senior cleric): `voicedLineOf`, the
+ * secret and the temperament closed as sentences.
+ * @param {TonightNpc} npc @param {{ withholdSecret?: boolean }} [options]
+ * @returns {{ says: 'want'|'secret'|'temperament', line: string }}
+ */
+function ownLineOf(npc, options) {
+  const { says, text } = voicedLineOf(npc, options);
+  return { says, line: says === 'want' ? text : sentence(text) };
+}
+
 /** @param {string} text @returns {RegExp} */
 function templatePattern(text) {
   const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z]+\\\}/g, '.+?');
@@ -298,17 +401,19 @@ function peopleOf(source) {
     .sort((a, b) => (powerOf(b.npc) - powerOf(a.npc)) || (a.index - b.index));
   /** @type {TonightPerson[]} */
   const out = [];
-  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] */
-  const add = (row, why, line, castLabel) => {
+  /** @param {{ npc: TonightNpc, index: number }} row @param {'seat'|'secret'|'cleric'|'cast'} why @param {string} line @param {string} [castLabel] @param {'want'|'secret'|'temperament'} [says] */
+  const add = (row, why, line, castLabel, says = why === 'secret' ? 'secret' : 'want') => {
     const name = clean(row.npc.name);
     const at = out.findIndex((p) => p.name === name);
     if (at >= 0) {
-      // the seat-holder who also holds the crisis secret is voiced once, with the secret
-      if (why === 'secret') out[at] = { ...out[at], line };
+      // the seat-holder who also holds the crisis secret is voiced once, with the secret — AS a
+      // secret (R11 / R7): it prints under the label "Secret:" (`secretLeadOf`), never after
+      // "Wants to" (the seam "Wants to Has been making personal side payments…", soak1k-22).
+      if (why === 'secret') out[at] = { ...out[at], line, says: 'secret' };
       return;
     }
     if (out.length >= VOICE_SLOTS.length) return; // three people; the fallbacks only where the cast is short
-    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, sourcePath: `npcs[${row.index}]` });
+    out.push({ name, role: clean(row.npc.role || row.npc.title), why, ...(castLabel ? { castLabel } : {}), line, says, sourcePath: `npcs[${row.index}]` });
   };
 
   // THE CAST FIRST (docs/DESIGN_CRISIS_TAB.md): slot by slot, the worst crisis's holder first.
@@ -327,15 +432,20 @@ function peopleOf(source) {
     }
   }
 
-  const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
-  const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
-  if (seat) add(seat, 'seat', wantOf(seat.npc));
-
   const patterns = crisisSecretPatterns(source);
   // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
   // and the plot's insider are opposed roles; the next keeper is voiced instead. Nor does a person
   // already voiced from the cast (soak1k-3005): their line is the role's want, never overwritten.
   const targets = new Set(casts.flatMap(({ cast }) => cast.roles.filter((r) => r.role === 'target' && r.kind === 'npc').map((r) => r.id)));
+  // R11: the same holds when a target's OWN line falls back to their secret (soak1k-26, -55).
+  /** @param {TonightNpc} npc */
+  const withholdSecret = (npc) => targets.has(clean(/** @type {{ id?: unknown }} */ (npc).id) || clean(npc.name))
+    && patterns.some((re) => re.test(secretOf(npc)));
+
+  const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
+  const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
+  if (seat) { const own = ownLineOf(seat.npc, { withholdSecret: withholdSecret(seat.npc) }); add(seat, 'seat', own.line, undefined, own.says); }
+
   const keeper = patterns.length
     ? npcs.find(({ npc }) => {
       const s = secretOf(npc);
@@ -346,8 +456,29 @@ function peopleOf(source) {
   if (keeper) add(keeper, 'secret', sentence(secretOf(keeper.npc)));
 
   const cleric = npcs.find(({ npc }) => npc.category === 'religious' && !out.some((p) => p.name === clean(npc.name)));
-  if (cleric) add(cleric, 'cleric', wantOf(cleric.npc));
+  if (cleric) { const own = ownLineOf(cleric.npc, { withholdSecret: withholdSecret(cleric.npc) }); add(cleric, 'cleric', own.line, undefined, own.says); }
   return wantsOnce(out);
+}
+
+/**
+ * Does this person's line print after "Wants to"? Only a want does; a secret (the crisis secret's
+ * keeper, or the seat-holder who keeps it) and a temperament print as they stand. ONE home for
+ * the three renderers (components/TonightSheet.jsx, pdf/sections/TonightAtTheTable.jsx,
+ * foundry/journalPages.js). A hand-built person with no `says` reads by its `why`.
+ * @param {{ why?: string, says?: string }} p @returns {boolean}
+ */
+export function printsAsWant(p) {
+  return p.why !== 'secret' && (p.says === undefined || p.says === 'want');
+}
+
+/**
+ * The label a renderer prints before a secret on a row whose own label is not "Secret" (the
+ * seat-holder who keeps the crisis secret): "Secret:". Empty for every other row. A label from
+ * TONIGHT_COPY, never a string on the record (the sheet's NOTHING-IS-INVENTED rule).
+ * @param {{ why?: string, says?: string }} p @returns {string}
+ */
+export function secretLeadOf(p) {
+  return p.says === 'secret' && p.why !== 'secret' ? `${TONIGHT_COPY.secret}:` : '';
 }
 
 /**
@@ -360,7 +491,7 @@ function wantsOnce(people) {
   /** @type {Map<string, string>} */
   const firstBy = new Map();
   return people.map((p) => {
-    if (p.why === 'secret' || !p.line) return p;
+    if (!printsAsWant(p) || !p.line) return p;
     const first = firstBy.get(p.line);
     if (first === undefined) { firstBy.set(p.line, p.name); return p; }
     return { ...p, sameAs: first };

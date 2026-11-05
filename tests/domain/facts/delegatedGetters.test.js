@@ -41,7 +41,7 @@ describe('the delegated getters (R-E)', () => {
   it('the four atoms are declarable now; the named-but-refused list shrinks by exactly them', () => {
     for (const a of ['soldiers', 'commander', 'mercenary', 'priest']) expect(V.assertDeclarable(a).dimension).toBe(a);
     const refused = Object.entries(V.FACT_DIMENSIONS).filter(([, d]) => d.reader === null).map(([n]) => n).sort();
-    expect(refused).toEqual(['exports', 'fish', 'game', 'grain', 'imports', 'livestock', 'organised crime', 'prosperity']);
+    expect(refused).toEqual([]); // CENSUS-4b's merge of CENSUS-3b: 3b's getters answer the rest
   });
   it('soldiers answers the twin table’s own `soldiers` need', () => {
     const facts = factsOf(RECORDS[2]);

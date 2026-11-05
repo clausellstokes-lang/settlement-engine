@@ -1,0 +1,515 @@
+{
+ "id": "traditions.TRADITION_NAMING",
+ "source": "src/data/traditionCorpus.js :: TRADITION_NAME_TEMPLATES · TRADITION_ADJECTIVES · TRADITION_CULTURE_FLAVOR · TRADITION_SEASON_LABELS · WEEK_ORDINALS",
+ "drawKind": "R",
+ "pool": {
+  "declares": [
+   "culture (the CULTURE_FLAVOR key)",
+   "season (the label key: no atom, ruling 8)"
+  ],
+  "crisisScoped": false,
+  "colour": true,
+  "notes": "name grammar and adjectives; presume nothing beyond their keys",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "traditions.TRADITION_NAME_TEMPLATES::0",
+   "text": "The {En} {An}",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_NAME_TEMPLATES::1",
+   "text": "The {An} of {Eg}",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_NAME_TEMPLATES::2",
+   "text": "The {Cadj} {An}",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_NAME_TEMPLATES::3",
+   "text": "The {Adj} {En} {An}",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_NAME_TEMPLATES::4",
+   "text": "The {Adj} {An}",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::0",
+   "text": "Great",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::1",
+   "text": "Long",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::2",
+   "text": "Old",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::3",
+   "text": "Quiet",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::4",
+   "text": "Bright",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::5",
+   "text": "Common",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_ADJECTIVES::6",
+   "text": "Lesser",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::germanic#0",
+   "text": "Elder",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::germanic#1",
+   "text": "Old",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::germanic#2",
+   "text": "Ninth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::celtic#0",
+   "text": "Green",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::celtic#1",
+   "text": "Hollow",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::celtic#2",
+   "text": "Hallowed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::norse#0",
+   "text": "Long",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::norse#1",
+   "text": "Wolf",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::norse#2",
+   "text": "Iron",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::latin#0",
+   "text": "Golden",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::latin#1",
+   "text": "High",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::latin#2",
+   "text": "Elder",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mediterranean#0",
+   "text": "Golden",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mediterranean#1",
+   "text": "High",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mediterranean#2",
+   "text": "Laurel",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::greek#0",
+   "text": "Golden",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::greek#1",
+   "text": "Laurel",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::greek#2",
+   "text": "High",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::arabic#0",
+   "text": "Lantern",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::arabic#1",
+   "text": "Amber",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::arabic#2",
+   "text": "Silk",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::slavic#0",
+   "text": "Deep",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::slavic#1",
+   "text": "Elder",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::slavic#2",
+   "text": "Frost",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::east_asian#0",
+   "text": "Lantern",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::east_asian#1",
+   "text": "Moon",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::east_asian#2",
+   "text": "Silk",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mesoamerican#0",
+   "text": "Sun",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mesoamerican#1",
+   "text": "Feathered",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mesoamerican#2",
+   "text": "Jade",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::south_asian#0",
+   "text": "Saffron",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::south_asian#1",
+   "text": "Lantern",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::south_asian#2",
+   "text": "Monsoon",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::steppe#0",
+   "text": "Horse",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::steppe#1",
+   "text": "Wind",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::steppe#2",
+   "text": "Open",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mixed#0",
+   "text": "Old",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mixed#1",
+   "text": "Elder",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::mixed#2",
+   "text": "Great",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::default#0",
+   "text": "Old",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::default#1",
+   "text": "Elder",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_CULTURE_FLAVOR::default#2",
+   "text": "Great",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_SEASON_LABELS::spring",
+   "text": "Seedtime",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_SEASON_LABELS::summer",
+   "text": "Highsun",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_SEASON_LABELS::autumn",
+   "text": "Harvest",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.TRADITION_SEASON_LABELS::winter",
+   "text": "Deepwinter",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::0",
+   "text": "first",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::1",
+   "text": "second",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::2",
+   "text": "third",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::3",
+   "text": "fourth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::4",
+   "text": "fifth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::5",
+   "text": "sixth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::6",
+   "text": "seventh",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::7",
+   "text": "eighth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::8",
+   "text": "ninth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::9",
+   "text": "tenth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::10",
+   "text": "eleventh",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::11",
+   "text": "twelfth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "traditions.WEEK_ORDINALS::12",
+   "text": "thirteenth",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

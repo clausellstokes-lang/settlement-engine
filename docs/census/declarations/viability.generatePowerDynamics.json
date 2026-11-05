@@ -1,0 +1,544 @@
+{
+  "id": "viability.generatePowerDynamics",
+  "source": "src/generators/economy/viability.js :: generatePowerDynamics (warnings/suggestions + suggestedFixes)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Structural/priority checks. Every institution test is a private substring over the RAW roster (nativeSemanticNames), so presumptions are declared with the vocabulary reader. priorityNote templates (dial numbers) not annotated. Crisis-scoped: \"Locally Sustained Isolation\" asserts viability and prints under any crisis.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "viability.generatePowerDynamics::no_trade_infra.title",
+      "text": "No Trade Infrastructure",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch: isCityScale (tier >= city) AND no 'market'/'merchant'/'district' by name — the market home (domain/facts/market.js) exists but is not read here."
+    },
+    {
+      "id": "viability.generatePowerDynamics::no_trade_infra.desc",
+      "text": "Population of ${population} without any markets or trade institutions.",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::no_trade_infra.impact",
+      "text": "Economy cannot support this population.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::no_trade_infra.fix.0",
+      "text": "Add Market Square, Merchants' Quarter, or Trade Guild",
+      "needs": [],
+      "excludes": [
+        "market"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::trade_crafts.title",
+      "text": "Trade-dependent craft economy",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::trade_crafts.desc",
+      "text": "Craft guilds operate on imported materials: sustained by strong ${tradeRouteAccess} trade.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Says \"craft guilds\" where craftCount < 2 (maybe zero guilds). unhomed: guild."
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.title",
+      "text": "Insufficient Craft Industries",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.desc",
+      "text": "Population of ${population} with only ${craftCount} craft institution(s). ${water.note}",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.impact.buffered",
+      "text": "Craft economy depends on trade imports.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.impact",
+      "text": "Lacks diversity to employ the population.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.fix.buffered",
+      "text": "Develop local resource base to reduce trade dependency",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.fix.0",
+      "text": "Add craft guilds: smiths, weavers, tanners, etc.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Suggests smiths without checking institution: smith."
+    },
+    {
+      "id": "viability.generatePowerDynamics::crafts.fix.1",
+      "text": "Improve trade access and economy for trade-sustained crafts",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.title",
+      "text": "Isolation Support Gap",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch isTradeRouteDisconnected + town+ (getTradeRouteFeatures)."
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.desc",
+      "text": "This ${tierLabel} has ${capacity}/${required} support capacity. Its ${supportPaths} does n",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.impact",
+      "text": "Specialist goods and bad-season reserves remain vulnerable until the gap is closed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.fix.0",
+      "text": "Strengthen the local foodshed, reserves, seasonal access, or patronage",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.fix.1",
+      "text": "Add a physical trade route",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_gap.fix.2",
+      "text": "Add magical transit as a last-resort substitution",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "magicExists !== false && priorityMagic >= 66."
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_magic.title",
+      "text": "Magically-Sustained Isolation",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_magic.desc",
+      "text": "${Tier} closes its isolation-support gap through magical transit (${capacity}/${required} ",
+      "needs": [
+        "magic",
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_magic.impact",
+      "text": "Its mundane support paths are insufficient. Disrupted magic would reopen the gap without a",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_magic.fix.0",
+      "text": "Maintain magical infrastructure at all costs",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_magic.fix.1",
+      "text": "Add a physical route or stronger local support as redundancy",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_local.title",
+      "text": "Locally Sustained Isolation",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": "Asserts viability; prints under famine/siege. Narrower: excludes hunger family."
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_local.desc",
+      "text": "${Tier} remains viable through ${supportPaths} (${capacity}/${required} capacity).",
+      "needs": [
+        "route: isolated"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_local.impact",
+      "text": "The settlement is isolated, not inexplicably disconnected from the means of survival.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::iso_local.fix.0",
+      "text": "Protect the support paths that make isolation viable",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::military.title",
+      "text": "High Military Priority Without Defences",
+      "needs": [],
+      "excludes": [
+        "walls",
+        "garrison"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch: town+, military very_high, no 'wall'/'fortif'/'palisade' and no 'garrison'/'guard'/'barracks' by name (a palisade suppresses it; 'guard' also matches 'guardhouse')."
+    },
+    {
+      "id": "viability.generatePowerDynamics::military.desc",
+      "text": "Military slider is high but the settlement has no walls, garrison, or barracks.",
+      "needs": [],
+      "excludes": [
+        "walls",
+        "garrison"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::military.impact",
+      "text": "Military investment without physical infrastructure produces limited security.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::military.fix.0",
+      "text": "Add Town Walls or Garrison",
+      "needs": [],
+      "excludes": [
+        "walls",
+        "garrison"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "\"Town Walls\" spoken for a city/metropolis too."
+    },
+    {
+      "id": "viability.generatePowerDynamics::religion.title",
+      "text": "High Religious Priority Without Clergy",
+      "needs": [],
+      "excludes": [
+        "institution: temple",
+        "institution: monastery"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch church/cathedral/temple/monastery/shrine/chapel by name (≈ temple ∪ monastery patterns minus friary/abbey)."
+    },
+    {
+      "id": "viability.generatePowerDynamics::religion.desc",
+      "text": "Religion slider is high but no religious institution is present.",
+      "needs": [],
+      "excludes": [
+        "institution: temple",
+        "institution: monastery"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::religion.impact",
+      "text": "Religious fervour without institutional anchoring produces instability.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::religion.fix.0",
+      "text": "Add a house of worship, a temple or a monastery",
+      "needs": [],
+      "excludes": [
+        "institution: temple",
+        "institution: monastery"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.small.title",
+      "text": "High Magic Priority: Informal Practice",
+      "needs": [
+        "tier: <= village"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "smallSettlement = !getTradeRouteFeatures(tier). unhomed: magic priority dial (priorityMagic very_high) — magic: <band> reads the level, not the dial."
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.small.desc",
+      "text": "Magic priority is high, but ${tier} scale limits formal arcane infrastructure. Practice is",
+      "needs": [
+        "tier: <= village"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.small.impact",
+      "text": "The setting choice is present, but reliable commercial magical services remain scarce.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.small.fix.0",
+      "text": "Add a tier-plausible hedge practitioner or alchemical workshop",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.title",
+      "text": "High Magic Priority Without Arcane Institutions",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.desc",
+      "text": "Magic priority is high but no arcane institution is present.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.impact",
+      "text": "Magical potential is unrealised. Adventurers will find no magical services.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "\"no magical services\" is a claim factsOf(r).magic.functions could contradict (temple casting, druids). Candidate excludes: magic."
+    },
+    {
+      "id": "viability.generatePowerDynamics::magic.fix.0",
+      "text": "Add Hedge Wizard, Alchemist Shop, or Wizard's Tower",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crime.title",
+      "text": "High Crime Priority: No Criminal or Guard Institutions",
+      "needs": [],
+      "excludes": [
+        "organised crime",
+        "watch",
+        "garrison"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": "Branch thieves/criminal/black market/smuggl and garrison/guard/watch by name (private)."
+    },
+    {
+      "id": "viability.generatePowerDynamics::crime.desc",
+      "text": "Criminal slider is high but neither criminal organisations nor guard infrastructure are pr",
+      "needs": [],
+      "excludes": [
+        "organised crime",
+        "watch",
+        "garrison"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crime.impact",
+      "text": "High crime without institutions creates ungoverned chaos rather than structured underworld",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::crime.fix.0",
+      "text": "Add Thieves' Guild, Black Market, or City Watch",
+      "needs": [],
+      "excludes": [
+        "organised crime",
+        "watch"
+      ],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::banking.title",
+      "text": "Banking Without Economic Focus",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "unhomed: bank ('bank'/'money' by name)."
+    },
+    {
+      "id": "viability.generatePowerDynamics::banking.desc",
+      "text": "Banking institutions exist but the economy priority is very low.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::banking.impact",
+      "text": "Banks cannot operate without a merchant class to serve.",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "viability.generatePowerDynamics::banking.fix.0",
+      "text": "Raise Economy priority or remove Banking institutions",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": ""
+    }
+  ]
+}

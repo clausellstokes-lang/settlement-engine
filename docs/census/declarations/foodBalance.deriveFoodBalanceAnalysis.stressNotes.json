@@ -1,0 +1,107 @@
+{
+  "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes",
+  "source": "src/generators/economy/foodBalance.js :: deriveFoodBalanceAnalysis (stressNotes :205–:241)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Each note is printed only under its own crisis (config.stressTypes); the crisis is declared on the row. \"Kept byte-identical to foodGenerator.js's production block\" — a second copy of these lines lives there (not in this seat's manifest).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::famine.failed",
+      "text": "Famine: the ${FAILED_SOURCE_WORDS[failed]} failed, taking ${famineCutPct}% of local food p",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "famine"
+      ],
+      "colour": false,
+      "notes": "FAILED_SOURCE_WORDS {grain harvest, herds, fishing, mill, hunt}: each word presumes food-source: <failed>, guaranteed (failedSource = foodSources[0])."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::famine.fallback",
+      "text": "Famine: crop failure has reduced local food production to 35% of normal capacity.",
+      "needs": [
+        "grain"
+      ],
+      "excludes": [],
+      "crisis": [
+        "famine"
+      ],
+      "colour": false,
+      "notes": "Prints when the record names no failed source — \"crop\" presumes grain."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::siege",
+      "text": "Siege: external supply lines severed and outlying farmland abandoned or razed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "under_siege"
+      ],
+      "colour": false,
+      "notes": "unhomed: farmland (food-source: grain|livestock disjunction)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::plague",
+      "text": "Plague: agricultural workforce decimated by illness, fields understaffed.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "plague_onset"
+      ],
+      "colour": false,
+      "notes": "fields presume crops: unhomed farmland."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::occupied",
+      "text": "Occupation: occupying forces consume approximately 20% of food supply beyond normal needs.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "occupied"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::wartime",
+      "text": "Wartime: conscription has thinned the agricultural workforce, cutting local output.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "wartime"
+      ],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::slave_revolt",
+      "text": "Slave revolt: labour-dependent production is disrupted and outlying fields lie idle.",
+      "needs": [],
+      "excludes": [],
+      "crisis": [
+        "slave_revolt"
+      ],
+      "colour": false,
+      "notes": "unhomed: slavery (content profile)."
+    },
+    {
+      "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::mass_migration",
+      "text": "Mass migration: an influx of newcomers stresses the food balance beyond normal needs.",
+      "needs": [
+        "migration: influx"
+      ],
+      "excludes": [],
+      "crisis": [
+        "mass_migration"
+      ],
+      "colour": false,
+      "notes": "Crisis kind mass_migration does not by itself say in/out; the line presumes IN."
+    }
+  ]
+}

@@ -1,0 +1,679 @@
+{
+  "id": "DS-ECO-11",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-11::TERRAIN: Coastal",
+      "pool": true,
+      "declares": [
+        "terrain: coastal"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Coastal. Whether terrain coastal entails water: coast (maritime kind) is unconfirmed, so water atoms stay on lines.",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Coastal::v1",
+          "text": "{settlement} keeps its back to the land and its face to the water, and everything the town",
+          "needs": [
+            "coast"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the tideline\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Coastal::v2",
+          "text": "The ground here gives less than the water does; what {settlement} counts as its own produc",
+          "needs": [
+            "fish"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"comes off boats more often than out of fields\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Coastal::v3",
+          "text": "The weather that matters in this town is the weather out at sea, and everybody watches it ",
+          "needs": [
+            "coast"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the weather out at sea\"; \"whether or not they sail\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Plains",
+      "pool": true,
+      "declares": [
+        "terrain: plains"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Plains",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Plains::v1",
+          "text": "{settlement} sits on ground that grows things without argument, and the town's whole arran",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"ground that grows things\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Plains::v2",
+          "text": "The country around {settlement} is open in every direction: good for a plough, good for a ",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"good for a plough\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Plains::v3",
+          "text": "There is nothing between this town and the horizon but what the town has planted, and the ",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"what the town has planted\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Forest",
+      "pool": true,
+      "declares": [
+        "terrain: forest"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Forest",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Forest::v1",
+          "text": "The timber and what lives in it are {settlement}'s standing wealth; the fields here are cl",
+          "needs": [
+            "game",
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"timber and what lives in it\" (game); \"the fields here are clearings\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Forest::v2",
+          "text": "The trees come nearly to the doorframes at {settlement}, and the town has arranged its lig",
+          "needs": [
+            "watch"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"its watch\"; roads"
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Forest::v3",
+          "text": "Everything in this town is made of what grows around it, and the making is the trade.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Hills",
+      "pool": true,
+      "declares": [
+        "terrain: hills"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Hills",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Hills::v1",
+          "text": "{settlement} works ground that rises: small fields, hard carting, and whatever the slopes ",
+          "needs": [
+            "grain"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"small fields\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Hills::v2",
+          "text": "Nothing at {settlement} is level, and the town has made a virtue of it. The approaches are",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Hills::v3",
+          "text": "The work here is uphill in the literal sense, and the town prices its carting accordingly.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Mountains",
+      "pool": true,
+      "declares": [
+        "terrain: mountain"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Mountains",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Mountains::v1",
+          "text": "What {settlement} lives on comes out of the rock rather than off the ground, and the seaso",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"comes out of the rock\" — presumes institution: mine|quarry (disjunction, not declared); short season = climate (no atom)"
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Mountains::v2",
+          "text": "The town sits in a place that had to be argued for: high, cold, and holding something wort",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"high, cold\" — climate (no atom)"
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Mountains::v3",
+          "text": "Everything this town does not dig out of the mountain, it carries up to itself.",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"dig out of the mountain\" — presumes institution: mine|quarry (disjunction, not declared)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: River",
+      "pool": true,
+      "declares": [
+        "terrain: riverside"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain River",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: River::v1",
+          "text": "The water is {settlement}'s road and its mill both, and the town's earnings divide along i",
+          "needs": [
+            "river",
+            "navigable",
+            "institution: mill"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The water is {settlement}'s road and its mill both\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: River::v2",
+          "text": "{settlement} is arranged lengthwise on its water, and a stranger meets the town by walking",
+          "needs": [
+            "river"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"walking upstream or down\""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: River::v3",
+          "text": "The river decides what this town can move and when, and nobody here treats that as a hards",
+          "needs": [
+            "river",
+            "navigable"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"The river decides what this town can move\""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Desert",
+      "pool": true,
+      "declares": [
+        "terrain: desert"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: terrain Desert",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Desert::v1",
+          "text": "{settlement} exists where it does because of water rather than soil; the ground gives almo",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "presumes an oasis/water source — unhomed: oasis"
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Desert::v2",
+          "text": "What surprises a stranger at {settlement} is not the dryness but how thoroughly the town h",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Desert::v3",
+          "text": "Nothing grows here without being made to, and everybody in the town knows exactly what the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Swamp",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: terrain Swamp — unhomed: terrain swamp (not in terrain values)",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Swamp::v1",
+          "text": "The ground under {settlement} will not carry a heavy building or a straight road, and ever",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Swamp::v2",
+          "text": "A stranger reaches {settlement} by the one path that holds, and understands immediately wh",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Swamp::v3",
+          "text": "What this country gives, it gives to people who know it, and the knowing is most of what t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: Tundra",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: terrain Tundra — unhomed: terrain tundra (not in terrain values)",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: Tundra::v1",
+          "text": "The working year at {settlement} is short and the storing year is long, and the town's acc",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Tundra::v2",
+          "text": "{settlement} is built against the cold rather than against anybody, and the building shows",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"built against the cold\" — climate (no atom); \"every wall\" = building walls, declares nothing"
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: Tundra::v3",
+          "text": "The town spends the good months preparing for the others, and does not think of that as pe",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::TERRAIN: anything else (the default accent)",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: any other terrain (default accent). Pure colour.",
+      "lines": [
+        {
+          "id": "DS-ECO-11::TERRAIN: anything else (the default accent)::v1",
+          "text": "The country around {settlement} is ordinary country, and what the town earns it earns by w",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: anything else (the default accent)::v2",
+          "text": "Nothing about {settlement}'s ground explains {settlement}; the town is the explanation.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::TERRAIN: anything else (the default accent)::v3",
+          "text": "The ground here is what it is. The town has never had cause to describe it further.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: economicStrengths[] non-empty (may hold ONE entry)",
+      "lines": [
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated::v1",
+          "text": "{settlement} has more than one thing it is good at, and the list is short enough that ever",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: strengths count >= 2 (\"more than one thing it is good at\")"
+        },
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated::v2",
+          "text": "Ask what this town does well and you get two or three answers, all of them the same two or",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: strengths count >= 2 (\"two or three answers\")"
+        },
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated::v3",
+          "text": "What {settlement} is for is legible within a day, because the town does a small number of ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: economicStrengths[] empty",
+      "lines": [
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded::v1",
+          "text": "Nothing about {settlement}'s ground or its trades stands out as a strength. The town works",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded::v2",
+          "text": "This town has no speciality and has never needed one; what it makes, it makes for itself.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded::v3",
+          "text": "{settlement} has no advantage of any kind and is still here, which is a plainer achievemen",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: strategicValue present (framed). Pure colour.",
+      "lines": [
+        {
+          "id": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed::v1",
+          "text": "What {settlement} is worth to anybody else is a separate question from what it is worth to",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed::v2",
+          "text": "A stranger with an eye for such things works out what this town is worth holding well befo",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed::v3",
+          "text": "The town knows what it sits on, and knows that knowing is not the same as being able to ke",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: unexploited, exportValue high",
+      "lines": [
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v1",
+          "text": "There is {resource} in {settlement}'s country worth real money and nothing in the town tak",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v2",
+          "text": "A stranger who knows what {resource} fetches elsewhere will find the sight of it lying unw",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v3",
+          "text": "Everybody in this town can point at the {resource}, and nobody in this town is working it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high::v4",
+          "text": "The {resource} sits at the edge of being worth a great deal to {settlement}: what the town",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"what the town lacks is not the ground\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: unexploited, exportValue medium/low",
+      "lines": [
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low::v1",
+          "text": "{settlement} leaves {resource} unworked, and the leaving is a reasonable decision. What it",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low::v2",
+          "text": "There is {resource} out there and nobody has ever thought it worth the trouble, which is t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low::v3",
+          "text": "The {resource} has been available to {settlement} for as long as the town has been here an",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::EXPLOITATION: partiallyExploited",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: partiallyExploited",
+      "lines": [
+        {
+          "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v1",
+          "text": "{settlement} works part of the line that {resource} could support: the raw material moves,",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v2",
+          "text": "A stranger tracing {resource} out of {settlement} finds it leaving half-finished, and find",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v3",
+          "text": "The {chain} between {resource} and {good} is begun and not finished here; what stands betw",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: partiallyExploited::v4",
+          "text": "The town takes the easy half of this trade and sells the rest of it to whoever will do the",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-11::EXPLOITATION: fullyExploited",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: fullyExploited",
+      "lines": [
+        {
+          "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v1",
+          "text": "The {resource} in {settlement}'s country is worked all the way through: the ground gives i",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"the ground gives it\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v2",
+          "text": "Nothing about this line is left on the table at {settlement}. A stranger following it from",
+          "needs": [
+            "gate"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"from ground to gate\""
+        },
+        {
+          "id": "DS-ECO-11::EXPLOITATION: fullyExploited::v3",
+          "text": "This is the trade the town is actually built on, and the town has taken it as far as it go",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

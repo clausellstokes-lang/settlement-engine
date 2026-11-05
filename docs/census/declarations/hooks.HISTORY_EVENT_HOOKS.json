@@ -1,0 +1,691 @@
+{
+ "id": "hooks.HISTORY_EVENT_HOOKS",
+ "source": "src/data/historyData.js :: HISTORICAL_EVENTS_DATA[].plotHooks",
+ "drawKind": "R",
+ "pool": {
+  "declares": [
+   "the event type (key)"
+  ],
+  "crisisScoped": false,
+  "colour": false,
+  "notes": "drawn by historyGenerator fill/timeline loops (content-dependent roll counts, §2.2): phase B resolves after the draw. The events hooks print on Plot Hooks (History Event) and are stored (record hooks).",
+  "needs": [],
+  "excludes": []
+ },
+ "rows": [
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::succession_crisis#0",
+   "text": "A would-be heir approaches outsiders to investigate a rival's past",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::succession_crisis#1",
+   "text": "The ailing ruler wants a final errand completed before naming a successor",
+   "needs": [],
+   "excludes": [
+    "ruler: council"
+   ],
+   "colour": false,
+   "notes": "\"the ailing ruler ... naming a successor\": a personal seat"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::succession_crisis#2",
+   "text": "Someone is poisoning the ruler slowly, and the physician knows",
+   "needs": [],
+   "excludes": [
+    "ruler: council"
+   ],
+   "colour": false,
+   "notes": "\"poisoning the ruler\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::economic_disparity#0",
+   "text": "A reformer has been found dead. Suicide or silenced?",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::economic_disparity#1",
+   "text": "A hidden ledger documenting wage theft is circulating in the workers' quarter",
+   "needs": [
+    "tier: >= town"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the workers' quarter\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::economic_disparity#2",
+   "text": "A merchant is funding both the reform movement and the suppression of it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::religious_tension#0",
+   "text": "A relic claimed by both sides has resurfaced in a private collection",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "relic: neutral"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::religious_tension#1",
+   "text": "The reformist leader is being blackmailed into silence",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::religious_tension#2",
+   "text": "Someone is staging miracles for one side. The question is who benefits",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#0",
+   "text": "A guild master's records have gone missing ahead of an audit",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "unhomed: guild (the template presumes a guild; hasGuild only biases the draw, Appendix C P20-10..12)"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#1",
+   "text": "A journeyman denied mastership has proof the exam was rigged",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "unhomed: guild"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::guild_conflict#2",
+   "text": "Someone is sabotaging both guilds to destabilize the market for a third party",
+   "needs": [
+    "market"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "unhomed: guild; \"destabilize the market\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::external_threat#0",
+   "text": "The threat is being exaggerated by someone who profits from wartime contracts",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::external_threat#1",
+   "text": "A diplomatic channel exists that the war faction is suppressing",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::external_threat#2",
+   "text": "The threat has an agent already inside the settlement",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::resource_scarcity#0",
+   "text": "A warehouse full of the resource is being held off the market deliberately",
+   "needs": [
+    "market"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"held off the market\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::resource_scarcity#1",
+   "text": "The scarcity was engineered. Someone destroyed the competing supply route",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::resource_scarcity#2",
+   "text": "An alternative source exists but the information is being suppressed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#0",
+   "text": "The crime wave is coordinated. Someone is directing it to create a pretext",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#1",
+   "text": "A guard captain is on the payroll of the criminal network",
+   "needs": [
+    "guardPresence"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"A guard captain\" (reader:hook-pools [guard], soak1k-32/42/54)"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#2",
+   "text": "The vigilantes have begun targeting innocents based on bad information",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::magical_controversy#0",
+   "text": "A recent magical accident was covered up and the victims silenced",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::magical_controversy#1",
+   "text": "An anti-magic agitator is secretly using magic themselves",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::magical_controversy#2",
+   "text": "Something was sealed away using magic years ago and the seal is weakening",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::generational_divide#0",
+   "text": "A traditional practice conceals something the elders don't want examined",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::generational_divide#1",
+   "text": "A young reformer has uncovered records that undermine the old guard's legitimacy",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "\"the old guard\" is figurative; it declares nothing, but GUARD_WORDS reads it (an instrument false positive, open question)"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::generational_divide#2",
+   "text": "The 'new idea' being promoted was actually tried once before, and failed badly",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::corruption_scandal#0",
+   "text": "The investigator who uncovered the corruption has received a death threat",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::corruption_scandal#1",
+   "text": "A key witness can be found, but won't speak without protection",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::corruption_scandal#2",
+   "text": "The corruption goes higher than anyone yet suspects; the reformers are being used",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::outside_debt#0",
+   "text": "The original loan documents contain a clause that was never disclosed publicly",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::outside_debt#1",
+   "text": "A creditor's agent is in town conducting a quiet assessment before enforcement",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::outside_debt#2",
+   "text": "The debt could be voided, if someone can prove it was obtained through fraud",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::occupation_legacy#0",
+   "text": "A collaborator family's wartime fortune was built on betrayals that are finally surfacing",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::occupation_legacy#1",
+   "text": "Resistance fighters kept records that would expose people still in power",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::occupation_legacy#2",
+   "text": "A former occupier officer has returned under a false identity",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::infiltration_fear#0",
+   "text": "One of the loudest voices warning about infiltration is themselves an agent",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::infiltration_fear#1",
+   "text": "An innocent person has been identified as a spy and is about to be executed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::infiltration_fear#2",
+   "text": "The agents' handler is someone in a position of trust, and the PCs have already met them",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::disputed_land#0",
+   "text": "The original charter is held in a private archive whose owner has gone missing",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::disputed_land#1",
+   "text": "Something of value was found on the disputed land, which is why the claim is suddenly being pressed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::disputed_land#2",
+   "text": "A forged document is about to be introduced as evidence; someone knows it's fake",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#0",
+   "text": "The newcomers fled something, and that something has sent agents after them",
+   "needs": [
+    "migration: influx"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#1",
+   "text": "A series of 'accidents' targeting newcomers is being attributed to chance",
+   "needs": [
+    "migration: influx"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#2",
+   "text": "An old family is deliberately inflaming tensions to drive out a newcomer who knows something",
+   "needs": [
+    "migration: influx"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::leadership_vacuum#0",
+   "text": "The departed leader left a sealed document designating a successor, and someone wants it destroyed before i...",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::leadership_vacuum#1",
+   "text": "One claimant has manufactured evidence of a mandate they actually lack",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::leadership_vacuum#2",
+   "text": "The vacuum is being maintained deliberately by an outside power that benefits from the instability",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::market_crash#0",
+   "text": "A ledger names who was warned to sell before the collapse, and who was not",
+   "needs": [
+    "market"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::market_crash#1",
+   "text": "A ruined family blames a rival for engineering the panic, and wants proof",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::market_crash#2",
+   "text": "The debts that survived the crash were quietly bought up by a single hidden buyer",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_collapse#0",
+   "text": "The route could be reopened, but someone with power prefers it stay closed",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_collapse#1",
+   "text": "A caravan master swears the collapse was arranged, and kept the correspondence to prove it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_collapse#2",
+   "text": "An old contract still obliges a distant partner to trade here, if anyone can enforce it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_fire#0",
+   "text": "The fire spared exactly the properties one faction wanted cleared. Coincidence is doubted",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_fire#1",
+   "text": "A confession was extracted from a scapegoat; the real arsonist still lives in town",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_fire#2",
+   "text": "Rebuilding uncovered something in the ashes that predates the settlement",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::plague_years#0",
+   "text": "A healer who profited enormously during the plague is being asked how they stayed untouched",
+   "needs": [],
+   "excludes": [],
+   "colour": true,
+   "notes": "a healer person; institution not presumed"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::plague_years#1",
+   "text": "A mass grave from the years holds a body that does not belong to any recorded victim",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::plague_years#2",
+   "text": "The quarantine was used to settle old scores, and the survivors remember exactly who",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_flood#0",
+   "text": "The old property boundaries washed away, and the new map favours whoever drew it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_flood#1",
+   "text": "A structure meant to hold back the water had been quietly left to rot, and someone knew",
+   "needs": [
+    "navigable"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"a structure meant to hold back the water\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::great_flood#2",
+   "text": "The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes",
+   "needs": [
+    "navigable"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"a wreck\": submerged"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::heresy_trial#0",
+   "text": "The evidence that convicted the heretic was fabricated, and a witness is finally willing to say so",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::heresy_trial#1",
+   "text": "The condemned doctrine is quietly practised still, by more of the town's leaders than would admit it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::heresy_trial#2",
+   "text": "A relic seized during the trial never reached the temple vault it was bound for",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the temple vault\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::pilgrimage_surge#0",
+   "text": "The miracle can be explained mundanely, and the person who can explain it is being kept quiet",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::pilgrimage_surge#1",
+   "text": "The pilgrim trade made one family rich enough to buy the office that authenticates relics",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::pilgrimage_surge#2",
+   "text": "A rival shrine claims the relic is theirs, stolen, and has sent someone to recover it",
+   "needs": [
+    "institution: temple"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"a rival shrine\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::popular_uprising#0",
+   "text": "A list of everyone who informed on the rebels survived, and it names people still in office",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::popular_uprising#1",
+   "text": "The uprising was funded by an outside hand that has come back to collect on the favour",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::popular_uprising#2",
+   "text": "A concession won in the revolt is being quietly rolled back, and the old anger is stirring again",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::tyranny#0",
+   "text": "The tyrant's private records survived, and they implicate respectable families in the worst of it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::tyranny#1",
+   "text": "A fortune the regime confiscated was never returned, and the rightful heirs have surfaced",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::tyranny#2",
+   "text": "Someone is deliberately rehabilitating the tyrant’s reputation, and profiting from it",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::wild_magic#0",
+   "text": "The surge was no accident. An experiment went wrong, and the notes were hidden, not destroyed",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::wild_magic#1",
+   "text": "A bloodline touched by the surge is now manifesting something the family cannot conceal",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::wild_magic#2",
+   "text": "The affected district is slowly spreading its strangeness, and the authorities are pretending otherwise",
+   "needs": [
+    "magic"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::legitimacy_crisis#0",
+   "text": "A document that would settle the question of legitimacy exists, and both sides would rather it stayed lost",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::legitimacy_crisis#1",
+   "text": "The authority is quietly manufacturing the consent it can no longer command",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::legitimacy_crisis#2",
+   "text": "A third party is keeping the question open on purpose, because an unsettled claim is easier to bargain with",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#0",
+   "text": "The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers",
+   "needs": [
+    "migration: influx"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the newcomers\""
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#1",
+   "text": "An old family is quietly buying the properties the departed left behind, before anyone can return to claim ...",
+   "needs": [
+    "migration: exodus"
+   ],
+   "excludes": [],
+   "colour": false,
+   "notes": "\"the properties the departed left behind\": the template holds BOTH directions (in on #0/#2, out on #1) — one is false wherever a migration runs one way"
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#2",
+   "text": "The newcomers fled something, and that something has followed them here",
+   "needs": [
+    "migration: influx"
+   ],
+   "excludes": [],
+   "colour": false
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_dispute#0",
+   "text": "The dispute is being kept alive by someone who profits from the uncertainty on both sides",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_dispute#1",
+   "text": "A contract clause that could end the dispute has been deliberately misfiled",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  },
+  {
+   "id": "hooks.HISTORY_EVENT_HOOKS::trade_dispute#2",
+   "text": "The partner settlement is applying pressure through a debt no one here wants to acknowledge",
+   "needs": [],
+   "excludes": [],
+   "colour": true
+  }
+ ]
+}

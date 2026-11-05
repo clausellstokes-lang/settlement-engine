@@ -68,7 +68,7 @@ import { generateSiegeCapability } from './narrative/siegeCapability.js';
 // second copy.
 import { buildStressProfile, historySiegeNarrative } from './narrative/historyCoherence.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
-import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js';
+import { deriveHistoryChallengeRoute } from './history/historyRouteContext.js'; // CENSUS-4 (factsOf: imported on line 26 by CENSUS-1c)
 
 // Keep the established public import path while the implementation lives with
 // the other extracted narrative policies.
@@ -868,7 +868,7 @@ export const generateArrivalScene = settlement => composeArrivalScene(settlement
  */
 export const enrichNpcCoherence = (settlement) => {
   const npcs = settlement.npcs || [];
-  const summary = genSettSummary(settlement);
+  const summary = { ...genSettSummary(settlement), facts: () => factsOf(settlement) }; // CENSUS-4: the declared NPC pools answer the record's facts
   const enrichedNpcs = npcs.map((npc, idx) => buildPoliticalNarrative(npc, idx, summary, npcs));
   const rawMergedNpcs = mergeNPCLists(
     enrichedNpcs,
