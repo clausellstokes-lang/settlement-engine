@@ -618,3 +618,106 @@ Nothing of this lane remains but the compose and the mechanism lane's channels: 
 2. DEFENSE_CONTEXT's five inert flags: dropped with the 39 (answer 2) or left in stasis with the dead text (answer 3, this seat's reading)?
 3. DAILY_LIFE_TAB paragraph [1]'s "priests": a faith-presence atom, or a reword dropping the priests when the site is wired?
 4. The religious_heavy refusals all resolve to row [6] (the cascade's argmax key `pattern::length::firstName` is near-constant): widen the key at the mechanism lane (it moves only refused births)?
+
+## Phase B continued (CENSUS-2g, 2026-11-05) — the lane's closing seat
+
+> Continues this branch from CENSUS-2f's `852a588`. Transport push only (after every unit); no pull request; no send_message. Merged `origin/lane/census-1b-2026-11-04` at its tip `0c445be` (CENSUS-1h unit 7 `8c6dcab` — R-AQ's position-keyed channel, the decree draw handed the record; unit 6 `18431ae` — row 95 wired, `dropRefused`; R-AT `0c445be`). R-AU and R-AW had not landed on that lane at this seat's boundary. ⚠ The checkout was a detached HEAD whose local branch ref is a stale old commit (`78d4c0e`); every push went `HEAD:refs/heads/lane/census-2-2026-11-04` (fast-forward), and the stale local ref was left untouched.
+
+### Commits
+
+| unit | commit | what |
+|---|---|---|
+| 1 | `c7ed534` | merge `0c445be`; the census re-taken through its door (ARRIVAL_SENSES 282 → 295 and POLITICAL_FLAVOR 11 → 13 lines: 1g's `tablePools` walker counting this lane's 2f row objects; no variant moved); `gen:dossier-prose --check` green |
+| 3 | `2d4608c` | DAILY_LIFE_TAB paragraph [1]'s priests declare `priest`, carried |
+| 2 | `7b7230f` | the decree family and the connectives read; the measurement pinned |
+| 4 | `5ba3fe4` | POLITICAL_FLAVOR catastrophic[1] listed per R-AS amended |
+| 5 | — | no twin owed (measured; below) |
+| 6 | this commit | the 60 and the 1,000 as a diff; this record |
+
+(Unit 3 was committed before unit 2 because unit 2 turned out to be a reading with no code to move; the order of the brief's units is otherwise kept.)
+
+### Unit 1 — the merged base
+
+The 60 at the merged base `c7ed534`: 119 findings, verdict STOP (2f's tip read 101 / CLIMB before 1g/1h; the rise is the merge's — R-AT alone moves 15 of the 60 records by 1h's own count, and R-AM's ledgering carries the 250 `OUTLOOK_HOOK_SIBLINGS` findings, R-AU not yet landed).
+
+### Unit 2 — the decree family and the connectives (R-AQ): read whole; nothing printed declares
+
+**The decree family** (`decreeProsePools.js`, 96 variants, vids 1–96), read line by line by R-AD's claim-or-colour test:
+
+- **DEC-EVENT (vids 52–72, vid 54 among them) and DEC-PARTY (73–96) print on no page.** They are drawn only by `eventCatalogue.js :: scheduledEventClause` / `partyDeedClause`, and `decreeLineParts` splices them only from `options.scheduledEvent` / `options.partyDeed`. Measured on this tree: **nothing in `src` imports `eventCatalogue.js`** (static or dynamic), and **no `src` caller hands either option** (the campaign chronicle hands `registry`, `facts`, `cause`, `tick`). Dead text (R-AI / R-S): listed, left in stasis. **vid 54** ("Something in the market's arrangement is already spoken for…") presumes `market` — recorded in the ledger (`DECREE_PROSE.json`, unchanged), **not** written as a kernel mark: the mark would make the Economy pool fail-closed at the walker's seedless `scheduledEventClause` calls, and dead text is never wired. If a page ever reaches DEC-EVENT, vid 54's `market` is owed with facts handed to the clause draw (pinned: `census2gDecreeConnectives.test.js`). The DEC-PARTY lines presume only the deed's own subject (a faction, a person, a stressor, the two places), which the pool key — the deed kind, the decree's own op — guarantees (R-AP); `ease_stressor`'s "the thing itself is still here" presumes the deed's stressor remains, a field the channel does not hand (R-Z) — listed **"waiting on a field"** (moot while the block is dead).
+- **The printed blocks (DEC-HAND, DEC-STANDING, DEC-FORM, DEC-OVERRIDE, DEC-FOLLOWS; vids 1–51) presume nothing about the settlement** — they speak of the decree's provenance, its standing, its form and the register's warnings: colour, no declaration. vid 28's "reaches past the town's roads" (the ledger's stop "roads / road network") is read as colour: the town's own ways, which every place holds; no atom (the chair's ruling below).
+- **In-play draws** (`campaignAdvanceSession.js :: decreeChronicleLine`): 0 moved — no printed variant declares.
+
+**The connectives** (`dossierConnectives.generated.js`, 4 lists, 12 joints): pure joinery between two sentences that declare for themselves — `{colour}` (CENSUS-2e) stands, and they are never seated (no shipped pool declares `role: modifier`, so no joint is drawn on any town). The position-keyed list stays all `null`.
+
+**Moved:** golden 0 / 525, records 0, pages 0 (display-time: nothing in the render ledger changes — `declared-share` identical on every surface).
+
+### Unit 3 — `priest` on DAILY_LIFE_TAB paragraph [1] (the chair's answer 3)
+
+The cell declares `needs: [guardPresence, priest]`, `crisis: any`, carried through `textOf` until the Daily Life site is wired (R-C); no reword. The ledger row now carries both atoms and its three stops are cleared (the guards stop was declared `guardPresence` by CENSUS-2e and the ledger had not said so). 0 births move (carried). Red-first: `census2gDailyLifePriest.test.js` (2 arms red at the merge; the vocabulary arm — no senior cleric refused, one admitted — the green control). Pin re-keyed by cause: `census2eTables.test.js` paragraph [1] + `priest`.
+
+### Unit 4 — catastrophic[1] listed (the chair's answer 1, R-AS amended); DOSSIER_CAUSAL_PROSE dead
+
+The monster-incursion branch carries a `listing` in `POLITICAL_FLAVOR.json`: **"presumes walls + militia, unverified; printed in 0 of 1,000; both facts true on the final record wherever the branch could print; waiting on a per-branch closure declaration channel"**, and the same note sits beside the closure. No split, the branch kept (R-AK), no row declaration (its other branch is colour). DOSSIER_CAUSAL_PROSE: listed dead, nothing more. 0 births move. Pinned: `census2gCatastrophicListing.test.js`.
+
+### Unit 5 — twins at the sites CENSUS-1h wired: none owed
+
+`origin/lane/census-1b-2026-11-04` re-fetched: tip `0c445be`. Of the sites the brief names, 1h wired only **row 95** (the quick guide's clauses, this lane's 2d/2e declarations); row 93's non-sibling tables, the landmarks and the Daily Life cells are **not wired** (1h's unit 6 message), so no twin is owed there (a twin at an unwired site is text with no reader). Row 95 measured on the 1,000 (a scratch scanner births each seed and reads the clause's declaration against `factsOf`):
+
+| clause (row 95) | births reaching it | refused (dropped) | twin? |
+|---|---|---|---|
+| scope, mesoamerican (`market`) | 92 | **38** (41%; soak1k-2, -6, -12, -73, -84, -120, …) | no — under "most births" (R-G); the sentence is built without it and reads whole |
+| scope, south_asian (`market` + `institution: temple`) | 95 | **44** (46%; soak1k-13, -18, -32, -50, -133, …) | no — the same |
+| scope, norse / slavic / greek | — | self-gated by `scopePhrase`'s water read (R-AS amended) | — |
+| food, Surplus / Secure (`no crisis: hunger`, scoped) | 596 (Secure) | **0** | no |
+
+**Mute slots for the compose's §10 census:** the quick guide's scope clause — mesoamerican 38 / 1,000 and south_asian 44 / 1,000 births, each over the 1-in-100 bar, so §10 owes each a line (a scope phrase that presumes no market or temple, in the house voice); the arrival `fish.lines` slot (1 / 1,000, 2f). 2e's twins owed at unwired sites (SPATIAL_TEXT, PRESSURE_SENTENCES, CAST_ABSENCES, DAILY_LIFE_TAB) stay owed to the day those sites are wired.
+
+**R-AT re-measured (the chair's answer 4).** The six religious_heavy refusals now spread over **four** admitted rows: soak1k-73 → [4], -517 → [1], -313 → [6], -331 → [3], -378 → [6], -642 → [3] (2f: all six → [6]); the positive controls soak1k-784 ([0]) and -866 ([2]) keep their rows. As the chair predicted; the move is 1h's.
+
+### Unit 6 — the 60 and the 1,000 (R-B: BEFORE = the merged base `c7ed534`, the 1,000 run from a scratch worktree; AFTER = the tip)
+
+| run | records moved | every `coh:*` / `reader:*` / `A-*` class | `cert:*` | verdict |
+|---|---|---|---|---|
+| 60 | 0 / 60 | identical (119 findings both) | identical | STOP → STOP |
+| 1,000 | **0 / 1,000** | identical (1,911 findings both): `coh:crisis-blind-prose` 0 → 0, `A-11:sea-words-landlocked` 0 → 0 (2f's fish fix holds), `A-12` 0 → 0, `reader:hook-pools` 5 → 5 (none on this lane's pools), `reader:daily-life-placeholder` 0 → 0 | `cert:false-presumption` 250 → 250 (161 births), **all** `foodBalance:OUTLOOK_HOOK_SIBLINGS` (`food: ≤ deficit` 140, `tier: <= village` 110) — R-AU's, the mechanism lane's site; **0 on this lane's pools** | STOP → STOP (the STOP is R-AU's 250, not this lane's) |
+
+**`declared-share` (1,000, the render ledger), identical base → tip:** overview 1,661 / 3,016 (0.551); crisis 503 / 549 (0.916); tab:daily_life 409 / 409 (1.000 — DEFENSE_CONTEXT, dead text; the local narrative is carried, so its cells never reach the ledger); tab:overview 105 / 105; history 1,583 / 10,499 (0.151). The decree family and the connectives have **no surface in the soak** (the decree line prints only in a campaign advance; the connectives are never seated): 0 drawn, 0 declared.
+
+**The undeclared register for this lane's surfaces:** unchanged — the arrival tables, POLITICAL_FLAVOR, the quick guide and the Daily Life cells are carried JS tables outside `undeclaredLines.register.json`; the decree pools sit in no register. The wiring census's `tablePools` rows for ARRIVAL_SENSES (295) and POLITICAL_FLAVOR (13) read every line undeclared because its walker cannot yet read this lane's row objects (R-AW's "shapes the walker cannot read") — the compose's re-take (R-T).
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** **0 / 525** (scratch sha-256 over `goldenCorpus()`, the merged base in a scratch worktree vs the tip: 525 / 525 identical).
+- **Soak records:** 0 / 60, 0 / 1,000. **Pages:** 0 (no printed text changed; the carried `priest` returns the same text).
+- **Wiring census:** re-taken in the merge (unit 1) — 2 `tablePools` rows' line counts (the merge's walker × 2f's tables, no variant moved). **Manifest / registers:** 0.
+- **Pins re-keyed by cause:** `census2eTables.test.js` paragraph [1] + `priest` (unit 3).
+- **Twins added:** none (unit 5). **Rewords:** none. **New tests:** `census2gDailyLifePriest`, `census2gDecreeConnectives`, `census2gCatastrophicListing`.
+
+### Reds at the merged base, unchanged by this seat
+
+`proseNumerics` 3 (the `DailyLifeTab.jsx` storeAiProgress line reads 236 at the merged base itself, before this seat's edit), `proseWiringCensus.walker` 14, `tabSentencesOnce` 1, `dossierContent` 1 — each at 2f's recorded count. `typecheck:ratchet` 167 / 167 green; `typecheck:domain:strict` red only on the base's +4 `crisisFactFindings.js` / +2 `composeStateProse.js`. eslint clean on every touched file. Suites run: every test file importing a touched module plus the decree, quick-guide, position-channel and R-AT suites (18 files); the full suite was not run.
+
+### The chair's rulings this seat made (recorded, vetoable)
+
+- **R-G1, a printed family's dead block stays in stasis even when one line presumes.** vid 54's `market` is not written as a kernel mark while DEC-EVENT prints on no page (R-AI): the mark would fail-close the pool at its only callers (the walker's seedless draws) for no reader's benefit. Pinned so the day a page reaches it, the declaration is owed.
+- **R-G2, "the town's roads" is colour.** vid 28's ledger stop retires: the phrase names the place's own ways, which every settlement holds; no atom, no reword.
+- **R-G3, the quick guide's scope slot is listed, not twinned.** 41% / 46% of the culture's births is below R-G's "most births"; the slot's absence leaves a whole sentence; the compose's §10 census (where it is over 1 in 100) owns the line.
+
+### Waiting lists (this lane's, complete at its close)
+
+- **dead (R-S, R-AI):** DAILY_LIFE_CONTEXT · TERRAIN_CONTEXT, ROUTE_CONTEXT, DEFENSE_CONTEXT (flags in stasis); DOSSIER_CAUSAL_PROSE; **DEC-EVENT and DEC-PARTY** (vid 54's `market` in the ledger); the connectives are live data but never seated.
+- **waiting on a closure channel:** POLITICAL_FLAVOR catastrophic[1] (listed as above).
+- **waiting on a field:** DEC-PARTY `ease_stressor` (the deed's stressor remains).
+- **carried, waiting on a site:** CHECK_INST_COMPAT_LANDMARKS (6 lines), DAILY_LIFE_TAB (loading messages, the local narrative incl. paragraph [1]'s `guardPresence` + `priest`), and 2e's twins owed at those sites.
+- **needs a home / a disjunction:** ARRIVAL_SENSES `livestock.lines[0]`'s grazing; ARRIVAL_PEOPLE `mixed`.
+- **mute slots for §10:** quick-guide scope mesoamerican 38 / 1,000, south_asian 44 / 1,000; ARRIVAL_SENSES `fish.lines` 1 / 1,000.
+
+### Where CENSUS-2h starts
+
+**Nothing of this lane remains but the compose.** The compose: merges this tip, re-takes the registers and the census (R-T), runs §10's mute-slot census (the quick-guide scope lines above are the two this lane measured over the bar). Only if the mechanism lane later wires the landmarks or the Daily Life site, lands a per-branch closure channel, or a page reaches DEC-EVENT, does a seat of this lane owe work (the twins of unit 5's list; catastrophic[1]'s branch declaration; vid 54's `market`).
+
+### Open questions for the chair
+
+1. The quick guide's scope clause drops in 41% (mesoamerican) / 46% (south_asian) of those cultures' births: write the §10 line now at the lane (this seat's reading of R-G says no), or leave it to the compose's census?
+2. DEC-EVENT / DEC-PARTY are complete, walker-tested corpora with no product caller: stasis as dead text (this seat's ruling), or is wiring EM-E6's splice into the campaign chronicle an owner decision to queue?
