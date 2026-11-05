@@ -100,7 +100,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 2 more items (434 → 436).
     // 436 → 434 at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json): the step re-deals the realm's year and the year-one desk files
     // 2 fewer items (436 → 434).
-    expect(Object.keys(manifest)).toHaveLength(434);
+    // 434 → 435 at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json): the step re-deals the realm's year and the year-one desk files
+    // 1 more items (434 → 435).
+    expect(Object.keys(manifest)).toHaveLength(435);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -149,10 +151,11 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the institution budget re-deals the year; the year's misjudgment beats are now 2 (4, 45), all on knowledge.
       // Re-dealt at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json):
       // the step re-deals the year; the year's misjudgment beats are now 3 (4, 42, 49), all on knowledge.
+      // Re-dealt at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json):
+      // the step re-deals the year; the year's misjudgment beats are now 2 (4, 42), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
         'wizard_news.42.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.49.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');
