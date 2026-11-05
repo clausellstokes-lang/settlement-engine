@@ -21,6 +21,7 @@ import { conjunctionContent } from '../../../src/domain/display/causeConjunction
 import { causeLifecyclePhrase } from '../../../src/domain/display/causeLifecycleVocabulary.js';
 import { deriveWarName, deriveRouteName } from '../../../src/domain/display/warAndRoadNames.js';
 import { deriveMarketQuote, strongestDeviation } from '../../../src/domain/display/marketPrices.js';
+import { crisisHooksOf } from '../../../src/domain/crisis/crisisHooks.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -115,5 +116,18 @@ describe('Appendix B row 110 — the market movement phrases and crier frames (k
     const cried = withPresumptionLedger(() => strongestDeviation([quote.result], 'shortage'));
     expect(cried.result).toEqual(strongestDeviation([quote.result], 'shortage'));
     expect(cried.ledger.map((e) => e.pool)).toEqual(['CRIER_FRAMES.dear']);
+  });
+});
+
+describe('Appendix B row 94 — the crisis line-role clauses (kind T)', () => {
+  it('the cast hook resolves its role clause through the one rule, the text unchanged', () => {
+    const town = { tier: 'town', npcs: [{ id: 'n1', name: 'Mara Vell', role: 'Miller', factionAffiliation: 'Millers Guild' }] };
+    const entry = { type: 'famine', cast: { nature: 'natural', rank: 1, absent: [], stakes: [], levers: [], links: [],
+      ifNothingIsDone: { residualEffects: [] }, playersSeeFirst: [],
+      roles: [{ role: 'brunt', kind: 'npc', id: 'n1', name: 'Mara Vell', reason: 'the hunger falls first on its people', temporary: false }] } };
+    const out = withPresumptionLedger(() => crisisHooksOf(town, entry));
+    expect(out.result).toEqual(crisisHooksOf(town, entry));
+    expect(out.result[0].text).toContain('the brunt falls on Mara Vell');
+    expect(out.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['LINE_ROLE_CLAUSE.brunt', 'T', 'crisis']]);
   });
 });
