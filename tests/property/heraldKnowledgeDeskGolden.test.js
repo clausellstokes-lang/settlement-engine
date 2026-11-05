@@ -94,7 +94,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 80 fewer items (475 → 395).
     // 395 → 400 at PLACE-NOT-TIER (R6, UNITS 1–2) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-15-place-not-tier.json): the step re-deals the realm's year and the year-one desk files
     // 5 more items (395 → 400).
-    expect(Object.keys(manifest)).toHaveLength(400);
+    // 400 → 434 at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json): the step re-deals the realm's year and the year-one desk files
+    // 34 more items (400 → 434).
+    expect(Object.keys(manifest)).toHaveLength(434);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -141,9 +143,12 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // the year's misjudgment beats are now 4 (10, 4, 47, 49), all on knowledge.
       // Re-dealt at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json):
       // the institution budget re-deals the year; the year's misjudgment beats are now 2 (4, 45), all on knowledge.
+      // Re-dealt at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json):
+      // the step re-deals the year; the year's misjudgment beats are now 3 (4, 42, 49), all on knowledge.
       expect(misjudged).toEqual([
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.45.belief_misjudgment.soak-b.soak-d',
+        'wizard_news.42.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.49.belief_misjudgment.soak-a.soak-c',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');
