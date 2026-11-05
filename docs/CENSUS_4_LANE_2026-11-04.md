@@ -434,3 +434,302 @@ sites 19 (ties), 18 (descriptions) and 15 (services): merge 1e's tip when they l
 descriptions and services (`declared-share` institutions / services from the render ledger; births by cause —
 the bowyers' line will then print only where a guard stands, which is every golden birth that holds the guild), and
 take the 1,000 as a diff against `a432465`. The 3 description rows "waiting on order" (R-Q) stay.
+
+## CENSUS-4e (2026-11-05)
+
+**Merge.** census-1b at `e35d60b` (CENSUS-1f: sites 19 `d422a8d`, 18 `1e71261`, 15 `9eee701`; the arrival redraw
+`f6ec896`; 3a; the census-2/census-3 merges): a **fast-forward** of `f8c92c9` (no merge commit). The local branch ref
+was stale at `83325f5` with HEAD detached for the third seat running; after an ancestor check it was re-pointed and
+checked out. `wiring-census --check` (709 / 2338 / 165) and `gen:dossier-prose --check` green. The container had no
+`node_modules`: `npm ci` (lockfile untouched). **R-Z's sentence is not on 1f's tip** (no "container" rule in
+`docs/census/declarations/VOCABULARY.md` or the rulings doc); it stays 1f's (answer 3).
+
+| unit | commit | what | golden (525) | soak records (1,000) |
+|---|---|---|---|---|
+| 1 | (the ff) | 1f's three sites arrive; re-measured on the 1,000 | — (1f's: 24 · 145 · 74) | 570 (below) |
+| 2 | `25145f1` | answer 2 (R-X): `guild` leaves Hired blades, Contract killer, Customs house, Auction house, Assay office | **183** | **368** |
+
+**Unit 1 — the three wired sites, re-measured on the 1,000** (1f counted the 525 and the 60). Records diffed on the
+clean first-parent chain `fe7bb1d` → `9eee701` (only the three site commits between), and every refusal logged at the
+tip by an instrumented scratch copy of `drawDeclared` (the repo's module untouched):
+
+| site | births moved (`fe7bb1d` → `9eee701`) | refusals at the tip (births / draws) | resolution | the refused atoms |
+|---|---|---|---|---|
+| 19 ties (H) | 109 | 109 / 392 | argmax 392 | `no ruler: lord` 373 · `garrison` 13 · `market` 6 · `watch` 4 · `institution: granary` 1 |
+| 18 descriptions (H) | 238 | 242 / 283 | argmax 282 · twin 1 | `terrain: forest` 131 · `river` 76 · `tier: ≤ hamlet` 25 · `militia` 25 · `coast` 13 · `tier: ≥ city` 9 · `market` 3 · `walls` 1 |
+| 15 services (R) | 381 (436 services not materialized, 0 added) | 384 / 445 | none 436 · twin 9 | `gate` 225 · `tier: ≤ village` 119 · `watch` 46 · `tier: ≥ city` 25 · `walls` 9 (the twins) · `institution: temple` 9 · `militia` 6 · `river` 6 |
+
+570 births moved in all; 8 of them also move outside the three parts, every one a downstream mirror (the walls-desc
+mirror `defenseProfile.institutions.walls[].desc` 3, `pressureSentence` 1 quoting the prominent tie, and 4 coherence
+receipts that lose a false `battery.defense-words` "soldiers without a garrison" finding when a refused veterans'
+service stops printing). The tip's descriptions read 242 (not 238): 2e/3e merged between. **The bowyers' "Military
+supply" (`needs: guardPresence`, 4d's R-W):** 346 births hold a Bowyers service and all 346 print it; refused **0** —
+every birth that holds the guild stands a guard (the brief's expectation, CONFIRMED). The 3 description rows "waiting
+on order" (R-Q: town Parish burial grounds #0, Town watch #0/#1, `gate`) stay undeclared.
+
+**Unit 2 (answer 2, R-X).** The five rows retagged at the catalogue, each keeping its other tags; the readers
+(`isCommerceGuild`, `historyGenerator.js`, `upgradeOpportunities.js`, `facts/market.js`) untouched. Golden 183:
+`institutions[].tags` 183, the Guild Master's chosen house (`npcs[].title` / `.institution` + the member mirror) 114,
+`simulationTrace[].downstreamEffects` 31. Soak 368 (town 51, city 156, metropolis 161): tags 368, the Guild Master's
+house 165 (every other NPC field identical), trace 43; Guild Masters gained or lost **0**, roster sizes **0**.
+Red-first `tests/data/catalogGuildTag.test.js` (the 4e block) 6/6 red, 13/13 green; the 40 governing files: the same
+6 pre-existing reds base and tip.
+
+**The 60 and the 1,000 as a diff (R-B).** BEFORE = `a432465`; MERGED = `e35d60b` (1f's tip); AFTER = the tip `25145f1`.
+
+| class (settlements) | the 60: merged → after | the 1,000: before → merged → after |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same → same |
+| coh:crisis-blind-prose | 0 → 0 | 35 → 0 → 0 (2c/2e's retirements and declarations, merged) |
+| A-12:self-vouch-false | 0 → 0 | 4 → 0 → 0 (2c's row retirement, merged: 4d's unmasking read as R-AG said) |
+| **A-11:sea-words-landlocked** | 0 → 0 | **0 → 1 → 1** — soak1k-152, "A basket of fish, still flapping…" (`arrivalProse.js`, fish beat); bisected to 1f unit 2 `f6ec896` (0 at `2b31f33`, 1 at `f6ec896`); not this lane's, at the same count base → tip |
+| reader:faction-role-fit (accepted) | 18 → 18 | 348 → 348 → 348 |
+| reader:relation-types · rule-text · possessive-slip | 0 · 0 · 0 → same | 0 · 0 · 0 → same → same |
+| reader:hook-pools · daily-life-placeholder | 3 · — → same | 108 · 495 → 70 · 0 → same (merged) |
+| every other class | identical | identical (A-05 977, battery-would-not-vouch 676, A-09 8) |
+| cert:* (incl. `cert:false-presumption`) | none → none | none → none → none |
+| `declared-share` npcs | 333 / 2,658 → same | 2,830 / 42,932 (0.066) → 5,156 / 42,932 (0.120) → same |
+| `declared-share` relationships (the ties: the draws the self-check re-asserted at site 19) | 149 / 1,356 → same | — → 2,077 / 21,528 (0.096) → same |
+| `declared-share` institutions (site 18) | 120 / 246 → same | 1 / 1 → 2,168 / 4,215 (0.514) → same |
+| `declared-share` services (site 15) | 116 / 3,435 → same | 115 / 115 → 1,965 / 55,655 (0.035) → same |
+
+`cert:false-presumption` 0 with 21,528 + 4,215 + 55,655 ledger draws re-asserted at the three sites (the services'
+`none` resolutions are not noted, by `drawDeclared`'s rule). Unit 2 moves no class and no share on either corpus.
+
+**Rows moved, by cause (nothing re-recorded):** golden unit 2 183 (one cause); soak records unit 2 368; unit 1's 570
+are 1f's (counted above, 1f's to own); wiring census 0 rows (verified, stamp unchanged); no manifest row; no pin.
+
+**Tests / gates.** eslint 0; typecheck:ratchet OK; domain:strict only the merged crisisFactFindings +4 /
+composeStateProse +2.
+
+**Open questions for the chair.**
+1. A-11 soak1k-152: 1f unit 2's arrival redraw admits the undeclared fish beat "A basket of fish, still flapping…" in a
+   landlocked birth — the sibling lines there declare `navigable`; this one is 1f's / 2b's table to declare (or the
+   instrument's to read freshwater fish as lawful).
+2. R-Z's sentence is not yet in the vocabulary doc at 1f's `e35d60b`.
+
+**Where CENSUS-4f starts.** Nothing of the NPC lane remains but the compose: every table is declared, every site this
+lane's tables feed is enforced (19 / 18 / 15 by 1f; the goal registry by 1e), and the chair's answers are applied. The
+compose re-takes the registers (R-T) and reads A-11 against 1f.
+
+## CENSUS-4f (2026-11-05)
+
+**Merges.** census-1b at `d2b1ab0` (merge `86cc1e3`: 1g's R-AO, R-AM, R-AJ) and at `e8b0072` (merge `04e36ff`:
+1g unit 4 = R-AL, 2b, unit 5 = unit 3c's declared columns and `tablePools`, its record). Both clean; `wiring-census
+--check` and `gen:dossier-prose --check` green at each (709 / 2338 / 165, stamp unchanged). The local ref was stale at
+`83325f5` with HEAD detached for the fourth seat running; ancestor-checked and re-pointed before the first push.
+`npm ci` (lockfile untouched).
+
+| unit | commit | what | golden (525) | soak (60 / 1,000) |
+|---|---|---|---|---|
+| 1 | `86cc1e3` | the merge; census through its door; the 60 as the merged base | — | — |
+| 2 | `3cb9861` | the `Military/Guard` label declares `guardPresence` (twin "Military Party"), **carried** | 0 | 0 / 0 |
+| 3 | (read only) | R-AM on this lane's pools | — | — |
+| 4 | (measured, not applied) | R-AO `colour` marks | — | — |
+| 6 | `501f0be` | NPC_WANTS's three ledgered declarations applied, **carried** (found by unit 3) | 0 | 0 / 0 |
+
+**Unit 2 — the five `[guard]` labels (the chair's ruling of 07:2x).** All five print ONE string: the faction label
+`Military/Guard` that `rulingStructure.js :: generatePowerStructure` pushes by the military priority and the tier
+(soak1k-110, -462, -470, -614 as a conflict party "X vs Military/Guard"; -571 as the revolt instigator's house — the
+brief's -614/-571 roles are swapped). The label is a declared row in `src/data/factionLabelSiblings.js`
+(`needs: guardPresence`), its twin **"Military Party"** (`excludes: guardPresence`) — THE CHAIR'S RULING (R-G): it keeps
+"Military", so `inferFactionCategory` and every `includes('military')` reader (factionDynamics, history, narrative, NPC
+placement) read the same kind, and names no body. **It is carried, not resolved, because the fact is not settled
+where the label is pushed** (R-AN), measured on the 1,000 through `onStep`: 363 births hold the label; `guardPresence`
+differs between the power step and the final record in **1** (soak1k-331: no guard at the power step, a militia
+after). The name is then copied into conflicts, affiliations and prose (~20 prints per birth: the power tab, PDF,
+Foundry, the NPC table, the crisis cast), so curing only the plot-hooks print would game the instrument.
+**Listed for the mechanism lane:** resolve `FACTION_LABEL_SIBLINGS` after the roster settles, against the final record,
+reaching every copy of the name. Would-be share: **12 of 1,000** births (12 of 363 holders: soak1k-110, -236, -247,
+-260, -326, -446, -462, -470, -571, -614, -674, -776; the instrument reads 5 of them — the other 7 carry a guard-like
+role on the roster or print no hook). `[guard]` therefore stays **5 → 5** on this lane.
+
+**Unit 3 — R-AM on this lane's pools.** `cert:false-presumption` at the merged base: the 60 42 settlements / 123, the
+1,000 711 / 2,134 — **none on a pool of this lane** (the ties, descriptions, services, goals, stress secrets). By pool:
+`rulingStructure:FACTION_DESC_SIBLINGS #0 'garrison'` 628 / 1,884 (CENSUS-5d's reword `1b74763` and 1g's 2b, merged
+second: 0 at the tip) and `foodBalance:OUTLOOK_HOOK_SIBLINGS` 161 / 250 (CENSUS-3d's table, lane 3's). **But the zero is
+partly blindness:** two of this lane's R draws were never wired and their ledgered declarations never applied, so the
+self-check cannot see them. Measured on the 1,000 (final record): NPC_WANTS "a dockhand's oilskins…" false in **48 of
+81** prints, the shrine vestments 17 / 151, the guild colours 2 / 146 → unit 6; NPC_CRIMINAL_SECRETS' 12 ledgered rows
+false 0–12 per line (military#4 "skimming from military supply budgets" 12 / 67, religious#0/#1/#3 8–9 each) → NOT
+applied: the secret TYPE is weighted by the roster's institutions, not the holder's role, so a religious secret
+("Lost their faith completely but maintains the role") presumes a CLERIC holder — no atom — and the ledger's
+`institution: temple` would refuse true lines and admit false ones. Waiting on a re-read (CENSUS-4g).
+
+**Unit 4 — R-AO, measured, not applied.** The brief's premise that the register falls by the marked lines does not hold
+for this lane's three named tables. The undeclared register (`statePools`) counts the dossier state prose only; the
+census's `tablePools` (unit 3c, merged) enrols this lane's tables but walks strings and `{ text }` rows in place: the
+catalogue descriptions keep their declarations BESIDE the table (`DESC_VARIANT_DECLARATIONS`, six string consumers read
+the variants), the tie prose is closures (not walked), and the goals are `{ short, long }` objects (a `colour` flag on
+one leaves its `short` and `long` counted). So the mark lowers **0** rows there until 1h's "`tablePools`' second half"
+(read declarations held beside a table) lands — then the lane marks `colour` in the beside-column with no consumer
+change. Also: `isColourLine` has no reader outside `tablePoolRow`, and marking any table moves the census
+(`--check` stale; the re-take is the compose's, R-T). Phase A recorded the colour split per line only for the tie prose
+(267 of 276 no-atom rows) and the wants (53 / 53); the other pools' no-atom rows (descriptions 599, services 929, goals
+99 + 71 + 17, secrets 152 + 115 + 28) mix "presumes nothing" with "presumes a fact with no home" and need a re-read
+before any mark — never marked unread.
+
+**Unit 6 — NPC_WANTS (this lane's leftover).** `{ text, needs }` in place: docks · guild · sacredHouse (religious#4
+re-read under R-AE: the shrine a priest serves is a sacred house, not a temple; the ledger row follows). The draw
+`npcGenerator.js :: generateNPCAppearance` (R, bespoke, not wired) reads its pick through `textOf`. **Listed for the
+mechanism lane** with unit 2's site. A test reader corrected by the same cause: `terrainPoolsHookLines` read the
+declaration column as prose (`needs: ['docks']` a "wet line"); it now skips the column (the wet set it reads is
+identical to the base's, 2 lines).
+
+**The 60 and the 1,000 as a diff (R-B).** BEFORE = the merged base `86cc1e3` (unit 2 is byte-identical to it);
+AFTER = the tip `501f0be` (with 1g's second merge).
+
+| class (settlements) | the 60 | the 1,000 |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same |
+| `coh:*` · `A-12` | 0 → 0 | 0 → 0 |
+| `reader:hook-pools [guard]` | 0 → 0 | **5 → 5** (carried; the mechanism lane's resolution) |
+| `cert:false-presumption` | 42 → 10 | 711 → 161 — none of this lane's: FACTION_DESC 628 → 0 (1g 2b, merged), OUTLOOK_HOOK 161 → 161 (lane 3) |
+| `reader:tension-memory` | 4 → 4 | **60 → 61** — soak1k-976 "collaborators and resisters continued…", 0 at `3cb9861`, 1 at the tip: the second merge (1g's R-AL history change), not this lane's |
+| reader:faction-role-fit · relation-types · validation-on-page · A-05 · A-09 · A-11 | identical | identical (348 · 147 · 985 · 977 · 8 · 1) |
+| other `cert:*` | none | none |
+| `declared-share` npcs · relationships · institutions · services | 333/2,658 · 149/1,356 · 120/246 · 116/3,435 → same | 5,156/42,932 (0.120) · 2,077/21,528 (0.096) · 2,168/4,215 (0.514) · 1,965/55,655 (0.035) → same |
+| `declared-share` power (1g 2b's eager `said()` no longer ledgered) | 252 → 72 drawn, share 1 | 4,424 → 1,424, share 1 |
+
+**Rows moved, by cause (nothing re-recorded):** golden 0 (units 2 and 6); soak records 0 of 60 (both units; the 1,000
+diff above is 1g's second merge); wiring census: unit 6 moves the `tablePools` row `npcData.NPC_WANTS` (undeclared
+56 → 53; lineDeclares docks, guild, sacredHouse; `--dry`: tablePools only, +72 bytes, 0 state rows, no stamp) — it
+reds the census interlock (`proseWiringCensus.walker` "the committed census is byte-identical to a fresh build" and
+"THE DRY READ"), the compose's re-take (R-T); no manifest row; no pin.
+
+**Tests / gates.** New: `tests/data/factionLabelSiblings.test.js` (4), `tests/generators/npcWantsDeclared.test.js` (2),
+each red-first. Governing suites: unit 2 31 files, the base's 38 reds title for title; unit 6 55 files, the base's 47
+plus the two census-interlock reds. eslint 0; typecheck:ratchet 167/167; domain:strict only the merged
+crisisFactFindings +4 / composeStateProse +2.
+
+**Open questions for the chair.**
+1. Unit 2: confirm "Military Party" as the label's twin, and that the label resolves after the roster settles (a
+   mechanism-lane site: a late record pass that renames every copy, or a display read model) rather than at the push.
+2. Unit 4: confirm the marks wait on 1h's `tablePools` second half, and that the no-atom rows of the descriptions,
+   services, goals and secrets are re-read before any mark.
+3. NPC_CRIMINAL_SECRETS: the religious and military secrets presume the HOLDER's role, which no atom carries; reword
+   under R-U, key the type by the holder's role (a roll change), or declare `ctx` the way the stress secrets' `{npc}` does?
+4. Should the census interlock's two reds be re-taken on this lane (unit 6's own declarations), or left for the compose?
+
+**Where CENSUS-4g starts.** Not nothing: (a) the criminal secrets' re-read and carry (question 3); (b) once 1h reads
+beside-columns, the R-AO marks after the re-read; (c) re-measure `[guard]` when the mechanism lane resolves
+`FACTION_LABEL_SIBLINGS` (expected 5 → 0, 12 births' labels change). Sites for the mechanism lane:
+`rulingStructure.js :: generatePowerStructure` (the label, after the roster settles), `npcGenerator.js ::
+generateNPCAppearance` (R), `factionLeaderSecret.js :: generateFactionLeaderSecret`'s pick (R, after the re-read).
+
+## CENSUS-4g (2026-11-05)
+
+**Merges.** census-1b at `0c445be` (merge `8c55289`: 1h units 6, 7 and R-AT; census-5d) — one conflict,
+`rulingStructure.js`'s single import line, both sides kept (4f's `textOf` + `MILITARY_GUARD_LABEL`; 5c's
+`powerSiblings` re-export); and at `712ac76` (merge `2b0efef`, clean: 1h's R-AU `d035cf8` and `clergy` `712ac76`;
+census-3h). At each: `gen:dossier-prose --check` green; `wiring-census --dry` stale by exactly 4f unit 6's known
+`tablePools` row (+72 bytes, 0 rows, no stamp — the compose's re-take, R-T, the chair's answer 4). The local ref was
+stale with HEAD detached for the fifth seat running (here at `ec45a02`, the pushed tip); re-pointed before the first
+push. `npm ci` (lockfile untouched).
+
+| unit | commit | what | golden (525) | soak (60 / 1,000) |
+|---|---|---|---|---|
+| 1 | `8c55289` | the merge; census through its door; the 60 as the merged base | — | — |
+| 2 | `6e9cbc6` | R-AX: the criminal secrets keyed by the holder's role, **carried**; the mismatch measured | 0 | 0 / 0 |
+| 3 | (listed) | NPC_WANTS "a dockhand's oilskins…": the site listed for the mechanism lane, re-measured | — | — |
+
+**Unit 2 — R-AX (the chair's answer 3).** `src/data/npcData.js :: NPC_CRIMINAL_SECRETS_BY_HOLDER` holds the rows by
+the holder's role class (`domain/roles/roleClass.js :: classOfRole`, the fact's own reader, R-AP): `clergy` — religious
+#0 "Lost their faith completely but maintains the role", #1 "covering for a colleague's heretical activities", #3
+"falsifying miracle reports", #4 "their religious order was founded on a historical lie", #5 the relic "officially
+declared destroyed" that it fell to them to destroy; `military` — military #0 "Gave an order during a battle", #3
+"selling patrol routes and schedules", #4 "skimming from military supply budgets", #5 "ordered to commit an atrocity
+… risen in the organisation"; `any` — every other row (religious #2, the visions; military #1, captured and
+released; #2, the victory won by treachery). Religious #5 and military #0 are keyed by R-AD's rule (where the reading
+cannot decide, it declares); military #3 is keyed military (the holder's access), which retires the disjunction
+(watch ∨ militia ∨ garrison) the phase-A ledger left undeclared. The ledger's six `institution: temple` declarations
+are withdrawn (`npcData.NPC_CRIMINAL_SECRETS.json`: declaring 9 → 3; `holderKey` recorded): a temple on the roster is
+not a cleric holding the secret. No atom enters the vocabulary.
+- **Carried, not keyed.** `factionLeaderSecret.js` still reads the flat `NPC_CRIMINAL_SECRETS`, now rebuilt in its
+  historic order by `CRIMINAL_SECRET_LEGACY_ORDER` (its sha-256 pinned to `8c55289`'s). The mechanism lane keys the
+  draw on `criminalSecretsForHolder(type, classOfRole(role))` — the role must be handed to
+  `generateFactionLeaderSecret` from `npcGenerator.js :: generateSingleNPC` (it holds `role`). That view keeps the
+  historic order and drops only rows keyed to another role, so a clergy holder's religious pool and a soldier's
+  military pool are the flat pools themselves: only a mismatched holder's draw moves, and the pick count is
+  unchanged (one `pickFromArray`, or the personal fallback's one).
+- **Byte identity:** 525 golden + 60 soak records hashed `8c55289` vs the unit: 0 of 585 differ.
+- **The mismatch, measured on the 1,000** (a scratch instrumented copy of `8c55289`; the data is identical):
+
+| figure | draws | births |
+|---|---|---|
+| faction-leader secret draws | 9,550 | 1,000 |
+| of type religious or military | 2,070 | — |
+| **to a holder of another role class — the births that move once keyed** | **1,711** | **665** |
+| … whose drawn row is keyed to another role (false today: clergy 955, military 474) | 1,429 | 620 |
+| … that find the role-free pool empty after `allowsSecret` (the visions line) and fall to the personal pool | 775 | — |
+| printed on the final record: keyed secrets / mismatching their holder | 740 / **600** | — / 393 |
+
+  By line on the final record (false prints): miracle reports 90 · heretical colleague 86 · religious order 86 · lost
+  faith 75 · relic 74 · patrol routes 53 · supply budgets 52 · atrocity 45 · order in battle 39. The 775 empty-pool
+  draws are the mechanism lane's to read: a non-clergy holder whose type roll lands on `religious` in a world without
+  magic now draws a personal secret (the type roll's weights read the roster, not the holder; R-AX keys the pool,
+  not the roll). One reader edge, not bent (R-X): `Temple Guard Commander` is `clergy` by `classOfRole`, so a
+  soldierly secret drawn by one is counted as a mismatch.
+- Red-first: `tests/data/criminalSecretsByHolder.test.js` 3/4 red on `8c55289`, 4/4 green. Governing suites (the 22
+  files importing `npcData`): the base's 6 reds title for title (generationForkCensus ×4, hookThemeDraws,
+  narrativeQualityCorpus).
+
+**Unit 3 — NPC_WANTS's site, listed.** Its declarations stand (4f unit 6, carried through `textOf`); the draw
+`npcGenerator.js :: generateNPCAppearance` (R, `clothes: textOf(pickFromArray(NPC_WANTS[r] || NPC_WANTS.other))`) is
+**listed for the mechanism lane** to route through `drawDeclared` (R-C). Re-measured on the merged tip `2b0efef` (the
+final record's `physical.clothes` against `factsOf(settlement)`): "a dockhand's oilskins over hands too clean for the
+work" (`docks`) false in **58 of 96 prints, 48 births** (4f's "48 of 81" counted births against prints); "vestments a
+size too grand for the shrine they serve" (`sacredHouse`) 17 / 168 (17 births); "guild colours worn with pride"
+(`guild`) 2 / 166 (2 births). Nothing else here.
+
+**A third merge:** census-1b at `f1d7605` (merge `85f18a3`, docs only: 1h's lane record). It records that **CENSUS-1h
+stopped at its boundary before R-AW and `tablePools`' second half**; both are now CENSUS-1i's items 1 and 2 (item 3 is
+R-AX's keyed draw, on unit 2's rows). So:
+
+| unit | status |
+|---|---|
+| 4 — R-AW re-measured | **waiting on CENSUS-1i item 1.** `[guard]` stays **5 → 5** on the 1,000 (soak1k-110, -462, -470, -571, -614); the would-be label changes stay 4f's measurement, 12 of 1,000 births (12 of 363 holders). Nothing to apply here: the label row and its twin are on this lane since 4f (`3cb9861`). |
+| 5 — the `colour` marks | **waiting on CENSUS-1i item 2** (the walker). Read verdicts exist only for the tie prose (267 rows marked `colour` in its phase-A ledger) and the wants (53); the catalogue descriptions (599 no-atom rows) and the goal texts (99 + 71 + 17) carry no per-line verdict, so they must be re-read before any mark (the chair's answer 2: never an unread line). The register count is unmoved by this seat. |
+
+**Unit 6 — the 60 and the 1,000 as a diff (R-B).** BEFORE = the first merged base `8c55289`; AFTER = the tip `85f18a3`
+(units 2–3 plus the two later merges). This lane's units are byte-identical (unit 2: 0 of 585), so every movement below
+is a merge's.
+
+| class (settlements) | the 60 | the 1,000 |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same |
+| `coh:*` · `A-12` | 0 → 0 | 0 → 0 |
+| `reader:hook-pools [guard]` | 0 → 0 | **5 → 5** (R-AW not landed) |
+| `cert:false-presumption` | 10 → **0** | 161 → **0** — all `foodBalance:OUTLOOK_HOOK_SIBLINGS` (lane 3's), cured by 1h's R-AU `d035cf8`, merged; none of this lane's pools on either side |
+| other `cert:*` | none | none (certification 1,000 / 1,000, 0 errors) |
+| reader:faction-role-fit · relation-types · tension-memory · validation-on-page · A-05 · A-09 · A-11 · info:battery-would-not-vouch | identical | identical (348 · 147 · 61 · 985 · 977 · 8 · 1 · 676) |
+| verdict | STOP → CLIMB | STOP (1,912 findings) → CLIMB (1,662) |
+| `declared-share` npcs · relationships · institutions · services | 333/2,658 · 149/1,356 · 120/246 · 116/3,435 → same | 5,155/42,933 (0.120) · 2,077/21,528 (0.096) · 2,168/4,215 (0.514) · 1,965/55,655 (0.035) → same |
+| `declared-share` economics (R-AU's kept notes gone) | 31/110 → 25/104 | 549/1,932 → 504/1,887 |
+
+R-AX adds no share yet: the criminal-secret draw is unwired (carried), so its pool is not ledgered.
+
+**Rows moved, by cause (nothing re-recorded):** golden 0 (unit 2, proven 0 of 525); soak records 0 of 60 (unit 2);
+wiring census: 0 rows — still stale only by 4f unit 6's `tablePools` row (+72 bytes; the census interlock's two reds,
+`proseWiringCensus.walker` "byte-identical to a fresh build" and "THE DRY READ", stay listed for the compose, the
+chair's answer 4); unit 2 moves no `tablePools` row (the flat view walks the same 124 strings); no manifest row; no pin.
+
+**Tests / gates.** New: `tests/data/criminalSecretsByHolder.test.js` (4), red-first. eslint 0; typecheck:ratchet
+167/167; domain:strict only the merged crisisFactFindings +4 / composeStateProse +2.
+
+**Sites for the mechanism lane (CENSUS-1i):** `rulingStructure.js :: generatePowerStructure`'s `Military/Guard` label
+(R-AW, resolved at the birth's close); `factionLeaderSecret.js :: generateFactionLeaderSecret`'s pick (R-AX: hand it
+the holder's role from `generateSingleNPC`, draw over `criminalSecretsForHolder(type, classOfRole(role))`; 665 births
+move, counted above); `npcGenerator.js :: generateNPCAppearance` (R, NPC_WANTS; 48 births print a false dockhand line).
+
+**Open questions for the chair.**
+1. R-AX's keyed draw sends 775 of the 1,711 moved draws to the personal pool (a non-clergy holder whose type roll lands
+   on `religious`, with the visions line barred by `allowsSecret`). Accept that, or should the type roll's weights
+   also read the holder (a weight change: it moves the type roll's births too)?
+2. `Temple Guard Commander` is `clergy` by `classOfRole`, so a soldierly secret is refused to it once keyed. Leave the
+   reader as it is (R-X), or should the military rows also admit a clergy holder whose title is a command?
+
+**Where CENSUS-4h starts.** Only on CENSUS-1i's landings: (a) when R-AW lands, merge and re-measure `[guard]` 5 → 0 and
+the ~12 label changes; (b) when the walker lands, re-read the descriptions' and goals' no-atom rows, then mark
+`colour` on the read rows (the ties' 267 and the wants' 53 are read already) and count the register's fall; (c) when
+R-AX's keyed draw lands, count the births against unit 2's 665. Otherwise nothing of this lane remains but the compose.

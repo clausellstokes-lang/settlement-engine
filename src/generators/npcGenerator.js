@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling, resolveDeclared } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; import { textOf } from '../domain/facts/textOf.js'; // F5, F10, CENSUS-1c, CENSUS-4f: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
@@ -121,7 +121,7 @@ const generateSingleNPC = (
   const secret = generateFactionLeaderSecret(
     config,
     institutions,
-    worldLaw,
+    worldLaw, role, // CENSUS-1i R-AX: the holder's role keys both rolls (the type and the row)
   );
   const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
   const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
@@ -353,7 +353,7 @@ const generateNPCAppearance = (r = 'other') => ({
   age: pickFromArray(NPC_AGE_DATA[pickFromArray(['young', 'middle', 'mature', 'elder'])]),
   build: pickFromArray(NPC_BUILDS),
   feature: pickFromArray(NPC_FEATURES),
-  clothes: pickFromArray(NPC_WANTS[r] || NPC_WANTS.other),
+  clothes: textOf(pickFromArray(NPC_WANTS[r] || NPC_WANTS.other)), // CENSUS-4f (R-C): three wants declare; carried until the site is wired
 });
 
 // generateNPCGoal

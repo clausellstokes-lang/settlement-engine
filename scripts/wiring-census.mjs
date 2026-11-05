@@ -55,7 +55,7 @@ import { CUSTOM_CONTENT_MANIFEST } from '../src/domain/content/customContentMani
 import { loadStateLeaves, ROOT, STATE_ANNEX } from '../tests/helpers/dossierCorpus.js';
 import { readAnnexDeclarations } from './lib/dossier-annex-grammar.mjs';
 import { annexDeclaredColumns, tablePoolRow } from './lib/census-declared.mjs';
-import { TABLE_POOLS } from './lib/table-pools.mjs';
+import { DECLARATION_CHANNELS, TABLE_POOLS } from './lib/table-pools.mjs';
 import { pathToFileURL } from 'node:url';
 import {
   COMPOSERS, composedFillByBlock, composedFillByKeyFunction, composerSources, fillSites,
@@ -914,10 +914,17 @@ export async function buildCensus(options = {}) {
   // CENSUS-1g unit 5: the declared columns, read from the ANNEX through the projector's own parse.
   const declaredCols = annexDeclaredColumns(readFileSync(STATE_ANNEX, 'utf8'));
   const tablePools = [];
+  // CENSUS-1i unit 2: every declaration channel held beside a table, read for every table.
+  const channels = [];
+  for (const c of DECLARATION_CHANNELS) {
+    const mod = await import(pathToFileURL(join(ROOT, c.module)).href);
+    if (!(c.name in mod)) throw new Error(`tablePools: ${c.module} exports no ${c.name} (a declaration channel)`);
+    channels.push({ [c.kind]: mod[c.name] });
+  }
   for (const entry of TABLE_POOLS) {
     const mod = await import(pathToFileURL(join(ROOT, entry.module)).href);
     if (!(entry.name in mod)) throw new Error(`tablePools: ${entry.module} exports no ${entry.name} (${entry.id})`);
-    tablePools.push(tablePoolRow(entry, mod[entry.name]));
+    tablePools.push(tablePoolRow(entry, mod[entry.name], channels));
   }
   /** @type {Map<string, Map<string, Array<{text: string, slots: string[]}>>>} */
   const pools = new Map();

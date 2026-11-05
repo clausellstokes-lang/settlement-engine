@@ -27,6 +27,31 @@ describe('the four mislabelled rows carry no guild tag', () => {
   });
 });
 
+// CENSUS-4e (the chair's answer 2 to CENSUS-4d, R-X): five more rows carry `guild` and are not
+// trade guilds by their own text — two hired swords (Contract killer is criminal, which
+// `isCommerceGuild` already refuses by group; its tag still read as a guild to the history and
+// upgrade readers), and three offices "run by royal or municipal officials" or a sale venue.
+const RETAGGED_4E = ['Hired blades', 'Contract killer', 'Customs house', 'Auction house', 'Assay office'];
+
+describe('the five further mislabelled rows carry no guild tag (CENSUS-4e)', () => {
+  it.each(RETAGGED_4E)('%s: present in the catalogue, no row tagged guild, not a commerce guild', (name) => {
+    const rows = rowsOf(name);
+    expect(rows.length).toBeGreaterThan(0);
+    for (const [tier, group, def] of rows) {
+      expect(def.tags || [], `${tier}/${group}`).not.toContain('guild');
+      expect(isCommerceGuild({ ...def, name, category: group }), `${tier}/${group}`).toBe(false);
+    }
+  });
+  it('each keeps its other tags (the retag removes only the one word)', () => {
+    const tagsOf = (name) => rowsOf(name)[0][2].tags;
+    expect(tagsOf('Hired blades')).toEqual(['military']);
+    expect(tagsOf('Contract killer')).toEqual(['military']);
+    expect(tagsOf('Customs house')).toEqual(['law_enforcement']);
+    expect(tagsOf('Auction house')).toEqual(['market']);
+    expect(tagsOf('Assay office')).toEqual(['banking']);
+  });
+});
+
 describe('the three villages of CENSUS-4c unit 1', () => {
   beforeAll(async () => { await ensureLaws(); });
   it.each([236, 320])('soak1k-%i: the guild atom is false and no Guild Master is crewed', (i) => {

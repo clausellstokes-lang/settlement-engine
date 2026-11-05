@@ -21,7 +21,9 @@ const inlandHookLine = (/** @type {any} */ line, /** @type {'maritime'|'river'|'
 import { waterAccessKind } from '../../src/domain/tradeRouteSemantics.js';
 
 /** Every string a hook pool holds, however nested. @param {unknown} v @returns {string[]} */
-const stringsOf = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(stringsOf) : v && typeof v === 'object' ? Object.values(v).flatMap(stringsOf) : []);
+// CENSUS-4f: a declared row's column (`needs`, `excludes`, `crisis`, `twinOf`, `tags`) is a declaration, not prose — `needs: ['docks']` is no wet line.
+const DECLARATION_KEYS = new Set(['needs', 'excludes', 'crisis', 'twinOf', 'tags']);
+const stringsOf = (v) => (typeof v === 'string' ? [v] : Array.isArray(v) ? v.flatMap(stringsOf) : v && typeof v === 'object' ? Object.entries(v).filter(([k]) => !DECLARATION_KEYS.has(k)).flatMap(([, x]) => stringsOf(x)) : []);
 const POOLS = { NPC_FACTION_GOALS, NPC_FACTION_LOYALTY, NPC_SECRETS, NPC_CRIMINAL_SECRETS, NPC_WANTS };
 
 describe('the hook pools\' wet lines', () => {

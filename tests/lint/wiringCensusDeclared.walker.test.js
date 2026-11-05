@@ -80,3 +80,34 @@ describe('tablePools', () => {
     expect(CENSUS.tablePools.find((t) => t.id === 'powerSupport.ALIGNED_BASIS')).toMatchObject({ colour: true, undeclared: 0 });
   });
 });
+
+// CENSUS-1i unit 2 (`tablePools`' second half; the chair's acceptance in block k): the walker reads
+// EVERY declaration channel, so no row reads high — a row object (`{ text }`, a goal's
+// `{ short, long }`, a secret's `{ secret, stakes }`, a service's `{ desc }`, a closure row
+// `{ line }`) is ONE line declaring by its own fields; a bare closure is a line; a line that is a
+// key of a sibling set or of a declaration column held beside its table declares by that channel,
+// and the set's twins are lines of the same pool.
+describe('tablePools reads every declaration channel (CENSUS-1i unit 2)', () => {
+  it('row objects are one line each, declaring by their own fields', async () => {
+    const { tableLines } = await import('../../scripts/lib/census-declared.mjs');
+    const rows = tableLines({ a: [{ short: 'S', long: 'L', needs: ['guild'], driven_by: ['x'] }, { secret: 'Q', stakes: 'R' }, { on: true, p: 0.5, desc: 'D' }, { line: () => 'f' }, () => 'g', { text: 'T', colour: true }] });
+    expect(rows.length).toBe(6);
+  });
+  it('a sibling key and a beside-column key declare by their channel; the twins are lines', async () => {
+    const { tablePoolRow } = await import('../../scripts/lib/census-declared.mjs');
+    const channels = [{ siblings: { Orig: [{ text: 'Orig', needs: ['walls'] }, { text: 'Twin', twinOf: 'Orig', excludes: ['walls'] }] } }, { column: { Col: { needs: ['market'] }, Plain: { colour: true } } }];
+    const row = tablePoolRow({ id: 'x', module: 'm', name: 'n', drawKind: 'R', drawSite: '' }, ['Orig', 'Col', 'Plain', 'Bare'], channels);
+    expect(row).toMatchObject({ lines: 5, undeclared: 1, lineDeclares: { walls: 1, 'no walls': 1, market: 1, colour: 1 } });
+  });
+  it('every exported sibling set and text-keyed declaration column in src is a channel the walker reads, or ruled out by name', async () => {
+    const { DECLARATION_CHANNELS, NOT_TABLE_CHANNELS } = await import('../../scripts/lib/table-pools.mjs');
+    const { execSync } = await import('node:child_process');
+    const found = execSync("git grep -hoE 'export const [A-Z_]*(SIBLINGS|DECLARATIONS)\\b' -- src", { encoding: 'utf8' }).trim().split('\n').map((l) => l.replace('export const ', '')).sort();
+    const held = [...DECLARATION_CHANNELS.map((c) => c.name), ...Object.keys(NOT_TABLE_CHANNELS)].sort();
+    expect(held).toEqual(found);
+  });
+  it('the institution descriptions no longer read every line undeclared', () => {
+    const t = CENSUS.tablePools.find((x) => x.id === 'institutionDescVariants.INSTITUTION_DESC_VARIANTS');
+    expect(t.undeclared).toBeLessThan(t.lines);
+  });
+});
