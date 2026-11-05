@@ -896,8 +896,10 @@
      "text": "Pilgrims in travel-stained cloaks queue patiently for their turn at the holy places.",
      "needs": [],
      "excludes": [
-      "crisis: threat"
+      "crisis: threat",
+      "crisis: unrest"
      ],
+     "note": "R-F3 (the chair, 2026-11-05): a calm arrival claim; the LINE widens to the unrest family.",
      "crisis": "any",
      "colour": false,
      "stop": []

@@ -9,22 +9,22 @@
 
 export const ARRIVAL_SCENES = {
   market: [
-    (r) =>
-      `The market at ${r} is audible before it is visible: a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.`,
+    { text: (r) =>
+      `The market at ${r} is audible before it is visible: a specific mix of voices, animals, and the percussion of commerce that no other combination of sounds quite replicates.`, crisis: ['any'] },
     (r) =>
       `${r}'s market day has the comfortable chaos of something that has been happening in the same place for a long time and has worked out most of its problems.`,
-    (r) =>
-      `The road into ${r} is thick with carts by mid-morning, all of them heading for the same square, and the traffic tells you where the settlement's heart is before you can see it.`,
-    (r) =>
-      `You reach ${r} against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news.`,
+    { text: (r) =>
+      `The road into ${r} is thick with carts by mid-morning, all of them heading for the same square, and the traffic tells you where the settlement's heart is before you can see it.`, crisis: ['any'] },
+    { text: (r) =>
+      `You reach ${r} against a tide of people leaving it. The market has ended for the day, and the settlement is exhaling its visitors back onto the roads with their purchases and their news.`, crisis: ['any'] },
   ],
   river: [
     (r) =>
       "The smell of the river reaches you before the settlement does: clean water, reeds, the particular mud of a working waterfront.",
     (r) =>
       `${r} runs along the water the way settlements do when water is the reason they exist: practical, a little chaotic at the waterfront, tidier as you move inland.`,
-    (r) =>
-      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`,
+    { text: (r) =>
+      `The river carries the sounds of ${r} to you around the bend before the buildings appear: a mill wheel, the knock of boats against a jetty, someone calling a tally across the water.`, needs: ['institution: mill'] },
     (r) =>
       `${r} has its back to the land and its face to the river; the approach by road brings you in the rear way, past the yards and the drying nets, into a settlement that plainly considers the water its front door.`,
   ],
@@ -39,8 +39,8 @@ export const ARRIVAL_SCENES = {
       `The road into ${r} descends toward a forest of masts. Tar, salt, fish, and woodsmoke mark the boundary between the coast and the working port.`,
   ],
   smoke: [
-    (r) =>
-      `The cookfire smoke of ${r} drifts on the wind in your direction: a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`,
+    { text: (r) =>
+      `The cookfire smoke of ${r} drifts on the wind in your direction: a hundred fires, each with its own particular fuel, combining into something that smells like inhabited place.`, needs: ['population: ≥ middling'] },
     (r) => `${r} is visible as a smear of smoke on the horizon for a long time before the buildings resolve.`,
     (r) =>
       `You smell ${r} before anything else: woodsmoke and bread and livestock, the layered scent of a place where people have been living close together and cooking the same suppers for generations.`,
@@ -48,27 +48,27 @@ export const ARRIVAL_SCENES = {
       `The smoke above ${r} stands straight up in the still air, a dozen thin columns that mark the settlement's shape on the sky like a map drawn in grey.`,
   ],
   guild: [
-    (r) =>
-      `The sound of a hammer on metal reaches you from ${r}'s smithing quarter: a craftsperson's rhythm, not a soldier's.`,
+    { text: (r) =>
+      `The sound of a hammer on metal reaches you from ${r}'s smithing quarter: a craftsperson's rhythm, not a soldier's.`, needs: ['institution: smith'] },
     (r) => `${r} smells of work: sawdust, tallow, the particular sharp smell of a tanner at the edge of town.`,
     (r) =>
       `${r} announces its trade before its name: the whine of a lathe, the reek of the dye-vats, a workshop door standing open on a scene of unhurried, practised industry.`,
-    (r) =>
-      `The approach to ${r} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`,
+    { text: (r) =>
+      `The approach to ${r} is lined with the overflow of its crafts: timber stacked to season, half-finished goods under eaves, the settlement's work spilling out past its walls for want of room inside.`, needs: ['walls'] },
   ],
   ordinary: [
     (r) =>
       `${r} is ordinary in the best sense: a place where people live and work and argue and sleep, which is most of what places are for.`,
-    (r) =>
-      `The road into ${r} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.`,
+    { text: (r) =>
+      `The road into ${r} becomes a street at a point you can't precisely identify. The settlement grows around you gradually.`, crisis: ['any'] },
     (r) =>
       `${r} is neither impressive nor disappointing from the approach. It is what it is, which is a working settlement of reasonable size doing reasonable things.`,
-    (r) =>
-      `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`,
-    (r) =>
-      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`,
-    (r) =>
-      `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`,
+    { text: (r) =>
+      `A child runs past you on the road into ${r}, chasing something or being chased by something (unclear which). Nobody in the street pays attention.`, crisis: ['any'] },
+    { text: (r) =>
+      `A merchant argues with a carter on the road into ${r} about the size of a load. Nobody else pays them any attention. This is clearly a daily occurrence.`, crisis: ['any'] },
+    { text: (r) =>
+      `The first person you meet on the road into ${r} wants to know your business, and the second already knows it.`, crisis: ['any'] },
   ],
 };
 

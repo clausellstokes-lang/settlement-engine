@@ -16,6 +16,7 @@ import {
   ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
 } from '../../src/data/arrivalProse.js';
 import { ARRIVAL_SCENES, STRESS_DESCS } from '../../src/data/narrativeData.js';
+import { textOf } from '../../src/domain/facts/textOf.js';
 import { STRESS_TYPE_MAP } from '../../src/data/stressTypes.js';
 import { nativeSemanticNames } from '../../src/domain/content/customContentSemanticAuthority.js';
 import { HISTORICAL_EVENTS_DATA } from '../../src/data/historyData.js';
@@ -47,7 +48,7 @@ const LIVING_MEMORY_CUT = (() => {
 afterEach(() => clearActiveRng());
 
 const NAME = 'Ashford';
-const render = (pool) => (pool || []).map((line) => line(NAME));
+const render = (pool) => (pool || []).map((line) => textOf(line)(NAME));
 
 /** Every line of every pool, with where it lives. */
 const ALL_LINES = [
@@ -347,7 +348,7 @@ describe('the scene on real settlements', () => {
     // The place beats are live on real settlements: most scenes carry a sense line.
     const senseLines = ARRIVAL_SENSES.flatMap((s) => [...s.lines, ...s.dominant]);
     const withSense = scenes.filter((text) => senseLines.some((line) => {
-      const probe = line('\u0000').split('\u0000');
+      const probe = textOf(line)('\u0000').split('\u0000');
       return probe.every((part) => text.includes(part));
     }));
     expect(withSense.length / scenes.length).toBeGreaterThan(0.6);
