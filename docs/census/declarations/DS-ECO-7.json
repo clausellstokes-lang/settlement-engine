@@ -1,0 +1,95 @@
+{
+  "id": "DS-ECO-7",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-7::TALLIES",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: economy-touching event after last regenerate (tallies). Pure colour: survey-staleness caveat.",
+      "lines": [
+        {
+          "id": "DS-ECO-7::TALLIES::v0",
+          "text": "Events recorded after this settlement's last survey may not be fully counted in these tall",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::TALLIES::v1",
+          "text": "The counts on this page were taken at the last full survey of {settlement}. Anything recor",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::TALLIES::v2",
+          "text": "These figures describe {settlement} as it was judged at its last survey. Events entered af",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::TALLIES::v3",
+          "text": "What follows is the last careful reckoning of {settlement}, and it may not be today's.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-7::CATALOG",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: same, catalog variant. Pure colour.",
+      "lines": [
+        {
+          "id": "DS-ECO-7::CATALOG::v0",
+          "text": "Events recorded after this settlement's last survey may not be fully counted in this catal",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::CATALOG::v1",
+          "text": "This list of what {settlement} offers was drawn at the last survey. A house opened or clos",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::CATALOG::v2",
+          "text": "The catalog describes the services {settlement} was judged to hold. Later changes may not ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-7::CATALOG::v3",
+          "text": "What the town could do for a visitor was written down at the last survey, and may have mov",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

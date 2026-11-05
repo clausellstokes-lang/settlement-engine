@@ -1,0 +1,55 @@
+{
+  "id": "tradeGoods.deriveIsEntrepot",
+  "source": "src/generators/economy/tradeGoods.js :: deriveIsEntrepot + generateTradeIncomeStreams.incomeBonuses",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "deriveIsEntrepot is a predicate (route crossroads, or port + \"international trade\"/\"warehouse district\" by name) and prints nothing itself; its consequences print as the two income bonuses below and as the transit list (generateTradeIncomeStreams.transit = imports.slice(0,4), i.e. UPGRADE_GOODS_BY_TIER labels re-labelled as transit). Crisis-scoped because the Entrepot line asserts traffic passing through and is not gated on siege/occupation.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "tradeGoods.deriveIsEntrepot::Entrepot Trade.source",
+      "text": "Entrepôt Trade",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Branch: entrepot && route crossroads && tier not thorp/hamlet (same readers; noted)."
+    },
+    {
+      "id": "tradeGoods.deriveIsEntrepot::Entrepot Trade.desc",
+      "text": "Transit duties, warehouse fees, and re-export premiums from goods passing through the cros",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "income",
+      "notes": "Asserts goods passing through; prints under under_siege/occupied unchanged. Wants a narrower crisis exclusion (threat family) than \"calm\"."
+    },
+    {
+      "id": "tradeGoods.deriveIsEntrepot::International Commerce.source",
+      "text": "International Commerce",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: 'international trade' institution (no kind). route: port guaranteed by branch."
+    },
+    {
+      "id": "tradeGoods.deriveIsEntrepot::International Commerce.desc",
+      "text": "Revenue from international trade: licensing fees, currency exchange, and commodity brokera",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "Blockade-blind like the entrepot line; left any (no traffic claim in the words)."
+    }
+  ]
+}

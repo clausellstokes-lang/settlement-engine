@@ -17,10 +17,14 @@
  * Both are PURE and DETERMINISTIC — no rng, no Date, no locale-dependent ordering.
  */
 
-import { institutionMatchesKeyword } from './computeActiveChains.js';
 import {
-  isMaterializedCustomContent,
-} from '../domain/content/customContentSemanticAuthority.js';
+  institutionInCategory,
+  isCommerceGuild,
+} from '../domain/institutions/institutionCategory.js';
+
+// The institution-category chain and the ONE guild reader live in the domain (CENSUS-4c, the
+// chair's answer 3): re-exported here so every generator import keeps its path.
+export { institutionInCategory, isCommerceGuild };
 
 // ─── Role → category keyword map ──────────────────────────────────────────────
 // Each category lists the role-name keywords that imply it. The map is grouped by
@@ -164,67 +168,8 @@ export function factionPoolCategory(npc, roleLower) {
 }
 
 // ─── Institution-metadata category detection ──────────────────────────────────
-// Catalog institutions carry a `category` (the catalog GROUP — 'Criminal',
-// 'Magic', 'Religious', …), `tags`, and `catalogId` (assembleInstitutions stamps
-// these). Categorize by that metadata instead of name substrings: the old
-// `name.includes('thieves'|'church'|'wizard')` tests missed entire institution
-// families ('Street gang', 'Wayside shrine', 'Teleportation circle', …) and
-// could false-hit on coincidental substrings. The catalog GROUP plus a small set
-// of clean tags is the precise signal; institutionMatchesKeyword (id-first,
-// substring fallback) backstops unstamped / custom / legacy institutions by name.
-
-/** Lowercased catalog group of an institution, '' when absent. */
-const groupOf = inst => String(inst?.category || '').toLowerCase();
-/** Lowercased tag set of an institution. */
-const tagsOf = inst => (Array.isArray(inst?.tags) ? inst.tags : []).map(t => String(t).toLowerCase());
-
-// Per-category detector: clean GROUP + clean TAGS, with name-keyword fallbacks
-// (via institutionMatchesKeyword) for unstamped institutions that carry neither.
-const CATEGORY_DETECTORS = Object.freeze({
-  criminal: {
-    groups: ['criminal'],
-    tags: ['criminal', 'smuggling'],
-    nameKeywords: ['thieves', 'black market', 'smuggl', 'fence', 'gang', 'outlaw', 'assassin'],
-  },
-  magic: {
-    groups: ['magic', 'exotic'],
-    tags: ['arcane', 'alchemy', 'planar'],
-    nameKeywords: ['wizard', 'mage', 'alchemist', 'enchant', 'arcane', 'teleportation'],
-  },
-  religion: {
-    groups: ['religious'],
-    tags: ['religious', 'church', 'monastery'],
-    nameKeywords: ['church', 'cathedral', 'monastery', 'temple', 'shrine', 'priest', 'friary'],
-  },
-});
-
-/**
- * Does a single institution belong to the given metadata category
- * ('criminal' | 'magic' | 'religion')? GROUP + tags first, name keywords as the
- * unstamped/custom fallback.
- *
- * @param {Object} inst
- * @param {'criminal'|'magic'|'religion'} category
- * @returns {boolean}
- */
-export function institutionInCategory(inst, category) {
-  const det = CATEGORY_DETECTORS[category];
-  if (!det || !inst) return false;
-  // Current custom metadata is presentation-only in the manifest. Custom
-  // mechanics must enter through registered fields, never by borrowing native
-  // category/tag/name classification.
-  if (isMaterializedCustomContent(inst)) return false;
-  const group = groupOf(inst);
-  if (det.groups.includes(group)) return true;
-  const tags = tagsOf(inst);
-  if (det.tags.some(t => tags.includes(t))) return true;
-  // Fallback for institutions with no usable metadata (custom / legacy / DM):
-  // match by name keyword (id-first when stamped, substring otherwise).
-  if (!inst.category && tags.length === 0) {
-    return det.nameKeywords.some(kw => institutionMatchesKeyword(inst, kw));
-  }
-  return false;
-}
+// `institutionInCategory` and its detectors moved to `domain/institutions/institutionCategory.js`
+// (CENSUS-4c), re-exported above.
 
 /**
  * Derive criminal / magic / religion presence flags for a settlement's
@@ -241,22 +186,4 @@ export function institutionCategoryFlags(institutions = []) {
     hasMagic: insts.some(i => institutionInCategory(i, 'magic')),
     hasReligion: insts.some(i => institutionInCategory(i, 'religion')),
   };
-}
-
-/**
- * Is this institution a (non-criminal) guild? Drives the guild-master NPC.
- * Metadata-first: a 'guild' tag is the catalog's own guild marker; criminal
- * guilds (Thieves' guild, Assassins' guild) are excluded via the criminal
- * detector. Name substring ('guild') backstops unstamped institutions.
- *
- * @param {Object} inst
- * @returns {boolean}
- */
-export function isCommerceGuild(inst) {
-  if (!inst) return false;
-  if (isMaterializedCustomContent(inst)) return false;
-  if (institutionInCategory(inst, 'criminal')) return false;
-  const tags = tagsOf(inst);
-  if (tags.includes('guild')) return true;
-  return institutionMatchesKeyword(inst, 'guild');
 }

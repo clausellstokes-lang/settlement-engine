@@ -1,0 +1,203 @@
+{
+  "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND",
+  "source": "src/data/finishedGoodsCategory.js :: INSTITUTION_FINISHED_GOODS_DEMAND (re-exported by src/data/economicData.js)",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Rows are the scaled importLabels [small, medium, large gap] and the exportBonus. consumers/suppliers are name-fragment matchers, not text, and are not rows. minTier/routeRequired are existing engine gates; the declarations mirror them.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.importLabels[0]",
+      "text": "Replacement arms and basic equipment",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumers (militia, palisade, watch, barracks, garrison, walls, adventurers) are a cross-dimension disjunction, so the consumer is left to the key"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.importLabels[1]",
+      "text": "Quality weapons and armour",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumers (militia, palisade, watch, barracks, garrison, walls, adventurers) are a cross-dimension disjunction, so the consumer is left to the key"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.importLabels[2]",
+      "text": "Advanced weapons and armour (bulk contract)",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumers (militia, palisade, watch, barracks, garrison, walls, adventurers) are a cross-dimension disjunction, so the consumer is left to the key"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::military.exportBonus",
+      "text": "Quality tools and weapons",
+      "needs": [
+        "institution: smith"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: specialized metalworkers; producer: the smith suppliers (resident smith, blacksmith(s)) match INSTITUTION_KIND_PATTERNS.smith; \"Specialized metalworkers\" (supply 5) and \"Smelter\" do not"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::religious.importLabels[0]",
+      "text": "Incense and votive candles",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumer churches/monasteries/hospitals are key-guaranteed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::religious.importLabels[1]",
+      "text": "Incense, ritual oil, and vestment materials",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumer churches/monasteries/hospitals are key-guaranteed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::religious.importLabels[2]",
+      "text": "Incense, ritual oil, sacred texts, and vestment cloth (bulk)",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet; consumer churches/monasteries/hospitals are key-guaranteed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::maritime.importLabels[0]",
+      "text": "Rope, oakum, and rigging supplies",
+      "needs": [
+        "tier: >= hamlet",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet and routeRequired [port, river] (water: navigable is the reader for coast OR river)"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::maritime.importLabels[1]",
+      "text": "Cordage, canvas, and vessel-maintenance supplies",
+      "needs": [
+        "tier: >= hamlet",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet and routeRequired [port, river] (water: navigable is the reader for coast OR river)"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::maritime.importLabels[2]",
+      "text": "Cordage, tar, timber fittings, and bulk vessel supplies",
+      "needs": [
+        "tier: >= hamlet",
+        "navigable"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet and routeRequired [port, river] (water: navigable is the reader for coast OR river)"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::luxury.importLabels[0]",
+      "text": "Luxury textiles and exotic goods",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier town; luxury-class (silk, fine dyes, exotic textiles) — the village band is subsumed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::luxury.importLabels[1]",
+      "text": "Silk, fine dyes, and imported cloth",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier town; luxury-class (silk, fine dyes, exotic textiles) — the village band is subsumed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::luxury.importLabels[2]",
+      "text": "Silk, fine dyes, exotic textiles, and finished luxury garments",
+      "needs": [
+        "tier: >= town"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier town; luxury-class (silk, fine dyes, exotic textiles) — the village band is subsumed"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::alchemical.importLabels[0]",
+      "text": "Alchemical reagents and scribal supplies",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::alchemical.importLabels[1]",
+      "text": "Alchemical reagents, rare minerals, and imported inks",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::alchemical.importLabels[2]",
+      "text": "Alchemical reagents, rare minerals, inks, and binding materials (bulk)",
+      "needs": [
+        "tier: >= hamlet"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "import",
+      "notes": "mirrors minTier hamlet"
+    },
+    {
+      "id": "economicData.INSTITUTION_FINISHED_GOODS_DEMAND::alchemical.exportBonus",
+      "text": "Alchemical trade (potions, reagents)",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: alchemist / apothecary; producer: apothecary/foraging/magical_node suppliers; no institution kind"
+    }
+  ]
+}

@@ -15,7 +15,7 @@ import { runPipeline } from './pipeline.js';
 import { generateNPCs, generateRelationships } from './npcGenerator.js';
 import { generateFactions, generateConflicts } from './powerGenerator.js';
 import { generateHistory } from './historyGenerator.js';
-import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js';
+import { enrichNpcCoherence, relinkFactionMembers } from './narrativeGenerator.js'; import { fitFactionRoster } from './power/factionRoleFit.js'; // CENSUS-4 R12
 import { enrichHistoryCoherence } from './narrative/historyCoherence.js';
 import { withCustomContent } from '../lib/dependencyEngine.js';
 // THE whole-word substitution, shared with the faction-rename convergence. The
@@ -547,7 +547,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
     // structuralPosition — not the poorer raw generateNPCs shape. The enrichment
     // reads the live settlement state (legitimacy/capture/food/prosperity) plus the
     // freshly generated npcs; give it a settlement-shaped view with the new roster.
-    const enrichedNpcs = enrichNpcCoherence({ ...settlement, npcs, config });
+    const enrichedNpcs = fitFactionRoster(enrichNpcCoherence({ ...settlement, npcs, config }), settlement); // CENSUS-4 R12: the fitted roster, before canon rides over it
 
     // The user's canon rides OVER the finished roll rather than through it. Every
     // draw above has already happened, so preservation cannot perturb a seeded

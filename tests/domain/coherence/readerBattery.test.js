@@ -182,10 +182,22 @@ describe('reader:tonight-wants', () => {
   test('"Wants to" followed by a sentence', () => {
     const rows = R.tonightWantsFindings(rec(), { tonight: 'People to voice\nLalita Acharya\nElder · Holds the seat\nWants to Was approached before the betrayal and said no.' });
     expect(rows).toHaveLength(1);
-    expect(rows[0].detail).toBe('1 lines; starts "Was"');
+    expect(rows[0].detail).toBe('[sentence-not-a-want] 1 lines; starts "Was"');
   });
-  test('negative control: a want with its verb', () => {
-    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to extend the institution\'s civic role.' })).toEqual([]);
+  test('R11: "Wants to" followed by management prose is the abstract-register sub-case', () => {
+    const tonight = [
+      'People to voice', 'Gerlinde', 'Baron · Holds the seat',
+      'Wants to convert governance instability into a restoration of prerogatives that formal governance had constrained.',
+      'Brother Anselm', 'Priest · Senior cleric',
+      'Wants to build pastoral standing and institutional credibility through consistent service in a context where the dominant institution sets the standard.',
+      'Wants to The supplies they declared destroyed in a fire are in a cellar.',
+    ].join('\n');
+    const rows = R.tonightWantsFindings(rec(), { tonight });
+    expect(rows.map((r) => r.detail)).toEqual(['[sentence-not-a-want] 1 lines; starts "The"', '[abstract-register] 2 lines; starts "convert"']);
+    expect(rows[1].quote).toMatch(/^Wants to convert governance instability/);
+  });
+  test('negative control: a concrete want, and the cast wants, read clean', () => {
+    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to get the old toll right back before the council notices.\nWants to keep the pressure on until the seat gives way, and keep their own hand out of sight.\nWants the same as Gerlinde.' })).toEqual([]);
   });
 });
 
@@ -229,10 +241,26 @@ describe('reader:daily-life-placeholder', () => {
   });
 });
 
+// ── 11. faction-role-fit (CENSUS-4 R12)
+describe('faction-role-fit', () => {
+  const town = (category, role) => rec({ powerStructure: { factions: [{ faction: 'The House', category }] }, npcs: [{ name: 'A', role, factionAffiliation: 'The House' }] });
+  test('a faction seating a role that does not fit its kind is a finding', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'Wandering Peddler'), {})).toEqual([{ surface: 'factions', quote: 'The House (religious)', detail: 'Wandering Peddler (merchant)' }]);
+    expect(R.factionRoleFitFindings(town('military', 'Priest'), {})).toHaveLength(1);
+    expect(R.factionRoleFitFindings(town('criminal', 'Guard Captain'), {})).toHaveLength(1);
+  });
+  test('a fitting role, an unrestricted kind, or an unjudged role is not', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'High Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('noble', 'Mayor'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('economy', 'Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('religious', 'Unheard-of Role'), {})).toEqual([]);
+  });
+});
+
 // ── the battery
 describe('readerBattery', () => {
-  test('runs the ten checks in order, in the battery shape, and a throwing check is a finding', () => {
-    expect(R.READER_BATTERY_CHECKS).toHaveLength(10);
+  test('runs the eleven checks in order, in the battery shape, and a throwing check is a finding', () => {
+    expect(R.READER_BATTERY_CHECKS).toHaveLength(11); // CENSUS-4 R12 added faction-role-fit
     const rows = R.readerBattery(rec({ tier: 'hamlet' }), { tonight: 'Wants to The supplies.', power: "Tailor's'" });
     expect(rows.map((f) => f.check)).toEqual(['tonight-wants', 'possessive-slip']);
     for (const f of rows) expect(Object.keys(f).sort()).toEqual(['check', 'detail', 'quote', 'surface']);
