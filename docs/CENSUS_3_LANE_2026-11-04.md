@@ -12,6 +12,10 @@
 >
 > **CENSUS-3f (2026-11-05): CENSUS-1f merged (the outlook and timeline sites wired by the mechanism lane); unit 3 re-measured (`[sea]` 66 → 0 on the 1,000, no slot emptied); the seven canonical v0 rows declared through the projector's tag slot (`market` ×2, `guild` ×1); R-AJ / R-AL / R-AM / R-AO not landed on 1b, listed as waiting. Nothing of this lane remains but the compose and those four. See "CENSUS-3f" at the end.**
 >
+> **CENSUS-3g (2026-11-05): CENSUS-1g merged (R-AO, R-AM, R-AJ); DS-ECO-6 v4 declares `guild`; 77 lines marked `colour`; the starving outlook set reworded and twinned once R-AM ledgered it. 3g wrote no section; CENSUS-3h wrote it from the commits. See "CENSUS-3g" at the end.**
+>
+> **CENSUS-3h (2026-11-05): CENSUS-1g's tip merged (R-AL: 16 history births, 0 empty tension lists); the moderate-gap twin graded by the band the record reads (R-AV: 95 of 1,000, 131 of 525); R-AU not landed on 1b at this seat's boundary, so the 250-class findings on `OUTLOOK_HOOK_SIBLINGS` stay listed as the mechanism lane's. Nothing of this lane remains but the compose. See "CENSUS-3h" at the end.**
+>
 > **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
@@ -625,3 +629,30 @@ Nothing of this lane remains but the compose and the mechanism lane's four items
 
 1. DS-ECO-6 "a large share off the books" v4 ("The guilds are losing their grip…", dm-only) presumes guilds as much as the canonical row this unit declared. It is DS-ECO's (this lane's annex rows), not in the seven. Should it declare `guild` now (display-time, about 1/4 of that pool's no-guild births), or wait for the compose's mute scan?
 2. §10's fill rule (≥ 1 in 100) reads the 16 / 1,000 `demographic_pressure` mute slots as owing a line. R-AL removes them at the draw instead. This seat reads R-AL as superseding the gap line. Is that right?
+
+## CENSUS-3g (2026-11-05; written by CENSUS-3h from the commits, since 3g's report stayed in its transcript)
+
+Base: CENSUS-3f's tip `525084d`. Merged: `origin/lane/census-1b-2026-11-04` at `d2b1ab0` (CENSUS-1g: R-AO `c000dd9`, R-AM `28c6d2a`, R-AJ `d2b1ab0`) as `2b9ee3d`, with no conflict. `gen:dossier-prose --check` and `wiring-census.mjs --check` are green (709 pools / 2,338 variants).
+
+| unit | commit | what | births moved |
+|---|---|---|---|
+| 1 | `2b9ee3d` | the merge. R-AJ is confirmed by hash: every section of soak1k-0..999, `npcs` and `factions[].members[].plotHooks` included, is byte-identical before and after | 0 |
+| 2 | `b6caa5e` | DS-ECO-6 "a large share off the books" v4 ("The guilds are losing their grip…", dm-only) declares `guild` (the chair's answer 1 of 07:2x; R-AD). Red-first: `canonicalRowsDeclared.test.js` 1 red, then 9 / 9 | display-time; records 0; pages on the 60: 0 (tab:dossier declared draws 2,843 → 2,847) |
+| 3 | `b1aab0f` | R-AO: 77 lines marked `colour` (read; presumes nothing) through the annex tag slot. These are the four slotless canonical rows (DS-ECO-3 ADEQUATE, DS-ECO-6 minor shadow, DS-ECO-7 TALLIES and CATALOG), 68 of the 73 undeclared lines in this lane's 41 mixed pools, and DS-ECO-7 TALLIES v1–3 and CATALOG v1–3. Red-first: `canonicalRowsDeclared.test.js` 9 red, then 18 / 18 | 0 (colour is silence to the draw; pages 0 / 60) |
+| 4 | — | no commit carries a unit 4 | — |
+| 5 | `167c957` | R-AM read: the starving outlook set reworded (R-U) and twinned (R-G). Below | soak 1,000: 143 · golden 525: 167 · the 60: 4 pages (`economicViability` only) |
+
+**The five read lines left unmarked at unit 3** (each presumes a fact, so `colour` would be false; they stay in the undeclared register for the compose's reading): DS-ECO-1 C4 v2, DS-ECO-2 FOOD deficit v1, DS-ECO-8 COMFORTABLE v3, DS-ECO-11 fullyExploited v1, DS-POP-1 balance v3.
+
+**The undeclared register after unit 3** (statePools, re-taken in scratch, not written, R-T): DS-ECO 168 → 111, DS-SUP 57 → 51, DS-POP 67 → 54.
+
+### Unit 5 · the starving outlook set (`167c957`)
+
+R-AM's ledger showed the kept-refused starving original false in 162 of the 1,000 births (`tier` 110, `food` 140). Each was later dropped from the record by the hook-truth pass. The loyalty pool read 0 false.
+
+- **R-U:** the original no longer calls the residents "Villagers" ("Its hungriest are turning to banditry"). It now declares only `food: ≤ deficit`.
+- **R-G, the chair's ruling recorded here (vetoable):** one twin for the moderate gap (Import-Dependent / Pressured; the chair's ruling 1 of 2026-11-03: a food hook for a moderate gap, nothing for a fed place), with no famine words: "The settlement grows less food than it eats, and a merchant has offered to make up the difference at a price the settlement cannot pay in coin." It excludes `food: ≤ deficit` and needs `food: ≤ pressured`. Its share is the births whose record refuses the original in the moderate band (a T site has no draw): 95 of 1,000.
+- **The residue:** a fed place (Secure; 45 of 1,000 at 3g's reading) has no true line, so `resolveSibling` keeps the refused original. The hook-truth pass then drops it, so it never prints. This is the mechanism lane's site policy, which the chair has since ruled on (R-AU, below).
+- **Births moved** (`economicViability` only): soak 1,000: 143 (45 reworded text, 95 twin added, 3 starving towns that now keep the hook). Golden 525: 167. The 60: 4 pages. Empty economics hook lists on the branch go from 88 to 38. Red-first: `outlookHooksResolved.test.js` 4 red, then 7 / 7.
+
+3g's three questions and the chair's answers (08:3x): (1) R-AU — the site drops a refused hook with no admitted sibling, and the mechanism lane changes it; (2) R-AV — the twin carries only the severity and category the record holds; (3) the `A-11` finding on the merged base is CENSUS-2f's fish fix (`3386e59b7` on lane 2), not this lane's.
