@@ -4636,7 +4636,7 @@ reads what the panel renders. A page draws at most one of each.
 **DEVOTION: `lukewarm`**
 1. `[visitor · temple]` The benches are thinly filled. The rites survive as custom rather than conviction, and the custom is wearing.
 2. `[street · colour]` Faith here has become a formality. The forms are observed, and fewer people each season could say why.
-3. `[ledger · priest]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
+3. `[ledger · clergy]` {settlement} keeps the calendar and little else of the creed; the clergy preach to the same few households.
 
 **DEVOTION: `secular`**
 1. `[ledger · temple]` Devotion here is nearly gone. The building stands and the rites are performed, largely for the people who have always performed them.
@@ -4646,7 +4646,7 @@ reads what the panel renders. A page draws at most one of each.
 **ARC: `trend: rising`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_alignment`
 1. `[unfolding · colour]` Devotion is climbing, and the reason is plain enough: the town lives by the creed it professes, and the professing has followed the living.
 2. `[street · colour]` The tide is coming back in. Attendance has not caught up with belief yet (it rarely does), but it is moving.
-3. `[ledger · priest]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
+3. `[ledger · clergy]` The observance is gaining. What the clergy record is larger each time they record it, and nothing in the reckoning runs the other way.
 
 **ARC: `trend: falling`** · a cause clause is licensed ONLY where `piety.causes[]` carries `conduct_drift` or `clergy_distortion`
 1. `[unfolding · colour]` Devotion is ebbing. The town no longer lives as its creed asks, and the observance is following the conduct rather than correcting it.

@@ -46,8 +46,10 @@ const WAITING = Object.freeze([
   ['DS-FTH-3', 'STANDING: cult', /Its shrine is real/, 'sacredHouse', withFacts({ sacredHouse: false })],
   ['DS-FTH-3', 'NICHE: slots open', /Shrines stand unclaimed/, 'sacredHouse', withFacts({ sacredHouse: false })],
   ['DS-FTH-1', 'CULTS: cults[] present beneath the patron', /keep their own shrines/, 'sacredHouse', withFacts({ sacredHouse: false })],
-  ['DS-FTH-1', 'DEVOTION: lukewarm', /the clergy preach to the same few households/, 'priest', withFacts({ faith: { seniorCleric: null } })],
-  ['DS-FTH-1', 'ARC: trend: rising', /What the clergy record/, 'priest', withFacts({ faith: { seniorCleric: null } })],
+  // CENSUS-5e unit 3 (re-keyed by that cause, R-AE): the two "clergy" lines declare `clergy` (priest ∨
+  // sacredHouse, CENSUS-1h `712ac7694`), so they are refused only where neither a cleric nor a house stands.
+  ['DS-FTH-1', 'DEVOTION: lukewarm', /the clergy preach to the same few households/, 'clergy', withFacts({ faith: { seniorCleric: null }, sacredHouse: false })],
+  ['DS-FTH-1', 'ARC: trend: rising', /What the clergy record/, 'clergy', withFacts({ faith: { seniorCleric: null }, sacredHouse: false })],
   ['DS-FTH-3', 'PILGRIM SEASON: thin', /the town's inns are honest/, 'institution: tavern', noTavern],
 ]);
 
