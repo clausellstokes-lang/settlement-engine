@@ -1230,15 +1230,7 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
               ? stressOverrides.rel
               : isMerchant
                 ? stressOverrides.merchant
-                : null;
-        // CENSUS-1e unit 2 (Appendix B item 23, T): the override resolves through the one rule against
-        // CENSUS-4b's declarations (insurgency.mil `watch`, mass_migration.gov `migration: influx`,
-        // slave_revolt.merchant `market`), answered by the birth's facts (the roster, the tier and the
-        // stresses). A refused override is not applied: the NPC keeps its goal (no twin owed). Draw-free.
-        const override = looked ? resolveDeclared(looked, {
-          facts: () => birthFactsOf({ institutions, config, tier, stress: (config?.stressTypes?.length ? config.stressTypes : [stressType]).map((/** @type {unknown} */ type) => ({ type })) }),
-          poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${stressType}`, surface: 'npcs',
-        }).line : null;
+                : null; const override = looked ? resolveDeclared(looked, { facts: () => birthFactsOf({ institutions, config, tier, stress: (config?.stressTypes?.length ? config.stressTypes : [stressType]).map((/** @type {unknown} */ type) => ({ type })) }), poolId: `npcGenerator:STRESS_GOAL_OVERRIDES.${stressType}`, surface: 'npcs' }).line : null; // CENSUS-1e unit 2 (T): resolved against CENSUS-4b's declarations and the birth's facts (roster, tier, stresses); a refused override is not applied — the NPC keeps its goal (no twin owed). Draw-free.
         if (override) {
           const facts = factsOf({ institutions }); const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); enriched.goal = { short: spoken(override.short), long: enriched.goal.long || spoken(override.short) }; // F10, CENSUS-1c: NPC_GOAL_SIBLINGS below, draw-free
           if (override.note) enriched.stressNote = spoken(override.note);
