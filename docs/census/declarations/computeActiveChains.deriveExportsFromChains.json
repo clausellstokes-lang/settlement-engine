@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "THE LIVE suffix sites (this list is what economicState.primaryExports becomes at economicState.js :811-812). Stress set is config.stressTypes + config.intendedStressTypes (economicState.js :759) — wider than economicState's own suffix sites, which read stressTypes only. Order: transit suffix is applied BEFORE the stress map, so a transit good under siege/occupation carries TWO tags (\"X (transit) (taxed by occupation)\" — goodsCatalog.js :: preferTradeLabel comments on exactly this). Each suffix is to become a `kind` field (transit | naval-only | occupation-taxed)."
+    "notes": "THE LIVE suffix sites (this list is what economicState.primaryExports becomes at economicState.js :811-812). Stress set is config.stressTypes + config.intendedStressTypes (economicState.js :759) — wider than economicState's own suffix sites, which read stressTypes only. Order: transit suffix is applied BEFORE the stress map, so a transit good under siege/occupation carries TWO tags (\"X (transit) (taxed by occupation)\" — goodsCatalog.js :: preferTradeLabel comments on exactly this). Each suffix is to become a `kind` field (transit | naval-only | occupation-taxed).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -23,7 +25,7 @@
       "id": "computeActiveChains.deriveExportsFromChains::suffix.naval",
       "text": "${e} (naval route only)",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "crisis": [

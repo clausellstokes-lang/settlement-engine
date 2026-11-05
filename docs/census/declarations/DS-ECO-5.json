@@ -35,7 +35,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::VULNERABLE (canonical strained)",
@@ -69,7 +71,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::RUNNING (canonical stable): draw only with the note fields empty (R-DST-F)",
@@ -103,7 +107,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::ENTREPÔT",
@@ -137,7 +143,9 @@
           "colour": false,
           "notes": "unhomed: canal (\"the cut\"); presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::MAGICALLY SUSTAINED: a small prop (low magicRecovery)",
@@ -173,7 +181,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::MAGICALLY SUSTAINED: a large prop (high magicRecovery)",
@@ -209,7 +219,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-5::OPERATIONAL: the service economy (no line of supply behind it)",
@@ -243,7 +255,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

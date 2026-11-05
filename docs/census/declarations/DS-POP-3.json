@@ -35,7 +35,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-3::RISING-NARROW",
@@ -69,7 +71,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-3::LEVEL",
@@ -95,7 +99,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-3::FALLING-OPEN",
@@ -129,7 +135,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-3::FALLING-NARROW",
@@ -157,7 +165,9 @@
           "colour": false,
           "notes": "\"the town was always small enough\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

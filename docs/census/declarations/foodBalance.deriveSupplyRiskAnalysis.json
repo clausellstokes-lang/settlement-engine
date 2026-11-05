@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "One templated warning per terrain mustImport resource with a local processor (hasImportProcessor) and external supply. The seven hook strings in this function are the hook seat's (see summary hookStringLocations)."
+    "notes": "One templated warning per terrain mustImport resource with a local processor (hasImportProcessor) and external supply. The seven hook strings in this function are the hook seat's (see summary hookStringLocations).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

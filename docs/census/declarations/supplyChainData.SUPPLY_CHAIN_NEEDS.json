@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "11 needs → 74 chains. A chain row is drawn only when computeActiveChains activates it (processors present, minTier met, resource/substitute held); its tier atoms mirror minTier. Item rows (rawInputs/intermediateGoods/outputs/outputsByResource) are drawn inside an active chain: outputs and intermediates declare their PRODUCER atom; rawInputs declare only label-intrinsic atoms (terrain words, luxury band) since an input may be imported. need.color, processingInstitutions, services, upstreamChains, resourceSubstitutes are mechanics, not text."
+    "notes": "11 needs → 74 chains. A chain row is drawn only when computeActiveChains activates it (processors present, minTier met, resource/substitute held); its tier atoms mirror minTier. Item rows (rawInputs/intermediateGoods/outputs/outputsByResource) are drawn inside an active chain: outputs and intermediates declare their PRODUCER atom; rawInputs declare only label-intrinsic atoms (terrain words, luxury band) since an input may be imported. need.color, processingInstitutions, services, upstreamChains, resourceSubstitutes are mechanics, not text.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -73,7 +75,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[1]",
       "text": "Grain surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -84,7 +86,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[2]",
       "text": "Agricultural surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -95,7 +97,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[grain].outputs[3]",
       "text": "Bulk food exports",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -140,7 +142,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].intermediateGoods[0]",
       "text": "Livestock",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -151,7 +153,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[livestock].intermediateGoods[1]",
       "text": "Dairy products",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -198,7 +200,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[salt].rawInputs[0]",
       "text": "Sea salt",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -303,7 +305,7 @@
       "text": "Fishing & Seafood",
       "needs": [
         "tier: >= hamlet",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -321,7 +323,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].rawInputs[1]",
       "text": "River fish",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -331,7 +333,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].rawInputs[2]",
       "text": "Freshwater catch",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -341,7 +343,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].intermediateGoods[0]",
       "text": "Fresh fish",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -352,7 +354,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].intermediateGoods[1]",
       "text": "Gutted catch",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -363,7 +365,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[0]",
       "text": "Salted fish",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -374,8 +376,8 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[1]",
       "text": "Smoked seafood",
       "needs": [
-        "food-source: fish",
-        "water: coast"
+        "fish",
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -386,7 +388,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[2]",
       "text": "Fish oil",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -397,8 +399,8 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[fishing].outputs[3]",
       "text": "Freshwater catch",
       "needs": [
-        "food-source: fish",
-        "water: river"
+        "fish",
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -419,7 +421,7 @@
       "text": "River Fishing",
       "needs": [
         "tier: >= hamlet",
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -429,7 +431,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].rawInputs[0]",
       "text": "River fish",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -439,7 +441,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].rawInputs[1]",
       "text": "Freshwater catch",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -449,7 +451,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].intermediateGoods[0]",
       "text": "Fresh fish",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -460,8 +462,8 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[0]",
       "text": "River fish",
       "needs": [
-        "food-source: fish",
-        "water: river"
+        "fish",
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -472,8 +474,8 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[1]",
       "text": "Freshwater catch",
       "needs": [
-        "food-source: fish",
-        "water: river"
+        "fish",
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -484,7 +486,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[river_fishing].outputs[2]",
       "text": "Salted fish",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -538,7 +540,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].intermediateGoods[1]",
       "text": "Dressed game",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -549,7 +551,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[0]",
       "text": "Game meat",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -560,7 +562,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[1]",
       "text": "Furs and pelts",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -571,7 +573,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::food_security.chains[hunting].outputs[2]",
       "text": "Hunting trophies",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -1316,7 +1318,7 @@
       "text": "Boatbuilding & River Transport",
       "needs": [
         "tier: >= village",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1359,7 +1361,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].intermediateGoods[1]",
       "text": "Boat components",
       "needs": [
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1370,7 +1372,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[0]",
       "text": "River craft",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -1381,7 +1383,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[1]",
       "text": "Cargo barges",
       "needs": [
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1392,7 +1394,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[2]",
       "text": "Fishing boats",
       "needs": [
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1403,7 +1405,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[shipbuilding].outputs[3]",
       "text": "Ferries",
       "needs": [
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1740,7 +1742,7 @@
       "text": "Harbour and Maritime",
       "needs": [
         "tier: >= town",
-        "water: coast",
+        "coast",
         "institution: docks"
       ],
       "excludes": [],
@@ -1751,7 +1753,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[0]",
       "text": "Harbour capacity",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1761,7 +1763,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].rawInputs[1]",
       "text": "Dockside access",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1780,7 +1782,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].intermediateGoods[1]",
       "text": "Ship repair",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1800,7 +1802,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[1]",
       "text": "Ship construction",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1811,7 +1813,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[harbour_trade].outputs[2]",
       "text": "Vessel maintenance",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1823,7 +1825,7 @@
       "text": "Shipbuilding and Timber",
       "needs": [
         "tier: >= town",
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1858,7 +1860,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].intermediateGoods[1]",
       "text": "Ship timber",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1869,7 +1871,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[0]",
       "text": "Ocean-going vessels",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1880,7 +1882,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[1]",
       "text": "River barges",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -1891,7 +1893,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[coastal_shipbuilding].outputs[2]",
       "text": "Coastal craft",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -1903,7 +1905,7 @@
       "text": "River Mill Industry",
       "needs": [
         "tier: >= hamlet",
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -1921,7 +1923,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[river_milling].rawInputs[1]",
       "text": "Water power",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -1981,7 +1983,7 @@
       "text": "Floodplain Agriculture",
       "needs": [
         "tier: >= village",
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -1991,7 +1993,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].rawInputs[0]",
       "text": "Alluvial soil crops",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -2001,7 +2003,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].rawInputs[1]",
       "text": "Flood-fed grain",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -2011,7 +2013,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].intermediateGoods[0]",
       "text": "Grain surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -2022,7 +2024,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].intermediateGoods[1]",
       "text": "Diverse crops",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -2033,7 +2035,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[0]",
       "text": "Grain export",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -2044,7 +2046,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[1]",
       "text": "Agricultural produce",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -2055,7 +2057,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[floodplain_agriculture].outputs[2]",
       "text": "Surplus food",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -2182,7 +2184,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[0]",
       "text": "Raw wool",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -2193,7 +2195,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[1]",
       "text": "Alpine cheese",
       "needs": [
-        "food-source: livestock",
+        "livestock",
         "terrain: mountain"
       ],
       "excludes": [],
@@ -2205,7 +2207,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].intermediateGoods[2]",
       "text": "Mountain butter",
       "needs": [
-        "food-source: livestock",
+        "livestock",
         "terrain: mountain"
       ],
       "excludes": [],
@@ -2217,7 +2219,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[0]",
       "text": "Fine wool cloth",
       "needs": [
-        "food-source: livestock",
+        "livestock",
         "tier: >= village"
       ],
       "excludes": [],
@@ -2229,7 +2231,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[1]",
       "text": "Aged cheese",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -2240,7 +2242,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::raw_extraction.chains[alpine_wool].outputs[2]",
       "text": "Luxury dairy products",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -2551,7 +2553,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[textiles].intermediateGoods[1]",
       "text": "Raw wool and hides",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -2628,7 +2630,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[leather].intermediateGoods[0]",
       "text": "Raw wool and hides",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -2702,7 +2704,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::manufacturing.chains[food_processing].intermediateGoods[1]",
       "text": "Dairy products",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -3704,7 +3706,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].intermediateGoods[0]",
       "text": "Furs and pelts",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -3715,7 +3717,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::trade_entrepot.chains[furs_north].outputs[0]",
       "text": "Furs and pelts",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -5111,13 +5113,11 @@
     {
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[0]",
       "text": "Religious services",
-      "needs": [
-        "institution: temple|institution: monastery"
-      ],
+      "needs": [],
       "excludes": [],
       "colour": false,
       "kind": "output",
-      "notes": "disjunction within the institution dimension (§3.2)"
+      "notes": "disjunction within the institution dimension (§3.2) · undeclarable as written (institution: temple|institution: monastery): a disjunction the vocabulary cannot express; left undeclared (CENSUS-3b re-spell)"
     },
     {
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[parish].outputs[1]",
@@ -5259,13 +5259,11 @@
     {
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].outputs[0]",
       "text": "Religious services",
-      "needs": [
-        "institution: temple|institution: monastery"
-      ],
+      "needs": [],
       "excludes": [],
       "colour": false,
       "kind": "output",
-      "notes": "disjunction within the institution dimension (§3.2)"
+      "notes": "disjunction within the institution dimension (§3.2) · undeclarable as written (institution: temple|institution: monastery): a disjunction the vocabulary cannot express; left undeclared (CENSUS-3b re-spell)"
     },
     {
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::religion_civic.chains[pilgrimage].outputs[1]",
@@ -5485,7 +5483,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].label",
       "text": "Smuggling & Contraband",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5511,7 +5509,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].intermediateGoods[0]",
       "text": "Contraband goods",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5522,7 +5520,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[0]",
       "text": "Contraband goods",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5533,7 +5531,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[1]",
       "text": "Import/export bypass",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5544,7 +5542,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[smuggling].outputs[2]",
       "text": "Safe houses",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5555,7 +5553,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].label",
       "text": "Black market",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5565,7 +5563,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[0]",
       "text": "Contraband goods",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5576,7 +5574,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[1]",
       "text": "Forged documents",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5587,7 +5585,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[2]",
       "text": "Fencing stolen goods",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5598,7 +5596,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[black_market].outputs[3]",
       "text": "Illegal services",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5610,7 +5608,7 @@
       "text": "Organised Crime",
       "needs": [
         "tier: >= town",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5629,7 +5627,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[1]",
       "text": "Guild protection",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5640,7 +5638,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[2]",
       "text": "Contract killing",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5651,7 +5649,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[3]",
       "text": "Intimidation services",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -5662,7 +5660,7 @@
       "id": "supplyChainData.SUPPLY_CHAIN_NEEDS::criminal_economy.chains[guild_crime].outputs[4]",
       "text": "Comprehensive black market",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,

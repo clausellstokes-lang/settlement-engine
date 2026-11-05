@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Structural/priority checks. Every institution test is a private substring over the RAW roster (nativeSemanticNames), so presumptions are declared with the vocabulary reader. priorityNote templates (dial numbers) not annotated. Crisis-scoped: \"Locally Sustained Isolation\" asserts viability and prints under any crisis."
+    "notes": "Structural/priority checks. Every institution test is a private substring over the RAW roster (nativeSemanticNames), so presumptions are declared with the vocabulary reader. priorityNote templates (dial numbers) not annotated. Crisis-scoped: \"Locally Sustained Isolation\" asserts viability and prints under any crisis.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -460,7 +462,7 @@
       "text": "High Crime Priority: No Criminal or Guard Institutions",
       "needs": [],
       "excludes": [
-        "crime",
+        "organised crime",
         "watch",
         "garrison"
       ],
@@ -473,7 +475,7 @@
       "text": "Criminal slider is high but neither criminal organisations nor guard infrastructure are pr",
       "needs": [],
       "excludes": [
-        "crime",
+        "organised crime",
         "watch",
         "garrison"
       ],
@@ -495,7 +497,7 @@
       "text": "Add Thieves' Guild, Black Market, or City Watch",
       "needs": [],
       "excludes": [
-        "crime",
+        "organised crime",
         "watch"
       ],
       "crisis": "any",

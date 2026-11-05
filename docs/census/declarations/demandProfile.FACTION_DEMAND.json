@@ -8,7 +8,9 @@
     ],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Whole-list IMPORT pool; each qualifying faction (power >= 8, by power) contributes its FIRST unsuppressed good (CHAIN_SUPPRESSES by active chain id). tier >= village is guaranteed by TIER_DEMAND_BUDGET (thorp/hamlet budget 0). Culture is the caller's culture string with a latin fallback, so culture is declared per row (except latin). Faction category presence: unhomed: faction category government (powerStructure.factions[].category, power >= 8); unhomed: faction category economy (merchant/guild faction, power >= 8); unhomed: faction category military (power >= 8); unhomed: faction category religious (power >= 8); faction category magic declared as \"magic\" (magic functions); the faction itself is unhomed; faction category criminal declared as \"crime\" (deriveCriminalStructure non-null — a DIFFERENT reader from the faction roster; confirm with chair). Producers are elsewhere (imports) and not declared. Line 189's government/isGoverning ternary is a no-op (both arms 'government')."
+    "notes": "Whole-list IMPORT pool; each qualifying faction (power >= 8, by power) contributes its FIRST unsuppressed good (CHAIN_SUPPRESSES by active chain id). tier >= village is guaranteed by TIER_DEMAND_BUDGET (thorp/hamlet budget 0). Culture is the caller's culture string with a latin fallback, so culture is declared per row (except latin). Faction category presence: unhomed: faction category government (powerStructure.factions[].category, power >= 8); unhomed: faction category economy (merchant/guild faction, power >= 8); unhomed: faction category military (power >= 8); unhomed: faction category religious (power >= 8); faction category magic declared as \"magic\" (magic functions); the faction itself is unhomed; faction category criminal declared as \"crime\" (deriveCriminalStructure non-null — a DIFFERENT reader from the faction roster; confirm with chair). Producers are elsewhere (imports) and not declared. Line 189's government/isGoverning ternary is a no-op (both arms 'government').",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -499,7 +501,7 @@
       "text": "Rope and sailcloth",
       "needs": [
         "culture: norse",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -1840,7 +1842,7 @@
       "text": "Undeclared luxury silk",
       "needs": [
         "culture: arabic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1852,7 +1854,7 @@
       "text": "Stolen spice shipments",
       "needs": [
         "culture: arabic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1864,7 +1866,7 @@
       "text": "Forged bills of trade",
       "needs": [
         "culture: arabic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1876,7 +1878,7 @@
       "text": "Smuggled jade and gems",
       "needs": [
         "culture: east_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1888,7 +1890,7 @@
       "text": "Opium and exotic narcotics",
       "needs": [
         "culture: east_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1900,7 +1902,7 @@
       "text": "Forged imperial seals",
       "needs": [
         "culture: east_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1911,7 +1913,7 @@
       "id": "demandProfile.FACTION_DEMAND::criminal.latin.0",
       "text": "Stolen silver plate",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1922,7 +1924,7 @@
       "id": "demandProfile.FACTION_DEMAND::criminal.latin.1",
       "text": "Undeclared wine and oil",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1933,7 +1935,7 @@
       "id": "demandProfile.FACTION_DEMAND::criminal.latin.2",
       "text": "Forged land titles",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1945,7 +1947,7 @@
       "text": "Stolen mail and weapons",
       "needs": [
         "culture: germanic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1957,7 +1959,7 @@
       "text": "Undeclared furs and amber",
       "needs": [
         "culture: germanic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1969,7 +1971,7 @@
       "text": "Counterfeit coinage",
       "needs": [
         "culture: germanic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1981,7 +1983,7 @@
       "text": "Stolen silver and hack-silver",
       "needs": [
         "culture: norse",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -1993,7 +1995,7 @@
       "text": "Undeclared furs",
       "needs": [
         "culture: norse",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2005,7 +2007,7 @@
       "text": "Enslaved captives",
       "needs": [
         "culture: norse",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2017,7 +2019,7 @@
       "text": "Stolen bronze work",
       "needs": [
         "culture: celtic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2029,7 +2031,7 @@
       "text": "Undeclared cattle",
       "needs": [
         "culture: celtic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2041,7 +2043,7 @@
       "text": "Forged clan markers",
       "needs": [
         "culture: celtic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2053,7 +2055,7 @@
       "text": "Stolen furs and amber",
       "needs": [
         "culture: slavic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2065,7 +2067,7 @@
       "text": "Forged documents",
       "needs": [
         "culture: slavic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2077,7 +2079,7 @@
       "text": "Undeclared silver",
       "needs": [
         "culture: slavic",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2089,7 +2091,7 @@
       "text": "Stolen horses",
       "needs": [
         "culture: steppe",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2101,7 +2103,7 @@
       "text": "Undeclared slaves",
       "needs": [
         "culture: steppe",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2113,7 +2115,7 @@
       "text": "Contraband silk and spice",
       "needs": [
         "culture: steppe",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2125,7 +2127,7 @@
       "text": "Stolen gems and spices",
       "needs": [
         "culture: south_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2137,7 +2139,7 @@
       "text": "Opium and contraband",
       "needs": [
         "culture: south_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2149,7 +2151,7 @@
       "text": "Forged merchant writs",
       "needs": [
         "culture: south_asian",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2161,7 +2163,7 @@
       "text": "Stolen silver",
       "needs": [
         "culture: greek",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2173,7 +2175,7 @@
       "text": "Undeclared olive oil",
       "needs": [
         "culture: greek",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2185,7 +2187,7 @@
       "text": "Forged citizenship documents",
       "needs": [
         "culture: greek",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2197,7 +2199,7 @@
       "text": "Stolen jade and cacao",
       "needs": [
         "culture: mesoamerican",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2209,7 +2211,7 @@
       "text": "Contraband obsidian",
       "needs": [
         "culture: mesoamerican",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,
@@ -2221,7 +2223,7 @@
       "text": "Forged tribute records",
       "needs": [
         "culture: mesoamerican",
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "colour": false,

@@ -6,14 +6,16 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Analysis lines + suggestedFixes (key suffix ::fix.N). plotHooks are NOT annotated (hook seat). The deficit branches read the canonical food record (deficitPercent vs FOOD_SECURITY_CUTS) — close to the food-band reader, declared. \"grain\" is spoken as the staple in every dependency line: unhomed: staple = grain (a fish/herd place is told of grain). Crisis-scoped: \"Agricultural Surplus\", \"manageable\", \"becomes a famine\"/\"famine risk\" carry calm-type claims. Stress notes: foodBalance.deriveFoodBalanceAnalysis.stressNotes.json."
+    "notes": "Analysis lines + suggestedFixes (key suffix ::fix.N). plotHooks are NOT annotated (hook seat). The deficit branches read the canonical food record (deficitPercent vs FOOD_SECURITY_CUTS) — close to the food-band reader, declared. \"grain\" is spoken as the staple in every dependency line: unhomed: staple = grain (a fish/herd place is told of grain). Crisis-scoped: \"Agricultural Surplus\", \"manageable\", \"becomes a famine\"/\"famine risk\" carry calm-type claims. Stress notes: foodBalance.deriveFoodBalanceAnalysis.stressNotes.json.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
       "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.title",
       "text": "Uncovered Local Food Deficit",
       "needs": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "excludes": [],
       "crisis": "any",
@@ -24,7 +26,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.desc",
       "text": "Settlement cannot cover ~${deficit} lbs of food per day (${pct}% of needs) and has no depe",
       "needs": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "excludes": [],
       "crisis": "any",
@@ -35,7 +37,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.severe.impact",
       "text": "The current population cannot survive this provisioning gap without a new support path.",
       "needs": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "excludes": [],
       "crisis": "any",
@@ -185,7 +187,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis::uncovered.mild.desc",
       "text": "Settlement cannot cover ~${deficit} lbs of food per day (${pct}% of needs) and has no depe",
       "needs": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "excludes": [],
       "crisis": "any",
@@ -295,7 +297,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis::surplus.fix.0",
       "text": "Add merchants to export surplus grain",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [
         "market"
@@ -383,7 +385,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis::no_mill.desc",
       "text": "Settlement of ${population} people processes grain without a mill.",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [
         "institution: mill"

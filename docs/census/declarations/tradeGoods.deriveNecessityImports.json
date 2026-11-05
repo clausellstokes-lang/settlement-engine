@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Inline branches; each label is an IMPORT. Pool-wide guarantee: route != isolated (early return). The branches read institution NAMES by private substring (smith/metalwork/farm/granar/carpenter/sawmill), not factsOf(r).hasInstitution, so the institution presumption is declared on the row. Merged into economicState.necessityImports, then into deriveImportsFromChains (survives the stage-7 override)."
+    "notes": "Inline branches; each label is an IMPORT. Pool-wide guarantee: route != isolated (early return). The branches read institution NAMES by private substring (smith/metalwork/farm/granar/carpenter/sawmill), not factsOf(r).hasInstitution, so the institution presumption is declared on the row. Merged into economicState.necessityImports, then into deriveImportsFromChains (survives the stage-7 override).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -34,7 +36,7 @@
       "text": "Grain",
       "needs": [],
       "excludes": [
-        "food-source: grain"
+        "grain"
       ],
       "colour": false,
       "kind": "import",

@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "INCOME rows. Branches read institution NAMES by private substring (hasInst/hasInstNamed) and the raw roster (getInstFlags, stamped once — the ⛔ note at :52), so presumptions are declared with the vocabulary reader. Crisis-scoped because \"Grain Sales\" (local) and \"Pilgrim Trade\" assert surplus/traffic and are gated on no crisis; every other row declares \"any\". Entrepot/International Commerce bonus rows live in tradeGoods.deriveIsEntrepot.json."
+    "notes": "INCOME rows. Branches read institution NAMES by private substring (hasInst/hasInstNamed) and the raw roster (getInstFlags, stamped once — the ⛔ note at :52), so presumptions are declared with the vocabulary reader. Crisis-scoped because \"Grain Sales\" (local) and \"Pilgrim Trade\" assert surplus/traffic and are gated on no crisis; every other row declares \"any\". Entrepot/International Commerce bonus rows live in tradeGoods.deriveIsEntrepot.json.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -130,7 +132,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::port_duties",
       "text": "Import and export taxes, anchorage fees, and customs inspection on all cargo.",
       "needs": [
-        "water: coast",
+        "coast",
         "institution: docks"
       ],
       "excludes": [],
@@ -143,7 +145,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::river_tolls",
       "text": "Tolls on river traffic, dock fees, and ferry rights.",
       "needs": [
-        "water: river",
+        "river",
         "institution: docks"
       ],
       "excludes": [],
@@ -382,7 +384,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.label.syndicate",
       "text": "Criminal Syndicate Revenue",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -394,7 +396,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.label.thieves_guild",
       "text": "Thieves' Guild Revenue",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -406,7 +408,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.label.smuggling",
       "text": "Smuggling Network Revenue",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -418,7 +420,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.label.shadow",
       "text": "Shadow Economy (untaxed)",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -430,7 +432,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.label.black_market",
       "text": "Black Market Revenue",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -442,7 +444,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::criminal.desc",
       "text": "An estimated ${bmc}% of economic activity flows through unofficial channels: ${...}. This ",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": "any",
@@ -466,7 +468,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::grain_sales.local",
       "text": "Surplus from local harvest sold to nearby settlements and passing merchants: steady income",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "crisis": "calm",
@@ -488,7 +490,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::wool.local",
       "text": "Local flocks provide raw wool; weavers and fullers convert it to cloth sold across the reg",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "crisis": "any",
@@ -556,8 +558,8 @@
       "id": "economicState.generateEconomicState.incomeBuild::fish.source.maritime",
       "text": "Fish & Maritime Produce",
       "needs": [
-        "water: coast",
-        "food-source: fish"
+        "coast",
+        "fish"
       ],
       "excludes": [],
       "crisis": "any",
@@ -569,7 +571,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::fish.source.preserved",
       "text": "Fish & Preserved Produce",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "crisis": "any",
@@ -581,7 +583,7 @@
       "id": "economicState.generateEconomicState.incomeBuild::fish.desc",
       "text": "Catch landed and sold fresh or preserved; salt fish are a major regional export commodity.",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "crisis": "any",

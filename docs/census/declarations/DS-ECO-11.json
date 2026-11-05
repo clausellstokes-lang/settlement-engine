@@ -17,7 +17,7 @@
           "id": "DS-ECO-11::TERRAIN: Coastal::v1",
           "text": "{settlement} keeps its back to the land and its face to the water, and everything the town",
           "needs": [
-            "water: coast"
+            "coast"
           ],
           "excludes": [],
           "colour": false,
@@ -27,7 +27,7 @@
           "id": "DS-ECO-11::TERRAIN: Coastal::v2",
           "text": "The ground here gives less than the water does; what {settlement} counts as its own produc",
           "needs": [
-            "food-source: fish"
+            "fish"
           ],
           "excludes": [],
           "colour": false,
@@ -37,13 +37,15 @@
           "id": "DS-ECO-11::TERRAIN: Coastal::v3",
           "text": "The weather that matters in this town is the weather out at sea, and everybody watches it ",
           "needs": [
-            "water: coast"
+            "coast"
           ],
           "excludes": [],
           "colour": false,
           "notes": "\"the weather out at sea\"; \"whether or not they sail\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Plains",
@@ -59,7 +61,7 @@
           "id": "DS-ECO-11::TERRAIN: Plains::v1",
           "text": "{settlement} sits on ground that grows things without argument, and the town's whole arran",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -69,7 +71,7 @@
           "id": "DS-ECO-11::TERRAIN: Plains::v2",
           "text": "The country around {settlement} is open in every direction: good for a plough, good for a ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -79,13 +81,15 @@
           "id": "DS-ECO-11::TERRAIN: Plains::v3",
           "text": "There is nothing between this town and the horizon but what the town has planted, and the ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
           "notes": "\"what the town has planted\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Forest",
@@ -101,8 +105,8 @@
           "id": "DS-ECO-11::TERRAIN: Forest::v1",
           "text": "The timber and what lives in it are {settlement}'s standing wealth; the fields here are cl",
           "needs": [
-            "food-source: game",
-            "food-source: grain"
+            "game",
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -126,7 +130,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Hills",
@@ -142,7 +148,7 @@
           "id": "DS-ECO-11::TERRAIN: Hills::v1",
           "text": "{settlement} works ground that rises: small fields, hard carting, and whatever the slopes ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -164,7 +170,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Mountains",
@@ -200,7 +208,9 @@
           "colour": false,
           "notes": "\"dig out of the mountain\" — presumes institution: mine|quarry (disjunction, not declared)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: River",
@@ -216,8 +226,8 @@
           "id": "DS-ECO-11::TERRAIN: River::v1",
           "text": "The water is {settlement}'s road and its mill both, and the town's earnings divide along i",
           "needs": [
-            "water: river",
-            "water: navigable",
+            "river",
+            "navigable",
             "institution: mill"
           ],
           "excludes": [],
@@ -228,7 +238,7 @@
           "id": "DS-ECO-11::TERRAIN: River::v2",
           "text": "{settlement} is arranged lengthwise on its water, and a stranger meets the town by walking",
           "needs": [
-            "water: river"
+            "river"
           ],
           "excludes": [],
           "colour": false,
@@ -238,14 +248,16 @@
           "id": "DS-ECO-11::TERRAIN: River::v3",
           "text": "The river decides what this town can move and when, and nobody here treats that as a hards",
           "needs": [
-            "water: river",
-            "water: navigable"
+            "river",
+            "navigable"
           ],
           "excludes": [],
           "colour": false,
           "notes": "\"The river decides what this town can move\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Desert",
@@ -281,7 +293,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Swamp",
@@ -315,7 +329,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: Tundra",
@@ -349,7 +365,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::TERRAIN: anything else (the default accent)",
@@ -383,7 +401,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::ECONOMIC STRENGTHS: the roster is populated",
@@ -417,7 +437,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::ECONOMIC STRENGTHS: none recorded",
@@ -451,7 +473,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::STRATEGIC VALUE: the generator's assessment, framed",
@@ -485,7 +509,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: high",
@@ -527,7 +553,9 @@
           "colour": false,
           "notes": "\"what the town lacks is not the ground\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::EXPLOITATION: unexploited, exportValue: medium or low",
@@ -561,7 +589,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::EXPLOITATION: partiallyExploited",
@@ -603,7 +633,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-11::EXPLOITATION: fullyExploited",
@@ -639,7 +671,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

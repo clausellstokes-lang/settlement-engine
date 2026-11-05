@@ -6,14 +6,16 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Key-guaranteed: the resource is held (and its terrainRequired/forbidden route gates already applied by resourceTerrainCompatibility.js). label+desc rows are descriptive (colour); warning rows fire when the ROUTE is forbidden, so they declare the route they fire on. tradeGoods declare their producer atom. STRENGTHS: the Resources tab's \"Economic strengths\" (to be relabelled \"What the land offers\") is fed by geographyData.js :: <terrain>.economicStrengths via resourceGenerator.js:500 (terrain.economicStrengths) — NO RESOURCE_DATA field feeds it, so nothing here is declared for that use. commodities/instBoosts/forbidden/terrainRequired/category are mechanics, not text."
+    "notes": "Key-guaranteed: the resource is held (and its terrainRequired/forbidden route gates already applied by resourceTerrainCompatibility.js). label+desc rows are descriptive (colour); warning rows fire when the ROUTE is forbidden, so they declare the route they fire on. tradeGoods declare their producer atom. STRENGTHS: the Resources tab's \"Economic strengths\" (to be relabelled \"What the land offers\") is fed by geographyData.js :: <terrain>.economicStrengths via resourceGenerator.js:500 (terrain.economicStrengths) — NO RESOURCE_DATA field feeds it, so nothing here is declared for that use. commodities/instBoosts/forbidden/terrainRequired/category are mechanics, not text.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
       "id": "resourceData.RESOURCE_DATA::fishing_grounds.desc",
       "text": "Fishing Grounds: Deep-water or reef fishing close to shore; reliable fish and seafood supp",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": true,
@@ -33,7 +35,7 @@
       "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[0]",
       "text": "Salted fish",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -44,8 +46,8 @@
       "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[1]",
       "text": "Smoked seafood",
       "needs": [
-        "food-source: fish",
-        "water: coast"
+        "fish",
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -56,7 +58,7 @@
       "id": "resourceData.RESOURCE_DATA::fishing_grounds.tradeGoods[2]",
       "text": "Fish oil",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -75,7 +77,7 @@
       "id": "resourceData.RESOURCE_DATA::salt_flats.tradeGoods[0]",
       "text": "Sea salt",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -85,10 +87,14 @@
     {
       "id": "resourceData.RESOURCE_DATA::salt_flats.tradeGoods[1]",
       "text": "Salt for preservation",
-      "needs": [
-        "terrain: coastal|desert"
+      "needs": [],
+      "excludes": [
+        "terrain: plains",
+        "terrain: hills",
+        "terrain: forest",
+        "terrain: riverside",
+        "terrain: mountain"
       ],
-      "excludes": [],
       "colour": false,
       "kind": "export",
       "notes": "unhomed: salt works"
@@ -97,7 +103,7 @@
       "id": "resourceData.RESOURCE_DATA::deep_harbour.desc",
       "text": "Deep Natural Harbour: A sheltered deepwater anchorage capable of hosting large vessels",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": true,
@@ -117,7 +123,7 @@
       "id": "resourceData.RESOURCE_DATA::deep_harbour.tradeGoods[0]",
       "text": "Ship passage",
       "needs": [
-        "water: coast",
+        "coast",
         "institution: docks"
       ],
       "excludes": [],
@@ -129,7 +135,7 @@
       "id": "resourceData.RESOURCE_DATA::deep_harbour.tradeGoods[1]",
       "text": "Maritime trade access",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -140,7 +146,7 @@
       "id": "resourceData.RESOURCE_DATA::shipbuilding_timber.desc",
       "text": "Coastal Timber: Dense timber stands near the coast suitable for shipbuilding and construct",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": true,
@@ -150,7 +156,7 @@
       "id": "resourceData.RESOURCE_DATA::shipbuilding_timber.tradeGoods[0]",
       "text": "Shipbuilding timber",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,
@@ -170,7 +176,7 @@
       "id": "resourceData.RESOURCE_DATA::river_mills.desc",
       "text": "Mill Sites: Fast-flowing sections ideal for water-powered mills; grain and textile process",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": true,
@@ -212,7 +218,7 @@
       "id": "resourceData.RESOURCE_DATA::river_mills.tradeGoods[2]",
       "text": "Fulled cloth",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -223,7 +229,7 @@
       "id": "resourceData.RESOURCE_DATA::river_clay.desc",
       "text": "Clay Deposits: Rich riverbank clay deposits suitable for brickmaking and pottery",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": true,
@@ -260,7 +266,7 @@
       "id": "resourceData.RESOURCE_DATA::fertile_floodplain.desc",
       "text": "Fertile Floodplain: Annual flooding renews soil nutrients; exceptionally productive farmla",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": true,
@@ -280,7 +286,7 @@
       "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[0]",
       "text": "Grain surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -291,7 +297,7 @@
       "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[1]",
       "text": "Agricultural surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -302,7 +308,7 @@
       "id": "resourceData.RESOURCE_DATA::fertile_floodplain.tradeGoods[2]",
       "text": "Livestock",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -313,7 +319,7 @@
       "id": "resourceData.RESOURCE_DATA::river_fish.desc",
       "text": "River Fisheries: Salmon runs, freshwater fish, and fishing weirs in the river",
       "needs": [
-        "water: river"
+        "river"
       ],
       "excludes": [],
       "colour": true,
@@ -322,10 +328,13 @@
     {
       "id": "resourceData.RESOURCE_DATA::river_fish.warning",
       "text": "River fisheries require river access.",
-      "needs": [
-        "route: isolated|port"
+      "needs": [],
+      "excludes": [
+        "route: road",
+        "route: river",
+        "route: crossroads",
+        "route: mountain_pass"
       ],
-      "excludes": [],
       "colour": false,
       "notes": "fires on forbidden routes isolated/port"
     },
@@ -333,8 +342,8 @@
       "id": "resourceData.RESOURCE_DATA::river_fish.tradeGoods[0]",
       "text": "River fish",
       "needs": [
-        "food-source: fish",
-        "water: river"
+        "fish",
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -345,8 +354,8 @@
       "id": "resourceData.RESOURCE_DATA::river_fish.tradeGoods[1]",
       "text": "Freshwater catch",
       "needs": [
-        "food-source: fish",
-        "water: river"
+        "fish",
+        "river"
       ],
       "excludes": [],
       "colour": false,
@@ -367,7 +376,7 @@
       "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[0]",
       "text": "Furs and pelts",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -378,7 +387,7 @@
       "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[1]",
       "text": "Game meat",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -389,7 +398,7 @@
       "id": "resourceData.RESOURCE_DATA::hunting_grounds.tradeGoods[2]",
       "text": "Hunting trophies",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -506,7 +515,7 @@
       "id": "resourceData.RESOURCE_DATA::grain_fields.tradeGoods[0]",
       "text": "Grain surplus",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -528,7 +537,7 @@
       "id": "resourceData.RESOURCE_DATA::grain_fields.tradeGoods[2]",
       "text": "Bulk food exports",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -547,7 +556,7 @@
       "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[0]",
       "text": "Raw wool",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -558,7 +567,7 @@
       "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[1]",
       "text": "Livestock",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -569,7 +578,7 @@
       "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[2]",
       "text": "Dairy products",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -580,7 +589,7 @@
       "id": "resourceData.RESOURCE_DATA::grazing_land.tradeGoods[3]",
       "text": "Leather goods",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -600,10 +609,12 @@
     {
       "id": "resourceData.RESOURCE_DATA::crossroads_position.warning",
       "text": "A crossroads position requires crossroads trade access.",
-      "needs": [
-        "route: isolated|port|river"
+      "needs": [],
+      "excludes": [
+        "route: road",
+        "route: crossroads",
+        "route: mountain_pass"
       ],
-      "excludes": [],
       "colour": false,
       "notes": "fires on forbidden routes isolated/port/river"
     },
@@ -861,7 +872,7 @@
       "id": "resourceData.RESOURCE_DATA::magical_node.desc",
       "text": "Magical Ley Line Node: Intersection of magical energy; draws practitioners and makes ritua",
       "needs": [
-        "magic: >= low"
+        "magic level: ≥ low"
       ],
       "excludes": [],
       "colour": true,
@@ -972,10 +983,14 @@
       "id": "resourceData.RESOURCE_DATA::oasis_water.warning",
       "text": "Oasis water: settlement depends on sustained water access",
       "needs": [
-        "terrain: desert",
-        "route: port|river"
+        "terrain: desert"
       ],
-      "excludes": [],
+      "excludes": [
+        "route: road",
+        "route: crossroads",
+        "route: isolated",
+        "route: mountain_pass"
+      ],
       "colour": false,
       "notes": "fires on forbidden routes port/river"
     },
@@ -1188,7 +1203,7 @@
       "text": "Raw wool",
       "needs": [
         "terrain: mountain",
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -1200,7 +1215,7 @@
       "text": "Mountain cheese",
       "needs": [
         "terrain: mountain",
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -1212,7 +1227,7 @@
       "text": "Live sheep",
       "needs": [
         "terrain: mountain",
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,

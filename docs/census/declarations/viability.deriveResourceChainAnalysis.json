@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Resource-chain suggestions; processors named are tier-plausible catalog names (institutionDisplayName). The resource is unhomed (nearby resource). "
+    "notes": "Resource-chain suggestions; processors named are tier-plausible catalog names (institutionDisplayName). The resource is unhomed (nearby resource). ",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "The headline sentence. The last arm asserts self-sufficiency and prints under any crisis that files no critical issue/dependency (e.g. plague, occupation, succession)."
+    "notes": "The headline sentence. The last arm asserts self-sufficiency and prints under any crisis that files no critical issue/dependency (e.g. plague, occupation, succession).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -40,7 +42,7 @@
       "id": "viability.buildViabilitySummary::viable.strain",
       "text": "△ VIABLE WITH PROVISIONING STRAIN: ${pct}% of daily food need remains uncovered.",
       "needs": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "excludes": [],
       "crisis": "any",

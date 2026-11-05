@@ -7,7 +7,7 @@
       "id": "DS-ECO-2::FOOD: deficit",
       "pool": true,
       "declares": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "crisisScoped": false,
       "colour": false,
@@ -25,7 +25,7 @@
           "id": "DS-ECO-2::FOOD: deficit::v2",
           "text": "Bread here is bought, not simply had. The fields do not cover the town and everyone knows ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -36,13 +36,15 @@
           "text": "The granary doors open more often than they shut, and what comes out is not what the field",
           "needs": [
             "institution: granary",
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
           "notes": "\"granary doors\"; \"what the fields put in\"; unhomed: imports"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::FOOD: surplus",
@@ -65,7 +67,7 @@
           "id": "DS-ECO-2::FOOD: surplus::v2",
           "text": "The talk about food here is about price, not about enough. The fields have been good to th",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "crisis": "calm",
@@ -81,7 +83,9 @@
           "colour": false,
           "notes": "\"loaded carts leaving\" — unhomed: food exports; false under siege"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::FOOD: balanced",
@@ -113,14 +117,16 @@
           "id": "DS-ECO-2::FOOD: balanced::v3",
           "text": "{settlement} sits level on food. The fields answer the town and no further, so a single fa",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "crisis": "any",
           "colour": false,
           "notes": "\"The fields answer the town\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::GRANARY: well stocked",
@@ -163,7 +169,9 @@
           "colour": false,
           "notes": "\"a town that plainly expects to stay that way\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::GRANARY: stocked",
@@ -203,7 +211,9 @@
           "colour": false,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::GRANARY: thin",
@@ -241,7 +251,9 @@
           "colour": true,
           "notes": "\"the town's whole immediate problem\" — crisis-blind (would understate a siege), not declared"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-2::GRANARY: nearly empty",
@@ -281,7 +293,9 @@
           "colour": false,
           "notes": "season slot: \"{season} has not turned\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

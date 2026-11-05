@@ -8,7 +8,9 @@
   ],
   "crisisScoped": false,
   "colour": false,
-  "notes": "drawn by historyGenerator fill/timeline loops (content-dependent roll counts, §2.2): phase B resolves after the draw. The events hooks print on Plot Hooks (History Event) and are stored (record hooks)."
+  "notes": "drawn by historyGenerator fill/timeline loops (content-dependent roll counts, §2.2): phase B resolves after the draw. The events hooks print on Plot Hooks (History Event) and are stored (record hooks).",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -166,7 +168,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::crime_wave#1",
    "text": "A guard captain is on the payroll of the criminal network",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -337,7 +339,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#0",
    "text": "The newcomers fled something, and that something has sent agents after them",
    "needs": [
-    "migration: in"
+    "migration: influx"
    ],
    "excludes": [],
    "colour": false
@@ -346,7 +348,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#1",
    "text": "A series of 'accidents' targeting newcomers is being attributed to chance",
    "needs": [
-    "migration: in"
+    "migration: influx"
    ],
    "excludes": [],
    "colour": false
@@ -355,7 +357,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::population_friction#2",
    "text": "An old family is deliberately inflaming tensions to drive out a newcomer who knows something",
    "needs": [
-    "migration: in"
+    "migration: influx"
    ],
    "excludes": [],
    "colour": false
@@ -479,7 +481,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::great_flood#1",
    "text": "A structure meant to hold back the water had been quietly left to rot, and someone knew",
    "needs": [
-    "water: navigable"
+    "navigable"
    ],
    "excludes": [],
    "colour": false,
@@ -489,7 +491,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::great_flood#2",
    "text": "The flood exposed a foundation, a wreck, or a cache that had been submerged for lifetimes",
    "needs": [
-    "water: navigable"
+    "navigable"
    ],
    "excludes": [],
    "colour": false,
@@ -639,7 +641,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#0",
    "text": "The relief meant for the newcomers is being skimmed, and the shortfall is being blamed on the newcomers",
    "needs": [
-    "migration: in"
+    "migration: influx"
    ],
    "excludes": [],
    "colour": false,
@@ -649,7 +651,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#1",
    "text": "An old family is quietly buying the properties the departed left behind, before anyone can return to claim ...",
    "needs": [
-    "migration: out"
+    "migration: exodus"
    ],
    "excludes": [],
    "colour": false,
@@ -659,7 +661,7 @@
    "id": "hooks.HISTORY_EVENT_HOOKS::demographic_pressure#2",
    "text": "The newcomers fled something, and that something has followed them here",
    "needs": [
-    "migration: in"
+    "migration: influx"
    ],
    "excludes": [],
    "colour": false

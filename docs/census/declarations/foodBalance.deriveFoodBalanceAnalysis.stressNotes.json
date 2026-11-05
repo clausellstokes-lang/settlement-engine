@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Each note is printed only under its own crisis (config.stressTypes); the crisis is declared on the row. \"Kept byte-identical to foodGenerator.js's production block\" — a second copy of these lines lives there (not in this seat's manifest)."
+    "notes": "Each note is printed only under its own crisis (config.stressTypes); the crisis is declared on the row. \"Kept byte-identical to foodGenerator.js's production block\" — a second copy of these lines lives there (not in this seat's manifest).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -24,7 +26,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::famine.fallback",
       "text": "Famine: crop failure has reduced local food production to 35% of normal capacity.",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "crisis": [
@@ -92,7 +94,7 @@
       "id": "foodBalance.deriveFoodBalanceAnalysis.stressNotes::mass_migration",
       "text": "Mass migration: an influx of newcomers stresses the food balance beyond normal needs.",
       "needs": [
-        "migration: in"
+        "migration: influx"
       ],
       "excludes": [],
       "crisis": [

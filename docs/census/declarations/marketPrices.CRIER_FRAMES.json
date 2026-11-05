@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Hash-modulus selection (fnv1a32(`${id}::${tag}`) % 4). The tag (dear/cheap) is the key, guaranteed. Every frame is a market crier's call; deriveMarketPrices runs for any place with resolvable exports/imports, market or not, so each frame declares \"market\". The causal {receipt} carries the crisis claim (marketPrices.causalReceipt.json)."
+    "notes": "Hash-modulus selection (fnv1a32(`${id}::${tag}`) % 4). The tag (dear/cheap) is the key, guaranteed. Every frame is a market crier's call; deriveMarketPrices runs for any place with resolvable exports/imports, market or not, so each frame declares \"market\". The causal {receipt} carries the crisis claim (marketPrices.causalReceipt.json).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

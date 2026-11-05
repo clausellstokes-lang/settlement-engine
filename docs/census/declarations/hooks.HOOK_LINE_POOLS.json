@@ -9,7 +9,9 @@
   ],
   "crisisScoped": false,
   "colour": false,
-  "notes": "createConflictHookDraw (fnv, without replacement per family); foodGapHookLine (fnv). The house voice already claims no building, force or spell; one line names guards."
+  "notes": "createConflictHookDraw (fnv, without replacement per family); foodGapHookLine (fnv). The house voice already claims no building, force or spell; one line names guards.",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -86,7 +88,7 @@
    "id": "hooks.HOOK_LINE_POOLS::conflict.property#0",
    "text": "{a} has posted guards on what it says is its own, and {b} says {issue} was never {a}'s to hold.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,

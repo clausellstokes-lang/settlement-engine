@@ -8,7 +8,9 @@
   ],
   "crisisScoped": false,
   "colour": false,
-  "notes": "genesis.js :: pickTrappings shuffles the act's list (pool length - 1 rolls on a forked PRNG): phase B must resolve after the shuffle, never filter before it (design §3.3 R)"
+  "notes": "genesis.js :: pickTrappings shuffles the act's list (pool length - 1 rolls on a forked PRNG): phase B must resolve after the shuffle, never filter before it (design §3.3 R)",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -85,7 +87,7 @@
    "id": "traditions.TRADITION_TRAPPINGS::vigil#1",
    "text": "lantern-boats set adrift on the water",
    "needs": [
-    "water: navigable"
+    "navigable"
    ],
    "excludes": [],
    "colour": false,

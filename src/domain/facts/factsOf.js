@@ -27,6 +27,10 @@ import { hasInstitution } from './institutions.js';
 import { populationBandOf } from './populationBand.js';
 import { terrainClassOf, tradeRouteOf } from './terrain.js';
 import { hasOtherNpc } from './otherNpc.js';
+import { canonExports, canonImports } from '../canonicalAccessors.js';
+import { resolveSettlementCulture } from '../resolveCulture.js';
+import { deriveCriminalStructure } from '../display/defenseDisplay.js';
+import { prosperityLabelOf } from '../prosperityRank.js';
 
 /**
  * @param {any} record a settlement record
@@ -70,5 +74,19 @@ export function factsOf(record, options = {}) {
     get tier() { return typeof record?.tier === 'string' ? record.tier : undefined; },
     /** fact 14: a second, named NPC beside this one */
     hasOtherNpc: (/** @type {number | object} */ npc) => hasOtherNpc(record, npc),
+    // ── CENSUS-3b unit 1 (the chair's ruling R-E; the vocabulary rulings §2): DELEGATIONS to the
+    // one canonical reader each — no field reader, no new logic. ──
+    /** the food record's sources (`foodBalance.js :: deriveFoodRecord`), or undefined when it carries none */
+    get foodSources() { const v = record?.economicState?.foodSecurity?.foodRecord?.foodSources; return Array.isArray(v) ? v : undefined; },
+    /** the import list (`canonicalAccessors.js :: canonImports`) */
+    get imports() { return canonImports(record); },
+    /** the export list (`canonicalAccessors.js :: canonExports`) */
+    get exports() { return canonExports(record); },
+    /** the culture key (`resolveCulture.js :: resolveSettlementCulture`) */
+    get culture() { return resolveSettlementCulture(record); },
+    /** the criminal structure (`defenseDisplay.js :: deriveCriminalStructure`): its key, or 'none' */
+    get crime() { return deriveCriminalStructure(record)?.key ?? 'none'; },
+    /** the prosperity band (`prosperityRank.js :: prosperityLabelOf`), lower-cased, or undefined */
+    get prosperity() { const l = prosperityLabelOf(record?.economicState?.prosperity).toLowerCase(); return l || undefined; },
   });
 }

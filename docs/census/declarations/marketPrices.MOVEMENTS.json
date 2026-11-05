@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Closed typed vocabulary keyed by movementFor(band, driftBand); the band is the M6a commodityStocks band (unhomed: commodity stock band — no atom) and absent ⇒ adequate. Crisis-scoped because the default \"usual\" prints for every good of an aspatial world (no ledger) under any crisis."
+    "notes": "Closed typed vocabulary keyed by movementFor(band, driftBand); the band is the M6a commodityStocks band (unhomed: commodity stock band — no atom) and absent ⇒ adequate. Crisis-scoped because the default \"usual\" prints for every good of an aspatial world (no ledger) under any crisis.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

@@ -35,7 +35,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::STRUGGLING",
@@ -71,7 +73,9 @@
           "colour": false,
           "notes": "\"a stall not restocked\"; \"a hall not heated\" presumes cold season (no atom)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::POOR",
@@ -108,7 +112,9 @@
           "colour": false,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::MODERATE",
@@ -156,7 +162,9 @@
           "colour": false,
           "notes": "author mark \"crisis\": only true under an active crisis (family any)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::COMFORTABLE",
@@ -190,7 +198,9 @@
           "colour": true,
           "notes": "\"the stores are more than the season needs\" (soft; not declared)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::PROSPEROUS",
@@ -236,7 +246,9 @@
           "colour": false,
           "notes": "K mark no walls (twin of v2)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-8::WEALTHY",
@@ -276,7 +288,9 @@
           "colour": false,
           "notes": "\"What would be a crisis elsewhere is an expense here\" — false under an active crisis"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

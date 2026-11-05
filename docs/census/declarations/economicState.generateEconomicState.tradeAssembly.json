@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Crisis necessity imports, the stage-1 suffix sites (:564/:567/:570), the stage-5 military/slave rows, and the tradeDependencies impact lines. ⚠ The stage-1 primaryExports (all three suffix sites) is DISCARDED at :811 (primaryExports.length = 0) and rebuilt from deriveExportsFromChains: these suffix rows reach no output, only the stage-5 dedupe checks (:644 military/mercenary, :658 slave) read the interim list. The crisis necessity imports DO survive (passed into deriveImportsFromChains at :778)."
+    "notes": "Crisis necessity imports, the stage-1 suffix sites (:564/:567/:570), the stage-5 military/slave rows, and the tradeDependencies impact lines. ⚠ The stage-1 primaryExports (all three suffix sites) is DISCARDED at :811 (primaryExports.length = 0) and rebuilt from deriveExportsFromChains: these suffix rows reach no output, only the stage-5 dedupe checks (:644 military/mercenary, :658 slave) read the interim list. The crisis necessity imports DO survive (passed into deriveImportsFromChains at :778).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -63,7 +65,7 @@
       "id": "economicState.generateEconomicState.tradeAssembly::suffix.naval",
       "text": "${exp} (naval route only)",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "crisis": [

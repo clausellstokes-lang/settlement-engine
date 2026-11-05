@@ -6,7 +6,9 @@
   "declares": [],
   "crisisScoped": false,
   "colour": false,
-  "notes": "inline T branches; stored on economicViability.plotHooks; storeTrueHooksOnly drops the false ones today (hook-truth classifier: famine, defence, crime). Phase B: the self-check re-asserts these declarations on the stored hooks (R5)."
+  "notes": "inline T branches; stored on economicViability.plotHooks; storeTrueHooksOnly drops the false ones today (hook-truth classifier: famine, defence, crime). Phase B: the self-check re-asserts these declarations on the stored hooks (R5).",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -29,7 +31,7 @@
    "id": "hooks.OUTLOOK_foodBalance::starving",
    "text": "The settlement is starving. Villagers are turning to banditry, and a merchant has offered to supply food at...",
    "needs": [
-    "food-band: deficit",
+    "food: ≤ deficit",
     "tier: <= village"
    ],
    "excludes": [],
@@ -40,7 +42,7 @@
    "id": "hooks.OUTLOOK_foodBalance::guild-monopoly",
    "text": "A single merchant guild controls grain imports and has raised prices 300%...",
    "needs": [
-    "food-band: deficit"
+    "food: ≤ deficit"
    ],
    "excludes": [],
    "colour": false,
@@ -50,7 +52,7 @@
    "id": "hooks.OUTLOOK_foodBalance::dam",
    "text": "Upstream settlement builds dam or diverts river. Threatens water access AND grain shipments. Diplomacy or war?",
    "needs": [
-    "water: river"
+    "river"
    ],
    "excludes": [],
    "colour": false,
@@ -60,7 +62,7 @@
    "id": "hooks.OUTLOOK_foodBalance::blockade",
    "text": "An enemy fleet or a pirate squadron blockades the port. The settlement has {n} days of reserves...",
    "needs": [
-    "water: coast"
+    "coast"
    ],
    "excludes": [],
    "colour": false,
@@ -80,7 +82,7 @@
    "id": "hooks.OUTLOOK_foodBalance::timber",
    "text": "Something is killing the forest the timber comes from, and the settlement's building and shipbuilding trade...",
    "needs": [
-    "water: navigable"
+    "navigable"
    ],
    "excludes": [],
    "colour": false,

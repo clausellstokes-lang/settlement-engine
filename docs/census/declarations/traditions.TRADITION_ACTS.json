@@ -6,7 +6,9 @@
   "declares": [],
   "crisisScoped": false,
   "colour": true,
-  "notes": "six act nouns; presume nothing"
+  "notes": "six act nouns; presume nothing",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {

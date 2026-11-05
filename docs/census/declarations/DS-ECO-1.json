@@ -38,7 +38,9 @@
           "colour": false,
           "notes": "author mark \"no hunger\": \"Nobody here talks about the price of bread\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-1::COMBINATION C2: a high rung on a narrow approach (isolated / mountain_pass)",
@@ -74,7 +76,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-1::COMBINATION C3: the middle rungs",
@@ -113,7 +117,9 @@
           "colour": false,
           "notes": "author mark \"no crisis\"; \"a working market\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-1::COMBINATION C4: a low rung on a working approach",
@@ -149,7 +155,9 @@
           "colour": false,
           "notes": "\"The market turns\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-1::COMBINATION C5: a low rung on a narrow approach",
@@ -183,7 +191,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

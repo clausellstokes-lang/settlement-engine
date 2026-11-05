@@ -8,7 +8,9 @@
     ],
     "crisisScoped": false,
     "colour": false,
-    "notes": "DEPENDENCY warnings; tier >= city guaranteed (tierAtLeast, same comparator). Pool-wide: hasExternalSupply."
+    "notes": "DEPENDENCY warnings; tier >= city guaranteed (tierAtLeast, same comparator). Pool-wide: hasExternalSupply.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

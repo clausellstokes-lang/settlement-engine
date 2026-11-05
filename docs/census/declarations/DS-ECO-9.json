@@ -24,7 +24,7 @@
           "id": "DS-ECO-9::SURPLUS::v2",
           "text": "Food is the least of it here. The fields have been generous and the stores can take a fail",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "crisis": "calm",
@@ -40,7 +40,9 @@
           "colour": false,
           "notes": "\"more than enough\"; stranger fed generously"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::SECURE",
@@ -99,7 +101,9 @@
           "colour": false,
           "notes": "author mark \"hunger\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::PRESSURED",
@@ -131,14 +135,16 @@
           "id": "DS-ECO-9::PRESSURED::v3",
           "text": "{settlement} is not hungry and has no cushion. A shock to the fields or the road would be ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "crisis": "calm",
           "colour": false,
           "notes": "\"{settlement} is not hungry\"; \"the fields or the road\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::IMPORT-DEPENDENT",
@@ -161,7 +167,7 @@
           "id": "DS-ECO-9::IMPORT-DEPENDENT::v2",
           "text": "The carts feed this town as much as the fields do. Everybody knows what day they come and ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "crisis": "any",
@@ -177,13 +183,15 @@
           "colour": false,
           "notes": "author mark \"no hunger\"; \"Nothing about the arrangement is failing\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::DEFICIT",
       "pool": true,
       "declares": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "crisisScoped": false,
       "colour": false,
@@ -213,13 +221,15 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::ACTIVE FAMINE",
       "pool": true,
       "declares": [
-        "food-band: deficit"
+        "food: ≤ deficit"
       ],
       "crisisScoped": false,
       "colour": false,
@@ -249,7 +259,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::BLOCKADED",
@@ -283,7 +295,7 @@
           "id": "DS-ECO-9::BLOCKADED::v3",
           "text": "{settlement} is cut off from its supply and eating down what it holds. The stores are answ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -299,7 +311,9 @@
           "colour": false,
           "notes": "K mark no walls (twin of v1)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-9::BLOCKADE BYPASSED",
@@ -335,7 +349,9 @@
           "colour": false,
           "notes": "\"the market is not empty\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

@@ -8,14 +8,16 @@
   ],
   "crisisScoped": false,
   "colour": false,
-  "notes": "Defense-surface table (Safety & Crime hooks on the Plot Hooks tab); declared here because reader:hook-pools reads the whole tab. Its flags read priorityHelpers (CENSUS-1 left them, militia measured moving births)."
+  "notes": "Defense-surface table (Safety & Crime hooks on the Plot Hooks tab); declared here because reader:hook-pools reads the whole tab. Its flags read priorityHelpers (CENSUS-1 left them, militia measured moving births).",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
    "id": "hooks.SAFETY_safetyProfile::stateCrime",
    "text": "A local family wants evidence of tax extortion gathered quietly, but the extorter wears an official badge.",
    "needs": [
-    "crime"
+    "organised crime"
    ],
    "excludes": [],
    "colour": false
@@ -24,7 +26,7 @@
    "id": "hooks.SAFETY_safetyProfile::crimeIsGovt",
    "text": "Someone approached the party seeking legitimate authority to settle a dispute. The only \"authority\" here is...",
    "needs": [
-    "crime"
+    "organised crime"
    ],
    "excludes": [],
    "colour": false,
@@ -35,7 +37,7 @@
    "text": "A wizard's tower component went missing. The black market has it...",
    "needs": [
     "magic",
-    "crime"
+    "organised crime"
    ],
    "excludes": [],
    "colour": false
@@ -59,7 +61,7 @@
    "id": "hooks.SAFETY_safetyProfile::hasSmuggling",
    "text": "The smuggling network is moving something unusual this week...",
    "needs": [
-    "crime"
+    "organised crime"
    ],
    "excludes": [],
    "colour": false

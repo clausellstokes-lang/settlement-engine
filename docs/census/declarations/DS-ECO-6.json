@@ -43,7 +43,9 @@
           "colour": false,
           "notes": "dm-only; unhomed: guild"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-6::TIER: significant off-book activity (≥15)",
@@ -87,7 +89,9 @@
           "colour": false,
           "notes": "dm-only"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-6::TIER: minor shadow activity (≥3)",
@@ -126,12 +130,14 @@
           "text": "What passes for a shadow economy here has never grown into one. There is unlicensed trade ",
           "needs": [],
           "excludes": [
-            "crime"
+            "organised crime"
           ],
           "colour": false,
           "notes": "dm-only; \"nothing organised behind it\" — false when deriveCriminalStructure is non-null"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

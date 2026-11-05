@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Each entry yields an EXPORT label (exportLabel, when exportable) and an INCOME label (incomeLabel, shown in Economic Flows/income). Membership is by institutionMatchesKeyword over private patterns, so the institution presumption is declared with the vocabulary reader where a kind exists. CRISIS-SCOPED: deriveServiceExports output bypasses the siege/occupation treatment in deriveExportsFromChains, so traffic-presuming service exports print under siege; those rows carry \"calm\" (the chair may want a narrower threat-family exclusion). The `output` field strings are not annotated (Economic Flows display; same presumptions as the income label)."
+    "notes": "Each entry yields an EXPORT label (exportLabel, when exportable) and an INCOME label (incomeLabel, shown in Economic Flows/income). Membership is by institutionMatchesKeyword over private patterns, so the institution presumption is declared with the vocabulary reader where a kind exists. CRISIS-SCOPED: deriveServiceExports output bypasses the siege/occupation treatment in deriveExportsFromChains, so traffic-presuming service exports print under siege; those rows carry \"calm\" (the chair may want a narrower threat-family exclusion). The `output` field strings are not annotated (Economic Flows display; same presumptions as the income label).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -173,7 +175,7 @@
       "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.export",
       "text": "Waterborne freight services (cargo, pilotage)",
       "needs": [
-        "water: navigable",
+        "navigable",
         "institution: docks"
       ],
       "excludes": [],
@@ -186,7 +188,7 @@
       "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.income",
       "text": "Port Revenue",
       "needs": [
-        "water: navigable",
+        "navigable",
         "institution: docks"
       ],
       "excludes": [],
@@ -199,7 +201,7 @@
       "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.maritime.export",
       "text": "Maritime services (cargo, pilotage)",
       "needs": [
-        "water: coast",
+        "coast",
         "institution: docks"
       ],
       "excludes": [],
@@ -212,7 +214,7 @@
       "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.maritime.output",
       "text": "Port & maritime services",
       "needs": [
-        "water: coast",
+        "coast",
         "institution: docks"
       ],
       "excludes": [],

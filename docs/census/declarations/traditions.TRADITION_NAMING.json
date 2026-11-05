@@ -9,7 +9,9 @@
   ],
   "crisisScoped": false,
   "colour": true,
-  "notes": "name grammar and adjectives; presume nothing beyond their keys"
+  "notes": "name grammar and adjectives; presume nothing beyond their keys",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {

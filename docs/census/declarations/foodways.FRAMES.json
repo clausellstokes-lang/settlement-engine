@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "Frames keyed by source COUNT (one/two/more); FNV offset modulus. Under famine generateFoodSecurity sets failedSource = foodSources[0] yet passes ALL sources to composeFoodwaysLine, so slot {A} is the FAILED source: \"Most meals start from bread from the home fields\" prints in a place whose grain harvest failed. Declared calm per the ruling; the precise form is \"excludes famine\" (or drop failedSource from the sources passed). Season/winter/lean-months words: no atom (ruled)."
+    "notes": "Frames keyed by source COUNT (one/two/more); FNV offset modulus. Under famine generateFoodSecurity sets failedSource = foodSources[0] yet passes ALL sources to composeFoodwaysLine, so slot {A} is the FAILED source: \"Most meals start from bread from the home fields\" prints in a place whose grain harvest failed. Declared calm per the ruling; the precise form is \"excludes famine\" (or drop failedSource from the sources passed). Season/winter/lean-months words: no atom (ruled).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

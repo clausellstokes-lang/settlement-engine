@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "isSieged = stressTypes under_siege OR an institution named 'war council'|'rationing' (private: a name asserts a siege)."
+    "notes": "isSieged = stressTypes under_siege OR an institution named 'war council'|'rationing' (private: a name asserts a siege).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

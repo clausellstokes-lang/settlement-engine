@@ -6,7 +6,9 @@
   "declares": [],
   "crisisScoped": false,
   "colour": true,
-  "notes": "connective prefixes; presume nothing"
+  "notes": "connective prefixes; presume nothing",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {

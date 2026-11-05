@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Keyed by food source (the food record's foodSources), so each row's food-source atom is GUARANTEED by its key and noted, not declared. Drawn by FNV offset without replacement."
+    "notes": "Keyed by food source (the food record's foodSources), so each row's food-source atom is GUARANTEED by its key and noted, not declared. Drawn by FNV offset without replacement.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

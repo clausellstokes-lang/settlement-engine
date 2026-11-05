@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Keyed by exact institution name: the key guarantees the consuming institution (pool-level, not on rows). The engine already gates each row on the ABSENCE of need.resources (hasResource) and of local agricultural supply, and isolates/siege-rewrites only the severity/impact text (not these rows). Imports declare tier band + terrain only (chair ruling), so most rows are silent. svcs[] are service names (services lane) and are not declared here."
+    "notes": "Keyed by exact institution name: the key guarantees the consuming institution (pool-level, not on rows). The engine already gates each row on the ABSENCE of need.resources (hasResource) and of local agricultural supply, and isolates/siege-rewrites only the severity/impact text (not these rows). Imports declare tier band + terrain only (chair ruling), so most rows are silent. svcs[] are service names (services lane) and are not declared here.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

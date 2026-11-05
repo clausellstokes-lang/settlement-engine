@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Tier-keyed export table (tradeGoods.js :: getGoodsModifiers): the tier key guarantees the tier; requiredInstitution is an existing engine gate (substring match on native names). Rows declare the producer atom; luxury-class rows also carry the village band (redundant at city/metropolis, kept for the walker)."
+    "notes": "Tier-keyed export table (tradeGoods.js :: getGoodsModifiers): the tier key guarantees the tier; requiredInstitution is an existing engine gate (substring match on native names). Rows declare the producer atom; luxury-class rows also carry the village band (redundant at city/metropolis, kept for the walker).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -22,7 +24,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::thorp.Small game",
       "text": "Small game: Rabbits, fowl from local hunting",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -42,7 +44,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Grain surplus",
       "text": "Grain surplus: Wheat, barley, oats beyond subsistence needs",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -53,7 +55,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Raw wool",
       "text": "Raw wool: Unprocessed wool from sheep",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -64,7 +66,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Dairy products",
       "text": "Dairy products: Cheese, butter, milk",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -75,7 +77,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Livestock",
       "text": "Livestock: Cattle, sheep, pigs for sale",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -95,7 +97,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Game meat",
       "text": "Game meat: Venison, boar, rabbit from local hunters",
       "needs": [
-        "food-source: game"
+        "game"
       ],
       "excludes": [],
       "colour": false,
@@ -133,7 +135,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::hamlet.Fresh fish",
       "text": "Fresh fish: Catch of the day from local waters",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -144,7 +146,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Agricultural surplus",
       "text": "Agricultural surplus: Grain, wheat, barley in quantity",
       "needs": [
-        "food-source: grain"
+        "grain"
       ],
       "excludes": [],
       "colour": false,
@@ -155,7 +157,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Raw wool and hides",
       "text": "Raw wool and hides: Bulk unprocessed animal products",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -166,7 +168,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Livestock",
       "text": "Livestock: Cattle, sheep, pigs in regular supply",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -177,7 +179,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Eggs and dairy",
       "text": "Eggs and dairy: Regular production for market",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -255,7 +257,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Salted fish",
       "text": "Salted fish: Salt-cured fish for travel and winter",
       "needs": [
-        "food-source: fish"
+        "fish"
       ],
       "excludes": [],
       "colour": false,
@@ -266,7 +268,7 @@
       "id": "tradeGoodsData.GOODS_MODIFIERS_BY_TIER::village.Fresh milk and dairy",
       "text": "Fresh milk and dairy: Milk, butter, soft cheese from cattle",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,

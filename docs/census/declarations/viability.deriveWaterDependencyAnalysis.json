@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "hasWater = terrain name coastal|riverside, else route river|port (private; factsOf(r).water.navigable should answer — a lake place and a mountain_pass river place disagree)."
+    "notes": "hasWater = terrain name coastal|riverside, else route river|port (private; factsOf(r).water.navigable should answer — a lake place and a mountain_pass river place disagree).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -14,7 +16,7 @@
       "text": "${inst}: requires water access",
       "needs": [],
       "excludes": [
-        "water: navigable"
+        "navigable"
       ],
       "colour": false,
       "notes": ""
@@ -24,7 +26,7 @@
       "text": "${inst} requires ${waterNeed.description} but settlement has no river or port.",
       "needs": [],
       "excludes": [
-        "water: navigable"
+        "navigable"
       ],
       "colour": false,
       "notes": ""
@@ -34,7 +36,7 @@
       "text": "Severely reduced productivity without water access.",
       "needs": [],
       "excludes": [
-        "water: navigable"
+        "navigable"
       ],
       "colour": false,
       "notes": ""
@@ -52,7 +54,7 @@
       "text": "Establish a river or port trade route",
       "needs": [],
       "excludes": [
-        "water: navigable"
+        "navigable"
       ],
       "colour": false,
       "notes": "A route cannot add a river; presumes terrain permits one."

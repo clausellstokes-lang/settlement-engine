@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "IMPORT labels written by this function (the chain.dependency.resource labels and necessityImports pass through from data/other writers and are not literal here). Pool-wide guarantee: not (route none, or isolated subsistence tier) unless hasMagicTrade. Upstream rows are keyed by the missing upstream chain id (branch-guaranteed absence of that chain; the producer atom is declared as excludes only where a vocabulary atom exists). ABSTRACT_IMPORTS is a filter set (not printed)."
+    "notes": "IMPORT labels written by this function (the chain.dependency.resource labels and necessityImports pass through from data/other writers and are not literal here). Pool-wide guarantee: not (route none, or isolated subsistence tier) unless hasMagicTrade. Upstream rows are keyed by the missing upstream chain id (branch-guaranteed absence of that chain; the producer atom is declared as excludes only where a vocabulary atom exists). ABSTRACT_IMPORTS is a filter set (not printed).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -34,7 +36,7 @@
       "text": "Grain and malt",
       "needs": [],
       "excludes": [
-        "food-source: grain"
+        "grain"
       ],
       "colour": false,
       "kind": "import",
@@ -45,7 +47,7 @@
       "text": "Raw hides and animal products",
       "needs": [],
       "excludes": [
-        "food-source: livestock"
+        "livestock"
       ],
       "colour": false,
       "kind": "import",
@@ -110,7 +112,7 @@
       "text": "Raw furs and pelts",
       "needs": [],
       "excludes": [
-        "food-source: game"
+        "game"
       ],
       "colour": false,
       "kind": "import",
@@ -143,7 +145,7 @@
       "text": "Bulk grain and foodstuffs",
       "needs": [],
       "excludes": [
-        "food-source: grain"
+        "grain"
       ],
       "colour": false,
       "kind": "import",

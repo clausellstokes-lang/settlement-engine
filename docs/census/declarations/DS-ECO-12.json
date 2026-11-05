@@ -35,7 +35,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::INCOME MIX: two or three sources between them",
@@ -69,7 +71,9 @@
           "colour": false,
           "notes": "\"dictate to the hall\" — unhomed: governing hall (≈ ruler: council|mayor, disjunction, not declared)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::INCOME MIX: a broad spread, no leader",
@@ -103,7 +107,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::INCOME MIX: a criminal line is present",
@@ -137,7 +143,9 @@
           "colour": true,
           "notes": "dm-only; {faction} slot"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::INCOME MIX: the criminal line leads",
@@ -171,7 +179,9 @@
           "colour": true,
           "notes": "dm-only"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::TRADE PROFILE: exports and imports both present",
@@ -207,7 +217,9 @@
           "colour": false,
           "notes": "\"The market at {settlement}… on the same stalls\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::TRADE PROFILE: no significant exports",
@@ -238,12 +250,14 @@
           "text": "{settlement} produces enough to feed and clothe itself and sells none of it, which is a de",
           "needs": [],
           "excludes": [
-            "food-band: deficit"
+            "food: ≤ deficit"
           ],
           "colour": false,
           "notes": "\"produces enough to feed and clothe itself\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::TRADE PROFILE: imports only, nothing outward",
@@ -277,7 +291,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::TRADE PROFILE: local production listed",
@@ -323,7 +339,9 @@
           "colour": false,
           "notes": "K mark no walls (twin of v1)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-12::TRADE PROFILE: isEntrepot, transit goods marked among the exports",
@@ -357,7 +375,9 @@
           "colour": false,
           "notes": "\"the yard and the road\" — presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

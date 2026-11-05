@@ -6,7 +6,9 @@
   "declares": [],
   "crisisScoped": false,
   "colour": false,
-  "notes": "weighted pick in genesis.js (local forked PRNG); the element names the tradition (The Tide Fair). Phase B: the Traditions tab prints only admissible rows (R6); the weight is not moved."
+  "notes": "weighted pick in genesis.js (local forked PRNG); the element names the tradition (The Tide Fair). Phase B: the Traditions tab prints only admissible rows (R6); the weight is not moved.",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -20,7 +22,7 @@
    "id": "traditions.TRADITION_ELEMENTS::first-landing",
    "text": "Landfall / the First Landing",
    "needs": [
-    "water: navigable"
+    "navigable"
    ],
    "excludes": [],
    "colour": false,
@@ -52,7 +54,7 @@
    "id": "traditions.TRADITION_ELEMENTS::river",
    "text": "River / the River",
    "needs": [
-    "water: river"
+    "river"
    ],
    "excludes": [],
    "colour": false,
@@ -116,7 +118,7 @@
    "id": "traditions.TRADITION_ELEMENTS::tide",
    "text": "Tide / the Tide",
    "needs": [
-    "water: coast"
+    "coast"
    ],
    "excludes": [],
    "colour": false,

@@ -8,7 +8,9 @@
   ],
   "crisisScoped": false,
   "colour": false,
-  "notes": "SHARED WITH CENSUS-4 (NPCs): declared here only because reader:hook-pools reads the Plot Hooks tab whole; CENSUS-4 owns the table and its application. drawLoyalty -> drawUnique (always 1 roll, safe for a gate); inlandHookLine F5 post-draw."
+  "notes": "SHARED WITH CENSUS-4 (NPCs): declared here only because reader:hook-pools reads the Plot Hooks tab whole; CENSUS-4 owns the table and its application. drawLoyalty -> drawUnique (always 1 roll, safe for a gate); inlandHookLine F5 post-draw.",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {
@@ -50,7 +52,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::government#5",
    "text": "They know who committed a crime the guard is currently investigating. They're not telling the guard.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -95,7 +97,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#0",
    "text": "Three guards have gone missing in the same district on night patrol. The report filed says they deserted.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -105,7 +107,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#1",
    "text": "Weapons from the armoury have been disappearing in small quantities for months. The inventory matches, some...",
    "needs": [
-    "garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -122,7 +124,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#3",
    "text": "A prisoner in their custody knows something valuable. So does someone with reason to ensure they never speak.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -139,7 +141,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#5",
    "text": "Someone is paying their soldiers more than their salary. The soldiers aren't saying who.",
    "needs": [
-    "garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -156,7 +158,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#7",
    "text": "The ambush that killed two of their best people wasn't random. Someone knew the patrol route.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -180,7 +182,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::military#10",
    "text": "A weapons cache they were responsible for is smaller than it should be. They haven't reported it yet.",
    "needs": [
-    "garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -351,7 +353,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::criminal#0",
    "text": "One of their people is talking to the guard. They don't know which one yet. They're watching.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,
@@ -397,7 +399,7 @@
    "id": "hooks.NPC_FACTION_LOYALTY::criminal#6",
    "text": "The guard captain has a file. They know because someone who works for the guard captain also works for them.",
    "needs": [
-    "watch|garrison|militia"
+    "guardPresence"
    ],
    "excludes": [],
    "colour": false,

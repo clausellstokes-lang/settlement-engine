@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Rows are the scaled importLabels [small, medium, large gap] and the exportBonus. consumers/suppliers are name-fragment matchers, not text, and are not rows. minTier/routeRequired are existing engine gates; the declarations mirror them."
+    "notes": "Rows are the scaled importLabels [small, medium, large gap] and the exportBonus. consumers/suppliers are name-fragment matchers, not text, and are not rows. minTier/routeRequired are existing engine gates; the declarations mirror them.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -91,7 +93,7 @@
       "text": "Rope, oakum, and rigging supplies",
       "needs": [
         "tier: >= hamlet",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -103,7 +105,7 @@
       "text": "Cordage, canvas, and vessel-maintenance supplies",
       "needs": [
         "tier: >= hamlet",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,
@@ -115,7 +117,7 @@
       "text": "Cordage, tar, timber fittings, and bulk vessel supplies",
       "needs": [
         "tier: >= hamlet",
-        "water: navigable"
+        "navigable"
       ],
       "excludes": [],
       "colour": false,

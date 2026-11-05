@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Key-guaranteed: the special resource is present. institutionModifiers are weights, not text. resources[] are flavour outputs; economicBoost/strategicImportance are display strings."
+    "notes": "Key-guaranteed: the special resource is present. institutionModifiers are weights, not text. resources[] are flavour outputs; economicBoost/strategicImportance are display strings.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -48,7 +50,7 @@
       "id": "resourceData.SPECIAL_RESOURCES::magicalNode",
       "text": "Magical Ley Line Node: Intersection of magical energy",
       "needs": [
-        "magic: >= low"
+        "magic level: ≥ low"
       ],
       "excludes": [],
       "colour": true,
@@ -80,7 +82,7 @@
       "id": "resourceData.SPECIAL_RESOURCES::magicalNode.effects.strategicImportance",
       "text": "High magical value",
       "needs": [
-        "magic: >= low"
+        "magic level: ≥ low"
       ],
       "excludes": [],
       "colour": false,

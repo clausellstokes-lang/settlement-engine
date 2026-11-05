@@ -156,6 +156,20 @@ export const INSTITUTION_WORDS = Object.freeze([
 /** The terrain classes (`steps/resolveConfig.js`). */
 export const TERRAIN_WORDS = Object.freeze(['plains', 'hills', 'forest', 'riverside', 'coastal', 'mountain', 'desert']);
 
+/** The culture keys (`cultureProfiles.js :: CULTURE_PROFILE_KEYS`; CENSUS-3b, ruling R-E). */
+export const CULTURE_WORDS = Object.freeze([
+  'germanic', 'latin', 'celtic', 'arabic', 'norse', 'slavic', 'east_asian', 'mesoamerican', 'south_asian', 'steppe', 'greek',
+]);
+
+/** The criminal structure, none → organized (`defenseDisplay.js :: deriveCriminalStructure`'s keys). */
+export const CRIME_WORDS = Object.freeze(['none', 'diffuse', 'semi-organized', 'organized']);
+
+/** The prosperity ladder (`prosperityRank.js :: PROSPERITY_LABELS`, below it the generator's own bottom rung `Subsistence`), lower-cased. */
+export const PROSPERITY_WORDS = Object.freeze(['subsistence', 'struggling', 'poor', 'moderate', 'comfortable', 'prosperous', 'wealthy']);
+
+/** The food record's sources (`foodGenerator.js`), the four the vocabulary names as atoms. */
+const FOOD_SOURCE_ATOMS = Object.freeze(['fish', 'grain', 'game', 'livestock']);
+
 /** The trade-route kinds (`tradeRouteSemantics.js`). */
 export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads', 'isolated', 'mountain_pass']);
 
@@ -169,6 +183,9 @@ export const ROUTE_WORDS = Object.freeze(['road', 'river', 'port', 'crossroads',
  * @property {(kind: string) => boolean} [hasInstitution] @property {string|null} [populationBand]
  * @property {string} [terrain] @property {string} [route] @property {string} [tier]
  * @property {(npc: unknown) => boolean} [hasOtherNpc]
+ * @property {ReadonlyArray<string>} [foodSources] @property {ReadonlyArray<unknown>} [imports]
+ * @property {ReadonlyArray<unknown>} [exports] @property {string|null} [culture] @property {string} [crime]
+ * @property {string} [prosperity]
  */
 /**
  * @typedef {object} Dimension
@@ -223,13 +240,16 @@ export const FACT_DIMENSIONS = Object.freeze({
   'other npc': Object.freeze({ shape: 'presence', home: 'hasOtherNpc', needsContext: 'npc',
     reader: (f, _key, ctx) => (typeof f.hasOtherNpc === 'function' && ctx && 'npc' in ctx ? f.hasOtherNpc(ctx.npc) : undefined) }),
   priest: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  'organised crime': Object.freeze({ shape: 'presence', home: '', reader: null }),
-  fish: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  grain: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  game: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  livestock: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  imports: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  exports: Object.freeze({ shape: 'presence', home: '', reader: null }),
+  // CENSUS-3b unit 1 (ruling R-E): the delegated getters. Organised crime = a structure at
+  // `semi-organized` or above (routes and territory, or a hierarchy); a diffuse presence is not one.
+  'organised crime': Object.freeze({ shape: 'presence', home: 'crime',
+    reader: (/** @type {FactsLike} */ f) => (typeof f.crime === 'string' ? CRIME_WORDS.indexOf(f.crime) >= CRIME_WORDS.indexOf('semi-organized') : undefined) }),
+  ...Object.fromEntries(FOOD_SOURCE_ATOMS.map((src) => [src, Object.freeze({ shape: 'presence', home: 'foodSources',
+    reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.foodSources) ? f.foodSources.includes(src) : undefined) })])),
+  imports: Object.freeze({ shape: 'presence', home: 'imports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.imports) ? f.imports.length > 0 : undefined) }),
+  exports: Object.freeze({ shape: 'presence', home: 'exports', reader: (/** @type {FactsLike} */ f) => (Array.isArray(f.exports) ? f.exports.length > 0 : undefined) }),
+  culture: Object.freeze({ shape: 'presence', home: 'culture', keys: CULTURE_WORDS,
+    reader: (/** @type {FactsLike} */ f, /** @type {string|null} */ key) => (f.culture === undefined ? undefined : f.culture === key) }),
   // ── keyed presence: one value of a categorical fact ──
   ruler: Object.freeze({ shape: 'presence', home: 'rulerKind', keys: RULER_WORDS,
     reader: (f, key) => (f.rulerKind === undefined ? undefined : f.rulerKind === key) }),
@@ -247,7 +267,8 @@ export const FACT_DIMENSIONS = Object.freeze({
   'magic level': Object.freeze({ shape: 'band', home: 'magic', order: MAGIC_LEVEL_WORDS, reader: (f) => f.magic?.level }),
   food: Object.freeze({ shape: 'band', home: 'famine', order: FOOD_BAND_WORDS, reader: (f) => f.famine?.band }),
   stores: Object.freeze({ shape: 'band', home: 'storesMonths', numeric: true, reader: (f) => f.storesMonths }),
-  prosperity: Object.freeze({ shape: 'band', home: '', reader: null }),
+  prosperity: Object.freeze({ shape: 'band', home: 'prosperity', order: PROSPERITY_WORDS, reader: (/** @type {FactsLike} */ f) => f.prosperity }),
+  crime: Object.freeze({ shape: 'band', home: 'crime', order: CRIME_WORDS, reader: (/** @type {FactsLike} */ f) => f.crime }),
   // ── the crisis dimension (the inverse default) ──
   crisis: Object.freeze({ shape: 'crisis', home: 'crisis', reader: (f) => f.crisis }),
 });

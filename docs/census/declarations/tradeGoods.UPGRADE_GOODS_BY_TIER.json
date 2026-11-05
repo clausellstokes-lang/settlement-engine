@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "Every row is an IMPORT (generateTradeIncomeStreams.imports). The tier key and the pool key (basic/fromHigher/fromCityOrMetropolis/fromMetropolis/fromHinterland, chosen by isFromHigher) are the branch; tier is the same reader (record.tier) so a tier the key guarantees is noted, not declared. Pool-wide guarantee: route != isolated (getUpgradeChain returns [] first). Import rows carry the producer as a note (producer is elsewhere); a luxury-class import declares \"tier: >= village\" per the ruling. Rows ALSO feed generateTradeIncomeStreams.transit (imports.slice(0,4) when entrepot), i.e. the same labels print as transit re-exports. Duplicates src/data/tradeGoodsData.js :: IMPORT_GOODS_BY_TIER (same rows)."
+    "notes": "Every row is an IMPORT (generateTradeIncomeStreams.imports). The tier key and the pool key (basic/fromHigher/fromCityOrMetropolis/fromMetropolis/fromHinterland, chosen by isFromHigher) are the branch; tier is the same reader (record.tier) so a tier the key guarantees is noted, not declared. Pool-wide guarantee: route != isolated (getUpgradeChain returns [] first). Import rows carry the producer as a note (producer is elsewhere); a luxury-class import declares \"tier: >= village\" per the ruling. Rows ALSO feed generateTradeIncomeStreams.transit (imports.slice(0,4) when entrepot), i.e. the same labels print as transit re-exports. Duplicates src/data/tradeGoodsData.js :: IMPORT_GOODS_BY_TIER (same rows).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

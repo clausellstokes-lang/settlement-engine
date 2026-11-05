@@ -8,7 +8,9 @@
   ],
   "crisisScoped": false,
   "colour": true,
-  "notes": "prose.js :: pickLine (fnv, 0 rolls). suppressed / restored are keyed on the occupation relation (key-guaranteed); adopted on newcomers (key)."
+  "notes": "prose.js :: pickLine (fnv, 0 rolls). suppressed / restored are keyed on the occupation relation (key-guaranteed); adopted on newcomers (key).",
+  "needs": [],
+  "excludes": []
  },
  "rows": [
   {

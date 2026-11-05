@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "The \"why\" clause. Season words have no atom (ruled). \"roads\" presumes an overland route (unhomed: road presence; route: road too narrow)."
+    "notes": "The \"why\" clause. Season words have no atom (ruled). \"roads\" presumes an overland route (unhomed: road presence; route: road too narrow).",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

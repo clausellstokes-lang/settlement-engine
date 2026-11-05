@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": true,
     "colour": false,
-    "notes": "deriveIsEntrepot is a predicate (route crossroads, or port + \"international trade\"/\"warehouse district\" by name) and prints nothing itself; its consequences print as the two income bonuses below and as the transit list (generateTradeIncomeStreams.transit = imports.slice(0,4), i.e. UPGRADE_GOODS_BY_TIER labels re-labelled as transit). Crisis-scoped because the Entrepot line asserts traffic passing through and is not gated on siege/occupation."
+    "notes": "deriveIsEntrepot is a predicate (route crossroads, or port + \"international trade\"/\"warehouse district\" by name) and prints nothing itself; its consequences print as the two income bonuses below and as the transit list (generateTradeIncomeStreams.transit = imports.slice(0,4), i.e. UPGRADE_GOODS_BY_TIER labels re-labelled as transit). Crisis-scoped because the Entrepot line asserts traffic passing through and is not gated on siege/occupation.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {

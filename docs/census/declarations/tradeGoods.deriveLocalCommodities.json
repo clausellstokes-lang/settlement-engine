@@ -6,7 +6,9 @@
     "declares": [],
     "crisisScoped": false,
     "colour": false,
-    "notes": "localProduction commodities (lowercase). Resource-derived commodities come from RESOURCE_DATA (data, not here; includes the abstract \"trade_access\" commodity of crossroads_position/defended_pass — CATEGORY ERROR, an access fact not a commodity). The seven institution-bonus rows below match institution NAMES by bare substring (private regex) — declared on the row with the reader that should answer."
+    "notes": "localProduction commodities (lowercase). Resource-derived commodities come from RESOURCE_DATA (data, not here; includes the abstract \"trade_access\" commodity of crossroads_position/defended_pass — CATEGORY ERROR, an access fact not a commodity). The seven institution-bonus rows below match institution NAMES by bare substring (private regex) — declared on the row with the reader that should answer.",
+    "needs": [],
+    "excludes": []
   },
   "rows": [
     {
@@ -49,7 +51,7 @@
       "id": "tradeGoods.deriveLocalCommodities::meat",
       "text": "meat",
       "needs": [
-        "food-source: livestock"
+        "livestock"
       ],
       "excludes": [],
       "colour": false,
@@ -67,7 +69,7 @@
       "id": "tradeGoods.deriveLocalCommodities::salt",
       "text": "salt",
       "needs": [
-        "water: coast"
+        "coast"
       ],
       "excludes": [],
       "colour": false,

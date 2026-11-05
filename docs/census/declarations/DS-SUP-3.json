@@ -37,7 +37,9 @@
           "colour": true,
           "notes": "word: \"town\" used as the generic referent (tier not declared)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING",
@@ -71,7 +73,9 @@
           "colour": true,
           "notes": "\"a complete town of its rung\" — word: \"town\" used as the generic referent (tier not declared)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING",
@@ -105,7 +109,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::THE HEALING GAP",
@@ -139,7 +145,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::THE FOOD GAP",
@@ -173,7 +181,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
@@ -207,7 +217,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE",
@@ -243,7 +255,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

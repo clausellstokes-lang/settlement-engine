@@ -49,7 +49,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-3::SHORTAGE × not trade-dependent",
@@ -73,7 +75,7 @@
           "id": "DS-ECO-3::SHORTAGE × not trade-dependent::v2",
           "text": "The roads are quiet. In a town that lives off its own fields, quiet roads are a matter of ",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -99,7 +101,9 @@
           "colour": false,
           "notes": "K mark no walls (twin of v1)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-3::ADEQUATE",
@@ -145,7 +149,9 @@
           "colour": false,
           "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-3::SURPLUS × trade-dependent",
@@ -193,7 +199,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-ECO-3::SURPLUS × not trade-dependent",
@@ -229,7 +237,9 @@
           "colour": false,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

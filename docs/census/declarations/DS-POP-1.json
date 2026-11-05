@@ -40,7 +40,9 @@
           "colour": false,
           "notes": "\"Nothing here was bad enough to move anyone\" — false under any crisis"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: a few souls",
@@ -74,7 +76,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: a dozen or so",
@@ -110,7 +114,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: dozens",
@@ -144,7 +150,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: a hundred or so",
@@ -182,7 +190,9 @@
           "colour": false,
           "notes": "\"what the market can sell\"; unhomed: levy"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: several hundred",
@@ -218,7 +228,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: many hundreds",
@@ -254,7 +266,9 @@
           "colour": false,
           "notes": "\"whole terraces dark\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::QUANTITY: thousands",
@@ -290,7 +304,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::HERALD KIND: hungry_gap",
@@ -304,7 +320,7 @@
           "id": "DS-POP-1::HERALD KIND: hungry_gap::v1",
           "text": "The lean season has cost {settlement} people, not to the road but to the ground, and the b",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -314,7 +330,7 @@
           "id": "DS-POP-1::HERALD KIND: hungry_gap::v2",
           "text": "More were buried here in {season} than born, and the shortfall in the fields is why the tw",
           "needs": [
-            "food-source: grain"
+            "grain"
           ],
           "excludes": [],
           "colour": false,
@@ -328,13 +344,15 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::HERALD KIND: migration_flight",
       "pool": true,
       "declares": [
-        "migration: out"
+        "migration: exodus"
       ],
       "crisisScoped": false,
       "colour": false,
@@ -364,7 +382,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::RECEIPT: births exceed deaths",
@@ -398,7 +418,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::RECEIPT: births and deaths in balance",
@@ -421,8 +443,8 @@
           "text": "Births and burials run level here. The town holds its size out of its own population, with",
           "needs": [],
           "excludes": [
-            "migration: in",
-            "migration: out"
+            "migration: influx",
+            "migration: exodus"
           ],
           "colour": false,
           "notes": "\"holds its size… without help and without loss\""
@@ -435,7 +457,9 @@
           "colour": false,
           "notes": "\"neither growing nor failing\" — unhomed: population trend (level)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::RECEIPT: deficit01 positive",
@@ -469,7 +493,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::CANDIDATE KIND: growth",
@@ -483,7 +509,7 @@
           "id": "DS-POP-1::CANDIDATE KIND: growth::v1",
           "text": "The town is taking people in faster than it loses them. The building is happening at the e",
           "needs": [
-            "migration: in"
+            "migration: influx"
           ],
           "excludes": [],
           "colour": false,
@@ -501,19 +527,21 @@
           "id": "DS-POP-1::CANDIDATE KIND: growth::v3",
           "text": "Numbers here are climbing. Whether the town can house what it is attracting is a question ",
           "needs": [
-            "migration: in"
+            "migration: influx"
           ],
           "excludes": [],
           "colour": false,
           "notes": "\"what it is attracting\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::CANDIDATE KIND: emigration",
       "pool": true,
       "declares": [
-        "migration: out"
+        "migration: exodus"
       ],
       "crisisScoped": false,
       "colour": false,
@@ -543,7 +571,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::CANDIDATE KIND: decline",
@@ -558,7 +588,7 @@
           "text": "The town is shrinking without anyone particularly leaving. It is losing people the slow wa",
           "needs": [],
           "excludes": [
-            "migration: out"
+            "migration: exodus"
           ],
           "crisis": "any",
           "colour": false,
@@ -578,13 +608,15 @@
           "text": "Numbers here are falling quietly: no exodus, no catastrophe, only a settlement that is not",
           "needs": [],
           "excludes": [
-            "migration: out"
+            "migration: exodus"
           ],
           "crisis": "calm",
           "colour": false,
           "notes": "\"no exodus, no catastrophe\""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-POP-1::BELIEVED TREND diverges from the ring",
@@ -618,7 +650,9 @@
           "colour": false,
           "notes": "dm-only; \"out of date in the town's favour\" — presumes belief worse than truth; direction not guaranteed"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }

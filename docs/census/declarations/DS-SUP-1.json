@@ -37,7 +37,9 @@
           "colour": false,
           "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-1::A PROCESSING HOUSE MISSING FROM THE ROSTER",
@@ -71,7 +73,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-1::UPSTREAM LINK COVERED BY AN IMPORT",
@@ -105,7 +109,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-1::RESOURCE DEPLETED",
@@ -139,7 +145,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-1::ENTREPÔT PASS-THROUGH (no workshop in the line)",
@@ -173,7 +181,9 @@
           "colour": true,
           "notes": ""
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     },
     {
       "id": "DS-SUP-1::BLOCKED: nothing can be got away",
@@ -207,7 +217,9 @@
           "colour": false,
           "notes": "\"the ground might as well be empty\" — unhomed: extractive resource (presumes {resource} comes out of the ground — mine/quarry — false for timber/fish/grain chains)"
         }
-      ]
+      ],
+      "needs": [],
+      "excludes": []
     }
   ]
 }
