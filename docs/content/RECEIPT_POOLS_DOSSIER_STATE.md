@@ -4511,6 +4511,7 @@ one crisis twice.
 1. `[ledger]` This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.
 2. `[visitor · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` {settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.
 3. `[street · institution: school · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.
+4. `[unfolding · crisis: hunger, threat, unrest, indebted, plague_onset]` The good stretch {settlement} was having has not ended, but it is being spent now on the trouble in front of it.
 
 **PROVENANCE: `causes[]` or `triggeredAt.sourceEventType` populated** · the ONLY causal pool in this block {colour}
 1. `[ledger]` The condition traces back to {reason}, and the trace is not disputed. The town knows exactly what did this.
@@ -4552,6 +4553,7 @@ one crisis twice.
 1. `[unfolding]` The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.
 2. `[elder]` The crisis ended and left its scars in the ordinary places: trust, institutions, and the habits people formed to survive it.
 3. `[street]` The town is recovering. It is not the town it was before, and it has not decided yet whether it minds.
+4. `[unfolding · crisis · crisis: any]` {settlement} is recovering from one trouble while it carries another, and the repair goes slower for it.
 
 ---
 
@@ -5412,7 +5414,7 @@ shared letter would collide.*
 - `Wealthy` / `Thriving` {colour} — 1. `[visitor]` {settlement} is rich in the way that shows in the paving and the doorframes before it shows in anybody's clothes. · 2. `[ledger]` {settlement}'s books carry more than the town needs, and what to do with the excess is a question in its own right here. · 3. `[street]` Money moves in {settlement} fast enough that people talk about where it is going rather than whether there is any.
 
 **`safetyProfile.safetyLabel`** *(the head word before the em dash; the suffix names a stressor and belongs to the stressor shape, which owns that prose)*
-- head word in {`Secure`, `Controlled`, `Quarantined`} {crisis-scoped} — 1. `[visitor · no crisis: threat · no crisis: unrest · no crisis: plague_onset · crisis: any]` A stranger walks {settlement} at any hour and the town's only interest in them is commercial. · 2. `[street · no crisis: threat · no crisis: plague_onset · crisis: any]` {settlement} is a safe place to be, and the safety has a cost that the town has agreed to pay. · 3. `[ledger · watch · no crisis: unrest · crisis: any]` The watch's returns at {settlement} are short, and short returns here mean quiet streets rather than an idle watch.
+- head word in {`Secure`, `Controlled`, `Quarantined`} {crisis-scoped} — 1. `[visitor · no crisis: threat · no crisis: unrest · no crisis: plague_onset · crisis: any]` A stranger walks {settlement} at any hour and the town's only interest in them is commercial. · 2. `[street · no crisis: threat · no crisis: plague_onset · crisis: any]` {settlement} is a safe place to be, and the safety has a cost that the town has agreed to pay. · 3. `[ledger · watch · no crisis: unrest · crisis: any]` The watch's returns at {settlement} are short, and short returns here mean quiet streets rather than an idle watch. · 4. `[street · crisis: occupied, plague_onset]` Movement in {settlement} is watched and limited, and the quiet in its streets is a kept quiet rather than a natural one.
 - head word in {`Tense`, `Strained`, `Restricted`, `Unsafe`} {crisis-scoped} — 1. `[visitor · crisis: any]` {settlement} is workable and watchful: a stranger is served, and also noticed. · 2. `[street · no crisis: threat · crisis: any]` {settlement} is not dangerous so much as unrelaxed, and the difference matters to the people living in it. · 3. `[ledger · watch · crisis: any]` The watch at {settlement} is stretched across more than it can comfortably cover, and the stretching shows in what gets deferred.
 - head word in {`Dangerous`, `Desperate`} — 1. `[visitor]` {settlement} is a place to be careful in, and being careful is not sufficient. · 2. `[street]` People in {settlement} move in company after dark and do not consider that unusual. · 3. `[ledger · watch]` What the watch at {settlement} records is a fraction of what happens, and the fraction is not chosen by the watch.
 
@@ -6011,6 +6013,7 @@ analogy. No variant carries a digit, an em dash or an exclamation point.*
 **`NO-MARKET`** {no market}
 1. `[counterforce · gate · institution: tavern]` No market or fair stands in {settlement}: what trade the town does is done at the gate, at the inn and on the road.
 2. `[visitor · gate · institution: tavern]` A stranger finds no market square in {settlement}, only trade done at the gate, at the inn and along the road.
+3. `[street]` No market or fair stands in {settlement}: what trade the town does is done house to house and on the road.
 
 ---
 

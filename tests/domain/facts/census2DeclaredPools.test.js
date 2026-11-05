@@ -82,11 +82,12 @@ describe('the declarations do their work on the real pools', () => {
   });
 
   it("DS-GEN-13's NO-MARKET lines (trade 'at the gate, at the inn') are refused where neither stands", () => {
-    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([]);
-    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([]);
+    // vid 3 is unit 5's twin, which presumes neither
+    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
+    expect(read('DS-GEN-13', 'NO-MARKET', SIEGE)).toEqual([3]);
     const gated = factsOf({ ...TOWN, institutions: [{ name: 'Town walls', category: 'Defense' }, { name: 'Tavern', category: 'Hospitality' }] });
     expect(gated.defence.gate && gated.hasInstitution('tavern')).toBe(true);
-    expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2]);
+    expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2, 3]);
   });
 
   it("DS-STR-1's calm framing (\"carries no emergency\") is refused under a siege and drawn in calm", () => {
@@ -99,3 +100,24 @@ describe('the declarations do their work on the real pools', () => {
     expect(read('DS-STR-1', 'UNDER SIEGE', both)).toEqual([5, 7, 8, 9, 10]);
   });
 });
+
+describe('the twins (unit 5; each the chair\'s ruling, share recorded in the lane doc)', () => {
+  const OCCUPIED = factsOf({ ...TOWN, stress: [{ type: 'occupied' }], institutions: [{ name: 'Weekly market', category: 'Economy' }] });
+  it("DS-GEN-13 NO-MARKET keeps a line where neither gate nor inn stands", () => {
+    expect(read('DS-GEN-13', 'NO-MARKET', CALM)).toEqual([3]);
+  });
+  it("DS-GEN-3's Secure/Controlled/Quarantined row speaks of a kept quiet under an occupation", () => {
+    expect(read('DS-GEN-3', 'safetyProfile.safetyLabel: head word in {Secure, Controlled, Quarantined}', OCCUPIED)).toEqual([4]);
+  });
+  it("DS-CND-1's flourishing and recovery pools keep a line under a crisis, and the recovery twin is silent in calm", () => {
+    const flourishing = 'ARCHETYPE: flourishing';
+    const recovery = Object.keys(LEAVES['DS-CND-1'].pools).find((k) => k.startsWith('FAMILY: recovery'));
+    const crisisOn = { walls: 'no walls', crisis: 'crisis' };
+    const at = (key, facts, dims) => eligibleVariants(LEAVES['DS-CND-1'].pools[key], {
+      facts, crisisScoped: true, dimensions: dims, slots: { settlement: 'Oakford' } }).map((v) => v.vid);
+    expect(at(flourishing, SIEGE, crisisOn)).toEqual([4]);
+    expect(at(recovery, SIEGE, crisisOn)).toEqual([4]);
+    expect(at(recovery, CALM, { walls: 'no walls', crisis: 'no crisis' })).toEqual([1, 2, 3]);
+  });
+});
+
