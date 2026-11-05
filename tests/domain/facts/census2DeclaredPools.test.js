@@ -104,6 +104,10 @@ describe('the declarations do their work on the real pools', () => {
     expect(read('DS-STR-2', 'ORIGIN: resistance', factsOf({ ...TOWN, stress: [{ type: 'insurgency' }] }))).toEqual([1]);
   });
 
+  it("DS-STR-2's resistance lines speak under insurgency + occupation (R-H: the disjunction admits `crisis: occupied` while occupation is one of the active kinds)", () => {
+    expect(read('DS-STR-2', 'ORIGIN: resistance', factsOf({ ...TOWN, stress: [{ type: 'insurgency' }, { type: 'occupied' }] }))).toEqual([1, 2, 3]);
+  });
+
   it("DS-STR-1's siege banner keeps its lines under a siege joined by a famine (the key is not re-declared)", () => {
     const both = factsOf({ ...TOWN, stress: [{ type: 'under_siege' }, { type: 'famine' }] });
     expect(read('DS-STR-1', 'UNDER SIEGE', both)).toEqual([5, 7, 8, 9, 10]);
