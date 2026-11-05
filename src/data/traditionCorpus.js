@@ -32,6 +32,7 @@
  * @property {ReadonlyArray<string>} econ      economic characters that favour it
  * @property {boolean}  deityFit    a faith-flavoured element (biases deity dedication)
  * @property {boolean}  foundingFit an origin-era element (eligible for the founding core)
+ * @property {ReadonlyArray<string>} [needs] the facts the element presumes (CENSUS-3b; the vocabulary's atoms)
  *
  * @typedef {Object} TraditionAct
  * @property {string}   id       act key (design §2: feast|procession|vigil|contest|fair|offering)
@@ -39,6 +40,10 @@
  * @property {boolean}  deityFit a devotional act (offering/vigil) — biases deity dedication
  * @property {boolean}  grand    an act that tends to run the grander two-week window
  */
+// CENSUS-3b unit 5 (the lane's Phase B 5; R6): the three water-keyed elements DECLARE the water
+// they presume (`needs`, the vocabulary's water atoms: First Landing `navigable` — a coast, a river
+// or a port; River `river`; Tide `coast`). The Traditions tab prints only admissible rows
+// (`filterDeclared`); genesis's weights are CENSUS-1c's and read nothing here.
 
 /**
  * The motif ELEMENTS (design §2 "element" vocabulary). Index 0 (`founding`) is the
@@ -48,11 +53,11 @@
  */
 export const TRADITION_ELEMENTS = Object.freeze([
   { id: 'founding',      glyph: '⌂', noun: 'Founding',   genitive: 'the Founding',        adjective: 'Founding', season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: true },
-  { id: 'first-landing', glyph: '⚓', noun: 'Landfall',   genitive: 'the First Landing',   adjective: 'Landing',  season: 'spring', terrains: Object.freeze(['coastal', 'riverside']),     econ: Object.freeze(['port', 'river']),         deityFit: false, foundingFit: true },
+  { id: 'first-landing', glyph: '⚓', noun: 'Landfall',   genitive: 'the First Landing',   adjective: 'Landing',  season: 'spring', terrains: Object.freeze(['coastal', 'riverside']),     econ: Object.freeze(['port', 'river']),         deityFit: false, foundingFit: true, needs: Object.freeze(['navigable']) },
   { id: 'charter',       glyph: '✒', noun: 'Charter',    genitive: 'the Charter',         adjective: 'Charter',  season: 'spring', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads']),            deityFit: false, foundingFit: true },
   { id: 'hearth',        glyph: '▲', noun: 'Hearth',     genitive: 'the Hearth',          adjective: 'Hearth',   season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
   { id: 'harvest',       glyph: '❦', noun: 'Harvest',    genitive: 'the Harvest',         adjective: 'Harvest',  season: 'autumn', terrains: Object.freeze(['plains', 'hills']),          econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'river',         glyph: '≈', noun: 'River',      genitive: 'the River',           adjective: 'River',    season: 'summer', terrains: Object.freeze(['riverside']),                econ: Object.freeze(['river']),                 deityFit: false, foundingFit: false },
+  { id: 'river',         glyph: '≈', noun: 'River',      genitive: 'the River',           adjective: 'River',    season: 'summer', terrains: Object.freeze(['riverside']),                econ: Object.freeze(['river']),                 deityFit: false, foundingFit: false, needs: Object.freeze(['river']) },
   { id: 'stone',         glyph: '◆', noun: 'Standing Stone', genitive: 'the Standing Stones', adjective: 'Stone', season: 'winter', terrains: Object.freeze(['mountain', 'hills']),     econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
   { id: 'the-dead',      glyph: '☾', noun: 'Dead',       genitive: 'the Dead',            adjective: 'Mourning', season: 'autumn', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
   { id: 'field',         glyph: '▦', noun: 'Furrow',     genitive: 'the Fields',          adjective: 'Field',    season: 'spring', terrains: Object.freeze(['plains']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
@@ -60,7 +65,7 @@ export const TRADITION_ELEMENTS = Object.freeze([
   { id: 'market',        glyph: '⚖', noun: 'Market',     genitive: 'the Market',          adjective: 'Market',   season: 'summer', terrains: Object.freeze([]),                          econ: Object.freeze(['crossroads', 'port', 'road']), deityFit: false, foundingFit: false },
   { id: 'hunt',          glyph: '➹', noun: 'Hunt',       genitive: 'the Hunt',            adjective: 'Hunt',     season: 'autumn', terrains: Object.freeze(['forest']),                   econ: Object.freeze(['isolated']),              deityFit: false, foundingFit: false },
   { id: 'long-sun',      glyph: '☀', noun: 'Long Sun',   genitive: 'the Long Sun',        adjective: 'Sun',      season: 'summer', terrains: Object.freeze(['desert']),                   econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
-  { id: 'tide',          glyph: '∿', noun: 'Tide',       genitive: 'the Tide',            adjective: 'Tide',     season: 'summer', terrains: Object.freeze(['coastal']),                  econ: Object.freeze(['port']),                  deityFit: false, foundingFit: false },
+  { id: 'tide',          glyph: '∿', noun: 'Tide',       genitive: 'the Tide',            adjective: 'Tide',     season: 'summer', terrains: Object.freeze(['coastal']),                  econ: Object.freeze(['port']),                  deityFit: false, foundingFit: false, needs: Object.freeze(['coast']) },
   { id: 'greening',      glyph: '✿', noun: 'Greening',   genitive: 'the Greening',        adjective: 'Green',    season: 'spring', terrains: Object.freeze(['forest', 'plains']),         econ: Object.freeze([]),                        deityFit: false, foundingFit: false },
   { id: 'stars',         glyph: '✦', noun: 'Stars',      genitive: 'the Stars',           adjective: 'Star',     season: 'winter', terrains: Object.freeze([]),                          econ: Object.freeze([]),                        deityFit: true,  foundingFit: false },
 ]);
