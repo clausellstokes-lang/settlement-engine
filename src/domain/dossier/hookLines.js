@@ -61,7 +61,7 @@ const ISSUE_FAMILIES = Object.freeze([
  * A line takes the two parties and the issue as the record spells them, and returns one
  * sentence. The issue arrives lower-cased at the call site (the record stores it
  * Title-Case, as a label), so a line may drop it mid-sentence without re-casing it.
- * @typedef {(a: string, b: string, issue: string) => string} HookLine
+ * @typedef {((a: string, b: string, issue: string) => string) | { text: (a: string, b: string, issue: string) => string, needs?: string[], excludes?: string[] }} HookLine a template, or the declared form around one (CENSUS-2c)
  */
 
 /**
@@ -97,7 +97,7 @@ const JURISDICTION_LINES = Object.freeze([
 
 /** @type {ReadonlyArray<HookLine>} */
 const PROPERTY_LINES = Object.freeze([
-  (a, b, issue) => `${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.`,
+  { text: (a, b, issue) => `${a} has posted guards on what it says is its own, and ${b} says ${issue} was never ${a}'s to hold.`, needs: ['guardPresence'] }, // CENSUS-2c: the rulings §3's composite
   (a, b, issue) => `An inventory of ${issue} came up short, and ${a} and ${b} each say the other took the difference.`,
   (a, b, issue) => `${b} has produced an old deed bearing on ${issue}; it is good enough for ${a} to take seriously and old enough for ${a} to doubt.`,
   (a, b, issue) => `Someone has been moving what ${issue} covers out of the building at night, and both ${a} and ${b} assume the other arranged it.`,
@@ -159,14 +159,14 @@ const CONFLICT_LINES = Object.freeze({
  * them claims a famine, so the same truth gate that refused the starving sentence passes
  * these. The settlement's name is never interpolated: the collector's dedupe folds on text,
  * and a named line would survive it on every page.
- * @type {ReadonlyArray<string>}
+ * @type {ReadonlyArray<string | { text: string, needs?: string[], excludes?: string[] }>} a line, or the declared form around one (CENSUS-2c)
  */
 const FOOD_GAP_LINES = Object.freeze([
-  'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.',
-  'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.',
+  { text: 'Grain is coming in, and the people bringing it have worked out exactly how much that is worth. The price has moved twice this month.', excludes: ['crisis: under_siege'] },
+  { text: 'Enough food arrives to keep the place fed, which means whoever controls the carts controls rather more than the carts.', excludes: ['starving', 'famine', 'crisis: famine', 'crisis: under_siege'] },
   'A supplier who has carried the shortfall for years wants the arrangement put on paper now, and the terms have changed.',
-  'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.',
-  'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.',
+  { text: 'The last two consignments were short by the same amount, and the measure is being blamed rather than the measurer.', excludes: ['crisis: under_siege'] },
+  { text: 'Somebody has begun buying grain forward at prices nobody local can match, and will not say who it is for.', needs: ['market'] },
   'A merchant has offered to cover the whole gap from one source, which would solve this season and hand them next season.',
 ]);
 
