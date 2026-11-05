@@ -90,7 +90,9 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
     // 10 more items (463 → 473).
     // 473 → 475 at T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json): the step re-deals the realm's year and the year-one desk files
     // 2 more items (473 → 475).
-    expect(Object.keys(manifest)).toHaveLength(475);
+    // 475 → 395 at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json): the institution budget re-deals the realm's year and the year-one desk files
+    // 80 fewer items (475 → 395).
+    expect(Object.keys(manifest)).toHaveLength(395);
   });
 
   it('the declared refile set is exactly the knowledge desk the routing table carries', () => {
@@ -135,11 +137,11 @@ describe('the knowledge desk — the non-omniscient Herald golden (captured firs
       // (soak-d -> soak-b, week 47). Still three, still all on knowledge.
       // Re-dealt at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the step re-deals the year;
       // the year's misjudgment beats are now 4 (10, 4, 47, 49), all on knowledge.
+      // Re-dealt at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json):
+      // the institution budget re-deals the year; the year's misjudgment beats are now 2 (4, 45), all on knowledge.
       expect(misjudged).toEqual([
-        'wizard_news.10.belief_misjudgment.soak-a.soak-c',
         'wizard_news.4.belief_misjudgment.soak-a.soak-c',
-        'wizard_news.47.belief_misjudgment.soak-d.soak-b',
-        'wizard_news.49.belief_misjudgment.soak-a.soak-c',
+        'wizard_news.45.belief_misjudgment.soak-b.soak-d',
       ]);
       for (const id of misjudged) {
         expect(live.sections[id]).toBe('knowledge');
