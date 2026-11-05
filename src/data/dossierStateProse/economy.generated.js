@@ -713,6 +713,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SHORTAGE × trade-dependent": [
         {
           "angle": "canonical",
+          "marks": [
+            "market"
+          ],
           "text": "The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.",
           "slots": [],
           "vid": 0
@@ -823,6 +826,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "SURPLUS × trade-dependent": [
         {
           "angle": "canonical",
+          "marks": [
+            "market"
+          ],
           "text": "The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.",
           "slots": [],
           "vid": 0
@@ -1842,6 +1848,9 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
       "TIER: significant off-book activity (≥15)": [
         {
           "angle": "canonical",
+          "marks": [
+            "guild"
+          ],
           "text": "Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.",
           "slots": [],
           "vid": 0

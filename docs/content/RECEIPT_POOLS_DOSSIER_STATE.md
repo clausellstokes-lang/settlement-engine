@@ -922,7 +922,7 @@ already in register and stand as index 0 of their pools, quoted below.
 **SLOTS.** `{settlement}`
 
 **SHORTAGE × trade-dependent**
-0. *(canonical)* The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
+0. *(canonical)* `[market]` The roads have gone quiet. Little reaches the markets, and what the town depends on is not arriving.
 1. `[ledger · gate]` The gate returns are thin in both columns. What arrives is short of what the town has contracted for, and the shortfall is in goods the town does not make.
 2. `[street · market]` Market days are quiet and short. The stalls that depend on the roads are the ones standing empty.
 3. `[unfolding]` Traffic into {settlement} has fallen below what the town runs on, and the stores are covering the difference for now.
@@ -940,7 +940,7 @@ already in register and stand as index 0 of their pools, quoted below.
 3. `[visitor · crisis: any]` Trade here reads as unremarkable, which on a road is the good reading.
 
 **SURPLUS × trade-dependent**
-0. *(canonical)* The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
+0. *(canonical)* `[market]` The roads are busy. Caravans arrive thick and depart laden, and the markets are well-fed.
 1. `[ledger · market]` More is moving through {settlement} than the town's own trade accounts for. Everything the market depends on arrives ahead of its need.
 2. `[street · market]` The yard is full most mornings and the market is fat on it. What the town cannot make, the town can simply buy.
 3. `[visitor]` A stranger will wait behind carts to get in. The roads are working harder than the town requires of them.
@@ -1123,7 +1123,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 4. `[unfolding · dm-only]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
-0. *(canonical)* Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
+0. *(canonical)* `[guild]` Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.
 1. `[ledger · dm-only]` A real portion of {settlement}'s trade sits outside the rolls, enough that the men who do pay their duties are competing at a disadvantage.
 2. `[street · dm-only]` There is a cheaper way to do most things here, and most people know somebody who knows it.
 3. `[visitor · dm-only · market]` The prices in this market do not quite add up for a stranger who assumes everyone is paying the same fees. They are not.
