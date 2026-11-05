@@ -6,6 +6,14 @@ import { defenseFactsOf } from '../domain/defense/defenseFacts.js';
 import { createGenerationWorldLaw } from './generationContext.js';
 import { textOf } from '../domain/facts/textOf.js'; // R-C (CENSUS-2d): a declared cell gives back its text; CENSUS-1e's T-branch wiring enforces
 
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the quarters whose description the ledger
+ * (docs/census/declarations/SPATIAL_TEXT.json) opted into the crisis dimension, by quarter name. The T wiring
+ * passes `crisisScoped: true` for these cells, read from here; the register pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+export const SPATIAL_QUARTER_CRISIS_SCOPED = Object.freeze(['Market Quarter', 'Religious Quarter']);
+
 // ─── generateSpatialLayout ────────────────────────────────────────────────────
 
 /**

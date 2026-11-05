@@ -700,6 +700,13 @@ export const QUICK_GUIDE_SIBLINGS = Object.freeze({
   [FOOD_SECURITY_CLAUSE.secure]: Object.freeze([Object.freeze({ text: FOOD_SECURITY_CLAUSE.secure, excludes: ['crisis: hunger'], crisis: ['any'] })]),
 });
 
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the food band's calm clauses, the ledger's opted
+ * pools, by their sibling key. The T wiring passes `crisisScoped: true` for these; the pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+export const QUICK_GUIDE_CRISIS_SCOPED = Object.freeze([FOOD_SECURITY_CLAUSE.surplus, FOOD_SECURITY_CLAUSE.secure]);
+
 /** @param {string} label @returns {string} */
 function foodSecurityClause(label) {
   const key = label.toLowerCase().replace(/[\u2013\u2014]/g, '-');

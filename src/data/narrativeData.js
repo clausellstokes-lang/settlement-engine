@@ -7,6 +7,10 @@
 // string tables: no runtime imports, no RNG capture. Covered by the src/data
 // purity lint (eslint.config.js) + tests/domain/dataPurity.test.js.
 
+// THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, R-AF): the ledger's opted ARRIVAL_SCENES pools; in these a line
+// that says nothing of a crisis is calm. The arrival site's wiring passes `crisisScoped: true` for them.
+export const ARRIVAL_SCENES_CRISIS_SCOPED = Object.freeze(['market', 'ordinary']);
+
 export const ARRIVAL_SCENES = {
   market: [
     { text: (r) =>

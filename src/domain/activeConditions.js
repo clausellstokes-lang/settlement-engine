@@ -522,6 +522,19 @@ export const CONDITION_ARCHETYPE_SIBLINGS = Object.freeze({
   ]),
 });
 
+/**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF): the sibling sets above whose ledger pool opted
+ * into the crisis dimension, by their key (the original's text). The T wiring passes `crisisScoped: true` for
+ * these, read from here; the register pin is the compose's (R-T).
+ * @type {ReadonlyArray<string>}
+ */
+export const CONDITION_ARCHETYPE_CRISIS_SCOPED = Object.freeze([
+  CONDITION_ARCHETYPE_TEMPLATES.siege_lifted.description,
+  CONDITION_ARCHETYPE_TEMPLATES.occupation_lifted.description,
+  CONDITION_ARCHETYPE_TEMPLATES.boom.description,
+  CONDITION_ARCHETYPE_TEMPLATES.flourishing.description,
+]);
+
 const VALID_STATUSES = new Set(['worsening', 'stable', 'easing']);
 const SEVERITY_BANDS = ['low', 'medium', 'high', 'critical'];
 

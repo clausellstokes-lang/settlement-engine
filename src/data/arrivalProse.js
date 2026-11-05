@@ -26,6 +26,20 @@
  *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }} ArrivalLine
  */
 /**
+ * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF: "flags now, pins at the compose"). The ledger's
+ * pools (docs/census/declarations/ARRIVAL_*.json) that opted into the crisis dimension, by pool name: in these a
+ * line that says nothing of a crisis is CALM, so the arrival site's wiring passes `crisisScoped: true` for them,
+ * read from here. The register pin is the compose's (R-T).
+ * @type {Readonly<Record<string, ReadonlyArray<string>>>}
+ */
+export const ARRIVAL_CRISIS_SCOPED = Object.freeze({
+  ARRIVAL_SENSES: Object.freeze(['arms.dominant', 'bread.dominant', 'tanners.dominant', 'brewers.dominant', 'cloth.dominant', 'livestock.lines', 'livestock.dominant', 'faith.dominant', 'stone.dominant', 'kilns.dominant', 'horses.dominant', 'market.lines']),
+  ARRIVAL_PEOPLE: Object.freeze(['latin', 'celtic', 'norse', 'slavic', 'steppe', 'greek', 'mixed']),
+  ARRIVAL_TENSIONS: Object.freeze(['prosperous']),
+  ARRIVAL_MEMORIES: Object.freeze(['plague_years', 'external_threat', 'occupation_legacy']),
+});
+
+/**
  * SENSE: what the settlement sounds or smells like, by a trade it practises. `institutions` are lowercase name
  * fragments matched at a word start against the settlement's NATIVE catalogue names. `trade` fragments are matched
  * the same way against its exports and income sources; a hit makes the key DOMINANT, which weights it ahead of a
