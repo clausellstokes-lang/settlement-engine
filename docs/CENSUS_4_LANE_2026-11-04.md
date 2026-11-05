@@ -733,3 +733,141 @@ move, counted above); `npcGenerator.js :: generateNPCAppearance` (R, NPC_WANTS; 
 the ~12 label changes; (b) when the walker lands, re-read the descriptions' and goals' no-atom rows, then mark
 `colour` on the read rows (the ties' 267 and the wants' 53 are read already) and count the register's fall; (c) when
 R-AX's keyed draw lands, count the births against unit 2's 665. Otherwise nothing of this lane remains but the compose.
+
+## CENSUS-4h (2026-11-05)
+
+**Merges.** census-1b at `5978662` (merge `8fcdc1e`, clean: 1i units 1–3 = R-AW at the birth's close, the walker,
+R-AX refined) and at `e36e491` (merge `63eaa09`, clean: 1i units 4–6 = R-O's family marks, R-AT's wider audit,
+NPC_WANTS's site). At the first: `gen:dossier-prose --check` green; `wiring-census --check` green and `--dry` CURRENT
+(1i re-took the census including 4f unit 6's row). At the second: `--check` green; `--dry` stale by exactly unit 4's
+rows. The local ref was stale with HEAD detached for the sixth seat running (at `1bb90ad`, the pushed tip). It was
+re-pointed before the first commit. `npm ci` (lockfile untouched).
+
+| unit | commit | what | golden (525) | soak (60 / 1,000) |
+|---|---|---|---|---|
+| 1 | `8fcdc1e` | the merge; census through its door; the 60 as the merged base | — | — |
+| 2 | (measured) | `[guard]` re-measured after R-AW | — | — |
+| 3 | (measured) | the keyed secret draws counted (R-AX refined) | — | — |
+| 4 | `ea6b9e1` | R-AO `colour` marks: wants 53, tie variants 249, goals 35, descriptions 511 | 0 | 0 / 0 |
+| 5 | `63eaa09` | the merge carrying NPC_WANTS's site; re-measured | 0 vs `e36e491` | 0 vs `e36e491` |
+
+**Unit 2 — `[guard]` (R-AW, answer 1).** On the 1,000 at `8fcdc1e`: `reader:hook-pools` reads **0** (4g: 5, on
+soak1k-110, -462, -470, -571, -614). Label changes are counted on scratch births of the 1,000, comparing `7e31bee`
+(pre-R-AW) with `b00d387`. **12 births** moved, and they are exactly 4f's twelve (soak1k-110, -236, -247, -260,
+-326, -446, -462, -470, -571, -614, -674, -776). Each now prints "Military Party" (128 copies through the rename
+cascade). Nothing else in any record moved.
+
+**Unit 3 — R-AX refined (answer 3).** Scratch births of the 1,000, `b00d387` vs `5978662`: **419 births** moved,
+against 4g's prediction of 665 births and 1,711 draws. The difference is draws that never reach the final record.
+1i's own walk found 419, all in `npcs[].secret`. 1,313 printed secrets changed:
+- 600 were exactly the keyed secrets that were false for their holder;
+- 713 come from the re-mapped type roll and the shifted row index of the keyed view.
+
+By holder class: office 279 · trade 229 · merchant 207 · military 164 · clergy 142 · criminal 139 · noble 94 ·
+other 38 · arcane 21. **Printed keyed secrets false on the final record: 600 (393 births) → 0.** Keyed prints
+fell 740 → 142. `cert:false-presumption` on the secrets: 0.
+
+**Unit 4 — the `colour` marks (answer 2), after the walker.** Only lines READ are marked, and a mark is a
+declaration with no atom (silence to every draw).
+- **Wants:** phase A's 53 colour rows, `{ text, colour: true }` in place.
+- **Tie prose:** phase A's 249 colour variants, `{ line, colour: true }`. The ledger's other 18 colour rows are
+  the archetype labels.
+- **Goals:** re-read, short and long together. 35 marked; 10 stay unmarked because each presumes a fact with no
+  home: Mayor#1 and Abbot/Abbess#1 a lord · Mayor#3 a council election · Governor#0 the season and the crown ·
+  Tax Collector#0 a past riot · Crime Lord#1 a guard captain · Council Member#0 and Wealthiest Merchant#1 a
+  council and a merchant bloc · Guild Master#0 a second guild · Chief Magistrate#0 a nobility. The last four
+  follow phase A's own note.
+- **Descriptions:** the 599 no-atom rows re-read. 511 marked in a new column beside the table,
+  `src/data/institutionDescColour.js :: DESC_VARIANT_COLOUR_DECLARATIONS`, enrolled in `DECLARATION_CHANNELS`.
+  `DESC_VARIANT_DECLARATIONS` stays pinned at 62. 88 stay unmarked:
+  - a fact the row does not or cannot declare: a road, alehouses or taverns, a church, a river, stream or
+    bridge, a marsh, no other government, no lawful slave market, no resident clergy, magic (compelled truth),
+    banks, militias, a season;
+  - every designer rule phase A listed as printed fact, plus its possessive slip;
+  - the village Waystation #1, which declares by 1c's walls sibling set.
+
+Each verdict is in the two re-read ledgers (`colour`, `colourReadBy`, `pool.colourReRead`). Byte identity: 525
+golden + 60 soak, `8fcdc1e` vs the unit: 0 of 585 differ.
+
+**The register's fall, measured through `buildCensus` and not re-taken (R-T, answer 4):**
+
+| `tablePools` row | undeclared before → after | what the fall is |
+|---|---|---|
+| descriptions | 921 → **144** | the 511 marked texts occur 777 times over the tier keys |
+| goals | 46 → **11** | the eleventh is Guard Captain#1, whose ledgered `crime` was never applied |
+| wants | 53 → **0** | — |
+| tie prose | 18 → 18 | the walker reads each archetype as one row; listed for the mechanism lane: read a `pairProse` closure's `.lines` |
+
+`--dry`: tablePools only, +66 bytes, 0 state rows, no stamp. The census interlock's two reds
+(`proseWiringCensus.walker` "byte-identical to a fresh build", "THE DRY READ") stay listed for the compose.
+
+**Unit 5 — NPC_WANTS's site (landed as 1i unit 6).** The merge is byte-identical to `e36e491`: 0 of 585 differ,
+so the marks reach the wired draw as silence. Final record of the 1,000, `b00d387` → the tip:
+
+| want | false prints before → after |
+|---|---|
+| "a dockhand's oilskins…" (`docks`) | 58 of 96 (48 births) → **0 of 38** |
+| shrine vestments (`sacredHouse`) | 17 / 168 → 0 / 151 |
+| guild colours (`guild`) | 2 / 166 → 0 / 162 |
+
+**Unit 6 — the 60 and the 1,000 as a diff (R-B).** BEFORE = 4g's tip `1bb90ad` (its recorded figures) and the
+merged base `8fcdc1e`; AFTER = the tip `63eaa09`. Units 4 and 5 move no birth (0 of 585 each), so every
+movement is a merge's.
+
+| class (settlements) | the 60 | the 1,000 (4g tip → merged base → tip) |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 | 0 · 0 · 0 throughout |
+| `coh:*` · `A-12` | 0 | 0 |
+| `reader:hook-pools [guard]` | 0 | **5 → 0 → 0** (R-AW) |
+| `cert:false-presumption` | 0 | 0 → 0 → 0; on the secrets 0, on every pool of this lane 0 |
+| other `cert:*` | none | none (certification 1,000 / 1,000, 0 errors) |
+| reader:faction-role-fit | 17 → 17 | 348 → 352 → 352: the first merge (R-AW renames and R-AX's moved secrets), not this lane's units |
+| relation-types · tension-memory · validation-on-page · A-05 · A-09 · A-11 · battery-would-not-vouch | identical | 147 · 61 · 985 · 977 · 8 · 1 · 676 throughout |
+| verdict | CLIMB → CLIMB (101) | CLIMB (1,662) throughout |
+
+`declared-share` on the 60 (base → tip):
+
+| surface | declared / drawn |
+|---|---|
+| npcs | 335/2,653 → 357/3,248 |
+| relationships | 149/1,356, unchanged |
+| institutions | 120/246, unchanged |
+| services | 116/3,435, unchanged |
+
+`declared-share` on the 1,000 (merged base → tip):
+
+| surface | declared / drawn |
+|---|---|
+| npcs | 5,160/42,934 (0.120) → 5,513/52,483 (0.105) |
+| relationships | 2,077/21,528 (0.096), unchanged |
+| institutions | 2,168/4,215 (0.514), unchanged |
+| services | 1,965/55,655 (0.035), unchanged |
+
+The npcs drawn count rises because 1i's wired wants site now ledgers its 9,549 draws. The share falls because
+the ledger reads a `colour` row as undeclared: R-AO counts it as declared in the registers but as silence in a
+draw, so the share does not count the marks.
+
+**Rows moved, by cause (nothing re-recorded):**
+- golden: 0 by this lane's units (unit 4 0 of 525; the second merge 0 of 525 vs `e36e491`);
+- soak records: 0 of 60;
+- wiring census: 3 `tablePools` rows by unit 4 (descriptions, goals, wants, as above), not re-taken; the two
+  interlock reds are the compose's;
+- manifest rows: 0; pins: 0.
+
+Test re-keyed by this unit's own cause: `npcWantsDeclared` (a), because the wants are `{ text, colour }`, no
+longer strings.
+
+**Tests / gates.** New: `tests/data/colourMarks4h.test.js` (4), red-first (4/4 red with an empty column).
+Governing suites (44 files): the base's 57 reds title for title, plus the two interlock reds. eslint 0;
+typecheck:ratchet 167/167; domain:strict only the merged crisisFactFindings +4 / composeStateProse +2.
+
+**Open questions for the chair.**
+1. The ledger's `declared-share` reads a `colour` row as undeclared while the registers count it as declared.
+   Should the share count marks (a mechanism-lane instrument change), or stay "presumption declared" only?
+2. The tie prose's 249 marks lower no census row until the walker reads a `pairProse` closure's `.lines`. Is
+   that the mechanism lane's (wave 2)?
+3. Guard Captain#1 ("on the thieves' guild payroll") carries a ledgered `crime` that was never applied. Is it
+   now declarable through 3b's `crime` getter, or listed "waiting on crime"?
+
+**Where CENSUS-4i starts.** Nothing of this lane remains but the compose: the census re-take for unit 4's three
+rows (R-T) and the open questions above. The NPC lane's tip for the compose is this section's commit.
