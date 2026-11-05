@@ -482,6 +482,15 @@
  *   one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the throw census
  *   stays 0.
  *
+ *   2026-11-04 — F3 FOOD-WORDS (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-24-f3-food-words.json; the chair signs by the owner's
+ *   delegation, vetoable). Written from the staged tree S24 (the step's tree with the door paths carried from
+ *   the branch). The per-tier maximum roster reads 11/16/24/46/90/104, so CARTOGRAPHY_CALIBRATION does not
+ *   move. Re-keyed by measurement over the recorded corpus (the suite's own definitions): DUPLICATES.permille
+ *   126/207/46/62/46/53 -> 117/202/47/62/45/53 (derived ceilings 202/332/74/100/74/85 -> 188/324/76/100/72/85).
+ *   W6 stays the one named red until record 27 (2.3 at town, 20 -> 46, against 1.6). CORPUS_ROWS stays 504; the
+ *   throw census stays 0.
+ *
  * To re-record after an INTENTIONAL change, run:
  *   UPDATE_CARTOGRAPHY_CALIBRATION=1 npx vitest run tests/domain/townCartographyCalibration.test.js
  * and add a row above before committing. Re-recording without adding a row is a
@@ -599,11 +608,11 @@ const FROZEN = Object.freeze({
  * those, which is the evidence that the census measures the cure rather than nothing.
  */
 const DUPLICATES = Object.freeze({
-  thorp: Object.freeze({ permille: 126 }),
-  hamlet: Object.freeze({ permille: 207 }),
-  village: Object.freeze({ permille: 46 }),
+  thorp: Object.freeze({ permille: 117 }),
+  hamlet: Object.freeze({ permille: 202 }),
+  village: Object.freeze({ permille: 47 }),
   town: Object.freeze({ permille: 62 }),
-  city: Object.freeze({ permille: 46 }),
+  city: Object.freeze({ permille: 45 }),
   metropolis: Object.freeze({ permille: 53 }),
 });
 
@@ -1300,7 +1309,8 @@ describe('W8 the drawn corpus does not repeat itself', () => {
     // 220/312/55/92/87/88 -> 220/312/60/92/87/87 on 2026-11-04: PINS, SECOND STEP (UNITS 6–7) (header), the same operator.
     // 220/312/60/92/87/87 -> 202/332/71/100/74/85 on 2026-11-04: F6 BUDGET-FLOOR (UNITS 1–4) (header), the same operator.
     // 202/332/71/100/74/85 -> 202/332/74/100/74/85 on 2026-11-04: F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (header), the same operator.
-    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([202, 332, 74, 100, 74, 85]);
+    // 202/332/74/100/74/85 -> 188/324/76/100/72/85 on 2026-11-04: F3 FOOD-WORDS (UNITS 1–5) (header), the same operator.
+    expect(CARTOGRAPHY_TIERS.map(duplicateCeilingPermille)).toEqual([188, 324, 76, 100, 72, 85]);
     // And the derivation is live — a hypothetical reading derives its own ceiling.
     expect(Math.ceil((100 * CARTOGRAPHY_HEADROOM_PERMILLE) / 1000)).toBe(160);
   });
