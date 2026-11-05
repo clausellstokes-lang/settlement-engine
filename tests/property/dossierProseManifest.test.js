@@ -177,8 +177,10 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,716 -> 67,688 (370/358/358 -> 372/358/358) at PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json).
     // Towns unmoved at 516/3/3/3.
+    // 67,688 -> 67,780 (372/358/358 -> 372/358/358) at X-46 CAR 3, I7 (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_688, towns: 516 },
+      'golden-master-v3': { cells: 67_780, towns: 516 },
       'gm-seed-a': { cells: 372, towns: 3 },
       'gm-seed-b': { cells: 358, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },
