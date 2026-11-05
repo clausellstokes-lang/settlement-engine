@@ -512,3 +512,16 @@ Red-first: `tests/generators/arrivalFishKeyDeclared.test.js` (the three table ar
 ### Unit 3 — "pilgrims queue patiently", re-measured after the arrival redraw
 
 **3 → 0, and the cure is CENSUS-1f's, not this lane's.** At this seat's merged base (`a33ce94`, which carries 1f's redraw-once `f6ec896`) the 1,000 already reads `coh:crisis-blind-prose` **0** (2e's base: 3, all the pilgrims' queue). On the three seeds the line no longer prints, and the beat that replaced it is the faith key's dominant[1] on all three: **"The bells of <name> answer one another across the roofs, and the streets slow for them."** — soak1k-317 (monster pressure, two gates held by two factions), soak1k-741 (siege: "Chernoko has drawn in on itself…"), soak1k-815 (occupied: "At Dzibac's gate the queue divides in two…"). The line still prints in 21 births of the 1,000 (soak1k-95, -136, -149, …), none under a threat or unrest crisis (the class reads 0). Unit 2's faith declarations do not touch dominant[1] or [2]; the tip's arrival scenes on these three are byte-identical to the base's.
+
+### Unit 4 — the twins at the sites CENSUS-1f wired: none owed
+
+`origin/lane/census-1b-2026-11-04` re-fetched before this unit: still `99b0036`. Read site by site (a twin only where the slot would empty for most births or thin below its ratchet, R-G / R-L):
+
+| table | site state at `99b0036` | does the slot empty? | twin |
+|---|---|---|---|
+| POLITICAL_FLAVOR | **wired** (`historyCoherence.js :: flavorOf`, `b26ed12`; `stable` crisis-scoped) | **no.** `stable` keeps four `crisis: any` rows with no other atom (rows 1, 2, 4, 5) under every crisis; every other pattern holds bare (neutral) rows admitted under every fact state; and the site keeps the drawn template when nothing is admitted, so the slot cannot empty | none |
+| ARRIVAL_SCENES `market` / `ordinary` (2e's list; wired by 1f's redraw, scoped) | **wired** | **no.** `market` keeps 3 `crisis: any` lines of 4, `ordinary` 4 of 6, under any crisis | none |
+| CHECK_INST_COMPAT_LANDMARKS | **carried** (`structuralValidator.js :: checkInstCompat` still `textOf(pickRandom([...]))`; the arrival site applies only the T1-12 market / drying-rack agreement to `sight`, no declaration) | — | none (a twin at an unwired site is text with no reader) |
+| DAILY_LIFE_TAB (loading messages, the local narrative) | **carried** (`textOf`) | — | none |
+
+**Mute slots from these sites for the compose's §10 census: none.** 2e's remaining twin list (SPATIAL_TEXT city / village layouts, PRESSURE_SENTENCES wartime-winning, CAST_ABSENCES, DAILY_LIFE_TAB's food / order / anchors / paragraph twins) stays owed to the day their sites are wired; none of them was wired by 1f. 0 births move.
