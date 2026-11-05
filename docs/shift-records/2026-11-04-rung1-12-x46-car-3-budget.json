@@ -1,0 +1,46 @@
+{
+  "_doc": "X-46 CAR 3 (LANE X46-3-BUDGET), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 3 (lane x46-3-budget): the institution budget follows the population — seven anchors read log-linearly, one density factor d per settlement scaling every non-required, non-fabric chance, the fabric tagged in the registry. THE MOVER, NAMED: first-parent step 90dc22f18 of lane/landing-rung1-2026-11-04 (\"compose: lane/x46-3-budget-2026-11-04 (at 4bfd2d698) onto the window branch\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/DESIGN_X46_SCALE_TRAIN.md line 7 (the owner, 2026-11-02, quoted from docs/UX_CONSOLIDATION_2026-10-30.md, the X-46 addendum: the historical-scale commission, which asks the correction \"in both the number of institutions and population\"; car 3 is its institution half, §4 at line 29 of the same file). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S12 is the tree of 90dc22f18 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 90dc22f18 by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S11 -> S12): generator-golden-master 525 of 525 rows (thorp 84, hamlet 84, village 84, town 105, city 84, metropolis 84), the key set identical; herald-knowledge-desk-golden 2 of 395 rows, 214 added and 294 removed (475 -> 395); cartography-calibration-corpus 466 of 504 rows (thorp 53, hamlet 83, village 84, town 84, city 78, metropolis 84); dossier-prose-manifest 960 of 1050 rows; espionage-dormancy-fence 360 of 360 rows (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60), 360/360 distinct, fff82c27.. -> 0b130673..; pdf-golden-view-model-snapshot, its one snapshot. A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 12/25/42/70/82/86 -> 11/14/22/47/92/106 by hand (W7 pins it to the corpus exactly), MAX_BUILDING_ROW_BYTES stays 447; the corpus captured at the new block is byte-identical to the capture at the old one (no cap bit: the derived building caps, 252 for a city and 298 for a metropolis, against 216 and 261 drawn). THE HEADROOM: at this stage W6 (the declared headroom clears the criterion that set it) reads the worst single-seed slice under-measuring by 2.4444 at village (9 -> 22) against the declared 1.6. By the chair's ruling 2 in LANDING-4's addendum it is carried as ONE NAMED RED through records 12-26 (the only red of the calibration suite at each stage), and CARTOGRAPHY_HEADROOM_PERMILLE moves in its own record (27) at the landing tip, never here. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "I think we have over blown how large the floor and ceiling is for a Thorpe all the way to a city… historically it should be 50 to 300 residents, grouped into roughly 30 to 90 households. And that scale from our Thorpe to hamlets and town to city. Can you correct that in both the number of institutions and population in our generation pipeline?",
+  "ownerDate": "2026-11-02",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 3 (lane x46-3-budget): the institution budget follows the population — seven anchors read log-linearly, one density factor d per settlement scaling every non-required, non-fabric chance, the fabric tagged in the registry",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 90dc22f18",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 395,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
