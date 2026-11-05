@@ -469,8 +469,10 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     // by being empty, which is the failure mode this pair of floors exists to refuse.
     // F10 WALLS-WORD (2026-11-04): 32 more pools partition by `walls`, so 730 are swept.
     // F12 CRISIS-BLIND (2026-11-04): 14 more pools partition by a crisis dimension, so 716.
-    expect(poolsChecked).toBeGreaterThanOrEqual(716);
-    expect(draws).toBeGreaterThanOrEqual(716 * 2 * SWEEP_SEEDS.length);
+    // CENSUS-5b unit 1 (2026-11-05): DS-DEF-1 `readiness WEAK` partitions by `walls` (v2, the
+    // perimeter line, declares it; R-O), so 715.
+    expect(poolsChecked).toBeGreaterThanOrEqual(715);
+    expect(draws).toBeGreaterThanOrEqual(715 * 2 * SWEEP_SEEDS.length);
   });
 
   it('leaves the causal register untouched — no arm name is a dimension word', () => {
