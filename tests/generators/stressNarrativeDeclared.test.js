@@ -88,3 +88,33 @@ describe('religious_conversion: the two variants that presume the old temple nee
     expect(renderStressSummary('religious_conversion', '', null).startsWith('A new faith is gaining ground in the settlement.')).toBe(true);
   });
 });
+
+describe('wartime (loss): "Food prices have doubled." needs hunger (CENSUS-2d unit 1; the chair\'s answer 1, R-U)', () => {
+  const PRICES = 'Food prices have doubled.';
+  const ROAD = 'The army has the carts and the road, and the fields are short of hands.';
+  const loss = { profit: false };
+  it('a war fought on a secure food record prints the twin in the refused line\'s place', () => {
+    const text = renderStressSummary('wartime', 'Avel', loss, factsOf(recordOf(['wartime'], 'secure')));
+    // anchored: the next assertion pins the whole paragraph, the twin in the refused line's place
+    expect(text).not.toContain(PRICES);
+    expect(text).toBe(`Avel is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. ${ROAD} The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.`);
+  });
+  it('a war on a deficit keeps the price line (hunger on by the food record)', () => {
+    expect(renderStressSummary('wartime', 'Avel', loss, factsOf(recordOf(['wartime'], 'deficit')))).toContain(PRICES);
+  });
+  it('the provisional render (no facts) keeps the old paragraph byte for byte', () => {
+    expect(renderStressSummary('wartime', 'Avel', loss)).toContain(PRICES);
+  });
+  it('the sibling set: the original needs crisis: hunger, the twin excludes it', () => {
+    expect(STRESS_SUMMARY_SIBLINGS[PRICES]).toEqual([{ text: PRICES, crisis: ['hunger'] }, { text: ROAD, twinOf: PRICES, excludes: ['crisis: hunger'] }]);
+  });
+});
+
+describe('slave_revolt: the summary presumes only slaves and a revolt (CENSUS-2d unit 1; the chair\'s answer 2, R-U)', () => {
+  it('names no slave market (no fact home; listed under "needs a home")', () => {
+    const text = renderStressSummary('slave_revolt', 'Avel', null, factsOf(recordOf(['slave_revolt'], 'secure')));
+    // anchored: the next assertion pins the reworded paragraph whole
+    expect(text).not.toMatch(/slave market/i);
+    expect(text).toBe('The enslaved population of Avel has organised. What began as work stoppages and passive resistance has moved into open defiance. Whole work gangs have downed tools and will not take them up again. The governing authority\'s first response was inadequate. Its second response is still being decided.');
+  });
+});

@@ -27,6 +27,8 @@ import { drawDeclared, resolveSiblingSentences } from '../domain/facts/drawDecla
 
 /** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
 const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
+/** wartime (loss)'s price sentence, the key of its declared sibling set (CENSUS-2d; the chair's answer 1, R-U). */
+const WARTIME_PRICES = 'Food prices have doubled.';
 /** plague_onset's healer sentence, the key of its declared sibling set. */
 const PLAGUE_HEALERS = 'Healers are overwhelmed.';
 
@@ -92,6 +94,13 @@ export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
   [PLAGUE_HEALERS]: Object.freeze([
     Object.freeze({ text: PLAGUE_HEALERS, needs: ['healer'] }),
     Object.freeze({ text: 'The sick outnumber those who can tend them.', twinOf: PLAGUE_HEALERS, excludes: ['healer'] }),
+  ]),
+  // wartime (loss): a doubled price is the food deficit speaking (R-U; the chair's answer 1 to
+  // CENSUS-2c): the line needs `crisis: hunger`; a war fought on a secure food record takes what
+  // the war takes that is not grain (the twin, the chair's ruling R-G).
+  [WARTIME_PRICES]: Object.freeze([
+    Object.freeze({ text: WARTIME_PRICES, crisis: ['hunger'] }),
+    Object.freeze({ text: 'The army has the carts and the road, and the fields are short of hands.', twinOf: WARTIME_PRICES, excludes: ['crisis: hunger'] }),
   ]),
 });
 
@@ -165,10 +174,14 @@ const RENDERERS = {
     return drawDeclared(variants, { draw: (p) => p[o], facts, key: 'stressNarrative:religious_conversion', poolId: 'stressNarrative:RELIGIOUS_CONVERSION', surface: 'crisis', drawKind: 'H' }).text ?? variants[o].text;
   },
 
+  // slave_revolt: presumes only what the key guarantees, enslaved people and their revolt (R-U; the
+  // chair's answer 2 to CENSUS-2c). "The slave market's holding facilities have been breached"
+  // presumed a slave market, which has no fact home (`institution: slave market` is listed under
+  // "needs a home" in docs/CENSUS_2_LANE_2026-11-04.md "CENSUS-2d").
   slave_revolt: (name) =>
     "The enslaved population of " +
     (name || "the settlement") +
-    " has organised. What began as work stoppages and passive resistance has moved into open defiance. The slave market's holding facilities have been breached. The governing authority's first response was inadequate. Its second response is still being decided.",
+    " has organised. What began as work stoppages and passive resistance has moved into open defiance. Whole work gangs have downed tools and will not take them up again. The governing authority's first response was inadequate. Its second response is still being decided.",
 
   // wartime: the profit text names no garrison (lane DEFENSE-2, 2026-11-03). It is rendered from
   // the stress type and the place's name alone, with no roster in reach, so it says only what
@@ -183,7 +196,7 @@ const RENDERERS = {
       ? s +
           " is in a kingdom at war and currently positioned to profit. Military contracts are flowing. Prices are high and merchants with the right connections are getting richer. The cost will come due (it always does), but for now the war is good for business."
       : s +
-          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. Food prices have doubled. The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
+          " is in a kingdom fighting a war it may not win. Conscription has taken a third of the working-age men. Supply caravans pass through on crown requisition. " + WARTIME_PRICES + " The governing authority is demanding sacrifice while certain families are quietly thriving on contracts.";
   },
 
   // mass_migration: the old closure used `typeof getInstFlags == 'function'` (ALWAYS
