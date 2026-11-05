@@ -331,6 +331,42 @@ function wantOf(npc) {
   return /[.!?]$/.test(lower) ? lower : `${lower}.`;
 }
 
+/** @param {TonightNpc} npc @returns {string} the temperament (X-48: never the nervous habit) */
+function temperamentOf(npc) {
+  const p = /** @type {{ personality?: unknown }} */ (npc).personality;
+  return clean(typeof p === 'object' && p ? /** @type {{ dominant?: unknown }} */ (p).dominant : p);
+}
+
+/**
+ * THE ONE CHOICE of what a person is voiced with (lane R11, the chair's ruling 2026-11-04), read
+ * by the Tonight sheet and the Quick Guide (`settlementQuickGuide.js :: personDetail`): the most
+ * concrete of (b) the person's own goal, only when it passes the voiceable shape rule
+ * (`isVoiceableWant`); (c) their secret; (d) their temperament. (a), the crisis cast's role want
+ * (CAST_WANTS), is the sheet's own and comes first there. `text` is the want lower-led and closed
+ * (read after "Wants to"), or the secret / temperament as the record holds it; '' when the record
+ * holds none of the three.
+ * @param {TonightNpc} npc @returns {{ says: 'want'|'secret'|'temperament', text: string }}
+ */
+export function voicedLineOf(npc) {
+  const goal = clean(typeof npc?.goal === 'object' && npc.goal ? (npc.goal.short || npc.goal.long) : npc?.goal);
+  if (goal && isVoiceableWant(goal)) return { says: 'want', text: wantOf(npc) };
+  const secret = npc ? secretOf(npc) : '';
+  if (secret) return { says: 'secret', text: secret };
+  const temper = npc ? temperamentOf(npc) : '';
+  if (temper) return { says: 'temperament', text: temper };
+  return { says: 'want', text: '' };
+}
+
+/**
+ * A person's own line on the sheet (the seat-holder, the senior cleric): `voicedLineOf`, the
+ * secret and the temperament closed as sentences.
+ * @param {TonightNpc} npc @returns {{ says: 'want'|'secret'|'temperament', line: string }}
+ */
+function ownLineOf(npc) {
+  const { says, text } = voicedLineOf(npc);
+  return { says, line: says === 'want' ? text : sentence(text) };
+}
+
 /** @param {string} text @returns {RegExp} */
 function templatePattern(text) {
   const escaped = text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&').replace(/\\\{[a-z]+\\\}/g, '.+?');
@@ -395,7 +431,7 @@ function peopleOf(source) {
 
   const seatName = rulingChainOf(/** @type {Parameters<typeof rulingChainOf>[0]} */ (source)).npc?.name || '';
   const seat = seatName ? npcs.find(({ npc }) => clean(npc.name) === seatName) : undefined;
-  if (seat) add(seat, 'seat', wantOf(seat.npc));
+  if (seat) { const own = ownLineOf(seat.npc); add(seat, 'seat', own.line, undefined, own.says); }
 
   const patterns = crisisSecretPatterns(source);
   // RUNG2-F13 (soak1k-4200): a crisis's TARGET never voices the crisis's own secret — the target
@@ -412,7 +448,7 @@ function peopleOf(source) {
   if (keeper) add(keeper, 'secret', sentence(secretOf(keeper.npc)));
 
   const cleric = npcs.find(({ npc }) => npc.category === 'religious' && !out.some((p) => p.name === clean(npc.name)));
-  if (cleric) add(cleric, 'cleric', wantOf(cleric.npc));
+  if (cleric) { const own = ownLineOf(cleric.npc); add(cleric, 'cleric', own.line, undefined, own.says); }
   return wantsOnce(out);
 }
 

@@ -18,6 +18,7 @@ import { formatCount } from '../formatNumber.js';
 import { institutionDisplayName } from '../display/institutionDisplayName.js';
 import { liveInstitutions } from '../institutions/institutionRoster.js';
 import { waterAccessKind } from '../tradeRouteSemantics.js';
+import { voicedLineOf } from './tonightSheet.js';
 
 const INFLUENCE_RANK = Object.freeze({
   high: 0,
@@ -806,27 +807,13 @@ function composeEntryPoint(settlement) {
  * @returns {string}
  */
 function personDetail(npc) {
-  const goal = cleanText(
-    typeof npc.goal === 'object'
-      ? (npc.goal?.short || npc.goal?.long)
-      : npc.goal,
-  );
-  if (goal) return sentence(`Wants to ${lowerLead(stripInfinitive(goal))}`);
-
+  // R11: the ONE choice of what a person is voiced with (tonightSheet.js :: voicedLineOf, the
+  // chair's ruling): the goal only when it is voiceable, else the secret, else the temperament.
+  const { says, text } = voicedLineOf(/** @type {Parameters<typeof voicedLineOf>[0]} */ (npc));
+  if (text && says === 'want') return sentence(`Wants to ${text}`);
+  if (text && says === 'secret') return sentence(`Secret: ${lowerLead(text)}`);
   // X-48: the temperament, never the nervous habit (`tell`), which prints nowhere.
-  const temperament = cleanText(
-    typeof npc.personality === 'object'
-      ? npc.personality?.dominant
-      : npc.personality,
-  );
-  if (temperament) return sentence(temperament);
-
-  const secret = cleanText(
-    typeof npc.secret === 'object'
-      ? npc.secret?.what
-      : npc.secret,
-  );
-  if (secret) return sentence(`Secret: ${lowerLead(secret)}`);
+  if (text) return sentence(text);
 
   return 'No immediate agenda is recorded.';
 }
@@ -886,11 +873,6 @@ function lowerLead(value) {
 /** @param {string} value @returns {string} */
 function upperLead(value) {
   return value ? value[0].toUpperCase() + value.slice(1) : '';
-}
-
-/** @param {string} value @returns {string} */
-function stripInfinitive(value) {
-  return value.replace(/^to\s+/i, '');
 }
 
 /** @param {string} value @returns {string} */
