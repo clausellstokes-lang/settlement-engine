@@ -82,3 +82,26 @@ describe('the history hooks declare what their event does not guarantee', () => 
     expect(bad).toEqual([]);
   }, 120_000);
 });
+
+describe('the outlook hooks carry their declarations beside the branches that print them (R-C)', () => {
+  it('each key is a string the branch prints, each atom declarable, each twin answers its original', async () => {
+    const { OUTLOOK_HOOK_SIBLINGS } = await import('../../src/generators/economy/foodBalance.js');
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../../src/generators/economy/foodBalance.js', import.meta.url), 'utf8');
+    const printed = src.slice(0, src.indexOf('export const OUTLOOK_HOOK_SIBLINGS'));
+    expect(Object.keys(OUTLOOK_HOOK_SIBLINGS).length).toBe(3);
+    for (const [key, set] of Object.entries(OUTLOOK_HOOK_SIBLINGS)) {
+      expect(printed.includes(key), key.slice(0, 40)).toBe(true);
+      expect(set[0].text).toBe(key);
+      for (const a of set[0].needs) expect(assertDeclarable(a).dimension, a).toBeTruthy();
+      if (set[1]) {
+        expect(set[1].twinOf).toBe(key);
+        expect(set[1].excludes).toEqual(set[0].needs);
+      }
+    }
+    // the [sea] case: the timber twin says no ships
+    const timber = Object.values(OUTLOOK_HOOK_SIBLINGS).find((s) => /timber/.test(s[0].text));
+    expect(timber[0].needs).toEqual(['navigable']);
+    expect(/ship|boat|dock/i.test(timber[1].text)).toBe(false);
+  });
+});
