@@ -681,3 +681,55 @@ final record's `physical.clothes` against `factsOf(settlement)`): "a dockhand's 
 work" (`docks`) false in **58 of 96 prints, 48 births** (4f's "48 of 81" counted births against prints); "vestments a
 size too grand for the shrine they serve" (`sacredHouse`) 17 / 168 (17 births); "guild colours worn with pride"
 (`guild`) 2 / 166 (2 births). Nothing else here.
+
+**A third merge:** census-1b at `f1d7605` (merge `85f18a3`, docs only: 1h's lane record). It records that **CENSUS-1h
+stopped at its boundary before R-AW and `tablePools`' second half**; both are now CENSUS-1i's items 1 and 2 (item 3 is
+R-AX's keyed draw, on unit 2's rows). So:
+
+| unit | status |
+|---|---|
+| 4 — R-AW re-measured | **waiting on CENSUS-1i item 1.** `[guard]` stays **5 → 5** on the 1,000 (soak1k-110, -462, -470, -571, -614); the would-be label changes stay 4f's measurement, 12 of 1,000 births (12 of 363 holders). Nothing to apply here: the label row and its twin are on this lane since 4f (`3cb9861`). |
+| 5 — the `colour` marks | **waiting on CENSUS-1i item 2** (the walker). Read verdicts exist only for the tie prose (267 rows marked `colour` in its phase-A ledger) and the wants (53); the catalogue descriptions (599 no-atom rows) and the goal texts (99 + 71 + 17) carry no per-line verdict, so they must be re-read before any mark (the chair's answer 2: never an unread line). The register count is unmoved by this seat. |
+
+**Unit 6 — the 60 and the 1,000 as a diff (R-B).** BEFORE = the first merged base `8c55289`; AFTER = the tip `85f18a3`
+(units 2–3 plus the two later merges). This lane's units are byte-identical (unit 2: 0 of 585), so every movement below
+is a merge's.
+
+| class (settlements) | the 60 | the 1,000 |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same |
+| `coh:*` · `A-12` | 0 → 0 | 0 → 0 |
+| `reader:hook-pools [guard]` | 0 → 0 | **5 → 5** (R-AW not landed) |
+| `cert:false-presumption` | 10 → **0** | 161 → **0** — all `foodBalance:OUTLOOK_HOOK_SIBLINGS` (lane 3's), cured by 1h's R-AU `d035cf8`, merged; none of this lane's pools on either side |
+| other `cert:*` | none | none (certification 1,000 / 1,000, 0 errors) |
+| reader:faction-role-fit · relation-types · tension-memory · validation-on-page · A-05 · A-09 · A-11 · info:battery-would-not-vouch | identical | identical (348 · 147 · 61 · 985 · 977 · 8 · 1 · 676) |
+| verdict | STOP → CLIMB | STOP (1,912 findings) → CLIMB (1,662) |
+| `declared-share` npcs · relationships · institutions · services | 333/2,658 · 149/1,356 · 120/246 · 116/3,435 → same | 5,155/42,933 (0.120) · 2,077/21,528 (0.096) · 2,168/4,215 (0.514) · 1,965/55,655 (0.035) → same |
+| `declared-share` economics (R-AU's kept notes gone) | 31/110 → 25/104 | 549/1,932 → 504/1,887 |
+
+R-AX adds no share yet: the criminal-secret draw is unwired (carried), so its pool is not ledgered.
+
+**Rows moved, by cause (nothing re-recorded):** golden 0 (unit 2, proven 0 of 525); soak records 0 of 60 (unit 2);
+wiring census: 0 rows — still stale only by 4f unit 6's `tablePools` row (+72 bytes; the census interlock's two reds,
+`proseWiringCensus.walker` "byte-identical to a fresh build" and "THE DRY READ", stay listed for the compose, the
+chair's answer 4); unit 2 moves no `tablePools` row (the flat view walks the same 124 strings); no manifest row; no pin.
+
+**Tests / gates.** New: `tests/data/criminalSecretsByHolder.test.js` (4), red-first. eslint 0; typecheck:ratchet
+167/167; domain:strict only the merged crisisFactFindings +4 / composeStateProse +2.
+
+**Sites for the mechanism lane (CENSUS-1i):** `rulingStructure.js :: generatePowerStructure`'s `Military/Guard` label
+(R-AW, resolved at the birth's close); `factionLeaderSecret.js :: generateFactionLeaderSecret`'s pick (R-AX: hand it
+the holder's role from `generateSingleNPC`, draw over `criminalSecretsForHolder(type, classOfRole(role))`; 665 births
+move, counted above); `npcGenerator.js :: generateNPCAppearance` (R, NPC_WANTS; 48 births print a false dockhand line).
+
+**Open questions for the chair.**
+1. R-AX's keyed draw sends 775 of the 1,711 moved draws to the personal pool (a non-clergy holder whose type roll lands
+   on `religious`, with the visions line barred by `allowsSecret`). Accept that, or should the type roll's weights
+   also read the holder (a weight change: it moves the type roll's births too)?
+2. `Temple Guard Commander` is `clergy` by `classOfRole`, so a soldierly secret is refused to it once keyed. Leave the
+   reader as it is (R-X), or should the military rows also admit a clergy holder whose title is a command?
+
+**Where CENSUS-4h starts.** Only on CENSUS-1i's landings: (a) when R-AW lands, merge and re-measure `[guard]` 5 → 0 and
+the ~12 label changes; (b) when the walker lands, re-read the descriptions' and goals' no-atom rows, then mark
+`colour` on the read rows (the ties' 267 and the wants' 53 are read already) and count the register's fall; (c) when
+R-AX's keyed draw lands, count the births against unit 2's 665. Otherwise nothing of this lane remains but the compose.
