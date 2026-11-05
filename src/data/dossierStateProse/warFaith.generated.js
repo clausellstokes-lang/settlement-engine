@@ -2685,6 +2685,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no soldiers"
+          ],
           "text": "A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.",
           "slots": [
             "settlement"
@@ -2874,6 +2877,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "settlementWarStatus null (peace, not missing data)": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: unrest"
+          ],
           "text": "There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.",
           "slots": [
             "settlement"
@@ -2890,6 +2896,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: unrest"
+          ],
           "text": "Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.",
           "slots": [
             "settlement"
@@ -2908,6 +2917,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "The gates are shut and there is something outside them, and the something is not a rumour.",
           "slots": [],
           "vid": 2
@@ -3298,6 +3310,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "aftermath siege_lifted": [
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.",
           "slots": [
             "settlement"
@@ -3460,6 +3475,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "market"
+          ],
           "text": "The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.",
           "slots": [
             "settlement"
@@ -5202,6 +5220,9 @@ export const DOSSIER_STATE_PROSE_WAR_FAITH = /* #__PURE__ */ Object.freeze({
       "LEGITIMACY: established": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: religious_conversion"
+          ],
           "text": "The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.",
           "slots": [],
           "vid": 1

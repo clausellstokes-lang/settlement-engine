@@ -69,6 +69,12 @@ const needsCrisis = (variant) => {
   const c = variantFactDeclaration(variant).crisis;
   return c.length > 0 && !c.includes('calm') && !c.includes('any');
 };
+/**
+ * CENSUS-5c unit 3 (2026-11-05): a variant that EXCLUDES a presence atom (`no organised crime`,
+ * DS-DEF-4 structure null v1) is refused by the calm double, which holds every presence atom;
+ * the calm reference sets it aside, as it sets aside a crisis-needing variant above.
+ */
+const excludesPresence = (variant) => variantFactDeclaration(variant).excludes.some((a) => !/^crisis\b/.test(a));
 
 /**
  * The hash pair, re-spelled here so every key this file checks is checked against an
@@ -458,7 +464,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
         const reference = pool.filter(
-          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant),
+          (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots) && !needsCrisis(variant) && !excludesPresence(variant),
         );
         // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
         // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).

@@ -2094,6 +2094,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "structure null (nothing organized recognized)": [
         {
           "angle": "ledger",
+          "marks": [
+            "no organised crime"
+          ],
           "text": "No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.",
           "slots": [
             "settlement"
@@ -2129,6 +2132,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "organised crime"
+          ],
           "text": "There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.",
           "slots": [
             "settlement"
@@ -2920,6 +2926,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "soldiers"
+          ],
           "text": "The soldiers at {settlement} are paid, which the town regards as unremarkable and which is the single thing most likely to keep them where they are.",
           "slots": [
             "settlement"

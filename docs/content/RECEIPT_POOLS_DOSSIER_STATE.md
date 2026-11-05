@@ -2851,13 +2851,13 @@ the leash is the state, not a fate.
 3. `[visitor]` A stranger at {settlement} is at risk from individuals rather than from an arrangement, which is worse in the moment and better in every other way.
 
 **structure `null` (nothing organized recognized)**
-1. `[ledger]` No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.
+1. `[ledger · no organised crime]` No criminal infrastructure has been identified at {settlement}. Whatever wrongdoing the town has does not run through anything that could be called an organization.
 2. `[street]` What goes wrong at {settlement} goes wrong one thing at a time and belongs to whoever did it.
 3. `[visitor]` A stranger asking after the arrangements at {settlement} is met with genuine incomprehension, which is either the truth or an unusually good performance of it.
 
 **capture `none`**
 1. `[ledger]` Nothing criminal has reached the {seat} at {settlement}. Whatever operates in the town operates outside the hall, and the hall's decisions are the hall's.
-2. `[counterforce]` There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.
+2. `[counterforce · organised crime]` There is a criminal interest at {settlement} with the means to reach into the hall and it has not; the seat's people are watched too closely for the approach to be worth its risk.
 3. `[street]` Whatever is being run at {settlement} is being run outside the hall, and the town's dealings with the hall are the town's dealings with the hall.
 
 **capture `adversarial`**
@@ -2983,7 +2983,7 @@ magical bypass channels (`teleport` / `airship`) are live-world state.
 
 **`Economic Backing: Well-funded`**
 1. `[ledger]` {settlement} pays its defense in full and on time, keeps the equipment maintained and holds something in reserve; every other arrangement in the town's defense is worth more for it.
-2. `[street]` The soldiers at {settlement} are paid, which the town regards as unremarkable and which is the single thing most likely to keep them where they are.
+2. `[street · soldiers]` The soldiers at {settlement} are paid, which the town regards as unremarkable and which is the single thing most likely to keep them where they are.
 3. `[counterforce · walls]` A bad year does not empty {settlement}'s walls, and the reason is the pay rather than the loyalty. A town that keeps paying keeps its people standing where it put them.
 4. `[counterforce · no walls]` A bad year does not empty {settlement}'s muster, and the reason is the pay rather than the loyalty. A town that keeps paying keeps its people standing where it put them.
 
@@ -3818,7 +3818,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 **posture `peace`**
 1. `[ledger]` {settlement} is at peace and is arranged for it. Nothing here is being held back for a war, and nothing is being produced against one.
 2. `[street]` The town is doing what it does, and has been doing it long enough that a muster would be a genuine interruption.
-3. `[visitor]` A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.
+3. `[visitor · no soldiers]` A stranger at {settlement} finds a town with no soldiers to speak of and no anxiety about the absence.
 
 **posture `alert`** {colour}
 1. `[ledger]` {settlement} is on alert. Nothing has been raised and everything is being watched, and the watching has begun to cost.
@@ -3856,13 +3856,13 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[counterforce · dm-only]` {settlement}'s disposition has moved and its appearance has not, which took one decision at the top of the hall and a great many small silences beneath it.
 
 **`settlementWarStatus` null (peace, not missing data)**
-1. `[ledger]` There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.
+1. `[ledger · no crisis: unrest]` There is no war at {settlement}: none against it and none of its own. The town's quarrels are the ordinary kind and are settled the ordinary way.
 2. `[counterforce]` {settlement} has neighbours it disagrees with and no front with any of them; the disagreements have stayed disagreements.
-3. `[street]` Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.
+3. `[street · no crisis: unrest]` Nobody at {settlement} is fighting anybody, and the town would find the question of who odd rather than sensitive.
 
 **live `war_front` INTO the settlement (a genuine siege)**
 1. `[ledger]` A live front runs into {settlement}. There is an army here, it is arranged against the town, and the town's condition is now a question of stores and time.
-2. `[street]` The gates are shut and there is something outside them, and the something is not a rumour.
+2. `[street · gate]` The gates are shut and there is something outside them, and the something is not a rumour.
 3. `[unfolding]` What decides {settlement} now is being decided outside its walls, and nothing the town does inside them changes the arithmetic much.
 
 **phantom front (hostility with no army behind it)**
@@ -3936,7 +3936,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 3. `[street]` What the town sends away at {settlement} is enough that people plan their year around what is left, rather than around what they earn.
 
 **aftermath `siege_lifted`**
-1. `[street]` The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.
+1. `[street · gate]` The army outside {settlement} has gone. The gates are open, the town is counting, and the counting is taking longer than anybody expected.
 2. `[ledger]` The siege at {settlement} has been lifted and the town's condition has not yet caught up with the fact; stores, walls and people are all where the siege left them.
 3. `[unfolding]` {settlement} is open again and is not yet what it was; the counting has started and nobody has said aloud how long the making-good will take.
 
@@ -3968,7 +3968,7 @@ inference. `stream: true` is the only thing that licenses *still being paid*.
 
 **aftermath `trade_realignment`**
 1. `[ledger]` The routes out of {settlement} are not the routes that were; the war moved where things go, and where things go has not moved back.
-2. `[street]` The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
+2. `[street · market]` The stalls at {settlement} are quieter than the town remembers them being, and the carters who used to fill them have somewhere else to be now.
 3. `[elder]` {settlement} trades with different towns than it did {timeband_since}, and the change was not chosen by anybody here.
 
 ---
@@ -4822,7 +4822,7 @@ panel does not surface at all.
 4. `[ledger · crisis: religious_conversion]` The patron's claim was settled long before the conversion reached {settlement}, and it is being tested now by people who never thought to question it.
 
 **LEGITIMACY: `established`**
-1. `[ledger]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.
+1. `[ledger · no crisis: religious_conversion]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.
 2. `[threshold]` {creed} holds the seat by right as much as by numbers; the right is real, and it is the kind of right scandal reaches.
 3. `[street]` The faith's standing is legitimate and ordinary. It is the arrangement people are used to.
 
