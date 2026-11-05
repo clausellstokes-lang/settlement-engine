@@ -26,3 +26,22 @@ describe('the institution-presence home (CENSUS-1 fact 11)', () => {
     expect(defenseFactsOf(rec('City hospital')).hasHospital).toBe(true);
   });
 });
+
+// CENSUS-1c unit 6 (the vocabulary rulings §6): the reader faults the lanes found.
+describe('CENSUS-1c unit 6 · the institution patterns', () => {
+  const rec = (/** @type {string[]} */ names) => ({ institutions: names.map((name) => ({ name, category: 'Economy' })) });
+  it("'Access to external mill' is no mill here; a mill still is", () => {
+    expect(hasInstitution(rec(['Access to external mill']), 'mill')).toBe(false);
+    expect(hasInstitution(rec(['Mill']), 'mill')).toBe(true);
+    expect(hasInstitution(rec(['Watermill']), 'mill')).toBe(false); // unchanged: no word boundary
+  });
+  it("'Access to parish church' is no temple here (the faith home's access-only reading); a church still is", () => {
+    expect(hasInstitution(rec(['Access to parish church']), 'temple')).toBe(false);
+    expect(hasInstitution(rec(['Parish church']), 'temple')).toBe(true);
+  });
+  it("'Ale house' and 'Alehouse' are taverns", () => {
+    expect(hasInstitution(rec(['Ale house']), 'tavern')).toBe(true);
+    expect(hasInstitution(rec(['Alehouse']), 'tavern')).toBe(true);
+    expect(hasInstitution(rec(['Brewery']), 'tavern')).toBe(false);
+  });
+});
