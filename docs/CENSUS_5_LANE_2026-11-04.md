@@ -89,3 +89,124 @@ Records: 60 of 60 byte-identical (the record hash in `settlements.jsonl`). Pages
 2. The mute claims (the food-endurance pools, strategic value LOW, uncontested niches, war-rested): twin, silent slot, or re-key? Each pool is minority-state, so R-G's bar ("empty for most births") is not met.
 3. `walls` on DS-DEF-1 WEAK v2: a kernel mark (with the mount row declaring walls) or a census `walls` atom? The tag slot reads the word `walls` as the kernel's today.
 4. Should CENSUS-1c carry the render-time K notes into the soak ledger before CENSUS-5b declares more? Without them, `declared-share` and `cert:false-presumption` cannot see a kernel declaration.
+
+---
+
+# CENSUS-5b — the off-census pools, the mute twins, DS-DEF-1 WEAK v2's walls (lane record, 2026-11-05)
+
+> A build seat's record for the chair. Same branch, base `40f0490ad` (CENSUS-5's tip). Merged first: `origin/lane/census-1b-2026-11-04` at `d6f8456be` (R-J, the render ledger; `ea641f692`), then 1d's tip `7dc90a6f7` (R-H, the display sites, the two declaration registers; `9eeda1d9f`), each with the wiring census re-taken through its door. Transport push after every unit; no pull request.
+
+## The units
+
+| unit | commit | what |
+|---|---|---|
+| merge | `ea641f692` | 1c's render ledger (R-J) |
+| 1 | `a5ee3fb53` | DS-DEF-1 WEAK v2 declares `walls` (R-O); the `defense.postureHeader` mount row declares `['threat', 'walls']` |
+| 2 | `5b65db04c` | item 5: the off-census pools read; 5 wired baseline-conflict declarations with twins; 38 carried declarations (13 twins) for 1d's wiring |
+| merge | `9eeda1d9f` | 1d's R-H (the disjunction), display sites, registers |
+| 3 | `c00b30eb6` | item 6: the four pools that would go mute under their own crisis, one twin each (R-L) |
+| doc | (this commit) | this record |
+
+## How this seat spelled the declarations (the chair's rulings this lane made, recorded, vetoable)
+
+- **C5b-1, a line declares only what its branch does not guarantee.** An inline T branch's `if (inst.hasWalls)` is the line's key (design §3.1: key-guaranteed atoms are never re-declared on a line). Every line of the named pools was read. Only lines that presume an atom their branch does not test declare it.
+- **C5b-2, declared sibling sets beside the original (CENSUS-1c's shape), keyed by the printed text.** The originals stay where their string consumers read them, so nothing about a consumer changes. Where 1c already resolves the table through `resolveSibling` (`governanceNarrative.js :: BASELINE_CONFLICT_SIBLINGS`), the declaration is enforced at once. Everywhere else the table is CARRIED, with no consumer: the site is CENSUS-1d's to route (R-C; no draw site wired here). No `textOf` helper was added, because `drawDeclared.js :: lineText` already is that helper (R-C's "one helper").
+- **C5b-3, a twin at a T site moves only its refused births.** A T lookup has no draw, so a twin adds no 1/(n+1) share. Without a twin, `resolveSibling` keeps the original, so a declaration with no twin is census-only at a T site. Twins were added where the record contradicts the line in measured births; R-site names (faction names) get none (an addition to an R stream, which is the chair's to price).
+- **C5b-4, "Town watch and militia" declares the watch alone.** On the 1,000 it printed 48 times: `watch` was false in 0, `militia` in 48. Its towns hold a watch, and "militia" reads as the watch's levy. Declaring both (a conjunction) would refuse a true line every time.
+- **C5b-5, `ruler: council` is too narrow for "fund the council".** A High Theocratic Council reads `ruler: priest` (soak1k-269), so the atom would refuse a true line. The two council lines stay undeclared, waiting on a council-presence atom (open question 3).
+- **C5b-6, `priest` is not declared at the power step.** The baseline conflict's facts are a names-only record with no NPCs (`factsOf({ institutions })`), so `priest` reads false for every birth there. The two priest lines wait on the site handing the final record (open question 4).
+- **C5b-7, the calm double gains 1c's getters.** `tests/helpers/calmFactsDouble.js` (R-N, this lane's helper) promises "every presence atom holds". It now also holds `soldiers`, `commander` and `faith.seniorCleric`, which 1c added after the double was written. Its six importers' reds are the base's, title for title.
+
+## Item 5 — the off-census pools
+
+| surface · pool (Appendix B row) | site kind · wired? | lines read | declaring | twins (share) | refused today (1,000, printed / false) | pure colour |
+|---|---|---|---|---|---|---|
+| Power · `governanceNarrative` baseline conflicts (69) | T · **wired by 1c** | ≈95 | 1 → **6** | 1 → **6** (5 new, below) | church "market day activities" 15 / 13 · "sells the most at market" 1 / 1 · militia captain, miller, market-day undercut 0 / 0 | the 15 stress narratives (stress-keyed; "three factions", "last winter" → the register's "needs a field / no atom") |
+| Defense · `safetyProfile` (78) | T · carried | ≈128 | **10** | **10** (0 now) | the watch under succession 61 / 30, migration 63 / 28, revolt 61 / 25, insurgency 43 / 22, displacement 71 / 32; walls beside a garrison 52 / 3, beside a gate 229 / 0; thin watch 2 / 1; merchant army's watch 32 / 0; garrison chaplain 12 / 0 | the strain labels and descs (stress-keyed); "wizard's tower" → needs a home (no atom) |
+| Power · `rulingStructure` descriptions (68) | T · carried | ≈60 | **7** | **2** (0 now) | Town watch and militia 48 / 0 · city garrison lines 101 / 0, 30 / 0 · market-day traders 8 / 0 · part-time militia 7 / 1 · armed patrol 34 / 13 | govDescBy* (label-keyed) |
+| Power · `stressFactions` (70) | T | ≈39 | 0 | 0 | — | **all** (stress-keyed), pending the register |
+| Factions · `FACTION_DESCRIPTORS` (66/67) | R · carried | 90 | **17** | 0 (an R stream) | Garrison Bloc 29 / 0 · Order of the Watch 29 / 0 | the rest |
+| Power · `STRESS_RUMORS` (39) | R | 4 | 0 | 0 | — | **all** (the relationship's own text) |
+| Power · `powerSupport :: ALIGNED_BASIS` (92) | T | 13 | 0 | 0 | — | **all** (archetype-keyed) |
+| Power · `rulingPower` (116) | T · carried | 18 | **2** (`temple`; election "Stable" `crisis: calm`) | 0 | play-time (a transfer of power), not soaked | the rest |
+| Defense · `threatProfile :: THREAT_TYPE_TEMPLATES` (118) | T · carried | 12 templates | **2** (siege "the walls"; unrest victims "the watch") | **1** (0 now) | not printed on the 1,000 | the rest |
+| Defense · `threatDefensePolicy` (79) | T | 2 tables | 0 | 0 | — | **all** (catalogue names) |
+| War · `warRemembrance` (105) | T | 23 | 0 | 0 | — | **all** (the world ledger's bands) |
+| Faith · `faithPanelModel` / `deityEffects` (108/109) | A | 15 | 0 | 0 | — | **all** (cause- and axis-keyed) |
+
+"Pure colour" is listed, **pending the register**. 1d's register reads the state-prose corpus only, and the off-census tables have no `{colour}` slot yet (the census's `tablePools`, design §3.5). No R-M leaked condition occurs in these files.
+
+## The new lines (the chair's rulings, R-G / R-L; the owner reads them after the fact)
+
+**Wired (they move births now; a T site, so each moves exactly its refused births):**
+
+| original (its atom) | twin | share on the 1,000 |
+|---|---|---|
+| "The village militia captain is pushing for authority over disputes that the reeve used to handle." (`militia`) | "The strongest armed household is pushing for authority over disputes that the reeve used to handle." | 0 |
+| "The miller and the largest farming household are in dispute over prices and access." (`institution: mill`) | "The largest farming household and the traders who buy from it are in dispute over prices and access." | 0 |
+| "The household that sells the most at market has been throwing its weight around in community decisions." (`market`) | "The household that sells the most beyond the settlement has been throwing its weight around in community decisions." | 1 (soak1k-252) |
+| "Two households have been undercutting each other on market day for months. …" (`market`) | "Two households have been undercutting each other on every sale for months. …" | 0 |
+| "The church wants approval rights over market day activities. The village reeve disagrees." (`market`) | "The church wants approval rights over who may trade and when. The village reeve disagrees." | 13 (soak1k-18, -60, -97, -182 …) |
+
+**Carried (0 now; at 1d's wiring each moves exactly the refused births measured above).** The safety profile's ten: the watch → "whoever keeps order" / "those who keep order"; "the walls and gates" → "the approaches"; "gates and walls" → "gates"; "The watch is too thinly spread" → "Enforcement is too thinly spread"; "The watch is looking the other way" → "No one with the authority to stop it is trying"; "The garrison chaplain and the commander are the same man" → "The settlement's chaplain also leads its armed men". The roster's two: "Part-time armed volunteers…", "Armed patrol of able-bodied residents…". The siege template: "…pressing the settlement".
+
+**The mute twins (item 6), each `crisis: <kinds>` (R-I), each the only survivor under its crisis and refused everywhere else:**
+
+| pool | the claims now declare | twin (v4) |
+|---|---|---|
+| DS-DEF-1 strategic value LOW | `no crisis: under_siege, occupied` (v1–v3) | `[counterforce]` Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now. |
+| DS-WAR-1 warExhaustion rested | `no crisis: under_siege, occupied` (v1, v2); v3 also `wartime` | `[unfolding]` {settlement} came to this fighting rested, with nothing spent before it began; that reserve is the town's whole advantage, and the fighting now draws on it daily. |
+| DS-FTH-3 every niche uncontested | `no crisis: religious_conversion` (v1; v2, v3 by CENSUS-5) | `[threshold]` On paper each of the town's creeds still has its separate calling; the conversion pressing on {settlement} is not a quarrel between them but a pull on every household at once. |
+| DS-FTH-3 LEGITIMACY secure | `no crisis: religious_conversion` (v1–v3) | `[ledger]` The patron's claim was settled long before the conversion reached {settlement}, and it is being tested now by people who never thought to question it. |
+
+A twin moves no birth outside its state, because the pool was otherwise mute there. No silent slot was chosen. The mute scan (every DS-DEF/POW/REL/WAR/FTH pool under each single crisis kind, walls both ways) found **0 mute pools at the base and 0 at the tip**: rung 2D's and CENSUS-5's declarations had left none, and every pool this lane mutes is filled by its twin. Food endurance is CENSUS-3c's (R-K) and is not touched here.
+
+## Waiting / owed (the line is left as it is)
+
+| line | presumes | waiting on |
+|---|---|---|
+| `rulingStructure` "…and fund the council" (crossroads) · "…expect council access in return" | a council beside the ruler | a council-presence atom; `ruler: council` refuses a theocratic council (C5b-5) |
+| `governanceNarrative` "The priest has been asking questions…" · "The local priest has declared…" | priest | the baseline-conflict site handing the final record (C5b-6) |
+| `rulingPower` election "Stable: a fresh mandate…" | no crisis | a twin's wording, once a transfer of power is soaked (play-time) |
+| `settlementNarrative :: genSuccessionNarr` "`ctx.milForce` or 'the garrison'" fallback; "the same market" | garrison; market | INTAKE (not in this lane's list): the Power area's next lane |
+| DS-DEF-6 "The soldiers at {settlement} are paid"; DS-DEF-4 crime lines | soldiers; crime | CENSUS-5's owed rows: `soldiers` now exists (1c); `crime` is CENSUS-3b's |
+
+## The 60 and the 1,000 (R-B: before = the merged base `10bd39e21` = CENSUS-5's tip + 1d's tip, without this lane's units; after = `c00b30eb6`)
+
+| run | settlements · findings · errors · verdict | `coh:crisis-blind-prose` | other contradiction classes | `cert:*` · `cert:false-presumption` | records moved | pages moved |
+|---|---|---|---|---|---|---|
+| 60 | 60 · 171 → 171 · 0 → 0 · STOP → STOP | 19 → 19 | none (`coh:defence-words`, `coh:faith-denial`, `coh:crisis` 0 → 0) | none · **0 → 0** | 1 (soak1k-18) | 3 settlements (power 1, defense 2) |
+| 1,000 | 1,000 · 2,549 → 2,549 · 0 → 0 · STOP → STOP | 241 → 241 | none; `A-12:self-vouch-false` 14 → 14; the nine `reader:*` classes identical | none · **0 → 0** | **14** = 13 church market-day + 1 sells-at-market, the measured set exactly | — |
+
+The STOP on both sides is the base's. `coh:crisis-blind-prose` fires on rung 2D unit 3's other claims (current stability 119, nothing is failing 34, stable institutional competition 33, food secure 32, depends on none alone 22, competent administration 21, pilgrims 3, a year closed ahead 3), which belong to CENSUS-3c/4b. **On this lane's claims it reads 0 by claim before and after.** The DS-POW/DEF/WAR/FTH calm claims under their own crises are 0, and the four mute pools now speak their twin instead.
+
+**`cert:false-presumption` is now meaningful for these pools.** 1c's render ledger sees the kernel's display-time draws. The 1,000's ledger noted 4,937 declared draws in tab:dossier (4,811 at the base) and 462 in the power baseline conflicts (114). Every one was re-asserted against the final record, and **0 failed**.
+
+`declared-share` by surface (the 1,000, the soak's own aggregate): tab:dossier 4,811 → 4,937 of 213,783 (0.023), power 114 → 462 of 462 (1.000), npcs 543 of 39,351 (unchanged). By family on the 60 (a scratch probe over the same ledger): DS-DEF 176 → 181 of 1,013 (0.179), DS-POW 22 of 592 (0.037), DS-REL 0 of 440, DS-FTH 0 of 60, DS-WAR not drawn on the 60 (no world war), the governance baseline conflicts 0 → 27 of 27, the military modifier 3 of 3.
+
+## Rows moved, by cause (never re-recorded)
+
+- **Golden records:** 0 of 525 against the base's own output, at unit 2 (the baseline conflicts this lane twins do not occur in the corpus). Units 1 and 3 are display only. The base is red on all 525 against the recorded manifest, from 1c's unrecorded moves, not this lane's.
+- **Soak records:** 14 of 1,000 (unit 2's wired twins; the list above).
+- **Wiring census:** re-taken through its door at every unit and merge. Unit 1 moved the `dossierMounts.js` stamp. Unit 3 moved 4 pool rows (variants 2,324 → 2,328). The two merges moved stamps only.
+- **Mount registry:** `defense.postureHeader` declares `['threat', 'walls']` (unit 1; the walker's honesty rule).
+- **Generated leaves:** `defense` (units 1, 3) and `warFaith` (unit 3), through `npm run gen:dossier-prose` only, `--check` green.
+- **The declaration registers (1d):** `declarationRegisters.test.js` is red on this branch in two arms, both from CENSUS-5's and 5b's declarations, and both are the compose's re-take. (a) The crisis-scoped register does not pin CENSUS-5's 14 opted pools. (b) The undeclared register reads falls, among them DS-DEF-1 / DS-FTH-3 / DS-WAR-1 from this lane and the DS-DEF/POW/WAR/FTH rows from CENSUS-5.
+- **Test pins re-keyed by cause:** `stateProseKernel.test.js` twice (the non-vacuity floor 716 → 715 for unit 1's walls dimension; the calm reference sets aside a crisis-needing variant for unit 3); `defenceTwinLines.test.js` (reads the defence-atom sets of the shared baseline table, unit 2); `calmFactsDouble.js` gains 1c's getters (C5b-7).
+- **Red-firsts:** `defenseWeakPerimeterWalls.test.js` 3/4 red at `ea641f692`; `census5bOffCensusDeclarations.test.js` 13/13 red at `a5ee3fb53`; `census5bMuteTwins.test.js` 5/5 red at `9eeda1d9f`. All green at the tip.
+- **Governing suites, per unit, title for title against the unit's own base:** unit 1, 45 files, the base's 55 reds; unit 2, 150 files, the base's 69; unit 3, 74 files, the pre-unit tip's 64. No new red. Two of the base's reds this lane makes larger without causing them: the `power/` module ceiling (800; 826 / 820 at the base, +25 / +42 here), and the golden master (above).
+- **Typecheck:** `typecheck:ratchet` green; `typecheck:domain:strict` red at the base and at the tip with the same two files (`crisisFactFindings.js` +4, `composeStateProse.js` +2), neither touched here.
+
+## Where CENSUS-5c starts
+
+1. The `{colour}` rulings on the DS-REL / DS-FTH / DS-WAR pools that presume nothing beyond their keys. 1d's register now gives a `{colour}` pool its reading; CENSUS-5 left these "for that register's first pass".
+2. CENSUS-5's owed DS-DEF-6 "The soldiers at {settlement} are paid" (`soldiers` exists since 1c) and DS-DEF-4's crime lines once CENSUS-3b's `crime` lands.
+3. The carried tables become enforced when CENSUS-1d/1e routes their sites (`safetyProfile`, the `rulingStructure` descriptions, `FACTION_DESCRIPTORS`, `THREAT_TYPE_TEMPLATES`, `rulingPower`). The census lane should enrol each table as a `tablePools` row.
+4. The waiting rows above.
+
+## Open questions for the chair
+
+1. The two `declarationRegisters.test.js` arms red on this branch: confirm the compose re-takes them (CENSUS-5's 14 pools plus the falls), not the lane.
+2. The `power/` module ceiling (800), red at the base: split the two modules, or move the sibling tables to a sibling data module? The tables stand beside their originals, which is 1c's shape.
+3. A council-presence atom (C5b-5): "fund the council" is true under a theocratic council, so `ruler: council` cannot carry it.
+4. The baseline-conflict site's facts hold no NPCs (C5b-6): should 1d/1e hand that site the final record, so `priest` can be declared there?
