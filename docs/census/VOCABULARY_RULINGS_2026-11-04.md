@@ -49,3 +49,7 @@ The hook tables, the NPC faction-loyalty hooks among them, are CENSUS-3's to app
 ## 8. Accepted as measured
 
 DS-GEN opts in 35 of 140 pools (history, fabric and morphology pools assert no calm) — accepted. The decree pools are 34 / 96 lines, the DS desks 772 — the inventory's counts corrected. The soak harness writes no certification field: "1,000/1,000" is read as "no `cert:*` finding".
+
+## 9. A draw site's facts (added 2026-11-05 06:18 UTC by CENSUS-1f, the chair's R-Z of 2026-11-05 04:5x)
+
+A draw site inside the pipeline is handed only the ONE field measured as settled before its draw (through `factsOf.js :: birthFactsOf`, R-V), never the whole container that holds it: handing the goal draw the whole power structure carried a guild faction the density law can empty later (CENSUS-4d, three births failed the self-check), and handing the ruling step's sibling sets the native roster carried a militia that joins after the power step (CENSUS-1e's R-Q cure, `f2367a4`); the birth self-check (`cert:false-presumption`) stays the guard.
