@@ -402,3 +402,19 @@ export const POLITICAL_FLAVOR = {
       `The practitioners here are respected, consulted, and watched: all three at once, without contradiction. The ${pickRandom2(r.filter((s) => s.type === "magical"))?.name || "this event"} taught the settlement that the useful and the dangerous are frequently the same people`,
   ],
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; `docs/DESIGN_POOL_CENSUS.md` §3.1, the twin tables
+ * dissolved): the walls-free twin of POLITICAL_FLAVOR.disaster_heavy's reserve sentence (F11, rung 2B: soak1k-6879), keyed by SENTENCE because the line goes on to name a drawn event. Each set is the original line, declaring what it presumes, and beside it its
+ * twin with the complementary atom (`twinOf` the original). The original stays where this table's
+ * string consumers read it; the draw site resolves a drawn key through
+ * `domain/facts/drawDeclared.js :: resolveSibling` (the original if the record admits it, else the
+ * twin). Retired from the text-keyed tables `defenceTwinLines.js` / `inlandHookLines.js` (F5, F10),
+ * every twin to the byte. VETOABLE wording, as before (the owner's).
+ */
+export const POLITICAL_FLAVOR_SIBLINGS = Object.freeze({
+  'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.': Object.freeze([
+    Object.freeze({ text: 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'The settlement keeps more in reserve than its size explains: granaries a little too large, stores a little too deep.', twinOf: 'The settlement keeps more in reserve than its size explains: granaries a little too large, walls a little too strong.', excludes: Object.freeze(['walls']) }),
+  ]),
+});

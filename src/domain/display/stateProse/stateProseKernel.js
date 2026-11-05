@@ -565,6 +565,9 @@ export function readStateProse(corpus, blockId, poolKey, options = {}) {
   const eligible = eligibleVariants(pool, options);
   const variant = drawVariant(eligible, blockId, poolKey, options.seed || '');
   if (!variant) return null;
+  // CENSUS-1c unit 4: the single-pool read notes its draw too (the PDF, Tonight and Foundry paths
+  // read here, not through composeStateProse's drawPiece); a no-op when no ledger is open.
+  noteDrawnVariant(variant, { blockId, poolKey, crisisScoped: /** @type {any} */ (options).crisisScoped === true, poolDeclares: /** @type {any} */ (options).poolDeclares });
   const text = fillSlots(variant.text, options.slots || {});
   if (text === null) return null;
   return Object.freeze({
