@@ -6,9 +6,10 @@
  * "managed quarantine compliance". (2) Hook-truth's `hasWatch` meant "a watch OR a militia": one
  * answer for two atoms. Both arms were red at the window tip through the public functions.
  *
- * NOT RE-POINTED, and why (the lane's byte-identity law; counted in the lane report): the
- * militia flag (the two readers disagree on 130 of soak1k-0..1999, and soak1k-18's record
- * moves) and DS-GEN-17's PROVISIONED hospital read (4 of 2,000 pages move PROVISIONED → BARE).
+ * CENSUS-1 withdrew two re-points under the old byte-identity law: the militia flag (the two
+ * readers disagree on 130 of soak1k-0..1999; soak1k-18's record moves) and DS-GEN-17's
+ * PROVISIONED hospital read (4 of 2,000 pages move PROVISIONED → BARE). The chair ruled both
+ * made (CENSUS-1b unit A); their red-firsts live in `declaredMoves.test.js`.
  *
  * @enforced-by npx vitest run tests/domain/facts/defence.test.js
  */

@@ -109,6 +109,7 @@ import { legibilityRung } from './legibilityRung.js';
 import { waterAccessKind } from '../../tradeRouteSemantics.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /**
  * The desk's corpus, typed at the import boundary — the generated leaves stay PURE DATA.
@@ -579,7 +580,7 @@ export function disasterRowPoolKey(granary, hospital, church) {
  */
 export function defenseThreatProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const dp = settlement?.defenseProfile || {};
   const compound = settlement?.economicState?.compound?.inst || {};
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -759,7 +760,7 @@ export function strategicPrizePoolKey(terrain) {
  */
 export function defensePostureProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const slots = { settlement: properFill(text(settlement?.name)) };
   const terrain = settlement?.resourceAnalysis?.terrain;
   // THE DM'S FIELD ALL THREE LENSES SIT BESIDE. Read through the projection's own path
@@ -874,7 +875,7 @@ export function criminalCapturePoolKey(captureState) {
  */
 export function defenseCriminalProse(settlement, structureKey, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const power = settlement?.powerStructure || {};
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -1001,7 +1002,7 @@ export function wallRationalePoolKey(walls, monsterThreat, militaryGate, tier) {
  */
 export function defenseWallRationaleProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const forces = standingDefenseForces(settlement);
   const slots = {
     settlement: properFill(text(settlement?.name)),
@@ -1125,7 +1126,7 @@ export function viabilityUnderStressPoolKey(stress, viable) {
  */
 export function defenseMilitaryStatusProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const slots = { settlement: properFill(text(settlement?.name)) };
   const stress = settlement?.stress;
 
@@ -1292,7 +1293,7 @@ export function arcaneDefensePoolKey(forces, magicWorks) {
  */
 export function defenseForcesProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const forces = standingDefenseForces(settlement);
   const slots = { settlement: properFill(text(settlement?.name)) };
   const config = settlement?.config || {};
@@ -1332,7 +1333,7 @@ export function defenseForcesProse(settlement, options = {}) {
  */
 export function defenseStateProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const safety = settlement?.economicState?.safetyProfile || {};
   const label = safety.safetyLabel;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1536,7 +1537,7 @@ const dryRecord = (settlement) => {
  */
 export function defenseSupportingProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const compound = settlement?.economicState?.compound?.inst || {};
   const stockpile = settlement?.economicState?.foodSecurity?.stockpile || null;
   const slots = { settlement: properFill(text(settlement?.name)) };
@@ -1725,7 +1726,7 @@ export function magicDependencyPoolKey(magicDependency, namedChain, magicAbsent 
  */
 export function defenseMagicDependencyProse(settlement, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const chains = settlement?.economicState?.activeChains;
   const slots = {
     settlement: properFill(text(settlement?.name)),

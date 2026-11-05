@@ -2,13 +2,13 @@
   "schema": "wiring-census/1",
   "stamp": {
     "files": {
-      "src/domain/display/stateProse/generalStateProse.js": "8349ddd9b6213887aeb3808e582d9522e9f5570c9b54c5c807596956798c9ab9",
-      "src/domain/display/stateProse/powerStateProse.js": "14666645d1a8b204bda039a5f316442fadb2dbc5301d95a37018825d2d35d216",
-      "src/domain/display/stateProse/economyStateProse.js": "11e9c0595cba59a44ecd19eae31f7c8d9133946ef7a30b15bec4f08051549b4e",
-      "src/domain/display/stateProse/defenseStateProse.js": "5fe83f187d5be126058faddd22a501a79d1d212235c24bacd5e5ddb606ed9e89",
-      "src/domain/display/stateProse/stressorsStateProse.js": "e27241a59f43b90c3c20c5fefc0f3dd61ce2d95469a5db7d1a8eb1f55c4578d5",
-      "src/domain/display/stateProse/warFaithStateProse.js": "2bf68c80126ed1892da909fa299f239d32b9efaf7b8fc095f96dc1cae99f531a",
-      "src/domain/display/stateProse/dossierMounts.js": "ef52d922dcf2df1a22469b9dd45f65a875b61f2c06e0aa260bcc26d8074542be"
+      "src/domain/display/stateProse/generalStateProse.js": "d0e22cd9629816f731f3d5ece96d54969b5fe6b80766e3c374091994c67ed6e4",
+      "src/domain/display/stateProse/powerStateProse.js": "11c913c83fa1e88d5f75d5415f8723936acf9aae37d6465a87b1ad3cb4d21e7b",
+      "src/domain/display/stateProse/economyStateProse.js": "d2bfe8cafa209803f26c83fde83534a7ba45230010ff87c33bd4ac52d831b924",
+      "src/domain/display/stateProse/defenseStateProse.js": "3754e325a7296cb78c4aceb93fa0d9b8372c9be305f4db7663b4efd256ef1edb",
+      "src/domain/display/stateProse/stressorsStateProse.js": "13c7f383882acf5bb48267feb4302ced6b9798cec2575470903f1aa88205600d",
+      "src/domain/display/stateProse/warFaithStateProse.js": "f1972add38589ee55369fb06e4a5e0a8f90c4d966bf703d4367a3cdca52d6aac",
+      "src/domain/display/stateProse/dossierMounts.js": "2ef29e8e200c8497192ffd01b1d2c96a675675b7038ee6cb6162f9c6194d6bcc"
     },
     "candidateLeaves": {
       "src/domain/display/stateProse/defenseStateProseCandidates.js": "b4833f55274b040dc5627b0eedafe7f98f508cec73ac829ce213adabe8c3e96c",
@@ -18,7 +18,7 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1279
+    "producerIndexFiles": 1284
   },
   "totals": {
     "pools": 709,
@@ -23094,7 +23094,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23156,7 +23157,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23218,7 +23220,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23280,7 +23283,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -23342,7 +23346,8 @@
         "readings.inst.hasMilitaryInst",
         "readings.inst.hasNavy",
         "readings.inst.hasPrison",
-        "readings.inst.hasWatch"
+        "readings.inst.hasWatch",
+        "settlement"
       ],
       "status": "RESOLVED",
       "reason": "",
@@ -45524,7 +45529,7 @@
       "notExecutable": 368,
       "histogram": [
         [
-          -6,
+          -7,
           5
         ],
         [
@@ -45580,7 +45585,7 @@
         "DS-STR-1",
         "DS-WAR-3"
       ],
-      "readPaths": 787,
+      "readPaths": 792,
       "modifierEligibleFactsByTab": [
         [
           "viability",

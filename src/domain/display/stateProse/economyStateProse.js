@@ -81,6 +81,7 @@ import { legibilityRung } from './legibilityRung.js';
 import { COMPLEXITY_LABEL } from '../labelBands.js';
 import { wallsAnswered } from '../../defense/defenseFacts.js';
 import { crisisAnswered } from '../../crisis/crisisFacts.js';
+import { factsAnswered } from '../../facts/factsAnswered.js';
 
 /**
  * The desk's corpus, typed at the import boundary. The generated leaves stay PURE DATA
@@ -882,7 +883,7 @@ export function leadingGoodNoun(exports_) {
  */
 export function economyStateProse(settlement, readings = {}, options = {}) {
   // F10 + F12: the walls and the five crisis dimensions answered once, from the defence and crisis readers (stateProseKernel law 5).
-  options = crisisAnswered(settlement, wallsAnswered(settlement, options));
+  options = factsAnswered(settlement, crisisAnswered(settlement, wallsAnswered(settlement, options)));
   const eco = settlement?.economicState || {};
   const name = text(settlement?.name);
   const prosperity = typeof eco.prosperity === 'string' ? eco.prosperity : text(eco.prosperity?.tier);
