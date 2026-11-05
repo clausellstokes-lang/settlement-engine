@@ -106,8 +106,8 @@ export const INSTITUTION_SERVICES = {
 
   "Mill": {
     "Grain milling": { on: true, p: 1.0, desc: "Process grain to flour" },
-    "Fulling cloth": { on: false, p: 0.4, desc: "Textile processing (if water mill)" },
-    "Sawing timber": { on: false, p: 0.3, desc: "Lumber production (if saw mill)" }
+    "Fulling cloth": { on: false, p: 0.4, desc: "Textile processing", needs: ["institution: mill", "river"] }, // CENSUS-4b (the chair, item 2): "(if water mill)" became its declaration
+    "Sawing timber": { on: false, p: 0.3, desc: "Lumber production", needs: ["institution: mill"] } // CENSUS-4b (the chair, item 2): "(if saw mill)" became its declaration
   },
 
   "Courthouse": {
