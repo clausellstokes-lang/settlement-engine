@@ -2725,12 +2725,19 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ARCHETYPE: reconstruction": [
         {
           "angle": "unfolding",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "{settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.",
           "slots": [
             "settlement"
@@ -2739,6 +2746,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat",
+            "crisis: any"
+          ],
           "text": "The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it will happen.",
           "slots": [],
           "vid": 3
@@ -2747,12 +2758,24 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ARCHETYPE: boom": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "no crisis: indebted",
+            "crisis: any"
+          ],
           "text": "The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "threshold",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "no crisis: indebted",
+            "crisis: any"
+          ],
           "text": "{settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.",
           "slots": [
             "settlement"
@@ -2761,6 +2784,12 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "no crisis: indebted",
+            "crisis: any"
+          ],
           "text": "Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.",
           "slots": [],
           "vid": 3
@@ -2775,6 +2804,14 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: threat",
+            "no crisis: unrest",
+            "no crisis: indebted",
+            "no crisis: plague_onset",
+            "crisis: any"
+          ],
           "text": "{settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.",
           "slots": [
             "settlement"
@@ -2783,6 +2820,15 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "institution: school",
+            "no crisis: hunger",
+            "no crisis: threat",
+            "no crisis: unrest",
+            "no crisis: indebted",
+            "no crisis: plague_onset",
+            "crisis: any"
+          ],
           "text": "The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.",
           "slots": [],
           "vid": 3
@@ -2908,6 +2954,12 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "FAMILY: war layer, aggressor side": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no war: front",
+            "crisis: any"
+          ],
           "text": "The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.",
           "slots": [],
           "vid": 1
@@ -2915,7 +2967,12 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "garrison",
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no war: front",
+            "crisis: any"
           ],
           "text": "{settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the thin garrison, not in the walls.",
           "slots": [
@@ -2925,6 +2982,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The town is carrying an army it does not have with it. That is a specific kind of poverty, and it compounds.",
           "slots": [],
           "vid": 3
@@ -2932,7 +2992,11 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "no crisis: under_siege",
+            "no crisis: occupied",
+            "no war: front",
+            "crisis: any"
           ],
           "text": "{settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the missing men, not in the streets.",
           "slots": [
@@ -3001,7 +3065,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "SEVERITY: medium": {
         "role": "spine",
@@ -3017,7 +3082,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "SEVERITY: high": {
         "role": "spine",
@@ -3033,7 +3099,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "SEVERITY: critical": {
         "role": "spine",
@@ -3049,7 +3116,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "DIRECTION: worsening": {
         "role": "spine",
@@ -3065,7 +3133,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "DIRECTION: stable, and the FLAT case (no valid directional status)": {
         "role": "spine",
@@ -3080,7 +3149,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "DIRECTION: easing": {
         "role": "spine",
@@ -3096,7 +3166,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "ARCHETYPE: reconstruction": {
         "role": "spine",
@@ -3112,7 +3183,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "ARCHETYPE: boom": {
         "role": "spine",
@@ -3128,7 +3200,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "ARCHETYPE: flourishing": {
         "role": "spine",
@@ -3144,7 +3217,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "PROVENANCE: causes[] or triggeredAt.sourceEventType populated": {
         "role": "spine",
@@ -3160,7 +3234,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "PROVENANCE: no causes[] and no sourceEventType": {
         "role": "spine",
@@ -3176,7 +3251,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "DURATION: inside the expiry wind-down window": {
         "role": "spine",
@@ -3192,7 +3268,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "FAMILY: acute crisis": {
         "role": "spine",
@@ -3207,7 +3284,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "FAMILY: regional transmission": {
         "role": "spine",
@@ -3222,7 +3300,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "FAMILY: war layer, aggressor side": {
         "role": "spine",
@@ -3239,7 +3318,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "FAMILY: occupation layer": {
         "role": "spine",
@@ -3269,7 +3349,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   }

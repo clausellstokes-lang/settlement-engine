@@ -4462,93 +4462,93 @@ one crisis twice.
 
 **SLOTS.** `{settlement}` `{reason}` `{timeband_age}`
 
-**SEVERITY: `low`**
+**SEVERITY: `low`** {colour}
 1. `[ledger]` The condition is present and light. It shows in the accounting rather than the streets.
 2. `[visitor]` It is a real pressure and a small one; {settlement} absorbs it without changing anything it does.
 3. `[threshold]` The strain registers. It does not yet cost the town anything it would miss.
 
-**SEVERITY: `medium`**
+**SEVERITY: `medium`** {colour}
 1. `[ledger]` The pressure is genuine now. Choices are being made because of it that would not have been made otherwise.
 2. `[street]` It has stopped being a line in a ledger: {settlement} is spending real capacity on this.
 3. `[visitor]` The condition bites. Not everywhere and not badly, but consistently enough to plan around.
 
-**SEVERITY: `high`**
+**SEVERITY: `high`** {colour}
 1. `[visitor]` This is one of the defining facts about the town at present. Systems that ought to be independent are all bending around it.
 2. `[counterforce]` The strain is severe. {settlement} is meeting it by giving up things it would rather keep.
 3. `[street]` The condition dominates. Whatever else is true of the town, this is truer.
 
-**SEVERITY: `critical`**
+**SEVERITY: `critical`** {colour}
 1. `[counterforce]` The town is at its limit. There is no capacity left to absorb this, and nothing behind it that could absorb the next thing.
 2. `[threshold]` This is as far as {settlement} bends. Past this it is not the same settlement, and it is very near past this.
 3. `[ledger]` The condition has run past what the town was built to carry. Everything else here is now downstream of it.
 
-**DIRECTION: `worsening`**
+**DIRECTION: `worsening`** {colour}
 1. `[unfolding]` It is getting worse, steadily rather than suddenly; each season costs a little more than the one before.
 2. `[ledger]` The trend is the wrong way. Nothing has broken yet, and nothing has stopped deteriorating either.
 3. `[counterforce]` The condition is deepening. The town's response has not caught up with the rate.
 
-**DIRECTION: `stable`, and the FLAT case (no valid directional status)**
+**DIRECTION: `stable`, and the FLAT case (no valid directional status)** {colour}
 1. `[ledger]` It holds where it is. Neither the pressure nor the response is gaining, and the balance has become the normal state.
 2. `[visitor]` The condition is level: an ongoing cost rather than a developing crisis.
 3. `[street]` Nothing here is moving. That is not relief, only the absence of change.
 
-**DIRECTION: `easing`**
+**DIRECTION: `easing`** {colour}
 1. `[unfolding]` It is lifting. Slowly, and from a level the town remembers clearly, but lifting.
 2. `[ledger]` The pressure is coming off. What remains is the accumulated cost rather than the cause.
 3. `[street]` The condition is receding. {settlement} has begun spending on repair rather than on holding.
 
-**ARCHETYPE: `reconstruction`** · **THE GOOD STATE (R-DST-G)**
-1. `[unfolding]` The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.
-2. `[visitor]` {settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.
-3. `[street]` The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it will happen.
+**ARCHETYPE: `reconstruction`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
+1. `[unfolding · crisis: any]` The town is rebuilding. What was broken is being replaced, and the race is between the rebuilding and the memory of why it was needed.
+2. `[visitor · no crisis: threat · crisis: any]` {settlement} is in its repair season: scaffolding where there were ruins, and a great deal of work with a visible end.
+3. `[street · no crisis: threat · crisis: any]` The rebuild is going well enough that people have begun arguing about what it should look like rather than whether it will happen.
 
-**ARCHETYPE: `boom`** · **THE GOOD STATE (R-DST-G)**
-1. `[ledger]` The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.
-2. `[threshold]` {settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.
-3. `[street]` Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.
+**ARCHETYPE: `boom`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
+1. `[ledger · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` The town is prosperous. Trade runs in its favour, and the expectation of that has become part of the economy rather than a comment on it.
+2. `[threshold · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` {settlement} is doing well, and quietly depends on the arteries feeding it. The boom is real and it is not self-sustaining.
+3. `[street · no crisis: hunger · no crisis: threat · no crisis: indebted · crisis: any]` Coin is easy here. The warehouses fill, the wages hold, and nobody is much interested in what the routes moving would mean.
 
-**ARCHETYPE: `flourishing`** · **THE GOOD STATE (R-DST-G)**
+**ARCHETYPE: `flourishing`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
 1. `[ledger]` This is a good stretch for the town. There is room here for things that are not strictly necessary, and the accounts carry them without strain.
-2. `[visitor]` {settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.
-3. `[street]` The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.
+2. `[visitor · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` {settlement} is in a modest golden age. It is bounded and it is real, and the people living in it mostly know both.
+3. `[street · institution: school · no crisis: hunger · no crisis: threat · no crisis: unrest · no crisis: indebted · no crisis: plague_onset · crisis: any]` The town is culturally fertile: workshops, schools, and arguments about art, all of them affordable for the first time in a while.
 
-**PROVENANCE: `causes[]` or `triggeredAt.sourceEventType` populated** · the ONLY causal pool in this block
+**PROVENANCE: `causes[]` or `triggeredAt.sourceEventType` populated** · the ONLY causal pool in this block {colour}
 1. `[ledger]` The condition traces back to {reason}, and the trace is not disputed. The town knows exactly what did this.
 2. `[elder]` This began with {reason}. What {settlement} carries now is the consequence, and the consequence has outlasted the cause.
 3. `[street]` {reason} put this here. The record is clear enough that the argument in the town is about the response rather than the origin.
 
-**PROVENANCE: no `causes[]` and no `sourceEventType`** · **PLAIN DESCRIPTION ONLY (R-DST-B)**
+**PROVENANCE: no `causes[]` and no `sourceEventType`** · **PLAIN DESCRIPTION ONLY (R-DST-B)** {colour}
 1. `[ledger]` The condition stands. Nothing in the record explains where it came from, and the town has stopped asking.
 2. `[visitor]` This is simply the state of {settlement}. No single event owns it, and nobody here can point to a beginning.
 3. `[elder]` It is here and it is {timeband_age}. Whatever caused it did so before anyone was writing things down.
 
-**DURATION: inside the expiry wind-down window**
+**DURATION: inside the expiry wind-down window** {colour}
 1. `[unfolding]` It is nearly over. The condition is winding down on its own schedule rather than anyone's effort.
 2. `[threshold]` The end of this is in sight. The pressure has begun releasing without anything in particular being fixed.
 3. `[street]` The town is at the tail of it. What is left is lifting, and nobody is treating that as an achievement.
 
-**FAMILY: acute crisis** (`plague` · `famine` · `war_pressure` · `rebellion` · `faction_challenge` · `custom_crisis` · `magical_instability` · `food_anchor_lost`)
+**FAMILY: acute crisis** (`plague` · `famine` · `war_pressure` · `rebellion` · `faction_challenge` · `custom_crisis` · `magical_instability` · `food_anchor_lost`) {colour}
 1. `[visitor]` This is an emergency the town is inside of: not a policy, not a trend, an event with a shape and an end.
 2. `[street]` {settlement} is in crisis. The condition is the town's whole agenda for as long as it lasts.
 3. `[ledger]` The trouble here is acute and undisguised; there is no reading of the state that does not begin with it.
 
-**FAMILY: regional transmission** (every `regional_*` · `cold_war_sanctions` · `trade_route_cut`)
+**FAMILY: regional transmission** (every `regional_*` · `cold_war_sanctions` · `trade_route_cut`) {colour}
 1. `[ledger]` The trouble did not begin here. It arrived along a connection {settlement} depends on, and the dependence is why it arrived.
 2. `[visitor]` This is somebody else's crisis reaching the town through the channel that normally carries something better.
 3. `[threshold]` What strains {settlement} is happening elsewhere. The town is exposed because it is well connected, which is the price of being well connected.
 
-**FAMILY: war layer, aggressor side** (`war_drain` · `army_deployed` · `war_exhaustion` · `war_mobilization` · `reinforcement_cost`)
-1. `[ledger]` The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.
-2. `[visitor · walls]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the thin garrison, not in the walls.
-3. `[counterforce]` The town is carrying an army it does not have with it. That is a specific kind of poverty, and it compounds.
-4. `[visitor · no walls]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the missing men, not in the streets.
+**FAMILY: war layer, aggressor side** (`war_drain` · `army_deployed` · `war_exhaustion` · `war_mobilization` · `reinforcement_cost`) {crisis-scoped}
+1. `[ledger · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` The war is being fought elsewhere and paid for here. Men, coin and grain leave; nothing comes back on the same schedule.
+2. `[visitor · walls · garrison · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the thin garrison, not in the walls.
+3. `[counterforce · crisis: any]` The town is carrying an army it does not have with it. That is a specific kind of poverty, and it compounds.
+4. `[visitor · no walls · no crisis: under_siege · no crisis: occupied · no war: front · crisis: any]` {settlement} is the home of a campaign rather than its battlefield. The cost shows in the treasury and the missing men, not in the streets.
 
 **FAMILY: occupation layer** (`occupation_resistance` · `occupation_burden` · `war_spoils` · `vassal_extraction` · `vassal_trade_coercion` · `trade_embargo`)
 1. `[counterforce]` Holding this place costs more than it returns. Garrisons, administrators and suppression tie down strength that was meant for elsewhere.
 2. `[unfolding]` {settlement} is administered by a power stretched thin doing it. Noncompliance and sabotage make the arithmetic worse each season.
 3. `[ledger]` The relationship here is extractive and it is expensive; both facts are true, and only one of them is written down.
 
-**FAMILY: recovery** (`siege_lifted` · `occupation_lifted` · `corruption_exposed` · `coup_suppressed` · `government_overthrown` · `stressor_residual` · `trade_realignment`)
+**FAMILY: recovery** (`siege_lifted` · `occupation_lifted` · `corruption_exposed` · `coup_suppressed` · `government_overthrown` · `stressor_residual` · `trade_realignment`) {crisis-scoped}
 1. `[unfolding]` The worst is behind {settlement}. What remains is the work of being a normal town again, which is slower than it looks.
 2. `[elder]` The crisis ended and left its scars in the ordinary places: trust, institutions, and the habits people formed to survive it.
 3. `[street]` The town is recovering. It is not the town it was before, and it has not decided yet whether it minds.

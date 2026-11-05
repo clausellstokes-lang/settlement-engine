@@ -34,6 +34,7 @@ const FAMILIES = {
     'DS-GEN-10', 'DS-GEN-11', 'DS-GEN-12', 'DS-GEN-13', 'DS-GEN-14', 'DS-GEN-15', 'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18'],
   'DS-HK': ['DS-HK-1'],
   'DS-STR': ['DS-STR-1', 'DS-STR-2'],
+  'DS-CND': ['DS-CND-1'],
 };
 
 const TOWN = { tier: 'town', population: 2400, institutions: [] };
