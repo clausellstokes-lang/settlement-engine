@@ -171,11 +171,13 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 68,904 -> 67,944 (384/376/372 -> 378/370/366) at SELF-VOUCH (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-08-self-vouch.json).
     // Towns unmoved at 516/3/3/3.
+    // 67,944 -> 67,724 (378/370/366 -> 370/358/358) at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
-      'golden-master-v3': { cells: 67_944, towns: 516 },
-      'gm-seed-a': { cells: 378, towns: 3 },
-      'gm-seed-b': { cells: 370, towns: 3 },
-      'gm-seed-c': { cells: 366, towns: 3 },
+      'golden-master-v3': { cells: 67_724, towns: 516 },
+      'gm-seed-a': { cells: 370, towns: 3 },
+      'gm-seed-b': { cells: 358, towns: 3 },
+      'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
     expect(Object.values(tally).reduce((n, r) => n + r.cells, 0)).toBe(run.cells.length);
@@ -504,7 +506,9 @@ describe('the two controls no one-audience manifest can see', () => {
     // from mixed pools at 13 fewer positions.
     // 296 -> 308 at X-46 CAR 1 (THE OWNER'S HISTORICAL BANDS) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-01-x46-car-1-bands.json): the moved worlds draw
     // from mixed pools at 12 more positions.
-    expect(differ.length, 'positions where the two faces draw differently').toBe(308);
+    // 308 -> 220 at X-46 CAR 3 (LANE X46-3-BUDGET) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json): the moved worlds draw
+    // from mixed pools at 88 fewer positions.
+    expect(differ.length, 'positions where the two faces draw differently').toBe(220);
     expect(new Set(differ.map((row) => `${row.dm.block} :: ${row.dm.pool}`)).size,
       'over this many of the twelve mixed pools').toBe(1);
     // ⛔ REFUSAL 3: THE ONE-SIDED POSITIONS, WITH THEIR DIRECTION (the fold's P9). The leak
