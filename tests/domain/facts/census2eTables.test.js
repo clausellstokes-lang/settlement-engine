@@ -139,3 +139,19 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
     setActiveRng(null);
   });
 });
+
+describe('CHECK_INST_COMPAT_LANDMARKS — the arrival landmarks (R, inline in structuralValidator.js; carried through textOf)', () => {
+  it('every declaring ledger line is declared in place, exactly; nothing else is', () => {
+    const found = declaredLiteralsOf('src/generators/structuralValidator.js');
+    const wrong = []; let declaring = 0;
+    for (const pool of ledger('CHECK_INST_COMPAT_LANDMARKS').pools) for (const line of pool.lines) {
+      const want = expectedDeclaration(pool, line);
+      const have = found.get(line.text);
+      if (!(want.needs.length || want.excludes.length || want.crisis.length)) { if (have) wrong.push(`${line.lineId}: declares, the ledger does not`); continue; }
+      declaring++;
+      if (!have || JSON.stringify(have) !== JSON.stringify([want])) wrong.push(`${line.lineId}: ${JSON.stringify(have)} ≠ ${JSON.stringify(want)}`);
+    }
+    expect(wrong).toEqual([]);
+    expect(declaring).toBe(6);
+  });
+});
