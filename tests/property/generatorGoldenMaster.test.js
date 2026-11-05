@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-10-t1-t2-siege-stores.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   84 OF 525 ROWS MOVED (village 84; thorp, hamlet, town, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step fe56bddd4): the siege keeps 0.3 of the harvest; a village stores as a hamlet does. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S10 (the tree of fe56bddd4 with the door paths carried from
+ *   the branch, the previous record's writes committed). 59ce8a2e.. -> f0d5b304..
+ *
  * 2026-11-04 — TERRAIN-POOLS, SECOND STEP (RE-MERGED AT 30141976), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-09-terrain-pools-2.json; the cloud chair signs under the owner's delegation, vetoable).
  *   51 OF 525 ROWS MOVED (village 1, town 1, city 37, metropolis 12; thorp, hamlet 0); the key set is identical. THE CAUSE, ONE (first-parent

@@ -1,0 +1,40 @@
+{
+  "_doc": "T1/T2 (THE DRY RUN §4'S TWO PROPOSALS, ADOPTED BY THE CHAIR), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: T1/T2 (the dry run §4's two proposals, adopted by the chair): the siege keeps 0.3 of the harvest; a village stores as a hamlet does. THE MOVER, NAMED: first-parent step fe56bddd4 of lane/landing-rung1-2026-11-04 (\"food: the siege keeps 0.3 of the harvest; a village stores as a hamlet does (T1, T2)\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/OWNER_DECISION_QUEUE.md line 592 (THE SOAK LADDER, the owner, 2026-11-03: the \"tune\" sentences). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order): this record's stage S10 is the tree of fe56bddd4 with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed; no lane touched a door path inside the window, so the stage differs from fe56bddd4 by those writes alone. MEASURED BEFORE THE WRITE (scripts/audit/golden-master-stage.mjs, refence.mjs, herald-stage.mjs, witness-stage.mjs and the capture arms against a scratch record in a throwaway worktree at fe56bddd4, S9 -> S10): generator-golden-master 84 of 525 rows (village 84; thorp, hamlet, town, city, metropolis 0), the key set identical; herald-knowledge-desk-golden 4 of 475 rows, 2 added and 0 removed; cartography-calibration-corpus 59 of 504 rows; dossier-prose-manifest 70 of 1050 rows; espionage-dormancy-fence 66 of 360 rows (thorp 1, hamlet 2, village 60, metropolis 3; town, city 0), 360/360 distinct, 5666cc4e.. -> 64cff250... A surface that does not move at this stage is not listed. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "after all of that, run 1000 generated settlements and review each in depth and in aggregate and tune · Also look at the distribution of every aspect in each of these both individually and in relationship to other facts of the dossier and tune",
+  "ownerDate": "2026-11-03",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "T1/T2 (the dry run §4's two proposals, adopted by the chair): the siege keeps 0.3 of the harvest; a village stores as a hamlet does",
+  "seat": "LANDING-3 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at fe56bddd4",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 475,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    }
+  ]
+}
