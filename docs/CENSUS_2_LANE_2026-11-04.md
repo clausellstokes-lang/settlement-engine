@@ -535,3 +535,55 @@ Red-first: `tests/generators/arrivalFishKeyDeclared.test.js` (the three table ar
 **(c) DAILY_LIFE_TAB paragraph [1]'s "priests": stays "waiting on priest".** The vocabulary at 1f's tip has no faith-presence atom: `priest` reads a senior cleric among the named people (2e's reason stands), and `sacredHouse` is a building, not a class of people at work — declaring it on the whole paragraph would refuse its food and guards sentences with it. The site is carried (unwired), so nothing would move either way.
 
 **(d) DECREE vid 54: stays carried and listed.** `decreeProse.js :: drawPart` still calls `eligibleVariants(spoken, { slots, audience })` with no facts (1f's display rows have not landed), so a declared vid 54 would be refused fail-closed in every birth.
+
+### Unit 6 — the 60 and the 1,000 (R-B: BEFORE = the merged base `a33ce94`, run from a scratch worktree; AFTER = the tip)
+
+| run | records moved | pages moved | every `coh:*` / `reader:*` / `A-*` class | `cert:*` | verdict |
+|---|---|---|---|---|---|
+| 60 | 0 / 60 | 0 / 60 | identical (101 findings both) | none → none | CLIMB → CLIMB |
+| 1,000 | **7 / 1,000** — exactly the predicted seven: soak1k-152 (unit 2), soak1k-73, -313, -331, -378, -517, -642 (unit 5) | (152 and the six are outside the 60) | **`A-11:sea-words-landlocked` 1 → 0** (soak1k-152); every other class identical (1,662 → 1,661 findings): `coh:crisis-blind-prose` 0 → 0, `reader:daily-life-placeholder` 0 → 0, `reader:hook-pools` 5 → 5 (none on this lane's pools: soak1k-110, -462, -470, -571, -614, the `[sea]` class 1f named), `A-12` 0 → 0 | none → none (**`cert:false-presumption` 0 → 0**) | CLIMB → CLIMB |
+
+**By claim (1,000):** the fish beat in a place with no catch 1 → 0; "pilgrims queue patiently" 0 → 0 (cured at the base by 1f, unit 3); the persisting-institution and local-clergy rows with no sacred house 6 → 0. None rose.
+
+**`declared-share` (1,000, the render ledger):** overview 1,563 / 3,017 (0.518) → **1,632 / 3,016 (0.541)** (the arrival beats' new declarations noted; one beat fewer, soak1k-152's); history 1,504 / 10,396 (0.145) → **1,519 / 10,396 (0.146)** (religious_heavy [0] / [2] and their resolutions noted); crisis 503 / 549 (0.916) unchanged; tab:daily_life 409 / 409 (1.000) unchanged (DEFENSE_CONTEXT, dead text); every other surface identical. `cert:false-presumption` cannot yet rise on this lane's pools from R-AM: 1f's ledgering of kept-refused originals has not landed (listed for CENSUS-1g); where it lands, POLITICAL_FLAVOR keeps no refused original (its slot never empties) and the arrival beats leave a refused beat out rather than keep it, so no rise is expected from these pools.
+
+**The undeclared register for this lane's surfaces:** unchanged — the arrival tables, POLITICAL_FLAVOR and the Daily Life cells are carried JS tables outside `undeclaredLines.register.json` (which counts the annex's pools; its two titles are red at the base by R-T and unchanged here). The census (`scripts/wiring-census.mjs --check`, 709 pools / 2,338 variants) and `gen:dossier-prose --check` are green at the tip; no annex row moved.
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** **0 / 525** at every code commit and at the tip (scratch sha-256 over `goldenCorpus()`, the base hashed twice, 0 / 0).
+- **Soak records:** 0 / 60; **7 / 1,000** — soak1k-152 (`arrivalScene`: the sense beat left out, unit 2) and soak1k-73, -313, -331, -378, -517, -642 (`history.historicalCharacter`, unit 5). **Pages:** 0 / 60.
+- **Wiring census / manifest / registers:** 0 rows (no annex variant moved; the register pins are the compose's, R-T).
+- **Pins re-keyed by cause:** `tests/domain/facts/textOf.test.js` declared arrival rows 86 → 92 (unit 2); `tests/domain/facts/census2eTables.test.js` unit 1 re-stated to R-AH's rule (unit 1) and its POLITICAL_FLAVOR ledger arm writes `sacredHouse` for the ledger's temple (unit 5).
+- **Twins added:** none (unit 4: no wired slot empties). **Rewords:** none.
+
+### Reds at the merged base, unchanged by this seat (re-run at `a33ce94` in a scratch worktree, title for title: identical, 25 titles in 10 files)
+
+tabSentencesOnce 1 · dossierContent 1 · rosterFinalUnderHeldRoster 1 · proseNumerics 3 · proseWiringCensus.walker 14 · styleShorthandLonghand 1 · espionageDormancyFence 1 · generatorGoldenMaster 1 · economicsTabFlow · generalDeskTabFlow; declarationRegisters 2 (R-T). `typecheck:ratchet` 167 / 167 green; `typecheck:domain:strict` red only on the base's +4 `crisisFactFindings.js` / +2 `composeStateProse.js`. eslint clean on every touched file. The suites run were every test file importing a touched module (45 files) plus the arrival and history suites; the full suite was not run.
+
+### Waiting lists (this seat's, complete)
+
+- **waiting on the closure's split (a mechanism channel):** POLITICAL_FLAVOR catastrophic[1]'s monster-incursion branch (walls, militia) — unit 5 (b).
+- **waiting on priest (a faith-presence atom):** DAILY_LIFE_TAB paragraph [1]'s "priests".
+- **carried, waiting on a site:** CHECK_INST_COMPAT_LANDMARKS (6 lines), DAILY_LIFE_TAB (loading messages, local narrative), DECREE vid 54 (`drawPart` hands no facts), and 2e's twins owed at unwired sites (SPATIAL_TEXT, PRESSURE_SENTENCES, CAST_ABSENCES, DAILY_LIFE_TAB).
+- **needs a home / a disjunction:** ARRIVAL_SENSES `livestock.lines[0]`'s grazing (a common-grazing house OR the grazing resource); ARRIVAL_PEOPLE `mixed` (unreachable fallback; a mixed people has no atom).
+- **mute slot for §10:** ARRIVAL_SENSES `fish.lines` under a fish house with no catch, 1 / 1,000 (soak1k-152).
+- **dead (R-S, R-AI):** DAILY_LIFE_CONTEXT · TERRAIN_CONTEXT, ROUTE_CONTEXT, DEFENSE_CONTEXT; DOSSIER_CAUSAL_PROSE.
+
+### The chair's rulings this seat made (recorded, vetoable)
+
+- **R-F1, the flag on dead text stays in stasis.** DEFENSE_CONTEXT's five inert flags are part of R-AH's 39 but sit at a dead site; answer 3's "left as they are" was read as the narrower rule, so 34 were dropped in code and those 5 left.
+- **R-F2, a key's picker that reads the trade, not the fact, keeps hygiene.** `fish.dominant` is reached through the exports (`trade: fish`) and its lines speak of the fish trade the picker read, so it keeps R-B1 hygiene; `fish.lines` is reached by a fish house's name and presumes the catch, so it declares `fish`.
+- **R-F3, a homed atom narrower than the line's claim is not declared.** `livestock` (the food record's source) is false in 86 of 87 `livestock.lines` births whose stock houses make the lines true; declaring it would refuse true lines.
+- **R-F4, catastrophic[1]'s split is held, not landed** (unit 5 (b)): the brief ordered it, but the measured cost (166 of 1,000 births moved by the modulus to cure a branch printed in 0) breaks the byte-identity law's intent, and the halves cannot be separate rows while the branch turns on an event type.
+
+### Where CENSUS-2g starts
+
+**Nothing of this lane remains but the compose and what waits on the mechanism lane.** If CENSUS-1g lands (a) a site for the landmarks or the Daily Life cells, the twins listed under unit 4 become owed at those sites, one commit each with its share; (b) R-AM's ledgering, re-read `cert:false-presumption` on POLITICAL_FLAVOR and the arrival pools (expected 0); (c) a declaration channel for a closure's returned branch, land catastrophic[1]'s split through it (0 births expected on the 1,000); (d) facts at `drawPart`, declare DECREE vid 54.
+
+### Open questions for the chair
+
+1. catastrophic[1]'s split: accept the modulus move (166 of 1,000 births' `historicalCharacter`, a branch printed in 0) as R-AA's kind of counted content move, or route it through a mechanism channel where the closure returns its branch's declaration (this seat's recommendation)?
+2. DEFENSE_CONTEXT's five inert flags: dropped with the 39 (answer 2) or left in stasis with the dead text (answer 3, this seat's reading)?
+3. DAILY_LIFE_TAB paragraph [1]'s "priests": a faith-presence atom (a class of clergy at work), or a reword dropping the priests from the list when the site is wired?
+4. The religious_heavy refusals all resolve to the same row ([6]) because the cascade's argmax key is `pattern::length::firstName`, near-constant across births: acceptable, or should the mechanism lane widen the key (it moves only refused births)?
