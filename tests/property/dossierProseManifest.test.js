@@ -181,10 +181,12 @@ describe('the composed-prose manifest — the DRIFT corpus, both audiences', () 
     // Towns unmoved at 516/3/3/3.
     // 67,780 -> 67,754 (372/358/358 -> 372/360/358) at F6 BUDGET-FLOOR (UNITS 1–4) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json).
     // Towns unmoved at 516/3/3/3.
+    // 67,754 -> 67,754 (372/360/358 -> 372/364/358) at F1 DEFENCE-WORDS, FIRST STEP (UNITS 1–5) (ODQ §934.105, RUNG 1 OF THE SOAK LADDER, 2026-11-04; record docs/shift-records/2026-11-04-rung1-23-f1-defence-words.json).
+    // Towns unmoved at 516/3/3/3.
     expect(tally, 'the DRIFT corpus by seed, cells and towns').toEqual({
       'golden-master-v3': { cells: 67_754, towns: 516 },
       'gm-seed-a': { cells: 372, towns: 3 },
-      'gm-seed-b': { cells: 360, towns: 3 },
+      'gm-seed-b': { cells: 364, towns: 3 },
       'gm-seed-c': { cells: 358, towns: 3 },
     });
     // The two halves must close against the figures every other arm here reads.
