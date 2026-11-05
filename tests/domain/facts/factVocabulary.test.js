@@ -33,6 +33,7 @@ describe('the spelled ladders equal their homes', () => {
     expect(V.INSTITUTION_WORDS).toEqual(INSTITUTION_KINDS);
     // F12's families as groups (ruling 2): its five, the fifth ('crisis', any active) spelled `any`'s side
     expect([...V.CRISIS_GROUP_WORDS, 'crisis']).toEqual(Object.keys(CRISIS_FAMILIES));
+    for (const g of V.CRISIS_GROUP_WORDS) expect(V.CRISIS_FAMILY_KINDS[g], g).toEqual(CRISIS_FAMILIES[g].types);
   });
 
   it("the kernel's mark dimensions ARE the vocabulary's mark half (a re-export, not a copy)", () => {
@@ -100,6 +101,27 @@ describe('the three polarities, stated once', () => {
     expect(V.declarationAdmits(siegeLine, bare).admitted).toBe(false);
     expect(V.declarationAdmits(anyLine, bare).admitted).toBe(true);
     expect(V.declarationAdmits(anyLine, sieged, { crisisScoped: true }).admitted).toBe(true);
+  });
+  it('the vocabulary rulings §1: needs crisis, excludes crisis[: family], the conjunction, the aliases', () => {
+    const two = factsOf({ tier: 'town', stress: [{ type: 'under_siege' }, { type: 'insurgency' }], institutions: [] });
+    const sieged = factsOf({ tier: 'town', stress: [{ type: 'under_siege' }], institutions: [] });
+    const d = (o) => V.declarationOf(o);
+    expect(V.declarationAdmits(d({ needs: ['crisis'] }), sieged).admitted).toBe(true);
+    expect(V.declarationAdmits(d({ needs: ['crisis'] }), bare).admitted).toBe(false);
+    expect(V.declarationAdmits(d({ excludes: ['crisis'] }), bare).admitted).toBe(true);
+    expect(V.declarationAdmits(d({ excludes: ['crisis'] }), sieged).admitted).toBe(false);
+    expect(V.declarationAdmits(d({ excludes: ['crisis: hunger'] }), sieged).admitted).toBe(false);
+    expect(V.declarationAdmits(d({ excludes: ['crisis: succession'] }), sieged).admitted).toBe(true);
+    // the conjunction: admissible for EVERY active kind
+    expect(V.declarationAdmits(d({ crisis: 'siege' }), two).admitted).toBe(false);
+    expect(V.declarationAdmits(d({ crisis: 'threat, unrest' }), two).admitted).toBe(true);
+    expect(V.declarationAdmits(d({ crisis: ['siege'] }), sieged).admitted).toBe(true);
+  });
+  it('the rulings §3–4: guardPresence is one composite; port is the route reader; lake is dropped', () => {
+    expect(V.atomHolds('guardPresence', factsOf({ institutions: [{ name: 'Citizen militia', category: 'Defense' }] }))).toBe(true);
+    expect(V.atomHolds('guardPresence', bare)).toBe(false);
+    expect(V.atomHolds('port', factsOf({ config: { tradeRouteAccess: 'port' } }))).toBe(true);
+    expect(V.parseAtom('lake')).toBeNull();
   });
   it('the tag slot: X needs, no X excludes, non-atoms skipped; the kernel marks declare walls only', () => {
     expect(V.declarationOfTags(['visitor', 'walls', 'no market', 'crisis: threat', 'dm-only']))

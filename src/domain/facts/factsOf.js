@@ -42,6 +42,8 @@ export function factsOf(record, options = {}) {
     get storesMonths() { return storesMonthsOf(record); },
     /** fact 3: walls / gate / watch / militia / garrison / hospital / healer */
     get defence() { return defenceOf(record); },
+    /** the ONE composite (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company */
+    get guardPresence() { const d = defenceOf(record); return d.watch || d.garrison || d.militia || d.mercenary; },
     /** fact 4: water a boat or a net could use */
     get water() { return waterOf(record); },
     /** fact 5: a live market */

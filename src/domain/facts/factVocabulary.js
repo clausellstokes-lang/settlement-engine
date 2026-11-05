@@ -109,6 +109,23 @@ export const CRISIS_KIND_WORDS = Object.freeze([
 /** F12's families as declarable GROUPS (ruling 2), each expanded by the crisis-kind home. */
 export const CRISIS_GROUP_WORDS = Object.freeze(['threat', 'hunger', 'succession', 'unrest']);
 
+/**
+ * family → its kinds: `crisisKind.js :: CRISIS_FAMILIES`' types, spelled here (held equal by the
+ * vocabulary test). `hunger` is also on under ANY crisis while the food record reads a deficit
+ * (`familyActiveIn`), which `crisisAdmits` honours through `facts.crisis.families`.
+ */
+export const CRISIS_FAMILY_KINDS = Object.freeze({
+  threat: Object.freeze(['under_siege', 'occupied', 'monster_pressure']),
+  hunger: Object.freeze(['famine', 'under_siege']),
+  succession: Object.freeze(['succession_void', 'politically_fractured']),
+  unrest: Object.freeze(['insurgency', 'slave_revolt', 'wartime']),
+});
+
+/** The short spellings the vocabulary rulings' table writes (`crisis: siege, famine`) → the record's kinds. */
+export const CRISIS_KIND_ALIASES = Object.freeze({
+  siege: 'under_siege', occupation: 'occupied', plague: 'plague_onset', war: 'wartime', migration: 'mass_migration', debt: 'indebted',
+});
+
 /** The tier ladder, `TIER_ORDER`. */
 export const TIER_WORDS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 
@@ -183,13 +200,17 @@ export const FACT_DIMENSIONS = Object.freeze({
   hospital: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.hospital) }),
   healer: Object.freeze({ shape: 'presence', home: 'defence', reader: (f) => bool(f.defence?.healer) }),
   soldiers: Object.freeze({ shape: 'presence', home: '', reader: null }),
-  guard: Object.freeze({ shape: 'presence', home: '', reader: null }),
+  // THE ONE COMPOSITE (the vocabulary rulings §3): watch ∨ garrison ∨ militia ∨ hired company,
+  // defined once in `factsOf` (`guardPresence`); a line never composes atoms itself.
+  guardPresence: Object.freeze({ shape: 'presence', home: 'guardPresence', reader: (f) => bool(f.guardPresence) }),
   // ── presence: market (fact 5), water (fact 4), magic (fact 7) ──
   market: Object.freeze({ shape: 'presence', home: 'market', reader: (f) => bool(f.market) }),
   navigable: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.navigable) }),
   coast: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.coast) }),
   river: Object.freeze({ shape: 'presence', home: 'water', reader: (f) => bool(f.water?.river) }),
-  lake: Object.freeze({ shape: 'presence', home: '', reader: null }),
+  // the rulings §4: the water atoms are the readers' values; `lake` is dropped (no record field
+  // carries a lake: the terrain classes have none); `port` is the trade-route reader's.
+  port: Object.freeze({ shape: 'presence', home: 'route', reader: (f) => (typeof f.route === 'string' ? f.route === 'port' : undefined) }),
   magic: Object.freeze({ shape: 'presence', home: 'magic', reader: (f) => bool(f.magic?.functions) }),
   // ── presence: institutions (fact 11; `facts/institutions.js`) ──
   temple: Object.freeze({ shape: 'presence', home: 'hasInstitution', reader: (f) => (typeof f.hasInstitution === 'function' ? f.hasInstitution('temple') : undefined) }),
@@ -263,12 +284,15 @@ export function parseAtom(word) {
   const raw = word.trim();
   if (!raw) return null;
   const colon = raw.indexOf(':');
-  const head = (colon < 0 ? raw : raw.slice(0, colon)).trim().toLowerCase();
+  const written = (colon < 0 ? raw : raw.slice(0, colon)).trim();
+  const head = FACT_DIMENSIONS[written] ? written : written.toLowerCase();
   const tail = colon < 0 ? '' : raw.slice(colon + 1).trim();
   const dim = FACT_DIMENSIONS[head];
   if (!dim) return null;
   if (dim.shape === 'crisis') {
-    const values = tail.split(',').map((v) => v.trim()).filter(Boolean);
+    // bare `crisis` (in needs / excludes): "a crisis is active" (the rulings §1)
+    if (colon < 0) return Object.freeze({ raw, dimension: head, key: null, op: null, value: null, values: null });
+    const values = tail.split(',').map((v) => v.trim()).filter(Boolean).map((v) => CRISIS_KIND_ALIASES[v] || v);
     if (!values.length || !values.every((v) => CRISIS_VALUES.includes(v))) return null;
     return Object.freeze({ raw, dimension: head, key: null, op: null, value: null, values: Object.freeze(values) });
   }
@@ -343,7 +367,8 @@ export function declarationOfTags(tags) {
     const neg = /^no\s+(.+)$/i.exec(w);
     const atom = parseAtom(neg ? neg[1] : w);
     if (!atom) continue;
-    if (atom.dimension === 'crisis') crisis.push(...(atom.values || []));
+    if (atom.dimension === 'crisis' && atom.values && !neg) crisis.push(...atom.values);
+    else if (atom.dimension === 'crisis' && neg) excludes.push(atom.raw);
     else if (neg && FACT_DIMENSIONS[atom.dimension].shape === 'presence') excludes.push(atom.raw);
     else if (!neg) needs.push(atom.raw);
   }
@@ -366,7 +391,7 @@ export function declarationOf(line, options = {}) {
   const o = /** @type {Record<string, unknown>} */ (line);
   const needs = list(o.needs); const excludes = list(o.excludes);
   /** @type {string[]} */ const crisis = [];
-  for (const c of list(o.crisis)) crisis.push(...c.split(',').map((v) => v.replace(/^crisis:\s*/i, '').trim()).filter(Boolean));
+  for (const c of list(o.crisis)) crisis.push(...c.replace(/^crisis:\s*/i, '').split(',').map((v) => v.trim()).filter(Boolean).map((v) => CRISIS_KIND_ALIASES[v] || v));
   let decl = needs.length || excludes.length || crisis.length
     ? Object.freeze({ needs: Object.freeze(needs), excludes: Object.freeze(excludes), crisis: Object.freeze(crisis) })
     : EMPTY_DECLARATION;
@@ -409,7 +434,13 @@ export function atomsOf(d) {
  */
 export function atomHolds(word, facts, ctx = {}) {
   const atom = parseAtom(word);
-  if (!atom || atom.dimension === 'crisis' || !facts) return undefined;
+  if (!atom || !facts) return undefined;
+  if (atom.dimension === 'crisis') {
+    const c = /** @type {any} */ (facts).crisis;
+    if (!c || typeof c.has !== 'function') return undefined;
+    if (!atom.values) return c.active === true; // `crisis`: a crisis is active
+    return atom.values.some((v) => v === 'any' ? c.active === true : v === 'calm' ? c.active !== true : c.has(v));
+  }
   const dim = FACT_DIMENSIONS[atom.dimension];
   if (!dim.reader) return undefined;
   const answer = dim.reader(facts, atom.key, ctx);
@@ -451,7 +482,15 @@ export function crisisAdmits(values, facts, options = {}) {
   const c = facts?.crisis;
   if (!c || typeof c.has !== 'function') return undefined;
   if (!c.active) return vs.includes('calm');
-  return vs.some((v) => v !== 'calm' && c.has(v));
+  // THE CONJUNCTION (the rulings §1): admissible only if admissible for EVERY active kind — the
+  // kind itself, or a family of it, is declared. `hunger` on by a food deficit covers every kind.
+  const hungerByDeficit = Array.isArray(c.families) && c.families.includes('hunger')
+    && !c.kinds.some((/** @type {string} */ k) => CRISIS_FAMILY_KINDS.hunger.includes(k));
+  const kinds = Array.isArray(c.kinds) && c.kinds.length ? c.kinds : [];
+  if (!kinds.length) return vs.some((v) => v !== 'calm' && c.has(v));
+  return kinds.every((/** @type {string} */ k) => vs.some((v) => v === k
+    || (/** @type {Record<string, ReadonlyArray<string>>} */ (CRISIS_FAMILY_KINDS)[v] || []).includes(k)
+    || (v === 'hunger' && hungerByDeficit)));
 }
 
 /**
