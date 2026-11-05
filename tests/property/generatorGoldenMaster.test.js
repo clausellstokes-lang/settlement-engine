@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F5 INSTRUMENTS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-21-f5-instruments.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   30 OF 525 ROWS MOVED (village 12, town 18; thorp, hamlet, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 7e28a6331): the hook pools' sea and dock lines are licensed on waterAccessKind (unit 4, the only unit that reaches the generator; units 1–3 are the soak's instruments). ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S21 (the tree of 7e28a6331 with the door paths carried from
+ *   the branch, the previous record's writes committed). fd89c9cc.. -> cad7b24e..
+ *
  * 2026-11-04 — PINS, SECOND STEP (UNITS 6–7), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json; the cloud chair signs under the owner's delegation, vetoable).
  *   99 OF 525 ROWS MOVED (village 39, city 24, metropolis 36; thorp, hamlet, town 0); the key set is identical. THE CAUSE, ONE (first-parent
