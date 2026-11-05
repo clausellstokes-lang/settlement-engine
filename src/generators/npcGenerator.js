@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { drawDeclared, lineText, resolveSibling } from '../domain/facts/drawDeclared.js'; import { birthFactsOf, factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -123,8 +123,8 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
-  const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
+  const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
+  const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry, birthFactsOf({ institutions, config, tier }, worldLaw)), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCPowerLevel(role);
   return {
@@ -152,7 +152,7 @@ const generateSingleNPC = (
     plotHooks,
     influence: powerLevel.level,
     power: powerLevel.power,
-    presentation: pickTitle(category),
+    presentation: pickTitle(category, birthFactsOf({ institutions, config, tier }, worldLaw)),
   };
 };
 
@@ -636,7 +636,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
 // can disagree about nothing. drawUnique spends exactly one roll in every arm
 // (HK-LAW-6), so the surrounding stream is unmoved; only WHICH template a given
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
-const drawLoyalty = (pool, reg) => drawUnique(pool, reg?.titles, undefined, reg?.themes, themeOfText);
+const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).line; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve
 
 // generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
 // the NPC's `plotHooks` array.
@@ -651,12 +651,12 @@ const drawLoyalty = (pool, reg) => drawUnique(pool, reg?.titles, undefined, reg?
 // drawLoyalty instead of a naive pick. Each branch still consumes the SAME
 // number of RNG rolls it always did (drawUnique spends one roll, exactly like
 // the pick it replaces), so title2 / power / downstream draws are unmoved.
-const generatePlotHook = (category = 'other', config = {}, hookRegistry) => {
+const generatePlotHook = (category = 'other', config = {}, hookRegistry, facts = null) => {
   const stresses = config.stressTypes?.length ? config.stressTypes : config.stressType ? [config.stressType] : [];
   const tier = config.tier || config.settType;
 
   // Small settlements: high chance of generic community loyalty description
-  if (['thorp', 'hamlet'].includes(tier) && _rng() < 0.45) return drawLoyalty(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other, hookRegistry);
+  if (['thorp', 'hamlet'].includes(tier) && _rng() < 0.45) return drawLoyalty(NPC_FACTION_LOYALTY.small_settlement || NPC_FACTION_LOYALTY.other, hookRegistry, facts);
 
   // Stress-driven category bias
   if (stresses.length > 0 && _rng() < 0.4) {
@@ -680,16 +680,16 @@ const generatePlotHook = (category = 'other', config = {}, hookRegistry) => {
     const biasedCategories = [...new Set(stresses.map(s => STRESS_TO_CATEGORY[s]).filter(Boolean))];
     if (biasedCategories.length > 0) {
       const biasedCat = pickFromArray(biasedCategories);
-      if (NPC_FACTION_LOYALTY[biasedCat]) return drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry);
+      if (NPC_FACTION_LOYALTY[biasedCat]) return drawLoyalty(NPC_FACTION_LOYALTY[biasedCat], hookRegistry, facts);
     }
   }
 
-  return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry);
+  return drawLoyalty(NPC_FACTION_LOYALTY[category] || NPC_FACTION_LOYALTY.other, hookRegistry, facts);
 };
 
 // pickTitle
-const pickTitle = r => {
-  const s = pick(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other);
+const pickTitle = (r, facts = null) => {
+  const s = drawDeclared(NPC_PLOT_HOOKS[r] || NPC_PLOT_HOOKS.other, { draw: pick, facts, poolId: 'npcData:NPC_PLOT_HOOKS', surface: 'npcs', drawKind: 'R' }).line || {}; // CENSUS-1c unit 2
   return {
     impression: s.impression,
     disposition: s.disposition,
@@ -753,7 +753,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   // 25% chance: NPC knows something compromising about another NPC
   if (random01(0.25) && allNpcs.length > 1) {
     const otherNpc = pickRandom2(allNpcs.filter((_, idx) => idx !== npcIndex));
-    return pickRandom2([
+    return drawDeclared([
       {
         what: `Knows something about ${otherNpc.name} that ${otherNpc.name} believes no one else knows, and has been deciding for months whether to use it`,
         stakes: `${otherNpc.name} would move against them immediately if they suspected`,
@@ -770,7 +770,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
         what: `Has been reading ${otherNpc.name}'s correspondence through an intermediary. Nothing damaging yet. But they keep looking`,
         stakes: 'The intermediary has recently started asking for more money',
       },
-    ]);
+    ], { draw: pickRandom2, facts: () => factsOf({ npcs: allNpcs }), ctx: { npc: npcIndex }, poolId: 'npcGenerator:CRIME_KNOWLEDGE', surface: 'npcs', drawKind: 'R' }).line;
   }
 
   // 45% chance: stress-driven institutional secret
