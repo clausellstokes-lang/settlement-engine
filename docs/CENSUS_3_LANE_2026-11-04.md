@@ -656,3 +656,93 @@ R-AM's ledger showed the kept-refused starving original false in 162 of the 1,00
 - **Births moved** (`economicViability` only): soak 1,000: 143 (45 reworded text, 95 twin added, 3 starving towns that now keep the hook). Golden 525: 167. The 60: 4 pages. Empty economics hook lists on the branch go from 88 to 38. Red-first: `outlookHooksResolved.test.js` 4 red, then 7 / 7.
 
 3g's three questions and the chair's answers (08:3x): (1) R-AU — the site drops a refused hook with no admitted sibling, and the mechanism lane changes it; (2) R-AV — the twin carries only the severity and category the record holds; (3) the `A-11` finding on the merged base is CENSUS-2f's fish fix (`3386e59b7` on lane 2), not this lane's.
+
+## CENSUS-3h (2026-11-05)
+
+Base: CENSUS-3g's tip `167c957`. Merged: `origin/lane/census-1b-2026-11-04` at `e8b0072` (CENSUS-1g: R-AL `ef551fc`, the rulingStructure fix `12615155`, unit 3c `1425ac7`) as `bfd0958`, with no conflict. `gen:dossier-prose --check` is green. The wiring census was re-taken through its door: 1g's declared columns now count this lane's R-AO `colour` marks, and that is the only diff. Re-fetched at unit 7: 1b is at `5215c43` (CENSUS-1h unit 7, R-AQ `8c6dcab`, and a merge of census-5). R-AU is not in it (neither `foodBalance.js` nor `drawDeclared.js` changed), so it is not merged here: nothing of this lane needs it, and census-5's lane comes in at the compose.
+
+| unit | commit | what | births moved (soak 1,000 · golden 525 · pages on the 60) |
+|---|---|---|---|
+| 1 | `bfd0958` | the merge; the census re-taken; the 60 as the merged base (`artifacts/census3h-base`) | 16 · 0 · 0 (R-AL, counted at unit 2) |
+| 2 | — (this record) | R-AL counted (below) | — |
+| 3 | `113a165` | R-AV: the moderate-gap twin graded by the band the record reads | 95 · 131 · 2 (soak1k-10, -15) |
+| 4 | — | R-AU not landed on 1b at this boundary | — |
+| 5 (unit 7) | this commit | the 60 and the 1,000 as a diff; this record | 0 |
+
+### Unit 2 · R-AL counted (sha per record section, `167c957` against `bfd0958`)
+
+- **Soak 1,000: 16 births move**, in `history` and `generationCoherenceReceipt` only (the receipt hashes the history). They are soak1k-8, -120, -129, -237, -295, -332, -394, -467, -608, -647, -712, -772, -800, -851, -951 and -976.
+- **These are exactly the 16 births whose tension list was empty at the base**, every one a `demographic_pressure` tension with no live migration. Births with an empty tension list: **16 → 0**. No mute slot remains, so none is listed for the compose (R-AR: the slot is absent, not mute).
+- **Golden 525: 0 move.**
+
+### Unit 3 · R-AV (`113a165`)
+
+`deriveSupplyRiskAnalysis` grades the moderate-gap twin by the band the food record reads at that birth, through the declaration's own reader (`famine.band`).
+- **The category** is the band's own label (`FOOD_SECURITY_BANDS`, never re-spelled).
+- **The severity** is the band's grade:
+  - Import-Dependent `medium`: the record's own grade for that band's viability hook ("A poor harvest somewhere else…");
+  - Pressured `low`: the grade under it, because the ladder writes no Pressured hook.
+- **The famine-band original** keeps "Survival Crisis / critical".
+- **The chair's ruling recorded here (vetoable):** the grade map is this seat's reading of "the band … and the category that band carries".
+- **Display:** the Plot Hooks collector prints no severity sub-label below `high` and gives both grades priority 7. On the page the grade change therefore reads as a source label and an order, not as a new mark.
+
+Births whose severity changes (`economicViability` only):
+
+| corpus | Pressured / low | Import-Dependent / medium | total |
+|---|---|---|---|
+| soak 1,000 | 67 | 28 | 95 |
+| golden 525 | 131 | 0 | 131 |
+
+Red-first: `outlookHooksResolved.test.js` 2 red, then 11 / 11.
+
+### Unit 4 · R-AU: not landed
+
+At this boundary the kept-refused residue on `foodBalance:OUTLOOK_HOOK_SIBLINGS` reads **45 births / 45 findings on the 1,000** (6 / 6 on the 60), before and after this seat.
+- **Not 250.** The chair's 250-in-161 was the set before CENSUS-3g's reword and twin. The 45 are the fed (Secure) places that keep the refused original, which never prints.
+- **Listed as the mechanism lane's (R-AU).** When CENSUS-1h changes the site, 45 → 0 is expected with no page moved, and no twin is owed for the fed case (R-L).
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `bfd0958`, AFTER = `113a165`)
+
+Runs: `soak-review.mjs --workers 4`, written to `artifacts/census3h-base` / `census3h-after60` (60) and to `census3h-before` (an export of `bfd0958`) / `census3h-after` (1,000).
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:hook-pools` | 0 → 0 | 5 / 5 → 5 / 5. All 5 are `[guard]` conflict labels: lane 4's, cured by R-AW on the mechanism lane. 0 on this lane's pools |
+| every `coh:*` | 0 → 0 | 0 → 0 |
+| `A-11:sea-words-landlocked` | 0 → 0 | 1 / 1 → 1 / 1. This is CENSUS-2f's fish fix (`3386e59b7`, lane 2), which the compose merges; not this lane's |
+| `A-12:*` | 0 | 0 → 0 |
+| `cert:false-presumption` | 6 / 6 → 6 / 6 | 45 / 45 → 45 / 45, all `foodBalance:OUTLOOK_HOOK_SIBLINGS`, the fed residue waiting on R-AU (unit 4). No other cause. Certification is otherwise 1,000 / 1,000 |
+| `reader:faction-role-fit` / `tension-memory` / `validation-on-page` | 18/25, 4/4, 60/163 (unchanged) | 348/521, 61/61, 985/2,547 (unchanged) |
+| findings · verdict | 107 → 107 · STOP | 1,707 → 1,707 · STOP. The base's STOP at the same counts (R-B) |
+
+**`declared-share` on the 1,000** (unchanged by this seat; R-AV re-grades a resolved line and declares nothing new):
+
+| surface | declared / drawn | share |
+|---|---|---|
+| history | 1,568 / 10,499 | 0.149 |
+| npcs | 5,156 / 42,932 | 0.120 |
+| economics | 549 / 1,932 | 0.284 |
+| tab:dossier | 49,011 / 213,133 | 0.230 |
+| tab:economics | 1,851 / 28,025 | 0.066 |
+| foundry:economics | 1,140 / 13,370 | 0.085 |
+| pdf:economics | 215 / 215 | 1 |
+
+**The undeclared register** (statePools, re-taken in scratch, not written, R-T), at the base and at the tip alike: DS-ECO 111, DS-SUP 51, DS-POP 54. The whole register re-takes at 1,409 lines / 478 pools. The difference from its pin is the siblings' declarations, which are the compose's.
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Records:**
+  - R-AL (the merge): soak 1,000 16, golden 0;
+  - R-AV: soak 1,000 95, golden 131 (`economicViability`).
+  - The sets do not overlap in section.
+- **Pages on the 60:** 2 (R-AV).
+- **The wiring census:** re-taken at the merge (the declared columns gain this lane's `colour` marks).
+- **The manifest and the registers:** not re-pinned.
+- **Pins:** none edited. `outlookHooksResolved.test.js` gains 4 tests.
+- **The base's own reds, unchanged:** `typecheck:domain:strict` (crisisFactFindings +4, composeStateProse +2); the reds listed at CENSUS-3f.
+
+### Where CENSUS-3i starts
+
+Nothing of this lane remains but the compose. Two notes for whoever reads it:
+- **When R-AU lands**, read `cert:false-presumption` on `OUTLOOK_HOOK_SIBLINGS`: 45 → 0 is expected, with no page moved.
+- **The five read-but-unmarked DS lines of CENSUS-3g unit 3** are for the compose's mute and presumption reading.
