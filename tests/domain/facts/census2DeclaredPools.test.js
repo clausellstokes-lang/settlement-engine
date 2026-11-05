@@ -32,6 +32,7 @@ const keyed = (p) => Array.isArray(p.poolCrisis) && p.poolCrisis.length > 0;
 const FAMILIES = {
   'DS-GEN': ['DS-GEN-1', 'DS-GEN-2', 'DS-GEN-3', 'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7', 'DS-GEN-8', 'DS-GEN-9',
     'DS-GEN-10', 'DS-GEN-11', 'DS-GEN-12', 'DS-GEN-13', 'DS-GEN-14', 'DS-GEN-15', 'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18'],
+  'DS-HK': ['DS-HK-1'],
 };
 
 const TOWN = { tier: 'town', population: 2400, institutions: [] };

@@ -7588,6 +7588,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "category npc: the people are the opening": [
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What is worth doing in {settlement} is worth doing because of who is in it; the town's difficulties have names attached before they have causes.",
           "slots": [
             "settlement"
@@ -7596,6 +7599,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s open questions sit with particular people rather than with offices, which is what makes them approachable.",
           "slots": [
             "settlement"
@@ -7604,6 +7610,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "A stranger with business in {settlement} will be pointed at a person, not at an institution.",
           "slots": [
             "settlement"
@@ -7656,6 +7665,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "category tension: the standing quarrels are the opening": [
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} runs on arrangements that everyone here has agreed not to test, and the untested places are where the town is soft.",
           "slots": [
             "settlement"
@@ -7672,6 +7684,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What is wrong in {settlement} is not hidden. It is simply nobody's job.",
           "slots": [
             "settlement"
@@ -7724,6 +7739,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "category safety: the streets are the opening": [
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} has more trouble than it has people to answer it, and the shortfall is where the work is.",
           "slots": [
             "settlement"
@@ -7732,6 +7750,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What {settlement} reports and what {settlement} suffers differ by enough that the difference is itself the opening.",
           "slots": [
             "settlement"
@@ -7740,6 +7761,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} is a town where being competent and armed makes you immediately useful, and the town knows it.",
           "slots": [
             "settlement"
@@ -7749,7 +7773,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "walls"
+            "walls",
+            "no crisis: threat",
+            "no crisis: unrest",
+            "crisis: any"
           ],
           "text": "{settlement} is safer than its country, and what threatens it comes from outside the walls rather than inside them.",
           "slots": [
@@ -7760,7 +7787,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "no walls"
+            "no walls",
+            "no crisis: threat",
+            "no crisis: unrest",
+            "crisis: any"
           ],
           "text": "{settlement} is safer than its country, and what threatens it comes from the country around it rather than from within.",
           "slots": [
@@ -7840,6 +7870,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "clock bread_riot": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement}'s food comes through a chain that is under strain, and a chain under strain has a shape to how it fails.",
           "slots": [
             "settlement"
@@ -7848,6 +7881,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The price of bread in {settlement} is the number this town watches, and it is going the wrong way.",
           "slots": [
             "settlement"
@@ -7856,6 +7892,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} can absorb what is happening to its food for a while, and the while is what everyone here is quietly estimating.",
           "slots": [
             "settlement"
@@ -7864,6 +7903,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "institution: granary",
+            "no crisis: hunger",
+            "crisis: any"
+          ],
           "text": "{settlement}'s food chain is strained and its granary is not; what would be a crisis in a town without stores is, here, an expensive season.",
           "slots": [
             "settlement"
@@ -7882,6 +7926,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "What is not coming into {settlement} through the gate is a gap, and gaps in a town like this get filled.",
           "slots": [
             "settlement"
@@ -7898,6 +7945,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "watch"
+          ],
           "text": "{settlement}'s trade is strained and its watch is not distracted; the gap is real and nobody has yet been able to work it.",
           "slots": [
             "settlement"
@@ -7908,6 +7958,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "clock legitimacy_crisis": [
         {
           "angle": "street",
+          "marks": [
+            "market",
+            "crisis: any"
+          ],
           "text": "{governing} governs {settlement} and does not command it, and the difference is audible in the market.",
           "slots": [
             "governing",
@@ -7917,6 +7971,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "Instructions from {settlement}'s hall are being complied with slowly, which is how a town says no without saying it.",
           "slots": [
             "settlement"
@@ -7925,6 +7982,10 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "no crisis: succession",
+            "crisis: any"
+          ],
           "text": "{governing}'s standing in {settlement} rests on nobody yet having a better claim.",
           "slots": [
             "governing",
@@ -7934,6 +7995,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: succession",
+            "no crisis: unrest",
+            "crisis: any"
+          ],
           "text": "{governing} is contested in {settlement} and unopposed; the town's complaint is real and has nowhere to go.",
           "slots": [
             "governing",
@@ -7945,6 +8011,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
       "clock faction_split": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{faction} and {faction2} hold overlapping ground in {settlement} and want incompatible things with it.",
           "slots": [
             "faction",
@@ -7955,6 +8024,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "Two powers in {settlement} need the same rooms, and the rooms are not getting larger.",
           "slots": [
             "settlement"
@@ -7963,6 +8035,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The people of {settlement} who deal with both {faction} and {faction2} are the ones who will have to choose first.",
           "slots": [
             "settlement",
@@ -7973,6 +8048,11 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: succession",
+            "no crisis: unrest",
+            "crisis: any"
+          ],
           "text": "{faction} and {faction2} overlap in {settlement} and have divided the overlap; the arrangement holds, and it holds on one person's word.",
           "slots": [
             "faction",
@@ -7999,7 +8079,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "category faction: the blocs are the opening": {
         "role": "spine",
@@ -8016,7 +8097,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "category tension: the standing quarrels are the opening": {
         "role": "spine",
@@ -8033,7 +8115,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "category economics: the books are the opening": {
         "role": "spine",
@@ -8050,7 +8133,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "category safety: the streets are the opening": {
         "role": "spine",
@@ -8069,7 +8153,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           4,
           5
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "category history: the past is the opening": {
         "role": "spine",
@@ -8086,7 +8171,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "category relationship: the ties are the opening": {
         "role": "spine",
@@ -8103,7 +8189,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "clock bread_riot": {
         "role": "spine",
@@ -8120,7 +8207,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "clock smuggling_rise": {
         "role": "spine",
@@ -8154,7 +8242,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "clock faction_split": {
         "role": "spine",
@@ -8171,7 +8260,8 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   },
