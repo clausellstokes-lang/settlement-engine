@@ -80,7 +80,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Defense starts with earthworks and timber palisades and turns to gated stone only as wealth and threat increase.',
-      'A militia tradition supports a smaller permanent watch or retinue.',
+      { text: 'A militia tradition supports a smaller permanent watch or retinue.', needs: ['guardPresence'] },
     ],
     socialTexture: [
       'Household, guild, parish, and estate obligations overlap; authority is visible through office and reciprocal duty.',
@@ -123,7 +123,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Where a place can pay for them, masonry defenses, watch posts, and road gates are kept as civic infrastructure.',
-      { text: 'Professional guards supplement levy forces organized by district and patron.', needs: ['militia'] },
+      { text: 'Professional guards supplement levy forces organized by district and patron.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
       'Public standing is negotiated through family networks, office, clientage, law, and visible contribution to civic life.',
@@ -381,7 +381,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       'Terraces, causeways, controlled approaches, fortified heights, and organized military orders shape defense.',
-      { text: 'Ward levies reinforce trained warrior societies and palace guards.', needs: ['militia'] },
+      { text: 'Ward levies reinforce trained warrior societies and palace guards.', needs: ['militia', 'guardPresence'] },
     ],
     socialTexture: [
       { text: 'Ward membership, craft specialization, market standing, tribute duty, and ritual office structure public life.', needs: ['market'] },
@@ -467,7 +467,7 @@ export const CULTURE_PROFILES = Object.freeze({
     ],
     defensePattern: [
       { text: 'Mounted patrols, mobile musters, earthworks, corrals, and signal systems protect people and herds.', needs: ['militia'] },
-      'A small permanent guard relies on rapid reinforcement from a dispersed mounted population.',
+      { text: 'A small permanent guard relies on rapid reinforcement from a dispersed mounted population.', needs: ['guardPresence'] },
     ],
     socialTexture: [
       'Clan, household, herd ownership, alliance, military following, and hospitality obligations organize public standing.',

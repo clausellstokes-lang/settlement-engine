@@ -24,6 +24,39 @@ const ledger = (name) => JSON.parse(readFileSync(new URL(`../../../docs/census/d
 /** @param {string} a */
 const norm = (a) => a.replace(/^deficit$/, 'starving').replace(/^other-npc$/, 'other npc').replace(/>=/g, '≥').replace(/<=/g, '≤').trim();
 
+/**
+ * ORDER ITEM 3 (CENSUS-2d): the ledger's parked `stop` lines whose atom now has a home — "guards"
+ * (watch | garrison | militia | a hired company) is `guardPresence`, the one composite (the
+ * vocabulary rulings §3); "soldiers" (a garrison or a hired company) is `soldiers` (CENSUS-1c).
+ * The occupied vignettes' soldiers are the occupier's (the key's), and the culture lines'
+ * military households / warrior followings describe a tradition drawn before any roster exists:
+ * neither is declared (open question in the lane doc).
+ * @type {Readonly<Record<string, string>>}
+ */
+const PARKED = Object.freeze({
+  'STRESS_DESCS.under_siege[1]': 'guardPresence',
+  'STRESS_DESCS.under_siege[2]': 'guardPresence',
+  'STRESS_DESCS.famine[1]': 'guardPresence',
+  'STRESS_DESCS.famine[3]': 'guardPresence',
+  'STRESS_DESCS.occupied[1]': 'guardPresence',
+  'STRESS_DESCS.politically_fractured[1]': 'guardPresence',
+  'STRESS_DESCS.recently_betrayed[0]': 'guardPresence',
+  'STRESS_DESCS.infiltrated[1]': 'guardPresence',
+  'STRESS_DESCS.infiltrated[2]': 'guardPresence',
+  'STRESS_DESCS.infiltrated[5]': 'guardPresence',
+  'STRESS_DESCS.monster_pressure[2]': 'guardPresence',
+  'STRESS_DESCS.insurgency[0]': 'guardPresence',
+  'STRESS_DESCS.mass_migration[0]': 'guardPresence',
+  'STRESS_DESCS.slave_revolt[0]': 'guardPresence',
+  'STRESS_DESCS.slave_revolt[2]': 'guardPresence',
+  'STRESS_DESCS.insurgency[2]': 'soldiers',
+  'STRESS_DESCS.wartime[2]': 'soldiers',
+  'CULTURE_PROFILES.germanic.defensePattern[1]': 'guardPresence',
+  'CULTURE_PROFILES.latin.defensePattern[1]': 'guardPresence',
+  'CULTURE_PROFILES.mesoamerican.defensePattern[1]': 'guardPresence',
+  'CULTURE_PROFILES.steppe.defensePattern[1]': 'guardPresence'
+});
+
 /** the declaration a ledger line carries under this lane's reading (see the header) */
 export function expectedDeclaration(pool, line) {
   const key = new Set(pool.poolCrisis || []);
@@ -33,7 +66,9 @@ export function expectedDeclaration(pool, line) {
   if (Array.isArray(c)) crisis = keyed && c.some((v) => key.has(v)) ? [] : c.filter((v) => v !== 'calm');
   else if (c === 'any' && pool.crisisScoped && !keyed) crisis = ['any'];
   if (Array.isArray(c) && c.includes('calm') && crisis.length) crisis.push('calm');
-  return { needs: (line.needs || []).map(norm), excludes: (line.excludes || []).map(norm), crisis };
+  const needs = (line.needs || []).map(norm);
+  if (PARKED[line.lineId]) needs.push(PARKED[line.lineId]);
+  return { needs, excludes: (line.excludes || []).map(norm), crisis };
 }
 
 /** @param {string} id */

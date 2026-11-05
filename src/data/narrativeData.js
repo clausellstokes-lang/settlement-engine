@@ -152,9 +152,9 @@ export const STRESS_DESCS = {
     { text: r =>
       `The gates of ${r} are closed. There are people on the walls. This is not the relaxed watch of a settlement going about its day. These are people watching the treeline. A runner comes out of the small side gate, sees your group, stops.`, needs: ['gate', 'walls'] },
     { text: r =>
-      `${r}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.`, needs: ['gate'] },
+      `${r}'s gates are open but attended: every person entering is noted, every cart searched. The guards are professional about it, which makes it worse. Professional means this has been happening long enough to become routine.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
-      `From the road, ${r} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach.`, needs: ['gate', 'market'] },
+      `From the road, ${r} looks ordinary. Smoke from cookfires, the sound of a market. It is only at the gate that the weight becomes apparent: the guards' expressions, the way conversation stops when strangers approach.`, needs: ['gate', 'market', 'guardPresence'] },
     { text: r =>
       `The approach to ${r} is quieter than it should be for a settlement this size. The outlying farms are empty. The road has not been maintained recently. The settlement itself is intact, but everything around it has been abandoned to the walls.`, needs: ['walls'] },
     // CONTENT-GT-FINAL (Charge 4): every pool below grew +2. Selection is a single
@@ -174,11 +174,11 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} looks prosperous in the merchant quarter: new paint, loaded carts, a market stall with produce. It is only when you walk further in that the other version of the settlement appears: shuttered houses, people sitting on doorsteps with no particular purpose.`, needs: ['market'] },
     { text: r =>
-      `${r} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street.`, needs: ['market'] },
+      `${r} is functional. The market is open, the streets are swept, the guards are at their posts. Something is wrong anyway. It takes a moment to identify: there are no children playing in the street.`, needs: ['market', 'guardPresence'] },
     { text: r =>
       `The queue at the granary gate is the first thing you see in ${r}. Not a market queue, not a water queue: the organised, patient, daily queue of people who are waiting to receive what they are owed and are not certain they will receive it.`, needs: ['institution: granary'] },
-    r =>
-      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`,
+    { text: r =>
+      `${r} is orderly in the way that a settlement is orderly when order is being enforced. The streets are clear. The rationing markers are painted on the doors. A guard patrol passes and everyone steps aside.`, needs: ['guardPresence'] },
     r =>
       `The dogs of ${r} are gone. It takes a while to notice and longer to stop noticing, and nobody in the settlement will discuss it with a stranger.`,
     { text: r =>
@@ -191,7 +191,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The flags above ${r}'s gatehouse are not the settlement's own. Two soldiers at the gate. Their uniform is not local. They look at your papers with the particular expression of people who have been told to look at papers.`, needs: ['gate'] },
     { text: r =>
-      `${r} looks normal from the approach. It is only at the gate that the nature of normal becomes apparent: the guard asks where you are from, writes it down, and asks how long you intend to stay. This is not the usual question.`, needs: ['gate'] },
+      `${r} looks normal from the approach. It is only at the gate that the nature of normal becomes apparent: the guard asks where you are from, writes it down, and asks how long you intend to stay. This is not the usual question.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
       `The approach to ${r} looks like any other settlement. There is graffiti on the wall near the gate that someone has attempted to scrub off. The symbol is still readable.`, needs: ['gate'] },
     { text: r =>
@@ -208,7 +208,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} has two gates. The eastern one is controlled by one faction, the western by another. You can tell by the pennants. The road you are on leads to the eastern gate.`, needs: ['gate'] },
     { text: r =>
-      `The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.`, needs: ['gate', 'institution: tavern'] },
+      `The gate guard at ${r} asks where you intend to stay: which inn, which district. The answer apparently matters. They note it and say nothing further.`, needs: ['gate', 'institution: tavern', 'guardPresence'] },
     r =>
       `The road into ${r} has been marked. Symbols painted on fence posts and milestone stones: the same symbol, repeated, belonging to one faction or another. Someone has been doing this recently; the paint is fresh.`,
     r =>
@@ -234,7 +234,7 @@ export const STRESS_DESCS = {
   ],
   recently_betrayed: [
     { text: r =>
-      `The guard at ${r}'s gate is polite, thorough, and writes down more than guards usually write down. You are asked your business three times, by three different people, in the space of five minutes.`, needs: ['gate'] },
+      `The guard at ${r}'s gate is polite, thorough, and writes down more than guards usually write down. You are asked your business three times, by three different people, in the space of five minutes.`, needs: ['gate', 'guardPresence'] },
     r =>
       `Something happened in ${r} recently. You cannot immediately say what, but the settlement has the quality of a place that is still processing something: hushed conversations, people watching the street.`,
     { text: r =>
@@ -250,15 +250,15 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r} looks exactly like it should. The gate is attended, the market sounds busy, there is nothing remarkable about the approach. Everything is as it should be.`, needs: ['gate', 'market'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
     { text: r =>
-      `The approach to ${r} is unremarkable in every respect. Gate, road, market noise, smoke, the usual questions from the guard. Nothing to note.`, needs: ['gate', 'market'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
+      `The approach to ${r} is unremarkable in every respect. Gate, road, market noise, smoke, the usual questions from the guard. Nothing to note.`, needs: ['gate', 'market', 'guardPresence'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
     { text: r =>
-      `${r} looks normal. There is a moment at the gate (a guard glancing at another guard after you answer a question) that is probably nothing.`, needs: ['gate'] },
+      `${r} looks normal. There is a moment at the gate (a guard glancing at another guard after you answer a question) that is probably nothing.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
       `${r} is functioning well. Clean streets, busy market, maintained walls. If you were looking for problems, you would not find them from the outside.`, needs: ['market', 'walls'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
     { text: r =>
       `Nothing in ${r} is out of place. The watch changes on the hour, the market closes at dusk, the innkeeper remembers your name on the second morning. It is all exactly as a well-run town should be.`, needs: ['watch', 'market', 'institution: tavern'], excludes: ['crisis: threat', 'crisis: hunger', 'crisis: succession', 'crisis: unrest'] },
     { text: r =>
-      `${r} welcomes travellers with practised ease: a good inn, fair prices, incurious guards. A week later you would struggle to say why the ease sat strangely. It was practised.`, needs: ['institution: tavern'], excludes: ['crisis: hunger'] },
+      `${r} welcomes travellers with practised ease: a good inn, fair prices, incurious guards. A week later you would struggle to say why the ease sat strangely. It was practised.`, needs: ['institution: tavern', 'guardPresence'], excludes: ['crisis: hunger'] },
     // The Voice Program wave 4 (2026-10-02): structure-free, so a settlement with no wall, gate, market or guard
     // still opens on its stress (src/generators/narrative/arrivalScene.js draws only the vignettes whose structures it holds).
     (n) => `${n} is friendly. Everyone you meet is helpful, and everyone you meet asks one question more than they need to: where you are going next, and who you know there.`,
@@ -302,7 +302,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `The farms outside ${r} are partially abandoned. You count three sets of buildings that have not been worked recently: the fields untended, the doors standing open. The settlement's wall is a quarter mile closer than it would have been three months ago.`, needs: ['walls'] },
     { text: r =>
-      `${r}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. The settlement is paying for help.`, needs: ['gate'] },
+      `${r}'s gate is attended by its usual guards and, less usually, by several people in road-worn equipment who are clearly not local and clearly not merchants. The settlement is paying for help.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
       `${r} is going about its business, but the business includes people you wouldn't normally see on a market day: hunters checking arrows, a blacksmith working past dark, a group of militia running a drill in the square visible from the gate.`, needs: ['market', 'institution: smith', 'militia', 'gate'] },
     r =>
@@ -317,11 +317,11 @@ export const STRESS_DESCS = {
   ],
   insurgency: [
     { text: r =>
-      `The approach to ${r} is ordinary until you notice what is missing: no toll-keeper at the gate, no one collecting the road tax a settlement this size always collects. The guards are present, but they are watching the town, not the road.`, needs: ['gate'] },
+      `The approach to ${r} is ordinary until you notice what is missing: no toll-keeper at the gate, no one collecting the road tax a settlement this size always collects. The guards are present, but they are watching the town, not the road.`, needs: ['gate', 'guardPresence'] },
     { text: r =>
       `${r}'s gate stands open and unmanned. Further in, two different sets of notices are posted on the same wall: one in the formal hand of the authorities, one hand-lettered and torn at the corner. Someone tears down the second kind. Someone keeps putting them back.`, needs: ['gate'] },
-    r =>
-      `There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.`,
+    { text: r =>
+      `There are soldiers on ${r}'s streets, but they move in pairs and do not linger. The people watch them pass with the particular blankness of a place that has already decided which side it is on and is waiting to be asked.`, needs: ['soldiers'] },
     { text: r =>
       `${r} looks governed, and is not, quite. The market runs, the watch patrols, the council building is occupied. But the orders that leave that building are not always the orders that get followed, and everyone in the street knows which is which.`, needs: ['market', 'watch'] },
     { text: r =>
@@ -334,7 +334,7 @@ export const STRESS_DESCS = {
   ],
   mass_migration: [
     { text: r =>
-      `The road into ${r} is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.`, needs: ['migration: influx', 'gate'] },
+      `The road into ${r} is crowded: not with merchants but with families, carts piled with household goods, people who are clearly not from here and clearly not passing through. The gate guard has stopped checking papers. There are too many.`, needs: ['migration: influx', 'gate', 'guardPresence'] },
     { text: r =>
       `${r} has grown a second settlement outside its walls: tents and lean-tos and cookfires on the ground that used to be common pasture. The people there watch you approach with the wariness of those who arrived too late to get inside.`, needs: ['migration: influx', 'walls'] },
     // ONE DIRECTION (chair ruling 2, 2026-10-30): these two vignettes told a departure beside a crisis card that says
@@ -354,7 +354,7 @@ export const STRESS_DESCS = {
     { text: r =>
       `${r}'s young men are not in ${r}. You notice it at the gate and it holds true inside: the people working the stalls and the fields are the old, the very young, and the women. A recruiting notice is nailed to the gatepost, its edges soft with weather.`, needs: ['gate', 'market'] },
     { text: r =>
-      `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['market'] },
+      `There are more soldiers than citizens visible on ${r}'s main street, and the citizens are the ones stepping aside. A requisition column is being loaded in the square: grain, cloth, iron, and the settlement's own carts to carry it away.`, needs: ['market', 'soldiers'] },
     { text: r =>
       `${r} is prosperous in a way that feels wrong. The forges work past dark, the warehouses are full, the coin is moving, and all of it points one direction, toward a war that is not fought here but is paid for here.`, needs: ['institution: smith'], excludes: ['crisis: hunger', 'crisis: under_siege', 'war: front'] },
     r =>
@@ -378,11 +378,11 @@ export const STRESS_DESCS = {
   ],
   slave_revolt: [
     { text: r =>
-      `${r}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.`, needs: ['gate', 'walls'] },
+      `${r}'s gates are shut in daylight, which is wrong for a settlement of its size. There is smoke inside: not cookfire smoke, too much and too dark. On the wall, the guards face inward, toward their own streets, not out toward you.`, needs: ['gate', 'walls', 'guardPresence'] },
     { text: r =>
       `The approach to ${r} is blocked by a hasty checkpoint: overturned carts, armed men who are not the regular watch, a hard question about your business before you are allowed within sight of the gate. Whatever is happening inside, they have decided strangers are a risk.`, needs: ['gate', 'watch'] },
     { text: r =>
-      `${r} is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards. The chains are still there. The people who wore them are not.`, needs: ['market', 'gate'] },
+      `${r} is quiet in the way a held breath is quiet. The slave market at its heart (you can see the empty auction platform from the gate) stands deserted, ringed by guards. The chains are still there. The people who wore them are not.`, needs: ['market', 'gate', 'guardPresence'] },
     r =>
       `There are bodies being carried through ${r}'s streets under cloth, and the people carrying them are not mourners but labourers doing grim, fast work. The rising that did this is not finished; you can hear it, somewhere in the lower districts, still going on.`,
     r =>
