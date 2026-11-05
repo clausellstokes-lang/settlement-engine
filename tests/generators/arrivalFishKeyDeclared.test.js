@@ -32,10 +32,10 @@ describe('the arrival tables declare what an unguaranteed key presumes (R-AP)', 
   it('the market key\'s lines declare `market`', () => {
     for (const line of sense('market').lines) expect(needsOf(line)).toContain('market');
   });
-  it('the faith key\'s bell, incense and hymn declare `sacredHouse`; the wayside shrine presumes nothing', () => {
+  it('the faith key\'s bell, incense and hymn declare `sacredHouse`; the wayside shrine is colour', () => {
     const [bell, incense, shrine, hymn] = sense('faith').lines;
     for (const line of [bell, incense, hymn]) expect(needsOf(line)).toContain('sacredHouse');
-    expect(typeof shrine).toBe('function');
+    expect(shrine).toEqual(expect.objectContaining({ colour: true })); // R-AO: read, presumes nothing (after the chair's 07:25 message)
   });
 });
 

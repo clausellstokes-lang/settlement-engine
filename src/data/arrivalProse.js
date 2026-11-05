@@ -23,7 +23,7 @@
  * ruling R-C) — `{ text, needs?, excludes?, crisis? }` in the atoms of `domain/facts/factVocabulary.js`. Consumers
  * read it through `domain/facts/textOf.js` until CENSUS-1c's wiring draws it through `drawDeclared`.
  * @typedef {((n: string) => string) | { text: (n: string) => string, needs?: ReadonlyArray<string>,
- *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }} ArrivalLine
+ *   excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string>, colour?: boolean }} ArrivalLine
  */
 /**
  * THE CRISIS-SCOPED FLAGS (CENSUS-2e unit 1, the chair's R-AF: "flags now, pins at the compose"). The ledger's
@@ -83,10 +83,10 @@ export const ARRIVAL_SENSES = Object.freeze([
     institutions: ['bakery', 'baker', 'bakehouse', 'mill', 'mills'],
     trade: ['baked goods', 'milled flour', 'flour', 'bread', 'grain surplus'],
     lines: [
-      () => 'The smell of fresh bread meets you on the road in.',
-      () => 'Someone has been baking since before dawn, and the air still carries it.',
+      { text: () => 'The smell of fresh bread meets you on the road in.', colour: true }, // R-AO (CENSUS-2f): read; presumes nothing
+      { text: () => 'Someone has been baking since before dawn, and the air still carries it.', colour: true },
       { text: () => 'A mill wheel turns somewhere close, and flour dust drifts on the breeze.', needs: ['institution: mill'] },
-      () => 'The warm smell of an oven reaches you before the first doorway does.',
+      { text: () => 'The warm smell of an oven reaches you before the first doorway does.', colour: true },
     ],
     dominant: [
       { text: (n) => `The smell of bread hits you as you walk into ${n}, and it never really leaves.`, excludes: ['crisis: hunger'], crisis: ['any'] },
@@ -134,8 +134,10 @@ export const ARRIVAL_SENSES = Object.freeze([
       { text: () => 'A basket of fish, still flapping, is carried past at a run.', needs: ['fish'] },
     ],
     dominant: [
-      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable'] },
-      (n) => `Half of ${n} seems to be gutting, salting or selling fish.`,
+      // CENSUS-2f, R-AP amended: the dominant pool is picked by the exports' fish trade, which guarantees the trade and no
+      // catch; the racks of catch and the gutting declare `fish`, the gulls' water `navigable`, both where both.
+      { text: () => 'Racks of drying fish line the way in, and the smell of salt and catch is everywhere.', needs: ['navigable', 'fish'] },
+      { text: (n) => `Half of ${n} seems to be gutting, salting or selling fish.`, needs: ['fish'] },
       { text: () => 'Barrels of salt fish stand stacked for the carts, and the gulls have opinions about every one.', needs: ['navigable'] },
     ] },
   { key: 'cloth',
@@ -174,7 +176,7 @@ export const ARRIVAL_SENSES = Object.freeze([
       // bell, the incense and the hymn declare `sacredHouse`; the wayside shrine set into a wall presumes nothing.
       { text: () => 'A bell marks the hour, and a few heads bow as it rings.', needs: ['sacredHouse'] },
       { text: () => 'The smell of incense drifts out into the press of the lane.', needs: ['sacredHouse'] },
-      () => 'Someone has left fresh flowers at a small shrine set into a wall.',
+      { text: () => 'Someone has left fresh flowers at a small shrine set into a wall.', colour: true }, // R-AO: read; presumes nothing
       { text: () => 'Voices raised in a hymn carry, faintly, from somewhere among the roofs.', needs: ['sacredHouse'] },
     ],
     dominant: [
@@ -260,8 +262,8 @@ export const ARRIVAL_SENSES = Object.freeze([
     ],
     dominant: [
       { text: () => 'Spice and drying herbs scent every lane, and the stalls are piled with them.', needs: ['market'] },
-      () => 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.',
-      () => 'Every other doorway seems to sell a remedy for something.',
+      { text: () => 'Sacks of herbs and spices fill the carts, and the smell of them clings to your clothes.', colour: true }, // R-AO (CENSUS-2f)
+      { text: () => 'Every other doorway seems to sell a remedy for something.', colour: true },
     ] },
   { key: 'arcane', arcane: true,
     institutions: ['mage', 'mages', 'wizard', 'arcane', 'alchemist', 'alchemy', 'enchanter', 'enchanting', 'sorcer', 'magelight', 'spellcast'],
