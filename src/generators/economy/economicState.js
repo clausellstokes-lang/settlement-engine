@@ -548,69 +548,14 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     incomeNormalized[largestIdx].percentage += 100 - percentageSum;
   }
   const stressTypes = config.stressTypes || [];
-  let necessityImports = [...(tradeStreams.necessityImports || [])];
-  if (stressTypes.includes('under_siege') || stressTypes.includes('famine')) {
-    if (!necessityImports.includes('Grain')) necessityImports.push('Grain');
-    if (!necessityImports.includes('Salt')) necessityImports.push('Salt');
-  }
-  if (stressTypes.includes('under_siege') && !necessityImports.includes('Iron')) {
-    necessityImports.push('Iron (weapons)');
-  }
-  if (stressTypes.includes('plague_onset') && !necessityImports.includes('Medicinal herbs')) {
-    necessityImports.push('Medicinal herbs');
-  }
-  const primaryExports = stressTypes.includes('under_siege')
-      ? generationWorldLaw.supportsMaritime()
-        ? tradeStreams.exports.slice(0, 3).map((exp) => `${exp} (naval route only)`)
-        : []
-      : stressTypes.includes('occupied')
-        ? tradeStreams.exports.slice(0, 5).map((exp) => `${exp} (taxed by occupation)`)
-        : [
-            ...(['crossroads', 'port', 'river'].includes(tradeRoute)
-              ? (tradeStreams.transit || []).map((item) => `${item} (transit)`)
-              : []),
-          ],
-    topImports = tradeStreams.imports.slice(0, 8),
-    primaryImports = [
-      ...necessityImports
-        .map((imp) => imp)
-        .filter((imp) => !topImports.some((existing) => existing.toLowerCase().includes(imp.toLowerCase()))),
-      ...topImports,
-    ].slice(0, 10);
+  // The pre-chain trade lists (necessity imports, the stress-shaped exports and imports, the goods toggles):
+  // economy/primaryTradeLists.js, extracted verbatim for the cohesion ceiling (LANDING-3).
+  const { necessityImports, primaryExports, primaryImports } = buildPrimaryTradeLists({
+    stressTypes, tradeStreams, tradeRoute, goodsToggles,
+    supportsMaritime: () => generationWorldLaw.supportsMaritime(),
+  });
   const isEntrepot = tradeStreams.isEntrepot;
   const transit = tradeStreams.transit;
-  if (goodsToggles && Object.keys(goodsToggles).length > 0) {
-    const goodTogglePattern = /_good_(.+)$/;
-    Object.entries(goodsToggles).forEach(function (entry) {
-      const key = entry[0],
-        toggle = entry[1],
-        match = key.match(goodTogglePattern);
-      if (!match) return;
-      const goodName = match[1];
-      if (toggle.force) {
-        if (!primaryExports.some((item) => item.toLowerCase().includes(goodName.toLowerCase()))) {
-          primaryExports.push(goodName);
-        }
-        if (
-          tradeStreams.localProduction &&
-          !tradeStreams.localProduction.some((item) => item.toLowerCase().includes(goodName.toLowerCase()))
-        ) {
-          tradeStreams.localProduction.push(goodName);
-        }
-      } else if (toggle.allow === false) {
-        for (let i = primaryExports.length - 1; i >= 0; i--) {
-          if (primaryExports[i].toLowerCase().includes(goodName.toLowerCase())) primaryExports.splice(i, 1);
-        }
-        if (tradeStreams.localProduction) {
-          for (let i = tradeStreams.localProduction.length - 1; i >= 0; i--) {
-            if (tradeStreams.localProduction[i].toLowerCase().includes(goodName.toLowerCase())) {
-              tradeStreams.localProduction.splice(i, 1);
-            }
-          }
-        }
-      }
-    });
-  }
   const tradeDependencies = [];
   // Stage-5 ledger: what the military/slave-trade stage actually pushed, so the
   // Stage-7 chain override (which rebuilds primaryExports/primaryImports from
@@ -906,3 +851,4 @@ export const generateEconomicState = (tier, institutions, tradeRoute, goodsToggl
     };
 };
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js'; import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js'; // at the END on purpose: this file's writes are cited by LINE; the Gate Tolls line speaks the tier noun (lane TIER-NOUN-POOLS, tests/generators/tierNounPoolDraws.test.js)
+import { buildPrimaryTradeLists } from './primaryTradeLists.js'; // at the END for the same reason: the pre-chain trade lists, extracted for the cohesion ceiling (LANDING-3)
