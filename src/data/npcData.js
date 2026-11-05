@@ -458,7 +458,7 @@ export const NPC_WANTS = {
 export const NPC_FACTION_GOALS = {
   Mayor: [
     {
-      short: "Navigate a dispute between two powerful guilds without losing either's support",
+      needs: ['guild'], short: "Navigate a dispute between two powerful guilds without losing either's support", // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Die in office having kept the peace (legacy matters more than wealth)',
       driven_by: 'protection',
     },
@@ -533,14 +533,14 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: "Identify which of their officers is on the thieves' guild payroll",
+      needs: ['organised crime'], short: "Identify which of their officers is on the thieves' guild payroll", // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Die in bed rather than in the street (unusual ambition for the role)',
       driven_by: 'personal',
     },
   ],
   'Garrison Commander': [
     {
-      short: 'Secure emergency funding to repair the east wall before it becomes a crisis',
+      needs: ['walls'], short: 'Secure emergency funding to repair the east wall before it becomes a crisis', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Be remembered as the commander who made this settlement truly defensible',
       driven_by: 'military',
     },
@@ -564,7 +564,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'High Priest': [
     {
-      short: 'Restore a desecrated shrine before the annual festival (quietly, without scandal)',
+      needs: ['temple'], short: 'Restore a desecrated shrine before the annual festival (quietly, without scandal)', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Unite the fractious local clergy under a single doctrinal standard',
       driven_by: 'spiritual',
     },
@@ -581,7 +581,7 @@ export const NPC_FACTION_GOALS = {
       driven_by: 'protection',
     },
     {
-      short: 'Convince their superior in the faith to fund repairs to the temple roof',
+      needs: ['temple'], short: 'Convince their superior in the faith to fund repairs to the temple roof', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Leave a detailed record of the congregation so future priests know who this community was',
       driven_by: 'knowledge',
     },
@@ -648,7 +648,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Master Craftsman': [
     {
-      short: 'Complete a prestigious commission that will make their reputation in the city',
+      needs: ['tier: ≥ city'], short: 'Complete a prestigious commission that will make their reputation in the city', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Train an apprentice who surpasses them: the greatest achievement of any craftsman',
       driven_by: 'personal',
     },
@@ -744,7 +744,7 @@ export const NPC_FACTION_GOALS = {
   ],
   'Tavern Owner': [
     {
-      short: 'Manage the fallout from a brawl last week that left a local merchant hospitalised',
+      needs: ['hospital'], short: 'Manage the fallout from a brawl last week that left a local merchant hospitalised', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: "Pay off the building and own it outright before they're too old to work it",
       driven_by: 'wealth',
     },
@@ -768,7 +768,7 @@ export const NPC_FACTION_GOALS = {
   ],
   Healer: [
     {
-      short: 'Identify the source of a cluster of unusual illnesses in the western quarter',
+      needs: ['tier: ≥ town'], short: 'Identify the source of a cluster of unusual illnesses in the western quarter', // CENSUS-4b: the ledger's declaration (docs/census/declarations/npcData.NPC_FACTION_GOALS.json)
       long: 'Train enough local healers that the settlement can cope without them',
       driven_by: 'protection',
     },

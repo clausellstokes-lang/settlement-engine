@@ -16,7 +16,7 @@
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
 const GOVERNANCE_FRACTURED = 'governance_fractured';
-const OTHER_STABLE_DOMINANT = 'other__stable__dominant';
+const OTHER_STABLE_DOMINANT = 'other__stable__dominant'; const CALM_ONLY = Object.freeze(['no crisis']); // CENSUS-4b (Appendix B item 3): the stable entries claim calm — the ledger's `excludes: crisis` (docs/census/declarations/npcStructure.T.json; R-F 4); the T lookup is CENSUS-1d's to wire (resolveDeclared, tagged)
 function getPrimaryCondition(settlement) {
   const leg     = settlement.powerStructure?.publicLegitimacy;
   const crimCap = settlement.powerStructure?.criminalCaptureState || 'none';
@@ -67,7 +67,7 @@ function reg(cat, cond, dom, sub) {
     position:   dom.position.replace('Holds governing authority', 'Occupies a civic position')
                              .replace('Controls the primary', 'Manages a secondary')
                              .replace('Holds institutional', 'Represents an institutional'),
-    goal:       dom.goal, // R11: a subordinate with no override wants what the dominant wants (dead today: every entry passes one)
+    goal:       dom.goal, ...(dom.tags ? { tags: dom.tags } : {}), // R11: a subordinate with no override wants what the dominant wants (dead today: every entry passes one); CENSUS-4b: its tags with it
     constraint: dom.constraint,
   };
 }
@@ -114,10 +114,10 @@ reg('government','contested',
     constraint:'Delayed commitment reduces the value of the eventual alignment without reducing the cost of having waited.' }
 );
 reg('government','stable',
-  { position:  'Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.',
+  { tags: CALM_ONLY, position:  'Holds governing authority in a settlement with functional legitimacy. The position is secure enough to act from rather than defend.',
     goal:      'Fix the weakness in the seat that nobody wants to talk about, before someone uses it.',
     constraint:'Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.' },
-  { position:  'Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.',
+  { tags: CALM_ONLY, position:  'Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.',
     goal:      'Do every task the seat hands them so well that the seat cannot do without them.',
     constraint:'Credible administration is expected, not rewarded. The upside is limited and the downside of failure is disproportionate.' }
 );
@@ -164,10 +164,10 @@ reg('military','contested',
     constraint:'Unit members have personal loyalties that do not necessarily align with institutional neutrality.' }
 );
 reg('military','stable',
-  { position:  'Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.',
+  { tags: CALM_ONLY, position:  'Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.',
     goal:      'Keep the drills, the patrols and the pay going, and the old hands in charge of them.',
     constraint:'Stable conditions make it harder to justify the resources and authority that would be needed if conditions changed.' },
-  { position:  'Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.',
+  { tags: CALM_ONLY, position:  'Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.',
     goal:      'Get their squad noticed for doing the dull work well, and earn a patron by it.',
     constraint:'Routine excellence is expected and unremarkable; meaningful advancement requires either a crisis or a patron.' }
 );
@@ -215,10 +215,10 @@ reg(cat,'contested',
     constraint:'Commercial neutrality looks like either timidity or calculation to the factions seeking commitment.' }
 );
 reg(cat,'stable',
-  { position:  'Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.',
+  { tags: CALM_ONLY, position:  'Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.',
     goal:      'Turn their hold on the trade into a charter, a seat at the table, or a monopoly.',
     constraint:'Visible accumulation of institutional advantage invites regulatory and political attention.' },
-  { position:  'Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.',
+  { tags: CALM_ONLY, position:  'Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.',
     goal:      'Win more custom without treading on the biggest house in the trade.',
     constraint:'Growth that encroaches on the dominant interest\'s commercial territory invites a response; growth that doesn\'t stays marginal.' }
 );
@@ -266,10 +266,10 @@ reg('religious','contested',
     constraint:'Following the institutional alignment requires having subordinated personal judgment to institutional authority. The cost is the same regardless of whether the alignment was correct.' }
 );
 reg('religious','stable',
-  { position:  'Leads an established religious institution in a settlement with functional civic order.',
+  { tags: CALM_ONLY, position:  'Leads an established religious institution in a settlement with functional civic order.',
     goal:      'Keep the faith at every naming, wedding and burial, and out of the seat\'s quarrels.',
     constraint:'Institutional stability tends toward complacency. The challenges that would justify institutional expansion are currently absent.' },
-  { position:  'Serves a religious position secondary to the dominant institution in a stable settlement.',
+  { tags: CALM_ONLY, position:  'Serves a religious position secondary to the dominant institution in a stable settlement.',
     goal:      'Serve their flock so faithfully that their superiors cannot pass them over again.',
     constraint:'Excellence within the dominant institution\'s frame does not distinguish the position; deviation from it invites institutional friction.' }
 );
@@ -316,10 +316,10 @@ reg('criminal','contested',
     constraint:'Network position consolidated during an expansion that fails is exposed when the network contracts.' }
 );
 reg('criminal','stable',
-  { position:  'Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.',
+  { tags: CALM_ONLY, position:  'Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.',
     goal:      'Keep the rackets small and steady enough that the law never bothers to look.',
     constraint:'Sustained operational success below the enforcement threshold makes the operation visible to those who look for the threshold.' },
-  { position:  'Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.',
+  { tags: CALM_ONLY, position:  'Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.',
     goal:      'Prove to the boss they can be trusted with more, without the law learning their name.',
     constraint:'Advancement within the network requires demonstrating capacity. Demonstration is visibility.' }
 );
@@ -366,10 +366,10 @@ reg('magic','contested',
     constraint:'Value to multiple competing factions requires keeping the scope of arcane services narrow enough that none of them perceive a conflict of interest.' }
 );
 reg('magic','stable',
-  { position:  'Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.',
+  { tags: CALM_ONLY, position:  'Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.',
     goal:      'Win more of the seat\'s work for their spells, and more of everyone else\'s.',
     constraint:'Arcane authority in stable conditions faces gradual bureaucratic containment. Institutionalization brings limits alongside legitimacy.' },
-  { position:  'Practices arcane arts in a secondary institutional position in a stable settlement.',
+  { tags: CALM_ONLY, position:  'Practices arcane arts in a secondary institutional position in a stable settlement.',
     goal:      'Become the caster people ask for by name, whatever their seniors think of them.',
     constraint:'Practical standing without institutional authority is vulnerable to institutional decisions about who is permitted to practice.' }
 );
@@ -384,10 +384,10 @@ reg('other',GOVERNANCE_FRACTURED,
     constraint:'Advancing relative to the dominant traditional interest during a crisis positions the advance as opportunistic rather than earned.' }
 );
 reg('other','stable',
-  { position:  'Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.',
+  { tags: CALM_ONLY, position:  'Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.',
     goal:      'Keep the family\'s name honoured at every feast while the new offices take its old work.',
     constraint:'Traditional authority in stable conditions is in slow structural decline relative to institutional authority.' },
-  { position:  'Holds a secondary traditional or hereditary position in a stable settlement.',
+  { tags: CALM_ONLY, position:  'Holds a secondary traditional or hereditary position in a stable settlement.',
     goal:      'Marry, lend or befriend their way into the offices that now run things.',
     constraint:'Usefulness to institutional actors defines the scope of permitted influence, not the traditional claim itself.' }
 );
