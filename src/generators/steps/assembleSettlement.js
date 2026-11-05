@@ -10,7 +10,7 @@
 
 import { chooseOrPin, registerStep } from '../pipeline.js';
 import { generateSettlementName } from '../npcGenerator.js';
-import { generateFactions, generateConflicts } from '../powerGenerator.js';
+import { generateFactions, generateConflicts } from '../powerGenerator.js'; import { fitFactionRoster } from '../power/factionRoleFit.js'; // CENSUS-4 R12
 // F8: re-render stress summaries with the real settlement name. resolveStress
 // (step 3) rolled them 16 steps ago with an empty name and stashed the
 // rng-derived choice in each entry's `summaryRoll`; we re-render here now that
@@ -344,7 +344,7 @@ registerStep('assembleSettlement', {
   // stream, so they move nothing generated after them, and a town with no crossing tie has no
   // conflict row. Under a held roster both re-derive from the held NPCs: a pure projection and
   // a seed-stable stream.
-  settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions);
+  if (chooseOrPin(pins, 'npcs', () => UNPINNED) === UNPINNED) settlement.npcs = fitFactionRoster(settlement.npcs, settlement); settlement.factions = generateFactions(settlement.npcs, settlement.powerStructure?.factions); // CENSUS-4 R12: one line, so no cited line moves
   settlement.conflicts = inAssemblySubstream(
     rng,
     'faction-conflicts',

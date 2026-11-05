@@ -81,7 +81,54 @@ riot, a desecration); season (winter) — ruling 8.
 
 ## Units
 
-| # | unit | commit | rows moved, by cause |
+| # | unit | commit | rows moved, by cause (never re-recorded) |
 |---|---|---|---|
-| R9 | `reader:possessive-slip`: `guildTitleName` | `8bededc` (amended: census re-taken through its door, 0 rows, producer index 1275 → 1276) | 17 of 525 golden rows, only `npcs[].title` + its mirror `factions[].members[].title` |
-| A | the phase-A ledger | this commit | 0 (docs and scripts only) |
+| R9 | `reader:possessive-slip`: `generators/npc/guildTitleName.js` | `1e28fbf` (census re-taken through its door, 0 rows) | 17 of 525 golden rows, only `npcs[].title` + its mirror `factions[].members[].title` |
+| A | the phase-A ledger | `42f212b` | 0 (docs and scripts only) |
+| R8 | `reader:rule-text`: the threshold notes move into the catalogue's registry-only `thresholdNote` | `e152ee2` | 171 of 525, only `institutions[].desc` + its mirror `defenseProfile.institutions.magicDef[].desc` |
+| R3 | the tie rule: `domain/roles/roleClass.js` (moved from readerBattery) + the tie step's resolve-after | `596cb8b` | 441 of 525, every path relationship-derived (below) |
+| R12 | faction-role-fit: `reader:faction-role-fit` (kind 9) + the assembly seam's re-home | this unit | 272 of 525, every path faction-derived (below) |
+
+### R8 — the wording the chair rules on
+
+Twelve catalogue `desc` notes and 22 variant clauses move off the page. Two variants, once stripped, would have equalled
+their canonical, so each takes a short new clause (wording, the chair's to veto): Printing house "Printed books and
+broadsheets, struck off by the sheet."; Golem workforce "Constructed servants, put to the heavy work.". Not touched
+(outside this lane's pools): `tradeGoodsData.js:532` "Mass-produced texts (if technology exists)" — matched by the same
+instrument if printed; Docks "If coastal or river access" (true wherever it prints: the route is required).
+
+### R3 — the tie rule (`domain/roles/roleClass.js`)
+
+One rule, one home: `ROLE_CLASS`, `classOfRole`, `holdsOffice`, `shareTradeOrOffice`, `exemptedVerdict`,
+`seatFactions` moved verbatim; readerBattery re-exports them (the test pins identity). `TIE_PRESUMES` names what each
+presuming kind needs; `resolveTieKey` keeps a lawful kind byte-identical and resolves a refused one by hash, no roll,
+**within its polarity** (the chair's to veto): Professional Rivalry → Unresolved History (so it still seeds its
+conflict — the first, polarity-blind cut emptied the one "rich" stride row `recordInvariants.test.js` needs and dropped
+6 of 45 stride conflicts); Jurisdictional Tension → Mutual Leverage; Mentor and Successor → respect, debt or family. At
+the tie step the seat is unknown (the affiliation is decided later), so the draw is at least as strict as the reader.
+`NOBLE_ROLES` moved to `data/nobleRoles.js` so the domain imports no generator (domainGeneratorsBoundary: 2 reds cured).
+
+Draw-count law: soak1k-0..59 — the 12 births with no refused tie are byte-identical; all 48 with one moved. The 60:
+exempted fires 160 → **0** (the 19 left are the `[~strict]` column the chair's rule exempts). Golden paths:
+`relationships[]` type/typeName/strength/archetypeKey (1,734 refused ties), description/tension/proseVariant (3,527,
+the without-replacement tie-prose sequence), `prominentRelationship` (39), `pressureSentence` (3; it quotes the
+prominent tie); conflicts 0.
+
+### R12 — faction-role-fit
+
+`FACTION_ROLE_FIT` (religious → clergy; noble → noble or office; military → military; criminal → criminal; other kinds
+unrestricted; an unjudged `other` role fits anywhere) and `factionRoleFits` live beside the tie rule. **The faction that
+holds or contests the seat also seats office-holders and nobles** (ruling Q1: the seat is one office) — without this the
+first cut emptied 11 seats on the 60 (`coh:seat-holder` 0 → 11, STOP; withdrawn before commit).
+
+**The base rate (the 60, read by the new check on the base): 71 factions in 35 settlements seat a misfit.** The seam
+(`generators/power/factionRoleFit.js`, at assembly before the faction groups, and the reroll path before canon rides
+over) re-homes a misfit by hash to a fitting faction — **bound by the density law** (R18/R20: a faction exists exactly as
+long as its roster; every house crewed). The unbound cut reached 0 but broke 7 density-law tests (emptied 26 factions,
+unaffiliated 21 NPCs) and was withdrawn. Bound: **71 → 25** (18 settlements); every kept misfit is its faction's last
+member or fits no other faction (the property test). soak1k-2401's Priest no longer stands in the Military/Guard's
+insurgency cast. Reaching 0 needs a fitting member to exist (a new role or a different roll) — the chair's call.
+
+Draw-count law: soak1k-0..59 — 26 births with no re-home byte-identical; all 34 re-homed moved. Golden paths:
+`npcs[].factionAffiliation` (354), `factions` / `factions[].members` (grouping), `conflicts` and its
+`powerStructure.conflicts` mirror (parties, desc, plotHooks, intensity) and the coherence receipt's conflict evidence.

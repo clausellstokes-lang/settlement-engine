@@ -206,3 +206,34 @@ export function resolveTieKey(archetypeKey, a, b, pairKey, seat = new Set()) {
   }
   return { key: best, refused: true };
 }
+
+/**
+ * FACTION-ROLE-FIT (R12, the chair's ruling of 2026-11-04): the role classes a faction of each
+ * kind may seat. A religious faction seats clergy; a noble faction nobles or office-holders; a
+ * military (guard) faction military roles; a criminal faction criminals. Every other kind
+ * (government, economy, crafts, magic, other) seats any class, and an unjudged role (`other`)
+ * fits anywhere, as in the tie rule. So a Wandering Peddler is never a Religious Authority, and a
+ * priest is never the Military/Guard's instigator.
+ */
+export const FACTION_ROLE_FIT = Object.freeze({
+  religious: Object.freeze(['clergy']),
+  noble: Object.freeze(['noble', 'office']),
+  military: Object.freeze(['military']),
+  criminal: Object.freeze(['criminal']),
+});
+
+/**
+ * A faction that holds or contests the SEAT is an office (the chair's ruling Q1), so it also seats
+ * office-holders and nobles whatever its kind: the Elder who holds a Priestly Guidance's seat,
+ * the Mayor at the head of a Grand Military Council.
+ * @param {unknown} category a power faction's category
+ * @param {unknown} role an NPC's role
+ * @param {{ seat?: boolean }} [options] `seat`: the faction holds or contests the seat (`seatFactions`)
+ * @returns {boolean}
+ */
+export function factionRoleFits(category, role, options = {}) {
+  const fit = /** @type {Record<string, ReadonlyArray<string>>} */ (FACTION_ROLE_FIT)[str(category)];
+  if (!fit) return true;
+  const c = classOfRole(str(role));
+  return c === 'other' || fit.includes(c) || (options.seat === true && (c === 'office' || c === 'noble'));
+}

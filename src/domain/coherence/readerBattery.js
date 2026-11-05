@@ -23,7 +23,7 @@
  * Pure.
  */
 
-import { ROLE_CLASS, classOfRole, holdsOffice, shareTradeOrOffice, exemptedVerdict, seatFactions, PRESUMING_KINDS } from '../roles/roleClass.js';
+import { ROLE_CLASS, classOfRole, holdsOffice, shareTradeOrOffice, exemptedVerdict, seatFactions, PRESUMING_KINDS, factionRoleFits } from '../roles/roleClass.js';
 import { hasMarketInstitution } from '../facts/market.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
 import { collect, str } from './recordBattery.js';
@@ -376,6 +376,30 @@ export function dailyLifePlaceholderFindings(s, surfaces) {
   return [{ surface: 'daily_life', quote: hit, detail: `${lacks.map((x) => `[${x}]`).join('')} ${lacks.map((x) => x.replace('-', ' ')).join(', ')}` }];
 }
 
+// ───────────────────────── 11. faction-role-fit ─────────────────────────
+
+/**
+ * A faction that seats a member whose role does not fit its kind (R12, the chair's ruling of
+ * 2026-11-04: religious → clergy; noble → noble or office; military → military; criminal →
+ * criminal; `domain/roles/roleClass.js :: factionRoleFits`, the rule the assembly seam applies).
+ * Read on the record: each power faction's category against the roles of the NPCs affiliated to
+ * it; the factions that hold or contest the seat also seat office-holders and nobles (ruling Q1). One finding per misfit faction; the detail names the misfit roles and their classes.
+ * @param {any} s @param {Readonly<Record<string,string>>} _surfaces
+ */
+export function factionRoleFitFindings(s, _surfaces) {
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const npcs = Array.isArray(s?.npcs) ? s.npcs : [];
+  const seat = seatFactions(s);
+  for (const f of Array.isArray(s?.powerStructure?.factions) ? s.powerStructure.factions : []) {
+    const name = str(f?.faction);
+    const misfits = npcs.filter((/** @type {any} */ n) => str(n?.factionAffiliation) === name && !factionRoleFits(f?.category, n?.role, { seat: seat.has(name) }));
+    if (!name || !misfits.length) continue;
+    out.push({ surface: 'factions', quote: `${name} (${str(f.category)})`, detail: misfits.map((/** @type {any} */ n) => `${str(n.role)} (${classOfRole(str(n.role))})`).join(', ') });
+  }
+  return out;
+}
+
 // ───────────────────────────── the battery ─────────────────────────────
 
 const RUNS = Object.freeze({
@@ -389,6 +413,7 @@ const RUNS = Object.freeze({
   'rule-text': ruleTextFindings,
   'possessive-slip': possessiveSlipFindings,
   'daily-life-placeholder': dailyLifePlaceholderFindings,
+  'faction-role-fit': factionRoleFitFindings,
 });
 
 /** The checks, in report order (the soak prefixes each with `reader:`). */

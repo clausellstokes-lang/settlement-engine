@@ -229,10 +229,26 @@ describe('reader:daily-life-placeholder', () => {
   });
 });
 
+// ── 11. faction-role-fit (CENSUS-4 R12)
+describe('faction-role-fit', () => {
+  const town = (category, role) => rec({ powerStructure: { factions: [{ faction: 'The House', category }] }, npcs: [{ name: 'A', role, factionAffiliation: 'The House' }] });
+  test('a faction seating a role that does not fit its kind is a finding', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'Wandering Peddler'), {})).toEqual([{ surface: 'factions', quote: 'The House (religious)', detail: 'Wandering Peddler (merchant)' }]);
+    expect(R.factionRoleFitFindings(town('military', 'Priest'), {})).toHaveLength(1);
+    expect(R.factionRoleFitFindings(town('criminal', 'Guard Captain'), {})).toHaveLength(1);
+  });
+  test('a fitting role, an unrestricted kind, or an unjudged role is not', () => {
+    expect(R.factionRoleFitFindings(town('religious', 'High Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('noble', 'Mayor'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('economy', 'Priest'), {})).toEqual([]);
+    expect(R.factionRoleFitFindings(town('religious', 'Unheard-of Role'), {})).toEqual([]);
+  });
+});
+
 // ── the battery
 describe('readerBattery', () => {
-  test('runs the ten checks in order, in the battery shape, and a throwing check is a finding', () => {
-    expect(R.READER_BATTERY_CHECKS).toHaveLength(10);
+  test('runs the eleven checks in order, in the battery shape, and a throwing check is a finding', () => {
+    expect(R.READER_BATTERY_CHECKS).toHaveLength(11); // CENSUS-4 R12 added faction-role-fit
     const rows = R.readerBattery(rec({ tier: 'hamlet' }), { tonight: 'Wants to The supplies.', power: "Tailor's'" });
     expect(rows.map((f) => f.check)).toEqual(['tonight-wants', 'possessive-slip']);
     for (const f of rows) expect(Object.keys(f).sort()).toEqual(['check', 'detail', 'quote', 'surface']);
