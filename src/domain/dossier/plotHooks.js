@@ -1,6 +1,7 @@
 import { compareCodepoint } from '../deterministicSort.js';
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
 import { traditionHook } from '../traditions/prose.js';
+import { factsOf } from '../facts/factsOf.js';
 import { normalizePlotHook, plotHookText } from '../../lib/proseSeams.js';
 import { themeOfText } from '../hookThemes.js';
 import { createConflictHookDraw, foodGapHookLine } from './hookLines.js';
@@ -493,7 +494,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   // rite suppressed under an overlord / just liberated / carried in by settlers each raise
   // a seeded hook. Absent mirror (dark / draft) ⇒ nothing added, byte-identical.
   (settlement.traditions || []).forEach((rec) => {
-    const hook = traditionHook(/** @type {Parameters<typeof traditionHook>[0]} */ (rec), { town: settlement.name });
+    const hook = traditionHook(/** @type {Parameters<typeof traditionHook>[0]} */ (rec), { town: settlement.name, facts: () => factsOf(settlement) });
     if (!hook) return;
     push(hooks, {
       text: hook.text,
