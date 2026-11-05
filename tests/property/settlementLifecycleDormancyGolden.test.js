@@ -247,7 +247,13 @@ describe('settlement-lifecycle — lit-path anti-vacuity (the satellite lane act
     const ids = Object.keys(sats);
     expect(ids.length, 'the lane founded a steading when lit').toBeGreaterThan(0);
     const rec = sats[ids[0]];
-    expect(rec.tier).toBe('thorp');
+    // Re-keyed by identity with its cause on 2026-11-05 (LANDING-4): 'thorp' -> 'hamlet'. The mover is X-46 car 1
+    // (first-parent step 1264a8152, the owner's historical bands, ODQ §934.104): POPULATION_RANGES.thorp is 5-30, so the
+    // steading founded with 16-31 founders grows past 30 in the two weekly ticks this pin drives (35 here) and the
+    // in-orbit ladder reads it as a hamlet, which is that ladder working. Bisected: green at a8739327, red from 1264a8152.
+    // The anti-vacuity premise (a steading is founded, conserved) is unchanged; the tier now follows the band it reads.
+    expect(rec.tier).toBe('hamlet');
+    expect(rec.population).toBe(35);
     expect(rec.population).toBeGreaterThan(0);
     expect(rec.parentId).toBe('a');
     expect(typeof rec.name).toBe('string');
