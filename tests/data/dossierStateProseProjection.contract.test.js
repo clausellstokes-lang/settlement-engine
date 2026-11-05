@@ -59,6 +59,7 @@ import {
   AUDIENCE_DM, AUDIENCE_PLAYER, STATE_MARK_DIMENSIONS,
   eligibleVariants, poolDimensions, readStateProse,
 } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { assertDeclarable } from '../../src/domain/facts/factVocabulary.js';
 
 const ROOT = resolve(import.meta.dirname, '../..');
 
@@ -767,7 +768,18 @@ const DIMENSIONED_POOLS = allStateBlocks.flatMap(([id, block]) => Object.entries
 /** Every (pool x dimension value) state those pools partition themselves into. */
 const DIMENSION_STATES = DIMENSIONED_POOLS.flatMap(({ id, key, pool, dims }) => dims
   .flatMap((dimension) => STATE_MARK_DIMENSIONS[dimension]
-    .map((value) => ({ id, key, pool, dimension, value }))));
+    .map((value) => ({ id, key, pool, dims, dimension, value }))));
+
+/**
+ * Every answer to a pool's OTHER dimensions, one combination each ([{}] for a pool that
+ * partitions by one). Rung 2D unit 2: DS-POW-4's `Stable (no challengers)` pool is the first to
+ * partition by two (`succession` and `unrest`); a desk answers all of them at once
+ * (`crisisAnswered`), so an arm that answers one dimension must answer the others too, or the
+ * fail-closed gate reads the pool as unanswered.
+ * @param {string[]} dims @param {string} dimension @returns {Array<Record<string, string>>}
+ */
+const otherAnswers = (dims, dimension) => dims.filter((d) => d !== dimension)
+  .reduce((combos, d) => combos.flatMap((c) => STATE_MARK_DIMENSIONS[d].map((v) => ({ ...c, [d]: v }))), [{}]);
 
 describe('the demoted state dimension — the channel the kernel enforces', () => {
   it('closes the mark vocabulary and keeps the three semantics disjoint', () => {
@@ -783,7 +795,12 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       .flatMap((variant) => variant.marks || []));
     const vocabulary = Object.values(STATE_MARK_DIMENSIONS).flat();
 
-    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m));
+    // CENSUS-1b wave 1: the mark vocabulary is the fact vocabulary's mark half, and a fact ATOM
+    // the projector routes into `marks` (`X` / `no X`, `crisis: …`) is classified too — but only
+    // a DECLARABLE one (a home answers it): an unknown atom, or one with no reader yet, is
+    // unclassified exactly as an unknown mark word is.
+    const declarable = (m) => { try { assertDeclarable(m.replace(/^no\s+/, '')); return true; } catch { return false; } };
+    const unclassified = [...stateMarks].filter((m) => m !== 'dm-only' && !vocabulary.includes(m) && !declarable(m));
     const inTwoDimensions = vocabulary.filter((word, i) => vocabulary.indexOf(word) !== i);
     // The causal register's arm names are family-local and OPEN (92 distinct today), so
     // they cannot be a closed vocabulary and stay outside STATE_MARK_DIMENSIONS. What must
@@ -819,9 +836,11 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       // fill: answering the dimension must bring the sentence back at every legal value.
       for (const dimension of dims) {
         for (const value of STATE_MARK_DIMENSIONS[dimension]) {
-          const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
-            { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { [dimension]: value } });
-          if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}`);
+          for (const others of otherAnswers(dims, dimension)) {
+            const answered = readStateProse({ [id]: { pools: { [key]: pool } } }, id, key,
+              { slots, seed: 's', audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } });
+            if (answered === null) mute.push(`${id} :: ${key} :: ${dimension}=${value}${Object.keys(others).length ? ` with ${JSON.stringify(others)}` : ''}`);
+          }
         }
       }
     }
@@ -887,9 +906,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     // by authoring, and hiding it would be the fail-open reading in a different coat.
     const thin = {};
     for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
-      thin[audience] = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-        pool, { slots: bagFor(pool), audience, dimensions: { [dimension]: value } },
-      ).length <= 1).length;
+      thin[audience] = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+        pool, { slots: bagFor(pool), audience, dimensions: { ...others, [dimension]: value } },
+      ).length <= 1)).length;
     }
     // MEASURED at 2d5112851, and the two audiences DIFFER BY ONE. The design volume
     // recorded 13; that is the DM figure. On the player's page DS-GEN-1 :: infiltration_fear
@@ -900,9 +919,9 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
     expect(thin[AUDIENCE_PLAYER]).toBeLessThanOrEqual(14);
     // No state may go SILENT: a value with zero eligible variants is a dead branch of the
     // corpus dressed as a town with nothing to say, and the ratchet above would not see it.
-    const silent = DIMENSION_STATES.filter(({ pool, dimension, value }) => eligibleVariants(
-      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { [dimension]: value } },
-    ).length === 0);
+    const silent = DIMENSION_STATES.filter(({ pool, dims, dimension, value }) => otherAnswers(dims, dimension).some((others) => eligibleVariants(
+      pool, { slots: bagFor(pool), audience: AUDIENCE_DM, dimensions: { ...others, [dimension]: value } },
+    ).length === 0));
     expect(silent).toEqual([]);
   });
 

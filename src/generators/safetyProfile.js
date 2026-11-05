@@ -48,8 +48,10 @@ export const generateSafetyProfile = (config = {}, tier = 'town', institutions =
   const stress  = getStressFlags(config, institutions);
   // CENSUS-1 wave 0, fact 3: the defence atoms are the live roster's (`domain/facts/defence.js`),
   // never the raw roster's substring flags; the other presence flags are still priorityHelpers'.
+  // CENSUS-1b unit A (a), the chair's ruling: the militia atom is the home's too (a ruined
+  // militia patrols nothing; a household levy is a militia). It moves births, counted by cause.
   const defence = defenceOf({ institutions });
-  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate };
+  const inst    = { ...flags.inst, hasWalls: defence.walls, hasWatch: defence.watch, hasGarrison: defence.garrison, hasGates: defence.gate, hasMilitia: defence.militia };
   const threat  = config.monsterThreat || 'frontier';
   const watchLabel =
     tier === 'town'

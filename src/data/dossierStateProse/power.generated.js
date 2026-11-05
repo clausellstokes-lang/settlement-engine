@@ -1393,7 +1393,8 @@ export const DOSSIER_STATE_PROSE_POWER = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "succession settled"
+            "succession settled",
+            "no unrest"
           ],
           "text": "There is discontent at {settlement} and no contender to carry it; the {seat} is safe for the plainest reason a seat can be safe.",
           "slots": [

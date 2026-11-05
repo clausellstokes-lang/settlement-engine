@@ -40,10 +40,11 @@ import { sentenceCase } from '../narrativeProse.js';
 import { checkInstCompat } from '../structuralValidator.js';
 import { resolveGenerationWorldLaw } from '../generationContext.js';
 import { nativeSemanticNames } from '../../domain/content/customContentSemanticAuthority.js';
-import { liveInstitutions } from '../../domain/institutions/institutionRoster.js'; import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
+import { defenseWordsFindings } from '../../domain/coherence/defenseWordsFindings.js'; // F1: one line
 import { CULTURE_PROFILES, resolveCultureProfileKey } from '../../data/cultureProfiles.js';
 import { speakTierNoun } from '../../domain/display/stateProse/stateProseKernel.js';
 import { tierNounFor } from '../../domain/display/stateProse/weaveBlock.js';
+import { marketOf } from '../../domain/facts/market.js';
 import { ARRIVAL_SCENES, STRESS_DESCS } from '../../data/narrativeData.js';
 import {
   ARRIVAL_MEMORIES, ARRIVAL_PEOPLE, ARRIVAL_SENSES, ARRIVAL_TENSIONS,
@@ -68,6 +69,7 @@ export const ROUTE_TO_SCENE = Object.freeze({
  * the SIGHT asks the same question the same way: the engine's market NAME class over the live roster. Mirrored
  * rather than imported (a generator does not reach into the display corpus) and pinned equal by the arrival test.
  */
+/** Retired as the market reader (CENSUS-1b unit A (d)); kept exported, unread (rule 36). */
 export const MARKET_INSTITUTION_NAME = /\b(market|bazaar|exchange|shambles|stalls)\b/i;
 /** The words a SIGHT line uses to say there is a market. */
 const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
@@ -75,15 +77,16 @@ const MARKET_WORD = /\b(?:market\w*|fairs?|bazaars?|stalls?|agora)\b/i;
 const CATCH_RACK_WORD = /\bracks of drying fish\b/i;
 
 /**
- * Whether the live roster carries a market-class institution, by DS-GEN-13's rule.
- * ⚠ NOT the market home (CENSUS-1 fact 5): chair ruling T1-12 pins this predicate EQUAL to
- * DS-GEN-13's `marketPoolKey` (tests/generators/arrivalScene.test.js); homing the pair is the
- * chair's (it moves DS-GEN-13 pages), named in docs/CENSUS_1_LANE_2026-11-04.md.
+ * Whether the live roster carries a market — THE MARKET HOME's answer (`facts/market.js`,
+ * CENSUS-1 fact 5). CENSUS-1b unit A (d), the chair's ruling: this predicate and DS-GEN-13's
+ * `marketPoolKey` are homed TOGETHER, so chair ruling T1-12's equality holds because both read
+ * the home (tests/generators/arrivalScene.test.js, re-keyed to the home). The retired name
+ * regex (`MARKET_INSTITUTION_NAME`) counted a black market and a stock exchange.
  * @param {unknown} institutions
  * @returns {boolean}
  */
 export function holdsMarket(institutions) {
-  return liveInstitutions({ institutions }).some((row) => MARKET_INSTITUTION_NAME.test(String(row?.name ?? '')));
+  return marketOf({ institutions });
 }
 
 /** Severities that leave a visible trace; a minor event does not mark a settlement. */

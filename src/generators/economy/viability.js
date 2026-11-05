@@ -21,6 +21,7 @@ import {
   nativeSemanticNames,
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { isTradeRouteDisconnected } from '../../domain/tradeRouteSemantics.js';
+import { waterOf } from '../../domain/facts/water.js';
 
 const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object.values(SUPPLY_CHAIN_NEEDS));
 
@@ -29,8 +30,6 @@ const SUPPLY_CHAIN_GROUPS = /** @type {Array<{ chains: Array<any> }>} */ (Object
 // from data/foodImportRates.js) — single source of truth shared with
 // foodGenerator and the tick-time stockpile (domain/worldPulse/foodStockpile).
 
-// WATER_ROUTES
-const WATER_ROUTES = ['coastal', 'riverside'];
 
 
 // Tier-plausible institution availability — the SAME model assembleInstitutions
@@ -201,12 +200,14 @@ const deriveResourceChainAnalysis = (institutions, terrain, nearbyResources, con
 
 
 // deriveWaterDependencyAnalysis
-const deriveWaterDependencyAnalysis = (institutions, terrain, config) => {
+const deriveWaterDependencyAnalysis = (institutions, terrainType, config) => {
   const issues = [];
   const warnings = [];
   const suggestions = [];
-  const route = config?.tradeRouteAccess || 'unknown';
-  const hasWater = terrain ? WATER_ROUTES.includes(terrain.name.toLowerCase()) : route === 'river' || route === 'port';
+  // CENSUS-1b unit A (c), the chair's ruling: water is the home's answer (`facts/water.js`, over
+  // `waterAccessKind`), so a port route on hills is not dry. The retired reader read the terrain
+  // object alone whenever one was present. It moves births, counted by cause.
+  const hasWater = waterOf({ config: { terrainType: terrainType ?? config?.terrainType ?? null, tradeRouteAccess: config?.tradeRouteAccess ?? null } }).navigable;
 
   institutions.forEach((inst) => {
     if (isMaterializedCustomContent(inst)) return;
@@ -519,7 +520,7 @@ export const generateEconomicViability = (settlement, terrainType = null, nearby
   }
 
   // Water/infrastructure dependencies
-  const waterAnalysis = deriveWaterDependencyAnalysis(insts, terrain, cfg);
+  const waterAnalysis = deriveWaterDependencyAnalysis(insts, terrainType, cfg);
   issues.push(...waterAnalysis.issues);
   warnings.push(...waterAnalysis.warnings);
   suggestions.push(...(waterAnalysis.suggestions || []));

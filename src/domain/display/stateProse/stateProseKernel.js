@@ -65,6 +65,8 @@
  *
  * @enforced-by tests/domain/stateProseKernel.test.js
  */
+import { STATE_MARK_DIMENSIONS, EMPTY_DECLARATION, declarationOfTags, declarationOfMarks, declarationAdmits, declares, atomsOf } from '../../facts/factVocabulary.js';
+import { activePresumptionLedger, notePresumption } from '../../facts/presumptionLedger.js';
 
 /**
  * One authored sentence, as the corpus projection emits it.
@@ -220,17 +222,10 @@ export function variantIsAudible(variant, audience) {
  * @enforced-by tests/domain/crisisBlindDossierProse.test.js
  * @type {Readonly<Record<string, ReadonlyArray<string>>>}
  */
-export const STATE_MARK_DIMENSIONS = Object.freeze({
-  severity: Object.freeze(['minor', 'major', 'catastrophic']),
-  deficit: Object.freeze(['deficit', 'no deficit']),
-  anchor: Object.freeze(['anchored', 'not anchored']),
-  walls: Object.freeze(['walls', 'no walls']),
-  threat: Object.freeze(['threat', 'no threat']),
-  hunger: Object.freeze(['hunger', 'no hunger']),
-  succession: Object.freeze(['succession open', 'succession settled']),
-  unrest: Object.freeze(['unrest', 'no unrest']),
-  crisis: Object.freeze(['crisis', 'no crisis']),
-});
+// ⭐ CENSUS-1b WAVE 1: THE WORDS MOVED TO THE ONE VOCABULARY (`domain/facts/factVocabulary.js`),
+// which is import-free like this file; this constant is a re-export of its MARK HALF, so the
+// contract test that refuses an unknown mark word refuses an unknown atom.
+export { STATE_MARK_DIMENSIONS };
 
 /**
  * mark word → the one dimension it belongs to. Derived, so the vocabulary is written
@@ -274,15 +269,51 @@ function variantSpeaksOver(variant, dimension, value) {
   return own.length === 0 || own.includes(value);
 }
 
+/** variant → its FACT declaration (the atoms of its marks beyond the kernel's own words). */
+const FACT_DECLARATION = new WeakMap();
+
+/**
+ * The fact atoms a variant's marks declare (CENSUS-1b wave 1): every mark that is neither the
+ * audience mark nor a kernel mark word, read in the vocabulary's tag form (`X` needs, `no X`
+ * excludes, `crisis: …`). The kernel's own words (`walls`, the crisis families) stay law 5's.
+ * @param {StateProseVariant|undefined} variant
+ */
+export function variantFactDeclaration(variant) {
+  // ⚠ STATE VARIANTS ONLY. The causal register's marks are its family-local, OPEN arm names, and
+  // one of them is spelled `market` (JF-CPL-9b): read as an atom it would gate that arm on the
+  // market fact. The STATE schema alone carries `vid` (§13 row 14; the causal register carries
+  // none), so a variant without one declares no fact atoms here.
+  if (!variant || typeof variant !== 'object' || typeof variant.vid !== 'number') return EMPTY_DECLARATION;
+  const held = FACT_DECLARATION.get(variant);
+  if (held) return held;
+  const atoms = (variant.marks || []).filter((m) => m !== COVERT_MARK && !DIMENSION_OF_MARK[m]);
+  const decl = atoms.length ? declarationOfTags(atoms) : EMPTY_DECLARATION;
+  FACT_DECLARATION.set(variant, decl);
+  return decl;
+}
+
 /**
  * The variants of one pool that this state and this audience can actually carry.
+ *
+ * ⭐ LAW 5 GENERALISED (CENSUS-1b wave 1; `docs/DESIGN_POOL_CENSUS.md` §3.3). A pool whose
+ * variants declare fact atoms (or that opted into the crisis dimension, `crisisScoped`) is read
+ * against `facts` — `factsOf(record)`, which every desk hands in at its entry — through the ONE
+ * rule (`factVocabulary.js :: declarationAdmits`). FAIL-CLOSED: such a pool with no `facts` is
+ * unreadable. A pool that declares nothing reads exactly as before, which is every pool today.
  * @param {ReadonlyArray<StateProseVariant>|undefined} pool
  * @param {{slots?: Record<string, unknown>, audience?: string,
- *   dimensions?: Record<string, string>}} [options]
+ *   dimensions?: Record<string, string>, facts?: object|null, crisisScoped?: boolean,
+ *   poolDeclares?: ReadonlyArray<string>}} [options] `poolDeclares` / `crisisScoped` are the
+ *   pool's own brace group (`poolMeta`), handed in by the composer
  * @returns {ReadonlyArray<StateProseVariant>}
  */
 export function eligibleVariants(pool, options = {}) {
   if (!Array.isArray(pool) || pool.length === 0) return [];
+  // The pool's own atoms (the key guarantees them; declared once on the pool): fail-closed too.
+  if (Array.isArray(options.poolDeclares) && options.poolDeclares.length > 0) {
+    if (!options.facts || typeof options.facts !== 'object') return [];
+    if (!declarationAdmits(declarationOfTags(options.poolDeclares), /** @type {any} */ (options.facts)).admitted) return [];
+  }
   // Read on the RAW pool, before any filter: the audience or a missing slot could remove
   // the last variant carrying a dimension word and turn a partitioned pool into one that
   // looks unpartitioned, which is the fail-OPEN reading wearing the gate's coat.
@@ -296,13 +327,41 @@ export function eligibleVariants(pool, options = {}) {
     const value = given[dimension];
     if (typeof value !== 'string' || !STATE_MARK_DIMENSIONS[dimension].includes(value)) return [];
   }
+  const crisisScoped = options.crisisScoped === true;
+  const factual = crisisScoped || pool.some((variant) => declares(variantFactDeclaration(variant)));
+  if (factual && (!options.facts || typeof options.facts !== 'object')) return [];
   const slots = options.slots || {};
   const audience = options.audience === AUDIENCE_DM ? AUDIENCE_DM : AUDIENCE_PLAYER;
   return pool.filter(
     (variant) => variantIsAudible(variant, audience)
       && variantIsAnchored(variant, slots)
-      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension])),
+      && dimensions.every((dimension) => variantSpeaksOver(variant, dimension, given[dimension]))
+      && (!factual || declarationAdmits(variantFactDeclaration(variant), /** @type {any} */ (options.facts), { crisisScoped }).admitted),
   );
+}
+
+/**
+ * Note a drawn variant in the open presumption ledger (CENSUS-1b wave 1, item 4): its atoms are
+ * the kernel's `walls` / `no walls` (the fact dimension wave 1 routes through the one channel)
+ * and any fact atoms its marks declare. A no-op when no ledger is open.
+ * @param {StateProseVariant|null|undefined} variant
+ * @param {{ blockId: string, poolKey: string, surface?: string, crisisScoped?: boolean,
+ *   poolDeclares?: ReadonlyArray<string> }} where
+ */
+export function noteDrawnVariant(variant, where) {
+  if (!variant || activePresumptionLedger() === null) return;
+  const walls = declarationOfMarks(variant.marks);
+  const facts = variantFactDeclaration(variant);
+  notePresumption({
+    pool: `${where.blockId}::${where.poolKey}`,
+    lineId: typeof variant.vid === 'number' ? variant.vid : variant.text,
+    atoms: [...atomsOf(walls), ...atomsOf(facts)],
+    surface: where.surface || 'dossier',
+    drawKind: 'K',
+    resolvedBy: 'drawn',
+    ...(where.crisisScoped ? { crisisScoped: true } : {}),
+    ...(where.poolDeclares && where.poolDeclares.length ? { poolDeclares: where.poolDeclares } : {}),
+  });
 }
 
 /**
