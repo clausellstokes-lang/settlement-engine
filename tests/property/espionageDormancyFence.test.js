@@ -189,6 +189,16 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * AND NOWHERE ELSE. Most recently at the ENGINE-HYGIENE landing (SHIFT RECORD,
  * 2026-09-01, TE-AGNOSTIC-1 cars `f2c1ad181` / `97d119c9b`); before that at T8.
  *
+ * ── 2026-11-04, X-46 car 3 (lane x46-3-budget) (RUNG 1 OF THE SOAK LADDER) ──
+ * THE FORTY-SECOND MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
+ * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
+ * record is docs/shift-records/2026-11-04-rung1-12-x46-car-3-budget.json. THE MOVER, FOUND: first-parent step 90dc22f18 of the rung-1
+ * landing and nothing else (X-46 car 3 (lane x46-3-budget): the institution budget follows the population). On THIS corpus 360 of 360 rows move
+ * (thorp 60, hamlet 60, village 60, town 60, city 60, metropolis 60); 360/360 hashes stay distinct. ATTRIBUTION, ZERO RESIDUE BY CONSTRUCTION: written
+ * from the staged tree S12 (the tree of 90dc22f18 with the door paths carried from the branch, the previous
+ * record's writes committed), measured by scripts/audit/refence.mjs before the write. FENCE 3 (call-path
+ * dormancy) re-run green at the write. `fff82c27…` -> `0b130673…`.
+ *
  * ── 2026-11-04, X-46 car 1b, first step (U1–U3) (RUNG 1 OF THE SOAK LADDER) ──
  * THE FORTY-FIRST MOVEMENT OF THIS CONSTANT, chair-signed through the door under the owner's delegation,
  * inside a NAMED CHARTERED WINDOW: RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the §881.4 STOP's own terms); the
@@ -649,7 +659,7 @@ const THE_CALLER = 'src/domain/worldPulse/operations/missionDispatcher.js';
  * superseded by the ENGINE-HYGIENE re-record above, which is the record of the
  * one chartered window that has been spent since.
  */
-const PRE_COUPLING_CORPUS_SHA = 'fff82c27c72faaeae9de1935fc3cd1fe858b011ecded705692827aecfc550fac';
+const PRE_COUPLING_CORPUS_SHA = '0b13067330d565b51fd544e1312d25b958fcc761d8f83de4bf200bd62b4ef391';
 
 const CORPUS_TIERS = Object.freeze(['thorp', 'hamlet', 'village', 'town', 'city', 'metropolis']);
 const CORPUS_ROUTES = Object.freeze(['road', 'isolated', 'port', 'crossroads']);
