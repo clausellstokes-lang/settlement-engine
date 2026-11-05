@@ -13,7 +13,7 @@ import {
 } from './roleCategory.js';
 import { nativeSemanticName } from '../domain/content/customContentSemanticAuthority.js';
 import { getUpgradeOpportunities, mandatedRoleCandidate } from './economicGenerator.js';
-import { random as _rng, pick as ctxPick } from '../kernel/rngContext.js';
+import { random as _rng, pick as ctxPick, getActiveRng } from '../kernel/rngContext.js';
 import { drawUnique } from './hookVariety.js';
 import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
@@ -636,7 +636,7 @@ const generateNPCGoal = (role, category = 'other', config = {}, facts = null) =>
 // can disagree about nothing. drawUnique spends exactly one roll in every arm
 // (HK-LAW-6), so the surrounding stream is unmoved; only WHICH template a given
 // roll lands on changes, and that is HK-3's disclosed same-seed shift.
-const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), registry: { used: reg?.titles, keyFn: (x) => lineText(x), themes: reg?.themes, themeOfFn: (x) => themeOfText(lineText(x)) }, facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).text; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve; CENSUS-3e: stores the TEXT (a declared row is `{ text, needs }`), and a refused row resolves to a FRESH admitted template (drawDeclared's `registry` option, R-AJ: CENSUS-3e's resolver lifted), so no hook is lost
+const drawLoyalty = (pool, reg, facts = null) => drawDeclared(pool, { key: `${getActiveRng()?.seed ?? ''}::npcData:NPC_FACTION_LOYALTY`, /* R-AT (CENSUS-1h): the registry resolution's key carries the settlement's identity, the active stream's seed (no roll) */ draw: (p) => drawUnique(p, reg?.titles, (x) => lineText(x), reg?.themes, (x) => themeOfText(lineText(x))), registry: { used: reg?.titles, keyFn: (x) => lineText(x), themes: reg?.themes, themeOfFn: (x) => themeOfText(lineText(x)) }, facts, poolId: 'npcData:NPC_FACTION_LOYALTY', surface: 'npcs', drawKind: 'R' }).text; // CENSUS-1c unit 2: one drawUnique over the full pool (one roll, HK-LAW-6), then resolve; CENSUS-3e: stores the TEXT (a declared row is `{ text, needs }`), and a refused row resolves to a FRESH admitted template (drawDeclared's `registry` option, R-AJ: CENSUS-3e's resolver lifted), so no hook is lost
 
 // generatePlotHook — ONE plot hook. `generateSingleNPC` calls it twice and the pair becomes
 // the NPC's `plotHooks` array.

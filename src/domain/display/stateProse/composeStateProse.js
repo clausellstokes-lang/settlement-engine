@@ -76,6 +76,7 @@ import {
   fillSlots,
   hashKey,
   noteDrawnVariant,
+  resolveDeclaredPosition,
   variantIsAudible,
   speakTierNoun,
 } from './stateProseKernel.js';
@@ -85,7 +86,7 @@ import {
 // `scripts/lib/module-closure.mjs`: the closure moves 2 files / 74,847 B to 3 files / 76,893 B,
 // so the edge costs ONE file and 2,046 bytes, against the four files and 150,231 bytes a
 // lexicon import was priced at and refused at car 8a-4. The leaf imports nothing itself.
-import { DOSSIER_CONNECTIVES } from '../../../data/dossierConnectives.generated.js';
+import { DOSSIER_CONNECTIVES, DOSSIER_CONNECTIVE_DECLARATIONS } from '../../../data/dossierConnectives.generated.js';
 
 /**
  * One piece of a composed unit — the provenance row a manifest cell carries.
@@ -731,15 +732,21 @@ function factBudget(spineMeta) {
  * @param {string} spineKey
  * @param {string} modifierKey
  * @param {string} seed
- * @returns {string|null} the phrase (possibly the empty opener), or null when the list is empty
+ * @param {object|null} [facts] `factsOf(record)` for the position-keyed channel (R-AQ)
+ * @returns {string|null} the phrase (possibly the empty opener), or null when the list is empty or
+ *   its drawn joint is refused with no admitted position
  */
-function drawConnective(connectives, relation, seat, blockId, spineKey, modifierKey, seed) {
+function drawConnective(connectives, relation, seat, blockId, spineKey, modifierKey, seed, facts = null) {
   const bySeat = connectives[relation];
   const list = bySeat ? bySeat[seat] : undefined;
   if (!Array.isArray(list) || list.length === 0) return null;
-  if (list.length === 1) return list[0];
-  if (!seed) return list[0];
-  return list[hashKey(`${seed}::${blockId}::${spineKey}::joint::${modifierKey}`) % list.length];
+  const key = `${seed}::${blockId}::${spineKey}::joint::${modifierKey}`;
+  const drawn = list.length === 1 || !seed ? 0 : hashKey(key) % list.length;
+  // CENSUS-1h unit 7 (R-AQ): the position-keyed channel, checked AFTER the modulus draw; a list
+  // with no declaration (all four today, `{colour}` by CENSUS-2e) returns the drawn position.
+  const declared = connectives === CONNECTIVES ? DOSSIER_CONNECTIVE_DECLARATIONS[relation]?.[seat] : undefined;
+  const at = resolveDeclaredPosition(declared, drawn, facts, key, { pool: `connective::${relation}.${seat}` });
+  return at < 0 ? null : list[at];
 }
 
 /**
@@ -865,7 +872,7 @@ export function composeStateProse(corpus, blockId, options = {}) {
     if (!seats[seat]) continue;
     if (seat === CLAUSE_SEAT && !clauseFits(text)) continue;
     const phrase = drawConnective(
-      leaves.connectives, relation, seat, blockId, spineKey, row.key, read.seed,
+      leaves.connectives, relation, seat, blockId, spineKey, row.key, read.seed, read.facts,
     );
     if (phrase === null) continue;
     const drawn = drawPiece(block, blockId, row.key, 'modifier', read, { relation, seat });
