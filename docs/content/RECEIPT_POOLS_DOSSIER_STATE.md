@@ -4933,9 +4933,9 @@ band over the ring; this block reads the movement that produced it.
 
 **SLOTS.** `{settlement}` `{counterpart}` `{season}`
 
-**QUANTITY: `nobody`** · **THE GOOD STATE (R-DST-G)**
-1. `[ledger]` Nobody left {settlement} in {season}. That is a small fact and, in a year like this one, not a trivial one.
-2. `[street]` No one took to the road. Whatever the town is short of, it is not short of reasons to stay.
+**QUANTITY: `nobody`** · **THE GOOD STATE (R-DST-G)** {crisis-scoped}
+1. `[ledger · crisis: any]` Nobody left {settlement} in {season}. That is a small fact and, in a year like this one, not a trivial one.
+2. `[street · crisis: any]` No one took to the road. Whatever the town is short of, it is not short of reasons to stay.
 3. `[visitor]` The departure rolls are empty. Nothing here was bad enough to move anyone.
 
 **QUANTITY: `a few souls`**
@@ -4944,7 +4944,7 @@ band over the ring; this block reads the movement that produced it.
 3. `[visitor]` A few souls went. Nothing about the settlement changed except the number of empty doorways.
 
 **QUANTITY: `a dozen or so`**
-1. `[street]` A dozen or so have gone. That is a street's worth in a place this size, and the street shows it.
+1. `[street · population: small]` A dozen or so have gone. That is a street's worth in a place this size, and the street shows it.
 2. `[ledger]` The loss runs to a dozen or so: enough to leave a trade short-handed, not enough to alter what the town can do.
 3. `[visitor]` About a dozen households' worth of people have moved on; the town has redistributed the work among the rest without much comment.
 
@@ -4954,28 +4954,28 @@ band over the ring; this block reads the movement that produced it.
 3. `[counterforce]` Dozens of people are gone from a place that could not spare them. What they were doing is largely not being done.
 
 **QUANTITY: `a hundred or so`**
-1. `[visitor]` A hundred or so have gone from {settlement}, which is a visible subtraction. Whole quarters are quieter than they were.
+1. `[visitor · tier: >= town]` A hundred or so have gone from {settlement}, which is a visible subtraction. Whole quarters are quieter than they were.
 2. `[street]` The loss is a hundred or so people, and it is the sort of loss a town argues about rather than absorbs.
-3. `[ledger]` About a hundred have left. That is enough to change what the market can sell and what the levy can raise.
+3. `[ledger · market]` About a hundred have left. That is enough to change what the market can sell and what the levy can raise.
 
 **QUANTITY: `several hundred`**
 1. `[ledger]` Several hundred have left {settlement}. The town is measurably smaller, and its institutions have not shrunk to match.
-2. `[visitor]` The exodus runs to several hundred: a real portion of a district, gone over a stretch of seasons, with the buildings still standing.
+2. `[visitor · tier: >= town]` The exodus runs to several hundred: a real portion of a district, gone over a stretch of seasons, with the buildings still standing.
 3. `[counterforce]` Several hundred people are no longer here. What they paid in, the town now raises from the ones who stayed.
 
 **QUANTITY: `many hundreds`**
 1. `[elder]` Many hundreds have gone. {settlement} is a substantially different settlement than it was, and it has not finished discovering how.
 2. `[ledger]` The departure runs to many hundreds. The town carries its old infrastructure on a fraction of its old population.
-3. `[visitor]` Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.
+3. `[visitor · tier: >= town]` Many hundreds have left, and the emptying is legible from the road: whole terraces dark, whole workshops shut.
 
 **QUANTITY: `thousands`**
 1. `[visitor]` Thousands have gone from {settlement}. This is not a decline; it is an evacuation on a slower schedule.
-2. `[ledger]` The loss runs into thousands. The town retains its walls, its plan and its name, and very little of its life.
+2. `[ledger · walls]` The loss runs into thousands. The town retains its walls, its plan and its name, and very little of its life.
 3. `[elder]` Thousands of people have left. What remains occupies a settlement built for something considerably larger.
 
 **HERALD KIND: `hungry_gap`** (the lean season)
-1. `[ledger]` The lean season has cost {settlement} people, not to the road but to the ground, and the burial rolls run longer than the harvest explains.
-2. `[street]` More were buried here in {season} than born, and the shortfall in the fields is why the two counts went apart.
+1. `[ledger · grain]` The lean season has cost {settlement} people, not to the road but to the ground, and the burial rolls run longer than the harvest explains.
+2. `[street · grain]` More were buried here in {season} than born, and the shortfall in the fields is why the two counts went apart.
 3. `[counterforce]` The gap between what the town grew and what it needed has been paid in the usual currency; the rolls carry it.
 
 **HERALD KIND: `migration_flight`** · **E-6: never in a page already carrying the rumor line**
@@ -4990,7 +4990,7 @@ band over the ring; this block reads the movement that produced it.
 
 **RECEIPT: births and deaths in balance**
 1. `[ledger]` The rolls balance. {settlement} replaces itself and does not exceed itself, which is what most settlements do most of the time.
-2. `[visitor]` Births and burials run level here. The town holds its size out of its own population, without help and without loss.
+2. `[visitor · no migration: influx · no migration: exodus]` Births and burials run level here. The town holds its size out of its own population, without help and without loss.
 3. `[street]` Nothing about the town's counts is moving. It is neither growing nor failing, only continuing.
 
 **RECEIPT: `deficit01` positive** (burials exceed births)
@@ -4999,19 +4999,19 @@ band over the ring; this block reads the movement that produced it.
 3. `[threshold]` The rolls are short. A settlement in this condition survives on arrivals, and the arrivals are a separate question.
 
 **CANDIDATE KIND: `growth`**
-1. `[visitor]` The town is taking people in faster than it loses them. The building is happening at the edges, which is where it always happens first.
+1. `[visitor · migration: influx]` The town is taking people in faster than it loses them. The building is happening at the edges, which is where it always happens first.
 2. `[unfolding]` {settlement} is growing. The pressure shows as crowding rather than prosperity so far, which is normal at this stage.
-3. `[threshold]` Numbers here are climbing. Whether the town can house what it is attracting is a question it has not answered.
+3. `[threshold · migration: influx]` Numbers here are climbing. Whether the town can house what it is attracting is a question it has not answered.
 
 **CANDIDATE KIND: `emigration`** (mass, organized)
 1. `[unfolding]` The town is losing people to the road in organized numbers. This is departure rather than decline, and it has a destination.
 2. `[street]` {settlement} is emptying outward. Households leave together and tell each other where they are going.
 3. `[ledger]` The population is falling because people are going somewhere else, which is a different problem from people simply not being here.
 
-**CANDIDATE KIND: `decline`**
-1. `[elder]` The town is shrinking without anyone particularly leaving. It is losing people the slow way, and nothing about it makes a scene.
-2. `[ledger]` {settlement} is smaller each season for reasons that appear on no single day's record.
-3. `[visitor]` Numbers here are falling quietly: no exodus, no catastrophe, only a settlement that is not holding what it has.
+**CANDIDATE KIND: `decline`** {crisis-scoped}
+1. `[elder · no migration: exodus · crisis: any]` The town is shrinking without anyone particularly leaving. It is losing people the slow way, and nothing about it makes a scene.
+2. `[ledger · crisis: any]` {settlement} is smaller each season for reasons that appear on no single day's record.
+3. `[visitor · no migration: exodus]` Numbers here are falling quietly: no exodus, no catastrophe, only a settlement that is not holding what it has.
 
 **BELIEVED TREND diverges from the ring**
 1. `[ledger · dm-only]` What the neighbouring settlements believe about {settlement}'s numbers and what the rolls say have come apart; the belief is stale rather than false, and it is the belief being acted on.
@@ -6157,7 +6157,7 @@ compass word, no real-world place, no named analogy.*
 
 **`FALLING-NARROW`**
 1. `[ledger]` {settlement} is losing what it had and is hard to reach, and a town in that position gets smaller quietly, without anyone outside marking the stages.
-2. `[elder]` The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.
+2. `[elder · population: small]` The ways into {settlement} were always poor and the town was always small enough to carry that; it is smaller now, and the poor ways make the smallness harder to answer.
 
 ---
 

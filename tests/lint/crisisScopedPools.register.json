@@ -20,6 +20,8 @@
     "DS-ECO-3::ADEQUATE",
     "DS-ECO-8::MODERATE",
     "DS-ECO-8::POOR",
-    "DS-ECO-8::WEALTHY"
+    "DS-ECO-8::WEALTHY",
+    "DS-POP-1::CANDIDATE KIND: decline",
+    "DS-POP-1::QUANTITY: nobody"
   ]
 }

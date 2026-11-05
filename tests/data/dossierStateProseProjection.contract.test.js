@@ -860,9 +860,10 @@ describe('the demoted state dimension — the channel the kernel enforces', () =
       // F10 WALLS-WORD (2026-11-04): sixteen more blocks partition by `walls`.
       // F12 CRISIS-BLIND (2026-11-04): six more partition by a crisis dimension (DS-DEF-1, -2, -4, -11, DS-ECO-1, DS-POW-4).
       // CENSUS-3b unit 2 (2026-11-05): DS-ECO-10 (POSTURE established v1 carries `no hunger`).
-      // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K).
+      // CENSUS-3c unit 4 (2026-11-05): DS-ECO-2 (the FOOD / GRANARY calm lines carry `no hunger`, R-K);
+      // DS-POP-1 (QUANTITY thousands v2 "retains its walls" declares `walls`, R-O's one word).
       .toEqual(['DS-CND-1', 'DS-DEF-1', 'DS-DEF-11', 'DS-DEF-2', 'DS-DEF-4', 'DS-DEF-6', 'DS-ECO-1', 'DS-ECO-10', 'DS-ECO-12', 'DS-ECO-2', 'DS-ECO-3', 'DS-ECO-8', 'DS-ECO-9', 'DS-FTH-1', 'DS-GEN-1', 'DS-GEN-3',
-        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
+        'DS-GEN-6', 'DS-GEN-9', 'DS-HK-1', 'DS-POP-1', 'DS-POW-2', 'DS-POW-4', 'DS-POW-6', 'DS-POW-7', 'DS-STR-1', 'DS-STR-2', 'DS-WAR-1', 'DS-WAR-2']);
   });
 
   it('never returns a variant that contradicts the state it was asked about', () => {

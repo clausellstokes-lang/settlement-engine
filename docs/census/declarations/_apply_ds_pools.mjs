@@ -17,7 +17,7 @@ const claimed = new Set();
 const KERNEL_ON = ['crisis', 'threat', 'hunger', 'succession open', 'unrest'];
 for (const f of fs.readdirSync(D).filter((f) => f.startsWith(fam + '-') && f.endsWith('.json')).sort()) {
   const j = JSON.parse(fs.readFileSync(D + f, 'utf8'));
-  const start = lines.findIndex((l) => l.startsWith(`### ${j.id}:`));
+  const start = lines.findIndex((l) => l.startsWith(`### ${j.id}:`) || l.startsWith(`### ${j.id} ·`)); // CENSUS-3c: DS-POP-3's header reads `### DS-POP-3 · …`
   let end = lines.findIndex((l, i) => i > start && /^### |^## /.test(l)); if (end < 0) end = lines.length;
   if (start < 0) { report.missing.push(j.id); continue; }
   for (const p of j.pools) {
