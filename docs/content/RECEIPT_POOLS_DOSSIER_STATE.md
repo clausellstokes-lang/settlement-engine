@@ -4382,8 +4382,8 @@ the mechanism behind it.
 
 **ORIGIN: `resistance`**
 1. `[unfolding]` This is a resistance rather than a revolt. It was born under an occupation, and it defines itself against the occupier rather than the seat.
-2. `[street]` The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.
-3. `[visitor]` {settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.
+2. `[street · crisis: occupied]` The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.
+3. `[visitor · crisis: occupied]` {settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.
 
 **ORIGIN: `palace_coup`**
 1. `[visitor]` The conspiracy is a courtly one. Invitations to private dinners are circulating, and the guest list is the plot.

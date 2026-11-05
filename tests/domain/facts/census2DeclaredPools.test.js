@@ -61,7 +61,12 @@ describe.each(Object.entries(FAMILIES))('%s: the annex carries the ledger', (_fa
         const want = [...(l.needs || []).map(rename), ...(l.excludes || []).map((a) => `no ${rename(a)}`)];
         if (scoped && l.crisis === 'any') want.push('crisis: any');
         for (const a of want) if (!marks.includes(a)) missing.push(`${p.pool} ${l.lineId}: ${a}`);
-        if (keyed(p) && marks.some((x) => /^crisis:/.test(x))) missing.push(`${p.pool} ${l.lineId}: re-declares its key`);
+        // a keyed pool's line re-declares its KEY only by repeating it; a NARROWER presumption (one
+        // kind of the key's conjunction, which can resolve after stamping: DS-STR-2 ORIGIN:
+        // resistance vid 2 and 3) declares `crisis: <kind>` (CENSUS-2c unit 2, the chair's R-I)
+        const narrower = keyed(p) && Array.isArray(l.crisis) && l.crisis.length > 0 && l.crisis.length < p.poolCrisis.length;
+        if (narrower) for (const k of l.crisis) if (!marks.includes(`crisis: ${k}`)) missing.push(`${p.pool} ${l.lineId}: crisis: ${k}`);
+        if (keyed(p) && !narrower && marks.some((x) => /^crisis:/.test(x))) missing.push(`${p.pool} ${l.lineId}: re-declares its key`);
       }
     }
     expect(missing).toEqual([]);
@@ -93,6 +98,10 @@ describe('the declarations do their work on the real pools', () => {
   it("DS-STR-1's calm framing (\"carries no emergency\") is refused under a siege and drawn in calm", () => {
     expect(read('DS-STR-1', "Overview's own section framing", SIEGE)).toEqual([]);
     expect(read('DS-STR-1', "Overview's own section framing", CALM)).toEqual([1, 2, 3]);
+  });
+
+  it("DS-STR-2's resistance lines that state the occupation in the present need it (R-I): an insurgency whose occupation has resolved keeps only vid 1", () => {
+    expect(read('DS-STR-2', 'ORIGIN: resistance', factsOf({ ...TOWN, stress: [{ type: 'insurgency' }] }))).toEqual([1]);
   });
 
   it("DS-STR-1's siege banner keeps its lines under a siege joined by a famine (the key is not re-declared)", () => {

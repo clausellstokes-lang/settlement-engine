@@ -1751,12 +1751,18 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: occupied"
+          ],
           "text": "The armed movement here answers a foreign garrison. Collaborators and patriots eat at the same tables, and everyone knows which is which.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: occupied"
+          ],
           "text": "{settlement} is occupied and it is fighting back; what runs in the alleys is organized, patient, and not interested in reform.",
           "slots": [
             "settlement"
