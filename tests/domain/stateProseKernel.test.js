@@ -39,7 +39,6 @@ import {
   hashKey,
   poolDimensions,
   readStateProse,
-  variantFactDeclaration,
   stableVid,
   stateProseSentence,
   variantIsAnchored,
@@ -440,9 +439,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
     let draws = 0;
     for (const { desk, blockId, poolKey, pool } of ALL_POOLS) {
       if (poolDimensions(pool).length > 0) continue;
-      // CENSUS-3b unit 2: a pool whose variants declare FACT atoms is fail-closed without `facts`
-      // (law 5 generalised); its gate is held by tests/domain/facts/declaredKernel.test.js.
-      if (pool.some((v) => { const d = variantFactDeclaration(v); return d.needs.length || d.excludes.length || d.crisis.length; })) continue;
+      // CENSUS-3b unit 2 skipped a pool whose variants declare FACT atoms (fail-closed without
+      // `facts`); the CENSUS-1e merge keeps it in the sweep instead, read against R-N's one calm
+      // double below (CENSUS-5's), so the sweep stays as wide as each side had it.
       poolsChecked += 1;
       const slots = bagFor(pool);
       for (const audience of [AUDIENCE_DM, AUDIENCE_PLAYER]) {
