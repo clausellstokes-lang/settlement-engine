@@ -18,6 +18,8 @@ import { crisisBlindFindings } from '../../src/domain/coherence/crisisBlindFindi
 import { crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
 import { eligibleVariants } from '../../src/domain/display/stateProse/stateProseKernel.js';
 import { DOSSIER_STATE_PROSE_POWER } from '../../src/data/dossierStateProse/power.generated.js';
+// CENSUS-5: DS-POW-4 v1/v2 declare `no crisis: unrest` (R-F 1), so the pool reads against the record's facts, as the desk's does.
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 
 const POOL = DOSSIER_STATE_PROSE_POWER['DS-POW-4'].pools['riskLabel: Stable (no challengers)'];
 /** The pool's own seat-safety variant, found by the instrument under a succession crisis. */
@@ -46,13 +48,13 @@ describe('rung 2D · the seat-safety line is denied by unrest as well as success
   it.each([1, 3001])('soak1k-%i: the desk pool never draws the line under its unrest crisis, and is not mute', (i) => {
     const s = born[i];
     const slots = Object.fromEntries(POOL.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
-    const eligible = eligibleVariants(POOL, { slots, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf(s) } });
+    const eligible = eligibleVariants(POOL, { slots, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf(s) }, facts: factsOf(s) });
     expect(eligible.length).toBeGreaterThan(0);
     expect(eligible.filter((v) => crisisBlindFindings(s, { power: v.text }).length)).toEqual([]);
   });
 
   it('a crisis-free place still draws it (the walled control)', () => {
-    const eligible = eligibleVariants(POOL, { slots: { settlement: 'X', seat: 'X', faction: 'X' }, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf({}) } });
+    const eligible = eligibleVariants(POOL, { slots: { settlement: 'X', seat: 'X', faction: 'X' }, audience: 'dm', dimensions: { walls: 'no walls', ...crisisDimensionsOf({}) }, facts: factsOf({}) });
     expect(eligible).toContain(SEAT_SAFE);
   });
 });

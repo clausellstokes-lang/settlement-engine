@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2327,
+    "variants": 2328,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -25168,8 +25168,8 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 5,
-      "grammars": 4,
+      "variants": 6,
+      "grammars": 5,
       "predicate": [
         {
           "field": "label (via RISK_POOL_OF in powerStateProse.js)",
@@ -39663,8 +39663,8 @@
         "DS-POW-4 :: riskLabel: Contested",
         "DS-POW-4 :: riskLabel: Critical. The seat could fall"
       ],
-      "variants": 15,
-      "grammars": 14,
+      "variants": 16,
+      "grammars": 15,
       "blocks": [
         "DS-POW-4"
       ]
@@ -51987,7 +51987,7 @@
         "label (via RISK_POOL_OF in powerStateProse.js)"
       ],
       "readingFunction": "RISK_POOL_OF",
-      "count": "5 variant(s) · 4 grammar(s) · slots {faction, seat, settlement}"
+      "count": "6 variant(s) · 5 grammar(s) · slots {faction, seat, settlement}"
     },
     {
       "tier": "COVERED",

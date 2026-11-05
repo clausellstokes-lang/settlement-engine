@@ -20,7 +20,9 @@ import { beforeAll, describe, expect, it } from 'vitest';
 import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 import { crisisBlindFindings } from '../../src/domain/coherence/crisisBlindFindings.js';
 import { CRISIS_FAMILIES, crisisAnswered, crisisDimensionsOf } from '../../src/domain/crisis/crisisFacts.js';
-import { eligibleVariants, STATE_MARK_DIMENSIONS } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { eligibleVariants, STATE_MARK_DIMENSIONS, variantFactDeclaration } from '../../src/domain/display/stateProse/stateProseKernel.js';
+import { declarationAdmits } from '../../src/domain/facts/factVocabulary.js';
+import { factsOf } from '../../src/domain/facts/factsOf.js';
 import {
   defensePostureProse, defenseThreatProse, defenseWallRationaleProse,
 } from '../../src/domain/display/stateProse/defenseStateProse.js';
@@ -52,6 +54,29 @@ function stringsOf(v) {
   if (!v || typeof v !== 'object') return [];
   return Object.values(v).flatMap(stringsOf);
 }
+
+/**
+ * The pool's own brace group (CENSUS-5): a pool opted into the crisis dimension reads silence as
+ * calm, and its pool-level atoms gate it, exactly as the composer hands them to the kernel.
+ * @param {any} block @param {string} poolKey
+ */
+const poolReadOf = (block, poolKey) => {
+  const meta = (block.poolMeta || {})[poolKey] || {};
+  return { crisisScoped: meta.crisisScoped === true, ...(Array.isArray(meta.declares) && meta.declares.length ? { poolDeclares: meta.declares } : {}) };
+};
+
+/**
+ * Does this variant carry its denial of the family? Either F12's kernel mark (`no threat`, …),
+ * or (CENSUS-5) a census crisis declaration the ONE rule refuses under a place in that family —
+ * `no crisis: threat, unrest`, or silence in a `{crisis-scoped}` pool. A refusal for a non-crisis
+ * atom (a gate the minimal place lacks) is not a denial of the family.
+ */
+const deniesFamily = (variant, family, place, read) => (variant.marks || []).includes(CRISIS_FAMILIES[family].off)
+  || declarationAdmits(variantFactDeclaration(variant), factsOf(place), { crisisScoped: read.crisisScoped })
+    .refused.some((atom) => /^(no )?crisis/.test(atom));
+
+/** Does this pool carry a crisis denial in either channel? */
+const poolDeniesFamily = (pool, family, place, read) => read.crisisScoped || pool.some((v) => deniesFamily(v, family, place, read));
 
 /** The instrument's claims about one variant's text under one place. */
 const claimsOf = (text, place) => crisisBlindFindings(place, { page: text });
@@ -86,7 +111,7 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
             const hit = claimsOf(variant.text, placeUnder(type)).find((f) => f.family === family);
             if (!hit) continue;
             claims += 1;
-            if (!(variant.marks || []).includes(CRISIS_FAMILIES[family].off)) unmarked.push(`${blockId} :: ${poolKey} :: v${variant.vid} :: ${family}`);
+            if (!deniesFamily(variant, family, placeUnder(type), poolReadOf(block, poolKey))) unmarked.push(`${blockId} :: ${poolKey} :: v${variant.vid} :: ${family}`);
           }
         }
       }
@@ -103,11 +128,12 @@ describe('F12 · the crisis dimensions on the state-prose desks', () => {
       if (UNMOUNTED_BLOCKS.includes(blockId)) continue;
       for (const [poolKey, pool] of Object.entries(block.pools || {})) {
         for (const [family, type] of Object.entries(UNDER)) {
-          if (!pool.some((v) => (v.marks || []).includes(CRISIS_FAMILIES[family].off))) continue;
+          const read = poolReadOf(block, poolKey);
+          if (!poolDeniesFamily(pool, family, placeUnder(type), read)) continue;
           const slots = Object.fromEntries(pool.flatMap((v) => v.slots || []).map((slot) => [slot, 'X']));
           // Every other dimension the pool partitions by is answered at both values in turn.
           const dims = { walls: 'no walls', ...crisisDimensionsOf(placeUnder(type)) };
-          const eligible = eligibleVariants(pool, { slots, audience: 'dm', dimensions: dims });
+          const eligible = eligibleVariants(pool, { slots, audience: 'dm', dimensions: dims, facts: factsOf(placeUnder(type)), ...read });
           if (eligible.length === 0) mute.push(`${blockId} :: ${poolKey} :: ${family}`);
           for (const v of eligible) if (claimsOf(v.text, placeUnder(type)).length) blind.push(`${blockId} :: ${poolKey} :: v${v.vid}`);
         }

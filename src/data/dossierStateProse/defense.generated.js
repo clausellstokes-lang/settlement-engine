@@ -19,6 +19,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness STRONG": [
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} reads as a defended place from the road in: the approaches are watched, the works are kept up, and none of it looks like it was thrown together.",
           "slots": [
             "settlement"
@@ -27,6 +30,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "What {settlement} can field and what {settlement} has built are both in good order; the town would take real effort to threaten and knows it.",
           "slots": [
             "settlement"
@@ -36,7 +42,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any",
+            "no crisis: unrest"
           ],
           "text": "The town does not spend much time thinking about being attacked, and the reason is not complacency. The arrangements are in place, and the town is not relying on anything else instead.",
           "slots": [],
@@ -89,6 +97,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness WEAK": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The defensive arrangements at {settlement} are thin. Something is in place against most pressures and nothing is in place in depth.",
           "slots": [
             "settlement"
@@ -97,6 +108,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "What a stranger notices at {settlement} is how much of the perimeter has nobody on it, and how normal the town seems to find that.",
           "slots": [
             "settlement"
@@ -105,6 +120,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "{settlement} is getting by on not being tested. The margin has been narrowing rather than widening, and nothing in hand is closing it.",
           "slots": [
             "settlement"
@@ -115,6 +134,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "readiness CRITICAL": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} is effectively undefended. There is no arrangement here that would slow a serious attempt on the town by more than the time it takes to walk in.",
           "slots": [
             "settlement"
@@ -123,12 +145,19 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The town knows perfectly well what it could not survive, and the knowledge shapes what it will and will not provoke.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "A stranger reaches the centre of {settlement} without being stopped, challenged or counted by anybody at all.",
           "slots": [
             "settlement"
@@ -253,7 +282,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "readiness ADEQUATE": {
         "role": "spine",
@@ -285,7 +315,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "readiness CRITICAL": {
         "role": "spine",
@@ -300,7 +331,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "terrain FAVOURABLE to the defender": {
         "role": "spine",
@@ -390,6 +422,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "Defense at {settlement} is not an emergency arrangement, it is the week's work: the rotations run, the gates close on time, and nobody treats any of it as unusual.",
           "slots": [
             "settlement"
@@ -458,6 +493,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Beasts & Monsters: frontier, credible deterrence": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} sits on an active frontier with a line and a force behind it. Most of what comes out of the country will not press a defended perimeter, and most of what comes here does not.",
           "slots": [
             "settlement"
@@ -466,12 +504,19 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "The town takes the frontier seriously and has taken it seriously long enough that the arrangements are ordinary rather than anxious.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat"
+          ],
           "text": "Very little reaches {settlement} out of the wild country, and the reason is that the arrangements are visible from a long way off.",
           "slots": [
             "settlement"
@@ -507,7 +552,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "There is very little in the country around {settlement} and there are substantial works facing it; whatever the walls here are for, it is not the creatures.",
           "slots": [
@@ -518,7 +564,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "{settlement} is comfortably over-provided against beasts. The pressures that matter to this town are internal, and its defensive spending does not reflect that.",
           "slots": [
@@ -529,7 +576,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any",
+            "no crisis: unrest"
           ],
           "text": "A stranger notices the perimeter at {settlement} chiefly for how relaxed the people on it are.",
           "slots": [
@@ -540,7 +589,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "{settlement} built more against the country than the country ever asked for, and the threat now at hand is spending that margin.",
           "slots": [
@@ -551,7 +601,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "A stranger finds {settlement}'s works manned in earnest; what was built against nothing in particular is being held against something now.",
           "slots": [
@@ -564,7 +615,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "{settlement} keeps no organized defense against the country, and in a heartland this quiet the arrangement is a reasonable one rather than a gap.",
           "slots": [
@@ -575,7 +627,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "The town has never needed to think about what is outside it, and does not.",
           "slots": [],
@@ -584,7 +637,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "A stranger walks out of {settlement} in any direction at any hour and meets nothing that would justify a watch.",
           "slots": [
@@ -595,7 +649,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "{settlement} kept no defence because the country never asked for one, and the country is asking now; the town is improvising what it never built.",
           "slots": [
@@ -606,7 +661,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "Nothing at {settlement} was organized against the country, and the threat now at hand has found the gap.",
           "slots": [
@@ -738,6 +794,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Invasion & War: neither walls nor force": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat"
+          ],
           "text": "{settlement} has no line and no force. Organized aggression cannot be resisted here; what preserves the town is distance, diplomacy, or being beneath notice.",
           "slots": [
             "settlement"
@@ -747,7 +807,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "Nothing has come for {settlement} and nothing about the town would stop it. The safety here is entirely a matter of nobody having wanted to.",
           "slots": [
@@ -758,7 +819,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "The town's plan for an army is to not be interesting to one, and everybody here can state the plan.",
           "slots": [],
@@ -767,7 +829,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "{settlement} has no line and no force, and the threat now at hand has noticed both.",
           "slots": [
@@ -787,6 +850,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "watch"
+          ],
           "text": "A thing done wrong at {settlement} goes somewhere and takes time, and the town has come to rely on that rather than on the watch's temper.",
           "slots": [
             "settlement"
@@ -879,6 +945,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Economic Survival: STRONG": [
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: debt"
+          ],
           "text": "{settlement} can absorb a sustained crisis out of its own revenue: emergency measures can be paid for and the defence kept paid while they last.",
           "slots": [
             "settlement"
@@ -887,6 +956,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: debt"
+          ],
           "text": "The town could go through a bad season with its arrangements intact, and the people who would have to be paid through one know it.",
           "slots": [],
           "vid": 2
@@ -1158,7 +1230,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Beasts & Monsters: frontier, force without a perimeter": {
         "role": "spine",
@@ -1194,7 +1267,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Beasts & Monsters: settled, nothing organized": {
         "role": "spine",
@@ -1214,7 +1288,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Invasion & War: walls AND professional garrison": {
         "role": "spine",
@@ -1312,7 +1387,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           4
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Internal Security: full legal chain (court AND prison)": {
         "role": "spine",
@@ -1539,6 +1615,11 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Very Safe": [
         {
           "angle": "street",
+          "marks": [
+            "watch",
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "Nothing much happens to people at {settlement}. The watch is heavier than anything working against it, by a margin the town does not have to think about.",
           "slots": [
             "settlement"
@@ -1547,6 +1628,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "A stranger walks {settlement} at any hour without being troubled, and notices that the locals do the same without appearing to have decided to.",
           "slots": [
             "settlement"
@@ -1555,6 +1640,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "Enforcement at {settlement} sits far above whatever criminal presence the town holds; the returns are thin because there is very little to return.",
           "slots": [
             "settlement"
@@ -1563,6 +1651,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "watch",
+            "crisis: any"
+          ],
           "text": "There is money at {settlement} and there is opportunity, and neither has produced an organized interest. The watch here is simply too heavy to be worth the arrangement.",
           "slots": [
             "settlement"
@@ -1573,6 +1665,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Safe": [
         {
           "angle": "street",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "{settlement} is a quiet town. Things are taken occasionally and the taking does not spread, because the people who would spread it are known.",
           "slots": [
             "settlement"
@@ -1581,6 +1677,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "Enforcement at {settlement} is clearly the stronger side; criminal work here is suppressed rather than absent, and stays suppressed.",
           "slots": [
             "settlement"
@@ -1589,6 +1688,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "A stranger is comfortable at {settlement} and is also aware that the comfort has somebody maintaining it.",
           "slots": [
             "settlement"
@@ -1633,6 +1736,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Unsafe": [
         {
           "angle": "street",
+          "marks": [
+            "watch"
+          ],
           "text": "Crime at {settlement} is outrunning the watch. It is not chaos; it is that the people doing it have stopped expecting to be caught.",
           "slots": [
             "settlement"
@@ -1649,6 +1755,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "watch"
+          ],
           "text": "The balance at {settlement} has tipped and is still tipping. Each season the watch answers a smaller share of what happens.",
           "slots": [
             "settlement"
@@ -1659,6 +1768,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Dangerous": [
         {
           "angle": "street",
+          "marks": [
+            "watch"
+          ],
           "text": "The watch at {settlement} has been overwhelmed. What happens in this town is decided by whoever is present when it happens.",
           "slots": [
             "settlement"
@@ -1751,7 +1863,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3,
           4
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Safe": {
         "role": "spine",
@@ -1766,7 +1879,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Moderate": {
         "role": "spine",
@@ -2293,6 +2407,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "walls PRESENT": [
         {
           "angle": "visitor",
+          "marks": [
+            "gate"
+          ],
           "text": "There is a line around {settlement} and it is kept: the gates shut, the works are repaired, and a stranger enters where the town intends him to.",
           "slots": [
             "settlement"
@@ -2309,6 +2426,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate"
+          ],
           "text": "The town has a wall and arranges its day around the gates without noticing that it does.",
           "slots": [],
           "vid": 3
@@ -2359,6 +2479,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "gate"
+          ],
           "text": "A stranger at {settlement} is counted at the gate by somebody whose job that is, and is counted again on the way out.",
           "slots": [
             "settlement"
@@ -2527,6 +2650,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "gate"
+          ],
           "text": "A stranger at {settlement} is measured at the gate in a way he cannot quite identify, and is not told about it.",
           "slots": [
             "settlement"
@@ -3123,6 +3249,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Logistics & Supply: Granary + port": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} holds stored food and keeps the sea; between them that is the hardest posture there is to starve out, and it is the reason a siege here would have to be a fleet.",
           "slots": [
             "settlement"
@@ -3131,6 +3260,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} does not close easily. Cutting the roads leaves the water, closing the water leaves the stores, and an attempt on either one alone accomplishes nothing.",
           "slots": [
             "settlement"
@@ -3139,6 +3271,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat"
+          ],
           "text": "The town has grain in store and water at the door at {settlement}, and is unhurried about threats in a way that irritates its neighbours.",
           "slots": [
             "settlement"
@@ -3189,6 +3325,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: hunger"
+          ],
           "text": "An interruption on the roads to {settlement} does not reach the table, and the granary is the reason rather than the roads.",
           "slots": [
             "settlement"
@@ -3215,6 +3354,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: hunger"
+          ],
           "text": "The town eats what the water brings at {settlement}, daily, and has no cause to wonder what it would do otherwise.",
           "slots": [
             "settlement"
@@ -3249,6 +3391,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Naval Defense: Naval force": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} controls its own sea approaches; anything coming by water would need to beat the fleet before it reached the town.",
           "slots": [
             "settlement"
@@ -3257,6 +3402,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "A stranger arriving by sea at {settlement} is met well before the harbour and understands the arrangement immediately.",
           "slots": [
             "settlement"
@@ -3265,6 +3413,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat"
+          ],
           "text": "Nothing hostile stands off {settlement}, and the ships that would have to be beaten first are the reason.",
           "slots": [
             "settlement"
@@ -3275,6 +3427,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
       "Naval Defense: Port only": [
         {
           "angle": "ledger",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "{settlement} has a harbour and nothing to hold it with; any vessel that wants the sea approaches has them.",
           "slots": [
             "settlement"
@@ -3284,7 +3439,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "The port is the town's living and the town's opening, and nothing has yet arrived that made the second half matter.",
           "slots": [],
@@ -3292,6 +3448,10 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any",
+            "no crisis: threat, unrest"
+          ],
           "text": "A stranger sails into {settlement} unchallenged and is struck, afterwards, by how easy that was.",
           "slots": [
             "settlement"
@@ -3550,7 +3710,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Logistics & Supply: Granary in isolation": {
         "role": "spine",
@@ -3626,7 +3787,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Naval Defense: Port only": {
         "role": "spine",
@@ -3642,7 +3804,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "Naval Defense: Under blockade": {
         "role": "spine",
@@ -3697,6 +3860,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "Nothing threatens {settlement} and the town is at full strength anyway, which is a choice somebody made and is still paying for.",
           "slots": [
             "settlement"
@@ -4651,6 +4817,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "counterforce",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "Nothing presses {settlement}, and the arrangements are the reason for that rather than the beneficiary of it.",
           "slots": [
             "settlement"
@@ -4669,12 +4838,18 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "no crisis: threat"
+          ],
           "text": "The town's continued existence is a matter of nothing having come for it.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "visitor",
+          "marks": [
+            "no crisis: threat, unrest"
+          ],
           "text": "A stranger enters {settlement}, crosses it and leaves without meeting anything that would have stopped him doing worse.",
           "slots": [
             "settlement"
@@ -5433,7 +5608,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any",
+            "no crisis: unrest"
           ],
           "text": "{settlement} keeps a {defwork} the present peace does not obviously require, and keeping it is cheaper than ever needing it again.",
           "slots": [
@@ -5445,7 +5622,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "elder",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "The {defwork} stands ahead of any present need; walls are easier to keep than to raise, and {settlement} keeps this one.",
           "slots": [
@@ -5457,7 +5635,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "The town pays little for its {defwork} now that it asks little of it; built work stands on its own patience.",
           "slots": [
@@ -5468,7 +5647,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "{settlement} kept its {defwork} through the quiet years, and the {defwork} is earning its keep now.",
           "slots": [
@@ -5480,7 +5660,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "ledger",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "What {settlement} spent on its {defwork} in the quiet years is what stands between the town and the threat at hand.",
           "slots": [
@@ -5514,7 +5695,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "no threat"
+            "no threat",
+            "crisis: any"
           ],
           "text": "{settlement} is too small to wall and knows it; the town's safety is its neighbours, its distance, and its unimportance.",
           "slots": [
@@ -5524,6 +5706,9 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "crisis: any"
+          ],
           "text": "No wall marks where {settlement} ends; at this size the country and the town simply agree to differ.",
           "slots": [
             "settlement"
@@ -5533,7 +5718,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "threat"
+            "threat",
+            "crisis: any"
           ],
           "text": "{settlement} is too small to wall, and what has come for it now makes the smallness a danger rather than a protection.",
           "slots": [
@@ -5596,7 +5782,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           5
         ],
         "readsCount": 3,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "WALLED-STRAINED": {
         "role": "spine",
@@ -5626,7 +5813,8 @@ export const DOSSIER_STATE_PROSE_DEFENSE = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 2,
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       },
       "UNWALLED-LARGE": {
         "role": "spine",

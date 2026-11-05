@@ -56,6 +56,7 @@ import { PROSPERITY_TIERS } from '../../src/data/constants.js';
 import { deriveProsperityLabel } from '../../src/generators/economy/prosperity.js';
 import { expectAbsentWithAnchor, expectPresentThenAbsent } from '../helpers/anchoredNegatives.js';
 import { collectSeedFailures, expectNoSeedFailures } from '../helpers/seedFailures.js';
+import { CALM_FACTS_ADMIT_ALL } from '../helpers/calmFactsDouble.js';
 
 /**
  * The hash pair, re-spelled here so every key this file checks is checked against an
@@ -444,7 +445,9 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
         const reference = pool.filter(
           (variant) => variantIsAudible(variant, audience) && variantIsAnchored(variant, slots),
         );
-        const cured = eligibleVariants(pool, { slots, audience });
+        // CENSUS-5: a pool whose lines declare fact atoms reads against `facts`; the calm
+        // admit-all double keeps this the pre-cure comparison (`tests/helpers/calmFactsDouble.js`).
+        const cured = eligibleVariants(pool, { slots, audience, facts: CALM_FACTS_ADMIT_ALL });
         if (cured.length !== reference.length || cured.some((v, i) => v !== reference[i])) {
           drift.push(`ELIGIBILITY :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience}`);
         }
@@ -453,7 +456,7 @@ describe('the state-prose reader — law 5, and the darkness of it', () => {
           const was = drawVariant(reference, blockId, poolKey, seed);
           const wasText = was ? fillSlots(was.text, slots) : null;
           const nowText = readStateProse({ [blockId]: { pools: { [poolKey]: pool } } },
-            blockId, poolKey, { slots, seed, audience })?.text ?? null;
+            blockId, poolKey, { slots, seed, audience, facts: CALM_FACTS_ADMIT_ALL })?.text ?? null;
           if (wasText !== nowText) {
             drift.push(`DRAW :: ${desk} :: ${blockId} :: ${poolKey} :: ${audience} :: seed "${seed}"`);
           }

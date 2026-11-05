@@ -5911,6 +5911,9 @@ export const DOSSIER_STATE_PROSE_GENERAL = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "{settlement}'s market carries {counterpart}'s goods without marking them out, which is the surest sign of a working partnership.",
           "slots": [
             "settlement",
