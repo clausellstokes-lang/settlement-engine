@@ -1,0 +1,46 @@
+{
+  "_doc": "X-46 CAR 3, I7 (THE LANE'S SECOND STEP), ONE SIGNED SHIFT OF RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature). THE CAUSE, ONE: X-46 car 3, I7: the realised table (INSTITUTION_BUDGET_REALISED) re-measured at the composed tip by the lane's own recipe, a metropolis forced through the custom-population path. THE MOVER, NAMED: first-parent step 6ca454d2b of lane/landing-rung1-2026-11-04 (\"fix(x46-3): the realised table re-measured at the composed tip (I7 re-key)\") and nothing else. THE OWNER'S WORDS are quoted verbatim from docs/DESIGN_X46_SCALE_TRAIN.md line 7 (the owner, 2026-11-02, quoted from docs/UX_CONSOLIDATION_2026-10-30.md, the X-46 addendum: the historical-scale commission, which asks the correction \"in both the number of institutions and population\"; this is car 3's second step, the chair's I7, per LANDING-3's brief, ruling 3). HOW (the staged-tree method, DOORS-2 ruling 1; LANDING-3's brief, ruling 1: one record per moving step, in first-parent order; LANDING-4 under the same brief and its addendum): this record's stage S19 is the tree of 6ca454d2b with the door paths (the freeze register, every registered manifest and suite, docs/shift-records/, scripts/prose-manifest-cells.mjs, the door helper, the freeze walker and scripts/audit/'s doors) carried from the branch, where the previous record's writes are committed, and CARTOGRAPHY_CALIBRATION's block carried with them (it is written by hand with every corpus re-record; scripts/audit/carry-calibration.mjs); no lane touched a door path inside the window, so the stage differs from 6ca454d2b by those writes alone (scripts/audit/landing-stage.sh build stops otherwise). MEASURED BEFORE THE WRITE (a dry pass of every act against a placeholder record in the same scratch stage, then the stage rebuilt, scripts/audit/landing-act.mjs figures; S18 -> S19): generator-golden-master 489 of 525 rows (thorp 60, hamlet 72, village 84, town 105, city 84, metropolis 84), the key set identical; herald-knowledge-desk-golden 2 of 436 rows, 20 added and 18 removed (434 -> 436); cartography-calibration-corpus 214 of 504 rows (thorp 34, hamlet 33, village 55, town 52, city 21, metropolis 19); dossier-prose-manifest 158 of 1050 rows (hamlet 48, village 70, town 36, metropolis 4); espionage-dormancy-fence 325 of 360 rows (thorp 52, hamlet 53, village 60, town 60, city 60, metropolis 40), 360/360 distinct, f95a9d28.. -> 3f686283..; pdf-golden-view-model-snapshot, its one snapshot. A surface that does not move at this stage is not listed. CARTOGRAPHY_CALIBRATION.MAX_INSTITUTIONS 11/15/22/47/92/105 -> 11/15/22/46/92/105 by hand (W7), MAX_BUILDING_ROW_BYTES stays 447; the corpus re-captured at the new block in the dry pass is byte-identical to the capture at the old one (fa51fbc2 both; no cap bit). W6 stays the one named red of the calibration suite: its worst slice now reads 2.3 at town (20 -> 46) against the declared 1.6, carried to record 27 by the chair's ruling 2 in LANDING-4's addendum. RUNG 1 OF THE SOAK LADDER, ODQ §934.105 (the cloud chair signs by the owner's delegation, vetoable; a successor chair does not inherit this signature).",
+  "ownerWords": "I think we have over blown how large the floor and ceiling is for a Thorpe all the way to a city… historically it should be 50 to 300 residents, grouped into roughly 30 to 90 households. And that scale from our Thorpe to hamlets and town to city. Can you correct that in both the number of institutions and population in our generation pipeline?",
+  "ownerDate": "2026-11-02",
+  "odqRow": "§934.105 of docs/OWNER_DECISION_QUEUE.md (RUNG 1 OF THE SOAK LADDER, recorded by the cloud chair, session 019yED1Rc3svZxTNcEJVRr77)",
+  "cause": "X-46 car 3, I7: the realised table (INSTITUTION_BUDGET_REALISED) re-measured at the composed tip by the lane's own recipe, a metropolis forced through the custom-population path",
+  "seat": "LANDING-4 (Opus 5.5) under the cloud chair (Fable 5.1), session 019yED1Rc3svZxTNcEJVRr77, from the stage at 6ca454d2b",
+  "surfaces": [
+    {
+      "surface": "generator-golden-master",
+      "action": "re-record",
+      "predictedRows": 525,
+      "proofForm": "settlement-hash"
+    },
+    {
+      "surface": "herald-knowledge-desk-golden",
+      "action": "re-record",
+      "predictedRows": 436,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "cartography-calibration-corpus",
+      "action": "re-record",
+      "predictedRows": 504,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "dossier-prose-manifest",
+      "action": "re-record",
+      "predictedRows": 2,
+      "proofForm": "derived-artefact"
+    },
+    {
+      "surface": "espionage-dormancy-fence",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "in-file corpus constant"
+    },
+    {
+      "surface": "pdf-golden-view-model-snapshot",
+      "action": "re-record",
+      "predictedRows": 1,
+      "proofForm": "derived-artefact"
+    }
+  ]
+}
