@@ -227,8 +227,14 @@ function assertLiveStringsBound(files) {
  * tags fold into the variant's marks; missing the second would publish dm-only prose.
  */
 const VARIANT_RE = /^(\d+)\.\s+`\[([^\]]+)\]`\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
-/** The canonical-at-zero row: `0. *(canonical)* <the live engine string>` */
-const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(.*)$/;
+/**
+ * The canonical-at-zero row: `0. *(canonical)* <the live engine string>`, optionally with ONE tag
+ * slot after the marker — `0. *(canonical)* \`[market · no crisis: hunger]\` <text>` (CENSUS-1f,
+ * the chair's item 3 of 2026-11-05 ~04:50): every part of the slot is a MARK (the angle is fixed,
+ * `canonical`), so a v0 row declares exactly as a numbered row's marks do (vid 0 is a real id). A
+ * row with no slot projects `marks: []`, as before.
+ */
+const CANONICAL_RE = /^0\.\s+\*\(([^)]*canonical[^)]*)\)\*\s+(?:`\[([^\]]+)\]`\s+)?(.*)$/;
 /**
  * A pool label. Either a standalone bold line (`**COMBINATION C1 — ...**`) or a bold
  * label carrying an em-dash gloss (`**SUBSISTENCE** — *bare survival, no cushion*`).
@@ -245,6 +251,10 @@ const BOLD_LINE_RE = /^\*\*((?:(?!\*\*).)+)\*\*(\s*(?:[—–·,:(-]\s*.*|\*.*)?
  * nothing). Items are split on `·`; each must be a ruling or a DECLARABLE atom (a home answers it).
  */
 const POOL_BRACES_RE = /^(\*\*.*\*\*.*?)\s*\{([^{}]*)\}\s*$/;
+/** A compact row's key with its trailing brace group (CENSUS-2b); a key's own `{…}` holds backticks. */
+const COMPACT_ROW_BRACES_RE = /^(.*\S)\s+\{([^{}`]*)\}$/;
+/** A bold compact row with its brace group between the label and the em dash (CENSUS-2b). */
+const COMPACT_BOLD_BRACES_RE = /^(\*\*(?:(?!\*\*).)+\*\*)\s*\{([^{}`]*)\}\s*((?:\*\([^*]*\)\*\s*)?—\s+1\.\s+`\[.*)$/;
 
 /**
  * Validate a pool's brace group into its declaration.
@@ -526,10 +536,19 @@ function parseAnnex(src, headerRe, label, options = {}) {
     }
 
     const bulletRow = line.match(COMPACT_BULLET_RE);
-    const boldRow = bulletRow ? null : line.match(COMPACT_BOLD_RE);
+    // CENSUS-2b: a bold compact row carries its brace group after its label (`**\`port\`** {coast} — 1. …`).
+    const boldRowBraced = bulletRow ? null : line.match(COMPACT_BOLD_BRACES_RE);
+    const boldRow = bulletRow ? null : (boldRowBraced ? `${boldRowBraced[1]} ${boldRowBraced[3]}` : line).match(COMPACT_BOLD_RE);
     const compact = bulletRow || boldRow;
     if (compact) {
-      const rowKey = poolKeyOf(compact[1]);
+      // CENSUS-2b: a compact row is its own pool, so its brace group rides the ROW KEY
+      // (`- \`STRONG\` {crisis-scoped} — 1. …`), read off before the key is formed so the key —
+      // hashed into the draw — is byte-identical. A key's own braces (`head word in {\`Secure\`, …}`)
+      // carry backticks and are never a declaration.
+      const rowBraced = compact[1].match(COMPACT_ROW_BRACES_RE);
+      const rowKey = poolKeyOf(rowBraced ? rowBraced[1] : compact[1]);
+      if (rowBraced) lastBraces = poolBraces(rowBraced[2], `${label} ${block.id} :: ${rowKey}`);
+      if (boldRow && boldRowBraced) lastBraces = poolBraces(boldRowBraced[2], `${label} ${block.id} :: ${rowKey}`);
       // A bulleted row NESTS under the bold group heading above it; a row carrying its
       // own bold label IS the pool and takes no prefix (and clears the pending label,
       // so a following bullet cannot inherit a heading that was never a group).
@@ -578,8 +597,12 @@ function parseAnnex(src, headerRe, label, options = {}) {
       // A block whose variants carry no label at all has ONE pool (every causal
       // family, and the few single-state blocks); '*' is its reserved key.
       if (!pool) openPool(SOLE_POOL);
+      const slot = canonical[2] ? canonical[2].split('·').map((p) => p.trim()).filter(Boolean) : [];
+      if (slot.some((p) => GRAMMAR_TAG_RE.test(p))) {
+        throw new Error(`${label} ${block.id}: a canonical row's tag slot carries a \`grammar:\` tag (line ${i + 1}); the canonical row realises the engine's own order`);
+      }
       pool.variants.push({
-        index: 0, angle: 'canonical', marks: [], grammar: null, wordings: [], text: cleanText(canonical[2]),
+        index: 0, angle: 'canonical', marks: slot, grammar: null, wordings: [], text: cleanText(canonical[3]),
       });
       lastIndex = 0;
       continue;
@@ -638,7 +661,8 @@ function assertNothingDropped(src, headerRe, blocks, label, options = {}) {
     // A FACE is not a numbered row, so the numbering guard never sees it and the drop check
     // has to count it separately or a wording set could go missing exactly as a variant could.
     if (FACE_ROW_RE.test(line)) { faceRows += 1; continue; }
-    const compact = line.match(COMPACT_BULLET_RE) || line.match(COMPACT_BOLD_RE);
+    const braced = line.match(COMPACT_BOLD_BRACES_RE);
+    const compact = line.match(COMPACT_BULLET_RE) || (braced ? `${braced[1]} ${braced[3]}` : line).match(COMPACT_BOLD_RE);
     if (compact) tagged += [...compact[2].matchAll(COMPACT_VARIANT_RE)].length;
   }
   const captured = blocks.reduce(

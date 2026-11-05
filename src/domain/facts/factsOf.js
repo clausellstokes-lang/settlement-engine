@@ -74,6 +74,8 @@ export function factsOf(record, options = {}) {
     get warState() { return warStateOf(record, options); },
     /** fact 11: a live institution of a kind */
     hasInstitution: (/** @type {string} */ kind) => hasInstitution(record, kind),
+    /** R-AE (CENSUS-1f): THE ONE composite sacred house — a temple-kind house (church, cathedral, shrine, chapel, abbey) ∨ a monastery-kind house (monastery, friary), as the roster names them; `temple` stays narrow */
+    get sacredHouse() { return hasInstitution(record, 'temple') || hasInstitution(record, 'monastery'); },
     /** CENSUS-4b (the chair's answer 4): a live non-criminal guild on the roster ∨ a guild power (`guild.js`) */
     get guild() { return guildOf(record); },
     /** fact 12: small / middling / large */
@@ -110,11 +112,16 @@ export function factsOf(record, options = {}) {
  * water home takes the world law's `portKind` (the same `waterAccessKind` rule). The self-check
  * (`cert:false-presumption`) re-asserts every declared atom against the FINAL record, so a fact a
  * later step changes is caught by name.
- * @param {{ institutions?: unknown, config?: any, tier?: unknown, stress?: unknown }} [partial]
+ * `powerStructure` (CENSUS-4d, R-V): a site drawn after the power step hands ONLY the parts
+ * measured as settled at its draw — the NPC goal site hands `{ government }`, so the ruler kind
+ * reads (0 of 585 births differ between `generatePopulation` and birth, CENSUS-4c); the factions
+ * are not settled there (the density law can empty a guild faction later), so they are not
+ * handed. Absent, the record carries none, as before.
+ * @param {{ institutions?: unknown, config?: any, tier?: unknown, stress?: unknown, powerStructure?: unknown }} [partial]
  * @param {{ portKind?: 'maritime'|'river'|'none' } | null} [worldLaw]
  */
 export function birthFactsOf(partial = {}, worldLaw = null) {
   const config = partial.config || {};
   const stress = partial.stress ?? (Array.isArray(config.stressTypes) ? config.stressTypes.map((/** @type {unknown} */ type) => ({ type })) : []);
-  return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
+  return factsOf({ institutions: partial.institutions, config, tier: partial.tier ?? config.tier, stress, powerStructure: partial.powerStructure }, worldLaw?.portKind ? { waterKind: worldLaw.portKind } : {});
 }

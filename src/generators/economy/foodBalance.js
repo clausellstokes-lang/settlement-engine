@@ -17,6 +17,7 @@ import {
 } from '../../domain/content/customContentSemanticAuthority.js';
 import { availableNativeResourceKeys } from '../../domain/resourceSemantics.js';
 import { resolveTerrain } from '../../domain/resolveTerrain.js';
+import { resolveSibling } from '../../domain/facts/drawDeclared.js';
 import {
   hasTradeRouteConnection,
   isTradeRouteDisconnected,
@@ -733,7 +734,17 @@ export function appendProvisioningAtScaleDeps(
   }
 }
 
-export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance) => {
+/**
+ * CENSUS-1f unit 3 (Appendix B item 23, T): every printed hook resolves through
+ * `resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)` (below) — the timber line's `navigable` (its twin
+ * drops "shipbuilding"), the iron line's `institution: smith` (its twin drops the blacksmiths), the
+ * starving line carried for the self-check (no twin: a refused original keeps its text). `facts`
+ * is the birth's partial record at the economy step (the roster, the config, the tier, the
+ * economic state: `viability.js`); absent, the hooks print unchanged (resolveSibling's rule).
+ * @param {any} population @param {any} terrain @param {any} institutions @param {any} config @param {any} foodBalance
+ * @param {object | (() => object) | null} [facts]
+ */
+export const deriveSupplyRiskAnalysis = (population, terrain, institutions, config, foodBalance, facts = null) => {
   const issues = [];
   const warnings = [];
   const hooks = [];
@@ -825,7 +836,8 @@ export const deriveSupplyRiskAnalysis = (population, terrain, institutions, conf
     hasExternalSupply,
   );
 
-  return { issues, warnings, plotHooks: hooks };
+  const resolved = hooks.map((h) => ({ ...h, hook: resolveSibling(h.hook, OUTLOOK_HOOK_SIBLINGS, { facts, poolId: 'foodBalance:OUTLOOK_HOOK_SIBLINGS', surface: 'economics', drawKind: 'T' }) })); // CENSUS-1f
+  return { issues, warnings, plotHooks: resolved };
 };
 
 /**

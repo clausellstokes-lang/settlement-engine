@@ -1,0 +1,842 @@
+{
+ "poolId": "CRISIS_CAST_REASONS",
+ "source": "src/domain/crisis/crisisCast.js :142 CAST_REASONS, :189 CAST_ABSENCES, :206 STAKE_REASONS",
+ "drawKind": "T",
+ "drawSite": "crisisCast.js:473-496 (stakes), :527-529 (bruntBase[sys] via defenceTwinLine), :535-923 (rule branches pick one fixed reason each); rendered through crisisHooksOf (plotHooks.js:385) and the crisis card",
+ "pools": [
+  {
+   "pool": "CAST_REASONS.bruntBase",
+   "keyGuarantees": [
+    "an active crisis entry on the record (crisisEntriesOf(settlement.stress)), cast by castCrisis; the reason is a fixed sentence chosen by the rule branch that filled (or failed to fill) the role",
+    "the key is the FIRST affected system of the crisis kind (catalogFor(kind).affectedSystems, crisisCast.js:520) that hits a losing faction; reachableUnder lists the kinds whose catalog names that system"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed ON an active crisis (poolCrisis [\"crisis\"]), so it opts in with that guarantee; lines are not calm. Kind-scoped lines list the kinds they presume. A T lookup with a fixed fallback (bruntLeast): an excluded line falls back to bruntLeast or its F10 twin.",
+   "lines": [
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.food_security",
+     "text": "the hunger falls first on its people",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "hunger"
+     ],
+     "colour": false,
+     "stop": [],
+     "reachableUnder": [
+      "famine",
+      "mass_migration"
+     ],
+     "note": "reachable under mass_migration with no food deficit, where no hunger is true; crisis: [\"hunger\"] drops it there (the hunger family counts a deficit-band crisis)."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.labor_capacity",
+     "text": "its hands do the work the crisis takes",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": [],
+     "reachableUnder": [
+      "famine",
+      "plague_onset",
+      "slave_revolt",
+      "wartime"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.trade_connectivity",
+     "text": "its trade is cut",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": [],
+     "reachableUnder": [
+      "under_siege",
+      "indebted",
+      "monster_pressure"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.defense_readiness",
+     "text": "its people stand on the walls",
+     "needs": [
+      "walls"
+     ],
+     "excludes": [
+      "crisis: occupied"
+     ],
+     "crisis": [
+      "under_siege",
+      "monster_pressure",
+      "insurgency",
+      "slave_revolt",
+      "wartime"
+     ],
+     "colour": false,
+     "stop": [],
+     "reachableUnder": [
+      "under_siege",
+      "occupied",
+      "monster_pressure",
+      "insurgency",
+      "slave_revolt",
+      "wartime"
+     ],
+     "note": "already twinned by F10: defenceTwinLine swaps to \"its people stand guard\" without walls (src/data/defenceTwinLines.js:42). Under occupation the occupier holds the walls, so the walls line is excluded there and the twin speaks."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.public_legitimacy",
+     "text": "its standing is what the crisis spends",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.healing_capacity",
+     "text": "its people tend the sick",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "plague_onset"
+     ],
+     "colour": false,
+     "stop": [],
+     "reachableUnder": [
+      "plague_onset"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.tax_revenue",
+     "text": "its revenue is what the crisis drains",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.housing_pressure",
+     "text": "its people take in the newcomers",
+     "needs": [
+      "migration: influx"
+     ],
+     "excludes": [],
+     "crisis": [
+      "mass_migration"
+     ],
+     "colour": false,
+     "stop": [],
+     "reachableUnder": [
+      "monster_pressure",
+      "mass_migration"
+     ],
+     "note": "false under an exodus and under monster_pressure (no newcomers on the record); the twin speaks there."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.social_trust",
+     "text": "its people stop trusting their neighbours",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.faction_stability",
+     "text": "its own ranks begin to split",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.law_order",
+     "text": "its people keep an order that is failing",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntBase.criminal_opportunity",
+     "text": "its streets are where the crime lands",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "crime structure",
+      "tier (streets)"
+     ]
+    }
+   ],
+   "twins": [
+    {
+     "text": "its people stand guard",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "under_siege",
+      "occupied",
+      "monster_pressure",
+      "insurgency",
+      "slave_revolt",
+      "wartime"
+     ],
+     "why": "already authored (F10, src/data/defenceTwinLines.js:42-43); the walls-free twin of defense_readiness — listed so Phase B wires it through the declaration rather than the twin table",
+     "existing": true
+    },
+    {
+     "text": "its houses are where the crisis is felt first",
+     "needs": [],
+     "excludes": [
+      "migration: influx"
+     ],
+     "crisis": [
+      "monster_pressure",
+      "mass_migration"
+     ],
+     "why": "housing_pressure under monster_pressure or a mass_migration exodus: no newcomers on the record; names only the faction's own base"
+    },
+    {
+     "text": "the shortage falls first on its people",
+     "needs": [],
+     "excludes": [
+      "crisis: hunger"
+     ],
+     "crisis": [
+      "mass_migration"
+     ],
+     "why": "food_security under mass_migration with no deficit: names a strain on the food the catalog says is hit, without claiming hunger"
+    }
+   ]
+  },
+  {
+   "pool": "CAST_REASONS",
+   "keyGuarantees": [
+    "an active crisis entry on the record (crisisEntriesOf(settlement.stress)), cast by castCrisis; the reason is a fixed sentence chosen by the rule branch that filled (or failed to fill) the role"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed ON an active crisis (poolCrisis [\"crisis\"]), so it opts in with that guarantee; lines are not calm. Kind-scoped lines list the kinds they presume. The linked reasons (*Linked) presume the earlier crisis via CRISIS_LINKS and declare it as a needs crisis atom.",
+   "lines": [
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.bruntLeast",
+     "text": "the least powerful of the house the crisis hits",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.leverRuns",
+     "text": "holds the office the crisis turns on",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.leverInstitution",
+     "text": "the crisis turns on this house, and no one on the roster runs it",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.leverTemporary",
+     "text": "no one on the roster could; here for this crisis",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.instigatorRival",
+     "text": "outranks the seat while it weakens",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.instigatorGains",
+     "text": "its faction gains from the crisis",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.instigatorLinked",
+     "text": "drawn from the house that bore the famine",
+     "needs": [
+      "crisis: famine"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": [],
+     "note": "CRISIS_LINKS famine → insurgency (crisisCast.js:261); the key guarantees both."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.targetSeat",
+     "text": "holds the seat",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.targetSeatContested",
+     "text": "holds the seat, with legitimacy already contested",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy contested (powerStructure.publicLegitimacy flag; no factsOf reader)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.targetGoverning",
+     "text": "the governing house",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.targetLinked",
+     "text": "the occupation's resistance turns on its local face",
+     "needs": [
+      "crisis: occupied"
+     ],
+     "excludes": [],
+     "crisis": [
+      "insurgency"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterCorrupt",
+     "text": "corrupt, with ties to the underworld",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "crime structure (the underworld)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterTrait",
+     "text": "grasping by nature, in a faction that gains",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterPower",
+     "text": "the most powerful of a faction that gains",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.exploiterLinked",
+     "text": "the siege's profiteer, still selling what the siege cut off",
+     "needs": [
+      "crisis: under_siege"
+     ],
+     "excludes": [],
+     "crisis": [
+      "famine"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.scapegoatSeat",
+     "text": "holds the seat, blamed while legitimacy is contested",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy contested"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.scapegoatLever",
+     "text": "holds the lever, blamed while legitimacy is contested",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy contested"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.defenderMilitary",
+     "text": "leads the military",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers / commander (a military-archetype faction is the key)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.defenderOffice",
+     "text": "holds the garrison's office",
+     "needs": [
+      "garrison"
+     ],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [],
+     "note": "already twinned by F10: \"holds the office of the guard\" without a garrison (defenceTwinLines.js:44)."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.defenderInstitution",
+     "text": "the town's defence, with no one on the roster leading it",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (\"the town\")"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.treaterMerchant",
+     "text": "leads the merchants, the seat being contested",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy contested"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.treaterSeat",
+     "text": "holds the seat",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.collaboratorCorrupt",
+     "text": "corrupt, with ties to the underworld",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "crime structure (the underworld)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.collaboratorAmbition",
+     "text": "the most ambitious of a faction that gains",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.collaboratorLinked",
+     "text": "the famine's exploiter, first to deal with the occupier",
+     "needs": [
+      "crisis: famine"
+     ],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.waverer",
+     "text": "its faction could go either way",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.face",
+     "text": "leads the occupying power",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.nextInLine",
+     "text": "next in line, the first choice already holding a role that contradicts this one",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": [],
+     "note": "appended after \"; \" to another reason (crisisCast.js:872)"
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_REASONS.dm",
+     "text": "the DM's word",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "holds the office of the guard",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "already authored (F10, defenceTwinLines.js:44-45): the garrison-free twin of defenderOffice",
+     "existing": true
+    }
+   ]
+  },
+  {
+   "pool": "CAST_ABSENCES",
+   "keyGuarantees": [
+    "an active crisis entry on the record (crisisEntriesOf(settlement.stress)), cast by castCrisis; the reason is a fixed sentence chosen by the rule branch that filled (or failed to fill) the role; the absence names why a role has no holder"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed ON an active crisis (poolCrisis [\"crisis\"]), so it opts in with that guarantee; lines are not calm. Kind-scoped lines list the kinds they presume. noMilitary asserts an absence the defence home can contradict: it excludes garrison and watch.",
+   "lines": [
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noBase",
+     "text": "no house's base is hit",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noLever",
+     "text": "no house the crisis turns on stands here",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noGains",
+     "text": "no faction gains",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.outsideHand",
+     "text": "an outside hand, unnamed",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noSeat",
+     "text": "no seat or governing house stands",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noMilitary",
+     "text": "no military, garrison or watch stands",
+     "needs": [],
+     "excludes": [
+      "garrison",
+      "watch"
+     ],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (no military faction)"
+     ],
+     "note": "defenderCandidates (crisisCast.js:705-723) finds defenders by faction archetype, office regex and Defense-category house — a competing reader; a place whose factsOf says garrison or watch but whose roster the regexes miss prints a false absence."
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noMerchantOrSeat",
+     "text": "no merchant house and no seat stands",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noOccupier",
+     "text": "no occupying power on the roster",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noSplit",
+     "text": "no faction could go either way",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.notContested",
+     "text": "legitimacy is not contested",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy contested (negated)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noLoser",
+     "text": "neither the seat's house nor the lever's loses by it",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.townCap",
+     "text": "the town already has one",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "tier (\"the town\")"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.CAST_ABSENCES.noCandidate",
+     "text": "everyone who could already holds a role that contradicts this one",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ],
+   "twins": [
+    {
+     "text": "no one on the roster leads the defence",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "why": "noMilitary where factsOf says a garrison or watch stands but no roster row could be cast: true without denying the force"
+    }
+   ]
+  },
+  {
+   "pool": "STAKE_REASONS",
+   "keyGuarantees": [
+    "an active crisis entry on the record (crisisEntriesOf(settlement.stress)), cast by castCrisis; the reason is a fixed sentence chosen by the rule branch that filled (or failed to fill) the role; one stake per faction (crisisCast.js:466-496)"
+   ],
+   "poolNeeds": [],
+   "poolExcludes": [],
+   "poolCrisis": [
+    "crisis"
+   ],
+   "crisisScoped": true,
+   "colour": false,
+   "ruling": "Keyed ON an active crisis (poolCrisis [\"crisis\"]), so it opts in with that guarantee; lines are not calm. Kind-scoped lines list the kinds they presume. ",
+   "lines": [
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsVacuum",
+     "text": "the military gains in a vacuum of governance",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "soldiers (military faction is the key)",
+      "legitimacy crisis flag"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsChurch",
+     "text": "the church gains while the seat struggles",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "priest / faith presence (a religious-archetype faction is the key)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsMerchants",
+     "text": "the merchants gain while the seat is endorsed",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "legitimacy endorsed flag"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsCrime",
+     "text": "crime gains from the disorder",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": false,
+     "stop": [
+      "crime structure (a criminal-archetype faction is the key)"
+     ]
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsRival",
+     "text": "outranks the seat while it weakens",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsClaim",
+     "text": "a rival claim to govern gains by it",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsHolds",
+     "text": "holds what the crisis makes scarce",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.gainsOccupier",
+     "text": "the occupier gains by it",
+     "needs": [],
+     "excludes": [],
+     "crisis": [
+      "occupied"
+     ],
+     "colour": false,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.loses",
+     "text": "the crisis hits its base",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.losesSeat",
+     "text": "the seat bears the blame",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.split",
+     "text": "gains and loses by it at once",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    },
+    {
+     "lineId": "CRISIS_CAST_REASONS.STAKE_REASONS.untouched",
+     "text": "no direct stake; it could go either way",
+     "needs": [],
+     "excludes": [],
+     "crisis": "any",
+     "colour": true,
+     "stop": []
+    }
+   ]
+  }
+ ]
+}

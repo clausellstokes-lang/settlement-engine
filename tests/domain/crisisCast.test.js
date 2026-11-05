@@ -63,7 +63,9 @@ const stakeOf = (stakes, f) => stakes.find((k) => k.factionId === f)?.stake;
 
 describe('the eleven rules, each over a hand-built town', () => {
   it('rule 1: the one who bears the brunt is the least powerful whose role touches the base the crisis hits', () => {
-    const s = town();
+    // CENSUS-2d: the record holds the famine it casts (the brunt reason "the hunger falls first"
+    // declares `crisis: hunger`, so a record with no hunger on reads its twin)
+    const s = { ...town(), stress: [{ type: 'famine' }] };
     const c = bruntCandidates(s, 'famine', deriveStakes(s, 'famine'));
     expect(c.candidates[0]).toMatchObject({ role: 'brunt', kind: 'npc', name: 'Ren Hale', reason: CAST_REASONS.bruntBase.food_security });
   });

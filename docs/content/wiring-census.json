@@ -18,12 +18,12 @@
       "src/domain/display/stateProse/stressorsStateProseCandidates.js": "ee0548fc8b662da76e4bf85a1fae30433e9f738277c774e16c6a7abd7fb93552",
       "src/domain/display/stateProse/warFaithStateProseCandidates.js": "b5b193dd2a2c83d077da5f82fd4a5fc5f5ad15a3b6a214725daf41ede442324b"
     },
-    "producerIndexFiles": 1289
+    "producerIndexFiles": 1291
   },
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2334,
+    "variants": 2338,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -16267,7 +16267,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [
         {
@@ -22048,7 +22048,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 2,
+      "variants": 3,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -31329,7 +31329,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -31738,7 +31738,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -39356,7 +39356,7 @@
         "DS-CND-1 :: ARCHETYPE: boom",
         "DS-CND-1 :: ARCHETYPE: flourishing"
       ],
-      "variants": 9,
+      "variants": 10,
       "grammars": 3,
       "blocks": [
         "DS-CND-1"
@@ -39620,7 +39620,7 @@
         "DS-GEN-3 :: safetyProfile.safetyLabel: head word in {Tense, Strained, Restricted, Unsafe}",
         "DS-GEN-3 :: safetyProfile.safetyLabel: head word in {Dangerous, Desperate}"
       ],
-      "variants": 9,
+      "variants": 10,
       "grammars": 4,
       "blocks": [
         "DS-GEN-3"
@@ -50647,7 +50647,7 @@
         "head (via SAFETY_POOL_OF in generalStateProse.js)"
       ],
       "readingFunction": "SAFETY_POOL_OF",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -51549,7 +51549,7 @@
       "subject": "NO-MARKET",
       "fields": [],
       "readingFunction": "marketPoolKey",
-      "count": "2 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -52995,7 +52995,7 @@
         "condition.archetype"
       ],
       "readingFunction": "conditionArchetypePoolKey",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53059,7 +53059,7 @@
       "subject": "FAMILY: recovery",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",

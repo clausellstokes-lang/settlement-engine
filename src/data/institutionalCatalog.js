@@ -528,7 +528,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // The town Mint was filed on Crafts and the city's Mint (official) on Economy until 2026-09-30.
     {
-      shared: { name: 'Mint (official)', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking', 'guild'], priorityCategory: 'economy' },
+      shared: { name: 'Mint (official)', desc: 'State or noble-chartered coin production. Standardises currency across the region. Significant ongoing revenue via seigniorage.', tags: ['banking'], priorityCategory: 'economy' },
       at: {
         town: { name: 'Mint', baseChance: 0.15, desc: 'Converts refined precious metal into standardised coinage. Requires noble or royal charter. Significant revenue for the granting authority.', priorityCategory: 'government' },
         city: { baseChance: 0.4 },
@@ -833,7 +833,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     {
       shared: { name: 'Village scribe' },
       at: {
-        village: { baseChance: 0.15, desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.", tags: ['guild'], priorityCategory: 'government' },
+        village: { baseChance: 0.15, desc: "Can read and write. Copies letters, draws up simple contracts, reads documents for the illiterate. Often the priest's assistant or a monastery-educated lay person.", tags: [], priorityCategory: 'government' },
       },
       ceiling: { tier: 'village', reason: "Town record-keeping sits with guild clerks and the crier; the printing house is the city's writing trade." },
     },
@@ -1093,7 +1093,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
     },
     // Filed on Crafts until 2026-09-30; a civic office, not a craft.
     {
-      shared: { name: 'Town crier', desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market squares. Employed by the city or a guild.', tags: ['guild'], priorityCategory: 'government' },
+      shared: { name: 'Town crier', desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market squares. Employed by the city or a guild.', tags: [], priorityCategory: 'government' },
       at: {
         town: { baseChance: 0.45, desc: 'Official announcer who reads proclamations, market prices, and news at fixed times in the market square. Employed by the town or a guild.' },
         city: { baseChance: 0.4 },
@@ -1259,7 +1259,7 @@ export const INSTITUTION_FAMILIES = Object.freeze([
       },
     },
     {
-      shared: { name: "Veteran's lodge", desc: 'A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords.', tags: ['military', 'guild'], priorityCategory: 'military' },
+      shared: { name: "Veteran's lodge", desc: 'A drinking hall where retired soldiers and mercenaries gather. Informal security, bar brawls, and the occasional job offer for a group needing swords.', tags: ['military'], priorityCategory: 'military' },
       at: {
         village: { baseChance: 0.15 },
         town: { baseChance: 0.2 },

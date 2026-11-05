@@ -85,7 +85,7 @@ export const STRESS_TYPE_META = {
   slave_revolt: {
     label: 'Slave Revolt',
     historyColour: 'political',
-    viabilityNote: 'The slave market\'s commercial operations are suspended. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.',
+    viabilityNote: 'Owners have pulled their work gangs off every task they cannot watch. Labour-dependent production is disrupted. The security apparatus is entirely focused on containment.',
   },
   wartime: {
     label: 'Wartime',

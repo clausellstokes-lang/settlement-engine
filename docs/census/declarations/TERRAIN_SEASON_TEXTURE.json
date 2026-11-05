@@ -1,0 +1,480 @@
+{
+  "poolId": "TERRAIN_SEASON_TEXTURE",
+  "source": "src/data/biomeTexture.js :57 TERRAIN_SEASON_TEXTURE",
+  "drawKind": "T",
+  "drawSite": "src/domain/briefs/roadScene.js:143 biomeSeasonTexture(terrainClass, season) (src/data/biomeTexture.js:117)",
+  "pools": [
+    {
+      "pool": "water",
+      "keyGuarantees": [
+        "road-hop terrain class = water (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.water.spring",
+          "text": "the crossing runs high with meltwater",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.water.summer",
+          "text": "the ford lies low and easy",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.water.autumn",
+          "text": "the water runs cold and grey",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.water.winter",
+          "text": "the crossing is rimed with ice",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "desert",
+      "keyGuarantees": [
+        "road-hop terrain class = desert (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.desert.spring",
+          "text": "the sands are merciful, the wells still sweet",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.desert.summer",
+          "text": "the road shimmers, water rationed by the mile",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.desert.autumn",
+          "text": "the heat breaks and the dunes go long and gold",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.desert.winter",
+          "text": "the nights bite hard over open sand",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "grassland",
+      "keyGuarantees": [
+        "road-hop terrain class = grassland (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.grassland.spring",
+          "text": "the grasslands run green and open",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.grassland.summer",
+          "text": "the plains lie dry and golden underfoot",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.grassland.autumn",
+          "text": "the grass is cut short and the ground firm",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.grassland.winter",
+          "text": "the open ground is hard and bare of cover",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "forest",
+      "keyGuarantees": [
+        "road-hop terrain class = forest (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.forest.spring",
+          "text": "the woodland tracks are soft with new leaf",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.forest.summer",
+          "text": "the forest road runs shaded and close",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.forest.autumn",
+          "text": "the canopy turns and the paths fill with leaf-fall",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.forest.winter",
+          "text": "the bare wood offers little shelter",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "wetland",
+      "keyGuarantees": [
+        "road-hop terrain class = wetland (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.wetland.spring",
+          "text": "the marsh causeways are half-drowned",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.wetland.summer",
+          "text": "the fen road holds, the reeds high and dense",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.wetland.autumn",
+          "text": "the marsh runs to mud and standing water",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.wetland.winter",
+          "text": "the fen freezes patchy and treacherous",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "tundra",
+      "keyGuarantees": [
+        "road-hop terrain class = tundra (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.tundra.spring",
+          "text": "the thaw turns the tundra to a mire",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.tundra.summer",
+          "text": "the tundra is brief-green and passable",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.tundra.autumn",
+          "text": "the ground hardens and the light grows short",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.tundra.winter",
+          "text": "the tundra lies frozen and wind-scoured",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "glacier",
+      "keyGuarantees": [
+        "road-hop terrain class = glacier (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.glacier.spring",
+          "text": "the ice groans but holds the old path",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.glacier.summer",
+          "text": "meltchannels seam the glacier road",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.glacier.autumn",
+          "text": "the ice road firms as the cold returns",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.glacier.winter",
+          "text": "the glacier is a hard white road, and pitiless",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    },
+    {
+      "pool": "mountain",
+      "keyGuarantees": [
+        "road-hop terrain class = mountain (the spatial digest's per-settlement biome, NOT factsOf(r).terrain: the vocabulary differs — water/grassland/wetland/tundra/glacier have no terrain atom)",
+        "season label (no reader, ruling 8)"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Every line presumes its season: stop [\"season\"] per ruling 8, left as is. A road texture asserts no settlement calm: not opted in.",
+      "lines": [
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.mountain.spring",
+          "text": "the high passes open late, still snow-choked",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.mountain.summer",
+          "text": "the pass is clear, the climb long",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.mountain.autumn",
+          "text": "the first snows threaten the high road",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        },
+        {
+          "lineId": "TERRAIN_SEASON_TEXTURE.mountain.winter",
+          "text": "the passes are all but shut",
+          "needs": [],
+          "excludes": [],
+          "crisis": null,
+          "colour": false,
+          "stop": [
+            "season"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -20,6 +20,11 @@
       "where": "any pool line presuming the climate",
       "presumes": "climate",
       "by": "the chair's ruling 8"
+    },
+    {
+      "where": "src/data/biomeTexture.js :: TERRAIN_SEASON_TEXTURE (all 32 cells: 8 terrains × 4 seasons)",
+      "presumes": "season",
+      "by": "CENSUS-2e (ruling 8): every cell presumes its season and no record field holds one; left as it is, the table ruled {colour} otherwise"
     }
   ],
   "statePools": {

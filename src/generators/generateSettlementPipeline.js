@@ -536,7 +536,7 @@ export function regenNPCsPipeline(settlement, config, options = {}) {
       powerStructure: settlement.powerStructure,
       economicState: settlement.economicState,
     }, config.culture || 'germanic', rollConfig, generationContext);
-    const relationships = generateRelationships(npcs, config, settlement.institutions || []);
+    const relationships = generateRelationships(npcs, config, settlement.institutions || [], { government: settlement.powerStructure?.government ?? null, tier: settlement.tier }); // CENSUS-1f (site 19): the government only (R-Z)
     // GS-2 (ODQ §934.101): the faction groups and the conflicts are derived from the FINAL
     // roster below, exactly as assembly derives them, because an NPC's power affiliation is
     // decided by the enrichment tail. The tier-1-only re-link that used to sit here (the

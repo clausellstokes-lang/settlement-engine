@@ -3908,10 +3908,9 @@
     },
     {
       "id": "Bowyers & fletchers (guild)|Military supply",
-      "text": "Contract supply of bows and arrows to garrison and militia. Volume pricing.",
+      "text": "Contract supply of bows and arrows to the local guard. Volume pricing.",
       "needs": [
-        "garrison",
-        "militia"
+        "guardPresence"
       ],
       "excludes": [],
       "crisis": [],

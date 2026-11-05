@@ -1,0 +1,69 @@
+{
+  "poolId": "ECHO_PREFIXES_DOSSIER",
+  "source": "src/domain/dossier/plotHooks.js :143 ECHO_PREFIXES (lower-cased MATCH copy) — the rendered copy is src/generators/historyGenerator.js :268",
+  "drawKind": "A",
+  "drawSite": "plotHooks.js:166 hookFamilyId strips the first matching prefix for the dedupe family key (a match list, never printed). The PRINTED draw is R: historyGenerator.js:279 ECHO_PREFIXES[Math.floor(_rng() * 5)], prepended to a present-tense history hook when 30 < yearsAgo <= 80.",
+  "pools": [
+    {
+      "pool": "ECHO_PREFIXES",
+      "keyGuarantees": [
+        "the hook belongs to a history event 31-80 years ago and reads present-tense (contains is/are/has/have/exists/being) — historyGenerator.js:259-281",
+        "the prefix is joined to the hook with its first letter lowered"
+      ],
+      "poolNeeds": [],
+      "poolExcludes": [],
+      "poolCrisis": null,
+      "crisisScoped": false,
+      "colour": false,
+      "ruling": "Renders under crisis (history hooks print on every page) but frames a past discovery and asserts no calm: stays out. Not a colour pool: three prefixes presume a written record or its keeper (no reader). The plotHooks.js copy must stay byte-for-byte the lower-cased historyGenerator copy, or the dedupe family key stops folding the variant — any Phase B twin must land in BOTH lists.",
+      "lines": [
+        {
+          "lineId": "ECHO_PREFIXES[0]",
+          "text": "Old records suggest ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "records / an archive"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[1]",
+          "text": "A recently surfaced document implies ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "records (a document)"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[2]",
+          "text": "Family accounts passed down from the time claim ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "stop": []
+        },
+        {
+          "lineId": "ECHO_PREFIXES[3]",
+          "text": "An archivist's notes from that period reveal ",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "stop": [
+            "an archivist (a keeper of records)"
+          ]
+        },
+        {
+          "lineId": "ECHO_PREFIXES[4]",
+          "text": "Evidence that survived the years indicates ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "stop": []
+        }
+      ]
+    }
+  ]
+}
