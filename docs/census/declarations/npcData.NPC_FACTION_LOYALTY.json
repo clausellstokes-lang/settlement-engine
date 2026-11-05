@@ -8,12 +8,12 @@
     "crisisScoped": false,
     "keyDeclares": {
       "small_settlement": [
-        "tier: <= hamlet"
+        "tier: ≤ hamlet"
       ]
     },
     "lines": 80,
     "declaring": 19,
-    "note": "Keyed by NPC category, but the key guarantees no record atom: under an active stress generatePlotHook re-routes 40% of draws to a stress-mapped category (e.g. infiltrated → criminal, plague_onset → religious), so any NPC can draw any category's line; hence crime/temple/watch/garrison/magic are declared on lines, not keyed. small_settlement is drawn only at thorp/hamlet (45%), so its tier is keyed. 'the guard' / 'guard captain' read as the watch; 'their soldiers' as garrison. economy#6 ('lost at sea') has an inland twin in inlandHookLines.js (applied at npcGenerator.js:126-127 by portKind), declared 'water' to match. INEXPRESSIBLE (colour:false, empty): government#10 (a civil case/deposition presumes a court); military#1 and #10 (an armoury / weapons cache presumes some standing armed force, any of watch/militia/garrison -- a disjunction the needs list cannot state). religious#3 'the gift' left undeclared (could be divine, not magic). Season/moon: small_settlement#3 'each new moon', #7 'last season' -- no atom."
+    "note": "Keyed by NPC category, but the key guarantees no record atom: under an active stress generatePlotHook re-routes 40% of draws to a stress-mapped category (e.g. infiltrated → criminal, plague_onset → religious), so any NPC can draw any category's line; hence crime/temple/watch/garrison/magic are declared on lines, not keyed. small_settlement is drawn only at thorp/hamlet (45%), so its tier is keyed. 'the guard' / 'guard captain' read as the watch; 'their soldiers' as garrison. economy#6 ('lost at sea') has an inland twin in inlandHookLines.js (applied at npcGenerator.js:126-127 by portKind), declared 'water' to match. INEXPRESSIBLE (colour:false, empty): government#10 (a civil case/deposition presumes a court); military#1 and #10 (an armoury / weapons cache presumes some standing armed force, any of watch/militia/garrison -- a disjunction the needs list cannot state). religious#3 'the gift' left undeclared (could be divine, not magic). Season/moon: small_settlement#3 'each new moon', #7 'last season' -- no atom. OWNERSHIP (vocabulary ruling 7, 2026-11-04): the hook tables are CENSUS-3's to apply; this ledger is CENSUS-4's phase-A read, handed over, not applied here."
   },
   "rows": [
     {
@@ -28,7 +28,7 @@
       "id": "government#1",
       "text": "They've been quietly buying up property in a district that hasn't been announced as a development site. Yet.",
       "needs": [
-        "tier: >= town"
+        "tier: ≥ town"
       ],
       "excludes": [],
       "crisis": [],
@@ -113,7 +113,7 @@
       "text": "Three guards have gone missing in the same district on night patrol. The report filed says they deserted.",
       "needs": [
         "watch",
-        "tier: >= town"
+        "tier: ≥ town"
       ],
       "excludes": [],
       "crisis": [],
@@ -349,7 +349,7 @@
       "id": "economy#6",
       "text": "A valuable cargo was reported lost at sea. The manifest has reappeared in a market two settlements away.",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -391,7 +391,7 @@
       "id": "criminal#0",
       "text": "One of their people is talking to the guard. They don't know which one yet. They're watching.",
       "needs": [
-        "crime",
+        "organised crime",
         "watch"
       ],
       "excludes": [],
@@ -402,7 +402,7 @@
       "id": "criminal#1",
       "text": "A valuable item came through their network recently. Three different parties have asked about it quietly.",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -412,7 +412,7 @@
       "id": "criminal#2",
       "text": "Someone in the legitimate government is playing both sides. That's useful, until it isn't.",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -422,7 +422,7 @@
       "id": "criminal#3",
       "text": "A job went wrong in a way that suggests information was leaked. They have three suspects.",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -440,7 +440,7 @@
       "id": "criminal#5",
       "text": "A new face has appeared in three separate incidents involving their operations. Coincidence or surveillance?",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -450,7 +450,7 @@
       "id": "criminal#6",
       "text": "The guard captain has a file. They know because someone who works for the guard captain also works for them.",
       "needs": [
-        "crime",
+        "organised crime",
         "watch"
       ],
       "excludes": [],
@@ -461,7 +461,7 @@
       "id": "criminal#7",
       "text": "Someone tried to rob one of their fronts. The attempt was professional. That's more worrying than amateur.",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],

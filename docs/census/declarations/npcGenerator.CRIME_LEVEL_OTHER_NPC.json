@@ -8,7 +8,7 @@
     "crisisScoped": false,
     "keyDeclares": {
       "*": [
-        "other-npc"
+        "other npc"
       ]
     },
     "lines": 8,

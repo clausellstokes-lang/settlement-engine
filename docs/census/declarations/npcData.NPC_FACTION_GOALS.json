@@ -17,22 +17,22 @@
         "institution: monastery"
       ],
       "Thieves' Guild Master": [
-        "crime"
+        "organised crime"
       ],
       "Smuggler Chief": [
-        "crime"
+        "organised crime"
       ],
       "Crime Lord": [
-        "crime",
-        "tier: >= city"
+        "organised crime",
+        "tier: ≥ city"
       ],
       "Tower Wizard": [
         "magic",
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "Guild Archmage": [
         "magic",
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "Hedge Wizard": [
         "magic"
@@ -41,7 +41,7 @@
         "magic"
       ],
       "Inquisitor": [
-        "tier: >= city"
+        "tier: ≥ city"
       ]
     },
     "lines": 108,
@@ -265,7 +265,7 @@
       "id": "Guard Captain#1.short",
       "text": "Identify which of their officers is on the thieves' guild payroll",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -577,7 +577,7 @@
       "id": "Master Craftsman#0.short",
       "text": "Complete a prestigious commission that will make their reputation in the city",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -901,7 +901,7 @@
       "id": "Healer#0.short",
       "text": "Identify the source of a cluster of unusual illnesses in the western quarter",
       "needs": [
-        "tier: >= town"
+        "tier: ≥ town"
       ],
       "excludes": [],
       "crisis": [],

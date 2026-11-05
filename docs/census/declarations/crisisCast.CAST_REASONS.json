@@ -276,7 +276,7 @@
       "id": "defenderInstitution",
       "text": "the town's defence, with no one on the roster leading it",
       "needs": [
-        "tier: >= town"
+        "tier: ≥ town"
       ],
       "excludes": [],
       "crisis": [],
@@ -317,12 +317,11 @@
     {
       "id": "collaboratorLinked",
       "text": "the famine's exploiter, first to deal with the occupier",
-      "needs": [
-        "occupied"
-      ],
+      "needs": [],
       "excludes": [],
       "crisis": [
-        "famine"
+        "famine",
+        "occupied"
       ],
       "colour": false
     },

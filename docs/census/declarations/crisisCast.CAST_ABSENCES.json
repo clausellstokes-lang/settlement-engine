@@ -107,7 +107,7 @@
       "id": "townCap",
       "text": "the town already has one",
       "needs": [
-        "tier: >= town"
+        "tier: ≥ town"
       ],
       "excludes": [],
       "crisis": [],

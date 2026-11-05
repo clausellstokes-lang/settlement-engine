@@ -1,5 +1,14 @@
 # CENSUS-4 declaration ledger — the atom words (phase A, 2026-11-04)
 
+> **PHASE B (2026-11-05): SUPERSEDED BY `src/domain/facts/factVocabulary.js`** (CENSUS-1b, corrected to the chair's
+> vocabulary rulings `docs/census/VOCABULARY_RULINGS_2026-11-04.md`). The ledger was re-spelled mechanically, never
+> re-judged (177 atoms): `water` → `navigable`; `other-npc` → `other npc`; `famine` (a line saying people starve) →
+> `starving`; `crime` → `organised crime`; `crisis: "calm"` → `excludes: crisis`; `ruler: council, elder, mayor, priest`
+> → `excludes: ruler: lord, ruler: occupier` (a keyed atom takes one key); a crisis kind written in `needs` → the line's
+> `crisis` list; `tier: >=` → `tier: ≥`. `tests/lint/census4Ledger.walker.test.js` holds every atom to the vocabulary
+> and names the atoms with no reader yet (`institution: guild` 21 lines, `organised crime` 10). The table below is the
+> phase-A record.
+
 The side ledger of `docs/census/declarations/<pool-id>.json` (one file per pool) uses EXACTLY
 these atom words: the design's §1 facts (`docs/DESIGN_POOL_CENSUS.md`), each answered by its ONE
 reader in `src/domain/facts/factsOf.js` (CENSUS-1's fourteen homes). Phase B maps them onto

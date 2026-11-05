@@ -8,13 +8,13 @@
     "crisisScoped": false,
     "keyDeclares": {
       "thorp|Economy|Fishing community": [
-        "water"
+        "navigable"
       ],
       "hamlet|Economy|Fisher's landing": [
-        "water"
+        "navigable"
       ],
       "village|Economy|Fisher's landing": [
-        "water"
+        "navigable"
       ],
       "thorp|Economy|Woodcutter's camp": [
         "terrain: forest"
@@ -41,25 +41,25 @@
         "terrain: desert"
       ],
       "town|Economy|Docks/port facilities": [
-        "water",
+        "navigable",
         "institution: docks"
       ],
       "city|Economy|Docks/port facilities": [
-        "water",
+        "navigable",
         "institution: docks"
       ],
       "metropolis|Economy|Docks/port facilities": [
-        "water",
+        "navigable",
         "institution: docks"
       ],
       "town|Economy|Harbour master's office": [
-        "water"
+        "navigable"
       ],
       "city|Economy|Harbour master's office": [
-        "water"
+        "navigable"
       ],
       "metropolis|Economy|Harbour master's office": [
-        "water"
+        "navigable"
       ],
       "town|Economy|Post relay station": [
         "institution: tavern"
@@ -428,7 +428,7 @@
       "id": "hamlet|Economy|Fisher's landing#1",
       "text": "A rough jetty and its salting-and-drying racks. Where there is water, the fish are what the hamlet lives on.",
       "needs": [
-        "tier: <= hamlet"
+        "tier: ≤ hamlet"
       ],
       "excludes": [],
       "crisis": [],
@@ -990,7 +990,7 @@
       "id": "hamlet|Criminal|Smuggling waypoint#0",
       "text": "Goods route through the hamlet to slip past the toll roads and customs posts. It is paid for the service in kind, and glad of it.",
       "needs": [
-        "tier: <= hamlet"
+        "tier: ≤ hamlet"
       ],
       "excludes": [],
       "crisis": [],
@@ -1000,7 +1000,7 @@
       "id": "hamlet|Criminal|Smuggling waypoint#1",
       "text": "Contraband moves through here, skirting the tolls and the customs checks. The hamlet takes its cut in goods rather than coin.",
       "needs": [
-        "tier: <= hamlet"
+        "tier: ≤ hamlet"
       ],
       "excludes": [],
       "crisis": [],
@@ -1058,7 +1058,7 @@
       "id": "village|Economy|Fish market#0",
       "text": "An open stall or small roofed market for selling the day's catch. The price falls quickly, for fish keeps no better than a day.",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -1068,7 +1068,7 @@
       "id": "village|Economy|Fish market#1",
       "text": "Where the day's catch is sold, from an open stall or a small covered market. Prices sink fast. Fish will not wait.",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -2530,7 +2530,7 @@
       "id": "town|Economy|Listening post#1",
       "text": "The modest end of the news trade. A paid register of who came into the city and what they reported, kept openly and taxed like any other counter.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -3034,7 +3034,7 @@
       "id": "town|Religious|Elder Grove Council#0",
       "text": "Senior druids who govern how their circle deals with the city. They may keep a grove hidden beneath the streets, hold the line between the city's spread and the wild, or advise its rulers on the land. Found where a city has come to terms with the wild.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -3044,7 +3044,7 @@
       "id": "town|Religious|Elder Grove Council#1",
       "text": "A council of elder druids charged with their circle's standing in the city: sometimes tending a concealed grove below the streets, sometimes mediating between expansion and wild ground, sometimes counselling those in power on ecological matters. It arises only in cities at peace with the wild.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -3326,7 +3326,7 @@
       "id": "town|Defense|Citadel#1",
       "text": "An innermost stronghold, the city's final hold under siege.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -3545,7 +3545,7 @@
       "text": "Message birds kept above a city yard by people who declare nothing. The word arrives unsigned and moves faster than the watch.",
       "needs": [
         "watch",
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],

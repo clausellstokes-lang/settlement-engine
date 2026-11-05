@@ -9,7 +9,7 @@
     "keyDeclares": {
       "*__governance_fractured__*": [],
       "*__corruption__*": [
-        "crime"
+        "organised crime"
       ],
       "*__food_crisis__*": [
         "hunger"
@@ -18,7 +18,7 @@
       "*__contested__*": [],
       "*__stable__*": [],
       "criminal__*__*": [
-        "crime"
+        "organised crime"
       ],
       "magic__*__*": [
         "magic"
@@ -281,24 +281,30 @@
       "id": "government__stable__dominant.goal",
       "text": "Use current stability to address structural vulnerabilities before conditions change.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "government__stable__dominant.constraint",
       "text": "Stability reduces the sense of urgency that would justify the resources and disruption required to address those vulnerabilities.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "government__stable__subordinate.position",
       "text": "Holds a civic position in a well-functioning settlement. The role is defined by administration rather than crisis.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -561,32 +567,40 @@
       "id": "military__stable__dominant.position",
       "text": "Commands enforcement in a well-ordered settlement. The role is preventive rather than responsive, and authority derives from institutional legitimacy.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "military__stable__dominant.goal",
       "text": "Maintain the enforcement capacity and institutional culture that makes current stability possible.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "military__stable__dominant.constraint",
       "text": "Stable conditions make it harder to justify the resources and authority that would be needed if conditions changed.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "military__stable__subordinate.position",
       "text": "Leads a subordinate enforcement unit in a stable settlement. The role is routine, the risks are low, and advancement requires distinguishing the unit in conditions that offer few distinctions.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -601,8 +615,10 @@
       "id": "military__stable__subordinate.constraint",
       "text": "Routine excellence is expected and unremarkable; meaningful advancement requires either a crisis or a patron.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -849,8 +865,10 @@
       "id": "economy__stable__dominant.position",
       "text": "Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -873,8 +891,10 @@
       "id": "economy__stable__subordinate.position",
       "text": "Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1137,8 +1157,10 @@
       "id": "crafts__stable__dominant.position",
       "text": "Controls organized commercial infrastructure in a functioning settlement. The position is secure and the leverage is real.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1161,8 +1183,10 @@
       "id": "crafts__stable__subordinate.position",
       "text": "Operates commercial interests in a stable settlement from a position secondary to the dominant commercial faction.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1425,8 +1449,10 @@
       "id": "religious__stable__dominant.position",
       "text": "Leads an established religious institution in a settlement with functional civic order.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1441,16 +1467,20 @@
       "id": "religious__stable__dominant.constraint",
       "text": "Institutional stability tends toward complacency. The challenges that would justify institutional expansion are currently absent.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "religious__stable__subordinate.position",
       "text": "Serves a religious position secondary to the dominant institution in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1713,8 +1743,10 @@
       "id": "criminal__stable__dominant.position",
       "text": "Operates within a well-ordered settlement where enforcement is functional and operational space is defined by what enforcement chooses not to pursue.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -1737,8 +1769,10 @@
       "id": "criminal__stable__subordinate.position",
       "text": "Holds a secondary position in a criminal network operating in a settled environment with functional enforcement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2001,8 +2035,10 @@
       "id": "magic__stable__dominant.position",
       "text": "Leads established arcane institutions in a functional settlement. The position is secure, the services are in demand.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2017,16 +2053,20 @@
       "id": "magic__stable__dominant.constraint",
       "text": "Arcane authority in stable conditions faces gradual bureaucratic containment. Institutionalization brings limits alongside legitimacy.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "magic__stable__subordinate.position",
       "text": "Practices arcane arts in a secondary institutional position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2097,8 +2137,10 @@
       "id": "other__stable__dominant.position",
       "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2113,16 +2155,20 @@
       "id": "other__stable__dominant.constraint",
       "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "other__stable__subordinate.position",
       "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2145,8 +2191,10 @@
       "id": "other__corruption__dominant.position",
       "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2161,16 +2209,20 @@
       "id": "other__corruption__dominant.constraint",
       "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "other__corruption__subordinate.position",
       "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2193,8 +2245,10 @@
       "id": "other__food_crisis__dominant.position",
       "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2209,16 +2263,20 @@
       "id": "other__food_crisis__dominant.constraint",
       "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "other__food_crisis__subordinate.position",
       "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2241,8 +2299,10 @@
       "id": "other__economic_stress__dominant.position",
       "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2257,16 +2317,20 @@
       "id": "other__economic_stress__dominant.constraint",
       "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "other__economic_stress__subordinate.position",
       "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2289,8 +2353,10 @@
       "id": "other__contested__dominant.position",
       "text": "Holds traditional or hereditary status in a stable settlement where institutional competition constrains traditional influence.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
@@ -2305,16 +2371,20 @@
       "id": "other__contested__dominant.constraint",
       "text": "Traditional authority in stable conditions is in slow structural decline relative to institutional authority.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {
       "id": "other__contested__subordinate.position",
       "text": "Holds a secondary traditional or hereditary position in a stable settlement.",
       "needs": [],
-      "excludes": [],
-      "crisis": "calm",
+      "excludes": [
+        "crisis"
+      ],
+      "crisis": [],
       "colour": false
     },
     {

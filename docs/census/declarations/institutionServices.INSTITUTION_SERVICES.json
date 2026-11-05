@@ -55,15 +55,15 @@
       ],
       "Major Port": [
         "institution: docks",
-        "water"
+        "navigable"
       ],
       "Thieves Guild": [
         "institution: guild",
-        "crime"
+        "organised crime"
       ],
       "Assassins Guild": [
         "institution: guild",
-        "crime"
+        "organised crime"
       ],
       "Adventurers Guild": [
         "institution: guild"
@@ -75,7 +75,7 @@
         "magic"
       ],
       "Front Business": [
-        "crime"
+        "organised crime"
       ],
       "Inn/Tavern District": [
         "institution: tavern"
@@ -88,7 +88,7 @@
       ],
       "Harbour Master's Office": [
         "institution: docks",
-        "water"
+        "navigable"
       ],
       "Grove Shrine": [
         "institution: temple"
@@ -110,10 +110,10 @@
       ],
       "Docks/port facilities": [
         "institution: docks",
-        "water"
+        "navigable"
       ],
       "Shipyard": [
-        "water"
+        "navigable"
       ],
       "River boatyard": [
         "river"
@@ -139,10 +139,10 @@
       ],
       "Assassins' guild": [
         "institution: guild",
-        "crime"
+        "organised crime"
       ],
       "Bandit affiliate": [
-        "crime"
+        "organised crime"
       ],
       "Bardic college": [
         "institution: school"
@@ -151,10 +151,10 @@
         "river"
       ],
       "Black market": [
-        "crime"
+        "organised crime"
       ],
       "Black market bazaar": [
-        "crime"
+        "organised crime"
       ],
       "Bowyers & fletchers (guild)": [
         "institution: guild"
@@ -175,7 +175,7 @@
         "institution: granary"
       ],
       "Contract killer": [
-        "crime"
+        "organised crime"
       ],
       "Craft guilds (5-15)": [
         "institution: guild"
@@ -224,7 +224,7 @@
         "institution: tavern"
       ],
       "Kidnapping ring": [
-        "crime"
+        "organised crime"
       ],
       "Mages' guild": [
         "institution: guild",
@@ -253,7 +253,7 @@
         "institution: guild"
       ],
       "Multiple criminal factions": [
-        "crime"
+        "organised crime"
       ],
       "Multiple garrisons": [
         "garrison"
@@ -299,24 +299,24 @@
         "hospital"
       ],
       "Smuggling operation": [
-        "crime"
+        "organised crime"
       ],
       "Smuggling waypoint": [
-        "crime"
+        "organised crime"
       ],
       "Street gang": [
-        "crime"
+        "organised crime"
       ],
       "Taverns (5-20)": [
         "institution: tavern"
       ],
       "Thieves' guild (powerful)": [
         "institution: guild",
-        "crime"
+        "organised crime"
       ],
       "Thieves' guild chapter": [
         "institution: guild",
-        "crime"
+        "organised crime"
       ],
       "Town watch": [
         "watch"
@@ -334,7 +334,7 @@
         "watch"
       ],
       "Human trafficking network": [
-        "crime"
+        "organised crime"
       ],
       "Town granary": [
         "institution: granary"
@@ -365,25 +365,25 @@
         "institution: monastery"
       ],
       "Local fence": [
-        "crime"
+        "organised crime"
       ],
       "Fence (word of mouth)": [
-        "crime"
+        "organised crime"
       ],
       "Outlaw shelter": [
-        "crime"
+        "organised crime"
       ],
       "Front businesses": [
-        "crime"
+        "organised crime"
       ],
       "Smuggling network": [
-        "crime"
+        "organised crime"
       ],
       "Underground network": [
-        "crime"
+        "organised crime"
       ],
       "Underground city": [
-        "crime"
+        "organised crime"
       ],
       "Palisade or earthworks": [
         "palisade"
@@ -1330,7 +1330,7 @@
       "id": "Navy|Convoy escort",
       "text": "Armed escort for merchant vessels",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -1340,7 +1340,7 @@
       "id": "Navy|Privateer licensing",
       "text": "Letters of marque for commerce raiding",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -1350,7 +1350,7 @@
       "id": "Navy|Shipyard access",
       "text": "Naval construction and repair",
       "needs": [
-        "water"
+        "navigable"
       ],
       "excludes": [],
       "crisis": [],
@@ -1702,7 +1702,7 @@
       "id": "Inn/Tavern District|Black market access",
       "text": "Someone in here knows someone",
       "needs": [
-        "crime"
+        "organised crime"
       ],
       "excludes": [],
       "crisis": [],
@@ -1721,7 +1721,7 @@
       "text": "Retired soldiers supplementing the village watch. Reliable, cheap, and unwilling to be bribed.",
       "needs": [
         "watch",
-        "tier: <= village"
+        "tier: ≤ village"
       ],
       "excludes": [],
       "crisis": [],
@@ -1732,7 +1732,7 @@
       "text": "Basic weapons training for village militia. They will not be knights, but they will not die in the first volley.",
       "needs": [
         "militia",
-        "tier: <= village"
+        "tier: ≤ village"
       ],
       "excludes": [],
       "crisis": [],
@@ -2628,7 +2628,7 @@
       "id": "Elder Grove Council|Druidic consultation",
       "text": "Advise city authorities on ecological matters.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -7318,7 +7318,7 @@
       "id": "Citadel|Last refuge",
       "text": "The final defensible point in the city. Holds the essential population if the rest falls.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
@@ -7328,7 +7328,7 @@
       "id": "Citadel|Military command",
       "text": "Command and coordination centre for the city's defense.",
       "needs": [
-        "tier: >= city"
+        "tier: ≥ city"
       ],
       "excludes": [],
       "crisis": [],
