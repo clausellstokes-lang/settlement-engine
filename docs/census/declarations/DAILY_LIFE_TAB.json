@@ -624,16 +624,15 @@
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[1]",
      "text": "{food}. Work is divided by habit more than proclamation. Farmers, haulers, priests, guards, and tradespeople all know which shortages can be endured and which ones will turn into arguments before sundown.",
-     "needs": [],
+     "needs": [
+      "guardPresence",
+      "priest"
+     ],
      "excludes": [],
      "crisis": "any",
      "colour": false,
-     "stop": [
-      "priest / faith presence beyond institution: temple (priests)",
-      "guards (a GUARD_WORDS hit)",
-      "guard presence (any of watch / garrison / militia): no single reader (design §1 row \"guard presence\"); a disjunction across dimensions is not a declaration (§3.2)"
-     ],
-     "note": "needsAny is NOT in RULES.md: the reader:hook-pools [guard] check is satisfied by ANY enforcement body (ENFORCEMENT_HOUSE watch|guard|garrison|militia...), and RULES.md has no disjunction for needs. Recorded as needsAny for the chair; Phase B must pick one atom or add a disjunction."
+     "stop": [],
+     "note": "CENSUS-2e: the guards stop declared as guardPresence (one atom: any watch / garrison / militia). CENSUS-2g unit 3 (the chair's answer 3, block j): the priests declare priest (a senior cleric among the named people), carried through textOf until the site is wired; no reword."
     },
     {
      "lineId": "DAILY_LIFE_TAB.localNarrative.paragraph[2][stability<45]",
