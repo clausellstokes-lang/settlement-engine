@@ -434,3 +434,80 @@ sites 19 (ties), 18 (descriptions) and 15 (services): merge 1e's tip when they l
 descriptions and services (`declared-share` institutions / services from the render ledger; births by cause —
 the bowyers' line will then print only where a guard stands, which is every golden birth that holds the guild), and
 take the 1,000 as a diff against `a432465`. The 3 description rows "waiting on order" (R-Q) stay.
+
+## CENSUS-4e (2026-11-05)
+
+**Merge.** census-1b at `e35d60b` (CENSUS-1f: sites 19 `d422a8d`, 18 `1e71261`, 15 `9eee701`; the arrival redraw
+`f6ec896`; 3a; the census-2/census-3 merges): a **fast-forward** of `f8c92c9` (no merge commit). The local branch ref
+was stale at `83325f5` with HEAD detached for the third seat running; after an ancestor check it was re-pointed and
+checked out. `wiring-census --check` (709 / 2338 / 165) and `gen:dossier-prose --check` green. The container had no
+`node_modules`: `npm ci` (lockfile untouched). **R-Z's sentence is not on 1f's tip** (no "container" rule in
+`docs/census/declarations/VOCABULARY.md` or the rulings doc); it stays 1f's (answer 3).
+
+| unit | commit | what | golden (525) | soak records (1,000) |
+|---|---|---|---|---|
+| 1 | (the ff) | 1f's three sites arrive; re-measured on the 1,000 | — (1f's: 24 · 145 · 74) | 570 (below) |
+| 2 | `25145f1` | answer 2 (R-X): `guild` leaves Hired blades, Contract killer, Customs house, Auction house, Assay office | **183** | **368** |
+
+**Unit 1 — the three wired sites, re-measured on the 1,000** (1f counted the 525 and the 60). Records diffed on the
+clean first-parent chain `fe7bb1d` → `9eee701` (only the three site commits between), and every refusal logged at the
+tip by an instrumented scratch copy of `drawDeclared` (the repo's module untouched):
+
+| site | births moved (`fe7bb1d` → `9eee701`) | refusals at the tip (births / draws) | resolution | the refused atoms |
+|---|---|---|---|---|
+| 19 ties (H) | 109 | 109 / 392 | argmax 392 | `no ruler: lord` 373 · `garrison` 13 · `market` 6 · `watch` 4 · `institution: granary` 1 |
+| 18 descriptions (H) | 238 | 242 / 283 | argmax 282 · twin 1 | `terrain: forest` 131 · `river` 76 · `tier: ≤ hamlet` 25 · `militia` 25 · `coast` 13 · `tier: ≥ city` 9 · `market` 3 · `walls` 1 |
+| 15 services (R) | 381 (436 services not materialized, 0 added) | 384 / 445 | none 436 · twin 9 | `gate` 225 · `tier: ≤ village` 119 · `watch` 46 · `tier: ≥ city` 25 · `walls` 9 (the twins) · `institution: temple` 9 · `militia` 6 · `river` 6 |
+
+570 births moved in all; 8 of them also move outside the three parts, every one a downstream mirror (the walls-desc
+mirror `defenseProfile.institutions.walls[].desc` 3, `pressureSentence` 1 quoting the prominent tie, and 4 coherence
+receipts that lose a false `battery.defense-words` "soldiers without a garrison" finding when a refused veterans'
+service stops printing). The tip's descriptions read 242 (not 238): 2e/3e merged between. **The bowyers' "Military
+supply" (`needs: guardPresence`, 4d's R-W):** 346 births hold a Bowyers service and all 346 print it; refused **0** —
+every birth that holds the guild stands a guard (the brief's expectation, CONFIRMED). The 3 description rows "waiting
+on order" (R-Q: town Parish burial grounds #0, Town watch #0/#1, `gate`) stay undeclared.
+
+**Unit 2 (answer 2, R-X).** The five rows retagged at the catalogue, each keeping its other tags; the readers
+(`isCommerceGuild`, `historyGenerator.js`, `upgradeOpportunities.js`, `facts/market.js`) untouched. Golden 183:
+`institutions[].tags` 183, the Guild Master's chosen house (`npcs[].title` / `.institution` + the member mirror) 114,
+`simulationTrace[].downstreamEffects` 31. Soak 368 (town 51, city 156, metropolis 161): tags 368, the Guild Master's
+house 165 (every other NPC field identical), trace 43; Guild Masters gained or lost **0**, roster sizes **0**.
+Red-first `tests/data/catalogGuildTag.test.js` (the 4e block) 6/6 red, 13/13 green; the 40 governing files: the same
+6 pre-existing reds base and tip.
+
+**The 60 and the 1,000 as a diff (R-B).** BEFORE = `a432465`; MERGED = `e35d60b` (1f's tip); AFTER = the tip `25145f1`.
+
+| class (settlements) | the 60: merged → after | the 1,000: before → merged → after |
+|---|---|---|
+| goal claims (current stability · competent administration · stable institutional competition) | 0 · 0 · 0 → same | 0 · 0 · 0 → same → same |
+| coh:crisis-blind-prose | 0 → 0 | 35 → 0 → 0 (2c/2e's retirements and declarations, merged) |
+| A-12:self-vouch-false | 0 → 0 | 4 → 0 → 0 (2c's row retirement, merged: 4d's unmasking read as R-AG said) |
+| **A-11:sea-words-landlocked** | 0 → 0 | **0 → 1 → 1** — soak1k-152, "A basket of fish, still flapping…" (`arrivalProse.js`, fish beat); bisected to 1f unit 2 `f6ec896` (0 at `2b31f33`, 1 at `f6ec896`); not this lane's, at the same count base → tip |
+| reader:faction-role-fit (accepted) | 18 → 18 | 348 → 348 → 348 |
+| reader:relation-types · rule-text · possessive-slip | 0 · 0 · 0 → same | 0 · 0 · 0 → same → same |
+| reader:hook-pools · daily-life-placeholder | 3 · — → same | 108 · 495 → 70 · 0 → same (merged) |
+| every other class | identical | identical (A-05 977, battery-would-not-vouch 676, A-09 8) |
+| cert:* (incl. `cert:false-presumption`) | none → none | none → none → none |
+| `declared-share` npcs | 333 / 2,658 → same | 2,830 / 42,932 (0.066) → 5,156 / 42,932 (0.120) → same |
+| `declared-share` relationships (the ties: the draws the self-check re-asserted at site 19) | 149 / 1,356 → same | — → 2,077 / 21,528 (0.096) → same |
+| `declared-share` institutions (site 18) | 120 / 246 → same | 1 / 1 → 2,168 / 4,215 (0.514) → same |
+| `declared-share` services (site 15) | 116 / 3,435 → same | 115 / 115 → 1,965 / 55,655 (0.035) → same |
+
+`cert:false-presumption` 0 with 21,528 + 4,215 + 55,655 ledger draws re-asserted at the three sites (the services'
+`none` resolutions are not noted, by `drawDeclared`'s rule). Unit 2 moves no class and no share on either corpus.
+
+**Rows moved, by cause (nothing re-recorded):** golden unit 2 183 (one cause); soak records unit 2 368; unit 1's 570
+are 1f's (counted above, 1f's to own); wiring census 0 rows (verified, stamp unchanged); no manifest row; no pin.
+
+**Tests / gates.** eslint 0; typecheck:ratchet OK; domain:strict only the merged crisisFactFindings +4 /
+composeStateProse +2.
+
+**Open questions for the chair.**
+1. A-11 soak1k-152: 1f unit 2's arrival redraw admits the undeclared fish beat "A basket of fish, still flapping…" in a
+   landlocked birth — the sibling lines there declare `navigable`; this one is 1f's / 2b's table to declare (or the
+   instrument's to read freshwater fish as lawful).
+2. R-Z's sentence is not yet in the vocabulary doc at 1f's `e35d60b`.
+
+**Where CENSUS-4f starts.** Nothing of the NPC lane remains but the compose: every table is declared, every site this
+lane's tables feed is enforced (19 / 18 / 15 by 1f; the goal registry by 1e), and the chair's answers are applied. The
+compose re-takes the registers (R-T) and reads A-11 against 1f.
