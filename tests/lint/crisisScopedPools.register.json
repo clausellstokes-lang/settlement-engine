@@ -1,0 +1,4 @@
+{
+  "_doc": "THE CRISIS-SCOPED REGISTER (CENSUS-1d unit 3; docs/DESIGN_POOL_CENSUS.md §3.5; the chair's ruling 4). GROW-ONLY: every pool whose brace group carries {crisis-scoped}. Re-taken by `RETAKE_DECLARATION_REGISTERS=1 npx vitest run tests/domain/facts/declarationRegisters.test.js`; a pool LEAVING is a hand edit carrying the chair's note.",
+  "pools": []
+}
