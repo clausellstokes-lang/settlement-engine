@@ -211,3 +211,69 @@ The R / T / A twins of Phase A's table are not written: their consumers are draw
 2. Should the tag slot gain a spelling for "needs: crisis: K" (a presence reading of one kind), for DS-STR-2's two resistance lines and lines like them?
 3. Should `declared-share` count display-time K draws (the harness's ledger instance), so the aggregate can read the gate this lane turned on?
 
+
+## Phase B continued (CENSUS-2c, 2026-11-05)
+
+> **Where this seat stopped: at the boundary rule, clean and pushed.** Merged CENSUS-1c `d6f8456be`, CENSUS-5 `40f0490ad` (the wiring census conflict taken from ours and re-taken through its door: 709 pools, 68 blocks / 2,328 variants) and CENSUS-1d's tip `a8a9c0d` (R-H, sites 89 and 90). Done: unit 1 (the stress narrative, three causes, three commits), unit 2 (DS-STR-2), unit 3 for HOOK_ESCALATION and HOOK_LINE_POOLS, unit 5 (the 60 and the 1,000). **CENSUS-2d starts at unit 3's remaining 24 off-census tables** (list below), then unit 4's R/T/A twins.
+
+### Commits
+
+| unit | commit | what |
+|---|---|---|
+| merges | `1507c4c`, `eda7495` | CENSUS-5; CENSUS-1d (R-H) |
+| 1a | `6dda5f7` | the influx food line needs `crisis: hunger`; twin; the instrument's `food secure / migration` row retired (R-P 1) |
+| 1b | `a305b0e` | plague's "Healers are overwhelmed." needs `healer`; twin |
+| 1c | `501abbf` | religious conversion's two temple wordings need `institution: temple`; a refused pick resolves to wording 2 (no twin) |
+| 2 | `f40e0f8`, `143b91a` | DS-STR-2 ORIGIN: resistance vid 2 and 3 `crisis: occupied` (R-I); the R-H arm after the merge |
+| 3a | `38d1b4c` | HOOK_ESCALATION (kind A, enforced here): sibling sets, refused stages take their twins in place |
+| 3b | `08bbe6f` | HOOK_LINE_POOLS (site 90, enforced by 1d's wiring): `guardPresence`, three siege / hunger exclusions, `market` |
+
+### The twins written (each the chair's ruling, R-G; every one is a T or A cell, so it moves only the refused births)
+
+| pool | twin | atom |
+|---|---|---|
+| STRESS_NARRATIVE · mass_migration | New arrivals come faster than housing and employment can absorb them. | `no crisis: hunger` |
+| STRESS_NARRATIVE · plague_onset | The sick outnumber those who can tend them. | `no healer` |
+| HOOK_ESCALATION · chain.ifIgnored | Public legitimacy erodes as the seat fails to stabilize supply. | `no ruler: council` |
+| HOOK_ESCALATION · external.possibleResolutions | Confront the external force directly, by arms or by talks. | `no magic` |
+| HOOK_ESCALATION · bread_riot | Households begin pooling what food they have. · Those who hold the stores start sleeping beside them. · A crowd gathers where the food is handed out, and it turns ugly. | — · — · `no market` |
+| HOOK_ESCALATION · smuggling_rise | {controller} makes an example of one smuggler; the rest shift routes. | `no watch` |
+| HOOK_ESCALATION · legitimacy_crisis | People grumble openly wherever they gather. · Tax collection slows; orders go unheeded. | `no market` · `no watch` |
+
+Not written: the drafted twin of "Subsidize the chain through temple charity or council intervention." (its original presumes a temple OR a council, a disjunction no line may declare, so it stays undeclared). HOOK_LINE_POOLS' foodGap opt-in is vacuous (every line `crisis: any`): not scoped.
+
+### The 60 and the 1,000 (BEFORE = the merged base: `1507c4c` + 1d's `a8a9c0d`, none of this lane's units; AFTER = the tip)
+
+| run | records moved | `coh:crisis-blind-prose` (seeds) | other classes | `cert:*` | verdict |
+|---|---|---|---|---|---|
+| 60 | 7 (units 1a 5, 1b 2) | 19 → 18 | identical | none | STOP → STOP (the base's) |
+| 1,000 | 127 (fed influx 65, plague with no healer 49, templeless conversion 15; 2 births carry two causes) | 241 → 218 | `A-12:self-vouch-false` 14 → 12; every other class identical; `reader:hook-pools` 109 → 109 (0 of the 112 lines on this lane's pools: 46 guard, 66 sea, all npcData / historyData / foodBalance); `reader:daily-life-placeholder` 0 → 0 | none | STOP → STOP (the base's: crisis-blind, A-12) |
+
+**By claim (1,000):** food secure 32 → **0** (the retired row; R-P 1) · current stability 119 · nothing is failing 34 · stable institutional competition 33 · depends on none alone 22 · competent administration 21 · pilgrims queue patiently 3 · a year closed ahead 3 — unchanged; none of those is this lane's except **pilgrims queue patiently (3)**, whose declaration (2b's) waits on 1d wiring the arrival consumer (Appendix B row 21/22).
+
+**`declared-share` (1,000, from the merged render ledger):** crisis 465/511 (0.91; the 46 are religious conversion's undeclared wording 2 and the stressors with no declared sentence) · tab:dossier 41,089/213,309 (0.193) · plot hooks 6/992 on each of tab / tonight, 24/3,883 pdf, 12/1,899 foundry (0.006: site 90's declared lines only; HOOK_ESCALATION's lists are not a surface the soak renders) · npcs 543/39,351 (0.014) · power, services 1.00. At the base: crisis 301/301, plot hooks 0.
+
+### Rows moved, by cause (never re-recorded)
+
+- **Golden:** 0 / 525 for every unit (the corpus carries no stressor that a declaration refuses; scratch sha-256 over `goldenCorpus`).
+- **Soak records:** 127 / 1,000 as above (the stress summary is rendered at assembly and persisted).
+- **Pages (60):** HOOK_ESCALATION 35 births (hooks and clocks); HOOK_LINE_POOLS 0; DS-STR-2 0.
+- **Wiring census:** 0 rows (the annex edit moved no count). **Manifest:** not run. **Pins:** `crisisBlindWidened.test.js` soak1k-1205 (the retired row); `plotHookTruthGate.test.js` reads the food pool through `textOf`; `census2DeclaredPools.test.js`'s keyed-pool arm reads narrower crisis presumptions.
+- **Correction (said out loud):** unit 2's commit body splits the base's 16 reds 7 / 2 / 7; the split is dossierStateProseProjection.contract 9, composeStateProse 5, crisisBlindDossierProse 2.
+
+### Reds at the merged base, unchanged by this lane
+
+dossierStateProseProjection.contract 9 · composeStateProse 5 · crisisBlindDossierProse 2 · generalStateProseDesk 8 · negativeAssertionAnchor 2 · proseCorpusBytes 2 · ruinFilterRoster 2 (factsOf.js, readerBattery.js) · proseWiringCensus 15, heldKeyWriterCensus 1 · tonightSheetOnce, hookThemeDraws (1d names them `d6f8456be`'s) · domain:strict +4 crisisFactFindings.js, +2 composeStateProse.js. typecheck:ratchet 167/167.
+
+### Where CENSUS-2d starts
+
+1. **Unit 3, the 24 tables left.** With declarations to carry: STRESS_DESCS (70), SPATIAL_TEXT (71), CULTURE_PROFILES_DAILY (62), DOSSIER_CAUSAL_PROSE (79 + 34 crisis; vid-less, needs 1d's ruling), PRESSURE_SENTENCES (17 + 71), DAILY_LIFE_TAB (24), DAILY_LIFE_CONTEXT (15), CULTURE_ARCHITECTURAL_DETAILS (13), POLITICAL_FLAVOR (9 + 6), CRISIS_CAST_REASONS (8 + 58, `tags`), QUICK_GUIDE_CLAUSES (7), CONDITION_ARCHETYPE_TEMPLATES (6), CHECK_INST_COMPAT_LANDMARKS (6), STRESS_TYPE_MAP (4 + 41), SETT_REASON (3), STRESSOR_SPINE_PHRASES (2 + 28), THORP_PRESSURES (1), DECREE_PROSE (1), LINE_ROLE_CLAUSE (7 crisis). Nothing to declare (read, colour): STRESS_RUMORS, TERRAIN_SEASON_TEXTURE, ECHO_PREFIXES_DOSSIER, DOSSIER_CONNECTIVES. STRESS_NARRATIVE_RENDERERS is done (unit 1). Fetch census-1b first: an R/H/T table whose site 1d has wired is declared and enforced; otherwise `textOf` at the consumer. ⚠ STRESS_DESCS' entries are template functions read as `line(name)` by `arrivalScene.js` and four test files: wrap them with the vignette filter (`textOf(line)(name)`).
+2. The ledger's remaining `guard presence` stops (STRESS_DESCS 15, CULTURE_PROFILES_DAILY 5, DAILY_LIFE_TAB 2) declare `guardPresence` as each table lands.
+3. Unit 4's R/T/A twins (Phase A's table rows 6–18) once their sites are wired.
+4. The scratch tools this seat used (a sha-256 golden hasher, a 60/1,000 class differ, a record differ) are three short scripts; the next seat rebuilds them in its scratchpad (none is committed: they are not instruments).
+
+### Open questions for the chair
+
+1. wartime's loss wording says "Food prices have doubled." in places whose food record is secure (11 of 22 wartime births on a 300-birth probe); there is no prices atom. Leave it, or declare it `crisis: hunger` (which refuses it in most wartime births and needs a twin)?
+2. slave_revolt's summary names "the slave market's holding facilities"; there is no slave-market atom. List it under "needs a home"?
+3. plague's healer line declares `healer` alone, so a place with a hospital and no healer gets the twin (true, less specific); a disjunction is unsayable. Accept?
