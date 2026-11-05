@@ -1,0 +1,294 @@
+{
+  "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP",
+  "source": "src/generators/computeActiveChains.js :: INSTITUTIONAL_SERVICE_MAP (read by deriveInstitutionalServices / deriveServiceExports)",
+  "drawKind": "A",
+  "pool": {
+    "declares": [],
+    "crisisScoped": true,
+    "colour": false,
+    "notes": "Each entry yields an EXPORT label (exportLabel, when exportable) and an INCOME label (incomeLabel, shown in Economic Flows/income). Membership is by institutionMatchesKeyword over private patterns, so the institution presumption is declared with the vocabulary reader where a kind exists. CRISIS-SCOPED: deriveServiceExports output bypasses the siege/occupation treatment in deriveExportsFromChains, so traffic-presuming service exports print under siege; those rows carry \"calm\" (the chair may want a narrower threat-family exclusion). The `output` field strings are not annotated (Economic Flows display; same presumptions as the income label).",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::banking.export",
+      "text": "Financial services (letters of credit)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: bank / money changer."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::banking.income",
+      "text": "Banking & Finance",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: bank / money changer."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::legal.export",
+      "text": "Legal services (contracts, notarial)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: courthouse."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::legal.income",
+      "text": "Legal Services",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: courthouse."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::religious.export",
+      "text": "Pilgrimage & religious tourism",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "presumes institution: temple OR institution: monastery (patterns cathedral/monaster/pilgrim; a within-dimension disjunction, left undeclared pending spelling); 'pilgrim' matches no kind. serviceExports are appended to primaryExports AFTER the siege/occupation collapse (economicState.js :813), so this export prints under under_siege; it presumes open traffic."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::religious.income",
+      "text": "Religious Revenue",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "presumes institution: temple OR institution: monastery (patterns cathedral/monaster/pilgrim; a within-dimension disjunction, left undeclared pending spelling); 'pilgrim' matches no kind."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::education.export",
+      "text": "Educational services (degrees, training)",
+      "needs": [
+        "institution: school"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "patterns university/academy ⊂ school pattern; 'academy of magic' also counts. serviceExports are appended to primaryExports AFTER the siege/occupation collapse (economicState.js :813), so this export prints under under_siege; it presumes open traffic."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::education.income",
+      "text": "Education & Scholarship",
+      "needs": [
+        "institution: school"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "patterns university/academy ⊂ school pattern; 'academy of magic' also counts."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::military.export",
+      "text": "Military contract services",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "patterns mercenary quarter / multiple garrison / professional city watch: presumes garrison OR watch (disjunction, undeclared); unhomed: mercenary quarter."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::military.income",
+      "text": "Military Contracts",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "patterns mercenary quarter / multiple garrison / professional city watch: presumes garrison OR watch (disjunction, undeclared); unhomed: mercenary quarter."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::arcane.export",
+      "text": "Arcane services (identification, enchanting)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: mages' guild."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::arcane.income",
+      "text": "Arcane Services",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: mages' guild."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::medical.income",
+      "text": "Medical Services",
+      "needs": [
+        "institution: hospital"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "exportLabel null (not exportable)."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::entertainment.export",
+      "text": "Cultural tourism revenue",
+      "needs": [],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: arena/theatre/bardic college. CATEGORY ERROR: \"revenue\" listed as an export (proposed home: income table). serviceExports are appended to primaryExports AFTER the siege/occupation collapse (economicState.js :813), so this export prints under under_siege; it presumes open traffic."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::entertainment.income",
+      "text": "Entertainment & Culture",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: arena/theatre/bardic college."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.export",
+      "text": "Waterborne freight services (cargo, pilotage)",
+      "needs": [
+        "navigable",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "patterns docks/port, major port, navy, shipyard (docks pattern misses 'navy'/'shipyard'). serviceExports are appended to primaryExports AFTER the siege/occupation collapse (economicState.js :813), so this export prints under under_siege; it presumes open traffic."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.income",
+      "text": "Port Revenue",
+      "needs": [
+        "navigable",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "patterns docks/port, major port, navy, shipyard (docks pattern misses 'navy'/'shipyard')."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.maritime.export",
+      "text": "Maritime services (cargo, pilotage)",
+      "needs": [
+        "coast",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "calm",
+      "colour": false,
+      "kind": "export",
+      "notes": "Override when a matched name is major port/navy/shipyard (private regex; water: coast declared). serviceExports are appended to primaryExports AFTER the siege/occupation collapse (economicState.js :813), so this export prints under under_siege; it presumes open traffic."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::waterborne.maritime.output",
+      "text": "Port & maritime services",
+      "needs": [
+        "coast",
+        "institution: docks"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "notes": "output override (Economic Flows)."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::scholarly.export",
+      "text": "Scholarly services (research access, rare texts)",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: great library / sage."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::scholarly.income",
+      "text": "Scholarly Revenue",
+      "needs": [],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: great library / sage."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::alchemy.export",
+      "text": "Alchemical trade (potions, reagents)",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "'potions' presumes working magic; unhomed: alchemist."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::alchemy.income",
+      "text": "Alchemical Trade",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "'potions' presumes working magic; unhomed: alchemist."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::planar.export",
+      "text": "Planar trade access",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "export",
+      "notes": "unhomed: planar trader/embassy. CATEGORY ERROR: \"access\" is not an export (proposed home: income table)."
+    },
+    {
+      "id": "computeActiveChains.INSTITUTIONAL_SERVICE_MAP::planar.income",
+      "text": "Planar Commerce",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "crisis": "any",
+      "colour": false,
+      "kind": "income",
+      "notes": "unhomed: planar trader/embassy."
+    }
+  ]
+}

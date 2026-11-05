@@ -1,0 +1,263 @@
+{
+  "id": "DS-SUP-3",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-SUP-3::COMPLETE FOR ITS TIER",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: catalog complete for tier",
+      "lines": [
+        {
+          "id": "DS-SUP-3::COMPLETE FOR ITS TIER::v1",
+          "text": "{settlement} offers everything a place its size is expected to offer, without gaps and wit",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::COMPLETE FOR ITS TIER::v2",
+          "text": "A stranger arriving at {settlement} with an ordinary need (a bed, a meal, a mended strap) ",
+          "needs": [
+            "institution: tavern"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"a bed, a meal… finds all three\" — at thorp/hamlet the tier catalog may not include lodging"
+        },
+        {
+          "id": "DS-SUP-3::COMPLETE FOR ITS TIER::v3",
+          "text": "The town can answer what a town this size ought to answer, and does not think about it fur",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "word: \"town\" used as the generic referent (tier not declared)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: one expected category missing",
+      "lines": [
+        {
+          "id": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING::v1",
+          "text": "There is one thing a place of {settlement}'s size ought to provide and does not, and the a",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING::v2",
+          "text": "A stranger will find everything he expects at {settlement} except one, and will be told, c",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::ONE EXPECTED CATEGORY MISSING::v3",
+          "text": "{settlement} is one house short of being a complete town of its rung, and the missing one ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": "\"a complete town of its rung\" — word: \"town\" used as the generic referent (tier not declared)"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: several categories missing",
+      "lines": [
+        {
+          "id": "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING::v1",
+          "text": "{settlement} falls short of its own rung in more than one direction; what the town offers ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING::v2",
+          "text": "This town is bigger than the things it can do for you, and the people here are used to goi",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::SEVERAL EXPECTED CATEGORIES MISSING::v3",
+          "text": "A stranger provisions carefully before leaving {settlement}, because a town this size is n",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::THE HEALING GAP",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: healing category missing at a tier that expects it (≈ excludes institution: hospital / healer; key-guaranteed, informational)",
+      "lines": [
+        {
+          "id": "DS-SUP-3::THE HEALING GAP::v1",
+          "text": "{settlement} keeps no house of healing at a size where one is assumed; what is done for th",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::THE HEALING GAP::v2",
+          "text": "The sick in this town are tended at home, and everybody knows how far the nearest better a",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::THE HEALING GAP::v3",
+          "text": "The town manages ordinary hurts and has nothing at all for the extraordinary one, and the ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::THE FOOD GAP",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: food category missing (≈ excludes institution: tavern; key-guaranteed, informational)",
+      "lines": [
+        {
+          "id": "DS-SUP-3::THE FOOD GAP::v1",
+          "text": "There is nowhere in {settlement} that sells a meal, which is unusual at any size and worth",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::THE FOOD GAP::v2",
+          "text": "A stranger at {settlement} eats what he brought or what somebody offers him, and the offer",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::THE FOOD GAP::v3",
+          "text": "Nobody here sells food to a stranger, because nobody here has ever had enough strangers to",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: a category present but its chain impaired",
+      "lines": [
+        {
+          "id": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED::v1",
+          "text": "{institution} at {settlement} is open and short of what it works with; the service stands ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED::v2",
+          "text": "The house is still there and cannot do half of what it is known for, and the town has adju",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::A CATEGORY PRESENT BUT ITS CHAIN IMPAIRED::v3",
+          "text": "What {institution} can offer {settlement} shrinks with each turn the supply behind it stay",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE",
+      "pool": true,
+      "declares": [
+        "tier: >= metropolis"
+      ],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: metropolis-tier catalog complete",
+      "lines": [
+        {
+          "id": "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE::v1",
+          "text": "{settlement} keeps every category a settlement can keep (including the ones a town has no ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE::v2",
+          "text": "Whatever a stranger wants at {settlement}, the answer is that somebody here does it, and t",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-SUP-3::A METROPOLIS-TIER CATALOG, COMPLETE::v3",
+          "text": "There is nothing this town has to send away for, which the people here mention to visitors",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

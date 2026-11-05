@@ -1,0 +1,214 @@
+{
+  "id": "resourceData.SPECIAL_RESOURCES",
+  "source": "src/data/resourceData.js :: SPECIAL_RESOURCES",
+  "drawKind": "T",
+  "pool": {
+    "declares": [],
+    "crisisScoped": false,
+    "colour": false,
+    "notes": "Key-guaranteed: the special resource is present. institutionModifiers are weights, not text. resources[] are flavour outputs; economicBoost/strategicImportance are display strings.",
+    "needs": [],
+    "excludes": []
+  },
+  "rows": [
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::ancientRuins",
+      "text": "Ancient Ruins: Remnants of a previous civilization",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::ancientRuins.effects.resources[0]",
+      "text": "ancient stone",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::ancientRuins.effects.resources[1]",
+      "text": "relics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::ancientRuins.effects.resources[2]",
+      "text": "knowledge",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::magicalNode",
+      "text": "Magical Ley Line Node: Intersection of magical energy",
+      "needs": [
+        "magic level: ≥ low"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::magicalNode.effects.resources[0]",
+      "text": "magical crystals",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::magicalNode.effects.resources[1]",
+      "text": "ley energy",
+      "needs": [
+        "magic"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::magicalNode.effects.strategicImportance",
+      "text": "High magical value",
+      "needs": [
+        "magic level: ≥ low"
+      ],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::holySite",
+      "text": "Holy Site: Location of religious significance",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::holySite.effects.resources[0]",
+      "text": "religious relics",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "relics"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::holySite.effects.resources[1]",
+      "text": "pilgrim donations",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "pilgrim donations are income, not a good"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::hotSprings",
+      "text": "Hot Springs: Natural thermal springs",
+      "needs": [],
+      "excludes": [],
+      "colour": true,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::hotSprings.effects.resources[0]",
+      "text": "thermal water",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::hotSprings.effects.resources[1]",
+      "text": "minerals",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein",
+      "text": "Rich Ore Vein: Exceptionally productive mine",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"Exceptionally productive mine\""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein.effects.resources[0]",
+      "text": "abundant ore",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": "ore vein yield (\"abundant ore\") is the income/boom, not a trade good"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein.effects.resources[1]",
+      "text": "rare metals",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "output",
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::richVein.effects.economicBoost",
+      "text": "Major mining boom",
+      "needs": [
+        "institution: mine"
+      ],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "ore-vein boom"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::strategicPass",
+      "text": "Strategic Mountain Pass: Controls key trade/military route",
+      "needs": [
+        "terrain: mountain"
+      ],
+      "excludes": [],
+      "colour": true,
+      "notes": "\"Strategic Mountain Pass\"; the route atom (mountain_pass) is not guaranteed by the special resource"
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::strategicPass.effects.strategicImportance",
+      "text": "Controls passage",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "notes": ""
+    },
+    {
+      "id": "resourceData.SPECIAL_RESOURCES::strategicPass.effects.economicBoost",
+      "text": "Toll and customs revenue",
+      "needs": [],
+      "excludes": [],
+      "colour": false,
+      "kind": "income",
+      "notes": "toll and customs revenue"
+    }
+  ]
+}

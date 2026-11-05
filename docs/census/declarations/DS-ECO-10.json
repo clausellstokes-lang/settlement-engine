@@ -1,0 +1,373 @@
+{
+  "id": "DS-ECO-10",
+  "source": "src/data/dossierStateProse/economy.generated.js",
+  "drawKind": "K",
+  "pools": [
+    {
+      "id": "DS-ECO-10::POSTURE: none",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: export posture none",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: none::v1",
+          "text": "{settlement} sells nothing outward. What the town makes, the town uses, and the accounts h",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: none::v2",
+          "text": "Nothing leaves here for trade. A stranger looking to buy in quantity has come to the wrong",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: none::v3",
+          "text": "There is no trade out. Whatever surplus there is stays, and is eaten or worn here.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::POSTURE: limited",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: export posture limited",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: limited::v1",
+          "text": "{settlement} exports one thing. The whole of the town's outward trade rests on {good} and ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: limited::v2",
+          "text": "The outward trade is single-stranded: {good} goes out, and if {good} stops the column is e",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: limited::v3",
+          "text": "Ask what this town sells and you get one answer, given without hesitation and without a se",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::POSTURE: vulnerable",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: export posture vulnerable",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: vulnerable::v1",
+          "text": "{settlement} has goods to sell and no dependable way to move them. The exports are real an",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: vulnerable::v2",
+          "text": "What the town makes has to get out over the {access}, and the {access} is not the kind of ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: vulnerable::v3",
+          "text": "The trade exists at the sufferance of the approaches. Nothing is wrong with the goods; eve",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::POSTURE: entrepot",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: export posture entrepot",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: entrepot::v1",
+          "text": "{settlement} sells on what it never made. The export column is full of goods that entered ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: entrepot::v2",
+          "text": "The trade here is in the moving of things. Very little of what leaves began here.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: entrepot::v3",
+          "text": "The town's living is the road. Goods come, goods go, and the town takes its part of both.",
+          "needs": [],
+          "excludes": [],
+          "colour": false,
+          "notes": "presumes an overland road approach (route: road|crossroads; disjunction, not declared) — reads oddly on a river/port approach"
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::POSTURE: import_dependent",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: export posture import_dependent",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: import_dependent::v1",
+          "text": "{settlement} buys more than it sells, and the imbalance is structural rather than seasonal",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: import_dependent::v2",
+          "text": "More arrives here than leaves. That is simply how the town is arranged and everyone trades",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: import_dependent::v3",
+          "text": "The outward trade does not cover the inward. It works while there is something to pay with",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::POSTURE: established",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: export posture established",
+      "lines": [
+        {
+          "id": "DS-ECO-10::POSTURE: established::v1",
+          "text": "{settlement} sells several things outward and depends on none of them alone. The export co",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: established::v2",
+          "text": "The yards here are full of goods bound out and no two of them are the same. This is a town",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::POSTURE: established::v3",
+          "text": "There is always something going out. If one trade is quiet, another is not.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::SCARCITY: shortage",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: commodity band shortage",
+      "lines": [
+        {
+          "id": "DS-ECO-10::SCARCITY: shortage::v1",
+          "text": "The stores of {good} are well under what the market keeps, and the reckoning has climbed a",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": "\"what the market keeps\""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: shortage::v2",
+          "text": "There is little {good} to be had here, and it costs what little things cost.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: shortage::v3",
+          "text": "A stranger wanting {good} in {settlement} will find it and will pay for the finding.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::SCARCITY: adequate",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: commodity band adequate",
+      "lines": [
+        {
+          "id": "DS-ECO-10::SCARCITY: adequate::v1",
+          "text": "{good} sits at its accustomed level in the stores, and its price sits with it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: adequate::v2",
+          "text": "{good} costs what {good} costs. There is nothing to say about it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: adequate::v3",
+          "text": "The market holds {good} in the ordinary quantity at the ordinary price.",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::SCARCITY: surplus",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": false,
+      "notes": "key: commodity band surplus",
+      "lines": [
+        {
+          "id": "DS-ECO-10::SCARCITY: surplus::v1",
+          "text": "{settlement} holds more {good} than it keeps room for, and the reckoning has come down und",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: surplus::v2",
+          "text": "There is {good} everywhere in this market, and it is going cheap because there is {good} e",
+          "needs": [
+            "market"
+          ],
+          "excludes": [],
+          "colour": false,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::SCARCITY: surplus::v3",
+          "text": "A stranger stocking {good} does well here. The town has more than it can use.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    },
+    {
+      "id": "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally",
+      "pool": true,
+      "declares": [],
+      "crisisScoped": false,
+      "colour": true,
+      "notes": "key: derived-tally freshness caveat. Pure colour.",
+      "lines": [
+        {
+          "id": "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally::v1",
+          "text": "The tallies below are the last survey's. They describe what {settlement} was judged to hol",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally::v2",
+          "text": "These counts stand as the town's own last reckoning of itself, and a later change may not ",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        },
+        {
+          "id": "DS-ECO-10::THE FRESHNESS CAVEAT: for any surface printing a derived tally::v3",
+          "text": "What is written here was true at the survey. Nobody has recounted it.",
+          "needs": [],
+          "excludes": [],
+          "colour": true,
+          "notes": ""
+        }
+      ],
+      "needs": [],
+      "excludes": []
+    }
+  ]
+}

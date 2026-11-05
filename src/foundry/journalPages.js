@@ -33,6 +33,7 @@ import { composeTonightSheet, printsAsWant, secretLeadOf, TONIGHT_COPY } from '.
 import { composeCrisisPage, CRISIS_PAGE_COPY } from '../domain/crisis/crisisPage.js';
 import { institutionDisplayName } from '../domain/display/institutionDisplayName.js';
 import { resourceDisplayName } from '../domain/display/resourceDisplayName.js';
+import { displayTradeList } from '../domain/display/tradeListDisplay.js';
 import { foodwaysLineOf } from '../domain/foodways.js';
 import {
   overviewHeadline, powerHeadline, economicsHeadline, defenseHeadline,
@@ -287,8 +288,9 @@ function economicsPage(vm) {
     kv('Complexity', e.economicComplexity),
     // The resource label seam: a trade list may carry a raw RESOURCE_DATA key beside an
     // authored phrase, and the VTT journal printed both exactly as the record spells them.
-    kv('Exports', (e.primaryExports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
-    kv('Imports', (e.primaryImports || []).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    // F11 / CENSUS-3b unit 3: the journal reads the SCREEN's lists (one display reader).
+    kv('Exports', displayTradeList(e.primaryExports, vm.raw, { side: 'exports' }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
+    kv('Imports', displayTradeList(e.primaryImports, vm.raw, { side: 'imports', exports: e.primaryExports }).map(x => resourceDisplayName(x)).filter(Boolean).join(', ')),
     fb.display ? kv('Food', fb.display) : (fb.deficit ? kv('Food deficit', fb.deficit) : kv('Food surplus', fb.surplus)),
     (e.incomeSources || []).length ? md('', '## Income', e.incomeSources.map(s =>
       `- ${esc(label(s.source) || s.source)}: ${esc(Math.round(s.percentage))}%`)) : null,

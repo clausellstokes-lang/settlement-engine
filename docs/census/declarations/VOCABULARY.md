@@ -62,7 +62,7 @@ re-spelled mechanically, never re-judged.
 | atom | nearest reader today | status |
 |---|---|---|
 | ~~`institution: guild`~~ → `guild` | `factsOf(r).guild` (`facts/guild.js`, CENSUS-4b) | **homed** (the chair's answer 4): the 21 lines re-spelled `guild` |
-| `crime` (organised crime present) | `defense/defenseDisplay.js :: deriveCriminalStructure` | **no factsOf home** |
+| `crime` → `organised crime` | `factsOf(r).crime` (CENSUS-3b's delegation to `deriveCriminalStructure`) | **homed** (merged into CENSUS-4b) |
 | `tier: <cmp> <tier>` | the field `record.tier` + `tierAtLeast` | a field, no factsOf getter |
 
 A line that presumes one of these is declared with it in the ledger so the row is not lost; phase
