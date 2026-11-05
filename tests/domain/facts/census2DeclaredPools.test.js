@@ -33,6 +33,7 @@ const FAMILIES = {
   'DS-GEN': ['DS-GEN-1', 'DS-GEN-2', 'DS-GEN-3', 'DS-GEN-5', 'DS-GEN-6', 'DS-GEN-7', 'DS-GEN-8', 'DS-GEN-9',
     'DS-GEN-10', 'DS-GEN-11', 'DS-GEN-12', 'DS-GEN-13', 'DS-GEN-14', 'DS-GEN-15', 'DS-GEN-16', 'DS-GEN-17', 'DS-GEN-18'],
   'DS-HK': ['DS-HK-1'],
+  'DS-STR': ['DS-STR-1', 'DS-STR-2'],
 };
 
 const TOWN = { tier: 'town', population: 2400, institutions: [] };
@@ -85,5 +86,15 @@ describe('the declarations do their work on the real pools', () => {
     const gated = factsOf({ ...TOWN, institutions: [{ name: 'Town walls', category: 'Defense' }, { name: 'Tavern', category: 'Hospitality' }] });
     expect(gated.defence.gate && gated.hasInstitution('tavern')).toBe(true);
     expect(read('DS-GEN-13', 'NO-MARKET', gated)).toEqual([1, 2]);
+  });
+
+  it("DS-STR-1's calm framing (\"carries no emergency\") is refused under a siege and drawn in calm", () => {
+    expect(read('DS-STR-1', "Overview's own section framing", SIEGE)).toEqual([]);
+    expect(read('DS-STR-1', "Overview's own section framing", CALM)).toEqual([1, 2, 3]);
+  });
+
+  it("DS-STR-1's siege banner keeps its lines under a siege joined by a famine (the key is not re-declared)", () => {
+    const both = factsOf({ ...TOWN, stress: [{ type: 'under_siege' }, { type: 'famine' }] });
+    expect(read('DS-STR-1', 'UNDER SIEGE', both)).toEqual([5, 7, 8, 9, 10]);
   });
 });

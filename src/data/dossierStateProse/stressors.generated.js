@@ -16,7 +16,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "gate",
+            "no crisis: mass_migration"
           ],
           "text": "Nothing moves through the gates. {settlement} lives on what is already inside the walls, and counts it daily.",
           "slots": [
@@ -35,6 +37,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "gate",
+            "market"
+          ],
           "text": "Trade stops at the gate rather than the market now. The siege decides what the town eats.",
           "slots": [],
           "vid": 3
@@ -42,7 +48,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "street",
           "marks": [
-            "walls"
+            "walls",
+            "gate"
           ],
           "text": "{settlement} is shut, and the shutting is not the town's decision; every arrangement inside the walls has been rebuilt around the gates staying closed.",
           "slots": [
@@ -61,7 +68,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "no crisis: mass_migration"
           ],
           "text": "Nobody goes in or out of {settlement}, and the walls have people on them at hours walls do not normally have people on them.",
           "slots": [
@@ -72,7 +80,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "no crisis: mass_migration"
           ],
           "text": "Nothing moves on the roads. {settlement} lives on what is already inside the town, and counts it daily.",
           "slots": [
@@ -103,7 +112,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "no crisis: mass_migration"
           ],
           "text": "Nobody goes in or out of {settlement}, and the edges of the town are kept at hours nobody normally keeps them.",
           "slots": [
@@ -115,6 +125,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "FAMINE": [
         {
           "angle": "street",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "There is not enough to eat, and the shortfall is public now rather than private. The granary answers fewer hands each week.",
           "slots": [],
           "vid": 1
@@ -127,6 +140,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "market"
+          ],
           "text": "The market has grain, and the price of it has become a kind of politics; families are eating stores meant for {season}.",
           "slots": [
             "season"
@@ -143,6 +159,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "institution: granary"
+          ],
           "text": "What {settlement}'s granary holds is being issued by rule rather than by price, and the rule is being tested.",
           "slots": [
             "settlement"
@@ -151,6 +170,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "{settlement}'s market is open and thin, and the thinness is not seasonal.",
           "slots": [
             "settlement"
@@ -375,6 +397,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "no crisis: hunger",
+            "no crisis: indebted"
+          ],
           "text": "The economy is untouched and the intelligence is not. Someone else's interest is being served inside the town's own rooms.",
           "slots": [],
           "vid": 2
@@ -416,6 +442,10 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "DISEASE OUTBREAK": [
         {
           "angle": "street",
+          "marks": [
+            "market",
+            "no crisis: under_siege"
+          ],
           "text": "Illness is loose in the town. The market thins as people keep to their own doors, and travel is discouraged rather than forbidden.",
           "slots": [],
           "vid": 1
@@ -428,6 +458,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "healer"
+          ],
           "text": "{settlement} has stopped moving at its ordinary speed: supply arrives late, work goes undone, and the healers are the busiest people here.",
           "slots": [
             "settlement"
@@ -519,7 +552,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "walls"
+            "walls",
+            "watch"
           ],
           "text": "{settlement} keeps more watch than it can afford; the country beyond the walls has stopped being ordinary country.",
           "slots": [
@@ -554,7 +588,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "counterforce",
           "marks": [
-            "no walls"
+            "no walls",
+            "watch"
           ],
           "text": "{settlement} keeps more watch than it can afford; the country beyond the last houses has stopped being ordinary country.",
           "slots": [
@@ -594,6 +629,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "ledger",
+          "marks": [
+            "watch"
+          ],
           "text": "The watch's patrols at {settlement} have been rewritten, and the routes now avoid places rather than cover them.",
           "slots": [
             "settlement"
@@ -618,6 +656,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "unfolding",
+          "marks": [
+            "institution: temple"
+          ],
           "text": "A rival observance has taken root deep enough to divide households. The old rite still holds the buildings and no longer holds the street.",
           "slots": [],
           "vid": 2
@@ -646,6 +687,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "institution: temple"
+          ],
           "text": "The altars in {settlement} are tended and the tending is new, which is visible in the stonework.",
           "slots": [
             "settlement"
@@ -749,7 +793,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "walls"
+            "walls",
+            "no crisis: under_siege"
           ],
           "text": "People are arriving faster than the town can house them. The camps outside the wall are becoming a second settlement.",
           "slots": [],
@@ -797,7 +842,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         {
           "angle": "visitor",
           "marks": [
-            "no walls"
+            "no walls",
+            "no crisis: under_siege"
           ],
           "text": "People are arriving faster than the town can house them. The camps at the edge of the town are becoming a second settlement.",
           "slots": [],
@@ -1224,7 +1270,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "crisisScoped": true
       }
     }
   },
@@ -1740,6 +1787,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: barracks_coup": [
         {
           "angle": "unfolding",
+          "marks": [
+            "garrison"
+          ],
           "text": "The garrison is the danger. It drilled at midnight without orders, or with orders nobody will admit to giving.",
           "slots": [],
           "vid": 1
@@ -1806,6 +1856,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: temple_putsch": [
         {
           "angle": "street",
+          "marks": [
+            "institution: temple"
+          ],
           "text": "The sermons have changed. Obedience to unworthy rulers is suddenly a live question, and it is being asked from a pulpit.",
           "slots": [],
           "vid": 1
@@ -1826,18 +1879,27 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
       "ORIGIN: arcane_ascendancy": [
         {
           "angle": "visitor",
+          "marks": [
+            "magic"
+          ],
           "text": "The casters are moving on the seat. Wards around the council hall have failed more than once this season, and the mages responsible shrug.",
           "slots": [],
           "vid": 1
         },
         {
           "angle": "street",
+          "marks": [
+            "magic"
+          ],
           "text": "Someone is scrying the seat of power and wants that known. The threat here is arcane, and it is not being hidden.",
           "slots": [],
           "vid": 2
         },
         {
           "angle": "threshold",
+          "marks": [
+            "magic"
+          ],
           "text": "What challenges the government in {settlement} needs neither a crowd nor a garrison; it needs a workroom, and it has several.",
           "slots": [
             "settlement"
@@ -1874,6 +1936,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "visitor",
+          "marks": [
+            "market"
+          ],
           "text": "The market square empties at the same hour every evening; somewhere people are meeting, and nobody organized them from above.",
           "slots": [],
           "vid": 2
@@ -1916,6 +1981,9 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
         },
         {
           "angle": "street",
+          "marks": [
+            "institution: tavern"
+          ],
           "text": "The revolt here is about coin and only coin. The tally of every levy taken is being read aloud in the taverns.",
           "slots": [],
           "vid": 2
@@ -1989,7 +2057,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "LIFECYCLE: active": {
         "role": "spine",
@@ -2005,7 +2074,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "LIFECYCLE: peaking": {
         "role": "spine",
@@ -2021,7 +2091,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "LIFECYCLE: easing": {
         "role": "spine",
@@ -2037,7 +2108,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "LIFECYCLE: residual": {
         "role": "spine",
@@ -2053,7 +2125,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           3
         ],
         "readsCount": 1,
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "COUNTERFORCE: floorsMet with a strong score": {
         "role": "spine",
@@ -2068,7 +2141,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "COUNTERFORCE: floorsMet: false": {
         "role": "spine",
@@ -2083,7 +2157,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "COUNTERFORCE: a named leading source": {
         "role": "spine",
@@ -2098,7 +2173,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "COUNTERFORCE: weak or absent": {
         "role": "spine",
@@ -2113,7 +2189,8 @@ export const DOSSIER_STATE_PROSE_STRESSORS = /* #__PURE__ */ Object.freeze({
           2,
           3
         ],
-        "attach": []
+        "attach": [],
+        "colour": true
       },
       "SYNERGY: famine × disease_outbreak": {
         "role": "spine",
