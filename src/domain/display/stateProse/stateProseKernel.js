@@ -365,6 +365,55 @@ export function noteDrawnVariant(variant, where) {
 }
 
 /**
+ * ⭐ THE POSITION-KEYED DECLARATION CHANNEL (CENSUS-1h unit 7; the chair's R-AQ). A vid-less
+ * list (the connectives) is drawn by the MODULUS of a roll, so a vid would move about (n−1)/n of
+ * its draws and a pre-filter would shift the modulus of every draw. Its declarations therefore
+ * sit in a list PARALLEL to the phrase list (`declarations[i]` = the tag array of position i, or
+ * null) that the draw never reads: the caller draws over the FULL list exactly as before and
+ * hands the drawn position here AFTER the draw. An admitted position (or a list with no
+ * declaration at all) comes back unchanged — byte-identity 0 until a line declares. A refused
+ * position resolves to the hash argmax over the admitted positions (`drawDeclared`'s rule, keyed
+ * on the caller's own key plus the position); none admitted answers -1 and the caller drops the
+ * slot (kind A; R-AU). FAIL-CLOSED: a declared position with no `facts` is refused.
+ * @param {ReadonlyArray<ReadonlyArray<string>|null|undefined>|undefined} declarations
+ * @param {number} drawn the position the modulus drew
+ * @param {object|null|undefined} facts `factsOf(record)`
+ * @param {string} key the caller's draw key (the settlement's seed is already in it)
+ * @param {{ pool?: string, surface?: string }} [where] ledger identity for a declared pick
+ * @returns {number} the position to print, or -1
+ */
+export function resolveDeclaredPosition(declarations, drawn, facts, key, where = {}) {
+  if (!Array.isArray(declarations) || !declarations.some((d) => Array.isArray(d) && d.length > 0)) return drawn;
+  const admits = (/** @type {number} */ i) => {
+    const tags = declarations[i];
+    if (!Array.isArray(tags) || tags.length === 0) return true;
+    if (!facts || typeof facts !== 'object') return false;
+    return declarationAdmits(declarationOfTags(tags), /** @type {any} */ (facts)).admitted;
+  };
+  let pick = admits(drawn) ? drawn : -1;
+  if (pick < 0) {
+    let bestHash = -1;
+    for (let i = 0; i < declarations.length; i += 1) {
+      if (i === drawn || !admits(i)) continue;
+      const digest = avalanche32(fnv1a32(`${key}::p${i}`));
+      if (digest > bestHash) { bestHash = digest; pick = i; }
+    }
+  }
+  const tags = pick >= 0 ? declarations[pick] : null;
+  if (Array.isArray(tags) && tags.length > 0 && activePresumptionLedger() !== null) {
+    notePresumption({
+      pool: where.pool || key,
+      lineId: `p${pick}`,
+      atoms: atomsOf(declarationOfTags(tags)),
+      surface: where.surface || 'dossier',
+      drawKind: 'K',
+      resolvedBy: pick === drawn ? 'drawn' : 'argmax',
+    });
+  }
+  return pick;
+}
+
+/**
  * Substitute every `{slot}` in a sentence. Returns `null` when any named slot lacks a
  * fill — a rendered `{counterpart}` is worse than no sentence, and this is the second
  * gate on the same invariant `variantIsAnchored` checks, kept because the composer and
