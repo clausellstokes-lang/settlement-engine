@@ -162,6 +162,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (F3 FOOD-WORDS (units 1–5), docs/shift-records/2026-11-04-rung1-24-f3-food-words.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of db8ce5da8 because a processed food good is an export only on a surplus and a fishing row on water is a fish source; 2 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (F10 WALLS-WORD (units 1–4), docs/shift-records/2026-11-04-rung1-26-f10-walls-word.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 54daafda3 because a line that names walls, soldiers or a garrison takes its twin where the roster lacks the thing; 288 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
