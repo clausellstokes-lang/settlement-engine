@@ -244,12 +244,15 @@ describe('THE GENERAL DESK DRAWS ON THE OVERVIEW TAB — and is silent for a fre
     const priv = renderTab(false);
     // Each anchor is the datum the cut sentence used to restate, on the same render.
     expectAbsentWithAnchor(priv, CONFLICT, 'Labor control', 'DS-GEN-2 prints under its conflict row again');
-    expectAbsentWithAnchor(priv, WARNING, 'Structural Issues', 'DS-GEN-7 prints beside the warning rows again');
+    expectAbsentWithAnchor(priv, WARNING, 'Labor control', 'DS-GEN-7 prints beside the warning rows again');
     expectAbsentWithAnchor(priv, CONNECTION, 'Mugain and Felix are connected by something neither discusses openly.',
       'a DS-REL-2 lens prints above the phrasing again');
-    // X-8: the warning headers carry no "First Survey" suffix; one page-level label says it.
-    expectAbsentWithAnchor(priv, 'Structural Issues · First Survey', 'Structural Issues', 'a header suffix is back');
-    expectAbsentWithAnchor(priv, 'Suggestions · First Survey', 'Suggestions', 'a header suffix is back');
+    // READER-R1 ruling 1 (2026-11-05): the structural validator's rows and suggestions left the
+    // DM page for the Viability tab's staff panel, so neither header nor row prints here (the
+    // X-8 suffix pin went with its headers).
+    expectAbsentWithAnchor(priv, 'Structural Issues', 'Labor control', 'the validator block is back on the DM page');
+    expectAbsentWithAnchor(priv, 'a violation', 'Labor control', 'a validator row is back on the DM page');
+    expectAbsentWithAnchor(priv, 'a suggestion', 'Labor control', 'a validator suggestion is back on the DM page');
   });
 
   test('THE PLACE is one passage: the arrival scene first, then the site lines trimmed to their first clause (T1-2)', () => {
