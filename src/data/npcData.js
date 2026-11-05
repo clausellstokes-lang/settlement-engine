@@ -1330,8 +1330,16 @@ export const NPC_PRESENTATION_MODES = {
 // way, and the archetype OBJECTS are unchanged (consumers compare them with === and
 // Object.entries().find: identity is load-bearing). `size` hands the pool length to the draw.
 // Index 0 of every pool is the pre-existing canonical closure, verbatim.
-const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => (isTieIndex(variant) ? variants[variant % variants.length]
-  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
+// CENSUS-4c (R-C, the table-consumer rule): a variant that presumes a record fact is declared IN
+// PLACE as `{ line: closure, needs?, excludes?, crisis? }` (the ledger's 30 rows,
+// docs/census/declarations/npcData.STRESS_ECONOMIC_EFFECTS.json); a bare closure declares nothing.
+// `closureOf` is the consumer's tolerance (byte-identical: the same closure is called), and `lines`
+// hands the declared variants, read-only and in index order, to the tie draw's resolution
+// (Appendix B site 19, `relationshipArchetypes.js :: createTieProseDraw`: CENSUS-1d's to wire).
+// ⚠ ONE index picks the desc AND the tension line: a refusal of either row refuses the pair.
+const closureOf = variant => (typeof variant === 'function' ? variant : variant.line);
+const pairProse = (salt, variants) => Object.assign((r, s, variant, force) => closureOf(isTieIndex(variant) ? variants[variant % variants.length]
+  : pickVariant(variants, `${r?.name ?? ''}>${s?.name ?? ''}::${salt}`))(r, s, force || TIE_FORCE_WORDS), { size: variants.length, lines: Object.freeze([...variants]) }); // F1: the force words, garrison's by default (`defenseFacts.js :: forceWordsOf`)
 const TIE_FORCE_WORDS = Object.freeze({ body: 'garrison', members: 'soldiers', member: 'soldier' });
 /** A drawn tie index is a non-negative integer; anything else takes the pair-hash fallback. */
 const isTieIndex = variant => Number.isInteger(variant) && variant >= 0;
@@ -1348,8 +1356,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `What ${r.name} sells is respectability, and ${s.name} is a steady customer. Goods move through channels no inspector has thought to draw on a map.`,
       (r, s) =>
         `${r.name} signs the import papers and ${s.name} decides what is actually in the crates. The warehouse keeps two inventories, and only one is shown to the customs house.`,
-      (r, s) =>
-        `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`,
+      { line: (r, s) =>
+        `${s.name}'s money buys ${r.name}'s stock at full price and sells it back through stalls that pay no market dues. Both of them call it a partnership.`, needs: ["market"] },
       (r, s) =>
         `${r.name}'s shop front is real, the trade is real, and a third of the coin that passes through it belongs to ${s.name}.`,
       (r, s) =>
@@ -1422,8 +1430,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} takes ${s.name}'s silver every quarter day and keeps certain doors unwatched in return. Each treats the other as a reliable colleague.`,
       (r, s) =>
         `${s.name}'s people are never searched on ${r.name}'s watch. The arrangement is three years old and has never been put in writing.`,
-      (r, s) =>
-        `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`,
+      { line: (r, s) =>
+        `${r.name} warns ${s.name} before every raid and arrests the competitors ${s.name} names. The watch reports show a fine record of arrests.`, needs: ["watch"] },
       (r, s) =>
         `When ${s.name}'s crew needs a prisoner released, ${r.name} signs the order. When ${r.name} needs an arrest, ${s.name} supplies the culprit.`,
       (r, s) =>
@@ -1454,10 +1462,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${r.name} keeps a file on ${s.name}'s operation that grows by the week; ${s.name} keeps one on ${r.name} that is already complete.`,
       (r, s) => `The war between ${r.name} and ${s.name} is fought in raids, informants, and paperwork. Neither side counts it as winnable; neither will stop.`,
       (r, s) => `${r.name} has closed three of ${s.name}'s houses this year. ${s.name} has opened four.`,
-      (r, s) =>
-        `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`,
-      (r, s) =>
-        `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`,
+      { line: (r, s) =>
+        `${r.name} wants ${s.name} in a cell and has said so before the council. ${s.name} has answered by paying two of ${r.name}'s informants.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${s.name}'s people know ${r.name}'s patrol routes by heart, and ${r.name}'s people know which taverns ${s.name} uses. Neither side has made the arrest that counts.`, needs: ["institution: tavern"] },
       (r, s) =>
         `${r.name} and ${s.name} are open enemies. Every raid ${r.name} orders costs ${s.name} money, and every month ${s.name} survives costs ${r.name} standing.`,
       (r, s) =>
@@ -1473,8 +1481,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} has offered ${r.name} a truce and a purse. ${r.name} has not answered, which ${s.name} counts as progress.`,
       (r, s) =>
         `${r.name}'s best informant inside ${s.name}'s crew has stopped reporting. Nobody has seen the informant for nine days.`,
-      (r, s) =>
-        `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`,
+      { line: (r, s) =>
+        `${s.name} has hired an advocate to sue ${r.name} over the last raid. The case comes before the council this season.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} has been ordered to stand down against ${s.name} by someone above ${r.name}. The order did not say why.`,
     ]),
@@ -1510,8 +1518,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${s.name}'s company has taken on a second client, and ${r.name} has learned the client's name.`,
       (r, s) =>
         `A guard from ${s.name}'s company was killed protecting ${r.name}'s cargo. ${s.name} wants compensation the contract does not mention.`,
-      (r, s) =>
-        `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`,
+      { line: (r, s) =>
+        `The council wants ${s.name}'s company under the watch's command. ${r.name} loses the contract's whole value if it agrees.`, needs: ["watch"], excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} has asked ${s.name} to escort a cargo with no manifest. ${s.name} has named a price.`,
     ]),
     type: 'patron_client',
@@ -1525,8 +1533,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `Between ${r.name}'s pulpit and ${s.name}'s ${f.body}, the settlement is governed twice over; the sermons and the patrol routes have a way of agreeing.`,
       (r, s) =>
         `${r.name} blesses what ${s.name} enforces, and ${s.name} enforces what ${r.name} blesses. Where one authority ends and the other begins is a question neither permits.`,
-      (r, s, f) =>
-        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`,
+      { line: (r, s, f) =>
+        `${r.name} preaches the cause and ${s.name} raises the men. The shrine's coffers pay for the ${f.body}'s swords.`, needs: ["institution: temple"] },
       (r, s, f) =>
         `${s.name}'s ${f.members} take their oaths before ${r.name}'s altar. To ${r.name}'s faithful, ${s.name}'s orders carry the weight of scripture.`,
       (r, s) =>
@@ -1542,8 +1550,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `The crowd that obeys them both has begun to notice it is one crowd. So has ${s.name}.`,
       (r, s, f) =>
         `${r.name} has declared a holy day on which no ${f.member} may bear arms. ${s.name} has a patrol scheduled for it.`,
-      (r, s) =>
-        `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`,
+      { line: (r, s) =>
+        `${s.name}'s men have started praying at a different shrine. ${r.name} counts the empty places at every service.`, needs: ["institution: temple"] },
       (r, s) =>
         `${r.name} wants an armed march against a rival sect. ${s.name} has counted the cost in men and wants to wait a year.`,
       (r, s, f) =>
@@ -1561,8 +1569,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name}'s money passes through ${r.name}'s offertory and comes out consecrated; the meeting rooms are sanctified, the accounts are not examined.`,
       (r, s) =>
         `${r.name} provides the sanctity, ${s.name} provides the income, and the congregation provides the cover (unknowingly), which is what makes it work.`,
-      (r, s) =>
-        `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`,
+      { line: (r, s) =>
+        `${s.name}'s crew meets in the crypt beneath ${r.name}'s shrine after evening prayers. ${r.name} keeps the only key.`, needs: ["institution: temple"] },
       (r, s) =>
         `${r.name} records ${s.name}'s payments as gifts from a pious donor. The donor has never attended a service.`,
       (r, s) =>
@@ -1574,14 +1582,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has a genuine crisis of conscience that ${s.name} is not prepared to accommodate.`,
-      (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`,
+      { line: (r, s) => `A visiting cleric has asked to audit the shrine's books. ${s.name} has offered to handle it.`, needs: ["institution: temple"] },
       (r, s) => `${r.name} has started keeping a second set of records. Confession, of a kind.`,
-      (r, s) =>
-        `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`,
+      { line: (r, s) =>
+        `A member of ${r.name}'s congregation saw ${s.name}'s men carrying crates out of the shrine at night, and has asked ${r.name} about it twice.`, needs: ["institution: temple"] },
       (r, s) =>
         `${s.name} wants to store weapons beneath ${r.name}'s altar. ${r.name} has refused once and been asked again.`,
-      (r, s) =>
-        `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`,
+      { line: (r, s) =>
+        `${r.name}'s superior is coming to inspect the shrine's accounts. ${s.name}'s gifts make up half the income.`, needs: ["institution: temple"] },
       (r, s) => `${r.name} preached a sermon on theft last week. ${s.name} took it personally.`,
       (r, s) =>
         `${s.name} has asked ${r.name} to marry two of the crew under false names. ${r.name} has not set a date.`,
@@ -1602,8 +1610,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) =>
         `${s.name} brings ${r.name} the jobs and the payment, and ${r.name} asks no questions about who the work is for.`,
       (r, s) => `${r.name}'s workshop has a back door, and ${s.name}'s couriers are the only ones who use it.`,
-      (r, s) =>
-        `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`,
+      { line: (r, s) =>
+        `${r.name} supplies ${s.name}'s network with wards against detection. Each ward is sold at triple the guild price.`, needs: ["guild"] },
       (r, s) =>
         `${s.name} pays ${r.name} a retainer to be ready at any hour. Twice this year, ${r.name} has been called out before dawn.`,
     ]),
@@ -1617,10 +1625,10 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${s.name} owes ${r.name} for three months of work and has offered information instead of coin.`,
       (r, s) =>
         `A ward ${r.name} made for ${s.name} failed during a robbery. ${s.name} blames the ward; ${r.name} blames the thief.`,
-      (r, s) =>
-        `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`,
-      (r, s) =>
-        `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`,
+      { line: (r, s) =>
+        `The guild has summoned ${r.name} to explain a shortfall in licensed components. ${s.name}'s orders account for the missing stock.`, needs: ["guild"] },
+      { line: (r, s) =>
+        `${r.name} has been offered a guild post that requires a clean record. ${s.name} has a list of everything ${r.name} has made.`, needs: ["guild"] },
     ]),
     type: 'patron_client',
   },
@@ -1639,24 +1647,24 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${s.name} holds the settlement's tax rolls as security for its loans. ${r.name} cannot raise a levy without ${s.name}'s clerks counting it first.`,
       (r, s) =>
         `${r.name} owes ${s.name} more than the settlement collects in two years of taxes. ${s.name} is paid first, every quarter.`,
-      (r, s) =>
-        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`,
+      { line: (r, s) =>
+        `${s.name} lends and ${r.name} spends. The council's decisions are made in ${r.name}'s chamber and approved in ${s.name}'s counting-house.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} governs on ${s.name}'s credit. Every loan renewed adds one more condition to the next.`,
     ]),
     tension: pairProse('t', [
       (r, s) => `${r.name} has identified an alternative creditor. ${s.name} has heard the same rumour.`,
       (r, s) => `The interest falls due at midsummer and the treasury will not cover it. ${s.name} has already drafted the terms of the extension.`,
-      (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`,
-      (r, s) =>
-        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`,
-      (r, s) =>
-        `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`,
+      { line: (r, s) => `A faction on the council wants the debt repudiated outright. ${r.name} has stopped disagreeing in public.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${s.name} has asked for a seat on the council as a condition of the next loan. ${r.name} has three weeks to answer.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${r.name} has proposed a new tax to clear the debt. ${s.name}'s friends on the council will vote against it.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${s.name} is calling in a third of the debt at once. ${r.name} has until the next quarter day to find it.`,
       (r, s) =>
         `${r.name} has started borrowing small sums from ${s.name}'s rivals. ${s.name}'s clerks have seen the receipts.`,
-      (r, s) =>
-        `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`,
+      { line: (r, s) =>
+        `${s.name} has refused credit for the winter grain stores. ${r.name} must choose between the creditor and the granary.`, needs: ["institution: granary"] },
     ]),
     type: 'debtor_creditor',
   },
@@ -1673,8 +1681,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} controls the ${f.body}'s pay and ${s.name} controls its swords. Each uses their half to bargain for the other's.`,
       (r, s) =>
         `${s.name} reports to ${r.name} on paper and to no one in practice. ${r.name} has three letters of complaint unanswered.`,
-      (r, s) =>
-        `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`,
+      { line: (r, s) =>
+        `${r.name} wants the watch under civil command; ${s.name} wants the council out of the barracks. They meet monthly and settle nothing.`, needs: ["watch","garrison"], excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} sets the curfew and ${s.name} decides whether to enforce it. The two have not agreed on a curfew in a year.`,
       (r, s) =>
@@ -1684,14 +1692,14 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'An incident is coming that will force the issue. Both are positioning for it.',
       (r, s) => 'A prisoner is currently held by both jurisdictions at once. Neither will release the paperwork first.',
       (r, s) => `${s.name} has begun drilling in the square without asking. ${r.name} has begun writing letters to the capital.`,
-      (r, s, f) =>
-        `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`,
-      (r, s) =>
-        `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`,
-      (r, s) =>
-        `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`,
-      (r, s) =>
-        `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`,
+      { line: (r, s, f) =>
+        `${r.name} has cut the ${f.body}'s pay to fund the market repairs. ${s.name} has told the ${f.members} who signed the order.`, needs: ["market"] },
+      { line: (r, s) =>
+        `${s.name} arrested a councillor's son without ${r.name}'s warrant. ${r.name} has demanded his release by tomorrow.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `${r.name} has asked the capital to replace ${s.name}. ${s.name} has asked the capital to dissolve ${r.name}'s council.`, excludes: ["ruler: lord","ruler: occupier"] },
+      { line: (r, s) =>
+        `A riot is expected on the next market day, and ${r.name} and ${s.name} have issued opposite orders for it.`, needs: ["market"] },
       (r, s, f) =>
         `${s.name} has begun collecting a road toll for the ${f.body}. ${r.name} calls it theft from the treasury.`,
     ]),
@@ -1725,8 +1733,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `A post opens at midsummer, and only ${r.name} or ${s.name} can fill it.`,
       (r, s) =>
         `${s.name} has been telling clients that ${r.name}'s work is slipping. Two of the clients have repeated it to ${r.name}.`,
-      (r, s) =>
-        `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} will both present proposals at the next council session. Only one will be accepted.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} lost the last contract to ${s.name} by a single vote, and has learned who cast it.`,
     ]),
     type: 'rival',
@@ -1806,7 +1814,7 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} and ${s.name} are allies by arithmetic: each has counted the cost of the other as an enemy and found it too high. The friendship is warm, public, and entirely conditional.`,
       (r, s) =>
         `The alliance between ${r.name} and ${s.name} was born of a shared threat and has outlived it; both are quietly recalculating what it is now for.`,
-      (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`,
+      { line: (r, s) => `${r.name} and ${s.name} share a council bloc and a list of enemies. They do not share their plans.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${r.name} and ${s.name} back each other in public and check each other's work in private.`,
       (r, s) =>
         `${r.name} brings the votes and ${s.name} brings the money. The alliance is three years old and has won every vote it needed.`,
@@ -1844,8 +1852,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
         `${r.name} sends difficult cases to ${s.name}, and ${s.name} sends them back solved. Neither has ever charged the other a fee.`,
       (r, s) =>
         `${r.name} and ${s.name} have stood on opposite sides of three disputes and praised each other after every one.`,
-      (r, s) =>
-        `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`,
+      { line: (r, s) =>
+        `${s.name} once told the council that ${r.name} was right and ${s.name} was wrong. ${r.name} has not forgotten it.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${r.name} and ${s.name} consult each other before any decision that matters. The advice is honest and is always taken seriously.`,
       (r, s) =>
@@ -1858,8 +1866,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => `${r.name} has learned something about ${s.name}'s family that ${s.name} does not know.`,
       (r, s) => `${s.name} has been offered ${r.name}'s post by people who want ${r.name} gone.`,
       (r, s) => `${r.name} has made a mistake that ${s.name} is bound to report. ${s.name} has not reported it.`,
-      (r, s) =>
-        `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`,
+      { line: (r, s) =>
+        `The council has asked ${r.name} and ${s.name} to audit each other's accounts. Both agreed, and neither is comfortable.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) =>
         `${s.name} has publicly backed a plan that ${r.name} thinks will fail. ${r.name} has said so once, in private.`,
     ]),
@@ -1957,8 +1965,8 @@ export const STRESS_ECONOMIC_EFFECTS = {
       (r, s) => 'A newcomer keeps trying to reconcile them, and is about to learn why nobody else does.',
       (r, s) => `${s.name} has been appointed to judge a case in which ${r.name} is a party.`,
       (r, s) => `${r.name} has found the document that proves what ${s.name} did, and has kept it locked away.`,
-      (r, s) =>
-        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`,
+      { line: (r, s) =>
+        `${r.name} and ${s.name} have been placed on the same council committee. The first meeting is next week.`, excludes: ["ruler: lord","ruler: occupier"] },
       (r, s) => `${s.name}'s child has asked to apprentice with ${r.name}. ${r.name} has not refused.`,
       (r, s) => `${r.name} has learned that ${s.name} is in debt and could be ruined by one call on a loan.`,
     ]),
