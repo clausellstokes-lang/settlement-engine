@@ -2576,9 +2576,10 @@ margin *arm*. They are different fields on different rows and both are kept;
 3. `[visitor]` A stranger understands within a day why anybody would want {settlement}, and understands shortly afterwards why the town is so careful about who it offends.
 
 **strategic value LOW**
-1. `[counterforce]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
-2. `[ledger]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
-3. `[street]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
+1. `[counterforce · no crisis: under_siege, occupied]` Nothing at {settlement} is worth an army's season, and the town's best defense is that plain fact rather than anything it has built.
+2. `[ledger · no crisis: under_siege, occupied]` {settlement} is not a prize. What it can field matters less here than what it does not have that anyone would come for.
+3. `[street · no crisis: under_siege, occupied]` The town knows it is not worth taking and has made a kind of peace with the knowledge, which is not the same as being comfortable with it.
+4. `[counterforce · crisis: under_siege, occupied]` Nothing at {settlement} was worth an army's season by any sensible reckoning, and somebody has come for it anyway; the town's plainness is no defense now.
 
 ---
 
@@ -3442,9 +3443,10 @@ PEACE, not missing data.
 4. `[counterforce · no walls]` {settlement} is at war with {counterpart} and has not been touched by it; the distance between the two towns is doing the work that arms would otherwise have to.
 
 **`warExhaustion: rested`**
-1. `[ledger]` {settlement} carries no scar from fighting. Whatever the town has done, it has recovered from, and what it could put in the field it could put there tomorrow.
-2. `[street]` The town has its people and its temper both, and neither has been spent on anything recently.
-3. `[counterforce]` {settlement} could put its full strength in the field this season and is not being asked to; nothing has been spent, and the not-spending is a choice somebody made.
+1. `[ledger · no crisis: under_siege, occupied]` {settlement} carries no scar from fighting. Whatever the town has done, it has recovered from, and what it could put in the field it could put there tomorrow.
+2. `[street · no crisis: under_siege, occupied]` The town has its people and its temper both, and neither has been spent on anything recently.
+3. `[counterforce · no crisis: under_siege, occupied, wartime]` {settlement} could put its full strength in the field this season and is not being asked to; nothing has been spent, and the not-spending is a choice somebody made.
+4. `[unfolding · crisis: under_siege, occupied]` {settlement} came to this fighting rested, with nothing spent before it began; that reserve is the town's whole advantage, and the fighting now draws on it daily.
 
 **`warExhaustion: near peace`**
 1. `[ledger]` {settlement} carries a light mark from its fighting and is very nearly clear of it; what remains is a preference rather than a weakness.
@@ -4808,14 +4810,16 @@ panel does not surface at all.
 3. `[street]` The contest here is not between different faiths but between near-identical ones, which is why it is bitter.
 
 **NICHE: every niche uncontested** · **THE GOOD STATE (R-DST-G)**
-1. `[ledger]` Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.
+1. `[ledger · no crisis: religious_conversion]` Each of the town's creeds keeps its own ground. They divide the year without dividing the households, and nobody competes for the same believer.
 2. `[visitor · no crisis: religious_conversion]` The faiths of {settlement} do not overlap: different tempers, different callings, and consequently no quarrel worth having.
 3. `[street · no crisis: religious_conversion]` The religious field here is orderly. Every rite answers something the others do not, which is why they all survive.
+4. `[threshold · crisis: religious_conversion]` On paper each of the town's creeds still has its separate calling; the conversion pressing on {settlement} is not a quarrel between them but a pull on every household at once.
 
 **LEGITIMACY: `secure`**
-1. `[elder]` The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}. *— requires `tenure`*
-2. `[ledger]` Legitimacy is not this creed's problem. Its right to the seat is treated as a fact about {settlement} rather than an opinion about the faith.
-3. `[threshold]` The claim is secure. A rival could out-draw the patron in adherents and still not out-argue it.
+1. `[elder · no crisis: religious_conversion]` The patron's claim is not questioned here. Whatever the shares say, the town regards {creed} as the rightful faith of this place, and has for {timeband_span}. *— requires `tenure`*
+2. `[ledger · no crisis: religious_conversion]` Legitimacy is not this creed's problem. Its right to the seat is treated as a fact about {settlement} rather than an opinion about the faith.
+3. `[threshold · no crisis: religious_conversion]` The claim is secure. A rival could out-draw the patron in adherents and still not out-argue it.
+4. `[ledger · crisis: religious_conversion]` The patron's claim was settled long before the conversion reached {settlement}, and it is being tested now by people who never thought to question it.
 
 **LEGITIMACY: `established`**
 1. `[ledger]` The patron's claim is accepted without being revered. Nobody disputes it, and nobody would call it sacred.

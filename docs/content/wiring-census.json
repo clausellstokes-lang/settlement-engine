@@ -23,7 +23,7 @@
   "totals": {
     "pools": 709,
     "blocks": 68,
-    "variants": 2324,
+    "variants": 2328,
     "resolved": 341,
     "unresolved": 368,
     "resolvedWithPredicate": 207,
@@ -486,7 +486,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [
         {
@@ -32059,7 +32059,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 1,
       "predicate": [],
       "branchReads": [],
@@ -38026,7 +38026,7 @@
       ],
       "slotsWithoutProvider": [],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [
@@ -38108,7 +38108,7 @@
         "timeband_span"
       ],
       "hasBag": true,
-      "variants": 3,
+      "variants": 4,
       "grammars": 2,
       "predicate": [],
       "branchReads": [],
@@ -39929,7 +39929,7 @@
         "DS-DEF-1 :: strategic value HIGH",
         "DS-DEF-1 :: strategic value LOW"
       ],
-      "variants": 6,
+      "variants": 7,
       "grammars": 2,
       "blocks": [
         "DS-DEF-1"
@@ -48166,7 +48166,7 @@
         "text(terrain) (via TERRAIN_PRIZE_OF in defenseStateProse.js)"
       ],
       "readingFunction": "TERRAIN_PRIZE_OF",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -53095,7 +53095,7 @@
       "subject": "warExhaustion: rested",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 1 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 1 grammar(s) · slots {settlement}"
     },
     {
       "tier": "THIN",
@@ -54007,7 +54007,7 @@
       "subject": "NICHE: every niche uncontested",
       "fields": [],
       "readingFunction": "nicheContestPoolKey",
-      "count": "3 variant(s) · 2 grammar(s) · slots {settlement}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {settlement}"
     },
     {
       "tier": "COVERED",
@@ -54015,7 +54015,7 @@
       "subject": "LEGITIMACY: secure",
       "fields": [],
       "readingFunction": "(unresolved)",
-      "count": "3 variant(s) · 2 grammar(s) · slots {creed, settlement, timeband_span}"
+      "count": "4 variant(s) · 2 grammar(s) · slots {creed, settlement, timeband_span}"
     },
     {
       "tier": "COVERED",
