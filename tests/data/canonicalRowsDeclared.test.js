@@ -38,6 +38,16 @@ describe('the seven canonical v0 rows declare through the tag slot (CENSUS-3f un
     expect(canonical(block, pool).marks ?? []).toEqual([]);
   });
 
+  // CENSUS-3g unit 2 (the chair's answer 1 / R-AR's second block): the dm-only v4 of the large-share
+  // tier presumes guilds exactly as the significant tier's canonical row does (R-AD: a DM reads it as
+  // a fact), so it declares `guild` now.
+  it('DS-ECO-6 large share v4 ("The guilds are losing their grip…") declares guild', () => {
+    const p = E['DS-ECO-6'].pools['TIER: a large share off the books (≥30)'];
+    const v4 = (Array.isArray(p) ? p : p.variants).find((v) => v.vid === 4);
+    expect(v4.text).toMatch(/^The guilds are losing their grip/);
+    expect(v4.marks).toEqual(['dm-only', 'guild']);
+  });
+
   it('the slot never reaches the text', () => {
     for (const [b, p] of [['DS-ECO-3', 'SHORTAGE × trade-dependent'], ['DS-ECO-3', 'SURPLUS × trade-dependent'], ['DS-ECO-6', 'TIER: significant off-book activity (≥15)']]) {
       expect(canonical(b, p).text).not.toMatch(/[`[\]]/);

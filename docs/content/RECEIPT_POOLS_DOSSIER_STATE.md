@@ -1120,7 +1120,7 @@ register and stand as canonical-at-zero for the two lower tiers (R-DST-C).
 1. `[ledger · dm-only]` A large share of what {settlement} earns never reaches a ledger. The duties collected fall well short of the trade actually done, and the gap is not an accounting error.
 2. `[street · dm-only]` Half the business of this town is done in the ordinary way and the rest is done quietly. The quiet half is not hiding especially hard.
 3. `[visitor · dm-only]` A stranger who trades honestly here will be undersold and will not immediately understand why. {faction} is not paying what he is paying.
-4. `[unfolding · dm-only]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
+4. `[unfolding · dm-only · guild]` The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.
 
 **TIER: significant off-book activity (≥15)**
 0. *(canonical)* `[guild]` Significant off-book activity. Merchants operating in the shadow economy have a cost advantage over those paying duties and guild fees.

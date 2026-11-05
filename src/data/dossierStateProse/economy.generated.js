@@ -1838,7 +1838,8 @@ export const DOSSIER_STATE_PROSE_ECONOMY = /* #__PURE__ */ Object.freeze({
         {
           "angle": "unfolding",
           "marks": [
-            "dm-only"
+            "dm-only",
+            "guild"
           ],
           "text": "The guilds are losing their grip a little further each season. Anyone can undercut a guild price by simply not being in the guild.",
           "slots": [],
