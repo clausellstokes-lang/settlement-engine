@@ -210,3 +210,80 @@ The STOP on both sides is the base's. `coh:crisis-blind-prose` fires on rung 2D 
 2. The `power/` module ceiling (800), red at the base: split the two modules, or move the sibling tables to a sibling data module? The tables stand beside their originals, which is 1c's shape.
 3. A council-presence atom (C5b-5): "fund the council" is true under a theocratic council, so `ruler: council` cannot carry it.
 4. The baseline-conflict site's facts hold no NPCs (C5b-6): should 1d/1e hand that site the final record, so `priest` can be declared there?
+
+---
+
+# CENSUS-5c — the {colour} rulings, the owed lines, the power split, the militia sets measured (lane record, 2026-11-05)
+
+> A build seat's record for the chair. Same branch, base CENSUS-5b's tip `abed36651`. Merged first: `origin/lane/census-1b-2026-11-04` at `6e2cb6d65` (CENSUS-1e: the `safetyProfile`, `rulingStructure` and `threatProfile` sibling sets wired), as `ff4128242`; clean, `gen:dossier-prose --check` and the wiring census `--check` green. Fetched again before unit 4: no new commit on 1b. Transport push after every unit; no pull request.
+
+## The units
+
+| unit | commit | what |
+|---|---|---|
+| merge | `ff4128242` | 1b at `6e2cb6d65` (1e's T sites) |
+| 1 | `bf41923` | R-AB, answer 2: the power sibling tables move to `src/data/powerSiblings.js`, byte-identical |
+| 2 | `6dd3f9766` | R-R: 113 DS-REL / DS-FTH / DS-WAR pools read and braced `{colour}` |
+| 3 | `8b304b8d8` | the owed lines (`soldiers`, `organised crime`) and the presumptions unit 2's reading found |
+| R-A ruling | `b3d4fa202` | the chair's 05:25 ruling: `FACTION_DESC_SIBLINGS`' militia sets measured at the draw, reworded (R-Q → R-U) |
+| 4 | (no commit) | the carried tables, measured where 1e enforces them; no slot empties, so no twin |
+| doc | (this commit) | this record |
+
+## Unit 1 — the split (R-AB)
+
+`BASELINE_CONFLICT_SIBLINGS`, `MILITARY_MODIFIER_SIBLINGS` and `FACTION_DESC_SIBLINGS` (with `declaredSet`) moved verbatim to `src/data/powerSiblings.js`. Both `power/` modules re-export them on their existing one-line import, so no cited line moves. The three exported tables deep-equal base and tip, and both modules' export sets are identical. **The ceiling (`powerStructure.test.js`, 800 raw lines): 851 / 873 at the merged base → 813 / 819 (→ 817 after the R-A unit).** It is still red, but only by the overage it had before the census: 813 / 807 at `358b0a841`, CENSUS-5's cut, before any sibling table existed. The ceiling is not raised. Getting under 800 means decomposing logic, which is outside a census lane's scope.
+
+## Unit 2 — the `{colour}` rulings (R-R; the chair's ruling under the delegation, vetoable)
+
+Every line of the 151 DS-REL / DS-FTH / DS-WAR pools was read. **The rule:** a pool is braced only when no line in it declares and no line presumes a fact beyond its key. A pool with one declared line is not pure colour by definition, so it stays in the register with its other lines.
+
+| family | pools | braced `{colour}` | left in the register (why) |
+|---|---|---|---|
+| DS-REL | 13 | **12** (DS-REL-1's seven relationship types, the two cross-settlement pools; DS-REL-2's three) | `trade_partner` (declares `market`) |
+| DS-FTH | 52 | **34** | the ten pools that declare a line; ARC rising and DEVOTION lukewarm v3 ("the clergy": `priest`?); CULTS v3 ("its own quarter of the town", several cults); STANDING cult ("Its shrine is real": `sacredHouse`, R-AE, not homed); NICHE slots open ("Shrines stand unclaimed"); PANTHEON Major v2 (the lawfulness of magic as a live question); PILGRIM thin ("the town's inns": `institution: tavern`?); LEGITIMACY established (now declared, unit 3) |
+| DS-WAR | 86 | **67** | the pools that declare (walls/gate/market twins, rested, WAR-3); DS-WAR-5 posture peace, null, live front, phantom front, blockade stamped ("the water"), siege_lifted, trade_realignment (unit 3 declares five of their lines) |
+| **total** | **151** | **113** | |
+
+The off-census tables CENSUS-5b listed as "pure colour, pending the register" are ruled `{colour}` here: `stressFactions` (the stress-keyed faction descriptions), `settlementNarrative :: STRESS_RUMORS` (the relationship's own text), `powerSupport :: ALIGNED_BASIS` (row 92, archetype labels; no label names a fact), `threatDefensePolicy` (catalogue names), `warRemembrance` (the world ledger's bands), and the faith panel tables (`faithPanelModel`, `deityEffects`; cause- and axis-keyed). I spot-checked 5b's reading and it holds. **No brace is applied to these tables, because none can be:** the table half of the registers (`tablePools`, CENSUS-1e's unit 3c) does not exist, and no reader has a table-level `{colour}` channel. This list is the row set for 3c to ingest. I did not invent a marker that 3c might spell differently.
+
+**Mechanics.** DS-REL-1's eight compact one-line rows were unfolded into a label plus numbered lines, because the projector reads a brace only on a standalone label. The keys, the variants and their order are unchanged. **Byte-identity 0:** the regenerated leaves differ from HEAD's in exactly 113 `poolMeta.colour` entries and nothing else (deep compare), and `colour` has no reader in the kernel or in `drawDeclared`. **The undeclared register** (read by its own reader): 2,118 → 1,775 lines, 688 → 575 pools (DS-REL 41 → 2, DS-WAR 242 → 40, DS-FTH 141 → 39). It is not re-pinned (R-T).
+
+## Unit 3 — the owed lines and the reading's presumptions
+
+| line | declares | why |
+|---|---|---|
+| DS-DEF-6 Well-funded v2 "The soldiers at {settlement} are paid" | `soldiers` | owed since CENSUS-5 (1c's getter) |
+| DS-DEF-4 capture none v2 "There is a criminal interest … with the means" | `organised crime` | owed (3b's getter) |
+| DS-DEF-4 structure null v1 "No criminal infrastructure has been identified" | `no organised crime` | owed. Diffuse crime is not "an organization", so the line excludes the presence atom, not `crime > none` |
+| DS-FTH-3 LEGITIMACY established v1 "Nobody disputes it" | `no crisis: religious_conversion` | 5b's reading of `secure`: a conversion tests the claim |
+| DS-WAR-5 posture peace v3 "a town with no soldiers to speak of" | `no soldiers` | unmounted, so it moves no birth |
+| DS-WAR-5 null v1, v3 (quarrels "the ordinary kind"; "nobody … is fighting anybody") | `no crisis: unrest` | unmounted |
+| DS-WAR-5 live front v2, siege_lifted v1 (the gates) | `gate` | unmounted |
+| DS-WAR-5 trade_realignment v2 (the stalls) | `market` | unmounted |
+
+There are no twins: every declared pool keeps at least two lines under the contradicting fact. **Left undeclared:** DS-FTH-1 SINK rising v1 ("Crisis has a way of ending indifference") presumes that SOME crisis is active. `crisis: any` admits everywhere (R-H), and the bare `crisis` is F12's kernel mark word, a mount dimension DS-FTH-1 does not declare, so the line waits on CENSUS-1d unit 8 (R-O). Red-first: `census5cOwedLines.test.js` was 10/10 red at `6dd3f9766`.
+
+## The chair's ruling of 05:25 (R-A) — the militia sets measured
+
+**The measurement.** On the 1,000, a probe hook at `rulingStructure`'s military-description draw (in a scratch worktree) compared the native roster's `factsOf(...).defence` with `factsOf(final record).defence` at every power step of every birth (2,121 steps):
+
+| component | differs at draw vs final |
+|---|---|
+| watch | **0** (settled) |
+| garrison | **9** (not settled) |
+| militia | **33** (not settled; false at the draw and true at the end: soak1k-73, -85, -229, -331, -558, -559 …) |
+
+The two sets presume a militia, and a militia is not settled at that draw, so R-V does not apply. **R-U:** both lines are reworded at their branch to their own twins' wording. That wording is CENSUS-5b's, already the chair's ruling (R-G), so no new line is added. Both sets leave `FACTION_DESC_SIBLINGS`.
+
+- "Part-time militia with limited organisation; …" → "Part-time armed volunteers with limited organisation; …"
+- "Armed patrol and informal militia; …" → "Armed patrol of able-bodied residents; …"
+
+**Moved, by this one cause:** golden **168 of 525** rows (hamlet 84, village 84), with zero residue: every moved record equals its base record once the two strings are replaced (computed in scratch worktrees; the golden door refuses an unsigned re-record, and none was attempted). Soak records **41 of 1,000** (7 part-time, of which 1 had no militia; 34 patrol, of which 13 had none), so **14 false claims leave the page**. On the 60, 3 records (soak1k-20, -26, -56). Red-first: `census5cMilitiaReword.test.js` was 3/3 red at `8b304b8d8`.
+
+## Unit 4 — the carried tables where 1e enforces them
+
+No new site landed on 1b after the merge. On this tree 1e enforces `SAFETY_LINE_SIBLINGS`, `FACTION_DESC_SIBLINGS` (settled sets) and `THREAT_TEXT_SIBLINGS`. `FACTION_NAME_SIBLINGS` (an R site, never pre-filtered) and `RULING_POWER_SIBLINGS` (1d: an import cycle) stay carried.
+
+- **The `safetyProfile` enforcement, by cause (1e's wiring of 5b's ten carried sets):** on the base 1,000's birth ledgers, a safety line resolves to its twin in **111 births** (289 draws across the generator's passes). That is consistent with the ~137 expected. It is in both BEFORE and AFTER (R-B), so it is not this lane's move.
+- **No slot empties.** A T site cannot mute: a refused line with no twin keeps the original. A probe re-asserted every printed original of this lane's wired tables against `factsOf(final record)` on 300 births. **0 kept-false** in `safetyProfile`, the settled `FACTION_DESC` sets, `MILITARY_MODIFIER` and the baseline conflicts. The one kept-false class was the militia patrol line (4 of 300), which the R-A unit cured. So no twin is owed (R-G, R-L).
+- **A blind spot found (open question 1).** `drawDeclared.js :: resolveSibling` keeps a refused original when its set has no twin. `note()` returns before ledgering a null resolution, so a kept-false original never reaches `cert:false-presumption`. 1e's "24 → 0" came from parking the militia sets; it does not show that the remaining twin-less sets are true. The probe above shows they are, today.
