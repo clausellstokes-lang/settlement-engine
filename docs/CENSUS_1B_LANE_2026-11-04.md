@@ -381,3 +381,12 @@ Golden **0 / 525** (every unit). Soak records / pages: unit 4 only, **1 / 60** (
 3. **Unit 8 (wave 2, R-O):** F12's five crisis-family marks and the `walls` mark onto the vocabulary's dimensions; byte-identity 0, pages included.
 4. **`tablePools`' second half:** read declarations held beside a table (sibling sets, declaration maps) so their rows stop reading high; enrol the remaining one-export prose tables.
 5. The chair's call on open question 1 (a kept line no final record carries).
+
+### Addendum — the chair's message of 2026-11-05 07:53 UTC (R-A), received after this seat's boundary report; listed for CENSUS-1h, not acted on (context budget)
+
+- **R-AT, for CENSUS-1h (after unit 6's display rows, before unit 8):** a resolution's tie-break key carries the settlement's identity. `historyCoherence.js :: flavorOf`'s argmax key (`POLITICAL_FLAVOR.${pattern}::${subset.length}::${subset[0]?.name}`, `b26ed12`) is nearly constant across settlements, so CENSUS-2f's six religious_heavy refusals on the 1,000 all resolved to row [6]. Key that resolution — and any resolver in `drawDeclared` / `resolveDeclared` / `resolveSibling` whose key omits the settlement — on the settlement's identity; only refused births move (six of 1,000 there), counted by cause; unrefused births byte-identical on the 525 and the 60. Note also unit 3's `registry` resolution keys on `options.key || options.poolId` (the loyalty site passes the pool id only) — the same audit applies.
+- **R-AQ's channel is now the first item** (three lanes wait; CENSUS-2f stopped "waiting on R-AQ", vid 54 first). The importer census is already taken above: both the decree family and the connectives are PRINTED (none dead for 2g to list); build the channel to the spec above and push.
+- **A correction for the chair's FYI:** the 1,884 `FACTION_DESC_SIBLINGS` findings were not kept garrison lines that print; they were this lane's eager governing-description table (never on the final record), cured by `1261515` (2b). On this tip the only `cert:false-presumption` cause is the 250 `OUTLOOK_HOOK_SIBLINGS` findings (161 births), also never printed (`withoutFalseHooks`), which CENSUS-3g is curing. 5d's garrison reword is independent of that count.
+- Re-fetch the rulings doc (now R-A…R-AT, ten blocks) on `origin/lane/census-sop-2026-11-04` before starting.
+
+**Revised order for CENSUS-1h:** 1. unit 7's channel → 2. unit 6's display rows (merge census-5 first) → 3. R-AT → 4. unit 8 → 5. `tablePools`' second half.
