@@ -278,7 +278,7 @@ function speakHooks(collected, facts, settlement) {
   }
   if (refusedFamine && !keptFoodHook && facts.foodGap) {
     push(out, {
-      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }),
+      text: foodGapHookLine({ name: settlement.name, band: facts.foodBand }, () => factsOf(settlement)),
       source: 'Economy',
       role: '',
       category: 'economics',
@@ -371,7 +371,7 @@ export function collectPlotHooks(settlement = {}, options = {}) {
   /** @type {PlotHook[]} */
   const hooks = [];
   const facts = settlementHookFacts(settlement);
-  const drawConflictHook = createConflictHookDraw();
+  const drawConflictHook = createConflictHookDraw(() => factsOf(settlement));
 
   // ── THE CRISIS HOOKS, FIRST (the HOOKS-UNDER-STRESS lane, SOAK-1000 §3) ─────────────────
   // Each active crisis adds the hooks its cast derives (`src/domain/crisis/crisisHooks.js ::

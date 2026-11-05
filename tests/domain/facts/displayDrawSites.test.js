@@ -14,6 +14,7 @@
 import { describe, expect, it } from 'vitest';
 import { withPresumptionLedger } from '../../../src/domain/facts/presumptionLedger.js';
 import { traditionHook, traditionBeatProse } from '../../../src/domain/traditions/prose.js';
+import { createConflictHookDraw, foodGapHookLine } from '../../../src/domain/dossier/hookLines.js';
 
 /** @param {() => unknown} fn */
 const ledgerOf = (fn) => withPresumptionLedger(fn).ledger;
@@ -26,5 +27,21 @@ describe('Appendix B row 89 — the tradition prose pools (kind H)', () => {
     expect(out.ledger.map((e) => [e.pool, e.drawKind, e.surface])).toEqual([['TRAD_HOOKS.failure', 'H', 'plot_hooks']]);
     const beat = ledgerOf(() => traditionBeatProse({ outcome: 'cancelled', name: 'x', town: 'y', ownerBit: '', seed: 's' }));
     expect(beat.map((e) => e.pool)).toEqual(['TRAD_OUTCOME_PHRASE.cancelled', 'TRAD_CANCELLED_SUMMARY']);
+  });
+});
+
+describe('Appendix B row 90 — the conflict-hook and food-gap pools (kind H)', () => {
+  it('each draw is noted under its family; without replacement, as before', () => {
+    const conflict = { parties: ['The Mill Guild', 'the Abbey'], issue: 'Control of the river tolls' };
+    const plain = createConflictHookDraw();
+    const expected = [plain(conflict)[0], plain(conflict)[0]];
+    const draw = createConflictHookDraw();
+    const out = withPresumptionLedger(() => [draw(conflict)[0], draw(conflict)[0]]);
+    expect(out.result).toEqual(expected);
+    expect(out.result[0]).not.toBe(out.result[1]);
+    expect(out.ledger.map((e) => e.pool)).toEqual(['HOOK_LINE_POOLS.conflict.standing', 'HOOK_LINE_POOLS.conflict.standing']);
+    const gap = withPresumptionLedger(() => foodGapHookLine({ name: 'Ashford', band: 'deficit' }));
+    expect(gap.result).toBe(foodGapHookLine({ name: 'Ashford', band: 'deficit' }));
+    expect(gap.ledger.map((e) => [e.pool, e.drawKind])).toEqual([['HOOK_LINE_POOLS.foodGap', 'H']]);
   });
 });
