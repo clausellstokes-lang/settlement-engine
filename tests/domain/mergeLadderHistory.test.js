@@ -159,8 +159,14 @@ function mergeWithReceipt(bend) {
   // by the three controls' own conditions (a rung takes the receipt, R1 repairs > 0, and the planted, empty and
   // absent histories each survive): four rows qualify (town coastal port, metropolis forest isolated, metropolis
   // riverside river, town plains port); this is the one of the same tier as the old subject.
+  // 2026-11-05 (LANDING-5, the chair's ruling 4; re-keyed BY IDENTITY with its step): THE SUBJECT MOVED AGAIN,
+  // metropolis|germanic|forest|isolated -> metropolis|germanic|riverside|river. Bisected over the rung-1 landing's
+  // first-parent stages: the old subject's control takes the receipt with R1 repairs 1 through 79c442330 and from
+  // X-46 car 3 90dc22f18 (record 12, the institution budget) on takes nothing (R1 repairs 0). Re-hunted at the landed
+  // tip by the same three conditions: three rows qualify (metropolis riverside river, town plains frontier, town plains
+  // plagued); this is the one of the same tier, and one of the four the 2026-10-01 hunt found.
   const row = sample63().find((candidate) => keyOf(candidate)
-    === 'metropolis|germanic|forest|isolated|civilized|golden-master-v3');
+    === 'metropolis|germanic|riverside|river|civilized|golden-master-v3');
   const { _seed: seed, ...config } = row;
   const base = generateSettlementPipeline(config, null, { seed, customContent: {} });
   const R0 = rederive(base, config, EMPTY, ENGINE, DECLARATIONS).record;
