@@ -74,12 +74,16 @@ function poolDeclares(pool, tagged) {
  * @property {ReadonlyArray<string>} [poolDeclares] the pool's own atoms
  * @property {(line: any) => any} [twin] the site's twin resolver (a text-keyed lookup)
  * @property {Record<string, unknown>} [ctx] the per-line context a context atom needs (`npc`)
+ * @property {boolean} [keepRefused] the site KEEPS its drawn line when nothing is admitted (a slot
+ *   that is never emptied: site 18's descriptions, the conversion beat): the result then carries
+ *   the refused drawn line with `resolvedBy: 'kept'`, and the ledger notes it with its atoms so the
+ *   birth self-check judges it (R-AM, CENSUS-1g unit 2)
  */
 
 /**
  * @param {ReadonlyArray<any>} pool
  * @param {DrawDeclaredOptions} options
- * @returns {{ line: any, text: any, refused: string[] | null, resolvedBy: 'drawn'|'twin'|'argmax'|'none' }}
+ * @returns {{ line: any, text: any, refused: string[] | null, resolvedBy: 'drawn'|'twin'|'argmax'|'none'|'kept' }}
  */
 export function drawDeclared(pool, options) {
   const list = Array.isArray(pool) ? pool : [];
@@ -130,6 +134,11 @@ export function drawDeclared(pool, options) {
     note(options, best, list, atomsOf(declarationOf(best, { tagged })), 'argmax');
     return { line: best, text: lineText(best), refused: verdict.refused, resolvedBy: 'argmax' };
   }
+  if (options.keepRefused === true) {
+    // R-AM: the site prints its refused drawn line; the ledger sees it.
+    note(options, drawn, list, atomsOf(declarationOf(drawn, { tagged })), 'kept');
+    return { line: drawn, text: lineText(drawn), refused: verdict.refused, resolvedBy: 'kept' };
+  }
   note(options, null, list, [], 'none');
   return { line: null, text: null, refused: verdict.refused, resolvedBy: 'none' };
 }
@@ -179,7 +188,9 @@ export function resolveDeclared(cell, options) {
  * keyed by the original's text. A drawn line that is no key is handed back untouched; a key
  * resolves through `resolveDeclared` (the original if admitted, else its twin). No roll is added:
  * the draw already happened. An UNANSWERED record (no facts) keeps the original — the retired
- * text-keyed lookup's own rule, kept so no birth moves (the self-check still re-asserts it).
+ * text-keyed lookup's own rule, kept so no birth moves. A KEPT original — unanswered, or refused
+ * with no admitted twin — is NOTED with its atoms (`resolvedBy: 'kept'`, R-AM, CENSUS-1g unit 2),
+ * so the birth self-check (`cert:false-presumption`) re-asserts it against the final record.
  * @template T
  * @param {T} line the drawn line
  * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings the table's sibling sets
@@ -189,9 +200,21 @@ export function resolveDeclared(cell, options) {
 export function resolveSibling(line, siblings, options) {
   if (typeof line !== 'string' || !Object.prototype.hasOwnProperty.call(siblings, line)) return line;
   const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
-  if (!facts) return line;
+  if (!facts) { noteKept(line, siblings[line], options); return line; }
   const r = resolveDeclared(siblings[line], { ...options, facts });
-  return r.line == null ? line : /** @type {T} */ (lineText(r.line));
+  if (r.line == null) { noteKept(line, siblings[line], options); return line; }
+  return /** @type {T} */ (lineText(r.line));
+}
+
+/**
+ * R-AM: a sibling set's original kept as printed (no admitted twin, or no facts) is noted with the
+ * original row's atoms.
+ * @param {string} line @param {ReadonlyArray<any>} set
+ * @param {Omit<DrawDeclaredOptions, 'draw'>} options
+ */
+function noteKept(line, set, options) {
+  const original = set.find((l) => !isTwin(l) && lineText(l) === line) ?? set[0];
+  note({ ...options, drawKind: options.drawKind || 'T' }, original, set, atomsOf(declarationOf(original, { tagged: options.tagged === true })), 'kept');
 }
 
 /**
@@ -236,7 +259,7 @@ function lineIdOf(line, i) {
 /**
  * @param {DrawDeclaredOptions | Omit<DrawDeclaredOptions, 'draw'|'twin'|'key'>} options
  * @param {any} line @param {ReadonlyArray<any>} pool @param {string[]} atoms
- * @param {'drawn'|'twin'|'argmax'|'none'} resolvedBy
+ * @param {'drawn'|'twin'|'argmax'|'none'|'kept'} resolvedBy
  */
 function note(options, line, pool, atoms, resolvedBy) {
   if (activePresumptionLedger() === null || line == null) return;
