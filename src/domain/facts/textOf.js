@@ -15,7 +15,7 @@
 
 /**
  * @template T
- * @param {T | { text: T, needs?: string[], excludes?: string[], crisis?: string[] }} line the bare value, or the declared row (its sibling column)
+ * @param {T | { text: T, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, crisis?: ReadonlyArray<string> }} line the bare value, or the declared row (its sibling column)
  * @returns {T}
  */
 export function textOf(line) {
