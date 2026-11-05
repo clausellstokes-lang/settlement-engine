@@ -239,6 +239,39 @@ describe('truthful aftermath: per-target residual severity', () => {
   });
 });
 
+// The residual outcome's id carries its TICK, like every other minted world outcome
+// (coup_verdict, army_homecoming, occupation_* … carry `.${tick}`). Without it a
+// stressor id that resolves twice — the same raider pressure rising again at the
+// same settlement — mints the SAME outcome id twice, and the regional event log
+// carries a duplicate record id (measured on the observed corpus: osr002's
+// `world_outcome.residual.world_stressor_monster_raider_pressure_osr002.osr002`,
+// which reds the prose-family contract's "regionalLog record reach" check).
+describe('the residual outcome id is unique per resolution', () => {
+  test('the same stressor resolved at two ticks mints two distinct residual ids, each carrying its tick', () => {
+    const stressor = () => [{
+      id: 'world_stressor_monster_raider_pressure_osr002',
+      type: 'monster_raider_pressure',
+      severity: 0.6,
+      age: 3,
+      status: 'active',
+      originSettlementId: 'osr002',
+      affectedSettlementIds: ['osr002'],
+    }];
+    const first = resolveStressorById(stressor(), 'world_stressor_monster_raider_pressure_osr002', { tick: 4, now: NOW });
+    const again = resolveStressorById(stressor(), 'world_stressor_monster_raider_pressure_osr002', { tick: 11, now: NOW });
+    const [a] = first.residualOutcomes;
+    const [b] = again.residualOutcomes;
+    expect(a.targetSaveId).toBe('osr002');
+    expect(a.id).not.toBe(b.id);
+    expect(a.id.startsWith('world_outcome.residual.4.')).toBe(true);
+    expect(b.id.startsWith('world_outcome.residual.11.')).toBe(true);
+    // …and the tick survives the regional event id's 80-character cut, so two resolutions are
+    // two regional records: the tick sits ahead of the long stressor id, never behind it.
+    const cut = (id) => String(id).toLowerCase().replace(/[^a-z0-9]+/g, '_').slice(0, 80);
+    expect(cut(`local_delta.osr002.${a.id}`)).not.toBe(cut(`local_delta.osr002.${b.id}`));
+  });
+});
+
 describe('end-to-end through advanceCampaignWorld', () => {
   function campaignWith(stressors) {
     return {

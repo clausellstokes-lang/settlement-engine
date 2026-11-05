@@ -425,7 +425,12 @@ export function residualOutcome(stressor, tick) {
     const experienced = effectiveStressorSeverity(stressor, targetSaveId);
     const residualSeverity = Math.max(0.15, experienced * 0.45);
     return {
-      id: `world_outcome.residual.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
+      // The id carries the resolution's tick, as every minted world outcome's does: a stressor id
+      // that resolves twice at one settlement (the same pressure rising again) would otherwise mint
+      // one id twice, and the regional event log would carry a duplicate record id. The tick sits
+      // FIRST, not last: the regional event id is cut to 80 characters (propagation.js :: idPart),
+      // and a trailing tick behind a long stressor id would be cut away with the tail.
+      id: `world_outcome.residual.${tick}.${stablePart(stressor.id)}.${stablePart(targetSaveId)}`,
       type: 'condition',
       candidateType: 'stressor_residual',
       ruleId: `stressor_${stressor.type}_residual`,

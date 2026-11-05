@@ -672,7 +672,10 @@ describe('reader-with-no-writer ratchet: the EXECUTED corpus', () => {
       // Chronicle put down. `wizardNewsFinalEntries` staying at 240 through both mints is
       // the control that keeps the two layers legibly apart.
       regionalEventLog: 75,
-      regionalEventLogUnique: 74,
+      // 2026-11-05 (LANDING-5, the chair's addition (c)): 74 → 75, ONE cause — the residual outcome's id now carries
+      // its tick (stressorsCore.js :: residualOutcome), so osr002's raider pressure, resolved twice, is two regional
+      // records instead of one id minted twice. regionalEventLog holds at 75: no record was added, one stopped colliding.
+      regionalEventLogUnique: 75,
       aiChronicle: 1,
     });
     expect(Object.hasOwn(corpus, 'scalarObservations')).toBe(false);
