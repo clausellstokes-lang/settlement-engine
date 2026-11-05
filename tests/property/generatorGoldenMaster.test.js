@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — PINS, SECOND STEP (UNITS 6–7), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-20-pins-2-rarity-mark.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   99 OF 525 ROWS MOVED (village 39, city 24, metropolis 36; thorp, hamlet, town 0); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 11467ed57): the rows whose own text calls them rare carry the rarity mark, and availableServices.criminal[].name is a service label, declared NON_CASCADED. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S20 (the tree of 11467ed57 with the door paths carried from
+ *   the branch, the previous record's writes committed). 9edc2b5f.. -> fd89c9cc..
+ *
  * 2026-11-04 — X-46 CAR 3, I7, THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-19-x46-car-3-i7-realised.json; the cloud chair signs under the owner's delegation, vetoable).
  *   489 OF 525 ROWS MOVED (thorp 60, hamlet 72, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
