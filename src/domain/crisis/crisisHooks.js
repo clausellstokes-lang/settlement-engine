@@ -33,6 +33,8 @@
 
 import { hookTruthViolations, settlementHookFacts, speakHookTruthfully } from '../coherence/hookTruth.js';
 import { effectiveCastOf, requiredRolesOf } from './crisisCast.js';
+import { resolveDeclared, lineText } from '../facts/drawDeclared.js';
+import { factsOf } from '../facts/factsOf.js';
 
 /** @typedef {import('./crisisCast.js').CrisisCast} CrisisCast */
 /** @typedef {import('./crisisCast.js').CastRow} CastRow */
@@ -182,7 +184,14 @@ export function crisisHooksOf(settlement, entry, facts = settlementHookFacts(set
   const out = [];
 
   const holder = lineRoleHolderOf(kind, cast);
-  const clauseOf = holder ? LINE_ROLE_CLAUSE[holder.role] : null;
+  // CENSUS-1d unit 2 (Appendix B row 94, kind T): the role's clause is resolved through
+  // `resolveDeclared` (a declared clause is answered by this record's `factsOf`, read only when it
+  // declares) and noted in the ledger; a clause is a template of the holder.
+  const clauseOf = holder && LINE_ROLE_CLAUSE[holder.role]
+    ? lineText(resolveDeclared(LINE_ROLE_CLAUSE[holder.role], {
+      facts: () => factsOf(settlement), poolId: `LINE_ROLE_CLAUSE.${holder.role}`, surface: 'crisis',
+    }).line)
+    : null;
   if (holder && clauseOf && str(holder.reason)) {
     const text = speakTrue((n) => castSentence(n, clauseOf(holderWords(s, holder)), holder.reason), noun, facts);
     if (text) out.push({ text, bound: 'cast', link: linkOf(holder) });
