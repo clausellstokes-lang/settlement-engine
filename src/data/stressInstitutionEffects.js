@@ -413,7 +413,16 @@ export const STRESS_INSTITUTION_EFFECTS = {
     {
       secret: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves",
       stakes: "People in the camp are dying of the shortfall. The blame is holding, for now",
-      needs: ["migration: influx"],
+      needs: ["migration: influx"], text: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves", // CENSUS-4b: `text` is the line's identity for its exodus twin (drawDeclared :: lineText)
+    },
+    {
+      // CENSUS-4b, THE CHAIR'S RULING (answer 5; R-G): the exodus twin of the relief pair above, the
+      // influx pair mirrored. Reached only by resolution (`twinOf`): out of the draw's domain, so no
+      // birth moves where the place fills; it serves a refused draw of its original where it empties.
+      secret: "Diverted the coin meant to keep the departing families here into a private arrangement, and the shortfall is being blamed on the families who left",
+      stakes: "More households go every week for want of it. The blame is holding, for now",
+      twinOf: "Diverted the relief meant for the newcomer camp into a private arrangement, and the shortfall is being blamed on the newcomers themselves",
+      needs: ["migration: exodus"],
     },
     {
       secret: "Is themselves a newcomer, arrived a decade ago under a false history that the current upheaval is threatening to expose",

@@ -11,10 +11,10 @@ import { birth, ensureLaws } from '../../scripts/audit/soak-review/corpus.mjs';
 const POOL = 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS';
 
 describe('the stress secrets declare', () => {
-  it('32 entries declare, every atom in the vocabulary', () => {
+  it('33 entries declare (32 + the exodus twin, answer 5), every atom in the vocabulary', () => {
     const entries = Object.values(STRESS_INSTITUTION_EFFECTS).flat();
     const declaring = entries.filter((e) => declares(declarationOf(e)));
-    expect(declaring).toHaveLength(32);
+    expect(declaring).toHaveLength(33);
     for (const e of declaring) for (const a of [...(e.needs || []), ...(e.excludes || [])]) expect(parseAtom(a), a).not.toBeNull();
   });
   it('a {npc} slot declares the other NPC', () => {
