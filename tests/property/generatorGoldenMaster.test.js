@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — PINS, FIRST STEP (UNITS 1–3 AND THE CHAIR'S ADDENDUM), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   288 OF 525 ROWS MOVED (thorp 31, hamlet 48, village 48, town 41, city 36, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 37b1e746d): route-required rows and rows with an authored rarity are exempt from X-46 car 3's density factor, and the budget's top anchor is the catalogue's ceiling, 60,000 -> 93. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S17 (the tree of 37b1e746d with the door paths carried from
+ *   the branch, the previous record's writes committed). 25d853fd.. -> a4377df3..
+ *
  * 2026-11-04 — TRUTH, FIRST STEP (UNITS A–C AND UNIT D'S FIRST COMMIT), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-16-truth-1-units-a-c.json; the cloud chair signs under the owner's delegation, vetoable).
  *   231 OF 525 ROWS MOVED (thorp 24, hamlet 24, village 36, town 63, city 24, metropolis 60); the key set is identical. THE CAUSE, ONE (first-parent
