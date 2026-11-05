@@ -230,3 +230,114 @@ reds were cured in-lane (soak1k-531; the twin's count). domain:strict: composeSt
 `createTieProseDraw`'s without-replacement counter), then INSTITUTION_DESC_VARIANTS (H, `assembleInstitutions ::
 pickVariant`) and the rest of INSTITUTION_SERVICES (the per-definition roll) — tags in the tables, the tolerance at
 each consumer, 1d's wiring.
+
+## CENSUS-4c (2026-11-05)
+
+**Merges** (each clean; the wiring census re-taken through its door, stamp only, 0 rows; `gen:dossier-prose --check`
+green): census-1b at `c456d1b` (`e2f34a4`: 1d unit 1, R-H, and sites 89/90/111), `fc38e11` (`be761f9`: sites 97–103,
+110), `ca14125` (`0aa20a4`: site 94 and unit 3's two registers), `7dc90a6` (`e3e70fc`: 1d's record). The local branch
+ref had been left at `83325f5` with HEAD detached at `11bacee`; it was re-pointed to HEAD (an ancestor check first)
+before the first push.
+
+| unit | commit | what | golden rows moved (525, scratch hasher) |
+|---|---|---|---|
+| 1 | `727d8a3` | answer 3: `isCommerceGuild` and its detector chain move verbatim to `domain/institutions/institutionCategory.js`; `roleCategory.js` / `computeActiveChains.js` re-export; `facts/guild.js` delegates its roster reading | 0 (and 0 of 60) |
+| 4 | `99fbe26` | the ties declare in place (30 rows); stakes and impressions read | 0 (and 0 of 60) |
+| 5 | `cd17614` | the institution descriptions (62 rows, a text-keyed column) and services (49 rows, in place) declare | 0 (and 0 of 60) |
+
+**Unit 1 (answer 3).** Measured first: the delegated atom agrees with the regex home on all 585 records (303 hold a
+guild; 0 disagree). The power-structure branch (a guild FACTION by name) stays in `guild.js`: the power structure
+carries names, not catalogue rows, and no other reader of a guild power exists. A guild-tagged house not named
+"guild" (Furrier's district) now holds the atom — it already drives a guild master.
+
+**Unit 4 — the NPC pools.**
+- **Ties** (`STRESS_ECONOMIC_EFFECTS`, 18 archetypes, 288 desc/tension lines + 18 labels; site 19, H). The variants
+  are closures, so a declared one is `{ line: closure, needs?, excludes? }`; `pairProse` accepts both (`closureOf`,
+  byte-identical) and exposes `lines` (frozen, index order) for 1e's resolution. ⚠ One index picks the desc AND the
+  tension: a refusal of either row refuses the pair. Every tie draw is in `generatePopulation`.
+- **Stakes.** The stress secrets' stakes are 4b's entries (B2). crisisCast `STAKE_REASONS` (12): each is chosen by
+  the exact condition it states — key-guaranteed, 0 declare.
+- **Impressions** (`NPC_PLOT_HOOKS`, 1c's site): 28 impressions + dispositions + behaviours re-read — pure colour,
+  pending a register (1d's two registers cover the state-prose corpus only, not the generator's tables).
+
+**Unit 5 — the institutions.**
+- **Descriptions** (664 lines / 332 pairs / 518 keys; site 18, H, `assembleInstitutions` pickVariant): the ledger's
+  65 declaring rows less 3 (R-Q) in `DESC_VARIANT_DECLARATIONS`, keyed by exact text — the shape R-P(3) accepted
+  for the sibling sets, chosen because six string consumers read the pairs (the ship filter, `shipFreeDesc`, the
+  tier-noun walkers, the dossier corpus, the ledger extractor). The texts are unique across pairs; the test holds
+  every key live. 1e lifts a drawn text to `{ text, ...column[text] }` and resolves after the draw.
+- **Services** (978 definitions; site 15, R, one roll per eligible definition in `economyReconcilePass`, then
+  printed whole): 49 rows in place on the definition objects (none shared between institutions). The two canonical
+  texts of 1c's `SERVICE_DESC_SIBLINGS` carry a superset of their sibling row's atoms (pinned).
+- **R-M:** nothing left in either table's prose. "Gates (if walled)" is a catalogue KEY (an institution name).
+
+**R-Q, measured (the rule's check per pool).** Each declared row's admission at its draw (the ctx at the draw step,
+via `onStep`) against the birth record, only on births where the row's pool is reachable, 525 golden + the soak:
+
+| pool | draw step | rows | births | rows that differ | verdict |
+|---|---|---|---|---|---|
+| ties | `generatePopulation` (after `generatePower`) | 30 | 585 | 0 | all declare |
+| descriptions | `assembleInstitutions` | 65 | 1,525 | 3 (4 births: soak1k-291, -453, …) | 62 declare; **waiting on order:** town Parish burial grounds #0, Town watch #0/#1 (`gate`: the cascade adds a town's gate after the draw; every case draw-refuses / birth-admits) |
+| services | `economyReconcilePass` | 49 | 1,525 | 0 | all declare |
+
+**Waiting on order (the chair's answer 1):** STRESS_GOALS famine#1, indebted#1, slave_revolt#2 (`no ruler: lord /
+occupier`) — R11b's register rewrite is their cure. Measured beside the ties: the ruler kind is ALREADY settled
+before `generatePopulation` (0 of 585 differ between that step and birth); the goal draw is handed
+`birthFactsOf({ institutions, config, tier })`, which carries no power structure. So the order is not the obstacle;
+the facts handed to the draw are (open question 1).
+
+**Faction-role-fit:** the 25 on the 60 (city 8, metropolis 8, town 6, village 2, thorp 1) ACCEPTED, the chair's
+ruling of 2026-11-05 (the faction name carries its kind; a rename is a new roll at the name retry).
+
+**⚠ Unit 1 moves 3 of 1,000 soak births (0 of 525 golden, 0 of the 60) — one cause, counted, not re-recorded.**
+soak1k-236, -320, -452 (all villages): the only "guild" is the catalogue's `guild` TAG on a Village scribe or a
+Veteran's lodge. The generator's `isCommerceGuild` reads that tag (and already crews a Guild Master there); the
+regex home did not. Now that the atom has one definition, Mayor#0's drawn goal ("Navigate a dispute between two
+powerful guilds…", `needs: guild`) is admitted instead of resolved by argmax. Paths: `npcs[].goal.long` + the
+`factions[].members[]` mirror. The byte-identity law was proven where the brief asked (525 + 60); the 1,000 shows the
+tail. The admitted claim is arguably false (a scribe is not two powerful guilds), so the defect is the one
+definition's tag arm (open question 2).
+
+**The 60 and the 1,000 as a diff (R-B).** BEFORE = `11bacee` + census-1b `7dc90a6` (a scratch merge, none of this
+seat's units); AFTER = the tip. `cert:*` findings: **none on either side** (`cert:false-presumption` 0 → 0).
+
+| class (settlements) | the 60 | the 1,000 |
+|---|---|---|
+| coh:crisis-blind-prose | 22 → 22 | 231 → 231 |
+| — "current stability" / "competent administration" / "stable institutional competition" | 11 / 1 / 4 → same | 119 / 21 / 33 → same |
+| reader:faction-role-fit (accepted) | 18 → 18 | 348 → 348 |
+| reader:relation-types (the exempt column) | 10 → 10 | 147 → 147 |
+| A-12:self-vouch-false | 0 → 0 | 18 → 18 |
+| rule-text · possessive-slip | 0 → 0 | 0 → 0 |
+| every other class | identical | identical |
+| `declared-share` npcs | — | 2,121 / 39,351 → 2,124 / 39,351 (0.054; the +3 are the three births above) |
+| `declared-share` institutions · services | — | 1 / 1 → same · 115 / 115 → same |
+
+The goal claims did not fall: 1d stopped at its boundary before the `npcStructure` registry lookup (CENSUS-1e's
+now). The figures are lower than 4b's (538 / 93 / 82) because R-H and 1d's sites merged in between. The ties, the
+descriptions and the services are not yet wired (1e: sites 19, 18, 15), so none of their declarations reach the render
+ledger; the declared share moves only when 1e enforces them.
+
+**Rows moved, by cause:** golden 0 of 525 (all units); soak records 3 of 1,000 (unit 1, above); wiring census: the
+stamp at each of the four merges, 0 rows; no manifest row, no pin. Nothing re-recorded.
+
+**Tests.** Each unit's governing suites: the same reds on the base and the tip (unit 1: 17, unit 4: 8, unit 5: 26;
+golden master, the prose walkers, generationForkCensus, pipelinePinnedChoosers… — the merged lanes'). domain:strict
+only the merged composeStateProse +2 / crisisFactFindings +4.
+
+**Open questions for the chair.**
+1. The three ruler-excluding goals: the ruler kind is settled before `generatePopulation` (0 of 585 differ). Should
+   1e hand the goal draw the power structure (`birthFactsOf` + `powerStructure`, no draw moved) so they can declare,
+   rather than wait on R11b?
+2. The one guild definition's TAG arm (Village scribe, Veteran's lodge, town crier, mint carry `guild`) crews false
+   Guild Masters and now admits guild claims in villages (3 / 1,000). Drop the tag arm (a generator change; it moves
+   births) or retag the catalogue?
+3. `Bowyers & fletchers (guild)|Military supply` needs garrison AND militia; that never holds (0 of 558 births), so
+   1e's materialization filter will drop it everywhere. A twin in the force-word form ("…to the {force}")?
+4. `Palisade or earthworks|Gated entry` / `|Night watch` are refused in every birth they reach (`gate` 0 of 117,
+   `watch` 0 of 30). Should a palisade's own entry read as a gate (a fact-home question, R-E)?
+
+**Where CENSUS-4d starts.** This lane's tables are all declared (NPC goals and secrets with 4b; ties, descriptions,
+services here). What remains is enforcement, which belongs to CENSUS-1e (sites 19, 18 and 15 and the `npcStructure` lookup):
+merge 1e's tip, re-measure the goal claims and the declared share, and count births by cause as each site lands. No
+further table work is owed here unless the chair rules on questions 1–4.
