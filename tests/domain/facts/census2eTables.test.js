@@ -155,3 +155,17 @@ describe('CHECK_INST_COMPAT_LANDMARKS — the arrival landmarks (R, inline in st
     expect(declaring).toBe(6);
   });
 });
+
+describe('the {colour} rulings (R-R) and the season table under "needs a field" (ruling 8)', () => {
+  const src = (rel) => readFileSync(new URL(`../../../${rel}`, import.meta.url), 'utf8');
+  it('each ruled table carries its ruling where it lives', () => {
+    expect(src('src/generators/power/settlementNarrative.js')).toMatch(/\{colour\} \(CENSUS-2e, R-R; ledger docs\/census\/declarations\/STRESS_RUMORS\.json\)/);
+    expect(src('src/generators/historyGenerator.js')).toMatch(/\{colour\} \(CENSUS-2e, R-R and R-AD; ledger ECHO_PREFIXES_DOSSIER\.json\)/);
+    expect(src('src/data/biomeTexture.js')).toMatch(/\{colour\} \(CENSUS-2e, R-R; ledger TERRAIN_SEASON_TEXTURE\.json\)/);
+    expect(src('docs/content/RECEIPT_POOLS_DOSSIER_STATE.md')).toMatch(/`\{colour\}` \(CENSUS-2e, the chair's R-R; ledger `docs\/census\/declarations\/DOSSIER_CONNECTIVES\.json`\)/);
+  });
+  it('the season table is a hand-kept "needs a field" row', () => {
+    const reg = JSON.parse(src('tests/lint/undeclaredLines.register.json'));
+    expect(reg.needsAField.filter((r) => r.where.startsWith('src/data/biomeTexture.js :: TERRAIN_SEASON_TEXTURE') && r.presumes === 'season')).toHaveLength(1);
+  });
+});

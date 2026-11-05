@@ -6417,6 +6417,10 @@ any clause list and never on a comma; a sentence-form row begins on a capital th
 (relation, seat) pair, is a projector error. `EMPTY-OPENER` is the seat that takes no word at all:
 adjacency itself, which is exactly what `contrast` and `addition` assert.
 
+**`{colour}` (CENSUS-2e, the chair's R-R; ledger `docs/census/declarations/DOSSIER_CONNECTIVES.json`).** All
+four lists are pure joinery between two sentences that declare for themselves: a connective asserts no
+fact, crisis or calm of its own, so no list declares.
+
 **THE PIN IS THE LIST'S OWN LENGTH, AND IT IS A MECHANISM.** A joint is drawn
 `hash(seed::block::spine::joint::modifier) % list.length`, so a longer list re-rolls every joint
 already drawn on it. Growth is a DECLARED row on `docs/content/prose-shift-register.json` and never
