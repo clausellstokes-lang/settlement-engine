@@ -96,23 +96,31 @@ describe('Custom-content faction prose — authored agenda and methods are shown
 });
 
 describe('Missing custom-content links — explain the failure, keep ids private', () => {
-  it.each([
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over the rows,
+  // each row rendered alone (cleanup between rows) and named in every failure message.
+  const MISSING_LINK_ROWS = [
     ['custom:local_7a9f', 'Deleted custom item'],
     ['prebuilt:resources:iron_deposits', 'Missing catalog item'],
     ['legacy.opaque_ref_44', 'Missing linked item'],
-  ])('EntityPicker translates %s without displaying it', (refId, expectedLabel) => {
-    const { container } = render(
-      <EntityPicker
-        category="resources"
-        value={[refId]}
-        onChange={vi.fn()}
-      />,
-    );
+  ];
 
-    expect(container.textContent).toContain(expectedLabel);
-    expect(container.textContent).not.toContain(refId);
-    expect(container.querySelector(`[title="${refId}"]`)).toBeNull();
-    expect(screen.getByTitle('This linked item no longer exists.')).toBeTruthy();
+  it('EntityPicker translates custom, prebuilt and legacy missing refs without displaying them', () => {
+    expect(MISSING_LINK_ROWS).toHaveLength(3);
+    for (const [refId, expectedLabel] of MISSING_LINK_ROWS) {
+      const { container } = render(
+        <EntityPicker
+          category="resources"
+          value={[refId]}
+          onChange={vi.fn()}
+        />,
+      );
+
+      expect(container.textContent, refId).toContain(expectedLabel);
+      expect(container.textContent, refId).not.toContain(refId);
+      expect(container.querySelector(`[title="${refId}"]`), refId).toBeNull();
+      expect(screen.getByTitle('This linked item no longer exists.'), refId).toBeTruthy();
+      cleanup();
+    }
   });
 
   it('DependencySummary uses the same missing-link language without a raw id', () => {

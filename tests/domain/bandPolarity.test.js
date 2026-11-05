@@ -107,15 +107,15 @@ describe('bandForDimension — polarity, both directions, every band family', ()
     expect(bandForDimension('resilience', 90)).toBe('Stable');
   });
 
-  test.each(['volatility', 'externalThreat', 'resourcePressure'])(
-    '%s walks the ladder DOWNWARD — every band family, low to high',
-    (key) => {
-      expect(bandForDimension(key, 10)).toBe('Stable');
-      expect(bandForDimension(key, 30)).toBe('Strained');
-      expect(bandForDimension(key, 60)).toBe('Vulnerable');
-      expect(bandForDimension(key, 90)).toBe('Critical');
-    },
-  );
+  // Each-family cure (2026-11-05, LANDING-6): the three keys loop inside one parameterless test.
+  test('volatility, externalThreat and resourcePressure walk the ladder DOWNWARD — every band family, low to high', () => {
+    for (const key of ['volatility', 'externalThreat', 'resourcePressure']) {
+      expect(bandForDimension(key, 10), key).toBe('Stable');
+      expect(bandForDimension(key, 30), key).toBe('Strained');
+      expect(bandForDimension(key, 60), key).toBe('Vulnerable');
+      expect(bandForDimension(key, 90), key).toBe('Critical');
+    }
+  });
 
   test('the exact pre-fix inversions now read the truth', () => {
     // The two figures the atlas probes produced, in both directions.
@@ -153,14 +153,14 @@ describe('deriveSystemState — a calm town and a crisis town band opposite ways
     expect(crisis.externalThreat.band).toBe('Critical');
   });
 
-  test.each(['volatility', 'externalThreat', 'resourcePressure'])(
-    '%s: the higher raw score is never the better band (the defect, stated as a law)',
-    (key) => {
+  // Each-family cure (2026-11-05, LANDING-6): the three keys loop inside one parameterless test.
+  test('volatility, externalThreat, resourcePressure: the higher raw score is never the better band (the defect, stated as a law)', () => {
+    for (const key of ['volatility', 'externalThreat', 'resourcePressure']) {
       const worse = crisis[key].value >= calm[key].value ? crisis : calm;
       const better = worse === crisis ? calm : crisis;
-      expect(BAND_RANK[worse[key].band]).toBeGreaterThanOrEqual(BAND_RANK[better[key].band]);
-    },
-  );
+      expect(BAND_RANK[worse[key].band], key).toBeGreaterThanOrEqual(BAND_RANK[better[key].band]);
+    }
+  });
 
   test('resilience keeps its own direction — the higher score is the better band', () => {
     expect(calm.resilience.value).toBeGreaterThan(crisis.resilience.value);
@@ -237,14 +237,18 @@ describe('compareSystemState — the band pair agrees with its own pressure clau
     expect(delta.explanation).toContain('Stable → Strained');
   });
 
-  test.each([
-    ['volatility', 30, 90],
-    ['externalThreat', 30, 90],
-    ['resourcePressure', 30, 90],
-  ])('%s: the band never improves while the sentence says pressure increased', (key, lo, hi) => {
-    const [delta] = compareSystemState(snap({ [key]: { value: lo } }), snap({ [key]: { value: hi } }));
-    expect(delta.explanation).toContain('pressure increased');
-    expect(BAND_RANK[bandForDimension(key, hi)]).toBeGreaterThan(BAND_RANK[bandForDimension(key, lo)]);
+  // Each-family cure (2026-11-05, LANDING-6): one parameterless test looping over the rows.
+  test('volatility, externalThreat, resourcePressure: the band never improves while the sentence says pressure increased', () => {
+    const rows = [
+      ['volatility', 30, 90],
+      ['externalThreat', 30, 90],
+      ['resourcePressure', 30, 90],
+    ];
+    for (const [key, lo, hi] of rows) {
+      const [delta] = compareSystemState(snap({ [key]: { value: lo } }), snap({ [key]: { value: hi } }));
+      expect(delta.explanation, key).toContain('pressure increased');
+      expect(BAND_RANK[bandForDimension(key, hi)], key).toBeGreaterThan(BAND_RANK[bandForDimension(key, lo)]);
+    }
   });
 });
 

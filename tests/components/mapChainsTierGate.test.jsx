@@ -155,12 +155,15 @@ describe('the derivation stays tier-blind (source scan)', () => {
   // legitimate game tier. These are the auth-gate concepts.)
   const FORBIDDEN = /TIER_GATE|canUseMapChains|ELEVATED_ROLES|useStore|authSlice|\bauth\b/;
 
-  test.each([
-    'src/lib/computeMapChains.js',
-    'src/lib/supplyChains.js',
-  ])('%s carries no auth/tier-gate concept', (rel) => {
-    const src = readFileSync(join(ROOT, rel), 'utf8');
-    expect(src).not.toMatch(FORBIDDEN);
+  // Each-family cure (2026-11-05, LANDING-6): the two derivation files loop inside one
+  // parameterless test, each failure named by its path.
+  test('computeMapChains.js and supplyChains.js carry no auth/tier-gate concept', () => {
+    const derivationFiles = ['src/lib/computeMapChains.js', 'src/lib/supplyChains.js'];
+    expect(derivationFiles).toHaveLength(2);
+    for (const rel of derivationFiles) {
+      const src = readFileSync(join(ROOT, rel), 'utf8');
+      expect(src, rel).not.toMatch(FORBIDDEN);
+    }
   });
 
   test('ChainEdges.jsx (the draw component) consults no gate — the gate lives outside it', () => {

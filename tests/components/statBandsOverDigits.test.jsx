@@ -103,6 +103,26 @@ beforeAll(() => {
 
 afterEach(() => { cleanup(); });
 
+/**
+ * EACH-FAMILY CURE (2026-11-05, LANDING-6). The per-case arms below used to be
+ * `test.each(CASES…)`, which parks this file in the sovereignty lighting census. Each is now
+ * one parameterless test that runs its row body for every case here, with the DOM cleaned
+ * between rows and the case's name prefixed onto any failure, so a red row still names itself.
+ */
+function forEveryCase(body) {
+  expect(CASES.map(([name]) => name)).toEqual(['thorp', 'village', 'city', 'metropolis']);
+  for (const [name] of CASES) {
+    try {
+      body(name);
+    } catch (error) {
+      error.message = `[case ${name}] ${error.message}`;
+      throw error;
+    } finally {
+      cleanup();
+    }
+  }
+}
+
 // ── The ladder itself ────────────────────────────────────────────────────────
 
 describe('defenseScoreBands — the one ladder', () => {
@@ -131,7 +151,7 @@ describe('defenseScoreBands — the one ladder', () => {
 // ── Surface 1: OverviewTab Systems Health ────────────────────────────────────
 
 describe('OverviewTab Systems Health — bands, not digits', () => {
-  test.each(CASES.map(([n]) => n))('%s: each score row shows its band word and no number', (name) => {
+  test('every case (thorp, village, city, metropolis): each score row shows its band word and no number', () => forEveryCase((name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     const { container } = render(<OverviewTab settlement={settlement} />);
     const scores = settlement.defenseProfile?.scores || {};
@@ -159,7 +179,7 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
       expect(row.textContent).toBe(`${label}${value}`);
       expect(row.textContent).not.toMatch(/\d/);
     }
-  });
+  }));
 
   test('the bar still carries the magnitude (band replaced the digit, not the bar)', () => {
     const settlement = settlements.find(([n]) => n === 'city')[1];
@@ -174,7 +194,7 @@ describe('OverviewTab Systems Health — bands, not digits', () => {
 // ── Surface 2: DefenseTab ────────────────────────────────────────────────────
 
 describe('DefenseTab — the raw safetyRatio display is retired', () => {
-  test.each(CASES.map(([n]) => n))('%s: no "ratio N.NNx" chip survives anywhere on the tab', (name) => {
+  test('every case (thorp, village, city, metropolis): no "ratio N.NNx" chip survives anywhere on the tab', () => forEveryCase((name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     const { container } = render(<DefenseTab settlement={settlement} />);
     const text = container.textContent;
@@ -184,7 +204,7 @@ describe('DefenseTab — the raw safetyRatio display is retired', () => {
     // The typed read that carries the same fact is still there: the Internal Security bar's
     // band word (the "<band> Public Order" headline that restated it was cut, T2-20).
     expect(text).toMatch(/Internal Security(Strong|Adequate|Weak|Critical)/);
-  });
+  }));
 
   test('the ratio is retired from DISPLAY only — safetyProfile.safetyRatio is still derived', () => {
     for (const [, settlement] of settlements) {
@@ -202,7 +222,7 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     ...s, defenseProfile: { ...s.defenseProfile, scores: { ...s.defenseProfile.scores, ...moved } },
   });
 
-  test.each(CASES.map(([n]) => n))('%s: every scored capability row says its grade exactly once', (name) => {
+  test('every case (thorp, village, city, metropolis): every scored capability row says its grade exactly once', () => forEveryCase((name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     render(<DefenseTab settlement={settlement} />);
     fireEvent.click(screen.getByRole('button', { name: /Supporting Capabilities/ }));
@@ -268,7 +288,7 @@ describe('DefenseTab Supporting Capabilities — bands, not digits', () => {
     // The retired digits: no bare 1-3 digit run survives in the capability rows.
     const bars = screen.getByText('Arcane Support').closest('div').parentElement;
     expect(bars.textContent).not.toMatch(/\b\d{1,3}\b/); // anchored: getByText('Arcane Support') found this row
-  });
+  }));
 
   /**
    * ONE NUMBER, ONE VERDICT, AT EVERY THRESHOLD OF BOTH LADDERS — deterministically, rather
@@ -440,7 +460,7 @@ describe('Two names, two facts — the Overview score and the Defense presence r
     expect(capabilities).toContain('Arcane Support');
   });
 
-  test.each(CASES.map(([n]) => n))('%s: each magic name renders on exactly ONE tab', (name) => {
+  test('every case (thorp, village, city, metropolis): each magic name renders on exactly ONE tab', () => forEveryCase((name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
 
     const { container: overview } = render(<OverviewTab settlement={settlement} />);
@@ -462,7 +482,7 @@ describe('Two names, two facts — the Overview score and the Defense presence r
       `${name}: the Overview's score-row name on the Defense tab`);
     expect(defenseLabels, `${name}: the Defense tab's presence row must render`)
       .toContain('Arcane Support');
-  });
+  }));
 });
 
 /**
@@ -609,7 +629,7 @@ describe('DefenseTab Threat Assessment — one score, one word, both tabs', () =
 // ── Surface 3: SummaryTab defence tile ───────────────────────────────────────
 
 describe('SummaryTab defence tile — the averaged raw score is retired', () => {
-  test.each(CASES.map(([n]) => n))('%s: the sub-line is a band word, not "Avg. score N/100"', (name) => {
+  test('every case (thorp, village, city, metropolis): the sub-line is a band word, not "Avg. score N/100"', () => forEveryCase((name) => {
     const settlement = settlements.find(([n]) => n === name)[1];
     const { container } = render(<SummaryTab settlement={settlement} />);
     const text = container.textContent;
@@ -624,7 +644,7 @@ describe('SummaryTab defence tile — the averaged raw score is retired', () => 
     // projection with it. The tile re-cases at the RENDER rung, so the pin reads the same
     // two functions the tile does and cannot drift from either one.
     expect(text).toContain(`Systems average: ${statusCase(scoreBand(avg))}`);
-  });
+  }));
 });
 
 // ── The coup weight, retired from both of its mounts (browser pass 3, 2026-09-19) ─────────
