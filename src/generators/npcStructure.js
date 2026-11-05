@@ -12,6 +12,8 @@
  * activeGoal replaces the existing goal.short field on enriched NPCs so
  * the DM sees one coherent goal derived from the current situation.
  */
+import { resolveDeclared, lineText } from '../domain/facts/drawDeclared.js';
+import { factsOf } from '../domain/facts/factsOf.js';
 
 
 // Shared phrases hoisted once (train EM-T16's worker buy-back, judgment 214c): each is spelled here and referenced below; every emitted value is byte-identical.
@@ -418,6 +420,8 @@ export function enrichNPCsWithStructure(npcs, settlement) {
   const powerFactions   = settlement.powerStructure?.factions || [];
   const condition       = getPrimaryCondition(settlement);
   const TOP_N           = Math.min(5, Math.max(2, Math.floor(npcs.length * 0.45)));
+  /** @type {ReturnType<typeof factsOf> | undefined} */ let held;
+  const facts = () => (held ??= factsOf(settlement)); // read only when an entry declares
 
   const scored = npcs.map(n => ({ npc: n, score: npcRelevanceScore(n, powerFactions) }))
                      .sort((a,b) => b.score - a.score);
@@ -428,21 +432,29 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     const cat  = npc.category || 'other';
     const rank = getRank(npc, powerFactions);
     const key  = `${cat}__${condition}__${rank}`;
-    const tmpl = T[key] || T[`${cat}__stable__${rank}`] || T[OTHER_STABLE_DOMINANT];
+    const found = T[key] || T[`${cat}__stable__${rank}`] || T[OTHER_STABLE_DOMINANT];
 
+    if (!found) return npc;
+
+    // CENSUS-1e unit 1 (Appendix B item 23, kind T): the entry resolves through the one rule
+    // against its `tags` (CENSUS-4b's CALM_ONLY on the stable entries; R-F 4). A refused entry —
+    // a `stable` reading under an active crisis — leaves the NPC its role goal, as an NPC past
+    // TOP_N keeps it (CENSUS-4b: no twin owed; the slot never empties). Draw-free.
+    const tmpl = resolveDeclared(found, { facts, tagged: true, key, poolId: `npcStructure.T:${key}`, surface: 'npcs', drawKind: 'T' }).line;
     if (!tmpl) return npc;
+    const goal = lineText(tmpl.goal); // a field may become `{ text, … }` (R-C): the record stores the text
 
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.
     const updatedGoal = npc.goal
-      ? { ...npc.goal, short: tmpl.goal }
-      : { short: tmpl.goal, long: tmpl.goal };
+      ? { ...npc.goal, short: goal }
+      : { short: goal, long: goal };
 
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: tmpl.position,
-      activeConstraint:   tmpl.constraint,
+      structuralPosition: lineText(tmpl.position),
+      activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     rank,
     };
