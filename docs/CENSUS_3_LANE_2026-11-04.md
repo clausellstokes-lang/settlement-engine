@@ -102,7 +102,7 @@ Base: `6276e1205`, then `origin/lane/census-1b-2026-11-04` at `358b0a841` merged
 | 4 | `3aff73f` | **PARKED.** The apply script and the mute scan are committed; the annex is untouched. | — |
 | 5 | `56f6644` | The traditions: three water elements declare `needs`, and the tab filters through `filterDeclared`. | 0 · 0 · traditions 7 |
 | 6 | — | **PARKED, not started.** | — |
-| R-A (the chair's ruling of 2026-11-05 01:13) | (next commit) | The leaked author note. `tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER.metropolis["Printing services"].desc` read "Mass-produced texts (if technology exists)", which presumes a technology level. That has no field and no atom (`magic` is not what it means), so the parenthetical is removed and the row is listed under "needs a field" below. Red-first: `tests/data/tradeGoodsAuthorNotes.test.js`, 1 red → green. | 0 · 0 · 0 (the row's text is printed on none of the 60) |
+| R-A (the chair's ruling of 2026-11-05 01:13) | `416bafa` | The leaked author note. `tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER.metropolis["Printing services"].desc` read "Mass-produced texts (if technology exists)", which presumes a technology level. That has no field and no atom (`magic` is not what it means), so the parenthetical is removed and the row is listed under "needs a field" below. Red-first: `tests/data/tradeGoodsAuthorNotes.test.js`, 1 red → green. | 0 · 0 · 0 (the row's text is printed on none of the 60) |
 
 ### The rename table (`_vocabulary.json` → `factVocabulary.js`)
 
@@ -132,6 +132,26 @@ The table is also kept in `_vocabulary.json :: respelledTo`.
    - Plains v2 drops `grain`;
    - F12's crisis twins in a scoped pool carry `crisis: any`.
 
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `c3aa387`, AFTER = this tip)
+
+Runs: `soak-review.mjs --workers 4`, written to `artifacts/census3b-base` (60) and to `artifacts/census3b-before` and `-after` (1,000).
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:scale-lists` (a) `[luxury-imports]` | 13 → 0 | 156 / 156 → **0** |
+| `reader:scale-lists` (b) `[~strength-no-house]` | 46 → 0 | 768 / 768 → **0** (the relabel: the instrument no longer reads a claimed-strength list) |
+| `reader:traditions-water` | 3 → 0 | 40 / 40 → **0** (the display's share; the weight share, the rows genesis still draws, is CENSUS-1c's and is unmeasured here) |
+| `reader:hook-pools` (sea / guard) | 3 / 6 → 3 / 6 | 66 / 50 → 66 / 50 (unit 6 is parked) |
+| `coh:crisis-blind-prose` | 24 / 74 → 22 / 71 | 278 / 902 → 231 / 843 |
+| · nothing is failing / depends on none alone / a year closed ahead (this lane's claims) | | 34 / 22 / 3 → **0 / 0 / 0** |
+| · current stability 538, stable institutional competition 134, competent administration 93, nobody stops a stranger 43, food secure 32, pilgrims 3 | | unchanged. The base's STOP, owned by CENSUS-4 / -2b / -5 / -1c |
+| `A-12:self-vouch-false` | 0 → 0 | 18 → 18 (the base's) |
+| `coh:food-words` and every other `coh:*` | 0 | 0 → 0 |
+| `cert:*`, including `cert:false-presumption` | 0 | 0 → 0 |
+| findings · verdict | 176 → 173 · STOP | 2,596 → 2,537 · STOP (the base's STOP classes at the same counts) |
+
+**`declared-share`** reads `{}` before and after. The soak opens the presumption ledger around the BIRTH only, and every declaration this lane landed is drawn at RENDER. A render-wrapped scratch run over 200 births also read `{}`: the render harness loads the modules through vite's own module graph, so its ledger is a different module instance from the one the script opens. That is an instrument gap (open question 4). `cert:false-presumption` over the same render ledger read 0, which is vacuous for the same reason.
+
 ### Needs a field (no atom; the undeclared register's row, kept here until the register file exists on this base)
 
 - `tradeGoodsData.js :: GOODS_MODIFIERS_BY_TIER.metropolis["Printing services"]` presumes a technology level. The vocabulary has no technology atom.
@@ -148,5 +168,12 @@ The table is also kept in `_vocabulary.json :: respelledTo`.
    - `dossierStateProseProjection.contract` ×2.
 3. Author one crisis-safe twin per `no hunger` food pool, as the chair's ruling with its share. F12's "never mute under a crisis" walker requires it.
 4. Do DS-SUP, then DS-POP: one commit each, mute-scanned (`_mute_scan.mjs` / `_mute_diff.mjs`).
+
+**Open questions for the chair.**
+1. Unit 4's twins: should each `no hunger` food pool get one crisis-safe line, or should those pools stay out of F12's never-mute walker?
+2. Should the ledger's `{crisis-scoped}` on the food pools be replaced by `no hunger`, as this seat ruled at apply?
+3. The revenue labels that leave the trade lists with no income row (Cultural tourism revenue, Planar trade access, Coin minting, the logistics and cartography services): should they get income rows (a generation change, golden-moving), or simply drop off the page?
+4. Should `declared-share` / `cert:false-presumption` at RENDER go through the soak's render harness (one ledger across vite's module graph), and whose lane is that?
+5. CENSUS-4's leaked author notes (Mill "(if water mill)" / "(if saw mill)"; "Printing house (if technology exists)").
 
 **Unit 6.** The hook tables, the record self-check (`storeTrueHooksOnly`), and the `textOf` tolerance at the tension and outlook pools. Check `origin/lane/census-1b-2026-11-04` for 1c's wiring first. Narrow `GUARD_WORDS` past "the old guard".
