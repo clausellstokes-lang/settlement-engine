@@ -18,6 +18,13 @@
  * A hash manifest cannot show WHY it moved, so every re-record is written down
  * here. Re-recording without adding a row is a deleted alarm.
  *
+ * 2026-11-04 — F6 BUDGET-FLOOR (UNITS 1–4), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
+ *   record docs/shift-records/2026-11-04-rung1-22-f6-budget-floor.json; the cloud chair signs under the owner's delegation, vetoable).
+ *   513 OF 525 ROWS MOVED (thorp 84, hamlet 72, village 84, town 105, city 84, metropolis 84); the key set is identical. THE CAUSE, ONE (first-parent
+ *   step 6d84aa834): the institution budget's target gives way — the density factor d answers anchor − R − X over the scalable rows, the realised table re-measured on the scalable definition. ATTRIBUTION, ZERO RESIDUE BY
+ *   CONSTRUCTION: written from the staged tree S22 (the tree of 6d84aa834 with the door paths carried from
+ *   the branch, the previous record's writes committed). cad7b24e.. -> d6e9fb42..
+ *
  * 2026-11-04 — F5 INSTRUMENTS, FIRST STEP (UNITS 1–5), THROUGH THE SIGNED DOOR (ODQ §934.105, RUNG 1 OF THE SOAK LADDER;
  *   record docs/shift-records/2026-11-04-rung1-21-f5-instruments.json; the cloud chair signs under the owner's delegation, vetoable).
  *   30 OF 525 ROWS MOVED (village 12, town 18; thorp, hamlet, city, metropolis 0); the key set is identical. THE CAUSE, ONE (first-parent
