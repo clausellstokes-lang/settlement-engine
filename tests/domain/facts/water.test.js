@@ -31,6 +31,19 @@ describe('the water home (CENSUS-1 fact 4)', () => {
     expect(elementsOf({ terrainType: 'hills', tradeRouteAccess: 'isolated' }, 150).has('first-landing')).toBe(false);
   });
 
+  it('RED-FIRST (CENSUS-1c unit 6, the vocabulary rulings §6): no place without water founds or adds a Tide or a River tradition', () => {
+    for (const cfg of [{ terrainType: 'plains', tradeRouteAccess: 'road' }, { terrainType: 'hills', tradeRouteAccess: 'isolated' }, { terrainType: 'desert', tradeRouteAccess: 'road' }]) {
+      const els = elementsOf(cfg, 200);
+      expect(els.has('tide'), JSON.stringify(cfg)).toBe(false);
+      expect(els.has('river'), JSON.stringify(cfg)).toBe(false);
+    }
+  });
+
+  it('a coastal or riverside place still can', () => {
+    expect(elementsOf({ terrainType: 'coastal', tradeRouteAccess: 'port' }, 200).has('tide')).toBe(true);
+    expect(elementsOf({ terrainType: 'riverside', tradeRouteAccess: 'river' }, 200).has('river')).toBe(true);
+  });
+
   it('a place on the coast, a river or a port route still can', () => {
     expect(elementsOf({ terrainType: 'coastal', tradeRouteAccess: 'port' }, 60).has('first-landing')).toBe(true);
     expect(elementsOf({ terrainType: 'hills', tradeRouteAccess: 'port' }, 60).has('first-landing')).toBe(true);
