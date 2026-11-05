@@ -23,6 +23,10 @@
  * is rng-free, so the token is `null` for them and the draw order is byte-identical
  * to the old inline closures.
  */
+import { resolveSiblingSentences } from '../domain/facts/drawDeclared.js';
+
+/** mass_migration's food sentence, the key of its declared sibling set (STRESS_SUMMARY_SIBLINGS). */
+const MIGRATION_FOOD = 'New arrivals come faster than housing, food, and employment can absorb them.';
 
 /**
  * Roll the rng-derived choices for a stressor summary.
@@ -52,12 +56,36 @@ export function rollStressSummary(type, { rng } = {}) {
  * @param {string} type - key from STRESS_TYPE_MAP
  * @param {string} [name] - the real settlement name (empty/undefined at roll time)
  * @param {?Object} [roll] - token from rollStressSummary (only wartime uses it)
+ * @param {object|null} [facts] - `factsOf(record)` at assembly (CENSUS-2c): a sentence of the
+ *   paragraph that is a key of STRESS_SUMMARY_SIBLINGS resolves through its declaration, after the
+ *   render and draw-free. Absent (the provisional roll-time render): every sentence is kept.
  * @returns {string|undefined}
  */
-export function renderStressSummary(type, name, roll) {
+export function renderStressSummary(type, name, roll, facts = null) {
   const fn = RENDERERS[type];
-  return fn ? fn(name, roll) : undefined;
+  if (!fn) return undefined;
+  const text = fn(name, roll);
+  return facts ? resolveSiblingSentences(text, STRESS_SUMMARY_SIBLINGS, { facts, poolId: 'stressNarrative:STRESS_SUMMARY_SIBLINGS', surface: 'crisis', drawKind: 'T' }) : text;
 }
+
+/**
+ * THE DECLARED SENTENCES OF THE STRESS NARRATIVE (CENSUS-2c; `docs/DESIGN_POOL_CENSUS.md` §3.1, the
+ * chair's R-P 1). A sentence a renderer prints that presumes a fact the stressor alone does not
+ * guarantee is a declared sibling set keyed by its own text: the original with its atoms, and its
+ * twin (`twinOf`) — what the record DOES hold — reached only when the original is refused. A keyed
+ * renderer does not re-declare its own stressor (R-B1). Each twin is the chair's ruling (R-G),
+ * recorded in `docs/CENSUS_2_LANE_2026-11-04.md` "CENSUS-2c" with its share: a T cell, so a twin
+ * moves only the births whose original is refused.
+ * @type {Readonly<Record<string, ReadonlyArray<Readonly<{ text: string, crisis?: string[], needs?: string[], excludes?: string[], twinOf?: string }>>>>}
+ */
+export const STRESS_SUMMARY_SIBLINGS = Object.freeze({
+  // mass_migration: "faster than … food … can absorb them" needs the food record's deficit (the
+  // food record counts the influx at ×1.15, so a fed influx is FED: CENSUS-1c unit 7).
+  [MIGRATION_FOOD]: Object.freeze([
+    Object.freeze({ text: MIGRATION_FOOD, crisis: ['hunger'] }),
+    Object.freeze({ text: 'New arrivals come faster than housing and employment can absorb them.', twinOf: MIGRATION_FOOD, excludes: ['crisis: hunger'] }),
+  ]),
+});
 
 /**
  * Legacy single-call shim. Any caller not yet migrated to the roll/render split
@@ -163,7 +191,7 @@ const RENDERERS = {
     const l = name || "The settlement";
     return (
       l +
-      " is receiving more people than its infrastructure was built for. New arrivals come faster than housing, food, and employment can absorb them. The old residents and the new ones are not yet the same community."
+      " is receiving more people than its infrastructure was built for. " + MIGRATION_FOOD + " The old residents and the new ones are not yet the same community."
     );
   },
 };
