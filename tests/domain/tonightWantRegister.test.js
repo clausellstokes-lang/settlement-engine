@@ -16,6 +16,8 @@ describe('R11 · the voiceable shape rule', () => {
     'Maintain traditional standing within the constraints that stable institutional competition creates.',
     "Advance the faction's institutional standing through the credibility that comes from competent administration of current responsibilities.",
     'Restore enough perceived legitimacy to make the governing role functional, or identify an exit before the gap between title and authority becomes irreversible.',
+    'Profit from the shortage through parallel distribution without triggering a response that uses the public interest as justification.',
+    'Manage the supply situation in a way that preserves commercial relationships and reputation beyond this crisis.',
   ])('abstract: %s', (line) => {
     expect(isVoiceableWant(line)).toBe(false);
     expect(wantRegisterFault(line[0].toLowerCase() + line.slice(1))).toBe('abstract-register');

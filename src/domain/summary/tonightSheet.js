@@ -129,6 +129,8 @@ export const ABSTRACT_REGISTER_WORDS = Object.freeze([
   'conditions change', 'economic conditions', 'political contest', 'political distraction',
   'the faction\'s position', 'commercial interests', 'commercial standing', 'commercial position',
   'arcane standing', 'pastoral standing', 'pastoral function', 'welfare capacity', 'responsibilities',
+  'supply situation', 'commercial relationships', 'distribution network', 'parallel distribution',
+  'justification', 'triggering a response', 'consolidate', 'consolidates', 'consolidating',
 ]);
 const ABSTRACT_WORD_RE = new RegExp(ABSTRACT_REGISTER_WORDS
   .map((w) => `${/^\w/.test(w) ? "(?<![\\w'])" : ''}${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`)
