@@ -101,9 +101,9 @@ export const generatePowerStructure = (
   // CENSUS-1e unit 2 (Appendix B item 23, inline T): a base-roster description CENSUS-5b declared in
   // FACTION_DESC_SIBLINGS (data/powerSiblings.js) resolves where it prints, against the native roster's facts — the
   // original where the record holds its atom, else its twin (a set with no twin keeps the original).
-  // ⚠ R-Q: the `militia` atom is NOT settled at this step — a militia can join the roster after the
-  // power step (the 1,000 at 1c00ed2: the twin's `no militia` false on the final record in 8 births,
-  // cert:false-presumption) — so the two militia sets wait on order and are not resolved here.
+  // ⚠ R-Q: the `militia` atom is NOT settled at this step (CENSUS-5c measured the 1,000: militia 33
+  // draw/final differences, garrison 9, watch 0), so no line here presumes the militia: the two
+  // militia lines print their guard-free wording (R-U, the chair's ruling of 2026-11-05 05:25).
   const said = (/** @type {string} */ line) => resolveSibling(line, FACTION_DESC_SIBLINGS_SETTLED, { facts: () => factsOf({ institutions: nativeInstitutions }), poolId: 'rulingStructure:FACTION_DESC_SIBLINGS', surface: 'power', drawKind: 'T' });
   const generationWorldLaw = resolveGenerationWorldLaw(null, config);
   const nativeInstitutions = (institutions || []).filter(
@@ -584,10 +584,10 @@ export const generatePowerStructure = (
             : 'Significant military presence; officers hold political influence disproportionate to formal civic rank.'
           : priorityToCategory(priorities.military) === 'low'
             ? ['hamlet', 'village', 'thorp'].includes(tier)
-              ? 'Part-time militia with limited organisation; authority is moral rather than institutional.'
+              ? 'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'
               : 'Undermanned and underfunded; unable to enforce law consistently and aware of it.'
             : ['thorp', 'hamlet', 'village'].includes(tier)
-              ? "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical."
+              ? "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
                 : militaryPower > 18

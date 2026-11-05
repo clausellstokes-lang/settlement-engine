@@ -76,8 +76,9 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * unit 2). Measured on the 1,000, printed / false by the record: "Town watch
  * and militia" 48 / 0 on `watch` (it would be 48 / 48 on `militia`: the line's town holds a watch,
  * and "militia" reads as the watch's own levy, so it declares the watch alone), the city garrison
- * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0, the part-time militia 7 / 1, the armed
- * patrol 34 / 13. The two twins are the chair's ruling (R-G), recorded in the lane doc. The
+ * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0. The part-time militia (7 / 1) and the
+ * armed patrol (34 / 13) sets LEFT this table (CENSUS-5c, the chair's ruling of 05:25: the militia
+ * is not settled at this draw, so R-U rewords both lines at their branch to their twins' wording). The
  * crossroads and established-merchant lines ("fund the council", "council access", 23 / 10 and
  * 40 / 13 by `ruler: council`) are NOT declared: a High Theocratic Council reads `ruler: priest`,
  * so the atom would refuse a true line; they wait for a council-presence atom (the lane doc).
@@ -93,10 +94,4 @@ export const FACTION_DESC_SIBLINGS = Object.freeze({
     'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.', ['garrison', 'watch']),
   'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.': declaredSet(
     'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.', ['market']),
-  'Part-time militia with limited organisation; authority is moral rather than institutional.': declaredSet(
-    'Part-time militia with limited organisation; authority is moral rather than institutional.', ['militia'],
-    'Part-time armed volunteers with limited organisation; authority is moral rather than institutional.'),
-  "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.": declaredSet(
-    "Armed patrol and informal militia; the settlement's primary recourse when disputes turn physical.", ['militia'],
-    "Armed patrol of able-bodied residents; the settlement's primary recourse when disputes turn physical."),
 });
