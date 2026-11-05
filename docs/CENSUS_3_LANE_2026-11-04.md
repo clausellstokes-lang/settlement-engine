@@ -8,6 +8,8 @@
 >
 > **CENSUS-3d (2026-11-05): unit 6 landed as 6a (the history hooks) and 6b (the outlook hooks, carried); answers 2 and 3 resolved with no code (the projector has no v0 slot; the roster's taxonomy has no court or bank kind). See "CENSUS-3d" at the end.**
 >
+> **CENSUS-3e (2026-11-05): the NPC loyalty guard rows declared (`[guard]` loyalty 29 → 0 on the 1,000), `demographic_pressure` split by direction (R-AA), the grain-monopoly hook reworded (R-V measured: `guild` is not settled at the draw). The outlook twins and the timeline roll stay carried (CENSUS-1f has not wired them). See "CENSUS-3e" at the end.**
+>
 > **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
@@ -411,3 +413,101 @@ The runs are `soak-review.mjs --workers 4`, written to `artifacts/census3d-base`
 2. The guild-monopoly hook wants `guild`, but the power half is settled after the economy step. Should R-V's measurement (birth-time `guildOf` against the final record) be taken, or the line reworded to presume only imports?
 3. demographic_pressure prints influx and exodus hooks from one template. Should the template be split by direction (content, golden-moving)?
 4. The NPC loyalty guard rows: does CENSUS-4 apply them (they are 29 of the 33 remaining `[guard]`)?
+
+## CENSUS-3e (2026-11-05)
+
+Base: CENSUS-3d's tip `2810d360a`. Merged: `origin/lane/census-1b-2026-11-04` at `6e2cb6d` (CENSUS-1e unit 2's T sites and its R-Q cure) as `a38d16f`, with no conflicts. `gen:dossier-prose --check` and `wiring-census.mjs --check` are green, and the declaration registers test is green and unmoved. Re-fetched before unit 3: still `6e2cb6d`.
+
+### The units
+
+| unit | commit | what | births moved (golden 525 · soak 0..59 · soak 1,000) |
+|---|---|---|---|
+| 1 | `a38d16f` | the merge | 0 · 0 · 0 |
+| 2a (answer 4) | `eb4a35f` | `NPC_FACTION_LOYALTY` declares the ledger's 14 rows: `guardPresence` on government #5, military #0/1/3/5/7/10 and criminal #0/6; `institution: temple` on religious #2; `market` on economy #3; `magic` on magic #2/5/6. `drawLoyalty` stores `.text`, and a refused row resolves through `hookVariety.js :: freshAdmittedTwin` (below). | 12 · 7 · 92 (sections `npcs` and `factions[].members[].plotHooks`) |
+| 2b (answer 3, R-AA) | `4be7162` | `demographic_pressure`'s hooks declare their direction: the two newcomer hooks `migration: influx`, the departed-properties hook `migration: exodus` | 0 · 6 · 74 (`history` only) |
+| 2c (answer 2) | `bc34830` | the grain-monopoly hook is reworded to presume only the imports: "A single importer controls the grain coming in and has raised prices 300%. …" | 38 · 23 · 377 (`economicViability` only) |
+| 3 | — | nothing landed: neither the outlook branch nor the timeline roll is wired at `6e2cb6d` | — |
+
+Byte identity was checked with a sha per record section, over the 525 golden configurations and soak1k-0..999, before and after every unit. The before tree is a `git archive` export of the merged base.
+
+### The measurements behind the answers (soak1k-0..999, the draw's facts against the final record's)
+
+- **Answer 4 (R-V):** `guardPresence`, `institution: temple`, `market` and `magic` read at the loyalty draw (`birthFactsOf`) equal the final record's on **14,340 of 14,340** draws. They are settled, so the rows declare.
+- **Answer 2 (R-V):** `guild` at the economy step (`birthFactsOf` over the step's roster) differs from the final record on **25 of 1,000** births. Every one of the 25 is false at the step and true at the end, because `guildOf`'s power half is settled later. Of the 377 births that print the hook, 4 differ (soak1k-230, -398, -578, -602). R-V does not hold, so the line is reworded, not declared. CENSUS-3d's `food: ≤ deficit` on it was already withdrawn (a wrong presumption). The ledger row now reads the new text with `needs: []`.
+- **Answer 3:** 74 `demographic_pressure` tensions: 58 under a live influx, 16 with no live migration (drawn by the fill), 0 under an exodus. At birth every mass migration is an influx, which is the catalog's direction (`crisis/migrationDirection.js`).
+
+### The chair's rulings recorded at this seat (vetoable)
+
+1. **The registry-aware resolution at the loyalty draw (`freshAdmittedTwin`).** `drawDeclared`'s fallback for a refused line is a hash argmax keyed by the pool alone. That ignores HK-3's settlement registry, so every refused draw of a pool resolves to the same template, which is an avoidable repeat that `drawUnique` exists to prevent. The site's `twin` resolver instead picks, among the admitted templates whose family is unused, the one with the highest hash of `key::drawn::candidate`, preferring an unspoken theme exactly as `drawUnique` does, and registers it. It uses no roll. With nothing fresh it answers `undefined`, and the kernel's argmax decides. It runs only on a refusal, so an admitted draw is byte-identical. This changes the resolution policy at CENSUS-1c's site (no line added under its `max-lines` 1288), so it is listed for the chair. The mechanism lane may lift it into `drawDeclared` as a `used` option.
+2. **`demographic_pressure`: no twin.** Under no live migration (16 of 74), all three hooks are refused and the tension prints an empty list. The Plot Hooks collector simply adds no card. A kind-A list drops twin rows, and a fourth plain row would change the timeline roll's domain (item 12 splices the template's list by index), moving every timeline that draws the event. R-G gives a twin only where the slot empties for most births, and 16 of 74 is not most. The description ("through arrivals, departures, or both") and the faction ("The newly arrived or departing") name both directions with an "or" and presume neither, so they are left as they are.
+3. **The exodus hook is never true at birth (0 of 74).** R-W would reword a never-true line, but the chair's answer 3 ordered the exodus declaration, and an authored exodus entry is representable (the entry's `direction`). It is declared as ordered and listed as open question 2.
+
+### R-Q / R-V at this seat
+
+- The loyalty rows are R-V (measured settled) and are declared.
+- The monopoly hook is R-Q (not settled) and is reworded.
+- The migration hooks are read from `config.stressTypes` at the history step, and the birth self-check re-asserts them against the final record: `cert:false-presumption` is 0 on the 1,000.
+
+### Unit 3: carried
+
+The outlook branches (`foodBalance.js`, `OUTLOOK_HOOK_SIBLINGS`, timber and iron) and the timeline hook roll (`historyGenerator.js :: generateEventNarrative`, Appendix B item 12) are not wired at `origin/lane/census-1b-2026-11-04` = `6e2cb6d`. CENSUS-1e's record lists them for CENSUS-1f. `[sea]` stays at 66 → 66.
+
+### The 60 and the 1,000 (R-B: BEFORE = the merged base `a38d16f`, AFTER = `bc34830`)
+
+Runs: `soak-review.mjs --workers 4`. The 60 was written to `artifacts/census3e-base` and `census3e-after60`. The 1,000 was written to `census3e-before` (from the base export) and `census3e-after`.
+
+| class | 60 before → after | 1,000 before → after (settlements / occurrences) |
+|---|---|---|
+| `reader:hook-pools` | 6 → 3 | 96 / 99 → **70 / 71** |
+| · `[guard]` NPC loyalty (this lane's) | 3 → 0 | 29 → **0** (government #5 15, military #0 6, criminal #0 4, criminal #6 4) |
+| · `[sea]` the timber "shipbuilding" (carried) | 3 → 3 | 66 → 66 |
+| · `[guard]` conflict labels "Military/Guard", the revolt line (CENSUS-4's / not this lane's) | 0 → 0 | 4 → 5. This is a re-bin, not a rise: the instrument reports one guard finding per settlement, and soak1k-614 carried "Military/Guard vs War Council" behind a loyalty row it read first |
+| `reader:scale-lists`, `reader:traditions-water` | 0 | 0 → 0 |
+| `coh:crisis-blind-prose` | 2 → 2 | 35 / 35 → 35 / 35. By claim: food secure / migration 32, pilgrims queue patiently 3. These are the base's (CENSUS-2c, 2b), and none are this lane's |
+| `coh:food-words` and every other `coh:*` | 0 | 0 → 0 |
+| `A-12:self-vouch-false` | 0 → 0 | 3 → 3 (the base's) |
+| `cert:*`, including `cert:false-presumption` | 0 → 0 | 0 → 0; certification 1000/1000 |
+| findings · verdict | 104 → 104 · CLIMB | 1,714 → 1,714 · STOP (the base's STOP classes at the same counts; `reader:*` is kind 9, 3,722 → 3,694) |
+
+**`declared-share`:**
+
+| surface | 60 | 1,000 |
+|---|---|---|
+| npcs | 165 / 2,658 (0.062) → 318 / 2,658 (0.120) | 2,567 / 42,934 (0.060) → **4,892 / 42,934 (0.114)** |
+| history | 34 / 316 (0.108) → 44 / 308 (0.143) | 670 / 5,178 (0.129) → **786 / 5,072 (0.155)** |
+
+Every other surface is unchanged.
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Golden records** (sha per section, 525 configurations): 2a 12 (a refused loyalty row resolved), 2b 0, 2c 38 (the reworded hook). The two sets do not overlap in section.
+- **Soak records, 1,000:** 2a 92, 2b 74, 2c 377. The 60: 7, 6, 23.
+- **The manifest, the wiring census, the registers:** unmoved (`--check` green; `declarationRegisters.test.js` green).
+- **Pins edited by cause:**
+  - `hookTablesDeclared.test.js`'s row pin 12 → 15 (the three migration rows);
+  - `hookThemeTotality.walker.test.js` reads the loyalty pool through `lineText` (R-C, byte-identical).
+- **The base's own reds, identical before and after, and not re-pinned:**
+  - `hookThemeDraws pin:no-hook-is-lost` (860 at the merged base and here, against its pin of 861);
+  - `economicStructure` ×2;
+  - the governing suites listed at CENSUS-3d;
+  - `typecheck:domain:strict` (crisisFactFindings +4, composeStateProse +2).
+
+### Needs a home / waiting
+
+- `court`, `bank`, `mint`: no (R-AC). They stay under "needs a home" with CENSUS-3c's counts (Legal services, Advanced legal expertise, Banking services, International banking, Coin minting).
+- The seven canonical v0 rows wait on CENSUS-1f's projector slot (the chair's item 3 of ~04:50).
+
+### Where CENSUS-3f starts
+
+1. When `origin/lane/census-1b-2026-11-04` shows CENSUS-1f's wiring of the outlook branch (`resolveSibling(…, OUTLOOK_HOOK_SIBLINGS, …)`) and of the timeline roll (item 12): merge it, then re-run the 60 and the 1,000.
+   - `[sea]` 66 → 0 is expected from the timber twin.
+   - Count the births the iron and timber twins move. That count is exactly the births whose record refuses the original, since a T site has no draw.
+   - The timeline will also enforce `demographic_pressure`'s directions and 3d's twelve rows. Count the slots that empty under no live migration, because a timeline event of that type with no live migration has every hook refused.
+2. When the projector reads a v0 tag slot: declare the seven canonical rows (CENSUS-3d's table: `market` ×2, `guild` ×1).
+3. Nothing else remains on this lane.
+
+### Open questions for the chair
+
+1. `freshAdmittedTwin`: keep it at the loyalty site, or lift it into `drawDeclared` as a `used` registry option for every `drawUnique` site (the mechanism lane's)?
+2. `demographic_pressure`'s exodus hook is never true at birth (0 of 74), because every born migration is an influx. Is it declared as ordered (as now), or reworded under R-W?
+3. The 16 fill-drawn `demographic_pressure` tensions with no live migration print no hooks. Should the fill draw that template only under a live migration (a history draw change, which moves births), or is an empty list acceptable?
