@@ -8,7 +8,6 @@ import {
   resolveCultureProfileKey,
 } from '../../domain/cultureProfiles.js';
 import { resolveDeclared, lineText } from '../../domain/facts/drawDeclared.js';
-import { factsOf } from '../../domain/facts/factsOf.js';
 
 function legacyCultureContext(culture) {
   const key = resolveCultureProfileKey(culture);
