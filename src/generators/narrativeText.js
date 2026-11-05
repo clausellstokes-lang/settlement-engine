@@ -381,12 +381,14 @@ export const POLITICAL_FLAVOR = {
         : "Little has happened here worth recording, which the residents will tell you is the point. The work of keeping a place uneventful is real work, and they have done it well enough that no one thanks them for it",
   ],
   religious_heavy: [
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`,
+    // CENSUS-2f unit 5: [0]'s persisting institution and [2]'s local clergy presume a house of worship of any kind (R-AE's
+    // `sacredHouse`, settled at this draw on all 1,000 soak births — R-V, R-AN); a refused row moves to the admitted argmax.
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} divided this settlement's relationship to faith in ways that never fully healed: the institution persisted; the unity didn't`, needs: ['sacredHouse'] },
     (r) =>
       `Religious history here is complicated: the ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} left an official account and an unofficial one, and which version you know says something about who you are`,
-    (r) =>
-      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`,
+    { text: (r) =>
+      `The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is why the local clergy and the civic authority maintain a relationship of careful, documented mutual respect rather than the easy cooperation you find elsewhere`, needs: ['sacredHouse'] },
     (r) =>
       `Visitors sometimes ask why the people here seem so personally invested in theological questions that most settlements leave to the priests. The ${pickRandom2(r.filter((s) => s.type === "religious"))?.name || "this event"} is the explanation`,
     (r) =>

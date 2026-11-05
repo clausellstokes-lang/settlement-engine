@@ -123,16 +123,18 @@ describe('POLITICAL_FLAVOR — the cascade\'s rows carry the ledger\'s declarati
   const NOT_WRITTEN = {
     'POLITICAL_FLAVOR.disaster_heavy[4]': ['walls'], // POLITICAL_FLAVOR_SIBLINGS (CENSUS-1c) resolves the walls after the draw
     'POLITICAL_FLAVOR.catastrophic[1].monster_incursion': ['walls', 'militia'], // one branch of the closure
-    'POLITICAL_FLAVOR.religious_heavy[0]': ['institution: temple'], // waiting on sacredHouse (R-AE)
+    'POLITICAL_FLAVOR.religious_heavy[0]': ['institution: temple'], // the ledger's temple is a sacred house of any kind (R-AE): written `sacredHouse` (CENSUS-2f unit 5)
     'POLITICAL_FLAVOR.religious_heavy[2]': ['institution: temple'],
   };
+  /** atoms the row writes in place of the ledger's, by cause (CENSUS-2f unit 5, R-AE's composite landed at `fc45cc1`) */
+  const WRITTEN_FOR = { 'POLITICAL_FLAVOR.religious_heavy[0]': ['sacredHouse'], 'POLITICAL_FLAVOR.religious_heavy[2]': ['sacredHouse'] };
   it('every row declares what its ledger lines say (a closure\'s branches share one row)', () => {
     const want = {};
     for (const pool of ledger('POLITICAL_FLAVOR').pools) for (const line of pool.lines) {
       const m = /^POLITICAL_FLAVOR\.(\w+)\[(\d+)\]/.exec(line.lineId);
       const d = expectedDeclaration(pool, line);
       const skip = NOT_WRITTEN[line.lineId] || [];
-      d.needs = d.needs.filter((a) => !skip.includes(a));
+      d.needs = [...d.needs.filter((a) => !skip.includes(a)), ...(WRITTEN_FOR[line.lineId] || [])];
       const key = `${m[1]}[${m[2]}]`;
       want[key] = JSON.stringify(d);
     }
