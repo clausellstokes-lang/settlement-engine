@@ -182,10 +182,22 @@ describe('reader:tonight-wants', () => {
   test('"Wants to" followed by a sentence', () => {
     const rows = R.tonightWantsFindings(rec(), { tonight: 'People to voice\nLalita Acharya\nElder · Holds the seat\nWants to Was approached before the betrayal and said no.' });
     expect(rows).toHaveLength(1);
-    expect(rows[0].detail).toBe('1 lines; starts "Was"');
+    expect(rows[0].detail).toBe('[sentence-not-a-want] 1 lines; starts "Was"');
   });
-  test('negative control: a want with its verb', () => {
-    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to extend the institution\'s civic role.' })).toEqual([]);
+  test('R11: "Wants to" followed by management prose is the abstract-register sub-case', () => {
+    const tonight = [
+      'People to voice', 'Gerlinde', 'Baron · Holds the seat',
+      'Wants to convert governance instability into a restoration of prerogatives that formal governance had constrained.',
+      'Brother Anselm', 'Priest · Senior cleric',
+      'Wants to build pastoral standing and institutional credibility through consistent service in a context where the dominant institution sets the standard.',
+      'Wants to The supplies they declared destroyed in a fire are in a cellar.',
+    ].join('\n');
+    const rows = R.tonightWantsFindings(rec(), { tonight });
+    expect(rows.map((r) => r.detail)).toEqual(['[sentence-not-a-want] 1 lines; starts "The"', '[abstract-register] 2 lines; starts "convert"']);
+    expect(rows[1].quote).toMatch(/^Wants to convert governance instability/);
+  });
+  test('negative control: a concrete want, and the cast wants, read clean', () => {
+    expect(R.tonightWantsFindings(rec(), { tonight: 'Wants to get the old toll right back before the council notices.\nWants to keep the pressure on until the seat gives way, and keep their own hand out of sight.\nWants the same as Gerlinde.' })).toEqual([]);
   });
 });
 

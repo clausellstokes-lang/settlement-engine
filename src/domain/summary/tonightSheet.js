@@ -101,6 +101,66 @@ export function castWantOf(role, personId, crisis, ownWant) {
   return pool[Math.floor(castHash(personId, crisis, role) * pool.length)];
 }
 
+/**
+ * THE VOICEABLE REGISTER (lane R11, the chair's ruling 2026-11-04): ONE home for the shape a want
+ * must have before a DM is handed it after "Wants to". Measured from the registry's goal strings
+ * (npcStructure.js) and the sixty-settlement read (docs/READER_R11_TONIGHT_WANTS_2026-11-04.md):
+ * a voiceable want begins with a verb a person can act on tonight, is at most eighteen words,
+ * and carries none of the management-prose words below. A line that opens on a subject or an
+ * auxiliary ("Was approached…", "The supplies…") is a sentence, not a want.
+ */
+export const WANT_MAX_WORDS = 18;
+/** Lead verbs that name a strategy, not an act (the chair's seven, plus the measured ones). */
+export const ABSTRACT_LEAD_VERBS = Object.freeze([
+  'convert', 'build', 'maintain', 'advance', 'consolidate', 'leverage', 'position',
+  'demonstrate', 'navigate', 'sustain', 'formalize', 'formalise', 'deploy', 'redirect',
+  'stabilise', 'stabilize', 'establish', 'cultivate', 'optimise', 'optimize',
+]);
+/** Words that open a sentence, never a want: subjects, articles, auxiliaries. */
+const NOT_A_VERB = new Set(['is', 'was', 'are', 'were', 'has', 'had', 'have', 'knows', 'knew', 'they', 'their', 'them', 'he', 'she', 'his', 'her', 'it', 'its', 'the', 'a', 'an', 'this', 'that', 'these', 'those', 'nobody', 'someone', 'everyone']);
+/** The abstract register: words a DM cannot say aloud as a person's want (measured; one place). */
+export const ABSTRACT_REGISTER_WORDS = Object.freeze([
+  'governance', 'prerogative', 'prerogatives', 'institutional', 'institution', "institution's", 'institutions',
+  'credibility', 'legitimacy', 'traditional standing', "'s standing", 'standing within', 'standing through', 'context', 'framework', 'relative', 'dominant interest',
+  'contingent', 'civic structures', 'civic role', 'structural', 'vulnerabilities', 'viability', 'viable',
+  'operational', 'apparatus', 'indispensable', 'indispensability', 'alignment', 'accountability',
+  'capacity', 'reconsolidation', 'reconsolidates', 'relevance', 'autonomy', 'neutrality', 'visibility',
+  'infrastructure', 'constraints', 'niche', 'perceived', 'precedents', 'current stability',
+  'conditions change', 'economic conditions', 'political contest', 'political distraction',
+  'the faction\'s position', 'commercial interests', 'commercial standing', 'commercial position',
+  'arcane standing', 'pastoral standing', 'pastoral function', 'welfare capacity', 'responsibilities',
+]);
+const ABSTRACT_WORD_RE = new RegExp(ABSTRACT_REGISTER_WORDS
+  .map((w) => `${/^\w/.test(w) ? "(?<![\\w'])" : ''}${w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}(?![\\w])`)
+  .join('|'), 'i');
+
+/**
+ * Why a want is not voiceable, or '' when it is. Reads the want as the sheet prints it after
+ * "Wants to" (a leading "to" is dropped). `sentence-not-a-want`: it opens on a capital or on a
+ * subject / auxiliary; `abstract-register`: an abstract lead verb, an abstract word, or more
+ * than eighteen words.
+ * @param {unknown} text @returns {'' | 'sentence-not-a-want' | 'abstract-register'}
+ */
+export function wantRegisterFault(text) {
+  const words = clean(text).replace(/^to\s+/i, '');
+  if (!words) return '';
+  const lead = (words.match(/^[\w'’-]+/) || [''])[0];
+  if (/^[A-Z]/.test(lead) || NOT_A_VERB.has(lead.toLowerCase())) return 'sentence-not-a-want';
+  if (ABSTRACT_LEAD_VERBS.includes(lead.toLowerCase())) return 'abstract-register';
+  if (words.split(/\s+/).length > WANT_MAX_WORDS) return 'abstract-register';
+  if (ABSTRACT_WORD_RE.test(words)) return 'abstract-register';
+  return '';
+}
+
+/**
+ * THE ONE SHAPE RULE: can a DM say this want aloud tonight? (Read on the lower-led want.)
+ * @param {unknown} text @returns {boolean}
+ */
+export function isVoiceableWant(text) {
+  const words = clean(text).replace(/^to\s+/i, '');
+  return !!words && wantRegisterFault(words[0].toLowerCase() + words.slice(1)) === '';
+}
+
 /** How many hooks the sheet carries. */
 const HOOK_COUNT = 3;
 

@@ -27,6 +27,7 @@ import { POWER_ROLES_BY_CATEGORY } from '../../data/historyData.js';
 import { NOBLE_ROLES } from '../../generators/npc/factionRoleCatalog.js';
 import { hasMarketInstitution } from '../../generators/economy/viability.js';
 import { nativeSemanticName } from '../content/customContentSemanticAuthority.js';
+import { wantRegisterFault } from '../summary/tonightSheet.js';
 import { collect, str } from './recordBattery.js';
 
 /** @typedef {import('./coherenceBattery.js').BatteryFinding} BatteryFinding */
@@ -428,13 +429,24 @@ export function traditionsWaterFindings(s, surfaces) {
 // ──────────────────────────── 7. tonight-wants ────────────────────────────
 
 /**
- * On the Tonight sheet, "Wants to" followed by a capitalised word — a sentence, not a want
- * ("Wants to Was approached…", "Wants to The supplies…"). A want's verb is lower-case.
+ * Every "Wants to" line on the Tonight sheet read by THE ONE SHAPE RULE (`tonightSheet.js ::
+ * wantRegisterFault`, lane R11): `[sentence-not-a-want]` — a sentence pasted after "Wants to"
+ * ("Wants to Was approached…", "Wants to The supplies…"); `[abstract-register]` — a want in
+ * management prose no DM can say aloud ("Wants to convert governance instability into…"). One
+ * finding per sub-case per settlement; the detail counts its lines.
  * @param {any} _s @param {Readonly<Record<string,string>>} surfaces
  */
 export function tonightWantsFindings(_s, surfaces) {
-  const hits = linesOf(surfaces.tonight).filter((x) => /\bWants to [A-Z]/.test(x));
-  return hits.length ? [{ surface: 'tonight', quote: hits[0], detail: `${hits.length} lines; starts "${str(hits[0].match(/\bWants to ([A-Z][\w'’]*)/)?.[1])}"` }] : [];
+  /** @type {Array<{surface:string,quote:string,detail:string}>} */
+  const out = [];
+  const wants = linesOf(surfaces.tonight).filter((x) => /\bWants to /.test(x));
+  for (const tag of /** @type {const} */ (['sentence-not-a-want', 'abstract-register'])) {
+    const hits = wants.filter((x) => wantRegisterFault(x.slice(x.indexOf('Wants to ') + 9)) === tag);
+    if (!hits.length) continue;
+    const lead = str(hits[0].slice(hits[0].indexOf('Wants to ') + 9).match(/^[\w'’-]+/)?.[0]);
+    out.push({ surface: 'tonight', quote: hits[0], detail: `[${tag}] ${hits.length} lines; starts "${lead}"` });
+  }
+  return out;
 }
 
 // ──────────────────────────── 8. rule-text ────────────────────────────
