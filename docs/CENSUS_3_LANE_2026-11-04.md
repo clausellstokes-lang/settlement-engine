@@ -4,6 +4,8 @@
 >
 > **Phase B (CENSUS-3b, 2026-11-05): units 1, 2, 3 and 5 landed on this branch; unit 4 (the DS pools) and unit 6 (the hook tables) are PARKED with their tools and findings. See "Phase B" at the end.** The phase-A note below is history.
 >
+> **CENSUS-3c (2026-11-05): unit 4 (DS-ECO, DS-SUP, DS-POP) and the revenues (R-P 2) landed; unit 6 is NOT started — CENSUS-3d starts there. See "CENSUS-3c" at the end.**
+>
 > **Where the phase-A seat stopped.** Phase A (annotation) is complete, committed and pushed. **Phase B (apply) was not started.** `lane/census-1b-2026-11-04` had not been pushed at any boundary of this lane (`git ls-remote` was empty at each one), so neither the vocabulary module, the sibling-column schema nor `drawDeclared` exists to apply against. The two-phase rule forbids applying before they land. The next seat starts at Phase B, step 1 below.
 
 ## Phase A: the ledger (`docs/census/declarations/`)
@@ -177,3 +179,124 @@ Runs: `soak-review.mjs --workers 4`, written to `artifacts/census3b-base` (60) a
 5. CENSUS-4's leaked author notes (Mill "(if water mill)" / "(if saw mill)"; "Printing house (if technology exists)").
 
 **Unit 6.** The hook tables, the record self-check (`storeTrueHooksOnly`), and the `textOf` tolerance at the tension and outlook pools. Check `origin/lane/census-1b-2026-11-04` for 1c's wiring first. Narrow `GUARD_WORDS` past "the old guard".
+
+## CENSUS-3c (2026-11-05)
+
+Base: CENSUS-3b's tip `988a858ed`. Merged, in order: `origin/lane/census-1b-2026-11-04` at `d6f8456be` (`fbe6ce4`; R-J), then `origin/lane/census-5-2026-11-04` at `40f0490ad` (`40285f1`; R-N), then, after unit 4 DS-ECO, `origin/lane/census-1b-2026-11-04` at `ca14125` (`aebd2f6`; CENSUS-1d's R-H disjunction, sites 89, 90, 94, 97–103, 110, 111, and the two declaration registers). The 1b merge conflicted in `factVocabulary.js` / `factsOf.js` and was resolved as a union. At that merge the "named but refused" list is EMPTY, so the three tests that pinned it from one side each were re-pinned to `[]`.
+
+**The base's own reds (R-B: not this lane's).** Every sibling tip carries 709 state pools, but 11 tests in `dossierStateProseProjection.contract`, `composeStateProse` and `stateProseKernel` still pin 708. They are red at `988a858`, `d6f8456be`, `40f0490ad` and this lane's merged base alike. This lane does not re-pin them. The values its units move inside those same red tests are listed by cause in each unit's row.
+
+### Unit 4 · DS-ECO (`e3295d1`)
+
+The step: `_apply_ds_pools.mjs DS-ECO`, then `gen:dossier-prose` with `--check` green, then the wiring census re-taken. The result is 91 lines declared and 6 pools `{crisis-scoped}`. The food pools take `no hunger` on their calm lines (R-K); 12 lines carry it.
+
+**The chair's rulings applied at this seat (vetoable):**
+
+1. **R-B1 at pool level.** Every pool-level `declares` in the DS-ECO/SUP/POP ledger restates its pool's key: terrain ×7, food band ×3, magic ×2, exodus ×2, metropolis ×1. The ledger's own `notes` say so. None is applied, which leaves 12 brace groups unwritten in DS-ECO.
+2. **R-B1 at line level.** A line F12 already marks `hunger` does not re-declare `crisis: hunger` through the census channel. This affects DS-ECO-9 SECURE v4/v5, the two places where the ledger gave both. Declaring the fact twice made the calm double contradict the kernel's mark.
+3. **R-K: the hunger-safe lines.** Six food pools gain one each. SECURE gains none, because it already carries two (F12's v4/v5). Each line is spelled with F12's `hunger` mark, which is the same spelling as SECURE's siblings on the same desk. R-O names the mark channel as 1d's wave-2 migration. A line marked `hunger` is drawn only under hunger, so it moves only hunger births, about 1/(k+1) of them, where k is the pool's lines admitted under hunger. The granary tile does not render at birth (0 of 200 births carry a stockpile season), so the GRANARY lines move no birth page.
+   - FOOD: surplus v4 — "On the counts {settlement} still raises more than it eats. Under the hunger the stores are what the town is drawing on, and the drawing is what gets counted now." Share ≈ 1/2 of hunger births in the pool.
+   - FOOD: balanced v4 — "{settlement}'s fields and its mouths came out level before the hunger. Now the stores make up the difference, and the stores are being drawn down." Share ≈ 1/3.
+   - GRANARY: well stocked v4 — "The stores went into {season} deep, and the hunger is what they are being drawn down against now." Share ≈ 1/2; no birth page.
+   - SURPLUS v4 — "{settlement} raised more than it ate, and what it put by is what the hunger is being met from now." Share ≈ 1/2.
+   - PRESSURED v4 — "The food counts were short by a little before the hunger. Under it the shortfall comes out of the stores, and the stores are being drawn down." Share ≈ 1/3.
+   - IMPORT-DEPENDENT v4 — "A substantial part of what {settlement} eats is bought, and under the hunger the bought part comes short. The stores cover the gap and are drawn down to do it." Share ≈ 1/3.
+4. **R-G / R-L: four complement twins, `no institution: granary`.** The four GRANARY pools are declared `institution: granary` on every line. The key does not guarantee a granary, because the outlook is derived from the stockpile for every place, and 101 of 200 births stand without a granary. So without these twins the tile goes mute for about half of advanced towns, and F12's walker caught exactly that for well stocked. Each twin is the "stores" form of the pool's own first line and is drawn only where the granary lines are refused, so a granary town is byte-identical. Share: all no-granary towns in that band, with no birth page and no granary-town page moved.
+   - well stocked v5 also carries `no hunger`;
+   - stocked v4;
+   - thin v4;
+   - nearly empty v4.
+5. **The canonicals.** The ledger's seven `*(canonical)*` v0 rows have no tag slot, so they are left as they are. Two of them presume `market` (DS-ECO-3 SHORTAGE / SURPLUS × trade-dependent), and they go to the undeclared register under "canonical, no slot".
+
+**R-N.** The arms that read DS-ECO-8 without facts take `CALM_FACTS_ADMIT_ALL` (stateProseKernel ×3 laws). The economy desk's arms birth through `factsAnswered`, so their fixture towns gain the institutions the drawn lines presume: a granary, and a market square. The projection pin of dimensioned blocks gains DS-ECO-2, by cause.
+
+**The merge of 1d's registers.** They were taken on 1d's base, which holds neither CENSUS-5's declarations nor this lane's, so `aebd2f6` re-takes them with `RETAKE_DECLARATION_REGISTERS=1`. The crisis-scoped register holds 20 pools after that merge (CENSUS-5's 14 and DS-ECO's 6) and 22 after DS-POP.
+
+### Unit 4 · DS-SUP (`3a1bb7a`) and DS-POP (`586bedd`)
+
+- **DS-SUP.** Three lines are declared: `gate`, `magic`, `institution: tavern`. The pool-level `tier: >= metropolis` restates the key, so it is not applied (R-B1).
+- **DS-POP.** 17 lines are declared, and two pools are `{crisis-scoped}`: QUANTITY nobody and CANDIDATE decline.
+  - The scale lines declare `population: small`, `tier: >= town`, `walls`, `grain`, `market` and the migration direction.
+  - Two key restatements are not applied.
+  - The script's block match now also takes DS-POP-3's `### DS-POP-3 ·` header.
+  - The projection pin of dimensioned blocks gains DS-POP-1, because `walls` is the kernel's word (R-O).
+
+### The revenues (`9e4283e`, R-P 2)
+
+`tradeListDisplay.js :: revenuesOffTheLists` is a display read model; no generated fact is added. It prints a `NOT_A_GOOD` label that the record's lists carry under the income table, in its home's words (`data/revenueHomes.js`), when two things hold: no income row of the same family already speaks for it, and the record holds the fact behind it (`filterDeclared` against `factsOf`).
+
+| home | the lists' labels | needs / excludes | family (already speaks) |
+|---|---|---|---|
+| Tolls | Toll revenue, Toll income, Trade access fees | `gate`; no `route: isolated` | Toll Revenue, Gate Tolls, River Tolls, Port Duties |
+| Transit trade | Transit trade, Pass transit trade, Transit trade profit, Overland freight revenue | no `route: isolated` | Entrepôt Trade + the tolls |
+| Market taxes | Market taxes | `market` | Market Taxes |
+| Medical care | Advanced medical care | `hospital` | — |
+
+The record holds no share for these revenues, so no figure is invented. The tab, the PDF and the Foundry journal each print one "Also earned, with no share recorded" line.
+
+- **Needs a home** (no atom; these leave the page): Legal services, Advanced legal expertise, Banking services, International banking, Coin minting, Cultural tourism revenue, Planar trade access. The income table has rows of the same kind ("Court Fees & Fines", "Banking Fees"), but no court or bank atom exists to gate a printed line. How often those rows already stand beside the labels was not measured.
+- **Not a revenue** (these leave the page): Warehousing and logistics services and Route maps and intelligence, which are imports of a service; Strategic control; Political legitimacy; Massive food requirements.
+
+### The 60, per unit (records 60/60 byte-identical at every unit)
+
+| unit | pages moved (of 60) | classes |
+|---|---|---|
+| DS-ECO | economics 24, daily_life 9, resources 4 | unchanged |
+| the 1d merge (R-H) | 0 | unchanged |
+| DS-SUP | 0 | unchanged |
+| DS-POP | 0 | unchanged |
+| revenues | economics 15, pdf 15, foundry 15 | unchanged |
+
+### The 1,000 (R-B: BEFORE = the merged base without this lane's units, `40285f1` + `ca14125` composed in a scratch worktree; AFTER = `9e4283e`)
+
+Runs: `soak-review.mjs --count 1000 --workers 4`, written to `artifacts/census3c-before` and `artifacts/census3c-after`. Records are 1000/1000 byte-identical.
+
+| class | before → after |
+|---|---|
+| `coh:crisis-blind-prose` | 189 / 800 → 189 / 800. By claim, the base's STOP is unchanged: current stability, stable institutional competition, competent administration, and "food secure / migration" 32, which is CENSUS-2c's under R-P 1. None of this lane's DS-ECO/SUP/POP claims appears, before or after. |
+| `A-12:self-vouch-false` | 14 → 14 (the base's) |
+| `coh:food-words` and every other `coh:*` | 0 → 0 |
+| `cert:*`, including `cert:false-presumption` | 0 → 0; certification 1000/1000 |
+| `reader:scale-lists` | 0 → 0 |
+| `reader:traditions-water` | 0 → 0 |
+| `reader:hook-pools` | 109 / 112 (sea 66, guard 46) → the same (unit 6 is not started) |
+| findings · verdict | 2,490 → 2,490 · STOP (the base's STOP classes at the same counts) |
+
+**`declared-share`**, from the merged render ledger (R-J), before → after:
+
+| surface | before | after |
+|---|---|---|
+| tab:dossier | 4,967 / 213,783 (0.023) | 12,417 / 213,783 (0.058) |
+| tab:economics | 1,421 / 27,595 (0.051) | 1,851 / 28,025 (0.066) |
+| foundry:economics | 710 / 12,940 (0.055) | 1,140 / 13,370 (0.085) |
+| pdf:economics | — | 215 / 215 (the revenue read) |
+| tab:traditions | 0.202 | 0.202 |
+
+**The calm claims under hunger.** The DS-ECO/SUP/POP calm claims under hunger are 0 before and after on the instrument. `coh:crisis-blind-prose`'s regex mirror reads none of these pools' phrases, and that is why 3b's three claims (nothing is failing, depends on none alone, a year closed ahead) were already at 0. The declaration-driven check (`cert:false-presumption`) reads 0.
+
+### Golden / manifest / census / pin rows moved, by cause (never re-recorded)
+
+- **Golden records:** 0 (every change is display-time). Byte identity was checked on soak records at 60 and at 1,000; the 525 golden fixtures were not re-run.
+- **The wiring census** (`docs/content/wiring-census.json`): `producerIndexFiles` +1 at each 1b merge, which is the new test file.
+- **Registers:** crisis-scoped 0 → 20 (the merge) → 22 (DS-POP); undeclared lines re-taken at the merge, DS-SUP and DS-POP.
+- **Pins edited by cause:**
+  - the named-but-refused list → `[]` (three tests, at the 1c × 3b merge);
+  - the dimensioned-blocks pin gains DS-ECO-2 and DS-POP-1;
+  - the mount probe borrows DS-ECO-6;
+  - stateProseKernel's DS-ECO-8 arms take the calm double (R-N);
+  - the economy desk's fixture towns hold a granary and a market square.
+- **Values moved inside the base's own red tests** (not re-pinned, because the 708 pin is red at every sibling tip):
+  - variants 2324 → 2334;
+  - law-5's compared-pool floor 675 → 641.
+
+### Where CENSUS-3d starts
+
+1. **Unit 6, the hook tables.** Wiring at this tip:
+   - **Wired:** `npcGenerator.js` (1c: loyalty, goals, impressions) and `hookLines.js` (1d site 90).
+   - **Not wired:**
+     - `historyGenerator.js`: the R draw of `HISTORICAL_EVENTS_DATA[].plotHooks`, which is record-time and golden-moving if a row refuses;
+     - `foodBalance.js`: the T writers of `economicViability.plotHooks`, including the timber "shipbuilding" row (the `[sea]` sub-case);
+     - `safetyProfile.js` (T);
+     - `plotHooks.js :: ECHO_PREFIXES` (A).
+   - **The order.** Declare the ledger's rows (`docs/census/declarations/hooks.*.json`): 24 history rows, 1 conflict row, 14 loyalty rows, 7 outlook rows and 6 safety rows carry atoms. Where a consumer is unwired, add a `textOf` tolerance (R-C) and do not wire it. 3b's two owed twins (timber without "and shipbuilding", `excludes: navigable`; and the guard-free `crime_wave` hook) need a T branch to resolve at, so they follow 1d's wiring of those sites. `reader:hook-pools` reads sea 66 and guard 46 on the 1,000. `GUARD_IDIOM` already narrows "the old guard".
+2. **The canonical rows.** Seven `*(canonical)*` v0 rows have no tag slot. Two presume `market` (DS-ECO-3 SHORTAGE / SURPLUS × trade-dependent) and are listed for the undeclared register.
