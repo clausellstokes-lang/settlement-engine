@@ -141,6 +141,9 @@ export const MANIFEST_PROVENANCE = Object.freeze({
     + '0 added, 0 removed.'
     + ' 2026-11-04 (PLACE-NOT-TIER (R6, units 1–2), docs/shift-records/2026-11-04-rung1-15-place-not-tier.json, ODQ §934.105, RUNG 1 OF THE'
     + ' SOAK LADDER): re-recorded at the stage of 6129c300d because the soldiers line, the Guard Captain and the garrison read the place\'s forces, and a small place seats no guild power without a market; 48 of the 1,050 rows move, '
+    + '0 added, 0 removed.'
+    + ' 2026-11-04 (PINS, first step (units 1–3 and the chair\'s addendum), docs/shift-records/2026-11-04-rung1-17-pins-1-density-exemptions.json, ODQ §934.105, RUNG 1 OF THE'
+    + ' SOAK LADDER): re-recorded at the stage of 37b1e746d because route-required and authored-rarity rows leave the density factor and the top anchor is the catalogue\'s ceiling; 340 of the 1,050 rows move, '
     + '0 added, 0 removed.',
 });
 
