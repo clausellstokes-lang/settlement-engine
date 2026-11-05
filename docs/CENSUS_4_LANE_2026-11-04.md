@@ -132,3 +132,45 @@ insurgency cast. Reaching 0 needs a fitting member to exist (a new role or a dif
 Draw-count law: soak1k-0..59 — 26 births with no re-home byte-identical; all 34 re-homed moved. Golden paths:
 `npcs[].factionAffiliation` (354), `factions` / `factions[].members` (grouping), `conflicts` and its
 `powerStructure.conflicts` mirror (parties, desc, plotHooks, intensity) and the coherence receipt's conflict evidence.
+
+## Phase B (2026-11-05)
+
+**Merges taken.** `origin/lane/census-1b-2026-11-04` at `f7e1861` (merge `148731d`; it carries `window-rung2` at
+`ebb5136`, so that branch is in too). One conflict, `docs/content/wiring-census.json`, resolved through its door
+(`wiring-census.mjs`, `gen:dossier-prose`, both `--check` green).
+
+**Unit B1 — the ledger re-spelled** (`9a879c5`): 177 atoms, mechanically, to `factVocabulary.js` and the chair's
+vocabulary rulings (mapping in `docs/census/declarations/VOCABULARY.md`); `tests/lint/census4Ledger.walker.test.js`.
+NPC_FACTION_LOYALTY is CENSUS-3's to apply (ruling 7).
+
+**Unit B2 — the stress secrets applied and drawn through `drawDeclared`** (Appendix B item 4). The 32 declaring
+pairs of STRESS_INSTITUTION_EFFECTS carry the sibling column (`needs` / `excludes` on the entry objects);
+`npcGenerator.js :: generateCrimeLevel`'s secret draw is `drawDeclared(stressEffects, { draw: pickRandom2, … ctx: {
+npc } })` — the same one roll over the same pool, resolved after (twin → hash argmax → none, `none` returns no
+secret); `enrichNpcCoherence` hands the facts thunk (`factsOf(settlement)`) on the summary. The food pre-filter
+(`secretsHeldByFoodRecord`) and the 0.45 gate are unchanged.
+- Draw-count law, soak1k-0..59: the 58 births with no refused secret are byte-identical; the 2 with one moved.
+- Golden: **0 of 525** rows move (no refusal in the corpus).
+- The 60: every class unchanged (STOP on both sides: `coh:crisis-blind-prose` 74, which arrived with the merged
+  window's widened instrument, `ebb5136`; not this lane's); `cert:false-presumption` **0**; `declared-share` npcs
+  **68 / 199 (0.342)**, from none.
+- Red-first: `tests/generators/stressSecretDeclared.test.js` 3/3 red on the merged base, 3/3 green.
+- **Pin moved by cause (not re-recorded):** `tests/generators/sentenceSlotFallback.test.js` "soak1k-1248: the secret
+  opens on 'Someone'" pins F11's fallback sentence for a one-NPC thorp. The census now refuses the `{npc}` line there
+  (`needs: other npc`) and the secret resolves to one that presumes no second person — the `someone` class closed by
+  declaration. The pin is the chair's to re-record; it stays red on this lane.
+- `typecheck:domain:strict` reds beyond the window's +4 are in 1b's merged files (`factVocabulary.js` +42,
+  `composeStateProse.js` +2, `presumptionCheck.js` +1), untouched here.
+
+## Where this seat stops, and where the next starts
+
+Stopped at the boundary rule (context budget), clean and pushed. **Applied:** the stress secrets (item 4). **Ledgered,
+not yet applied:** the goals (items 3: NPC_FACTION_GOALS, STRESS_GOALS, NPC_SECRETS; Garrison Commander#0 `needs:
+walls` has no twin — the gate will refuse it, the pool's other lines serve, ruling 5), the criminal secrets (item 6,
+`factionLeaderSecret.js:110`), the npcStructure registry (T; its 35 lines are `excludes: crisis` and need
+`resolveDeclared` at `npcStructure.js:424`), the crisis cast tables (T), the tie texts (H, `createTieProseDraw`: its
+draw is without replacement, so resolve-after must keep the `used` counter), the institution descriptions (H,
+`assembleInstitutions.js:65/:1004 pickVariant`) and services (the per-definition roll at `institutionServices.js:69/203`
+must keep one roll per eligible definition: declare, roll, then drop a refused row at materialization). The next seat
+starts with item 3 on this branch's tip, same method: apply the ledger's column, wire the site, byte-identity on the 60,
+golden paths, the self-check.

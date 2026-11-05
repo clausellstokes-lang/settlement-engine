@@ -22,7 +22,7 @@ import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defe
 import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
-import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; // CENSUS-4 R9: one line, so no cited line moves
+import { deriveThorpSecondRole } from './npc/thorpSecondRole.js'; import { guildTitleName } from './npc/guildTitleName.js'; import { tieArchetype } from './npc/tieKind.js'; import { drawDeclared } from '../domain/facts/drawDeclared.js'; // CENSUS-4 R9: one line, so no cited line moves
 
 import { NAMING_DATA } from '../data/namingData.js';
 import { STRESS_ECONOMIC_EFFECTS , TRAIT_PRESENCE_DISTRIBUTION } from '../data/npcData.js';
@@ -777,7 +777,7 @@ export const generateCrimeLevel = (npc, npcIndex, summary, allNpcs) => {
   // F3 FOOD-WORDS: a secret that says people are starving only where the food record goes hungry
   const stressEffects = secretsHeldByFoodRecord((summary.stressTypes || (stressType ? [stressType] : [])).flatMap(s => STRESS_INSTITUTION_EFFECTS[s] || []), summary.foodRecord);
   if (stressEffects.length > 0 && random01(0.45)) {
-    const effect = pickRandom2(stressEffects);
+    const effect = drawDeclared(stressEffects, { draw: pickRandom2, facts: summary.facts ?? null, key: `${npc?.id ?? npcIndex}::stress-secret`, poolId: 'stressInstitutionEffects:STRESS_INSTITUTION_EFFECTS', surface: 'npcs', drawKind: 'R', ctx: { npc: npcIndex } }).line; if (!effect) return null; // CENSUS-4: the census's one draw (one roll over the full pool, resolved after)
     const otherNpc = otherNpcOf({ npcs: allNpcs }, npcIndex); // CENSUS-1 fact 14: the other-NPC home's selection
     return {
       what: fillSentenceSlots(effect.secret, { faction: topFaction, commodity, npc: otherNpc?.name }, { npc: 'someone' }), // F11: a fallback that opens a sentence is sentence-cased
