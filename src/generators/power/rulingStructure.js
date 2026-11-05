@@ -397,7 +397,7 @@ export const generatePowerStructure = (
       'Guild Authority':
         "The guilds have formalised their political control; the city's elected bodies are largely ceremonial.",
       'Military Council':
-        said('Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.'),
+        'Military commanders and their officers hold decisive political weight; civic matters defer to security priorities.',
       'Church Council':
         'Religious authorities hold formal civic influence; canonical law and civil ordinance are intertwined.',
       'Merchant Council':
@@ -591,8 +591,8 @@ export const generatePowerStructure = (
               : tier === 'town'
                 ? 'Town watch and militia; enforce ordinances, manage disorder, and report to the council.'
                 : militaryPower > 18
-                  ? 'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.'
-                  : 'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.'),
+                  ? 'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.'
+                  : 'City watch; law enforcement and external defence, stretched between multiple responsibilities.'),
       militaryDescFinal =
         governingFaction && (governingFaction.toLowerCase().includes('military council') || governingFaction.toLowerCase().includes('martial'))
           ? militaryDesc +

@@ -78,20 +78,21 @@ const declaredSet = (text, needs, twin) => Object.freeze([
  * and "militia" reads as the watch's own levy, so it declares the watch alone), the city garrison
  * lines 101 / 0 and 30 / 0, the market-day traders 8 / 0. The part-time militia (7 / 1) and the
  * armed patrol (34 / 13) sets LEFT this table (CENSUS-5c, the chair's ruling of 05:25: the militia
- * is not settled at this draw, so R-U rewords both lines at their branch to their twins' wording). The
+ * is not settled at this draw, so R-U rewords both lines at their branch to their twins' wording), and
+ * so did the three garrison sets (CENSUS-5d, the chair's answer 2, R-AN: garrison differs at the draw on
+ * 9 of 2,121 steps; the Military Council line drops the garrison, the two city lines keep the settled
+ * watch alone — "Well-funded city watch; …", "City watch; law enforcement …"). The
  * crossroads and established-merchant lines ("fund the council", "council access", 23 / 10 and
  * 40 / 13 by `ruler: council`) are NOT declared: a High Theocratic Council reads `ruler: priest`,
  * so the atom would refuse a true line; they wait for a council-presence atom (the lane doc).
  */
 export const FACTION_DESC_SIBLINGS = Object.freeze({
-  'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.': declaredSet(
-    'Military commanders and garrison officers hold decisive political weight; civic matters defer to security priorities.', ['garrison']),
   'Town watch and militia; enforce ordinances, manage disorder, and report to the council.': declaredSet(
     'Town watch and militia; enforce ordinances, manage disorder, and report to the council.', ['watch']),
-  'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.': declaredSet(
-    'Well-funded garrison and city watch; a reliable instrument of civic order with growing institutional confidence.', ['garrison', 'watch']),
-  'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
-    'Garrison and city watch; law enforcement and external defence, stretched between multiple responsibilities.', ['garrison', 'watch']),
+  'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.': declaredSet(
+    'Well-funded city watch; a reliable instrument of civic order with growing institutional confidence.', ['watch']),
+  'City watch; law enforcement and external defence, stretched between multiple responsibilities.': declaredSet(
+    'City watch; law enforcement and external defence, stretched between multiple responsibilities.', ['watch']),
   'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.': declaredSet(
     'A small trader community present at market days; politically active in minor disputes, limited in broader leverage.', ['market']),
 });
