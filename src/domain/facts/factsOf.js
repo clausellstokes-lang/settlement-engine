@@ -16,7 +16,7 @@
 import { crisisOf } from './crisisKind.js';
 import { storesMonthsOf } from './storesMonths.js';
 import { defenceOf } from './defence.js';
-import { waterOf } from './water.js';
+import { waterOf, waterOfKind } from './water.js';
 import { marketOf } from './market.js';
 import { famineOf } from './famine.js';
 import { magicOf } from './magic.js';
@@ -31,9 +31,11 @@ import { faithReadingOf } from '../dossier/faithReading.js';
 
 /**
  * @param {any} record a settlement record
- * @param {{ worldStressors?: ReadonlyArray<unknown> | null, settlementId?: unknown, worldState?: unknown, regionalGraph?: unknown }} [options]
+ * @param {{ worldStressors?: ReadonlyArray<unknown> | null, settlementId?: unknown, worldState?: unknown, regionalGraph?: unknown, waterKind?: 'maritime'|'river'|'none' }} [options]
  *   the world, for the two facts a lone record cannot answer whole (the crisis's pulse stressors,
- *   the war state)
+ *   the war state); and, for a birth IN PROGRESS whose partial record carries no terrain yet,
+ *   `waterKind` — the generation world law's `portKind`, the same `waterAccessKind` rule
+ *   (CENSUS-1c unit 1)
  */
 export function factsOf(record, options = {}) {
   return Object.freeze({
@@ -52,7 +54,7 @@ export function factsOf(record, options = {}) {
     /** the rulings §2 (CENSUS-1c, R-E): the ONE faith reading (`dossier/faithReading.js :: faithReadingOf`) */
     get faith() { return faithReadingOf(record); },
     /** fact 4: water a boat or a net could use */
-    get water() { return waterOf(record); },
+    get water() { return options.waterKind ? waterOfKind(options.waterKind) : waterOf(record); },
     /** fact 5: a live market */
     get market() { return marketOf(record); },
     /** fact 6: the one starving rule */

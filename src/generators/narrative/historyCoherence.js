@@ -29,9 +29,9 @@
 
 import { pickRandom2, random01 } from '../helpers.js';
 import { collapseArticleSeams } from '../narrativeProse.js';
-import { POLITICAL_FLAVOR } from '../narrativeText.js';
+import { POLITICAL_FLAVOR, POLITICAL_FLAVOR_SIBLINGS } from '../narrativeText.js';
 import { generateSiegeCapability } from './siegeCapability.js';
-import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { defenceTwinSentences } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F11: one line, so no cited line moves
+import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { resolveSiblingSentences } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // F11, CENSUS-1c: one line, so no cited line moves
 
 // ─── buildStressProfile ───────────────────────────────────────────────────────
 /**
@@ -41,7 +41,7 @@ import { deriveLegacyAnnotations } from '../legacyGenerator.js'; import { defenc
  * Draws from the active RNG, so callers that need a stable draw budget wrap it
  * in their own substream (generateCoherence does).
  */
-export const buildStressProfile = (events, _tier, _config, defence) => defenceTwinSentences(stressProfileDrawn(events), defence); const stressProfileDrawn = (events) => { // F11: a wall line the place cannot speak takes its twin (data/defenceTwinLines.js), after the draw
+export const buildStressProfile = (events, _tier, _config, facts) => resolveSiblingSentences(stressProfileDrawn(events), POLITICAL_FLAVOR_SIBLINGS, { facts, poolId: 'narrativeText:POLITICAL_FLAVOR_SIBLINGS', surface: 'history', drawKind: 'T' }); const stressProfileDrawn = (events) => { // F11, CENSUS-1c: a wall sentence the place cannot speak resolves to its declared sibling (narrativeText.js :: POLITICAL_FLAVOR_SIBLINGS), after the draw
   if (!events || events.length === 0) return 'recently established and still finding its character';
 
   const disasters = events.filter(e => e.type === 'disaster').length;
@@ -128,7 +128,7 @@ export const enrichHistoryCoherence = (history, settlement) => ({
   historicalCharacter: buildStressProfile(
     history.historicalEvents || [],
     settlement.tier,
-    settlement.config, defenseFactsOf(settlement), // F11
+    settlement.config, factsOf(settlement), // F11, CENSUS-1c
   ),
   siegeNarrative: historySiegeNarrative(history),
   legacyAnnotations: deriveLegacyAnnotations(history, settlement),

@@ -12,7 +12,7 @@
  * those precedence rules explicit when adding new narrative cases.
  */
 
-import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { defenceTwinLine } from '../../data/defenceTwinLines.js'; import { defenseFactsOf } from '../../domain/defense/defenseFacts.js'; // F10: one line, so no cited line moves
+import { resolveGenerationWorldLaw } from '../generationContext.js'; import { migrationDirectionOf } from '../../domain/crisis/migrationDirection.js'; import { resolveSibling } from '../../domain/facts/drawDeclared.js'; import { factsOf } from '../../domain/facts/factsOf.js'; // F10, CENSUS-1c: one line, so no cited line moves
 
 const SMALL_SETTLEMENT_TIERS = new Set(['thorp', 'hamlet', 'village']);
 
@@ -759,7 +759,7 @@ export const buildGovernanceLabels = ({
   const governingFactionName =
     factions.find(faction => faction.isGoverning)?.faction || null;
 
-  let recentConflict = defenceTwinLine(deriveBaselineConflict({ // F10: a soldiers line its twin where no garrison or hired company stands (data/defenceTwinLines.js)
+  let recentConflict = resolveSibling(deriveBaselineConflict({ // F10, CENSUS-1c: a soldiers line its declared sibling where no garrison or hired company stands (BASELINE_CONFLICT_SIBLINGS below)
     stressFlags,
     institutionFlags,
     institutionSignals,
@@ -768,7 +768,7 @@ export const buildGovernanceLabels = ({
     monsterThreat: config?.monsterThreat,
     hasRoyalAuthority,
     hasNoblePower,
-  }), defenseFactsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }));
+  }), BASELINE_CONFLICT_SIBLINGS, { facts: () => factsOf({ institutions: (institutionNames || []).map((name) => ({ name })) }), poolId: 'governanceNarrative:BASELINE_CONFLICT_SIBLINGS', surface: 'power', drawKind: 'T' });
 
   const primaryStress = selectPrimaryStress(
     stressTypes,
@@ -811,3 +811,16 @@ export const buildGovernanceLabels = ({
 
   return { stability, recentConflict };
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
+ * §3.1): the merchant-army baseline conflict (`deriveBaselineConflict`). The original stays where it is spelled above; the twin stands beside it here with
+ * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
+ * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
+ */
+export const BASELINE_CONFLICT_SIBLINGS = Object.freeze({
+  'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.': Object.freeze([
+    Object.freeze({ text: 'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', needs: Object.freeze(['soldiers']) }),
+    Object.freeze({ text: 'A guild\'s hired guards arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', twinOf: 'A guild\'s private soldiers arrested a rival\'s factor. The public watch is refusing to intervene in what they call a \'merchant matter\'.', excludes: Object.freeze(['soldiers']) }),
+  ]),
+});

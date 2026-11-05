@@ -19,7 +19,7 @@ import { themeOfText } from '../domain/hookThemes.js';
 import { disambiguateNPCDisplayNames } from './npcDisplayNames.js';
 import { resolveGenerationWorldLaw } from './generationContext.js';
 import { legacyMassRange } from '../domain/density/densityLaw.js'; import { defenceRoleGate, defenseFactsOf, forceWordsOf } from '../domain/defense/defenseFacts.js'; import { crimeSignalOf, namesCriminalGuild, withoutCriminalGuild } from '../domain/crimeSignal.js'; // R6 (and F4 unit 3): one line, so no cited line moves
-import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { inlandHookLine } from '../data/inlandHookLines.js'; import { defenceTwinLine } from '../data/defenceTwinLines.js'; // F5, F10: one line, so no cited line moves
+import { generateFactionLeaderSecret } from './npc/factionLeaderSecret.js'; import { resolveSibling } from '../domain/facts/drawDeclared.js'; import { factsOf } from '../domain/facts/factsOf.js'; // F5, F10, CENSUS-1c: one line, so no cited line moves
 import { CRAFTS_ROLES, NOBLE_ROLES } from './npc/factionRoleCatalog.js';
 import { resolveGeneratedNpcTitle } from './npc/generatedNpcTitle.js';
 import { deriveThorpSecondRole } from './npc/thorpSecondRole.js';
@@ -45,7 +45,7 @@ import {
   NPC_FACTION_LOYALTY,
   NPC_SECRETS,
   NPC_PLOT_HOOKS_DATA,
-  NPC_PRESENTATION_MODES,
+  NPC_PRESENTATION_MODES, NPC_HOOK_SIBLINGS,
 } from '../data/npcData.js';
 
 // pickFromArray — uses seeded PRNG when available
@@ -115,7 +115,7 @@ const generateSingleNPC = (
   });
   const religion = generateReligionType(hookRegistry);
   const appearance = generateNPCAppearance(category);
-  const goal = ((g, d) => (g && typeof g === 'object' ? { ...g, short: defenceTwinLine(inlandHookLine(g.short, worldLaw.portKind), d), long: defenceTwinLine(inlandHookLine(g.long, worldLaw.portKind), d) } : defenceTwinLine(inlandHookLine(g, worldLaw.portKind), d)))(generateNPCGoal(role, category, config), defenseFactsOf({ institutions })); // F5: a wet pool line gives its inland twin where there is no water (data/inlandHookLines.js); F10: a defence line its defence-free twin where the roster lacks the thing (data/defenceTwinLines.js); both draw-free
+  const goal = ((g, f) => (g && typeof g === 'object' ? { ...g, short: npcLineAsSpoken(g.short, f), long: npcLineAsSpoken(g.long, f) } : npcLineAsSpoken(g, f)))(generateNPCGoal(role, category, config), factsOf({ institutions }, { waterKind: worldLaw.portKind })); // F5, F10, CENSUS-1c: a drawn line the record cannot hold resolves to its declared sibling (npcData.js :: NPC_HOOK_SIBLINGS, NPC_GOAL_SIBLINGS below); draw-free
   // institutions drives generateFactionLeader's secret-type weighting (criminal/
   // magic/religion presence). Without it the weighting was stuck in "absent" mode.
   const secret = generateFactionLeaderSecret(
@@ -123,8 +123,8 @@ const generateSingleNPC = (
     institutions,
     worldLaw,
   );
-  const title1 = inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind);
-  const title2 = _rng() > 0.5 ? inlandHookLine(generatePlotHook(category, config, hookRegistry), worldLaw.portKind) : null;
+  const title1 = resolveSibling(generatePlotHook(category, config, hookRegistry), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' });
+  const title2 = _rng() > 0.5 ? resolveSibling(generatePlotHook(category, config, hookRegistry), NPC_HOOK_SIBLINGS, { facts: () => factsOf({ institutions }, { waterKind: worldLaw.portKind }), poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }) : null;
   const plotHooks = title2 && title2 !== title1 ? [title1, title2] : [title1];
   const powerLevel = generateNPCPowerLevel(role);
   return {
@@ -1232,8 +1232,8 @@ export const mergeNPCLists = (npcs, factions, institutions, tier, config) => {
                 ? stressOverrides.merchant
                 : null;
         if (override) {
-          const defence = defenseFactsOf({ institutions }); enriched.goal = { short: defenceTwinLine(override.short, defence), long: enriched.goal.long || defenceTwinLine(override.short, defence) }; // F10: data/defenceTwinLines.js, draw-free
-          if (override.note) enriched.stressNote = defenceTwinLine(override.note, defence);
+          const facts = factsOf({ institutions }); const spoken = (/** @type {string} */ l) => resolveSibling(l, NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); enriched.goal = { short: spoken(override.short), long: enriched.goal.long || spoken(override.short) }; // F10, CENSUS-1c: NPC_GOAL_SIBLINGS below, draw-free
+          if (override.note) enriched.stressNote = spoken(override.note);
         }
       }
     }
@@ -1673,3 +1673,19 @@ export const generateSettlementName = (r = 'germanic') => {
   const suffixData = NAMING_DATA[r === 'mixed' ? resolveNameCulture(r) : resolveNameCulture(r)] || prefixData;
   return `${prefixData.settlementPrefixes[Math.floor(_rng() * prefixData.settlementPrefixes.length)]}${suffixData.settlementSuffixes[Math.floor(_rng() * suffixData.settlementSuffixes.length)]}`;
 };
+
+/**
+ * DECLARED SIBLINGS (CENSUS-1c unit 1; the twin tables dissolved, `docs/DESIGN_POOL_CENSUS.md`
+ * §3.1): the siege goal (`STRESS_GOALS.under_siege`), the wartime military override and its note (`STRESS_GOAL_OVERRIDES.wartime.mil`). The original stays where it is spelled above; the twin stands beside it here with
+ * the complementary atom, and the site resolves a drawn key through `resolveSibling`. Retired from
+ * `data/defenceTwinLines.js` (F10 unit 4), every twin to the byte.
+ */
+export const NPC_GOAL_SIBLINGS = Object.freeze({ 'Identify the person inside the walls who is communicating with the besiegers': Object.freeze([ Object.freeze({ text: 'Identify the person inside the walls who is communicating with the besiegers', needs: Object.freeze(['walls']) }), Object.freeze({ text: 'Identify the person inside the settlement who is communicating with the besiegers', twinOf: 'Identify the person inside the walls who is communicating with the besiegers', excludes: Object.freeze(['walls']) }), ]), 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes': Object.freeze([ Object.freeze({ text: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Keep the defenders together as the call-up pulls away experienced hands and replaces them with frightened substitutes', twinOf: 'Keep unit cohesion as conscription pulls away experienced soldiers and replaces them with frightened substitutes', excludes: Object.freeze(['soldiers']) }), ]), 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.': Object.freeze([ Object.freeze({ text: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', needs: Object.freeze(['soldiers']) }), Object.freeze({ text: 'Every experienced hand called up into the field army is a hole in local security that a substitute won\'t fill the same way.', twinOf: 'Every experienced soldier conscripted into the field army is a hole in local security that a substitute won\'t fill the same way.', excludes: Object.freeze(['soldiers']) }), ]), });
+
+/**
+ * A drawn NPC goal or hook line as this record can speak it: its declared sibling where the record
+ * lacks what the line presumes (the inland twins of `npcData.js :: NPC_HOOK_SIBLINGS`, then the
+ * defence twins of `NPC_GOAL_SIBLINGS`, the order the retired lookups ran in). Draw-free.
+ * @param {unknown} line @param {ReturnType<typeof factsOf>} facts
+ */
+function npcLineAsSpoken(line, facts) { return resolveSibling(resolveSibling(line, NPC_HOOK_SIBLINGS, { facts, poolId: 'npcData:NPC_HOOK_SIBLINGS', surface: 'npcs', drawKind: 'T' }), NPC_GOAL_SIBLINGS, { facts, poolId: 'npcGenerator:NPC_GOAL_SIBLINGS', surface: 'npcs', drawKind: 'T' }); }

@@ -171,6 +171,44 @@ export function resolveDeclared(cell, options) {
   return drawDeclared(pool, { ...options, draw: (p) => p[0], drawKind: options.drawKind || 'T' });
 }
 
+/**
+ * A DECLARED SIBLING SET, resolved where its original was drawn (CENSUS-1c unit 1: the twins of
+ * `defenceTwinLines.js` and `inlandHookLines.js` dissolved into their originals' own tables). A
+ * table keeps its original line where its string consumers read it and declares, BESIDE it in the
+ * same file, the set `[{ text: <original>, needs }, { text: <twin>, twinOf: <original>, excludes }]`
+ * keyed by the original's text. A drawn line that is no key is handed back untouched; a key
+ * resolves through `resolveDeclared` (the original if admitted, else its twin). No roll is added:
+ * the draw already happened. An UNANSWERED record (no facts) keeps the original — the retired
+ * text-keyed lookup's own rule, kept so no birth moves (the self-check still re-asserts it).
+ * @template T
+ * @param {T} line the drawn line
+ * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings the table's sibling sets
+ * @param {Omit<DrawDeclaredOptions, 'draw'>} options
+ * @returns {T}
+ */
+export function resolveSibling(line, siblings, options) {
+  if (typeof line !== 'string' || !Object.prototype.hasOwnProperty.call(siblings, line)) return line;
+  const facts = typeof options.facts === 'function' ? options.facts() : options.facts ?? null;
+  if (!facts) return line;
+  const r = resolveDeclared(siblings[line], { ...options, facts });
+  return r.line == null ? line : /** @type {T} */ (lineText(r.line));
+}
+
+/**
+ * The same, sentence by sentence: each sentence of a drawn passage that is a sibling key resolves;
+ * every other sentence and the spacing between them are kept (a line whose drawn tail — an
+ * event's name — keeps the whole from being a key).
+ * @template T
+ * @param {T} text
+ * @param {Readonly<Record<string, ReadonlyArray<any>>>} siblings
+ * @param {Omit<DrawDeclaredOptions, 'draw'>} options
+ * @returns {T}
+ */
+export function resolveSiblingSentences(text, siblings, options) {
+  if (typeof text !== 'string') return text;
+  return /** @type {T} */ (/** @type {unknown} */ (text.split(/(?<=[.!?])(\s+)/).map((part) => resolveSibling(part, siblings, options)).join('')));
+}
+
 /** @param {any} line @param {number} i */
 function lineIdOf(line, i) {
   if (line && typeof line === 'object' && (typeof line.id === 'string' || typeof line.id === 'number')) return line.id;
