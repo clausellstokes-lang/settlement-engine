@@ -12,7 +12,7 @@
  * activeGoal replaces the existing goal.short field on enriched NPCs so
  * the DM sees one coherent goal derived from the current situation.
  */
-import { resolveDeclared } from '../domain/facts/drawDeclared.js';
+import { resolveDeclared, lineText } from '../domain/facts/drawDeclared.js';
 import { factsOf } from '../domain/facts/factsOf.js';
 
 
@@ -447,14 +447,14 @@ export function enrichNPCsWithStructure(npcs, settlement) {
     // activeGoal replaces goal.short on enriched NPCs so the DM sees one coherent goal.
     // The settlement-derived goal is more specific than the generic role goal.
     const updatedGoal = npc.goal
-      ? { ...npc.goal, short: tmpl.goal }
-      : { short: tmpl.goal, long: tmpl.goal };
+      ? { ...npc.goal, short: lineText(tmpl.goal) }
+      : { short: lineText(tmpl.goal), long: lineText(tmpl.goal) }; // CENSUS-1e: a field may become `{ text, … }` (R-C); the record stores the text
 
     return {
       ...npc,
       goal:               updatedGoal,
-      structuralPosition: tmpl.position,
-      activeConstraint:   tmpl.constraint,
+      structuralPosition: lineText(tmpl.position),
+      activeConstraint:   lineText(tmpl.constraint),
       settlementCondition: condition,
       structuralRank:     rank,
     };

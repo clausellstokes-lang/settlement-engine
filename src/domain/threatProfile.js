@@ -693,3 +693,20 @@ export function threatSeverityBands() {
 export function threatStages() {
   return [...THREAT_STAGES];
 }
+
+/**
+ * DECLARED SIBLINGS, CARRIED (CENSUS-5b unit 2, 2026-11-05; the chair's ruling R-C): two
+ * template texts that presume a fact the threat type does not guarantee — a siege threat "pressing
+ * the walls" of a place with no perimeter (the chair's ruling 3: `walls` is the perimeter), and a
+ * civil unrest whose victims name "the watch". Keyed by the text; NO CONSUMER READS THIS YET (the
+ * template lookup is CENSUS-1d's T site, Appendix B row 118), so it moves no birth. The siege twin
+ * is the chair's ruling (R-G); the victim is a list item (kind A: filtered, no twin).
+ * @type {Readonly<Record<string, ReadonlyArray<{ text: string, needs?: ReadonlyArray<string>, excludes?: ReadonlyArray<string>, twinOf?: string }>>>}
+ */
+export const THREAT_TEXT_SIBLINGS = Object.freeze({
+  'External military force pressing or potentially pressing the walls.': Object.freeze([
+    Object.freeze({ text: 'External military force pressing or potentially pressing the walls.', needs: Object.freeze(['walls']) }),
+    Object.freeze({ text: 'External military force pressing or potentially pressing the settlement.', twinOf: 'External military force pressing or potentially pressing the walls.', excludes: Object.freeze(['walls']) }),
+  ]),
+  'the watch': Object.freeze([Object.freeze({ text: 'the watch', needs: Object.freeze(['watch']) })]),
+});

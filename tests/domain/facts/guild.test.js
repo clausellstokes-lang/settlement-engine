@@ -31,3 +31,29 @@ describe('the guild atom (answer 4)', () => {
     expect(V.declarationAdmits(d, without)).toEqual({ admitted: false, refused: ['guild'] });
   });
 });
+
+// CENSUS-4c (the chair's answer 3 to CENSUS-4b): ONE guild reader. `isCommerceGuild` lives in the
+// domain (`domain/institutions/institutionCategory.js`); the generator imports it from there and
+// `facts/guild.js` delegates to it instead of re-reading the guild word.
+describe('one guild reader (answer 3)', () => {
+  it('the generator re-exports the domain definition (one function, not a copy)', async () => {
+    const domain = await import('../../../src/domain/institutions/institutionCategory.js');
+    const gen = await import('../../../src/generators/roleCategory.js');
+    const chains = await import('../../../src/generators/computeActiveChains.js');
+    expect(gen.isCommerceGuild).toBe(domain.isCommerceGuild);
+    expect(gen.institutionInCategory).toBe(domain.institutionInCategory);
+    expect(chains.institutionMatchesKeyword).toBe(domain.institutionMatchesKeyword);
+  });
+  it('the atom reads the catalogue\'s own guild marker (a guild-tagged house not named "guild")', () => {
+    // Furrier's district carries the catalogue tag `guild` and drives a guild master; the old
+    // regex home read only the word and answered false.
+    const furriers = { name: "Furrier's district", category: 'Economy', tags: ['trade', 'guild'] };
+    expect(factsOf({ tier: 'city', institutions: [furriers] }).guild).toBe(true);
+  });
+  it('guild.js holds no guild word of its own for the roster', async () => {
+    const { readFileSync } = await import('node:fs');
+    const src = readFileSync(new URL('../../../src/domain/facts/guild.js', import.meta.url), 'utf8');
+    expect(src).toMatch(/import \{[^}]*isCommerceGuild[^}]*\} from '\.\.\/institutions\/institutionCategory\.js'/);
+    expect(src).not.toMatch(/liveInstitutionNames/);
+  });
+});
